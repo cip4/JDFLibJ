@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -43,7 +75,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFSpanGlue;
@@ -54,7 +85,7 @@ import org.cip4.jdflib.span.JDFSpanScoring;
  *****************************************************************************
  * class JDFAutoSoftCoverBinding : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoSoftCoverBinding extends JDFElement
@@ -89,7 +120,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoSoftCoverBinding
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -100,7 +131,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoSoftCoverBinding
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -112,7 +143,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoSoftCoverBinding
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -123,22 +154,14 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoSoftCoverBinding[  --> " + super.toString() + " ]";
-	}
-
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element BlockThreadSewing
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getBlockThreadSewing()
@@ -148,7 +171,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateBlockThreadSewing
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateBlockThreadSewing()
@@ -158,18 +181,17 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element BlockThreadSewing
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendBlockThreadSewing() throws JDFException
+	public JDFOptionSpan appendBlockThreadSewing()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.BLOCKTHREADSEWING, 1, null);
 	}
 
 	/**
 	 * (24) const get element EndSheets
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getEndSheets()
@@ -179,7 +201,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateEndSheets
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateEndSheets()
@@ -189,18 +211,17 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element EndSheets
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendEndSheets() throws JDFException
+	public JDFOptionSpan appendEndSheets()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.ENDSHEETS, 1, null);
 	}
 
 	/**
 	 * (24) const get element FoldingWidth
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getFoldingWidth()
@@ -210,7 +231,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateFoldingWidth
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateFoldingWidth()
@@ -220,18 +241,17 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element FoldingWidth
-	 * 
-	 * @return JDFNumberSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNumberSpan the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendFoldingWidth() throws JDFException
+	public JDFNumberSpan appendFoldingWidth()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.FOLDINGWIDTH, 1, null);
 	}
 
 	/**
 	 * (24) const get element FoldingWidthBack
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getFoldingWidthBack()
@@ -241,7 +261,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateFoldingWidthBack
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateFoldingWidthBack()
@@ -251,18 +271,17 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element FoldingWidthBack
-	 * 
-	 * @return JDFNumberSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNumberSpan the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendFoldingWidthBack() throws JDFException
+	public JDFNumberSpan appendFoldingWidthBack()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.FOLDINGWIDTHBACK, 1, null);
 	}
 
 	/**
 	 * (24) const get element GlueProcedure
-	 * 
+	 *
 	 * @return JDFSpanGlueProcedure the element
 	 */
 	public JDFSpanGlueProcedure getGlueProcedure()
@@ -272,7 +291,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateGlueProcedure
-	 * 
+	 *
 	 * @return JDFSpanGlueProcedure the element
 	 */
 	public JDFSpanGlueProcedure getCreateGlueProcedure()
@@ -282,18 +301,17 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element GlueProcedure
-	 * 
-	 * @return JDFSpanGlueProcedure the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanGlueProcedure the element @ if the element already exists
 	 */
-	public JDFSpanGlueProcedure appendGlueProcedure() throws JDFException
+	public JDFSpanGlueProcedure appendGlueProcedure()
 	{
 		return (JDFSpanGlueProcedure) appendElementN(ElementName.GLUEPROCEDURE, 1, null);
 	}
 
 	/**
 	 * (24) const get element Scoring
-	 * 
+	 *
 	 * @return JDFSpanScoring the element
 	 */
 	public JDFSpanScoring getScoring()
@@ -303,7 +321,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateScoring
-	 * 
+	 *
 	 * @return JDFSpanScoring the element
 	 */
 	public JDFSpanScoring getCreateScoring()
@@ -313,18 +331,17 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element Scoring
-	 * 
-	 * @return JDFSpanScoring the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanScoring the element @ if the element already exists
 	 */
-	public JDFSpanScoring appendScoring() throws JDFException
+	public JDFSpanScoring appendScoring()
 	{
 		return (JDFSpanScoring) appendElementN(ElementName.SCORING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineBrushing
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getSpineBrushing()
@@ -334,7 +351,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineBrushing
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineBrushing()
@@ -344,18 +361,17 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineBrushing
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendSpineBrushing() throws JDFException
+	public JDFOptionSpan appendSpineBrushing()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.SPINEBRUSHING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineFiberRoughing
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getSpineFiberRoughing()
@@ -365,7 +381,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineFiberRoughing
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineFiberRoughing()
@@ -375,18 +391,17 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineFiberRoughing
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendSpineFiberRoughing() throws JDFException
+	public JDFOptionSpan appendSpineFiberRoughing()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.SPINEFIBERROUGHING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineGlue
-	 * 
+	 *
 	 * @return JDFSpanGlue the element
 	 */
 	public JDFSpanGlue getSpineGlue()
@@ -396,7 +411,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineGlue
-	 * 
+	 *
 	 * @return JDFSpanGlue the element
 	 */
 	public JDFSpanGlue getCreateSpineGlue()
@@ -406,18 +421,17 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineGlue
-	 * 
-	 * @return JDFSpanGlue the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanGlue the element @ if the element already exists
 	 */
-	public JDFSpanGlue appendSpineGlue() throws JDFException
+	public JDFSpanGlue appendSpineGlue()
 	{
 		return (JDFSpanGlue) appendElementN(ElementName.SPINEGLUE, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineLevelling
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getSpineLevelling()
@@ -427,7 +441,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineLevelling
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineLevelling()
@@ -437,18 +451,17 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineLevelling
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendSpineLevelling() throws JDFException
+	public JDFOptionSpan appendSpineLevelling()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.SPINELEVELLING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineMilling
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getSpineMilling()
@@ -458,7 +471,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineMilling
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineMilling()
@@ -468,18 +481,17 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineMilling
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendSpineMilling() throws JDFException
+	public JDFOptionSpan appendSpineMilling()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.SPINEMILLING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineNotching
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getSpineNotching()
@@ -489,7 +501,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineNotching
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineNotching()
@@ -499,18 +511,17 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineNotching
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendSpineNotching() throws JDFException
+	public JDFOptionSpan appendSpineNotching()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.SPINENOTCHING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineSanding
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getSpineSanding()
@@ -520,7 +531,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineSanding
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineSanding()
@@ -530,18 +541,17 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineSanding
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendSpineSanding() throws JDFException
+	public JDFOptionSpan appendSpineSanding()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.SPINESANDING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineShredding
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getSpineShredding()
@@ -551,7 +561,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineShredding
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineShredding()
@@ -561,13 +571,12 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineShredding
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendSpineShredding() throws JDFException
+	public JDFOptionSpan appendSpineShredding()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.SPINESHREDDING, 1, null);
 	}
 
-}// end namespace JDF
+}

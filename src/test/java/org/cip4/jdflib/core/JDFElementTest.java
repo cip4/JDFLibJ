@@ -1111,7 +1111,7 @@ public class JDFElementTest extends JDFTestCaseBase
 				continue;
 			}
 
-			System.out.println("Parsing: " + file.getPath());
+			log.info("Parsing: " + file.getPath());
 			JDFDoc jdfDoc = p.parseFile(file.getPath());
 			assertTrue("parse ok", jdfDoc != null);
 

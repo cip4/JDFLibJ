@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -44,7 +76,6 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
 import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
@@ -54,7 +85,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoPreflightParams : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoPreflightParams extends JDFResource
@@ -78,7 +109,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPreflightParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -89,7 +120,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPreflightParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -101,7 +132,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPreflightParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -110,15 +141,6 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	protected JDFAutoPreflightParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoPreflightParams[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -141,13 +163,14 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateActionPool
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFActionPool the element
 	 */
@@ -158,7 +181,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
 	/**
 	 * (27) const get element ActionPool
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFActionPool the element default is getActionPool(0)
 	 */
@@ -169,17 +192,17 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
 	/**
 	 * Get all ActionPool from the current element
-	 * 
+	 *
 	 * @return Collection<JDFActionPool>, null if none are available
 	 */
 	public Collection<JDFActionPool> getAllActionPool()
 	{
-		return getChildrenByClass(JDFActionPool.class, false, 0);
+		return getChildArrayByClass(JDFActionPool.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ActionPool
-	 * 
+	 *
 	 * @return JDFActionPool the element
 	 */
 	public JDFActionPool appendActionPool()
@@ -189,7 +212,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
 	/**
 	 * (24) const get element FileSpec
-	 * 
+	 *
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getFileSpec()
@@ -199,7 +222,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
 	/**
 	 * (25) getCreateFileSpec
-	 * 
+	 *
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()
@@ -209,18 +232,17 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
 	/**
 	 * (29) append element FileSpec
-	 * 
-	 * @return JDFFileSpec the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFFileSpec the element @ if the element already exists
 	 */
-	public JDFFileSpec appendFileSpec() throws JDFException
+	public JDFFileSpec appendFileSpec()
 	{
 		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refFileSpec(JDFFileSpec refTarget)
@@ -230,7 +252,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
 	/**
 	 * (24) const get element TestPool
-	 * 
+	 *
 	 * @return JDFTestPool the element
 	 */
 	public JDFTestPool getTestPool()
@@ -240,7 +262,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
 	/**
 	 * (25) getCreateTestPool
-	 * 
+	 *
 	 * @return JDFTestPool the element
 	 */
 	public JDFTestPool getCreateTestPool()
@@ -250,13 +272,12 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
 	/**
 	 * (29) append element TestPool
-	 * 
-	 * @return JDFTestPool the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFTestPool the element @ if the element already exists
 	 */
-	public JDFTestPool appendTestPool() throws JDFException
+	public JDFTestPool appendTestPool()
 	{
 		return (JDFTestPool) appendElementN(ElementName.TESTPOOL, 1, null);
 	}
 
-}// end namespace JDF
+}

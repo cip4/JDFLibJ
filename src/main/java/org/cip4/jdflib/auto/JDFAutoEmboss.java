@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -52,7 +84,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFTool;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
@@ -62,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
  *****************************************************************************
  * class JDFAutoEmboss : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoEmboss extends JDFElement
@@ -70,17 +101,18 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DIRECTION, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumDirection.getEnum(0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.EDGEANGLE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.EDGESHAPE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumEdgeShape.getEnum(0), "Rounded");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.EMBOSSINGTYPE, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumEmbossingType.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.HEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.IMAGESIZE, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.LEVEL, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumLevel.getEnum(0), null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.POSITION, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.FACE, 0x33111111, AttributeInfo.EnumAttributeType.enumeration, EnumFace.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.HEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.IMAGESIZE, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.LEVEL, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumLevel.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.POSITION, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -105,7 +137,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoEmboss
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -116,7 +148,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoEmboss
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -128,7 +160,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoEmboss
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -137,15 +169,6 @@ public abstract class JDFAutoEmboss extends JDFElement
 	protected JDFAutoEmboss(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoEmboss[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -350,6 +373,77 @@ public abstract class JDFAutoEmboss extends JDFElement
 	}
 
 	/**
+	 * Enumeration strings for Face
+	 */
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumFace extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumFace(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumFace getEnum(String enumName)
+		{
+			return (EnumFace) getEnum(EnumFace.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumFace getEnum(int enumValue)
+		{
+			return (EnumFace) getEnum(EnumFace.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumFace.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumFace.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumFace.class);
+		}
+
+		/**  */
+		public static final EnumFace Top = new EnumFace("Top");
+		/**  */
+		public static final EnumFace Bottom = new EnumFace("Bottom");
+		/**  */
+		public static final EnumFace Left = new EnumFace("Left");
+		/**  */
+		public static final EnumFace Right = new EnumFace("Right");
+		/**  */
+		public static final EnumFace Front = new EnumFace("Front");
+		/**  */
+		public static final EnumFace Back = new EnumFace("Back");
+	}
+
+	/**
 	 * Enumeration strings for Level
 	 */
 
@@ -414,16 +508,17 @@ public abstract class JDFAutoEmboss extends JDFElement
 		public static final EnumLevel Sculpted = new EnumLevel("Sculpted");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Direction ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Direction
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Direction
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setDirection(EnumDirection enumVar)
@@ -433,7 +528,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (9) get attribute Direction
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumDirection getDirection()
@@ -441,12 +536,12 @@ public abstract class JDFAutoEmboss extends JDFElement
 		return EnumDirection.getEnum(getAttribute(AttributeName.DIRECTION, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EdgeAngle ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EdgeAngle
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute EdgeAngle
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEdgeAngle(double value)
@@ -456,7 +551,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (17) get double attribute EdgeAngle
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getEdgeAngle()
@@ -464,12 +559,12 @@ public abstract class JDFAutoEmboss extends JDFElement
 		return getRealAttribute(AttributeName.EDGEANGLE, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EdgeShape ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EdgeShape
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute EdgeShape
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setEdgeShape(EnumEdgeShape enumVar)
@@ -479,7 +574,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (9) get attribute EdgeShape
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumEdgeShape getEdgeShape()
@@ -487,12 +582,12 @@ public abstract class JDFAutoEmboss extends JDFElement
 		return EnumEdgeShape.getEnum(getAttribute(AttributeName.EDGESHAPE, null, "Rounded"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EmbossingType ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EmbossingType
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute EmbossingType
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setEmbossingType(EnumEmbossingType enumVar)
@@ -502,7 +597,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (9) get attribute EmbossingType
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumEmbossingType getEmbossingType()
@@ -510,12 +605,35 @@ public abstract class JDFAutoEmboss extends JDFElement
 		return EnumEmbossingType.getEnum(getAttribute(AttributeName.EMBOSSINGTYPE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Height ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Face
+	--------------------------------------------------------------------- */
+	/**
+	 * (5) set attribute Face
+	 *
+	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setFace(EnumFace enumVar)
+	{
+		setAttribute(AttributeName.FACE, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	 * (9) get attribute Face
+	 *
+	 * @return the value of the attribute
+	 */
+	public EnumFace getFace()
+	{
+		return EnumFace.getEnum(getAttribute(AttributeName.FACE, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Height
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Height
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setHeight(double value)
@@ -525,7 +643,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (17) get double attribute Height
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getHeight()
@@ -533,12 +651,12 @@ public abstract class JDFAutoEmboss extends JDFElement
 		return getRealAttribute(AttributeName.HEIGHT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageSize ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ImageSize
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ImageSize
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setImageSize(JDFXYPair value)
@@ -548,7 +666,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (20) get JDFXYPair attribute ImageSize
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getImageSize()
@@ -558,12 +676,12 @@ public abstract class JDFAutoEmboss extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Level ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Level
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Level
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setLevel(EnumLevel enumVar)
@@ -573,7 +691,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (9) get attribute Level
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumLevel getLevel()
@@ -581,12 +699,12 @@ public abstract class JDFAutoEmboss extends JDFElement
 		return EnumLevel.getEnum(getAttribute(AttributeName.LEVEL, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Position
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Position
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPosition(JDFXYPair value)
@@ -596,7 +714,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (20) get JDFXYPair attribute Position
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getPosition()
@@ -606,13 +724,14 @@ public abstract class JDFAutoEmboss extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateIdentificationField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element
 	 */
@@ -623,7 +742,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (27) const get element IdentificationField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element default is getIdentificationField(0)
 	 */
@@ -634,17 +753,17 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * Get all IdentificationField from the current element
-	 * 
+	 *
 	 * @return Collection<JDFIdentificationField>, null if none are available
 	 */
 	public Collection<JDFIdentificationField> getAllIdentificationField()
 	{
-		return getChildrenByClass(JDFIdentificationField.class, false, 0);
+		return getChildArrayByClass(JDFIdentificationField.class, false, 0);
 	}
 
 	/**
 	 * (30) append element IdentificationField
-	 * 
+	 *
 	 * @return JDFIdentificationField the element
 	 */
 	public JDFIdentificationField appendIdentificationField()
@@ -654,7 +773,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refIdentificationField(JDFIdentificationField refTarget)
@@ -664,7 +783,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (24) const get element Media
-	 * 
+	 *
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getMedia()
@@ -674,7 +793,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (25) getCreateMedia
-	 * 
+	 *
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()
@@ -684,18 +803,17 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (29) append element Media
-	 * 
-	 * @return JDFMedia the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFMedia the element @ if the element already exists
 	 */
-	public JDFMedia appendMedia() throws JDFException
+	public JDFMedia appendMedia()
 	{
 		return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refMedia(JDFMedia refTarget)
@@ -705,7 +823,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (24) const get element Tool
-	 * 
+	 *
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getTool()
@@ -715,7 +833,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (25) getCreateTool
-	 * 
+	 *
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateTool()
@@ -725,18 +843,17 @@ public abstract class JDFAutoEmboss extends JDFElement
 
 	/**
 	 * (29) append element Tool
-	 * 
-	 * @return JDFMedia the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFMedia the element @ if the element already exists
 	 */
-	public JDFMedia appendTool() throws JDFException
+	public JDFMedia appendTool()
 	{
 		return (JDFMedia) appendElementN(ElementName.TOOL, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refTool(JDFTool refTarget)
@@ -744,4 +861,4 @@ public abstract class JDFAutoEmboss extends JDFElement
 		refElement(refTarget);
 	}
 
-}// end namespace JDF
+}

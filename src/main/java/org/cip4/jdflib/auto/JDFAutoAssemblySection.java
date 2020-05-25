@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -73,9 +105,9 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x44444311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORDER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOrder.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.COMMONFOLDS, 0x31111111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.COMMONFOLDS, 0x31111111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ORDER, 0x44433311, AttributeInfo.EnumAttributeType.enumeration, EnumOrder.getEnum(0), null);
 	}
 
 	@Override
@@ -102,7 +134,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAssemblySection(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	protected JDFAutoAssemblySection(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -114,7 +146,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAssemblySection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	protected JDFAutoAssemblySection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -127,18 +159,9 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAssemblySection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	protected JDFAutoAssemblySection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoAssemblySection[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -151,7 +174,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOrder(final String name)
+		private EnumOrder(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -160,7 +183,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumOrder getEnum(final String enumName)
+		public static EnumOrder getEnum(String enumName)
 		{
 			return (EnumOrder) getEnum(EnumOrder.class, enumName);
 		}
@@ -169,7 +192,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumOrder getEnum(final int enumValue)
+		public static EnumOrder getEnum(int enumValue)
 		{
 			return (EnumOrder) getEnum(EnumOrder.class, enumValue);
 		}
@@ -204,19 +227,20 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 		public static final EnumOrder Gathering = new EnumOrder("Gathering");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssemblyID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AssemblyID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AssemblyID
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyID(final String value)
+	public void setAssemblyID(String value)
 	{
 		setAttribute(AttributeName.ASSEMBLYID, value, null);
 	}
@@ -231,15 +255,15 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 		return getAttribute(AttributeName.ASSEMBLYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AssemblyIDs
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AssemblyIDs
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyIDs(final VString value)
+	public void setAssemblyIDs(VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
@@ -257,15 +281,38 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 		return vStrAttrib;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CommonFolds
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute CommonFolds
+	 *
+	 * @param value the value to set the attribute to
 	 */
+	public void setCommonFolds(int value)
+	{
+		setAttribute(AttributeName.COMMONFOLDS, value, null);
+	}
+
+	/**
+	 * (15) get int attribute CommonFolds
+	 *
+	 * @return int the value of the attribute
+	 */
+	public int getCommonFolds()
+	{
+		return getIntAttribute(AttributeName.COMMONFOLDS, null, 0);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute JobID
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(final String value)
+	public void setJobID(String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -280,15 +327,15 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Order ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Order
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Order
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOrder(final EnumOrder enumVar)
+	public void setOrder(EnumOrder enumVar)
 	{
 		setAttribute(AttributeName.ORDER, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -303,8 +350,9 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 		return EnumOrder.getEnum(getAttribute(AttributeName.ORDER, null, null));
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -313,7 +361,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageAssignedList the element
 	 */
-	public JDFPageAssignedList getCreatePageAssignedList(final int iSkip)
+	public JDFPageAssignedList getCreatePageAssignedList(int iSkip)
 	{
 		return (JDFPageAssignedList) getCreateElement_JDFElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
 	}
@@ -324,7 +372,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageAssignedList the element default is getPageAssignedList(0)
 	 */
-	public JDFPageAssignedList getPageAssignedList(final int iSkip)
+	public JDFPageAssignedList getPageAssignedList(int iSkip)
 	{
 		return (JDFPageAssignedList) getElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
 	}
@@ -336,7 +384,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 */
 	public Collection<JDFPageAssignedList> getAllPageAssignedList()
 	{
-		return getChildrenByClass(JDFPageAssignedList.class, false, 0);
+		return getChildArrayByClass(JDFPageAssignedList.class, false, 0);
 	}
 
 	/**
@@ -349,4 +397,4 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 		return (JDFPageAssignedList) appendElement(ElementName.PAGEASSIGNEDLIST, null);
 	}
 
-}// end namespace JDF
+}

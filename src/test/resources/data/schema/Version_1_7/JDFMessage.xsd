@@ -1741,7 +1741,7 @@
         <Version Path="@Transformation" First="1.6" />
         <Version Path="@Usage" First="1.3" />
         <Version Path="AmountPool" First="1.3" />
-        <Version Path="Lot" First="1.4" />
+        <Version Path="Lot" First="1.4" Last="1.5"/>
         <Version Path="MISDetails" First="1.2" />
         <Version Path="Part" First="1.2" />
         <Constraint Path="AmountPool" minOccurs="0" maxOccurs="1" />
@@ -1834,7 +1834,6 @@
         <Version Path="Event" First="1.7" />
         <Version Path="Lot" First="1.4" />
         <Version Path="MISDetails" First="1.2" />
-        <Version Path="Part" First="1.4" />
         <Constraint Path="AmountPool" minOccurs="0" maxOccurs="1" />
         <Constraint Path="CostCenter" minOccurs="0" maxOccurs="1" />
         <Constraint Path="Event" minOccurs="0" maxOccurs="unbounded" />
@@ -1872,6 +1871,7 @@
         <xs:attribute name="ResourceID" type="jdftyp:NMTOKEN" use="optional" />
         <xs:attribute name="ResourceName" type="jdftyp:NMTOKEN" use="optional" />
         <xs:attribute name="Scope" type="jdftyp:eValueUsage_" use="optional" />
+        <xs:attribute name="Speed" type="jdftyp:double" use="optional"/>
         <xs:attribute name="Status" type="jdftyp:eResourceStatus_" use="optional" />
         <xs:attribute name="TotalAmount" type="jdftyp:double" use="optional" />
         <xs:attribute name="Transformation" type="jdftyp:matrix" use="optional" />
@@ -4457,8 +4457,13 @@
 
   <xs:element name="GangCmdFilter" type="jdf:GangCmdFilter_m" substitutionGroup="jdf:CommandTypeObj" />
   <xs:element name="GangQuFilter" type="jdf:GangQuFilter_m" substitutionGroup="jdf:QueryTypeObj" />
-  <xs:element name="GangInfo" type="jdf:GangInfo_m" substitutionGroup="jdf:ResponseTypeObj" />
-  <xs:complexType name="GangCmdFilter_m" mixed="false">
+  <xs:element name="GangInfo" type="jdf:GangInfo_m" substitutionGroup="jdf:ResponseTypeObj">
+    <xs:annotation>
+      <xs:appinfo>
+        <Version Path="@Amount" First="1.6"/>       
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>  <xs:complexType name="GangCmdFilter_m" mixed="false">
     <xs:complexContent mixed="false">
       <xs:extension base="jdf:CommandTypeObj_">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -4487,6 +4492,7 @@
   <xs:complexType name="CommandForceGang" mixed="false">
     <xs:annotation>
       <xs:appinfo>
+        <Version Path="GangCmdFilter/@Policy" First="1.6"/>     
         <Constraint Path="QueueFilter" minOccurs="0" maxOccurs="1" />
       </xs:appinfo>
     </xs:annotation>

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -46,6 +46,8 @@ import static org.junit.Assert.assertTrue;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoApprovalDetails.EnumApprovalState;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -930,6 +932,23 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertEquals(a.getAssemblyID(), "");
 		assertEquals(as.getAssemblyIDs(), asi);
 		assertEquals(as.getAssemblyID(), "");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMediaGrade()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(JDFNode.EnumType.ConventionalPrinting);
+		final JDFMedia med = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		med.setMediaType(EnumMediaType.Paper);
+		med.setWeight(42);
+		med.setGrade(1);
+
+		assertTrue(med.fixVersion(EnumVersion.Version_1_6));
+		assertEquals(EnumISOPaperSubstrate.PS1, med.getISOPaperSubstrate());
 	}
 
 	/**

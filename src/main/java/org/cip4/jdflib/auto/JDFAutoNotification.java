@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -53,7 +85,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFPart;
@@ -64,7 +95,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
  *****************************************************************************
  * class JDFAutoNotification : public JDFAudit
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoNotification extends JDFAudit
@@ -107,7 +138,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * Constructor for JDFAutoNotification
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -118,7 +149,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * Constructor for JDFAutoNotification
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -130,7 +161,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * Constructor for JDFAutoNotification
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -139,15 +170,6 @@ public abstract class JDFAutoNotification extends JDFAudit
 	protected JDFAutoNotification(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoNotification[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -219,16 +241,17 @@ public abstract class JDFAutoNotification extends JDFAudit
 		public static final EnumClass Fatal = new EnumClass("Fatal");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Class ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Class
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Class
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setClass(EnumClass enumVar)
@@ -238,7 +261,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (6) get EnumClass attribute Class
-	 * 
+	 *
 	 * @return EnumClass the value of the attribute
 	 */
 	public EnumClass getClassJDF()
@@ -246,12 +269,12 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return EnumClass.getEnum(getAttribute(AttributeName.CLASS, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CombinedProcessIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CombinedProcessIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CombinedProcessIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCombinedProcessIndex(JDFIntegerList value)
@@ -261,7 +284,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (20) get JDFIntegerList attribute CombinedProcessIndex
-	 * 
+	 *
 	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getCombinedProcessIndex()
@@ -271,12 +294,12 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute JobID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setJobID(String value)
@@ -286,7 +309,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (23) get String attribute JobID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getJobID()
@@ -294,12 +317,12 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobPartID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute JobPartID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setJobPartID(String value)
@@ -309,7 +332,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (23) get String attribute JobPartID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getJobPartID()
@@ -317,12 +340,12 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ModuleID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setModuleID(String value)
@@ -332,7 +355,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (23) get String attribute ModuleID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getModuleID()
@@ -340,12 +363,12 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return getAttribute(AttributeName.MODULEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ModuleIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setModuleIndex(JDFIntegerRangeList value)
@@ -355,7 +378,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute ModuleIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getModuleIndex()
@@ -365,12 +388,12 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleType ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleType
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ModuleType
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setModuleType(String value)
@@ -380,7 +403,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (23) get String attribute ModuleType
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getModuleType()
@@ -388,12 +411,12 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return getAttribute(AttributeName.MODULETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Type
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Type
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setType(String value)
@@ -403,7 +426,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (23) get String attribute Type
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getType()
@@ -411,13 +434,14 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element CostCenter
-	 * 
+	 *
 	 * @return JDFCostCenter the element
 	 */
 	public JDFCostCenter getCostCenter()
@@ -427,7 +451,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (25) getCreateCostCenter
-	 * 
+	 *
 	 * @return JDFCostCenter the element
 	 */
 	public JDFCostCenter getCreateCostCenter()
@@ -437,18 +461,17 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (29) append element CostCenter
-	 * 
-	 * @return JDFCostCenter the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFCostCenter the element @ if the element already exists
 	 */
-	public JDFCostCenter appendCostCenter() throws JDFException
+	public JDFCostCenter appendCostCenter()
 	{
 		return (JDFCostCenter) appendElementN(ElementName.COSTCENTER, 1, null);
 	}
 
 	/**
 	 * (26) getCreateEmployee
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -460,7 +483,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (27) const get element Employee
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element default is getEmployee(0)
 	 */
@@ -472,18 +495,18 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * Get all Employee from the current element
-	 * 
+	 *
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	@Override
 	public Collection<JDFEmployee> getAllEmployee()
 	{
-		return getChildrenByClass(JDFEmployee.class, false, 0);
+		return getChildArrayByClass(JDFEmployee.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Employee
-	 * 
+	 *
 	 * @return JDFEmployee the element
 	 */
 	@Override
@@ -494,7 +517,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (26) getCreatePart
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -505,7 +528,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (27) const get element Part
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element default is getPart(0)
 	 */
@@ -516,17 +539,17 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * Get all Part from the current element
-	 * 
+	 *
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()
 	{
-		return getChildrenByClass(JDFPart.class, false, 0);
+		return getChildArrayByClass(JDFPart.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Part
-	 * 
+	 *
 	 * @return JDFPart the element
 	 */
 	public JDFPart appendPart()
@@ -534,4 +557,4 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return (JDFPart) appendElement(ElementName.PART, null);
 	}
 
-}// end namespace JDF
+}

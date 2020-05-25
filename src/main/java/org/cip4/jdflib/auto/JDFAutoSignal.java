@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -52,17 +84,17 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFTrigger;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFEmployee;
+import org.cip4.jdflib.util.JDFDate;
 
 /**
  *****************************************************************************
  * class JDFAutoSignal : public JDFMessage
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoSignal extends JDFMessage
@@ -70,12 +102,14 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0), "FireAndForget");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.LASTREPEAT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.REFID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.REPLACEAFTER, 0x31111111, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.REPLACEBEFORE, 0x31111111, AttributeInfo.EnumAttributeType.dateTime, null, null);
 	}
 
 	@Override
@@ -100,7 +134,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * Constructor for JDFAutoSignal
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -111,7 +145,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * Constructor for JDFAutoSignal
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -123,7 +157,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * Constructor for JDFAutoSignal
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -132,15 +166,6 @@ public abstract class JDFAutoSignal extends JDFMessage
 	protected JDFAutoSignal(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoSignal[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -206,16 +231,17 @@ public abstract class JDFAutoSignal extends JDFMessage
 		public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ChannelMode ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ChannelMode
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute ChannelMode
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setChannelMode(EnumChannelMode enumVar)
@@ -225,7 +251,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (9) get attribute ChannelMode
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumChannelMode getChannelMode()
@@ -233,12 +259,12 @@ public abstract class JDFAutoSignal extends JDFMessage
 		return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, "FireAndForget"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LastRepeat ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LastRepeat
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute LastRepeat
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setLastRepeat(boolean value)
@@ -248,7 +274,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (18) get boolean attribute LastRepeat
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getLastRepeat()
@@ -256,12 +282,12 @@ public abstract class JDFAutoSignal extends JDFMessage
 		return getBoolAttribute(AttributeName.LASTREPEAT, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute refID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute refID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute refID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	@Override
@@ -272,7 +298,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (23) get String attribute refID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	@Override
@@ -281,13 +307,74 @@ public abstract class JDFAutoSignal extends JDFMessage
 		return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ReplaceAfter
+	--------------------------------------------------------------------- */
+	/**
+	 * (11) set attribute ReplaceAfter
+	 *
+	 * @param value the value to set the attribute to or null
+	 */
+	public void setReplaceAfter(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+		{
+			date = new JDFDate();
+		}
+		setAttribute(AttributeName.REPLACEAFTER, date.getDateTimeISO(), null);
+	}
+
+	/**
+	 * (12) get JDFDate attribute ReplaceAfter
+	 *
+	 * @return JDFDate the value of the attribute
+	 */
+	public JDFDate getReplaceAfter()
+	{
+		final String str = getAttribute(AttributeName.REPLACEAFTER, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ReplaceBefore
+	--------------------------------------------------------------------- */
+	/**
+	 * (11) set attribute ReplaceBefore
+	 *
+	 * @param value the value to set the attribute to or null
+	 */
+	public void setReplaceBefore(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+		{
+			date = new JDFDate();
+		}
+		setAttribute(AttributeName.REPLACEBEFORE, date.getDateTimeISO(), null);
+	}
+
+	/**
+	 * (12) get JDFDate attribute ReplaceBefore
+	 *
+	 * @return JDFDate the value of the attribute
+	 */
+	public JDFDate getReplaceBefore()
+	{
+		final String str = getAttribute(AttributeName.REPLACEBEFORE, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
+
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateEmployee
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -298,7 +385,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (27) const get element Employee
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element default is getEmployee(0)
 	 */
@@ -309,17 +396,17 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * Get all Employee from the current element
-	 * 
+	 *
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	public Collection<JDFEmployee> getAllEmployee()
 	{
-		return getChildrenByClass(JDFEmployee.class, false, 0);
+		return getChildArrayByClass(JDFEmployee.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Employee
-	 * 
+	 *
 	 * @return JDFEmployee the element
 	 */
 	public JDFEmployee appendEmployee()
@@ -329,7 +416,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (26) getCreateNotification
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFNotification the element
 	 */
@@ -340,7 +427,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (27) const get element Notification
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFNotification the element default is getNotification(0)
 	 */
@@ -351,17 +438,17 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * Get all Notification from the current element
-	 * 
+	 *
 	 * @return Collection<JDFNotification>, null if none are available
 	 */
 	public Collection<JDFNotification> getAllNotification()
 	{
-		return getChildrenByClass(JDFNotification.class, false, 0);
+		return getChildArrayByClass(JDFNotification.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Notification
-	 * 
+	 *
 	 * @return JDFNotification the element
 	 */
 	public JDFNotification appendNotification()
@@ -371,7 +458,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (24) const get element Trigger
-	 * 
+	 *
 	 * @return JDFTrigger the element
 	 */
 	public JDFTrigger getTrigger()
@@ -381,7 +468,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (25) getCreateTrigger
-	 * 
+	 *
 	 * @return JDFTrigger the element
 	 */
 	public JDFTrigger getCreateTrigger()
@@ -391,13 +478,12 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (29) append element Trigger
-	 * 
-	 * @return JDFTrigger the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFTrigger the element @ if the element already exists
 	 */
-	public JDFTrigger appendTrigger() throws JDFException
+	public JDFTrigger appendTrigger()
 	{
 		return (JDFTrigger) appendElementN(ElementName.TRIGGER, 1, null);
 	}
 
-}// end namespace JDF
+}

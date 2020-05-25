@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -61,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoColorCorrectionOp : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoColorCorrectionOp extends JDFElement
@@ -103,7 +135,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoColorCorrectionOp
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -114,7 +146,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoColorCorrectionOp
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -126,7 +158,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoColorCorrectionOp
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -135,15 +167,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	protected JDFAutoColorCorrectionOp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoColorCorrectionOp[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -217,16 +240,17 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 		public static final EnumSourceObjects Text = new EnumSourceObjects("Text");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SourceObjects
+	--------------------------------------------------------------------- */
 	/**
 	 * (5.2) set attribute SourceObjects
-	 * 
+	 *
 	 * @param v vector of the enumeration values
 	 */
 	public void setSourceObjects(Vector<? extends ValuedEnum> v)
@@ -236,7 +260,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * (9.2) get SourceObjects attribute SourceObjects
-	 * 
+	 *
 	 * @return Vector of the enumerations
 	 */
 	public Vector<? extends ValuedEnum> getSourceObjects()
@@ -244,12 +268,12 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdjustCyanRed ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdjustCyanRed
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AdjustCyanRed
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAdjustCyanRed(double value)
@@ -259,7 +283,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * (17) get double attribute AdjustCyanRed
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getAdjustCyanRed()
@@ -267,12 +291,12 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 		return getRealAttribute(AttributeName.ADJUSTCYANRED, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdjustMagentaGreen ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdjustMagentaGreen
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AdjustMagentaGreen
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAdjustMagentaGreen(double value)
@@ -282,7 +306,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * (17) get double attribute AdjustMagentaGreen
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getAdjustMagentaGreen()
@@ -290,12 +314,12 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 		return getRealAttribute(AttributeName.ADJUSTMAGENTAGREEN, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdjustYellowBlue ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdjustYellowBlue
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AdjustYellowBlue
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAdjustYellowBlue(double value)
@@ -305,7 +329,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * (17) get double attribute AdjustYellowBlue
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getAdjustYellowBlue()
@@ -313,12 +337,12 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 		return getRealAttribute(AttributeName.ADJUSTYELLOWBLUE, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdjustContrast ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdjustContrast
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AdjustContrast
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAdjustContrast(double value)
@@ -328,7 +352,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * (17) get double attribute AdjustContrast
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getAdjustContrast()
@@ -336,12 +360,12 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 		return getRealAttribute(AttributeName.ADJUSTCONTRAST, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdjustHue ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdjustHue
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AdjustHue
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAdjustHue(double value)
@@ -351,7 +375,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * (17) get double attribute AdjustHue
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getAdjustHue()
@@ -359,12 +383,12 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 		return getRealAttribute(AttributeName.ADJUSTHUE, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdjustLightness ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdjustLightness
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AdjustLightness
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAdjustLightness(double value)
@@ -374,7 +398,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * (17) get double attribute AdjustLightness
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getAdjustLightness()
@@ -382,12 +406,12 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 		return getRealAttribute(AttributeName.ADJUSTLIGHTNESS, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdjustSaturation ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdjustSaturation
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AdjustSaturation
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAdjustSaturation(double value)
@@ -397,7 +421,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * (17) get double attribute AdjustSaturation
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getAdjustSaturation()
@@ -405,12 +429,12 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 		return getRealAttribute(AttributeName.ADJUSTSATURATION, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ObjectTags ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ObjectTags
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ObjectTags
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setObjectTags(VString value)
@@ -420,7 +444,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * (21) get VString attribute ObjectTags
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getObjectTags()
@@ -431,13 +455,14 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 		return vStrAttrib;
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateFileSpec
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
@@ -448,7 +473,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * (27) const get element FileSpec
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element default is getFileSpec(0)
 	 */
@@ -459,17 +484,17 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * Get all FileSpec from the current element
-	 * 
+	 *
 	 * @return Collection<JDFFileSpec>, null if none are available
 	 */
 	public Collection<JDFFileSpec> getAllFileSpec()
 	{
-		return getChildrenByClass(JDFFileSpec.class, false, 0);
+		return getChildArrayByClass(JDFFileSpec.class, false, 0);
 	}
 
 	/**
 	 * (30) append element FileSpec
-	 * 
+	 *
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec appendFileSpec()
@@ -479,7 +504,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refFileSpec(JDFFileSpec refTarget)
@@ -487,4 +512,4 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 		refElement(refTarget);
 	}
 
-}// end namespace JDF
+}

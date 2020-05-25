@@ -55,17 +55,4 @@ public class JDFBindingIntent extends JDFAutoBindingIntent
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
-
-	// **************************************** Methods
-	// *********************************************
-	/**
-	 * toString
-	 * 
-	 * @return String
-	 */
-	@Override
-	public String toString()
-	{
-		return "JDFBindingIntent[  --> " + super.toString() + " ]";
-	}
 }

@@ -82,13 +82,13 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 	boolean totalResult = true;
 
 	@Override
-	public void enterDirectory(File dir)
+	public void enterDirectory(final File dir)
 	{
 		totalResult = true;
 	}
 
 	@Override
-	public void leaveDirectory(File dir)
+	public void leaveDirectory(final File dir)
 	{
 		if (!totalResult)
 		{
@@ -98,7 +98,7 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 	}
 
 	@Override
-	public void visitFile(File file)
+	public void visitFile(final File file)
 	{
 		testJDFClass(file.getName());
 	}
@@ -137,7 +137,7 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 		createdClass = createdClass.substring(createdClass.lastIndexOf(".") + 1);
 
 		result = elementName.equals(createdClass.substring("JDF".length())) || (elementName.equals(ElementName.COLORSUSED) && createdClass.equals("JDFSeparationList"))
-				|| (elementName.equals(ElementName.SHAPE) && createdClass.equals("JDFShapeElement"))
+				|| (elementName.equals(ElementName.CONTENTMETADATA) && createdClass.equals("JDFContentMetaData")) || (elementName.equals(ElementName.SHAPE) && createdClass.equals("JDFShapeElement"))
 				|| (elementName.endsWith(JDFConstants.LINK) && createdClass.substring("JDF".length()).equals(ElementName.RESOURCELINK));
 
 		if (!result)

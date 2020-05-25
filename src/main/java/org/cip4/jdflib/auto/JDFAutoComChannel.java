@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -55,7 +87,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoComChannel : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoComChannel extends JDFResource
@@ -80,7 +112,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoComChannel
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -91,7 +123,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoComChannel
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -103,7 +135,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoComChannel
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -112,15 +144,6 @@ public abstract class JDFAutoComChannel extends JDFResource
 	protected JDFAutoComChannel(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoComChannel[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -220,16 +243,17 @@ public abstract class JDFAutoComChannel extends JDFResource
 		public static final EnumChannelType WWW = new EnumChannelType("WWW");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ChannelType ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ChannelType
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute ChannelType
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setChannelType(EnumChannelType enumVar)
@@ -239,7 +263,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 
 	/**
 	 * (9) get attribute ChannelType
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumChannelType getChannelType()
@@ -247,12 +271,12 @@ public abstract class JDFAutoComChannel extends JDFResource
 		return EnumChannelType.getEnum(getAttribute(AttributeName.CHANNELTYPE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Locator ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Locator
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Locator
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setLocator(String value)
@@ -262,7 +286,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 
 	/**
 	 * (23) get String attribute Locator
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getLocator()
@@ -270,12 +294,12 @@ public abstract class JDFAutoComChannel extends JDFResource
 		return getAttribute(AttributeName.LOCATOR, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ChannelTypeDetails ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ChannelTypeDetails
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ChannelTypeDetails
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setChannelTypeDetails(String value)
@@ -285,7 +309,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 
 	/**
 	 * (23) get String attribute ChannelTypeDetails
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getChannelTypeDetails()
@@ -293,12 +317,12 @@ public abstract class JDFAutoComChannel extends JDFResource
 		return getAttribute(AttributeName.CHANNELTYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ChannelUsage ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ChannelUsage
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ChannelUsage
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setChannelUsage(VString value)
@@ -308,7 +332,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 
 	/**
 	 * (21) get VString attribute ChannelUsage
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getChannelUsage()
@@ -319,4 +343,4 @@ public abstract class JDFAutoComChannel extends JDFResource
 		return vStrAttrib;
 	}
 
-}// end namespace JDF
+}

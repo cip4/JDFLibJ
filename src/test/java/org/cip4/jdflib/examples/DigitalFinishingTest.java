@@ -68,7 +68,7 @@
  */
 package org.cip4.jdflib.examples;
 
-import java.util.Vector;
+import java.util.Collection;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumAutomation;
@@ -109,6 +109,7 @@ import org.junit.Test;
 
 /**
  * jmf pipe example file test
+ *
  * @author rainer prosi
  * @date Mar 3 2013
  */
@@ -553,7 +554,7 @@ public class DigitalFinishingTest extends ExampleTest
 			command.setType(EnumType.PipePush);
 			command.setSenderID("Printer");
 			JDFPipeParams pp = createPipeParams(command);
-			Vector<JDFPartAmount> vpa = createPartAmount(pp, j, 0, 1, true);
+			Collection<JDFPartAmount> vpa = createPartAmount(pp, j, 0, 1, true);
 			for (final JDFPartAmount pa : vpa)
 				pa.getPart(0).setMetadata(0, j == 0 ? "Rich" : "Poor");
 
@@ -593,7 +594,7 @@ public class DigitalFinishingTest extends ExampleTest
 	 * @param set
 	 * @param sheets
 	 */
-	Vector<JDFPartAmount> createPartAmount(final JDFPipeParams pp, final int set, final int sheets, final int plannedSheets, final boolean bCover)
+	Collection<JDFPartAmount> createPartAmount(final JDFPipeParams pp, final int set, final int sheets, final int plannedSheets, final boolean bCover)
 	{
 		final JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
 		final JDFAttributeMap m = new JDFAttributeMap("SetIndex", "" + set);
@@ -610,7 +611,7 @@ public class DigitalFinishingTest extends ExampleTest
 		{
 			pa.setActualAmount(sheets, null);
 		}
-		return (Vector<JDFPartAmount>) ap.getAllPartAmount();
+		return ap.getAllPartAmount();
 	}
 
 	/**

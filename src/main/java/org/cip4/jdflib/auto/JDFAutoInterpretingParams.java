@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -51,7 +83,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFFitPolicy;
 import org.cip4.jdflib.resource.JDFPDFInterpretingParams;
@@ -64,7 +95,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFInterpretingDetails;
  *****************************************************************************
  * class JDFAutoInterpretingParams : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoInterpretingParams extends JDFResource
@@ -110,7 +141,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoInterpretingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -121,7 +152,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoInterpretingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -133,7 +164,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoInterpretingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -142,15 +173,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	protected JDFAutoInterpretingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoInterpretingParams[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -368,16 +390,17 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 		public static final EnumPrintQuality Draft = new EnumPrintQuality("Draft");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Center
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Center
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCenter(boolean value)
@@ -387,7 +410,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute Center
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getCenter()
@@ -395,12 +418,12 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 		return getBoolAttribute(AttributeName.CENTER, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MirrorAround ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MirrorAround
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute MirrorAround
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setMirrorAround(EnumMirrorAround enumVar)
@@ -410,7 +433,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (9) get attribute MirrorAround
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumMirrorAround getMirrorAround()
@@ -418,12 +441,12 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 		return EnumMirrorAround.getEnum(getAttribute(AttributeName.MIRRORAROUND, null, "None"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Polarity ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Polarity
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Polarity
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setPolarity(EnumPolarity enumVar)
@@ -433,7 +456,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (9) get attribute Polarity
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumPolarity getPolarity()
@@ -441,12 +464,12 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 		return EnumPolarity.getEnum(getAttribute(AttributeName.POLARITY, null, "Positive"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintQuality ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrintQuality
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute PrintQuality
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setPrintQuality(EnumPrintQuality enumVar)
@@ -456,7 +479,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (9) get attribute PrintQuality
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumPrintQuality getPrintQuality()
@@ -464,12 +487,12 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 		return EnumPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, "Normal"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FitToPage ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FitToPage
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FitToPage
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFitToPage(boolean value)
@@ -479,7 +502,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute FitToPage
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getFitToPage()
@@ -487,12 +510,12 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 		return getBoolAttribute(AttributeName.FITTOPAGE, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Poster ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Poster
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Poster
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPoster(JDFXYPair value)
@@ -502,7 +525,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (20) get JDFXYPair attribute Poster
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getPoster()
@@ -512,12 +535,12 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PosterOverlap ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PosterOverlap
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PosterOverlap
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPosterOverlap(JDFXYPair value)
@@ -527,7 +550,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (20) get JDFXYPair attribute PosterOverlap
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getPosterOverlap()
@@ -537,12 +560,12 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Scaling ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Scaling
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Scaling
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setScaling(JDFXYPair value)
@@ -552,7 +575,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (20) get JDFXYPair attribute Scaling
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getScaling()
@@ -562,12 +585,12 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ScalingOrigin ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ScalingOrigin
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ScalingOrigin
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setScalingOrigin(JDFXYPair value)
@@ -577,7 +600,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (20) get JDFXYPair attribute ScalingOrigin
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getScalingOrigin()
@@ -587,13 +610,14 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateObjectResolution
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFObjectResolution the element
 	 */
@@ -604,7 +628,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (27) const get element ObjectResolution
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFObjectResolution the element default is getObjectResolution(0)
 	 */
@@ -615,17 +639,17 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * Get all ObjectResolution from the current element
-	 * 
+	 *
 	 * @return Collection<JDFObjectResolution>, null if none are available
 	 */
 	public Collection<JDFObjectResolution> getAllObjectResolution()
 	{
-		return getChildrenByClass(JDFObjectResolution.class, false, 0);
+		return getChildArrayByClass(JDFObjectResolution.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ObjectResolution
-	 * 
+	 *
 	 * @return JDFObjectResolution the element
 	 */
 	public JDFObjectResolution appendObjectResolution()
@@ -635,7 +659,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refObjectResolution(JDFObjectResolution refTarget)
@@ -645,7 +669,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (24) const get element FitPolicy
-	 * 
+	 *
 	 * @return JDFFitPolicy the element
 	 */
 	public JDFFitPolicy getFitPolicy()
@@ -655,7 +679,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (25) getCreateFitPolicy
-	 * 
+	 *
 	 * @return JDFFitPolicy the element
 	 */
 	public JDFFitPolicy getCreateFitPolicy()
@@ -665,18 +689,17 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (29) append element FitPolicy
-	 * 
-	 * @return JDFFitPolicy the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFFitPolicy the element @ if the element already exists
 	 */
-	public JDFFitPolicy appendFitPolicy() throws JDFException
+	public JDFFitPolicy appendFitPolicy()
 	{
 		return (JDFFitPolicy) appendElementN(ElementName.FITPOLICY, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refFitPolicy(JDFFitPolicy refTarget)
@@ -686,7 +709,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (26) getCreateInterpretingDetails
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFInterpretingDetails the element
 	 */
@@ -697,7 +720,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (27) const get element InterpretingDetails
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFInterpretingDetails the element default is getInterpretingDetails(0)
 	 */
@@ -708,17 +731,17 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * Get all InterpretingDetails from the current element
-	 * 
+	 *
 	 * @return Collection<JDFInterpretingDetails>, null if none are available
 	 */
 	public Collection<JDFInterpretingDetails> getAllInterpretingDetails()
 	{
-		return getChildrenByClass(JDFInterpretingDetails.class, false, 0);
+		return getChildArrayByClass(JDFInterpretingDetails.class, false, 0);
 	}
 
 	/**
 	 * (30) append element InterpretingDetails
-	 * 
+	 *
 	 * @return JDFInterpretingDetails the element
 	 */
 	public JDFInterpretingDetails appendInterpretingDetails()
@@ -728,7 +751,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (26) getCreateMedia
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFMedia the element
 	 */
@@ -739,7 +762,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (27) const get element Media
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFMedia the element default is getMedia(0)
 	 */
@@ -750,17 +773,17 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * Get all Media from the current element
-	 * 
+	 *
 	 * @return Collection<JDFMedia>, null if none are available
 	 */
 	public Collection<JDFMedia> getAllMedia()
 	{
-		return getChildrenByClass(JDFMedia.class, false, 0);
+		return getChildArrayByClass(JDFMedia.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Media
-	 * 
+	 *
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia appendMedia()
@@ -770,7 +793,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refMedia(JDFMedia refTarget)
@@ -780,7 +803,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (24) const get element PDFInterpretingParams
-	 * 
+	 *
 	 * @return JDFPDFInterpretingParams the element
 	 */
 	public JDFPDFInterpretingParams getPDFInterpretingParams()
@@ -790,7 +813,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (25) getCreatePDFInterpretingParams
-	 * 
+	 *
 	 * @return JDFPDFInterpretingParams the element
 	 */
 	public JDFPDFInterpretingParams getCreatePDFInterpretingParams()
@@ -800,13 +823,12 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
 	/**
 	 * (29) append element PDFInterpretingParams
-	 * 
-	 * @return JDFPDFInterpretingParams the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFPDFInterpretingParams the element @ if the element already exists
 	 */
-	public JDFPDFInterpretingParams appendPDFInterpretingParams() throws JDFException
+	public JDFPDFInterpretingParams appendPDFInterpretingParams()
 	{
 		return (JDFPDFInterpretingParams) appendElementN(ElementName.PDFINTERPRETINGPARAMS, 1, null);
 	}
 
-}// end namespace JDF
+}

@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -58,7 +90,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
  *****************************************************************************
  * class JDFAutoPart : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoPart extends JDFElement
@@ -66,7 +98,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[72];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[75];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.SORTING, 0x44443333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
@@ -98,49 +130,52 @@ public abstract class JDFAutoPart extends JDFElement
 		atrInfoTable[26] = new AtrInfoTable(AttributeName.ITEMNAMES, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[27] = new AtrInfoTable(AttributeName.LAYERIDS, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable[28] = new AtrInfoTable(AttributeName.LOCATION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[29] = new AtrInfoTable(AttributeName.METADATA0, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-		atrInfoTable[30] = new AtrInfoTable(AttributeName.METADATA1, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-		atrInfoTable[31] = new AtrInfoTable(AttributeName.METADATA2, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-		atrInfoTable[32] = new AtrInfoTable(AttributeName.METADATA3, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-		atrInfoTable[33] = new AtrInfoTable(AttributeName.METADATA4, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-		atrInfoTable[34] = new AtrInfoTable(AttributeName.METADATA5, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-		atrInfoTable[35] = new AtrInfoTable(AttributeName.METADATA6, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-		atrInfoTable[36] = new AtrInfoTable(AttributeName.METADATA7, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-		atrInfoTable[37] = new AtrInfoTable(AttributeName.METADATA8, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-		atrInfoTable[38] = new AtrInfoTable(AttributeName.METADATA9, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-		atrInfoTable[39] = new AtrInfoTable(AttributeName.OPTION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[40] = new AtrInfoTable(AttributeName.PAGENUMBER, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[41] = new AtrInfoTable(AttributeName.PAGETAGS, 0x33333111, AttributeInfo.EnumAttributeType.Any, null, null);
-		atrInfoTable[42] = new AtrInfoTable(AttributeName.PARTVERSION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[43] = new AtrInfoTable(AttributeName.PLATELAYOUT, 0x33333111, AttributeInfo.EnumAttributeType.Any, null, null);
-		atrInfoTable[44] = new AtrInfoTable(AttributeName.PREFLIGHTRULE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[45] = new AtrInfoTable(AttributeName.PREVIEWTYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewType.getEnum(0), null);
-		atrInfoTable[46] = new AtrInfoTable(AttributeName.PRODUCTPART, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[47] = new AtrInfoTable(AttributeName.RIBBONNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[48] = new AtrInfoTable(AttributeName.RUN, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[49] = new AtrInfoTable(AttributeName.RUNINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[50] = new AtrInfoTable(AttributeName.RUNPAGE, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[51] = new AtrInfoTable(AttributeName.RUNPAGERANGE, 0x33331111, AttributeInfo.EnumAttributeType.Any, null, null);
-		atrInfoTable[52] = new AtrInfoTable(AttributeName.RUNSET, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[53] = new AtrInfoTable(AttributeName.RUNTAGS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[54] = new AtrInfoTable(AttributeName.SECTIONINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[55] = new AtrInfoTable(AttributeName.SEPARATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[56] = new AtrInfoTable(AttributeName.SETCOPIES, 0x33311111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[57] = new AtrInfoTable(AttributeName.SETDOCINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[58] = new AtrInfoTable(AttributeName.SETRUNINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[59] = new AtrInfoTable(AttributeName.SETSHEETINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[60] = new AtrInfoTable(AttributeName.SETTAGS, 0x33333111, AttributeInfo.EnumAttributeType.Any, null, null);
-		atrInfoTable[61] = new AtrInfoTable(AttributeName.SETINDEX, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[62] = new AtrInfoTable(AttributeName.SHEETINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[63] = new AtrInfoTable(AttributeName.SHEETNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[64] = new AtrInfoTable(AttributeName.SIDE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSide.getEnum(0), null);
-		atrInfoTable[65] = new AtrInfoTable(AttributeName.SIGNATURENAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[66] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
-		atrInfoTable[67] = new AtrInfoTable(AttributeName.SUBRUN, 0x33333111, AttributeInfo.EnumAttributeType.Any, null, null);
-		atrInfoTable[68] = new AtrInfoTable(AttributeName.TILEID, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[69] = new AtrInfoTable(AttributeName.WEBNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[70] = new AtrInfoTable(AttributeName.WEBPRODUCT, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[71] = new AtrInfoTable(AttributeName.WEBSETUP, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[29] = new AtrInfoTable(AttributeName.LOTID, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[30] = new AtrInfoTable(AttributeName.METADATA0, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[31] = new AtrInfoTable(AttributeName.METADATA1, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[32] = new AtrInfoTable(AttributeName.METADATA2, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[33] = new AtrInfoTable(AttributeName.METADATA3, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[34] = new AtrInfoTable(AttributeName.METADATA4, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[35] = new AtrInfoTable(AttributeName.METADATA5, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[36] = new AtrInfoTable(AttributeName.METADATA6, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[37] = new AtrInfoTable(AttributeName.METADATA7, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[38] = new AtrInfoTable(AttributeName.METADATA8, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[39] = new AtrInfoTable(AttributeName.METADATA9, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[40] = new AtrInfoTable(AttributeName.OPTION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[41] = new AtrInfoTable(AttributeName.PAGENUMBER, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[42] = new AtrInfoTable(AttributeName.PAGETAGS, 0x33333111, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[43] = new AtrInfoTable(AttributeName.PARTVERSION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[44] = new AtrInfoTable(AttributeName.PLATELAYOUT, 0x33333111, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[45] = new AtrInfoTable(AttributeName.PREFLIGHTRULE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[46] = new AtrInfoTable(AttributeName.PREVIEWTYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewType.getEnum(0), null);
+		atrInfoTable[47] = new AtrInfoTable(AttributeName.PRINTCONDITION, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[48] = new AtrInfoTable(AttributeName.PRODUCT, 0x31111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[49] = new AtrInfoTable(AttributeName.PRODUCTPART, 0x43311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[50] = new AtrInfoTable(AttributeName.RIBBONNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[51] = new AtrInfoTable(AttributeName.RUN, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[52] = new AtrInfoTable(AttributeName.RUNINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[53] = new AtrInfoTable(AttributeName.RUNPAGE, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[54] = new AtrInfoTable(AttributeName.RUNPAGERANGE, 0x33331111, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[55] = new AtrInfoTable(AttributeName.RUNSET, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[56] = new AtrInfoTable(AttributeName.RUNTAGS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[57] = new AtrInfoTable(AttributeName.SECTIONINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[58] = new AtrInfoTable(AttributeName.SEPARATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[59] = new AtrInfoTable(AttributeName.SETCOPIES, 0x33311111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[60] = new AtrInfoTable(AttributeName.SETDOCINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[61] = new AtrInfoTable(AttributeName.SETRUNINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[62] = new AtrInfoTable(AttributeName.SETSHEETINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[63] = new AtrInfoTable(AttributeName.SETTAGS, 0x33333111, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[64] = new AtrInfoTable(AttributeName.SETINDEX, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[65] = new AtrInfoTable(AttributeName.SHEETINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[66] = new AtrInfoTable(AttributeName.SHEETNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[67] = new AtrInfoTable(AttributeName.SIDE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSide.getEnum(0), null);
+		atrInfoTable[68] = new AtrInfoTable(AttributeName.SIGNATURENAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[69] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[70] = new AtrInfoTable(AttributeName.SUBRUN, 0x33333111, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[71] = new AtrInfoTable(AttributeName.TILEID, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[72] = new AtrInfoTable(AttributeName.WEBNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[73] = new AtrInfoTable(AttributeName.WEBPRODUCT, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[74] = new AtrInfoTable(AttributeName.WEBSETUP, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -151,7 +186,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPart
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -162,7 +197,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPart
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -174,7 +209,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPart
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -183,15 +218,6 @@ public abstract class JDFAutoPart extends JDFElement
 	protected JDFAutoPart(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoPart[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -332,16 +358,17 @@ public abstract class JDFAutoPart extends JDFElement
 		public static final EnumSide Back = new EnumSide("Back");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Sorting ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Sorting
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Sorting
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSorting(JDFIntegerRangeList value)
@@ -351,7 +378,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute Sorting
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSorting()
@@ -361,12 +388,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SortAmount ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SortAmount
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SortAmount
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSortAmount(String value)
@@ -376,7 +403,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute SortAmount
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getSortAmount()
@@ -384,12 +411,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.SORTAMOUNT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BinderySignatureName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BinderySignatureName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BinderySignatureName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBinderySignatureName(String value)
@@ -399,7 +426,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute BinderySignatureName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getBinderySignatureName()
@@ -407,12 +434,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.BINDERYSIGNATURENAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BinderySignaturePaginationIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BinderySignaturePaginationIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BinderySignaturePaginationIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBinderySignaturePaginationIndex(String value)
@@ -422,7 +449,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute BinderySignaturePaginationIndex
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getBinderySignaturePaginationIndex()
@@ -430,12 +457,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlockName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BlockName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BlockName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBlockName(String value)
@@ -445,7 +472,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute BlockName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getBlockName()
@@ -453,12 +480,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.BLOCKNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BundleItemIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BundleItemIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BundleItemIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBundleItemIndex(JDFIntegerRangeList value)
@@ -468,7 +495,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute BundleItemIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getBundleItemIndex()
@@ -478,12 +505,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CellIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CellIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CellIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCellIndex(JDFIntegerRangeList value)
@@ -493,7 +520,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute CellIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getCellIndex()
@@ -503,12 +530,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Condition ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Condition
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Condition
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCondition(String value)
@@ -518,7 +545,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute Condition
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getCondition()
@@ -526,12 +553,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.CONDITION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit0 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeliveryUnit0
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DeliveryUnit0
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDeliveryUnit0(String value)
@@ -541,7 +568,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute DeliveryUnit0
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDeliveryUnit0()
@@ -549,12 +576,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.DELIVERYUNIT0, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit1 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeliveryUnit1
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DeliveryUnit1
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDeliveryUnit1(String value)
@@ -564,7 +591,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute DeliveryUnit1
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDeliveryUnit1()
@@ -572,12 +599,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.DELIVERYUNIT1, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit2 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeliveryUnit2
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DeliveryUnit2
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDeliveryUnit2(String value)
@@ -587,7 +614,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute DeliveryUnit2
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDeliveryUnit2()
@@ -595,12 +622,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.DELIVERYUNIT2, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit3 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeliveryUnit3
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DeliveryUnit3
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDeliveryUnit3(String value)
@@ -610,7 +637,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute DeliveryUnit3
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDeliveryUnit3()
@@ -618,12 +645,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.DELIVERYUNIT3, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit4 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeliveryUnit4
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DeliveryUnit4
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDeliveryUnit4(String value)
@@ -633,7 +660,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute DeliveryUnit4
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDeliveryUnit4()
@@ -641,12 +668,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.DELIVERYUNIT4, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit5 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeliveryUnit5
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DeliveryUnit5
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDeliveryUnit5(String value)
@@ -656,7 +683,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute DeliveryUnit5
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDeliveryUnit5()
@@ -664,12 +691,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.DELIVERYUNIT5, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit6 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeliveryUnit6
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DeliveryUnit6
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDeliveryUnit6(String value)
@@ -679,7 +706,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute DeliveryUnit6
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDeliveryUnit6()
@@ -687,12 +714,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.DELIVERYUNIT6, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit7 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeliveryUnit7
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DeliveryUnit7
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDeliveryUnit7(String value)
@@ -702,7 +729,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute DeliveryUnit7
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDeliveryUnit7()
@@ -710,12 +737,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.DELIVERYUNIT7, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit8 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeliveryUnit8
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DeliveryUnit8
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDeliveryUnit8(String value)
@@ -725,7 +752,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute DeliveryUnit8
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDeliveryUnit8()
@@ -733,12 +760,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.DELIVERYUNIT8, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit9 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeliveryUnit9
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DeliveryUnit9
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDeliveryUnit9(String value)
@@ -748,7 +775,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute DeliveryUnit9
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDeliveryUnit9()
@@ -756,12 +783,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.DELIVERYUNIT9, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocCopies ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DocCopies
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DocCopies
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDocCopies(JDFIntegerRangeList value)
@@ -771,7 +798,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute DocCopies
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getDocCopies()
@@ -781,12 +808,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DocIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DocIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDocIndex(JDFIntegerRangeList value)
@@ -796,7 +823,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute DocIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getDocIndex()
@@ -806,12 +833,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocRunIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DocRunIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DocRunIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDocRunIndex(JDFIntegerRangeList value)
@@ -821,7 +848,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute DocRunIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getDocRunIndex()
@@ -831,12 +858,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocSheetIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DocSheetIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DocSheetIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDocSheetIndex(JDFIntegerRangeList value)
@@ -846,7 +873,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute DocSheetIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getDocSheetIndex()
@@ -856,12 +883,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocTags ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DocTags
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DocTags
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDocTags(String value)
@@ -871,7 +898,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute DocTags
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDocTags()
@@ -879,12 +906,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.DOCTAGS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Edition ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Edition
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Edition
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEdition(String value)
@@ -894,7 +921,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute Edition
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getEdition()
@@ -902,12 +929,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.EDITION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EditionVersion ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EditionVersion
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute EditionVersion
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEditionVersion(String value)
@@ -917,7 +944,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute EditionVersion
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getEditionVersion()
@@ -925,12 +952,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.EDITIONVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FountainNumber ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FountainNumber
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FountainNumber
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFountainNumber(int value)
@@ -940,7 +967,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (15) get int attribute FountainNumber
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getFountainNumber()
@@ -948,12 +975,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getIntAttribute(AttributeName.FOUNTAINNUMBER, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ItemNames ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ItemNames
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ItemNames
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setItemNames(String value)
@@ -963,7 +990,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute ItemNames
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getItemNames()
@@ -971,12 +998,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.ITEMNAMES, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LayerIDs ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LayerIDs
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute LayerIDs
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setLayerIDs(JDFIntegerRangeList value)
@@ -986,7 +1013,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute LayerIDs
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getLayerIDs()
@@ -996,12 +1023,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Location ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Location
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Location
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setLocation(String value)
@@ -1011,7 +1038,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute Location
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getLocation()
@@ -1019,12 +1046,35 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.LOCATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata0 ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LotID
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute LotID
+	 *
+	 * @param value the value to set the attribute to
 	 */
+	public void setLotID(String value)
+	{
+		setAttribute(AttributeName.LOTID, value, null);
+	}
+
+	/**
+	 * (23) get String attribute LotID
+	 *
+	 * @return the value of the attribute
+	 */
+	public String getLotID()
+	{
+		return getAttribute(AttributeName.LOTID, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Metadata0
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Metadata0
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMetadata0(JDFNameRangeList value)
@@ -1034,7 +1084,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata0
-	 * 
+	 *
 	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata0()
@@ -1044,12 +1094,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata1 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Metadata1
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Metadata1
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMetadata1(JDFNameRangeList value)
@@ -1059,7 +1109,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata1
-	 * 
+	 *
 	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata1()
@@ -1069,12 +1119,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata2 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Metadata2
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Metadata2
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMetadata2(JDFNameRangeList value)
@@ -1084,7 +1134,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata2
-	 * 
+	 *
 	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata2()
@@ -1094,12 +1144,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata3 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Metadata3
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Metadata3
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMetadata3(JDFNameRangeList value)
@@ -1109,7 +1159,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata3
-	 * 
+	 *
 	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata3()
@@ -1119,12 +1169,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata4 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Metadata4
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Metadata4
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMetadata4(JDFNameRangeList value)
@@ -1134,7 +1184,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata4
-	 * 
+	 *
 	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata4()
@@ -1144,12 +1194,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata5 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Metadata5
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Metadata5
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMetadata5(JDFNameRangeList value)
@@ -1159,7 +1209,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata5
-	 * 
+	 *
 	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata5()
@@ -1169,12 +1219,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata6 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Metadata6
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Metadata6
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMetadata6(JDFNameRangeList value)
@@ -1184,7 +1234,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata6
-	 * 
+	 *
 	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata6()
@@ -1194,12 +1244,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata7 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Metadata7
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Metadata7
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMetadata7(JDFNameRangeList value)
@@ -1209,7 +1259,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata7
-	 * 
+	 *
 	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata7()
@@ -1219,12 +1269,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata8 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Metadata8
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Metadata8
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMetadata8(JDFNameRangeList value)
@@ -1234,7 +1284,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata8
-	 * 
+	 *
 	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata8()
@@ -1244,12 +1294,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata9 ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Metadata9
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Metadata9
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMetadata9(JDFNameRangeList value)
@@ -1259,7 +1309,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata9
-	 * 
+	 *
 	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata9()
@@ -1269,12 +1319,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Option ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Option
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Option
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOption(String value)
@@ -1284,7 +1334,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute Option
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getOption()
@@ -1292,12 +1342,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.OPTION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageNumber ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PageNumber
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PageNumber
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPageNumber(JDFIntegerRangeList value)
@@ -1307,7 +1357,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute PageNumber
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPageNumber()
@@ -1317,12 +1367,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageTags ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PageTags
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PageTags
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPageTags(String value)
@@ -1332,7 +1382,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute PageTags
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getPageTags()
@@ -1340,12 +1390,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.PAGETAGS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PartVersion ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PartVersion
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PartVersion
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPartVersion(VString value)
@@ -1355,7 +1405,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (21) get VString attribute PartVersion
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getPartVersion()
@@ -1366,12 +1416,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return vStrAttrib;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PlateLayout ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PlateLayout
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PlateLayout
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPlateLayout(String value)
@@ -1381,7 +1431,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute PlateLayout
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getPlateLayout()
@@ -1389,12 +1439,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.PLATELAYOUT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreflightRule ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PreflightRule
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PreflightRule
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPreflightRule(String value)
@@ -1404,7 +1454,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute PreflightRule
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getPreflightRule()
@@ -1412,12 +1462,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.PREFLIGHTRULE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreviewType ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PreviewType
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute PreviewType
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setPreviewType(EnumPreviewType enumVar)
@@ -1427,7 +1477,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (9) get attribute PreviewType
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumPreviewType getPreviewType()
@@ -1435,12 +1485,58 @@ public abstract class JDFAutoPart extends JDFElement
 		return EnumPreviewType.getEnum(getAttribute(AttributeName.PREVIEWTYPE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProductPart ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrintCondition
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute PrintCondition
+	 *
+	 * @param value the value to set the attribute to
 	 */
+	public void setPrintCondition(String value)
+	{
+		setAttribute(AttributeName.PRINTCONDITION, value, null);
+	}
+
+	/**
+	 * (23) get String attribute PrintCondition
+	 *
+	 * @return the value of the attribute
+	 */
+	public String getPrintCondition()
+	{
+		return getAttribute(AttributeName.PRINTCONDITION, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Product
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute Product
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setProduct(String value)
+	{
+		setAttribute(AttributeName.PRODUCT, value, null);
+	}
+
+	/**
+	 * (23) get String attribute Product
+	 *
+	 * @return the value of the attribute
+	 */
+	public String getProduct()
+	{
+		return getAttribute(AttributeName.PRODUCT, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ProductPart
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ProductPart
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setProductPart(String value)
@@ -1450,7 +1546,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute ProductPart
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getProductPart()
@@ -1458,12 +1554,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.PRODUCTPART, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RibbonName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RibbonName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RibbonName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRibbonName(String value)
@@ -1473,7 +1569,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute RibbonName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getRibbonName()
@@ -1481,12 +1577,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.RIBBONNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Run ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Run
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Run
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRun(String value)
@@ -1496,7 +1592,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute Run
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getRun()
@@ -1504,12 +1600,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.RUN, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RunIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RunIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RunIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRunIndex(JDFIntegerRangeList value)
@@ -1519,7 +1615,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute RunIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getRunIndex()
@@ -1529,12 +1625,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RunPage ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RunPage
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RunPage
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRunPage(int value)
@@ -1544,7 +1640,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (15) get int attribute RunPage
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getRunPage()
@@ -1552,12 +1648,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getIntAttribute(AttributeName.RUNPAGE, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RunPageRange ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RunPageRange
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RunPageRange
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRunPageRange(String value)
@@ -1567,7 +1663,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute RunPageRange
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getRunPageRange()
@@ -1575,12 +1671,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.RUNPAGERANGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RunSet ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RunSet
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RunSet
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRunSet(String value)
@@ -1590,7 +1686,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute RunSet
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getRunSet()
@@ -1598,12 +1694,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.RUNSET, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RunTags ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RunTags
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RunTags
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRunTags(String value)
@@ -1613,7 +1709,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute RunTags
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getRunTags()
@@ -1621,12 +1717,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.RUNTAGS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SectionIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SectionIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SectionIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSectionIndex(JDFIntegerRangeList value)
@@ -1636,7 +1732,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute SectionIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSectionIndex()
@@ -1646,12 +1742,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Separation ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Separation
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Separation
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSeparation(String value)
@@ -1661,7 +1757,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute Separation
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getSeparation()
@@ -1669,12 +1765,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.SEPARATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetCopies ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SetCopies
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SetCopies
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSetCopies(JDFIntegerRangeList value)
@@ -1684,7 +1780,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute SetCopies
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSetCopies()
@@ -1694,12 +1790,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetDocIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SetDocIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SetDocIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSetDocIndex(JDFIntegerRangeList value)
@@ -1709,7 +1805,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute SetDocIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSetDocIndex()
@@ -1719,12 +1815,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetRunIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SetRunIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SetRunIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSetRunIndex(JDFIntegerRangeList value)
@@ -1734,7 +1830,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute SetRunIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSetRunIndex()
@@ -1744,12 +1840,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetSheetIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SetSheetIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SetSheetIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSetSheetIndex(JDFIntegerRangeList value)
@@ -1759,7 +1855,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute SetSheetIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSetSheetIndex()
@@ -1769,12 +1865,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetTags ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SetTags
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SetTags
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSetTags(String value)
@@ -1784,7 +1880,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute SetTags
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getSetTags()
@@ -1792,12 +1888,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.SETTAGS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SetIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SetIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSetIndex(JDFIntegerRangeList value)
@@ -1807,7 +1903,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute SetIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSetIndex()
@@ -1817,12 +1913,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SheetIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SheetIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSheetIndex(JDFIntegerRangeList value)
@@ -1832,7 +1928,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute SheetIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSheetIndex()
@@ -1842,12 +1938,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SheetName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SheetName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSheetName(String value)
@@ -1857,7 +1953,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute SheetName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getSheetName()
@@ -1865,12 +1961,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.SHEETNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Side ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Side
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Side
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setSide(EnumSide enumVar)
@@ -1880,7 +1976,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (9) get attribute Side
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumSide getSide()
@@ -1888,12 +1984,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return EnumSide.getEnum(getAttribute(AttributeName.SIDE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SignatureName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SignatureName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SignatureName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSignatureName(String value)
@@ -1903,7 +1999,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute SignatureName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getSignatureName()
@@ -1911,12 +2007,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.SIGNATURENAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StationName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StationName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute StationName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setStationName(String value)
@@ -1926,7 +2022,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute StationName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getStationName()
@@ -1934,12 +2030,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.STATIONNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SubRun ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SubRun
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SubRun
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSubRun(String value)
@@ -1949,7 +2045,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute SubRun
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getSubRun()
@@ -1957,12 +2053,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.SUBRUN, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TileID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TileID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TileID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTileID(JDFXYPair value)
@@ -1972,7 +2068,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (20) get JDFXYPair attribute TileID
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getTileID()
@@ -1982,12 +2078,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WebName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WebName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute WebName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setWebName(String value)
@@ -1997,7 +2093,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute WebName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getWebName()
@@ -2005,12 +2101,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.WEBNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WebProduct ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WebProduct
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute WebProduct
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setWebProduct(String value)
@@ -2020,7 +2116,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute WebProduct
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getWebProduct()
@@ -2028,12 +2124,12 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.WEBPRODUCT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WebSetup ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WebSetup
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute WebSetup
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setWebSetup(String value)
@@ -2043,7 +2139,7 @@ public abstract class JDFAutoPart extends JDFElement
 
 	/**
 	 * (23) get String attribute WebSetup
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getWebSetup()
@@ -2051,4 +2147,4 @@ public abstract class JDFAutoPart extends JDFElement
 		return getAttribute(AttributeName.WEBSETUP, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-}// end namespace JDF
+}

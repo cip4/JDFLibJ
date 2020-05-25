@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -47,14 +79,13 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFDeviceMark;
 
 /**
  *****************************************************************************
  * class JDFAutoDynamicField : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoDynamicField extends JDFElement
@@ -93,7 +124,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoDynamicField
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -104,7 +135,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoDynamicField
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -116,7 +147,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoDynamicField
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -127,25 +158,17 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoDynamicField[  --> " + super.toString() + " ]";
-	}
-
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Format ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Format
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Format
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFormat(String value)
@@ -155,7 +178,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 
 	/**
 	 * (23) get String attribute Format
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getFormat()
@@ -163,12 +186,12 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		return getAttribute(AttributeName.FORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InputField ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute InputField
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute InputField
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setInputField(String value)
@@ -178,7 +201,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 
 	/**
 	 * (23) get String attribute InputField
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getInputField()
@@ -186,12 +209,12 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		return getAttribute(AttributeName.INPUTFIELD, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Ord ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Ord
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Ord
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOrd(int value)
@@ -201,7 +224,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 
 	/**
 	 * (15) get int attribute Ord
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getOrd()
@@ -209,12 +232,12 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		return getIntAttribute(AttributeName.ORD, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OrdExpression ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OrdExpression
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute OrdExpression
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOrdExpression(String value)
@@ -224,7 +247,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 
 	/**
 	 * (23) get String attribute OrdExpression
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getOrdExpression()
@@ -232,12 +255,12 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		return getAttribute(AttributeName.ORDEXPRESSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReplaceField ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ReplaceField
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ReplaceField
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setReplaceField(String value)
@@ -247,7 +270,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 
 	/**
 	 * (23) get String attribute ReplaceField
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getReplaceField()
@@ -255,12 +278,12 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		return getAttribute(AttributeName.REPLACEFIELD, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Template ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Template
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Template
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTemplate(String value)
@@ -270,7 +293,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 
 	/**
 	 * (23) get String attribute Template
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getTemplate()
@@ -278,13 +301,14 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		return getAttribute(AttributeName.TEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element DeviceMark
-	 * 
+	 *
 	 * @return JDFDeviceMark the element
 	 */
 	public JDFDeviceMark getDeviceMark()
@@ -294,7 +318,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 
 	/**
 	 * (25) getCreateDeviceMark
-	 * 
+	 *
 	 * @return JDFDeviceMark the element
 	 */
 	public JDFDeviceMark getCreateDeviceMark()
@@ -304,18 +328,17 @@ public abstract class JDFAutoDynamicField extends JDFElement
 
 	/**
 	 * (29) append element DeviceMark
-	 * 
-	 * @return JDFDeviceMark the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFDeviceMark the element @ if the element already exists
 	 */
-	public JDFDeviceMark appendDeviceMark() throws JDFException
+	public JDFDeviceMark appendDeviceMark()
 	{
 		return (JDFDeviceMark) appendElementN(ElementName.DEVICEMARK, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refDeviceMark(JDFDeviceMark refTarget)
@@ -323,4 +346,4 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		refElement(refTarget);
 	}
 
-}// end namespace JDF
+}

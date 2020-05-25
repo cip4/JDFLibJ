@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -47,10 +79,10 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.span.JDFNumberSpan;
+import org.cip4.jdflib.span.JDFSpanCutDepth;
 import org.cip4.jdflib.span.JDFSpanCutType;
 import org.cip4.jdflib.span.JDFSpanShapeType;
 import org.cip4.jdflib.span.JDFStringSpan;
@@ -59,7 +91,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoShapeCut : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoShapeCut extends JDFElement
@@ -67,13 +99,14 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CUTBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CUTOUT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.CUTPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.PAGES, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SHAPETYPEDETAILS, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -82,14 +115,15 @@ public abstract class JDFAutoShapeCut extends JDFElement
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
 	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.MATERIAL, 0x66666666);
 		elemInfoTable[1] = new ElemInfoTable(ElementName.CUTTYPE, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.SHAPEDEPTH, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.SHAPETYPE, 0x55555555);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.TEETHPERDIMENSION, 0x66666666);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.CUTDEPTH, 0x66111111);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.SHAPEDEPTH, 0x77666661);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.SHAPETYPE, 0x55555555);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.TEETHPERDIMENSION, 0x66666666);
 	}
 
 	@Override
@@ -100,7 +134,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoShapeCut
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -111,7 +145,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoShapeCut
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -123,7 +157,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoShapeCut
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -134,25 +168,17 @@ public abstract class JDFAutoShapeCut extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoShapeCut[  --> " + super.toString() + " ]";
-	}
-
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutBox ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CutBox
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CutBox
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCutBox(JDFRectangle value)
@@ -162,7 +188,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (20) get JDFRectangle attribute CutBox
-	 * 
+	 *
 	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getCutBox()
@@ -172,12 +198,12 @@ public abstract class JDFAutoShapeCut extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutOut ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CutOut
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CutOut
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCutOut(boolean value)
@@ -187,7 +213,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (18) get boolean attribute CutOut
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getCutOut()
@@ -195,12 +221,12 @@ public abstract class JDFAutoShapeCut extends JDFElement
 		return getBoolAttribute(AttributeName.CUTOUT, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutPath ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CutPath
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CutPath
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCutPath(String value)
@@ -210,7 +236,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (23) get String attribute CutPath
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getCutPath()
@@ -218,12 +244,12 @@ public abstract class JDFAutoShapeCut extends JDFElement
 		return getAttribute(AttributeName.CUTPATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Pages ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Pages
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Pages
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPages(JDFIntegerRangeList value)
@@ -233,7 +259,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute Pages
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPages()
@@ -243,13 +269,37 @@ public abstract class JDFAutoShapeCut extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ShapeTypeDetails
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute ShapeTypeDetails
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setShapeTypeDetails(String value)
+	{
+		setAttribute(AttributeName.SHAPETYPEDETAILS, value, null);
+	}
+
+	/**
+	 * (23) get String attribute ShapeTypeDetails
+	 *
+	 * @return the value of the attribute
+	 */
+	public String getShapeTypeDetails()
+	{
+		return getAttribute(AttributeName.SHAPETYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element Material
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getMaterial()
@@ -259,7 +309,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (25) getCreateMaterial
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateMaterial()
@@ -269,18 +319,17 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (29) append element Material
-	 * 
-	 * @return JDFStringSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFStringSpan the element @ if the element already exists
 	 */
-	public JDFStringSpan appendMaterial() throws JDFException
+	public JDFStringSpan appendMaterial()
 	{
 		return (JDFStringSpan) appendElementN(ElementName.MATERIAL, 1, null);
 	}
 
 	/**
 	 * (24) const get element CutType
-	 * 
+	 *
 	 * @return JDFSpanCutType the element
 	 */
 	public JDFSpanCutType getCutType()
@@ -290,7 +339,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (25) getCreateCutType
-	 * 
+	 *
 	 * @return JDFSpanCutType the element
 	 */
 	public JDFSpanCutType getCreateCutType()
@@ -300,18 +349,47 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (29) append element CutType
-	 * 
-	 * @return JDFSpanCutType the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanCutType the element @ if the element already exists
 	 */
-	public JDFSpanCutType appendCutType() throws JDFException
+	public JDFSpanCutType appendCutType()
 	{
 		return (JDFSpanCutType) appendElementN(ElementName.CUTTYPE, 1, null);
 	}
 
 	/**
+	 * (24) const get element CutDepth
+	 *
+	 * @return JDFSpanCutDepth the element
+	 */
+	public JDFSpanCutDepth getCutDepth()
+	{
+		return (JDFSpanCutDepth) getElement(ElementName.CUTDEPTH, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCutDepth
+	 *
+	 * @return JDFSpanCutDepth the element
+	 */
+	public JDFSpanCutDepth getCreateCutDepth()
+	{
+		return (JDFSpanCutDepth) getCreateElement_JDFElement(ElementName.CUTDEPTH, null, 0);
+	}
+
+	/**
+	 * (29) append element CutDepth
+	 *
+	 * @return JDFSpanCutDepth the element @ if the element already exists
+	 */
+	public JDFSpanCutDepth appendCutDepth()
+	{
+		return (JDFSpanCutDepth) appendElementN(ElementName.CUTDEPTH, 1, null);
+	}
+
+	/**
 	 * (24) const get element ShapeDepth
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getShapeDepth()
@@ -321,7 +399,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (25) getCreateShapeDepth
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateShapeDepth()
@@ -331,18 +409,17 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (29) append element ShapeDepth
-	 * 
-	 * @return JDFNumberSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNumberSpan the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendShapeDepth() throws JDFException
+	public JDFNumberSpan appendShapeDepth()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.SHAPEDEPTH, 1, null);
 	}
 
 	/**
 	 * (24) const get element ShapeType
-	 * 
+	 *
 	 * @return JDFSpanShapeType the element
 	 */
 	public JDFSpanShapeType getShapeType()
@@ -352,7 +429,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (25) getCreateShapeType
-	 * 
+	 *
 	 * @return JDFSpanShapeType the element
 	 */
 	public JDFSpanShapeType getCreateShapeType()
@@ -362,18 +439,17 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (29) append element ShapeType
-	 * 
-	 * @return JDFSpanShapeType the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanShapeType the element @ if the element already exists
 	 */
-	public JDFSpanShapeType appendShapeType() throws JDFException
+	public JDFSpanShapeType appendShapeType()
 	{
 		return (JDFSpanShapeType) appendElementN(ElementName.SHAPETYPE, 1, null);
 	}
 
 	/**
 	 * (24) const get element TeethPerDimension
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getTeethPerDimension()
@@ -383,7 +459,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (25) getCreateTeethPerDimension
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateTeethPerDimension()
@@ -393,13 +469,12 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (29) append element TeethPerDimension
-	 * 
-	 * @return JDFNumberSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNumberSpan the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendTeethPerDimension() throws JDFException
+	public JDFNumberSpan appendTeethPerDimension()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.TEETHPERDIMENSION, 1, null);
 	}
 
-}// end namespace JDF
+}

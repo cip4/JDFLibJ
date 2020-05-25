@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -76,11 +77,12 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * June 7, 2009
+ *         June 7, 2009
  */
 public class WalkMedia extends WalkResource
 {
@@ -123,8 +125,26 @@ public class WalkMedia extends WalkResource
 		{
 			m.renameKey(AttributeName.USERMEDIATYPE, AttributeName.MEDIATYPEDETAILS);
 			ret = true;
+			updateGrade(m, AttributeName.GRADE, AttributeName.ISOPAPERSUBSTRATE);
+			updateGrade(m, "BackGrade", AttributeName.BACKISOPAPERSUBSTRATE);
+
 		}
 
 		return super.updateAttributes(m) || ret;
 	}
+
+	private void updateGrade(final JDFAttributeMap map, final String oldGrade, final String newGrade)
+	{
+		final String grade = map.get(oldGrade);
+		if (map.getNonEmpty(newGrade) == null)
+		{
+			final int igrade = StringUtil.parseInt(grade, 0);
+			final EnumISOPaperSubstrate ips = JDFMedia.getIsoPaperFromGrade(igrade);
+			if (ips != null)
+			{
+				map.put(newGrade, ips.getName());
+			}
+		}
+	}
+
 }

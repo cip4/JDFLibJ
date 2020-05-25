@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -47,7 +79,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFBundle;
 import org.cip4.jdflib.resource.JDFPallet;
 import org.cip4.jdflib.resource.JDFRegisterRibbon;
@@ -78,10 +109,10 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDITIONALAMOUNT, 0x44444333, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORDEREDAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PROOF, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.UNIT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.DROPID, 0x33311111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DROPID, 0x33311111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORDEREDAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROOF, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.UNIT, 0x44333333, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -119,7 +150,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDropItemIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	protected JDFAutoDropItemIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -131,7 +162,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDropItemIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	protected JDFAutoDropItemIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -144,33 +175,25 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDropItemIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	protected JDFAutoDropItemIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoDropItemIntent[  --> " + super.toString() + " ]";
-	}
-
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdditionalAmount ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdditionalAmount
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AdditionalAmount
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAdditionalAmount(final int value)
+	public void setAdditionalAmount(int value)
 	{
 		setAttribute(AttributeName.ADDITIONALAMOUNT, value, null);
 	}
@@ -185,15 +208,15 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 		return getIntAttribute(AttributeName.ADDITIONALAMOUNT, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Amount
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Amount
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAmount(final int value)
+	public void setAmount(int value)
 	{
 		setAttribute(AttributeName.AMOUNT, value, null);
 	}
@@ -208,15 +231,38 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 		return getIntAttribute(AttributeName.AMOUNT, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OrderedAmount ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DropID
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute DropID
+	 *
+	 * @param value the value to set the attribute to
 	 */
+	public void setDropID(String value)
+	{
+		setAttribute(AttributeName.DROPID, value, null);
+	}
+
+	/**
+	 * (23) get String attribute DropID
+	 *
+	 * @return the value of the attribute
+	 */
+	public String getDropID()
+	{
+		return getAttribute(AttributeName.DROPID, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OrderedAmount
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute OrderedAmount
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrderedAmount(final int value)
+	public void setOrderedAmount(int value)
 	{
 		setAttribute(AttributeName.ORDEREDAMOUNT, value, null);
 	}
@@ -231,15 +277,15 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 		return getIntAttribute(AttributeName.ORDEREDAMOUNT, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Proof ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Proof
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Proof
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProof(final String value)
+	public void setProof(String value)
 	{
 		setAttribute(AttributeName.PROOF, value, null);
 	}
@@ -254,15 +300,15 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 		return getAttribute(AttributeName.PROOF, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Unit ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Unit
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Unit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUnit(final String value)
+	public void setUnit(String value)
 	{
 		setAttribute(AttributeName.UNIT, value, null);
 	}
@@ -277,8 +323,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 		return getAttribute(AttributeName.UNIT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -304,10 +351,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Pricing
 	 *
-	 * @return JDFPricing the element
-	 * @throws JDFException if the element already exists
+	 * @return JDFPricing the element @ if the element already exists
 	 */
-	public JDFPricing appendPricing() throws JDFException
+	public JDFPricing appendPricing()
 	{
 		return (JDFPricing) appendElementN(ElementName.PRICING, 1, null);
 	}
@@ -335,10 +381,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Component
 	 *
-	 * @return JDFComponent the element
-	 * @throws JDFException if the element already exists
+	 * @return JDFComponent the element @ if the element already exists
 	 */
-	public JDFComponent appendComponent() throws JDFException
+	public JDFComponent appendComponent()
 	{
 		return (JDFComponent) appendElementN(ElementName.COMPONENT, 1, null);
 	}
@@ -348,7 +393,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refComponent(final JDFComponent refTarget)
+	public void refComponent(JDFComponent refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -376,10 +421,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element ExposedMedia
 	 *
-	 * @return JDFExposedMedia the element
-	 * @throws JDFException if the element already exists
+	 * @return JDFExposedMedia the element @ if the element already exists
 	 */
-	public JDFExposedMedia appendExposedMedia() throws JDFException
+	public JDFExposedMedia appendExposedMedia()
 	{
 		return (JDFExposedMedia) appendElementN(ElementName.EXPOSEDMEDIA, 1, null);
 	}
@@ -389,7 +433,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refExposedMedia(final JDFExposedMedia refTarget)
+	public void refExposedMedia(JDFExposedMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -417,10 +461,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Ink
 	 *
-	 * @return JDFInk the element
-	 * @throws JDFException if the element already exists
+	 * @return JDFInk the element @ if the element already exists
 	 */
-	public JDFInk appendInk() throws JDFException
+	public JDFInk appendInk()
 	{
 		return (JDFInk) appendElementN(ElementName.INK, 1, null);
 	}
@@ -430,7 +473,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refInk(final JDFInk refTarget)
+	public void refInk(JDFInk refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -458,10 +501,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Media
 	 *
-	 * @return JDFMedia the element
-	 * @throws JDFException if the element already exists
+	 * @return JDFMedia the element @ if the element already exists
 	 */
-	public JDFMedia appendMedia() throws JDFException
+	public JDFMedia appendMedia()
 	{
 		return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
 	}
@@ -471,7 +513,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(final JDFMedia refTarget)
+	public void refMedia(JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -499,10 +541,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Pallet
 	 *
-	 * @return JDFPallet the element
-	 * @throws JDFException if the element already exists
+	 * @return JDFPallet the element @ if the element already exists
 	 */
-	public JDFPallet appendPallet() throws JDFException
+	public JDFPallet appendPallet()
 	{
 		return (JDFPallet) appendElementN(ElementName.PALLET, 1, null);
 	}
@@ -512,7 +553,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refPallet(final JDFPallet refTarget)
+	public void refPallet(JDFPallet refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -540,10 +581,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element RegisterRibbon
 	 *
-	 * @return JDFRegisterRibbon the element
-	 * @throws JDFException if the element already exists
+	 * @return JDFRegisterRibbon the element @ if the element already exists
 	 */
-	public JDFRegisterRibbon appendRegisterRibbon() throws JDFException
+	public JDFRegisterRibbon appendRegisterRibbon()
 	{
 		return (JDFRegisterRibbon) appendElementN(ElementName.REGISTERRIBBON, 1, null);
 	}
@@ -553,7 +593,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refRegisterRibbon(final JDFRegisterRibbon refTarget)
+	public void refRegisterRibbon(JDFRegisterRibbon refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -581,10 +621,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Strap
 	 *
-	 * @return JDFStrap the element
-	 * @throws JDFException if the element already exists
+	 * @return JDFStrap the element @ if the element already exists
 	 */
-	public JDFStrap appendStrap() throws JDFException
+	public JDFStrap appendStrap()
 	{
 		return (JDFStrap) appendElementN(ElementName.STRAP, 1, null);
 	}
@@ -594,7 +633,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refStrap(final JDFStrap refTarget)
+	public void refStrap(JDFStrap refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -622,10 +661,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Bundle
 	 *
-	 * @return JDFBundle the element
-	 * @throws JDFException if the element already exists
+	 * @return JDFBundle the element @ if the element already exists
 	 */
-	public JDFBundle appendBundle() throws JDFException
+	public JDFBundle appendBundle()
 	{
 		return (JDFBundle) appendElementN(ElementName.BUNDLE, 1, null);
 	}
@@ -635,7 +673,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refBundle(final JDFBundle refTarget)
+	public void refBundle(JDFBundle refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -663,10 +701,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element DigitalMedia
 	 *
-	 * @return JDFDigitalMedia the element
-	 * @throws JDFException if the element already exists
+	 * @return JDFDigitalMedia the element @ if the element already exists
 	 */
-	public JDFDigitalMedia appendDigitalMedia() throws JDFException
+	public JDFDigitalMedia appendDigitalMedia()
 	{
 		return (JDFDigitalMedia) appendElementN(ElementName.DIGITALMEDIA, 1, null);
 	}
@@ -676,7 +713,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refDigitalMedia(final JDFDigitalMedia refTarget)
+	public void refDigitalMedia(JDFDigitalMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -704,10 +741,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element RollStand
 	 *
-	 * @return JDFRollStand the element
-	 * @throws JDFException if the element already exists
+	 * @return JDFRollStand the element @ if the element already exists
 	 */
-	public JDFRollStand appendRollStand() throws JDFException
+	public JDFRollStand appendRollStand()
 	{
 		return (JDFRollStand) appendElementN(ElementName.ROLLSTAND, 1, null);
 	}
@@ -717,7 +753,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refRollStand(final JDFRollStand refTarget)
+	public void refRollStand(JDFRollStand refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -745,10 +781,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Tool
 	 *
-	 * @return JDFTool the element
-	 * @throws JDFException if the element already exists
+	 * @return JDFTool the element @ if the element already exists
 	 */
-	public JDFTool appendTool() throws JDFException
+	public JDFTool appendTool()
 	{
 		return (JDFTool) appendElementN(ElementName.TOOL, 1, null);
 	}
@@ -758,32 +793,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refTool(final JDFTool refTarget)
+	public void refTool(JDFTool refTarget)
 	{
 		refElement(refTarget);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DropID ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute DropID
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setDropID(final String value)
-	{
-		setAttribute(AttributeName.DROPID, value, null);
-	}
-
-	/**
-	 * (23) get String attribute DropID
-	 *
-	 * @return the value of the attribute
-	 */
-	public String getDropID()
-	{
-		return getAttribute(AttributeName.DROPID, null, JDFCoreConstants.EMPTYSTRING);
-	}
-
-}// end namespace JDF
+}

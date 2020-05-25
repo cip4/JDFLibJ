@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -53,7 +85,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFJobField;
 import org.cip4.jdflib.resource.JDFRefAnchor;
@@ -64,7 +95,7 @@ import org.cip4.jdflib.resource.process.JDFPosition;
  *****************************************************************************
  * class JDFAutoStripMark : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoStripMark extends JDFElement
@@ -117,7 +148,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoStripMark
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -128,7 +159,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoStripMark
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -140,7 +171,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoStripMark
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -149,15 +180,6 @@ public abstract class JDFAutoStripMark extends JDFElement
 	protected JDFAutoStripMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoStripMark[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -586,16 +608,17 @@ public abstract class JDFAutoStripMark extends JDFElement
 		public static final EnumVerticalFitPolicy RepeatUnclipped = new EnumVerticalFitPolicy("RepeatUnclipped");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AbsoluteHeight ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AbsoluteHeight
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AbsoluteHeight
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAbsoluteHeight(double value)
@@ -605,7 +628,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (17) get double attribute AbsoluteHeight
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getAbsoluteHeight()
@@ -613,12 +636,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getRealAttribute(AttributeName.ABSOLUTEHEIGHT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AbsoluteWidth ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AbsoluteWidth
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AbsoluteWidth
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAbsoluteWidth(double value)
@@ -628,7 +651,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (17) get double attribute AbsoluteWidth
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getAbsoluteWidth()
@@ -636,12 +659,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getRealAttribute(AttributeName.ABSOLUTEWIDTH, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Anchor
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Anchor
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setAnchor(EnumAnchor enumVar)
@@ -651,7 +674,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (9) get attribute Anchor
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumAnchor getAnchor()
@@ -659,12 +682,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Font ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Font
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Font
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFont(String value)
@@ -674,7 +697,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (23) get String attribute Font
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getFont()
@@ -682,12 +705,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getAttribute(AttributeName.FONT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FontSize ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FontSize
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FontSize
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFontSize(double value)
@@ -697,7 +720,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (17) get double attribute FontSize
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getFontSize()
@@ -705,12 +728,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getRealAttribute(AttributeName.FONTSIZE, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HorizontalFitPolicy ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute HorizontalFitPolicy
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute HorizontalFitPolicy
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setHorizontalFitPolicy(EnumHorizontalFitPolicy enumVar)
@@ -720,7 +743,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (9) get attribute HorizontalFitPolicy
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumHorizontalFitPolicy getHorizontalFitPolicy()
@@ -728,12 +751,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return EnumHorizontalFitPolicy.getEnum(getAttribute(AttributeName.HORIZONTALFITPOLICY, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	@Override
@@ -744,7 +767,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (23) get String attribute ID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	@Override
@@ -753,12 +776,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkContext ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MarkContext
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute MarkContext
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setMarkContext(EnumMarkContext enumVar)
@@ -768,7 +791,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (9) get attribute MarkContext
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumMarkContext getMarkContext()
@@ -776,12 +799,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return EnumMarkContext.getEnum(getAttribute(AttributeName.MARKCONTEXT, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MarkName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MarkName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMarkName(String value)
@@ -791,7 +814,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (23) get String attribute MarkName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getMarkName()
@@ -799,12 +822,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getAttribute(AttributeName.MARKNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkSide ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MarkSide
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute MarkSide
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setMarkSide(EnumMarkSide enumVar)
@@ -814,7 +837,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (9) get attribute MarkSide
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumMarkSide getMarkSide()
@@ -822,12 +845,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return EnumMarkSide.getEnum(getAttribute(AttributeName.MARKSIDE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Offset
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Offset
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOffset(JDFXYPair value)
@@ -837,7 +860,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (20) get JDFXYPair attribute Offset
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getOffset()
@@ -847,12 +870,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Ord ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Ord
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Ord
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOrd(int value)
@@ -862,7 +885,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (15) get int attribute Ord
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getOrd()
@@ -870,12 +893,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getIntAttribute(AttributeName.ORD, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Orientation
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Orientation
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setOrientation(EnumOrientation enumVar)
@@ -885,7 +908,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (9) get attribute Orientation
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumOrientation getOrientation()
@@ -893,12 +916,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelativeHeight ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RelativeHeight
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RelativeHeight
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRelativeHeight(double value)
@@ -908,7 +931,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (17) get double attribute RelativeHeight
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getRelativeHeight()
@@ -916,12 +939,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getRealAttribute(AttributeName.RELATIVEHEIGHT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelativeWidth ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RelativeWidth
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RelativeWidth
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRelativeWidth(double value)
@@ -931,7 +954,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (17) get double attribute RelativeWidth
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getRelativeWidth()
@@ -939,12 +962,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getRealAttribute(AttributeName.RELATIVEWIDTH, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StripMarkDetails ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StripMarkDetails
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute StripMarkDetails
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setStripMarkDetails(String value)
@@ -954,7 +977,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (23) get String attribute StripMarkDetails
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getStripMarkDetails()
@@ -962,12 +985,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getAttribute(AttributeName.STRIPMARKDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute VerticalFitPolicy ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute VerticalFitPolicy
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute VerticalFitPolicy
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setVerticalFitPolicy(EnumVerticalFitPolicy enumVar)
@@ -977,7 +1000,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (9) get attribute VerticalFitPolicy
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumVerticalFitPolicy getVerticalFitPolicy()
@@ -985,13 +1008,14 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return EnumVerticalFitPolicy.getEnum(getAttribute(AttributeName.VERTICALFITPOLICY, null, null));
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateMarkColor
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFMarkColor the element
 	 */
@@ -1002,7 +1026,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (27) const get element MarkColor
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFMarkColor the element default is getMarkColor(0)
 	 */
@@ -1013,17 +1037,17 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * Get all MarkColor from the current element
-	 * 
+	 *
 	 * @return Collection<JDFMarkColor>, null if none are available
 	 */
 	public Collection<JDFMarkColor> getAllMarkColor()
 	{
-		return getChildrenByClass(JDFMarkColor.class, false, 0);
+		return getChildArrayByClass(JDFMarkColor.class, false, 0);
 	}
 
 	/**
 	 * (30) append element MarkColor
-	 * 
+	 *
 	 * @return JDFMarkColor the element
 	 */
 	public JDFMarkColor appendMarkColor()
@@ -1033,7 +1057,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (24) const get element Position
-	 * 
+	 *
 	 * @return JDFPosition the element
 	 */
 	public JDFPosition getPosition()
@@ -1043,7 +1067,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (25) getCreatePosition
-	 * 
+	 *
 	 * @return JDFPosition the element
 	 */
 	public JDFPosition getCreatePosition()
@@ -1053,18 +1077,17 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (29) append element Position
-	 * 
-	 * @return JDFPosition the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFPosition the element @ if the element already exists
 	 */
-	public JDFPosition appendPosition() throws JDFException
+	public JDFPosition appendPosition()
 	{
 		return (JDFPosition) appendElementN(ElementName.POSITION, 1, null);
 	}
 
 	/**
 	 * (24) const get element JobField
-	 * 
+	 *
 	 * @return JDFJobField the element
 	 */
 	public JDFJobField getJobField()
@@ -1074,7 +1097,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (25) getCreateJobField
-	 * 
+	 *
 	 * @return JDFJobField the element
 	 */
 	public JDFJobField getCreateJobField()
@@ -1084,18 +1107,17 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (29) append element JobField
-	 * 
-	 * @return JDFJobField the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFJobField the element @ if the element already exists
 	 */
-	public JDFJobField appendJobField() throws JDFException
+	public JDFJobField appendJobField()
 	{
 		return (JDFJobField) appendElementN(ElementName.JOBFIELD, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refJobField(JDFJobField refTarget)
@@ -1105,7 +1127,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (26) getCreateRefAnchor
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFRefAnchor the element
 	 */
@@ -1116,7 +1138,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (27) const get element RefAnchor
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFRefAnchor the element default is getRefAnchor(0)
 	 */
@@ -1127,17 +1149,17 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * Get all RefAnchor from the current element
-	 * 
+	 *
 	 * @return Collection<JDFRefAnchor>, null if none are available
 	 */
 	public Collection<JDFRefAnchor> getAllRefAnchor()
 	{
-		return getChildrenByClass(JDFRefAnchor.class, false, 0);
+		return getChildArrayByClass(JDFRefAnchor.class, false, 0);
 	}
 
 	/**
 	 * (30) append element RefAnchor
-	 * 
+	 *
 	 * @return JDFRefAnchor the element
 	 */
 	public JDFRefAnchor appendRefAnchor()
@@ -1145,4 +1167,4 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return (JDFRefAnchor) appendElement(ElementName.REFANCHOR, null);
 	}
 
-}// end namespace JDF
+}

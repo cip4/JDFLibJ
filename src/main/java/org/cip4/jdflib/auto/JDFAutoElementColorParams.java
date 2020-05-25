@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -52,7 +84,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
 import org.cip4.jdflib.resource.process.JDFColorantAlias;
@@ -64,7 +95,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
  *****************************************************************************
  * class JDFAutoElementColorParams : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoElementColorParams extends JDFResource
@@ -103,7 +134,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoElementColorParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -114,7 +145,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoElementColorParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -126,7 +157,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoElementColorParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -135,15 +166,6 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	protected JDFAutoElementColorParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoElementColorParams[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -231,16 +253,17 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 		public static final EnumICCOutputProfileUsage IgnorePDL = new EnumICCOutputProfileUsage("IgnorePDL");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorManagementSystem ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ColorManagementSystem
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ColorManagementSystem
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setColorManagementSystem(String value)
@@ -250,7 +273,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (23) get String attribute ColorManagementSystem
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getColorManagementSystem()
@@ -258,12 +281,12 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 		return getAttribute(AttributeName.COLORMANAGEMENTSYSTEM, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ICCOutputProfileUsage ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ICCOutputProfileUsage
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute ICCOutputProfileUsage
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setICCOutputProfileUsage(EnumICCOutputProfileUsage enumVar)
@@ -273,7 +296,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (9) get attribute ICCOutputProfileUsage
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumICCOutputProfileUsage getICCOutputProfileUsage()
@@ -281,13 +304,14 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 		return EnumICCOutputProfileUsage.getEnum(getAttribute(AttributeName.ICCOUTPUTPROFILEUSAGE, null, null));
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element AutomatedOverPrintParams
-	 * 
+	 *
 	 * @return JDFAutomatedOverPrintParams the element
 	 */
 	public JDFAutomatedOverPrintParams getAutomatedOverPrintParams()
@@ -297,7 +321,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (25) getCreateAutomatedOverPrintParams
-	 * 
+	 *
 	 * @return JDFAutomatedOverPrintParams the element
 	 */
 	public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams()
@@ -307,18 +331,17 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (29) append element AutomatedOverPrintParams
-	 * 
-	 * @return JDFAutomatedOverPrintParams the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFAutomatedOverPrintParams the element @ if the element already exists
 	 */
-	public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams() throws JDFException
+	public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams()
 	{
 		return (JDFAutomatedOverPrintParams) appendElementN(ElementName.AUTOMATEDOVERPRINTPARAMS, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refAutomatedOverPrintParams(JDFAutomatedOverPrintParams refTarget)
@@ -328,7 +351,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (26) getCreateColorantAlias
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorantAlias the element
 	 */
@@ -339,7 +362,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (27) const get element ColorantAlias
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorantAlias the element default is getColorantAlias(0)
 	 */
@@ -350,17 +373,17 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * Get all ColorantAlias from the current element
-	 * 
+	 *
 	 * @return Collection<JDFColorantAlias>, null if none are available
 	 */
 	public Collection<JDFColorantAlias> getAllColorantAlias()
 	{
-		return getChildrenByClass(JDFColorantAlias.class, false, 0);
+		return getChildArrayByClass(JDFColorantAlias.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ColorantAlias
-	 * 
+	 *
 	 * @return JDFColorantAlias the element
 	 */
 	public JDFColorantAlias appendColorantAlias()
@@ -370,7 +393,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refColorantAlias(JDFColorantAlias refTarget)
@@ -380,7 +403,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (26) getCreateColorCorrectionOp
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorCorrectionOp the element
 	 */
@@ -391,7 +414,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (27) const get element ColorCorrectionOp
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorCorrectionOp the element default is getColorCorrectionOp(0)
 	 */
@@ -402,17 +425,17 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * Get all ColorCorrectionOp from the current element
-	 * 
+	 *
 	 * @return Collection<JDFColorCorrectionOp>, null if none are available
 	 */
 	public Collection<JDFColorCorrectionOp> getAllColorCorrectionOp()
 	{
-		return getChildrenByClass(JDFColorCorrectionOp.class, false, 0);
+		return getChildArrayByClass(JDFColorCorrectionOp.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ColorCorrectionOp
-	 * 
+	 *
 	 * @return JDFColorCorrectionOp the element
 	 */
 	public JDFColorCorrectionOp appendColorCorrectionOp()
@@ -422,7 +445,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (24) const get element ColorSpaceConversionOp
-	 * 
+	 *
 	 * @return JDFColorSpaceConversionOp the element
 	 */
 	public JDFColorSpaceConversionOp getColorSpaceConversionOp()
@@ -432,7 +455,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (25) getCreateColorSpaceConversionOp
-	 * 
+	 *
 	 * @return JDFColorSpaceConversionOp the element
 	 */
 	public JDFColorSpaceConversionOp getCreateColorSpaceConversionOp()
@@ -442,18 +465,17 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (29) append element ColorSpaceConversionOp
-	 * 
-	 * @return JDFColorSpaceConversionOp the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFColorSpaceConversionOp the element @ if the element already exists
 	 */
-	public JDFColorSpaceConversionOp appendColorSpaceConversionOp() throws JDFException
+	public JDFColorSpaceConversionOp appendColorSpaceConversionOp()
 	{
 		return (JDFColorSpaceConversionOp) appendElementN(ElementName.COLORSPACECONVERSIONOP, 1, null);
 	}
 
 	/**
 	 * (24) const get element FileSpec
-	 * 
+	 *
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getFileSpec()
@@ -463,7 +485,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (25) getCreateFileSpec
-	 * 
+	 *
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()
@@ -473,18 +495,17 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (29) append element FileSpec
-	 * 
-	 * @return JDFFileSpec the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFFileSpec the element @ if the element already exists
 	 */
-	public JDFFileSpec appendFileSpec() throws JDFException
+	public JDFFileSpec appendFileSpec()
 	{
 		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refFileSpec(JDFFileSpec refTarget)
@@ -492,4 +513,4 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 		refElement(refTarget);
 	}
 
-}// end namespace JDF
+}

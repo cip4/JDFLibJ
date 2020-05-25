@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -60,7 +92,7 @@ import org.cip4.jdflib.resource.JDFDevice;
  *****************************************************************************
  * class JDFAutoQueue : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoQueue extends JDFElement
@@ -68,12 +100,13 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumQueueStatus.getEnum(0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.QUEUESIZE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXQUEUESIZE, 0x33111111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUESIZE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -97,7 +130,7 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoQueue
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -108,7 +141,7 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoQueue
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -120,7 +153,7 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoQueue
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -129,15 +162,6 @@ public abstract class JDFAutoQueue extends JDFElement
 	protected JDFAutoQueue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoQueue[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -211,16 +235,17 @@ public abstract class JDFAutoQueue extends JDFElement
 		public static final EnumQueueStatus Held = new EnumQueueStatus("Held");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Status ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Status
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Status
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setQueueStatus(EnumQueueStatus enumVar)
@@ -230,7 +255,7 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	/**
 	 * (9) get attribute Status
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumQueueStatus getQueueStatus()
@@ -238,12 +263,12 @@ public abstract class JDFAutoQueue extends JDFElement
 		return EnumQueueStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeviceID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DeviceID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDeviceID(String value)
@@ -253,7 +278,7 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	/**
 	 * (23) get String attribute DeviceID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDeviceID()
@@ -261,12 +286,35 @@ public abstract class JDFAutoQueue extends JDFElement
 		return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueSize ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxQueueSize
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute MaxQueueSize
+	 *
+	 * @param value the value to set the attribute to
 	 */
+	public void setMaxQueueSize(int value)
+	{
+		setAttribute(AttributeName.MAXQUEUESIZE, value, null);
+	}
+
+	/**
+	 * (15) get int attribute MaxQueueSize
+	 *
+	 * @return int the value of the attribute
+	 */
+	public int getMaxQueueSize()
+	{
+		return getIntAttribute(AttributeName.MAXQUEUESIZE, null, 0);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute QueueSize
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute QueueSize
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setQueueSize(int value)
@@ -276,7 +324,7 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	/**
 	 * (15) get int attribute QueueSize
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getQueueSize()
@@ -284,13 +332,14 @@ public abstract class JDFAutoQueue extends JDFElement
 		return getIntAttribute(AttributeName.QUEUESIZE, null, 0);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateDevice
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
 	 */
@@ -301,7 +350,7 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	/**
 	 * (27) const get element Device
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element default is getDevice(0)
 	 */
@@ -312,17 +361,17 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	/**
 	 * Get all Device from the current element
-	 * 
+	 *
 	 * @return Collection<JDFDevice>, null if none are available
 	 */
 	public Collection<JDFDevice> getAllDevice()
 	{
-		return getChildrenByClass(JDFDevice.class, false, 0);
+		return getChildArrayByClass(JDFDevice.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Device
-	 * 
+	 *
 	 * @return JDFDevice the element
 	 */
 	public JDFDevice appendDevice()
@@ -332,7 +381,7 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	/**
 	 * (26) getCreateQueueEntry
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFQueueEntry the element
 	 */
@@ -343,7 +392,7 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	/**
 	 * (27) const get element QueueEntry
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFQueueEntry the element default is getQueueEntry(0)
 	 */
@@ -354,17 +403,17 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	/**
 	 * Get all QueueEntry from the current element
-	 * 
+	 *
 	 * @return Collection<JDFQueueEntry>, null if none are available
 	 */
 	public Collection<JDFQueueEntry> getAllQueueEntry()
 	{
-		return getChildrenByClass(JDFQueueEntry.class, false, 0);
+		return getChildArrayByClass(JDFQueueEntry.class, false, 0);
 	}
 
 	/**
 	 * (30) append element QueueEntry
-	 * 
+	 *
 	 * @return JDFQueueEntry the element
 	 */
 	public JDFQueueEntry appendQueueEntry()
@@ -372,4 +421,4 @@ public abstract class JDFAutoQueue extends JDFElement
 		return (JDFQueueEntry) appendElement(ElementName.QUEUEENTRY, null);
 	}
 
-}// end namespace JDF
+}

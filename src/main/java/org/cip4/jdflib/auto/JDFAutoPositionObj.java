@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -51,7 +83,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -61,7 +92,7 @@ import org.cip4.jdflib.resource.JDFRefAnchor;
  *****************************************************************************
  * class JDFAutoPositionObj : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoPositionObj extends JDFElement
@@ -102,7 +133,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPositionObj
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -113,7 +144,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPositionObj
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -125,7 +156,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPositionObj
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -134,15 +165,6 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	protected JDFAutoPositionObj(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoPositionObj[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -411,16 +433,17 @@ public abstract class JDFAutoPositionObj extends JDFElement
 		public static final EnumSizePolicy Free = new EnumSizePolicy("Free");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Anchor
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Anchor
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setAnchor(EnumAnchor enumVar)
@@ -430,7 +453,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 
 	/**
 	 * (9) get attribute Anchor
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumAnchor getAnchor()
@@ -438,12 +461,12 @@ public abstract class JDFAutoPositionObj extends JDFElement
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CTM
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CTM
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCTM(JDFMatrix value)
@@ -453,7 +476,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 
 	/**
 	 * (20) get JDFMatrix attribute CTM
-	 * 
+	 *
 	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getCTM()
@@ -463,12 +486,12 @@ public abstract class JDFAutoPositionObj extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageRange ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PageRange
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PageRange
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPageRange(JDFIntegerRangeList value)
@@ -478,7 +501,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute PageRange
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPageRange()
@@ -488,12 +511,12 @@ public abstract class JDFAutoPositionObj extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PositionPolicy ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PositionPolicy
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute PositionPolicy
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setPositionPolicy(EnumPositionPolicy enumVar)
@@ -503,7 +526,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 
 	/**
 	 * (9) get attribute PositionPolicy
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumPositionPolicy getPositionPolicy()
@@ -511,12 +534,12 @@ public abstract class JDFAutoPositionObj extends JDFElement
 		return EnumPositionPolicy.getEnum(getAttribute(AttributeName.POSITIONPOLICY, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelativeSize ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RelativeSize
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RelativeSize
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRelativeSize(JDFXYPair value)
@@ -526,7 +549,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 
 	/**
 	 * (20) get JDFXYPair attribute RelativeSize
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getRelativeSize()
@@ -536,12 +559,12 @@ public abstract class JDFAutoPositionObj extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RotationPolicy ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RotationPolicy
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute RotationPolicy
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setRotationPolicy(EnumRotationPolicy enumVar)
@@ -551,7 +574,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 
 	/**
 	 * (9) get attribute RotationPolicy
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumRotationPolicy getRotationPolicy()
@@ -559,12 +582,12 @@ public abstract class JDFAutoPositionObj extends JDFElement
 		return EnumRotationPolicy.getEnum(getAttribute(AttributeName.ROTATIONPOLICY, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Size ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Size
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Size
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSize(JDFXYPair value)
@@ -574,7 +597,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 
 	/**
 	 * (20) get JDFXYPair attribute Size
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getSize()
@@ -584,12 +607,12 @@ public abstract class JDFAutoPositionObj extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SizePolicy ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SizePolicy
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute SizePolicy
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setSizePolicy(EnumSizePolicy enumVar)
@@ -599,7 +622,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 
 	/**
 	 * (9) get attribute SizePolicy
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumSizePolicy getSizePolicy()
@@ -607,13 +630,14 @@ public abstract class JDFAutoPositionObj extends JDFElement
 		return EnumSizePolicy.getEnum(getAttribute(AttributeName.SIZEPOLICY, null, null));
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element RefAnchor
-	 * 
+	 *
 	 * @return JDFRefAnchor the element
 	 */
 	public JDFRefAnchor getRefAnchor()
@@ -623,7 +647,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 
 	/**
 	 * (25) getCreateRefAnchor
-	 * 
+	 *
 	 * @return JDFRefAnchor the element
 	 */
 	public JDFRefAnchor getCreateRefAnchor()
@@ -633,13 +657,12 @@ public abstract class JDFAutoPositionObj extends JDFElement
 
 	/**
 	 * (29) append element RefAnchor
-	 * 
-	 * @return JDFRefAnchor the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFRefAnchor the element @ if the element already exists
 	 */
-	public JDFRefAnchor appendRefAnchor() throws JDFException
+	public JDFRefAnchor appendRefAnchor()
 	{
 		return (JDFRefAnchor) appendElementN(ElementName.REFANCHOR, 1, null);
 	}
 
-}// end namespace JDF
+}

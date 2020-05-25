@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,6 +76,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -87,7 +88,7 @@ import org.junit.Test;
 /**
  * @author MuchaD
  *
- * This implements the first fixture with unit tests for class JDFAudit.
+ *         This implements the first fixture with unit tests for class JDFAudit.
  */
 public class JDFPartAmountTest extends JDFTestCaseBase
 {
@@ -96,7 +97,7 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 	private JDFPartAmount pa;
 
 	/**
-	 * 	@Override
+	 * @Override
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -104,8 +105,8 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 	{
 		super.setUp();
 		KElement.setLongID(false);
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
-		JDFResource r = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFResource r = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		rl = n.getLink(r, null);
 		final JDFAttributeMap s1Map = new JDFAttributeMap(EnumPartIDKey.SheetName, "S1");
 		rl.setAmount(10, s1Map);
@@ -130,7 +131,9 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 	@Test
 	public void testLot()
 	{
+		pa.getJDFRoot().setVersion(EnumVersion.Version_1_3);
 		pa.appendLot();
+
 		assertTrue(pa.isValid(EnumValidationLevel.Incomplete));
 		assertFalse(pa.getUnknownElements(false, 999).contains(ElementName.LOT));
 	}
@@ -151,8 +154,8 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 	@Test
 	public void testSetPartMapVector()
 	{
-		JDFAttributeMap map = new JDFAttributeMap("SheetName", "S1");
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "S1");
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		vMap.add(map.clone());
 		map.put("SheetName", "S2");
 		vMap.add(map);

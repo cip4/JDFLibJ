@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -49,9 +81,9 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.process.JDFApprovalParams;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.span.JDFIntegerSpan;
 import org.cip4.jdflib.span.JDFNameSpan;
@@ -65,7 +97,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoProofItem : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoProofItem extends JDFElement
@@ -88,7 +120,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[9];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[10];
 	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.AMOUNT, 0x66666661);
@@ -98,8 +130,9 @@ public abstract class JDFAutoProofItem extends JDFElement
 		elemInfoTable[4] = new ElemInfoTable(ElementName.IMAGESTRATEGY, 0x66666611);
 		elemInfoTable[5] = new ElemInfoTable(ElementName.TECHNOLOGY, 0x66666661);
 		elemInfoTable[6] = new ElemInfoTable(ElementName.PROOFTYPE, 0x66666661);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333331);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.APPROVALPARAMS, 0x66666611);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.APPROVALPARAMS, 0x66666611);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.FILESPEC, 0x61111111);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333331);
 	}
 
 	@Override
@@ -110,7 +143,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoProofItem
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -121,7 +154,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoProofItem
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -133,7 +166,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoProofItem
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -144,25 +177,17 @@ public abstract class JDFAutoProofItem extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoProofItem[  --> " + super.toString() + " ]";
-	}
-
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Contract ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Contract
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Contract
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setContract(boolean value)
@@ -172,7 +197,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (18) get boolean attribute Contract
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getContract()
@@ -180,12 +205,12 @@ public abstract class JDFAutoProofItem extends JDFElement
 		return getBoolAttribute(AttributeName.CONTRACT, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PageIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PageIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPageIndex(JDFIntegerRangeList value)
@@ -195,7 +220,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute PageIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPageIndex()
@@ -205,12 +230,12 @@ public abstract class JDFAutoProofItem extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProofName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ProofName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ProofName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setProofName(String value)
@@ -220,7 +245,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (23) get String attribute ProofName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getProofName()
@@ -228,12 +253,12 @@ public abstract class JDFAutoProofItem extends JDFElement
 		return getAttribute(AttributeName.PROOFNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProofTarget ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ProofTarget
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ProofTarget
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setProofTarget(String value)
@@ -243,7 +268,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (23) get String attribute ProofTarget
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getProofTarget()
@@ -251,13 +276,14 @@ public abstract class JDFAutoProofItem extends JDFElement
 		return getAttribute(AttributeName.PROOFTARGET, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element Amount
-	 * 
+	 *
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getAmount()
@@ -267,7 +293,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateAmount
-	 * 
+	 *
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreateAmount()
@@ -277,18 +303,17 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (29) append element Amount
-	 * 
-	 * @return JDFIntegerSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFIntegerSpan the element @ if the element already exists
 	 */
-	public JDFIntegerSpan appendAmount() throws JDFException
+	public JDFIntegerSpan appendAmount()
 	{
 		return (JDFIntegerSpan) appendElementN(ElementName.AMOUNT, 1, null);
 	}
 
 	/**
 	 * (24) const get element BrandName
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getBrandName()
@@ -298,7 +323,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateBrandName
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateBrandName()
@@ -308,18 +333,17 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (29) append element BrandName
-	 * 
-	 * @return JDFStringSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFStringSpan the element @ if the element already exists
 	 */
-	public JDFStringSpan appendBrandName() throws JDFException
+	public JDFStringSpan appendBrandName()
 	{
 		return (JDFStringSpan) appendElementN(ElementName.BRANDNAME, 1, null);
 	}
 
 	/**
 	 * (24) const get element ColorType
-	 * 
+	 *
 	 * @return JDFSpanColorType the element
 	 */
 	public JDFSpanColorType getColorType()
@@ -329,7 +353,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateColorType
-	 * 
+	 *
 	 * @return JDFSpanColorType the element
 	 */
 	public JDFSpanColorType getCreateColorType()
@@ -339,18 +363,17 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (29) append element ColorType
-	 * 
-	 * @return JDFSpanColorType the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanColorType the element @ if the element already exists
 	 */
-	public JDFSpanColorType appendColorType() throws JDFException
+	public JDFSpanColorType appendColorType()
 	{
 		return (JDFSpanColorType) appendElementN(ElementName.COLORTYPE, 1, null);
 	}
 
 	/**
 	 * (24) const get element HalfTone
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getHalfTone()
@@ -360,7 +383,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateHalfTone
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateHalfTone()
@@ -370,18 +393,17 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (29) append element HalfTone
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendHalfTone() throws JDFException
+	public JDFOptionSpan appendHalfTone()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.HALFTONE, 1, null);
 	}
 
 	/**
 	 * (24) const get element ImageStrategy
-	 * 
+	 *
 	 * @return JDFSpanImageStrategy the element
 	 */
 	public JDFSpanImageStrategy getImageStrategy()
@@ -391,7 +413,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateImageStrategy
-	 * 
+	 *
 	 * @return JDFSpanImageStrategy the element
 	 */
 	public JDFSpanImageStrategy getCreateImageStrategy()
@@ -401,18 +423,17 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (29) append element ImageStrategy
-	 * 
-	 * @return JDFSpanImageStrategy the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanImageStrategy the element @ if the element already exists
 	 */
-	public JDFSpanImageStrategy appendImageStrategy() throws JDFException
+	public JDFSpanImageStrategy appendImageStrategy()
 	{
 		return (JDFSpanImageStrategy) appendElementN(ElementName.IMAGESTRATEGY, 1, null);
 	}
 
 	/**
 	 * (24) const get element Technology
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getTechnology()
@@ -422,7 +443,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateTechnology
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateTechnology()
@@ -432,18 +453,17 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (29) append element Technology
-	 * 
-	 * @return JDFNameSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNameSpan the element @ if the element already exists
 	 */
-	public JDFNameSpan appendTechnology() throws JDFException
+	public JDFNameSpan appendTechnology()
 	{
 		return (JDFNameSpan) appendElementN(ElementName.TECHNOLOGY, 1, null);
 	}
 
 	/**
 	 * (24) const get element ProofType
-	 * 
+	 *
 	 * @return JDFSpanProofType the element
 	 */
 	public JDFSpanProofType getProofType()
@@ -453,7 +473,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateProofType
-	 * 
+	 *
 	 * @return JDFSpanProofType the element
 	 */
 	public JDFSpanProofType getCreateProofType()
@@ -463,18 +483,87 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (29) append element ProofType
-	 * 
-	 * @return JDFSpanProofType the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanProofType the element @ if the element already exists
 	 */
-	public JDFSpanProofType appendProofType() throws JDFException
+	public JDFSpanProofType appendProofType()
 	{
 		return (JDFSpanProofType) appendElementN(ElementName.PROOFTYPE, 1, null);
 	}
 
 	/**
+	 * (24) const get element ApprovalParams
+	 *
+	 * @return JDFApprovalParams the element
+	 */
+	public JDFApprovalParams getApprovalParams()
+	{
+		return (JDFApprovalParams) getElement(ElementName.APPROVALPARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateApprovalParams
+	 *
+	 * @return JDFApprovalParams the element
+	 */
+	public JDFApprovalParams getCreateApprovalParams()
+	{
+		return (JDFApprovalParams) getCreateElement_JDFElement(ElementName.APPROVALPARAMS, null, 0);
+	}
+
+	/**
+	 * (29) append element ApprovalParams
+	 *
+	 * @return JDFApprovalParams the element @ if the element already exists
+	 */
+	public JDFApprovalParams appendApprovalParams()
+	{
+		return (JDFApprovalParams) appendElementN(ElementName.APPROVALPARAMS, 1, null);
+	}
+
+	/**
+	 * (31) create inter-resource link to refTarget
+	 *
+	 * @param refTarget the element that is referenced
+	 */
+	public void refApprovalParams(JDFApprovalParams refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (29) append element FileSpec
+	 *
+	 * @return JDFFileSpec the element @ if the element already exists
+	 */
+	public JDFFileSpec appendFileSpec()
+	{
+		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+	}
+
+	/**
 	 * (26) getCreateSeparationSpec
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
@@ -485,7 +574,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (27) const get element SeparationSpec
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element default is getSeparationSpec(0)
 	 */
@@ -496,17 +585,17 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * Get all SeparationSpec from the current element
-	 * 
+	 *
 	 * @return Collection<JDFSeparationSpec>, null if none are available
 	 */
 	public Collection<JDFSeparationSpec> getAllSeparationSpec()
 	{
-		return getChildrenByClass(JDFSeparationSpec.class, false, 0);
+		return getChildArrayByClass(JDFSeparationSpec.class, false, 0);
 	}
 
 	/**
 	 * (30) append element SeparationSpec
-	 * 
+	 *
 	 * @return JDFSeparationSpec the element
 	 */
 	public JDFSeparationSpec appendSeparationSpec()
@@ -514,45 +603,4 @@ public abstract class JDFAutoProofItem extends JDFElement
 		return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
 	}
 
-	/**
-	 * (24) const get element ApprovalParams
-	 * 
-	 * @return JDFApprovalParams the element
-	 */
-	public JDFApprovalParams getApprovalParams()
-	{
-		return (JDFApprovalParams) getElement(ElementName.APPROVALPARAMS, null, 0);
-	}
-
-	/**
-	 * (25) getCreateApprovalParams
-	 * 
-	 * @return JDFApprovalParams the element
-	 */
-	public JDFApprovalParams getCreateApprovalParams()
-	{
-		return (JDFApprovalParams) getCreateElement_JDFElement(ElementName.APPROVALPARAMS, null, 0);
-	}
-
-	/**
-	 * (29) append element ApprovalParams
-	 * 
-	 * @return JDFApprovalParams the element
-	 * @throws JDFException if the element already exists
-	 */
-	public JDFApprovalParams appendApprovalParams() throws JDFException
-	{
-		return (JDFApprovalParams) appendElementN(ElementName.APPROVALPARAMS, 1, null);
-	}
-
-	/**
-	 * (31) create inter-resource link to refTarget
-	 * 
-	 * @param refTarget the element that is referenced
-	 */
-	public void refApprovalParams(JDFApprovalParams refTarget)
-	{
-		refElement(refTarget);
-	}
-
-}// end namespace JDF
+}

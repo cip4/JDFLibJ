@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -53,7 +85,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoAdvancedParams : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoAdvancedParams extends JDFElement
@@ -91,7 +123,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoAdvancedParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -102,7 +134,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoAdvancedParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -114,7 +146,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoAdvancedParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -123,15 +155,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	protected JDFAutoAdvancedParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoAdvancedParams[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -262,16 +285,17 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		public static final EnumUCRandBGInfo Remove = new EnumUCRandBGInfo("Remove");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowPSXObjects ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AllowPSXObjects
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AllowPSXObjects
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAllowPSXObjects(boolean value)
@@ -281,7 +305,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute AllowPSXObjects
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getAllowPSXObjects()
@@ -289,12 +313,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.ALLOWPSXOBJECTS, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowTransparency ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AllowTransparency
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AllowTransparency
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAllowTransparency(boolean value)
@@ -304,7 +328,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute AllowTransparency
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getAllowTransparency()
@@ -312,12 +336,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.ALLOWTRANSPARENCY, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AutoPositionEPSInfo ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AutoPositionEPSInfo
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AutoPositionEPSInfo
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAutoPositionEPSInfo(boolean value)
@@ -327,7 +351,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute AutoPositionEPSInfo
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getAutoPositionEPSInfo()
@@ -335,12 +359,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.AUTOPOSITIONEPSINFO, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EmbedJobOptions ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EmbedJobOptions
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute EmbedJobOptions
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEmbedJobOptions(boolean value)
@@ -350,7 +374,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute EmbedJobOptions
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getEmbedJobOptions()
@@ -358,12 +382,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.EMBEDJOBOPTIONS, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EmitDSCWarnings ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EmitDSCWarnings
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute EmitDSCWarnings
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEmitDSCWarnings(boolean value)
@@ -373,7 +397,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute EmitDSCWarnings
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getEmitDSCWarnings()
@@ -381,12 +405,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.EMITDSCWARNINGS, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LockDistillerParams ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LockDistillerParams
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute LockDistillerParams
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setLockDistillerParams(boolean value)
@@ -396,7 +420,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute LockDistillerParams
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getLockDistillerParams()
@@ -404,12 +428,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.LOCKDISTILLERPARAMS, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ParseDSCComments ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ParseDSCComments
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ParseDSCComments
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setParseDSCComments(boolean value)
@@ -419,7 +443,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute ParseDSCComments
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getParseDSCComments()
@@ -427,12 +451,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PARSEDSCCOMMENTS, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ParseDSCCommentsForDocInfo ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ParseDSCCommentsForDocInfo
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ParseDSCCommentsForDocInfo
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setParseDSCCommentsForDocInfo(boolean value)
@@ -442,7 +466,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute ParseDSCCommentsForDocInfo
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getParseDSCCommentsForDocInfo()
@@ -450,12 +474,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PARSEDSCCOMMENTSFORDOCINFO, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PassThroughJPEGImages ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PassThroughJPEGImages
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PassThroughJPEGImages
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPassThroughJPEGImages(boolean value)
@@ -465,7 +489,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute PassThroughJPEGImages
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getPassThroughJPEGImages()
@@ -473,12 +497,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PASSTHROUGHJPEGIMAGES, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreserveCopyPage ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PreserveCopyPage
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PreserveCopyPage
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPreserveCopyPage(boolean value)
@@ -488,7 +512,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute PreserveCopyPage
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getPreserveCopyPage()
@@ -496,12 +520,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PRESERVECOPYPAGE, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreserveEPSInfo ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PreserveEPSInfo
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PreserveEPSInfo
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPreserveEPSInfo(boolean value)
@@ -511,7 +535,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute PreserveEPSInfo
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getPreserveEPSInfo()
@@ -519,12 +543,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PRESERVEEPSINFO, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreserveHalftoneInfo ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PreserveHalftoneInfo
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PreserveHalftoneInfo
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPreserveHalftoneInfo(boolean value)
@@ -534,7 +558,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute PreserveHalftoneInfo
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getPreserveHalftoneInfo()
@@ -542,12 +566,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PRESERVEHALFTONEINFO, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreserveOverprintSettings ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PreserveOverprintSettings
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PreserveOverprintSettings
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPreserveOverprintSettings(boolean value)
@@ -557,7 +581,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute PreserveOverprintSettings
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getPreserveOverprintSettings()
@@ -565,12 +589,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PRESERVEOVERPRINTSETTINGS, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreserveOPIComments ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PreserveOPIComments
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PreserveOPIComments
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPreserveOPIComments(boolean value)
@@ -580,7 +604,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute PreserveOPIComments
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getPreserveOPIComments()
@@ -588,12 +612,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PRESERVEOPICOMMENTS, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TransferFunctionInfo ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TransferFunctionInfo
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute TransferFunctionInfo
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setTransferFunctionInfo(EnumTransferFunctionInfo enumVar)
@@ -603,7 +627,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (9) get attribute TransferFunctionInfo
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumTransferFunctionInfo getTransferFunctionInfo()
@@ -611,12 +635,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return EnumTransferFunctionInfo.getEnum(getAttribute(AttributeName.TRANSFERFUNCTIONINFO, null, "Preserve"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UCRandBGInfo ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute UCRandBGInfo
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute UCRandBGInfo
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setUCRandBGInfo(EnumUCRandBGInfo enumVar)
@@ -626,7 +650,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (9) get attribute UCRandBGInfo
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumUCRandBGInfo getUCRandBGInfo()
@@ -634,12 +658,12 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return EnumUCRandBGInfo.getEnum(getAttribute(AttributeName.UCRANDBGINFO, null, "Preserve"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UsePrologue ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute UsePrologue
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute UsePrologue
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setUsePrologue(boolean value)
@@ -649,7 +673,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute UsePrologue
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getUsePrologue()
@@ -657,4 +681,4 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.USEPROLOGUE, null, false);
 	}
 
-}// end namespace JDF
+}

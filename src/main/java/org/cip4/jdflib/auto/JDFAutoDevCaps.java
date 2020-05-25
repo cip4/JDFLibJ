@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -64,7 +96,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFLoc;
  *****************************************************************************
  * class JDFAutoDevCaps : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoDevCaps extends JDFElement
@@ -112,7 +144,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoDevCaps
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -123,7 +155,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoDevCaps
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -135,7 +167,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoDevCaps
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -144,15 +176,6 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	protected JDFAutoDevCaps(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoDevCaps[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -222,16 +245,17 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		public static final EnumContext Element = new EnumContext("Element");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Availability ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Availability
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Availability
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setAvailability(JDFDeviceCap.EnumAvailability enumVar)
@@ -241,7 +265,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (9) get attribute Availability
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public JDFDeviceCap.EnumAvailability getAvailability()
@@ -249,12 +273,12 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return JDFDeviceCap.EnumAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, "Installed"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Context ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Context
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Context
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setContext(EnumContext enumVar)
@@ -264,7 +288,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (9) get attribute Context
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumContext getContext()
@@ -272,12 +296,12 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return EnumContext.getEnum(getAttribute(AttributeName.CONTEXT, null, "Resource"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DevCapRef ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DevCapRef
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DevCapRef
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDevCapRef(VString value)
@@ -287,7 +311,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (21) get VString attribute DevCapRef
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getDevCapRef()
@@ -298,12 +322,12 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return vStrAttrib;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DevNS ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DevNS
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DevNS
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDevNS(String value)
@@ -313,7 +337,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (23) get String attribute DevNS
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDevNS()
@@ -321,12 +345,12 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return getAttribute(AttributeName.DEVNS, null, "http://www.CIP4.org/JDFSchema_1_1");
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	@Override
@@ -337,7 +361,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (23) get String attribute ID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	@Override
@@ -346,12 +370,12 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LinkUsage ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LinkUsage
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute LinkUsage
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setLinkUsage(JDFResourceLink.EnumUsage enumVar)
@@ -361,7 +385,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (9) get attribute LinkUsage
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public JDFResourceLink.EnumUsage getLinkUsage()
@@ -369,12 +393,12 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.LINKUSAGE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleRefs ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleRefs
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ModuleRefs
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setModuleRefs(VString value)
@@ -384,7 +408,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (21) get VString attribute ModuleRefs
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getModuleRefs()
@@ -395,12 +419,12 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return vStrAttrib;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Name
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Name
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setName(String value)
@@ -410,7 +434,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (23) get String attribute Name
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getName()
@@ -418,12 +442,12 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProcessUsage ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ProcessUsage
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ProcessUsage
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setProcessUsage(String value)
@@ -433,7 +457,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (23) get String attribute ProcessUsage
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getProcessUsage()
@@ -441,12 +465,12 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return getAttribute(AttributeName.PROCESSUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Required ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Required
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Required
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRequired(boolean value)
@@ -456,7 +480,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (18) get boolean attribute Required
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getRequired()
@@ -464,12 +488,12 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return getBoolAttribute(AttributeName.REQUIRED, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceUpdate ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ResourceUpdate
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ResourceUpdate
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setResourceUpdate(VString value)
@@ -479,7 +503,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (21) get VString attribute ResourceUpdate
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getResourceUpdate()
@@ -490,12 +514,12 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return vStrAttrib;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceUsage ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ResourceUsage
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ResourceUsage
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setResourceUsage(String value)
@@ -505,7 +529,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (23) get String attribute ResourceUsage
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getResourceUsage()
@@ -513,12 +537,12 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return getAttribute(AttributeName.RESOURCEUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TypeOccurrenceNum ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TypeOccurrenceNum
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TypeOccurrenceNum
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTypeOccurrenceNum(JDFIntegerRangeList value)
@@ -528,7 +552,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute TypeOccurrenceNum
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getTypeOccurrenceNum()
@@ -538,12 +562,12 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Types ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Types
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Types
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTypes(VString value)
@@ -553,7 +577,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (21) get VString attribute Types
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getTypes()
@@ -564,13 +588,14 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return vStrAttrib;
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateDevCap
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevCap the element
 	 */
@@ -581,7 +606,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (27) const get element DevCap
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevCap the element default is getDevCap(0)
 	 */
@@ -592,17 +617,17 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * Get all DevCap from the current element
-	 * 
+	 *
 	 * @return Collection<JDFDevCap>, null if none are available
 	 */
 	public Collection<JDFDevCap> getAllDevCap()
 	{
-		return getChildrenByClass(JDFDevCap.class, false, 0);
+		return getChildArrayByClass(JDFDevCap.class, false, 0);
 	}
 
 	/**
 	 * (30) append element DevCap
-	 * 
+	 *
 	 * @return JDFDevCap the element
 	 */
 	public JDFDevCap appendDevCap()
@@ -612,7 +637,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (26) getCreateLoc
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
@@ -623,7 +648,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * (27) const get element Loc
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element default is getLoc(0)
 	 */
@@ -634,17 +659,17 @@ public abstract class JDFAutoDevCaps extends JDFElement
 
 	/**
 	 * Get all Loc from the current element
-	 * 
+	 *
 	 * @return Collection<JDFLoc>, null if none are available
 	 */
 	public Collection<JDFLoc> getAllLoc()
 	{
-		return getChildrenByClass(JDFLoc.class, false, 0);
+		return getChildArrayByClass(JDFLoc.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Loc
-	 * 
+	 *
 	 * @return JDFLoc the element
 	 */
 	public JDFLoc appendLoc()
@@ -652,4 +677,4 @@ public abstract class JDFAutoDevCaps extends JDFElement
 		return (JDFLoc) appendElement(ElementName.LOC, null);
 	}
 
-}// end namespace JDF
+}

@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -53,7 +85,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFOCGControl;
 import org.cip4.jdflib.resource.process.JDFReferenceXObjParams;
 
@@ -61,7 +92,7 @@ import org.cip4.jdflib.resource.process.JDFReferenceXObjParams;
  *****************************************************************************
  * class JDFAutoPDFInterpretingParams : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoPDFInterpretingParams extends JDFElement
@@ -80,7 +111,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.ICCCOLORASDEVICECOLOR, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.OCGDEFAULT, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumOCGDefault.getEnum(0), "FromPDF");
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.OCGINTENT, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.OCGPROCESS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumOCGProcess.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.OCGPROCESS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.OCGZOOM, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, "1.0");
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.PRINTPDFANNOTATIONS, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRINTTRAPANNOTATIONS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "false");
@@ -108,7 +139,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPDFInterpretingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -119,7 +150,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPDFInterpretingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -131,7 +162,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPDFInterpretingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -140,15 +171,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	protected JDFAutoPDFInterpretingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoPDFInterpretingParams[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -216,81 +238,17 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		public static final EnumOCGDefault Include = new EnumOCGDefault("Include");
 	}
 
-	/**
-	 * Enumeration strings for OCGProcess
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumOCGProcess extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumOCGProcess(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumOCGProcess getEnum(String enumName)
-		{
-			return (EnumOCGProcess) getEnum(EnumOCGProcess.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumOCGProcess getEnum(int enumValue)
-		{
-			return (EnumOCGProcess) getEnum(EnumOCGProcess.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOCGProcess.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOCGProcess.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumOCGProcess.class);
-		}
-
-		/**  */
-		public static final EnumOCGProcess Export = new EnumOCGProcess("Export");
-		/**  */
-		public static final EnumOCGProcess Print = new EnumOCGProcess("Print");
-		/**  */
-		public static final EnumOCGProcess View = new EnumOCGProcess("View");
-	}
-
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
-	 */
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EmitPDFBG ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EmitPDFBG
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute EmitPDFBG
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEmitPDFBG(boolean value)
@@ -300,7 +258,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute EmitPDFBG
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getEmitPDFBG()
@@ -308,12 +266,12 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		return getBoolAttribute(AttributeName.EMITPDFBG, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EmitPDFHalftones ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EmitPDFHalftones
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute EmitPDFHalftones
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEmitPDFHalftones(boolean value)
@@ -323,7 +281,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute EmitPDFHalftones
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getEmitPDFHalftones()
@@ -331,12 +289,12 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		return getBoolAttribute(AttributeName.EMITPDFHALFTONES, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EmitPDFTransfers ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EmitPDFTransfers
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute EmitPDFTransfers
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEmitPDFTransfers(boolean value)
@@ -346,7 +304,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute EmitPDFTransfers
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getEmitPDFTransfers()
@@ -354,12 +312,12 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		return getBoolAttribute(AttributeName.EMITPDFTRANSFERS, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EmitPDFUCR ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EmitPDFUCR
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute EmitPDFUCR
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEmitPDFUCR(boolean value)
@@ -369,7 +327,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute EmitPDFUCR
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getEmitPDFUCR()
@@ -377,12 +335,12 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		return getBoolAttribute(AttributeName.EMITPDFUCR, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HonorPDFOverprint ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute HonorPDFOverprint
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute HonorPDFOverprint
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setHonorPDFOverprint(boolean value)
@@ -392,7 +350,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute HonorPDFOverprint
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getHonorPDFOverprint()
@@ -400,12 +358,12 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		return getBoolAttribute(AttributeName.HONORPDFOVERPRINT, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ICCColorAsDeviceColor ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ICCColorAsDeviceColor
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ICCColorAsDeviceColor
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setICCColorAsDeviceColor(boolean value)
@@ -415,7 +373,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute ICCColorAsDeviceColor
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getICCColorAsDeviceColor()
@@ -423,12 +381,12 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		return getBoolAttribute(AttributeName.ICCCOLORASDEVICECOLOR, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OCGDefault ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OCGDefault
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute OCGDefault
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setOCGDefault(EnumOCGDefault enumVar)
@@ -438,7 +396,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (9) get attribute OCGDefault
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumOCGDefault getOCGDefault()
@@ -446,12 +404,12 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		return EnumOCGDefault.getEnum(getAttribute(AttributeName.OCGDEFAULT, null, "FromPDF"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OCGIntent ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OCGIntent
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute OCGIntent
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOCGIntent(String value)
@@ -461,7 +419,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (23) get String attribute OCGIntent
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getOCGIntent()
@@ -469,35 +427,35 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		return getAttribute(AttributeName.OCGINTENT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OCGProcess ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OCGProcess
+	--------------------------------------------------------------------- */
 	/**
-	 * (5) set attribute OCGProcess
-	 * 
-	 * @param enumVar the enumVar to set the attribute to
+	 * (36) set attribute OCGProcess
+	 *
+	 * @param value the value to set the attribute to
 	 */
-	public void setOCGProcess(EnumOCGProcess enumVar)
+	public void setOCGProcess(String value)
 	{
-		setAttribute(AttributeName.OCGPROCESS, enumVar == null ? null : enumVar.getName(), null);
+		setAttribute(AttributeName.OCGPROCESS, value, null);
 	}
 
 	/**
-	 * (9) get attribute OCGProcess
-	 * 
+	 * (23) get String attribute OCGProcess
+	 *
 	 * @return the value of the attribute
 	 */
-	public EnumOCGProcess getOCGProcess()
+	public String getOCGProcess()
 	{
-		return EnumOCGProcess.getEnum(getAttribute(AttributeName.OCGPROCESS, null, null));
+		return getAttribute(AttributeName.OCGPROCESS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OCGZoom ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OCGZoom
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute OCGZoom
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOCGZoom(double value)
@@ -507,7 +465,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (17) get double attribute OCGZoom
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getOCGZoom()
@@ -515,12 +473,12 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		return getRealAttribute(AttributeName.OCGZOOM, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintPDFAnnotations ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrintPDFAnnotations
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PrintPDFAnnotations
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPrintPDFAnnotations(boolean value)
@@ -530,7 +488,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute PrintPDFAnnotations
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getPrintPDFAnnotations()
@@ -538,12 +496,12 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		return getBoolAttribute(AttributeName.PRINTPDFANNOTATIONS, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintTrapAnnotations ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrintTrapAnnotations
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PrintTrapAnnotations
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPrintTrapAnnotations(boolean value)
@@ -553,7 +511,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute PrintTrapAnnotations
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getPrintTrapAnnotations()
@@ -561,12 +519,12 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		return getBoolAttribute(AttributeName.PRINTTRAPANNOTATIONS, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TransparencyRenderingQuality ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TransparencyRenderingQuality
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TransparencyRenderingQuality
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTransparencyRenderingQuality(double value)
@@ -576,7 +534,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (17) get double attribute TransparencyRenderingQuality
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getTransparencyRenderingQuality()
@@ -584,13 +542,14 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		return getRealAttribute(AttributeName.TRANSPARENCYRENDERINGQUALITY, null, 0.0);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateOCGControl
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFOCGControl the element
 	 */
@@ -601,7 +560,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (27) const get element OCGControl
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFOCGControl the element default is getOCGControl(0)
 	 */
@@ -612,17 +571,17 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * Get all OCGControl from the current element
-	 * 
+	 *
 	 * @return Collection<JDFOCGControl>, null if none are available
 	 */
 	public Collection<JDFOCGControl> getAllOCGControl()
 	{
-		return getChildrenByClass(JDFOCGControl.class, false, 0);
+		return getChildArrayByClass(JDFOCGControl.class, false, 0);
 	}
 
 	/**
 	 * (30) append element OCGControl
-	 * 
+	 *
 	 * @return JDFOCGControl the element
 	 */
 	public JDFOCGControl appendOCGControl()
@@ -632,7 +591,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (24) const get element ReferenceXObjParams
-	 * 
+	 *
 	 * @return JDFReferenceXObjParams the element
 	 */
 	public JDFReferenceXObjParams getReferenceXObjParams()
@@ -642,7 +601,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (25) getCreateReferenceXObjParams
-	 * 
+	 *
 	 * @return JDFReferenceXObjParams the element
 	 */
 	public JDFReferenceXObjParams getCreateReferenceXObjParams()
@@ -652,13 +611,12 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (29) append element ReferenceXObjParams
-	 * 
-	 * @return JDFReferenceXObjParams the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFReferenceXObjParams the element @ if the element already exists
 	 */
-	public JDFReferenceXObjParams appendReferenceXObjParams() throws JDFException
+	public JDFReferenceXObjParams appendReferenceXObjParams()
 	{
 		return (JDFReferenceXObjParams) appendElementN(ElementName.REFERENCEXOBJPARAMS, 1, null);
 	}
 
-}// end namespace JDF
+}

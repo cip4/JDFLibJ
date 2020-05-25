@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -52,7 +84,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFApprovalParams;
@@ -62,7 +93,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFInk;
  *****************************************************************************
  * class JDFAutoConventionalPrintingParams : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoConventionalPrintingParams extends JDFResource
@@ -90,7 +121,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.PRINTINGTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPrintingType.getEnum(0), null);
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.PRINTINGTECHNOLOGY, 0x44431111, AttributeInfo.EnumAttributeType.enumeration, EnumPrintingTechnology.getEnum(0), null);
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.SHEETLAY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.SPEED, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.SPEED, 0x43333333, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[18] = new AtrInfoTable(AttributeName.WORKSTYLE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0), null);
 	}
 
@@ -115,7 +146,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoConventionalPrintingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -126,7 +157,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoConventionalPrintingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -138,7 +169,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoConventionalPrintingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -147,15 +178,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	protected JDFAutoConventionalPrintingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoConventionalPrintingParams[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -716,16 +738,17 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		public static final EnumWorkStyle WorkAndTwist = new EnumWorkStyle("WorkAndTwist");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DirectProof ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DirectProof
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DirectProof
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDirectProof(boolean value)
@@ -735,7 +758,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute DirectProof
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getDirectProof()
@@ -743,12 +766,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return getBoolAttribute(AttributeName.DIRECTPROOF, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Drying ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Drying
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Drying
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setDrying(EnumDrying enumVar)
@@ -758,7 +781,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (9) get attribute Drying
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumDrying getDrying()
@@ -766,12 +789,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return EnumDrying.getEnum(getAttribute(AttributeName.DRYING, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FirstSurface ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FirstSurface
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute FirstSurface
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setFirstSurface(EnumFirstSurface enumVar)
@@ -781,7 +804,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (9) get attribute FirstSurface
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumFirstSurface getFirstSurface()
@@ -789,12 +812,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return EnumFirstSurface.getEnum(getAttribute(AttributeName.FIRSTSURFACE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FountainSolution ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FountainSolution
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute FountainSolution
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setFountainSolution(EnumFountainSolution enumVar)
@@ -804,7 +827,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (9) get attribute FountainSolution
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumFountainSolution getFountainSolution()
@@ -812,12 +835,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return EnumFountainSolution.getEnum(getAttribute(AttributeName.FOUNTAINSOLUTION, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaLocation ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaLocation
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MediaLocation
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMediaLocation(String value)
@@ -827,7 +850,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (23) get String attribute MediaLocation
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getMediaLocation()
@@ -835,12 +858,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return getAttribute(AttributeName.MEDIALOCATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleAvailableIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleAvailableIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ModuleAvailableIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setModuleAvailableIndex(JDFIntegerRangeList value)
@@ -850,7 +873,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute ModuleAvailableIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getModuleAvailableIndex()
@@ -860,12 +883,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleDrying ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleDrying
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute ModuleDrying
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setModuleDrying(EnumModuleDrying enumVar)
@@ -875,7 +898,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (9) get attribute ModuleDrying
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumModuleDrying getModuleDrying()
@@ -883,12 +906,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return EnumModuleDrying.getEnum(getAttribute(AttributeName.MODULEDRYING, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ModuleIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setModuleIndex(JDFIntegerRangeList value)
@@ -898,7 +921,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (20) get JDFIntegerRangeList attribute ModuleIndex
-	 * 
+	 *
 	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getModuleIndex()
@@ -908,12 +931,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginBottom ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NonPrintableMarginBottom
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute NonPrintableMarginBottom
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setNonPrintableMarginBottom(double value)
@@ -923,7 +946,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute NonPrintableMarginBottom
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getNonPrintableMarginBottom()
@@ -931,12 +954,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginLeft ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NonPrintableMarginLeft
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute NonPrintableMarginLeft
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setNonPrintableMarginLeft(double value)
@@ -946,7 +969,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute NonPrintableMarginLeft
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getNonPrintableMarginLeft()
@@ -954,12 +977,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINLEFT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginRight ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NonPrintableMarginRight
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute NonPrintableMarginRight
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setNonPrintableMarginRight(double value)
@@ -969,7 +992,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute NonPrintableMarginRight
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getNonPrintableMarginRight()
@@ -977,12 +1000,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINRIGHT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginTop ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NonPrintableMarginTop
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute NonPrintableMarginTop
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setNonPrintableMarginTop(double value)
@@ -992,7 +1015,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute NonPrintableMarginTop
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getNonPrintableMarginTop()
@@ -1000,12 +1023,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINTOP, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PerfectingModule ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PerfectingModule
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PerfectingModule
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPerfectingModule(int value)
@@ -1015,7 +1038,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (15) get int attribute PerfectingModule
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getPerfectingModule()
@@ -1023,12 +1046,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return getIntAttribute(AttributeName.PERFECTINGMODULE, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Powder ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Powder
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Powder
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPowder(double value)
@@ -1038,7 +1061,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute Powder
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getPowder()
@@ -1046,12 +1069,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return getRealAttribute(AttributeName.POWDER, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintingType ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrintingType
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute PrintingType
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setPrintingType(EnumPrintingType enumVar)
@@ -1061,7 +1084,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (9) get attribute PrintingType
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumPrintingType getPrintingType()
@@ -1069,12 +1092,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return EnumPrintingType.getEnum(getAttribute(AttributeName.PRINTINGTYPE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintingTechnology ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrintingTechnology
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute PrintingTechnology
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setPrintingTechnology(EnumPrintingTechnology enumVar)
@@ -1084,7 +1107,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (9) get attribute PrintingTechnology
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumPrintingTechnology getPrintingTechnology()
@@ -1092,12 +1115,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return EnumPrintingTechnology.getEnum(getAttribute(AttributeName.PRINTINGTECHNOLOGY, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SheetLay
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute SheetLay
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setSheetLay(EnumSheetLay enumVar)
@@ -1107,7 +1130,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (9) get attribute SheetLay
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumSheetLay getSheetLay()
@@ -1115,12 +1138,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Speed ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Speed
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Speed
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSpeed(double value)
@@ -1130,7 +1153,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute Speed
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getSpeed()
@@ -1138,12 +1161,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return getRealAttribute(AttributeName.SPEED, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkStyle ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WorkStyle
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute WorkStyle
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setWorkStyle(EnumWorkStyle enumVar)
@@ -1153,7 +1176,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (9) get attribute WorkStyle
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumWorkStyle getWorkStyle()
@@ -1161,13 +1184,14 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return EnumWorkStyle.getEnum(getAttribute(AttributeName.WORKSTYLE, null, null));
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateInk
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFInk the element
 	 */
@@ -1178,7 +1202,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (27) const get element Ink
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFInk the element default is getInk(0)
 	 */
@@ -1189,17 +1213,17 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * Get all Ink from the current element
-	 * 
+	 *
 	 * @return Collection<JDFInk>, null if none are available
 	 */
 	public Collection<JDFInk> getAllInk()
 	{
-		return getChildrenByClass(JDFInk.class, false, 0);
+		return getChildArrayByClass(JDFInk.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Ink
-	 * 
+	 *
 	 * @return JDFInk the element
 	 */
 	public JDFInk appendInk()
@@ -1209,7 +1233,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refInk(JDFInk refTarget)
@@ -1219,7 +1243,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (24) const get element ApprovalParams
-	 * 
+	 *
 	 * @return JDFApprovalParams the element
 	 */
 	public JDFApprovalParams getApprovalParams()
@@ -1229,7 +1253,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (25) getCreateApprovalParams
-	 * 
+	 *
 	 * @return JDFApprovalParams the element
 	 */
 	public JDFApprovalParams getCreateApprovalParams()
@@ -1239,18 +1263,17 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (29) append element ApprovalParams
-	 * 
-	 * @return JDFApprovalParams the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFApprovalParams the element @ if the element already exists
 	 */
-	public JDFApprovalParams appendApprovalParams() throws JDFException
+	public JDFApprovalParams appendApprovalParams()
 	{
 		return (JDFApprovalParams) appendElementN(ElementName.APPROVALPARAMS, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refApprovalParams(JDFApprovalParams refTarget)
@@ -1258,4 +1281,4 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		refElement(refTarget);
 	}
 
-}// end namespace JDF
+}

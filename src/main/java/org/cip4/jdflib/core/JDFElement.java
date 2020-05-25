@@ -2287,7 +2287,7 @@ public class JDFElement extends KElement
 		try
 		{
 			final VString invalidAttributes = getInvalidAttributes(level, true, 0);
-			if (invalidAttributes.size() > 0)
+			if (!invalidAttributes.isEmpty())
 			{
 				jLog.info("Invalid attributes " + invalidAttributes);
 				return false;

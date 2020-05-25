@@ -1061,6 +1061,8 @@
         <Version Path="." First="1.2" />
         <Version Path="@BackFacePages" Last="1.3" />
         <Version Path="@BackSpread" First="1.5" />
+        <Version Path="@BottleAngle" Last="1.5" />
+        <Version Path="@BottleAxis" Last="1.5" />
         <Version Path="@FaceCells" First="1.4" />
         <Version Path="@FrontFacePages" Last="1.3" />
         <Version Path="@FrontSpread" First="1.5" />
@@ -3424,6 +3426,8 @@
     <xs:annotation>
       <xs:appinfo>
         <Version Path="." First="1.3" />
+        <Version Path="@CatalogDetails" Last="1.5"/>
+        <Version Path="@CatalogID" Last="1.5"/>
         <Version Path="@ContentRefs" First="1.4" />
         <Version Path="@ID" First="1.4" />
         <Version Path="ContentMetadata" First="1.4" />
@@ -4541,7 +4545,8 @@
         <Version Path="CompanyRef" Last="1.0" />
         <Version Path="Contact" First="1.1" />
         <Version Path="ContactRef" First="1.1" />
-        <Version Path="FileSpec" First="1.5" />
+        <Version Path='FileSpec[@ProcessUsage="DeliveryContents"]' First="1.6" />
+        <Version Path='FileSpec[@ProcessUsage="MailingList"]' First="1.5" />
         <Constraint Path="Company" minOccurs="0" maxOccurs="1" />
         <Constraint Path="CompanyRef" minOccurs="0" maxOccurs="1" />
         <Constraint Path="Contact" minOccurs="0" maxOccurs="unbounded" />
@@ -5636,7 +5641,6 @@
         <Version Path="Component" First="1.1" />
         <Version Path="ComponentRef" First="1.1" />
         <Version Path="Disjointing" First="1.1" Last="1.5"/>
-        <Version Path="DisjointingRef" First="1.1" Last="1.5"/>
         <Version Path="Ink" First="1.3" Last="1.3" />
         <Version Path="InkRef" First="1.3" Last="1.3" />
         <Version Path="Media" First="1.1" />
@@ -5648,7 +5652,6 @@
         <Constraint Path="ApprovalParams" minOccurs="0" maxOccurs="1" />
         <Constraint Path="ApprovalParamsRef" minOccurs="0" maxOccurs="1" />
         <Constraint Path="Disjointing" minOccurs="0" maxOccurs="1" />
-        <Constraint Path="DisjointingRef" minOccurs="0" maxOccurs="1" />
         <Constraint Path="Ink" minOccurs="0" maxOccurs="1" />
         <Constraint Path="InkRef" minOccurs="0" maxOccurs="1" />
         <Constraint Path="Media" minOccurs="0" maxOccurs="1" />
@@ -7765,6 +7768,8 @@
   <xs:element name="IdentificationFieldLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink" />
   <xs:attributeGroup name="IdentificationFieldAttribs_c">
     <xs:attribute name="BoundingBox" type="jdftyp:rectangle" use="optional" />
+    <xs:attribute name="Encoding" type="jdftyp:eEncoding_" use="optional" />
+    <xs:attribute name="EncodingDetails" type="jdftyp:NMTOKEN" use="optional" />
     <xs:attribute name="Format" type="jdftyp:regExp" use="optional" />
     <xs:attribute name="Orientation" type="jdftyp:matrix" use="optional" />
     <xs:attribute name="Page" type="jdftyp:Integer" use="optional" />
@@ -7777,13 +7782,9 @@
   </xs:attributeGroup>
   <xs:attributeGroup name="IdentificationFieldAttribs_u">
     <xs:attributeGroup ref="jdf:IdentificationFieldAttribs_c" />
-    <xs:attribute name="Encoding" type="jdftyp:eEncoding_" use="optional" />
-    <xs:attribute name="EncodingDetails" type="jdftyp:NMTOKEN" use="optional" />
   </xs:attributeGroup>
   <xs:attributeGroup name="IdentificationFieldAttribs_r">
     <xs:attributeGroup ref="jdf:IdentificationFieldAttribs_c" />
-    <xs:attribute name="Encoding" type="jdftyp:eEncoding_" use="required" />
-    <xs:attribute name="EncodingDetails" type="jdftyp:NMTOKEN" use="required" />
   </xs:attributeGroup>
   <xs:complexType name="IdentificationField_r" mixed="false">
     <xs:complexContent mixed="false">
@@ -18616,14 +18617,14 @@
   </xs:element>
   <xs:element name="WrappingParamsRef" type="jdf:ResourceRef" substitutionGroup="jdf:ResourceRef" />
   <xs:element name="WrappingParamsLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink" />
-  <xs:attributeGroup name="WrappingParamsAttribs_c" />
+  <xs:attributeGroup name="WrappingParamsAttribs_c">
+    <xs:attribute name="WrappingKind" type="jdftyp:eWrappingKind_" use="optional" />
+  </xs:attributeGroup>
   <xs:attributeGroup name="WrappingParamsAttribs_u">
     <xs:attributeGroup ref="jdf:WrappingParamsAttribs_c" />
-    <xs:attribute name="WrappingKind" type="jdftyp:eWrappingKind_" use="optional" />
   </xs:attributeGroup>
   <xs:attributeGroup name="WrappingParamsAttribs_r">
     <xs:attributeGroup ref="jdf:WrappingParamsAttribs_c" />
-    <xs:attribute name="WrappingKind" type="jdftyp:eWrappingKind_" use="required" />
   </xs:attributeGroup>
   <xs:complexType name="WrappingParams_r" mixed="false">
     <xs:complexContent mixed="false">
@@ -19110,6 +19111,7 @@
       <xs:appinfo>
         <Version Path="StapleShape" First="1.6" />
         <Version Path="StitchNumber" First="1.1" />
+        <Constraint Path="StapleShape" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="StitchNumber" minOccurs="0" maxOccurs="1" />
       </xs:appinfo>
     </xs:annotation>
@@ -19139,6 +19141,7 @@
       <xs:appinfo>
         <Version Path="StapleShape" First="1.6" />
         <Version Path="StitchNumber" First="1.2" />
+        <Constraint Path="StapleShape" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="StitchNumber" minOccurs="0" maxOccurs="1" />
       </xs:appinfo>
     </xs:annotation>
@@ -19398,8 +19401,8 @@
         <Version Path="BackCoverColor" First="1.1" />
         <Version Path="BackCoverColorDetails" First="1.4" />
         <Version Path="@BindingOrder" First="1.1" />
-        <Version Path="AdhesiveNote" First="1.6"/>
         <Version Path="AdhesiveBinding" Last="1.0" />
+        <Version Path="AdhesiveNote" First="1.6"/>
         <Version Path="BindingColorDetails" First="1.4" />
         <Version Path="BindList" First="1.1" />
         <Version Path="BindingLength" Last="1.5" />
@@ -19417,8 +19420,8 @@
         <Constraint Path="BindingSide" minOccurs="0" maxOccurs="1" />
         <Constraint Path="BindingType" minOccurs="0" maxOccurs="1" />
         <Constraint Path="CoverColor" minOccurs="0" maxOccurs="1" />
-        <Constraint Path="AdhesiveNote" minOccurs="0" maxOccurs="1" />
         <Constraint Path="AdhesiveBinding" minOccurs="0" maxOccurs="1" />
+        <Constraint Path="AdhesiveNote" minOccurs="0" maxOccurs="1" />
         <Constraint Path="BindList" minOccurs="0" maxOccurs="1" />
         <Constraint Path="BookCase" minOccurs="0" maxOccurs="1" />
         <Constraint Path="ChannelBinding" minOccurs="0" maxOccurs="1" />
@@ -19454,8 +19457,8 @@
           <xs:element name="BindingSide" type="jdf:EnumerationSpan" minOccurs="0" />
           <xs:element name="CoverColor" type="jdf:EnumerationSpan" minOccurs="0" />
           <xs:element name="CoverColorDetails" type="jdf:StringSpan" minOccurs="0" />
-          <xs:element name="AdhesiveNote" type="jdf:BindingIntentAdhesiveNote" minOccurs="0"/>
           <xs:element name="AdhesiveBinding" type="jdf:BindingIntentAdhesiveBinding" minOccurs="0" />
+          <xs:element name="AdhesiveNote" type="jdf:BindingIntentAdhesiveNote" minOccurs="0"/>
           <xs:element name="BindList" type="jdf:BindingIntent_BindList_lr" minOccurs="0" />
           <xs:element name="BookCase" type="jdf:BindingIntentBookCase" minOccurs="0" />
           <xs:element name="ChannelBinding" type="jdf:BindingIntentChannelBinding" minOccurs="0" />
@@ -19688,6 +19691,7 @@
         <Version Path="@AdditionalAmount" First="1.0" Last="1.2" />
         <Version Path="@DropID" First="1.5" />
         <Version Path="@Proof" First="1.1" />
+        <Version Path="@Unit" Last="1.5" />
         <Version Path="Pricing" Last="1.2" />
         <Constraint Path="Pricing" minOccurs="0" maxOccurs="1" />
         <Constraint Path="Component" minOccurs="0" maxOccurs="1" />
@@ -20380,6 +20384,7 @@
         <Version Path="Dimensions" Last="1.1" />
         <Version Path="Flute" First="1.4" />
         <Version Path="FluteDirection" First="1.4" />
+        <Version Path="Grade" Last="1.5"/>
         <Version Path="GrainDirection" First="1.2" />
         <Version Path="HoleCount" Last="1.0" />
         <Version Path="HoleType" First="1.1" />
@@ -20393,6 +20398,7 @@
         <Version Path="Recycled" Last="1.1" />
         <Version Path="RecycledPercentage" First="1.2" />
         <Version Path="Thickness" First="1.1" />
+        <Version Path="UserMediaType" Last="1.5"/>
         <Version Path="USWeight" Last="1.1" />
         <Version Path="MediaLayers" First="1.4" />
         <Version Path="Certification" First="1.6" />

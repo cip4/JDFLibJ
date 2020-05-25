@@ -75,44 +75,50 @@
 package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoContentMetaData;
+import org.cip4.jdflib.auto.JDFAutoContentMetadata;
 
-public class JDFContentMetaData extends JDFAutoContentMetaData
+/**
+ * note the nasty capitalization, which we retain for backwds compatibility
+ *
+ * @author prosirai
+ *
+ */
+public class JDFContentMetaData extends JDFAutoContentMetadata
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFContentMetaData
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFContentMetaData(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFContentMetaData(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFContentMetaData
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFContentMetaData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFContentMetaData(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFContentMetaData
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFContentMetaData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFContentMetaData(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -121,7 +127,7 @@ public class JDFContentMetaData extends JDFAutoContentMetaData
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

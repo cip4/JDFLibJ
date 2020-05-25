@@ -2288,6 +2288,7 @@
   </xs:simpleType>
   <xs:simpleType name="eMediaType_">
     <xs:restriction base="jdftyp:EnumerationBaseType">
+      <xs:enumeration value="Blanket" />
       <xs:enumeration value="CorrugatedBoard" />
       <xs:enumeration value="Disc" />
       <xs:enumeration value="EndBoard" />
@@ -3648,6 +3649,7 @@
   </xs:simpleType>
   <xs:simpleType name="eWrappingKind_">
     <xs:restriction base="jdftyp:EnumerationBaseType">
+      <xs:enumeration value="Band" />
       <xs:enumeration value="LooseWrap" />
       <xs:enumeration value="ShrinkWrap" />
     </xs:restriction>

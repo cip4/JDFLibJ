@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -48,7 +80,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
@@ -58,7 +89,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoTabs : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoTabs extends JDFElement
@@ -100,7 +131,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoTabs
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -111,7 +142,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoTabs
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -123,7 +154,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoTabs
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -134,25 +165,17 @@ public abstract class JDFAutoTabs extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoTabs[  --> " + super.toString() + " ]";
-	}
-
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TabBanks ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TabBanks
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TabBanks
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTabBanks(int value)
@@ -162,7 +185,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (15) get int attribute TabBanks
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getTabBanks()
@@ -170,12 +193,12 @@ public abstract class JDFAutoTabs extends JDFElement
 		return getIntAttribute(AttributeName.TABBANKS, null, 1);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TabCount ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TabCount
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TabCount
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTabCount(int value)
@@ -185,7 +208,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (15) get int attribute TabCount
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getTabCount()
@@ -193,12 +216,12 @@ public abstract class JDFAutoTabs extends JDFElement
 		return getIntAttribute(AttributeName.TABCOUNT, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TabsPerBank ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TabsPerBank
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TabsPerBank
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTabsPerBank(int value)
@@ -208,7 +231,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (15) get int attribute TabsPerBank
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getTabsPerBank()
@@ -216,13 +239,14 @@ public abstract class JDFAutoTabs extends JDFElement
 		return getIntAttribute(AttributeName.TABSPERBANK, null, 0);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element TabBrand
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getTabBrand()
@@ -232,7 +256,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (25) getCreateTabBrand
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateTabBrand()
@@ -242,18 +266,17 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (29) append element TabBrand
-	 * 
-	 * @return JDFStringSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFStringSpan the element @ if the element already exists
 	 */
-	public JDFStringSpan appendTabBrand() throws JDFException
+	public JDFStringSpan appendTabBrand()
 	{
 		return (JDFStringSpan) appendElementN(ElementName.TABBRAND, 1, null);
 	}
 
 	/**
 	 * (24) const get element TabExtensionDistance
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getTabExtensionDistance()
@@ -263,7 +286,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (25) getCreateTabExtensionDistance
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateTabExtensionDistance()
@@ -273,18 +296,17 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (29) append element TabExtensionDistance
-	 * 
-	 * @return JDFNumberSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNumberSpan the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendTabExtensionDistance() throws JDFException
+	public JDFNumberSpan appendTabExtensionDistance()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.TABEXTENSIONDISTANCE, 1, null);
 	}
 
 	/**
 	 * (24) const get element TabExtensionMylar
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getTabExtensionMylar()
@@ -294,7 +316,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (25) getCreateTabExtensionMylar
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateTabExtensionMylar()
@@ -304,18 +326,17 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (29) append element TabExtensionMylar
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendTabExtensionMylar() throws JDFException
+	public JDFOptionSpan appendTabExtensionMylar()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.TABEXTENSIONMYLAR, 1, null);
 	}
 
 	/**
 	 * (24) const get element TabBindMylar
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getTabBindMylar()
@@ -325,7 +346,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (25) getCreateTabBindMylar
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateTabBindMylar()
@@ -335,18 +356,17 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (29) append element TabBindMylar
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendTabBindMylar() throws JDFException
+	public JDFOptionSpan appendTabBindMylar()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.TABBINDMYLAR, 1, null);
 	}
 
 	/**
 	 * (24) const get element TabBodyCopy
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getTabBodyCopy()
@@ -356,7 +376,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (25) getCreateTabBodyCopy
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateTabBodyCopy()
@@ -366,18 +386,17 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (29) append element TabBodyCopy
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendTabBodyCopy() throws JDFException
+	public JDFOptionSpan appendTabBodyCopy()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.TABBODYCOPY, 1, null);
 	}
 
 	/**
 	 * (24) const get element TabMylarColor
-	 * 
+	 *
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getTabMylarColor()
@@ -387,7 +406,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (25) getCreateTabMylarColor
-	 * 
+	 *
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateTabMylarColor()
@@ -397,18 +416,17 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (29) append element TabMylarColor
-	 * 
-	 * @return JDFSpanNamedColor the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanNamedColor the element @ if the element already exists
 	 */
-	public JDFSpanNamedColor appendTabMylarColor() throws JDFException
+	public JDFSpanNamedColor appendTabMylarColor()
 	{
 		return (JDFSpanNamedColor) appendElementN(ElementName.TABMYLARCOLOR, 1, null);
 	}
 
 	/**
 	 * (26) getCreateTabMylarColorDetails
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
@@ -419,7 +437,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (27) const get element TabMylarColorDetails
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element default is getTabMylarColorDetails(0)
 	 */
@@ -430,17 +448,17 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * Get all TabMylarColorDetails from the current element
-	 * 
+	 *
 	 * @return Collection<JDFStringSpan>, null if none are available
 	 */
 	public Collection<JDFStringSpan> getAllTabMylarColorDetails()
 	{
-		return getChildrenByClass(JDFStringSpan.class, false, 0);
+		return getChildArrayByClass(JDFStringSpan.class, false, 0);
 	}
 
 	/**
 	 * (30) append element TabMylarColorDetails
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan appendTabMylarColorDetails()
@@ -448,4 +466,4 @@ public abstract class JDFAutoTabs extends JDFElement
 		return (JDFStringSpan) appendElement(ElementName.TABMYLARCOLORDETAILS, null);
 	}
 
-}// end namespace JDF
+}

@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -48,7 +80,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
@@ -58,7 +89,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
  *****************************************************************************
  * class JDFAutoDigitalMedia : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoDigitalMedia extends JDFResource
@@ -97,7 +128,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoDigitalMedia
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -108,7 +139,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoDigitalMedia
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -120,7 +151,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoDigitalMedia
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -129,15 +160,6 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 	protected JDFAutoDigitalMedia(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoDigitalMedia[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -160,16 +182,17 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 		return JDFResource.EnumResourceClass.Handling;
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaType ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaType
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MediaType
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMediaType(String value)
@@ -179,7 +202,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (23) get String attribute MediaType
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getMediaType()
@@ -187,12 +210,12 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 		return getAttribute(AttributeName.MEDIATYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Capacity ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Capacity
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Capacity
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCapacity(int value)
@@ -202,7 +225,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (15) get int attribute Capacity
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getCapacity()
@@ -210,12 +233,12 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 		return getIntAttribute(AttributeName.CAPACITY, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaLabel ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaLabel
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MediaLabel
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMediaLabel(String value)
@@ -225,7 +248,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (23) get String attribute MediaLabel
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getMediaLabel()
@@ -233,12 +256,12 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 		return getAttribute(AttributeName.MEDIALABEL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaTypeDetails ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaTypeDetails
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MediaTypeDetails
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMediaTypeDetails(String value)
@@ -248,7 +271,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (23) get String attribute MediaTypeDetails
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getMediaTypeDetails()
@@ -256,13 +279,14 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 		return getAttribute(AttributeName.MEDIATYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element RunList
-	 * 
+	 *
 	 * @return JDFRunList the element
 	 */
 	public JDFRunList getRunList()
@@ -272,7 +296,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (25) getCreateRunList
-	 * 
+	 *
 	 * @return JDFRunList the element
 	 */
 	public JDFRunList getCreateRunList()
@@ -282,18 +306,17 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (29) append element RunList
-	 * 
-	 * @return JDFRunList the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFRunList the element @ if the element already exists
 	 */
-	public JDFRunList appendRunList() throws JDFException
+	public JDFRunList appendRunList()
 	{
 		return (JDFRunList) appendElementN(ElementName.RUNLIST, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refRunList(JDFRunList refTarget)
@@ -303,7 +326,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (26) getCreateContact
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -314,7 +337,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (27) const get element Contact
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element default is getContact(0)
 	 */
@@ -325,17 +348,17 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 * 
+	 *
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
 	{
-		return getChildrenByClass(JDFContact.class, false, 0);
+		return getChildArrayByClass(JDFContact.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Contact
-	 * 
+	 *
 	 * @return JDFContact the element
 	 */
 	@Override
@@ -346,7 +369,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refContact(JDFContact refTarget)
@@ -356,7 +379,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (26) getCreateIdentificationField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element
 	 */
@@ -368,7 +391,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (27) const get element IdentificationField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element default is getIdentificationField(0)
 	 */
@@ -380,17 +403,17 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * Get all IdentificationField from the current element
-	 * 
+	 *
 	 * @return Collection<JDFIdentificationField>, null if none are available
 	 */
 	public Collection<JDFIdentificationField> getAllIdentificationField()
 	{
-		return getChildrenByClass(JDFIdentificationField.class, false, 0);
+		return getChildArrayByClass(JDFIdentificationField.class, false, 0);
 	}
 
 	/**
 	 * (30) append element IdentificationField
-	 * 
+	 *
 	 * @return JDFIdentificationField the element
 	 */
 	@Override
@@ -401,7 +424,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refIdentificationField(JDFIdentificationField refTarget)
@@ -409,4 +432,4 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 		refElement(refTarget);
 	}
 
-}// end namespace JDF
+}

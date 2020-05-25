@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -60,7 +92,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFFold;
  *****************************************************************************
  * class JDFAutoFoldingParams : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoFoldingParams extends JDFResource
@@ -68,13 +100,14 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHEETLAY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), "Left");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DESCRIPTIONTYPE, 0x44444433, AttributeInfo.EnumAttributeType.enumeration, EnumDescriptionType.getEnum(0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.FOLDCATALOG, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.FOLDSHEETIN, 0x44444443, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.FOLDINGDETAILS, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.FOLDSHEETIN, 0x44444443, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -97,7 +130,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoFoldingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -108,7 +141,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoFoldingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -120,7 +153,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoFoldingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -129,15 +162,6 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	protected JDFAutoFoldingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoFoldingParams[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -286,16 +310,17 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		public static final EnumDescriptionType FoldCatalog = new EnumDescriptionType("FoldCatalog");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SheetLay
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute SheetLay
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setSheetLay(EnumSheetLay enumVar)
@@ -305,7 +330,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 
 	/**
 	 * (9) get attribute SheetLay
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumSheetLay getSheetLay()
@@ -313,12 +338,12 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, "Left"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DescriptionType ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DescriptionType
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute DescriptionType
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setDescriptionType(EnumDescriptionType enumVar)
@@ -328,7 +353,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 
 	/**
 	 * (9) get attribute DescriptionType
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumDescriptionType getDescriptionType()
@@ -336,12 +361,12 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		return EnumDescriptionType.getEnum(getAttribute(AttributeName.DESCRIPTIONTYPE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FoldCatalog ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FoldCatalog
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FoldCatalog
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFoldCatalog(String value)
@@ -351,7 +376,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 
 	/**
 	 * (23) get String attribute FoldCatalog
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getFoldCatalog()
@@ -359,12 +384,35 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		return getAttribute(AttributeName.FOLDCATALOG, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FoldSheetIn ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FoldingDetails
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute FoldingDetails
+	 *
+	 * @param value the value to set the attribute to
 	 */
+	public void setFoldingDetails(String value)
+	{
+		setAttribute(AttributeName.FOLDINGDETAILS, value, null);
+	}
+
+	/**
+	 * (23) get String attribute FoldingDetails
+	 *
+	 * @return the value of the attribute
+	 */
+	public String getFoldingDetails()
+	{
+		return getAttribute(AttributeName.FOLDINGDETAILS, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FoldSheetIn
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FoldSheetIn
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFoldSheetIn(JDFXYPair value)
@@ -374,7 +422,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 
 	/**
 	 * (20) get JDFXYPair attribute FoldSheetIn
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getFoldSheetIn()
@@ -384,13 +432,14 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateFold
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFold the element
 	 */
@@ -401,7 +450,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 
 	/**
 	 * (27) const get element Fold
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFold the element default is getFold(0)
 	 */
@@ -412,17 +461,17 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 
 	/**
 	 * Get all Fold from the current element
-	 * 
+	 *
 	 * @return Collection<JDFFold>, null if none are available
 	 */
 	public Collection<JDFFold> getAllFold()
 	{
-		return getChildrenByClass(JDFFold.class, false, 0);
+		return getChildArrayByClass(JDFFold.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Fold
-	 * 
+	 *
 	 * @return JDFFold the element
 	 */
 	public JDFFold appendFold()
@@ -430,4 +479,4 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		return (JDFFold) appendElement(ElementName.FOLD, null);
 	}
 
-}// end namespace JDF
+}

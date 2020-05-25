@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -43,14 +75,13 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
  *****************************************************************************
  * class JDFAutoPreflightAnalysis : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoPreflightAnalysis extends JDFResource
@@ -77,7 +108,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPreflightAnalysis
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -88,7 +119,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPreflightAnalysis
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -100,7 +131,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPreflightAnalysis
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -109,15 +140,6 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	protected JDFAutoPreflightAnalysis(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoPreflightAnalysis[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -140,13 +162,14 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element ColorsResultsPool
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement getColorsResultsPool()
@@ -156,7 +179,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * (25) getCreateColorsResultsPool
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateColorsResultsPool()
@@ -166,18 +189,17 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * (29) append element ColorsResultsPool
-	 * 
-	 * @return JDFElement the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFElement the element @ if the element already exists
 	 */
-	public JDFElement appendColorsResultsPool() throws JDFException
+	public JDFElement appendColorsResultsPool()
 	{
 		return (JDFElement) appendElementN(ElementName.COLORSRESULTSPOOL, 1, null);
 	}
 
 	/**
 	 * (24) const get element DocumentResultsPool
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement getDocumentResultsPool()
@@ -187,7 +209,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * (25) getCreateDocumentResultsPool
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateDocumentResultsPool()
@@ -197,18 +219,17 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * (29) append element DocumentResultsPool
-	 * 
-	 * @return JDFElement the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFElement the element @ if the element already exists
 	 */
-	public JDFElement appendDocumentResultsPool() throws JDFException
+	public JDFElement appendDocumentResultsPool()
 	{
 		return (JDFElement) appendElementN(ElementName.DOCUMENTRESULTSPOOL, 1, null);
 	}
 
 	/**
 	 * (24) const get element FontsResultsPool
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement getFontsResultsPool()
@@ -218,7 +239,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * (25) getCreateFontsResultsPool
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateFontsResultsPool()
@@ -228,18 +249,17 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * (29) append element FontsResultsPool
-	 * 
-	 * @return JDFElement the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFElement the element @ if the element already exists
 	 */
-	public JDFElement appendFontsResultsPool() throws JDFException
+	public JDFElement appendFontsResultsPool()
 	{
 		return (JDFElement) appendElementN(ElementName.FONTSRESULTSPOOL, 1, null);
 	}
 
 	/**
 	 * (24) const get element FileTypeResultsPool
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement getFileTypeResultsPool()
@@ -249,7 +269,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * (25) getCreateFileTypeResultsPool
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateFileTypeResultsPool()
@@ -259,18 +279,17 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * (29) append element FileTypeResultsPool
-	 * 
-	 * @return JDFElement the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFElement the element @ if the element already exists
 	 */
-	public JDFElement appendFileTypeResultsPool() throws JDFException
+	public JDFElement appendFileTypeResultsPool()
 	{
 		return (JDFElement) appendElementN(ElementName.FILETYPERESULTSPOOL, 1, null);
 	}
 
 	/**
 	 * (24) const get element ImagesResultsPool
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement getImagesResultsPool()
@@ -280,7 +299,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * (25) getCreateImagesResultsPool
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateImagesResultsPool()
@@ -290,18 +309,17 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * (29) append element ImagesResultsPool
-	 * 
-	 * @return JDFElement the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFElement the element @ if the element already exists
 	 */
-	public JDFElement appendImagesResultsPool() throws JDFException
+	public JDFElement appendImagesResultsPool()
 	{
 		return (JDFElement) appendElementN(ElementName.IMAGESRESULTSPOOL, 1, null);
 	}
 
 	/**
 	 * (24) const get element PagesResultsPool
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement getPagesResultsPool()
@@ -311,7 +329,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * (25) getCreatePagesResultsPool
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreatePagesResultsPool()
@@ -321,13 +339,12 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 
 	/**
 	 * (29) append element PagesResultsPool
-	 * 
-	 * @return JDFElement the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFElement the element @ if the element already exists
 	 */
-	public JDFElement appendPagesResultsPool() throws JDFException
+	public JDFElement appendPagesResultsPool()
 	{
 		return (JDFElement) appendElementN(ElementName.PAGESRESULTSPOOL, 1, null);
 	}
 
-}// end namespace JDF
+}

@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -45,7 +77,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFRegisterRibbon;
 import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFNumberSpan;
@@ -61,7 +92,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoHardCoverBinding : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoHardCoverBinding extends JDFElement
@@ -103,7 +134,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoHardCoverBinding
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -114,7 +145,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoHardCoverBinding
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -126,7 +157,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoHardCoverBinding
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -137,22 +168,14 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoHardCoverBinding[  --> " + super.toString() + " ]";
-	}
-
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element BlockThreadSewing
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getBlockThreadSewing()
@@ -162,7 +185,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateBlockThreadSewing
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateBlockThreadSewing()
@@ -172,18 +195,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element BlockThreadSewing
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendBlockThreadSewing() throws JDFException
+	public JDFOptionSpan appendBlockThreadSewing()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.BLOCKTHREADSEWING, 1, null);
 	}
 
 	/**
 	 * (24) const get element CoverStyle
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCoverStyle()
@@ -193,7 +215,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateCoverStyle
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateCoverStyle()
@@ -203,18 +225,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element CoverStyle
-	 * 
-	 * @return JDFNameSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNameSpan the element @ if the element already exists
 	 */
-	public JDFNameSpan appendCoverStyle() throws JDFException
+	public JDFNameSpan appendCoverStyle()
 	{
 		return (JDFNameSpan) appendElementN(ElementName.COVERSTYLE, 1, null);
 	}
 
 	/**
 	 * (24) const get element EndSheets
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getEndSheets()
@@ -224,7 +245,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateEndSheets
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateEndSheets()
@@ -234,18 +255,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element EndSheets
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendEndSheets() throws JDFException
+	public JDFOptionSpan appendEndSheets()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.ENDSHEETS, 1, null);
 	}
 
 	/**
 	 * (24) const get element HeadBands
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getHeadBands()
@@ -255,7 +275,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateHeadBands
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateHeadBands()
@@ -265,18 +285,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element HeadBands
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendHeadBands() throws JDFException
+	public JDFOptionSpan appendHeadBands()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.HEADBANDS, 1, null);
 	}
 
 	/**
 	 * (24) const get element HeadBandColor
-	 * 
+	 *
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getHeadBandColor()
@@ -286,7 +305,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateHeadBandColor
-	 * 
+	 *
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateHeadBandColor()
@@ -296,18 +315,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element HeadBandColor
-	 * 
-	 * @return JDFSpanNamedColor the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanNamedColor the element @ if the element already exists
 	 */
-	public JDFSpanNamedColor appendHeadBandColor() throws JDFException
+	public JDFSpanNamedColor appendHeadBandColor()
 	{
 		return (JDFSpanNamedColor) appendElementN(ElementName.HEADBANDCOLOR, 1, null);
 	}
 
 	/**
 	 * (26) getCreateHeadBandColorDetails
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
@@ -318,7 +336,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (27) const get element HeadBandColorDetails
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element default is getHeadBandColorDetails(0)
 	 */
@@ -329,17 +347,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * Get all HeadBandColorDetails from the current element
-	 * 
+	 *
 	 * @return Collection<JDFStringSpan>, null if none are available
 	 */
 	public Collection<JDFStringSpan> getAllHeadBandColorDetails()
 	{
-		return getChildrenByClass(JDFStringSpan.class, false, 0);
+		return getChildArrayByClass(JDFStringSpan.class, false, 0);
 	}
 
 	/**
 	 * (30) append element HeadBandColorDetails
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan appendHeadBandColorDetails()
@@ -349,7 +367,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (24) const get element Jacket
-	 * 
+	 *
 	 * @return JDFSpanJacket the element
 	 */
 	public JDFSpanJacket getJacket()
@@ -359,7 +377,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateJacket
-	 * 
+	 *
 	 * @return JDFSpanJacket the element
 	 */
 	public JDFSpanJacket getCreateJacket()
@@ -369,18 +387,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element Jacket
-	 * 
-	 * @return JDFSpanJacket the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanJacket the element @ if the element already exists
 	 */
-	public JDFSpanJacket appendJacket() throws JDFException
+	public JDFSpanJacket appendJacket()
 	{
 		return (JDFSpanJacket) appendElementN(ElementName.JACKET, 1, null);
 	}
 
 	/**
 	 * (24) const get element JacketFoldingWidth
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getJacketFoldingWidth()
@@ -390,7 +407,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateJacketFoldingWidth
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateJacketFoldingWidth()
@@ -400,18 +417,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element JacketFoldingWidth
-	 * 
-	 * @return JDFNumberSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNumberSpan the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendJacketFoldingWidth() throws JDFException
+	public JDFNumberSpan appendJacketFoldingWidth()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.JACKETFOLDINGWIDTH, 1, null);
 	}
 
 	/**
 	 * (24) const get element JapanBind
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getJapanBind()
@@ -421,7 +437,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateJapanBind
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateJapanBind()
@@ -431,18 +447,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element JapanBind
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendJapanBind() throws JDFException
+	public JDFOptionSpan appendJapanBind()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.JAPANBIND, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineBrushing
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getSpineBrushing()
@@ -452,7 +467,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineBrushing
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineBrushing()
@@ -462,18 +477,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineBrushing
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendSpineBrushing() throws JDFException
+	public JDFOptionSpan appendSpineBrushing()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.SPINEBRUSHING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineFiberRoughing
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getSpineFiberRoughing()
@@ -483,7 +497,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineFiberRoughing
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineFiberRoughing()
@@ -493,18 +507,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineFiberRoughing
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendSpineFiberRoughing() throws JDFException
+	public JDFOptionSpan appendSpineFiberRoughing()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.SPINEFIBERROUGHING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineGlue
-	 * 
+	 *
 	 * @return JDFSpanGlue the element
 	 */
 	public JDFSpanGlue getSpineGlue()
@@ -514,7 +527,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineGlue
-	 * 
+	 *
 	 * @return JDFSpanGlue the element
 	 */
 	public JDFSpanGlue getCreateSpineGlue()
@@ -524,18 +537,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineGlue
-	 * 
-	 * @return JDFSpanGlue the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanGlue the element @ if the element already exists
 	 */
-	public JDFSpanGlue appendSpineGlue() throws JDFException
+	public JDFSpanGlue appendSpineGlue()
 	{
 		return (JDFSpanGlue) appendElementN(ElementName.SPINEGLUE, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineLevelling
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getSpineLevelling()
@@ -545,7 +557,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineLevelling
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineLevelling()
@@ -555,18 +567,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineLevelling
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendSpineLevelling() throws JDFException
+	public JDFOptionSpan appendSpineLevelling()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.SPINELEVELLING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineMilling
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getSpineMilling()
@@ -576,7 +587,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineMilling
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineMilling()
@@ -586,18 +597,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineMilling
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendSpineMilling() throws JDFException
+	public JDFOptionSpan appendSpineMilling()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.SPINEMILLING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineNotching
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getSpineNotching()
@@ -607,7 +617,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineNotching
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineNotching()
@@ -617,18 +627,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineNotching
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendSpineNotching() throws JDFException
+	public JDFOptionSpan appendSpineNotching()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.SPINENOTCHING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineSanding
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getSpineSanding()
@@ -638,7 +647,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineSanding
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineSanding()
@@ -648,18 +657,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineSanding
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendSpineSanding() throws JDFException
+	public JDFOptionSpan appendSpineSanding()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.SPINESANDING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SpineShredding
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getSpineShredding()
@@ -669,7 +677,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineShredding
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineShredding()
@@ -679,18 +687,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element SpineShredding
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendSpineShredding() throws JDFException
+	public JDFOptionSpan appendSpineShredding()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.SPINESHREDDING, 1, null);
 	}
 
 	/**
 	 * (24) const get element StripMaterial
-	 * 
+	 *
 	 * @return JDFSpanStripMaterial the element
 	 */
 	public JDFSpanStripMaterial getStripMaterial()
@@ -700,7 +707,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateStripMaterial
-	 * 
+	 *
 	 * @return JDFSpanStripMaterial the element
 	 */
 	public JDFSpanStripMaterial getCreateStripMaterial()
@@ -710,18 +717,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element StripMaterial
-	 * 
-	 * @return JDFSpanStripMaterial the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanStripMaterial the element @ if the element already exists
 	 */
-	public JDFSpanStripMaterial appendStripMaterial() throws JDFException
+	public JDFSpanStripMaterial appendStripMaterial()
 	{
 		return (JDFSpanStripMaterial) appendElementN(ElementName.STRIPMATERIAL, 1, null);
 	}
 
 	/**
 	 * (24) const get element TightBacking
-	 * 
+	 *
 	 * @return JDFSpanTightBacking the element
 	 */
 	public JDFSpanTightBacking getTightBacking()
@@ -731,7 +737,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateTightBacking
-	 * 
+	 *
 	 * @return JDFSpanTightBacking the element
 	 */
 	public JDFSpanTightBacking getCreateTightBacking()
@@ -741,18 +747,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element TightBacking
-	 * 
-	 * @return JDFSpanTightBacking the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanTightBacking the element @ if the element already exists
 	 */
-	public JDFSpanTightBacking appendTightBacking() throws JDFException
+	public JDFSpanTightBacking appendTightBacking()
 	{
 		return (JDFSpanTightBacking) appendElementN(ElementName.TIGHTBACKING, 1, null);
 	}
 
 	/**
 	 * (24) const get element Thickness
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getThickness()
@@ -762,7 +767,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateThickness
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateThickness()
@@ -772,18 +777,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (29) append element Thickness
-	 * 
-	 * @return JDFNumberSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNumberSpan the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendThickness() throws JDFException
+	public JDFNumberSpan appendThickness()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
 	}
 
 	/**
 	 * (26) getCreateRegisterRibbon
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegisterRibbon the element
 	 */
@@ -794,7 +798,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (27) const get element RegisterRibbon
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegisterRibbon the element default is getRegisterRibbon(0)
 	 */
@@ -805,17 +809,17 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * Get all RegisterRibbon from the current element
-	 * 
+	 *
 	 * @return Collection<JDFRegisterRibbon>, null if none are available
 	 */
 	public Collection<JDFRegisterRibbon> getAllRegisterRibbon()
 	{
-		return getChildrenByClass(JDFRegisterRibbon.class, false, 0);
+		return getChildArrayByClass(JDFRegisterRibbon.class, false, 0);
 	}
 
 	/**
 	 * (30) append element RegisterRibbon
-	 * 
+	 *
 	 * @return JDFRegisterRibbon the element
 	 */
 	public JDFRegisterRibbon appendRegisterRibbon()
@@ -825,7 +829,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refRegisterRibbon(JDFRegisterRibbon refTarget)
@@ -833,4 +837,4 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 		refElement(refTarget);
 	}
 
-}// end namespace JDF
+}

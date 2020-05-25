@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -59,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFColorantZoneDetails;
  *****************************************************************************
  * class JDFAutoTrappingParams : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoTrappingParams extends JDFResource
@@ -113,7 +145,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoTrappingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -124,7 +156,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoTrappingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -136,7 +168,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoTrappingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -145,15 +177,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	protected JDFAutoTrappingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoTrappingParams[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -243,16 +266,17 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		public static final EnumImageTrapPlacement Spread = new EnumImageTrapPlacement("Spread");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MinimumBlackWidth ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MinimumBlackWidth
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MinimumBlackWidth
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMinimumBlackWidth(double value)
@@ -262,7 +286,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute MinimumBlackWidth
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getMinimumBlackWidth()
@@ -270,12 +294,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.MINIMUMBLACKWIDTH, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrapEndStyle ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrapEndStyle
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrapEndStyle
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrapEndStyle(String value)
@@ -285,7 +309,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (23) get String attribute TrapEndStyle
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getTrapEndStyle()
@@ -293,12 +317,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getAttribute(AttributeName.TRAPENDSTYLE, null, "Miter");
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrapJoinStyle ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrapJoinStyle
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrapJoinStyle
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrapJoinStyle(String value)
@@ -308,7 +332,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (23) get String attribute TrapJoinStyle
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getTrapJoinStyle()
@@ -316,12 +340,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getAttribute(AttributeName.TRAPJOINSTYLE, null, "Miter");
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlackColorLimit ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BlackColorLimit
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BlackColorLimit
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBlackColorLimit(double value)
@@ -331,7 +355,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute BlackColorLimit
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getBlackColorLimit()
@@ -339,12 +363,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.BLACKCOLORLIMIT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlackDensityLimit ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BlackDensityLimit
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BlackDensityLimit
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBlackDensityLimit(double value)
@@ -354,7 +378,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute BlackDensityLimit
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getBlackDensityLimit()
@@ -362,12 +386,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.BLACKDENSITYLIMIT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlackWidth ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BlackWidth
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BlackWidth
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBlackWidth(double value)
@@ -377,7 +401,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute BlackWidth
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getBlackWidth()
@@ -385,12 +409,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.BLACKWIDTH, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Enabled ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Enabled
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Enabled
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEnabled(boolean value)
@@ -400,7 +424,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute Enabled
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getEnabled()
@@ -408,12 +432,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getBoolAttribute(AttributeName.ENABLED, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HalftoneName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute HalftoneName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute HalftoneName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setHalftoneName(String value)
@@ -423,7 +447,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (23) get String attribute HalftoneName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getHalftoneName()
@@ -431,12 +455,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getAttribute(AttributeName.HALFTONENAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageInternalTrapping ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ImageInternalTrapping
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ImageInternalTrapping
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setImageInternalTrapping(boolean value)
@@ -446,7 +470,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute ImageInternalTrapping
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getImageInternalTrapping()
@@ -454,12 +478,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getBoolAttribute(AttributeName.IMAGEINTERNALTRAPPING, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageResolution ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ImageResolution
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ImageResolution
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setImageResolution(int value)
@@ -469,7 +493,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (15) get int attribute ImageResolution
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getImageResolution()
@@ -477,12 +501,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getIntAttribute(AttributeName.IMAGERESOLUTION, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageMaskTrapping ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ImageMaskTrapping
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ImageMaskTrapping
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setImageMaskTrapping(boolean value)
@@ -492,7 +516,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute ImageMaskTrapping
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getImageMaskTrapping()
@@ -500,12 +524,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getBoolAttribute(AttributeName.IMAGEMASKTRAPPING, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageToImageTrapping ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ImageToImageTrapping
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ImageToImageTrapping
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setImageToImageTrapping(boolean value)
@@ -515,7 +539,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute ImageToImageTrapping
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getImageToImageTrapping()
@@ -523,12 +547,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getBoolAttribute(AttributeName.IMAGETOIMAGETRAPPING, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageToObjectTrapping ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ImageToObjectTrapping
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ImageToObjectTrapping
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setImageToObjectTrapping(boolean value)
@@ -538,7 +562,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute ImageToObjectTrapping
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getImageToObjectTrapping()
@@ -546,12 +570,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getBoolAttribute(AttributeName.IMAGETOOBJECTTRAPPING, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageTrapPlacement ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ImageTrapPlacement
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute ImageTrapPlacement
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setImageTrapPlacement(EnumImageTrapPlacement enumVar)
@@ -561,7 +585,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (9) get attribute ImageTrapPlacement
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumImageTrapPlacement getImageTrapPlacement()
@@ -569,12 +593,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return EnumImageTrapPlacement.getEnum(getAttribute(AttributeName.IMAGETRAPPLACEMENT, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageTrapWidth ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ImageTrapWidth
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ImageTrapWidth
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setImageTrapWidth(double value)
@@ -584,7 +608,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute ImageTrapWidth
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getImageTrapWidth()
@@ -592,12 +616,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.IMAGETRAPWIDTH, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageTrapWidthY ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ImageTrapWidthY
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ImageTrapWidthY
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setImageTrapWidthY(double value)
@@ -607,7 +631,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute ImageTrapWidthY
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getImageTrapWidthY()
@@ -615,12 +639,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.IMAGETRAPWIDTHY, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SlidingTrapLimit ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SlidingTrapLimit
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SlidingTrapLimit
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSlidingTrapLimit(double value)
@@ -630,7 +654,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute SlidingTrapLimit
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getSlidingTrapLimit()
@@ -638,12 +662,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.SLIDINGTRAPLIMIT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StepLimit ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StepLimit
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute StepLimit
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setStepLimit(double value)
@@ -653,7 +677,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute StepLimit
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getStepLimit()
@@ -661,12 +685,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.STEPLIMIT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrapColorScaling ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrapColorScaling
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrapColorScaling
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrapColorScaling(double value)
@@ -676,7 +700,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute TrapColorScaling
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getTrapColorScaling()
@@ -684,12 +708,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.TRAPCOLORSCALING, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrapWidth ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrapWidth
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrapWidth
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrapWidth(double value)
@@ -699,7 +723,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute TrapWidth
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getTrapWidth()
@@ -707,12 +731,12 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.TRAPWIDTH, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrapWidthY ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrapWidthY
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrapWidthY
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrapWidthY(double value)
@@ -722,7 +746,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute TrapWidthY
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getTrapWidthY()
@@ -730,13 +754,14 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.TRAPWIDTHY, null, 0.0);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateColorantZoneDetails
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorantZoneDetails the element
 	 */
@@ -747,7 +772,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * (27) const get element ColorantZoneDetails
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorantZoneDetails the element default is getColorantZoneDetails(0)
 	 */
@@ -758,17 +783,17 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * Get all ColorantZoneDetails from the current element
-	 * 
+	 *
 	 * @return Collection<JDFColorantZoneDetails>, null if none are available
 	 */
 	public Collection<JDFColorantZoneDetails> getAllColorantZoneDetails()
 	{
-		return getChildrenByClass(JDFColorantZoneDetails.class, false, 0);
+		return getChildArrayByClass(JDFColorantZoneDetails.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ColorantZoneDetails
-	 * 
+	 *
 	 * @return JDFColorantZoneDetails the element
 	 */
 	public JDFColorantZoneDetails appendColorantZoneDetails()
@@ -776,4 +801,4 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return (JDFColorantZoneDetails) appendElement(ElementName.COLORANTZONEDETAILS, null);
 	}
 
-}// end namespace JDF
+}

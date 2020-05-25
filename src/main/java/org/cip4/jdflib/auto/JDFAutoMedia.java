@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -53,7 +85,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFLabColor;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFCertification;
@@ -70,7 +101,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
  *****************************************************************************
  * class JDFAutoMedia : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoMedia extends JDFResource
@@ -78,7 +109,7 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[51];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[54];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.HOLETYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumerations, EnumHoleType.getEnum(0), "None");
@@ -88,50 +119,53 @@ public abstract class JDFAutoMedia extends JDFResource
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.BACKCOATINGDETAIL, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.BACKCOATINGS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBackCoatings.getEnum(0), null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.BACKGLOSSVALUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.BRIGHTNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.CIETINT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.CIEWHITENESS, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.COLORNAME, 0x44444431, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.COREWEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.DIMENSION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.FLUTE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.FLUTEDIRECTION, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumFluteDirection.getEnum(0), null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.FRONTCOATINGDETAIL, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.FRONTCOATINGS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumFrontCoatings.getEnum(0), null);
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.FRONTGLOSSVALUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[18] = new AtrInfoTable(AttributeName.GRADE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[19] = new AtrInfoTable(AttributeName.GRAINDIRECTION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumGrainDirection.getEnum(0), null);
-		atrInfoTable[20] = new AtrInfoTable(AttributeName.HOLECOUNT, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[21] = new AtrInfoTable(AttributeName.IMAGABLESIDE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumImagableSide.getEnum(0), null);
-		atrInfoTable[22] = new AtrInfoTable(AttributeName.INNERCOREDIAMETER, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[23] = new AtrInfoTable(AttributeName.INSIDELOSS, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[24] = new AtrInfoTable(AttributeName.ISOPAPERSUBSTRATE, 0x33311111, AttributeInfo.EnumAttributeType.enumeration, EnumISOPaperSubstrate.getEnum(0), null);
-		atrInfoTable[25] = new AtrInfoTable(AttributeName.LABCOLORVALUE, 0x33333311, AttributeInfo.EnumAttributeType.LabColor, null, null);
-		atrInfoTable[26] = new AtrInfoTable(AttributeName.MEDIACOLORNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[27] = new AtrInfoTable(AttributeName.MEDIACOLORNAMEDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[28] = new AtrInfoTable(AttributeName.MEDIAQUALITY, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[29] = new AtrInfoTable(AttributeName.MEDIASETCOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[30] = new AtrInfoTable(AttributeName.MEDIATYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMediaType.getEnum(0), null);
-		atrInfoTable[31] = new AtrInfoTable(AttributeName.MEDIATYPEDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[32] = new AtrInfoTable(AttributeName.OPACITY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumOpacity.getEnum(0), null);
-		atrInfoTable[33] = new AtrInfoTable(AttributeName.OPACITYLEVEL, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[34] = new AtrInfoTable(AttributeName.OUTERCOREDIAMETER, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[35] = new AtrInfoTable(AttributeName.OUTSIDEGAIN, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[36] = new AtrInfoTable(AttributeName.PLATETECHNOLOGY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumPlateTechnology.getEnum(0), null);
-		atrInfoTable[37] = new AtrInfoTable(AttributeName.POLARITY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPolarity.getEnum(0), null);
-		atrInfoTable[38] = new AtrInfoTable(AttributeName.PRINTINGTECHNOLOGY, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[39] = new AtrInfoTable(AttributeName.RECYCLED, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[40] = new AtrInfoTable(AttributeName.RECYCLEDPERCENTAGE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[41] = new AtrInfoTable(AttributeName.RELIEFTHICKNESS, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[42] = new AtrInfoTable(AttributeName.ROLLDIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[43] = new AtrInfoTable(AttributeName.SHRINKINDEX, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[44] = new AtrInfoTable(AttributeName.SLEEVEINTERLOCK, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[45] = new AtrInfoTable(AttributeName.STOCKTYPE, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[46] = new AtrInfoTable(AttributeName.TEXTURE, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[47] = new AtrInfoTable(AttributeName.THICKNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[48] = new AtrInfoTable(AttributeName.USERMEDIATYPE, 0x44444443, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[49] = new AtrInfoTable(AttributeName.WEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[50] = new AtrInfoTable(AttributeName.WRAPPERWEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.BACKISOPAPERSUBSTRATE, 0x33111111, AttributeInfo.EnumAttributeType.enumeration, EnumBackISOPaperSubstrate.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.BACKSPECTRUM, 0x31111111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.BRIGHTNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.CIETINT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.CIEWHITENESS, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.COLORNAME, 0x44444431, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.COREWEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.DIMENSION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.FLUTE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.FLUTEDIRECTION, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumFluteDirection.getEnum(0), null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.FRONTCOATINGDETAIL, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[18] = new AtrInfoTable(AttributeName.FRONTCOATINGS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumFrontCoatings.getEnum(0), null);
+		atrInfoTable[19] = new AtrInfoTable(AttributeName.FRONTGLOSSVALUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[20] = new AtrInfoTable(AttributeName.GRADE, 0x44333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[21] = new AtrInfoTable(AttributeName.GRAINDIRECTION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumGrainDirection.getEnum(0), null);
+		atrInfoTable[22] = new AtrInfoTable(AttributeName.HOLECOUNT, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[23] = new AtrInfoTable(AttributeName.IMAGABLESIDE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumImagableSide.getEnum(0), null);
+		atrInfoTable[24] = new AtrInfoTable(AttributeName.INNERCOREDIAMETER, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[25] = new AtrInfoTable(AttributeName.INSIDELOSS, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[26] = new AtrInfoTable(AttributeName.ISOPAPERSUBSTRATE, 0x33311111, AttributeInfo.EnumAttributeType.enumeration, EnumISOPaperSubstrate.getEnum(0), null);
+		atrInfoTable[27] = new AtrInfoTable(AttributeName.LABCOLORVALUE, 0x33333311, AttributeInfo.EnumAttributeType.LabColor, null, null);
+		atrInfoTable[28] = new AtrInfoTable(AttributeName.MEDIACOLORNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[29] = new AtrInfoTable(AttributeName.MEDIACOLORNAMEDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[30] = new AtrInfoTable(AttributeName.MEDIAQUALITY, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[31] = new AtrInfoTable(AttributeName.MEDIASETCOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[32] = new AtrInfoTable(AttributeName.MEDIATYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMediaType.getEnum(0), null);
+		atrInfoTable[33] = new AtrInfoTable(AttributeName.MEDIATYPEDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[34] = new AtrInfoTable(AttributeName.OPACITY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumOpacity.getEnum(0), null);
+		atrInfoTable[35] = new AtrInfoTable(AttributeName.OPACITYLEVEL, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[36] = new AtrInfoTable(AttributeName.OUTERCOREDIAMETER, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[37] = new AtrInfoTable(AttributeName.OUTSIDEGAIN, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[38] = new AtrInfoTable(AttributeName.PLATETECHNOLOGY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumPlateTechnology.getEnum(0), null);
+		atrInfoTable[39] = new AtrInfoTable(AttributeName.POLARITY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPolarity.getEnum(0), null);
+		atrInfoTable[40] = new AtrInfoTable(AttributeName.PRINTINGTECHNOLOGY, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[41] = new AtrInfoTable(AttributeName.RECYCLED, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[42] = new AtrInfoTable(AttributeName.RECYCLEDPERCENTAGE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[43] = new AtrInfoTable(AttributeName.RELIEFTHICKNESS, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[44] = new AtrInfoTable(AttributeName.ROLLDIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[45] = new AtrInfoTable(AttributeName.SHRINKINDEX, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[46] = new AtrInfoTable(AttributeName.SLEEVEINTERLOCK, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[47] = new AtrInfoTable(AttributeName.SPECTRUM, 0x31111111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[48] = new AtrInfoTable(AttributeName.STOCKTYPE, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[49] = new AtrInfoTable(AttributeName.TEXTURE, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[50] = new AtrInfoTable(AttributeName.THICKNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[51] = new AtrInfoTable(AttributeName.USERMEDIATYPE, 0x44444443, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[52] = new AtrInfoTable(AttributeName.WEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[53] = new AtrInfoTable(AttributeName.WRAPPERWEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -161,47 +195,38 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoMedia
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMedia(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	protected JDFAutoMedia(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoMedia
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMedia(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	protected JDFAutoMedia(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoMedia
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMedia(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	protected JDFAutoMedia(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoMedia[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -234,7 +259,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumHoleType(final String name)
+		private EnumHoleType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -243,7 +268,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumHoleType getEnum(final String enumName)
+		public static EnumHoleType getEnum(String enumName)
 		{
 			return (EnumHoleType) getEnum(EnumHoleType.class, enumName);
 		}
@@ -252,7 +277,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumHoleType getEnum(final int enumValue)
+		public static EnumHoleType getEnum(int enumValue)
 		{
 			return (EnumHoleType) getEnum(EnumHoleType.class, enumValue);
 		}
@@ -363,7 +388,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMediaUnit(final String name)
+		private EnumMediaUnit(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -372,7 +397,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumMediaUnit getEnum(final String enumName)
+		public static EnumMediaUnit getEnum(String enumName)
 		{
 			return (EnumMediaUnit) getEnum(EnumMediaUnit.class, enumName);
 		}
@@ -381,7 +406,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumMediaUnit getEnum(final int enumValue)
+		public static EnumMediaUnit getEnum(int enumValue)
 		{
 			return (EnumMediaUnit) getEnum(EnumMediaUnit.class, enumValue);
 		}
@@ -428,7 +453,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBackCoatings(final String name)
+		private EnumBackCoatings(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -437,7 +462,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumBackCoatings getEnum(final String enumName)
+		public static EnumBackCoatings getEnum(String enumName)
 		{
 			return (EnumBackCoatings) getEnum(EnumBackCoatings.class, enumName);
 		}
@@ -446,7 +471,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumBackCoatings getEnum(final int enumValue)
+		public static EnumBackCoatings getEnum(int enumValue)
 		{
 			return (EnumBackCoatings) getEnum(EnumBackCoatings.class, enumValue);
 		}
@@ -498,6 +523,81 @@ public abstract class JDFAutoMedia extends JDFResource
 	}
 
 	/**
+	 * Enumeration strings for BackISOPaperSubstrate
+	 */
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumBackISOPaperSubstrate extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumBackISOPaperSubstrate(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumBackISOPaperSubstrate getEnum(String enumName)
+		{
+			return (EnumBackISOPaperSubstrate) getEnum(EnumBackISOPaperSubstrate.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumBackISOPaperSubstrate getEnum(int enumValue)
+		{
+			return (EnumBackISOPaperSubstrate) getEnum(EnumBackISOPaperSubstrate.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumBackISOPaperSubstrate.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumBackISOPaperSubstrate.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumBackISOPaperSubstrate.class);
+		}
+
+		/**  */
+		public static final EnumBackISOPaperSubstrate PS1 = new EnumBackISOPaperSubstrate("PS1");
+		/**  */
+		public static final EnumBackISOPaperSubstrate PS2 = new EnumBackISOPaperSubstrate("PS2");
+		/**  */
+		public static final EnumBackISOPaperSubstrate PS3 = new EnumBackISOPaperSubstrate("PS3");
+		/**  */
+		public static final EnumBackISOPaperSubstrate PS4 = new EnumBackISOPaperSubstrate("PS4");
+		/**  */
+		public static final EnumBackISOPaperSubstrate PS5 = new EnumBackISOPaperSubstrate("PS5");
+		/**  */
+		public static final EnumBackISOPaperSubstrate PS6 = new EnumBackISOPaperSubstrate("PS6");
+		/**  */
+		public static final EnumBackISOPaperSubstrate PS7 = new EnumBackISOPaperSubstrate("PS7");
+		/**  */
+		public static final EnumBackISOPaperSubstrate PS8 = new EnumBackISOPaperSubstrate("PS8");
+	}
+
+	/**
 	 * Enumeration strings for FluteDirection
 	 */
 
@@ -507,7 +607,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumFluteDirection(final String name)
+		private EnumFluteDirection(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -516,7 +616,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumFluteDirection getEnum(final String enumName)
+		public static EnumFluteDirection getEnum(String enumName)
 		{
 			return (EnumFluteDirection) getEnum(EnumFluteDirection.class, enumName);
 		}
@@ -525,7 +625,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumFluteDirection getEnum(final int enumValue)
+		public static EnumFluteDirection getEnum(int enumValue)
 		{
 			return (EnumFluteDirection) getEnum(EnumFluteDirection.class, enumValue);
 		}
@@ -555,9 +655,15 @@ public abstract class JDFAutoMedia extends JDFResource
 		}
 
 		/**  */
-		public static final EnumFluteDirection LongEdge = new EnumFluteDirection("LongEdge");
+		public static final EnumFluteDirection Any = new EnumFluteDirection("Any");
+		/**  */
+		public static final EnumFluteDirection Both = new EnumFluteDirection("Both");
 		/**  */
 		public static final EnumFluteDirection ShortEdge = new EnumFluteDirection("ShortEdge");
+		/**  */
+		public static final EnumFluteDirection LongEdge = new EnumFluteDirection("LongEdge");
+		/**  */
+		public static final EnumFluteDirection SameDirection = new EnumFluteDirection("SameDirection");
 		/**  */
 		public static final EnumFluteDirection XDirection = new EnumFluteDirection("XDirection");
 		/**  */
@@ -574,7 +680,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumFrontCoatings(final String name)
+		private EnumFrontCoatings(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -583,7 +689,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumFrontCoatings getEnum(final String enumName)
+		public static EnumFrontCoatings getEnum(String enumName)
 		{
 			return (EnumFrontCoatings) getEnum(EnumFrontCoatings.class, enumName);
 		}
@@ -592,7 +698,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumFrontCoatings getEnum(final int enumValue)
+		public static EnumFrontCoatings getEnum(int enumValue)
 		{
 			return (EnumFrontCoatings) getEnum(EnumFrontCoatings.class, enumValue);
 		}
@@ -653,7 +759,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumGrainDirection(final String name)
+		private EnumGrainDirection(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -662,7 +768,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumGrainDirection getEnum(final String enumName)
+		public static EnumGrainDirection getEnum(String enumName)
 		{
 			return (EnumGrainDirection) getEnum(EnumGrainDirection.class, enumName);
 		}
@@ -671,7 +777,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumGrainDirection getEnum(final int enumValue)
+		public static EnumGrainDirection getEnum(int enumValue)
 		{
 			return (EnumGrainDirection) getEnum(EnumGrainDirection.class, enumValue);
 		}
@@ -701,9 +807,15 @@ public abstract class JDFAutoMedia extends JDFResource
 		}
 
 		/**  */
-		public static final EnumGrainDirection LongEdge = new EnumGrainDirection("LongEdge");
+		public static final EnumGrainDirection Any = new EnumGrainDirection("Any");
+		/**  */
+		public static final EnumGrainDirection Both = new EnumGrainDirection("Both");
 		/**  */
 		public static final EnumGrainDirection ShortEdge = new EnumGrainDirection("ShortEdge");
+		/**  */
+		public static final EnumGrainDirection LongEdge = new EnumGrainDirection("LongEdge");
+		/**  */
+		public static final EnumGrainDirection SameDirection = new EnumGrainDirection("SameDirection");
 		/**  */
 		public static final EnumGrainDirection XDirection = new EnumGrainDirection("XDirection");
 		/**  */
@@ -720,7 +832,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumImagableSide(final String name)
+		private EnumImagableSide(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -729,7 +841,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumImagableSide getEnum(final String enumName)
+		public static EnumImagableSide getEnum(String enumName)
 		{
 			return (EnumImagableSide) getEnum(EnumImagableSide.class, enumName);
 		}
@@ -738,7 +850,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumImagableSide getEnum(final int enumValue)
+		public static EnumImagableSide getEnum(int enumValue)
 		{
 			return (EnumImagableSide) getEnum(EnumImagableSide.class, enumValue);
 		}
@@ -787,7 +899,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumISOPaperSubstrate(final String name)
+		private EnumISOPaperSubstrate(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -796,7 +908,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumISOPaperSubstrate getEnum(final String enumName)
+		public static EnumISOPaperSubstrate getEnum(String enumName)
 		{
 			return (EnumISOPaperSubstrate) getEnum(EnumISOPaperSubstrate.class, enumName);
 		}
@@ -805,7 +917,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumISOPaperSubstrate getEnum(final int enumValue)
+		public static EnumISOPaperSubstrate getEnum(int enumValue)
 		{
 			return (EnumISOPaperSubstrate) getEnum(EnumISOPaperSubstrate.class, enumValue);
 		}
@@ -862,7 +974,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMediaType(final String name)
+		private EnumMediaType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -871,7 +983,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumMediaType getEnum(final String enumName)
+		public static EnumMediaType getEnum(String enumName)
 		{
 			return (EnumMediaType) getEnum(EnumMediaType.class, enumName);
 		}
@@ -880,7 +992,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumMediaType getEnum(final int enumValue)
+		public static EnumMediaType getEnum(int enumValue)
 		{
 			return (EnumMediaType) getEnum(EnumMediaType.class, enumValue);
 		}
@@ -911,6 +1023,7 @@ public abstract class JDFAutoMedia extends JDFResource
 
 		/**  */
 		public static final EnumMediaType Blanket = new EnumMediaType("Blanket");
+		/**  */
 		public static final EnumMediaType CorrugatedBoard = new EnumMediaType("CorrugatedBoard");
 		/**  */
 		public static final EnumMediaType Disc = new EnumMediaType("Disc");
@@ -964,7 +1077,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOpacity(final String name)
+		private EnumOpacity(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -973,7 +1086,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumOpacity getEnum(final String enumName)
+		public static EnumOpacity getEnum(String enumName)
 		{
 			return (EnumOpacity) getEnum(EnumOpacity.class, enumName);
 		}
@@ -982,7 +1095,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumOpacity getEnum(final int enumValue)
+		public static EnumOpacity getEnum(int enumValue)
 		{
 			return (EnumOpacity) getEnum(EnumOpacity.class, enumValue);
 		}
@@ -1029,7 +1142,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPlateTechnology(final String name)
+		private EnumPlateTechnology(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -1038,7 +1151,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumPlateTechnology getEnum(final String enumName)
+		public static EnumPlateTechnology getEnum(String enumName)
 		{
 			return (EnumPlateTechnology) getEnum(EnumPlateTechnology.class, enumName);
 		}
@@ -1047,7 +1160,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumPlateTechnology getEnum(final int enumValue)
+		public static EnumPlateTechnology getEnum(int enumValue)
 		{
 			return (EnumPlateTechnology) getEnum(EnumPlateTechnology.class, enumValue);
 		}
@@ -1106,7 +1219,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPolarity(final String name)
+		private EnumPolarity(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -1115,7 +1228,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumPolarity getEnum(final String enumName)
+		public static EnumPolarity getEnum(String enumName)
 		{
 			return (EnumPolarity) getEnum(EnumPolarity.class, enumName);
 		}
@@ -1124,7 +1237,7 @@ public abstract class JDFAutoMedia extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumPolarity getEnum(final int enumValue)
+		public static EnumPolarity getEnum(int enumValue)
 		{
 			return (EnumPolarity) getEnum(EnumPolarity.class, enumValue);
 		}
@@ -1159,26 +1272,27 @@ public abstract class JDFAutoMedia extends JDFResource
 		public static final EnumPolarity Negative = new EnumPolarity("Negative");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HoleType ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute HoleType
+	--------------------------------------------------------------------- */
 	/**
 	 * (5.2) set attribute HoleType
-	 * 
+	 *
 	 * @param v vector of the enumeration values
 	 */
-	public void setHoleType(final Vector<? extends ValuedEnum> v)
+	public void setHoleType(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.HOLETYPE, v, null);
 	}
 
 	/**
 	 * (9.2) get HoleType attribute HoleType
-	 * 
+	 *
 	 * @return Vector of the enumerations
 	 */
 	public Vector<? extends ValuedEnum> getHoleType()
@@ -1186,22 +1300,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getEnumerationsAttribute(AttributeName.HOLETYPE, null, EnumHoleType.None, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaUnit ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaUnit
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute MediaUnit
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMediaUnit(final EnumMediaUnit enumVar)
+	public void setMediaUnit(EnumMediaUnit enumVar)
 	{
 		setAttribute(AttributeName.MEDIAUNIT, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute MediaUnit
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumMediaUnit getMediaUnit()
@@ -1209,22 +1323,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return EnumMediaUnit.getEnum(getAttribute(AttributeName.MEDIAUNIT, null, "Sheet"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrePrinted ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrePrinted
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PrePrinted
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPrePrinted(final boolean value)
+	public void setPrePrinted(boolean value)
 	{
 		setAttribute(AttributeName.PREPRINTED, value, null);
 	}
 
 	/**
 	 * (18) get boolean attribute PrePrinted
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getPrePrinted()
@@ -1232,22 +1346,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getBoolAttribute(AttributeName.PREPRINTED, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BackBrightness ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BackBrightness
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BackBrightness
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBackBrightness(final double value)
+	public void setBackBrightness(double value)
 	{
 		setAttribute(AttributeName.BACKBRIGHTNESS, value, null);
 	}
 
 	/**
 	 * (17) get double attribute BackBrightness
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getBackBrightness()
@@ -1255,22 +1369,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.BACKBRIGHTNESS, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BackCoatingDetail ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BackCoatingDetail
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BackCoatingDetail
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBackCoatingDetail(final String value)
+	public void setBackCoatingDetail(String value)
 	{
 		setAttribute(AttributeName.BACKCOATINGDETAIL, value, null);
 	}
 
 	/**
 	 * (23) get String attribute BackCoatingDetail
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getBackCoatingDetail()
@@ -1278,22 +1392,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getAttribute(AttributeName.BACKCOATINGDETAIL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BackCoatings ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BackCoatings
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute BackCoatings
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setBackCoatings(final EnumBackCoatings enumVar)
+	public void setBackCoatings(EnumBackCoatings enumVar)
 	{
 		setAttribute(AttributeName.BACKCOATINGS, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute BackCoatings
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumBackCoatings getBackCoatings()
@@ -1301,22 +1415,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return EnumBackCoatings.getEnum(getAttribute(AttributeName.BACKCOATINGS, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BackGlossValue ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BackGlossValue
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BackGlossValue
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBackGlossValue(final double value)
+	public void setBackGlossValue(double value)
 	{
 		setAttribute(AttributeName.BACKGLOSSVALUE, value, null);
 	}
 
 	/**
 	 * (17) get double attribute BackGlossValue
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getBackGlossValue()
@@ -1324,22 +1438,68 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.BACKGLOSSVALUE, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Brightness ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BackISOPaperSubstrate
+	--------------------------------------------------------------------- */
 	/**
-	 * (36) set attribute Brightness
-	 * 
+	 * (5) set attribute BackISOPaperSubstrate
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 */
+	public void setBackISOPaperSubstrate(EnumBackISOPaperSubstrate enumVar)
+	{
+		setAttribute(AttributeName.BACKISOPAPERSUBSTRATE, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	 * (9) get attribute BackISOPaperSubstrate
+	 *
+	 * @return the value of the attribute
+	 */
+	public EnumBackISOPaperSubstrate getBackISOPaperSubstrate()
+	{
+		return EnumBackISOPaperSubstrate.getEnum(getAttribute(AttributeName.BACKISOPAPERSUBSTRATE, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BackSpectrum
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute BackSpectrum
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBrightness(final double value)
+	public void setBackSpectrum(double value)
+	{
+		setAttribute(AttributeName.BACKSPECTRUM, value, null);
+	}
+
+	/**
+	 * (17) get double attribute BackSpectrum
+	 *
+	 * @return double the value of the attribute
+	 */
+	public double getBackSpectrum()
+	{
+		return getRealAttribute(AttributeName.BACKSPECTRUM, null, 0.0);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Brightness
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute Brightness
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setBrightness(double value)
 	{
 		setAttribute(AttributeName.BRIGHTNESS, value, null);
 	}
 
 	/**
 	 * (17) get double attribute Brightness
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getBrightness()
@@ -1347,22 +1507,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.BRIGHTNESS, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CIETint ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CIETint
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CIETint
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCIETint(final double value)
+	public void setCIETint(double value)
 	{
 		setAttribute(AttributeName.CIETINT, value, null);
 	}
 
 	/**
 	 * (17) get double attribute CIETint
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getCIETint()
@@ -1370,22 +1530,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.CIETINT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CIEWhiteness ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CIEWhiteness
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CIEWhiteness
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCIEWhiteness(final double value)
+	public void setCIEWhiteness(double value)
 	{
 		setAttribute(AttributeName.CIEWHITENESS, value, null);
 	}
 
 	/**
 	 * (17) get double attribute CIEWhiteness
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getCIEWhiteness()
@@ -1393,22 +1553,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.CIEWHITENESS, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ColorName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ColorName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorName(final String value)
+	public void setColorName(String value)
 	{
 		setAttribute(AttributeName.COLORNAME, value, null);
 	}
 
 	/**
 	 * (23) get String attribute ColorName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getColorName()
@@ -1416,22 +1576,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getAttribute(AttributeName.COLORNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CoreWeight ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CoreWeight
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CoreWeight
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCoreWeight(final double value)
+	public void setCoreWeight(double value)
 	{
 		setAttribute(AttributeName.COREWEIGHT, value, null);
 	}
 
 	/**
 	 * (17) get double attribute CoreWeight
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getCoreWeight()
@@ -1439,22 +1599,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.COREWEIGHT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Dimension ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Dimension
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Dimension
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDimension(final JDFXYPair value)
+	public void setDimension(JDFXYPair value)
 	{
 		setAttribute(AttributeName.DIMENSION, value, null);
 	}
 
 	/**
 	 * (20) get JDFXYPair attribute Dimension
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getDimension()
@@ -1464,22 +1624,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Flute ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Flute
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Flute
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFlute(final String value)
+	public void setFlute(String value)
 	{
 		setAttribute(AttributeName.FLUTE, value, null);
 	}
 
 	/**
 	 * (23) get String attribute Flute
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getFlute()
@@ -1487,22 +1647,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getAttribute(AttributeName.FLUTE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FluteDirection ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FluteDirection
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute FluteDirection
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFluteDirection(final EnumFluteDirection enumVar)
+	public void setFluteDirection(EnumFluteDirection enumVar)
 	{
 		setAttribute(AttributeName.FLUTEDIRECTION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute FluteDirection
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumFluteDirection getFluteDirection()
@@ -1510,22 +1670,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return EnumFluteDirection.getEnum(getAttribute(AttributeName.FLUTEDIRECTION, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FrontCoatingDetail ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FrontCoatingDetail
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FrontCoatingDetail
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFrontCoatingDetail(final String value)
+	public void setFrontCoatingDetail(String value)
 	{
 		setAttribute(AttributeName.FRONTCOATINGDETAIL, value, null);
 	}
 
 	/**
 	 * (23) get String attribute FrontCoatingDetail
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getFrontCoatingDetail()
@@ -1533,22 +1693,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getAttribute(AttributeName.FRONTCOATINGDETAIL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FrontCoatings ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FrontCoatings
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute FrontCoatings
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFrontCoatings(final EnumFrontCoatings enumVar)
+	public void setFrontCoatings(EnumFrontCoatings enumVar)
 	{
 		setAttribute(AttributeName.FRONTCOATINGS, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute FrontCoatings
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumFrontCoatings getFrontCoatings()
@@ -1556,22 +1716,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return EnumFrontCoatings.getEnum(getAttribute(AttributeName.FRONTCOATINGS, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FrontGlossValue ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FrontGlossValue
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FrontGlossValue
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFrontGlossValue(final double value)
+	public void setFrontGlossValue(double value)
 	{
 		setAttribute(AttributeName.FRONTGLOSSVALUE, value, null);
 	}
 
 	/**
 	 * (17) get double attribute FrontGlossValue
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getFrontGlossValue()
@@ -1579,22 +1739,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.FRONTGLOSSVALUE, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Grade ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Grade
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Grade
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGrade(final int value)
+	public void setGrade(int value)
 	{
 		setAttribute(AttributeName.GRADE, value, null);
 	}
 
 	/**
 	 * (15) get int attribute Grade
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getGrade()
@@ -1602,22 +1762,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getIntAttribute(AttributeName.GRADE, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GrainDirection ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GrainDirection
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute GrainDirection
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setGrainDirection(final EnumGrainDirection enumVar)
+	public void setGrainDirection(EnumGrainDirection enumVar)
 	{
 		setAttribute(AttributeName.GRAINDIRECTION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute GrainDirection
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumGrainDirection getGrainDirection()
@@ -1625,22 +1785,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return EnumGrainDirection.getEnum(getAttribute(AttributeName.GRAINDIRECTION, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HoleCount ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute HoleCount
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute HoleCount
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHoleCount(final int value)
+	public void setHoleCount(int value)
 	{
 		setAttribute(AttributeName.HOLECOUNT, value, null);
 	}
 
 	/**
 	 * (15) get int attribute HoleCount
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getHoleCount()
@@ -1648,22 +1808,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getIntAttribute(AttributeName.HOLECOUNT, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImagableSide ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ImagableSide
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute ImagableSide
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setImagableSide(final EnumImagableSide enumVar)
+	public void setImagableSide(EnumImagableSide enumVar)
 	{
 		setAttribute(AttributeName.IMAGABLESIDE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute ImagableSide
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumImagableSide getImagableSide()
@@ -1671,22 +1831,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return EnumImagableSide.getEnum(getAttribute(AttributeName.IMAGABLESIDE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InnerCoreDiameter ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute InnerCoreDiameter
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute InnerCoreDiameter
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setInnerCoreDiameter(final double value)
+	public void setInnerCoreDiameter(double value)
 	{
 		setAttribute(AttributeName.INNERCOREDIAMETER, value, null);
 	}
 
 	/**
 	 * (17) get double attribute InnerCoreDiameter
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getInnerCoreDiameter()
@@ -1694,22 +1854,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.INNERCOREDIAMETER, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InsideLoss ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute InsideLoss
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute InsideLoss
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setInsideLoss(final double value)
+	public void setInsideLoss(double value)
 	{
 		setAttribute(AttributeName.INSIDELOSS, value, null);
 	}
 
 	/**
 	 * (17) get double attribute InsideLoss
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getInsideLoss()
@@ -1717,22 +1877,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.INSIDELOSS, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ISOPaperSubstrate ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ISOPaperSubstrate
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute ISOPaperSubstrate
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setISOPaperSubstrate(final EnumISOPaperSubstrate enumVar)
+	public void setISOPaperSubstrate(EnumISOPaperSubstrate enumVar)
 	{
 		setAttribute(AttributeName.ISOPAPERSUBSTRATE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute ISOPaperSubstrate
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumISOPaperSubstrate getISOPaperSubstrate()
@@ -1740,22 +1900,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return EnumISOPaperSubstrate.getEnum(getAttribute(AttributeName.ISOPAPERSUBSTRATE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LabColorValue ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LabColorValue
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute LabColorValue
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLabColorValue(final JDFLabColor value)
+	public void setLabColorValue(JDFLabColor value)
 	{
 		setAttribute(AttributeName.LABCOLORVALUE, value, null);
 	}
 
 	/**
 	 * (20) get JDFLabColor attribute LabColorValue
-	 * 
+	 *
 	 * @return JDFLabColor the value of the attribute, null if a the attribute value is not a valid to create a JDFLabColor
 	 */
 	public JDFLabColor getLabColorValue()
@@ -1765,22 +1925,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaColorName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaColorName
+	--------------------------------------------------------------------- */
 	/**
 	 * (13) set attribute MediaColorName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMediaColorName(final EnumNamedColor value)
+	public void setMediaColorName(EnumNamedColor value)
 	{
 		setAttribute(AttributeName.MEDIACOLORNAME, value == null ? null : value.getName(), null);
 	}
 
 	/**
 	 * (19) get EnumNamedColor attribute MediaColorName
-	 * 
+	 *
 	 * @return EnumNamedColor the value of the attribute
 	 */
 	public EnumNamedColor getMediaColorName()
@@ -1792,22 +1952,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaColorNameDetails ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaColorNameDetails
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MediaColorNameDetails
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMediaColorNameDetails(final String value)
+	public void setMediaColorNameDetails(String value)
 	{
 		setAttribute(AttributeName.MEDIACOLORNAMEDETAILS, value, null);
 	}
 
 	/**
 	 * (23) get String attribute MediaColorNameDetails
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getMediaColorNameDetails()
@@ -1815,22 +1975,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getAttribute(AttributeName.MEDIACOLORNAMEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaQuality ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaQuality
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MediaQuality
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMediaQuality(final String value)
+	public void setMediaQuality(String value)
 	{
 		setAttribute(AttributeName.MEDIAQUALITY, value, null);
 	}
 
 	/**
 	 * (23) get String attribute MediaQuality
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getMediaQuality()
@@ -1838,22 +1998,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getAttribute(AttributeName.MEDIAQUALITY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaSetCount ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaSetCount
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MediaSetCount
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMediaSetCount(final int value)
+	public void setMediaSetCount(int value)
 	{
 		setAttribute(AttributeName.MEDIASETCOUNT, value, null);
 	}
 
 	/**
 	 * (15) get int attribute MediaSetCount
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getMediaSetCount()
@@ -1861,22 +2021,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getIntAttribute(AttributeName.MEDIASETCOUNT, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaType ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaType
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute MediaType
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMediaType(final EnumMediaType enumVar)
+	public void setMediaType(EnumMediaType enumVar)
 	{
 		setAttribute(AttributeName.MEDIATYPE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute MediaType
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumMediaType getMediaType()
@@ -1884,22 +2044,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return EnumMediaType.getEnum(getAttribute(AttributeName.MEDIATYPE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaTypeDetails ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaTypeDetails
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MediaTypeDetails
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMediaTypeDetails(final String value)
+	public void setMediaTypeDetails(String value)
 	{
 		setAttribute(AttributeName.MEDIATYPEDETAILS, value, null);
 	}
 
 	/**
 	 * (23) get String attribute MediaTypeDetails
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getMediaTypeDetails()
@@ -1907,22 +2067,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getAttribute(AttributeName.MEDIATYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Opacity ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Opacity
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Opacity
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOpacity(final EnumOpacity enumVar)
+	public void setOpacity(EnumOpacity enumVar)
 	{
 		setAttribute(AttributeName.OPACITY, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute Opacity
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumOpacity getOpacity()
@@ -1930,22 +2090,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return EnumOpacity.getEnum(getAttribute(AttributeName.OPACITY, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OpacityLevel ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OpacityLevel
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute OpacityLevel
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOpacityLevel(final double value)
+	public void setOpacityLevel(double value)
 	{
 		setAttribute(AttributeName.OPACITYLEVEL, value, null);
 	}
 
 	/**
 	 * (17) get double attribute OpacityLevel
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getOpacityLevel()
@@ -1953,22 +2113,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.OPACITYLEVEL, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OuterCoreDiameter ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OuterCoreDiameter
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute OuterCoreDiameter
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOuterCoreDiameter(final double value)
+	public void setOuterCoreDiameter(double value)
 	{
 		setAttribute(AttributeName.OUTERCOREDIAMETER, value, null);
 	}
 
 	/**
 	 * (17) get double attribute OuterCoreDiameter
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getOuterCoreDiameter()
@@ -1976,22 +2136,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.OUTERCOREDIAMETER, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OutsideGain ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OutsideGain
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute OutsideGain
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOutsideGain(final double value)
+	public void setOutsideGain(double value)
 	{
 		setAttribute(AttributeName.OUTSIDEGAIN, value, null);
 	}
 
 	/**
 	 * (17) get double attribute OutsideGain
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getOutsideGain()
@@ -1999,22 +2159,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.OUTSIDEGAIN, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PlateTechnology ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PlateTechnology
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute PlateTechnology
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPlateTechnology(final EnumPlateTechnology enumVar)
+	public void setPlateTechnology(EnumPlateTechnology enumVar)
 	{
 		setAttribute(AttributeName.PLATETECHNOLOGY, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute PlateTechnology
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumPlateTechnology getPlateTechnology()
@@ -2022,22 +2182,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return EnumPlateTechnology.getEnum(getAttribute(AttributeName.PLATETECHNOLOGY, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Polarity ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Polarity
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Polarity
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPolarity(final EnumPolarity enumVar)
+	public void setPolarity(EnumPolarity enumVar)
 	{
 		setAttribute(AttributeName.POLARITY, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute Polarity
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumPolarity getPolarity()
@@ -2045,22 +2205,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return EnumPolarity.getEnum(getAttribute(AttributeName.POLARITY, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintingTechnology ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrintingTechnology
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PrintingTechnology
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPrintingTechnology(final String value)
+	public void setPrintingTechnology(String value)
 	{
 		setAttribute(AttributeName.PRINTINGTECHNOLOGY, value, null);
 	}
 
 	/**
 	 * (23) get String attribute PrintingTechnology
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getPrintingTechnology()
@@ -2068,22 +2228,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getAttribute(AttributeName.PRINTINGTECHNOLOGY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Recycled ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Recycled
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Recycled
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRecycled(final boolean value)
+	public void setRecycled(boolean value)
 	{
 		setAttribute(AttributeName.RECYCLED, value, null);
 	}
 
 	/**
 	 * (18) get boolean attribute Recycled
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getRecycled()
@@ -2091,22 +2251,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getBoolAttribute(AttributeName.RECYCLED, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RecycledPercentage ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RecycledPercentage
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RecycledPercentage
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRecycledPercentage(final double value)
+	public void setRecycledPercentage(double value)
 	{
 		setAttribute(AttributeName.RECYCLEDPERCENTAGE, value, null);
 	}
 
 	/**
 	 * (17) get double attribute RecycledPercentage
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getRecycledPercentage()
@@ -2114,22 +2274,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.RECYCLEDPERCENTAGE, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReliefThickness ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ReliefThickness
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ReliefThickness
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setReliefThickness(final double value)
+	public void setReliefThickness(double value)
 	{
 		setAttribute(AttributeName.RELIEFTHICKNESS, value, null);
 	}
 
 	/**
 	 * (17) get double attribute ReliefThickness
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getReliefThickness()
@@ -2137,22 +2297,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.RELIEFTHICKNESS, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RollDiameter ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RollDiameter
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RollDiameter
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRollDiameter(final double value)
+	public void setRollDiameter(double value)
 	{
 		setAttribute(AttributeName.ROLLDIAMETER, value, null);
 	}
 
 	/**
 	 * (17) get double attribute RollDiameter
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getRollDiameter()
@@ -2160,22 +2320,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.ROLLDIAMETER, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShrinkIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ShrinkIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ShrinkIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShrinkIndex(final JDFXYPair value)
+	public void setShrinkIndex(JDFXYPair value)
 	{
 		setAttribute(AttributeName.SHRINKINDEX, value, null);
 	}
 
 	/**
 	 * (20) get JDFXYPair attribute ShrinkIndex
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getShrinkIndex()
@@ -2185,22 +2345,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SleeveInterlock ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SleeveInterlock
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SleeveInterlock
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSleeveInterlock(final String value)
+	public void setSleeveInterlock(String value)
 	{
 		setAttribute(AttributeName.SLEEVEINTERLOCK, value, null);
 	}
 
 	/**
 	 * (23) get String attribute SleeveInterlock
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getSleeveInterlock()
@@ -2208,22 +2368,45 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getAttribute(AttributeName.SLEEVEINTERLOCK, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StockType ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Spectrum
+	--------------------------------------------------------------------- */
 	/**
-	 * (36) set attribute StockType
-	 * 
+	 * (36) set attribute Spectrum
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStockType(final String value)
+	public void setSpectrum(double value)
+	{
+		setAttribute(AttributeName.SPECTRUM, value, null);
+	}
+
+	/**
+	 * (17) get double attribute Spectrum
+	 *
+	 * @return double the value of the attribute
+	 */
+	public double getSpectrum()
+	{
+		return getRealAttribute(AttributeName.SPECTRUM, null, 0.0);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StockType
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute StockType
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setStockType(String value)
 	{
 		setAttribute(AttributeName.STOCKTYPE, value, null);
 	}
 
 	/**
 	 * (23) get String attribute StockType
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getStockType()
@@ -2231,22 +2414,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getAttribute(AttributeName.STOCKTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Texture ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Texture
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Texture
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTexture(final String value)
+	public void setTexture(String value)
 	{
 		setAttribute(AttributeName.TEXTURE, value, null);
 	}
 
 	/**
 	 * (23) get String attribute Texture
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getTexture()
@@ -2254,22 +2437,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getAttribute(AttributeName.TEXTURE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Thickness ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Thickness
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Thickness
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setThickness(final double value)
+	public void setThickness(double value)
 	{
 		setAttribute(AttributeName.THICKNESS, value, null);
 	}
 
 	/**
 	 * (17) get double attribute Thickness
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getThickness()
@@ -2277,22 +2460,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.THICKNESS, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UserMediaType ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute UserMediaType
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute UserMediaType
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUserMediaType(final String value)
+	public void setUserMediaType(String value)
 	{
 		setAttribute(AttributeName.USERMEDIATYPE, value, null);
 	}
 
 	/**
 	 * (23) get String attribute UserMediaType
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getUserMediaType()
@@ -2300,22 +2483,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getAttribute(AttributeName.USERMEDIATYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Weight ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Weight
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Weight
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWeight(final double value)
+	public void setWeight(double value)
 	{
 		setAttribute(AttributeName.WEIGHT, value, null);
 	}
 
 	/**
 	 * (17) get double attribute Weight
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getWeight()
@@ -2323,22 +2506,22 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.WEIGHT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WrapperWeight ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WrapperWeight
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute WrapperWeight
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWrapperWeight(final double value)
+	public void setWrapperWeight(double value)
 	{
 		setAttribute(AttributeName.WRAPPERWEIGHT, value, null);
 	}
 
 	/**
 	 * (17) get double attribute WrapperWeight
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getWrapperWeight()
@@ -2346,45 +2529,46 @@ public abstract class JDFAutoMedia extends JDFResource
 		return getRealAttribute(AttributeName.WRAPPERWEIGHT, null, 0.0);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateCertification
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFCertification the element
 	 */
-	public JDFCertification getCreateCertification(final int iSkip)
+	public JDFCertification getCreateCertification(int iSkip)
 	{
 		return (JDFCertification) getCreateElement_JDFElement(ElementName.CERTIFICATION, null, iSkip);
 	}
 
 	/**
 	 * (27) const get element Certification
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFCertification the element default is getCertification(0)
 	 */
-	public JDFCertification getCertification(final int iSkip)
+	public JDFCertification getCertification(int iSkip)
 	{
 		return (JDFCertification) getElement(ElementName.CERTIFICATION, null, iSkip);
 	}
 
 	/**
 	 * Get all Certification from the current element
-	 * 
+	 *
 	 * @return Collection<JDFCertification>, null if none are available
 	 */
 	public Collection<JDFCertification> getAllCertification()
 	{
-		return getChildrenByClass(JDFCertification.class, false, 0);
+		return getChildArrayByClass(JDFCertification.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Certification
-	 * 
+	 *
 	 * @return JDFCertification the element
 	 */
 	public JDFCertification appendCertification()
@@ -2394,7 +2578,7 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * (24) const get element Color
-	 * 
+	 *
 	 * @return JDFColor the element
 	 */
 	public JDFColor getColor()
@@ -2404,7 +2588,7 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * (25) getCreateColor
-	 * 
+	 *
 	 * @return JDFColor the element
 	 */
 	public JDFColor getCreateColor()
@@ -2414,28 +2598,27 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * (29) append element Color
-	 * 
-	 * @return JDFColor the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFColor the element @ if the element already exists
 	 */
-	public JDFColor appendColor() throws JDFException
+	public JDFColor appendColor()
 	{
 		return (JDFColor) appendElementN(ElementName.COLOR, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColor(final JDFColor refTarget)
+	public void refColor(JDFColor refTarget)
 	{
 		refElement(refTarget);
 	}
 
 	/**
 	 * (24) const get element ColorMeasurementConditions
-	 * 
+	 *
 	 * @return JDFColorMeasurementConditions the element
 	 */
 	public JDFColorMeasurementConditions getColorMeasurementConditions()
@@ -2445,7 +2628,7 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * (25) getCreateColorMeasurementConditions
-	 * 
+	 *
 	 * @return JDFColorMeasurementConditions the element
 	 */
 	public JDFColorMeasurementConditions getCreateColorMeasurementConditions()
@@ -2455,28 +2638,27 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * (29) append element ColorMeasurementConditions
-	 * 
-	 * @return JDFColorMeasurementConditions the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFColorMeasurementConditions the element @ if the element already exists
 	 */
-	public JDFColorMeasurementConditions appendColorMeasurementConditions() throws JDFException
+	public JDFColorMeasurementConditions appendColorMeasurementConditions()
 	{
 		return (JDFColorMeasurementConditions) appendElementN(ElementName.COLORMEASUREMENTCONDITIONS, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorMeasurementConditions(final JDFColorMeasurementConditions refTarget)
+	public void refColorMeasurementConditions(JDFColorMeasurementConditions refTarget)
 	{
 		refElement(refTarget);
 	}
 
 	/**
 	 * (24) const get element MediaLayers
-	 * 
+	 *
 	 * @return JDFMediaLayers the element
 	 */
 	public JDFMediaLayers getMediaLayers()
@@ -2486,7 +2668,7 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * (25) getCreateMediaLayers
-	 * 
+	 *
 	 * @return JDFMediaLayers the element
 	 */
 	public JDFMediaLayers getCreateMediaLayers()
@@ -2496,18 +2678,17 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * (29) append element MediaLayers
-	 * 
-	 * @return JDFMediaLayers the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFMediaLayers the element @ if the element already exists
 	 */
-	public JDFMediaLayers appendMediaLayers() throws JDFException
+	public JDFMediaLayers appendMediaLayers()
 	{
 		return (JDFMediaLayers) appendElementN(ElementName.MEDIALAYERS, 1, null);
 	}
 
 	/**
 	 * (24) const get element HoleList
-	 * 
+	 *
 	 * @return JDFHoleList the element
 	 */
 	public JDFHoleList getHoleList()
@@ -2517,7 +2698,7 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * (25) getCreateHoleList
-	 * 
+	 *
 	 * @return JDFHoleList the element
 	 */
 	public JDFHoleList getCreateHoleList()
@@ -2527,50 +2708,49 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * (29) append element HoleList
-	 * 
-	 * @return JDFHoleList the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFHoleList the element @ if the element already exists
 	 */
-	public JDFHoleList appendHoleList() throws JDFException
+	public JDFHoleList appendHoleList()
 	{
 		return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
 	}
 
 	/**
 	 * (26) getCreateTabDimensions
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFTabDimensions the element
 	 */
-	public JDFTabDimensions getCreateTabDimensions(final int iSkip)
+	public JDFTabDimensions getCreateTabDimensions(int iSkip)
 	{
 		return (JDFTabDimensions) getCreateElement_JDFElement(ElementName.TABDIMENSIONS, null, iSkip);
 	}
 
 	/**
 	 * (27) const get element TabDimensions
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFTabDimensions the element default is getTabDimensions(0)
 	 */
-	public JDFTabDimensions getTabDimensions(final int iSkip)
+	public JDFTabDimensions getTabDimensions(int iSkip)
 	{
 		return (JDFTabDimensions) getElement(ElementName.TABDIMENSIONS, null, iSkip);
 	}
 
 	/**
 	 * Get all TabDimensions from the current element
-	 * 
+	 *
 	 * @return Collection<JDFTabDimensions>, null if none are available
 	 */
 	public Collection<JDFTabDimensions> getAllTabDimensions()
 	{
-		return getChildrenByClass(JDFTabDimensions.class, false, 0);
+		return getChildArrayByClass(JDFTabDimensions.class, false, 0);
 	}
 
 	/**
 	 * (30) append element TabDimensions
-	 * 
+	 *
 	 * @return JDFTabDimensions the element
 	 */
 	public JDFTabDimensions appendTabDimensions()
@@ -2580,39 +2760,39 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * (26) getCreateContact
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(final int iSkip)
+	public JDFContact getCreateContact(int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**
 	 * (27) const get element Contact
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element default is getContact(0)
 	 */
-	public JDFContact getContact(final int iSkip)
+	public JDFContact getContact(int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**
 	 * Get all Contact from the current element
-	 * 
+	 *
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
 	{
-		return getChildrenByClass(JDFContact.class, false, 0);
+		return getChildArrayByClass(JDFContact.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Contact
-	 * 
+	 *
 	 * @return JDFContact the element
 	 */
 	@Override
@@ -2623,51 +2803,51 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(final JDFContact refTarget)
+	public void refContact(JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}
 
 	/**
 	 * (26) getCreateIdentificationField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element
 	 */
 	@Override
-	public JDFIdentificationField getCreateIdentificationField(final int iSkip)
+	public JDFIdentificationField getCreateIdentificationField(int iSkip)
 	{
 		return (JDFIdentificationField) getCreateElement_JDFElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
 
 	/**
 	 * (27) const get element IdentificationField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element default is getIdentificationField(0)
 	 */
 	@Override
-	public JDFIdentificationField getIdentificationField(final int iSkip)
+	public JDFIdentificationField getIdentificationField(int iSkip)
 	{
 		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
 
 	/**
 	 * Get all IdentificationField from the current element
-	 * 
+	 *
 	 * @return Collection<JDFIdentificationField>, null if none are available
 	 */
 	public Collection<JDFIdentificationField> getAllIdentificationField()
 	{
-		return getChildrenByClass(JDFIdentificationField.class, false, 0);
+		return getChildArrayByClass(JDFIdentificationField.class, false, 0);
 	}
 
 	/**
 	 * (30) append element IdentificationField
-	 * 
+	 *
 	 * @return JDFIdentificationField the element
 	 */
 	@Override
@@ -2678,12 +2858,12 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refIdentificationField(final JDFIdentificationField refTarget)
+	public void refIdentificationField(JDFIdentificationField refTarget)
 	{
 		refElement(refTarget);
 	}
 
-}// end namespace JDF
+}

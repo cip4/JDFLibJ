@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -51,7 +83,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 
@@ -59,7 +90,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
  *****************************************************************************
  * class JDFAutoRingBindingParams : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoRingBindingParams extends JDFResource
@@ -105,7 +136,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoRingBindingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -116,7 +147,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoRingBindingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -128,7 +159,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoRingBindingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -137,15 +168,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	protected JDFAutoRingBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoRingBindingParams[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -233,16 +255,17 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		public static final EnumRingSystem RingSystem_4HoleEuro = new EnumRingSystem("4HoleEuro");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BinderColor ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BinderColor
+	--------------------------------------------------------------------- */
 	/**
 	 * (13) set attribute BinderColor
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBinderColor(EnumNamedColor value)
@@ -252,7 +275,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (19) get EnumNamedColor attribute BinderColor
-	 * 
+	 *
 	 * @return EnumNamedColor the value of the attribute
 	 */
 	public EnumNamedColor getBinderColor()
@@ -264,12 +287,12 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BinderColorDetails ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BinderColorDetails
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BinderColorDetails
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBinderColorDetails(String value)
@@ -279,7 +302,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (23) get String attribute BinderColorDetails
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getBinderColorDetails()
@@ -287,12 +310,12 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getAttribute(AttributeName.BINDERCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BinderMaterial ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BinderMaterial
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BinderMaterial
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBinderMaterial(String value)
@@ -302,7 +325,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (23) get String attribute BinderMaterial
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getBinderMaterial()
@@ -310,12 +333,12 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getAttribute(AttributeName.BINDERMATERIAL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BinderName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BinderName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BinderName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBinderName(String value)
@@ -325,7 +348,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (23) get String attribute BinderName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getBinderName()
@@ -333,12 +356,12 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getAttribute(AttributeName.BINDERNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RingDiameter ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RingDiameter
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RingDiameter
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRingDiameter(double value)
@@ -348,7 +371,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute RingDiameter
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getRingDiameter()
@@ -356,12 +379,12 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.RINGDIAMETER, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RingMechanic ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RingMechanic
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RingMechanic
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRingMechanic(boolean value)
@@ -371,7 +394,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute RingMechanic
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getRingMechanic()
@@ -379,12 +402,12 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getBoolAttribute(AttributeName.RINGMECHANIC, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RingShape ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RingShape
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RingShape
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRingShape(String value)
@@ -394,7 +417,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (23) get String attribute RingShape
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getRingShape()
@@ -402,12 +425,12 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getAttribute(AttributeName.RINGSHAPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RingSystem ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RingSystem
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute RingSystem
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setRingSystem(EnumRingSystem enumVar)
@@ -417,7 +440,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (9) get attribute RingSystem
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumRingSystem getRingSystem()
@@ -425,12 +448,12 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return EnumRingSystem.getEnum(getAttribute(AttributeName.RINGSYSTEM, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RivetsExposed ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RivetsExposed
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RivetsExposed
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRivetsExposed(boolean value)
@@ -440,7 +463,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute RivetsExposed
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getRivetsExposed()
@@ -448,12 +471,12 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getBoolAttribute(AttributeName.RIVETSEXPOSED, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SpineColor ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SpineColor
+	--------------------------------------------------------------------- */
 	/**
 	 * (13) set attribute SpineColor
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSpineColor(EnumNamedColor value)
@@ -463,7 +486,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (19) get EnumNamedColor attribute SpineColor
-	 * 
+	 *
 	 * @return EnumNamedColor the value of the attribute
 	 */
 	public EnumNamedColor getSpineColor()
@@ -475,12 +498,12 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SpineColorDetails ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SpineColorDetails
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SpineColorDetails
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSpineColorDetails(String value)
@@ -490,7 +513,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (23) get String attribute SpineColorDetails
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getSpineColorDetails()
@@ -498,12 +521,12 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getAttribute(AttributeName.SPINECOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SpineWidth ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SpineWidth
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SpineWidth
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSpineWidth(double value)
@@ -513,7 +536,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (17) get double attribute SpineWidth
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getSpineWidth()
@@ -521,12 +544,12 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.SPINEWIDTH, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ViewBinder ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ViewBinder
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ViewBinder
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setViewBinder(String value)
@@ -536,7 +559,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (23) get String attribute ViewBinder
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getViewBinder()
@@ -544,13 +567,14 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getAttribute(AttributeName.VIEWBINDER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element HoleMakingParams
-	 * 
+	 *
 	 * @return JDFHoleMakingParams the element
 	 */
 	public JDFHoleMakingParams getHoleMakingParams()
@@ -560,7 +584,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (25) getCreateHoleMakingParams
-	 * 
+	 *
 	 * @return JDFHoleMakingParams the element
 	 */
 	public JDFHoleMakingParams getCreateHoleMakingParams()
@@ -570,18 +594,17 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (29) append element HoleMakingParams
-	 * 
-	 * @return JDFHoleMakingParams the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFHoleMakingParams the element @ if the element already exists
 	 */
-	public JDFHoleMakingParams appendHoleMakingParams() throws JDFException
+	public JDFHoleMakingParams appendHoleMakingParams()
 	{
 		return (JDFHoleMakingParams) appendElementN(ElementName.HOLEMAKINGPARAMS, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refHoleMakingParams(JDFHoleMakingParams refTarget)
@@ -589,4 +612,4 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		refElement(refTarget);
 	}
 
-}// end namespace JDF
+}

@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -65,7 +97,7 @@ import org.cip4.jdflib.resource.process.JDFTransferCurve;
  *****************************************************************************
  * class JDFAutoPrintConditionColor : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoPrintConditionColor extends JDFElement
@@ -113,7 +145,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPrintConditionColor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -124,7 +156,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPrintConditionColor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -136,7 +168,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPrintConditionColor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -145,15 +177,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	protected JDFAutoPrintConditionColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoPrintConditionColor[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -286,16 +309,17 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		public static final EnumMediaSide Both = new EnumMediaSide("Both");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CMYK ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CMYK
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CMYK
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCMYK(JDFCMYKColor value)
@@ -305,7 +329,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (20) get JDFCMYKColor attribute CMYK
-	 * 
+	 *
 	 * @return JDFCMYKColor the value of the attribute, null if a the attribute value is not a valid to create a JDFCMYKColor
 	 */
 	public JDFCMYKColor getCMYK()
@@ -315,12 +339,12 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorBook ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ColorBook
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ColorBook
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setColorBook(String value)
@@ -330,7 +354,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (23) get String attribute ColorBook
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getColorBook()
@@ -338,12 +362,12 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		return getAttribute(AttributeName.COLORBOOK, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorBookEntry ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ColorBookEntry
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ColorBookEntry
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setColorBookEntry(String value)
@@ -353,7 +377,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (23) get String attribute ColorBookEntry
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getColorBookEntry()
@@ -361,12 +385,12 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		return getAttribute(AttributeName.COLORBOOKENTRY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorBookPrefix ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ColorBookPrefix
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ColorBookPrefix
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setColorBookPrefix(String value)
@@ -376,7 +400,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (23) get String attribute ColorBookPrefix
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getColorBookPrefix()
@@ -384,12 +408,12 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		return getAttribute(AttributeName.COLORBOOKPREFIX, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorBookSuffix ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ColorBookSuffix
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ColorBookSuffix
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setColorBookSuffix(String value)
@@ -399,7 +423,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (23) get String attribute ColorBookSuffix
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getColorBookSuffix()
@@ -407,12 +431,12 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		return getAttribute(AttributeName.COLORBOOKSUFFIX, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Density ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Density
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Density
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDensity(double value)
@@ -422,7 +446,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (17) get double attribute Density
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getDensity()
@@ -430,12 +454,12 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		return getRealAttribute(AttributeName.DENSITY, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Lab ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Lab
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Lab
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setLab(JDFLabColor value)
@@ -445,7 +469,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (20) get JDFLabColor attribute Lab
-	 * 
+	 *
 	 * @return JDFLabColor the value of the attribute, null if a the attribute value is not a valid to create a JDFLabColor
 	 */
 	public JDFLabColor getLab()
@@ -455,12 +479,12 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MappingSelection ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MappingSelection
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute MappingSelection
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setMappingSelection(EnumMappingSelection enumVar)
@@ -470,7 +494,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (9) get attribute MappingSelection
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumMappingSelection getMappingSelection()
@@ -478,12 +502,12 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		return EnumMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaSide ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaSide
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute MediaSide
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setMediaSide(EnumMediaSide enumVar)
@@ -493,7 +517,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (9) get attribute MediaSide
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumMediaSide getMediaSide()
@@ -501,12 +525,12 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		return EnumMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, "Both"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NeutralDensity ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NeutralDensity
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute NeutralDensity
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setNeutralDensity(double value)
@@ -516,7 +540,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (17) get double attribute NeutralDensity
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getNeutralDensity()
@@ -524,12 +548,12 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		return getRealAttribute(AttributeName.NEUTRALDENSITY, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintConditionName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrintConditionName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PrintConditionName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPrintConditionName(String value)
@@ -539,7 +563,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (23) get String attribute PrintConditionName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getPrintConditionName()
@@ -547,12 +571,12 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		return getAttribute(AttributeName.PRINTCONDITIONNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute sRGB ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute sRGB
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute sRGB
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setsRGB(JDFRGBColor value)
@@ -562,7 +586,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (20) get JDFRGBColor attribute sRGB
-	 * 
+	 *
 	 * @return JDFRGBColor the value of the attribute, null if a the attribute value is not a valid to create a JDFRGBColor
 	 */
 	public JDFRGBColor getsRGB()
@@ -572,13 +596,14 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateFileSpec
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
@@ -589,7 +614,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (27) const get element FileSpec
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element default is getFileSpec(0)
 	 */
@@ -600,17 +625,17 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * Get all FileSpec from the current element
-	 * 
+	 *
 	 * @return Collection<JDFFileSpec>, null if none are available
 	 */
 	public Collection<JDFFileSpec> getAllFileSpec()
 	{
-		return getChildrenByClass(JDFFileSpec.class, false, 0);
+		return getChildArrayByClass(JDFFileSpec.class, false, 0);
 	}
 
 	/**
 	 * (30) append element FileSpec
-	 * 
+	 *
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec appendFileSpec()
@@ -620,7 +645,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refFileSpec(JDFFileSpec refTarget)
@@ -630,7 +655,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (26) getCreateDeviceNColor
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDeviceNColor the element
 	 */
@@ -641,7 +666,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (27) const get element DeviceNColor
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDeviceNColor the element default is getDeviceNColor(0)
 	 */
@@ -652,17 +677,17 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * Get all DeviceNColor from the current element
-	 * 
+	 *
 	 * @return Collection<JDFDeviceNColor>, null if none are available
 	 */
 	public Collection<JDFDeviceNColor> getAllDeviceNColor()
 	{
-		return getChildrenByClass(JDFDeviceNColor.class, false, 0);
+		return getChildArrayByClass(JDFDeviceNColor.class, false, 0);
 	}
 
 	/**
 	 * (30) append element DeviceNColor
-	 * 
+	 *
 	 * @return JDFDeviceNColor the element
 	 */
 	public JDFDeviceNColor appendDeviceNColor()
@@ -672,7 +697,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (26) getCreateMedia
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFMedia the element
 	 */
@@ -683,7 +708,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (27) const get element Media
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFMedia the element default is getMedia(0)
 	 */
@@ -694,17 +719,17 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * Get all Media from the current element
-	 * 
+	 *
 	 * @return Collection<JDFMedia>, null if none are available
 	 */
 	public Collection<JDFMedia> getAllMedia()
 	{
-		return getChildrenByClass(JDFMedia.class, false, 0);
+		return getChildArrayByClass(JDFMedia.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Media
-	 * 
+	 *
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia appendMedia()
@@ -714,7 +739,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refMedia(JDFMedia refTarget)
@@ -724,7 +749,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (26) getCreateTransferCurve
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFTransferCurve the element
 	 */
@@ -735,7 +760,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (27) const get element TransferCurve
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFTransferCurve the element default is getTransferCurve(0)
 	 */
@@ -746,17 +771,17 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * Get all TransferCurve from the current element
-	 * 
+	 *
 	 * @return Collection<JDFTransferCurve>, null if none are available
 	 */
 	public Collection<JDFTransferCurve> getAllTransferCurve()
 	{
-		return getChildrenByClass(JDFTransferCurve.class, false, 0);
+		return getChildArrayByClass(JDFTransferCurve.class, false, 0);
 	}
 
 	/**
 	 * (30) append element TransferCurve
-	 * 
+	 *
 	 * @return JDFTransferCurve the element
 	 */
 	public JDFTransferCurve appendTransferCurve()
@@ -766,7 +791,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refTransferCurve(JDFTransferCurve refTarget)
@@ -774,4 +799,4 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		refElement(refTarget);
 	}
 
-}// end namespace JDF
+}

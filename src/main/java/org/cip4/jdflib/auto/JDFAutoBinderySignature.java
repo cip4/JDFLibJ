@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -52,7 +84,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
@@ -64,7 +95,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFFold;
  *****************************************************************************
  * class JDFAutoBinderySignature : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoBinderySignature extends JDFResource
@@ -72,7 +103,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[21];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[23];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BINDERYSIGNATURETYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumBinderySignatureType.getEnum(0), "Fold");
@@ -85,17 +116,19 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.BLEEDLEFT, 0x33311111, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.BLEEDRIGHT, 0x33311111, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.BLEEDTOP, 0x33311111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.FOLDCATALOG, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.FOLDLAY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumFoldLay.getEnum(0), null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.OUTSIDEGUTTER, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.STAGGERCOLUMNS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.STAGGERCONTINUOUS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.STAGGERROWS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.TRIMBOTTOM, 0x33311111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.TRIMLEFT, 0x33311111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[18] = new AtrInfoTable(AttributeName.TRIMRIGHT, 0x33311111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[19] = new AtrInfoTable(AttributeName.TRIMTOP, 0x33311111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[20] = new AtrInfoTable(AttributeName.WEBCELLALIGNMENT, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.BOTTLING, 0x33111111, AttributeInfo.EnumAttributeType.enumeration, EnumBottling.getEnum(0), null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.FOLDCATALOG, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.FOLDLAY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumFoldLay.getEnum(0), null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.OUTSIDEGUTTER, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.SPREADTYPE, 0x31111111, AttributeInfo.EnumAttributeType.enumeration, EnumSpreadType.getEnum(0), null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.STAGGERCOLUMNS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.STAGGERCONTINUOUS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.STAGGERROWS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[18] = new AtrInfoTable(AttributeName.TRIMBOTTOM, 0x33311111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[19] = new AtrInfoTable(AttributeName.TRIMLEFT, 0x33311111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[20] = new AtrInfoTable(AttributeName.TRIMRIGHT, 0x33311111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[21] = new AtrInfoTable(AttributeName.TRIMTOP, 0x33311111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[22] = new AtrInfoTable(AttributeName.WEBCELLALIGNMENT, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -120,7 +153,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoBinderySignature
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -131,7 +164,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoBinderySignature
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -143,7 +176,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoBinderySignature
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -152,15 +185,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	protected JDFAutoBinderySignature(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoBinderySignature[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -462,6 +486,71 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	}
 
 	/**
+	 * Enumeration strings for Bottling
+	 */
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumBottling extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumBottling(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumBottling getEnum(String enumName)
+		{
+			return (EnumBottling) getEnum(EnumBottling.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumBottling getEnum(int enumValue)
+		{
+			return (EnumBottling) getEnum(EnumBottling.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumBottling.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumBottling.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumBottling.class);
+		}
+
+		/**  */
+		public static final EnumBottling All = new EnumBottling("All");
+		/**  */
+		public static final EnumBottling Last = new EnumBottling("Last");
+		/**  */
+		public static final EnumBottling None = new EnumBottling("None");
+	}
+
+	/**
 	 * Enumeration strings for FoldLay
 	 */
 
@@ -536,16 +625,80 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		public static final EnumFoldLay Flip270 = new EnumFoldLay("Flip270");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/**
+	 * Enumeration strings for SpreadType
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BinderySignatureType ---------------------------------------------------------------------
+	@SuppressWarnings("rawtypes")
+	public static class EnumSpreadType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumSpreadType(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumSpreadType getEnum(String enumName)
+		{
+			return (EnumSpreadType) getEnum(EnumSpreadType.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumSpreadType getEnum(int enumValue)
+		{
+			return (EnumSpreadType) getEnum(EnumSpreadType.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSpreadType.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSpreadType.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumSpreadType.class);
+		}
+
+		/**  */
+		public static final EnumSpreadType SinglePage = new EnumSpreadType("SinglePage");
+		/**  */
+		public static final EnumSpreadType Spread = new EnumSpreadType("Spread");
+	}
+
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BinderySignatureType
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute BinderySignatureType
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setBinderySignatureType(EnumBinderySignatureType enumVar)
@@ -555,7 +708,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (9) get attribute BinderySignatureType
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumBinderySignatureType getBinderySignatureType()
@@ -563,12 +716,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return EnumBinderySignatureType.getEnum(getAttribute(AttributeName.BINDERYSIGNATURETYPE, null, "Fold"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BindingEdge ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BindingEdge
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute BindingEdge
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setBindingEdge(EnumBindingEdge enumVar)
@@ -578,7 +731,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (9) get attribute BindingEdge
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumBindingEdge getBindingEdge()
@@ -586,12 +739,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return EnumBindingEdge.getEnum(getAttribute(AttributeName.BINDINGEDGE, null, "Left"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JogEdge ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JogEdge
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute JogEdge
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setJogEdge(EnumJogEdge enumVar)
@@ -601,7 +754,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (9) get attribute JogEdge
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumJogEdge getJogEdge()
@@ -609,12 +762,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return EnumJogEdge.getEnum(getAttribute(AttributeName.JOGEDGE, null, "Top"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NumberUp ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NumberUp
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute NumberUp
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setNumberUp(JDFXYPair value)
@@ -624,7 +777,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (20) get JDFXYPair attribute NumberUp
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getNumberUp()
@@ -634,12 +787,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AlignmentReferenceWeb ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AlignmentReferenceWeb
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AlignmentReferenceWeb
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAlignmentReferenceWeb(String value)
@@ -649,7 +802,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (23) get String attribute AlignmentReferenceWeb
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getAlignmentReferenceWeb()
@@ -657,12 +810,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return getAttribute(AttributeName.ALIGNMENTREFERENCEWEB, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BindingOrientation ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BindingOrientation
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute BindingOrientation
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setBindingOrientation(EnumBindingOrientation enumVar)
@@ -672,7 +825,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (9) get attribute BindingOrientation
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumBindingOrientation getBindingOrientation()
@@ -680,12 +833,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return EnumBindingOrientation.getEnum(getAttribute(AttributeName.BINDINGORIENTATION, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BleedBottom ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BleedBottom
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BleedBottom
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBleedBottom(double value)
@@ -695,7 +848,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (17) get double attribute BleedBottom
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getBleedBottom()
@@ -703,12 +856,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return getRealAttribute(AttributeName.BLEEDBOTTOM, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BleedLeft ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BleedLeft
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BleedLeft
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBleedLeft(double value)
@@ -718,7 +871,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (17) get double attribute BleedLeft
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getBleedLeft()
@@ -726,12 +879,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return getRealAttribute(AttributeName.BLEEDLEFT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BleedRight ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BleedRight
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BleedRight
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBleedRight(double value)
@@ -741,7 +894,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (17) get double attribute BleedRight
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getBleedRight()
@@ -749,12 +902,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return getRealAttribute(AttributeName.BLEEDRIGHT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BleedTop ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BleedTop
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BleedTop
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBleedTop(double value)
@@ -764,7 +917,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (17) get double attribute BleedTop
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getBleedTop()
@@ -772,12 +925,35 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return getRealAttribute(AttributeName.BLEEDTOP, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FoldCatalog ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Bottling
+	--------------------------------------------------------------------- */
+	/**
+	 * (5) set attribute Bottling
+	 *
+	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBottling(EnumBottling enumVar)
+	{
+		setAttribute(AttributeName.BOTTLING, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	 * (9) get attribute Bottling
+	 *
+	 * @return the value of the attribute
+	 */
+	public EnumBottling getBottling()
+	{
+		return EnumBottling.getEnum(getAttribute(AttributeName.BOTTLING, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FoldCatalog
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FoldCatalog
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFoldCatalog(String value)
@@ -787,7 +963,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (23) get String attribute FoldCatalog
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getFoldCatalog()
@@ -795,12 +971,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return getAttribute(AttributeName.FOLDCATALOG, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FoldLay ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FoldLay
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute FoldLay
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setFoldLay(EnumFoldLay enumVar)
@@ -810,7 +986,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (9) get attribute FoldLay
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumFoldLay getFoldLay()
@@ -818,12 +994,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return EnumFoldLay.getEnum(getAttribute(AttributeName.FOLDLAY, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OutsideGutter ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OutsideGutter
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute OutsideGutter
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOutsideGutter(boolean value)
@@ -833,7 +1009,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (18) get boolean attribute OutsideGutter
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getOutsideGutter()
@@ -841,12 +1017,35 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return getBoolAttribute(AttributeName.OUTSIDEGUTTER, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StaggerColumns ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SpreadType
+	--------------------------------------------------------------------- */
+	/**
+	 * (5) set attribute SpreadType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSpreadType(EnumSpreadType enumVar)
+	{
+		setAttribute(AttributeName.SPREADTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	 * (9) get attribute SpreadType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EnumSpreadType getSpreadType()
+	{
+		return EnumSpreadType.getEnum(getAttribute(AttributeName.SPREADTYPE, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StaggerColumns
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute StaggerColumns
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setStaggerColumns(JDFNumberList value)
@@ -856,7 +1055,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (20) get JDFNumberList attribute StaggerColumns
-	 * 
+	 *
 	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getStaggerColumns()
@@ -866,12 +1065,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StaggerContinuous ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StaggerContinuous
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute StaggerContinuous
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setStaggerContinuous(boolean value)
@@ -881,7 +1080,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (18) get boolean attribute StaggerContinuous
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getStaggerContinuous()
@@ -889,12 +1088,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return getBoolAttribute(AttributeName.STAGGERCONTINUOUS, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StaggerRows ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StaggerRows
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute StaggerRows
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setStaggerRows(JDFNumberList value)
@@ -904,7 +1103,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (20) get JDFNumberList attribute StaggerRows
-	 * 
+	 *
 	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getStaggerRows()
@@ -914,12 +1113,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimBottom ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrimBottom
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrimBottom
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrimBottom(double value)
@@ -929,7 +1128,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (17) get double attribute TrimBottom
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getTrimBottom()
@@ -937,12 +1136,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return getRealAttribute(AttributeName.TRIMBOTTOM, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimLeft ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrimLeft
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrimLeft
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrimLeft(double value)
@@ -952,7 +1151,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (17) get double attribute TrimLeft
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getTrimLeft()
@@ -960,12 +1159,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return getRealAttribute(AttributeName.TRIMLEFT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimRight ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrimRight
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrimRight
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrimRight(double value)
@@ -975,7 +1174,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (17) get double attribute TrimRight
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getTrimRight()
@@ -983,12 +1182,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return getRealAttribute(AttributeName.TRIMRIGHT, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimTop ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrimTop
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrimTop
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrimTop(double value)
@@ -998,7 +1197,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (17) get double attribute TrimTop
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getTrimTop()
@@ -1006,12 +1205,12 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return getRealAttribute(AttributeName.TRIMTOP, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WebCellAlignment ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WebCellAlignment
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute WebCellAlignment
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setWebCellAlignment(JDFXYPair value)
@@ -1021,7 +1220,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (20) get JDFXYPair attribute WebCellAlignment
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getWebCellAlignment()
@@ -1031,13 +1230,14 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element DieLayout
-	 * 
+	 *
 	 * @return JDFDieLayout the element
 	 */
 	public JDFDieLayout getDieLayout()
@@ -1047,7 +1247,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (25) getCreateDieLayout
-	 * 
+	 *
 	 * @return JDFDieLayout the element
 	 */
 	public JDFDieLayout getCreateDieLayout()
@@ -1057,18 +1257,17 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (29) append element DieLayout
-	 * 
-	 * @return JDFDieLayout the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFDieLayout the element @ if the element already exists
 	 */
-	public JDFDieLayout appendDieLayout() throws JDFException
+	public JDFDieLayout appendDieLayout()
 	{
 		return (JDFDieLayout) appendElementN(ElementName.DIELAYOUT, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refDieLayout(JDFDieLayout refTarget)
@@ -1078,7 +1277,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (26) getCreateFold
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFold the element
 	 */
@@ -1089,7 +1288,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (27) const get element Fold
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFold the element default is getFold(0)
 	 */
@@ -1100,17 +1299,17 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * Get all Fold from the current element
-	 * 
+	 *
 	 * @return Collection<JDFFold>, null if none are available
 	 */
 	public Collection<JDFFold> getAllFold()
 	{
-		return getChildrenByClass(JDFFold.class, false, 0);
+		return getChildArrayByClass(JDFFold.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Fold
-	 * 
+	 *
 	 * @return JDFFold the element
 	 */
 	public JDFFold appendFold()
@@ -1120,7 +1319,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (26) getCreateSignatureCell
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFSignatureCell the element
 	 */
@@ -1131,7 +1330,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * (27) const get element SignatureCell
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFSignatureCell the element default is getSignatureCell(0)
 	 */
@@ -1142,17 +1341,17 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 	/**
 	 * Get all SignatureCell from the current element
-	 * 
+	 *
 	 * @return Collection<JDFSignatureCell>, null if none are available
 	 */
 	public Collection<JDFSignatureCell> getAllSignatureCell()
 	{
-		return getChildrenByClass(JDFSignatureCell.class, false, 0);
+		return getChildArrayByClass(JDFSignatureCell.class, false, 0);
 	}
 
 	/**
 	 * (30) append element SignatureCell
-	 * 
+	 *
 	 * @return JDFSignatureCell the element
 	 */
 	public JDFSignatureCell appendSignatureCell()
@@ -1160,4 +1359,4 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		return (JDFSignatureCell) appendElement(ElementName.SIGNATURECELL, null);
 	}
 
-}// end namespace JDF
+}

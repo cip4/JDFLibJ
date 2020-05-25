@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -63,7 +95,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoJMF : public JDFPool
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoJMF extends JDFPool
@@ -111,7 +143,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * Constructor for JDFAutoJMF
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -122,7 +154,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * Constructor for JDFAutoJMF
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -134,7 +166,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * Constructor for JDFAutoJMF
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -145,25 +177,17 @@ public abstract class JDFAutoJMF extends JDFPool
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoJMF[  --> " + super.toString() + " ]";
-	}
-
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AgentName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AgentName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AgentName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAgentName(String value)
@@ -173,7 +197,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (23) get String attribute AgentName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getAgentName()
@@ -181,12 +205,12 @@ public abstract class JDFAutoJMF extends JDFPool
 		return getAttribute(AttributeName.AGENTNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AgentVersion ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AgentVersion
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AgentVersion
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAgentVersion(String value)
@@ -196,7 +220,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (23) get String attribute AgentVersion
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getAgentVersion()
@@ -204,12 +228,12 @@ public abstract class JDFAutoJMF extends JDFPool
 		return getAttribute(AttributeName.AGENTVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeviceID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DeviceID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDeviceID(String value)
@@ -219,7 +243,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (23) get String attribute DeviceID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDeviceID()
@@ -227,12 +251,12 @@ public abstract class JDFAutoJMF extends JDFPool
 		return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ICSVersions ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ICSVersions
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ICSVersions
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setICSVersions(VString value)
@@ -242,7 +266,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (21) get VString attribute ICSVersions
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getICSVersions()
@@ -253,12 +277,12 @@ public abstract class JDFAutoJMF extends JDFPool
 		return vStrAttrib;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxVersion ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxVersion
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute MaxVersion
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setMaxVersion(EnumVersion enumVar)
@@ -268,7 +292,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (9) get attribute MaxVersion
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumVersion getMaxVersion()
@@ -276,12 +300,12 @@ public abstract class JDFAutoJMF extends JDFPool
 		return EnumVersion.getEnum(getAttribute(AttributeName.MAXVERSION, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResponseURL ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ResponseURL
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ResponseURL
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setResponseURL(String value)
@@ -291,7 +315,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (23) get String attribute ResponseURL
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getResponseURL()
@@ -299,12 +323,12 @@ public abstract class JDFAutoJMF extends JDFPool
 		return getAttribute(AttributeName.RESPONSEURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SenderID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SenderID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SenderID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSenderID(String value)
@@ -314,7 +338,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (23) get String attribute SenderID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getSenderID()
@@ -322,12 +346,12 @@ public abstract class JDFAutoJMF extends JDFPool
 		return getAttribute(AttributeName.SENDERID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TimeStamp ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TimeStamp
+	--------------------------------------------------------------------- */
 	/**
 	 * (11) set attribute TimeStamp
-	 * 
+	 *
 	 * @param value the value to set the attribute to or null
 	 */
 	public void setTimeStamp(JDFDate value)
@@ -342,7 +366,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (12) get JDFDate attribute TimeStamp
-	 * 
+	 *
 	 * @return JDFDate the value of the attribute
 	 */
 	public JDFDate getTimeStamp()
@@ -352,13 +376,14 @@ public abstract class JDFAutoJMF extends JDFPool
 		return ret;
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateEmployee
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -369,7 +394,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (27) const get element Employee
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element default is getEmployee(0)
 	 */
@@ -380,17 +405,17 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * Get all Employee from the current element
-	 * 
+	 *
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	public Collection<JDFEmployee> getAllEmployee()
 	{
-		return getChildrenByClass(JDFEmployee.class, false, 0);
+		return getChildArrayByClass(JDFEmployee.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Employee
-	 * 
+	 *
 	 * @return JDFEmployee the element
 	 */
 	public JDFEmployee appendEmployee()
@@ -400,7 +425,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (26) getCreateCommand
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFCommand the element
 	 */
@@ -411,7 +436,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (27) const get element Command
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFCommand the element default is getCommand(0)
 	 */
@@ -422,17 +447,17 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * Get all Command from the current element
-	 * 
+	 *
 	 * @return Collection<JDFCommand>, null if none are available
 	 */
 	public Collection<JDFCommand> getAllCommand()
 	{
-		return getChildrenByClass(JDFCommand.class, false, 0);
+		return getChildArrayByClass(JDFCommand.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Command
-	 * 
+	 *
 	 * @return JDFCommand the element
 	 */
 	public JDFCommand appendCommand()
@@ -442,7 +467,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (26) getCreateAcknowledge
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFAcknowledge the element
 	 */
@@ -453,7 +478,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (27) const get element Acknowledge
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFAcknowledge the element default is getAcknowledge(0)
 	 */
@@ -464,17 +489,17 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * Get all Acknowledge from the current element
-	 * 
+	 *
 	 * @return Collection<JDFAcknowledge>, null if none are available
 	 */
 	public Collection<JDFAcknowledge> getAllAcknowledge()
 	{
-		return getChildrenByClass(JDFAcknowledge.class, false, 0);
+		return getChildArrayByClass(JDFAcknowledge.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Acknowledge
-	 * 
+	 *
 	 * @return JDFAcknowledge the element
 	 */
 	public JDFAcknowledge appendAcknowledge()
@@ -484,7 +509,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (26) getCreateResponse
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFResponse the element
 	 */
@@ -495,7 +520,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (27) const get element Response
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFResponse the element default is getResponse(0)
 	 */
@@ -506,17 +531,17 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * Get all Response from the current element
-	 * 
+	 *
 	 * @return Collection<JDFResponse>, null if none are available
 	 */
 	public Collection<JDFResponse> getAllResponse()
 	{
-		return getChildrenByClass(JDFResponse.class, false, 0);
+		return getChildArrayByClass(JDFResponse.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Response
-	 * 
+	 *
 	 * @return JDFResponse the element
 	 */
 	public JDFResponse appendResponse()
@@ -526,7 +551,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (26) getCreateSignal
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFSignal the element
 	 */
@@ -537,7 +562,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (27) const get element Signal
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFSignal the element default is getSignal(0)
 	 */
@@ -548,17 +573,17 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * Get all Signal from the current element
-	 * 
+	 *
 	 * @return Collection<JDFSignal>, null if none are available
 	 */
 	public Collection<JDFSignal> getAllSignal()
 	{
-		return getChildrenByClass(JDFSignal.class, false, 0);
+		return getChildArrayByClass(JDFSignal.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Signal
-	 * 
+	 *
 	 * @return JDFSignal the element
 	 */
 	public JDFSignal appendSignal()
@@ -568,7 +593,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (26) getCreateQuery
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFQuery the element
 	 */
@@ -579,7 +604,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (27) const get element Query
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFQuery the element default is getQuery(0)
 	 */
@@ -590,17 +615,17 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * Get all Query from the current element
-	 * 
+	 *
 	 * @return Collection<JDFQuery>, null if none are available
 	 */
 	public Collection<JDFQuery> getAllQuery()
 	{
-		return getChildrenByClass(JDFQuery.class, false, 0);
+		return getChildArrayByClass(JDFQuery.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Query
-	 * 
+	 *
 	 * @return JDFQuery the element
 	 */
 	public JDFQuery appendQuery()
@@ -610,7 +635,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (26) getCreateRegistration
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegistration the element
 	 */
@@ -621,7 +646,7 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (27) const get element Registration
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegistration the element default is getRegistration(0)
 	 */
@@ -632,17 +657,17 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * Get all Registration from the current element
-	 * 
+	 *
 	 * @return Collection<JDFRegistration>, null if none are available
 	 */
 	public Collection<JDFRegistration> getAllRegistration()
 	{
-		return getChildrenByClass(JDFRegistration.class, false, 0);
+		return getChildArrayByClass(JDFRegistration.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Registration
-	 * 
+	 *
 	 * @return JDFRegistration the element
 	 */
 	public JDFRegistration appendRegistration()
@@ -650,4 +675,4 @@ public abstract class JDFAutoJMF extends JDFPool
 		return (JDFRegistration) appendElement(ElementName.REGISTRATION, null);
 	}
 
-}// end namespace JDF
+}

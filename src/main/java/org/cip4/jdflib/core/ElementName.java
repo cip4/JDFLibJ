@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -386,7 +386,7 @@ public final class ElementName
 	/** */
 	public static final String CONTENTLIST = "ContentList";
 	/** */
-	public static final String CONTENTMETADATA = "ContentMetaData";
+	public static final String CONTENTMETADATA = "ContentMetadata";
 	/** */
 	public static final String CONTENTOBJECT = "ContentObject";
 	/** */
@@ -1863,4 +1863,18 @@ public final class ElementName
 
 	/** */
 	public static final String YPOSITION = "YPosition";
+
+	// JDF 1.6 + 1.7 updates
+	public static final String CUTDEPTH = "CutDepth";
+	public static final String AREA = "Area";
+	public static final String AVERAGEPAGES = "AveragePages";
+	public static final String MAXPAGES = "MaxPages";
+	public static final String MINPAGES = "MinPages";
+	public static final String NUMBEROFCOPIES = "NumberOfCopies";
+	public static final String VARIABLETYPE = "VariableType";
+	public static final String VARIABLEQUALITY = "VariableQuality";
+	public static final String PREFLIGHTITEM = "PreflightItem";
+	public static final String ADDRESSLINE = "AddressLine";
+	public static final String ADHESIVENOTE = "AdhesiveNote";
+	public static final String STAPLESHAPE = AttributeName.STAPLESHAPE;
 }

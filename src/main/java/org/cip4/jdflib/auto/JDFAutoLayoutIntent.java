@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -51,7 +83,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -66,7 +97,7 @@ import org.cip4.jdflib.span.JDFXYPairSpan;
  *****************************************************************************
  * class JDFAutoLayoutIntent : public JDFIntentResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoLayoutIntent extends JDFIntentResource
@@ -74,14 +105,16 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLIOCOUNT, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumFolioCount.getEnum(0), "Booklet");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.NUMBERUP, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.FINISHEDPAGEORIENTATION, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumFinishedPageOrientation.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATEPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumRotatePolicy.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.SIDES, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33111111, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ROTATEPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumRotatePolicy.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SPREADTYPE, 0x33111111, AttributeInfo.EnumAttributeType.enumeration, EnumSpreadType.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SIDES, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), null);
 	}
 
 	@Override
@@ -111,7 +144,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoLayoutIntent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -122,7 +155,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoLayoutIntent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -134,7 +167,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoLayoutIntent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -143,15 +176,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	protected JDFAutoLayoutIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoLayoutIntent[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -281,6 +305,81 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	}
 
 	/**
+	 * Enumeration strings for Orientation
+	 */
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumOrientation extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumOrientation(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumOrientation getEnum(String enumName)
+		{
+			return (EnumOrientation) getEnum(EnumOrientation.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumOrientation getEnum(int enumValue)
+		{
+			return (EnumOrientation) getEnum(EnumOrientation.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumOrientation.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumOrientation.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumOrientation.class);
+		}
+
+		/**  */
+		public static final EnumOrientation Rotate0 = new EnumOrientation("Rotate0");
+		/**  */
+		public static final EnumOrientation Rotate90 = new EnumOrientation("Rotate90");
+		/**  */
+		public static final EnumOrientation Rotate180 = new EnumOrientation("Rotate180");
+		/**  */
+		public static final EnumOrientation Rotate270 = new EnumOrientation("Rotate270");
+		/**  */
+		public static final EnumOrientation Flip0 = new EnumOrientation("Flip0");
+		/**  */
+		public static final EnumOrientation Flip90 = new EnumOrientation("Flip90");
+		/**  */
+		public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
+		/**  */
+		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
+	}
+
+	/**
 	 * Enumeration strings for RotatePolicy
 	 */
 
@@ -345,6 +444,69 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		public static final EnumRotatePolicy RotateClockwise = new EnumRotatePolicy("RotateClockwise");
 		/**  */
 		public static final EnumRotatePolicy RotateCounterClockwise = new EnumRotatePolicy("RotateCounterClockwise");
+	}
+
+	/**
+	 * Enumeration strings for SpreadType
+	 */
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumSpreadType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumSpreadType(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumSpreadType getEnum(String enumName)
+		{
+			return (EnumSpreadType) getEnum(EnumSpreadType.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumSpreadType getEnum(int enumValue)
+		{
+			return (EnumSpreadType) getEnum(EnumSpreadType.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSpreadType.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSpreadType.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumSpreadType.class);
+		}
+
+		/**  */
+		public static final EnumSpreadType SinglePage = new EnumSpreadType("SinglePage");
+		/**  */
+		public static final EnumSpreadType Spread = new EnumSpreadType("Spread");
 	}
 
 	/**
@@ -414,16 +576,17 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		public static final EnumSides TwoSidedHeadToFoot = new EnumSides("TwoSidedHeadToFoot");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FolioCount ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FolioCount
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute FolioCount
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setFolioCount(EnumFolioCount enumVar)
@@ -433,7 +596,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (9) get attribute FolioCount
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumFolioCount getFolioCount()
@@ -441,12 +604,12 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		return EnumFolioCount.getEnum(getAttribute(AttributeName.FOLIOCOUNT, null, "Booklet"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NumberUp ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NumberUp
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute NumberUp
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setNumberUp(JDFXYPair value)
@@ -456,7 +619,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (20) get JDFXYPair attribute NumberUp
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getNumberUp()
@@ -466,12 +629,12 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FinishedPageOrientation ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FinishedPageOrientation
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute FinishedPageOrientation
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setFinishedPageOrientation(EnumFinishedPageOrientation enumVar)
@@ -481,7 +644,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (9) get attribute FinishedPageOrientation
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumFinishedPageOrientation getFinishedPageOrientation()
@@ -489,12 +652,35 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		return EnumFinishedPageOrientation.getEnum(getAttribute(AttributeName.FINISHEDPAGEORIENTATION, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RotatePolicy ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Orientation
+	--------------------------------------------------------------------- */
+	/**
+	 * (5) set attribute Orientation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOrientation(EnumOrientation enumVar)
+	{
+		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	 * (9) get attribute Orientation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EnumOrientation getOrientation()
+	{
+		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RotatePolicy
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute RotatePolicy
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setRotatePolicy(EnumRotatePolicy enumVar)
@@ -504,7 +690,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (9) get attribute RotatePolicy
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumRotatePolicy getRotatePolicy()
@@ -512,12 +698,35 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		return EnumRotatePolicy.getEnum(getAttribute(AttributeName.ROTATEPOLICY, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Sides ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SpreadType
+	--------------------------------------------------------------------- */
+	/**
+	 * (5) set attribute SpreadType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSpreadType(EnumSpreadType enumVar)
+	{
+		setAttribute(AttributeName.SPREADTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	 * (9) get attribute SpreadType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EnumSpreadType getSpreadType()
+	{
+		return EnumSpreadType.getEnum(getAttribute(AttributeName.SPREADTYPE, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Sides
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Sides
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setSides(EnumSides enumVar)
@@ -527,7 +736,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (9) get attribute Sides
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumSides getSides()
@@ -535,13 +744,14 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, null));
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateBleed
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFNumberSpan the element
 	 */
@@ -552,7 +762,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (27) const get element Bleed
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFNumberSpan the element default is getBleed(0)
 	 */
@@ -563,17 +773,17 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * Get all Bleed from the current element
-	 * 
+	 *
 	 * @return Collection<JDFNumberSpan>, null if none are available
 	 */
 	public Collection<JDFNumberSpan> getAllBleed()
 	{
-		return getChildrenByClass(JDFNumberSpan.class, false, 0);
+		return getChildArrayByClass(JDFNumberSpan.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Bleed
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan appendBleed()
@@ -583,7 +793,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element Dimensions
-	 * 
+	 *
 	 * @return JDFXYPairSpan the element
 	 */
 	public JDFXYPairSpan getDimensions()
@@ -593,7 +803,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateDimensions
-	 * 
+	 *
 	 * @return JDFXYPairSpan the element
 	 */
 	public JDFXYPairSpan getCreateDimensions()
@@ -603,18 +813,17 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Dimensions
-	 * 
-	 * @return JDFXYPairSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFXYPairSpan the element @ if the element already exists
 	 */
-	public JDFXYPairSpan appendDimensions() throws JDFException
+	public JDFXYPairSpan appendDimensions()
 	{
 		return (JDFXYPairSpan) appendElementN(ElementName.DIMENSIONS, 1, null);
 	}
 
 	/**
 	 * (24) const get element FinishedDimensions
-	 * 
+	 *
 	 * @return JDFShapeSpan the element
 	 */
 	public JDFShapeSpan getFinishedDimensions()
@@ -624,7 +833,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateFinishedDimensions
-	 * 
+	 *
 	 * @return JDFShapeSpan the element
 	 */
 	public JDFShapeSpan getCreateFinishedDimensions()
@@ -634,18 +843,17 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element FinishedDimensions
-	 * 
-	 * @return JDFShapeSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFShapeSpan the element @ if the element already exists
 	 */
-	public JDFShapeSpan appendFinishedDimensions() throws JDFException
+	public JDFShapeSpan appendFinishedDimensions()
 	{
 		return (JDFShapeSpan) appendElementN(ElementName.FINISHEDDIMENSIONS, 1, null);
 	}
 
 	/**
 	 * (24) const get element FinishedGrainDirection
-	 * 
+	 *
 	 * @return JDFSpanFinishedGrainDirection the element
 	 */
 	public JDFSpanFinishedGrainDirection getFinishedGrainDirection()
@@ -655,7 +863,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateFinishedGrainDirection
-	 * 
+	 *
 	 * @return JDFSpanFinishedGrainDirection the element
 	 */
 	public JDFSpanFinishedGrainDirection getCreateFinishedGrainDirection()
@@ -665,18 +873,17 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element FinishedGrainDirection
-	 * 
-	 * @return JDFSpanFinishedGrainDirection the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanFinishedGrainDirection the element @ if the element already exists
 	 */
-	public JDFSpanFinishedGrainDirection appendFinishedGrainDirection() throws JDFException
+	public JDFSpanFinishedGrainDirection appendFinishedGrainDirection()
 	{
 		return (JDFSpanFinishedGrainDirection) appendElementN(ElementName.FINISHEDGRAINDIRECTION, 1, null);
 	}
 
 	/**
 	 * (24) const get element Pages
-	 * 
+	 *
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getPages()
@@ -686,7 +893,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePages
-	 * 
+	 *
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreatePages()
@@ -696,18 +903,17 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Pages
-	 * 
-	 * @return JDFIntegerSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFIntegerSpan the element @ if the element already exists
 	 */
-	public JDFIntegerSpan appendPages() throws JDFException
+	public JDFIntegerSpan appendPages()
 	{
 		return (JDFIntegerSpan) appendElementN(ElementName.PAGES, 1, null);
 	}
 
 	/**
 	 * (24) const get element PageVariance
-	 * 
+	 *
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getPageVariance()
@@ -717,7 +923,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePageVariance
-	 * 
+	 *
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreatePageVariance()
@@ -727,18 +933,17 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element PageVariance
-	 * 
-	 * @return JDFIntegerSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFIntegerSpan the element @ if the element already exists
 	 */
-	public JDFIntegerSpan appendPageVariance() throws JDFException
+	public JDFIntegerSpan appendPageVariance()
 	{
 		return (JDFIntegerSpan) appendElementN(ElementName.PAGEVARIANCE, 1, null);
 	}
 
 	/**
 	 * (24) const get element Layout
-	 * 
+	 *
 	 * @return JDFLayout the element
 	 */
 	public JDFLayout getLayout()
@@ -748,7 +953,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateLayout
-	 * 
+	 *
 	 * @return JDFLayout the element
 	 */
 	public JDFLayout getCreateLayout()
@@ -758,18 +963,17 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Layout
-	 * 
-	 * @return JDFLayout the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFLayout the element @ if the element already exists
 	 */
-	public JDFLayout appendLayout() throws JDFException
+	public JDFLayout appendLayout()
 	{
 		return (JDFLayout) appendElementN(ElementName.LAYOUT, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refLayout(JDFLayout refTarget)
@@ -779,7 +983,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element SizePolicy
-	 * 
+	 *
 	 * @return JDFSpanSizePolicy the element
 	 */
 	public JDFSpanSizePolicy getSizePolicy()
@@ -789,7 +993,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateSizePolicy
-	 * 
+	 *
 	 * @return JDFSpanSizePolicy the element
 	 */
 	public JDFSpanSizePolicy getCreateSizePolicy()
@@ -799,13 +1003,12 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element SizePolicy
-	 * 
-	 * @return JDFSpanSizePolicy the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanSizePolicy the element @ if the element already exists
 	 */
-	public JDFSpanSizePolicy appendSizePolicy() throws JDFException
+	public JDFSpanSizePolicy appendSizePolicy()
 	{
 		return (JDFSpanSizePolicy) appendElementN(ElementName.SIZEPOLICY, 1, null);
 	}
 
-}// end namespace JDF
+}

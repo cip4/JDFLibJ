@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -202,6 +202,17 @@ public class JDFNotificationTest extends JDFTestCaseBase
 	{
 		final JDFEvent e = n.setEvent("id", "value", "bullshit");
 		assertEquals(e, n.getEvent());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testValidEvent()
+	{
+		final JDFEvent e = n.setEvent("id", "value", "bullshit");
+		assertEquals(e, n.getEvent());
+		assertTrue(e.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**

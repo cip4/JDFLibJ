@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -57,7 +89,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFLoc;
  *****************************************************************************
  * class JDFAutoMatrixState : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoMatrixState extends JDFResource
@@ -99,7 +131,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoMatrixState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -110,7 +142,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoMatrixState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -122,7 +154,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoMatrixState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -131,15 +163,6 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	protected JDFAutoMatrixState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoMatrixState[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -153,16 +176,17 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return bRet;
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DefaultValue
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DefaultValue
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDefaultValue(JDFMatrix value)
@@ -172,7 +196,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * (20) get JDFMatrix attribute DefaultValue
-	 * 
+	 *
 	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getDefaultValue()
@@ -182,12 +206,12 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CurrentValue
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CurrentValue
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCurrentValue(JDFMatrix value)
@@ -197,7 +221,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * (20) get JDFMatrix attribute CurrentValue
-	 * 
+	 *
 	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getCurrentValue()
@@ -207,12 +231,12 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedRotateMod ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AllowedRotateMod
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AllowedRotateMod
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAllowedRotateMod(double value)
@@ -222,7 +246,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * (17) get double attribute AllowedRotateMod
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getAllowedRotateMod()
@@ -230,12 +254,12 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return getRealAttribute(AttributeName.ALLOWEDROTATEMOD, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedShift ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AllowedShift
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AllowedShift
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAllowedShift(String value)
@@ -245,7 +269,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * (23) get String attribute AllowedShift
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getAllowedShift()
@@ -253,12 +277,12 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return getAttribute(AttributeName.ALLOWEDSHIFT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedTransforms ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AllowedTransforms
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AllowedTransforms
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAllowedTransforms(String value)
@@ -268,7 +292,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * (23) get String attribute AllowedTransforms
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getAllowedTransforms()
@@ -276,12 +300,12 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return getAttribute(AttributeName.ALLOWEDTRANSFORMS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentRotateMod ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PresentRotateMod
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PresentRotateMod
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPresentRotateMod(double value)
@@ -291,7 +315,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * (17) get double attribute PresentRotateMod
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getPresentRotateMod()
@@ -299,12 +323,12 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return getRealAttribute(AttributeName.PRESENTROTATEMOD, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentShift ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PresentShift
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PresentShift
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPresentShift(String value)
@@ -314,7 +338,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * (23) get String attribute PresentShift
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getPresentShift()
@@ -322,12 +346,12 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return getAttribute(AttributeName.PRESENTSHIFT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentTransforms ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PresentTransforms
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PresentTransforms
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPresentTransforms(String value)
@@ -337,7 +361,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * (23) get String attribute PresentTransforms
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getPresentTransforms()
@@ -345,13 +369,14 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return getAttribute(AttributeName.PRESENTTRANSFORMS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateLoc
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
@@ -362,7 +387,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * (27) const get element Loc
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element default is getLoc(0)
 	 */
@@ -373,17 +398,17 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * Get all Loc from the current element
-	 * 
+	 *
 	 * @return Collection<JDFLoc>, null if none are available
 	 */
 	public Collection<JDFLoc> getAllLoc()
 	{
-		return getChildrenByClass(JDFLoc.class, false, 0);
+		return getChildArrayByClass(JDFLoc.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Loc
-	 * 
+	 *
 	 * @return JDFLoc the element
 	 */
 	public JDFLoc appendLoc()
@@ -393,7 +418,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * (26) getCreateValue
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFValue the element
 	 */
@@ -404,7 +429,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * (27) const get element Value
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFValue the element default is getValue(0)
 	 */
@@ -415,17 +440,17 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * Get all Value from the current element
-	 * 
+	 *
 	 * @return Collection<JDFValue>, null if none are available
 	 */
 	public Collection<JDFValue> getAllValue()
 	{
-		return getChildrenByClass(JDFValue.class, false, 0);
+		return getChildArrayByClass(JDFValue.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Value
-	 * 
+	 *
 	 * @return JDFValue the element
 	 */
 	public JDFValue appendValue()
@@ -433,4 +458,4 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return (JDFValue) appendElement(ElementName.VALUE, null);
 	}
 
-}// end namespace JDF
+}

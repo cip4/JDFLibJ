@@ -114,6 +114,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.ADDRESS, JDFLIB + "resource.process.JDFAddress");
 		sm_PackageNames.put(ElementName.ADHESIVEBINDING, JDFLIB + "resource.process.postpress.JDFAdhesiveBinding");
 		sm_PackageNames.put(ElementName.ADHESIVEBINDINGPARAMS, JDFLIB + "resource.JDFAdhesiveBindingParams");
+		sm_PackageNames.put(ElementName.ADHESIVENOTE, JDFLIB + "resource.intent.JDFAdhesiveNote");
 		sm_PackageNames.put(ElementName.ADVANCEDPARAMS, JDFLIB + "resource.process.JDFAdvancedParams");
 		sm_PackageNames.put(ElementName.AMOUNT, INTEGER_SPAN);
 		sm_PackageNames.put(ElementName.AMOUNTPOOL, JDFLIB + "pool.JDFAmountPool");
@@ -140,6 +141,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.AUTHENTICATIONQUPARAMS, JDFLIB + "jmf.JDFAuthenticationQuParams");
 		sm_PackageNames.put(ElementName.AUTHENTICATIONRESP, JDFLIB + "jmf.JDFAuthenticationResp");
 		sm_PackageNames.put(ElementName.AUTOMATEDOVERPRINTPARAMS, JDFLIB + "resource.process.JDFAutomatedOverPrintParams");
+
 		sm_PackageNames.put(ElementName.BACKCOATINGS, JDFLIB + "span.JDFSpanCoatings");
 		sm_PackageNames.put(ElementName.BACKCOVERCOLOR, SPAN_NAMED_COLOR);
 		sm_PackageNames.put(ElementName.BACKCOVERCOLORDETAILS, STRING_SPAN);
@@ -224,6 +226,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.COLORCORRECTIONPARAMS, JDFLIB + "resource.process.prepress.JDFColorCorrectionParams");
 		sm_PackageNames.put(ElementName.COLORICCSTANDARD, STRING_SPAN);
 		sm_PackageNames.put(ElementName.COLORINTENT, JDFLIB + "resource.intent.JDFColorIntent");
+		sm_PackageNames.put(ElementName.COLORMEASUREMENT, JDFLIB + "resource.JDFColorMeasurement");
 		sm_PackageNames.put(ElementName.COLORMEASUREMENTCONDITIONS, JDFLIB + "resource.JDFColorMeasurementConditions");
 		sm_PackageNames.put(ElementName.COLORNAME, SPAN_NAMED_COLOR);
 		sm_PackageNames.put(ElementName.COLORNAMEDETAILS, STRING_SPAN);
@@ -276,6 +279,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.CYLINDERLAYOUT, JDFLIB + "resource.process.JDFCylinderLayout");
 		sm_PackageNames.put(ElementName.CYLINDERLAYOUTPREPARATIONPARAMS, JDFLIB + "resource.process.JDFCylinderLayoutPreparationParams");
 		sm_PackageNames.put(ElementName.CYLINDERPOSITION, JDFLIB + "resource.process.JDFCylinderPosition");
+
 		sm_PackageNames.put(ElementName.DATETIMEEVALUATION, JDFLIB + "resource.devicecapability.JDFDateTimeEvaluation");
 		sm_PackageNames.put(ElementName.DATETIMESTATE, JDFLIB + "resource.devicecapability.JDFDateTimeState");
 		sm_PackageNames.put(ElementName.DCTPARAMS, JDFLIB + "resource.process.JDFDCTParams");
@@ -283,6 +287,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.DBRULES, JDFLIB + "resource.process.JDFDBRules");
 		sm_PackageNames.put(ElementName.DBSCHEMA, JDFLIB + "resource.JDFDBSchema");
 		sm_PackageNames.put(ElementName.DBSELECTION, JDFLIB + "resource.process.JDFDBSelection");
+		sm_PackageNames.put(ElementName.DEFECT, JDFLIB + "resource.JDFDefect");
 		sm_PackageNames.put(ElementName.DELETED, JDFLIB + "resource.JDFDeleted");
 		sm_PackageNames.put(ElementName.DELIVERYCHARGE, JDFLIB + "span.JDFSpanDeliveryCharge");
 		sm_PackageNames.put(ElementName.DELIVERYINTENT, JDFLIB + "resource.intent.JDFDeliveryIntent");
@@ -395,6 +400,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.GANGCMDFILTER, JDFLIB + "jmf.JDFGangCmdFilter");
 		sm_PackageNames.put(ElementName.GANGELEMENT, JDFLIB + "resource.process.JDFGangElement");
 		sm_PackageNames.put(ElementName.GANGINFO, JDFLIB + "jmf.JDFGangInfo");
+		sm_PackageNames.put(ElementName.GANGPREPARATIONPARAMS, JDFLIB + "resource.JDFGangPreparationParams");
 		sm_PackageNames.put(ElementName.GANGQUFILTER, JDFLIB + "jmf.JDFGangQuFilter");
 		sm_PackageNames.put(ElementName.GANGSOURCE, JDFLIB + "resource.JDFGangSource");
 		sm_PackageNames.put(ElementName.GATHERINGPARAMS, JDFLIB + "resource.JDFGatheringParams");
@@ -407,6 +413,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.GLUINGPARAMS, JDFLIB + "resource.JDFGluingParams");
 		sm_PackageNames.put(ElementName.GRADE, INTEGER_SPAN);
 		sm_PackageNames.put(ElementName.GRAINDIRECTION, JDFLIB + "span.JDFSpanGrainDirection");
+
 		sm_PackageNames.put(ElementName.HALFTONE, OPTION_SPAN);
 		sm_PackageNames.put(ElementName.HARDCOVERBINDING, JDFLIB + "resource.JDFHardCoverBinding");
 		sm_PackageNames.put(ElementName.HEADBANDAPPLICATIONPARAMS, JDFLIB + "resource.JDFHeadBandApplicationParams");
@@ -457,6 +464,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.INSERTINGPARAMS, JDFLIB + "resource.JDFInsertingParams");
 		sm_PackageNames.put(ElementName.INSERTLIST, JDFLIB + "resource.JDFInsertList");
 		sm_PackageNames.put(ElementName.INSERTSHEET, JDFLIB + "resource.process.JDFInsertSheet");
+		sm_PackageNames.put(ElementName.INSPECTION, JDFLIB + "resource.JDFInspection");
 		sm_PackageNames.put(ElementName.INTEGEREVALUATION, JDFLIB + "resource.devicecapability.JDFIntegerEvaluation");
 		sm_PackageNames.put(ElementName.INTEGERSTATE, JDFLIB + "resource.devicecapability.JDFIntegerState");
 		sm_PackageNames.put(ElementName.INTENTRESOURCE, JDFLIB + "resource.intent.JDFIntentResource");
@@ -480,7 +488,9 @@ class DocumentData
 		sm_PackageNames.put(ElementName.JOBPHASE, JDFLIB + "jmf.JDFJobPhase");
 		sm_PackageNames.put(ElementName.JOBSHEET, JDFLIB + "resource.JDFJobSheet");
 		sm_PackageNames.put(ElementName.JPEG2000PARAMS, JDFLIB + "resource.process.JDFJPEG2000Params");
+
 		sm_PackageNames.put(ElementName.KNOWNMSGQUPARAMS, JDFLIB + "jmf.JDFKnownMsgQuParams");
+
 		sm_PackageNames.put(ElementName.LABELINGPARAMS, JDFLIB + "resource.JDFLabelingParams");
 		sm_PackageNames.put(ElementName.LAMINATED, OPTION_SPAN);
 		sm_PackageNames.put(ElementName.LAMINATINGINTENT, JDFLIB + "resource.intent.JDFLaminatingIntent");
@@ -543,8 +553,10 @@ class DocumentData
 		sm_PackageNames.put(ElementName.MODULESTATUS, JDFLIB + "resource.JDFModuleStatus");
 		sm_PackageNames.put(ElementName.MOVERESOURCE, JDFLIB + "jmf.JDFMoveResource");
 		sm_PackageNames.put(ElementName.MSGFILTER, JDFLIB + "jmf.JDFMsgFilter");
+
 		sm_PackageNames.put(ElementName.NAMEEVALUATION, JDFLIB + "resource.devicecapability.JDFNameEvaluation");
 		sm_PackageNames.put(ElementName.NAMESTATE, JDFLIB + "resource.devicecapability.JDFNameState");
+		sm_PackageNames.put(ElementName.NETWORKHEADER, JDFLIB + "resource.JDFNetworkHeader");
 		sm_PackageNames.put(ElementName.NEWCOMMENT, JDFLIB + "jmf.JDFNewComment");
 		sm_PackageNames.put(ElementName.NEWJDFCMDPARAMS, JDFLIB + "jmf.JDFNewJDFCmdParams");
 		sm_PackageNames.put(ElementName.NEWJDFQUPARAMS, JDFLIB + "jmf.JDFNewJDFQuParams");
@@ -602,6 +614,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.PART, JDFLIB + "resource.JDFPart");
 		sm_PackageNames.put(ElementName.PARTAMOUNT, JDFLIB + "core.JDFPartAmount");
 		sm_PackageNames.put(ElementName.PARTSTATUS, JDFLIB + "core.JDFPartStatus");
+		sm_PackageNames.put(ElementName.PATCH, JDFLIB + "resource.JDFPatch");
 		sm_PackageNames.put(ElementName.PAYMENT, JDFLIB + "resource.JDFPayment");
 		sm_PackageNames.put(ElementName.PAYTERM, JDF_COMMENT);
 		sm_PackageNames.put(ElementName.PDFINTERPRETINGPARAMS, JDFLIB + "resource.JDFPDFInterpretingParams");
@@ -633,6 +646,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.PREFLIGHTDETAIL, JDFLIB + "resource.process.prepress.JDFPreflightDetail");
 		sm_PackageNames.put(ElementName.PREFLIGHTINSTANCE, JDFLIB + "resource.process.prepress.JDFPreflightInstance");
 		sm_PackageNames.put(ElementName.PREFLIGHTINSTANCEDETAIL, JDFLIB + "resource.process.prepress.JDFPreflightInstanceDetail");
+		sm_PackageNames.put(ElementName.PREFLIGHTITEM, JDFLIB + "resource.intent.JDFPreflightItem");
 		sm_PackageNames.put(ElementName.PREFLIGHTINVENTORY, JDFLIB + "resource.process.prepress.JDFPreflightInventory");
 		sm_PackageNames.put(ElementName.PREFLIGHTPARAMS, JDFLIB + "resource.process.JDFPreflightParams");
 		sm_PackageNames.put(ElementName.PREFLIGHTPROFILE, JDFLIB + "resource.process.prepress.JDFPreflightProfile");
@@ -655,7 +669,6 @@ class DocumentData
 		sm_PackageNames.put(ElementName.PROCESSRUN, JDFLIB + "resource.JDFProcessRun");
 		sm_PackageNames.put(ElementName.PRODUCTIONINTENT, JDFLIB + "resource.intent.JDFProductionIntent");
 		sm_PackageNames.put(ElementName.PRODUCTIONPATH, JDFLIB + "resource.process.JDFProductionPath");
-
 		sm_PackageNames.put(ElementName.PRODUCTIONSUBPATH, JDFLIB + "resource.process.JDFProductionSubPath");
 		sm_PackageNames.put(ElementName.PROOFINGINTENT, JDFLIB + "resource.intent.JDFProofingIntent");
 		sm_PackageNames.put(ElementName.PROOFINGPARAMS, JDFLIB + "resource.process.JDFProofingParams");
@@ -665,6 +678,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.PRRULEATTR, JDFLIB + "resource.process.JDFPRRuleAttr");
 		sm_PackageNames.put(ElementName.PSTOPDFCONVERSIONPARAMS, JDFLIB + "resource.process.prepress.JDFPSToPDFConversionParams");
 		sm_PackageNames.put(ElementName.PUBLISHINGINTENT, JDFLIB + "resource.intent.JDFPublishingIntent");
+
 		sm_PackageNames.put(ElementName.QUALITYCONTROLPARAMS, JDFLIB + "resource.process.JDFQualityControlParams");
 		sm_PackageNames.put(ElementName.QUALITYCONTROLRESULT, JDFLIB + "resource.process.JDFQualityControlResult");
 		sm_PackageNames.put(ElementName.QUALITYMEASUREMENT, JDFLIB + "resource.process.JDFQualityMeasurement");
@@ -690,6 +704,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.REGISTERMARK, JDFLIB + "resource.process.JDFRegisterMark");
 		sm_PackageNames.put(ElementName.REGISTERRIBBON, JDFLIB + "resource.JDFRegisterRibbon");
 		sm_PackageNames.put(ElementName.REGISTRATION, JDFLIB + "jmf.JDFRegistration");
+		sm_PackageNames.put(ElementName.REGISTRATIONQUALITY, JDFLIB + "resource.JDFRegistrationQuality");
 		sm_PackageNames.put(ElementName.REMOVED, JDFLIB + "resource.JDFRemoved");
 		sm_PackageNames.put(ElementName.REMOVELINK, JDFLIB + "jmf.JDFRemoveLink");
 		sm_PackageNames.put(ElementName.REMOVEQUEUEENTRYPARAMS, JDFLIB + "jmf.JDFRemoveQueueEntryParams");
@@ -740,6 +755,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.SEPARATIONCONTROLPARAMS, JDFLIB + "resource.process.JDFSeparationControlParams");
 		sm_PackageNames.put(ElementName.SEPARATIONLIST, SEPARATION_LIST);
 		sm_PackageNames.put(ElementName.SEPARATIONSPEC, JDFLIB + "resource.process.JDFSeparationSpec");
+		sm_PackageNames.put(ElementName.SEPARATIONTINT, JDFLIB + "resource.JDFSeparationTint");
 		sm_PackageNames.put(ElementName.SERVICELEVEL, STRING_SPAN);
 		sm_PackageNames.put(ElementName.SET, JDFLIB + "resource.devicecapability.JDFset");
 		// "Shape" is context sensitive, see handleOtherElements() and
@@ -862,6 +878,7 @@ class DocumentData
 
 		sm_PackageNames.put(ElementName.VALUE, JDFLIB + "resource.JDFValue");
 		sm_PackageNames.put(ElementName.VALUELOC, JDFLIB + "resource.devicecapability.JDFValueLoc");
+		sm_PackageNames.put(ElementName.VARIABLEINTENT, JDFLIB + "resource.intent.JDFVariableIntent");
 		sm_PackageNames.put(ElementName.VARNISHINGPARAMS, JDFLIB + "resource.JDFVarnishingParams");
 		sm_PackageNames.put(ElementName.VELOBINDING, JDFLIB + "resource.process.postpress.JDFVeloBinding");
 		sm_PackageNames.put(ElementName.VERIFICATIONPARAMS, JDFLIB + "resource.JDFVerificationParams");

@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -51,7 +83,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoComment : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoComment extends JDFElement
@@ -59,7 +91,7 @@ public abstract class JDFAutoComment extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.AGENTNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
@@ -71,7 +103,8 @@ public abstract class JDFAutoComment extends JDFElement
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.LANGUAGE, 0x33333333, AttributeInfo.EnumAttributeType.language, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.NAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Description");
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.PATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x33333111, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PERSONALID, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x33333111, AttributeInfo.EnumAttributeType.dateTime, null, null);
 	}
 
 	@Override
@@ -82,7 +115,7 @@ public abstract class JDFAutoComment extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoComment
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -93,7 +126,7 @@ public abstract class JDFAutoComment extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoComment
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -105,7 +138,7 @@ public abstract class JDFAutoComment extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoComment
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -116,25 +149,17 @@ public abstract class JDFAutoComment extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoComment[  --> " + super.toString() + " ]";
-	}
-
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AgentName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AgentName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AgentName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAgentName(String value)
@@ -144,7 +169,7 @@ public abstract class JDFAutoComment extends JDFElement
 
 	/**
 	 * (23) get String attribute AgentName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getAgentName()
@@ -152,12 +177,12 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.AGENTNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AgentVersion ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AgentVersion
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AgentVersion
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAgentVersion(String value)
@@ -167,7 +192,7 @@ public abstract class JDFAutoComment extends JDFElement
 
 	/**
 	 * (23) get String attribute AgentVersion
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getAgentVersion()
@@ -175,12 +200,12 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.AGENTVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Attribute ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Attribute
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Attribute
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAttributeJDF(String value)
@@ -190,7 +215,7 @@ public abstract class JDFAutoComment extends JDFElement
 
 	/**
 	 * (22) get String attribute Attribute
-	 * 
+	 *
 	 * @return String the value of the attribute
 	 */
 	public String getAttributeJDF()
@@ -198,12 +223,12 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.ATTRIBUTE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Author ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Author
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Author
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAuthor(String value)
@@ -213,7 +238,7 @@ public abstract class JDFAutoComment extends JDFElement
 
 	/**
 	 * (23) get String attribute Author
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getAuthor()
@@ -221,12 +246,12 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.AUTHOR, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Box ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Box
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Box
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBox(JDFRectangle value)
@@ -236,7 +261,7 @@ public abstract class JDFAutoComment extends JDFElement
 
 	/**
 	 * (20) get JDFRectangle attribute Box
-	 * 
+	 *
 	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getBox()
@@ -246,12 +271,12 @@ public abstract class JDFAutoComment extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	@Override
@@ -262,7 +287,7 @@ public abstract class JDFAutoComment extends JDFElement
 
 	/**
 	 * (23) get String attribute ID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	@Override
@@ -271,12 +296,12 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Language ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Language
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Language
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setLanguage(String value)
@@ -286,7 +311,7 @@ public abstract class JDFAutoComment extends JDFElement
 
 	/**
 	 * (23) get String attribute Language
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getLanguage()
@@ -294,12 +319,12 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.LANGUAGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Name
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Name
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setName(String value)
@@ -309,7 +334,7 @@ public abstract class JDFAutoComment extends JDFElement
 
 	/**
 	 * (23) get String attribute Name
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getName()
@@ -317,12 +342,12 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.NAME, null, "Description");
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Path ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Path
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Path
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPath(String value)
@@ -332,7 +357,7 @@ public abstract class JDFAutoComment extends JDFElement
 
 	/**
 	 * (23) get String attribute Path
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getPath()
@@ -340,12 +365,35 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.PATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TimeStamp ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PersonalID
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute PersonalID
+	 *
+	 * @param value the value to set the attribute to
 	 */
+	public void setPersonalID(String value)
+	{
+		setAttribute(AttributeName.PERSONALID, value, null);
+	}
+
+	/**
+	 * (23) get String attribute PersonalID
+	 *
+	 * @return the value of the attribute
+	 */
+	public String getPersonalID()
+	{
+		return getAttribute(AttributeName.PERSONALID, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TimeStamp
+	--------------------------------------------------------------------- */
 	/**
 	 * (11) set attribute TimeStamp
-	 * 
+	 *
 	 * @param value the value to set the attribute to or null
 	 */
 	public void setTimeStamp(JDFDate value)
@@ -360,7 +408,7 @@ public abstract class JDFAutoComment extends JDFElement
 
 	/**
 	 * (12) get JDFDate attribute TimeStamp
-	 * 
+	 *
 	 * @return JDFDate the value of the attribute
 	 */
 	public JDFDate getTimeStamp()
@@ -370,4 +418,4 @@ public abstract class JDFAutoComment extends JDFElement
 		return ret;
 	}
 
-}// end namespace JDF
+}

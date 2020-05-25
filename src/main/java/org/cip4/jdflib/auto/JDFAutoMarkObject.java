@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -53,7 +85,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
@@ -77,7 +108,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
  *****************************************************************************
  * class JDFAutoMarkObject : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoMarkObject extends JDFElement
@@ -144,7 +175,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoMarkObject
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -155,7 +186,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoMarkObject
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -167,7 +198,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoMarkObject
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -176,15 +207,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	protected JDFAutoMarkObject(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoMarkObject[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -327,16 +349,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		public static final EnumType Mark = new EnumType("Mark");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Ord ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Ord
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Ord
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOrd(int value)
@@ -346,7 +369,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (15) get int attribute Ord
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getOrd()
@@ -354,12 +377,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return getIntAttribute(AttributeName.ORD, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceClipPath ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SourceClipPath
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SourceClipPath
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSourceClipPath(String value)
@@ -369,7 +392,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (23) get String attribute SourceClipPath
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getSourceClipPath()
@@ -377,12 +400,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return getAttribute(AttributeName.SOURCECLIPPATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimClipPath ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrimClipPath
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrimClipPath
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrimClipPath(String value)
@@ -392,7 +415,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (23) get String attribute TrimClipPath
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getTrimClipPath()
@@ -400,12 +423,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return getAttribute(AttributeName.TRIMCLIPPATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LogicalStackOrd ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LogicalStackOrd
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute LogicalStackOrd
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setLogicalStackOrd(int value)
@@ -415,7 +438,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (15) get int attribute LogicalStackOrd
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getLogicalStackOrd()
@@ -423,12 +446,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return getIntAttribute(AttributeName.LOGICALSTACKORD, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LayoutElementPageNum ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LayoutElementPageNum
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute LayoutElementPageNum
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setLayoutElementPageNum(int value)
@@ -438,7 +461,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (15) get int attribute LayoutElementPageNum
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getLayoutElementPageNum()
@@ -446,12 +469,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return getIntAttribute(AttributeName.LAYOUTELEMENTPAGENUM, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ContentRef ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ContentRef
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ContentRef
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setContentRef(String value)
@@ -461,7 +484,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (23) get String attribute ContentRef
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getContentRef()
@@ -469,12 +492,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return getAttribute(AttributeName.CONTENTREF, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipBoxFormat ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClipBoxFormat
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ClipBoxFormat
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setClipBoxFormat(String value)
@@ -484,7 +507,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (23) get String attribute ClipBoxFormat
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getClipBoxFormat()
@@ -492,12 +515,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return getAttribute(AttributeName.CLIPBOXFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Anchor
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Anchor
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setAnchor(EnumAnchor enumVar)
@@ -507,7 +530,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (9) get attribute Anchor
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumAnchor getAnchor()
@@ -515,12 +538,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OrdID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OrdID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute OrdID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOrdID(int value)
@@ -530,7 +553,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (15) get int attribute OrdID
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getOrdID()
@@ -538,12 +561,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return getIntAttribute(AttributeName.ORDID, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Type
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Type
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setType(EnumType enumVar)
@@ -553,7 +576,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (9) get attribute Type
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumType getType()
@@ -561,12 +584,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipBox ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClipBox
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ClipBox
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setClipBox(JDFRectangle value)
@@ -576,7 +599,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (20) get JDFRectangle attribute ClipBox
-	 * 
+	 *
 	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getClipBox()
@@ -586,12 +609,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CompensationCTMTemplate ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CompensationCTMTemplate
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CompensationCTMTemplate
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCompensationCTMTemplate(String value)
@@ -601,7 +624,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (23) get String attribute CompensationCTMTemplate
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getCompensationCTMTemplate()
@@ -609,12 +632,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return getAttribute(AttributeName.COMPENSATIONCTMTEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LayerID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LayerID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute LayerID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setLayerID(int value)
@@ -624,7 +647,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (15) get int attribute LayerID
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getLayerID()
@@ -632,12 +655,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return getIntAttribute(AttributeName.LAYERID, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimCTM ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrimCTM
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrimCTM
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrimCTM(JDFMatrix value)
@@ -647,7 +670,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (20) get JDFMatrix attribute TrimCTM
-	 * 
+	 *
 	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getTrimCTM()
@@ -657,12 +680,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipPath ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClipPath
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ClipPath
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setClipPath(String value)
@@ -672,7 +695,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (23) get String attribute ClipPath
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getClipPath()
@@ -680,12 +703,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return getAttribute(AttributeName.CLIPPATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HalfTonePhaseOrigin ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute HalfTonePhaseOrigin
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute HalfTonePhaseOrigin
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setHalfTonePhaseOrigin(JDFXYPair value)
@@ -695,7 +718,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (20) get JDFXYPair attribute HalfTonePhaseOrigin
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getHalfTonePhaseOrigin()
@@ -705,12 +728,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CompensationCTMFormat ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CompensationCTMFormat
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CompensationCTMFormat
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCompensationCTMFormat(String value)
@@ -720,7 +743,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (23) get String attribute CompensationCTMFormat
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getCompensationCTMFormat()
@@ -728,12 +751,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return getAttribute(AttributeName.COMPENSATIONCTMFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AssemblyIDs
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AssemblyIDs
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAssemblyIDs(VString value)
@@ -743,7 +766,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (21) get VString attribute AssemblyIDs
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getAssemblyIDs()
@@ -754,12 +777,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return vStrAttrib;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CTM
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CTM
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCTM(JDFMatrix value)
@@ -769,7 +792,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (20) get JDFMatrix attribute CTM
-	 * 
+	 *
 	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getCTM()
@@ -779,12 +802,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipBoxTemplate ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClipBoxTemplate
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ClipBoxTemplate
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setClipBoxTemplate(String value)
@@ -794,7 +817,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (23) get String attribute ClipBoxTemplate
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getClipBoxTemplate()
@@ -802,12 +825,12 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return getAttribute(AttributeName.CLIPBOXTEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimSize ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrimSize
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrimSize
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrimSize(JDFXYPair value)
@@ -817,7 +840,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (20) get JDFXYPair attribute TrimSize
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getTrimSize()
@@ -827,13 +850,14 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateCIELABMeasuringField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFCIELABMeasuringField the element
 	 */
@@ -844,7 +868,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (27) const get element CIELABMeasuringField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFCIELABMeasuringField the element default is getCIELABMeasuringField(0)
 	 */
@@ -855,17 +879,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * Get all CIELABMeasuringField from the current element
-	 * 
+	 *
 	 * @return Collection<JDFCIELABMeasuringField>, null if none are available
 	 */
 	public Collection<JDFCIELABMeasuringField> getAllCIELABMeasuringField()
 	{
-		return getChildrenByClass(JDFCIELABMeasuringField.class, false, 0);
+		return getChildArrayByClass(JDFCIELABMeasuringField.class, false, 0);
 	}
 
 	/**
 	 * (30) append element CIELABMeasuringField
-	 * 
+	 *
 	 * @return JDFCIELABMeasuringField the element
 	 */
 	public JDFCIELABMeasuringField appendCIELABMeasuringField()
@@ -875,7 +899,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refCIELABMeasuringField(JDFCIELABMeasuringField refTarget)
@@ -885,7 +909,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (26) getCreateColorControlStrip
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorControlStrip the element
 	 */
@@ -896,7 +920,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (27) const get element ColorControlStrip
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorControlStrip the element default is getColorControlStrip(0)
 	 */
@@ -907,17 +931,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * Get all ColorControlStrip from the current element
-	 * 
+	 *
 	 * @return Collection<JDFColorControlStrip>, null if none are available
 	 */
 	public Collection<JDFColorControlStrip> getAllColorControlStrip()
 	{
-		return getChildrenByClass(JDFColorControlStrip.class, false, 0);
+		return getChildArrayByClass(JDFColorControlStrip.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ColorControlStrip
-	 * 
+	 *
 	 * @return JDFColorControlStrip the element
 	 */
 	public JDFColorControlStrip appendColorControlStrip()
@@ -927,7 +951,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refColorControlStrip(JDFColorControlStrip refTarget)
@@ -937,7 +961,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (26) getCreateCutMark
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFCutMark the element
 	 */
@@ -948,7 +972,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (27) const get element CutMark
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFCutMark the element default is getCutMark(0)
 	 */
@@ -959,17 +983,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * Get all CutMark from the current element
-	 * 
+	 *
 	 * @return Collection<JDFCutMark>, null if none are available
 	 */
 	public Collection<JDFCutMark> getAllCutMark()
 	{
-		return getChildrenByClass(JDFCutMark.class, false, 0);
+		return getChildArrayByClass(JDFCutMark.class, false, 0);
 	}
 
 	/**
 	 * (30) append element CutMark
-	 * 
+	 *
 	 * @return JDFCutMark the element
 	 */
 	public JDFCutMark appendCutMark()
@@ -979,7 +1003,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refCutMark(JDFCutMark refTarget)
@@ -989,7 +1013,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (26) getCreateDensityMeasuringField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDensityMeasuringField the element
 	 */
@@ -1000,7 +1024,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (27) const get element DensityMeasuringField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDensityMeasuringField the element default is getDensityMeasuringField(0)
 	 */
@@ -1011,17 +1035,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * Get all DensityMeasuringField from the current element
-	 * 
+	 *
 	 * @return Collection<JDFDensityMeasuringField>, null if none are available
 	 */
 	public Collection<JDFDensityMeasuringField> getAllDensityMeasuringField()
 	{
-		return getChildrenByClass(JDFDensityMeasuringField.class, false, 0);
+		return getChildArrayByClass(JDFDensityMeasuringField.class, false, 0);
 	}
 
 	/**
 	 * (30) append element DensityMeasuringField
-	 * 
+	 *
 	 * @return JDFDensityMeasuringField the element
 	 */
 	public JDFDensityMeasuringField appendDensityMeasuringField()
@@ -1031,7 +1055,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refDensityMeasuringField(JDFDensityMeasuringField refTarget)
@@ -1041,7 +1065,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (24) const get element DeviceMark
-	 * 
+	 *
 	 * @return JDFDeviceMark the element
 	 */
 	public JDFDeviceMark getDeviceMark()
@@ -1051,7 +1075,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (25) getCreateDeviceMark
-	 * 
+	 *
 	 * @return JDFDeviceMark the element
 	 */
 	public JDFDeviceMark getCreateDeviceMark()
@@ -1061,18 +1085,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (29) append element DeviceMark
-	 * 
-	 * @return JDFDeviceMark the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFDeviceMark the element @ if the element already exists
 	 */
-	public JDFDeviceMark appendDeviceMark() throws JDFException
+	public JDFDeviceMark appendDeviceMark()
 	{
 		return (JDFDeviceMark) appendElementN(ElementName.DEVICEMARK, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refDeviceMark(JDFDeviceMark refTarget)
@@ -1082,7 +1105,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (26) getCreateDynamicField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDynamicField the element
 	 */
@@ -1093,7 +1116,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (27) const get element DynamicField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDynamicField the element default is getDynamicField(0)
 	 */
@@ -1104,17 +1127,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * Get all DynamicField from the current element
-	 * 
+	 *
 	 * @return Collection<JDFDynamicField>, null if none are available
 	 */
 	public Collection<JDFDynamicField> getAllDynamicField()
 	{
-		return getChildrenByClass(JDFDynamicField.class, false, 0);
+		return getChildArrayByClass(JDFDynamicField.class, false, 0);
 	}
 
 	/**
 	 * (30) append element DynamicField
-	 * 
+	 *
 	 * @return JDFDynamicField the element
 	 */
 	public JDFDynamicField appendDynamicField()
@@ -1124,7 +1147,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (26) getCreateFillMark
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFillMark the element
 	 */
@@ -1135,7 +1158,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (27) const get element FillMark
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFillMark the element default is getFillMark(0)
 	 */
@@ -1146,17 +1169,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * Get all FillMark from the current element
-	 * 
+	 *
 	 * @return Collection<JDFFillMark>, null if none are available
 	 */
 	public Collection<JDFFillMark> getAllFillMark()
 	{
-		return getChildrenByClass(JDFFillMark.class, false, 0);
+		return getChildArrayByClass(JDFFillMark.class, false, 0);
 	}
 
 	/**
 	 * (30) append element FillMark
-	 * 
+	 *
 	 * @return JDFFillMark the element
 	 */
 	public JDFFillMark appendFillMark()
@@ -1166,7 +1189,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (26) getCreateIdentificationField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element
 	 */
@@ -1177,7 +1200,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (27) const get element IdentificationField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element default is getIdentificationField(0)
 	 */
@@ -1188,17 +1211,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * Get all IdentificationField from the current element
-	 * 
+	 *
 	 * @return Collection<JDFIdentificationField>, null if none are available
 	 */
 	public Collection<JDFIdentificationField> getAllIdentificationField()
 	{
-		return getChildrenByClass(JDFIdentificationField.class, false, 0);
+		return getChildArrayByClass(JDFIdentificationField.class, false, 0);
 	}
 
 	/**
 	 * (30) append element IdentificationField
-	 * 
+	 *
 	 * @return JDFIdentificationField the element
 	 */
 	public JDFIdentificationField appendIdentificationField()
@@ -1208,7 +1231,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refIdentificationField(JDFIdentificationField refTarget)
@@ -1218,7 +1241,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (24) const get element JobField
-	 * 
+	 *
 	 * @return JDFJobField the element
 	 */
 	public JDFJobField getJobField()
@@ -1228,7 +1251,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (25) getCreateJobField
-	 * 
+	 *
 	 * @return JDFJobField the element
 	 */
 	public JDFJobField getCreateJobField()
@@ -1238,18 +1261,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (29) append element JobField
-	 * 
-	 * @return JDFJobField the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFJobField the element @ if the element already exists
 	 */
-	public JDFJobField appendJobField() throws JDFException
+	public JDFJobField appendJobField()
 	{
 		return (JDFJobField) appendElementN(ElementName.JOBFIELD, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refJobField(JDFJobField refTarget)
@@ -1259,7 +1281,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (24) const get element LayoutElement
-	 * 
+	 *
 	 * @return JDFLayoutElement the element
 	 */
 	public JDFLayoutElement getLayoutElement()
@@ -1269,7 +1291,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (25) getCreateLayoutElement
-	 * 
+	 *
 	 * @return JDFLayoutElement the element
 	 */
 	public JDFLayoutElement getCreateLayoutElement()
@@ -1279,18 +1301,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (29) append element LayoutElement
-	 * 
-	 * @return JDFLayoutElement the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFLayoutElement the element @ if the element already exists
 	 */
-	public JDFLayoutElement appendLayoutElement() throws JDFException
+	public JDFLayoutElement appendLayoutElement()
 	{
 		return (JDFLayoutElement) appendElementN(ElementName.LAYOUTELEMENT, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refLayoutElement(JDFLayoutElement refTarget)
@@ -1300,7 +1321,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (26) getCreateMarkActivation
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFMarkActivation the element
 	 */
@@ -1311,7 +1332,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (27) const get element MarkActivation
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFMarkActivation the element default is getMarkActivation(0)
 	 */
@@ -1322,17 +1343,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * Get all MarkActivation from the current element
-	 * 
+	 *
 	 * @return Collection<JDFMarkActivation>, null if none are available
 	 */
 	public Collection<JDFMarkActivation> getAllMarkActivation()
 	{
-		return getChildrenByClass(JDFMarkActivation.class, false, 0);
+		return getChildArrayByClass(JDFMarkActivation.class, false, 0);
 	}
 
 	/**
 	 * (30) append element MarkActivation
-	 * 
+	 *
 	 * @return JDFMarkActivation the element
 	 */
 	public JDFMarkActivation appendMarkActivation()
@@ -1342,7 +1363,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (24) const get element RefAnchor
-	 * 
+	 *
 	 * @return JDFRefAnchor the element
 	 */
 	public JDFRefAnchor getRefAnchor()
@@ -1352,7 +1373,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (25) getCreateRefAnchor
-	 * 
+	 *
 	 * @return JDFRefAnchor the element
 	 */
 	public JDFRefAnchor getCreateRefAnchor()
@@ -1362,18 +1383,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (29) append element RefAnchor
-	 * 
-	 * @return JDFRefAnchor the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFRefAnchor the element @ if the element already exists
 	 */
-	public JDFRefAnchor appendRefAnchor() throws JDFException
+	public JDFRefAnchor appendRefAnchor()
 	{
 		return (JDFRefAnchor) appendElementN(ElementName.REFANCHOR, 1, null);
 	}
 
 	/**
 	 * (26) getCreateRegisterMark
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegisterMark the element
 	 */
@@ -1384,7 +1404,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (27) const get element RegisterMark
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegisterMark the element default is getRegisterMark(0)
 	 */
@@ -1395,17 +1415,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * Get all RegisterMark from the current element
-	 * 
+	 *
 	 * @return Collection<JDFRegisterMark>, null if none are available
 	 */
 	public Collection<JDFRegisterMark> getAllRegisterMark()
 	{
-		return getChildrenByClass(JDFRegisterMark.class, false, 0);
+		return getChildArrayByClass(JDFRegisterMark.class, false, 0);
 	}
 
 	/**
 	 * (30) append element RegisterMark
-	 * 
+	 *
 	 * @return JDFRegisterMark the element
 	 */
 	public JDFRegisterMark appendRegisterMark()
@@ -1415,7 +1435,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refRegisterMark(JDFRegisterMark refTarget)
@@ -1425,7 +1445,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (26) getCreateScavengerArea
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFScavengerArea the element
 	 */
@@ -1436,7 +1456,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (27) const get element ScavengerArea
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFScavengerArea the element default is getScavengerArea(0)
 	 */
@@ -1447,17 +1467,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * Get all ScavengerArea from the current element
-	 * 
+	 *
 	 * @return Collection<JDFScavengerArea>, null if none are available
 	 */
 	public Collection<JDFScavengerArea> getAllScavengerArea()
 	{
-		return getChildrenByClass(JDFScavengerArea.class, false, 0);
+		return getChildArrayByClass(JDFScavengerArea.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ScavengerArea
-	 * 
+	 *
 	 * @return JDFScavengerArea the element
 	 */
 	public JDFScavengerArea appendScavengerArea()
@@ -1467,7 +1487,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refScavengerArea(JDFScavengerArea refTarget)
@@ -1475,4 +1495,4 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		refElement(refTarget);
 	}
 
-}// end namespace JDF
+}

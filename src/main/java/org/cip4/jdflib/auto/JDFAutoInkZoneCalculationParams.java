@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -45,7 +77,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFDevice;
@@ -55,7 +86,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoInkZoneCalculationParams : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
@@ -94,7 +125,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoInkZoneCalculationParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -105,7 +136,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoInkZoneCalculationParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -117,7 +148,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoInkZoneCalculationParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -126,15 +157,6 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 	protected JDFAutoInkZoneCalculationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoInkZoneCalculationParams[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -157,16 +179,17 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FountainPositions ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FountainPositions
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FountainPositions
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFountainPositions(JDFNumberList value)
@@ -176,7 +199,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 
 	/**
 	 * (20) get JDFNumberList attribute FountainPositions
-	 * 
+	 *
 	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getFountainPositions()
@@ -186,12 +209,12 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintableArea ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrintableArea
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PrintableArea
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPrintableArea(JDFRectangle value)
@@ -201,7 +224,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 
 	/**
 	 * (20) get JDFRectangle attribute PrintableArea
-	 * 
+	 *
 	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getPrintableArea()
@@ -211,12 +234,12 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ZoneWidth ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ZoneWidth
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ZoneWidth
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setZoneWidth(double value)
@@ -226,7 +249,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 
 	/**
 	 * (17) get double attribute ZoneWidth
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getZoneWidth()
@@ -234,12 +257,12 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		return getRealAttribute(AttributeName.ZONEWIDTH, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Zones ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Zones
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Zones
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setZones(int value)
@@ -249,7 +272,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 
 	/**
 	 * (15) get int attribute Zones
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getZones()
@@ -257,12 +280,12 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		return getIntAttribute(AttributeName.ZONES, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ZonesY ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ZonesY
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ZonesY
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setZonesY(int value)
@@ -272,7 +295,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 
 	/**
 	 * (15) get int attribute ZonesY
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getZonesY()
@@ -280,12 +303,12 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		return getIntAttribute(AttributeName.ZONESY, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ZoneHeight ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ZoneHeight
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ZoneHeight
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setZoneHeight(double value)
@@ -295,7 +318,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 
 	/**
 	 * (17) get double attribute ZoneHeight
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getZoneHeight()
@@ -303,13 +326,14 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		return getRealAttribute(AttributeName.ZONEHEIGHT, null, 0.0);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element Device
-	 * 
+	 *
 	 * @return JDFDevice the element
 	 */
 	public JDFDevice getDevice()
@@ -319,7 +343,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 
 	/**
 	 * (25) getCreateDevice
-	 * 
+	 *
 	 * @return JDFDevice the element
 	 */
 	public JDFDevice getCreateDevice()
@@ -329,18 +353,17 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 
 	/**
 	 * (29) append element Device
-	 * 
-	 * @return JDFDevice the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFDevice the element @ if the element already exists
 	 */
-	public JDFDevice appendDevice() throws JDFException
+	public JDFDevice appendDevice()
 	{
 		return (JDFDevice) appendElementN(ElementName.DEVICE, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refDevice(JDFDevice refTarget)
@@ -348,4 +371,4 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		refElement(refTarget);
 	}
 
-}// end namespace JDF
+}

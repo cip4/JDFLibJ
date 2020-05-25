@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -50,7 +82,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAdvancedParams;
@@ -61,7 +92,7 @@ import org.cip4.jdflib.resource.process.JDFThinPDFParams;
  *****************************************************************************
  * class JDFAutoPSToPDFConversionParams : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
@@ -111,7 +142,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPSToPDFConversionParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -122,7 +153,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPSToPDFConversionParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -134,7 +165,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPSToPDFConversionParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -143,15 +174,6 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	protected JDFAutoPSToPDFConversionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoPSToPDFConversionParams[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -371,16 +393,17 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		public static final EnumDefaultRenderingIntent AbsoluteColorimetric = new EnumDefaultRenderingIntent("AbsoluteColorimetric");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ASCII85EncodePages ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ASCII85EncodePages
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ASCII85EncodePages
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setASCII85EncodePages(boolean value)
@@ -390,7 +413,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute ASCII85EncodePages
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getASCII85EncodePages()
@@ -398,12 +421,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getBoolAttribute(AttributeName.ASCII85ENCODEPAGES, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Binding ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Binding
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Binding
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setBinding(EnumBinding enumVar)
@@ -413,7 +436,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (9) get attribute Binding
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumBinding getBinding()
@@ -421,12 +444,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return EnumBinding.getEnum(getAttribute(AttributeName.BINDING, null, "Left"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DetectBlend ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DetectBlend
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DetectBlend
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDetectBlend(boolean value)
@@ -436,7 +459,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute DetectBlend
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getDetectBlend()
@@ -444,12 +467,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getBoolAttribute(AttributeName.DETECTBLEND, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DoThumbnails ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DoThumbnails
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DoThumbnails
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDoThumbnails(boolean value)
@@ -459,7 +482,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute DoThumbnails
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getDoThumbnails()
@@ -467,12 +490,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getBoolAttribute(AttributeName.DOTHUMBNAILS, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Optimize ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Optimize
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Optimize
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOptimize(boolean value)
@@ -482,7 +505,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute Optimize
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getOptimize()
@@ -490,12 +513,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getBoolAttribute(AttributeName.OPTIMIZE, null, true);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AutoRotatePages ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AutoRotatePages
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute AutoRotatePages
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setAutoRotatePages(EnumAutoRotatePages enumVar)
@@ -505,7 +528,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (9) get attribute AutoRotatePages
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumAutoRotatePages getAutoRotatePages()
@@ -513,12 +536,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return EnumAutoRotatePages.getEnum(getAttribute(AttributeName.AUTOROTATEPAGES, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CompressPages ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CompressPages
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CompressPages
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCompressPages(boolean value)
@@ -528,7 +551,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute CompressPages
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getCompressPages()
@@ -536,12 +559,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getBoolAttribute(AttributeName.COMPRESSPAGES, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultRenderingIntent ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DefaultRenderingIntent
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute DefaultRenderingIntent
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setDefaultRenderingIntent(EnumDefaultRenderingIntent enumVar)
@@ -551,7 +574,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (9) get attribute DefaultRenderingIntent
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumDefaultRenderingIntent getDefaultRenderingIntent()
@@ -559,12 +582,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return EnumDefaultRenderingIntent.getEnum(getAttribute(AttributeName.DEFAULTRENDERINGINTENT, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EndPage ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EndPage
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute EndPage
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEndPage(int value)
@@ -574,7 +597,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (15) get int attribute EndPage
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getEndPage()
@@ -582,12 +605,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getIntAttribute(AttributeName.ENDPAGE, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageMemory ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ImageMemory
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ImageMemory
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setImageMemory(int value)
@@ -597,7 +620,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (15) get int attribute ImageMemory
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getImageMemory()
@@ -605,12 +628,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getIntAttribute(AttributeName.IMAGEMEMORY, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InitialPageSize ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute InitialPageSize
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute InitialPageSize
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setInitialPageSize(JDFXYPair value)
@@ -620,7 +643,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (20) get JDFXYPair attribute InitialPageSize
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getInitialPageSize()
@@ -630,12 +653,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InitialResolution ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute InitialResolution
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute InitialResolution
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setInitialResolution(JDFXYPair value)
@@ -645,7 +668,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (20) get JDFXYPair attribute InitialResolution
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getInitialResolution()
@@ -655,12 +678,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OverPrintMode ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OverPrintMode
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute OverPrintMode
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOverPrintMode(int value)
@@ -670,7 +693,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (15) get int attribute OverPrintMode
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getOverPrintMode()
@@ -678,12 +701,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getIntAttribute(AttributeName.OVERPRINTMODE, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFVersion ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PDFVersion
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PDFVersion
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPDFVersion(double value)
@@ -693,7 +716,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (17) get double attribute PDFVersion
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getPDFVersion()
@@ -701,12 +724,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getRealAttribute(AttributeName.PDFVERSION, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StartPage ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StartPage
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute StartPage
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setStartPage(int value)
@@ -716,7 +739,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (15) get int attribute StartPage
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getStartPage()
@@ -724,13 +747,14 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getIntAttribute(AttributeName.STARTPAGE, null, 0);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element AdvancedParams
-	 * 
+	 *
 	 * @return JDFAdvancedParams the element
 	 */
 	public JDFAdvancedParams getAdvancedParams()
@@ -740,7 +764,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (25) getCreateAdvancedParams
-	 * 
+	 *
 	 * @return JDFAdvancedParams the element
 	 */
 	public JDFAdvancedParams getCreateAdvancedParams()
@@ -750,18 +774,17 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (29) append element AdvancedParams
-	 * 
-	 * @return JDFAdvancedParams the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFAdvancedParams the element @ if the element already exists
 	 */
-	public JDFAdvancedParams appendAdvancedParams() throws JDFException
+	public JDFAdvancedParams appendAdvancedParams()
 	{
 		return (JDFAdvancedParams) appendElementN(ElementName.ADVANCEDPARAMS, 1, null);
 	}
 
 	/**
 	 * (24) const get element PDFXParams
-	 * 
+	 *
 	 * @return JDFPDFXParams the element
 	 */
 	public JDFPDFXParams getPDFXParams()
@@ -771,7 +794,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (25) getCreatePDFXParams
-	 * 
+	 *
 	 * @return JDFPDFXParams the element
 	 */
 	public JDFPDFXParams getCreatePDFXParams()
@@ -781,18 +804,17 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (29) append element PDFXParams
-	 * 
-	 * @return JDFPDFXParams the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFPDFXParams the element @ if the element already exists
 	 */
-	public JDFPDFXParams appendPDFXParams() throws JDFException
+	public JDFPDFXParams appendPDFXParams()
 	{
 		return (JDFPDFXParams) appendElementN(ElementName.PDFXPARAMS, 1, null);
 	}
 
 	/**
 	 * (24) const get element ThinPDFParams
-	 * 
+	 *
 	 * @return JDFThinPDFParams the element
 	 */
 	public JDFThinPDFParams getThinPDFParams()
@@ -802,7 +824,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (25) getCreateThinPDFParams
-	 * 
+	 *
 	 * @return JDFThinPDFParams the element
 	 */
 	public JDFThinPDFParams getCreateThinPDFParams()
@@ -812,13 +834,12 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (29) append element ThinPDFParams
-	 * 
-	 * @return JDFThinPDFParams the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFThinPDFParams the element @ if the element already exists
 	 */
-	public JDFThinPDFParams appendThinPDFParams() throws JDFException
+	public JDFThinPDFParams appendThinPDFParams()
 	{
 		return (JDFThinPDFParams) appendElementN(ElementName.THINPDFPARAMS, 1, null);
 	}
 
-}// end namespace JDF
+}

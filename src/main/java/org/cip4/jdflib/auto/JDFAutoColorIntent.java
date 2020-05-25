@@ -2,41 +2,75 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
 
 package org.cip4.jdflib.auto;
+
+import java.util.Collection;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -45,8 +79,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFSeparationList;
+import org.cip4.jdflib.resource.JDFCertification;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.span.JDFNameSpan;
@@ -57,7 +91,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoColorIntent : public JDFIntentResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoColorIntent extends JDFIntentResource
@@ -77,16 +111,17 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[7];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COATINGS, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORSTANDARD, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORICCSTANDARD, 0x66666611);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.COVERAGE, 0x66666666);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.INKMANUFACTURER, 0x77777766);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666661);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.COLORSUSED, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CERTIFICATION, 0x31111111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COATINGS, 0x66666666);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORSTANDARD, 0x66666666);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.COLORICCSTANDARD, 0x66666611);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.COVERAGE, 0x66666666);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.INKMANUFACTURER, 0x77777766);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666661);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.COLORSUSED, 0x66666666);
 	}
 
 	@Override
@@ -97,7 +132,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoColorIntent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -108,7 +143,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoColorIntent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -120,7 +155,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoColorIntent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -131,25 +166,17 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoColorIntent[  --> " + super.toString() + " ]";
-	}
-
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NumColors ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NumColors
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute NumColors
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setNumColors(int value)
@@ -159,7 +186,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (15) get int attribute NumColors
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getNumColors()
@@ -167,13 +194,56 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 		return getIntAttribute(AttributeName.NUMCOLORS, null, 0);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
+	 * (26) getCreateCertification
+	 *
+	 * @param iSkip number of elements to skip
+	 * @return JDFCertification the element
+	 */
+	public JDFCertification getCreateCertification(int iSkip)
+	{
+		return (JDFCertification) getCreateElement_JDFElement(ElementName.CERTIFICATION, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element Certification
+	 *
+	 * @param iSkip number of elements to skip
+	 * @return JDFCertification the element default is getCertification(0)
+	 */
+	public JDFCertification getCertification(int iSkip)
+	{
+		return (JDFCertification) getElement(ElementName.CERTIFICATION, null, iSkip);
+	}
+
+	/**
+	 * Get all Certification from the current element
+	 *
+	 * @return Collection<JDFCertification>, null if none are available
+	 */
+	public Collection<JDFCertification> getAllCertification()
+	{
+		return getChildArrayByClass(JDFCertification.class, false, 0);
+	}
+
+	/**
+	 * (30) append element Certification
+	 *
+	 * @return JDFCertification the element
+	 */
+	public JDFCertification appendCertification()
+	{
+		return (JDFCertification) appendElement(ElementName.CERTIFICATION, null);
+	}
+
+	/**
 	 * (24) const get element Coatings
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCoatings()
@@ -183,7 +253,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCoatings
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateCoatings()
@@ -193,18 +263,17 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Coatings
-	 * 
-	 * @return JDFStringSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFStringSpan the element @ if the element already exists
 	 */
-	public JDFStringSpan appendCoatings() throws JDFException
+	public JDFStringSpan appendCoatings()
 	{
 		return (JDFStringSpan) appendElementN(ElementName.COATINGS, 1, null);
 	}
 
 	/**
 	 * (24) const get element ColorStandard
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getColorStandard()
@@ -214,7 +283,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateColorStandard
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateColorStandard()
@@ -224,18 +293,17 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element ColorStandard
-	 * 
-	 * @return JDFNameSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNameSpan the element @ if the element already exists
 	 */
-	public JDFNameSpan appendColorStandard() throws JDFException
+	public JDFNameSpan appendColorStandard()
 	{
 		return (JDFNameSpan) appendElementN(ElementName.COLORSTANDARD, 1, null);
 	}
 
 	/**
 	 * (24) const get element ColorICCStandard
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getColorICCStandard()
@@ -245,7 +313,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateColorICCStandard
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateColorICCStandard()
@@ -255,18 +323,17 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element ColorICCStandard
-	 * 
-	 * @return JDFStringSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFStringSpan the element @ if the element already exists
 	 */
-	public JDFStringSpan appendColorICCStandard() throws JDFException
+	public JDFStringSpan appendColorICCStandard()
 	{
 		return (JDFStringSpan) appendElementN(ElementName.COLORICCSTANDARD, 1, null);
 	}
 
 	/**
 	 * (24) const get element Coverage
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCoverage()
@@ -276,7 +343,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCoverage
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateCoverage()
@@ -286,18 +353,17 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Coverage
-	 * 
-	 * @return JDFNumberSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNumberSpan the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendCoverage() throws JDFException
+	public JDFNumberSpan appendCoverage()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.COVERAGE, 1, null);
 	}
 
 	/**
 	 * (24) const get element InkManufacturer
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getInkManufacturer()
@@ -307,7 +373,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateInkManufacturer
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateInkManufacturer()
@@ -317,18 +383,17 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element InkManufacturer
-	 * 
-	 * @return JDFNameSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNameSpan the element @ if the element already exists
 	 */
-	public JDFNameSpan appendInkManufacturer() throws JDFException
+	public JDFNameSpan appendInkManufacturer()
 	{
 		return (JDFNameSpan) appendElementN(ElementName.INKMANUFACTURER, 1, null);
 	}
 
 	/**
 	 * (24) const get element ColorPool
-	 * 
+	 *
 	 * @return JDFColorPool the element
 	 */
 	public JDFColorPool getColorPool()
@@ -338,7 +403,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateColorPool
-	 * 
+	 *
 	 * @return JDFColorPool the element
 	 */
 	public JDFColorPool getCreateColorPool()
@@ -348,18 +413,17 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element ColorPool
-	 * 
-	 * @return JDFColorPool the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFColorPool the element @ if the element already exists
 	 */
-	public JDFColorPool appendColorPool() throws JDFException
+	public JDFColorPool appendColorPool()
 	{
 		return (JDFColorPool) appendElementN(ElementName.COLORPOOL, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refColorPool(JDFColorPool refTarget)
@@ -369,7 +433,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element ColorsUsed
-	 * 
+	 *
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getColorsUsed()
@@ -379,7 +443,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateColorsUsed
-	 * 
+	 *
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getCreateColorsUsed()
@@ -389,13 +453,12 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element ColorsUsed
-	 * 
-	 * @return JDFSeparationList the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSeparationList the element @ if the element already exists
 	 */
-	public JDFSeparationList appendColorsUsed() throws JDFException
+	public JDFSeparationList appendColorsUsed()
 	{
 		return (JDFSeparationList) appendElementN(ElementName.COLORSUSED, 1, null);
 	}
 
-}// end namespace JDF
+}

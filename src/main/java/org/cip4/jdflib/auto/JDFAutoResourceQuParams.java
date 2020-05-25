@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -80,8 +112,8 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.LOCATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.LOTDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumLotDetails.getEnum(0), "Brief");
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.LOTID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.LOTDETAILS, 0x44331111, AttributeInfo.EnumAttributeType.enumeration, EnumLotDetails.getEnum(0), "Brief");
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.LOTID, 0x44331111, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
@@ -116,7 +148,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourceQuParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	protected JDFAutoResourceQuParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -128,7 +160,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourceQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	protected JDFAutoResourceQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -141,18 +173,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoResourceQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	protected JDFAutoResourceQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoResourceQuParams[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -165,7 +188,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumContext(final String name)
+		private EnumContext(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -174,7 +197,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumContext getEnum(final String enumName)
+		public static EnumContext getEnum(String enumName)
 		{
 			return (EnumContext) getEnum(EnumContext.class, enumName);
 		}
@@ -183,7 +206,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumContext getEnum(final int enumValue)
+		public static EnumContext getEnum(int enumValue)
 		{
 			return (EnumContext) getEnum(EnumContext.class, enumValue);
 		}
@@ -228,7 +251,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumLotDetails(final String name)
+		private EnumLotDetails(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -237,7 +260,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumLotDetails getEnum(final String enumName)
+		public static EnumLotDetails getEnum(String enumName)
 		{
 			return (EnumLotDetails) getEnum(EnumLotDetails.class, enumName);
 		}
@@ -246,7 +269,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumLotDetails getEnum(final int enumValue)
+		public static EnumLotDetails getEnum(int enumValue)
 		{
 			return (EnumLotDetails) getEnum(EnumLotDetails.class, enumValue);
 		}
@@ -293,7 +316,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumResourceDetails(final String name)
+		private EnumResourceDetails(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -302,7 +325,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumResourceDetails getEnum(final String enumName)
+		public static EnumResourceDetails getEnum(String enumName)
 		{
 			return (EnumResourceDetails) getEnum(EnumResourceDetails.class, enumName);
 		}
@@ -311,7 +334,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumResourceDetails getEnum(final int enumValue)
+		public static EnumResourceDetails getEnum(int enumValue)
 		{
 			return (EnumResourceDetails) getEnum(EnumResourceDetails.class, enumValue);
 		}
@@ -356,7 +379,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumScope(final String name)
+		private EnumScope(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -365,7 +388,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumScope getEnum(final String enumName)
+		public static EnumScope getEnum(String enumName)
 		{
 			return (EnumScope) getEnum(EnumScope.class, enumName);
 		}
@@ -374,7 +397,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumScope getEnum(final int enumValue)
+		public static EnumScope getEnum(int enumValue)
 		{
 			return (EnumScope) getEnum(EnumScope.class, enumValue);
 		}
@@ -407,23 +430,26 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		public static final EnumScope Present = new EnumScope("Present");
 		/**  */
 		public static final EnumScope Allowed = new EnumScope("Allowed");
+		/**  */
 		public static final EnumScope Job = new EnumScope("Job");
+		/**  */
 		public static final EnumScope Estimate = new EnumScope("Estimate");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Classes ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Classes
+	--------------------------------------------------------------------- */
 	/**
 	 * (5.2) set attribute Classes
 	 *
 	 * @param v vector of the enumeration values
 	 */
-	public void setClasses(final Vector<? extends ValuedEnum> v)
+	public void setClasses(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.CLASSES, v, null);
 	}
@@ -438,15 +464,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return getEnumerationsAttribute(AttributeName.CLASSES, null, JDFResource.EnumResourceClass.getEnum(0), false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Context ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Context
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Context
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setContext(final EnumContext enumVar)
+	public void setContext(EnumContext enumVar)
 	{
 		setAttribute(AttributeName.CONTEXT, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -461,15 +487,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return EnumContext.getEnum(getAttribute(AttributeName.CONTEXT, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Exact ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Exact
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Exact
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setExact(final boolean value)
+	public void setExact(boolean value)
 	{
 		setAttribute(AttributeName.EXACT, value, null);
 	}
@@ -484,15 +510,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return getBoolAttribute(AttributeName.EXACT, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute JobID
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(final String value)
+	public void setJobID(String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -507,15 +533,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobPartID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute JobPartID
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(final String value)
+	public void setJobPartID(String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -530,15 +556,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Location ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Location
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Location
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLocation(final String value)
+	public void setLocation(String value)
 	{
 		setAttribute(AttributeName.LOCATION, value, null);
 	}
@@ -553,15 +579,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return getAttribute(AttributeName.LOCATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LotDetails ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LotDetails
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute LotDetails
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setLotDetails(final EnumLotDetails enumVar)
+	public void setLotDetails(EnumLotDetails enumVar)
 	{
 		setAttribute(AttributeName.LOTDETAILS, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -576,15 +602,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return EnumLotDetails.getEnum(getAttribute(AttributeName.LOTDETAILS, null, "Brief"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LotID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LotID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute LotID
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLotID(final String value)
+	public void setLotID(String value)
 	{
 		setAttribute(AttributeName.LOTID, value, null);
 	}
@@ -599,15 +625,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return getAttribute(AttributeName.LOTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProcessUsage ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ProcessUsage
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ProcessUsage
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProcessUsage(final String value)
+	public void setProcessUsage(String value)
 	{
 		setAttribute(AttributeName.PROCESSUSAGE, value, null);
 	}
@@ -622,15 +648,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return getAttribute(AttributeName.PROCESSUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProductID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ProductID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ProductID
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProductID(final String value)
+	public void setProductID(String value)
 	{
 		setAttribute(AttributeName.PRODUCTID, value, null);
 	}
@@ -645,15 +671,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return getAttribute(AttributeName.PRODUCTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute QueueEntryID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute QueueEntryID
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueEntryID(final String value)
+	public void setQueueEntryID(String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}
@@ -668,15 +694,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceDetails ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ResourceDetails
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute ResourceDetails
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setResourceDetails(final EnumResourceDetails enumVar)
+	public void setResourceDetails(EnumResourceDetails enumVar)
 	{
 		setAttribute(AttributeName.RESOURCEDETAILS, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -691,15 +717,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return EnumResourceDetails.getEnum(getAttribute(AttributeName.RESOURCEDETAILS, null, "Full"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ResourceID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ResourceID
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResourceID(final String value)
+	public void setResourceID(String value)
 	{
 		setAttribute(AttributeName.RESOURCEID, value, null);
 	}
@@ -714,15 +740,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return getAttribute(AttributeName.RESOURCEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ResourceName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ResourceName
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResourceName(final VString value)
+	public void setResourceName(VString value)
 	{
 		setAttribute(AttributeName.RESOURCENAME, value, null);
 	}
@@ -740,15 +766,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return vStrAttrib;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Scope ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Scope
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Scope
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setScope(final EnumScope enumVar)
+	public void setScope(EnumScope enumVar)
 	{
 		setAttribute(AttributeName.SCOPE, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -763,15 +789,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return EnumScope.getEnum(getAttribute(AttributeName.SCOPE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Usage
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Usage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setUsage(final JDFResourceLink.EnumUsage enumVar)
+	public void setUsage(JDFResourceLink.EnumUsage enumVar)
 	{
 		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -786,8 +812,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -796,7 +823,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(final int iSkip)
+	public JDFPart getCreatePart(int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -807,7 +834,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element default is getPart(0)
 	 */
-	public JDFPart getPart(final int iSkip)
+	public JDFPart getPart(int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}
@@ -819,7 +846,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 */
 	public Collection<JDFPart> getAllPart()
 	{
-		return getChildrenByClass(JDFPart.class, false, 0);
+		return getChildArrayByClass(JDFPart.class, false, 0);
 	}
 
 	/**
@@ -832,4 +859,4 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 		return (JDFPart) appendElement(ElementName.PART, null);
 	}
 
-}// end namespace JDF
+}

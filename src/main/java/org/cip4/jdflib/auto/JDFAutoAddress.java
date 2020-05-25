@@ -2,41 +2,75 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
 
 package org.cip4.jdflib.auto;
+
+import java.util.Collection;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -47,7 +81,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
@@ -62,16 +95,18 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CITY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COUNTRY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.COUNTRYCODE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.POSTBOX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.POSTALCODE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.REGION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.STREET, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDRESSUSAGE, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CITY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CIVICNUMBER, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COUNTRY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.COUNTRYCODE, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.POSTBOX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.POSTALCODE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.REGION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.STREET, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -80,10 +115,11 @@ public abstract class JDFAutoAddress extends JDFResource
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.EXTENDEDADDRESS, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ADDRESSLINE, 0x33111111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EXTENDEDADDRESS, 0x66666666);
 	}
 
 	@Override
@@ -129,15 +165,6 @@ public abstract class JDFAutoAddress extends JDFResource
 	}
 
 	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoAddress[  --> " + super.toString() + " ]";
-	}
-
-	/**
 	 * @return true if ok
 	 */
 	@Override
@@ -157,13 +184,37 @@ public abstract class JDFAutoAddress extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute City ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AddressUsage
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute AddressUsage
+	 * 
+	 * @param value the value to set the attribute to
 	 */
+	public void setAddressUsage(String value)
+	{
+		setAttribute(AttributeName.ADDRESSUSAGE, value, null);
+	}
+
+	/**
+	 * (23) get String attribute AddressUsage
+	 * 
+	 * @return the value of the attribute
+	 */
+	public String getAddressUsage()
+	{
+		return getAttribute(AttributeName.ADDRESSUSAGE, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute City
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute City
 	 * 
@@ -184,9 +235,32 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.CITY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Country ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CivicNumber
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute CivicNumber
+	 * 
+	 * @param value the value to set the attribute to
 	 */
+	public void setCivicNumber(String value)
+	{
+		setAttribute(AttributeName.CIVICNUMBER, value, null);
+	}
+
+	/**
+	 * (23) get String attribute CivicNumber
+	 * 
+	 * @return the value of the attribute
+	 */
+	public String getCivicNumber()
+	{
+		return getAttribute(AttributeName.CIVICNUMBER, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Country
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Country
 	 * 
@@ -207,9 +281,9 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.COUNTRY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CountryCode ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CountryCode
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CountryCode
 	 * 
@@ -230,9 +304,9 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.COUNTRYCODE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PostBox ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PostBox
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PostBox
 	 * 
@@ -253,9 +327,9 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.POSTBOX, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PostalCode ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PostalCode
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PostalCode
 	 * 
@@ -276,9 +350,9 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.POSTALCODE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Region ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Region
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Region
 	 * 
@@ -299,9 +373,9 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.REGION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Street ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Street
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Street
 	 * 
@@ -322,9 +396,52 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.STREET, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
+
+	/**
+	 * (26) getCreateAddressLine
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreateAddressLine(int iSkip)
+	{
+		return (JDFElement) getCreateElement_JDFElement(ElementName.ADDRESSLINE, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element AddressLine
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFElement the element default is getAddressLine(0)
+	 */
+	public JDFElement getAddressLine(int iSkip)
+	{
+		return (JDFElement) getElement(ElementName.ADDRESSLINE, null, iSkip);
+	}
+
+	/**
+	 * Get all AddressLine from the current element
+	 * 
+	 * @return Collection<JDFElement>, null if none are available
+	 */
+	public Collection<JDFElement> getAllAddressLine()
+	{
+		return getChildArrayByClass(JDFElement.class, false, 0);
+	}
+
+	/**
+	 * (30) append element AddressLine
+	 * 
+	 * @return JDFElement the element
+	 */
+	public JDFElement appendAddressLine()
+	{
+		return (JDFElement) appendElement(ElementName.ADDRESSLINE, null);
+	}
 
 	/**
 	 * (24) const get element ExtendedAddress
@@ -349,12 +466,11 @@ public abstract class JDFAutoAddress extends JDFResource
 	/**
 	 * (29) append element ExtendedAddress
 	 * 
-	 * @return JDFElement the element
-	 * @throws JDFException if the element already exists
+	 * @return JDFElement the element @ if the element already exists
 	 */
-	public JDFElement appendExtendedAddress() throws JDFException
+	public JDFElement appendExtendedAddress()
 	{
 		return (JDFElement) appendElementN(ElementName.EXTENDEDADDRESS, 1, null);
 	}
 
-}// end namespace JDF
+}

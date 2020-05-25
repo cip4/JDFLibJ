@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -49,7 +81,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFBarcodeProductionParams;
 import org.cip4.jdflib.resource.process.JDFImageCompressionParams;
 import org.cip4.jdflib.resource.process.JDFImageEnhancementParams;
@@ -61,7 +92,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorCorrectionParams;
  *****************************************************************************
  * class JDFAutoLayoutElementPart : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoLayoutElementPart extends JDFElement
@@ -100,7 +131,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoLayoutElementPart
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -111,7 +142,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoLayoutElementPart
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -123,7 +154,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoLayoutElementPart
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -134,25 +165,17 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoLayoutElementPart[  --> " + super.toString() + " ]";
-	}
-
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	@Override
@@ -163,7 +186,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (23) get String attribute ID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	@Override
@@ -172,13 +195,14 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element BarcodeProductionParams
-	 * 
+	 *
 	 * @return JDFBarcodeProductionParams the element
 	 */
 	public JDFBarcodeProductionParams getBarcodeProductionParams()
@@ -188,7 +212,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (25) getCreateBarcodeProductionParams
-	 * 
+	 *
 	 * @return JDFBarcodeProductionParams the element
 	 */
 	public JDFBarcodeProductionParams getCreateBarcodeProductionParams()
@@ -198,18 +222,17 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (29) append element BarcodeProductionParams
-	 * 
-	 * @return JDFBarcodeProductionParams the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFBarcodeProductionParams the element @ if the element already exists
 	 */
-	public JDFBarcodeProductionParams appendBarcodeProductionParams() throws JDFException
+	public JDFBarcodeProductionParams appendBarcodeProductionParams()
 	{
 		return (JDFBarcodeProductionParams) appendElementN(ElementName.BARCODEPRODUCTIONPARAMS, 1, null);
 	}
 
 	/**
 	 * (26) getCreateColorCorrectionParams
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorCorrectionParams the element
 	 */
@@ -220,7 +243,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (27) const get element ColorCorrectionParams
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorCorrectionParams the element default is getColorCorrectionParams(0)
 	 */
@@ -231,17 +254,17 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * Get all ColorCorrectionParams from the current element
-	 * 
+	 *
 	 * @return Collection<JDFColorCorrectionParams>, null if none are available
 	 */
 	public Collection<JDFColorCorrectionParams> getAllColorCorrectionParams()
 	{
-		return getChildrenByClass(JDFColorCorrectionParams.class, false, 0);
+		return getChildArrayByClass(JDFColorCorrectionParams.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ColorCorrectionParams
-	 * 
+	 *
 	 * @return JDFColorCorrectionParams the element
 	 */
 	public JDFColorCorrectionParams appendColorCorrectionParams()
@@ -251,7 +274,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refColorCorrectionParams(JDFColorCorrectionParams refTarget)
@@ -261,7 +284,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (26) getCreateImageCompressionParams
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFImageCompressionParams the element
 	 */
@@ -272,7 +295,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (27) const get element ImageCompressionParams
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFImageCompressionParams the element default is getImageCompressionParams(0)
 	 */
@@ -283,17 +306,17 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * Get all ImageCompressionParams from the current element
-	 * 
+	 *
 	 * @return Collection<JDFImageCompressionParams>, null if none are available
 	 */
 	public Collection<JDFImageCompressionParams> getAllImageCompressionParams()
 	{
-		return getChildrenByClass(JDFImageCompressionParams.class, false, 0);
+		return getChildArrayByClass(JDFImageCompressionParams.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ImageCompressionParams
-	 * 
+	 *
 	 * @return JDFImageCompressionParams the element
 	 */
 	public JDFImageCompressionParams appendImageCompressionParams()
@@ -303,7 +326,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refImageCompressionParams(JDFImageCompressionParams refTarget)
@@ -313,7 +336,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (26) getCreateImageEnhancementParams
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFImageEnhancementParams the element
 	 */
@@ -324,7 +347,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (27) const get element ImageEnhancementParams
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFImageEnhancementParams the element default is getImageEnhancementParams(0)
 	 */
@@ -335,17 +358,17 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * Get all ImageEnhancementParams from the current element
-	 * 
+	 *
 	 * @return Collection<JDFImageEnhancementParams>, null if none are available
 	 */
 	public Collection<JDFImageEnhancementParams> getAllImageEnhancementParams()
 	{
-		return getChildrenByClass(JDFImageEnhancementParams.class, false, 0);
+		return getChildArrayByClass(JDFImageEnhancementParams.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ImageEnhancementParams
-	 * 
+	 *
 	 * @return JDFImageEnhancementParams the element
 	 */
 	public JDFImageEnhancementParams appendImageEnhancementParams()
@@ -355,7 +378,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refImageEnhancementParams(JDFImageEnhancementParams refTarget)
@@ -365,7 +388,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (24) const get element LayoutElement
-	 * 
+	 *
 	 * @return JDFLayoutElement the element
 	 */
 	public JDFLayoutElement getLayoutElement()
@@ -375,7 +398,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (25) getCreateLayoutElement
-	 * 
+	 *
 	 * @return JDFLayoutElement the element
 	 */
 	public JDFLayoutElement getCreateLayoutElement()
@@ -385,18 +408,17 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (29) append element LayoutElement
-	 * 
-	 * @return JDFLayoutElement the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFLayoutElement the element @ if the element already exists
 	 */
-	public JDFLayoutElement appendLayoutElement() throws JDFException
+	public JDFLayoutElement appendLayoutElement()
 	{
 		return (JDFLayoutElement) appendElementN(ElementName.LAYOUTELEMENT, 1, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refLayoutElement(JDFLayoutElement refTarget)
@@ -406,7 +428,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (24) const get element PositionObj
-	 * 
+	 *
 	 * @return JDFPositionObj the element
 	 */
 	public JDFPositionObj getPositionObj()
@@ -416,7 +438,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (25) getCreatePositionObj
-	 * 
+	 *
 	 * @return JDFPositionObj the element
 	 */
 	public JDFPositionObj getCreatePositionObj()
@@ -426,13 +448,12 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (29) append element PositionObj
-	 * 
-	 * @return JDFPositionObj the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFPositionObj the element @ if the element already exists
 	 */
-	public JDFPositionObj appendPositionObj() throws JDFException
+	public JDFPositionObj appendPositionObj()
 	{
 		return (JDFPositionObj) appendElementN(ElementName.POSITIONOBJ, 1, null);
 	}
 
-}// end namespace JDF
+}

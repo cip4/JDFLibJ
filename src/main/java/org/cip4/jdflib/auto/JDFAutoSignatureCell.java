@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -54,7 +86,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
  *****************************************************************************
  * class JDFAutoSignatureCell : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoSignatureCell extends JDFElement
@@ -68,8 +100,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKFACEPAGES, 0x44443311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.BACKPAGES, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.BACKSPREAD, 0x33311111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.BOTTLEANGLE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.BOTTLEAXIS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumBottleAxis.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.BOTTLEANGLE, 0x44333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.BOTTLEAXIS, 0x44333311, AttributeInfo.EnumAttributeType.enumeration, EnumBottleAxis.getEnum(0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.FACECELLS, 0x33331111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.FRONTFACEPAGES, 0x44443311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.FRONTPAGES, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
@@ -87,7 +119,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoSignatureCell
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -98,7 +130,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoSignatureCell
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -110,7 +142,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoSignatureCell
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -119,15 +151,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	protected JDFAutoSignatureCell(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoSignatureCell[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -264,16 +287,17 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		public static final EnumOrientation Right = new EnumOrientation("Right");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BackFacePages ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BackFacePages
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BackFacePages
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBackFacePages(JDFIntegerList value)
@@ -283,7 +307,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerList attribute BackFacePages
-	 * 
+	 *
 	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getBackFacePages()
@@ -293,12 +317,12 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BackPages ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BackPages
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BackPages
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBackPages(JDFIntegerList value)
@@ -308,7 +332,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerList attribute BackPages
-	 * 
+	 *
 	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getBackPages()
@@ -318,12 +342,12 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BackSpread ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BackSpread
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BackSpread
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBackSpread(JDFIntegerList value)
@@ -333,7 +357,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerList attribute BackSpread
-	 * 
+	 *
 	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getBackSpread()
@@ -343,12 +367,12 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BottleAngle ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BottleAngle
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute BottleAngle
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBottleAngle(double value)
@@ -358,7 +382,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * (17) get double attribute BottleAngle
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getBottleAngle()
@@ -366,12 +390,12 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return getRealAttribute(AttributeName.BOTTLEANGLE, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BottleAxis ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BottleAxis
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute BottleAxis
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setBottleAxis(EnumBottleAxis enumVar)
@@ -381,7 +405,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * (9) get attribute BottleAxis
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumBottleAxis getBottleAxis()
@@ -389,12 +413,12 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return EnumBottleAxis.getEnum(getAttribute(AttributeName.BOTTLEAXIS, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FaceCells ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FaceCells
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FaceCells
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFaceCells(JDFIntegerList value)
@@ -404,7 +428,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerList attribute FaceCells
-	 * 
+	 *
 	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getFaceCells()
@@ -414,12 +438,12 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FrontFacePages ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FrontFacePages
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FrontFacePages
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFrontFacePages(JDFIntegerList value)
@@ -429,7 +453,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerList attribute FrontFacePages
-	 * 
+	 *
 	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getFrontFacePages()
@@ -439,12 +463,12 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FrontPages ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FrontPages
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FrontPages
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFrontPages(JDFIntegerList value)
@@ -454,7 +478,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerList attribute FrontPages
-	 * 
+	 *
 	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getFrontPages()
@@ -464,12 +488,12 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FrontSpread ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FrontSpread
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FrontSpread
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFrontSpread(JDFIntegerList value)
@@ -479,7 +503,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerList attribute FrontSpread
-	 * 
+	 *
 	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getFrontSpread()
@@ -489,12 +513,12 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Orientation
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Orientation
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setOrientation(EnumOrientation enumVar)
@@ -504,7 +528,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * (9) get attribute Orientation
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumOrientation getOrientation()
@@ -512,12 +536,12 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, "Up"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SectionIndex ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SectionIndex
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SectionIndex
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSectionIndex(int value)
@@ -527,7 +551,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * (15) get int attribute SectionIndex
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getSectionIndex()
@@ -535,12 +559,12 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return getIntAttribute(AttributeName.SECTIONINDEX, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StationName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StationName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute StationName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setStationName(String value)
@@ -550,7 +574,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
 	/**
 	 * (23) get String attribute StationName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getStationName()
@@ -558,4 +582,4 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return getAttribute(AttributeName.STATIONNAME, null, "0");
 	}
 
-}// end namespace JDF
+}

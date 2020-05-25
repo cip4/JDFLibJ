@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -51,7 +83,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFBindList;
 import org.cip4.jdflib.resource.JDFEdgeGluing;
 import org.cip4.jdflib.resource.JDFHardCoverBinding;
@@ -59,6 +90,7 @@ import org.cip4.jdflib.resource.JDFSoftCoverBinding;
 import org.cip4.jdflib.resource.JDFStripBinding;
 import org.cip4.jdflib.resource.JDFTabs;
 import org.cip4.jdflib.resource.JDFTape;
+import org.cip4.jdflib.resource.intent.JDFAdhesiveNote;
 import org.cip4.jdflib.resource.intent.JDFBookCase;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.postpress.JDFAdhesiveBinding;
@@ -82,7 +114,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoBindingIntent : public JDFIntentResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoBindingIntent extends JDFIntentResource
@@ -102,7 +134,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[28];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[29];
 	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.BACKCOVERCOLOR, 0x66666666);
@@ -115,24 +147,25 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 		elemInfoTable[7] = new ElemInfoTable(ElementName.COVERCOLOR, 0x66666666);
 		elemInfoTable[8] = new ElemInfoTable(ElementName.COVERCOLORDETAILS, 0x33333333);
 		elemInfoTable[9] = new ElemInfoTable(ElementName.ADHESIVEBINDING, 0x66666666);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.BINDLIST, 0x66666666);
-		elemInfoTable[11] = new ElemInfoTable(ElementName.BOOKCASE, 0x66666666);
-		elemInfoTable[12] = new ElemInfoTable(ElementName.CHANNELBINDING, 0x66666666);
-		elemInfoTable[13] = new ElemInfoTable(ElementName.COILBINDING, 0x66666666);
-		elemInfoTable[14] = new ElemInfoTable(ElementName.EDGEGLUING, 0x66666666);
-		elemInfoTable[15] = new ElemInfoTable(ElementName.HARDCOVERBINDING, 0x66666666);
-		elemInfoTable[16] = new ElemInfoTable(ElementName.PLASTICCOMBBINDING, 0x66666666);
-		elemInfoTable[17] = new ElemInfoTable(ElementName.RINGBINDING, 0x66666666);
-		elemInfoTable[18] = new ElemInfoTable(ElementName.SADDLESTITCHING, 0x66666666);
-		elemInfoTable[19] = new ElemInfoTable(ElementName.SIDESEWING, 0x66666666);
-		elemInfoTable[20] = new ElemInfoTable(ElementName.SIDESTITCHING, 0x66666666);
-		elemInfoTable[21] = new ElemInfoTable(ElementName.SOFTCOVERBINDING, 0x66666666);
-		elemInfoTable[22] = new ElemInfoTable(ElementName.TAPE, 0x66666666);
-		elemInfoTable[23] = new ElemInfoTable(ElementName.TABS, 0x66666666);
-		elemInfoTable[24] = new ElemInfoTable(ElementName.THREADSEALING, 0x66666666);
-		elemInfoTable[25] = new ElemInfoTable(ElementName.THREADSEWING, 0x66666666);
-		elemInfoTable[26] = new ElemInfoTable(ElementName.STRIPBINDING, 0x66666666);
-		elemInfoTable[27] = new ElemInfoTable(ElementName.WIRECOMBBINDING, 0x66666666);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.ADHESIVENOTE, 0x66666666);
+		elemInfoTable[11] = new ElemInfoTable(ElementName.BINDLIST, 0x66666666);
+		elemInfoTable[12] = new ElemInfoTable(ElementName.BOOKCASE, 0x66666666);
+		elemInfoTable[13] = new ElemInfoTable(ElementName.CHANNELBINDING, 0x66666666);
+		elemInfoTable[14] = new ElemInfoTable(ElementName.COILBINDING, 0x66666666);
+		elemInfoTable[15] = new ElemInfoTable(ElementName.EDGEGLUING, 0x66666666);
+		elemInfoTable[16] = new ElemInfoTable(ElementName.HARDCOVERBINDING, 0x66666666);
+		elemInfoTable[17] = new ElemInfoTable(ElementName.PLASTICCOMBBINDING, 0x66666666);
+		elemInfoTable[18] = new ElemInfoTable(ElementName.RINGBINDING, 0x66666666);
+		elemInfoTable[19] = new ElemInfoTable(ElementName.SADDLESTITCHING, 0x66666666);
+		elemInfoTable[20] = new ElemInfoTable(ElementName.SIDESEWING, 0x66666666);
+		elemInfoTable[21] = new ElemInfoTable(ElementName.SIDESTITCHING, 0x66666666);
+		elemInfoTable[22] = new ElemInfoTable(ElementName.SOFTCOVERBINDING, 0x66666666);
+		elemInfoTable[23] = new ElemInfoTable(ElementName.TAPE, 0x66666666);
+		elemInfoTable[24] = new ElemInfoTable(ElementName.TABS, 0x66666666);
+		elemInfoTable[25] = new ElemInfoTable(ElementName.THREADSEALING, 0x66666666);
+		elemInfoTable[26] = new ElemInfoTable(ElementName.THREADSEWING, 0x66666666);
+		elemInfoTable[27] = new ElemInfoTable(ElementName.STRIPBINDING, 0x66666666);
+		elemInfoTable[28] = new ElemInfoTable(ElementName.WIRECOMBBINDING, 0x66666666);
 	}
 
 	@Override
@@ -143,7 +176,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoBindingIntent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -154,7 +187,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoBindingIntent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -166,7 +199,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoBindingIntent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -175,15 +208,6 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	protected JDFAutoBindingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoBindingIntent[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -253,16 +277,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 		public static final EnumBindingOrder None = new EnumBindingOrder("None");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BindingOrder ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BindingOrder
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute BindingOrder
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setBindingOrder(EnumBindingOrder enumVar)
@@ -272,7 +297,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (9) get attribute BindingOrder
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumBindingOrder getBindingOrder()
@@ -280,13 +305,14 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 		return EnumBindingOrder.getEnum(getAttribute(AttributeName.BINDINGORDER, null, "Gathering"));
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element BackCoverColor
-	 * 
+	 *
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getBackCoverColor()
@@ -296,7 +322,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBackCoverColor
-	 * 
+	 *
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateBackCoverColor()
@@ -306,18 +332,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element BackCoverColor
-	 * 
-	 * @return JDFSpanNamedColor the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanNamedColor the element @ if the element already exists
 	 */
-	public JDFSpanNamedColor appendBackCoverColor() throws JDFException
+	public JDFSpanNamedColor appendBackCoverColor()
 	{
 		return (JDFSpanNamedColor) appendElementN(ElementName.BACKCOVERCOLOR, 1, null);
 	}
 
 	/**
 	 * (26) getCreateBackCoverColorDetails
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
@@ -328,7 +353,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (27) const get element BackCoverColorDetails
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element default is getBackCoverColorDetails(0)
 	 */
@@ -339,17 +364,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * Get all BackCoverColorDetails from the current element
-	 * 
+	 *
 	 * @return Collection<JDFStringSpan>, null if none are available
 	 */
 	public Collection<JDFStringSpan> getAllBackCoverColorDetails()
 	{
-		return getChildrenByClass(JDFStringSpan.class, false, 0);
+		return getChildArrayByClass(JDFStringSpan.class, false, 0);
 	}
 
 	/**
 	 * (30) append element BackCoverColorDetails
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan appendBackCoverColorDetails()
@@ -359,7 +384,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element BindingType
-	 * 
+	 *
 	 * @return JDFSpanBindingType the element
 	 */
 	public JDFSpanBindingType getBindingType()
@@ -369,7 +394,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBindingType
-	 * 
+	 *
 	 * @return JDFSpanBindingType the element
 	 */
 	public JDFSpanBindingType getCreateBindingType()
@@ -379,18 +404,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element BindingType
-	 * 
-	 * @return JDFSpanBindingType the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanBindingType the element @ if the element already exists
 	 */
-	public JDFSpanBindingType appendBindingType() throws JDFException
+	public JDFSpanBindingType appendBindingType()
 	{
 		return (JDFSpanBindingType) appendElementN(ElementName.BINDINGTYPE, 1, null);
 	}
 
 	/**
 	 * (24) const get element BindingColor
-	 * 
+	 *
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getBindingColor()
@@ -400,7 +424,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBindingColor
-	 * 
+	 *
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateBindingColor()
@@ -410,18 +434,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element BindingColor
-	 * 
-	 * @return JDFSpanNamedColor the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanNamedColor the element @ if the element already exists
 	 */
-	public JDFSpanNamedColor appendBindingColor() throws JDFException
+	public JDFSpanNamedColor appendBindingColor()
 	{
 		return (JDFSpanNamedColor) appendElementN(ElementName.BINDINGCOLOR, 1, null);
 	}
 
 	/**
 	 * (26) getCreateBindingColorDetails
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
@@ -432,7 +455,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (27) const get element BindingColorDetails
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element default is getBindingColorDetails(0)
 	 */
@@ -443,17 +466,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * Get all BindingColorDetails from the current element
-	 * 
+	 *
 	 * @return Collection<JDFStringSpan>, null if none are available
 	 */
 	public Collection<JDFStringSpan> getAllBindingColorDetails()
 	{
-		return getChildrenByClass(JDFStringSpan.class, false, 0);
+		return getChildArrayByClass(JDFStringSpan.class, false, 0);
 	}
 
 	/**
 	 * (30) append element BindingColorDetails
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan appendBindingColorDetails()
@@ -463,7 +486,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element BindingLength
-	 * 
+	 *
 	 * @return JDFSpanBindingLength the element
 	 */
 	public JDFSpanBindingLength getBindingLength()
@@ -473,7 +496,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBindingLength
-	 * 
+	 *
 	 * @return JDFSpanBindingLength the element
 	 */
 	public JDFSpanBindingLength getCreateBindingLength()
@@ -483,18 +506,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element BindingLength
-	 * 
-	 * @return JDFSpanBindingLength the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanBindingLength the element @ if the element already exists
 	 */
-	public JDFSpanBindingLength appendBindingLength() throws JDFException
+	public JDFSpanBindingLength appendBindingLength()
 	{
 		return (JDFSpanBindingLength) appendElementN(ElementName.BINDINGLENGTH, 1, null);
 	}
 
 	/**
 	 * (24) const get element BindingSide
-	 * 
+	 *
 	 * @return JDFSpanBindingSide the element
 	 */
 	public JDFSpanBindingSide getBindingSide()
@@ -504,7 +526,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBindingSide
-	 * 
+	 *
 	 * @return JDFSpanBindingSide the element
 	 */
 	public JDFSpanBindingSide getCreateBindingSide()
@@ -514,18 +536,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element BindingSide
-	 * 
-	 * @return JDFSpanBindingSide the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanBindingSide the element @ if the element already exists
 	 */
-	public JDFSpanBindingSide appendBindingSide() throws JDFException
+	public JDFSpanBindingSide appendBindingSide()
 	{
 		return (JDFSpanBindingSide) appendElementN(ElementName.BINDINGSIDE, 1, null);
 	}
 
 	/**
 	 * (24) const get element CoverColor
-	 * 
+	 *
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCoverColor()
@@ -535,7 +556,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCoverColor
-	 * 
+	 *
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateCoverColor()
@@ -545,18 +566,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element CoverColor
-	 * 
-	 * @return JDFSpanNamedColor the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanNamedColor the element @ if the element already exists
 	 */
-	public JDFSpanNamedColor appendCoverColor() throws JDFException
+	public JDFSpanNamedColor appendCoverColor()
 	{
 		return (JDFSpanNamedColor) appendElementN(ElementName.COVERCOLOR, 1, null);
 	}
 
 	/**
 	 * (26) getCreateCoverColorDetails
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
@@ -567,7 +587,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (27) const get element CoverColorDetails
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element default is getCoverColorDetails(0)
 	 */
@@ -578,17 +598,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * Get all CoverColorDetails from the current element
-	 * 
+	 *
 	 * @return Collection<JDFStringSpan>, null if none are available
 	 */
 	public Collection<JDFStringSpan> getAllCoverColorDetails()
 	{
-		return getChildrenByClass(JDFStringSpan.class, false, 0);
+		return getChildArrayByClass(JDFStringSpan.class, false, 0);
 	}
 
 	/**
 	 * (30) append element CoverColorDetails
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan appendCoverColorDetails()
@@ -598,7 +618,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element AdhesiveBinding
-	 * 
+	 *
 	 * @return JDFAdhesiveBinding the element
 	 */
 	public JDFAdhesiveBinding getAdhesiveBinding()
@@ -608,7 +628,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateAdhesiveBinding
-	 * 
+	 *
 	 * @return JDFAdhesiveBinding the element
 	 */
 	public JDFAdhesiveBinding getCreateAdhesiveBinding()
@@ -618,18 +638,47 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element AdhesiveBinding
-	 * 
-	 * @return JDFAdhesiveBinding the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFAdhesiveBinding the element @ if the element already exists
 	 */
-	public JDFAdhesiveBinding appendAdhesiveBinding() throws JDFException
+	public JDFAdhesiveBinding appendAdhesiveBinding()
 	{
 		return (JDFAdhesiveBinding) appendElementN(ElementName.ADHESIVEBINDING, 1, null);
 	}
 
 	/**
+	 * (24) const get element AdhesiveNote
+	 *
+	 * @return JDFAdhesiveNote the element
+	 */
+	public JDFAdhesiveNote getAdhesiveNote()
+	{
+		return (JDFAdhesiveNote) getElement(ElementName.ADHESIVENOTE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateAdhesiveNote
+	 *
+	 * @return JDFAdhesiveNote the element
+	 */
+	public JDFAdhesiveNote getCreateAdhesiveNote()
+	{
+		return (JDFAdhesiveNote) getCreateElement_JDFElement(ElementName.ADHESIVENOTE, null, 0);
+	}
+
+	/**
+	 * (29) append element AdhesiveNote
+	 *
+	 * @return JDFAdhesiveNote the element @ if the element already exists
+	 */
+	public JDFAdhesiveNote appendAdhesiveNote()
+	{
+		return (JDFAdhesiveNote) appendElementN(ElementName.ADHESIVENOTE, 1, null);
+	}
+
+	/**
 	 * (24) const get element BindList
-	 * 
+	 *
 	 * @return JDFBindList the element
 	 */
 	public JDFBindList getBindList()
@@ -639,7 +688,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBindList
-	 * 
+	 *
 	 * @return JDFBindList the element
 	 */
 	public JDFBindList getCreateBindList()
@@ -649,18 +698,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element BindList
-	 * 
-	 * @return JDFBindList the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFBindList the element @ if the element already exists
 	 */
-	public JDFBindList appendBindList() throws JDFException
+	public JDFBindList appendBindList()
 	{
 		return (JDFBindList) appendElementN(ElementName.BINDLIST, 1, null);
 	}
 
 	/**
 	 * (24) const get element BookCase
-	 * 
+	 *
 	 * @return JDFBookCase the element
 	 */
 	public JDFBookCase getBookCase()
@@ -670,7 +718,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBookCase
-	 * 
+	 *
 	 * @return JDFBookCase the element
 	 */
 	public JDFBookCase getCreateBookCase()
@@ -680,18 +728,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element BookCase
-	 * 
-	 * @return JDFBookCase the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFBookCase the element @ if the element already exists
 	 */
-	public JDFBookCase appendBookCase() throws JDFException
+	public JDFBookCase appendBookCase()
 	{
 		return (JDFBookCase) appendElementN(ElementName.BOOKCASE, 1, null);
 	}
 
 	/**
 	 * (24) const get element ChannelBinding
-	 * 
+	 *
 	 * @return JDFChannelBinding the element
 	 */
 	public JDFChannelBinding getChannelBinding()
@@ -701,7 +748,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateChannelBinding
-	 * 
+	 *
 	 * @return JDFChannelBinding the element
 	 */
 	public JDFChannelBinding getCreateChannelBinding()
@@ -711,18 +758,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element ChannelBinding
-	 * 
-	 * @return JDFChannelBinding the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFChannelBinding the element @ if the element already exists
 	 */
-	public JDFChannelBinding appendChannelBinding() throws JDFException
+	public JDFChannelBinding appendChannelBinding()
 	{
 		return (JDFChannelBinding) appendElementN(ElementName.CHANNELBINDING, 1, null);
 	}
 
 	/**
 	 * (24) const get element CoilBinding
-	 * 
+	 *
 	 * @return JDFCoilBinding the element
 	 */
 	public JDFCoilBinding getCoilBinding()
@@ -732,7 +778,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCoilBinding
-	 * 
+	 *
 	 * @return JDFCoilBinding the element
 	 */
 	public JDFCoilBinding getCreateCoilBinding()
@@ -742,18 +788,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element CoilBinding
-	 * 
-	 * @return JDFCoilBinding the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFCoilBinding the element @ if the element already exists
 	 */
-	public JDFCoilBinding appendCoilBinding() throws JDFException
+	public JDFCoilBinding appendCoilBinding()
 	{
 		return (JDFCoilBinding) appendElementN(ElementName.COILBINDING, 1, null);
 	}
 
 	/**
 	 * (24) const get element EdgeGluing
-	 * 
+	 *
 	 * @return JDFEdgeGluing the element
 	 */
 	public JDFEdgeGluing getEdgeGluing()
@@ -763,7 +808,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateEdgeGluing
-	 * 
+	 *
 	 * @return JDFEdgeGluing the element
 	 */
 	public JDFEdgeGluing getCreateEdgeGluing()
@@ -773,18 +818,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element EdgeGluing
-	 * 
-	 * @return JDFEdgeGluing the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFEdgeGluing the element @ if the element already exists
 	 */
-	public JDFEdgeGluing appendEdgeGluing() throws JDFException
+	public JDFEdgeGluing appendEdgeGluing()
 	{
 		return (JDFEdgeGluing) appendElementN(ElementName.EDGEGLUING, 1, null);
 	}
 
 	/**
 	 * (24) const get element HardCoverBinding
-	 * 
+	 *
 	 * @return JDFHardCoverBinding the element
 	 */
 	public JDFHardCoverBinding getHardCoverBinding()
@@ -794,7 +838,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateHardCoverBinding
-	 * 
+	 *
 	 * @return JDFHardCoverBinding the element
 	 */
 	public JDFHardCoverBinding getCreateHardCoverBinding()
@@ -804,18 +848,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element HardCoverBinding
-	 * 
-	 * @return JDFHardCoverBinding the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFHardCoverBinding the element @ if the element already exists
 	 */
-	public JDFHardCoverBinding appendHardCoverBinding() throws JDFException
+	public JDFHardCoverBinding appendHardCoverBinding()
 	{
 		return (JDFHardCoverBinding) appendElementN(ElementName.HARDCOVERBINDING, 1, null);
 	}
 
 	/**
 	 * (24) const get element PlasticCombBinding
-	 * 
+	 *
 	 * @return JDFPlasticCombBinding the element
 	 */
 	public JDFPlasticCombBinding getPlasticCombBinding()
@@ -825,7 +868,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePlasticCombBinding
-	 * 
+	 *
 	 * @return JDFPlasticCombBinding the element
 	 */
 	public JDFPlasticCombBinding getCreatePlasticCombBinding()
@@ -835,18 +878,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element PlasticCombBinding
-	 * 
-	 * @return JDFPlasticCombBinding the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFPlasticCombBinding the element @ if the element already exists
 	 */
-	public JDFPlasticCombBinding appendPlasticCombBinding() throws JDFException
+	public JDFPlasticCombBinding appendPlasticCombBinding()
 	{
 		return (JDFPlasticCombBinding) appendElementN(ElementName.PLASTICCOMBBINDING, 1, null);
 	}
 
 	/**
 	 * (24) const get element RingBinding
-	 * 
+	 *
 	 * @return JDFRingBinding the element
 	 */
 	public JDFRingBinding getRingBinding()
@@ -856,7 +898,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateRingBinding
-	 * 
+	 *
 	 * @return JDFRingBinding the element
 	 */
 	public JDFRingBinding getCreateRingBinding()
@@ -866,18 +908,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element RingBinding
-	 * 
-	 * @return JDFRingBinding the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFRingBinding the element @ if the element already exists
 	 */
-	public JDFRingBinding appendRingBinding() throws JDFException
+	public JDFRingBinding appendRingBinding()
 	{
 		return (JDFRingBinding) appendElementN(ElementName.RINGBINDING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SaddleStitching
-	 * 
+	 *
 	 * @return JDFSaddleStitching the element
 	 */
 	public JDFSaddleStitching getSaddleStitching()
@@ -887,7 +928,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateSaddleStitching
-	 * 
+	 *
 	 * @return JDFSaddleStitching the element
 	 */
 	public JDFSaddleStitching getCreateSaddleStitching()
@@ -897,18 +938,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element SaddleStitching
-	 * 
-	 * @return JDFSaddleStitching the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSaddleStitching the element @ if the element already exists
 	 */
-	public JDFSaddleStitching appendSaddleStitching() throws JDFException
+	public JDFSaddleStitching appendSaddleStitching()
 	{
 		return (JDFSaddleStitching) appendElementN(ElementName.SADDLESTITCHING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SideSewing
-	 * 
+	 *
 	 * @return JDFSideSewing the element
 	 */
 	public JDFSideSewing getSideSewing()
@@ -918,7 +958,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateSideSewing
-	 * 
+	 *
 	 * @return JDFSideSewing the element
 	 */
 	public JDFSideSewing getCreateSideSewing()
@@ -928,18 +968,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element SideSewing
-	 * 
-	 * @return JDFSideSewing the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSideSewing the element @ if the element already exists
 	 */
-	public JDFSideSewing appendSideSewing() throws JDFException
+	public JDFSideSewing appendSideSewing()
 	{
 		return (JDFSideSewing) appendElementN(ElementName.SIDESEWING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SideStitching
-	 * 
+	 *
 	 * @return JDFSideStitching the element
 	 */
 	public JDFSideStitching getSideStitching()
@@ -949,7 +988,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateSideStitching
-	 * 
+	 *
 	 * @return JDFSideStitching the element
 	 */
 	public JDFSideStitching getCreateSideStitching()
@@ -959,18 +998,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element SideStitching
-	 * 
-	 * @return JDFSideStitching the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSideStitching the element @ if the element already exists
 	 */
-	public JDFSideStitching appendSideStitching() throws JDFException
+	public JDFSideStitching appendSideStitching()
 	{
 		return (JDFSideStitching) appendElementN(ElementName.SIDESTITCHING, 1, null);
 	}
 
 	/**
 	 * (24) const get element SoftCoverBinding
-	 * 
+	 *
 	 * @return JDFSoftCoverBinding the element
 	 */
 	public JDFSoftCoverBinding getSoftCoverBinding()
@@ -980,7 +1018,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateSoftCoverBinding
-	 * 
+	 *
 	 * @return JDFSoftCoverBinding the element
 	 */
 	public JDFSoftCoverBinding getCreateSoftCoverBinding()
@@ -990,18 +1028,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element SoftCoverBinding
-	 * 
-	 * @return JDFSoftCoverBinding the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSoftCoverBinding the element @ if the element already exists
 	 */
-	public JDFSoftCoverBinding appendSoftCoverBinding() throws JDFException
+	public JDFSoftCoverBinding appendSoftCoverBinding()
 	{
 		return (JDFSoftCoverBinding) appendElementN(ElementName.SOFTCOVERBINDING, 1, null);
 	}
 
 	/**
 	 * (24) const get element Tape
-	 * 
+	 *
 	 * @return JDFTape the element
 	 */
 	public JDFTape getTape()
@@ -1011,7 +1048,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateTape
-	 * 
+	 *
 	 * @return JDFTape the element
 	 */
 	public JDFTape getCreateTape()
@@ -1021,18 +1058,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Tape
-	 * 
-	 * @return JDFTape the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFTape the element @ if the element already exists
 	 */
-	public JDFTape appendTape() throws JDFException
+	public JDFTape appendTape()
 	{
 		return (JDFTape) appendElementN(ElementName.TAPE, 1, null);
 	}
 
 	/**
 	 * (24) const get element Tabs
-	 * 
+	 *
 	 * @return JDFTabs the element
 	 */
 	public JDFTabs getTabs()
@@ -1042,7 +1078,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateTabs
-	 * 
+	 *
 	 * @return JDFTabs the element
 	 */
 	public JDFTabs getCreateTabs()
@@ -1052,18 +1088,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Tabs
-	 * 
-	 * @return JDFTabs the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFTabs the element @ if the element already exists
 	 */
-	public JDFTabs appendTabs() throws JDFException
+	public JDFTabs appendTabs()
 	{
 		return (JDFTabs) appendElementN(ElementName.TABS, 1, null);
 	}
 
 	/**
 	 * (24) const get element ThreadSealing
-	 * 
+	 *
 	 * @return JDFThreadSealing the element
 	 */
 	public JDFThreadSealing getThreadSealing()
@@ -1073,7 +1108,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateThreadSealing
-	 * 
+	 *
 	 * @return JDFThreadSealing the element
 	 */
 	public JDFThreadSealing getCreateThreadSealing()
@@ -1083,18 +1118,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element ThreadSealing
-	 * 
-	 * @return JDFThreadSealing the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFThreadSealing the element @ if the element already exists
 	 */
-	public JDFThreadSealing appendThreadSealing() throws JDFException
+	public JDFThreadSealing appendThreadSealing()
 	{
 		return (JDFThreadSealing) appendElementN(ElementName.THREADSEALING, 1, null);
 	}
 
 	/**
 	 * (24) const get element ThreadSewing
-	 * 
+	 *
 	 * @return JDFThreadSewing the element
 	 */
 	public JDFThreadSewing getThreadSewing()
@@ -1104,7 +1138,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateThreadSewing
-	 * 
+	 *
 	 * @return JDFThreadSewing the element
 	 */
 	public JDFThreadSewing getCreateThreadSewing()
@@ -1114,18 +1148,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element ThreadSewing
-	 * 
-	 * @return JDFThreadSewing the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFThreadSewing the element @ if the element already exists
 	 */
-	public JDFThreadSewing appendThreadSewing() throws JDFException
+	public JDFThreadSewing appendThreadSewing()
 	{
 		return (JDFThreadSewing) appendElementN(ElementName.THREADSEWING, 1, null);
 	}
 
 	/**
 	 * (24) const get element StripBinding
-	 * 
+	 *
 	 * @return JDFStripBinding the element
 	 */
 	public JDFStripBinding getStripBinding()
@@ -1135,7 +1168,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateStripBinding
-	 * 
+	 *
 	 * @return JDFStripBinding the element
 	 */
 	public JDFStripBinding getCreateStripBinding()
@@ -1145,18 +1178,17 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element StripBinding
-	 * 
-	 * @return JDFStripBinding the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFStripBinding the element @ if the element already exists
 	 */
-	public JDFStripBinding appendStripBinding() throws JDFException
+	public JDFStripBinding appendStripBinding()
 	{
 		return (JDFStripBinding) appendElementN(ElementName.STRIPBINDING, 1, null);
 	}
 
 	/**
 	 * (24) const get element WireCombBinding
-	 * 
+	 *
 	 * @return JDFWireCombBinding the element
 	 */
 	public JDFWireCombBinding getWireCombBinding()
@@ -1166,7 +1198,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateWireCombBinding
-	 * 
+	 *
 	 * @return JDFWireCombBinding the element
 	 */
 	public JDFWireCombBinding getCreateWireCombBinding()
@@ -1176,13 +1208,12 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element WireCombBinding
-	 * 
-	 * @return JDFWireCombBinding the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFWireCombBinding the element @ if the element already exists
 	 */
-	public JDFWireCombBinding appendWireCombBinding() throws JDFException
+	public JDFWireCombBinding appendWireCombBinding()
 	{
 		return (JDFWireCombBinding) appendElementN(ElementName.WIRECOMBBINDING, 1, null);
 	}
 
-}// end namespace JDF
+}

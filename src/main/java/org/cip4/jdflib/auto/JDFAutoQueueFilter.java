@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -58,6 +90,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFQueueEntryDef;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFGangSource;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.JDFDate;
 
@@ -65,7 +98,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoQueueFilter : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoQueueFilter extends JDFElement
@@ -73,20 +106,24 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[15];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33311111, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.GANGNAMES, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXENTRIES, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.OLDERTHAN, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PREVIEWUSAGES, 0x33331111, AttributeInfo.EnumAttributeType.enumerations, EnumPreviewUsages.getEnum(0), "Separation");
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.NEWERTHAN, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.QUEUEENTRYDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumQueueEntryDetails.getEnum(0), "Brief");
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.STATUSLIST, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumStatusList.getEnum(0), null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.UPDATEGRANULARITY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateGranularity.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FIRSTENTRY, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.GANGNAMES, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.LASTENTRY, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXENTRIES, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MAXPRIORITY, 0x33111111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.MINPRIORITY, 0x33111111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.OLDERTHAN, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.PREVIEWUSAGES, 0x33331111, AttributeInfo.EnumAttributeType.enumerations, EnumPreviewUsages.getEnum(0), "Separation");
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.NEWERTHAN, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.QUEUEENTRYDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumQueueEntryDetails.getEnum(0), "Brief");
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.STATUSLIST, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumStatusList.getEnum(0), null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.UPDATEGRANULARITY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateGranularity.getEnum(0), null);
 	}
 
 	@Override
@@ -95,12 +132,13 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEENTRYDEF, 0x33333311);
 		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x33333311);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333311);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.GANGSOURCE, 0x33333311);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.PART, 0x33333311);
 	}
 
 	@Override
@@ -111,7 +149,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoQueueFilter
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -122,7 +160,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoQueueFilter
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -134,7 +172,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoQueueFilter
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -143,15 +181,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	protected JDFAutoQueueFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoQueueFilter[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -432,16 +461,17 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		public static final EnumUpdateGranularity ChangesOnly = new EnumUpdateGranularity("ChangesOnly");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Activation
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Activation
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setActivation(EnumActivation enumVar)
@@ -451,7 +481,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (9) get attribute Activation
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumActivation getActivation()
@@ -459,12 +489,35 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GangNames ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FirstEntry
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute FirstEntry
+	 *
+	 * @param value the value to set the attribute to
 	 */
+	public void setFirstEntry(String value)
+	{
+		setAttribute(AttributeName.FIRSTENTRY, value, null);
+	}
+
+	/**
+	 * (23) get String attribute FirstEntry
+	 *
+	 * @return the value of the attribute
+	 */
+	public String getFirstEntry()
+	{
+		return getAttribute(AttributeName.FIRSTENTRY, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GangNames
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute GangNames
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setGangNames(VString value)
@@ -474,7 +527,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (21) get VString attribute GangNames
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getGangNames()
@@ -485,12 +538,12 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return vStrAttrib;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute JobID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setJobID(String value)
@@ -500,7 +553,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (23) get String attribute JobID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getJobID()
@@ -508,12 +561,12 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobPartID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute JobPartID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setJobPartID(String value)
@@ -523,7 +576,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (23) get String attribute JobPartID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getJobPartID()
@@ -531,12 +584,35 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxEntries ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LastEntry
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute LastEntry
+	 *
+	 * @param value the value to set the attribute to
 	 */
+	public void setLastEntry(String value)
+	{
+		setAttribute(AttributeName.LASTENTRY, value, null);
+	}
+
+	/**
+	 * (23) get String attribute LastEntry
+	 *
+	 * @return the value of the attribute
+	 */
+	public String getLastEntry()
+	{
+		return getAttribute(AttributeName.LASTENTRY, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxEntries
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MaxEntries
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMaxEntries(int value)
@@ -546,7 +622,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (15) get int attribute MaxEntries
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getMaxEntries()
@@ -554,12 +630,58 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return getIntAttribute(AttributeName.MAXENTRIES, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OlderThan ---------------------------------------------------------------------
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxPriority
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute MaxPriority
+	 *
+	 * @param value the value to set the attribute to
 	 */
+	public void setMaxPriority(int value)
+	{
+		setAttribute(AttributeName.MAXPRIORITY, value, null);
+	}
+
+	/**
+	 * (15) get int attribute MaxPriority
+	 *
+	 * @return int the value of the attribute
+	 */
+	public int getMaxPriority()
+	{
+		return getIntAttribute(AttributeName.MAXPRIORITY, null, 0);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MinPriority
+	--------------------------------------------------------------------- */
+	/**
+	 * (36) set attribute MinPriority
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setMinPriority(int value)
+	{
+		setAttribute(AttributeName.MINPRIORITY, value, null);
+	}
+
+	/**
+	 * (15) get int attribute MinPriority
+	 *
+	 * @return int the value of the attribute
+	 */
+	public int getMinPriority()
+	{
+		return getIntAttribute(AttributeName.MINPRIORITY, null, 0);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OlderThan
+	--------------------------------------------------------------------- */
 	/**
 	 * (11) set attribute OlderThan
-	 * 
+	 *
 	 * @param value the value to set the attribute to or null
 	 */
 	public void setOlderThan(JDFDate value)
@@ -574,7 +696,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (12) get JDFDate attribute OlderThan
-	 * 
+	 *
 	 * @return JDFDate the value of the attribute
 	 */
 	public JDFDate getOlderThan()
@@ -584,12 +706,12 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return ret;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreviewUsages ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PreviewUsages
+	--------------------------------------------------------------------- */
 	/**
 	 * (5.2) set attribute PreviewUsages
-	 * 
+	 *
 	 * @param v vector of the enumeration values
 	 */
 	public void setPreviewUsages(Vector<? extends ValuedEnum> v)
@@ -599,7 +721,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (9.2) get PreviewUsages attribute PreviewUsages
-	 * 
+	 *
 	 * @return Vector of the enumerations
 	 */
 	public Vector<? extends ValuedEnum> getPreviewUsages()
@@ -607,12 +729,12 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return getEnumerationsAttribute(AttributeName.PREVIEWUSAGES, null, EnumPreviewUsages.Separation, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NewerThan ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NewerThan
+	--------------------------------------------------------------------- */
 	/**
 	 * (11) set attribute NewerThan
-	 * 
+	 *
 	 * @param value the value to set the attribute to or null
 	 */
 	public void setNewerThan(JDFDate value)
@@ -627,7 +749,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (12) get JDFDate attribute NewerThan
-	 * 
+	 *
 	 * @return JDFDate the value of the attribute
 	 */
 	public JDFDate getNewerThan()
@@ -637,12 +759,12 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return ret;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryDetails ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute QueueEntryDetails
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute QueueEntryDetails
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setQueueEntryDetails(EnumQueueEntryDetails enumVar)
@@ -652,7 +774,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (9) get attribute QueueEntryDetails
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumQueueEntryDetails getQueueEntryDetails()
@@ -660,12 +782,12 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return EnumQueueEntryDetails.getEnum(getAttribute(AttributeName.QUEUEENTRYDETAILS, null, "Brief"));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StatusList ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StatusList
+	--------------------------------------------------------------------- */
 	/**
 	 * (5.2) set attribute StatusList
-	 * 
+	 *
 	 * @param v vector of the enumeration values
 	 */
 	public void setStatusList(Vector<? extends ValuedEnum> v)
@@ -675,7 +797,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (9.2) get StatusList attribute StatusList
-	 * 
+	 *
 	 * @return Vector of the enumerations
 	 */
 	public Vector<? extends ValuedEnum> getStatusList()
@@ -683,12 +805,12 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return getEnumerationsAttribute(AttributeName.STATUSLIST, null, EnumStatusList.getEnum(0), false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UpdateGranularity ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute UpdateGranularity
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute UpdateGranularity
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setUpdateGranularity(EnumUpdateGranularity enumVar)
@@ -698,7 +820,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (9) get attribute UpdateGranularity
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumUpdateGranularity getUpdateGranularity()
@@ -706,13 +828,14 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return EnumUpdateGranularity.getEnum(getAttribute(AttributeName.UPDATEGRANULARITY, null, null));
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateQueueEntryDef
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFQueueEntryDef the element
 	 */
@@ -723,7 +846,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (27) const get element QueueEntryDef
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFQueueEntryDef the element default is getQueueEntryDef(0)
 	 */
@@ -734,17 +857,17 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * Get all QueueEntryDef from the current element
-	 * 
+	 *
 	 * @return Collection<JDFQueueEntryDef>, null if none are available
 	 */
 	public Collection<JDFQueueEntryDef> getAllQueueEntryDef()
 	{
-		return getChildrenByClass(JDFQueueEntryDef.class, false, 0);
+		return getChildArrayByClass(JDFQueueEntryDef.class, false, 0);
 	}
 
 	/**
 	 * (30) append element QueueEntryDef
-	 * 
+	 *
 	 * @return JDFQueueEntryDef the element
 	 */
 	public JDFQueueEntryDef appendQueueEntryDef()
@@ -754,7 +877,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (26) getCreateDevice
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
 	 */
@@ -765,7 +888,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (27) const get element Device
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element default is getDevice(0)
 	 */
@@ -776,17 +899,17 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * Get all Device from the current element
-	 * 
+	 *
 	 * @return Collection<JDFDevice>, null if none are available
 	 */
 	public Collection<JDFDevice> getAllDevice()
 	{
-		return getChildrenByClass(JDFDevice.class, false, 0);
+		return getChildArrayByClass(JDFDevice.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Device
-	 * 
+	 *
 	 * @return JDFDevice the element
 	 */
 	public JDFDevice appendDevice()
@@ -795,8 +918,50 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	}
 
 	/**
+	 * (26) getCreateGangSource
+	 *
+	 * @param iSkip number of elements to skip
+	 * @return JDFGangSource the element
+	 */
+	public JDFGangSource getCreateGangSource(int iSkip)
+	{
+		return (JDFGangSource) getCreateElement_JDFElement(ElementName.GANGSOURCE, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element GangSource
+	 *
+	 * @param iSkip number of elements to skip
+	 * @return JDFGangSource the element default is getGangSource(0)
+	 */
+	public JDFGangSource getGangSource(int iSkip)
+	{
+		return (JDFGangSource) getElement(ElementName.GANGSOURCE, null, iSkip);
+	}
+
+	/**
+	 * Get all GangSource from the current element
+	 *
+	 * @return Collection<JDFGangSource>, null if none are available
+	 */
+	public Collection<JDFGangSource> getAllGangSource()
+	{
+		return getChildArrayByClass(JDFGangSource.class, false, 0);
+	}
+
+	/**
+	 * (30) append element GangSource
+	 *
+	 * @return JDFGangSource the element
+	 */
+	public JDFGangSource appendGangSource()
+	{
+		return (JDFGangSource) appendElement(ElementName.GANGSOURCE, null);
+	}
+
+	/**
 	 * (26) getCreatePart
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -807,7 +972,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (27) const get element Part
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element default is getPart(0)
 	 */
@@ -818,17 +983,17 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * Get all Part from the current element
-	 * 
+	 *
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()
 	{
-		return getChildrenByClass(JDFPart.class, false, 0);
+		return getChildArrayByClass(JDFPart.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Part
-	 * 
+	 *
 	 * @return JDFPart the element
 	 */
 	public JDFPart appendPart()
@@ -836,4 +1001,4 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return (JDFPart) appendElement(ElementName.PART, null);
 	}
 
-}// end namespace JDF
+}

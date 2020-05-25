@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -48,7 +80,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFCertification;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.JDFMediaLayers;
@@ -71,7 +102,7 @@ import org.cip4.jdflib.span.JDFXYPairSpan;
  *****************************************************************************
  * class JDFAutoMediaIntent : public JDFIntentResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoMediaIntent extends JDFIntentResource
@@ -104,7 +135,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 		elemInfoTable[5] = new ElemInfoTable(ElementName.FLUTE, 0x66661111);
 		elemInfoTable[6] = new ElemInfoTable(ElementName.FLUTEDIRECTION, 0x66661111);
 		elemInfoTable[7] = new ElemInfoTable(ElementName.FRONTCOATINGS, 0x66666666);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.GRADE, 0x66666666);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.GRADE, 0x77666666);
 		elemInfoTable[9] = new ElemInfoTable(ElementName.GRAINDIRECTION, 0x66666611);
 		elemInfoTable[10] = new ElemInfoTable(ElementName.HOLECOUNT, 0x77777776);
 		elemInfoTable[11] = new ElemInfoTable(ElementName.HOLETYPE, 0x66666661);
@@ -136,69 +167,61 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoMediaIntent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMediaIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoMediaIntent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMediaIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoMediaIntent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMediaIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoMediaIntent[  --> " + super.toString() + " ]";
-	}
-
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrePrinted ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrePrinted
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute PrePrinted
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPrePrinted(final boolean value)
+	public void setPrePrinted(boolean value)
 	{
 		setAttribute(AttributeName.PREPRINTED, value, null);
 	}
 
 	/**
 	 * (18) get boolean attribute PrePrinted
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getPrePrinted()
@@ -206,22 +229,22 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 		return getBoolAttribute(AttributeName.PREPRINTED, null, false);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaSetCount ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaSetCount
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MediaSetCount
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMediaSetCount(final int value)
+	public void setMediaSetCount(int value)
 	{
 		setAttribute(AttributeName.MEDIASETCOUNT, value, null);
 	}
 
 	/**
 	 * (15) get int attribute MediaSetCount
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getMediaSetCount()
@@ -229,22 +252,22 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 		return getIntAttribute(AttributeName.MEDIASETCOUNT, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UserMediaType ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute UserMediaType
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute UserMediaType
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUserMediaType(final String value)
+	public void setUserMediaType(String value)
 	{
 		setAttribute(AttributeName.USERMEDIATYPE, value, null);
 	}
 
 	/**
 	 * (23) get String attribute UserMediaType
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getUserMediaType()
@@ -252,13 +275,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 		return getAttribute(AttributeName.USERMEDIATYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element BackCoatings
-	 * 
+	 *
 	 * @return JDFSpanCoatings the element
 	 */
 	public JDFSpanCoatings getBackCoatings()
@@ -268,7 +292,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBackCoatings
-	 * 
+	 *
 	 * @return JDFSpanCoatings the element
 	 */
 	public JDFSpanCoatings getCreateBackCoatings()
@@ -278,18 +302,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element BackCoatings
-	 * 
-	 * @return JDFSpanCoatings the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanCoatings the element @ if the element already exists
 	 */
-	public JDFSpanCoatings appendBackCoatings() throws JDFException
+	public JDFSpanCoatings appendBackCoatings()
 	{
 		return (JDFSpanCoatings) appendElementN(ElementName.BACKCOATINGS, 1, null);
 	}
 
 	/**
 	 * (24) const get element Brightness
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getBrightness()
@@ -299,7 +322,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBrightness
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateBrightness()
@@ -309,18 +332,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Brightness
-	 * 
-	 * @return JDFNumberSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNumberSpan the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendBrightness() throws JDFException
+	public JDFNumberSpan appendBrightness()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.BRIGHTNESS, 1, null);
 	}
 
 	/**
 	 * (24) const get element BuyerSupplied
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getBuyerSupplied()
@@ -330,7 +352,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBuyerSupplied
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateBuyerSupplied()
@@ -340,50 +362,49 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element BuyerSupplied
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendBuyerSupplied() throws JDFException
+	public JDFOptionSpan appendBuyerSupplied()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.BUYERSUPPLIED, 1, null);
 	}
 
 	/**
 	 * (26) getCreateCertification
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFCertification the element
 	 */
-	public JDFCertification getCreateCertification(final int iSkip)
+	public JDFCertification getCreateCertification(int iSkip)
 	{
 		return (JDFCertification) getCreateElement_JDFElement(ElementName.CERTIFICATION, null, iSkip);
 	}
 
 	/**
 	 * (27) const get element Certification
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFCertification the element default is getCertification(0)
 	 */
-	public JDFCertification getCertification(final int iSkip)
+	public JDFCertification getCertification(int iSkip)
 	{
 		return (JDFCertification) getElement(ElementName.CERTIFICATION, null, iSkip);
 	}
 
 	/**
 	 * Get all Certification from the current element
-	 * 
+	 *
 	 * @return Collection<JDFCertification>, null if none are available
 	 */
 	public Collection<JDFCertification> getAllCertification()
 	{
-		return getChildrenByClass(JDFCertification.class, false, 0);
+		return getChildArrayByClass(JDFCertification.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Certification
-	 * 
+	 *
 	 * @return JDFCertification the element
 	 */
 	public JDFCertification appendCertification()
@@ -393,7 +414,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element Dimensions
-	 * 
+	 *
 	 * @return JDFXYPairSpan the element
 	 */
 	public JDFXYPairSpan getDimensions()
@@ -403,7 +424,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateDimensions
-	 * 
+	 *
 	 * @return JDFXYPairSpan the element
 	 */
 	public JDFXYPairSpan getCreateDimensions()
@@ -413,18 +434,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Dimensions
-	 * 
-	 * @return JDFXYPairSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFXYPairSpan the element @ if the element already exists
 	 */
-	public JDFXYPairSpan appendDimensions() throws JDFException
+	public JDFXYPairSpan appendDimensions()
 	{
 		return (JDFXYPairSpan) appendElementN(ElementName.DIMENSIONS, 1, null);
 	}
 
 	/**
 	 * (24) const get element Flute
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getFlute()
@@ -434,7 +454,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateFlute
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateFlute()
@@ -444,18 +464,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Flute
-	 * 
-	 * @return JDFNameSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNameSpan the element @ if the element already exists
 	 */
-	public JDFNameSpan appendFlute() throws JDFException
+	public JDFNameSpan appendFlute()
 	{
 		return (JDFNameSpan) appendElementN(ElementName.FLUTE, 1, null);
 	}
 
 	/**
 	 * (24) const get element FluteDirection
-	 * 
+	 *
 	 * @return JDFSpanFluteDirection the element
 	 */
 	public JDFSpanFluteDirection getFluteDirection()
@@ -465,7 +484,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateFluteDirection
-	 * 
+	 *
 	 * @return JDFSpanFluteDirection the element
 	 */
 	public JDFSpanFluteDirection getCreateFluteDirection()
@@ -475,18 +494,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element FluteDirection
-	 * 
-	 * @return JDFSpanFluteDirection the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanFluteDirection the element @ if the element already exists
 	 */
-	public JDFSpanFluteDirection appendFluteDirection() throws JDFException
+	public JDFSpanFluteDirection appendFluteDirection()
 	{
 		return (JDFSpanFluteDirection) appendElementN(ElementName.FLUTEDIRECTION, 1, null);
 	}
 
 	/**
 	 * (24) const get element FrontCoatings
-	 * 
+	 *
 	 * @return JDFSpanCoatings the element
 	 */
 	public JDFSpanCoatings getFrontCoatings()
@@ -496,7 +514,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateFrontCoatings
-	 * 
+	 *
 	 * @return JDFSpanCoatings the element
 	 */
 	public JDFSpanCoatings getCreateFrontCoatings()
@@ -506,18 +524,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element FrontCoatings
-	 * 
-	 * @return JDFSpanCoatings the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanCoatings the element @ if the element already exists
 	 */
-	public JDFSpanCoatings appendFrontCoatings() throws JDFException
+	public JDFSpanCoatings appendFrontCoatings()
 	{
 		return (JDFSpanCoatings) appendElementN(ElementName.FRONTCOATINGS, 1, null);
 	}
 
 	/**
 	 * (24) const get element Grade
-	 * 
+	 *
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getGrade()
@@ -527,7 +544,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateGrade
-	 * 
+	 *
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreateGrade()
@@ -537,18 +554,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Grade
-	 * 
-	 * @return JDFIntegerSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFIntegerSpan the element @ if the element already exists
 	 */
-	public JDFIntegerSpan appendGrade() throws JDFException
+	public JDFIntegerSpan appendGrade()
 	{
 		return (JDFIntegerSpan) appendElementN(ElementName.GRADE, 1, null);
 	}
 
 	/**
 	 * (24) const get element GrainDirection
-	 * 
+	 *
 	 * @return JDFSpanGrainDirection the element
 	 */
 	public JDFSpanGrainDirection getGrainDirection()
@@ -558,7 +574,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateGrainDirection
-	 * 
+	 *
 	 * @return JDFSpanGrainDirection the element
 	 */
 	public JDFSpanGrainDirection getCreateGrainDirection()
@@ -568,18 +584,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element GrainDirection
-	 * 
-	 * @return JDFSpanGrainDirection the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanGrainDirection the element @ if the element already exists
 	 */
-	public JDFSpanGrainDirection appendGrainDirection() throws JDFException
+	public JDFSpanGrainDirection appendGrainDirection()
 	{
 		return (JDFSpanGrainDirection) appendElementN(ElementName.GRAINDIRECTION, 1, null);
 	}
 
 	/**
 	 * (24) const get element HoleCount
-	 * 
+	 *
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getHoleCount()
@@ -589,7 +604,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateHoleCount
-	 * 
+	 *
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreateHoleCount()
@@ -599,18 +614,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element HoleCount
-	 * 
-	 * @return JDFIntegerSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFIntegerSpan the element @ if the element already exists
 	 */
-	public JDFIntegerSpan appendHoleCount() throws JDFException
+	public JDFIntegerSpan appendHoleCount()
 	{
 		return (JDFIntegerSpan) appendElementN(ElementName.HOLECOUNT, 1, null);
 	}
 
 	/**
 	 * (24) const get element HoleType
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getHoleType()
@@ -620,7 +634,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateHoleType
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateHoleType()
@@ -630,18 +644,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element HoleType
-	 * 
-	 * @return JDFStringSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFStringSpan the element @ if the element already exists
 	 */
-	public JDFStringSpan appendHoleType() throws JDFException
+	public JDFStringSpan appendHoleType()
 	{
 		return (JDFStringSpan) appendElementN(ElementName.HOLETYPE, 1, null);
 	}
 
 	/**
 	 * (24) const get element ISOPaperSubstrate
-	 * 
+	 *
 	 * @return JDFSpanISOPaperSubstrate the element
 	 */
 	public JDFSpanISOPaperSubstrate getISOPaperSubstrate()
@@ -651,7 +664,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateISOPaperSubstrate
-	 * 
+	 *
 	 * @return JDFSpanISOPaperSubstrate the element
 	 */
 	public JDFSpanISOPaperSubstrate getCreateISOPaperSubstrate()
@@ -661,18 +674,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element ISOPaperSubstrate
-	 * 
-	 * @return JDFSpanISOPaperSubstrate the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanISOPaperSubstrate the element @ if the element already exists
 	 */
-	public JDFSpanISOPaperSubstrate appendISOPaperSubstrate() throws JDFException
+	public JDFSpanISOPaperSubstrate appendISOPaperSubstrate()
 	{
 		return (JDFSpanISOPaperSubstrate) appendElementN(ElementName.ISOPAPERSUBSTRATE, 1, null);
 	}
 
 	/**
 	 * (24) const get element MediaColor
-	 * 
+	 *
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getMediaColor()
@@ -682,7 +694,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMediaColor
-	 * 
+	 *
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateMediaColor()
@@ -692,18 +704,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element MediaColor
-	 * 
-	 * @return JDFSpanNamedColor the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanNamedColor the element @ if the element already exists
 	 */
-	public JDFSpanNamedColor appendMediaColor() throws JDFException
+	public JDFSpanNamedColor appendMediaColor()
 	{
 		return (JDFSpanNamedColor) appendElementN(ElementName.MEDIACOLOR, 1, null);
 	}
 
 	/**
 	 * (24) const get element MediaColorDetails
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getMediaColorDetails()
@@ -713,7 +724,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMediaColorDetails
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateMediaColorDetails()
@@ -723,18 +734,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element MediaColorDetails
-	 * 
-	 * @return JDFStringSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFStringSpan the element @ if the element already exists
 	 */
-	public JDFStringSpan appendMediaColorDetails() throws JDFException
+	public JDFStringSpan appendMediaColorDetails()
 	{
 		return (JDFStringSpan) appendElementN(ElementName.MEDIACOLORDETAILS, 1, null);
 	}
 
 	/**
 	 * (24) const get element MediaQuality
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getMediaQuality()
@@ -744,7 +754,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMediaQuality
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateMediaQuality()
@@ -754,18 +764,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element MediaQuality
-	 * 
-	 * @return JDFStringSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFStringSpan the element @ if the element already exists
 	 */
-	public JDFStringSpan appendMediaQuality() throws JDFException
+	public JDFStringSpan appendMediaQuality()
 	{
 		return (JDFStringSpan) appendElementN(ElementName.MEDIAQUALITY, 1, null);
 	}
 
 	/**
 	 * (24) const get element MediaType
-	 * 
+	 *
 	 * @return JDFSpanMediaType the element
 	 */
 	public JDFSpanMediaType getMediaType()
@@ -775,7 +784,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMediaType
-	 * 
+	 *
 	 * @return JDFSpanMediaType the element
 	 */
 	public JDFSpanMediaType getCreateMediaType()
@@ -785,18 +794,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element MediaType
-	 * 
-	 * @return JDFSpanMediaType the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanMediaType the element @ if the element already exists
 	 */
-	public JDFSpanMediaType appendMediaType() throws JDFException
+	public JDFSpanMediaType appendMediaType()
 	{
 		return (JDFSpanMediaType) appendElementN(ElementName.MEDIATYPE, 1, null);
 	}
 
 	/**
 	 * (24) const get element MediaTypeDetails
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getMediaTypeDetails()
@@ -806,7 +814,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMediaTypeDetails
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateMediaTypeDetails()
@@ -816,18 +824,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element MediaTypeDetails
-	 * 
-	 * @return JDFNameSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNameSpan the element @ if the element already exists
 	 */
-	public JDFNameSpan appendMediaTypeDetails() throws JDFException
+	public JDFNameSpan appendMediaTypeDetails()
 	{
 		return (JDFNameSpan) appendElementN(ElementName.MEDIATYPEDETAILS, 1, null);
 	}
 
 	/**
 	 * (24) const get element MediaUnit
-	 * 
+	 *
 	 * @return JDFSpanMediaUnit the element
 	 */
 	public JDFSpanMediaUnit getMediaUnit()
@@ -837,7 +844,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMediaUnit
-	 * 
+	 *
 	 * @return JDFSpanMediaUnit the element
 	 */
 	public JDFSpanMediaUnit getCreateMediaUnit()
@@ -847,18 +854,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element MediaUnit
-	 * 
-	 * @return JDFSpanMediaUnit the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanMediaUnit the element @ if the element already exists
 	 */
-	public JDFSpanMediaUnit appendMediaUnit() throws JDFException
+	public JDFSpanMediaUnit appendMediaUnit()
 	{
 		return (JDFSpanMediaUnit) appendElementN(ElementName.MEDIAUNIT, 1, null);
 	}
 
 	/**
 	 * (24) const get element Opacity
-	 * 
+	 *
 	 * @return JDFSpanOpacity the element
 	 */
 	public JDFSpanOpacity getOpacity()
@@ -868,7 +874,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateOpacity
-	 * 
+	 *
 	 * @return JDFSpanOpacity the element
 	 */
 	public JDFSpanOpacity getCreateOpacity()
@@ -878,18 +884,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Opacity
-	 * 
-	 * @return JDFSpanOpacity the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFSpanOpacity the element @ if the element already exists
 	 */
-	public JDFSpanOpacity appendOpacity() throws JDFException
+	public JDFSpanOpacity appendOpacity()
 	{
 		return (JDFSpanOpacity) appendElementN(ElementName.OPACITY, 1, null);
 	}
 
 	/**
 	 * (24) const get element OpacityLevel
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getOpacityLevel()
@@ -899,7 +904,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateOpacityLevel
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateOpacityLevel()
@@ -909,18 +914,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element OpacityLevel
-	 * 
-	 * @return JDFNumberSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNumberSpan the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendOpacityLevel() throws JDFException
+	public JDFNumberSpan appendOpacityLevel()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.OPACITYLEVEL, 1, null);
 	}
 
 	/**
 	 * (24) const get element Recycled
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getRecycled()
@@ -930,7 +934,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateRecycled
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateRecycled()
@@ -940,18 +944,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Recycled
-	 * 
-	 * @return JDFOptionSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFOptionSpan the element @ if the element already exists
 	 */
-	public JDFOptionSpan appendRecycled() throws JDFException
+	public JDFOptionSpan appendRecycled()
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.RECYCLED, 1, null);
 	}
 
 	/**
 	 * (24) const get element RecycledPercentage
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getRecycledPercentage()
@@ -961,7 +964,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateRecycledPercentage
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateRecycledPercentage()
@@ -971,18 +974,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element RecycledPercentage
-	 * 
-	 * @return JDFNumberSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNumberSpan the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendRecycledPercentage() throws JDFException
+	public JDFNumberSpan appendRecycledPercentage()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.RECYCLEDPERCENTAGE, 1, null);
 	}
 
 	/**
 	 * (24) const get element StockBrand
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getStockBrand()
@@ -992,7 +994,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateStockBrand
-	 * 
+	 *
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateStockBrand()
@@ -1002,18 +1004,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element StockBrand
-	 * 
-	 * @return JDFStringSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFStringSpan the element @ if the element already exists
 	 */
-	public JDFStringSpan appendStockBrand() throws JDFException
+	public JDFStringSpan appendStockBrand()
 	{
 		return (JDFStringSpan) appendElementN(ElementName.STOCKBRAND, 1, null);
 	}
 
 	/**
 	 * (24) const get element StockType
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getStockType()
@@ -1023,7 +1024,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateStockType
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateStockType()
@@ -1033,18 +1034,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element StockType
-	 * 
-	 * @return JDFNameSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNameSpan the element @ if the element already exists
 	 */
-	public JDFNameSpan appendStockType() throws JDFException
+	public JDFNameSpan appendStockType()
 	{
 		return (JDFNameSpan) appendElementN(ElementName.STOCKTYPE, 1, null);
 	}
 
 	/**
 	 * (24) const get element Texture
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getTexture()
@@ -1054,7 +1054,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateTexture
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateTexture()
@@ -1064,18 +1064,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Texture
-	 * 
-	 * @return JDFNameSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNameSpan the element @ if the element already exists
 	 */
-	public JDFNameSpan appendTexture() throws JDFException
+	public JDFNameSpan appendTexture()
 	{
 		return (JDFNameSpan) appendElementN(ElementName.TEXTURE, 1, null);
 	}
 
 	/**
 	 * (24) const get element Thickness
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getThickness()
@@ -1085,7 +1084,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateThickness
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateThickness()
@@ -1095,18 +1094,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Thickness
-	 * 
-	 * @return JDFNumberSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNumberSpan the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendThickness() throws JDFException
+	public JDFNumberSpan appendThickness()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
 	}
 
 	/**
 	 * (24) const get element USWeight
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getUSWeight()
@@ -1116,7 +1114,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateUSWeight
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateUSWeight()
@@ -1126,18 +1124,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element USWeight
-	 * 
-	 * @return JDFNumberSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNumberSpan the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendUSWeight() throws JDFException
+	public JDFNumberSpan appendUSWeight()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.USWEIGHT, 1, null);
 	}
 
 	/**
 	 * (24) const get element Weight
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getWeight()
@@ -1147,7 +1144,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateWeight
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateWeight()
@@ -1157,18 +1154,17 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Weight
-	 * 
-	 * @return JDFNumberSpan the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFNumberSpan the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendWeight() throws JDFException
+	public JDFNumberSpan appendWeight()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.WEIGHT, 1, null);
 	}
 
 	/**
 	 * (24) const get element MediaLayers
-	 * 
+	 *
 	 * @return JDFMediaLayers the element
 	 */
 	public JDFMediaLayers getMediaLayers()
@@ -1178,7 +1174,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMediaLayers
-	 * 
+	 *
 	 * @return JDFMediaLayers the element
 	 */
 	public JDFMediaLayers getCreateMediaLayers()
@@ -1188,13 +1184,12 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element MediaLayers
-	 * 
-	 * @return JDFMediaLayers the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFMediaLayers the element @ if the element already exists
 	 */
-	public JDFMediaLayers appendMediaLayers() throws JDFException
+	public JDFMediaLayers appendMediaLayers()
 	{
 		return (JDFMediaLayers) appendElementN(ElementName.MEDIALAYERS, 1, null);
 	}
 
-}// end namespace JDF
+}

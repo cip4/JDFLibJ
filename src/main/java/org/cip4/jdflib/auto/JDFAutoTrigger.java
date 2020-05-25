@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -47,7 +79,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFAdded;
 import org.cip4.jdflib.jmf.JDFChangedPath;
 import org.cip4.jdflib.resource.JDFChangedAttribute;
@@ -58,7 +89,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoTrigger : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoTrigger extends JDFResource
@@ -96,7 +127,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoTrigger
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -107,7 +138,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoTrigger
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -119,7 +150,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoTrigger
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -128,15 +159,6 @@ public abstract class JDFAutoTrigger extends JDFResource
 	protected JDFAutoTrigger(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoTrigger[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -159,16 +181,17 @@ public abstract class JDFAutoTrigger extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RepeatStep ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RepeatStep
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RepeatStep
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRepeatStep(int value)
@@ -178,7 +201,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * (15) get int attribute RepeatStep
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getRepeatStep()
@@ -186,12 +209,12 @@ public abstract class JDFAutoTrigger extends JDFResource
 		return getIntAttribute(AttributeName.REPEATSTEP, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RepeatTime ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RepeatTime
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RepeatTime
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRepeatTime(double value)
@@ -201,7 +224,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * (17) get double attribute RepeatTime
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getRepeatTime()
@@ -209,13 +232,14 @@ public abstract class JDFAutoTrigger extends JDFResource
 		return getRealAttribute(AttributeName.REPEATTIME, null, 0.0);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateChangedAttribute
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFChangedAttribute the element
 	 */
@@ -226,7 +250,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * (27) const get element ChangedAttribute
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFChangedAttribute the element default is getChangedAttribute(0)
 	 */
@@ -237,17 +261,17 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * Get all ChangedAttribute from the current element
-	 * 
+	 *
 	 * @return Collection<JDFChangedAttribute>, null if none are available
 	 */
 	public Collection<JDFChangedAttribute> getAllChangedAttribute()
 	{
-		return getChildrenByClass(JDFChangedAttribute.class, false, 0);
+		return getChildArrayByClass(JDFChangedAttribute.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ChangedAttribute
-	 * 
+	 *
 	 * @return JDFChangedAttribute the element
 	 */
 	public JDFChangedAttribute appendChangedAttribute()
@@ -257,7 +281,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * (24) const get element Added
-	 * 
+	 *
 	 * @return JDFAdded the element
 	 */
 	public JDFAdded getAdded()
@@ -267,7 +291,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * (25) getCreateAdded
-	 * 
+	 *
 	 * @return JDFAdded the element
 	 */
 	public JDFAdded getCreateAdded()
@@ -277,18 +301,17 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * (29) append element Added
-	 * 
-	 * @return JDFAdded the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFAdded the element @ if the element already exists
 	 */
-	public JDFAdded appendAdded() throws JDFException
+	public JDFAdded appendAdded()
 	{
 		return (JDFAdded) appendElementN(ElementName.ADDED, 1, null);
 	}
 
 	/**
 	 * (26) getCreateChangedPath
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFChangedPath the element
 	 */
@@ -299,7 +322,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * (27) const get element ChangedPath
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFChangedPath the element default is getChangedPath(0)
 	 */
@@ -310,17 +333,17 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * Get all ChangedPath from the current element
-	 * 
+	 *
 	 * @return Collection<JDFChangedPath>, null if none are available
 	 */
 	public Collection<JDFChangedPath> getAllChangedPath()
 	{
-		return getChildrenByClass(JDFChangedPath.class, false, 0);
+		return getChildArrayByClass(JDFChangedPath.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ChangedPath
-	 * 
+	 *
 	 * @return JDFChangedPath the element
 	 */
 	public JDFChangedPath appendChangedPath()
@@ -330,7 +353,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * (24) const get element Removed
-	 * 
+	 *
 	 * @return JDFRemoved the element
 	 */
 	public JDFRemoved getRemoved()
@@ -340,7 +363,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * (25) getCreateRemoved
-	 * 
+	 *
 	 * @return JDFRemoved the element
 	 */
 	public JDFRemoved getCreateRemoved()
@@ -350,13 +373,12 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * (29) append element Removed
-	 * 
-	 * @return JDFRemoved the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFRemoved the element @ if the element already exists
 	 */
-	public JDFRemoved appendRemoved() throws JDFException
+	public JDFRemoved appendRemoved()
 	{
 		return (JDFRemoved) appendElementN(ElementName.REMOVED, 1, null);
 	}
 
-}// end namespace JDF
+}

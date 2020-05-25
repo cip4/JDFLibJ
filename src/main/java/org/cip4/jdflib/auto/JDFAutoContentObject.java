@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -58,7 +90,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
  *****************************************************************************
  * class JDFAutoContentObject : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoContentObject extends JDFElement
@@ -102,7 +134,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoContentObject
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -113,7 +145,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoContentObject
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -125,7 +157,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoContentObject
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -134,15 +166,6 @@ public abstract class JDFAutoContentObject extends JDFElement
 	protected JDFAutoContentObject(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoContentObject[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -285,16 +308,17 @@ public abstract class JDFAutoContentObject extends JDFElement
 		public static final EnumType Mark = new EnumType("Mark");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Ord ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Ord
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Ord
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOrd(int value)
@@ -304,7 +328,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (15) get int attribute Ord
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getOrd()
@@ -312,12 +336,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getIntAttribute(AttributeName.ORD, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceClipPath ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SourceClipPath
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SourceClipPath
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSourceClipPath(String value)
@@ -327,7 +351,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (23) get String attribute SourceClipPath
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getSourceClipPath()
@@ -335,12 +359,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.SOURCECLIPPATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimClipPath ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrimClipPath
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrimClipPath
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrimClipPath(String value)
@@ -350,7 +374,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (23) get String attribute TrimClipPath
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getTrimClipPath()
@@ -358,12 +382,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.TRIMCLIPPATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LogicalStackOrd ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LogicalStackOrd
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute LogicalStackOrd
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setLogicalStackOrd(int value)
@@ -373,7 +397,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (15) get int attribute LogicalStackOrd
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getLogicalStackOrd()
@@ -381,12 +405,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getIntAttribute(AttributeName.LOGICALSTACKORD, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipBoxFormat ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClipBoxFormat
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ClipBoxFormat
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setClipBoxFormat(String value)
@@ -396,7 +420,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (23) get String attribute ClipBoxFormat
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getClipBoxFormat()
@@ -404,12 +428,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.CLIPBOXFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Anchor
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Anchor
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setAnchor(EnumAnchor enumVar)
@@ -419,7 +443,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (9) get attribute Anchor
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumAnchor getAnchor()
@@ -427,12 +451,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OrdID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OrdID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute OrdID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOrdID(int value)
@@ -442,7 +466,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (15) get int attribute OrdID
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getOrdID()
@@ -450,12 +474,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getIntAttribute(AttributeName.ORDID, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Type
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Type
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setType(EnumType enumVar)
@@ -465,7 +489,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (9) get attribute Type
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumType getType()
@@ -473,12 +497,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipBox ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClipBox
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ClipBox
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setClipBox(JDFRectangle value)
@@ -488,7 +512,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (20) get JDFRectangle attribute ClipBox
-	 * 
+	 *
 	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getClipBox()
@@ -498,12 +522,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OrdExpression ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OrdExpression
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute OrdExpression
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOrdExpression(String value)
@@ -513,7 +537,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (23) get String attribute OrdExpression
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getOrdExpression()
@@ -521,12 +545,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.ORDEXPRESSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CompensationCTMTemplate ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CompensationCTMTemplate
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CompensationCTMTemplate
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCompensationCTMTemplate(String value)
@@ -536,7 +560,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (23) get String attribute CompensationCTMTemplate
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getCompensationCTMTemplate()
@@ -544,12 +568,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.COMPENSATIONCTMTEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LayerID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LayerID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute LayerID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setLayerID(int value)
@@ -559,7 +583,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (15) get int attribute LayerID
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getLayerID()
@@ -567,12 +591,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getIntAttribute(AttributeName.LAYERID, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimCTM ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrimCTM
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrimCTM
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrimCTM(JDFMatrix value)
@@ -582,7 +606,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (20) get JDFMatrix attribute TrimCTM
-	 * 
+	 *
 	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getTrimCTM()
@@ -592,12 +616,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetOrd ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SetOrd
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SetOrd
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSetOrd(int value)
@@ -607,7 +631,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (15) get int attribute SetOrd
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getSetOrd()
@@ -615,12 +639,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getIntAttribute(AttributeName.SETORD, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipPath ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClipPath
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ClipPath
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setClipPath(String value)
@@ -630,7 +654,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (23) get String attribute ClipPath
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getClipPath()
@@ -638,12 +662,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.CLIPPATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HalfTonePhaseOrigin ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute HalfTonePhaseOrigin
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute HalfTonePhaseOrigin
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setHalfTonePhaseOrigin(JDFXYPair value)
@@ -653,7 +677,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (20) get JDFXYPair attribute HalfTonePhaseOrigin
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getHalfTonePhaseOrigin()
@@ -663,12 +687,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocOrd ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DocOrd
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DocOrd
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDocOrd(int value)
@@ -678,7 +702,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (15) get int attribute DocOrd
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getDocOrd()
@@ -686,12 +710,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getIntAttribute(AttributeName.DOCORD, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CompensationCTMFormat ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CompensationCTMFormat
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CompensationCTMFormat
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCompensationCTMFormat(String value)
@@ -701,7 +725,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (23) get String attribute CompensationCTMFormat
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getCompensationCTMFormat()
@@ -709,12 +733,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.COMPENSATIONCTMFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	@Override
@@ -725,7 +749,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (23) get String attribute ID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	@Override
@@ -734,12 +758,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AssemblyIDs
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AssemblyIDs
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAssemblyIDs(VString value)
@@ -749,7 +773,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (21) get VString attribute AssemblyIDs
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getAssemblyIDs()
@@ -760,12 +784,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return vStrAttrib;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CTM
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CTM
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCTM(JDFMatrix value)
@@ -775,7 +799,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (20) get JDFMatrix attribute CTM
-	 * 
+	 *
 	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getCTM()
@@ -785,12 +809,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipBoxTemplate ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClipBoxTemplate
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ClipBoxTemplate
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setClipBoxTemplate(String value)
@@ -800,7 +824,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (23) get String attribute ClipBoxTemplate
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getClipBoxTemplate()
@@ -808,12 +832,12 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.CLIPBOXTEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimSize ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrimSize
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute TrimSize
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTrimSize(JDFXYPair value)
@@ -823,7 +847,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 
 	/**
 	 * (20) get JDFXYPair attribute TrimSize
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getTrimSize()
@@ -833,4 +857,4 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return nPlaceHolder;
 	}
 
-}// end namespace JDF
+}

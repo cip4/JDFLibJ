@@ -3672,4 +3672,36 @@ public final class AttributeName
 	/** */
 	public static final String ZONEWIDTH = "ZoneWidth";
 
+	// JDF 1.6 + 1.7 additions
+	public static final String TYPEDETAILS = "TypeDetails";
+	public static final String BOXTYPE = "BoxType";
+	public static final String BOXTYPEDETAILS = "BoxTypeDetails";
+	public static final String FACE = "Face";
+	public static final String FIRSTENTRY = "FirstEntry";
+	public static final String SHAPETYPEDETAILS = "ShapeTypeDetails";
+	public static final String LASTENTRY = "LastEntry";
+	public static final String MAXPRIORITY = "MaxPriority";
+	public static final String MINPRIORITY = "MinPriority";
+	public static final String MAXQUEUESIZE = "MaxQueueSize";
+	public static final String PREFLIGHTLEVEL = "PreflightLevel";
+	public static final String PROCSTEPSGROUP = "ProcStepsGroup";
+	public static final String PROCSTEPSTYPE = "ProcStepsType";
+	public static final String RELATEDPROJECTID = "RelatedProjectID";
+	public static final String TOOLNAME = "ToolName";
+	public static final String ADDRESSUSAGE = "AddressUsage";
+	public static final String BACKSPECTRUM = "BackSpectrum";
+	public static final String BOTTLING = "Bottling";
+	public static final String CIVICNUMBER = "CivicNumber";
+	public static final String SECUREURL = "SecureURL";
+	public static final String DELIVERYID = "DeliveryID";
+	public static final String DOCPAGES = "DocPages";
+	public static final String EARLIESTDURATION = "EarliestDuration";
+	public static final String REQUIREDDURATION = "RequiredDuration";
+	public static final String FINISHEDPAGES = "FinishedPages";
+	public static final String JOBIDS = "JobIDs";
+	public static final String MEASUREMENTMODE = "MeasurementMode";
+	public static final String REFERENCE = "Reference";
+	public static final String REPLACEAFTER = "ReplaceAfter";
+	public static final String REPLACEBEFORE = "ReplaceBefore";
+	public static final String REVISION = "Revision";
 }

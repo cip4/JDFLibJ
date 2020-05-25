@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -53,8 +85,8 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFNetworkHeader;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContainer;
 import org.cip4.jdflib.resource.process.JDFDisposition;
@@ -64,7 +96,7 @@ import org.cip4.jdflib.resource.process.JDFFileAlias;
  *****************************************************************************
  * class JDFAutoFileSpec : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoFileSpec extends JDFResource
@@ -77,7 +109,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPRESSION, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, "None");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.APPLICATION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.APPOS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.APPOS, 0x44333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.APPVERSION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.CHECKSUM, 0x33333331, AttributeInfo.EnumAttributeType.hexBinary, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.DISPOSITION, 0x44444433, AttributeInfo.EnumAttributeType.enumeration, EnumDisposition.getEnum(0), null);
@@ -91,7 +123,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.MIMETYPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.MIMETYPEVERSION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.OVERWRITEPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOverwritePolicy.getEnum(0), null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.OSVERSION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.OSVERSION, 0x44333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[17] = new AtrInfoTable(AttributeName.PAGEORDER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumPageOrder.getEnum(0), null);
 		atrInfoTable[18] = new AtrInfoTable(AttributeName.PASSWORD, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[19] = new AtrInfoTable(AttributeName.REQUESTQUALITY, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -108,12 +140,13 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTAINER, 0x66666611);
 		elemInfoTable[1] = new ElemInfoTable(ElementName.DISPOSITION, 0x66666611);
 		elemInfoTable[2] = new ElemInfoTable(ElementName.FILEALIAS, 0x33333311);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.NETWORKHEADER, 0x31111111);
 	}
 
 	@Override
@@ -124,7 +157,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoFileSpec
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -135,7 +168,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoFileSpec
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -147,7 +180,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoFileSpec
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -156,15 +189,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	protected JDFAutoFileSpec(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoFileSpec[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -386,16 +410,17 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		public static final EnumPageOrder Descending = new EnumPageOrder("Descending");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Compression ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Compression
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Compression
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCompression(String value)
@@ -405,7 +430,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute Compression
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getCompression()
@@ -413,12 +438,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.COMPRESSION, null, "None");
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Application ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Application
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Application
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setApplication(String value)
@@ -428,7 +453,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute Application
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getApplication()
@@ -436,12 +461,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.APPLICATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AppOS ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AppOS
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AppOS
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAppOS(String value)
@@ -451,7 +476,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute AppOS
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getAppOS()
@@ -459,12 +484,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.APPOS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AppVersion ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AppVersion
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute AppVersion
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAppVersion(String value)
@@ -474,7 +499,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute AppVersion
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getAppVersion()
@@ -482,12 +507,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.APPVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CheckSum ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CheckSum
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute CheckSum
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCheckSum(String value)
@@ -497,7 +522,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute CheckSum
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getCheckSum()
@@ -505,12 +530,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.CHECKSUM, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Disposition ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Disposition
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute Disposition
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setDisposition(EnumDisposition enumVar)
@@ -520,7 +545,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (9) get attribute Disposition
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumDisposition getDisposition()
@@ -528,12 +553,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return EnumDisposition.getEnum(getAttribute(AttributeName.DISPOSITION, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocumentNaturalLang ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DocumentNaturalLang
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute DocumentNaturalLang
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDocumentNaturalLang(String value)
@@ -543,7 +568,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute DocumentNaturalLang
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDocumentNaturalLang()
@@ -551,12 +576,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.DOCUMENTNATURALLANG, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Encoding ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Encoding
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Encoding
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEncoding(String value)
@@ -566,7 +591,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute Encoding
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getEncoding()
@@ -574,12 +599,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.ENCODING, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FileFormat ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FileFormat
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FileFormat
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFileFormat(String value)
@@ -589,7 +614,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute FileFormat
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getFileFormat()
@@ -597,12 +622,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.FILEFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FileSize ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FileSize
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FileSize
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFileSize(String value)
@@ -612,7 +637,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute FileSize
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getFileSize()
@@ -620,12 +645,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.FILESIZE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FileTargetDeviceModel ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FileTargetDeviceModel
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FileTargetDeviceModel
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFileTargetDeviceModel(String value)
@@ -635,7 +660,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute FileTargetDeviceModel
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getFileTargetDeviceModel()
@@ -643,12 +668,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.FILETARGETDEVICEMODEL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FileTemplate ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FileTemplate
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FileTemplate
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFileTemplate(String value)
@@ -658,7 +683,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute FileTemplate
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getFileTemplate()
@@ -666,12 +691,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.FILETEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FileVersion ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FileVersion
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute FileVersion
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setFileVersion(String value)
@@ -681,7 +706,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute FileVersion
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getFileVersion()
@@ -689,12 +714,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.FILEVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MimeType ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MimeType
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MimeType
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMimeType(String value)
@@ -704,7 +729,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute MimeType
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getMimeType()
@@ -712,12 +737,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.MIMETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MimeTypeVersion ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MimeTypeVersion
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MimeTypeVersion
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMimeTypeVersion(String value)
@@ -727,7 +752,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute MimeTypeVersion
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getMimeTypeVersion()
@@ -735,12 +760,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.MIMETYPEVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OverwritePolicy ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OverwritePolicy
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute OverwritePolicy
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setOverwritePolicy(EnumOverwritePolicy enumVar)
@@ -750,7 +775,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (9) get attribute OverwritePolicy
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumOverwritePolicy getOverwritePolicy()
@@ -758,12 +783,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return EnumOverwritePolicy.getEnum(getAttribute(AttributeName.OVERWRITEPOLICY, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OSVersion ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OSVersion
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute OSVersion
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOSVersion(String value)
@@ -773,7 +798,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute OSVersion
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getOSVersion()
@@ -781,12 +806,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.OSVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageOrder ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PageOrder
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute PageOrder
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setPageOrder(EnumPageOrder enumVar)
@@ -796,7 +821,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (9) get attribute PageOrder
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumPageOrder getPageOrder()
@@ -804,12 +829,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return EnumPageOrder.getEnum(getAttribute(AttributeName.PAGEORDER, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Password ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Password
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute Password
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPassword(String value)
@@ -819,7 +844,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute Password
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getPassword()
@@ -827,12 +852,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.PASSWORD, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RequestQuality ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RequestQuality
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute RequestQuality
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRequestQuality(double value)
@@ -842,7 +867,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (17) get double attribute RequestQuality
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getRequestQuality()
@@ -850,12 +875,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getRealAttribute(AttributeName.REQUESTQUALITY, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceUsage ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ResourceUsage
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ResourceUsage
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setResourceUsage(String value)
@@ -865,7 +890,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute ResourceUsage
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getResourceUsage()
@@ -873,12 +898,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.RESOURCEUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SearchDepth ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SearchDepth
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute SearchDepth
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSearchDepth(int value)
@@ -888,7 +913,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (15) get int attribute SearchDepth
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getSearchDepth()
@@ -896,12 +921,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getIntAttribute(AttributeName.SEARCHDEPTH, null, 0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UID ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute UID
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute UID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setUID(String value)
@@ -911,7 +936,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute UID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getUID()
@@ -919,12 +944,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.UID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute URL
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute URL
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setURL(String value)
@@ -934,7 +959,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute URL
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getURL()
@@ -942,12 +967,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UserFileName ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute UserFileName
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute UserFileName
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setUserFileName(String value)
@@ -957,7 +982,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (23) get String attribute UserFileName
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getUserFileName()
@@ -965,13 +990,14 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return getAttribute(AttributeName.USERFILENAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (28) const get element Container
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFContainer the element default is getContainer(0)
 	 */
@@ -982,13 +1008,13 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * Get all Container from the current element
-	 * 
+	 *
 	 * @return Collection<JDFContainer>, null if none are available
 	 */
 	public Collection<JDFContainer> getAllContainer()
 	{
 		final VElement vc = getChildElementVector(ElementName.CONTAINER, null);
-		if (vc == null || vc.size() == 0)
+		if (vc == null || vc.isEmpty())
 		{
 			return null;
 		}
@@ -1004,7 +1030,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (25) getCreateContainer
-	 * 
+	 *
 	 * @return JDFContainer the element
 	 */
 	public JDFContainer getCreateContainer()
@@ -1014,18 +1040,17 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (29) append element Container
-	 * 
-	 * @return JDFContainer the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFContainer the element @ if the element already exists
 	 */
-	public JDFContainer appendContainer() throws JDFException
+	public JDFContainer appendContainer()
 	{
 		return (JDFContainer) appendElementN(ElementName.CONTAINER, 1, null);
 	}
 
 	/**
 	 * (28) const get element Disposition
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDisposition the element default is getDisposition(0)
 	 */
@@ -1036,13 +1061,13 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * Get all Disposition from the current element
-	 * 
+	 *
 	 * @return Collection<JDFDisposition>, null if none are available
 	 */
 	public Collection<JDFDisposition> getAllDisposition()
 	{
 		final VElement vc = getChildElementVector(ElementName.DISPOSITION, null);
-		if (vc == null || vc.size() == 0)
+		if (vc == null || vc.isEmpty())
 		{
 			return null;
 		}
@@ -1058,7 +1083,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (25) getCreateDisposition
-	 * 
+	 *
 	 * @return JDFDisposition the element
 	 */
 	public JDFDisposition getCreateDisposition()
@@ -1068,18 +1093,17 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (29) append element Disposition
-	 * 
-	 * @return JDFDisposition the element
-	 * @throws JDFException if the element already exists
+	 *
+	 * @return JDFDisposition the element @ if the element already exists
 	 */
-	public JDFDisposition appendDisposition() throws JDFException
+	public JDFDisposition appendDisposition()
 	{
 		return (JDFDisposition) appendElementN(ElementName.DISPOSITION, 1, null);
 	}
 
 	/**
 	 * (26) getCreateFileAlias
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileAlias the element
 	 */
@@ -1090,7 +1114,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (27) const get element FileAlias
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileAlias the element default is getFileAlias(0)
 	 */
@@ -1101,17 +1125,17 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * Get all FileAlias from the current element
-	 * 
+	 *
 	 * @return Collection<JDFFileAlias>, null if none are available
 	 */
 	public Collection<JDFFileAlias> getAllFileAlias()
 	{
-		return getChildrenByClass(JDFFileAlias.class, false, 0);
+		return getChildArrayByClass(JDFFileAlias.class, false, 0);
 	}
 
 	/**
 	 * (30) append element FileAlias
-	 * 
+	 *
 	 * @return JDFFileAlias the element
 	 */
 	public JDFFileAlias appendFileAlias()
@@ -1119,4 +1143,46 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return (JDFFileAlias) appendElement(ElementName.FILEALIAS, null);
 	}
 
-}// end namespace JDF
+	/**
+	 * (26) getCreateNetworkHeader
+	 *
+	 * @param iSkip number of elements to skip
+	 * @return JDFNetworkHeader the element
+	 */
+	public JDFNetworkHeader getCreateNetworkHeader(int iSkip)
+	{
+		return (JDFNetworkHeader) getCreateElement_JDFElement(ElementName.NETWORKHEADER, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element NetworkHeader
+	 *
+	 * @param iSkip number of elements to skip
+	 * @return JDFNetworkHeader the element default is getNetworkHeader(0)
+	 */
+	public JDFNetworkHeader getNetworkHeader(int iSkip)
+	{
+		return (JDFNetworkHeader) getElement(ElementName.NETWORKHEADER, null, iSkip);
+	}
+
+	/**
+	 * Get all NetworkHeader from the current element
+	 *
+	 * @return Collection<JDFNetworkHeader>, null if none are available
+	 */
+	public Collection<JDFNetworkHeader> getAllNetworkHeader()
+	{
+		return getChildArrayByClass(JDFNetworkHeader.class, false, 0);
+	}
+
+	/**
+	 * (30) append element NetworkHeader
+	 *
+	 * @return JDFNetworkHeader the element
+	 */
+	public JDFNetworkHeader appendNetworkHeader()
+	{
+		return (JDFNetworkHeader) appendElement(ElementName.NETWORKHEADER, null);
+	}
+
+}

@@ -2,36 +2,68 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+  *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
  *
  *
  */
@@ -61,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoImageReplacementParams : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoImageReplacementParams extends JDFResource
@@ -102,7 +134,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoImageReplacementParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -113,7 +145,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoImageReplacementParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -125,7 +157,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoImageReplacementParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -134,15 +166,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	protected JDFAutoImageReplacementParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return the string representation
-	 */
-	@Override
-	public String toString()
-	{
-		return " JDFAutoImageReplacementParams[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -297,16 +320,17 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		public static final EnumResolutionReductionStrategy Bicubic = new EnumResolutionReductionStrategy("Bicubic");
 	}
 
-	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageReplacementStrategy ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ImageReplacementStrategy
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute ImageReplacementStrategy
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setImageReplacementStrategy(EnumImageReplacementStrategy enumVar)
@@ -316,7 +340,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * (9) get attribute ImageReplacementStrategy
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumImageReplacementStrategy getImageReplacementStrategy()
@@ -324,12 +348,12 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return EnumImageReplacementStrategy.getEnum(getAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImagePreScanStrategy ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ImagePreScanStrategy
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute ImagePreScanStrategy
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setImagePreScanStrategy(String value)
@@ -339,7 +363,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * (23) get String attribute ImagePreScanStrategy
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getImagePreScanStrategy()
@@ -347,12 +371,12 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return getAttribute(AttributeName.IMAGEPRESCANSTRATEGY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxResolution ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxResolution
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MaxResolution
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMaxResolution(double value)
@@ -362,7 +386,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * (17) get double attribute MaxResolution
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getMaxResolution()
@@ -370,12 +394,12 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return getRealAttribute(AttributeName.MAXRESOLUTION, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MinResolution ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MinResolution
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MinResolution
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMinResolution(double value)
@@ -385,7 +409,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * (17) get double attribute MinResolution
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getMinResolution()
@@ -393,12 +417,12 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return getRealAttribute(AttributeName.MINRESOLUTION, null, 0.0);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResolutionReductionStrategy ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ResolutionReductionStrategy
+	--------------------------------------------------------------------- */
 	/**
 	 * (5) set attribute ResolutionReductionStrategy
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setResolutionReductionStrategy(EnumResolutionReductionStrategy enumVar)
@@ -408,7 +432,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * (9) get attribute ResolutionReductionStrategy
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumResolutionReductionStrategy getResolutionReductionStrategy()
@@ -416,12 +440,12 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return EnumResolutionReductionStrategy.getEnum(getAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, null, null));
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreExtensions ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute IgnoreExtensions
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute IgnoreExtensions
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setIgnoreExtensions(VString value)
@@ -431,7 +455,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * (21) get VString attribute IgnoreExtensions
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getIgnoreExtensions()
@@ -442,12 +466,12 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxSearchRecursion ---------------------------------------------------------------------
-	 */
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxSearchRecursion
+	--------------------------------------------------------------------- */
 	/**
 	 * (36) set attribute MaxSearchRecursion
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMaxSearchRecursion(int value)
@@ -457,7 +481,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * (15) get int attribute MaxSearchRecursion
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
 	public int getMaxSearchRecursion()
@@ -465,13 +489,14 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return getIntAttribute(AttributeName.MAXSEARCHRECURSION, null, 0);
 	}
 
-	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateFileSpec
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
@@ -482,7 +507,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * (27) const get element FileSpec
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element default is getFileSpec(0)
 	 */
@@ -493,17 +518,17 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * Get all FileSpec from the current element
-	 * 
+	 *
 	 * @return Collection<JDFFileSpec>, null if none are available
 	 */
 	public Collection<JDFFileSpec> getAllFileSpec()
 	{
-		return getChildrenByClass(JDFFileSpec.class, false, 0);
+		return getChildArrayByClass(JDFFileSpec.class, false, 0);
 	}
 
 	/**
 	 * (30) append element FileSpec
-	 * 
+	 *
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec appendFileSpec()
@@ -513,7 +538,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refFileSpec(JDFFileSpec refTarget)
@@ -523,7 +548,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * (26) getCreateSearchPath
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element
 	 */
@@ -534,7 +559,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * (27) const get element SearchPath
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element default is getSearchPath(0)
 	 */
@@ -545,17 +570,17 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * Get all SearchPath from the current element
-	 * 
+	 *
 	 * @return Collection<JDFElement>, null if none are available
 	 */
 	public Collection<JDFElement> getAllSearchPath()
 	{
-		return getChildrenByClass(JDFElement.class, false, 0);
+		return getChildArrayByClass(JDFElement.class, false, 0);
 	}
 
 	/**
 	 * (30) append element SearchPath
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement appendSearchPath()
@@ -563,4 +588,4 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return (JDFElement) appendElement(ElementName.SEARCHPATH, null);
 	}
 
-}// end namespace JDF
+}
