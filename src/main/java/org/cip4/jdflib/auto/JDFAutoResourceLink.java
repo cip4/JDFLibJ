@@ -115,7 +115,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMBINEDPROCESSTYPE, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.DRAFTOK, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.DRAFTOK, 0x44444333, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.DURATION, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXAMOUNT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.MINAMOUNT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -164,7 +164,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourceLink(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoResourceLink(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -176,7 +176,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourceLink(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoResourceLink(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -189,7 +189,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoResourceLink(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoResourceLink(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -204,7 +204,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMinLateStatus(String name)
+		private EnumMinLateStatus(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -213,7 +213,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumMinLateStatus getEnum(String enumName)
+		public static EnumMinLateStatus getEnum(final String enumName)
 		{
 			return (EnumMinLateStatus) getEnum(EnumMinLateStatus.class, enumName);
 		}
@@ -222,7 +222,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumMinLateStatus getEnum(int enumValue)
+		public static EnumMinLateStatus getEnum(final int enumValue)
 		{
 			return (EnumMinLateStatus) getEnum(EnumMinLateStatus.class, enumValue);
 		}
@@ -277,7 +277,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMinStatus(String name)
+		private EnumMinStatus(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -286,7 +286,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumMinStatus getEnum(String enumName)
+		public static EnumMinStatus getEnum(final String enumName)
 		{
 			return (EnumMinStatus) getEnum(EnumMinStatus.class, enumName);
 		}
@@ -295,7 +295,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumMinStatus getEnum(int enumValue)
+		public static EnumMinStatus getEnum(final int enumValue)
 		{
 			return (EnumMinStatus) getEnum(EnumMinStatus.class, enumValue);
 		}
@@ -350,7 +350,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOrientation(String name)
+		private EnumOrientation(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -359,7 +359,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumOrientation getEnum(String enumName)
+		public static EnumOrientation getEnum(final String enumName)
 		{
 			return (EnumOrientation) getEnum(EnumOrientation.class, enumName);
 		}
@@ -368,7 +368,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumOrientation getEnum(int enumValue)
+		public static EnumOrientation getEnum(final int enumValue)
 		{
 			return (EnumOrientation) getEnum(EnumOrientation.class, enumValue);
 		}
@@ -425,7 +425,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPipePartIDKeys(String name)
+		private EnumPipePartIDKeys(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -434,7 +434,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumPipePartIDKeys getEnum(String enumName)
+		public static EnumPipePartIDKeys getEnum(final String enumName)
 		{
 			return (EnumPipePartIDKeys) getEnum(EnumPipePartIDKeys.class, enumName);
 		}
@@ -443,7 +443,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumPipePartIDKeys getEnum(int enumValue)
+		public static EnumPipePartIDKeys getEnum(final int enumValue)
 		{
 			return (EnumPipePartIDKeys) getEnum(EnumPipePartIDKeys.class, enumValue);
 		}
@@ -625,7 +625,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setActualAmount(double value)
+	public void setActualAmount(final double value)
 	{
 		setAttribute(AttributeName.ACTUALAMOUNT, value, null);
 	}
@@ -648,7 +648,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAmount(double value)
+	public void setAmount(final double value)
 	{
 		setAttribute(AttributeName.AMOUNT, value, null);
 	}
@@ -671,7 +671,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCombinedProcessIndex(JDFIntegerList value)
+	public void setCombinedProcessIndex(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.COMBINEDPROCESSINDEX, value, null);
 	}
@@ -696,7 +696,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCombinedProcessType(String value)
+	public void setCombinedProcessType(final String value)
 	{
 		setAttribute(AttributeName.COMBINEDPROCESSTYPE, value, null);
 	}
@@ -719,7 +719,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDraftOK(boolean value)
+	public void setDraftOK(final boolean value)
 	{
 		setAttribute(AttributeName.DRAFTOK, value, null);
 	}
@@ -742,7 +742,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDuration(JDFDuration value)
+	public void setDuration(final JDFDuration value)
 	{
 		setAttribute(AttributeName.DURATION, value, null);
 	}
@@ -767,7 +767,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxAmount(double value)
+	public void setMaxAmount(final double value)
 	{
 		setAttribute(AttributeName.MAXAMOUNT, value, null);
 	}
@@ -790,7 +790,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMinAmount(double value)
+	public void setMinAmount(final double value)
 	{
 		setAttribute(AttributeName.MINAMOUNT, value, null);
 	}
@@ -813,7 +813,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMinLateStatus(JDFResource.EnumResStatus enumVar)
+	public void setMinLateStatus(final JDFResource.EnumResStatus enumVar)
 	{
 		setAttribute(AttributeName.MINLATESTATUS, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -836,7 +836,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMinStatus(JDFResource.EnumResStatus enumVar)
+	public void setMinStatus(final JDFResource.EnumResStatus enumVar)
 	{
 		setAttribute(AttributeName.MINSTATUS, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -859,7 +859,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOrientation(EnumOrientation enumVar)
+	public void setOrientation(final EnumOrientation enumVar)
 	{
 		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -882,7 +882,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param v vector of the enumeration values
 	 */
-	public void setPipePartIDKeys(Vector<? extends ValuedEnum> v)
+	public void setPipePartIDKeys(final Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, v, null);
 	}
@@ -905,7 +905,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPipePause(double value)
+	public void setPipePause(final double value)
 	{
 		setAttribute(AttributeName.PIPEPAUSE, value, null);
 	}
@@ -928,7 +928,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPipeProtocol(String value)
+	public void setPipeProtocol(final String value)
 	{
 		setAttribute(AttributeName.PIPEPROTOCOL, value, null);
 	}
@@ -951,7 +951,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPipeResume(double value)
+	public void setPipeResume(final double value)
 	{
 		setAttribute(AttributeName.PIPERESUME, value, null);
 	}
@@ -974,7 +974,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPipeURL(String value)
+	public void setPipeURL(final String value)
 	{
 		setAttribute(AttributeName.PIPEURL, value, null);
 	}
@@ -997,7 +997,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProcessUsage(String value)
+	public void setProcessUsage(final String value)
 	{
 		setAttribute(AttributeName.PROCESSUSAGE, value, null);
 	}
@@ -1020,7 +1020,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRecommendation(boolean value)
+	public void setRecommendation(final boolean value)
 	{
 		setAttribute(AttributeName.RECOMMENDATION, value, null);
 	}
@@ -1043,7 +1043,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRemotePipeEndPause(double value)
+	public void setRemotePipeEndPause(final double value)
 	{
 		setAttribute(AttributeName.REMOTEPIPEENDPAUSE, value, null);
 	}
@@ -1066,7 +1066,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRemotePipeEndResume(double value)
+	public void setRemotePipeEndResume(final double value)
 	{
 		setAttribute(AttributeName.REMOTEPIPEENDRESUME, value, null);
 	}
@@ -1089,7 +1089,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setrRef(String value)
+	public void setrRef(final String value)
 	{
 		setAttribute(AttributeName.RREF, value, null);
 	}
@@ -1112,7 +1112,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setrSubRef(String value)
+	public void setrSubRef(final String value)
 	{
 		setAttribute(AttributeName.RSUBREF, value, null);
 	}
@@ -1135,7 +1135,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setStart(JDFDate value)
+	public void setStart(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -1165,7 +1165,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStartOffset(JDFDuration value)
+	public void setStartOffset(final JDFDuration value)
 	{
 		setAttribute(AttributeName.STARTOFFSET, value, null);
 	}
@@ -1190,7 +1190,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setUsage(EnumUsage enumVar)
+	public void setUsage(final EnumUsage enumVar)
 	{
 		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -1213,7 +1213,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTransformation(JDFMatrix value)
+	public void setTransformation(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.TRANSFORMATION, value, null);
 	}
@@ -1271,7 +1271,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFLot the element
 	 */
-	public JDFLot getCreateLot(int iSkip)
+	public JDFLot getCreateLot(final int iSkip)
 	{
 		return (JDFLot) getCreateElement_JDFElement(ElementName.LOT, null, iSkip);
 	}
@@ -1282,7 +1282,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFLot the element default is getLot(0)
 	 */
-	public JDFLot getLot(int iSkip)
+	public JDFLot getLot(final int iSkip)
 	{
 		return (JDFLot) getElement(ElementName.LOT, null, iSkip);
 	}
