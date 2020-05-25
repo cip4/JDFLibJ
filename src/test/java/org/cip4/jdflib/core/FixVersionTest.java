@@ -426,7 +426,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testContentData()
+	public void testContentMetaData()
 	{
 		final JDFContentMetaData c = (JDFContentMetaData) new JDFDoc(ElementName.CONTENTMETADATA).getRoot();
 		c.setISBN13("12345");

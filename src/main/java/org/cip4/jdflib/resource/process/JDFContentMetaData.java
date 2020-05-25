@@ -75,7 +75,7 @@
 package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoContentMetadata;
+import org.cip4.jdflib.auto.JDFAutoContentMetaData;
 
 /**
  * note the nasty capitalization, which we retain for backwds compatibility
@@ -83,7 +83,7 @@ import org.cip4.jdflib.auto.JDFAutoContentMetadata;
  * @author prosirai
  *
  */
-public class JDFContentMetaData extends JDFAutoContentMetadata
+public class JDFContentMetaData extends JDFAutoContentMetaData
 {
 	private static final long serialVersionUID = 1L;
 
