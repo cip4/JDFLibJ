@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
  *
  */
 
-public abstract class JDFAutoContentMetaData extends JDFElement
+public abstract class JDFAutoContentMetadata2 extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
@@ -132,7 +132,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContentMetaData(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoContentMetadata2(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -144,7 +144,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContentMetaData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoContentMetadata2(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -157,7 +157,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoContentMetaData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoContentMetadata2(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
