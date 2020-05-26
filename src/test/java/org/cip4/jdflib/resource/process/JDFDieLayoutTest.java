@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,7 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -94,6 +95,7 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 
 	/**
 	 * tests the proposed Color/@PDLName attribute
+	 * 
 	 * @throws Exception
 	 *
 	 */
@@ -101,15 +103,15 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 	public final void testStationMapStrip() throws Exception
 	{
 		n.setType(EnumType.Stripping);
-		JDFBinderySignature bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, null);
-		JDFDieLayout dl = bs.appendDieLayout();
+		final JDFBinderySignature bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, null);
+		final JDFDieLayout dl = bs.appendDieLayout();
 		JDFStation station = dl.appendStation();
 		station.setStationName("Lid");
 		station.setStationAmount(9);
 		station = dl.appendStation();
 		station.setStationName("Box");
 		station.setStationAmount(3);
-		JDFResource sm = n.addResource("StationMap", EnumResourceClass.Parameter, null, null, null, null, null);
+		final JDFResource sm = n.addResource("StationMap", EnumResourceClass.Parameter, null, null, null, null, null);
 		sm.setXMLComment("The partition structure should reflect the product structure ", true);
 		JDFResource sm1 = sm.addPartition(EnumPartIDKey.PartVersion, "Strawberry");
 		sm1.setAttribute("StationName", "Lid");
@@ -140,7 +142,7 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 	@Test
 	public void testStation()
 	{
-		JDFDieLayout lo = (JDFDieLayout) n.addResource(ElementName.DIELAYOUT, EnumUsage.Input);
+		final JDFDieLayout lo = (JDFDieLayout) n.addResource(ElementName.DIELAYOUT, EnumUsage.Input);
 		lo.appendStation();
 		assertTrue(lo.toXML().indexOf("<Station") > 0);
 	}
@@ -152,9 +154,22 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 	@Test
 	public void testRuleLength()
 	{
-		JDFDieLayout lo = (JDFDieLayout) n.addResource(ElementName.DIELAYOUT, EnumUsage.Input);
+		final JDFDieLayout lo = (JDFDieLayout) n.addResource(ElementName.DIELAYOUT, EnumUsage.Input);
 		lo.appendRuleLength();
 		assertTrue(lo.toXML().indexOf("<RuleLength") > 0);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testFileSpec()
+	{
+		final JDFDieLayout lo = (JDFDieLayout) n.addResource(ElementName.DIELAYOUT, EnumUsage.Input);
+		final JDFFileSpec fs = lo.appendFileSpec();
+		assertEquals(fs, lo.getCreateFileSpec());
+		assertEquals(fs, lo.getCreateFileSpec(0));
 	}
 
 	/**

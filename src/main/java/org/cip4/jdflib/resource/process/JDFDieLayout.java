@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -67,14 +67,14 @@
  *
  *
  *//**
-*
-* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
-*
-* JDFDieLayout.java
-*
-* Last changes
-*
-*/
+	*
+	* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
+	*
+	* JDFDieLayout.java
+	*
+	* Last changes
+	*
+	*/
 package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -87,43 +87,56 @@ public class JDFDieLayout extends JDFAutoDieLayout
 
 	/**
 	 * Constructor for JDFDieLayout
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDieLayout(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
+	public JDFDieLayout(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDieLayout
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDieLayout(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
+	public JDFDieLayout(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDieLayout
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFDieLayout(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFDieLayout(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	// **************************************** Methods
-	// *********************************************
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoDieLayout#getCreateFileSpec(int)
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return super.getCreateFileSpec(0);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoDieLayout#getFileSpec(int)
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return super.getFileSpec(0);
+	}
 }

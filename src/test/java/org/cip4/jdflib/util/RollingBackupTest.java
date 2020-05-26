@@ -58,6 +58,7 @@ import org.junit.Test;
 public class RollingBackupTest extends JDFTestCaseBase
 {
 	private File dir;
+	private int n;
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**
@@ -132,6 +133,30 @@ public class RollingBackupTest extends JDFTestCaseBase
 			ff1.createNewFile();
 			final File ff2 = rbf.getNewFile(".bar.txt");
 			ff2.createNewFile();
+			assertEquals(dir.listFiles().length, Math.min(3 * i + 3, 43));
+
+		}
+	}
+
+	/**
+	 * @throws Exception x
+	 */
+	@Test
+	public void testGetNewFileWithNewDotExtension() throws Exception
+	{
+		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roller"));
+		for (int i = 0; i < 30; i++)
+		{
+			final RollingBackupFile rbf = new RollingBackupFile(backRoot, 42);
+			final File ff = rbf.getNewFile(".txt");
+			ff.createNewFile();
+			final RollingBackupFile rbf1 = new RollingBackupFile(backRoot, 42);
+			final File ff1 = rbf1.getNewFile(".foo.txt");
+			ff1.createNewFile();
+			final RollingBackupFile rbf2 = new RollingBackupFile(backRoot, 42);
+			final File ff2 = rbf2.getNewFile(".bar.txt");
+			ff2.createNewFile();
+			assertEquals(dir.listFiles().length, Math.min(3 * i + 3, 43));
 		}
 	}
 
@@ -210,7 +235,7 @@ public class RollingBackupTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		dir = FileUtil.getFileInDirectory(new File(sm_dirTestDataTemp), new File("Rolling"));
+		dir = FileUtil.getFileInDirectory(new File(sm_dirTestDataTemp), new File("Rolling" + n++));
 		FileUtil.deleteAll(dir);
 		dir.mkdirs();
 	}
