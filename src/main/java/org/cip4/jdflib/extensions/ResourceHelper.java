@@ -561,6 +561,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 *
 	 * @return the comment text
 	 */
+	@Override
 	public String getComment(final int i)
 	{
 		final KElement root = getRoot();
@@ -637,7 +638,12 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 		super.setGeneralID(idUsage, idValue);
 	}
 
-	public Object getResourceAttribute(final String string)
+	/**
+	 *
+	 * @param string
+	 * @return
+	 */
+	public String getResourceAttribute(final String string)
 	{
 		final KElement resource = getResource();
 		return resource == null ? null : resource.getNonEmpty(string);
