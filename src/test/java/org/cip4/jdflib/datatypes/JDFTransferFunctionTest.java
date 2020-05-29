@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -98,6 +98,16 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 		tf.add(1, 1);
 		assertTrue(tf.isUnit());
 		tf.add(1, 1);
+	}
+
+	@Test
+	public void testGetUnit()
+	{
+		final JDFTransferFunction tf = JDFTransferFunction.getUnit();
+		assertTrue(tf.isUnit());
+		tf.add(1, 2);
+		assertFalse(tf.isUnit());
+		assertTrue(JDFTransferFunction.getUnit().isUnit());
 	}
 
 	@Test

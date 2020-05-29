@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,13 @@ import java.util.zip.DataFormatException;
  */
 public class JDFTransferFunction extends JDFNumList
 {
+	public static final String UNIT = "0 0 1 1";
+
+	public static JDFTransferFunction getUnit()
+	{
+		return createTransferFunction(UNIT);
+	}
+
 	/**
 	 * factory for JDFTransferFunction that silently returns null in case of illegal strings
 	 *
@@ -480,7 +487,7 @@ public class JDFTransferFunction extends JDFNumList
 
 	/**
 	 * returns the multiplied tf - in case one of thr arguments is null or unit, the other argument is returned unmodified
-	 * 
+	 *
 	 * @param tf1
 	 * @param tf2
 	 * @return
