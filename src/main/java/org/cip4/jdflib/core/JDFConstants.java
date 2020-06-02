@@ -1281,6 +1281,10 @@ public abstract class JDFConstants extends JDFCoreConstants
 	public static final String SEPARATION_SPOT = "Spot";
 	/** * */
 	public static final String SEPARATION_VARNISH = "Varnish";
+	/**
+	 * @deprecated use JDFColor.getCMYKSeparations()
+	 */
+	@Deprecated
 	public static final VString SEPARATIONS_CMYK = new VString("Cyan Magenta Yellow Black", null);
 
 	/** * */

@@ -2139,7 +2139,7 @@ class PostXJDFWalker extends BaseElementWalker
 			final String ref = xjdf.getNonEmpty("MediaRef");
 			if (ref != null)
 			{
-				xjdf.removeAttribute("MediaRef");
+				xjdf.removeAttribute(XJDFConstants.MediaRef);
 				final ResourceHelper helper = ResourceHelper.getHelper(xjdf);
 				final VJDFAttributeMap maps = helper == null ? null : helper.getPartMapVector();
 				if (!VJDFAttributeMap.isEmpty(maps))

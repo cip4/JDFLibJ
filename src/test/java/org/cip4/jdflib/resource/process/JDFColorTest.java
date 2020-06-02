@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.junit.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * 23.01.2009
+ *         23.01.2009
  */
 public class JDFColorTest extends JDFTestCaseBase
 {
@@ -130,6 +130,19 @@ public class JDFColorTest extends JDFTestCaseBase
 		final byte[] b = "grün".getBytes();
 		c.set8BitNames(b);
 		assertEquals(c.get8BitName(), "grün");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCMYK()
+	{
+		for (final String c : JDFColor.getCMYKSeparations())
+		{
+			final JDFColor co = cp.appendColorWithName(c, null);
+			assertEquals(c, co.get8BitName());
+		}
 	}
 
 	/**

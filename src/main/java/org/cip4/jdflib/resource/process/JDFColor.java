@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,11 +36,14 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import java.util.List;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColor;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
@@ -56,6 +59,16 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFColor extends JDFAutoColor
 {
 	private static final long serialVersionUID = 1L;
+	private static final VString CMYK = new VString("Cyan Magenta Yellow Black", null);
+
+	/**
+	 *
+	 * @return
+	 */
+	public static List<String> getCMYKSeparations()
+	{
+		return new StringArray(CMYK);
+	}
 
 	/**
 	 * Constructor for JDFColor
@@ -70,7 +83,7 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * Constructor for JDFColor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 *
@@ -83,7 +96,7 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * Constructor for JDFColor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -128,7 +141,7 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * get the html color representation of this color in the format 0xrrggbb;
-	 * 
+	 *
 	 * @return
 	 */
 	public String getHTMLColor()
@@ -191,7 +204,7 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * get the FileSpec referring to ColorProfile
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFFileSpec getColorProfile()
@@ -220,7 +233,7 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * get or create a ColorProfile FileSpec
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFFileSpec getCreateColorProfile()
@@ -237,7 +250,7 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * append a ColorProfoe FileSpec
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFFileSpec appendColorProfile()
@@ -253,7 +266,7 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * get or create a TargetProfile FileSpec
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFFileSpec getTargetProfile()
@@ -279,7 +292,7 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * get or create a TargetProfile FileSpec
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFFileSpec getCreateTargetProfile()
@@ -296,7 +309,7 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * append a TargetProfile FileSpec
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFFileSpec appendTargetProfile()
