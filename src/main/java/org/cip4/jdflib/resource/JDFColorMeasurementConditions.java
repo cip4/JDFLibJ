@@ -191,4 +191,22 @@ public class JDFColorMeasurementConditions extends JDFAutoColorMeasurementCondit
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 *
+	 * @param e
+	 */
+	public void setIllumination(final EnumIllumination e)
+	{
+		super.setIllumination(e == null ? null : e.getName());
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public EnumIllumination getEnumIllumination()
+	{
+		return EnumIllumination.getEnum(getIllumination());
+	}
+
 }
