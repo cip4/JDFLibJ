@@ -2506,8 +2506,6 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertNull(vSpawned);
 	}
 
-	// ////////////////////////////////////////////////////////////
-
 	/**
 	 * @throws DataFormatException
 	 */
@@ -2535,6 +2533,21 @@ public class JDFNodeTest extends JDFTestCaseBase
 		n.removeAttribute(AttributeName.TYPES);
 		assertNotNull("invalid types attribute, but still retrieve ni with no cpi", n.getNodeInfo());
 		assertNotNull("invalid types attribute, but...", n.getNodeInfo());
+	}
+
+	/**
+	 * @throws DataFormatException
+	 */
+	@Test
+	public void testGetNodeInfoProc() throws DataFormatException
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(JDFNode.EnumType.ConventionalPrinting);
+		final JDFNodeInfo ni2 = n.appendNodeInfo();
+		assertEquals(ni2, n.getNodeInfo());
+		assertEquals(ni2, n.getNodeInfo(0));
+		assertNull(n.getNodeInfo(1));
 	}
 
 	/**

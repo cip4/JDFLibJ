@@ -3440,7 +3440,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-	
+
 	 *
 	 */
 
@@ -5766,9 +5766,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public JDFNodeInfo getNodeInfo(final int combinedProcessIndex)
 	{
-		if (combinedProcessIndex < 0 || combinedProcessIndex >= getTypes().size())
+		if (combinedProcessIndex < 0 || combinedProcessIndex >= ContainerUtil.size(getTypes()))
 		{
-			return null;
+			if (combinedProcessIndex == 0)
+				return getNodeInfo();
+			else
+				return null;
 		}
 		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (rlp == null)
@@ -5781,8 +5784,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			return null;
 		}
-
-		return (JDFNodeInfo) rl.getTarget();
+		else
+			return (JDFNodeInfo) rl.getTarget();
 	}
 
 	/**
