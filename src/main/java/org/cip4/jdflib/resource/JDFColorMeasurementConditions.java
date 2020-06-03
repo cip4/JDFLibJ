@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,6 +78,11 @@
  */
 package org.cip4.jdflib.resource;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorMeasurementConditions;
 import org.w3c.dom.DOMException;
@@ -86,56 +91,104 @@ public class JDFColorMeasurementConditions extends JDFAutoColorMeasurementCondit
 {
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("rawtypes")
+	public static class EnumIllumination extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumIllumination(final String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumIllumination getEnum(final String enumName)
+		{
+			return (EnumIllumination) getEnum(EnumIllumination.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumIllumination getEnum(final int enumValue)
+		{
+			return (EnumIllumination) getEnum(EnumIllumination.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumIllumination.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumIllumination.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumIllumination.class);
+		}
+
+		/**  */
+		public static final EnumIllumination D50 = new EnumIllumination("D50");
+		/**  */
+		public static final EnumIllumination D65 = new EnumIllumination("D65");
+		/**  */
+		public static final EnumIllumination Unknown = new EnumIllumination("Unknown");
+	}
+
 	/**
 	 * Constructor for JDFColorMeasurementConditions
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorMeasurementConditions(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFColorMeasurementConditions(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFColorMeasurementConditions
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorMeasurementConditions(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFColorMeasurementConditions(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFColorMeasurementConditions
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFColorMeasurementConditions(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFColorMeasurementConditions(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	// **************************************** Methods
-	// *********************************************
-	/**
-	 * toString - StringRepresentation of JDFNode
-	 * 
-	 * @return String
-	 */
-	@Override
-	public String toString()
-	{
-		return "JDFColorMeasurementConditions[  --> " + super.toString() + " ]";
 	}
 
 }
