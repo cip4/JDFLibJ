@@ -36,7 +36,7 @@ jobs:
       - name: Maven Release Prepare
         env:
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-        run: mvn -Darguments="-Dgpg.passphrase=$SIGNING_PASSWORD" release:prepare --batch-mode -DreleaseVersion=${GITHUB_REF:8} -DdevelopmentVersion=${GITHUB_REF:8:5}.x-SNAPSHOT
+        run: mvn -Darguments="-Dgpg.passphrase=$SIGNING_PASSWORD" release:prepare --batch-mode -DreleaseVersion=${GITHUB_REF:18} -DdevelopmentVersion=${GITHUB_REF:18:5}.x-SNAPSHOT
 
       - name: Maven Release Perform
         env:

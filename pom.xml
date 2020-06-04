@@ -3,9 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.cip4.lib.jdf</groupId>
     <artifactId>JDFLibJ</artifactId>
-    <version>s/JDF.x-SNAPSHOT</version>
+    <version>2.1.6.x-SNAPSHOT</version>
     <name>CIP4 JDF Writer Java</name>
-    <url>https://confluence.cip4.org/display/PUB/JDFLibJ</url>
     <description>CIP4 JDF Library for JDF 1.x</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,8 +22,7 @@
         <url>https://github.com/cip4/JDFLibJ</url>
         <connection>https://github.com/cip4/JDFLibJ.git</connection>
         <developerConnection>scm:git:https://github.com/cip4/JDFLibJ.git</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
+    </scm>
     <issueManagement>
         <system>JIRA</system>
         <url>https://jira.cip4.org/browse/JDFLIBJ</url>
@@ -50,10 +48,9 @@
             <id>s.meissner</id>
             <name>Stefan Meissner</name>
             <organization>Cimpress Technology</organization>
-            <organizationUrl>https://cimpress.com/</organizationUrl>
+            <organizationUrl>https://www.cimpress.com/</organizationUrl>
         </developer>
     </developers>
-
     <dependencies>
         <dependency>
             <groupId>commons-lang</groupId>
