@@ -14,8 +14,11 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Check out sources...
+      - name: Check out sources.
         uses: actions/checkout@v2
+
+      - name: Git config
+        run: git config user.name "R2D2" && git config user.email "r2d2@cip4.org"
 
       - name: GPG Version
         run: gpg --version
