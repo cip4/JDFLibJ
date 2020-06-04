@@ -18,7 +18,15 @@ jobs:
       - name: Check out sources...
         uses: actions/checkout@v2
 
+      - name: Decrypt GPG Ring File
+        env:
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+        run: gpg --quiet --batch --yes --decrypt --passphrase="$SIGNING_PASSWORD" --output secring.gpg secring.gpg.encrypted && chmod +x secring.gpg
+
+      - name: Import GPG Ring File
+        run: gpg --batch --import secring.gpg
+
       - name: Maven Deploy
         env:
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-        run: mvn "-Dgpg.passphrase=$GPG_PASSPHRASE" clean deploy
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+        run: mvn '-Dgpg.passphrase=$SIGNING_PASSWORD' clean deploy
