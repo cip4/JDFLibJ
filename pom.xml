@@ -20,9 +20,9 @@
         </license>
     </licenses>
     <scm>
-        <url>https://github.com/cip4/JDFLibJ.git</url>
-        <developerConnection>scm:git:ssh://git@github.com:cip4/JDFLibJ.git</developerConnection>
-        <connection>scm:git:ssh://git@github.com:cip4/JDFLibJ.git</connection>
+        <url>https://github.com/cip4/JDFLibJ</url>
+        <connection>https://github.com/cip4/JDFLibJ.git</connection>
+        <developerConnection>scm:git:git@github.com:cip4/JDFLibJ.git</developerConnection>
     </scm>
     <issueManagement>
         <system>JIRA</system>
