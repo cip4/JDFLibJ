@@ -21,10 +21,10 @@ jobs:
       - name: Decrypt GPG Ring File
         env:
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-        run: gpg --quiet --batch --yes --decrypt --passphrase="$SIGNING_PASSWORD" --output secring.gpg secring.gpg.encrypted && chmod +x secring.gpg
+        run: gpg2 --quiet --batch --yes --decrypt --passphrase="$SIGNING_PASSWORD" --output secring.gpg secring.gpg.encrypted && chmod +x secring.gpg
 
       - name: Import GPG Ring File
-        run: gpg --batch --import secring.gpg
+        run: gpg2 --batch --import secring.gpg
 
       - name: Maven Deploy
         env:
