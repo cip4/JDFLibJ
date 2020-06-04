@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.cip4.lib.jdf</groupId>
     <artifactId>JDFLibJ</artifactId>
-    <version>s/JDFLibJ-2.1.6.3</version>
+    <version>s/JDF.x-SNAPSHOT</version>
     <name>CIP4 JDF Writer Java</name>
     <url>https://confluence.cip4.org/display/PUB/JDFLibJ</url>
     <description>CIP4 JDF Library for JDF 1.x</description>
@@ -23,7 +23,7 @@
         <url>https://github.com/cip4/JDFLibJ</url>
         <connection>https://github.com/cip4/JDFLibJ.git</connection>
         <developerConnection>scm:git:https://github.com/cip4/JDFLibJ.git</developerConnection>
-      <tag>JDFLibJ-s/JDFLibJ-2.1.6.3</tag>
+      <tag>HEAD</tag>
   </scm>
     <issueManagement>
         <system>JIRA</system>
