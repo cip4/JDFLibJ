@@ -1,6 +1,9 @@
 # JDF Library
 CIP4 JDF Library
 
+## Issue Tracking
+Don't write issues, provide Pull-Requets!
+
 ## Development Notes
 ### Release a new Version
 
