@@ -22,7 +22,7 @@
     <scm>
         <url>https://github.com/cip4/JDFLibJ</url>
         <connection>https://github.com/cip4/JDFLibJ.git</connection>
-        <developerConnection>scm:git:git@github.com:cip4/JDFLibJ.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/cip4/JDFLibJ.git</developerConnection>
     </scm>
     <issueManagement>
         <system>JIRA</system>
