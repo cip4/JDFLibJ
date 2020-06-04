@@ -33,11 +33,20 @@ jobs:
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-        run: mvn --settings maven-settings.xml -Dgpg.passphrase=$SIGNING_PASSWORD -Dossrh.username=$OSSRH_USERNAME -Dossrh.password=$OSSRH_PASSWORD release:prepare --batch-mode -DreleaseVersion=${GITHUB_REF:8} -DdevelopmentVersion=${GITHUB_REF:8:5}.x-SNAPSHOT
+        run: mvn --settings maven-settings.xml -Darguments="-Dgpg.passphrase=$SIGNING_PASSWORD" release:prepare --batch-mode -DreleaseVersion=${GITHUB_REF:8} -DdevelopmentVersion=${GITHUB_REF:8:5}.x-SNAPSHOT
 
       - name: Maven Release Perform
         env:
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-        run: mvn --settings maven-settings.xml -Dgpg.passphrase=$SIGNING_PASSWORD -Dossrh.username=$OSSRH_USERNAME -Dossrh.password=$OSSRH_PASSWORD release:perform --batch-mode
+        run: mvn --settings maven-settings.xml -Darguments="-Dgpg.passphrase=$SIGNING_PASSWORD -Dossrh.username=$OSSRH_USERNAME -Dossrh.password=$OSSRH_PASSWORD" release:perform --batch-mode
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v1-release
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/{*.jar}
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
