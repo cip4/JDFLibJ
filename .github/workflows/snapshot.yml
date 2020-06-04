@@ -32,4 +32,4 @@ jobs:
       - name: Maven Deploy
         env:
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-        run: mvn '-Dgpg.passphrase=$SIGNING_PASSWORD' -Dgpg.executable=gpg2 clean deploy
+        run: mvn '-Dgpg.passphrase=$SIGNING_PASSWORD' clean deploy
