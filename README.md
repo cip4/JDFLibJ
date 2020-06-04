@@ -2,7 +2,7 @@
 CIP4 JDF Library
 
 ## Issue Tracking
-Don't write issues, provide Pull-Requets!
+Don't write issues, provide Pull-Requests!
 
 ## Development Notes
 ### Release a new Version
