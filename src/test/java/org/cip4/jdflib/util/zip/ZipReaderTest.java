@@ -566,7 +566,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 			if (i < 0)
 				break;
 		}
-		assertTrue(n > 350000000);
+		assertTrue(n > 35000000);
 		bos.close();
 		r.close();
 	}

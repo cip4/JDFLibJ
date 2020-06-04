@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.cip4.lib.jdf</groupId>
     <artifactId>JDFLibJ</artifactId>
-    <version>2.1.x-SNAPSHOT</version>
+    <version>2.1.6.x-SNAPSHOT</version>
     <name>CIP4 JDF Writer Java</name>
     <url>https://confluence.cip4.org/display/PUB/JDFLibJ</url>
     <description>CIP4 JDF Library for JDF 1.x</description>
@@ -105,7 +105,7 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.5</version>
+                <version>1.6.8</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
@@ -116,15 +116,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.0</version>
+                <version>3.8.1</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <compilerArgs>
-                        <arg>-encoding UTF-8</arg>
-                        <arg>-Dfile.encoding=UTF-8</arg>
-                    </compilerArgs>
                  </configuration>
             </plugin>
             <plugin>
@@ -132,7 +128,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.20</version>
                 <configuration>
-                    <skipTests>true</skipTests>
                     <forkCount>1</forkCount>
                     <reuseForks>false</reuseForks>
 					<forkedProcessTimeoutInSeconds>66666</forkedProcessTimeoutInSeconds>
@@ -171,11 +166,10 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -188,7 +182,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.2.0</version>
                 <configuration>
                     <doclint>none</doclint>
                 </configuration>
@@ -201,7 +195,6 @@
                     </execution>
                 </executions>
             </plugin>
-            -->
         </plugins>
     </build>
 </project>
