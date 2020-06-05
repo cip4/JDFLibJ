@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build with Gradle
-        run: ./gradlew build -PprojectVersion=${GITHUB_REF:18} -x test
+        run: ./gradlew build -PprojectVersion=${GITHUB_REF:18}
 
       - name: Attach files to GitHub Release
         uses: AButler/upload-release-assets@v2.0
@@ -46,4 +46,4 @@ jobs:
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-        run: ./gradlew publish  -PprojectVersion=${GITHUB_REF:18} -Psigning.keyId=$SIGNING_KEY_ID -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$PWD/secring.gpg -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD
+        run: ./gradlew publish closeAndReleaseRepository -PprojectVersion=${GITHUB_REF:18} -Psigning.keyId=$SIGNING_KEY_ID -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$PWD/secring.gpg -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD

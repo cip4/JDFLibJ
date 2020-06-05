@@ -6,6 +6,9 @@ Don't write issues, provide Pull-Requests!
 
 ## Development Notes
 ### Release a new Version
+Creation and publishing of a new version to GitHub Release and to the Central Maven Repository. 
+
+**NOTE:** The publication to the Central Maven Repository may take up to two hours.
 
 ```bash
 $ git tag -a JDFLibJ-2.1.[VERSION] -m "[TITLE]"

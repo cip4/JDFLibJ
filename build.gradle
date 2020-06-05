@@ -4,6 +4,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'signing'
+    id 'io.codearte.nexus-staging' version '0.21.2'
 }
 
 group = 'org.cip4.lib.jdf'
@@ -35,6 +36,10 @@ publishing {
                 }
             }
             pom {
+                name = project.description
+                description = 'CIP4 JDF Library for JDF 1.x'
+                url = 'https://github.com/cip4/JDFLibJ'
+
                 licenses {
                     license {
                         name = 'TCIP4 Software License'
@@ -71,6 +76,13 @@ publishing {
             }
         }
     }
+}
+
+nexusStaging {
+    packageGroup = 'org.cip4'
+    stagingProfileId = "105e2b532689c6"
+    username ossrhUsername
+    password ossrhPassword
 }
 
 repositories {
