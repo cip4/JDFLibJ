@@ -37,7 +37,8 @@ on:
 
         - name: Upload Archives to Maven Central Snapshot
           env:
+            SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
             SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
             OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
             OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-          run: ./gradlew uploadArchives -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$PWD/secring.gpg -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD
+          run: ./gradlew uploadArchives -Psigning.keyId=$SIGNING_KEY_ID -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$PWD/secring.gpg -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD

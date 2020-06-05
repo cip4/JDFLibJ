@@ -1,18 +1,81 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-    id 'java'
-    id 'io.codearte.nexus-staging' version '0.11.0'
+    id 'java-library'
+    id 'maven-publish'
+    id 'signing'
 }
 
 group = 'org.cip4.lib.jdf'
 version = '2.1.6.x-SNAPSHOT'
 description = 'CIP4 JDF Writer Java'
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'my-library'
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'CIP4 JDF Writer Java'
+
+                licenses {
+                    license {
+                        name = 'TCIP4 Software License'
+                        url = 'https://github.com/cip4/JDFLibJ/blob/master/LICENSE.md'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'r.prosi'
+                        name = 'Dr. Rainer Prosi'
+                    }
+                    developer {
+                        id = 's.meissner'
+                        name = 'Stefan Meissner'
+                    }
+                }
+                scm {
+                    connection = 'https://github.com/cip4/JDFLibJ.git'
+                    developerConnection = 'scm:git:https://github.com/cip4/JDFLibJ.git'
+                    url = 'https://github.com/cip4/JDFLibJ'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        }
+    }
+}
+
 repositories {
     mavenCentral()
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots"
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
     }
 }
 
