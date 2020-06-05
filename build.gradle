@@ -10,13 +10,10 @@ group = 'org.cip4.lib.jdf'
 version = '2.1.6.x-SNAPSHOT'
 description = 'CIP4 JDF Writer Java'
 
-/**
 java {
     withJavadocJar()
     withSourcesJar()
 }
- */
-
 
 publishing {
     publications {
@@ -33,10 +30,6 @@ publishing {
                 }
             }
             pom {
-                artifactId = "JDFLbiJ"
-                version = "2.1.x.x-SNAPSHOT"
-                name = 'CIP4 JDF Writer Java'
-
                 licenses {
                     license {
                         name = 'TCIP4 Software License'
@@ -80,9 +73,10 @@ repositories {
 }
 
 signing {
-    sign publishing.publications.mavenJava
+    if (!version.endsWith("SNAPSHOT")) {
+         sign publishing.publications.mavenJava
+    }
 }
-
 
 javadoc {
     failOnError = false
