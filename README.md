@@ -1,4 +1,4 @@
-# JDF Library
+# CIP4 JDF Java Library
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.cip4.lib.jdf/JDFLibJ/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.cip4.lib.jdf/JDFLibJ) [![License (CIP4 Software License)](https://img.shields.io/badge/license-CIP4%20Software%20License-blue)](https://github.com/cip4/xJdfLib/blob/master/LICENSE.md)
 
 CIP4 JDF Library
