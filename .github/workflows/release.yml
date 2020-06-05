@@ -20,11 +20,14 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build -PprojectVersion=${GITHUB_REF:18}
 
+      - name: Debug
+        run: ls -l build/libs/
+
       - name: Attach files to GitHub Release
         uses: svenstaro/upload-release-action@v1-release
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/libs/{*.jar}
+          file: build/libs/*
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
