@@ -20,7 +20,13 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build -PprojectVersion=${GITHUB_REF:18} -x test
 
-      - name: Upload Artifacts to GitHub
+      - name: Attach files to GitHub Release
+        uses: AButler/upload-release-assets@v2.0
+        with:
+          files: 'build/libs/*'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Artifacts to GitHub Build Artifacts
         uses: actions/upload-artifact@v1
         with:
           name: libs

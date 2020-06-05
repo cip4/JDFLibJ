@@ -21,7 +21,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build -x test
 
-      - name: Upload Artifacts to GitHub
+      - name: Upload Artifacts to GitHub Build Artifacts
         uses: actions/upload-artifact@v1
         with:
           name: libs
