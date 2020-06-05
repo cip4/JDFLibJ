@@ -18,7 +18,8 @@ java {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId = 'my-library'
+            artifactId = project.name
+
             from components.java
             versionMapping {
                 usage('java-api') {
