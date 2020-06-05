@@ -80,7 +80,9 @@ publishing {
 
 nexusStaging {
     packageGroup = 'org.cip4'
-    stagingProfileId = "105e2b532689c6"
+    stagingProfileId = '105e2b532689c6'
+    numberOfRetries = 100
+    delayBetweenRetriesInMillis = 10000
     username ossrhUsername
     password ossrhPassword
 }
