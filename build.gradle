@@ -1,0 +1,39 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'java'
+    id 'io.codearte.nexus-staging' version '0.11.0'
+}
+
+group = 'org.cip4.lib.jdf'
+version = '2.1.6.x-SNAPSHOT'
+description = 'CIP4 JDF Writer Java'
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
+}
+
+processResources {
+    filesMatching('**/*.properties') {
+        filter(ReplaceTokens, tokens:  [
+                'name': project.properties['description'],
+                'version': project.properties['version'],
+                'artifactId': project.properties['name'],
+                'timestamp': new Date().format('yyyy-MM-dd HH:mm:ssZ')
+        ])
+    }
+}
+
+dependencies {
+    compile 'commons-lang:commons-lang:2.5'
+    compile 'commons-io:commons-io:2.0'
+    compile 'commons-logging:commons-logging:1.1.1'
+    compile 'log4j:log4j:1.2.16'
+    compile 'xerces:xercesImpl:2.12.0'
+    compile 'javax.mail:mailapi:1.4.3'
+
+    testCompile 'junit:junit:4.11'
+}
