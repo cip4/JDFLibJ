@@ -14,40 +14,30 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Check out sources.
+      - name: Check out sources...
         uses: actions/checkout@v2
 
-      - name: Git config
-        run: git config user.name "R2D2" && git config user.email "r2d2@cip4.org"
+      - name: Build with Gradle
+        run: ./gradlew build -PprojectVersion=${GITHUB_REF:18} -x test
 
-      - name: GPG Version
-        run: gpg --version
+      - name: Upload Artifacts to GitHub
+        uses: actions/upload-artifact@v1
+        with:
+          name: libs
+          path: build/libs
 
-      - name: Decrypt GPG Ring File
+      - name: Decrypt GGP Ring File
         env:
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
         run: gpg --quiet --batch --yes --decrypt --passphrase="$SIGNING_PASSWORD" --output secring.gpg secring.gpg.encrypted && chmod +x secring.gpg
 
-      - name: Import GPG Ring File
-        run: gpg --batch --import secring.gpg
+      - name: Debug
+        run: echo $PWD/secring.gpg && ls -l
 
-      - name: Maven Release Prepare
+      - name: Publish artifacts to Maven Central Snapshot
         env:
-          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-        run: mvn -Darguments="-Dgpg.passphrase=$SIGNING_PASSWORD" release:prepare --batch-mode -DreleaseVersion=${GITHUB_REF:18} -DdevelopmentVersion=${GITHUB_REF:18:5}.x-SNAPSHOT
-
-      - name: Maven Release Perform
-        env:
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-        run: mvn --settings maven-settings.xml -Darguments="-Dgpg.passphrase=$SIGNING_PASSWORD -Dossrh.username=$OSSRH_USERNAME -Dossrh.password=$OSSRH_PASSWORD" release:perform --batch-mode
-
-      - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v1-release
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: target/{*.jar}
-          tag: ${{ github.ref }}
-          overwrite: true
-          file_glob: true
+        run: ./gradlew publish  -PprojectVersion=${GITHUB_REF:18} -Psigning.keyId=$SIGNING_KEY_ID -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$PWD/secring.gpg -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD
