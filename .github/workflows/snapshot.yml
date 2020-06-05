@@ -24,7 +24,7 @@ jobs:
       - name: Upload Artifacts to GitHub
         uses: actions/upload-artifact@v1
         with:
-          name: jar
+          name: libs
           path: build/libs
 
       - name: Decrypt GGP Ring File

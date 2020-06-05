@@ -10,10 +10,13 @@ group = 'org.cip4.lib.jdf'
 version = '2.1.6.x-SNAPSHOT'
 description = 'CIP4 JDF Writer Java'
 
+/**
 java {
     withJavadocJar()
     withSourcesJar()
 }
+ */
+
 
 publishing {
     publications {
@@ -30,6 +33,8 @@ publishing {
                 }
             }
             pom {
+                artifactId = "JDFLbiJ"
+                version = "2.1.x.x-SNAPSHOT"
                 name = 'CIP4 JDF Writer Java'
 
                 licenses {
