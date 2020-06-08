@@ -136,7 +136,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 	@Test
 	public void testOptimizeCutBlock()
 	{
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			final JDFElement e = addGang();
 			e.setAttribute(AttributeName.NPAGE, "1");
@@ -155,23 +155,27 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 		cb2.setBlockName("B2");
 
 		writeTest(xjdfHelper, "CutGangIn.xjdf");
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 4; i++)
 		{
-			final String sn = "S" + (i / 2);
+			final String sn = "S" + (i / 4);
 			final JDFAttributeMap partMap = new JDFAttributeMap(AttributeName.SHEETNAME, sn);
 			final ResourceHelper phLO = layout.getCreatePartition(partMap, true);
-			phLO.setAmount(1000, partMap, true);
+			phLO.setAmount(1025, partMap, true);
 			final JDFLayout lo = (JDFLayout) phLO.getCreateResource();
 			final JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
-			final JDFRectangle relBox = new JDFRectangle(0, 0, 0.5, 1);
+			final JDFRectangle relBox = new JDFRectangle(0, 0, 0.5, 0.5);
 			if (i % 2 == 1)
 				relBox.shift(0.5, 0);
+			if (i / 2 == 1)
+				relBox.shift(0.0, 0.5);
 			pos.setRelativeBox(relBox);
 			pos.setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
 			pos.setAttribute(AttributeName.GANGELEMENTID, GANG + i);
 
 			final SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
-			final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS" + i), true).getResource();
+			final ResourceHelper rBS = sh.getCreatePartition(0, true);
+			final JDFBinderySignature bs = (JDFBinderySignature) rBS.getResource();
+			rBS.appendPartMap(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS" + i));
 			bs.setBinderySignatureType(EnumBinderySignatureType.Grid);
 			bs.setNumberUp(1, 1);
 			final KElement gang = sheetOptimizingParams.getElement(ElementName.GANGELEMENT, null, i);
@@ -256,6 +260,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 	@Test
 	public void testOutputLayout()
 	{
+		prepareLayout(true);
 		for (int i = 0; i < 2; i++)
 		{
 			for (int j = 0; j < 2; j++)
@@ -282,6 +287,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 	@Test
 	public void testOutputLayoutPositionOrd()
 	{
+		prepareLayout(true);
 		for (int k = 0; k < 2; k++)
 		{
 			for (int i = 0; i < 2; i++)
@@ -358,13 +364,14 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 		xjdfHelper.setTypes("SheetOptimizing");
 		JDFElement.setLongID(false);
 		prepareSheetOptimizing();
-		prepareLayout();
+		prepareLayout(false);
 	}
 
-	private void prepareLayout()
+	private void prepareLayout(final boolean addemptypart)
 	{
 		layout = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Output);
-		layout.getCreatePartition(0, true);
+		if (addemptypart)
+			layout.getCreatePartition(0, true);
 	}
 
 	private void prepareSheetOptimizing()
