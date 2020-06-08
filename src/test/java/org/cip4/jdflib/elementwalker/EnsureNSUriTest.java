@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -43,8 +43,13 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.CPUTimer;
 import org.junit.Test;
 
@@ -219,6 +224,26 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		assertTrue("undeclared n3 namespace is retained", root.toXML().indexOf("n3:test") > 0);
 		assertTrue(root.toXML().indexOf("<n3:next") > 0);
 		assertTrue(root.toXML().indexOf("<n3:foofoo") > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testEnsureNSJDF()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode jdfRoot = d.getJDFRoot();
+		final JDFGeneralID gid = (JDFGeneralID) jdfRoot.appendElement("jdf:GeneralID", JDFElement.getSchemaURL());
+		gid.setIDUsage("u");
+		gid.setIDValue("v");
+		final EnsureNSUri ensure = new EnsureNSUri();
+		ensure.addNS("", JDFElement.getSchemaURL());
+		ensure.addAlias("jdf", "");
+
+		ensure.walk(jdfRoot);
+		assertTrue(jdfRoot.toXML().indexOf("jdf:") < 0);
+
 	}
 
 	/**
