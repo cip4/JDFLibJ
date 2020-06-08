@@ -93,7 +93,7 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  *
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFMedia extends JDFAutoMedia implements IMatches
 {
@@ -101,6 +101,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 
 	/**
 	 * implementation of spec table Translation of Paper grades between [ISO12647-2:2004] and [ISO12647-2:2013]
+	 *
 	 * @param iso
 	 * @return 1-5 if valid; else null
 	 */
@@ -134,6 +135,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 
 	/**
 	 * implementation of spec table Translation of Paper grades between [ISO12647-2:2004] and [ISO12647-2:2013]
+	 *
 	 * @param iso
 	 * @return 1-5 if valid; else null
 	 */
@@ -165,13 +167,14 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 		}
 		else
 		{
-			//???
+			// ???
 			return 0;
 		}
 	}
 
 	/**
 	 * Constructor for JDFMedia
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 *
@@ -183,6 +186,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 
 	/**
 	 * Constructor for JDFMedia
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 *
@@ -195,6 +199,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 
 	/**
 	 * Constructor for JDFMedia
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -218,15 +223,10 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	}
 
 	/**
-	 * calculates paper thickness from weight, if and only if weight exists but
-	 * not thickness
+	 * calculates paper thickness from weight, if and only if weight exists but not thickness
 	 *
-	 * @param bLocal
-	 *            if true, only evaluate locally set attributes in this
-	 *            partition, else check inherited attributes
-	 * @param bRecurse
-	 *            if true, do for all children, grandchildren rtc, else only
-	 *            local
+	 * @param bLocal if true, only evaluate locally set attributes in this partition, else check inherited attributes
+	 * @param bRecurse if true, do for all children, grandchildren rtc, else only local
 	 */
 	public void setThicknessFromWeight(final boolean bLocal, final boolean bRecurse)
 	{
@@ -257,7 +257,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	/**
 	 * Set attribute Dimension (in cm)
 	 *
-	 * @param  value the value (in centimeter) to set the dimension to
+	 * @param value the value (in centimeter) to set the dimension to
 	 */
 	public void setDimensionCM(final JDFXYPair value)
 	{
@@ -269,7 +269,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	/**
 	 * Set attribute Dimension (in cm)
 	 *
-	 * @param  value the value (in centimeter) to set the dimension to
+	 * @param value the value (in centimeter) to set the dimension to
 	 */
 	public void setDimensionCM(final int x, final int y)
 	{
@@ -292,7 +292,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	/**
 	 * Set attribute Dimension (in inch)
 	 *
-	 * @param   value  the value (in inch) to set the dimension to
+	 * @param value the value (in inch) to set the dimension to
 	 */
 	public void setDimensionInch(final JDFXYPair value)
 	{
@@ -317,8 +317,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	/**
 	 * Get the ISO grade of the back side based on backCoatings
 	 *
-	 * @return 1-5: the grade of the back 0 if no grade value is specified
-	 * note that front is always assumed to have a better coating
+	 * @return 1-5: the grade of the back 0 if no grade value is specified note that front is always assumed to have a better coating
 	 */
 	public int getBackGrade()
 	{
@@ -380,10 +379,11 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 			{
 				matches = StringUtil.getDistance(getBrand(), other.getBrand(), true, true, true) == 0;
 				matches = matches && StringUtil.getDistance(getMediaQuality(), other.getMediaQuality(), true, true, true) == 0;
-				matches = matches
-						&& StringUtil.getDistance(getAttribute(AttributeName.ISOPAPERSUBSTRATE), other.getAttribute(AttributeName.ISOPAPERSUBSTRATE), true, true, true) == 0;
-				matches = matches && getGrade() == 0 || other.getGrade() == 0 || other.getGrade() == getGrade();
-				matches = matches && getBackGrade() == 0 || other.getBackGrade() == 0 || other.getBackGrade() == getBackGrade();
+				matches = matches && StringUtil.getDistance(getAttribute(AttributeName.ISOPAPERSUBSTRATE), other.getAttribute(AttributeName.ISOPAPERSUBSTRATE), true, true, true) == 0;
+				matches = matches && (getGrade() == 0 || other.getGrade() == 0 || other.getGrade() == getGrade());
+				matches = matches && (getBackGrade() == 0 || other.getBackGrade() == 0 || other.getBackGrade() == getBackGrade());
+				matches = matches && (getWeight() == 0 || other.getWeight() == 0 || Math.abs(other.getWeight() - getWeight()) < 1);
+				matches = matches && (getThickness() == 0 || other.getThickness() == 0 || Math.abs(other.getThickness() - getThickness()) < 1);
 				if (matches)
 				{
 					final JDFXYPair dim = getDimension();
@@ -397,6 +397,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 
 	/**
 	 * return true if we are a media used for printing
+	 *
 	 * @return
 	 */
 	public boolean isComponentMedia()

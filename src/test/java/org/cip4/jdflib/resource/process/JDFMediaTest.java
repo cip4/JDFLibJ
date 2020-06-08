@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -266,6 +266,31 @@ public class JDFMediaTest extends JDFTestCaseBase
 
 		m.setProductID("foo");
 		assertTrue(m.matches("foo"));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public final void testMatchesBrand()
+	{
+		final JDFDoc doc = new JDFDoc("Media");
+		final JDFMedia m = (JDFMedia) doc.getRoot();
+		final JDFMedia m2 = (JDFMedia) new JDFDoc("Media").getRoot();
+		assertTrue(m.matches(m2));
+		m.setBrand("B1");
+		m2.setBrand("B2");
+		m.setGrade(4);
+		m2.setGrade(4);
+		assertFalse(m.matches(m2));
+		m2.setGrade(5);
+		assertFalse(m.matches(m2));
+		m.setGrade(5);
+		assertFalse(m.matches(m2));
+		m.setDimensionCM(new JDFXYPair(10, 20));
+		m2.setDimensionCM(new JDFXYPair(10.1, 20));
+		assertFalse(m.matches(m2));
 	}
 
 	/**
