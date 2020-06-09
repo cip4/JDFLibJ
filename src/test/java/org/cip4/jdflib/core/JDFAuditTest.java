@@ -69,6 +69,12 @@ public class JDFAuditTest extends ExampleTest
 {
 	private boolean bAutoAgent;
 
+	@Test
+	public void readVersionDetails() {
+		assertEquals("AgentName is wrong", "CIP4 JDF Writer Java", JDFAudit.getStaticAgentName());
+		assertTrue("AgentVersion is wrong", JDFAudit.getStaticAgentVersion().startsWith("2.1."));
+	}
+
 	/**
 	 *
 	 */
