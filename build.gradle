@@ -46,16 +46,6 @@ publishing {
                         url = 'https://github.com/cip4/JDFLibJ/blob/master/LICENSE.md'
                     }
                 }
-                developers {
-                    developer {
-                        id = 'r.prosi'
-                        name = 'Dr. Rainer Prosi'
-                    }
-                    developer {
-                        id = 's.meissner'
-                        name = 'Stefan Meissner'
-                    }
-                }
                 scm {
                     connection = 'https://github.com/cip4/JDFLibJ.git'
                     developerConnection = 'scm:git:https://github.com/cip4/JDFLibJ.git'
