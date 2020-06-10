@@ -961,6 +961,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	@Ignore
 	public void testTimeZone() throws DataFormatException
 	{
 		final TimeZone t = TimeZone.getDefault();
