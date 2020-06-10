@@ -56,6 +56,7 @@ import java.util.TimeZone;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -983,7 +984,7 @@ public class JDFDateTest extends JDFTestCaseBase
 			assertEquals(d.getDateTimeISO(), d4.getDateTimeISO());
 		}
 
-		if (PlatformUtil.isWindows() && d.getTimeZoneOffsetInMillis() < 1000 * 3600 * 4)
+		if (PlatformUtil.isWindows() && d.getTimeZoneOffsetInMillis() < 1000 * 3600 * 4 && d.getTimeZoneOffsetInMillis() >= 0)
 		{
 			assertTrue("timezone test only in europe...", bSummer);
 		}
