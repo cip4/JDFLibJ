@@ -22,10 +22,7 @@ java {
 }
 
 test {
-    minHeapSize = "128m"
-    maxHeapSize = "4096m"
-    maxParallelForks = 1
-    jvmArgs '-XX:MaxPermSize=512m'
+    systemProperty "file.encoding", "utf-8"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
