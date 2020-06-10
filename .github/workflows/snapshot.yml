@@ -30,11 +30,11 @@ jobs:
           path: build/libs
 
       - name: Upload Test Results to GitHub Build Artifacts
-        if: ${{ failure() }}
+        if: ${{ always() }}
         uses: actions/upload-artifact@v1
         with:
           name: test-results linux
-          path: build/test-results
+          path: build/reports/tests/test
 
       - name: Decrypt GGP Ring File
         env:
@@ -67,8 +67,8 @@ jobs:
         run: ./gradlew test
 
       - name: Upload Test Results to GitHub Build Artifacts
-        if: ${{ failure() }}
+        if: ${{ always() }}
         uses: actions/upload-artifact@v1
         with:
           name: test-results windows
-          path: build/test-results
+          path: build/reports/tests/test
