@@ -29,6 +29,12 @@ jobs:
           name: libs
           path: build/libs
 
+      - name: Upload Test Results to GitHub Build Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: test-results linux
+          path: build/test-results
+
       - name: Decrypt GGP Ring File
         env:
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
@@ -58,3 +64,9 @@ jobs:
 
       - name: Test with Gradle
         run: ./gradlew test
+
+      - name: Upload Test Results to GitHub Build Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: test-results windows
+          path: build/test-results

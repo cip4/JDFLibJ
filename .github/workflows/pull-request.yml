@@ -23,6 +23,12 @@ jobs:
       - name: Test with Gradle
         run: ./gradlew test
 
+      - name: Upload Test Results to GitHub Build Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: test-results linux
+          path: build/test-results
+
   windows-test:
     runs-on: windows-latest
     steps:
@@ -36,3 +42,9 @@ jobs:
 
       - name: Test with Gradle
         run: ./gradlew test
+
+      - name: Upload Test Results to GitHub Build Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: test-results windows
+          path: build/test-results
