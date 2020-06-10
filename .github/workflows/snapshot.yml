@@ -56,5 +56,5 @@ jobs:
       - name: Check out sources...
         uses: actions/checkout@v2
 
-      - name: Build with Gradle
+      - name: Test with Gradle
         run: ./gradlew test
