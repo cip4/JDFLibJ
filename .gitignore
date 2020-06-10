@@ -12,6 +12,11 @@ buildNumber.properties
 .mvn/timing.properties
 secring.gpg
 
+### Eclipse
+.settings/
+.project
+.classpath
+
 ### JetBrains
 .idea
 /*.iml
