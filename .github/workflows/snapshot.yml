@@ -30,6 +30,7 @@ jobs:
           path: build/libs
 
       - name: Upload Test Results to GitHub Build Artifacts
+        if: ${{ failure() }}
         uses: actions/upload-artifact@v1
         with:
           name: test-results linux
@@ -66,6 +67,7 @@ jobs:
         run: ./gradlew test
 
       - name: Upload Test Results to GitHub Build Artifacts
+        if: ${{ failure() }}
         uses: actions/upload-artifact@v1
         with:
           name: test-results windows
