@@ -21,6 +21,19 @@ java {
     withSourcesJar()
 }
 
+test {
+    minHeapSize = "128m"
+    maxHeapSize = "4096m"
+    maxParallelForks = 1
+    jvmArgs '-XX:MaxPermSize=512m'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
 publishing {
     publications {
         mavenJava(MavenPublication) {

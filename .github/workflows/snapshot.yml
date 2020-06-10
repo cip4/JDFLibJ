@@ -9,7 +9,7 @@ on:
     branches: [ master ]
 
 jobs:
-  linux-build:
+  linux-build-publish:
     runs-on: ubuntu-latest
     steps:
       - name: Set up JDK 8
@@ -57,4 +57,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew test
