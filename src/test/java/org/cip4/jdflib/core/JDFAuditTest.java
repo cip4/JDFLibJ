@@ -62,12 +62,23 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
 
+import java.lang.reflect.Method;
+
 /**
  * @author MuchaD This implements the first fixture with unit tests for class JDFAudit.
  */
 public class JDFAuditTest extends ExampleTest
 {
 	private boolean bAutoAgent;
+
+	@Test
+	public void readVersionDetails() throws Exception {
+		Method m = JDFAudit.class.getDeclaredMethod("readBuildProperty", String.class);
+		m.setAccessible(true);
+
+		assertEquals("AgentName is wrong", "CIP4 JDF Writer Java", m.invoke(null, "lib.name"));
+		assertTrue("AgentVersion is wrong", m.invoke(null, "lib.version").toString().startsWith("2.1."));
+	}
 
 	/**
 	 *

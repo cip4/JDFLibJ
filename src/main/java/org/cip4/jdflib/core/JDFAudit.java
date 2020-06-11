@@ -34,20 +34,10 @@
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  */
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * 07082002 KM moved JDFElement.EnumNodeStatus GetStatus to JDFElement 05092002 KM deleted GetStart() and GetEnd() if you need them use JDFProcessRun methods
- */
 package org.cip4.jdflib.core;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
+import java.io.IOException;
+import java.util.*;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -69,18 +59,32 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 {
 
 	private static final long serialVersionUID = 1L;
-	final private static String m_libAgentName = "CIP4 JDF Writer Java";
-	final private static String m_libAgentVersion = "1.7 BLD 010";
+
 
 	// use reasonable defaults
-	private static String m_strAgentName = m_libAgentName;
-	private static String m_strAgentVersion = m_libAgentVersion;
+	private static String m_strAgentName = readBuildProperty("lib.name");
+	private static String m_strAgentVersion =readBuildProperty("lib.version");
 	private static String m_strAuthor = null;
 
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33331111);
+	}
+
+	/**
+	 * Read and returns the build property value by key.
+	 * @param key The key of the property.
+	 * @return The value of the key as String
+	 */
+	private static String readBuildProperty(String key) {
+		Properties props = new Properties();
+		try {
+			props.load(JDFAudit.class.getResourceAsStream("/org/cip4/jdflib/build.properties"));
+		} catch (IOException e) {
+			return "n. a.";
+		}
+		return props.getProperty(key, "n. a.");
 	}
 
 	/**
@@ -501,7 +505,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	 */
 	public static String software()
 	{
-		return m_libAgentName + JDFConstants.BLANK + m_libAgentVersion;
+		return m_strAgentName + JDFConstants.BLANK + m_strAgentVersion;
 	}
 
 	/**
