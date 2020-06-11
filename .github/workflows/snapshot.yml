@@ -1,4 +1,4 @@
-name: JDFLibJ Snapshot
+name: Snapshot
 
 # This build process is triggered in case changes are being pushed to the master branch.
 # This process takes the latest master changes, build and test the new version and finally publish the artifacts

@@ -1,4 +1,4 @@
-name: JDFLibJ Release
+name: Release
 
 # This build process is triggered in case a new annotated tag has been created, which name starts with "JDFLibJ-2.1.".
 # This process takes the latest master changes, build and test the new version and finally releases the artifacts

@@ -1,4 +1,4 @@
-name: JDFLibJ Pull-Request
+name: Pull-Request
 
 # This build process is triggered in case a new pull request on master has been created.
 # This process takes the latest changes of the branch, and build and test the new version. The process's aim is to
