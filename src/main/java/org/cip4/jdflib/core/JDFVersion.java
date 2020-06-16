@@ -77,10 +77,11 @@ package org.cip4.jdflib.core;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.cip4.jdflib.util.StringUtil;
+import org.apache.commons.lang.StringUtils;
 
 /**
- * This class provides all version and build details of the library. Attention - this only works in case the library is built with maven
+ * This class provides all version and build details of the library.
+ * Attention - this only works in case the library is built with maven
  *
  */
 public class JDFVersion
@@ -134,7 +135,6 @@ public class JDFVersion
 
 	/**
 	 * Read and returns a build property by key.
-	 * 
 	 * @param key The key of the build property.
 	 * @return The value of the build property by key.
 	 */
@@ -163,21 +163,34 @@ public class JDFVersion
 
 	/**
 	 * Generates and returns the major version number from the maven version number.
-	 * 
 	 * @return The major version number as String.
 	 */
 	private static String getMajorVersion(final String mvnVersion)
 	{
-		return StringUtil.token(mvnVersion, 0, ".-");
+		if (mvnVersion == null)
+			return null;
+		// extract pure version
+		final String version = StringUtils.substringBefore(mvnVersion, "-");
+
+		// extract major version
+		final int i = version.lastIndexOf(".");
+		return version.substring(0, i);
 	}
 
 	/**
 	 * Generates and returns the minor version number from the maven version number.
-	 * 
 	 * @return The major version number as String.
 	 */
 	private static String getMinorVersion(final String mvnVersion)
 	{
-		return StringUtil.token(mvnVersion, 1, ".-");
+		if (mvnVersion == null)
+			return null;
+
+		// extract pure version
+		final String version = StringUtils.substringBefore(mvnVersion, "-");
+
+		// extract major version
+		final int i = version.lastIndexOf(".");
+		return version.substring(i + 1);
 	}
 }

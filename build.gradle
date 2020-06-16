@@ -11,10 +11,9 @@ group = 'org.cip4.lib.jdf'
 description = 'CIP4 JDF Writer Java'
 
 if (project.hasProperty('projectVersion')) {
-//    version = project.projectVersion
-    version = '2.1.7.x-SNAPSHOT'
+    version = project.projectVersion
 } else {
-    version = '2.1.7.x-SNAPSHOT'
+    version = '2.1.6.x-SNAPSHOT'
 }
 
 java {
