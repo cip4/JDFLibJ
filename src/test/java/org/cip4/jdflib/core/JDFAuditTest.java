@@ -45,6 +45,8 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.lang.reflect.Method;
+
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -62,18 +64,16 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
 
-import java.lang.reflect.Method;
-
 /**
  * @author MuchaD This implements the first fixture with unit tests for class JDFAudit.
  */
 public class JDFAuditTest extends ExampleTest
 {
-	private boolean bAutoAgent;
 
 	@Test
-	public void readVersionDetails() throws Exception {
-		Method m = JDFAudit.class.getDeclaredMethod("readBuildProperty", String.class);
+	public void readVersionDetails() throws Exception
+	{
+		final Method m = JDFAudit.class.getDeclaredMethod("readBuildProperty", String.class);
 		m.setAccessible(true);
 
 		assertEquals("AgentName is wrong", "CIP4 JDF Writer Java", m.invoke(null, "lib.name"));
@@ -291,8 +291,20 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
+	public void testSoftware()
+	{
+		assertTrue(JDFAudit.software().contains(JDFAudit.getStaticAgentName()));
+		assertTrue(JDFAudit.software().contains(JDFAudit.getStaticAgentVersion()));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testSetStaticAgentVersion()
 	{
+		final boolean bAutoAgent = JDFResource.getAutoAgent();
+
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
@@ -300,12 +312,12 @@ public class JDFAuditTest extends ExampleTest
 		assertNotNull(ap);
 		JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
 		// @Rainer (2013-03-10) - Not compatible to Linux
-		// assertEquals(crea.getAgentName(), JDFAudit.getStaticAgentName());
+		assertEquals(crea.getAgentName(), JDFAudit.getStaticAgentName());
 		//
-		// JDFResource.setAutoAgent(true);
+		JDFResource.setAutoAgent(true);
 		JDFResource r = n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
-		// assertEquals(r.getAgentName(), JDFAudit.getStaticAgentName());
-		// assertEquals(r.getAgentVersion(), JDFAudit.getStaticAgentVersion());
+		assertEquals(r.getAgentName(), JDFAudit.getStaticAgentName());
+		assertEquals(r.getAgentVersion(), JDFAudit.getStaticAgentVersion());
 		JDFAudit.setStaticAgentName(null);
 		JDFAudit.setStaticAgentVersion(null);
 		JDFAudit.setStaticAuthor(null);
@@ -321,17 +333,7 @@ public class JDFAuditTest extends ExampleTest
 		r = n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
 		assertFalse(r.hasAttribute(AttributeName.AGENTNAME));
 		assertFalse(r.hasAttribute(AttributeName.AGENTVERSION));
-	}
-
-	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
-	 */
-	@Override
-	public void tearDown() throws Exception
-	{
-		super.tearDown();
 		JDFResource.setAutoAgent(bAutoAgent);
-
 	}
 
 	/**
@@ -341,7 +343,6 @@ public class JDFAuditTest extends ExampleTest
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		bAutoAgent = JDFResource.getAutoAgent();
 		KElement.setLongID(false);
 
 	}

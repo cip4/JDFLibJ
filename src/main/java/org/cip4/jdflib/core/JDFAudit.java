@@ -37,7 +37,13 @@
 package org.cip4.jdflib.core;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -58,12 +64,17 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 {
 
+	private static final String LIB_VERSION = "lib.version";
+
+	private static final String LIB_NAME = "lib.name";
+	final private static String m_libAgentName = "CIP4 JDF Writer Java";
+	final private static String m_libAgentVersion = "2.1.7 BLD 010";
+
 	private static final long serialVersionUID = 1L;
 
-
 	// use reasonable defaults
-	private static String m_strAgentName = readBuildProperty("lib.name");
-	private static String m_strAgentVersion =readBuildProperty("lib.version");
+	private static String m_strAgentName = readBuildProperty(LIB_NAME);
+	private static String m_strAgentVersion = readBuildProperty(LIB_VERSION);
 	private static String m_strAuthor = null;
 
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
@@ -74,17 +85,32 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Read and returns the build property value by key.
+	 *
 	 * @param key The key of the property.
 	 * @return The value of the key as String
 	 */
-	private static String readBuildProperty(String key) {
-		Properties props = new Properties();
-		try {
+	private static String readBuildProperty(final String key)
+	{
+		final Properties props = new Properties();
+		final String def;
+		if (LIB_NAME.equals(key))
+			def = m_libAgentName;
+		else if (LIB_VERSION.equals(key))
+			def = m_libAgentVersion;
+		else
+			def = "n. a.";
+
+		try
+		{
 			props.load(JDFAudit.class.getResourceAsStream("/org/cip4/jdflib/build.properties"));
-		} catch (IOException e) {
-			return "n. a.";
 		}
-		return props.getProperty(key, "n. a.");
+		catch (final IOException e)
+		{
+			return def;
+		}
+		final String property = props.getProperty(key, def);
+
+		return property.startsWith("@") ? def : property;
 	}
 
 	/**
