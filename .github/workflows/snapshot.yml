@@ -20,7 +20,7 @@ jobs:
       - name: Trigger Bambi SNAPSHOT build
         run: curl \
           -X POST \
-          --header 'Accept:application/vnd.github.v3+json" \
+          -H 'Accept:application/vnd.github.v3+json' \
           -H 'Authorization:Bearer ${{ secrets.GITHUB_TOKEN }}' \
           https://api.github.com/repos/cip4/bambi/dispatches \
           -d '{"event_type":"trigger_bambi"}'
