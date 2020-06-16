@@ -18,7 +18,8 @@ jobs:
           java-version: 1.8
           
       - name: Trigger Bambi SNAPSHOT build
-        run: curl -X POST https://api.github.com/repos/cip4/bambi/dispatches --data '{"event_type" : "trigger_bambi"}' -H "Accept: application/vnd.github.everest-preview+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}"
+        run: | 
+          curl -X POST https://api.github.com/repos/cip4/bambi/dispatches --data "{'event_type' : 'trigger_bambi'}" -H "Accept: application/vnd.github.everest-preview+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}"
            
       - name: Check out sources...
         uses: actions/checkout@v2
