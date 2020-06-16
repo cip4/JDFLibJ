@@ -53,7 +53,7 @@ jobs:
         run: ./gradlew publish -Psigning.keyId=$SIGNING_KEY_ID -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$PWD/secring.gpg -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD
         
       - name: Trigger Bambi SNAPSHOT build
-        run: curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/cip4/bambi/dispatches --data '{"event_type": "build_application"}'
+        run: curl -XPOST -u "$secrets.PAT_USERNAME:$secrets.PAT_TOKEN" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/cip4/bambi/dispatches --data "{'event_type': 'build_application'}"
 
   windows-test:
     runs-on: windows-latest
