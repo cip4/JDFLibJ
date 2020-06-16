@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -99,9 +99,8 @@ public class WalkJMFMessage extends WalkElement
 	}
 
 	/**
-	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
-	 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
-	 * high versions but potentially fail when attempting to move from higher to lower versions
+	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine for JDF uses heuristics to modify this element and its children to be compatible with
+	 *      a given version in general, it will be able to move from low to high versions but potentially fail when attempting to move from higher to lower versions
 	 */
 	@Override
 	public KElement walk(final KElement e1, final KElement trackElem)
@@ -117,21 +116,21 @@ public class WalkJMFMessage extends WalkElement
 	/**
 	 *
 	 * this is one of the message types where queue or queueufilter should be zapped in JDF1.5 and above
+	 *
 	 * @param toCheck
 	 * @return
 	 */
 	boolean isQueueFilterRemove(final KElement toCheck)
 	{
-		JDFMessage.EnumType type = ((JDFMessage) toCheck).getEnumType();
+		final JDFMessage.EnumType type = ((JDFMessage) toCheck).getEnumType();
 		if (type == null)
 			return false;
 		boolean b = false;
 		b = b || JDFMessage.EnumType.AbortQueueEntry.equals(type);
-		b = b || JDFMessage.EnumType.RemoveQueueEntry.equals(type); // duplicate. possibly something is wrong
+		b = b || JDFMessage.EnumType.RemoveQueueEntry.equals(type);
 		b = b || JDFMessage.EnumType.HoldQueueEntry.equals(type);
 		b = b || JDFMessage.EnumType.SuspendQueueEntry.equals(type);
 		b = b || JDFMessage.EnumType.ResumeQueueEntry.equals(type);
-		b = b || JDFMessage.EnumType.RemoveQueueEntry.equals(type); // duplicate. possibly something is wrong
 		b = b || JDFMessage.EnumType.ResubmitQueueEntry.equals(type);
 		b = b || JDFMessage.EnumType.SetQueueEntryPosition.equals(type);
 		b = b || JDFMessage.EnumType.SetQueueEntryPriority.equals(type);

@@ -1226,7 +1226,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	@Test
 	public void testCreateBig()
 	{
-		for (int ii = 0; ii < 4; ii++)
+		for (int ii = 0; ii < 6; ii++)
 		{
 			final XMLDoc d = ii % 2 == 0 ? new XMLDoc("foo", null) : new JDFDoc("JDF");
 			final KElement e = d.getRoot();
@@ -1237,7 +1237,7 @@ public class XMLDocTest extends JDFTestCaseBase
 				final KElement e3 = e2.appendElement("Created");
 				for (int i = 33; i < 199; i++)
 				{
-					if (i < 2) // this expression will always be false!
+					if (ii % 2 == 0)
 					{
 						e3.setAttribute("k" + String.valueOf(i), "value" + String.valueOf(i));
 					}
