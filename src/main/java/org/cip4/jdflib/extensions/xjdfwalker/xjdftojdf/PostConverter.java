@@ -37,6 +37,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -67,6 +68,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
+import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDependencies;
 import org.cip4.jdflib.resource.process.JDFEmployee;
@@ -75,6 +77,7 @@ import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
 import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
@@ -429,18 +432,35 @@ class PostConverter
 
 		}
 
-		private void cleanBinderySignature(final JDFResource resRoot)
+		private void cleanBinderySignature(final JDFResource bsRoot)
 		{
 			final JDFResource strippingParams = theNode.getResource(ElementName.STRIPPINGPARAMS, null, 0);
 			if (strippingParams != null)
 			{
 				final List<JDFResource> spLeaves = strippingParams.getLeafArray(false);
+				final Collection<String> moved = new HashSet<>();
 				for (final JDFResource sp : spLeaves)
 				{
-					final JDFResource bs = resRoot.getPartition(sp.getPartMap(), EnumPartUsage.Implicit);
-					moveToStipping(bs, sp);
+					final JDFResource bs = bsRoot.getPartition(sp.getPartMap(), EnumPartUsage.Implicit);
+					moved.addAll(moveToStripping(bs, sp));
 				}
-				cleanidenticals(resRoot, strippingParams);
+				if (!moved.isEmpty())
+				{
+					for (final JDFResource sp : spLeaves)
+					{
+						final JDFBinderySignature bs = (JDFBinderySignature) bsRoot.getPartition(sp.getPartMap(), EnumPartUsage.Implicit);
+						final Collection<JDFSignatureCell> scs = bs.getAllSignatureCell();
+						for (final JDFSignatureCell sc : scs)
+						{
+							sc.removeAttributes(moved);
+							if (JDFAttributeMap.isEmpty(sc.getAttributeMap()))
+							{
+								sc.deleteNode();
+							}
+						}
+					}
+				}
+				cleanidenticals(bsRoot, strippingParams);
 			}
 
 		}
@@ -479,17 +499,18 @@ class PostConverter
 
 		}
 
-		void moveToStipping(final JDFResource bs, final JDFResource sp)
+		Collection<String> moveToStripping(final JDFResource bs, final JDFResource sp)
 		{
 			final List<KElement> vsc = bs.getChildArray_KElement(ElementName.SIGNATURECELL, null, null, false, 0);
+			final VJDFAttributeMap tmp = new VJDFAttributeMap();
 			if (!ContainerUtil.isEmpty(vsc))
 			{
 				for (final KElement sc : vsc)
 				{
-					moveToStripCell(sc, sp);
+					tmp.add(moveToStripCell(sc, sp));
 				}
 			}
-
+			return tmp.getKeys();
 		}
 
 		/**
@@ -498,7 +519,7 @@ class PostConverter
 		 * @param bs
 		 * @return
 		 */
-		void moveToStripCell(final KElement signatureCell, final JDFResource sp)
+		JDFAttributeMap moveToStripCell(final KElement signatureCell, final JDFResource sp)
 		{
 			final JDFStripCellParams stripCell = (JDFStripCellParams) sp.appendElement(ElementName.STRIPCELLPARAMS);
 			final VString stripCellKnown = stripCell.knownAttributes();
@@ -511,12 +532,11 @@ class PostConverter
 			else
 			{
 				for (final String key : sigCelMap.keySet())
-					stripCell.moveAttribute(key, signatureCell);
-				if (signatureCell.getAttributeMap().isEmpty())
 				{
-					signatureCell.deleteNode();
+					stripCell.copyAttribute(key, signatureCell);
 				}
 			}
+			return sigCelMap;
 		}
 
 		private void cleanLeaf(final KElement elem, final boolean cleanMe)

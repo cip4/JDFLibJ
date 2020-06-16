@@ -2027,6 +2027,65 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
+	*
+	*/
+	@Test
+	public void testStrippingSignatureCell()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
+		xjdfHelper.setTypes("Stripping");
+
+		final SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		final ResourceHelper rhBS = shBS.appendPartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS1.1"), true);
+		final JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
+		bs.setFoldCatalog("F16-6");
+		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		bs.appendSignatureCell().setAttribute(AttributeName.TRIMSIZE, "20 30");
+		bs.appendSignatureCell().setAttribute(AttributeName.TRIMSIZE, "120 130");
+
+		final SetHelper shBS2 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		final ResourceHelper rhBS2 = shBS2.appendPartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS2.1"), true);
+		final JDFBinderySignature bs2 = (JDFBinderySignature) rhBS2.getResource();
+		bs2.setFoldCatalog("F16-5");
+		bs2.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		bs2.appendSignatureCell().setAttribute(AttributeName.TRIMSIZE, "40 50");
+		bs2.appendSignatureCell().setAttribute(AttributeName.TRIMSIZE, "140 150");
+
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rh = shLO.appendPartition(AttributeName.SHEETNAME, "sheet1", true);
+		final JDFLayout lo = (JDFLayout) rh.getResource();
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndBack.getName());
+		for (int i = 1; i < 2; i++)
+		{
+			final KElement pos = lo.appendElement(ElementName.POSITION);
+			pos.setAttribute(XJDFConstants.BinderySignatureID, "BS1." + i);
+			final KElement pos2 = lo.appendElement(ElementName.POSITION);
+			pos2.setAttribute(XJDFConstants.BinderySignatureID, "BS2." + i);
+		}
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdfHelper);
+		final JDFNode n = d.getJDFRoot();
+		final JDFLayout loj = (JDFLayout) n.getResource(ElementName.LAYOUT, EnumUsage.Input, 0);
+		assertEquals(EnumResStatus.Available, loj.getResStatus(false));
+		final JDFStrippingParams sp = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+		assertEquals(EnumResStatus.Available, sp.getResStatus(false));
+
+		final JDFBinderySignature bsj = (JDFBinderySignature) ((JDFStrippingParams) sp.getLeaf(0)).getBinderySignature().getResourceRoot();
+		assertEquals(2, bsj.getLeafArray(false).size());
+		for (final KElement bsl : bsj.getLeaves(false))
+		{
+			assertNull(bsl.getElement(ElementName.SIGNATURECELL));
+		}
+		for (final KElement spl : sp.getLeaves(false))
+		{
+			assertNotNull(spl.getElement(ElementName.STRIPCELLPARAMS));
+			assertNotNull(spl.getElement(ElementName.STRIPCELLPARAMS, null, 1).getAttribute(AttributeName.TRIMSIZE));
+		}
+
+	}
+
+	/**
 	 *
 	 */
 	@Test
