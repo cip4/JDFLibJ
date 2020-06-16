@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -132,7 +132,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 		final String actual = JDFVersion.LIB_RELEASE_DATE;
 
 		// assert
-		//assertTrue("ReleaseDate is wrong.", actual.matches("(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2})"));
+		// assertTrue("ReleaseDate is wrong.", actual.matches("(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2})"));
 		System.out.println("JDFLibJ Release Date: " + actual);
 	}
 
@@ -194,14 +194,14 @@ public class JDFVersionTest extends JDFTestCaseBase
 		if (!canTest)
 			return;
 		// arrange
-		final String expected = "1.6";
+		final String expected = "1.7";
 
 		// act
 		final String actual = JDFVersion.JDF_VERSION;
 
 		// assert
 		assertEquals("JDF Version number is wrong.", expected, actual);
-		System.out.println("JDF Version: " + actual);
+		log.info("JDF Version: " + actual);
 	}
 
 	@Test
@@ -222,7 +222,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 
 		// assert
 		assertEquals("JDF Version doesn't match the Lib Version.", jdfVersion, extractedVersion);
-		System.out.println(String.format("JDF Version: %s - Lib Version: %s (OK)", jdfVersion, libVersion));
+		log.info(String.format("JDF Version: %s - Lib Version: %s (OK)", jdfVersion, libVersion));
 	}
 
 	@Test
