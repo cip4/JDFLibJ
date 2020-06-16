@@ -37,6 +37,7 @@
 package org.cip4.jdflib.core;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -102,7 +103,10 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 		try
 		{
-			props.load(JDFAudit.class.getResourceAsStream("/org/cip4/jdflib/build.properties"));
+			final InputStream s = JDFAudit.class.getResourceAsStream("/org/cip4/jdflib/build.properties");
+			if (s == null)
+				return def;
+			props.load(s);
 		}
 		catch (final IOException e)
 		{
