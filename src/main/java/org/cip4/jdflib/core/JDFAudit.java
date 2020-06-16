@@ -105,8 +105,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 		{
 			final InputStream s = JDFAudit.class.getResourceAsStream("/org/cip4/jdflib/build.properties");
 			if (s == null)
-				return def;
-			props.load(s);
+				props.load(s);
 		}
 		catch (final IOException e)
 		{
@@ -660,7 +659,9 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	 */
 	public static synchronized String getStaticAgentName()
 	{
-		return m_strAgentName;
+		if (m_strAgentName == null)
+			m_strAgentName = readBuildProperty(LIB_NAME);
+		return StringUtil.getNonEmpty(m_strAgentName);
 	}
 
 	/**
@@ -670,7 +671,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	 */
 	public static synchronized void setStaticAgentName(final String agentName)
 	{
-		m_strAgentName = agentName;
+		m_strAgentName = agentName == null ? JDFConstants.EMPTYSTRING : agentName;
 	}
 
 	/**
@@ -700,7 +701,9 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	 */
 	public static synchronized String getStaticAgentVersion()
 	{
-		return m_strAgentVersion;
+		if (m_strAgentVersion == null)
+			m_strAgentVersion = readBuildProperty(LIB_VERSION);
+		return StringUtil.getNonEmpty(m_strAgentVersion);
 	}
 
 	/**
@@ -710,7 +713,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	 */
 	public static synchronized void setStaticAgentVersion(final String agentVersion)
 	{
-		m_strAgentVersion = agentVersion;
+		m_strAgentVersion = agentVersion == null ? JDFConstants.EMPTYSTRING : agentVersion;
 	}
 
 	/**
