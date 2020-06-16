@@ -18,12 +18,13 @@ jobs:
           java-version: 1.8
           
       - name: Trigger Bambi SNAPSHOT build
-        run: curl \
+        run: |
+          curl \
           -X POST \
-          -H 'Accept:application/vnd.github.v3+json' \
-          -H 'Authorization:Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          -H 'Accept: application/vnd.github.v3+json' \
+          -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           https://api.github.com/repos/cip4/bambi/dispatches \
-          -d '{"event_type":"trigger_bambi"}'
+          -d '{"event_type" : "trigger_bambi"}'
            
       - name: Check out sources...
         uses: actions/checkout@v2
