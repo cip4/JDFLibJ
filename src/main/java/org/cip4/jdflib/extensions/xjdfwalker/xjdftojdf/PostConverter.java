@@ -70,6 +70,7 @@ import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDependencies;
 import org.cip4.jdflib.resource.process.JDFEmployee;
+import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
 import org.cip4.jdflib.resource.process.JDFPageData;
@@ -438,6 +439,41 @@ class PostConverter
 				{
 					final JDFResource bs = resRoot.getPartition(sp.getPartMap(), EnumPartUsage.Implicit);
 					moveToStipping(bs, sp);
+				}
+				cleanidenticals(resRoot, strippingParams);
+			}
+
+		}
+
+		void cleanidenticals(final JDFResource bsRoot, final JDFResource spRoot)
+		{
+			final List<JDFIdentical> ids = bsRoot.getChildArrayByClass(JDFIdentical.class, true, 0);
+			if (!ContainerUtil.isEmpty(ids))
+			{
+				final List<JDFResource> spLeaves = spRoot.getLeafArray(false);
+				for (final JDFIdentical id : ids)
+				{
+					final JDFResource parentResource = id.getParentResource();
+					final JDFAttributeMap src = parentResource.getPartMap();
+					final String srcBS = src == null ? null : src.get(AttributeName.BINDERYSIGNATURENAME);
+					final JDFAttributeMap trg = id.getPartMap();
+					final String trgBS = trg == null ? null : trg.get(AttributeName.BINDERYSIGNATURENAME);
+					if (srcBS != null && trgBS != null)
+					{
+						for (final JDFResource sp : spLeaves)
+						{
+							if (srcBS.equals(sp.getBinderySignatureName()))
+							{
+								final JDFRefElement re = (JDFRefElement) sp.getElement_KElement("BinderySignatureRef", null, 0);
+								final JDFPart p = re == null ? null : re.getPart();
+								if (p != null)
+								{
+									p.setBinderySignatureName(trgBS);
+								}
+							}
+						}
+					}
+					parentResource.deleteNode();
 				}
 			}
 
