@@ -62,6 +62,7 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.PlatformUtil;
 import org.junit.Test;
 
 /**
@@ -293,8 +294,11 @@ public class JDFAuditTest extends ExampleTest
 	@Test
 	public void testSoftware()
 	{
-		assertTrue(JDFAudit.software().contains(JDFAudit.getStaticAgentName()));
-		assertTrue(JDFAudit.software().contains(JDFAudit.getStaticAgentVersion()));
+		if (PlatformUtil.isWindows())
+		{
+			assertTrue(JDFAudit.software().contains(JDFAudit.getStaticAgentName()));
+			assertTrue(JDFAudit.software().contains(JDFAudit.getStaticAgentVersion()));
+		}
 	}
 
 	/**
@@ -303,6 +307,8 @@ public class JDFAuditTest extends ExampleTest
 	@Test
 	public void testSetStaticAgentVersion()
 	{
+		if (!PlatformUtil.isWindows())
+			return;
 		final boolean bAutoAgent = JDFResource.getAutoAgent();
 
 		JDFDoc d = new JDFDoc(ElementName.JDF);
