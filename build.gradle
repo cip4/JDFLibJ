@@ -13,7 +13,7 @@ description = 'CIP4 JDF Writer Java'
 if (project.hasProperty('projectVersion')) {
     version = project.projectVersion
 } else {
-    version = '2.1.6.x-SNAPSHOT'
+    version = '2.1.7.x-SNAPSHOT'
 }
 
 java {
@@ -23,6 +23,8 @@ java {
 
 test {
     systemProperty "file.encoding", "utf-8"
+    maxParallelForks = 1
+    forkEvery = 1
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8

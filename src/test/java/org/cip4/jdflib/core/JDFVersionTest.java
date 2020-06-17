@@ -194,7 +194,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 		if (!canTest)
 			return;
 		// arrange
-		final String expected = "1.6";
+		final String expected = "1.7";
 
 		// act
 		final String actual = JDFVersion.JDF_VERSION;
