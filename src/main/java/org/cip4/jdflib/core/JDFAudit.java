@@ -105,7 +105,8 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 		{
 			final InputStream s = JDFAudit.class.getResourceAsStream("/org/cip4/jdflib/build.properties");
 			if (s == null)
-				props.load(s);
+				return def;
+			props.load(s);
 		}
 		catch (final IOException e)
 		{
