@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,18 +40,25 @@
 package org.cip4.jdflib.extensions.xjdfwalker;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFNameRange;
+import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -62,6 +69,58 @@ public class IDFinder extends BaseElementWalker
 	final Map<String, IDPart> theMap;
 	final Map<String, String> indexMap;
 	boolean needSplitPart;
+
+	/**
+	 * ensure that we always have a SIGNATURENAME partition in case we have a SHEETNAME
+	 *
+	 * @param part the partmap
+	 *
+	 * @return
+	 */
+	public static JDFAttributeMap getPartMap(final JDFPart part)
+	{
+		final JDFAttributeMap p = part == null ? new JDFAttributeMap() : part.getAttributeMap();
+
+		p.renameKey(XJDFConstants.BinderySignatureID, AttributeName.BINDERYSIGNATURENAME);
+		final String sheetName = p.getNonEmpty(AttributeName.SHEETNAME);
+		String signatureName = p.getNonEmpty(AttributeName.SIGNATURENAME);
+		if (sheetName != null && signatureName == null)
+		{
+			signatureName = XJDFToJDFConverter.SIG + sheetName;
+			p.put(AttributeName.SIGNATURENAME, signatureName);
+			part.setSignatureName(signatureName);
+		}
+		p.renameKey(AttributeName.METADATA, AttributeName.METADATA0);
+		final List<String> keys = p.getKeyList();
+		for (final String key : keys)
+		{
+			if (EnumPartIDKey.getEnum(key) == null && !AttributeName.DROPID.equals(key))
+			{
+				p.remove(key);
+			}
+			else if (key.endsWith("Index"))
+			{
+				final String val = p.getNonEmpty(key);
+				if (val != null)
+				{
+					final VString v = new VString(val, null);
+					if (v.size() % 2 == 0)
+					{
+						final JDFNameRangeList nrl = new JDFNameRangeList();
+						for (int i = 0; i < v.size(); i += 2)
+						{
+							nrl.append(new JDFNameRange(v.get(i), v.get(i + 1)));
+						}
+						final String newVal = nrl.getString(0);
+						p.put(key, newVal);
+					}
+				}
+			}
+		}
+		p.remove(AttributeName.PRODUCTPART);
+		p.remove(XJDFConstants.ContactType);
+		return p;
+	}
 
 	/**
 	 *

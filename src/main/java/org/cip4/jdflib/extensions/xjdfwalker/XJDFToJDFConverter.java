@@ -62,6 +62,7 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 {
 	protected IXJDFSplit splitter;
 	private static StringArray resLinkAttribs;
+	public static final String SIG = "Sig_";
 
 	public static StringArray getResLinkAttribs()
 	{

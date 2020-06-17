@@ -1930,6 +1930,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFLayout loj = (JDFLayout) n.getResource(ElementName.LAYOUT, EnumUsage.Input, 0).getLeaf(0);
 		assertEquals(EnumResStatus.Available, loj.getResStatus(false));
 		assertNotNull(loj.getMedia(1));
+		assertEquals("Sig_sheet1", loj.getXPathAttribute("MediaRef/Part/@SignatureName", null));
 		final JDFStrippingParams sp = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0);
 		assertNotNull(sp.getMedia(1));
 		assertEquals(EnumResStatus.Available, sp.getResStatus(false));

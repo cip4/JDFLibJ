@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -49,12 +49,10 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.JDFNameRange;
-import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.xjdfwalker.IDFinder;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
@@ -283,6 +281,11 @@ public class WalkXJDFResource extends WalkXElement
 			vMap.add(new JDFAttributeMap());
 		vMap.unify();
 		return vMap;
+	}
+
+	JDFAttributeMap getPartMap(final JDFPart part)
+	{
+		return IDFinder.getPartMap(part);
 	}
 
 	/**
@@ -550,58 +553,6 @@ public class WalkXJDFResource extends WalkXElement
 		{
 			return partMap;
 		}
-	}
-
-	/**
-	 * ensure that we always have a SIGNATURENAME partition in case we have a SHEETNAME
-	 *
-	 * @param part the partmap
-	 *
-	 * @return
-	 */
-	JDFAttributeMap getPartMap(final JDFPart part)
-	{
-		final JDFAttributeMap p = part == null ? new JDFAttributeMap() : part.getAttributeMap();
-
-		p.renameKey(XJDFConstants.BinderySignatureID, AttributeName.BINDERYSIGNATURENAME);
-		final String sheetName = p.getNonEmpty(AttributeName.SHEETNAME);
-		String signatureName = p.getNonEmpty(AttributeName.SIGNATURENAME);
-		if (sheetName != null && signatureName == null)
-		{
-			signatureName = "Sig_" + sheetName;
-			p.put(AttributeName.SIGNATURENAME, signatureName);
-			part.setSignatureName(signatureName);
-		}
-		p.renameKey(AttributeName.METADATA, AttributeName.METADATA0);
-		final List<String> keys = p.getKeyList();
-		for (final String key : keys)
-		{
-			if (EnumPartIDKey.getEnum(key) == null && !AttributeName.DROPID.equals(key))
-			{
-				p.remove(key);
-			}
-			else if (key.endsWith("Index"))
-			{
-				final String val = p.getNonEmpty(key);
-				if (val != null)
-				{
-					final VString v = new VString(val, null);
-					if (v.size() % 2 == 0)
-					{
-						final JDFNameRangeList nrl = new JDFNameRangeList();
-						for (int i = 0; i < v.size(); i += 2)
-						{
-							nrl.append(new JDFNameRange(v.get(i), v.get(i + 1)));
-						}
-						final String newVal = nrl.getString(0);
-						p.put(key, newVal);
-					}
-				}
-			}
-		}
-		p.remove(AttributeName.PRODUCTPART);
-		p.remove(XJDFConstants.ContactType);
-		return p;
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -50,6 +50,7 @@ import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.util.StringUtil;
@@ -118,7 +119,7 @@ public class WalkResourceAudit extends WalkAudit
 					String signatureName = partMap.get(AttributeName.SIGNATURENAME);
 					if (StringUtil.getNonEmpty(sheetName) != null && StringUtil.getNonEmpty(signatureName) == null)
 					{
-						signatureName = "Sig_" + sheetName;
+						signatureName = XJDFToJDFConverter.SIG + sheetName;
 						partMap.put(AttributeName.SIGNATURENAME, signatureName);
 					}
 				}

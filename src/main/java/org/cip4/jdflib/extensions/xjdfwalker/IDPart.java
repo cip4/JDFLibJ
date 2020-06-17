@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,11 +68,11 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.resource.JDFPart;
 
 /**
  *
@@ -95,8 +95,7 @@ public class IDPart
 
 			for (final KElement p : parts)
 			{
-				final JDFAttributeMap partMap = p.getAttributeMap();
-				partMap.remove(AttributeName.PRODUCTPART);
+				final JDFAttributeMap partMap = IDFinder.getPartMap((JDFPart) p);
 				vMap.add(partMap);
 			}
 			vMap.unify();
