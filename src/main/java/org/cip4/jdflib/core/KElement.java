@@ -6378,12 +6378,12 @@ public class KElement extends ElementNSImpl implements Element
 
 	/**
 	 *
-	 * @param filename
+	 * @param string
 	 * @return
 	 */
-	public static KElement parseString(final String filename)
+	public static KElement parseString(final String string)
 	{
-		final XMLDoc f = XMLDoc.parseString(filename);
+		final XMLDoc f = XMLDoc.parseString(string);
 		return f == null ? null : f.getRoot();
 	}
 

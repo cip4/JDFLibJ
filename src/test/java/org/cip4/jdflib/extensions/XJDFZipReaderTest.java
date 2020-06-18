@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,9 +77,11 @@ import java.io.File;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.extensions.xjdfwalker.JDFToXJDFConverterTest;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
 import org.junit.Test;
 
@@ -95,6 +97,19 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 		new JDFToXJDFConverterTest().testMultiNode1();
 		final XJDFZipReader zr = new XJDFZipReader(new File(sm_dirTestDataTemp + "3files.xjdf.zip"));
 		FileUtil.writeFile(zr, new File(sm_dirTestDataTemp + "3files.jdf"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testRunList()
+	{
+		final XJDFZipReader zr = new XJDFZipReader(new File(sm_dirTestData + "runlist.zip"));
+		zr.convert();
+		final JDFNode jdfRoot = zr.getJDFRoot();
+		final JDFRunList ruli = (JDFRunList) jdfRoot.getResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+		assertNotNull(ruli.getLayoutElement());
 	}
 
 	/**
