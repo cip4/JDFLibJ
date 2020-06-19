@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -79,47 +79,56 @@ public class IDFinder extends BaseElementWalker
 	 */
 	public static JDFAttributeMap getPartMap(final JDFPart part)
 	{
-		final JDFAttributeMap p = part == null ? new JDFAttributeMap() : part.getAttributeMap();
-
-		p.renameKey(XJDFConstants.BinderySignatureID, AttributeName.BINDERYSIGNATURENAME);
-		final String sheetName = p.getNonEmpty(AttributeName.SHEETNAME);
-		String signatureName = p.getNonEmpty(AttributeName.SIGNATURENAME);
-		if (sheetName != null && signatureName == null)
+		if (part == null)
+			return new JDFAttributeMap();
+		final JDFAttributeMap p = part.getAttributeMap();
+		if (!p.isEmpty())
 		{
-			signatureName = XJDFToJDFConverter.SIG + sheetName;
-			p.put(AttributeName.SIGNATURENAME, signatureName);
-			part.setSignatureName(signatureName);
-		}
-		p.renameKey(AttributeName.METADATA, AttributeName.METADATA0);
-		final List<String> keys = p.getKeyList();
-		for (final String key : keys)
-		{
-			if (EnumPartIDKey.getEnum(key) == null && !AttributeName.DROPID.equals(key))
+			p.renameKey(XJDFConstants.BinderySignatureID, AttributeName.BINDERYSIGNATURENAME);
+			final String sheetName = p.getNonEmpty(AttributeName.SHEETNAME);
+			String signatureName = p.getNonEmpty(AttributeName.SIGNATURENAME);
+			if (sheetName != null && signatureName == null)
 			{
-				p.remove(key);
+				signatureName = XJDFToJDFConverter.SIG + sheetName;
+				p.put(AttributeName.SIGNATURENAME, signatureName);
+				part.setSignatureName(signatureName);
 			}
-			else if (key.endsWith("Index"))
+			p.renameKey(AttributeName.METADATA, AttributeName.METADATA0);
+			final List<String> keys = p.getKeyList();
+			for (final String key : keys)
 			{
-				final String val = p.getNonEmpty(key);
-				if (val != null)
+				checkKey(p, key);
+			}
+			p.remove(AttributeName.PRODUCTPART);
+			p.remove(XJDFConstants.ContactType);
+		}
+		return p;
+	}
+
+	static void checkKey(final JDFAttributeMap p, final String key)
+	{
+		if (EnumPartIDKey.getEnum(key) == null && !AttributeName.DROPID.equals(key))
+		{
+			p.remove(key);
+		}
+		else if (key.endsWith("Index"))
+		{
+			final String val = p.getNonEmpty(key);
+			if (val != null)
+			{
+				final VString v = new VString(val, null);
+				if (v.size() % 2 == 0)
 				{
-					final VString v = new VString(val, null);
-					if (v.size() % 2 == 0)
+					final JDFNameRangeList nrl = new JDFNameRangeList();
+					for (int i = 0; i < v.size(); i += 2)
 					{
-						final JDFNameRangeList nrl = new JDFNameRangeList();
-						for (int i = 0; i < v.size(); i += 2)
-						{
-							nrl.append(new JDFNameRange(v.get(i), v.get(i + 1)));
-						}
-						final String newVal = nrl.getString(0);
-						p.put(key, newVal);
+						nrl.append(new JDFNameRange(v.get(i), v.get(i + 1)));
 					}
+					final String newVal = nrl.getString(0);
+					p.put(key, newVal);
 				}
 			}
 		}
-		p.remove(AttributeName.PRODUCTPART);
-		p.remove(XJDFConstants.ContactType);
-		return p;
 	}
 
 	/**
