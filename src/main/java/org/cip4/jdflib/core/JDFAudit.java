@@ -90,7 +90,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	 * @param key The key of the property.
 	 * @return The value of the key as String
 	 */
-	private static String readBuildProperty(final String key)
+	static String readBuildProperty(final String key)
 	{
 		final Properties props = new Properties();
 		final String def;
@@ -114,7 +114,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 		}
 		final String property = props.getProperty(key, def);
 
-		return property.startsWith("@") ? def : property;
+		return property.startsWith("@") || property.isEmpty() ? def : property;
 	}
 
 	/**

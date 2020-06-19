@@ -794,7 +794,7 @@ public class AttributeInfo
 		}
 		else if ((val == EnumAttributeValidity.Optional) || ((level != EnumValidationLevel.Complete) && (level != EnumValidationLevel.RecursiveComplete)))
 		{
-			return (attribute == null) || validStringForType(attribute, typ, enu);
+			return (attribute == null) || (attribute.isEmpty()) || validStringForType(attribute, typ, enu);
 		}
 		else if (val == EnumAttributeValidity.Required)
 		{

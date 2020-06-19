@@ -49,6 +49,7 @@ import java.lang.reflect.Method;
 
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.extensions.examples.ExampleTest;
@@ -63,6 +64,7 @@ import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.PlatformUtil;
+import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 
 /**
@@ -236,6 +238,38 @@ public class JDFAuditTest extends ExampleTest
 
 		d.write2File(sm_dirTestDataTemp + "createdTest.jdf", 0, false);
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCreatedValid()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFCreated c1 = (JDFCreated) d.getJDFRoot().getAuditPool().getAudit(0, null, null, null);
+		c1.setAgentName("");
+		assertTrue(c1.isValid(EnumValidationLevel.Complete));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testReadBuildName()
+	{
+		final String s = JDFAudit.readBuildProperty("lib.name");
+		assertFalse(StringUtil.isEmpty(s));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testReadBuildVersion()
+	{
+		final String s = JDFAudit.readBuildProperty("lib.version");
+		assertFalse(StringUtil.isEmpty(s));
 	}
 
 	/**
