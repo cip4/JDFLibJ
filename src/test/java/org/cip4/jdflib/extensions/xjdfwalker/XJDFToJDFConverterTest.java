@@ -1000,6 +1000,35 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testDropIDContact()
+	{
+		final KElement xjdf = new JDFToXJDFConverterTest()._testDeliveryIntent();
+		final XJDFHelper h = new XJDFHelper(xjdf);
+		final SetHelper csh = h.getCreateSet(ElementName.CONTACT, EnumUsage.Input);
+		for (int i = 0; i < 2; i++)
+		{
+			final JDFAttributeMap partmap = new JDFAttributeMap(XJDFConstants.ContactType, EnumContactType.Delivery.getName());
+			partmap.put(AttributeName.DROPID, "DROP_" + i);
+			final ResourceHelper ch = csh.appendPartition(partmap, true);
+			final JDFContact co = (JDFContact) ch.getResource();
+			co.appendAddress().setStreet("S" + i);
+		}
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdf);
+		final JDFDeliveryParams dp = (JDFDeliveryParams) d.getJDFRoot().getResource(ElementName.DELIVERYPARAMS, EnumUsage.Input, 0);
+		assertNull(dp);
+		final JDFDeliveryIntent di = (JDFDeliveryIntent) d.getJDFRoot().getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
+		assertNotNull(di);
+		assertEquals("DROP_0", di.getDropIntent(0).getDropID());
+		assertEquals("DROP_1", di.getDropIntent(1).getDropID());
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
 	public void testPlacedObject()
 	{
 		final KElement xjdf = new XJDFHelper("j1", "p1", null).getRoot();

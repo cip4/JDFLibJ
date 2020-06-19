@@ -3092,6 +3092,8 @@ public class JDFElement extends KElement
 	 */
 	public JDFRefElement refElement(JDFResource target)
 	{
+		if (target == null)
+			return null;
 		final JDFRefElement newRef = (JDFRefElement) appendElement(target.getNodeName() + JDFConstants.REF, target.getNamespaceURI());
 
 		JDFResource root = target.getResourceRoot();
@@ -3131,7 +3133,6 @@ public class JDFElement extends KElement
 
 			root = (JDFResource) parent.getCreateResourcePool().moveElement(root, null);
 		}
-
 		return newRef;
 	}
 
@@ -5578,6 +5579,24 @@ public class JDFElement extends KElement
 	public KElement[] getChildElements()
 	{
 		return getChildElementArray();
+	}
+
+	/**
+	 *
+	 * @param elementName
+	 * @param src
+	 */
+	@Override
+	public void copyChildren(final String elementName, final KElement src)
+	{
+		super.copyChildren(elementName, src);
+		final VElement refs = src.getChildElementVector_KElement(JDFRefElement.getRefName(elementName), null, null, true, 0);
+		for (final KElement e : refs)
+		{
+			final JDFRefElement re = (JDFRefElement) e;
+			final JDFResource r = re.getTarget();
+			refElement(r);
+		}
 	}
 
 	/**

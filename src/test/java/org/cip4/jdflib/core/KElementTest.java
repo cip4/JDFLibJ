@@ -1338,6 +1338,21 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test for copyElement
+	 */
+	@Test
+	public void testCopyChildren()
+	{
+		final XMLDoc d = new XMLDoc("d1", null);
+		final KElement e = d.getRoot();
+		e.appendElement("a");
+		final KElement b = e.appendElement("b");
+		final KElement c = b.appendElement("c");
+		e.copyChildren("c", b);
+		assertNotNull(e.getElement("c"));
+	}
+
+	/**
 	 * test for copyElement after clone check for spurious npes here
 	 */
 	@Test

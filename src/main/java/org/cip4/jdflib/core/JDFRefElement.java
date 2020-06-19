@@ -187,7 +187,7 @@ public class JDFRefElement extends JDFElement
 	 */
 	public String getrRef()
 	{
-		return getAttribute(JDFConstants.RREF, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
+		return getAttribute(JDFConstants.RREF);
 	}
 
 	/**
@@ -448,6 +448,16 @@ public class JDFRefElement extends JDFElement
 	public JDFPart appendPart()
 	{
 		return (JDFPart) appendElementN(ElementName.PART, 1, null);
+	}
+
+	/**
+	 *
+	 * @param base
+	 * @return
+	 */
+	public static String getRefName(final String base)
+	{
+		return base + JDFConstants.REF;
 	}
 
 	/**

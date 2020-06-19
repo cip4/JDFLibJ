@@ -42,10 +42,15 @@ import java.util.List;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.ResourceHelper;
+import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDrop;
 import org.cip4.jdflib.util.StringUtil;
@@ -65,23 +70,12 @@ public class WalkDeliveryParams extends WalkResource
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return toCheck instanceof JDFDeliveryParams;
-	}
-
-	/**
 	 *
 	 * @param xjdfDeliveryParams
 	 * @param jdfDeliveryParams
 	 * @return
 	 */
-	private boolean moveToDrop(final KElement xjdfDeliveryParams)
+	boolean moveToDrop(final KElement xjdfDeliveryParams)
 	{
 		final JDFDrop drop = ((JDFDeliveryParams) xjdfDeliveryParams).appendDrop();
 		final VString vAtt = drop.knownAttributes();
@@ -104,6 +98,7 @@ public class WalkDeliveryParams extends WalkResource
 			foundSome = true;
 			drop.setDropID(dropID);
 		}
+		foundSome = ensureContact(drop, dropID) || foundSome;
 		final VString dropKnown = drop.knownElements();
 		final List<KElement> vMyElm = xjdfDeliveryParams.getChildArray_KElement(null, null, null, true, 0);
 		for (final KElement myElm : vMyElm)
@@ -118,6 +113,25 @@ public class WalkDeliveryParams extends WalkResource
 		if (!foundSome)
 			drop.deleteNode();
 		return foundSome;
+	}
+
+	boolean ensureContact(final JDFDrop drop, final String dropID)
+	{
+		final SetHelper shc = xjdfToJDFImpl.xjdf.getSet(ElementName.CONTACT, EnumUsage.Input);
+		if (shc != null)
+		{
+			final JDFAttributeMap m = new JDFAttributeMap(XJDFConstants.ContactType, EnumContactType.Delivery);
+			if (!StringUtil.isEmpty(dropID))
+				m.put(AttributeName.DROPID, dropID);
+			final ResourceHelper rhc = shc.getPartition(m);
+			if (rhc != null)
+			{
+				rhc.ensureReference(drop, null);
+				return true;
+			}
+		}
+		return false;
+
 	}
 
 	/**

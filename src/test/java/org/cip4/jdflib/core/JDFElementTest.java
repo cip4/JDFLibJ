@@ -194,6 +194,21 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test for copyElement
+	 */
+	@Test
+	public void testCopyChildren()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource ci = n.addResource(ElementName.CUSTOMERINFO, null);
+		final JDFResource co = n.addResource(ElementName.CONTACT, null);
+		ci.refElement(co);
+
+		n.copyChildren(ElementName.CONTACT, ci);
+		assertNotNull(n.getElement(JDFRefElement.getRefName(ElementName.CONTACT)));
+	}
+
+	/**
 	 *
 	 *
 	 */

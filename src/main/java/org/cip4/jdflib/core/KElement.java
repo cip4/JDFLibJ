@@ -2641,7 +2641,7 @@ public class KElement extends ElementNSImpl implements Element
 			n = n.getNextSiblingElement();
 		}
 
-		return i == 0 ? null : new MyPair<A, Integer>(null, Integer.valueOf(i));
+		return i == 0 ? null : new MyPair<>(null, Integer.valueOf(i));
 	}
 
 	/**
@@ -5202,6 +5202,24 @@ public class KElement extends ElementNSImpl implements Element
 	public String copyAttribute(final String attrib, final KElement src)
 	{
 		return copyAttribute(attrib, src, null, null, null);
+	}
+
+	/**
+	 *
+	 * @param elementName
+	 * @param src
+	 */
+	public void copyChildren(final String elementName, final KElement src)
+	{
+		int iSkip = 0;
+		while (true)
+		{
+			final KElement e = src.getElement_KElement(elementName, null, iSkip++);
+			if (e != null)
+				copyElement(e, null);
+			else
+				break;
+		}
 	}
 
 	/**

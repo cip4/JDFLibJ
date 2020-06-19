@@ -72,6 +72,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFComponent;
 
@@ -95,7 +96,7 @@ public class WalkDropItem extends WalkXElement
 	@Override
 	protected String getRefName(final String val)
 	{
-		if ("ItemRef".equals(val))
+		if (XJDFConstants.ItemRef.equals(val))
 		{
 			return "ComponentRef";
 		}
@@ -105,7 +106,7 @@ public class WalkDropItem extends WalkXElement
 	@Override
 	protected void cleanRef(final KElement e, final KElement trackElem, final String val, String values)
 	{
-		if ("ItemRef".equals(val))
+		if (XJDFConstants.ItemRef.equals(val))
 		{
 			final JDFNode n = xjdfToJDFImpl.currentJDFNode.getRoot().getChildJDFNode(values, false);
 			final JDFComponent c = (JDFComponent) (n == null ? null : n.getResource(ElementName.COMPONENT, EnumUsage.Output, 0));

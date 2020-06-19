@@ -67,20 +67,20 @@
  *
  */
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFDeliveryIntent extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de   using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de   using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  * Revision history:   ...
  */
 
 package org.cip4.jdflib.resource.intent;
 
 import java.util.Collection;
-import java.util.Vector;
+import java.util.List;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeliveryIntent;
@@ -95,45 +95,45 @@ public class JDFDeliveryIntent extends JDFAutoDeliveryIntent
 
 	/**
 	 * Constructor for JDFDeliveryIntent
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDeliveryIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFDeliveryIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDeliveryIntent
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDeliveryIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFDeliveryIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDeliveryIntent
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFDeliveryIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFDeliveryIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoDeliveryIntent#toString()
 	 */
 	@Override
@@ -143,21 +143,21 @@ public class JDFDeliveryIntent extends JDFAutoDeliveryIntent
 	}
 
 	/**
-	 * 
+	 *
 	 * @param delParams
 	 */
-	public boolean setFromDeliveryParams(JDFDeliveryParams delParams)
+	public boolean setFromDeliveryParams(final JDFDeliveryParams delParams)
 	{
 		if (delParams == null)
 			return false;
 
 		boolean done = false;
-		Vector<JDFDrop> v = delParams.getChildrenByClass(JDFDrop.class, false, 0);
-		for (JDFDrop d : v)
+		final List<JDFDrop> v = delParams.getChildArrayByClass(JDFDrop.class, false, 0);
+		for (final JDFDrop d : v)
 		{
 			if (!d.isArtDeliveryIntent())
 			{
-				JDFDropIntent dropIntent = appendDropIntent();
+				final JDFDropIntent dropIntent = appendDropIntent();
 				dropIntent.setFromDrop(d);
 				done = true;
 			}
@@ -167,19 +167,19 @@ public class JDFDeliveryIntent extends JDFAutoDeliveryIntent
 	}
 
 	/**
-	 * get the dropItemIntent for a given component 
-	 * also checks partition
+	 * get the dropItemIntent for a given component also checks partition
+	 * 
 	 * @param c
 	 * @return
 	 */
-	public JDFDropItemIntent getDropItemWithComponent(JDFComponent c)
+	public JDFDropItemIntent getDropItemWithComponent(final JDFComponent c)
 	{
-		Collection<JDFDropIntent> dis = getAllDropIntent();
+		final Collection<JDFDropIntent> dis = getAllDropIntent();
 		if (dis != null)
 		{
-			for (JDFDropIntent di : dis)
+			for (final JDFDropIntent di : dis)
 			{
-				JDFDropItemIntent dii = di.getDropItemWithComponent(c);
+				final JDFDropItemIntent dii = di.getDropItemWithComponent(c);
 				if (dii != null)
 				{
 					return dii;
