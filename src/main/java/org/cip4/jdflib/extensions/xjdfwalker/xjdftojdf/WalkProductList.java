@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
@@ -82,7 +82,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 public class WalkProductList extends WalkXElement
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkProductList()
 	{
@@ -98,11 +98,11 @@ public class WalkProductList extends WalkXElement
 	{
 		final boolean bFirst = xjdfToJDFImpl.foundProductList;
 		xjdfToJDFImpl.foundProductList = true;
-		KElement eXJDF = e.getParentNode_KElement();
-		XJDFHelper h = new XJDFHelper(eXJDF);
+		final KElement eXJDF = e.getParentNode_KElement();
+		final XJDFHelper h = new XJDFHelper(eXJDF);
 		// only convert products in the first pass
 		// TODO rethink product conversion switch
-		int numProductHelpers = h.numProductHelpers(true);
+		final int numProductHelpers = h.numProductHelpers(true);
 		if (xjdfToJDFImpl.createProduct && (!xjdfToJDFImpl.foundProduct || numProductHelpers > 1))
 		{
 			if (!EnumType.Product.equals(xjdfToJDFImpl.currentJDFNode.getEnumType()))
@@ -111,12 +111,12 @@ public class WalkProductList extends WalkXElement
 			}
 			xjdfToJDFImpl.firstproductInList = numProductHelpers <= 1;
 		}
-		Vector<ProductHelper> vRoot = h.getRootProductHelpers();
-		Vector<ProductHelper> vOther = h.getProductHelpers();
+		final Vector<ProductHelper> vRoot = h.getRootProductHelpers();
+		final Vector<ProductHelper> vOther = h.getProductHelpers();
 		if (vRoot != null && vOther != null)
 		{
 			vOther.removeAll(vRoot);
-			for (ProductHelper ph : vOther)
+			for (final ProductHelper ph : vOther)
 			{
 				e.moveElement(ph.getRoot(), null);
 			}
@@ -125,7 +125,6 @@ public class WalkProductList extends WalkXElement
 		KElement theReturn = xjdfToJDFImpl.currentJDFNode;
 		if (!ProductHelper.PRODUCT.equals(xjdfToJDFImpl.currentJDFNode.getType()))
 			theReturn = xjdfToJDFImpl.jdfDoc.getJDFRoot();
-		e.deleteNode();
 		return xjdfToJDFImpl.createProduct && !bFirst ? theReturn : null;
 	}
 

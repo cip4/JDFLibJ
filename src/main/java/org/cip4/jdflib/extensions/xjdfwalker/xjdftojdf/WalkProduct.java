@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -45,13 +45,18 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
+import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.IDPart;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
+import org.cip4.jdflib.resource.intent.JDFDropIntent;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -108,7 +113,7 @@ public class WalkProduct extends WalkXElement
 		copyToNode(xjdfProduct, theNode);
 		final JDFComponent c = fixComponent(theNode, xjdfProduct);
 		// we only do voodoo default if no explicit deliveryparams exists
-		if (productHelper.isRootProduct() && xjdfToJDFImpl.xjdf.getSet(ElementName.DELIVERYPARAMS, 0) == null)
+		if (productHelper.isRootProduct() && xjdfToJDFImpl.xjdf.getSet(ElementName.DELIVERYPARAMS, 0) == null && new ProductHelper(xjdfProduct).getIntent(ElementName.DELIVERYINTENT) == null)
 		{
 			updateDeliveryIntent(xjdfProduct, theNode, c);
 		}
@@ -139,7 +144,16 @@ public class WalkProduct extends WalkXElement
 			{
 				di.getCreateUnderage().setActual(100.0 * (amount - underage) / amount);
 			}
-			final JDFDropItemIntent dropItemIntent = di.getCreateDropIntent(0).appendDropItemIntent();
+			final JDFDropIntent dropIntent = di.getCreateDropIntent(0);
+			final XJDFHelper h = XJDFHelper.getHelper(xjdfProduct);
+			final SetHelper contacts = h == null ? null : h.getSet(ElementName.CONTACT, EnumUsage.Input);
+			final ResourceHelper contact = contacts == null ? null : contacts.getPartition(XJDFConstants.ContactType, EnumContactType.Delivery.getName());
+			if (contact != null)
+			{
+				contact.ensureReference(di, null);
+				cleanRefs(di, di);
+			}
+			final JDFDropItemIntent dropItemIntent = dropIntent.appendDropItemIntent();
 			dropItemIntent.setAmount((int) amount);
 			dropItemIntent.refElement(c);
 		}

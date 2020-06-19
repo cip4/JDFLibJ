@@ -936,6 +936,26 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testDeliveryIntentFromProduct()
+	{
+		final XJDFHelper xjdf = new XJDFHelper("j1", null);
+		xjdf.appendProduct().setAmount(42);
+		final JDFContact c = (JDFContact) xjdf.appendSet(ElementName.CONTACT, EnumUsage.Input).appendPartition(XJDFConstants.ContactType, "Delivery", true).getResource();
+		c.appendPerson().setFamilyName("f");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdf);
+		final JDFDeliveryParams dp = (JDFDeliveryParams) d.getJDFRoot().getResource(ElementName.DELIVERYPARAMS, EnumUsage.Input, 0);
+		assertNull(dp);
+		final JDFDeliveryIntent di = (JDFDeliveryIntent) d.getJDFRoot().getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
+		assertNotNull(di);
+		assertEquals("The Contact was not translated", "f", di.getDropIntent(0).getContact(0).getPerson().getFamilyName());
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
 	public void testDescNameProduct()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
