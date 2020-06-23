@@ -233,7 +233,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 			if (!q.isLive())
 				break;
 			else
-				ThreadUtil.sleep(2);
+				ThreadUtil.sleep(12);
 		}
 		assertFalse(q.queue(new WaitRunner(2)));
 	}
@@ -245,10 +245,10 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	@Test
 	synchronized public void testStopAll()
 	{
-		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test554");
+		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test554445");
 		assertTrue(q.queue(new WaitRunner(1, 200)));
 		OrderedTaskQueue.shutDownAll();
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 1000; i++)
 		{
 			if (!q.isLive())
 				break;
