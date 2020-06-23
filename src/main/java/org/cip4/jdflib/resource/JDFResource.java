@@ -1366,6 +1366,12 @@ public class JDFResource extends JDFElement
 		 *
 		 */
 		public static final EnumPartIDKey Metadata9 = new EnumPartIDKey(AttributeName.METADATA9);
+
+		/**
+		 * 1.7++
+		 */
+		public static final EnumPartIDKey DropID = new EnumPartIDKey(AttributeName.DROPID);
+
 	}
 
 	/**
@@ -3412,7 +3418,7 @@ public class JDFResource extends JDFElement
 				v.remove(JDFResource.this);
 				if (v.isEmpty())
 					break;
-				final List<JDFResource> zapp = force ? v : new ArrayList<JDFResource>();
+				final List<JDFResource> zapp = force ? v : new ArrayList<>();
 				if (!force)
 				{
 					for (final JDFResource r : v)

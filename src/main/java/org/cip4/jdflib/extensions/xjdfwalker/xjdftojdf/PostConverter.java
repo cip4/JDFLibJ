@@ -346,9 +346,14 @@ class PostConverter
 		 */
 		void cleanResources()
 		{
-			final VElement vRes = collectResources();
+			VElement vRes = collectResources();
 			if (vRes != null)
 			{
+				for (final KElement rr : vRes)
+				{
+					splitDropID((JDFResource) rr);
+				}
+				vRes = collectResources();
 				for (final KElement rr : vRes)
 				{
 					cleanResource(rr);
@@ -413,6 +418,111 @@ class PostConverter
 				for (final KElement leaf : leaves)
 				{
 					leaf.removeChildrenByClass(JDFPart.class);
+				}
+			}
+		}
+
+		void splitDropID(final JDFResource resRoot)
+		{
+			final VString partIDKeys = resRoot.getPartIDKeys();
+			if (partIDKeys.contains(AttributeName.DROPID))
+			{
+				final VJDFAttributeMap partMapVector = resRoot.getPartMapVector(true);
+				for (final int pos = partIDKeys.index(AttributeName.DROPID) + 1; pos < partIDKeys.size();)
+				{
+					partIDKeys.remove(pos);
+				}
+				partMapVector.reduceMap(partIDKeys);
+				final VString vals = partMapVector.getPartValues(AttributeName.DROPID, false);
+				final VElement copies = new VElement();
+				copies.add(resRoot);
+				final VElement vl = resRoot.getLinksAndRefs(true, false);
+				final VElement vr = resRoot.getLinksAndRefs(false, true);
+				for (int i = 1; i < vals.size(); i++)
+				{
+					copies.add(resRoot.getParentNode_KElement().copyElement(resRoot, resRoot));
+				}
+				for (int i = 0; i < copies.size(); i++)
+				{
+					splitSingleDrop(partMapVector, copies, vl, vr, i);
+				}
+			}
+		}
+
+		private void splitSingleDrop(final VJDFAttributeMap partMapVector, final VElement copies, final VElement vl, final VElement vr, int i)
+		{
+			final JDFResource newRoot = (JDFResource) copies.get(i);
+			final JDFAttributeMap map = partMapVector.remove(0);
+			final String currentDrop = map.get(AttributeName.DROPID);
+			final JDFResource leaf = newRoot.getPartition(map, EnumPartUsage.Explicit);
+			String id = newRoot.getID();
+			if (i > 0)
+			{
+				id += map.get(AttributeName.DROPID);
+				newRoot.setID(id);
+			}
+			if (vl != null)
+			{
+				copyLinks(partMapVector, vl, i, currentDrop, id);
+			}
+			if (vr != null)
+			{
+				copyRefs(vr, currentDrop, id);
+			}
+
+			for (final JDFAttributeMap map2 : partMapVector)
+			{
+				newRoot.getPartition(map2, EnumPartUsage.Explicit).deleteNode();
+			}
+			for (int j = i + 1; j < copies.size(); j++)
+			{
+				((JDFResource) copies.get(j)).getPartition(map, EnumPartUsage.Explicit).deleteNode();
+			}
+
+			leaf.removeAttribute(AttributeName.DROPID);
+			leaf.getParentNode_KElement().copyInto(leaf, false);
+			leaf.deleteNode();
+			final VString partIDKeys2 = newRoot.getPartIDKeys();
+			partIDKeys2.remove(AttributeName.DROPID);
+			newRoot.setPartIDKeys(partIDKeys2);
+		}
+
+		private void copyRefs(final VElement vr, final String currentDrop, String id)
+		{
+			for (final KElement r : vr)
+			{
+				final JDFRefElement ref = (JDFRefElement) r;
+				final JDFAttributeMap rMap = ref.getPartMap();
+
+				if (!JDFAttributeMap.isEmpty(rMap) && currentDrop.equals(rMap.get(AttributeName.DROPID)))
+				{
+					rMap.remove(AttributeName.DROPID);
+					ref.setPartMap(rMap);
+					ref.setrRef(id);
+				}
+			}
+		}
+
+		private void copyLinks(final VJDFAttributeMap partMapVector, final VElement vl, int i, final String currentDrop, String id)
+		{
+			for (final KElement l : vl)
+			{
+				final JDFResourceLink link = (JDFResourceLink) l;
+				final VJDFAttributeMap vlMap = link.getPartMapVector();
+
+				if (!VJDFAttributeMap.isEmpty(vlMap) && currentDrop.equals(vlMap.getCommonMap().get(AttributeName.DROPID)))
+				{
+					vlMap.removeKey(AttributeName.DROPID);
+					link.setPartMapVector(vlMap);
+					link.setrRef(id);
+				}
+				else if (VJDFAttributeMap.isEmpty(vlMap) && i == 0)
+				{
+					for (final JDFAttributeMap map2 : partMapVector)
+					{
+						final String id2 = id + map2.get(AttributeName.DROPID);
+						link.getParentNode_KElement().copyElement(link, null).setAttribute(AttributeName.RREF, id2);
+					}
 				}
 			}
 		}
