@@ -430,7 +430,7 @@ public class JDFPart extends JDFAutoPart
 		return ai;
 	}
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.LOTID, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -438,6 +438,7 @@ public class JDFPart extends JDFAutoPart
 		atrInfoTable[2] = new AtrInfoTable(ElementName.PRINTCONDITION, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[3] = new AtrInfoTable(ElementName.QUALITYMEASUREMENT, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[4] = new AtrInfoTable(XJDFConstants.TransferCurveName, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.DROPID, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	static Set<String> fastparts = fillFastParts();
