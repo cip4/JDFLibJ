@@ -438,6 +438,72 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
+	public void testMultiPage1()
+	{
+		theHelper.setTypes("Stripping");
+		theHelper.setJobID("2up");
+
+		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+
+		final ResourceHelper resBS = bssh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS1"), true);
+		final JDFBinderySignature bs1 = (JDFBinderySignature) resBS.getResource();
+		bs1.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		bs1.setFoldCatalog("F16-7");
+		for (int i = 0; i < 2; i++)
+		{
+			final KElement mpf = bs1.appendElement(XJDFConstants.MultiPageFold);
+			mpf.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
+			mpf.setAttribute(AttributeName.ORIENTATION, "Rotate0");
+		}
+		final JDFLayout lo = (JDFLayout) losh.getCreatePartition(0, true).getResource();
+		lo.setSurfaceContentsBox((JDFRectangle) new JDFRectangle(0, 0, 100, 70).scaleFromCM());
+		final JDFPosition position = (JDFPosition) lo.appendElement(ElementName.POSITION);
+		position.setOrientation(org.cip4.jdflib.auto.JDFAutoPosition.EnumOrientation.Rotate90);
+		position.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
+		theHelper.cleanUp();
+		setSnippet(bssh, true);
+		setSnippet(losh, true);
+		writeTest(theHelper, "2upfold.xjdf");
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMultiPageComeGo()
+	{
+		theHelper.setTypes("Stripping");
+		theHelper.setJobID("comeandgo");
+		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+
+		final ResourceHelper resBS = bssh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS1"), true);
+		resBS.appendPartMap(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS2"));
+		final JDFBinderySignature bs1 = (JDFBinderySignature) resBS.getResource();
+		bs1.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		bs1.setFoldCatalog("F16-7");
+		final KElement mpf = bs1.appendElement(XJDFConstants.MultiPageFold);
+		mpf.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
+		mpf.setAttribute(AttributeName.ORIENTATION, "Rotate0");
+		final KElement mpf2 = bs1.appendElement(XJDFConstants.MultiPageFold);
+		mpf2.setAttribute(XJDFConstants.BinderySignatureID, "BS2");
+		mpf2.setAttribute(AttributeName.ORIENTATION, "Flip0");
+		final JDFLayout lo = (JDFLayout) losh.getCreatePartition(0, true).getResource();
+		lo.setSurfaceContentsBox((JDFRectangle) new JDFRectangle(0, 0, 100, 70).scaleFromCM());
+		final JDFPosition position = (JDFPosition) lo.appendElement(ElementName.POSITION);
+		position.setOrientation(org.cip4.jdflib.auto.JDFAutoPosition.EnumOrientation.Rotate90);
+		position.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
+		theHelper.cleanUp();
+		setSnippet(bssh, true);
+		setSnippet(losh, true);
+		writeTest(theHelper, "comego.xjdf");
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testBSMulti()
 	{
 		theHelper.setTypes("Stripping");

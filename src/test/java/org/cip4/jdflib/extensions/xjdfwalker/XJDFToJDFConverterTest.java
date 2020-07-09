@@ -61,6 +61,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -567,8 +568,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFColorantControl cc = (JDFColorantControl) h.getCreateSet(XJDFConstants.Resource, ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
 		cc.setAttribute(ElementName.COLORANTPARAMS, "Sep_1");
 		cc.setAttribute(ElementName.COLORANTORDER, "Sep_1");
-		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME,
-				"Sep 1");
+		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME, "Sep 1");
 
 		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
 		final JDFDoc docjdf = conv.convert(h);
@@ -653,8 +653,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final KElement c = e.appendElement(SetHelper.RESOURCE_SET);
 		c.setAttribute("Name", "Layout");
 		c.setAttribute("Usage", "Input");
-		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL",
-				"file://foo.xml");
+		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL", "file://foo.xml");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		final JDFNode root = d.getJDFRoot();
@@ -1717,6 +1716,20 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final JDFDoc d = xCon.convert(h);
 		assertEquals("w1", d.getJDFRoot().getNodeInfo().getWorkStepID());
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetVersion()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
+		h.setVersion(EnumVersion.Version_2_1);
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(h);
+		assertEquals(EnumVersion.Version_1_7, xCon.getVersion());
 
 	}
 
