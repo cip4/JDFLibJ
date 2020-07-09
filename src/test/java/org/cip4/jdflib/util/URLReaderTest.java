@@ -204,7 +204,7 @@ public class URLReaderTest extends JDFTestCaseBase
 	@Test
 	public void testGetURLInputStreamFTP()
 	{
-		if (!isTestNetwork() || FTP_SITE == null)
+		if (!isTestNetwork() || UrlUtilTest.FTP_SITE == null)
 			return;
 		final URLReader reader = new URLReader(UrlUtilTest.FTP_SITE);
 		final InputStream is = reader.getURLInputStream();
