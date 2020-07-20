@@ -479,8 +479,8 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	{
 		if (xjdf != null)
 		{
-			final String ns = xjdf.getRoot().getNamespaceURI();
-			final int minor = StringUtil.parseInt(StringUtil.token(ns, -1, JDFConstants.UNDERSCORE), -1);
+			final String xVersion = xjdf.getAttribute(AttributeName.VERSION);
+			final int minor = StringUtil.parseInt(StringUtil.token(xVersion, -1, JDFConstants.DOT), -1);
 			if (minor == 1)
 				version = (EnumVersion) EnumUtil.max(EnumVersion.Version_1_7, version);
 			if (minor == 2)

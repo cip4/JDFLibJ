@@ -72,7 +72,6 @@ import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStation;
 import org.cip4.jdflib.resource.process.JDFStripMark;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class StrippingTest extends JDFTestCaseBase
@@ -85,7 +84,6 @@ public class StrippingTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	@Ignore
 	public void testCommonFolds()
 	{
 		final JDFBinderySignature bs = stripParams.appendBinderySignature();

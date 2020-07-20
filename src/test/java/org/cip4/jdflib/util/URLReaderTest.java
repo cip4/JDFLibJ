@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -204,9 +204,9 @@ public class URLReaderTest extends JDFTestCaseBase
 	@Test
 	public void testGetURLInputStreamFTP()
 	{
-		if (!isTestNetwork())
+		if (!isTestNetwork() || UrlUtilTest.FTP_SITE == null)
 			return;
-		final URLReader reader = new URLReader("ftp://speedtest.tele2.net");
+		final URLReader reader = new URLReader(UrlUtilTest.FTP_SITE);
 		final InputStream is = reader.getURLInputStream();
 		assertNotNull(is);
 		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);

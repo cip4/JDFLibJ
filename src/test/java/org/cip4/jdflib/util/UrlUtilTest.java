@@ -82,6 +82,8 @@ import org.junit.Test;
 public class UrlUtilTest extends JDFTestCaseBase
 {
 
+	static final String FTP_SITE = null; //"ftp://speedtest.tele2.net/";
+
 	/**
 	 * Test method for {@link org.cip4.jdflib.util.UrlUtil#getConnectionTimeout()}.
 	 */
@@ -260,9 +262,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWriteToFTP() throws IOException
 	{
-		if (!isTestNetwork())
+		if (!isTestNetwork() || FTP_SITE == null)
 			return;
-		final UrlPart part = UrlUtil.writeToURL("ftp://speedtest.tele2.net/", null, null, null, null);
+		final UrlPart part = UrlUtil.writeToURL(FTP_SITE, null, null, null, null);
 		assertEquals(part.getResponseCode(), 200);
 		part.buffer();
 		assertTrue(part.getResponseStream().available() > 100);
@@ -275,9 +277,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetFTPInputstream() throws IOException
 	{
-		if (!isTestNetwork())
+		if (!isTestNetwork() || FTP_SITE == null)
 			return;
-		final InputStream is = UrlUtil.getURLInputStream("ftp://speedtest.tele2.net/");
+		final InputStream is = UrlUtil.getURLInputStream(FTP_SITE);
 		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
 	}
 
