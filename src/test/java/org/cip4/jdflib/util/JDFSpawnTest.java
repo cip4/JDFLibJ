@@ -1988,6 +1988,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 					final String spawnID = spawnedNode.getSpawnID(false);
 					assertNotSame(spawnID, "");
+					assertFalse(spawnedNode.toXML().indexOf(AttributeName.SPAWNSTATUS) > 0);
 					spawnedNode.getCreateAuditPool().addProcessRun(EnumNodeStatus.Completed, null, vPartMap);
 
 					JDFComponent spawnedROComponent = (JDFComponent) spawnedNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
@@ -3158,6 +3159,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final VElement vLeaves = rspawned.getLeaves(false);
 		vLeaves.get(1).deleteNode();
 
+		assertTrue(n2.toXML().indexOf(AttributeName.SPAWNSTATUS) > 0);
 		final JDFMerge m = new JDFMerge(n2);
 		final JDFNode nMerged = m.mergeJDF(nSpawned);
 		assertTrue(nMerged.toXML().indexOf(AttributeName.SPAWNSTATUS) < 0);
