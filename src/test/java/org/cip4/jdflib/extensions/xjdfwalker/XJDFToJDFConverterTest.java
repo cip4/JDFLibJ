@@ -568,7 +568,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFColorantControl cc = (JDFColorantControl) h.getCreateSet(XJDFConstants.Resource, ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
 		cc.setAttribute(ElementName.COLORANTPARAMS, "Sep_1");
 		cc.setAttribute(ElementName.COLORANTORDER, "Sep_1");
-		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME, "Sep 1");
+		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME,
+				"Sep 1");
 
 		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
 		final JDFDoc docjdf = conv.convert(h);
@@ -653,7 +654,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final KElement c = e.appendElement(SetHelper.RESOURCE_SET);
 		c.setAttribute("Name", "Layout");
 		c.setAttribute("Usage", "Input");
-		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL", "file://foo.xml");
+		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL",
+				"file://foo.xml");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		final JDFNode root = d.getJDFRoot();
@@ -2206,7 +2208,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertEquals(EnumResStatus.Available, loj.getResStatus(false));
 		final JDFStrippingParams sp = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
 		assertEquals(EnumResStatus.Available, sp.getResStatus(false));
-		assertEquals("Description of the sheet", loj.getLeaf(0).getDescriptiveName());
-		assertEquals("Description of the sheet", sp.getLeaf(0).getDescriptiveName());
+		assertEquals("Description of the sheet", loj.getLeaf(0).getAttribute_KElement(AttributeName.DESCRIPTIVENAME));
+		assertEquals("Description of the sheet", sp.getLeaf(0).getParentNode_KElement().getAttribute_KElement(AttributeName.DESCRIPTIVENAME));
 	}
 }

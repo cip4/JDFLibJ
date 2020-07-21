@@ -168,12 +168,12 @@ public class WalkLayout extends WalkStrippingParams
 
 			tmpStripParams.removeAttribute(AttributeName.PARTIDKEYS);
 
+			part.copyAttribute(AttributeName.DESCRIPTIVENAME, trackLayout);
 			part.copyInto(tmpStripParams, false);
 			if (tmpStripParams.getElement_KElement(ElementName.STRIPPINGPARAMS, null, 0) != null)
 			{
 				sp.addPartIDKey(EnumPartIDKey.BinderySignatureName);
 			}
-			sp.copyAttribute(AttributeName.DESCRIPTIVENAME, trackLayout);
 			foo.deleteNode();
 		}
 
