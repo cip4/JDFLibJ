@@ -107,15 +107,34 @@ public class UrlUtil
 	/**
 	 * http post method
 	 */
-	public static final String POST = "POST";
+	public static final String POST = HttpMethod.POST.name();
+	/**
+	 * http put method
+	 */
+	public static final String PUT = HttpMethod.PUT.name();
 	/**
 	 * http get method
 	 */
-	public static final String GET = "GET";
+	public static final String GET = HttpMethod.GET.name();
 	/**
 	 * http head method
 	 */
-	public static final String HEAD = "HEAD";
+	public static final String HEAD = HttpMethod.HEAD.name();
+	public static final String DELETE = HttpMethod.DELETE.name();
+	public static final String CONNECT = HttpMethod.CONNECT.name();
+	public static final String OPTIONS = HttpMethod.OPTIONS.name();
+	public static final String TRACE = HttpMethod.TRACE.name();
+	public static final String PATCH = HttpMethod.PATCH.name();
+
+	/**
+	 * list of all http methods
+	 *
+	 *
+	 */
+	public enum HttpMethod
+	{
+		POST, PUT, GET, HEAD, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+	}
 
 	/**
 	 *
