@@ -149,7 +149,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	@Test
 	public void testConstructFile() throws IOException
 	{
-		final File f = new File(sm_dirTestDataTemp + "bios2.fil");
+		final File f = new File(sm_dirTestDataTemp + "bios222.fil");
 		f.delete();
 		f.createNewFile();
 		final FileOutputStream fos = new FileOutputStream(f);
@@ -353,6 +353,43 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 		}
 		assertEquals(n, len);
 		ios.close();
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testGetBufferedInputStreamKeep() throws Exception
+	{
+		final ByteArrayIOStream ios = new ByteArrayIOStream();
+		final int len = 10000;
+		for (int i = 0; i < len; i++)
+		{
+			ios.write(i);
+		}
+		final File tmp = new File(sm_dirTestDataTemp + "tmp.tmp");
+		FileUtil.streamToFile(ios.getInputStream(), tmp);
+		final InputStream is2 = new ByteArrayIOFileStream(FileUtil.getBufferedInputStream(tmp), 4444).getInputStream();
+
+		int n = 0;
+		for (int i = 0; i < 10; i++)
+		{
+			final byte[] big = new byte[10000000];
+		}
+		System.gc();
+		ThreadUtil.sleep(10);
+		int i;
+		while ((i = is2.read()) >= 0)
+		{
+			final byte[] big = new byte[10000];
+			if (i % 20 == 0)
+			{
+				System.gc();
+				ThreadUtil.sleep(1);
+			}
+			n++;
+		}
+		assertEquals(n, len);
 	}
 
 }

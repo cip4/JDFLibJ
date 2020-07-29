@@ -572,6 +572,47 @@ public class ZipReaderTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws IOException
+	 *
+	 *
+	 */
+	@Test
+	public void testGetBigEntryStreamGone() throws IOException
+	{
+		ByteArrayIOStream bos = new ByteArrayIOFileStream(FileUtil.getBufferedInputStream(new File(sm_dirTestData + "dir1.zip")), 4444);
+		final ZipReader r = new ZipReader(bos.getInputStream());
+		bos = null;
+		for (int i = 0; i < 99; i++)
+		{
+			final byte[] bbb = new byte[1000000];
+			System.gc();
+		}
+
+		final ZipEntry e = r.getEntry("dir1/bigzip.pdf");
+		assertNotNull(e);
+		final InputStream inputStream = r.getInputStream();
+		assertNotNull(inputStream);
+		int n = 0;
+		final byte[] b = new byte[10000];
+		int nn = 0;
+		while (true)
+		{
+			final int i = inputStream.read(b);
+			n += i;
+			if (i < 0)
+				break;
+			if (nn++ % 100 == 0)
+			{
+				final byte[] bbb = new byte[10000];
+				System.gc();
+				log.info(nn + " " + i + " " + n);
+			}
+		}
+		assertTrue(n > 35000000);
+		r.close();
+	}
+
+	/**
 	 *
 	 *
 	 */

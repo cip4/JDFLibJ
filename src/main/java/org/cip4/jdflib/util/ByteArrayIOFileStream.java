@@ -52,6 +52,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.core.JDFException;
@@ -69,6 +70,9 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	private File file;
 	private RandomAccessFile os;
 	private boolean isTmpFile;
+	private boolean isCopy;
+	private final int id;
+	private static AtomicInteger n = new AtomicInteger();
 
 	/**
 	 *
@@ -95,7 +99,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	 * @author rainer prosi
 	 *
 	 */
-	public static class ByteArrayIOFileInputStream extends ByteArrayIOInputStream
+	public class ByteArrayIOFileInputStream extends ByteArrayIOInputStream
 	{
 		private final ByteArrayIOFileStream ios;
 		private long filePos;
@@ -310,6 +314,8 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		file = null;
 		isTmpFile = false;
 		os = null;
+		id = n.incrementAndGet();
+		isCopy = false;
 	}
 
 	/**
@@ -380,15 +386,6 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	}
 
 	/**
-	 * @see java.io.ByteArrayOutputStream#toString()
-	 */
-	@Override
-	public synchronized String toString()
-	{
-		return "ByteArrayIOFileStream: size= " + count + " maxLength=" + maxLength + "isTmp=" + isTmpFile + "File=" + file;
-	}
-
-	/**
 	 * Writes the specified byte to this byte array output stream.
 	 *
 	 * @param b the byte to be written.
@@ -427,6 +424,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 				{
 					isTmpFile = true;
 					file = File.createTempFile("ByteArray.", null);
+					log.info("ensuring " + id + " " + file);
 				}
 				catch (final IOException e)
 				{
@@ -443,7 +441,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 			}
 			catch (final Exception e)
 			{
-				log.error("cannot create file " + file);
+				log.error("cannot create file " + id + " " + file);
 			}
 		}
 	}
@@ -483,13 +481,15 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	{
 		try
 		{
-			if (os != null)
+			if (os != null && !isCopy)
 			{
+				log.info("closing random access temp file " + id + " " + file);
 				os.close();
 				os = null;
 			}
 			if (isTmpFile && file != null)
 			{
+				log.info("deleting temp file " + id + " " + file);
 				file.delete();
 				file = null;
 				isTmpFile = false;
@@ -509,7 +509,8 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	@Override
 	protected void finalize() throws Throwable
 	{
-		close();
+		if (!isCopy)
+			close();
 		super.finalize();
 	}
 
@@ -525,7 +526,9 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 			final ByteArrayIOFileInputStream bais = (ByteArrayIOFileInputStream) is;
 			file = bais.ios.file;
 			isTmpFile = false;
+			isCopy = true;
 			os = bais.ios.os;
+			log.info("updating " + id + " " + file + " from " + bais.ios.id);
 		}
 		else if (is != null)
 		{
@@ -576,5 +579,14 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	public File getFile()
 	{
 		return file;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public synchronized String toString()
+	{
+		return "ByteArrayIOFileStream [maxLength=" + maxLength + ", " + (file != null ? "file=" + file + ", " : "") + "isTmpFile=" + isTmpFile + ", isCopy=" + isCopy + ", id=" + id + "]";
 	}
 }
