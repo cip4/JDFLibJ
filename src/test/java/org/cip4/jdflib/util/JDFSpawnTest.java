@@ -283,8 +283,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		}
 	}
 
-	// /////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -304,6 +302,49 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFNode spawnedNode = spawn.spawn();
 		assertEquals(1, spawnedNode.getResourceLinkPool().getPoolChild(0, ElementName.CUSTOMERINFO + "Link", null, null).getPartMapVector().size());
 		assertEquals(1, spawnedNode.getResourceLinkPool().getPoolChild(0, ElementName.NODEINFO + "Link", null, null).getPartMapVector().size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSpawnPartImplicitPreviewNoFix()
+	{
+		final JDFDoc dRoot = new JDFDoc("JDF");
+		final JDFNode nRoot = dRoot.getJDFRoot();
+		nRoot.setType(EnumType.Product);
+		final JDFNode n2 = nRoot.addJDFNode(EnumType.PreviewGeneration);
+		final JDFResource preview = n2.addResource(ElementName.PREVIEW, EnumUsage.Output);
+		preview.setPartUsage(EnumPartUsage.Implicit);
+		final JDFResource pvs = preview.addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "S1");
+		final JDFResource pvf = pvs.addPartition(EnumPartIDKey.Side, "Front");
+		final JDFResource pvb = pvs.addPartition(EnumPartIDKey.Side, "Back");
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap();
+		map.put("SignatureName", "Sig1");
+		map.put("SheetName", "S1");
+		final JDFAttributeMap m2 = new JDFAttributeMap(map);
+		map.put("Side", "Front");
+		for (final String sep : new VString("a b c"))
+		{
+			map.put("Separation", sep);
+			vMap.add(map.clone());
+		}
+
+		final JDFSpawn spawn = new JDFSpawn(n2);
+		spawn.vSpawnParts = vMap;
+		spawn.bFixResources = false;
+		spawn.vRWResources_in = new VString("Output");
+		final JDFNode spawnedNode = spawn.spawn();
+		assertEquals(EnumSpawnStatus.SpawnedRW, pvf.getSpawnStatus());
+		assertEquals(EnumSpawnStatus.NotSpawned, pvs.getSpawnStatus());
+
+		new JDFMerge(nRoot).mergeJDF(spawnedNode);
+		final JDFNode n2n = nRoot.getJDF(0);
+		final JDFResource pvn = n2n.getResource(ElementName.PREVIEW, EnumUsage.Output, 0);
+		m2.put("Side", "Back");
+		assertNotNull(pvn.getPartition(m2, EnumPartUsage.Explicit));
+
 	}
 
 	/**
