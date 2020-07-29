@@ -7,7 +7,7 @@ name: Release
 on:
   push:
     tags:
-      - JDFLibJ-2.1.*
+      - '*'
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build with Gradle
-        run: ./gradlew build -PprojectVersion=${GITHUB_REF:18}
+        run: ./gradlew build -PprojectVersion=${GITHUB_REF##*/}
 
       - name: Debug
         run: ls -l build/libs/
@@ -56,4 +56,4 @@ jobs:
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-        run: ./gradlew publish closeAndReleaseRepository -PprojectVersion=${GITHUB_REF:18} -Psigning.keyId=$SIGNING_KEY_ID -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$PWD/secring.gpg -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD
+        run: ./gradlew publish closeAndReleaseRepository -PprojectVersion=${GITHUB_REF##*/} -Psigning.keyId=$SIGNING_KEY_ID -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$PWD/secring.gpg -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD
