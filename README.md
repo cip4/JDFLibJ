@@ -13,12 +13,12 @@ Creation and publishing of a new version to GitHub Release and to the Central Ma
 **NOTE:** The publication to the Central Maven Repository may take up to two hours.
 
 ```bash
-$ git tag -a JDFLibJ-2.1.[VERSION] -m "[TITLE]"
-$ git push origin JDFLibJ-2.1.[VERSION]
+$ git tag -a [VERSION] -m "[TITLE]"
+$ git push origin [VERSION]
 ```
 
 In case a build has been failed, a tag can be deleted using the following command:
 ```bash
-$ git tag -d JDFLibJ-2.1.[VERSION]
-$ git push origin :refs/tags/JDFLibJ-2.1.[VERSION]
+$ git tag -d [VERSION]
+$ git push origin :refs/tags/[VERSION]
 ```
