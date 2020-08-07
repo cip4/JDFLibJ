@@ -448,7 +448,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		final ResourceHelper resBS = bssh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS1"), true);
 		final JDFBinderySignature bs1 = (JDFBinderySignature) resBS.getResource();
 		bs1.setBinderySignatureType(EnumBinderySignatureType.Fold);
-		bs1.setFoldCatalog("F16-7");
+		bs1.setFoldCatalog("F16-14");
 		for (int i = 0; i < 2; i++)
 		{
 			final KElement mpf = bs1.appendElement(XJDFConstants.MultiPageFold);
@@ -458,7 +458,6 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		final JDFLayout lo = (JDFLayout) losh.getCreatePartition(0, true).getResource();
 		lo.setSurfaceContentsBox((JDFRectangle) new JDFRectangle(0, 0, 100, 70).scaleFromCM());
 		final JDFPosition position = (JDFPosition) lo.appendElement(ElementName.POSITION);
-		position.setOrientation(org.cip4.jdflib.auto.JDFAutoPosition.EnumOrientation.Rotate90);
 		position.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
 		theHelper.cleanUp();
 		setSnippet(bssh, true);
@@ -481,7 +480,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		resBS.appendPartMap(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS2"));
 		final JDFBinderySignature bs1 = (JDFBinderySignature) resBS.getResource();
 		bs1.setBinderySignatureType(EnumBinderySignatureType.Fold);
-		bs1.setFoldCatalog("F16-7");
+		bs1.setFoldCatalog("F16-14");
 		final KElement mpf = bs1.appendElement(XJDFConstants.MultiPageFold);
 		mpf.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
 		mpf.setAttribute(AttributeName.ORIENTATION, "Rotate0");
@@ -491,7 +490,6 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		final JDFLayout lo = (JDFLayout) losh.getCreatePartition(0, true).getResource();
 		lo.setSurfaceContentsBox((JDFRectangle) new JDFRectangle(0, 0, 100, 70).scaleFromCM());
 		final JDFPosition position = (JDFPosition) lo.appendElement(ElementName.POSITION);
-		position.setOrientation(org.cip4.jdflib.auto.JDFAutoPosition.EnumOrientation.Rotate90);
 		position.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
 		theHelper.cleanUp();
 		setSnippet(bssh, true);
