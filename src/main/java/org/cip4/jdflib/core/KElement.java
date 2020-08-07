@@ -4298,7 +4298,38 @@ public class KElement extends ElementNSImpl implements Element
 		 */
 		public SingleAttributeComparator(final String pAttName, final boolean pInvert)
 		{
-			super("@" + pAttName, pInvert);
+			super(pAttName, pInvert);
+		}
+
+		/**
+		 * @param o1
+		 * @param o2
+		 * @return
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		public int compare(final KElement o1, final KElement o2)
+		{
+			final String a1 = o1.getAttribute_KElement(xPath, null, null);
+			final String a2 = o2.getAttribute_KElement(xPath, null, null);
+			if (StringUtil.isNumber(a1) && StringUtil.isNumber(a2))
+			{
+				final double d1 = StringUtil.parseDouble(a1, 0);
+				final double d2 = StringUtil.parseDouble(a2, 0);
+				if (d1 < d2)
+				{
+					return -invert;
+				}
+				else if (d1 == d2)
+				{
+					return 0;
+				}
+				else
+				{
+					return invert;
+				}
+			}
+			return invert * ContainerUtil.compare(a1, a2);
 		}
 	}
 
