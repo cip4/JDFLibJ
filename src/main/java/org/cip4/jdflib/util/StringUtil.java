@@ -1548,13 +1548,20 @@ public class StringUtil
 			return false;
 		}
 		final String dStr = str.trim();
-		if (dStr.length() == 0)
+		if (dStr.isEmpty())
 		{
 			return false;
 		}
+		final int first = dStr.charAt(0);
+		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I' || first == '.')
+		{
+			if (dStr.indexOf(JDFConstants.BLANK) >= 0)
+				return false;
 
-		// NaN is not a number...
-		return !Double.isNaN(parseDouble(str, Double.NaN));
+			// NaN is not a number...
+			return !Double.isNaN(parseDouble(str, Double.NaN));
+		}
+		return false;
 	}
 
 	/**
@@ -2091,32 +2098,87 @@ public class StringUtil
 		{
 			return false;
 		}
+		final int first = intStr.charAt(0);
+		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I')
+		{
 
-		if (intStr.equals(JDFConstants.POSINF))
-		{
-			return true;
-		}
+			if (intStr.equals(JDFConstants.POSINF))
+			{
+				return true;
+			}
 
-		if (intStr.equals(JDFConstants.NEGINF))
-		{
-			return true;
-		}
-		// hack for xml schema conformance, which uses unbounded to define +
-		// infinity
-		if (intStr.equals("unbounded"))
-		{
-			return true;
-		}
+			if (intStr.equals(JDFConstants.NEGINF))
+			{
+				return true;
+			}
+			// hack for xml schema conformance, which uses unbounded to define +
+			// infinity
+			if (intStr.equals("unbounded"))
+			{
+				return true;
+			}
 
-		try
-		{
-			Integer.parseInt(intStr);
-			return true;
+			try
+			{
+				Integer.parseInt(intStr);
+				return true;
+			}
+			catch (final NumberFormatException e)
+			{
+				return false;
+			}
 		}
-		catch (final NumberFormatException e)
+		return false;
+	}
+
+	/**
+	 * checks whether <code>str</code> reprents an integer
+	 *
+	 * @param str the String to check
+	 * @return boolean - true if the string represents an integer number
+	 */
+	public static boolean isLong(final String str)
+	{
+		if (str == null)
 		{
 			return false;
 		}
+		final String intStr = str.trim();
+		if (intStr.length() == 0)
+		{
+			return false;
+		}
+		final int first = intStr.charAt(0);
+		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I' || first == '.')
+		{
+
+			if (intStr.equals(JDFConstants.POSINF))
+			{
+				return true;
+			}
+
+			if (intStr.equals(JDFConstants.NEGINF))
+			{
+				return true;
+			}
+			// hack for xml schema conformance, which uses unbounded to define +
+			// infinity
+			if (intStr.equals("unbounded"))
+			{
+				return true;
+			}
+
+			try
+			{
+				Long.parseLong(intStr);
+				return true;
+			}
+			catch (final NumberFormatException e)
+			{
+				return false;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -2404,43 +2466,41 @@ public class StringUtil
 		{
 			return def;
 		}
-		try
-		{
-			return Double.parseDouble(s);
-		}
-		catch (final NumberFormatException nfe)
-		{
-			// nop
-		}
-		double d = def;
 		s = s.trim();
-		if (s.equalsIgnoreCase(JDFConstants.POSINF))
+		if (s.isEmpty())
+			return def;
+		final int first = s.charAt(0);
+		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I' || first == '.')
 		{
-			return Double.MAX_VALUE;
-		}
 
-		if (s.equalsIgnoreCase(JDFConstants.NEGINF))
-		{
-			return -Double.MAX_VALUE;
-		}
+			if (s.equalsIgnoreCase(JDFConstants.POSINF))
+			{
+				return Double.MAX_VALUE;
+			}
 
-		try
-		{
-			d = Double.parseDouble(s);
-		}
-		catch (final NumberFormatException nfe)
-		{
+			if (s.equalsIgnoreCase(JDFConstants.NEGINF))
+			{
+				return -Double.MAX_VALUE;
+			}
+
 			try
 			{
-				s = replaceChar(s, ',', ".", 0);
-				d = Double.parseDouble(s);
+				return Double.parseDouble(s);
 			}
-			catch (final NumberFormatException nfe2)
+			catch (final NumberFormatException nfe)
 			{
-				// nop
+				try
+				{
+					s = replaceChar(s, ',', ".", 0);
+					return Double.parseDouble(s);
+				}
+				catch (final NumberFormatException nfe2)
+				{
+					// nop
+				}
 			}
 		}
-		return d;
+		return def;
 	}
 
 	/**
@@ -2487,66 +2547,64 @@ public class StringUtil
 		{
 			return def;
 		}
-		try
+		s = s.trim();
+		if (s.isEmpty())
+			return def;
+		final int first = s.charAt(0);
+		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I')
 		{
-			return Integer.parseInt(s);
-		}
-		catch (final NumberFormatException nfe)
-		{
-			// nop
-		}
-		int i = def;
-		s = s.trim().toLowerCase();
-		final int pos0x = s.indexOf("0x");
-		if (pos0x >= 0)
-		{
-			s = (pos0x > 0 ? StringUtil.leftStr(s, pos0x) : "") + s.substring(pos0x + 2);
 			try
 			{
-				return Integer.parseInt(s, 16);
+				return Integer.parseInt(s);
 			}
 			catch (final NumberFormatException nfe)
 			{
-				return i;
+				// nop
 			}
-		}
+			s = s.toLowerCase();
+			final int pos0x = s.indexOf("0x");
+			if (pos0x >= 0)
+			{
+				s = (pos0x > 0 ? StringUtil.leftStr(s, pos0x) : "") + s.substring(pos0x + 2);
+				try
+				{
+					return Integer.parseInt(s, 16);
+				}
+				catch (final NumberFormatException nfe)
+				{
+					return def;
+				}
+			}
 
-		if (s.equalsIgnoreCase(JDFConstants.POSINF))
-		{
-			return Integer.MAX_VALUE;
-		}
+			if (s.equalsIgnoreCase(JDFConstants.POSINF))
+			{
+				return Integer.MAX_VALUE;
+			}
 
-		if (s.equalsIgnoreCase(JDFConstants.NEGINF))
-		{
-			return Integer.MIN_VALUE;
-		}
+			if (s.equalsIgnoreCase(JDFConstants.NEGINF))
+			{
+				return Integer.MIN_VALUE;
+			}
 
-		try
-		{
-			i = Integer.parseInt(s);
-		}
-		catch (final NumberFormatException nfe)
-		{
 			try
 			{
 				final double d = Double.parseDouble(s);
 				if (d > Integer.MAX_VALUE)
 				{
-					i = Integer.MAX_VALUE;
+					return Integer.MAX_VALUE;
 				}
 				else if (d < Integer.MIN_VALUE)
 				{
-					i = Integer.MIN_VALUE;
+					return Integer.MIN_VALUE;
 				}
-				i = (int) (d + 0.4999);
+				return (int) (d + 0.4999);
 			}
 			catch (final NumberFormatException nfe2)
 			{
 				// nop
 			}
 		}
-
-		return i;
+		return def;
 	}
 
 	/**
@@ -2563,65 +2621,72 @@ public class StringUtil
 		{
 			return def;
 		}
-		try
+		s = s.trim();
+		if (s.isEmpty())
+			return def;
+		final int first = s.charAt(0);
+		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I')
 		{
-			return Long.parseLong(s);
-		}
-		catch (final NumberFormatException nfe)
-		{
-			// nop
-		}
-		long i = def;
-		s = s.trim().toLowerCase();
-		final int pos0x = s.indexOf("0x");
-		if (pos0x >= 0)
-		{
-			s = (pos0x > 0 ? StringUtil.leftStr(s, pos0x) : "") + s.substring(pos0x + 2);
+
 			try
 			{
-				return Long.parseLong(s, 16);
+				return Long.parseLong(s);
 			}
 			catch (final NumberFormatException nfe)
 			{
-				return i;
-			}
-		}
-		if (s.equalsIgnoreCase(JDFConstants.POSINF))
-		{
-			return Long.MAX_VALUE;
-		}
-
-		if (s.equalsIgnoreCase(JDFConstants.NEGINF))
-		{
-			return Long.MIN_VALUE;
-		}
-
-		try
-		{
-			i = Long.parseLong(s);
-		}
-		catch (final NumberFormatException nfe)
-		{
-			try
-			{
-				final double d = Double.parseDouble(s);
-				if (d > Long.MAX_VALUE)
-				{
-					i = Long.MAX_VALUE;
-				}
-				else if (d < Long.MIN_VALUE)
-				{
-					i = Long.MIN_VALUE;
-				}
-				i = (long) (d + 0.4999);
-			}
-			catch (final NumberFormatException nfe2)
-			{
 				// nop
 			}
+			s = s.toLowerCase();
+			final int pos0x = s.indexOf("0x");
+			if (pos0x >= 0)
+			{
+				s = (pos0x > 0 ? StringUtil.leftStr(s, pos0x) : "") + s.substring(pos0x + 2);
+				try
+				{
+					return Long.parseLong(s, 16);
+				}
+				catch (final NumberFormatException nfe)
+				{
+					return def;
+				}
+			}
+			if (s.equalsIgnoreCase(JDFConstants.POSINF))
+			{
+				return Long.MAX_VALUE;
+			}
+
+			if (s.equalsIgnoreCase(JDFConstants.NEGINF))
+			{
+				return Long.MIN_VALUE;
+			}
+
+			try
+			{
+				return Long.parseLong(s);
+			}
+			catch (final NumberFormatException nfe)
+			{
+				try
+				{
+					final double d = Double.parseDouble(s);
+					if (d > Long.MAX_VALUE)
+					{
+						return Long.MAX_VALUE;
+					}
+					else if (d < Long.MIN_VALUE)
+					{
+						return Long.MIN_VALUE;
+					}
+					return (long) (d + 0.4999);
+				}
+				catch (final NumberFormatException nfe2)
+				{
+					// nop
+				}
+			}
 		}
 
-		return i;
+		return def;
 	}
 
 	/**

@@ -524,6 +524,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.trim("", ", &"), null);
 		assertEquals(StringUtil.trim("   ", " "), null);
 		assertEquals(StringUtil.trim("   ", null), null);
+		assertEquals(StringUtil.trim(null, null), null);
 	}
 
 	/**
@@ -868,6 +869,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.parseInt("1234123456", 0), 1234123456);
 		assertEquals(StringUtil.parseInt("+1234123456", 0), 1234123456);
 		assertEquals(StringUtil.parseInt("1234123456.0", 0), 1234123456);
+		assertEquals(StringUtil.parseInt("abc", 99), 99);
 		assertEquals(StringUtil.parseInt("12341234561234567834556", 0), Integer.MAX_VALUE);
 		assertEquals(StringUtil.parseInt("-12341234561234567834556", 0), Integer.MIN_VALUE);
 		assertEquals(StringUtil.parseInt("INF", 0), Integer.MAX_VALUE);
@@ -1342,7 +1344,45 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.isInteger("123"));
 		assertTrue(StringUtil.isInteger("-123"));
 		assertTrue(StringUtil.isInteger("+123"));
+		assertTrue(StringUtil.isInteger("0x3"));
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testisNumber()
+	{
+		assertFalse(StringUtil.isNumber(""));
+		assertFalse(StringUtil.isNumber(" a"));
+		assertFalse(StringUtil.isNumber("a"));
+		assertTrue(StringUtil.isNumber("1.0"));
+		assertTrue(StringUtil.isNumber("1.0"));
+		assertTrue(StringUtil.isNumber("123"));
+		assertTrue(StringUtil.isNumber("-123"));
+		assertTrue(StringUtil.isNumber("+123"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testisNumberSpeed()
+	{
+		final long t0 = System.currentTimeMillis();
+		for (int i = 0; i < 1000000; i++)
+		{
+			assertFalse(StringUtil.isNumber(""));
+			assertFalse(StringUtil.isNumber(" a"));
+			assertFalse(StringUtil.isNumber("a"));
+			assertTrue(StringUtil.isNumber("1.0"));
+			assertTrue(StringUtil.isNumber("1.0"));
+			assertTrue(StringUtil.isNumber("123"));
+			assertTrue(StringUtil.isNumber("-123"));
+			assertTrue(StringUtil.isNumber("+123"));
+		}
+		log.info(System.currentTimeMillis() - t0);
 	}
 
 	/**
