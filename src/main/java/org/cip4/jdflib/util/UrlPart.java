@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,15 +41,18 @@ package org.cip4.jdflib.util;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URLConnection;
 
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
 
+import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.core.XMLParserFactory;
+import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.util.net.IPollDetails;
 
 /**
@@ -58,7 +61,7 @@ import org.cip4.jdflib.util.net.IPollDetails;
  * @author rainer prosi
  *
  */
-public class UrlPart implements IPollDetails
+public class UrlPart implements IPollDetails, IStreamWriter
 {
 	/**
 	 *
@@ -68,6 +71,15 @@ public class UrlPart implements IPollDetails
 	public int getResponseCode()
 	{
 		return rc;
+	}
+
+	@Override
+	public void writeStream(final OutputStream os) throws IOException
+	{
+		buffer();
+		IOUtils.copy(getResponseStream(), os);
+		os.flush();
+		os.close();
 	}
 
 	/**

@@ -2369,6 +2369,23 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetAttributeIgnoreCase()
+	{
+		final XMLDoc xd = new XMLDoc("a", null);
+		final KElement root = xd.getRoot();
+		root.setAttribute("at", "b");
+		root.setAttribute("at:a2", "b2", "foo");
+		assertEquals("b", root.getAttributeIgnoreCase("at"));
+		assertEquals("b", root.getAttributeIgnoreCase("At"));
+		assertEquals("b2", root.getAttributeIgnoreCase("At:A2"));
+		assertEquals("b2", root.getAttributeIgnoreCase("A2"));
+		assertNull(root.getAttributeIgnoreCase("at2"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetIgnoreCase()
 	{
 		final XMLDoc xd = new XMLDoc("a", null);

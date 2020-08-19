@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,8 @@ import org.cip4.jdflib.span.JDFSpanBase;
 
 /**
  * class to parse units from strings
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class UnitParser
 {
@@ -114,7 +115,7 @@ public class UnitParser
 	{
 		final JDFAttributeMap map = element.getAttributeMap_KElement();
 		final Iterator<String> keyIt = map.getKeyIterator();
-		boolean elemSpan = (element instanceof JDFSpanBase) && isUnit(element.getLocalName());
+		final boolean elemSpan = (element instanceof JDFSpanBase) && isUnit(element.getLocalName());
 		while (keyIt.hasNext())
 		{
 			final String key = keyIt.next();
@@ -130,10 +131,10 @@ public class UnitParser
 			{
 				element.setAttribute(key, newVal);
 			}
-			//update dates in case they were specified in milliseconds
+			// update dates in case they were specified in milliseconds
 			if ((element instanceof JDFElement) && EnumAttributeType.dateTime.equals(((JDFElement) element).getAttributeInfo().getAttributeType(key)))
 			{
-				JDFDate d = JDFDate.createDate(val);
+				final JDFDate d = JDFDate.createDate(val);
 				if (d != null && !val.equals(d.getDateTimeISO()))
 				{
 					element.setAttribute(key, d.getDateTimeISO());
@@ -147,7 +148,7 @@ public class UnitParser
 	 * @param key
 	 * @return
 	 */
-	public boolean isUnit(String key)
+	public boolean isUnit(final String key)
 	{
 		return unitKeys.contains(key);
 	}
@@ -157,7 +158,7 @@ public class UnitParser
 	 * @param key
 	 * @return
 	 */
-	public void addUnitKey(String key)
+	public void addUnitKey(final String key)
 	{
 		unitKeys.add(key);
 	}
@@ -178,6 +179,7 @@ public class UnitParser
 			unitKeys.add(AttributeName.CENTER);
 			unitKeys.add(AttributeName.CUTBOX);
 			unitKeys.add(AttributeName.DIAMETER);
+			unitKeys.add(AttributeName.DIMENSION);
 			unitKeys.add(ElementName.DIMENSIONS);
 			unitKeys.add(AttributeName.EXTENT);
 			unitKeys.add(ElementName.FINISHEDDIMENSIONS);
@@ -241,7 +243,7 @@ public class UnitParser
 	 * @param val
 	 * @return
 	 */
-	public String extractUnits(String key, String val)
+	public String extractUnits(final String key, final String val)
 	{
 		if (key != null && unitKeys.contains(key))
 		{
@@ -254,8 +256,8 @@ public class UnitParser
 	}
 
 	/**
-	 * extract units if and only if the string has a pattern of "<##>mm" or "<##>cm"or "<##>in" whitespace characters may be placed between the numbers and the units
-	 * the unit case is ignored
+	 * extract units if and only if the string has a pattern of "<##>mm" or "<##>cm"or "<##>in" whitespace characters may be placed between the numbers and the units the unit case is ignored
+	 *
 	 * @param val the string to convert
 	 * @return the converted unit string
 	 */
@@ -269,7 +271,7 @@ public class UnitParser
 		final VString v = StringUtil.tokenize(val, JDFConstants.BLANK, false);
 		final VString keep = new VString(v);
 		boolean oneGood = false;
-		int size = v.size();
+		final int size = v.size();
 		for (int i = 0; i < size; i++)
 		{
 			String tmp = v.get(i).toLowerCase();
@@ -318,7 +320,7 @@ public class UnitParser
 				else
 				{
 					oneGood = true;
-					double dbl = StringUtil.parseDouble(tmp, -1) * factor;
+					final double dbl = StringUtil.parseDouble(tmp, -1) * factor;
 					v.setElementAt(new NumberFormatter().formatDouble(dbl, precision), i);
 				}
 			}
@@ -338,15 +340,17 @@ public class UnitParser
 
 	/**
 	 * Setter for precision attribute.
+	 *
 	 * @param precision the precision to set
 	 */
-	public void setPrecision(int precision)
+	public void setPrecision(final int precision)
 	{
 		this.precision = precision;
 	}
 
 	/**
 	 * Getter for precision attribute.
+	 *
 	 * @return the precision
 	 */
 	public int getPrecision()

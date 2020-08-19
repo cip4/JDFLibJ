@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,7 +95,7 @@ public class UrlPartTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNotNull(writeToURL);
 		assertTrue(writeToURL.toString().contains("<not buffered>"));
 		writeToURL.buffer();
@@ -110,7 +110,7 @@ public class UrlPartTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNotNull(writeToURL);
 		assertNull(writeToURL.getXMLDoc());
 	}
@@ -123,11 +123,26 @@ public class UrlPartTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNotNull(writeToURL);
 		writeToURL.buffer();
-		ByteArrayIOStream byteArrayIOStream = new ByteArrayIOStream(writeToURL.getResponseStream());
+		final ByteArrayIOStream byteArrayIOStream = new ByteArrayIOStream(writeToURL.getResponseStream());
 		byteArrayIOStream.close();
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testWriteStream()
+	{
+		if (!isTestNetwork())
+			return;
+		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		assertNotNull(writeToURL);
+		final File file = new File(sm_dirTestDataTemp + "s1.html");
+		FileUtil.writeFile(writeToURL, file);
+		assertTrue(file.exists());
 	}
 
 	/**
@@ -137,7 +152,7 @@ public class UrlPartTest extends JDFTestCaseBase
 	@Test
 	public void testFile() throws Exception
 	{
-		UrlPart p = new UrlPart(new File("Test.xml"));
+		final UrlPart p = new UrlPart(new File("Test.xml"));
 		assertEquals(p.getContentType(), UrlUtil.TEXT_XML);
 	}
 

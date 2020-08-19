@@ -2089,12 +2089,12 @@ public class StringUtil
 	 */
 	public static boolean isInteger(final String str)
 	{
-		if (str == null)
+		if (str == null || str.isEmpty())
 		{
 			return false;
 		}
-		final String intStr = str.trim();
-		if (intStr.length() == 0)
+		String intStr = str.charAt(0) == ' ' ? str.trim() : str;
+		if (intStr.isEmpty())
 		{
 			return false;
 		}
@@ -2102,17 +2102,14 @@ public class StringUtil
 		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I')
 		{
 
-			if (intStr.equals(JDFConstants.POSINF))
-			{
-				return true;
-			}
+			if (str.charAt(0) != ' ')
+				intStr = str.trim();
 
-			if (intStr.equals(JDFConstants.NEGINF))
+			if (intStr.equals(JDFConstants.POSINF) || intStr.equals(JDFConstants.NEGINF))
 			{
 				return true;
 			}
-			// hack for xml schema conformance, which uses unbounded to define +
-			// infinity
+			// hack for xml schema conformance, which uses unbounded to define + infinity
 			if (intStr.equals("unbounded"))
 			{
 				return true;

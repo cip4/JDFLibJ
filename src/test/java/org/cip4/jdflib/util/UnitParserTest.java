@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -158,9 +158,11 @@ public class UnitParserTest extends JDFTestCaseBase
 		final XJDFHelper h = new XJDFHelper("1cm", "2mm", null);
 		final KElement li = h.appendProduct().appendIntent("LayoutIntent").getCreateResource();
 		li.setAttribute("Dimensions", "10cm 5cm");
+		li.setAttribute("Dimension", "10cm 5cm");
 		li.setAttribute("FinishedDimensions", "10cm 5cm 0cm");
 		unitParser.setPrecision(0);
 		unitParser.convertUnits(li);
+		assertEquals(li.getAttribute("Dimension"), "283 142");
 		assertEquals(li.getAttribute("Dimensions"), "283 142");
 		assertEquals(li.getAttribute("FinishedDimensions"), "283 142 0");
 	}

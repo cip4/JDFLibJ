@@ -2762,6 +2762,30 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * Gets an atrribute if the local name
+	 *
+	 * @return VString: a vector of all attribute keys in 'this'
+	 */
+	public String getAttributeIgnoreCase(final String key)
+	{
+		final NamedNodeMap nm = getAttributes();
+		if (nm != null && key != null)
+		{
+			final int siz = nm.getLength();
+
+			for (int i = 0; i < siz; i++)
+			{
+				final Node a = nm.item(i);
+				if (key.equalsIgnoreCase(a.getLocalName()) || key.equalsIgnoreCase(a.getNodeName()))
+				{
+					return a.getNodeValue();
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * looking for a specified target with an id, e.g. resource.<br>
 	 * Offers access to exactly KElements implementation of GetTarget even if called for an instance of one of it's subclasses.
 	 * <p>
