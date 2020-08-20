@@ -275,8 +275,7 @@ public class OrderedTaskQueue extends Thread
 	{
 		idle.set(-1);
 		theMap.remove(getName());
-		ThreadUtil.notify(mutex);
-		ThreadUtil.join(this, 10);
+		ThreadUtil.notifyAll(mutex);
 	}
 
 	/**
