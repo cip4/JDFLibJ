@@ -104,7 +104,7 @@ public class FileSorterTest extends JDFTestCaseBase
 		{
 			assertEquals(names.get(i), list[i].getName());
 		}
-		list = fs.sortLastModified(true);
+		list = fs.sortLastModified(true, 1000);
 		for (int i = 0; i < names.size() - 1; i++)
 		{
 			assertEquals(names.get(names.size() - i - 1), list[i].getName());

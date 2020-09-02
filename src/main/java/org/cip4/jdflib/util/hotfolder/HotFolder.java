@@ -170,7 +170,7 @@ public class HotFolder
 				if (!vf.isEmpty())
 				{
 					files = vf.toArray(new File[0]);
-					files = new FileSorter(files).sortLastModified(false, 42000);
+					files = new FileSorter(files).sortLastModified(false);
 
 					for (final File f : files) // the file is new - add to list for next check
 					{

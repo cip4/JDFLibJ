@@ -312,7 +312,7 @@ class StorageHotFolderListener implements HotFolderListener
 		if (nHot % check == 0)
 		{
 			final FileSorter fs = new FileSorter(bOK ? okStorage : errorStorage);
-			final File[] list = fs.sortLastModified(true, 42000);
+			final File[] list = fs.sortLastModified(true);
 			final List<File> vList = new ArrayList<>();
 			for (final File f : list)
 			{

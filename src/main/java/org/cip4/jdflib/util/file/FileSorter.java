@@ -82,7 +82,7 @@ public class FileSorter
 	 */
 	public File[] sortLastModified(final boolean bNewFirst)
 	{
-		for (int i = 0; i < 3; i++)
+		for (int i = 1; i < 7; i++)
 		{
 			try
 			{
@@ -92,7 +92,7 @@ public class FileSorter
 			}
 			catch (final Exception x)
 			{
-				ThreadUtil.sleep(123);
+				ThreadUtil.sleep(123 * i);
 			}
 		}
 		return list;
