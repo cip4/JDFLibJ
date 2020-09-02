@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -77,6 +77,35 @@ public class FileSorterTest extends JDFTestCaseBase
 		}
 		list = fs.sortLastModified(true);
 		for (int i = 0; i < names.size(); i++)
+		{
+			assertEquals(names.get(names.size() - i - 1), list[i].getName());
+		}
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	public void testSortLastModifiedAge() throws IOException
+	{
+		final File dir = new File(sm_dirTestDataTemp + "filesort2");
+		FileUtil.deleteAll(dir);
+		dir.mkdirs();
+		final VString names = new VString("a c b", null);
+		for (final String s : names)
+		{
+			FileUtil.getFileInDirectory(dir, new File(s)).createNewFile();
+			ThreadUtil.sleep(1100);
+		}
+		final FileSorter fs = new FileSorter(dir);
+		File[] list = fs.sortLastModified(false, 1000);
+		for (int i = 0; i < names.size() - 1; i++)
+		{
+			assertEquals(names.get(i), list[i].getName());
+		}
+		list = fs.sortLastModified(true);
+		for (int i = 0; i < names.size() - 1; i++)
 		{
 			assertEquals(names.get(names.size() - i - 1), list[i].getName());
 		}

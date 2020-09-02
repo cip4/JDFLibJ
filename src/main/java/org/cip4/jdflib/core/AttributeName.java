@@ -282,26 +282,17 @@ public final class AttributeName
 
 	/** */
 	public static final String BACKBRIGHTNESS = "BackBrightness";
-	/** */
 	public static final String BACKCOATINGDETAIL = "BackCoatingDetail";
-	/** */
 	public static final String BACKCOATINGS = "BackCoatings";
-	/** */
 	public static final String BACKFACEPAGES = "BackFacePages";
-	/** */
 	public static final String BACKGLOSSVALUE = "BackGlossValue";
-	/** */
 	public static final String BACKING = "Backing";
 	public static final String BACKISOPAPERSUBSTRATE = "BackISOPaperSubstrate";
-	/** */
+	public static final String BACKLABCOLORVALUEE = "BackLabColorValue";
 	public static final String BACKMARKLIST = "BackMarkList";
-	/** */
 	public static final String BACKOVERFOLD = "BackOverfold";
-	/** */
 	public static final String BACKPAGES = "BackPages";
-	/** */
 	public static final String BACKSIDE = "BackSide";
-	/** */
 	public static final String BACKSPREAD = "BackSpread";
 	/** */
 	public static final String BADFEEDQUALITY = "BadFeedQuality";

@@ -161,8 +161,12 @@ class StorageHotFolderListener implements HotFolderListener
 		}
 		copyCompleted(storedFiles.getA(), b);
 		log.info("deleting tmp file: " + storedFiles.getB());
-		FileUtil.deleteAll(storedFiles.getB());
+		final boolean deleted = FileUtil.deleteAll(storedFiles.getB());
+		if (!deleted)
+		{
+			log.warn("Problems deleting: " + storedFiles.getB());
 
+		}
 		return b;
 	}
 
@@ -301,14 +305,14 @@ class StorageHotFolderListener implements HotFolderListener
 	 *
 	 * @param bOK if true cleanup the ok folder, else the error folder
 	 */
-	private void cleanup(final boolean bOK)
+	void cleanup(final boolean bOK)
 	{
 		final int nHot = bOK ? nHotOK.incrementAndGet() : nHotError.incrementAndGet();
 		final int check = Math.max(1, maxAux / 4);
 		if (nHot % check == 0)
 		{
 			final FileSorter fs = new FileSorter(bOK ? okStorage : errorStorage);
-			final File[] list = fs.sortLastModified(true);
+			final File[] list = fs.sortLastModified(true, 42000);
 			final List<File> vList = new ArrayList<>();
 			for (final File f : list)
 			{
