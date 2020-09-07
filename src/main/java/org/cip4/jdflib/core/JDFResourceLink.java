@@ -739,14 +739,15 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		{
 			final PartitionGetter partitionGetter = new PartitionGetter(linkRoot);
 			partitionGetter.setFollowIdentical(true);
-			return partitionGetter.getPartition(vmParts.get(0), linkRoot.getPartUsage());
+			final JDFResource partition = partitionGetter.getPartition(vmParts.get(0), linkRoot.getPartUsage());
+			if (partition != null)
+			{
+				return partition;
+			}
 		}
-		else
-		{
-			final VElement v = getMapTargetVector(vmParts, -1, true);
-			final JDFResource commonAncestor = (JDFResource) v.getCommonAncestor();
-			return commonAncestor;
-		}
+		final VElement v = getMapTargetVector(vmParts, -1, true);
+		final JDFResource commonAncestor = (JDFResource) v.getCommonAncestor();
+		return commonAncestor;
 	}
 
 	/**
