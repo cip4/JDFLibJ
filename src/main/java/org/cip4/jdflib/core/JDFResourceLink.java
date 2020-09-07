@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -727,11 +727,26 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 * @return JDFResource - the first leaf that is referenced by this ResourceLink
 	 */
 	@Override
-	@SuppressWarnings(value = { "deprecation" })
 	public JDFResource getTarget()
 	{
-		final VElement v = getTargetVector(-1);
-		return (JDFResource) v.getCommonAncestor();
+		final VJDFAttributeMap vmParts = getPartMapVector();
+		final JDFResource linkRoot = getLinkRoot();
+		if (VJDFAttributeMap.isEmpty(vmParts))
+		{
+			return linkRoot;
+		}
+		else if (linkRoot != null && vmParts.size() == 1)
+		{
+			final PartitionGetter partitionGetter = new PartitionGetter(linkRoot);
+			partitionGetter.setFollowIdentical(true);
+			return partitionGetter.getPartition(vmParts.get(0), linkRoot.getPartUsage());
+		}
+		else
+		{
+			final VElement v = getMapTargetVector(vmParts, -1, true);
+			final JDFResource commonAncestor = (JDFResource) v.getCommonAncestor();
+			return commonAncestor;
+		}
 	}
 
 	/**

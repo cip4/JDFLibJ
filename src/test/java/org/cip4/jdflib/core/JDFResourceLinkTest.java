@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -104,7 +104,7 @@ import org.junit.Test;
 /**
  * @author MuchaD
  *
- * This implements the first fixture with unit tests for class JDFElement.
+ *         This implements the first fixture with unit tests for class JDFElement.
  */
 public class JDFResourceLinkTest extends JDFTestCaseBase
 {
@@ -722,8 +722,8 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	* Method testGetTarget * @throws Exception
-	*/
+	 * Method testGetTarget * @throws Exception
+	 */
 	@Test
 	public void testGetTargetPartVersionMulti()
 	{
@@ -999,6 +999,33 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		xm.setPartUsage(EnumPartUsage.Sparse);
 		assertEquals(rl.getTarget(), xmPart);
 		assertEquals(rl.getTargetVector(0).size(), 1);
+	}
+
+	/**
+	 * Method testGetTarget
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testGetTargetIntermediate() throws Exception
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource xm = n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+		xm.setPartUsage(EnumPartUsage.Implicit);
+		xm.setPartUsage(EnumPartUsage.Implicit);
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		xm.getCreatePartition(mPart, null);
+		mPart.put("SheetName", "S12");
+		xm.getCreatePartition(mPart, null);
+		final JDFExposedMedia xmSheet = (JDFExposedMedia) xm.getPartition(mPart, null);
+		final JDFAttributeMap m2 = mPart.clone();
+		mPart.put("Side", "Front");
+		xm.getCreatePartition(mPart, null);
+
+		final JDFResourceLink rl = n.getLink(xm, null);
+		rl.setPartMap(m2);
+
+		assertEquals(xmSheet, rl.getTarget());
 	}
 
 	/**
