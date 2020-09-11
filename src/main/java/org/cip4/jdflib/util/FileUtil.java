@@ -157,7 +157,7 @@ public class FileUtil
 	public static Vector<File> listFilesInTree(final File dir, final FileFilter filter)
 	{
 		Vector<File> v = null;
-		if (dir == null || filter == null)
+		if (dir == null)
 		{
 			return null;
 		}
@@ -186,9 +186,13 @@ public class FileUtil
 	{
 		Vector<File> v = null;
 
-		if (dir == null || expression == null)
+		if (dir == null)
 		{
 			return null;
+		}
+		if (expression == null)
+		{
+			return listFilesInTree(dir, (FileFilter) null);
 		}
 
 		final int posSlash = expression.indexOf('/');

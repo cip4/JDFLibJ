@@ -52,6 +52,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -356,6 +357,18 @@ public class FileUtilTest extends JDFTestCaseBase
 		final Vector<File> list = FileUtil.listFilesInTree(root, new FileUtil.DirectoryFileFilter());
 		for (final File f : list)
 			assertTrue(f.isDirectory());
+		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2a"))));
+		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2b"))));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testListTreeFilterNull()
+	{
+		final File root = new File(sm_dirTestData + File.separator + "dir1");
+		final Vector<File> list = FileUtil.listFilesInTree(root, (FileFilter) null);
 		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2a"))));
 		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2b"))));
 	}
