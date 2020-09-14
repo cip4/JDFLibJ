@@ -218,6 +218,20 @@ public class FixVersionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testNamespaceRetain2()
+	{
+		n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final KElement e = n.appendElement("foo:bar", "http://www.foo.com/schema");
+		final JDFNode n0 = (JDFNode) e.appendElement(ElementName.JDF);
+		n0.appendStatusPool();
+		n.fixVersion(EnumVersion.Version_1_3);
+		assertNotNull(n0.getStatusPool());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testNamespaceRetainZappDeprecated()
 	{
 		n = new JDFDoc(ElementName.JDF).getJDFRoot();
