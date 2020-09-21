@@ -101,10 +101,10 @@ public class JDFRGBColor extends JDFNumList
 	}
 
 	/**
-	 * factory for JDFXYPair that silently returns null in case of illegal strings
+	 * factory for RGBColors that silently returns null in case of illegal strings also applies some voodo to parse html hex strings
 	 *
 	 * @param s the string to parse
-	 * @return the JDFXYPair, null if s is not compatible
+	 * @return the RGB color, null if s is not compatible
 	 */
 	public static JDFRGBColor createRGBColor(final String s)
 	{
@@ -116,13 +116,30 @@ public class JDFRGBColor extends JDFNumList
 			}
 			catch (final DataFormatException x)
 			{
-				return null;
+				// nop
 			}
+
+			try
+			{
+
+				final String s2 = StringUtil.rightStr(s, 6);
+				if (s2.length() == 6)
+				{
+					final int hex = Integer.valueOf(s2, 16);
+					final JDFRGBColor rgb = new JDFRGBColor();
+					rgb.setB255(hex & 0xff);
+					rgb.setG255((hex & 0xff00) >> 8);
+					rgb.setR255((hex & 0xff0000) >> 16);
+					return rgb;
+				}
+			}
+			catch (final Exception x)
+			{
+				// nop
+			}
+
 		}
-		else
-		{
-			return null;
-		}
+		return null;
 	}
 
 	/**

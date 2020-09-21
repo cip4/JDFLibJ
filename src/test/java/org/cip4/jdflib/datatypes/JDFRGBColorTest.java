@@ -75,6 +75,18 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testFromHTMLcolor()
+	{
+		final JDFRGBColor c = JDFRGBColor.createRGBColor("#f08123");
+		assertEquals(0xf0, c.getR255());
+		assertEquals(0x81, c.getG255());
+		assertEquals(0x23, c.getB255());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testgetHTMLcolorInt()
 	{
 		final JDFRGBColor c = new JDFRGBColor(255, 255, 255);

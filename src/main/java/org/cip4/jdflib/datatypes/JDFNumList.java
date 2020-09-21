@@ -85,7 +85,7 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -256,7 +256,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	public JDFNumList setString(final String string) throws DataFormatException
 	{
 		clear();
-		final VString v = StringUtil.tokenize(string, null, false);
+		final StringArray v = StringArray.getVString(string, null);
 		if (v != null)
 		{
 			final boolean bInteger = this instanceof JDFIntegerList;
@@ -600,7 +600,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 */
 	public boolean isValidString(final String st)
 	{
-		final VString v = StringUtil.tokenize(st, null, false);
+		final StringArray v = StringArray.getVString(st, null);
 		if (v != null)
 		{
 			final int size = v.size();
