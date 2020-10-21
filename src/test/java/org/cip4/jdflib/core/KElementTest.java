@@ -4057,6 +4057,27 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testToValueString()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final KElement root = d.getRoot();
+		assertFalse(root.toValueString((char) 7).contains("<doc/>"));
+		root.setAttribute("test", "a");
+		root.setAttribute("test2", "b");
+		assertTrue(root.toValueString((char) 7).contains("a"));
+		assertFalse(root.toValueString((char) 7).contains("test"));
+		assertFalse(root.toValueString((char) 7).contains("null"));
+		root.appendElement("a").setText("c");
+		assertTrue(root.toValueString((char) 7).contains("c"));
+		root.appendElement("a").setAttribute("d", "e");
+		assertTrue(root.toValueString((char) 7).contains("e"));
+		assertFalse(root.toValueString((char) 7).contains("d"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testToXMLParse()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);

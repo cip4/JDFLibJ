@@ -4467,6 +4467,32 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * get a concatinated string of all values
+	 *
+	 * @return
+	 *
+	 */
+	public String toValueString(final char sep)
+	{
+		final StringBuilder b = new StringBuilder();
+		final String text = getText();
+		if (text != null)
+			b.append(text);
+		b.append(sep);
+		for (final String v : getAttributeMap_KElement().values())
+		{
+			b.append(v).append(sep);
+		}
+		KElement e = getFirstChildElement();
+		while (e != null)
+		{
+			b.append(e.toValueString(sep));
+			e = e.getNextSiblingElement();
+		}
+		return b.toString();
+	}
+
+	/**
 	 * this to string, used for debug purpose mostly
 	 *
 	 * @return string representativ of this
