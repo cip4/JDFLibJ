@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -72,11 +72,11 @@ public class XPathWalkerTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testFile() throws Exception
+	public synchronized void testFile() throws Exception
 	{
-		final String s = sm_dirTestData + File.separator + testFile;
+		final String s = sm_dirTestData + testFile;
 		final JDFDoc d = new JDFParser().parseFile(s);
-		final XPathWalker w = new XPathWalker(new File(sm_dirTestDataTemp + File.separator + UrlUtil.newExtension(testFile, "txt")));
+		final XPathWalker w = new XPathWalker(new File(sm_dirTestDataTemp + UrlUtil.newExtension(testFile, "txt")));
 		w.setAttribute(true);
 		w.setAttributeValue(true);
 		w.walkAll(d.getRoot());
@@ -92,7 +92,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFParser().parseFile(sm_dirTestData + "bigWhite.jdf");
 		for (int i = 0; i < 3; i++)
 		{
-			final XPathWalker w = new XPathWalker(new File(sm_dirTestDataTemp + "bigWhite.txt"));
+			final XPathWalker w = new XPathWalker(new File(sm_dirTestDataTemp + "bigWhite" + i + ".txt"));
 			w.setAttribute(true);
 			w.setAttributeValue(true);
 			ct.start();
@@ -169,7 +169,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testRead() throws Exception
+	public synchronized void testRead() throws Exception
 	{
 		final long n0 = System.currentTimeMillis();
 		testFile();
@@ -207,5 +207,16 @@ public class XPathWalkerTest extends JDFTestCaseBase
 			System.out.println("write time: " + (n3 - n2));
 			r.close();
 		}
+	}
+
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	public void setUp() throws Exception
+	{
+
+		super.setUp();
+		new File(sm_dirTestDataTemp).mkdirs();
 	}
 }
