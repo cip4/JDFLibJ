@@ -851,6 +851,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.parseLong("", 0L), 0L);
 		assertEquals(StringUtil.parseLong("1234567890123456", 0L), 1234567890123456L);
 		assertEquals(StringUtil.parseLong("INF", 0L), Long.MAX_VALUE);
+		assertEquals(StringUtil.parseLong("unbounded", 0L), Long.MAX_VALUE);
 		assertEquals(StringUtil.parseLong("-inf", 0L), Long.MIN_VALUE);
 		assertEquals(StringUtil.parseLong("12341234561234567834556", 0), Long.MAX_VALUE);
 		assertEquals(StringUtil.parseLong("-12341234561234567834556", 0), Long.MIN_VALUE);

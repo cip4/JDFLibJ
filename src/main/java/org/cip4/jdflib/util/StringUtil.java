@@ -2099,7 +2099,7 @@ public class StringUtil
 			return false;
 		}
 		final int first = intStr.charAt(0);
-		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I')
+		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I' || first == 'u')
 		{
 
 			if (str.charAt(0) != ' ')
@@ -2146,7 +2146,7 @@ public class StringUtil
 			return false;
 		}
 		final int first = intStr.charAt(0);
-		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I' || first == '.')
+		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I' || first == 'u' || first == '.')
 		{
 
 			if (intStr.equals(JDFConstants.POSINF))
@@ -2467,10 +2467,10 @@ public class StringUtil
 		if (s.isEmpty())
 			return def;
 		final int first = s.charAt(0);
-		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I' || first == '.')
+		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I' || first == 'u' || first == '.')
 		{
 
-			if (s.equalsIgnoreCase(JDFConstants.POSINF))
+			if (s.equalsIgnoreCase(JDFConstants.POSINF) || s.equalsIgnoreCase(JDFConstants.UNBOUNDED))
 			{
 				return Double.MAX_VALUE;
 			}
@@ -2548,7 +2548,7 @@ public class StringUtil
 		if (s.isEmpty())
 			return def;
 		final int first = s.charAt(0);
-		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I')
+		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I' || first == 'u')
 		{
 			try
 			{
@@ -2573,7 +2573,7 @@ public class StringUtil
 				}
 			}
 
-			if (s.equalsIgnoreCase(JDFConstants.POSINF))
+			if (s.equalsIgnoreCase(JDFConstants.POSINF) || s.equalsIgnoreCase(JDFConstants.UNBOUNDED))
 			{
 				return Integer.MAX_VALUE;
 			}
@@ -2622,7 +2622,7 @@ public class StringUtil
 		if (s.isEmpty())
 			return def;
 		final int first = s.charAt(0);
-		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I')
+		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I' || first == 'u')
 		{
 
 			try
@@ -2647,7 +2647,7 @@ public class StringUtil
 					return def;
 				}
 			}
-			if (s.equalsIgnoreCase(JDFConstants.POSINF))
+			if (s.equalsIgnoreCase(JDFConstants.POSINF) || s.equalsIgnoreCase(JDFConstants.UNBOUNDED))
 			{
 				return Long.MAX_VALUE;
 			}
