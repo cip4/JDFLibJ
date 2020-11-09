@@ -79,6 +79,7 @@ import org.cip4.jdflib.util.mime.MimeHelper;
  */
 public class UrlUtil
 {
+	public static final int MAX_STREAM = 12345678;
 
 	/**
 	 * @deprecated use the real class

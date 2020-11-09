@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -60,6 +60,7 @@ import org.cip4.jdflib.util.net.ProxyUtil;
 
 class URLWriter
 {
+
 	/**
 	 * @see java.lang.Object#toString()
 	 */
@@ -115,7 +116,7 @@ class URLWriter
 			contentType = UrlUtil.TEXT_UNKNOWN;
 		this.contentType = StringUtil.token(contentType, 0, "\r\n");
 		this.details = details;
-		this.stream = (is == null) ? null : new ByteArrayIOFileStream(is, 1234567);
+		this.stream = (is == null) ? null : new ByteArrayIOFileStream(is, UrlUtil.MAX_STREAM);
 		this.writer = null;
 	}
 
@@ -125,7 +126,7 @@ class URLWriter
 		if (inWriter == null || UrlUtil.isFile(strUrl))
 			return null;
 
-		final ByteArrayIOStream bufStream = new ByteArrayIOFileStream(1234567);
+		final ByteArrayIOStream bufStream = new ByteArrayIOFileStream(UrlUtil.MAX_STREAM);
 		try
 		{
 			inWriter.writeStream(bufStream);

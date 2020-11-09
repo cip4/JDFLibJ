@@ -236,7 +236,7 @@ public class UrlPart implements IPollDetails, IStreamWriter
 	{
 		if (bufferStream == null)
 		{
-			bufferStream = new ByteArrayIOFileStream(inStream, 10000000);
+			bufferStream = new ByteArrayIOFileStream(inStream, UrlUtil.MAX_STREAM);
 		}
 	}
 
