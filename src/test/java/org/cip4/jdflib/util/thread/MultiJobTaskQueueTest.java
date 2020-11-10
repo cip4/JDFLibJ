@@ -113,11 +113,11 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 		assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 10; i++)
 			q.queue(new WaitRunner(i, 100), "" + (i % 3));
-		q.start();
+
 		assertEquals(q.getAvQueue(), 0);
 		for (int i = 0; i < 342; i++)
 		{
-			ThreadUtil.sleep(14);
+			ThreadUtil.sleep(42);
 			if (q.size() <= 7)
 			{
 				break;
