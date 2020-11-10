@@ -58,7 +58,7 @@ import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.net.HTTPDetails;
 import org.cip4.jdflib.util.net.ProxyUtil;
 
-class URLWriter
+public class URLWriter
 {
 
 	/**
