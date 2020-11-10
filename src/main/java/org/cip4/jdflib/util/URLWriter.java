@@ -67,11 +67,11 @@ class URLWriter
 	@Override
 	public String toString()
 	{
-		return "UrlWriter: " + method + " / " + contentType + " --> " + strUrl;
+		return "UrlWriter: " + method + " / " + contentType + " --> " + url;
 	}
 
 	static final Log log = LogFactory.getLog(URLWriter.class);
-	private final String strUrl;
+	private final URL url;
 	private final ByteArrayIOStream stream;
 	private final String method;
 	private final String contentType;
@@ -87,9 +87,9 @@ class URLWriter
 	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
 	 * @param details
 	 */
-	public URLWriter(final String strUrl, final IStreamWriter streamWriter, final String method, String contentType, final HTTPDetails details)
+	public URLWriter(final URL url, final IStreamWriter streamWriter, final String method, String contentType, final HTTPDetails details)
 	{
-		this.strUrl = strUrl;
+		this.url = url;
 		this.method = method;
 		if (contentType == null)
 			contentType = UrlUtil.TEXT_UNKNOWN;
@@ -97,7 +97,6 @@ class URLWriter
 		this.details = details;
 		this.stream = getStream(streamWriter);
 		this.writer = stream != null ? null : streamWriter;
-
 	}
 
 	/**
@@ -108,9 +107,35 @@ class URLWriter
 	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
 	 * @param details
 	 */
-	public URLWriter(final InputStream is, final String strUrl, final String method, String contentType, final HTTPDetails details)
+	public URLWriter(final String strUrl, final IStreamWriter streamWriter, final String method, final String contentType, final HTTPDetails details)
 	{
-		this.strUrl = strUrl;
+		this(UrlUtil.stringToURL(strUrl), streamWriter, method, contentType, details);
+	}
+
+	/**
+	 * @param strUrl the URL to write to
+	 * @param stream the input stream to read from
+	 * @param streamWriter
+	 * @param method HEAD, GET or POST
+	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
+	 * @param details
+	 */
+	public URLWriter(final InputStream is, final String strUrl, final String method, final String contentType, final HTTPDetails details)
+	{
+		this(is, UrlUtil.stringToURL(strUrl), method, contentType, details);
+	}
+
+	/**
+	 * @param strUrl the URL to write to
+	 * @param stream the input stream to read from
+	 * @param streamWriter
+	 * @param method HEAD, GET or POST
+	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
+	 * @param details
+	 */
+	public URLWriter(final InputStream is, final URL url, final String method, String contentType, final HTTPDetails details)
+	{
+		this.url = url;
 		this.method = method;
 		if (contentType == null)
 			contentType = UrlUtil.TEXT_UNKNOWN;
@@ -123,7 +148,7 @@ class URLWriter
 	private ByteArrayIOStream getStream(final IStreamWriter inWriter)
 	{
 		// we can retain the original - we never need to buffer
-		if (inWriter == null || UrlUtil.isFile(strUrl))
+		if (inWriter == null || UrlUtil.isFile(UrlUtil.urlToString(url)))
 			return null;
 
 		final ByteArrayIOStream bufStream = new ByteArrayIOFileStream(UrlUtil.MAX_STREAM);
@@ -149,13 +174,12 @@ class URLWriter
 		UrlPart urlPart = null;
 		UrlPart fallBack = null;
 
-		if (UrlUtil.isFile(strUrl))
+		if (UrlUtil.isFile(UrlUtil.urlToString(url)))
 		{
 			urlPart = writeFile();
 		}
 		else
 		{
-			final URL url = UrlUtil.stringToURL(strUrl);
 			final URI uri = ProxyUtil.getHostURI(url);
 			if (uri == null) // redundant but makes compiler happy
 				return null;
@@ -177,7 +201,7 @@ class URLWriter
 					else if (UrlUtil.isRedirect(responseCode) && (details == null || details.getRedirect() < 42))
 					{
 						String newLocation = urlPart.getConnection().getHeaderField("Location");
-						if (StringUtil.isEmpty(newLocation) && UrlUtil.isHttp(strUrl))
+						if (StringUtil.isEmpty(newLocation) && UrlUtil.isHttp(UrlUtil.urlToString(url)))
 						{
 							newLocation = StringUtil.replaceToken(newLocation, 0, JDFConstants.COLON, "https");
 						}
@@ -214,7 +238,7 @@ class URLWriter
 	 */
 	private UrlPart writeFile()
 	{
-		File f = UrlUtil.urlToFile(strUrl);
+		File f = UrlUtil.urlToFile(UrlUtil.urlToString(url));
 		if (writer != null)
 		{
 			f = FileUtil.writeFile(writer, f);
@@ -240,7 +264,6 @@ class URLWriter
 	 */
 	private UrlPart callProxy(final Proxy proxy, final boolean bWantLog)
 	{
-		final URL url = UrlUtil.stringToURL(strUrl);
 
 		try
 		{
@@ -259,7 +282,7 @@ class URLWriter
 				output(httpUrlConnection);
 				return new UrlPart(httpUrlConnection);
 			}
-			else if (UrlUtil.isFtp(strUrl))
+			else if (UrlUtil.isFtp(UrlUtil.urlToString(url)))
 			{
 				return new UrlPart(urlConnection, false);
 			}
@@ -268,7 +291,7 @@ class URLWriter
 		{
 			if (bWantLog && (nLogged++ < 10 || nLogged % 100 == 0))
 			{
-				log.warn(x.getClass().getCanonicalName() + " snafu #" + nLogged + " writing to url: " + strUrl + " " + x.getMessage());
+				log.warn(x.getClass().getCanonicalName() + " snafu #" + nLogged + " writing to url: " + url + " " + x.getMessage());
 			}
 		}
 		return null;
