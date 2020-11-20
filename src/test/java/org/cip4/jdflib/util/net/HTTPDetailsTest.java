@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,12 +40,14 @@ package org.cip4.jdflib.util.net;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Test;
 
@@ -117,6 +119,20 @@ public class HTTPDetailsTest
 		d.setBearerToken("abc");
 		d.applyTo(uc);
 		assertEquals("Bearer abc", uc.getRequestProperty(UrlUtil.AUTHORIZATION));
+	}
+
+	/**
+	 * @throws MalformedURLException
+	 *
+	 */
+	@Test
+	public void testAccept() throws MalformedURLException
+	{
+		final HTTPDetails d = new HTTPDetails();
+		d.setAccept(new VString("a/b c/d"));
+		assertEquals("a/b, c/d", d.getHeader(UrlUtil.ACCEPT));
+		d.setAccept(new VString());
+		assertNull(d.getHeader(UrlUtil.ACCEPT));
 	}
 
 	/**

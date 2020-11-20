@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,6 +39,7 @@
 package org.cip4.jdflib.util.net;
 
 import java.net.HttpURLConnection;
+import java.util.List;
 
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -108,6 +109,15 @@ public class HTTPDetails
 	public void setBearerToken(final String bearerToken)
 	{
 		this.bearerToken = bearerToken;
+	}
+
+	/**
+	 * @param contenttypes the content types accepted
+	 */
+	public void setAccept(final List<String> contenttypes)
+	{
+		final String s = StringUtil.setvString(contenttypes, ", ", null, null);
+		setHeader(UrlUtil.ACCEPT, s);
 	}
 
 	public int getRedirect()

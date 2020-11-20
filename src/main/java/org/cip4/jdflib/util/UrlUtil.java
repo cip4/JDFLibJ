@@ -167,6 +167,7 @@ public class UrlUtil
 	/**
 	 *
 	 */
+	public static final String ACCEPT = "accept";
 	public static final String CLOSE = "close";
 
 	/**
