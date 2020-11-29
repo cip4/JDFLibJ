@@ -158,6 +158,6 @@ public class WalkIntent extends WalkXElement
 	{
 		final KElement parent = toCheck.getParentNode_KElement();
 		final boolean bL1 = parent != null && parent.getLocalName().equals(ProductHelper.PRODUCT);
-		return bL1 && super.matches(toCheck) && toCheck.getLocalName().equals(IntentHelper.INTENT);
+		return bL1 && super.matches(toCheck) && toCheck.getLocalName().equals(XJDFConstants.Intent);
 	}
 }

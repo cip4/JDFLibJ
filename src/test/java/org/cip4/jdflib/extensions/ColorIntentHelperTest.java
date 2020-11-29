@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.ColorIntentHelper.EnumSurface;
 import org.junit.Test;
 
 import junit.framework.TestCase;
@@ -80,51 +81,40 @@ import junit.framework.TestCase;
  * @author rainer prosi
  *
  */
-public class IntentHelperTest extends TestCase
+public class ColorIntentHelperTest extends TestCase
 {
-	/**
-	 *
-	 */
-	@Test
-	public void testGetSpan()
-	{
-		final KElement intent = new JDFDoc("Intent").getRoot();
-		intent.appendElement("Comment");
-		intent.appendElement("foo");
-		final IntentHelper intentHelper = new IntentHelper(intent);
-		intentHelper.setSpan("a", "42", "IntegerSpan");
-		intentHelper.setSpan("b/a", "43", "IntegerSpan");
-		assertEquals(intentHelper.getSpan("a"), "42");
-		assertEquals(intentHelper.getSpan("b/a"), "43");
-	}
 
 	/**
 	 *
 	 */
 	@Test
-	public void testSetSpan()
-	{
-		final KElement intent = new JDFDoc("Intent").getRoot();
-		intent.appendElement("foo");
-		final IntentHelper intentHelper = new IntentHelper(intent);
-		intentHelper.setSpan("a", "42");
-		intentHelper.setSpan("b/a", "43");
-		assertEquals(intentHelper.getSpan("a"), "42");
-		assertEquals(intentHelper.getSpan("b/a"), "43");
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	public void testIsIntent()
+	public void testIsColorIntent()
 	{
 		final KElement intent = new JDFDoc(XJDFConstants.Intent).getRoot();
-		intent.setAttribute("Name", "foo");
-		final KElement foo = intent.appendElement("foo");
+		intent.setAttribute("Name", ElementName.COLORINTENT);
+		final KElement foo = intent.appendElement(ElementName.COLORINTENT);
 		final KElement c = intent.appendElement(ElementName.COMMENT);
 		assertTrue(IntentHelper.isIntentResource(foo));
 		assertFalse(IntentHelper.isIntentResource(intent));
 		assertFalse(IntentHelper.isIntentResource(c));
+
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testAppendColorIntent()
+	{
+		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		final ProductHelper ph = theHelper.appendProduct();
+		ColorIntentHelper intent = (ColorIntentHelper) ph.getIntent(ElementName.COLORINTENT);
+		assertNull(intent);
+		intent = (ColorIntentHelper) ph.appendIntent(ElementName.COLORINTENT);
+		intent.setNumColors(2, 6);
+		final KElement sc = intent.getSurfaceColor(EnumSurface.Front);
+		assertEquals("Black Cyan", sc.getAttribute(ElementName.COLORSUSED));
+		final KElement scb = intent.getSurfaceColor(EnumSurface.Back);
+		assertEquals("Black Cyan Magenta Yellow Spot1 Spot2", scb.getAttribute(ElementName.COLORSUSED));
 	}
 }

@@ -55,6 +55,22 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class ProductHelper extends BaseXJDFHelper
 {
+	public enum eProductType
+	{
+		BackCover, BlankBox, BlankSheet, BlankWeb, Body, Book, BookBlock, BookCase, Booklet, Box, Brochure, BusinessCard, Carton, Cover, CoverBoard, CoverLetter, EndSheet, Envelope, FlatBox, FlatWork, FrontCover, Insert, Jacket, Label, Leaflet, Letter, Map, Media, Newspaper, Notebook, Pallet, Postcard, Poster, Proof, ResponseCard, Section, SelfMailer, Spine, SpineBoard, Stack, WrapAroundCover;
+
+		public static eProductType getEnum(String val)
+		{
+			val = StringUtil.normalize(val, false, null);
+			for (final eProductType t : values())
+			{
+				if (t.name().equalsIgnoreCase(val))
+					return t;
+			}
+			return null;
+		}
+	}
+
 	/**
 	 *
 	 */
@@ -123,7 +139,10 @@ public class ProductHelper extends BaseXJDFHelper
 		final KElement intent = theElement.appendElement(XJDFConstants.Intent);
 		intent.appendElement(name);
 		intent.setAttribute(AttributeName.NAME, name);
-		return new IntentHelper(intent);
+		if (ElementName.COLORINTENT.equals(name))
+			return new ColorIntentHelper(intent);
+		else
+			return new IntentHelper(intent);
 	}
 
 	/**
@@ -133,7 +152,12 @@ public class ProductHelper extends BaseXJDFHelper
 	public IntentHelper getIntent(final String name)
 	{
 		final KElement intent = theElement.getChildWithAttribute(XJDFConstants.Intent, AttributeName.NAME, null, name, 0, true);
-		return intent == null ? null : new IntentHelper(intent);
+		if (intent == null)
+			return null;
+		else if (ElementName.COLORINTENT.equals(name))
+			return new ColorIntentHelper(intent);
+		else
+			return new IntentHelper(intent);
 	}
 
 	/**
@@ -242,11 +266,19 @@ public class ProductHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * @return the productID of the product
+	 * @return the product typeof the product
 	 */
 	public String getProductType()
 	{
 		return theElement.getNonEmpty(AttributeName.PRODUCTTYPE);
+	}
+
+	/**
+	 * @return the productID of the product
+	 */
+	public eProductType getProductTypeEnum()
+	{
+		return eProductType.getEnum(theElement.getNonEmpty(AttributeName.PRODUCTTYPE));
 	}
 
 	/**
@@ -256,6 +288,15 @@ public class ProductHelper extends BaseXJDFHelper
 	public void setProductType(final String productType)
 	{
 		theElement.setNonEmpty(AttributeName.PRODUCTTYPE, productType);
+	}
+
+	/**
+	 *
+	 * @param productType
+	 */
+	public void setProductType(final eProductType productType)
+	{
+		theElement.setNonEmpty(AttributeName.PRODUCTTYPE, productType.name());
 	}
 
 	/**
@@ -523,8 +564,7 @@ public class ProductHelper extends BaseXJDFHelper
 		if (!b && theElement.getBoolAttribute(rootProduct, null, true))
 		{
 			final KElement list = theElement.getParentNode_KElement();
-			b = (list != null && list.getElement(XJDFConstants.Product, null, 0) == theElement
-					&& list.getChildWithAttribute(XJDFConstants.Product, rootProduct, null, "true", 0, true) == null);
+			b = (list != null && list.getElement(XJDFConstants.Product, null, 0) == theElement && list.getChildWithAttribute(XJDFConstants.Product, rootProduct, null, "true", 0, true) == null);
 		}
 		return b;
 	}

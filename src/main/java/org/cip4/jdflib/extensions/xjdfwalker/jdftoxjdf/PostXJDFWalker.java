@@ -1398,7 +1398,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return IntentHelper.INTENT.equals(toCheck.getLocalName());
+			return XJDFConstants.Intent.equals(toCheck.getLocalName());
 		}
 
 		/**

@@ -80,6 +80,7 @@ import static org.junit.Assert.assertTrue;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.XMLParser;
@@ -143,6 +144,16 @@ public class JDFColorTest extends JDFTestCaseBase
 			final JDFColor co = cp.appendColorWithName(c, null);
 			assertEquals(c, co.get8BitName());
 		}
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testKCMY()
+	{
+		assertTrue(JDFColor.getKCMYSeparations().containsAll(JDFColor.getCMYKSeparations()));
+		assertEquals(JDFConstants.SEPARATION_BLACK, JDFColor.getKCMYSeparations().get(0));
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -46,6 +46,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.ProductHelper.eProductType;
 import org.junit.Test;
 
 /**
@@ -77,6 +78,18 @@ public class ProductHelperTest extends JDFTestCaseBase
 		assertEquals(ph.getChild(1).getProduct(), phBody.getProduct());
 		assertEquals(ph.getChild("Body", 0).getProduct(), phBody.getProduct());
 		assertNull(ph.getChild("Body", 1));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testEProductType()
+	{
+		assertEquals(eProductType.Book, eProductType.getEnum("BOOK"));
+		assertEquals(null, eProductType.getEnum(null));
+		assertEquals(null, eProductType.getEnum(""));
+		assertEquals(eProductType.Postcard, eProductType.getEnum("  post card"));
 	}
 
 	/**
@@ -176,6 +189,22 @@ public class ProductHelperTest extends JDFTestCaseBase
 		intent = ph.appendIntent(ElementName.LAYOUTINTENT);
 		intent.getResource().setAttribute(AttributeName.PAGES, "4");
 		assertEquals("4", ph.getIntentAttribute(ElementName.LAYOUTINTENT, AttributeName.PAGES));
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testGetColorIntent()
+	{
+		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		final ProductHelper ph = theHelper.appendProduct();
+		IntentHelper intent = ph.getIntent(ElementName.COLORINTENT);
+		assertNull(intent);
+		intent = ph.appendIntent(ElementName.COLORINTENT);
+		assertEquals(ColorIntentHelper.class, intent.getClass());
+		intent = ph.getIntent(ElementName.COLORINTENT);
+		assertEquals(ColorIntentHelper.class, intent.getClass());
 	}
 
 	/**

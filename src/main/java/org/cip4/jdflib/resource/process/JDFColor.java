@@ -59,7 +59,7 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFColor extends JDFAutoColor
 {
 	private static final long serialVersionUID = 1L;
-	private static final VString CMYK = new VString("Cyan Magenta Yellow Black", null);
+	private static final StringArray CMYK = new StringArray("Cyan Magenta Yellow Black", null);
 
 	/**
 	 *
@@ -68,6 +68,18 @@ public class JDFColor extends JDFAutoColor
 	public static List<String> getCMYKSeparations()
 	{
 		return new StringArray(CMYK);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public static List<String> getKCMYSeparations()
+	{
+		final StringArray stringArray = new StringArray(CMYK);
+		final String b = stringArray.remove(3);
+		stringArray.add(0, b);
+		return stringArray;
 	}
 
 	/**

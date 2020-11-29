@@ -1,6 +1,5 @@
-/*
+/**
  * The CIP4 Software License, Version 1.0
- *
  *
  * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
@@ -23,7 +22,7 @@
  *       "This product includes software developed by the
  *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
+ *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
  * 4. The names "CIP4" and "The International Cooperation for the Integration of
@@ -33,7 +32,7 @@
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
+ *    nor may "CIP4" appear in their name, without prior written
  *    permission of the CIP4 organization
  *
  * Usage of this software in commercial products is subject to restrictions. For
@@ -45,7 +44,7 @@
  * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
  * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
  * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
  * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
@@ -57,7 +56,7 @@
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
+ * originally based on software
  * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
  * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
@@ -65,66 +64,74 @@
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
  *
+ *
  */
-package org.cip4.jdflib.extensions;
+package org.cip4.jdflib.extensions.examples;
 
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFShape;
+import org.cip4.jdflib.extensions.ColorIntentHelper;
+import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.ProductHelper.eProductType;
+import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
-
-import junit.framework.TestCase;
 
 /**
  *
  * @author rainer prosi
  *
  */
-public class IntentHelperTest extends TestCase
+public class XJDFProductExampleTest extends ExampleTest
 {
 	/**
 	 *
 	 */
 	@Test
-	public void testGetSpan()
+	public void testProduct()
 	{
-		final KElement intent = new JDFDoc("Intent").getRoot();
-		intent.appendElement("Comment");
-		intent.appendElement("foo");
-		final IntentHelper intentHelper = new IntentHelper(intent);
-		intentHelper.setSpan("a", "42", "IntegerSpan");
-		intentHelper.setSpan("b/a", "43", "IntegerSpan");
-		assertEquals(intentHelper.getSpan("a"), "42");
-		assertEquals(intentHelper.getSpan("b/a"), "43");
+		final XJDFHelper xjdfHelper = new XJDFHelper("Simple_Product", null, null);
+		xjdfHelper.setTypes("Product");
+		final SetHelper sh1 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
+		final JDFDate jdfDate = new JDFDate().setTime(13, 0, 0);
+		sh1.getPartition((JDFAttributeMap) null).getResource().setAttribute(AttributeName.END, jdfDate.getDateTimeISO());
+		xjdfHelper.cleanUp();
+		final ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
+		ph.setProductType(eProductType.Poster);
+		final IntentHelper mih = ph.getCreateIntent(ElementName.MEDIAINTENT);
+		final KElement mir = mih.getCreateResource();
+		mir.setAttribute(AttributeName.WEIGHT, 130, null);
+		mir.setAttribute(ElementName.MEDIATYPE, EnumMediaType.Paper.getName());
+
+		final IntentHelper lih = ph.getCreateIntent(ElementName.LAYOUTINTENT);
+		final JDFElement lir = (JDFElement) lih.getCreateResource();
+		lir.setAttribute(ElementName.FINISHEDDIMENSIONS, new JDFShape(210, 297, 0).scaleFromMM(1), null);
+
+		final ColorIntentHelper cih = (ColorIntentHelper) ph.getCreateIntent(ElementName.COLORINTENT);
+		cih.setNumColors(4, 4);
+
+		setSnippet(xjdfHelper, true);
+		setSnippet(xjdfHelper.getAuditPool(), false);
+		writeRoundTripX(xjdfHelper, "product/poster.xjdf", EnumValidationLevel.Incomplete);
 	}
 
 	/**
-	 *
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
-	@Test
-	public void testSetSpan()
+	@Override
+	public void setUp() throws Exception
 	{
-		final KElement intent = new JDFDoc("Intent").getRoot();
-		intent.appendElement("foo");
-		final IntentHelper intentHelper = new IntentHelper(intent);
-		intentHelper.setSpan("a", "42");
-		intentHelper.setSpan("b/a", "43");
-		assertEquals(intentHelper.getSpan("a"), "42");
-		assertEquals(intentHelper.getSpan("b/a"), "43");
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	public void testIsIntent()
-	{
-		final KElement intent = new JDFDoc(XJDFConstants.Intent).getRoot();
-		intent.setAttribute("Name", "foo");
-		final KElement foo = intent.appendElement("foo");
-		final KElement c = intent.appendElement(ElementName.COMMENT);
-		assertTrue(IntentHelper.isIntentResource(foo));
-		assertFalse(IntentHelper.isIntentResource(intent));
-		assertFalse(IntentHelper.isIntentResource(c));
+		super.setUp();
+		KElement.setLongID(false);
 	}
 }

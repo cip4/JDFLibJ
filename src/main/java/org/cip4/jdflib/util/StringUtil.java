@@ -185,7 +185,10 @@ public class StringUtil
 			"Not only is this incomprehensible, but the ink is ugly and the paper is from the wrong kind of tree.", "If the code and the comments disagree, then both are probably wrong.",
 			"A radioactive cat has eighteen half-lives.", "Silence! I kill you!",
 			"Although golf was originally restricted to wealthy, overweight Protestants, today it's open to anybody who owns hideous clothing.",
-			"Biology is the only science in which multiplication means the same thing as division.", "Last quote" };
+			"Base eight is just like base ten really — if you're missing two fingers", "Biology is the only science in which multiplication means the same thing as division.",
+			"My dog's not eating, he no longer barks; He hit the propeller and turned into sparks",
+			"One leg is missing; the other is gone; The third leg is scattered all over the lawn; No need explaining the one leg remaining is spinning on the carport floor" + "I",
+			"\"Once the rockets are up, who cares where they come down? That's not my department,\" says Wernher von Braun.", "Last quote" };
 
 	/**
 	 * returns a random string for testing fun stuff - similar to unix fortune but biased towards monty python or the hitchhikers guide to the galaxy
