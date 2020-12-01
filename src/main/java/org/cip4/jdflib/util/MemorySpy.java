@@ -218,13 +218,26 @@ public class MemorySpy
 	 *
 	 * @return
 	 */
-	public String getSummary()
+	public String getSummary(final String delim)
 	{
 		final StringBuilder b = new StringBuilder();
 		final Map<String, Long> map = getSummaryMap();
-		for (final String s : map.keySet())
-			b.append("Mem ").append(s).append(": ").append(map.get(s)).append("\n");
+		final List<String> keyList = ContainerUtil.getKeyList(map);
+		keyList.sort(null);
+		for (final String s : keyList)
+			b.append("Mem ").append(s).append(": ").append(map.get(s)).append(delim);
 		return b.toString();
+	}
+
+	/**
+	 *
+	 * get a fast summary for debugging
+	 *
+	 * @return
+	 */
+	public String getSummary()
+	{
+		return getSummary("\n");
 	}
 
 	/**

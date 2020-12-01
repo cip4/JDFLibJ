@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,6 +41,8 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.Assert.assertNotEquals;
+
 import java.util.Map;
 
 import org.cip4.jdflib.util.MemorySpy.MemScope;
@@ -73,6 +75,18 @@ public class MemorySpyTest extends TestCase
 		final MemorySpy ms = new MemorySpy();
 		final String summary = ms.getSummary();
 		assertNotNull(summary);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSummary2()
+	{
+		final MemorySpy ms = new MemorySpy();
+		final String summary = ms.getSummary(",");
+		final String summary2 = ms.getSummary(" ");
+		assertNotEquals(summary, summary2);
 	}
 
 	/**
