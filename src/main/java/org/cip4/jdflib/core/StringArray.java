@@ -55,6 +55,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import org.cip4.jdflib.datatypes.StringCache;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -146,7 +147,7 @@ public class StringArray extends ArrayList<String>
 			final StringTokenizer sToken = new StringTokenizer(strIn, strSep);
 			while (sToken.hasMoreTokens())
 			{
-				add(sToken.nextToken());
+				add(StringCache.getString(sToken.nextToken()));
 			}
 		}
 	}

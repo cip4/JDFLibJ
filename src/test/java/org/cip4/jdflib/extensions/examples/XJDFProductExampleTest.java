@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
+import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSpreadType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -84,6 +85,7 @@ import org.cip4.jdflib.extensions.ProductHelper.eProductType;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
 
@@ -98,16 +100,15 @@ public class XJDFProductExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testProduct()
+	public void testPoster()
 	{
-		final XJDFHelper xjdfHelper = new XJDFHelper("Simple_Product", null, null);
+		final XJDFHelper xjdfHelper = new XJDFHelper("Simple_Poster", null, null);
 		xjdfHelper.setTypes("Product");
-		final SetHelper sh1 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
-		final JDFDate jdfDate = new JDFDate().setTime(13, 0, 0);
-		sh1.getPartition((JDFAttributeMap) null).getResource().setAttribute(AttributeName.END, jdfDate.getDateTimeISO());
-		xjdfHelper.cleanUp();
+		prepareNodeInfo(xjdfHelper);
+
 		final ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
 		ph.setProductType(eProductType.Poster);
+		ph.setAmount(42);
 		final IntentHelper mih = ph.getCreateIntent(ElementName.MEDIAINTENT);
 		final KElement mir = mih.getCreateResource();
 		mir.setAttribute(AttributeName.WEIGHT, 130, null);
@@ -115,14 +116,81 @@ public class XJDFProductExampleTest extends ExampleTest
 
 		final IntentHelper lih = ph.getCreateIntent(ElementName.LAYOUTINTENT);
 		final JDFElement lir = (JDFElement) lih.getCreateResource();
-		lir.setAttribute(ElementName.FINISHEDDIMENSIONS, new JDFShape(210, 297, 0).scaleFromMM(1), null);
+		lir.setAttribute(ElementName.FINISHEDDIMENSIONS, new JDFShape(800, 500, 0).scaleFromMM(1), null);
 
 		final ColorIntentHelper cih = (ColorIntentHelper) ph.getCreateIntent(ElementName.COLORINTENT);
 		cih.setNumColors(4, 4);
 
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
-		writeRoundTripX(xjdfHelper, "product/poster.xjdf", EnumValidationLevel.Incomplete);
+		writeRoundTripX(xjdfHelper, "product/poster", EnumValidationLevel.Incomplete);
+	}
+
+	private void prepareNodeInfo(final XJDFHelper xjdfHelper)
+	{
+		final SetHelper sh1 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
+		final JDFDate jdfDate = new JDFDate().setTime(13, 0, 0);
+		sh1.getPartition((JDFAttributeMap) null).getResource().setAttribute(AttributeName.END, jdfDate.getDateTimeISO());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testBrochure()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper("Brochure4_16", null, null);
+		xjdfHelper.setTypes("Product");
+		prepareNodeInfo(xjdfHelper);
+
+		final ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
+		ph.setProductType(eProductType.Brochure);
+		ph.setAmount(42);
+
+		final IntentHelper bih = ph.getCreateIntent(ElementName.BINDINGINTENT);
+		final KElement bir = bih.getCreateResource();
+		bir.setAttribute(ElementName.BINDINGTYPE, EnumSpanBindingType.SaddleStitch.getName(), null);
+
+		final IntentHelper lih = ph.getCreateIntent(ElementName.LAYOUTINTENT);
+		final JDFElement lir = (JDFElement) lih.getCreateResource();
+		lir.setAttribute(ElementName.FINISHEDDIMENSIONS, new JDFShape(210, 297, 8).scaleFromMM(1), null);
+
+		final ProductHelper phCover = xjdfHelper.appendProduct();
+		phCover.setProductType(eProductType.Cover);
+		ph.setChild(phCover);
+
+		final IntentHelper mich = phCover.getCreateIntent(ElementName.MEDIAINTENT);
+		final KElement micr = mich.getCreateResource();
+		micr.setAttribute(AttributeName.WEIGHT, 130, null);
+		micr.setAttribute(ElementName.MEDIATYPE, EnumMediaType.Paper.getName());
+
+		final ColorIntentHelper cich = (ColorIntentHelper) phCover.getCreateIntent(ElementName.COLORINTENT);
+		cich.setNumColors(4, 4);
+
+		final IntentHelper lich = phCover.getCreateIntent(ElementName.LAYOUTINTENT);
+		final JDFElement licr = (JDFElement) lich.getCreateResource();
+		licr.setAttribute(ElementName.PAGES, 2, null);
+		licr.setAttribute(AttributeName.SPREADTYPE, EnumSpreadType.Spread.getName(), null);
+
+		final ProductHelper phBody = xjdfHelper.appendProduct();
+		phBody.setProductType(eProductType.Body);
+		ph.setChild(phBody);
+		final IntentHelper mibh = phBody.getCreateIntent(ElementName.MEDIAINTENT);
+		final KElement mibr = mibh.getCreateResource();
+		mibr.setAttribute(AttributeName.WEIGHT, 90, null);
+		mibr.setAttribute(ElementName.MEDIATYPE, EnumMediaType.Paper.getName());
+
+		final ColorIntentHelper cibh = (ColorIntentHelper) phBody.getCreateIntent(ElementName.COLORINTENT);
+		cibh.setNumColors(1, 1);
+
+		final IntentHelper libh = phBody.getCreateIntent(ElementName.LAYOUTINTENT);
+		final JDFElement libr = (JDFElement) libh.getCreateResource();
+		libr.setAttribute(ElementName.PAGES, 16, null);
+		libr.setAttribute(AttributeName.SPREADTYPE, EnumSpreadType.SinglePage.getName(), null);
+
+		setSnippet(xjdfHelper, true);
+		setSnippet(xjdfHelper.getAuditPool(), false);
+		writeRoundTripX(xjdfHelper, "product/brochure", EnumValidationLevel.Incomplete);
 	}
 
 	/**

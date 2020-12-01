@@ -50,9 +50,11 @@ package org.cip4.jdflib.datatypes;
 import java.util.Collection;
 import java.util.HashMap;
 
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.resource.process.JDFColor;
 
 /**
  *
@@ -89,6 +91,10 @@ public class StringCache
 			{
 				getCreateString("" + i);
 			}
+			for (final String c : JDFColor.getCMYKSeparations())
+				getCreateString(c);
+			getCreateString(EnumSide.Front.getName());
+			getCreateString(EnumSide.Back.getName());
 		}
 		else if (!enable)
 		{
@@ -103,18 +109,19 @@ public class StringCache
 	 */
 	public static String getCreateString(final String s)
 	{
-		if (theSet == null)
-			return s;
-		final String s2 = theSet.get(s);
-		if (s2 != null)
+		if (theSet != null)
 		{
-			return s2;
+			final String s2 = theSet.get(s);
+			if (s2 != null)
+			{
+				return s2;
+			}
+			else
+			{
+				theSet.put(s, s);
+			}
 		}
-		else
-		{
-			theSet.put(s, s);
-			return s;
-		}
+		return s;
 	}
 
 	/**
@@ -125,16 +132,17 @@ public class StringCache
 	 */
 	public static String getString(final String s)
 	{
-		if (theSet == null)
-			return s;
-		final String s2 = theSet.get(s);
-		if (s2 != null)
+		if (theSet != null)
 		{
-			return s2;
-		}
-		else if (s != null && s.length() < 3)
-		{
-			theSet.put(s, s);
+			final String s2 = theSet.get(s);
+			if (s2 != null)
+			{
+				return s2;
+			}
+			else if (s != null && s.length() < 3)
+			{
+				theSet.put(s, s);
+			}
 		}
 		return s;
 	}
