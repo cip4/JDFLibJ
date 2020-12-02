@@ -7047,12 +7047,12 @@ public class JDFResource extends JDFElement
 		else
 		// local value
 		{
-			return EnumResStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
+			final EnumResStatus s = EnumResStatus.getEnum(getNonEmpty_KElement((AttributeName.STATUS)));
+			// we have an explicit override?
+			final JDFResource idTarget = s == null ? getIdenticalTarget() : null;
+			return idTarget == null ? EnumResStatus.getEnum(getNonEmpty(AttributeName.STATUS)) : EnumResStatus.getEnum(idTarget.getNonEmpty(AttributeName.STATUS));
 		}
 	}
-
-	// //////////////////////////////////////////////////////////////////////////
-	// ///////
 
 	/**
 	 * Gets the minimum typesafe enumerated value of attribute Status from the value of all leaves

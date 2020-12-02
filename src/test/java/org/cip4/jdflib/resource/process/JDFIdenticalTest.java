@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.junit.Test;
 
 public class JDFIdenticalTest extends JDFTestCaseBase
@@ -183,8 +184,8 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	}
 
 	/**
-	* test expand and collapse methods
-	*/
+	 * test expand and collapse methods
+	 */
 	@Test
 	public void testUpdateFromLeavesIdentical()
 	{
@@ -231,6 +232,22 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 		r1.setIdentical(r2);
 		final JDFIdentical identical = r1.getIdentical();
 		assertEquals(r2, identical.getTarget());
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testResStatus()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
+		final JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		r1.setIdentical(r2);
+		r.setResStatus(EnumResStatus.Unavailable, true);
+		r2.setResStatus(EnumResStatus.Available, true);
+		assertEquals(EnumResStatus.Available, r1.getResStatus(false));
 	}
 
 }
