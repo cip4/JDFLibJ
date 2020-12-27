@@ -78,11 +78,6 @@
  */
 package org.cip4.jdflib.resource;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorMeasurementConditions;
 import org.w3c.dom.DOMException;
@@ -90,67 +85,6 @@ import org.w3c.dom.DOMException;
 public class JDFColorMeasurementConditions extends JDFAutoColorMeasurementConditions
 {
 	private static final long serialVersionUID = 1L;
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumIllumination extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumIllumination(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumIllumination getEnum(final String enumName)
-		{
-			return (EnumIllumination) getEnum(EnumIllumination.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumIllumination getEnum(final int enumValue)
-		{
-			return (EnumIllumination) getEnum(EnumIllumination.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumIllumination.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumIllumination.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumIllumination.class);
-		}
-
-		/**  */
-		public static final EnumIllumination D50 = new EnumIllumination("D50");
-		/**  */
-		public static final EnumIllumination D65 = new EnumIllumination("D65");
-		/**  */
-		public static final EnumIllumination Unknown = new EnumIllumination("Unknown");
-	}
 
 	/**
 	 * Constructor for JDFColorMeasurementConditions
@@ -189,24 +123,6 @@ public class JDFColorMeasurementConditions extends JDFAutoColorMeasurementCondit
 	public JDFColorMeasurementConditions(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 *
-	 * @param e
-	 */
-	public void setIllumination(final EnumIllumination e)
-	{
-		super.setIllumination(e == null ? null : e.getName());
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public EnumIllumination getEnumIllumination()
-	{
-		return EnumIllumination.getEnum(getIllumination());
 	}
 
 }
