@@ -65,6 +65,7 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFProofItem;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
@@ -397,6 +398,22 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertEquals(c.getAttribute(AttributeName.CHANNELTYPE), "Phone");
 		assertTrue(new FixVersion(EnumVersion.Version_1_5).convert(c));
 		assertEquals(c.getAttribute(AttributeName.CHANNELTYPE), "Mobile");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testProofItem()
+	{
+		final JDFProofItem c = (JDFProofItem) new JDFDoc(ElementName.PROOFITEM).getRoot();
+		c.setProofTarget("pt");
+		assertTrue(new FixVersion(EnumVersion.Version_1_7).convert(c));
+		assertEquals("pt", c.getFileSpec().getURL());
+		assertEquals("", c.getProofTarget());
+		assertTrue(new FixVersion(EnumVersion.Version_1_6).convert(c));
+		assertEquals("pt", c.getProofTarget());
+		assertNull(c.getFileSpec());
 	}
 
 	/**
