@@ -2921,6 +2921,25 @@ public class StringUtil
 	}
 
 	/**
+	 *
+	 * @param s1
+	 * @param s2
+	 * @param delim
+	 * @return
+	 */
+	public static String concat(final String s1, final String s2, final String delim)
+	{
+		if (isEmpty(s1))
+			return getNonEmpty(s2);
+		if (isEmpty(s2))
+			return s1;
+		if (isEmpty(delim))
+			return s1 + s2;
+		else
+			return s1 + delim + s2;
+	}
+
+	/**
 	 * create a string from an input stream
 	 *
 	 * @param is the input stream

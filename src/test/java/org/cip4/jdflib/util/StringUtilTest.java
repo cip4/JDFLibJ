@@ -1264,8 +1264,6 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.tokenizeBrackets("a?b:c?d:e?f:g", '?', ':'), new VString(new String[] { "a", "b", "c?d:e?f:g" }));
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -1277,7 +1275,18 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals("a_foo b_foo c_foo", StringUtil.setvString(v, " ", null, null));
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 *
+	 */
+	@Test
+	public void testConcatString()
+	{
+		assertEquals("acb", StringUtil.concat("a", "b", "c"));
+		assertEquals("a", StringUtil.concat("a", null, "c"));
+		assertEquals("a", StringUtil.concat(null, "a", null));
+		assertNull(StringUtil.concat(null, "", null));
+		assertNull(StringUtil.concat("", "", null));
+	}
 
 	/**
 	 *
@@ -1289,8 +1298,6 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.createString(ios.getInputStream()), "abc");
 		ios.close();
 	}
-
-	// /////////////////////////////////////////////////////////////////////////
 
 	/**
 	 *

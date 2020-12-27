@@ -45,6 +45,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.datatypes.JDFTransferFunction;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.AuditResourceHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
@@ -54,6 +55,7 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.XJMFHelper;
 import org.cip4.jdflib.resource.JDFColorMeasurementConditions;
 import org.cip4.jdflib.resource.JDFMarkObject;
+import org.cip4.jdflib.resource.JDFPatch;
 import org.cip4.jdflib.resource.process.JDFColorControlStrip;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -82,6 +84,46 @@ public class XJDFQCExampleTest extends ExampleTest
 		JDFAudit.setStaticAgentName(null);
 		JDFAudit.setStaticAgentVersion(null);
 		KElement.setLongID(false);
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public final void testColorQualityControlSpectrum()
+	{
+		final XJDFHelper h = new XJDFHelper(EnumVersion.Version_2_1, "qc1");
+		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
+		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.QualityControl);
+		final SetHelper sh = h.appendResourceSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		vMap.extendMap(AttributeName.SEPARATION, JDFConstants.SEPARATIONS_CMYK);
+		final ResourceHelper rh = sh.getCreateVPartition(vMap, true);
+		final JDFQualityControlParams qpr = (JDFQualityControlParams) rh.getResource();
+		qpr.setAttribute(AttributeName.QUALITYCONTROLMETHODS, "ColorSpectrophotometry Colorimetry");
+		final ResourceHelper resLO = h.getCreateSet(ElementName.LAYOUT, EnumUsage.Input).getCreatePartition(AttributeName.SHEETNAME, "S1", true);
+		resLO.ensurePart(AttributeName.SIDE, "Front");
+		final JDFLayout lo = (JDFLayout) resLO.getResource();
+		final KElement po = lo.appendElement(XJDFConstants.PlacedObject);
+		po.setAttribute(AttributeName.CTM, JDFMatrix.getUnitMatrix().shift(30, 40).getString(1));
+		final JDFMarkObject mo = (JDFMarkObject) po.appendElement(ElementName.MARKOBJECT);
+		final JDFColorControlStrip ccs = mo.appendColorControlStrip();
+		final JDFColorMeasurementConditions cmc = (JDFColorMeasurementConditions) ccs.appendElement(ElementName.COLORMEASUREMENTCONDITIONS);
+		ccs.setStripType("xxx");
+		for (int i = 0; i < 10; i++)
+		{
+			final JDFPatch patch = ccs.appendPatch();
+			patch.setAttribute(XJDFConstants.ExternalID, "Patch_" + i);
+			patch.setAttribute(AttributeName.CENTER, "50 " + (i * 100));
+			patch.setAttribute(AttributeName.SIZE, "30 30");
+			patch.setAttribute(AttributeName.PATCHUSAGE, "Color");
+			patch.setSpectrum(JDFTransferFunction.createTransferFunction("400 0 450 0.5 500 1.0 550 0.8 600 0.3 650 0.2 700 0"));
+
+		}
+		h.cleanUp();
+		writeTest(h.getRoot(), "../QualityControlColorSpectrum.xjdf", true, null);
+
 	}
 
 	/**
