@@ -98,7 +98,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DENSITYSTANDARD, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumDensityStandard.getEnum(0), "ANSIT");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ILLUMINATION, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, "D50");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ILLUMINATION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumIllumination.getEnum(0), "D50");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.OBSERVER, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, "2");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.APERTURE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.ILLUMINATIONANGLE, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -124,7 +124,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorMeasurementConditions(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoColorMeasurementConditions(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorMeasurementConditions(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoColorMeasurementConditions(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoColorMeasurementConditions(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoColorMeasurementConditions(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -184,7 +184,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDensityStandard(String name)
+		private EnumDensityStandard(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -193,7 +193,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumDensityStandard getEnum(String enumName)
+		public static EnumDensityStandard getEnum(final String enumName)
 		{
 			return (EnumDensityStandard) getEnum(EnumDensityStandard.class, enumName);
 		}
@@ -202,7 +202,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumDensityStandard getEnum(int enumValue)
+		public static EnumDensityStandard getEnum(final int enumValue)
 		{
 			return (EnumDensityStandard) getEnum(EnumDensityStandard.class, enumValue);
 		}
@@ -246,6 +246,71 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	}
 
 	/**
+	 * Enumeration strings for Illumination
+	 */
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumIllumination extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumIllumination(final String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumIllumination getEnum(final String enumName)
+		{
+			return (EnumIllumination) getEnum(EnumIllumination.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumIllumination getEnum(final int enumValue)
+		{
+			return (EnumIllumination) getEnum(EnumIllumination.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumIllumination.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumIllumination.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumIllumination.class);
+		}
+
+		/**  */
+		public static final EnumIllumination D50 = new EnumIllumination("D50");
+		/**  */
+		public static final EnumIllumination D65 = new EnumIllumination("D65");
+		/**  */
+		public static final EnumIllumination Unknown = new EnumIllumination("Unknown");
+	}
+
+	/**
 	 * Enumeration strings for InkState
 	 */
 
@@ -255,7 +320,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumInkState(String name)
+		private EnumInkState(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -264,7 +329,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumInkState getEnum(String enumName)
+		public static EnumInkState getEnum(final String enumName)
 		{
 			return (EnumInkState) getEnum(EnumInkState.class, enumName);
 		}
@@ -273,7 +338,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumInkState getEnum(int enumValue)
+		public static EnumInkState getEnum(final int enumValue)
 		{
 			return (EnumInkState) getEnum(EnumInkState.class, enumValue);
 		}
@@ -320,7 +385,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMeasurementFilter(String name)
+		private EnumMeasurementFilter(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -329,7 +394,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumMeasurementFilter getEnum(String enumName)
+		public static EnumMeasurementFilter getEnum(final String enumName)
 		{
 			return (EnumMeasurementFilter) getEnum(EnumMeasurementFilter.class, enumName);
 		}
@@ -338,7 +403,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumMeasurementFilter getEnum(int enumValue)
+		public static EnumMeasurementFilter getEnum(final int enumValue)
 		{
 			return (EnumMeasurementFilter) getEnum(EnumMeasurementFilter.class, enumValue);
 		}
@@ -385,7 +450,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSampleBacking(String name)
+		private EnumSampleBacking(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -394,7 +459,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumSampleBacking getEnum(String enumName)
+		public static EnumSampleBacking getEnum(final String enumName)
 		{
 			return (EnumSampleBacking) getEnum(EnumSampleBacking.class, enumName);
 		}
@@ -403,7 +468,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumSampleBacking getEnum(int enumValue)
+		public static EnumSampleBacking getEnum(final int enumValue)
 		{
 			return (EnumSampleBacking) getEnum(EnumSampleBacking.class, enumValue);
 		}
@@ -450,7 +515,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumWhiteBase(String name)
+		private EnumWhiteBase(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -459,7 +524,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumWhiteBase getEnum(String enumName)
+		public static EnumWhiteBase getEnum(final String enumName)
 		{
 			return (EnumWhiteBase) getEnum(EnumWhiteBase.class, enumName);
 		}
@@ -468,7 +533,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumWhiteBase getEnum(int enumValue)
+		public static EnumWhiteBase getEnum(final int enumValue)
 		{
 			return (EnumWhiteBase) getEnum(EnumWhiteBase.class, enumValue);
 		}
@@ -501,6 +566,8 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		public static final EnumWhiteBase Absolute = new EnumWhiteBase("Absolute");
 		/**  */
 		public static final EnumWhiteBase Paper = new EnumWhiteBase("Paper");
+		/**  */
+		public static final EnumWhiteBase Substrate = new EnumWhiteBase("Substrate");
 	}
 
 	/* ************************************************************************
@@ -516,7 +583,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDensityStandard(EnumDensityStandard enumVar)
+	public void setDensityStandard(final EnumDensityStandard enumVar)
 	{
 		setAttribute(AttributeName.DENSITYSTANDARD, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -535,23 +602,23 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	Methods for Attribute Illumination
 	--------------------------------------------------------------------- */
 	/**
-	 * (36) set attribute Illumination
+	 * (5) set attribute Illumination
 	 *
-	 * @param value the value to set the attribute to
+	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setIllumination(String value)
+	public void setIllumination(final EnumIllumination enumVar)
 	{
-		setAttribute(AttributeName.ILLUMINATION, value, null);
+		setAttribute(AttributeName.ILLUMINATION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	 * (23) get String attribute Illumination
+	 * (9) get attribute Illumination
 	 *
 	 * @return the value of the attribute
 	 */
-	public String getIllumination()
+	public EnumIllumination getIllumination()
 	{
-		return getAttribute(AttributeName.ILLUMINATION, null, "D50");
+		return EnumIllumination.getEnum(getAttribute(AttributeName.ILLUMINATION, null, "D50"));
 	}
 
 	/* ---------------------------------------------------------------------
@@ -562,7 +629,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setObserver(int value)
+	public void setObserver(final int value)
 	{
 		setAttribute(AttributeName.OBSERVER, value, null);
 	}
@@ -585,7 +652,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAperture(double value)
+	public void setAperture(final double value)
 	{
 		setAttribute(AttributeName.APERTURE, value, null);
 	}
@@ -608,7 +675,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIlluminationAngle(int value)
+	public void setIlluminationAngle(final int value)
 	{
 		setAttribute(AttributeName.ILLUMINATIONANGLE, value, null);
 	}
@@ -631,7 +698,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setInkState(EnumInkState enumVar)
+	public void setInkState(final EnumInkState enumVar)
 	{
 		setAttribute(AttributeName.INKSTATE, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -654,7 +721,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setInstrumentation(String value)
+	public void setInstrumentation(final String value)
 	{
 		setAttribute(AttributeName.INSTRUMENTATION, value, null);
 	}
@@ -677,7 +744,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMeasurementAngle(int value)
+	public void setMeasurementAngle(final int value)
 	{
 		setAttribute(AttributeName.MEASUREMENTANGLE, value, null);
 	}
@@ -700,7 +767,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMeasurementFilter(EnumMeasurementFilter enumVar)
+	public void setMeasurementFilter(final EnumMeasurementFilter enumVar)
 	{
 		setAttribute(AttributeName.MEASUREMENTFILTER, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -723,7 +790,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMeasurementMode(String value)
+	public void setMeasurementMode(final String value)
 	{
 		setAttribute(AttributeName.MEASUREMENTMODE, value, null);
 	}
@@ -746,7 +813,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSampleBacking(EnumSampleBacking enumVar)
+	public void setSampleBacking(final EnumSampleBacking enumVar)
 	{
 		setAttribute(AttributeName.SAMPLEBACKING, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -769,7 +836,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSpectralResolution(double value)
+	public void setSpectralResolution(final double value)
 	{
 		setAttribute(AttributeName.SPECTRALRESOLUTION, value, null);
 	}
@@ -792,7 +859,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setWhiteBase(EnumWhiteBase enumVar)
+	public void setWhiteBase(final EnumWhiteBase enumVar)
 	{
 		setAttribute(AttributeName.WHITEBASE, enumVar == null ? null : enumVar.getName(), null);
 	}
