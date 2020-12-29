@@ -991,6 +991,7 @@ public class UrlUtil
 			mimeMap.put("ppml", JDFCoreConstants.MIME_PPML);
 			mimeMap.put("ptk", JDFCoreConstants.MIME_PTK);
 			mimeMap.put("xjdf", JDFCoreConstants.MIME_XJDF);
+			mimeMap.put("xjmf", JDFCoreConstants.MIME_XJMF);
 			mimeMap.put("jdf", JDFCoreConstants.MIME_JDF);
 			mimeMap.put("jmf", JDFCoreConstants.MIME_JMF);
 
@@ -1093,7 +1094,8 @@ public class UrlUtil
 		{
 			return false;
 		}
-		return StringUtils.isAlpha(pathName.substring(0, 1)) && pathName.substring(1, 2).equals(":") || StringUtils.countMatches(pathName, "\\") > StringUtils.countMatches(pathName, "/");
+		return StringUtils.isAlpha(pathName.substring(0, 1)) && pathName.substring(1, 2).equals(":")
+				|| StringUtils.countMatches(pathName, "\\") > StringUtils.countMatches(pathName, "/");
 
 	}
 

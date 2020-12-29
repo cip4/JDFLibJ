@@ -118,7 +118,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		assertEquals("txt", UrlUtil.getExtensionFromMimeType(UrlUtil.TEXT_UNKNOWN));
 		assertEquals("jdf", UrlUtil.getExtensionFromMimeType(UrlUtil.VND_JDF));
+		assertEquals("xjdf", UrlUtil.getExtensionFromMimeType(UrlUtil.VND_XJDF));
 		assertEquals("jmf", UrlUtil.getExtensionFromMimeType(UrlUtil.VND_JMF));
+		assertEquals("xjmf", UrlUtil.getExtensionFromMimeType(UrlUtil.VND_XJMF));
 		assertEquals("xml", UrlUtil.getExtensionFromMimeType(UrlUtil.TEXT_XML));
 		assertEquals("xml", UrlUtil.getExtensionFromMimeType(UrlUtil.APPLICATION_XML));
 		assertEquals("zip", UrlUtil.getExtensionFromMimeType(UrlUtil.APPLICATION_ZIP));
@@ -138,6 +140,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.VND_JDF, UrlUtil.getMimeTypeFromURL(".JDF"));
 		assertEquals(UrlUtil.VND_JDF, UrlUtil.getMimeTypeFromURL(".jdf"));
 		assertEquals(UrlUtil.VND_JDF, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.jdf"));
+		assertEquals(UrlUtil.VND_XJDF, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.xjdf"));
+		assertEquals(UrlUtil.VND_XJMF, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.xjmf"));
 		assertEquals(UrlUtil.VND_JMF, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.JMF"));
 		assertEquals(UrlUtil.TEXT_XML, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.xml"));
 		assertEquals(UrlUtil.TEXT_XML, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.xsl"));
