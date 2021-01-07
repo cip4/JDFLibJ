@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1706,12 +1706,12 @@ public class JDFRunList extends JDFAutoRunList
 		JDFIntegerRangeList irl = super.getPages();
 		if (irl == null)
 		{
-			irl = new JDFIntegerRangeList(new JDFIntegerRange(0, -1));
+			irl = new JDFIntegerRangeList(new JDFIntegerRange(getLogicalPage(), -1));
 		}
 		final int nPage = super.getNPage();
 		if (nPage > 0)
 		{
-			irl.setDef(nPage);
+			irl.setDef(nPage + getLogicalPage());
 		}
 		return irl;
 	}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -392,6 +392,36 @@ public class JDFRunListTest extends JDFTestCaseBase
 		final JDFIntegerRangeList pages = rlp.getPages();
 		assertEquals(pages.getDef(), 7);
 		assertEquals(pages.getElementCount(), 7);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public final void testGetPages2() throws Exception
+	{
+		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
+		rlp.setNPage(7);
+		final JDFIntegerRangeList pages = rlp.getPages();
+		assertEquals(pages.getDef(), 7);
+		assertEquals(pages.getElementCount(), 7);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public final void testGetPagesLogicalPage() throws Exception
+	{
+		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
+		rlp.setNPage(7);
+		rlp.setLogicalPage(2);
+		final JDFIntegerRangeList pages = rlp.getPages();
+		assertEquals(pages.getDef(), 9);
+		assertEquals(pages.getElementCount(), 7);
+		assertEquals(2, pages.getElement(0));
+		assertEquals(4, pages.getElement(2));
+		assertEquals(8, pages.getElement(6));
 	}
 
 	/**
