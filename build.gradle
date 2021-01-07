@@ -52,6 +52,20 @@ publishing {
                 description = 'CIP4 JDF Library for JDF 1.x'
                 url = 'https://github.com/cip4/JDFLibJ'
 
+                organization {
+                    name = "CIP4 Organization"
+                    url = "https://www.cip4.org"
+                }
+                developers {
+                    developer {
+                        id = "rainer"
+                        name = "Dr. Rainer Prosi"
+                    }
+                    developer {
+                        id = "stefan"
+                        name = "Stefan Meissner"
+                    }
+                }
                 licenses {
                     license {
                         name = 'TCIP4 Software License'
