@@ -52,6 +52,7 @@ import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.zip.DataFormatException;
 
@@ -881,7 +882,19 @@ public class JDFDateTest extends JDFTestCaseBase
 	public void testGetWeek() throws Exception
 	{
 		final JDFDate date = new JDFDate("2020-12-30T07:00:11.300+00:00");
-		assertEquals("53", date.getFormattedDateTime("ww"));
+		log.info(PlatformUtil.getJavaVersion());
+		final Locale l = Locale.getDefault();
+		log.info(l.getDisplayName());
+		Locale.setDefault(Locale.US);
+		String formattedDateTime = date.getFormattedDateTime("ww");
+		log.info(Locale.getDefault() + " " + formattedDateTime);
+		Locale.setDefault(Locale.GERMANY);
+		formattedDateTime = date.getFormattedDateTime("ww");
+		assertEquals("53", formattedDateTime);
+		log.info(Locale.getDefault() + " " + formattedDateTime);
+		Locale.setDefault(l);
+		formattedDateTime = date.getFormattedDateTime("ww");
+		log.info(Locale.getDefault() + " " + formattedDateTime);
 	}
 
 	/**
