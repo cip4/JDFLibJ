@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -872,6 +872,16 @@ public class JDFDateTest extends JDFTestCaseBase
 	{
 		final JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
 		assertEquals(19, date.getDay());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testGetWeek() throws Exception
+	{
+		final JDFDate date = new JDFDate("2020-12-30T07:00:11.300+00:00");
+		assertEquals("53", date.getFormattedDateTime("ww"));
 	}
 
 	/**

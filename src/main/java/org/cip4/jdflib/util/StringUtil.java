@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -2241,7 +2241,8 @@ public class StringUtil
 	 */
 	public static byte[] escape(final byte[] a_toEscape, final String strCharSet, String strEscapeChar, final int iRadix, final int iEscapeLen, final int iEscapeBelow, int iEscapeAbove)
 	{
-
+		if (a_toEscape == null)
+			return null;
 		if (strEscapeChar == null)
 		{
 			strEscapeChar = "\\";
@@ -2749,19 +2750,35 @@ public class StringUtil
 	 * @param simpleRegExp the simple regexp
 	 * @return the converted real regexp
 	 */
-	public static String simpleRegExptoRegExp(String simpleRegExp)
+	public static String simpleRegExptoRegExp(final String simpleRegExp)
 	{
-		if (simpleRegExp == null)
+		return simpleRegExptoRegExp(simpleRegExp, false);
+	}
+
+	/**
+	 * converts a simple regexp to a real regexp <br/>
+	 * * --> (.*) (any # of chars) <br/>
+	 * . --> \. (literal ".")<br/>
+	 * ? --> . (exactly one character) if not alwaysSimple one of ([|\ is found in the expression we assume it is a real regexp that has already been converted
+	 *
+	 * @param simpleRegExp the simple regexp
+	 * @param alwaysSimple
+	 * @return the converted real regexp
+	 */
+	public static String simpleRegExptoRegExp(String simpleRegExp, final boolean alwaysSimple)
+	{
+		if (isEmpty(simpleRegExp))
 		{
 			return null;
 		}
 		// don't resimplify explicit regexp
-		if (StringUtils.containsAny(simpleRegExp, "([|"))
+		if (!alwaysSimple && StringUtils.containsAny(simpleRegExp, "{([|"))
 			return simpleRegExp;
 
+		simpleRegExp = StringUtil.escape(simpleRegExp, ".\\{}|[]()", JDFConstants.BACK_SLASH, 0, 0, 0, Integer.MAX_VALUE);
 		// attention note sequence, otherwise we get unwanted side effects
-		final String[] in = new String[] { ".", "*", "?" };
-		final String[] out = new String[] { "\\.", "(.*)", "(.)" };
+		final String[] in = new String[] { "*", "+", "?" };
+		final String[] out = new String[] { "(.*)", "(.+)", "(.)" };
 		for (int i = 0; i < in.length; i++)
 		{
 			final StringBuilder b = new StringBuilder(simpleRegExp.length() * 2);
@@ -2793,9 +2810,22 @@ public class StringUtil
 	 * @param regExp the expression to match against
 	 * @return true, if str matches regExp or regexp is empty
 	 */
-	public static boolean matchesSimple(final String str, String regExp)
+	public static boolean matchesSimple(final String str, final String regExp)
 	{
-		regExp = simpleRegExptoRegExp(regExp);
+		return matchesSimple(str, regExp, false);
+	}
+
+	/**
+	 * match a regular expression using String.matches(), but also catch exceptions and handle simplified regexp. The <code>null</code> expression is assumed to match anything.
+	 *
+	 * @param str the string to match
+	 * @param regExp the expression to match against
+	 * @param alwaysSimple if true - always escape
+	 * @return true, if str matches regExp or regexp is empty
+	 */
+	public static boolean matchesSimple(final String str, String regExp, final boolean alwaysSimple)
+	{
+		regExp = simpleRegExptoRegExp(regExp, false);
 		return matches(str, regExp);
 	}
 
@@ -2898,7 +2928,20 @@ public class StringUtil
 	 */
 	public static boolean matchesIgnoreCase(final String str, final String regExp)
 	{
-		return matchesSimple(str == null ? null : str.toLowerCase(), regExp == null ? null : regExp.toLowerCase());
+		return matchesIgnoreCase(str, regExp, false);
+	}
+
+	/**
+	 * match a regular expression using ignoring cases using String.matches(), but also catch exceptions and handle simplified regexp. The <code>null</code> expression is assumed to match anything.
+	 *
+	 * @param str the string to match
+	 * @param regExp the simplified expression to match against
+	 * @param alwaysSimple TODO
+	 * @return true, if str matches regExp or regexp is empty
+	 */
+	public static boolean matchesIgnoreCase(final String str, final String regExp, final boolean alwaysSimple)
+	{
+		return matchesSimple(str == null ? null : str.toLowerCase(), regExp == null ? null : regExp.toLowerCase(), alwaysSimple);
 	}
 
 	/**
@@ -2947,6 +2990,9 @@ public class StringUtil
 	 */
 	public static String createString(final InputStream is)
 	{
+		if (is == null)
+			return null;
+
 		final StringBuilder b = new StringBuilder();
 		int n = 0;
 		final byte[] by = new byte[4000];
