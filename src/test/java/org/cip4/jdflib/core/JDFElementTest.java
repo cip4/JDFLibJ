@@ -104,6 +104,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 
@@ -1445,6 +1446,20 @@ public class JDFElementTest extends JDFTestCaseBase
 		final JDFElement root = d.getJDFRoot();
 		root.setAttribute("test", nl, null, 1);
 		assertTrue(root.toXML().indexOf("1.1 2.2 3.3") > 0);
+	}
+
+	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
+	public void testSetAttributeNameTimestamp() throws Exception
+	{
+		final JDFElement e = JDFElement.createRoot("a");
+		e.setAttributeNameTimeStamp("b", null);
+		final String attribute = e.getNonEmpty("b");
+		assertNotNull(attribute);
+		assertEquals(System.currentTimeMillis(), new JDFDate(attribute).getTimeInMillis(), 42000);
 	}
 
 	/**
