@@ -79,7 +79,7 @@ public class HotFolder
 	public int stabilizeTime = defaultStabilizeTime; // time between reads in milliseconds - also minimum length of non-modification
 
 	/**
-	 * @param maxConcurrent the maxConcurrent to set
+	 * @param maxConcurrent the maxConcurrent to set note will only add
 	 */
 	public void setMaxConcurrent(final int maxConcurrent)
 	{
@@ -124,14 +124,14 @@ public class HotFolder
 		{
 			lastModified = lastMod;
 			File[] files = getHotFiles();
-			if (lastFileTime.size() > 0 && files != null)
+			if ((lastFileTime.size() > 0) && (files != null))
 			{
-				final int fileListLength = files == null ? 0 : files.length;
+				final int fileListLength = files.length;
 				for (int i = 0; i < lastFileTime.size(); i++)
 				{
 					boolean found = false;
 					final FileTime lftAt = lastFileTime.get(i);
-					for (int j = 0; getMaxConcurrent() > 0 && j < fileListLength; j++)
+					for (int j = 0; j < fileListLength; j++)
 					// loop over all matching files in the directory
 					{
 						final File fileJ = files[j];
@@ -273,7 +273,6 @@ public class HotFolder
 		hfRunning = new HashSet<>();
 		allExtensions = null;
 		HotFolderRunner.getCreateTherunner();
-		setMaxConcurrent(1);
 		if (_hfl != null)
 		{
 			addListener(_hfl, ext);

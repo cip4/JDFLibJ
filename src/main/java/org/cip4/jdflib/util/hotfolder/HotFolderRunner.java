@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -73,7 +73,7 @@ class HotFolderRunner extends Thread
 	void quit()
 	{
 		final String name = getName();
-		log.info("Stopping hot folder runner: " + name);
+		log.info("Stopping hot folder runner: " + this);
 		interrupt.set(true);
 		ThreadUtil.notifyAll(mutex);
 		MultiTaskQueue.shutDown(name);
@@ -90,8 +90,7 @@ class HotFolderRunner extends Thread
 	{
 		hotfolders.remove(hotFolder);
 		hotfolders.add(hotFolder);
-		if (maxConcurrent < hotfolders.size() && maxConcurrent < 13)
-			maxConcurrent = Math.min(13, hotfolders.size());
+		setMaxConcurrent(hotfolders.size());
 		ThreadUtil.notifyAll(mutex);
 	}
 
@@ -117,6 +116,7 @@ class HotFolderRunner extends Thread
 		log.info("Starting hotfolder runner thread");
 		interrupt = new AtomicBoolean(false);
 		mutex = new MyMutex();
+		setMaxConcurrent(1);
 		start();
 	}
 
@@ -126,19 +126,22 @@ class HotFolderRunner extends Thread
 	public void setMaxConcurrent(int maxConcurrent)
 	{
 		if (maxConcurrent < 1)
+		{
 			maxConcurrent = 1;
+		}
+		else if (maxConcurrent > 13)
+		{
+			maxConcurrent = 13;
+		}
 		if (maxConcurrent > this.maxConcurrent)
 		{
-			if (maxConcurrent > 13)
-			{
-				maxConcurrent = 13;
-			}
+			log.info("Setting maxConcurrent to " + maxConcurrent + " " + toString());
 			this.maxConcurrent = maxConcurrent;
 		}
 	}
 
 	final AtomicBoolean interrupt;
-	int maxConcurrent = 1;
+	int maxConcurrent;
 
 	/**
 	 * @see java.lang.Thread#run()
@@ -154,11 +157,18 @@ class HotFolderRunner extends Thread
 			final ArrayList<HotFolder> local = new ArrayList<>(hotfolders);
 			for (final HotFolder folder : local)
 			{
-				mod = folder.loop() || mod;
-				if (interrupt.get())
+				try
 				{
-					log.info("interrupted in hotfilder loop " + folder);
-					break;
+					mod = folder.loop() || mod;
+					if (interrupt.get())
+					{
+						log.info("interrupted in hotfilder loop " + folder);
+						break;
+					}
+				}
+				catch (final Throwable t)
+				{
+					log.error("snafu in " + this, t);
 				}
 			}
 			if (!interrupt.get())
