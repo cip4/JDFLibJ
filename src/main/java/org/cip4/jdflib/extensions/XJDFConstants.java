@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -139,16 +139,21 @@ public abstract class XJDFConstants
 	public static final String ResourceSet = "ResourceSet";
 	public static final String ResponseModes = "ResponseModes";
 
+	public static final String Separations = "Separations";
+
 	public static final String ShapeDefRef = "ShapeDefRef";
 	public static final String ShapeDimension = "ShapeDimension";
+
 	public static final String SheetHeightMax = "SheetHeightMax";
 	public static final String SheetHeightMin = "SheetHeightMin";
 	public static final String SheetWidthMax = "SheetWidthMax";
+	public static final String SheetOptimizingReport = "SheetOptimizingReport";
 	public static final String SheetWidthMin = "SheetWidthMin";
+
+	public static final String SignalNotification = "SignalNotification";
 	public static final String SignalResource = "SignalResource";
 	public static final String SignalStatus = "SignalStatus";
 
-	public static final String Separations = "Separations";
 	public static final String SourceFrequencyMax = "SourceFrequencyMax";
 	public static final String SourceFrequencyMin = "SourceFrequencyMin";
 	public static final String StickOn = "StickOn";

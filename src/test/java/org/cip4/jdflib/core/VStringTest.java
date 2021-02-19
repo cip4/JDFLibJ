@@ -183,7 +183,7 @@ public class VStringTest extends JDFTestCaseBase
 		v.appendUnique("b");
 		v.appendUnique("c");
 		v.add("c");
-		assertFalse(v.containsAny(null));
+		assertTrue(v.containsAny(null));
 		assertFalse(v.containsAny(new VString("d e", " ")));
 		assertTrue(v.containsAny(new VString("b e", " ")));
 		assertTrue(v.containsAny(new VString("e b", " ")));

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -696,6 +696,36 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		r.getCreatePartition(mPart, null);
 		final VElement v = rl.getTargetVector(-1);
 		assertEquals("The target vector has two pv nodes", v.size(), 2);
+	}
+
+	/**
+	 * Method testGetTarget * @throws Exception
+	 */
+	@Test
+	public void testGetStatusFromLeaves()
+	{
+		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
+		final JDFNode n = d.getJDFRoot();
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		final JDFAttributeMap mPartLink = new JDFAttributeMap("PartVersion", "En");
+		mPart.put("SheetName", "S1");
+		mPart.put("Side", "Front");
+		mPart.put("PartVersion", "En Fr");
+		final JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
+
+		assertEquals(EnumResStatus.Unavailable, rl.getStatusFromLeaves());
+		final JDFResource r = rl.getTarget();
+		r.getResourceRoot().setResStatus(EnumResStatus.Available, true);
+		assertEquals(EnumResStatus.Available, rl.getStatusFromLeaves());
+		rl.setPartMap(mPartLink);
+		r.getCreatePartition(mPart, null);
+		mPart.put("PartVersion", "En DK");
+		r.getCreatePartition(mPart, null).setResStatus(EnumResStatus.Draft, true);
+		assertEquals(EnumResStatus.Draft, rl.getStatusFromLeaves());
+		mPartLink.put(AttributeName.SHEETNAME, "nixda");
+		r.getResourceRoot().setPartUsage(EnumPartUsage.Explicit);
+		rl.setPartMap(mPartLink);
+		assertEquals(EnumResStatus.Incomplete, rl.getStatusFromLeaves());
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -561,5 +561,30 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		assertEquals(ContainerUtil.compare("1", null), 1);
 		assertEquals(ContainerUtil.compare(null, "2"), -1);
 		assertEquals(ContainerUtil.compare(null, null), 0);
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testContainsAll()
+	{
+		assertTrue(ContainerUtil.containsAll(null, null));
+		assertFalse(ContainerUtil.containsAll(null, new VString("a")));
+		assertTrue(ContainerUtil.containsAll(new VString("a"), null));
+		assertTrue(ContainerUtil.containsAll(new VString("a b"), new VString("a b c")));
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testContainsAny()
+	{
+		assertTrue(ContainerUtil.containsAny(null, null));
+		assertFalse(ContainerUtil.containsAny(null, new VString("a")));
+		assertTrue(ContainerUtil.containsAny(new VString("a"), null));
+		assertTrue(ContainerUtil.containsAny(new VString("a b"), new VString("a")));
+		assertTrue(ContainerUtil.containsAny(new VString("a b"), new VString("a")));
 	}
 }

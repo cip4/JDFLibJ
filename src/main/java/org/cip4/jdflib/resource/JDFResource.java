@@ -2186,26 +2186,24 @@ public class JDFResource extends JDFElement
 	 */
 	public void clonePartitions(final JDFResource r, VString partIDKeys)
 	{
-		if (r == null)
+		if (r != null)
 		{
-			return;
-		}
-		if (partIDKeys == null)
-			partIDKeys = r.getPartIDKeys();
-		final int size = partIDKeys == null ? 0 : partIDKeys.size();
-		if (size == 0)
-		{
-			return;
-		}
-		setPartIDKeys(partIDKeys);
-		final List<JDFResource> vLeaves = r.getLeafArray(false); // only need the real leaves
-		for (final JDFResource leaf : vLeaves)
-		{
-			final JDFAttributeMap partMap = leaf.getPartMap();
-			partMap.reduceMap(partIDKeys);
-			getCreatePartition(partMap, partIDKeys);
-		}
+			if (partIDKeys == null)
+				partIDKeys = r.getPartIDKeys();
 
+			if (!ContainerUtil.isEmpty(partIDKeys))
+			{
+				if (!ContainerUtil.containsAll(partIDKeys, getPartIDKeyList()))
+					setPartIDKeys(partIDKeys);
+				final List<JDFResource> vLeaves = r.getLeafArray(false); // only need the real leaves
+				for (final JDFResource leaf : vLeaves)
+				{
+					final JDFAttributeMap partMap = leaf.getPartMap();
+					partMap.reduceMap(partIDKeys);
+					getCreatePartition(partMap, partIDKeys);
+				}
+			}
+		}
 	}
 
 	/**

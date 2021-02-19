@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -240,7 +240,7 @@ public class ContainerUtil
 	{
 		if (isEmpty(others))
 		{
-			return false;
+			return true;
 		}
 		for (final A other : others)
 		{
@@ -250,6 +250,27 @@ public class ContainerUtil
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * null safe helper
+	 *
+	 * @param <A>
+	 * @param c
+	 * @param others
+	 * @return
+	 */
+	public static <A> boolean containsAll(final Collection<A> c, final Collection<A> others)
+	{
+		if (isEmpty(others))
+		{
+			return true;
+		}
+		else if (isEmpty(c))
+		{
+			return false;
+		}
+		return c.containsAll(others);
 	}
 
 	/**
@@ -1039,4 +1060,5 @@ public class ContainerUtil
 	{
 		return (List<A>) getKeyArray(m);
 	}
+
 }

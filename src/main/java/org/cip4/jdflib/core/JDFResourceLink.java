@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -80,6 +80,8 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.PartitionGetter;
 import org.cip4.jdflib.resource.process.JDFLot;
+import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -510,6 +512,26 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	public JDFResource.EnumResStatus getStatusJDF()
 	{
 		return JDFResource.EnumResStatus.getEnum(getLinkRoot().getResStatus(false).getName());
+	}
+
+	/**
+	 * get the status of the Resource that is linked by this link
+	 *
+	 * @return JDFResource.EnumResStatus
+	 */
+	public JDFResource.EnumResStatus getStatusFromLeaves()
+	{
+
+		final VElement v = getTargetVector(0);
+		if (ContainerUtil.isEmpty(v))
+			return EnumResStatus.Incomplete;
+		EnumResStatus status = EnumResStatus.Available;
+		for (final KElement e : v)
+		{
+			final EnumResStatus s2 = ((JDFResource) e).getStatusFromLeaves(false);
+			status = (EnumResStatus) EnumUtil.min(s2, status);
+		}
+		return status;
 	}
 
 	/**
