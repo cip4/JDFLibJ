@@ -572,7 +572,8 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		assertTrue(ContainerUtil.containsAll(null, null));
 		assertFalse(ContainerUtil.containsAll(null, new VString("a")));
 		assertTrue(ContainerUtil.containsAll(new VString("a"), null));
-		assertTrue(ContainerUtil.containsAll(new VString("a b"), new VString("a b c")));
+		assertFalse(ContainerUtil.containsAll(new VString("a b"), new VString("a b c")));
+		assertTrue(ContainerUtil.containsAll(new VString("a b c d"), new VString("a b c")));
 	}
 
 	/**

@@ -242,6 +242,10 @@ public class ContainerUtil
 		{
 			return true;
 		}
+		else if (isEmpty(c))
+		{
+			return false;
+		}
 		for (final A other : others)
 		{
 			if (c.contains(other))

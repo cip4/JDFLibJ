@@ -116,7 +116,7 @@ public class StringArrayTest extends JDFTestCaseBase
 		v.appendUnique("b");
 		v.appendUnique("c");
 		v.add("c");
-		assertFalse(v.containsAny(null));
+		assertTrue(v.containsAny(null));
 		assertFalse(v.containsAny(new StringArray("d e", " ")));
 		assertTrue(v.containsAny(new StringArray("b e", " ")));
 		assertTrue(v.containsAny(new StringArray("e b", " ")));
