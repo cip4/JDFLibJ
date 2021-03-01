@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 package org.cip4.jdflib.util;
@@ -78,9 +78,9 @@ import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 
 /**
  * stream class that allows allows skipping until a certain tag is found
- * 
+ *
  * @author rainer prosi
- * 
+ *
  */
 public class SkipInputStream extends ByteArrayIOInputStream
 {
@@ -137,9 +137,9 @@ public class SkipInputStream extends ByteArrayIOInputStream
 	}
 
 	/**
-	 * @param maxPreRead 
+	 * @param maxPreRead
 	 * @throws IOException
-	 * 
+	 *
 	 */
 	private boolean readToTag() throws IOException
 	{
@@ -175,6 +175,11 @@ public class SkipInputStream extends ByteArrayIOInputStream
 			}
 			else
 			{
+				if (tagPos != 0)
+				{
+					super.reset();
+					super.read();
+				}
 				tagPos = 0;
 			}
 		}
@@ -183,7 +188,7 @@ public class SkipInputStream extends ByteArrayIOInputStream
 
 	/**
 	 * same as read, returns -1 if not found
-	 * 
+	 *
 	 * @see java.io.BufferedInputStream#read()
 	 */
 	@Override
@@ -195,6 +200,7 @@ public class SkipInputStream extends ByteArrayIOInputStream
 
 	/**
 	 * read until we find the next occurrence of searchtag
+	 *
 	 * @return true if we found a new search tag and are at a new position
 	 */
 	public boolean readToNextTag()
@@ -216,7 +222,7 @@ public class SkipInputStream extends ByteArrayIOInputStream
 			found = false;
 			readToTag();
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			return false;
 		}
@@ -233,7 +239,7 @@ public class SkipInputStream extends ByteArrayIOInputStream
 	}
 
 	/**
-	 * 
+	 *
 	 * @see java.io.ByteArrayInputStream#reset()
 	 */
 	@Override
@@ -244,11 +250,11 @@ public class SkipInputStream extends ByteArrayIOInputStream
 	}
 
 	/**
-	 * 
+	 *
 	 * @see java.io.ByteArrayInputStream#mark(int)
 	 */
 	@Override
-	public synchronized void mark(int readlimit)
+	public synchronized void mark(final int readlimit)
 	{
 		myMark = pos;
 	}

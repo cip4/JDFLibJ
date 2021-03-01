@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,7 @@ import org.junit.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * July 23, 2009
+ *         July 23, 2009
  */
 public class SkipInputStreamTest extends JDFTestCaseBase
 {
@@ -127,6 +127,20 @@ public class SkipInputStreamTest extends JDFTestCaseBase
 		assertEquals(pis.read(), '1');
 		assertFalse(pis.readToNextTag());
 		assertEquals(pis.read(), -1);
+		pis.close();
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testReadToNextTagStart() throws Exception
+	{
+		final SkipInputStream pis = new SkipInputStream("ab", new ByteArrayInputStream("a0caab12".getBytes()), false);
+		assertEquals(pis.read(), 'a');
+		assertEquals(pis.read(), 'b');
+		assertEquals(pis.read(), '1');
+		assertEquals(pis.read(), '2');
 		pis.close();
 	}
 
