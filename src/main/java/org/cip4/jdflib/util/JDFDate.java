@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -456,7 +456,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		 */
 		private String handleZulu(String strDateTime) throws DataFormatException
 		{
-			final int length = strDateTime.length();
+			int length = strDateTime.length();
 			char lastChar = strDateTime.charAt(length - 1);
 
 			if (lastChar >= 'a' && lastChar <= 'z')
@@ -497,6 +497,30 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 				bias += ":00";
 
 				strDateTime = strBuffer + bias; // add the alphabetical timezone
+			}
+			else if (((strDateTime.charAt(length - 6) != '+') && (strDateTime.charAt(length - 6) != '-')))
+			{
+				if (lastChar == ':')
+				{
+					strDateTime += "00";
+					length += 2;
+				}
+				final int posColon = strDateTime.lastIndexOf(':');
+				final int posPlus = strDateTime.lastIndexOf('+');
+				final int posMinus = strDateTime.lastIndexOf('-');
+				final int posPM = Math.max(posMinus, posPlus);
+				if (posPM == length - 5 && posColon > posPM)
+				{
+					strDateTime = StringUtil.leftStr(strDateTime, -4) + '0' + StringUtil.rightStr(strDateTime, 4);
+				}
+				if (posColon < posPM && length - posPM < 3)
+				{
+					strDateTime += ":00";
+					if (posPM == length - 2)
+					{
+						strDateTime = StringUtil.leftStr(strDateTime, -4) + '0' + StringUtil.rightStr(strDateTime, 4);
+					}
+				}
 			}
 			return strDateTime;
 		}

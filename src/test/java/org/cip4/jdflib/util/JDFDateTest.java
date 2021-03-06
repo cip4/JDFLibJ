@@ -98,6 +98,21 @@ public class JDFDateTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testCreateDateBadTimeZone() throws DataFormatException
+	{
+		assertNotNull(JDFDate.createDate("1999-09-26T11:43:10+3:00"));
+		final JDFDate createDate = JDFDate.createDate("1999-09-26T11:43:10-3:00");
+		assertNotNull(createDate);
+		assertEquals(createDate, JDFDate.createDate("1999-09-26T11:43:10-3"));
+		assertEquals(createDate, JDFDate.createDate("1999-09-26T11:43:10-3:"));
+		assertNotNull(JDFDate.createDate("1999-09-26T11:43:10Z"));
+	}
+
+	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
 	public void testCreateDateBlank() throws DataFormatException
 	{
 		assertEquals(JDFDate.createDate("1999-09-26T 1:43:10+03:00"), JDFDate.createDate("1999-09-26T01:43:10+03:00"));
@@ -231,16 +246,6 @@ public class JDFDateTest extends JDFTestCaseBase
 		catch (final DataFormatException dfe)
 		{
 			fail("date exception: ");
-		}
-
-		try
-		{
-			date = new JDFDate("1975-01-01T20:00:10-5");
-			fail("date exception: " + date);
-		}
-		catch (final DataFormatException dfe)
-		{
-			//
 		}
 
 		try
@@ -602,10 +607,8 @@ public class JDFDateTest extends JDFTestCaseBase
 	@Test
 	public void testRegexp()
 	{
-		assertTrue(StringUtil.matches(new JDFDate().getDateTimeISO(),
-				"(19|20)\\d\\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])[T](0[0-9]|1[0-9]|2[0123])[:]([0-5][0-9])[:]([0-5][0-9])([.](\\d)*)?(([+-](0[0-9]|1[0-9]|2[0123])[:](00))|[a-zA-Z])"));
-		assertTrue(StringUtil.matches(new JDFDate().getDateTimeISO(),
-				"(19|20)\\d\\d(-)(0[1-9]|1[012])(-)(0[1-9]|[12][0-9]|3[01])[T](0[0-9]|1[0-9]|2[0123])(:)([0-5][0-9])(:)([0-5][0-9])((.)(\\d)*)?(([+-](0[0-9]|1[0-9]|2[0123])(:)(00))|[a-zA-Z])"));
+		assertTrue(StringUtil.matches(new JDFDate().getDateTimeISO(), "(19|20)\\d\\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])[T](0[0-9]|1[0-9]|2[0123])[:]([0-5][0-9])[:]([0-5][0-9])([.](\\d)*)?(([+-](0[0-9]|1[0-9]|2[0123])[:](00))|[a-zA-Z])"));
+		assertTrue(StringUtil.matches(new JDFDate().getDateTimeISO(), "(19|20)\\d\\d(-)(0[1-9]|1[012])(-)(0[1-9]|[12][0-9]|3[01])[T](0[0-9]|1[0-9]|2[0123])(:)([0-5][0-9])(:)([0-5][0-9])((.)(\\d)*)?(([+-](0[0-9]|1[0-9]|2[0123])(:)(00))|[a-zA-Z])"));
 	}
 
 	/**
