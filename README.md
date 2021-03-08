@@ -3,6 +3,29 @@
 
 CIP4 JDF Library
 
+
+### Download
+
+Gradle:
+```gradle
+dependencies {
+  implementation 'org.cip4.lib.jdf:JDFLibJ:2.1.7.3'
+}
+```
+
+Maven:
+```xml
+<dependency>
+  <groupId>org.cip4.lib.jdf</groupId>
+  <artifactId>JDFLibJ</artifactId>
+  <version>2.1.7.3</version>
+</dependency>
+```
+
+[JDFLibJ jar downloads](https://maven-badges.herokuapp.com/maven-central/org.cip4.lib.jdf/JDFLibJ) are available from Maven Central.
+
+[![Build Status](https://travis-ci.org/cip4/JDFLibJ.svg?branch=master)](https://travis-ci.org/cip4/JDFLibJ)
+
 ## Issue Tracking
 Don't write issues, provide Pull-Requests!
 
