@@ -24,7 +24,6 @@ Maven:
 
 [JDFLibJ jar downloads](https://maven-badges.herokuapp.com/maven-central/org.cip4.lib.jdf/JDFLibJ) are available from Maven Central.
 
-[![Build Status](https://travis-ci.org/cip4/JDFLibJ.svg?branch=master)](https://travis-ci.org/cip4/JDFLibJ)
 
 ## Issue Tracking
 Don't write issues, provide Pull-Requests!
