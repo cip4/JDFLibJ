@@ -107,6 +107,17 @@ public class ContainerUtil
 	}
 
 	/**
+	 * return null if c==null or c.isEmpty=true used to zapp empty collections
+	 *
+	 * @param c the Collection to test
+	 * @return the converted Collecion
+	 */
+	public static Map<?, ?> getNonEmpty(final Map<?, ?> c)
+	{
+		return c == null || c.isEmpty() ? null : c;
+	}
+
+	/**
 	 * return null if c==null or c.isEmpty=true or c contains an empty collection used to zapp empty collections
 	 *
 	 * @param c the Collection to test

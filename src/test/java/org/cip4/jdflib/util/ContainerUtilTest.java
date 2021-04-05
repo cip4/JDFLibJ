@@ -477,7 +477,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	{
 		final Vector<String> v = new Vector<>();
 		assertNull(ContainerUtil.getNonEmpty(v));
-		assertNull(ContainerUtil.getNonEmpty(null));
+		assertNull(ContainerUtil.getNonEmpty((Map) null));
 
 		v.add("a");
 		assertEquals(v, ContainerUtil.getNonEmpty(v));
