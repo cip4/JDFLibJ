@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -174,7 +174,7 @@ public class HotFolder
 
 					for (final File f : files) // the file is new - add to list for next check
 					{
-						lastFileTime.add(new FileTime(f));
+						lastFileTime.add(new FileTime(f, false));
 					}
 				}
 			}
@@ -205,9 +205,9 @@ public class HotFolder
 			return null;
 		}
 		final StringArray allextensions = new StringArray();
-		for (int i = 0; i < hfl.size(); i++)
+		for (final ExtensionListener element : hfl)
 		{
-			final Set<String> ext = hfl.get(i).extension;
+			final Set<String> ext = element.extension;
 			if (ext != null)
 			{
 				allextensions.addAll(ext);
@@ -224,7 +224,24 @@ public class HotFolder
 	}
 
 	private long lastModified = -1;
-	private final ArrayList<FileTime> lastFileTime;
+	private ArrayList<FileTime> lastFileTime;
+
+	/**
+	 * @return the lastFileTime
+	 */
+	ArrayList<FileTime> getLastFileTime()
+	{
+		return lastFileTime;
+	}
+
+	/**
+	 * @param lastFileTime the lastFileTime to set
+	 */
+	void setLastFileTime(final ArrayList<FileTime> lastFileTime)
+	{
+		this.lastFileTime = lastFileTime;
+	}
+
 	protected final ArrayList<ExtensionListener> hfl;
 	final Set<File> hfRunning;
 	static final private Log log = LogFactory.getLog(HotFolder.class);
@@ -318,7 +335,7 @@ public class HotFolder
 	 *
 	 * @return
 	 */
-	private File[] getHotFiles()
+	File[] getHotFiles()
 	{
 		final HotFolderRunner r = HotFolderRunner.getTherunner();
 		if (r == null)
@@ -352,7 +369,7 @@ public class HotFolder
 		return n == 0 ? null : files;
 	}
 
-	private boolean processSingleFile(final FileTime lftAt)
+	boolean processSingleFile(final FileTime lftAt)
 	{
 		boolean found = true;
 		if (lftAt.sameModified() && ((lftAt.modified + stabilizeTime) < System.currentTimeMillis()))

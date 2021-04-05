@@ -53,12 +53,16 @@ class FileTime
 	protected final File f;
 	protected long modified;
 	protected long length;
+	private final boolean readOnly;
 
-	protected FileTime(final File _f)
+	protected FileTime(final File _f, final boolean readOnly)
 	{
 		f = _f;
 		modified = -1;
 		length = 0;
+		this.readOnly = readOnly;
+		if (readOnly)
+			updateModified();
 	}
 
 	protected long updateModified()
@@ -82,12 +86,12 @@ class FileTime
 
 	protected long lastModified()
 	{
-		return ((f == null) || !f.canWrite()) ? 0 : f.lastModified();
+		return ((f == null) || !readOnly && !f.canWrite()) ? 0 : f.lastModified();
 	}
 
 	protected long lastLength()
 	{
-		return ((f == null) || !f.canWrite()) ? -1 : f.length();
+		return ((f == null) || !readOnly && !f.canWrite()) ? -1 : f.length();
 	}
 
 	@Override

@@ -69,7 +69,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	private static final String LIB_NAME = "lib.name";
 	final private static String m_libAgentName = "CIP4 JDF Writer Java";
-	final private static String m_libAgentVersion = "2.1.7 BLD 015";
+	final private static String m_libAgentVersion = "2.1.7 BLD 016";
 
 	private static final long serialVersionUID = 1L;
 

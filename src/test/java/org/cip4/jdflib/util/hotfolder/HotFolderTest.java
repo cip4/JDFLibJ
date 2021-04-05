@@ -69,13 +69,15 @@ public class HotFolderTest extends JDFTestCaseBase
 	private File theHF;
 	HotFolder hf;
 
-	protected class MyListener implements HotFolderListener
+	protected static class MyListener implements HotFolderListener
 	{
 		protected boolean bZapp;
+		int n;
 
 		protected MyListener(final boolean _bZapp)
 		{
 			bZapp = _bZapp;
+			n = 0;
 		}
 
 		/**
@@ -89,8 +91,16 @@ public class HotFolderTest extends JDFTestCaseBase
 			boolean zapp = false;
 			if (bZapp)
 				zapp = hotFile.delete();
-			log.info(hotFile.getPath() + "," + bZapp + "," + zapp + " " + hf.getMaxConcurrent());
+			n++;
 			return zapp;
+		}
+
+		/**
+		 * @return the n
+		 */
+		int getN()
+		{
+			return n;
 		}
 
 	}

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -56,13 +56,13 @@ public class FileTimeTest extends JDFTestCaseBase
 	@Test
 	public void testExists()
 	{
-		assertTrue(new FileTime(new File(sm_dirTestData)).exists());
+		assertTrue(new FileTime(new File(sm_dirTestData), false).exists());
 	}
 
 	@Test
 	public void testmodified()
 	{
-		final FileTime ft = new FileTime(new File(sm_dirTestData));
+		final FileTime ft = new FileTime(new File(sm_dirTestData), false);
 		final long updateModified = ft.updateModified();
 		assertEquals(System.currentTimeMillis(), updateModified, 1000);
 		ThreadUtil.sleep(400);
@@ -72,35 +72,44 @@ public class FileTimeTest extends JDFTestCaseBase
 	@Test
 	public void testmodifiedFile() throws Exception
 	{
-		final File dummy = new File(sm_dirTestDataTemp + "dummy.file");
-		final FileTime ft = new FileTime(dummy);
-		FileUtil.forceDelete(dummy);
-		FileUtil.createNewFile(dummy);
-		ThreadUtil.sleep(2);
-		for (int i = 0; i < 20; i++)
+		for (final boolean b : new boolean[] { true, false })
 		{
-			final FileOutputStream fos = new FileOutputStream(dummy, true);
-			for (int j = 0; j < 200; j++)
-			{// incrementally fill file
-				fos.write(i);
+			final File dummy = new File(sm_dirTestDataTemp + "dummy.file");
+			final FileTime ft = new FileTime(dummy, b);
+			FileUtil.forceDelete(dummy);
+			FileUtil.createNewFile(dummy);
+			ThreadUtil.sleep(2);
+			for (int i = 0; i < 20; i++)
+			{
+				final FileOutputStream fos = new FileOutputStream(dummy, true);
+				for (int j = 0; j < 200; j++)
+				{// incrementally fill file
+					fos.write(i);
+				}
+				fos.flush();
+				fos.close();
+
+				ThreadUtil.sleep(100);
+				final long updateModified = ft.updateModified();
+				assertEquals(System.currentTimeMillis(), updateModified, 4200);
+
 			}
-			fos.flush();
-			fos.close();
-
-			ThreadUtil.sleep(100);
-			final long updateModified = ft.updateModified();
-			assertEquals(System.currentTimeMillis(), updateModified, 4200);
-
 		}
-
 	}
 
 	@Test
 	public void testSameModified()
 	{
-		final FileTime ft = new FileTime(new File(sm_dirTestData));
+		final FileTime ft = new FileTime(new File(sm_dirTestData), false);
 		assertFalse(ft.sameModified());
 		ft.updateModified();
+		assertTrue(ft.sameModified());
+	}
+
+	@Test
+	public void testSameModifiedRO()
+	{
+		final FileTime ft = new FileTime(new File(sm_dirTestData), true);
 		assertTrue(ft.sameModified());
 	}
 
