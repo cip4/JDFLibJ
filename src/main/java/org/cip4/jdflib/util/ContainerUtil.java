@@ -561,9 +561,9 @@ public class ContainerUtil
 			}
 
 			Collections.sort(keys);
-			for (int i = 0; i < keys.size(); i++)
+			for (final a key : keys)
 			{
-				v.add(m.get(keys.get(i)));
+				v.add(m.get(key));
 			}
 			return v;
 		}
@@ -614,9 +614,9 @@ public class ContainerUtil
 			}
 
 			Collections.sort(keys);
-			for (int i = 0; i < keys.size(); i++)
+			for (final A key : keys)
 			{
-				v.add(m.get(keys.get(i)));
+				v.add(m.get(key));
 			}
 			return v;
 		}
@@ -1033,11 +1033,30 @@ public class ContainerUtil
 	}
 
 	/**
+	 * @param c the collection to check
+	 * @return 0 for null or size
+	 */
+	public static int size(final Map<?, ?> c)
+	{
+		return c == null ? 0 : c.size();
+	}
+
+	/**
 	 *
 	 * @param c
 	 * @return
 	 */
 	public static boolean isEmpty(final Collection<?> c)
+	{
+		return c == null ? true : c.isEmpty();
+	}
+
+	/**
+	 *
+	 * @param c
+	 * @return
+	 */
+	public static boolean isEmpty(final Map<?, ?> c)
 	{
 		return c == null ? true : c.isEmpty();
 	}

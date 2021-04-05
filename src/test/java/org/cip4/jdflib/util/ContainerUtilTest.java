@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
@@ -55,6 +56,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.resource.process.JDFCostCenter;
 import org.junit.Test;
@@ -489,10 +491,24 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	{
 		final Vector<String> v = new Vector<>();
 		assertTrue(ContainerUtil.isEmpty(v));
-		assertTrue(ContainerUtil.isEmpty(null));
+		assertTrue(ContainerUtil.isEmpty((Map) null));
 
 		v.add("a");
 		assertFalse(ContainerUtil.isEmpty(v));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSize()
+	{
+		final JDFAttributeMap m = new JDFAttributeMap();
+		assertEquals(0, ContainerUtil.size(m));
+		assertEquals(0, ContainerUtil.size((List) null));
+
+		m.put("a", "b");
+		assertEquals(1, ContainerUtil.size(m));
 	}
 
 	/**
