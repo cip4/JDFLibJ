@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -251,6 +251,31 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		writeTest(xjdfHelper, "processes/SimpleGang.xjdf");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testReport()
+	{
+		for (int i = 0; i < 6; i++)
+		{
+			addGang();
+		}
+		final SetHelper sorSet = xjdfHelper.getCreateSet(XJDFConstants.SheetOptimizingReport, EnumUsage.Input);
+		xjdfHelper.setVersion(EnumVersion.Version_2_2);
+		final ResourceHelper sorRes = sorSet.getCreatePartition(0, true);
+		sorRes.setAmount(200, null, true);
+		final KElement sor = sorRes.getCreateResource();
+		sor.setAttribute(XJDFConstants.AreaUse, 0.8, null);
+		sor.setAttribute(XJDFConstants.BackUse, 1.0, null);
+		sor.setAttribute(XJDFConstants.VolumeUse, 0.7, null);
+
+		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper, true);
+		writeTest(xjdfHelper, "processes/SimpleReport.xjdf");
 	}
 
 	/**

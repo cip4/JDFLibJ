@@ -40,6 +40,7 @@ import org.cip4.jdflib.core.ElementName;
 
 public abstract class XJDFConstants
 {
+	public static final String AreaUse = "AreaUse";
 	public static final String AssemblingIntent = "AssemblingIntent";
 
 	public static final String AuditCreated = "AuditCreated";
@@ -52,6 +53,8 @@ public abstract class XJDFConstants
 	public static final String BackCIEWhiteness = "BackCIEWhiteness";
 	public static final String BackCoating = "BackCoating";
 	public static final String BackLabColorValue = "BackLabColorValue";
+	public static final String BackUse = "BackUse";
+
 	public static final String BindIn = "BindIn";
 	public static final String BinderySignatureID = "BinderySignatureID";
 	public static final String BinderySignatureIDs = "BinderySignatureIDs";
@@ -73,6 +76,7 @@ public abstract class XJDFConstants
 	public static final String ContentStatus = "ContentStatus";
 	public static final String Cover = "Cover";
 
+	public static final String DateSpread = "DateSpread";
 	public static final String Dependent = "Dependent";
 	public static final String DropID = "DropID";
 	/**
@@ -107,6 +111,8 @@ public abstract class XJDFConstants
 	public static final String ModuleIDs = "ModuleIDs";
 	public static final String MultiPageFold = "MultiPageFold";
 
+	public static final String OrderQuantity = "OrderQuantity";
+
 	public static final String PaperRef = "PaperRef";
 	public static final String Parent = "Parent";
 	public static final String ParentID = "ParentID";
@@ -115,9 +121,13 @@ public abstract class XJDFConstants
 	public static final String Pattern = "Pattern";
 	public static final String PlacedObject = "PlacedObject";
 	public static final String PlacedQuantity = "PlacedQuantity";
-	public static final String PositionRef = "PositionRef";
 	public static final String PlateRef = "PlateRef";
+
+	public static final String PositionRef = "PositionRef";
+	public static final String Positions = "Positions";
 	public static final String PreflightItem = "PreflightItem";
+	public static final String PrintableArea = "PrintableArea";
+	public static final String PrintedWaste = "PrintedWaste";
 	public static final String PrintStandard = "PrintStandard";
 	public static final String Process = "Process";
 	public static final String ProcessList = "ProcessList";
@@ -164,11 +174,16 @@ public abstract class XJDFConstants
 	public static final String TrimSpine = "TrimSpine";
 	public static final String TypeDetails = "TypeDetails";
 
+	public static final String UniquePositions = "UniquePositions";
+	public static final String UniqueUse = "UniqueUse";
+
 	public static final String VariableType = "VariableType";
 	public static final String VerificationResult = "VerificationResult";
+	public static final String VolumeUse = "VolumeUse";
 
 	public static final String Waste = "Waste";
 	public static final String WasteDetails = "WasteDetails";
+	public static final String WasteQuantity = "WasteQuantity";
 
 	public static final String XJDF = "XJDF";
 	public static final String XJDFPREFIX = XJDF.toLowerCase();
