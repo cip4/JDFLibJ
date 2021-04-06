@@ -89,9 +89,9 @@ public class FileTimeTest extends JDFTestCaseBase
 				fos.flush();
 				fos.close();
 
-				ThreadUtil.sleep(100);
+				ThreadUtil.sleep(420);
 				final long updateModified = ft.updateModified();
-				assertEquals(System.currentTimeMillis(), updateModified, 4200);
+				assertEquals("loop " + i, System.currentTimeMillis(), updateModified, 4200);
 
 			}
 		}
