@@ -79,7 +79,7 @@ public class FileTimeTest extends JDFTestCaseBase
 			FileUtil.forceDelete(dummy);
 			FileUtil.createNewFile(dummy);
 			ThreadUtil.sleep(2);
-			for (int i = 0; i < 20; i++)
+			for (int i = 0; i < 5; i++)
 			{
 				final FileOutputStream fos = new FileOutputStream(dummy, true);
 				for (int j = 0; j < 200; j++)
@@ -88,10 +88,10 @@ public class FileTimeTest extends JDFTestCaseBase
 				}
 				fos.flush();
 				fos.close();
-
-				ThreadUtil.sleep(420);
+				log.info("" + i);
+				ThreadUtil.sleep(1420);
 				final long updateModified = ft.updateModified();
-				assertEquals("loop " + i, System.currentTimeMillis(), updateModified, 4200);
+				assertEquals("loop " + i, System.currentTimeMillis(), updateModified, 14200);
 
 			}
 		}
