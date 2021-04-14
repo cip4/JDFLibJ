@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,8 @@
 package org.cip4.jdflib.util.thread;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -157,9 +159,28 @@ public class DelayedPersistTest extends JDFTestCaseBase
 		assertFalse(file.exists());
 		DelayedPersist.getDelayedPersist().queue(new TestPersist(), 15555);
 		assertFalse(file.exists());
-		long t0 = System.currentTimeMillis();
+		final long t0 = System.currentTimeMillis();
 		DelayedPersist.shutDown();
 		assertTrue(System.currentTimeMillis() - t0 < 3000);
+		assertTrue(file.exists());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testShutdownCurrent()
+	{
+		file.delete();
+		assertFalse(file.exists());
+		DelayedPersist.getDelayedPersist().queue(new TestPersist(), 15555);
+		assertNotNull(DelayedPersist.getCurrentDelayedPersist());
+		assertFalse(file.exists());
+		final long t0 = System.currentTimeMillis();
+		DelayedPersist.shutDown();
+		assertNull(DelayedPersist.getCurrentDelayedPersist());
+		assertTrue(System.currentTimeMillis() - t0 < 3000);
+		assertNull(DelayedPersist.getCurrentDelayedPersist());
 		assertTrue(file.exists());
 	}
 
