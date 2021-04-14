@@ -1459,7 +1459,7 @@ public class JDFElementTest extends JDFTestCaseBase
 		e.setAttributeNameTimeStamp("b", null);
 		final String attribute = e.getNonEmpty("b");
 		assertNotNull(attribute);
-		assertEquals(System.currentTimeMillis(), new JDFDate(attribute).getTimeInMillis(), 42000);
+		assertEquals(System.currentTimeMillis(), new JDFDate(attribute).getTimeInMillis(), 142000);
 	}
 
 	/**
