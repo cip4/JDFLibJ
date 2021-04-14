@@ -8089,168 +8089,181 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		for (int i = 0; i < v.size(); i++)
 		{
 			final JDFResource res = (JDFResource) v.elementAt(i);
-			addExecutablePartitions(link, res, res.getPartIDKeys(), vp, minStatus, bCheckNodeStatus);
+			new ExecCheck().addExecutablePartitions(link, res, res.getPartIDKeys(), vp, minStatus, bCheckNodeStatus);
 		}
 		vp.unify();
 		return vp;
 	}
 
-	private ExecPartFlags addExecutablePartitions(final JDFResourceLink link, final JDFResource res, final VString vsPartIDKeys, final VJDFAttributeMap vamPartMaps, final JDFResource.EnumResStatus minStatus, final boolean bCheckNodeStatus)
+	private class ExecCheck
 	{
-		final JDFAttributeMap amPartMap = res.getPartMap();
-
-		// //////////////////////////////////////////////////////
-		// Check if all child partitions are executable.
-		//
-
-		final VElement veChildPartitions = res.getChildElementVector_JDFElement(res.getNodeName(), null, null, false, 0, true);
-
-		final int nChildPartitions = veChildPartitions.size();
-
-		// //////////////////////////////////////////////////////
-		// Check if this is a leaf partition.
-		//
-
-		boolean isLeaf = false;
-
-		if (nChildPartitions == 0)
+		private ExecPartFlags addExecutablePartitions(final JDFResourceLink link, final JDFResource res, final VString vsPartIDKeys, final VJDFAttributeMap vamPartMaps, final JDFResource.EnumResStatus minStatus, final boolean bCheckNodeStatus)
 		{
-			if (vsPartIDKeys != null)
-			{
-				final StringArray vsMapKeys = amPartMap.getKeyList();
+			final JDFAttributeMap amPartMap = res.getPartMap();
 
-				if (vsMapKeys != null)
+			// //////////////////////////////////////////////////////
+			// Check if all child partitions are executable.
+			//
+
+			final VElement veChildPartitions = res.getChildElementVector_JDFElement(res.getNodeName(), null, null, false, 0, true);
+
+			final int nChildPartitions = veChildPartitions.size();
+
+			// //////////////////////////////////////////////////////
+			// Check if this is a leaf partition.
+			//
+
+			final boolean isLeaf = isLeaf(vsPartIDKeys, amPartMap, nChildPartitions);
+
+			// //////////////////////////////////////////////////////
+			// Check the process status.
+			//
+
+			final JDFElement.EnumNodeStatus stat = getPartStatus(amPartMap, 0);
+
+			boolean isProcStatOK = false;
+			if (bCheckNodeStatus)
+			{
+				if (((stat == null) && (isLeaf)) || (stat == JDFNode.EnumNodeStatus.Waiting) || (stat == JDFNode.EnumNodeStatus.Ready))
 				{
-					isLeaf = vsMapKeys.containsAll(vsPartIDKeys);
+					isProcStatOK = true;
 				}
 			}
 			else
-			{
-				isLeaf = true;
-			}
-		}
-
-		// //////////////////////////////////////////////////////
-		// Check the process status.
-		//
-
-		boolean isProcStatOK = false;
-
-		final JDFElement.EnumNodeStatus stat = getPartStatus(amPartMap, 0);
-
-		if (bCheckNodeStatus)
-		{
-			if (((stat == null) && (isLeaf)) || (stat == JDFNode.EnumNodeStatus.Waiting) || (stat == JDFNode.EnumNodeStatus.Ready))
 			{
 				isProcStatOK = true;
 			}
-		}
-		else
-		{
-			isProcStatOK = true;
-		}
 
-		final JDFResource.EnumPartUsage partUsage = res.getPartUsage();
+			final JDFResource.EnumPartUsage partUsage = res.getPartUsage();
 
-		boolean allChildsAvailable = true;
-		for (int i = 0; i < nChildPartitions; i++)
-		{
-			final JDFResource sub = (JDFResource) veChildPartitions.get(i);
-			final JDFAttributeMap amSub = sub.getPartMap();
-
-			if (link.overlapsResourcePartMap(amSub))
+			boolean allChildsAvailable = true;
+			for (int i = 0; i < nChildPartitions; i++)
 			{
-				final ExecPartFlags ExecChild = addExecutablePartitions(link, sub, vsPartIDKeys, vamPartMaps, minStatus, bCheckNodeStatus);
-				if (!ExecChild.isAvailable())
-				{
-					allChildsAvailable = false;
-				}
+				final JDFResource sub = (JDFResource) veChildPartitions.get(i);
+				final JDFAttributeMap amSub = sub.getPartMap();
 
-				if (!ExecChild.isProcStatOK() && (partUsage != JDFResource.EnumPartUsage.Implicit))
+				if (link.overlapsResourcePartMap(amSub))
 				{
-					isProcStatOK = false;
+					final ExecPartFlags ExecChild = addExecutablePartitions(link, sub, vsPartIDKeys, vamPartMaps, minStatus, bCheckNodeStatus);
+					if (!ExecChild.isAvailable())
+					{
+						allChildsAvailable = false;
+					}
+
+					if (!ExecChild.isProcStatOK() && (partUsage != JDFResource.EnumPartUsage.Implicit))
+					{
+						isProcStatOK = false;
+					}
 				}
 			}
-		}
 
-		// //////////////////////////////////////////////////////
-		// Determine status of resource.
-		//
-
-		final JDFResource.EnumResStatus statRes = res.getResStatus(false);
-		boolean isAvailable = (statRes.getValue() >= minStatus.getValue());
-
-		if (nChildPartitions > 0) // Non leaf
-		{
 			// //////////////////////////////////////////////////////
-			// In case special parts are referenced by the link, the
-			// resource should behave as if it has explicit part usage
-			// when determining availability.
+			// Determine status of resource.
 			//
 
-			if (!allChildsAvailable)
+			final JDFResource.EnumResStatus statRes = res.getResStatus(false);
+			boolean isAvailable = (statRes.getValue() >= minStatus.getValue());
+
+			if (nChildPartitions > 0) // Non leaf
 			{
-				isAvailable = false;
-			}
-			else
-			{
-				if ((partUsage != JDFResource.EnumPartUsage.Implicit) || (link.hasChildElement(ElementName.PART, null)))
+				// //////////////////////////////////////////////////////
+				// In case special parts are referenced by the link, the
+				// resource should behave as if it has explicit part usage
+				// when determining availability.
+				//
+
+				if (!allChildsAvailable)
 				{
-					isAvailable = true;
+					isAvailable = false;
+				}
+				else
+				{
+					if ((partUsage != JDFResource.EnumPartUsage.Implicit) || (link.hasChildElement(ElementName.PART, null)))
+					{
+						isAvailable = true;
+					}
 				}
 			}
+
+			// //////////////////////////////////////////////////////
+			// Add part map if executable, and spawn is allowed.
+			//
+
+			final boolean hasResourcePartMap = link.hasResourcePartMap(amPartMap, true);
+
+			final boolean isExecutable = hasResourcePartMap && isProcStatOK && isAvailable && res.isSpawnAllowed();
+
+			modifyPartMap(vamPartMaps, amPartMap, isLeaf, stat, isExecutable);
+
+			// //////////////////////////////////////////////////////
+			// Return the two booleans as integer.
+			//
+
+			return new ExecPartFlags(isAvailable, isProcStatOK);
 		}
 
-		// //////////////////////////////////////////////////////
-		// Add part map if executable, and spawn is allowed.
-		//
-
-		final boolean hasResourcePartMap = link.hasResourcePartMap(amPartMap, true);
-
-		final boolean isExecutable = hasResourcePartMap && isProcStatOK && isAvailable && res.isSpawnAllowed();
-
-		if (isExecutable)
+		private void modifyPartMap(final VJDFAttributeMap vamPartMaps, final JDFAttributeMap amPartMap, final boolean isLeaf, final JDFElement.EnumNodeStatus stat, final boolean isExecutable)
 		{
-			if ((isLeaf) && (stat == null)) // leaf with unknown PartStatus
+			if (isExecutable)
 			{
-				if (getStatus() == EnumNodeStatus.Part)
+				if ((isLeaf) && (stat == null)) // leaf with unknown PartStatus
 				{
-					final JDFNodeInfo ni = getNodeInfo();
-
-					final VElement veParts = ni.getPartitionVector(amPartMap, JDFResource.EnumPartUsage.Implicit);
-
-					if ((veParts == null) || veParts.isEmpty())
+					if (getStatus() == EnumNodeStatus.Part)
 					{
-						vamPartMaps.add(amPartMap);
-					}
-					else
-					{
-						for (int p = 0; p < veParts.size(); p++)
+						final JDFNodeInfo ni = getNodeInfo();
+
+						final VElement veParts = ni.getPartitionVector(amPartMap, JDFResource.EnumPartUsage.Implicit);
+
+						if ((veParts == null) || veParts.isEmpty())
 						{
-							final JDFNodeInfo niPart = (JDFNodeInfo) veParts.elementAt(p);
-
-							final JDFElement.EnumNodeStatus statPart = niPart.getNodeStatus();
-
-							if ((statPart == JDFNode.EnumNodeStatus.Waiting) || (statPart == JDFNode.EnumNodeStatus.Ready))
-							{
-								vamPartMaps.add(niPart.getPartMap());
-							}
+							vamPartMaps.add(amPartMap);
 						}
-						vamPartMaps.unify();
+						else
+						{
+							for (int p = 0; p < veParts.size(); p++)
+							{
+								final JDFNodeInfo niPart = (JDFNodeInfo) veParts.elementAt(p);
+
+								final JDFElement.EnumNodeStatus statPart = niPart.getNodeStatus();
+
+								if ((statPart == JDFNode.EnumNodeStatus.Waiting) || (statPart == JDFNode.EnumNodeStatus.Ready))
+								{
+									vamPartMaps.add(niPart.getPartMap());
+								}
+							}
+							vamPartMaps.unify();
+						}
 					}
 				}
-			}
-			else
-			{
-				vamPartMaps.add(amPartMap);
+				else
+				{
+					vamPartMaps.add(amPartMap);
+				}
 			}
 		}
 
-		// //////////////////////////////////////////////////////
-		// Return the two booleans as integer.
-		//
+		private boolean isLeaf(final VString vsPartIDKeys, final JDFAttributeMap amPartMap, final int nChildPartitions)
+		{
+			boolean isLeaf = false;
 
-		return new ExecPartFlags(isAvailable, isProcStatOK);
+			if (nChildPartitions == 0)
+			{
+				if (vsPartIDKeys != null)
+				{
+					final StringArray vsMapKeys = amPartMap.getKeyList();
+
+					if (vsMapKeys != null)
+					{
+						isLeaf = vsMapKeys.containsAll(vsPartIDKeys);
+					}
+				}
+				else
+				{
+					isLeaf = true;
+				}
+			}
+			return isLeaf;
+		}
 	}
 
 	/**
