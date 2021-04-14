@@ -77,6 +77,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.List;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -672,6 +674,22 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
 		rl.setPartMap(mPart);
 		final VElement v = rl.getTargetVector(0);
+		assertEquals("The target vector is the node with two leaves", v.size(), 1);
+	}
+
+	/**
+	 * Method testGetTarget * @throws Exception
+	 */
+	@Test
+	public void testGetTargetList()
+	{
+		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
+		final JDFNode n = d.getJDFRoot();
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		mPart.put("SheetName", "S1");
+		final JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
+		rl.setPartMap(mPart);
+		final List<JDFResource> v = rl.getTargetList();
 		assertEquals("The target vector is the node with two leaves", v.size(), 1);
 	}
 

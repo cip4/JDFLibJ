@@ -51,6 +51,7 @@
 
 package org.cip4.jdflib.core;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -788,7 +789,6 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	public VElement getTargetVector(final int nMax)
 	{
 		// split it into leaves
-		// 221003 changed GetResourcePartMapVector to GetPartMapVector
 		final VJDFAttributeMap vmParts = getPartMapVector();
 		return getMapTargetVector(vmParts, nMax, true);
 	}
@@ -2068,6 +2068,16 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		}
 
 		return bMatch;
+	}
+
+	public List<JDFResource> getTargetList()
+	{
+		final ArrayList<JDFResource> ret = new ArrayList<>();
+		final VElement v = getTargetVector(0);
+		if (v != null)
+			for (final KElement e : v)
+				ret.add((JDFResource) e);
+		return ret;
 	}
 
 }

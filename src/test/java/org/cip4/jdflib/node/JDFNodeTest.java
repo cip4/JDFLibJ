@@ -104,6 +104,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.CPUTimer;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFMerge;
@@ -2290,6 +2291,19 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFResource nsJDF = n.addResource("jdf:bar", EnumResourceClass.Parameter, EnumUsage.Output, null, null, JDFElement.getSchemaURL(), null);
 		assertEquals("qualified names", nsJDF, n.getResource("jdf:bar", EnumUsage.Output, null, 0));
 		assertEquals("unqualified names", nsJDF, n.getResource("bar", EnumUsage.Output, null, 0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetResourceLeaves()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.ResourceDefinition);
+		final List<JDFResource> r = n.getResourceLeaves(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input);
+		assertTrue(ContainerUtil.isEmpty(r));
 	}
 
 	/**

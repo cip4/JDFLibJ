@@ -1706,12 +1706,12 @@ public class JDFRunList extends JDFAutoRunList
 		JDFIntegerRangeList irl = super.getPages();
 		if (irl == null)
 		{
-			irl = new JDFIntegerRangeList(new JDFIntegerRange(getLogicalPage(), -1));
+			irl = new JDFIntegerRangeList(new JDFIntegerRange(0, -1));
 		}
 		final int nPage = super.getNPage();
 		if (nPage > 0)
 		{
-			irl.setDef(nPage + getLogicalPage());
+			irl.setDef(nPage);
 		}
 		return irl;
 	}
