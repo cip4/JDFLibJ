@@ -134,9 +134,10 @@ processResources {
     }
 }
 
-configurations {
-   all*.exclude group: 'xml-apis', module: 'xml-apis'
- }
+// revive java 11
+// configurations {
+//   all*.exclude group: 'xml-apis', module: 'xml-apis'
+// }
  
 dependencies {
     compile 'commons-lang:commons-lang:2.5'
