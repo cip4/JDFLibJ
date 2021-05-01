@@ -74,12 +74,12 @@ public class FileTimeTest extends JDFTestCaseBase
 	{
 		for (final boolean b : new boolean[] { true, false })
 		{
-			final File dummy = new File(sm_dirTestDataTemp + "dummy.file");
+			final File dummy = new File(sm_dirTestDataTemp + System.currentTimeMillis() + ".file");
 			final FileTime ft = new FileTime(dummy, b);
 			FileUtil.forceDelete(dummy);
 			FileUtil.createNewFile(dummy);
 			ThreadUtil.sleep(2);
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < 3; i++)
 			{
 				final FileOutputStream fos = new FileOutputStream(dummy, true);
 				for (int j = 0; j < 200; j++)
