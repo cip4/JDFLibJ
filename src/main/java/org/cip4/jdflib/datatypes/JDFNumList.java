@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -110,8 +110,8 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		@Override
 		public int compare(final JDFNumList o1, final JDFNumList o2)
 		{
-			final double d1 = o1 == null ? Double.MIN_VALUE : o1.volume();
-			final double d2 = o2 == null ? Double.MIN_VALUE : o2.volume();
+			final double d1 = o1 == null ? 0 : o1.volume();
+			final double d2 = o2 == null ? 0 : o2.volume();
 			return d1 < d2 ? -1 : d1 == d2 ? 0 : 1;
 		}
 	}
@@ -958,7 +958,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 */
 	public double max()
 	{
-		double max = Double.MIN_VALUE;
+		double max = Double.NEGATIVE_INFINITY;
 		final int size = size();
 		for (int i = 0; i < size; i++)
 		{

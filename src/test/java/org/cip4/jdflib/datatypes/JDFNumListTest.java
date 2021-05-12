@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -414,10 +414,32 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testMinNeg() throws Exception
+	{
+		final JDFNumberList nl = new JDFNumberList("-4 -3 -8 -7 ");
+		assertEquals(-8, nl.min(), 0);
+	}
+
+	/**
+	 * @throws Exception
+	 *
+	 */
+	@Test
 	public void testMax() throws Exception
 	{
 		final JDFNumberList nl = new JDFNumberList("4 3 8 7 -15");
 		assertEquals(8, nl.max(), 0);
+	}
+
+	/**
+	 * @throws Exception
+	 *
+	 */
+	@Test
+	public void testMaxNeg() throws Exception
+	{
+		final JDFNumberList nl = new JDFNumberList("-1 -1");
+		assertEquals(-1, nl.max(), 0);
 	}
 
 	/**
