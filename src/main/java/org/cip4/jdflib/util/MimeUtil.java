@@ -104,6 +104,15 @@ public class MimeUtil extends UrlUtil
 	{
 		String contentType;
 		ByteArrayIOStream ioStream;
+		String name;
+
+		/**
+		 * @param name the name to set
+		 */
+		void setName(final String name)
+		{
+			this.name = name;
+		}
 
 		/**
 		 * create a data source from a byte array
@@ -115,6 +124,7 @@ public class MimeUtil extends UrlUtil
 		{
 			contentType = _contentType;
 			ioStream = _ioStream;
+			name = null;
 		}
 
 		/**
@@ -143,8 +153,7 @@ public class MimeUtil extends UrlUtil
 		@Override
 		public String getName()
 		{
-			// not needed
-			return null;
+			return name;
 		}
 
 		/**
@@ -163,6 +172,7 @@ public class MimeUtil extends UrlUtil
 	 */
 
 	public static final String MULTIPART_RELATED = "multipart/related";
+	public static final String MULTIPART_FORMDATA = "multipart/form-data";
 
 	/**
 	 * @param bp
@@ -361,14 +371,13 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static boolean isJDFMimeType(String mimeType)
 	{
-
 		if (mimeType == null)
 		{
 			return false;
 		}
 		mimeType = StringUtil.token(mimeType, 0, ";");
-		return JDFConstants.MIME_JDF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_JMF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeType)
-				|| UrlUtil.APPLICATION_XML.equalsIgnoreCase(mimeType);
+		return JDFConstants.MIME_JDF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_XJDF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_JMF.equalsIgnoreCase(mimeType)
+				|| JDFConstants.MIME_XJMF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeType) || UrlUtil.APPLICATION_XML.equalsIgnoreCase(mimeType);
 	}
 
 	/**

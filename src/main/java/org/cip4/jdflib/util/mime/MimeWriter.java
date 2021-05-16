@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -89,6 +89,40 @@ import org.cip4.jdflib.util.UrlUtil;
  */
 public class MimeWriter extends MimeHelper implements IStreamWriter
 {
+	public enum eMimeSubType
+	{
+		related, formdata;
+
+		private static final String MULTIPART = "multipart/";
+
+		public String getSubtype()
+		{
+			return formdata.equals(this) ? "form-data" : name();
+		}
+
+		public String getMimetype()
+		{
+			return MULTIPART + getSubtype();
+		}
+
+		public static eMimeSubType getEnum(final String name)
+		{
+			if (name != null)
+			{
+				for (final eMimeSubType e : values())
+				{
+					if (e.name().equalsIgnoreCase(name))
+						return e;
+				}
+				if (name.toLowerCase().startsWith(MULTIPART))
+				{
+					return getEnum(name.substring(MULTIPART.length()));
+				}
+			}
+			return null;
+		}
+
+	}
 
 	private static class MyMimeMessage extends MimeMessage
 	{
@@ -184,6 +218,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	}
 
 	private MIMEDetails md;
+	private final eMimeSubType subType;
 
 	/**
 	 * @param _md
@@ -212,7 +247,16 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	 */
 	public MimeWriter()
 	{
+		this(eMimeSubType.related);
+	}
+
+	/**
+	 *
+	 */
+	public MimeWriter(final eMimeSubType subtype)
+	{
 		super();
+		subType = subtype;
 		createMimePackage();
 	}
 
@@ -224,6 +268,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	{
 		super();
 		theMultipart = mp;
+		subType = eMimeSubType.getEnum(mp.getContentType());
 	}
 
 	/**
@@ -232,7 +277,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	public void createMimePackage()
 	{
 		// Create a MIME package
-		final Multipart multipart = new MimeMultipart("related");
+		final Multipart multipart = new MimeMultipart(subType.getSubtype());
 		final Message message = new MimeMessage((Session) null);
 		// Put parts in message
 		try
@@ -592,7 +637,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	/**
 	 * @param bph
 	 */
-	private void addBodyPart(final BodyPartHelper bph)
+	public void addBodyPart(final BodyPartHelper bph)
 	{
 		try
 		{

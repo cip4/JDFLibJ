@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -31,9 +31,9 @@
  *
  * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
  * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- * 
+ *
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
- * 
+ *
  *
  */
 
@@ -42,7 +42,7 @@ package org.cip4.jdflib.core;
 /**
  *
  * list of Strings that are universal and independent of JDF
- * 
+ *
  * @author rainerprosi
  * @date Sep 15, 2010
  */
@@ -117,11 +117,12 @@ public abstract class JDFCoreConstants
 	public static final String NEGINF = "-INF";
 	/** * */
 	public static final String POSINF = "INF";
+
+	// MIME types
 	/** * */
 	public static final String MIME_TEXTUNKNOWN = "text/unknown";
 	/** * */
 	public static final String MIME_TEXTXML = "text/xml";
-	// MIME types
 	/** * */
 	public static final String MIME_PNG = "image/x-png";
 	/** * */
@@ -136,10 +137,12 @@ public abstract class JDFCoreConstants
 	public static final String MIME_EPS = "application/postscript";
 	/** * */
 	public static final String MIME_PTK = "application/vnd.cip4-ptk+xml";
-	/** * */
 	public static final String MIME_XJDF = "application/vnd.cip4-xjdf+xml";
-	/** * */
 	public static final String MIME_XJMF = "application/vnd.cip4-xjmf+xml";
+	/** * */
+	public static final String MIME_PTK_JSON = "application/vnd.cip4-ptk+json";
+	public static final String MIME_XJDF_JSON = "application/vnd.cip4-xjdf+json";
+	public static final String MIME_XJMF_JSON = "application/vnd.cip4-xjmf+json";
 	/** * */
 	public static final String MIME_JDF = "application/vnd.cip4-jdf+xml";
 	/** * */

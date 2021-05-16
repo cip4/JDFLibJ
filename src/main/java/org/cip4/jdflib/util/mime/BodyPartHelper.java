@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,11 +40,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Enumeration;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
+import javax.mail.Header;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.internet.MimeBodyPart;
@@ -57,12 +59,15 @@ import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFParserFactory;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MimeUtil.ByteArrayDataSource;
+import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
@@ -109,6 +114,22 @@ public class BodyPartHelper
 	public void createBodyPart()
 	{
 		theBodyPart = new MimeBodyPart();
+		setHeader(UrlUtil.CONTENT_TRANSFER_ENCODING, MIMEDetails.defaultTransferEncoding);
+	}
+
+	public boolean setHeader(final String key, final String value)
+	{
+		if (theBodyPart == null)
+			return false;
+		try
+		{
+			theBodyPart.setHeader(key, value);
+			return true;
+		}
+		catch (final MessagingException e)
+		{
+			return false;
+		}
 	}
 
 	/**
@@ -271,8 +292,7 @@ public class BodyPartHelper
 		// quite a few copies...
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		xmlDoc.write2Stream(ios, 0, true);
-		final ByteArrayDataSource ds = new ByteArrayDataSource(ios, "text/xml");
-		theBodyPart.setDataHandler(new DataHandler(ds));
+		setContent(ios, UrlUtil.TEXT_XML);
 		xmlDoc.setBodyPart(theBodyPart);
 		final KElement root = xmlDoc.getRoot();
 		if (root instanceof JDFJMF)
@@ -283,7 +303,43 @@ public class BodyPartHelper
 		{
 			theBodyPart.setHeader(UrlUtil.CONTENT_TYPE, JDFConstants.MIME_JDF); // JDF
 		}
+		else
+		{
+			final String localName = root.getLocalName();
+			if (localName.equals(XJDFConstants.XJDF))
+			{
+				theBodyPart.setHeader(UrlUtil.CONTENT_TYPE, JDFConstants.MIME_XJDF);
+			}
+			else if (localName.equals(XJDFConstants.XJMF))
+			{
+				theBodyPart.setHeader(UrlUtil.CONTENT_TYPE, JDFConstants.MIME_XJMF);
+			}
+			else if (localName.equals(JDFConstants.PRINT_TALK))
+			{
+				theBodyPart.setHeader(UrlUtil.CONTENT_TYPE, JDFConstants.MIME_PTK);
+			}
+		}
 
+	}
+
+	void setContent(final ByteArrayIOStream ios, final String contentType) throws MessagingException
+	{
+		final ByteArrayDataSource ds = new ByteArrayDataSource(ios, contentType);
+		final DataHandler dataHandler = new DataHandler(ds);
+		theBodyPart.setDataHandler(dataHandler);
+	}
+
+	public boolean setContent(final InputStream is, final String contentType)
+	{
+		try
+		{
+			setContent(new ByteArrayIOStream(is), contentType);
+		}
+		catch (final MessagingException e)
+		{
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -451,4 +507,58 @@ public class BodyPartHelper
 		return null;
 	}
 
+	public String getContentType()
+	{
+		// TODO Auto-generated method stub
+		try
+		{
+			return theBodyPart == null ? null : theBodyPart.getContentType();
+		}
+		catch (final MessagingException e)
+		{
+			return null;
+		}
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "BodyPartHelper [" + getHeaderMap() + "]";
+	}
+
+	public JDFAttributeMap getHeaderMap()
+	{
+		try
+		{
+			final Enumeration headers = theBodyPart == null ? null : theBodyPart.getAllHeaders();
+			if (headers != null)
+			{
+				final JDFAttributeMap ret = new JDFAttributeMap();
+				while (headers.hasMoreElements())
+				{
+					final Header header = (Header) headers.nextElement();
+					ret.put(header.getName(), header.getValue());
+				}
+				return ret;
+			}
+
+		}
+		catch (final Exception x)
+		{
+		}
+		return null;
+
+	}
+
+	public boolean matchesKey(final String key, final String value)
+	{
+		if (theBodyPart == null)
+			return false;
+		final JDFAttributeMap headerMap = getHeaderMap();
+		final String ignoreCase = headerMap == null ? null : headerMap.getIgnoreCase(key);
+		return ignoreCase != null && StringUtil.equals(ignoreCase, value);
+	}
 }

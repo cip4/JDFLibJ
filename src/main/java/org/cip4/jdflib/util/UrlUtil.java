@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -229,19 +229,13 @@ public class UrlUtil
 	/**
 	 *
 	 */
+	public static final String VND_PTK = JDFCoreConstants.MIME_PTK;
 	public static final String VND_JDF = JDFCoreConstants.MIME_JDF;
-	/**
-	 *
-	 */
 	public static final String VND_JMF = JDFCoreConstants.MIME_JMF;
-	/**
-	 *
-	 */
 	public static final String VND_XJDF = JDFCoreConstants.MIME_XJDF;
-	/**
-	 *
-	 */
 	public static final String VND_XJMF = JDFCoreConstants.MIME_XJMF;
+	public static final String VND_XJDF_J = JDFCoreConstants.MIME_XJDF_JSON;
+	public static final String VND_XJMF_J = JDFCoreConstants.MIME_XJMF_JSON;
 	/**
 	 *
 	 */

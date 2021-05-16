@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -144,6 +144,34 @@ public class MimeHelper
 	}
 
 	/**
+	 * get the MIME BodyPart from a multiPart package with a given cid create one if it does not exist;
+	 *
+	 * @param name the cid of the requested bodypart
+	 * @return BodyPart the matching BodyPart, null if none is found
+	 */
+	public BodyPart getCreatePartByLocalName(final String name)
+	{
+		BodyPart bp = getPartByCID(name);
+		if (bp != null)
+		{
+			return bp;
+		}
+
+		final BodyPartHelper bph = new BodyPartHelper();
+		try
+		{
+			bph.setContentID(name);
+			theMultipart.addBodyPart(bph.getBodyPart());
+			bp = bph.getBodyPart();
+		}
+		catch (final MessagingException x)
+		{
+			log.error("Cannot create part; cid=" + name, x);
+		}
+		return bp;
+	}
+
+	/**
 	 * get the MIME BodyPart from a multiPart package with a given cid
 	 *
 	 * @param cid the cid of the requested bodypart
@@ -179,6 +207,35 @@ public class MimeHelper
 					return null;
 				}
 				if (bph.matchesCID(cid))
+				{
+					return bph;
+				}
+			}
+		}
+		catch (final ArrayIndexOutOfBoundsException e)
+		{
+			// we catch the exception rather than calculate length because calculating length requires a full parse of the entire stream
+			return null;
+		}
+	}
+
+	/**
+	 * 	get the MIME BodyPart from a multiPart package with a given header
+	*
+	* @return BodyPartHelper the matching BodyPart, null if none is found
+	*/
+	public BodyPartHelper getPartHelperByAttribute(final String key, final String value)
+	{
+		try
+		{
+			for (int i = 0; true; i++)
+			{
+				final BodyPartHelper bph = getBodyPartHelper(i);
+				if (bph == null)
+				{
+					return null;
+				}
+				if (bph.matchesKey(key, value))
 				{
 					return bph;
 				}
