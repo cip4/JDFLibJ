@@ -226,7 +226,11 @@ public class MimeReader extends MimeHelper
 	 */
 	public InputStream getURLInputStream(final String urlString)
 	{
-		final BodyPartHelper bp = getPartHelperByCID(urlString);
+		BodyPartHelper bp = getPartHelperByCID(urlString);
+		if (bp == null)
+		{
+			bp = getPartHelperByLocalName(urlString);
+		}
 		if (bp != null)
 		{
 			return bp.getInputStream();

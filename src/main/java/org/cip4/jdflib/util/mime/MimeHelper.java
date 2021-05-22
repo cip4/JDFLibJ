@@ -149,26 +149,23 @@ public class MimeHelper
 	 * @param name the cid of the requested bodypart
 	 * @return BodyPart the matching BodyPart, null if none is found
 	 */
-	public BodyPart getCreatePartByLocalName(final String name)
+	public BodyPartHelper getCreatePartByLocalName(final String name)
 	{
-		BodyPart bp = getPartByCID(name);
-		if (bp != null)
+		BodyPartHelper bph = getPartHelperByLocalName(name);
+		if (bph == null)
 		{
-			return bp;
+			bph = new BodyPartHelper();
+			try
+			{
+				bph.setFileName(name);
+				theMultipart.addBodyPart(bph.getBodyPart());
+			}
+			catch (final MessagingException x)
+			{
+				log.error("Cannot create part; name=" + name, x);
+			}
 		}
-
-		final BodyPartHelper bph = new BodyPartHelper();
-		try
-		{
-			bph.setContentID(name);
-			theMultipart.addBodyPart(bph.getBodyPart());
-			bp = bph.getBodyPart();
-		}
-		catch (final MessagingException x)
-		{
-			log.error("Cannot create part; cid=" + name, x);
-		}
-		return bp;
+		return bph;
 	}
 
 	/**
@@ -322,5 +319,35 @@ public class MimeHelper
 	public void setMarkSize(final int markSize)
 	{
 		this.markSize = markSize;
+	}
+
+	public BodyPartHelper getPartHelperByLocalName(String name)
+	{
+		name = StringUtil.getNonEmpty(name);
+		if (UrlUtil.isRelativeURL(name))
+		{
+			log.debug("incorrect URL local  format: url=" + name);
+			return null;
+		}
+		try
+		{
+			for (int i = 0; true; i++)
+			{
+				final BodyPartHelper bph = getBodyPartHelper(i);
+				if (bph == null)
+				{
+					return null;
+				}
+				if (bph.matchesFileName(name))
+				{
+					return bph;
+				}
+			}
+		}
+		catch (final ArrayIndexOutOfBoundsException e)
+		{
+			// we catch the exception rather than calculate length because calculating length requires a full parse of the entire stream
+		}
+		return null;
 	}
 }

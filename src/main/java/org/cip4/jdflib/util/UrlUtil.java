@@ -434,11 +434,13 @@ public class UrlUtil
 		{
 			return null;
 		}
-		final BodyPart bp = new MimeHelper(multipart).getPartByCID(url);
-		return new BodyPartHelper(bp).getInputStream();
-	}
+		final MimeHelper mimeHelper = new MimeHelper(multipart);
+		BodyPartHelper bp = mimeHelper.getPartHelperByCID(url);
+		if (bp == null)
+			bp = mimeHelper.getPartHelperByLocalName(url);
 
-	// /////////////////////////////////////////////////////////////////
+		return bp == null ? null : bp.getInputStream();
+	}
 
 	/**
 	 * get the filename extension of pathName excluding the '.' if no '.' is found, returns null if trailing . is found, returns ""
@@ -1779,7 +1781,7 @@ public class UrlUtil
 			return false;
 
 		final String lower = normalizeType(contentType);
-		return TEXT_JSON.equals(lower) || APPLICATION_JSON.equals(lower);
+		return TEXT_JSON.equals(lower) || APPLICATION_JSON.equals(lower) || lower.endsWith("+json");
 	}
 
 	private static String normalizeType(final String contentType)

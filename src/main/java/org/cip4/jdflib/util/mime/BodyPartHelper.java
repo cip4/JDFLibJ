@@ -509,10 +509,9 @@ public class BodyPartHelper
 
 	public String getContentType()
 	{
-		// TODO Auto-generated method stub
 		try
 		{
-			return theBodyPart == null ? null : theBodyPart.getContentType();
+			return theBodyPart == null ? null : StringUtil.token(theBodyPart.getContentType(), 0, ";");
 		}
 		catch (final MessagingException e)
 		{
@@ -560,5 +559,10 @@ public class BodyPartHelper
 		final JDFAttributeMap headerMap = getHeaderMap();
 		final String ignoreCase = headerMap == null ? null : headerMap.getIgnoreCase(key);
 		return ignoreCase != null && StringUtil.equals(ignoreCase, value);
+	}
+
+	public boolean matchesFileName(final String name)
+	{
+		return name != null && name.equalsIgnoreCase(getFileName());
 	}
 }
