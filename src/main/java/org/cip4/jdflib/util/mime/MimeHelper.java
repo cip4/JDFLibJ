@@ -324,9 +324,9 @@ public class MimeHelper
 	public BodyPartHelper getPartHelperByLocalName(String name)
 	{
 		name = StringUtil.getNonEmpty(name);
-		if (UrlUtil.isRelativeURL(name))
+		if (!UrlUtil.isRelativeURL(name))
 		{
-			log.debug("incorrect URL local  format: url=" + name);
+			log.info("incorrect URL local format: url=" + name);
 			return null;
 		}
 		try
