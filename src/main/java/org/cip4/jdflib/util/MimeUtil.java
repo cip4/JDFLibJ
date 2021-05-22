@@ -393,7 +393,7 @@ public class MimeUtil extends UrlUtil
 		{
 			return false;
 		}
-		toCheck = StringUtil.token(toCheck, 0, ";");
+		toCheck = StringUtil.token(toCheck, 0, ";").trim();
 		return mimeType.equalsIgnoreCase(toCheck);
 	}
 
