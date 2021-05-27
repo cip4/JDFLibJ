@@ -430,7 +430,7 @@ public class UrlUtil
 	 */
 	public static InputStream getCidURLStream(final String url, final Multipart multipart)
 	{
-		if (url == null || url.equals(JDFCoreConstants.EMPTYSTRING))
+		if (StringUtil.isEmpty(url))
 		{
 			return null;
 		}
