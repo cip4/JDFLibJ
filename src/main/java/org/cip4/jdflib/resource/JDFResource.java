@@ -276,12 +276,15 @@ public class JDFResource extends JDFElement
 		atrInfoTable_Abstract[8] = new AtrInfoTable(AttributeName.PIPEURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable_Abstract[9] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_Abstract[10] = new AtrInfoTable(AttributeName.RREFS, 0x44444433, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSpawnStatus.getEnum(0), EnumSpawnStatus.NotSpawned.getName());
+		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
+				EnumSpawnStatus.getEnum(0), EnumSpawnStatus.NotSpawned.getName());
 		atrInfoTable_Abstract[12] = new AtrInfoTable(AttributeName.SPAWNIDS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_Abstract[13] = new AtrInfoTable(AttributeName.SORTING, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_Abstract[14] = new AtrInfoTable(AttributeName.SORTAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable_Abstract[15] = new AtrInfoTable(AttributeName.PARTIDKEYS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumPartIDKey.getEnum(0), null);
-		atrInfoTable_Abstract[16] = new AtrInfoTable(AttributeName.PIPEPARTIDKEYS, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumPartIDKey.getEnum(0), null);
+		atrInfoTable_Abstract[15] = new AtrInfoTable(AttributeName.PARTIDKEYS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations,
+				EnumPartIDKey.getEnum(0), null);
+		atrInfoTable_Abstract[16] = new AtrInfoTable(AttributeName.PIPEPARTIDKEYS, 0x33333311, AttributeInfo.EnumAttributeType.enumerations,
+				EnumPartIDKey.getEnum(0), null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Physical = new AtrInfoTable[11];
@@ -297,7 +300,8 @@ public class JDFResource extends JDFElement
 		atrInfoTable_Physical[7] = new AtrInfoTable(AttributeName.RESOURCEWEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable_Physical[8] = new AtrInfoTable(AttributeName.GROSSWEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable_Physical[9] = new AtrInfoTable(AttributeName.MANUFACTURER, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable_Physical[10] = new AtrInfoTable(AttributeName.LOTCONTROL, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumLotControl.getEnum(0), null);
+		atrInfoTable_Physical[10] = new AtrInfoTable(AttributeName.LOTCONTROL, 0x33333111, AttributeInfo.EnumAttributeType.enumeration,
+				EnumLotControl.getEnum(0), null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Param = new AtrInfoTable[1];
@@ -310,8 +314,10 @@ public class JDFResource extends JDFElement
 	static
 	{
 		atrInfoTable_ID_Class_Required[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable_ID_Class_Required[1] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumResourceClass.getEnum(0), null);
-		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), EnumPartUsage.Explicit.getName());
+		atrInfoTable_ID_Class_Required[1] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration,
+				EnumResourceClass.getEnum(0), null);
+		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration,
+				EnumPartUsage.getEnum(0), EnumPartUsage.Explicit.getName());
 
 	}
 
@@ -319,26 +325,31 @@ public class JDFResource extends JDFElement
 	static
 	{
 		atrInfoTable_ID_Class_Optional[0] = new AtrInfoTable(AttributeName.ID, 0x44444433, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable_ID_Class_Optional[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumResourceClass.getEnum(0), null);
+		atrInfoTable_ID_Class_Optional[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
+				EnumResourceClass.getEnum(0), null);
 	}
 	private static AtrInfoTable[] atrInfoTable_ID_Class_Root = new AtrInfoTable[3];
 	static
 	{
 		atrInfoTable_ID_Class_Root[0] = new AtrInfoTable(AttributeName.ID, 0x33333333, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable_ID_Class_Root[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumResourceClass.getEnum(0), null);
-		atrInfoTable_ID_Class_Root[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), null);
+		atrInfoTable_ID_Class_Root[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
+				EnumResourceClass.getEnum(0), null);
+		atrInfoTable_ID_Class_Root[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration,
+				EnumPartUsage.getEnum(0), null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Status_Required = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable_Status_Required[0] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumResStatus.getEnum(0), null);
+		atrInfoTable_Status_Required[0] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration,
+				EnumResStatus.getEnum(0), null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Status_Optional = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable_Status_Optional[0] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumResStatus.getEnum(0), null);
+		atrInfoTable_Status_Optional[0] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
+				EnumResStatus.getEnum(0), null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_UpdateID_Optional = new AtrInfoTable[1];
@@ -373,7 +384,8 @@ public class JDFResource extends JDFElement
 		atrInfoTable_PartIDKeys[14] = new AtrInfoTable(AttributeName.PAGENUMBER, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_PartIDKeys[15] = new AtrInfoTable(AttributeName.PARTVERSION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_PartIDKeys[16] = new AtrInfoTable(AttributeName.PREFLIGHTRULE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable_PartIDKeys[17] = new AtrInfoTable(AttributeName.PREVIEWTYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewType.getEnum(0), null);
+		atrInfoTable_PartIDKeys[17] = new AtrInfoTable(AttributeName.PREVIEWTYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration,
+				EnumPreviewType.getEnum(0), null);
 		atrInfoTable_PartIDKeys[18] = new AtrInfoTable(AttributeName.RIBBONNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_PartIDKeys[19] = new AtrInfoTable(AttributeName.RUN, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_PartIDKeys[20] = new AtrInfoTable(AttributeName.RUNINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
@@ -414,7 +426,8 @@ public class JDFResource extends JDFElement
 		atrInfoTable_PartIDKeys[55] = new AtrInfoTable(AttributeName.PRODUCTPART, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		for (int i = 0; i < 10; i++)
 			atrInfoTable_PartIDKeys[56 + i] = new AtrInfoTable(AttributeName.METADATA + i, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable_PartIDKeys[66] = new AtrInfoTable(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, 0x33661111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable_PartIDKeys[66] = new AtrInfoTable(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, 0x33661111,
+				AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_PartIDKeys[67] = new AtrInfoTable(AttributeName.LOTID, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_PartIDKeys[68] = new AtrInfoTable(AttributeName.PRINTCONDITION, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_PartIDKeys[69] = new AtrInfoTable(AttributeName.SETCOPIES, 0x33311111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
@@ -531,7 +544,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/*
-	 * These three constructors are defined first in ElementNSImpl they correspond to the three createElement methods in DocumentJDFImpl which are used to create the JDF elements during parsing
+	 * These three constructors are defined first in ElementNSImpl they correspond to the three createElement methods in DocumentJDFImpl which are used to
+	 * create the JDF elements during parsing
 	 *
 	 * they are necessary in every class, which is inherited from JDFElement
 	 */
@@ -1467,7 +1481,8 @@ public class JDFResource extends JDFElement
 	/**
 	 * Tests whether Status of resource is Available
 	 *
-	 * @param bRecurseRefs if bRecurseRefs is set to true, also recurses into all resources linked by rRefs and returns true if the minimum Status is Status_Available
+	 * @param bRecurseRefs if bRecurseRefs is set to true, also recurses into all resources linked by rRefs and returns true if the minimum Status is
+	 *            Status_Available
 	 *
 	 * @return boolean true, if Status is Available
 	 * @deprecated use getStatus default: IsAvailable(false)
@@ -1682,7 +1697,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Makes from 'this' resource subelement a root resource element (direct child) of the specified parentPool or (in default case) of ResourcePool, where it lives. <br>
+	 * Makes from 'this' resource subelement a root resource element (direct child) of the specified parentPool or (in default case) of ResourcePool, where it
+	 * lives. <br>
 	 *
 	 * The Status and SpawnStatus attribute values of the new root resource are taken from the old root resource.
 	 *
@@ -1957,7 +1973,7 @@ public class JDFResource extends JDFElement
 			final VElement vRet = getRootLinksAndRefs(n, resID);
 			reduceParts(vRet);
 
-			return vRet.size() > 0 ? vRet : null;
+			return ContainerUtil.isEmpty(vRet) ? null : vRet;
 		}
 
 		private void reduceParts(final VElement vRet)
@@ -2053,7 +2069,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * list of valid node names of potential parents for a resource that impy a real resource root with class, id etc list of valid node names of potential parents for a resource
+	 * list of valid node names of potential parents for a resource that impy a real resource root with class, id etc list of valid node names of potential
+	 * parents for a resource
 	 *
 	 * @param nodeName the name of the node to check against
 	 * @return {@link Boolean} true if nodeName is the name of a valid resource parent element
@@ -2064,7 +2081,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Tests, if the first ancestor with a name different from the node name is not one of DropItemIntent,CustomerInfo,NodeInfo,ResourcePool,PipeParams, ResourceInfo,ResourceCmdParams. <br>
+	 * Tests, if the first ancestor with a name different from the node name is not one of DropItemIntent,CustomerInfo,NodeInfo,ResourcePool,PipeParams,
+	 * ResourceInfo,ResourceCmdParams. <br>
 	 * In other words: if this resource is a subelement, but not a resourceroot
 	 *
 	 * @return boolean true, if this is a subelement but not a root
@@ -2130,7 +2148,8 @@ public class JDFResource extends JDFElement
 	 *
 	 * @param key the PartIDKey attribute name
 	 * @param value the string value of the partition key
-	 * @param bIncomplete if true, also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
+	 * @param bIncomplete if true, also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is
+	 *            specified
 	 *
 	 * @return JDFResource the first matching resource leaf or node
 	 *
@@ -3601,7 +3620,8 @@ public class JDFResource extends JDFElement
 			}
 		}
 
-		private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves, final boolean removeEqual)
+		private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent,
+				final VElement localLeaves, final boolean removeEqual)
 		{
 			final int localSize = localLeaves.size();
 			for (final String att : atts)
@@ -3617,7 +3637,8 @@ public class JDFResource extends JDFElement
 						for (int l = 0; l < localSize; l++)
 						{
 							final String attVal2 = localLeaves.elementAt(l).getAttribute(att, null, JDFConstants.EMPTYSTRING);
-							if (!attVal.equals(attVal2) || JDFConstants.EMPTYSTRING.equals(attVal2) && !attVal.equals(localLeaves.elementAt(l).getAttribute(att, null, null)))
+							if (!attVal.equals(attVal2)
+									|| JDFConstants.EMPTYSTRING.equals(attVal2) && !attVal.equals(localLeaves.elementAt(l).getAttribute(att, null, null)))
 							{
 								bAllSame = false;
 								break;
@@ -4003,7 +4024,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Finds the canonical vector of parts that defines the vector of parts that fits to vParts. If all children of a parent node are in vParts, they are replaced by their parent. <br>
+	 * Finds the canonical vector of parts that defines the vector of parts that fits to vParts. If all children of a parent node are in vParts, they are
+	 * replaced by their parent. <br>
 	 * for example the canonical vector of all leaves is the root
 	 *
 	 * @param vParts the vector of parts to check against 'this'
@@ -4237,7 +4259,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Tests, whether the first ancestor of 'this' is in ValidParentNodeNames - must be one of: DropItemIntent,CustomerInfo,NodeInfo,ResourcePool,PipeParams ,ResourceInfo,ResourceCmdParams
+	 * Tests, whether the first ancestor of 'this' is in ValidParentNodeNames - must be one of: DropItemIntent,CustomerInfo,NodeInfo,ResourcePool,PipeParams
+	 * ,ResourceInfo,ResourceCmdParams
 	 *
 	 * @return boolean true, if 'this' is a root resource
 	 */
@@ -4336,12 +4359,13 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * update the amount of a resource based on the connected resource links Only Condition="Good" is counted if no explicit partioning by condition is specified
+	 * update the amount of a resource based on the connected resource links Only Condition="Good" is counted if no explicit partioning by condition is
+	 * specified
 	 *
 	 * @param keepPrevious if true, the previous amounts etc. are retained, if false they are completely recalculated from the linkx
 	 *
-	 * @since 2011.1.15 note the change of interface. The prior usage of previousamount was inheritently flawed. Update note: if you used a previousAmount!=0, you probably want to use
-	 *        keepPrevious=false whereas a 0 value retains the orignal value (leepPrevious=true)
+	 * @since 2011.1.15 note the change of interface. The prior usage of previousamount was inheritently flawed. Update note: if you used a previousAmount!=0,
+	 *        you probably want to use keepPrevious=false whereas a 0 value retains the orignal value (leepPrevious=true)
 	 */
 	public void updateAmounts(final boolean keepPrevious)
 	{
@@ -4477,7 +4501,8 @@ public class JDFResource extends JDFElement
 	 * @default getChildElementVector(null, null, null, true, 0, false)
 	 */
 	@Override
-	public VElement getChildElementVector(final String element, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize, final boolean bResolveTarget)
+	public VElement getChildElementVector(final String element, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize,
+			final boolean bResolveTarget)
 	{
 		VElement v = null;
 		final String nodeName = getNodeName();
@@ -4576,7 +4601,8 @@ public class JDFResource extends JDFElement
 	/**
 	 * Tests if the given resources are compatible regarding their partitioning.
 	 *
-	 * The resources are compatible if the PartIDKeys for the common start sequence of the PartIDKeys vectors are the same. The resources are not compatible if one has PartIDKeys and the other not.
+	 * The resources are compatible if the PartIDKeys for the common start sequence of the PartIDKeys vectors are the same. The resources are not compatible if
+	 * one has PartIDKeys and the other not.
 	 *
 	 * @param other the other resource to check.
 	 *
@@ -4599,7 +4625,8 @@ public class JDFResource extends JDFElement
 	/**
 	 * Tests if the resource is compatible with the given partition keys.
 	 *
-	 * The resource is compatible if all PartIDKeys in vsPartitions are contained in this, regardless of sequence The resource is not compatible if one has PartIDKeys and the other not.
+	 * The resource is compatible if all PartIDKeys in vsPartitions are contained in this, regardless of sequence The resource is not compatible if one has
+	 * PartIDKeys and the other not.
 	 *
 	 * @param vsPartitions the given partition keys to compare
 	 *
@@ -4753,8 +4780,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Gets of 'this' the iSkip-th IdentificationField element, optionally creates it, if it doesn't exist. If iSkip is more than one larger than the number of elements, only one will be created and
-	 * appended.
+	 * Gets of 'this' the iSkip-th IdentificationField element, optionally creates it, if it doesn't exist. If iSkip is more than one larger than the number of
+	 * elements, only one will be created and appended.
 	 *
 	 * @param iSkip number of child IdentificationField elements to skip
 	 * @return JDFIdentificationField - the matching IdentificationField element
@@ -4848,7 +4875,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Sets the 1st-nth element as identical to the 0th elemennt ov vPartMap i.e. the partition leaves that match vPartMap[1]...vPartMap[size-1] are set identical to vPartMap[0]
+	 * Sets the 1st-nth element as identical to the 0th elemennt ov vPartMap i.e. the partition leaves that match vPartMap[1]...vPartMap[size-1] are set
+	 * identical to vPartMap[0]
 	 *
 	 * @param vPartMap VJDFAttributeMap to correspond to
 	 */
@@ -4870,7 +4898,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Appends new child Identifical element that refers to target also removes all subelements and attributes If an identical already exists, the part element is overwritten
+	 * Appends new child Identifical element that refers to target also removes all subelements and attributes If an identical already exists, the part element
+	 * is overwritten
 	 *
 	 * @param target the resource leaf that this leaf should reference as identical
 	 *
@@ -4919,8 +4948,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Gets of 'this' the iSkip-th QualityControlResult element, optionally creates it, if it doesn't exist. If iSkip is more than one larger that the number of elements, only one will be created and
-	 * appended.
+	 * Gets of 'this' the iSkip-th QualityControlResult element, optionally creates it, if it doesn't exist. If iSkip is more than one larger that the number of
+	 * elements, only one will be created and appended.
 	 *
 	 * @param iSkip number of child QualityControlResult elements to skip
 	 * @return JDFQualityControlResult - the matching QualityControlResult element
@@ -5912,8 +5941,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * if set to true, the default @PartUsage of unpartitioned resources is Implicit. Note: this is NOT according to the specification since the Specification defaults PartUsage to Explicit for all
-	 * Resources.
+	 * if set to true, the default @PartUsage of unpartitioned resources is Implicit. Note: this is NOT according to the specification since the Specification
+	 * defaults PartUsage to Explicit for all Resources.
 	 *
 	 * @param bUnpartitiondImplicit the bUnpartitiondImplicit to set
 	 */
@@ -5923,8 +5952,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Gets typesafe enumerated value of attribute PartUsage; defaults to PartUsage_Explicit unless setUnpartitiondImplicit(true) has been called and the resource is not partitioned, in which case
-	 * PartUsage_Implicit is called.
+	 * Gets typesafe enumerated value of attribute PartUsage; defaults to PartUsage_Explicit unless setUnpartitiondImplicit(true) has been called and the
+	 * resource is not partitioned, in which case PartUsage_Implicit is called.
 	 *
 	 * Achtung - mieser Balkon!
 	 *
@@ -7019,7 +7048,8 @@ public class JDFResource extends JDFElement
 			final EnumResStatus s = EnumResStatus.getEnum(getNonEmpty_KElement((AttributeName.STATUS)));
 			// we have an explicit override?
 			final JDFResource idTarget = s == null ? getIdenticalTarget() : null;
-			return idTarget == null ? EnumResStatus.getEnum(getNonEmpty(AttributeName.STATUS)) : EnumResStatus.getEnum(idTarget.getNonEmpty(AttributeName.STATUS));
+			return idTarget == null ? EnumResStatus.getEnum(getNonEmpty(AttributeName.STATUS))
+					: EnumResStatus.getEnum(idTarget.getNonEmpty(AttributeName.STATUS));
 		}
 	}
 
@@ -7362,7 +7392,8 @@ public class JDFResource extends JDFElement
 			// partition attribute values
 			{
 				final KElement parent = getParentNode_KElement();
-				final List<KElement> vThis = parent.getChildArray_KElement(getNodeName(), getNamespaceURI(), new JDFAttributeMap(currentPartition, getAttribute_KElement(currentPartition)), true, 999);
+				final List<KElement> vThis = parent.getChildArray_KElement(getNodeName(), getNamespaceURI(),
+						new JDFAttributeMap(currentPartition, getAttribute_KElement(currentPartition)), true, 999);
 				if (vThis.size() > 1)
 				{
 					vAtts.appendUnique(currentPartition);
