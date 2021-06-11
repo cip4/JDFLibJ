@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -276,8 +276,7 @@ public class JDFResource extends JDFElement
 		atrInfoTable_Abstract[8] = new AtrInfoTable(AttributeName.PIPEURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable_Abstract[9] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_Abstract[10] = new AtrInfoTable(AttributeName.RREFS, 0x44444433, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSpawnStatus.getEnum(0),
-				EnumSpawnStatus.NotSpawned.getName());
+		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSpawnStatus.getEnum(0), EnumSpawnStatus.NotSpawned.getName());
 		atrInfoTable_Abstract[12] = new AtrInfoTable(AttributeName.SPAWNIDS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_Abstract[13] = new AtrInfoTable(AttributeName.SORTING, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_Abstract[14] = new AtrInfoTable(AttributeName.SORTAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
@@ -312,8 +311,7 @@ public class JDFResource extends JDFElement
 	{
 		atrInfoTable_ID_Class_Required[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
 		atrInfoTable_ID_Class_Required[1] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumResourceClass.getEnum(0), null);
-		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0),
-				EnumPartUsage.Explicit.getName());
+		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), EnumPartUsage.Explicit.getName());
 
 	}
 
@@ -2012,24 +2010,17 @@ public class JDFResource extends JDFElement
 		private VElement getRootLinksAndRefs(final JDFNode n, final String resID)
 		{
 			final JDFAttributeMap mID = new JDFAttributeMap(AttributeName.RREF, resID);
-			final VString refList = getRefList();
 
-			final VElement vRet;
+			VElement vRet = null;
 			if (bRef)
 			{
-				if (bLink)
-				{
-					vRet = n.getChildrenFromList(refList, mID, false, null);
-				}
-				else
-				{
-					vRet = n.getChildrenByTagName(getRefString(), null, mID, false, false, 0);
-				}
+				vRet = n.getChildrenByTagName(getRefString(), null, mID, false, false, 0);
 			}
-			else
+			if (bLink)
 			{
 				final VElement vNodes = n.getvJDFNode(null, null, false);
-				vRet = new VElement();
+				if (vRet == null)
+					vRet = new VElement();
 				for (final KElement nE : vNodes)
 				{
 					final VElement vTmp = ((JDFNode) nE).getResourceLinks(null);
@@ -2047,26 +2038,6 @@ public class JDFResource extends JDFElement
 				}
 			}
 			return vRet;
-		}
-
-		/**
-		 *
-		 *
-		 * @return
-		 */
-		private VString getRefList()
-		{
-			final VString refList = new VString();
-			if (bLink)
-			{
-				refList.add(getLinkString());
-			}
-
-			if (bRef)
-			{
-				refList.add(getRefString());
-			}
-			return refList;
 		}
 	}
 
@@ -2772,11 +2743,10 @@ public class JDFResource extends JDFElement
 			final List<JDFResource> vLeaves = getLeafArray(false);
 
 			final int size = values.size();
-			for (int i = 0; i < vLeaves.size(); i++)
+			for (final JDFResource p : vLeaves)
 			{
 				for (int j = 0; j < size; j++)
 				{
-					final JDFResource p = vLeaves.get(i);
 					v.add(p.addPartition(partType, values.get(j)));
 				}
 			}
@@ -2891,9 +2861,9 @@ public class JDFResource extends JDFElement
 		final List<JDFResource> leaves = getLeafArray(false);
 		final VElement v = new VElement();
 
-		for (int i = 0; i < leaves.size(); i++)
+		for (final JDFResource leave : leaves)
 		{
-			final JDFResource p = leaves.get(i).getAttributePart(key);
+			final JDFResource p = leave.getAttributePart(key);
 
 			if (p != null)
 			{
@@ -3897,7 +3867,8 @@ public class JDFResource extends JDFElement
 		for (int i = v2.size() - 1; i >= 0; i--)
 		{
 			final JDFElement e = v2.get(i);
-			if (!e.hasAttribute_KElement(AttributeName.SPAWNIDS, null, false) || !e.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, AttributeInfo.EnumAttributeType.NMTOKENS))
+			if (!e.hasAttribute_KElement(AttributeName.SPAWNIDS, null, false)
+					|| !e.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, AttributeInfo.EnumAttributeType.NMTOKENS))
 			{
 				v2.remove(i);
 			}
