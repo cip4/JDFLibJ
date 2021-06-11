@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -495,9 +495,8 @@ public class WalkJDFElement extends WalkElement
 	 */
 	boolean isExchangeResource(final JDFResourceLink resLink, final JDFResource linkTarget)
 	{
-
-		if (!jdfToXJDF.isSingleNode()
-				|| (resLink != null && EnumUsage.Input.equals(resLink.getUsage()) && resLink.hasNonEmpty(AttributeName.COMBINEDPROCESSINDEX) && !resLink.getCombinedProcessIndex().contains(0)))
+		if (!jdfToXJDF.isRetainAll() && (!jdfToXJDF.isSingleNode() || (resLink != null && EnumUsage.Input.equals(resLink.getUsage())
+				&& resLink.hasNonEmpty(AttributeName.COMBINEDPROCESSINDEX) && !resLink.getCombinedProcessIndex().contains(0))))
 		{
 
 			final JDFResource resInRoot = linkTarget == null ? null : linkTarget.getResourceRoot();
