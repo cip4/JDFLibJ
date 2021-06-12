@@ -964,6 +964,11 @@ public class UrlUtil
 			{
 				extension = "xml";
 			}
+			else if (isJSONType(contentType))
+			{
+				extension = "json";
+			}
+
 		}
 		return extension;
 	}
@@ -990,6 +995,8 @@ public class UrlUtil
 			mimeMap.put("xjmf", JDFCoreConstants.MIME_XJMF);
 			mimeMap.put("jdf", JDFCoreConstants.MIME_JDF);
 			mimeMap.put("jmf", JDFCoreConstants.MIME_JMF);
+			mimeMap.put("jjdf", JDFCoreConstants.MIME_XJDF_JSON);
+			mimeMap.put("jjmf", JDFCoreConstants.MIME_XJMF_JSON);
 
 			mimeMap.put("xsl", TEXT_XML);
 			mimeMap.put("xsd", TEXT_XML);
