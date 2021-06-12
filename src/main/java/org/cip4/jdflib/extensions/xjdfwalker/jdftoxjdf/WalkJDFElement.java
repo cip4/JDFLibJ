@@ -495,8 +495,8 @@ public class WalkJDFElement extends WalkElement
 	 */
 	boolean isExchangeResource(final JDFResourceLink resLink, final JDFResource linkTarget)
 	{
-		if (!jdfToXJDF.isRetainAll() && (!jdfToXJDF.isSingleNode() || (resLink != null && EnumUsage.Input.equals(resLink.getUsage())
-				&& resLink.hasNonEmpty(AttributeName.COMBINEDPROCESSINDEX) && !resLink.getCombinedProcessIndex().contains(0))))
+		if (!jdfToXJDF.isSingleNode() || (resLink != null && EnumUsage.Input.equals(resLink.getUsage())
+				&& resLink.hasNonEmpty(AttributeName.COMBINEDPROCESSINDEX) && !resLink.getCombinedProcessIndex().contains(0)))
 		{
 
 			final JDFResource resInRoot = linkTarget == null ? null : linkTarget.getResourceRoot();
