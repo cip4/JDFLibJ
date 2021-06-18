@@ -245,6 +245,18 @@ public class KElementTest extends JDFTestCaseBase
 	 * check for memory leaks
 	 */
 	@Test
+	public void testDirtyRename()
+	{
+		final KElement k = KElement.parseString("<a><b/></a>");
+		assertFalse(k.isDirty());
+		k.getElement("b").renameElement("c", null);
+		assertTrue(k.isDirty());
+	}
+
+	/**
+	 * check for memory leaks
+	 */
+	@Test
 	public void testImportNode()
 	{
 		final long currentMem0 = getCurrentMem();
@@ -484,8 +496,8 @@ public class KElementTest extends JDFTestCaseBase
 	@Test
 	public void testGetElementById()
 	{
-		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">" + "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>"
-				+ "</ELEM3>" + "</ELEM2>" + "</JDF>";
+		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">" + "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>"
+				+ "</ELEM2>" + "</JDF>";
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -1675,9 +1687,8 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue(kElement3.getPrefix().equals(cip4Prefix1));
 
 		final String jdfDocString = "<JDF ID=\"n051221_021145422_000005\" Version=\"1.3\" " + "xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" "
-				+ "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" "
-				+ "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">" + "<kElement0/>" + "<JDF:kElement1/>" + "<JDFS:kElement2/>" + "<jdf:kElement3/>"
-				+ "</JDF>";
+				+ "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">"
+				+ "<kElement0/>" + "<JDF:kElement1/>" + "<JDFS:kElement2/>" + "<jdf:kElement3/>" + "</JDF>";
 
 		final JDFParser p = new JDFParser();
 		final JDFDoc jdfDoc = p.parseString(jdfDocString);
@@ -1851,8 +1862,7 @@ public class KElementTest extends JDFTestCaseBase
 		root.setType(JDFNode.EnumType.Imposition.getName(), false);
 		final JDFRunList rl = (JDFRunList) root.appendMatchingResource(ElementName.RUNLIST, JDFNode.EnumProcessUsage.Document, null);
 		rl.appendLayoutElement();
-		final JDFRunList leaf = (JDFRunList) rl.getCreatePartition(JDFResource.EnumPartIDKey.Run, "Run1",
-				new VString(JDFResource.EnumPartIDKey.Run.getName(), " "));
+		final JDFRunList leaf = (JDFRunList) rl.getCreatePartition(JDFResource.EnumPartIDKey.Run, "Run1", new VString(JDFResource.EnumPartIDKey.Run.getName(), " "));
 
 		final KElement el1 = rl.getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, 0);
 		final KElement el2 = leaf.getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, 0);
@@ -2202,8 +2212,7 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals("", root.getElement("foo").getElement("bar").getNextSiblingElement("bar", null).numChildElements("fnarf", null), 5);
 		assertNotNull("create by attribute value now implemented", root.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[@a=\"b\"]"));
 		assertEquals("getCreate actually sets the attribute", "blahblah", root.getCreateXPathElement("./foo/bar[@blub=\"blahblah\"]").getAttribute("blub"));
-		assertEquals("getCreate actually sets the attribute", "blahblah",
-				root.getCreateXPathElement("./foo/bar[gaga/@blub=\"blahblah\"]").getXPathAttribute("gaga/@blub", null));
+		assertEquals("getCreate actually sets the attribute", "blahblah", root.getCreateXPathElement("./foo/bar[gaga/@blub=\"blahblah\"]").getXPathAttribute("gaga/@blub", null));
 	}
 
 	/**
@@ -3125,8 +3134,7 @@ public class KElementTest extends JDFTestCaseBase
 		}
 		assertEquals("", root.getElementHashMap(null, null, "ID").size(), 2000);
 		assertEquals("", root.getElementHashMap(null, "myns", "ID").size(), 1000);
-		assertEquals("", root.getElementHashMap(null, null, "ID").get("id1_50"),
-				root.getChildByTagName("child1", null, 0, new JDFAttributeMap("ID", "id1_50"), true, true));
+		assertEquals("", root.getElementHashMap(null, null, "ID").get("id1_50"), root.getChildByTagName("child1", null, 0, new JDFAttributeMap("ID", "id1_50"), true, true));
 	}
 
 	/**

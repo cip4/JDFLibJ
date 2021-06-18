@@ -194,12 +194,11 @@ public class KElement extends ElementNSImpl implements Element
 	/**
 	 * Set this element as dirty
 	 *
-	 * @deprecated use setDirty (bAttribute)
+	 *
 	 */
-	@Deprecated
 	public void setDirty()
 	{
-		setDirty(false);
+		((DocumentXMLImpl) ownerDocument).setDirty();
 	}
 
 	/**
@@ -209,7 +208,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public void setDirty(final boolean bAttribute)
 	{
-		// nop
+		// nop 
 	}
 
 	/**
@@ -832,8 +831,8 @@ public class KElement extends ElementNSImpl implements Element
 							final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 							if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
 							{
-								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: "
-										+ nsURI2 + "; attempting to set URI: " + nameSpaceURI);
+								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
+										+ "; attempting to set URI: " + nameSpaceURI);
 							}
 							try
 							{
@@ -1741,8 +1740,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @default getChildElementVector(null, null, null, true, 0, false)
 	 */
 	@Deprecated
-	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd,
-			final int maxSize)
+	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize)
 	{
 		return getChildElementVector(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize, false);
 	}
@@ -1760,8 +1758,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return VElement vector with all found elements, an empty vector if no elements match
 	 * @default getChildElementVector(null, null, null, true, 0, true)
 	 */
-	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd,
-			final int maxSize, final boolean bResolveTarget)
+	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize, final boolean bResolveTarget)
 	{
 		return getChildElementVector_KElement(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize);
 	}
@@ -1821,8 +1818,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
-	public synchronized VElement getChildElementVector_KElement(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib,
-			final boolean bAnd, final int maxSize)
+	public synchronized VElement getChildElementVector_KElement(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize)
 	{
 		final VElement v = new VElement();
 		v.addAll(getChildArray_KElement(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize));
@@ -2266,8 +2262,7 @@ public class KElement extends ElementNSImpl implements Element
 	 *      boolean)
 	 * @default getChildrenByTagName(s,null,null, false, true, 0)
 	 */
-	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect,
-			final boolean bAnd, final int maxSize)
+	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize)
 	{
 		if (bDirect)
 		{
@@ -2321,8 +2316,7 @@ public class KElement extends ElementNSImpl implements Element
 	 *      boolean)
 	 * @default getChildrenByTagName(s,null,null, false, true, 0)
 	 */
-	public VElement getChildrenByTagName_KElement(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect,
-			final boolean bAnd, final int maxSize)
+	public VElement getChildrenByTagName_KElement(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize)
 	{
 		if (bDirect)
 		{
@@ -3116,8 +3110,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param bAnd if true, a child is only returned if it has all attributes specified in mAttrib
 	 * @return KElement the found child (element or node), null if index < 0 or index < number of matching children
 	 */
-	public KElement getChildByTagName(final String s, final String nameSpaceURI, int index, final JDFAttributeMap mAttrib, final boolean bDirect,
-			final boolean bAnd)
+	public KElement getChildByTagName(final String s, final String nameSpaceURI, int index, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd)
 	{
 		final VElement v = getChildrenByTagName(s, nameSpaceURI, mAttrib, bDirect, bAnd, index + 1);
 		if (index < 0)
@@ -3405,6 +3398,7 @@ public class KElement extends ElementNSImpl implements Element
 		{
 			this.namespaceURI = nameSpaceURI;
 		}
+		setDirty();
 		return this;
 	}
 
@@ -4101,8 +4095,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param bDirect if true, looks only in direct children, else search through all children, grandchildren etc.
 	 * @return KElement the element which matches the above conditions
 	 */
-	public KElement getChildWithAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index,
-			final boolean bDirect)
+	public KElement getChildWithAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index, final boolean bDirect)
 	{
 		return getChildByTagName(nodeName, nameSpaceURI, index, new JDFAttributeMap(attName, attVal), bDirect, true);
 	}
@@ -4189,8 +4182,7 @@ public class KElement extends ElementNSImpl implements Element
 	{
 		boolean fSuccess = false;
 
-		final String strNameSpace = (strPrefix == null || strPrefix.length() <= 0) ? JDFCoreConstants.XMLNS
-				: JDFCoreConstants.XMLNS + JDFCoreConstants.COLON + strPrefix;
+		final String strNameSpace = (strPrefix == null || strPrefix.length() <= 0) ? JDFCoreConstants.XMLNS : JDFCoreConstants.XMLNS + JDFCoreConstants.COLON + strPrefix;
 
 		final String strOldNameSpaceURI = getInheritedAttribute(strNameSpace, null, JDFCoreConstants.EMPTYSTRING);
 		final String myNameSpaceURI = getNamespaceURI();
@@ -4637,8 +4629,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param bUnique if you want to make sure, the attribute is unique, set this boolean to true. Otherwise attribute attName is added to the returned vector
 	 * @return Vector - vector with attributes
 	 */
-	public VString getChildAttributeList(final String nodeName, final String attName, final String nameSpaceURI, final String attValue, final boolean bDirect,
-			final boolean bUnique)
+	public VString getChildAttributeList(final String nodeName, final String attName, final String nameSpaceURI, final String attValue, final boolean bDirect, final boolean bUnique)
 	{
 		final VString v = new VString();
 		final VElement vChildren = getChildrenByTagName(nodeName, nameSpaceURI, new JDFAttributeMap(attName, JDFCoreConstants.EMPTYSTRING), bDirect, true, 0);
@@ -4770,8 +4761,7 @@ public class KElement extends ElementNSImpl implements Element
 	{
 		if (numChildElements_KElement(elementName, nameSpaceURI) >= maxAllowed)
 		{
-			throw new JDFException(
-					"KElement:appendElementN:" + " too many elements (>" + maxAllowed + ") of type" + nameSpaceURI + JDFCoreConstants.COLON + elementName);
+			throw new JDFException("KElement:appendElementN:" + " too many elements (>" + maxAllowed + ") of type" + nameSpaceURI + JDFCoreConstants.COLON + elementName);
 		}
 
 		return appendElement(elementName, nameSpaceURI);
@@ -4847,8 +4837,7 @@ public class KElement extends ElementNSImpl implements Element
 	public KElement insertAt(final String nodeName, final int beforePos, final String beforeNode, final String nameSpaceURI, final String beforeNameSpaceURI)
 	{
 		KElement kRet = null;
-		final String strBeforeNS = ((beforeNameSpaceURI == null) || beforeNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING)) ? nameSpaceURI
-				: beforeNameSpaceURI;
+		final String strBeforeNS = ((beforeNameSpaceURI == null) || beforeNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING)) ? nameSpaceURI : beforeNameSpaceURI;
 		final KElement kElem = getElement_KElement(beforeNode, strBeforeNS, beforePos);
 
 		if (kElem == null)
@@ -5455,8 +5444,7 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				parent = parent.getParentNode();
 			}
-			while (parent != null && newParentName != null && !newParentName.equals(JDFCoreConstants.EMPTYSTRING)
-					&& !parent.getNodeName().equals(newParentName));
+			while (parent != null && newParentName != null && !newParentName.equals(JDFCoreConstants.EMPTYSTRING) && !parent.getNodeName().equals(newParentName));
 
 			if (parent != null)
 			{

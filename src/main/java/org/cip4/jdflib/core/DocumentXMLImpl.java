@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,23 +56,23 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  * DocumentJDFImpl.java - JDFElement Factory
  *
  * @author Dietrich Mucha
- * 
+ *
  * This method creates at least a KElement !!! (was JDFElement until 11.2005)
  *
  * Copyright (C) 2003 Heidelberger Druckmaschinen AG. All Rights Reserved.
@@ -95,7 +95,7 @@ import org.w3c.dom.Element;
 /**
  * implementation of the JDFLib class factory
  * @author prosirai
- * 
+ *
  */
 public class DocumentXMLImpl extends DocumentImpl
 {
@@ -163,7 +163,7 @@ public class DocumentXMLImpl extends DocumentImpl
 
 	/**
 	 * rough guestimate of the memory used by this if called after parsing
-	 * 
+	 *
 	 * @return the difference of memory used when calling compared to construction time
 	 */
 	public long getDocMemoryUsed()
@@ -205,21 +205,20 @@ public class DocumentXMLImpl extends DocumentImpl
 	/**
 	 * @param documentJDFImpl
 	 */
-	void setNSMap(DocumentXMLImpl documentJDFImpl)
+	void setNSMap(final DocumentXMLImpl documentJDFImpl)
 	{
 		if (documentJDFImpl == null)
 			return;
 
 		nsMap.putAll(documentJDFImpl.nsMap);
-		Element e = getDocumentElement();
+		final Element e = getDocumentElement();
 		if (e != null)
 		{
-			Vector<String> keys = ContainerUtil.getKeyVector(nsMap);
+			final Vector<String> keys = ContainerUtil.getKeyVector(nsMap);
 			if (keys != null)
 			{
-				for (int i = 0; i < keys.size(); i++)
+				for (final String prefix : keys)
 				{
-					String prefix = keys.get(i);
 					setRootNSAttribute(prefix, nsMap.get(prefix));
 				}
 			}
@@ -242,9 +241,9 @@ public class DocumentXMLImpl extends DocumentImpl
 
 	/**
 	 * Factory method; creates an <code>Element</code> having this <code>Document</code> as its OwnerDoc.
-	 * 
+	 *
 	 * @param qualifiedName The name of the element type to instantiate. For XML, this is case-sensitive.
-	 * 
+	 *
 	 */
 	@Override
 	public Element createElement(final String qualifiedName)
@@ -326,7 +325,7 @@ public class DocumentXMLImpl extends DocumentImpl
 
 	/**
 	 * if true no namespaces are heuristically gathered
-	 * 
+	 *
 	 * @param _setIgnoreNSDefault the setIgnoreNSDefault to set
 	 */
 	public void setIgnoreNSDefault(final boolean _setIgnoreNSDefault)
@@ -351,11 +350,11 @@ public class DocumentXMLImpl extends DocumentImpl
 	 * @param prefix
 	 * @param strNamespaceURI
 	 */
-	public void setNamespaceURIFromPrefix(String prefix, String strNamespaceURI)
+	public void setNamespaceURIFromPrefix(String prefix, final String strNamespaceURI)
 	{
 		if (StringUtil.getNonEmpty(prefix) == null)
 			prefix = JDFCoreConstants.COLON;
-		String old = nsMap.get(prefix);
+		final String old = nsMap.get(prefix);
 		if (old == null)
 		{
 			setRootNSAttribute(prefix, strNamespaceURI);
@@ -367,12 +366,12 @@ public class DocumentXMLImpl extends DocumentImpl
 	 * @param prefix
 	 * @param strNamespaceURI
 	 */
-	private void setRootNSAttribute(String prefix, String strNamespaceURI)
+	private void setRootNSAttribute(final String prefix, final String strNamespaceURI)
 	{
 		String qualifiedName = "xmlns";
 		if (!JDFCoreConstants.COLON.equals(prefix))
 			qualifiedName += JDFCoreConstants.COLON + prefix;
-		KElement element = (KElement) getDocumentElement();
+		final KElement element = (KElement) getDocumentElement();
 		if (element != null)
 		{
 			element.setAttributeNS(JDFCoreConstants.XMLNSURI, qualifiedName, strNamespaceURI);
@@ -387,6 +386,11 @@ public class DocumentXMLImpl extends DocumentImpl
 	public void clearDirty()
 	{
 		changes = 0;
+	}
+
+	public void setDirty()
+	{
+		changed();
 	}
 
 }
