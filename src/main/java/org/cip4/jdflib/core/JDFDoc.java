@@ -503,8 +503,8 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
-	 * This method sends the contents of this JDFDoc to the URL <code>strURL</code> and receives the response in the returned JDFDoc. the content type is automagically set to either text/xml for
-	 * undefined xml or to application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml
+	 * This method sends the contents of this JDFDoc to the URL <code>strURL</code> and receives the response in the returned JDFDoc. the content type is
+	 * automagically set to either text/xml for undefined xml or to application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml
 	 *
 	 * @param strURL the URL to write to
 	 *
@@ -516,8 +516,8 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
-	 * This method sends the contents of this JDFDoc to the URL <code>strURL</code> and receives the response in the returned JDFDoc. the content type is automagically set to either text/xml for
-	 * undefined xml or to application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml
+	 * This method sends the contents of this JDFDoc to the URL <code>strURL</code> and receives the response in the returned JDFDoc. the content type is
+	 * automagically set to either text/xml for undefined xml or to application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml
 	 *
 	 * @param strURL the URL to write to
 	 *
@@ -675,6 +675,7 @@ public class JDFDoc extends XMLDoc
 	 */
 	public void clearDirtyIDs()
 	{
+		m_doc.clearDirty();
 		getCreateXMLDocUserData().clearDirtyIDs();
 	}
 
@@ -686,6 +687,10 @@ public class JDFDoc extends XMLDoc
 	 */
 	public boolean isDirty(final String strID)
 	{
+		if (m_doc == null)
+			return false;
+		if (m_doc.bGlobalDirtyPolicy)
+			return m_doc.isDirty();
 		final XMLDocUserData docUserData = getXMLDocUserData();
 		return docUserData == null ? false : docUserData.isDirty(strID);
 	}

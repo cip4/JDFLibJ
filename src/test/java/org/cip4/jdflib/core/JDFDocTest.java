@@ -103,6 +103,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = new JDFDoc("test");
 		final KElement e = doc.getRoot();
+		doc.clearDirtyIDs();
 		assertFalse(e.isDirty());
 		assertFalse(doc.isDirty(null));
 		doc.getCreateXMLDocUserData().setDirtyPolicy(EnumDirtyPolicy.Doc);
