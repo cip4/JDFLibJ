@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -146,7 +146,6 @@ public class DocumentXMLImpl extends DocumentImpl
 
 	// used mainly for memory debugging purposes
 	protected long initialMem;
-	boolean bGlobalDirtyFlag = false;
 	boolean bGlobalDirtyPolicy = true;
 	/**
 	 * the original file name if an element was parsed, else null
@@ -261,7 +260,7 @@ public class DocumentXMLImpl extends DocumentImpl
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @return
-	*/
+	 */
 	@Override
 	public Element createElementNS(final String namespaceURI, final String qualifiedName)
 	{
@@ -275,7 +274,7 @@ public class DocumentXMLImpl extends DocumentImpl
 	 * @param qualifiedName
 	 * @param localPart
 	 * @return
-	*/
+	 */
 	@Override
 	public Element createElementNS(final String namespaceURI, final String qualifiedName, final String localPart)
 	{
@@ -318,7 +317,7 @@ public class DocumentXMLImpl extends DocumentImpl
 	}
 
 	/**
-	 * @return the setIgnoreNSDefault; if true no namespaces are collected 
+	 * @return the setIgnoreNSDefault; if true no namespaces are collected
 	 */
 	public boolean isIgnoreNSDefault()
 	{
@@ -378,6 +377,16 @@ public class DocumentXMLImpl extends DocumentImpl
 		{
 			element.setAttributeNS(JDFCoreConstants.XMLNSURI, qualifiedName, strNamespaceURI);
 		}
+	}
+
+	public boolean isDirty()
+	{
+		return changes > 0;
+	}
+
+	public void clearDirty()
+	{
+		changes = 0;
 	}
 
 }

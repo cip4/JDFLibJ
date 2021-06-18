@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -37,6 +37,7 @@
 package org.cip4.jdflib.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -142,6 +143,19 @@ public class XMLParserTest extends JDFTestCaseBase
 		final String s = d.write2String(2);
 		final XMLDoc d2 = p.parseString(s);
 		assertNotNull(d2);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testDirty()
+	{
+		final XMLParser p = new XMLParser();
+		final XMLDoc d = p.parseString("<foo/>");
+		assertNotNull(d);
+		assertFalse(d.getRoot().isDirty());
 	}
 
 	/**

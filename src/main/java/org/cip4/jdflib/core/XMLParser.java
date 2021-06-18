@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -288,7 +288,8 @@ public class XMLParser extends DOMParser
 		}
 		else
 		{
-			final InputStream bis = (inStream instanceof BufferedInputStream) || (inStream instanceof ByteArrayIOInputStream) ? inStream : new BufferedInputStream(inStream);
+			final InputStream bis = (inStream instanceof BufferedInputStream) || (inStream instanceof ByteArrayIOInputStream) ? inStream
+					: new BufferedInputStream(inStream);
 			final InputSource inSource = new InputSource(bis);
 			d = parseInputSource(inSource);
 		}
@@ -434,6 +435,7 @@ public class XMLParser extends DOMParser
 			final String namespaceURI = root.getNamespaceURI();
 			setDocumentProperties(root, memberDocument, namespaceURI);
 			memberDocument.setIgnoreNSDefault(ignoreNSDefault);
+			memberDocument.clearDirty();
 		}
 		inputID = null;
 		return doc;
@@ -480,10 +482,12 @@ public class XMLParser extends DOMParser
 	}
 
 	/**
-	 * @see org.apache.xerces.parsers.AbstractDOMParser#startDocument(org.apache.xerces.xni.XMLLocator, java.lang.String, org.apache.xerces.xni.NamespaceContext, org.apache.xerces.xni.Augmentations)
+	 * @see org.apache.xerces.parsers.AbstractDOMParser#startDocument(org.apache.xerces.xni.XMLLocator, java.lang.String,
+	 *      org.apache.xerces.xni.NamespaceContext, org.apache.xerces.xni.Augmentations)
 	 */
 	@Override
-	public void startDocument(final XMLLocator locator, final String encoding, final NamespaceContext namespaceContext, final Augmentations augs) throws XNIException
+	public void startDocument(final XMLLocator locator, final String encoding, final NamespaceContext namespaceContext, final Augmentations augs)
+			throws XNIException
 	{
 		super.startDocument(locator, encoding, namespaceContext, augs);
 		final DocumentXMLImpl memberDocument = (DocumentXMLImpl) getDocument();

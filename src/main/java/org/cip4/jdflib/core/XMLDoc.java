@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -671,7 +671,8 @@ public class XMLDoc implements Cloneable
 	}
 
 	/**
-	 * createElement create a JDFElement that floats in nirvana. This must be appended to a node with appendChild (created in namespace JDFCoreConstants.NONAMESPACE (DOM Level 2)).<br>
+	 * createElement create a JDFElement that floats in nirvana. This must be appended to a node with appendChild (created in namespace
+	 * JDFCoreConstants.NONAMESPACE (DOM Level 2)).<br>
 	 * Another way would be to use KElement.appendElement(String elementName, String nameSpaceURI)
 	 *
 	 * @param elementName name of the element that is created
@@ -1183,7 +1184,8 @@ public class XMLDoc implements Cloneable
 	 * @param version version number of the package name to test
 	 *
 	 * @return boolean - true, if the feature is sopported
-	 * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/NodeImpl.html#isSupported(java.lang.String,%20java.lang.String)" <a>Xerxes-Documentation</a>
+	 * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/NodeImpl.html#isSupported(java.lang.String,%20java.lang.String)"
+	 *      <a>Xerxes-Documentation</a>
 	 */
 	public boolean isSupported(final String feature, final String version)
 	{
@@ -1236,6 +1238,16 @@ public class XMLDoc implements Cloneable
 	public boolean isNull()
 	{
 		return m_doc == null;
+	}
+
+	/**
+	 * check whether the underlying document is null
+	 *
+	 * @return true if m_doc==null
+	 */
+	public boolean isDirty()
+	{
+		return m_doc != null && m_doc.isDirty();
 	}
 
 	/**

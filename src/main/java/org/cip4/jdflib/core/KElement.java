@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -130,8 +130,8 @@ import org.w3c.dom.Text;
  * KElement is completely agnostic to JDF.<br>
  * Typically elements in non-JDF namespaces will be KElements.<br>
  * <br>
- * note that it is discouraged to mix direct calls to Dom Element and KElement routines a future version will most likely contain a private ElementNSImpl rather than inherit from it. The current
- * extension solution is a work around around a xerces bug
+ * note that it is discouraged to mix direct calls to Dom Element and KElement routines a future version will most likely contain a private ElementNSImpl rather
+ * than inherit from it. The current extension solution is a work around around a xerces bug
  *
  * @author CIP4
  * @see JDFElement for the first element class that is aware of JDF
@@ -188,7 +188,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public boolean isDirty()
 	{
-		return ((DocumentXMLImpl) ownerDocument).bGlobalDirtyFlag;
+		return ((DocumentXMLImpl) ownerDocument).isDirty();
 	}
 
 	/**
@@ -209,7 +209,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public void setDirty(final boolean bAttribute)
 	{
-		((DocumentXMLImpl) ownerDocument).bGlobalDirtyFlag = true;
+		// nop
 	}
 
 	/**
@@ -544,8 +544,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Get The DOM Attribute node of a given attribute if attrib has no namespace prefix and nameSpaceURI is a wildcard the attribute with the element prefix will be returned if no empty attribute
-	 * exists e.g. getDOMAttr("a") will return the node x:a in <x:e x:a="b"/>
+	 * Get The DOM Attribute node of a given attribute if attrib has no namespace prefix and nameSpaceURI is a wildcard the attribute with the element prefix
+	 * will be returned if no empty attribute exists e.g. getDOMAttr("a") will return the node x:a in <x:e x:a="b"/>
 	 *
 	 * @param attrib the attribute Name
 	 * @param nameSpaceURI then namespaceURI, defaults to the local namespace
@@ -610,10 +610,11 @@ public class KElement extends ElementNSImpl implements Element
 	// ////////////////////////////////////////////////////////////////////
 	/**
 	 * Mother of all Attribute setters <br>
-	 * Sets a new attribute. If an attribute with that name is already present in the element, its value is changed to be that of the value parameter. This value is a simple string; it is not parsed
-	 * as it is being set. So any markup (such as syntax to be recognized as an entity reference) is treated as literal text, and needs to be appropriately escaped by the implementation when it is
-	 * written out. In order to assign an attribute value that contains entity references, the user must create an Attr node plus any Text and EntityReference nodes, build the appropriate subtree, and
-	 * use setAttributeNode to assign it as the value of an attribute. To set an attribute with a qualified name and namespace URI, use the setAttributeNS method.
+	 * Sets a new attribute. If an attribute with that name is already present in the element, its value is changed to be that of the value parameter. This
+	 * value is a simple string; it is not parsed as it is being set. So any markup (such as syntax to be recognized as an entity reference) is treated as
+	 * literal text, and needs to be appropriately escaped by the implementation when it is written out. In order to assign an attribute value that contains
+	 * entity references, the user must create an Attr node plus any Text and EntityReference nodes, build the appropriate subtree, and use setAttributeNode to
+	 * assign it as the value of an attribute. To set an attribute with a qualified name and namespace URI, use the setAttributeNS method.
 	 *
 	 * @param key the qualified name of the attribute to create or alter.
 	 * @param value the value to set in string form. If null, the attribute is removed
@@ -702,7 +703,8 @@ public class KElement extends ElementNSImpl implements Element
 					namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
 					if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
 					{
-						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2 + "; attempting to set URI: " + nameSpaceURI;
+						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
+								+ "; attempting to set URI: " + nameSpaceURI;
 						kLog.error(message);
 						throw new JDFException(message);
 					}
@@ -830,8 +832,8 @@ public class KElement extends ElementNSImpl implements Element
 							final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 							if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
 							{
-								throw new JDFException(
-										"KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2 + "; attempting to set URI: " + nameSpaceURI);
+								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: "
+										+ nsURI2 + "; attempting to set URI: " + nameSpaceURI);
 							}
 							try
 							{
@@ -1121,8 +1123,9 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param value string to be appended
 	 * @param nameSpaceURI namespace of key
 	 * @param sep separator between the original attribute value and value, defaults to " " if null
-	 * @param bUnique if true, the attribute will only be appended if it is not yet within the current attribute value appendAttribute("key","next",JDFCoreConstants.EMPTYSTRING,JDFCoreConstants
-	 *            .COMMA) applied to <xml key="first"/> results in <xml key="first,next"/>
+	 * @param bUnique if true, the attribute will only be appended if it is not yet within the current attribute value
+	 *            appendAttribute("key","next",JDFCoreConstants.EMPTYSTRING,JDFCoreConstants .COMMA) applied to <xml key="first"/> results in
+	 *            <xml key="first,next"/>
 	 * @default appendAttribute(key, value, null, null, false)
 	 * @return the updated value; null if none exists
 	 */
@@ -1445,8 +1448,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Sets the attributes from the curent element to the attributes from kElem. If the Attributes map from kElem is empty (kElem has no attributes), zero is returned. Otherwhise the size of the map
-	 * (number of attributes from kElem) is returned.
+	 * Sets the attributes from the curent element to the attributes from kElem. If the Attributes map from kElem is empty (kElem has no attributes), zero is
+	 * returned. Otherwhise the size of the map (number of attributes from kElem) is returned.
 	 *
 	 * @param kElem the attribute source
 	 * @return int number of elements from kElem
@@ -1457,8 +1460,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Sets the attributes from the current element to the attributes from kElem. If the Attributes map from kElem is empty (kElem has no attributes), zero is returned. Otherwise the size of the map
-	 * (number of attributes from kElem) is returned.
+	 * Sets the attributes from the current element to the attributes from kElem. If the Attributes map from kElem is empty (kElem has no attributes), zero is
+	 * returned. Otherwise the size of the map (number of attributes from kElem) is returned.
 	 *
 	 * @param kElem the attribute source
 	 */
@@ -1479,8 +1482,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Sets the attributes from the curent element to the attributes from kElem. If the Attributes map from kElem is empty (kElem has no attributes), zero is returned. Otherwhise the size of the map
-	 * (number of attributes from kElem) is returned.
+	 * Sets the attributes from the curent element to the attributes from kElem. If the Attributes map from kElem is empty (kElem has no attributes), zero is
+	 * returned. Otherwhise the size of the map (number of attributes from kElem) is returned.
 	 *
 	 * @param kElem the attribute source
 	 * @param ignoreList
@@ -1573,8 +1576,8 @@ public class KElement extends ElementNSImpl implements Element
 
 	/**
 	 * @param elementName the elementname with namespace prefix "xyz:abc"
-	 * @param nameSpaceURI the namespace of the element "null" is valid if the namespace was specified already above. The method will lookup the namespace for you. Performance wise its better to add
-	 *            it nevertheless.
+	 * @param nameSpaceURI the namespace of the element "null" is valid if the namespace was specified already above. The method will lookup the namespace for
+	 *            you. Performance wise its better to add it nevertheless.
 	 * @return KElement the appended element or null
 	 * @throws JDFException if you tried to append an element into an unspecified namespace
 	 */
@@ -1738,7 +1741,8 @@ public class KElement extends ElementNSImpl implements Element
 	 * @default getChildElementVector(null, null, null, true, 0, false)
 	 */
 	@Deprecated
-	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize)
+	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd,
+			final int maxSize)
 	{
 		return getChildElementVector(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize, false);
 	}
@@ -1756,7 +1760,8 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return VElement vector with all found elements, an empty vector if no elements match
 	 * @default getChildElementVector(null, null, null, true, 0, true)
 	 */
-	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize, final boolean bResolveTarget)
+	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd,
+			final int maxSize, final boolean bResolveTarget)
 	{
 		return getChildElementVector_KElement(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize);
 	}
@@ -1816,7 +1821,8 @@ public class KElement extends ElementNSImpl implements Element
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
-	public synchronized VElement getChildElementVector_KElement(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize)
+	public synchronized VElement getChildElementVector_KElement(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib,
+			final boolean bAnd, final int maxSize)
 	{
 		final VElement v = new VElement();
 		v.addAll(getChildArray_KElement(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize));
@@ -2220,8 +2226,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Check if an attribute is present. If attValue is '*', "" or null it is checked if the element attName is present. Only for simple attributes where an exact .equals match is appropriate, for
-	 * ranges and rangelists use JDFElement.includesMatchingAttributes()
+	 * Check if an attribute is present. If attValue is '*', "" or null it is checked if the element attName is present. Only for simple attributes where an
+	 * exact .equals match is appropriate, for ranges and rangelists use JDFElement.includesMatchingAttributes()
 	 *
 	 * @param attName the name of the attribute
 	 * @param attValue the value of the attribute
@@ -2256,10 +2262,12 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param bAnd if true, a child is only added, if it includes all attributes, specified in mAttrib
 	 * @param maxSize maximum size of the element vector. maxSize is ignored if bDirect is false
 	 * @return VElement: vector with all found elements
-	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int, boolean)
+	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int,
+	 *      boolean)
 	 * @default getChildrenByTagName(s,null,null, false, true, 0)
 	 */
-	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize)
+	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect,
+			final boolean bAnd, final int maxSize)
 	{
 		if (bDirect)
 		{
@@ -2309,10 +2317,12 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param bAnd if true, a child is only added, if it includes all attributes, specified in mAttrib
 	 * @param maxSize maximum size of the element vector. maxSize is ignored if bDirect is false
 	 * @return VElement: vector with all found elements
-	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int, boolean)
+	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int,
+	 *      boolean)
 	 * @default getChildrenByTagName(s,null,null, false, true, 0)
 	 */
-	public VElement getChildrenByTagName_KElement(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize)
+	public VElement getChildrenByTagName_KElement(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect,
+			final boolean bAnd, final int maxSize)
 	{
 		if (bDirect)
 		{
@@ -3046,8 +3056,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Get the number of child elements. If String 'node' is null, an empty string or '*', all nodes are counted. This method is the same as numChildElements but prevents before the maybe unwanted
-	 * virtuality of numChildElements.
+	 * Get the number of child elements. If String 'node' is null, an empty string or '*', all nodes are counted. This method is the same as numChildElements
+	 * but prevents before the maybe unwanted virtuality of numChildElements.
 	 * <p>
 	 * default: numChildElements_KElement(null, null)
 	 *
@@ -3101,11 +3111,13 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param nameSpaceURI nameSpace you are searching for
 	 * @param index if more then one child match the condition you can specify which one you want to have via the index
 	 * @param mAttrib attributes you are lokking for
-	 * @param bDirect if true return value is directly the elemement. Otherwise the return value is the node of the found element. Only direct child, not grandchild etc.
+	 * @param bDirect if true return value is directly the elemement. Otherwise the return value is the node of the found element. Only direct child, not
+	 *            grandchild etc.
 	 * @param bAnd if true, a child is only returned if it has all attributes specified in mAttrib
 	 * @return KElement the found child (element or node), null if index < 0 or index < number of matching children
 	 */
-	public KElement getChildByTagName(final String s, final String nameSpaceURI, int index, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd)
+	public KElement getChildByTagName(final String s, final String nameSpaceURI, int index, final JDFAttributeMap mAttrib, final boolean bDirect,
+			final boolean bAnd)
 	{
 		final VElement v = getChildrenByTagName(s, nameSpaceURI, mAttrib, bDirect, bAnd, index + 1);
 		if (index < 0)
@@ -3296,7 +3308,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * You can get the iSkip element named by nodeName. If there is no element present, a new empty element is returned. If iSkip is out of range, a new element is returned.
+	 * You can get the iSkip element named by nodeName. If there is no element present, a new empty element is returned. If iSkip is out of range, a new element
+	 * is returned.
 	 * <p>
 	 * default: getDeepElement(nodeName, null, 0)
 	 *
@@ -3375,7 +3388,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Rename the element with the String newName. Attention. the Java class of the element does not get modified. It is up to the caller to ensure that no inconsistent types get created with rename
+	 * Rename the element with the String newName. Attention. the Java class of the element does not get modified. It is up to the caller to ensure that no
+	 * inconsistent types get created with rename
 	 * <p>
 	 * default: renameElement(newName, null)
 	 *
@@ -3461,10 +3475,11 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Moves src node (including all attributes and subelements) from its parent node into 'this' and inserts it in front of beforeChild, if it exists. Otherwise appends src to 'this'.<br>
+	 * Moves src node (including all attributes and subelements) from its parent node into 'this' and inserts it in front of beforeChild, if it exists.
+	 * Otherwise appends src to 'this'.<br>
 	 * If src is <code>null</code>, an empty KElement is returned.<br>
-	 * src is removed from its parent node. if the actual document owner is the same as the document owner of src, src is appended to 'this' If the documents are different, then src is appended to
-	 * 'this' in the actual document.
+	 * src is removed from its parent node. if the actual document owner is the same as the document owner of src, src is appended to 'this' If the documents
+	 * are different, then src is appended to 'this' in the actual document.
 	 * <p>
 	 * default: moveElement(src, null)
 	 *
@@ -3551,8 +3566,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Erases all empty text nodes in 'this' and its subelements If there any empty text nodes removes them. If bTrimWhite is true, then trims white spaces from both ends of a text node and only then,
-	 * if it is empty, removes it
+	 * Erases all empty text nodes in 'this' and its subelements If there any empty text nodes removes them. If bTrimWhite is true, then trims white spaces from
+	 * both ends of a text node and only then, if it is empty, removes it
 	 *
 	 * @param bTrimWhite trims whitespace of text, default = true
 	 * @return int the number of removed nodes
@@ -3597,7 +3612,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Copies src node (including all attributes and subelements) and inserts the copy into 'this' in front of beforeChild, if it exists. Otherwise appends src node to 'this'.
+	 * Copies src node (including all attributes and subelements) and inserts the copy into 'this' in front of beforeChild, if it exists. Otherwise appends src
+	 * node to 'this'.
 	 * <p>
 	 * default: copyElement(src, null)
 	 *
@@ -3683,7 +3699,8 @@ public class KElement extends ElementNSImpl implements Element
 	/**
 	 * Replaces 'this' with src. <br>
 	 * If the actual document is the same as the src document, 'this' is replaced by src.<br>
-	 * If the actual document and the src document are different, src is positioned at the position of 'this' in the current document and removed from the old parent document.<br>
+	 * If the actual document and the src document are different, src is positioned at the position of 'this' in the current document and removed from the old
+	 * parent document.<br>
 	 *
 	 * @since 130103 ReplaceElement works on all elements including the document root
 	 * @param src node, that 'this' will be replaced with
@@ -3906,8 +3923,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * set a DOM comment <code>&lt;!-- XMLComment --&gt;</code> in front of <code>this</code> if an xml Comment node already exists directly in front of <code>this</code>, the previous comment is
-	 * removed The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
+	 * set a DOM comment <code>&lt;!-- XMLComment --&gt;</code> in front of <code>this</code> if an xml Comment node already exists directly in front of
+	 * <code>this</code>, the previous comment is removed The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
 	 *
 	 * @param commentText the comment text to set
 	 *
@@ -3919,8 +3936,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * set a DOM comment <code>&lt;!-- XMLComment --&gt;</code> in front of <code>this</code> if an xml Comment node already exists directly in front of <code>this</code>, the previous comment is
-	 * removed The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
+	 * set a DOM comment <code>&lt;!-- XMLComment --&gt;</code> in front of <code>this</code> if an xml Comment node already exists directly in front of
+	 * <code>this</code>, the previous comment is removed The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
 	 *
 	 * @param commentText the comment text to set
 	 * @param single TODO
@@ -4084,7 +4101,8 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param bDirect if true, looks only in direct children, else search through all children, grandchildren etc.
 	 * @return KElement the element which matches the above conditions
 	 */
-	public KElement getChildWithAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index, final boolean bDirect)
+	public KElement getChildWithAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index,
+			final boolean bDirect)
 	{
 		return getChildByTagName(nodeName, nameSpaceURI, index, new JDFAttributeMap(attName, attVal), bDirect, true);
 	}
@@ -4171,7 +4189,8 @@ public class KElement extends ElementNSImpl implements Element
 	{
 		boolean fSuccess = false;
 
-		final String strNameSpace = (strPrefix == null || strPrefix.length() <= 0) ? JDFCoreConstants.XMLNS : JDFCoreConstants.XMLNS + JDFCoreConstants.COLON + strPrefix;
+		final String strNameSpace = (strPrefix == null || strPrefix.length() <= 0) ? JDFCoreConstants.XMLNS
+				: JDFCoreConstants.XMLNS + JDFCoreConstants.COLON + strPrefix;
 
 		final String strOldNameSpaceURI = getInheritedAttribute(strNameSpace, null, JDFCoreConstants.EMPTYSTRING);
 		final String myNameSpaceURI = getNamespaceURI();
@@ -4618,7 +4637,8 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param bUnique if you want to make sure, the attribute is unique, set this boolean to true. Otherwise attribute attName is added to the returned vector
 	 * @return Vector - vector with attributes
 	 */
-	public VString getChildAttributeList(final String nodeName, final String attName, final String nameSpaceURI, final String attValue, final boolean bDirect, final boolean bUnique)
+	public VString getChildAttributeList(final String nodeName, final String attName, final String nameSpaceURI, final String attValue, final boolean bDirect,
+			final boolean bUnique)
 	{
 		final VString v = new VString();
 		final VElement vChildren = getChildrenByTagName(nodeName, nameSpaceURI, new JDFAttributeMap(attName, JDFCoreConstants.EMPTYSTRING), bDirect, true, 0);
@@ -4649,8 +4669,9 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Inserts the Element elementName before the existing Element node beforeChild. If beforeChild is <code>null</code> , insert elementName at the end of the list of children. If elementName is a
-	 * DocumentFragment object, all of its children are inserted, in the same order, before beforeChild. If the elementName is already in the tree, it is removed first.
+	 * Inserts the Element elementName before the existing Element node beforeChild. If beforeChild is <code>null</code> , insert elementName at the end of the
+	 * list of children. If elementName is a DocumentFragment object, all of its children are inserted, in the same order, before beforeChild. If the
+	 * elementName is already in the tree, it is removed first.
 	 * <p>
 	 * default: insertBefore(elementName, beforeChild, null)
 	 *
@@ -4749,7 +4770,8 @@ public class KElement extends ElementNSImpl implements Element
 	{
 		if (numChildElements_KElement(elementName, nameSpaceURI) >= maxAllowed)
 		{
-			throw new JDFException("KElement:appendElementN:" + " too many elements (>" + maxAllowed + ") of type" + nameSpaceURI + JDFCoreConstants.COLON + elementName);
+			throw new JDFException(
+					"KElement:appendElementN:" + " too many elements (>" + maxAllowed + ") of type" + nameSpaceURI + JDFCoreConstants.COLON + elementName);
 		}
 
 		return appendElement(elementName, nameSpaceURI);
@@ -4809,7 +4831,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Creates a new child element with defined Name and NameSpace and inserts it in front of the node with a name bForeNode and namespace beforeNameSpaceURI, with index beforePos
+	 * Creates a new child element with defined Name and NameSpace and inserts it in front of the node with a name bForeNode and namespace beforeNameSpaceURI,
+	 * with index beforePos
 	 * <p>
 	 * default: InsertAt(nodeName, beforePos, null, null, null)
 	 *
@@ -4824,7 +4847,8 @@ public class KElement extends ElementNSImpl implements Element
 	public KElement insertAt(final String nodeName, final int beforePos, final String beforeNode, final String nameSpaceURI, final String beforeNameSpaceURI)
 	{
 		KElement kRet = null;
-		final String strBeforeNS = ((beforeNameSpaceURI == null) || beforeNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING)) ? nameSpaceURI : beforeNameSpaceURI;
+		final String strBeforeNS = ((beforeNameSpaceURI == null) || beforeNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING)) ? nameSpaceURI
+				: beforeNameSpaceURI;
 		final KElement kElem = getElement_KElement(beforeNode, strBeforeNS, beforePos);
 
 		if (kElem == null)
@@ -4843,8 +4867,8 @@ public class KElement extends ElementNSImpl implements Element
 	 * Sets an attribute as defined by XPath to value <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *            <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code>
+	 *            <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param value string to be set as attribute value
 	 */
 	public void setXPathValue(final String path, final String value)
@@ -4867,8 +4891,8 @@ public class KElement extends ElementNSImpl implements Element
 	 * Sets an attribute as defined by XPath to value <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *            <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code>
+	 *            <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param value string to be set as attribute value
 	 * @throws JDFException if the defined path is a bad attribute path
 	 */
@@ -4892,8 +4916,8 @@ public class KElement extends ElementNSImpl implements Element
 	 * Gets an attribute value as defined by XPath namespace prefixes are resolved or the node text if an element is specified <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported TODO fix bug for attribute searches where the att value contains xpath syntax
-	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code>
+	 *            <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param def default value if it doesn't exist
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
@@ -4910,8 +4934,8 @@ public class KElement extends ElementNSImpl implements Element
 	 * Attributes are searched for in partitioned resources if appropriate
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported TODO fix bug for attribute searches where the att value contains xpath syntax
-	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code>
+	 *            <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param def default value if it doesn't exist
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
@@ -4926,8 +4950,9 @@ public class KElement extends ElementNSImpl implements Element
 	 * Gets a map of attribute values as defined by XPath namespace prefixes are resolved <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code> if null, assume .//@*, i.e. all of this
+	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code>
+	 *            <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code> if null, assume
+	 *            .//@*, i.e. all of this
 	 *
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
@@ -4943,7 +4968,8 @@ public class KElement extends ElementNSImpl implements Element
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 *
-	 *      <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code> if null, assume .//@*, i.e. all of this
+	 *      <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code> if null, assume .//@*,
+	 *      i.e. all of this
 	 *
 	 * @return String the String value of the xpath
 	 *
@@ -4958,8 +4984,8 @@ public class KElement extends ElementNSImpl implements Element
 	 * gets an element as defined by XPath to value <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-	 *            <code>parentElement[@a=\"b\"]/thisElement[./foo/@foo=\"bar\"]</code>
+	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code>
+	 *            <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[./foo/@foo=\"bar\"]</code>
 	 * @return KElement the specified element
 	 * @throws IllegalArgumentException if path is not supported
 	 */
@@ -4973,8 +4999,8 @@ public class KElement extends ElementNSImpl implements Element
 	 * gets an vector of elements element as defined by XPath to value <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@,// are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code>
+	 *            <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 	 * @param maxSize
 	 * @return VElement the vector of matching elements
 	 * @throws IllegalArgumentException if path is not supported
@@ -5138,8 +5164,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Get child from the actual element by the tag name, nameSpaceURI or attribute map. GetTree only follows direct links, e.g. as in a JDF tree. Hidden nodes that are children of non-matching nodes
-	 * are ignored
+	 * Get child from the actual element by the tag name, nameSpaceURI or attribute map. GetTree only follows direct links, e.g. as in a JDF tree. Hidden nodes
+	 * that are children of non-matching nodes are ignored
 	 *
 	 * @param nodeName elementname you are searching for.<br>
 	 *            Required, no default.
@@ -5429,7 +5455,8 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				parent = parent.getParentNode();
 			}
-			while (parent != null && newParentName != null && !newParentName.equals(JDFCoreConstants.EMPTYSTRING) && !parent.getNodeName().equals(newParentName));
+			while (parent != null && newParentName != null && !newParentName.equals(JDFCoreConstants.EMPTYSTRING)
+					&& !parent.getNodeName().equals(newParentName));
 
 			if (parent != null)
 			{
@@ -6323,7 +6350,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * UniqueID - create a unique id based on date and time + a counter - 6 digits are taken from id Normally this should only be used internally, @see JDFElement.appendAnchor() for details.
+	 * UniqueID - create a unique id based on date and time + a counter - 6 digits are taken from id Normally this should only be used internally, @see
+	 * JDFElement.appendAnchor() for details.
 	 *
 	 * @param id the starting id of the ID - should normally be 0 in order to increment
 	 *

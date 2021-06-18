@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.w3c.dom.Attr;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class XMLDocUserData
 {
@@ -115,7 +115,7 @@ public class XMLDocUserData
 
 	/**
 	 * constructor
-	 * @param parent 
+	 * @param parent
 	 */
 	public XMLDocUserData(DocumentJDFImpl parent)
 	{
@@ -225,7 +225,7 @@ public class XMLDocUserData
 		}
 
 		/**
-		 *  none is default instead of unknown
+		 * none is default instead of unknown
 		 */
 		public static final EnumDirtyPolicy None = new EnumDirtyPolicy("None");
 		/**
@@ -255,8 +255,7 @@ public class XMLDocUserData
 
 	/**
 	 * Return the documents user data pointer.<br>
-	 * User data allows application programs to attach extra data to JDF Documents and can be set using the function
-	 * <code>JDFDoc::SetUserData(p)</code>.
+	 * User data allows application programs to attach extra data to JDF Documents and can be set using the function <code>JDFDoc::SetUserData(p)</code>.
 	 * 
 	 * @return The user data pointer.
 	 */
@@ -268,15 +267,14 @@ public class XMLDocUserData
 	/**
 	 * Set the user data for a document.<br>
 	 * 
-	 * User data allows application programs to attach extra data to DOM nodes, and can be retrieved using the function
-	 * <code>DOM_Node::getUserData(p)</code>.
+	 * User data allows application programs to attach extra data to DOM nodes, and can be retrieved using the function <code>DOM_Node::getUserData(p)</code>.
 	 * <p>
-	 * Deletion of the user data remains the responsibility of the application program; it will not be automatically
-	 * deleted when the nodes themselves are reclaimed.
+	 * Deletion of the user data remains the responsibility of the application program; it will not be automatically deleted when the nodes themselves are
+	 * reclaimed.
 	 * 
 	 * <p>
-	 * Because DOM_Node is not designed to be subclassed, userdata provides an alternative means for extending the
-	 * information kept with nodes by an application program.
+	 * Because DOM_Node is not designed to be subclassed, userdata provides an alternative means for extending the information kept with nodes by an application
+	 * program.
 	 * 
 	 * @param objUserData the user data to be kept with the node.
 	 */
@@ -320,7 +318,7 @@ public class XMLDocUserData
 	 */
 	public void clearDirtyIDs()
 	{
-		m_Parent.bGlobalDirtyFlag = false;
+		m_Parent.clearDirty();
 		if (dirtyPolicy == EnumDirtyPolicy.ID)
 		{
 			m_vDirtyID.clear();
@@ -341,7 +339,6 @@ public class XMLDocUserData
 	VString setDirty(KElement e, boolean bAttribute)
 	{
 
-		m_Parent.bGlobalDirtyFlag = true;
 		if (dirtyPolicy == EnumDirtyPolicy.XPath)
 		{
 			String x = e.buildXPath(null, 1);
@@ -397,7 +394,7 @@ public class XMLDocUserData
 			return false;
 		if (dirtyPolicy == EnumDirtyPolicy.Doc)
 		{
-			return m_Parent.bGlobalDirtyFlag;
+			return m_Parent.isDirty();
 		}
 		else if (dirtyPolicy == EnumDirtyPolicy.ID)
 		{
@@ -446,7 +443,7 @@ public class XMLDocUserData
 			}
 			return false;
 		}
-		return m_Parent.bGlobalDirtyFlag;
+		return m_Parent.isDirty();
 
 	}
 
