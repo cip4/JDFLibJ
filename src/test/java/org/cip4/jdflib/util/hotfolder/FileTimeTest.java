@@ -74,9 +74,9 @@ public class FileTimeTest extends JDFTestCaseBase
 	{
 		for (final boolean b : new boolean[] { true, false })
 		{
-			final File dummy = new File(sm_dirTestDataTemp + System.currentTimeMillis() + ".file");
+			final File dummy = new File(sm_dirTestDataTemp + System.nanoTime() + ".file");
 			final FileTime ft = new FileTime(dummy, b);
-			FileUtil.forceDelete(dummy);
+			assertTrue(FileUtil.forceDelete(dummy));
 			FileUtil.createNewFile(dummy);
 			ThreadUtil.sleep(2);
 			for (int i = 0; i < 3; i++)
@@ -89,7 +89,7 @@ public class FileTimeTest extends JDFTestCaseBase
 				fos.flush();
 				fos.close();
 				log.info("" + i);
-				ThreadUtil.sleep(1420);
+				ThreadUtil.sleep(2420);
 				final long updateModified = ft.updateModified();
 				assertEquals("loop " + i, System.currentTimeMillis(), updateModified, 14200);
 
