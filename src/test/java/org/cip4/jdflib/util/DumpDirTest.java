@@ -141,7 +141,13 @@ public class DumpDirTest extends JDFTestCaseBase
 		final int j = dumpDir.increment();
 		for (int i = 0; i < 10; i++)
 			new TestThread(dumpDir).start();
-		ThreadUtil.sleep(1234);
+
+		for (int i = 0; i < 100; i++)
+		{
+			ThreadUtil.sleep(123);
+			if (j + 10 == dumpDir.get())
+				break;
+		}
 		assertEquals(j + 11, dumpDir.increment());
 	}
 

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -126,7 +126,14 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 			ThreadUtil.sleep(10);
 		}
 		assertFalse(file.exists());
-		ThreadUtil.sleep(100);
+		for (int i = 0; i < 123; i++)
+		{
+			if (myListener.vJMF.size() == 1)
+			{
+				break;
+			}
+			ThreadUtil.sleep(10);
+		}
 		assertNull(FileUtil.listFilesWithExtension(theStorage, null));
 		assertEquals(myListener.vJMF.size(), 1);
 		final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
