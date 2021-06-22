@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,70 +71,118 @@
 
 package org.cip4.jdflib.util;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.ByteArrayInputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
 public class PrefixInputStreamTest extends JDFTestCaseBase
 {
 
-	// /////////////////////////////////////////////////////////////////////////
 	/**
-	 * @throws Exception 
-	 * 
+	 * @throws Exception
+	 *
 	 */
 	@Test
 	public void testRead() throws Exception
 	{
-		PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
-		Assert.assertEquals(pis.read(), 'a');
-		Assert.assertEquals(pis.read(), 'b');
-		Assert.assertEquals(pis.read(), 'c');
-		Assert.assertEquals(pis.read(), '1');
-		Assert.assertEquals(pis.read(), '2');
-		Assert.assertEquals(pis.read(), '3');
-		Assert.assertEquals(pis.read(), -1);
+		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
+		assertEquals(pis.read(), 'a');
+		assertEquals(pis.read(), 'b');
+		assertEquals(pis.read(), 'c');
+		assertEquals(pis.read(), '1');
+		assertEquals(pis.read(), '2');
+		assertEquals(pis.read(), '3');
+		assertEquals(pis.read(), -1);
+	}
+
+	/**
+	 * @throws Exception
+	 *
+	 */
+	@Test
+	public void testMark1() throws Exception
+	{
+		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
+		pis.mark(44);
+		assertEquals(pis.read(), 'a');
+		assertEquals(pis.read(), 'b');
+		pis.reset();
+		assertEquals(pis.read(), 'a');
+		assertEquals(pis.read(), 'b');
+
+		assertEquals(pis.read(), 'c');
+		assertEquals(pis.read(), '1');
+		assertEquals(pis.read(), '2');
+		assertEquals(pis.read(), '3');
+		assertEquals(pis.read(), -1);
+	}
+
+	/**
+	 * @throws Exception
+	 *
+	 */
+	@Test
+	public void testMark2() throws Exception
+	{
+		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
+		pis.mark(44);
+		assertEquals(pis.read(), 'a');
+		assertEquals(pis.read(), 'b');
+
+		assertEquals(pis.read(), 'c');
+		assertEquals(pis.read(), '1');
+		assertEquals(pis.read(), '2');
+		pis.reset();
+		assertEquals(pis.read(), 'a');
+		assertEquals(pis.read(), 'b');
+		assertEquals(pis.read(), 'c');
+		assertEquals(pis.read(), '1');
+		assertEquals(pis.read(), '2');
+
+		assertEquals(pis.read(), '3');
+		assertEquals(pis.read(), -1);
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * @throws Exception 
-	 * 
+	 * @throws Exception
+	 *
 	 */
 	@Test
 	public void testReadBytes() throws Exception
 	{
-		PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
-		byte b[] = new byte[2];
-		Assert.assertEquals(pis.read(b), 2);
-		Assert.assertEquals(pis.read(b), 1);
-		Assert.assertEquals(pis.read(b), 2);
-		Assert.assertEquals(pis.read(b), 1);
-		Assert.assertEquals(pis.read(b), -1);
+		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
+		final byte b[] = new byte[2];
+		assertEquals(pis.read(b), 2);
+		assertEquals(pis.read(b), 1);
+		assertEquals(pis.read(b), 2);
+		assertEquals(pis.read(b), 1);
+		assertEquals(pis.read(b), -1);
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
 	/**
-	 * @throws Exception 
-	 * 
+	 * @throws Exception
+	 *
 	 */
 	@Test
 	public void testReadByteslen() throws Exception
 	{
-		PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
-		byte b[] = new byte[2];
-		Assert.assertEquals(pis.read(b, 0, 2), 2);
-		Assert.assertEquals(pis.read(b, 0, 2), 1);
-		Assert.assertEquals(pis.read(b, 0, 2), 2);
-		Assert.assertEquals(pis.read(b, 0, 2), 1);
-		Assert.assertEquals(pis.read(b, 0, 2), -1);
+		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
+		final byte b[] = new byte[2];
+		assertEquals(pis.read(b, 0, 2), 2);
+		assertEquals(pis.read(b, 0, 2), 1);
+		assertEquals(pis.read(b, 0, 2), 2);
+		assertEquals(pis.read(b, 0, 2), 1);
+		assertEquals(pis.read(b, 0, 2), -1);
 	}
 	// /////////////////////////////////////////////////////////////////////////
 

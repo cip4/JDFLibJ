@@ -131,7 +131,7 @@ public class MimeReader extends MimeHelper
 
 		try
 		{
-			//InputStream newStream = new PrefixInputStream("\n", StreamUtil.getBufferedInputStream(mimeStream));
+			//final InputStream newStream = new PrefixInputStream("\n", StreamUtil.getBufferedInputStream(mimeStream));
 			final InputStream newStream = StreamUtil.getBufferedInputStream(mimeStream);
 			final Message mimeMessage = new MimeMessage(null, newStream);
 
