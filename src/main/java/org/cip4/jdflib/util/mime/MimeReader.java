@@ -53,7 +53,6 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
-import org.cip4.jdflib.util.PrefixInputStream;
 import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.URLReader;
 import org.cip4.jdflib.util.UrlUtil;
@@ -123,7 +122,7 @@ public class MimeReader extends MimeHelper
 	 * @param mimeStream the input stream
 	 * @return MultiPart the Multipart that represents the root mime, null if something went wrong
 	 */
-	private Multipart getMultiPart(InputStream mimeStream)
+	private Multipart getMultiPart(final InputStream mimeStream)
 	{
 		if (mimeStream == null)
 		{
@@ -132,8 +131,8 @@ public class MimeReader extends MimeHelper
 
 		try
 		{
-			InputStream newStream = new PrefixInputStream("\n", StreamUtil.getBufferedInputStream(mimeStream));
-			// InputStream newStream = StreamUtil.getBufferedInputStream(mimeStream);
+			//InputStream newStream = new PrefixInputStream("\n", StreamUtil.getBufferedInputStream(mimeStream));
+			final InputStream newStream = StreamUtil.getBufferedInputStream(mimeStream);
 			final Message mimeMessage = new MimeMessage(null, newStream);
 
 			final Multipart mp = new MimeMultipart(mimeMessage.getDataHandler().getDataSource());
