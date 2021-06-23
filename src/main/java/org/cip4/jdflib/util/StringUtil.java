@@ -107,34 +107,42 @@ public class StringUtil
 	 * parts (c) Monty Python, Star Trek, Douglas Adams, Black Adder, Goethe, Firefly, Capt. Jack Sparrow
 	 *
 	 */
-	private static String[] strings = { "Randomly inserted error", "Me. I'm dishonest! And a dishonest man you can always trust to be dishonest... honestly!", "fooBar", "Snafu",
+	private static String[] strings = { "Randomly inserted error", "Me. I'm dishonest! And a dishonest man you can always trust to be dishonest... honestly!",
+			"fooBar", "Snafu",
 			"Soon TM is a registered trademark of CIP4 and does not imply, either implicitly or explicitly, any action will take place in any given time, if ever.",
 			"Programming today is a race between software engineers striving to build bigger and better programs, and the Universe trying to produce bigger and better idiots. So far, the Universe is winning.",
 			"Nichtsnutz geht über Eigennutz!", "Dumb people are always blissfully unaware of how dumb they really are…",
 			"Well, it’s no secret that the best thing about a secret is secretly telling someone your secret, thereby adding another secret to their secret collection of secrets, secretly.",
 			"Bad Karma",
 			"Ihr Instrumente freilich spottet mein, Mit Rad und Kämmen, Walz und Bügel: Ich stand am Tor, ihr solltet Schlüssel sein; Zwar euer Bart ist kraus, doch hebt ihr nicht die Riegel.",
-			"What do you expect from a simulator", "Paper Jam", "Strawberry jam", "Elderberry jam", "Your mother was a hamster and your father smelt of elderberries!",
-			"I'm French! Why do think I have this outrageous accent, you silly king-a?!", "It's just a flesh wound.", "All right, we'll call it a draw.",
-			"Oh, oh, I see! Running away, eh? You yellow bastards! Come back here and take what's coming to you! I'll bite your legs off!", "You don't frighten us, English pig-dogs!",
-			"Go and boil your bottom, sons of a silly person.", "I blow my nose at you, so-called Arthur King, you and all your silly English k-nnnnniggets. Thpppppt! Thppt! Thppt!",
+			"What do you expect from a simulator", "Paper Jam", "Strawberry jam", "Elderberry jam",
+			"Your mother was a hamster and your father smelt of elderberries!", "I'm French! Why do think I have this outrageous accent, you silly king-a?!",
+			"It's just a flesh wound.", "All right, we'll call it a draw.",
+			"Oh, oh, I see! Running away, eh? You yellow bastards! Come back here and take what's coming to you! I'll bite your legs off!",
+			"You don't frighten us, English pig-dogs!", "Go and boil your bottom, sons of a silly person.",
+			"I blow my nose at you, so-called Arthur King, you and all your silly English k-nnnnniggets. Thpppppt! Thppt! Thppt!",
 			"I don't wanna talk to you no more, you empty headed animal food trough wiper!", "I fart in your general direction!",
 			"Listen, strange women lyin' in ponds distributin' swords is no basis for a system of government. Supreme executive power derives from a mandate from the masses, not from some farcical aquatic ceremony",
-			"C'est un lapin, lapin de bois.", "Quoi? Un cadeau. What? A present. Oh, un cadeau. Oui, oui. Hurry. What? Let's go. Oh. On y va. Bon magne. Over here...",
-			"Oh. Oh, I see. Running away, eh? You yellow bastards! Come back here and take what's coming to you. I'll bite your legs off!", "You're using coconuts!",
+			"C'est un lapin, lapin de bois.",
+			"Quoi? Un cadeau. What? A present. Oh, un cadeau. Oui, oui. Hurry. What? Let's go. Oh. On y va. Bon magne. Over here...",
+			"Oh. Oh, I see. Running away, eh? You yellow bastards! Come back here and take what's coming to you. I'll bite your legs off!",
+			"You're using coconuts!",
 			"The swallow may fly south with the sun or the house martin or the plover may seek warmer climes in winter, yet these are not strangers to our land?",
-			"Are you suggesting coconuts migrate?", "It's not a question of where he grips it! It's a simple question of weight ratios! A five ounce bird could not carry a one pound coconut.",
+			"Are you suggesting coconuts migrate?",
+			"It's not a question of where he grips it! It's a simple question of weight ratios! A five ounce bird could not carry a one pound coconut.",
 			"Listen. In order to maintain air-speed velocity, a swallow needs to beat its wings forty-three times every second, right?",
 			"Oh, King, eh, very nice. And how d'you get that, eh? By exploiting the workers! By 'anging on to outdated imperialist dogma which perpetuates the economic and social differences in our society. If there's ever going to be any progress with the--",
 			"Oh! Come and see the violence inherent in the system! Help! Help! I'm being repressed!",
 			"Here I am, brain the size of a planet, and they ask me to take you to the bridge. Call that job satisfaction, 'cause I don't.",
 			"Ghastly, isn't it? All the doors on this spaceship have been programmed to have a cheery and sunny disposition.", "whazzap?",
 			"Explain again how sheep's bladders may be employed to prevent earthquakes.",
-			"Pardon me for breathing, which I never do anyway so I don't know why I even bothered to say it. Oh god, I'm so depressed.", "I've got this pain in all the diodes down my left side",
+			"Pardon me for breathing, which I never do anyway so I don't know why I even bothered to say it. Oh god, I'm so depressed.",
+			"I've got this pain in all the diodes down my left side",
 			"I would like to say that it is a very great pleasure, honour and privilege for me to open this bridge, but I can't because my lying circuits are all out of commission",
 			"Do you want me to sit in the corner and rust, or just fall apart where I'm standing?",
 			"You may think you've read Hamlet before, but you can't really appreciate it until you've read it in the original Klingon.",
-			"What's this, then? \"Romanes eunt domus\"? People called Romanes, they go, the house?", "Life's a piece of shit when you look at it. Life's a laugh and death's a joke; it's true.",
+			"What's this, then? \"Romanes eunt domus\"? People called Romanes, they go, the house?",
+			"Life's a piece of shit when you look at it. Life's a laugh and death's a joke; it's true.",
 			"Excuse me. Are you the Judean People's Front? Fuck off! We're the People's Front of Judea",
 			"How many Romans? - Aaaaagh ! Plural, plural, er, \"ite\" ! - \"Domus\"? Nominative? \"Go home\" is motion towards, isn't it? - Dative ! -  Aaagh ! Not the dative, not the dative ! Er, er, accusative, \"Domum\" ! - But \"Domus\" takes the locative, which is...? Er, \"Domum\" ! ",
 			"Making it worse? How can it be worse? Jehovah! Jehovah! Jehovah! ",
@@ -159,7 +167,8 @@ public class StringUtil
 			"E: Look, there's no need to panic. Someone in the crew will know how to steer this thing.\nR: The crew, milord?\nE: Yes, the crew.\nR: What crew?\nE: I was under the impression that it was common maritime practice for a ship to have a crew.\nR: Opinion is divided on the subject.\n",
 			"If we do happen to step on a mine, Sir, what do we do ?\nNormal procedure, Lieutenant, is to jump 200 feet in the air and scatter oneself over a wide area.",
 			"Gentlemen, you can't fight in here, this is the War Room!", "I love it when a plan comes together", "Das also war des Pudels Kern!",
-			"I feel that if a person can't communicate the very least he can do is to shut up", "Always carry a flagon of whiskey in case of snakebite and furthermore always carry a small snake.",
+			"I feel that if a person can't communicate the very least he can do is to shut up",
+			"Always carry a flagon of whiskey in case of snakebite and furthermore always carry a small snake.",
 			"Anyone who hates children and animals can't be all bad.", "Ein Teil von jener Kraft, Die stets das Böse will und stets das Gute schafft.",
 			"Von allen Geistern, die verneinen, ist mir der Schalk am wenigsten zur Last.",
 			"And the Lord spake, saying, 'First shalt thou take out the Holy Pin. Then, shalt thou count to three, no more, no less. Three shalt be the number thou shalt count, and the number of the counting shall be three. Four shalt thou not count, nor either count thou two, excepting that thou then proceed to three. Five is right out. Once the number three, being the third number, be reached, then lobbest thou thy Holy Hand Grenade of Antioch towards thy foe, who, being naughty in my sight, shall snuff it.",
@@ -182,12 +191,14 @@ public class StringUtil
 			"If they take the ship they will rape us to death, eat our flesh, and sew our skins in to their clothing, and if we're very, very lucky, they’ll do it in that order.",
 			"Hier konnte niemand sonst Einlaß erhalten, denn dieser Eingang war nur für dich bestimmt. Ich gehe jetzt und schließe ihn.",
 			"Hohe Herren von der Akademie! Sie erweisen mir die Ehre, mich aufzufordern, der Akademie einen Bericht über mein äffisches Vorleben einzureichen.",
-			"Not only is this incomprehensible, but the ink is ugly and the paper is from the wrong kind of tree.", "If the code and the comments disagree, then both are probably wrong.",
-			"A radioactive cat has eighteen half-lives.", "Silence! I kill you!",
+			"Not only is this incomprehensible, but the ink is ugly and the paper is from the wrong kind of tree.",
+			"If the code and the comments disagree, then both are probably wrong.", "A radioactive cat has eighteen half-lives.", "Silence! I kill you!",
 			"Although golf was originally restricted to wealthy, overweight Protestants, today it's open to anybody who owns hideous clothing.",
-			"Base eight is just like base ten really - if you're missing two fingers", "Biology is the only science in which multiplication means the same thing as division.",
+			"Base eight is just like base ten really - if you're missing two fingers",
+			"Biology is the only science in which multiplication means the same thing as division.",
 			"My dog's not eating, he no longer barks; He hit the propeller and turned into sparks",
-			"One leg is missing; the other is gone; The third leg is scattered all over the lawn; No need explaining the one leg remaining is spinning on the carport floor" + "I",
+			"One leg is missing; the other is gone; The third leg is scattered all over the lawn; No need explaining the one leg remaining is spinning on the carport floor"
+					+ "I",
 			"\"Once the rockets are up, who cares where they come down? That's not my department,\" says Wernher von Braun.", "Last quote" };
 
 	/**
@@ -204,7 +215,8 @@ public class StringUtil
 	/**
 	 * Returns a string with deleted whitespaces near 'delim' and from the both ends of the string (if they were there)<br>
 	 *
-	 * tokenizes a given string 'str' into tokens without separators. Trims every token from both sides to remove the whitespaces and builds a new string from these tokens separated by 'delim'.
+	 * tokenizes a given string 'str' into tokens without separators. Trims every token from both sides to remove the whitespaces and builds a new string from
+	 * these tokens separated by 'delim'.
 	 *
 	 * @param str working string
 	 * @param delim the delimiter
@@ -235,8 +247,8 @@ public class StringUtil
 	 * format a string using C++ sprintf functionality
 	 *
 	 * @param format the format to print, see C++ spec for details
-	 * @param template - comma separated string - the values are parsed and the appropriate objects are created more objects exist in template than the number of '%' tokens in format, the remainder of
-	 *            objects is ignored duplicate '\\,' is taken as literal ','
+	 * @param template - comma separated string - the values are parsed and the appropriate objects are created more objects exist in template than the number
+	 *            of '%' tokens in format, the remainder of objects is ignored duplicate '\\,' is taken as literal ','
 	 * @return String the formatted string
 	 * @throws IllegalArgumentException in case format and o do not match, i.e. not enough objects are passed to fill format
 	 */
@@ -273,8 +285,9 @@ public class StringUtil
 	 * format a string using C++ sprintf functionality
 	 *
 	 * @param format the format to print, see C++ spec for details
-	 * @param objects the array of objects, either String, Double, Integer or ValuedEnum, if objects is longer than the number of '%' tokens in format, the remainder of objects is ignored The method
-	 *            works fairly loosely typed, thus doubles are printed as integers, Strings are converted to numbers, if possible etc.
+	 * @param objects the array of objects, either String, Double, Integer or ValuedEnum, if objects is longer than the number of '%' tokens in format, the
+	 *            remainder of objects is ignored The method works fairly loosely typed, thus doubles are printed as integers, Strings are converted to numbers,
+	 *            if possible etc.
 	 *
 	 * @return String the formatted string
 	 * @throws IllegalArgumentException in case format and o do not match, i.e. not eough objects are passed to fill format
@@ -428,8 +441,8 @@ public class StringUtil
 	}
 
 	/**
-	 * n > 0 substring(0, n) take the first n chars (leftmost) n < 0 substring(0, s.length()+n) take the string and cut n chars on the right example: string = "abcdefgh" string.leftStr( 2) = "ab"
-	 * string.leftStr(-3) = "abcde"
+	 * n > 0 substring(0, n) take the first n chars (leftmost) n < 0 substring(0, s.length()+n) take the string and cut n chars on the right example: string =
+	 * "abcdefgh" string.leftStr( 2) = "ab" string.leftStr(-3) = "abcde"
 	 *
 	 * @param strWork the string to work on
 	 * @param n number of characters to cut (negative) or retain (positive)
@@ -499,8 +512,8 @@ public class StringUtil
 	}
 
 	/**
-	 * get the end of a string n > 0 str.substring(str.length() - n) take the rightmost n chars n < 0 substring(-n) take the string and cut n chars on the left example: string = "abcdefgh"
-	 * string.rightStr( 2) = "gh" string.rightStr(-3) = "defgh"
+	 * get the end of a string n > 0 str.substring(str.length() - n) take the rightmost n chars n < 0 substring(-n) take the string and cut n chars on the left
+	 * example: string = "abcdefgh" string.rightStr( 2) = "gh" string.rightStr(-3) = "defgh"
 	 *
 	 * @param strWork the string to work on
 	 * @param n number of characters to cut (negative) or retain (positive)
@@ -947,8 +960,8 @@ public class StringUtil
 	}
 
 	/**
-	 * replace a string in a given String if the replacement string is contained by the string to replace, recursively replace until no ocurrences of the original remain thus replaceString("a000000",
-	 * "00", "0") will return "a0" rather than "a000"
+	 * replace a string in a given String if the replacement string is contained by the string to replace, recursively replace until no ocurrences of the
+	 * original remain thus replaceString("a000000", "00", "0") will return "a0" rather than "a000"
 	 *
 	 * @param strWork String to work on
 	 * @param toReplace String to match and replace
@@ -994,8 +1007,8 @@ public class StringUtil
 		}
 
 		/**
-		 * replace a string in a given String if the replacement string is contained by the string to replace, recursively replace until no ocurrences of the original remain thus
-		 * replaceString("a000000", "00", "0") will return "a0" rather than "a000"
+		 * replace a string in a given String if the replacement string is contained by the string to replace, recursively replace until no ocurrences of the
+		 * original remain thus replaceString("a000000", "00", "0") will return "a0" rather than "a000"
 		 *
 		 * @param toReplace String to match and replace
 		 * @param replaceBy String to insert for toReplace, null if nothing should be inserted
@@ -1157,7 +1170,8 @@ public class StringUtil
 	 * @param reduceSubstring if true slide over the string and check only the substring
 	 * @return
 	 */
-	public static int getDistance(final String s1, final String s2, final boolean normalize, final boolean ignoreCase, final boolean ignoreEmpty, final boolean reduceSubstring)
+	public static int getDistance(final String s1, final String s2, final boolean normalize, final boolean ignoreCase, final boolean ignoreEmpty,
+			final boolean reduceSubstring)
 	{
 		if (!reduceSubstring)
 			return getDistance(s1, s2, normalize, ignoreCase, ignoreEmpty);
@@ -1750,7 +1764,8 @@ public class StringUtil
 				{
 					return posToken1;
 				}
-				else if (posToken1 > 0 && delim.indexOf(strWork.charAt(posToken1 - 1)) >= 0 && ((sl == posToken1 + tl) || delim.indexOf(strWork.charAt(posToken1 + tl)) >= 0))
+				else if (posToken1 > 0 && delim.indexOf(strWork.charAt(posToken1 - 1)) >= 0
+						&& ((sl == posToken1 + tl) || delim.indexOf(strWork.charAt(posToken1 + tl)) >= 0))
 				{
 					return posToken1;
 				}
@@ -1995,7 +2010,8 @@ public class StringUtil
 	}
 
 	/**
-	 * get the unicode string representing the UTF8 representation of the byte buffer fall back on default encoding in case someone accidentally sends in non utf-8
+	 * get the unicode string representing the UTF8 representation of the byte buffer fall back on default encoding in case someone accidentally sends in non
+	 * utf-8
 	 *
 	 * @param utf8 the utf-8 encoded byte array
 	 *
@@ -2182,7 +2198,8 @@ public class StringUtil
 	}
 
 	/**
-	 * escape a string by prepending escapeChar and a numerical representation of the string. Characters to be escaped are defined by toEscape, escapeBelow and escapeAbove
+	 * escape a string by prepending escapeChar and a numerical representation of the string. Characters to be escaped are defined by toEscape, escapeBelow and
+	 * escapeAbove
 	 * <p>
 	 * default: escape(String toEscape, null, 0, 0, 0, 256); //Note that an escaped character can't be unescaped without the knowledge of the escapelength
 	 *
@@ -2201,7 +2218,8 @@ public class StringUtil
 	 *
 	 * @return the string where all required sequences have been replaced by their escaped representation
 	 */
-	public static String escape(final String strToEscape, final String strCharSet, final String strEscapeChar, final int iRadix, final int iEscapeLen, final int iEscapeBelow, final int iEscapeAbove)
+	public static String escape(final String strToEscape, final String strCharSet, final String strEscapeChar, final int iRadix, final int iEscapeLen,
+			final int iEscapeBelow, final int iEscapeAbove)
 	{
 		final byte[] a_toEscape = getUTF8Bytes(strToEscape);
 		return getUTF8String(escape(a_toEscape, strCharSet, strEscapeChar, iRadix, iEscapeLen, iEscapeBelow, iEscapeAbove));
@@ -2220,7 +2238,8 @@ public class StringUtil
 	}
 
 	/**
-	 * escape a string by prepending escapeChar and a numerical representation of the string. Characters to be escaped are defined by toEscape, escapeBelow and escapeAbove
+	 * escape a string by prepending escapeChar and a numerical representation of the string. Characters to be escaped are defined by toEscape, escapeBelow and
+	 * escapeAbove
 	 * <p>
 	 * default: escape(String toEscape, null, 0, 0, 0, 256); //Note that an escaped character can't be unescaped without the knowledge of the escapelength
 	 *
@@ -2239,7 +2258,8 @@ public class StringUtil
 	 *
 	 * @return the string where all illegal sequences have been replaced by their escaped representation
 	 */
-	public static byte[] escape(final byte[] a_toEscape, final String strCharSet, String strEscapeChar, final int iRadix, final int iEscapeLen, final int iEscapeBelow, int iEscapeAbove)
+	public static byte[] escape(final byte[] a_toEscape, final String strCharSet, String strEscapeChar, final int iRadix, final int iEscapeLen,
+			final int iEscapeBelow, int iEscapeAbove)
 	{
 		if (a_toEscape == null)
 			return null;
@@ -2804,7 +2824,8 @@ public class StringUtil
 	}
 
 	/**
-	 * match a regular expression using String.matches(), but also catch exceptions and handle simplified regexp. The <code>null</code> expression is assumed to match anything.
+	 * match a regular expression using String.matches(), but also catch exceptions and handle simplified regexp. The <code>null</code> expression is assumed to
+	 * match anything.
 	 *
 	 * @param str the string to match
 	 * @param regExp the expression to match against
@@ -2816,7 +2837,8 @@ public class StringUtil
 	}
 
 	/**
-	 * match a regular expression using String.matches(), but also catch exceptions and handle simplified regexp. The <code>null</code> expression is assumed to match anything.
+	 * match a regular expression using String.matches(), but also catch exceptions and handle simplified regexp. The <code>null</code> expression is assumed to
+	 * match anything.
 	 *
 	 * @param str the string to match
 	 * @param regExp the expression to match against
@@ -2850,7 +2872,8 @@ public class StringUtil
 		{
 			final EDataType dt = getDataType(attribute);
 			final EDataType dt2 = getDataType(attribute2);
-			final boolean isNumber = EDataType.number.equals(dt) && EDataType.integer.equals(dt2) || EDataType.number.equals(dt2) && EDataType.integer.equals(dt);
+			final boolean isNumber = EDataType.number.equals(dt) && EDataType.integer.equals(dt2)
+					|| EDataType.number.equals(dt2) && EDataType.integer.equals(dt);
 
 			if (!isNumber && !ContainerUtil.equals(dt, dt2))
 			{
@@ -2880,7 +2903,7 @@ public class StringUtil
 			{
 				final JDFDate d1 = JDFDate.createDate(attribute);
 				final JDFDate d2 = JDFDate.createDate(attribute2);
-				return Math.abs(d1.getTimeInMillis() - d2.getTimeInMillis()) < 1111;
+				return Math.abs(d1.getTimeInMillis() - d2.getTimeInMillis()) < delta;
 			}
 		}
 		return false;
@@ -2920,7 +2943,8 @@ public class StringUtil
 	}
 
 	/**
-	 * match a regular expression using ignoring cases using String.matches(), but also catch exceptions and handle simplified regexp. The <code>null</code> expression is assumed to match anything.
+	 * match a regular expression using ignoring cases using String.matches(), but also catch exceptions and handle simplified regexp. The <code>null</code>
+	 * expression is assumed to match anything.
 	 *
 	 * @param str the string to match
 	 * @param regExp the simplified expression to match against
@@ -2932,7 +2956,8 @@ public class StringUtil
 	}
 
 	/**
-	 * match a regular expression using ignoring cases using String.matches(), but also catch exceptions and handle simplified regexp. The <code>null</code> expression is assumed to match anything.
+	 * match a regular expression using ignoring cases using String.matches(), but also catch exceptions and handle simplified regexp. The <code>null</code>
+	 * expression is assumed to match anything.
 	 *
 	 * @param str the string to match
 	 * @param regExp the simplified expression to match against

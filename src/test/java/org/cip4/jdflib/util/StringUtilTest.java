@@ -1341,7 +1341,8 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.equals("1", "1.0001", 0.001));
 		assertTrue(StringUtil.equals("1 2", "1.0001 2.0002", 0.001));
 		assertTrue(StringUtil.equals("true", "TRUE", 0));
-		assertTrue(StringUtil.equals(new JDFDate().getDateTimeISO(), new JDFDate().addOffset(1, 0, 0, 0).getDateTimeISO(), 0));
+		JDFDate jdfDate = new JDFDate();
+		assertTrue(StringUtil.equals(jdfDate.getDateTimeISO(), jdfDate.addOffset(1, 0, 0, 0).getDateTimeISO(), 1234));
 	}
 
 	/**
