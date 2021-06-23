@@ -112,14 +112,21 @@ public class XMLDocTest extends JDFTestCaseBase
 
 	protected abstract class MyThread implements Runnable
 	{
+		public MyThread()
+		{
+			super();
+			mutex = new Object();
+		}
+
 		public XMLDoc d;
 		public int iLoop;
-		public Exception hook = null;
-		private Object mutex = null;
+		public Exception hook;
+		private Object mutex;
 
 		protected void waitComplete()
 		{
-			ThreadUtil.wait(mutex, 0);
+			if (mutex != null && !ThreadUtil.wait(mutex, 1234))
+				fail("whazzup");
 		}
 
 		protected abstract void runMyThread();
@@ -134,7 +141,6 @@ public class XMLDocTest extends JDFTestCaseBase
 		{
 			try
 			{
-				mutex = new Object();
 				log.info("Starting " + iLoop);
 				runMyThread();
 				log.info("Completing " + iLoop);
@@ -908,6 +914,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			threads[i].waitComplete();
+			log.info("completed " + i);
 		}
 		log.info("all done");
 	}
