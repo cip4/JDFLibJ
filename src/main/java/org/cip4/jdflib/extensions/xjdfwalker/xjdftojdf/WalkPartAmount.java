@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -120,12 +120,12 @@ public class WalkPartAmount extends WalkXElement
 			final JDFPartAmount pa = (JDFPartAmount) xjdfPartAmount;
 			final JDFPartAmount newPA = (JDFPartAmount) super.walk(xjdfPartAmount, jdfAmountPool);
 			VJDFAttributeMap vPartMap = pa.getPartMapVector();
+			if (vPartMap == null)
+			{
+				vPartMap = new VJDFAttributeMap();
+			}
 			if (condition != null)
 			{
-				if (vPartMap == null)
-				{
-					vPartMap = new VJDFAttributeMap();
-				}
 				vPartMap.put(AttributeName.CONDITION, condition);
 			}
 			final KElement res = xjdfPartAmount.getDeepParent((String) null, 2);
