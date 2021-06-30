@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -49,6 +49,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.nio.channels.OverlappingFileLockException;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -76,6 +80,50 @@ public class FileUtil
 	private FileUtil()
 	{
 		super();
+	}
+
+	public static boolean isLocked(final File file)
+	{
+
+		if (!exists(file))
+			return false;
+		boolean locked = false;
+		FileLock lock = null;
+		FileChannel channel = null;
+		RandomAccessFile randomAccessFile = null;
+		try
+		{
+			randomAccessFile = new RandomAccessFile(file, "rw");
+			channel = randomAccessFile.getChannel();
+			lock = channel.tryLock();
+		}
+		catch (final OverlappingFileLockException e)
+		{
+			locked = true;
+		}
+		catch (final IOException e)
+		{
+			locked = true;
+		}
+		finally
+		{
+			try
+			{
+				randomAccessFile.close();
+				channel.close();
+				lock.release();
+			}
+			catch (final Exception e)
+			{
+				// nop
+			}
+		}
+		return locked;
+	}
+
+	public static boolean exists(final File file)
+	{
+		return file != null && file.exists();
 	}
 
 	/**

@@ -347,16 +347,17 @@ public class HotFolder
 		{
 			for (int i = 0; i < files.length; i++)
 			{
-				if (!files[i].canWrite())
+				final File file = files[i];
+				if (!file.canWrite())
 				{
-					log.warn("ignoring read only file in hot folder: " + files[i]);
+					log.warn("ignoring read only file in hot folder: " + file);
 					files[i] = null;
 				}
-				else if (files[i].isDirectory())
+				else if (file.isDirectory() || file.isHidden() || FileUtil.isLocked(file))
 				{
 					files[i] = null;
 				}
-				else if (hfRunning.contains(files[i]))
+				else if (hfRunning.contains(file))
 				{
 					files[i] = null;
 				}
