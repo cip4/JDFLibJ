@@ -353,7 +353,7 @@ public class HotFolder
 					log.warn("ignoring read only file in hot folder: " + file);
 					files[i] = null;
 				}
-				else if (file.isDirectory() || file.isHidden() || FileUtil.isLocked(file))
+				else if (file.isDirectory() || file.isHidden())
 				{
 					files[i] = null;
 				}

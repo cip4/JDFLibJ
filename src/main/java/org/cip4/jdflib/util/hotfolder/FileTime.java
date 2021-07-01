@@ -3,6 +3,7 @@ package org.cip4.jdflib.util.hotfolder;
 import java.io.File;
 
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.util.FileUtil;
 
 /*
  *
@@ -86,7 +87,12 @@ class FileTime
 
 	protected long lastModified()
 	{
-		return ((f == null) || !readOnly && !f.canWrite()) ? 0 : f.lastModified();
+		if (f == null || readOnly && !f.canWrite())
+			return 0;
+		else if (FileUtil.isLocked(f))
+			return System.currentTimeMillis();
+		else
+			return f.lastModified();
 	}
 
 	protected long lastLength()
