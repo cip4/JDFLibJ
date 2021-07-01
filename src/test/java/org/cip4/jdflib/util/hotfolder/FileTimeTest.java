@@ -44,6 +44,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
@@ -98,18 +99,20 @@ public class FileTimeTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSameModified()
+	public void testSameModified() throws IOException
 	{
-		final FileTime ft = new FileTime(new File(sm_dirTestData), false);
+		final FileTime ft = new FileTime(File.createTempFile("abbb", "txt", new File(sm_dirTestDataTemp)), false);
 		assertFalse(ft.sameModified());
 		ft.updateModified();
 		assertTrue(ft.sameModified());
 	}
 
 	@Test
-	public void testSameModifiedRO()
+	public void testSameModifiedRO() throws IOException
 	{
-		final FileTime ft = new FileTime(new File(sm_dirTestData), true);
+		final FileTime ft = new FileTime(File.createTempFile("abbb", "txt", new File(sm_dirTestDataTemp)), false);
+		assertFalse(ft.sameModified());
+		ft.updateModified();
 		assertTrue(ft.sameModified());
 	}
 
