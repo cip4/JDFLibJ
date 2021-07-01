@@ -530,23 +530,23 @@ public class HotFolderTest extends JDFTestCaseBase
 	public synchronized void testBig() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
-		hf.setStabilizeTime(2222);
+		hf.setStabilizeTime(1444);
 		final File file = new File(theHF + File.separator + "f1Bigab.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
 
+		final FileOutputStream fos = new FileOutputStream(file, true);
 		for (int i = 0; i < 20; i++)
 		{
-			ThreadUtil.sleep(100);
-			final FileOutputStream fos = new FileOutputStream(file, true);
+			ThreadUtil.sleep(10);
 			for (int j = 0; j < 200; j++)
 			{// incrementally fill file
 				fos.write(i);
 			}
 			fos.flush();
-			fos.close();
 
 		}
+		fos.close();
 		final long t0 = System.currentTimeMillis();
 		assertTrue(file.exists());
 
@@ -554,7 +554,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		{
 			ThreadUtil.sleep(100);
 		}
-		assertEquals(3333, System.currentTimeMillis() - t0, 2222);
+		assertEquals(2222, System.currentTimeMillis() - t0, 2222);
 		assertFalse(file.exists());
 	}
 
