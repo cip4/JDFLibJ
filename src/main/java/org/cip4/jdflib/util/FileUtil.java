@@ -109,9 +109,12 @@ public class FileUtil
 		{
 			try
 			{
-				randomAccessFile.close();
-				channel.close();
-				lock.release();
+				if (lock != null)
+					lock.release();
+				if (channel != null)
+					channel.close();
+				if (randomAccessFile != null)
+					randomAccessFile.close();
 			}
 			catch (final Exception e)
 			{
