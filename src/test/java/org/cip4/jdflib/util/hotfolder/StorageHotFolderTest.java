@@ -307,7 +307,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	public synchronized void testEvilFile() throws IOException
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
-		final File file = new File(theHFDir + File.separator + ".~#~2.xml");
+		final File file = new File(theHFDir + File.separator + "a.~#~2.xml");
 		file.createNewFile();
 		for (int i = 0; i < 1234; i++)
 		{

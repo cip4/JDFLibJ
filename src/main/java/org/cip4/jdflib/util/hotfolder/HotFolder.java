@@ -205,22 +205,30 @@ public class HotFolder
 			return null;
 		}
 		final StringArray allextensions = new StringArray();
-		for (final ExtensionListener element : hfl)
+		try
 		{
-			final Set<String> ext = element.extension;
-			if (ext != null)
+			for (final ExtensionListener element : hfl)
 			{
-				allextensions.addAll(ext);
+				final Set<String> ext = element.extension;
+				if (ext != null)
+				{
+					allextensions.addAll(ext);
+				}
+				else
+				{
+					// an extension=null exists, i.e. wildcard
+					return null;
+				}
 			}
-			else
-			{
-				// an extension=null exists, i.e. wildcard
-				return null;
-			}
+			allextensions.unify();
+			allExtensions = allextensions.getString(JDFConstants.COMMA, null, null);
+			return allExtensions;
 		}
-		allextensions.unify();
-		allExtensions = allextensions.getString(JDFConstants.COMMA, null, null);
-		return allExtensions;
+		catch (final Exception x)
+		{
+			// we had a minor issue - better just check all and try again next time
+			return null;
+		}
 	}
 
 	private long lastModified = -1;
