@@ -37,7 +37,6 @@
 package org.cip4.jdflib.util.thread;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -91,6 +90,16 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	{
 		final MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij0", 3);
 		assertEquals(0, q.size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testExecuting()
+	{
+		final MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij0", 3);
+		assertEquals(0, q.executing());
 	}
 
 	/**
@@ -162,7 +171,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 			q.queue(new WaitRunner(i, 100), "" + (i % 4));
 
-		assertEquals(2, q.size(), 2);
+		assertEquals(2, q.waiting(), 2);
 		for (int i = 0; i < 342; i++)
 		{
 			ThreadUtil.sleep(14);
@@ -177,10 +186,11 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 
 		for (int i = 0; i < 4; i++)
 			assertTrue(q.queue(new WaitRunner(i, 100), "" + (i % 4)));
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 44; i++)
+		{
 			q.queue(new WaitRunner(i, 100), "" + (i % 4));
-		for (int i = 0; i < 4; i++)
-			assertFalse(q.queue(new WaitRunner(i, 100), "" + (i % 4)));
+			assertEquals(2, q.waiting(), 2);
+		}
 	}
 
 	/**

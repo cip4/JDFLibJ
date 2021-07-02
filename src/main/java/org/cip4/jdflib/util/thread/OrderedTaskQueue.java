@@ -306,6 +306,21 @@ public class OrderedTaskQueue extends Thread
 	 */
 	public int size()
 	{
+		return waiting() + executing();
+	}
+
+	public int executing()
+	{
+		return (currentRunning == null) ? 0 : 1;
+	}
+
+	/**
+	 * size of the waiting queue + currently executing
+	 *
+	 * @return
+	 */
+	public int waiting()
+	{
 		return queue.size();
 	}
 

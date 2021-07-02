@@ -284,16 +284,6 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	}
 
 	/**
-	 * @see org.cip4.jdflib.util.thread.OrderedTaskQueue#size()
-	 */
-	@Override
-	public int size()
-	{
-		final int n = executor == null ? 0 : executor.getActiveCount();
-		return super.size() + Math.max(n, current.size());
-	}
-
-	/**
 	 * @see org.cip4.jdflib.util.thread.OrderedTaskQueue#shutDown()
 	 */
 	@Override
@@ -303,6 +293,15 @@ public class MultiTaskQueue extends OrderedTaskQueue
 		if (executor != null)
 			executor.shutdown();
 		executor = null;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.util.thread.OrderedTaskQueue#executing()
+	 */
+	@Override
+	public int executing()
+	{
+		return executor == null ? 0 : executor.getActiveCount();
 	}
 
 }
