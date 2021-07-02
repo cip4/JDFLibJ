@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,6 +40,7 @@ package org.cip4.jdflib.util.thread;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.cip4.jdflib.util.MyPair;
 
@@ -52,6 +53,24 @@ import org.cip4.jdflib.util.MyPair;
  */
 public class MultiJobTaskQueue extends MultiTaskQueue
 {
+	private AtomicReference<Set<Object>> setQueueMutex = null;
+
+	/**
+	 * @return the unique
+	 */
+	public boolean isUnique()
+	{
+		return setQueueMutex != null;
+	}
+
+	/**
+	 * @param unique the unique to set
+	 */
+	public void setUnique(final boolean unique)
+	{
+		setQueueMutex = unique ? new AtomicReference<>(new HashSet<>()) : null;
+	}
+
 	class RunPair extends MyPair<Runnable, Object> implements Runnable
 	{
 
@@ -64,12 +83,12 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 		public void run()
 		{
 			a.run();
-			setMutex.remove(b);
+			setMutex.get().remove(b);
 		}
 
 	}
 
-	final Set<Object> setMutex = new HashSet<>();
+	final AtomicReference<Set<Object>> setMutex = new AtomicReference<>(new HashSet<>());
 
 	/**
 	 *
@@ -103,6 +122,7 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 	MultiJobTaskQueue(final String name)
 	{
 		super(name);
+		setUnique(false);
 	}
 
 	/**
@@ -134,7 +154,7 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 			int n = 0;
 			for (final TaskRunner r : queue)
 			{
-				if (!setMutex.contains(getObject(r)))
+				if (!setMutex.get().contains(getObject(r)))
 				{
 					return queue.remove(n);
 				}
@@ -150,7 +170,7 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 	 */
 	void addTask(final TaskRunner firstTask)
 	{
-		setMutex.add(getObject(firstTask));
+		setMutex.get().add(getObject(firstTask));
 	}
 
 	/**
@@ -171,6 +191,13 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 	 */
 	public boolean queue(final Runnable task, final Object mutex)
 	{
+		if (isUnique())
+		{
+			if (setQueueMutex.get().contains(mutex))
+				return false;
+			else
+				setQueueMutex.get().add(mutex);
+		}
 		final RunPair rp = new RunPair(task, mutex);
 		return super.queue(rp);
 	}
@@ -184,6 +211,27 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 	public boolean queue(final Runnable task)
 	{
 		return queue(task, new MyMutex());
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return super.toString() + " unique=" + isUnique();
+
+	}
+
+	/**
+	 * @see org.cip4.jdflib.util.thread.MultiTaskQueue#runTask(org.cip4.jdflib.util.thread.OrderedTaskQueue.TaskRunner)
+	 */
+	@Override
+	void runTask(final TaskRunner r)
+	{
+		if (isUnique())
+			setQueueMutex.get().remove(getObject(r));
+		super.runTask(r);
 	}
 
 }

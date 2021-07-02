@@ -243,6 +243,15 @@ public class MultiTaskQueue extends OrderedTaskQueue
 		maxParallel = 0;
 		setMaxParallel(2);
 		nThread = 1;
+		super.start();
+	}
+
+	/**
+	 * @see java.lang.Thread#start()
+	 */
+	@Override
+	public synchronized void start()
+	{
 	}
 
 	/**
