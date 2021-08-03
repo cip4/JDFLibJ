@@ -130,6 +130,31 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testIsEqualStatic()
+	{
+		final KElement e1 = KElement.createRoot("a", null);
+		final KElement e2 = e1.clone();
+
+		assertTrue(KElement.isEqual(null, null));
+		assertFalse(KElement.isEqual(null, e1));
+		assertFalse(KElement.isEqual(e1, null));
+
+		assertTrue(KElement.isEqual(e1, e1));
+		assertTrue(KElement.isEqual(e1, e2));
+
+		e1.setAttribute("a1", "v1");
+		e1.setAttribute("a2", "v2");
+		e2.setAttribute("a2", "v2");
+		assertFalse(KElement.isEqual(e1, null));
+		e2.setAttribute("a1", "v1");
+		assertTrue(KElement.isEqual(e1, e2));
+		assertTrue(e1.isEqual(e2));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testEquals()
 	{
 		final KElement e1 = KElement.createRoot("a", null);
@@ -331,6 +356,33 @@ public class KElementTest extends JDFTestCaseBase
 		final String s = d.write2String(2);
 		assertTrue(s.indexOf("www.root.com") < 0);
 		assertTrue(s.indexOf("www.bar.com") > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCleanupNS()
+	{
+		final KElement e = KElement.createRoot("a", "www.a.com");
+		e.cleanup();
+		assertEquals("www.a.com", e.getNamespaceURI());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCleanup()
+	{
+		final KElement e = KElement.createRoot("a", null);
+		e.setText("foo");
+		e.appendCData("bar");
+		e.appendElement("e2").setAttribute("a1", "v1");
+		e.setAttribute("a1", "v1");
+		e.cleanup();
+		assertEquals("<a/>", e.toDisplayXML(0));
+
 	}
 
 	/**

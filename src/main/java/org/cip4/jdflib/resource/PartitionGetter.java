@@ -37,11 +37,13 @@
  */
 package org.cip4.jdflib.resource;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
@@ -54,6 +56,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * class that evaluates the partitions based on the underlying PartitionMap This class will typically return JDFAttributeMaps that exist in the PartitionMap
@@ -420,7 +423,8 @@ public class PartitionGetter
 	{
 		final int maxSize = 1 + lastPos(m, resourceRoot.getPartIDKeys(), true);
 		JDFAttributeMapArray v = new JDFAttributeMapArray();
-		final JDFAttributeMapArray vExp = EnumPartUsage.Implicit.equals(partUsage) && !resourceRoot.getPartIDKeyList().contains(AttributeName.PARTVERSION) ? new JDFAttributeMapArray() : null;
+		final JDFAttributeMapArray vExp = EnumPartUsage.Implicit.equals(partUsage)
+				&& !resourceRoot.getPartIDKeyList().contains(AttributeName.PARTVERSION) ? new JDFAttributeMapArray() : null;
 		for (final JDFAttributeMap map : leafMap.keySet())
 		{
 			if (map.size() <= maxSize)
@@ -773,9 +777,9 @@ public class PartitionGetter
 				vTmpPartIDKeys.add(partKey);
 				vPartIDKeys.remove(partKey);
 			}
-			for (int i = 0; i < vPartIDKeys.size(); i++)
+			for (final String vPartIDKey : vPartIDKeys)
 			{
-				vTmpPartIDKeys.add(vPartIDKeys.get(i));
+				vTmpPartIDKeys.add(vPartIDKey);
 			}
 			vPartIDKeys = vTmpPartIDKeys;
 		}
@@ -820,7 +824,8 @@ public class PartitionGetter
 		final int s = vPartIDKeys == null ? 0 : vPartIDKeys.size();
 		if (s < partMap.size())
 		{
-			throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + leafMap.getPartIDKeys() + " for " + partMap);
+			throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + leafMap.getPartIDKeys()
+					+ " for " + partMap);
 		}
 		// create all partitions
 		JDFAttributeMap map = thisMap;
@@ -840,8 +845,8 @@ public class PartitionGetter
 			}
 			else
 			{
-				throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + " attempting to fill non-matching partIDKeys: " + key + " valid keys: "
-						+ "Current PartIDKeys: " + resourceRoot.getPartIDKeys() + " complete map: " + partMap);
+				throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + " attempting to fill non-matching partIDKeys: " + key
+						+ " valid keys: " + "Current PartIDKeys: " + resourceRoot.getPartIDKeys() + " complete map: " + partMap);
 			}
 		}
 		return r;
@@ -945,6 +950,61 @@ public class PartitionGetter
 		p.init();
 		p.setPartIDKey(partType, value);
 		return p;
+	}
+
+	/**
+	 * refactor a resource to new partIDKeys
+	 */
+	public boolean reorderPartitions(final List<String> newPartIDKeys)
+	{
+		final StringArray partIDKeyList = resourceRoot.getPartIDKeyList();
+		if (ContainerUtil.size(newPartIDKeys) == ContainerUtil.size(partIDKeyList) && ContainerUtil.containsAll(partIDKeyList, newPartIDKeys))
+		{
+			if (!ContainerUtil.equals(newPartIDKeys, partIDKeyList))
+			{
+				final VString pk = new VString();
+				pk.addAll(newPartIDKeys);
+				final JDFResource r2 = (JDFResource) JDFElement.createRoot(resourceRoot.getNodeName());
+				r2.setPartIDKeyList(newPartIDKeys);
+				final PartitionGetter p2 = new PartitionGetter(r2);
+				for (final JDFResource r : resourceRoot.getLeafArray(false))
+				{
+					final JDFResource rNew = p2.getCreatePartition(r.getPartMap(), pk);
+					r.removeAttributes(newPartIDKeys);
+					rNew.copyInto(r, false);
+				}
+				final Set<JDFResource> done = new HashSet<>();
+				for (final JDFResource r : resourceRoot.getLeafArray(true))
+				{
+					if (!r.isLeaf())
+					{
+						final String text = r.getText();
+						final JDFResource rNew = p2.getPartition(r.getPartMap(), EnumPartUsage.Implicit);
+						if (!done.contains(rNew))
+						{
+							if (!StringUtil.isEmpty(text))
+							{
+								rNew.setText(text);
+							}
+							final VElement v = r.getChildElementVector(null, null);
+							for (final KElement e : v)
+							{
+								rNew.copyElement(e, null);
+							}
+							done.add(rNew);
+						}
+					}
+				}
+				r2.collapse(false, true);
+				resourceRoot.cleanup();
+				resourceRoot.copyInto(r2, false);
+			}
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	/**
@@ -1101,7 +1161,8 @@ public class PartitionGetter
 				if (!JDFPart.overlapPartMap(localPartMap, partMap, strictPartVersion))
 				{
 					if (create)
-						throw new JDFException("Incompatible part maps: local: " + localPartMap.showKeys(null) + " request: " + partMap.showKeys(null) + " ID=" + resourceRoot.getID());
+						throw new JDFException("Incompatible part maps: local: " + localPartMap.showKeys(null) + " request: " + partMap.showKeys(null) + " ID="
+								+ resourceRoot.getID());
 					else
 						return null;
 				}

@@ -208,7 +208,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public void setDirty(final boolean bAttribute)
 	{
-		// nop 
+		// nop
 	}
 
 	/**
@@ -1173,6 +1173,19 @@ public class KElement extends ElementNSImpl implements Element
 	{
 		final int length = (nodeName == null) ? 0 : nodeName.length();
 		return length == 0 || length == 1 && nodeName.charAt(0) == '*';
+	}
+
+	/**
+	 * null safe test whether the elements e1 and e2 are equal
+	 * @see isEqual(KElement)
+	 * @param e1
+	 * @param e2
+	 */
+	public static boolean isEqual(final KElement e1, final KElement e2)
+	{
+		if (e1 == null)
+			return e2 == null;
+		return e1.isEqual(e2);
 	}
 
 	/**
@@ -5560,6 +5573,22 @@ public class KElement extends ElementNSImpl implements Element
 		}
 
 		return bRemoved;
+	}
+
+	/**
+	 * removes everything
+	 */
+	public void cleanup()
+	{
+		removeAttributes(null);
+		Node n = getFirstChild();
+		while (n != null)
+		{
+			final Node n2 = n;
+			n = n.getNextSibling();
+			super.removeChild(n2);
+		}
+		setDirty(false);
 	}
 
 	/**
