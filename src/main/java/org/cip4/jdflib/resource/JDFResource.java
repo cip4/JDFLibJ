@@ -276,15 +276,12 @@ public class JDFResource extends JDFElement
 		atrInfoTable_Abstract[8] = new AtrInfoTable(AttributeName.PIPEURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable_Abstract[9] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_Abstract[10] = new AtrInfoTable(AttributeName.RREFS, 0x44444433, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
-				EnumSpawnStatus.getEnum(0), EnumSpawnStatus.NotSpawned.getName());
+		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSpawnStatus.getEnum(0), EnumSpawnStatus.NotSpawned.getName());
 		atrInfoTable_Abstract[12] = new AtrInfoTable(AttributeName.SPAWNIDS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_Abstract[13] = new AtrInfoTable(AttributeName.SORTING, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_Abstract[14] = new AtrInfoTable(AttributeName.SORTAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable_Abstract[15] = new AtrInfoTable(AttributeName.PARTIDKEYS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations,
-				EnumPartIDKey.getEnum(0), null);
-		atrInfoTable_Abstract[16] = new AtrInfoTable(AttributeName.PIPEPARTIDKEYS, 0x33333311, AttributeInfo.EnumAttributeType.enumerations,
-				EnumPartIDKey.getEnum(0), null);
+		atrInfoTable_Abstract[15] = new AtrInfoTable(AttributeName.PARTIDKEYS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumPartIDKey.getEnum(0), null);
+		atrInfoTable_Abstract[16] = new AtrInfoTable(AttributeName.PIPEPARTIDKEYS, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumPartIDKey.getEnum(0), null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Physical = new AtrInfoTable[11];
@@ -300,8 +297,7 @@ public class JDFResource extends JDFElement
 		atrInfoTable_Physical[7] = new AtrInfoTable(AttributeName.RESOURCEWEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable_Physical[8] = new AtrInfoTable(AttributeName.GROSSWEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable_Physical[9] = new AtrInfoTable(AttributeName.MANUFACTURER, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable_Physical[10] = new AtrInfoTable(AttributeName.LOTCONTROL, 0x33333111, AttributeInfo.EnumAttributeType.enumeration,
-				EnumLotControl.getEnum(0), null);
+		atrInfoTable_Physical[10] = new AtrInfoTable(AttributeName.LOTCONTROL, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumLotControl.getEnum(0), null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Param = new AtrInfoTable[1];
@@ -314,10 +310,8 @@ public class JDFResource extends JDFElement
 	static
 	{
 		atrInfoTable_ID_Class_Required[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable_ID_Class_Required[1] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration,
-				EnumResourceClass.getEnum(0), null);
-		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration,
-				EnumPartUsage.getEnum(0), EnumPartUsage.Explicit.getName());
+		atrInfoTable_ID_Class_Required[1] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumResourceClass.getEnum(0), null);
+		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), EnumPartUsage.Explicit.getName());
 
 	}
 
@@ -325,31 +319,26 @@ public class JDFResource extends JDFElement
 	static
 	{
 		atrInfoTable_ID_Class_Optional[0] = new AtrInfoTable(AttributeName.ID, 0x44444433, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable_ID_Class_Optional[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
-				EnumResourceClass.getEnum(0), null);
+		atrInfoTable_ID_Class_Optional[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumResourceClass.getEnum(0), null);
 	}
 	private static AtrInfoTable[] atrInfoTable_ID_Class_Root = new AtrInfoTable[3];
 	static
 	{
 		atrInfoTable_ID_Class_Root[0] = new AtrInfoTable(AttributeName.ID, 0x33333333, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable_ID_Class_Root[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
-				EnumResourceClass.getEnum(0), null);
-		atrInfoTable_ID_Class_Root[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration,
-				EnumPartUsage.getEnum(0), null);
+		atrInfoTable_ID_Class_Root[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumResourceClass.getEnum(0), null);
+		atrInfoTable_ID_Class_Root[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Status_Required = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable_Status_Required[0] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration,
-				EnumResStatus.getEnum(0), null);
+		atrInfoTable_Status_Required[0] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumResStatus.getEnum(0), null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Status_Optional = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable_Status_Optional[0] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
-				EnumResStatus.getEnum(0), null);
+		atrInfoTable_Status_Optional[0] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumResStatus.getEnum(0), null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_UpdateID_Optional = new AtrInfoTable[1];
@@ -384,8 +373,7 @@ public class JDFResource extends JDFElement
 		atrInfoTable_PartIDKeys[14] = new AtrInfoTable(AttributeName.PAGENUMBER, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_PartIDKeys[15] = new AtrInfoTable(AttributeName.PARTVERSION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_PartIDKeys[16] = new AtrInfoTable(AttributeName.PREFLIGHTRULE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable_PartIDKeys[17] = new AtrInfoTable(AttributeName.PREVIEWTYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration,
-				EnumPreviewType.getEnum(0), null);
+		atrInfoTable_PartIDKeys[17] = new AtrInfoTable(AttributeName.PREVIEWTYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewType.getEnum(0), null);
 		atrInfoTable_PartIDKeys[18] = new AtrInfoTable(AttributeName.RIBBONNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_PartIDKeys[19] = new AtrInfoTable(AttributeName.RUN, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_PartIDKeys[20] = new AtrInfoTable(AttributeName.RUNINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
@@ -426,8 +414,7 @@ public class JDFResource extends JDFElement
 		atrInfoTable_PartIDKeys[55] = new AtrInfoTable(AttributeName.PRODUCTPART, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		for (int i = 0; i < 10; i++)
 			atrInfoTable_PartIDKeys[56 + i] = new AtrInfoTable(AttributeName.METADATA + i, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable_PartIDKeys[66] = new AtrInfoTable(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, 0x33661111,
-				AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable_PartIDKeys[66] = new AtrInfoTable(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, 0x33661111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_PartIDKeys[67] = new AtrInfoTable(AttributeName.LOTID, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_PartIDKeys[68] = new AtrInfoTable(AttributeName.PRINTCONDITION, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_PartIDKeys[69] = new AtrInfoTable(AttributeName.SETCOPIES, 0x33311111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
@@ -2197,6 +2184,26 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
+	 *
+	 * @param newPartIDKeys
+	 */
+	public void reorderPartitions(final List<String> newPartIDKeys)
+	{
+		final org.cip4.jdflib.resource.PartitionGetter partitionGetter = new org.cip4.jdflib.resource.PartitionGetter(this);
+		partitionGetter.reorderPartitions(newPartIDKeys);
+	}
+
+	/**
+	 * 
+	 * @param newPartIDKeys
+	 */
+	public void fillSparse(final List<String> newPartIDKeys)
+	{
+		final org.cip4.jdflib.resource.PartitionGetter partitionGetter = new org.cip4.jdflib.resource.PartitionGetter(this);
+		partitionGetter.fillSparse();
+	}
+
+	/**
 	 * Recursively adds the partition leaves defined in partMap
 	 *
 	 * @param partMap the map of part keys
@@ -3620,8 +3627,7 @@ public class JDFResource extends JDFElement
 			}
 		}
 
-		private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent,
-				final VElement localLeaves, final boolean removeEqual)
+		private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves, final boolean removeEqual)
 		{
 			final int localSize = localLeaves.size();
 			for (final String att : atts)
@@ -3637,8 +3643,7 @@ public class JDFResource extends JDFElement
 						for (int l = 0; l < localSize; l++)
 						{
 							final String attVal2 = localLeaves.elementAt(l).getAttribute(att, null, JDFConstants.EMPTYSTRING);
-							if (!attVal.equals(attVal2)
-									|| JDFConstants.EMPTYSTRING.equals(attVal2) && !attVal.equals(localLeaves.elementAt(l).getAttribute(att, null, null)))
+							if (!attVal.equals(attVal2) || JDFConstants.EMPTYSTRING.equals(attVal2) && !attVal.equals(localLeaves.elementAt(l).getAttribute(att, null, null)))
 							{
 								bAllSame = false;
 								break;
@@ -4501,8 +4506,7 @@ public class JDFResource extends JDFElement
 	 * @default getChildElementVector(null, null, null, true, 0, false)
 	 */
 	@Override
-	public VElement getChildElementVector(final String element, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize,
-			final boolean bResolveTarget)
+	public VElement getChildElementVector(final String element, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize, final boolean bResolveTarget)
 	{
 		VElement v = null;
 		final String nodeName = getNodeName();
@@ -7048,8 +7052,7 @@ public class JDFResource extends JDFElement
 			final EnumResStatus s = EnumResStatus.getEnum(getNonEmpty_KElement((AttributeName.STATUS)));
 			// we have an explicit override?
 			final JDFResource idTarget = s == null ? getIdenticalTarget() : null;
-			return idTarget == null ? EnumResStatus.getEnum(getNonEmpty(AttributeName.STATUS))
-					: EnumResStatus.getEnum(idTarget.getNonEmpty(AttributeName.STATUS));
+			return idTarget == null ? EnumResStatus.getEnum(getNonEmpty(AttributeName.STATUS)) : EnumResStatus.getEnum(idTarget.getNonEmpty(AttributeName.STATUS));
 		}
 	}
 
@@ -7392,8 +7395,7 @@ public class JDFResource extends JDFElement
 			// partition attribute values
 			{
 				final KElement parent = getParentNode_KElement();
-				final List<KElement> vThis = parent.getChildArray_KElement(getNodeName(), getNamespaceURI(),
-						new JDFAttributeMap(currentPartition, getAttribute_KElement(currentPartition)), true, 999);
+				final List<KElement> vThis = parent.getChildArray_KElement(getNodeName(), getNamespaceURI(), new JDFAttributeMap(currentPartition, getAttribute_KElement(currentPartition)), true, 999);
 				if (vThis.size() > 1)
 				{
 					vAtts.appendUnique(currentPartition);

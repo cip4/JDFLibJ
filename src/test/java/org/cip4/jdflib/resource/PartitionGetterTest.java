@@ -367,6 +367,26 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
+	public void testFillSparse()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource s1 = r.addPartition(EnumPartIDKey.SheetName, "a1");
+		final JDFResource f = s1.addPartition(EnumPartIDKey.Side, "Front");
+		final JDFResource b = s1.addPartition(EnumPartIDKey.Side, "Back");
+		final JDFResource sepb = f.addPartition(EnumPartIDKey.Separation, "b");
+		final JDFResource sep = f.addPartition(EnumPartIDKey.Separation, "c");
+		final JDFResource sepm = f.addPartition(EnumPartIDKey.Separation, "m");
+		final JDFResource v1 = sepb.addPartition(EnumPartIDKey.PartVersion, "v1");
+		final JDFResource v2 = sepb.addPartition(EnumPartIDKey.PartVersion, "v2");
+		final PartitionGetter g = new PartitionGetter(r);
+		g.fillSparse();
+		assertEquals(12, r.getLeafArray(false).size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testHasGapRange()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();

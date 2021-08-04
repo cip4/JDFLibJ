@@ -56,6 +56,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -958,7 +959,8 @@ public class PartitionGetter
 	public boolean reorderPartitions(final List<String> newPartIDKeys)
 	{
 		final StringArray partIDKeyList = resourceRoot.getPartIDKeyList();
-		if (ContainerUtil.size(newPartIDKeys) == ContainerUtil.size(partIDKeyList) && ContainerUtil.containsAll(partIDKeyList, newPartIDKeys))
+		final int size = ContainerUtil.size(newPartIDKeys);
+		if (size == ContainerUtil.size(partIDKeyList) && ContainerUtil.containsAll(partIDKeyList, newPartIDKeys))
 		{
 			if (!ContainerUtil.equals(newPartIDKeys, partIDKeyList))
 			{
@@ -969,9 +971,13 @@ public class PartitionGetter
 				final PartitionGetter p2 = new PartitionGetter(r2);
 				for (final JDFResource r : resourceRoot.getLeafArray(false))
 				{
-					final JDFResource rNew = p2.getCreatePartition(r.getPartMap(), pk);
-					r.removeAttributes(newPartIDKeys);
-					rNew.copyInto(r, false);
+					final JDFAttributeMap partMap = r.getPartMap();
+					if (!hasGap(partMap, newPartIDKeys))
+					{
+						final JDFResource rNew = p2.getCreatePartition(partMap, pk);
+						r.removeAttributes(newPartIDKeys);
+						rNew.copyInto(r, false);
+					}
 				}
 				final Set<JDFResource> done = new HashSet<>();
 				for (final JDFResource r : resourceRoot.getLeafArray(true))
@@ -1008,6 +1014,40 @@ public class PartitionGetter
 	}
 
 	/**
+	 * refactor a resource to add all sparse partitions
+	 */
+	public void fillSparse()
+	{
+		final ListMap<String, String> allkeys = new ListMap<>();
+		final StringArray pik = resourceRoot.getPartIDKeyList();
+		final int size = pik.size();
+		final VJDFAttributeMap maps = resourceRoot.getPartMapVector(false);
+		for (final String key : pik)
+		{
+			allkeys.put(key, maps.getPartValues(key, true));
+		}
+		boolean needAdd = false;
+		for (final JDFAttributeMap resMap : maps)
+		{
+			final int mapSize = resMap.size();
+			if (mapSize < size)
+			{
+				final JDFAttributeMap newMap = resMap.clone();
+				final String newKey = pik.get(mapSize);
+				for (final String newVal : allkeys.get(newKey))
+				{
+					newMap.put(newKey, newVal);
+					getCreatePartition(newMap, null);
+					needAdd = newMap.size() < size;
+				}
+			}
+
+		}
+		if (needAdd)
+			fillSparse();
+	}
+
+	/**
 	 * Recursively adds the partition leaves defined in vPartMap
 	 *
 	 * @param vPartMap the vector of maps of part keys
@@ -1025,7 +1065,7 @@ public class PartitionGetter
 		final VElement v = new VElement();
 		if (vPartMap != null)
 		{
-			List<String> currentPartIDKeys = resourceRoot.getPartIDKeys();
+			List<String> currentPartIDKeys = resourceRoot.getPartIDKeyList();
 			currentPartIDKeys = (List<String>) ContainerUtil.appendUnique(currentPartIDKeys, vPartIDKeys);
 
 			final VJDFAttributeMap newMaps = updateCreate(vPartMap, currentPartIDKeys);
