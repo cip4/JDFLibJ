@@ -76,6 +76,7 @@ import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
@@ -2362,8 +2363,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
 		for (int i = 0; i < 2222; i++)
 		{
-			xm.addPartition(EnumPartIDKey.SignatureName, "Sig" + i).addPartition(EnumPartIDKey.SheetName, "Sheet" + i).addPartition(EnumPartIDKey.Side, "Front")
-					.addPartition(EnumPartIDKey.Separation, "Black").appendElement(ElementName.MEDIA);
+			xm.addPartition(EnumPartIDKey.SignatureName, "Sig" + i).addPartition(EnumPartIDKey.SheetName, "Sheet"
+					+ i).addPartition(EnumPartIDKey.Side, "Front").addPartition(EnumPartIDKey.Separation, "Black").appendElement(ElementName.MEDIA);
 		}
 
 		final CPUTimer ct = new CPUTimer(false);
@@ -2653,6 +2654,31 @@ public class JDFResourceTest extends JDFTestCaseBase
 		xm.reducePartitions(vm);
 		assertNotNull(xm.getPartition(mPart, null));
 		assertNull("Sig2 was removed from vmap", xm.getPartition(mPart2, null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testReorderPartitions()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.getCreateResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input, 0);
+		r.appendElement(ElementName.MEDIA);
+		final JDFResource ab = r.addPartition(EnumPartIDKey.SheetName, "sh1").addPartition(EnumPartIDKey.PartVersion, "a b");
+		final JDFResource cd = r.addPartition(EnumPartIDKey.SheetName, "sh2").addPartition(EnumPartIDKey.PartVersion, "c d");
+		final JDFAttributeMap abs1 = ab.addPartition(EnumPartIDKey.Separation, "s1").getPartMap();
+		final JDFAttributeMap cds1 = cd.addPartition(EnumPartIDKey.Separation, "s1").getPartMap();
+		final JDFAttributeMap cds2 = cd.addPartition(EnumPartIDKey.Separation, "s2").getPartMap();
+
+		final PartitionGetter pg = new PartitionGetter(r);
+		pg.reorderPartitions(new StringArray("SheetName Separation PartVersion"));
+		assertNotNull(pg.getPartition(null, null).getElement(ElementName.MEDIA));
+		assertNotNull(pg.getPartition(abs1, EnumPartUsage.Explicit));
+		assertNotNull(r.getPartition(abs1, EnumPartUsage.Explicit));
+		assertNotNull(pg.getPartition(cds1, EnumPartUsage.Explicit));
+		assertNotNull(r.getPartition(cds2, EnumPartUsage.Explicit));
+		assertEquals(r, n.getCreateResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input, 0));
 	}
 
 	/**

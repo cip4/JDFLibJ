@@ -967,6 +967,7 @@ public class PartitionGetter
 				final VString pk = new VString();
 				pk.addAll(newPartIDKeys);
 				final JDFResource r2 = (JDFResource) JDFElement.createRoot(resourceRoot.getNodeName());
+				r2.setAttributes(resourceRoot);
 				r2.setPartIDKeyList(newPartIDKeys);
 				final PartitionGetter p2 = new PartitionGetter(r2);
 				for (final JDFResource r : resourceRoot.getLeafArray(false))

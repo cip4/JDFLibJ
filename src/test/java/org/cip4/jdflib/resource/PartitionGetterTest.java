@@ -264,6 +264,7 @@ public class PartitionGetterTest
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		r.appendElement(ElementName.MEDIA);
+		r.setID("id");
 		final JDFResource ab = r.addPartition(EnumPartIDKey.SheetName, "sh1").addPartition(EnumPartIDKey.PartVersion, "a b");
 		final JDFResource cd = r.addPartition(EnumPartIDKey.SheetName, "sh2").addPartition(EnumPartIDKey.PartVersion, "c d");
 		final JDFAttributeMap abs1 = ab.addPartition(EnumPartIDKey.Separation, "s1").getPartMap();
@@ -277,6 +278,7 @@ public class PartitionGetterTest
 		assertNotNull(r.getPartition(abs1, EnumPartUsage.Explicit));
 		assertNotNull(pg.getPartition(cds1, EnumPartUsage.Explicit));
 		assertNotNull(r.getPartition(cds2, EnumPartUsage.Explicit));
+		assertEquals("id", r.getID());
 	}
 
 	/**

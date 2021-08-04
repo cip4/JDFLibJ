@@ -2194,10 +2194,9 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * 
-	 * @param newPartIDKeys
+	 *
 	 */
-	public void fillSparse(final List<String> newPartIDKeys)
+	public void fillSparse()
 	{
 		final org.cip4.jdflib.resource.PartitionGetter partitionGetter = new org.cip4.jdflib.resource.PartitionGetter(this);
 		partitionGetter.fillSparse();
