@@ -772,7 +772,12 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		}
 		ok = FileUtil.getFileInDirectory(theHFDir, ok);
 		error = FileUtil.getFileInDirectory(theHFDir, error);
-		ThreadUtil.sleep(2000);
+		for (int i = 0; i < 400; i++)
+		{
+			ThreadUtil.sleep(20);
+			if (ok.listFiles().length == 2 && ok.listFiles().length == 2)
+				break;
+		}
 		assertEquals(ok.listFiles().length, 2, 1);
 		assertEquals(tmpHFDir.listFiles().length, 0, 1);
 		assertEquals(error.listFiles().length, 2, 1);
