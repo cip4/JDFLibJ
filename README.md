@@ -1,46 +1,32 @@
 # CIP4 JDF Java Library
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.cip4.lib.jdf/JDFLibJ/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.cip4.lib.jdf/JDFLibJ) [![License (CIP4 Software License)](https://img.shields.io/badge/license-CIP4%20Software%20License-blue)](https://github.com/cip4/xJdfLib/blob/master/LICENSE.md) ![Snapshot](https://github.com/cip4/JDFLibJ/workflows/Snapshot/badge.svg)
 
-CIP4 JDF Library
+The CIP4 JDF Library. 
 
 
-### Download
-
-Gradle:
-```gradle
-dependencies {
-  implementation 'org.cip4.lib.jdf:JDFLibJ:2.1.7.3'
-}
-```
-
-Maven:
-```xml
-<dependency>
-  <groupId>org.cip4.lib.jdf</groupId>
-  <artifactId>JDFLibJ</artifactId>
-  <version>2.1.7.3</version>
-</dependency>
-```
-
-[JDFLibJ jar downloads](https://maven-badges.herokuapp.com/maven-central/org.cip4.lib.jdf/JDFLibJ) are available from Maven Central.
+## Download
+[JDFLibJ jar downloads](https://maven-badges.herokuapp.com/maven-central/org.cip4.lib.jdf/JDFLibJ) are available from Maven Central. The binaries can also be downloaded on github: https://github.com/cip4/JDFLibJ/releases/
 
 
 ## Issue Tracking
 Don't write issues, provide Pull-Requests!
 
-## Development Notes
-### Release a new Version
-Creation and publishing of a new version to GitHub Release and to the Central Maven Repository. 
+## Usage
 
-**NOTE:** The publication to the Central Maven Repository may take up to two hours.
+### Create JMF Messages
+Here is a code snippet showing how to generate a KnowMessages JMF Query using the JDF Library:
+```java
+public String createJmfKnownMessagesQuery() {
+  // create builder
+  JMFBuilder jmfBuilder = JMFBuilderFactory.getJMFBuilder(null);
+  jmfBuilder.setAgentName("MY_AGENT");
+  jmfBuilder.setAgentVersion("42");
+  jmfBuilder.setSenderID("AGENT_ID");
 
-```bash
-$ git tag -a [VERSION] -m "[TITLE]"
-$ git push origin [VERSION]
-```
+  // create the acutal query
+  JDFJMF jmf = jmfBuilder.buildKnownMessagesQuery();
 
-In case a build has been failed, a tag can be deleted using the following command:
-```bash
-$ git tag -d [VERSION]
-$ git push origin :refs/tags/[VERSION]
+  // return JMF as String
+  return jmf.toXML();
+}
 ```
