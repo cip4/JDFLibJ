@@ -136,7 +136,7 @@ public class PartitionGetter
 					if (onlyMap != null)
 					{
 						onlyMap.remove(AttributeName.PARTVERSION);
-						return EnumPartUsage.Explicit.equals(partUsage) || leafMap.get(onlyMap) == null ? null : onlyMap;
+						return EnumPartUsage.Explicit.equals(partUsage) || EnumPartUsage.Sparse.equals(partUsage) || leafMap.get(onlyMap) == null ? null : onlyMap;
 					}
 					else
 					{
