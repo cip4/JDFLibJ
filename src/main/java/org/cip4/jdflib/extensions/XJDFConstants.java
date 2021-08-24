@@ -148,6 +148,9 @@ public abstract class XJDFConstants
 	public static final String Resource = "Resource";
 	public static final String ResourceSet = "ResourceSet";
 	public static final String ResponseModes = "ResponseModes";
+	public static final String ResponseNotification = "ResponseNotification";
+	public static final String ResponseResource = "ResponseResource";
+	public static final String ResponseStatus = "ResponseStatus";
 
 	public static final String Separations = "Separations";
 

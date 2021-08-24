@@ -38,8 +38,8 @@ package org.cip4.jdflib.extensions;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -81,7 +81,7 @@ public class XJMFHelper extends MessagePoolHelper
 	public List<MessageHelper> getMessageHelpers(final EFamily family)
 	{
 		final List<MessageHelper> vA = getMessageHelpers();
-		final List<MessageHelper> vM = new Vector<>();
+		final List<MessageHelper> vM = new ArrayList<>();
 		for (final MessageHelper mh : vA)
 		{
 			if (family == null || family.equals(mh.getEFamily()))

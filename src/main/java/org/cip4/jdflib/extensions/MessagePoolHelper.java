@@ -182,9 +182,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 		if (e == null)
 			return null;
 		final String name = e.getLocalName();
-		if (XJDFConstants.AuditResource.equals(name))
-			return newMessageResourceHelper(e);
-		else if (XJDFConstants.SignalResource.equals(name))
+		if (XJDFConstants.AuditResource.equals(name) || XJDFConstants.SignalResource.equals(name) || XJDFConstants.ResponseResource.equals(name))
 			return newMessageResourceHelper(e);
 		else if (name.startsWith(JDFConstants.AUDIT))
 			return new AuditHelper(e);
