@@ -506,7 +506,7 @@ public class FileUtil
 			}
 		}
 
-		return forceDelete(dirToZapp, 4) && b;
+		return forceDelete(dirToZapp, 3, false) && b;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -986,7 +986,7 @@ public class FileUtil
 	 */
 	public static boolean forceDelete(final File file)
 	{
-		return forceDelete(file, 42);
+		return forceDelete(file, 42, true);
 	}
 
 	/**
@@ -998,6 +998,19 @@ public class FileUtil
 	 */
 	public static boolean forceDelete(final File file, final int loops)
 	{
+		return forceDelete(file, loops, true);
+	}
+
+	/**
+	 * forces deletion of a file
+	 *
+	 * @param file the file to delete
+	 * @param recurse TODO
+	 * @param # of 42 msec * loop loops to wait
+	 * @return true if the file no longer exists
+	 */
+	private static boolean forceDelete(final File file, final int loops, boolean recurse)
+	{
 		if (file == null)
 		{
 			return true;
@@ -1006,7 +1019,7 @@ public class FileUtil
 		{
 			return true;
 		}
-		boolean bOK = file.delete();
+		boolean bOK = recurse && file.isDirectory() ? deleteAll(file) : file.delete();
 		int i = 1;
 		while (!bOK)
 		{
@@ -1015,7 +1028,7 @@ public class FileUtil
 			bMod = file.setWritable(true) && bMod;
 
 			final boolean bInterupt = !ThreadUtil.sleep(i * 42);
-			bOK = file.delete();
+			bOK = recurse && file.isDirectory() ? deleteAll(file) : file.delete();
 			if (bInterupt || i++ > loops)
 			{
 				log.warn("cannot force delete of file: " + file.getAbsolutePath() + " modifications=" + bMod);

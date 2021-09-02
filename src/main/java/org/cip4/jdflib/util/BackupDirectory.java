@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,11 +80,11 @@ import org.cip4.jdflib.util.thread.IPersistable;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * class to manage a directory by removing the oldest files whenever a new file is created
+ *         class to manage a directory by removing the oldest files whenever a new file is created
  * 
- * The oldest file dies when the maximum number is reached
+ *         The oldest file dies when the maximum number is reached
  * 
- * 08.12.2008
+ *         08.12.2008
  */
 public class BackupDirectory extends File implements IPersistable
 {
@@ -107,7 +107,8 @@ public class BackupDirectory extends File implements IPersistable
 		 * @see java.lang.Comparable#compareTo(java.lang.Object)
 		 * @param o
 		 * @return
-		*/
+		 */
+		@Override
 		public int compareTo(FileTime o)
 		{
 			long l = t - o.t;
@@ -121,7 +122,7 @@ public class BackupDirectory extends File implements IPersistable
 		/**
 		 * @see java.lang.Object#toString()
 		 * @return
-		*/
+		 */
 		@Override
 		public String toString()
 		{
@@ -131,6 +132,7 @@ public class BackupDirectory extends File implements IPersistable
 	}
 
 	private final int nBackup;
+	private boolean isDirectory;
 
 	/**
 	 * @param pathname the Directory
@@ -155,6 +157,7 @@ public class BackupDirectory extends File implements IPersistable
 			mkdirs();
 		if (!isDirectory())
 			throw new IllegalArgumentException(file.getAbsolutePath() + " is not a directory");
+		isDirectory = false;
 	}
 
 	/**
@@ -166,20 +169,28 @@ public class BackupDirectory extends File implements IPersistable
 	{
 		File file = FileUtil.getFileInDirectory(this, localFile);
 		if (file.exists())
-			file.delete();
+			FileUtil.forceDelete(file);
 		else
 			// we only cleanup once a minute
-			DelayedPersist.getDelayedPersist().queue(this, 60000);
+			DelayedPersist.getDelayedPersist().queue(this, 42000);
 
-		try
+		final boolean ok;
+		if (isDirectory)
 		{
-			file.createNewFile();
+			ok = file.mkdirs();
 		}
-		catch (IOException x)
+		else
 		{
-			return null;
+			try
+			{
+				ok = file.createNewFile();
+			}
+			catch (IOException x)
+			{
+				return null;
+			}
 		}
-		return file;
+		return ok ? file : null;
 	}
 
 	/**
@@ -202,7 +213,7 @@ public class BackupDirectory extends File implements IPersistable
 			Arrays.sort(time);
 			for (int i = nBackup; i < all.length; i++)
 			{
-				time[i].f.delete();
+				FileUtil.forceDelete(time[i].f);
 			}
 		}
 
@@ -228,16 +239,27 @@ public class BackupDirectory extends File implements IPersistable
 	@Override
 	public String toString()
 	{
-		return super.toString() + " nBackup=" + nBackup;
+		return super.toString() + "isDir=" + isDirectory + " nBackup=" + nBackup;
 	}
 
 	/**
 	 * @see org.cip4.jdflib.util.thread.IPersistable#persist()
 	 */
+	@Override
 	public boolean persist()
 	{
 		clean();
 		return true;
+	}
+
+	public boolean isCreateDirectory()
+	{
+		return isDirectory;
+	}
+
+	public void setDirectory(boolean isDirectory)
+	{
+		this.isDirectory = isDirectory;
 	}
 
 }

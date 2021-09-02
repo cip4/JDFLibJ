@@ -95,9 +95,13 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testisLocked() throws IOException
 	{
-		assertFalse(FileUtil.isLocked(new File("no such file")));
+		File file = new File("no such file");
+		FileUtil.forceDelete(file);
+		assertFalse(FileUtil.isLocked(file));
 		final File f = new File("test");
+		FileUtil.forceDelete(f);
 		final boolean b = f.createNewFile();
+		ThreadUtil.sleep(12);
 		assertEquals(!b, FileUtil.isLocked(f));
 
 	}

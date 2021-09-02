@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -152,10 +152,10 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 	}
 
 	/**
-	* @throws IOException
-	*
-	*
-	*/
+	 * @throws IOException
+	 *
+	 *
+	 */
 	@Test
 	public void testCreateNew() throws IOException
 	{
@@ -171,10 +171,29 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 	}
 
 	/**
-	* @throws IOException
-	*
-	*
-	*/
+	 * @throws IOException
+	 *
+	 *
+	 */
+	@Test
+	public void testCreateNewDir() throws IOException
+	{
+		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "testDir");
+		dir.setDirectory(true);
+		for (int i = 0; i < 200; i++)
+		{
+			File newFile = dir.getNewFile();
+			assertTrue(newFile.isDirectory());
+		}
+		dir.persist();
+		assertEquals(42, FileUtil.listDirectories(dir).length, 5);
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 *
+	 */
 	@Test
 	public void testCreateNewNumeric() throws IOException
 	{
