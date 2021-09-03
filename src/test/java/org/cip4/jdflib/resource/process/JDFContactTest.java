@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-20186 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -197,6 +197,40 @@ public class JDFContactTest extends JDFTestCaseBase
 		co.refElement(comp);
 
 		assertEquals(comp, co.getAddress());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetAddressPerson()
+	{
+		final JDFAddress a = co.appendPerson().appendAddress();
+		assertEquals(a, co.getAddress());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetComChannelPerson()
+	{
+		final JDFComChannel a = co.appendPerson().appendComChannel(EnumChannelType.Phone, "1234");
+		assertEquals(a, co.getComChannel(EnumChannelType.Phone));
+		assertEquals(null, co.getComChannel(EnumChannelType.Mobile));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetCreateAddressPerson()
+	{
+		final JDFAddress a = co.appendPerson().appendAddress();
+		assertEquals(a, co.getCreateAddress());
 	}
 
 	/**

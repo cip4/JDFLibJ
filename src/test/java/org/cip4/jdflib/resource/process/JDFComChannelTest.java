@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -112,6 +112,18 @@ public class JDFComChannelTest extends JDFTestCaseBase
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
 		assertEquals(JDFComChannel.TEL + "+49.431.123456", cc.getLocator());
 		assertEquals("+49431123456", cc.getPhoneNumber(true));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetComChannel()
+	{
+		JDFPerson p = (JDFPerson) JDFElementColorParams.createRoot(ElementName.PERSON);
+		JDFComChannel.appendChannel(p, EnumChannelType.Phone, "1234");
+		JDFComChannel.appendChannel(p, EnumChannelType.Mobile, "12345");
+		assertEquals("12345", JDFComChannel.getChannelByType(p, EnumChannelType.Mobile).getLocator());
 	}
 
 	/**

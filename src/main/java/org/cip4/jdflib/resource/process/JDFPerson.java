@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -45,6 +45,7 @@
 package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoPerson;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.VString;
@@ -98,7 +99,8 @@ public class JDFPerson extends JDFAutoPerson implements IMatches
 	 * @throws DOMException
 	 *
 	 */
-	public JDFPerson(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFPerson(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -261,4 +263,15 @@ public class JDFPerson extends JDFAutoPerson implements IMatches
 
 		return super.getCreateAddress();
 	}
+
+	public JDFComChannel getComChannel(EnumChannelType ct)
+	{
+		return JDFComChannel.getChannelByType(this, ct);
+	}
+
+	public JDFComChannel appendComChannel(EnumChannelType ct, String locator)
+	{
+		return JDFComChannel.appendChannel(this, ct, locator);
+	}
+
 }

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -102,7 +102,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * 
- *  
+ * 
  * @author rainer prosi
  * @date way before Jan 31, 2012
  */
@@ -112,7 +112,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 
 	/**
 	 * 
-	 *  
+	 * 
 	 * @author rainerprosi
 	 * @date Jan 31, 2012
 	 */
@@ -127,8 +127,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 		}
 
 		/**
-		 * @param enumName
-		 *            the name of the enum object to return
+		 * @param enumName the name of the enum object to return
 		 * @return the enum object if enumName is valid. Otherwise null
 		 */
 		public static EnumContactType getEnum(String enumName)
@@ -137,8 +136,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 		}
 
 		/**
-		 * @param enumValue
-		 *            the value of the enum object to return
+		 * @param enumValue the value of the enum object to return
 		 * @return the enum object if enumName is valid. Otherwise null
 		 */
 		public static EnumContactType getEnum(int enumValue)
@@ -214,7 +212,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 
 	/**
 	 * Constructor for JDFContact
-	 * @param myOwnerDocument 
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -225,9 +223,9 @@ public class JDFContact extends JDFAutoContact implements IMatches
 
 	/**
 	 * Constructor for JDFContact
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
 	 * 
 	 * @throws DOMException
 	 */
@@ -238,10 +236,10 @@ public class JDFContact extends JDFAutoContact implements IMatches
 
 	/**
 	 * Constructor for JDFContact
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
 	 * 
 	 * @throws DOMException
 	 */
@@ -267,7 +265,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 	 * Set attribute ContactTypes
 	 * 
 	 * @deprecated use getContactTypes
-	 *@param value the value to set the attribute to
+	 * @param value the value to set the attribute to
 	 */
 	@Deprecated
 	public void setExtendedContactTypes(VString value)
@@ -307,8 +305,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 	}
 
 	/**
-	 * @param typ
-	 *            the single contacttype to set this contact to
+	 * @param typ the single contacttype to set this contact to
 	 */
 	public void addContactTypes(EnumContactType typ)
 	{
@@ -316,6 +313,21 @@ public class JDFContact extends JDFAutoContact implements IMatches
 		{
 			appendAttribute(AttributeName.CONTACTTYPES, typ.getName(), null, JDFConstants.BLANK, true);
 		}
+	}
+
+	public JDFComChannel getComChannel(EnumChannelType ct)
+	{
+		JDFComChannel cc = JDFComChannel.getChannelByType(this, ct);
+		if (cc == null)
+		{
+			return JDFComChannel.getChannelByType(getPerson(), ct);
+		}
+		return null;
+	}
+
+	public JDFComChannel appendComChannel(EnumChannelType ct, String locator)
+	{
+		return JDFComChannel.appendChannel(this, ct, locator);
 	}
 
 	/**
@@ -334,7 +346,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 	/**
 	 * @param firstName
 	 * @param familyName
-	 * @return 
+	 * @return
 	 */
 	public JDFPerson setPerson(String firstName, String familyName)
 	{
@@ -410,9 +422,8 @@ public class JDFContact extends JDFAutoContact implements IMatches
 	}
 
 	/**
-	 * checks a match
-	 * if subset is a String, then we check userID (ignoring case)
-	 * if subset is a JDFContact, we do heuristic matching of the person, company and address
+	 * checks a match if subset is a String, then we check userID (ignoring case) if subset is a JDFContact, we do heuristic matching of the person, company and
+	 * address
 	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 	 */
 	@Override
@@ -443,6 +454,35 @@ public class JDFContact extends JDFAutoContact implements IMatches
 			}
 		}
 		return matches;
+	}
+
+	/**
+	 * 
+	 * also search in person
+	 * @see org.cip4.jdflib.auto.JDFAutoContact#getAddress()
+	 */
+	@Override
+	public JDFAddress getAddress()
+	{
+		JDFAddress a = super.getAddress();
+		if (a == null)
+		{
+			JDFPerson p = getPerson();
+			if (p != null)
+				a = p.getAddress();
+		}
+		return a;
+	}
+
+	/**
+	 * also search in person
+	 * @see org.cip4.jdflib.auto.JDFAutoContact#getCreateAddress()
+	 */
+	@Override
+	public JDFAddress getCreateAddress()
+	{
+		JDFAddress address = getAddress();
+		return address == null ? appendAddress() : address;
 	}
 
 }

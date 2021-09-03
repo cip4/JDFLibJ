@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,6 +74,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.junit.Test;
@@ -85,6 +86,18 @@ import org.junit.Test;
 public class JDFPersonTest extends JDFTestCaseBase
 {
 	private JDFPerson person;
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetComChannelPerson()
+	{
+		final JDFComChannel a = person.appendComChannel(EnumChannelType.Phone, "1234");
+		assertEquals(a, person.getComChannel(EnumChannelType.Phone));
+		assertEquals(null, person.getComChannel(EnumChannelType.Mobile));
+	}
 
 	/**
 	 *

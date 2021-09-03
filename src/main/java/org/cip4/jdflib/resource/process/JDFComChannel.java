@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -86,7 +86,10 @@ import java.util.Map;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoComChannel;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
@@ -94,7 +97,7 @@ import org.cip4.jdflib.util.StringUtil;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * 13.02.2009
+ *         13.02.2009
  */
 public class JDFComChannel extends JDFAutoComChannel implements IMatches
 {
@@ -113,7 +116,7 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 	 * some additionally specified details from the spec
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 * 
-	 * 13.02.2009
+	 *         13.02.2009
 	 */
 	public static class EnumChannelTypeDetails extends ValuedEnum
 	{
@@ -138,7 +141,7 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 
 		/**
 		 * 
-		 *  
+		 * 
 		 * @param enumValue
 		 * @return
 		 */
@@ -154,7 +157,7 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 
 		/**
 		 * 
-		 *  
+		 * 
 		 * @return
 		 */
 		public static List getEnumList()
@@ -164,7 +167,7 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 
 		/**
 		 * 
-		 *  
+		 * 
 		 * @return
 		 */
 		public static Iterator iterator()
@@ -240,6 +243,31 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 	}
 
 	/**
+	 * 
+	 * @param parent
+	 * @return
+	 */
+	static JDFComChannel getChannelByType(JDFElement parent, EnumChannelType ct)
+	{
+		JDFComChannel cc = parent == null ? null
+				: parent.getChildWithAttribute(JDFComChannel.class, AttributeName.CHANNELTYPE, ct == null ? null : ct.getName());
+		return cc;
+	}
+
+	/**
+	 * 
+	 * @param parent
+	 * @return
+	 */
+	static JDFComChannel appendChannel(JDFElement parent, EnumChannelType ct, String locator)
+	{
+		JDFComChannel cc = (JDFComChannel) parent.appendElement(ElementName.COMCHANNEL);
+		cc.setChannelType(ct);
+		cc.setLocator(locator);
+		return cc;
+	}
+
+	/**
 	 * sets locator to the string specified in eMail, checking valid email syntax "mailto:" is prepended, if it is not yet there
 	 * 
 	 * @param eMail the email address
@@ -291,7 +319,7 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 	 * get the phone number of this, if this is a valid phone address, else null any "tel:" or "fax:" is stripped
 	 * 
 	 * @param stripNonNumerical if true, remove any valid brackets, . / etc. so that a purely numerical code (except for an optional "+" for international) is
-	 * returned
+	 *            returned
 	 * @return the phone number
 	 */
 	public String getPhoneNumber(final boolean stripNonNumerical)
