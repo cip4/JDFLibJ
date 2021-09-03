@@ -95,15 +95,14 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testisLocked() throws IOException
 	{
-		File file = new File("no such file");
+		final File file = new File(sm_dirTestDataTemp + "no such file");
 		FileUtil.forceDelete(file);
 		assertFalse(FileUtil.isLocked(file));
-		final File f = new File("test");
+		final File f = new File(sm_dirTestDataTemp + "test");
 		FileUtil.forceDelete(f);
 		final boolean b = f.createNewFile();
 		ThreadUtil.sleep(12);
 		assertEquals(!b, FileUtil.isLocked(f));
-
 	}
 
 	/**
