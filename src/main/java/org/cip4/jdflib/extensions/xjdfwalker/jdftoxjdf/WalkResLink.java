@@ -134,15 +134,13 @@ public class WalkResLink extends WalkJDFElement
 				for (final KElement e : v)
 				{
 					final ResourceHelper resourceHelper = new ResourceHelper(e);
-					final VJDFAttributeMap partMapVector = resourceHelper.getPartMapVector();
-					partMapVector.put(key, productID);
-					resourceHelper.setPartMapVector(partMapVector);
+					resourceHelper.ensurePart(key, productID);
 				}
 			}
 		}
 	}
 
-	String getXJDFExternalID(final JDFNode node)
+	static String getXJDFExternalID(final JDFNode node)
 	{
 		final JDFComponent c = (JDFComponent) node.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
 		if (c != null)
@@ -267,7 +265,8 @@ public class WalkResLink extends WalkJDFElement
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#setResource(org.cip4.jdflib.core.JDFElement, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#setResource(org.cip4.jdflib.core.JDFElement, org.cip4.jdflib.resource.JDFResource,
+	 *      org.cip4.jdflib.core.KElement)
 	 */
 	@Override
 	protected List<KElement> setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
@@ -297,7 +296,10 @@ public class WalkResLink extends WalkJDFElement
 				boolean bChange = false;
 				if (parentProduct != null)
 				{
-					partMaps.put(XJDFConstants.ProductPart, parentProduct.getID());
+					final boolean isLegacy = EnumUtil.aLessThanB(jdfToXJDF.getNewVersion(), EnumVersion.Version_2_1);
+					final String productID = isLegacy ? getXJDFProductID(parentProduct) : getXJDFExternalID(parentProduct);
+					final String key = isLegacy ? XJDFConstants.ProductPart : XJDFConstants.Product;
+					partMaps.put(key, productID);
 					bChange = true;
 				}
 				if (EnumProcessPartition.processTypes.equals(jdfToXJDF.getProcessPart()))

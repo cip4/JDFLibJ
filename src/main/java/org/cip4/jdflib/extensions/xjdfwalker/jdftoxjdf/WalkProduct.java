@@ -199,14 +199,17 @@ public class WalkProduct extends WalkJDF
 			map.remove(AttributeName.JOBID);
 			if (prod.getNonEmpty(XJDFConstants.ExternalID) == null)
 			{
-				map.renameKey(AttributeName.JOBPARTID, XJDFConstants.ExternalID);
+				String xid = WalkResLink.getXJDFExternalID(node);
+				map.put(XJDFConstants.ExternalID, xid);
 			}
+
 			map.remove("xmlns:xsi");
 			map.remove(AttributeName.JOBPARTID);
 			updateAttributes(map);
 			prod.setAttributes(map);
 
 			calcChildren(node, prod);
+
 			return prod;
 		}
 		else

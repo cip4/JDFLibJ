@@ -124,8 +124,9 @@ class PostXJDFWalker extends BaseElementWalker
 	private boolean bDeliveryIntent;
 	private boolean retainAll;
 
-	private static final StringArray metaKeys = new StringArray(new String[] { AttributeName.COMMANDRESULT, AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.LEVEL, AttributeName.MODULEID,
-			AttributeName.QUEUEENTRYID, AttributeName.SCOPE, AttributeName.SPEED, AttributeName.TOTALAMOUNT, AttributeName.TYPES });
+	private static final StringArray metaKeys = new StringArray(
+			new String[] { AttributeName.COMMANDRESULT, AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.LEVEL, AttributeName.MODULEID,
+					AttributeName.QUEUEENTRYID, AttributeName.SCOPE, AttributeName.SPEED, AttributeName.TOTALAMOUNT, AttributeName.TYPES });
 
 	/**
 	 *
@@ -801,7 +802,8 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return !retainAll && toCheck.getLocalName().equals(SetHelper.RESOURCE_SET) && ElementName.STRIPPINGPARAMS.equals(toCheck.getAttribute(AttributeName.NAME));
+			return !retainAll && toCheck.getLocalName().equals(SetHelper.RESOURCE_SET)
+					&& ElementName.STRIPPINGPARAMS.equals(toCheck.getAttribute(AttributeName.NAME));
 		}
 
 		/**
@@ -1776,7 +1778,8 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement,
+		 *      java.lang.String)
 		 */
 		@Override
 		void moveToMisconsumable(final KElement xjdf)
@@ -1859,7 +1862,8 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement,
+		 *      java.lang.String)
 		 */
 		@Override
 		void moveToMisconsumable(final KElement xjdf)
@@ -1915,7 +1919,8 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement,
+		 *      java.lang.String)
 		 */
 		@Override
 		void moveToMisconsumable(final KElement xjdf)
@@ -1978,7 +1983,8 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement,
+		 *      org.cip4.jdflib.core.KElement)
 		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
@@ -2046,7 +2052,8 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement,
+		 *      java.lang.String)
 		 */
 		@Override
 		void moveToMisconsumable(final KElement xjdf)
@@ -2103,7 +2110,8 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement,
+		 *      java.lang.String)
 		 */
 		void moveToStacking(final KElement xjdf)
 		{
@@ -2124,7 +2132,8 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement,
+		 *      org.cip4.jdflib.core.KElement)
 		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
@@ -2201,7 +2210,29 @@ class PostXJDFWalker extends BaseElementWalker
 		void updateAttributes(final KElement xjdf)
 		{
 			super.updateAttributes(xjdf);
-			xjdf.removeAttribute("ContactRefs");
+			fixReferencedContactParts(xjdf);
+			xjdf.removeAttribute(XJDFConstants.ContactRefs);
+		}
+
+		public void fixReferencedContactParts(final KElement xjdf)
+		{
+			ResourceHelper rh = ResourceHelper.getHelper(xjdf);
+			VJDFAttributeMap vMap = rh == null ? null : rh.getPartMapVector();
+			JDFAttributeMap map = vMap == null ? null : vMap.getCommonMap();
+			String pp = map == null ? null : map.get(JDFConstants.PRODUCT);
+			StringArray a = pp == null ? null : StringArray.getVString(xjdf.getNonEmpty(XJDFConstants.ContactRefs), null);
+			if (a != null)
+			{
+				SetHelper cs = newRootHelper.getSet(ElementName.CONTACT, null);
+				for (String id : a)
+				{
+					ResourceHelper c = cs == null ? null : cs.getPartition(id);
+					if (c != null)
+					{
+						c.ensurePart(JDFConstants.PRODUCT, pp);
+					}
+				}
+			}
 		}
 
 	}
@@ -2243,7 +2274,8 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement,
+		 *      java.lang.String)
 		 */
 		@Override
 		void moveToMisconsumable(final KElement xjdf)
@@ -2404,7 +2436,8 @@ class PostXJDFWalker extends BaseElementWalker
 		public boolean matches(final KElement e)
 		{
 			final String localName = e.getLocalName();
-			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE) || localName.startsWith(ElementName.COMMAND);
+			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE)
+					|| localName.startsWith(ElementName.COMMAND);
 		}
 
 	}
@@ -2570,7 +2603,8 @@ class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 *
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement,
+		 *      org.cip4.jdflib.core.KElement)
 		 */
 		@Override
 		public KElement walk(final KElement strippingParams, final KElement dummy)
@@ -2599,7 +2633,8 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param layoutMap
 		 * @return
 		 */
-		private JDFAttributeMap mergeStrippingParamsLayout(final JDFStrippingParams strippingParams, final SetHelper layoutseth, final VJDFAttributeMap layoutMaps)
+		private JDFAttributeMap mergeStrippingParamsLayout(final JDFStrippingParams strippingParams, final SetHelper layoutseth,
+				final VJDFAttributeMap layoutMaps)
 		{
 			final JDFAttributeMap layoutMap = VJDFAttributeMap.isEmpty(layoutMaps) ? null : layoutMaps.get(0);
 			if (isRemoveSignatureName() && layoutMap != null)
@@ -2985,8 +3020,8 @@ class PostXJDFWalker extends BaseElementWalker
 	@Override
 	public String toString()
 	{
-		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll + ", removeSignatureName="
-				+ removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
+		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll="
+				+ retainAll + ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
 	}
 
 	void combineSameSets()

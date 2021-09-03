@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,13 +72,13 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.resource.process.JDFContact;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
 public class WalkCustomerInfo extends WalkResource
 {
+
 	/**
 	 *
 	 */
@@ -106,15 +106,4 @@ public class WalkCustomerInfo extends WalkResource
 	{
 		return new VString(ElementName.CUSTOMERINFO, null);
 	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected void removeUnusedElements(final KElement jdf)
-	{
-		jdf.removeChildrenByClass(JDFContact.class);
-		super.removeUnusedElements(jdf);
-	}
-
 }
