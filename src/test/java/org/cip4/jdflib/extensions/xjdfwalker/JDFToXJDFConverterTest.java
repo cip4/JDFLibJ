@@ -226,6 +226,30 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testCustomerInfoContactPersonAddress()
+	{
+		final JDFToXJDF conv = new JDFToXJDF();
+		final JDFNode n = createBaseProductNode();
+		JDFCustomerInfo ci = n.appendCustomerInfo();
+		ci.setDescriptiveName("c");
+		JDFContact c1 = ci.appendContact(EnumContactType.Customer);
+		JDFPerson p1 = c1.appendPerson();
+		p1.setFamilyName("F1");
+		p1.appendComChannel(EnumChannelType.Phone, "1234");
+		p1.appendAddress().setCity("city");
+		c1.setDescriptiveName("cust");
+		ci.appendContact(EnumContactType.Delivery).setDescriptiveName("del");
+		KElement x = conv.convert(n);
+		XJDFHelper h = XJDFHelper.getHelper(x);
+		SetHelper set = h.getSet(ElementName.CONTACT, null);
+		assertNotNull(set);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testCustomerInfo2Contact()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();

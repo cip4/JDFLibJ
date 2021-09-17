@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -82,12 +82,16 @@ import org.apache.log4j.RollingFileAppender;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**
- *  
+ * 
  * @author rainer prosi
  * @date May 18, 2011
  */
 public class LogConfigurator
 {
+	static
+	{
+		System.setProperty("LOG4J_LEVEL", "DEBUG");
+	}
 
 	/**
 	 * @param logDir the log directory, null console only
