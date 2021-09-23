@@ -322,7 +322,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 		{
 			return JDFComChannel.getChannelByType(getPerson(), ct);
 		}
-		return null;
+		return cc;
 	}
 
 	public JDFComChannel appendComChannel(EnumChannelType ct, String locator)

@@ -215,6 +215,18 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetComChannel()
+	{
+		final JDFComChannel a = co.appendComChannel(EnumChannelType.Phone, "1234");
+		assertEquals(a, co.getComChannel(EnumChannelType.Phone));
+		assertEquals(null, co.getComChannel(EnumChannelType.Mobile));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testGetComChannelPerson()
 	{
 		final JDFComChannel a = co.appendPerson().appendComChannel(EnumChannelType.Phone, "1234");
