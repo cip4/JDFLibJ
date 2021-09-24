@@ -107,15 +107,14 @@ public class WalkJDFElement extends WalkElement
 	void makeRefElements(final JDFElement je)
 	{
 		removeUnusedElements(je);
-		final VElement v = je.getChildElementVector_KElement(null, null, null, true, 0);
+		final List<KElement> v = je.getChildList();
 		for (final KElement e : v)
 		{
 			if (e instanceof JDFResource)
 			{
-				final JDFResource r = (JDFResource) e;
-				if (!mustInline(r.getLocalName()))
+				if (JDFElement.isInJDFNameSpaceStatic(e) && !mustInline(e.getLocalName()))
 				{
-					cleanRefs(je, r);
+					cleanRefs(je, (JDFResource) e);
 				}
 			}
 		}
