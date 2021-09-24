@@ -110,12 +110,9 @@ public class WalkJDFElement extends WalkElement
 		final List<KElement> v = je.getChildList();
 		for (final KElement e : v)
 		{
-			if (e instanceof JDFResource)
+			if ((e instanceof JDFResource) && JDFElement.isInJDFNameSpaceStatic(e) && !mustInline(e.getLocalName()))
 			{
-				if (JDFElement.isInJDFNameSpaceStatic(e) && !mustInline(e.getLocalName()))
-				{
-					cleanRefs(je, (JDFResource) e);
-				}
+				cleanRefs(je, (JDFResource) e);
 			}
 		}
 	}
