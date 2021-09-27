@@ -197,8 +197,7 @@ public class StringUtil
 			"Base eight is just like base ten really - if you're missing two fingers",
 			"Biology is the only science in which multiplication means the same thing as division.",
 			"My dog's not eating, he no longer barks; He hit the propeller and turned into sparks",
-			"One leg is missing; the other is gone; The third leg is scattered all over the lawn; No need explaining the one leg remaining is spinning on the carport floor"
-					+ "I",
+			"One leg is missing; the other is gone; The third leg is scattered all over the lawn; No need explaining the one leg remaining is spinning on the carport floor",
 			"\"Once the rockets are up, who cares where they come down? That's not my department,\" says Wernher von Braun.", "Last quote" };
 
 	/**
@@ -2847,7 +2846,7 @@ public class StringUtil
 	 */
 	public static boolean matchesSimple(final String str, String regExp, final boolean alwaysSimple)
 	{
-		regExp = simpleRegExptoRegExp(regExp, false);
+		regExp = simpleRegExptoRegExp(regExp, alwaysSimple);
 		return matches(str, regExp);
 	}
 
