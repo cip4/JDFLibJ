@@ -143,7 +143,7 @@ dependencies {
     compile 'commons-lang:commons-lang:2.5'
     compile 'commons-io:commons-io:2.0'
     compile 'commons-logging:commons-logging:1.1.1'
-    compile 'log4j:log4j:1.2.16'
+    compile 'log4j:log4j:1.2.17'
     compile 'xerces:xercesImpl:2.12.0'
     compile 'javax.mail:mailapi:1.4.3'
 
