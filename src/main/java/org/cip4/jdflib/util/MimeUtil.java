@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -364,7 +364,7 @@ public class MimeUtil extends UrlUtil
 	}
 
 	/**
-	 * checks whether the mime type corresponds to one of "application/vnd.cip4-jdf+xml"; "application/vnd.cip4-jmf+xml"; "text/xml";
+	 * checks whether the mime type corresponds to one of "application/vnd.cip4-jdf+xml"; "application/vnd.cip4-jmf+xml"; "text/xml"; or the respective XJDF tapes
 	 *
 	 * @param mimeType the string to test
 	 * @return true if matches
@@ -378,6 +378,21 @@ public class MimeUtil extends UrlUtil
 		mimeType = StringUtil.token(mimeType, 0, ";");
 		return JDFConstants.MIME_JDF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_XJDF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_JMF.equalsIgnoreCase(mimeType)
 				|| JDFConstants.MIME_XJMF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeType) || UrlUtil.APPLICATION_XML.equalsIgnoreCase(mimeType);
+	}
+	/**
+	 * checks whether the mime type corresponds to ppf
+	 *
+	 * @param mimeType the string to test
+	 * @return true if matches
+	 */
+	public static boolean isPPFMimeType(String mimeType)
+	{
+		if (mimeType == null)
+		{
+			return false;
+		}
+		mimeType = StringUtil.token(mimeType, 0, ";");
+		return JDFConstants.MIME_CIP3.equalsIgnoreCase(mimeType);
 	}
 
 	/**

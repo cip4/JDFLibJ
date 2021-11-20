@@ -229,6 +229,7 @@ public class UrlUtil
 	/**
 	 *
 	 */
+	public static final String VND_PPF = JDFCoreConstants.MIME_CIP3;
 	public static final String VND_PTK = JDFCoreConstants.MIME_PTK;
 	public static final String VND_JDF = JDFCoreConstants.MIME_JDF;
 	public static final String VND_JMF = JDFCoreConstants.MIME_JMF;
@@ -988,7 +989,10 @@ public class UrlUtil
 			mimeMap.put("pdf", JDFCoreConstants.MIME_PDF);
 			mimeMap.put("ps", JDFCoreConstants.MIME_PS);
 
+			mimeMap.put("cip", JDFCoreConstants.MIME_CIP3);
+			mimeMap.put("cip3", JDFCoreConstants.MIME_CIP3);
 			mimeMap.put("ppf", JDFCoreConstants.MIME_CIP3);
+
 			mimeMap.put("ppml", JDFCoreConstants.MIME_PPML);
 			mimeMap.put("ptk", JDFCoreConstants.MIME_PTK);
 			mimeMap.put("xjdf", JDFCoreConstants.MIME_XJDF);
@@ -1019,7 +1023,9 @@ public class UrlUtil
 			mimeMap.put("mim", MimeUtil.MULTIPART_RELATED);
 
 			mimeMap.put("zip", APPLICATION_ZIP);
+			
 			mimeMap.put("cf2", APPLICATION_CFF2);
+			mimeMap.put("cff2", APPLICATION_CFF2);
 		}
 		final String extension = UrlUtil.extension(url);
 		final String mimeType = extension == null ? null : mimeMap.get(extension.toLowerCase());

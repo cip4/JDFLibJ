@@ -148,7 +148,7 @@ public abstract class JDFCoreConstants
 	/** * */
 	public static final String MIME_JMF = "application/vnd.cip4-jmf+xml";
 	/** * */
-	public static final String MIME_CIP3 = "application/vnd.cip3-ppf";
+	public static final String MIME_CIP3 = "application/vnd.cip4-ppf";
 	/** * */
 	public static final String MIME_PPML = "application/vnd.podi-ppml+xml";
 
