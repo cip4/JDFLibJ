@@ -21,17 +21,14 @@ java {
     withSourcesJar()
 }
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
 test {
     systemProperty "file.encoding", "utf-8"
     maxParallelForks = 1
     forkEvery = 1
 }
-
-//sourceCompatibility = 11
-//targetCompatibility = 11
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
@@ -134,11 +131,6 @@ processResources {
     }
 }
 
-// revive java 11
-// configurations {
-//   all*.exclude group: 'xml-apis', module: 'xml-apis'
-// }
- 
 dependencies {
     compile 'commons-lang:commons-lang:2.6'
     compile 'commons-io:commons-io:2.0'
