@@ -69,28 +69,42 @@
 package org.cip4.jdflib.util.logging;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Layout;
-import org.apache.log4j.Level;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.RollingFileAppender;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.core.config.builder.api.AppenderComponentBuilder;
+import org.apache.logging.log4j.core.config.builder.api.AppenderRefComponentBuilder;
+import org.apache.logging.log4j.core.config.builder.api.ComponentBuilder;
+import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilder;
+import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilderFactory;
+import org.apache.logging.log4j.core.config.builder.api.LayoutComponentBuilder;
+import org.apache.logging.log4j.core.config.builder.api.RootLoggerComponentBuilder;
+import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
+import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**
- * 
  * @author rainer prosi
  * @date May 18, 2011
  */
 public class LogConfigurator
 {
-	static
+
+	public static void main(String[] args)
 	{
-		System.setProperty("LOG4J_LEVEL", "DEBUG");
+		final Logger logger = LogManager.getLogger(LogConfigurator.class);
+
+		configureLog("c:/a", "main.log");
+		Log log = LogFactory.getLog(LogConfigurator.class);
+		log.info("pre");
+		logger.info("pre2");
+		for (int i = 0; i < 5; i++)
+			log.info("Configured logging ");
+
 	}
 
 	/**
@@ -99,14 +113,24 @@ public class LogConfigurator
 	 */
 	public static void configureLog(String logDir, final String logName)
 	{
-		BasicConfigurator.resetConfiguration();
 		Log log = LogFactory.getLog(LogConfigurator.class);
 		try
 		{
-			Layout layout = new PatternLayout("%d " + PatternLayout.TTCC_CONVERSION_PATTERN);
-			ConsoleAppender appender1 = new ConsoleAppender(layout);
-			appender1.setThreshold(Level.INFO);
-			BasicConfigurator.configure(appender1);
+			ConfigurationBuilder<BuiltConfiguration> builder = ConfigurationBuilderFactory.newConfigurationBuilder();
+			builder.setConfigurationName("DefaultLogger");
+
+			LayoutComponentBuilder newLayout = builder.newLayout(PatternLayout.class.getSimpleName());
+			newLayout.addAttribute("pattern", "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n");
+
+			// configure a console appender
+			AppenderComponentBuilder consoleAppender = builder.newAppender("stdout", "Console");
+			consoleAppender.add(newLayout);
+			builder.add(consoleAppender);
+
+			// configure the root logger
+			RootLoggerComponentBuilder newRootLogger = builder.newRootLogger(Level.INFO);
+			AppenderRefComponentBuilder newAppenderRef = builder.newAppenderRef("stdout");
+			newRootLogger.add(newAppenderRef);
 
 			if (logDir != null)
 			{
@@ -114,17 +138,36 @@ public class LogConfigurator
 				String logFileName = logDir + "/" + logName;
 				if (UrlUtil.extension(logFileName) == null)
 					logFileName += ".log";
-				RollingFileAppender appender = new RollingFileAppender(layout, logFileName, true);
-				appender.setMaximumFileSize(1000000);
-				appender.setMaxBackupIndex(4);
-				appender.setThreshold(Level.INFO);
-				BasicConfigurator.configure(appender);
-				log.info("log file=" + new File(logFileName).getAbsolutePath());
+
+				// configure a console appender
+				AppenderComponentBuilder fileleAppender = builder.newAppender("file", "RollingFile");
+				fileleAppender.add(newLayout);
+				fileleAppender.addAttribute("fileName", logFileName);
+				String pattern = UrlUtil.newExtension(logFileName, "%i." + UrlUtil.extension(logFileName));
+				fileleAppender.addAttribute("filePattern", pattern);
+
+				ComponentBuilder<?> policies = builder.newComponent("Policies");
+				ComponentBuilder<?> trigger = builder.newComponent("SizeBasedTriggeringPolicy");
+				trigger.addAttribute("size", "10M");
+				policies.addComponent(trigger);
+				fileleAppender.addComponent(policies);
+
+				ComponentBuilder<?> roll = builder.newComponent("DefaultRolloverStrategy");
+				roll.addAttribute("max", 10);
+				fileleAppender.addComponent(roll);
+
+				builder.add(fileleAppender);
+
+				AppenderRefComponentBuilder fileAppenderRef = builder.newAppenderRef("file");
+				newRootLogger.add(fileAppenderRef);
+
 			}
-			log = LogFactory.getLog(LogConfigurator.class);
-			// log.info("Configured logging ");
+			builder.add(newRootLogger);
+			BuiltConfiguration c = builder.build();
+			Configurator.reconfigure(c);
+			log.info("Configured logging " + logDir);
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
 			log.error("Snafu while configuring logging ", e);
 		}
