@@ -61,6 +61,8 @@ import javax.mail.MessagingException;
 import javax.mail.Multipart;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
@@ -80,6 +82,8 @@ import org.cip4.jdflib.util.mime.MimeHelper;
 public class UrlUtil
 {
 	public static final int MAX_STREAM = 12345678;
+
+	private static Log log = LogFactory.getLog(UrlUtil.class);
 
 	/**
 	 * @deprecated use the real class
@@ -1023,7 +1027,7 @@ public class UrlUtil
 			mimeMap.put("mim", MimeUtil.MULTIPART_RELATED);
 
 			mimeMap.put("zip", APPLICATION_ZIP);
-			
+
 			mimeMap.put("cf2", APPLICATION_CFF2);
 			mimeMap.put("cff2", APPLICATION_CFF2);
 		}
@@ -1662,6 +1666,7 @@ public class UrlUtil
 	 * @param dir the directory to move to. dir is created if it does not exist. If dir exists and dir is not a directory, the call fails and null is returned
 	 * @param cwd the current working dir for local urls
 	 * @param overWrite if true, zapp any old files with the same name
+	 * @throws IllegalArgumentException in case the filename contains '..'
 	 * @return the file that corresponds to the moved url reference, null if an error occurred
 	 */
 	public static File moveToDir(final IURLSetter urlSetter, final File dir, final String cwd, final boolean overWrite, final boolean deleteFile)
@@ -1710,6 +1715,10 @@ public class UrlUtil
 		{
 			final Multipart mp = d == null ? null : d.getMultiPart();
 			fileName = getFileName(url, mp);
+		}
+		if (StringUtil.hasToken(fileName, "..", "/\\", 0))
+		{
+			throw new IllegalArgumentException("illegal filename " + fileName);
 		}
 		final File localFile = fileName == null ? null : new File(fileName);
 		File out = FileUtil.getFileInDirectory(dir, localFile);

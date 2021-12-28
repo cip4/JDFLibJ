@@ -263,6 +263,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		assertTrue(MimeUtil.isMimeMultiPart(" " + MimeUtil.MULTIPART_RELATED + "; foo"));
 		assertTrue(MimeUtil.isMimeMultiPart(" " + MimeUtil.MULTIPART_RELATED.toUpperCase() + "; foo"));
 	}
+
 	/**
 	 * @throws Exception
 	 */
@@ -603,8 +604,6 @@ public class MimeUtilTest extends JDFTestCaseBase
 		assertNotNull(xmlDoc);
 	}
 
-	// /////////////////////////////////////////////////////
-
 	/**
 	 * @throws Exception
 	 */
@@ -623,6 +622,24 @@ public class MimeUtilTest extends JDFTestCaseBase
 		}
 		MimeUtil.writeToDir(mp, directory);
 		assertTrue(new File(baseDir, "test.icc").exists());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testWriteToDirDown() throws Exception
+	{
+		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestData + "evil.mjm");
+
+		final String baseDir = sm_dirTestDataTemp + "TestWriteMimeDown";
+		final File directory = new File(baseDir);
+		if (directory.exists())
+		{
+			directory.delete();
+		}
+		MimeUtil.writeToDir(mp, directory);
+		assertTrue(new File(directory, "OtherJDF.jdf").exists());
 	}
 
 	/**

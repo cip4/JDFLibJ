@@ -461,10 +461,14 @@ public class BodyPartHelper
 
 		if (!exists)
 		{
-			throw new FileNotFoundException();
+			throw new FileNotFoundException("Could not create " + directory);
 		}
 
 		final String fileName = getFileName();
+		if (StringUtil.hasToken(fileName, "..", "/\\", 0))
+		{
+			throw new MessagingException("illegal filename " + fileName);
+		}
 		final File outFile = new File(directory.getPath() + File.separator + fileName);
 		FileUtil.streamToFile(getInputStream(), outFile);
 	}

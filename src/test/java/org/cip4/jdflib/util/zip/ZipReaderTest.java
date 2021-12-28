@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -52,6 +52,8 @@ import java.util.zip.ZipEntry;
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.XJDFZipWriter;
 import org.cip4.jdflib.util.ByteArrayIOFileStream;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
@@ -85,6 +87,64 @@ public class ZipReaderTest extends JDFTestCaseBase
 			final File dir2 = dir = FileUtil.getFileInDirectory(dir, new File("schema"));
 			assertEquals(dir2.listFiles().length, 3);
 		}
+	}
+
+	/**
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public void testEvilPath() throws IOException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final XJDFZipWriter w = new XJDFZipWriter();
+		w.addXJDF(h);
+		w.addAux("../foo.pdf", FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf")));
+		final File file = new File(sm_dirTestDataTemp + "testaux.zip");
+		file.delete();
+		FileUtil.writeFile(w, file);
+		final ZipReader zr = new ZipReader(file);
+		final ZipEntry entry = zr.getEntry("../foo.pdf");
+		assertNotNull(entry);
+		assertNotNull(zr.getInputStream());
+		assertFalse(zr.unPack(new File(sm_dirTestDataTemp + "aux"), entry));
+	}
+
+	/**
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public void testEvilPath2() throws IOException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final XJDFZipWriter w = new XJDFZipWriter();
+		w.addXJDF(h);
+		w.addAux("../foo.pdf", FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf")));
+		final File file = new File(sm_dirTestDataTemp + "testaux2.zip");
+		file.delete();
+		FileUtil.writeFile(w, file);
+		final ZipReader zr = new ZipReader(file);
+		assertEquals(2, zr.unPack(new File(sm_dirTestDataTemp + "aux2")));
+
+	}
+
+	/**
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public void testAuxPath() throws IOException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final XJDFZipWriter w = new XJDFZipWriter();
+		w.addXJDF(h);
+		w.addAux("foo.pdf", FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf")));
+		final File file = new File(sm_dirTestDataTemp + "testaux3.zip");
+		file.delete();
+		FileUtil.writeFile(w, file);
+		final ZipReader zr = new ZipReader(file);
+		assertEquals(3, zr.unPack(new File(sm_dirTestDataTemp + "aux3")));
 	}
 
 	/**

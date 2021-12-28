@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1090,6 +1090,25 @@ public class UrlUtilTest extends JDFTestCaseBase
 		fs.setURL("deep/blub.pdf");
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/deep/blub.pdf"));
 		assertTrue("relative:", UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true).exists());
+	}
+
+	/**
+	 * @throws Exception
+	 *
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testMoveToDownDir() throws Exception
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		final JDFFileSpec fs = rl.addPDF("./content/boo.pdf", 0, -1).getLayoutElement().getFileSpec();
+
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/boo2.pdf"));
+
+		final File newDir = new File(sm_dirTestDataTemp + "newDir2");
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "blub2.pdf"));
+		fs.setURL("../blub2.pdf");
+		UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true);
 	}
 
 	/**
