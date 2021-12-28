@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -100,6 +100,22 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Signal, EnumType.Status);
 		mh.appendElement(ElementName.DEVICEINFO).setAttribute(AttributeName.DEVICEID, "d1");
+		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		final JDFDoc d = xc.convert(h.getRoot());
+		assertNull(StringUtil.getNonEmpty(d.getJMFRoot().getDeviceID()));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSenderID2()
+	{
+		final XJMFHelper h = new XJMFHelper();
+		h.getHeader().setAttribute(AttributeName.DEVICEID, "xjmfdev");
+		final MessageHelper mh = h.appendMessage(EnumFamily.Query, EnumType.Status);
+		mh.getHeader().setAttribute(AttributeName.DEVICEID, "qdev");
+		mh.appendElement(ElementName.SUBSCRIPTION).setAttribute(AttributeName.URL, "foo");
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(h.getRoot());
 		assertNull(StringUtil.getNonEmpty(d.getJMFRoot().getDeviceID()));
