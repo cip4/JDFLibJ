@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -149,8 +149,21 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	 */
 	public enum EnumResourceUsage
 	{
-		CIP3, DataList, DeliveryContents, DeviceLinkProfile, ExternalImpositionTemplate, FinalTargetDevice, Font, Image, MailingList, PDL, PDLSourceProfile, ReferenceOutputProfile, RemoteURL, SearchPath, SourceProfile
-	};
+		Accepted, AbstractProfile, AddressList, ActualOutputProfile, CIP3, ColorProfile, Combined, CorrectionProfile, CurrentSchema, DataList, DeliveryContents, DeviceLinkProfile, ExternalImpositionTemplate, FinalTargetDevice, Font, Image, MailingList, OutputProfile, PDL, PDLSourceProfile, Preview, RasterFileLocation, ReferenceOutputProfile, Rejected, RemoteURL, ScanProfile, Schema, SearchPath, Setup, SourceProfile, TargetProfile, Unknown, Verification, WorkingColorSpace;
+
+		public static EnumResourceUsage getEnum(final String val)
+		{
+			for (final EnumResourceUsage e : values())
+			{
+				if (e.name().equalsIgnoreCase(val))
+				{
+					return e;
+				}
+			}
+			return null;
+		}
+
+	}
 
 	/**
 	 * get the input stream that reads from URL
@@ -284,14 +297,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	 */
 	public EnumResourceUsage getResourceUsageEnum()
 	{
-		try
-		{
-			return EnumResourceUsage.valueOf(getResourceUsage());
-		}
-		catch (final IllegalArgumentException x)
-		{
-			return null;
-		}
+		return EnumResourceUsage.getEnum(getResourceUsage());
 	}
 
 }
