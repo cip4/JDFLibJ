@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,10 +76,16 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoAddress;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
@@ -156,6 +162,45 @@ public class JDFAddress extends JDFAutoAddress implements IMatches
 	public void setExtendedAddressText(final String extendedAddress)
 	{
 		getCreateExtendedAddress().setText(extendedAddress);
+	}
+
+	public JDFElement appendAddressLine(final String line)
+	{
+		final JDFElement e = appendAddressLine();
+		e.setText(line);
+		return e;
+	}
+
+	public String getAddressLineText(final int line)
+	{
+		final JDFElement e = super.getAddressLine(line);
+		return e == null ? null : e.getText();
+	}
+
+	public StringArray getAddressLines()
+	{
+		final Collection<JDFElement> lines = getAllAddressLine();
+		final StringArray ret = new StringArray();
+		for (final JDFElement line : lines)
+		{
+			ret.addNonEmpty(line.getText());
+		}
+		return ret;
+	}
+
+	/**
+	 * Get all AddressLine from the current element
+	 *
+	 * @return Collection<JDFElement>, null if none are available
+	 */
+	@Override
+	public Collection<JDFElement> getAllAddressLine()
+	{
+		final Collection<KElement> c = getChildArray(ElementName.ADDRESSLINE, null);
+		final Collection<JDFElement> cc = new ArrayList<>();
+		for (final KElement l : c)
+			cc.add((JDFElement) l);
+		return cc;
 	}
 
 	/**

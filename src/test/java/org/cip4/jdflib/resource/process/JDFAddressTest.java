@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,6 +72,7 @@ package org.cip4.jdflib.resource.process;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -79,6 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.StringArray;
 import org.junit.Test;
 
 /**
@@ -100,6 +102,48 @@ public class JDFAddressTest extends JDFTestCaseBase
 		final JDFAddress ad = (JDFAddress) doc.getRoot();
 		final JDFComment c = (JDFComment) ad.appendExtendedAddress();
 		assertFalse(c.hasAttribute(AttributeName.ID));
+	}
+
+	/**
+	 * tests the JDFAddress class
+	 *
+	 */
+	@Test
+	public final void testAddressLine()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.ADDRESS);
+		final JDFAddress ad = (JDFAddress) doc.getRoot();
+		for (int i = 0; i < 5; i++)
+		{
+			ad.appendAddressLine("Line" + i);
+		}
+		for (int i = 0; i < 5; i++)
+		{
+			assertEquals("Line" + i, ad.getAddressLineText(i));
+		}
+		assertNull(ad.getAddressLine(7));
+	}
+
+	/**
+	 * tests the JDFAddress class
+	 *
+	 */
+	@Test
+	public final void testAddressLines()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.ADDRESS);
+		final JDFAddress ad = (JDFAddress) doc.getRoot();
+		for (int i = 0; i < 5; i++)
+		{
+			ad.appendAddressLine("Line" + i);
+			ad.appendComment().setText("comment " + i);
+		}
+
+		final StringArray sa = ad.getAddressLines();
+		for (int i = 0; i < 5; i++)
+		{
+			assertEquals("Line" + i, sa.get(i));
+		}
 	}
 
 	/**
