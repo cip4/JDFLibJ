@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -48,6 +48,30 @@ import org.cip4.jdflib.util.StringUtil;
 public class AuditHelper extends MessageHelper
 {
 
+	public enum eAudit
+	{
+		Created, Notification, Resource, Status, ProcessRun;
+
+		public static eAudit getEnum(String name)
+		{
+			if (name == null)
+				return null;
+			if (name.toLowerCase().startsWith("audit"))
+				name = name.substring(5);
+			for (final eAudit e : values())
+			{
+				if (e.name().equalsIgnoreCase(name))
+					return e;
+			}
+			return null;
+		}
+
+		public String getAuditName()
+		{
+			return ElementName.AUDIT + name();
+		}
+	}
+
 	/**
 	 *
 	 * @return
@@ -59,7 +83,7 @@ public class AuditHelper extends MessageHelper
 		{
 			return false;
 		}
-		return localName.startsWith(ElementName.AUDIT);
+		return localName.startsWith(ElementName.AUDIT) && eAudit.getEnum(localName) != null;
 	}
 
 	/**

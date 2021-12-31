@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,6 +38,7 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.AuditHelper.eAudit;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -73,7 +74,9 @@ public class AuditPoolHelper extends MessagePoolHelper
 	 *
 	 * @param auditType
 	 * @return
+	 * @deprecated use the enum
 	 */
+	@Deprecated
 	public AuditHelper appendAudit(String auditType)
 	{
 		if (!auditType.startsWith(ElementName.AUDIT))
@@ -81,6 +84,17 @@ public class AuditPoolHelper extends MessagePoolHelper
 			auditType = ElementName.AUDIT + auditType;
 		}
 		return new AuditHelper(appendMessage(auditType).theElement);
+	}
+
+	/**
+	 *
+	 * @param auditType
+	 * @return
+	 */
+	public AuditHelper appendAudit(final eAudit auditType)
+	{
+		final MessageHelper appendMessage = appendMessage(auditType == null ? null : auditType.getAuditName());
+		return appendMessage == null ? null : new AuditHelper(appendMessage.theElement);
 	}
 
 	/**

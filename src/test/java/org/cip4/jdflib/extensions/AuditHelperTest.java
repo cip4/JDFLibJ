@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,6 +39,7 @@ package org.cip4.jdflib.extensions;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.AuditHelper.eAudit;
 
 import junit.framework.TestCase;
 
@@ -49,6 +50,31 @@ import junit.framework.TestCase;
  */
 public class AuditHelperTest extends TestCase
 {
+
+	/**
+	 *
+	 */
+	public void testeAudit()
+	{
+		for (final eAudit e : eAudit.values())
+		{
+			assertEquals(e, eAudit.getEnum(e.name()));
+			assertEquals(e, eAudit.getEnum(e.name().toLowerCase()));
+			assertEquals(e, eAudit.getEnum("audit" + e.name()));
+			assertEquals(null, eAudit.getEnum("audit " + e.name()));
+		}
+	}
+
+	/**
+	 *
+	 */
+	public void testeAuditName()
+	{
+		for (final eAudit e : eAudit.values())
+		{
+			assertEquals(e, eAudit.getEnum(e.getAuditName()));
+		}
+	}
 
 	/**
 	 *
@@ -73,6 +99,17 @@ public class AuditHelperTest extends TestCase
 		final KElement rs = ah.appendElement(XJDFConstants.ResourceSet);
 		ah.cleanUp();
 		assertEquals(header.getNextSiblingElement(), rs);
+	}
+
+	/**
+	 *
+	 */
+	public void testIsAudit()
+	{
+		final KElement audit = KElement.createRoot(XJDFConstants.AuditResource, null);
+		assertTrue(AuditHelper.isAudit(audit));
+		final KElement audit2 = KElement.createRoot(XJDFConstants.AuditResource + "2", null);
+		assertFalse(AuditHelper.isAudit(audit2));
 	}
 
 	/**
