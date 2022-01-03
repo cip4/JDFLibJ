@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -60,9 +60,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author Rainer
- *
- *         To change the template for this generated type comment go to Window - Preferences - Java - Code Generation - Code and Comments
+ * @author Rainer To change the template for this generated type comment go to Window - Preferences - Java - Code Generation - Code and
+ *         Comments
  */
 public class HotFolderTest extends JDFTestCaseBase
 {
@@ -81,8 +80,6 @@ public class HotFolderTest extends JDFTestCaseBase
 		}
 
 		/**
-		 *
-		 *
 		 * @see org.cip4.jdflib.util.HotFolderListener#hotFile(java.io.File)
 		 */
 		@Override
@@ -531,9 +528,10 @@ public class HotFolderTest extends JDFTestCaseBase
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
 		hf.setStabilizeTime(1444);
-		final File file = new File(theHF + File.separator + "f1Bigab.txt");
+		final File file = new File(theHF + File.separator + "f1Bigabc.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
+		ThreadUtil.sleep(123);
 
 		final FileOutputStream fos = new FileOutputStream(file, true);
 		for (int i = 0; i < 20; i++)
@@ -603,8 +601,6 @@ public class HotFolderTest extends JDFTestCaseBase
 	}
 
 	/***
-	 *
-	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
