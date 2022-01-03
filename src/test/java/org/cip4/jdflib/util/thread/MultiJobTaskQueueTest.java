@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -51,7 +51,6 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	class WaitRunner implements Runnable
 	{
 		/**
-		 *
 		 * @param i
 		 */
 		WaitRunner(final int i)
@@ -216,7 +215,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 		final MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij2", 7);
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
-		for (int i = 0; i < 444; i++)
+		for (int i = 0; i < 44; i++)
 		{
 			q.queue(new WaitRunner(i, 10), "" + ((int) (10.0 * Math.random())));
 		}
@@ -231,6 +230,6 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 			}
 		}
 		ThreadUtil.sleep(40);
-		assertEquals(nRun, 444, 5);
+		assertEquals(nRun, 44, 5);
 	}
 }
