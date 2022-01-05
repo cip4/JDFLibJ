@@ -80,7 +80,6 @@ import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.cip4.jdflib.util.logging.LogConfigurator;
 import org.cip4.jdflib.util.net.ProxyUtil;
 import org.cip4.jdflib.util.net.UrlCheck;
 import org.cip4.jdflib.util.thread.RegularJanitor;
@@ -171,7 +170,6 @@ public abstract class JDFTestCaseBase
 	public JDFTestCaseBase()
 	{
 		super();
-		LogConfigurator.configureLog(null, null);
 		if (!StringUtil.parseBoolean(System.getProperty("jdf.testnetwork"), true))
 		{
 			setTestNetwork(false);
