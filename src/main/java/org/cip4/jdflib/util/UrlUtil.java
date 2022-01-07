@@ -412,7 +412,7 @@ public class UrlUtil
 	 */
 	public static String getFileName(final String url, final Multipart mp)
 	{
-		if (!isNotCID(url))
+		if (mp != null && !isNotCID(url))
 		{
 			final BodyPart bp = MimeUtil.getPartByCID(mp, url);
 			final String ret = MimeUtil.getFileName(bp);
