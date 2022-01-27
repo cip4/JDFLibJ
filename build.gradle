@@ -135,7 +135,7 @@ dependencies {
     compile 'commons-lang:commons-lang:2.6'
     compile 'commons-io:commons-io:2.11.0'
     compile 'commons-logging:commons-logging:1.2'
-    compile ('xerces:xercesImpl:2.12.1'){
+    compile ('xerces:xercesImpl:2.12.2'){
 	// exclude group: 'xml-apis'
 	}
     compile 'javax.mail:mailapi:1.4.3'
