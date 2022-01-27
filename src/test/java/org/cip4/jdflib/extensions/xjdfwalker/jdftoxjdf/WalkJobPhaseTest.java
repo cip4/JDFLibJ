@@ -68,110 +68,60 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
-import org.cip4.jdflib.resource.process.JDFCostCenter;
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
+import org.junit.Test;
 
-/**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
- */
-public class WalkJobPhase extends WalkJDFSubElement
+public class WalkJobPhaseTest extends JDFTestCaseBase
 {
+
 	/**
 	 *
 	 */
-	public WalkJobPhase()
+	@Test
+	public void testGlobal()
 	{
-		super();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFJobPhase);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return new VString(ElementName.JOBPHASE, null);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
-	 */
-	@Override
-	protected void updateAttributes(final JDFAttributeMap map)
-	{
-		map.remove(AttributeName.ACTIVATION);
-		map.remove(AttributeName.SPEED);
-		updateTotalAmount(map);
-		map.remove(AttributeName.URL);
-		renamePhaseAttributes(map);
-		super.updateAttributes(map);
-	}
-
-	void updateTotalAmount(final JDFAttributeMap map)
-	{
-		final String ta = map.remove(AttributeName.TOTALAMOUNT);
-		if (!StringUtil.isEmpty(ta))
-		{
-			final String pc = map.get(AttributeName.PERCENTCOMPLETED);
-			if (StringUtil.isEmpty(pc))
-			{
-				final double am = StringUtil.parseDouble(map.get(AttributeName.AMOUNT), 0);
-				final double tam = StringUtil.parseDouble(ta, 0);
-				if (tam > 0)
-				{
-					map.put(AttributeName.PERCENTCOMPLETED, StringUtil.formatDouble((100.0 * am) / tam, 3));
-				}
-			}
-		}
-	}
-
-	void renamePhaseAttributes(final JDFAttributeMap map)
-	{
-		map.renameKey(AttributeName.PHASESTARTTIME, AttributeName.STARTTIME);
-		map.renameKey(AttributeName.PHASEAMOUNT, AttributeName.AMOUNT);
-		map.renameKey(AttributeName.PHASEWASTE, AttributeName.WASTE);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		jdf.removeChild(ElementName.JDF, null, 0);
-		moveCostCenter(jdf);
-		return super.walk(jdf, xjdf);
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		final JDFJobPhase jp = jmf.getSignal(0).appendDeviceInfo().appendJobPhase();
+		jp.setAmount(42);
+		jp.setTotalAmount(100);
+		final KElement xjmf = new JDFToXJDF().convert(jmf);
+		assertEquals("42", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/JobPhase/@PercentCompleted", null));
 	}
 
 	/**
 	 *
-	 * @param jdf
 	 */
-	void moveCostCenter(final KElement jdf)
+	@Test
+	public void testUpdatePC()
 	{
-		final JDFCostCenter c = ((JDFJobPhase) jdf).getCostCenter();
-		if (c != null)
-		{
-			jdf.moveAttribute(AttributeName.COSTCENTERID, c);
-			c.deleteNode();
-		}
+		final WalkJobPhase w = new WalkJobPhase();
+		final JDFAttributeMap m = new JDFAttributeMap();
+		w.updateTotalAmount(m);
+		m.put(AttributeName.TOTALAMOUNT, "123");
+		w.updateTotalAmount(m);
+		assertEquals("0", m.get(AttributeName.PERCENTCOMPLETED));
+		m.put(AttributeName.TOTALAMOUNT, "123");
+		m.put(AttributeName.PERCENTCOMPLETED, "12");
+		w.updateTotalAmount(m);
+
+		assertEquals("12", m.get(AttributeName.PERCENTCOMPLETED));
+		assertNull(m.get(AttributeName.TOTALAMOUNT));
+		m.remove(AttributeName.PERCENTCOMPLETED);
+		m.put(AttributeName.TOTALAMOUNT, "123");
+		m.put(AttributeName.AMOUNT, "23");
+		w.updateTotalAmount(m);
+		assertEquals(18.7, Double.valueOf(m.get(AttributeName.PERCENTCOMPLETED)), 0.1);
 	}
 
 }
