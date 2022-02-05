@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -124,9 +124,8 @@ class PostXJDFWalker extends BaseElementWalker
 	private boolean bDeliveryIntent;
 	private boolean retainAll;
 
-	private static final StringArray metaKeys = new StringArray(
-			new String[] { AttributeName.COMMANDRESULT, AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.LEVEL, AttributeName.MODULEID,
-					AttributeName.QUEUEENTRYID, AttributeName.SCOPE, AttributeName.SPEED, AttributeName.TOTALAMOUNT, AttributeName.TYPES });
+	private static final StringArray metaKeys = new StringArray(new String[] { AttributeName.COMMANDRESULT, AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.LEVEL,
+			AttributeName.MODULEID, AttributeName.QUEUEENTRYID, AttributeName.SCOPE, AttributeName.SPEED, AttributeName.TOTALAMOUNT, AttributeName.TYPES });
 
 	/**
 	 *
@@ -802,8 +801,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return !retainAll && toCheck.getLocalName().equals(SetHelper.RESOURCE_SET)
-					&& ElementName.STRIPPINGPARAMS.equals(toCheck.getAttribute(AttributeName.NAME));
+			return !retainAll && toCheck.getLocalName().equals(SetHelper.RESOURCE_SET) && ElementName.STRIPPINGPARAMS.equals(toCheck.getAttribute(AttributeName.NAME));
 		}
 
 		/**
@@ -1311,6 +1309,12 @@ class PostXJDFWalker extends BaseElementWalker
 			if (set != null && xjdf.hasNonEmpty(AttributeName.UNIT))
 			{
 				set.moveAttribute(AttributeName.UNIT, xjdf);
+			}
+			final String desc = xjdf.getNonEmpty(AttributeName.DESCRIPTIVENAME);
+			final String setdesc = set.getNonEmpty(AttributeName.DESCRIPTIVENAME);
+			if (setdesc != null && StringUtil.equals(desc, setdesc))
+			{
+				set.removeAttribute(AttributeName.DESCRIPTIVENAME);
 			}
 
 		}
@@ -2216,17 +2220,17 @@ class PostXJDFWalker extends BaseElementWalker
 
 		public void fixReferencedContactParts(final KElement xjdf)
 		{
-			ResourceHelper rh = ResourceHelper.getHelper(xjdf);
-			VJDFAttributeMap vMap = rh == null ? null : rh.getPartMapVector();
-			JDFAttributeMap map = vMap == null ? null : vMap.getCommonMap();
-			String pp = map == null ? null : map.get(JDFConstants.PRODUCT);
-			StringArray a = pp == null ? null : StringArray.getVString(xjdf.getNonEmpty(XJDFConstants.ContactRefs), null);
+			final ResourceHelper rh = ResourceHelper.getHelper(xjdf);
+			final VJDFAttributeMap vMap = rh == null ? null : rh.getPartMapVector();
+			final JDFAttributeMap map = vMap == null ? null : vMap.getCommonMap();
+			final String pp = map == null ? null : map.get(JDFConstants.PRODUCT);
+			final StringArray a = pp == null ? null : StringArray.getVString(xjdf.getNonEmpty(XJDFConstants.ContactRefs), null);
 			if (a != null)
 			{
-				SetHelper cs = newRootHelper.getSet(ElementName.CONTACT, null);
-				for (String id : a)
+				final SetHelper cs = newRootHelper.getSet(ElementName.CONTACT, null);
+				for (final String id : a)
 				{
-					ResourceHelper c = cs == null ? null : cs.getPartition(id);
+					final ResourceHelper c = cs == null ? null : cs.getPartition(id);
 					if (c != null)
 					{
 						c.ensurePart(JDFConstants.PRODUCT, pp);
@@ -2633,8 +2637,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param layoutMap
 		 * @return
 		 */
-		private JDFAttributeMap mergeStrippingParamsLayout(final JDFStrippingParams strippingParams, final SetHelper layoutseth,
-				final VJDFAttributeMap layoutMaps)
+		private JDFAttributeMap mergeStrippingParamsLayout(final JDFStrippingParams strippingParams, final SetHelper layoutseth, final VJDFAttributeMap layoutMaps)
 		{
 			final JDFAttributeMap layoutMap = VJDFAttributeMap.isEmpty(layoutMaps) ? null : layoutMaps.get(0);
 			if (isRemoveSignatureName() && layoutMap != null)
@@ -3020,8 +3023,8 @@ class PostXJDFWalker extends BaseElementWalker
 	@Override
 	public String toString()
 	{
-		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll="
-				+ retainAll + ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
+		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll
+				+ ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
 	}
 
 	void combineSameSets()

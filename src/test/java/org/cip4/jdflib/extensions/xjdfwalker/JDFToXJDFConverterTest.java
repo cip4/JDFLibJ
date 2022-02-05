@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -212,12 +212,12 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode n = createBaseProductNode();
-		JDFCustomerInfo ci = n.appendCustomerInfo();
+		final JDFCustomerInfo ci = n.appendCustomerInfo();
 		ci.setDescriptiveName("c");
 		ci.appendContact(EnumContactType.Customer).setDescriptiveName("cust");
 		ci.appendContact(EnumContactType.Delivery).setDescriptiveName("del");
-		KElement x = conv.convert(n);
-		XJDFHelper h = XJDFHelper.getHelper(x);
+		final KElement x = conv.convert(n);
+		final XJDFHelper h = XJDFHelper.getHelper(x);
 		assertNotNull(h.getSet(ElementName.CONTACT, null));
 	}
 
@@ -230,18 +230,18 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode n = createBaseProductNode();
-		JDFCustomerInfo ci = n.appendCustomerInfo();
+		final JDFCustomerInfo ci = n.appendCustomerInfo();
 		ci.setDescriptiveName("c");
-		JDFContact c1 = ci.appendContact(EnumContactType.Customer);
-		JDFPerson p1 = c1.appendPerson();
+		final JDFContact c1 = ci.appendContact(EnumContactType.Customer);
+		final JDFPerson p1 = c1.appendPerson();
 		p1.setFamilyName("F1");
 		p1.appendComChannel(EnumChannelType.Phone, "1234");
 		p1.appendAddress().setCity("city");
 		c1.setDescriptiveName("cust");
 		ci.appendContact(EnumContactType.Delivery).setDescriptiveName("del");
-		KElement x = conv.convert(n);
-		XJDFHelper h = XJDFHelper.getHelper(x);
-		SetHelper set = h.getSet(ElementName.CONTACT, null);
+		final KElement x = conv.convert(n);
+		final XJDFHelper h = XJDFHelper.getHelper(x);
+		final SetHelper set = h.getSet(ElementName.CONTACT, null);
 		assertNotNull(set);
 	}
 
@@ -256,20 +256,20 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFNode n = createBaseProductNode();
 		for (int i = 0; i < 2; i++)
 		{
-			JDFNode p = n.addProduct();
-			JDFComponent comp = (JDFComponent) p.addResource(ElementName.COMPONENT, EnumUsage.Output);
+			final JDFNode p = n.addProduct();
+			final JDFComponent comp = (JDFComponent) p.addResource(ElementName.COMPONENT, EnumUsage.Output);
 			comp.setComponentType(EnumComponentType.FinalProduct, null);
 
-			JDFCustomerInfo ci = p.appendCustomerInfo();
+			final JDFCustomerInfo ci = p.appendCustomerInfo();
 			ci.setDescriptiveName("c" + i);
 			ci.appendContact(EnumContactType.Customer).setDescriptiveName("cust" + i);
 			ci.appendContact(EnumContactType.Delivery).setDescriptiveName("del" + i);
 		}
-		KElement x = conv.convert(n);
-		XJDFHelper h = XJDFHelper.getHelper(x);
-		SetHelper set = h.getSet(ElementName.CONTACT, null);
+		final KElement x = conv.convert(n);
+		final XJDFHelper h = XJDFHelper.getHelper(x);
+		final SetHelper set = h.getSet(ElementName.CONTACT, null);
 		assertNotNull(set);
-		VJDFAttributeMap pv = set.getPartMapVector();
+		final VJDFAttributeMap pv = set.getPartMapVector();
 		pv.unify();
 		assertEquals(4, pv.size());
 	}
@@ -694,8 +694,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFLayout lo2 = (JDFLayout) lo.addPartition(EnumPartIDKey.SignatureName, "s2").addPartition(EnumPartIDKey.SheetName, "s2");
 
 		final JDFTransferCurvePool tcp = (JDFTransferCurvePool) n.addResource(ElementName.TRANSFERCURVEPOOL, null);
-		final JDFTransferCurvePool tcp1 = (JDFTransferCurvePool) tcp.addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName,
-				"s1");
+		final JDFTransferCurvePool tcp1 = (JDFTransferCurvePool) tcp.addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "s1");
 		final JDFTransferCurveSet tcs1 = tcp.appendTransferCurveSet();
 		tcs1.setName("Paper");
 		tcs1.setDescriptiveName("ddd");
@@ -703,8 +702,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		tc1.setCurve(new JDFTransferFunction("0 0 1 1"));
 		tc1.setSeparation("Cyan");
 
-		final JDFTransferCurvePool tcp2 = (JDFTransferCurvePool) tcp.addPartition(EnumPartIDKey.SignatureName, "s2").addPartition(EnumPartIDKey.SheetName,
-				"s2");
+		final JDFTransferCurvePool tcp2 = (JDFTransferCurvePool) tcp.addPartition(EnumPartIDKey.SignatureName, "s2").addPartition(EnumPartIDKey.SheetName, "s2");
 		final JDFTransferCurveSet tcs2 = tcp.appendTransferCurveSet();
 		tcs2.setName("Plate");
 		tcs2.setDescriptiveName("eee");
@@ -1034,7 +1032,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		conv.setParameterSet(true);
 		final KElement xjdf = conv.convert(n);
 		assertEquals(xjdf.getXPathAttribute("ParameterSet/Parameter/NodeInfo/@Status", null), "Cleanup");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/@DescriptiveName", null), "desc");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/@DescriptiveName", null), "desc");
 	}
 
 	/**
@@ -1606,6 +1604,22 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testResDescName()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFResource r1 = n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		r1.setDescriptiveName("c1");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/@DescriptiveName", null));
+		assertEquals("c1", xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@DescriptiveName", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testSourceRes()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -2069,8 +2083,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 		assertNotNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@ID", null));
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/ExposedMedia/@MediaRef", null),
-				xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@ID", null));
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/ExposedMedia/@MediaRef", null), xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@ID", null));
 	}
 
 	/**
@@ -2758,8 +2771,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
 		assertNull(new XJDFHelper(xjdf).getSet(ElementName.COILBINDINGPARAMS, 0));
 		assertNotNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
-		assertEquals("42", new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0).getPartition(0)
-				.getXPathValue("LooseBindingParams/CoilBindingDetails/@Diameter"));
+		assertEquals("42", new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0).getPartition(0).getXPathValue("LooseBindingParams/CoilBindingDetails/@Diameter"));
 	}
 
 	/**
