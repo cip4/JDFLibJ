@@ -1305,20 +1305,21 @@ class PostXJDFWalker extends BaseElementWalker
 		 */
 		void moveToSet(final KElement xjdf)
 		{
-			final KElement set = xjdf.getParentNode_KElement();
-			if (set != null && xjdf.hasNonEmpty(AttributeName.UNIT))
+			final KElement set = xjdf == null ? null : xjdf.getParentNode_KElement();
+			if (set != null)
 			{
-				set.moveAttribute(AttributeName.UNIT, xjdf);
+				if (xjdf.hasNonEmpty(AttributeName.UNIT))
+				{
+					set.moveAttribute(AttributeName.UNIT, xjdf);
+				}
+				final String desc = xjdf.getNonEmpty(AttributeName.DESCRIPTIVENAME);
+				final String setdesc = set.getNonEmpty(AttributeName.DESCRIPTIVENAME);
+				if (setdesc != null && StringUtil.equals(desc, setdesc))
+				{
+					set.removeAttribute(AttributeName.DESCRIPTIVENAME);
+				}
 			}
-			final String desc = xjdf.getNonEmpty(AttributeName.DESCRIPTIVENAME);
-			final String setdesc = set.getNonEmpty(AttributeName.DESCRIPTIVENAME);
-			if (setdesc != null && StringUtil.equals(desc, setdesc))
-			{
-				set.removeAttribute(AttributeName.DESCRIPTIVENAME);
-			}
-
 		}
-
 	}
 
 	/**

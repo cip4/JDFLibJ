@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -398,6 +398,27 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		w.walkTree(h.getRoot(), null);
 		assertEquals(EnumOrientation.Flip0.getName(), h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartition(0).getAttribute(AttributeName.ORIENTATION));
 		assertNull(h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getAttribute(AttributeName.ORIENTATION));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMoveToSet()
+	{
+		final XJDFHelper h = new XJDFHelper("a", null);
+		final SetHelper set = h.appendResourceSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+		set.getRoot().setAttribute(AttributeName.DESCRIPTIVENAME, "D1");
+		final ResourceHelper p = set.getCreatePartition(AttributeName.PARTVERSION, "P1", true);
+		p.setDescriptiveName("D1");
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		final org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResource walkResource = w.new WalkResource();
+		walkResource.moveToSet(p.getRoot());
+		walkResource.moveToSet(p.getRoot());
+		assertEquals("D1", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartition(0).getDescriptiveName());
+		assertNull(h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getDescriptiveName());
+		walkResource.moveToSet(KElement.createRoot(XJDFConstants.Resource, null));
+		walkResource.moveToSet(null);
 	}
 
 	/**
