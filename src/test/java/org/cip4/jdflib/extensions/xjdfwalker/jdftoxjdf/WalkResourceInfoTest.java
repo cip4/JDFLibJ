@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -71,6 +71,45 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 
 		assertEquals("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testTotalAmount()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		final JDFSignal sig = jmf.getSignal(0);
+		sig.appendResourceQuParams().setJobID("j1");
+		final JDFResourceInfo ri = sig.appendResourceInfo();
+		ri.setTotalAmount(42);
+
+		final KElement xjmf = new JDFToXJDF().convert(jmf);
+
+		assertEquals("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@TotalAmount", null));
+		assertEquals(null, xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
+		assertEquals("Job", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@Scope", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testResName()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		final JDFSignal sig = jmf.getSignal(0);
+		sig.appendResourceQuParams().setJobID("j1");
+		final JDFResourceInfo ri = sig.appendResourceInfo();
+		ri.setResourceName("Media");
+		ri.setTotalAmount(42);
+
+		final KElement xjmf = new JDFToXJDF().convert(jmf);
+
+		assertEquals("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@TotalAmount", null));
+		assertEquals("Media", xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/@Name", null));
+		assertEquals("Job", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@Scope", null));
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -190,7 +190,10 @@ public class WalkResourceInfo extends WalkJDFSubElement
 			if (ap == null)
 			{
 				// TODO use correct amounts
-				ph.setAmount(ri.getActualAmount(), null, true);
+				if (ri.hasNonEmpty(AttributeName.ACTUALAMOUNT))
+				{
+					ph.setAmount(ri.getActualAmount(), null, true);
+				}
 				if (newParts.size() == 1)
 				{
 					ph.getRoot().moveAttribute(XJDFConstants.ExternalID, ri);
@@ -232,12 +235,15 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		{
 			set = ri.appendElement(XJDFConstants.ResourceSet);
 			set.setAttribute(AttributeName.NAME, resName);
+			set.setAttribute(AttributeName.DESCRIPTIVENAME, resName);
 		}
 
 		set.moveAttribute(AttributeName.PROCESSUSAGE, ri);
 		set.moveAttribute(AttributeName.ORIENTATION, ri);
 		set.moveAttribute(AttributeName.UNIT, ri);
 		set.moveAttribute(AttributeName.USAGE, ri);
+		if (ri.hasNonEmpty(AttributeName.DESCRIPTIVENAME))
+			set.moveAttribute(AttributeName.DESCRIPTIVENAME, ri);
 		return set;
 	}
 
@@ -246,7 +252,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		final boolean hasScope = jdfRI.hasNonEmpty(AttributeName.SCOPE);
 		if (!hasScope)
 		{
-			final boolean isJobScope;
+			boolean isJobScope;
 			if (sh0 != null)
 			{
 				isJobScope = sh0.getAmountSum(true) <= 0;
@@ -255,6 +261,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 			{
 				isJobScope = jdfRI.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT, null) > 0;
 			}
+			isJobScope = isJobScope || jdfRI.getTotalAmount() > 0;
 			final String value = isJobScope ? "Job" : "Estimate";
 			ri.setAttribute(AttributeName.SCOPE, value);
 		}
@@ -303,8 +310,8 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	{
 		map.remove(AttributeName.ACTUALAMOUNT);
 		map.remove(AttributeName.AMOUNT);
+		map.remove(AttributeName.AVAILABLEAMOUNT);
 		map.remove(AttributeName.DEVICEID);
-		map.remove(AttributeName.LEVEL);
 		map.remove(AttributeName.LOTCONTROLLED);
 		map.remove(AttributeName.RESOURCEID);
 		map.remove(AttributeName.STATUS);
