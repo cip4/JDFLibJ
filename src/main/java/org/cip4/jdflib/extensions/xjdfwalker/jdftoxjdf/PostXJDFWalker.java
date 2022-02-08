@@ -2495,6 +2495,13 @@ class PostXJDFWalker extends BaseElementWalker
 				{
 					combineSameSets(sets);
 				}
+				for (final JDFResourceInfo ri : vr)
+				{
+					if (!ri.hasChildElement(XJDFConstants.ResourceSet, null))
+					{
+						ri.deleteNode();
+					}
+				}
 			}
 
 		}
