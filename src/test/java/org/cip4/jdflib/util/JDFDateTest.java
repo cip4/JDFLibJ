@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -116,6 +116,48 @@ public class JDFDateTest extends JDFTestCaseBase
 	public void testCreateDateBlank() throws DataFormatException
 	{
 		assertEquals(JDFDate.createDate("1999-09-26T 1:43:10+03:00"), JDFDate.createDate("1999-09-26T01:43:10+03:00"));
+	}
+
+	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
+	public void testCreateDateTZ30() throws DataFormatException
+	{
+		final JDFDate d = JDFDate.createDate("2022-09-26T 1:43:10+03:30");
+		final JDFDate d2 = JDFDate.createDate("2022-09-26T 1:13:10+03:00");
+		final long m = d.getTimeInMillis();
+		final long m2 = d2.getTimeInMillis();
+		assertEquals(m, m2);
+	}
+
+	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
+	public void testCreateDateTZ30Neg() throws DataFormatException
+	{
+		final JDFDate d = JDFDate.createDate("2022-09-26T 1:43:10-03:30");
+		final JDFDate d2 = JDFDate.createDate("2022-09-26T 2:13:10-03:00");
+		final long m = d.getTimeInMillis();
+		final long m2 = d2.getTimeInMillis();
+		assertEquals(m, m2);
+	}
+
+	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
+	public void testCreateDateTZ30N00() throws DataFormatException
+	{
+		final JDFDate d = JDFDate.createDate("2022-09-26T 1:43:10-00:30");
+		final JDFDate d2 = JDFDate.createDate("2022-09-26T 2:43:10+00:30");
+		final long m = d.getTimeInMillis();
+		final long m2 = d2.getTimeInMillis();
+		assertEquals(m, m2);
 	}
 
 	/**

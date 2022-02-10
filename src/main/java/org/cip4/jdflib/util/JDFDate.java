@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -649,8 +649,12 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			}
 			else
 			{
+				int minfac = 60000;
 				if (posMinus > posPlus)
+				{
 					posPlus = posMinus;
+					minfac = -minfac;
+				}
 
 				final String tzValue = strDateTime.substring(posPlus, posPlus + 3);
 				if (!StringUtil.isInteger(tzValue))
@@ -658,7 +662,14 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 					throw new DataFormatException("bad date time string: " + strDateTime);
 				}
 				final int parseInt = StringUtil.parseInt(tzValue, 0);
-				setTimeZoneOffsetInMillis(3600 * 1000 * parseInt);
+				int parseMin = 0;
+				if (strDateTime.length() >= posPlus + 6)
+				{
+					final String tzMinutes = strDateTime.substring(posPlus + 4, posPlus + 6);
+					parseMin = StringUtil.parseInt(tzMinutes, 0);
+				}
+
+				setTimeZoneOffsetInMillis(3600 * 1000 * parseInt + minfac * parseMin);
 			}
 		}
 
