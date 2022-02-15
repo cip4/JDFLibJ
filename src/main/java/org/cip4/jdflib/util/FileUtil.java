@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,6 +41,7 @@ package org.cip4.jdflib.util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -53,6 +54,7 @@ import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.channels.OverlappingFileLockException;
+import java.nio.charset.Charset;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -616,6 +618,18 @@ public class FileUtil
 	}
 
 	/**
+	 * @param s the String to read - if null nothing happens
+	 * @param fil the file to stream to
+	 * @return the file created by the stream, null if snafu
+	 */
+	public static File stringToFile(final String s, final File fil)
+	{
+		if (s == null || fil == null)
+			return null;
+		return streamToFile(new ByteArrayInputStream(s.getBytes()), fil);
+	}
+
+	/**
 	 * get an md5 from a file that reads at most 2*maxSize bytes of which maxSize are from the front and maxSize are from the back
 	 *
 	 * @param f
@@ -716,6 +730,20 @@ public class FileUtil
 	 * @param file the file to read into a byte array
 	 * @return the correctly sized byte array, null if no bytes were read
 	 */
+	public static String fileToString(final File file, Charset s)
+	{
+		final byte[] a = fileToByteArray(file);
+		if (s == null)
+			s = Charset.defaultCharset();
+		return a == null ? null : new String(a, s);
+	}
+
+	/**
+	 * read a file into a byte array
+	 *
+	 * @param file the file to read into a byte array
+	 * @return the correctly sized byte array, null if no bytes were read
+	 */
 	public static byte[] fileToByteArray(final File file)
 	{
 		if (file == null || !file.canRead())
@@ -787,7 +815,7 @@ public class FileUtil
 	 */
 	public static boolean moveFile(final File fromFile, final File toFile)
 	{
-		if (fromFile == null || toFile == null)
+		if (fromFile == null || toFile == null || !fromFile.exists())
 		{
 			return false;
 		}
@@ -802,6 +830,7 @@ public class FileUtil
 
 			getCreateDirectory(parentPath);
 		}
+		forceDelete(toFile, 2);
 		if (fromFile.renameTo(toFile))
 		{
 			return true;
@@ -1009,7 +1038,7 @@ public class FileUtil
 	 * @param # of 42 msec * loop loops to wait
 	 * @return true if the file no longer exists
 	 */
-	private static boolean forceDelete(final File file, final int loops, boolean recurse)
+	private static boolean forceDelete(final File file, final int loops, final boolean recurse)
 	{
 		if (file == null)
 		{

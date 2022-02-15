@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -57,6 +57,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -577,7 +578,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		final File f2 = new File(sm_dirTestDataTemp + "streamMove.dat");
 
 		assertTrue(FileUtil.moveFile(f2, f));
-		assertTrue(FileUtil.moveFile(new File("file://a"), new File("file://a")));
+		assertFalse(FileUtil.moveFile(new File("file://a"), new File("file://a")));
 	}
 
 	/**
@@ -699,9 +700,14 @@ public class FileUtilTest extends JDFTestCaseBase
 		os.flush();
 		os.close();
 		assertEquals(500000000l, fNew.length(), 10000);
+		final File fnewB = new File(sm_dirTestDataTemp + "Big3b.txt");
+		FileUtil.copyFile(fNew, fnewB);
 
 		final File copy = new File(sm_dirTestDataTemp + "Big4.txt");
 		assertTrue(FileUtil.moveFile(fNew, copy));
+		assertEquals(500000000l, copy.length(), 10000);
+
+		assertTrue(FileUtil.moveFile(fnewB, copy));
 		assertEquals(500000000l, copy.length(), 10000);
 
 		fNew.delete();
@@ -861,6 +867,29 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertTrue(f2.delete());
 		assertFalse(f.delete());
 		assertNull("null safe", FileUtil.streamToFile(null, sm_dirTestDataTemp + "stream2.dat"));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testStringToFile() throws Exception
+	{
+
+		final File f = new File(sm_dirTestDataTemp + "string.dat");
+		FileUtil.forceDelete(f);
+
+		final String s0 = "abcdefg";
+		FileUtil.stringToFile(s0, f);
+		assertTrue(f.exists());
+		assertEquals(f.length(), 7, 100);
+
+		final String s = FileUtil.fileToString(f, null);
+		assertEquals(s0, s);
+		final String s1 = FileUtil.fileToString(f, StandardCharsets.UTF_8);
+		assertEquals(s0, s1);
+		assertNull("null safe", FileUtil.stringToFile(null, new File(sm_dirTestDataTemp + "string2.dat")));
+		assertNull("null safe", FileUtil.fileToString(null, null));
 	}
 
 	/**
