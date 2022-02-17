@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -164,6 +164,7 @@ public class UrlPartTest extends JDFTestCaseBase
 	public void testRCOK() throws Exception
 	{
 		assertFalse(UrlPart.isReturnCodeOK(null));
+		assertFalse(UrlPart.isReturnCodeOK(new UrlPart(new File("certainly not there"))));
 		if (!isTestNetwork())
 			return;
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);

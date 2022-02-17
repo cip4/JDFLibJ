@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -400,6 +400,19 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertTrue(UrlUtil.isReturnCodeOK(200));
 		assertFalse(UrlUtil.isReturnCodeOK(420));
 		assertFalse(UrlUtil.isReturnCodeOK(20));
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	public void testIsReturnOKPart() throws IOException
+	{
+		final UrlPart p = new UrlPart(new File(sm_dirTestData + "url1.pdf"));
+		assertTrue(UrlUtil.isReturnCodeOK(p));
+		assertFalse(UrlUtil.isReturnCodeOK(new UrlPart(new File(""))));
+		assertFalse(UrlUtil.isReturnCodeOK(null));
 	}
 
 	/**

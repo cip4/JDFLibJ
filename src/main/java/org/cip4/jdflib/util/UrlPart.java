@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -164,7 +164,7 @@ public class UrlPart implements IPollDetails, IStreamWriter
 		}
 
 		connection = null;
-		rc = f == null ? 500 : 200;
+		rc = f == null ? 500 : inStream == null ? 404 : 200;
 		bufferStream = null;
 	}
 
@@ -247,8 +247,7 @@ public class UrlPart implements IPollDetails, IStreamWriter
 	@Override
 	public String toString()
 	{
-		return "URLPart: " + contentType + " length=" + contentLength + " rc=" + rc + " URL=" + url + "\n"
-				+ ((bufferStream == null) ? " <not buffered>" : bufferStream);
+		return "URLPart: " + contentType + " length=" + contentLength + " rc=" + rc + " URL=" + url + "\n" + ((bufferStream == null) ? " <not buffered>" : bufferStream);
 	}
 
 	/**
@@ -278,12 +277,12 @@ public class UrlPart implements IPollDetails, IStreamWriter
 		super.finalize();
 	}
 
-	public static boolean isReturnCodeOK(UrlPart p)
+	public static boolean isReturnCodeOK(final UrlPart p)
 	{
 		return UrlUtil.isReturnCodeOK(getReturnCode(p));
 	}
 
-	public static int getReturnCode(UrlPart p)
+	public static int getReturnCode(final UrlPart p)
 	{
 		return p == null ? -1 : p.getResponseCode();
 	}
