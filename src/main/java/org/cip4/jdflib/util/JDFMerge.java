@@ -321,7 +321,7 @@ public class JDFMerge
 			findSpawnAudit();
 	}
 
-	protected JDFSpawned findSpawnAudit()
+	JDFSpawned findSpawnAudit()
 	{
 		final String subJDFID = subJDFNode.getID();
 		final JDFAncestorPool ancestorPool = subJDFNode.getAncestorPool();
@@ -535,61 +535,71 @@ public class JDFMerge
 		final int siz = localChildren.size();
 		for (int i = 0; i < siz; i++)
 		{
-			final KElement e = localChildren.elementAt(i);
-			// skip all pools
-			final String nodeName = e.getLocalName();
-			if (nodeName.endsWith("Pool"))
-			{
-				if (nodeName.equals(ElementName.RESOURCELINKPOOL))
-				{
-					continue;
-				}
-				if (nodeName.equals(ElementName.RESOURCEPOOL))
-				{
-					continue;
-				}
-				if (nodeName.equals(ElementName.AUDITPOOL))
-				{
-					mergeAuditPool(overwriteLocalNode, toMergeLocalNode, false);
-					continue;
-				}
-				if (nodeName.equals(ElementName.STATUSPOOL))
-				{
-					mergeStatusPool(overwriteLocalNode, toMergeLocalNode, parts);
-					continue;
-				}
-				if (nodeName.equals(ElementName.ANCESTORPOOL))
-				{
-					continue;
-				}
-			}
+			mergeLocalElement(overwriteLocalNode, toMergeLocalNode, localChildren, siz, i);
+		}
+	}
 
-			// 131204 RP also skip all sub-JDF nodes!!!
-			if (ElementName.JDF.equals(nodeName))
+	void mergeLocalElement(final JDFNode overwriteLocalNode, final JDFNode toMergeLocalNode, final VElement localChildren, final int siz, final int i)
+	{
+		final KElement e = localChildren.elementAt(i);
+		// skip all pools
+		final String nodeName = e.getLocalName();
+		if (nodeName.endsWith("Pool"))
+		{
+			if (nodeName.equals(ElementName.RESOURCELINKPOOL))
 			{
-				continue;
+				return;
 			}
-			// 050708 RP special handling for comments
-			if (ElementName.COMMENT.equals(nodeName))
+			if (nodeName.equals(ElementName.RESOURCEPOOL))
 			{
-				mergeComments(overwriteLocalNode, toMergeLocalNode);
-				continue;
+				return;
 			}
-
-			toMergeLocalNode.removeChildren(nodeName, null, null);
-			toMergeLocalNode.moveElement(e, null);
-
-			// repeat in case of multiple identical elements (e.g. comments)
-			for (int j = i + 1; j < siz; j++)
+			if (nodeName.equals(ElementName.AUDITPOOL))
 			{
-				final JDFElement localChild = (JDFElement) localChildren.elementAt(j);
-				if (localChild != null)
+				mergeAuditPool(overwriteLocalNode, toMergeLocalNode, false);
+				return;
+			}
+			if (nodeName.equals(ElementName.STATUSPOOL))
+			{
+				mergeStatusPool(overwriteLocalNode, toMergeLocalNode, parts);
+				return;
+			}
+			if (nodeName.equals(ElementName.ANCESTORPOOL))
+			{
+				return;
+			}
+		}
+
+		// 131204 RP also skip all sub-JDF nodes!!!
+		if (ElementName.JDF.equals(nodeName))
+		{
+			return;
+		}
+		// 050708 RP special handling for comments
+		if (ElementName.COMMENT.equals(nodeName))
+		{
+			mergeComments(overwriteLocalNode, toMergeLocalNode);
+			return;
+		}
+
+		toMergeLocalNode.removeChildren(nodeName, null, null);
+		toMergeLocalNode.moveElement(e, null);
+
+		recurseLocalElement(toMergeLocalNode, localChildren, siz, i, nodeName);
+	}
+
+	void recurseLocalElement(final JDFNode toMergeLocalNode, final VElement localChildren, final int siz, final int i, final String nodeName)
+	{
+		// repeat in case of multiple identical elements (e.g. comments)
+		for (int j = i + 1; j < siz; j++)
+		{
+			final JDFElement localChild = (JDFElement) localChildren.elementAt(j);
+			if (localChild != null)
+			{
+				if (localChild.getNodeName().equals(nodeName))
 				{
-					if (localChild.getNodeName().equals(nodeName))
-					{
-						toMergeLocalNode.moveElement(localChild, null);
-						localChildren.set(j, null);
-					}
+					toMergeLocalNode.moveElement(localChild, null);
+					localChildren.set(j, null);
 				}
 			}
 		}
@@ -879,30 +889,35 @@ public class JDFMerge
 			array[1] = m_ParentNode;
 			for (final JDFNode nParent : array)
 			{
-				final VElement v = nParent.getvJDFNode(null, null, false);
-				for (int i = 0; i < v.size(); i++)
+				prePareNewSpawnMap(nParent);
+			}
+		}
+		return newSpawnMap;
+	}
+
+	void prePareNewSpawnMap(final JDFNode nParent)
+	{
+		final VElement v = nParent.getvJDFNode(null, null, false);
+		for (int i = 0; i < v.size(); i++)
+		{
+			final JDFNode n = (JDFNode) v.get(i);
+			final JDFAuditPool ap = n.getAuditPool();
+			final VElement v2 = ap == null ? null : ap.getAudits(EnumAuditType.Spawned, null, null);
+			if (v2 != null)
+			{
+				// JDFSpawned s=(JDFSpawned) v.get(i);
+				final int siz = v2.size();
+				for (int j = 0; j < siz; j++)
 				{
-					final JDFNode n = (JDFNode) v.get(i);
-					final JDFAuditPool ap = n.getAuditPool();
-					final VElement v2 = ap == null ? null : ap.getAudits(EnumAuditType.Spawned, null, null);
-					if (v2 != null)
+					final JDFSpawned s = (JDFSpawned) v2.get(j);
+					final String nsID = s.getNewSpawnID();
+					if (!KElement.isWildCard(nsID))
 					{
-						// JDFSpawned s=(JDFSpawned) v.get(i);
-						final int siz = v2.size();
-						for (int j = 0; j < siz; j++)
-						{
-							final JDFSpawned s = (JDFSpawned) v2.get(j);
-							final String nsID = s.getNewSpawnID();
-							if (!KElement.isWildCard(nsID))
-							{
-								newSpawnMap.put(nsID, s);
-							}
-						}
+						newSpawnMap.put(nsID, s);
 					}
 				}
 			}
 		}
-		return newSpawnMap;
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -941,7 +956,6 @@ public class JDFMerge
 			throw new JDFException("mergeMainPools - corrupt audit structure; no Spawn Audit found");
 		}
 
-		// JDFNode overWriteParent=ap.getParentJDF();
 		final VString vs = new VString();
 		final Iterator<String> it = vsRW.iterator();
 		while (it.hasNext())
@@ -961,7 +975,7 @@ public class JDFMerge
 
 		// cleanup
 		subJDFNode.removeChild(ElementName.ANCESTORPOOL, null, 0);
-		if (parts != null && parts.size() >= 1)
+		if (!ContainerUtil.isEmpty(parts))
 		{
 			mergeStatusPool(overWriteNode, subJDFNode, parts);
 			// handle ancestor pools only in partitioned spawns
@@ -1567,40 +1581,45 @@ public class JDFMerge
 					vSpawned.add(a);
 				}
 			}
-			for (int i = vMerged.size() - 1; i >= 0; i--)
+			cleanSpawnRefs(pool, vMerged, vSpawned);
+		}
+	}
+
+	void cleanSpawnRefs(final JDFAuditPool pool, final VElement vMerged, final VElement vSpawned)
+	{
+		for (int i = vMerged.size() - 1; i >= 0; i--)
+		{
+			final JDFMerged merged = (JDFMerged) vMerged.elementAt(i);
+			final String mergeID = merged.getMergeID();
+			final KElement doubleSpawn = pool.getChildWithAttribute(ElementName.SPAWNED, AttributeName.SPAWNID, null, mergeID, 0, true);
+			if (doubleSpawn != null)
 			{
-				final JDFMerged merged = (JDFMerged) vMerged.elementAt(i);
-				final String mergeID = merged.getMergeID();
-				final KElement doubleSpawn = pool.getChildWithAttribute(ElementName.SPAWNED, AttributeName.SPAWNID, null, mergeID, 0, true);
-				if (doubleSpawn != null)
-				{
-					continue; // skip cleanup in case spawned audits rely on
-					// this
-				}
+				continue; // skip cleanup in case spawned audits rely on
+				// this
+			}
 
-				for (int j = vSpawned.size() - 1; j >= 0; j--)
+			for (int j = vSpawned.size() - 1; j >= 0; j--)
+			{
+				final JDFSpawned spawned = (JDFSpawned) vSpawned.elementAt(i);
+				if (spawned.getNewSpawnID().equals(mergeID))
 				{
-					final JDFSpawned spawned = (JDFSpawned) vSpawned.elementAt(i);
-					if (spawned.getNewSpawnID().equals(mergeID))
+
+					if (cleanPolicy == JDFNode.EnumCleanUpMerge.RemoveAll)
 					{
-
-						if (cleanPolicy == JDFNode.EnumCleanUpMerge.RemoveAll)
-						{
-							spawned.deleteNode();
-							merged.deleteNode();
-							vSpawned.remove(j);
-						}
-						else if (cleanPolicy == JDFNode.EnumCleanUpMerge.RemoveRRefs)
-						{
-							spawned.removeAttribute(AttributeName.RREFSRWCOPIED);
-							spawned.removeAttribute(AttributeName.RREFSROCOPIED);
-							merged.removeAttribute(AttributeName.RREFSOVERWRITTEN);
-						}
-						else
-						{
-							// never get here
-							throw new JDFException("JDFNode.EnumCleanUpMerge: illegal cleanPolicy enumeration: " + cleanPolicy.getValue());
-						}
+						spawned.deleteNode();
+						merged.deleteNode();
+						vSpawned.remove(j);
+					}
+					else if (cleanPolicy == JDFNode.EnumCleanUpMerge.RemoveRRefs)
+					{
+						spawned.removeAttribute(AttributeName.RREFSRWCOPIED);
+						spawned.removeAttribute(AttributeName.RREFSROCOPIED);
+						merged.removeAttribute(AttributeName.RREFSOVERWRITTEN);
+					}
+					else
+					{
+						// never get here
+						throw new JDFException("JDFNode.EnumCleanUpMerge: illegal cleanPolicy enumeration: " + cleanPolicy.getValue());
 					}
 				}
 			}
