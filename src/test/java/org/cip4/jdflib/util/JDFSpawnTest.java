@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -883,8 +883,14 @@ public class JDFSpawnTest extends JDFTestCaseBase
 						assertTrue("spawnID RW not gone", nRoot.toString().indexOf(spawnIDRW) >= 0);
 						xm = (JDFExposedMedia) n.getMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.AnyInput, null, 0);
 						xmPart = (JDFExposedMedia) xm.getPartition(map, null);
-						assertEquals(i + " " + j, xmPart.getSpawnStatus(), j == 0 || j == 1 || j == 3 ? EnumSpawnStatus.SpawnedRW : EnumSpawnStatus.NotSpawned);
-
+						if (j == 1)
+						{
+							assertEquals(i + " " + j, EnumSpawnStatus.SpawnedRO, xmPart.getSpawnStatus());
+						}
+						else
+						{
+							assertEquals(i + " " + j, xmPart.getSpawnStatus(), j == 0 || j == 3 ? EnumSpawnStatus.SpawnedRW : EnumSpawnStatus.NotSpawned);
+						}
 						// merge and immediately respawn the same thing
 						n = new JDFMerge(nRoot).mergeJDF(s2, null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
 						assertTrue("spawnID gone " + i + " " + j + " " + k + " " + kk, nRoot.toString().indexOf(spawnIDRW) < 0);
@@ -2217,8 +2223,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFAuditPool auditPoolMerged = jobPart.getAuditPool();
 			if (i == 0)
 			{
-				assertEquals(((JDFProcessRun) auditPoolMerged.getAudit(0, EnumAuditType.ProcessRun, null, null)).getSubmissionTime(),
-						n.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null).getTimeStamp());
+				assertEquals(((JDFProcessRun) auditPoolMerged.getAudit(0, EnumAuditType.ProcessRun, null, null)).getSubmissionTime(), n.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null).getTimeStamp());
 			}
 			assertNotNull(auditPoolMerged.getAudit(3, EnumAuditType.Notification, null, null));
 			assertNull(auditPoolMerged.getAudit(4, EnumAuditType.Notification, null, null));
@@ -3050,8 +3055,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				assertTrue(nodeRoot.toString().indexOf(spawnID) < 0);
 				final long t2 = System.currentTimeMillis();
 				tMerge += (t2 - t11);
-				log.info("j= " + j + " i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID + " time Spawn: " + (t1 - t0) + " time Write: " + (t11 - t1) + " time Merge: " + (t2 - t11) + " / "
-						+ tMerge + " total " + (t2 - t00));
+				log.info("j= " + j + " i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID + " time Spawn: " + (t1 - t0) + " time Write: " + (t11 - t1) + " time Merge: "
+						+ (t2 - t11) + " / " + tMerge + " total " + (t2 - t00));
 				t0 = t2;
 			}
 			jdfDoc.write2File(sm_dirTestDataTemp + "bigMainMany.jdf", 2, true);
@@ -4238,8 +4243,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFParser p = new JDFParser();
 		m_jdfDoc = p.parseFile(sm_dirTestDataTemp + m_xmlFile1);
 
-		assertNotNull(sm_dirTestDataTemp + m_xmlFile1 + ": Parse Error\n" + "MergeJDF: JDF merger simulation;\n" + "Arguments: 1=parent input JDF, 2=child input JDF;\n" + "-o: output JDF;\n"
-				+ "-d: delete completed tasks from the output JDF\n", m_jdfDoc);
+		assertNotNull(sm_dirTestDataTemp + m_xmlFile1 + ": Parse Error\n" + "MergeJDF: JDF merger simulation;\n" + "Arguments: 1=parent input JDF, 2=child input JDF;\n"
+				+ "-o: output JDF;\n" + "-d: delete completed tasks from the output JDF\n", m_jdfDoc);
 
 		final JDFParser p2 = new JDFParser();
 		m_jdfDoc2 = p2.parseFile(sm_dirTestDataTemp + m_xmlFile2);
@@ -4276,7 +4281,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	public void testCleanupMerge()
 	{
 		final List<EnumCleanUpMerge> l = EnumCleanUpMerge.getEnumList();
-		for (int i = 0; i < l.size(); i++)
+		for (final EnumCleanUpMerge cm : l)
 		{
 			final JDFDoc doc = new JDFDoc("JDF");
 			final JDFNode node = doc.getJDFRoot();
@@ -4288,7 +4293,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFSpawned auditSpawn = (JDFSpawned) node.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null);
 			assertNotNull(auditSpawn);
 			assertTrue(auditSpawn.getrRefsROCopied().contains(r.getID()));
-			final EnumCleanUpMerge cm = l.get(i);
 			new JDFMerge(node).mergeJDF(spn, null, cm, JDFResource.EnumAmountMerge.None);
 			final JDFSpawned auditSpawn2 = (JDFSpawned) node.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null);
 			final JDFMerged mergeSpawn2 = (JDFMerged) node.getAuditPool().getAudit(0, EnumAuditType.Merged, null, null);
