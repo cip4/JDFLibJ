@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -105,7 +105,12 @@ public class ColdFolderTest extends JDFTestCaseBase
 			final File file = new File(cfd, "f1.txt");
 			file.createNewFile();
 			assertTrue(file.exists());
-			ThreadUtil.sleep(2345);
+			for (int j = 0; j < 1234; j++)
+			{
+				ThreadUtil.sleep(12);
+				if (1 + i == listener.getN())
+					break;
+			}
 			assertTrue(file.exists());
 			assertEquals(1 + i, listener.getN());
 			file.delete();
