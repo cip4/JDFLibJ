@@ -459,14 +459,14 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 * andMap - builds a new map with identical pairs of both maps does not modify this
+	 * orMap - builds a new map with identical pairs of both maps does not modify this
 	 *
 	 * @param subMap the given map
 	 * @return the ored map, null if mismatches occurred
 	 */
 	public JDFAttributeMap getOrMap(final JDFAttributeMap subMap)
 	{
-		if (subMap == null || subMap.size() == 0)
+		if (ContainerUtil.isEmpty(subMap))
 		{
 			return new JDFAttributeMap(this);
 		}
@@ -478,7 +478,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 			final String subVal = subMap.get(key);
 			if (subVal == null || subVal.equals(val))
 			{
-				newMap.put(key, val);
+				newMap.putNotNull(key, val);
 			}
 			else
 			{
