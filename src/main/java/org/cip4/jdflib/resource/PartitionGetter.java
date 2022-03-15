@@ -1109,6 +1109,8 @@ public class PartitionGetter
 	{
 		if (vPartIDKeys == null)
 			vPartIDKeys = resourceRoot.getPartIDKeys();
+		if (next == null)
+			return false;
 		return lastPos(next, vPartIDKeys, false) > next.size() - 1;
 	}
 
@@ -1121,7 +1123,7 @@ public class PartitionGetter
 	int lastPos(final JDFAttributeMap next, final List<String> vPartIDKeys, final boolean newIsGap)
 	{
 		int last = -1;
-		if (vPartIDKeys != null)
+		if (vPartIDKeys != null && next != null)
 		{
 			final Set<String> keys = next.keySet();
 			for (final String pik : keys)
