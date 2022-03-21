@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -42,6 +42,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
@@ -97,7 +98,7 @@ public class WalkModuleStatus extends WalkJDFSubElement
 		final boolean needCopy = ds == null || (dsi != null ? dsi.equals(ds) : bModuleIdle == bPhaseeIdle);
 		if (needCopy)
 		{
-			String id = StringUtil.getNonEmpty(ms.getModuleID());
+			final String id = StringUtil.getNonEmpty(ms.getModuleID());
 			if (id != null && xjdf != null)
 			{
 				xjdf.appendAttribute(XJDFConstants.ModuleIDs, id, null, null, true);
@@ -107,11 +108,12 @@ public class WalkModuleStatus extends WalkJDFSubElement
 				final JDFIntegerRangeList index = ms.getModuleIndex();
 				if (index != null && xjdf != null)
 				{
-					final int size = index.size();
+					final JDFIntegerList il = index.getIntegerList();
+					il.unify();
+					final int size = il.size();
 					for (int i = 0; i < size; i++)
 					{
-						id = JDFConstants.EMPTYSTRING + index.getElement(i);
-						xjdf.appendAttribute(XJDFConstants.ModuleIDs, id, null, null, true);
+						xjdf.appendAttribute(XJDFConstants.ModuleIDs, JDFConstants.EMPTYSTRING + il.getInt(i), null, null, true);
 					}
 				}
 			}

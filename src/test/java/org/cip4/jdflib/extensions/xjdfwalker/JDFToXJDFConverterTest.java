@@ -1430,6 +1430,23 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testDeviceInfoModuleStatusSkip()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
+		di.appendDevice().setDeviceID("id");
+		di.setDeviceStatus(EnumDeviceStatus.Running);
+		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 0 }));
+		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 4, 6 }));
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@ModuleIDs", null), "0 4 6");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testJMFEmployee()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.PipeClose);
