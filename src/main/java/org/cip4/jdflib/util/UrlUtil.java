@@ -81,6 +81,16 @@ import org.cip4.jdflib.util.mime.MimeHelper;
  */
 public class UrlUtil
 {
+	private static final String SLASHSLASH = "//";
+
+	private static final String FILE = "file:";
+
+	private static final String FTP = "ftp:";
+
+	private static final String HTTPS = "https:";
+
+	private static final String HTTP = "http:";
+
 	public static final int MAX_STREAM = 12345678;
 
 	private static Log log = LogFactory.getLog(UrlUtil.class);
@@ -602,7 +612,7 @@ public class UrlUtil
 			s = "///" + s;
 		}
 
-		return "file:" + s;
+		return FILE + s;
 	}
 
 	/**
@@ -742,7 +752,7 @@ public class UrlUtil
 		}
 		String url = StringUtil.replaceCharSet(unc, "\\", "/", 0);
 		url = escape(url, escape128, false);
-		return "file:" + url;
+		return FILE + url;
 	}
 
 	/**
@@ -1094,7 +1104,7 @@ public class UrlUtil
 	{
 		if (url == null)
 			return false;
-		return url.toLowerCase().startsWith("file:");
+		return url.toLowerCase().startsWith(FILE);
 	}
 
 	/**
@@ -1127,7 +1137,7 @@ public class UrlUtil
 			return false;
 		}
 		final String lowerURL = url.toLowerCase();
-		return lowerURL.startsWith("http://");
+		return lowerURL.startsWith(HTTP);
 	}
 
 	/**
@@ -1143,7 +1153,7 @@ public class UrlUtil
 			return false;
 		}
 		final String lowerURL = url.toLowerCase();
-		return lowerURL.startsWith("ftp://");
+		return lowerURL.startsWith(FTP);
 	}
 
 	/**
@@ -1159,7 +1169,7 @@ public class UrlUtil
 			return false;
 		}
 		final String lowerURL = url.toLowerCase();
-		return lowerURL.startsWith("https://");
+		return lowerURL.startsWith(HTTPS);
 	}
 
 	/**
@@ -1175,7 +1185,7 @@ public class UrlUtil
 			return false;
 		}
 		final String lowerURL = url.toLowerCase();
-		return lowerURL.startsWith("http://") || lowerURL.startsWith("https://") || lowerURL.startsWith("ftp://");
+		return lowerURL.startsWith(HTTP) || lowerURL.startsWith(HTTPS) || lowerURL.startsWith(FTP);
 	}
 
 	/**
@@ -1192,7 +1202,7 @@ public class UrlUtil
 		}
 		else if (UrlUtil.isFile(urlString))
 		{
-			urlString = "file:" + urlString.substring(5);
+			urlString = FILE + urlString.substring(5);
 			urlString = UrlUtil.unEscape(urlString);
 			urlString = UrlUtil.escape(urlString, false, false);
 		}
@@ -1350,7 +1360,7 @@ public class UrlUtil
 	}
 
 	/**
-	 * remove athe protocol part of a url, if it is specified
+	 * remove the protocol part of a url, if it is specified
 	 *
 	 * @param url the url string to work on
 	 * @return the input string without the protocol and ":"
@@ -1581,16 +1591,16 @@ public class UrlUtil
 		String protocol = v.get(0);
 		if (!protocol.startsWith("http"))
 		{
-			protocol = "http://";
+			protocol = HTTP + SLASHSLASH;
 		}
 		else if (protocol.startsWith("https"))
 		{
-			protocol = "https://";
+			protocol = HTTPS + SLASHSLASH;
 			v.remove(0);
 		}
 		else
 		{
-			protocol = "http://";
+			protocol = HTTP + SLASHSLASH;
 			v.remove(0);
 		}
 		return StringUtil.setvString(v, "/", protocol, null);
