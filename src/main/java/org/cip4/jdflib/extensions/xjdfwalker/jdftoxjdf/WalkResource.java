@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -72,6 +72,8 @@ public class WalkResource extends WalkJDFElement
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final JDFResource r = (JDFResource) jdf;
+		if (r.getNoOp())
+			return null;
 		final KElement newResLeaf = super.walk(jdf, xjdf);
 
 		if (newResLeaf != null)
@@ -103,6 +105,13 @@ public class WalkResource extends WalkJDFElement
 			map.remove(AttributeName.RUNTAG);
 			map.remove(AttributeName.AMOUNTPRODUCED);
 			map.remove(AttributeName.AMOUNTREQUIRED);
+			map.remove(AttributeName.CLASS);
+			map.remove(AttributeName.PARTUSAGE);
+			map.remove(AttributeName.LOCKED);
+			map.remove(AttributeName.MINSTATUS);
+			map.remove(AttributeName.NOOP);
+			map.remove(AttributeName.SPAWNSTATUS);
+			map.remove(AttributeName.SPAWNIDS);
 		}
 		super.updateAttributes(map);
 	}
@@ -166,13 +175,6 @@ public class WalkResource extends WalkJDFElement
 	private void removeDeprecatedResourceAttribs(final JDFResource r, final KElement newResLeaf)
 	{
 		newResLeaf.removeAttributes(r.getPartIDKeys());
-		newResLeaf.removeAttribute(AttributeName.CLASS);
-		newResLeaf.removeAttribute(AttributeName.PARTUSAGE);
-		newResLeaf.removeAttribute(AttributeName.LOCKED);
-		newResLeaf.removeAttribute(AttributeName.MINSTATUS);
-		newResLeaf.removeAttribute(AttributeName.NOOP);
-		newResLeaf.removeAttribute(AttributeName.SPAWNSTATUS);
-		newResLeaf.removeAttribute(AttributeName.SPAWNIDS);
 		newResLeaf.removeAttribute(AttributeName.PARTIDKEYS);
 	}
 

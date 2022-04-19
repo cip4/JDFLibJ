@@ -2709,6 +2709,25 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
+	public void testCoilBindingParamsNOP()
+	{
+		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.CoilBinding);
+		final JDFCoilBindingParams cbp = (JDFCoilBindingParams) node.getCreateResource(ElementName.COILBINDINGPARAMS, EnumUsage.Input, null);
+		cbp.setColor(EnumNamedColor.Red);
+		cbp.setNoOp(true);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(node);
+		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
+		assertNull(new XJDFHelper(xjdf).getSet(ElementName.COILBINDINGPARAMS, 0));
+		assertNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Test
 	public void testCoilBindingMisc()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
