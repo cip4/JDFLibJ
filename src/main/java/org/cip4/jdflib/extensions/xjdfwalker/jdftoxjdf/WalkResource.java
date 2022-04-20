@@ -105,7 +105,6 @@ public class WalkResource extends WalkJDFElement
 			map.remove(AttributeName.RUNTAG);
 			map.remove(AttributeName.AMOUNTPRODUCED);
 			map.remove(AttributeName.AMOUNTREQUIRED);
-			map.remove(AttributeName.CLASS);
 			map.remove(AttributeName.PARTUSAGE);
 			map.remove(AttributeName.LOCKED);
 			map.remove(AttributeName.MINSTATUS);
@@ -176,6 +175,7 @@ public class WalkResource extends WalkJDFElement
 	{
 		newResLeaf.removeAttributes(r.getPartIDKeys());
 		newResLeaf.removeAttribute(AttributeName.PARTIDKEYS);
+		newResLeaf.removeAttribute(AttributeName.CLASS);
 	}
 
 	/**
