@@ -106,11 +106,8 @@ public class WalkResource extends WalkJDFElement
 			map.remove(AttributeName.AMOUNTPRODUCED);
 			map.remove(AttributeName.AMOUNTREQUIRED);
 			map.remove(AttributeName.PARTUSAGE);
-			map.remove(AttributeName.LOCKED);
 			map.remove(AttributeName.MINSTATUS);
 			map.remove(AttributeName.NOOP);
-			map.remove(AttributeName.SPAWNSTATUS);
-			map.remove(AttributeName.SPAWNIDS);
 		}
 		super.updateAttributes(map);
 	}
@@ -176,6 +173,9 @@ public class WalkResource extends WalkJDFElement
 		newResLeaf.removeAttributes(r.getPartIDKeys());
 		newResLeaf.removeAttribute(AttributeName.PARTIDKEYS);
 		newResLeaf.removeAttribute(AttributeName.CLASS);
+		newResLeaf.removeAttribute(AttributeName.LOCKED);
+		newResLeaf.removeAttribute(AttributeName.SPAWNIDS);
+		newResLeaf.removeAttribute(AttributeName.SPAWNSTATUS);
 	}
 
 	/**
