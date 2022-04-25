@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1052,7 +1052,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final String out = sm_dirTestDataTemp + "foo %20bar/fnarf.xml";
-		final File f = UrlUtil.urlToFile(out);
+		final File f = new File(out);
 		f.delete();
 		assertTrue(d.write2File(out, 2, true));
 		assertTrue(f.exists());

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -395,9 +395,10 @@ public class XMLDoc implements Cloneable
 	}
 
 	/**
-	 * write2File - write to a file; Create if it doesn't exist always assume utf-8 encoding
+	 * write2File - write to a file; Create if it doesn't exist
+	 * DO NOT attempt any url escaping voodoo @see write2URL
 	 *
-	 * @param oFilePath where to write the file
+	 * @param oFilePath the file path where to write the file
 	 * @param indent indentation
 	 * @param bPreserveSpace if true, preserve whitespace
 	 *
@@ -418,7 +419,7 @@ public class XMLDoc implements Cloneable
 			return false;
 		}
 
-		return write2File(UrlUtil.urlToFile(oFilePath), indent, bPreserveSpace);
+		return write2File(new File(oFilePath), indent, bPreserveSpace);
 	}
 
 	/**
