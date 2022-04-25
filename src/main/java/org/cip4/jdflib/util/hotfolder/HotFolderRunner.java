@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -57,6 +57,7 @@ class HotFolderRunner extends Thread
 	MyMutex mutex;
 	private static Log log = LogFactory.getLog(HotFolderRunner.class);
 	static final AtomicReference<HotFolderRunner> theRunner = new AtomicReference<>(null);
+	int ran;
 
 	public static void shutDown()
 	{
@@ -116,6 +117,7 @@ class HotFolderRunner extends Thread
 		log.info("Starting hotfolder runner thread");
 		interrupt = new AtomicBoolean(false);
 		mutex = new MyMutex();
+		ran = 0;
 		setMaxConcurrent(1);
 		start();
 	}
@@ -226,6 +228,7 @@ class HotFolderRunner extends Thread
 
 	boolean runFile(final HotFileRunner runner)
 	{
+		ran++;
 		if (getMaxConcurrent() == 1)
 		{
 			runner.run();
@@ -233,6 +236,10 @@ class HotFolderRunner extends Thread
 		else
 		{
 			final MultiTaskQueue taskQueue = MultiTaskQueue.getCreateQueue(getName(), getMaxConcurrent());
+			if (ran % 100 == 0 && taskQueue.size() > 2 * getMaxConcurrent())
+			{
+				log.info("Queueing into full hf queue; size=" + taskQueue.size());
+			}
 			return taskQueue.queue(runner);
 		}
 		return true;
