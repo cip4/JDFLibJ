@@ -72,11 +72,35 @@ public class HotFolderTest extends JDFTestCaseBase
 	{
 		protected boolean bZapp;
 		int n;
+		int sleep;
+
+		/**
+		 * @return the sleep
+		 */
+		int getSleep()
+		{
+			return sleep;
+		}
+
+		/**
+		 * @param sleep the sleep to set
+		 */
+		void setSleep(final int sleep)
+		{
+			this.sleep = sleep;
+		}
 
 		protected MyListener(final boolean _bZapp)
 		{
 			bZapp = _bZapp;
 			n = 0;
+			sleep = 0;
+		}
+
+		public MyListener(final boolean b, final int slp)
+		{
+			this(b);
+			sleep = slp;
 		}
 
 		/**
@@ -89,6 +113,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			if (bZapp)
 				zapp = hotFile.delete();
 			n++;
+			ThreadUtil.sleep(sleep);
 			return zapp;
 		}
 
@@ -480,18 +505,17 @@ public class HotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testLogMulti() throws Exception
 	{
-		hf = new HotFolder(theHF, ".txt", new MyListener(true));
-		hf.setMaxConcurrent(5);
+		hf = new HotFolder(theHF, ".txt", new MyListener(true, 10));
+		hf.setMaxConcurrent(2);
 		final File backup = new File(sm_dirTestDataTemp + "backup/hfbackup.keep");
 		FileUtil.deleteAll(backup.getParentFile());
 
-		hf.restart();
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i <= 123; i++)
 		{
 			final File file = new File(theHF + File.separator + "f" + i + ".txt");
 			file.createNewFile();
 		}
-		final File file1 = new File(theHF + File.separator + "f1.txt");
+		final File file1 = new File(theHF + File.separator + "f123.txt");
 
 		for (int i = 0; i < 1500 && file1.exists(); i++)
 		{

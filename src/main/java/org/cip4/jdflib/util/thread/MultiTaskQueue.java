@@ -304,4 +304,13 @@ public class MultiTaskQueue extends OrderedTaskQueue
 		return executor == null ? 0 : executor.getActiveCount();
 	}
 
+	/**
+	 * @see org.cip4.jdflib.util.thread.OrderedTaskQueue#size()
+	 */
+	@Override
+	public int size()
+	{
+		return super.size() + current.size();
+	}
+
 }

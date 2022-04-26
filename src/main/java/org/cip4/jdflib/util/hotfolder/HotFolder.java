@@ -310,6 +310,7 @@ public class HotFolder
 	 */
 	public synchronized void restart()
 	{
+		final int mc = getMaxConcurrent();
 		stop();
 		if (dir.canWrite())
 		{
@@ -321,6 +322,7 @@ public class HotFolder
 		}
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
 		r.add(this);
+		setMaxConcurrent(mc);
 		lastModified = -1;
 		hfRunning.clear();
 	}
