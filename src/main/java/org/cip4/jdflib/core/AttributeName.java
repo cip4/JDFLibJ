@@ -289,6 +289,8 @@ public final class AttributeName
 	public static final String BACKING = "Backing";
 	public static final String BACKISOPAPERSUBSTRATE = "BackISOPaperSubstrate";
 	public static final String BACKLABCOLORVALUE = "BackLabColorValue";
+	@Deprecated
+	public static final String BACKLABCOLORVALUEE = BACKLABCOLORVALUE;
 	public static final String BACKMARKLIST = "BackMarkList";
 	public static final String BACKOVERFOLD = "BackOverfold";
 	public static final String BACKPAGES = "BackPages";
