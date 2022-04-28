@@ -10,7 +10,7 @@ plugins {
 
 group = 'org.cip4.lib.jdf'
 description = 'CIP4 JDF Writer Java'
-version = project.hasProperty('projectVersion') ? project.projectVersion : '0.x-SNAPSHOT'
+version = project.hasProperty('projectVersion') ? project.projectVersion : '2.1.7.x-SNAPSHOT'
 
 java {
     withJavadocJar()
