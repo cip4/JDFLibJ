@@ -43,6 +43,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import net.jcip.annotations.NotThreadSafe;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoApprovalDetails.EnumApprovalState;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
@@ -95,6 +96,7 @@ import org.junit.Test;
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
+@NotThreadSafe
 public class FixVersionTest extends JDFTestCaseBase
 {
 	private JDFDoc mDoc;

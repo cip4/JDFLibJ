@@ -131,6 +131,7 @@ dependencies {
     compile 'javax.mail:mailapi:1.4.3'
 
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'net.jcip:jcip-annotations:1.0'
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
 }
 
@@ -145,6 +146,7 @@ jacocoTestReport {
 test {
     useJUnitPlatform()
     systemProperty "file.encoding", "utf-8"
+    maxParallelForks Math.max(1, Runtime.runtime.availableProcessors / 2)
 }
 
 jar {

@@ -49,6 +49,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import net.jcip.annotations.NotThreadSafe;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.Before;
@@ -59,6 +60,7 @@ import org.junit.Test;
  *
  *         To change the template for this generated type comment go to Window - Preferences - Java - Code Generation - Code and Comments
  */
+@NotThreadSafe
 public class ColdFolderTest extends JDFTestCaseBase
 {
 
