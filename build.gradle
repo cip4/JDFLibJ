@@ -5,6 +5,7 @@ plugins {
     id 'maven-publish'
     id 'signing'
     id 'io.codearte.nexus-staging' version '0.30.0'
+    id 'jacoco'
 }
 
 group = 'org.cip4.lib.jdf'
@@ -141,4 +142,12 @@ dependencies {
     compile 'javax.mail:mailapi:1.4.3'
 
     testCompile 'junit:junit:4.13.2'
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = false
+    }
 }
