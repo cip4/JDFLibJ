@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -3589,8 +3589,46 @@ public class JDFResourceTest extends JDFTestCaseBase
 		}
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
+	/**
+	 *
+	 */
+	@Test
+	public void testAddpartitionStar()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode n = doc.getJDFRoot();
+		final JDFResource media = n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
+		final JDFResource r2 = media.addPartition(EnumPartIDKey.PartVersion, "*");
+		assertEquals("*", r2.getPartVersion());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAddpartitionStar2()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode n = doc.getJDFRoot();
+		final JDFResource media = n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
+		final JDFResource r1 = media.addPartition(EnumPartIDKey.PartVersion, "a");
+		final JDFResource r2 = media.addPartition(EnumPartIDKey.PartVersion, "*");
+		assertEquals("*", r2.getPartVersion());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAddpartitionStar1()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode n = doc.getJDFRoot();
+		final JDFResource media = n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
+		final JDFResource r1 = media.addPartition(EnumPartIDKey.SheetName, "a");
+		final JDFResource r2 = media.addPartition(EnumPartIDKey.SheetName, "*");
+		assertEquals("*", r2.getSheetName());
+	}
 
 	/**
 	 *
