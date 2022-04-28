@@ -11,10 +11,11 @@ on:
 jobs:
   call-snapshot:
     name: 🏭
-    uses: cip4/.github/.github/workflows/library-snapshot.yml@v2
+    uses: cip4/.github/.github/workflows/library-snapshot.yml@master
     with:
       java-version: 8
       java-distribution: adopt
+      codecov-enabled: true
     secrets:
       SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
       SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
