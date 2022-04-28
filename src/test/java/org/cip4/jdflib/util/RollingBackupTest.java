@@ -47,6 +47,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
+import net.jcip.annotations.NotThreadSafe;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.Test;
 
@@ -55,6 +56,7 @@ import org.junit.Test;
  *
  *         08.12.2008
  */
+@NotThreadSafe
 public class RollingBackupTest extends JDFTestCaseBase
 {
 	private File dir;
