@@ -75,6 +75,7 @@ import static org.junit.Assert.assertFalse;
 
 import java.lang.reflect.Method;
 
+import net.jcip.annotations.NotThreadSafe;
 import org.apache.commons.lang.StringUtils;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.Test;
@@ -82,6 +83,7 @@ import org.junit.Test;
 /**
  * JUnit test case for JDFVersion.
  */
+@NotThreadSafe
 public class JDFVersionTest extends JDFTestCaseBase
 {
 	boolean canTest;
