@@ -47,7 +47,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Method;
 
-import net.jcip.annotations.NotThreadSafe;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -71,7 +70,6 @@ import org.junit.Test;
 /**
  * @author MuchaD This implements the first fixture with unit tests for class JDFAudit.
  */
-@NotThreadSafe
 public class JDFAuditTest extends ExampleTest
 {
 

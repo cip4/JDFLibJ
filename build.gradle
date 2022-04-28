@@ -131,7 +131,6 @@ dependencies {
     compile 'javax.mail:mailapi:1.4.3'
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'net.jcip:jcip-annotations:1.0'
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
 }
 
