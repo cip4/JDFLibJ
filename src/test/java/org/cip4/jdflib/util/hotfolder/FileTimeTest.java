@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -92,7 +92,7 @@ public class FileTimeTest extends JDFTestCaseBase
 				ThreadUtil.sleep(220);
 				final long updateModified = ft.updateModified();
 				log.info("loop " + i + " " + updateModified % 10000 + " " + ft.length);
-				assertEquals("loop " + i, System.currentTimeMillis(), updateModified, 14200);
+				assertEquals("loop " + i, System.currentTimeMillis(), updateModified, 24200);
 
 			}
 		}
