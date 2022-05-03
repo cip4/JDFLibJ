@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -45,6 +45,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.ContainerUtil;
 
 /**
@@ -54,6 +55,35 @@ import org.cip4.jdflib.util.ContainerUtil;
  */
 public abstract class BaseXJDFHelper
 {
+
+	/**
+	 * factory to create a helper from a doc
+	 *
+	 * @param doc the xmldoc to parse
+	 * @return the helper
+	 */
+	public static BaseXJDFHelper getBaseHelper(final XMLDoc doc)
+	{
+		if (doc == null)
+			return null;
+		final KElement root = doc.getRoot();
+		return getBaseHelper(root);
+	}
+
+	/**
+	 * factory to create a helper from an element
+	 *
+	 * @param root the element to parse if not an XJDF - search in ancestors of element
+	 * @return the helper
+	 */
+	public static BaseXJDFHelper getBaseHelper(final KElement root)
+	{
+		BaseXJDFHelper h = XJDFHelper.getHelper(root);
+		if (h == null)
+			h = XJMFHelper.getHelper(root);
+		return h;
+	}
+
 	protected final static Log log = LogFactory.getLog(BaseXJDFHelper.class);
 	private static EnumVersion defaultVersion = EnumVersion.Version_2_1;
 
@@ -198,13 +228,7 @@ public abstract class BaseXJDFHelper
 	 */
 	public BaseXJDFHelper getXRoot()
 	{
-		BaseXJDFHelper b = XJDFHelper.getHelper(theElement);
-		if (b != null)
-		{
-			return b;
-		}
-		b = XJMFHelper.getHelper(theElement);
-		return b;
+		return getBaseHelper(theElement);
 
 	}
 
