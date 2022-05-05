@@ -97,21 +97,19 @@ import org.junit.Test;
  */
 public class FixVersionTest extends JDFTestCaseBase
 {
-	private JDFDoc mDoc;
 	private JDFNode n;
 
 	/**
 	 *
-	 * @see junit.framework.TestCase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
 	@Before
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		mDoc = new JDFDoc(ElementName.JDF);
+		JDFDoc mDoc = new JDFDoc(ElementName.JDF);
 		n = mDoc.getJDFRoot();
-
 	}
 
 	/**
@@ -194,7 +192,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testNamespaceParse()
 	{
-		n = JDFDoc.parseFile(sm_dirTestData + "fixns.jdf").getJDFRoot();
+		JDFNode n = JDFDoc.parseFile(sm_dirTestData + "fixns.jdf").getJDFRoot();
 		n.fixVersion(null);
 		KElement ns2 = n.getResourcePool().getElement("foo:myresource");
 		assertEquals(ns2.getNamespaceURI(), "http://www.foo.com/schema");
@@ -209,7 +207,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testNamespaceRetain()
 	{
-		n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.addNameSpace("foo", "http://www.foo.com/schema");
 		n.fixVersion(EnumVersion.Version_1_3);
 		assertEquals(n.getAttribute("xmlns:foo"), "http://www.foo.com/schema");
@@ -221,7 +219,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testNamespaceRetain2()
 	{
-		n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final KElement e = n.appendElement("foo:bar", "http://www.foo.com/schema");
 		final JDFNode n0 = (JDFNode) e.appendElement(ElementName.JDF);
 		n0.appendStatusPool();
@@ -235,7 +233,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testNamespaceRetainZappDeprecated()
 	{
-		n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.addNameSpace("foo", "http://www.foo.com/schema");
 		final FixVersion fv = new FixVersion(EnumVersion.Version_1_5);
 		fv.setZappDeprecated(true);
