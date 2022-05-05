@@ -145,7 +145,7 @@ jacocoTestReport {
 test {
     useJUnitPlatform()
     systemProperty "file.encoding", "utf-8"
-    maxParallelForks = Math.ceil(Runtime.getRuntime().availableProcessors() / 2)
+    maxParallelForks = 1
 }
 
 jar {
