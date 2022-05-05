@@ -44,6 +44,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.net.URL;
 
+import junit.framework.TestCase;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -309,7 +310,7 @@ public abstract class JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	/**
 	 *
-	 * @see junit.framework.TestCase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Before
 	public void setUp() throws Exception
@@ -341,7 +342,7 @@ public abstract class JDFTestCaseBase
 	/**
 	 * general cleanup after each test
 	 *
-	 * @see junit.framework.TestCase#tearDown()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@After
 	public void tearDown() throws Exception
@@ -526,7 +527,7 @@ public abstract class JDFTestCaseBase
 	 *
 	 * @param root the jdf node or jmf root
 	 * @param fileBase the filename without extension
-	 * @param version21
+	 * @param version 21
 	 */
 	protected void writeRoundTrip(final JDFElement root, final String fileBase, final EnumVersion version)
 	{
