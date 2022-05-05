@@ -104,7 +104,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		}
 
 		/**
-		 * @see org.cip4.jdflib.util.HotFolderListener#hotFile(java.io.File)
+		 * @see HotFolderListener#hotFile(File)
 		 */
 		@Override
 		public boolean hotFile(final File hotFile)
