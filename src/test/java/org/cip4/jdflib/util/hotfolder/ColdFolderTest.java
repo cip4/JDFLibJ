@@ -53,6 +53,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 /**
  * @author Rainer
@@ -95,25 +96,20 @@ public class ColdFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public synchronized void testdoMulti() throws Exception
+	public synchronized void testDoMulti() throws Exception
 	{
 		final File cfd = new File(sm_dirTestDataTemp + "Cold3");
-		final HotFolderTest.MyListener listener = new HotFolderTest.MyListener(false);
+		final HotFolderListener listener = Mockito.mock(HotFolderListener.class);
+
 		final ColdFolder cf = new ColdFolder(cfd, null, listener);
 		for (int i = 0; i < 3; i++)
 		{
 			final File file = new File(cfd, "f1.txt");
-			file.createNewFile();
+			assertTrue("File could not be created", file.createNewFile());
 			assertTrue(file.exists());
-			for (int j = 0; j < 1234; j++)
-			{
-				ThreadUtil.sleep(12);
-				if (1 + i == listener.getN())
-					break;
-			}
+			Mockito.verify(listener, Mockito.timeout(10_000)).hotFile(file);
 			assertTrue(file.exists());
-			assertEquals(1 + i, listener.getN());
-			file.delete();
+			assertTrue("File could not be deleted", file.delete());
 		}
 		cf.stop();
 	}
