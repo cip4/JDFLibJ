@@ -43,6 +43,8 @@ import org.cip4.jdflib.core.KElement;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
  *
  * @author rainer prosi
@@ -72,7 +74,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	public void testSetXPath()
 	{
 		theHelper.setTypes("Product");
-		Assertions.assertEquals("Product", theHelper.getTypes().get(0));
+		assertEquals("Product", theHelper.getTypes().get(0));
 	}
 
 	/**
@@ -107,7 +109,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	public void testGetXRoot()
 	{
 		final ProductHelper p = theHelper.appendProduct();
-		Assertions.assertEquals(theHelper, p.getXRoot());
+		assertEquals(theHelper, p.getXRoot());
 	}
 
 	/**
@@ -118,7 +120,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	public void testGeneralID()
 	{
 		theHelper.setGeneralID("foo", "Product");
-		Assertions.assertEquals("Product", theHelper.getGeneralID("foo"));
+		assertEquals("Product", theHelper.getGeneralID("foo"));
 	}
 
 	/**
@@ -130,7 +132,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	{
 		final SetHelper set = theHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
 		set.setComment("foo");
-		Assertions.assertEquals("foo", set.getComment(0));
+		assertEquals("foo", set.getComment(0));
 	}
 
 	/**
@@ -142,7 +144,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	{
 		Assertions.assertNull(theHelper.getAttribute("foo"));
 		theHelper.setAttribute("foo", "bar");
-		Assertions.assertEquals("bar", theHelper.getAttribute("foo"));
+		assertEquals("bar", theHelper.getAttribute("foo"));
 	}
 
 	/**
@@ -152,7 +154,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetLocalName()
 	{
-		Assertions.assertEquals(XJDFConstants.XJDF, theHelper.getLocalName());
+		assertEquals(XJDFConstants.XJDF, theHelper.getLocalName());
 	}
 
 	/**
@@ -163,7 +165,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	public void testSetAttribute()
 	{
 		theHelper.setAttribute("foo", "bar");
-		Assertions.assertEquals("bar", theHelper.getAttribute("foo"));
+		assertEquals("bar", theHelper.getAttribute("foo"));
 	}
 
 	/**
@@ -173,8 +175,8 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testEquals()
 	{
-		Assertions.assertEquals(theHelper, theHelper);
-		Assertions.assertEquals(theHelper, new XJDFHelper(theHelper.getRoot()));
+		assertEquals(theHelper, theHelper);
+		assertEquals(theHelper, new XJDFHelper(theHelper.getRoot()));
 	}
 
 	/**
@@ -184,9 +186,9 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testClone()
 	{
-		Assertions.assertEquals(theHelper, theHelper);
+		assertEquals(theHelper, theHelper);
 		Assertions.assertFalse(theHelper.equals(theHelper.clone()));
-		Assertions.assertEquals(theHelper.toString(), theHelper.clone().toString());
+		assertEquals(theHelper.toString(), theHelper.clone().toString());
 	}
 
 	/**
@@ -209,10 +211,10 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testDeleteNode()
 	{
-		Assertions.assertEquals(theHelper, theHelper);
+		assertEquals(theHelper, theHelper);
 		Assertions.assertNotNull(theHelper.getRoot());
 		theHelper.deleteNode();
-		Assertions.assertEquals(theHelper, theHelper);
+		assertEquals(theHelper, theHelper);
 		Assertions.assertNull(theHelper.getRoot());
 	}
 
@@ -223,6 +225,6 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testHash()
 	{
-		Assertions.assertEquals(theHelper.hashCode(), new XJDFHelper(theHelper.getRoot()).hashCode());
+		assertEquals(theHelper.hashCode(), new XJDFHelper(theHelper.getRoot()).hashCode());
 	}
 }
