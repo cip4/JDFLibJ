@@ -220,7 +220,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	public void testNamespaceRetain2()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		final KElement e = n.appendElement("foo:bar", "http://www.foo.com/schema");
+		final KElement e = n.appendElement("foo:" + this.getClass().getSimpleName(), "http://www.foo.com/schema");
 		final JDFNode n0 = (JDFNode) e.appendElement(ElementName.JDF);
 		n0.appendStatusPool();
 		n.fixVersion(EnumVersion.Version_1_3);
