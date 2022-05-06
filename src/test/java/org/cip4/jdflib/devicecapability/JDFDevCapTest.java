@@ -78,16 +78,13 @@ import org.cip4.jdflib.resource.process.JDFLayout;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
 /**
  *
  *
  * @author rainer prosi
  * @date before Jun 7, 2012
  */
-public class JDFDevCapTest extends TestCase
-{
+public class JDFDevCapTest {
 	/**
 	 *
 	 *

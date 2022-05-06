@@ -82,8 +82,7 @@ import org.cip4.jdflib.util.JDFDuration;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-public class JDFDurationRangeTest extends TestCase {
+public class JDFDurationRangeTest {
 
 	/*
 	 * Constructors JDFDurationRange(JDFDuration) and JDFDurationRange(JDFDuration, JDFDuration)

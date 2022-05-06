@@ -74,16 +74,15 @@
 package org.cip4.jdflib.util;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.TestCase;
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class MyArgsTest extends TestCase
-{
+public class MyArgsTest {
 
 	final String[] _testArray = { "/Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/VAHNSC6a7ag5ecAn9379.jdf", "-qc", "-v",
 			"-d /Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/tENgU4Gh3huO2iVH9380.xml",
@@ -100,11 +99,10 @@ public class MyArgsTest extends TestCase
 	 * @see junit.framework.TestCase#setUp()
 	 * @throws Exception
 	 */
-	@Override
-	public void setUp() throws Exception
+	@Before
+    public void setUp() throws Exception
 	{
-		super.setUp();
-		_myArgs = new MyArgs(_testArray, "?cqvVntP", "dlLuhpx", null);
+        _myArgs = new MyArgs(_testArray, "?cqvVntP", "dlLuhpx", null);
 
 	}
 

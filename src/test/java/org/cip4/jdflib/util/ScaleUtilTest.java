@@ -68,35 +68,33 @@
  */
 package org.cip4.jdflib.util;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.TestCase;
 /**
  * JUnit test case for scale unit helper class.
  * @author Stefan Meißner, CIP4
  * @date 26.01.2010
  */
-public class ScaleUtilTest extends TestCase
-{
+public class ScaleUtilTest {
 
 	/**
 	 * @see junit.framework.TestCase#setUp()
 	 */
-	@Override
-	public void setUp() throws Exception
+	@Before
+    public void setUp() throws Exception
 	{
-		super.setUp();
-	}
+    }
 
 	/**
 	 * @see junit.framework.TestCase#tearDown()
 	 */
-	@Override
-	public void tearDown() throws Exception
+	@After
+    public void tearDown() throws Exception
 	{
-		super.tearDown();
-	}
+    }
 
 	/**
 	 * Test method for {@link org.cip4.jdflib.util.ScaleUtil#mm2Dtp(double)}.

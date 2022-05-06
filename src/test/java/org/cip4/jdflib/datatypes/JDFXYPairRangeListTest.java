@@ -19,9 +19,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFXYPairEvaluation;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-public class JDFXYPairRangeListTest extends TestCase
-{
+public class JDFXYPairRangeListTest {
 	@Test
 	public final void testSetString()
 	{

@@ -13,8 +13,7 @@ import java.util.zip.DataFormatException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-public class JDFShapeRangeListTest extends TestCase {
+public class JDFShapeRangeListTest {
 	/*
 	 * Class under test for void append(JDFShapeRange)
 	 */

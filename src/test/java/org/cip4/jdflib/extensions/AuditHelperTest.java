@@ -41,56 +41,60 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.AuditHelper.eAudit;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  *
  * @author rainer prosi
  *
  */
-public class AuditHelperTest extends TestCase
-{
+public class AuditHelperTest {
 
 	/**
 	 *
 	 */
+	@Test
 	public void testeAudit()
 	{
 		for (final eAudit e : eAudit.values())
 		{
-			assertEquals(e, eAudit.getEnum(e.name()));
-			assertEquals(e, eAudit.getEnum(e.name().toLowerCase()));
-			assertEquals(e, eAudit.getEnum("audit" + e.name()));
-			assertEquals(null, eAudit.getEnum("audit " + e.name()));
+			Assert.assertEquals(e, eAudit.getEnum(e.name()));
+			Assert.assertEquals(e, eAudit.getEnum(e.name().toLowerCase()));
+			Assert.assertEquals(e, eAudit.getEnum("audit" + e.name()));
+			Assert.assertEquals(null, eAudit.getEnum("audit " + e.name()));
 		}
 	}
 
 	/**
 	 *
 	 */
+	@Test
 	public void testeAuditName()
 	{
 		for (final eAudit e : eAudit.values())
 		{
-			assertEquals(e, eAudit.getEnum(e.getAuditName()));
+			Assert.assertEquals(e, eAudit.getEnum(e.getAuditName()));
 		}
 	}
 
 	/**
 	 *
 	 */
+	@Test
 	public void testCleanup()
 	{
 		final KElement audit = KElement.createRoot(ElementName.CREATED, null);
 		final MessageHelper ah = new MessageHelper(audit);
 		ah.appendElement(XJDFConstants.Header);
 		ah.cleanUp();
-		assertNotNull(ah);
+		Assert.assertNotNull(ah);
 	}
 
 	/**
 	 *
 	 */
+	@Test
 	public void testCleanupResource()
 	{
 		final KElement audit = KElement.createRoot(XJDFConstants.AuditResource, null);
@@ -98,23 +102,25 @@ public class AuditHelperTest extends TestCase
 		final KElement header = ah.appendElement(XJDFConstants.Header);
 		final KElement rs = ah.appendElement(XJDFConstants.ResourceSet);
 		ah.cleanUp();
-		assertEquals(header.getNextSiblingElement(), rs);
+		Assert.assertEquals(header.getNextSiblingElement(), rs);
 	}
 
 	/**
 	 *
 	 */
+	@Test
 	public void testIsAudit()
 	{
 		final KElement audit = KElement.createRoot(XJDFConstants.AuditResource, null);
-		assertTrue(AuditHelper.isAudit(audit));
+		Assert.assertTrue(AuditHelper.isAudit(audit));
 		final KElement audit2 = KElement.createRoot(XJDFConstants.AuditResource + "2", null);
-		assertFalse(AuditHelper.isAudit(audit2));
+		Assert.assertFalse(AuditHelper.isAudit(audit2));
 	}
 
 	/**
 	 *
 	 */
+	@Test
 	public void testXJMFResource()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null);
@@ -122,7 +128,7 @@ public class AuditHelperTest extends TestCase
 		final SetHelper rs = ah.appendSet(ElementName.RUNLIST);
 		rs.appendPartition("Run", "R1", true).getResource().appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "u");
 		final XJMFHelper xjmf = ah.makeXJMFSignal();
-		assertEquals("u", xjmf.getMessageHelper(0).getRoot().getXPathAttribute("ResourceInfo/ResourceSet/Resource/RunList/FileSpec/@URL", null));
+		Assert.assertEquals("u", xjmf.getMessageHelper(0).getRoot().getXPathAttribute("ResourceInfo/ResourceSet/Resource/RunList/FileSpec/@URL", null));
 	}
 
 }

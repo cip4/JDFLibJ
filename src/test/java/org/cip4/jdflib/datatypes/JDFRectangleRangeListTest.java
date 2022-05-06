@@ -13,9 +13,7 @@ import java.util.zip.DataFormatException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-public class JDFRectangleRangeListTest extends TestCase
-{
+public class JDFRectangleRangeListTest {
 
 	/*
 	 * Class under test for void append

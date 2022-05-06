@@ -42,10 +42,7 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
-public class ElemInfoTest extends TestCase
-{
+public class ElemInfoTest {
 
 	@Test
 	public void testgetFirstLastVersion()

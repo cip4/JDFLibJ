@@ -13,9 +13,7 @@ import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-public class JDFMediaColorTest extends TestCase
-{
+public class JDFMediaColorTest {
 	@Test
 	public void testMediaColor()
 	{

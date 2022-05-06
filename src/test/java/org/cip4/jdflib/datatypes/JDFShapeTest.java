@@ -85,15 +85,13 @@ import org.cip4.jdflib.node.JDFNode;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
 /**
  * 
  *  
  * @author rainer prosi
  * @date Feb 23, 2011
  */
-public class JDFShapeTest extends TestCase
-{
+public class JDFShapeTest {
 	/**
 	 * 
 	 *  

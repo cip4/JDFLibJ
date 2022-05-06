@@ -75,15 +75,13 @@ import java.util.zip.DataFormatException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
 /**
  * 
  *  
  * @author rainerprosi
  * @date Sep 12, 2012
  */
-public class JDFNumberRangeListTest extends TestCase
-{
+public class JDFNumberRangeListTest {
 
 	/**
 	 * 

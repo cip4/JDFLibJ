@@ -84,9 +84,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-public class JDFDevCapsTest extends TestCase
-{
+public class JDFDevCapsTest {
 	@Test
 	public void testGetContextName()
 	{

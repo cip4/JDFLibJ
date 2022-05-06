@@ -79,15 +79,15 @@ package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.util.ThreadUtil;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
  * 14.01.2009
  */
-public class JDFDocThreadTest extends TestCase
-{
+public class JDFDocThreadTest {
 	/**
 	 * 
 	 *
@@ -105,13 +105,14 @@ public class JDFDocThreadTest extends TestCase
 			ThreadUtil.sleep(1);
 			JDFDoc d = new JDFParser().parseString("<JDF/>");
 			DocumentJDFImpl.registerCustomClass("a_b_c", "bar");
-			assertNotNull(d);
+			Assert.assertNotNull(d);
 		}
 	}
 
 	/**
 	 * 
 	 */
+	@Test
 	public void testMultiThreadStart()
 	{
 		for (int i = 0; i < 10; i++)

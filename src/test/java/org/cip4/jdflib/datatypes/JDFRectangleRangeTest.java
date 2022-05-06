@@ -11,9 +11,7 @@ package org.cip4.jdflib.datatypes;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-public class JDFRectangleRangeTest extends TestCase
-{
+public class JDFRectangleRangeTest {
 
 	@Test
 	public final void testIsPartOfRange()

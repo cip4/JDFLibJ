@@ -22,7 +22,6 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
 /**
  * Test for JDFURL.
  * 
@@ -30,8 +29,7 @@ import junit.framework.TestCase;
  *         Heidelberger Druckmaschinen AG, Tel. 3538
  * 
  */
-public class JDFURLTest extends TestCase
-{
+public class JDFURLTest {
 
 	@Test
 	public final void testAmpersand()

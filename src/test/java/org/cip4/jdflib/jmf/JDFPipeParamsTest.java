@@ -86,16 +86,15 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.TestCase;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
  * Jun 11, 2009
  */
-public class JDFPipeParamsTest extends TestCase
-{
+public class JDFPipeParamsTest {
 	private JDFPipeParams pp;
 
 	/**
@@ -192,11 +191,10 @@ public class JDFPipeParamsTest extends TestCase
 	/**
 	 * @see junit.framework.TestCase#setUp()
 	 */
-	@Override
-	public void setUp() throws Exception
+	@Before
+    public void setUp() throws Exception
 	{
-		super.setUp();
-		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+        final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
 		final JDFCommand c = jmf.appendCommand(EnumType.PipePull);
 		pp = c.appendPipeParams();

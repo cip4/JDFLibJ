@@ -104,9 +104,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-public class JDFAutoResourceTest extends TestCase
-{
+public class JDFAutoResourceTest {
 	@Test
 	public void testRunList()
 	{

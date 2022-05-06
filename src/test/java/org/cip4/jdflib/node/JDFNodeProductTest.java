@@ -83,13 +83,11 @@ import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class JDFNodeProductTest extends TestCase
-{
+public class JDFNodeProductTest {
 	/**
 	 * 
 	 */

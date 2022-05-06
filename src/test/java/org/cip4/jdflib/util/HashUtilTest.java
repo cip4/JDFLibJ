@@ -75,14 +75,12 @@ import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class HashUtilTest extends TestCase
-{
+public class HashUtilTest {
 	/**
 	 * 
 	 */
