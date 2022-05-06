@@ -36,8 +36,6 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
@@ -60,7 +58,8 @@ import org.cip4.jdflib.resource.process.JDFGangElement;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPosition;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -361,7 +360,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 			p.setAttribute(XJDFConstants.BinderySignatureID, bsIJ);
 			p2.setAttribute(XJDFConstants.BinderySignatureID, bsIJ);
 		}
-		assertNotNull(p);
+		Assertions.assertNotNull(p);
 	}
 
 	/**

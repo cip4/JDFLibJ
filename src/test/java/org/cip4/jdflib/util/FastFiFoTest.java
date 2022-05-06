@@ -6,8 +6,8 @@ package org.cip4.jdflib.util;
 import java.util.ArrayList;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -27,11 +27,11 @@ public class FastFiFoTest extends JDFTestCaseBase
 			final MyInteger r = ff.push(new MyInteger(i));
 			if (i < 10)
 			{
-				Assert.assertNull("loop " + i, r);
+				Assertions.assertNull(r, "loop " + i);
 			}
 			else
 			{
-				Assert.assertEquals("loop " + i, r, new MyInteger(i - 10));
+				Assertions.assertEquals(r, new MyInteger(i - 10), "loop " + i);
 			}
 		}
 	}
@@ -52,11 +52,11 @@ public class FastFiFoTest extends JDFTestCaseBase
 				final MyInteger r2 = ff.peek(j);
 				if (j > i)
 				{
-					Assert.assertNull("loop " + i, r2);
+					Assertions.assertNull(r2, "loop " + i);
 				}
 				else
 				{
-					Assert.assertEquals("loop " + i + "/" + j, r2, new MyInteger(i - Math.min(9, i) + j));
+					Assertions.assertEquals(r2, new MyInteger(i - Math.min(9, i) + j), "loop " + i + "/" + j);
 				}
 			}
 		}
@@ -74,11 +74,11 @@ public class FastFiFoTest extends JDFTestCaseBase
 //			final MyInteger r = 
 				ff.push(new MyInteger(i));
 			final MyInteger[] a = ff.peekArray();
-			Assert.assertEquals("loop " + i, a[0], new MyInteger(Math.max(0, i - 9)));
+			Assertions.assertEquals(a[0], new MyInteger(Math.max(0, i - 9)), "loop " + i);
 			if (i > 5)
 			{
-				Assert.assertEquals("loop " + i, a[5], new MyInteger(Math.max(5, i - 4)));
-				Assert.assertTrue("loop " + i, a[5].i > a[4].i);
+				Assertions.assertEquals(a[5], new MyInteger(Math.max(5, i - 4)), "loop " + i);
+				Assertions.assertTrue(a[5].i > a[4].i, "loop " + i);
 			}
 		}
 	}

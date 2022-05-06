@@ -38,12 +38,10 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.VString;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class StringCacheTest extends JDFTestCaseBase
 {
@@ -54,9 +52,9 @@ public class StringCacheTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testAddAll()
 	{
-		assertEquals(51, StringCache.size(), 10);
+		Assertions.assertEquals(51, StringCache.size(), 10);
 		StringCache.addAll(new VString("a b c d e f g h i j"));
-		assertEquals(60, StringCache.size(), 10);
+		Assertions.assertEquals(60, StringCache.size(), 10);
 	}
 
 	/**
@@ -69,11 +67,11 @@ public class StringCacheTest extends JDFTestCaseBase
 		{
 			StringCache.getCreateString("" + (i % 100));
 		}
-		assertEquals(110, StringCache.size(), 10);
+		Assertions.assertEquals(110, StringCache.size(), 10);
 		StringCache.getCreateString(null);
-		assertEquals(111, StringCache.size(), 10);
+		Assertions.assertEquals(111, StringCache.size(), 10);
 		StringCache.enable(false);
-		assertEquals(0, StringCache.size());
+		Assertions.assertEquals(0, StringCache.size());
 	}
 
 	/**
@@ -88,11 +86,11 @@ public class StringCacheTest extends JDFTestCaseBase
 		{
 			StringCache.getString("_" + (i % 100));
 		}
-		assertEquals(51, StringCache.size(), 10);
+		Assertions.assertEquals(51, StringCache.size(), 10);
 		StringCache.getCreateString(null);
-		assertEquals(52, StringCache.size(), 10);
+		Assertions.assertEquals(52, StringCache.size(), 10);
 		StringCache.enable(false);
-		assertEquals(0, StringCache.size());
+		Assertions.assertEquals(0, StringCache.size());
 		StringCache.enable(true);
 	}
 
@@ -103,7 +101,7 @@ public class StringCacheTest extends JDFTestCaseBase
 	public synchronized void testCreateNull()
 	{
 		StringCache.enable(true);
-		assertNull(StringCache.getCreateString(null));
+		Assertions.assertNull(StringCache.getCreateString(null));
 		StringCache.enable(false);
 	}
 
@@ -114,7 +112,7 @@ public class StringCacheTest extends JDFTestCaseBase
 	public synchronized void testNull()
 	{
 		StringCache.enable(true);
-		assertNull(StringCache.getString(null));
+		Assertions.assertNull(StringCache.getString(null));
 		StringCache.enable(false);
 	}
 

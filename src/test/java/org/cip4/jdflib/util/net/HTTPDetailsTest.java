@@ -38,10 +38,6 @@
  */
 package org.cip4.jdflib.util.net;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -49,7 +45,8 @@ import java.net.URL;
 
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class HTTPDetailsTest
 {
@@ -90,9 +87,9 @@ public class HTTPDetailsTest
 	public void testRedirect()
 	{
 		final HTTPDetails redirect = HTTPDetails.getRedirect(null);
-		assertNotNull(redirect);
-		assertEquals(1, redirect.getRedirect());
-		assertEquals(2, HTTPDetails.getRedirect(redirect).getRedirect());
+		Assertions.assertNotNull(redirect);
+		Assertions.assertEquals(1, redirect.getRedirect());
+		Assertions.assertEquals(2, HTTPDetails.getRedirect(redirect).getRedirect());
 	}
 
 	/**
@@ -102,9 +99,9 @@ public class HTTPDetailsTest
 	public void testTimeOut()
 	{
 		final HTTPDetails redirect = new HTTPDetails();
-		assertEquals(UrlUtil.getConnectionTimeout(), redirect.getConnectionTimeout());
+		Assertions.assertEquals(UrlUtil.getConnectionTimeout(), redirect.getConnectionTimeout());
 		redirect.setConnectionTimeout(122);
-		assertEquals(122, redirect.getConnectionTimeout());
+		Assertions.assertEquals(122, redirect.getConnectionTimeout());
 	}
 
 	/**
@@ -118,7 +115,7 @@ public class HTTPDetailsTest
 		final HTTPDetails d = new HTTPDetails();
 		d.setBearerToken("abc");
 		d.applyTo(uc);
-		assertEquals("Bearer abc", uc.getRequestProperty(UrlUtil.AUTHORIZATION));
+		Assertions.assertEquals("Bearer abc", uc.getRequestProperty(UrlUtil.AUTHORIZATION));
 	}
 
 	/**
@@ -130,9 +127,9 @@ public class HTTPDetailsTest
 	{
 		final HTTPDetails d = new HTTPDetails();
 		d.setAccept(new VString("a/b c/d"));
-		assertEquals("a/b, c/d", d.getHeader(UrlUtil.ACCEPT));
+		Assertions.assertEquals("a/b, c/d", d.getHeader(UrlUtil.ACCEPT));
 		d.setAccept(new VString());
-		assertNull(d.getHeader(UrlUtil.ACCEPT));
+		Assertions.assertNull(d.getHeader(UrlUtil.ACCEPT));
 	}
 
 	/**
@@ -146,7 +143,7 @@ public class HTTPDetailsTest
 		final HTTPDetails d = new HTTPDetails();
 		d.setHeader("abc", "def");
 		d.applyTo(uc);
-		assertEquals("def", uc.getRequestProperty("abc"));
+		Assertions.assertEquals("def", uc.getRequestProperty("abc"));
 	}
 
 	/**
@@ -159,7 +156,7 @@ public class HTTPDetailsTest
 		final HttpURLConnection uc = new TestConnection(new URL("http://foo.com"));
 		final HTTPDetails d = new HTTPDetails();
 		d.setHeader("abc", "def");
-		assertEquals("abc", d.getHeaders().get(0));
+		Assertions.assertEquals("abc", d.getHeaders().get(0));
 	}
 
 	/**
@@ -172,7 +169,7 @@ public class HTTPDetailsTest
 		final HttpURLConnection uc = new TestConnection(new URL("http://foo.com"));
 		final HTTPDetails d = new HTTPDetails();
 		d.setHeader("abc", "def");
-		assertEquals("def", d.getHeader("abc"));
+		Assertions.assertEquals("def", d.getHeader("abc"));
 	}
 
 }

@@ -81,8 +81,8 @@ import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.util.JDFDate;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -103,9 +103,9 @@ public class ProcessRunTest extends JDFTestCaseBase
 		final JDFDate end = new JDFDate();
 		end.setTimeInMillis(end.getTimeInMillis() + 100 * 1000);
 		pt.setEnd(end);
-		Assert.assertEquals("", pt.getDuration().getDuration(), 100., 1.);
+		Assertions.assertEquals(pt.getDuration().getDuration(), 100., 1., "");
 		pt.setDurationSeconds(50);
-		Assert.assertEquals("", pt.getDuration().getDuration(), 50., 1.);
+		Assertions.assertEquals(pt.getDuration().getDuration(), 50., 1., "");
 
 	}
 
@@ -131,15 +131,15 @@ public class ProcessRunTest extends JDFTestCaseBase
 			final JDFDate end = new JDFDate();
 			end.setTimeInMillis(end.getTimeInMillis() + 100 * 1000 + i * 1000 * 1000);
 			pt.setEnd(end);
-			Assert.assertEquals("", pt.getDuration().getDuration(), 100, 1.);
+			Assertions.assertEquals(pt.getDuration().getDuration(), 100, 1., "");
 
 			pr.addPhase(pt);
-			Assert.assertEquals("", pr.getDuration().getDuration(), (i + 1) * 100, 1.);
+			Assertions.assertEquals(pr.getDuration().getDuration(), (i + 1) * 100, 1., "");
 			if (pt0 != null)
 			{
-				Assert.assertEquals("", pr.getStart(), pt0.getStart());
+				Assertions.assertEquals(pr.getStart(), pt0.getStart(), "");
 			}
-			Assert.assertEquals("", pr.getEnd(), pt.getEnd());
+			Assertions.assertEquals(pr.getEnd(), pt.getEnd(), "");
 		}
 	}
 
@@ -164,9 +164,9 @@ public class ProcessRunTest extends JDFTestCaseBase
 		final JDFProcessRun pr0 = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
 		final JDFPhaseTime pt1 = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
 		final JDFProcessRun pr1 = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
-		Assert.assertTrue(pr1.matches(pt1));
-		Assert.assertFalse(pr0.matches(pt1));
-		Assert.assertFalse(pr1.matches(pr0));
+		Assertions.assertTrue(pr1.matches(pt1));
+		Assertions.assertFalse(pr0.matches(pt1));
+		Assertions.assertFalse(pr1.matches(pr0));
 	}
 
 	/**

@@ -39,10 +39,9 @@
 
 package org.cip4.jdflib.datatypes;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -60,7 +59,7 @@ public class JDFCMYKColorTest extends JDFTestCaseBase
 	{
 		final JDFCMYKColor c = new JDFCMYKColor(0, 0, 0, 0);
 		final JDFRGBColor rgb = c.getRGB();
-		assertEquals(rgb, new JDFRGBColor(1, 1., 1));
+		Assertions.assertEquals(rgb, new JDFRGBColor(1, 1., 1));
 	}
 
 }

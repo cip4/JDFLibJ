@@ -71,15 +71,14 @@
 
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFPageList;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -118,11 +117,11 @@ public class JDFPageDataTest extends JDFTestCaseBase
 	public void testRefContentData()
 	{
 		for (int i = 0; i < 10; i++)
-			assertEquals(cl.appendContentData().getIndex(), i);
+			Assertions.assertEquals(cl.appendContentData().getIndex(), i);
 		JDFContentData cd = cl.appendContentData();
 		JDFPageData pd = pl.appendPageData();
 		pd.refContentData(cd);
-		assertEquals(pd.getPageElement(0).getContentListIndex(), 10);
+		Assertions.assertEquals(pd.getPageElement(0).getContentListIndex(), 10);
 	}
 
 	/**
@@ -134,8 +133,8 @@ public class JDFPageDataTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			pl.appendPageData();
-			assertEquals(pl.getPageData(i).getPageIndex().getIntegerList().getInt(0), i);
-			assertEquals(pl.getPageData(i).getPageIndex().getIntegerList().size(), 1);
+			Assertions.assertEquals(pl.getPageData(i).getPageIndex().getIntegerList().getInt(0), i);
+			Assertions.assertEquals(pl.getPageData(i).getPageIndex().getIntegerList().size(), 1);
 		}
 	}
 
@@ -146,11 +145,11 @@ public class JDFPageDataTest extends JDFTestCaseBase
 	public void testGetAssemblyID()
 	{
 		JDFPageData d = pl.appendPageData();
-		assertEquals(d.getAssemblyID(), "");
+		Assertions.assertEquals(d.getAssemblyID(), "");
 		pl.setAssemblyID("foo");
-		assertEquals(d.getAssemblyID(), "foo");
+		Assertions.assertEquals(d.getAssemblyID(), "foo");
 		d.setAssemblyID("bar");
-		assertEquals(d.getAssemblyID(), "bar");
+		Assertions.assertEquals(d.getAssemblyID(), "bar");
 	}
 
 	/**
@@ -161,7 +160,7 @@ public class JDFPageDataTest extends JDFTestCaseBase
 	{
 		JDFPageData d = pl.appendPageData();
 		d.setPageIndex(1);
-		assertEquals(d.getPageIndex().getElement(0), 1);
-		assertEquals(d.getPageIndex().size(), 1);
+		Assertions.assertEquals(d.getPageIndex().getElement(0), 1);
+		Assertions.assertEquals(d.getPageIndex().size(), 1);
 	}
 }

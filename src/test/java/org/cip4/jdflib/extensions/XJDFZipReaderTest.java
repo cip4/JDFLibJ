@@ -68,10 +68,6 @@
  */
 package org.cip4.jdflib.extensions;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -83,7 +79,8 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class XJDFZipReaderTest extends JDFTestCaseBase
 {
@@ -109,7 +106,7 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 		zr.convert();
 		final JDFNode jdfRoot = zr.getJDFRoot();
 		final JDFRunList ruli = (JDFRunList) jdfRoot.getResource(ElementName.RUNLIST, EnumUsage.Input, 0);
-		assertNotNull(ruli.getLayoutElement());
+		Assertions.assertNotNull(ruli.getLayoutElement());
 	}
 
 	/**
@@ -122,8 +119,8 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 		final XJDFZipReader zr = new XJDFZipReader(new File(sm_dirTestDataTemp + "3files.xjdf.zip"));
 		zr.convert();
 		final JDFNode jdfRoot = zr.getJDFRoot();
-		assertTrue(jdfRoot.isValid(EnumValidationLevel.Incomplete));
-		assertEquals(jdfRoot.numChildElements(ElementName.JDF, null), 2);
+		Assertions.assertTrue(jdfRoot.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertEquals(jdfRoot.numChildElements(ElementName.JDF, null), 2);
 	}
 
 	/**
@@ -137,11 +134,11 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 
 		zr.convert();
 		final JDFJMF jmfRoot = zr.getJMFRoot();
-		assertTrue(jmfRoot.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(jmfRoot.isValid(EnumValidationLevel.Complete));
 
 		final JDFNode jdfRoot = zr.getJDFRoot();
-		assertTrue(jdfRoot.isValid(EnumValidationLevel.Incomplete));
-		assertEquals(jdfRoot.numChildElements(ElementName.JDF, null), 2);
+		Assertions.assertTrue(jdfRoot.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertEquals(jdfRoot.numChildElements(ElementName.JDF, null), 2);
 	}
 
 	/**
@@ -153,7 +150,7 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 		new JDFToXJDFConverterTest().testMultiNode1();
 		final XJDFZipReader zr = new XJDFZipReader(new File(sm_dirTestDataTemp + "3files.xjmf.zip"));
 
-		assertNotNull(zr.getXJMF());
+		Assertions.assertNotNull(zr.getXJMF());
 	}
 
 	/**
@@ -165,7 +162,7 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 		new JDFToXJDFConverterTest().testMultiNode1();
 		final XJDFZipReader zr = new XJDFZipReader(new File(sm_dirTestDataTemp + "3files.xjmf.zip"));
 
-		assertEquals(3, zr.getXJDFs().size());
+		Assertions.assertEquals(3, zr.getXJDFs().size());
 	}
 
 }

@@ -89,8 +89,8 @@ import org.cip4.jdflib.span.JDFSpanMethod;
 import org.cip4.jdflib.span.JDFSpanShape;
 import org.cip4.jdflib.span.JDFSpanSurface;
 import org.cip4.jdflib.span.JDFStringSpan;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -143,7 +143,7 @@ public class DocumentJDFImplTest extends JDFTestCaseBase
 		JDFNode n = doc.getJDFRoot();
 		JDFResourcePool rp = n.getCreateResourcePool();
 		KElement e = rp.appendElement("test:res", "www.test.org");
-		Assert.assertTrue(e instanceof JDFResource);
+		Assertions.assertTrue(e instanceof JDFResource);
 	}
 
 }

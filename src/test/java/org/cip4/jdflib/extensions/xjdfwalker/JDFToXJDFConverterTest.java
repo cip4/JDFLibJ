@@ -36,12 +36,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.util.Collection;
 import java.util.zip.DataFormatException;
@@ -162,7 +156,8 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.cip4.jdflib.span.JDFSpanScreeningType.EnumSpanScreeningType;
 import org.cip4.jdflib.util.FileUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author rainer prosi
@@ -187,7 +182,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		// n.ensureLink(c, EnumUsage.Input, null);
 		final KElement e = conv.convert(n);
 		final KElement resource = new XJDFHelper(e).getSet(ElementName.CONTACT, null).getPartition(0).getResource();
-		assertEquals("foo", resource.getElement(ElementName.ADDRESS).getAttribute(ElementName.EXTENDEDADDRESS));
+		Assertions.assertEquals("foo", resource.getElement(ElementName.ADDRESS).getAttribute(ElementName.EXTENDEDADDRESS));
 		writeRoundTrip(n, "extendedAddress");
 	}
 
@@ -218,7 +213,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		ci.appendContact(EnumContactType.Delivery).setDescriptiveName("del");
 		final KElement x = conv.convert(n);
 		final XJDFHelper h = XJDFHelper.getHelper(x);
-		assertNotNull(h.getSet(ElementName.CONTACT, null));
+		Assertions.assertNotNull(h.getSet(ElementName.CONTACT, null));
 	}
 
 	/**
@@ -242,7 +237,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement x = conv.convert(n);
 		final XJDFHelper h = XJDFHelper.getHelper(x);
 		final SetHelper set = h.getSet(ElementName.CONTACT, null);
-		assertNotNull(set);
+		Assertions.assertNotNull(set);
 	}
 
 	/**
@@ -268,10 +263,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement x = conv.convert(n);
 		final XJDFHelper h = XJDFHelper.getHelper(x);
 		final SetHelper set = h.getSet(ElementName.CONTACT, null);
-		assertNotNull(set);
+		Assertions.assertNotNull(set);
 		final VJDFAttributeMap pv = set.getPartMapVector();
 		pv.unify();
-		assertEquals(4, pv.size());
+		Assertions.assertEquals(4, pv.size());
 	}
 
 	/**
@@ -288,7 +283,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.addResource(ElementName.RUNLIST, EnumUsage.Input).setAttribute(AttributeName.NPAGE, "4");
 		xm.appendMedia().setMediaSetCount(42);
 		final KElement xjdf = conv.convert(n);
-		assertNotNull(new XJDFHelper(xjdf).getSet(ElementName.MEDIA, 0));
+		Assertions.assertNotNull(new XJDFHelper(xjdf).getSet(ElementName.MEDIA, 0));
 		writeRoundTrip(n, "xm");
 
 	}
@@ -332,10 +327,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdfc1 = conv.convert(nc1);
 		final KElement xjdfc2 = conv.convert(nc2);
 
-		assertEquals(xjdff1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.1");
-		assertEquals(xjdfc1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.2");
-		assertEquals(xjdff2.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.3");
-		assertEquals(xjdfc2.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.4");
+		Assertions.assertEquals(xjdff1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.1");
+		Assertions.assertEquals(xjdfc1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.2");
+		Assertions.assertEquals(xjdff2.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.3");
+		Assertions.assertEquals(xjdfc2.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.4");
 	}
 
 	/**
@@ -365,10 +360,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdff2 = conv.convert(nf2);
 		final KElement xjdfc1 = conv.convert(nc);
 
-		assertEquals(xjdfc1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.2");
+		Assertions.assertEquals(xjdfc1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.2");
 
-		assertEquals(xjdff1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.1");
-		assertEquals(xjdff2.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.1");
+		Assertions.assertEquals(xjdff1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.1");
+		Assertions.assertEquals(xjdff2.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.1");
 	}
 
 	/**
@@ -387,7 +382,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		conv.setSingleNode(true);
 		final KElement xjdf = conv.convert(n);
 
-		assertEquals(typs, new XJDFHelper(xjdf).getTypes());
+		Assertions.assertEquals(typs, new XJDFHelper(xjdf).getTypes());
 
 	}
 
@@ -425,10 +420,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		conv.setSingleNode(true);
 		final KElement xjdf = conv.convert(n);
 		final XJDFHelper h = XJDFHelper.getHelper(xjdf);
-		assertNotNull(h.getSet(ElementName.COMPONENT, EnumUsage.Output, null, new JDFIntegerList(0)));
-		assertNotNull(h.getSet(ElementName.COMPONENT, EnumUsage.Output, null, new JDFIntegerList(1)));
-		assertNotNull(h.getSet(ElementName.COMPONENT, EnumUsage.Input, null, new JDFIntegerList(0)));
-		assertNull(h.getSet(ElementName.COMPONENT, EnumUsage.Input, null, new JDFIntegerList(1)));
+		Assertions.assertNotNull(h.getSet(ElementName.COMPONENT, EnumUsage.Output, null, new JDFIntegerList(0)));
+		Assertions.assertNotNull(h.getSet(ElementName.COMPONENT, EnumUsage.Output, null, new JDFIntegerList(1)));
+		Assertions.assertNotNull(h.getSet(ElementName.COMPONENT, EnumUsage.Input, null, new JDFIntegerList(0)));
+		Assertions.assertNull(h.getSet(ElementName.COMPONENT, EnumUsage.Input, null, new JDFIntegerList(1)));
 
 	}
 
@@ -456,8 +451,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdff1 = conv.convert(nf);
 		final KElement xjdfc1 = conv.convert(nc);
 
-		assertEquals(xjdfc1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.2");
-		assertEquals(xjdff1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.1");
+		Assertions.assertEquals(xjdfc1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.2");
+		Assertions.assertEquals(xjdff1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.1");
 	}
 
 	/**
@@ -482,9 +477,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setSingleNode(true);
 		final KElement xjdf = xjdf20.makeNewJDF(nP, null);
 		xjdf.write2File(sm_dirTestDataTemp + "delTest2.xjdf");
-		assertNotNull(xjdf);
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/DeliveryParams/DropItem/@Amount", null), "42");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[2]/DeliveryParams/DropItem/@Amount", null), "63");
+		Assertions.assertNotNull(xjdf);
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/DeliveryParams/DropItem/@Amount", null), "42");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[2]/DeliveryParams/DropItem/@Amount", null), "63");
 		return xjdf;
 	}
 
@@ -507,10 +502,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setSpanAsAttribute(true);
 		final KElement xjdf = xjdf20.makeNewJDF(nP, null);
 		xjdf.write2File(sm_dirTestDataTemp + "bind.xjdf");
-		assertNotNull(xjdf);
-		assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/MediaIntent/@MediaQuality", null), "foo");
-		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/MediaIntent/Brightness"));
-		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/MediaIntent/@Brightness"));
+		Assertions.assertNotNull(xjdf);
+		Assertions.assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/MediaIntent/@MediaQuality", null), "foo");
+		Assertions.assertNull(xjdf.getXPathElement("ProductList/Product/Intent/MediaIntent/Brightness"));
+		Assertions.assertNull(xjdf.getXPathElement("ProductList/Product/Intent/MediaIntent/@Brightness"));
 		writeRoundTrip(nP, "intent");
 	}
 
@@ -527,8 +522,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setSingleNode(true);
 		final KElement xjdf = xjdf20.makeNewJDF(n, null);
 		xjdf.write2File(sm_dirTestDataTemp + "dielayoutproduction.xjdf");
-		assertNotNull(xjdf);
-		assertEquals("2267.72", xjdf.getXPathAttribute("ResourceSet/Resource/DieLayoutProductionParams/ConvertingConfig/@SheetHeightMax", null));
+		Assertions.assertNotNull(xjdf);
+		Assertions.assertEquals("2267.72", xjdf.getXPathAttribute("ResourceSet/Resource/DieLayoutProductionParams/ConvertingConfig/@SheetHeightMax", null));
 	}
 
 	/**
@@ -568,9 +563,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setSingleNode(true);
 		final KElement xjdf = xjdf20.makeNewJDF(n, null);
 		xjdf.write2File(sm_dirTestDataTemp + "tcp.xjdf");
-		assertNotNull(xjdf);
-		assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource/TransferCurve/@Curve", null));
-		assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[2]/TransferCurve/@Curve", null));
+		Assertions.assertNotNull(xjdf);
+		Assertions.assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource/TransferCurve/@Curve", null));
+		Assertions.assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[2]/TransferCurve/@Curve", null));
 	}
 
 	/**
@@ -610,9 +605,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setSingleNode(true);
 		final KElement xjdf = xjdf20.makeNewJDF(n, null);
 		xjdf.write2File(sm_dirTestDataTemp + "tcp.xjdf");
-		assertNotNull(xjdf);
-		assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource/TransferCurve/@Curve", null));
-		assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[2]/TransferCurve/@Curve", null));
+		Assertions.assertNotNull(xjdf);
+		Assertions.assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource/TransferCurve/@Curve", null));
+		Assertions.assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[2]/TransferCurve/@Curve", null));
 	}
 
 	/**
@@ -632,7 +627,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setSingleNode(true);
 		final KElement xjdf = xjdf20.makeNewJDF(n, null);
 		xjdf.write2File(sm_dirTestDataTemp + "fc.xjdf");
-		assertNotNull(xjdf);
+		Assertions.assertNotNull(xjdf);
 	}
 
 	/**
@@ -672,11 +667,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setSingleNode(true);
 		final KElement xjdf = xjdf20.makeNewJDF(n, null);
 		xjdf.write2File(sm_dirTestDataTemp + "tcp.xjdf");
-		assertNotNull(xjdf);
-		assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource/TransferCurve/@Curve", null));
-		assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[2]/TransferCurve/@Curve", null));
-		assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource[3]/TransferCurve/@Curve", null));
-		assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[4]/TransferCurve/@Curve", null));
+		Assertions.assertNotNull(xjdf);
+		Assertions.assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource/TransferCurve/@Curve", null));
+		Assertions.assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[2]/TransferCurve/@Curve", null));
+		Assertions.assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource[3]/TransferCurve/@Curve", null));
+		Assertions.assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[4]/TransferCurve/@Curve", null));
 	}
 
 	/**
@@ -716,14 +711,14 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setSingleNode(true);
 		final KElement xjdf = xjdf20.makeNewJDF(n, null);
 		xjdf.write2File(sm_dirTestDataTemp + "tcp.xjdf");
-		assertNotNull(xjdf);
-		assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource/TransferCurve/@Curve", null));
-		assertEquals("Substrate", xjdf.getXPathAttribute("ResourceSet/Resource/Part/@TransferCurveName", null));
-		assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[2]/TransferCurve/@Curve", null));
-		assertEquals("Plate", xjdf.getXPathAttribute("ResourceSet/Resource[2]/Part/@TransferCurveName", null));
-		assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource[3]/TransferCurve/@Curve", null));
-		assertEquals("Substrate", xjdf.getXPathAttribute("ResourceSet/Resource[3]/Part/@TransferCurveName", null));
-		assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[4]/TransferCurve/@Curve", null));
+		Assertions.assertNotNull(xjdf);
+		Assertions.assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource/TransferCurve/@Curve", null));
+		Assertions.assertEquals("Substrate", xjdf.getXPathAttribute("ResourceSet/Resource/Part/@TransferCurveName", null));
+		Assertions.assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[2]/TransferCurve/@Curve", null));
+		Assertions.assertEquals("Plate", xjdf.getXPathAttribute("ResourceSet/Resource[2]/Part/@TransferCurveName", null));
+		Assertions.assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource[3]/TransferCurve/@Curve", null));
+		Assertions.assertEquals("Substrate", xjdf.getXPathAttribute("ResourceSet/Resource[3]/Part/@TransferCurveName", null));
+		Assertions.assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[4]/TransferCurve/@Curve", null));
 	}
 
 	/**
@@ -738,7 +733,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		nP.addJDFNode(EnumType.ConventionalPrinting);
 		final JDFToXJDF xjdf20 = new JDFToXJDF();
 		final KElement xjdf = xjdf20.convert(nP);
-		assertEquals("Product ImageSetting ConventionalPrinting", xjdf.getAttribute("Types"));
+		Assertions.assertEquals("Product ImageSetting ConventionalPrinting", xjdf.getAttribute("Types"));
 	}
 
 	/**
@@ -753,7 +748,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		nP.addJDFNode(EnumType.ConventionalPrinting).setJobPartID("j2");
 		final JDFToXJDF xjdf20 = new JDFToXJDF();
 		final KElement xjdf = xjdf20.convert(nP);
-		assertEquals(3, new XJDFHelper(xjdf).getSets(ElementName.NODEINFO, null).size());
+		Assertions.assertEquals(3, new XJDFHelper(xjdf).getSets(ElementName.NODEINFO, null).size());
 	}
 
 	/**
@@ -767,7 +762,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		nP.setType(EnumType.ImageSetting);
 		final JDFToXJDF xjdf20 = new JDFToXJDF();
 		final KElement xjdf = xjdf20.convert(nP);
-		assertEquals("ImageSetting", xjdf.getAttribute("Types"));
+		Assertions.assertEquals("ImageSetting", xjdf.getAttribute("Types"));
 	}
 
 	/**
@@ -786,13 +781,13 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setSpanAsAttribute(true);
 		KElement xjdf = xjdf20.makeNewJDF(nP, null);
 		xjdf.write2File(sm_dirTestDataTemp + "pack.xjdf");
-		assertNotNull(xjdf);
-		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/PackingIntent"));
+		Assertions.assertNotNull(xjdf);
+		Assertions.assertNull(xjdf.getXPathElement("ProductList/Product/Intent/PackingIntent"));
 		xjdf20.setRetainAll(true);
 		xjdf = xjdf20.makeNewJDF(nP, null);
 		xjdf.write2File(sm_dirTestDataTemp + "packretain.xjdf");
-		assertNotNull(xjdf);
-		assertNotNull(xjdf.getXPathElement("ProductList/Product/Intent/PackingIntent"));
+		Assertions.assertNotNull(xjdf);
+		Assertions.assertNotNull(xjdf.getXPathElement("ProductList/Product/Intent/PackingIntent"));
 		writeRoundTrip(nP, "pack");
 	}
 
@@ -812,13 +807,13 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setSpanAsAttribute(true);
 		KElement xjdf = xjdf20.makeNewJDF(nP, null);
 		xjdf.write2File(sm_dirTestDataTemp + "screen.xjdf");
-		assertNotNull(xjdf);
-		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/ScreeningIntent"));
+		Assertions.assertNotNull(xjdf);
+		Assertions.assertNull(xjdf.getXPathElement("ProductList/Product/Intent/ScreeningIntent"));
 		xjdf20.setRetainAll(true);
 		xjdf = xjdf20.makeNewJDF(nP, null);
 		xjdf.write2File(sm_dirTestDataTemp + "screenretain.xjdf");
-		assertNotNull(xjdf);
-		assertNotNull(xjdf.getXPathElement("ProductList/Product/Intent/ScreeningIntent"));
+		Assertions.assertNotNull(xjdf);
+		Assertions.assertNotNull(xjdf.getXPathElement("ProductList/Product/Intent/ScreeningIntent"));
 		writeRoundTrip(nP, "screen");
 	}
 
@@ -840,8 +835,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setNewVersion(EnumVersion.Version_2_1);
 		final KElement xjdf = xjdf20.makeNewJDF(nP, null);
 		xjdf.write2File(sm_dirTestDataTemp + "retain.xjdf");
-		assertNotNull(xjdf);
-		assertNull(xjdf.getChildByTagName(ElementName.RESOURCEPOOL, null, 0, null, false, false));
+		Assertions.assertNotNull(xjdf);
+		Assertions.assertNull(xjdf.getChildByTagName(ElementName.RESOURCEPOOL, null, 0, null, false, false));
 		writeRoundTrip(nP, "pack");
 	}
 
@@ -862,8 +857,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setNewVersion(EnumVersion.Version_2_1);
 		final KElement xjdf = xjdf20.makeNewJDF(nP, null);
 		xjdf.write2File(sm_dirTestDataTemp + "retainJP.xjdf");
-		assertNotNull(xjdf);
-		assertEquals("jp1", xjdf.getXPathAttribute("ProductList/Product/@JobPartID", null));
+		Assertions.assertNotNull(xjdf);
+		Assertions.assertEquals("jp1", xjdf.getXPathAttribute("ProductList/Product/@JobPartID", null));
 	}
 
 	/**
@@ -917,13 +912,13 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setRetainAll(retainAll);
 		final KElement xjdf = xjdf20.makeNewJDF(root, null);
 		xjdf.write2File(sm_dirTestDataTemp + "pageListTest." + retainAll + ".xjdf");
-		assertNotNull(xjdf);
+		Assertions.assertNotNull(xjdf);
 		if (!retainAll)
 		{
 			for (int i = 1; i < 5; i++)
 			{
-				assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[" + i + "]/Content/@IsBlank", null), i % 2 == 1 ? "true" : "false");
-				assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[" + i + "]/Content/@ContentStatus", null), "DigitalArtArrived");
+				Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[" + i + "]/Content/@IsBlank", null), i % 2 == 1 ? "true" : "false");
+				Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[" + i + "]/Content/@ContentStatus", null), "DigitalArtArrived");
 			}
 		}
 		return xjdf;
@@ -952,11 +947,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		root.addNameSpace("Foo", "www.foo.com");
 		final JDFResource pList = root.addResource("Foo:" + ElementName.PAGELIST, EnumUsage.Input);
 		pList.setDescriptiveName("Desc");
-		assertFalse(pList instanceof JDFPageList);
+		Assertions.assertFalse(pList instanceof JDFPageList);
 		final XJDF20 xjdf20 = new XJDF20();
 		xjdf20.setSingleNode(true);
 		final KElement xjdf = xjdf20.makeNewJDF(root, null);
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Foo:PageList\"]/Resource/@DescriptiveName", null), "Desc");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Foo:PageList\"]/Resource/@DescriptiveName", null), "Desc");
 
 	}
 
@@ -986,8 +981,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setSingleNode(true);
 		final KElement xjdf = xjdf20.makeNewJDF(root, null);
 		xjdf.write2File(sm_dirTestDataTemp + "pageListEmptyTest.xjdf");
-		assertNotNull(xjdf);
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Content\"]/Resource/@DescriptiveName", null), "Pl for p1");
+		Assertions.assertNotNull(xjdf);
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Content\"]/Resource/@DescriptiveName", null), "Pl for p1");
 		return xjdf;
 	}
 
@@ -1008,10 +1003,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		c.setComponentType(EnumComponentType.PartialProduct, null);
 		c.addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "s1");
 		final KElement x = conv.convert(n);
-		assertEquals(x.toXML().indexOf(AttributeName.SIGNATURENAME), -1);
+		Assertions.assertEquals(x.toXML().indexOf(AttributeName.SIGNATURENAME), -1);
 		conv.setRemoveSignatureName(false);
 		final KElement x2 = conv.convert(n);
-		assertTrue(x2.toXML().indexOf(AttributeName.SIGNATURENAME) > 0);
+		Assertions.assertTrue(x2.toXML().indexOf(AttributeName.SIGNATURENAME) > 0);
 		writeRoundTrip(n, "print");
 
 	}
@@ -1031,8 +1026,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.setStatus(EnumNodeStatus.Cleanup);
 		conv.setParameterSet(true);
 		final KElement xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("ParameterSet/Parameter/NodeInfo/@Status", null), "Cleanup");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/@DescriptiveName", null), "desc");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ParameterSet/Parameter/NodeInfo/@Status", null), "Cleanup");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/@DescriptiveName", null), "desc");
 	}
 
 	/**
@@ -1047,7 +1042,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		conv.setCleanup(false);
 		final KElement xjdf = conv.convert(n);
-		assertNotNull(xjdf.getXPathAttribute("ResourceSet/@ID", null));
+		Assertions.assertNotNull(xjdf.getXPathAttribute("ResourceSet/@ID", null));
 	}
 
 	/**
@@ -1061,8 +1056,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.setType(EnumType.ConventionalPrinting);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertNull(xjdf.getXPathAttribute("ResourceSet/@ID", null));
-		assertNull(xjdf.getXPathAttribute("ResourceSet/Resource/@ID", null));
+		Assertions.assertNull(xjdf.getXPathAttribute("ResourceSet/@ID", null));
+		Assertions.assertNull(xjdf.getXPathAttribute("ResourceSet/Resource/@ID", null));
 	}
 
 	/**
@@ -1082,7 +1077,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 		n.setStatus(EnumNodeStatus.Cleanup);
 		final KElement xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ExternalID", null), "prodID");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ExternalID", null), "prodID");
 		writeRoundTrip(n, "pid");
 	}
 
@@ -1117,9 +1112,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.convert(n);
 
 		final JDFColorantControl ccNew = (JDFColorantControl) new XJDFHelper(xjdf).getPartition(ElementName.COLORANTCONTROL, 0, 0).getResource();
-		assertEquals(ccNew.getAttribute(ElementName.COLORANTPARAMS), "Cyan Magenta Yellow Black");
-		assertEquals(ccNew.getAttribute(ElementName.COLORANTORDER), "Cyan Black");
-		assertNull(ccNew.getNonEmpty(ElementName.DEVICECOLORANTORDER));
+		Assertions.assertEquals(ccNew.getAttribute(ElementName.COLORANTPARAMS), "Cyan Magenta Yellow Black");
+		Assertions.assertEquals(ccNew.getAttribute(ElementName.COLORANTORDER), "Cyan Black");
+		Assertions.assertNull(ccNew.getNonEmpty(ElementName.DEVICECOLORANTORDER));
 
 		writeRoundTrip(n, "colorcont");
 	}
@@ -1154,7 +1149,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.convert(n);
 
 		final JDFColorantControl ccNew = (JDFColorantControl) new XJDFHelper(xjdf).getPartition(ElementName.COLORANTCONTROL, 0, 0).getResource();
-		assertNull(ccNew.getNonEmpty("ColorRef"));
+		Assertions.assertNull(ccNew.getNonEmpty("ColorRef"));
 		writeRoundTrip(n, "colorpool");
 
 	}
@@ -1176,8 +1171,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final ResourceHelper partition = new XJDFHelper(xjdf).getPartition(ElementName.COLOR, 0, 0);
 		final JDFColor cNew = (JDFColor) partition.getResource();
-		assertEquals(cNew.getAttribute(AttributeName.ACTUALCOLORNAME), "c1");
-		assertEquals(partition.getPartMap().get(AttributeName.SEPARATION), "c1");
+		Assertions.assertEquals(cNew.getAttribute(AttributeName.ACTUALCOLORNAME), "c1");
+		Assertions.assertEquals(partition.getPartMap().get(AttributeName.SEPARATION), "c1");
 	}
 
 	/**
@@ -1211,8 +1206,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		{
 			final ResourceHelper partition = new XJDFHelper(xjdf).getPartition(ElementName.COLOR, 0, i);
 			final JDFColor cNew = (JDFColor) partition.getResource();
-			assertEquals(cNew.getAttribute(AttributeName.ACTUALCOLORNAME), "sep " + (i + 1));
-			assertEquals(partition.getPartMap().get(AttributeName.SEPARATION), "sep_" + (i + 1));
+			Assertions.assertEquals(cNew.getAttribute(AttributeName.ACTUALCOLORNAME), "sep " + (i + 1));
+			Assertions.assertEquals(partition.getPartMap().get(AttributeName.SEPARATION), "sep_" + (i + 1));
 		}
 		writeRoundTrip(n, "colorspaces");
 	}
@@ -1238,7 +1233,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final ResourceHelper partition = new XJDFHelper(xjdf).getPartition(ElementName.COLORANTCONTROL, 0, 0);
 		final JDFColorantControl cNew = (JDFColorantControl) partition.getResource();
-		assertEquals(cNew.getAttribute(ElementName.COLORANTPARAMS), "sep_1 sep_2");
+		Assertions.assertEquals(cNew.getAttribute(ElementName.COLORANTPARAMS), "sep_1 sep_2");
 	}
 
 	/**
@@ -1259,8 +1254,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final ResourceHelper partition = new XJDFHelper(xjdf).getPartition(ElementName.COLORANTCONTROL, 0, 0);
 		final JDFColorantControl cNew = (JDFColorantControl) partition.getResource();
-		assertEquals("sep1 sep2", cNew.getAttribute(ElementName.COLORANTORDER));
-		assertNull(cNew.getNonEmpty(ElementName.DEVICECOLORANTORDER));
+		Assertions.assertEquals("sep1 sep2", cNew.getAttribute(ElementName.COLORANTORDER));
+		Assertions.assertNull(cNew.getNonEmpty(ElementName.DEVICECOLORANTORDER));
 	}
 
 	/**
@@ -1281,11 +1276,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		ci.appendColorICCStandard().setActual("ICC");
 		final KElement xjdf = conv.convert(n);
 		final ProductHelper ph = new XJDFHelper(xjdf).getProductHelpers().get(0);
-		assertNotNull(ph);
+		Assertions.assertNotNull(ph);
 		final IntentHelper ih = ph.getIntent("ColorIntent");
 		final KElement e = ih.getResource();
-		assertEquals(e.getChildElementVector("SurfaceColor", null).size(), 2);
-		assertEquals("CMYK", e.getChildElementVector("SurfaceColor", null).get(0).getAttribute(XJDFConstants.PrintStandard));
+		Assertions.assertEquals(e.getChildElementVector("SurfaceColor", null).size(), 2);
+		Assertions.assertEquals("CMYK", e.getChildElementVector("SurfaceColor", null).get(0).getAttribute(XJDFConstants.PrintStandard));
 		writeRoundTrip(n, "ColorIntent");
 	}
 
@@ -1310,10 +1305,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		cib.setNumColors(1);
 		final KElement xjdf = conv.convert(n);
 		final ProductHelper ph = new XJDFHelper(xjdf).getProductHelpers().get(0);
-		assertNotNull(ph);
+		Assertions.assertNotNull(ph);
 		final IntentHelper ih = ph.getIntent("ColorIntent");
 		final KElement e = ih.getResource();
-		assertEquals(e.getChildElementVector("SurfaceColor", null).size(), 2);
+		Assertions.assertEquals(e.getChildElementVector("SurfaceColor", null).size(), 2);
 		writeRoundTrip(n, "ColorIntent");
 	}
 
@@ -1339,12 +1334,12 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		cib.setNumColors(1);
 		final KElement xjdf = conv.convert(n);
 		final ProductHelper ph = new XJDFHelper(xjdf).getProductHelpers().get(0);
-		assertNotNull(ph);
+		Assertions.assertNotNull(ph);
 		final IntentHelper ih = ph.getIntent("ColorIntent");
 		final KElement e = ih.getResource();
-		assertEquals(e.getChildElementVector(XJDFConstants.SurfaceColor, null).size(), 2);
-		assertEquals("fsc", e.getElement(XJDFConstants.SurfaceColor).getElement(ElementName.CERTIFICATION, null, 0).getAttribute(AttributeName.ORGANIZATION));
-		assertNull("fsc", e.getElement(XJDFConstants.SurfaceColor, null, 1).getElement(ElementName.CERTIFICATION));
+		Assertions.assertEquals(e.getChildElementVector(XJDFConstants.SurfaceColor, null).size(), 2);
+		Assertions.assertEquals("fsc", e.getElement(XJDFConstants.SurfaceColor).getElement(ElementName.CERTIFICATION, null, 0).getAttribute(AttributeName.ORGANIZATION));
+		Assertions.assertNull(e.getElement(XJDFConstants.SurfaceColor, null, 1).getElement(ElementName.CERTIFICATION), "fsc");
 		// writeRoundTrip(n, "ColorIntent");
 	}
 
@@ -1367,13 +1362,13 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		}
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final JDFDoc d = xCon.convert(h);
-		assertEquals(d.getJDFRoot().getJobPartID(true), "root");
+		Assertions.assertEquals(d.getJDFRoot().getJobPartID(true), "root");
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement newRoot = conv.convert(d.getJDFRoot());
 		final XJDFHelper h2 = new XJDFHelper(newRoot);
-		assertEquals(h2.numProductHelpers(true), 2);
-		assertEquals(h2.numProductHelpers(false), 6);
+		Assertions.assertEquals(h2.numProductHelpers(true), 2);
+		Assertions.assertEquals(h2.numProductHelpers(false), 6);
 	}
 
 	/**
@@ -1388,7 +1383,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		di.setDeviceStatus(EnumDeviceStatus.Running);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), "Production");
+		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), "Production");
 	}
 
 	/**
@@ -1405,8 +1400,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		di.appendEmployee().setPersonalID("e2");
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/Activity/@PersonalID", null), "e1");
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/Activity[2]@PersonalID", null), "e2");
+		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/Activity/@PersonalID", null), "e1");
+		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/Activity[2]@PersonalID", null), "e2");
 	}
 
 	/**
@@ -1423,7 +1418,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 1 }));
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@ModuleIDs", null), "0 1");
+		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@ModuleIDs", null), "0 1");
 	}
 
 	/**
@@ -1440,7 +1435,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 4, 6 }));
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@ModuleIDs", null), "0 4 6");
+		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@ModuleIDs", null), "0 4 6");
 	}
 
 	/**
@@ -1453,12 +1448,12 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		jmf.getCommand(0).appendEmployee().setPersonalID("P1");
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
-		assertEquals(xjmf.getXPathAttribute("CommandPipeControl/Header/@PersonalID", null), "P1");
+		Assertions.assertEquals(xjmf.getXPathAttribute("CommandPipeControl/Header/@PersonalID", null), "P1");
 
 		final XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		final JDFDoc d = invert.convert(xjmf);
 		final JDFJMF jmf2 = d.getJMFRoot();
-		assertEquals(jmf2.getCommand(0).getEmployee(0).getPersonalID(), "P1");
+		Assertions.assertEquals(jmf2.getCommand(0).getEmployee(0).getPersonalID(), "P1");
 	}
 
 	/**
@@ -1474,16 +1469,16 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		emp.setPersonalID("P1");
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Part/@ContactType", null), ElementName.EMPLOYEE);
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/@ContactTypeDetails", null), "ShiftLeader TelephoneSanitizer");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/@ExternalID", null), "P1");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Part/@ContactType", null), ElementName.EMPLOYEE);
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/@ContactTypeDetails", null), "ShiftLeader TelephoneSanitizer");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/@ExternalID", null), "P1");
 
 		final XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		final JDFDoc d = invert.convert(xjdf);
 		final JDFNode n2 = d.getJDFRoot();
 		final JDFEmployee emp2 = (JDFEmployee) n2.getResource(ElementName.EMPLOYEE, EnumUsage.Input, 0);
-		assertEquals(emp2.getPersonalID(), "P1");
-		assertEquals(emp2.getRoles(), roles);
+		Assertions.assertEquals(emp2.getPersonalID(), "P1");
+		Assertions.assertEquals(emp2.getRoles(), roles);
 	}
 
 	/**
@@ -1506,11 +1501,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.makeNewJDF(n, null);
-		assertNotNull(xjdf);
+		Assertions.assertNotNull(xjdf);
 
 		conv.setRetainAll(true);
 		xjdf = conv.makeNewJDF(n, null);
-		assertNotNull(xjdf);
+		Assertions.assertNotNull(xjdf);
 	}
 
 	/**
@@ -1526,11 +1521,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.makeNewJDF(n, null);
-		assertNotNull(xjdf);
+		Assertions.assertNotNull(xjdf);
 
 		conv.setRetainAll(true);
 		xjdf = conv.makeNewJDF(n, null);
-		assertNotNull(xjdf);
+		Assertions.assertNotNull(xjdf);
 	}
 
 	/**
@@ -1597,7 +1592,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
-		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/@Locked", null));
+		Assertions.assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/@Locked", null));
 	}
 
 	/**
@@ -1613,8 +1608,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
-		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@Unit", null));
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/@Unit", null), "parsec");
+		Assertions.assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@Unit", null));
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/@Unit", null), "parsec");
 	}
 
 	/**
@@ -1629,8 +1624,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
-		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/@DescriptiveName", null));
-		assertEquals("c1", xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@DescriptiveName", null));
+		Assertions.assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/@DescriptiveName", null));
+		Assertions.assertEquals("c1", xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@DescriptiveName", null));
 	}
 
 	/**
@@ -1650,7 +1645,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
-		assertTrue(xjdf.toXML().indexOf(ElementName.SOURCERESOURCE) < 0);
+		Assertions.assertTrue(xjdf.toXML().indexOf(ElementName.SOURCERESOURCE) < 0);
 	}
 
 	/**
@@ -1664,7 +1659,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		ni.setWorkStepID("w1");
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
-		assertEquals("w1", new XJDFHelper(xjdf).getSet(ElementName.NODEINFO, null).getPartition(0).getAttribute(XJDFConstants.ExternalID));
+		Assertions.assertEquals("w1", new XJDFHelper(xjdf).getSet(ElementName.NODEINFO, null).getPartition(0).getAttribute(XJDFConstants.ExternalID));
 	}
 
 	/**
@@ -1678,7 +1673,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		conv.setRetainAll(true);
 		conv.setNewVersion(EnumVersion.Version_2_1);
 		final KElement xjdf = conv.makeNewJDF(n, null);
-		assertEquals("2.1", xjdf.getAttribute(AttributeName.VERSION));
+		Assertions.assertEquals("2.1", xjdf.getAttribute(AttributeName.VERSION));
 	}
 
 	/**
@@ -1692,7 +1687,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		uc.setCounterID("c1");
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
-		assertEquals("c1", new XJDFHelper(xjdf).getSet(ElementName.USAGECOUNTER, null).getPartition(0).getAttribute(XJDFConstants.ExternalID));
+		Assertions.assertEquals("c1", new XJDFHelper(xjdf).getSet(ElementName.USAGECOUNTER, null).getPartition(0).getAttribute(XJDFConstants.ExternalID));
 	}
 
 	/**
@@ -1709,7 +1704,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
 		final JDFNodeInfo ni2 = (JDFNodeInfo) new XJDFHelper(xjdf).getSet(ElementName.NODEINFO, null).getPartition(0).getResource();
-		assertNull(ni2.getMISDetails().getDeviceOperationMode());
+		Assertions.assertNull(ni2.getMISDetails().getDeviceOperationMode());
 
 	}
 
@@ -1736,11 +1731,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Part/@ContactType", null), "Employee");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/@ContactTypeDetails", null), "ShiftLeader TelephoneSanitizer");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/@ExternalID", null), "P1");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/Address/@Street", null), "Sesame");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/ComChannel/@Locator", null), "tel:123");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Part/@ContactType", null), "Employee");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/@ContactTypeDetails", null), "ShiftLeader TelephoneSanitizer");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/@ExternalID", null), "P1");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/Address/@Street", null), "Sesame");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/ComChannel/@Locator", null), "tel:123");
 	}
 
 	/**
@@ -1754,8 +1749,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
-		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/@URL", null));
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/FileSpec/@URL", null), "previewURL");
+		Assertions.assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/@URL", null));
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/FileSpec/@URL", null), "previewURL");
 		return xjdf;
 	}
 
@@ -1771,8 +1766,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
-		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/@URL", null));
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/FileSpec/@URL", null), "previewURL");
+		Assertions.assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/@URL", null));
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/FileSpec/@URL", null), "previewURL");
 	}
 
 	/**
@@ -1788,8 +1783,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		conv.setRetainAll(true);
 		final KElement xjdf = conv.makeNewJDF(n, null);
-		assertNull(xjdf.getXPathAttribute("ProductList/Product/IntentSet", null));
-		assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/@Name", null), ElementName.LAYOUTINTENT);
+		Assertions.assertNull(xjdf.getXPathAttribute("ProductList/Product/IntentSet", null));
+		Assertions.assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/@Name", null), ElementName.LAYOUTINTENT);
 	}
 
 	/**
@@ -1814,8 +1809,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
 		final XJDFHelper h = new XJDFHelper(xjdf);
-		assertEquals("v1", h.getRootProduct(0).getAttribute(AttributeName.PARTVERSION));
-		assertEquals("v2", h.getRootProduct(1).getAttribute(AttributeName.PARTVERSION));
+		Assertions.assertEquals("v1", h.getRootProduct(0).getAttribute(AttributeName.PARTVERSION));
+		Assertions.assertEquals("v2", h.getRootProduct(1).getAttribute(AttributeName.PARTVERSION));
 	}
 
 	/**
@@ -1829,14 +1824,14 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
-		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditNotification/Notification/Comment", null), "foo");
+		Assertions.assertEquals(xjdf.getXPathAttribute("AuditPool/AuditNotification/Notification/Comment", null), "foo");
 
 		final XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		final JDFDoc d = invert.convert(xjdf);
 		final JDFNode n2 = d.getJDFRoot();
 		final JDFAudit audit = n2.getAuditPool().getAudit(0, EnumAuditType.Notification, null, null);
-		assertEquals(audit.getEmployee(0).getDescriptiveName(), "me");
-		assertEquals(audit.getComment(0).getText(), "foo");
+		Assertions.assertEquals(audit.getEmployee(0).getDescriptiveName(), "me");
+		Assertions.assertEquals(audit.getComment(0).getText(), "foo");
 	}
 
 	/**
@@ -1850,14 +1845,14 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
-		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditNotification/Notification/Event/@EventID", null), "IDfoo");
+		Assertions.assertEquals(xjdf.getXPathAttribute("AuditPool/AuditNotification/Notification/Event/@EventID", null), "IDfoo");
 
 		final XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		final JDFDoc d = invert.convert(xjdf);
 		final JDFNode n2 = d.getJDFRoot();
 		final JDFNotification audit = (JDFNotification) n2.getAuditPool().getAudit(0, EnumAuditType.Notification, null, null);
-		assertEquals(audit.getEmployee(0).getDescriptiveName(), "me");
-		assertEquals(audit.getEvent().getEventID(), "IDfoo");
+		Assertions.assertEquals(audit.getEmployee(0).getDescriptiveName(), "me");
+		Assertions.assertEquals(audit.getEvent().getEventID(), "IDfoo");
 	}
 
 	/**
@@ -1870,12 +1865,12 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.getCreateAuditPool().addAudit(EnumAuditType.PhaseTime, "me");
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditStatus/Header/@Author", null), "me");
+		Assertions.assertEquals(xjdf.getXPathAttribute("AuditPool/AuditStatus/Header/@Author", null), "me");
 
 		final XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		final JDFDoc d = invert.convert(xjdf);
 		final JDFNode n2 = d.getJDFRoot();
-		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.PhaseTime, null, null).getEmployee(0).getDescriptiveName(), "me");
+		Assertions.assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.PhaseTime, null, null).getEmployee(0).getDescriptiveName(), "me");
 	}
 
 	/**
@@ -1894,12 +1889,12 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.convert(n);
 		final XJDFHelper h = new XJDFHelper(xjdf);
 		final SetHelper set = h.getSet(ElementName.APPROVALDETAILS, 0);
-		assertNotNull(set);
-		assertNull(set.getPartition(1));
+		Assertions.assertNotNull(set);
+		Assertions.assertNull(set.getPartition(1));
 		final JDFApprovalDetails det = (JDFApprovalDetails) set.getPartition(0).getResource();
-		assertEquals(EnumApprovalState.Approved, det.getApprovalState());
-		assertEquals("ok", set.getPartition(0).getComment(0));
-		assertNull(det.getElement_KElement(ElementName.APPROVALDETAILS, null, 0));
+		Assertions.assertEquals(EnumApprovalState.Approved, det.getApprovalState());
+		Assertions.assertEquals("ok", set.getPartition(0).getComment(0));
+		Assertions.assertNull(det.getElement_KElement(ElementName.APPROVALDETAILS, null, 0));
 
 	}
 
@@ -1917,7 +1912,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 		final XJDFHelper h = new XJDFHelper(xjdf);
-		assertEquals(2, h.getSet(ElementName.RUNLIST, 0).getPartitions().size());
+		Assertions.assertEquals(2, h.getSet(ElementName.RUNLIST, 0).getPartitions().size());
 	}
 
 	/**
@@ -1931,12 +1926,12 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 		final String agent = xjdf.getXPathAttribute("AuditPool/AuditCreated/Header/@AgentName", null);
-		assertEquals("CIP4 Test Agent", agent);
+		Assertions.assertEquals("CIP4 Test Agent", agent);
 
 		final XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		final JDFDoc d = invert.convert(xjdf);
 		final JDFNode n2 = d.getJDFRoot();
-		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.Created, null, null).getAgentName(), agent);
+		Assertions.assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.Created, null, null).getAgentName(), agent);
 	}
 
 	/**
@@ -1952,13 +1947,13 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.getCreateAuditPool().addProcessRun(EnumNodeStatus.Completed, "me", maps);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditProcessRun/ProcessRun/Part[1]/@SheetName", null), "s1");
-		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditProcessRun/ProcessRun/Part[2]/@SheetName", null), "s2");
+		Assertions.assertEquals(xjdf.getXPathAttribute("AuditPool/AuditProcessRun/ProcessRun/Part[1]/@SheetName", null), "s1");
+		Assertions.assertEquals(xjdf.getXPathAttribute("AuditPool/AuditProcessRun/ProcessRun/Part[2]/@SheetName", null), "s2");
 
 		final XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		final JDFDoc d = invert.convert(xjdf);
 		final JDFNode n2 = d.getJDFRoot();
-		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.ProcessRun, null, null).getPartMapVector().size(), 2);
+		Assertions.assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.ProcessRun, null, null).getPartMapVector().size(), 2);
 	}
 
 	/**
@@ -1967,7 +1962,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testDefVersion()
 	{
-		assertEquals(EnumVersion.Version_2_1, JDFToXJDF.getDefaultVersion());
+		Assertions.assertEquals(EnumVersion.Version_2_1, JDFToXJDF.getDefaultVersion());
 	}
 
 	/**
@@ -1989,7 +1984,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 
-		assertEquals(xjdf.getXPathAttribute("//ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Waste", null), "15");
+		Assertions.assertEquals(xjdf.getXPathAttribute("//ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Waste", null), "15");
 	}
 
 	/**
@@ -2004,7 +1999,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 
-		assertNull(xjdf.getElement(ElementName.ANCESTORPOOL));
+		Assertions.assertNull(xjdf.getElement(ElementName.ANCESTORPOOL));
 	}
 
 	/**
@@ -2022,7 +2017,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertTrue(xjdf.getXPathAttribute("ResourceSet/Resource/Component/@MediaRef", null).startsWith(med.getID()));
+		Assertions.assertTrue(xjdf.getXPathAttribute("ResourceSet/Resource/Component/@MediaRef", null).startsWith(med.getID()));
 	}
 
 	/**
@@ -2044,7 +2039,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final SetHelper sh = new XJDFHelper(xjdf).getSet(ElementName.COMPONENT, EnumUsage.Output);
 		final ResourceHelper rh = sh.getPartition(0);
 		final JDFAmountPool ap = rh.getAmountPool();
-		assertEquals(2, ap.numChildElements(ElementName.PARTAMOUNT, null));
+		Assertions.assertEquals(2, ap.numChildElements(ElementName.PARTAMOUNT, null));
 
 	}
 
@@ -2070,19 +2065,19 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		conv.setRetainAll(true);
 		final KElement xjdf = conv.convert(n);
 
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Waste\"]/../@Amount", null), "15");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Good\"]/../@Amount", null), "10");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Waste\"]/../@Amount", null), "15");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Good\"]/../@Amount", null), "10");
 		conv.setRetainAll(true);
 		final KElement xjdf2 = conv.convert(n);
 
-		assertEquals(xjdf2.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Waste\"]/../@Amount", null), "15");
-		assertEquals(xjdf2.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Good\"]/../@Amount", null), "10");
+		Assertions.assertEquals(xjdf2.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Waste\"]/../@Amount", null), "15");
+		Assertions.assertEquals(xjdf2.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Good\"]/../@Amount", null), "10");
 
 		rl.removeChild(ElementName.AMOUNTPOOL, null, 0);
 		rl.setAmount(42);
 		final KElement xjdf3 = conv.convert(n);
 		// assertEquals(xjdf3.getXPathAttribute("ResourceSet/Resource/@Amount", null), "42");
-		assertEquals(xjdf3.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/@Amount", null), "42");
+		Assertions.assertEquals(xjdf3.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/@Amount", null), "42");
 
 	}
 
@@ -2099,8 +2094,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xm.setPlateType(EnumPlateType.Dummy);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertNotNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@ID", null));
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/ExposedMedia/@MediaRef", null), xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@ID", null));
+		Assertions.assertNotNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@ID", null));
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/ExposedMedia/@MediaRef", null), xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@ID", null));
 	}
 
 	/**
@@ -2118,7 +2113,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Part/@Location", null), "L1");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Part/@Location", null), "L1");
 	}
 
 	/**
@@ -2137,8 +2132,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/@Ord", null), "0");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/MarkObject/CIELABMeasuringField/@Center", null), "2 2");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/@Ord", null), "0");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/MarkObject/CIELABMeasuringField/@Center", null), "2 2");
 	}
 
 	/**
@@ -2153,7 +2148,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/@Automated", null), "true");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/@Automated", null), "true");
 	}
 
 	/**
@@ -2171,8 +2166,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		sheet.setDescriptiveName("s1");
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertEquals("n1", new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getDescriptiveName());
-		assertEquals("s1", new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getPartition(0).getDescriptiveName());
+		Assertions.assertEquals("n1", new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getDescriptiveName());
+		Assertions.assertEquals("s1", new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getPartition(0).getDescriptiveName());
 	}
 
 	/**
@@ -2190,8 +2185,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final XJDF20 xjdf20 = new XJDF20();
 		xjdf20.setMergeLayout(true);
 		final KElement xjdf = xjdf20.makeNewJDF(n, null);
-		assertEquals("foo", xjdf.getXPathAttribute("ResourceSet/Resource/Layout/FileSpec/@URL", null));
-		assertEquals(ElementName.EXTERNALIMPOSITIONTEMPLATE, xjdf.getXPathAttribute("ResourceSet/Resource/Layout/FileSpec/@ResourceUsage", null));
+		Assertions.assertEquals("foo", xjdf.getXPathAttribute("ResourceSet/Resource/Layout/FileSpec/@URL", null));
+		Assertions.assertEquals(ElementName.EXTERNALIMPOSITIONTEMPLATE, xjdf.getXPathAttribute("ResourceSet/Resource/Layout/FileSpec/@ResourceUsage", null));
 	}
 
 	/**
@@ -2211,7 +2206,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final XJDF20 xjdf20 = new XJDF20();
 		xjdf20.setMergeLayout(true);
 		final KElement xjdf = xjdf20.makeNewJDF(n, null);
-		assertEquals(1, xjdf.getXPathElementVector("ResourceSet/Resource/Layout/FileSpec", 0).size());
+		Assertions.assertEquals(1, xjdf.getXPathElementVector("ResourceSet/Resource/Layout/FileSpec", 0).size());
 	}
 
 	/**
@@ -2228,8 +2223,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		sheet.setDescriptiveName("s1");
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertNull(new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getAttribute(XJDFConstants.ExternalID));
-		assertEquals("p1", new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getPartition(0).getExternalID());
+		Assertions.assertNull(new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getAttribute(XJDFConstants.ExternalID));
+		Assertions.assertEquals("p1", new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getPartition(0).getExternalID());
 	}
 
 	/**
@@ -2247,8 +2242,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertNotNull(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/@PaperRef", null));
-		assertNotNull(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/@PlateRef", null));
+		Assertions.assertNotNull(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/@PaperRef", null));
+		Assertions.assertNotNull(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/@PlateRef", null));
 	}
 
 	/**
@@ -2266,8 +2261,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/@Ord", null), "0");
-		assertNotNull(xjdf.getXPathElement("ResourceSet/Resource/Layout/PlacedObject/ContentObject"));
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/@Ord", null), "0");
+		Assertions.assertNotNull(xjdf.getXPathElement("ResourceSet/Resource/Layout/PlacedObject/ContentObject"));
 	}
 
 	/**
@@ -2291,7 +2286,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertEquals(new XJDFHelper(xjdf).getSets(ElementName.MEDIA, null).size(), 2);
+		Assertions.assertEquals(new XJDFHelper(xjdf).getSets(ElementName.MEDIA, null).size(), 2);
 	}
 
 	/**
@@ -2317,10 +2312,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 		final SetHelper sh = new XJDFHelper(xjdf).getSet(ElementName.ASSEMBLY, EnumUsage.Input);
-		assertEquals(4, sh.getRoot().getChildArrayByClass(JDFAssemblySection.class, true, 0).size());
+		Assertions.assertEquals(4, sh.getRoot().getChildArrayByClass(JDFAssemblySection.class, true, 0).size());
 
 		sh.cleanUp();
-		assertEquals(4, sh.getRoot().getChildArrayByClass(JDFAssemblySection.class, true, 0).size());
+		Assertions.assertEquals(4, sh.getRoot().getChildArrayByClass(JDFAssemblySection.class, true, 0).size());
 	}
 
 	/**
@@ -2339,10 +2334,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.convert(n);
 		final SetHelper sh = new XJDFHelper(xjdf).getSet(ElementName.ASSEMBLY, EnumUsage.Input);
 		final JDFAssembly asx = (JDFAssembly) sh.getPartition(0).getResource();
-		assertEquals("AS1 AS2 AS3", asx.getNonEmpty(XJDFConstants.BinderySignatureIDs));
+		Assertions.assertEquals("AS1 AS2 AS3", asx.getNonEmpty(XJDFConstants.BinderySignatureIDs));
 
 		sh.cleanUp();
-		assertEquals("AS1 AS2 AS3", asx.getNonEmpty(XJDFConstants.BinderySignatureIDs));
+		Assertions.assertEquals("AS1 AS2 AS3", asx.getNonEmpty(XJDFConstants.BinderySignatureIDs));
 	}
 
 	/**
@@ -2363,20 +2358,20 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.convert(n);
 		final SetHelper sh = new XJDFHelper(xjdf).getSet(ElementName.ASSEMBLY, EnumUsage.Input);
 		final JDFAssembly asx = (JDFAssembly) sh.getPartition(0).getResource();
-		assertEquals("a1", asx.getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
-		assertNull(asx.getAssemblySection(1));
-		assertEquals("a2", asx.getAssemblySection(0).getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
-		assertNull(asx.getAssemblySection(0).getAssemblySection(1));
-		assertEquals("a3", asx.getAssemblySection(0).getAssemblySection(0).getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
-		assertNull(asx.getAssemblySection(0).getAssemblySection(0).getAssemblySection(1));
+		Assertions.assertEquals("a1", asx.getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
+		Assertions.assertNull(asx.getAssemblySection(1));
+		Assertions.assertEquals("a2", asx.getAssemblySection(0).getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
+		Assertions.assertNull(asx.getAssemblySection(0).getAssemblySection(1));
+		Assertions.assertEquals("a3", asx.getAssemblySection(0).getAssemblySection(0).getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
+		Assertions.assertNull(asx.getAssemblySection(0).getAssemblySection(0).getAssemblySection(1));
 
 		sh.cleanUp();
-		assertEquals("a1", asx.getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
-		assertNull(asx.getAssemblySection(1));
-		assertEquals("a2", asx.getAssemblySection(0).getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
-		assertNull(asx.getAssemblySection(0).getAssemblySection(1));
-		assertEquals("a3", asx.getAssemblySection(0).getAssemblySection(0).getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
-		assertNull(asx.getAssemblySection(0).getAssemblySection(0).getAssemblySection(1));
+		Assertions.assertEquals("a1", asx.getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
+		Assertions.assertNull(asx.getAssemblySection(1));
+		Assertions.assertEquals("a2", asx.getAssemblySection(0).getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
+		Assertions.assertNull(asx.getAssemblySection(0).getAssemblySection(1));
+		Assertions.assertEquals("a3", asx.getAssemblySection(0).getAssemblySection(0).getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
+		Assertions.assertNull(asx.getAssemblySection(0).getAssemblySection(0).getAssemblySection(1));
 
 	}
 
@@ -2402,14 +2397,14 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Amount", null), "1234");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Waste", null), "123");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Amount", null), "1234");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Waste", null), "123");
 
 		mediaLink.removeChild(ElementName.AMOUNTPOOL, null, 0);
 		mediaLink.setAmount(5678, (JDFAttributeMap) null);
 		conv = new JDFToXJDF();
 		final KElement xjdfc = conv.convert(n);
-		assertEquals(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Amount", null), "5678");
+		Assertions.assertEquals(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Amount", null), "5678");
 		writeRoundTripX(xjdf, "CompAmount", EnumValidationLevel.Incomplete);
 	}
 
@@ -2428,8 +2423,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdfc = conv.convert(n);
-		assertEquals(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@ISOPaperSubstrate", null), "PS1");
-		assertNull(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@Grade", null));
+		Assertions.assertEquals(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@ISOPaperSubstrate", null), "PS1");
+		Assertions.assertNull(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@Grade", null));
 		writeRoundTripX(xjdfc, "MediaGrade", EnumValidationLevel.Incomplete);
 	}
 
@@ -2450,7 +2445,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertNotNull(new XJDFHelper(xjdf).getSet(ElementName.MEDIA, 1));
+		Assertions.assertNotNull(new XJDFHelper(xjdf).getSet(ElementName.MEDIA, 1));
 	}
 
 	/**
@@ -2472,8 +2467,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdfc = conv.convert(n);
 		final JDFMedia m = (JDFMedia) xjdfc.getXPathElement("ResourceSet[@Name=\"Media\"]/Resource/Media");
-		assertEquals(EnumGrainDirection.YDirection, m.getGrainDirection());
-		assertEquals(EnumFluteDirection.XDirection, m.getFluteDirection());
+		Assertions.assertEquals(EnumGrainDirection.YDirection, m.getGrainDirection());
+		Assertions.assertEquals(EnumFluteDirection.XDirection, m.getFluteDirection());
 		writeRoundTripX(xjdfc, "MediaFlute", EnumValidationLevel.Incomplete);
 	}
 
@@ -2491,8 +2486,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdfc = conv.convert(n);
-		assertEquals(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@MediaTypeDetails", null), "mtd");
-		assertNull(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@UserMediaType", null));
+		Assertions.assertEquals(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@MediaTypeDetails", null), "mtd");
+		Assertions.assertNull(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@UserMediaType", null));
 		writeRoundTripX(xjdfc, "MediaType", EnumValidationLevel.Incomplete);
 	}
 
@@ -2518,9 +2513,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
-		assertNotNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/Part/@Location", null));
-		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/Part/@Location", null));
-		assertNotNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/Part/@Separation", null));
+		Assertions.assertNotNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/Part/@Location", null));
+		Assertions.assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/Part/@Location", null));
+		Assertions.assertNotNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/Part/@Separation", null));
 	}
 
 	/**
@@ -2553,7 +2548,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFJMF jmf = new JMFBuilder().buildSubmitQueueEntry("http://foo.bar", "xjdfs");
 		conv.writeStream(FileUtil.getBufferedOutputStream(new File(sm_dirTestDataTemp + "3files.xjmf.zip")), product, jmf);
-		assertTrue(product.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(product.isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**
@@ -2570,8 +2565,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.convert(node);
 		final ResourceHelper ph = new XJDFHelper(xjdf).getPartition(ElementName.HOLEMAKINGPARAMS, 0, 0);
 		final KElement holepattern = ph.getResource().getElement("HolePattern");
-		assertNotNull(holepattern);
-		assertEquals(holepattern.getAttribute(AttributeName.CENTER), "3 4");
+		Assertions.assertNotNull(holepattern);
+		Assertions.assertEquals(holepattern.getAttribute(AttributeName.CENTER), "3 4");
 	}
 
 	/**
@@ -2592,8 +2587,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final ResourceHelper ph = new XJDFHelper(xjdf).getPartition(ElementName.LABELINGPARAMS, 0, 0);
 		final VJDFAttributeMap vMap = new VJDFAttributeMap(new JDFAttributeMap(AttributeName.SHEETNAME, "s1"));
 		vMap.add(new JDFAttributeMap(AttributeName.SHEETNAME, "s2"));
-		assertEquals(vMap, ph.getPartMapVector());
-		assertNull(ph.getResource().getElement(ElementName.IDENTICAL));
+		Assertions.assertEquals(vMap, ph.getPartMapVector());
+		Assertions.assertNull(ph.getResource().getElement(ElementName.IDENTICAL));
 
 	}
 
@@ -2611,7 +2606,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(node);
 
-		assertNotNull(xjdf.getXPathElement("ProductList/Product/Intent[@Name=\"AssemblingIntent\"]/AssemblingIntent/BindIn"));
+		Assertions.assertNotNull(xjdf.getXPathElement("ProductList/Product/Intent[@Name=\"AssemblingIntent\"]/AssemblingIntent/BindIn"));
 	}
 
 	/**
@@ -2666,9 +2661,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.convert(node);
 		final ResourceHelper ph = new XJDFHelper(xjdf).getPartition(ElementName.HOLEMAKINGPARAMS, 0, 0);
 		final KElement holepattern = ph.getResource().getElement("HolePattern");
-		assertNotNull(holepattern);
-		assertEquals(holepattern.getAttribute(AttributeName.CENTER), "5 6");
-		assertEquals(holepattern.getAttribute(AttributeName.PITCH), "42");
+		Assertions.assertNotNull(holepattern);
+		Assertions.assertEquals(holepattern.getAttribute(AttributeName.CENTER), "5 6");
+		Assertions.assertEquals(holepattern.getAttribute(AttributeName.PITCH), "42");
 		return xjdf;
 	}
 
@@ -2683,7 +2678,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		node.setType(EnumType.CoilBinding);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(node);
-		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
+		Assertions.assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
 	}
 
 	/**
@@ -2699,9 +2694,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		cbp.setColor(EnumNamedColor.Red);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(node);
-		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
-		assertNull(new XJDFHelper(xjdf).getSet(ElementName.COILBINDINGPARAMS, 0));
-		assertNotNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
+		Assertions.assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
+		Assertions.assertNull(new XJDFHelper(xjdf).getSet(ElementName.COILBINDINGPARAMS, 0));
+		Assertions.assertNotNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
 	}
 
 	/**
@@ -2718,9 +2713,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		cbp.setNoOp(true);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(node);
-		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
-		assertNull(new XJDFHelper(xjdf).getSet(ElementName.COILBINDINGPARAMS, 0));
-		assertNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
+		Assertions.assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
+		Assertions.assertNull(new XJDFHelper(xjdf).getSet(ElementName.COILBINDINGPARAMS, 0));
+		Assertions.assertNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
 	}
 
 	/**
@@ -2736,12 +2731,12 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		cbp.setColor(EnumNamedColor.Red);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(node);
-		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
-		assertNull(new XJDFHelper(xjdf).getSet(ElementName.COILBINDINGPARAMS, 0));
-		assertNotNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
+		Assertions.assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
+		Assertions.assertNull(new XJDFHelper(xjdf).getSet(ElementName.COILBINDINGPARAMS, 0));
+		Assertions.assertNotNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
 		final SetHelper set = new XJDFHelper(xjdf).getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Spine");
-		assertNotNull(set);
-		assertEquals("Red", set.getPartition(0).getResource().getAttribute(AttributeName.COLOR));
+		Assertions.assertNotNull(set);
+		Assertions.assertEquals("Red", set.getPartition(0).getResource().getAttribute(AttributeName.COLOR));
 	}
 
 	/**
@@ -2757,12 +2752,12 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		cbp.setClampColor(EnumNamedColor.Red);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(node);
-		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
-		assertNull(new XJDFHelper(xjdf).getSet(ElementName.CHANNELBINDINGPARAMS, 0));
-		assertNotNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
+		Assertions.assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
+		Assertions.assertNull(new XJDFHelper(xjdf).getSet(ElementName.CHANNELBINDINGPARAMS, 0));
+		Assertions.assertNotNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
 		final SetHelper set = new XJDFHelper(xjdf).getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Spine");
-		assertNotNull(set);
-		assertEquals("Red", set.getPartition(0).getResource().getAttribute(AttributeName.COLOR));
+		Assertions.assertNotNull(set);
+		Assertions.assertEquals("Red", set.getPartition(0).getResource().getAttribute(AttributeName.COLOR));
 	}
 
 	/**
@@ -2787,8 +2782,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.convert(n);
 
 		final JDFCutBlock cb = (JDFCutBlock) xjdf.getXPathElement("ResourceSet/Resource/CuttingParams/CutBlock");
-		assertEquals("pid", cb.getAttribute(XJDFConstants.ExternalID));
-		assertEquals("desc name", cb.getDescriptiveName());
+		Assertions.assertEquals("pid", cb.getAttribute(XJDFConstants.ExternalID));
+		Assertions.assertEquals("desc name", cb.getDescriptiveName());
 	}
 
 	/**
@@ -2804,10 +2799,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		cbp.setDiameter(42);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(node);
-		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
-		assertNull(new XJDFHelper(xjdf).getSet(ElementName.COILBINDINGPARAMS, 0));
-		assertNotNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
-		assertEquals("42", new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0).getPartition(0).getXPathValue("LooseBindingParams/CoilBindingDetails/@Diameter"));
+		Assertions.assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
+		Assertions.assertNull(new XJDFHelper(xjdf).getSet(ElementName.COILBINDINGPARAMS, 0));
+		Assertions.assertNotNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
+		Assertions.assertEquals("42", new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0).getPartition(0).getXPathValue("LooseBindingParams/CoilBindingDetails/@Diameter"));
 	}
 
 	/**
@@ -2821,7 +2816,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		node.setType(EnumType.Buffer);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(node);
-		assertEquals(EnumType.ManualLabor.getName(), xjdf.getAttribute(AttributeName.TYPES));
+		Assertions.assertEquals(EnumType.ManualLabor.getName(), xjdf.getAttribute(AttributeName.TYPES));
 	}
 
 	/**
@@ -2835,7 +2830,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		product.write2File(sm_dirTestDataTemp + "getXJDFS.jdf");
 		final JDFToXJDF conv = new JDFToXJDF();
 		final Collection<XJDFHelper> v = conv.getXJDFs(product);
-		assertEquals(v.size(), 3);
+		Assertions.assertEquals(v.size(), 3);
 		for (final XJDFHelper h : v)
 		{
 			h.writeToFile(sm_dirTestDataTemp + "getXJDFS." + h.getJobPartID() + ".xjdf");
@@ -2852,7 +2847,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final XJDFHelper h = conv.getCombined(jdf);
 		h.writeToFile(sm_dirTestDataTemp + "Folding_sample.xjdf");
-		assertNotNull(h.getSet(ElementName.CUTTINGPARAMS, 0));
+		Assertions.assertNotNull(h.getSet(ElementName.CUTTINGPARAMS, 0));
 	}
 
 	static JDFNode prepareProduct()
@@ -2899,7 +2894,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final XJDFHelper h = conv.getCombined(product);
-		assertEquals(new VString("Product Impositioning Interpreting Rendering ImageSetting InkZoneCalculation ConventionalPrinting", null), h.getTypes());
+		Assertions.assertEquals(new VString("Product Impositioning Interpreting Rendering ImageSetting InkZoneCalculation ConventionalPrinting", null), h.getTypes());
 	}
 
 	/**
@@ -2912,7 +2907,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final XJDFHelper h = conv.getCombined(product);
-		assertEquals(1, h.getSets(ElementName.EXPOSEDMEDIA, null).size());
+		Assertions.assertEquals(1, h.getSets(ElementName.EXPOSEDMEDIA, null).size());
 	}
 
 	/**

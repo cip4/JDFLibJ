@@ -70,7 +70,7 @@ package org.cip4.jdflib.extensions.xjdfgoldenticket;
 
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.extensions.examples.ExampleTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

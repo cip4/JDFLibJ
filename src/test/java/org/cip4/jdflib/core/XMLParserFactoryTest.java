@@ -70,15 +70,13 @@
  */
 package org.cip4.jdflib.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.MemorySpy;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author rainerprosi
@@ -111,14 +109,14 @@ public class XMLParserFactoryTest extends JDFTestCaseBase
 			final XMLParser xmlParser = f.get();
 			XMLDoc d = xmlParser.parseFile(sm_dirTestData + "bigWhite.jdf");
 			f.push(xmlParser);
-			assertNotNull(d);
+			Assertions.assertNotNull(d);
 			System.gc();
 		}
 		System.gc();
 		ThreadUtil.sleep(123);
 		long mem2 = new MemorySpy().getCurrentMem();
 		if (mem2 > mem)
-			assertEquals("mem: ", mem2, mem, 20000000);
+			Assertions.assertEquals(mem2, mem, 20000000, "mem: ");
 	}
 
 }

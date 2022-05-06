@@ -71,12 +71,11 @@
 
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.ByteArrayInputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -94,13 +93,13 @@ public class PrefixInputStreamTest extends JDFTestCaseBase
 	public void testRead() throws Exception
 	{
 		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
-		assertEquals(pis.read(), 'a');
-		assertEquals(pis.read(), 'b');
-		assertEquals(pis.read(), 'c');
-		assertEquals(pis.read(), '1');
-		assertEquals(pis.read(), '2');
-		assertEquals(pis.read(), '3');
-		assertEquals(pis.read(), -1);
+		Assertions.assertEquals(pis.read(), 'a');
+		Assertions.assertEquals(pis.read(), 'b');
+		Assertions.assertEquals(pis.read(), 'c');
+		Assertions.assertEquals(pis.read(), '1');
+		Assertions.assertEquals(pis.read(), '2');
+		Assertions.assertEquals(pis.read(), '3');
+		Assertions.assertEquals(pis.read(), -1);
 	}
 
 	/**
@@ -112,17 +111,17 @@ public class PrefixInputStreamTest extends JDFTestCaseBase
 	{
 		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
 		pis.mark(44);
-		assertEquals(pis.read(), 'a');
-		assertEquals(pis.read(), 'b');
+		Assertions.assertEquals(pis.read(), 'a');
+		Assertions.assertEquals(pis.read(), 'b');
 		pis.reset();
-		assertEquals(pis.read(), 'a');
-		assertEquals(pis.read(), 'b');
+		Assertions.assertEquals(pis.read(), 'a');
+		Assertions.assertEquals(pis.read(), 'b');
 
-		assertEquals(pis.read(), 'c');
-		assertEquals(pis.read(), '1');
-		assertEquals(pis.read(), '2');
-		assertEquals(pis.read(), '3');
-		assertEquals(pis.read(), -1);
+		Assertions.assertEquals(pis.read(), 'c');
+		Assertions.assertEquals(pis.read(), '1');
+		Assertions.assertEquals(pis.read(), '2');
+		Assertions.assertEquals(pis.read(), '3');
+		Assertions.assertEquals(pis.read(), -1);
 	}
 
 	/**
@@ -134,21 +133,21 @@ public class PrefixInputStreamTest extends JDFTestCaseBase
 	{
 		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
 		pis.mark(44);
-		assertEquals(pis.read(), 'a');
-		assertEquals(pis.read(), 'b');
+		Assertions.assertEquals(pis.read(), 'a');
+		Assertions.assertEquals(pis.read(), 'b');
 
-		assertEquals(pis.read(), 'c');
-		assertEquals(pis.read(), '1');
-		assertEquals(pis.read(), '2');
+		Assertions.assertEquals(pis.read(), 'c');
+		Assertions.assertEquals(pis.read(), '1');
+		Assertions.assertEquals(pis.read(), '2');
 		pis.reset();
-		assertEquals(pis.read(), 'a');
-		assertEquals(pis.read(), 'b');
-		assertEquals(pis.read(), 'c');
-		assertEquals(pis.read(), '1');
-		assertEquals(pis.read(), '2');
+		Assertions.assertEquals(pis.read(), 'a');
+		Assertions.assertEquals(pis.read(), 'b');
+		Assertions.assertEquals(pis.read(), 'c');
+		Assertions.assertEquals(pis.read(), '1');
+		Assertions.assertEquals(pis.read(), '2');
 
-		assertEquals(pis.read(), '3');
-		assertEquals(pis.read(), -1);
+		Assertions.assertEquals(pis.read(), '3');
+		Assertions.assertEquals(pis.read(), -1);
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -162,11 +161,11 @@ public class PrefixInputStreamTest extends JDFTestCaseBase
 	{
 		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
 		final byte b[] = new byte[2];
-		assertEquals(pis.read(b), 2);
-		assertEquals(pis.read(b), 1);
-		assertEquals(pis.read(b), 2);
-		assertEquals(pis.read(b), 1);
-		assertEquals(pis.read(b), -1);
+		Assertions.assertEquals(pis.read(b), 2);
+		Assertions.assertEquals(pis.read(b), 1);
+		Assertions.assertEquals(pis.read(b), 2);
+		Assertions.assertEquals(pis.read(b), 1);
+		Assertions.assertEquals(pis.read(b), -1);
 	}
 
 	/**
@@ -178,11 +177,11 @@ public class PrefixInputStreamTest extends JDFTestCaseBase
 	{
 		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
 		final byte b[] = new byte[2];
-		assertEquals(pis.read(b, 0, 2), 2);
-		assertEquals(pis.read(b, 0, 2), 1);
-		assertEquals(pis.read(b, 0, 2), 2);
-		assertEquals(pis.read(b, 0, 2), 1);
-		assertEquals(pis.read(b, 0, 2), -1);
+		Assertions.assertEquals(pis.read(b, 0, 2), 2);
+		Assertions.assertEquals(pis.read(b, 0, 2), 1);
+		Assertions.assertEquals(pis.read(b, 0, 2), 2);
+		Assertions.assertEquals(pis.read(b, 0, 2), 1);
+		Assertions.assertEquals(pis.read(b, 0, 2), -1);
 	}
 	// /////////////////////////////////////////////////////////////////////////
 

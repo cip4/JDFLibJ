@@ -37,22 +37,12 @@
  */
 package org.cip4.jdflib.jmf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.*;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
@@ -60,7 +50,8 @@ import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -104,8 +95,8 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	{
 		final JDFJMF jmf = b.buildSubmitQueueEntry("retURL", "xxx");
 		final JDFQueueSubmissionParams queueSubmissionParams = jmf.getCommand(0).getQueueSubmissionParams(0);
-		assertEquals(queueSubmissionParams.getURL(), "xxx");
-		assertEquals(queueSubmissionParams.getReturnJMF(), "retURL");
+		Assertions.assertEquals(queueSubmissionParams.getURL(), "xxx");
+		Assertions.assertEquals(queueSubmissionParams.getReturnJMF(), "retURL");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "submitQueueEntry");
 	}
 
@@ -117,17 +108,17 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 */
 	private void roundTrip(final JDFJMF jmf, final EnumValidationLevel level, final String dir)
 	{
-		assertTrue(jmf.isValid(level));
+		Assertions.assertTrue(jmf.isValid(level));
 		jmf.write2File(dir + ".jmf");
 		final JDFToXJDF xc = new XJDF20();
 		xc.setTypeSafeMessage(true);
 		final KElement e = xc.convert(jmf);
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		e.write2File(dir + ".xjmf");
 		final XJDFToJDFConverter xc2 = new XJDFToJDFConverter(null);
 		final JDFDoc doc = xc2.convert(e);
 		doc.write2File(dir + ".xjmf.jmf", 2, false);
-		assertTrue(doc.getJMFRoot().isValid(level));
+		Assertions.assertTrue(doc.getJMFRoot().isValid(level));
 
 	}
 
@@ -139,7 +130,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testBuildResourceSignal()
 	{
 		final JDFJMF jmf = b.buildResourceSignal(true, null);
-		assertEquals(jmf.getSignal(0).getType(), "Resource");
+		Assertions.assertEquals(jmf.getSignal(0).getType(), "Resource");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "resourceSignal");
 	}
 
@@ -163,7 +154,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 		map.put(AttributeName.CONDITION, "Waste");
 		rl.setActualAmount(33, map);
 		final JDFJMF jmf = b.buildResourceSignal(true, rl);
-		assertEquals(jmf.getSignal(0).getType(), "Resource");
+		Assertions.assertEquals(jmf.getSignal(0).getType(), "Resource");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "resourceSignalWaste");
 	}
 
@@ -197,7 +188,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 				ap.appendPartAmount(map).setActualAmount(125 + (i * 42 * sep.hashCode()) % 123);
 			}
 		}
-		assertEquals(signal.getType(), "Resource");
+		Assertions.assertEquals(signal.getType(), "Resource");
 		jmf.write2File(sm_dirTestDataTemp + "resourceInk.jmf");
 	}
 
@@ -209,7 +200,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testBuildStatusSignal()
 	{
 		final JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
-		assertEquals(jmf.getSignal(0).getType(), "Status");
+		Assertions.assertEquals(jmf.getSignal(0).getType(), "Status");
 		roundTrip(jmf, EnumValidationLevel.Incomplete, sm_dirTestDataTemp + "statusSignal");
 	}
 
@@ -221,11 +212,11 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testBuildNewJDFCommand()
 	{
 		final JDFJMF jmf = b.buildNewJDFCommand();
-		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 		final JDFToXJDF xc = new XJDF20();
 		xc.setTypeSafeMessage(true);
 		final KElement e = xc.convert(jmf);
-		assertNull(e);
+		Assertions.assertNull(e);
 
 	}
 
@@ -281,13 +272,13 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testSenderID()
 	{
 		JDFJMF jmf = b.buildMilestone("PrepressCompleted", "jobID");
-		assertEquals(jmf.getSenderID(), JDFJMF.getTheSenderID());
+		Assertions.assertEquals(jmf.getSenderID(), JDFJMF.getTheSenderID());
 		b.setSenderID("fooBar");
 		jmf = b.buildMilestone("PrepressCompleted", "jobID");
-		assertEquals(jmf.getSenderID(), "fooBar");
+		Assertions.assertEquals(jmf.getSenderID(), "fooBar");
 		b.setSenderID(null);
 		jmf = b.buildMilestone("PrepressCompleted", "jobID");
-		assertEquals(jmf.getSenderID(), "");
+		Assertions.assertEquals(jmf.getSenderID(), "");
 	}
 
 }

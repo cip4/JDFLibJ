@@ -48,8 +48,8 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -65,34 +65,34 @@ public class JDFDurationTest {
 	public final void testNegativeDuration() throws Exception
 	{
 		JDFDuration d = new JDFDuration(" -PT5M ");
-		Assert.assertEquals(d.getDurationISO(), "-PT5M");
+		Assertions.assertEquals(d.getDurationISO(), "-PT5M");
 		try
 		{
 			new JDFDuration("--PT5M90.95S");
-			Assert.fail("bad duration string");
+			Assertions.fail("bad duration string");
 		}
 		catch (final Exception e)
 		{
 			// nop
 		}
 		d = new JDFDuration("-P3M");
-		Assert.assertEquals(d.getDurationISO(), "-P3M");
-		Assert.assertEquals(d.getDuration(), -3 * 30 * 24 * 60 * 60);
+		Assertions.assertEquals(d.getDurationISO(), "-P3M");
+		Assertions.assertEquals(d.getDuration(), -3 * 30 * 24 * 60 * 60);
 		d = new JDFDuration("-P3MT4M");
-		Assert.assertEquals(d.getDurationISO(), "-P3MT4M");
-		Assert.assertEquals(d.getDuration(), -3 * 30 * 24 * 60 * 60 - 4 * 60);
+		Assertions.assertEquals(d.getDurationISO(), "-P3MT4M");
+		Assertions.assertEquals(d.getDuration(), -3 * 30 * 24 * 60 * 60 - 4 * 60);
 		d = new JDFDuration("-P13M");
-		Assert.assertEquals(d.getDurationISO(), "-P1Y1M");
+		Assertions.assertEquals(d.getDurationISO(), "-P1Y1M");
 
 		d = new JDFDuration("-P365D");
-		Assert.assertEquals(d.getDurationISO(), "-P1Y");
+		Assertions.assertEquals(d.getDurationISO(), "-P1Y");
 		d = new JDFDuration("-P395D");
-		Assert.assertEquals(d.getDurationISO(), "-P1Y1M");
+		Assertions.assertEquals(d.getDurationISO(), "-P1Y1M");
 		d = new JDFDuration("-PT3600S");
-		Assert.assertEquals(d.getDurationISO(), "-PT1H");
-		Assert.assertEquals(new JDFDuration("-PT0.95S").getDurationISO(), "-PT0.95S");
-		Assert.assertEquals(new JDFDuration("-PT5M30.45S").getDurationISO(), "-PT5M30.45S");
-		Assert.assertEquals(new JDFDuration("-PT5M90.95S").getDurationISO(), "-PT6M30.95S");
+		Assertions.assertEquals(d.getDurationISO(), "-PT1H");
+		Assertions.assertEquals(new JDFDuration("-PT0.95S").getDurationISO(), "-PT0.95S");
+		Assertions.assertEquals(new JDFDuration("-PT5M30.45S").getDurationISO(), "-PT5M30.45S");
+		Assertions.assertEquals(new JDFDuration("-PT5M90.95S").getDurationISO(), "-PT6M30.95S");
 	}
 
 	/**
@@ -103,11 +103,11 @@ public class JDFDurationTest {
 	public final void testJDFDurationString() throws Exception
 	{
 		JDFDuration d = new JDFDuration(" PT5M ");
-		Assert.assertEquals(d.getDurationISO(), "PT5M");
+		Assertions.assertEquals(d.getDurationISO(), "PT5M");
 		try
 		{
 			new JDFDuration("PT5M90.95aS");
-			Assert.fail("bad duration string");
+			Assertions.fail("bad duration string");
 		}
 		catch (final Exception e)
 		{
@@ -116,27 +116,27 @@ public class JDFDurationTest {
 		try
 		{
 			new JDFDuration("PTM90.95aS");
-			Assert.fail("bad duration string");
+			Assertions.fail("bad duration string");
 		}
 		catch (final Exception e)
 		{
 			// nop
 		}
 		d = new JDFDuration("P3M");
-		Assert.assertEquals(d.getDurationISO(), "P3M");
-		Assert.assertEquals(d.getDuration(), 3 * 30 * 24 * 60 * 60);
+		Assertions.assertEquals(d.getDurationISO(), "P3M");
+		Assertions.assertEquals(d.getDuration(), 3 * 30 * 24 * 60 * 60);
 		d = new JDFDuration("P3MT4M");
-		Assert.assertEquals(d.getDurationISO(), "P3MT4M");
-		Assert.assertEquals(d.getDuration(), 3 * 30 * 24 * 60 * 60 + 4 * 60);
+		Assertions.assertEquals(d.getDurationISO(), "P3MT4M");
+		Assertions.assertEquals(d.getDuration(), 3 * 30 * 24 * 60 * 60 + 4 * 60);
 		d = new JDFDuration("P13M");
-		Assert.assertEquals(d.getDurationISO(), "P1Y1M");
+		Assertions.assertEquals(d.getDurationISO(), "P1Y1M");
 
 		d = new JDFDuration("P365D");
-		Assert.assertEquals(d.getDurationISO(), "P1Y");
+		Assertions.assertEquals(d.getDurationISO(), "P1Y");
 		d = new JDFDuration("P395D");
-		Assert.assertEquals(d.getDurationISO(), "P1Y1M");
+		Assertions.assertEquals(d.getDurationISO(), "P1Y1M");
 		d = new JDFDuration("PT3600S");
-		Assert.assertEquals(d.getDurationISO(), "PT1H");
+		Assertions.assertEquals(d.getDurationISO(), "PT1H");
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -148,11 +148,11 @@ public class JDFDurationTest {
 	@Test
 	public final void testFractions() throws Exception
 	{
-		Assert.assertEquals(new JDFDuration(90.5).getDurationISO(), "PT1M30.5S");
-		Assert.assertEquals(new JDFDuration(-90.5).getDurationISO(), "-PT1M30.5S");
-		Assert.assertEquals(new JDFDuration("PT0.95S").getDurationISO(), "PT0.95S");
-		Assert.assertEquals(new JDFDuration("PT5M30.45S").getDurationISO(), "PT5M30.45S");
-		Assert.assertEquals(new JDFDuration("PT5M90.95S").getDurationISO(), "PT6M30.95S");
+		Assertions.assertEquals(new JDFDuration(90.5).getDurationISO(), "PT1M30.5S");
+		Assertions.assertEquals(new JDFDuration(-90.5).getDurationISO(), "-PT1M30.5S");
+		Assertions.assertEquals(new JDFDuration("PT0.95S").getDurationISO(), "PT0.95S");
+		Assertions.assertEquals(new JDFDuration("PT5M30.45S").getDurationISO(), "PT5M30.45S");
+		Assertions.assertEquals(new JDFDuration("PT5M90.95S").getDurationISO(), "PT6M30.95S");
 	}
 
 	/**
@@ -162,12 +162,12 @@ public class JDFDurationTest {
 	@Test
 	public final void testEqualsFractions() throws Exception
 	{
-		Assert.assertEquals(new JDFDuration(90.5), new JDFDuration("PT1M30.5S"));
-		Assert.assertEquals(new JDFDuration(-90.5), new JDFDuration("-PT1M30.5S"));
-		Assert.assertEquals(new JDFDuration(0.95), new JDFDuration("PT0.95S"));
-		Assert.assertEquals(new JDFDuration(99.00001), new JDFDuration(99));
-		Assert.assertFalse(new JDFDuration(99.001).equals(new JDFDuration(99)));
-		Assert.assertEquals(new JDFDuration(-99.00001), new JDFDuration(-99));
+		Assertions.assertEquals(new JDFDuration(90.5), new JDFDuration("PT1M30.5S"));
+		Assertions.assertEquals(new JDFDuration(-90.5), new JDFDuration("-PT1M30.5S"));
+		Assertions.assertEquals(new JDFDuration(0.95), new JDFDuration("PT0.95S"));
+		Assertions.assertEquals(new JDFDuration(99.00001), new JDFDuration(99));
+		Assertions.assertFalse(new JDFDuration(99.001).equals(new JDFDuration(99)));
+		Assertions.assertEquals(new JDFDuration(-99.00001), new JDFDuration(-99));
 	}
 
 	/**
@@ -177,12 +177,12 @@ public class JDFDurationTest {
 	@Test
 	public final void testEqualsFractionsHash() throws Exception
 	{
-		Assert.assertEquals(new JDFDuration(90.5).hashCode(), new JDFDuration("PT1M30.5S").hashCode());
-		Assert.assertEquals(new JDFDuration(-90.5).hashCode(), new JDFDuration("-PT1M30.5S").hashCode());
-		Assert.assertEquals(new JDFDuration(0.95).hashCode(), new JDFDuration("PT0.95S").hashCode());
-		Assert.assertEquals(new JDFDuration(99.00001).hashCode(), new JDFDuration(99).hashCode());
-		Assert.assertFalse(new JDFDuration(99.001).hashCode() == new JDFDuration(99).hashCode());
-		Assert.assertEquals(new JDFDuration(-99.00001).hashCode(), new JDFDuration(-99).hashCode());
+		Assertions.assertEquals(new JDFDuration(90.5).hashCode(), new JDFDuration("PT1M30.5S").hashCode());
+		Assertions.assertEquals(new JDFDuration(-90.5).hashCode(), new JDFDuration("-PT1M30.5S").hashCode());
+		Assertions.assertEquals(new JDFDuration(0.95).hashCode(), new JDFDuration("PT0.95S").hashCode());
+		Assertions.assertEquals(new JDFDuration(99.00001).hashCode(), new JDFDuration(99).hashCode());
+		Assertions.assertFalse(new JDFDuration(99.001).hashCode() == new JDFDuration(99).hashCode());
+		Assertions.assertEquals(new JDFDuration(-99.00001).hashCode(), new JDFDuration(-99).hashCode());
 	}
 
 	// //////////////////////////////////////////////////////////////////////
@@ -193,13 +193,13 @@ public class JDFDurationTest {
 	@Test
 	public final void testCompareTo()
 	{
-		Assert.assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(90.5)), 0);
-		Assert.assertEquals(new JDFDuration(-90.5).compareTo(new JDFDuration(-90.5)), 0);
-		Assert.assertEquals(new JDFDuration(-90.5).compareTo(new JDFDuration(0)), -1);
-		Assert.assertEquals(new JDFDuration(-90.5).compareTo(new JDFDuration(-20)), -1);
-		Assert.assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(0)), 1);
-		Assert.assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(90)), 1);
-		Assert.assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(900)), -1);
+		Assertions.assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(90.5)), 0);
+		Assertions.assertEquals(new JDFDuration(-90.5).compareTo(new JDFDuration(-90.5)), 0);
+		Assertions.assertEquals(new JDFDuration(-90.5).compareTo(new JDFDuration(0)), -1);
+		Assertions.assertEquals(new JDFDuration(-90.5).compareTo(new JDFDuration(-20)), -1);
+		Assertions.assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(0)), 1);
+		Assertions.assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(90)), 1);
+		Assertions.assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(900)), -1);
 	}
 
 	/**
@@ -210,11 +210,11 @@ public class JDFDurationTest {
 	{
 		final JDFDate start = new JDFDate();
 		final JDFDate end = new JDFDate(start);
-		Assert.assertEquals(new JDFDuration(start, end), new JDFDuration(0));
+		Assertions.assertEquals(new JDFDuration(start, end), new JDFDuration(0));
 		end.addOffset(20, 0, 0, 0);
-		Assert.assertEquals(new JDFDuration(start, end), new JDFDuration(20));
+		Assertions.assertEquals(new JDFDuration(start, end), new JDFDuration(20));
 		start.addOffset(120, 0, 0, 0);
-		Assert.assertEquals(new JDFDuration(start, end), new JDFDuration(-100));
+		Assertions.assertEquals(new JDFDuration(start, end), new JDFDuration(-100));
 	}
 
 	/**
@@ -224,8 +224,8 @@ public class JDFDurationTest {
 	public final void testAddSeconds()
 	{
 		final JDFDuration duration = new JDFDuration();
-		Assert.assertEquals(duration.addSeconds(5.234), 5.234, 0.0001);
-		Assert.assertEquals(duration.getDurationISO(), "PT5.234S");
+		Assertions.assertEquals(duration.addSeconds(5.234), 5.234, 0.0001);
+		Assertions.assertEquals(duration.getDurationISO(), "PT5.234S");
 	}
 
 	/**
@@ -236,15 +236,15 @@ public class JDFDurationTest {
 	{
 		final JDFDuration duration = new JDFDuration();
 		duration.setDuration(65);
-		Assert.assertEquals(duration.getDurationISO(), "PT1M5S");
+		Assertions.assertEquals(duration.getDurationISO(), "PT1M5S");
 		duration.setDuration(60 * 60 * 24 * 63);
-		Assert.assertEquals(duration.getDurationISO(), "P2M3D");
+		Assertions.assertEquals(duration.getDurationISO(), "P2M3D");
 		duration.addSeconds(65.5);
-		Assert.assertEquals(duration.getDurationISO(), "P2M3DT1M5.5S");
+		Assertions.assertEquals(duration.getDurationISO(), "P2M3DT1M5.5S");
 		duration.addSeconds(60 * 60 * 3);
-		Assert.assertEquals(duration.getDurationISO(), "P2M3DT3H1M5.5S");
+		Assertions.assertEquals(duration.getDurationISO(), "P2M3DT3H1M5.5S");
 		duration.addSeconds(60 * 60 * 3);
-		Assert.assertEquals(duration.getDurationISO(), "P2M3DT6H1M5.5S");
+		Assertions.assertEquals(duration.getDurationISO(), "P2M3DT6H1M5.5S");
 	}
 
 	/**
@@ -253,7 +253,7 @@ public class JDFDurationTest {
 	@Test
 	public final void testGetDurationMillis()
 	{
-		Assert.assertEquals(JDFDuration.createDuration("P1000D").getDurationMillis(), 1000l * 1000l * 60l * 60l * 24l);
+		Assertions.assertEquals(JDFDuration.createDuration("P1000D").getDurationMillis(), 1000l * 1000l * 60l * 60l * 24l);
 	}
 
 	/**
@@ -262,7 +262,7 @@ public class JDFDurationTest {
 	@Test
 	public final void testGetDuration()
 	{
-		Assert.assertEquals(JDFDuration.createDuration("P1000D").getDuration() * 1000l, 1000l * 1000l * 60l * 60l * 24l);
+		Assertions.assertEquals(JDFDuration.createDuration("P1000D").getDuration() * 1000l, 1000l * 1000l * 60l * 60l * 24l);
 	}
 
 	/**
@@ -271,7 +271,7 @@ public class JDFDurationTest {
 	@Test
 	public final void testGetDurationINF()
 	{
-		Assert.assertEquals(JDFDuration.createDuration("INF").getDuration(), Long.MAX_VALUE);
+		Assertions.assertEquals(JDFDuration.createDuration("INF").getDuration(), Long.MAX_VALUE);
 	}
 
 	/**
@@ -282,11 +282,11 @@ public class JDFDurationTest {
 	{
 		final JDFDuration duration = new JDFDuration();
 		duration.setDuration(Double.MAX_VALUE);
-		Assert.assertEquals(duration.getDurationISO(), JDFConstants.POSINF);
+		Assertions.assertEquals(duration.getDurationISO(), JDFConstants.POSINF);
 		duration.setDuration(Long.MAX_VALUE);
-		Assert.assertEquals(duration.getDurationISO(), JDFConstants.POSINF);
+		Assertions.assertEquals(duration.getDurationISO(), JDFConstants.POSINF);
 		duration.setDuration(Integer.MAX_VALUE);
-		Assert.assertEquals(duration.getDurationISO(), JDFConstants.POSINF);
+		Assertions.assertEquals(duration.getDurationISO(), JDFConstants.POSINF);
 	}
 
 	@Test
@@ -301,7 +301,7 @@ public class JDFDurationTest {
 		{
 			ex = e;
 		}
-		Assert.assertNotNull(ex);
+		Assertions.assertNotNull(ex);
 		try
 		{
 			new JDFDuration(" ");
@@ -318,18 +318,18 @@ public class JDFDurationTest {
 	@Test
 	public final void testCreateDuration()
 	{
-		Assert.assertEquals(JDFDuration.createDuration("1").getDuration(), 60 * 60 * 24);
-		Assert.assertEquals(JDFDuration.createDuration("1d").getDuration(), 60 * 60 * 24);
-		Assert.assertEquals(JDFDuration.createDuration("1D").getDuration(), 60 * 60 * 24);
-		Assert.assertEquals(JDFDuration.createDuration("1h").getDuration(), 60 * 60);
-		Assert.assertEquals(JDFDuration.createDuration("1D 1h 3m").getDuration(), 60 * 60 * 25 + 180);
-		Assert.assertEquals(JDFDuration.createDuration("\t1D \n1h 3m").getDuration(), 60 * 60 * 25 + 180);
-		Assert.assertEquals(JDFDuration.createDuration("25h").getDuration(), 60 * 60 * 25);
-		Assert.assertEquals(JDFDuration.createDuration("p25h").getDuration(), 60 * 60 * 25);
-		Assert.assertEquals(JDFDuration.createDuration("pt25h").getDuration(), 60 * 60 * 25);
-		Assert.assertEquals(JDFDuration.createDuration("pt30m").getDuration(), 30 * 60);
-		Assert.assertEquals(JDFDuration.createDuration("pt3h").getDuration(), 3 * 60 * 60);
-		Assert.assertEquals(JDFDuration.createDuration("240h").getDuration(), 60 * 60 * 240);
-		Assert.assertNull(JDFDuration.createDuration("foo"));
+		Assertions.assertEquals(JDFDuration.createDuration("1").getDuration(), 60 * 60 * 24);
+		Assertions.assertEquals(JDFDuration.createDuration("1d").getDuration(), 60 * 60 * 24);
+		Assertions.assertEquals(JDFDuration.createDuration("1D").getDuration(), 60 * 60 * 24);
+		Assertions.assertEquals(JDFDuration.createDuration("1h").getDuration(), 60 * 60);
+		Assertions.assertEquals(JDFDuration.createDuration("1D 1h 3m").getDuration(), 60 * 60 * 25 + 180);
+		Assertions.assertEquals(JDFDuration.createDuration("\t1D \n1h 3m").getDuration(), 60 * 60 * 25 + 180);
+		Assertions.assertEquals(JDFDuration.createDuration("25h").getDuration(), 60 * 60 * 25);
+		Assertions.assertEquals(JDFDuration.createDuration("p25h").getDuration(), 60 * 60 * 25);
+		Assertions.assertEquals(JDFDuration.createDuration("pt25h").getDuration(), 60 * 60 * 25);
+		Assertions.assertEquals(JDFDuration.createDuration("pt30m").getDuration(), 30 * 60);
+		Assertions.assertEquals(JDFDuration.createDuration("pt3h").getDuration(), 3 * 60 * 60);
+		Assertions.assertEquals(JDFDuration.createDuration("240h").getDuration(), 60 * 60 * 240);
+		Assertions.assertNull(JDFDuration.createDuration("foo"));
 	}
 }

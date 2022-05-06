@@ -68,16 +68,11 @@
  */
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -96,10 +91,10 @@ public class UrlPartTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		assertNotNull(writeToURL);
-		assertTrue(writeToURL.toString().contains("<not buffered>"));
+		Assertions.assertNotNull(writeToURL);
+		Assertions.assertTrue(writeToURL.toString().contains("<not buffered>"));
 		writeToURL.buffer();
-		assertFalse(writeToURL.toString().contains("<not buffered>"));
+		Assertions.assertFalse(writeToURL.toString().contains("<not buffered>"));
 	}
 
 	/**
@@ -111,8 +106,8 @@ public class UrlPartTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		assertNotNull(writeToURL);
-		assertNull(writeToURL.getXMLDoc());
+		Assertions.assertNotNull(writeToURL);
+		Assertions.assertNull(writeToURL.getXMLDoc());
 	}
 
 	/**
@@ -124,7 +119,7 @@ public class UrlPartTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		assertNotNull(writeToURL);
+		Assertions.assertNotNull(writeToURL);
 		writeToURL.buffer();
 		final ByteArrayIOStream byteArrayIOStream = new ByteArrayIOStream(writeToURL.getResponseStream());
 		byteArrayIOStream.close();
@@ -139,10 +134,10 @@ public class UrlPartTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		assertNotNull(writeToURL);
+		Assertions.assertNotNull(writeToURL);
 		final File file = new File(sm_dirTestDataTemp + "s1.html");
 		FileUtil.writeFile(writeToURL, file);
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 	}
 
 	/**
@@ -153,7 +148,7 @@ public class UrlPartTest extends JDFTestCaseBase
 	public void testFile() throws Exception
 	{
 		final UrlPart p = new UrlPart(new File("Test.xml"));
-		assertEquals(p.getContentType(), UrlUtil.TEXT_XML);
+		Assertions.assertEquals(p.getContentType(), UrlUtil.TEXT_XML);
 	}
 
 	/**
@@ -163,12 +158,12 @@ public class UrlPartTest extends JDFTestCaseBase
 	@Test
 	public void testRCOK() throws Exception
 	{
-		assertFalse(UrlPart.isReturnCodeOK(null));
-		assertFalse(UrlPart.isReturnCodeOK(new UrlPart(new File("certainly not there"))));
+		Assertions.assertFalse(UrlPart.isReturnCodeOK(null));
+		Assertions.assertFalse(UrlPart.isReturnCodeOK(new UrlPart(new File("certainly not there"))));
 		if (!isTestNetwork())
 			return;
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		assertTrue(UrlPart.isReturnCodeOK(writeToURL));
+		Assertions.assertTrue(UrlPart.isReturnCodeOK(writeToURL));
 	}
 
 }

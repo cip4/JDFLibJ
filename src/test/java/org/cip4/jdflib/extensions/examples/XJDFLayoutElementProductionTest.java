@@ -59,8 +59,8 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFShapeDef;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -217,7 +217,7 @@ public class XJDFLayoutElementProductionTest extends ExampleTest
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	@Override
 	public void setUp() throws Exception
 	{

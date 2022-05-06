@@ -68,8 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -86,7 +84,8 @@ import org.cip4.jdflib.resource.intent.JDFHoleMakingIntent;
 import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFProofingIntent;
 import org.cip4.jdflib.span.JDFSpanProofType.EnumSpanProofType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkIntentTest extends JDFTestCaseBase
 {
@@ -102,7 +101,7 @@ public class WalkIntentTest extends JDFTestCaseBase
 		JDFDoc dJDF = c.convert(h);
 		JDFNode jdfRoot = dJDF.getJDFRoot();
 		JDFProofingIntent pi = (JDFProofingIntent) jdfRoot.getResource(ElementName.PROOFINGINTENT, EnumUsage.Input, 0);
-		assertEquals(pi.getProofItem(0).getProofType().guessActual(), "Page");
+		Assertions.assertEquals(pi.getProofItem(0).getProofType().guessActual(), "Page");
 	}
 
 	/**
@@ -121,7 +120,7 @@ public class WalkIntentTest extends JDFTestCaseBase
 		JDFDoc dJDF = c.convert(h);
 		JDFNode jdfRoot = dJDF.getJDFRoot();
 		JDFInsertingIntent ii = (JDFInsertingIntent) jdfRoot.getResource(ElementName.INSERTINGINTENT, EnumUsage.Input, 0);
-		assertEquals(ii.getInsertList().getInsert(0).getFolio(), new JDFIntegerRangeList("1 ~ 4"));
+		Assertions.assertEquals(ii.getInsertList().getInsert(0).getFolio(), new JDFIntegerRangeList("1 ~ 4"));
 	}
 
 	/**
@@ -139,7 +138,7 @@ public class WalkIntentTest extends JDFTestCaseBase
 		JDFDoc dJDF = c.convert(h);
 		JDFNode jdfRoot = dJDF.getJDFRoot();
 		JDFHoleMakingIntent hi = (JDFHoleMakingIntent) jdfRoot.getResource(ElementName.HOLEMAKINGINTENT, EnumUsage.Input, 0);
-		assertEquals("R2i-US-b", hi.getHoleType().getActual());
+		Assertions.assertEquals("R2i-US-b", hi.getHoleType().getActual());
 	}
 
 	/**
@@ -156,7 +155,7 @@ public class WalkIntentTest extends JDFTestCaseBase
 		JDFDoc dJDF = c.convert(h);
 		JDFNode jdfRoot = dJDF.getJDFRoot();
 		JDFFoldingIntent fi = (JDFFoldingIntent) jdfRoot.getResource(ElementName.FOLDINGINTENT, EnumUsage.Input, 0);
-		assertEquals("F4-1", fi.getFoldingCatalog().getActual());
+		Assertions.assertEquals("F4-1", fi.getFoldingCatalog().getActual());
 
 	}
 

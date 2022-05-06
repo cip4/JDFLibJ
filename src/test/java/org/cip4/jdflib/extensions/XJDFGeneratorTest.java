@@ -57,7 +57,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen

@@ -36,8 +36,6 @@
  */
 package org.cip4.jdflib.util.file;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -45,7 +43,8 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -73,12 +72,12 @@ public class FileSorterTest extends JDFTestCaseBase
 		File[] list = fs.sortLastModified(false);
 		for (int i = 0; i < names.size(); i++)
 		{
-			assertEquals(names.get(i), list[i].getName());
+			Assertions.assertEquals(names.get(i), list[i].getName());
 		}
 		list = fs.sortLastModified(true);
 		for (int i = 0; i < names.size(); i++)
 		{
-			assertEquals(names.get(names.size() - i - 1), list[i].getName());
+			Assertions.assertEquals(names.get(names.size() - i - 1), list[i].getName());
 		}
 	}
 
@@ -102,12 +101,12 @@ public class FileSorterTest extends JDFTestCaseBase
 		File[] list = fs.sortLastModified(false, 1000);
 		for (int i = 0; i < names.size() - 1; i++)
 		{
-			assertEquals(names.get(i), list[i].getName());
+			Assertions.assertEquals(names.get(i), list[i].getName());
 		}
 		list = fs.sortLastModified(true, 1000);
 		for (int i = 0; i < names.size() - 1; i++)
 		{
-			assertEquals(names.get(names.size() - i - 1), list[i].getName());
+			Assertions.assertEquals(names.get(names.size() - i - 1), list[i].getName());
 		}
 	}
 }

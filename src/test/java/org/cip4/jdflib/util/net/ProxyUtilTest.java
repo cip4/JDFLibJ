@@ -76,10 +76,6 @@
  */
 package org.cip4.jdflib.util.net;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.ProxySelector;
@@ -89,9 +85,10 @@ import java.util.List;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -124,7 +121,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
 			if (p != null)
 				i++;
-			assertTrue(i > 0);
+			Assertions.assertTrue(i > 0);
 		}
 	}
 
@@ -145,7 +142,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 			}
 			catch (Exception x)
 			{
-				fail(x.toString());
+				Assertions.fail(x.toString());
 			}
 		}
 	}
@@ -199,7 +196,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		ProxyUtil.setUseSystemDefault(true);
-		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
+		Assertions.assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
 
 	/**
@@ -212,12 +209,12 @@ public class ProxyUtilTest extends JDFTestCaseBase
 			return;
 		ProxyUtil.setUseSystemDefault(true);
 		UrlPart part = UrlUtil.writeToURL("https://www.google.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		assertNotNull(part);
+		Assertions.assertNotNull(part);
 		part.buffer();
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		defaultSel = ProxySelector.getDefault();
@@ -225,7 +222,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		super.tearDown();

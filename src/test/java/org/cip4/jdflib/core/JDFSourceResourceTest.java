@@ -80,8 +80,8 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFSourceResource;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 public class JDFSourceResourceTest extends JDFTestCaseBase
 {
 
@@ -96,13 +96,13 @@ public class JDFSourceResourceTest extends JDFTestCaseBase
 		JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
 		JDFNodeInfo ni = (JDFNodeInfo) n.getMatchingResource("NodeInfo", JDFNode.EnumProcessUsage.AnyInput, null, 0);
 		xm.createSourceResource(ni);
-		Assert.assertEquals("", ni, xm.getSourceResource(0).getLinkRoot());
-		Assert.assertEquals("", ni, xm.getSourceResource(0).getTarget());
-		Assert.assertEquals(ni.getNodeName(), xm.getSourceResource(0).getSourcefNodeName());
+		Assertions.assertEquals(ni, xm.getSourceResource(0).getLinkRoot(), "");
+		Assertions.assertEquals(ni, xm.getSourceResource(0).getTarget(), "");
+		Assertions.assertEquals(ni.getNodeName(), xm.getSourceResource(0).getSourcefNodeName());
 		JDFSourceResource sr = xm.appendSourceResource();
-		Assert.assertNull(sr.getLinkRoot());
-		Assert.assertNull(sr.getTarget());
-		Assert.assertNull(sr.getSourceLocalName());
+		Assertions.assertNull(sr.getLinkRoot());
+		Assertions.assertNull(sr.getTarget());
+		Assertions.assertNull(sr.getSourceLocalName());
 	}
 
 	////////////////////////////////////////////////////////////////////////////

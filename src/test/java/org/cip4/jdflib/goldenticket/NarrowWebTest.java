@@ -69,7 +69,7 @@
 package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG

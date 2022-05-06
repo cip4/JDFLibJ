@@ -68,11 +68,9 @@
  */
 package org.cip4.jdflib.util.file;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -91,7 +89,7 @@ public class RollingDateFileTest extends JDFTestCaseBase
 	public void testGetFileNameInt()
 	{
 		long t = 1332096687756l; // System.currentTimeMillis();
-		assertTrue(rdf.getNewFileName(t).equals("Date.120318.txt") || rdf.getNewFileName(t).equals("Date.120319.txt"));
+		Assertions.assertTrue(rdf.getNewFileName(t).equals("Date.120318.txt") || rdf.getNewFileName(t).equals("Date.120319.txt"));
 	}
 
 	/**
@@ -103,7 +101,7 @@ public class RollingDateFileTest extends JDFTestCaseBase
 	{
 		long t = 1332096687756l; // System.currentTimeMillis();
 		rdf.setFormat("yyyy");
-		assertEquals(rdf.getNewFileName(t), "Date.2012.txt");
+		Assertions.assertEquals(rdf.getNewFileName(t), "Date.2012.txt");
 	}
 
 	/**

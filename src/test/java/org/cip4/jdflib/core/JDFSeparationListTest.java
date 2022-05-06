@@ -68,10 +68,9 @@
  */
 package org.cip4.jdflib.core;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * test for {@link JDFSeparationList}
@@ -90,8 +89,8 @@ public class JDFSeparationListTest extends JDFTestCaseBase
 	{
 		JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
 		sl.setSeparations(new VString("a b b c", null));
-		assertEquals(sl.unify(), new VString("a b c", null));
-		assertEquals(sl.getSeparations(), new VString("a b c", null));
+		Assertions.assertEquals(sl.unify(), new VString("a b c", null));
+		Assertions.assertEquals(sl.getSeparations(), new VString("a b c", null));
 	}
 
 	/**
@@ -104,7 +103,7 @@ public class JDFSeparationListTest extends JDFTestCaseBase
 		JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
 		sl.setSeparations(new VString("a b c", null));
 		sl.removeSeparations(new VString("a c", null));
-		assertEquals(sl.getSeparations(), new VString("b", null));
+		Assertions.assertEquals(sl.getSeparations(), new VString("b", null));
 	}
 
 	/**
@@ -117,6 +116,6 @@ public class JDFSeparationListTest extends JDFTestCaseBase
 		JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
 		sl.setSeparations(new VString("a b c", null));
 		sl.ensureSeparations(new VString("a c d", null));
-		assertEquals(sl.getSeparations(), new VString("a b c d", null));
+		Assertions.assertEquals(sl.getSeparations(), new VString("a b c d", null));
 	}
 }

@@ -78,8 +78,8 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 public class JDFColorConversionParamsTest extends JDFTestCaseBase
 {
 
@@ -95,10 +95,10 @@ public class JDFColorConversionParamsTest extends JDFTestCaseBase
 						EnumUsage.Input, null, null, null, null);
 		JDFFileSpec fs0 = cscp.appendFinalTargetDevice();
 		JDFFileSpec fs1 = cscp.getFinalTargetDevice();
-		Assert.assertEquals(fs1, fs0);
+		Assertions.assertEquals(fs1, fs0);
 		fs0 = (JDFFileSpec) fs0.makeRootResource(null, null, true);
 		fs1 = cscp.getFinalTargetDevice();
-		Assert.assertEquals(fs1, fs0);
+		Assertions.assertEquals(fs1, fs0);
 	}
 
 }

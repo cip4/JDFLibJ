@@ -80,8 +80,8 @@ import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * @author RP
  * 
@@ -132,12 +132,12 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 		ap.appendAncestor().setNodeID(n1.getID());
 		ap.copyNodeData(n, true, true, false);
 		JDFAncestor a0 = ap.getAncestor(0);
-		Assert.assertEquals(a0.getAttribute("foo:bar"), "fnarf");
-		Assert.assertEquals(a0.getNodeID(), n1.getID());
+		Assertions.assertEquals(a0.getAttribute("foo:bar"), "fnarf");
+		Assertions.assertEquals(a0.getNodeID(), n1.getID());
 		String s = dA.write2String(2);
 		JDFParser p = new JDFParser();
 		JDFDoc test = p.parseString(s);
-		Assert.assertNotNull(test);
+		Assertions.assertNotNull(test);
 	}
 
 	// /////////////////////////////////////////////////////
@@ -155,9 +155,9 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 		ap.appendAncestor();
 		JDFNodeInfo ni2 = a2.appendNodeInfo();
 		ni2.makeRootResource(null, null, true);
-		Assert.assertNotNull(a2.getElement("NodeInfoRef", null, 0));
+		Assertions.assertNotNull(a2.getElement("NodeInfoRef", null, 0));
 		n.linkResource(ni2, EnumUsage.Input, null);
-		Assert.assertEquals(n.getNodeInfo(), ni2);
+		Assertions.assertEquals(n.getNodeInfo(), ni2);
 
 	}
 
@@ -174,17 +174,17 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 		JDFAncestor a3 = ap.appendAncestor();
 		JDFNodeInfo ni2 = a2.appendNodeInfo();
 		ni2.appendJMF().appendQuery(JDFMessage.EnumType.Status).appendSubscription();
-		Assert.assertEquals(ap.getAncestorElement(ElementName.NODEINFO, null, "JMF/Query[@Type=\"Status\"]"), ni2);
+		Assertions.assertEquals(ap.getAncestorElement(ElementName.NODEINFO, null, "JMF/Query[@Type=\"Status\"]"), ni2);
 		ni2.makeRootResource(null, null, true);
-		Assert.assertEquals(ap.getAncestorElement(ElementName.NODEINFO, null, "JMF/Query[@Type=\"Status\"]"), ni2);
+		Assertions.assertEquals(ap.getAncestorElement(ElementName.NODEINFO, null, "JMF/Query[@Type=\"Status\"]"), ni2);
 
 		JDFNodeInfo ni3 = a3.appendNodeInfo();
 		ni3.appendJMF().appendQuery(JDFMessage.EnumType.Status).appendSubscription();
-		Assert.assertEquals(ap.getAncestorElement(ElementName.NODEINFO, null, "JMF/Query[@Type=\"Status\"]"), ni3);
+		Assertions.assertEquals(ap.getAncestorElement(ElementName.NODEINFO, null, "JMF/Query[@Type=\"Status\"]"), ni3);
 
 		JDFNodeInfo ni1 = a1.appendNodeInfo();
 		ni1.appendJMF().appendQuery(JDFMessage.EnumType.Resource).appendSubscription();
-		Assert.assertEquals(ap.getAncestorElement(ElementName.NODEINFO, null, "JMF/Query[@Type=\"Resource\"]"), ni1);
+		Assertions.assertEquals(ap.getAncestorElement(ElementName.NODEINFO, null, "JMF/Query[@Type=\"Resource\"]"), ni1);
 	}
 
 	/**
@@ -197,7 +197,7 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 		JDFCustomerInfo ci = n.getCreateCustomerInfo();
 		n.getResourceLinkPool().deleteNode();
 		a1.refElement(ci);
-		Assert.assertEquals(ap.getAncestorElement(ElementName.CUSTOMERINFO, null, null), ci);
+		Assertions.assertEquals(ap.getAncestorElement(ElementName.CUSTOMERINFO, null, null), ci);
 	}
 
 }

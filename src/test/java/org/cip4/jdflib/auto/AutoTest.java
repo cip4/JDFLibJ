@@ -78,8 +78,8 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFAdhesiveBindingParams;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class AutoTest {
 	// Beware!
@@ -101,12 +101,12 @@ public class AutoTest {
 		vDeprecated = adhesiveBindingParam.getTheElementInfo().deprecatedElements();
 		adhesiveBindingParam.appendGlueApplication();
 		vDeprecated = adhesiveBindingParam.getDeprecatedElements(99999999);
-		Assert.assertTrue(vDeprecated.contains(ElementName.GLUEAPPLICATION));
+		Assertions.assertTrue(vDeprecated.contains(ElementName.GLUEAPPLICATION));
 
 		root.setVersion(JDFElement.EnumVersion.Version_1_0);
 		adhesiveBindingParam.init();
 		vDeprecated = adhesiveBindingParam.getDeprecatedElements(99999999);
-		Assert.assertEquals(0, vDeprecated.size());
+		Assertions.assertEquals(0, vDeprecated.size());
 
 		// check MarkObject/DeviceMark
 		//
@@ -115,15 +115,15 @@ public class AutoTest {
 		final JDFMarkObject markObject = layout.appendMarkObject();
 		markObject.appendDeviceMark();
 		vPrerelease = markObject.getPrereleaseElements(99999999);
-		Assert.assertTrue(vPrerelease.contains(ElementName.DEVICEMARK));
+		Assertions.assertTrue(vPrerelease.contains(ElementName.DEVICEMARK));
 
 		root.setVersion(JDFElement.EnumVersion.Version_1_1);
 		vOptional = markObject.getTheElementInfo().optionalElements();
-		Assert.assertTrue(vOptional.contains(ElementName.DEVICEMARK));
+		Assertions.assertTrue(vOptional.contains(ElementName.DEVICEMARK));
 
 		root.setVersion(JDFElement.EnumVersion.Version_1_2);
 		vOptional = markObject.getTheElementInfo().optionalElements();
-		Assert.assertTrue(vOptional.contains(ElementName.DEVICEMARK));
+		Assertions.assertTrue(vOptional.contains(ElementName.DEVICEMARK));
 
 		// DeviceMark is again allowed in 1.4
 		// root.setVersion(JDFElement.EnumVersion.Version_1_3);

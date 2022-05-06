@@ -45,12 +45,6 @@
  */
 package org.cip4.jdflib.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -64,7 +58,8 @@ import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.util.FileUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -154,7 +149,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		log.info("mem new:   " + currentMem + " " + mem);
 		if (currentMem < mem)
 			currentMem = mem;
-		assertEquals("parese memory", currentMem, mem, 4200000);
+		Assertions.assertEquals(currentMem, mem, 4200000, "parese memory");
 		log.info("new:   " + (System.nanoTime() - l1) / 1000000);
 	}
 
@@ -169,7 +164,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		System.gc();
 		final long l1 = System.currentTimeMillis();
 		final JDFDoc d = parser.parseFile(sm_dirTestData + "bigWhite.jdf");
-		assertNotNull(d);
+		Assertions.assertNotNull(d);
 		log.info("big parse:   " + (System.currentTimeMillis() - l1) / 1000.000);
 	}
 
@@ -181,7 +176,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	public void testParseString()
 	{
 		final JDFParser parser = new JDFParser();
-		assertNotNull(parser.parseString(s));
+		Assertions.assertNotNull(parser.parseString(s));
 	}
 
 	/**
@@ -194,11 +189,11 @@ public class JDFParserTest extends JDFTestCaseBase
 		final JDFParser parser = new JDFParser();
 		final JDFDoc d = parser.parseString("<JDF/>");
 		final JDFNode n = d.getJDFRoot();
-		assertEquals(n.getNamespaceURI(), JDFConstants.JDFNAMESPACE);
+		Assertions.assertEquals(n.getNamespaceURI(), JDFConstants.JDFNAMESPACE);
 		JDFAuditPool ap = n.getAuditPool();
-		assertNull(ap);
+		Assertions.assertNull(ap);
 		ap = n.appendAuditPool();
-		assertNotNull(ap);
+		Assertions.assertNotNull(ap);
 	}
 
 	/**
@@ -211,7 +206,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		final JDFParser parser = new JDFParser();
 		final JDFDoc d = parser.parseString("<PrintTalk/>");
 		final KElement pt = d.getRoot();
-		assertTrue(pt instanceof JDFElement);
+		Assertions.assertTrue(pt instanceof JDFElement);
 	}
 
 	/**
@@ -224,7 +219,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		final JDFParser parser = new JDFParser();
 		final JDFDoc d = parser.parseString("<PrintTalk><Request><XJDF><Contact/></XJDF></Request></PrintTalk>");
 		final KElement pt = d.getRoot();
-		assertNotNull(pt.getElementByClass(JDFContact.class, 0, true));
+		Assertions.assertNotNull(pt.getElementByClass(JDFContact.class, 0, true));
 	}
 
 	/**
@@ -236,11 +231,11 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 		final JDFParser parser = new JDFParser();
 		JDFDoc d = parser.parseString("<JDF");
-		assertNull("not wellformed ", d);
+		Assertions.assertNull(d, "not wellformed ");
 		d = parser.parseString("<Foo:JDF/>");
-		assertNull("bad ns ", d);
+		Assertions.assertNull(d, "bad ns ");
 		d = parser.parseString("<JDF><a b=\"a");
-		assertNull("bad attribute ", d);
+		Assertions.assertNull(d, "bad attribute ");
 	}
 
 	/**
@@ -252,11 +247,11 @@ public class JDFParserTest extends JDFTestCaseBase
 		final JDFParser parser = new JDFParser();
 		final JDFDoc d = parser.parseString("<JDF xmlns=\"www.cip4.org\"/>");
 		final JDFNode n = d.getJDFRoot();
-		assertEquals(n.getNamespaceURI(), JDFConstants.JDFNAMESPACE);
+		Assertions.assertEquals(n.getNamespaceURI(), JDFConstants.JDFNAMESPACE);
 		JDFAuditPool ap = n.getAuditPool();
-		assertNull(ap);
+		Assertions.assertNull(ap);
 		ap = n.appendAuditPool();
-		assertNotNull(ap);
+		Assertions.assertNotNull(ap);
 	}
 
 	/**
@@ -270,17 +265,17 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 		final JDFParser parser = new JDFParser();
 		final File f = new File(sm_dirTestData + "ApprovalSubJDF.jdf");
-		assertTrue(f.canRead());
+		Assertions.assertTrue(f.canRead());
 		final File f2 = new File(sm_dirTestDataTemp + "ApprovalSubJDF.jdf");
-		assertTrue(FileUtil.copyFile(f, f2));
+		Assertions.assertTrue(FileUtil.copyFile(f, f2));
 		final InputStream is = new FileInputStream(f2);
 		final JDFDoc d = parser.parseStream(is);
-		assertNotNull(d);
+		Assertions.assertNotNull(d);
 		is.close();
 		final File f3 = new File("movedTo.jdf");
 		f3.delete();
-		assertTrue(FileUtil.moveFile(f2, f3));
-		assertFalse(f2.canRead());
+		Assertions.assertTrue(FileUtil.moveFile(f2, f3));
+		Assertions.assertFalse(f2.canRead());
 		f3.delete();
 
 	}
@@ -294,7 +289,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 		final MyParser p = new MyParser();
 		final JDFDoc doc = p.parseString("<JMF/>");
-		assertEquals(doc.getRoot().getLocalName(), "JMF");
+		Assertions.assertEquals(doc.getRoot().getLocalName(), "JMF");
 		new JDFDoc(doc.getMemberDocument());
 	}
 
@@ -306,7 +301,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	public void testBadNS()
 	{
 		final String s2 = "<JMF/>";
-		assertEquals(new JDFParser().parseString(s2).getRoot().getLocalName(), "JMF");
+		Assertions.assertEquals(new JDFParser().parseString(s2).getRoot().getLocalName(), "JMF");
 	}
 
 	/**
@@ -323,7 +318,7 @@ public class JDFParserTest extends JDFTestCaseBase
 			p.parseString(s);
 		}
 		log.info("mem reuse:   " + getCurrentMem() + " " + mem);
-		assertTrue(getCurrentMem() - mem < 4200000);
+		Assertions.assertTrue(getCurrentMem() - mem < 4200000);
 		log.info("reuse: " + (System.nanoTime() - l1) / 1000000);
 	}
 
@@ -339,13 +334,13 @@ public class JDFParserTest extends JDFTestCaseBase
 		final JDFParser jdfParser = JDFParserFactory.getFactory().get();
 		for (int i = 0; i < 444; i++)
 		{
-			assertNotNull(jdfParser.parseString(s2));
+			Assertions.assertNotNull(jdfParser.parseString(s2));
 
 		}
 		log.info("mem new:   " + getCurrentMem() + " " + mem);
-		assertTrue(getCurrentMem() - mem < 4200000);
+		Assertions.assertTrue(getCurrentMem() - mem < 4200000);
 		JDFParser.m_searchStream = false;
-		assertNull(new JDFParser().parseString(s2));
+		Assertions.assertNull(new JDFParser().parseString(s2));
 	}
 
 	/**
@@ -357,7 +352,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 		final JDFDoc d = new JDFParser().parseString(new JDFDoc("JDF").write2String(2));
 		final JDFCreated c = d.getJDFRoot().getCreateAuditPool().addCreated(null, null);
-		assertTrue(c.getID().length() > 2);
+		Assertions.assertTrue(c.getID().length() > 2);
 	}
 
 	/**
@@ -367,9 +362,9 @@ public class JDFParserTest extends JDFTestCaseBase
 	public void testSchema()
 	{
 		final File foo = new File(sm_dirTestSchema).getParentFile();
-		assertTrue("please mount the svn schema parallel to jdflibJ", foo.isDirectory());
+		Assertions.assertTrue(foo.isDirectory(), "please mount the svn schema parallel to jdflibJ");
 		final File[] dirs = FileUtil.listFilesWithExpression(foo, "*Version_1*");
-		assertTrue(dirs.length > 0);
+		Assertions.assertTrue(dirs.length > 0);
 		int nCheck = 0;
 		for (final File dir2 : dirs)
 		{
@@ -379,13 +374,13 @@ public class JDFParserTest extends JDFTestCaseBase
 				continue;
 			}
 			final File jdfxsd = new File(dir + File.separator + "JDF.xsd");
-			assertTrue(jdfxsd.canRead());
+			Assertions.assertTrue(jdfxsd.canRead());
 			final JDFParser p = new JDFParser();
 			p.setJDFSchemaLocation(jdfxsd);
-			assertNotNull("oops in" + jdfxsd, p.parseString(s));
+			Assertions.assertNotNull(p.parseString(s), "oops in" + jdfxsd);
 			nCheck++;
 		}
-		assertTrue(nCheck >= 1);
+		Assertions.assertTrue(nCheck >= 1);
 	}
 
 	/**

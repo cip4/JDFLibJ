@@ -44,8 +44,8 @@ import org.cip4.jdflib.resource.process.JDFPreflightParams;
 import org.cip4.jdflib.resource.process.JDFPreflightReport;
 import org.cip4.jdflib.resource.process.JDFPreflightReportRulePool;
 import org.cip4.jdflib.resource.process.JDFRunList;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 public class PreflightTest extends JDFTestCaseBase
 {
 	protected JDFActionPool aPool;
@@ -82,25 +82,25 @@ public class PreflightTest extends JDFTestCaseBase
 		prMap.put("PageNumber", "2");
 		groupBy.add("PageNumber");
 		JDFPRItem pi = prp.setPR(aPool.getAction(0), 2, prMap, groupBy);
-		Assert.assertNotNull(pi);
-		Assert.assertEquals(pi.getOccurrences(), 1);
+		Assertions.assertNotNull(pi);
+		Assertions.assertEquals(pi.getOccurrences(), 1);
 		prMap.put("CompressionTypes", "JPEG2000");
 		JDFPRItem pi2 = prp.setPR(aPool.getAction(0), 2, prMap, groupBy);
-		Assert.assertNotNull(pi2);
-		Assert.assertEquals(pi2.getOccurrences(), 2);
-		Assert.assertEquals(pi, pi2);
+		Assertions.assertNotNull(pi2);
+		Assertions.assertEquals(pi2.getOccurrences(), 2);
+		Assertions.assertEquals(pi, pi2);
 		prMap.put("PageNumber", "3");
 		JDFPRItem pi3 = prp.setPR(aPool.getAction(0), 3, prMap, groupBy);
-		Assert.assertNotNull(pi3);
-		Assert.assertEquals(pi3.getOccurrences(), 3);
-		Assert.assertEquals(pi, pi3);
-		Assert.assertEquals(pi.getPageSet(), new JDFIntegerRangeList("2 ~ 3"));
+		Assertions.assertNotNull(pi3);
+		Assertions.assertEquals(pi3.getOccurrences(), 3);
+		Assertions.assertEquals(pi, pi3);
+		Assertions.assertEquals(pi.getPageSet(), new JDFIntegerRangeList("2 ~ 3"));
 		JDFPRItem pi4 = prp.setPR(aPool.getAction(1), 3, null, null);
-		Assert.assertEquals(pi4.getOccurrences(), 1);
-		Assert.assertNotSame(pi, pi4);
-		Assert.assertEquals(pi4.getPageSet(), new JDFIntegerRangeList("3"));
+		Assertions.assertEquals(pi4.getOccurrences(), 1);
+		Assertions.assertNotSame(pi, pi4);
+		Assertions.assertEquals(pi4.getPageSet(), new JDFIntegerRangeList("3"));
 
-		Assert.assertEquals(prp.numChildElements(ElementName.PRITEM, null), 2);
+		Assertions.assertEquals(prp.numChildElements(ElementName.PRITEM, null), 2);
 		n.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + File.separator + "PreflightReport.jdf", 2, false);
 	}
 

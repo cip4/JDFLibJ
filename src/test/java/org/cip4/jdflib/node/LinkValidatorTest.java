@@ -68,9 +68,6 @@
  */
 package org.cip4.jdflib.node;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCustomerInfo;
@@ -84,7 +81,8 @@ import org.cip4.jdflib.resource.process.JDFImageEnhancementParams;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFSheetOptimizingParams;
 import org.cip4.jdflib.resource.process.postpress.JDFWindingParams;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -113,12 +111,12 @@ public class LinkValidatorTest extends JDFTestCaseBase
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.ImageEnhancement);
 		JDFImageEnhancementParams iep = (JDFImageEnhancementParams) n.appendMatchingResource(ElementName.IMAGEENHANCEMENTPARAMS, EnumUsage.Input);
-		assertNotNull(iep);
+		Assertions.assertNotNull(iep);
 		JDFCustomerInfo ci = (JDFCustomerInfo) n.appendMatchingResource(ElementName.CUSTOMERINFO, EnumUsage.Input);
-		assertNotNull(ci);
+		Assertions.assertNotNull(ci);
 		JDFRunList rli = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumUsage.Input);
 		JDFRunList rlo = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumUsage.Output);
-		assertNotSame(rli, rlo);
+		Assertions.assertNotSame(rli, rlo);
 	}
 
 	/**
@@ -131,15 +129,15 @@ public class LinkValidatorTest extends JDFTestCaseBase
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.SheetOptimizing);
 		JDFSheetOptimizingParams sop = (JDFSheetOptimizingParams) n.appendMatchingResource(ElementName.SHEETOPTIMIZINGPARAMS, EnumUsage.Input);
-		assertNotNull(sop);
+		Assertions.assertNotNull(sop);
 		for (int i = 0; i < 3; i++)
 		{
 			n.appendMatchingResource(ElementName.ASSEMBLY, EnumUsage.Input);
 		}
 		JDFCustomerInfo ci = (JDFCustomerInfo) n.appendMatchingResource(ElementName.CUSTOMERINFO, EnumUsage.Input);
-		assertNotNull(ci);
+		Assertions.assertNotNull(ci);
 		JDFStrippingParams sp = (JDFStrippingParams) n.appendMatchingResource(ElementName.STRIPPINGPARAMS, EnumUsage.Output);
-		assertNotNull(sp);
+		Assertions.assertNotNull(sp);
 	}
 
 	/**
@@ -152,12 +150,12 @@ public class LinkValidatorTest extends JDFTestCaseBase
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.Winding);
 		JDFWindingParams sop = (JDFWindingParams) n.appendMatchingResource(ElementName.WINDINGPARAMS, EnumUsage.Input);
-		assertNotNull(sop);
-		assertNotNull(n.appendMatchingResource(ElementName.MEDIA, EnumUsage.Input));
-		assertNotNull(n.appendMatchingResource(ElementName.MEDIA, EnumProcessUsage.Core, null));
+		Assertions.assertNotNull(sop);
+		Assertions.assertNotNull(n.appendMatchingResource(ElementName.MEDIA, EnumUsage.Input));
+		Assertions.assertNotNull(n.appendMatchingResource(ElementName.MEDIA, EnumProcessUsage.Core, null));
 		JDFCustomerInfo ci = (JDFCustomerInfo) n.appendMatchingResource(ElementName.CUSTOMERINFO, EnumUsage.Input);
-		assertNotNull(ci);
+		Assertions.assertNotNull(ci);
 		JDFComponent sp = (JDFComponent) n.appendMatchingResource(ElementName.COMPONENT, EnumUsage.Output);
-		assertNotNull(sp);
+		Assertions.assertNotNull(sp);
 	}
 }

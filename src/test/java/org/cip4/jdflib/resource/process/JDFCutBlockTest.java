@@ -77,8 +77,8 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFCutBlockTest {
 	/**
@@ -92,12 +92,12 @@ public class JDFCutBlockTest {
 		final JDFNode root = doc.getJDFRoot();
 		final JDFResourcePool resPool = root.getCreateResourcePool();
 		final KElement kElem = resPool.appendResource(ElementName.CUTBLOCK, null, null);
-		Assert.assertTrue(kElem instanceof JDFCutBlock);
+		Assertions.assertTrue(kElem instanceof JDFCutBlock);
 		final JDFCutBlock block = (JDFCutBlock) kElem;
 		block.setBlockName("Foo");
 		block.setBlockSize(new JDFXYPair(10, 10));
 		block.setBlockType(EnumBlockType.CutBlock);
-		Assert.assertTrue(block.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(block.isValid(EnumValidationLevel.Complete));
 
 	}
 
@@ -112,9 +112,9 @@ public class JDFCutBlockTest {
 		final JDFNode root = doc.getJDFRoot();
 		final JDFResourcePool resPool = root.getCreateResourcePool();
 		final KElement kElem = resPool.appendResource(ElementName.CUTBLOCK, null, null);
-		Assert.assertTrue(kElem instanceof JDFCutBlock);
+		Assertions.assertTrue(kElem instanceof JDFCutBlock);
 		final JDFCutBlock block = (JDFCutBlock) kElem;
-		Assert.assertEquals(EnumPartIDKey.BlockName, block.getImplicitPartitions().get(0));
+		Assertions.assertEquals(EnumPartIDKey.BlockName, block.getImplicitPartitions().get(0));
 
 	}
 

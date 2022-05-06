@@ -72,8 +72,6 @@
  */
 package org.cip4.jdflib.resource;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
@@ -83,7 +81,8 @@ import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JMFBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -99,7 +98,7 @@ public class JDFPhaseTimeTest extends JDFTestCaseBase
 	public void testGetDeviceID()
 	{
 		testSetDeviceID();
-		assertEquals("d1", pt.getDeviceID());
+		Assertions.assertEquals("d1", pt.getDeviceID());
 	}
 
 	/**
@@ -109,7 +108,7 @@ public class JDFPhaseTimeTest extends JDFTestCaseBase
 	public void testSetDeviceID()
 	{
 		pt.setDeviceID("d1");
-		assertEquals(pt.getDevice(0).getDeviceID(), "d1");
+		Assertions.assertEquals(pt.getDevice(0).getDeviceID(), "d1");
 	}
 
 	/**
@@ -144,6 +143,6 @@ public class JDFPhaseTimeTest extends JDFTestCaseBase
 		jobPhase.setAmount(42);
 		jobPhase.setStatus(EnumNodeStatus.InProgress);
 		pt.setPhase(jobPhase);
-		assertEquals(pt.getStatus(), EnumNodeStatus.InProgress);
+		Assertions.assertEquals(pt.getStatus(), EnumNodeStatus.InProgress);
 	}
 }

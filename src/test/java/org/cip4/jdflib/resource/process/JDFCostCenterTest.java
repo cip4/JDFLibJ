@@ -74,8 +74,8 @@ package org.cip4.jdflib.resource.process;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * 
  *  
@@ -95,11 +95,11 @@ public class JDFCostCenterTest extends JDFTestCaseBase
 		cs.setCostCenterID("CS");
 		JDFCostCenter cs2 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs2.setCostCenterID("CS");
-		Assert.assertTrue(cs.matches(cs2));
-		Assert.assertTrue(cs.matches("CS"));
-		Assert.assertFalse(cs.matches("CS2"));
+		Assertions.assertTrue(cs.matches(cs2));
+		Assertions.assertTrue(cs.matches("CS"));
+		Assertions.assertFalse(cs.matches("CS2"));
 		cs2.setCostCenterID("CS2");
-		Assert.assertFalse(cs.matches(cs2));
+		Assertions.assertFalse(cs.matches(cs2));
 	}
 
 }

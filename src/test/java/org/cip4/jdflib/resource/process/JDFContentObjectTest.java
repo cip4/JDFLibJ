@@ -71,9 +71,6 @@
 
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -81,7 +78,8 @@ import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -119,19 +117,19 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			assertEquals(JDFContentObject.calcOrd(0, 10, 0, 2, 2, i), 0 + i);
-			assertEquals(JDFContentObject.calcOrd(-1, 10, 0, 2, 2, i), -1);
-			assertEquals(JDFContentObject.calcOrd(-1, 12, 0, 2, 2, i), 11 + i);
-			assertEquals(JDFContentObject.calcOrd(-1, 12, 1, 2, 2, i), 9 + i);
-			assertEquals(JDFContentObject.calcOrd(-2, 10, 2, 2, 2, i), 6 + i);
-			assertEquals(JDFContentObject.calcOrd(-2, 10, 3, 2, 2, i), -1);
-			assertEquals(JDFContentObject.calcOrd(0, 13, 3, 2, 2, i), 6 + i);
-			assertEquals(JDFContentObject.calcOrd(0, 12, 3, 2, 2, i), -1);
+			Assertions.assertEquals(JDFContentObject.calcOrd(0, 10, 0, 2, 2, i), 0 + i);
+			Assertions.assertEquals(JDFContentObject.calcOrd(-1, 10, 0, 2, 2, i), -1);
+			Assertions.assertEquals(JDFContentObject.calcOrd(-1, 12, 0, 2, 2, i), 11 + i);
+			Assertions.assertEquals(JDFContentObject.calcOrd(-1, 12, 1, 2, 2, i), 9 + i);
+			Assertions.assertEquals(JDFContentObject.calcOrd(-2, 10, 2, 2, 2, i), 6 + i);
+			Assertions.assertEquals(JDFContentObject.calcOrd(-2, 10, 3, 2, 2, i), -1);
+			Assertions.assertEquals(JDFContentObject.calcOrd(0, 13, 3, 2, 2, i), 6 + i);
+			Assertions.assertEquals(JDFContentObject.calcOrd(0, 12, 3, 2, 2, i), -1);
 
-			assertEquals(JDFContentObject.calcOrd(-2, 13, 3, 2, 2, i), 8 + i);
-			assertEquals(JDFContentObject.calcOrd(-2, 12, 3, 2, 2, i), -1);
-			assertEquals(JDFContentObject.calcOrd(-2, 12, 3, 2, 2, i), -1);
-			assertEquals(JDFContentObject.calcOrd(-1, 10, 1, 2, 2, i), 9 + i);
+			Assertions.assertEquals(JDFContentObject.calcOrd(-2, 13, 3, 2, 2, i), 8 + i);
+			Assertions.assertEquals(JDFContentObject.calcOrd(-2, 12, 3, 2, 2, i), -1);
+			Assertions.assertEquals(JDFContentObject.calcOrd(-2, 12, 3, 2, 2, i), -1);
+			Assertions.assertEquals(JDFContentObject.calcOrd(-1, 10, 1, 2, 2, i), 9 + i);
 		}
 	}
 
@@ -144,7 +142,7 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 	{
 		final JDFContentObject co = lo.appendContentObject();
 		co.setTrimSize(1.12345, 2.3456, 2);
-		assertTrue(co.toXML().indexOf("1.12 2.35\"") > 0);
+		Assertions.assertTrue(co.toXML().indexOf("1.12 2.35\"") > 0);
 	}
 
 	/**
@@ -157,7 +155,7 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 		final JDFContentObject co = lo.appendContentObject();
 		co.setTrimSize(1.2345, 2.3456);
 		co.setCTM(JDFMatrix.getUnitMatrix());
-		assertEquals(new JDFRectangle(0, 0, 1.2345, 2.3456), co.getRect());
+		Assertions.assertEquals(new JDFRectangle(0, 0, 1.2345, 2.3456), co.getRect());
 	}
 
 	/**
@@ -169,7 +167,7 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 	{
 		final JDFContentObject co = lo.appendContentObject();
 		co.setTrimSize(1.12345, 2.3456, 2);
-		assertTrue(co.toXML().indexOf("1.12 2.35\"") > 0);
+		Assertions.assertTrue(co.toXML().indexOf("1.12 2.35\"") > 0);
 	}
 
 	/**
@@ -181,6 +179,6 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 	{
 		final JDFContentObject co = lo.appendContentObject();
 		co.setClipPath("1.0000004 1.2345678 l 1 2 3 g ds", 2);
-		assertEquals(co.getClipPath(), ("1 1.23 l 1 2 3 g ds"));
+		Assertions.assertEquals(co.getClipPath(), ("1 1.23 l 1 2 3 g ds"));
 	}
 }

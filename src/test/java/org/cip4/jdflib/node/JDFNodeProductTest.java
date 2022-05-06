@@ -80,8 +80,8 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -107,11 +107,11 @@ public class JDFNodeProductTest {
 		final JDFResourceLink rli = productNode.getMatchingLink("LayoutIntent", JDFNode.EnumProcessUsage.AnyInput, 0);
 
 		boolean bValid = rli.isValid(EnumValidationLevel.Complete);
-		Assert.assertTrue(bValid);
+		Assertions.assertTrue(bValid);
 
 		final JDFLayoutIntent layoutIntent2 = (JDFLayoutIntent) rli.getTarget();
 		bValid = bValid && (layoutIntent2.equals(layoutIntent));
-		Assert.assertTrue(bValid);
+		Assertions.assertTrue(bValid);
 	}
 
 }

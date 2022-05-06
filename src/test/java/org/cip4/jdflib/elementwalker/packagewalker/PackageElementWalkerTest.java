@@ -68,9 +68,6 @@
  */
 package org.cip4.jdflib.elementwalker.packagewalker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -82,7 +79,8 @@ import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -99,7 +97,7 @@ public class PackageElementWalkerTest extends JDFTestCaseBase
 	public void testConstruct()
 	{
 		PackageTestWalker w = new PackageTestWalker();
-		assertNotNull(w);
+		Assertions.assertNotNull(w);
 	}
 
 	/**
@@ -111,9 +109,9 @@ public class PackageElementWalkerTest extends JDFTestCaseBase
 	{
 		FixVersion v = new FixVersion(EnumVersion.Version_1_1);
 		FixVersion v2 = new FixVersion(EnumVersion.Version_1_1);
-		assertNotNull(v2);
-		assertNotNull(v);
-		assertEquals(v.getFactory().getBaseWalkers().size(), v2.getFactory().getBaseWalkers().size());
+		Assertions.assertNotNull(v2);
+		Assertions.assertNotNull(v);
+		Assertions.assertEquals(v.getFactory().getBaseWalkers().size(), v2.getFactory().getBaseWalkers().size());
 	}
 
 	/**
@@ -130,7 +128,7 @@ public class PackageElementWalkerTest extends JDFTestCaseBase
 		XJDFToJDFConverter c2 = new XJDFToJDFConverter(null);
 		JDFDoc d2 = c2.convert(xjdf);
 		JDFNode n2 = d2.getJDFRoot();
-		assertNotNull(n2.getResource(ElementName.EXPOSEDMEDIA, null, 0));
+		Assertions.assertNotNull(n2.getResource(ElementName.EXPOSEDMEDIA, null, 0));
 	}
 
 	/**
@@ -142,8 +140,8 @@ public class PackageElementWalkerTest extends JDFTestCaseBase
 	{
 		PackageTestWalker w = new PackageTestWalker();
 		BaseWalkerFactory factory = w.getFactory();
-		assertNotNull(factory);
-		assertEquals(WalkFoo.class, factory.getWalker(new XMLDoc("D", null).getRoot()).getClass());
+		Assertions.assertNotNull(factory);
+		Assertions.assertEquals(WalkFoo.class, factory.getWalker(new XMLDoc("D", null).getRoot()).getClass());
 	}
 
 	/**
@@ -157,8 +155,8 @@ public class PackageElementWalkerTest extends JDFTestCaseBase
 		{
 			PackageTestWalker w = new PackageTestWalker();
 			BaseWalkerFactory factory = w.getFactory();
-			assertNotNull(factory);
-			assertEquals(WalkFoo.class, factory.getWalker(new XMLDoc("D", null).getRoot()).getClass());
+			Assertions.assertNotNull(factory);
+			Assertions.assertEquals(WalkFoo.class, factory.getWalker(new XMLDoc("D", null).getRoot()).getClass());
 		}
 	}
 }

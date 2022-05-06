@@ -38,10 +38,6 @@
  */
 package org.cip4.jdflib.resource.intent;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -52,7 +48,8 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
 import org.cip4.jdflib.util.JDFDate;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -68,7 +65,7 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	{
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
 		final JDFNumberSpan ns = di.appendOverage();
-		assertNotNull(ns);
+		Assertions.assertNotNull(ns);
 	}
 
 	/**
@@ -81,10 +78,10 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
 		final JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		final JDFDropIntent drop = di.appendDropIntent();
-		assertNull(drop.getDropItemWithComponent(c));
+		Assertions.assertNull(drop.getDropItemWithComponent(c));
 		final JDFDropItemIntent dropItemIntent = drop.appendDropItemIntent();
 		dropItemIntent.refComponent(c);
-		assertEquals(dropItemIntent, drop.getDropItemWithComponent(c));
+		Assertions.assertEquals(dropItemIntent, drop.getDropItemWithComponent(c));
 	}
 
 	/**
@@ -99,12 +96,12 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 		final JDFComponent c1 = (JDFComponent) c.addPartition(EnumPartIDKey.SheetName, "S1");
 		final JDFComponent c2 = (JDFComponent) c.addPartition(EnumPartIDKey.SheetName, "S2");
 		final JDFDropIntent drop = di.appendDropIntent();
-		assertNull(drop.getDropItemWithComponent(c1));
+		Assertions.assertNull(drop.getDropItemWithComponent(c1));
 		final JDFDropItemIntent dropItemIntent = drop.appendDropItemIntent();
 		dropItemIntent.refComponent(c1);
-		assertEquals(dropItemIntent, drop.getDropItemWithComponent(c1));
-		assertNull(drop.getDropItemWithComponent(c2));
-		assertNull(drop.getDropItemWithComponent(c));
+		Assertions.assertEquals(dropItemIntent, drop.getDropItemWithComponent(c1));
+		Assertions.assertNull(drop.getDropItemWithComponent(c2));
+		Assertions.assertNull(drop.getDropItemWithComponent(c));
 	}
 
 	/**
@@ -117,7 +114,7 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
 		final JDFDropIntent drop = di.appendDropIntent();
 		drop.setDropID("d1");
-		assertEquals("d1", drop.getDropID());
+		Assertions.assertEquals("d1", drop.getDropID());
 	}
 
 	/**
@@ -131,7 +128,7 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 		final JDFDropIntent drop = di.appendDropIntent();
 		final JDFDropItemIntent dii = drop.appendDropItemIntent();
 		dii.setDropID("d1");
-		assertEquals("d1", dii.getDropID());
+		Assertions.assertEquals("d1", dii.getDropID());
 	}
 
 	/**
@@ -145,7 +142,7 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 		final JDFDropIntent drop = di.appendDropIntent();
 		final JDFDropItemIntent dii = drop.appendDropItemIntent();
 		drop.setDropID("d1");
-		assertEquals("d1", dii.getDropID());
+		Assertions.assertEquals("d1", dii.getDropID());
 	}
 
 	/**
@@ -160,12 +157,12 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 		final JDFComponent c1 = (JDFComponent) c.addPartition(EnumPartIDKey.SheetName, "S1");
 		final JDFComponent c2 = (JDFComponent) c.addPartition(EnumPartIDKey.SheetName, "S2");
 		final JDFDropIntent drop = di.appendDropIntent();
-		assertNull(di.getDropItemWithComponent(c1));
+		Assertions.assertNull(di.getDropItemWithComponent(c1));
 		final JDFDropItemIntent dropItemIntent = drop.appendDropItemIntent();
 		dropItemIntent.refComponent(c1);
-		assertEquals(dropItemIntent, di.getDropItemWithComponent(c1));
-		assertNull(di.getDropItemWithComponent(c2));
-		assertNull(di.getDropItemWithComponent(c));
+		Assertions.assertEquals(dropItemIntent, di.getDropItemWithComponent(c1));
+		Assertions.assertNull(di.getDropItemWithComponent(c2));
+		Assertions.assertNull(di.getDropItemWithComponent(c));
 	}
 
 	/**
@@ -178,9 +175,9 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
 		final JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		final JDFDropIntent drop = di.appendDropIntent();
-		assertNull(drop.getDropItemWithComponent(c));
+		Assertions.assertNull(drop.getDropItemWithComponent(c));
 		final JDFDropItemIntent dropItemIntent = drop.getCreateDropItemWithComponent(c);
-		assertEquals(dropItemIntent, drop.getDropItemWithComponent(c));
+		Assertions.assertEquals(dropItemIntent, drop.getDropItemWithComponent(c));
 	}
 
 	/**
@@ -195,13 +192,13 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 		final JDFComponent c1 = (JDFComponent) c.addPartition(EnumPartIDKey.SheetName, "S1");
 		final JDFComponent c2 = (JDFComponent) c.addPartition(EnumPartIDKey.SheetName, "S2");
 		final JDFDropIntent drop = di.appendDropIntent();
-		assertNull(drop.getDropItemWithComponent(c1));
+		Assertions.assertNull(drop.getDropItemWithComponent(c1));
 		JDFDropItemIntent dropItemIntent = drop.getCreateDropItemWithComponent(c1);
-		assertEquals(dropItemIntent, drop.getDropItemWithComponent(c1));
-		assertNull(drop.getDropItemWithComponent(c));
-		assertNull(drop.getDropItemWithComponent(c2));
+		Assertions.assertEquals(dropItemIntent, drop.getDropItemWithComponent(c1));
+		Assertions.assertNull(drop.getDropItemWithComponent(c));
+		Assertions.assertNull(drop.getDropItemWithComponent(c2));
 		dropItemIntent = drop.getCreateDropItemWithComponent(c2);
-		assertEquals(dropItemIntent, drop.getDropItemWithComponent(c2));
+		Assertions.assertEquals(dropItemIntent, drop.getDropItemWithComponent(c2));
 	}
 
 	/**
@@ -212,10 +209,10 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	{
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
 		final JDFTimeSpan req = di.appendRequired();
-		assertNull(req.getActual());
-		assertNull(req.getRange());
+		Assertions.assertNull(req.getActual());
+		Assertions.assertNull(req.getRange());
 		final JDFDate date = new JDFDate();
 		req.setActual(date);
-		assertEquals(req.getActual(), date);
+		Assertions.assertEquals(req.getActual(), date);
 	}
 }

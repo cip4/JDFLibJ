@@ -38,8 +38,6 @@
  */
 package org.cip4.jdflib.resource;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
@@ -47,7 +45,8 @@ import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.JDFLayout;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFScavengerAreaTest
 {
@@ -61,7 +60,7 @@ public class JDFScavengerAreaTest
 		final JDFScavengerArea sa = mo.appendScavengerArea();
 		sa.setSize(new JDFXYPair(10, 200));
 		sa.setCenter(new JDFXYPair(10, 100));
-		assertEquals(new JDFRectangle(55, 100, 65, 300), sa.getRect());
+		Assertions.assertEquals(new JDFRectangle(55, 100, 65, 300), sa.getRect());
 	}
 
 	@Test
@@ -74,7 +73,7 @@ public class JDFScavengerAreaTest
 		sa.setSize(new JDFXYPair(10, 200));
 		sa.setCenter(new JDFXYPair(100, 100));
 		sa.setRotation(90);
-		assertEquals(new JDFRectangle(50, 195, 250, 205), sa.getRect());
+		Assertions.assertEquals(new JDFRectangle(50, 195, 250, 205), sa.getRect());
 	}
 
 	@Test
@@ -85,7 +84,7 @@ public class JDFScavengerAreaTest
 		mo.setTrimCTM(JDFMatrix.getUnitMatrix().shift(50, 100));
 		final JDFScavengerArea sa = mo.appendScavengerArea();
 		sa.setSeparations(new VString("a b c"));
-		assertEquals(new VString("a b c"), sa.getSeparations());
+		Assertions.assertEquals(new VString("a b c"), sa.getSeparations());
 	}
 
 }

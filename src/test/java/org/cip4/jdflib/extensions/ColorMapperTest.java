@@ -1,8 +1,7 @@
 package org.cip4.jdflib.extensions;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class ColorMapperTest
 {
@@ -10,7 +9,7 @@ public class ColorMapperTest
 	@Test
 	public void testtestGetColor()
 	{
-		assertEquals("yellow", ColorMapper.getMatchingColor("Yellow"));
+		Assertions.assertEquals("yellow", ColorMapper.getMatchingColor("Yellow"));
 	}
 
 }

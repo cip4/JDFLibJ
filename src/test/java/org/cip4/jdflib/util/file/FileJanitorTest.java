@@ -36,17 +36,14 @@
  */
 package org.cip4.jdflib.util.file;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -75,12 +72,12 @@ public class FileJanitorTest extends JDFTestCaseBase
 		FileJanitor fileJanitor = new FileJanitor(f, 2);
 		fileJanitor.setLogSingle(true);
 		Vector<File> cleanupList = fileJanitor.cleanup();
-		assertEquals(cleanupList.size(), 2, 1);
+		Assertions.assertEquals(cleanupList.size(), 2, 1);
 		ThreadUtil.sleep(2000);
 		fileJanitor = new FileJanitor(f, 1);
 		fileJanitor.setLogSingle(true);
 		cleanupList = fileJanitor.cleanup();
-		assertEquals(cleanupList.size(), 3, 1);
+		Assertions.assertEquals(cleanupList.size(), 3, 1);
 	}
 
 	/**
@@ -104,12 +101,12 @@ public class FileJanitorTest extends JDFTestCaseBase
 		fileJanitor.setLogSingle(false);
 		fileJanitor.setDeleteEmptyDir(true);
 		Vector<File> cleanupList = fileJanitor.cleanup();
-		assertEquals(cleanupList.size(), 2, 1);
+		Assertions.assertEquals(cleanupList.size(), 2, 1);
 		ThreadUtil.sleep(2000);
 		fileJanitor = new FileJanitor(f, 1);
 		fileJanitor.setLogSingle(true);
 		cleanupList = fileJanitor.cleanup();
-		assertEquals(cleanupList.size(), 2, 1);
+		Assertions.assertEquals(cleanupList.size(), 2, 1);
 	}
 
 	/**
@@ -124,9 +121,9 @@ public class FileJanitorTest extends JDFTestCaseBase
 		final FileJanitor fileJanitor = new FileJanitor(null, 2);
 		fileJanitor.setDeleteEmptyDir(true);
 
-		assertTrue(fileJanitor.delEmpty);
+		Assertions.assertTrue(fileJanitor.delEmpty);
 		fileJanitor.setDeleteEmptyDir(false);
-		assertFalse(fileJanitor.delEmpty);
+		Assertions.assertFalse(fileJanitor.delEmpty);
 	}
 
 	/**
@@ -141,8 +138,8 @@ public class FileJanitorTest extends JDFTestCaseBase
 		final FileJanitor fileJanitor = new FileJanitor(null, 2);
 		fileJanitor.setLogSingle(true);
 
-		assertTrue(fileJanitor.logSingle);
+		Assertions.assertTrue(fileJanitor.logSingle);
 		fileJanitor.setLogSingle(false);
-		assertFalse(fileJanitor.logSingle);
+		Assertions.assertFalse(fileJanitor.logSingle);
 	}
 }

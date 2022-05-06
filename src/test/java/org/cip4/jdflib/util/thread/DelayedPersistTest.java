@@ -70,17 +70,13 @@
  */
 package org.cip4.jdflib.util.thread;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -96,13 +92,13 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	public void testPersist()
 	{
 		file.delete();
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		DelayedPersist.getDelayedPersist().queue(new TestPersist(), 1555);
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		ThreadUtil.sleep(2000);
 		DelayedPersist.getDelayedPersist().queue(new TestPersist(), 1555);
 		ThreadUtil.sleep(2000);
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 	}
 
 	/**
@@ -112,13 +108,13 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	public void testRun()
 	{
 		file.delete();
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		DelayedPersist.getDelayedPersist().queueRunnable(new TestRun(), 1555);
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		ThreadUtil.sleep(2000);
 		DelayedPersist.getDelayedPersist().queueRunnable(new TestRun(), 1555);
 		ThreadUtil.sleep(2000);
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 	}
 
 	/**
@@ -128,13 +124,13 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	public void testRunPersist()
 	{
 		file.delete();
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		DelayedPersist.getDelayedPersist().queueRunnable(new TestRunPersist(), 1555);
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		ThreadUtil.sleep(2000);
 		DelayedPersist.getDelayedPersist().queue(new TestRunPersist(), 1555);
 		ThreadUtil.sleep(2000);
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 	}
 
 	/**
@@ -156,13 +152,13 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	public void testShutdown()
 	{
 		file.delete();
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		DelayedPersist.getDelayedPersist().queue(new TestPersist(), 15555);
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		final long t0 = System.currentTimeMillis();
 		DelayedPersist.shutDown();
-		assertTrue(System.currentTimeMillis() - t0 < 3000);
-		assertTrue(file.exists());
+		Assertions.assertTrue(System.currentTimeMillis() - t0 < 3000);
+		Assertions.assertTrue(file.exists());
 	}
 
 	/**
@@ -172,16 +168,16 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	public void testShutdownCurrent()
 	{
 		file.delete();
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		DelayedPersist.getDelayedPersist().queue(new TestPersist(), 15555);
-		assertNotNull(DelayedPersist.getCurrentDelayedPersist());
-		assertFalse(file.exists());
+		Assertions.assertNotNull(DelayedPersist.getCurrentDelayedPersist());
+		Assertions.assertFalse(file.exists());
 		final long t0 = System.currentTimeMillis();
 		DelayedPersist.shutDown();
-		assertNull(DelayedPersist.getCurrentDelayedPersist());
-		assertTrue(System.currentTimeMillis() - t0 < 3000);
-		assertNull(DelayedPersist.getCurrentDelayedPersist());
-		assertTrue(file.exists());
+		Assertions.assertNull(DelayedPersist.getCurrentDelayedPersist());
+		Assertions.assertTrue(System.currentTimeMillis() - t0 < 3000);
+		Assertions.assertNull(DelayedPersist.getCurrentDelayedPersist());
+		Assertions.assertTrue(file.exists());
 	}
 
 	/**

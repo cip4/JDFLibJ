@@ -71,8 +71,8 @@ package org.cip4.jdflib.extensions;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -92,8 +92,8 @@ public class IntentHelperTest {
 		final IntentHelper intentHelper = new IntentHelper(intent);
 		intentHelper.setSpan("a", "42", "IntegerSpan");
 		intentHelper.setSpan("b/a", "43", "IntegerSpan");
-		Assert.assertEquals(intentHelper.getSpan("a"), "42");
-		Assert.assertEquals(intentHelper.getSpan("b/a"), "43");
+		Assertions.assertEquals(intentHelper.getSpan("a"), "42");
+		Assertions.assertEquals(intentHelper.getSpan("b/a"), "43");
 	}
 
 	/**
@@ -107,8 +107,8 @@ public class IntentHelperTest {
 		final IntentHelper intentHelper = new IntentHelper(intent);
 		intentHelper.setSpan("a", "42");
 		intentHelper.setSpan("b/a", "43");
-		Assert.assertEquals(intentHelper.getSpan("a"), "42");
-		Assert.assertEquals(intentHelper.getSpan("b/a"), "43");
+		Assertions.assertEquals(intentHelper.getSpan("a"), "42");
+		Assertions.assertEquals(intentHelper.getSpan("b/a"), "43");
 	}
 
 	/**
@@ -121,8 +121,8 @@ public class IntentHelperTest {
 		intent.setAttribute("Name", "foo");
 		final KElement foo = intent.appendElement("foo");
 		final KElement c = intent.appendElement(ElementName.COMMENT);
-		Assert.assertTrue(IntentHelper.isIntentResource(foo));
-		Assert.assertFalse(IntentHelper.isIntentResource(intent));
-		Assert.assertFalse(IntentHelper.isIntentResource(c));
+		Assertions.assertTrue(IntentHelper.isIntentResource(foo));
+		Assertions.assertFalse(IntentHelper.isIntentResource(intent));
+		Assertions.assertFalse(IntentHelper.isIntentResource(c));
 	}
 }

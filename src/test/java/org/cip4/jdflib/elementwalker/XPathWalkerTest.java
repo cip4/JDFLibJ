@@ -39,8 +39,6 @@
  */
 package org.cip4.jdflib.elementwalker;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -58,7 +56,8 @@ import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -120,7 +119,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 		w.setDatatype(true);
 		w.walkAll(intent);
 		final String s = new String(ios.getBuf());
-		assertTrue(s.indexOf("@SizePolicy,Tile,enumeration") > 0);
+		Assertions.assertTrue(s.indexOf("@SizePolicy,Tile,enumeration") > 0);
 	}
 
 	/**
@@ -139,7 +138,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 		w.setDatatype(true);
 		w.walkAll(d.getRoot());
 		final String s = new String(ios.getBuf());
-		assertTrue(s.indexOf("JDF/AuditPool") > 0);
+		Assertions.assertTrue(s.indexOf("JDF/AuditPool") > 0);
 	}
 
 	/**
@@ -162,7 +161,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 		w.setMethod(0);
 		w.walkAll(d.getRoot());
 		final String s = ios.toString();
-		assertTrue(StringUtil.tokenize(s, "\n", false).size() < 50);
+		Assertions.assertTrue(StringUtil.tokenize(s, "\n", false).size() < 50);
 	}
 
 	/**

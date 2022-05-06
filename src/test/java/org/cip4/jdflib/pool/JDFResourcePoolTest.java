@@ -81,8 +81,8 @@ import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * @author MuchaD
  * 
@@ -102,7 +102,7 @@ public class JDFResourcePoolTest extends JDFTestCaseBase
 	{
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		JDFComment c = n.appendResourcePool().appendComment();
-		Assert.assertTrue(c instanceof JDFComment);
+		Assertions.assertTrue(c instanceof JDFComment);
 	}
 
 	/**
@@ -117,27 +117,27 @@ public class JDFResourcePoolTest extends JDFTestCaseBase
 		JDFNode n = d.getJDFRoot();
 		JDFResource r = n.addResource("Component", null, null, null, null, null, null);
 		JDFResourcePool rp = n.getResourcePool();
-		Assert.assertTrue(r instanceof JDFComponent);
-		Assert.assertFalse(n.hasChildElement("ResourceLinkPool", null));
+		Assertions.assertTrue(r instanceof JDFComponent);
+		Assertions.assertFalse(n.hasChildElement("ResourceLinkPool", null));
 		JDFResourceLinkPool rlp = n.getCreateResourceLinkPool();
-		Assert.assertEquals(rp.getUnlinkedResources().elementAt(0), r);
+		Assertions.assertEquals(rp.getUnlinkedResources().elementAt(0), r);
 
 		JDFResourceLink rl = rlp.linkResource(r, EnumUsage.Input, EnumProcessUsage.BookBlock);
-		Assert.assertNotNull(rl);
-		Assert.assertNull(rp.getUnlinkedResources());
+		Assertions.assertNotNull(rl);
+		Assertions.assertNull(rp.getUnlinkedResources());
 		JDFResource rx = n.addResource("ExposedMedia", null, null, null, null, null, null);
-		Assert.assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
+		Assertions.assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
 
 		n.setVersion(EnumVersion.Version_1_2);
 		JDFCustomerInfo ci = n.appendCustomerInfo();
 		JDFContact co = ci.appendContact();
 		co = (JDFContact) co.makeRootResource(null, null, true);
-		Assert.assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
-		Assert.assertEquals(rp.getUnlinkedResources().size(), 1);
+		Assertions.assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
+		Assertions.assertEquals(rp.getUnlinkedResources().size(), 1);
 
 		ci.deleteNode();
-		Assert.assertEquals(rp.getUnlinkedResources().elementAt(1), co);
-		Assert.assertEquals(rp.getUnlinkedResources().size(), 2);
+		Assertions.assertEquals(rp.getUnlinkedResources().elementAt(1), co);
+		Assertions.assertEquals(rp.getUnlinkedResources().size(), 2);
 
 	}
 

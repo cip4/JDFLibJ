@@ -75,15 +75,14 @@
  */
 package org.cip4.jdflib.auto;
 
-import static org.junit.Assert.fail;
-
 import java.io.File;
 import java.io.FileFilter;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.VString;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 import org.w3c.dom.DOMException;
 
 /**
@@ -169,7 +168,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 		}
 		catch (final DOMException e)
 		{
-			fail("DOMException : " + e.getMessage());
+			Assertions.fail("DOMException : " + e.getMessage());
 		}
 	}
 
@@ -242,7 +241,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 		}
 		catch (final DOMException e)
 		{
-			fail("DOMException : " + e.getMessage());
+			Assertions.fail("DOMException : " + e.getMessage());
 		}
 	}
 
@@ -250,7 +249,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

@@ -68,15 +68,13 @@
  */
 package org.cip4.jdflib.util.file;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -110,7 +108,7 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 		for (int i = 0; i < 155; i++)
 		{
 			File newFile = dir.getNewFile();
-			assertTrue(newFile.exists());
+			Assertions.assertTrue(newFile.exists());
 		}
 	}
 
@@ -126,7 +124,7 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 		for (int i = 0; i < 55; i++)
 		{
 			File newFile = dir.getNewFile();
-			assertTrue(newFile.exists());
+			Assertions.assertTrue(newFile.exists());
 		}
 	}
 
@@ -147,7 +145,7 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 			else if (i % 3 == 2)
 				ext = ".foo";
 			File newFile = dir.getNewFileWithExt(ext);
-			assertTrue(newFile.exists());
+			Assertions.assertTrue(newFile.exists());
 		}
 	}
 
@@ -163,11 +161,11 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 		for (int i = 0; i < 2; i++)
 		{
 			File newFile = dir.getNewFileWithExt("txt");
-			assertTrue(newFile.exists());
+			Assertions.assertTrue(newFile.exists());
 		}
 		RollingBackupDirectory dir2 = new RollingBackupDirectory(theDir, 42, "test");
 		File newFile = dir2.getNewFileWithExt("txt");
-		assertEquals(newFile.getName(), "test.3.txt");
+		Assertions.assertEquals(newFile.getName(), "test.3.txt");
 	}
 
 	/**
@@ -183,10 +181,10 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 		for (int i = 0; i < 200; i++)
 		{
 			File newFile = dir.getNewFile();
-			assertTrue(newFile.isDirectory());
+			Assertions.assertTrue(newFile.isDirectory());
 		}
 		dir.persist();
-		assertEquals(42, FileUtil.listDirectories(dir).length, 5);
+		Assertions.assertEquals(42, FileUtil.listDirectories(dir).length, 5);
 	}
 
 	/**
@@ -201,11 +199,11 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 		for (int i = 0; i < 2; i++)
 		{
 			File newFile = dir.getNewFileWithExt("txt");
-			assertTrue(newFile.exists());
+			Assertions.assertTrue(newFile.exists());
 		}
 		RollingBackupDirectory dir2 = new RollingBackupDirectory(theDir, 42, "42");
 		File newFile = dir2.getNewFileWithExt("txt");
-		assertEquals(newFile.getName(), "42.3.txt");
+		Assertions.assertEquals(newFile.getName(), "42.3.txt");
 	}
 
 	/**
@@ -225,7 +223,7 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 			else if (i % 3 == 2)
 				ext = ".foo";
 			File newFile = dir.getNewFileWithExt(ext);
-			assertTrue(newFile.exists());
+			Assertions.assertTrue(newFile.exists());
 		}
 	}
 }

@@ -77,17 +77,14 @@
  */
 package org.cip4.jdflib.span;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -106,13 +103,13 @@ public class JDFSpanBaseTest extends JDFTestCaseBase
 		JDFDoc doc = new JDFDoc("LayoutIntent");
 		JDFLayoutIntent e = (JDFLayoutIntent) doc.getRoot();
 		JDFIntegerSpan is = e.appendPages();
-		assertNull(is.guessActual());
+		Assertions.assertNull(is.guessActual());
 		is.setRange(new JDFIntegerRangeList("3 ~ 5 8"));
-		assertEquals("5", is.guessActual());
+		Assertions.assertEquals("5", is.guessActual());
 		is.setPreferred(7);
-		assertEquals("7", is.guessActual());
+		Assertions.assertEquals("7", is.guessActual());
 		is.setActual(9);
-		assertEquals("9", is.guessActual());
+		Assertions.assertEquals("9", is.guessActual());
 	}
 
 	/**
@@ -126,9 +123,9 @@ public class JDFSpanBaseTest extends JDFTestCaseBase
 		JDFDoc doc = new JDFDoc("LayoutIntent");
 		JDFLayoutIntent e = (JDFLayoutIntent) doc.getRoot();
 		JDFIntegerSpan is = e.appendPages();
-		assertFalse(is.preferredToActual());
+		Assertions.assertFalse(is.preferredToActual());
 		is.setPreferred(7);
 		is.preferredToActual();
-		assertEquals(7, is.getActual());
+		Assertions.assertEquals(7, is.getActual());
 	}
 }

@@ -44,8 +44,8 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFRectangleTest {
 	/**
@@ -57,24 +57,24 @@ public class JDFRectangleTest {
 	{
 		final JDFRectangle r1 = new JDFRectangle("0 0 1 1");
 		JDFRectangle r2 = new JDFRectangle("0 0 1 1");
-		Assert.assertTrue(r1.equals(r2));
-		Assert.assertTrue(r1.isGreaterOrEqual(r2));
-		Assert.assertTrue(r1.isLessOrEqual(r2));
-		Assert.assertFalse(r1.isGreater(r2));
-		Assert.assertFalse(r1.isLess(r2));
+		Assertions.assertTrue(r1.equals(r2));
+		Assertions.assertTrue(r1.isGreaterOrEqual(r2));
+		Assertions.assertTrue(r1.isLessOrEqual(r2));
+		Assertions.assertFalse(r1.isGreater(r2));
+		Assertions.assertFalse(r1.isLess(r2));
 		r2 = new JDFRectangle("0 0 1 2");
-		Assert.assertTrue(r1.isLessOrEqual(r2));
-		Assert.assertTrue(r1.isLess(r2));
+		Assertions.assertTrue(r1.isLessOrEqual(r2));
+		Assertions.assertTrue(r1.isLess(r2));
 		r2 = new JDFRectangle("0 0 1.000000001 1");
-		Assert.assertTrue(r1.isLessOrEqual(r2));
-		Assert.assertTrue(r1.equals(r2));
+		Assertions.assertTrue(r1.isLessOrEqual(r2));
+		Assertions.assertTrue(r1.equals(r2));
 
 		r2 = new JDFRectangle("2 2 3 3");
-		Assert.assertFalse(r1.equals(r2));
-		Assert.assertFalse(r1.isGreaterOrEqual(r2));
-		Assert.assertFalse(r1.isLessOrEqual(r2));
-		Assert.assertFalse(r1.isGreater(r2));
-		Assert.assertFalse(r1.isLess(r2));
+		Assertions.assertFalse(r1.equals(r2));
+		Assertions.assertFalse(r1.isGreaterOrEqual(r2));
+		Assertions.assertFalse(r1.isLessOrEqual(r2));
+		Assertions.assertFalse(r1.isGreater(r2));
+		Assertions.assertFalse(r1.isLess(r2));
 
 	}
 
@@ -97,38 +97,38 @@ public class JDFRectangleTest {
 		r2.setUrxMm(1);
 		r2.setUryMm(1);
 
-		Assert.assertTrue(r1.equals(r2));
-		Assert.assertTrue(r1.isGreaterOrEqual(r2));
-		Assert.assertTrue(r1.isLessOrEqual(r2));
-		Assert.assertFalse(r1.isGreater(r2));
-		Assert.assertFalse(r1.isLess(r2));
+		Assertions.assertTrue(r1.equals(r2));
+		Assertions.assertTrue(r1.isGreaterOrEqual(r2));
+		Assertions.assertTrue(r1.isLessOrEqual(r2));
+		Assertions.assertFalse(r1.isGreater(r2));
+		Assertions.assertFalse(r1.isLess(r2));
 
 		r2 = new JDFRectangle();
 		r2.setLlxMm(0);
 		r2.setLlyMm(0);
 		r2.setUrxMm(1);
 		r2.setUryMm(2);
-		Assert.assertTrue(r1.isLessOrEqual(r2));
-		Assert.assertTrue(r1.isLess(r2));
+		Assertions.assertTrue(r1.isLessOrEqual(r2));
+		Assertions.assertTrue(r1.isLess(r2));
 
 		r2 = new JDFRectangle();
 		r2.setLlxMm(0);
 		r2.setLlyMm(0);
 		r2.setUrxMm(1.000000001);
 		r2.setUryMm(1);
-		Assert.assertTrue(r1.isLessOrEqual(r2));
-		Assert.assertTrue(r1.equals(r2));
+		Assertions.assertTrue(r1.isLessOrEqual(r2));
+		Assertions.assertTrue(r1.equals(r2));
 
 		r2 = new JDFRectangle();
 		r2.setLlxMm(2);
 		r2.setLlyMm(2);
 		r2.setUrxMm(3);
 		r2.setUryMm(3);
-		Assert.assertFalse(r1.equals(r2));
-		Assert.assertFalse(r1.isGreaterOrEqual(r2));
-		Assert.assertFalse(r1.isLessOrEqual(r2));
-		Assert.assertFalse(r1.isGreater(r2));
-		Assert.assertFalse(r1.isLess(r2));
+		Assertions.assertFalse(r1.equals(r2));
+		Assertions.assertFalse(r1.isGreaterOrEqual(r2));
+		Assertions.assertFalse(r1.isLessOrEqual(r2));
+		Assertions.assertFalse(r1.isGreater(r2));
+		Assertions.assertFalse(r1.isLess(r2));
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class JDFRectangleTest {
 		final JDFRectangle r = JDFRectangle.createRectangle("0 0 1 1");
 		r.shift(5, 10);
 		final JDFRectangle r2 = JDFRectangle.createRectangle("5 10 6 11");
-		Assert.assertEquals(r, r2);
+		Assertions.assertEquals(r, r2);
 	}
 
 	/**
@@ -150,7 +150,7 @@ public class JDFRectangleTest {
 	public void testGetLL()
 	{
 		final JDFRectangle r = JDFRectangle.createRectangle("5 10 6 11");
-		Assert.assertEquals(new JDFXYPair(5, 10), r.getLL());
+		Assertions.assertEquals(new JDFXYPair(5, 10), r.getLL());
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class JDFRectangleTest {
 	public void testGetUR()
 	{
 		final JDFRectangle r = JDFRectangle.createRectangle("5 10 6 11");
-		Assert.assertEquals(new JDFXYPair(6, 11), r.getUR());
+		Assertions.assertEquals(new JDFXYPair(6, 11), r.getUR());
 	}
 
 	/**
@@ -171,9 +171,9 @@ public class JDFRectangleTest {
 	{
 		final JDFXYPair size = new JDFXYPair(2, 3);
 		final JDFRectangle r = new JDFRectangle(size);
-		Assert.assertEquals(size, r.getSize());
-		Assert.assertEquals(size, r.getUR());
-		Assert.assertEquals(new JDFXYPair(), r.getLL());
+		Assertions.assertEquals(size, r.getSize());
+		Assertions.assertEquals(size, r.getUR());
+		Assertions.assertEquals(new JDFXYPair(), r.getLL());
 	}
 
 	/**
@@ -183,7 +183,7 @@ public class JDFRectangleTest {
 	public void testGetSize()
 	{
 		final JDFRectangle r = JDFRectangle.createRectangle("5 10 6 12");
-		Assert.assertEquals(new JDFXYPair(1, 2), r.getSize());
+		Assertions.assertEquals(new JDFXYPair(1, 2), r.getSize());
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class JDFRectangleTest {
 	public void testGetArea()
 	{
 		final JDFRectangle r = JDFRectangle.createRectangle("1 2 3 4");
-		Assert.assertEquals(4, r.getArea(), 0.0);
+		Assertions.assertEquals(4, r.getArea(), 0.0);
 	}
 
 	/**
@@ -203,7 +203,7 @@ public class JDFRectangleTest {
 	public void testGetCenter()
 	{
 		final JDFRectangle r = JDFRectangle.createRectangle("4 10 6 12");
-		Assert.assertEquals(new JDFXYPair(5, 11), r.getCenter());
+		Assertions.assertEquals(new JDFXYPair(5, 11), r.getCenter());
 	}
 
 	/**
@@ -213,10 +213,10 @@ public class JDFRectangleTest {
 	public void testIsInside()
 	{
 		final JDFRectangle r = JDFRectangle.createRectangle("4 10 6 12");
-		Assert.assertTrue(r.isInside(new JDFXYPair(5, 11)));
-		Assert.assertTrue(r.isInside(new JDFXYPair(4, 12)));
-		Assert.assertTrue(r.isInside(new JDFXYPair(6, 12)));
-		Assert.assertFalse(r.isInside(new JDFXYPair(6, 12.1)));
+		Assertions.assertTrue(r.isInside(new JDFXYPair(5, 11)));
+		Assertions.assertTrue(r.isInside(new JDFXYPair(4, 12)));
+		Assertions.assertTrue(r.isInside(new JDFXYPair(6, 12)));
+		Assertions.assertFalse(r.isInside(new JDFXYPair(6, 12.1)));
 	}
 
 	/**
@@ -226,13 +226,13 @@ public class JDFRectangleTest {
 	public void testSetCenter()
 	{
 		final JDFRectangle r = JDFRectangle.createRectangle("4 10 6 12");
-		Assert.assertEquals(new JDFXYPair(5, 11), r.getCenter());
+		Assertions.assertEquals(new JDFXYPair(5, 11), r.getCenter());
 		final JDFRectangle r2 = r.clone();
 		r2.setCenter(r2.getCenter());
-		Assert.assertEquals(r2, r);
+		Assertions.assertEquals(r2, r);
 		r2.setCenter(new JDFXYPair(15, 31));
 		r.shift(10, 20);
-		Assert.assertEquals(r2, r);
+		Assertions.assertEquals(r2, r);
 
 	}
 
@@ -245,7 +245,7 @@ public class JDFRectangleTest {
 		final JDFRectangle r = JDFRectangle.createRectangle("4 10 6 12");
 		final JDFRectangle r2 = JDFRectangle.createRectangle("8 40 12 48");
 		r.scale(new JDFXYPair(2, 4));
-		Assert.assertEquals(r2, r);
+		Assertions.assertEquals(r2, r);
 
 	}
 
@@ -258,7 +258,7 @@ public class JDFRectangleTest {
 		final JDFRectangle r = JDFRectangle.createRectangle("0 0 1 1");
 		r.shift(new JDFXYPair(5, 10));
 		final JDFRectangle r2 = JDFRectangle.createRectangle("5 10 6 11");
-		Assert.assertEquals(r, r2);
+		Assertions.assertEquals(r, r2);
 	}
 
 	/**
@@ -269,9 +269,9 @@ public class JDFRectangleTest {
 	{
 		final JDFRectangle r = JDFRectangle.createRectangle("0 0 1 1");
 		final JDFRectangle r2 = r.clone();
-		Assert.assertEquals(r2, r.normalize());
+		Assertions.assertEquals(r2, r.normalize());
 		final JDFRectangle r3 = JDFRectangle.createRectangle("1 1 0 0");
-		Assert.assertEquals(r2, r3.normalize());
+		Assertions.assertEquals(r2, r3.normalize());
 	}
 
 	/**
@@ -282,12 +282,12 @@ public class JDFRectangleTest {
 	{
 		final JDFRectangle r = JDFRectangle.createRectangle("10 10 100 100");
 		final JDFRectangle r2 = JDFRectangle.createRectangle("2 2 5 5");
-		Assert.assertNull(r.getInterSection(r2));
-		Assert.assertNull(r2.getInterSection(r));
-		Assert.assertEquals(r2, r2.getInterSection(r2));
+		Assertions.assertNull(r.getInterSection(r2));
+		Assertions.assertNull(r2.getInterSection(r));
+		Assertions.assertEquals(r2, r2.getInterSection(r2));
 		final JDFRectangle r3 = JDFRectangle.createRectangle("20 20 200 2000");
-		Assert.assertEquals(JDFRectangle.createRectangle("20 20 100 100"), r3.getInterSection(r));
-		Assert.assertEquals(JDFRectangle.createRectangle("20 20 100 100"), r.getInterSection(r3));
+		Assertions.assertEquals(JDFRectangle.createRectangle("20 20 100 100"), r3.getInterSection(r));
+		Assertions.assertEquals(JDFRectangle.createRectangle("20 20 100 100"), r.getInterSection(r3));
 	}
 
 	/**
@@ -298,12 +298,12 @@ public class JDFRectangleTest {
 	{
 		final JDFRectangle r = JDFRectangle.createRectangle("10 5 100 100");
 		final JDFRectangle r2 = JDFRectangle.createRectangle("22 22 45 45");
-		Assert.assertEquals(r, r2.getBoundingRect(r));
-		Assert.assertEquals(r, r.getBoundingRect(r2));
-		Assert.assertEquals(r, r.getBoundingRect(null));
+		Assertions.assertEquals(r, r2.getBoundingRect(r));
+		Assertions.assertEquals(r, r.getBoundingRect(r2));
+		Assertions.assertEquals(r, r.getBoundingRect(null));
 		final JDFRectangle r3 = JDFRectangle.createRectangle("20 20 200 2000");
-		Assert.assertEquals(JDFRectangle.createRectangle("10 5 200 2000"), r3.getBoundingRect(r));
-		Assert.assertEquals(JDFRectangle.createRectangle("10 5 200 2000"), r.getBoundingRect(r3));
+		Assertions.assertEquals(JDFRectangle.createRectangle("10 5 200 2000"), r3.getBoundingRect(r));
+		Assertions.assertEquals(JDFRectangle.createRectangle("10 5 200 2000"), r.getBoundingRect(r3));
 	}
 
 	/**
@@ -318,7 +318,7 @@ public class JDFRectangleTest {
 		r2.setLly(2);
 		r2.setUrx(3);
 		r2.setUry(4);
-		Assert.assertEquals(r, r2);
+		Assertions.assertEquals(r, r2);
 	}
 
 	/**
@@ -330,6 +330,6 @@ public class JDFRectangleTest {
 
 		final JDFRectangle ab = new JDFRectangle(1.0, 2.0, 3, 4);
 		final JDFRectangle ac = ab.clone();
-		Assert.assertEquals(ab, ac);
+		Assertions.assertEquals(ab, ac);
 	}
 }

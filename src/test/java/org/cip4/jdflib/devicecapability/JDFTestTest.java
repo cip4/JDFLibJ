@@ -83,8 +83,8 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
 import org.cip4.jdflib.resource.devicecapability.JDFor;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 public class JDFTestTest extends JDFTestCaseBase
 {
 	@Test
@@ -94,9 +94,9 @@ public class JDFTestTest extends JDFTestCaseBase
 		JDFTest t = (JDFTest) d.getRoot();
 		t.init();
 		t.appendTerm(EnumTerm.IsPresentEvaluation);
-		Assert.assertTrue(t.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(t.isValid(EnumValidationLevel.Complete));
 		t.appendTerm(EnumTerm.BooleanEvaluation); // no two are allowed
-		Assert.assertFalse(t.isValid(EnumValidationLevel.Complete));
+		Assertions.assertFalse(t.isValid(EnumValidationLevel.Complete));
 	}
 
 	// ////////////////////////////////////////////////////////////////
@@ -108,15 +108,15 @@ public class JDFTestTest extends JDFTestCaseBase
 		JDFTest t = (JDFTest) d.getRoot();
 		t.init();
 		JDFor or = (JDFor) t.appendTerm(EnumTerm.or);
-		Assert.assertFalse(t.isValid(EnumValidationLevel.Complete));
+		Assertions.assertFalse(t.isValid(EnumValidationLevel.Complete));
 		or.appendTerm(EnumTerm.BooleanEvaluation); // no two are allowed
-		Assert.assertFalse(t.isValid(EnumValidationLevel.Complete));
-		Assert.assertFalse(or.isValid(EnumValidationLevel.Complete));
+		Assertions.assertFalse(t.isValid(EnumValidationLevel.Complete));
+		Assertions.assertFalse(or.isValid(EnumValidationLevel.Complete));
 		or.appendTerm(EnumTerm.BooleanEvaluation); // no two are allowed
-		Assert.assertTrue(t.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(t.isValid(EnumValidationLevel.Complete));
 		or.appendTerm(EnumTerm.IntegerEvaluation); // no two are allowed
-		Assert.assertTrue(t.isValid(EnumValidationLevel.Complete));
-		Assert.assertTrue(or.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(t.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(or.isValid(EnumValidationLevel.Complete));
 	}
 
 	// ////////////////////////////////////////////////////////////////
@@ -134,18 +134,18 @@ public class JDFTestTest extends JDFTestCaseBase
 		JDFNode node2 = node.addJDFNode("foobar");
 		JDFResource r2 = node.addResource("res", EnumResourceClass.Parameter,
 				EnumUsage.Input, null, null, null, null);
-		Assert.assertTrue(t.fitsContext(node));
-		Assert.assertTrue(t.fitsContext(node2));
+		Assertions.assertTrue(t.fitsContext(node));
+		Assertions.assertTrue(t.fitsContext(node2));
 		t.setContext("JDF");
-		Assert.assertTrue(t.fitsContext(node));
-		Assert.assertTrue(t.fitsContext(node2));
+		Assertions.assertTrue(t.fitsContext(node));
+		Assertions.assertTrue(t.fitsContext(node2));
 		t.setContext("/JDF");
-		Assert.assertTrue(t.fitsContext(node));
-		Assert.assertFalse(t.fitsContext(node2));
+		Assertions.assertTrue(t.fitsContext(node));
+		Assertions.assertFalse(t.fitsContext(node2));
 		t.setContext("res");
-		Assert.assertTrue(t.fitsContext(r2));
+		Assertions.assertTrue(t.fitsContext(r2));
 		t.setContext("/res");
-		Assert.assertFalse(t.fitsContext(r2));
+		Assertions.assertFalse(t.fitsContext(r2));
 	}
 
 }

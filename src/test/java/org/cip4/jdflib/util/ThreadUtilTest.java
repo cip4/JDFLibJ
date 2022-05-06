@@ -39,15 +39,11 @@
 
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.thread.MyMutex;
 import org.cip4.jdflib.util.thread.WaitTimeout;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -91,8 +87,8 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testWaitTimeout()
 	{
-		assertEquals(new TestWait(1400, 1000).getWaitedObject().intValue(), 42);
-		assertNull(new TestWait(2, 5000).getWaitedObject());
+		Assertions.assertEquals(new TestWait(1400, 1000).getWaitedObject().intValue(), 42);
+		Assertions.assertNull(new TestWait(2, 5000).getWaitedObject());
 	}
 
 	/**
@@ -110,8 +106,8 @@ public class ThreadUtilTest extends JDFTestCaseBase
 				break;
 		}
 
-		assertEquals(testWait.getWaitedObject().intValue(), 42);
-		assertEquals(testWait.peekWaitedObject().intValue(), 42);
+		Assertions.assertEquals(testWait.getWaitedObject().intValue(), 42);
+		Assertions.assertEquals(testWait.peekWaitedObject().intValue(), 42);
 	}
 
 	/**
@@ -123,8 +119,8 @@ public class ThreadUtilTest extends JDFTestCaseBase
 		final TestWait testWait = new TestWait(2000, 1000);
 		ThreadUtil.sleep(1200);
 		final long t0 = System.currentTimeMillis();
-		assertNotNull(testWait.getWaitedObject());
-		assertTrue(System.currentTimeMillis() - t0 < 1000);
+		Assertions.assertNotNull(testWait.getWaitedObject());
+		Assertions.assertTrue(System.currentTimeMillis() - t0 < 1000);
 	}
 
 	/**
@@ -133,7 +129,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testWaitTimeoutFail()
 	{
-		assertNull(new TestWait(2, 14200).getWaitedObject());
+		Assertions.assertNull(new TestWait(2, 14200).getWaitedObject());
 	}
 
 	/**
@@ -153,8 +149,8 @@ public class ThreadUtilTest extends JDFTestCaseBase
 			}
 			ThreadUtil.sleep(1);
 			final Integer waitedObject = testWait.getWaitedObject();
-			assertNotNull("Waited Loop " + i, waitedObject);
-			assertEquals("Loop " + i, waitedObject.intValue(), 42);
+			Assertions.assertNotNull(waitedObject, "Waited Loop " + i);
+			Assertions.assertEquals(waitedObject.intValue(), 42, "Loop " + i);
 		}
 	}
 
@@ -168,7 +164,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 		for (int i = 0; i < 10000; i++)
 		{
 			final int n = StringUtil.parseInt(StringUtil.token(new MyMutex().toString(), 1, " "), 0);
-			assertTrue(n > nLast);
+			Assertions.assertTrue(n > nLast);
 			nLast = n;
 		}
 	}

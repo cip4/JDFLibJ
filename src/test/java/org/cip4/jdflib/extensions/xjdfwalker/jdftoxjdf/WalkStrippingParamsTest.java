@@ -68,16 +68,14 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.JDFStrippingParams;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkStrippingParamsTest extends JDFTestCaseBase
 {
@@ -96,7 +94,7 @@ public class WalkStrippingParamsTest extends JDFTestCaseBase
 		wa.walk(sp, root);
 		final JDFStrippingParams sp2 = (JDFStrippingParams) root.getElement(ElementName.STRIPPINGPARAMS);
 
-		assertNull(sp2.getSectionList());
+		Assertions.assertNull(sp2.getSectionList());
 	}
 
 	/**
@@ -107,7 +105,7 @@ public class WalkStrippingParamsTest extends JDFTestCaseBase
 	{
 		final JDFStrippingParams sp = (JDFStrippingParams) new JDFDoc(ElementName.STRIPPINGPARAMS).getRoot();
 		final WalkStrippingParams wa = new WalkStrippingParams();
-		assertTrue(wa.getElementNames().contains(sp.getLocalName()));
+		Assertions.assertTrue(wa.getElementNames().contains(sp.getLocalName()));
 	}
 
 }

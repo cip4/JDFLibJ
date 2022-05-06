@@ -72,7 +72,7 @@ import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStation;
 import org.cip4.jdflib.resource.process.JDFStripMark;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class StrippingTest extends JDFTestCaseBase
 {

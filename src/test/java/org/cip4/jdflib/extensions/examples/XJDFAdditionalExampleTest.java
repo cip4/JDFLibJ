@@ -57,7 +57,7 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JDFDate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

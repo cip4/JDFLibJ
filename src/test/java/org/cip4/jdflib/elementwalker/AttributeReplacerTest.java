@@ -71,14 +71,12 @@
  */
 package org.cip4.jdflib.elementwalker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author prosirai
@@ -98,9 +96,9 @@ public class AttributeReplacerTest extends JDFTestCaseBase
 		e.setAttribute("ID", "a1");
 		e.setXPathAttribute("a/b/@ID", "aa");
 		rep.replace(e);
-		assertEquals("foo", e.getAttribute("ID"));
-		assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
-		assertNull(e.getXPathAttribute("a/@ID", null));
+		Assertions.assertEquals("foo", e.getAttribute("ID"));
+		Assertions.assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
+		Assertions.assertNull(e.getXPathAttribute("a/@ID", null));
 	}
 
 	/**
@@ -114,9 +112,9 @@ public class AttributeReplacerTest extends JDFTestCaseBase
 		e.setAttribute("ID", "a1");
 		e.setXPathAttribute("a/b/@ID", "aa");
 		rep.replace(e);
-		assertNull(e.getAttribute("ID", null, null));
-		assertNull(e.getXPathAttribute("a/b/@ID", null));
-		assertNull(e.getXPathAttribute("a/@ID", null));
+		Assertions.assertNull(e.getAttribute("ID", null, null));
+		Assertions.assertNull(e.getXPathAttribute("a/b/@ID", null));
+		Assertions.assertNull(e.getXPathAttribute("a/@ID", null));
 	}
 
 	/**
@@ -130,9 +128,9 @@ public class AttributeReplacerTest extends JDFTestCaseBase
 		e.setAttribute("ID", "a1");
 		e.setXPathAttribute("a/b/@ID", "aa");
 		rep.replace(e);
-		assertEquals("a1", e.getAttribute("ID"));
-		assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
-		assertNull(e.getXPathAttribute("a/@ID", null));
+		Assertions.assertEquals("a1", e.getAttribute("ID"));
+		Assertions.assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
+		Assertions.assertNull(e.getXPathAttribute("a/@ID", null));
 	}
 
 	/**
@@ -149,10 +147,10 @@ public class AttributeReplacerTest extends JDFTestCaseBase
 		e.setXPathAttribute("a/b/@ID", "aa");
 		e.setXPathAttribute("a/b/@c", "aa");
 		rep.replace(e);
-		assertEquals("foo", e.getAttribute("ID"));
-		assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
-		assertNull(e.getXPathAttribute("a/@ID", null));
-		assertNull(e.getXPathAttribute("a/b/@c", null));
+		Assertions.assertEquals("foo", e.getAttribute("ID"));
+		Assertions.assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
+		Assertions.assertNull(e.getXPathAttribute("a/@ID", null));
+		Assertions.assertNull(e.getXPathAttribute("a/b/@c", null));
 	}
 
 }

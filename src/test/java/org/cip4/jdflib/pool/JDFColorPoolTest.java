@@ -44,9 +44,9 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author MuchaD
@@ -59,7 +59,7 @@ public class JDFColorPoolTest {
 	/**
 	 * @see junit.framework.TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		try
@@ -86,7 +86,7 @@ public class JDFColorPoolTest {
 	@Test
 	public void testGetColorWithName()
 	{
-		Assert.assertNotNull("grün", cp.getColorWithName("Grün"));
+		Assertions.assertNotNull(cp.getColorWithName("Grün"), "grün");
 		boolean caught = false;
 		try
 		{
@@ -96,7 +96,7 @@ public class JDFColorPoolTest {
 		{
 			caught = true;
 		}
-		Assert.assertTrue("noappend", caught);
+		Assertions.assertTrue(caught, "noappend");
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class JDFColorPoolTest {
 	@Test
 	public void testGetCreateColorWithName()
 	{
-		Assert.assertNotNull("grün", cp.getCreateColorWithName("Grün", null));
+		Assertions.assertNotNull(cp.getCreateColorWithName("Grün", null), "grün");
 	}
 
 	/**
@@ -118,12 +118,12 @@ public class JDFColorPoolTest {
 	@Test
 	public void testAppendColorWithName()
 	{
-		Assert.assertNotNull("grün", cp.appendColorWithName("Orange", "grün"));
-		Assert.assertNotNull("grün", cp.getCreateColorWithName("Orange", null));
+		Assertions.assertNotNull(cp.appendColorWithName("Orange", "grün"), "grün");
+		Assertions.assertNotNull(cp.getCreateColorWithName("Orange", null), "grün");
 		try
 		{
 			cp.appendColorWithName("Orange", "grün");
-			Assert.fail("highlander");
+			Assertions.fail("highlander");
 		}
 		catch (final JDFException x)
 		{
@@ -137,13 +137,13 @@ public class JDFColorPoolTest {
 	@Test
 	public void testRemoveColor()
 	{
-		Assert.assertEquals("num", cp.numChildElements("Color", null), 3);
+		Assertions.assertEquals(cp.numChildElements("Color", null), 3, "num");
 		cp.removeColor("bar");
-		Assert.assertEquals("num", cp.numChildElements("Color", null), 3);
+		Assertions.assertEquals(cp.numChildElements("Color", null), 3, "num");
 		cp.removeColor("Grün");
-		Assert.assertEquals("num", cp.numChildElements("Color", null), 2);
+		Assertions.assertEquals(cp.numChildElements("Color", null), 2, "num");
 		cp.removeColor("foo");
-		Assert.assertEquals("num", cp.numChildElements("Color", null), 1);
+		Assertions.assertEquals(cp.numChildElements("Color", null), 1, "num");
 
 	}
 
@@ -153,12 +153,12 @@ public class JDFColorPoolTest {
 	@Test
 	public void testDuplicateColor()
 	{
-		Assert.assertNull(cp.getDuplicateColors());
+		Assertions.assertNull(cp.getDuplicateColors());
 		final JDFColor c = cp.appendColorWithName("grun", "grun");
-		Assert.assertNull(cp.getDuplicateColors());
+		Assertions.assertNull(cp.getDuplicateColors());
 		c.set8BitNames("Grün".getBytes());
 		c.setName("grun");
-		Assert.assertTrue(cp.getDuplicateColors().contains("grun"));
+		Assertions.assertTrue(cp.getDuplicateColors().contains("grun"));
 	}
 
 	/**
@@ -167,12 +167,12 @@ public class JDFColorPoolTest {
 	@Test
 	public void testDuplicateGetColor()
 	{
-		Assert.assertNull(cp.getDuplicateColors());
+		Assertions.assertNull(cp.getDuplicateColors());
 		final JDFColor c = cp.appendColorWithName("grun", "grun");
-		Assert.assertNull(cp.getDuplicateColors());
+		Assertions.assertNull(cp.getDuplicateColors());
 		c.set8BitNames("Grün".getBytes());
 		c.setName("grun");
-		Assert.assertNotNull(cp.getColorWithName("grun"));
+		Assertions.assertNotNull(cp.getColorWithName("grun"));
 	}
 
 	/**

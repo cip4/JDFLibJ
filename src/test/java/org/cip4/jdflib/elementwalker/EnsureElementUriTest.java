@@ -70,8 +70,8 @@ package org.cip4.jdflib.elementwalker;
 
 import org.cip4.jdflib.core.KElement;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *  
@@ -91,8 +91,8 @@ public class EnsureElementUriTest {
 		EnsureElementUri ens = new EnsureElementUri();
 		ens.addNS("a", "www.a.com");
 		ens.walk(e);
-		Assert.assertEquals(e.getNamespaceURI(), "www.a.com");
-		Assert.assertEquals(e.getElement("b").getNamespaceURI(), "www.a.com");
+		Assertions.assertEquals(e.getNamespaceURI(), "www.a.com");
+		Assertions.assertEquals(e.getElement("b").getNamespaceURI(), "www.a.com");
 	}
 
 	/**
@@ -107,8 +107,8 @@ public class EnsureElementUriTest {
 		EnsureElementUri ens = new EnsureElementUri();
 		ens.addNS("a", "www.a.com");
 		ens.walk(e);
-		Assert.assertEquals(e.getNamespaceURI(), "www.a.com");
-		Assert.assertEquals(e.getElement("b").getNamespaceURI(), "www.a.com");
+		Assertions.assertEquals(e.getNamespaceURI(), "www.a.com");
+		Assertions.assertEquals(e.getElement("b").getNamespaceURI(), "www.a.com");
 	}
 
 	/**
@@ -123,9 +123,9 @@ public class EnsureElementUriTest {
 		EnsureElementUri ens = new EnsureElementUri();
 		ens.addNS("b", "www.b.com");
 		ens.walk(e);
-		Assert.assertEquals(e.getNamespaceURI(), null);
-		Assert.assertEquals(e.getElement("b").getNamespaceURI(), "www.b.com");
-		Assert.assertEquals(e.getElement("b").getElement("c").getNamespaceURI(), "www.b.com");
+		Assertions.assertEquals(e.getNamespaceURI(), null);
+		Assertions.assertEquals(e.getElement("b").getNamespaceURI(), "www.b.com");
+		Assertions.assertEquals(e.getElement("b").getElement("c").getNamespaceURI(), "www.b.com");
 	}
 
 	/**
@@ -141,8 +141,8 @@ public class EnsureElementUriTest {
 		ens.addNS("a", "www.a.com");
 		ens.addNS("b", "www.b.com");
 		ens.walk(e);
-		Assert.assertEquals(e.getNamespaceURI(), "www.a.com");
-		Assert.assertEquals(e.getElement("b").getNamespaceURI(), "www.b.com");
-		Assert.assertEquals(e.getElement("b").getElement("c").getNamespaceURI(), "www.b.com");
+		Assertions.assertEquals(e.getNamespaceURI(), "www.a.com");
+		Assertions.assertEquals(e.getElement("b").getNamespaceURI(), "www.b.com");
+		Assertions.assertEquals(e.getElement("b").getElement("c").getNamespaceURI(), "www.b.com");
 	}
 }

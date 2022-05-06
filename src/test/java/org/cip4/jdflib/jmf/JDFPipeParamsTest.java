@@ -85,9 +85,9 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -104,11 +104,11 @@ public class JDFPipeParamsTest {
 	public void testAppendResourceLink()
 	{
 		JDFResourceLink rl = pp.appendResourceLink("Dummy", true);
-		Assert.assertEquals(rl.getUsage(), EnumUsage.Input);
+		Assertions.assertEquals(rl.getUsage(), EnumUsage.Input);
 		try
 		{
 			rl = pp.appendResourceLink("Dummy2", true);
-			Assert.fail("max 1 rl");
+			Assertions.fail("max 1 rl");
 		}
 		catch (final Exception e)
 		{
@@ -126,9 +126,9 @@ public class JDFPipeParamsTest {
 	public void testAppendResource()
 	{
 		final JDFCoilBindingParams cbp = (JDFCoilBindingParams) pp.appendResource(ElementName.COILBINDINGPARAMS);
-		Assert.assertEquals(cbp.getResourceClass(), EnumResourceClass.Parameter);
+		Assertions.assertEquals(cbp.getResourceClass(), EnumResourceClass.Parameter);
 		final JDFHeadBandApplicationParams hap = (JDFHeadBandApplicationParams) pp.appendResource(ElementName.HEADBANDAPPLICATIONPARAMS);
-		Assert.assertEquals(hap.getResourceClass(), EnumResourceClass.Parameter);
+		Assertions.assertEquals(hap.getResourceClass(), EnumResourceClass.Parameter);
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -141,15 +141,15 @@ public class JDFPipeParamsTest {
 	public void testGetResourceLink()
 	{
 		final JDFExposedMedia xm = (JDFExposedMedia) pp.appendResource(ElementName.EXPOSEDMEDIA);
-		Assert.assertEquals(xm.getResourceClass(), EnumResourceClass.Handling);
+		Assertions.assertEquals(xm.getResourceClass(), EnumResourceClass.Handling);
 		final JDFMedia m = (JDFMedia) pp.appendResource(ElementName.MEDIA);
-		Assert.assertEquals(m.getResourceClass(), EnumResourceClass.Consumable);
+		Assertions.assertEquals(m.getResourceClass(), EnumResourceClass.Consumable);
 		final JDFRefElement rm = xm.refElement(m);
-		Assert.assertEquals(rm.getTarget(), m);
+		Assertions.assertEquals(rm.getTarget(), m);
 		final JDFResourceLink rl = pp.appendResourceLink(ElementName.EXPOSEDMEDIA, true);
 		rl.setrRef(xm.getID());
-		Assert.assertEquals(rl.getTarget(), xm);
-		Assert.assertEquals(rl, pp.getResourceLink());
+		Assertions.assertEquals(rl.getTarget(), xm);
+		Assertions.assertEquals(rl, pp.getResourceLink());
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -161,18 +161,18 @@ public class JDFPipeParamsTest {
 	public void testGetResource()
 	{
 		final JDFExposedMedia xm = (JDFExposedMedia) pp.appendResource(ElementName.EXPOSEDMEDIA);
-		Assert.assertEquals(xm.getResourceClass(), EnumResourceClass.Handling);
+		Assertions.assertEquals(xm.getResourceClass(), EnumResourceClass.Handling);
 		final JDFMedia m = (JDFMedia) pp.appendResource(ElementName.MEDIA);
-		Assert.assertEquals(m.getResourceClass(), EnumResourceClass.Consumable);
+		Assertions.assertEquals(m.getResourceClass(), EnumResourceClass.Consumable);
 		final JDFRefElement rm = xm.refElement(m);
-		Assert.assertEquals(rm.getTarget(), m);
-		Assert.assertEquals(pp.getResource(ElementName.EXPOSEDMEDIA), xm);
-		Assert.assertEquals(pp.getResource(null), xm);
-		Assert.assertEquals(pp.getResource(ElementName.MEDIA), m);
+		Assertions.assertEquals(rm.getTarget(), m);
+		Assertions.assertEquals(pp.getResource(ElementName.EXPOSEDMEDIA), xm);
+		Assertions.assertEquals(pp.getResource(null), xm);
+		Assertions.assertEquals(pp.getResource(ElementName.MEDIA), m);
 		try
 		{
-			Assert.assertNull(pp.getResource("MediaLink"));
-			Assert.fail();
+			Assertions.assertNull(pp.getResource("MediaLink"));
+			Assertions.fail();
 		}
 		catch (final JDFException e)
 		{
@@ -181,17 +181,17 @@ public class JDFPipeParamsTest {
 
 		final JDFResourceLink rl = pp.appendResourceLink(ElementName.EXPOSEDMEDIA, true);
 		rl.setrRef(xm.getID());
-		Assert.assertEquals(xm, pp.getResource(null));
-		Assert.assertEquals(rl.getTarget(), pp.getResource(null));
+		Assertions.assertEquals(xm, pp.getResource(null));
+		Assertions.assertEquals(rl.getTarget(), pp.getResource(null));
 
 		rl.setPartMap(new JDFAttributeMap("Run", "r1"));
-		Assert.assertEquals(xm, pp.getResource(null));
+		Assertions.assertEquals(xm, pp.getResource(null));
 	}
 
 	/**
 	 * @see junit.framework.TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
     public void setUp() throws Exception
 	{
         final JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -217,6 +217,6 @@ public class JDFPipeParamsTest {
 
 		pp.applyPipeToNode(n);
 
-		Assert.assertEquals(rl2.getActualAmount(null), 33, 0);
+		Assertions.assertEquals(rl2.getActualAmount(null), 33, 0);
 	}
 }

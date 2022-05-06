@@ -37,8 +37,6 @@
  */
 package org.cip4.jdflib.examples;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.util.HashSet;
 
@@ -63,7 +61,8 @@ import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class NColorTest extends JDFTestCaseBase
 {
@@ -143,7 +142,7 @@ public class NColorTest extends JDFTestCaseBase
 
 		// jmfStatus.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "StatusPerfecting.jmf", 2, false);
 		writeRoundTrip(jmfStatus, "StatusPerfecting.jmf");
-		assertTrue("known defect - wait for autoclass fix", jmfStatus.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(jmfStatus.isValid(EnumValidationLevel.Complete), "known defect - wait for autoclass fix");
 	}
 
 	/**

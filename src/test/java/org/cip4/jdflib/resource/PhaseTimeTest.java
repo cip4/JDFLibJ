@@ -87,8 +87,8 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.util.JDFDate;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 public class PhaseTimeTest extends JDFTestCaseBase
 {
 	@Test
@@ -108,7 +108,7 @@ public class PhaseTimeTest extends JDFTestCaseBase
 		pt.appendComment().setText("foo");
 		pt.setLinks(vRL);
 		pt.setStart(new JDFDate());
-		Assert.assertEquals(rl.toString(), pt.getLink(0).toString());
+		Assertions.assertEquals(rl.toString(), pt.getLink(0).toString());
 	}
 
 	@Test
@@ -123,7 +123,7 @@ public class PhaseTimeTest extends JDFTestCaseBase
 		JDFDate end = new JDFDate();
 		end.setTimeInMillis(end.getTimeInMillis() + 100 * 1000);
 		pt.setEnd(end);
-		Assert.assertEquals("", pt.getDuration().getDuration(), 100., 1.);
+		Assertions.assertEquals(pt.getDuration().getDuration(), 100., 1., "");
 
 	}
 
@@ -136,10 +136,10 @@ public class PhaseTimeTest extends JDFTestCaseBase
 		JDFPhaseTime pt = ap
 				.addPhaseTime(EnumNodeStatus.InProgress, null, null);
 		pt.setModules(new VString("m1 m2", " "), new VString("RIP Press", " "));
-		Assert.assertEquals(pt.numChildElements(ElementName.MODULEPHASE, null), 2);
-		Assert.assertEquals(pt.getModulePhase(0).getModuleID(), "m1");
-		Assert.assertEquals(pt.getModulePhase(1).getModuleID(), "m2");
-		Assert.assertEquals(pt.getModulePhase(1).getModuleType(), "Press");
+		Assertions.assertEquals(pt.numChildElements(ElementName.MODULEPHASE, null), 2);
+		Assertions.assertEquals(pt.getModulePhase(0).getModuleID(), "m1");
+		Assertions.assertEquals(pt.getModulePhase(1).getModuleID(), "m2");
+		Assertions.assertEquals(pt.getModulePhase(1).getModuleType(), "Press");
 		// Assert.assertTrue(pt.isValid(EnumValidationLevel.Complete));
 	}
 

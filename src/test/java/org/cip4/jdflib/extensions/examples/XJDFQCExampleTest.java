@@ -64,7 +64,7 @@ import org.cip4.jdflib.resource.process.JDFQualityControlParams;
 import org.cip4.jdflib.resource.process.JDFQualityControlResult;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

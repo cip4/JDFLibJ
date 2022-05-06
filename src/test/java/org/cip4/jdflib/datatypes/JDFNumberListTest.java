@@ -69,9 +69,8 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class JDFNumberListTest
 {
@@ -80,8 +79,8 @@ public class JDFNumberListTest
 	public void testConstruct()
 	{
 		final JDFNumberList nl = new JDFNumberList(new double[] { 1.1, 2.2, 3.3 });
-		assertEquals(1.1, nl.doubleAt(0), 0);
-		assertEquals(3.3, nl.doubleAt(2), 0);
+		Assertions.assertEquals(1.1, nl.doubleAt(0), 0);
+		Assertions.assertEquals(3.3, nl.doubleAt(2), 0);
 	}
 
 }

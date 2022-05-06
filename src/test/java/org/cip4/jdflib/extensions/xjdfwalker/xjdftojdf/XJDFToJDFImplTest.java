@@ -1,7 +1,5 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -13,8 +11,9 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class XJDFToJDFImplTest extends JDFTestCaseBase
 {
@@ -24,7 +23,7 @@ public class XJDFToJDFImplTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	@Ignore
+	@Disabled
 	public void testDropIDContactPartition()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null);
@@ -41,7 +40,7 @@ public class XJDFToJDFImplTest extends JDFTestCaseBase
 		final XJDFToJDFImpl impl = new XJDFToJDFImpl(null);
 		impl.xjdf = h;
 		// impl.unpartition();
-		assertEquals(2, h.getSets(ElementName.CONTACT, EnumUsage.Input).size());
+		Assertions.assertEquals(2, h.getSets(ElementName.CONTACT, EnumUsage.Input).size());
 	}
 
 }

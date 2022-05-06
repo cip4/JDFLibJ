@@ -43,11 +43,11 @@
  */
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -72,7 +72,8 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 import org.cip4.jdflib.util.net.HTTPDetails;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -90,7 +91,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetConnectionTimeout()
 	{
-		assertEquals("ConnectionTimeout value is wrong.", UrlUtil.DEFAULT_CONNECTION_TIMEOUT, UrlUtil.getConnectionTimeout());
+		assertEquals(UrlUtil.DEFAULT_CONNECTION_TIMEOUT, UrlUtil.getConnectionTimeout(), "ConnectionTimeout value is wrong.");
 	}
 
 	/**
@@ -164,7 +165,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetURLProtocol()
 	{
-		assertEquals(null, UrlUtil.getProtocol(null));
+		assertNull(UrlUtil.getProtocol(null));
 		assertEquals(URLProtocol.http, UrlUtil.getProtocol("http://foo.bar.com"));
 		assertEquals(URLProtocol.cid, UrlUtil.getProtocol("cid:blah"));
 		assertEquals(URLProtocol.file, UrlUtil.getProtocol("file:blah"));
@@ -526,12 +527,12 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		assertTrue(UrlUtil.isIRL("file://blï¿½dï¿½.txt"));
 		assertTrue(UrlUtil.isIRL("http://foo.com/blï¿½dï¿½.txt"));
-		assertFalse("3 ///", UrlUtil.isIRL("http:///blï¿½dï¿½.txt"));
-		assertFalse("blank is bad", UrlUtil.isIRL("file://a blï¿½dï¿½.txt"));
-		assertTrue("blank %20 is good", UrlUtil.isIRL("file://a%20blï¿½dï¿½.txt"));
+		assertFalse(UrlUtil.isIRL("http:///blï¿½dï¿½.txt"), "3 ///");
+		assertFalse(UrlUtil.isIRL("file://a blï¿½dï¿½.txt"), "blank is bad");
+		assertTrue(UrlUtil.isIRL("file://a%20blï¿½dï¿½.txt"), "blank %20 is good");
 		assertTrue(UrlUtil.isIRL("file:C:/a/b.txt"));
-		assertTrue("relative url", UrlUtil.isIRL("./3ï¿½.txt"));
-		assertFalse("invalid char: @", UrlUtil.isIRL("http://@"));
+		assertTrue(UrlUtil.isIRL("./3ï¿½.txt"), "relative url");
+		assertFalse(UrlUtil.isIRL("http://@"), "invalid char: @");
 		assertTrue(UrlUtil.isIRL("HTTP://ï¿½/ï¿½"));
 		assertTrue(UrlUtil.isIRL("file:///C:/Documents%20and%20Settings/Israel/My%20Documents/Vio%20Production/Results/TIME_H8789/TIME_H8789.pdf"));
 	}
@@ -545,13 +546,13 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertFalse(UrlUtil.isURL(null));
 		assertTrue(UrlUtil.isURL("file://bl.txt"));
 		assertTrue(UrlUtil.isURL("http://foo.com/bl.txt"));
-		assertFalse("3 ///", UrlUtil.isURL("http:///bl.txt"));
-		assertFalse("blank is bad", UrlUtil.isURL("file://a b.txt"));
-		assertTrue("blank %20 is good", UrlUtil.isURL("file://a%20bl.txt"));
+		assertFalse(UrlUtil.isURL("http:///bl.txt"), "3 ///");
+		assertFalse(UrlUtil.isURL("file://a b.txt"), "blank is bad");
+		assertTrue(UrlUtil.isURL("file://a%20bl.txt"), "blank %20 is good");
 		assertTrue(UrlUtil.isURL("file:C:/a/b.txt"));
-		assertTrue("relative url", UrlUtil.isURL("./3.txt"));
-		assertFalse("invalid char: @", UrlUtil.isURL("http://@"));
-		assertFalse("UNC", UrlUtil.isURL("\\\\unc\\bar\\a.txt"));
+		assertTrue(UrlUtil.isURL("./3.txt"), "relative url");
+		assertFalse(UrlUtil.isURL("http://@"), "invalid char: @");
+		assertFalse(UrlUtil.isURL("\\\\unc\\bar\\a.txt"), "UNC");
 		assertTrue(UrlUtil.isURL("HTTP://a/b?c"));
 	}
 
@@ -568,13 +569,13 @@ public class UrlUtilTest extends JDFTestCaseBase
 			assertFalse(UrlUtil.isURL(null));
 			assertTrue(UrlUtil.isURL("file://bl.txt"));
 			assertTrue(UrlUtil.isURL("http://foo.com/bl.txt"));
-			assertFalse("3 ///", UrlUtil.isURL("http:///bl.txt"));
-			assertFalse("blank is bad", UrlUtil.isURL("file://a b.txt"));
-			assertTrue("blank %20 is good", UrlUtil.isURL("file://a%20bl.txt"));
+			assertFalse(UrlUtil.isURL("http:///bl.txt"), "3 ///");
+			assertFalse(UrlUtil.isURL("file://a b.txt"), "blank is bad");
+			assertTrue(UrlUtil.isURL("file://a%20bl.txt"), "blank %20 is good");
 			assertTrue(UrlUtil.isURL("file:C:/a/b.txt"));
-			assertTrue("relative url", UrlUtil.isURL("./3.txt"));
-			assertFalse("invalid char: @", UrlUtil.isURL("http://@"));
-			assertFalse("UNC", UrlUtil.isURL("\\\\unc\\bar\\a.txt"));
+			assertTrue(UrlUtil.isURL("./3.txt"), "relative url");
+			assertFalse(UrlUtil.isURL("http://@"), "invalid char: @");
+			assertFalse(UrlUtil.isURL("\\\\unc\\bar\\a.txt"), "UNC");
 			assertTrue(UrlUtil.isURL("HTTP://a/b?c"));
 			ct.stop();
 		}
@@ -659,7 +660,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.stringToURL("http://foo/%20.txt"), new URL("http://foo/%20.txt"));
 		assertEquals(UrlUtil.stringToURL("http://foo"), new URL("http://foo"));
 		assertEquals(UrlUtil.stringToURL("https://foo"), new URL("https://foo"));
-		assertNull("empty File: should be null", UrlUtil.stringToURL("File:"));
+		assertNull(UrlUtil.stringToURL("File:"), "empty File: should be null");
 		assertEquals(UrlUtil.stringToURL("http%3A%2F%2FDRU-CIP4HD1%3A6331"), new URL("http://DRU-CIP4HD1:6331"));
 		assertEquals(new URL("https://foo/-a1d3-7b4e52b36407/dywEqM_chouchou-dÉc-2019.pdf"), UrlUtil.stringToURL("https://foo/-a1d3-7b4e52b36407/dywEqM_chouchou-dÉc-2019.pdf"));
 
@@ -1050,7 +1051,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		final JDFFileSpec fs = cscp.getFinalTargetDevice();
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
 		final File f = UrlUtil.moveToDir(fs, newDir, null, true);
-		assertNotNull("error moving file to dir", f);
+		assertNotNull(f, "error moving file to dir");
 		for (int i = 0; i < 10; i++)
 		{
 			ThreadUtil.sleep(1000);
@@ -1062,19 +1063,19 @@ public class UrlUtilTest extends JDFTestCaseBase
 		}
 		final long l = f.lastModified();
 		final File f2 = UrlUtil.moveToDir(fs, newDir, null, false);
-		assertNotNull("error moving file to dir", f2);
+		assertNotNull(f2, "error moving file to dir");
 		ThreadUtil.sleep(1000);
 		assertEquals(l, f2.lastModified(), 0);
 		fs.setURL("bad:/blöd");
-		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, null, true));
+		assertNull(UrlUtil.moveToDir(fs, newDir, null, true), "bad url:");
 		fs.setURL("http:localhost:2");
-		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, null, true));
+		assertNull(UrlUtil.moveToDir(fs, newDir, null, true), "bad url:");
 		fs.setURL("./blub.pdf");
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/blub.pdf"));
-		assertTrue("relative:", UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true).exists());
+		assertTrue(UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true).exists(), "relative:");
 		fs.setURL("deep/blub.pdf");
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/deep/blub.pdf"));
-		assertTrue("relative:", UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true).exists());
+		assertTrue(UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true).exists(), "relative:");
 
 	}
 
@@ -1093,23 +1094,23 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
 		fs.setURL("bad:/blöd");
-		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, null, true));
+		assertNull(UrlUtil.moveToDir(fs, newDir, null, true), "bad url:");
 		// fs.setURL("http://really_really_not_there.com/isnt/there?aaa");
 		fs.setURL("http://localhost:2");
-		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, null, true));
+		assertNull(UrlUtil.moveToDir(fs, newDir, null, true), "bad url:");
 		fs.setURL("./blub.pdf");
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/blub.pdf"));
-		assertTrue("relative:", UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true).exists());
+		assertTrue(UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true).exists(), "relative:");
 		fs.setURL("deep/blub.pdf");
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/deep/blub.pdf"));
-		assertTrue("relative:", UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true).exists());
+		assertTrue(UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true).exists(), "relative:");
 	}
 
 	/**
 	 * @throws Exception
 	 *
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testMoveToDownDir() throws Exception
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -1121,7 +1122,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 		final File newDir = new File(sm_dirTestDataTemp + "newDir2");
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "blub2.pdf"));
 		fs.setURL("../blub2.pdf");
-		UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true);
+		Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+			UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true);
+		});
 	}
 
 	/**
@@ -1138,13 +1141,13 @@ public class UrlUtilTest extends JDFTestCaseBase
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
 		fs.setURL("./blub.pdf");
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/blub.pdf"));
-		assertTrue("relative:", UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true, true).exists());
-		assertFalse("relative:", new File(sm_dirTestDataTemp + "dummy/blub.pdf").exists());
+		assertTrue(UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true, true).exists(), "relative:");
+		assertFalse(new File(sm_dirTestDataTemp + "dummy/blub.pdf").exists(), "relative:");
 
 		fs.setURL("deep/blub.pdf");
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/deep/blub.pdf"));
-		assertTrue("relative:", UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true, true).exists());
-		assertFalse("relative:", new File(sm_dirTestDataTemp + "dummy/deep/blub.pdf").exists());
+		assertTrue(UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true, true).exists(), "relative:");
+		assertFalse(new File(sm_dirTestDataTemp + "dummy/deep/blub.pdf").exists(), "relative:");
 	}
 
 	/**

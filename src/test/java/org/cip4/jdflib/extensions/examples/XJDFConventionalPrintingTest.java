@@ -64,7 +64,7 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JDFDate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

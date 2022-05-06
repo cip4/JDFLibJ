@@ -36,8 +36,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -49,7 +47,8 @@ import org.cip4.jdflib.jmf.JDFResourceCmdParams;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -68,7 +67,7 @@ public class WalkMessageTest extends JDFTestCaseBase
 		final JDFResourceCmdParams rcp = jmf.getRegistration(0).appendResourceCmdParams();
 		rcp.setResourceName("Plate");
 		final KElement e = new JDFToXJDF().convert(jmf);
-		assertNull(e);
+		Assertions.assertNull(e);
 	}
 
 	/**
@@ -81,7 +80,7 @@ public class WalkMessageTest extends JDFTestCaseBase
 		final JDFResourceInfo ri = jmf.getAcknowledge(0).appendResourceInfo();
 		ri.setResourceName("Plate");
 		final KElement e = new JDFToXJDF().convert(jmf);
-		assertNull(e);
+		Assertions.assertNull(e);
 	}
 
 	/**
@@ -97,7 +96,7 @@ public class WalkMessageTest extends JDFTestCaseBase
 		ri.setResourceName("Plate");
 		final KElement e = new JDFToXJDF().convert(jmf);
 		final XJMFHelper h = new XJMFHelper(e);
-		assertNull(h.getMessageHelper(0).getRoot().getNonEmpty(AttributeName.VERSION));
+		Assertions.assertNull(h.getMessageHelper(0).getRoot().getNonEmpty(AttributeName.VERSION));
 	}
 
 }

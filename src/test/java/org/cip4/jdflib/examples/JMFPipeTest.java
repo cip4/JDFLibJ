@@ -46,7 +46,7 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFPipeParams;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.pool.JDFAmountPool;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * jmf pipe example file test

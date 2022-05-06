@@ -65,7 +65,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

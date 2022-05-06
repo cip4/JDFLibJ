@@ -38,11 +38,6 @@
  */
 package org.cip4.jdflib.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -50,7 +45,8 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFNotification;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFCommentTest extends JDFTestCaseBase
 {
@@ -60,8 +56,8 @@ public class JDFCommentTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
 		final JDFComment cRoot = root.appendComment();
-		assertNotNull(cRoot.getAttribute(AttributeName.ID, null, null));
-		assertTrue(cRoot.isValid(EnumValidationLevel.Complete));
+		Assertions.assertNotNull(cRoot.getAttribute(AttributeName.ID, null, null));
+		Assertions.assertTrue(cRoot.isValid(EnumValidationLevel.Complete));
 
 		root.setVersion(JDFElement.EnumVersion.Version_1_2);
 		final JDFAuditPool ap = root.getCreateAuditPool();
@@ -69,7 +65,7 @@ public class JDFCommentTest extends JDFTestCaseBase
 		final JDFComment c = notif.appendComment();
 		c.setText("This element should have no ID attribute");
 		final String id = c.getAttribute(AttributeName.ID, null, null);
-		assertNull(id);
+		Assertions.assertNull(id);
 	}
 
 	@Test
@@ -80,7 +76,7 @@ public class JDFCommentTest extends JDFTestCaseBase
 		final JDFComment cRoot = root.appendComment();
 
 		final String id = cRoot.getAttribute(AttributeName.ID, null, null);
-		assertTrue(id.startsWith("c"));
+		Assertions.assertTrue(id.startsWith("c"));
 	}
 
 	@Test
@@ -96,8 +92,8 @@ public class JDFCommentTest extends JDFTestCaseBase
 		final JDFComment c21 = root.appendComment();
 		final String txt2 = "This element \n has \n crlf";
 		c21.setText(txt2);
-		assertEquals("text is equal in DOM", txt, c11.getText());
-		assertEquals("text is equal in DOM", txt2, c21.getText());
+		Assertions.assertEquals(txt, c11.getText(), "text is equal in DOM");
+		Assertions.assertEquals(txt2, c21.getText(), "text is equal in DOM");
 		final String commentFile = sm_dirTestDataTemp + File.separator + "CommentTest.JDF";
 		doc.write2File(commentFile, 2, true);
 		final JDFParser p = new JDFParser();
@@ -105,8 +101,8 @@ public class JDFCommentTest extends JDFTestCaseBase
 		final JDFNode root2 = doc2.getJDFRoot();
 		final JDFComment c12 = root2.getComment(0);
 		final JDFComment c22 = root2.getComment(1);
-		assertEquals("text is equal after parse", txt, c12.getText());
-		assertEquals("text is equal after parse", txt2, c22.getText());
+		Assertions.assertEquals(txt, c12.getText(), "text is equal after parse");
+		Assertions.assertEquals(txt2, c22.getText(), "text is equal after parse");
 	}
 
 	@Test
@@ -118,7 +114,7 @@ public class JDFCommentTest extends JDFTestCaseBase
 		final String txt = "      \n\n";
 		c11.setText(txt);
 		root.eraseEmptyNodes(true);
-		assertEquals("whitespace is not removed", txt, c11.getText());
+		Assertions.assertEquals(txt, c11.getText(), "whitespace is not removed");
 	}
 
 	@Test
@@ -129,7 +125,7 @@ public class JDFCommentTest extends JDFTestCaseBase
 		final JDFComment c11 = root.appendComment();
 		final String txt = "      \n\n";
 		c11.setText(txt);
-		assertEquals("whitespace is not removed", txt, c11.getText());
+		Assertions.assertEquals(txt, c11.getText(), "whitespace is not removed");
 	}
 
 }

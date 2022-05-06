@@ -73,9 +73,9 @@
  */
 package org.cip4.jdflib.util;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * 
@@ -99,7 +99,7 @@ public class MyArgsTest {
 	 * @see junit.framework.TestCase#setUp()
 	 * @throws Exception
 	 */
-	@Before
+	@BeforeEach
     public void setUp() throws Exception
 	{
         _myArgs = new MyArgs(_testArray, "?cqvVntP", "dlLuhpx", null);
@@ -164,7 +164,7 @@ public class MyArgsTest {
 	public void testParameterString()
 	{
 		String d = _myArgs.parameter("d");
-		Assert.assertEquals(d, " /Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/tENgU4Gh3huO2iVH9380.xml");
+		Assertions.assertEquals(d, " /Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/tENgU4Gh3huO2iVH9380.xml");
 	}
 
 	/**
@@ -202,7 +202,7 @@ public class MyArgsTest {
 	{
 		String[] s = { "-abc", "foo" };
 		MyArgs args = new MyArgs(s, "ab", "c", null);
-		Assert.assertEquals(args.nargs(), 0);
+		Assertions.assertEquals(args.nargs(), 0);
 
 	}
 
@@ -214,12 +214,12 @@ public class MyArgsTest {
 	{
 		String[] s = { "-abc", "foo" };
 		MyArgs args = new MyArgs(s, "ab", "c", null);
-		Assert.assertTrue(args.boolParameter('a'));
+		Assertions.assertTrue(args.boolParameter('a'));
 		args.setFlag('a', false);
-		Assert.assertFalse(args.boolParameter('a'));
-		Assert.assertFalse(args.boolParameter('d'));
+		Assertions.assertFalse(args.boolParameter('a'));
+		Assertions.assertFalse(args.boolParameter('d'));
 		args.setFlag('d', true);
-		Assert.assertTrue(args.boolParameter('d'));
+		Assertions.assertTrue(args.boolParameter('d'));
 	}
 
 	/**
@@ -230,14 +230,14 @@ public class MyArgsTest {
 	{
 		String[] s = { "-abc", "foo" };
 		MyArgs args = new MyArgs(s, "ab", "c", null);
-		Assert.assertEquals(args.parameter('c'), "foo");
+		Assertions.assertEquals(args.parameter('c'), "foo");
 		args.setParam('c', null);
-		Assert.assertNull(args.parameter('c'));
+		Assertions.assertNull(args.parameter('c'));
 		args.setParam('c', "bar");
-		Assert.assertEquals(args.parameter('c'), "bar");
-		Assert.assertNull(args.parameter('d'));
+		Assertions.assertEquals(args.parameter('c'), "bar");
+		Assertions.assertNull(args.parameter('d'));
 		args.setParam('d', "bar");
-		Assert.assertEquals(args.parameter('d'), "bar");
+		Assertions.assertEquals(args.parameter('d'), "bar");
 	}
 
 	/**
@@ -247,10 +247,10 @@ public class MyArgsTest {
 	{
 		String[] s = { "-abc", "foo" };
 		MyArgs args = new MyArgs(s, "ab", "c", null);
-		Assert.assertTrue(args.hasParameter('a'));
-		Assert.assertTrue(args.hasParameter('b'));
-		Assert.assertTrue(args.hasParameter('c'));
-		Assert.assertFalse(args.hasParameter('d'));
+		Assertions.assertTrue(args.hasParameter('a'));
+		Assertions.assertTrue(args.hasParameter('b'));
+		Assertions.assertTrue(args.hasParameter('c'));
+		Assertions.assertFalse(args.hasParameter('d'));
 
 	}
 
@@ -262,8 +262,8 @@ public class MyArgsTest {
 	{
 		String[] s = { "-abc", "foo", "bar" };
 		MyArgs args = new MyArgs(s, "ab", "c", null);
-		Assert.assertEquals(args.nargs(), 1);
-		Assert.assertEquals(args.argument(0), "bar");
+		Assertions.assertEquals(args.nargs(), 1);
+		Assertions.assertEquals(args.argument(0), "bar");
 	}
 
 	/**

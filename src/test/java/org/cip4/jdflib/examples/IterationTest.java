@@ -25,8 +25,8 @@ import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 public class IterationTest extends JDFTestCaseBase
 {
 	private static final String ITERATION_PAUSED = "IterationPaused";
@@ -89,17 +89,17 @@ public class IterationTest extends JDFTestCaseBase
 	private void iterateRead(int i)
 	{
 		iterDoc = JDFDoc.parseFile(getIteration(i));
-		Assert.assertNotNull(iterDoc);
+		Assertions.assertNotNull(iterDoc);
 		iterNode = iterDoc.getJDFRoot();
-		Assert.assertNotNull(iterNode);
+		Assertions.assertNotNull(iterNode);
 		iterLepp = (JDFLayoutElementProductionParams) iterNode.getMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null, 0);
-		Assert.assertNotNull(iterLepp);
+		Assertions.assertNotNull(iterLepp);
 		iterApp = (JDFApprovalParams) iterNode.getMatchingResource(ElementName.APPROVALPARAMS, EnumProcessUsage.AnyInput, null, 0);
-		Assert.assertNotNull(iterApp);
+		Assertions.assertNotNull(iterApp);
 		iterAppSuccess = (JDFApprovalSuccess) iterNode.getMatchingResource(ElementName.APPROVALSUCCESS, EnumProcessUsage.AnyInput, null, 0);
-		Assert.assertNotNull(iterAppSuccess);
+		Assertions.assertNotNull(iterAppSuccess);
 		iterRuli = (JDFRunList) iterNode.getMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null, 0);
-		Assert.assertNotNull(iterRuli);
+		Assertions.assertNotNull(iterRuli);
 
 	}
 

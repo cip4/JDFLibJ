@@ -45,12 +45,11 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -67,8 +66,8 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	public void testConstruct()
 	{
 		final JDFIntegerList l = new JDFIntegerList(3);
-		assertEquals(l.size(), 1);
-		assertEquals(l.getInt(0), 3);
+		Assertions.assertEquals(l.size(), 1);
+		Assertions.assertEquals(l.getInt(0), 3);
 	}
 
 	/**
@@ -78,15 +77,15 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	public void testSetInt()
 	{
 		final JDFIntegerList l = new JDFIntegerList(3);
-		assertEquals(l.size(), 1);
-		assertEquals(l.getInt(0), 3);
+		Assertions.assertEquals(l.size(), 1);
+		Assertions.assertEquals(l.getInt(0), 3);
 		l.setInt(0, 2);
-		assertEquals(l.getInt(0), 2);
-		assertEquals(l.size(), 1);
+		Assertions.assertEquals(l.getInt(0), 2);
+		Assertions.assertEquals(l.size(), 1);
 		l.setInt(1, 4);
-		assertEquals(l.getInt(1), 4);
+		Assertions.assertEquals(l.getInt(1), 4);
 		l.setInt(-1, 3);
-		assertEquals(l.getInt(1), 3);
+		Assertions.assertEquals(l.getInt(1), 3);
 	}
 
 	/**
@@ -100,9 +99,9 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 		l.setInt(1, 4);
 		l.setInt(2, 3);
 		l.sort();
-		assertEquals(l.get(0), 2);
-		assertEquals(l.get(1), 3);
-		assertEquals(l.get(2), 4);
+		Assertions.assertEquals(l.get(0), 2);
+		Assertions.assertEquals(l.get(1), 3);
+		Assertions.assertEquals(l.get(2), 4);
 	}
 
 	/**
@@ -114,8 +113,8 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 		final JDFIntegerList l = new JDFIntegerList(3);
 		l.setIntX(0, 2).setIntX(1, 2).setInt(2, 2);
 		l.unify();
-		assertEquals(l.get(0), 2);
-		assertEquals(1, l.size());
+		Assertions.assertEquals(l.get(0), 2);
+		Assertions.assertEquals(1, l.size());
 	}
 
 	/**
@@ -126,8 +125,8 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	{
 		final JDFIntegerList l = new JDFIntegerList(3);
 		l.addX(4).add(5);
-		assertEquals(4, l.get(1));
-		assertEquals(3, l.size());
+		Assertions.assertEquals(4, l.get(1));
+		Assertions.assertEquals(3, l.size());
 	}
 
 	/**
@@ -138,9 +137,9 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	{
 		final JDFIntegerList l = new JDFIntegerList(1);
 		l.addX(4).shift(10);
-		assertEquals(11, l.get(0));
-		assertEquals(14, l.get(1));
-		assertEquals(2, l.size());
+		Assertions.assertEquals(11, l.get(0));
+		Assertions.assertEquals(14, l.get(1));
+		Assertions.assertEquals(2, l.size());
 	}
 
 	/**
@@ -154,9 +153,9 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 		l.add(4);
 		final JDFIntegerList l2 = new JDFIntegerList(l);
 		l.subtract(l2);
-		assertEquals(0, l.get(0));
-		assertEquals(0, l.get(1));
-		assertEquals(2, l.size());
+		Assertions.assertEquals(0, l.get(0));
+		Assertions.assertEquals(0, l.get(1));
+		Assertions.assertEquals(2, l.size());
 
 	}
 }

@@ -105,7 +105,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMetadataMap;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.JDFSpawn;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * jmf pipe example file test

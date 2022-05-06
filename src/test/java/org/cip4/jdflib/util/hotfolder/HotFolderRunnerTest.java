@@ -38,12 +38,9 @@
  */
 package org.cip4.jdflib.util.hotfolder;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class HotFolderRunnerTest extends JDFTestCaseBase
 {
@@ -52,21 +49,21 @@ public class HotFolderRunnerTest extends JDFTestCaseBase
 	public void testTostring()
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
-		assertNotNull(r.toString());
+		Assertions.assertNotNull(r.toString());
 	}
 
 	@Test
 	public void testGet()
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
-		assertEquals(r, HotFolderRunner.getTherunner());
+		Assertions.assertEquals(r, HotFolderRunner.getTherunner());
 	}
 
 	@Test
 	public void testGetCreate()
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
-		assertEquals(r, HotFolderRunner.getCreateTherunner());
+		Assertions.assertEquals(r, HotFolderRunner.getCreateTherunner());
 	}
 
 	@Test
@@ -74,7 +71,7 @@ public class HotFolderRunnerTest extends JDFTestCaseBase
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
 		r.setMaxConcurrent(-1);
-		assertTrue(r.getMaxConcurrent() > 0);
+		Assertions.assertTrue(r.getMaxConcurrent() > 0);
 	}
 
 	@Test
@@ -82,7 +79,7 @@ public class HotFolderRunnerTest extends JDFTestCaseBase
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
 		r.setMaxConcurrent(42);
-		assertEquals(13, r.getMaxConcurrent());
+		Assertions.assertEquals(13, r.getMaxConcurrent());
 	}
 
 }

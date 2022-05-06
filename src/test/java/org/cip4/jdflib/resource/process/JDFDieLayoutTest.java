@@ -70,9 +70,6 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -83,7 +80,8 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -144,7 +142,7 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 	{
 		final JDFDieLayout lo = (JDFDieLayout) n.addResource(ElementName.DIELAYOUT, EnumUsage.Input);
 		lo.appendStation();
-		assertTrue(lo.toXML().indexOf("<Station") > 0);
+		Assertions.assertTrue(lo.toXML().indexOf("<Station") > 0);
 	}
 
 	/**
@@ -156,7 +154,7 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 	{
 		final JDFDieLayout lo = (JDFDieLayout) n.addResource(ElementName.DIELAYOUT, EnumUsage.Input);
 		lo.appendRuleLength();
-		assertTrue(lo.toXML().indexOf("<RuleLength") > 0);
+		Assertions.assertTrue(lo.toXML().indexOf("<RuleLength") > 0);
 	}
 
 	/**
@@ -168,8 +166,8 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 	{
 		final JDFDieLayout lo = (JDFDieLayout) n.addResource(ElementName.DIELAYOUT, EnumUsage.Input);
 		final JDFFileSpec fs = lo.appendFileSpec();
-		assertEquals(fs, lo.getCreateFileSpec());
-		assertEquals(fs, lo.getCreateFileSpec(0));
+		Assertions.assertEquals(fs, lo.getCreateFileSpec());
+		Assertions.assertEquals(fs, lo.getCreateFileSpec(0));
 	}
 
 	/**

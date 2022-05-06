@@ -38,17 +38,14 @@
 
 package org.cip4.jdflib.resource;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class PartitionMapTest
 {
@@ -61,7 +58,7 @@ public class PartitionMapTest
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final PartitionMap map = new PartitionMap(r);
-		assertEquals(1, map.size());
+		Assertions.assertEquals(1, map.size());
 	}
 
 	/**
@@ -73,15 +70,15 @@ public class PartitionMapTest
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		r.setPartIDKeys(new VString("SignatureName SheetName Side", null));
 		final PartitionMap map = new PartitionMap(r);
-		assertFalse(map.hasMissingKeys(new JDFAttributeMap()));
+		Assertions.assertFalse(map.hasMissingKeys(new JDFAttributeMap()));
 		final JDFAttributeMap m = new JDFAttributeMap(AttributeName.SIGNATURENAME, "s1");
-		assertFalse(map.hasMissingKeys(m));
+		Assertions.assertFalse(map.hasMissingKeys(m));
 		final JDFAttributeMap m2 = m.clone();
 		m2.put(AttributeName.SHEETNAME, "S1");
-		assertFalse(map.hasMissingKeys(m2));
+		Assertions.assertFalse(map.hasMissingKeys(m2));
 		final JDFAttributeMap m3 = m.clone();
 		m3.put(AttributeName.SIDE, "Front");
-		assertTrue(map.hasMissingKeys(m3));
+		Assertions.assertTrue(map.hasMissingKeys(m3));
 	}
 
 	/**
@@ -92,7 +89,7 @@ public class PartitionMapTest
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final PartitionMap map = new PartitionMap(r);
-		assertEquals(r, map.get(new JDFAttributeMap()));
+		Assertions.assertEquals(r, map.get(new JDFAttributeMap()));
 	}
 
 	/**
@@ -104,7 +101,7 @@ public class PartitionMapTest
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
 		final PartitionMap map = new PartitionMap(r);
-		assertEquals(r2, map.get(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1")));
+		Assertions.assertEquals(r2, map.get(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1")));
 	}
 
 	/**
@@ -117,7 +114,7 @@ public class PartitionMapTest
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d2");
 		r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
 		final PartitionMap map = new PartitionMap(r);
-		assertEquals(3, map.size());
+		Assertions.assertEquals(3, map.size());
 	}
 
 	/**
@@ -130,7 +127,7 @@ public class PartitionMapTest
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
 		r.addPartition(EnumPartIDKey.DeliveryUnit0, "d2");
 		final PartitionMap map = new PartitionMap(r);
-		assertEquals(1, map.partSize());
+		Assertions.assertEquals(1, map.partSize());
 	}
 
 }

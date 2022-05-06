@@ -43,13 +43,12 @@
  */
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class URLWriterTest extends JDFTestCaseBase
 {
@@ -62,7 +61,7 @@ public class URLWriterTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		assertNotNull(new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null).writeToURL());
+		Assertions.assertNotNull(new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null).writeToURL());
 	}
 
 	/**
@@ -75,7 +74,7 @@ public class URLWriterTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		final UrlPart writeToURL = new URLWriter(null, new URL("http://www.google.com"), UrlUtil.POST, UrlUtil.TEXT_PLAIN, null).writeToURL();
-		assertNotNull(writeToURL);
+		Assertions.assertNotNull(writeToURL);
 		writeToURL.buffer();
 	}
 

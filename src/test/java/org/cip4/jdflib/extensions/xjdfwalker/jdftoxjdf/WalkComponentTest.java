@@ -68,16 +68,14 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.JDFComponent;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkComponentTest
 {
@@ -93,12 +91,12 @@ public class WalkComponentTest
 		WalkComponent walkComponent = new WalkComponent();
 		JDFAttributeMap map = cb.getAttributeMap();
 		walkComponent.updateComponentType(map);
-		assertEquals("Web", map.get(AttributeName.COMPONENTTYPE));
+		Assertions.assertEquals("Web", map.get(AttributeName.COMPONENTTYPE));
 
 		cb.setComponentType(EnumComponentType.PartialProduct, null);
 		map = cb.getAttributeMap();
 		walkComponent.updateComponentType(map);
-		assertNull(map.get(AttributeName.COMPONENTTYPE));
+		Assertions.assertNull(map.get(AttributeName.COMPONENTTYPE));
 	}
 
 }

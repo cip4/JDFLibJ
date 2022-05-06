@@ -36,18 +36,13 @@
  */
 package org.cip4.jdflib.extensions;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.ProductHelper.eProductType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -74,10 +69,10 @@ public class ProductHelperTest extends JDFTestCaseBase
 		ph.setChild(phCover);
 		final ProductHelper phBody = new ProductHelper(body);
 		ph.setChild(phBody);
-		assertEquals(ph.getChild(0).getProduct(), phCover.getProduct());
-		assertEquals(ph.getChild(1).getProduct(), phBody.getProduct());
-		assertEquals(ph.getChild("Body", 0).getProduct(), phBody.getProduct());
-		assertNull(ph.getChild("Body", 1));
+		Assertions.assertEquals(ph.getChild(0).getProduct(), phCover.getProduct());
+		Assertions.assertEquals(ph.getChild(1).getProduct(), phBody.getProduct());
+		Assertions.assertEquals(ph.getChild("Body", 0).getProduct(), phBody.getProduct());
+		Assertions.assertNull(ph.getChild("Body", 1));
 	}
 
 	/**
@@ -86,10 +81,10 @@ public class ProductHelperTest extends JDFTestCaseBase
 	@Test
 	public void testEProductType()
 	{
-		assertEquals(eProductType.Book, eProductType.getEnum("BOOK"));
-		assertEquals(null, eProductType.getEnum(null));
-		assertEquals(null, eProductType.getEnum(""));
-		assertEquals(eProductType.Postcard, eProductType.getEnum("  post card"));
+		Assertions.assertEquals(eProductType.Book, eProductType.getEnum("BOOK"));
+		Assertions.assertEquals(null, eProductType.getEnum(null));
+		Assertions.assertEquals(null, eProductType.getEnum(""));
+		Assertions.assertEquals(eProductType.Postcard, eProductType.getEnum("  post card"));
 	}
 
 	/**
@@ -104,7 +99,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final KElement product = productList.appendElement("Product");
 		final ProductHelper ph = new ProductHelper(product);
 		ph.setRoot();
-		assertEquals("true", product.getAttribute("IsRoot", null, null));
+		Assertions.assertEquals("true", product.getAttribute("IsRoot", null, null));
 	}
 
 	/**
@@ -115,9 +110,9 @@ public class ProductHelperTest extends JDFTestCaseBase
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
-		assertTrue(ph.isRootProduct());
+		Assertions.assertTrue(ph.isRootProduct());
 		final ProductHelper ph2 = theHelper.appendProduct();
-		assertFalse(ph2.isRootProduct());
+		Assertions.assertFalse(ph2.isRootProduct());
 	}
 
 	/**
@@ -128,9 +123,9 @@ public class ProductHelperTest extends JDFTestCaseBase
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
-		assertNull(ph.getIntent(XJDFConstants.AssemblingIntent));
+		Assertions.assertNull(ph.getIntent(XJDFConstants.AssemblingIntent));
 		ph.appendIntent(XJDFConstants.AssemblingIntent);
-		assertNotNull(ph.getIntent(XJDFConstants.AssemblingIntent));
+		Assertions.assertNotNull(ph.getIntent(XJDFConstants.AssemblingIntent));
 	}
 
 	/**
@@ -141,9 +136,9 @@ public class ProductHelperTest extends JDFTestCaseBase
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
-		assertNull(ph.getIntent(ElementName.BINDINGINTENT));
+		Assertions.assertNull(ph.getIntent(ElementName.BINDINGINTENT));
 		final IntentHelper ih = ph.getCreateChildIntent();
-		assertEquals(ih, ph.getIntent(ElementName.BINDINGINTENT));
+		Assertions.assertEquals(ih, ph.getIntent(ElementName.BINDINGINTENT));
 
 	}
 
@@ -157,7 +152,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final ProductHelper ph = theHelper.appendProduct();
 		final IntentHelper asi = ph.appendIntent(XJDFConstants.AssemblingIntent);
 		final IntentHelper ih = ph.getCreateChildIntent();
-		assertEquals(ih, asi);
+		Assertions.assertEquals(ih, asi);
 
 	}
 
@@ -169,11 +164,11 @@ public class ProductHelperTest extends JDFTestCaseBase
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
-		assertNull(ph.getIntent(XJDFConstants.AssemblingIntent));
+		Assertions.assertNull(ph.getIntent(XJDFConstants.AssemblingIntent));
 		final IntentHelper asi = ph.appendIntent(XJDFConstants.AssemblingIntent);
 		final IntentHelper loi = ph.appendIntent(ElementName.LAYOUTINTENT);
-		assertEquals(asi, ph.getIntents().get(0));
-		assertEquals(loi, ph.getIntents().get(1));
+		Assertions.assertEquals(asi, ph.getIntents().get(0));
+		Assertions.assertEquals(loi, ph.getIntents().get(1));
 	}
 
 	/**
@@ -185,10 +180,10 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
 		IntentHelper intent = ph.getIntent(ElementName.LAYOUTINTENT);
-		assertNull(intent);
+		Assertions.assertNull(intent);
 		intent = ph.appendIntent(ElementName.LAYOUTINTENT);
 		intent.getResource().setAttribute(AttributeName.PAGES, "4");
-		assertEquals("4", ph.getIntentAttribute(ElementName.LAYOUTINTENT, AttributeName.PAGES));
+		Assertions.assertEquals("4", ph.getIntentAttribute(ElementName.LAYOUTINTENT, AttributeName.PAGES));
 	}
 
 	/**
@@ -200,11 +195,11 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
 		IntentHelper intent = ph.getIntent(ElementName.COLORINTENT);
-		assertNull(intent);
+		Assertions.assertNull(intent);
 		intent = ph.appendIntent(ElementName.COLORINTENT);
-		assertEquals(ColorIntentHelper.class, intent.getClass());
+		Assertions.assertEquals(ColorIntentHelper.class, intent.getClass());
 		intent = ph.getIntent(ElementName.COLORINTENT);
-		assertEquals(ColorIntentHelper.class, intent.getClass());
+		Assertions.assertEquals(ColorIntentHelper.class, intent.getClass());
 	}
 
 	/**
@@ -215,9 +210,9 @@ public class ProductHelperTest extends JDFTestCaseBase
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.getCreateRootProduct(0);
-		assertTrue(ph.isRootProduct());
+		Assertions.assertTrue(ph.isRootProduct());
 		final ProductHelper ph2 = theHelper.getCreateRootProduct(1);
-		assertTrue(ph2.isRootProduct());
+		Assertions.assertTrue(ph2.isRootProduct());
 	}
 
 	/**
@@ -232,9 +227,9 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final KElement product = productList.appendElement("Product");
 		final ProductHelper ph = new ProductHelper(product);
 		ph.setRoot(true);
-		assertTrue(ph.isRootProduct());
+		Assertions.assertTrue(ph.isRootProduct());
 		ph.setRoot(false);
-		assertFalse(ph.isRootProduct());
+		Assertions.assertFalse(ph.isRootProduct());
 	}
 
 	/**
@@ -248,13 +243,13 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final KElement productList = root.appendElement("ProductList");
 		final KElement product = productList.appendElement("Product");
 		final ProductHelper ph = new ProductHelper(product);
-		assertTrue(ph.isRootProduct());
+		Assertions.assertTrue(ph.isRootProduct());
 		final KElement product2 = productList.appendElement("Product");
 		final ProductHelper ph2 = new ProductHelper(product2);
-		assertFalse(ph2.isRootProduct());
+		Assertions.assertFalse(ph2.isRootProduct());
 		ph2.setRoot();
-		assertTrue(ph2.isRootProduct());
-		assertFalse(ph.isRootProduct());
+		Assertions.assertTrue(ph2.isRootProduct());
+		Assertions.assertFalse(ph.isRootProduct());
 	}
 
 	/**
@@ -269,17 +264,17 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final KElement product = productList.appendElement("Product");
 		final ProductHelper ph = new ProductHelper(product);
 		ph.setAmount(42);
-		assertEquals(ph.getAmount(), 42);
-		assertEquals(ph.getMinAmount(), 42);
-		assertEquals(ph.getMaxAmount(), 42);
+		Assertions.assertEquals(ph.getAmount(), 42);
+		Assertions.assertEquals(ph.getMinAmount(), 42);
+		Assertions.assertEquals(ph.getMaxAmount(), 42);
 		ph.setMaxAmount(84);
-		assertEquals(ph.getAmount(), 42);
-		assertEquals(ph.getMinAmount(), 42);
-		assertEquals(ph.getMaxAmount(), 84);
+		Assertions.assertEquals(ph.getAmount(), 42);
+		Assertions.assertEquals(ph.getMinAmount(), 42);
+		Assertions.assertEquals(ph.getMaxAmount(), 84);
 		ph.setMinAmount(21);
-		assertEquals(ph.getAmount(), 42);
-		assertEquals(ph.getMinAmount(), 21);
-		assertEquals(ph.getMaxAmount(), 84);
+		Assertions.assertEquals(ph.getAmount(), 42);
+		Assertions.assertEquals(ph.getMinAmount(), 21);
+		Assertions.assertEquals(ph.getMaxAmount(), 84);
 	}
 
 	/**
@@ -293,11 +288,11 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final KElement productList = root.appendElement("ProductList");
 		final KElement product = productList.appendElement("Product");
 		final ProductHelper ph = new ProductHelper(product);
-		assertEquals(ph.getOverproduction(), 0.0, 0.0001);
+		Assertions.assertEquals(ph.getOverproduction(), 0.0, 0.0001);
 		ph.setAmount(42);
-		assertEquals(ph.getOverproduction(), 0.0, 0.0001);
+		Assertions.assertEquals(ph.getOverproduction(), 0.0, 0.0001);
 		ph.setMaxAmount(84);
-		assertEquals(ph.getOverproduction(), 100.0, 0.0001);
+		Assertions.assertEquals(ph.getOverproduction(), 100.0, 0.0001);
 	}
 
 	/**
@@ -313,9 +308,9 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final ProductHelper ph2 = theHelper.getCreateProduct("i2");
 
 		ph.setChild(ph1);
-		assertEquals("i1", ph.getIntent(ElementName.BINDINGINTENT).getResource().getAttribute(XJDFConstants.ChildRefs));
+		Assertions.assertEquals("i1", ph.getIntent(ElementName.BINDINGINTENT).getResource().getAttribute(XJDFConstants.ChildRefs));
 		ph.setChild(ph2);
-		assertEquals("i1 i2", ph.getIntent(ElementName.BINDINGINTENT).getResource().getAttribute(XJDFConstants.ChildRefs));
+		Assertions.assertEquals("i1 i2", ph.getIntent(ElementName.BINDINGINTENT).getResource().getAttribute(XJDFConstants.ChildRefs));
 	}
 
 	/**
@@ -333,24 +328,24 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final ProductHelper ph22 = theHelper.getCreateProduct("i22");
 
 		ph.setChild(ph1);
-		assertEquals("i1", ph.getChildRefs(true).get(0));
-		assertEquals(1, ph.getChildRefs(true).size());
-		assertEquals("i1", ph.getChildRefs(false).get(0));
-		assertEquals(1, ph.getChildRefs(false).size());
+		Assertions.assertEquals("i1", ph.getChildRefs(true).get(0));
+		Assertions.assertEquals(1, ph.getChildRefs(true).size());
+		Assertions.assertEquals("i1", ph.getChildRefs(false).get(0));
+		Assertions.assertEquals(1, ph.getChildRefs(false).size());
 		ph.setChild(ph2);
 		ph2.setChild(ph21);
 		ph2.setChild(ph22);
-		assertEquals("i1", ph.getChildRefs(true).get(0));
-		assertEquals(4, ph.getChildRefs(true).size());
-		assertEquals("i2", ph.getChildRefs(false).get(1));
-		assertEquals(2, ph.getChildRefs(false).size());
+		Assertions.assertEquals("i1", ph.getChildRefs(true).get(0));
+		Assertions.assertEquals(4, ph.getChildRefs(true).size());
+		Assertions.assertEquals("i2", ph.getChildRefs(false).get(1));
+		Assertions.assertEquals(2, ph.getChildRefs(false).size());
 
 		// dead loop?
 		ph22.setChild(ph2);
-		assertEquals("i1", ph.getChildRefs(true).get(0));
-		assertEquals(4, ph.getChildRefs(true).size());
-		assertEquals("i2", ph.getChildRefs(false).get(1));
-		assertEquals(2, ph.getChildRefs(false).size());
+		Assertions.assertEquals("i1", ph.getChildRefs(true).get(0));
+		Assertions.assertEquals(4, ph.getChildRefs(true).size());
+		Assertions.assertEquals("i2", ph.getChildRefs(false).get(1));
+		Assertions.assertEquals(2, ph.getChildRefs(false).size());
 
 	}
 
@@ -367,10 +362,10 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final ProductHelper ph2 = theHelper.getCreateProduct("i2");
 
 		ph.setChild(ph1);
-		assertEquals(ph, ph1.getParent());
+		Assertions.assertEquals(ph, ph1.getParent());
 		ph.setChild(ph2);
-		assertEquals(ph, ph1.getParent());
-		assertEquals(ph, ph2.getParent());
+		Assertions.assertEquals(ph, ph1.getParent());
+		Assertions.assertEquals(ph, ph2.getParent());
 
 	}
 }

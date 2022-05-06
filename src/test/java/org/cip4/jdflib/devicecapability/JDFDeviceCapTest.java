@@ -85,16 +85,9 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;
 import org.cip4.jdflib.auto.JDFAutoDeviceCap.EnumCombinedMethod;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.*;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -119,8 +112,8 @@ import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -292,12 +285,12 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	{
 		final JDFDoc d = JDFDoc.parseFile(sm_dirTestData + "Device_Elk_ConventionalPrinting2.xml");
 		final JDFDeviceCap dc = (JDFDeviceCap) d.getRoot().getXPathElement("/JMF/Response/DeviceList/DeviceInfo/Device/DeviceCap");
-		Assert.assertNotNull(dc);
+		Assertions.assertNotNull(dc);
 		final JDFDoc d2 = JDFDoc.parseFile(sm_dirTestData + "Elk_ConventionalPrinting.jdf");
 		final JDFNode cpNode = d2.getJDFRoot();
-		Assert.assertNotNull(cpNode);
+		Assertions.assertNotNull(cpNode);
 		final XMLDoc outDoc = dc.getBadJDFInfo(cpNode, EnumFitsValue.Allowed, EnumValidationLevel.Complete);
-		Assert.assertNull("devcaps are consistently evaluated", outDoc);
+		Assertions.assertNull(outDoc, "devcaps are consistently evaluated");
 	}
 
 	// ///////////////////////////////////////////////////////////////
@@ -315,8 +308,8 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 		final JDFActionPool ap = dc.appendActionPool();
 		final JDFAction a = ap.appendAction();
 		a.setTest(test);
-		Assert.assertEquals("", test, a.getTest());
-		Assert.assertTrue("", a.hasAttribute("TestRef"));
+		Assertions.assertEquals(test, a.getTest(), "");
+		Assertions.assertTrue(a.hasAttribute("TestRef"), "");
 	}
 
 	// ///////////////////////////////////////////////////////////////
@@ -328,22 +321,22 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	public void testGetDevCapsByName()
 	{
 		JDFDevCaps dcs = devicecap.getDevCapsByName("AuditPool", null, null, null, 0);
-		Assert.assertNotNull(dcs);
-		Assert.assertEquals(dcs.getName(), "AuditPool");
+		Assertions.assertNotNull(dcs);
+		Assertions.assertEquals(dcs.getName(), "AuditPool");
 		dcs = devicecap.getDevCapsByName("Layout", EnumContext.Resource, null, null, 0);
-		Assert.assertNotNull(dcs);
-		Assert.assertEquals(dcs.getName(), "Layout");
-		Assert.assertEquals(dcs.getDevCap().getID(), "dc_Layout");
+		Assertions.assertNotNull(dcs);
+		Assertions.assertEquals(dcs.getName(), "Layout");
+		Assertions.assertEquals(dcs.getDevCap().getID(), "dc_Layout");
 		dcs = devicecap.getDevCapsByName("Layout", EnumContext.Link, null, null, 0);
-		Assert.assertNotNull(dcs);
-		Assert.assertEquals(dcs.getName(), "Layout");
-		Assert.assertEquals(dcs.getDevCap().getID(), "dc_LayoutLink");
+		Assertions.assertNotNull(dcs);
+		Assertions.assertEquals(dcs.getName(), "Layout");
+		Assertions.assertEquals(dcs.getDevCap().getID(), "dc_LayoutLink");
 		dcs = devicecap.getDevCapsByName("Layout", EnumContext.Element, null, null, 0);
-		Assert.assertNull(dcs);
+		Assertions.assertNull(dcs);
 		dcs = devicecap.getDevCapsByName("RunList", null, null, EnumProcessUsage.Marks, 0);
-		Assert.assertNotNull(dcs);
+		Assertions.assertNotNull(dcs);
 		dcs = devicecap.getDevCapsByName("RunList", null, null, EnumProcessUsage.Ancestor, 0);
-		Assert.assertNull(dcs);
+		Assertions.assertNull(dcs);
 
 	}
 
@@ -356,7 +349,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	public void testDevCapsMinOccurs()
 	{
 		final JDFDevCaps dcs = devicecap.getDevCapsByName("AuditPool", null, null, null, 0);
-		Assert.assertEquals(dcs.getMinOccurs(), 1);
+		Assertions.assertEquals(dcs.getMinOccurs(), 1);
 	}
 
 	// ///////////////////////////////////////////////////////////////
@@ -368,7 +361,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	public void testDevCapsMaxOccurs()
 	{
 		final JDFDevCaps dcs = devicecap.getDevCapsByName("AuditPool", null, null, null, 0);
-		Assert.assertEquals(dcs.getMaxOccurs(), 1);
+		Assertions.assertEquals(dcs.getMaxOccurs(), 1);
 	}
 
 	// ///////////////////////////////////////////////////////////////
@@ -404,7 +397,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 		final JDFDeviceCap dc = (JDFDeviceCap) d.getRoot();
 		final Vector<EnumCombinedMethod> v = new Vector<EnumCombinedMethod>();
 		v.add(EnumCombinedMethod.None);
-		Assert.assertEquals("default is none", dc.getCombinedMethod(), v);
+		Assertions.assertEquals(dc.getCombinedMethod(), v, "default is none");
 
 	}
 
@@ -419,11 +412,11 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 		final JDFParser p = new JDFParser();
 		final String docDevCap = "DevCaps_Product_MISPrepress_ICS_Minimal.jdf";
 		final JDFDoc jmfDevCap = p.parseFile(sm_dirTestData + docDevCap);
-		Assert.assertNotNull("Parse of file " + docDevCap + " failed", jmfDevCap);
+		Assertions.assertNotNull(jmfDevCap, "Parse of file " + docDevCap + " failed");
 		final JDFJMF jmfRoot = jmfDevCap.getJMFRoot();
-		Assert.assertNotNull("jmfRoot == null Can't start Test", jmfRoot);
+		Assertions.assertNotNull(jmfRoot, "jmfRoot == null Can't start Test");
 		final JDFDeviceCap deviceCap = (JDFDeviceCap) jmfRoot.getChildByTagName("DeviceCap", "", 0, null, false, true);
-		Assert.assertTrue(deviceCap.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(deviceCap.isValid(EnumValidationLevel.Incomplete));
 	}
 
 	// /////////////////////////////////////////////////////
@@ -442,15 +435,15 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 		final JDFParser p = new JDFParser();
 		final JDFDoc jmfDevCap = p.parseFile(sm_dirTestData + docDevCap);
 		JDFJMF jmfRoot = null;
-		Assert.assertNotNull("Parse of file " + docDevCap + " failed", jmfDevCap);
+		Assertions.assertNotNull(jmfDevCap, "Parse of file " + docDevCap + " failed");
 		jmfRoot = jmfDevCap.getJMFRoot();
-		Assert.assertNotNull("jmfRoot == null Can't start Test", jmfRoot);
+		Assertions.assertNotNull(jmfRoot, "jmfRoot == null Can't start Test");
 		final XMLDoc docOutDevCap = jmfRoot.getOwnerDocument_KElement();
 		docOutDevCap.write2File(sm_dirTestDataTemp + "_" + docDevCap, 0, true);
 
 		final JDFDoc jdfTest = p.parseFile(sm_dirTestData + docTest);
 		final JDFNode jdfRoot = jdfTest.getJDFRoot();
-		Assert.assertTrue("jdfRoot is null", jdfRoot != null);
+		Assertions.assertTrue(jdfRoot != null, "jdfRoot is null");
 
 		if (jdfRoot != null)
 		{
@@ -497,17 +490,17 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 		n.setType("bar", false);
-		Assert.assertNull(devicecap.getMatchingTypeNodeVector(n));
+		Assertions.assertNull(devicecap.getMatchingTypeNodeVector(n));
 
 		n.setType("fnarf", false);
-		Assert.assertTrue(devicecap.getMatchingTypeNodeVector(n).contains(n));
+		Assertions.assertTrue(devicecap.getMatchingTypeNodeVector(n).contains(n));
 
 		devicecap.setCombinedMethod(EnumCombinedMethod.ProcessGroup);
 		n.setType("ProcessGroup", true);
 		final JDFNode n2 = n.addJDFNode("fnarf");
-		Assert.assertFalse("Only the actually matching nodes are returned, not their ancestors", devicecap.getMatchingTypeNodeVector(n).contains(n));
-		Assert.assertTrue(devicecap.getMatchingTypeNodeVector(n).contains(n2));
-		Assert.assertNull("want pg but have local node", devicecap.getMatchingTypeNodeVector(n2));
+		Assertions.assertFalse(devicecap.getMatchingTypeNodeVector(n).contains(n), "Only the actually matching nodes are returned, not their ancestors");
+		Assertions.assertTrue(devicecap.getMatchingTypeNodeVector(n).contains(n2));
+		Assertions.assertNull(devicecap.getMatchingTypeNodeVector(n2), "want pg but have local node");
 
 	}
 
@@ -522,16 +515,16 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 		n.setType("bar", false);
-		Assert.assertNull(device.getMatchingDeviceCapVector(n, true));
-		Assert.assertNull(device.getMatchingDeviceCapVector(n, false));
+		Assertions.assertNull(device.getMatchingDeviceCapVector(n, true));
+		Assertions.assertNull(device.getMatchingDeviceCapVector(n, false));
 		n.setType("fnarf", false);
-		Assert.assertEquals(device.getMatchingDeviceCapVector(n, true).size(), 2);
-		Assert.assertEquals(device.getMatchingDeviceCapVector(n, false).size(), 2);
+		Assertions.assertEquals(device.getMatchingDeviceCapVector(n, true).size(), 2);
+		Assertions.assertEquals(device.getMatchingDeviceCapVector(n, false).size(), 2);
 		n.setType("ProcessGroup", true);
 		final JDFNode n2 = n.addJDFNode("fnarf");
-		Assert.assertEquals(device.getMatchingDeviceCapVector(n, true).size(), 1);
-		Assert.assertEquals(device.getMatchingDeviceCapVector(n, false).elementAt(0), devicecapProduct);
-		Assert.assertEquals(device.getMatchingDeviceCapVector(n2, false).size(), 2);
+		Assertions.assertEquals(device.getMatchingDeviceCapVector(n, true).size(), 1);
+		Assertions.assertEquals(device.getMatchingDeviceCapVector(n, false).elementAt(0), devicecapProduct);
+		Assertions.assertEquals(device.getMatchingDeviceCapVector(n2, false).size(), 2);
 
 	}
 
@@ -550,7 +543,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 		final EnumFitsValue testlists = EnumFitsValue.Allowed;
 		final EnumValidationLevel level = EnumValidationLevel.Complete;
 		VElement vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
-		Assert.assertNull("missing resources", vExecNodes);
+		Assertions.assertNull(vExecNodes, "missing resources");
 
 		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, null, EnumUsage.Input, null, null, null, null);
 		lo.appendContentObject().setCTM(new JDFMatrix("1 0 0 1 0 0"));
@@ -558,38 +551,38 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 
 		final JDFRunList rlDoc = (JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, EnumProcessUsage.Document, null, null, null);
 		vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
-		Assert.assertNotNull("no missing resources", vExecNodes);
+		Assertions.assertNotNull(vExecNodes, "no missing resources");
 
 		n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, EnumProcessUsage.Marks, null, null, null);
 		vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
-		Assert.assertNotNull("no missing resources", vExecNodes);
+		Assertions.assertNotNull(vExecNodes, "no missing resources");
 
 		final JDFResourceLink rl = n.getLink(rlDoc, null);
 		rl.setUsage(EnumUsage.Output);
 		vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
-		Assert.assertNull("no required runlist doc", vExecNodes);
+		Assertions.assertNull(vExecNodes, "no required runlist doc");
 
 		rl.setUsage(EnumUsage.Input);
 		vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
-		Assert.assertNotNull("no required runlist doc", vExecNodes);
+		Assertions.assertNotNull(vExecNodes, "no required runlist doc");
 
 		final JDFDevCaps dcsRLDoc = devicecap.getDevCapsByName("RunList", null, null, EnumProcessUsage.Document, 0);
 		final JDFNameState ns = dcsRLDoc.getDevCap().appendNameState("RunTag");
 		ns.setRequired(true);
 
 		vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
-		Assert.assertNull("incomplete required runlist doc", vExecNodes);
+		Assertions.assertNull(vExecNodes, "incomplete required runlist doc");
 
 		ns.setRequired(false);
 		vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
-		Assert.assertNotNull("incomplete required runlist doc", vExecNodes);
+		Assertions.assertNotNull(vExecNodes, "incomplete required runlist doc");
 
 		final JDFDevCaps dcsRLMarks = devicecap.getDevCapsByName("RunList", null, null, EnumProcessUsage.Marks, 0);
 		final JDFNameState nsMarks = dcsRLMarks.getDevCap().appendNameState("PageNames");
 		nsMarks.setRequired(true);
 
 		vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
-		Assert.assertNull("incomplete required runlist marks", vExecNodes);
+		Assertions.assertNull(vExecNodes, "incomplete required runlist marks");
 
 	}
 
@@ -604,44 +597,44 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 		n.setType("bar", false);
-		Assert.assertFalse(devicecap.matchesType(n, true));
-		Assert.assertFalse(devicecap.matchesType(n, false));
-		Assert.assertFalse(device.matchesType(n, true));
-		Assert.assertFalse(device.matchesType(n, false));
+		Assertions.assertFalse(devicecap.matchesType(n, true));
+		Assertions.assertFalse(devicecap.matchesType(n, false));
+		Assertions.assertFalse(device.matchesType(n, true));
+		Assertions.assertFalse(device.matchesType(n, false));
 
 		n.setType("fnarf", false);
-		Assert.assertTrue(devicecap.matchesType(n, true));
-		Assert.assertTrue(devicecap.matchesType(n, false));
-		Assert.assertTrue(device.matchesType(n, true));
-		Assert.assertTrue(device.matchesType(n, false));
+		Assertions.assertTrue(devicecap.matchesType(n, true));
+		Assertions.assertTrue(devicecap.matchesType(n, false));
+		Assertions.assertTrue(device.matchesType(n, true));
+		Assertions.assertTrue(device.matchesType(n, false));
 
 		n.setType("blub", false);
-		Assert.assertTrue(devicecap.matchesType(n, true));
-		Assert.assertTrue(devicecap.matchesType(n, false));
-		Assert.assertTrue(device.matchesType(n, true));
-		Assert.assertTrue(device.matchesType(n, false));
+		Assertions.assertTrue(devicecap.matchesType(n, true));
+		Assertions.assertTrue(devicecap.matchesType(n, false));
+		Assertions.assertTrue(device.matchesType(n, true));
+		Assertions.assertTrue(device.matchesType(n, false));
 
 		n.setType("Combined", false);
 		n.setTypes(new VString("blub fnarf", " "));
-		Assert.assertFalse(devicecap.matchesType(n, true));
-		Assert.assertFalse(devicecap.matchesType(n, false));
-		Assert.assertTrue(devicecapProduct.matchesType(n, true));
-		Assert.assertTrue(devicecapProduct.matchesType(n, false));
-		Assert.assertTrue(device.matchesType(n, false));
+		Assertions.assertFalse(devicecap.matchesType(n, true));
+		Assertions.assertFalse(devicecap.matchesType(n, false));
+		Assertions.assertTrue(devicecapProduct.matchesType(n, true));
+		Assertions.assertTrue(devicecapProduct.matchesType(n, false));
+		Assertions.assertTrue(device.matchesType(n, false));
 
 		devicecap.setCombinedMethod(EnumCombinedMethod.ProcessGroup);
 		n.setType("ProcessGroup", true);
 		n.removeAttribute(AttributeName.TYPES);
 		final JDFNode n2 = n.addJDFNode("fnarf");
 
-		Assert.assertFalse(devicecap.matchesType(n, true));
-		Assert.assertTrue(devicecap.matchesType(n, false));
-		Assert.assertTrue(device.matchesType(n, true));
-		Assert.assertTrue(device.matchesType(n, false));
-		Assert.assertFalse("method pg for local individual process", devicecap.matchesType(n2, true));
-		Assert.assertFalse(devicecap.matchesType(n2, false));
-		Assert.assertTrue(devicecapProduct.matchesType(n2, false));
-		Assert.assertTrue(device.matchesType(n2, false));
+		Assertions.assertFalse(devicecap.matchesType(n, true));
+		Assertions.assertTrue(devicecap.matchesType(n, false));
+		Assertions.assertTrue(device.matchesType(n, true));
+		Assertions.assertTrue(device.matchesType(n, false));
+		Assertions.assertFalse(devicecap.matchesType(n2, true), "method pg for local individual process");
+		Assertions.assertFalse(devicecap.matchesType(n2, false));
+		Assertions.assertTrue(devicecapProduct.matchesType(n2, false));
+		Assertions.assertTrue(device.matchesType(n2, false));
 	}
 
 	// ///////////////////////////////////////////////////////////////
@@ -655,12 +648,12 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		n.setType("fnarf", false);
 		devicecap.setDefaultsFromCaps(n, true, false);
-		Assert.assertNotNull(n.getResourceLinks("Layout", null, null));
+		Assertions.assertNotNull(n.getResourceLinks("Layout", null, null));
 		final JDFLayout lo = (JDFLayout) n.getResourcePool().getPoolChild(0, "Layout", null, null);
 		final JDFContentObject contentObject = lo.getContentObject(0);
-		Assert.assertNotNull(contentObject);
-		Assert.assertEquals(contentObject.getCTM(), new JDFMatrix("1 0 0 1 1 1"));
-		Assert.assertNotNull(lo.getContentObject(1));
+		Assertions.assertNotNull(contentObject);
+		Assertions.assertEquals(contentObject.getCTM(), new JDFMatrix("1 0 0 1 1 1"));
+		Assertions.assertNotNull(lo.getContentObject(1));
 	}
 
 	// ///////////////////////////////////////////////////////////////
@@ -671,7 +664,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	public void testCreateModuleCaps()
 	{
 		devicecap.createModuleCaps(null);
-		Assert.assertNotNull(devicecap.getModulePool());
+		Assertions.assertNotNull(devicecap.getModulePool());
 	}
 
 	// ///////////////////////////////////////////////////////////////
@@ -688,32 +681,32 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 		{
 			final JDFDevCap dc = (JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_Ancestor", 0, false);
 			final VString v = dc.getNamePathVector(true);
-			Assert.assertEquals(v.size(), 1);
-			Assert.assertEquals(v.get(0), "JDF/AncestorPool/Ancestor");
+			Assertions.assertEquals(v.size(), 1);
+			Assertions.assertEquals(v.get(0), "JDF/AncestorPool/Ancestor");
 		}
 		{
 			final JDFDevCap dc = (JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_Layout", 0, false);
 			final VString v = dc.getNamePathVector(true);
-			Assert.assertTrue(v.size() > 1);
-			Assert.assertEquals(v.get(0), "JDF/ResourcePool/Layout");
+			Assertions.assertTrue(v.size() > 1);
+			Assertions.assertEquals(v.get(0), "JDF/ResourcePool/Layout");
 		}
 		{
 			final JDFDevCap dc = (JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_LayoutLink", 0, false);
 			final VString v = dc.getNamePathVector(true);
-			Assert.assertEquals(v.size(), 1);
-			Assert.assertEquals(v.get(0), "JDF/ResourceLinkPool/LayoutLink");
+			Assertions.assertEquals(v.size(), 1);
+			Assertions.assertEquals(v.get(0), "JDF/ResourceLinkPool/LayoutLink");
 		}
 		{
 			final JDFDevCap dc = (JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_Created", 0, false);
 			final VString v = dc.getNamePathVector(true);
-			Assert.assertEquals(v.size(), 1);
-			Assert.assertEquals(v.get(0), "JDF/AuditPool/Created");
+			Assertions.assertEquals(v.size(), 1);
+			Assertions.assertEquals(v.get(0), "JDF/AuditPool/Created");
 		}
 		{
 			final JDFDevCap dc = (JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_JDF", 0, false);
 			final VString v = dc.getNamePathVector(true);
-			Assert.assertEquals(v.size(), 1);
-			Assert.assertEquals(v.get(0), "JDF");
+			Assertions.assertEquals(v.size(), 1);
+			Assertions.assertEquals(v.get(0), "JDF");
 		}
 	}
 
@@ -729,15 +722,15 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 		final JDFMessageService ms = resp.appendMessageService();
 		ms.setType(EnumType.AbortQueueEntry);
 		ms.setAcknowledge(true);
-		Assert.assertNull("wrong type", JDFDeviceCap.getMessageServiceForJMFType(m, resp));
+		Assertions.assertNull(JDFDeviceCap.getMessageServiceForJMFType(m, resp), "wrong type");
 		final JDFMessageService ms2 = resp.appendMessageService();
 		ms2.setType(EnumType.KnownDevices);
 		ms2.setQuery(true);
-		Assert.assertNull("wrong family", JDFDeviceCap.getMessageServiceForJMFType(m, resp));
+		Assertions.assertNull(JDFDeviceCap.getMessageServiceForJMFType(m, resp), "wrong family");
 		final JDFMessageService ms3 = resp.appendMessageService();
 		ms3.setType(EnumType.KnownDevices);
 		ms3.setAcknowledge(true);
-		Assert.assertEquals("family and type match", JDFDeviceCap.getMessageServiceForJMFType(m, resp), ms3);
+		Assertions.assertEquals(JDFDeviceCap.getMessageServiceForJMFType(m, resp), ms3, "family and type match");
 
 	}
 }

@@ -70,9 +70,6 @@
 
 package org.cip4.jdflib.jmf;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
@@ -82,7 +79,8 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi
@@ -128,10 +126,10 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			final JDFDeviceInfo deviceInfo = dl.getDeviceInfo(i);
-			assertNull(deviceInfo.getDevice());
-			assertNull(StringUtil.getNonEmpty(deviceInfo.getStatusDetails()));
-			assertNotNull(deviceInfo.getDeviceStatus());
-			assertNotNull(deviceInfo.getDeviceID());
+			Assertions.assertNull(deviceInfo.getDevice());
+			Assertions.assertNull(StringUtil.getNonEmpty(deviceInfo.getStatusDetails()));
+			Assertions.assertNotNull(deviceInfo.getDeviceStatus());
+			Assertions.assertNotNull(deviceInfo.getDeviceID());
 		}
 	}
 
@@ -147,10 +145,10 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			final JDFDeviceInfo deviceInfo = dl.getDeviceInfo(i);
-			assertNull(deviceInfo.getDevice());
-			assertNotNull(StringUtil.getNonEmpty(deviceInfo.getStatusDetails()));
-			assertNotNull(deviceInfo.getDeviceStatus());
-			assertNotNull(deviceInfo.getDeviceID());
+			Assertions.assertNull(deviceInfo.getDevice());
+			Assertions.assertNotNull(StringUtil.getNonEmpty(deviceInfo.getStatusDetails()));
+			Assertions.assertNotNull(deviceInfo.getDeviceStatus());
+			Assertions.assertNotNull(deviceInfo.getDeviceID());
 		}
 	}
 
@@ -175,11 +173,11 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			final JDFDeviceInfo deviceInfo = dl.getDeviceInfo(i);
-			assertNotNull(deviceInfo.getDevice());
-			assertNull(deviceInfo.getDevice().getDeviceCap(0));
-			assertNotNull(StringUtil.getNonEmpty(deviceInfo.getStatusDetails()));
-			assertNotNull(deviceInfo.getDeviceStatus());
-			assertNotNull(deviceInfo.getDeviceID());
+			Assertions.assertNotNull(deviceInfo.getDevice());
+			Assertions.assertNull(deviceInfo.getDevice().getDeviceCap(0));
+			Assertions.assertNotNull(StringUtil.getNonEmpty(deviceInfo.getStatusDetails()));
+			Assertions.assertNotNull(deviceInfo.getDeviceStatus());
+			Assertions.assertNotNull(deviceInfo.getDeviceID());
 		}
 	}
 
@@ -195,11 +193,11 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			final JDFDeviceInfo deviceInfo = dl.getDeviceInfo(i);
-			assertNotNull(deviceInfo.getDevice());
-			assertNotNull(deviceInfo.getDevice().getDeviceCap(0));
-			assertNotNull(StringUtil.getNonEmpty(deviceInfo.getStatusDetails()));
-			assertNotNull(deviceInfo.getDeviceStatus());
-			assertNotNull(deviceInfo.getDeviceID());
+			Assertions.assertNotNull(deviceInfo.getDevice());
+			Assertions.assertNotNull(deviceInfo.getDevice().getDeviceCap(0));
+			Assertions.assertNotNull(StringUtil.getNonEmpty(deviceInfo.getStatusDetails()));
+			Assertions.assertNotNull(deviceInfo.getDeviceStatus());
+			Assertions.assertNotNull(deviceInfo.getDeviceID());
 		}
 	}
 }

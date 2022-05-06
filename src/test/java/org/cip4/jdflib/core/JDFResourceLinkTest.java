@@ -70,13 +70,6 @@
  */
 package org.cip4.jdflib.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.util.List;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -101,7 +94,8 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author MuchaD
@@ -124,16 +118,16 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink rl = n.getLink(m, null);
 
 		m.setAmount(42);
-		assertEquals("m amount!=42", m.getAttribute(AttributeName.AMOUNT), "42");
-		assertTrue("rl amount!=42", rl.getAmount(null) == 42);
-		assertTrue("rl amount!=42", rl.getMinAmount(null) == 42);
-		assertTrue("rl amount!=42", rl.getMaxAmount(null) == 42);
+		Assertions.assertEquals(m.getAttribute(AttributeName.AMOUNT), "42", "m amount!=42");
+		Assertions.assertTrue(rl.getAmount(null) == 42, "rl amount!=42");
+		Assertions.assertTrue(rl.getMinAmount(null) == 42, "rl amount!=42");
+		Assertions.assertTrue(rl.getMaxAmount(null) == 42, "rl amount!=42");
 
 		rl.setAmount(44, null);
-		assertEquals("ml amount!=44", rl.getAttribute(AttributeName.AMOUNT), "44");
-		assertTrue("rl amount!=44", rl.getAmount(null) == 44);
-		assertTrue("rl amount!=44", rl.getMinAmount(null) == 44);
-		assertTrue("rl amount!=44", rl.getMaxAmount(null) == 44);
+		Assertions.assertEquals(rl.getAttribute(AttributeName.AMOUNT), "44", "ml amount!=44");
+		Assertions.assertTrue(rl.getAmount(null) == 44, "rl amount!=44");
+		Assertions.assertTrue(rl.getMinAmount(null) == 44, "rl amount!=44");
+		Assertions.assertTrue(rl.getMaxAmount(null) == 44, "rl amount!=44");
 	}
 
 	/**
@@ -151,7 +145,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 		rl.setAmount(42);
 		rl.setPart("SheetName", "s1");
-		assertEquals(rl.getAmount(new JDFAttributeMap("SheetName", "s1")), 42.0, 0);
+		Assertions.assertEquals(rl.getAmount(new JDFAttributeMap("SheetName", "s1")), 42.0, 0);
 	}
 
 	/**
@@ -165,11 +159,11 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		n.setType("ConventionalPrinting", true);
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
 		final JDFResourceLink rl = n.getLink(m, null);
-		assertEquals(rl.getLinkedResourceName(), ElementName.MEDIA);
+		Assertions.assertEquals(rl.getLinkedResourceName(), ElementName.MEDIA);
 		rl.setrRef("ddd");
-		assertEquals(rl.getLinkedResourceName(), ElementName.MEDIA);
+		Assertions.assertEquals(rl.getLinkedResourceName(), ElementName.MEDIA);
 		rl.renameElement("foo", null);
-		assertNull(rl.getLinkedResourceName());
+		Assertions.assertNull(rl.getLinkedResourceName());
 	}
 
 	/**
@@ -189,36 +183,36 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		mapC.put("Condition", "Good");
 
 		m.setAmount(42);
-		assertEquals("m amount!=42", m.getAttribute(AttributeName.AMOUNT), "42");
-		assertEquals("rl amount!=42", rl.getAmount(null), 42., 0.1);
-		assertEquals("rl amount!=42", rl.getMinAmount(null), 42., 0.1);
-		assertEquals("rl amount!=42", rl.getMaxAmount(null), 42., 0.1);
+		Assertions.assertEquals(m.getAttribute(AttributeName.AMOUNT), "42", "m amount!=42");
+		Assertions.assertEquals(rl.getAmount(null), 42., 0.1, "rl amount!=42");
+		Assertions.assertEquals(rl.getMinAmount(null), 42., 0.1, "rl amount!=42");
+		Assertions.assertEquals(rl.getMaxAmount(null), 42., 0.1, "rl amount!=42");
 
 		rl.setAmount(44, map);
-		assertEquals("rl amount!=42", rl.getAmount(map), 44., 0.1);
-		assertEquals("rl amount!=42", rl.getMinAmount(map), 44., 0.1);
-		assertEquals("rl amount!=42", rl.getMaxAmount(map), 44., 0.1);
+		Assertions.assertEquals(rl.getAmount(map), 44., 0.1, "rl amount!=42");
+		Assertions.assertEquals(rl.getMinAmount(map), 44., 0.1, "rl amount!=42");
+		Assertions.assertEquals(rl.getMaxAmount(map), 44., 0.1, "rl amount!=42");
 
-		assertEquals("no good in map", rl.getAmount(mapC), -1., 0.1);
-		assertEquals("no good in map", rl.getMinAmount(mapC), -1., 0.1);
-		assertEquals("no good in map", rl.getMaxAmount(mapC), -1., 0.1);
+		Assertions.assertEquals(rl.getAmount(mapC), -1., 0.1, "no good in map");
+		Assertions.assertEquals(rl.getMinAmount(mapC), -1., 0.1, "no good in map");
+		Assertions.assertEquals(rl.getMaxAmount(mapC), -1., 0.1, "no good in map");
 
 		rl.removeChild(ElementName.AMOUNTPOOL, null, 0);
 		rl.setAmount(44, mapC);
-		assertEquals("rl amount!=42", rl.getAmount(mapC), 44., 0.1);
-		assertEquals("rl amount!=42", rl.getMinAmount(mapC), 44., 0.1);
-		assertEquals("rl amount!=42", rl.getMaxAmount(mapC), 44., 0.1);
+		Assertions.assertEquals(rl.getAmount(mapC), 44., 0.1, "rl amount!=42");
+		Assertions.assertEquals(rl.getMinAmount(mapC), 44., 0.1, "rl amount!=42");
+		Assertions.assertEquals(rl.getMaxAmount(mapC), 44., 0.1, "rl amount!=42");
 
-		assertEquals("no good in rl", rl.getAmount(map), 44., 0.1);
-		assertEquals("no good in rl", rl.getMinAmount(map), 44., 0.1);
-		assertEquals("no good in rl", rl.getMaxAmount(map), 44., 0.1);
+		Assertions.assertEquals(rl.getAmount(map), 44., 0.1, "no good in rl");
+		Assertions.assertEquals(rl.getMinAmount(map), 44., 0.1, "no good in rl");
+		Assertions.assertEquals(rl.getMaxAmount(map), 44., 0.1, "no good in rl");
 
 		final JDFAttributeMap mapW = new JDFAttributeMap(map);
 		mapW.put("Condition", "Waste");
 		rl.setAmount(4, mapW);
-		assertEquals("sum g/w in rl", rl.getAmount(map), 48., 0.1);
-		assertEquals("sum g/w in rl", rl.getMinAmount(map), 48., 0.1);
-		assertEquals("sum g/w in rl", rl.getMaxAmount(map), 48., 0.1);
+		Assertions.assertEquals(rl.getAmount(map), 48., 0.1, "sum g/w in rl");
+		Assertions.assertEquals(rl.getMinAmount(map), 48., 0.1, "sum g/w in rl");
+		Assertions.assertEquals(rl.getMaxAmount(map), 48., 0.1, "sum g/w in rl");
 	}
 
 	/**
@@ -229,11 +223,11 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	{
 		final JDFDoc d = new JDFDoc("MediaLink");
 		final JDFResourceLink rl = (JDFResourceLink) d.getRoot();
-		assertNotNull(rl.appendAmountPool());
+		Assertions.assertNotNull(rl.appendAmountPool());
 		try
 		{
 			rl.appendAmountPool();
-			fail("AmountPool #2");
+			Assertions.fail("AmountPool #2");
 		}
 		catch (final JDFException x)
 		{
@@ -255,38 +249,38 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFCustomerInfo ci = (JDFCustomerInfo) n.addResource(ElementName.CUSTOMERINFO, null, EnumUsage.Input, null, null, null, null);
 		final JDFComponent co = (JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
 		JDFResourceLink rl = n.getLink(ci, null);
-		assertEquals("available", rl.getMinStatus(), JDFResource.EnumResStatus.Available);
+		Assertions.assertEquals(rl.getMinStatus(), EnumResStatus.Available, "available");
 
 		rl.setDraftOK(true);
-		assertEquals("draft", rl.getMinStatus(), JDFResource.EnumResStatus.Draft);
-		assertTrue("has no draft", !rl.hasAttribute(AttributeName.DRAFTOK));
-		assertTrue("late draft", rl.getMinLateStatus() == JDFResource.EnumResStatus.Draft);
-		assertTrue("1.3 valid", rl.isValid(EnumValidationLevel.Complete));
+		Assertions.assertEquals(rl.getMinStatus(), EnumResStatus.Draft, "draft");
+		Assertions.assertTrue(!rl.hasAttribute(AttributeName.DRAFTOK), "has no draft");
+		Assertions.assertTrue(rl.getMinLateStatus() == EnumResStatus.Draft, "late draft");
+		Assertions.assertTrue(rl.isValid(EnumValidationLevel.Complete), "1.3 valid");
 		rl.setDraftOK(false);
-		assertEquals("draft", rl.getMinStatus(), JDFResource.EnumResStatus.Available);
-		assertTrue("has no draft", !rl.hasAttribute(AttributeName.DRAFTOK));
-		assertTrue("late draft", rl.getMinLateStatus() == JDFResource.EnumResStatus.Available);
-		assertTrue("1.3 valid", rl.isValid(EnumValidationLevel.Complete));
+		Assertions.assertEquals(rl.getMinStatus(), EnumResStatus.Available, "draft");
+		Assertions.assertTrue(!rl.hasAttribute(AttributeName.DRAFTOK), "has no draft");
+		Assertions.assertTrue(rl.getMinLateStatus() == EnumResStatus.Available, "late draft");
+		Assertions.assertTrue(rl.isValid(EnumValidationLevel.Complete), "1.3 valid");
 		rl.removeAttribute(AttributeName.MINSTATUS);
 
 		n.setVersion(JDFElement.EnumVersion.Version_1_2);
 		rl.init();
 		rl.setDraftOK(true);
 
-		assertTrue("draft", rl.getMinStatus() == JDFResource.EnumResStatus.Draft);
-		assertTrue("has draft", rl.hasAttribute(AttributeName.DRAFTOK));
-		assertTrue("has no MinStatus", !rl.hasAttribute(AttributeName.MINSTATUS));
-		assertEquals("late draft", rl.getMinLateStatus(), JDFResource.EnumResStatus.Draft);
-		assertTrue("1.2 valid", rl.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(rl.getMinStatus() == EnumResStatus.Draft, "draft");
+		Assertions.assertTrue(rl.hasAttribute(AttributeName.DRAFTOK), "has draft");
+		Assertions.assertTrue(!rl.hasAttribute(AttributeName.MINSTATUS), "has no MinStatus");
+		Assertions.assertEquals(rl.getMinLateStatus(), EnumResStatus.Draft, "late draft");
+		Assertions.assertTrue(rl.isValid(EnumValidationLevel.Complete), "1.2 valid");
 		rl.setDraftOK(false);
-		assertTrue("draft", rl.getMinStatus() == JDFResource.EnumResStatus.Available);
-		assertTrue("has draft", rl.hasAttribute(AttributeName.DRAFTOK));
-		assertTrue("has no MinStatus", !rl.hasAttribute(AttributeName.MINSTATUS));
-		assertEquals("late draft", rl.getMinLateStatus(), JDFResource.EnumResStatus.Available);
-		assertTrue("1.2 valid", rl.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(rl.getMinStatus() == EnumResStatus.Available, "draft");
+		Assertions.assertTrue(rl.hasAttribute(AttributeName.DRAFTOK), "has draft");
+		Assertions.assertTrue(!rl.hasAttribute(AttributeName.MINSTATUS), "has no MinStatus");
+		Assertions.assertEquals(rl.getMinLateStatus(), EnumResStatus.Available, "late draft");
+		Assertions.assertTrue(rl.isValid(EnumValidationLevel.Complete), "1.2 valid");
 
 		rl = n.getLink(co, null);
-		assertEquals("unavailable", rl.getMinStatus(), JDFResource.EnumResStatus.Unavailable);
+		Assertions.assertEquals(rl.getMinStatus(), EnumResStatus.Unavailable, "unavailable");
 	}
 
 	/**
@@ -299,14 +293,14 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink rl = (JDFResourceLink) d.getRoot();
 		rl.setActualAmount(12, new JDFAttributeMap("SignatureName", "1"));
 		rl.setActualAmount(14, new JDFAttributeMap("SignatureName", "2"));
-		assertEquals(rl.getMinAmountPoolAttribute("ActualAmount", null, null, 42), 12., 0.);
+		Assertions.assertEquals(rl.getMinAmountPoolAttribute("ActualAmount", null, null, 42), 12., 0.);
 
 		final JDFAttributeMap map = new JDFAttributeMap("SignatureName", "3");
 		map.put("SheetName", "a");
 		rl.setActualAmount(24, map);
 		map.put("SheetName", "b");
 		rl.setActualAmount(26, map);
-		assertEquals(rl.getMinAmountPoolAttribute("ActualAmount", null, new JDFAttributeMap("SignatureName", "3"), 42), 24., 0.);
+		Assertions.assertEquals(rl.getMinAmountPoolAttribute("ActualAmount", null, new JDFAttributeMap("SignatureName", "3"), 42), 24., 0.);
 	}
 
 	/**
@@ -324,13 +318,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink rl = n.getLink(comp, null);
 		rl.setAmount(42, null);
 		rl.setPipeProtocol("JDF");
-		assertEquals(rl.getAmount(null), 42., 0.1);
-		assertNull(rl.getAmountPool());
+		Assertions.assertEquals(rl.getAmount(null), 42., 0.1);
+		Assertions.assertNull(rl.getAmountPool());
 		rl.expandAmountPool();
-		assertNull(rl.getAttribute("Amount", null, null));
-		assertEquals(rl.getAmount(new JDFAttributeMap(EnumPartIDKey.SheetName, "S2")), 42., 0.1);
-		assertNotNull(rl.getAmountPool());
-		assertEquals(rl.getPipeProtocol(), "JDF");
+		Assertions.assertNull(rl.getAttribute("Amount", null, null));
+		Assertions.assertEquals(rl.getAmount(new JDFAttributeMap(EnumPartIDKey.SheetName, "S2")), 42., 0.1);
+		Assertions.assertNotNull(rl.getAmountPool());
+		Assertions.assertEquals(rl.getPipeProtocol(), "JDF");
 
 	}
 
@@ -347,7 +341,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		rl.setrRef("dummy");
 		n.setCombined(new VString("ImageSetting ConventionalPrinting", null));
 		rl.generateCombinedProcessIndex();
-		assertNull(" No CPI for unlinked resLink", rl.getCombinedProcessIndex());
+		Assertions.assertNull(rl.getCombinedProcessIndex(), " No CPI for unlinked resLink");
 	}
 
 	/**
@@ -360,25 +354,25 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
 		JDFResource r = n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
 		JDFResourceLink rl = n.getLink(r, null);
-		assertNull(" No CPI if no type", rl.getCombinedProcessIndex());
+		Assertions.assertNull(rl.getCombinedProcessIndex(), " No CPI if no type");
 		rl.generateCombinedProcessIndex();
-		assertNull(" No CPI if no type", rl.getCombinedProcessIndex());
+		Assertions.assertNull(rl.getCombinedProcessIndex(), " No CPI if no type");
 
 		n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
 		n.setType(EnumType.ProcessGroup);
 		r = n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
 		rl = n.getLink(r, null);
-		assertNull(" No CPI for gray box", rl.getCombinedProcessIndex());
+		Assertions.assertNull(rl.getCombinedProcessIndex(), " No CPI for gray box");
 		rl.generateCombinedProcessIndex();
-		assertNull(" No CPI for gray box", rl.getCombinedProcessIndex());
+		Assertions.assertNull(rl.getCombinedProcessIndex(), " No CPI for gray box");
 
 		n.setCombined(new VString("ImageSetting ConventionalPrinting", null));
 		rl.generateCombinedProcessIndex();
-		assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1"));
+		Assertions.assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1"));
 		n.setCombined(new VString("ImageSetting ConventionalPrinting ConventionalPrinting", null));
 		rl.generateCombinedProcessIndex();
-		assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1 2"));
+		Assertions.assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1 2"));
 	}
 
 	/**
@@ -392,11 +386,11 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		JDFResource r2 = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		JDFResourceLink rl = n.getLink(r, null);
 		JDFResourceLink rl2 = n.getLink(r2, null);
-		assertNull(" No CPI if no type", rl.getCombinedProcessIndex());
-		assertNull(" No CPI if no type", rl2.getCombinedProcessIndex());
+		Assertions.assertNull(rl.getCombinedProcessIndex(), " No CPI if no type");
+		Assertions.assertNull(rl2.getCombinedProcessIndex(), " No CPI if no type");
 		rl.generateCombinedProcessIndex();
-		assertNull(" No CPI if no type", rl.getCombinedProcessIndex());
-		assertNull(" No CPI if no type", rl2.getCombinedProcessIndex());
+		Assertions.assertNull(rl.getCombinedProcessIndex(), " No CPI if no type");
+		Assertions.assertNull(rl2.getCombinedProcessIndex(), " No CPI if no type");
 
 		n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
@@ -405,26 +399,26 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		r2 = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		rl = n.getLink(r, null);
 		rl2 = n.getLink(r2, null);
-		assertNull(" No CPI for gray box", rl.getCombinedProcessIndex());
+		Assertions.assertNull(rl.getCombinedProcessIndex(), " No CPI for gray box");
 		rl.generateCombinedProcessIndex();
-		assertNull(" No CPI for gray box", rl.getCombinedProcessIndex());
+		Assertions.assertNull(rl.getCombinedProcessIndex(), " No CPI for gray box");
 
 		n.setCombined(new VString("ConventionalPrinting", null));
 		rl.generateCombinedProcessIndex();
-		assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("0"));
+		Assertions.assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("0"));
 		rl2.generateCombinedProcessIndex();
-		assertEquals(rl2.getCombinedProcessIndex(), new JDFIntegerList("0"));
+		Assertions.assertEquals(rl2.getCombinedProcessIndex(), new JDFIntegerList("0"));
 
 		n.setCombined(new VString("ImageSetting ConventionalPrinting", null));
 		rl.generateCombinedProcessIndex();
-		assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1"));
+		Assertions.assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1"));
 		rl2.generateCombinedProcessIndex();
-		assertEquals(rl2.getCombinedProcessIndex(), new JDFIntegerList("1"));
+		Assertions.assertEquals(rl2.getCombinedProcessIndex(), new JDFIntegerList("1"));
 		n.setCombined(new VString("ImageSetting ConventionalPrinting ConventionalPrinting", null));
 		rl.generateCombinedProcessIndex();
 		rl2.generateCombinedProcessIndex();
-		assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1"));
-		assertEquals(rl2.getCombinedProcessIndex(), new JDFIntegerList("2"));
+		Assertions.assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1"));
+		Assertions.assertEquals(rl2.getCombinedProcessIndex(), new JDFIntegerList("2"));
 	}
 
 	/**
@@ -437,12 +431,12 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink rl = (JDFResourceLink) d.getRoot();
 		rl.setActualAmount(12, new JDFAttributeMap("SignatureName", "1"));
 		rl.setActualAmount(14, new JDFAttributeMap("SignatureName", "2"));
-		assertEquals(rl.getActualAmount(null), 26., 0.1);
+		Assertions.assertEquals(rl.getActualAmount(null), 26., 0.1);
 		rl.setAmount(42., null);
-		assertEquals("root attribute is incorrectly retrieved", rl.getAmount(new JDFAttributeMap("SignatureName", "2")), 42., 0.1);
+		Assertions.assertEquals(rl.getAmount(new JDFAttributeMap("SignatureName", "2")), 42., 0.1, "root attribute is incorrectly retrieved");
 		rl.removeChild(ElementName.AMOUNTPOOL, null, 0);
 		rl.setActualAmount(33, null);
-		assertEquals(rl.getActualAmount(null), 33., 0.1);
+		Assertions.assertEquals(rl.getActualAmount(null), 33., 0.1);
 	}
 
 	/**
@@ -467,14 +461,14 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		rl.getAmountPool().getPartAmount(map).setPartMapVector(vMap);
 		map.put("Condition", "Waste");
 		rl.setActualAmount(14, map);
-		assertEquals(rl.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT, null), 26., 0.1);
-		assertEquals(rl.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT, vMap), 26., 0.1);
+		Assertions.assertEquals(rl.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT, null), 26., 0.1);
+		Assertions.assertEquals(rl.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT, vMap), 26., 0.1);
 		sig1.put("SheetName", "S1");
-		assertEquals(" also when more granular", rl.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT, vMap), 26., 0.1);
+		Assertions.assertEquals(rl.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT, vMap), 26., 0.1, " also when more granular");
 		sig1 = new JDFAttributeMap(sig1);
 		sig1.put("SheetName", "S2");
 		vMap.add(sig1);
-		assertEquals(" also when more granular", rl.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT, vMap), 26., 0.1);
+		Assertions.assertEquals(rl.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT, vMap), 26., 0.1, " also when more granular");
 
 	}
 
@@ -491,9 +485,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		vM.add(new JDFAttributeMap("SignatureName", "2"));
 		rl.setAmountPoolAttribute("Amount", "42", null, vM);
 
-		assertEquals(rl.getAmountPoolAttribute("Amount", null, vM), "42");
+		Assertions.assertEquals(rl.getAmountPoolAttribute("Amount", null, vM), "42");
 		vM.add(new JDFAttributeMap("SignatureName", "3"));
-		assertNull(rl.getAmountPoolAttribute("Amount", null, vM));
+		Assertions.assertNull(rl.getAmountPoolAttribute("Amount", null, vM));
 
 	}
 
@@ -521,24 +515,24 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink rl = n.getLink(xm, null);
 		final JDFPartAmount pa = rl.getCreateAmountPool().getCreatePartAmount(new JDFAttributeMap("SheetName", "Sheet1"));
 		pa.setDraftOK(true);
-		assertTrue("draft", pa.getMinStatus() == JDFResource.EnumResStatus.Draft);
-		assertTrue("has no draft", !pa.hasAttribute(AttributeName.DRAFTOK));
-		assertTrue("late draft", pa.getMinLateStatus() == JDFResource.EnumResStatus.Draft);
+		Assertions.assertTrue(pa.getMinStatus() == EnumResStatus.Draft, "draft");
+		Assertions.assertTrue(!pa.hasAttribute(AttributeName.DRAFTOK), "has no draft");
+		Assertions.assertTrue(pa.getMinLateStatus() == EnumResStatus.Draft, "late draft");
 		pa.removeAttribute(AttributeName.MINSTATUS);
 		n.setVersion(JDFElement.EnumVersion.Version_1_2);
 		pa.setDraftOK(true);
-		assertTrue("draft", pa.getMinStatus() == JDFResource.EnumResStatus.Draft);
-		assertTrue("has draft", pa.hasAttribute(AttributeName.DRAFTOK));
-		assertTrue("has no MinStatus", !pa.hasAttribute(AttributeName.MINSTATUS));
-		assertTrue("late draft", pa.getMinLateStatus() == JDFResource.EnumResStatus.Draft);
+		Assertions.assertTrue(pa.getMinStatus() == EnumResStatus.Draft, "draft");
+		Assertions.assertTrue(pa.hasAttribute(AttributeName.DRAFTOK), "has draft");
+		Assertions.assertTrue(!pa.hasAttribute(AttributeName.MINSTATUS), "has no MinStatus");
+		Assertions.assertTrue(pa.getMinLateStatus() == EnumResStatus.Draft, "late draft");
 
 		rl.setMinAmount(42., map1);
-		assertEquals("map1min", rl.getMinAmount(map1), 42., 0.);
-		assertEquals("map1max", rl.getMaxAmount(map1), 1., 0.);
-		assertEquals("map2min", rl.getMinAmount(map2), 2., 0.); // last default
-		assertEquals("map0min", rl.getMaxAmount(null), 2., 0.); // last default
+		Assertions.assertEquals(rl.getMinAmount(map1), 42., 0., "map1min");
+		Assertions.assertEquals(rl.getMaxAmount(map1), 1., 0., "map1max");
+		Assertions.assertEquals(rl.getMinAmount(map2), 2., 0., "map2min"); // last default
+		Assertions.assertEquals(rl.getMaxAmount(null), 2., 0., "map0min"); // last default
 		pa.setAmount(55, null);
-		assertEquals("pa amount", pa.getAmount(null), 55., 0.);
+		Assertions.assertEquals(pa.getAmount(null), 55., 0., "pa amount");
 
 	}
 
@@ -559,23 +553,23 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink cpLink = n.getLink(comp, null);
 		final JDFAttributeMap mapBad = new JDFAttributeMap("Condition", "Waste");
 		cpLink.setActualAmount(42, mapBad);
-		assertEquals(cpLink.getActualAmount(mapBad), 42., 0);
-		assertTrue("allow partamounts to non-existing partitions", n.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertEquals(cpLink.getActualAmount(mapBad), 42., 0);
+		Assertions.assertTrue(n.isValid(EnumValidationLevel.Incomplete), "allow partamounts to non-existing partitions");
 
 		cpLink.removeChild(ElementName.AMOUNTPOOL, null, 0);
 		comp.addPartition(EnumPartIDKey.SheetName, "Sheet1");
 		mapBad.put(EnumPartIDKey.SheetName.getName(), "Sheet1");
 		cpLink.setActualAmount(42, mapBad);
-		assertEquals(cpLink.getActualAmount(mapBad), 42., 0);
-		assertTrue("allow partamounts to non-existing partitions", n.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertEquals(cpLink.getActualAmount(mapBad), 42., 0);
+		Assertions.assertTrue(n.isValid(EnumValidationLevel.Incomplete), "allow partamounts to non-existing partitions");
 		mapBad.put(EnumPartIDKey.SheetName.getName(), "Sheet2");
-		assertEquals(cpLink.getActualAmount(mapBad), 0., 0);
+		Assertions.assertEquals(cpLink.getActualAmount(mapBad), 0., 0);
 		final JDFAttributeMap m2 = new JDFAttributeMap("Condition", "Waste");
-		assertEquals(cpLink.getActualAmount(m2), 42., 0);
+		Assertions.assertEquals(cpLink.getActualAmount(m2), 42., 0);
 		m2.put("SheetName", "Sheet1");
-		assertEquals(cpLink.getActualAmount(m2), 42., 0);
+		Assertions.assertEquals(cpLink.getActualAmount(m2), 42., 0);
 		m2.put("Side", "Front");
-		assertEquals(cpLink.getActualAmount(m2), 0., 0);
+		Assertions.assertEquals(cpLink.getActualAmount(m2), 0., 0);
 
 	}
 
@@ -591,13 +585,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		VJDFAttributeMap vPart = new VJDFAttributeMap();
 		vPart.add(new JDFAttributeMap());
 		foo.setAmountPoolAttribute("blub", "123", null, vPart);
-		assertEquals(foo.getAttribute("blub"), "123");
+		Assertions.assertEquals(foo.getAttribute("blub"), "123");
 		vPart = new VJDFAttributeMap();
 		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "b");
 		vPart.add(map);
 		foo.setAmountPoolAttribute("blub", "123", null, vPart);
-		assertNull(foo.getAttribute("blub", null, null));
-		assertEquals(foo.getAmountPoolAttribute("blub", null, map, 0), "123");
+		Assertions.assertNull(foo.getAttribute("blub", null, null));
+		Assertions.assertEquals(foo.getAmountPoolAttribute("blub", null, map, 0), "123");
 
 	}
 
@@ -619,8 +613,8 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFRunList ruli = (JDFRunList) pp.appendResource(ElementName.RUNLIST);
 		final JDFResourceLink rl = pp.appendResourceLink("RunListLink", true);
 		rl.setrRef(ruli.getID());
-		assertTrue("valid param", jmf.isValid(EnumValidationLevel.Complete));
-		assertEquals(ruli, rl.getTarget());
+		Assertions.assertTrue(jmf.isValid(EnumValidationLevel.Complete), "valid param");
+		Assertions.assertEquals(ruli, rl.getTarget());
 	}
 
 	/**
@@ -634,30 +628,30 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource("ExposedMedia", null);
 		final JDFResourceLink rl = n.ensureLink(xm, EnumUsage.Input, null);
-		assertEquals(rl.getLeafVector().get(0), xm);
-		assertEquals(rl.getLeafVector().size(), 1);
+		Assertions.assertEquals(rl.getLeafVector().get(0), xm);
+		Assertions.assertEquals(rl.getLeafVector().size(), 1);
 
 		final JDFExposedMedia[] vxm = new JDFExposedMedia[5];
 		for (int i = 0; i < 5; i++)
 		{
 			vxm[i] = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.SheetName, "S" + i);
 		}
-		assertEquals(rl.getLeafVector().size(), 5);
-		assertEquals(rl.getLeafVector().get(3), vxm[3]);
+		Assertions.assertEquals(rl.getLeafVector().size(), 5);
+		Assertions.assertEquals(rl.getLeafVector().get(3), vxm[3]);
 		rl.appendPart().setPartMap(new JDFAttributeMap("SheetName", "S1"));
-		assertEquals(rl.getLeafVector().size(), 1);
-		assertEquals(rl.getLeafVector().get(0), vxm[1]);
+		Assertions.assertEquals(rl.getLeafVector().size(), 1);
+		Assertions.assertEquals(rl.getLeafVector().get(0), vxm[1]);
 
 		rl.appendPart().setPartMap(new JDFAttributeMap("SheetName", "S3"));
-		assertEquals(rl.getLeafVector().size(), 2);
-		assertEquals(rl.getLeafVector().get(1), vxm[3]);
+		Assertions.assertEquals(rl.getLeafVector().size(), 2);
+		Assertions.assertEquals(rl.getLeafVector().get(1), vxm[3]);
 
 		rl.removeChildren("Part", null, null);
 		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "S4");
 		map.put("Separation", "green");
 		rl.appendPart().setPartMap(map);
 
-		assertNull(rl.getLeafVector());
+		Assertions.assertNull(rl.getLeafVector());
 
 	}
 
@@ -674,7 +668,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
 		rl.setPartMap(mPart);
 		final VElement v = rl.getTargetVector(0);
-		assertEquals("The target vector is the node with two leaves", v.size(), 1);
+		Assertions.assertEquals(v.size(), 1, "The target vector is the node with two leaves");
 	}
 
 	/**
@@ -690,7 +684,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
 		rl.setPartMap(mPart);
 		final List<JDFResource> v = rl.getTargetList();
-		assertEquals("The target vector is the node with two leaves", v.size(), 1);
+		Assertions.assertEquals(v.size(), 1, "The target vector is the node with two leaves");
 	}
 
 	/**
@@ -713,7 +707,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		mPart.put("PartVersion", "En DK");
 		r.getCreatePartition(mPart, null);
 		final VElement v = rl.getTargetVector(-1);
-		assertEquals("The target vector has two pv nodes", v.size(), 2);
+		Assertions.assertEquals(v.size(), 2, "The target vector has two pv nodes");
 	}
 
 	/**
@@ -731,19 +725,19 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		mPart.put("PartVersion", "En Fr");
 		final JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
 
-		assertEquals(EnumResStatus.Unavailable, rl.getStatusFromLeaves());
+		Assertions.assertEquals(EnumResStatus.Unavailable, rl.getStatusFromLeaves());
 		final JDFResource r = rl.getTarget();
 		r.getResourceRoot().setResStatus(EnumResStatus.Available, true);
-		assertEquals(EnumResStatus.Available, rl.getStatusFromLeaves());
+		Assertions.assertEquals(EnumResStatus.Available, rl.getStatusFromLeaves());
 		rl.setPartMap(mPartLink);
 		r.getCreatePartition(mPart, null);
 		mPart.put("PartVersion", "En DK");
 		r.getCreatePartition(mPart, null).setResStatus(EnumResStatus.Draft, true);
-		assertEquals(EnumResStatus.Draft, rl.getStatusFromLeaves());
+		Assertions.assertEquals(EnumResStatus.Draft, rl.getStatusFromLeaves());
 		mPartLink.put(AttributeName.SHEETNAME, "nixda");
 		r.getResourceRoot().setPartUsage(EnumPartUsage.Explicit);
 		rl.setPartMap(mPartLink);
-		assertEquals(EnumResStatus.Incomplete, rl.getStatusFromLeaves());
+		Assertions.assertEquals(EnumResStatus.Incomplete, rl.getStatusFromLeaves());
 	}
 
 	/**
@@ -763,10 +757,10 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResource leaf = comp.getCreatePartition(mPart, new VString("SignatureName SheetName PartVersion", null));
 		rl.setPartMap(mPartLink);
 
-		assertEquals(rl.getTarget(), leaf);
+		Assertions.assertEquals(rl.getTarget(), leaf);
 		leaf.setPartVersion("En En");
 		rl.setPartMap(mPart);
-		assertEquals("swapped", rl.getTarget(), leaf);
+		Assertions.assertEquals(rl.getTarget(), leaf, "swapped");
 	}
 
 	/**
@@ -794,7 +788,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		rl.setPartMapVector(vLink);
 		mPart.remove("PartVersion");
 
-		assertEquals(rl.getTarget(), comp.getPartition(mPart, EnumPartUsage.Explicit));
+		Assertions.assertEquals(rl.getTarget(), comp.getPartition(mPart, EnumPartUsage.Explicit));
 	}
 
 	/**
@@ -815,7 +809,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		vm.add(mPartLink2);
 		rl.setPartMapVector(vm);
 		final VElement v = rl.getTargetVector(-1);
-		assertEquals("The target vector has two pv nodes", v.size(), 2);
+		Assertions.assertEquals(v.size(), 2, "The target vector has two pv nodes");
 	}
 
 	/**
@@ -849,13 +843,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		}
 
 		VElement v = r.getPartitionVector((VJDFAttributeMap) null, null);
-		assertEquals("explicit identicals are excluded", v.size(), 1);
+		Assertions.assertEquals(v.size(), 1, "explicit identicals are excluded");
 		v = r.getPartitionVector(vm, null);
-		assertEquals(v.size(), 4);
+		Assertions.assertEquals(v.size(), 4);
 
 		rl.setPartMapVector(vm);
 		v = rl.getTargetVector(0);
-		assertEquals(v.size(), 4);
+		Assertions.assertEquals(v.size(), 4);
 	}
 
 	/**
@@ -889,13 +883,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		}
 
 		VElement v = r.getPartitionVector((VJDFAttributeMap) null, null);
-		assertEquals("explicit identicals are excluded", v.size(), 1);
+		Assertions.assertEquals(v.size(), 1, "explicit identicals are excluded");
 		v = r.getPartitionVector(vm, null);
-		assertEquals(v.size(), 4);
+		Assertions.assertEquals(v.size(), 4);
 
 		rl.setPartMapVector(vm);
 		v = rl.getRawTargetVector(0);
-		assertEquals(v.size(), 8);
+		Assertions.assertEquals(v.size(), 8);
 	}
 
 	/**
@@ -915,24 +909,24 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink rl = n.getLink(xm, null);
 		rl.setPartMap(new JDFAttributeMap("PartVersion", "DE"));
 		VElement v = rl.getTargetVector(-1);
-		assertEquals("DE/Black + Cyan", v.size(), 2);
-		assertEquals(v.get(0), xmbd);
-		assertEquals(v.get(1), xmc);
+		Assertions.assertEquals(v.size(), 2, "DE/Black + Cyan");
+		Assertions.assertEquals(v.get(0), xmbd);
+		Assertions.assertEquals(v.get(1), xmc);
 		rl.setPartMap(new JDFAttributeMap("PartVersion", "EN"));
 		v = rl.getTargetVector(-1);
-		assertEquals(v.size(), 2);
-		assertEquals(v.get(0), xmbe);
-		assertEquals(v.get(1), xmc);
+		Assertions.assertEquals(v.size(), 2);
+		Assertions.assertEquals(v.get(0), xmbe);
+		Assertions.assertEquals(v.get(1), xmc);
 		rl.setPartMap(new JDFAttributeMap("PartVersion", "FR"));
 		v = rl.getTargetVector(-1);
-		assertEquals(v.size(), 1);
-		assertEquals(v.get(0), xmc);
+		Assertions.assertEquals(v.size(), 1);
+		Assertions.assertEquals(v.get(0), xmc);
 		xm.setPartUsage(EnumPartUsage.Implicit);
 		v = rl.getTargetVector(-1);
-		assertEquals(v.size(), 2);
+		Assertions.assertEquals(v.size(), 2);
 		// TODO should be xmb?
-		assertEquals(v.get(0), xmb);
-		assertEquals(v.get(1), xmc);
+		Assertions.assertEquals(v.get(0), xmb);
+		Assertions.assertEquals(v.get(1), xmc);
 	}
 
 	/**
@@ -947,13 +941,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
 		rl.appendPart();
 		VElement v = rl.getTargetVector(0);
-		assertEquals("The target vector is the node with two leaves", v.size(), 1);
+		Assertions.assertEquals(v.size(), 1, "The target vector is the node with two leaves");
 		final JDFResource linkRoot = rl.getLinkRoot();
-		assertEquals("The target vector is the node with two leaves", v.elementAt(0), linkRoot);
+		Assertions.assertEquals(v.elementAt(0), linkRoot, "The target vector is the node with two leaves");
 		linkRoot.setPartUsage(EnumPartUsage.Implicit);
 		v = rl.getTargetVector(0);
-		assertEquals("The target vector is the node with two leaves", v.size(), 1);
-		assertEquals("The target vector is the node with two leaves", v.elementAt(0), linkRoot);
+		Assertions.assertEquals(v.size(), 1, "The target vector is the node with two leaves");
+		Assertions.assertEquals(v.elementAt(0), linkRoot, "The target vector is the node with two leaves");
 
 		linkRoot.setPartUsage(EnumPartUsage.Explicit);
 
@@ -963,13 +957,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		rl.appendPart();
 
 		v = rl.getTargetVector(0);
-		assertEquals("The target vector is the node with two leaves", v.size(), 2);
-		assertTrue(v.contains(linkRoot));
-		assertTrue(v.contains(linkRoot.getPartition(mPart, null)));
+		Assertions.assertEquals(v.size(), 2, "The target vector is the node with two leaves");
+		Assertions.assertTrue(v.contains(linkRoot));
+		Assertions.assertTrue(v.contains(linkRoot.getPartition(mPart, null)));
 		linkRoot.setPartUsage(EnumPartUsage.Implicit);
 		v = rl.getTargetVector(0);
-		assertTrue(v.contains(linkRoot));
-		assertTrue(v.contains(linkRoot.getPartition(mPart, null)));
+		Assertions.assertTrue(v.contains(linkRoot));
+		Assertions.assertTrue(v.contains(linkRoot.getPartition(mPart, null)));
 	}
 
 	/**
@@ -993,60 +987,60 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		mPart2.put("SheetName", "S1");
 		mPart2.put("Side", "Front");
 		final JDFExposedMedia xmPart = (JDFExposedMedia) xm.getPartition(mPart2, null);
-		assertNotNull(xmPart);
+		Assertions.assertNotNull(xmPart);
 
 		final JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
 
 		rl.setPartMap(mPart);
-		assertNull(rl.getTarget());
-		assertEquals(rl.getTargetVector(0).size(), 0);
+		Assertions.assertNull(rl.getTarget());
+		Assertions.assertEquals(rl.getTargetVector(0).size(), 0);
 
 		xm.setPartUsage(EnumPartUsage.Explicit);
-		assertNull(rl.getTarget());
-		assertEquals(rl.getTargetVector(0).size(), 0);
+		Assertions.assertNull(rl.getTarget());
+		Assertions.assertEquals(rl.getTargetVector(0).size(), 0);
 
 		xm.setPartUsage(EnumPartUsage.Implicit);
-		assertEquals(rl.getTarget(), xm);
-		assertEquals(rl.getTargetVector(0).size(), 1);
+		Assertions.assertEquals(rl.getTarget(), xm);
+		Assertions.assertEquals(rl.getTargetVector(0).size(), 1);
 
 		xm.setPartUsage(EnumPartUsage.Sparse);
-		assertEquals(rl.getTarget(), null);
-		assertEquals(rl.getTargetVector(0).size(), 0);
+		Assertions.assertEquals(rl.getTarget(), null);
+		Assertions.assertEquals(rl.getTargetVector(0).size(), 0);
 
 		rl.setPartMap(mPart2);
 		xm.removeAttribute("PartUsage");
-		assertEquals(xmPart, rl.getTarget());
-		assertEquals(rl.getTargetVector(0).size(), 1);
+		Assertions.assertEquals(xmPart, rl.getTarget());
+		Assertions.assertEquals(rl.getTargetVector(0).size(), 1);
 
 		xm.setPartUsage(EnumPartUsage.Explicit);
-		assertEquals(xmPart, rl.getTarget());
-		assertEquals(rl.getTargetVector(0).size(), 1);
+		Assertions.assertEquals(xmPart, rl.getTarget());
+		Assertions.assertEquals(rl.getTargetVector(0).size(), 1);
 
 		xm.setPartUsage(EnumPartUsage.Implicit);
-		assertEquals(rl.getTarget(), xmPart);
-		assertEquals(rl.getTargetVector(0).size(), 1);
+		Assertions.assertEquals(rl.getTarget(), xmPart);
+		Assertions.assertEquals(rl.getTargetVector(0).size(), 1);
 
 		xm.setPartUsage(EnumPartUsage.Sparse);
-		assertEquals(rl.getTarget(), xmPart);
-		assertEquals(rl.getTargetVector(0).size(), 1);
+		Assertions.assertEquals(rl.getTarget(), xmPart);
+		Assertions.assertEquals(rl.getTargetVector(0).size(), 1);
 
 		mPart2.put("PartVersion", "Fnarf");
 		rl.setPartMap(mPart2);
 		xm.removeAttribute("PartUsage");
-		assertEquals(null, rl.getTarget());
-		assertEquals(rl.getTargetVector(0).size(), 0);
+		Assertions.assertEquals(null, rl.getTarget());
+		Assertions.assertEquals(rl.getTargetVector(0).size(), 0);
 
 		xm.setPartUsage(EnumPartUsage.Explicit);
-		assertEquals(null, rl.getTarget());
-		assertEquals(rl.getTargetVector(0).size(), 0);
+		Assertions.assertEquals(null, rl.getTarget());
+		Assertions.assertEquals(rl.getTargetVector(0).size(), 0);
 
 		xm.setPartUsage(EnumPartUsage.Implicit);
-		assertEquals(rl.getTarget(), xmPart);
-		assertEquals(rl.getTargetVector(0).size(), 1);
+		Assertions.assertEquals(rl.getTarget(), xmPart);
+		Assertions.assertEquals(rl.getTargetVector(0).size(), 1);
 
 		xm.setPartUsage(EnumPartUsage.Sparse);
-		assertEquals(rl.getTarget(), xmPart);
-		assertEquals(rl.getTargetVector(0).size(), 1);
+		Assertions.assertEquals(rl.getTarget(), xmPart);
+		Assertions.assertEquals(rl.getTargetVector(0).size(), 1);
 	}
 
 	/**
@@ -1073,7 +1067,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink rl = n.getLink(xm, null);
 		rl.setPartMap(m2);
 
-		assertEquals(xmSheet, rl.getTarget());
+		Assertions.assertEquals(xmSheet, rl.getTarget());
 	}
 
 	/**
@@ -1090,15 +1084,15 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink rl = n.getLink(r, null);
 		final VString nodeTypes = n.getTypes();
 		nodeTypes.unify();
-		assertEquals(rl.getCombinedProcessTypes(), nodeTypes);
+		Assertions.assertEquals(rl.getCombinedProcessTypes(), nodeTypes);
 		rl.setCombinedProcessType("c");
-		assertEquals(rl.getCombinedProcessTypes(), new VString("c", " "));
+		Assertions.assertEquals(rl.getCombinedProcessTypes(), new VString("c", " "));
 		rl.removeAttribute(AttributeName.COMBINEDPROCESSTYPE);
-		assertEquals(rl.getCombinedProcessTypes(), nodeTypes);
+		Assertions.assertEquals(rl.getCombinedProcessTypes(), nodeTypes);
 		rl.setCombinedProcessIndex(new JDFIntegerList("0 2 4 6"));
-		assertEquals(rl.getCombinedProcessTypes(), new VString("a c e", " "));
+		Assertions.assertEquals(rl.getCombinedProcessTypes(), new VString("a c e", " "));
 		rl.setCombinedProcessIndex(new JDFIntegerList("0 2 4 6 8 99"));
-		assertEquals(rl.getCombinedProcessTypes(), new VString("a c e", " "));
+		Assertions.assertEquals(rl.getCombinedProcessTypes(), new VString("a c e", " "));
 	}
 
 	/**
@@ -1115,33 +1109,33 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFNode n2 = n.addJDFNode("ConventionalPrinting");
 		final JDFCustomerInfo ci = (JDFCustomerInfo) n.addResource(ElementName.CUSTOMERINFO, null, EnumUsage.Input, null, null, null, null);
 		final JDFResourceLink ciLink = n.getLink(ci, null);
-		assertTrue("getLinkRoot in same node", ci == ciLink.getLinkRoot());
-		assertTrue("getLinkTarget in same node", ci == ciLink.getTarget());
-		assertTrue("getTarget in same node", ci == ciLink.getTarget());
+		Assertions.assertTrue(ci == ciLink.getLinkRoot(), "getLinkRoot in same node");
+		Assertions.assertTrue(ci == ciLink.getTarget(), "getLinkTarget in same node");
+		Assertions.assertTrue(ci == ciLink.getTarget(), "getTarget in same node");
 
 		final JDFResourceLink ciLink2 = n2.linkResource(ci, EnumUsage.Input, null);
-		assertTrue("getLinkRoot in child node", ci == ciLink2.getLinkRoot());
-		assertTrue("getLinkTarget in child node", ci == ciLink2.getTarget());
-		assertTrue("getTarget in child node", ci == ciLink2.getTarget());
+		Assertions.assertTrue(ci == ciLink2.getLinkRoot(), "getLinkRoot in child node");
+		Assertions.assertTrue(ci == ciLink2.getTarget(), "getLinkTarget in child node");
+		Assertions.assertTrue(ci == ciLink2.getTarget(), "getTarget in child node");
 
 		final JDFNodeInfo ni = (JDFNodeInfo) n2.addResource(ElementName.NODEINFO, null, null, null, null, null, null);
 		final JDFResourceLink niLink = n2.linkResource(ni, true ? EnumUsage.Input : EnumUsage.Output, null);
-		assertTrue("getLinkRoot both in child node", ni == niLink.getLinkRoot());
-		assertTrue("getLinkTarget both in child node", ni == niLink.getTarget());
-		assertTrue("getTarget both in child node", ni == niLink.getTarget());
+		Assertions.assertTrue(ni == niLink.getLinkRoot(), "getLinkRoot both in child node");
+		Assertions.assertTrue(ni == niLink.getTarget(), "getLinkTarget both in child node");
+		Assertions.assertTrue(ni == niLink.getTarget(), "getTarget both in child node");
 
 		final JDFResourceLink niLink2 = (JDFResourceLink) n.getCreateResourceLinkPool().appendElement("NodeInfoLink", null);
 		niLink2.setrRef(ni.getID());
-		assertTrue("getLinkRoot illegal in child node", niLink2.getLinkRoot() == null);
-		assertTrue("getLinkTarget illegal in child node", niLink2.getTarget() == null);
-		assertTrue("getTarget illegal in child node", niLink2.getTarget() == null);
+		Assertions.assertTrue(niLink2.getLinkRoot() == null, "getLinkRoot illegal in child node");
+		Assertions.assertTrue(niLink2.getTarget() == null, "getLinkTarget illegal in child node");
+		Assertions.assertTrue(niLink2.getTarget() == null, "getTarget illegal in child node");
 
 		final JDFDoc d22 = new JDFDoc(ElementName.JDF);
 		final JDFNode n22 = d22.getJDFRoot();
 		final JDFResourceLinkPool rlp = n22.getCreateResourceLinkPool();
 		final JDFResourceLink rl = rlp.linkResource(ni, true ? EnumUsage.Input : EnumUsage.Output, null);
-		assertNull(rl);
-		assertNull("NI not linked", rlp.getElement("NodeInfoLink"));
+		Assertions.assertNull(rl);
+		Assertions.assertNull(rlp.getElement("NodeInfoLink"), "NI not linked");
 
 	}
 
@@ -1156,7 +1150,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResource r = node.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
 		node.getResourcePool().insertBefore(ElementName.ADHESIVEBINDINGPARAMS + "Ref", r, null).setAttribute("rRef", "badLink");
 		final JDFResourceLink link = node.getLink(r, null);
-		assertNotNull(link.getLinkRoot()); // Endlos-Schleife !!!!
+		Assertions.assertNotNull(link.getLinkRoot()); // Endlos-Schleife !!!!
 	}
 
 	/**
@@ -1169,17 +1163,17 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFNode node = jdfDoc.getJDFRoot();
 		final JDFResource r = node.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
 		final JDFResourceLink link = node.getLink(r, null);
-		assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS));
-		assertTrue(link.matchesString("Input"));
-		assertFalse(link.matchesString("Output"));
-		assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS + "Link"));
-		assertFalse(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS + ":Plate"));
+		Assertions.assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS));
+		Assertions.assertTrue(link.matchesString("Input"));
+		Assertions.assertFalse(link.matchesString("Output"));
+		Assertions.assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS + "Link"));
+		Assertions.assertFalse(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS + ":Plate"));
 		link.setProcessUsage(EnumProcessUsage.Plate);
-		assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS));
-		assertTrue(link.matchesString("Input"));
-		assertFalse(link.matchesString("Output"));
-		assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS + "Link"));
-		assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS + ":Plate"));
+		Assertions.assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS));
+		Assertions.assertTrue(link.matchesString("Input"));
+		Assertions.assertFalse(link.matchesString("Output"));
+		Assertions.assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS + "Link"));
+		Assertions.assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS + ":Plate"));
 	}
 
 	/**
@@ -1227,14 +1221,14 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		try
 		{
 			rl.setTarget(m);
-			fail("no link to subelem");
+			Assertions.fail("no link to subelem");
 		}
 		catch (final JDFException x)
 		{
 			// nop
 		}
 		rl.setTarget(xm1);
-		assertEquals(rl.getPartMapVector(), vSig1);
+		Assertions.assertEquals(rl.getPartMapVector(), vSig1);
 
 	}
 
@@ -1250,7 +1244,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		final JDFResourceLinkPool rlp = n.appendResourceLinkPool();
 		final JDFResourceLink rl = (JDFResourceLink) rlp.appendElement("FooLink");
-		assertNull(rl.getUsage());
+		Assertions.assertNull(rl.getUsage());
 	}
 
 	/**
@@ -1266,57 +1260,57 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 		final JDFResourceLink rl = n.getLink(r, null);
 		// the root always exists
-		assertTrue(rl.hasResourcePartMap(null, false));
-		assertTrue(rl.hasResourcePartMap(null, true));
+		Assertions.assertTrue(rl.hasResourcePartMap(null, false));
+		Assertions.assertTrue(rl.hasResourcePartMap(null, true));
 
 		final JDFAttributeMap attributeMap = new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig1");
 
-		assertTrue(rl.hasResourcePartMap(attributeMap, false));
-		assertFalse(rl.hasResourcePartMap(attributeMap, true));
+		Assertions.assertTrue(rl.hasResourcePartMap(attributeMap, false));
+		Assertions.assertFalse(rl.hasResourcePartMap(attributeMap, true));
 
 		r.setPartUsage(EnumPartUsage.Implicit);
-		assertTrue(rl.hasResourcePartMap(attributeMap, false));
-		assertTrue(rl.hasResourcePartMap(attributeMap, true));
+		Assertions.assertTrue(rl.hasResourcePartMap(attributeMap, false));
+		Assertions.assertTrue(rl.hasResourcePartMap(attributeMap, true));
 
 		r.setPartUsage(EnumPartUsage.Explicit);
 
 		final JDFResource rSig = r.addPartition(EnumPartIDKey.SignatureName, "sig1");
 
 		// the root always exists
-		assertTrue(rl.hasResourcePartMap(null, false));
-		assertTrue(rl.hasResourcePartMap(null, true));
+		Assertions.assertTrue(rl.hasResourcePartMap(null, false));
+		Assertions.assertTrue(rl.hasResourcePartMap(null, true));
 
 		// link and resource match
 		rl.setPart(EnumPartIDKey.SignatureName.getName(), "sig1");
-		assertTrue(rl.hasResourcePartMap(null, false));
-		assertTrue(rl.hasResourcePartMap(null, true));
+		Assertions.assertTrue(rl.hasResourcePartMap(null, false));
+		Assertions.assertTrue(rl.hasResourcePartMap(null, true));
 
 		// resource is partitioned deeper than link
 		rSig.addPartition(EnumPartIDKey.SheetName, "sh1");
-		assertTrue(rl.hasResourcePartMap(null, false));
-		assertTrue(rl.hasResourcePartMap(attributeMap, false));
+		Assertions.assertTrue(rl.hasResourcePartMap(null, false));
+		Assertions.assertTrue(rl.hasResourcePartMap(attributeMap, false));
 
 		attributeMap.put(EnumPartIDKey.SheetName, "sh1");
-		assertTrue(rl.hasResourcePartMap(attributeMap, true));
-		assertFalse(rl.hasResourcePartMap(attributeMap, false));
+		Assertions.assertTrue(rl.hasResourcePartMap(attributeMap, true));
+		Assertions.assertFalse(rl.hasResourcePartMap(attributeMap, false));
 
 		attributeMap.put(EnumPartIDKey.SheetName, "sh2");
-		assertFalse(rl.hasResourcePartMap(attributeMap, true));
-		assertFalse(rl.hasResourcePartMap(attributeMap, false));
+		Assertions.assertFalse(rl.hasResourcePartMap(attributeMap, true));
+		Assertions.assertFalse(rl.hasResourcePartMap(attributeMap, false));
 
 		attributeMap.put(EnumPartIDKey.Side, "Front");
-		assertFalse(rl.hasResourcePartMap(attributeMap, true));
-		assertFalse(rl.hasResourcePartMap(attributeMap, false));
+		Assertions.assertFalse(rl.hasResourcePartMap(attributeMap, true));
+		Assertions.assertFalse(rl.hasResourcePartMap(attributeMap, false));
 
-		assertFalse(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig2"), false));
-		assertFalse(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig2"), true));
+		Assertions.assertFalse(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig2"), false));
+		Assertions.assertFalse(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig2"), true));
 
 		r.setPartUsage(EnumPartUsage.Implicit);
-		assertTrue(rl.hasResourcePartMap(attributeMap, true));
-		assertTrue(rl.hasResourcePartMap(attributeMap, false));
+		Assertions.assertTrue(rl.hasResourcePartMap(attributeMap, true));
+		Assertions.assertTrue(rl.hasResourcePartMap(attributeMap, false));
 
-		assertFalse(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig2"), false));
-		assertFalse(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig2"), true));
+		Assertions.assertFalse(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig2"), false));
+		Assertions.assertFalse(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig2"), true));
 	}
 
 	/**
@@ -1325,8 +1319,8 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	@Test
 	public void testInvertUsage()
 	{
-		assertEquals(EnumUsage.Output, EnumUsage.Output.invert().invert());
-		assertEquals(EnumUsage.Input, EnumUsage.Output.invert());
+		Assertions.assertEquals(EnumUsage.Output, EnumUsage.Output.invert().invert());
+		Assertions.assertEquals(EnumUsage.Input, EnumUsage.Output.invert());
 	}
 
 	/**
@@ -1336,13 +1330,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	public void testIsResourceLink()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		assertFalse(JDFResourceLink.isResourceLink(n));
+		Assertions.assertFalse(JDFResourceLink.isResourceLink(n));
 		final JDFResource r = n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
 		final JDFResourceLink rl = n.getLink(r, null);
-		assertFalse(JDFResourceLink.isResourceLink(r));
-		assertTrue(JDFResourceLink.isResourceLink(rl));
+		Assertions.assertFalse(JDFResourceLink.isResourceLink(r));
+		Assertions.assertTrue(JDFResourceLink.isResourceLink(rl));
 		final JDFPartAmount pa = rl.appendAmountPool().appendPartAmount();
-		assertFalse(JDFResourceLink.isResourceLink(pa));
+		Assertions.assertFalse(JDFResourceLink.isResourceLink(pa));
 	}
 
 	/**
@@ -1358,7 +1352,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink rl = n.getLink(r, null);
 		r.setResStatus(null, true);
 
-		assertFalse(rl.isExecutable(null, true));
+		Assertions.assertFalse(rl.isExecutable(null, true));
 	}
 
 	/**
@@ -1374,23 +1368,23 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLink rl = n.getLink(r, null);
 
 		r.setResStatus(EnumResStatus.Available, true);
-		assertTrue(rl.isExecutable(null, true));
+		Assertions.assertTrue(rl.isExecutable(null, true));
 		r.setResStatus(EnumResStatus.Unavailable, true);
-		assertFalse(rl.isExecutable(null, true));
+		Assertions.assertFalse(rl.isExecutable(null, true));
 		r.setResStatus(EnumResStatus.Draft, true);
-		assertFalse(rl.isExecutable(null, true));
+		Assertions.assertFalse(rl.isExecutable(null, true));
 		rl.setDraftOK(true);
-		assertTrue(rl.isExecutable(null, true));
+		Assertions.assertTrue(rl.isExecutable(null, true));
 
 		rl.setUsage(EnumUsage.Output);
 		r.setResStatus(EnumResStatus.Available, true);
-		assertTrue(rl.isExecutable(null, true));
+		Assertions.assertTrue(rl.isExecutable(null, true));
 		r.setResStatus(EnumResStatus.Unavailable, true);
-		assertFalse(rl.isExecutable(null, true));
+		Assertions.assertFalse(rl.isExecutable(null, true));
 		r.setResStatus(EnumResStatus.Draft, true);
-		assertTrue(rl.isExecutable(null, true));
+		Assertions.assertTrue(rl.isExecutable(null, true));
 		rl.setDraftOK(true);
-		assertTrue(rl.isExecutable(null, true));
+		Assertions.assertTrue(rl.isExecutable(null, true));
 
 		final JDFResource rSig = r.addPartition(EnumPartIDKey.SignatureName, "sig1");
 		final JDFResource rSheet = rSig.addPartition(EnumPartIDKey.SheetName, "sh1");
@@ -1399,23 +1393,23 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		rSheet.setResStatus(EnumResStatus.Available, true);
 		rl.setUsage(EnumUsage.Input);
 		JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig1");
-		assertFalse(rl.isExecutable(map, false));
-		assertTrue(rl.isExecutable(map, true));
+		Assertions.assertFalse(rl.isExecutable(map, false));
+		Assertions.assertTrue(rl.isExecutable(map, true));
 		final JDFResource rSheet2 = rSig.addPartition(EnumPartIDKey.SheetName, "sh2");
 		rSheet2.setResStatus(EnumResStatus.Unavailable, false);
-		assertFalse(rl.isExecutable(map, false));
-		assertFalse(rl.isExecutable(map, true));
+		Assertions.assertFalse(rl.isExecutable(map, false));
+		Assertions.assertFalse(rl.isExecutable(map, true));
 		map.put(EnumPartIDKey.SheetName, "sh1");
-		assertTrue(rl.isExecutable(map, false));
-		assertTrue(rl.isExecutable(map, true));
+		Assertions.assertTrue(rl.isExecutable(map, false));
+		Assertions.assertTrue(rl.isExecutable(map, true));
 		rl.appendPart().setPartMap(map);
 		map.put(EnumPartIDKey.SheetName, "sh2");
 		rl.appendPart().setPartMap(map);
 		map = new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig1");
 		rSheet2.setResStatus(EnumResStatus.Available, false);
 
-		assertTrue(rl.isExecutable(map, false));
-		assertTrue(rl.isExecutable(map, true));
+		Assertions.assertTrue(rl.isExecutable(map, false));
+		Assertions.assertTrue(rl.isExecutable(map, true));
 
 	}
 
@@ -1432,10 +1426,10 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		JDFResourceLink rl = (JDFResourceLink) rlp.appendElement("FooLink");
 		final JDFResource rBar = n.addResource("Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
 		rl.setrRef(rBar.getID());
-		assertFalse((rl.isValid(null)));
+		Assertions.assertFalse((rl.isValid(null)));
 		rl = n.getLink(rBar, null);
-		assertNotNull(rl);
-		assertTrue((rl.isValid(null)));
+		Assertions.assertNotNull(rl);
+		Assertions.assertTrue((rl.isValid(null)));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -1451,12 +1445,12 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		n.setType(EnumType.ProcessGroup);
 		final JDFResource rBar = n.addResource("Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
 		final JDFResourceLink rl = n.getLink(rBar, null);
-		assertNotNull(rl);
-		assertTrue((rl.isValid(null)));
+		Assertions.assertNotNull(rl);
+		Assertions.assertTrue((rl.isValid(null)));
 		final JDFNode n2 = n.addJDFNode("Whatever");
 		n2.moveElement(n.getResourcePool(), null);
-		assertFalse((rl.isValid(null)));
-		assertFalse((rl.validResourcePosition()));
+		Assertions.assertFalse((rl.isValid(null)));
+		Assertions.assertFalse((rl.validResourcePosition()));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -1476,10 +1470,10 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		rl.setActualAmount(42, partMap);
 		rl.setPartMap(partMap);
 		rl.unpartition(false, true);
-		assertEquals(rl.getActualAmount(null), 42, 0.);
-		assertNotNull(rl.getPartMapVector());
+		Assertions.assertEquals(rl.getActualAmount(null), 42, 0.);
+		Assertions.assertNotNull(rl.getPartMapVector());
 		rl.unpartition(true, true);
-		assertNull(rl.getPartMapVector());
+		Assertions.assertNull(rl.getPartMapVector());
 	}
 
 	/**
@@ -1495,7 +1489,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResource rBar = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
 		final JDFResourceLink rl = n.getLink(rBar, null);
 		rl.setActualAmount(42, null);
-		assertFalse(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 99).contains(AttributeName.ACTUALAMOUNT));
+		Assertions.assertFalse(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 99).contains(AttributeName.ACTUALAMOUNT));
 		// rl.appendAmountPool();
 		// assertTrue(rl.getInvalidAttributes(EnumValidationLevel.Incomplete,
 		// false, 99).contains(AttributeName.ACTUALAMOUNT));
@@ -1514,29 +1508,29 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		n.setType(EnumType.Strapping);
 		final JDFResource rBar = n.addResource("Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
 		final JDFResourceLink rl = n.getLink(rBar, null);
-		assertTrue(rl.validCombinedProcessIndex());
+		Assertions.assertTrue(rl.validCombinedProcessIndex());
 		rl.setCombinedProcessIndex(null);
-		assertTrue(rl.validCombinedProcessIndex());
+		Assertions.assertTrue(rl.validCombinedProcessIndex());
 		final JDFIntegerList il = new JDFIntegerList();
 		rl.setCombinedProcessIndex(il);
-		assertTrue(rl.validCombinedProcessIndex());
+		Assertions.assertTrue(rl.validCombinedProcessIndex());
 		il.add(0);
 		rl.setCombinedProcessIndex(il);
-		assertFalse(rl.validCombinedProcessIndex());
+		Assertions.assertFalse(rl.validCombinedProcessIndex());
 		n.setCombined(new VString("Approval ImageSetting", " "));
-		assertTrue(rl.validCombinedProcessIndex());
+		Assertions.assertTrue(rl.validCombinedProcessIndex());
 		il.add(1);
 		rl.setCombinedProcessIndex(il);
-		assertTrue(rl.validCombinedProcessIndex());
+		Assertions.assertTrue(rl.validCombinedProcessIndex());
 		il.add(1);
 		rl.setCombinedProcessIndex(il);
-		assertTrue(rl.validCombinedProcessIndex());
-		assertTrue(n.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(rl.validCombinedProcessIndex());
+		Assertions.assertTrue(n.isValid(EnumValidationLevel.Incomplete));
 		il.add(2);
 		rl.setCombinedProcessIndex(il);
-		assertFalse(rl.validCombinedProcessIndex());
-		assertFalse(n.isValid(EnumValidationLevel.Incomplete));
-		assertTrue(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, true, -1).contains(AttributeName.COMBINEDPROCESSINDEX));
+		Assertions.assertFalse(rl.validCombinedProcessIndex());
+		Assertions.assertFalse(n.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, true, -1).contains(AttributeName.COMBINEDPROCESSINDEX));
 
 	} // ///////////////////////////////////////////////////////////////////
 
@@ -1553,13 +1547,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResource rBar = n.addResource("Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
 		final JDFResourceLink rl = n.getLink(rBar, null);
 		rl.setCombinedProcessIndex(null);
-		assertFalse(rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
+		Assertions.assertFalse(rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
 		final JDFIntegerList il = new JDFIntegerList();
 		rl.setCombinedProcessIndex(il);
-		assertFalse(rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
+		Assertions.assertFalse(rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
 		il.add(0);
 		rl.setCombinedProcessIndex(il);
-		assertEquals(rl.getCombinedProcessIndex(), il);
+		Assertions.assertEquals(rl.getCombinedProcessIndex(), il);
 	}
 
 }

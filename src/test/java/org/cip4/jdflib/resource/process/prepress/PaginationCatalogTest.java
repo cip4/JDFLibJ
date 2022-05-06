@@ -37,17 +37,13 @@
  */
 package org.cip4.jdflib.resource.process.prepress;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Collection;
 
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class PaginationCatalogTest
 {
@@ -58,7 +54,7 @@ public class PaginationCatalogTest
 	@Test
 	public void testconstruct()
 	{
-		assertNotNull(PaginationCatalog.instance());
+		Assertions.assertNotNull(PaginationCatalog.instance());
 	}
 
 	/**
@@ -67,7 +63,7 @@ public class PaginationCatalogTest
 	@Test
 	public void testToString()
 	{
-		assertNotNull(PaginationCatalog.instance().toString());
+		Assertions.assertNotNull(PaginationCatalog.instance().toString());
 	}
 
 	/**
@@ -76,8 +72,8 @@ public class PaginationCatalogTest
 	@Test
 	public void testgetFrontPages()
 	{
-		assertNotNull(PaginationCatalog.instance().getFrontPages("F4-2"));
-		assertNull(PaginationCatalog.instance().getFrontPages("ffff"));
+		Assertions.assertNotNull(PaginationCatalog.instance().getFrontPages("F4-2"));
+		Assertions.assertNull(PaginationCatalog.instance().getFrontPages("ffff"));
 	}
 
 	/**
@@ -86,9 +82,9 @@ public class PaginationCatalogTest
 	@Test
 	public void testNUP()
 	{
-		assertEquals(new JDFXYPair(1, 1), PaginationCatalog.instance().getNUp("f2-1"));
-		assertEquals(new JDFXYPair(2, 1), PaginationCatalog.instance().getNUp("f4-1"));
-		assertEquals(new JDFXYPair(4, 2), PaginationCatalog.instance().getNUp("f16-7"));
+		Assertions.assertEquals(new JDFXYPair(1, 1), PaginationCatalog.instance().getNUp("f2-1"));
+		Assertions.assertEquals(new JDFXYPair(2, 1), PaginationCatalog.instance().getNUp("f4-1"));
+		Assertions.assertEquals(new JDFXYPair(4, 2), PaginationCatalog.instance().getNUp("f16-7"));
 	}
 
 	/**
@@ -106,11 +102,11 @@ public class PaginationCatalogTest
 			ContainerUtil.unify(p);
 			final JDFXYPair nUp = pc.getNUp(key);
 			final double size = 2 * nUp.getX() * nUp.getY();
-			assertEquals(key, size, p.size(), 0);
+			Assertions.assertEquals(size, p.size(), 0, key);
 			for (int i = 0; i < size; i++)
 			{
-				assertTrue(p.doubleAt(i) >= 0);
-				assertTrue(p.doubleAt(i) < size);
+				Assertions.assertTrue(p.doubleAt(i) >= 0);
+				Assertions.assertTrue(p.doubleAt(i) < size);
 			}
 		}
 	}

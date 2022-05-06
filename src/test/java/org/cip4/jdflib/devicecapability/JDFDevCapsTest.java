@@ -81,8 +81,8 @@ import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFDevCapsTest {
 	@Test
@@ -91,15 +91,15 @@ public class JDFDevCapsTest {
 		JDFDoc d = new JDFDoc("DevCaps");
 		JDFDevCaps dcs = (JDFDevCaps) d.getRoot();
 		dcs.setName("foo");
-		Assert.assertEquals(dcs.getContextName(), "foo");
+		Assertions.assertEquals(dcs.getContextName(), "foo");
 		dcs.setContext(EnumContext.Link);
-		Assert.assertEquals(dcs.getContextName(), "fooLink");
+		Assertions.assertEquals(dcs.getContextName(), "fooLink");
 		dcs.setContext(EnumContext.Element);
-		Assert.assertEquals(dcs.getContextName(), "foo");
+		Assertions.assertEquals(dcs.getContextName(), "foo");
 		dcs.setContext(EnumContext.JMF);
-		Assert.assertEquals(dcs.getContextName(), "foo");
+		Assertions.assertEquals(dcs.getContextName(), "foo");
 		dcs.setContext(EnumContext.Resource);
-		Assert.assertEquals(dcs.getContextName(), "foo");
+		Assertions.assertEquals(dcs.getContextName(), "foo");
 	}
 
 	@Test
@@ -111,8 +111,8 @@ public class JDFDevCapsTest {
 		JDFDevCaps dcs = ms.appendDevCaps();
 		dcs.setName("foo");
 		JDFDevCap dc = dcs.appendDevCapInPool();
-		Assert.assertEquals(dc, dcs.getDevCap());
-		Assert.assertEquals(dc.getName(), dcs.getName());
+		Assertions.assertEquals(dc, dcs.getDevCap());
+		Assertions.assertEquals(dc.getName(), dcs.getName());
 	}
 
 	@Test
@@ -124,7 +124,7 @@ public class JDFDevCapsTest {
 		JDFDevCaps dcs = ms.appendDevCaps();
 		dcs.setName("foo");
 		JDFDevCap dc = dcs.appendDevCapInPool();
-		Assert.assertEquals(dc, dcs.getDevCap());
-		Assert.assertEquals(dc.getName(), dcs.getName());
+		Assertions.assertEquals(dc, dcs.getDevCap());
+		Assertions.assertEquals(dc.getName(), dcs.getName());
 	}
 }

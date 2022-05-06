@@ -72,8 +72,8 @@ package org.cip4.jdflib.datatypes;
 
 import java.util.zip.DataFormatException;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * 
@@ -100,7 +100,7 @@ public class JDFNumberRangeListTest {
 			System.out.println(dfe.toString());
 		}
 		// rangeList is not empty
-		Assert.assertFalse("Bad Constructor from a given String", rangeList.toString().length() == 0);
+		Assertions.assertFalse(rangeList.toString().length() == 0, "Bad Constructor from a given String");
 
 	}
 
@@ -118,11 +118,11 @@ public class JDFNumberRangeListTest {
 		}
 		catch (DataFormatException dfe)
 		{
-			Assert.fail("DataFormatException");
+			Assertions.fail("DataFormatException");
 		}
-		Assert.assertFalse("Bad inRange", rangeList.inRange(2.8));
-		Assert.assertTrue("Bad inRange", rangeList.inRange(0.4));
-		Assert.assertTrue("Bad inRange", rangeList.inRange(12345.));
+		Assertions.assertFalse(rangeList.inRange(2.8), "Bad inRange");
+		Assertions.assertTrue(rangeList.inRange(0.4), "Bad inRange");
+		Assertions.assertTrue(rangeList.inRange(12345.), "Bad inRange");
 	}
 
 	/**
@@ -139,10 +139,10 @@ public class JDFNumberRangeListTest {
 		}
 		catch (DataFormatException dfe)
 		{
-			Assert.fail("DataFormatException");
+			Assertions.fail("DataFormatException");
 		}
-		Assert.assertEquals(rangeList.getString(1), "0.4 1.7 ~ 2.8 3.7 ~ 6 77.6 ~ INF");
-		Assert.assertEquals(rangeList.getString(2), "0.44 1.67 ~ 2.78 3.67 ~ 6 77.56 ~ INF");
+		Assertions.assertEquals(rangeList.getString(1), "0.4 1.7 ~ 2.8 3.7 ~ 6 77.6 ~ INF");
+		Assertions.assertEquals(rangeList.getString(2), "0.44 1.67 ~ 2.78 3.67 ~ 6 77.56 ~ INF");
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class JDFNumberRangeListTest {
 	public final void testInitRange() throws Exception
 	{
 		JDFNumberRange range = new JDFNumberRange("0.0");
-		Assert.assertEquals(range.getLeft(), 0.0, 0.0);
+		Assertions.assertEquals(range.getLeft(), 0.0, 0.0);
 	}
 
 	/**
@@ -173,8 +173,8 @@ public class JDFNumberRangeListTest {
 		{
 			System.out.println(dfe.toString());
 		}
-		Assert.assertFalse("Bad isPartOfRange", rangeList.isPartOfRange(new JDFNumberRange(2.8, 3.0)));
-		Assert.assertTrue("Bad isPartOfRange", rangeList.isPartOfRange(new JDFNumberRange(1.6, 2.7)));
+		Assertions.assertFalse(rangeList.isPartOfRange(new JDFNumberRange(2.8, 3.0)), "Bad isPartOfRange");
+		Assertions.assertTrue(rangeList.isPartOfRange(new JDFNumberRange(1.6, 2.7)), "Bad isPartOfRange");
 	}
 
 	/**
@@ -192,8 +192,8 @@ public class JDFNumberRangeListTest {
 			copyRangeList = new JDFNumberRangeList(rangeList);
 			copyRangeList.append(new JDFNumberRange("8~9"));
 
-			Assert.assertEquals("original rangeList wrong:", rangeList.toString(), "0 4");
-			Assert.assertEquals("changed copy of rangeList wrong:", copyRangeList.toString(), "0 4 8 ~ 9");
+			Assertions.assertEquals(rangeList.toString(), "0 4", "original rangeList wrong:");
+			Assertions.assertEquals(copyRangeList.toString(), "0 4 8 ~ 9", "changed copy of rangeList wrong:");
 		}
 		catch (DataFormatException dfe)
 		{
@@ -226,7 +226,7 @@ public class JDFNumberRangeListTest {
 
 		if (rangeList != null)
 		{
-			Assert.assertTrue("Bad isList", rangeList.equals(copyRangeList));
+			Assertions.assertTrue(rangeList.equals(copyRangeList), "Bad isList");
 		}
 	}
 
@@ -253,9 +253,9 @@ public class JDFNumberRangeListTest {
 		}
 
 		if (rangeList != null)
-			Assert.assertTrue("Bad isList", rangeList.isList());
+			Assertions.assertTrue(rangeList.isList(), "Bad isList");
 		if (badRangeList != null)
-			Assert.assertFalse("Bad isList", badRangeList.isList());
+			Assertions.assertFalse(badRangeList.isList(), "Bad isList");
 
 	}
 
@@ -278,7 +278,7 @@ public class JDFNumberRangeListTest {
 		}
 
 		if (rangelist != null)
-			Assert.assertFalse("Bad isUnique", rangelist.isUnique());
+			Assertions.assertFalse(rangelist.isUnique(), "Bad isUnique");
 	}
 
 	/**
@@ -302,7 +302,7 @@ public class JDFNumberRangeListTest {
 		}
 
 		if (rangelist != null)
-			Assert.assertFalse("Bad isOrdered", rangelist.isOrdered());
+			Assertions.assertFalse(rangelist.isOrdered(), "Bad isOrdered");
 	}
 
 	/**
@@ -326,7 +326,7 @@ public class JDFNumberRangeListTest {
 		}
 
 		if (rangelist != null)
-			Assert.assertTrue("Bad isOrdered", rangelist.isOrdered());
+			Assertions.assertTrue(rangelist.isOrdered(), "Bad isOrdered");
 	}
 
 	/**
@@ -349,7 +349,7 @@ public class JDFNumberRangeListTest {
 		}
 
 		if (rangelist != null)
-			Assert.assertFalse("Bad isUniqueOrdered", rangelist.isUniqueOrdered());
+			Assertions.assertFalse(rangelist.isUniqueOrdered(), "Bad isUniqueOrdered");
 	}
 
 	/**
@@ -373,7 +373,7 @@ public class JDFNumberRangeListTest {
 		}
 
 		if (rangelist != null)
-			Assert.assertFalse("Bad isUniqueOrdered", rangelist.isUniqueOrdered());
+			Assertions.assertFalse(rangelist.isUniqueOrdered(), "Bad isUniqueOrdered");
 	}
 
 	/**
@@ -396,7 +396,7 @@ public class JDFNumberRangeListTest {
 		}
 
 		if (rangelist != null)
-			Assert.assertTrue("Bad isUniqueOrdered" + rangelist.toString(), rangelist.isUniqueOrdered());
+			Assertions.assertTrue(rangelist.isUniqueOrdered(), "Bad isUniqueOrdered" + rangelist.toString());
 	}
 
 }

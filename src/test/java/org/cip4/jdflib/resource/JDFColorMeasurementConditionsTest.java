@@ -76,12 +76,11 @@
  */
 package org.cip4.jdflib.resource;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.auto.JDFAutoColorMeasurementConditions.EnumIllumination;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFColorMeasurementConditionsTest
 {
@@ -92,7 +91,7 @@ public class JDFColorMeasurementConditionsTest
 		final EnumIllumination e = EnumIllumination.D50;
 		final JDFColorMeasurementConditions cmc = (JDFColorMeasurementConditions) new JDFDoc(ElementName.COLORMEASUREMENTCONDITIONS).getRoot();
 		cmc.setIllumination(e);
-		assertEquals(e, cmc.getIllumination());
+		Assertions.assertEquals(e, cmc.getIllumination());
 	}
 
 }

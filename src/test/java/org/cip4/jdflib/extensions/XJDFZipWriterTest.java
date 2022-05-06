@@ -68,10 +68,6 @@
  */
 package org.cip4.jdflib.extensions;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -79,7 +75,8 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.zip.ZipReader;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class XJDFZipWriterTest extends JDFTestCaseBase
 {
@@ -96,7 +93,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 		w.addXJDF(h);
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		w.writeStream(ios);
-		assertTrue(ios.size() > 13);
+		Assertions.assertTrue(ios.size() > 13);
 	}
 
 	/**
@@ -110,7 +107,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 		final XJDFZipWriter w = new XJDFZipWriter();
 		w.addXJDF(h);
 		final XJMFHelper jmf = w.ensureXJMF();
-		assertEquals("xjdf/j1.00.xjdf", jmf.getXPathValue("CommandSubmitQueueEntry/QueueSubmissionParams/@URL"));
+		Assertions.assertEquals("xjdf/j1.00.xjdf", jmf.getXPathValue("CommandSubmitQueueEntry/QueueSubmissionParams/@URL"));
 	}
 
 	/**
@@ -128,8 +125,8 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 		file.delete();
 		FileUtil.writeFile(w, file);
 		final ZipReader zr = new ZipReader(file);
-		assertNotNull(zr.getEntry("pdf/foo.pdf"));
-		assertNotNull(zr.getInputStream());
+		Assertions.assertNotNull(zr.getEntry("pdf/foo.pdf"));
+		Assertions.assertNotNull(zr.getInputStream());
 
 	}
 
@@ -146,10 +143,10 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 		final File file = new File(sm_dirTestDataTemp + "testx.zip");
 		file.delete();
 		FileUtil.writeFile(w, file);
-		assertTrue(file.canRead());
+		Assertions.assertTrue(file.canRead());
 		final ZipReader zr = new ZipReader(file);
 		zr.getNextEntry();
-		assertNotNull(zr.getXMLDoc());
+		Assertions.assertNotNull(zr.getXMLDoc());
 	}
 
 }

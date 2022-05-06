@@ -45,21 +45,14 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.CPUTimer;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -85,7 +78,7 @@ public class JDFXYPairTest extends JDFTestCaseBase
 
 		xy = new JDFXYPair("1.1 2.2");
 		n.setAttribute("test2", xy, null);
-		assertEquals("double double", n.getAttribute("test2", null, ""), "1.1 2.2");
+		Assertions.assertEquals(n.getAttribute("test2", null, ""), "1.1 2.2", "double double");
 
 		try
 		{
@@ -93,7 +86,7 @@ public class JDFXYPairTest extends JDFTestCaseBase
 		}
 		catch (final DataFormatException dfe)
 		{
-			assertTrue("exception 123 caught", true);
+			Assertions.assertTrue(true, "exception 123 caught");
 		}
 		try
 		{
@@ -101,7 +94,7 @@ public class JDFXYPairTest extends JDFTestCaseBase
 		}
 		catch (final DataFormatException dfe)
 		{
-			assertTrue("exception null caught", true);
+			Assertions.assertTrue(true, "exception null caught");
 		}
 	}
 
@@ -114,15 +107,15 @@ public class JDFXYPairTest extends JDFTestCaseBase
 	public final void testSingleVal() throws Exception
 	{
 		JDFXYPair xy = new JDFXYPair("4");
-		assertEquals(xy.getX(), 4, 0.0);
-		assertEquals(xy.getY(), 0, 0.0);
+		Assertions.assertEquals(xy.getX(), 4, 0.0);
+		Assertions.assertEquals(xy.getY(), 0, 0.0);
 
 		xy = new JDFXYPair("4/1");
-		assertEquals(xy.getX(), 4, 0.0);
-		assertEquals(xy.getY(), 1, 0.0);
+		Assertions.assertEquals(xy.getX(), 4, 0.0);
+		Assertions.assertEquals(xy.getY(), 1, 0.0);
 		xy = new JDFXYPair(" 4 / 1 ");
-		assertEquals(xy.getX(), 4, 0.0);
-		assertEquals(xy.getY(), 1, 0.0);
+		Assertions.assertEquals(xy.getX(), 4, 0.0);
+		Assertions.assertEquals(xy.getY(), 1, 0.0);
 	}
 
 	/**
@@ -134,9 +127,9 @@ public class JDFXYPairTest extends JDFTestCaseBase
 	public final void testIsPortrait() throws Exception
 	{
 		final JDFXYPair xy = new JDFXYPair("4 5");
-		assertTrue(xy.isPortrait());
+		Assertions.assertTrue(xy.isPortrait());
 		xy.setY(4);
-		assertFalse(xy.isPortrait());
+		Assertions.assertFalse(xy.isPortrait());
 	}
 
 	/**
@@ -149,9 +142,9 @@ public class JDFXYPairTest extends JDFTestCaseBase
 	{
 		final JDFXYPair xy = new JDFXYPair("4 5");
 		final JDFXYPair yx = new JDFXYPair("5 4");
-		assertNotSame(xy, yx);
+		Assertions.assertNotSame(xy, yx);
 		yx.swapXY();
-		assertEquals(xy, yx);
+		Assertions.assertEquals(xy, yx);
 	}
 
 	/**
@@ -165,7 +158,7 @@ public class JDFXYPairTest extends JDFTestCaseBase
 		final JDFXYPair xy = new JDFXYPair("4 5");
 		final JDFXYPair yx = new JDFXYPair("8 9");
 		yx.shift(xy);
-		assertEquals(new JDFXYPair(12, 14), yx);
+		Assertions.assertEquals(new JDFXYPair(12, 14), yx);
 	}
 
 	/**
@@ -180,9 +173,9 @@ public class JDFXYPairTest extends JDFTestCaseBase
 		final JDFXYPair ab = new JDFXYPair(1.0, 2.0);
 		xy = new JDFXYPair(1.0 + JDFBaseDataTypes.EPSILON / 2.0, 2.0 + JDFBaseDataTypes.EPSILON / 2.0);
 
-		assertTrue(ab.equals(xy));
-		assertTrue(ab.isLessOrEqual(xy));
-		assertTrue(ab.isGreaterOrEqual(xy));
+		Assertions.assertTrue(ab.equals(xy));
+		Assertions.assertTrue(ab.isLessOrEqual(xy));
+		Assertions.assertTrue(ab.isGreaterOrEqual(xy));
 	}
 
 	/**
@@ -195,7 +188,7 @@ public class JDFXYPairTest extends JDFTestCaseBase
 		final JDFXYPair ab = new JDFXYPair(1.0, 2.0);
 		final JDFXYPair ac = new JDFXYPair(ab);
 		ac.setX(3.0);
-		assertEquals(ab.getX(), 1.0, 0.0);
+		Assertions.assertEquals(ab.getX(), 1.0, 0.0);
 	}
 
 	/**
@@ -207,7 +200,7 @@ public class JDFXYPairTest extends JDFTestCaseBase
 
 		final JDFXYPair ab = new JDFXYPair(1.0, 2.0);
 		final JDFXYPair ac = ab.clone();
-		assertEquals(ab, ac);
+		Assertions.assertEquals(ab, ac);
 	}
 
 	/**
@@ -219,9 +212,9 @@ public class JDFXYPairTest extends JDFTestCaseBase
 
 		final JDFXYPair ab = new JDFXYPair(1, 2);
 		final JDFXYPair ac = ab.clone();
-		assertEquals(ab, ac);
-		assertEquals(1, ab.getX(), 0);
-		assertEquals(2, ab.getY(), 0);
+		Assertions.assertEquals(ab, ac);
+		Assertions.assertEquals(1, ab.getX(), 0);
+		Assertions.assertEquals(2, ab.getY(), 0);
 	}
 
 	/**
@@ -233,7 +226,7 @@ public class JDFXYPairTest extends JDFTestCaseBase
 
 		final JDFShape ab = new JDFShape(1.0, 2.0, 3.0);
 		final JDFXYPair ac = new JDFXYPair(ab);
-		assertEquals(ac, new JDFXYPair(1.0, 2.0));
+		Assertions.assertEquals(ac, new JDFXYPair(1.0, 2.0));
 	}
 
 	/**
@@ -248,9 +241,9 @@ public class JDFXYPairTest extends JDFTestCaseBase
 		final JDFXYPair ab = new JDFXYPair(1.0, 2.0);
 		xy = new JDFXYPair(1.0 - JDFBaseDataTypes.EPSILON / 2.0, 2.0 - JDFBaseDataTypes.EPSILON / 2.0);
 
-		assertTrue(ab.equals(xy));
-		assertTrue(ab.isLessOrEqual(xy));
-		assertTrue(ab.isGreaterOrEqual(xy));
+		Assertions.assertTrue(ab.equals(xy));
+		Assertions.assertTrue(ab.isLessOrEqual(xy));
+		Assertions.assertTrue(ab.isGreaterOrEqual(xy));
 	}
 
 	/**
@@ -260,15 +253,15 @@ public class JDFXYPairTest extends JDFTestCaseBase
 	@Test
 	public final void testcreateXYPair()
 	{
-		assertNull(JDFXYPair.createXYPair(null));
-		assertNull(JDFXYPair.createXYPair(""));
-		assertNull(JDFXYPair.createXYPair("a"));
-		assertNotNull(JDFXYPair.createXYPair("1"));
-		assertNull(JDFXYPair.createXYPair("1 2 a"));
-		assertNotNull(JDFXYPair.createXYPair("1 2"));
-		assertNotNull(JDFXYPair.createXYPair("  1 2 "));
-		assertNotNull(JDFXYPair.createXYPair("  1. 2 "));
-		assertNotNull(JDFXYPair.createXYPair("  1.00 2.00 "));
+		Assertions.assertNull(JDFXYPair.createXYPair(null));
+		Assertions.assertNull(JDFXYPair.createXYPair(""));
+		Assertions.assertNull(JDFXYPair.createXYPair("a"));
+		Assertions.assertNotNull(JDFXYPair.createXYPair("1"));
+		Assertions.assertNull(JDFXYPair.createXYPair("1 2 a"));
+		Assertions.assertNotNull(JDFXYPair.createXYPair("1 2"));
+		Assertions.assertNotNull(JDFXYPair.createXYPair("  1 2 "));
+		Assertions.assertNotNull(JDFXYPair.createXYPair("  1. 2 "));
+		Assertions.assertNotNull(JDFXYPair.createXYPair("  1.00 2.00 "));
 	}
 
 	/**
@@ -282,7 +275,7 @@ public class JDFXYPairTest extends JDFTestCaseBase
 		for (int i = 0; i < 100000; i++)
 		{
 			final JDFXYPair p = JDFXYPair.createXYPair("");
-			assertNull(p);
+			Assertions.assertNull(p);
 		}
 		t1.stop();
 		log.info("fast: " + t1);
@@ -293,7 +286,7 @@ public class JDFXYPairTest extends JDFTestCaseBase
 			try
 			{
 				new JDFXYPair("");
-				fail("blurb");
+				Assertions.fail("blurb");
 			}
 			catch (final DataFormatException x)
 			{

@@ -68,16 +68,14 @@
  */
 package org.cip4.jdflib.elementwalker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -98,7 +96,7 @@ public class URLMapperTest extends JDFTestCaseBase
 		fs.setURL("file://foo/bar/a.b");
 		URLMapper m = new URLMapper("File://foo", "http://www.foo.com");
 		m.convert(n);
-		assertEquals(fs.getURL(), "http://www.foo.com/bar/a.b");
+		Assertions.assertEquals(fs.getURL(), "http://www.foo.com/bar/a.b");
 	}
 
 	/**
@@ -114,7 +112,7 @@ public class URLMapperTest extends JDFTestCaseBase
 		URLMapper m = new URLMapper("File://foo", "http://www.foo.com");
 		m.setWantLog(true);
 		m.convert(n);
-		assertTrue(m.isWantLog());
-		assertEquals(fs.getURL(), "http://www.foo.com/bar/a.b");
+		Assertions.assertTrue(m.isWantLog());
+		Assertions.assertEquals(fs.getURL(), "http://www.foo.com/bar/a.b");
 	}
 }

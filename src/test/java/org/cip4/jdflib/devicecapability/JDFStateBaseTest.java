@@ -105,8 +105,8 @@ import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
 import org.cip4.jdflib.resource.devicecapability.JDFMatrixState;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 public class JDFStateBaseTest extends JDFTestCaseBase
 {
 
@@ -146,8 +146,7 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 		JDFBooleanState state = (JDFBooleanState) devCaps.getChildByTagName(
 				ElementName.BOOLEANSTATE, null, 0, null, false, true);
 		System.out.println(state.getNamePath());
-		Assert.assertEquals("", state.getNamePath(),
-				"JDF/ResourcePool/RenderingParams/AutomatedOverprintParams/@OverPrintBlackText");
+		Assertions.assertEquals(state.getNamePath(), "JDF/ResourcePool/RenderingParams/AutomatedOverprintParams/@OverPrintBlackText", "");
 	}
 
 	@Test
@@ -174,8 +173,8 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 		JDFDoc jdfDoc = new JDFDoc(ElementName.STRINGSTATE);
 		JDFStringState root = (JDFStringState) jdfDoc.getRoot();
 		root.appendValueAllowedValue("foo");
-		Assert.assertTrue(root.fitsValue("foo", EnumFitsValue.Allowed));
-		Assert.assertFalse(root.fitsValue("bar", EnumFitsValue.Allowed));
+		Assertions.assertTrue(root.fitsValue("foo", EnumFitsValue.Allowed));
+		Assertions.assertFalse(root.fitsValue("bar", EnumFitsValue.Allowed));
 
 	}
 
@@ -215,13 +214,13 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 		k.setListType(lt);
 		// EnumListType listType = k.getListType();
 
-		Assert.assertTrue("Matrix OK", k.fitsValue(value1, EnumFitsValue.Allowed));
+		Assertions.assertTrue(k.fitsValue(value1, EnumFitsValue.Allowed), "Matrix OK");
 
 		String value = "1 2 3 4 5 6 7 8 9 10 11 12 3 4 5 6 7 8";
 
 		VString vs = new VString(value, JDFConstants.BLANK);
 		int siz = vs.size();
-		Assert.assertEquals("It is not a Matrix", siz % 6, 0);
+		Assertions.assertEquals(siz % 6, 0, "It is not a Matrix");
 		VString matrixList = new VString();
 		int i = 0;
 		StringBuffer sb = new StringBuffer(250);
@@ -260,16 +259,15 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 	{
 		JDFDevCap dc = deviceCap.appendDevCaps().appendDevCap();
 		JDFIntegerState is = dc.appendIntegerState();
-		Assert.assertNull(is.getAttribute(AttributeName.MAXOCCURS, null, null));
+		Assertions.assertNull(is.getAttribute(AttributeName.MAXOCCURS, null, null));
 		is.fixVersion(null);
-		Assert.assertNull(is.getAttribute(AttributeName.MAXOCCURS, null, null));
+		Assertions.assertNull(is.getAttribute(AttributeName.MAXOCCURS, null, null));
 		is.setAttribute(AttributeName.MAXOCCURS, "unbounded");
 		is.fixVersion(null);
-		Assert.assertEquals(is.getAttribute(AttributeName.MAXOCCURS),
-				JDFConstants.POSINF);
+		Assertions.assertEquals(is.getAttribute(AttributeName.MAXOCCURS), JDFConstants.POSINF);
 		is.setAttribute(AttributeName.MAXOCCURS, "3");
 		is.fixVersion(null);
-		Assert.assertEquals(is.getAttribute(AttributeName.MAXOCCURS), "3");
+		Assertions.assertEquals(is.getAttribute(AttributeName.MAXOCCURS), "3");
 	}
 
 	// //////////////////////////////////////////////////////////
@@ -282,14 +280,13 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 	{
 		JDFDevCap dc = deviceCap.appendDevCaps().appendDevCap();
 		JDFIntegerState is = dc.appendIntegerState();
-		Assert.assertEquals(is.getMaxOccurs(), 1);
+		Assertions.assertEquals(is.getMaxOccurs(), 1);
 		is.setMaxOccurs(Integer.MAX_VALUE);
-		Assert.assertEquals(is.getAttribute(AttributeName.MAXOCCURS, null, null),
-				JDFConstants.POSINF);
-		Assert.assertTrue(is.getMaxOccurs() > 999);
+		Assertions.assertEquals(is.getAttribute(AttributeName.MAXOCCURS, null, null), JDFConstants.POSINF);
+		Assertions.assertTrue(is.getMaxOccurs() > 999);
 		is.setAttribute(AttributeName.MAXOCCURS, "unbounded");
-		Assert.assertTrue("correctly parsed unbounded for legacy support", is
-				.getMaxOccurs() > 999);
+		Assertions.assertTrue(is
+				.getMaxOccurs() > 999, "correctly parsed unbounded for legacy support");
 	}
 
 	// //////////////////////////////////////////////////////////
@@ -300,8 +297,8 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 
 		JDFBooleanState b = deviceCap.getBooleanState("Template");
 		VString v = b.getNamePathVector(true);
-		Assert.assertEquals(v.size(), 1);
-		Assert.assertEquals(v.get(0), "JDF/@Template");
+		Assertions.assertEquals(v.size(), 1);
+		Assertions.assertEquals(v.get(0), "JDF/@Template");
 	}
 
 	/**
@@ -312,7 +309,7 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 	{
 		JDFDevCap dc = deviceCap.appendDevCaps().appendDevCap();
 		JDFIntegerState is = dc.appendIntegerState();
-		Assert.assertEquals("default=1", is.getMinOccurs(), 1);
+		Assertions.assertEquals(is.getMinOccurs(), 1, "default=1");
 	}
 
 	/**
@@ -324,12 +321,12 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 		JDFDevCap dc = deviceCap.appendDevCaps().appendDevCap();
 		JDFIntegerState is = dc.appendIntegerState();
 
-		Assert.assertEquals(EnumAvailability.Installed, dc.getAvailability());
-		Assert.assertEquals(EnumAvailability.Installed, is.getAvailability());
+		Assertions.assertEquals(EnumAvailability.Installed, dc.getAvailability());
+		Assertions.assertEquals(EnumAvailability.Installed, is.getAvailability());
 
 		dc.setAvailability(EnumAvailability.NotLicensed);
-		Assert.assertEquals(EnumAvailability.NotLicensed, dc.getAvailability());
-		Assert.assertEquals(EnumAvailability.NotLicensed, is.getAvailability());
+		Assertions.assertEquals(EnumAvailability.NotLicensed, dc.getAvailability());
+		Assertions.assertEquals(EnumAvailability.NotLicensed, is.getAvailability());
 
 	}
 

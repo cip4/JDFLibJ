@@ -60,7 +60,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.prepress.JDFInk;
 import org.cip4.jdflib.util.JDFDate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

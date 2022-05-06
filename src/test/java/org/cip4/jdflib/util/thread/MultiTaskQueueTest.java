@@ -36,12 +36,10 @@
  */
 package org.cip4.jdflib.util.thread;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class MultiTaskQueueTest extends JDFTestCaseBase
 {
@@ -100,12 +98,12 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	synchronized public void testSize()
 	{
 		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi0", 3);
-		assertEquals(0, q.size());
+		Assertions.assertEquals(0, q.size());
 		q.queue(new WaitRunner(0, 1000));
 		ThreadUtil.sleep(2);
-		assertEquals(1, q.size(), 1);
+		Assertions.assertEquals(1, q.size(), 1);
 		ThreadUtil.sleep(42);
-		assertEquals(1, q.size(), 1);
+		Assertions.assertEquals(1, q.size(), 1);
 	}
 
 	/**
@@ -115,7 +113,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	synchronized public void testMaxParrallel()
 	{
 		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi0", 3);
-		assertEquals(3, q.getMaxParallel());
+		Assertions.assertEquals(3, q.getMaxParallel());
 	}
 
 	/**
@@ -126,11 +124,11 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	synchronized public void testMulti()
 	{
 		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi1", 3);
-		assertEquals(0, q.getAvQueue());
-		assertEquals(0, q.getAvRun());
+		Assertions.assertEquals(0, q.getAvQueue());
+		Assertions.assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 10; i++)
 			q.queue(new WaitRunner(i, 100));
-		assertEquals(q.getAvQueue(), 0);
+		Assertions.assertEquals(q.getAvQueue(), 0);
 		for (int i = 0; i < 142; i++)
 		{
 			ThreadUtil.sleep(4);
@@ -139,7 +137,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 				break;
 			}
 		}
-		assertEquals(q.size(), 5, 2);
+		Assertions.assertEquals(q.size(), 5, 2);
 		for (int i = 0; i < 42; i++)
 		{
 			ThreadUtil.sleep(100);
@@ -149,10 +147,10 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 			}
 		}
 
-		assertTrue(q.getAvQueue() > 0);
-		assertTrue(q.getAvRun() > 0);
-		assertEquals(q.size(), 0);
-		assertTrue(q.queue(new WaitRunner(4)));
+		Assertions.assertTrue(q.getAvQueue() > 0);
+		Assertions.assertTrue(q.getAvRun() > 0);
+		Assertions.assertEquals(q.size(), 0);
+		Assertions.assertTrue(q.queue(new WaitRunner(4)));
 		for (int i = 0; i < 420; i++)
 		{
 			ThreadUtil.sleep(10);
@@ -161,8 +159,8 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 				break;
 			}
 		}
-		assertEquals(q.size(), 0);
-		assertTrue(q.getAvQueue() > 0);
+		Assertions.assertEquals(q.size(), 0);
+		Assertions.assertTrue(q.getAvQueue() > 0);
 	}
 
 	/**
@@ -174,8 +172,8 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	{
 		nRun = 0;
 		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi2b", 3);
-		assertEquals(0, q.getAvQueue());
-		assertEquals(0, q.getAvRun());
+		Assertions.assertEquals(0, q.getAvQueue());
+		Assertions.assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 333; i++)
 			q.queue(new WaitRunner(i, 5));
 
@@ -188,7 +186,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 			}
 		}
 		ThreadUtil.sleep(42);
-		assertEquals(nRun, 333, 2);
+		Assertions.assertEquals(nRun, 333, 2);
 	}
 
 	/**
@@ -199,14 +197,14 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	synchronized public void testManyMultiIdle()
 	{
 		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi2aa", 3);
-		assertEquals(0, q.getAvQueue());
-		assertEquals(0, q.getAvRun());
+		Assertions.assertEquals(0, q.getAvQueue());
+		Assertions.assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 555; i++)
 		{
 			final WaitRunner task = new WaitRunner(i, 5);
 			task.addRun = false;
 			q.queue(task);
-			assertEquals(0, q.idle.get(), 2);
+			Assertions.assertEquals(0, q.idle.get(), 2);
 		}
 
 		for (int i = 0; i < 442; i++)
@@ -217,7 +215,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 				break;
 			}
 		}
-		assertEquals(0, q.idle.get(), 1);
+		Assertions.assertEquals(0, q.idle.get(), 1);
 	}
 
 	/**
@@ -240,6 +238,6 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 			q.interruptCurrent(1);
 			ThreadUtil.sleep(10);
 		}
-		assertEquals(System.currentTimeMillis() - t0, 1200, 1200);
+		Assertions.assertEquals(System.currentTimeMillis() - t0, 1200, 1200);
 	}
 }

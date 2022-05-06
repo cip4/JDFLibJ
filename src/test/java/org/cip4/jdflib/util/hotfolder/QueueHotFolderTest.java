@@ -43,11 +43,6 @@
  */
 package org.cip4.jdflib.util.hotfolder;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -57,7 +52,8 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer
@@ -113,8 +109,8 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		final File file = new File(theHF + File.separator + "f1.jdf");
 
 		doc.write2File(file, 2, false);
-		assertTrue(file.exists());
-		assertNull(FileUtil.listFilesWithExtension(theStorage, null));
+		Assertions.assertTrue(file.exists());
+		Assertions.assertNull(FileUtil.listFilesWithExtension(theStorage, null));
 		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
 		for (int i = 0; i < 2000; i++)
 		{
@@ -125,7 +121,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 			log.info("Waiting " + i);
 			ThreadUtil.sleep(10);
 		}
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		for (int i = 0; i < 123; i++)
 		{
 			if (myListener.vJMF.size() == 1)
@@ -134,11 +130,11 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 			}
 			ThreadUtil.sleep(10);
 		}
-		assertNull(FileUtil.listFilesWithExtension(theStorage, null));
-		assertEquals(myListener.vJMF.size(), 1);
+		Assertions.assertNull(FileUtil.listFilesWithExtension(theStorage, null));
+		Assertions.assertEquals(myListener.vJMF.size(), 1);
 		final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
-		assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
-		assertTrue(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL().endsWith(".jdf"));
+		Assertions.assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
+		Assertions.assertTrue(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL().endsWith(".jdf"));
 	}
 
 	/**
@@ -151,9 +147,9 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		final File file = new File(theHF + File.separator + "f1.jdf");
 
 		doc.write2File(file, 2, false);
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 
-		assertNull(FileUtil.listFilesWithExtension(theStorage, null));
+		Assertions.assertNull(FileUtil.listFilesWithExtension(theStorage, null));
 		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
 		hf.setOKStorage(new File("ok"));
 		for (int i = 0; i < 2000; i++)
@@ -165,13 +161,13 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 			log.info("Waiting " + i);
 			ThreadUtil.sleep(10);
 		}
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		ThreadUtil.sleep(100);
-		assertEquals(FileUtil.listFilesWithExtension(FileUtil.getFileInDirectory(theHF, new File("ok")), null).length, 1);
-		assertEquals(myListener.vJMF.size(), 1);
+		Assertions.assertEquals(FileUtil.listFilesWithExtension(FileUtil.getFileInDirectory(theHF, new File("ok")), null).length, 1);
+		Assertions.assertEquals(myListener.vJMF.size(), 1);
 		final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
-		assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
-		assertTrue(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL().endsWith(".jdf"));
+		Assertions.assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
+		Assertions.assertTrue(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL().endsWith(".jdf"));
 	}
 
 	/**
@@ -184,9 +180,9 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		final File file = new File(theHF + File.separator + "f1.jdf");
 
 		doc.write2File(file, 2, false);
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 
-		assertNull(FileUtil.listFilesWithExtension(theStorage, null));
+		Assertions.assertNull(FileUtil.listFilesWithExtension(theStorage, null));
 		final QueueHotFolderListenerImpl impl = new QueueHotFolderListenerImpl(myListener, null);
 		hf = new QueueHotFolder(theHF, theStorage, null, impl);
 		hf.setOKStorage(new File("ok"));
@@ -199,7 +195,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 			log.info("Waiting " + i);
 			ThreadUtil.sleep(100);
 		}
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		for (int i = 0; i < 444; i++)
 		{
 			if (FileUtil.listFilesWithExtension(FileUtil.getFileInDirectory(theHF, new File("ok")), null) == null)
@@ -209,11 +205,11 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 			}
 
 		}
-		assertEquals(FileUtil.listFilesWithExtension(FileUtil.getFileInDirectory(theHF, new File("ok")), null).length, 1);
-		assertEquals(myListener.vJMF.size(), 1);
+		Assertions.assertEquals(FileUtil.listFilesWithExtension(FileUtil.getFileInDirectory(theHF, new File("ok")), null).length, 1);
+		Assertions.assertEquals(myListener.vJMF.size(), 1);
 		final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
-		assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
-		assertTrue(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL().endsWith(".jdf"));
+		Assertions.assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
+		Assertions.assertTrue(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL().endsWith(".jdf"));
 	}
 
 	/**
@@ -227,12 +223,12 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
 		hf.stop();
 		doc.write2File(file, 2, false);
-		assertTrue(file.exists());
-		assertNull(FileUtil.listFilesWithExtension(theStorage, null));
+		Assertions.assertTrue(file.exists());
+		Assertions.assertNull(FileUtil.listFilesWithExtension(theStorage, null));
 		ThreadUtil.sleep(222);
-		assertTrue(file.exists());
-		assertNull("File is still there after stop", FileUtil.listFilesWithExtension(theStorage, null));
-		assertEquals(myListener.vJMF.size(), 0);
+		Assertions.assertTrue(file.exists());
+		Assertions.assertNull(FileUtil.listFilesWithExtension(theStorage, null), "File is still there after stop");
+		Assertions.assertEquals(myListener.vJMF.size(), 0);
 		hf.restart();
 		for (int i = 0; i < 420; i++)
 		{
@@ -243,12 +239,12 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 			log.info("Waiting " + i);
 			ThreadUtil.sleep(10);
 		}
-		assertFalse("File is gone after stop", file.exists());
-		assertNull(FileUtil.listFilesWithExtension(theStorage, null));
-		assertEquals(myListener.vJMF.size(), 1);
+		Assertions.assertFalse(file.exists(), "File is gone after stop");
+		Assertions.assertNull(FileUtil.listFilesWithExtension(theStorage, null));
+		Assertions.assertEquals(myListener.vJMF.size(), 1);
 		final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
-		assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
-		assertTrue(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL().endsWith(".jdf"));
+		Assertions.assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
+		Assertions.assertTrue(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL().endsWith(".jdf"));
 	}
 
 	/**

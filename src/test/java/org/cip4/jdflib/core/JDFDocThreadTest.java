@@ -79,8 +79,8 @@ package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.util.ThreadUtil;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -105,7 +105,7 @@ public class JDFDocThreadTest {
 			ThreadUtil.sleep(1);
 			JDFDoc d = new JDFParser().parseString("<JDF/>");
 			DocumentJDFImpl.registerCustomClass("a_b_c", "bar");
-			Assert.assertNotNull(d);
+			Assertions.assertNotNull(d);
 		}
 	}
 

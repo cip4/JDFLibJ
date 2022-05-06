@@ -70,15 +70,13 @@
  */
 package org.cip4.jdflib.resource.process.prepress;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoObjectResolution.EnumSourceObjects;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.resource.process.JDFObjectResolution;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -97,14 +95,14 @@ public class JDFRenderingParamsTest extends JDFTestCaseBase
 		JDFRenderingParams rp = (JDFRenderingParams) new JDFDoc(ElementName.RENDERINGPARAMS).getRoot();
 		JDFObjectResolution or0 = rp.appendObjectResolution();
 		JDFObjectResolution or = rp.getObjectResolution(null, null);
-		assertEquals(or, or0);
+		Assertions.assertEquals(or, or0);
 		or0.addObjectTag("foo");
 		or = rp.getObjectResolution(null, null);
-		assertEquals(or, or0);
+		Assertions.assertEquals(or, or0);
 		or = rp.getObjectResolution(null, "foo");
-		assertEquals(or, or0);
+		Assertions.assertEquals(or, or0);
 		or = rp.getObjectResolution(null, "bar");
-		assertNull(or);
+		Assertions.assertNull(or);
 	}
 
 	/**
@@ -116,15 +114,15 @@ public class JDFRenderingParamsTest extends JDFTestCaseBase
 		JDFRenderingParams rp = (JDFRenderingParams) new JDFDoc(ElementName.RENDERINGPARAMS).getRoot();
 		JDFObjectResolution or0 = rp.appendObjectResolution();
 		JDFObjectResolution or = rp.getObjectResolution(null, null);
-		assertEquals(or, or0);
+		Assertions.assertEquals(or, or0);
 		or0.addSourceObject(EnumSourceObjects.All);
 		or = rp.getObjectResolution(null, null);
-		assertEquals(or, or0);
+		Assertions.assertEquals(or, or0);
 		or = rp.getObjectResolution(null, "foo");
-		assertEquals(or, or0);
+		Assertions.assertEquals(or, or0);
 		or = rp.getObjectResolution(EnumSourceObjects.All, "bar");
-		assertEquals(or, or0);
+		Assertions.assertEquals(or, or0);
 		or = rp.getObjectResolution(EnumSourceObjects.ImagePhotographic, "bar");
-		assertEquals(or, or0);
+		Assertions.assertEquals(or, or0);
 	}
 }

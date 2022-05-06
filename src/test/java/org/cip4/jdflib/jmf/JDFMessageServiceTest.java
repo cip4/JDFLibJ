@@ -75,8 +75,8 @@ import java.util.Vector;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -93,13 +93,13 @@ public class JDFMessageServiceTest {
 		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
 		JDFMessageService ms = (JDFMessageService) doc.getRoot();
 		ms.setQuery(true);
-		Assert.assertEquals(ms.getFamilies().elementAt(0), EnumFamily.Query);
-		Assert.assertEquals(ms.getFamilies().size(), 1);
-		Assert.assertFalse(ms.getFamilies().contains(EnumFamily.Command));
+		Assertions.assertEquals(ms.getFamilies().elementAt(0), EnumFamily.Query);
+		Assertions.assertEquals(ms.getFamilies().size(), 1);
+		Assertions.assertFalse(ms.getFamilies().contains(EnumFamily.Command));
 		ms.setCommand(true);
-		Assert.assertTrue(ms.getFamilies().contains(EnumFamily.Query));
-		Assert.assertTrue(ms.getFamilies().contains(EnumFamily.Command));
-		Assert.assertEquals(ms.getFamilies().size(), 2);
+		Assertions.assertTrue(ms.getFamilies().contains(EnumFamily.Query));
+		Assertions.assertTrue(ms.getFamilies().contains(EnumFamily.Command));
+		Assertions.assertEquals(ms.getFamilies().size(), 2);
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -112,7 +112,7 @@ public class JDFMessageServiceTest {
 		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
 		JDFMessageService ms = (JDFMessageService) doc.getRoot();
 		ms.setFamily(EnumFamily.Query);
-		Assert.assertTrue(ms.getQuery());
+		Assertions.assertTrue(ms.getQuery());
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -128,9 +128,9 @@ public class JDFMessageServiceTest {
 		v.add(EnumFamily.Query);
 		v.add(EnumFamily.Command);
 		ms.setFamilies(v);
-		Assert.assertTrue(ms.getQuery());
-		Assert.assertTrue(ms.getCommand());
-		Assert.assertFalse(ms.getRegistration());
+		Assertions.assertTrue(ms.getQuery());
+		Assertions.assertTrue(ms.getCommand());
+		Assertions.assertFalse(ms.getRegistration());
 	}
 
 	////////////////////////////////////////////////////////////////////////////

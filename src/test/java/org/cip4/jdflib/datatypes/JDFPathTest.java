@@ -88,7 +88,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFContentObject;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for JDFPath.

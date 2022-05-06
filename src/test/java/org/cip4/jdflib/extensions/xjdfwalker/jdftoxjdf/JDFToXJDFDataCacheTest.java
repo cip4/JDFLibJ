@@ -68,14 +68,12 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFToXJDFDataCacheTest extends JDFTestCaseBase
 {
@@ -87,8 +85,8 @@ public class JDFToXJDFDataCacheTest extends JDFTestCaseBase
 	public void testGetResAttribs()
 	{
 		final List<String> resAtts = JDFToXJDFDataCache.getResAttribs();
-		assertNotNull(resAtts);
-		assertTrue(resAtts.contains(AttributeName.AMOUNT));
+		Assertions.assertNotNull(resAtts);
+		Assertions.assertTrue(resAtts.contains(AttributeName.AMOUNT));
 	}
 
 	/**
@@ -98,8 +96,8 @@ public class JDFToXJDFDataCacheTest extends JDFTestCaseBase
 	public void testGetResAttribsStatus()
 	{
 		final List<String> resAtts = JDFToXJDFDataCache.getResAttribs();
-		assertNotNull(resAtts);
-		assertTrue(resAtts.contains(AttributeName.STATUS));
+		Assertions.assertNotNull(resAtts);
+		Assertions.assertTrue(resAtts.contains(AttributeName.STATUS));
 	}
 
 	/**
@@ -109,8 +107,8 @@ public class JDFToXJDFDataCacheTest extends JDFTestCaseBase
 	public void testGetResAttribsPageNumber()
 	{
 		final List<String> resAtts = JDFToXJDFDataCache.getResAttribs();
-		assertNotNull(resAtts);
-		assertTrue(resAtts.contains(AttributeName.PAGENUMBER));
+		Assertions.assertNotNull(resAtts);
+		Assertions.assertTrue(resAtts.contains(AttributeName.PAGENUMBER));
 	}
 
 	/**
@@ -120,9 +118,9 @@ public class JDFToXJDFDataCacheTest extends JDFTestCaseBase
 	public void testGetPOAttribs()
 	{
 		final List<String> resAtts = JDFToXJDFDataCache.getPlacedObjectAttribs();
-		assertNotNull(resAtts);
-		assertTrue(resAtts.contains(AttributeName.ORD));
-		assertTrue(resAtts.contains(AttributeName.ANCHOR));
+		Assertions.assertNotNull(resAtts);
+		Assertions.assertTrue(resAtts.contains(AttributeName.ORD));
+		Assertions.assertTrue(resAtts.contains(AttributeName.ANCHOR));
 	}
 
 }

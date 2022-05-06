@@ -67,7 +67,7 @@ import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
 import org.cip4.jdflib.resource.process.JDFPositionObj;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.StatusCounter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *

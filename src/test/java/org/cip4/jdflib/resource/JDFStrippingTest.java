@@ -38,9 +38,6 @@
 
 package org.cip4.jdflib.resource;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -58,7 +55,8 @@ import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * all kinds of fun tests around Stripping also some tests for automated layout
@@ -105,10 +103,10 @@ public class JDFStrippingTest extends JDFTestCaseBase
 		sp.appendAssemblyIDs("BS1", true);
 		sp.appendAssemblyIDs("BS2", true);
 		sp.appendAssemblyIDs("BS2", true);
-		assertTrue(sp.getAssemblyIDs().contains("BS1"));
-		assertTrue(sp.getAssemblyIDs().contains("BS2"));
-		assertEquals(2, sp.getAssemblyIDs().size());
-		assertTrue(sp.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(sp.getAssemblyIDs().contains("BS1"));
+		Assertions.assertTrue(sp.getAssemblyIDs().contains("BS2"));
+		Assertions.assertEquals(2, sp.getAssemblyIDs().size());
+		Assertions.assertTrue(sp.isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**
@@ -122,7 +120,7 @@ public class JDFStrippingTest extends JDFTestCaseBase
 		n.setType(EnumType.Stripping);
 		final JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
 		sp.appendPosition();
-		assertTrue(sp.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(sp.isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**

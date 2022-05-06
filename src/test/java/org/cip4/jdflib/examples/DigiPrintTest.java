@@ -134,8 +134,8 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StatusUtil;
 import org.cip4.jdflib.util.StatusUtil.AmountBag;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -748,7 +748,7 @@ public class DigiPrintTest extends ExampleTest
 			xMax += i % 2 == 0 ? 4 : 1;
 			rl.setAttribute("SheetSides", i % 2 == 0 ? "Front" : "FrontBack");
 		}
-		Assert.assertTrue(cover.hasAttribute("ID"));
+		Assertions.assertTrue(cover.hasAttribute("ID"));
 		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "ContentDataRunList.jdf", 2, false);
 	}
 

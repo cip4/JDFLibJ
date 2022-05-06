@@ -70,15 +70,12 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.jmf.JDFEmployeeDef;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * tests the JDFEmployee class
@@ -96,13 +93,13 @@ public class JDFEmployeeTest extends JDFTestCaseBase
 	{
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc(ElementName.EMPLOYEE).getRoot();
 		final JDFEmployee emp2 = (JDFEmployee) new JDFDoc(ElementName.EMPLOYEE).getRoot();
-		assertTrue(emp.matches(null));
+		Assertions.assertTrue(emp.matches(null));
 		emp.setPersonalID("p1");
-		assertFalse(emp.matches(emp2));
+		Assertions.assertFalse(emp.matches(emp2));
 		emp2.setPersonalID("p1");
-		assertTrue(emp.matches(emp2));
+		Assertions.assertTrue(emp.matches(emp2));
 		emp2.setPersonalID("p2");
-		assertFalse(emp.matches(emp2));
+		Assertions.assertFalse(emp.matches(emp2));
 	}
 
 	/**
@@ -112,11 +109,11 @@ public class JDFEmployeeTest extends JDFTestCaseBase
 	public final void testMatchesPersonalID()
 	{
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc(ElementName.EMPLOYEE).getRoot();
-		assertTrue(emp.matches(null));
-		assertFalse(emp.matches("p2"));
+		Assertions.assertTrue(emp.matches(null));
+		Assertions.assertFalse(emp.matches("p2"));
 		emp.setPersonalID("p1");
-		assertFalse(emp.matches("p2"));
-		assertTrue(emp.matches("p1"));
+		Assertions.assertFalse(emp.matches("p2"));
+		Assertions.assertTrue(emp.matches("p1"));
 	}
 
 	/**
@@ -128,13 +125,13 @@ public class JDFEmployeeTest extends JDFTestCaseBase
 	{
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc(ElementName.EMPLOYEE).getRoot();
 		final JDFEmployeeDef emp2 = (JDFEmployeeDef) new JDFDoc(ElementName.EMPLOYEEDEF).getRoot();
-		assertTrue(emp.matches(null));
+		Assertions.assertTrue(emp.matches(null));
 		emp.setPersonalID("p1");
-		assertFalse(emp.matches(emp2));
+		Assertions.assertFalse(emp.matches(emp2));
 		emp2.setPersonalID("p1");
-		assertTrue(emp.matches(emp2));
+		Assertions.assertTrue(emp.matches(emp2));
 		emp2.setPersonalID("p2");
-		assertFalse(emp.matches(emp2));
+		Assertions.assertFalse(emp.matches(emp2));
 	}
 
 	/**
@@ -146,9 +143,9 @@ public class JDFEmployeeTest extends JDFTestCaseBase
 		JDFPerson p = emp.appendPerson();
 		p.setFirstName("a");
 		p.setFamilyName("b");
-		assertEquals(emp.getDescriptiveName(), "a b");
+		Assertions.assertEquals(emp.getDescriptiveName(), "a b");
 		emp.setDescriptiveName("aaa");
-		assertEquals(emp.getDescriptiveName(), "aaa");
+		Assertions.assertEquals(emp.getDescriptiveName(), "aaa");
 	}
 
 	/**
@@ -159,9 +156,9 @@ public class JDFEmployeeTest extends JDFTestCaseBase
 	{
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc(ElementName.EMPLOYEE).getRoot();
 		emp.setProductID("aaa");
-		assertEquals(emp.getDescriptiveName(), "aaa");
+		Assertions.assertEquals(emp.getDescriptiveName(), "aaa");
 		emp.setPersonalID("aaaa");
-		assertEquals(emp.getDescriptiveName(), "aaaa");
+		Assertions.assertEquals(emp.getDescriptiveName(), "aaaa");
 	}
 
 	/**
@@ -172,9 +169,9 @@ public class JDFEmployeeTest extends JDFTestCaseBase
 	{
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc(ElementName.EMPLOYEE).getRoot();
 		emp.setProductID("P1");
-		assertEquals(emp.getPersonalID(), "P1");
+		Assertions.assertEquals(emp.getPersonalID(), "P1");
 		emp.setPersonalID("P2");
-		assertEquals(emp.getPersonalID(), "P2");
+		Assertions.assertEquals(emp.getPersonalID(), "P2");
 	}
 
 	/**
@@ -186,10 +183,10 @@ public class JDFEmployeeTest extends JDFTestCaseBase
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc(ElementName.EMPLOYEE).getRoot();
 		emp.setPersonalID("p1");
 		emp.fixVersion(null);
-		assertEquals(emp.getProductID(), "p1");
+		Assertions.assertEquals(emp.getProductID(), "p1");
 		emp.setPersonalID("p2");
 		emp.fixVersion(null);
-		assertEquals(emp.getProductID(), "p1");
+		Assertions.assertEquals(emp.getProductID(), "p1");
 
 	}
 }

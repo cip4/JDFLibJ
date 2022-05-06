@@ -70,8 +70,8 @@ package org.cip4.jdflib.node;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class LinkInfoTest {
 
@@ -83,9 +83,9 @@ public class LinkInfoTest {
 	{
 		LinkInfo li = new LinkInfo("i_");
 		LinkInfo li2 = new LinkInfo("i_");
-		Assert.assertEquals(li, li2);
+		Assertions.assertEquals(li, li2);
 		LinkInfo li3 = new LinkInfo(li);
-		Assert.assertEquals(li, li3);
+		Assertions.assertEquals(li, li3);
 	}
 
 	/**
@@ -97,9 +97,9 @@ public class LinkInfoTest {
 		LinkInfoMap linkInfoMap = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);
 		LinkInfo cp = linkInfoMap.get(ElementName.CONVENTIONALPRINTINGPARAMS);
 		LinkInfo cpStar = linkInfoMap.getStar(ElementName.CONVENTIONALPRINTINGPARAMS);
-		Assert.assertEquals(cp, cpStar);
-		Assert.assertFalse(cp.hasOutput(null));
-		Assert.assertTrue(cp.hasInput(null));
+		Assertions.assertEquals(cp, cpStar);
+		Assertions.assertFalse(cp.hasOutput(null));
+		Assertions.assertTrue(cp.hasInput(null));
 	}
 
 }

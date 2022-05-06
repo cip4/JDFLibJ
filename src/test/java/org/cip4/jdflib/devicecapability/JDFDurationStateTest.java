@@ -87,8 +87,8 @@ import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.datatypes.JDFDurationRangeList;
 import org.cip4.jdflib.resource.devicecapability.JDFDurationState;
 import org.cip4.jdflib.util.JDFDuration;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 public class JDFDurationStateTest extends JDFTestCaseBase
 {
 
@@ -115,16 +115,16 @@ public class JDFDurationStateTest extends JDFTestCaseBase
 		JDFDurationState state = (JDFDurationState) jdfDoc.getRoot();
 
 		state.setListType(EnumListType.SingleValue);
-		Assert.assertTrue("ListType=SingleValue", state.fitsValue("PT2H",
-				JDFBaseDataTypes.EnumFitsValue.Allowed));
-		Assert.assertFalse("ListType=SingleValue", state.fitsValue("PT6H",
-				JDFBaseDataTypes.EnumFitsValue.Allowed));
+		Assertions.assertTrue(state.fitsValue("PT2H",
+				JDFBaseDataTypes.EnumFitsValue.Allowed), "ListType=SingleValue");
+		Assertions.assertFalse(state.fitsValue("PT6H",
+				JDFBaseDataTypes.EnumFitsValue.Allowed), "ListType=SingleValue");
 
 		state.removeAttribute(AttributeName.ALLOWEDVALUELIST);
-		Assert.assertTrue("ListType=SingleValue", state.fitsValue("PT2H",
-				JDFBaseDataTypes.EnumFitsValue.Allowed));
-		Assert.assertTrue("ListType=SingleValue", state.fitsValue("PT6H",
-				JDFBaseDataTypes.EnumFitsValue.Allowed));
+		Assertions.assertTrue(state.fitsValue("PT2H",
+				JDFBaseDataTypes.EnumFitsValue.Allowed), "ListType=SingleValue");
+		Assertions.assertTrue(state.fitsValue("PT6H",
+				JDFBaseDataTypes.EnumFitsValue.Allowed), "ListType=SingleValue");
 
 	}
 
@@ -133,15 +133,15 @@ public class JDFDurationStateTest extends JDFTestCaseBase
 	public final void testIsValid() throws Exception
 	{
 		iState.setDefaultValue(new JDFDuration("P4D"));
-		Assert.assertTrue(iState.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
 		iState.setCurrentValue(new JDFDuration("PT30M"));
 		iState.setListType(EnumListType.SingleValue);
-		Assert.assertTrue(iState.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
 		final JDFDurationRangeList integerRList = new JDFDurationRangeList(
 				"PT2S PT5S");
 		iState.setAllowedValueList(integerRList);
-		Assert.assertTrue(iState.isValid(EnumValidationLevel.Complete));
-		Assert.assertTrue(iState.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
 	}
 	// //////////////////////////////////////////////////////////
 

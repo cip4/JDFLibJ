@@ -37,21 +37,11 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoResourceLink.EnumOrientation;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.*;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
@@ -60,7 +50,8 @@ import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.XJMFHelper;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class PostXJDFWalkerTest extends JDFTestCaseBase
 {
@@ -79,7 +70,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertNull(h.getRoot().getXPathAttribute("AuditPool/AuditResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
+		Assertions.assertNull(h.getRoot().getXPathAttribute("AuditPool/AuditResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
 	}
 
 	/**
@@ -92,9 +83,9 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		h.setXPathValue("AuditPool/AuditCreated/@ID", "42");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated"));
-		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated/Header"));
-		assertNull(h.getRoot().getXPathElement("AuditPool/Header"));
+		Assertions.assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated"));
+		Assertions.assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated/Header"));
+		Assertions.assertNull(h.getRoot().getXPathElement("AuditPool/Header"));
 	}
 
 	/**
@@ -108,8 +99,8 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		h.appendResourceSet("a", EnumUsage.Input).appendPartition("Run", "r2", true);
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.combineSameSets();
-		assertNull(h.getSet("a", 1));
-		assertEquals(2, h.getSet("a", 0).getPartMapVector().size());
+		Assertions.assertNull(h.getSet("a", 1));
+		Assertions.assertEquals(2, h.getSet("a", 0).getPartMapVector().size());
 	}
 
 	/**
@@ -131,9 +122,9 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		}
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(mh.getRoot(), null);
-		assertEquals(1, mh.getRoot().getChildList(ElementName.RESOURCEINFO, null).size());
+		Assertions.assertEquals(1, mh.getRoot().getChildList(ElementName.RESOURCEINFO, null).size());
 		final SetHelper s2 = new SetHelper(mh.getRoot().getElement("ResourceInfo").getElement(XJDFConstants.ResourceSet));
-		assertEquals(10, s2.getPartitions().size());
+		Assertions.assertEquals(10, s2.getPartitions().size());
 	}
 
 	/**
@@ -148,8 +139,8 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.setRetainAll(true);
 		w.combineSameSets();
-		assertNotNull(h.getSet("a", 1));
-		assertEquals(1, h.getSet("a", 0).getPartMapVector().size());
+		Assertions.assertNotNull(h.getSet("a", 1));
+		Assertions.assertEquals(1, h.getSet("a", 0).getPartMapVector().size());
 	}
 
 	/**
@@ -162,7 +153,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		h.appendResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input).appendPartition(null, true).getResource().setAttribute(AttributeName.STRIPMATERIAL, "b1");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "BackStrip").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails), "b1");
+		Assertions.assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "BackStrip").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails), "b1");
 	}
 
 	/**
@@ -177,8 +168,8 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		band.setAttribute(AttributeName.TOPBRAND, "b1");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getResource().getAttribute(AttributeName.COLOR), "Black");
-		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getBrand(), "b1");
+		Assertions.assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getResource().getAttribute(AttributeName.COLOR), "Black");
+		Assertions.assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getBrand(), "b1");
 	}
 
 	/**
@@ -193,7 +184,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		r.setPartMap(map);
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals(new JDFAttributeMap(), r.getPartMap());
+		Assertions.assertEquals(new JDFAttributeMap(), r.getPartMap());
 	}
 
 	/**
@@ -208,7 +199,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		r.setPartMap(map);
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals(new JDFAttributeMap(AttributeName.RUNINDEX, "3"), r.getPartMap());
+		Assertions.assertEquals(new JDFAttributeMap(AttributeName.RUNINDEX, "3"), r.getPartMap());
 	}
 
 	/**
@@ -226,9 +217,9 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		final ResourceHelper r2 = set.appendPartition(map, true);
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals(2, set.getPartitions().size());
-		assertTrue(set.getPartMapVector().getKeys().contains(AttributeName.PAGENUMBER));
-		assertEquals("2", r2.getPartMap().get(AttributeName.PAGENUMBER));
+		Assertions.assertEquals(2, set.getPartitions().size());
+		Assertions.assertTrue(set.getPartMapVector().getKeys().contains(AttributeName.PAGENUMBER));
+		Assertions.assertEquals("2", r2.getPartMap().get(AttributeName.PAGENUMBER));
 	}
 
 	/**
@@ -242,7 +233,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		tsp.setAttribute(AttributeName.CASTINGMATERIAL, "cm");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals("cm", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Thread").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
+		Assertions.assertEquals("cm", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Thread").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
 	}
 
 	/**
@@ -256,7 +247,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		tsp.setAttribute(AttributeName.HARDENERTYPE, "toughstough");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals("toughstough", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Hardener").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
+		Assertions.assertEquals("toughstough", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Hardener").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
 	}
 
 	/**
@@ -270,7 +261,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		tsp.setAttribute(AttributeName.ADHESIVETYPE, "toughstough");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals("toughstough", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Glue").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
+		Assertions.assertEquals("toughstough", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Glue").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
 	}
 
 	/**
@@ -285,7 +276,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		tsp.setAttribute(AttributeName.WIREBRAND, "wb");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals("42", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Wire").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
+		Assertions.assertEquals("42", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Wire").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
 	}
 
 	/**
@@ -299,8 +290,8 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		dl.appendElement(ElementName.STATION).setAttribute(AttributeName.STATIONAMOUNT, "3");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals(3, dl.numChildElements(ElementName.STATION, null));
-		assertFalse(dl.getElement(ElementName.STATION, null, 0).hasAttribute(AttributeName.STATIONAMOUNT));
+		Assertions.assertEquals(3, dl.numChildElements(ElementName.STATION, null));
+		Assertions.assertFalse(dl.getElement(ElementName.STATION, null, 0).hasAttribute(AttributeName.STATIONAMOUNT));
 	}
 
 	/**
@@ -314,10 +305,10 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		h.setXPathValue("AuditPool/AuditCreated/Foo/@Bar", "foo");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated"));
+		Assertions.assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated"));
 		final KElement head = h.getRoot().getXPathElement("AuditPool/AuditCreated/Header");
 		final KElement foo = h.getRoot().getXPathElement("AuditPool/AuditCreated/Foo");
-		assertEquals(head.getNextSibling(), foo);
+		Assertions.assertEquals(head.getNextSibling(), foo);
 	}
 
 	/**
@@ -332,8 +323,8 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		final KElement h2 = c.appendElement(XJDFConstants.AssemblingIntent);
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) x);
 		w.walkTree(x, null);
-		assertEquals(c.getElement(null), h);
-		assertEquals(h.getNextSibling(), h2);
+		Assertions.assertEquals(c.getElement(null), h);
+		Assertions.assertEquals(h.getNextSibling(), h2);
 	}
 
 	/**
@@ -348,8 +339,8 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		c.setAttribute(AttributeName.DEVICEID, "d1");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) x);
 		w.walkTreeKidsFirst(x);
-		assertEquals(XJDF20.getSchemaURL(), x.getElement(XJDFConstants.Header).getNamespaceURI());
-		assertEquals(XJDF20.getSchemaURL(), c.getElement(XJDFConstants.Header).getNamespaceURI());
+		Assertions.assertEquals(XJDF20.getSchemaURL(), x.getElement(XJDFConstants.Header).getNamespaceURI());
+		Assertions.assertEquals(XJDF20.getSchemaURL(), c.getElement(XJDFConstants.Header).getNamespaceURI());
 	}
 
 	/**
@@ -365,9 +356,9 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) x);
 		w.setNewVersion(EnumVersion.Version_2_1);
 		w.walkTreeKidsFirst(x);
-		assertEquals(JDFElement.getSchemaURL(EnumVersion.Version_2_1), x.getElement(XJDFConstants.Header).getNamespaceURI());
-		assertEquals(JDFElement.getSchemaURL(EnumVersion.Version_2_1), c.getElement(XJDFConstants.Header).getNamespaceURI());
-		assertEquals(JDFElement.getSchemaURL(EnumVersion.Version_2_1), x.getNamespaceURI());
+		Assertions.assertEquals(JDFElement.getSchemaURL(EnumVersion.Version_2_1), x.getElement(XJDFConstants.Header).getNamespaceURI());
+		Assertions.assertEquals(JDFElement.getSchemaURL(EnumVersion.Version_2_1), c.getElement(XJDFConstants.Header).getNamespaceURI());
+		Assertions.assertEquals(JDFElement.getSchemaURL(EnumVersion.Version_2_1), x.getNamespaceURI());
 	}
 
 	/**
@@ -380,8 +371,8 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		h.appendResourceSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getCreatePartition(AttributeName.PARTVERSION, "P1 P2", true);
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals("P1", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartMapVector().get(0).get(AttributeName.PARTVERSION));
-		assertEquals("P2", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartMapVector().get(1).get(AttributeName.PARTVERSION));
+		Assertions.assertEquals("P1", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartMapVector().get(0).get(AttributeName.PARTVERSION));
+		Assertions.assertEquals("P2", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartMapVector().get(1).get(AttributeName.PARTVERSION));
 	}
 
 	/**
@@ -396,8 +387,8 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		set.getCreatePartition(AttributeName.PARTVERSION, "P1", true);
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals(EnumOrientation.Flip0.getName(), h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartition(0).getAttribute(AttributeName.ORIENTATION));
-		assertNull(h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getAttribute(AttributeName.ORIENTATION));
+		Assertions.assertEquals(EnumOrientation.Flip0.getName(), h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartition(0).getAttribute(AttributeName.ORIENTATION));
+		Assertions.assertNull(h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getAttribute(AttributeName.ORIENTATION));
 	}
 
 	/**
@@ -415,8 +406,8 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		final org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResource walkResource = w.new WalkResource();
 		walkResource.moveToSet(p.getRoot());
 		walkResource.moveToSet(p.getRoot());
-		assertEquals("D1", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartition(0).getDescriptiveName());
-		assertNull(h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getDescriptiveName());
+		Assertions.assertEquals("D1", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartition(0).getDescriptiveName());
+		Assertions.assertNull(h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getDescriptiveName());
 		walkResource.moveToSet(KElement.createRoot(XJDFConstants.Resource, null));
 		walkResource.moveToSet(null);
 	}
@@ -432,6 +423,6 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.setRetainAll(true);
 		w.walkTree(h.getRoot(), null);
-		assertEquals("P1 P2", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartMapVector().get(0).get(AttributeName.PARTVERSION));
+		Assertions.assertEquals("P1 P2", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartMapVector().get(0).get(AttributeName.PARTVERSION));
 	}
 }

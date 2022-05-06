@@ -73,7 +73,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

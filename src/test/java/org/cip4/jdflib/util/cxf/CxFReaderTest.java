@@ -36,13 +36,10 @@
  */
 package org.cip4.jdflib.util.cxf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.XMLDoc;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class CxFReaderTest extends JDFTestCaseBase
 {
@@ -52,10 +49,10 @@ public class CxFReaderTest extends JDFTestCaseBase
 	@Test
 	public void testGet()
 	{
-		assertNull(CxFReader.getReader(null));
-		assertNotNull(CxFReader.getReader(new XMLDoc(CxFReader.CXF, CxFReader.CXF_NS).getRoot()));
-		assertNotNull(CxFReader.getReader(new XMLDoc("cc:" + CxFReader.CXF, CxFReader.CXF_NS).getRoot()));
-		assertNull(CxFReader.getReader(new XMLDoc("cc", CxFReader.CXF_NS).getRoot()));
+		Assertions.assertNull(CxFReader.getReader(null));
+		Assertions.assertNotNull(CxFReader.getReader(new XMLDoc(CxFReader.CXF, CxFReader.CXF_NS).getRoot()));
+		Assertions.assertNotNull(CxFReader.getReader(new XMLDoc("cc:" + CxFReader.CXF, CxFReader.CXF_NS).getRoot()));
+		Assertions.assertNull(CxFReader.getReader(new XMLDoc("cc", CxFReader.CXF_NS).getRoot()));
 	}
 
 	/**
@@ -64,8 +61,8 @@ public class CxFReaderTest extends JDFTestCaseBase
 	@Test
 	public void testParseFile()
 	{
-		assertNull(CxFReader.parseFile(null));
-		assertNotNull(CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf"));
+		Assertions.assertNull(CxFReader.parseFile(null));
+		Assertions.assertNotNull(CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf"));
 	}
 
 	/**
@@ -75,7 +72,7 @@ public class CxFReaderTest extends JDFTestCaseBase
 	public void testGetColor()
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
-		assertNotNull(cxf.getColorObject(0));
+		Assertions.assertNotNull(cxf.getColorObject(0));
 	}
 
 	/**
@@ -85,8 +82,8 @@ public class CxFReaderTest extends JDFTestCaseBase
 	public void testGetColorByName()
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
-		assertNotNull(cxf.getColorObject("black"));
-		assertNull(cxf.getColorObject("black1"));
+		Assertions.assertNotNull(cxf.getColorObject("black"));
+		Assertions.assertNull(cxf.getColorObject("black1"));
 	}
 
 	/**
@@ -96,7 +93,7 @@ public class CxFReaderTest extends JDFTestCaseBase
 	public void testToString()
 	{
 		final CxFReader cxf = CxFReader.getReader(new XMLDoc(CxFReader.CXF, CxFReader.CXF_NS).getRoot());
-		assertEquals("CxFReader", cxf.toString().substring(0, 9));
+		Assertions.assertEquals("CxFReader", cxf.toString().substring(0, 9));
 	}
 
 }

@@ -70,9 +70,6 @@
  */
 package org.cip4.jdflib.util.net;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -80,7 +77,8 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -100,12 +98,12 @@ public class NetPollTest extends JDFTestCaseBase
 		public PollResult handlePoll(IPollDetails result, String url)
 		{
 			n++;
-			assertNotNull("cannot access url: " + url, result);
-			assertEquals(result.getResponseCode(), 200, 0);
+			Assertions.assertNotNull(result, "cannot access url: " + url);
+			Assertions.assertEquals(result.getResponseCode(), 200, 0);
 			InputStream responseStream = result.getResponseStream();
-			assertNotNull(responseStream);
+			Assertions.assertNotNull(responseStream);
 			System.out.println(result);
-			assertEquals(StringUtil.token(result.getContentType(), 0, ";"), UrlUtil.TEXT_HTML);
+			Assertions.assertEquals(StringUtil.token(result.getContentType(), 0, ";"), UrlUtil.TEXT_HTML);
 			return n % 2 == 0 ? PollResult.idle : PollResult.success;
 		}
 	}
@@ -122,7 +120,7 @@ public class NetPollTest extends JDFTestCaseBase
 		p.start();
 		ThreadUtil.sleep(3333);
 		p.stop();
-		assertNotNull(p);
+		Assertions.assertNotNull(p);
 	}
 
 	/**

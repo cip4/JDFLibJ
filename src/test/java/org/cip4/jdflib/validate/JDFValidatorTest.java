@@ -70,10 +70,6 @@
 
 package org.cip4.jdflib.validate;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -86,7 +82,8 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.process.JDFColorPool;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -109,7 +106,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 		final JDFColorPool cp = (JDFColorPool) cc.appendElement(ElementName.COLORPOOL);
 		cp.appendColorWithName("B", null);
 		cp.appendColorWithName("C", null);
-		assertTrue(validator.isValid(doc));
+		Assertions.assertTrue(validator.isValid(doc));
 	}
 
 	/**
@@ -124,7 +121,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 		cp.appendColorWithName("B", null).setActualColorName("A");
 		cp.appendColorWithName("C", null).setActualColorName("A");
 
-		assertFalse(validator.isValid(doc));
+		Assertions.assertFalse(validator.isValid(doc));
 	}
 
 	/**
@@ -136,7 +133,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 		final JDFNode node = doc.getJDFRoot();
 		final JDFResource cc = node.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
 		final JDFColorPool cp = (JDFColorPool) cc.appendElement(ElementName.COLORPOOL);
-		assertTrue(validator.isValid(doc));
+		Assertions.assertTrue(validator.isValid(doc));
 	}
 
 	/**
@@ -151,8 +148,8 @@ public class JDFValidatorTest extends JDFTestCaseBase
 		final JDFResourceLink rl = ra.addNewOldLink(true, media, EnumUsage.Input);
 		rl.setActualAmount(42, null);
 		validator.setWarning(false);
-		assertNotNull(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0));
-		assertTrue(validator.isValid(doc));
+		Assertions.assertNotNull(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0));
+		Assertions.assertTrue(validator.isValid(doc));
 	}
 
 	/**
@@ -183,8 +180,8 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	{
 		final JDFJMF jmf = JDFDoc.parseFile(sm_dirTestData + "ResourceInfo.jmf").getJMFRoot();
 		final JDFResourceInfo resourceInfo = jmf.getResponse(0).getResourceInfo(0);
-		assertTrue(resourceInfo.isValid(EnumValidationLevel.Complete));
-		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(resourceInfo.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 	}
 
 }

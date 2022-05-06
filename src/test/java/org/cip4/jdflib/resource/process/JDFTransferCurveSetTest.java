@@ -38,14 +38,11 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFTransferCurveSetTest extends JDFTestCaseBase
 {
@@ -57,7 +54,7 @@ public class JDFTransferCurveSetTest extends JDFTestCaseBase
 	public void testGetTransfercurve()
 	{
 		final JDFTransferCurveSet p = (JDFTransferCurveSet) new JDFDoc(ElementName.TRANSFERCURVESET).getRoot();
-		assertNull(p.getTransferCurve(0));
+		Assertions.assertNull(p.getTransferCurve(0));
 	}
 
 	/**
@@ -67,12 +64,12 @@ public class JDFTransferCurveSetTest extends JDFTestCaseBase
 	public void testGetTransfercurveName()
 	{
 		final JDFTransferCurveSet p = (JDFTransferCurveSet) new JDFDoc(ElementName.TRANSFERCURVESET).getRoot();
-		assertNull(p.getTransferCurve(null));
+		Assertions.assertNull(p.getTransferCurve(null));
 		final JDFTransferCurve tc = p.getCreateTransferCurve("Cyan");
-		assertEquals(tc, p.getCreateTransferCurve("Cyan"));
-		assertEquals(tc, p.getTransferCurve("Cyan"));
-		assertNull(p.getTransferCurve("Magenta"));
-		assertEquals(tc, p.getTransferCurve("*"));
+		Assertions.assertEquals(tc, p.getCreateTransferCurve("Cyan"));
+		Assertions.assertEquals(tc, p.getTransferCurve("Cyan"));
+		Assertions.assertNull(p.getTransferCurve("Magenta"));
+		Assertions.assertEquals(tc, p.getTransferCurve("*"));
 
 	}
 
@@ -83,13 +80,13 @@ public class JDFTransferCurveSetTest extends JDFTestCaseBase
 	public void testGetTransfercurveEmpty()
 	{
 		final JDFTransferCurveSet p = (JDFTransferCurveSet) new JDFDoc(ElementName.TRANSFERCURVESET).getRoot();
-		assertNull(p.getTransferCurve(null));
+		Assertions.assertNull(p.getTransferCurve(null));
 		final JDFTransferCurve tc = p.getCreateTransferCurve("*");
 		final JDFTransferCurve tcc = p.getCreateTransferCurve("Cyan");
-		assertNotEquals(tc, tcc);
-		assertEquals(tcc, p.getTransferCurve("Cyan"));
-		assertEquals(tc, p.getTransferCurve("Green"));
-		assertEquals(tc, p.getTransferCurve("*"));
+		Assertions.assertNotEquals(tc, tcc);
+		Assertions.assertEquals(tcc, p.getTransferCurve("Cyan"));
+		Assertions.assertEquals(tc, p.getTransferCurve("Green"));
+		Assertions.assertEquals(tc, p.getTransferCurve("*"));
 
 	}
 

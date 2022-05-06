@@ -78,8 +78,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.span.JDFNameSpan;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -92,11 +92,11 @@ public class JDFProductionIntentTest extends JDFTestCaseBase
 	public void testIsDigital()
 	{
 		JDFProductionIntent pi = (JDFProductionIntent) new JDFDoc(ElementName.PRODUCTIONINTENT).getRoot();
-		Assert.assertFalse(pi.isDigital());
+		Assertions.assertFalse(pi.isDigital());
 		JDFNameSpan printProc = pi.appendPrintProcess();
 		printProc.setRange(new VString("Inkjet Electrophotography", null));
-		Assert.assertTrue(pi.isDigital());
+		Assertions.assertTrue(pi.isDigital());
 		printProc.setActual("Screen");
-		Assert.assertFalse(pi.isDigital());
+		Assertions.assertFalse(pi.isDigital());
 	}
 }

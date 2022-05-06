@@ -72,7 +72,7 @@ import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *

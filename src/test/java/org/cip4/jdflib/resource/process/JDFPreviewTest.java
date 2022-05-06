@@ -39,10 +39,6 @@
 
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumPreviewType;
 import org.cip4.jdflib.auto.JDFAutoPreview.EnumPreviewUsage;
@@ -55,7 +51,8 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -74,11 +71,11 @@ public class JDFPreviewTest extends JDFTestCaseBase
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setVersion(EnumVersion.Version_1_4);
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
-		assertTrue(m.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(m.isValid(EnumValidationLevel.Incomplete));
 		final JDFPreview pv = m.appendPreview();
-		assertTrue(n.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(n.isValid(EnumValidationLevel.Incomplete));
 		pv.makeRootResource(null, null, true);
-		assertTrue(n.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(n.isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**
@@ -92,9 +89,9 @@ public class JDFPreviewTest extends JDFTestCaseBase
 		final JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Input);
 		final JDFResource pv1 = pv.addPartition(EnumPartIDKey.SignatureName, "v");
 		pv.setPreviewType(EnumPreviewType.Separation);
-		assertEquals(1, pv.getPartIDKeys().size());
+		Assertions.assertEquals(1, pv.getPartIDKeys().size());
 		pv1.setPreviewType(EnumPreviewType.Separation);
-		assertEquals(1, pv.getPartIDKeys().size());
+		Assertions.assertEquals(1, pv.getPartIDKeys().size());
 	}
 
 	/**
@@ -107,7 +104,7 @@ public class JDFPreviewTest extends JDFTestCaseBase
 		n.setVersion(EnumVersion.Version_1_4);
 		final JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Input);
 		pv.setFileSpecURL("abc");
-		assertEquals("abc", pv.getFileSpec().getURL());
+		Assertions.assertEquals("abc", pv.getFileSpec().getURL());
 	}
 
 	/**
@@ -120,7 +117,7 @@ public class JDFPreviewTest extends JDFTestCaseBase
 		n.setVersion(EnumVersion.Version_1_4);
 		final JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Input);
 		pv.setPreviewFileType("AAA");
-		assertNull(pv.getEnumPreviewFileType());
+		Assertions.assertNull(pv.getEnumPreviewFileType());
 	}
 
 	/**
@@ -134,7 +131,7 @@ public class JDFPreviewTest extends JDFTestCaseBase
 		final JDFPreview pv = n.appendPreview();
 		pv.setPreviewUsage(EnumPreviewUsage.Separation);
 		final String s = n.getOwnerDocument_JDFElement().write2String(2);
-		assertTrue(s.indexOf(EnumPreviewUsage.Separation.getName()) > 0);
+		Assertions.assertTrue(s.indexOf(EnumPreviewUsage.Separation.getName()) > 0);
 	}
 
 	/**

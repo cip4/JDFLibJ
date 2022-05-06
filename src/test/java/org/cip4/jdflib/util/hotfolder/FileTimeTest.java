@@ -38,10 +38,6 @@
  */
 package org.cip4.jdflib.util.hotfolder;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -49,7 +45,8 @@ import java.io.IOException;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class FileTimeTest extends JDFTestCaseBase
 {
@@ -57,7 +54,7 @@ public class FileTimeTest extends JDFTestCaseBase
 	@Test
 	public void testExists()
 	{
-		assertTrue(new FileTime(new File(sm_dirTestData), false).exists());
+		Assertions.assertTrue(new FileTime(new File(sm_dirTestData), false).exists());
 	}
 
 	@Test
@@ -65,9 +62,9 @@ public class FileTimeTest extends JDFTestCaseBase
 	{
 		final FileTime ft = new FileTime(new File(sm_dirTestData), false);
 		final long updateModified = ft.updateModified();
-		assertEquals(System.currentTimeMillis(), updateModified, 1000);
+		Assertions.assertEquals(System.currentTimeMillis(), updateModified, 1000);
 		ThreadUtil.sleep(400);
-		assertEquals(updateModified, ft.updateModified(), 300);
+		Assertions.assertEquals(updateModified, ft.updateModified(), 300);
 	}
 
 	@Test
@@ -77,7 +74,7 @@ public class FileTimeTest extends JDFTestCaseBase
 		{
 			final File dummy = new File(sm_dirTestDataTemp + System.nanoTime() + ".file");
 			final FileTime ft = new FileTime(dummy, b);
-			assertTrue(FileUtil.forceDelete(dummy));
+			Assertions.assertTrue(FileUtil.forceDelete(dummy));
 			FileUtil.createNewFile(dummy);
 			ThreadUtil.sleep(2);
 			for (int i = 0; i < 3; i++)
@@ -92,7 +89,7 @@ public class FileTimeTest extends JDFTestCaseBase
 				ThreadUtil.sleep(220);
 				final long updateModified = ft.updateModified();
 				log.info("loop " + i + " " + updateModified % 10000 + " " + ft.length);
-				assertEquals("loop " + i, System.currentTimeMillis(), updateModified, 24200);
+				Assertions.assertEquals(System.currentTimeMillis(), updateModified, 24200, "loop " + i);
 
 			}
 		}
@@ -102,18 +99,18 @@ public class FileTimeTest extends JDFTestCaseBase
 	public void testSameModified() throws IOException
 	{
 		final FileTime ft = new FileTime(File.createTempFile("abbb", "txt", new File(sm_dirTestDataTemp)), false);
-		assertFalse(ft.sameModified());
+		Assertions.assertFalse(ft.sameModified());
 		ft.updateModified();
-		assertTrue(ft.sameModified());
+		Assertions.assertTrue(ft.sameModified());
 	}
 
 	@Test
 	public void testSameModifiedRO() throws IOException
 	{
 		final FileTime ft = new FileTime(File.createTempFile("abbb", "txt", new File(sm_dirTestDataTemp)), false);
-		assertFalse(ft.sameModified());
+		Assertions.assertFalse(ft.sameModified());
 		ft.updateModified();
-		assertTrue(ft.sameModified());
+		Assertions.assertTrue(ft.sameModified());
 	}
 
 }

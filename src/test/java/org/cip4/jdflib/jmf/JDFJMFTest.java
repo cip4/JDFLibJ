@@ -38,12 +38,6 @@
  */
 package org.cip4.jdflib.jmf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Iterator;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -63,7 +57,8 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -81,12 +76,12 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.Status);
-		assertEquals(jmf.getMessageVector(null, EnumType.Status).elementAt(0), command);
-		assertEquals(jmf.getMessageVector(null, EnumType.Status).size(), 1);
+		Assertions.assertEquals(jmf.getMessageVector(null, EnumType.Status).elementAt(0), command);
+		Assertions.assertEquals(jmf.getMessageVector(null, EnumType.Status).size(), 1);
 		final JDFSignal signal = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Status);
-		assertEquals(jmf.getMessageVector(null, EnumType.Status).elementAt(0), command);
-		assertEquals(jmf.getMessageVector(null, EnumType.Status).elementAt(1), signal);
-		assertEquals(jmf.getMessageVector(null, EnumType.Status).size(), 2);
+		Assertions.assertEquals(jmf.getMessageVector(null, EnumType.Status).elementAt(0), command);
+		Assertions.assertEquals(jmf.getMessageVector(null, EnumType.Status).elementAt(1), signal);
+		Assertions.assertEquals(jmf.getMessageVector(null, EnumType.Status).size(), 2);
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -101,10 +96,10 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFJMF jmf = doc.getJMFRoot();
 		jmf.setSenderID("sid");
 		final JDFCommand c = jmf.appendCommand();
-		assertTrue(c.getID().indexOf("." + (("sid".hashCode() & 0xffff) % 10000) + ".") != -1);
-		assertTrue(jmf.toString().indexOf("xsi:type=") > 0);
-		assertEquals(jmf.getMaxVersion(), jmf.getVersion(false));
-		assertEquals(jmf.getMaxVersion(), c.getMaxVersion(true));
+		Assertions.assertTrue(c.getID().indexOf("." + (("sid".hashCode() & 0xffff) % 10000) + ".") != -1);
+		Assertions.assertTrue(jmf.toString().indexOf("xsi:type=") > 0);
+		Assertions.assertEquals(jmf.getMaxVersion(), jmf.getVersion(false));
+		Assertions.assertEquals(jmf.getMaxVersion(), c.getMaxVersion(true));
 	}
 
 	/**
@@ -116,9 +111,9 @@ public class JDFJMFTest extends JDFTestCaseBase
 		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_2);
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
-		assertEquals(jmf.getMaxVersion(), jmf.getVersion(false));
+		Assertions.assertEquals(jmf.getMaxVersion(), jmf.getVersion(false));
 		final JDFCommand c = jmf.appendCommand();
-		assertEquals(jmf.getMaxVersion(), c.getMaxVersion(true));
+		Assertions.assertEquals(jmf.getMaxVersion(), c.getMaxVersion(true));
 	}
 
 	/**
@@ -131,7 +126,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
 		final JDFCommand c = jmf.appendCommand();
-		assertTrue(c.getID().indexOf("." + (("sid".hashCode() & 0xffff) % 10000) + ".") != -1);
+		Assertions.assertTrue(c.getID().indexOf("." + (("sid".hashCode() & 0xffff) % 10000) + ".") != -1);
 		JDFJMF.setTheSenderID(null);
 	}
 
@@ -148,7 +143,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final String xml = jmf.toXML();
 		final JDFDoc newDoc = p.parseString(xml);
 		System.out.print(xml);
-		assertNotNull(newDoc);
+		Assertions.assertNotNull(newDoc);
 	}
 
 	/**
@@ -159,13 +154,13 @@ public class JDFJMFTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
-		assertNull(jmf.getSubmissionURL());
+		Assertions.assertNull(jmf.getSubmissionURL());
 		final JDFCommand c = jmf.appendCommand(EnumType.ResubmitQueueEntry);
-		assertNull(jmf.getSubmissionURL());
+		Assertions.assertNull(jmf.getSubmissionURL());
 		final JDFResubmissionParams rsp = c.appendResubmissionParams();
-		assertNull(jmf.getSubmissionURL());
+		Assertions.assertNull(jmf.getSubmissionURL());
 		rsp.setURL("url");
-		assertEquals("url", jmf.getSubmissionURL());
+		Assertions.assertEquals("url", jmf.getSubmissionURL());
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -184,13 +179,13 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFJMF responses = queries.createResponse();
 		final VElement messageVector = queries.getMessageVector(null, null);
 		final VElement responseVector = responses.getMessageVector(null, null);
-		assertEquals(responseVector.size(), 4);
+		Assertions.assertEquals(responseVector.size(), 4);
 		for (int i = 0; i < responseVector.size(); i++)
 		{
 			final JDFResponse r = (JDFResponse) responseVector.elementAt(i);
 			final JDFMessage m = (JDFMessage) messageVector.elementAt(i);
-			assertEquals(r.getrefID(), m.getID());
-			assertEquals(r.getType(), m.getType());
+			Assertions.assertEquals(r.getrefID(), m.getID());
+			Assertions.assertEquals(r.getType(), m.getType());
 		}
 	}
 
@@ -207,7 +202,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		JDFJMF jmf2 = (JDFJMF) jmf.cloneNewDoc();
 		for (int i = 0; i < 10; i++)
 			jmf2 = (JDFJMF) jmf2.cloneNewDoc();
-		assertTrue(StringUtil.numSubstrings(jmf2.toXML(), "<--") < 2);
+		Assertions.assertTrue(StringUtil.numSubstrings(jmf2.toXML(), "<--") < 2);
 
 	}
 
@@ -220,24 +215,24 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
 		jmf.collectICSVersions();
-		assertFalse(jmf.hasAttribute(AttributeName.ICSVERSIONS));
+		Assertions.assertFalse(jmf.hasAttribute(AttributeName.ICSVERSIONS));
 		final VString s12 = new VString("s1 s2", null);
 		jmf.appendSignal().setICSVersions(s12);
-		assertTrue(s12.containsAll(jmf.collectICSVersions()));
-		assertTrue(jmf.collectICSVersions().containsAll(s12));
+		Assertions.assertTrue(s12.containsAll(jmf.collectICSVersions()));
+		Assertions.assertTrue(jmf.collectICSVersions().containsAll(s12));
 
 		jmf.appendSignal().setICSVersions(s12);
-		assertTrue(s12.containsAll(jmf.collectICSVersions()));
-		assertTrue(jmf.collectICSVersions().containsAll(s12));
+		Assertions.assertTrue(s12.containsAll(jmf.collectICSVersions()));
+		Assertions.assertTrue(jmf.collectICSVersions().containsAll(s12));
 
 		jmf.setICSVersions(new VString("j1 j1 j2", null));
 		s12.add("j1");
 		s12.add("j2");
 
-		assertTrue(s12.containsAll(jmf.collectICSVersions()));
-		assertTrue(jmf.collectICSVersions().containsAll(s12));
+		Assertions.assertTrue(s12.containsAll(jmf.collectICSVersions()));
+		Assertions.assertTrue(jmf.collectICSVersions().containsAll(s12));
 
-		assertEquals("multiple calls should not stack", jmf.getICSVersions(), jmf.collectICSVersions());
+		Assertions.assertEquals(jmf.getICSVersions(), jmf.collectICSVersions(), "multiple calls should not stack");
 	}
 
 	/**
@@ -256,21 +251,21 @@ public class JDFJMFTest extends JDFTestCaseBase
 		q.setType("KnownMessages");
 		q.appendKnownMsgQuParams();
 		r.setQuery(q);
-		assertEquals("refID", q.getID(), r.getrefID());
+		Assertions.assertEquals(q.getID(), r.getrefID(), "refID");
 
 		final JDFMessageService ms = r.appendMessageService();
 		ms.setType("KnownMessages");
 		s.convertResponse(r, q);
-		assertEquals("type", r.getType(), s.getType());
-		assertTrue("ms equal", ms.isEqual(s.getMessageService(0)));
-		assertTrue(s.getXSIType().startsWith("Signal"));
-		assertEquals(s.getKnownMsgQuParams(0).getNextSiblingElement(), s.getMessageService(0));
+		Assertions.assertEquals(r.getType(), s.getType(), "type");
+		Assertions.assertTrue(ms.isEqual(s.getMessageService(0)), "ms equal");
+		Assertions.assertTrue(s.getXSIType().startsWith("Signal"));
+		Assertions.assertEquals(s.getKnownMsgQuParams(0).getNextSiblingElement(), s.getMessageService(0));
 
 		s = jmf.appendSignal();
 		s.convertResponse(r, null);
-		assertEquals("type", r.getType(), s.getType());
-		assertTrue("ms equal", ms.isEqual(s.getMessageService(0)));
-		assertTrue(s.getXSIType().startsWith("Signal"));
+		Assertions.assertEquals(r.getType(), s.getType(), "type");
+		Assertions.assertTrue(ms.isEqual(s.getMessageService(0)), "ms equal");
+		Assertions.assertTrue(s.getXSIType().startsWith("Signal"));
 	}
 
 	/**
@@ -292,7 +287,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		q.setType("KnownMessages");
 		q.appendKnownMsgQuParams();
 		r.setQuery(q);
-		assertEquals("refID", q.getID(), r.getrefID());
+		Assertions.assertEquals(q.getID(), r.getrefID(), "refID");
 
 		final JDFMessageService ms = r.appendMessageService();
 		jmfResp.setAttribute("xmlns:foo", "www.foo.com");
@@ -300,16 +295,16 @@ public class JDFJMFTest extends JDFTestCaseBase
 		ms.setAttribute("foo:key", "val");
 		ms.appendElement("foo:bar");
 		s.convertResponse(r, q);
-		assertEquals("type", r.getType(), s.getType());
-		assertTrue("ms equal", ms.isEqual(s.getMessageService(0)));
-		assertTrue(s.getXSIType().startsWith("Signal"));
-		assertEquals(s.getKnownMsgQuParams(0).getNextSiblingElement(), s.getMessageService(0));
+		Assertions.assertEquals(r.getType(), s.getType(), "type");
+		Assertions.assertTrue(ms.isEqual(s.getMessageService(0)), "ms equal");
+		Assertions.assertTrue(s.getXSIType().startsWith("Signal"));
+		Assertions.assertEquals(s.getKnownMsgQuParams(0).getNextSiblingElement(), s.getMessageService(0));
 
 		s = jmfQuery.appendSignal();
 		s.convertResponse(r, null);
-		assertEquals("type", r.getType(), s.getType());
-		assertTrue("ms equal", ms.isEqual(s.getMessageService(0)));
-		assertTrue(s.getXSIType().startsWith("Signal"));
+		Assertions.assertEquals(r.getType(), s.getType(), "type");
+		Assertions.assertTrue(ms.isEqual(s.getMessageService(0)), "ms equal");
+		Assertions.assertTrue(s.getXSIType().startsWith("Signal"));
 	}
 
 	/**
@@ -330,14 +325,14 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFMessageService ms = r.appendMessageService();
 		ms.setType("KnownMessages");
 		ack.convertResponse(r, q);
-		assertEquals("refID", q.getID(), r.getrefID());
-		assertEquals("type", r.getType(), ack.getType());
-		assertTrue("ms equal", ms.isEqual(ack.getMessageService(0)));
+		Assertions.assertEquals(q.getID(), r.getrefID(), "refID");
+		Assertions.assertEquals(r.getType(), ack.getType(), "type");
+		Assertions.assertTrue(ms.isEqual(ack.getMessageService(0)), "ms equal");
 		ack = jmf.appendAcknowledge();
 		ack.convertResponse(r, null);
-		assertEquals("type", r.getType(), ack.getType());
-		assertTrue("ms equal", ms.isEqual(ack.getMessageService(0)));
-		assertTrue(ack.getXSIType().startsWith("Acknowledge"));
+		Assertions.assertEquals(r.getType(), ack.getType(), "type");
+		Assertions.assertTrue(ms.isEqual(ack.getMessageService(0)), "ms equal");
+		Assertions.assertTrue(ack.getXSIType().startsWith("Acknowledge"));
 	}
 
 	/**
@@ -357,10 +352,10 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFMessageService ms = r.appendMessageService();
 		ms.setType("KnownMessages");
 		final JDFAcknowledge ack = r.splitAcknowledge();
-		assertEquals("refID", q.getID(), r.getrefID());
-		assertEquals("type", r.getType(), ack.getType());
-		assertTrue("ms equal", ms.isEqual(ack.getMessageService(0)));
-		assertNull(r.getMessageService(0));
+		Assertions.assertEquals(q.getID(), r.getrefID(), "refID");
+		Assertions.assertEquals(r.getType(), ack.getType(), "type");
+		Assertions.assertTrue(ms.isEqual(ack.getMessageService(0)), "ms equal");
+		Assertions.assertNull(r.getMessageService(0));
 	}
 
 	/**
@@ -377,11 +372,11 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFQuery q = jmf.appendQuery();
 		q.setType("KnownMessages");
 		r.setQuery(q);
-		assertEquals("refID", q.getID(), r.getrefID());
+		Assertions.assertEquals(q.getID(), r.getrefID(), "refID");
 
 		jmf2.convertResponses(q);
-		assertNull(jmf2.getResponse(0));
-		assertEquals(jmf2.getSignal(0).getrefID(), q.getID());
+		Assertions.assertNull(jmf2.getResponse(0));
+		Assertions.assertEquals(jmf2.getSignal(0).getrefID(), q.getID());
 	}
 
 	/**
@@ -391,8 +386,8 @@ public class JDFJMFTest extends JDFTestCaseBase
 	public void testCreateJMF()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
-		assertEquals(jmf.getResponse(0).getEnumType(), EnumType.AbortQueueEntry);
-		assertEquals(jmf.getResponse(0).getLocalName(), "Response");
+		Assertions.assertEquals(jmf.getResponse(0).getEnumType(), EnumType.AbortQueueEntry);
+		Assertions.assertEquals(jmf.getResponse(0).getLocalName(), "Response");
 	}
 
 	/**
@@ -405,8 +400,8 @@ public class JDFJMFTest extends JDFTestCaseBase
 		JDFAudit.setStaticAgentName("foo");
 		JDFAudit.setStaticAgentVersion("v1");
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
-		assertEquals(JDFAudit.getStaticAgentName(), jmf.getAgentName());
-		assertEquals(JDFAudit.getStaticAgentVersion(), jmf.getAgentVersion());
+		Assertions.assertEquals(JDFAudit.getStaticAgentName(), jmf.getAgentName());
+		Assertions.assertEquals(JDFAudit.getStaticAgentVersion(), jmf.getAgentVersion());
 	}
 
 	/**
@@ -418,7 +413,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		JDFJMF.setTheSenderID("a b");
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
 		final JDFResponse response = jmf.getResponse(0);
-		assertTrue("the sender id was added but stripped", response.getID().indexOf("." + "ab".hashCode() + ".") > 0);
+		Assertions.assertTrue(response.getID().indexOf("." + "ab".hashCode() + ".") > 0, "the sender id was added but stripped");
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -438,14 +433,14 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFDeviceInfo di = s.appendDeviceInfo();
 		di.setDeviceStatus(EnumDeviceStatus.Unknown);
 		JDFJobPhase jp = di.appendJobPhase();
-		assertEquals("", jp, di.getJobPhase(0));
+		Assertions.assertEquals(jp, di.getJobPhase(0), "");
 		jp = (JDFJobPhase) di.appendElement("jdf:JobPhase", JDFElement.getSchemaURL());
-		assertEquals("", jp, di.getJobPhase(1));
-		assertNull("", di.getJobPhase(2));
+		Assertions.assertEquals(jp, di.getJobPhase(1), "");
+		Assertions.assertNull(di.getJobPhase(2), "");
 		jp.appendNode();
-		assertTrue(jp.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(jp.isValid(EnumValidationLevel.Incomplete));
 		jp.setAttribute("Status", "fnarf");
-		assertFalse(jp.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertFalse(jp.isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**
@@ -460,11 +455,11 @@ public class JDFJMFTest extends JDFTestCaseBase
 		r.setType("Status");
 		r.setrefID("r1");
 		final JDFNotification n = r.setErrorText("blub", null);
-		assertEquals("get comment text", n.getComment(0).getText(), "blub");
-		assertEquals("type", n.getType(), "Error");
-		assertTrue(r.isValid(EnumValidationLevel.Complete));
+		Assertions.assertEquals(n.getComment(0).getText(), "blub", "get comment text");
+		Assertions.assertEquals(n.getType(), "Error", "type");
+		Assertions.assertTrue(r.isValid(EnumValidationLevel.Complete));
 		jmf.setSenderID("S1");
-		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
@@ -476,22 +471,22 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JMF");
 		final JDFJMF jmf = d.getJMFRoot();
 		final JDFCommand c = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.Events);
-		assertEquals(c, jmf.getMessageElement(EnumFamily.Command, EnumType.Events, 0));
+		Assertions.assertEquals(c, jmf.getMessageElement(EnumFamily.Command, EnumType.Events, 0));
 		jmf.appendComment();
 
 		final JDFSignal s = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Events);
-		assertEquals(s, jmf.getMessageElement(EnumFamily.Signal, EnumType.Events, 0));
-		assertEquals(s, jmf.getMessageElement(null, EnumType.Events, 1));
-		assertEquals(s, jmf.getMessageElement(null, null, 1));
+		Assertions.assertEquals(s, jmf.getMessageElement(EnumFamily.Signal, EnumType.Events, 0));
+		Assertions.assertEquals(s, jmf.getMessageElement(null, EnumType.Events, 1));
+		Assertions.assertEquals(s, jmf.getMessageElement(null, null, 1));
 
 		final JDFSignal s2 = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Status);
-		assertEquals(s2, jmf.getMessageElement(EnumFamily.Signal, EnumType.Status, 0));
-		assertEquals(s2, jmf.getMessageElement(EnumFamily.Signal, null, 1));
-		assertEquals(s2, jmf.getMessageElement(null, null, 2));
-		assertEquals(s2, jmf.getMessageElement(null, null, -1));
-		assertEquals(s, jmf.getMessageElement(null, null, -2));
-		assertEquals(c, jmf.getMessageElement(null, null, -3));
-		assertNull(jmf.getMessageElement(null, null, -4));
+		Assertions.assertEquals(s2, jmf.getMessageElement(EnumFamily.Signal, EnumType.Status, 0));
+		Assertions.assertEquals(s2, jmf.getMessageElement(EnumFamily.Signal, null, 1));
+		Assertions.assertEquals(s2, jmf.getMessageElement(null, null, 2));
+		Assertions.assertEquals(s2, jmf.getMessageElement(null, null, -1));
+		Assertions.assertEquals(s, jmf.getMessageElement(null, null, -2));
+		Assertions.assertEquals(c, jmf.getMessageElement(null, null, -3));
+		Assertions.assertNull(jmf.getMessageElement(null, null, -4));
 	}
 
 	/**
@@ -507,7 +502,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 
 		final JDFResponse r = (JDFResponse) jmf.appendMessageElement(EnumFamily.Response, EnumType.Events);
 		r.setrefID("i42");
-		assertEquals(r, jmf.getResponse("i42"));
+		Assertions.assertEquals(r, jmf.getResponse("i42"));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -524,8 +519,8 @@ public class JDFJMFTest extends JDFTestCaseBase
 
 		final JDFAcknowledge a = (JDFAcknowledge) jmf.appendMessageElement(EnumFamily.Acknowledge, EnumType.Events);
 		a.setrefID("i42");
-		assertEquals(a, jmf.getAcknowledge("i42"));
-		assertEquals(a, jmf.getAcknowledge(null));
+		Assertions.assertEquals(a, jmf.getAcknowledge("i42"));
+		Assertions.assertEquals(a, jmf.getAcknowledge(null));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -544,12 +539,12 @@ public class JDFJMFTest extends JDFTestCaseBase
 		sqp.setDeviceDetails(EnumDeviceDetails.Brief);
 		final JDFDeviceInfo di = s.appendDeviceInfo();
 		JDFJobPhase jp = di.appendJobPhase();
-		assertEquals("", jp, di.getJobPhase(0));
+		Assertions.assertEquals(jp, di.getJobPhase(0), "");
 		jp = (JDFJobPhase) di.appendElement("jdf:JobPhase", JDFElement.getSchemaURL());
-		assertEquals("", jp, di.getJobPhase(1));
-		assertNull("", di.getJobPhase(2));
+		Assertions.assertEquals(jp, di.getJobPhase(1), "");
+		Assertions.assertNull(di.getJobPhase(2), "");
 		jp.appendNode();
-		assertTrue(jp.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(jp.isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**
@@ -585,14 +580,14 @@ public class JDFJMFTest extends JDFTestCaseBase
 				r.appendSubscription();
 			}
 
-			assertTrue(" added messages", jmf.getMessageVector(f, null).size() == 1);
-			assertTrue("xsi type", jmf.getMessageElement(f, null, 0).hasAttribute(AttributeName.XSITYPE));
-			assertEquals("xsi type", jmf.getMessageElement(f, null, 0).getAttribute(AttributeName.XSITYPE), f.getName() + "KnownMessages");
+			Assertions.assertTrue(jmf.getMessageVector(f, null).size() == 1, " added messages");
+			Assertions.assertTrue(jmf.getMessageElement(f, null, 0).hasAttribute(AttributeName.XSITYPE), "xsi type");
+			Assertions.assertEquals(jmf.getMessageElement(f, null, 0).getAttribute(AttributeName.XSITYPE), f.getName() + "KnownMessages", "xsi type");
 
 		}
 
-		assertTrue(" added messages", jmf.getMessageVector(null, null).size() == 6);
-		assertTrue("valid", jmf.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(jmf.getMessageVector(null, null).size() == 6, " added messages");
+		Assertions.assertTrue(jmf.isValid(EnumValidationLevel.Complete), "valid");
 	}
 
 	/**
@@ -606,8 +601,8 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFSignal s = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, null);
 		s.setType("foo:test");
 		s.appendDevice();
-		assertNull(s.getXSIType());
-		assertTrue("get device", s.getDevice(0) != null);
+		Assertions.assertNull(s.getXSIType());
+		Assertions.assertTrue(s.getDevice(0) != null, "get device");
 	}
 
 	/**
@@ -623,7 +618,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFReturnQueueEntryParams rqe = c.appendReturnQueueEntryParams();
 		rqe.setURL("http://foo.jdf");
 		rqe.setQueueEntryID("dummyID");
-		assertTrue("JDFReturnQueueEntryParams", rqe.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(rqe.isValid(EnumValidationLevel.Complete), "JDFReturnQueueEntryParams");
 	}
 
 	/*

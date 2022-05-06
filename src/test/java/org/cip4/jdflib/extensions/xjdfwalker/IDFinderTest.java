@@ -39,8 +39,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Map;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -49,7 +47,8 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -68,7 +67,7 @@ public class IDFinderTest extends JDFTestCaseBase
 	{
 		final IDFinder finder = new IDFinder();
 		final Map<String, IDPart> m = finder.getMap(root);
-		assertEquals(m.size(), 9 + 3);
+		Assertions.assertEquals(m.size(), 9 + 3);
 	}
 
 	/**
@@ -89,12 +88,12 @@ public class IDFinderTest extends JDFTestCaseBase
 				final String sh = p.get(AttributeName.SHEETNAME);
 				if (sh != null)
 				{
-					assertEquals("Sig_" + sh, p.get(AttributeName.SIGNATURENAME));
+					Assertions.assertEquals("Sig_" + sh, p.get(AttributeName.SIGNATURENAME));
 					n++;
 				}
 			}
 		}
-		assertEquals(9, n);
+		Assertions.assertEquals(9, n);
 	}
 
 	/**

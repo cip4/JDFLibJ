@@ -70,10 +70,6 @@
  */
 package org.cip4.jdflib.goldenticket;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -83,7 +79,8 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -113,11 +110,11 @@ public class ODPGoldenTicketTest extends BaseGoldenTicketTest
 	{
 		JDFNode n = odpGoldenTicket.getNode();
 		JDFRunList rl = (JDFRunList) n.getResource(ElementName.RUNLIST, EnumUsage.Input, null, 0);
-		assertNotNull(rl);
+		Assertions.assertNotNull(rl);
 		JDFRunList leaf = (JDFRunList) rl.getLeaves(false).elementAt(0);
 		JDFFileSpec fs = leaf.getLayoutElement().getFileSpec();
-		assertEquals(fs.getURL(), UrlUtil.normalize(odpGoldenTicket.m_pdfFile));
-		assertTrue(n.isValid(EnumValidationLevel.Complete));
+		Assertions.assertEquals(fs.getURL(), UrlUtil.normalize(odpGoldenTicket.m_pdfFile));
+		Assertions.assertTrue(n.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
@@ -135,9 +132,9 @@ public class ODPGoldenTicketTest extends BaseGoldenTicketTest
 		odpGoldenTicket.assign(null);
 		final JDFNode node = odpGoldenTicket.getNode();
 		VString icsVersions = node.getICSVersions(false);
-		assertTrue(icsVersions.contains("Base_L0-1.5"));
-		assertTrue(icsVersions.contains("ODP_L1-1.5"));
-		assertEquals(icsVersions.size(), 2);
+		Assertions.assertTrue(icsVersions.contains("Base_L0-1.5"));
+		Assertions.assertTrue(icsVersions.contains("ODP_L1-1.5"));
+		Assertions.assertEquals(icsVersions.size(), 2);
 
 		odpGoldenTicket.good = 10;
 		odpGoldenTicket.waste = 0;

@@ -36,27 +36,14 @@
  */
 package org.cip4.jdflib.extensions;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.*;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
@@ -65,7 +52,8 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JDFDate;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -93,10 +81,10 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
 		final Vector<XJDFHelper> c = (Vector<XJDFHelper>) splitter.splitXJDF(h);
-		assertEquals(3, c.size());
-		assertNotNull(c.get(1).getSet(ElementName.COMPONENT, EnumUsage.Output));
-		assertNotNull(c.get(2).getSet(ElementName.COMPONENT, EnumUsage.Input));
-		assertNotNull(c.get(2).getSet(ElementName.COMPONENT, EnumUsage.Output).getPartition(0));
+		Assertions.assertEquals(3, c.size());
+		Assertions.assertNotNull(c.get(1).getSet(ElementName.COMPONENT, EnumUsage.Output));
+		Assertions.assertNotNull(c.get(2).getSet(ElementName.COMPONENT, EnumUsage.Input));
+		Assertions.assertNotNull(c.get(2).getSet(ElementName.COMPONENT, EnumUsage.Output).getPartition(0));
 	}
 
 	/**
@@ -126,7 +114,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		final JDFNode jdfRoot = d.getJDFRoot();
 		final JDFNode jdf0 = jdfRoot.getJDF(0);
 		final JDFResource strpParams = jdf0.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
-		assertNotNull(strpParams.getElement(ElementName.MEDIA));
+		Assertions.assertNotNull(strpParams.getElement(ElementName.MEDIA));
 	}
 
 	/**
@@ -140,7 +128,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		h.setTypes("ConventionalPrinting Cutting Product");
 
 		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
-		assertEquals(new VString("Product"), splitter.splitTypes(h).get(0));
+		Assertions.assertEquals(new VString("Product"), splitter.splitTypes(h).get(0));
 	}
 
 	/**
@@ -183,7 +171,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 		final JDFDoc d = c.convert(h.getRoot());
 		d.write2File(sm_dirTestDataTemp + "splitxjdf.jdf", 2, false);
-		assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**
@@ -217,15 +205,15 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		final JDFNode root = d.getJDFRoot();
 		final JDFNode imSet = (JDFNode) root.getvJDFNode("ImageSetting", null, true).get(0);
 		final JDFResource jdfDev = imSet.getResource(ElementName.DEVICE, null, 0);
-		assertEquals("PS1", jdfDev.getAttribute(AttributeName.DEVICEID));
-		assertNull(imSet.getLink(jdfDev, null).getNonEmpty(AttributeName.COMBINEDPROCESSINDEX));
+		Assertions.assertEquals("PS1", jdfDev.getAttribute(AttributeName.DEVICEID));
+		Assertions.assertNull(imSet.getLink(jdfDev, null).getNonEmpty(AttributeName.COMBINEDPROCESSINDEX));
 		final JDFNode cp = (JDFNode) root.getvJDFNode("ConventionalPrinting", null, true).get(0);
 		final JDFResource cpDev = cp.getResource(ElementName.DEVICE, null, 0);
-		assertEquals("P1", cpDev.getAttribute(AttributeName.DEVICEID));
-		assertNull(cp.getLink(cpDev, null).getNonEmpty(AttributeName.COMBINEDPROCESSINDEX));
+		Assertions.assertEquals("P1", cpDev.getAttribute(AttributeName.DEVICEID));
+		Assertions.assertNull(cp.getLink(cpDev, null).getNonEmpty(AttributeName.COMBINEDPROCESSINDEX));
 
 		d.write2File(sm_dirTestDataTemp + "splitDevxjdf.jdf", 2, false);
-		assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**
@@ -252,9 +240,9 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		nicp0.setEnd(new JDFDate().addOffset(0, 0, 0, 5));
 
 		final Vector<XJDFHelper> splitted = (Vector<XJDFHelper>) splitter.splitXJDF(h);
-		assertEquals(2, splitted.size());
-		assertEquals(1, splitted.get(0).getSets(ElementName.NODEINFO, EnumUsage.Input).size());
-		assertEquals(1, splitted.get(1).getSets(ElementName.NODEINFO, EnumUsage.Input).size());
+		Assertions.assertEquals(2, splitted.size());
+		Assertions.assertEquals(1, splitted.get(0).getSets(ElementName.NODEINFO, EnumUsage.Input).size());
+		Assertions.assertEquals(1, splitted.get(1).getSets(ElementName.NODEINFO, EnumUsage.Input).size());
 	}
 
 	/**
@@ -277,9 +265,9 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		h.appendProduct().setAmount(10);
 		h.cleanUp();
 		final JDFDoc d = xCon.convert(h);
-		assertNotNull(d);
+		Assertions.assertNotNull(d);
 		final JDFNode n = d.getJDFRoot();
-		assertNull(n.getResource(ElementName.COMPONENT, EnumUsage.Output, 1));
+		Assertions.assertNull(n.getResource(ElementName.COMPONENT, EnumUsage.Output, 1));
 	}
 
 	/**
@@ -295,9 +283,9 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		h.addType(EnumType.Product);
 		final SetHelper niProduct = h.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
 		final SetHelper color = h.getCreateSet(ElementName.COLOR, EnumUsage.Input);
-		assertNull(splitter.checkProduct(color, new VString("Product")));
-		assertNotNull(splitter.checkProduct(color, new VString("Climbing")));
-		assertNotNull(splitter.checkProduct(niProduct, new VString("Product")));
+		Assertions.assertNull(splitter.checkProduct(color, new VString("Product")));
+		Assertions.assertNotNull(splitter.checkProduct(color, new VString("Climbing")));
+		Assertions.assertNotNull(splitter.checkProduct(niProduct, new VString("Product")));
 
 	}
 
@@ -322,11 +310,11 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		niIm.setExternalID("im");
 		final List<XJDFHelper> s = (List<XJDFHelper>) splitter.splitXJDF(h);
 		s.remove(0);
-		assertEquals("im", s.get(0).getSet(ElementName.NODEINFO, 0).getExternalID());
-		assertNull("im", s.get(0).getSet(ElementName.NODEINFO, 1));
-		assertEquals("rl", s.get(0).getSet(ElementName.RUNLIST, 0).getExternalID());
-		assertEquals("cp", s.get(1).getSet(ElementName.NODEINFO, 0).getExternalID());
-		assertNull("cp", s.get(1).getSet(ElementName.NODEINFO, 1));
+		Assertions.assertEquals("im", s.get(0).getSet(ElementName.NODEINFO, 0).getExternalID());
+		Assertions.assertNull(s.get(0).getSet(ElementName.NODEINFO, 1), "im");
+		Assertions.assertEquals("rl", s.get(0).getSet(ElementName.RUNLIST, 0).getExternalID());
+		Assertions.assertEquals("cp", s.get(1).getSet(ElementName.NODEINFO, 0).getExternalID());
+		Assertions.assertNull(s.get(1).getSet(ElementName.NODEINFO, 1), "cp");
 
 	}
 
@@ -358,10 +346,10 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		nicp0.setEnd(d5);
 
 		final JDFDoc d = xCon.convert(h);
-		assertNotNull(d);
+		Assertions.assertNotNull(d);
 		final JDFNode root = d.getJDFRoot();
-		assertEquals(d10, root.getNodeInfo().getEnd());
-		assertEquals(d5, root.getJDF(0).getNodeInfo().getEnd());
+		Assertions.assertEquals(d10, root.getNodeInfo().getEnd());
+		Assertions.assertEquals(d5, root.getJDF(0).getNodeInfo().getEnd());
 	}
 
 	/**
@@ -406,7 +394,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		final VElement v = d.getJDFRoot().getvJDFNode(null, null, false);
 		for (final KElement e : v)
 		{
-			assertEquals(-1, e.getNonEmpty(AttributeName.JOBPARTID).indexOf(" "));
+			Assertions.assertEquals(-1, e.getNonEmpty(AttributeName.JOBPARTID).indexOf(" "));
 		}
 		d.write2File(sm_dirTestDataTemp + "splitxjdfTypes.jdf", 2, false);
 	}
@@ -433,7 +421,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		for (final KElement e : v)
 		{
 			final JDFNode n = (JDFNode) e;
-			assertEquals(n.isJDFRoot() ? "w2p" : "", n.getCategory());
+			Assertions.assertEquals(n.isJDFRoot() ? "w2p" : "", n.getCategory());
 		}
 		d.write2File(sm_dirTestDataTemp + "splitxjdfCategory.jdf", 2, false);
 	}
@@ -454,9 +442,9 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 		final JDFDoc d = c.convert(h.getRoot());
 		final VElement v = d.getJDFRoot().getvJDFNode(null, null, false);
-		assertEquals(1, v.size());
+		Assertions.assertEquals(1, v.size());
 		final JDFNode n = (JDFNode) v.get(0);
-		assertEquals("w2p", n.getCategory());
+		Assertions.assertEquals("w2p", n.getCategory());
 
 		d.write2File(sm_dirTestDataTemp + "splitxjdfCategory.jdf", 2, false);
 	}
@@ -482,8 +470,8 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		final JDFDoc d = c.convert(h);
 		final JDFNode n = d.getJDFRoot();
 
-		assertNotNull(n.getCustomerInfo());
-		assertNotNull(n.getResource(ElementName.CUSTOMERINFO, EnumUsage.Input, "EndCustomer", null, 0));
+		Assertions.assertNotNull(n.getCustomerInfo());
+		Assertions.assertNotNull(n.getResource(ElementName.CUSTOMERINFO, EnumUsage.Input, "EndCustomer", null, 0));
 		d.write2File(sm_dirTestDataTemp + "ci2.jdf", 2, false);
 	}
 
@@ -505,7 +493,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		final JDFDoc d = c.convert(h);
 		final JDFNode n = d.getJDFRoot();
 
-		assertNotNull(n.getResource(ElementName.COLORPOOL, EnumUsage.Input, 0));
+		Assertions.assertNotNull(n.getResource(ElementName.COLORPOOL, EnumUsage.Input, 0));
 		d.write2File(sm_dirTestDataTemp + "cp.jdf", 2, false);
 	}
 

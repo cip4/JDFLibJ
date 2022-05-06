@@ -37,9 +37,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -59,7 +56,8 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -81,8 +79,8 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 		}
 		final XJDFCombiner c = new XJDFCombiner(vh.get(0), vh.get(1));
 		final int[] ct = c.combineTypes();
-		assertEquals(1, ct.length);
-		assertEquals(0, ct[0]);
+		Assertions.assertEquals(1, ct.length);
+		Assertions.assertEquals(0, ct[0]);
 	}
 
 	@Test
@@ -100,9 +98,9 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 
 			final XJDFCombiner c = new XJDFCombiner(h, h2);
 			final int[] ct = c.combineTypes();
-			assertEquals(3, ct.length);
+			Assertions.assertEquals(3, ct.length);
 			for (int i = 0; i < ct.length; i++)
-				assertEquals(i + 1, ct[i]);
+				Assertions.assertEquals(i + 1, ct[i]);
 		}
 	}
 
@@ -123,7 +121,7 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 		final XJDFHelper h1 = vh.get(1);
 		final XJDFCombiner c = new XJDFCombiner(h0, h1);
 		final SetHelper mainSet = c.getMainSet(h1.getSet(ElementName.NODEINFO, 0));
-		assertEquals(h0.getSet(ElementName.NODEINFO, 0), mainSet);
+		Assertions.assertEquals(h0.getSet(ElementName.NODEINFO, 0), mainSet);
 	}
 
 	/**
@@ -151,9 +149,9 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 		final XJDFHelper h1 = vh.get(1);
 		final XJDFCombiner c = new XJDFCombiner(h0, h1);
 		final XJDFHelper hc = c.combine();
-		assertEquals(2, hc.getSet(ElementName.MEDIA, 0).getPartitions().size());
-		assertEquals(2, hc.getSet(ElementName.MEDIA, 1).getPartitions().size());
-		assertNull(hc.getSet(ElementName.MEDIA, 2));
+		Assertions.assertEquals(2, hc.getSet(ElementName.MEDIA, 0).getPartitions().size());
+		Assertions.assertEquals(2, hc.getSet(ElementName.MEDIA, 1).getPartitions().size());
+		Assertions.assertNull(hc.getSet(ElementName.MEDIA, 2));
 
 	}
 
@@ -175,7 +173,7 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 		final XJDFCombiner c = new XJDFCombiner(h0, h1);
 		c.mergeSet(h0.getSet(ElementName.NODEINFO, 0), h1.getSet(ElementName.NODEINFO, 0));
 
-		assertEquals(2, h0.getSet(ElementName.NODEINFO, 0).getPartitions().size());
+		Assertions.assertEquals(2, h0.getSet(ElementName.NODEINFO, 0).getPartitions().size());
 	}
 
 	/**
@@ -196,7 +194,7 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 		final XJDFCombiner c = new XJDFCombiner(h0, h1);
 		c.mergeSet(h0.getSet(ElementName.NODEINFO, 0), h1.getSet(ElementName.NODEINFO, 0));
 
-		assertEquals(1, h0.getSet(ElementName.NODEINFO, 0).getPartitions().size());
+		Assertions.assertEquals(1, h0.getSet(ElementName.NODEINFO, 0).getPartitions().size());
 	}
 
 	/**
@@ -227,7 +225,7 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 		final SetHelper sh = h0.getSet(ElementName.ASSEMBLY, 0);
 		c.mergeSet(sh, h1.getSet(ElementName.ASSEMBLY, 0));
 
-		assertEquals(4, sh.getRoot().getChildrenByClass(JDFAssemblySection.class, true, 0).size());
+		Assertions.assertEquals(4, sh.getRoot().getChildrenByClass(JDFAssemblySection.class, true, 0).size());
 
 	}
 
@@ -246,7 +244,7 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 
 		c.combine();
 
-		assertNull(h1.getSet(ElementName.CONVENTIONALPRINTINGPARAMS, 1));
+		Assertions.assertNull(h1.getSet(ElementName.CONVENTIONALPRINTINGPARAMS, 1));
 	}
 
 }

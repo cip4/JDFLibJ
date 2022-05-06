@@ -10,8 +10,8 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFMediaColorTest {
 	@Test
@@ -38,6 +38,6 @@ public class JDFMediaColorTest {
 		// from JDFSpanMediaColor to JDFSpanNamedColor,
 		// so no class cast exception should occur in getMediaColor()
 		JDFSpanNamedColor nc = mediaIntent.getMediaColor();
-		Assert.assertEquals(nc.getPreferred().getName(), "White");
+		Assertions.assertEquals(nc.getPreferred().getName(), "White");
 	}
 }

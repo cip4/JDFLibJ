@@ -39,12 +39,11 @@
  */
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * general utilities for containers and objects
@@ -70,7 +69,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		final Runtime rt = Runtime.getRuntime();
 		for (int i = 0; i < 1000; i++)
 			dumpDir.newFileFromStream("header", bis.getInputStream(), "a" + i);
-		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 666, 111);
+		Assertions.assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 666, 111);
 		bis.close();
 		for (int i = 0; i < 10; i++)
 		{
@@ -79,7 +78,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		}
 		final long mem2 = rt.totalMemory() - rt.freeMemory();
 		if (mem2 > mem)
-			assertEquals(mem, mem2, 14200000);
+			Assertions.assertEquals(mem, mem2, 14200000);
 	}
 
 	/**
@@ -92,7 +91,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		final DumpDir dumpDir = new DumpDir(theDir);
 		for (int i = 0; i < 1000; i++)
 			dumpDir.newFileFromStream("header", null, "a" + i);
-		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 666, 111);
+		Assertions.assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 666, 111);
 
 	}
 
@@ -105,7 +104,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir");
 		final DumpDir dumpDir = new DumpDir(theDir);
 		int i = dumpDir.increment();
-		assertEquals(++i, dumpDir.increment());
+		Assertions.assertEquals(++i, dumpDir.increment());
 
 	}
 
@@ -148,7 +147,7 @@ public class DumpDirTest extends JDFTestCaseBase
 			if (j + 10 == dumpDir.get())
 				break;
 		}
-		assertEquals(j + 11, dumpDir.increment());
+		Assertions.assertEquals(j + 11, dumpDir.increment());
 	}
 
 	/**
@@ -167,7 +166,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		final Runtime rt = Runtime.getRuntime();
 		for (int i = 0; i < 1000; i++)
 			dumpDir.newFileFromStream("header", bis.getInputStream(), "a" + (i % 2 == 0 ? "x." : "y.") + i);
-		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 666, 111);
+		Assertions.assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 666, 111);
 		bis.close();
 		for (int i = 0; i < 10; i++)
 		{
@@ -177,7 +176,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		final long mem2 = rt.totalMemory() - rt.freeMemory();
 		if (mem2 > mem)
 		{
-			assertEquals(mem, mem2, 44200000);
+			Assertions.assertEquals(mem, mem2, 44200000);
 		}
 	}
 }

@@ -36,10 +36,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -50,7 +46,8 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkCutBlockTest extends JDFTestCaseBase
 {
@@ -70,10 +67,10 @@ public class WalkCutBlockTest extends JDFTestCaseBase
 		walkCutBlock.walk(cbo, root);
 		final JDFCutBlock cb = (JDFCutBlock) root.getElement(ElementName.CUTBLOCK);
 		final JDFRectangle box = JDFRectangle.createRectangle(cb.getNonEmpty(AttributeName.BOX));
-		assertEquals(box.getSize(), size);
-		assertEquals(box.getLL(), new JDFXYPair());
-		assertNull(cb.getBlockTrf());
-		assertNull(cb.getBlockSize());
+		Assertions.assertEquals(box.getSize(), size);
+		Assertions.assertEquals(box.getLL(), new JDFXYPair());
+		Assertions.assertNull(cb.getBlockTrf());
+		Assertions.assertNull(cb.getBlockSize());
 	}
 
 	/**
@@ -95,10 +92,10 @@ public class WalkCutBlockTest extends JDFTestCaseBase
 		walkCutBlock.walk(cbo, root);
 		final JDFCutBlock cb = (JDFCutBlock) root.getElement(ElementName.CUTBLOCK);
 		final JDFRectangle box = JDFRectangle.createRectangle(cb.getNonEmpty(AttributeName.BOX));
-		assertEquals(box.getSize(), size);
-		assertEquals(box.getLL(), shift);
-		assertNull(cb.getBlockTrf());
-		assertNull(cb.getBlockSize());
+		Assertions.assertEquals(box.getSize(), size);
+		Assertions.assertEquals(box.getLL(), shift);
+		Assertions.assertNull(cb.getBlockTrf());
+		Assertions.assertNull(cb.getBlockSize());
 	}
 
 	/**
@@ -121,8 +118,8 @@ public class WalkCutBlockTest extends JDFTestCaseBase
 		final KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
 		walkCutBlock.walk(cbo, root);
 		final JDFCutBlock cb = (JDFCutBlock) root.getElement(ElementName.CUTBLOCK);
-		assertEquals("pid", cb.getAttribute(XJDFConstants.ExternalID));
-		assertEquals("desc name", cb.getDescriptiveName());
+		Assertions.assertEquals("pid", cb.getAttribute(XJDFConstants.ExternalID));
+		Assertions.assertEquals("desc name", cb.getDescriptiveName());
 	}
 
 	/**
@@ -134,7 +131,7 @@ public class WalkCutBlockTest extends JDFTestCaseBase
 		final JDFCutBlock cbo = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
 		final WalkCutBlock wa = new WalkCutBlock();
 		wa.setParent(new JDFToXJDF());
-		assertTrue(wa.matches(cbo));
+		Assertions.assertTrue(wa.matches(cbo));
 	}
 
 	/**
@@ -145,6 +142,6 @@ public class WalkCutBlockTest extends JDFTestCaseBase
 	{
 		final JDFCutBlock cbo = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
 		final WalkCutBlock wa = new WalkCutBlock();
-		assertTrue(wa.getElementNames().contains(cbo.getLocalName()));
+		Assertions.assertTrue(wa.getElementNames().contains(cbo.getLocalName()));
 	}
 }

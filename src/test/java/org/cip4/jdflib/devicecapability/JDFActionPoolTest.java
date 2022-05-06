@@ -74,18 +74,10 @@ package org.cip4.jdflib.devicecapability;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.resource.devicecapability.JDFAction;
-import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
-import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
-import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
-import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
-import org.cip4.jdflib.resource.devicecapability.JDFStringState;
+import org.cip4.jdflib.resource.devicecapability.*;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
-import org.cip4.jdflib.resource.devicecapability.JDFTest;
-import org.cip4.jdflib.resource.devicecapability.JDFand;
-import org.cip4.jdflib.resource.devicecapability.JDFnot;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 public class JDFActionPoolTest extends JDFTestCaseBase
 {
 	@Test
@@ -96,16 +88,16 @@ public class JDFActionPoolTest extends JDFTestCaseBase
 				ElementName.ACTIONPOOL);
 		JDFAction a = ap.appendActionTest(EnumTerm.and, true);
 		JDFTest test = a.getTest();
-		Assert.assertNotNull(test);
-		Assert.assertNotNull(test.getTerm());
-		Assert.assertTrue(test.getTerm() instanceof JDFand);
+		Assertions.assertNotNull(test);
+		Assertions.assertNotNull(test.getTerm());
+		Assertions.assertTrue(test.getTerm() instanceof JDFand);
 
 		a = ap.appendActionTest(EnumTerm.and, false);
 		test = a.getTest();
-		Assert.assertNotNull(test);
-		Assert.assertNotNull(test.getTerm());
-		Assert.assertTrue(test.getTerm() instanceof JDFnot);
-		Assert.assertTrue(((JDFnot) test.getTerm()).getTerm(null, 0) instanceof JDFand);
+		Assertions.assertNotNull(test);
+		Assertions.assertNotNull(test.getTerm());
+		Assertions.assertTrue(test.getTerm() instanceof JDFnot);
+		Assertions.assertTrue(((JDFnot) test.getTerm()).getTerm(null, 0) instanceof JDFand);
 	}
 
 	// //////////////////////////////////////////////////////////////
@@ -123,13 +115,13 @@ public class JDFActionPoolTest extends JDFTestCaseBase
 		JDFIntegerState ist = dcs.appendDevCap().appendIntegerState("ibar");
 
 		JDFAction ac = ap.appendExcludeTest(stst, ist);
-		Assert.assertNotNull(ac);
+		Assertions.assertNotNull(ac);
 		JDFTest t = ac.getTest();
-		Assert.assertNotNull(t);
+		Assertions.assertNotNull(t);
 		JDFand a = (JDFand) t.getTerm();
-		Assert.assertNotNull(a);
-		Assert.assertNotNull(a.getTerm(EnumTerm.StringEvaluation, 0));
-		Assert.assertNotNull(a.getTerm(EnumTerm.IntegerEvaluation, 0));
+		Assertions.assertNotNull(a);
+		Assertions.assertNotNull(a.getTerm(EnumTerm.StringEvaluation, 0));
+		Assertions.assertNotNull(a.getTerm(EnumTerm.IntegerEvaluation, 0));
 
 	}
 

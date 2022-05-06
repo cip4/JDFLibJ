@@ -36,14 +36,12 @@
  */
 package org.cip4.jdflib.resource.intent;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.span.JDFSpanOrientation;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFFoldingIntentTest
 {
@@ -57,7 +55,7 @@ public class JDFFoldingIntentTest
 		final JDFFoldingIntent fi = (JDFFoldingIntent) new JDFDoc(ElementName.FOLDINGINTENT).getRoot();
 		final JDFSpanOrientation o = fi.getCreateOrientation();
 		o.setActual(EnumOrientation.Flip180);
-		assertEquals(EnumOrientation.Flip180.getName(), o.guessActual());
+		Assertions.assertEquals(EnumOrientation.Flip180.getName(), o.guessActual());
 	}
 
 	/**
@@ -67,7 +65,7 @@ public class JDFFoldingIntentTest
 	public void testOrientationOptional()
 	{
 		final JDFFoldingIntent fi = (JDFFoldingIntent) new JDFDoc(ElementName.FOLDINGINTENT).getRoot();
-		assertFalse(fi.requiredElements().contains(ElementName.ORIENTATION));
+		Assertions.assertFalse(fi.requiredElements().contains(ElementName.ORIENTATION));
 	}
 
 }

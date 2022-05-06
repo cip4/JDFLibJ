@@ -43,16 +43,14 @@
  */
 package org.cip4.jdflib.util.hotfolder;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
 
 /**
@@ -65,7 +63,7 @@ public class ColdFolderTest extends JDFTestCaseBase
 
 	static AtomicInteger n = new AtomicInteger(1000);
 
-	@Before
+	@BeforeEach
 	@Override
 	public synchronized void setUp() throws Exception
 	{
@@ -85,10 +83,10 @@ public class ColdFolderTest extends JDFTestCaseBase
 		final ColdFolder cf = new ColdFolder(cfd, null, listener);
 		final File file = new File(cfd, "f1.txt");
 		file.createNewFile();
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 		ThreadUtil.sleep(4200);
-		assertTrue(file.exists());
-		assertEquals(1, listener.getN());
+		Assertions.assertTrue(file.exists());
+		Assertions.assertEquals(1, listener.getN());
 		cf.stop();
 	}
 
@@ -105,11 +103,11 @@ public class ColdFolderTest extends JDFTestCaseBase
 		for (int i = 0; i < 3; i++)
 		{
 			final File file = new File(cfd, "f1.txt");
-			assertTrue("File could not be created", file.createNewFile());
-			assertTrue(file.exists());
+			Assertions.assertTrue(file.createNewFile(), "File could not be created");
+			Assertions.assertTrue(file.exists());
 			Mockito.verify(listener, Mockito.timeout(10_000)).hotFile(file);
-			assertTrue(file.exists());
-			assertTrue("File could not be deleted", file.delete());
+			Assertions.assertTrue(file.exists());
+			Assertions.assertTrue(file.delete(), "File could not be deleted");
 		}
 		cf.stop();
 	}
@@ -125,8 +123,8 @@ public class ColdFolderTest extends JDFTestCaseBase
 		final ColdFolder cf = new ColdFolder(cfd, null, listener);
 		final File file = new File(cfd, "f1.txt");
 		file.createNewFile();
-		assertTrue(file.exists());
-		assertEquals(1, cf.getHotFiles().length);
+		Assertions.assertTrue(file.exists());
+		Assertions.assertEquals(1, cf.getHotFiles().length);
 		cf.stop();
 	}
 
@@ -141,8 +139,8 @@ public class ColdFolderTest extends JDFTestCaseBase
 		final ColdFolder cf = new ColdFolder(cfd, null, listener);
 		final File file = new File(cfd, "f1.txt");
 		file.createNewFile();
-		assertTrue(file.exists());
-		assertTrue(cf.processSingleFile(new FileTime(file, true)));
+		Assertions.assertTrue(file.exists());
+		Assertions.assertTrue(cf.processSingleFile(new FileTime(file, true)));
 		cf.stop();
 	}
 

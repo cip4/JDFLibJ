@@ -68,9 +68,6 @@
  */
 package org.cip4.jdflib.node;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.ElementName;
@@ -84,7 +81,8 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -103,12 +101,12 @@ public class AuditToJMFTest extends JDFTestCaseBase
 	{
 		final AuditToJMF aj = new AuditToJMF(node, null, true);
 		final VElement vJMF = aj.getLocalJMFs(EnumAuditType.PhaseTime);
-		assertEquals(vJMF.size(), 3);
+		Assertions.assertEquals(vJMF.size(), 3);
 		for (int i = 0; i < vJMF.size(); i++)
 		{
 			final JDFJMF jmf = (JDFJMF) vJMF.get(i);
 			jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "auditToJMF.jmf", 2, false);
-			assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+			Assertions.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 		}
 	}
 

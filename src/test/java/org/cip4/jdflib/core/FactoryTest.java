@@ -78,8 +78,8 @@
 package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * 
@@ -99,7 +99,7 @@ public class FactoryTest extends JDFTestCaseBase
 		final JDFParser p = new JDFParser();
 		final JDFDoc jdfDoc = p.parseFile(sm_dirTestData + strFile);
 
-		Assert.assertTrue("", jdfDoc != null);
+		Assertions.assertTrue(jdfDoc != null, "");
 	}
 
 	/**
@@ -115,14 +115,14 @@ public class FactoryTest extends JDFTestCaseBase
 		final KElement kElem = root.getChildByTagName("Created", "", 0, null, false, true);
 
 		final boolean before = kElem.hasAttribute("Author", "", false);
-		Assert.assertTrue("The Attribute 'Author' does not exist", before);
+		Assertions.assertTrue(before, "The Attribute 'Author' does not exist");
 
 		if (before)
 		{
 			kElem.removeAttribute("Author", "");
 			final boolean after = kElem.hasAttribute("Author", "", false);
 
-			Assert.assertFalse("The Attribute 'Author' was not removed", after);
+			Assertions.assertFalse(after, "The Attribute 'Author' was not removed");
 		}
 	}
 }

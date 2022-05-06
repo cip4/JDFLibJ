@@ -39,11 +39,6 @@
 
 package org.cip4.jdflib.util.mime;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.Arrays;
@@ -60,7 +55,8 @@ import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.mime.MimeWriter.FixSemiColonStream;
 import org.cip4.jdflib.util.mime.MimeWriter.eMimeSubType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -83,7 +79,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 		final byte b[] = new byte[100];
 		is.read(b);
 		final String s = new String(b);
-		assertTrue(s.indexOf("related;") < 0);
+		Assertions.assertTrue(s.indexOf("related;") < 0);
 	}
 
 	/**
@@ -108,8 +104,8 @@ public class MimeWriterTest extends JDFTestCaseBase
 		mw.writeToStream(ios);
 		final byte[] b = ios.getBuf();
 		final String string = new String(b);
-		assertTrue(string.startsWith("MIME-Version"));
-		assertEquals(-1, string.indexOf("Message-ID"));
+		Assertions.assertTrue(string.startsWith("MIME-Version"));
+		Assertions.assertEquals(-1, string.indexOf("Message-ID"));
 	}
 
 	/**
@@ -127,8 +123,8 @@ public class MimeWriterTest extends JDFTestCaseBase
 		final byte b[] = new byte[100];
 		is.read(b);
 		final String s = new String(b);
-		assertTrue(s.indexOf("related;") < 0);
-		assertTrue(s.indexOf("\nbbb") > 0);
+		Assertions.assertTrue(s.indexOf("related;") < 0);
+		Assertions.assertTrue(s.indexOf("\nbbb") > 0);
 	}
 
 	/**
@@ -150,8 +146,8 @@ public class MimeWriterTest extends JDFTestCaseBase
 		final MimeWriter mw = new MimeWriter();
 		mw.buildMimePackage(docJMF, docJDF, false);
 		final File f = new File(sm_dirTestDataTemp + "mimestream.mjm");
-		assertNotNull(FileUtil.writeFile(mw, f));
-		assertTrue(f.exists());
+		Assertions.assertNotNull(FileUtil.writeFile(mw, f));
+		Assertions.assertTrue(f.exists());
 	}
 
 	/**
@@ -162,11 +158,11 @@ public class MimeWriterTest extends JDFTestCaseBase
 	{
 		final MimeWriter mw = new MimeWriter(eMimeSubType.formdata);
 		final BodyPartHelper bph = new BodyPartHelper();
-		assertTrue(bph.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
+		Assertions.assertTrue(bph.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
 		mw.addBodyPart(bph);
 		final File f = new File(sm_dirTestDataTemp + "mimetext.mim");
-		assertNotNull(FileUtil.writeFile(mw, f));
-		assertTrue(f.exists());
+		Assertions.assertNotNull(FileUtil.writeFile(mw, f));
+		Assertions.assertTrue(f.exists());
 	}
 
 	/**
@@ -178,14 +174,14 @@ public class MimeWriterTest extends JDFTestCaseBase
 		final MimeWriter mw = new MimeWriter(eMimeSubType.formdata);
 		final BodyPartHelper bph = new BodyPartHelper();
 		final byte[] bytes = "{ \"a\":\"€\"}".getBytes();
-		assertTrue(bph.setContent(new ByteArrayInputStream(bytes), UrlUtil.VND_XJDF_J));
+		Assertions.assertTrue(bph.setContent(new ByteArrayInputStream(bytes), UrlUtil.VND_XJDF_J));
 		mw.addBodyPart(bph);
 		final File f = new File(sm_dirTestDataTemp + "mimejson.mim");
-		assertNotNull(FileUtil.writeFile(mw, f));
-		assertTrue(f.exists());
+		Assertions.assertNotNull(FileUtil.writeFile(mw, f));
+		Assertions.assertTrue(f.exists());
 		final MimeReader mr = new MimeReader(sm_dirTestDataTemp + "mimejson.mim");
 		final BodyPartHelper bph2 = mr.getBodyPartHelper(0);
-		assertArrayEquals(bytes, Arrays.copyOf(new ByteArrayIOStream(bph2.getInputStream()).getBuf(), bytes.length));
+		Assertions.assertArrayEquals(bytes, Arrays.copyOf(new ByteArrayIOStream(bph2.getInputStream()).getBuf(), bytes.length));
 	}
 
 	/**
@@ -197,24 +193,24 @@ public class MimeWriterTest extends JDFTestCaseBase
 		final MimeWriter mw = new MimeWriter(eMimeSubType.formdata);
 		final BodyPartHelper bphM = new BodyPartHelper();
 		final byte[] bytesM = "{ \"XJMF\":{\"JobID\":\"j1\"}}".getBytes();
-		assertTrue(bphM.setContent(new ByteArrayInputStream(bytesM), UrlUtil.VND_XJMF_J));
+		Assertions.assertTrue(bphM.setContent(new ByteArrayInputStream(bytesM), UrlUtil.VND_XJMF_J));
 		bphM.setFileName("submit.xjmf");
 		mw.addBodyPart(bphM);
 		final byte[] bytes = "{ \"XJDF\":{\"JobID\":\"j1\"}}".getBytes();
 		final BodyPartHelper bph = new BodyPartHelper();
-		assertTrue(bph.setContent(new ByteArrayInputStream(bytes), UrlUtil.VND_XJDF_J));
+		Assertions.assertTrue(bph.setContent(new ByteArrayInputStream(bytes), UrlUtil.VND_XJDF_J));
 		bph.setFileName("submit.xjdf");
 		mw.addBodyPart(bph);
 		final File f = new File(sm_dirTestDataTemp + "mimexjmf.mim");
-		assertNotNull(FileUtil.writeFile(mw, f));
-		assertTrue(f.exists());
+		Assertions.assertNotNull(FileUtil.writeFile(mw, f));
+		Assertions.assertTrue(f.exists());
 		final MimeReader mr = new MimeReader(sm_dirTestDataTemp + "mimexjmf.mim");
 		final BodyPartHelper bphM2 = mr.getBodyPartHelper(0);
-		assertEquals("submit.xjmf", bphM2.getFileName());
-		assertArrayEquals(bytesM, Arrays.copyOf(new ByteArrayIOStream(bphM2.getInputStream()).getBuf(), bytes.length));
+		Assertions.assertEquals("submit.xjmf", bphM2.getFileName());
+		Assertions.assertArrayEquals(bytesM, Arrays.copyOf(new ByteArrayIOStream(bphM2.getInputStream()).getBuf(), bytes.length));
 		final BodyPartHelper bph2 = mr.getBodyPartHelper(1);
-		assertArrayEquals(bytes, Arrays.copyOf(new ByteArrayIOStream(bph2.getInputStream()).getBuf(), bytes.length));
-		assertEquals("submit.xjdf", bph2.getFileName());
+		Assertions.assertArrayEquals(bytes, Arrays.copyOf(new ByteArrayIOStream(bph2.getInputStream()).getBuf(), bytes.length));
+		Assertions.assertEquals("submit.xjdf", bph2.getFileName());
 	}
 
 	/**
@@ -237,6 +233,6 @@ public class MimeWriterTest extends JDFTestCaseBase
 		mw.buildMimePackage(docJMF, docJDF, false);
 		final File f = new File(sm_dirTestDataTemp + "mimeurl.mjm");
 		mw.writeToFile(f.getAbsolutePath());
-		assertTrue(f.exists());
+		Assertions.assertTrue(f.exists());
 	}
 }

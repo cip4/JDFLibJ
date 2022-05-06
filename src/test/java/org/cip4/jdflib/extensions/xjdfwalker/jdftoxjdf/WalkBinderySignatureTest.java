@@ -68,10 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBindingEdge;
 import org.cip4.jdflib.core.AttributeName;
@@ -79,7 +75,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkBinderySignatureTest extends JDFTestCaseBase
 {
@@ -97,8 +94,8 @@ public class WalkBinderySignatureTest extends JDFTestCaseBase
 		KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
 		wa.walk(bs, root);
 		JDFBinderySignature bs2 = (JDFBinderySignature) root.getElement(ElementName.BINDERYSIGNATURE);
-		assertNotNull(bs2);
-		assertNull(bs.getFold(0));
+		Assertions.assertNotNull(bs2);
+		Assertions.assertNull(bs.getFold(0));
 	}
 
 	/**
@@ -114,8 +111,8 @@ public class WalkBinderySignatureTest extends JDFTestCaseBase
 		KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
 		wa.walk(bs, root);
 		JDFBinderySignature bs2 = (JDFBinderySignature) root.getElement(ElementName.BINDERYSIGNATURE);
-		assertNotNull(bs2);
-		assertNull(bs2.getNonEmpty(AttributeName.BINDINGEDGE));
+		Assertions.assertNotNull(bs2);
+		Assertions.assertNull(bs2.getNonEmpty(AttributeName.BINDINGEDGE));
 	}
 
 	/**
@@ -128,7 +125,7 @@ public class WalkBinderySignatureTest extends JDFTestCaseBase
 		bs.setBindingEdge(EnumBindingEdge.Bottom);
 		WalkBinderySignature wa = new WalkBinderySignature();
 		wa.setParent(new JDFToXJDF());
-		assertTrue(wa.matches(bs));
+		Assertions.assertTrue(wa.matches(bs));
 	}
 
 	/**
@@ -140,7 +137,7 @@ public class WalkBinderySignatureTest extends JDFTestCaseBase
 		JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.setBindingEdge(EnumBindingEdge.Bottom);
 		WalkBinderySignature wa = new WalkBinderySignature();
-		assertTrue(wa.getElementNames().contains(bs.getLocalName()));
+		Assertions.assertTrue(wa.getElementNames().contains(bs.getLocalName()));
 	}
 
 }

@@ -72,7 +72,7 @@ package org.cip4.jdflib.util.net;
 import java.net.URISyntaxException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *

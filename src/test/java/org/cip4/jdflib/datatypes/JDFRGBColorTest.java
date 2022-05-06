@@ -45,11 +45,10 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.CPUTimer;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -66,9 +65,9 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 	public void testgetHTMLcolor()
 	{
 		JDFRGBColor c = new JDFRGBColor(0, 0, 0);
-		assertEquals(c.getHTMLColor(), "#000000");
+		Assertions.assertEquals(c.getHTMLColor(), "#000000");
 		c = new JDFRGBColor(1, 1., 1);
-		assertEquals(c.getHTMLColor(), "#ffffff");
+		Assertions.assertEquals(c.getHTMLColor(), "#ffffff");
 	}
 
 	/**
@@ -78,9 +77,9 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 	public void testFromHTMLcolor()
 	{
 		final JDFRGBColor c = JDFRGBColor.createRGBColor("#f08123");
-		assertEquals(0xf0, c.getR255());
-		assertEquals(0x81, c.getG255());
-		assertEquals(0x23, c.getB255());
+		Assertions.assertEquals(0xf0, c.getR255());
+		Assertions.assertEquals(0x81, c.getG255());
+		Assertions.assertEquals(0x23, c.getB255());
 	}
 
 	/**
@@ -90,7 +89,7 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 	public void testgetHTMLcolorInt()
 	{
 		final JDFRGBColor c = new JDFRGBColor(255, 255, 255);
-		assertEquals(c.getHTMLColor(), "#ffffff");
+		Assertions.assertEquals(c.getHTMLColor(), "#ffffff");
 	}
 
 	/**
@@ -100,9 +99,9 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 	public void testgetRGB255()
 	{
 		final JDFRGBColor c = new JDFRGBColor(0, 0.5, 1);
-		assertEquals(0, c.getR255());
-		assertEquals(127, c.getG255());
-		assertEquals(255, c.getB255());
+		Assertions.assertEquals(0, c.getR255());
+		Assertions.assertEquals(127, c.getG255());
+		Assertions.assertEquals(255, c.getB255());
 	}
 
 	/**
@@ -118,9 +117,9 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 			c.setR255(i);
 			c.setG255(i);
 			c.setB255(i);
-			assertEquals(i, c.getR255());
-			assertEquals(i, c.getG255());
-			assertEquals(i, c.getB255());
+			Assertions.assertEquals(i, c.getR255());
+			Assertions.assertEquals(i, c.getG255());
+			Assertions.assertEquals(i, c.getB255());
 		}
 
 	}
@@ -132,11 +131,11 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 	public void testgetCMYKcolor()
 	{
 		JDFRGBColor co = new JDFRGBColor(0, 0, 0);
-		assertEquals(co.getCMYK(), new JDFCMYKColor(0, 0, 0, 1));
+		Assertions.assertEquals(co.getCMYK(), new JDFCMYKColor(0, 0, 0, 1));
 		co = new JDFRGBColor(1., 1, 1);
-		assertEquals(co.getCMYK(), new JDFCMYKColor(0, 0, 0, 0));
+		Assertions.assertEquals(co.getCMYK(), new JDFCMYKColor(0, 0, 0, 0));
 		co = new JDFRGBColor(0, 1., 1);
-		assertEquals(co.getCMYK(), new JDFCMYKColor(1, 0, 0, 0));
+		Assertions.assertEquals(co.getCMYK(), new JDFCMYKColor(1, 0, 0, 0));
 		for (double r = 0; r <= 1; r += 0.1)
 		{
 			for (double g = 0; g <= 1; g += 0.1)
@@ -144,7 +143,7 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 				for (double b = 0; b <= 1; b += 0.1)
 				{
 					co = new JDFRGBColor(r, g, b);
-					assertEquals(co.getCMYK().getRGB(), co);
+					Assertions.assertEquals(co.getCMYK().getRGB(), co);
 				}
 			}
 		}
@@ -166,9 +165,9 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 				{
 					final double[] cmykArray = JDFRGBColor.getCMYKArray(r, g, b);
 					final double[] rgbArray = JDFCMYKColor.getRGBArray(cmykArray[0], cmykArray[1], cmykArray[2], cmykArray[3]);
-					assertEquals(rgbArray[0], r / 255., 0.0000001);
-					assertEquals(rgbArray[1], g / 255., 0.0000001);
-					assertEquals(rgbArray[2], b / 255., 0.0000001);
+					Assertions.assertEquals(rgbArray[0], r / 255., 0.0000001);
+					Assertions.assertEquals(rgbArray[1], g / 255., 0.0000001);
+					Assertions.assertEquals(rgbArray[2], b / 255., 0.0000001);
 				}
 			}
 			ct2.stop();
@@ -191,7 +190,7 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 				for (double b = 0; b <= 1; b += 0.01)
 				{
 					final JDFRGBColor co = new JDFRGBColor(r, g, b);
-					assertEquals(co.getCMYK().getRGB(), co);
+					Assertions.assertEquals(co.getCMYK().getRGB(), co);
 				}
 			}
 			ct.stop();
@@ -207,9 +206,9 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 				{
 					final double[] cmykArray = JDFRGBColor.getCMYKArray(r, g, b);
 					final double[] rgbArray = JDFCMYKColor.getRGBArray(cmykArray[0], cmykArray[1], cmykArray[2], cmykArray[3]);
-					assertEquals(rgbArray[0], r, 0.0000001);
-					assertEquals(rgbArray[1], g, 0.0000001);
-					assertEquals(rgbArray[2], b, 0.0000001);
+					Assertions.assertEquals(rgbArray[0], r, 0.0000001);
+					Assertions.assertEquals(rgbArray[1], g, 0.0000001);
+					Assertions.assertEquals(rgbArray[2], b, 0.0000001);
 				}
 			}
 			ct2.stop();

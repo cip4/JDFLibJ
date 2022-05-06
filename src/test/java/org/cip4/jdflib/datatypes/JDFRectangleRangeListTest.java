@@ -10,8 +10,8 @@ package org.cip4.jdflib.datatypes;
 
 import java.util.zip.DataFormatException;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFRectangleRangeListTest {
 
@@ -31,9 +31,9 @@ public class JDFRectangleRangeListTest {
 			System.out.println(dfe.toString());
 		}
 
-		Assert.assertEquals("0 0 2 2 ~ 0 0 4 4 0 0 4 4 ~ 0 0 6 6", rangelist
+		Assertions.assertEquals("0 0 2 2 ~ 0 0 4 4 0 0 4 4 ~ 0 0 6 6", rangelist
 				.toString());
-		Assert.assertTrue("Bad append" + rangelist.toString(), rangelist.size() == 2);
+		Assertions.assertTrue(rangelist.size() == 2, "Bad append" + rangelist.toString());
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class JDFRectangleRangeListTest {
 		}
 
 		// rangeList is not empty
-		Assert.assertTrue("Bad setString: " + rangelist.size(), rangelist.size() == 2);
+		Assertions.assertTrue(rangelist.size() == 2, "Bad setString: " + rangelist.size());
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class JDFRectangleRangeListTest {
 		}
 
 		if (rangelist != null)
-			Assert.assertTrue("Bad isList", rangelist.isList());
+			Assertions.assertTrue(rangelist.isList(), "Bad isList");
 	}
 
 	@Test
@@ -90,7 +90,7 @@ public class JDFRectangleRangeListTest {
 		}
 
 		if (rangelist != null)
-			Assert.assertTrue("Bad isUnique", rangelist.isUnique());
+			Assertions.assertTrue(rangelist.isUnique(), "Bad isUnique");
 	}
 
 	@Test
@@ -111,7 +111,7 @@ public class JDFRectangleRangeListTest {
 		}
 
 		if (rangelist != null)
-			Assert.assertFalse("Bad isOrdered", rangelist.isOrdered());
+			Assertions.assertFalse(rangelist.isOrdered(), "Bad isOrdered");
 	}
 
 	@Test
@@ -130,7 +130,7 @@ public class JDFRectangleRangeListTest {
 		}
 
 		if (rangelist != null)
-			Assert.assertFalse("Bad isOrdered", rangelist.isOrdered());
+			Assertions.assertFalse(rangelist.isOrdered(), "Bad isOrdered");
 	}
 
 	@Test
@@ -149,7 +149,7 @@ public class JDFRectangleRangeListTest {
 		}
 
 		if (rangelist != null)
-			Assert.assertFalse("Bad isUniqueOrdered", rangelist.isUniqueOrdered());
+			Assertions.assertFalse(rangelist.isUniqueOrdered(), "Bad isUniqueOrdered");
 	}
 
 	@Test
@@ -170,7 +170,7 @@ public class JDFRectangleRangeListTest {
 		}
 
 		if (rangelist != null)
-			Assert.assertTrue("Bad isUniqueOrdered", rangelist.isUniqueOrdered());
+			Assertions.assertTrue(rangelist.isUniqueOrdered(), "Bad isUniqueOrdered");
 	}
 
 }

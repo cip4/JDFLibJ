@@ -36,19 +36,9 @@
  */
 package org.cip4.jdflib.util.xml;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCustomerInfo;
-import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.*;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.node.JDFNode;
@@ -56,7 +46,8 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.zip.ZipReader;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author rainer prosi
@@ -77,7 +68,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		template.appendElement("html", "http://www.w3.org/1999/xhtml");
 		final KElement a = new XMLDoc("a", null).getRoot();
 		final KElement t = new XSLTransformHelper(a, xsl).getTransformElement().getRoot();
-		assertNotNull(t);
+		Assertions.assertNotNull(t);
 	}
 
 	/**
@@ -94,7 +85,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		template.appendElement("html", "http://www.w3.org/1999/xhtml");
 		final KElement a = new XMLDoc("a", null).getRoot();
 		final KElement t = new XSLTransformHelper(a, xsl).getTransformElement().getRoot();
-		assertNotNull(t);
+		Assertions.assertNotNull(t);
 	}
 
 	/**
@@ -113,7 +104,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		xmlDoc.setZipReader(zip);
 		final KElement a = xmlDoc.getRoot();
 		final XMLDoc t = new XSLTransformHelper(a, xsl).getTransformElement();
-		assertEquals(zip, t.getZipReader());
+		Assertions.assertEquals(zip, t.getZipReader());
 	}
 
 	/**
@@ -130,7 +121,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		final KElement a = new XMLDoc("a", null).getRoot();
 		final ByteArrayIOStream s = new ByteArrayIOStream();
 		new XSLTransformHelper(a, xsl).writeStream(s);
-		assertTrue(new String(s.getInputStream().getBuf()).indexOf("<html") >= 0);
+		Assertions.assertTrue(new String(s.getInputStream().getBuf()).indexOf("<html") >= 0);
 	}
 
 	/**
@@ -161,10 +152,10 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		final KElement a = new XMLDoc("a", null).getRoot();
 		final ByteArrayIOStream s = new ByteArrayIOStream();
 		new XSLTransformHelper(a, xsl).writeStream(s);
-		assertTrue(new String(s.getInputStream().getBuf()).indexOf(">30<") >= 0);
-		assertTrue(new String(s.getInputStream().getBuf()).indexOf(">42<") >= 0);
-		assertTrue(new String(s.getInputStream().getBuf()).indexOf(">44<") >= 0);
-		assertTrue(new String(s.getInputStream().getBuf()).indexOf(">50.8<") >= 0);
+		Assertions.assertTrue(new String(s.getInputStream().getBuf()).indexOf(">30<") >= 0);
+		Assertions.assertTrue(new String(s.getInputStream().getBuf()).indexOf(">42<") >= 0);
+		Assertions.assertTrue(new String(s.getInputStream().getBuf()).indexOf(">44<") >= 0);
+		Assertions.assertTrue(new String(s.getInputStream().getBuf()).indexOf(">50.8<") >= 0);
 	}
 
 	/**
@@ -193,7 +184,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		final String st = "<xsl:template xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" name=\"mmList\"><xsl:param name=\"pts\" /><xsl:if test=\"string-length($pts)\"><xsl:choose><xsl:when test=\"substring-before($pts, ' ')\"><xsl:value-of select=\"substring-before($pts, ' ') * 4\" />mm<xsl:text> </xsl:text><xsl:call-template name=\"mmList\"><xsl:with-param name=\"pts\" select=\"substring-after($pts, ' ')\" /></xsl:call-template></xsl:when><xsl:otherwise><xsl:value-of select=\"$pts\" />mm</xsl:otherwise></xsl:choose></xsl:if></xsl:template>";
 		style.copyElement(new XMLParser().parseString(st).getRoot(), null);
 		new XSLTransformHelper(a, xsl).writeStream(s);
-		assertTrue(new String(s.getInputStream().getBuf()).indexOf("mm") >= 0);
+		Assertions.assertTrue(new String(s.getInputStream().getBuf()).indexOf("mm") >= 0);
 	}
 
 	/**
@@ -209,7 +200,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		final JDFContact c = ci.appendContact(EnumContactType.Customer);
 		final XMLDoc d = new XSLTransformHelper(n, xsl).getTransformElement();
 		final JDFContact c2 = (new JDFDoc(d).getJDFRoot().getElementByClass(JDFContact.class, 0, true));
-		assertTrue(c2.getContactTypes().contains("Approver"));
+		Assertions.assertTrue(c2.getContactTypes().contains("Approver"));
 	}
 
 	/**
@@ -222,7 +213,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		final JDFJMF jmf = new JMFBuilder().buildMilestone("dummy", "j");
 		final XMLDoc xsl = XMLDoc.parseFile(sm_dirTestData + "xsl/milestonedummy.xsl");
 		final XMLDoc d = new XSLTransformHelper(jmf, xsl).getTransformElement();
-		assertNull(d.getRoot().getElement(ElementName.SIGNAL));
+		Assertions.assertNull(d.getRoot().getElement(ElementName.SIGNAL));
 	}
 
 	/**
@@ -238,7 +229,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		n.addResource(ElementName.LAYOUT, EnumUsage.Output);
 		final XMLDoc d = new XSLTransformHelper(n, xsl).getTransformElement();
 		final JDFNode jdfRoot = new JDFDoc(d).getJDFRoot();
-		assertNull(jdfRoot.getResource(ElementName.LAYOUT, EnumUsage.Output, 0));
-		assertNotNull(jdfRoot.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
+		Assertions.assertNull(jdfRoot.getResource(ElementName.LAYOUT, EnumUsage.Output, 0));
+		Assertions.assertNotNull(jdfRoot.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
 	}
 }

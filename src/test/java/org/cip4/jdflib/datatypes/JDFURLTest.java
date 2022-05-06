@@ -19,8 +19,8 @@ import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for JDFURL.
@@ -48,7 +48,7 @@ public class JDFURLTest {
 		String newUrl = ((JDFFileSpec) dNew.getJDFRoot().getResourcePool()
 				.getElement(ElementName.FILESPEC, null, 0)).getURL();
 
-		Assert.assertEquals("url=url", url, newUrl);
+		Assertions.assertEquals(url, newUrl, "url=url");
 
 	}
 

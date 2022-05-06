@@ -73,7 +73,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFRegisterMark;
 import org.cip4.jdflib.resource.process.JDFStripMark;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

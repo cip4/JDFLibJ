@@ -36,13 +36,10 @@
  */
 package org.cip4.jdflib.util.thread;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class MultiJobTaskQueueTest extends JDFTestCaseBase
 {
@@ -88,7 +85,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	public void testSize()
 	{
 		final MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij0", 3);
-		assertEquals(0, q.size());
+		Assertions.assertEquals(0, q.size());
 	}
 
 	/**
@@ -98,7 +95,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	public void testExecuting()
 	{
 		final MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij0", 3);
-		assertEquals(0, q.executing());
+		Assertions.assertEquals(0, q.executing());
 	}
 
 	/**
@@ -108,7 +105,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	public void testMaxParrallel()
 	{
 		final MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij0", 3);
-		assertEquals(3, q.getMaxParallel());
+		Assertions.assertEquals(3, q.getMaxParallel());
 	}
 
 	/**
@@ -119,12 +116,12 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	public void testMulti()
 	{
 		final MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij1", 7);
-		assertEquals(0, q.getAvQueue());
-		assertEquals(0, q.getAvRun());
+		Assertions.assertEquals(0, q.getAvQueue());
+		Assertions.assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 10; i++)
 			q.queue(new WaitRunner(i, 100), "" + (i % 3));
 
-		assertEquals(q.getAvQueue(), 0);
+		Assertions.assertEquals(q.getAvQueue(), 0);
 		for (int i = 0; i < 342; i++)
 		{
 			ThreadUtil.sleep(42);
@@ -133,7 +130,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 				break;
 			}
 		}
-		assertEquals(q.size(), 6, 2);
+		Assertions.assertEquals(q.size(), 6, 2);
 		for (int i = 0; i < 342; i++)
 		{
 			ThreadUtil.sleep(14);
@@ -142,10 +139,10 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 				break;
 			}
 		}
-		assertTrue(q.getAvQueue() > 0);
-		assertTrue(q.getAvRun() > 0);
-		assertEquals(q.size(), 0, 1);
-		assertTrue(q.queue(new WaitRunner(4)));
+		Assertions.assertTrue(q.getAvQueue() > 0);
+		Assertions.assertTrue(q.getAvRun() > 0);
+		Assertions.assertEquals(q.size(), 0, 1);
+		Assertions.assertTrue(q.queue(new WaitRunner(4)));
 		for (int i = 0; i < 342; i++)
 		{
 			ThreadUtil.sleep(4);
@@ -154,8 +151,8 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 				break;
 			}
 		}
-		assertEquals(q.size(), 0, 1);
-		assertTrue(q.getAvQueue() > 0);
+		Assertions.assertEquals(q.size(), 0, 1);
+		Assertions.assertTrue(q.getAvQueue() > 0);
 	}
 
 	/**
@@ -170,7 +167,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 			q.queue(new WaitRunner(i, 100), "" + (i % 4));
 
-		assertEquals(2, q.waiting(), 2);
+		Assertions.assertEquals(2, q.waiting(), 2);
 		for (int i = 0; i < 342; i++)
 		{
 			ThreadUtil.sleep(14);
@@ -179,16 +176,16 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 				break;
 			}
 		}
-		assertTrue(q.getAvQueue() > 0);
-		assertTrue(q.getAvRun() > 0);
-		assertEquals(q.size(), 0, 1);
+		Assertions.assertTrue(q.getAvQueue() > 0);
+		Assertions.assertTrue(q.getAvRun() > 0);
+		Assertions.assertEquals(q.size(), 0, 1);
 
 		for (int i = 0; i < 4; i++)
-			assertTrue(q.queue(new WaitRunner(i, 100), "" + (i % 4)));
+			Assertions.assertTrue(q.queue(new WaitRunner(i, 100), "" + (i % 4)));
 		for (int i = 0; i < 44; i++)
 		{
 			q.queue(new WaitRunner(i, 100), "" + (i % 4));
-			assertEquals(2, q.waiting(), 2);
+			Assertions.assertEquals(2, q.waiting(), 2);
 		}
 	}
 
@@ -201,7 +198,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	{
 		final MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multiju", 7);
 		q.setUnique(true);
-		assertNotNull(q.toString());
+		Assertions.assertNotNull(q.toString());
 	}
 
 	/**
@@ -213,8 +210,8 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	{
 		nRun = 0;
 		final MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij2", 7);
-		assertEquals(0, q.getAvQueue());
-		assertEquals(0, q.getAvRun());
+		Assertions.assertEquals(0, q.getAvQueue());
+		Assertions.assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 44; i++)
 		{
 			q.queue(new WaitRunner(i, 10), "" + ((int) (10.0 * Math.random())));
@@ -230,6 +227,6 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 			}
 		}
 		ThreadUtil.sleep(40);
-		assertEquals(nRun, 44, 5);
+		Assertions.assertEquals(nRun, 44, 5);
 	}
 }

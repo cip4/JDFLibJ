@@ -68,16 +68,14 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkCommentTest extends JDFTestCaseBase
 {
@@ -92,7 +90,7 @@ public class WalkCommentTest extends JDFTestCaseBase
 		JDFComment c = n.appendComment();
 		c.setID("i1");
 		KElement xjdf = new JDFToXJDF().convert(n);
-		assertNull(xjdf.getXPathAttribute("Comment/@ID", null));
+		Assertions.assertNull(xjdf.getXPathAttribute("Comment/@ID", null));
 	}
 
 	/**
@@ -105,7 +103,7 @@ public class WalkCommentTest extends JDFTestCaseBase
 		JDFComment c = n.appendComment();
 		c.setText("abc");
 		KElement xjdf = new JDFToXJDF().convert(n);
-		assertEquals(xjdf.getXPathAttribute("Comment", null), "abc");
+		Assertions.assertEquals(xjdf.getXPathAttribute("Comment", null), "abc");
 	}
 
 }

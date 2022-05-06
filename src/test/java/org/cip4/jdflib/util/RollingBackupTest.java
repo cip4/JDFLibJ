@@ -39,16 +39,11 @@
 
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -69,10 +64,10 @@ public class RollingBackupTest extends JDFTestCaseBase
 	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
 		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 4);
-		assertTrue(rbf.createNewFile());
+		Assertions.assertTrue(rbf.createNewFile());
 
 		final File rbf2 = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
-		assertTrue(rbf2.exists());
+		Assertions.assertTrue(rbf2.exists());
 	}
 
 	/**
@@ -87,16 +82,16 @@ public class RollingBackupTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			rbf.getNewFile();
-			assertTrue(rbf.createNewFile());
-			assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
+			Assertions.assertTrue(rbf.createNewFile());
+			Assertions.assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
 		}
 		final File backRoot2 = FileUtil.getFileInDirectory(dir, new File("Roll2.xml"));
 		final RollingBackupFile rbf2 = new RollingBackupFile(backRoot2.getPath(), 4);
 		for (int i = 0; i < 10; i++)
 		{
 			rbf2.getNewFile();
-			assertTrue(rbf2.createNewFile());
-			assertEquals(dir.listFiles().length, Math.min(5 + i + 1, 5 + 5));
+			Assertions.assertTrue(rbf2.createNewFile());
+			Assertions.assertEquals(dir.listFiles().length, Math.min(5 + i + 1, 5 + 5));
 		}
 	}
 
@@ -112,8 +107,8 @@ public class RollingBackupTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			final File ff = rbf.getNewFile("txt" + (i % 3));
-			assertTrue("" + i, ff.createNewFile());
-			assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
+			Assertions.assertTrue(ff.createNewFile(), "" + i);
+			Assertions.assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
 		}
 	}
 
@@ -133,7 +128,7 @@ public class RollingBackupTest extends JDFTestCaseBase
 			ff1.createNewFile();
 			final File ff2 = rbf.getNewFile(".bar.txt");
 			ff2.createNewFile();
-			assertEquals(dir.listFiles().length, Math.min(3 * i + 3, 43));
+			Assertions.assertEquals(dir.listFiles().length, Math.min(3 * i + 3, 43));
 
 		}
 	}
@@ -156,7 +151,7 @@ public class RollingBackupTest extends JDFTestCaseBase
 			final RollingBackupFile rbf2 = new RollingBackupFile(backRoot, 42);
 			final File ff2 = rbf2.getNewFile(".bar.txt");
 			ff2.createNewFile();
-			assertEquals(dir.listFiles().length, Math.min(3 * i + 3, 43));
+			Assertions.assertEquals(dir.listFiles().length, Math.min(3 * i + 3, 43));
 		}
 	}
 
@@ -192,18 +187,18 @@ public class RollingBackupTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			rbf.getNewFile();
-			assertTrue(rbf.createNewFile());
-			assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
+			Assertions.assertTrue(rbf.createNewFile());
+			Assertions.assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
 		}
-		assertEquals(rbf.getOldFile(0), rbf);
+		Assertions.assertEquals(rbf.getOldFile(0), rbf);
 		for (int i = 1; i < 4; i++)
 		{
-			assertNotNull(rbf.getOldFile(i));
-			assertNotSame(rbf.getOldFile(i), rbf);
+			Assertions.assertNotNull(rbf.getOldFile(i));
+			Assertions.assertNotSame(rbf.getOldFile(i), rbf);
 		}
 		for (int i = 5; i < 14; i++)
 		{
-			assertNull(rbf.getOldFile(i));
+			Assertions.assertNull(rbf.getOldFile(i));
 		}
 	}
 
@@ -219,11 +214,11 @@ public class RollingBackupTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			rbf.getNewFile();
-			assertTrue(rbf.createNewFile());
-			assertEquals("File " + i, dir.listFiles().length, Math.min(i + 1, 5));
+			Assertions.assertTrue(rbf.createNewFile());
+			Assertions.assertEquals(dir.listFiles().length, Math.min(i + 1, 5), "File " + i);
 		}
 		rbf.clearAll();
-		assertEquals(dir.listFiles().length, 0);
+		Assertions.assertEquals(dir.listFiles().length, 0);
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

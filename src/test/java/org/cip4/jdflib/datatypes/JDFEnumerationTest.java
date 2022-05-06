@@ -73,8 +73,8 @@ package org.cip4.jdflib.datatypes;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
 import org.cip4.jdflib.auto.JDFAutoStitchingParams.EnumStapleShape;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * Test for JDFURL.
  * 
@@ -88,8 +88,8 @@ public class JDFEnumerationTest extends JDFTestCaseBase
 	@Test
 	public final void testtoString()
 	{
-		Assert.assertEquals(EnumStapleShape.Crown.getName(), "Crown");
-		Assert.assertEquals(EnumQueueStatus.Blocked.getName(), "Blocked");
+		Assertions.assertEquals(EnumStapleShape.Crown.getName(), "Crown");
+		Assertions.assertEquals(EnumQueueStatus.Blocked.getName(), "Blocked");
 
 	}
 

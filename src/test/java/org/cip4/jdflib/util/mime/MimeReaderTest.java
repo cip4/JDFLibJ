@@ -38,15 +38,14 @@
  */
 package org.cip4.jdflib.util.mime;
 
-import static org.junit.Assert.assertNull;
-
 import java.io.File;
 
 import javax.mail.Multipart;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.MimeUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class MimeReaderTest extends JDFTestCaseBase
 {
@@ -58,6 +57,6 @@ public class MimeReaderTest extends JDFTestCaseBase
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
 		MimeUtil.writeToFile(mp, sm_dirTestDataTemp + File.separator + "testMimePackageReader.mjm", null);
 		MimeReader mr = new MimeReader(sm_dirTestDataTemp + File.separator + "testMimePackageReader.mjm");
-		assertNull(mr.getURLInputStream("a"));
+		Assertions.assertNull(mr.getURLInputStream("a"));
 	}
 }

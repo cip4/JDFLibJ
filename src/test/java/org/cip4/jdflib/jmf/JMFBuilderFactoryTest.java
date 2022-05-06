@@ -68,13 +68,11 @@
  */
 package org.cip4.jdflib.jmf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -91,7 +89,7 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 	public void testSenderID()
 	{
 		JMFBuilderFactory.setSenderID(getClass(), "s1");
-		assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()).getSenderID(), "s1");
+		Assertions.assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()).getSenderID(), "s1");
 	}
 
 	/**
@@ -104,8 +102,8 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		b.setAgentName("a1");
 		JMFBuilder b2 = JMFBuilderFactory.getJMFBuilder("aname");
-		assertEquals(b2.getAgentName(), "a1");
-		assertEquals(b2.createJMF(EnumFamily.Acknowledge, EnumType.AbortQueueEntry).getAgentName(), "a1");
+		Assertions.assertEquals(b2.getAgentName(), "a1");
+		Assertions.assertEquals(b2.createJMF(EnumFamily.Acknowledge, EnumType.AbortQueueEntry).getAgentName(), "a1");
 	}
 
 	/**
@@ -118,8 +116,8 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		b.setAgentVersion("a1");
 		JMFBuilder b2 = JMFBuilderFactory.getJMFBuilder("av");
-		assertEquals(b2.getAgentVersion(), "a1");
-		assertEquals(b2.createJMF(EnumFamily.Acknowledge, EnumType.AbortQueueEntry).getAgentVersion(), "a1");
+		Assertions.assertEquals(b2.getAgentVersion(), "a1");
+		Assertions.assertEquals(b2.createJMF(EnumFamily.Acknowledge, EnumType.AbortQueueEntry).getAgentVersion(), "a1");
 	}
 
 	/**
@@ -130,7 +128,7 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 	public void testAcknowledgeURL()
 	{
 		JMFBuilderFactory.setAcknowledgeURL(getClass(), "a1");
-		assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()).getAcknowledgeURL(), "a1");
+		Assertions.assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()).getAcknowledgeURL(), "a1");
 	}
 
 	/**
@@ -140,7 +138,7 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 	@Test
 	public void testSame()
 	{
-		assertNotNull(JMFBuilderFactory.getJMFBuilder(getClass()));
-		assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()), JMFBuilderFactory.getJMFBuilder(getClass()));
+		Assertions.assertNotNull(JMFBuilderFactory.getJMFBuilder(getClass()));
+		Assertions.assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()), JMFBuilderFactory.getJMFBuilder(getClass()));
 	}
 }

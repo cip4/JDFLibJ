@@ -70,16 +70,12 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFTransferCurvePoolTest extends JDFTestCaseBase
 {
@@ -91,7 +87,7 @@ public class JDFTransferCurvePoolTest extends JDFTestCaseBase
 	public void testGetTransfercurveSet()
 	{
 		final JDFTransferCurvePool p = (JDFTransferCurvePool) new JDFDoc(ElementName.TRANSFERCURVEPOOL).getRoot();
-		assertNull(p.getTransferCurveSet(0));
+		Assertions.assertNull(p.getTransferCurveSet(0));
 	}
 
 	/**
@@ -101,7 +97,7 @@ public class JDFTransferCurvePoolTest extends JDFTestCaseBase
 	public void testGetCreateTransfercurveSet()
 	{
 		final JDFTransferCurvePool p = (JDFTransferCurvePool) new JDFDoc(ElementName.TRANSFERCURVEPOOL).getRoot();
-		assertNotNull(p.getCreateTransferCurveSet(0));
+		Assertions.assertNotNull(p.getCreateTransferCurveSet(0));
 	}
 
 	/**
@@ -111,12 +107,12 @@ public class JDFTransferCurvePoolTest extends JDFTestCaseBase
 	public void testGetTransfercurveSetName()
 	{
 		final JDFTransferCurvePool p = (JDFTransferCurvePool) new JDFDoc(ElementName.TRANSFERCURVEPOOL).getRoot();
-		assertNull(p.getTransferCurveSet(null));
+		Assertions.assertNull(p.getTransferCurveSet(null));
 		final JDFTransferCurveSet set = p.getCreateTransferCurveSet("Paper");
-		assertEquals(set, p.getCreateTransferCurveSet("Paper"));
-		assertEquals(set, p.getTransferCurveSet("Paper"));
-		assertNull(p.getTransferCurveSet("Plate"));
-		assertEquals(set, p.getTransferCurveSet("*"));
+		Assertions.assertEquals(set, p.getCreateTransferCurveSet("Paper"));
+		Assertions.assertEquals(set, p.getTransferCurveSet("Paper"));
+		Assertions.assertNull(p.getTransferCurveSet("Plate"));
+		Assertions.assertEquals(set, p.getTransferCurveSet("*"));
 
 	}
 
@@ -129,7 +125,7 @@ public class JDFTransferCurvePoolTest extends JDFTestCaseBase
 		final JDFTransferCurvePool p = (JDFTransferCurvePool) new JDFDoc(ElementName.TRANSFERCURVEPOOL).getRoot();
 		final JDFTransferCurveSet set = p.getCreateTransferCurveSet("Paper");
 		final JDFTransferCurveSet set2 = p.getCreateTransferCurveSet("Film");
-		assertNotSame(set, set2);
+		Assertions.assertNotSame(set, set2);
 
 	}
 
@@ -142,8 +138,8 @@ public class JDFTransferCurvePoolTest extends JDFTestCaseBase
 		final JDFTransferCurvePool p = (JDFTransferCurvePool) new JDFDoc(ElementName.TRANSFERCURVEPOOL).getRoot();
 		final JDFTransferCurvePool ppart = (JDFTransferCurvePool) p.addPartition(EnumPartIDKey.SheetName, "s1");
 		final JDFTransferCurveSet set = p.getCreateTransferCurveSet("Paper");
-		assertEquals(set, ppart.getTransferCurveSet("Paper"));
-		assertNotSame(set, ppart.getCreateTransferCurveSet("Paper"));
+		Assertions.assertEquals(set, ppart.getTransferCurveSet("Paper"));
+		Assertions.assertNotSame(set, ppart.getCreateTransferCurveSet("Paper"));
 
 	}
 

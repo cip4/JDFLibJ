@@ -68,9 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -85,7 +82,8 @@ import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkSignalResourceTest extends JDFTestCaseBase
 {
@@ -102,8 +100,8 @@ public class WalkSignalResourceTest extends JDFTestCaseBase
 		JDFResourceInfo ri = sig.appendResourceInfo();
 
 		new WalkSignalResource().moveFromQuParams(sig);
-		assertNull(sig.getResourceQuParams());
-		assertEquals("j1", ri.getAttribute(AttributeName.JOBID));
+		Assertions.assertNull(sig.getResourceQuParams());
+		Assertions.assertEquals("j1", ri.getAttribute(AttributeName.JOBID));
 	}
 
 	/**
@@ -121,10 +119,10 @@ public class WalkSignalResourceTest extends JDFTestCaseBase
 
 		KElement xjmf = new JDFToXJDF().convert(jmf);
 
-		assertNull(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/@JobID", null));
-		assertNull(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/@JobPartID", null));
-		assertEquals("j1", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@JobID", null));
-		assertEquals("p1", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@JobPartID", null));
+		Assertions.assertNull(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/@JobID", null));
+		Assertions.assertNull(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/@JobPartID", null));
+		Assertions.assertEquals("j1", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@JobID", null));
+		Assertions.assertEquals("p1", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@JobPartID", null));
 	}
 
 	/**
@@ -148,8 +146,8 @@ public class WalkSignalResourceTest extends JDFTestCaseBase
 		KElement xjmf = jdfToXJDF.convert(jmf);
 
 		KElement sr = xjmf.getElement("SignalResource");
-		assertEquals(sr.numChildElements(ElementName.RESOURCEINFO, null), 2);
-		assertEquals(sr.getChildrenByTagName(XJDFConstants.ResourceSet, null, null, false, true, 0).size(), 2);
+		Assertions.assertEquals(sr.numChildElements(ElementName.RESOURCEINFO, null), 2);
+		Assertions.assertEquals(sr.getChildrenByTagName(XJDFConstants.ResourceSet, null, null, false, true, 0).size(), 2);
 	}
 
 	/**
@@ -165,8 +163,8 @@ public class WalkSignalResourceTest extends JDFTestCaseBase
 
 		KElement xjmf = new JDFToXJDF().convert(jmf);
 
-		assertNull(xjmf.getXPathElement("SignalResource/ResourceQuParams"));
-		assertEquals("j1", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@JobID", null));
+		Assertions.assertNull(xjmf.getXPathElement("SignalResource/ResourceQuParams"));
+		Assertions.assertEquals("j1", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@JobID", null));
 	}
 
 }

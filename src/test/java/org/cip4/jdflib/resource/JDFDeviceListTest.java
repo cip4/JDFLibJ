@@ -71,8 +71,8 @@ package org.cip4.jdflib.resource;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 public class JDFDeviceListTest extends JDFTestCaseBase
 {
 	private JDFDeviceList d;
@@ -83,10 +83,10 @@ public class JDFDeviceListTest extends JDFTestCaseBase
 	@Test
 	public void testgetDeviceInfo()
 	{
-		Assert.assertNull(d.getDeviceInfo("abc"));
-		Assert.assertNotNull(d.getDeviceInfo("d1"));
-		Assert.assertNotNull(d.getDeviceInfo("d2"));
-		Assert.assertNull(d.getDeviceInfo("d3"));
+		Assertions.assertNull(d.getDeviceInfo("abc"));
+		Assertions.assertNotNull(d.getDeviceInfo("d1"));
+		Assertions.assertNotNull(d.getDeviceInfo("d2"));
+		Assertions.assertNull(d.getDeviceInfo("d3"));
 	}
 
 	/**
@@ -95,8 +95,8 @@ public class JDFDeviceListTest extends JDFTestCaseBase
 	@Test
 	public void testgetCreateDeviceInfo()
 	{
-		Assert.assertNotNull(d.getCreateDeviceInfo("d3"));
-		Assert.assertEquals(d.getCreateDeviceInfo("d3").getDeviceID(), "d3");
+		Assertions.assertNotNull(d.getCreateDeviceInfo("d3"));
+		Assertions.assertEquals(d.getCreateDeviceInfo("d3").getDeviceID(), "d3");
 	}
 
 	/**

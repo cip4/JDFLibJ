@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.process.JDFConvertingConfig;
 import org.cip4.jdflib.resource.process.JDFDieLayoutProductionParams;
 import org.cip4.jdflib.resource.process.JDFRepeatDesc;
 import org.cip4.jdflib.resource.process.JDFShapeDef;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

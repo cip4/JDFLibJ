@@ -36,14 +36,11 @@
  */
 package org.cip4.jdflib.extensions;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class MessagePoolHelperTest extends JDFTestCaseBase
 {
@@ -57,8 +54,8 @@ public class MessagePoolHelperTest extends JDFTestCaseBase
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
 		final AuditPoolHelper ah = new AuditPoolHelper(auditPool);
 		final MessageHelper created = ah.appendMessage(XJDFConstants.AuditCreated);
-		assertNotNull(created.getXPathElement(XJDFConstants.Header));
-		assertNotNull(created);
+		Assertions.assertNotNull(created.getXPathElement(XJDFConstants.Header));
+		Assertions.assertNotNull(created);
 	}
 
 	/**
@@ -70,10 +67,10 @@ public class MessagePoolHelperTest extends JDFTestCaseBase
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
 		final AuditPoolHelper ah = new AuditPoolHelper(auditPool);
 		final MessageHelper created = ah.appendMessage(XJDFConstants.AuditCreated);
-		assertEquals(created, ah.getMessageHelper(0));
-		assertEquals(created, ah.getMessageHelper(-1));
-		assertNull(ah.getMessageHelper(1));
-		assertNull(ah.getMessageHelper(-42));
+		Assertions.assertEquals(created, ah.getMessageHelper(0));
+		Assertions.assertEquals(created, ah.getMessageHelper(-1));
+		Assertions.assertNull(ah.getMessageHelper(1));
+		Assertions.assertNull(ah.getMessageHelper(-42));
 	}
 
 	/**
@@ -86,11 +83,11 @@ public class MessagePoolHelperTest extends JDFTestCaseBase
 		final AuditPoolHelper ah = new AuditPoolHelper(auditPool);
 		final MessageHelper created = ah.appendMessage(XJDFConstants.AuditCreated);
 		final MessageHelper r = ah.appendMessage(XJDFConstants.AuditResource);
-		assertEquals(created, ah.getMessageHelper("Created", 0));
-		assertEquals(created, ah.getMessageHelper("Created", -1));
-		assertEquals(r, ah.getMessageHelper("Resource", -1));
-		assertNull(ah.getMessageHelper("Created", 1));
-		assertNull(ah.getMessageHelper("Status", 0));
+		Assertions.assertEquals(created, ah.getMessageHelper("Created", 0));
+		Assertions.assertEquals(created, ah.getMessageHelper("Created", -1));
+		Assertions.assertEquals(r, ah.getMessageHelper("Resource", -1));
+		Assertions.assertNull(ah.getMessageHelper("Created", 1));
+		Assertions.assertNull(ah.getMessageHelper("Status", 0));
 	}
 
 }

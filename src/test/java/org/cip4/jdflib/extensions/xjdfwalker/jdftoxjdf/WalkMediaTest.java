@@ -36,8 +36,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumFluteDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
@@ -48,7 +46,8 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkMediaTest extends JDFTestCaseBase
 {
@@ -66,7 +65,7 @@ public class WalkMediaTest extends JDFTestCaseBase
 		final WalkMedia walkMedia = new WalkMedia();
 		walkMedia.jdfToXJDF = new JDFToXJDF();
 		walkMedia.walk(m, res);
-		assertEquals(EnumISOPaperSubstrate.PS8, ((JDFMedia) res.getElement(ElementName.MEDIA)).getISOPaperSubstrate());
+		Assertions.assertEquals(EnumISOPaperSubstrate.PS8, ((JDFMedia) res.getElement(ElementName.MEDIA)).getISOPaperSubstrate());
 	}
 
 	/**
@@ -82,7 +81,7 @@ public class WalkMediaTest extends JDFTestCaseBase
 		final WalkMedia walkMedia = new WalkMedia();
 		walkMedia.jdfToXJDF = new JDFToXJDF();
 		walkMedia.walk(m, res);
-		assertEquals(EnumMediaType.Other, ((JDFMedia) res.getElement(ElementName.MEDIA)).getMediaType());
+		Assertions.assertEquals(EnumMediaType.Other, ((JDFMedia) res.getElement(ElementName.MEDIA)).getMediaType());
 	}
 
 	/**
@@ -98,7 +97,7 @@ public class WalkMediaTest extends JDFTestCaseBase
 		final WalkMedia walkMedia = new WalkMedia();
 		walkMedia.jdfToXJDF = new JDFToXJDF();
 		walkMedia.walk(m, res);
-		assertEquals(EnumMediaType.Other, ((JDFMedia) res.getElement(ElementName.MEDIA)).getMediaType());
+		Assertions.assertEquals(EnumMediaType.Other, ((JDFMedia) res.getElement(ElementName.MEDIA)).getMediaType());
 	}
 
 	/**
@@ -115,7 +114,7 @@ public class WalkMediaTest extends JDFTestCaseBase
 		final WalkMedia walkMedia = new WalkMedia();
 		walkMedia.jdfToXJDF = new JDFToXJDF();
 		walkMedia.walk(m, res);
-		assertEquals(EnumGrainDirection.XDirection, ((JDFMedia) res.getElement(ElementName.MEDIA)).getGrainDirection());
+		Assertions.assertEquals(EnumGrainDirection.XDirection, ((JDFMedia) res.getElement(ElementName.MEDIA)).getGrainDirection());
 	}
 
 	/**
@@ -132,7 +131,7 @@ public class WalkMediaTest extends JDFTestCaseBase
 		final WalkMedia walkMedia = new WalkMedia();
 		walkMedia.jdfToXJDF = new JDFToXJDF();
 		walkMedia.walk(m, res);
-		assertEquals(EnumFluteDirection.YDirection, ((JDFMedia) res.getElement(ElementName.MEDIA)).getFluteDirection());
+		Assertions.assertEquals(EnumFluteDirection.YDirection, ((JDFMedia) res.getElement(ElementName.MEDIA)).getFluteDirection());
 	}
 
 }

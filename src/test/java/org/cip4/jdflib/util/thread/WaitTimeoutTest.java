@@ -36,13 +36,10 @@
  */
 package org.cip4.jdflib.util.thread;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WaitTimeoutTest extends JDFTestCaseBase
 {
@@ -72,19 +69,19 @@ public class WaitTimeoutTest extends JDFTestCaseBase
 	@Test
 	public void testGetFail()
 	{
-		assertNull(new TestWait(12345, 12).getWaitedObject());
+		Assertions.assertNull(new TestWait(12345, 12).getWaitedObject());
 	}
 
 	@Test
 	public void testGetOK()
 	{
-		assertTrue(new TestWait(12, 12345).getWaitedObject().booleanValue());
+		Assertions.assertTrue(new TestWait(12, 12345).getWaitedObject().booleanValue());
 	}
 
 	@Test
 	public void testGetMillis()
 	{
-		assertEquals(123, new TestWait(12, 123).getWaitMillis());
+		Assertions.assertEquals(123, new TestWait(12, 123).getWaitMillis());
 	}
 
 }

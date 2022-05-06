@@ -65,7 +65,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.resource.process.press.JDFPrintCondition;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

@@ -36,16 +36,12 @@
  */
 package org.cip4.jdflib.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -64,7 +60,7 @@ public class XMLParserTest extends JDFTestCaseBase
 		final XMLDoc d = new XMLDoc("a*", null);
 		final String xml = d.toXML();
 		final XMLParser p = new XMLParser();
-		assertNull(p.parseString(xml));
+		Assertions.assertNull(p.parseString(xml));
 	}
 
 	/**
@@ -77,7 +73,7 @@ public class XMLParserTest extends JDFTestCaseBase
 		for (int i = 0; i < 444; i++)
 		{
 			final XMLParser p = XMLParserFactory.getFactory().get();
-			assertNotNull(p.parseFile(new File(sm_dirTestData + "ResourceInfo.jmf")));
+			Assertions.assertNotNull(p.parseFile(new File(sm_dirTestData + "ResourceInfo.jmf")));
 		}
 	}
 
@@ -90,7 +86,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	{
 		final String xml = "<a>aaa</b>";
 		final XMLParser p = new XMLParser();
-		assertNull(p.parseString(xml));
+		Assertions.assertNull(p.parseString(xml));
 	}
 
 	/**
@@ -101,7 +97,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	public void testFatalErrorFile()
 	{
 		final XMLParser p = new XMLParser();
-		assertNull(p.parseFile(sm_dirTestData + "corrupt.jdf"));
+		Assertions.assertNull(p.parseFile(sm_dirTestData + "corrupt.jdf"));
 	}
 
 	/**
@@ -113,7 +109,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	{
 		final XMLParser p = new XMLParser();
 		p.setSchemaLocation("foo", "./foo.com");
-		assertEquals("foo ./foo.com", p.m_SchemaLocation);
+		Assertions.assertEquals("foo ./foo.com", p.m_SchemaLocation);
 	}
 
 	/**
@@ -125,9 +121,9 @@ public class XMLParserTest extends JDFTestCaseBase
 	{
 		final XMLParser p = new XMLParser();
 		p.addSchemaLocation("foo", "./foo.com");
-		assertEquals("foo ./foo.com", p.m_SchemaLocation);
+		Assertions.assertEquals("foo ./foo.com", p.m_SchemaLocation);
 		p.addSchemaLocation("bar", "./bar.com");
-		assertEquals("foo ./foo.com bar ./bar.com", p.m_SchemaLocation);
+		Assertions.assertEquals("foo ./foo.com bar ./bar.com", p.m_SchemaLocation);
 	}
 
 	/**
@@ -139,10 +135,10 @@ public class XMLParserTest extends JDFTestCaseBase
 	{
 		final XMLParser p = new XMLParser();
 		final XMLDoc d = p.parseString("<foo a=\"SchuÌˆtz_Teil5_bel\"/>");
-		assertNotNull(d);
+		Assertions.assertNotNull(d);
 		final String s = d.write2String(2);
 		final XMLDoc d2 = p.parseString(s);
-		assertNotNull(d2);
+		Assertions.assertNotNull(d2);
 	}
 
 	/**
@@ -154,8 +150,8 @@ public class XMLParserTest extends JDFTestCaseBase
 	{
 		final XMLParser p = new XMLParser();
 		final XMLDoc d = p.parseString("<foo/>");
-		assertNotNull(d);
-		assertFalse(d.getRoot().isDirty());
+		Assertions.assertNotNull(d);
+		Assertions.assertFalse(d.getRoot().isDirty());
 	}
 
 	/**
@@ -172,7 +168,7 @@ public class XMLParserTest extends JDFTestCaseBase
 		log.info("empty after");
 		d = p.parseString("<foo a=\"SchuÌˆtz_Teil5_bel\">");
 		log.info("empty before");
-		assertNull(d);
+		Assertions.assertNull(d);
 	}
 
 	/**
@@ -188,17 +184,17 @@ public class XMLParserTest extends JDFTestCaseBase
 		final XMLDoc d = p.parseString("aaaabbb  ss<?xml version='1.0' encoding='utf-8' ?>\n<foo />");
 		XMLParser.m_searchStream = b;
 
-		assertNotNull(d);
+		Assertions.assertNotNull(d);
 		final String s = d.write2String(2);
 		final XMLDoc d2 = p.parseString(s);
-		assertNotNull(d2);
+		Assertions.assertNotNull(d2);
 	}
 
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		XMLErrorHandler.setWantLog(true);

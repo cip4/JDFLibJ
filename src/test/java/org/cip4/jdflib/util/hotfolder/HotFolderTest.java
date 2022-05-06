@@ -43,12 +43,6 @@
  */
 package org.cip4.jdflib.util.hotfolder;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -56,8 +50,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer To change the template for this generated type comment go to Window - Preferences - Java - Code Generation - Code and
@@ -129,7 +124,7 @@ public class HotFolderTest extends JDFTestCaseBase
 
 	static AtomicInteger n = new AtomicInteger(1000);
 
-	@Before
+	@BeforeEach
 	@Override
 	public synchronized void setUp() throws Exception
 	{
@@ -149,9 +144,9 @@ public class HotFolderTest extends JDFTestCaseBase
 		hf = new HotFolder(theHF, null, new MyListener(false));
 		final File file = new File(theHF + File.separator + "f1.txt");
 		file.createNewFile();
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 		ThreadUtil.sleep(1);
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 	}
 
 	/**
@@ -161,7 +156,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	public synchronized void testShutdown() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(false));
-		assertNotNull(HotFolderRunner.getTherunner());
+		Assertions.assertNotNull(HotFolderRunner.getTherunner());
 		HotFolderRunner.shutDown();
 	}
 
@@ -176,14 +171,14 @@ public class HotFolderTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			Thread.sleep(1);
-			assertTrue("Loop " + i, Thread.activeCount() - n0 < 7);
+			Assertions.assertTrue(Thread.activeCount() - n0 < 7, "Loop " + i);
 			hf.restart();
 		}
 		for (int i = 0; i < 3; i++)
 		{
 			hf.stop();
 			Thread.sleep(1);
-			assertTrue("Loop " + i, Thread.activeCount() - n0 < 6);
+			Assertions.assertTrue(Thread.activeCount() - n0 < 6, "Loop " + i);
 		}
 	}
 
@@ -201,7 +196,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			hf = new HotFolder(singleHF, null, new MyListener(true));
 
 		}
-		assertTrue("Loop ", Thread.activeCount() - n0 < 17);
+		Assertions.assertTrue(Thread.activeCount() - n0 < 17, "Loop ");
 		for (int i = 0; i < 1000; i++)
 		{
 			final File singleHF = new File(manyDir, "single" + i);
@@ -228,7 +223,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			if (n == 0)
 				return;
 		}
-		fail("not gone");
+		Assertions.fail("not gone");
 	}
 
 	/**
@@ -247,7 +242,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			for (int i = 0; i < 10; i++)
 			{
 				Thread.sleep(20);
-				assertTrue("Loop " + i, n0 - Thread.activeCount() < 9);
+				Assertions.assertTrue(n0 - Thread.activeCount() < 9, "Loop " + i);
 				hf.restart();
 			}
 			if (n0 < Thread.activeCount())
@@ -256,7 +251,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			{
 				Thread.sleep(20);
 				hf.stop();
-				assertTrue("Loop " + i, n0 - Thread.activeCount() < 9);
+				Assertions.assertTrue(n0 - Thread.activeCount() < 9, "Loop " + i);
 			}
 		}
 	}
@@ -270,22 +265,22 @@ public class HotFolderTest extends JDFTestCaseBase
 		hf = new HotFolder(theHF, null, new MyListener(true));
 		final File file = new File(theHF + File.separator + "f1.txt");
 		file.createNewFile();
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 
 		for (int i = 0; i < 145 && file.exists(); i++)
 		{
 			ThreadUtil.sleep(100);
 		}
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		hf.stop();
 		hf.stop();
 		file.createNewFile();
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 		for (int i = 0; i < 150 && !file.exists(); i++)
 		{
 			ThreadUtil.sleep(100);
 		}
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 		hf.restart();
 		hf.restart();
 		hf.restart();
@@ -293,7 +288,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		{
 			ThreadUtil.sleep(100);
 		}
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 	}
 
 	/**
@@ -306,22 +301,22 @@ public class HotFolderTest extends JDFTestCaseBase
 		hf.setMaxConcurrent(5);
 		final File file = new File(theHF + File.separator + "f1.txt");
 		file.createNewFile();
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 
 		for (int i = 0; (i < 145) && file.exists(); i++)
 		{
 			ThreadUtil.sleep(100);
 		}
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		hf.stop();
 		hf.stop();
 		file.createNewFile();
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 		for (int i = 0; i < 1500 && !file.exists(); i++)
 		{
 			ThreadUtil.sleep(10);
 		}
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 		hf.restart();
 		ThreadUtil.sleep(10);
 		hf.restart();
@@ -329,7 +324,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		{
 			ThreadUtil.sleep(10);
 		}
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 	}
 
 	/**
@@ -350,15 +345,15 @@ public class HotFolderTest extends JDFTestCaseBase
 			final File file3 = new File(theHF + File.separator + "f1.txt2");
 			final File file4 = new File(theHF + File.separator + "f1");
 			file.createNewFile();
-			assertTrue(file.exists());
+			Assertions.assertTrue(file.exists());
 			file1.createNewFile();
-			assertTrue(file1.exists());
+			Assertions.assertTrue(file1.exists());
 			file2.createNewFile();
-			assertTrue(file2.exists());
+			Assertions.assertTrue(file2.exists());
 			file3.createNewFile();
-			assertTrue(file3.exists());
+			Assertions.assertTrue(file3.exists());
 			file4.createNewFile();
-			assertTrue(file4.exists());
+			Assertions.assertTrue(file4.exists());
 
 			for (int i = 0; i < 420; i++)
 			{
@@ -366,10 +361,10 @@ public class HotFolderTest extends JDFTestCaseBase
 				if (!file.exists() && !file3.exists())
 					break;
 			}
-			assertFalse(file.exists());
-			assertFalse(file3.exists());
-			assertTrue(file1.exists());
-			assertTrue(file4.exists());
+			Assertions.assertFalse(file.exists());
+			Assertions.assertFalse(file3.exists());
+			Assertions.assertTrue(file1.exists());
+			Assertions.assertTrue(file4.exists());
 
 			hf.addListener(new MyListener(true), ".xml");
 			for (int i = 0; i < 420; i++)
@@ -378,9 +373,9 @@ public class HotFolderTest extends JDFTestCaseBase
 				if (!file1.exists() && file2.exists() && file4.exists())
 					break;
 			}
-			assertFalse(file1.exists());
-			assertTrue(file2.exists());
-			assertTrue(file4.exists());
+			Assertions.assertFalse(file1.exists());
+			Assertions.assertTrue(file2.exists());
+			Assertions.assertTrue(file4.exists());
 
 			hf.addListener(new MyListener(true), null);
 			for (int i = 0; i < 420; i++)
@@ -389,8 +384,8 @@ public class HotFolderTest extends JDFTestCaseBase
 				if (!file2.exists() && !file4.exists())
 					break;
 			}
-			assertFalse(file2.exists());
-			assertFalse(file4.exists());
+			Assertions.assertFalse(file2.exists());
+			Assertions.assertFalse(file4.exists());
 			hf.stop();
 		}
 	}
@@ -406,7 +401,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		ThreadUtil.sleep(300); // time to start up
 		final File file = new File(theHF + File.separator + "f123.txt");
 		file.createNewFile();
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 		final long t0 = System.currentTimeMillis();
 		for (int i = 0; i < 420; i++)
 		{
@@ -414,9 +409,9 @@ public class HotFolderTest extends JDFTestCaseBase
 			if (!file.exists())
 				break;
 		}
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 
-		assertTrue(System.currentTimeMillis() - t0 > 3000);
+		Assertions.assertTrue(System.currentTimeMillis() - t0 > 3000);
 		hf.stop();
 	}
 
@@ -434,16 +429,16 @@ public class HotFolderTest extends JDFTestCaseBase
 		file.createNewFile();
 		file2.mkdir();
 		file1.createNewFile();
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 
 		for (int i = 0; i < 15 && file.exists(); i++)
 		{
 			ThreadUtil.sleep(1000);
 		}
 
-		assertFalse(file.exists());
-		assertTrue("in subdir", file1.exists());
-		assertTrue(file2.exists());
+		Assertions.assertFalse(file.exists());
+		Assertions.assertTrue(file1.exists(), "in subdir");
+		Assertions.assertTrue(file2.exists());
 	}
 
 	/**
@@ -455,7 +450,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		final MyListener myl = new MyListener(true);
 		hf = new HotFolder(theHF, ".txt", myl);
 		hf.addListener(myl, "xml");
-		assertEquals(hf.getListener(0).getListener(), myl);
+		Assertions.assertEquals(hf.getListener(0).getListener(), myl);
 	}
 
 	/**
@@ -466,11 +461,11 @@ public class HotFolderTest extends JDFTestCaseBase
 	{
 		final MyListener myl = new MyListener(true);
 		hf = new HotFolder(theHF, null, null);
-		assertEquals(null, hf.getAllExtensions());
+		Assertions.assertEquals(null, hf.getAllExtensions());
 		hf.addListener(myl, "xml");
-		assertEquals("xml", hf.getAllExtensions());
+		Assertions.assertEquals("xml", hf.getAllExtensions());
 		hf.addListener(myl, "txt");
-		assertEquals("xml,txt", hf.getAllExtensions());
+		Assertions.assertEquals("xml,txt", hf.getAllExtensions());
 	}
 
 	/**
@@ -496,7 +491,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			ThreadUtil.sleep(1000);
 		}
 
-		assertFalse(file1.exists());
+		Assertions.assertFalse(file1.exists());
 	}
 
 	/**
@@ -522,7 +517,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			ThreadUtil.sleep(10);
 		}
 
-		assertFalse(file1.exists());
+		Assertions.assertFalse(file1.exists());
 	}
 
 	/**
@@ -534,14 +529,14 @@ public class HotFolderTest extends JDFTestCaseBase
 		hf = new HotFolder(theHF, null, new MyListener(true));
 		final File file = new File(theHF + File.separator + "f1.txt");
 		file.createNewFile();
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 
 		for (int i = 0; i < 15 && file.exists(); i++)
 		{
 			ThreadUtil.sleep(1000);
 		}
 
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 	}
 
 	/**
@@ -554,7 +549,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		hf.setStabilizeTime(1444);
 		final File file = new File(theHF + File.separator + "f1Bigabc.txt");
 		file.createNewFile();
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 		ThreadUtil.sleep(123);
 
 		final FileOutputStream fos = new FileOutputStream(file, true);
@@ -570,14 +565,14 @@ public class HotFolderTest extends JDFTestCaseBase
 		}
 		fos.close();
 		final long t0 = System.currentTimeMillis();
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 
 		for (int i = 0; i < 600 && file.exists(); i++)
 		{
 			ThreadUtil.sleep(100);
 		}
-		assertEquals(2222, System.currentTimeMillis() - t0, 2222);
-		assertFalse(file.exists());
+		Assertions.assertEquals(2222, System.currentTimeMillis() - t0, 2222);
+		Assertions.assertFalse(file.exists());
 	}
 
 	/**
@@ -591,7 +586,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		final File file = new File(theHF + File.separator + "f1Big.txt");
 		final File file2 = new File(theHF + File.separator + "f2Big.txt");
 		file.createNewFile();
-		assertTrue(file.exists());
+		Assertions.assertTrue(file.exists());
 
 		final FileOutputStream fos = new FileOutputStream(file);
 		final FileOutputStream fos2 = new FileOutputStream(file2);
@@ -607,8 +602,8 @@ public class HotFolderTest extends JDFTestCaseBase
 			fos.flush();
 			fos2.flush();
 		}
-		assertTrue(file.exists());
-		assertTrue(file2.exists());
+		Assertions.assertTrue(file.exists());
+		Assertions.assertTrue(file2.exists());
 		fos.close();
 		fos2.close();
 
@@ -616,12 +611,12 @@ public class HotFolderTest extends JDFTestCaseBase
 		{
 			ThreadUtil.sleep(100);
 		}
-		assertFalse(file.exists());
+		Assertions.assertFalse(file.exists());
 		for (int i = 0; i < 666 && file2.exists(); i++)
 		{
 			ThreadUtil.sleep(100);
 		}
-		assertFalse(file2.exists());
+		Assertions.assertFalse(file2.exists());
 	}
 
 	/***

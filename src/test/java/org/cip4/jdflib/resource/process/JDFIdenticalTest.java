@@ -68,8 +68,6 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -81,7 +79,8 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFIdenticalTest extends JDFTestCaseBase
 {
@@ -95,7 +94,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
 		r.appendIdentical();
-		assertEquals(r, r.getIdentical().getTarget());
+		Assertions.assertEquals(r, r.getIdentical().getTarget());
 	}
 
 	/**
@@ -109,8 +108,8 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 		final JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
 		r1.setIdentical(r2);
-		assertEquals(r2, r.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetName, "s1"), null));
-		assertEquals(r2, r.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetName, "s2"), null));
+		Assertions.assertEquals(r2, r.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetName, "s1"), null));
+		Assertions.assertEquals(r2, r.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetName, "s2"), null));
 	}
 
 	/**
@@ -125,8 +124,8 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
 		r1.setIdentical(r2);
 		r1.getIdentical().setPartMap(new JDFAttributeMap(EnumPartIDKey.SheetName, "s1"));
-		assertEquals(r1, r.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetName, "s1"), null));
-		assertEquals(r2, r.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetName, "s2"), null));
+		Assertions.assertEquals(r1, r.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetName, "s1"), null));
+		Assertions.assertEquals(r2, r.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetName, "s2"), null));
 	}
 
 	/**
@@ -141,8 +140,8 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
 		r2.setDescriptiveName("foo");
 		r1.setIdentical(r2);
-		assertEquals("", ((JDFElement) r.getLeaves(false).get(0)).getDescriptiveName());
-		assertEquals("foo", ((JDFElement) r.getLeaves(false).get(1)).getDescriptiveName());
+		Assertions.assertEquals("", ((JDFElement) r.getLeaves(false).get(0)).getDescriptiveName());
+		Assertions.assertEquals("foo", ((JDFElement) r.getLeaves(false).get(1)).getDescriptiveName());
 	}
 
 	/**
@@ -159,8 +158,8 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 		r1.setIdentical(r2);
 		VElement leaves = r.getLeaves(false);
 		leaves = JDFIdentical.removeIdenticals(leaves);
-		assertEquals("foo", ((JDFElement) leaves.get(0)).getDescriptiveName());
-		assertEquals(1, leaves.size());
+		Assertions.assertEquals("foo", ((JDFElement) leaves.get(0)).getDescriptiveName());
+		Assertions.assertEquals(1, leaves.size());
 	}
 
 	/**
@@ -180,7 +179,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 		b.setIdentical(f);
 		sh.setDescriptiveName("sh");
 		dpp.collapse(false, false);
-		assertEquals("sh", sh.getDescriptiveName());
+		Assertions.assertEquals("sh", sh.getDescriptiveName());
 	}
 
 	/**
@@ -200,7 +199,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 		b.setIdentical(f);
 		sh.setDescriptiveName("sh");
 		dpp.updateAttributeFromLeaves(AttributeName.DESCRIPTIVENAME, null, false);
-		assertEquals("sh", sh.getDescriptiveName());
+		Assertions.assertEquals("sh", sh.getDescriptiveName());
 	}
 
 	/**
@@ -216,7 +215,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 		r1.setIdentical(r2);
 		final JDFIdentical identical = r1.getIdentical();
 		identical.setPartMap(new JDFAttributeMap(EnumPartIDKey.SheetName, "s1"));
-		assertEquals(r1, identical.getTarget());
+		Assertions.assertEquals(r1, identical.getTarget());
 	}
 
 	/**
@@ -231,7 +230,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
 		r1.setIdentical(r2);
 		final JDFIdentical identical = r1.getIdentical();
-		assertEquals(r2, identical.getTarget());
+		Assertions.assertEquals(r2, identical.getTarget());
 	}
 
 	/**
@@ -247,7 +246,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 		r1.setIdentical(r2);
 		r.setResStatus(EnumResStatus.Unavailable, true);
 		r2.setResStatus(EnumResStatus.Available, true);
-		assertEquals(EnumResStatus.Available, r1.getResStatus(false));
+		Assertions.assertEquals(EnumResStatus.Available, r1.getResStatus(false));
 	}
 
 }

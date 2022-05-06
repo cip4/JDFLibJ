@@ -75,9 +75,6 @@
  */
 package org.cip4.jdflib.examples;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -107,7 +104,8 @@ import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WebTest extends JDFTestCaseBase
 {
@@ -201,8 +199,8 @@ public class WebTest extends JDFTestCaseBase
 		xm.appendMedia();
 		final JDFExposedMedia xmCyl = (JDFExposedMedia) node.appendMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.Cylinder, null);
 		xmCyl.setDescriptiveName("Optional cylinder");
-		assertNotNull(node.linkMatchingResource(xmCyl, EnumProcessUsage.AnyOutput, null));
-		assertEquals("2 for cylinder one for plate", node.getResourceLinkPool().numChildElements("ExposedMediaLink", null), 3);
+		Assertions.assertNotNull(node.linkMatchingResource(xmCyl, EnumProcessUsage.AnyOutput, null));
+		Assertions.assertEquals(node.getResourceLinkPool().numChildElements("ExposedMediaLink", null), 3, "2 for cylinder one for plate");
 		doc.write2File(sm_dirTestDataTemp + File.separator + "webDirect.jdf", 2, false);
 
 	}

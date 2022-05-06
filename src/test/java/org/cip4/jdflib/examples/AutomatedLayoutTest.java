@@ -104,8 +104,8 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class AutomatedLayoutTest extends ExampleTest
 {
@@ -889,7 +889,7 @@ public class AutomatedLayoutTest extends ExampleTest
 	private void setUpAutomatedInputRunList() throws DataFormatException
 	{
 		final JDFRunList run = rl.addRun("file://host/data/test.ppml", 0, -1);
-		Assert.assertEquals(run.getLayoutElement().getFileSpec().getMimeType(), UrlUtil.getMimeTypeFromURL(".ppml"));
+		Assertions.assertEquals(run.getLayoutElement().getFileSpec().getMimeType(), UrlUtil.getMimeTypeFromURL(".ppml"));
 		run.setDocs(new JDFIntegerRangeList("0~99"));
 		rl.setResStatus(EnumResStatus.Available, true);
 	}

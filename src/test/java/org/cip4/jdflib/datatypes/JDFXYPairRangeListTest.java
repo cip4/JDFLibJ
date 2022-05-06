@@ -16,8 +16,8 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
 import org.cip4.jdflib.resource.devicecapability.JDFXYPairEvaluation;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFXYPairRangeListTest {
 	@Test
@@ -33,11 +33,10 @@ public class JDFXYPairRangeListTest {
 			System.out.println(dfe.toString());
 		}
 
-		Assert.assertEquals(rangeList.toString(),
-				"0.4 1.9 ~ 1.4 2.9 0.4 1.9 ~ 2.4 3.8 0.4 1.6");
+		Assertions.assertEquals(rangeList.toString(), "0.4 1.9 ~ 1.4 2.9 0.4 1.9 ~ 2.4 3.8 0.4 1.6");
 		// rangeList is not empty
-		Assert.assertFalse("Bad Constructor from a given String", rangeList.toString()
-				.length() == 0);
+		Assertions.assertFalse(rangeList.toString()
+				.length() == 0, "Bad Constructor from a given String");
 	}
 
 	@Test
@@ -45,7 +44,7 @@ public class JDFXYPairRangeListTest {
 	{
 		JDFXYPairRangeList rl = new JDFXYPairRangeList(new JDFXYPairRange(
 				new JDFXYPair(2, 4), new JDFXYPair(6, 8)));
-		Assert.assertEquals(rl.toString(), "2 4 ~ 6 8");
+		Assertions.assertEquals(rl.toString(), "2 4 ~ 6 8");
 	}
 
 	@Test
@@ -61,13 +60,13 @@ public class JDFXYPairRangeListTest {
 			JDFXYPairEvaluation xyPairEvaluation = (JDFXYPairEvaluation) t
 					.appendTerm(EnumTerm.XYPairEvaluation);
 			xyPairEvaluation.setTolerance(new JDFXYPair("0 0"));
-			Assert.assertTrue(t.isValid(EnumValidationLevel.Complete));
+			Assertions.assertTrue(t.isValid(EnumValidationLevel.Complete));
 
-			Assert.assertEquals(xyPairEvaluation.getTolerance(), new JDFXYPair("0 0"));
+			Assertions.assertEquals(xyPairEvaluation.getTolerance(), new JDFXYPair("0 0"));
 			xyPairEvaluation.setTolerance(new JDFXYPair("0.1 0.1"));
 		} catch (DataFormatException dfe)
 		{
-			Assert.fail(dfe.toString());
+			Assertions.fail(dfe.toString());
 		}
 	}
 }

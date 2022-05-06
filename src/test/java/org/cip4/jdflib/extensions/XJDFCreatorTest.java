@@ -43,7 +43,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

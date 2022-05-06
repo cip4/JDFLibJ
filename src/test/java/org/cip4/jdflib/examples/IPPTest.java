@@ -65,7 +65,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen

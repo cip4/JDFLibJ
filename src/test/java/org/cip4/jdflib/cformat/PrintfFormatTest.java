@@ -17,7 +17,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 /**
  * Testing class for PrintfFormat. Run the <tt>main</tt> method to test the class.
  * 
@@ -456,20 +458,20 @@ public class PrintfFormatTest extends JDFTestCaseBase {
 		try {
 			fmt = new PrintfFormat(s);
 		} catch (Exception e) {
-			Assert.fail("bad expression");
+			Assertions.fail("bad expression");
 		}
 
 		if (fmt != null) {
-			Assert.assertEquals("type is '" + fmt.type + "' vs. '" + type + "'", fmt.type, type);
-			Assert.assertEquals("prefix is '" + fmt.prefix + "' vs. '" + pfx + "'", fmt.prefix, pfx);
-			Assert.assertEquals("suffix is '" + fmt.suffix + "' vs. '" + sfx + "'", fmt.suffix, sfx);
-			Assert.assertEquals("width is '" + fmt.width + "' vs. '" + w + "'", fmt.width, w);
-			Assert.assertEquals("prec is '" + fmt.prec + "' vs. '" + p + "'", fmt.prec, p);
-			Assert.assertEquals("alternate is '" + fmt.alternate + "' vs. '" + alt + "'", fmt.alternate, alt);
-			Assert.assertEquals("zeropad is '" + fmt.zeropad + "' vs. '" + zeropad + "'", fmt.zeropad, zeropad);
-			Assert.assertEquals("leftAdjust is '" + fmt.leftAdjust + "' vs. '" + left + "'", fmt.leftAdjust, left);
-			Assert.assertEquals("addBlank is '" + fmt.addBlank + "' vs. '" + blank + "'", fmt.addBlank, blank);
-			Assert.assertEquals("addSign is '" + fmt.addSign + "' vs. '" + sign + "'", fmt.addSign, sign);
+			Assertions.assertEquals(fmt.type, type, "type is '" + fmt.type + "' vs. '" + type + "'");
+			Assertions.assertEquals(fmt.prefix, pfx, "prefix is '" + fmt.prefix + "' vs. '" + pfx + "'");
+			Assertions.assertEquals(fmt.suffix, sfx, "suffix is '" + fmt.suffix + "' vs. '" + sfx + "'");
+			Assertions.assertEquals(fmt.width, w, "width is '" + fmt.width + "' vs. '" + w + "'");
+			Assertions.assertEquals(fmt.prec, p, "prec is '" + fmt.prec + "' vs. '" + p + "'");
+			Assertions.assertEquals(fmt.alternate, alt, "alternate is '" + fmt.alternate + "' vs. '" + alt + "'");
+			Assertions.assertEquals(fmt.zeropad, zeropad, "zeropad is '" + fmt.zeropad + "' vs. '" + zeropad + "'");
+			Assertions.assertEquals(fmt.leftAdjust, left, "leftAdjust is '" + fmt.leftAdjust + "' vs. '" + left + "'");
+			Assertions.assertEquals(fmt.addBlank, blank, "addBlank is '" + fmt.addBlank + "' vs. '" + blank + "'");
+			Assertions.assertEquals(fmt.addSign, sign, "addSign is '" + fmt.addSign + "' vs. '" + sign + "'");
 		}
 	}
 
