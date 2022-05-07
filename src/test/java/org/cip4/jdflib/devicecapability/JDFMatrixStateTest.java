@@ -83,6 +83,7 @@ import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.devicecapability.JDFMatrixState;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 public class JDFMatrixStateTest extends JDFTestCaseBase
 {
@@ -90,6 +91,7 @@ public class JDFMatrixStateTest extends JDFTestCaseBase
 	JDFMatrixState sState = null;
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

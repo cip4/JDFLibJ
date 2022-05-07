@@ -81,6 +81,7 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class XJMFTypeMapTest extends JDFTestCaseBase
@@ -140,7 +141,7 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
 	public void tearDown() throws Exception
@@ -150,9 +151,10 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

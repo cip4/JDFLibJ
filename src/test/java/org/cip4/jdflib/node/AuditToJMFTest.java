@@ -82,6 +82,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -114,6 +115,7 @@ public class AuditToJMFTest extends JDFTestCaseBase
 	 * @throws Exception any exception
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

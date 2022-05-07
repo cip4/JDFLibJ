@@ -39,6 +39,7 @@ package org.cip4.jdflib.extensions.examples;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLFormatter;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -49,9 +50,10 @@ public class ExampleTest extends JDFTestCaseBase
 {
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

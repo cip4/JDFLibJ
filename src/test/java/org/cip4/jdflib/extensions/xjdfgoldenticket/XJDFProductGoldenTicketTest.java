@@ -369,7 +369,7 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
 	@BeforeEach

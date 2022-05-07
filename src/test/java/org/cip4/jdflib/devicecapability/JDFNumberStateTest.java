@@ -89,6 +89,7 @@ import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.devicecapability.JDFNumberState;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 public class JDFNumberStateTest extends JDFTestCaseBase
 {
@@ -96,6 +97,7 @@ public class JDFNumberStateTest extends JDFTestCaseBase
 	JDFNumberState iState = null;
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

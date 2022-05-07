@@ -135,6 +135,7 @@ import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StatusUtil;
 import org.cip4.jdflib.util.StatusUtil.AmountBag;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -1009,6 +1010,7 @@ public class DigiPrintTest extends ExampleTest
 	 *
 	 */
 	@Override
+	@BeforeEach
 	public void setUp()
 	{
 		KElement.setLongID(false);

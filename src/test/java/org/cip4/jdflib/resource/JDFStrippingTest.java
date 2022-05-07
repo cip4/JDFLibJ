@@ -56,6 +56,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -72,10 +73,11 @@ public class JDFStrippingTest extends JDFTestCaseBase
 	private JDFBinderySignature bs = null;
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 * @throws Exception
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

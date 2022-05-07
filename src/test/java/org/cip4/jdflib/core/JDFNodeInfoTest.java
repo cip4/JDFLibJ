@@ -81,6 +81,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -310,6 +311,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 	}
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

@@ -59,6 +59,7 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.PlatformUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -374,6 +375,7 @@ public class JDFAuditTest extends ExampleTest
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

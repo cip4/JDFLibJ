@@ -79,6 +79,7 @@ import org.cip4.jdflib.extensions.examples.ExampleTest;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -99,9 +100,10 @@ public abstract class BaseGoldenTicketTest extends ExampleTest
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
@@ -112,7 +114,7 @@ public abstract class BaseGoldenTicketTest extends ExampleTest
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
 	public void tearDown() throws Exception

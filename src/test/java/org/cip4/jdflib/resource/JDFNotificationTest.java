@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.resource.JDFNotification.EnumNotificationDetails;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -313,6 +314,7 @@ public class JDFNotificationTest extends JDFTestCaseBase
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

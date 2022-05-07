@@ -56,6 +56,7 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -68,9 +69,10 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	private JDFDeviceInfo di;
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp()
 	{
 		KElement.setLongID(false);

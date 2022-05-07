@@ -215,7 +215,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 * @throws Exception
 	 */
 	@Override
@@ -228,7 +228,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#toString()
+	 * @see JDFTestCaseBase#toString()
 	 * @return
 	 */
 	@Override

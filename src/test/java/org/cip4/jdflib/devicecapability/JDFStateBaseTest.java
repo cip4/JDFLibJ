@@ -106,6 +106,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
 import org.cip4.jdflib.resource.devicecapability.JDFMatrixState;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 public class JDFStateBaseTest extends JDFTestCaseBase
 {
@@ -113,6 +114,7 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 	private JDFDeviceCap deviceCap;
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

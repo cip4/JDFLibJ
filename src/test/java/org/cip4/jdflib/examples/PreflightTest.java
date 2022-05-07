@@ -45,6 +45,7 @@ import org.cip4.jdflib.resource.process.JDFPreflightReport;
 import org.cip4.jdflib.resource.process.JDFPreflightReportRulePool;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 public class PreflightTest extends JDFTestCaseBase
 {
@@ -60,6 +61,7 @@ public class PreflightTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

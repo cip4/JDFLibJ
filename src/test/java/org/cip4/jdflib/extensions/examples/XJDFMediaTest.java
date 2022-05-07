@@ -236,8 +236,8 @@ public class XJDFMediaTest extends ExampleTest
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
-	@BeforeEach
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		KElement.setLongID(false);

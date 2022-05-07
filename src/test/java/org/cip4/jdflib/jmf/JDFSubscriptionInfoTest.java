@@ -77,6 +77,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -110,6 +111,7 @@ public class JDFSubscriptionInfoTest extends JDFTestCaseBase
 	 * @throws Exception
 	*/
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub

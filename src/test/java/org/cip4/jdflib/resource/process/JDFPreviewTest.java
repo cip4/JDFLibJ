@@ -52,6 +52,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -138,6 +139,7 @@ public class JDFPreviewTest extends JDFTestCaseBase
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		JDFAudit.setStaticAuthor(null);

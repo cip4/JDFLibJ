@@ -105,6 +105,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class AutomatedLayoutTest extends ExampleTest
@@ -139,6 +140,7 @@ public class AutomatedLayoutTest extends ExampleTest
 	 *
 	 */
 	@Override
+	@BeforeEach
 	public void setUp()
 	{
 		KElement.setLongID(false);

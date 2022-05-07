@@ -56,6 +56,7 @@ import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -71,9 +72,10 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		JDFDoc d = new JDFDoc(ElementName.QUEUE);
@@ -401,7 +403,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Test
 	public void testNonStatus() throws Exception
@@ -428,7 +430,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Test
 	public void testQueueSize() throws Exception

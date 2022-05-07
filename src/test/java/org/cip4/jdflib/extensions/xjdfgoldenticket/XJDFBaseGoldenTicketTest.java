@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions.xjdfgoldenticket;
 
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.extensions.examples.ExampleTest;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -84,6 +85,7 @@ public class XJDFBaseGoldenTicketTest extends ExampleTest
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

@@ -83,6 +83,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -153,9 +154,10 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -164,7 +166,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#toString()
+	 * @see JDFTestCaseBase#toString()
 	 */
 	@Override
 	public String toString()

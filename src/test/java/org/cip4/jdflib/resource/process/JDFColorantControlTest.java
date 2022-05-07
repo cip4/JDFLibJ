@@ -57,6 +57,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.util.StringUtil;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.xml.sax.SAXException;
@@ -474,6 +475,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	 *
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

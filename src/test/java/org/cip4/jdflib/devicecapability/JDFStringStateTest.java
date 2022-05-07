@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 public class JDFStringStateTest extends JDFTestCaseBase
 {
@@ -89,6 +90,7 @@ public class JDFStringStateTest extends JDFTestCaseBase
 	JDFStringState sState = null;
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

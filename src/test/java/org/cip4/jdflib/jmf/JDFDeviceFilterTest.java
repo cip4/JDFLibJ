@@ -80,6 +80,7 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -92,9 +93,10 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 	private JDFDeviceList dl;
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp()
 	{
 		KElement.setLongID(false);

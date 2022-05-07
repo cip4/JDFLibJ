@@ -79,6 +79,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -210,9 +211,10 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicketTest#setUp()
+	 * @see BaseGoldenTicketTest#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
@@ -236,7 +238,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicketTest#tearDown()
+	 * @see BaseGoldenTicketTest#tearDown()
 	 */
 	@Override
 	public void tearDown() throws Exception

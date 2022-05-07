@@ -41,6 +41,7 @@ package org.cip4.jdflib.datatypes;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.VString;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class StringCacheTest extends JDFTestCaseBase
@@ -117,9 +118,10 @@ public class StringCacheTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		StringCache.enable(false);
@@ -128,7 +130,7 @@ public class StringCacheTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
 	public void tearDown() throws Exception

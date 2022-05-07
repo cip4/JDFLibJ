@@ -107,6 +107,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFnot;
 import org.cip4.jdflib.resource.devicecapability.JDFor;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -126,9 +127,10 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -304,7 +306,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#toString()
+	 * @see JDFTestCaseBase#toString()
 	 */
 	@Override
 	public String toString()

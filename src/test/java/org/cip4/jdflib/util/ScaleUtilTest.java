@@ -97,7 +97,7 @@ public class ScaleUtilTest {
     }
 
 	/**
-	 * Test method for {@link org.cip4.jdflib.util.ScaleUtil#mm2Dtp(double)}.
+	 * Test method for {@link ScaleUtil#mm2Dtp(double)}.
 	 */
 	@Test
 	public void testMm2Dtp()
@@ -106,7 +106,7 @@ public class ScaleUtilTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.jdflib.util.ScaleUtil#dtp2Mm(double)}.
+	 * Test method for {@link ScaleUtil#dtp2Mm(double)}.
 	 */
 	@Test
 	public void testDtp2Mm()

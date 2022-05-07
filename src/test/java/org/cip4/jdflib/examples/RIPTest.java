@@ -34,6 +34,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.StatusCounter;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 public class RIPTest extends JDFTestCaseBase
 {
@@ -100,6 +101,7 @@ public class RIPTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -179,7 +181,7 @@ public class RIPTest extends JDFTestCaseBase
 		JDFDoc d2 = statCounter.getDocJMFResource();
 		JDFJMF jmf = d2.getJMFRoot();
 		jmf.convertResponses(null);
-		JDFSignal sig = jmf.appendSignal(org.cip4.jdflib.jmf.JDFMessage.EnumType.Notification);
+		JDFSignal sig = jmf.appendSignal(JDFMessage.EnumType.Notification);
 		JDFNotification not = sig.appendNotification();
 		not.setXPathAttribute("MileStone/@MileStoneType", "PrepressCompleted");
 		not.setXPathAttribute("MileStone/@Amount", "5");

@@ -79,6 +79,7 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -98,6 +99,7 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub

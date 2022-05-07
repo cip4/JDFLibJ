@@ -47,6 +47,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -369,6 +370,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Override
+	@BeforeEach
 	public void setUp()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);

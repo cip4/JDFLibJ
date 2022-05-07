@@ -108,7 +108,7 @@ import org.junit.jupiter.api.Test;
 public class JMFResourceTest extends JDFTestCaseBase
 {
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
 	@BeforeEach
@@ -398,7 +398,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		niRQPS1.setNodeStatus(EnumNodeStatus.Aborted);
 		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
 		final JDFNode jdf = docJDF.getJDFRoot();
-		jdf.setType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
+		jdf.setType(JDFNode.EnumType.ConventionalPrinting);
 		jdf.setStatus(EnumNodeStatus.Waiting);
 		jdf.setJobID("JobID");
 		jdf.setJobPartID("JobPartID");
@@ -444,7 +444,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 
 		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
 		final JDFNode jdf = docJDF.getJDFRoot();
-		jdf.setType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
+		jdf.setType(JDFNode.EnumType.ConventionalPrinting);
 		final JDFMedia mediaJDF = (JDFMedia) jdf.addResource("Media", null, EnumUsage.Input, null, null, null, null);
 		mediaJDF.setDimension(new JDFXYPair(40, 60));
 		rqp.setJobID(jdf.getJobID(true));

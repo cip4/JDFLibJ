@@ -80,6 +80,7 @@ import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -109,9 +110,10 @@ public class JDFComponentTest extends JDFTestCaseBase
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -187,7 +189,7 @@ public class JDFComponentTest extends JDFTestCaseBase
 
 	/**
 	 * 	@Override
-	 * @see org.cip4.jdflib.JDFTestCaseBase#toString()
+	 * @see JDFTestCaseBase#toString()
 	 */
 	@Override
 	public String toString()

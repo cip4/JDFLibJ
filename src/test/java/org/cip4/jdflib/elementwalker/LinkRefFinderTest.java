@@ -49,6 +49,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.ListMap;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -63,7 +64,7 @@ public class LinkRefFinderTest extends JDFTestCaseBase
 	VElement vM;
 
 	/**
-	 * Test method for {@link org.cip4.jdflib.elementwalker.LinkRefFinder#getMap(org.cip4.jdflib.node.JDFNode)}.
+	 * Test method for {@link LinkRefFinder#getMap(JDFNode)}.
 	 */
 	@Test
 	public void testGetTheMap()
@@ -74,7 +75,7 @@ public class LinkRefFinderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * Test method for {@link org.cip4.jdflib.elementwalker.LinkRefFinder#getMap(org.cip4.jdflib.node.JDFNode)}.
+	 * Test method for {@link LinkRefFinder#getMap(JDFNode)}.
 	 */
 	@Test
 	public void testGetMap()
@@ -118,6 +119,7 @@ public class LinkRefFinderTest extends JDFTestCaseBase
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

@@ -76,6 +76,7 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -240,9 +241,10 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicketTest#setUp()
+	 * @see BaseGoldenTicketTest#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
@@ -253,7 +255,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicketTest#tearDown()
+	 * @see BaseGoldenTicketTest#tearDown()
 	 */
 	@Override
 	public void tearDown() throws Exception

@@ -86,7 +86,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		/**
 		 * dummy that alternates ok and false
 		 *
-		 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
+		 * @see HotFolderListener#hotFile(File)
 		 */
 		@Override
 		public boolean hotFile(final File hotFile)
@@ -133,7 +133,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		/**
 		 * dummy that alternates ok and false
 		 *
-		 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
+		 * @see HotFolderListener#hotFile(File)
 		 */
 		@Override
 		public boolean hotFile(final File hotFile)
@@ -159,7 +159,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
 	@BeforeEach
@@ -818,7 +818,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
 	@AfterEach

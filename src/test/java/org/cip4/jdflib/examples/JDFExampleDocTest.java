@@ -142,6 +142,7 @@ import org.cip4.jdflib.span.JDFXYPairSpan;
 import org.cip4.jdflib.util.MyArgs;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -157,6 +158,7 @@ public class JDFExampleDocTest extends ExampleTest
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

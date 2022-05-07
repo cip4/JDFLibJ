@@ -92,6 +92,7 @@ import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.resource.process.JDFPageElement;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -312,6 +313,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

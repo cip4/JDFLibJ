@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.resource.devicecapability.JDFNameState;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 public class JDFNameStateTest extends JDFTestCaseBase
 {
@@ -93,6 +94,7 @@ public class JDFNameStateTest extends JDFTestCaseBase
 	JDFNameState theState = null;
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

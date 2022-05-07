@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi
@@ -96,9 +97,10 @@ public class JMFStatusTest extends JDFTestCaseBase
 
 	/**
 	 * 
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp()
 	{
 		KElement.setLongID(false);

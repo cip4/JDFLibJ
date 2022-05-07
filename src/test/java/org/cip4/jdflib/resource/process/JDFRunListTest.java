@@ -63,6 +63,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -856,6 +857,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		KElement.setLongID(false);

@@ -53,6 +53,7 @@ import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -85,6 +86,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 	}
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -249,7 +251,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
 	public void tearDown() throws Exception

@@ -74,6 +74,7 @@ import java.io.File;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.thread.DelayedPersist;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -103,10 +104,11 @@ public class BackupDirectoryTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 * @throws Exception
 	*/
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{ // TODO Auto-generated method stub
 		super.setUp();

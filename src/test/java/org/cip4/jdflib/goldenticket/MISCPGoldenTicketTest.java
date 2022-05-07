@@ -82,6 +82,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -331,9 +332,10 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicketTest#setUp()
+	 * @see BaseGoldenTicketTest#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

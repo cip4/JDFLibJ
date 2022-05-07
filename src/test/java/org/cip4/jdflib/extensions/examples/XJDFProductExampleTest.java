@@ -87,6 +87,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
 import org.cip4.jdflib.util.JDFDate;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -197,6 +198,7 @@ public class XJDFProductExampleTest extends ExampleTest
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

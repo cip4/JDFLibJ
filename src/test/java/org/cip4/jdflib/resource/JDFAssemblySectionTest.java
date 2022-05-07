@@ -48,6 +48,7 @@ import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -62,10 +63,11 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 	private JDFAssembly as = null;
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 * @throws Exception
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

@@ -77,6 +77,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.LinkRefFinder;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
@@ -110,6 +111,7 @@ import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -485,7 +487,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	@Test
 	public void testGetResourceRootJMF()
 	{
-		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, org.cip4.jdflib.jmf.JDFMessage.EnumType.Resource);
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Resource);
 		final JDFResourceInfo ri = jmf.getCreateSignal(0).appendResourceInfo();
 		final JDFExposedMedia xm = (JDFExposedMedia) ri.appendResource("ExposedMedia");
 		final JDFAttributeMap partMap = new JDFAttributeMap();
@@ -3711,7 +3713,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	/**
 	 *
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
 	public void tearDown() throws Exception
@@ -3725,9 +3727,10 @@ public class JDFResourceTest extends JDFTestCaseBase
 	/**
 	 *
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

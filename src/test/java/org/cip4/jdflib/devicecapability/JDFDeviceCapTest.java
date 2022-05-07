@@ -113,6 +113,7 @@ import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -129,6 +130,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	private JDFDevice device;
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		final JDFDoc doc = new JDFDoc("Device");

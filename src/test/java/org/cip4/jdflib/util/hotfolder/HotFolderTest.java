@@ -620,7 +620,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	}
 
 	/***
-	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
 	public synchronized void tearDown() throws Exception

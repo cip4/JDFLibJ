@@ -59,8 +59,8 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 * @see junit.framework.TestCase#setUp()
 	 * @throws Exception if snafu
 	 */
-	@BeforeEach
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

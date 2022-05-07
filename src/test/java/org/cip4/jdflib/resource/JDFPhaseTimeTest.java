@@ -82,6 +82,7 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -92,7 +93,7 @@ public class JDFPhaseTimeTest extends JDFTestCaseBase
 	private JDFPhaseTime pt = null;
 
 	/**
-	 * Test method for {@link org.cip4.jdflib.resource.JDFPhaseTime#getDeviceID()}.
+	 * Test method for {@link JDFPhaseTime#getDeviceID()}.
 	 */
 	@Test
 	public void testGetDeviceID()
@@ -102,7 +103,7 @@ public class JDFPhaseTimeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * Test method for {@link org.cip4.jdflib.resource.JDFPhaseTime#setDeviceID(java.lang.String)}.
+	 * Test method for {@link JDFPhaseTime#setDeviceID(String)}.
 	 */
 	@Test
 	public void testSetDeviceID()
@@ -116,6 +117,7 @@ public class JDFPhaseTimeTest extends JDFTestCaseBase
 	 * @throws Exception
 	*/
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

@@ -88,6 +88,7 @@ import org.cip4.jdflib.datatypes.JDFDurationRangeList;
 import org.cip4.jdflib.resource.devicecapability.JDFDurationState;
 import org.cip4.jdflib.util.JDFDuration;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 public class JDFDurationStateTest extends JDFTestCaseBase
 {
@@ -95,6 +96,7 @@ public class JDFDurationStateTest extends JDFTestCaseBase
 	JDFDurationState iState = null;
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

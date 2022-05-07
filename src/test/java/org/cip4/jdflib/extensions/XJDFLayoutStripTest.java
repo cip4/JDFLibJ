@@ -63,6 +63,7 @@ import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -286,10 +287,11 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.XJDFCreatorTest#setUp()
+	 * @see XJDFCreatorTest#setUp()
 	 * @throws Exception
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

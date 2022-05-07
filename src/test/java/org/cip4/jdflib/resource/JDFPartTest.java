@@ -54,6 +54,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 ////////////////////////////////////////////////////////////////
@@ -97,6 +98,7 @@ public class JDFPartTest extends JDFTestCaseBase
 	 *
 	 */
 	@Override
+	@BeforeEach
 	public void setUp()
 	{
 		final JDFDoc doc = new JDFDoc("Part");

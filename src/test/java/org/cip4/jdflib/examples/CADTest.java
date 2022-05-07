@@ -100,6 +100,7 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -354,6 +355,7 @@ public class CADTest extends JDFTestCaseBase
 	 *
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

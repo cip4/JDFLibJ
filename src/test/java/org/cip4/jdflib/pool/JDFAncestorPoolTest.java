@@ -81,6 +81,7 @@ import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 /**
  * @author RP
@@ -105,6 +106,7 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 	private JDFAncestorPool ap;
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

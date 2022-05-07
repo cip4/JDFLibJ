@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -133,6 +134,7 @@ public class JDFMatrixEvaluationTest extends JDFTestCaseBase
 	}
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

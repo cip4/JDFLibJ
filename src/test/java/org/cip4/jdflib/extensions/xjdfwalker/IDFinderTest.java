@@ -48,6 +48,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -60,7 +61,7 @@ public class IDFinderTest extends JDFTestCaseBase
 	KElement root;
 
 	/**
-	 * Test method for {@link org.cip4.jdflib.extensions.xjdfwalker.IDFinder#getMap(KElement)}.
+	 * Test method for {@link IDFinder#getMap(KElement)}.
 	 */
 	@Test
 	public void testGetMap()
@@ -71,7 +72,7 @@ public class IDFinderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * Test method for {@link org.cip4.jdflib.extensions.xjdfwalker.IDFinder#getMap(KElement)}.
+	 * Test method for {@link IDFinder#getMap(KElement)}.
 	 */
 	@Test
 	public void testSignatureName()
@@ -101,6 +102,7 @@ public class IDFinderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

@@ -90,7 +90,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	private JDFRunList rl = null;
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 * @throws Exception
 	 */
 	@Override

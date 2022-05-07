@@ -99,6 +99,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceSubstitute;
 import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
 import org.cip4.jdflib.util.JDFDate;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.xml.sax.SAXException;
@@ -117,6 +118,7 @@ public class XJDFTest extends JDFTestCaseBase
 	*
 	*/
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		KElement.setLongID(false);

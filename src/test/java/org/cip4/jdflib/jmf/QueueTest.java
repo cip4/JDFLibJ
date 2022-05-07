@@ -57,6 +57,7 @@ import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -633,6 +634,7 @@ public class QueueTest extends JDFTestCaseBase
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub

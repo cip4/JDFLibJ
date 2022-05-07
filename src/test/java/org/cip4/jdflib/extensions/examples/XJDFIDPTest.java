@@ -65,6 +65,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.UrlUtil;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -168,9 +169,10 @@ public class XJDFIDPTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentName(null);

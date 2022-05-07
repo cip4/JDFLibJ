@@ -57,6 +57,7 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JDFDate;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -141,6 +142,7 @@ public class XJDFAdditionalExampleTest extends ExampleTest
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		JDFElement.setLongID(false);
