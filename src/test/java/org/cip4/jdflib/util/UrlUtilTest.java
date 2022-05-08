@@ -828,20 +828,20 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 			f = new File(".\\simple.pdf");
 			f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, i == 0));
-			assertEquals("asccii", f.getCanonicalPath(), f2.getCanonicalPath());
+			assertEquals(f.getCanonicalPath(), f2.getCanonicalPath(), "asccii");
 
 			f = new File("blö½d .pdf");
 			f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, i == 0));
-			assertEquals("non asccii", f.getCanonicalPath(), f2.getCanonicalPath());
+			assertEquals(f.getCanonicalPath(), f2.getCanonicalPath(), "non asccii");
 
 			f = new File("blöd .pdf");
 			f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, i == 0));
-			assertEquals("non asccii", f.getCanonicalPath(), f2.getCanonicalPath());
+			assertEquals(f.getCanonicalPath(), f2.getCanonicalPath(), "non asccii");
 
 			f = new File("blöd ist es 10€.pdf");
 			final String fileToUrl = UrlUtil.fileToUrl(f, i == 0);
 			f2 = UrlUtil.urlToFile(fileToUrl);
-			assertEquals("escape %20", f.getCanonicalPath(), f2.getCanonicalPath());
+			assertEquals(f.getCanonicalPath(), f2.getCanonicalPath(), "escape %20");
 			assertNull(UrlUtil.urlToFile("http://foo"));
 			assertNull(UrlUtil.urlToFile("https://foo"));
 			assertNull(UrlUtil.urlToFile("cid:foo"));
@@ -941,40 +941,40 @@ public class UrlUtilTest extends JDFTestCaseBase
 	public void testGetURLWithDirectory()
 	{
 		String url = "File://a.b";
-		assertEquals("test nulls", url, UrlUtil.getURLWithDirectory(null, url));
-		assertEquals("test nulls", url, UrlUtil.getURLWithDirectory("", url));
-		assertEquals("test nulls", url, UrlUtil.getURLWithDirectory("File:/dir", url));
+		assertEquals(url, UrlUtil.getURLWithDirectory("", url), "test nulls");
+		assertEquals(url, UrlUtil.getURLWithDirectory(null, url), "test nulls");
+		assertEquals(url, UrlUtil.getURLWithDirectory("File:/dir", url), "test nulls");
 
 		url = "a.b";
-		assertEquals("relative url", "File://dir/a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
-		assertEquals("relative url", "File://dir/a.b", UrlUtil.getURLWithDirectory("File://dir", url));
+		assertEquals("File://dir/a.b", UrlUtil.getURLWithDirectory("File://dir/", url), "relative url");
+		assertEquals("File://dir/a.b", UrlUtil.getURLWithDirectory("File://dir", url), "relative url");
 
 		url = "/a.b";
-		assertEquals("absolute url no host", "File://a.b", UrlUtil.getURLWithDirectory("File://host/", url));
-		assertEquals("absolute url no host", "File://a.b", UrlUtil.getURLWithDirectory("File://host", url));
+		assertEquals("File://a.b", UrlUtil.getURLWithDirectory("File://host/", url), "absolute url no host");
+		assertEquals("File://a.b", UrlUtil.getURLWithDirectory("File://host", url), "absolute url no host");
 
 		url = "/a.b:c";
-		assertEquals("absolute url no host - colon", "File://a.b:c", UrlUtil.getURLWithDirectory("File://host/", url));
-		assertEquals("absolute url no host - colon", "File://a.b:c", UrlUtil.getURLWithDirectory("File://host", url));
+		assertEquals("File://a.b:c", UrlUtil.getURLWithDirectory("File://host/", url), "absolute url no host - colon");
+		assertEquals("File://a.b:c", UrlUtil.getURLWithDirectory("File://host", url), "absolute url no host - colon");
 
 		url = "//a.b";
-		assertEquals("absolute url with default host", "File://a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
-		assertEquals("absolute url with default host", "File://a.b", UrlUtil.getURLWithDirectory("File://dir", url));
+		assertEquals("File://a.b", UrlUtil.getURLWithDirectory("File://dir/", url), "absolute url with default host");
+		assertEquals("File://a.b", UrlUtil.getURLWithDirectory("File://dir", url), "absolute url with default host");
 
 		url = "ftp://a.b";
-		assertEquals("absolute url with default host", "ftp://a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
+		assertEquals("ftp://a.b", UrlUtil.getURLWithDirectory("File://dir/", url), "absolute url with default host");
 		url = "http://a.b";
-		assertEquals("absolute url with default host", "http://a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
+		assertEquals("http://a.b", UrlUtil.getURLWithDirectory("File://dir/", url), "absolute url with default host");
 
 		url = "//boo/a.b";
-		assertEquals("absolute url with new host", "File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
-		assertEquals("absolute url with new host", "File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir", url));
+		assertEquals("File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir/", url), "absolute url with new host");
+		assertEquals("File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir", url), "absolute url with new host");
 
 		url = "//boo/./gg/../a.b";
-		assertEquals("absolute url with new host and cleandots", "File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
-		assertEquals("absolute url with new host and cleandots", "File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir", url));
+		assertEquals("File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir/", url), "absolute url with new host and cleandots");
+		assertEquals("File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir", url), "absolute url with new host and cleandots");
 
-		assertEquals("http url", "http://dir/a.b", UrlUtil.getURLWithDirectory("http://dir", "a.b"));
+		assertEquals("http://dir/a.b", UrlUtil.getURLWithDirectory("http://dir", "a.b"), "http url");
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
