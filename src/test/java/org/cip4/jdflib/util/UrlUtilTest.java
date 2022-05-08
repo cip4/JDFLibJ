@@ -854,7 +854,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 			assertTrue(UrlUtil.urlToFile(uC).getPath().startsWith("C:" + File.separator + "Documents and Settings"));
 			final File fi1 = new File("\\\\fooBar\\4€€.txt");
 			final File fi = UrlUtil.urlToFile("file://fooBar/4€%e2%82%ac.txt");
-			assertEquals("escape %20", fi.getCanonicalPath(), fi1.getCanonicalPath());
+			assertEquals(fi.getCanonicalPath(), fi1.getCanonicalPath(), "escape %20");
 			assertEquals(new File("C:\\Windows"), UrlUtil.urlToFile("file:/C:/Windows"));
 			assertEquals(new File("C:\\Windows"), UrlUtil.urlToFile("file:///C:/Windows"));
 			assertEquals(new File("C:\\Windows"), UrlUtil.urlToFile("file://localhost/C:/Windows"));
