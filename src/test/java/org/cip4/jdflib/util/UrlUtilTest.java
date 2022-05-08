@@ -899,8 +899,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 		File f = new File("./a b");
 		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "a%20b");
 		f = new File("../a.ß");
-		assertEquals("escaped utf8", StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "../a.%c3%9f");
-		assertEquals("unescaped but utf8", StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, false), '\\', "/", 0), new String(StringUtil.getUTF8Bytes("../a.ß")));
+		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "../a.%c3%9f", "escaped utf8");
+		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, false), '\\', "/", 0), new String(StringUtil.getUTF8Bytes("../a.ß")), "unescaped but utf8");
 	}
 
 	/**
