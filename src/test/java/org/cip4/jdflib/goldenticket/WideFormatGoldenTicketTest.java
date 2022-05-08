@@ -73,6 +73,7 @@ package org.cip4.jdflib.goldenticket;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.node.JDFNode;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -90,6 +91,7 @@ public class WideFormatGoldenTicketTest extends BaseGoldenTicketTest
 	 */
 	@Override
 	@Test
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		BaseGoldenTicket.misURL = "http://192.168.14.143:8010/FJC/Fiery";
