@@ -235,10 +235,15 @@ public class JDFDateTest extends JDFTestCaseBase
 	@Test
 	public void testDefaultHour()
 	{
-		JDFDate.setDefaultHour(4);
-		Assertions.assertEquals(4, JDFDate.getDefaultHour());
-		JDFDate.setDefaultHour(44);
-		Assertions.assertEquals(4, JDFDate.getDefaultHour());
+		int defaultHour = JDFDate.getDefaultHour();
+		try {
+			JDFDate.setDefaultHour(4);
+			Assertions.assertEquals(4, JDFDate.getDefaultHour());
+			JDFDate.setDefaultHour(44);
+			Assertions.assertEquals(4, JDFDate.getDefaultHour());
+		} finally {
+			JDFDate.setDefaultHour(defaultHour);
+		}
 	}
 
 	/**
