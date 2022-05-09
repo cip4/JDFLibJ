@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -53,10 +53,12 @@ import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -109,6 +111,26 @@ public class StatusCounterTest extends JDFTestCaseBase
 		return statusCounterTest.testAddPhase();
 	}
 
+	@Test
+	public void testCollisionWithFixVersion()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode docNode = doc.getJDFRoot();
+		final JDFComponent comp = (JDFComponent) docNode.appendMatchingResource(ElementName.COMPONENT, JDFNode.EnumProcessUsage.AnyOutput, null);
+		comp.appendElement("foo:bar", "www.foobar.com");
+		new StatusCounter(docNode, null, null);
+
+		final JDFNode n2 = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n2.setJobID("OuterJob");
+		final KElement e = n2.appendElement("foo:bar", "http://www.foo.com/schema");
+		final JDFNode n0 = (JDFNode) e.appendElement(ElementName.JDF);
+		n0.setJobID("NestedJob");
+		n0.appendStatusPool();
+		assertNotNull("Status Pool could not be added", n0.getStatusPool());
+		n2.fixVersion(JDFElement.EnumVersion.Version_1_3);
+		assertNotNull("Status Pool did not survive: " + n2.toDisplayXML(4), n0.getStatusPool());
+	}
+
 	/**
 	 * @throws Exception
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
@@ -116,19 +138,20 @@ public class StatusCounterTest extends JDFTestCaseBase
 	@Override
 	public void setUp() throws Exception
 	{
-		d = creatXMDoc();
-		n = d.getJDFRoot();
-		xpMedia = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
-		final JDFResourceLink rlxp = n.getLink(xpMedia, null);
-		rlxp.setAmount(100, null);
-		sc = new StatusCounter(n, null, null);
-		deviceID = "Status-counter-TestDevice";
-		sc.setDeviceID(deviceID);
-		resID = xpMedia.getID();
-		sc.setFirstRefID(resID);
-		sc.addPhase(resID, 200, 0, true);
-		employee = (JDFEmployee) new JDFDoc("Employee").getRoot();
-		employee.setPersonalID("P1");
+		// d = creatXMDoc();
+		// n = d.getJDFRoot();
+		// xpMedia = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null,
+		// 0);
+		// final JDFResourceLink rlxp = n.getLink(xpMedia, null);
+		// rlxp.setAmount(100, null);
+		// sc = new StatusCounter(n, null, null);
+		// deviceID = "Status-counter-TestDevice";
+		// sc.setDeviceID(deviceID);
+		// resID = xpMedia.getID();
+		// sc.setFirstRefID(resID);
+		// sc.addPhase(resID, 200, 0, true);
+		// employee = (JDFEmployee) new JDFDoc("Employee").getRoot();
+		// employee.setPersonalID("P1");
 		super.setUp();
 	}
 

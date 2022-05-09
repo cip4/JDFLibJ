@@ -414,6 +414,6 @@ public class WalkElement extends BaseWalker
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return (toCheck instanceof JDFElement);
+		return (toCheck instanceof JDFElement && JDFElement.isInJDFNameSpaceStatic(toCheck));
 	}
 }
