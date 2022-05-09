@@ -73,10 +73,6 @@ package org.cip4.jdflib.elementwalker;
  *
  */
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.auto.JDFAutoFitPolicy.EnumSizePolicy;
 import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumBindingEdge;
 import org.cip4.jdflib.core.ElementName;
@@ -87,7 +83,8 @@ import org.cip4.jdflib.resource.JDFLayoutPreparationParams;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class StrippingConverterTest
 {
@@ -101,9 +98,9 @@ public class StrippingConverterTest
 		final StrippingConverter strippingConverter = new StrippingConverter(lpp, parentJDF);
 		strippingConverter.convert();
 		final JDFBinderySignature bs = strippingConverter.getBinderySignature();
-		assertEquals(EnumBindingEdge.Bottom.getName(), bs.getBindingEdge().getName());
+		Assertions.assertEquals(EnumBindingEdge.Bottom.getName(), bs.getBindingEdge().getName());
 		final JDFAssembly ass = strippingConverter.getAssembly();
-		assertEquals(EnumBindingEdge.Bottom.getName(), ass.getBindingSide().getName());
+		Assertions.assertEquals(EnumBindingEdge.Bottom.getName(), ass.getBindingSide().getName());
 	}
 
 	@Test
@@ -116,7 +113,7 @@ public class StrippingConverterTest
 		strippingConverter.convert();
 		final JDFBinderySignature bs = strippingConverter.getBinderySignature();
 		final JDFStrippingParams sp = strippingConverter.getStrippingParams();
-		assertNotNull(sp.getElement(ElementName.FITPOLICY));
+		Assertions.assertNotNull(sp.getElement(ElementName.FITPOLICY));
 	}
 
 	@Test
@@ -128,7 +125,7 @@ public class StrippingConverterTest
 		final StrippingConverter strippingConverter = new StrippingConverter(lpp, parentJDF);
 		strippingConverter.convert();
 		final JDFStrippingParams spp = (JDFStrippingParams) parentJDF.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
-		assertTrue(spp.getAutomated());
+		Assertions.assertTrue(spp.getAutomated());
 	}
 
 	/**

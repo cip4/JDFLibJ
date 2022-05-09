@@ -5,16 +5,12 @@ plugins {
     id 'maven-publish'
     id 'signing'
     id 'io.codearte.nexus-staging' version '0.30.0'
+    id 'jacoco'
 }
 
 group = 'org.cip4.lib.jdf'
 description = 'CIP4 JDF Writer Java'
-
-if (project.hasProperty('projectVersion')) {
-    version = project.projectVersion
-} else {
-    version = '2.1.7.x-SNAPSHOT'
-}
+version = project.hasProperty('projectVersion') ? project.projectVersion : '2.1.7.x-SNAPSHOT'
 
 java {
     withJavadocJar()
@@ -23,12 +19,6 @@ java {
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
-
-test {
-    systemProperty "file.encoding", "utf-8"
-    maxParallelForks = 1
-    forkEvery = 1
-}
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
@@ -68,7 +58,7 @@ publishing {
                 }
                 licenses {
                     license {
-                        name = 'TCIP4 Software License'
+                        name = 'CIP4 Software License'
                         url = 'https://github.com/cip4/JDFLibJ/blob/master/LICENSE.md'
                     }
                 }
@@ -109,13 +99,13 @@ repositories {
 
 signing {
     if (!version.endsWith("SNAPSHOT")) {
-         sign publishing.publications.mavenJava
+        sign publishing.publications.mavenJava
     }
 }
 
 javadoc {
     failOnError = false
-    if(JavaVersion.current().isJava9Compatible()) {
+    if (JavaVersion.current().isJava9Compatible()) {
         options.addBooleanOption('html5', true)
     }
 }
@@ -140,5 +130,34 @@ dependencies {
 	}
     compile 'javax.mail:mailapi:1.4.3'
 
-    testCompile 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation 'org.mockito:mockito-core:4.5.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = false
+    }
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty "file.encoding", "utf-8"
+    maxParallelForks = Math.max(1, Math.ceil(Runtime.getRuntime().availableProcessors() * 0.75))
+}
+
+jar {
+    manifest {
+        attributes(
+                "Implementation-Title": project.description,
+                "Implementation-Version": project.version,
+                "Implementation-Vendor-Id": project.group,
+                "Specification-Title": project.description,
+                "Specification-Version": project.version,
+                "Build-Jdk": JavaVersion.current(),
+        )
+    }
 }

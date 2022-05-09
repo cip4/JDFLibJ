@@ -76,9 +76,6 @@
  */
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -86,7 +83,8 @@ import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -107,7 +105,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		for (int i = 0; i < 12345; i++)
 		{
 			ios.write(i);
-			assertEquals(ios.size(), 1 + i);
+			Assertions.assertEquals(ios.size(), 1 + i);
 		}
 		ios.close();
 	}
@@ -124,12 +122,12 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 			ios.write(i);
 		}
 		ByteArrayIOInputStream in = ios.getInputStream();
-		assertEquals(0, in.tell());
+		Assertions.assertEquals(0, in.tell());
 		in.seek(-1);
-		assertTrue(in.read() >= 0);
-		assertTrue(in.read() < 0);
+		Assertions.assertTrue(in.read() >= 0);
+		Assertions.assertTrue(in.read() < 0);
 		in.seek(42);
-		assertEquals(42, in.tell());
+		Assertions.assertEquals(42, in.tell());
 		ios.close();
 	}
 
@@ -145,7 +143,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 			ios.write(i);
 		}
 		final ByteArrayIOStream ios2 = new ByteArrayIOStream(ios.getInputStream());
-		assertEquals(ios.toString(), ios2.toString());
+		Assertions.assertEquals(ios.toString(), ios2.toString());
 		ios.close();
 		ios2.close();
 	}
@@ -170,7 +168,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		final InputStream is = ios.getInputStream();
 		for (int i = 0; i < 20000; i++)
 		{
-			assertEquals(is.read(), i % 256);
+			Assertions.assertEquals(is.read(), i % 256);
 		}
 		ios.close();
 	}
@@ -186,13 +184,13 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		FileUtil.forceDelete(f);
 		ByteArrayIOStream ios = new ByteArrayIOStream(f);
 		InputStream is = ios.getInputStream();
-		assertEquals(is.available(), 0);
+		Assertions.assertEquals(is.available(), 0);
 		ios.close();
 		// now null
 		f = null;
 		ios = new ByteArrayIOStream(f);
 		is = ios.getInputStream();
-		assertEquals(is.available(), 0);
+		Assertions.assertEquals(is.available(), 0);
 		ios.close();
 	}
 
@@ -205,7 +203,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		final byte[] b = "abc".getBytes();
 		final ByteArrayIOStream ios = new ByteArrayIOStream(b);
 
-		assertEquals(ios.getInputStream().available(), 3);
+		Assertions.assertEquals(ios.getInputStream().available(), 3);
 		ios.close();
 	}
 
@@ -225,10 +223,10 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		int i;
 		while ((i = is.read()) >= 0)
 		{
-			assertEquals("" + n, i, n % 256);
+			Assertions.assertEquals(i, n % 256, "" + n);
 			n++;
 		}
-		assertEquals(n, 200000);
+		Assertions.assertEquals(n, 200000);
 		ios.close();
 	}
 
@@ -250,11 +248,11 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		while ((i = is.read()) >= 0)
 		{
 			final int jj = is2.read();
-			assertEquals("" + n, i, n % 256);
-			assertEquals(jj, i);
+			Assertions.assertEquals(i, n % 256, "" + n);
+			Assertions.assertEquals(jj, i);
 			n++;
 		}
-		assertEquals(n, 50000);
+		Assertions.assertEquals(n, 50000);
 		ios.close();
 	}
 
@@ -276,11 +274,11 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		while ((i = is.read()) >= 0)
 		{
 			final int jj = is2.read();
-			assertEquals("" + n, i, n % 256);
-			assertEquals(jj, i);
+			Assertions.assertEquals(i, n % 256, "" + n);
+			Assertions.assertEquals(jj, i);
 			n++;
 		}
-		assertEquals(n, 50000);
+		Assertions.assertEquals(n, 50000);
 		ios.close();
 	}
 
@@ -302,11 +300,11 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		while ((i = is.read()) >= 0)
 		{
 			final int jj = is2.read();
-			assertEquals("" + n, i, n % 256);
-			assertEquals(jj, i);
+			Assertions.assertEquals(i, n % 256, "" + n);
+			Assertions.assertEquals(jj, i);
 			n++;
 		}
-		assertEquals(n, 50000);
+		Assertions.assertEquals(n, 50000);
 		ios.close();
 	}
 

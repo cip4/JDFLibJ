@@ -73,8 +73,9 @@ import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.thread.DelayedPersist;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -91,22 +92,23 @@ public class BackupDirectoryTest extends JDFTestCaseBase
 		for (int i = 0; i < 30; i++)
 		{
 			File newFile = dir.getNewFile("File" + i);
-			Assert.assertNotNull(newFile);
+			Assertions.assertNotNull(newFile);
 			ThreadUtil.sleep(20);
 			if (i > 20)
 			{
-				Assert.assertFalse("old die first", ContainerUtil.toHashSet(dir.listFiles()).contains(new File("File" + (20 - i))));
+				Assertions.assertFalse(ContainerUtil.toHashSet(dir.listFiles()).contains(new File("File" + (20 - i))), "old die first");
 			}
 		}
 		DelayedPersist.shutDown();
-		Assert.assertEquals(dir.listFiles().length, 20);
+		Assertions.assertEquals(dir.listFiles().length, 20);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 * @throws Exception
 	*/
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{ // TODO Auto-generated method stub
 		super.setUp();

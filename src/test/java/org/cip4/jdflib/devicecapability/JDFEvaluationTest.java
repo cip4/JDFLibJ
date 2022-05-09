@@ -71,10 +71,6 @@
 
 package org.cip4.jdflib.devicecapability;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -110,7 +106,9 @@ import org.cip4.jdflib.resource.devicecapability.JDFXYPairEvaluation;
 import org.cip4.jdflib.resource.devicecapability.JDFnot;
 import org.cip4.jdflib.resource.devicecapability.JDFor;
 import org.cip4.jdflib.resource.process.JDFComponent;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -129,9 +127,10 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -168,16 +167,16 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		JDFDoc d = new JDFDoc(ElementName.INTEGEREVALUATION);
 		JDFIntegerEvaluation ie = (JDFIntegerEvaluation) d.getRoot();
 		ie.appendValueList(1);
-		assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1");
+		Assertions.assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1");
 		ie.appendValueList(3);
-		assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3");
+		Assertions.assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3");
 		ie.appendValueList(4);
-		assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3 ~ 4");
+		Assertions.assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3 ~ 4");
 		ie.appendValueList(5);
-		assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3 ~ 5");
+		Assertions.assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3 ~ 5");
 		ie.appendValueList(Integer.MAX_VALUE);
-		assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3 ~ 5 INF");
-		assertEquals(ie.getValueList(), new JDFIntegerRangeList("1 3 ~ 5 INF"));
+		Assertions.assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3 ~ 5 INF");
+		Assertions.assertEquals(ie.getValueList(), new JDFIntegerRangeList("1 3 ~ 5 INF"));
 	}
 
 	/**
@@ -190,10 +189,10 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		JDFDoc d = new JDFDoc(ElementName.ENUMERATIONEVALUATION);
 		JDFEnumerationEvaluation ee = (JDFEnumerationEvaluation) d.getRoot();
 		ee.setRegExp("a( b)?");
-		assertTrue(ee.fitsValue("a"));
-		assertTrue(ee.fitsValue("a b"));
-		assertFalse(ee.fitsValue("a b c"));
-		assertFalse(ee.fitsValue("c"));
+		Assertions.assertTrue(ee.fitsValue("a"));
+		Assertions.assertTrue(ee.fitsValue("a b"));
+		Assertions.assertFalse(ee.fitsValue("a b c"));
+		Assertions.assertFalse(ee.fitsValue("c"));
 	}
 
 	/**
@@ -206,10 +205,10 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		JDFDoc d = new JDFDoc(ElementName.XYPAIREVALUATION);
 		JDFXYPairEvaluation ie = (JDFXYPairEvaluation) d.getRoot();
 		ie.setTolerance(new JDFXYPair(1, 1));
-		assertEquals(ie.getTolerance().toString(), "1 1");
+		Assertions.assertEquals(ie.getTolerance().toString(), "1 1");
 		ie.setValueList(new JDFXYPair(1.5, 1.5));
 		ie.appendBasicPreflightTest("foo");
-		assertTrue(ie.fitsMap(new JDFAttributeMap("foo", "1.2 1.6")));
+		Assertions.assertTrue(ie.fitsMap(new JDFAttributeMap("foo", "1.2 1.6")));
 	}
 
 	/**
@@ -222,7 +221,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		JDFDoc d = new JDFDoc(ElementName.XYPAIREVALUATION);
 		JDFXYPairEvaluation ie = (JDFXYPairEvaluation) d.getRoot();
 		ie.setPath("abc");
-		assertEquals(ie.getPath(), "abc");
+		Assertions.assertEquals(ie.getPath(), "abc");
 	}
 
 	/**
@@ -237,7 +236,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		tst.setContext("//Component");
 		JDFIsPresentEvaluation ipe = (JDFIsPresentEvaluation) tst.getTerm();
 		ipe.setRefTarget(ptState);
-		assertEquals(ipe.getrRef(), ptState.getID());
+		Assertions.assertEquals(ipe.getrRef(), ptState.getID());
 
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode node = doc.getJDFRoot();
@@ -248,10 +247,10 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		XMLDoc rep = new XMLDoc("root", null);
 		KElement eRep = rep.getRoot();
 		boolean fitsJDF = tst.fitsJDF(comp, eRep);
-		assertTrue(fitsJDF);
+		Assertions.assertTrue(fitsJDF);
 		comp = (JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "s1");
 		fitsJDF = tst.fitsJDF(comp, eRep);
-		assertTrue("also partition leaves ", fitsJDF);
+		Assertions.assertTrue(fitsJDF, "also partition leaves ");
 
 	}
 
@@ -268,7 +267,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		JDFor or = (JDFor) ((JDFnot) tst.getTerm()).getTerm(EnumTerm.or, 0);
 		JDFIsPresentEvaluation ipe = (JDFIsPresentEvaluation) or.appendTerm(EnumTerm.IsPresentEvaluation);
 		ipe.setRefTarget(ptState);
-		assertEquals(ipe.getrRef(), ptState.getID());
+		Assertions.assertEquals(ipe.getrRef(), ptState.getID());
 
 		JDFEnumerationEvaluation enev = (JDFEnumerationEvaluation) or.appendTerm(EnumTerm.EnumerationEvaluation);
 		enev.setRefTarget(compState);
@@ -282,32 +281,32 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		XMLDoc rep = new XMLDoc("root", null);
 		KElement eRep = rep.getRoot();
 		boolean fitsJDF = tst.fitsJDF(comp, eRep);
-		assertTrue(fitsJDF);
+		Assertions.assertTrue(fitsJDF);
 
 		comp.setProductType("foobar");
 		fitsJDF = tst.fitsJDF(comp, eRep);
-		assertFalse("have pt", fitsJDF);
+		Assertions.assertFalse(fitsJDF, "have pt");
 
 		Vector<EnumComponentType> v = new Vector<EnumComponentType>();
 		v.add(EnumComponentType.FinalProduct);
 		comp.setComponentType(v);
 		fitsJDF = tst.fitsJDF(comp, eRep);
-		assertFalse("have both", fitsJDF);
+		Assertions.assertFalse(fitsJDF, "have both");
 
 		comp.removeAttribute("ProductType");
 		fitsJDF = tst.fitsJDF(comp, eRep);
-		assertFalse("have final", fitsJDF);
+		Assertions.assertFalse(fitsJDF, "have final");
 
 		v = new Vector<EnumComponentType>();
 		v.add(EnumComponentType.PartialProduct);
 		comp.setComponentType(v);
 		fitsJDF = tst.fitsJDF(comp, eRep);
-		assertTrue("have no final", fitsJDF);
+		Assertions.assertTrue(fitsJDF, "have no final");
 	}
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#toString()
+	 * @see JDFTestCaseBase#toString()
 	 */
 	@Override
 	public String toString()

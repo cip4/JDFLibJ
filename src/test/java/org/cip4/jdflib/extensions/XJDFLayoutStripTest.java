@@ -36,21 +36,14 @@
  */
 package org.cip4.jdflib.extensions;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation;
 import org.cip4.jdflib.auto.JDFAutoStripCellParams.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCustomerInfo;
-import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.*;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
@@ -69,7 +62,9 @@ import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -292,10 +287,11 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.XJDFCreatorTest#setUp()
+	 * @see XJDFCreatorTest#setUp()
 	 * @throws Exception
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -328,8 +324,8 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 
 		final KElement xjdf = xjdf20.makeNewJDF(n, null);
 		final JDFBinderySignature bsNew = (JDFBinderySignature) xjdf.getChildByTagName(ElementName.BINDERYSIGNATURE, null, 0, null, false, true);
-		assertEquals("TwoSidedHeadToFoot", bsNew.getSignatureCell(0).getAttribute(AttributeName.SIDES));
-		assertEquals(42, bsNew.getSignatureCell(0).getIntAttribute(XJDFConstants.TrimSpine, null, 0));
+		Assertions.assertEquals("TwoSidedHeadToFoot", bsNew.getSignatureCell(0).getAttribute(AttributeName.SIDES));
+		Assertions.assertEquals(42, bsNew.getSignatureCell(0).getIntAttribute(XJDFConstants.TrimSpine, null, 0));
 
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc dJDF = xc.convert(xjdf);
@@ -357,7 +353,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 
 		final KElement xjdf = xjdf20.makeNewJDF(n, null);
 		final JDFBinderySignature bsNew = (JDFBinderySignature) xjdf.getChildByTagName(ElementName.BINDERYSIGNATURE, null, 0, null, false, true);
-		assertEquals("OneSided", bsNew.getSignatureCell(0).getAttribute(AttributeName.SIDES));
+		Assertions.assertEquals("OneSided", bsNew.getSignatureCell(0).getAttribute(AttributeName.SIDES));
 
 	}
 
@@ -430,7 +426,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		losh.getCreatePartition(0, true).getResource().appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS1");
 		final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		final JDFDoc converted = jdfConverter.convert(theHelper);
-		assertNotNull(converted.getJDFRoot().getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0).getElement(ElementName.BINDERYSIGNATURE));
+		Assertions.assertNotNull(converted.getJDFRoot().getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0).getElement(ElementName.BINDERYSIGNATURE));
 
 	}
 
@@ -516,7 +512,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		loRes.appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS2");
 		final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		final JDFDoc converted = jdfConverter.convert(theHelper);
-		assertNotNull(converted.getJDFRoot().getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0).getElement(ElementName.BINDERYSIGNATURE));
+		Assertions.assertNotNull(converted.getJDFRoot().getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0).getElement(ElementName.BINDERYSIGNATURE));
 		writeRoundTripX(theHelper, "multiBS", EnumValidationLevel.Incomplete);
 
 	}
@@ -545,7 +541,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 
 		final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		final JDFDoc converted = jdfConverter.convert(theHelper);
-		assertNotNull(converted.getJDFRoot().getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0).getElement(ElementName.BINDERYSIGNATURE));
+		Assertions.assertNotNull(converted.getJDFRoot().getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0).getElement(ElementName.BINDERYSIGNATURE));
 		writeRoundTripX(theHelper, "multiBsAss", EnumValidationLevel.Incomplete);
 
 	}

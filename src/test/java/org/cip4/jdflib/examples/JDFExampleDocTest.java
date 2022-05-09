@@ -59,9 +59,6 @@
  */
 package org.cip4.jdflib.examples;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
 import java.io.File;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
@@ -144,7 +141,9 @@ import org.cip4.jdflib.span.JDFIntegerSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
 import org.cip4.jdflib.util.MyArgs;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * some simple examples
@@ -159,6 +158,7 @@ public class JDFExampleDocTest extends ExampleTest
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -590,7 +590,7 @@ public class JDFExampleDocTest extends ExampleTest
 		auditPool.setPhase(JDFElement.EnumNodeStatus.InProgress, null, null, null);
 		auditPool.setPhase(JDFElement.EnumNodeStatus.InProgress, null, null, null);
 		auditPool.setPhase(JDFElement.EnumNodeStatus.Cleanup, null, null, null);
-		assertEquals(auditPool.getPoolChildren("PhaseTime", null).size(), 3);
+		Assertions.assertEquals(auditPool.getPoolChildren("PhaseTime", null).size(), 3);
 
 		// get the input runlist
 		final VElement inOutLinks = root.getResourceLinkPool().getInOutLinks(EnumUsage.Input, false, "RunList", null);
@@ -1295,7 +1295,7 @@ public class JDFExampleDocTest extends ExampleTest
 		}
 		catch (final DataFormatException e)
 		{
-			fail("rectangle");
+			Assertions.fail("rectangle");
 		}
 
 		final JDFStrippingParams sp2 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.BinderySignatureName, "BS2");
@@ -1310,7 +1310,7 @@ public class JDFExampleDocTest extends ExampleTest
 		}
 		catch (final DataFormatException e)
 		{
-			fail("rectangle");
+			Assertions.fail("rectangle");
 		}
 		misNode.addResource(ElementName.LAYOUT, EnumUsage.Output);
 		//TODO		writeRoundTrip(misNode, "StrippingGang");

@@ -78,14 +78,10 @@ package org.cip4.jdflib.resource;
 
 import org.cip4.jdflib.auto.JDFAutoInsertSheet.EnumSheetType;
 import org.cip4.jdflib.auto.JDFAutoInsertSheet.EnumSheetUsage;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.*;
 import org.cip4.jdflib.core.JDFElement.EnumNamedColor;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
@@ -101,12 +97,10 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFScore;
 import org.cip4.jdflib.resource.process.postpress.JDFScore.EnumScoreSide;
 import org.cip4.jdflib.span.JDFStringSpan;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import junit.framework.TestCase;
-public class JDFAutoResourceTest extends TestCase
-{
+public class JDFAutoResourceTest {
 	@Test
 	public void testRunList()
 	{
@@ -120,10 +114,10 @@ public class JDFAutoResourceTest extends TestCase
 		JDFInsertSheet is2 = rl.appendInsertSheet();
 		is2.setSheetType(EnumSheetType.SeparatorSheet);
 		is2.setSheetUsage(EnumSheetUsage.Slip);
-		Assert.assertNotSame("two insert sheets", is1, is2);
+		Assertions.assertNotSame(is1, is2, "two insert sheets");
 
 		rl.appendLayoutElement(); // 1
-		Assert.assertTrue("runlist valid", rl.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(rl.isValid(EnumValidationLevel.Complete), "runlist valid");
 		boolean b1 = false;
 		try
 		{
@@ -132,7 +126,7 @@ public class JDFAutoResourceTest extends TestCase
 		{
 			b1 = true;
 		}
-		Assert.assertTrue("only one layoutelement possible", b1);
+		Assertions.assertTrue(b1, "only one layoutelement possible");
 	}
 
 	@Test
@@ -144,9 +138,9 @@ public class JDFAutoResourceTest extends TestCase
 				EnumUsage.Input, null, null, null, null);
 		JDFColor col = cp.appendColor();
 		col.setColorName(EnumNamedColor.Red);
-		Assert.assertTrue("named color get", col.getColorName() == EnumNamedColor.Red);
-		Assert.assertTrue("named color get raw", col
-				.getAttribute(AttributeName.COLORNAME) == "Red");
+		Assertions.assertTrue(col.getColorName() == EnumNamedColor.Red, "named color get");
+		Assertions.assertTrue(col
+				.getAttribute(AttributeName.COLORNAME) == "Red", "named color get raw");
 	}
 
 	@Test
@@ -156,14 +150,12 @@ public class JDFAutoResourceTest extends TestCase
 		JDFNode n = d.getJDFRoot();
 		JDFResource bs = n.addResource(ElementName.BINDERYSIGNATURE, null,
 				null, null, null, null, null);
-		Assert.assertEquals("bs class", bs.getResourceClass(),
-				EnumResourceClass.Parameter);
+		Assertions.assertEquals(bs.getResourceClass(), EnumResourceClass.Parameter, "bs class");
 		bs = n.addResource(ElementName.BINDERYSIGNATURE,
 				JDFResource.EnumResourceClass.Parameter, null, null, n, null,
 				null);
-		Assert.assertEquals("bs class old style", bs.getResourceClass(),
-				EnumResourceClass.Parameter);
-		Assert.assertTrue(bs.validClass());
+		Assertions.assertEquals(bs.getResourceClass(), EnumResourceClass.Parameter, "bs class old style");
+		Assertions.assertTrue(bs.validClass());
 	}
 
 	@Test
@@ -178,9 +170,9 @@ public class JDFAutoResourceTest extends TestCase
 		JDFStringSpan sb = mi.appendStockBrand();
 		sb.setActual("abc foo");
 		sb.setPreferred("abc foo");
-		Assert.assertTrue("valid StockBrand", sb.isValid(EnumValidationLevel.Complete));
-		Assert.assertEquals(mi.getValidClass(), EnumResourceClass.Intent);
-		Assert.assertTrue(mi.validClass());
+		Assertions.assertTrue(sb.isValid(EnumValidationLevel.Complete), "valid StockBrand");
+		Assertions.assertEquals(mi.getValidClass(), EnumResourceClass.Intent);
+		Assertions.assertTrue(mi.validClass());
 	}
 
 	@Test
@@ -199,19 +191,19 @@ public class JDFAutoResourceTest extends TestCase
 		// m.setModuleIndex(0);
 		m.setModelDescription("1234");
 		JDFIconList il = dev.appendIconList();
-		Assert.assertFalse("empty iconlist", il.isValid(EnumValidationLevel.Complete));
-		Assert.assertTrue("empty iconlist", il.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertFalse(il.isValid(EnumValidationLevel.Complete), "empty iconlist");
+		Assertions.assertTrue(il.isValid(EnumValidationLevel.Incomplete), "empty iconlist");
 		JDFIcon ic = il.appendIcon();
 		ic.setSize(new JDFXYPair(200, 200));
 		ic.setBitDepth(8);
 		JDFFileSpec fs = ic.appendFileSpec();
 		fs.setURL("file:///this.ico");
 
-		Assert.assertTrue("icon valid", ic.isValid(EnumValidationLevel.Complete));
-		Assert.assertTrue("iconlist valid", il.isValid(EnumValidationLevel.Complete));
-		Assert.assertTrue("mod valid", m.isValid(EnumValidationLevel.Complete));
-		Assert.assertTrue("dev valid", dev.isValid(EnumValidationLevel.Complete));
-		Assert.assertTrue(dev.validClass());
+		Assertions.assertTrue(ic.isValid(EnumValidationLevel.Complete), "icon valid");
+		Assertions.assertTrue(il.isValid(EnumValidationLevel.Complete), "iconlist valid");
+		Assertions.assertTrue(m.isValid(EnumValidationLevel.Complete), "mod valid");
+		Assertions.assertTrue(dev.isValid(EnumValidationLevel.Complete), "dev valid");
+		Assertions.assertTrue(dev.validClass());
 
 	}
 
@@ -229,13 +221,13 @@ public class JDFAutoResourceTest extends TestCase
 		JDFScore score = cap.appendScore();
 		score.setSide(EnumScoreSide.FromInside);
 		score.setOffset(1234.5);
-		Assert.assertTrue("score 1", score.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(score.isValid(EnumValidationLevel.Complete), "score 1");
 		score = cap.appendScore();
 		score.setSide(EnumScoreSide.FromOutside);
-		Assert.assertTrue("score 2", score.isValid(EnumValidationLevel.Complete));
-		Assert.assertTrue("cap", cap.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(score.isValid(EnumValidationLevel.Complete), "score 2");
+		Assertions.assertTrue(cap.isValid(EnumValidationLevel.Complete), "cap");
 		// we know that we are incomplete since we have missing resources
-		Assert.assertTrue("n", n.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(n.isValid(EnumValidationLevel.Incomplete), "n");
 
 	}
 

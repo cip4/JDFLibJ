@@ -45,17 +45,13 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -72,7 +68,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		final JDFMatrix m = new JDFMatrix(90, 20, 20);
 		final JDFMatrix m2 = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
 		m2.shift(20, 20);
-		assertEquals(m, m2);
+		Assertions.assertEquals(m, m2);
 	}
 
 	/**
@@ -85,7 +81,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		final JDFMatrix m = new JDFMatrix(r);
 		final JDFMatrix m2 = JDFMatrix.getUnitMatrix();
 		m2.shift(0, 10);
-		assertEquals(m, m2);
+		Assertions.assertEquals(m, m2);
 	}
 
 	/**
@@ -99,9 +95,9 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 
 		final JDFMatrix m = new JDFMatrix("1 0 0 1 0 0");
-		assertEquals(m, JDFMatrix.getUnitMatrix());
+		Assertions.assertEquals(m, JDFMatrix.getUnitMatrix());
 		n.setAttribute("foo", m, null);
-		assertEquals(n.getAttribute("foo"), m.toString());
+		Assertions.assertEquals(n.getAttribute("foo"), m.toString());
 	}
 
 	// ////////////////////////////////////////////////////////////
@@ -113,7 +109,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	{
 
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
-		assertEquals(m, JDFMatrix.getUnitMatrix());
+		Assertions.assertEquals(m, JDFMatrix.getUnitMatrix());
 	}
 
 	/**
@@ -124,7 +120,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	{
 		for (final EnumOrientation o : EnumOrientation.getEnumList())
 		{
-			assertEquals(o, new JDFMatrix(o, 3, 4).getOrientation());
+			Assertions.assertEquals(o, new JDFMatrix(o, 3, 4).getOrientation());
 		}
 	}
 
@@ -135,31 +131,31 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	public void testRotate()
 	{
 		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
-		assertEquals(m, JDFMatrix.getUnitMatrix());
+		Assertions.assertEquals(m, JDFMatrix.getUnitMatrix());
 		m.rotate(180);
-		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate180, 0, 0));
-		assertEquals(m.getAngle(), 180.0, 0.00001);
+		Assertions.assertEquals(m, new JDFMatrix(EnumOrientation.Rotate180, 0, 0));
+		Assertions.assertEquals(m.getAngle(), 180.0, 0.00001);
 		m.rotate(90);
-		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate270, 0, 0));
-		assertEquals(m.getAngle(), 270.0, 0.00001);
+		Assertions.assertEquals(m, new JDFMatrix(EnumOrientation.Rotate270, 0, 0));
+		Assertions.assertEquals(m.getAngle(), 270.0, 0.00001);
 
 		m.rotate(180);
-		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate90, 0, 0));
+		Assertions.assertEquals(m, new JDFMatrix(EnumOrientation.Rotate90, 0, 0));
 		m = new JDFMatrix(EnumOrientation.Flip0, 0, 0);
-		assertEquals(m.getAngle(), 0.0, 0.00001);
+		Assertions.assertEquals(m.getAngle(), 0.0, 0.00001);
 		m.rotate(180);
-		assertEquals(m, new JDFMatrix(EnumOrientation.Flip180, 0, 0));
-		assertEquals(m.getAngle(), 180.0, 0.00001);
+		Assertions.assertEquals(m, new JDFMatrix(EnumOrientation.Flip180, 0, 0));
+		Assertions.assertEquals(m.getAngle(), 180.0, 0.00001);
 		m.rotate(90);
-		assertEquals(m, new JDFMatrix(EnumOrientation.Flip270, 0, 0));
-		assertEquals(m.getAngle(), 270.0, 0.00001);
+		Assertions.assertEquals(m, new JDFMatrix(EnumOrientation.Flip270, 0, 0));
+		Assertions.assertEquals(m.getAngle(), 270.0, 0.00001);
 		m.rotate(90);
-		assertEquals(m.getAngle(), 0.0, 0.00001);
+		Assertions.assertEquals(m.getAngle(), 0.0, 0.00001);
 		for (int i = 0; i < 1800; i += 45)
 		{
 			final JDFMatrix m2 = JDFMatrix.getUnitMatrix();
 			m2.rotate(0.1 * i);
-			assertEquals(m2.getAngle(), 0.1 * i, 0.000001);
+			Assertions.assertEquals(m2.getAngle(), 0.1 * i, 0.000001);
 		}
 	}
 
@@ -170,18 +166,18 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	public void testIsFlip()
 	{
 		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
-		assertFalse(m.isFlip());
+		Assertions.assertFalse(m.isFlip());
 		m.rotate(90);
-		assertFalse(m.isFlip());
+		Assertions.assertFalse(m.isFlip());
 		m.rotate(33);
-		assertFalse(m.isFlip());
+		Assertions.assertFalse(m.isFlip());
 
 		m = new JDFMatrix(EnumOrientation.Flip0, 0, 0);
-		assertTrue(m.isFlip());
+		Assertions.assertTrue(m.isFlip());
 		m.rotate(90);
-		assertTrue(m.isFlip());
+		Assertions.assertTrue(m.isFlip());
 		m.rotate(33);
-		assertTrue(m.isFlip());
+		Assertions.assertTrue(m.isFlip());
 	}
 
 	/**
@@ -199,7 +195,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 			{
 				m2.rotate(20);
 			}
-			assertEquals(m, m2);
+			Assertions.assertEquals(m, m2);
 		}
 	}
 
@@ -212,11 +208,11 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	{
 
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
-		assertEquals(m, JDFMatrix.getUnitMatrix());
+		Assertions.assertEquals(m, JDFMatrix.getUnitMatrix());
 		m.shift(10, 11);
-		assertEquals(m, new JDFMatrix("1 0 0 1 10 11"));
+		Assertions.assertEquals(m, new JDFMatrix("1 0 0 1 10 11"));
 		m.shift(10, 11);
-		assertEquals("2nd shift adds up", m, new JDFMatrix("1 0 0 1 20 22"));
+		Assertions.assertEquals(m, new JDFMatrix("1 0 0 1 20 22"), "2nd shift adds up");
 	}
 
 	/**
@@ -229,9 +225,9 @@ public class JDFMatrixTest extends JDFTestCaseBase
 
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
 		m.shift(new JDFXYPair(20, 25));
-		assertEquals(m, new JDFMatrix("0 1 -1 0 20 25"));
+		Assertions.assertEquals(m, new JDFMatrix("0 1 -1 0 20 25"));
 		m.shift(new JDFXYPair(20, 25));
-		assertEquals(m, new JDFMatrix("0 1 -1 0 40 50"));
+		Assertions.assertEquals(m, new JDFMatrix("0 1 -1 0 40 50"));
 	}
 
 	/**
@@ -245,7 +241,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
 
 		m.shift(new JDFXYPair(20, 25)).shift(new JDFXYPair(20, 25));
-		assertEquals(m, new JDFMatrix("0 1 -1 0 40 50"));
+		Assertions.assertEquals(m, new JDFMatrix("0 1 -1 0 40 50"));
 	}
 
 	/**
@@ -258,7 +254,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
 		m.setShift(new JDFXYPair(20, 25));
-		assertEquals(m, new JDFMatrix("0 1 -1 0 20 25"));
+		Assertions.assertEquals(m, new JDFMatrix("0 1 -1 0 20 25"));
 	}
 
 	/**
@@ -271,7 +267,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
 		final JDFXYPair p = new JDFXYPair(10, 10);
 		final JDFXYPair p2 = m.transform(p);
-		assertEquals(p, p2);
+		Assertions.assertEquals(p, p2);
 	}
 
 	/**
@@ -285,7 +281,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		m.shift(30, 30);
 		final JDFXYPair p = new JDFXYPair(10, 10);
 		final JDFXYPair p2 = m.transform(p);
-		assertEquals(p.shift(30, 30), p2);
+		Assertions.assertEquals(p.shift(30, 30), p2);
 	}
 
 	/**
@@ -300,7 +296,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		final JDFRectangle p = new JDFRectangle(10, 10, 20, 20);
 		final JDFRectangle p2 = m.transform(p);
 		p.shift(30, 30);
-		assertEquals(p, p2);
+		Assertions.assertEquals(p, p2);
 	}
 
 	/**
@@ -316,7 +312,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		final JDFXYPair p2 = m.transform(p);
 		final JDFXYPair p22 = m.transform(p2);
 		final JDFXYPair p20 = m2.transform(p);
-		assertEquals(p20, p22);
+		Assertions.assertEquals(p20, p22);
 	}
 
 	/**
@@ -328,9 +324,9 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	{
 
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
-		assertEquals(m.getShift(), new JDFXYPair());
+		Assertions.assertEquals(m.getShift(), new JDFXYPair());
 		m.setShift(new JDFXYPair(20, 25));
-		assertEquals(m.getShift(), new JDFXYPair(20, 25));
+		Assertions.assertEquals(m.getShift(), new JDFXYPair(20, 25));
 	}
 
 	/**
@@ -343,15 +339,15 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
 		final JDFMatrix m2 = new JDFMatrix(EnumOrientation.Rotate270, 0, 0);
 		m.concat(m2);
-		assertEquals(m, JDFMatrix.getUnitMatrix());
+		Assertions.assertEquals(m, JDFMatrix.getUnitMatrix());
 
 		m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
 		m.concat(m);
-		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate180, 0, 0));
+		Assertions.assertEquals(m, new JDFMatrix(EnumOrientation.Rotate180, 0, 0));
 
 		m = new JDFMatrix(EnumOrientation.Flip180, 0, 0);
 		m.concat(m);
-		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate0, 0, 0));
+		Assertions.assertEquals(m, new JDFMatrix(EnumOrientation.Rotate0, 0, 0));
 
 	}
 
@@ -363,8 +359,8 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	{
 		final JDFMatrix m = new JDFMatrix(90, 20, 20);
 		final JDFMatrix m2 = new JDFMatrix(90, 20, 20).invert();
-		assertEquals(270, m2.getAngle(), 0.1);
-		assertEquals(JDFMatrix.getUnitMatrix(), m.concat(m2));
+		Assertions.assertEquals(270, m2.getAngle(), 0.1);
+		Assertions.assertEquals(JDFMatrix.getUnitMatrix(), m.concat(m2));
 	}
 
 	/**
@@ -376,7 +372,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		final JDFMatrix m = JDFMatrix.getUnitMatrix();
 		final JDFMatrix m2 = JDFMatrix.getUnitMatrix();
 		m.invert();
-		assertEquals(m2, m);
+		Assertions.assertEquals(m2, m);
 	}
 
 	/**
@@ -388,9 +384,9 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	{
 		final JDFMatrix m = JDFMatrix.getUnitMatrix();
 		m.rotate(180);
-		assertNotSame(JDFMatrix.getUnitMatrix(), m);
-		assertEquals(new JDFMatrix("1 0 0 1 0 0"), JDFMatrix.getUnitMatrix());
-		assertEquals(new JDFMatrix(EnumOrientation.Rotate180, 0, 0), m);
+		Assertions.assertNotSame(JDFMatrix.getUnitMatrix(), m);
+		Assertions.assertEquals(new JDFMatrix("1 0 0 1 0 0"), JDFMatrix.getUnitMatrix());
+		Assertions.assertEquals(new JDFMatrix(EnumOrientation.Rotate180, 0, 0), m);
 	}
 
 }

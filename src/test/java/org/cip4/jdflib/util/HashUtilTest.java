@@ -72,17 +72,15 @@
 package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import junit.framework.TestCase;
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class HashUtilTest extends TestCase
-{
+public class HashUtilTest {
 	/**
 	 * 
 	 */
@@ -92,21 +90,21 @@ public class HashUtilTest extends TestCase
 		JDFIntegerRange range1 = new JDFIntegerRange(100, 200);
 		JDFIntegerRange range2 = new JDFIntegerRange(100, 200);
 		// different objects with same content should be equal
-		Assert.assertEquals(range1, range2);
-		Assert.assertEquals(range2, range1);
+		Assertions.assertEquals(range1, range2);
+		Assertions.assertEquals(range2, range1);
 
 		int range1Hash = range1.hashCode();
 		int range2Hash = range2.hashCode();
 		// the hashCode of equal objects should be equal
-		Assert.assertEquals(range1Hash, range2Hash);
+		Assertions.assertEquals(range1Hash, range2Hash);
 
 		String str3 = "100 ~ 200";
 		int str3Hash = str3.hashCode();
 		// different objects can have the same hashCode
-		Assert.assertEquals(range1Hash, str3Hash);
+		Assertions.assertEquals(range1Hash, str3Hash);
 
 		// objects of different type should be different
-		Assert.assertNotSame(str3, range1);
-		Assert.assertNotSame(range1, str3);
+		Assertions.assertNotSame(str3, range1);
+		Assertions.assertNotSame(range1, str3);
 	}
 }

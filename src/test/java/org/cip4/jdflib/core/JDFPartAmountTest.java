@@ -70,10 +70,6 @@
  */
 package org.cip4.jdflib.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -83,7 +79,9 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author MuchaD
@@ -98,9 +96,10 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 
 	/**
 	 * @Override
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -119,9 +118,9 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 	@Test
 	public void testGetInvalidAttributes()
 	{
-		assertEquals(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).size(), 0);
+		Assertions.assertEquals(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).size(), 0);
 		rl.setAttribute("Amount", 20, null);
-		assertTrue(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).contains("Amount"));
+		Assertions.assertTrue(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).contains("Amount"));
 
 	}
 
@@ -134,8 +133,8 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 		pa.getJDFRoot().setVersion(EnumVersion.Version_1_3);
 		pa.appendLot();
 
-		assertTrue(pa.isValid(EnumValidationLevel.Incomplete));
-		assertFalse(pa.getUnknownElements(false, 999).contains(ElementName.LOT));
+		Assertions.assertTrue(pa.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertFalse(pa.getUnknownElements(false, 999).contains(ElementName.LOT));
 	}
 
 	/**
@@ -145,7 +144,7 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 	public void testPartAmount()
 	{
 		pa.appendElement("AmountPool");
-		assertTrue(pa.getUnknownElements(false, 999).contains(ElementName.AMOUNTPOOL));
+		Assertions.assertTrue(pa.getUnknownElements(false, 999).contains(ElementName.AMOUNTPOOL));
 	}
 
 	/**
@@ -160,6 +159,6 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 		map.put("SheetName", "S2");
 		vMap.add(map);
 		pa.setPartMapVector(vMap);
-		assertEquals(pa.numChildElements(ElementName.PART, null), 2);
+		Assertions.assertEquals(pa.numChildElements(ElementName.PART, null), 2);
 	}
 }

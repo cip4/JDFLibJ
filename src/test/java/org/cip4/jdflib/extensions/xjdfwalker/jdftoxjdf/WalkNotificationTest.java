@@ -68,13 +68,12 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkNotificationTest
 {
@@ -87,7 +86,7 @@ public class WalkNotificationTest
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildMilestone("FooBar", "42");
 		KElement xjmf = new JDFToXJDF().convert(jmf).getXPathElement("SignalNotification/Notification");
-		assertNull(xjmf.getNonEmpty(AttributeName.AGENTNAME));
+		Assertions.assertNull(xjmf.getNonEmpty(AttributeName.AGENTNAME));
 	}
 
 }

@@ -68,14 +68,13 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.resource.devicecapability.JDFNameEvaluation;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.devicecapability.JDFand;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -94,7 +93,7 @@ public class JDFExprTest extends JDFTestCaseBase
 	{
 		JDFExpr expr = (JDFExpr) new JDFDoc("Expr").getRoot();
 		JDFand a = (JDFand) expr.appendTerm(EnumTerm.and);
-		assertEquals(a, expr.getTerm(null, 0));
+		Assertions.assertEquals(a, expr.getTerm(null, 0));
 	}
 
 	/**
@@ -106,7 +105,7 @@ public class JDFExprTest extends JDFTestCaseBase
 	{
 		JDFExpr expr = (JDFExpr) new JDFDoc("Expr").getRoot();
 		JDFNameEvaluation a = (JDFNameEvaluation) expr.getCreateTerm(EnumTerm.NameEvaluation, 0);
-		assertEquals(a, expr.getTerm(null, 0));
+		Assertions.assertEquals(a, expr.getTerm(null, 0));
 	}
 
 }

@@ -68,15 +68,14 @@
  */
 package org.cip4.jdflib.extensions;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class AuditResourceHelperTest extends JDFTestCaseBase
 {
@@ -91,7 +90,7 @@ public class AuditResourceHelperTest extends JDFTestCaseBase
 		SetHelper sh = h.getCreateSet(ElementName.MEDIA, EnumUsage.Input, null);
 		sh.appendPartition(null, true);
 		MessageResourceHelper a = h.getCreateAuditPool().getCreateMessageResourceHelper(sh);
-		assertEquals(1, a.getRoot().getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID, JDFConstants.STAR), false, false, 0).size());
+		Assertions.assertEquals(1, a.getRoot().getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID, JDFConstants.STAR), false, false, 0).size());
 	}
 
 }

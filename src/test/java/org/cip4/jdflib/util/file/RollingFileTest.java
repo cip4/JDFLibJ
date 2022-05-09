@@ -41,10 +41,6 @@
  */
 package org.cip4.jdflib.util.file;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
@@ -54,7 +50,9 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -85,7 +83,7 @@ public class RollingFileTest extends JDFTestCaseBase
 	{
 		for (int i = 1; i < 100; i++)
 		{
-			assertEquals(r.getNewFile().getName(), StringUtil.sprintf("dummy%06i.tst", "" + i));
+			Assertions.assertEquals(r.getNewFile().getName(), StringUtil.sprintf("dummy%06i.tst", "" + i));
 		}
 	}
 
@@ -105,7 +103,7 @@ public class RollingFileTest extends JDFTestCaseBase
 				break;
 			ThreadUtil.sleep(123);
 		}
-		assertEquals(42, files.size(), 1);
+		Assertions.assertEquals(42, files.size(), 1);
 	}
 
 	/**
@@ -118,12 +116,12 @@ public class RollingFileTest extends JDFTestCaseBase
 		for (int i = 1; i < 100; i++)
 		{
 			final File newFile = r.getNewFile();
-			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
-			assertFalse(newFile.isDirectory());
-			assertTrue(newFile.delete());
+			Assertions.assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
+			Assertions.assertFalse(newFile.isDirectory());
+			Assertions.assertTrue(newFile.delete());
 			newFile.mkdir();
-			assertTrue(newFile.isDirectory());
-			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
+			Assertions.assertTrue(newFile.isDirectory());
+			Assertions.assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
 		}
 	}
 
@@ -137,8 +135,8 @@ public class RollingFileTest extends JDFTestCaseBase
 		for (int i = 1; i < 100; i++)
 		{
 			final File newFile = r.getNewFile();
-			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
-			assertTrue(newFile.canRead());
+			Assertions.assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
+			Assertions.assertTrue(newFile.canRead());
 		}
 	}
 
@@ -151,7 +149,7 @@ public class RollingFileTest extends JDFTestCaseBase
 	{
 		FileUtil.getFileInDirectory(r, new File("dummy1234.tst")).createNewFile();
 		r = new RollingFile(sm_dirTestDataTemp + "RollingFile", "dummy.tst");
-		assertEquals(r.getNewFile().getName(), "dummy001235.tst");
+		Assertions.assertEquals(r.getNewFile().getName(), "dummy001235.tst");
 	}
 
 	/**
@@ -162,14 +160,15 @@ public class RollingFileTest extends JDFTestCaseBase
 	public void testDoubleDot()
 	{
 		r = new RollingFile(sm_dirTestDataTemp + "RollingFile", "dummy..tst");
-		assertEquals(r.getNewFile().getName(), "dummy.000001.tst");
+		Assertions.assertEquals(r.getNewFile().getName(), "dummy.000001.tst");
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 * @throws Exception
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

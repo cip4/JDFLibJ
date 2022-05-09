@@ -71,16 +71,15 @@
  */
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen tests for the ListMap class
@@ -95,7 +94,7 @@ public class ListMapTest extends JDFTestCaseBase
 	@Test
 	public void testSize()
 	{
-		Assert.assertEquals(m.size("a"), 2);
+		Assertions.assertEquals(m.size("a"), 2);
 	}
 
 	/**
@@ -104,7 +103,7 @@ public class ListMapTest extends JDFTestCaseBase
 	@Test
 	public void testGetOne()
 	{
-		Assert.assertEquals(m.getOne("a", 0), "b");
+		Assertions.assertEquals(m.getOne("a", 0), "b");
 	}
 
 	/**
@@ -114,11 +113,11 @@ public class ListMapTest extends JDFTestCaseBase
 	public void testGetAllValues()
 	{
 		final List<String> allValues = m.getAllValues();
-		Assert.assertEquals(allValues.size(), 3);
-		Assert.assertTrue(allValues.contains("b"));
-		Assert.assertTrue(allValues.contains("c"));
-		Assert.assertEquals("we didn't modify m by calling getAllValues", m.getAllValues().size(), 3);
-		Assert.assertEquals(m.getAllValues().size(), 3);
+		Assertions.assertEquals(allValues.size(), 3);
+		Assertions.assertTrue(allValues.contains("b"));
+		Assertions.assertTrue(allValues.contains("c"));
+		Assertions.assertEquals(m.getAllValues().size(), 3, "we didn't modify m by calling getAllValues");
+		Assertions.assertEquals(m.getAllValues().size(), 3);
 	}
 
 	/**
@@ -127,10 +126,10 @@ public class ListMapTest extends JDFTestCaseBase
 	@Test
 	public void testGetIndex()
 	{
-		Assert.assertEquals(m.getIndex("a", "b"), 0);
-		Assert.assertEquals(m.getIndex("a", "c"), 1);
-		Assert.assertEquals(m.getIndex("a", "d"), -1);
-		Assert.assertEquals(m.getIndex("c", "c"), -2);
+		Assertions.assertEquals(m.getIndex("a", "b"), 0);
+		Assertions.assertEquals(m.getIndex("a", "c"), 1);
+		Assertions.assertEquals(m.getIndex("a", "d"), -1);
+		Assertions.assertEquals(m.getIndex("c", "c"), -2);
 	}
 
 	/**
@@ -146,14 +145,14 @@ public class ListMapTest extends JDFTestCaseBase
 			mis.put(Integer.valueOf(i), "" + (i % 10));
 		}
 		vm.fillInvertedMap(mis);
-		assertEquals(vm.size(), 10);
+		Assertions.assertEquals(vm.size(), 10);
 		for (int i = 0; i < 10; i++)
 		{
 			final List<Integer> vector = vm.get("" + i);
-			assertEquals(vector.size(), 10);
+			Assertions.assertEquals(vector.size(), 10);
 			for (int j = 0; j < 10; j++)
 			{
-				assertEquals(i + j * 10, vector.get(j).intValue());
+				Assertions.assertEquals(i + j * 10, vector.get(j).intValue());
 			}
 		}
 	}
@@ -166,9 +165,9 @@ public class ListMapTest extends JDFTestCaseBase
 	{
 		m.putOne("e", "f");
 		final Map<String, String> inv = m.getInvertedMap();
-		Assert.assertNotNull(inv);
-		Assert.assertEquals(inv.get("b"), "a");
-		Assert.assertEquals(inv.get("f"), "e");
+		Assertions.assertNotNull(inv);
+		Assertions.assertEquals(inv.get("b"), "a");
+		Assertions.assertEquals(inv.get("f"), "e");
 	}
 
 	/**
@@ -177,14 +176,14 @@ public class ListMapTest extends JDFTestCaseBase
 	@Test
 	public void testPutOne()
 	{
-		assertEquals(m.size("a"), 2);
+		Assertions.assertEquals(m.size("a"), 2);
 		m.putOne("a", "b");
-		assertEquals(m.getOne("a", 0), "b");
+		Assertions.assertEquals(m.getOne("a", 0), "b");
 		m.setUnique(false);
 		for (int i = 0; i < 7; i++)
 			m.putOne("cc", "d");
 		for (int i = 0; i < 7; i++)
-			assertEquals(m.getOne("cc", i), "d");
+			Assertions.assertEquals(m.getOne("cc", i), "d");
 	}
 
 	/**
@@ -193,14 +192,14 @@ public class ListMapTest extends JDFTestCaseBase
 	@Test
 	public void testAppendUniqueKey()
 	{
-		Assert.assertEquals(m.size("a"), 2);
+		Assertions.assertEquals(m.size("a"), 2);
 		final Vector<String> v2 = new Vector<String>();
 		v2.add("v1");
 		v2.add("v2");
 		m.appendUnique("a", v2);
-		assertEquals(m.size("a"), 4);
+		Assertions.assertEquals(m.size("a"), 4);
 		m.appendUnique("a", v2);
-		assertEquals(m.size("a"), 4);
+		Assertions.assertEquals(m.size("a"), 4);
 	}
 
 	/**
@@ -209,14 +208,14 @@ public class ListMapTest extends JDFTestCaseBase
 	@Test
 	public void testAppendUnique()
 	{
-		Assert.assertEquals(m.size("a"), 2);
+		Assertions.assertEquals(m.size("a"), 2);
 		@SuppressWarnings("unchecked")
 		final ListMap<String, String> clone = (ListMap<String, String>) m.clone();
 		m.appendUnique(clone);
-		Assert.assertEquals(m, clone);
+		Assertions.assertEquals(m, clone);
 		clone.putOne("d", "d1");
 		m.appendUnique(clone);
-		Assert.assertEquals(m, clone);
+		Assertions.assertEquals(m, clone);
 	}
 
 	/**
@@ -226,15 +225,15 @@ public class ListMapTest extends JDFTestCaseBase
 	public void testremoveOne()
 	{
 		m.removeOne("a", "b");
-		Assert.assertEquals(m.getOne("a", 0), "c");
-		Assert.assertEquals(-1, m.getIndex("a", "b"));
-		Assert.assertEquals(m.size("a"), 1);
+		Assertions.assertEquals(m.getOne("a", 0), "c");
+		Assertions.assertEquals(-1, m.getIndex("a", "b"));
+		Assertions.assertEquals(m.size("a"), 1);
 		m.removeOne("a", "c");
-		Assert.assertEquals(-2, m.getIndex("a", "b"));
-		Assert.assertNull(m.get("a"));
+		Assertions.assertEquals(-2, m.getIndex("a", "b"));
+		Assertions.assertNull(m.get("a"));
 		m.removeOne("a", "c");
-		Assert.assertEquals(-2, m.getIndex("a", "b"));
-		Assert.assertNull(m.get("a"));
+		Assertions.assertEquals(-2, m.getIndex("a", "b"));
+		Assertions.assertNull(m.get("a"));
 	}
 
 	/**
@@ -244,14 +243,14 @@ public class ListMapTest extends JDFTestCaseBase
 	public void testSetOne()
 	{
 		m.setOne("a", "b1", "b");
-		Assert.assertEquals(m.getOne("a", 0), "b1");
-		Assert.assertEquals(m.size("a"), 2);
+		Assertions.assertEquals(m.getOne("a", 0), "b1");
+		Assertions.assertEquals(m.size("a"), 2);
 		m.setOne("a", "b2", "b4");
-		Assert.assertEquals(m.getOne("a", 2), "b2");
-		Assert.assertEquals(m.size("a"), 3);
+		Assertions.assertEquals(m.getOne("a", 2), "b2");
+		Assertions.assertEquals(m.size("a"), 3);
 		m.setOne("aaa", "bb", "b4");
-		Assert.assertEquals(m.getOne("aaa", 0), "bb");
-		Assert.assertEquals(m.size("aaa"), 1);
+		Assertions.assertEquals(m.getOne("aaa", 0), "bb");
+		Assertions.assertEquals(m.size("aaa"), 1);
 	}
 
 	/**
@@ -262,19 +261,19 @@ public class ListMapTest extends JDFTestCaseBase
 	{
 		m = new ListMap<String, String>();
 		m.setOne("a", "b1", 3);
-		Assert.assertEquals(m.getOne("a", 3), "b1");
-		Assert.assertNull(m.getOne("a", 2));
-		Assert.assertEquals(m.size("a"), 4);
+		Assertions.assertEquals(m.getOne("a", 3), "b1");
+		Assertions.assertNull(m.getOne("a", 2));
+		Assertions.assertEquals(m.size("a"), 4);
 		m.setOne("a", "b2", -2);
-		Assert.assertEquals(m.size("a"), 4);
-		Assert.assertNull(m.getOne("a", 1));
-		Assert.assertEquals(m.getOne("a", 3), "b1");
-		Assert.assertEquals(m.getOne("a", 2), "b2");
-		Assert.assertEquals(m.getOne("a", -2), "b2");
+		Assertions.assertEquals(m.size("a"), 4);
+		Assertions.assertNull(m.getOne("a", 1));
+		Assertions.assertEquals(m.getOne("a", 3), "b1");
+		Assertions.assertEquals(m.getOne("a", 2), "b2");
+		Assertions.assertEquals(m.getOne("a", -2), "b2");
 		try
 		{
 			m.setOne("a", "v", -20);
-			Assert.fail("bad negative");
+			Assertions.fail("bad negative");
 		}
 		catch (final IllegalArgumentException x)
 		{
@@ -285,9 +284,10 @@ public class ListMapTest extends JDFTestCaseBase
 	/**
 	 *
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

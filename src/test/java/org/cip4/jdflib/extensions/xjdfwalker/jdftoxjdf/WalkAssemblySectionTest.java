@@ -36,11 +36,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -48,7 +43,8 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkAssemblySectionTest extends JDFTestCaseBase
 {
@@ -67,10 +63,10 @@ public class WalkAssemblySectionTest extends JDFTestCaseBase
 		final KElement root = new JDFDoc(ElementName.ASSEMBLY).getRoot();
 		wa.walk(as, root);
 		final JDFAssemblySection as2 = (JDFAssemblySection) root.getElement(ElementName.ASSEMBLYSECTION);
-		assertNotNull(as2);
+		Assertions.assertNotNull(as2);
 		final JDFAssemblySection ass2 = as.getAssemblySection(0);
-		assertNotNull(ass2);
-		assertNull(as2.getPageAssignedList(0));
+		Assertions.assertNotNull(ass2);
+		Assertions.assertNull(as2.getPageAssignedList(0));
 	}
 
 	/**
@@ -86,7 +82,7 @@ public class WalkAssemblySectionTest extends JDFTestCaseBase
 		final KElement root = new JDFDoc(ElementName.ASSEMBLYSECTION).getRoot();
 		wa.walk(as, root);
 		final JDFAssemblySection as2 = (JDFAssemblySection) root.getElement(ElementName.ASSEMBLYSECTION);
-		assertNull(as2.getNonEmpty(AttributeName.JOBID));
+		Assertions.assertNull(as2.getNonEmpty(AttributeName.JOBID));
 	}
 
 	/**
@@ -104,9 +100,9 @@ public class WalkAssemblySectionTest extends JDFTestCaseBase
 		final KElement root = new JDFDoc(ElementName.ASSEMBLYSECTION).getRoot();
 		wa.walk(as, root);
 		final JDFAssemblySection as2 = (JDFAssemblySection) root.getElement(ElementName.ASSEMBLYSECTION);
-		assertNull(as2.getNonEmpty(AttributeName.JOBID));
-		assertEquals("D", as2.getDescriptiveName());
-		assertEquals("X", as2.getAttribute(XJDFConstants.ExternalID));
+		Assertions.assertNull(as2.getNonEmpty(AttributeName.JOBID));
+		Assertions.assertEquals("D", as2.getDescriptiveName());
+		Assertions.assertEquals("X", as2.getAttribute(XJDFConstants.ExternalID));
 	}
 
 	/**
@@ -118,7 +114,7 @@ public class WalkAssemblySectionTest extends JDFTestCaseBase
 		final JDFAssemblySection as = (JDFAssemblySection) new JDFDoc(ElementName.ASSEMBLYSECTION).getRoot();
 		final WalkAssemblySection wa = new WalkAssemblySection();
 		wa.setParent(new JDFToXJDF());
-		assertTrue(wa.matches(as));
+		Assertions.assertTrue(wa.matches(as));
 	}
 
 	/**
@@ -130,8 +126,8 @@ public class WalkAssemblySectionTest extends JDFTestCaseBase
 		final JDFAssemblySection as = (JDFAssemblySection) new JDFDoc(ElementName.ASSEMBLYSECTION).getRoot();
 		final WalkAssemblySection wa = new WalkAssemblySection();
 		wa.setParent(new JDFToXJDF());
-		assertTrue(wa.matches(as));
-		assertTrue(wa.getElementNames().contains(as.getLocalName()));
+		Assertions.assertTrue(wa.matches(as));
+		Assertions.assertTrue(wa.getElementNames().contains(as.getLocalName()));
 	}
 
 }

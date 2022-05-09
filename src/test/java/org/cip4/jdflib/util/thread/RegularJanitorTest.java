@@ -68,14 +68,11 @@
  */
 package org.cip4.jdflib.util.thread;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * test for duh reggular janitor, duh
@@ -160,7 +157,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 		janitor.addSweeper(new TimeSweeper(1, runner), true);
 		janitor.startSweep(1);
 		ThreadUtil.sleep(8888);
-		assertTrue(runner.i >= 3);
+		Assertions.assertTrue(runner.i >= 3);
 	}
 
 	/**
@@ -175,7 +172,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 		janitor.addSweeper(new TimeSweeper(1, runner), true);
 		janitor.startSweep(10);
 		ThreadUtil.sleep(811);
-		assertEquals(runner.i, 0);
+		Assertions.assertEquals(runner.i, 0);
 	}
 
 	/**
@@ -186,13 +183,13 @@ public class RegularJanitorTest extends JDFTestCaseBase
 	{
 		final RegularJanitor janitor = RegularJanitor.getJanitor();
 		janitor.addSweeper(new TimeSweeper(42, new Runner()), true);
-		assertTrue(janitor.hasSweeper(new Runner()));
-		assertTrue(janitor.hasSweeper(new TimeSweeper(42, new Runner())));
+		Assertions.assertTrue(janitor.hasSweeper(new Runner()));
+		Assertions.assertTrue(janitor.hasSweeper(new TimeSweeper(42, new Runner())));
 		janitor.addSweeper(new TimeSweeper(42, new Runner2()), true);
-		assertTrue(janitor.hasSweeper(new Runner2()));
-		assertTrue(janitor.hasSweeper(new TimeSweeper(42, new Runner2())));
-		assertFalse(janitor.hasSweeper(new Runner3()));
-		assertFalse(janitor.hasSweeper(new TimeSweeper(42, new Runner3())));
+		Assertions.assertTrue(janitor.hasSweeper(new Runner2()));
+		Assertions.assertTrue(janitor.hasSweeper(new TimeSweeper(42, new Runner2())));
+		Assertions.assertFalse(janitor.hasSweeper(new Runner3()));
+		Assertions.assertFalse(janitor.hasSweeper(new TimeSweeper(42, new Runner3())));
 	}
 
 	/**
@@ -203,28 +200,28 @@ public class RegularJanitorTest extends JDFTestCaseBase
 	{
 		final RegularJanitor janitor = RegularJanitor.getJanitor();
 		janitor.addSweeper(new TimeSweeper(42, new Runner()), true);
-		assertEquals(janitor.numSweepers(), 1);
+		Assertions.assertEquals(janitor.numSweepers(), 1);
 		janitor.addSweeper(new TimeSweeper(42, new Runner()), true);
-		assertEquals(janitor.numSweepers(), 1);
+		Assertions.assertEquals(janitor.numSweepers(), 1);
 		janitor.addSweeper(new TimeSweeper(42, new Runner2()), true);
-		assertEquals(janitor.numSweepers(), 2);
+		Assertions.assertEquals(janitor.numSweepers(), 2);
 		janitor.addSweeper(new TimeSweeper(42, new Runner2()), true);
-		assertEquals(janitor.numSweepers(), 2);
+		Assertions.assertEquals(janitor.numSweepers(), 2);
 		janitor.addSweeper(new CSweeper(), true);
-		assertEquals(janitor.numSweepers(), 3);
+		Assertions.assertEquals(janitor.numSweepers(), 3);
 		janitor.addSweeper(new CSweeper(), true);
-		assertEquals(janitor.numSweepers(), 3);
+		Assertions.assertEquals(janitor.numSweepers(), 3);
 		janitor.addSweeper(new CSweeper(), false);
-		assertEquals(janitor.numSweepers(), 4);
+		Assertions.assertEquals(janitor.numSweepers(), 4);
 		janitor.addSweeper(new CSweeper(), false);
-		assertEquals(janitor.numSweepers(), 5);
+		Assertions.assertEquals(janitor.numSweepers(), 5);
 	}
 
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		super.tearDown();

@@ -68,11 +68,6 @@
  */
 package org.cip4.jdflib.resource.devicecapability;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -82,7 +77,9 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * TODO Please insert comment!
@@ -102,9 +99,9 @@ public class JDFMatrixEvaluationTest extends JDFTestCaseBase
 		Vector<EnumOrientation> v = new Vector<EnumOrientation>();
 		v.add(EnumOrientation.Rotate90);
 		m.setTransforms(v);
-		assertEquals(v, m.getTransforms());
+		Assertions.assertEquals(v, m.getTransforms());
 		m.setAttribute(AttributeName.TRANSFORMS, "bad");
-		assertNull("bad att", m.getTransforms());
+		Assertions.assertNull(m.getTransforms(), "bad att");
 	}
 
 	/**
@@ -117,9 +114,9 @@ public class JDFMatrixEvaluationTest extends JDFTestCaseBase
 		v.add(EnumOrientation.Rotate90);
 		m.setTransforms(v);
 		JDFMatrix mat = JDFMatrix.getUnitMatrix();
-		assertFalse(m.fitsTransforms(mat));
+		Assertions.assertFalse(m.fitsTransforms(mat));
 		mat.rotate(90);
-		assertTrue(m.fitsTransforms(mat));
+		Assertions.assertTrue(m.fitsTransforms(mat));
 		Iterator<EnumOrientation> it = EnumOrientation.iterator();
 		while (it.hasNext())
 		{
@@ -130,13 +127,14 @@ public class JDFMatrixEvaluationTest extends JDFTestCaseBase
 			{
 				for (int y = -100; y < 200; y += 100)
 				{
-					assertTrue(m.fitsTransforms(new JDFMatrix(next, x, y)));
+					Assertions.assertTrue(m.fitsTransforms(new JDFMatrix(next, x, y)));
 				}
 			}
 		}
 	}
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

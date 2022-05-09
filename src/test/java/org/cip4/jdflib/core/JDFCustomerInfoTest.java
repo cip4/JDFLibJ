@@ -45,18 +45,13 @@
  */
 package org.cip4.jdflib.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFPerson;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -100,7 +95,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		if (info != null)
 		{
 			v = info.getChildElementVector(ElementName.CONTACT, null, null, true, 0, false);
-			assertEquals("v does not contain 4 contact", v.size(), 4);
+			Assertions.assertEquals(v.size(), 4, "v does not contain 4 contact");
 		}
 
 		v = null;
@@ -108,7 +103,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		if (info != null)
 		{
 			v = info.getChildElementVector(ElementName.CONTACT, null, null, true, 0, false);
-			assertTrue("v does not contain 4 contacts", v.size() == 4);
+			Assertions.assertTrue(v.size() == 4, "v does not contain 4 contacts");
 		}
 	}
 
@@ -122,18 +117,18 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		final JDFCustomerInfo info = prepareCustomerInfo(doc);
 
 		JDFContact cc = info.getContactWithContactType("Customer", 0);
-		assertNotNull("cc", cc);
+		Assertions.assertNotNull(cc, "cc");
 		cc = info.getContactWithContactType("Customer", 2);
-		assertNotNull("cc", cc);
+		Assertions.assertNotNull(cc, "cc");
 		cc = info.getContactWithContactType("Customer", 1);
-		assertNotNull("cc", cc);
+		Assertions.assertNotNull(cc, "cc");
 		final JDFContact cc2 = info.getContactWithContactType("Administrator", 0);
-		assertNotNull("cc2", cc2);
-		assertEquals("cc2", cc, cc2);
+		Assertions.assertNotNull(cc2, "cc2");
+		Assertions.assertEquals(cc, cc2, "cc2");
 		cc = info.getContactWithContactType("Delivery", 0);
-		assertNotNull("cc", cc);
+		Assertions.assertNotNull(cc, "cc");
 		cc = info.getContactWithContactType("fnarf", 0);
-		assertNull("cc", cc);
+		Assertions.assertNull(cc, "cc");
 	}
 
 	/**
@@ -152,7 +147,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		JDFContact cc = info.getContactWithContactType("Customer", 0);
 		cc = (JDFContact) cc.makeRootResource(null, null, true);
 		final JDFContact ccr = info.getContactWithContactType("Customer", 0);
-		assertEquals("cc", cc, ccr);
+		Assertions.assertEquals(cc, ccr, "cc");
 	}
 
 	/**
@@ -164,11 +159,11 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFCustomerInfo info = doc.getJDFRoot().getCreateCustomerInfo();
 		JDFContact cc = info.getContactWithContactType("Customer", 0);
-		assertNull("cc", cc);
+		Assertions.assertNull(cc, "cc");
 		cc = info.getCreateContactWithContactType("Customer", 0);
-		assertNotNull("cc", cc);
+		Assertions.assertNotNull(cc, "cc");
 		cc = info.getContactWithContactType("Customer", 0);
-		assertNotNull("cc", cc);
+		Assertions.assertNotNull(cc, "cc");
 	}
 
 	/**
@@ -181,15 +176,15 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		final JDFCustomerInfo info = prepareCustomerInfo(doc);
 
 		VElement v = info.getContactVectorWithContactType("Customer");
-		assertNotNull(v);
-		assertEquals(v.size(), 3);
+		Assertions.assertNotNull(v);
+		Assertions.assertEquals(v.size(), 3);
 		v = info.getContactVectorWithContactType("Administrator");
-		assertNotNull(v);
-		assertEquals(v.size(), 1);
+		Assertions.assertNotNull(v);
+		Assertions.assertEquals(v.size(), 1);
 		v = info.getContactVectorWithContactType("beagle");
-		assertNull(v);
+		Assertions.assertNull(v);
 		v = info.getContactVectorWithContactType(null);
-		assertEquals(v.size(), 4);
+		Assertions.assertEquals(v.size(), 4);
 
 	}
 
@@ -205,7 +200,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		final JDFNode n = doc.getJDFRoot();
 		final JDFCustomerInfo info = n.appendCustomerInfo();
 		info.appendContact().setContactTypes(new VString("foo", null));
-		assertNotNull(info.getContact(0));
+		Assertions.assertNotNull(info.getContact(0));
 	}
 
 	/**
@@ -218,29 +213,29 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc("CustomerInfo");
 		final JDFCustomerInfo ci = (JDFCustomerInfo) doc.getRoot();
 		final JDFCustomerInfo ci2 = (JDFCustomerInfo) new JDFDoc("CustomerInfo").getRoot();
-		assertFalse(ci.matches(ci2));
+		Assertions.assertFalse(ci.matches(ci2));
 		ci.setCustomerID("cid1");
 		ci2.setCustomerID("cid2");
-		assertFalse(ci.matches(ci2));
+		Assertions.assertFalse(ci.matches(ci2));
 		ci2.setCustomerID("cid1");
-		assertTrue(ci.matches(ci2));
+		Assertions.assertTrue(ci.matches(ci2));
 		ci.setCustomerID(null);
 		ci2.setCustomerID("");
 		final JDFContact c = ci.appendContact(EnumContactType.Customer);
 		final JDFContact c2 = ci2.appendContact(EnumContactType.Customer);
 		final JDFPerson p = c.appendPerson();
 		final JDFPerson p2 = c2.appendPerson();
-		assertTrue(c.matches(c2));
+		Assertions.assertTrue(c.matches(c2));
 		p.setFirstName("foo");
-		assertTrue(c.matches(c2));
+		Assertions.assertTrue(c.matches(c2));
 		p2.setFirstName("Foo");
-		assertTrue(c.matches(c));
+		Assertions.assertTrue(c.matches(c));
 		p2.setFamilyName("bar");
-		assertFalse(c.matches(c2));
-		assertFalse(c2.matches(c));
+		Assertions.assertFalse(c.matches(c2));
+		Assertions.assertFalse(c2.matches(c));
 		p.setFamilyName("bar");
 
 		c.setUserID("foo");
-		assertTrue(c.matches("foo"));
+		Assertions.assertTrue(c.matches("foo"));
 	}
 }

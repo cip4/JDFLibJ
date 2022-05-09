@@ -36,10 +36,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumScope;
@@ -52,7 +48,8 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFResourceQuParams;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author rainer prosi
@@ -72,7 +69,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 		mh.appendElement(ElementName.RESUBMISSIONPARAMS).setAttribute(AttributeName.UPDATEMETHOD, EnumUpdateMethod.Incremental.getName());
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(h.getRoot());
-		assertNotNull(d);
+		Assertions.assertNotNull(d);
 		// assertTrue(d.getJMFRoot().isValid(EnumValidationLevel.Incomplete));
 	}
 
@@ -88,7 +85,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(h.getRoot());
 		final JDFResourceQuParams rqp2 = d.getJMFRoot().getQuery(0).getResourceQuParams();
-		assertEquals(EnumScope.Allowed, rqp2.getScope());
+		Assertions.assertEquals(EnumScope.Allowed, rqp2.getScope());
 	}
 
 	/**
@@ -102,7 +99,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 		mh.appendElement(ElementName.DEVICEINFO).setAttribute(AttributeName.DEVICEID, "d1");
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(h.getRoot());
-		assertNull(StringUtil.getNonEmpty(d.getJMFRoot().getDeviceID()));
+		Assertions.assertNull(StringUtil.getNonEmpty(d.getJMFRoot().getDeviceID()));
 	}
 
 	/**
@@ -118,7 +115,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 		mh.appendElement(ElementName.SUBSCRIPTION).setAttribute(AttributeName.URL, "foo");
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(h.getRoot());
-		assertNull(StringUtil.getNonEmpty(d.getJMFRoot().getDeviceID()));
+		Assertions.assertNull(StringUtil.getNonEmpty(d.getJMFRoot().getDeviceID()));
 	}
 
 }

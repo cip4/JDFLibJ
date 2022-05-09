@@ -69,8 +69,8 @@
 package org.cip4.jdflib.util.thread;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * 
  * @author rainer prosi
@@ -87,7 +87,7 @@ public class ThreadFilterTest extends JDFTestCaseBase
 	public void testGetThis()
 	{
 		Thread currentThread = Thread.currentThread();
-		Assert.assertEquals(currentThread, new ThreadFilter().getThread(currentThread.getName(), 0));
+		Assertions.assertEquals(currentThread, new ThreadFilter().getThread(currentThread.getName(), 0));
 	}
 
 	/**
@@ -98,6 +98,6 @@ public class ThreadFilterTest extends JDFTestCaseBase
 	public void testGetAll()
 	{
 		Thread currentThread = Thread.currentThread();
-		Assert.assertTrue(new ThreadFilter().getThreads(null).contains(currentThread));
+		Assertions.assertTrue(new ThreadFilter().getThreads(null).contains(currentThread));
 	}
 }

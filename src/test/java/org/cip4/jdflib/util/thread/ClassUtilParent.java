@@ -68,12 +68,11 @@
  */
 package org.cip4.jdflib.util.thread;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -101,7 +100,7 @@ public class ClassUtilParent extends JDFTestCaseBase
 	{
 		Vector<Class<?>> v = ClassUtil.getDeclaredClasses(getClass());
 
-		assertTrue(v.contains(OtherInnerClass.class));
+		Assertions.assertTrue(v.contains(OtherInnerClass.class));
 	}
 
 }

@@ -36,14 +36,12 @@
  */
 package org.cip4.jdflib.util.cxf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import org.cip4.jdflib.datatypes.JDFRGBColor;
 import org.cip4.jdflib.datatypes.JDFTransferFunction;
 import org.cip4.jdflib.extensions.examples.ExampleTest;
 import org.cip4.jdflib.resource.process.JDFColor;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class CxFColorObjectTest extends ExampleTest
 {
@@ -56,7 +54,7 @@ public class CxFColorObjectTest extends ExampleTest
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject(0);
-		assertNotNull(colorObject.getCieLab());
+		Assertions.assertNotNull(colorObject.getCieLab());
 	}
 
 	/**
@@ -67,7 +65,7 @@ public class CxFColorObjectTest extends ExampleTest
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject(0);
-		assertNotNull(colorObject.getCMYKColor());
+		Assertions.assertNotNull(colorObject.getCMYKColor());
 	}
 
 	/**
@@ -79,7 +77,7 @@ public class CxFColorObjectTest extends ExampleTest
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject("black");
 		final JDFColor jdfColor = colorObject.getJDFColor();
-		assertEquals("black", jdfColor.getName());
+		Assertions.assertEquals("black", jdfColor.getName());
 	}
 
 	/**
@@ -91,7 +89,7 @@ public class CxFColorObjectTest extends ExampleTest
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject("black");
 		final JDFRGBColor rgbColor = colorObject.getRGBColor();
-		assertEquals(rgbColor.getR(), rgbColor.getB(), 0);
+		Assertions.assertEquals(rgbColor.getR(), rgbColor.getB(), 0);
 	}
 
 	/**
@@ -103,7 +101,7 @@ public class CxFColorObjectTest extends ExampleTest
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject("black");
 		final JDFTransferFunction tf = colorObject.getSpectrum();
-		assertEquals(31, tf.numPoints());
+		Assertions.assertEquals(31, tf.numPoints());
 	}
 
 	/**
@@ -115,7 +113,7 @@ public class CxFColorObjectTest extends ExampleTest
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject("black");
 		final JDFTransferFunction tf = colorObject.getSpectrum();
-		assertEquals(400, tf.getX(0), 0);
+		Assertions.assertEquals(400, tf.getX(0), 0);
 	}
 
 	/**
@@ -127,7 +125,7 @@ public class CxFColorObjectTest extends ExampleTest
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject("black");
 		final JDFTransferFunction tf = colorObject.getSpectrum();
-		assertEquals(700, tf.getX(30), 0);
+		Assertions.assertEquals(700, tf.getX(30), 0);
 	}
 
 	/**
@@ -138,7 +136,7 @@ public class CxFColorObjectTest extends ExampleTest
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject(0);
-		assertEquals("CxFColorObject", colorObject.toString().substring(0, 14));
+		Assertions.assertEquals("CxFColorObject", colorObject.toString().substring(0, 14));
 	}
 
 }

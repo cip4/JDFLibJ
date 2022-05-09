@@ -75,8 +75,8 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * test for exposedmedia related stuff
@@ -91,14 +91,14 @@ public class JDFExposedMediaTest extends JDFTestCaseBase
 	public void testGetMediaDimension()
 	{
 		JDFExposedMedia xm = (JDFExposedMedia) new JDFDoc("JDF").getRoot().appendElement(ElementName.RESOURCEPOOL).appendElement(ElementName.EXPOSEDMEDIA);
-		Assert.assertNull(xm.getMediaDimension());
+		Assertions.assertNull(xm.getMediaDimension());
 		JDFMedia m = xm.appendMedia();
-		Assert.assertNull(xm.getMediaDimension());
+		Assertions.assertNull(xm.getMediaDimension());
 		JDFXYPair dim = new JDFXYPair(10, 20);
 		m.setDimension(dim);
-		Assert.assertEquals(xm.getMediaDimension(), dim);
+		Assertions.assertEquals(xm.getMediaDimension(), dim);
 		m.makeRootResource(null, null, true);
-		Assert.assertEquals(xm.getMediaDimension(), dim);
+		Assertions.assertEquals(xm.getMediaDimension(), dim);
 	}
 
 }

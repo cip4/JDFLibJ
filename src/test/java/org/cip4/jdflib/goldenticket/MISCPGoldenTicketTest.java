@@ -70,24 +70,20 @@
  */
 package org.cip4.jdflib.goldenticket;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.*;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -118,11 +114,11 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.assign(null);
 		JDFNode node = cpGoldenTicket.getNode();
 		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Manager", "_MISCPS_1_GB", null);
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
-		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.5"));
-		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.5"));
-		assertTrue(node.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("MIS_L2-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.5"));
+		Assertions.assertTrue(node.isValid(EnumValidationLevel.Complete));
 
 		cpGoldenTicket.good = 1000;
 		cpGoldenTicket.waste = 90;
@@ -130,11 +126,11 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.execute(null, true, true);
 		node = cpGoldenTicket.getNode();
 		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Worker", "_MISCPS_1_GB", null);
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
-		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.5"));
-		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.5"));
-		assertTrue(node.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("MIS_L2-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.5"));
+		Assertions.assertTrue(node.isValid(EnumValidationLevel.Complete));
 
 		cpGoldenTicket.assign(null);
 		VJDFAttributeMap mapSingle = new VJDFAttributeMap();
@@ -299,7 +295,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 1, true, null);
 
 		VString vICS = new VString("Base_L2-1.5,MIS_L1-1.5,MISCPS_L1-1.5", ",");
-		assertEquals(cpGoldenTicket.getICSVersions(), vICS);
+		Assertions.assertEquals(cpGoldenTicket.getICSVersions(), vICS);
 	}
 
 	/**
@@ -336,9 +332,10 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicketTest#setUp()
+	 * @see BaseGoldenTicketTest#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

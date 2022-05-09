@@ -36,10 +36,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -50,7 +46,9 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class WalkJDFTest extends JDFTestCaseBase
 {
@@ -64,7 +62,7 @@ public class WalkJDFTest extends JDFTestCaseBase
 		final JDFComment c = n.appendComment();
 		c.setID("i1");
 		final KElement xjdf = new JDFToXJDF().convert(n);
-		assertEquals(xjdf.getXPathAttribute("@Types", null), "Product");
+		Assertions.assertEquals(xjdf.getXPathAttribute("@Types", null), "Product");
 	}
 
 	/**
@@ -78,7 +76,7 @@ public class WalkJDFTest extends JDFTestCaseBase
 		final JDFComment c = n.appendComment();
 		c.setID("i1");
 		final KElement xjdf = new JDFToXJDF().convert(n);
-		assertEquals(xjdf.getXPathAttribute("@Types", null), EnumType.ManualLabor.getName());
+		Assertions.assertEquals(xjdf.getXPathAttribute("@Types", null), EnumType.ManualLabor.getName());
 	}
 
 	/**
@@ -92,7 +90,7 @@ public class WalkJDFTest extends JDFTestCaseBase
 		final JDFComment c = n.appendComment();
 		c.setID("i1");
 		final KElement xjdf = new JDFToXJDF().convert(n);
-		assertEquals(JDFToXJDF.getDefaultVersion().getName(), xjdf.getAttribute(AttributeName.VERSION));
+		Assertions.assertEquals(JDFToXJDF.getDefaultVersion().getName(), xjdf.getAttribute(AttributeName.VERSION));
 	}
 
 	/**
@@ -107,7 +105,7 @@ public class WalkJDFTest extends JDFTestCaseBase
 		c.setID("i1");
 		JDFToXJDF.setDefaultVersion(EnumVersion.Version_2_2);
 		final KElement xjdf = new JDFToXJDF().convert(n);
-		assertEquals(JDFToXJDF.getDefaultVersion().getName(), xjdf.getAttribute(AttributeName.VERSION));
+		Assertions.assertEquals(JDFToXJDF.getDefaultVersion().getName(), xjdf.getAttribute(AttributeName.VERSION));
 	}
 
 	/**
@@ -118,14 +116,15 @@ public class WalkJDFTest extends JDFTestCaseBase
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final KElement xjdf = new JDFToXJDF().convert(n);
-		assertNotNull(xjdf.getXPathElement("AuditPool/AuditCreated[1]"));
-		assertNull(xjdf.getXPathElement("AuditPool/AuditCreated[2]"));
+		Assertions.assertNotNull(xjdf.getXPathElement("AuditPool/AuditCreated[1]"));
+		Assertions.assertNull(xjdf.getXPathElement("AuditPool/AuditCreated[2]"));
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		JDFToXJDF.setDefaultVersion(XJDFHelper.defaultVersion());

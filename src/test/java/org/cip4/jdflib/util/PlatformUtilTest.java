@@ -36,17 +36,12 @@
  */
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case for PlatformUtil class.
@@ -65,7 +60,7 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	@Test
 	public void testIsWindows()
 	{
-		assertEquals("Return value is not windows.", File.separator.equals(JDFCoreConstants.BACK_SLASH), PlatformUtil.isWindows());
+		Assertions.assertEquals(File.separator.equals(JDFCoreConstants.BACK_SLASH), PlatformUtil.isWindows(), "Return value is not windows.");
 	}
 
 	/**
@@ -75,9 +70,9 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	public void testGetProperty()
 	{
 		System.setProperty("foo.bar", "");
-		assertNull(PlatformUtil.getProperty("foo.bar"));
+		Assertions.assertNull(PlatformUtil.getProperty("foo.bar"));
 		System.setProperty("foo.bar", "fnarf");
-		assertEquals("fnarf", PlatformUtil.getProperty("foo.bar"));
+		Assertions.assertEquals("fnarf", PlatformUtil.getProperty("foo.bar"));
 		System.setProperty("foo.bar", "");
 	}
 
@@ -88,7 +83,7 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	public void testGetJavaVersion()
 	{
 		log.info(PlatformUtil.getJavaVersion());
-		assertNotNull(PlatformUtil.getJavaVersion());
+		Assertions.assertNotNull(PlatformUtil.getJavaVersion());
 	}
 
 	/**
@@ -98,9 +93,9 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	public void testHasProperty()
 	{
 		System.setProperty("foo.bar", "");
-		assertFalse(PlatformUtil.hasProperty("foo.bar"));
+		Assertions.assertFalse(PlatformUtil.hasProperty("foo.bar"));
 		System.setProperty("foo.bar", "fnarf");
-		assertTrue(PlatformUtil.hasProperty("foo.bar"));
+		Assertions.assertTrue(PlatformUtil.hasProperty("foo.bar"));
 		System.setProperty("foo.bar", "");
 	}
 
@@ -113,7 +108,7 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetConnectionTimeout()
 	{
-		assertEquals("ConnectionTimeout value is wrong.", PlatformUtil.DEFAULT_CONNECTION_TIMEOUT, PlatformUtil.getConnectionTimeout());
+		Assertions.assertEquals(PlatformUtil.DEFAULT_CONNECTION_TIMEOUT, PlatformUtil.getConnectionTimeout(), "ConnectionTimeout value is wrong.");
 	}
 
 }

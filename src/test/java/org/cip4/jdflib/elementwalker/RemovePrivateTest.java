@@ -39,15 +39,13 @@ package org.cip4.jdflib.elementwalker;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Test;
-
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class RemovePrivateTest extends TestCase
-{
+public class RemovePrivateTest {
 	/**
 	 *
 	 */
@@ -62,9 +60,9 @@ public class RemovePrivateTest extends TestCase
 		n.getCreateAuditPool().appendElement("blah:e", "www.blah.com");
 		final RemovePrivate rp = new RemovePrivate();
 		rp.walkTree(n, null);
-		assertNull(n.getAttribute("foo:bar", "www.foo.com", null));
-		assertNull(n.getElement("e", "www.blah.com", 0));
-		assertNotNull(n.getAuditPool());
+		Assertions.assertNull(n.getAttribute("foo:bar", "www.foo.com", null));
+		Assertions.assertNull(n.getElement("e", "www.blah.com", 0));
+		Assertions.assertNotNull(n.getAuditPool());
 	}
 
 	/**
@@ -79,9 +77,9 @@ public class RemovePrivateTest extends TestCase
 		final RemovePrivate rp = new RemovePrivate();
 		rp.addPrefix("foo");
 		rp.walkTree(e, null);
-		assertNull(e.getNonEmpty("foo:bar"));
-		assertNull(e.getNonEmpty("bar"));
-		assertNull(e.getNonEmpty("xmlns:foo"));
+		Assertions.assertNull(e.getNonEmpty("foo:bar"));
+		Assertions.assertNull(e.getNonEmpty("bar"));
+		Assertions.assertNull(e.getNonEmpty("xmlns:foo"));
 	}
 
 	/**
@@ -99,9 +97,9 @@ public class RemovePrivateTest extends TestCase
 		final RemovePrivate rp = new RemovePrivate();
 		rp.setZappAttributes(false);
 		rp.walkTree(n, null);
-		assertEquals("blub", n.getAttribute("foo:bar", "www.foo.com", null));
-		assertNull(n.getElement("e", "www.blah.com", 0));
-		assertNotNull(n.getAuditPool());
+		Assertions.assertEquals("blub", n.getAttribute("foo:bar", "www.foo.com", null));
+		Assertions.assertNull(n.getElement("e", "www.blah.com", 0));
+		Assertions.assertNotNull(n.getAuditPool());
 	}
 
 	/**
@@ -119,9 +117,9 @@ public class RemovePrivateTest extends TestCase
 		final RemovePrivate rp = new RemovePrivate();
 		rp.setZappElements(false);
 		rp.walkTree(n, null);
-		assertNull(n.getAttribute("foo:bar", "www.foo.com", null));
-		assertEquals(e1, n.getElement("e", "www.blah.com", 0));
-		assertNotNull(n.getAuditPool());
+		Assertions.assertNull(n.getAttribute("foo:bar", "www.foo.com", null));
+		Assertions.assertEquals(e1, n.getElement("e", "www.blah.com", 0));
+		Assertions.assertNotNull(n.getAuditPool());
 	}
 
 	/**
@@ -135,21 +133,21 @@ public class RemovePrivateTest extends TestCase
 		n.appendGeneralID("foo:key", "bar");
 		final RemovePrivate rp = new RemovePrivate();
 		rp.walkTree(n, null);
-		assertNull(n.getGeneralID(0));
+		Assertions.assertNull(n.getGeneralID(0));
 		n.appendGeneralID("key", "bar");
 		rp.walkTree(n, null);
-		assertEquals(n.getGeneralID("key", 0), "bar");
+		Assertions.assertEquals(n.getGeneralID("key", 0), "bar");
 		n.appendGeneralID("foo:key", "bar");
 		rp.addPrefix("blub");
 		rp.walkTree(n, null);
-		assertEquals(n.getGeneralID("foo:key", 0), "bar");
+		Assertions.assertEquals(n.getGeneralID("foo:key", 0), "bar");
 		rp.addPrefix("foo");
 		rp.setZappGeneralID(false);
 		rp.walkTree(n, null);
-		assertEquals(n.getGeneralID("foo:key", 0), "bar");
+		Assertions.assertEquals(n.getGeneralID("foo:key", 0), "bar");
 		rp.setZappGeneralID(true);
 		rp.walkTree(n, null);
-		assertNull(n.getGeneralID("foo:key", 0));
+		Assertions.assertNull(n.getGeneralID("foo:key", 0));
 	}
 
 	/**
@@ -168,10 +166,10 @@ public class RemovePrivateTest extends TestCase
 		final RemovePrivate rp = new RemovePrivate();
 		rp.addPrefix("foo");
 		rp.walkTree(n, null);
-		assertNull(n.getAttribute("bar", "www.foo.com", null));
-		assertNotNull(n.getAttribute("blah", "www.blah.com", null));
-		assertNotNull(n.getElement("e", "www.blah.com", 0));
-		assertNotNull(n.getAuditPool());
+		Assertions.assertNull(n.getAttribute("bar", "www.foo.com", null));
+		Assertions.assertNotNull(n.getAttribute("blah", "www.blah.com", null));
+		Assertions.assertNotNull(n.getElement("e", "www.blah.com", 0));
+		Assertions.assertNotNull(n.getAuditPool());
 
 	}
 }

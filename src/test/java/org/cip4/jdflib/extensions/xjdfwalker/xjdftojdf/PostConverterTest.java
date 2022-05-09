@@ -68,10 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -80,8 +76,9 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class PostConverterTest
 {
@@ -91,7 +88,7 @@ public class PostConverterTest
 	*
 	*/
 	@Test
-	@Ignore
+	@Disabled
 	public void testColorantControlSpace()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -106,9 +103,9 @@ public class PostConverterTest
 		final PostConverter pc = new PostConverter(null, n);
 		pc.new ResourceCleaner().cleanResources();
 
-		assertEquals("sep 1", cc.getColorantParams().getSeparation(0));
-		assertNotNull(cp.getColorWithName("sep 1"));
-		assertNull(cp.getColorWithName("sep_1"));
+		Assertions.assertEquals("sep 1", cc.getColorantParams().getSeparation(0));
+		Assertions.assertNotNull(cp.getColorWithName("sep 1"));
+		Assertions.assertNull(cp.getColorWithName("sep_1"));
 	}
 
 }

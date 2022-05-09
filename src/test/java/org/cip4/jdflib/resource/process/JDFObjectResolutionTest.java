@@ -70,14 +70,12 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoObjectResolution.EnumSourceObjects;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -94,8 +92,8 @@ public class JDFObjectResolutionTest extends JDFTestCaseBase
 	{
 		JDFObjectResolution or = (JDFObjectResolution) new JDFDoc(ElementName.OBJECTRESOLUTION).getRoot();
 		or.addSourceObject(EnumSourceObjects.ImagePhotographic);
-		assertTrue(or.matches(EnumSourceObjects.ImagePhotographic));
-		assertTrue(or.matches(null));
+		Assertions.assertTrue(or.matches(EnumSourceObjects.ImagePhotographic));
+		Assertions.assertTrue(or.matches(null));
 	}
 
 	/**
@@ -106,15 +104,15 @@ public class JDFObjectResolutionTest extends JDFTestCaseBase
 	{
 		JDFObjectResolution or = (JDFObjectResolution) new JDFDoc(ElementName.OBJECTRESOLUTION).getRoot();
 		or.addSourceObject(EnumSourceObjects.All);
-		assertEquals(or.getSourceObjects().get(0), EnumSourceObjects.All);
-		assertEquals(or.getSourceObjects().size(), 1);
+		Assertions.assertEquals(or.getSourceObjects().get(0), EnumSourceObjects.All);
+		Assertions.assertEquals(or.getSourceObjects().size(), 1);
 		or.addSourceObject(EnumSourceObjects.All);
-		assertEquals(or.getSourceObjects().get(0), EnumSourceObjects.All);
-		assertEquals(or.getSourceObjects().size(), 1);
+		Assertions.assertEquals(or.getSourceObjects().get(0), EnumSourceObjects.All);
+		Assertions.assertEquals(or.getSourceObjects().size(), 1);
 		or.addSourceObject(EnumSourceObjects.ImagePhotographic);
-		assertEquals(or.getSourceObjects().get(0), EnumSourceObjects.All);
-		assertEquals(or.getSourceObjects().get(1), EnumSourceObjects.ImagePhotographic);
-		assertEquals(or.getSourceObjects().size(), 2);
+		Assertions.assertEquals(or.getSourceObjects().get(0), EnumSourceObjects.All);
+		Assertions.assertEquals(or.getSourceObjects().get(1), EnumSourceObjects.ImagePhotographic);
+		Assertions.assertEquals(or.getSourceObjects().size(), 2);
 	}
 
 	/**
@@ -125,15 +123,15 @@ public class JDFObjectResolutionTest extends JDFTestCaseBase
 	{
 		JDFObjectResolution or = (JDFObjectResolution) new JDFDoc(ElementName.OBJECTRESOLUTION).getRoot();
 		or.addObjectTag("foo");
-		assertEquals(or.getObjectTags().get(0), "foo");
-		assertEquals(or.getObjectTags().size(), 1);
+		Assertions.assertEquals(or.getObjectTags().get(0), "foo");
+		Assertions.assertEquals(or.getObjectTags().size(), 1);
 		or.addObjectTag("foo");
-		assertEquals(or.getObjectTags().get(0), "foo");
-		assertEquals(or.getObjectTags().size(), 1);
+		Assertions.assertEquals(or.getObjectTags().get(0), "foo");
+		Assertions.assertEquals(or.getObjectTags().size(), 1);
 		or.addObjectTag("bar");
-		assertEquals(or.getObjectTags().get(0), "foo");
-		assertEquals(or.getObjectTags().get(1), "bar");
-		assertEquals(or.getObjectTags().size(), 2);
+		Assertions.assertEquals(or.getObjectTags().get(0), "foo");
+		Assertions.assertEquals(or.getObjectTags().get(1), "bar");
+		Assertions.assertEquals(or.getObjectTags().size(), 2);
 	}
 
 }

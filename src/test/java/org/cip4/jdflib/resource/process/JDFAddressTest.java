@@ -70,18 +70,14 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.StringArray;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -101,7 +97,7 @@ public class JDFAddressTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.ADDRESS);
 		final JDFAddress ad = (JDFAddress) doc.getRoot();
 		final JDFComment c = (JDFComment) ad.appendExtendedAddress();
-		assertFalse(c.hasAttribute(AttributeName.ID));
+		Assertions.assertFalse(c.hasAttribute(AttributeName.ID));
 	}
 
 	/**
@@ -119,9 +115,9 @@ public class JDFAddressTest extends JDFTestCaseBase
 		}
 		for (int i = 0; i < 5; i++)
 		{
-			assertEquals("Line" + i, ad.getAddressLineText(i));
+			Assertions.assertEquals("Line" + i, ad.getAddressLineText(i));
 		}
-		assertNull(ad.getAddressLine(7));
+		Assertions.assertNull(ad.getAddressLine(7));
 	}
 
 	/**
@@ -142,7 +138,7 @@ public class JDFAddressTest extends JDFTestCaseBase
 		final StringArray sa = ad.getAddressLines();
 		for (int i = 0; i < 5; i++)
 		{
-			assertEquals("Line" + i, sa.get(i));
+			Assertions.assertEquals("Line" + i, sa.get(i));
 		}
 	}
 
@@ -156,7 +152,7 @@ public class JDFAddressTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.ADDRESS);
 		final JDFAddress ad = (JDFAddress) doc.getRoot();
 		ad.setExtendedAddressText("suite");
-		assertEquals("suite", ad.getExtendedAddressText());
+		Assertions.assertEquals("suite", ad.getExtendedAddressText());
 	}
 
 	/**
@@ -169,18 +165,18 @@ public class JDFAddressTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc("Address");
 		final JDFAddress ad = (JDFAddress) doc.getRoot();
 		final JDFAddress ad2 = (JDFAddress) new JDFDoc("Address").getRoot();
-		assertTrue(ad.matches(ad));
+		Assertions.assertTrue(ad.matches(ad));
 		ad.setCity("cc1");
 		ad2.setCity("cc2");
-		assertTrue(ad.matches(ad2));
+		Assertions.assertTrue(ad.matches(ad2));
 		ad.setCountryCode("DE");
-		assertTrue(ad.matches(ad2));
+		Assertions.assertTrue(ad.matches(ad2));
 		ad2.setCountryCode("de");
-		assertTrue(ad.matches(ad2));
+		Assertions.assertTrue(ad.matches(ad2));
 		ad2.setCountryCode("dd");
-		assertFalse(ad.matches(ad2));
+		Assertions.assertFalse(ad.matches(ad2));
 		ad2.setCountryCode("de");
 		ad2.setCity("abcde");
-		assertFalse(ad.matches(ad2));
+		Assertions.assertFalse(ad.matches(ad2));
 	}
 }

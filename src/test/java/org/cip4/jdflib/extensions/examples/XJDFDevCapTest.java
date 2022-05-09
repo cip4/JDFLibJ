@@ -77,7 +77,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
 import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
 import org.cip4.jdflib.resource.devicecapability.JDFand;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 

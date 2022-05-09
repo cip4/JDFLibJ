@@ -39,9 +39,6 @@
 
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -51,7 +48,9 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFMarkObject;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -70,6 +69,7 @@ public class JDFMarkObjectTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -88,7 +88,7 @@ public class JDFMarkObjectTest extends JDFTestCaseBase
 	{
 		final JDFMarkObject co = lo.appendMarkObject();
 		co.setTrimSize(1.12345, 2.3456, 2);
-		assertTrue(co.toXML().indexOf("1.12 2.35\"") > 0);
+		Assertions.assertTrue(co.toXML().indexOf("1.12 2.35\"") > 0);
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class JDFMarkObjectTest extends JDFTestCaseBase
 		final JDFMarkObject co = lo.appendMarkObject();
 		co.setTrimSize(1.2345, 2.3456);
 		co.setCTM(JDFMatrix.getUnitMatrix());
-		assertEquals(new JDFRectangle(0, 0, 1.2345, 2.3456), co.getRect());
+		Assertions.assertEquals(new JDFRectangle(0, 0, 1.2345, 2.3456), co.getRect());
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class JDFMarkObjectTest extends JDFTestCaseBase
 	{
 		final JDFMarkObject co = lo.appendMarkObject();
 		co.setTrimSize(1.12345, 2.3456, 2);
-		assertTrue(co.toXML().indexOf("1.12 2.35\"") > 0);
+		Assertions.assertTrue(co.toXML().indexOf("1.12 2.35\"") > 0);
 	}
 
 	/**
@@ -125,7 +125,7 @@ public class JDFMarkObjectTest extends JDFTestCaseBase
 	{
 		final JDFMarkObject co = lo.appendMarkObject();
 		co.setClipPath("1.0000004 1.2345678 l 1 2 3 g ds", 2);
-		assertEquals(co.getClipPath(), ("1 1.23 l 1 2 3 g ds"));
+		Assertions.assertEquals(co.getClipPath(), ("1 1.23 l 1 2 3 g ds"));
 	}
 
 	/**
@@ -137,6 +137,6 @@ public class JDFMarkObjectTest extends JDFTestCaseBase
 	{
 		final JDFMarkObject co = lo.appendMarkObject();
 		co.setClipBox(JDFRectangle.createRectangle("1 2 44 66"));
-		assertEquals(new JDFXYPair(43, 64), co.getTrimSize());
+		Assertions.assertEquals(new JDFXYPair(43, 64), co.getTrimSize());
 	}
 }

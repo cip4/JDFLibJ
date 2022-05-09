@@ -68,9 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -79,7 +76,8 @@ import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -100,12 +98,12 @@ public class WalkCutBlockTest extends JDFTestCaseBase
 		WalkCutBlock walkCutBlock = new WalkCutBlock();
 		walkCutBlock.setParent(new XJDFToJDFImpl(null));
 		walkCutBlock.walk(cb, new JDFDoc(ElementName.RESOURCEPOOL).getRoot());
-		assertNull(cb.getNonEmpty(AttributeName.BOX));
+		Assertions.assertNull(cb.getNonEmpty(AttributeName.BOX));
 		JDFMatrix m = JDFMatrix.getUnitMatrix();
 		m.shift(box.getLL());
 		JDFXYPair size = box.getSize();
-		assertEquals(cb.getBlockTrf(), m);
-		assertEquals(cb.getBlockSize(), size);
-		assertNull(cb.getNonEmpty(AttributeName.BOX));
+		Assertions.assertEquals(cb.getBlockTrf(), m);
+		Assertions.assertEquals(cb.getBlockSize(), size);
+		Assertions.assertNull(cb.getNonEmpty(AttributeName.BOX));
 	}
 }

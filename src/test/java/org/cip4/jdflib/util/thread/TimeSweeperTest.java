@@ -68,12 +68,10 @@
  */
 package org.cip4.jdflib.util.thread;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TimeSweeperTest extends JDFTestCaseBase
 {
@@ -101,9 +99,9 @@ public class TimeSweeperTest extends JDFTestCaseBase
 		janitor.setInterval(1);
 		janitor.addSweeper(new TimeSweeper(2, new TestRun()), true);
 		janitor.startSweep(0);
-		assertEquals(janitor.numSweepers(), 1);
+		Assertions.assertEquals(janitor.numSweepers(), 1);
 		ThreadUtil.sleep(4231);
-		assertTrue(n > 1);
+		Assertions.assertTrue(n > 1);
 	}
 
 }

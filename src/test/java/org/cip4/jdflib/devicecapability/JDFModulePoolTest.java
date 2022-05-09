@@ -78,8 +78,8 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 import org.cip4.jdflib.resource.devicecapability.JDFModuleCap;
 import org.cip4.jdflib.resource.devicecapability.JDFModulePool;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 public class JDFModulePoolTest extends JDFTestCaseBase
 {
 	@Test
@@ -97,7 +97,7 @@ public class JDFModulePoolTest extends JDFTestCaseBase
 		for (int i = 3; i >= 0; i--)
 		{
 			s.add("I" + i);
-			Assert.assertEquals(mp.getMinAvailability(s), EnumAvailability.getEnum(i));
+			Assertions.assertEquals(mp.getMinAvailability(s), EnumAvailability.getEnum(i));
 		}
 	}
 

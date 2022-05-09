@@ -36,9 +36,6 @@
  */
 package org.cip4.jdflib.node;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.util.HashMap;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -46,7 +43,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class LinkValidatorMapTest extends JDFTestCaseBase
 {
@@ -58,10 +56,10 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	public void testGetLinkNames()
 	{
 		final VString linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkNames(EnumType.ConventionalPrinting, null);
-		assertTrue(linkInfo.contains("ConventionalPrintingParams"));
-		assertTrue(linkInfo.contains("Preview"));
-		assertTrue(linkInfo.contains("Media"));
-		assertTrue(linkInfo.contains("Component"));
+		Assertions.assertTrue(linkInfo.contains("ConventionalPrintingParams"));
+		Assertions.assertTrue(linkInfo.contains("Preview"));
+		Assertions.assertTrue(linkInfo.contains("Media"));
+		Assertions.assertTrue(linkInfo.contains("Component"));
 	}
 
 	/**
@@ -71,9 +69,9 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	public void testGetLinkNamesStripping()
 	{
 		final VString linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkNames(EnumType.Stripping, null);
-		assertTrue(linkInfo.contains("Device"));
-		assertTrue(linkInfo.contains("BinderySignature"));
-		assertTrue(linkInfo.contains("Assembly"));
+		Assertions.assertTrue(linkInfo.contains("Device"));
+		Assertions.assertTrue(linkInfo.contains("BinderySignature"));
+		Assertions.assertTrue(linkInfo.contains("Assembly"));
 	}
 
 	/**
@@ -84,7 +82,7 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	{
 		final VString linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkNames(EnumType.ConventionalPrinting, null);
 		final LinkInfoMap linkNames = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);
-		assertEquals(linkInfo.size(), linkNames.size());
+		Assertions.assertEquals(linkInfo.size(), linkNames.size());
 	}
 
 	/**
@@ -95,7 +93,7 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	{
 		final HashMap<String, LinkInfo> linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);
 		final LinkInfo cp = linkInfo.get("ConventionalPrintingParams");
-		assertTrue(cp.getVString().contains("i_"));
+		Assertions.assertTrue(cp.getVString().contains("i_"));
 	}
 
 	/**
@@ -106,7 +104,7 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	{
 		final HashMap<String, LinkInfo> linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.Verification, null);
 		final LinkInfo cp = linkInfo.get(ElementName.FILESPEC);
-		assertTrue(cp.getVString().contains("i?"));
+		Assertions.assertTrue(cp.getVString().contains("i?"));
 	}
 
 	/**
@@ -117,7 +115,7 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	{
 		final HashMap<String, LinkInfo> linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.Product, null);
 		final LinkInfo cp = linkInfo.get(ElementName.VARIABLEINTENT);
-		assertTrue(cp.getVString().contains("i?"));
+		Assertions.assertTrue(cp.getVString().contains("i?"));
 	}
 
 	/**
@@ -128,7 +126,7 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	{
 		final HashMap<String, LinkInfo> linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.SheetOptimizing, null);
 		final LinkInfo cp = linkInfo.get(ElementName.ASSEMBLY);
-		assertTrue(cp.getVString().contains("i*"));
+		Assertions.assertTrue(cp.getVString().contains("i*"));
 	}
 
 	/**
@@ -143,7 +141,7 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 		{
 			final HashMap<String, LinkInfo> linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.Combined, v);
 			final LinkInfo cp = linkInfo.get("ConventionalPrintingParams");
-			assertTrue(cp.getVString().contains("i_"));
+			Assertions.assertTrue(cp.getVString().contains("i_"));
 		}
 	}
 }

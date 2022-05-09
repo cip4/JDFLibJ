@@ -70,15 +70,13 @@
  */
 package org.cip4.jdflib.resource.intent;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.span.JDFStringSpan;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -94,7 +92,7 @@ public class JDFColorIntentTest extends JDFTestCaseBase
 	{
 		JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
 		JDFStringSpan ns = ci.appendColorICCStandard();
-		assertNotNull(ns);
+		Assertions.assertNotNull(ns);
 	}
 
 	/**
@@ -105,11 +103,11 @@ public class JDFColorIntentTest extends JDFTestCaseBase
 	{
 		JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
 		ci.appendColorsUsed().setCMYK();
-		assertEquals(ci.getNumColors(), 4);
+		Assertions.assertEquals(ci.getNumColors(), 4);
 		ci.setNumColors(4);
-		assertEquals(ci.getNumColors(), 4);
+		Assertions.assertEquals(ci.getNumColors(), 4);
 		ci.getColorsUsed().setSeparations(new VString("Spot1", null));
-		assertEquals(ci.getNumColors(), 5);
+		Assertions.assertEquals(ci.getNumColors(), 5);
 	}
 
 	/**
@@ -121,8 +119,8 @@ public class JDFColorIntentTest extends JDFTestCaseBase
 		JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
 		ci.appendColorsUsed().setCMYK();
 		ci.getColorsUsed().setSeparations(new VString("Spot1", null));
-		assertEquals(ci.getNumVarnish(), 0);
+		Assertions.assertEquals(ci.getNumVarnish(), 0);
 		ci.getColorsUsed().setSeparations(new VString("Spot1 DullVarnish Aqueous", null));
-		assertEquals(ci.getNumVarnish(), 2);
+		Assertions.assertEquals(ci.getNumVarnish(), 2);
 	}
 }

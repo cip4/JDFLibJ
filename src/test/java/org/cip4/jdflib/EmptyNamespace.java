@@ -84,8 +84,8 @@ import java.io.IOException;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -108,7 +108,7 @@ public class EmptyNamespace extends JDFTestCaseBase {
 
 		// assertXMLEqual (jdfDocResult.getMemberDocument (),
 		// jdfDoc.getMemberDocument ());
-		Assert.assertEquals(jdfDocResult.getDocumentElement().getNamespaceURI(), jdfDoc.getDocumentElement().getNamespaceURI());
+		Assertions.assertEquals(jdfDocResult.getDocumentElement().getNamespaceURI(), jdfDoc.getDocumentElement().getNamespaceURI());
 
 	}
 
@@ -138,7 +138,7 @@ public class EmptyNamespace extends JDFTestCaseBase {
 
 				if (!namespaceOk) {
 					String help = xml.substring(xml.indexOf("<AuditPool"));
-					Assert.assertTrue("This version of Apache Xerces has a namespace problem : " + help, namespaceOk);
+					Assertions.assertTrue(namespaceOk, "This version of Apache Xerces has a namespace problem : " + help);
 				}
 			}
 		} catch (FileNotFoundException e) {

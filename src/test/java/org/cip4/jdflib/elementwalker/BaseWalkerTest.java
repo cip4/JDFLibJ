@@ -71,15 +71,13 @@
  */
 package org.cip4.jdflib.elementwalker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author prosirai
@@ -135,7 +133,7 @@ public class BaseWalkerTest extends JDFTestCaseBase
 	{
 		BaseWalkerFactory bf = new BaseWalkerFactory();
 		BaseWalker b = new TestWalker(bf);
-		assertEquals(b.getDepth(), 1);
+		Assertions.assertEquals(b.getDepth(), 1);
 	}
 
 	/**
@@ -149,10 +147,10 @@ public class BaseWalkerTest extends JDFTestCaseBase
 		XMLDoc d = new XMLDoc("a", null);
 		ElementWalker ew = new ElementWalker(bf);
 		KElement root = d.getRoot();
-		assertEquals(ew.walkTree(root, null), 1);
+		Assertions.assertEquals(ew.walkTree(root, null), 1);
 		for (int i = 1; i <= 10; i++)
 			root.getCreateXPathElement("b/c/d[" + i + "]");
-		assertEquals("a,b,c+10*d=13", ew.walkTree(root, null), 13);
+		Assertions.assertEquals(ew.walkTree(root, null), 13, "a,b,c+10*d=13");
 	}
 
 	/**
@@ -164,12 +162,12 @@ public class BaseWalkerTest extends JDFTestCaseBase
 		BaseWalkerFactory bf = new BaseWalkerFactory();
 		TestWalker tw = new TestWalker(bf);
 		KElement a = new XMLDoc("a", null).getRoot();
-		assertEquals(bf.getWalker(a), tw);
+		Assertions.assertEquals(bf.getWalker(a), tw);
 		tw.setNames("b");
 		bf.addWalker(tw);
-		assertNull(bf.getWalker(a));
+		Assertions.assertNull(bf.getWalker(a));
 		tw.setNames("a");
 		bf.addWalker(tw);
-		assertEquals(bf.getWalker(a), tw);
+		Assertions.assertEquals(bf.getWalker(a), tw);
 	}
 }

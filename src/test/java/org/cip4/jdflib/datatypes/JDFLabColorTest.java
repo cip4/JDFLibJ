@@ -37,9 +37,8 @@
  *
  */package org.cip4.jdflib.datatypes;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class JDFLabColorTest
 {
@@ -48,10 +47,10 @@ public class JDFLabColorTest
 	public void testDeltaE()
 	{
 		final JDFLabColor lc = new JDFLabColor(1, 2, 3);
-		assertEquals(-1, lc.deltaE(null), 0.);
-		assertEquals(0, lc.deltaE(lc), 0.);
+		Assertions.assertEquals(-1, lc.deltaE(null), 0.);
+		Assertions.assertEquals(0, lc.deltaE(lc), 0.);
 		final JDFLabColor lc2 = new JDFLabColor(2, 3, 4);
-		assertEquals(Math.sqrt(3), lc.deltaE(lc2), 0.0001);
+		Assertions.assertEquals(Math.sqrt(3), lc.deltaE(lc2), 0.0001);
 	}
 
 }

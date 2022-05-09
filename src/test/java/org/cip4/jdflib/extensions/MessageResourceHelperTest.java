@@ -36,11 +36,10 @@
  */
 package org.cip4.jdflib.extensions;
 
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class MessageResourceHelperTest
 {
@@ -52,7 +51,7 @@ public class MessageResourceHelperTest
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageResourceHelper mh = (MessageResourceHelper) xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Resource);
-		assertTrue(mh.isSignal());
+		Assertions.assertTrue(mh.isSignal());
 	}
 
 }

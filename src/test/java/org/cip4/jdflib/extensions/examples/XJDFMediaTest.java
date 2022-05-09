@@ -87,8 +87,8 @@ import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMediaLayers;
 import org.cip4.jdflib.resource.process.postpress.JDFGlue;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -236,8 +236,8 @@ public class XJDFMediaTest extends ExampleTest
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
-	@Before
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		KElement.setLongID(false);

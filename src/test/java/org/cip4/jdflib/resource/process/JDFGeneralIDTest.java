@@ -73,9 +73,6 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
 import org.cip4.jdflib.core.ElementName;
@@ -84,7 +81,8 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -101,11 +99,11 @@ public class JDFGeneralIDTest extends JDFTestCaseBase
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFGeneralID gid1 = n.appendGeneralID("foo", "bar");
 		JDFGeneralID gid2 = n.appendGeneralID("foo", "bar");
-		assertTrue(gid1.matches(gid2));
-		assertTrue(gid1.matches("bar"));
+		Assertions.assertTrue(gid1.matches(gid2));
+		Assertions.assertTrue(gid1.matches("bar"));
 		gid2.setIDValue("notBar");
-		assertFalse(gid1.matches(gid2));
-		assertFalse(gid1.matches("notBar"));
+		Assertions.assertFalse(gid1.matches(gid2));
+		Assertions.assertFalse(gid1.matches("notBar"));
 	}
 
 	/**

@@ -71,8 +71,8 @@
 package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * simple JDFException test case class
@@ -87,10 +87,10 @@ public class JDFExceptionTest extends JDFTestCaseBase
 	{
 		JDFException x1 = new JDFException("foo");
 		JDFException x2 = new JDFException("bar");
-		Assert.assertTrue(x1.hashCode() != x2.hashCode());
+		Assertions.assertTrue(x1.hashCode() != x2.hashCode());
 		x1 = new JDFException("foo", 42);
 		x2 = new JDFException("bar", 42);
-		Assert.assertEquals(x1.hashCode(), x2.hashCode());
+		Assertions.assertEquals(x1.hashCode(), x2.hashCode());
 	}
 
 	/**
@@ -101,10 +101,10 @@ public class JDFExceptionTest extends JDFTestCaseBase
 	{
 		JDFException x1 = new JDFException("foo");
 		JDFException x2 = new JDFException("bar");
-		Assert.assertNotSame(x1, x2);
+		Assertions.assertNotSame(x1, x2);
 		x1 = new JDFException("foo", 42);
 		x2 = new JDFException("bar", 42);
-		Assert.assertEquals(x1, x2);
+		Assertions.assertEquals(x1, x2);
 	}
 
 }

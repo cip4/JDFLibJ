@@ -45,10 +45,6 @@
  */
 package org.cip4.jdflib.span;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -57,7 +53,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.span.JDFSpanBindingLength.EnumSpanBindingLength;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -74,17 +71,17 @@ public class JDFEnumerationSpanTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = new JDFDoc("BindingLength");
 		final KElement e = doc.getRoot();
-		assertTrue(e instanceof JDFSpanBindingLength);
+		Assertions.assertTrue(e instanceof JDFSpanBindingLength);
 		final JDFSpanBindingLength bl = (JDFSpanBindingLength) e;
 		bl.setActual(EnumSpanBindingLength.Long);
 		final EnumSpanBindingLength ebl = (EnumSpanBindingLength) bl.getActual();
-		assertEquals(ebl, EnumSpanBindingLength.Long);
+		Assertions.assertEquals(ebl, EnumSpanBindingLength.Long);
 		final Vector<ValuedEnum> v = new Vector<>();
 		v.add(EnumSpanBindingLength.Long);
 		v.add(EnumSpanBindingLength.Short);
 		bl.setRange(v);
 		final Vector<? extends ValuedEnum> v2 = bl.getRange();
-		assertEquals("Range", v, v2);
+		Assertions.assertEquals(v, v2, "Range");
 	}
 
 	/**
@@ -97,8 +94,8 @@ public class JDFEnumerationSpanTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.BINDINGLENGTH);
 		final JDFSpanBindingLength e = (JDFSpanBindingLength) doc.getRoot();
 		e.setActual(null);
-		assertNull(e.getActual());
+		Assertions.assertNull(e.getActual());
 		e.setActual(EnumSpanBindingLength.Long);
-		assertEquals(EnumSpanBindingLength.Long, e.getActual());
+		Assertions.assertEquals(EnumSpanBindingLength.Long, e.getActual());
 	}
 }

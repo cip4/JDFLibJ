@@ -36,9 +36,6 @@
  */
 package org.cip4.jdflib.elementwalker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import java.util.List;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -51,7 +48,9 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.ListMap;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -65,18 +64,18 @@ public class LinkRefFinderTest extends JDFTestCaseBase
 	VElement vM;
 
 	/**
-	 * Test method for {@link org.cip4.jdflib.elementwalker.LinkRefFinder#getMap(org.cip4.jdflib.node.JDFNode)}.
+	 * Test method for {@link LinkRefFinder#getMap(JDFNode)}.
 	 */
 	@Test
 	public void testGetTheMap()
 	{
 		final LinkRefFinder lrf = new LinkRefFinder(true, true);
 		final ListMap<String, KElement> m = lrf.getMap(n);
-		assertEquals(m, lrf.getTheMap());
+		Assertions.assertEquals(m, lrf.getTheMap());
 	}
 
 	/**
-	 * Test method for {@link org.cip4.jdflib.elementwalker.LinkRefFinder#getMap(org.cip4.jdflib.node.JDFNode)}.
+	 * Test method for {@link LinkRefFinder#getMap(JDFNode)}.
 	 */
 	@Test
 	public void testGetMap()
@@ -111,8 +110,8 @@ public class LinkRefFinderTest extends JDFTestCaseBase
 		{
 			final JDFMedia m2 = (JDFMedia) vM.get(i);
 			final List<KElement> vRef = vm.get(m2.getID());
-			assertNotNull(vRef);
-			assertEquals("A link and a ref", vRef.size(), nV);
+			Assertions.assertNotNull(vRef);
+			Assertions.assertEquals(vRef.size(), nV, "A link and a ref");
 		}
 	}
 
@@ -120,6 +119,7 @@ public class LinkRefFinderTest extends JDFTestCaseBase
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

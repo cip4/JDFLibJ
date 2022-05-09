@@ -81,14 +81,16 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 public class JDFStringStateTest extends JDFTestCaseBase
 {
 
 	JDFStringState sState = null;
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -106,14 +108,14 @@ public class JDFStringStateTest extends JDFTestCaseBase
 	{
 		sState.appendValueAllowedValue("20");
 		sState.addValue("24", EnumFitsValue.Allowed);
-		Assert.assertEquals(sState.getValueAllowedValue(1), "24");
+		Assertions.assertEquals(sState.getValueAllowedValue(1), "24");
 		sState.addValue("26", EnumFitsValue.Allowed);
-		Assert.assertEquals(sState.getValueAllowedValue(1), "24");
-		Assert.assertEquals(sState.getValueAllowedValue(2), "26");
+		Assertions.assertEquals(sState.getValueAllowedValue(1), "24");
+		Assertions.assertEquals(sState.getValueAllowedValue(2), "26");
 		sState.addValue("24", EnumFitsValue.Allowed);
-		Assert.assertEquals(sState.getValueAllowedValue(1), "24");
-		Assert.assertEquals(sState.getValueAllowedValue(2), "26");
-		Assert.assertNull(sState.getValueAllowedValue(3));
+		Assertions.assertEquals(sState.getValueAllowedValue(1), "24");
+		Assertions.assertEquals(sState.getValueAllowedValue(2), "26");
+		Assertions.assertNull(sState.getValueAllowedValue(3));
 	}
 
 }

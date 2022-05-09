@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 public class JDFLayerListTest extends JDFTestCaseBase
 {
 	private JDFRunList rlIn;

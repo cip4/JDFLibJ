@@ -70,10 +70,6 @@
  */
 package org.cip4.jdflib.jmf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-
 import java.io.File;
 import java.net.URL;
 
@@ -93,7 +89,9 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -107,9 +105,10 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		JDFDoc d = new JDFDoc(ElementName.QUEUE);
@@ -127,7 +126,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	public void testAddNull()
 	{
 		JDFResponse resp = qsp.addEntry(null, null, null);
-		assertEquals(2, resp.getReturnCode());
+		Assertions.assertEquals(2, resp.getReturnCode());
 	}
 
 	/**
@@ -137,9 +136,9 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	public void testAddEntry()
 	{
 		JDFResponse resp = qsp.addEntry(theQueue, null, null);
-		assertEquals(0, resp.getReturnCode());
+		Assertions.assertEquals(0, resp.getReturnCode());
 		theQueue = resp.getQueue(0);
-		assertEquals(theQueue.numEntries(null), 0);
+		Assertions.assertEquals(theQueue.numEntries(null), 0);
 	}
 
 	/**
@@ -162,9 +161,9 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 			{
 				t.start();
 				JDFResponse resp = qsp.addEntry(theQueue, null, f);
-				assertEquals(0, resp.getReturnCode());
+				Assertions.assertEquals(0, resp.getReturnCode());
 				JDFQueueEntry queueResp = resp.getQueueEntry(0);
-				assertNotNull(queueResp);
+				Assertions.assertNotNull(queueResp);
 				t.stop();
 				if (i % 100 == 0)
 				{
@@ -199,13 +198,13 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 		Multipart m = MimeUtil.buildMimePackage(d1, doc, true);
 
 		JDFDoc[] d2 = MimeUtil.getJMFSubmission(m);
-		assertNotNull(d2);
+		Assertions.assertNotNull(d2);
 		final JDFQueueSubmissionParams queueSubmissionParams = d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0);
-		assertEquals(queueSubmissionParams.getURL(), "cid:JDF.jdf");
-		assertEquals(d2[1].getJDFRoot().getEnumType(), JDFNode.EnumType.ColorSpaceConversion);
+		Assertions.assertEquals(queueSubmissionParams.getURL(), "cid:JDF.jdf");
+		Assertions.assertEquals(d2[1].getJDFRoot().getEnumType(), JDFNode.EnumType.ColorSpaceConversion);
 		JDFDoc d3 = queueSubmissionParams.getURLDoc();
-		assertNotNull(d3);
-		assertEquals(d3.getJDFRoot().getEnumType(), JDFNode.EnumType.ColorSpaceConversion);
+		Assertions.assertNotNull(d3);
+		Assertions.assertEquals(d3.getJDFRoot().getEnumType(), JDFNode.EnumType.ColorSpaceConversion);
 	}
 
 	/**
@@ -215,9 +214,9 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	public void testSetReturnURL() throws Exception
 	{
 		qsp.setReturnURL((URL) null);
-		assertFalse(qsp.hasAttribute(AttributeName.RETURNURL));
+		Assertions.assertFalse(qsp.hasAttribute(AttributeName.RETURNURL));
 		qsp.setReturnURL(new URL("http://localhost"));
-		assertEquals(qsp.getReturnURL(), "http://localhost");
+		Assertions.assertEquals(qsp.getReturnURL(), "http://localhost");
 	}
 
 	/**
@@ -227,8 +226,8 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	public void testSetReturnJMFL() throws Exception
 	{
 		qsp.setReturnJMF((URL) null);
-		assertFalse(qsp.hasAttribute(AttributeName.RETURNJMF));
+		Assertions.assertFalse(qsp.hasAttribute(AttributeName.RETURNJMF));
 		qsp.setReturnJMF(new URL("http://localhost"));
-		assertEquals(qsp.getReturnJMF(), "http://localhost");
+		Assertions.assertEquals(qsp.getReturnJMF(), "http://localhost");
 	}
 }

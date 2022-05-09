@@ -38,11 +38,6 @@
  */
 package org.cip4.jdflib.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -50,7 +45,8 @@ import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -69,7 +65,7 @@ public class StringArrayTest extends JDFTestCaseBase
 		v.appendUnique("b");
 		v.appendUnique("c");
 		v.appendUnique("c");
-		assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
+		Assertions.assertEquals(StringUtil.setvString(v, " ", null, null), "a b c", "a b c");
 
 	}
 
@@ -84,12 +80,12 @@ public class StringArrayTest extends JDFTestCaseBase
 		v.add("b");
 		v.add("c");
 		v.add("c");
-		assertEquals("a", v.get(0));
-		assertEquals("c", v.get(3));
-		assertEquals("c", v.get(-2));
-		assertEquals("b", v.get(-3));
-		assertNull("b", v.get(-6));
-		assertNull("b", v.get(7));
+		Assertions.assertEquals("a", v.get(0));
+		Assertions.assertEquals("c", v.get(3));
+		Assertions.assertEquals("c", v.get(-2));
+		Assertions.assertEquals("b", v.get(-3));
+		Assertions.assertNull(v.get(-6), "b");
+		Assertions.assertNull(v.get(7), "b");
 	}
 
 	/**
@@ -100,9 +96,9 @@ public class StringArrayTest extends JDFTestCaseBase
 	public void testRemove() throws Exception
 	{
 		final StringArray v = new StringArray("a b c", null);
-		assertEquals(v.remove(-1), "c");
-		assertEquals(v.remove(-1), "b");
-		assertEquals(v.size(), 1);
+		Assertions.assertEquals(v.remove(-1), "c");
+		Assertions.assertEquals(v.remove(-1), "b");
+		Assertions.assertEquals(v.size(), 1);
 	}
 
 	/**
@@ -116,12 +112,12 @@ public class StringArrayTest extends JDFTestCaseBase
 		v.appendUnique("b");
 		v.appendUnique("c");
 		v.add("c");
-		assertTrue(v.containsAny(null));
-		assertFalse(v.containsAny(new StringArray("d e", " ")));
-		assertTrue(v.containsAny(new StringArray("b e", " ")));
-		assertTrue(v.containsAny(new StringArray("e b", " ")));
-		assertTrue(v.containsAny(new StringArray("g c h", " ")));
-		assertTrue(v.containsAny(v));
+		Assertions.assertTrue(v.containsAny(null));
+		Assertions.assertFalse(v.containsAny(new StringArray("d e", " ")));
+		Assertions.assertTrue(v.containsAny(new StringArray("b e", " ")));
+		Assertions.assertTrue(v.containsAny(new StringArray("e b", " ")));
+		Assertions.assertTrue(v.containsAny(new StringArray("g c h", " ")));
+		Assertions.assertTrue(v.containsAny(v));
 
 	}
 
@@ -131,13 +127,13 @@ public class StringArrayTest extends JDFTestCaseBase
 	@Test
 	public void testIsEmpty()
 	{
-		assertTrue(StringArray.isEmpty(null));
+		Assertions.assertTrue(StringArray.isEmpty(null));
 		final StringArray v = new StringArray();
-		assertTrue(StringArray.isEmpty(v));
+		Assertions.assertTrue(StringArray.isEmpty(v));
 		v.appendUnique("");
-		assertTrue(StringArray.isEmpty(v));
+		Assertions.assertTrue(StringArray.isEmpty(v));
 		v.set(0, "b");
-		assertFalse(StringArray.isEmpty(v));
+		Assertions.assertFalse(StringArray.isEmpty(v));
 	}
 
 	/**
@@ -151,12 +147,12 @@ public class StringArrayTest extends JDFTestCaseBase
 		v.appendUnique("b");
 		v.appendUnique("c");
 		v.add("c");
-		assertNull(v.getOverlapping(null));
-		assertNull(v.getOverlapping(new StringArray("d e", " ")));
-		assertEquals(new StringArray("b", null), v.getOverlapping(new StringArray("b e", " ")));
-		assertEquals(new StringArray("c c", null), v.getOverlapping(new StringArray("c", " ")));
-		assertEquals(new StringArray("b c c", null), v.getOverlapping(new StringArray("b c c c", " ")));
-		assertEquals(v, v.getOverlapping(v));
+		Assertions.assertNull(v.getOverlapping(null));
+		Assertions.assertNull(v.getOverlapping(new StringArray("d e", " ")));
+		Assertions.assertEquals(new StringArray("b", null), v.getOverlapping(new StringArray("b e", " ")));
+		Assertions.assertEquals(new StringArray("c c", null), v.getOverlapping(new StringArray("c", " ")));
+		Assertions.assertEquals(new StringArray("b c c", null), v.getOverlapping(new StringArray("b c c c", " ")));
+		Assertions.assertEquals(v, v.getOverlapping(v));
 	}
 
 	/**
@@ -226,7 +222,7 @@ public class StringArrayTest extends JDFTestCaseBase
 		v.add((String) null);
 		v.add("b");
 		v.add("c");
-		assertEquals("b c", StringUtil.setvString(v, " ", null, null), "b c");
+		Assertions.assertEquals(StringUtil.setvString(v, " ", null, null), "b c", "b c");
 	}
 
 	/**
@@ -240,8 +236,8 @@ public class StringArrayTest extends JDFTestCaseBase
 		v.add("c");
 		v.add("b");
 		final Set<?> s = v.getSet();
-		assertEquals(v.size(), s.size());
-		assertTrue(s.contains("c"));
+		Assertions.assertEquals(v.size(), s.size());
+		Assertions.assertTrue(s.contains("c"));
 
 	}
 
@@ -266,9 +262,9 @@ public class StringArrayTest extends JDFTestCaseBase
 		w.add("d");
 
 		v.unify();
-		assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
+		Assertions.assertEquals(StringUtil.setvString(v, " ", null, null), "a b c", "a b c");
 		v.appendUnique(w);
-		assertEquals("a b c d", StringUtil.setvString(v, " ", null, null), "a b c d");
+		Assertions.assertEquals(StringUtil.setvString(v, " ", null, null), "a b c d", "a b c d");
 
 	}
 
@@ -283,7 +279,7 @@ public class StringArrayTest extends JDFTestCaseBase
 		v.add("b");
 		v.add("c");
 		v.add("c");
-		assertEquals("a b c c", v.getString());
+		Assertions.assertEquals("a b c c", v.getString());
 	}
 
 	/**
@@ -297,7 +293,7 @@ public class StringArrayTest extends JDFTestCaseBase
 		v.add("b");
 		v.add("c");
 		v.add("c");
-		assertEquals("abcc", v.getString(null, null, null));
+		Assertions.assertEquals("abcc", v.getString(null, null, null));
 	}
 
 	/**
@@ -318,10 +314,10 @@ public class StringArrayTest extends JDFTestCaseBase
 		h.add("d");
 
 		v.unify();
-		assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
+		Assertions.assertEquals(StringUtil.setvString(v, " ", null, null), "a b c", "a b c");
 		v.addAll(h);
 		v.unify();
-		assertEquals("a b c d", StringUtil.setvString(v, " ", null, null), "a b c d");
+		Assertions.assertEquals(StringUtil.setvString(v, " ", null, null), "a b c d", "a b c d");
 
 	}
 
@@ -333,11 +329,11 @@ public class StringArrayTest extends JDFTestCaseBase
 	{
 		final StringArray v = new StringArray();
 		v.addNonEmpty("");
-		assertEquals(0, v.size());
+		Assertions.assertEquals(0, v.size());
 		v.addNonEmpty(null);
-		assertEquals(0, v.size());
+		Assertions.assertEquals(0, v.size());
 		v.addNonEmpty(" ");
-		assertEquals(1, v.size());
+		Assertions.assertEquals(1, v.size());
 	}
 
 	/**
@@ -348,15 +344,15 @@ public class StringArrayTest extends JDFTestCaseBase
 	{
 		final StringArray v = new StringArray();
 		v.appendUnique((String) null);
-		assertEquals(0, v.size());
+		Assertions.assertEquals(0, v.size());
 		v.appendUnique("a");
-		assertEquals(1, v.size());
+		Assertions.assertEquals(1, v.size());
 		v.appendUnique("b");
-		assertEquals(2, v.size());
+		Assertions.assertEquals(2, v.size());
 		v.appendUnique("c");
-		assertEquals(3, v.size());
+		Assertions.assertEquals(3, v.size());
 		v.appendUnique("c");
-		assertEquals(3, v.size());
+		Assertions.assertEquals(3, v.size());
 	}
 
 	/**
@@ -367,14 +363,14 @@ public class StringArrayTest extends JDFTestCaseBase
 	{
 		final StringArray v = new StringArray();
 		v.appendUnique((String) null);
-		assertEquals(0, v.size());
+		Assertions.assertEquals(0, v.size());
 		v.appendUnique("a");
-		assertEquals(1, v.size());
+		Assertions.assertEquals(1, v.size());
 		v.appendUnique(v);
-		assertEquals(1, v.size());
+		Assertions.assertEquals(1, v.size());
 		final StringArray v2 = new StringArray("b c");
 		v.appendUnique(v2);
-		assertEquals(3, v.size());
+		Assertions.assertEquals(3, v.size());
 	}
 
 	/**
@@ -384,17 +380,17 @@ public class StringArrayTest extends JDFTestCaseBase
 	public void testConstructEmpty()
 	{
 		StringArray v = new StringArray("", ",");
-		assertEquals(v.size(), 0);
+		Assertions.assertEquals(v.size(), 0);
 		v = new StringArray((String) null, null);
-		assertEquals(v.size(), 0);
+		Assertions.assertEquals(v.size(), 0);
 		v = new StringArray((String[]) null);
-		assertEquals(v.size(), 0);
+		Assertions.assertEquals(v.size(), 0);
 		v = new StringArray((new String[] {}));
-		assertEquals(v.size(), 0);
+		Assertions.assertEquals(v.size(), 0);
 		v = new StringArray((StringArray) null);
-		assertEquals(v.size(), 0);
+		Assertions.assertEquals(v.size(), 0);
 		v = new StringArray(new StringArray());
-		assertEquals(v.size(), 0);
+		Assertions.assertEquals(v.size(), 0);
 	}
 
 	/**
@@ -404,9 +400,9 @@ public class StringArrayTest extends JDFTestCaseBase
 	public void testConstructDouble()
 	{
 		StringArray v = new StringArray("a,b,c, ,", ",");
-		assertEquals(v.get(-1), " ");
+		Assertions.assertEquals(v.get(-1), " ");
 		v = new StringArray("a,b,c,,", ",");
-		assertEquals("double tokens are ignored", v.get(-1), "c");
+		Assertions.assertEquals(v.get(-1), "c", "double tokens are ignored");
 	}
 
 	/**
@@ -415,9 +411,9 @@ public class StringArrayTest extends JDFTestCaseBase
 	@Test
 	public void testFactory()
 	{
-		assertNull(StringArray.getVString(null, null));
-		assertNull(StringArray.getVString("", null));
-		assertEquals(StringArray.getVString("a", null).get(0), "a");
+		Assertions.assertNull(StringArray.getVString(null, null));
+		Assertions.assertNull(StringArray.getVString("", null));
+		Assertions.assertEquals(StringArray.getVString("a", null).get(0), "a");
 	}
 
 	/**
@@ -433,7 +429,7 @@ public class StringArrayTest extends JDFTestCaseBase
 		v.add("c");
 		v.add("e");
 		v.set(3, "d");
-		assertEquals("a b c d e", StringUtil.setvString(v, " ", null, null));
+		Assertions.assertEquals("a b c d e", StringUtil.setvString(v, " ", null, null));
 
 	}
 

@@ -70,21 +70,16 @@
  */
 package org.cip4.jdflib.goldenticket;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.*;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.examples.ExampleTest;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -105,9 +100,10 @@ public abstract class BaseGoldenTicketTest extends ExampleTest
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
@@ -118,7 +114,7 @@ public abstract class BaseGoldenTicketTest extends ExampleTest
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
 	public void tearDown() throws Exception
@@ -137,15 +133,15 @@ public abstract class BaseGoldenTicketTest extends ExampleTest
 	public static void write3GTFiles(final BaseGoldenTicket goldenTicket, final String templateName)
 	{
 		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_Manager_" + templateName + ".jdf", 2);
-		assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
 
 		goldenTicket.makeReadyAll();
 		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_MakeReady_" + templateName + ".jdf", 2);
-		assertTrue(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_MakeReady_" + templateName + ".jdf", goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete), JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_MakeReady_" + templateName + ".jdf");
 
 		goldenTicket.executeAll(null);
 		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_Worker_" + templateName + ".jdf", 2);
-		assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
@@ -178,7 +174,7 @@ public abstract class BaseGoldenTicketTest extends ExampleTest
 	{
 
 		goldenTicket.write2File(sm_dirTestDataTemp + gtType + templateName + ".jdf", 2);
-		assertTrue(gtType + templateName + ".jdf", goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete), gtType + templateName + ".jdf");
 
 		final XJDF20 xjdfConv = new XJDF20();
 		final JDFNode expandedNode = goldenTicket.getExpandedNode();
@@ -195,7 +191,7 @@ public abstract class BaseGoldenTicketTest extends ExampleTest
 		final boolean localCheckSchema = checkSchema == null ? defaultCheckSchema : checkSchema.booleanValue();
 		if (localCheckSchema)
 		{
-			assertEquals(schemapath, "Valid", dVal.getRoot().getAttribute("ValidationResult"));
+			Assertions.assertEquals("Valid", dVal.getRoot().getAttribute("ValidationResult"), schemapath);
 		}
 		final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		final JDFDoc converted = jdfConverter.convert(xjdfRoot);
@@ -205,7 +201,7 @@ public abstract class BaseGoldenTicketTest extends ExampleTest
 		{
 			printValid(converted);
 		}
-		assertTrue(gtType + templateName + ".xjdf.jdf", valid);
+		Assertions.assertTrue(valid, gtType + templateName + ".xjdf.jdf");
 	}
 
 }

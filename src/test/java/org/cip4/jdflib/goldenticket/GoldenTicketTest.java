@@ -70,14 +70,14 @@
  */
 package org.cip4.jdflib.goldenticket;
 
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -100,9 +100,9 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		bgt.assign(null);
 		final JDFNode node = bgt.getNode();
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "GoldenTicket_Base_1.jdf", 2, false);
-		assertTrue(node.getICSVersions(false).contains("Base_L1-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("Base_L1-1.5"));
 		node.setType(JDFNode.EnumType.ProcessGroup);
-		assertTrue(node.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(node.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
@@ -116,10 +116,10 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		bgt.assign(null);
 		final JDFNode node = bgt.getNode();
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "GoldenTicket_JMF_1.jdf", 2, false);
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L1-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("JMF_L1-1.5"));
 		node.setType(JDFNode.EnumType.ProcessGroup);
-		assertTrue(node.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(node.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
@@ -133,12 +133,12 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		bgt.assign(null);
 		final JDFNode node = bgt.getNode();
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "GoldenTicket_MIS_2.jdf", 2, false);
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
-		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("MIS_L2-1.5"));
 		node.setType(JDFNode.EnumType.ProcessGroup);
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "MISGT.jdf", 2, false);
-		assertTrue(node.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(node.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
@@ -204,7 +204,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		final JDFNode node = pgt.getNode();
 		node.setJobID("6915");
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "multiLabel.jdf", 2, false);
-		assertTrue(node.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(node.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
@@ -241,9 +241,10 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicketTest#setUp()
+	 * @see BaseGoldenTicketTest#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
@@ -254,7 +255,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicketTest#tearDown()
+	 * @see BaseGoldenTicketTest#tearDown()
 	 */
 	@Override
 	public void tearDown() throws Exception

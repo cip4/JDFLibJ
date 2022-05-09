@@ -70,11 +70,9 @@
 
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -93,16 +91,16 @@ public class BiHashMapTest extends JDFTestCaseBase
 	{
 		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
 		hm.put("a", "b");
-		assertEquals(hm.getValue("a"), "b");
-		assertEquals(hm.getKey("b"), "a");
-		assertEquals(hm.getKeyMap().size(), 1);
-		assertEquals(hm.getValMap().size(), 1);
+		Assertions.assertEquals(hm.getValue("a"), "b");
+		Assertions.assertEquals(hm.getKey("b"), "a");
+		Assertions.assertEquals(hm.getKeyMap().size(), 1);
+		Assertions.assertEquals(hm.getValMap().size(), 1);
 		hm.put("a", "c");
-		assertEquals(hm.getValue("a"), "c");
-		assertEquals(hm.getKey("c"), "a");
-		assertEquals(hm.getKeyMap().size(), 1);
-		assertEquals(hm.getValMap().size(), 1);
-		assertNull(hm.getKey("b"));
+		Assertions.assertEquals(hm.getValue("a"), "c");
+		Assertions.assertEquals(hm.getKey("c"), "a");
+		Assertions.assertEquals(hm.getKeyMap().size(), 1);
+		Assertions.assertEquals(hm.getValMap().size(), 1);
+		Assertions.assertNull(hm.getKey("b"));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -114,11 +112,11 @@ public class BiHashMapTest extends JDFTestCaseBase
 	{
 		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
 		hm.put("a", "b");
-		assertEquals(hm.getValue("a"), "b");
-		assertEquals(hm.getKey("b"), "a");
+		Assertions.assertEquals(hm.getValue("a"), "b");
+		Assertions.assertEquals(hm.getKey("b"), "a");
 		hm.clear();
-		assertEquals(hm.getKeyMap().size(), 0);
-		assertEquals(hm.getValMap().size(), 0);
+		Assertions.assertEquals(hm.getKeyMap().size(), 0);
+		Assertions.assertEquals(hm.getValMap().size(), 0);
 	}
 
 	/**
@@ -130,16 +128,16 @@ public class BiHashMapTest extends JDFTestCaseBase
 		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
 		hm.put("a", "b");
 		hm.put("a", "c");
-		assertEquals(hm.getValue("a"), "c");
-		assertEquals(hm.getKeyMap().size(), 1);
-		assertEquals(hm.getValMap().size(), 1);
+		Assertions.assertEquals(hm.getValue("a"), "c");
+		Assertions.assertEquals(hm.getKeyMap().size(), 1);
+		Assertions.assertEquals(hm.getValMap().size(), 1);
 		hm.remove("b");
 		hm.removeVal("b");
-		assertEquals(hm.getKeyMap().size(), 1);
-		assertEquals(hm.getValMap().size(), 1);
+		Assertions.assertEquals(hm.getKeyMap().size(), 1);
+		Assertions.assertEquals(hm.getValMap().size(), 1);
 		hm.removeVal("c");
-		assertEquals(hm.getKeyMap().size(), 0);
-		assertEquals(hm.getValMap().size(), 0);
+		Assertions.assertEquals(hm.getKeyMap().size(), 0);
+		Assertions.assertEquals(hm.getValMap().size(), 0);
 	}
 
 	/**
@@ -150,13 +148,13 @@ public class BiHashMapTest extends JDFTestCaseBase
 	{
 		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
 		hm.put("a", "b");
-		assertEquals(hm.getValue("a"), "b");
-		assertEquals(hm.getKey("b"), "a");
-		assertEquals(hm.getKeyMap().size(), 1);
-		assertEquals(hm.getValMap().size(), 1);
+		Assertions.assertEquals(hm.getValue("a"), "b");
+		Assertions.assertEquals(hm.getKey("b"), "a");
+		Assertions.assertEquals(hm.getKeyMap().size(), 1);
+		Assertions.assertEquals(hm.getValMap().size(), 1);
 		hm.remove("a");
-		assertEquals(hm.getKeyMap().size(), 0);
-		assertEquals(hm.getValMap().size(), 0);
+		Assertions.assertEquals(hm.getKeyMap().size(), 0);
+		Assertions.assertEquals(hm.getValMap().size(), 0);
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -168,12 +166,12 @@ public class BiHashMapTest extends JDFTestCaseBase
 	{
 		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
 		hm.put("a", "b");
-		assertEquals(hm.getValue("a"), "b");
-		assertEquals(hm.getKey("b"), "a");
-		assertEquals(hm.getKeyMap().size(), 1);
-		assertEquals(hm.getValMap().size(), 1);
+		Assertions.assertEquals(hm.getValue("a"), "b");
+		Assertions.assertEquals(hm.getKey("b"), "a");
+		Assertions.assertEquals(hm.getKeyMap().size(), 1);
+		Assertions.assertEquals(hm.getValMap().size(), 1);
 		hm.removeVal("b");
-		assertEquals(hm.getKeyMap().size(), 0);
-		assertEquals(hm.getValMap().size(), 0);
+		Assertions.assertEquals(hm.getKeyMap().size(), 0);
+		Assertions.assertEquals(hm.getValMap().size(), 0);
 	}
 }

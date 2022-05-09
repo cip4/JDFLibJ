@@ -36,15 +36,11 @@
  */
 package org.cip4.jdflib.node;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class LinkInfoMapTest extends JDFTestCaseBase
 {
@@ -55,7 +51,7 @@ public class LinkInfoMapTest extends JDFTestCaseBase
 	public void testGetLinkInfoMap()
 	{
 		final LinkInfoMap linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);
-		assertNotNull(linkInfo);
+		Assertions.assertNotNull(linkInfo);
 
 	}
 
@@ -66,10 +62,10 @@ public class LinkInfoMapTest extends JDFTestCaseBase
 	public void testGetStar()
 	{
 		final LinkInfoMap linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.Verification, null);
-		assertNotNull(linkInfo.getStar(ElementName.COMPONENT, true));
-		assertNotNull(linkInfo.getStar(ElementName.COMPONENT, false));
-		assertNotNull(linkInfo.getStar(ElementName.COLORSPACECONVERSIONPARAMS, false));
-		assertNull(linkInfo.getStar(ElementName.COLORSPACECONVERSIONPARAMS, true));
+		Assertions.assertNotNull(linkInfo.getStar(ElementName.COMPONENT, true));
+		Assertions.assertNotNull(linkInfo.getStar(ElementName.COMPONENT, false));
+		Assertions.assertNotNull(linkInfo.getStar(ElementName.COLORSPACECONVERSIONPARAMS, false));
+		Assertions.assertNull(linkInfo.getStar(ElementName.COLORSPACECONVERSIONPARAMS, true));
 
 	}
 
@@ -83,8 +79,8 @@ public class LinkInfoMapTest extends JDFTestCaseBase
 		final LinkInfoMap linkInfo0 = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);
 		final LinkInfoMap linkInfo2 = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);
 		linkInfo.merge(linkInfo2);
-		assertEquals(linkInfo0, linkInfo2);
-		assertNotSame(linkInfo, linkInfo0);
+		Assertions.assertEquals(linkInfo0, linkInfo2);
+		Assertions.assertNotSame(linkInfo, linkInfo0);
 	}
 
 }

@@ -68,15 +68,14 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.process.JDFDeviceNColor;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkDeviceNColorTest extends JDFTestCaseBase
 {
@@ -93,7 +92,7 @@ public class WalkDeviceNColorTest extends JDFTestCaseBase
 		walkDeviceNColor.setParent(new XJDFToJDFImpl(null));
 		KElement dns = new JDFDoc(ElementName.DEVICENSPACE).getRoot();
 		walkDeviceNColor.walk(dnc, dns);
-		assertEquals("5", dns.getXPathAttribute("DeviceNColor/@N", null));
+		Assertions.assertEquals("5", dns.getXPathAttribute("DeviceNColor/@N", null));
 	}
 
 }

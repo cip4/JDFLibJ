@@ -68,9 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.AttributeName;
@@ -78,7 +75,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -101,7 +99,7 @@ public class WalkDeviceInfoTest extends JDFTestCaseBase
 		wdi.walk(di, rp);
 		JDFDeviceInfo di2 = (JDFDeviceInfo) rp.getElement(ElementName.DEVICEINFO);
 		String status = di2.getNonEmpty(AttributeName.DEVICESTATUS);
-		assertNull(di2.getNonEmpty(AttributeName.STATUS));
-		assertEquals(status, EnumDeviceStatus.Running.getName());
+		Assertions.assertNull(di2.getNonEmpty(AttributeName.STATUS));
+		Assertions.assertEquals(status, EnumDeviceStatus.Running.getName());
 	}
 }

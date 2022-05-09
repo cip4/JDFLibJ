@@ -39,11 +39,6 @@
 
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.core.AttributeName;
@@ -52,7 +47,9 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -67,9 +64,10 @@ public class JDFContactTest extends JDFTestCaseBase
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -87,7 +85,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	public void testSetContactTypeEnum()
 	{
 		co.setContactTypes(EnumContactType.Accounting);
-		assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
+		Assertions.assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
 	}
 
 	/**
@@ -98,12 +96,12 @@ public class JDFContactTest extends JDFTestCaseBase
 	public void testaddContactType()
 	{
 		co.addContactTypes(null);
-		assertTrue(co.getContactTypes().isEmpty());
+		Assertions.assertTrue(co.getContactTypes().isEmpty());
 		co.addContactTypes(EnumContactType.Accounting);
-		assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
+		Assertions.assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
 		co.addContactTypes(EnumContactType.Delivery);
-		assertTrue(co.getContactTypes().contains("Accounting"));
-		assertTrue(co.getContactTypes().contains("Delivery"));
+		Assertions.assertTrue(co.getContactTypes().contains("Accounting"));
+		Assertions.assertTrue(co.getContactTypes().contains("Delivery"));
 	}
 
 	/**
@@ -114,7 +112,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	public void testSetContactType()
 	{
 		co.setContactTypes("Customer");
-		assertEquals(co.getContactTypes().get(0), "Customer");
+		Assertions.assertEquals(co.getContactTypes().get(0), "Customer");
 	}
 
 	/**
@@ -124,15 +122,15 @@ public class JDFContactTest extends JDFTestCaseBase
 	@Test
 	public void testsetPerson()
 	{
-		assertNull(co.setPerson(null, null));
+		Assertions.assertNull(co.setPerson(null, null));
 
 		co.setPerson("foo", "bar");
-		assertEquals(co.getPerson().getFirstName(), "foo");
-		assertEquals(co.getPerson().getFamilyName(), "bar");
+		Assertions.assertEquals(co.getPerson().getFirstName(), "foo");
+		Assertions.assertEquals(co.getPerson().getFamilyName(), "bar");
 
 		co.setPerson("foo", null);
-		assertEquals(co.getPerson().getFirstName(), "foo");
-		assertEquals(co.getPerson().getFamilyName(), "");
+		Assertions.assertEquals(co.getPerson().getFirstName(), "foo");
+		Assertions.assertEquals(co.getPerson().getFamilyName(), "");
 	}
 
 	/**
@@ -147,7 +145,7 @@ public class JDFContactTest extends JDFTestCaseBase
 		comp.setOrganizationName("ccc");
 		co.refElement(comp);
 
-		assertEquals(comp, co.getCreateCompany());
+		Assertions.assertEquals(comp, co.getCreateCompany());
 	}
 
 	/**
@@ -163,9 +161,9 @@ public class JDFContactTest extends JDFTestCaseBase
 		comp.setOrganizationName("ccc");
 		co.refElement(comp);
 		final JDFCompany comp2 = co.appendCompany();
-		assertEquals(comp, co.getCreateCompany());
+		Assertions.assertEquals(comp, co.getCreateCompany());
 		comp.deleteNode();
-		assertEquals(comp2, co.getCreateCompany());
+		Assertions.assertEquals(comp2, co.getCreateCompany());
 
 	}
 
@@ -181,7 +179,7 @@ public class JDFContactTest extends JDFTestCaseBase
 		comp.setOrganizationName("ccc");
 		co.refElement(comp);
 
-		assertEquals(comp, co.getCompany());
+		Assertions.assertEquals(comp, co.getCompany());
 	}
 
 	/**
@@ -196,7 +194,7 @@ public class JDFContactTest extends JDFTestCaseBase
 
 		co.refElement(comp);
 
-		assertEquals(comp, co.getAddress());
+		Assertions.assertEquals(comp, co.getAddress());
 	}
 
 	/**
@@ -207,7 +205,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	public void testGetAddressPerson()
 	{
 		final JDFAddress a = co.appendPerson().appendAddress();
-		assertEquals(a, co.getAddress());
+		Assertions.assertEquals(a, co.getAddress());
 	}
 
 	/**
@@ -218,8 +216,8 @@ public class JDFContactTest extends JDFTestCaseBase
 	public void testGetComChannel()
 	{
 		final JDFComChannel a = co.appendComChannel(EnumChannelType.Phone, "1234");
-		assertEquals(a, co.getComChannel(EnumChannelType.Phone));
-		assertEquals(null, co.getComChannel(EnumChannelType.Mobile));
+		Assertions.assertEquals(a, co.getComChannel(EnumChannelType.Phone));
+		Assertions.assertEquals(null, co.getComChannel(EnumChannelType.Mobile));
 	}
 
 	/**
@@ -230,8 +228,8 @@ public class JDFContactTest extends JDFTestCaseBase
 	public void testGetComChannelPerson()
 	{
 		final JDFComChannel a = co.appendPerson().appendComChannel(EnumChannelType.Phone, "1234");
-		assertEquals(a, co.getComChannel(EnumChannelType.Phone));
-		assertEquals(null, co.getComChannel(EnumChannelType.Mobile));
+		Assertions.assertEquals(a, co.getComChannel(EnumChannelType.Phone));
+		Assertions.assertEquals(null, co.getComChannel(EnumChannelType.Mobile));
 	}
 
 	/**
@@ -242,7 +240,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	public void testGetCreateAddressPerson()
 	{
 		final JDFAddress a = co.appendPerson().appendAddress();
-		assertEquals(a, co.getCreateAddress());
+		Assertions.assertEquals(a, co.getCreateAddress());
 	}
 
 	/**
@@ -257,7 +255,7 @@ public class JDFContactTest extends JDFTestCaseBase
 
 		co.refElement(comp);
 
-		assertEquals(comp, co.getCreateAddress());
+		Assertions.assertEquals(comp, co.getCreateAddress());
 	}
 
 	/**
@@ -271,7 +269,7 @@ public class JDFContactTest extends JDFTestCaseBase
 		final JDFPerson comp = (JDFPerson) root.addResource(ElementName.PERSON, null);
 		co.refElement(comp);
 
-		assertEquals(comp, co.getCreatePerson());
+		Assertions.assertEquals(comp, co.getCreatePerson());
 	}
 
 	/**
@@ -285,7 +283,7 @@ public class JDFContactTest extends JDFTestCaseBase
 		final JDFPerson comp = (JDFPerson) root.addResource(ElementName.PERSON, null);
 		co.refElement(comp);
 
-		assertEquals(comp, co.getPerson());
+		Assertions.assertEquals(comp, co.getPerson());
 	}
 
 	/**
@@ -298,20 +296,20 @@ public class JDFContactTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.CONTACT);
 		final JDFContact c = (JDFContact) doc.getRoot();
 		final JDFContact c2 = (JDFContact) new JDFDoc(ElementName.CONTACT).getRoot();
-		assertFalse(c.matches(c2));
+		Assertions.assertFalse(c.matches(c2));
 		final JDFPerson p = c.appendPerson();
 		final JDFPerson p2 = c2.appendPerson();
-		assertTrue(c.matches(c2));
+		Assertions.assertTrue(c.matches(c2));
 		p.setFirstName("foo");
-		assertTrue(c.matches(c2));
+		Assertions.assertTrue(c.matches(c2));
 		p2.setFirstName("Foo");
-		assertTrue(c.matches(c));
+		Assertions.assertTrue(c.matches(c));
 		p2.setFamilyName("bar");
-		assertFalse(c.matches(c2));
+		Assertions.assertFalse(c.matches(c2));
 		p.setFamilyName("bar");
 
 		c.setUserID("foo");
-		assertTrue(c.matches("foo"));
+		Assertions.assertTrue(c.matches("foo"));
 	}
 
 	/**
@@ -333,9 +331,9 @@ public class JDFContactTest extends JDFTestCaseBase
 		c2.appendComChannel(EnumChannelType.Email).setEMailLocator("a@b.com");
 		c2.appendComChannel(EnumChannelType.Phone).setPhoneNumber("+12345");
 		c.merge(c2);
-		assertEquals(c.getComChannel(1).getPhoneNumber(false), "+12345");
-		assertTrue(c.getPerson().matches(p));
-		assertEquals(2, c.getContactTypes().size());
+		Assertions.assertEquals(c.getComChannel(1).getPhoneNumber(false), "+12345");
+		Assertions.assertTrue(c.getPerson().matches(p));
+		Assertions.assertEquals(2, c.getContactTypes().size());
 	}
 
 	/**
@@ -356,8 +354,8 @@ public class JDFContactTest extends JDFTestCaseBase
 		c2.appendComChannel(EnumChannelType.Email).setEMailLocator("a@b.com");
 		c2.appendComChannel(EnumChannelType.Phone).setPhoneNumber("+12345");
 		c.merge(c2);
-		assertEquals(c.getComChannel(1).getPhoneNumber(false), "+12345");
-		assertTrue(c.getPerson().matches(p));
-		assertEquals(2, c.getContactTypes().size());
+		Assertions.assertEquals(c.getComChannel(1).getPhoneNumber(false), "+12345");
+		Assertions.assertTrue(c.getPerson().matches(p));
+		Assertions.assertEquals(2, c.getContactTypes().size());
 	}
 }

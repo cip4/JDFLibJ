@@ -78,8 +78,8 @@ import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 public class JDFStitchingParamsTest extends JDFTestCaseBase
 {
 	/**
@@ -94,13 +94,13 @@ public class JDFStitchingParamsTest extends JDFTestCaseBase
 		JDFResourcePool resPool = root.getCreateResourcePool();
 		KElement kElem = resPool.appendResource(ElementName.STITCHINGPARAMS,
 				null, null);
-		Assert.assertTrue(kElem instanceof JDFStitchingParams);
+		Assertions.assertTrue(kElem instanceof JDFStitchingParams);
 		JDFStitchingParams sp = (JDFStitchingParams) kElem;
 		sp.setStitchType(EnumStitchType.Saddle);
 		final String write2String = doc.write2String(0);
-		Assert.assertTrue(write2String.indexOf("StitchType=\"Saddle\"") > 22);
+		Assertions.assertTrue(write2String.indexOf("StitchType=\"Saddle\"") > 22);
 		JDFParser p2 = new JDFParser();
 		JDFDoc d2 = p2.parseString(write2String);
-		Assert.assertTrue(d2.write2String(0).indexOf("StitchType=\"Saddle\"") > 22);
+		Assertions.assertTrue(d2.write2String(0).indexOf("StitchType=\"Saddle\"") > 22);
 	}
 }

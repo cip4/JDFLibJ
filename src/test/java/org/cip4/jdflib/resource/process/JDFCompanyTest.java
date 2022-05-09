@@ -37,16 +37,12 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFCompanyTest extends JDFTestCaseBase
 {
@@ -60,13 +56,13 @@ public class JDFCompanyTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.COMPANY);
 		final JDFCompany c = (JDFCompany) doc.getRoot();
 		final JDFCompany c2 = (JDFCompany) new JDFDoc(ElementName.COMPANY).getRoot();
-		assertTrue(c.matches(c2));
+		Assertions.assertTrue(c.matches(c2));
 		c.setOrganizationName("org1");
-		assertTrue(c.matches(c2));
+		Assertions.assertTrue(c.matches(c2));
 		c2.setOrganizationName("Org1");
-		assertTrue(c.matches(c));
+		Assertions.assertTrue(c.matches(c));
 		c2.setOrganizationName("Organ2");
-		assertFalse(c.matches(c2));
+		Assertions.assertFalse(c.matches(c2));
 	}
 
 	/**
@@ -78,11 +74,11 @@ public class JDFCompanyTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.COMPANY);
 		final JDFCompany c = (JDFCompany) doc.getRoot();
-		assertEquals("", c.getDescriptiveName());
+		Assertions.assertEquals("", c.getDescriptiveName());
 		c.setOrganizationName("o");
-		assertEquals("o", c.getDescriptiveName());
+		Assertions.assertEquals("o", c.getDescriptiveName());
 		c.setDescriptiveName("d");
-		assertEquals("d", c.getDescriptiveName());
+		Assertions.assertEquals("d", c.getDescriptiveName());
 	}
 
 	/**
@@ -94,17 +90,17 @@ public class JDFCompanyTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.COMPANY);
 		final JDFCompany c = (JDFCompany) doc.getRoot();
-		assertNull(c.getOrganizationalUnits());
+		Assertions.assertNull(c.getOrganizationalUnits());
 		c.appendOrganizationalUnit("foo");
-		assertEquals(new VString("foo"), c.getOrganizationalUnits());
+		Assertions.assertEquals(new VString("foo"), c.getOrganizationalUnits());
 		c.appendOrganizationalUnit("bar");
-		assertEquals(new VString("foo bar"), c.getOrganizationalUnits());
+		Assertions.assertEquals(new VString("foo bar"), c.getOrganizationalUnits());
 		c.setOrganizationalUnit("abc");
-		assertEquals(new VString("abc"), c.getOrganizationalUnits());
+		Assertions.assertEquals(new VString("abc"), c.getOrganizationalUnits());
 		c.appendOrganizationalUnit("");
-		assertEquals(new VString("abc"), c.getOrganizationalUnits());
+		Assertions.assertEquals(new VString("abc"), c.getOrganizationalUnits());
 		c.setOrganizationalUnit("");
-		assertNull(c.getOrganizationalUnits());
+		Assertions.assertNull(c.getOrganizationalUnits());
 
 	}
 }

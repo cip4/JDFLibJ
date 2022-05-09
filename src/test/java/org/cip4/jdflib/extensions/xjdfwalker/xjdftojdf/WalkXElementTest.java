@@ -36,9 +36,8 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class WalkXElementTest
 {
@@ -47,7 +46,7 @@ public class WalkXElementTest
 	public void testUpdateColor()
 	{
 		final WalkXElement w = new WalkXElement();
-		assertEquals("Black", w.updateColor("black"));
+		Assertions.assertEquals("Black", w.updateColor("black"));
 	}
 
 }

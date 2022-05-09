@@ -77,8 +77,9 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi
  * 
@@ -95,11 +96,11 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	@Test
 	public void testGetResource()
 	{
-		Assert.assertNull(ri.getResource(ElementName.MEDIA));
+		Assertions.assertNull(ri.getResource(ElementName.MEDIA));
 		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
 		JDFMedia m2 = (JDFMedia) ri.getResource(ElementName.MEDIA);
-		Assert.assertEquals(m, m2);
-		Assert.assertTrue(ri.isValid(EnumValidationLevel.Complete));
+		Assertions.assertEquals(m, m2);
+		Assertions.assertTrue(ri.isValid(EnumValidationLevel.Complete));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -112,8 +113,8 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	{
 		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
 		JDFMedia m2 = (JDFMedia) ri.getResource(null);
-		Assert.assertEquals(m, m2);
-		Assert.assertTrue(ri.isValid(EnumValidationLevel.Complete));
+		Assertions.assertEquals(m, m2);
+		Assertions.assertTrue(ri.isValid(EnumValidationLevel.Complete));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -126,7 +127,7 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 		// JDFMedia m=(JDFMedia)
 		ri.appendResource(ElementName.MEDIA);
 		String name = ri.getResourceName();
-		Assert.assertEquals(name, ElementName.MEDIA);
+		Assertions.assertEquals(name, ElementName.MEDIA);
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -138,7 +139,7 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	{
 		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
 		String name = ri.getResourceID();
-		Assert.assertEquals(name, m.getID());
+		Assertions.assertEquals(name, m.getID());
 	}
 
 	// //////////////////////////////////////////////////////////////////////
@@ -151,7 +152,7 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
 		m.setProductID("p1");
 		String name = ri.getProductID();
-		Assert.assertEquals(name, m.getProductID());
+		Assertions.assertEquals(name, m.getProductID());
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -163,7 +164,7 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	{
 		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
 		EnumResStatus name = ri.getResStatus();
-		Assert.assertEquals(name, m.getResStatus(false));
+		Assertions.assertEquals(name, m.getResStatus(false));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -171,9 +172,10 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	/**
 	 *  
 	 * 
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -195,16 +197,16 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	{
 		ri.appendResource("Media");
 
-		Assert.assertTrue(ri.matches(null));
-		Assert.assertTrue(ri.matches("Media"));
-		Assert.assertTrue(ri.matches(ri.getResource("Media")));
-		Assert.assertFalse(ri.matches("Ink"));
+		Assertions.assertTrue(ri.matches(null));
+		Assertions.assertTrue(ri.matches("Media"));
+		Assertions.assertTrue(ri.matches(ri.getResource("Media")));
+		Assertions.assertFalse(ri.matches("Ink"));
 
 		JDFResourceQuParams rqp = (JDFResourceQuParams) new JDFDoc(ElementName.RESOURCEQUPARAMS).getRoot();
-		Assert.assertTrue(ri.matches(rqp));
+		Assertions.assertTrue(ri.matches(rqp));
 		rqp.setResourceName("Media");
-		Assert.assertTrue(ri.matches(rqp));
+		Assertions.assertTrue(ri.matches(rqp));
 		rqp.setResourceName("Ink");
-		Assert.assertFalse(ri.matches(rqp));
+		Assertions.assertFalse(ri.matches(rqp));
 	}
 }

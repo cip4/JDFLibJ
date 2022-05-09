@@ -75,7 +75,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.jmf.JDFJMF;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 /**
  * TODO Please insert comment!
  * @author rainer prosi

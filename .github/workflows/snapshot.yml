@@ -6,69 +6,19 @@ name: Snapshot
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master]
 
 jobs:
-  linux-build-publish:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up JDK 8
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-
-      - name: Check out sources...
-        uses: actions/checkout@v2
-
-      - name: Build with Gradle
-        run: ./gradlew build
-
-      - name: Upload Artifacts to GitHub Build Artifacts
-        uses: actions/upload-artifact@v1
-        with:
-          name: libs
-          path: build/libs
-
-      - name: Upload Test Results to GitHub Build Artifacts
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v1
-        with:
-          name: test-results linux
-          path: build/reports/tests/test
-
-      - name: Decrypt GGP Ring File
-        env:
-          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-        run: gpg --quiet --batch --yes --decrypt --passphrase="$SIGNING_PASSWORD" --output secring.gpg secring.gpg.encrypted && chmod +x secring.gpg
-
-      - name: Debug
-        run: echo $PWD/secring.gpg && ls -l
-
-      - name: Publish artifacts to Maven Central Snapshot
-        env:
-          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
-          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-        run: ./gradlew publish -Psigning.keyId=$SIGNING_KEY_ID -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$PWD/secring.gpg -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD
-
-  windows-test:
-    runs-on: windows-latest
-    steps:
-      - name: Set up JDK 8
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-
-      - name: Check out sources...
-        uses: actions/checkout@v2
-
-      - name: Test with Gradle
-        run: ./gradlew test
-
-      - name: Upload Test Results to GitHub Build Artifacts
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v1
-        with:
-          name: test-results windows
-          path: build/reports/tests/test
+  call-snapshot:
+    name: 🏭
+    uses: cip4/.github/.github/workflows/library-snapshot.yml@master
+    with:
+      java-version: 8
+      java-distribution: adopt
+      codecov-enabled: true
+    secrets:
+      SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+      SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+      SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+      OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+      OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}

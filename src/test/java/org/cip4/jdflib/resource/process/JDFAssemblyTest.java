@@ -71,8 +71,8 @@ package org.cip4.jdflib.resource.process;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * TODO Please insert comment!
  * @author rainer prosi
@@ -95,8 +95,8 @@ public class JDFAssemblyTest extends JDFTestCaseBase
 		s1.setJobID("j2");
 		JDFAssemblySection s2 = a1.appendAssemblySection();
 		s2.setJobID("j2");
-		Assert.assertEquals(a.getAssemblyAttributes("JobID").size(), 2);
-		Assert.assertTrue(a.getAssemblyAttributes("JobID").contains("j1"));
-		Assert.assertTrue(a.getAssemblyAttributes("JobID").contains("j2"));
+		Assertions.assertEquals(a.getAssemblyAttributes("JobID").size(), 2);
+		Assertions.assertTrue(a.getAssemblyAttributes("JobID").contains("j1"));
+		Assertions.assertTrue(a.getAssemblyAttributes("JobID").contains("j2"));
 	}
 }

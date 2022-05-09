@@ -40,19 +40,20 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.AuditHelper.eAudit;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
  * @author rainer prosi
  *
  */
-public class AuditPoolHelperTest extends TestCase
-{
+public class AuditPoolHelperTest {
 
 	/**
 	 *
 	 */
+	@Test
 	public void testCleanup()
 	{
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
@@ -61,39 +62,42 @@ public class AuditPoolHelperTest extends TestCase
 		final AuditPoolHelper ah = new AuditPoolHelper(auditPool);
 
 		ah.cleanUp();
-		assertEquals(created.getNextSiblingElement(), ar);
+		Assertions.assertEquals(created.getNextSiblingElement(), ar);
 	}
 
 	/**
 	 *
 	 */
+	@Test
 	public void testAppendAudit()
 	{
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
 		final AuditPoolHelper aph = new AuditPoolHelper(auditPool);
 		final AuditHelper ah = aph.appendAudit(ElementName.NOTIFICATION);
-		assertNotNull(ah.getHeader());
+		Assertions.assertNotNull(ah.getHeader());
 	}
 
 	/**
 	 *
 	 */
+	@Test
 	public void testAppendAuditEnum()
 	{
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
 		final AuditPoolHelper aph = new AuditPoolHelper(auditPool);
 		final AuditHelper ah = aph.appendAudit(eAudit.Created);
-		assertNotNull(ah.getHeader());
-		assertNull(aph.appendAudit((eAudit) null));
+		Assertions.assertNotNull(ah.getHeader());
+		Assertions.assertNull(aph.appendAudit((eAudit) null));
 	}
 
 	/**
 	*
 	*/
+	@Test
 	public void testGetHelper()
 	{
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
-		assertNull(AuditPoolHelper.getHelper(null));
-		assertEquals(auditPool, AuditPoolHelper.getHelper(auditPool).getRoot());
+		Assertions.assertNull(AuditPoolHelper.getHelper(null));
+		Assertions.assertEquals(auditPool, AuditPoolHelper.getHelper(auditPool).getRoot());
 	}
 }

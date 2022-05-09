@@ -82,18 +82,16 @@ import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import junit.framework.TestCase;
 /**
  * 
  *  
  * @author rainer prosi
  * @date Feb 23, 2011
  */
-public class JDFShapeTest extends TestCase
-{
+public class JDFShapeTest {
 	/**
 	 * 
 	 *  
@@ -110,7 +108,7 @@ public class JDFShapeTest extends TestCase
 
 		xy = new JDFShape("1.1 2.2 3.3");
 		n.setAttribute("test2", xy, null);
-		Assert.assertEquals("double double double", n.getAttribute("test2", null, ""), "1.1 2.2 3.3");
+		Assertions.assertEquals(n.getAttribute("test2", null, ""), "1.1 2.2 3.3", "double double double");
 
 		try
 		{
@@ -118,7 +116,7 @@ public class JDFShapeTest extends TestCase
 		}
 		catch (DataFormatException dfe)
 		{
-			Assert.assertTrue("exception 1234 caught", true);
+			Assertions.assertTrue(true, "exception 1234 caught");
 		}
 		try
 		{
@@ -126,7 +124,7 @@ public class JDFShapeTest extends TestCase
 		}
 		catch (DataFormatException dfe)
 		{
-			Assert.assertTrue("exception null caught", true);
+			Assertions.assertTrue(true, "exception null caught");
 		}
 	}
 
@@ -139,14 +137,14 @@ public class JDFShapeTest extends TestCase
 	public final void testSingleVal() throws Exception
 	{
 		JDFShape xy = new JDFShape("4");
-		Assert.assertEquals(xy.getX(), 4, 0.0);
-		Assert.assertEquals(xy.getY(), 0, 0.0);
-		Assert.assertEquals(xy.getZ(), 0, 0.0);
+		Assertions.assertEquals(xy.getX(), 4, 0.0);
+		Assertions.assertEquals(xy.getY(), 0, 0.0);
+		Assertions.assertEquals(xy.getZ(), 0, 0.0);
 
 		xy = new JDFShape("4 1");
-		Assert.assertEquals(xy.getX(), 4, 0.0);
-		Assert.assertEquals(xy.getY(), 1, 0.0);
-		Assert.assertEquals(xy.getZ(), 0, 0.0);
+		Assertions.assertEquals(xy.getX(), 4, 0.0);
+		Assertions.assertEquals(xy.getY(), 1, 0.0);
+		Assertions.assertEquals(xy.getZ(), 0, 0.0);
 	}
 
 	/**
@@ -159,9 +157,9 @@ public class JDFShapeTest extends TestCase
 		JDFShape ab = new JDFShape(1.0, 2.0, 3.0);
 		JDFShape xy = new JDFShape(1.0 + JDFBaseDataTypes.EPSILON / 2.0, 2.0 + JDFBaseDataTypes.EPSILON / 2.0, 3.0 + JDFBaseDataTypes.EPSILON / 2.0);
 
-		Assert.assertTrue(ab.equals(xy));
-		Assert.assertTrue(ab.isLessOrEqual(xy));
-		Assert.assertTrue(ab.isGreaterOrEqual(xy));
+		Assertions.assertTrue(ab.equals(xy));
+		Assertions.assertTrue(ab.isLessOrEqual(xy));
+		Assertions.assertTrue(ab.isGreaterOrEqual(xy));
 	}
 
 	/**
@@ -174,7 +172,7 @@ public class JDFShapeTest extends TestCase
 		JDFShape ab = new JDFShape(1.0, 2.0, 3.0);
 		JDFShape ac = new JDFShape(ab);
 		ac.setX(3.0);
-		Assert.assertEquals(ab.getX(), 1.0, 0.0);
+		Assertions.assertEquals(ab.getX(), 1.0, 0.0);
 	}
 
 	/**
@@ -189,9 +187,9 @@ public class JDFShapeTest extends TestCase
 		JDFShape ab = new JDFShape(1.0, 2.0, 3.0);
 		xy = new JDFShape(1.0 - JDFBaseDataTypes.EPSILON / 2.0, 2.0 - JDFBaseDataTypes.EPSILON / 2.0, 3.0 - JDFBaseDataTypes.EPSILON / 2.0);
 
-		Assert.assertTrue(ab.equals(xy));
-		Assert.assertTrue(ab.isLessOrEqual(xy));
-		Assert.assertTrue(ab.isGreaterOrEqual(xy));
+		Assertions.assertTrue(ab.equals(xy));
+		Assertions.assertTrue(ab.isLessOrEqual(xy));
+		Assertions.assertTrue(ab.isGreaterOrEqual(xy));
 	}
 
 	/**
@@ -201,14 +199,14 @@ public class JDFShapeTest extends TestCase
 	@Test
 	public final void testcreateShape()
 	{
-		Assert.assertNull(JDFShape.createShape(null));
-		Assert.assertNull(JDFShape.createShape(""));
-		Assert.assertNull(JDFShape.createShape("a"));
-		Assert.assertNotNull(JDFShape.createShape("1"));
-		Assert.assertNull(JDFShape.createShape("1 2 3 a"));
-		Assert.assertNotNull(JDFShape.createShape("1 2 3"));
-		Assert.assertNotNull(JDFShape.createShape("  1 2 3 "));
-		Assert.assertNotNull(JDFShape.createShape("  1. 2 3 "));
-		Assert.assertNotNull(JDFShape.createShape("  1.00 2.00 -3.0 "));
+		Assertions.assertNull(JDFShape.createShape(null));
+		Assertions.assertNull(JDFShape.createShape(""));
+		Assertions.assertNull(JDFShape.createShape("a"));
+		Assertions.assertNotNull(JDFShape.createShape("1"));
+		Assertions.assertNull(JDFShape.createShape("1 2 3 a"));
+		Assertions.assertNotNull(JDFShape.createShape("1 2 3"));
+		Assertions.assertNotNull(JDFShape.createShape("  1 2 3 "));
+		Assertions.assertNotNull(JDFShape.createShape("  1. 2 3 "));
+		Assertions.assertNotNull(JDFShape.createShape("  1.00 2.00 -3.0 "));
 	}
 }

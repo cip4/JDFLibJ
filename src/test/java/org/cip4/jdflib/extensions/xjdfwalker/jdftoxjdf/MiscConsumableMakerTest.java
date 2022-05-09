@@ -36,8 +36,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNamedColor;
@@ -47,7 +45,8 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class MiscConsumableMakerTest
 {
@@ -63,8 +62,8 @@ public class MiscConsumableMakerTest
 		final JDFHeadBandApplicationParams hp = (JDFHeadBandApplicationParams) ph.getResource();
 		final MiscConsumableMaker m = new MiscConsumableMaker(ph);
 		final ResourceHelper misc = m.create("Headband", null);
-		assertEquals(misc.getResource().getAttribute(AttributeName.TYPE), "Headband");
-		assertEquals(misc.getSet().getProcessUsage(), "Headband");
+		Assertions.assertEquals(misc.getResource().getAttribute(AttributeName.TYPE), "Headband");
+		Assertions.assertEquals(misc.getSet().getProcessUsage(), "Headband");
 	}
 
 	/**
@@ -81,9 +80,9 @@ public class MiscConsumableMakerTest
 		final MiscConsumableMaker m = new MiscConsumableMaker(ph);
 		final ResourceHelper misc = m.create("Headband", null);
 		m.setBrand("b1");
-		assertEquals(misc.getBrand(), "b1");
+		Assertions.assertEquals(misc.getBrand(), "b1");
 		m.setBrand("b1  ");
-		assertEquals(misc.getBrand(), "b1");
+		Assertions.assertEquals(misc.getBrand(), "b1");
 	}
 
 	/**
@@ -101,7 +100,7 @@ public class MiscConsumableMakerTest
 		final MiscConsumableMaker m = new MiscConsumableMaker(ph);
 		final ResourceHelper misc = m.create("Headband", null);
 		m.setColor("Black");
-		assertEquals(misc.getResource().getAttribute(AttributeName.COLOR), "Black");
+		Assertions.assertEquals(misc.getResource().getAttribute(AttributeName.COLOR), "Black");
 	}
 
 	/**
@@ -119,7 +118,7 @@ public class MiscConsumableMakerTest
 		final MiscConsumableMaker m = new MiscConsumableMaker(ph);
 		final ResourceHelper misc = m.create("Headband", null);
 		m.setTypeDetails("Foo :  bar  ");
-		assertEquals(misc.getResource().getAttribute(XJDFConstants.TypeDetails), "Foo : bar");
+		Assertions.assertEquals(misc.getResource().getAttribute(XJDFConstants.TypeDetails), "Foo : bar");
 	}
 
 }

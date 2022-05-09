@@ -68,12 +68,11 @@
  */
 package org.cip4.jdflib.node;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFActivityTest
 {
@@ -82,7 +81,7 @@ public class JDFActivityTest
 	public void testEvent()
 	{
 		final JDFActivity a = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status).getSignal(0).getCreateDeviceInfo(0).appendActivity();
-		assertNotNull(a);
+		Assertions.assertNotNull(a);
 	}
 
 }

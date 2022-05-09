@@ -36,11 +36,9 @@
  */
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
-
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -74,7 +72,7 @@ public class MyPairTest extends JDFTestCaseBase
 	@Test
 	public void testToString()
 	{
-		assertEquals("TestPair a,b", new TestPair("a", "b").toString());
+		Assertions.assertEquals("TestPair a,b", new TestPair("a", "b").toString());
 	}
 
 	/**
@@ -87,8 +85,8 @@ public class MyPairTest extends JDFTestCaseBase
 		final MyPair<Integer, Integer> p = new MyPair<>(new Integer(1), new Integer(2));
 		final MyPair<Integer, Integer> p2 = new MyPair<>(new Integer(1), new Integer(2));
 		final MyPair<Integer, Integer> p3 = new MyPair<>(new Integer(1), new Integer(3));
-		assertEquals(p, p2);
-		assertNotSame(p, p3);
+		Assertions.assertEquals(p, p2);
+		Assertions.assertNotSame(p, p3);
 	}
 
 	/**
@@ -100,7 +98,7 @@ public class MyPairTest extends JDFTestCaseBase
 	{
 		final MyPair<Integer, Integer> p = new MyPair<>(new Integer(1), new Integer(2));
 		final MyPair<Integer, Integer> p2 = new MyPair<>(new Integer(1), new Integer(2));
-		assertEquals(p.hashCode(), p2.hashCode());
+		Assertions.assertEquals(p.hashCode(), p2.hashCode());
 	}
 
 }

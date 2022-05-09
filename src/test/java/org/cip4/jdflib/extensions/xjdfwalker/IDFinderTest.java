@@ -39,8 +39,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Map;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -49,7 +47,9 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -61,18 +61,18 @@ public class IDFinderTest extends JDFTestCaseBase
 	KElement root;
 
 	/**
-	 * Test method for {@link org.cip4.jdflib.extensions.xjdfwalker.IDFinder#getMap(KElement)}.
+	 * Test method for {@link IDFinder#getMap(KElement)}.
 	 */
 	@Test
 	public void testGetMap()
 	{
 		final IDFinder finder = new IDFinder();
 		final Map<String, IDPart> m = finder.getMap(root);
-		assertEquals(m.size(), 9 + 3);
+		Assertions.assertEquals(m.size(), 9 + 3);
 	}
 
 	/**
-	 * Test method for {@link org.cip4.jdflib.extensions.xjdfwalker.IDFinder#getMap(KElement)}.
+	 * Test method for {@link IDFinder#getMap(KElement)}.
 	 */
 	@Test
 	public void testSignatureName()
@@ -89,12 +89,12 @@ public class IDFinderTest extends JDFTestCaseBase
 				final String sh = p.get(AttributeName.SHEETNAME);
 				if (sh != null)
 				{
-					assertEquals("Sig_" + sh, p.get(AttributeName.SIGNATURENAME));
+					Assertions.assertEquals("Sig_" + sh, p.get(AttributeName.SIGNATURENAME));
 					n++;
 				}
 			}
 		}
-		assertEquals(9, n);
+		Assertions.assertEquals(9, n);
 	}
 
 	/**
@@ -102,6 +102,7 @@ public class IDFinderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

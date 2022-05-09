@@ -80,8 +80,9 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi
  * 
@@ -96,9 +97,10 @@ public class JMFStatusTest extends JDFTestCaseBase
 
 	/**
 	 * 
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp()
 	{
 		KElement.setLongID(false);
@@ -128,7 +130,7 @@ public class JMFStatusTest extends JDFTestCaseBase
 		di.setStatusDetails("OutputAreaFull PaperJam Repair");
 
 		doc.write2File(sm_dirTestDataTemp + File.separator + "JMFStatusSignal.jmf", 2, false);
-		Assert.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
@@ -145,10 +147,10 @@ public class JMFStatusTest extends JDFTestCaseBase
 		di.setStatusDetails("OutputAreaFull PaperJam Repair");
 
 		JDFJobPhase jp = di.appendJobPhase();
-		Assert.assertEquals(jp.getJobID(), sqp.getJobID());
-		Assert.assertEquals(jp.getJobPartID(), sqp.getJobPartID());
+		Assertions.assertEquals(jp.getJobID(), sqp.getJobID());
+		Assertions.assertEquals(jp.getJobPartID(), sqp.getJobPartID());
 		jp.setJobID("foo");
-		Assert.assertEquals(jp.getJobID(), "foo");
+		Assertions.assertEquals(jp.getJobID(), "foo");
 	}
 
 }

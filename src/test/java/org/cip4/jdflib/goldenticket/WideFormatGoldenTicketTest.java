@@ -70,11 +70,11 @@
  */
 package org.cip4.jdflib.goldenticket;
 
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -91,6 +91,7 @@ public class WideFormatGoldenTicketTest extends BaseGoldenTicketTest
 	 */
 	@Override
 	@Test
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		BaseGoldenTicket.misURL = "http://192.168.14.143:8010/FJC/Fiery";
@@ -100,10 +101,10 @@ public class WideFormatGoldenTicketTest extends BaseGoldenTicketTest
 		theTicket.assign(null);
 		final JDFNode node = theTicket.getNode();
 
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
-		assertTrue(node.getICSVersions(false).contains("MIS_L1-1.5"));
-		assertTrue(node.getICSVersions(false).contains("DPW_L1-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("MIS_L1-1.5"));
+		Assertions.assertTrue(node.getICSVersions(false).contains("DPW_L1-1.5"));
 
 		theTicket.good = 10;
 		theTicket.waste = 0;

@@ -41,20 +41,16 @@
  */
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertNotEquals;
-
 import java.util.Map;
 
 import org.cip4.jdflib.util.MemorySpy.MemScope;
-import org.junit.Test;
-
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class MemorySpyTest extends TestCase
-{
+public class MemorySpyTest {
 
 	/**
 	 *
@@ -63,7 +59,7 @@ public class MemorySpyTest extends TestCase
 	public void testToString()
 	{
 		final MemorySpy ms = new MemorySpy();
-		assertNotNull(ms.toString());
+		Assertions.assertNotNull(ms.toString());
 	}
 
 	/**
@@ -74,7 +70,7 @@ public class MemorySpyTest extends TestCase
 	{
 		final MemorySpy ms = new MemorySpy();
 		final String summary = ms.getSummary();
-		assertNotNull(summary);
+		Assertions.assertNotNull(summary);
 	}
 
 	/**
@@ -86,7 +82,7 @@ public class MemorySpyTest extends TestCase
 		final MemorySpy ms = new MemorySpy();
 		final String summary = ms.getSummary(",");
 		final String summary2 = ms.getSummary(" ");
-		assertNotEquals(summary, summary2);
+		Assertions.assertNotEquals(summary, summary2);
 	}
 
 	/**
@@ -97,7 +93,7 @@ public class MemorySpyTest extends TestCase
 	{
 		final MemorySpy ms = new MemorySpy();
 		final Map<String, Long> summary = ms.getSummaryMap();
-		assertNotNull(summary);
+		Assertions.assertNotNull(summary);
 	}
 
 	/**
@@ -112,7 +108,7 @@ public class MemorySpyTest extends TestCase
 		final MemorySpy ms2 = new MemorySpy();
 		ms2.setWantMega(false);
 		final Map<String, Long> summary2 = ms2.getSummaryMap();
-		assertTrue(summary2.get("Total") / summary.get("Total") > 500000l);
+		Assertions.assertTrue(summary2.get("Total") / summary.get("Total") > 500000l);
 	}
 
 	/**
@@ -123,7 +119,7 @@ public class MemorySpyTest extends TestCase
 	{
 		final MemorySpy ms = new MemorySpy();
 		final Map<String, Long> summary = ms.getSizeMap();
-		assertNotNull(summary);
+		Assertions.assertNotNull(summary);
 	}
 
 	/**
@@ -134,7 +130,7 @@ public class MemorySpyTest extends TestCase
 	{
 		final MemorySpy ms = new MemorySpy();
 		final long summary = ms.getCurrentMem();
-		assertTrue(summary < Runtime.getRuntime().maxMemory());
+		Assertions.assertTrue(summary < Runtime.getRuntime().maxMemory());
 	}
 
 	/**
@@ -146,7 +142,7 @@ public class MemorySpyTest extends TestCase
 		final MemorySpy ms = new MemorySpy();
 		ms.setWantMega(true);
 		final long summary = ms.getCurrentMem();
-		assertTrue(summary > 0);
+		Assertions.assertTrue(summary > 0);
 	}
 
 	/**
@@ -158,8 +154,8 @@ public class MemorySpyTest extends TestCase
 		final MemorySpy ms = new MemorySpy();
 		final long l = ms.getHeapUsed(MemScope.current);
 		final byte[] b = new byte[10000000];
-		assertNotNull(b);
+		Assertions.assertNotNull(b);
 		final long l2 = ms.getHeapUsed(MemScope.commit);
-		assertTrue(l2 - l > 5000000);
+		Assertions.assertTrue(l2 - l > 5000000);
 	}
 }

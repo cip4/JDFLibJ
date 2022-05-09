@@ -36,12 +36,6 @@
  */
 package org.cip4.jdflib.util.zip;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,7 +54,8 @@ import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MemorySpy;
 import org.cip4.jdflib.util.MemorySpy.MemScope;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -83,9 +78,9 @@ public class ZipReaderTest extends JDFTestCaseBase
 			r.buffer();
 			FileUtil.deleteAll(dir);
 			r.unPack(dir);
-			assertTrue(dir.isDirectory());
+			Assertions.assertTrue(dir.isDirectory());
 			final File dir2 = dir = FileUtil.getFileInDirectory(dir, new File("schema"));
-			assertEquals(dir2.listFiles().length, 3);
+			Assertions.assertEquals(dir2.listFiles().length, 3);
 		}
 	}
 
@@ -105,9 +100,9 @@ public class ZipReaderTest extends JDFTestCaseBase
 		FileUtil.writeFile(w, file);
 		final ZipReader zr = new ZipReader(file);
 		final ZipEntry entry = zr.getEntry("../foo.pdf");
-		assertNotNull(entry);
-		assertNotNull(zr.getInputStream());
-		assertFalse(zr.unPack(new File(sm_dirTestDataTemp + "aux"), entry));
+		Assertions.assertNotNull(entry);
+		Assertions.assertNotNull(zr.getInputStream());
+		Assertions.assertFalse(zr.unPack(new File(sm_dirTestDataTemp + "aux"), entry));
 	}
 
 	/**
@@ -125,7 +120,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 		file.delete();
 		FileUtil.writeFile(w, file);
 		final ZipReader zr = new ZipReader(file);
-		assertEquals(2, zr.unPack(new File(sm_dirTestDataTemp + "aux2")));
+		Assertions.assertEquals(2, zr.unPack(new File(sm_dirTestDataTemp + "aux2")));
 
 	}
 
@@ -144,7 +139,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 		file.delete();
 		FileUtil.writeFile(w, file);
 		final ZipReader zr = new ZipReader(file);
-		assertEquals(3, zr.unPack(new File(sm_dirTestDataTemp + "aux3")));
+		Assertions.assertEquals(3, zr.unPack(new File(sm_dirTestDataTemp + "aux3")));
 	}
 
 	/**
@@ -157,10 +152,10 @@ public class ZipReaderTest extends JDFTestCaseBase
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		final File dir = new File(sm_dirTestDataTemp + "schema.zip.dir");
 		FileUtil.deleteAll(dir);
-		assertFalse(r.unPack(dir, null));
-		assertTrue(r.unPack(dir, r.getNextEntry()));
-		assertTrue(dir.isDirectory());
-		assertEquals(1, dir.listFiles().length);
+		Assertions.assertFalse(r.unPack(dir, null));
+		Assertions.assertTrue(r.unPack(dir, r.getNextEntry()));
+		Assertions.assertTrue(dir.isDirectory());
+		Assertions.assertEquals(1, dir.listFiles().length);
 
 	}
 
@@ -173,12 +168,12 @@ public class ZipReaderTest extends JDFTestCaseBase
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		ZipEntry e = r.getEntry("schema/Conditions.jdf");
-		assertNotNull(r.getInputStream());
+		Assertions.assertNotNull(r.getInputStream());
 		e = r.getEntry("schema/BarcodeDetails.jdf");
-		assertNotNull(r.getInputStream());
+		Assertions.assertNotNull(r.getInputStream());
 		e = r.getEntry("schema/Conditions.jdf");
-		assertNotNull(r.getInputStream());
-		assertNotNull(e);
+		Assertions.assertNotNull(r.getInputStream());
+		Assertions.assertNotNull(e);
 		r.close();
 	}
 
@@ -193,12 +188,12 @@ public class ZipReaderTest extends JDFTestCaseBase
 		FileUtil.copyFile(new File(sm_dirTestData + "schema.zip"), zipFile);
 		final ZipReader r = new ZipReader(zipFile);
 		ZipEntry e = r.getEntry("schema/Conditions.jdf");
-		assertNotNull(r.getInputStream());
+		Assertions.assertNotNull(r.getInputStream());
 		e = r.getEntry("schema/BarcodeDetails.jdf");
-		assertNotNull(r.getInputStream());
+		Assertions.assertNotNull(r.getInputStream());
 		e = r.getEntry("schema/Conditions.jdf");
-		assertNotNull(r.getInputStream());
-		assertNotNull(e);
+		Assertions.assertNotNull(r.getInputStream());
+		Assertions.assertNotNull(e);
 		r.close();
 	}
 
@@ -212,9 +207,9 @@ public class ZipReaderTest extends JDFTestCaseBase
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		final ZipEntry e = r.getEntry("schema/Conditions.jdf");
 		final XMLDoc xmlDoc = r.getXMLDoc();
-		assertNotNull(xmlDoc);
-		assertEquals(r, xmlDoc.getZipReader());
-		assertNotNull(e);
+		Assertions.assertNotNull(xmlDoc);
+		Assertions.assertEquals(r, xmlDoc.getZipReader());
+		Assertions.assertNotNull(e);
 		r.close();
 	}
 
@@ -228,9 +223,9 @@ public class ZipReaderTest extends JDFTestCaseBase
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		final ZipEntry e = r.getMatchingEntry("*Conditions.jdf", 0);
 		final XMLDoc xmlDoc = r.getJDFDoc();
-		assertNotNull(xmlDoc);
-		assertEquals(r, xmlDoc.getZipReader());
-		assertNotNull(e);
+		Assertions.assertNotNull(xmlDoc);
+		Assertions.assertEquals(r, xmlDoc.getZipReader());
+		Assertions.assertNotNull(e);
 		r.close();
 	}
 
@@ -243,11 +238,11 @@ public class ZipReaderTest extends JDFTestCaseBase
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		ZipEntry e = r.getEntry("schema/Conditions.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		e = r.getEntry("schema/BarcodeDetails.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		e = r.getEntry("schema/Conditions.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		r.close();
 
 	}
@@ -282,11 +277,11 @@ public class ZipReaderTest extends JDFTestCaseBase
 
 		final ZipReader r = ZipReader.getZipReader(crap.getInputStream());
 		ZipEntry e = r.getEntry("schema/Conditions.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		e = r.getEntry("schema/BarcodeDetails.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		e = r.getEntry("schema/Conditions.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		r.close();
 	}
 
@@ -320,11 +315,11 @@ public class ZipReaderTest extends JDFTestCaseBase
 
 		final ZipReader r = ZipReader.getZipReader(crap.getInputStream());
 		ZipEntry e = r.getEntry("schema/Conditions.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		e = r.getEntry("schema/BarcodeDetails.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		e = r.getEntry("schema/Conditions.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		r.close();
 	}
 
@@ -357,16 +352,16 @@ public class ZipReaderTest extends JDFTestCaseBase
 			}
 		}
 		final Vector<ZipReader> v = ZipReader.getZipReaders(crap.getInputStream(), -1);
-		assertEquals(v.size(), 3);
+		Assertions.assertEquals(v.size(), 3);
 		for (int k = 0; k < 3; k++)
 		{
 			final ZipReader r = v.get(k);
 			ZipEntry e = r.getEntry("schema/Conditions.jdf");
-			assertNotNull(e);
+			Assertions.assertNotNull(e);
 			e = r.getEntry("schema/BarcodeDetails.jdf");
-			assertNotNull(e);
+			Assertions.assertNotNull(e);
 			e = r.getEntry("schema/Conditions.jdf");
-			assertNotNull(e);
+			Assertions.assertNotNull(e);
 		}
 	}
 
@@ -378,15 +373,15 @@ public class ZipReaderTest extends JDFTestCaseBase
 	public void testGetEntryEscaped()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "testZip.zip");
-		assertNotNull(r.getEntry("content/%20.pdf"));
-		assertNotNull(r.getEntry("content/a%20b.pdf"));
-		assertNotNull(r.getEntry("content/a b.pdf"));
-		assertNull(r.getEntry("content/ .pdf"));
+		Assertions.assertNotNull(r.getEntry("content/%20.pdf"));
+		Assertions.assertNotNull(r.getEntry("content/a%20b.pdf"));
+		Assertions.assertNotNull(r.getEntry("content/a b.pdf"));
+		Assertions.assertNull(r.getEntry("content/ .pdf"));
 		r.setCaseSensitive(false);
-		assertNotNull(r.getEntry("content/A%20b.pdf"));
-		assertNotNull(r.getEntry("content/A b.pdf"));
-		assertNull(r.getEntry("content/ .Pdf"));
-		assertNotNull(r.getEntry("content/%20.Pdf"));
+		Assertions.assertNotNull(r.getEntry("content/A%20b.pdf"));
+		Assertions.assertNotNull(r.getEntry("content/A b.pdf"));
+		Assertions.assertNull(r.getEntry("content/ .Pdf"));
+		Assertions.assertNotNull(r.getEntry("content/%20.Pdf"));
 		r.close();
 	}
 
@@ -399,11 +394,11 @@ public class ZipReaderTest extends JDFTestCaseBase
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		ZipEntry e = r.getEntry("Conditions.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		e = r.getEntry("BarcodeDetails.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		e = r.getEntry("Conditions.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		r.close();
 	}
 
@@ -418,10 +413,10 @@ public class ZipReaderTest extends JDFTestCaseBase
 		final File dir = new File(sm_dirTestDataTemp + "backslash.zip.dir");
 		FileUtil.deleteAll(dir);
 		r.unPack(dir);
-		assertTrue(dir.isDirectory());
+		Assertions.assertTrue(dir.isDirectory());
 		final File dir2 = FileUtil.getFileInDirectory(dir, new File("backslash/a"));
-		assertTrue(dir2.isDirectory());
-		assertEquals(dir2.listFiles().length, 2);
+		Assertions.assertTrue(dir2.isDirectory());
+		Assertions.assertEquals(dir2.listFiles().length, 2);
 	}
 
 	/**
@@ -432,12 +427,12 @@ public class ZipReaderTest extends JDFTestCaseBase
 	public void testgetEntryBackslash()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "backslash.zip");
-		assertNotNull(r.getEntry("b.jmf"));
-		assertNotNull(r.getEntry("c.jmf"));
-		assertNotNull(r.getEntry("a/c.jmf"));
-		assertNotNull(r.getEntry("backslash/a/c.jmf"));
-		assertNotNull(r.getEntry("./backslash/a/c.jmf"));
-		assertNotNull(r.getEntry("backslash"));
+		Assertions.assertNotNull(r.getEntry("b.jmf"));
+		Assertions.assertNotNull(r.getEntry("c.jmf"));
+		Assertions.assertNotNull(r.getEntry("a/c.jmf"));
+		Assertions.assertNotNull(r.getEntry("backslash/a/c.jmf"));
+		Assertions.assertNotNull(r.getEntry("./backslash/a/c.jmf"));
+		Assertions.assertNotNull(r.getEntry("backslash"));
 		r.close();
 	}
 
@@ -449,9 +444,9 @@ public class ZipReaderTest extends JDFTestCaseBase
 	public void testgetMatchingEntryBackslash()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "backslash.zip");
-		assertNotNull(r.getMatchingEntry("?.jmf", 0));
-		assertNotNull(r.getMatchingEntry("?.jmf", 1));
-		assertNull(r.getMatchingEntry("?.jmf", 2));
+		Assertions.assertNotNull(r.getMatchingEntry("?.jmf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("?.jmf", 1));
+		Assertions.assertNull(r.getMatchingEntry("?.jmf", 2));
 		r.close();
 	}
 
@@ -464,9 +459,9 @@ public class ZipReaderTest extends JDFTestCaseBase
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "backslash.zip");
 		r.buffer();
-		assertNotNull(r.getNextMatchingEntry("?.jmf"));
-		assertNotNull(r.getNextMatchingEntry("?.jmf"));
-		assertNull(r.getNextMatchingEntry("?.jmf"));
+		Assertions.assertNotNull(r.getNextMatchingEntry("?.jmf"));
+		Assertions.assertNotNull(r.getNextMatchingEntry("?.jmf"));
+		Assertions.assertNull(r.getNextMatchingEntry("?.jmf"));
 		r.close();
 	}
 
@@ -480,13 +475,13 @@ public class ZipReaderTest extends JDFTestCaseBase
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		r.setRootEntry("schema/");
 		ZipEntry e = r.getEntry("Conditions.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		e = r.getEntry("BarcodeDetails.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		e = r.getEntry("Conditions.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		e = r.getMatchingEntry("Condition?.jdf", 0);
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		r.close();
 	}
 
@@ -504,7 +499,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 		log.info("testGetBigEntryMemLeak #1 " + ms.getSummary());
 		ZipReader r = new ZipReader(sm_dirTestData + "dir1.zip");
 		ZipEntry e = r.getEntry("dir1/bigzip.pdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		log.info("testGetBigEntryMemLeak #2 " + ms.getSummary());
 		r.close();
 		e = null;
@@ -517,7 +512,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 		log.info(ms.getSummary());
 		final long heapUsed = ms.getHeapUsed(MemScope.current) - heap0;
 		log.info("testGetBigEntryMemLeak #3 " + heapUsed + " " + ms.getSummary());
-		assertTrue("heapused: " + heapUsed, heapUsed < 42345678);
+		Assertions.assertTrue(heapUsed < 42345678, "heapused: " + heapUsed);
 	}
 
 	/**
@@ -529,7 +524,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "dir1.zip");
 		final ZipEntry e = r.getEntry("dir1/bigzip.pdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		r.close();
 	}
 
@@ -542,7 +537,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	{
 		final ZipReader r = ZipReader.getZipReader(new File(sm_dirTestData + "dir1.zip"));
 		final ZipEntry e = r.getEntry("dir1/bigzip.pdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		r.close();
 	}
 
@@ -558,7 +553,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 		{
 			final ZipReader r = ZipReader.getZipReader(new File(sm_dirTestData + "dir1.zip"));
 			final ZipEntry e = r.getEntry("dir1/bigzip.pdf");
-			assertNotNull(e);
+			Assertions.assertNotNull(e);
 			l.add(r);
 			final MemorySpy ms = new MemorySpy();
 			log.info(i + " " + ms.getSummary());
@@ -579,7 +574,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 		{
 			final ZipReader r = ZipReader.getZipReaders(FileUtil.getBufferedInputStream(new File(sm_dirTestData + "dir1.zip")), 1).get(0);
 			final ZipEntry e = r.getEntry("dir1/bigzip.pdf");
-			assertNotNull(e);
+			Assertions.assertNotNull(e);
 			l.add(r);
 			final MemorySpy ms = new MemorySpy();
 			log.info(i + " " + ms.getSummary());
@@ -600,7 +595,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 		{
 			zr = ZipReader.getZipReader(new File(sm_dirTestData + "CIP4_JDFEditor_2.4-SNAPSHOT.exe"), false);
 		}
-		assertNull(zr);
+		Assertions.assertNull(zr);
 	}
 
 	/**
@@ -614,9 +609,9 @@ public class ZipReaderTest extends JDFTestCaseBase
 		final ByteArrayIOStream bos = new ByteArrayIOFileStream(new File(sm_dirTestData + "dir1.zip"), 444444, true);
 		final ZipReader r = new ZipReader(bos.getInputStream());
 		final ZipEntry e = r.getEntry("dir1/bigzip.pdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		final InputStream inputStream = r.getInputStream();
-		assertNotNull(inputStream);
+		Assertions.assertNotNull(inputStream);
 		int n = 0;
 		final byte[] b = new byte[1000];
 		while (true)
@@ -626,7 +621,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 			if (i < 0)
 				break;
 		}
-		assertTrue(n > 35000000);
+		Assertions.assertTrue(n > 35000000);
 		bos.close();
 		r.close();
 	}
@@ -649,9 +644,9 @@ public class ZipReaderTest extends JDFTestCaseBase
 		}
 
 		final ZipEntry e = r.getEntry("dir1/bigzip.pdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		final InputStream inputStream = r.getInputStream();
-		assertNotNull(inputStream);
+		Assertions.assertNotNull(inputStream);
 		int n = 0;
 		final byte[] b = new byte[10000];
 		int nn = 0;
@@ -668,7 +663,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 				log.info(nn + " " + i + " " + n);
 			}
 		}
-		assertTrue(n > 35000000);
+		Assertions.assertTrue(n > 35000000);
 		r.close();
 	}
 
@@ -681,7 +676,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "dir1.zip");
 		final Vector<ZipEntry> v = r.getEntries();
-		assertNotNull(v);
+		Assertions.assertNotNull(v);
 		r.close();
 	}
 
@@ -696,7 +691,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 		if (is == null)
 			is = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "CIP4_JDFEditor_2.4-SNAPSHOT.exe"));
 		final Vector<ZipReader> v = ZipReader.getZipReaders(is, -1);
-		assertTrue(v.size() > 0);
+		Assertions.assertTrue(v.size() > 0);
 		for (final ZipReader zr : v)
 		{
 			final Vector<ZipEntry> vze = zr.getEntries();
@@ -718,7 +713,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 		if (zr == null)
 			zr = ZipReader.getZipReader(new File(sm_dirTestData + "CIP4_JDFEditor_2.4-SNAPSHOT.exe"));
 		final Vector<ZipEntry> vze = zr.getEntries();
-		assertTrue(vze.size() > 42);
+		Assertions.assertTrue(vze.size() > 42);
 		zr.close();
 	}
 
@@ -731,12 +726,12 @@ public class ZipReaderTest extends JDFTestCaseBase
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		final ZipEntry e = r.getMatchingEntry("*.jdf", 0);
-		assertTrue(e.getName().endsWith(".jdf"));
+		Assertions.assertTrue(e.getName().endsWith(".jdf"));
 		final ZipEntry e2 = r.getMatchingEntry("*.jdf", 1);
-		assertNotNull(e2);
-		assertTrue(e2.getName().endsWith(".jdf"));
+		Assertions.assertNotNull(e2);
+		Assertions.assertTrue(e2.getName().endsWith(".jdf"));
 		final ZipEntry e3 = r.getMatchingEntry("*.jdf", 2);
-		assertNull(e3);
+		Assertions.assertNull(e3);
 		r.close();
 	}
 
@@ -748,16 +743,16 @@ public class ZipReaderTest extends JDFTestCaseBase
 	public void testGetMatchingEntryEscaped()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "testZip.zip");
-		assertNotNull(r.getMatchingEntry("*boo.pdf", 0));
-		assertNotNull(r.getMatchingEntry("*a%20b.pdf", 0));
-		assertNotNull(r.getMatchingEntry("* b.pdf", 0));
-		assertNotNull(r.getMatchingEntry("content/???.pdf", 0));
-		assertNotNull(r.getMatchingEntry("content/%20*.pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("*boo.pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("*a%20b.pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("* b.pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("content/???.pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("content/%20*.pdf", 0));
 		r.setCaseSensitive(false);
-		assertNotNull(r.getMatchingEntry("content/A%20b.pdf", 0));
-		assertNotNull(r.getMatchingEntry("content/A b.pdf", 0));
-		assertNotNull(r.getMatchingEntry("content/???.Pdf", 0));
-		assertNotNull(r.getMatchingEntry("content/%20.Pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("content/A%20b.pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("content/A b.pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("content/???.Pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("content/%20.Pdf", 0));
 		r.close();
 	}
 
@@ -771,10 +766,10 @@ public class ZipReaderTest extends JDFTestCaseBase
 		final ZipReader r = new ZipReader(sm_dirTestData + "testZip.zip");
 		final Vector<ZipEntry> v = r.getMatchingEntries("*", true);
 		r.buffer();
-		assertEquals(v.size(), r.getEntries().size());
+		Assertions.assertEquals(v.size(), r.getEntries().size());
 		for (int i = 0; i < v.size() - 1; i++)
 		{
-			assertTrue(v.get(i).getName().compareTo(v.get(i + 1).getName()) < 0);
+			Assertions.assertTrue(v.get(i).getName().compareTo(v.get(i + 1).getName()) < 0);
 		}
 	}
 
@@ -789,10 +784,10 @@ public class ZipReaderTest extends JDFTestCaseBase
 		final Vector<ZipEntry> v = r.getEntries();
 		for (final ZipEntry ze : v)
 		{
-			assertTrue(r.setEntry(ze));
+			Assertions.assertTrue(r.setEntry(ze));
 		}
-		assertFalse(r.setEntry(null));
-		assertFalse(r.setEntry(new ZipEntry("blub")));
+		Assertions.assertFalse(r.setEntry(null));
+		Assertions.assertFalse(r.setEntry(new ZipEntry("blub")));
 	}
 
 	/**
@@ -803,16 +798,16 @@ public class ZipReaderTest extends JDFTestCaseBase
 	public void testGetMatchingEntryEscapedFile()
 	{
 		final ZipReader r = new ZipReader(new File(sm_dirTestData + "testZip.zip"), 33);
-		assertNotNull(r.getMatchingEntry("*boo.pdf", 0));
-		assertNotNull(r.getMatchingEntry("*a%20b.pdf", 0));
-		assertNotNull(r.getMatchingEntry("* b.pdf", 0));
-		assertNotNull(r.getMatchingEntry("content/???.pdf", 0));
-		assertNotNull(r.getMatchingEntry("content/%20*.pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("*boo.pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("*a%20b.pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("* b.pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("content/???.pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("content/%20*.pdf", 0));
 		r.setCaseSensitive(false);
-		assertNotNull(r.getMatchingEntry("content/A%20b.pdf", 0));
-		assertNotNull(r.getMatchingEntry("content/A b.pdf", 0));
-		assertNotNull(r.getMatchingEntry("content/???.Pdf", 0));
-		assertNotNull(r.getMatchingEntry("content/%20.Pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("content/A%20b.pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("content/A b.pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("content/???.Pdf", 0));
+		Assertions.assertNotNull(r.getMatchingEntry("content/%20.Pdf", 0));
 		r.close();
 	}
 
@@ -825,16 +820,16 @@ public class ZipReaderTest extends JDFTestCaseBase
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		ZipEntry e = r.getMatchingEntry("*.jdf", 0);
-		assertTrue(e.getName().endsWith(".jdf"));
+		Assertions.assertTrue(e.getName().endsWith(".jdf"));
 		final ZipEntry e3 = r.getMatchingEntry("*.JDF", 0);
-		assertNull(e3);
+		Assertions.assertNull(e3);
 		e = r.getEntry("schema/barcodedetails.jdf");
-		assertNull(e);
+		Assertions.assertNull(e);
 		r.setCaseSensitive(false);
 		final ZipEntry e2 = r.getMatchingEntry("*.JDF", 0);
-		assertTrue(e2.getName().endsWith(".jdf"));
+		Assertions.assertTrue(e2.getName().endsWith(".jdf"));
 		e = r.getEntry("schema/barcodedetails.jdf");
-		assertNotNull(e);
+		Assertions.assertNotNull(e);
 		r.close();
 	}
 
@@ -847,7 +842,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		final Vector<ZipEntry> entries = r.getEntries();
-		assertEquals(entries.size(), 15);
+		Assertions.assertEquals(entries.size(), 15);
 		r.close();
 	}
 }

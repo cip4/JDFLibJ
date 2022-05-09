@@ -36,8 +36,6 @@
  */
 package org.cip4.jdflib.jmf;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
@@ -45,7 +43,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -64,8 +63,8 @@ public class JDFQueueTest extends JDFTestCaseBase
 		final JDFQueue q = (JDFQueue) new JDFDoc(ElementName.QUEUE).getRoot();
 		for (int i = 0; i < 42; i++)
 		{
-			assertEquals(q.numEntries(null), i);
-			assertEquals(q.getEntryCount(), i);
+			Assertions.assertEquals(q.numEntries(null), i);
+			Assertions.assertEquals(q.getEntryCount(), i);
 			q.appendQueueEntry();
 		}
 	}
@@ -79,7 +78,7 @@ public class JDFQueueTest extends JDFTestCaseBase
 	{
 		final JDFQueue q = (JDFQueue) new JDFDoc(ElementName.QUEUE).getRoot();
 		q.setQueueStatus(EnumQueueStatus.Running);
-		assertEquals(EnumQueueStatus.Running, q.getQueueStatus());
+		Assertions.assertEquals(EnumQueueStatus.Running, q.getQueueStatus());
 	}
 
 	/**
@@ -101,7 +100,7 @@ public class JDFQueueTest extends JDFTestCaseBase
 		}
 		q.setStatusFromEntries();
 		final KElement xjmf = convertToXJDF(jmf);
-		assertEquals(42, xjmf.getChildrenByClass(JDFQueueEntry.class, true, 0).size());
+		Assertions.assertEquals(42, xjmf.getChildrenByClass(JDFQueueEntry.class, true, 0).size());
 		writeRoundTrip(jmf, "QueueStatus.jmf");
 	}
 

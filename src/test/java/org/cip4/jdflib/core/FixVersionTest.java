@@ -37,12 +37,6 @@
  */
 package org.cip4.jdflib.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoApprovalDetails.EnumApprovalState;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
@@ -88,8 +82,9 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -97,21 +92,19 @@ import org.junit.Test;
  */
 public class FixVersionTest extends JDFTestCaseBase
 {
-	private JDFDoc mDoc;
 	private JDFNode n;
 
 	/**
 	 *
-	 * @see junit.framework.TestCase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		mDoc = new JDFDoc(ElementName.JDF);
+		JDFDoc mDoc = new JDFDoc(ElementName.JDF);
 		n = mDoc.getJDFRoot();
-
 	}
 
 	/**
@@ -126,18 +119,18 @@ public class FixVersionTest extends JDFTestCaseBase
 		as.appendContact();
 		as.appendFileSpec();
 		boolean bRet = n.fixVersion(EnumVersion.Version_1_3);
-		assertTrue("fix ok", bRet);
-		assertNotNull("approvaldetails", as.getApprovalDetails(0));
+		Assertions.assertTrue(bRet, "fix ok");
+		Assertions.assertNotNull(as.getApprovalDetails(0), "approvaldetails");
 		bRet = n.fixVersion(EnumVersion.Version_1_2);
-		assertTrue("fix ok", bRet);
-		assertNull("approvaldetails", as.getApprovalDetails(0));
+		Assertions.assertTrue(bRet, "fix ok");
+		Assertions.assertNull(as.getApprovalDetails(0), "approvaldetails");
 		bRet = n.fixVersion(EnumVersion.Version_1_3);
-		assertTrue("fix ok", bRet);
+		Assertions.assertTrue(bRet, "fix ok");
 		as = (JDFApprovalSuccess) n.getMatchingResource(ElementName.APPROVALSUCCESS, EnumProcessUsage.AnyOutput, null, 0);
 		final JDFApprovalDetails ad = as.getApprovalDetails(0);
 		ad.setApprovalState(EnumApprovalState.Rejected);
 		bRet = n.fixVersion(EnumVersion.Version_1_2);
-		assertFalse("fix not ok", bRet);
+		Assertions.assertFalse(bRet, "fix not ok");
 	}
 
 	// //////////////////////////////////////////////////////////////////////
@@ -151,7 +144,7 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFResourcePool rp = n.appendResourcePool();
 		rp.setAttribute(AttributeName.RREFS, "a b", null);
 		n.fixVersion(null);
-		assertFalse(rp.hasAttribute(AttributeName.RREFS));
+		Assertions.assertFalse(rp.hasAttribute(AttributeName.RREFS));
 	}
 
 	/**
@@ -163,12 +156,12 @@ public class FixVersionTest extends JDFTestCaseBase
 		final KElement ns = n.appendElement("foo:abc", "www.foobar.com");
 		n.fixVersion(null);
 		KElement ns2 = n.getElement("foo:abc");
-		assertEquals(ns, ns2);
-		assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
+		Assertions.assertEquals(ns, ns2);
+		Assertions.assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
 		n.fixVersion(EnumVersion.Version_1_3);
 		ns2 = n.getElement("foo:abc");
-		assertEquals(ns, ns2);
-		assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
+		Assertions.assertEquals(ns, ns2);
+		Assertions.assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
 	}
 
 	/**
@@ -180,12 +173,12 @@ public class FixVersionTest extends JDFTestCaseBase
 		final KElement ns = n.addResource("foo:abc", EnumResourceClass.Parameter, null, null, null, "www.foobar.com", null);
 		n.fixVersion(null);
 		KElement ns2 = n.getResourcePool().getElement("foo:abc");
-		assertEquals(ns, ns2);
-		assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
+		Assertions.assertEquals(ns, ns2);
+		Assertions.assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
 		n.fixVersion(EnumVersion.Version_1_3);
 		ns2 = n.getResourcePool().getElement("foo:abc");
-		assertEquals(ns, ns2);
-		assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
+		Assertions.assertEquals(ns, ns2);
+		Assertions.assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
 	}
 
 	/**
@@ -194,13 +187,13 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testNamespaceParse()
 	{
-		n = JDFDoc.parseFile(sm_dirTestData + "fixns.jdf").getJDFRoot();
+		JDFNode n = JDFDoc.parseFile(sm_dirTestData + "fixns.jdf").getJDFRoot();
 		n.fixVersion(null);
 		KElement ns2 = n.getResourcePool().getElement("foo:myresource");
-		assertEquals(ns2.getNamespaceURI(), "http://www.foo.com/schema");
+		Assertions.assertEquals(ns2.getNamespaceURI(), "http://www.foo.com/schema");
 		n.fixVersion(EnumVersion.Version_1_3);
 		ns2 = n.getResourcePool().getElement("foo:myresource");
-		assertEquals(ns2.getNamespaceURI(), "http://www.foo.com/schema");
+		Assertions.assertEquals(ns2.getNamespaceURI(), "http://www.foo.com/schema");
 	}
 
 	/**
@@ -209,10 +202,10 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testNamespaceRetain()
 	{
-		n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.addNameSpace("foo", "http://www.foo.com/schema");
 		n.fixVersion(EnumVersion.Version_1_3);
-		assertEquals(n.getAttribute("xmlns:foo"), "http://www.foo.com/schema");
+		Assertions.assertEquals(n.getAttribute("xmlns:foo"), "http://www.foo.com/schema");
 	}
 
 	/**
@@ -221,12 +214,12 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testNamespaceRetain2()
 	{
-		n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		final KElement e = n.appendElement("foo:bar", "http://www.foo.com/schema");
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final KElement e = n.appendElement("foo:" + this.getClass().getSimpleName(), "http://www.foo.com/schema");
 		final JDFNode n0 = (JDFNode) e.appendElement(ElementName.JDF);
 		n0.appendStatusPool();
 		n.fixVersion(EnumVersion.Version_1_3);
-		assertNotNull(n0.getStatusPool());
+		Assertions.assertNotNull(n0.getStatusPool());
 	}
 
 	/**
@@ -235,12 +228,12 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testNamespaceRetainZappDeprecated()
 	{
-		n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.addNameSpace("foo", "http://www.foo.com/schema");
 		final FixVersion fv = new FixVersion(EnumVersion.Version_1_5);
 		fv.setZappDeprecated(true);
 		fv.convert(n);
-		assertEquals(n.getAttribute("xmlns:foo"), "http://www.foo.com/schema");
+		Assertions.assertEquals(n.getAttribute("xmlns:foo"), "http://www.foo.com/schema");
 	}
 
 	/**
@@ -255,11 +248,11 @@ public class FixVersionTest extends JDFTestCaseBase
 		r.setICSVersions(ics0);
 		final FixVersion f0 = new FixVersion(EnumVersion.Version_1_4);
 		f0.walkTree(n, null);
-		assertEquals(r.getICSVersions(), ics0);
+		Assertions.assertEquals(r.getICSVersions(), ics0);
 		final FixVersion f1 = new FixVersion(EnumVersion.Version_1_4);
 		f1.setFixICSVersions(true);
 		f1.walkTree(n, null);
-		assertEquals(r.getICSVersions(), ics1);
+		Assertions.assertEquals(r.getICSVersions(), ics1);
 	}
 
 	/**
@@ -271,7 +264,7 @@ public class FixVersionTest extends JDFTestCaseBase
 		final FixVersion f1 = new FixVersion(EnumVersion.Version_1_4);
 		n.removeAttribute(AttributeName.JOBID);
 		f1.convert(n);
-		assertTrue(n.hasNonEmpty(AttributeName.JOBID));
+		Assertions.assertTrue(n.hasNonEmpty(AttributeName.JOBID));
 
 	}
 
@@ -285,7 +278,7 @@ public class FixVersionTest extends JDFTestCaseBase
 		n.setJobID("j1");
 		n.removeAttribute(AttributeName.JOBPARTID);
 		f1.convert(n);
-		assertEquals("P_j1", n.getJobPartID(true));
+		Assertions.assertEquals("P_j1", n.getJobPartID(true));
 
 	}
 
@@ -296,34 +289,34 @@ public class FixVersionTest extends JDFTestCaseBase
 	public void testAudit()
 	{
 		final JDFAuditPool ap = n.getAuditPool();
-		assertNotNull(ap);
+		Assertions.assertNotNull(ap);
 		final JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
 		crea.setAgentName("Agent");
 		crea.setAgentVersion("V1");
 		final String agent = crea.getAgentName();
 		crea.setAuthor(agent);
-		assertNotNull(agent);
+		Assertions.assertNotNull(agent);
 		String author = crea.getAuthor();
-		assertNotNull(author);
+		Assertions.assertNotNull(author);
 
 		n.fixVersion(EnumVersion.Version_1_1);
 		author = crea.getAuthor();
-		assertEquals(StringUtil.token(author, 1, "_|_"), agent);
-		assertTrue(author.startsWith(agent));
+		Assertions.assertEquals(StringUtil.token(author, 1, "_|_"), agent);
+		Assertions.assertTrue(author.startsWith(agent));
 		String agent2 = crea.getAgentName();
-		assertEquals(agent2, "");
+		Assertions.assertEquals(agent2, "");
 
 		n.fixVersion(EnumVersion.Version_1_3);
 		author = crea.getAuthor();
-		assertEquals(author.indexOf("_|_"), -1);
+		Assertions.assertEquals(author.indexOf("_|_"), -1);
 		agent2 = crea.getAgentName();
-		assertEquals(agent, agent2);
+		Assertions.assertEquals(agent, agent2);
 
 		n.fixVersion(EnumVersion.Version_1_2);
 		author = crea.getAuthor();
-		assertEquals(author.indexOf("_|_"), -1);
+		Assertions.assertEquals(author.indexOf("_|_"), -1);
 		agent2 = crea.getAgentName();
-		assertEquals(agent, agent2);
+		Assertions.assertEquals(agent, agent2);
 	}
 
 	/**
@@ -334,11 +327,11 @@ public class FixVersionTest extends JDFTestCaseBase
 	{
 		final JDFMedia m = (JDFMedia) n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
 		m.setResStatus(EnumResStatus.Available, true);
-		assertEquals(m.getResStatus(true), EnumResStatus.Available);
-		assertTrue(m.fixVersion(EnumVersion.Version_1_1));
-		assertEquals(m.getResStatus(true), EnumResStatus.Available);
-		assertTrue(m.fixVersion(EnumVersion.Version_1_3));
-		assertEquals(m.getResStatus(true), EnumResStatus.Available);
+		Assertions.assertEquals(m.getResStatus(true), EnumResStatus.Available);
+		Assertions.assertTrue(m.fixVersion(EnumVersion.Version_1_1));
+		Assertions.assertEquals(m.getResStatus(true), EnumResStatus.Available);
+		Assertions.assertTrue(m.fixVersion(EnumVersion.Version_1_3));
+		Assertions.assertEquals(m.getResStatus(true), EnumResStatus.Available);
 	}
 
 	/**
@@ -352,7 +345,7 @@ public class FixVersionTest extends JDFTestCaseBase
 		{
 			ct.start();
 			final FixVersion v = new FixVersion(EnumVersion.Version_1_3);
-			assertNotNull(v);
+			Assertions.assertNotNull(v);
 			log.info(ct.toXML());
 			ct.stop();
 		}
@@ -366,9 +359,9 @@ public class FixVersionTest extends JDFTestCaseBase
 	{
 		final JDFMedia m = (JDFMedia) n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
 		m.setResStatus(EnumResStatus.Available, true);
-		assertEquals(m.getResStatus(true), EnumResStatus.Available);
-		assertTrue(new FixVersion(EnumVersion.Version_1_1).convert(n));
-		assertEquals(n.getVersion(true), EnumVersion.Version_1_1);
+		Assertions.assertEquals(m.getResStatus(true), EnumResStatus.Available);
+		Assertions.assertTrue(new FixVersion(EnumVersion.Version_1_1).convert(n));
+		Assertions.assertEquals(n.getVersion(true), EnumVersion.Version_1_1);
 	}
 
 	/**
@@ -382,7 +375,7 @@ public class FixVersionTest extends JDFTestCaseBase
 		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
 		fixVersion.setZappDeprecated(true);
 		fixVersion.convert(ci);
-		assertNull(ci.getCustomerMessage(0));
+		Assertions.assertNull(ci.getCustomerMessage(0));
 	}
 
 	/**
@@ -393,11 +386,11 @@ public class FixVersionTest extends JDFTestCaseBase
 	{
 		final JDFComChannel c = (JDFComChannel) new JDFDoc("ComChannel").getRoot();
 		c.setChannelType(EnumChannelType.Mobile);
-		assertTrue(new FixVersion(EnumVersion.Version_1_1).convert(c));
-		assertEquals(c.getChannelTypeDetails(), "Mobile");
-		assertEquals(c.getAttribute(AttributeName.CHANNELTYPE), "Phone");
-		assertTrue(new FixVersion(EnumVersion.Version_1_5).convert(c));
-		assertEquals(c.getAttribute(AttributeName.CHANNELTYPE), "Mobile");
+		Assertions.assertTrue(new FixVersion(EnumVersion.Version_1_1).convert(c));
+		Assertions.assertEquals(c.getChannelTypeDetails(), "Mobile");
+		Assertions.assertEquals(c.getAttribute(AttributeName.CHANNELTYPE), "Phone");
+		Assertions.assertTrue(new FixVersion(EnumVersion.Version_1_5).convert(c));
+		Assertions.assertEquals(c.getAttribute(AttributeName.CHANNELTYPE), "Mobile");
 	}
 
 	/**
@@ -408,12 +401,12 @@ public class FixVersionTest extends JDFTestCaseBase
 	{
 		final JDFProofItem c = (JDFProofItem) new JDFDoc(ElementName.PROOFITEM).getRoot();
 		c.setProofTarget("pt");
-		assertTrue(new FixVersion(EnumVersion.Version_1_7).convert(c));
-		assertEquals("pt", c.getFileSpec().getURL());
-		assertEquals("", c.getProofTarget());
-		assertTrue(new FixVersion(EnumVersion.Version_1_6).convert(c));
-		assertEquals("pt", c.getProofTarget());
-		assertNull(c.getFileSpec());
+		Assertions.assertTrue(new FixVersion(EnumVersion.Version_1_7).convert(c));
+		Assertions.assertEquals("pt", c.getFileSpec().getURL());
+		Assertions.assertEquals("", c.getProofTarget());
+		Assertions.assertTrue(new FixVersion(EnumVersion.Version_1_6).convert(c));
+		Assertions.assertEquals("pt", c.getProofTarget());
+		Assertions.assertNull(c.getFileSpec());
 	}
 
 	/**
@@ -428,10 +421,10 @@ public class FixVersionTest extends JDFTestCaseBase
 		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_1);
 		fixVersion.setBZappInvalid(true);
 		fixVersion.addIgnore(ElementName.COMCHANNEL, "notbad");
-		assertTrue(fixVersion.convert(c));
-		assertNull(c.getNonEmpty("bad"));
-		assertEquals("blah", c.getAttribute("notbad"));
-		assertTrue(new FixVersion(EnumVersion.Version_1_5).convert(c));
+		Assertions.assertTrue(fixVersion.convert(c));
+		Assertions.assertNull(c.getNonEmpty("bad"));
+		Assertions.assertEquals("blah", c.getAttribute("notbad"));
+		Assertions.assertTrue(new FixVersion(EnumVersion.Version_1_5).convert(c));
 	}
 
 	/**
@@ -444,13 +437,13 @@ public class FixVersionTest extends JDFTestCaseBase
 		d.setFriendlyName("f1");
 		d.setDescriptiveName("d1");
 		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
-		assertTrue(fixVersion.convert(d));
-		assertEquals("f1", d.getFriendlyName());
-		assertEquals("d1", d.getDescriptiveName());
+		Assertions.assertTrue(fixVersion.convert(d));
+		Assertions.assertEquals("f1", d.getFriendlyName());
+		Assertions.assertEquals("d1", d.getDescriptiveName());
 		fixVersion.setZappDeprecated(true);
-		assertTrue(fixVersion.convert(d));
-		assertNull(d.getNonEmpty(AttributeName.FRIENDLYNAME));
-		assertEquals("d1", d.getDescriptiveName());
+		Assertions.assertTrue(fixVersion.convert(d));
+		Assertions.assertNull(d.getNonEmpty(AttributeName.FRIENDLYNAME));
+		Assertions.assertEquals("d1", d.getDescriptiveName());
 	}
 
 	/**
@@ -461,11 +454,11 @@ public class FixVersionTest extends JDFTestCaseBase
 	{
 		final JDFContentMetaData c = (JDFContentMetaData) new JDFDoc(ElementName.CONTENTMETADATA).getRoot();
 		c.setISBN13("12345");
-		assertTrue(new FixVersion(EnumVersion.Version_1_6).convert(c));
-		assertEquals(c.getAttribute(AttributeName.ISBN), "12345");
-		assertTrue(new FixVersion(EnumVersion.Version_1_1).convert(c));
-		assertEquals(c.getAttribute(AttributeName.ISBN10), "12345");
-		assertFalse(c.hasAttribute(AttributeName.ISBN));
+		Assertions.assertTrue(new FixVersion(EnumVersion.Version_1_6).convert(c));
+		Assertions.assertEquals(c.getAttribute(AttributeName.ISBN), "12345");
+		Assertions.assertTrue(new FixVersion(EnumVersion.Version_1_1).convert(c));
+		Assertions.assertEquals(c.getAttribute(AttributeName.ISBN10), "12345");
+		Assertions.assertFalse(c.hasAttribute(AttributeName.ISBN));
 	}
 
 	/**
@@ -475,12 +468,12 @@ public class FixVersionTest extends JDFTestCaseBase
 	public void testNamedFeature()
 	{
 		n.setNamedFeatures(new VString("a b", null));
-		assertTrue(new FixVersion(EnumVersion.Version_1_5).convert(n));
-		assertEquals(n.getGeneralID("a", 0), "b");
-		assertNull(n.getAttribute(AttributeName.NAMEDFEATURES, null, null));
-		assertTrue(new FixVersion(EnumVersion.Version_1_4).convert(n));
-		assertEquals(n.getAttribute(AttributeName.NAMEDFEATURES, null, null), "a b");
-		assertNull(n.getGeneralID(null, 0));
+		Assertions.assertTrue(new FixVersion(EnumVersion.Version_1_5).convert(n));
+		Assertions.assertEquals(n.getGeneralID("a", 0), "b");
+		Assertions.assertNull(n.getAttribute(AttributeName.NAMEDFEATURES, null, null));
+		Assertions.assertTrue(new FixVersion(EnumVersion.Version_1_4).convert(n));
+		Assertions.assertEquals(n.getAttribute(AttributeName.NAMEDFEATURES, null, null), "a b");
+		Assertions.assertNull(n.getGeneralID(null, 0));
 	}
 
 	/**
@@ -492,15 +485,15 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
 		ci.setNumColors(4);
 		boolean converted = new FixVersion(EnumVersion.Version_1_4).convert(ci);
-		assertTrue(converted);
-		assertNull(ci.getAttribute(AttributeName.NUMCOLORS, null, null));
-		assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
+		Assertions.assertTrue(converted);
+		Assertions.assertNull(ci.getAttribute(AttributeName.NUMCOLORS, null, null));
+		Assertions.assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
 		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
 		fixVersion.setFixNewDuplicate(true);
 		converted = fixVersion.convert(ci);
-		assertTrue(converted);
-		assertEquals(ci.getNumColors(), 4);
-		assertEquals(ci.getColorsUsed().getSeparations().size(), 0);
+		Assertions.assertTrue(converted);
+		Assertions.assertEquals(ci.getNumColors(), 4);
+		Assertions.assertEquals(ci.getColorsUsed().getSeparations().size(), 0);
 	}
 
 	/**
@@ -512,10 +505,10 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
 		ci.appendColorsUsed().setSeparations(new VString("K", null));
 		final boolean converted = new FixVersion(EnumVersion.Version_1_4).convert(ci);
-		assertTrue(converted);
-		assertNull(ci.getAttribute(AttributeName.NUMCOLORS, null, null));
-		assertEquals(ci.getColorsUsed().getSeparations().size(), 1);
-		assertEquals("K", ci.getColorsUsed().getSeparations().get(0));
+		Assertions.assertTrue(converted);
+		Assertions.assertNull(ci.getAttribute(AttributeName.NUMCOLORS, null, null));
+		Assertions.assertEquals(ci.getColorsUsed().getSeparations().size(), 1);
+		Assertions.assertEquals("K", ci.getColorsUsed().getSeparations().get(0));
 	}
 
 	/**
@@ -528,8 +521,8 @@ public class FixVersionTest extends JDFTestCaseBase
 
 		co.addSourceObject(JDFColorSpaceConversionOp.EnumSourceObjects.All);
 		final boolean converted = new FixVersion(EnumVersion.Version_1_6).convert(co);
-		assertTrue(converted);
-		assertNull(co.getSourceObjects());
+		Assertions.assertTrue(converted);
+		Assertions.assertNull(co.getSourceObjects());
 	}
 
 	/**
@@ -542,8 +535,8 @@ public class FixVersionTest extends JDFTestCaseBase
 
 		co.addSourceObject(JDFColorSpaceConversionOp.EnumSourceObjects.ImagePhotographic);
 		final boolean converted = new FixVersion(EnumVersion.Version_1_6).convert(co);
-		assertTrue(converted);
-		assertEquals(1, co.getSourceObjects().size());
+		Assertions.assertTrue(converted);
+		Assertions.assertEquals(1, co.getSourceObjects().size());
 	}
 
 	/**
@@ -557,8 +550,8 @@ public class FixVersionTest extends JDFTestCaseBase
 		co.addSourceObject(JDFColorSpaceConversionOp.EnumSourceObjects.ImagePhotographic);
 		co.addSourceObject(JDFColorSpaceConversionOp.EnumSourceObjects.All);
 		final boolean converted = new FixVersion((EnumVersion) null).convert(co);
-		assertTrue(converted);
-		assertEquals(2, co.getSourceObjects().size());
+		Assertions.assertTrue(converted);
+		Assertions.assertEquals(2, co.getSourceObjects().size());
 	}
 
 	/**
@@ -572,14 +565,14 @@ public class FixVersionTest extends JDFTestCaseBase
 		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
 		fixVersion.setFixNewDuplicate(false);
 		final boolean converted = fixVersion.convert(ci);
-		assertTrue(converted);
-		assertNull(ci.getNonEmpty(AttributeName.NUMCOLORS));
-		assertEquals(ci.getColorsUsed().getSeparations().size(), 1);
-		assertEquals("Black", ci.getColorsUsed().getSeparations().get(0));
+		Assertions.assertTrue(converted);
+		Assertions.assertNull(ci.getNonEmpty(AttributeName.NUMCOLORS));
+		Assertions.assertEquals(ci.getColorsUsed().getSeparations().size(), 1);
+		Assertions.assertEquals("Black", ci.getColorsUsed().getSeparations().get(0));
 
 		fixVersion.setFixNewDuplicate(true);
 		fixVersion.convert(ci);
-		assertEquals("1", ci.getNonEmpty(AttributeName.NUMCOLORS));
+		Assertions.assertEquals("1", ci.getNonEmpty(AttributeName.NUMCOLORS));
 	}
 
 	/**
@@ -593,9 +586,9 @@ public class FixVersionTest extends JDFTestCaseBase
 		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
 		fixVersion.setZappDeprecated(true);
 		final boolean converted = fixVersion.convert(n);
-		assertTrue(converted);
-		assertNotNull(n.getResource(ElementName.NODEINFO, EnumUsage.Input, 0));
-		assertNull(n.getResource(ElementName.NODEINFO, EnumUsage.Input, 0).getElement(ElementName.JMF));
+		Assertions.assertTrue(converted);
+		Assertions.assertNotNull(n.getResource(ElementName.NODEINFO, EnumUsage.Input, 0));
+		Assertions.assertNull(n.getResource(ElementName.NODEINFO, EnumUsage.Input, 0).getElement(ElementName.JMF));
 	}
 
 	/**
@@ -610,9 +603,9 @@ public class FixVersionTest extends JDFTestCaseBase
 		final FixVersion fixVersion = new FixVersion((EnumVersion) null);
 		fixVersion.setBZappInvalid(true);
 		final boolean converted = fixVersion.convert(n);
-		assertTrue(converted);
-		assertTrue(ni.getAttribute(AttributeName.START).indexOf("T06:00") > 0);
-		assertTrue(ni.getAttribute(AttributeName.LASTEND).indexOf("T18:00") > 0);
+		Assertions.assertTrue(converted);
+		Assertions.assertTrue(ni.getAttribute(AttributeName.START).indexOf("T06:00") > 0);
+		Assertions.assertTrue(ni.getAttribute(AttributeName.LASTEND).indexOf("T18:00") > 0);
 	}
 
 	/**
@@ -629,9 +622,9 @@ public class FixVersionTest extends JDFTestCaseBase
 		fixVersion.setLasthour(22);
 		fixVersion.setBZappInvalid(true);
 		final boolean converted = fixVersion.convert(n);
-		assertTrue(converted);
-		assertTrue(ni.getAttribute(AttributeName.START).indexOf("T03:00") > 0);
-		assertTrue(ni.getAttribute(AttributeName.LASTEND).indexOf("T22:00") > 0);
+		Assertions.assertTrue(converted);
+		Assertions.assertTrue(ni.getAttribute(AttributeName.START).indexOf("T03:00") > 0);
+		Assertions.assertTrue(ni.getAttribute(AttributeName.LASTEND).indexOf("T22:00") > 0);
 	}
 
 	/**
@@ -648,9 +641,9 @@ public class FixVersionTest extends JDFTestCaseBase
 		fixVersion.setLasthour(22);
 		fixVersion.setBZappInvalid(true);
 		final boolean converted = fixVersion.convert(n);
-		assertTrue(converted);
-		assertTrue(ni.getEarliest().getAttribute(AttributeName.ACTUAL).indexOf("T03:00") > 0);
-		assertTrue(ni.getRequired().getAttribute(AttributeName.ACTUAL).indexOf("T22:00") > 0);
+		Assertions.assertTrue(converted);
+		Assertions.assertTrue(ni.getEarliest().getAttribute(AttributeName.ACTUAL).indexOf("T03:00") > 0);
+		Assertions.assertTrue(ni.getRequired().getAttribute(AttributeName.ACTUAL).indexOf("T22:00") > 0);
 	}
 
 	/**
@@ -665,9 +658,9 @@ public class FixVersionTest extends JDFTestCaseBase
 		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
 		fixVersion.setZappDeprecated(true);
 		final boolean converted = fixVersion.convert(n);
-		assertTrue(converted);
-		assertEquals(7, ru.getNPage());
-		assertFalse(rup.hasAttribute_KElement(AttributeName.NPAGE, null, false));
+		Assertions.assertTrue(converted);
+		Assertions.assertEquals(7, ru.getNPage());
+		Assertions.assertFalse(rup.hasAttribute_KElement(AttributeName.NPAGE, null, false));
 	}
 
 	/**
@@ -680,15 +673,15 @@ public class FixVersionTest extends JDFTestCaseBase
 		ci.setNumColors(4);
 		ci.getCreateColorsUsed().setCMYK();
 		boolean converted = new FixVersion(EnumVersion.Version_1_4).convert(ci);
-		assertTrue(converted);
-		assertNull(ci.getAttribute(AttributeName.NUMCOLORS, null, null));
-		assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
+		Assertions.assertTrue(converted);
+		Assertions.assertNull(ci.getAttribute(AttributeName.NUMCOLORS, null, null));
+		Assertions.assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
 		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
 		fixVersion.setFixNewDuplicate(true);
 		converted = fixVersion.convert(ci);
-		assertTrue(converted);
-		assertEquals(ci.getNumColors(), 4);
-		assertEquals(ci.getColorsUsed().getSeparations().size(), 0);
+		Assertions.assertTrue(converted);
+		Assertions.assertEquals(ci.getNumColors(), 4);
+		Assertions.assertEquals(ci.getColorsUsed().getSeparations().size(), 0);
 	}
 
 	/**
@@ -700,12 +693,12 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFTool t = (JDFTool) n.addResource("Tool", null, EnumUsage.Input, null, null, null, null);
 		t.setResStatus(EnumResStatus.Available, true);
 		t.setProductID("toolID");
-		assertTrue(t.fixVersion(EnumVersion.Version_1_1));
-		assertEquals(t.getToolID(), "toolID");
-		assertEquals(t.getProductID(), "toolID");
-		assertTrue(t.fixVersion(EnumVersion.Version_1_3));
-		assertEquals(t.getToolID(), "");
-		assertEquals(t.getProductID(), "toolID");
+		Assertions.assertTrue(t.fixVersion(EnumVersion.Version_1_1));
+		Assertions.assertEquals(t.getToolID(), "toolID");
+		Assertions.assertEquals(t.getProductID(), "toolID");
+		Assertions.assertTrue(t.fixVersion(EnumVersion.Version_1_3));
+		Assertions.assertEquals(t.getToolID(), "");
+		Assertions.assertEquals(t.getProductID(), "toolID");
 	}
 
 	/**
@@ -718,12 +711,12 @@ public class FixVersionTest extends JDFTestCaseBase
 
 		idpGoldenTicket.assign(null);
 		final JDFNode node = idpGoldenTicket.getNode();
-		assertTrue(node.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(node.isValid(EnumValidationLevel.Complete));
 		final FixVersion fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.setLayoutPrepToStripping(true);
 		fix.walkTree(node, null);
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "FixLayoutPrep.jdf", 2, false);
-		assertTrue(node.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(node.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
@@ -738,7 +731,7 @@ public class FixVersionTest extends JDFTestCaseBase
 		final FixVersion fix = new FixVersion(EnumVersion.Version_1_3);
 		fix.setBZappInvalid(true);
 		fix.walkTree(jmf, null);
-		assertNull(StringUtil.getNonEmpty(jmf.getAgentName()));
+		Assertions.assertNull(StringUtil.getNonEmpty(jmf.getAgentName()));
 		final FixVersion fix2 = new FixVersion(EnumVersion.Version_1_4);
 		fix2.walkTree(jmf, null);
 	}
@@ -754,10 +747,10 @@ public class FixVersionTest extends JDFTestCaseBase
 		command.appendQueueFilter();
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		assertNotNull(command.getQueueFilter(0));
+		Assertions.assertNotNull(command.getQueueFilter(0));
 		fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.walkTree(jmf, null);
-		assertNull(command.getQueueFilter(0));
+		Assertions.assertNull(command.getQueueFilter(0));
 	}
 
 	/**
@@ -770,13 +763,13 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFCommand command = jmf.getCommand(0);
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		assertNotNull(command.getQueueEntryDef(0));
+		Assertions.assertNotNull(command.getQueueEntryDef(0));
 		fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.walkTree(jmf, null);
-		assertNull(command.getQueueEntryDef(0));
+		Assertions.assertNull(command.getQueueEntryDef(0));
 		fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		assertNotNull(command.getQueueEntryDef(0));
+		Assertions.assertNotNull(command.getQueueEntryDef(0));
 	}
 
 	/**
@@ -787,14 +780,14 @@ public class FixVersionTest extends JDFTestCaseBase
 	{
 		final JDFJMF jmf = new JMFBuilder().buildAbortQueueEntry("42");
 		final JDFCommand command = jmf.getCommand(0);
-		assertNotNull(command.getQueueEntryDef(0));
+		Assertions.assertNotNull(command.getQueueEntryDef(0));
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.walkTree(jmf, null);
-		assertNull(command.getQueueEntryDef(0));
-		assertEquals("42", jmf.getXPathAttribute("Command/AbortQueueEntryParams/QueueFilter/QueueEntryDef/@QueueEntryID", null));
+		Assertions.assertNull(command.getQueueEntryDef(0));
+		Assertions.assertEquals("42", jmf.getXPathAttribute("Command/AbortQueueEntryParams/QueueFilter/QueueEntryDef/@QueueEntryID", null));
 		fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		assertNotNull(command.getQueueEntryDef(0));
+		Assertions.assertNotNull(command.getQueueEntryDef(0));
 	}
 
 	/**
@@ -807,13 +800,13 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFCommand command = jmf.getCommand(0);
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		assertNotNull(command.getQueueEntryDef(0));
+		Assertions.assertNotNull(command.getQueueEntryDef(0));
 		fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.walkTree(jmf, null);
-		assertNull(command.getQueueEntryDef(0));
+		Assertions.assertNull(command.getQueueEntryDef(0));
 		fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		assertNotNull(command.getQueueEntryDef(0));
+		Assertions.assertNotNull(command.getQueueEntryDef(0));
 	}
 
 	/**
@@ -826,13 +819,13 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFCommand command = jmf.getCommand(0);
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		assertNotNull(command.getQueueEntryDef(0));
+		Assertions.assertNotNull(command.getQueueEntryDef(0));
 		fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.walkTree(jmf, null);
-		assertNull(command.getQueueEntryDef(0));
+		Assertions.assertNull(command.getQueueEntryDef(0));
 		fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		assertNotNull(command.getQueueEntryDef(0));
+		Assertions.assertNotNull(command.getQueueEntryDef(0));
 	}
 
 	/**
@@ -845,13 +838,13 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFCommand command = jmf.getCommand(0);
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		assertNotNull(command.getQueueEntryDef(0));
+		Assertions.assertNotNull(command.getQueueEntryDef(0));
 		fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.walkTree(jmf, null);
-		assertNull(command.getQueueEntryDef(0));
+		Assertions.assertNull(command.getQueueEntryDef(0));
 		fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		assertNotNull(command.getQueueEntryDef(0));
+		Assertions.assertNotNull(command.getQueueEntryDef(0));
 	}
 
 	/**
@@ -868,7 +861,7 @@ public class FixVersionTest extends JDFTestCaseBase
 		fix.walkTree(jmf, null);
 		fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		assertNotNull(command);
+		Assertions.assertNotNull(command);
 	}
 
 	/**
@@ -881,18 +874,18 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFCommand command = jmf.getCommand(0);
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		assertNotNull(command.getQueueEntryDef(0));
+		Assertions.assertNotNull(command.getQueueEntryDef(0));
 		fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.walkTree(jmf, null);
-		assertEquals(1, command.numChildElements("ResumeQueueEntryParams", null));
-		assertNull(command.getQueueEntryDef(0));
+		Assertions.assertEquals(1, command.numChildElements("ResumeQueueEntryParams", null));
+		Assertions.assertNull(command.getQueueEntryDef(0));
 		fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.walkTree(jmf, null);
-		assertNull(command.getQueueEntryDef(0));
-		assertEquals(1, command.numChildElements("ResumeQueueEntryParams", null));
+		Assertions.assertNull(command.getQueueEntryDef(0));
+		Assertions.assertEquals(1, command.numChildElements("ResumeQueueEntryParams", null));
 		fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		assertNotNull(command.getQueueEntryDef(0));
+		Assertions.assertNotNull(command.getQueueEntryDef(0));
 	}
 
 	/**
@@ -907,10 +900,10 @@ public class FixVersionTest extends JDFTestCaseBase
 		r.appendQueue();
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		assertNotNull(r.getQueue(0));
+		Assertions.assertNotNull(r.getQueue(0));
 		fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.walkTree(jmf, null);
-		assertNull(r.getQueue(0));
+		Assertions.assertNull(r.getQueue(0));
 	}
 
 	// //////////////////////////////////////////////////////////////////////
@@ -927,16 +920,16 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFAssemblySection as = a.appendAssemblySection();
 		final VString asi = new VString("a1.1", null);
 		as.setAssemblyIDs(asi);
-		assertTrue(a.fixVersion(EnumVersion.Version_1_1));
-		assertEquals(a.getAssemblyID(), "a1");
-		assertNull(a.getAttribute("AssemblyIDs", null, null));
-		assertEquals(as.getAssemblyID(), "a1.1");
-		assertNull(as.getAttribute("AssemblyIDs", null, null));
-		assertTrue(a.fixVersion(EnumVersion.Version_1_4));
-		assertEquals(a.getAssemblyIDs(), ai);
-		assertEquals(a.getAssemblyID(), "");
-		assertEquals(as.getAssemblyIDs(), asi);
-		assertEquals(as.getAssemblyID(), "");
+		Assertions.assertTrue(a.fixVersion(EnumVersion.Version_1_1));
+		Assertions.assertEquals(a.getAssemblyID(), "a1");
+		Assertions.assertNull(a.getAttribute("AssemblyIDs", null, null));
+		Assertions.assertEquals(as.getAssemblyID(), "a1.1");
+		Assertions.assertNull(as.getAttribute("AssemblyIDs", null, null));
+		Assertions.assertTrue(a.fixVersion(EnumVersion.Version_1_4));
+		Assertions.assertEquals(a.getAssemblyIDs(), ai);
+		Assertions.assertEquals(a.getAssemblyID(), "");
+		Assertions.assertEquals(as.getAssemblyIDs(), asi);
+		Assertions.assertEquals(as.getAssemblyID(), "");
 	}
 
 	/**
@@ -953,16 +946,16 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFAssemblySection as = a.appendAssemblySection();
 		final VString asi = new VString("a1.1", null);
 		as.setAssemblyIDs(asi);
-		assertTrue(a.fixVersion(EnumVersion.Version_1_1));
-		assertEquals(a.getAssemblyID(), "a1");
-		assertNull(a.getAttribute("AssemblyIDs", null, null));
-		assertEquals(as.getAssemblyID(), "a1.1");
-		assertNull(as.getAttribute("AssemblyIDs", null, null));
-		assertTrue(a.fixVersion(EnumVersion.Version_1_4));
-		assertEquals(a.getAssemblyIDs(), ai);
-		assertEquals(a.getAssemblyID(), "");
-		assertEquals(as.getAssemblyIDs(), asi);
-		assertEquals(as.getAssemblyID(), "");
+		Assertions.assertTrue(a.fixVersion(EnumVersion.Version_1_1));
+		Assertions.assertEquals(a.getAssemblyID(), "a1");
+		Assertions.assertNull(a.getAttribute("AssemblyIDs", null, null));
+		Assertions.assertEquals(as.getAssemblyID(), "a1.1");
+		Assertions.assertNull(as.getAttribute("AssemblyIDs", null, null));
+		Assertions.assertTrue(a.fixVersion(EnumVersion.Version_1_4));
+		Assertions.assertEquals(a.getAssemblyIDs(), ai);
+		Assertions.assertEquals(a.getAssemblyID(), "");
+		Assertions.assertEquals(as.getAssemblyIDs(), asi);
+		Assertions.assertEquals(as.getAssemblyID(), "");
 	}
 
 	/**
@@ -978,8 +971,8 @@ public class FixVersionTest extends JDFTestCaseBase
 		med.setWeight(42);
 		med.setGrade(1);
 
-		assertTrue(med.fixVersion(EnumVersion.Version_1_6));
-		assertEquals(EnumISOPaperSubstrate.PS1, med.getISOPaperSubstrate());
+		Assertions.assertTrue(med.fixVersion(EnumVersion.Version_1_6));
+		Assertions.assertEquals(EnumISOPaperSubstrate.PS1, med.getISOPaperSubstrate());
 	}
 
 	/**
@@ -993,7 +986,7 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFResourceLink rl = n.getLink(c, null);
 		rl.setAttribute(AttributeName.AMOUNT, "333.0");
 		n.fixVersion(null);
-		assertEquals(rl.getAttribute(AttributeName.AMOUNT), "333");
+		Assertions.assertEquals(rl.getAttribute(AttributeName.AMOUNT), "333");
 	}
 
 	/**
@@ -1006,7 +999,7 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFBendingParams c = (JDFBendingParams) n.addResource(ElementName.BENDINGPARAMS, EnumUsage.Input);
 		c.setAttribute(AttributeName.BEND, "1");
 		n.fixVersion(null);
-		assertEquals("true", c.getAttribute(AttributeName.BEND));
+		Assertions.assertEquals("true", c.getAttribute(AttributeName.BEND));
 	}
 
 	/**
@@ -1019,7 +1012,7 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFBendingParams c = (JDFBendingParams) n.addResource(ElementName.BENDINGPARAMS, EnumUsage.Input);
 		c.setAttribute(AttributeName.BEND, "0");
 		n.fixVersion(null);
-		assertEquals("false", c.getAttribute(AttributeName.BEND));
+		Assertions.assertEquals("false", c.getAttribute(AttributeName.BEND));
 	}
 
 	/**

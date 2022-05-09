@@ -2966,8 +2966,9 @@ public final class AttributeName
 	 */
 	/** */
 	public static final String SHEETOCCURRENCE = "SheetOccurrence";
-	@Deprecated
+
 	/** */
+	@Deprecated
 	public static final String SHEETOCCURENCE = SHEETOCCURRENCE;
 	/** */
 	public static final String SHEETOFFSET = "SheetOffset";

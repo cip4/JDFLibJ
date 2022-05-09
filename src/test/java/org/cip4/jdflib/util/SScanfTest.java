@@ -43,12 +43,11 @@
  */
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author MatternK
@@ -65,19 +64,19 @@ public class SScanfTest extends JDFTestCaseBase
 	{
 		Vector<Object> o = SScanf.sscanf("4", "%i");
 		Integer i2 = (Integer) o.elementAt(0);
-		assertEquals(i2.intValue(), 4);
+		Assertions.assertEquals(i2.intValue(), 4);
 		o = SScanf.sscanf("abc4", "abc%i");
 		i2 = (Integer) o.elementAt(0);
-		assertEquals(i2.intValue(), 4);
+		Assertions.assertEquals(i2.intValue(), 4);
 		o = SScanf.sscanf("abc6%", "abc%i%%");
 		i2 = (Integer) o.elementAt(0);
-		assertEquals(i2.intValue(), 6);
+		Assertions.assertEquals(i2.intValue(), 6);
 		o = SScanf.sscanf("abccv", "abc%xv");
 		i2 = (Integer) o.elementAt(0);
-		assertEquals(i2.intValue(), 12);
+		Assertions.assertEquals(i2.intValue(), 12);
 		o = SScanf.sscanf("abc55", "abc%o");
 		i2 = (Integer) o.elementAt(0);
-		assertEquals(i2.intValue(), 055);
+		Assertions.assertEquals(i2.intValue(), 055);
 	}
 
 	/**
@@ -88,7 +87,7 @@ public class SScanfTest extends JDFTestCaseBase
 	{
 		final Vector<Object> o = SScanf.sscanf("4", "%f");
 		final Double d2 = (Double) o.elementAt(0);
-		assertEquals(d2.intValue(), 4);
+		Assertions.assertEquals(d2.intValue(), 4);
 	}
 
 	/**
@@ -99,19 +98,19 @@ public class SScanfTest extends JDFTestCaseBase
 	{
 		Vector<Object> o = SScanf.sscanf("4", "%s");
 		String s2 = (String) o.elementAt(0);
-		assertEquals(s2, "4");
+		Assertions.assertEquals(s2, "4");
 		o = SScanf.sscanf("abc4", "abc%s");
 		s2 = (String) o.elementAt(0);
-		assertEquals(s2, "4");
+		Assertions.assertEquals(s2, "4");
 		o = SScanf.sscanf("abc4", "abc%s");
 		s2 = (String) o.elementAt(0);
-		assertEquals(s2, "4");
+		Assertions.assertEquals(s2, "4");
 		o = SScanf.sscanf("abc6%", "abc%1s%%");
 		s2 = (String) o.elementAt(0);
-		assertEquals(s2, "6");
+		Assertions.assertEquals(s2, "6");
 		o = SScanf.sscanf("abc7%", "abc%2c");
 		s2 = (String) o.elementAt(0);
-		assertEquals(s2, "7%");
+		Assertions.assertEquals(s2, "7%");
 	}
 
 	/**
@@ -125,25 +124,25 @@ public class SScanfTest extends JDFTestCaseBase
 		{
 			Vector<Object> o = SScanf.sscanf("4", "%s");
 			String s2 = (String) o.elementAt(0);
-			assertEquals(s2, "4");
+			Assertions.assertEquals(s2, "4");
 			o = SScanf.sscanf("abc4", "abc%s");
 			s2 = (String) o.elementAt(0);
-			assertEquals(s2, "4");
+			Assertions.assertEquals(s2, "4");
 			o = SScanf.sscanf("abc4", "abc%s");
 			s2 = (String) o.elementAt(0);
-			assertEquals(s2, "4");
+			Assertions.assertEquals(s2, "4");
 			o = SScanf.sscanf("abc6%", "abc%1s%%");
 			s2 = (String) o.elementAt(0);
-			assertEquals(s2, "6");
+			Assertions.assertEquals(s2, "6");
 			o = SScanf.sscanf("abc7%", "abc%2c");
 			s2 = (String) o.elementAt(0);
-			assertEquals(s2, "7%");
+			Assertions.assertEquals(s2, "7%");
 		}
 		System.gc();
 		ThreadUtil.sleep(123);
 		final long mem2 = new MemorySpy().getCurrentMem();
 		if (mem2 > mem)
-			assertEquals(mem2, mem, 42000000);
+			Assertions.assertEquals(mem2, mem, 42000000);
 	}
 
 	/**
@@ -155,13 +154,13 @@ public class SScanfTest extends JDFTestCaseBase
 		Vector<Object> o = SScanf.sscanf("abc 4", "%s %i");
 		String s2 = (String) o.elementAt(0);
 		Integer i2 = (Integer) o.elementAt(1);
-		assertEquals(s2, "abc");
-		assertEquals(i2.intValue(), 4);
+		Assertions.assertEquals(s2, "abc");
+		Assertions.assertEquals(i2.intValue(), 4);
 		o = SScanf.sscanf("abc 4", "a%s %i");
 		s2 = (String) o.elementAt(0);
 		i2 = (Integer) o.elementAt(1);
-		assertEquals(s2, "bc");
-		assertEquals(i2.intValue(), 4);
+		Assertions.assertEquals(s2, "bc");
+		Assertions.assertEquals(i2.intValue(), 4);
 	}
 
 }

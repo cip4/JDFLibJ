@@ -42,16 +42,11 @@
  */
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.CPUTimer.CPUTimerFactory;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -79,7 +74,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 				break;
 			}
 		}
-		assertTrue(" t=" + t.getTotalCPUTime(), t.getTotalCPUTime() > 0);
+		Assertions.assertTrue(t.getTotalCPUTime() > 0, " t=" + t.getTotalCPUTime());
 	}
 
 	/**
@@ -96,7 +91,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 				break;
 		}
 		t.stop();
-		assertTrue(t.getTotalCPUTime() > 0);
+		Assertions.assertTrue(t.getTotalCPUTime() > 0);
 	}
 
 	/**
@@ -107,7 +102,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	public void testGetSummary() throws InterruptedException
 	{
 		t.start();
-		assertNotNull(t.getSingleSummary());
+		Assertions.assertNotNull(t.getSingleSummary());
 		t.stop();
 		log.info(t.getSingleSummary());
 		log.info("TotalCPUTime: " + t.getTotalCPUTime());
@@ -132,9 +127,9 @@ public class CPUTimerTest extends JDFTestCaseBase
 			if (i > 2 && t.getTotalCPUTime() > 0)
 				break;
 		}
-		assertTrue(t.getTotalCPUTime() > 0);
-		assertEquals(t.getTotalCPUTime() / i, t.getAverageCPUTime());
-		assertEquals(t.getTotalRealTime() / i, t.getAverageRealTime());
+		Assertions.assertTrue(t.getTotalCPUTime() > 0);
+		Assertions.assertEquals(t.getTotalCPUTime() / i, t.getAverageCPUTime());
+		Assertions.assertEquals(t.getTotalRealTime() / i, t.getAverageRealTime());
 	}
 
 	/**
@@ -144,12 +139,12 @@ public class CPUTimerTest extends JDFTestCaseBase
 	public void testGetCurrentTimer()
 	{
 		CPUTimer ct0 = fac.getCurrentTimer(null);
-		assertNull(ct0);
+		Assertions.assertNull(ct0);
 		ct0 = fac.getCreateCurrentTimer(null);
-		assertNotNull(ct0);
+		Assertions.assertNotNull(ct0);
 		final CPUTimer ct1 = fac.getCreateCurrentTimer("1");
-		assertNotNull(ct1);
-		assertNotSame(ct0, ct1);
+		Assertions.assertNotNull(ct1);
+		Assertions.assertNotSame(ct0, ct1);
 	}
 
 	/**
@@ -158,8 +153,8 @@ public class CPUTimerTest extends JDFTestCaseBase
 	@Test
 	public void testGetFactory()
 	{
-		assertNotNull(CPUTimer.getFactory());
-		assertEquals(fac, CPUTimer.getFactory());
+		Assertions.assertNotNull(CPUTimer.getFactory());
+		Assertions.assertEquals(fac, CPUTimer.getFactory());
 	}
 
 	/**
@@ -185,10 +180,10 @@ public class CPUTimerTest extends JDFTestCaseBase
 			if (ii > 2 && (t.getTotalCPUTime() > 0))
 				break;
 		}
-		assertTrue(t.getTotalCPUTime() > 0);
-		assertEquals(t.getNumStarts(), ii);
-		assertEquals(t.getTotalCPUTime(), lCPU, lCPU / 13);
-		assertEquals(t.getTotalRealTime(), l, l / 13);
+		Assertions.assertTrue(t.getTotalCPUTime() > 0);
+		Assertions.assertEquals(t.getNumStarts(), ii);
+		Assertions.assertEquals(t.getTotalCPUTime(), lCPU, lCPU / 13);
+		Assertions.assertEquals(t.getTotalRealTime(), l, l / 13);
 
 	}
 
@@ -198,10 +193,10 @@ public class CPUTimerTest extends JDFTestCaseBase
 	@Test
 	public void testAverage()
 	{
-		assertEquals(0, t.getAverageRealTime());
-		assertEquals(0, t.getAverageCPUTime());
-		assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime());
-		assertEquals(t.getTotalRealTime(), t.getAverageRealTime());
+		Assertions.assertEquals(0, t.getAverageRealTime());
+		Assertions.assertEquals(0, t.getAverageCPUTime());
+		Assertions.assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime());
+		Assertions.assertEquals(t.getTotalRealTime(), t.getAverageRealTime());
 
 		t.start();
 		int i = 0;
@@ -214,17 +209,17 @@ public class CPUTimerTest extends JDFTestCaseBase
 			if (i > 2 && t.getTotalCPUTime() > 0)
 				break;
 		}
-		assertTrue(t.getTotalCPUTime() > 0);
-		assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime(), t.getAverageCPUTime() / i);
-		assertEquals(t.getTotalRealTime(), t.getAverageRealTime(), t.getAverageRealTime() / i);
+		Assertions.assertTrue(t.getTotalCPUTime() > 0);
+		Assertions.assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime(), t.getAverageCPUTime() / i);
+		Assertions.assertEquals(t.getTotalRealTime(), t.getAverageRealTime(), t.getAverageRealTime() / i);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 * @throws Exception
 	 */
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -233,7 +228,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#toString()
+	 * @see JDFTestCaseBase#toString()
 	 * @return
 	 */
 	@Override

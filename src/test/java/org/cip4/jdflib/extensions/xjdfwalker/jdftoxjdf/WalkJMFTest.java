@@ -68,9 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
@@ -80,7 +77,8 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkJMFTest extends JDFTestCaseBase
 {
@@ -100,8 +98,8 @@ public class WalkJMFTest extends JDFTestCaseBase
 		KElement xjmf = new JDFToXJDF().convert(jmf);
 
 		KElement sender = xjmf.getElement(XJDFConstants.Header);
-		assertNull(sender.getNonEmpty(AttributeName.SENDERID));
-		assertEquals(sender.getNonEmpty(AttributeName.DEVICEID), "s1");
+		Assertions.assertNull(sender.getNonEmpty(AttributeName.SENDERID));
+		Assertions.assertEquals(sender.getNonEmpty(AttributeName.DEVICEID), "s1");
 	}
 
 	/**
@@ -118,8 +116,8 @@ public class WalkJMFTest extends JDFTestCaseBase
 
 		KElement xjmf = new JDFToXJDF().convert(jmf);
 
-		assertNull(xjmf.getNonEmpty(AttributeName.XSITYPE));
-		assertNull(xjmf.getNonEmpty(AttributeName.XMLNSXSI));
+		Assertions.assertNull(xjmf.getNonEmpty(AttributeName.XSITYPE));
+		Assertions.assertNull(xjmf.getNonEmpty(AttributeName.XMLNSXSI));
 	}
 
 }

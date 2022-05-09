@@ -70,12 +70,11 @@
  */
 package org.cip4.jdflib.util.file;
 
-import static org.junit.Assert.assertNotSame;
-
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -92,6 +91,6 @@ public class UserDirTest extends JDFTestCaseBase
 	public void testNotDot() throws Exception
 	{
 		UserDir d = new UserDir("myTool");
-		assertNotSame(new File(d.getToolsPath()).getCanonicalPath(), new File(".").getCanonicalPath());
+		Assertions.assertNotSame(new File(d.getToolsPath()).getCanonicalPath(), new File(".").getCanonicalPath());
 	}
 }

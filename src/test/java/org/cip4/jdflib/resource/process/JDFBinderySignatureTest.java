@@ -36,13 +36,12 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFBinderySignatureTest extends JDFTestCaseBase
 {
@@ -56,7 +55,7 @@ public class JDFBinderySignatureTest extends JDFTestCaseBase
 	{
 		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.setFoldCatalog("F4-1");
-		assertEquals(EnumBinderySignatureType.Fold, bs.getBinderySignatureType());
+		Assertions.assertEquals(EnumBinderySignatureType.Fold, bs.getBinderySignatureType());
 	}
 
 	/**
@@ -68,7 +67,7 @@ public class JDFBinderySignatureTest extends JDFTestCaseBase
 	{
 		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.setNumberUp(3, 3);
-		assertEquals(EnumBinderySignatureType.Fold, bs.getBinderySignatureType());
+		Assertions.assertEquals(EnumBinderySignatureType.Fold, bs.getBinderySignatureType());
 	}
 
 	/**
@@ -80,7 +79,7 @@ public class JDFBinderySignatureTest extends JDFTestCaseBase
 	{
 		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.appendDieLayout();
-		assertEquals(EnumBinderySignatureType.Die, bs.getBinderySignatureType());
+		Assertions.assertEquals(EnumBinderySignatureType.Die, bs.getBinderySignatureType());
 	}
 
 }

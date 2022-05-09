@@ -36,16 +36,13 @@
  */
 package org.cip4.jdflib.util.hotfolder;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class StorageHotFolderListenerTest extends JDFTestCaseBase
 {
@@ -92,7 +89,7 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		FileUtil.deleteAll(theHFDir);
 		theHFDir.mkdirs();
 		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new DummyListener(), null);
-		assertNotNull(hl);
+		Assertions.assertNotNull(hl);
 	}
 
 	/**
@@ -105,7 +102,7 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		FileUtil.deleteAll(theHFDir);
 		theHFDir.mkdirs();
 		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
-		assertFalse(hl.hotFile(new File("a")));
+		Assertions.assertFalse(hl.hotFile(new File("a")));
 	}
 
 	/**
@@ -121,7 +118,7 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		final File file = new File(theHFDir, "a");
 		file.createNewFile();
 		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
-		assertFalse(hl.hotFile(file));
+		Assertions.assertFalse(hl.hotFile(file));
 	}
 
 	/**
@@ -141,10 +138,10 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
 		hl.setOKStorage(new File("ok"));
 		hl.setErrorStorage(new File("nok"));
-		assertTrue(hl.handleBad(file, true));
-		assertFalse(file.exists());
-		assertTrue(hl.handleBad(file2, false));
-		assertFalse(file2.exists());
+		Assertions.assertTrue(hl.handleBad(file, true));
+		Assertions.assertFalse(file.exists());
+		Assertions.assertTrue(hl.handleBad(file2, false));
+		Assertions.assertFalse(file2.exists());
 	}
 
 }

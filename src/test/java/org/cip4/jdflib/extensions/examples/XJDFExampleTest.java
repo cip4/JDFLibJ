@@ -68,9 +68,6 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -86,7 +83,9 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JDFDate;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 import org.w3c.dom.Comment;
 
 /**
@@ -124,8 +123,8 @@ public class XJDFExampleTest extends ExampleTest
 		final SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
 		final ResourceHelper rh = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		setSnippet(rh.getRoot(), true);
-		assertTrue(xjdfHelper.toString().indexOf("<!-- START SNIPPET -->") > 0);
-		assertTrue(xjdfHelper.toString().indexOf("<!-- END SNIPPET -->") > 0);
+		Assertions.assertTrue(xjdfHelper.toString().indexOf("<!-- START SNIPPET -->") > 0);
+		Assertions.assertTrue(xjdfHelper.toString().indexOf("<!-- END SNIPPET -->") > 0);
 	}
 
 	/**
@@ -138,10 +137,10 @@ public class XJDFExampleTest extends ExampleTest
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
 		final KElement ap = xjdfHelper.getAuditPool().getRoot();
-		assertTrue(ap.getPreviousSibling() instanceof Comment);
-		assertEquals(ap.getPreviousSibling().getNodeValue(), " END SNIPPET ");
-		assertTrue(ap.getNextSibling() instanceof Comment);
-		assertEquals(ap.getNextSibling().getNodeValue(), " START SNIPPET ");
+		Assertions.assertTrue(ap.getPreviousSibling() instanceof Comment);
+		Assertions.assertEquals(ap.getPreviousSibling().getNodeValue(), " END SNIPPET ");
+		Assertions.assertTrue(ap.getNextSibling() instanceof Comment);
+		Assertions.assertEquals(ap.getNextSibling().getNodeValue(), " START SNIPPET ");
 	}
 
 	/**
@@ -154,10 +153,10 @@ public class XJDFExampleTest extends ExampleTest
 		setSnippet(xjdfHelper.getAuditPool(), false);
 		setSnippet(xjdfHelper, true);
 		final KElement ap = xjdfHelper.getAuditPool().getRoot();
-		assertTrue(ap.getPreviousSibling() instanceof Comment);
-		assertEquals(ap.getPreviousSibling().getNodeValue(), " END SNIPPET ");
-		assertTrue(ap.getNextSibling() instanceof Comment);
-		assertEquals(ap.getNextSibling().getNodeValue(), " START SNIPPET ");
+		Assertions.assertTrue(ap.getPreviousSibling() instanceof Comment);
+		Assertions.assertEquals(ap.getPreviousSibling().getNodeValue(), " END SNIPPET ");
+		Assertions.assertTrue(ap.getNextSibling() instanceof Comment);
+		Assertions.assertEquals(ap.getNextSibling().getNodeValue(), " START SNIPPET ");
 	}
 
 	/**
@@ -171,8 +170,8 @@ public class XJDFExampleTest extends ExampleTest
 		shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		final KElement root = xjdfHelper.getRoot();
 		setSnippet(root, true);
-		assertTrue(root.getOwnerDocument_KElement().write2String(2).indexOf("<!-- START SNIPPET -->") > 0);
-		assertTrue(root.getOwnerDocument_KElement().write2String(2).indexOf("<!-- END SNIPPET -->") > 0);
+		Assertions.assertTrue(root.getOwnerDocument_KElement().write2String(2).indexOf("<!-- START SNIPPET -->") > 0);
+		Assertions.assertTrue(root.getOwnerDocument_KElement().write2String(2).indexOf("<!-- END SNIPPET -->") > 0);
 	}
 
 	/**
@@ -252,6 +251,7 @@ public class XJDFExampleTest extends ExampleTest
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

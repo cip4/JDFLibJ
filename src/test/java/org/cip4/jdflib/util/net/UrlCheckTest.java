@@ -36,16 +36,13 @@
  */
 package org.cip4.jdflib.util.net;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -71,7 +68,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 				break;
 		}
 
-		assertNotNull(ping);
+		Assertions.assertNotNull(ping);
 	}
 
 	/**
@@ -94,7 +91,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 				break;
 		}
 
-		assertNotNull(ping);
+		Assertions.assertNotNull(ping);
 	}
 
 	/**
@@ -107,7 +104,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 		final HTTPDetails det = new HTTPDetails();
 		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.setHTTPDetails(det);
-		assertNotNull(urlCheck.toString());
+		Assertions.assertNotNull(urlCheck.toString());
 	}
 
 	/**
@@ -122,7 +119,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.setBuffer(true);
 		final UrlPart ping = urlCheck.ping(5555);
-		assertNotNull(ping.getResponseStream());
+		Assertions.assertNotNull(ping.getResponseStream());
 	}
 
 	/**
@@ -134,7 +131,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		assertEquals(200, new UrlCheck("https://www.google.com").pingRC(8888));
+		Assertions.assertEquals(200, new UrlCheck("https://www.google.com").pingRC(8888));
 	}
 
 	/**
@@ -146,7 +143,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		assertEquals(200, new UrlCheck("https://www.google.com", UrlUtil.GET).pingRC(5555));
+		Assertions.assertEquals(200, new UrlCheck("https://www.google.com", UrlUtil.GET).pingRC(5555));
 	}
 
 	/**
@@ -161,7 +158,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 			return;
 		final UrlCheck urlCheck = new UrlCheck("https://www.google.com", UrlUtil.POST);
 		urlCheck.setStream(new ByteArrayIOStream("test".getBytes()).getInputStream());
-		assertTrue("Google does not accept post... ", urlCheck.pingRC(8888) > 200);
+		Assertions.assertTrue(urlCheck.pingRC(8888) > 200, "Google does not accept post... ");
 	}
 
 	/**
@@ -176,6 +173,6 @@ public class UrlCheckTest extends JDFTestCaseBase
 		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.startPing(5555);
 		ThreadUtil.sleep(111);
-		assertEquals(200, urlCheck.getPingRC());
+		Assertions.assertEquals(200, urlCheck.getPingRC());
 	}
 }

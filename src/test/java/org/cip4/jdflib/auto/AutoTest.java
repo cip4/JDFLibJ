@@ -78,12 +78,10 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFAdhesiveBindingParams;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import junit.framework.TestCase;
-
-public class AutoTest extends TestCase
-{
+public class AutoTest {
 	// Beware!
 	// These tests are for checking versioning and JDFValidator internal details
 	@Test
@@ -103,12 +101,12 @@ public class AutoTest extends TestCase
 		vDeprecated = adhesiveBindingParam.getTheElementInfo().deprecatedElements();
 		adhesiveBindingParam.appendGlueApplication();
 		vDeprecated = adhesiveBindingParam.getDeprecatedElements(99999999);
-		assertTrue(vDeprecated.contains(ElementName.GLUEAPPLICATION));
+		Assertions.assertTrue(vDeprecated.contains(ElementName.GLUEAPPLICATION));
 
 		root.setVersion(JDFElement.EnumVersion.Version_1_0);
 		adhesiveBindingParam.init();
 		vDeprecated = adhesiveBindingParam.getDeprecatedElements(99999999);
-		assertEquals(0, vDeprecated.size());
+		Assertions.assertEquals(0, vDeprecated.size());
 
 		// check MarkObject/DeviceMark
 		//
@@ -117,15 +115,15 @@ public class AutoTest extends TestCase
 		final JDFMarkObject markObject = layout.appendMarkObject();
 		markObject.appendDeviceMark();
 		vPrerelease = markObject.getPrereleaseElements(99999999);
-		assertTrue(vPrerelease.contains(ElementName.DEVICEMARK));
+		Assertions.assertTrue(vPrerelease.contains(ElementName.DEVICEMARK));
 
 		root.setVersion(JDFElement.EnumVersion.Version_1_1);
 		vOptional = markObject.getTheElementInfo().optionalElements();
-		assertTrue(vOptional.contains(ElementName.DEVICEMARK));
+		Assertions.assertTrue(vOptional.contains(ElementName.DEVICEMARK));
 
 		root.setVersion(JDFElement.EnumVersion.Version_1_2);
 		vOptional = markObject.getTheElementInfo().optionalElements();
-		assertTrue(vOptional.contains(ElementName.DEVICEMARK));
+		Assertions.assertTrue(vOptional.contains(ElementName.DEVICEMARK));
 
 		// DeviceMark is again allowed in 1.4
 		// root.setVersion(JDFElement.EnumVersion.Version_1_3);

@@ -36,10 +36,6 @@
  */
 package org.cip4.jdflib.elementwalker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -51,7 +47,8 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.CPUTimer;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -75,7 +72,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		ensure.addNS("n1", "www.n1.com");
 		ensure.walk(root);
 
-		assertTrue(root.toXML().indexOf("n6") < 0);
+		Assertions.assertTrue(root.toXML().indexOf("n6") < 0);
 	}
 
 	/**
@@ -96,8 +93,8 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		final EnsureNSUri ensure = new EnsureNSUri();
 		ensure.walk(root);
 
-		assertEquals(e.getPrefix(), "n1");
-		assertEquals(e2.getPrefix(), "n1");
+		Assertions.assertEquals(e.getPrefix(), "n1");
+		Assertions.assertEquals(e2.getPrefix(), "n1");
 	}
 
 	/**
@@ -117,9 +114,9 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		ensure.addAlias("blub", null);
 		ensure.walk(root);
 
-		assertTrue(root.toXML().indexOf("n6") < 0);
-		assertTrue(root.toXML().indexOf("n7") < 0);
-		assertTrue(root.toXML().indexOf("blub") < 0);
+		Assertions.assertTrue(root.toXML().indexOf("n6") < 0);
+		Assertions.assertTrue(root.toXML().indexOf("n7") < 0);
+		Assertions.assertTrue(root.toXML().indexOf("blub") < 0);
 	}
 
 	/**
@@ -137,7 +134,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		final EnsureNSUri ensure = new EnsureNSUri();
 		ensure.addNS("xxx", "blah.com");
 		ensure.walk(root);
-		assertEquals(root.toXML().indexOf("xxx:ccc"), -1);
+		Assertions.assertEquals(root.toXML().indexOf("xxx:ccc"), -1);
 	}
 
 	/**
@@ -175,7 +172,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		final EnsureNSUri ensure = new EnsureNSUri();
 		ensure.addNS("xxx", "bar.com");
 		ensure.walk(root);
-		assertTrue(root.toXML().indexOf("xxx:bar") > 0);
+		Assertions.assertTrue(root.toXML().indexOf("xxx:bar") > 0);
 	}
 
 	/**
@@ -193,8 +190,8 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		final EnsureNSUri ensure = new EnsureNSUri();
 		ensure.addNS(null, "foo.com");
 		ensure.walk(root);
-		assertEquals(root.toXML().indexOf("bar:"), -1);
-		assertEquals(root.toXML().indexOf("gg:"), -1);
+		Assertions.assertEquals(root.toXML().indexOf("bar:"), -1);
+		Assertions.assertEquals(root.toXML().indexOf("gg:"), -1);
 	}
 
 	/**
@@ -220,10 +217,10 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		ensure.addAlias("n2", "n1");
 		ensure.walk(root);
 
-		assertTrue(root.toXML().indexOf("n2") < 0);
-		assertTrue("undeclared n3 namespace is retained", root.toXML().indexOf("n3:test") > 0);
-		assertTrue(root.toXML().indexOf("<n3:next") > 0);
-		assertTrue(root.toXML().indexOf("<n3:foofoo") > 0);
+		Assertions.assertTrue(root.toXML().indexOf("n2") < 0);
+		Assertions.assertTrue(root.toXML().indexOf("n3:test") > 0, "undeclared n3 namespace is retained");
+		Assertions.assertTrue(root.toXML().indexOf("<n3:next") > 0);
+		Assertions.assertTrue(root.toXML().indexOf("<n3:foofoo") > 0);
 	}
 
 	/**
@@ -242,7 +239,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		ensure.addAlias("jdf", "");
 
 		ensure.walk(jdfRoot);
-		assertTrue(jdfRoot.toXML().indexOf("jdf:") < 0);
+		Assertions.assertTrue(jdfRoot.toXML().indexOf("jdf:") < 0);
 
 	}
 
@@ -267,9 +264,9 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		ensure.addNS("n1", "www.n1.com");
 		ensure.walk(root);
 
-		assertTrue(root.toXML().indexOf("n2:") < 0);
-		assertTrue("undeclared n3 namespace is retained", root.toXML().indexOf("n3:test") > 0);
-		assertTrue(root.toXML().indexOf("<n3:next") > 0);
+		Assertions.assertTrue(root.toXML().indexOf("n2:") < 0);
+		Assertions.assertTrue(root.toXML().indexOf("n3:test") > 0, "undeclared n3 namespace is retained");
+		Assertions.assertTrue(root.toXML().indexOf("<n3:next") > 0);
 	}
 
 	/**
@@ -279,19 +276,19 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	public void testBigEnsureNS()
 	{
 		final File f = new File(sm_dirTestData + "evilparts.jdf");
-		assertTrue(String.format("File %s not exists.", sm_dirTestData + "evilparts.jdf"), f.exists());
+		Assertions.assertTrue(f.exists(), String.format("File %s not exists.", sm_dirTestData + "evilparts.jdf"));
 
 		final CPUTimer ct = new CPUTimer(true);
 		final XMLDoc d = XMLDoc.parseFile(sm_dirTestData + "evilparts.jdf");
 		final KElement root = d.getRoot();
-		assertNotNull(root);
+		Assertions.assertNotNull(root);
 		final EnsureNSUri ensure = new EnsureNSUri();
 		ensure.addNS("HDM", "www.hdm.com");
 		ensure.walk(root);
 		ct.stop();
 		System.out.println(ct);
 
-		assertTrue(root.toXML().indexOf("schema/HDM") < 0);
+		Assertions.assertTrue(root.toXML().indexOf("schema/HDM") < 0);
 
 	}
 }

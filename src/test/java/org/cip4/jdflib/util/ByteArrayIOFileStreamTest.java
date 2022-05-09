@@ -43,11 +43,6 @@
  */
 package org.cip4.jdflib.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -56,7 +51,8 @@ import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -75,7 +71,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 		for (int i = 0; i < 12345; i++)
 		{
 			ios.write(i);
-			assertEquals(ios.size(), 1 + i);
+			Assertions.assertEquals(ios.size(), 1 + i);
 		}
 		ios.close();
 
@@ -92,10 +88,10 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 		for (int i = 0; i < 12345; i++)
 		{
 			ios.write(i);
-			assertEquals(ios.size(), 1 + i);
+			Assertions.assertEquals(ios.size(), 1 + i);
 		}
 		ios.flush();
-		assertEquals(12345, ios.getFile().length());
+		Assertions.assertEquals(12345, ios.getFile().length());
 		ios.close();
 	}
 
@@ -111,12 +107,12 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 			ios.write(i);
 		}
 		final ByteArrayIOInputStream in = ios.getInputStream();
-		assertEquals(0, in.tell());
+		Assertions.assertEquals(0, in.tell());
 		in.seek(-1);
-		assertTrue(in.read() >= 0);
-		assertTrue(in.read() < 0);
+		Assertions.assertTrue(in.read() >= 0);
+		Assertions.assertTrue(in.read() < 0);
 		in.seek(42);
-		assertEquals(42, in.tell());
+		Assertions.assertEquals(42, in.tell());
 		ios.close();
 	}
 
@@ -136,7 +132,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 		final ByteArrayInputStream is2 = ios2.getInputStream();
 		for (int i = 0; i < 123457; i++)
 		{
-			assertEquals(is1.read(), is2.read());
+			Assertions.assertEquals(is1.read(), is2.read());
 		}
 		ios.close();
 		ios2.close();
@@ -162,14 +158,14 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 		InputStream is = ios.getInputStream();
 		for (int i = 0; i < 20000; i++)
 		{
-			assertEquals(is.read(), i % 256);
+			Assertions.assertEquals(is.read(), i % 256);
 		}
 		ios.close();
 		ios = new ByteArrayIOFileStream(f, 333333, true);
 		is = ios.getInputStream();
 		for (int i = 0; i < 20000; i++)
 		{
-			assertEquals(is.read(), i % 256);
+			Assertions.assertEquals(is.read(), i % 256);
 		}
 		ios.close();
 	}
@@ -184,16 +180,16 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 		File f = new File(sm_dirTestDataTemp + "bios1.fil");
 		f.delete();
 		ThreadUtil.sleep(123);
-		assertFalse(f.exists());
+		Assertions.assertFalse(f.exists());
 		ByteArrayIOStream ios = new ByteArrayIOFileStream(f, 200, true);
 		InputStream is = ios.getInputStream();
-		assertEquals(is.available(), 0);
+		Assertions.assertEquals(is.available(), 0);
 		ios.close();
 		// now null
 		f = null;
 		ios = new ByteArrayIOFileStream(f, 200, true);
 		is = ios.getInputStream();
-		assertEquals(is.available(), 0);
+		Assertions.assertEquals(is.available(), 0);
 		ios.close();
 	}
 
@@ -213,10 +209,10 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 		int i;
 		while ((i = is.read()) >= 0)
 		{
-			assertEquals("" + n, i, n % 256);
+			Assertions.assertEquals(i, n % 256, "" + n);
 			n++;
 		}
-		assertEquals(n, 200000);
+		Assertions.assertEquals(n, 200000);
 		ios.close();
 	}
 
@@ -239,11 +235,11 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 		while ((i = is.read()) >= 0)
 		{
 			final int jj = is2.read();
-			assertEquals("" + n, i, n % 256);
-			assertEquals(jj, i);
+			Assertions.assertEquals(i, n % 256, "" + n);
+			Assertions.assertEquals(jj, i);
 			n++;
 		}
-		assertEquals(n, len);
+		Assertions.assertEquals(n, len);
 		ios.close();
 	}
 
@@ -264,7 +260,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 		try
 		{
 			is.skip(4);
-			fail("");
+			Assertions.fail("");
 		}
 		catch (final Exception e)
 		{
@@ -292,7 +288,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 		try
 		{
 			final long n = is.skip(4);
-			assertEquals(0, n);
+			Assertions.assertEquals(0, n);
 		}
 		catch (final IOException e)
 		{
@@ -320,11 +316,11 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 		while ((i = is.read()) >= 0)
 		{
 			final int jj = is2.read();
-			assertEquals("" + n, i, n % 256);
-			assertEquals(jj, i);
+			Assertions.assertEquals(i, n % 256, "" + n);
+			Assertions.assertEquals(jj, i);
 			n++;
 		}
-		assertEquals(n, len);
+		Assertions.assertEquals(n, len);
 		ios.close();
 	}
 
@@ -347,11 +343,11 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 		while ((i = is.read()) >= 0)
 		{
 			final int jj = is2.read();
-			assertEquals("" + n, i, n % 256);
-			assertEquals(jj, i);
+			Assertions.assertEquals(i, n % 256, "" + n);
+			Assertions.assertEquals(jj, i);
 			n++;
 		}
-		assertEquals(n, len);
+		Assertions.assertEquals(n, len);
 		ios.close();
 	}
 
@@ -389,7 +385,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 			}
 			n++;
 		}
-		assertEquals(n, len);
+		Assertions.assertEquals(n, len);
 	}
 
 }

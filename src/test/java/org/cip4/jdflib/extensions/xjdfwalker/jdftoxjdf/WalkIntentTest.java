@@ -68,9 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -93,7 +90,8 @@ import org.cip4.jdflib.resource.process.postpress.JDFHole;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
 import org.cip4.jdflib.span.JDFSpanMethod.EnumSpanMethod;
 import org.cip4.jdflib.span.JDFSpanProofType.EnumSpanProofType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkIntentTest extends JDFTestCaseBase
 {
@@ -110,8 +108,8 @@ public class WalkIntentTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 
 		KElement xjdf = conv.makeNewJDF(n, null);
-		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/ProofingIntent"));
-		assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/ContentCheckIntent/ProofItem/@ProofType", null), EnumSpanProofType.Page.getName());
+		Assertions.assertNull(xjdf.getXPathElement("ProductList/Product/Intent/ProofingIntent"));
+		Assertions.assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/ContentCheckIntent/ProofItem/@ProofType", null), EnumSpanProofType.Page.getName());
 	}
 
 	/**
@@ -127,8 +125,8 @@ public class WalkIntentTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 
 		KElement xjdf = conv.makeNewJDF(n, null);
-		assertNull("F4-1", xjdf.getXPathAttribute("ProductList/Product/Intent/FoldingIntent/@FoldingCatalog", null));
-		assertEquals("F4-1", xjdf.getXPathAttribute("ProductList/Product/Intent/FoldingIntent/@FoldCatalog", null));
+		Assertions.assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/FoldingIntent/@FoldingCatalog", null), "F4-1");
+		Assertions.assertEquals("F4-1", xjdf.getXPathAttribute("ProductList/Product/Intent/FoldingIntent/@FoldCatalog", null));
 	}
 
 	/**
@@ -145,9 +143,9 @@ public class WalkIntentTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 
 		KElement xjdf = conv.makeNewJDF(n, null);
-		assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/@Extent", null));
-		assertEquals("21 44", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Extent", null));
-		assertEquals("R2i-US-b", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Pattern", null));
+		Assertions.assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/@Extent", null));
+		Assertions.assertEquals("21 44", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Extent", null));
+		Assertions.assertEquals("R2i-US-b", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Pattern", null));
 	}
 
 	/**
@@ -168,10 +166,10 @@ public class WalkIntentTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 
 		KElement xjdf = conv.makeNewJDF(n, null);
-		assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/@Extent", null));
-		assertEquals("3 5", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Extent", null));
-		assertEquals("3", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Pitch", null));
-		assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Pattern", null));
+		Assertions.assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/@Extent", null));
+		Assertions.assertEquals("3 5", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Extent", null));
+		Assertions.assertEquals("3", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Pitch", null));
+		Assertions.assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Pattern", null));
 	}
 
 	/**
@@ -191,9 +189,9 @@ public class WalkIntentTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 
 		KElement xjdf = conv.makeNewJDF(n, null);
-		assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/@Extent", null));
-		assertEquals("3 5", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Extent", null));
-		assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Pattern", null));
+		Assertions.assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/@Extent", null));
+		Assertions.assertEquals("3 5", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Extent", null));
+		Assertions.assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Pattern", null));
 	}
 
 	/**
@@ -212,8 +210,8 @@ public class WalkIntentTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 
 		KElement xjdf = conv.makeNewJDF(n, null);
-		assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/InsertingIntent", null));
-		assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/AssemblingIntent/BlowIn/@FolioFrom", null), "1");
-		assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/AssemblingIntent/BlowIn/@FolioTo", null), "4");
+		Assertions.assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/InsertingIntent", null));
+		Assertions.assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/AssemblingIntent/BlowIn/@FolioFrom", null), "1");
+		Assertions.assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/AssemblingIntent/BlowIn/@FolioTo", null), "4");
 	}
 }

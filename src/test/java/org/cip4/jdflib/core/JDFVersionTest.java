@@ -70,14 +70,13 @@
  */
 package org.cip4.jdflib.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
 import java.lang.reflect.Method;
 
 import org.apache.commons.lang.StringUtils;
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case for JDFVersion.
@@ -99,7 +98,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 		final String actual = JDFVersion.LIB_ARTIFACT_ID;
 
 		// assert
-		assertEquals("ArtifactID number is wrong.", expected, actual);
+		Assertions.assertEquals(expected, actual, "ArtifactID number is wrong.");
 		System.out.println("JDFLibJ ArtifactID: " + actual);
 	}
 
@@ -116,7 +115,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 		final String actual = JDFVersion.LIB_NAME;
 
 		// assert
-		assertEquals("Name number is wrong.", expected, actual);
+		Assertions.assertEquals(expected, actual, "Name number is wrong.");
 		System.out.println("JDFLibJ Name: " + actual);
 	}
 
@@ -148,7 +147,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 		final String actual = JDFVersion.LIB_VERSION;
 
 		// assert
-		assertFalse("Version is wrong.", StringUtils.isEmpty(actual));
+		Assertions.assertFalse(StringUtils.isEmpty(actual), "Version is wrong.");
 		System.out.println("JDFLibJ Version: " + actual);
 	}
 
@@ -164,9 +163,9 @@ public class JDFVersionTest extends JDFTestCaseBase
 		final String actual = JDFVersion.LIB_MAJOR_VERSION;
 
 		// assert
-		assertFalse("Version is wrong.", StringUtils.isEmpty(actual));
-		assertEquals("Major Version is wrong.", 3, StringUtils.split(actual, ".").length);
-		assertEquals("Major Version is wrong.", 1, StringUtils.split(actual, "-").length);
+		Assertions.assertFalse(StringUtils.isEmpty(actual), "Version is wrong.");
+		Assertions.assertEquals(3, StringUtils.split(actual, ".").length, "Major Version is wrong.");
+		Assertions.assertEquals(1, StringUtils.split(actual, "-").length, "Major Version is wrong.");
 		System.out.println("JDFLibJ Major Version: " + actual);
 	}
 
@@ -182,9 +181,9 @@ public class JDFVersionTest extends JDFTestCaseBase
 		final String actual = JDFVersion.LIB_MINOR_VERSION;
 
 		// assert
-		assertFalse("Version is wrong.", StringUtils.isEmpty(actual));
-		assertEquals("Major Version is wrong.", 1, StringUtils.split(actual, ".").length);
-		assertEquals("Major Version is wrong.", 1, StringUtils.split(actual, "-").length);
+		Assertions.assertFalse(StringUtils.isEmpty(actual), "Version is wrong.");
+		Assertions.assertEquals(1, StringUtils.split(actual, ".").length, "Major Version is wrong.");
+		Assertions.assertEquals(1, StringUtils.split(actual, "-").length, "Major Version is wrong.");
 		System.out.println("JDFLibJ Major Version: " + actual);
 	}
 
@@ -200,7 +199,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 		final String actual = JDFVersion.JDF_VERSION;
 
 		// assert
-		assertEquals("JDF Version number is wrong.", expected, actual);
+		Assertions.assertEquals(expected, actual, "JDF Version number is wrong.");
 		System.out.println("JDF Version: " + actual);
 	}
 
@@ -221,7 +220,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 		final String extractedVersion = libVersion.substring(i, n);
 
 		// assert
-		assertEquals("JDF Version doesn't match the Lib Version.", jdfVersion, extractedVersion);
+		Assertions.assertEquals(jdfVersion, extractedVersion, "JDF Version doesn't match the Lib Version.");
 		System.out.println(String.format("JDF Version: %s - Lib Version: %s (OK)", jdfVersion, libVersion));
 	}
 
@@ -242,7 +241,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 		final String actual = (String) method.invoke(null, version);
 
 		// assert
-		assertEquals("Minor Version is wrong.", expected, actual);
+		Assertions.assertEquals(expected, actual, "Minor Version is wrong.");
 	}
 
 	@Test
@@ -262,7 +261,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 		final String actual = (String) method.invoke(null, version);
 
 		// assert
-		assertEquals("Minor Version is wrong.", expected, actual);
+		Assertions.assertEquals(expected, actual, "Minor Version is wrong.");
 	}
 
 	@Test
@@ -282,7 +281,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 		final String actual = (String) method.invoke(null, version);
 
 		// assert
-		assertEquals("Major Version is wrong.", expected, actual);
+		Assertions.assertEquals(expected, actual, "Major Version is wrong.");
 	}
 
 	@Test
@@ -302,13 +301,14 @@ public class JDFVersionTest extends JDFTestCaseBase
 		final String actual = (String) method.invoke(null, version);
 
 		// assert
-		assertEquals("Major Version is wrong.", expected, actual);
+		Assertions.assertEquals(expected, actual, "Major Version is wrong.");
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		try

@@ -82,21 +82,22 @@ import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.devicecapability.JDFNumberState;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 public class JDFNumberStateTest extends JDFTestCaseBase
 {
 
 	JDFNumberState iState = null;
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -121,8 +122,8 @@ public class JDFNumberStateTest extends JDFTestCaseBase
 		// list.append(12);
 
 		state.setListType(EnumListType.RangeList);
-		Assert.assertFalse("ListType=RangeList", state.fitsValue(list.toString(),
-				JDFBaseDataTypes.EnumFitsValue.Allowed));
+		Assertions.assertFalse(state.fitsValue(list.toString(),
+				EnumFitsValue.Allowed), "ListType=RangeList");
 
 		JDFNumberRangeList list2 = new JDFNumberRangeList();
 		list2.append(new JDFNumberRange(1, 12.5)); // 1~-2
@@ -132,8 +133,8 @@ public class JDFNumberStateTest extends JDFTestCaseBase
 
 		state.setAllowedValueList(allowedVL); // new AllowedVlaueList
 
-		Assert.assertTrue(state.fitsValue(list2.toString(),
-				JDFBaseDataTypes.EnumFitsValue.Allowed));
+		Assertions.assertTrue(state.fitsValue(list2.toString(),
+				EnumFitsValue.Allowed));
 
 		list.erase(list.size() - 1); // erase "1~12"
 		list.append(2);
@@ -141,9 +142,8 @@ public class JDFNumberStateTest extends JDFTestCaseBase
 		list.append(22);
 		state.setListType(EnumListType.List);
 		state.setAllowedValueMod(new JDFXYPair(10, 2));
-		Assert.assertTrue("ListType=List, ValueMod=" + state.getAllowedValueMod(),
-				state.fitsValue(list.toString(),
-						JDFBaseDataTypes.EnumFitsValue.Allowed));
+		Assertions.assertTrue(state.fitsValue(list.toString(),
+                EnumFitsValue.Allowed), "ListType=List, ValueMod=" + state.getAllowedValueMod());
 	}
 
 	// //////////////////////////////////////////////////////////
@@ -153,9 +153,9 @@ public class JDFNumberStateTest extends JDFTestCaseBase
 	{
 		final JDFNumberList integerList = new JDFNumberList("1 2 3");
 		iState.setCurrentValue(integerList);
-		Assert.assertEquals(iState.getCurrentValue(), integerList);
+		Assertions.assertEquals(iState.getCurrentValue(), integerList);
 		iState.setCurrentValue(1);
-		Assert.assertEquals(iState.getCurrentValue(), new JDFNumberList("1"));
+		Assertions.assertEquals(iState.getCurrentValue(), new JDFNumberList("1"));
 
 	}
 
@@ -165,9 +165,9 @@ public class JDFNumberStateTest extends JDFTestCaseBase
 	{
 		final JDFNumberList integerList = new JDFNumberList("1 2 3");
 		iState.setDefaultValue(integerList);
-		Assert.assertEquals(iState.getDefaultValue(), integerList);
+		Assertions.assertEquals(iState.getDefaultValue(), integerList);
 		iState.setDefaultValue(1);
-		Assert.assertEquals(iState.getDefaultValue(), new JDFNumberList("1"));
+		Assertions.assertEquals(iState.getDefaultValue(), new JDFNumberList("1"));
 
 	}
 
@@ -180,12 +180,12 @@ public class JDFNumberStateTest extends JDFTestCaseBase
 				"1 2 3 4 ~ 44");
 		iState.setAllowedValueList(integerList);
 		iState.addValue("24", EnumFitsValue.Allowed);
-		Assert.assertEquals(iState.getAllowedValueList(), integerList);
+		Assertions.assertEquals(iState.getAllowedValueList(), integerList);
 		iState.addValue("45", EnumFitsValue.Allowed);
-		Assert.assertEquals(iState.getAllowedValueList(), new JDFNumberRangeList(
+		Assertions.assertEquals(iState.getAllowedValueList(), new JDFNumberRangeList(
 				"1 2 3 4 ~ 44 45"));
 		iState.addValue("48", EnumFitsValue.Present);
-		Assert.assertEquals(iState.getPresentValueList(), new JDFNumberRangeList("48"));
+		Assertions.assertEquals(iState.getPresentValueList(), new JDFNumberRangeList("48"));
 	}
 
 	// //////////////////////////////////////////////////////////
@@ -195,13 +195,13 @@ public class JDFNumberStateTest extends JDFTestCaseBase
 		final JDFNumberRangeList integerList = new JDFNumberRangeList(
 				"1 2 3 4 ~ 44");
 		iState.setAllowedValueList(integerList);
-		Assert.assertEquals(iState.getPresentValueList(), integerList);
-		Assert.assertEquals(iState.getAllowedValueList(), integerList);
+		Assertions.assertEquals(iState.getPresentValueList(), integerList);
+		Assertions.assertEquals(iState.getAllowedValueList(), integerList);
 		final JDFNumberRangeList integerList2 = new JDFNumberRangeList(
 				"1 2 3 7~77");
 		iState.setPresentValueList(integerList2);
-		Assert.assertEquals(iState.getPresentValueList(), integerList2);
-		Assert.assertEquals(iState.getAllowedValueList(), integerList);
+		Assertions.assertEquals(iState.getPresentValueList(), integerList2);
+		Assertions.assertEquals(iState.getAllowedValueList(), integerList);
 	}
 
 	// //////////////////////////////////////////////////////////
@@ -212,17 +212,17 @@ public class JDFNumberStateTest extends JDFTestCaseBase
 		final JDFNumberList numberList = new JDFNumberList("1 2 3");
 		iState.setDefaultValue(numberList);
 		iState.setCurrentValue(numberList);
-		Assert.assertFalse(iState.isValid(EnumValidationLevel.Complete));
+		Assertions.assertFalse(iState.isValid(EnumValidationLevel.Complete));
 		iState.setListType(EnumListType.List);
-		Assert.assertTrue(iState.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
 		final JDFNumberRangeList numberRList = new JDFNumberRangeList(
 				"1 2 3 4 ~ 44");
 		iState.setAllowedValueList(numberRList);
-		Assert.assertTrue(iState.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
 		final JDFNumberRangeList numberList2 = new JDFNumberRangeList(
 				"1 2 3 7~77");
 		iState.setPresentValueList(numberList2);
-		Assert.assertTrue(iState.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
 	}
 	// //////////////////////////////////////////////////////////
 

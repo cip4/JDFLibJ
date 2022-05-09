@@ -68,8 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
@@ -77,7 +75,8 @@ import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkDeviceInfoTest extends JDFTestCaseBase
 {
@@ -95,12 +94,12 @@ public class WalkDeviceInfoTest extends JDFTestCaseBase
 		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Down);
 		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Idle);
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), "Offline");
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[2]/@Status", null), "Production");
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[3]/@Status", null), "Setup");
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[4]/@Status", null), "Cleanup");
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[5]/@Status", null), "Offline");
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[6]/@Status", null), "Idle");
+		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), "Offline");
+		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[2]/@Status", null), "Production");
+		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[3]/@Status", null), "Setup");
+		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[4]/@Status", null), "Cleanup");
+		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[5]/@Status", null), "Offline");
+		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[6]/@Status", null), "Idle");
 	}
 
 }

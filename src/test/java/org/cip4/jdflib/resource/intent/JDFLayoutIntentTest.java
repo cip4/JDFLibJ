@@ -68,12 +68,10 @@
  */
 package org.cip4.jdflib.resource.intent;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -88,8 +86,8 @@ public class JDFLayoutIntentTest extends JDFTestCaseBase
 	@Test
 	public void testGetSideVectorStatic()
 	{
-		assertNull(JDFLayoutIntent.getSideVector(null));
-		assertEquals("Front", JDFLayoutIntent.getSideVector(EnumSides.OneSided).get(0));
-		assertEquals(2, JDFLayoutIntent.getSideVector(EnumSides.TwoSidedHeadToFoot).size());
+		Assertions.assertNull(JDFLayoutIntent.getSideVector(null));
+		Assertions.assertEquals("Front", JDFLayoutIntent.getSideVector(EnumSides.OneSided).get(0));
+		Assertions.assertEquals(2, JDFLayoutIntent.getSideVector(EnumSides.TwoSidedHeadToFoot).size());
 	}
 }

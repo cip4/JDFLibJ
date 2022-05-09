@@ -70,25 +70,20 @@
 
 package org.cip4.jdflib.resource;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.*;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.elementwalker.StrippingConverter;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts also some tests for automated layout
@@ -110,9 +105,9 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 		lpp.setBackMarkList(new VString("RegisterMark ColorBar", null));
 		final StrippingConverter sc = lpp.convertToStripping(null);
 		final JDFStrippingParams strippingParams = sc.getStrippingParams();
-		Assert.assertEquals(strippingParams, n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
+		Assertions.assertEquals(strippingParams, n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
 		final VElement v = strippingParams.getChildElementVector(ElementName.STRIPMARK, null);
-		Assert.assertEquals("2 front + 2 back", v.size(), 4);
+		Assertions.assertEquals(v.size(), 4, "2 front + 2 back");
 	}
 
 	/**
@@ -122,9 +117,9 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	public void testConvertStripSimple()
 	{
 		lpp.convertToStripping(null);
-		Assert.assertNull(n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0));
-		Assert.assertNotNull(n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
-		Assert.assertEquals(EnumType.Stripping, n.getEnumType());
+		Assertions.assertNull(n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0));
+		Assertions.assertNotNull(n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
+		Assertions.assertEquals(EnumType.Stripping, n.getEnumType());
 	}
 
 	/**
@@ -137,8 +132,8 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 		lpp.setNumberUp(new JDFXYPair(4, 9));
 		lpp.setStepRepeat(new JDFIntegerList("2 3 1"));
 		lpp.convertToStripping(null);
-		Assert.assertNull(n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0));
-		Assert.assertEquals(n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaves(false).size(), 6);
+		Assertions.assertNull(n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0));
+		Assertions.assertEquals(n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaves(false).size(), 6);
 	}
 
 	/**
@@ -151,12 +146,12 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 		nProd.setType(EnumType.Product);
 		n = (JDFNode) nProd.moveElement(n, null);
 		lpp = (JDFLayoutPreparationParams) n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0);
-		Assert.assertNotNull(lpp);
+		Assertions.assertNotNull(lpp);
 		nProd.getCreateResourcePool().moveElement(lpp, null);
 		lpp.convertToStripping(n);
-		Assert.assertNull(n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0));
-		Assert.assertNotNull(n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
-		Assert.assertEquals(EnumType.Stripping, n.getEnumType());
+		Assertions.assertNull(n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0));
+		Assertions.assertNotNull(n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
+		Assertions.assertEquals(EnumType.Stripping, n.getEnumType());
 
 	}
 
@@ -169,9 +164,9 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 		n.setCombined(new VString("LayoutPreparation Imposition", null));
 		lpp.convertToStripping(null);
 		final VString types = n.getTypes();
-		Assert.assertTrue(types.contains(EnumType.Stripping.getName()));
-		Assert.assertTrue(types.contains(EnumType.Imposition.getName()));
-		Assert.assertFalse(types.contains(EnumType.LayoutPreparation.getName()));
+		Assertions.assertTrue(types.contains(EnumType.Stripping.getName()));
+		Assertions.assertTrue(types.contains(EnumType.Imposition.getName()));
+		Assertions.assertFalse(types.contains(EnumType.LayoutPreparation.getName()));
 	}
 
 	/**
@@ -188,9 +183,10 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -214,15 +210,15 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	@Test
 	public void testGetClipBox()
 	{
-		assertNull(lpp.getClipBox());
+		Assertions.assertNull(lpp.getClipBox());
 		JDFPageCell pc = lpp.appendPageCell();
-		assertNull(lpp.getClipBox());
+		Assertions.assertNull(lpp.getClipBox());
 		JDFXYPair size = new JDFXYPair(10, 20);
 		pc.setTrimSize(size);
-		assertEquals(lpp.getClipBox().getSize(), size);
+		Assertions.assertEquals(lpp.getClipBox().getSize(), size);
 		JDFRectangle rect = new JDFRectangle(1, 2, 33, 44);
 		pc.setClipBox(rect);
-		assertEquals(lpp.getClipBox(), rect);
+		Assertions.assertEquals(lpp.getClipBox(), rect);
 	}
 
 	/**
@@ -231,15 +227,15 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	@Test
 	public void testTrimSize()
 	{
-		assertNull(lpp.getTrimSize());
+		Assertions.assertNull(lpp.getTrimSize());
 		JDFPageCell pc = lpp.appendPageCell();
-		assertNull(lpp.getTrimSize());
+		Assertions.assertNull(lpp.getTrimSize());
 		JDFRectangle rect = new JDFRectangle(1, 2, 33, 44);
 		pc.setClipBox(rect);
-		assertEquals(lpp.getTrimSize(), rect.getSize());
+		Assertions.assertEquals(lpp.getTrimSize(), rect.getSize());
 		JDFXYPair size = new JDFXYPair(10, 20);
 		pc.setTrimSize(size);
-		assertEquals(lpp.getTrimSize(), size);
+		Assertions.assertEquals(lpp.getTrimSize(), size);
 	}
 
 }

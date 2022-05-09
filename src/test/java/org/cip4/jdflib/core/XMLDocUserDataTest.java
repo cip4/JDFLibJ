@@ -70,8 +70,8 @@
 package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -91,8 +91,8 @@ public class XMLDocUserDataTest extends JDFTestCaseBase
 		ud.setDirtyPolicy(XMLDocUserData.EnumDirtyPolicy.None);
 		ud.clearDirtyIDs();
 		final KElement root = d.getRoot();
-		Assert.assertFalse(ud.isDirty((String) null));
+		Assertions.assertFalse(ud.isDirty((String) null));
 		root.setAttribute("a", "b");
-		Assert.assertTrue(ud.isDirty((String) null));
+		Assertions.assertTrue(ud.isDirty((String) null));
 	}
 }

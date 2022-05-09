@@ -89,8 +89,8 @@ import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi
  * 
@@ -156,7 +156,7 @@ public class JMFKnownMessagesTest extends JDFTestCaseBase
 			di.setDeviceID("d123");
 			di.setDeviceStatus(EnumDeviceStatus.Running);
 			XMLDoc report = JDFDeviceCap.getJMFInfo(jmf, r, EnumFitsValue.Allowed, EnumValidationLevel.Complete, true);
-			Assert.assertEquals(report.getRoot().getAttribute("IsValid"), "true");
+			Assertions.assertEquals(report.getRoot().getAttribute("IsValid"), "true");
 		}
 		{
 			JDFResponse resp = jmf.appendResponse(EnumType.KnownMessages);
@@ -167,7 +167,7 @@ public class JMFKnownMessagesTest extends JDFTestCaseBase
 
 		}
 		XMLDoc report = JDFDeviceCap.getJMFInfo(jmf, r, EnumFitsValue.Allowed, EnumValidationLevel.Complete, true);
-		Assert.assertEquals(report.getRoot().getAttribute("IsValid"), "true");
+		Assertions.assertEquals(report.getRoot().getAttribute("IsValid"), "true");
 
 		doc.write2File(sm_dirTestDataTemp + "JMFDevCap.xml", 2, false);
 		docJMF.write2File(sm_dirTestDataTemp + "JMFDevCapTest.jmf", 2, false);
@@ -175,7 +175,7 @@ public class JMFKnownMessagesTest extends JDFTestCaseBase
 			jmf.appendResponse(EnumType.AbortQueueEntry);
 		}
 		report = JDFDeviceCap.getJMFInfo(jmf, r, EnumFitsValue.Allowed, EnumValidationLevel.Complete, true);
-		Assert.assertEquals(report.getRoot().getAttribute("IsValid"), "false");
+		Assertions.assertEquals(report.getRoot().getAttribute("IsValid"), "false");
 
 	}
 	// ///////////////////////////////////////////////////////////////////

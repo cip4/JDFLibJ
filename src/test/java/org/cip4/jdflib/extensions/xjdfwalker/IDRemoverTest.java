@@ -69,16 +69,14 @@
 
 package org.cip4.jdflib.extensions.xjdfwalker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -90,18 +88,18 @@ public class IDRemoverTest extends JDFTestCaseBase
 	KElement root;
 
 	/**
-	 * Test method for {@link org.cip4.jdflib.extensions.xjdfwalker.IDFinder#getMap(KElement)}.
+	 * Test method for {@link IDFinder#getMap(KElement)}.
 	 */
 	@Test
 	public void testRemoveIDs()
 	{
 		IDRemover finder = new IDRemover();
 		finder.removeIDs(root);
-		assertEquals(root.toString().indexOf("ID="), -1);
+		Assertions.assertEquals(root.toString().indexOf("ID="), -1);
 	}
 
 	/**
-	 * Test method for {@link org.cip4.jdflib.extensions.xjdfwalker.IDFinder#getMap(KElement)}.
+	 * Test method for {@link IDFinder#getMap(KElement)}.
 	 */
 	@Test
 	public void testHeader()
@@ -110,7 +108,7 @@ public class IDRemoverTest extends JDFTestCaseBase
 		XJDFHelper h = XJDFHelper.getHelper(root);
 		h.getCreateAuditPool().appendMessage(XJDFConstants.AuditResource);
 		finder.removeIDs(root);
-		assertNotNull(h.getAuditPool().getMessageHelpers().get(0).getHeader().getID());
+		Assertions.assertNotNull(h.getAuditPool().getMessageHelpers().get(0).getHeader().getID());
 	}
 
 	/**
@@ -123,8 +121,8 @@ public class IDRemoverTest extends JDFTestCaseBase
 		h.getCreateAuditPool().appendMessage(XJDFConstants.AuditResource);
 		root.setXPathAttribute("foo/@blahRefs", "R1.1 R1.2");
 		finder.removeIDs(root);
-		assertNotSame(root.toString().indexOf("R1.1"), -1);
-		assertNotSame(root.toString().indexOf("R1.2"), -1);
+		Assertions.assertNotSame(root.toString().indexOf("R1.1"), -1);
+		Assertions.assertNotSame(root.toString().indexOf("R1.2"), -1);
 
 	}
 
@@ -138,7 +136,7 @@ public class IDRemoverTest extends JDFTestCaseBase
 		h.getCreateAuditPool().appendMessage(XJDFConstants.AuditResource);
 		root.setXPathAttribute("foo/@blahRef", "R1.1");
 		finder.removeIDs(root);
-		assertNotSame(root.toString().indexOf("R1.1"), -1);
+		Assertions.assertNotSame(root.toString().indexOf("R1.1"), -1);
 	}
 
 	/**
@@ -146,6 +144,7 @@ public class IDRemoverTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

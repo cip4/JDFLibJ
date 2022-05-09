@@ -73,8 +73,8 @@ package org.cip4.jdflib.resource.process;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts
  * 
@@ -91,15 +91,15 @@ public class JDFPRItemTest extends JDFTestCaseBase
 		JDFPRItem pi = (JDFPRItem) d.getRoot();
 
 		pi.insertPageSet(3);
-		Assert.assertEquals(pi.getAttribute(AttributeName.PAGESET), "3");
+		Assertions.assertEquals(pi.getAttribute(AttributeName.PAGESET), "3");
 		pi.insertPageSet(3);
-		Assert.assertEquals(pi.getAttribute(AttributeName.PAGESET), "3");
+		Assertions.assertEquals(pi.getAttribute(AttributeName.PAGESET), "3");
 		pi.insertPageSet(5);
-		Assert.assertEquals(pi.getAttribute(AttributeName.PAGESET), "3 5");
+		Assertions.assertEquals(pi.getAttribute(AttributeName.PAGESET), "3 5");
 		pi.insertPageSet(2);
-		Assert.assertEquals(pi.getAttribute(AttributeName.PAGESET), "2 ~ 3 5");
+		Assertions.assertEquals(pi.getAttribute(AttributeName.PAGESET), "2 ~ 3 5");
 		pi.insertPageSet(4);
-		Assert.assertEquals(pi.getAttribute(AttributeName.PAGESET), "2 ~ 5");
+		Assertions.assertEquals(pi.getAttribute(AttributeName.PAGESET), "2 ~ 5");
 	}
 
 	// ///////////////////////////////////////////////////

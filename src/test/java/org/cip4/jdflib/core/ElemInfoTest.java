@@ -39,24 +39,21 @@ package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import junit.framework.TestCase;
-
-public class ElemInfoTest extends TestCase
-{
+public class ElemInfoTest {
 
 	@Test
 	public void testgetFirstLastVersion()
 	{
 		ElemInfo ai = new ElemInfo(0x44433211);
-		Assert.assertEquals("", ai.getFirstVersion(), EnumVersion.Version_1_2);
-		Assert.assertEquals("", ai.getLastVersion(), EnumVersion.Version_1_4);
+		Assertions.assertEquals(ai.getFirstVersion(), EnumVersion.Version_1_2, "");
+		Assertions.assertEquals(ai.getLastVersion(), EnumVersion.Version_1_4, "");
 
 		ai = new ElemInfo(0x33333222);
-		Assert.assertEquals("", ai.getFirstVersion(), EnumVersion.Version_1_0);
-		Assert.assertEquals("", ai.getLastVersion(), ContainerUtil.get(EnumVersion.getEnumList(), -1));
+		Assertions.assertEquals(ai.getFirstVersion(), EnumVersion.Version_1_0, "");
+		Assertions.assertEquals(ai.getLastVersion(), ContainerUtil.get(EnumVersion.getEnumList(), -1), "");
 
 	}
 

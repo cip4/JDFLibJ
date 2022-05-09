@@ -8,12 +8,10 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import junit.framework.TestCase;
-public class JDFRectangleRangeTest extends TestCase
-{
+public class JDFRectangleRangeTest {
 
 	@Test
 	public final void testIsPartOfRange()
@@ -21,9 +19,9 @@ public class JDFRectangleRangeTest extends TestCase
 		JDFRectangleRange range = new JDFRectangleRange(new JDFRectangle(0, 0,
 				2, 2), new JDFRectangle(0, 0, 4, 4));
 
-		Assert.assertTrue("inRange falsch", range
+		Assertions.assertTrue(range
 				.isPartOfRange(new JDFRectangleRange(new JDFRectangle(0, 0, 3,
-						3), new JDFRectangle(0, 0, 3.5, 3.5))));
+						3), new JDFRectangle(0, 0, 3.5, 3.5))), "inRange falsch");
 	}
 
 }

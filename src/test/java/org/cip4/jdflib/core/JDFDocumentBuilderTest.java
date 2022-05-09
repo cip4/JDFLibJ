@@ -38,10 +38,9 @@
  */
 package org.cip4.jdflib.core;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFDocumentBuilderTest extends JDFTestCaseBase
 {
@@ -49,7 +48,7 @@ public class JDFDocumentBuilderTest extends JDFTestCaseBase
 	@Test
 	public void testGetParser()
 	{
-		assertNotNull(new JDFDocumentBuilder().getParser());
+		Assertions.assertNotNull(new JDFDocumentBuilder().getParser());
 	}
 
 	/**

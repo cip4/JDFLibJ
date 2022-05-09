@@ -76,8 +76,9 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
@@ -90,9 +91,10 @@ public class JDFContentDataTest extends JDFTestCaseBase
 	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
@@ -111,10 +113,10 @@ public class JDFContentDataTest extends JDFTestCaseBase
 	public void testGetIndex()
 	{
 		for (int i = 0; i < 10; i++)
-			Assert.assertEquals(cl.appendContentData().getIndex(), i);
+			Assertions.assertEquals(cl.appendContentData().getIndex(), i);
 		JDFContentData cd = cl.appendContentData();
 		cd.deleteNode();
-		Assert.assertEquals(cd.getIndex(), -1);
+		Assertions.assertEquals(cd.getIndex(), -1);
 	}
 
 }

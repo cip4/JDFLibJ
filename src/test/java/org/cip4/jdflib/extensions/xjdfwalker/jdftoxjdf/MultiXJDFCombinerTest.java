@@ -37,19 +37,12 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.*;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -59,8 +52,9 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -84,7 +78,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 			vh.add(h);
 		}
 		final XJDFHelper hc = new MultiXJDFCombiner(vh).getCombinedHelper();
-		assertEquals(2, hc.getSet(ElementName.NODEINFO, EnumUsage.Input).getPartitions().size());
+		Assertions.assertEquals(2, hc.getSet(ElementName.NODEINFO, EnumUsage.Input).getPartitions().size());
 	}
 
 	/**
@@ -99,11 +93,11 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 		for (final KElement e : v0)
 			e.removeAttribute(AttributeName.DESCRIPTIVENAME);
 		final List<XJDFHelper> v = conv.getXJDFs(root);
-		assertEquals(3, v.size());
+		Assertions.assertEquals(3, v.size());
 		final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
-		assertEquals(0, hc.getSet(ElementName.NODEINFO, 0).getCombinedProcessIndex().get(0));
-		assertEquals(1, hc.getSet(ElementName.NODEINFO, 1).getCombinedProcessIndex().get(0));
-		assertEquals(2, hc.getSet(ElementName.NODEINFO, 2).getCombinedProcessIndex().get(0));
+		Assertions.assertEquals(0, hc.getSet(ElementName.NODEINFO, 0).getCombinedProcessIndex().get(0));
+		Assertions.assertEquals(1, hc.getSet(ElementName.NODEINFO, 1).getCombinedProcessIndex().get(0));
+		Assertions.assertEquals(2, hc.getSet(ElementName.NODEINFO, 2).getCombinedProcessIndex().get(0));
 		writeRoundTripX(hc.getRoot(), "sammel18", null);
 	}
 
@@ -117,14 +111,14 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 		final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel18.jdf");
 		final List<XJDFHelper> v = conv.getXJDFs(root);
 		final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
-		assertNull(hc.getRoot().getElementByClass(JDFSeparationSpec.class, 0, true));
+		Assertions.assertNull(hc.getRoot().getElementByClass(JDFSeparationSpec.class, 0, true));
 	}
 
 	/**
 	 *
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testSammel19()
 	{
 		for (int i = 0; i < 1; i++)
@@ -134,7 +128,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 			conv.setWantDependent(false);
 			final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel19.jdf");
 			final List<XJDFHelper> v = conv.getXJDFs(root);
-			assertEquals(11, v.size());
+			Assertions.assertEquals(11, v.size());
 			final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
 			writeRoundTripX(hc.getRoot(), "sammel19", null);
 		}
@@ -152,8 +146,8 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 		final KElement e = conv.convert(root);
 		final XJDFHelper h = XJDFHelper.getHelper(e);
 		final SetHelper delivery = h.getSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
-		assertEquals(1, delivery.getPartitions().size());
-		assertNotNull(delivery.getPartition(0).getXPathElement("DeliveryParams/DropItem[6]"));
+		Assertions.assertEquals(1, delivery.getPartitions().size());
+		Assertions.assertNotNull(delivery.getPartition(0).getXPathElement("DeliveryParams/DropItem[6]"));
 	}
 
 	/**
@@ -168,8 +162,8 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 		final KElement e = conv.convert(root);
 		final XJDFHelper h = XJDFHelper.getHelper(e);
 		final SetHelper delivery = h.getSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
-		assertEquals(1, delivery.getPartitions().size());
-		assertNotNull(delivery.getPartition(0).getXPathElement("DeliveryParams/DropItem[6]"));
+		Assertions.assertEquals(1, delivery.getPartitions().size());
+		Assertions.assertNotNull(delivery.getPartition(0).getXPathElement("DeliveryParams/DropItem[6]"));
 	}
 
 	/**
@@ -192,7 +186,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 		final KElement e = conv.convert(s);
 		final XJDFHelper h = XJDFHelper.getHelper(e);
 		final SetHelper bs = h.getSet(ElementName.BINDERYSIGNATURE, null);
-		assertEquals(6, bs.getPartitions().size());
+		Assertions.assertEquals(6, bs.getPartitions().size());
 		writeRoundTripX(e, "testsig", null);
 	}
 

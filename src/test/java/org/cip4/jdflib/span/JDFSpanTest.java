@@ -77,9 +77,6 @@
  */
 package org.cip4.jdflib.span;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -88,7 +85,8 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.resource.intent.JDFBindingIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -108,7 +106,7 @@ public class JDFSpanTest extends JDFTestCaseBase
 		JDFBindingIntent e = (JDFBindingIntent) doc.getRoot();
 		JDFSpanBindingType bindingType = e.appendBindingType();
 		bindingType.setActual(EnumSpanBindingType.None);
-		assertEquals(bindingType.getActual(), EnumSpanBindingType.None);
+		Assertions.assertEquals(bindingType.getActual(), EnumSpanBindingType.None);
 	}
 
 	@Test
@@ -118,7 +116,7 @@ public class JDFSpanTest extends JDFTestCaseBase
 		JDFDeliveryIntent e = (JDFDeliveryIntent) doc.getRoot();
 		JDFTimeSpan ts = e.appendRequired();
 		ts.setPreferred(null);
-		assertNull(ts.getPreferred());
+		Assertions.assertNull(ts.getPreferred());
 	}
 
 }

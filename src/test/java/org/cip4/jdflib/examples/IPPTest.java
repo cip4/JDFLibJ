@@ -39,6 +39,7 @@ package org.cip4.jdflib.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides;
+import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams;
 import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumBindingEdge;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumBackCoatings;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumFrontCoatings;
@@ -65,7 +66,8 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -86,6 +88,7 @@ public class IPPTest extends JDFTestCaseBase
 	 *
 	 */
 	@Override
+	@BeforeEach
 	public void setUp()
 	{
 		KElement.setLongID(false);
@@ -147,7 +150,7 @@ public class IPPTest extends JDFTestCaseBase
 		rlComp.setAmount(42);
 		comp.refMedia(med);
 		layoutPrep.setNumberUp(new JDFXYPair(1, 1));
-		layoutPrep.setSides(org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumSides.TwoSidedFlipY);
+		layoutPrep.setSides(JDFAutoLayoutPreparationParams.EnumSides.TwoSidedFlipY);
 		layoutPrep.setPageDistributionScheme("Sequential");
 
 		final JDFStitchingParams stitchParams = (JDFStitchingParams) n.addResource(ElementName.STITCHINGPARAMS, null, EnumUsage.Input, null, null, null, null);
@@ -190,7 +193,7 @@ public class IPPTest extends JDFTestCaseBase
 		comp.setDimensions(new JDFShape(21, 29.7, 0.3));
 
 		layoutPrep.setNumberUp(new JDFXYPair(2, 1));
-		layoutPrep.setSides(org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumSides.TwoSidedFlipY);
+		layoutPrep.setSides(JDFAutoLayoutPreparationParams.EnumSides.TwoSidedFlipY);
 		layoutPrep.setPageDistributionScheme("Saddle");
 		layoutPrep.setBindingEdge(EnumBindingEdge.Left);
 

@@ -38,22 +38,18 @@
 
 package org.cip4.jdflib.resource;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Collection;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.*;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.core.StringArray;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts
@@ -67,10 +63,11 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 	private JDFAssembly as = null;
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 * @throws Exception
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -89,7 +86,7 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 		final JDFAssemblySection ass = as.appendAssemblySection();
 		final JDFAssemblySection asss = ass.appendAssemblySection();
 		asss.setAssemblyIDs(new VString("a b c", " "));
-		assertTrue(as.isValid(EnumValidationLevel.Incomplete));
+		Assertions.assertTrue(as.isValid(EnumValidationLevel.Incomplete));
 		doc.write2File(sm_dirTestDataTemp + "AssemblySection.jdf", 2, false);
 	}
 
@@ -110,7 +107,7 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 
 		final Collection<JDFAssemblySection> vASS = as.getAllAssemblySection();
 
-		assertTrue(vASS.size() == 2);
+		Assertions.assertTrue(vASS.size() == 2);
 	}
 
 	/**
@@ -127,7 +124,7 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 		asss.setAssemblyIDs(new VString("a b c", " "));
 		final StringArray a = as.getAllAssemblyIDs();
 
-		assertTrue(a.containsAll(new StringArray("aid a b c d e")));
-		assertEquals(6, a.size());
+		Assertions.assertTrue(a.containsAll(new StringArray("aid a b c d e")));
+		Assertions.assertEquals(6, a.size());
 	}
 }

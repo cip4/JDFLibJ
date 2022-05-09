@@ -68,11 +68,10 @@
  */
 package org.cip4.jdflib.util.thread;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.Vector;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 
 /**
  *
@@ -99,8 +98,8 @@ public class ClassUtilTest extends ClassUtilParent
 	public void testGetDeclaredClasses()
 	{
 		Vector<Class<?>> v = ClassUtil.getDeclaredClasses(getClass());
-		assertTrue(v.contains(InnerClass.class));
-		assertTrue(v.contains(OtherInnerClass.class));
+		Assertions.assertTrue(v.contains(InnerClass.class));
+		Assertions.assertTrue(v.contains(OtherInnerClass.class));
 	}
 
 }

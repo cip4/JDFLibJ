@@ -49,9 +49,8 @@ import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
-import org.junit.Test;
-
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -59,8 +58,7 @@ import junit.framework.TestCase;
  * @author rainer prosi
  * @date Apr 12, 2013
  */
-public class JDFDateTimeRangeTest extends TestCase
-{
+public class JDFDateTimeRangeTest {
 	/**
 	 * Class under test for void JDFDateTimeRange(JDFDateTimeRange)
 	 */
@@ -72,7 +70,7 @@ public class JDFDateTimeRangeTest extends TestCase
 			final JDFDateTimeRange r = new JDFDateTimeRange(new JDFDate("2004-12-01T09:30:00Z"), new JDFDate("2004-12-01T09:35:00Z"));
 
 			final JDFDateTimeRange test_r = new JDFDateTimeRange("2004-12-01T09:30:00Z ~ 2004-12-01T09:35:00Z");
-			assertTrue("Bad Constructor: " + r.toString(), r.equals(test_r));
+			Assertions.assertTrue(r.equals(test_r), "Bad Constructor: " + r.toString());
 
 			final int duration = (int) ((test_r.getRight().getTimeInMillis() - test_r.getLeft().getTimeInMillis()) / 1000);
 			final JDFDuration d = new JDFDuration();
@@ -83,7 +81,7 @@ public class JDFDateTimeRangeTest extends TestCase
 			final JDFDateTimeRange r3 = new JDFDateTimeRange(r2);
 			r3.setRight(r.getRight());
 
-			assertTrue("Bad Constructor: " + r3.toString(), r3.equals(r));
+			Assertions.assertTrue(r3.equals(r), "Bad Constructor: " + r3.toString());
 
 		}
 		catch (final DataFormatException dfe)
@@ -102,9 +100,9 @@ public class JDFDateTimeRangeTest extends TestCase
 	{
 		final JDFDateTimeRangeList rangelist = new JDFDateTimeRangeList("2004-11-30T09:30:00Z ~ 2004-12-05T09:00:00Z");
 
-		assertTrue("Bad setString: ", rangelist.inRange(new JDFDate("2004-12-05T08:30:00Z")));
-		assertTrue("Bad setString: ", rangelist.inRange(new JDFDate("2004-12-05T09:00:00Z")));
-		assertFalse("Bad setString: ", rangelist.inRange(new JDFDate("2004-12-05T09:35:00Z")));
+		Assertions.assertTrue(rangelist.inRange(new JDFDate("2004-12-05T08:30:00Z")), "Bad setString: ");
+		Assertions.assertTrue(rangelist.inRange(new JDFDate("2004-12-05T09:00:00Z")), "Bad setString: ");
+		Assertions.assertFalse(rangelist.inRange(new JDFDate("2004-12-05T09:35:00Z")), "Bad setString: ");
 	}
 
 	/**
@@ -117,7 +115,7 @@ public class JDFDateTimeRangeTest extends TestCase
 	{
 		final JDFDateTimeRange range = new JDFDateTimeRange("2004-11-30T09:30:00Z ~ 2004-12-05T09:00:00Z");
 
-		assertEquals(range.hashCode(), new JDFDateTimeRange(range).hashCode());
+		Assertions.assertEquals(range.hashCode(), new JDFDateTimeRange(range).hashCode());
 	}
 
 	/**
@@ -130,7 +128,7 @@ public class JDFDateTimeRangeTest extends TestCase
 	{
 		final JDFDateTimeRange range = new JDFDateTimeRange("2004-11-30T09:30:00Z ~ 2004-12-05T09:00:00Z");
 
-		assertEquals(range, new JDFDateTimeRange(range));
+		Assertions.assertEquals(range, new JDFDateTimeRange(range));
 	}
 
 	/**
@@ -141,11 +139,11 @@ public class JDFDateTimeRangeTest extends TestCase
 	@Test
 	public final void testCreateRange() throws DataFormatException
 	{
-		assertNotNull(JDFDateTimeRangeList.createDateTimeRangeList("2004-11-30T09:30:00Z ~ 2004-12-05T09:00:00Z"));
-		assertNotNull(JDFDateTimeRangeList.createDateTimeRangeList("2013-11-30T09:30:00Z"));
-		assertNull(JDFDateTimeRangeList.createDateTimeRangeList(""));
-		assertNull(JDFDateTimeRangeList.createDateTimeRangeList(null));
-		assertNull(JDFDateTimeRangeList.createDateTimeRangeList("foo"));
+		Assertions.assertNotNull(JDFDateTimeRangeList.createDateTimeRangeList("2004-11-30T09:30:00Z ~ 2004-12-05T09:00:00Z"));
+		Assertions.assertNotNull(JDFDateTimeRangeList.createDateTimeRangeList("2013-11-30T09:30:00Z"));
+		Assertions.assertNull(JDFDateTimeRangeList.createDateTimeRangeList(""));
+		Assertions.assertNull(JDFDateTimeRangeList.createDateTimeRangeList(null));
+		Assertions.assertNull(JDFDateTimeRangeList.createDateTimeRangeList("foo"));
 	}
 
 }

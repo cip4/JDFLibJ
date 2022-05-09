@@ -47,13 +47,9 @@ package org.cip4.jdflib.devicecapability;
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.*;
 import org.cip4.jdflib.core.JDFElement.EnumBoolean;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
@@ -75,10 +71,8 @@ import org.cip4.jdflib.resource.devicecapability.JDFShapeState;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.cip4.jdflib.resource.devicecapability.JDFXYPairState;
 import org.cip4.jdflib.resource.process.JDFLayout;
-import org.junit.Assert;
-import org.junit.Test;
-
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -86,8 +80,7 @@ import junit.framework.TestCase;
  * @author rainer prosi
  * @date before Jun 7, 2012
  */
-public class JDFDevCapTest extends TestCase
-{
+public class JDFDevCapTest {
 	/**
 	 *
 	 *
@@ -100,12 +93,12 @@ public class JDFDevCapTest extends TestCase
 		final Vector<EnumBoolean> v = new Vector<>();
 		v.add(EnumBoolean.False);
 		bs.setAllowedValueList(v);
-		Assert.assertTrue(bs.fitsValue("false", EnumFitsValue.Allowed));
-		Assert.assertFalse(bs.fitsValue("fnarf", EnumFitsValue.Allowed));
-		Assert.assertFalse(bs.fitsValue("true", EnumFitsValue.Allowed));
+		Assertions.assertTrue(bs.fitsValue("false", EnumFitsValue.Allowed));
+		Assertions.assertFalse(bs.fitsValue("fnarf", EnumFitsValue.Allowed));
+		Assertions.assertFalse(bs.fitsValue("true", EnumFitsValue.Allowed));
 		v.add(EnumBoolean.True);
 		bs.setAllowedValueList(v);
-		Assert.assertTrue(bs.fitsValue("true", EnumFitsValue.Allowed));
+		Assertions.assertTrue(bs.fitsValue("true", EnumFitsValue.Allowed));
 	}
 
 	/**
@@ -118,9 +111,9 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap root = (JDFDevCap) d.getRoot();
 		final JDFStringState ss1 = root.appendStringState("foo");
-		Assert.assertEquals(ss1.getName(), "foo");
+		Assertions.assertEquals(ss1.getName(), "foo");
 		final JDFStringState ss2 = root.appendStringState(null);
-		Assert.assertFalse(ss2.hasAttribute("Name"));
+		Assertions.assertFalse(ss2.hasAttribute("Name"));
 	}
 
 	/**
@@ -136,12 +129,12 @@ public class JDFDevCapTest extends TestCase
 		JDFIntegerRangeList irl = new JDFIntegerRangeList("12~15");
 		is.setAllowedValueList(irl);
 		is.setListType(EnumListType.RangeList);
-		Assert.assertTrue(is.fitsValue("12~15", EnumFitsValue.Allowed));
-		Assert.assertFalse(is.fitsValue("19~33", EnumFitsValue.Allowed));
+		Assertions.assertTrue(is.fitsValue("12~15", EnumFitsValue.Allowed));
+		Assertions.assertFalse(is.fitsValue("19~33", EnumFitsValue.Allowed));
 		irl = new JDFIntegerRangeList("12~15 19~33");
 		is.setAllowedValueList(irl);
-		Assert.assertTrue(is.fitsValue("12~15", EnumFitsValue.Allowed));
-		Assert.assertTrue(is.fitsValue("19~33", EnumFitsValue.Allowed));
+		Assertions.assertTrue(is.fitsValue("12~15", EnumFitsValue.Allowed));
+		Assertions.assertTrue(is.fitsValue("19~33", EnumFitsValue.Allowed));
 	}
 
 	/**
@@ -169,9 +162,9 @@ public class JDFDevCapTest extends TestCase
 		}
 		final VElement devCapVector = dc.getDevCapVector(null, true);
 		final VElement vMatch = ((JDFDevCap) devCapVector.item(0)).getMatchingElementsFromParent(e, devCapVector);
-		Assert.assertEquals(vMatch.size(), 2);
-		Assert.assertEquals(vMatch.item(0), e.getElement("Media", null, 0));
-		Assert.assertEquals(vMatch.item(1), e.getElement("Media", null, 1));
+		Assertions.assertEquals(vMatch.size(), 2);
+		Assertions.assertEquals(vMatch.item(0), e.getElement("Media", null, 0));
+		Assertions.assertEquals(vMatch.item(1), e.getElement("Media", null, 1));
 	}
 
 	/**
@@ -205,8 +198,8 @@ public class JDFDevCapTest extends TestCase
 		for (int i = 0; i < 2; i++)
 		{
 			final VElement vMatch = ((JDFDevCap) devCapVector.item(i)).getMatchingElementsFromParent(e, devCapVector);
-			Assert.assertEquals(vMatch.size(), 1);
-			Assert.assertEquals(vMatch.item(0), e.getElement("Media", null, i));
+			Assertions.assertEquals(vMatch.size(), 1);
+			Assertions.assertEquals(vMatch.item(0), e.getElement("Media", null, i));
 		}
 	}
 
@@ -223,14 +216,14 @@ public class JDFDevCapTest extends TestCase
 		JDFNumberRangeList nrl = new JDFNumberRangeList("12.45~15.88");
 		ns.setAllowedValueList(nrl);
 		ns.setListType(EnumListType.RangeList);
-		Assert.assertTrue(ns.fitsValue("12.45~15.88", EnumFitsValue.Allowed));
-		Assert.assertTrue(ns.fitsValue("12.45~13.0", EnumFitsValue.Allowed));
-		Assert.assertFalse(ns.fitsValue("19.0~33.234", EnumFitsValue.Allowed));
+		Assertions.assertTrue(ns.fitsValue("12.45~15.88", EnumFitsValue.Allowed));
+		Assertions.assertTrue(ns.fitsValue("12.45~13.0", EnumFitsValue.Allowed));
+		Assertions.assertFalse(ns.fitsValue("19.0~33.234", EnumFitsValue.Allowed));
 		nrl = new JDFNumberRangeList("12.45~15.88 19.0~33.234");
 		ns.setAllowedValueList(nrl);
-		Assert.assertTrue(ns.fitsValue("12.45", EnumFitsValue.Allowed));
-		Assert.assertTrue(ns.fitsValue("19.0~33.234", EnumFitsValue.Allowed));
-		Assert.assertFalse(ns.fitsValue("16.01", EnumFitsValue.Allowed));
+		Assertions.assertTrue(ns.fitsValue("12.45", EnumFitsValue.Allowed));
+		Assertions.assertTrue(ns.fitsValue("19.0~33.234", EnumFitsValue.Allowed));
+		Assertions.assertFalse(ns.fitsValue("16.01", EnumFitsValue.Allowed));
 	}
 
 	/**
@@ -247,22 +240,22 @@ public class JDFDevCapTest extends TestCase
 		v.add("bar");
 
 		es.setAllowedValueList(v);
-		Assert.assertTrue(es.fitsValue("foo", EnumFitsValue.Allowed));
-		Assert.assertTrue(es.fitsValue("bar", EnumFitsValue.Allowed));
-		Assert.assertFalse(es.fitsValue("fnarf", EnumFitsValue.Allowed));
+		Assertions.assertTrue(es.fitsValue("foo", EnumFitsValue.Allowed));
+		Assertions.assertTrue(es.fitsValue("bar", EnumFitsValue.Allowed));
+		Assertions.assertFalse(es.fitsValue("fnarf", EnumFitsValue.Allowed));
 
 		es.setListType(EnumListType.List);
-		Assert.assertTrue(es.fitsValue("foo", EnumFitsValue.Allowed));
-		Assert.assertTrue(es.fitsValue("foo bar", EnumFitsValue.Allowed));
-		Assert.assertTrue(es.fitsValue("foo bar foo", EnumFitsValue.Allowed));
-		Assert.assertFalse(es.fitsValue("foo bar fnarf", EnumFitsValue.Allowed));
+		Assertions.assertTrue(es.fitsValue("foo", EnumFitsValue.Allowed));
+		Assertions.assertTrue(es.fitsValue("foo bar", EnumFitsValue.Allowed));
+		Assertions.assertTrue(es.fitsValue("foo bar foo", EnumFitsValue.Allowed));
+		Assertions.assertFalse(es.fitsValue("foo bar fnarf", EnumFitsValue.Allowed));
 
 		es.setListType(EnumListType.CompleteList);
-		Assert.assertFalse(es.fitsValue("foo", EnumFitsValue.Allowed));
-		Assert.assertTrue(es.fitsValue("foo bar", EnumFitsValue.Allowed));
-		Assert.assertTrue(es.fitsValue("bar foo", EnumFitsValue.Allowed));
-		Assert.assertFalse(es.fitsValue("foo bar foo", EnumFitsValue.Allowed));
-		Assert.assertFalse(es.fitsValue("foo bar fnarf", EnumFitsValue.Allowed));
+		Assertions.assertFalse(es.fitsValue("foo", EnumFitsValue.Allowed));
+		Assertions.assertTrue(es.fitsValue("foo bar", EnumFitsValue.Allowed));
+		Assertions.assertTrue(es.fitsValue("bar foo", EnumFitsValue.Allowed));
+		Assertions.assertFalse(es.fitsValue("foo bar foo", EnumFitsValue.Allowed));
+		Assertions.assertFalse(es.fitsValue("foo bar fnarf", EnumFitsValue.Allowed));
 
 		// TODO implement more list types
 		// es.setListType(EnumListType.OrderedList);
@@ -289,13 +282,13 @@ public class JDFDevCapTest extends TestCase
 			es.setAllowedRegExp("a b( c)?( d)*");
 			if (i == 1)
 				es.setAllowedValueList(new VString("a b c d", " "));
-			Assert.assertTrue(es.fitsValue("a b", EnumFitsValue.Allowed));
-			Assert.assertTrue(es.fitsValue("a b c", EnumFitsValue.Allowed));
-			Assert.assertTrue(es.fitsValue("a b c d d", EnumFitsValue.Allowed));
-			Assert.assertFalse(es.fitsValue("a b c c", EnumFitsValue.Allowed));
-			Assert.assertFalse(es.fitsValue("a c b", EnumFitsValue.Allowed));
-			Assert.assertFalse(es.fitsValue("abc", EnumFitsValue.Allowed));
-			Assert.assertFalse(es.fitsValue("A b c", EnumFitsValue.Allowed));
+			Assertions.assertTrue(es.fitsValue("a b", EnumFitsValue.Allowed));
+			Assertions.assertTrue(es.fitsValue("a b c", EnumFitsValue.Allowed));
+			Assertions.assertTrue(es.fitsValue("a b c d d", EnumFitsValue.Allowed));
+			Assertions.assertFalse(es.fitsValue("a b c c", EnumFitsValue.Allowed));
+			Assertions.assertFalse(es.fitsValue("a c b", EnumFitsValue.Allowed));
+			Assertions.assertFalse(es.fitsValue("abc", EnumFitsValue.Allowed));
+			Assertions.assertFalse(es.fitsValue("A b c", EnumFitsValue.Allowed));
 		}
 	}
 
@@ -312,18 +305,18 @@ public class JDFDevCapTest extends TestCase
 		nl.add("anna~berta");
 		ns.setAllowedValueList(nl);
 		ns.setListType(EnumListType.RangeList);
-		Assert.assertTrue(ns.fitsValue("anna~berta", EnumFitsValue.Allowed));
-		Assert.assertFalse(ns.fitsValue("hans~otto", EnumFitsValue.Allowed));
+		Assertions.assertTrue(ns.fitsValue("anna~berta", EnumFitsValue.Allowed));
+		Assertions.assertFalse(ns.fitsValue("hans~otto", EnumFitsValue.Allowed));
 		nl.add("anna~berta hans~otto");
 		ns.setAllowedValueList(nl);
-		Assert.assertTrue(ns.fitsValue("anna~berta", EnumFitsValue.Allowed));
-		Assert.assertTrue(ns.fitsValue("hans~otto", EnumFitsValue.Allowed));
+		Assertions.assertTrue(ns.fitsValue("anna~berta", EnumFitsValue.Allowed));
+		Assertions.assertTrue(ns.fitsValue("hans~otto", EnumFitsValue.Allowed));
 		ns.setAllowedValueList(null);
 		ns.setAllowedRegExp("*");
-		Assert.assertTrue(ns.fitsValue("hans~otto", EnumFitsValue.Allowed));
+		Assertions.assertTrue(ns.fitsValue("hans~otto", EnumFitsValue.Allowed));
 		ns.setAllowedRegExp("[ab].*");
-		Assert.assertTrue(ns.fitsValue("al", EnumFitsValue.Allowed));
-		Assert.assertFalse(ns.fitsValue("cl", EnumFitsValue.Allowed));
+		Assertions.assertTrue(ns.fitsValue("al", EnumFitsValue.Allowed));
+		Assertions.assertFalse(ns.fitsValue("cl", EnumFitsValue.Allowed));
 	}
 
 	/**
@@ -336,15 +329,15 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		JDFBooleanState bs = dc.appendBooleanState("foo");
-		Assert.assertEquals(bs.getName(), "foo");
+		Assertions.assertEquals(bs.getName(), "foo");
 		bs = dc.getBooleanState("bar");
-		Assert.assertNull(bs);
+		Assertions.assertNull(bs);
 		bs = dc.getCreateBooleanState("bar");
-		Assert.assertNotNull(bs);
-		Assert.assertEquals(bs.getName(), "bar");
+		Assertions.assertNotNull(bs);
+		Assertions.assertEquals(bs.getName(), "bar");
 		bs = dc.getBooleanState("bar");
-		Assert.assertNotNull(bs);
-		Assert.assertEquals(bs.getName(), "bar");
+		Assertions.assertNotNull(bs);
+		Assertions.assertEquals(bs.getName(), "bar");
 
 	}
 
@@ -358,15 +351,15 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		JDFIntegerState is = dc.appendIntegerState("foo");
-		Assert.assertEquals(is.getName(), "foo");
+		Assertions.assertEquals(is.getName(), "foo");
 		is = dc.getIntegerState("bar");
-		Assert.assertNull(is);
+		Assertions.assertNull(is);
 		is = dc.getCreateIntegerState("bar");
-		Assert.assertNotNull(is);
-		Assert.assertEquals(is.getName(), "bar");
+		Assertions.assertNotNull(is);
+		Assertions.assertEquals(is.getName(), "bar");
 		is = dc.getIntegerState("bar");
-		Assert.assertNotNull(is);
-		Assert.assertEquals(is.getName(), "bar");
+		Assertions.assertNotNull(is);
+		Assertions.assertEquals(is.getName(), "bar");
 
 	}
 
@@ -380,16 +373,16 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		dc.setDevNS(null);
-		Assert.assertEquals(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).size(), 0);
+		Assertions.assertEquals(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).size(), 0);
 		dc.setName("Foo9182");
-		Assert.assertTrue(dc.getInvalidAttributes(EnumValidationLevel.RecursiveComplete, true, 0).contains("DevNS"));
-		Assert.assertTrue(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
+		Assertions.assertTrue(dc.getInvalidAttributes(EnumValidationLevel.RecursiveComplete, true, 0).contains("DevNS"));
+		Assertions.assertTrue(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
 		dc.setName("FooLink");
-		Assert.assertFalse(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
+		Assertions.assertFalse(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
 		dc.setName("ScreeningParams");
-		Assert.assertFalse(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
+		Assertions.assertFalse(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
 		dc.setName("ScreeningParams_");
-		Assert.assertTrue(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
+		Assertions.assertTrue(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
 
 	}
 
@@ -403,15 +396,15 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		JDFNumberState ns = dc.appendNumberState("foo");
-		Assert.assertEquals(ns.getName(), "foo");
+		Assertions.assertEquals(ns.getName(), "foo");
 		ns = dc.getNumberState("bar");
-		Assert.assertNull(ns);
+		Assertions.assertNull(ns);
 		ns = dc.getCreateNumberState("bar");
-		Assert.assertNotNull(ns);
-		Assert.assertEquals(ns.getName(), "bar");
+		Assertions.assertNotNull(ns);
+		Assertions.assertEquals(ns.getName(), "bar");
 		ns = dc.getNumberState("bar");
-		Assert.assertNotNull(ns);
-		Assert.assertEquals(ns.getName(), "bar");
+		Assertions.assertNotNull(ns);
+		Assertions.assertEquals(ns.getName(), "bar");
 
 	}
 
@@ -425,15 +418,15 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		JDFEnumerationState es = dc.appendEnumerationState("foo");
-		Assert.assertEquals(es.getName(), "foo");
+		Assertions.assertEquals(es.getName(), "foo");
 		es = dc.getEnumerationState("bar");
-		Assert.assertNull(es);
+		Assertions.assertNull(es);
 		es = dc.getCreateEnumerationState("bar");
-		Assert.assertNotNull(es);
-		Assert.assertEquals(es.getName(), "bar");
+		Assertions.assertNotNull(es);
+		Assertions.assertEquals(es.getName(), "bar");
 		es = dc.getEnumerationState("bar");
-		Assert.assertNotNull(es);
-		Assert.assertEquals(es.getName(), "bar");
+		Assertions.assertNotNull(es);
+		Assertions.assertEquals(es.getName(), "bar");
 
 	}
 
@@ -447,15 +440,15 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		JDFNameState ns = dc.appendNameState("foo");
-		Assert.assertEquals(ns.getName(), "foo");
+		Assertions.assertEquals(ns.getName(), "foo");
 		ns = dc.getNameState("bar");
-		Assert.assertNull(ns);
+		Assertions.assertNull(ns);
 		ns = dc.getCreateNameState("bar");
-		Assert.assertNotNull(ns);
-		Assert.assertEquals(ns.getName(), "bar");
+		Assertions.assertNotNull(ns);
+		Assertions.assertEquals(ns.getName(), "bar");
 		ns = dc.getNameState("bar");
-		Assert.assertNotNull(ns);
-		Assert.assertEquals(ns.getName(), "bar");
+		Assertions.assertNotNull(ns);
+		Assertions.assertEquals(ns.getName(), "bar");
 
 	}
 
@@ -469,15 +462,15 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		JDFStringState ss = dc.appendStringState("foo");
-		Assert.assertEquals(ss.getName(), "foo");
+		Assertions.assertEquals(ss.getName(), "foo");
 		ss = dc.getStringState("bar");
-		Assert.assertNull(ss);
+		Assertions.assertNull(ss);
 		ss = dc.getCreateStringState("bar");
-		Assert.assertNotNull(ss);
-		Assert.assertEquals(ss.getName(), "bar");
+		Assertions.assertNotNull(ss);
+		Assertions.assertEquals(ss.getName(), "bar");
 		ss = dc.getStringState("bar");
-		Assert.assertNotNull(ss);
-		Assert.assertEquals(ss.getName(), "bar");
+		Assertions.assertNotNull(ss);
+		Assertions.assertEquals(ss.getName(), "bar");
 
 	}
 
@@ -491,15 +484,15 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		JDFXYPairState xy = dc.appendXYPairState("foo");
-		Assert.assertEquals(xy.getName(), "foo");
+		Assertions.assertEquals(xy.getName(), "foo");
 		xy = dc.getXYPairState("bar");
-		Assert.assertNull(xy);
+		Assertions.assertNull(xy);
 		xy = dc.getCreateXYPairState("bar");
-		Assert.assertNotNull(xy);
-		Assert.assertEquals(xy.getName(), "bar");
+		Assertions.assertNotNull(xy);
+		Assertions.assertEquals(xy.getName(), "bar");
 		xy = dc.getXYPairState("bar");
-		Assert.assertNotNull(xy);
-		Assert.assertEquals(xy.getName(), "bar");
+		Assertions.assertNotNull(xy);
+		Assertions.assertEquals(xy.getName(), "bar");
 
 	}
 
@@ -513,15 +506,15 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		JDFShapeState ss = dc.appendShapeState("foo");
-		Assert.assertEquals(ss.getName(), "foo");
+		Assertions.assertEquals(ss.getName(), "foo");
 		ss = dc.getShapeState("bar");
-		Assert.assertNull(ss);
+		Assertions.assertNull(ss);
 		ss = dc.getCreateShapeState("bar");
-		Assert.assertNotNull(ss);
-		Assert.assertEquals(ss.getName(), "bar");
+		Assertions.assertNotNull(ss);
+		Assertions.assertEquals(ss.getName(), "bar");
 		ss = dc.getShapeState("bar");
-		Assert.assertNotNull(ss);
-		Assert.assertEquals(ss.getName(), "bar");
+		Assertions.assertNotNull(ss);
+		Assertions.assertEquals(ss.getName(), "bar");
 
 	}
 
@@ -535,8 +528,8 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		dc.setAvailability(EnumAvailability.NotInstalled);
-		Assert.assertEquals(dc.getAvailability(), EnumAvailability.NotInstalled);
-		Assert.assertEquals(dc.getModuleAvailability(), EnumAvailability.NotInstalled);
+		Assertions.assertEquals(dc.getAvailability(), EnumAvailability.NotInstalled);
+		Assertions.assertEquals(dc.getModuleAvailability(), EnumAvailability.NotInstalled);
 	}
 
 	/**
@@ -550,17 +543,17 @@ public class JDFDevCapTest extends TestCase
 		final JDFDeviceCap deviceCap = (JDFDeviceCap) d.getRoot();
 		final JDFDevCap dc = deviceCap.appendDevCaps().appendDevCap();
 		dc.setAvailability(EnumAvailability.NotInstalled);
-		Assert.assertEquals(dc.getAvailability(), EnumAvailability.NotInstalled);
-		Assert.assertEquals(dc.getModuleAvailability(), EnumAvailability.NotInstalled);
+		Assertions.assertEquals(dc.getAvailability(), EnumAvailability.NotInstalled);
+		Assertions.assertEquals(dc.getModuleAvailability(), EnumAvailability.NotInstalled);
 		JDFModuleCap mc = dc.appendModuleRef("MyDev");
 		mc.setAvailability(EnumAvailability.Disabled);
-		Assert.assertEquals(dc.getAvailability(), EnumAvailability.Module);
-		Assert.assertEquals(dc.getModuleAvailability(), EnumAvailability.Disabled);
-		Assert.assertEquals(mc.getAvailability(), EnumAvailability.Disabled);
+		Assertions.assertEquals(dc.getAvailability(), EnumAvailability.Module);
+		Assertions.assertEquals(dc.getModuleAvailability(), EnumAvailability.Disabled);
+		Assertions.assertEquals(mc.getAvailability(), EnumAvailability.Disabled);
 		mc = dc.appendModuleRef("MyOtherDev");
 		mc.setAvailability(EnumAvailability.NotInstalled);
-		Assert.assertEquals(dc.getModuleAvailability(), EnumAvailability.NotInstalled);
-		Assert.assertEquals(mc.getAvailability(), EnumAvailability.NotInstalled);
+		Assertions.assertEquals(dc.getModuleAvailability(), EnumAvailability.NotInstalled);
+		Assertions.assertEquals(mc.getAvailability(), EnumAvailability.NotInstalled);
 	}
 
 	/**
@@ -576,12 +569,12 @@ public class JDFDevCapTest extends TestCase
 		mc.setID("i");
 		mc.setAvailability(EnumAvailability.NotLicensed);
 		final JDFDevCap dc = deviceCap.appendDevCaps().appendDevCap();
-		Assert.assertEquals(dc.getModuleAvailability(), EnumAvailability.Installed);
+		Assertions.assertEquals(dc.getModuleAvailability(), EnumAvailability.Installed);
 		dc.setAvailability(EnumAvailability.Module);
-		Assert.assertEquals(dc.getAvailability(), EnumAvailability.Module);
-		Assert.assertNull(dc.getModuleAvailability());
+		Assertions.assertEquals(dc.getAvailability(), EnumAvailability.Module);
+		Assertions.assertNull(dc.getModuleAvailability());
 		dc.setModuleRefs(new VString("i", null));
-		Assert.assertEquals(dc.getModuleAvailability(), EnumAvailability.NotLicensed);
+		Assertions.assertEquals(dc.getModuleAvailability(), EnumAvailability.NotLicensed);
 	}
 
 	/**
@@ -594,15 +587,15 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		JDFMatrixState ms = dc.appendMatrixState("foo");
-		Assert.assertEquals(ms.getName(), "foo");
+		Assertions.assertEquals(ms.getName(), "foo");
 		ms = dc.getMatrixState("bar");
-		Assert.assertNull(ms);
+		Assertions.assertNull(ms);
 		ms = dc.getCreateMatrixState("bar");
-		Assert.assertNotNull(ms);
-		Assert.assertEquals(ms.getName(), "bar");
+		Assertions.assertNotNull(ms);
+		Assertions.assertEquals(ms.getName(), "bar");
 		ms = dc.getMatrixState("bar");
-		Assert.assertNotNull(ms);
-		Assert.assertEquals(ms.getName(), "bar");
+		Assertions.assertNotNull(ms);
+		Assertions.assertEquals(ms.getName(), "bar");
 
 	}
 
@@ -616,15 +609,15 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		JDFDateTimeState dts = dc.appendDateTimeState("foo");
-		Assert.assertEquals(dts.getName(), "foo");
+		Assertions.assertEquals(dts.getName(), "foo");
 		dts = dc.getDateTimeState("bar");
-		Assert.assertNull(dts);
+		Assertions.assertNull(dts);
 		dts = dc.getCreateDateTimeState("bar");
-		Assert.assertNotNull(dts);
-		Assert.assertEquals(dts.getName(), "bar");
+		Assertions.assertNotNull(dts);
+		Assertions.assertEquals(dts.getName(), "bar");
 		dts = dc.getDateTimeState("bar");
-		Assert.assertNotNull(dts);
-		Assert.assertEquals(dts.getName(), "bar");
+		Assertions.assertNotNull(dts);
+		Assertions.assertEquals(dts.getName(), "bar");
 
 	}
 
@@ -638,15 +631,15 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		JDFDurationState ds = dc.appendDurationState("foo");
-		Assert.assertEquals(ds.getName(), "foo");
+		Assertions.assertEquals(ds.getName(), "foo");
 		ds = dc.getDurationState("bar");
-		Assert.assertNull(ds);
+		Assertions.assertNull(ds);
 		ds = dc.getCreateDurationState("bar");
-		Assert.assertNotNull(ds);
-		Assert.assertEquals(ds.getName(), "bar");
+		Assertions.assertNotNull(ds);
+		Assertions.assertEquals(ds.getName(), "bar");
 		ds = dc.getDurationState("bar");
-		Assert.assertNotNull(ds);
-		Assert.assertEquals(ds.getName(), "bar");
+		Assertions.assertNotNull(ds);
+		Assertions.assertEquals(ds.getName(), "bar");
 
 	}
 
@@ -660,15 +653,15 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		JDFPDFPathState pps = dc.appendPDFPathState("foo");
-		Assert.assertEquals(pps.getName(), "foo");
+		Assertions.assertEquals(pps.getName(), "foo");
 		pps = dc.getPDFPathState("bar");
-		Assert.assertNull(pps);
+		Assertions.assertNull(pps);
 		pps = dc.getCreatePDFPathState("bar");
-		Assert.assertNotNull(pps);
-		Assert.assertEquals(pps.getName(), "bar");
+		Assertions.assertNotNull(pps);
+		Assertions.assertEquals(pps.getName(), "bar");
 		pps = dc.getPDFPathState("bar");
-		Assert.assertNotNull(pps);
-		Assert.assertEquals(pps.getName(), "bar");
+		Assertions.assertNotNull(pps);
+		Assertions.assertEquals(pps.getName(), "bar");
 
 	}
 
@@ -682,15 +675,15 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
 		JDFRectangleState rs = dc.appendRectangleState("foo");
-		Assert.assertEquals(rs.getName(), "foo");
+		Assertions.assertEquals(rs.getName(), "foo");
 		rs = dc.getRectangleState("bar");
-		Assert.assertNull(rs);
+		Assertions.assertNull(rs);
 		rs = dc.getCreateRectangleState("bar");
-		Assert.assertNotNull(rs);
-		Assert.assertEquals(rs.getName(), "bar");
+		Assertions.assertNotNull(rs);
+		Assertions.assertEquals(rs.getName(), "bar");
 		rs = dc.getRectangleState("bar");
-		Assert.assertNotNull(rs);
-		Assert.assertEquals(rs.getName(), "bar");
+		Assertions.assertNotNull(rs);
+		Assertions.assertEquals(rs.getName(), "bar");
 	}
 
 	/**
@@ -717,7 +710,7 @@ public class JDFDevCapTest extends TestCase
 		final JDFDoc d3 = new JDFDoc("parent");
 		final KElement parent = d3.getRoot();
 		dc.stateReport(foo, EnumFitsValue.Allowed, EnumValidationLevel.Complete, false, true, parent);
-		Assert.assertTrue(parent.toString().indexOf("bar1") >= 0);
-		Assert.assertFalse(parent.toString().indexOf("bar2") >= 0);
+		Assertions.assertTrue(parent.toString().indexOf("bar1") >= 0);
+		Assertions.assertFalse(parent.toString().indexOf("bar2") >= 0);
 	}
 }

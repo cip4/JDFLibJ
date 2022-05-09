@@ -76,8 +76,8 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi
  * 
@@ -92,7 +92,7 @@ public class JDFIDInfoTest extends JDFTestCaseBase
 	@Test
 	public void testCreateNull()
 	{
-		Assert.assertNotNull(JDFIDInfo.createFromJDF(null, null));
+		Assertions.assertNotNull(JDFIDInfo.createFromJDF(null, null));
 	}
 
 	/**
@@ -110,20 +110,20 @@ public class JDFIDInfoTest extends JDFTestCaseBase
 		final JDFNode jdf2 = jdf.addCombined(tasks);
 		jdf.setJobPartID("j2");
 		JDFIDInfo idInfo = JDFIDInfo.createFromJDF(jdf, null);
-		Assert.assertNotNull(idInfo);
-		Assert.assertEquals(idInfo.getCategory(), jdf.getCategory());
-		Assert.assertEquals(idInfo.getJobID(), jdf.getJobID(true));
-		Assert.assertEquals(idInfo.getJobPartID(), jdf.getJobPartID(false));
-		Assert.assertEquals(idInfo.getType(), "Product");
+		Assertions.assertNotNull(idInfo);
+		Assertions.assertEquals(idInfo.getCategory(), jdf.getCategory());
+		Assertions.assertEquals(idInfo.getJobID(), jdf.getJobID(true));
+		Assertions.assertEquals(idInfo.getJobPartID(), jdf.getJobPartID(false));
+		Assertions.assertEquals(idInfo.getType(), "Product");
 
 		idInfo = JDFIDInfo.createFromJDF(jdf2, null);
-		Assert.assertNotNull(idInfo);
-		Assert.assertNull(StringUtil.getNonEmpty(idInfo.getCategory()));
-		Assert.assertEquals(idInfo.getJobID(), jdf2.getJobID(true));
-		Assert.assertEquals(idInfo.getJobPartID(), jdf2.getJobPartID(false));
-		Assert.assertEquals(idInfo.getParentJobID(), jdf.getJobID(true));
-		Assert.assertEquals(idInfo.getParentJobPartID(), jdf.getJobPartID(false));
-		Assert.assertEquals(idInfo.getType(), "Combined");
-		Assert.assertEquals(idInfo.getTypes(), tasks);
+		Assertions.assertNotNull(idInfo);
+		Assertions.assertNull(StringUtil.getNonEmpty(idInfo.getCategory()));
+		Assertions.assertEquals(idInfo.getJobID(), jdf2.getJobID(true));
+		Assertions.assertEquals(idInfo.getJobPartID(), jdf2.getJobPartID(false));
+		Assertions.assertEquals(idInfo.getParentJobID(), jdf.getJobID(true));
+		Assertions.assertEquals(idInfo.getParentJobPartID(), jdf.getJobPartID(false));
+		Assertions.assertEquals(idInfo.getType(), "Combined");
+		Assertions.assertEquals(idInfo.getTypes(), tasks);
 	}
 }

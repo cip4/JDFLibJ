@@ -36,14 +36,12 @@
  */
 package org.cip4.jdflib.resource.intent;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.span.JDFSpanISOPaperSubstrate;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFMediaIntentTest
 {
@@ -56,7 +54,7 @@ public class JDFMediaIntentTest
 	{
 		final JDFMediaIntent ci = (JDFMediaIntent) new JDFDoc(ElementName.MEDIAINTENT).getRoot();
 		final JDFSpanISOPaperSubstrate ns = ci.appendISOPaperSubstrate();
-		assertNotNull(ns);
+		Assertions.assertNotNull(ns);
 		ns.setActual(EnumISOPaperSubstrate.PS1);
 	}
 
@@ -68,6 +66,6 @@ public class JDFMediaIntentTest
 	{
 		final JDFMediaIntent ci = (JDFMediaIntent) new JDFDoc(ElementName.MEDIAINTENT).getRoot();
 		ci.appendCertification().setOrganization("o1");
-		assertEquals("o1", ci.getCertification(0).getOrganization());
+		Assertions.assertEquals("o1", ci.getCertification(0).getOrganization());
 	}
 }

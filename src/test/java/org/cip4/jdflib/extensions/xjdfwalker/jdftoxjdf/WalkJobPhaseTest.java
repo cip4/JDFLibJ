@@ -68,9 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
@@ -80,7 +77,8 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkJobPhaseTest extends JDFTestCaseBase
 {
@@ -96,7 +94,7 @@ public class WalkJobPhaseTest extends JDFTestCaseBase
 		jp.setAmount(42);
 		jp.setTotalAmount(100);
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
-		assertEquals("42", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/JobPhase/@PercentCompleted", null));
+		Assertions.assertEquals("42", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/JobPhase/@PercentCompleted", null));
 	}
 
 	/**
@@ -110,18 +108,18 @@ public class WalkJobPhaseTest extends JDFTestCaseBase
 		w.updateTotalAmount(m);
 		m.put(AttributeName.TOTALAMOUNT, "123");
 		w.updateTotalAmount(m);
-		assertEquals("0", m.get(AttributeName.PERCENTCOMPLETED));
+		Assertions.assertEquals("0", m.get(AttributeName.PERCENTCOMPLETED));
 		m.put(AttributeName.TOTALAMOUNT, "123");
 		m.put(AttributeName.PERCENTCOMPLETED, "12");
 		w.updateTotalAmount(m);
 
-		assertEquals("12", m.get(AttributeName.PERCENTCOMPLETED));
-		assertNull(m.get(AttributeName.TOTALAMOUNT));
+		Assertions.assertEquals("12", m.get(AttributeName.PERCENTCOMPLETED));
+		Assertions.assertNull(m.get(AttributeName.TOTALAMOUNT));
 		m.remove(AttributeName.PERCENTCOMPLETED);
 		m.put(AttributeName.TOTALAMOUNT, "123");
 		m.put(AttributeName.AMOUNT, "23");
 		w.updateTotalAmount(m);
-		assertEquals(18.7, Double.valueOf(m.get(AttributeName.PERCENTCOMPLETED)), 0.1);
+		Assertions.assertEquals(18.7, Double.valueOf(m.get(AttributeName.PERCENTCOMPLETED)), 0.1);
 	}
 
 }

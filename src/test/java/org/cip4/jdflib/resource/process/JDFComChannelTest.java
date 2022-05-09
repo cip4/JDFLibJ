@@ -69,16 +69,13 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author prosirai
@@ -95,12 +92,12 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	public void testSetEMailLocator()
 	{
 		cc.setEMailLocator(" test@cip4.org");
-		assertEquals(JDFComChannel.MAILTO + "test@cip4.org", cc.getLocator());
-		assertEquals("test@cip4.org", cc.getEMailAddress());
+		Assertions.assertEquals(JDFComChannel.MAILTO + "test@cip4.org", cc.getLocator());
+		Assertions.assertEquals("test@cip4.org", cc.getEMailAddress());
 		cc.setLocator("test@cip4.org");
-		assertEquals("test@cip4.org", cc.getEMailAddress());
+		Assertions.assertEquals("test@cip4.org", cc.getEMailAddress());
 		cc.setLocator("test.2@cip4.org");
-		assertEquals("test.2@cip4.org", cc.getEMailAddress());
+		Assertions.assertEquals("test.2@cip4.org", cc.getEMailAddress());
 	}
 
 	/**
@@ -110,8 +107,8 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	public void testSetPhoneNumber()
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
-		assertEquals(JDFComChannel.TEL + "+49.431.123456", cc.getLocator());
-		assertEquals("+49431123456", cc.getPhoneNumber(true));
+		Assertions.assertEquals(JDFComChannel.TEL + "+49.431.123456", cc.getLocator());
+		Assertions.assertEquals("+49431123456", cc.getPhoneNumber(true));
 	}
 
 	/**
@@ -123,7 +120,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 		JDFPerson p = (JDFPerson) JDFElementColorParams.createRoot(ElementName.PERSON);
 		JDFComChannel.appendChannel(p, EnumChannelType.Phone, "1234");
 		JDFComChannel.appendChannel(p, EnumChannelType.Mobile, "12345");
-		assertEquals("12345", JDFComChannel.getChannelByType(p, EnumChannelType.Mobile).getLocator());
+		Assertions.assertEquals("12345", JDFComChannel.getChannelByType(p, EnumChannelType.Mobile).getLocator());
 	}
 
 	/**
@@ -133,8 +130,8 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	public void testSetPhoneNumberMobile()
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Mobile);
-		assertEquals(JDFComChannel.TEL + "+49.431.123456", cc.getLocator());
-		assertEquals("+49431123456", cc.getPhoneNumber(true));
+		Assertions.assertEquals(JDFComChannel.TEL + "+49.431.123456", cc.getLocator());
+		Assertions.assertEquals("+49431123456", cc.getPhoneNumber(true));
 	}
 
 	/**
@@ -145,7 +142,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
 		cc.setChannelTypeDetails("Mobile");
-		assertEquals(cc.getChannelType(), EnumChannelType.Mobile);
+		Assertions.assertEquals(cc.getChannelType(), EnumChannelType.Mobile);
 	}
 
 	/**
@@ -155,8 +152,8 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	public void testMatchesString()
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
-		assertTrue(cc.stringMatch("tel:+49 431 123456"));
-		assertTrue(cc.stringMatch("+49431123456"));
+		Assertions.assertTrue(cc.stringMatch("tel:+49 431 123456"));
+		Assertions.assertTrue(cc.stringMatch("+49431123456"));
 	}
 
 	/**
@@ -167,7 +164,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
 		JDFComChannel ccNew = (JDFComChannel) cc.cloneNewDoc();
-		assertTrue(ccNew.matchesComChannel(cc));
+		Assertions.assertTrue(ccNew.matchesComChannel(cc));
 	}
 
 	/**
@@ -178,14 +175,14 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
 		JDFComChannel ccNew = (JDFComChannel) cc.cloneNewDoc();
-		assertTrue(ccNew.matches(cc));
+		Assertions.assertTrue(ccNew.matches(cc));
 		cc.setPhoneNumber("+49 431 123456");
-		assertTrue(ccNew.matches(cc));
+		Assertions.assertTrue(ccNew.matches(cc));
 		cc.setPhoneNumber("+49 431 1234567");
-		assertFalse(ccNew.matches(cc));
+		Assertions.assertFalse(ccNew.matches(cc));
 		cc.setPhoneNumber("+49 431 123456");
 		cc.setChannelType(EnumChannelType.Mobile);
-		assertFalse(ccNew.matches(cc));
+		Assertions.assertFalse(ccNew.matches(cc));
 	}
 
 	/**
@@ -196,13 +193,13 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	{
 		cc.setChannelType(EnumChannelType.Phone);
 		cc.setPhoneNumber(" +49 431 123456 ");
-		assertEquals(JDFComChannel.TEL + "+49.431.123456", cc.getLocator());
-		assertEquals("+49431123456", cc.getPhoneNumber(true));
+		Assertions.assertEquals(JDFComChannel.TEL + "+49.431.123456", cc.getLocator());
+		Assertions.assertEquals("+49431123456", cc.getPhoneNumber(true));
 		cc.setChannelType(EnumChannelType.PrivateDirectory);
 		try
 		{
 			cc.setPhoneNumber(" +49 431 123456 ");
-			fail("illegal channel type");
+			Assertions.fail("illegal channel type");
 		}
 		catch (IllegalArgumentException x)
 		{
@@ -213,9 +210,10 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	/**
 	 *
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

@@ -76,8 +76,9 @@ package org.cip4.jdflib.jmf;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -92,7 +93,7 @@ public class JDFSubscriptionInfoTest extends JDFTestCaseBase
 	public void testGetEnumType()
 	{
 		si.setMessageType("Status");
-		Assert.assertEquals(si.getEnumType(), EnumType.Status);
+		Assertions.assertEquals(si.getEnumType(), EnumType.Status);
 	}
 
 	/**
@@ -102,7 +103,7 @@ public class JDFSubscriptionInfoTest extends JDFTestCaseBase
 	public void testSetEnumType()
 	{
 		si.setMessageType(EnumType.SubmissionMethods);
-		Assert.assertEquals(si.getMessageType(), EnumType.SubmissionMethods.getName());
+		Assertions.assertEquals(si.getMessageType(), EnumType.SubmissionMethods.getName());
 	}
 
 	/**
@@ -110,6 +111,7 @@ public class JDFSubscriptionInfoTest extends JDFTestCaseBase
 	 * @throws Exception
 	*/
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub

@@ -71,8 +71,6 @@
 
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EnumSourceObjects;
 import org.cip4.jdflib.core.ElementName;
@@ -80,7 +78,8 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -99,7 +98,7 @@ public class JDFColorSpaceConversionOpTest extends JDFTestCaseBase
 		final JDFNode n = JDFNode.createRoot();
 		final JDFColorSpaceConversionParams cp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input);
 		cp.appendColorSpaceConversionOp().addSourceObject(EnumSourceObjects.ImagePhotographic);
-		assertEquals(1, cp.getColorSpaceConversionOp(0).getSourceObjects().size());
+		Assertions.assertEquals(1, cp.getColorSpaceConversionOp(0).getSourceObjects().size());
 	}
 
 	/**
@@ -113,7 +112,7 @@ public class JDFColorSpaceConversionOpTest extends JDFTestCaseBase
 		final JDFColorSpaceConversionOp op = cp.appendColorSpaceConversionOp();
 		op.addSourceObject(EnumSourceObjects.ImagePhotographic);
 		op.addSourceObject(EnumSourceObjects.ImagePhotographic);
-		assertEquals(1, cp.getColorSpaceConversionOp(0).getSourceObjects().size());
+		Assertions.assertEquals(1, cp.getColorSpaceConversionOp(0).getSourceObjects().size());
 	}
 
 	/**
@@ -127,7 +126,7 @@ public class JDFColorSpaceConversionOpTest extends JDFTestCaseBase
 		final JDFColorSpaceConversionOp op = cp.appendColorSpaceConversionOp();
 		op.addSourceObject(EnumSourceObjects.ImagePhotographic);
 		op.addSourceObject(EnumSourceObjects.ImageScreenShot);
-		assertEquals(2, cp.getColorSpaceConversionOp(0).getSourceObjects().size());
+		Assertions.assertEquals(2, cp.getColorSpaceConversionOp(0).getSourceObjects().size());
 	}
 
 }

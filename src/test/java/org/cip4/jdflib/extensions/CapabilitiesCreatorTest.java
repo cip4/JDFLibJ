@@ -70,14 +70,13 @@
  */
 package org.cip4.jdflib.extensions;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.goldenticket.WideFormatGoldenTicket;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class CapabilitiesCreatorTest extends JDFTestCaseBase
 {
@@ -95,7 +94,7 @@ public class CapabilitiesCreatorTest extends JDFTestCaseBase
 		KElement xjdf = c.convert(n);
 		CapabilitiesCreator cc = new CapabilitiesCreator();
 		KElement dc = cc.createCaps(xjdf);
-		assertNotNull(dc);
+		Assertions.assertNotNull(dc);
 	}
 
 }

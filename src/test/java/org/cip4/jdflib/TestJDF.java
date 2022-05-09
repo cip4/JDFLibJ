@@ -39,9 +39,6 @@
 
 package org.cip4.jdflib;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import java.io.File;
 import java.util.Collection;
 import java.util.Vector;
@@ -59,9 +56,10 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFSpawn;
-import org.junit.After;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -88,7 +86,7 @@ public class TestJDF extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void fixExampleVersions()
 	{
 		final Vector<File> v = FileUtil.listFilesInTree(new File("/gitreps/samples/src/main/resources/jdf"), "*.jdf");
@@ -182,7 +180,7 @@ public class TestJDF extends JDFTestCaseBase
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testCheckSpawnedResources() throws Throwable
 	{
 		final JDFDoc jdfDoc = JDFDoc.parseFile("C:/data/spawnedrw.jdf");
@@ -202,11 +200,11 @@ public class TestJDF extends JDFTestCaseBase
 
 		final Collection<JDFResource> col = nodeProc.checkSpawnedResources(vsRWResourceIDs, vamSpawn);
 
-		assertNotNull("No spawned resource found", col);
+		Assertions.assertNotNull(col, "No spawned resource found");
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testSpawnedResources() throws Throwable
 	{
 		final JDFDoc jdfDoc = JDFDoc.parseFile("C:/data/spawnedrw.jdf");
@@ -247,7 +245,7 @@ public class TestJDF extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		JDFResource.setUnpartitiondImplicit(false);
@@ -260,7 +258,7 @@ public class TestJDF extends JDFTestCaseBase
 	@Test
 	public void testDumy()
 	{
-		assertNull(null);
+		Assertions.assertNull(null);
 	}
 
 }

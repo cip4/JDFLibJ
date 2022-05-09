@@ -36,11 +36,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -50,7 +45,8 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.process.JDFAssembly;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkAssemblyTest extends JDFTestCaseBase
 {
@@ -71,10 +67,10 @@ public class WalkAssemblyTest extends JDFTestCaseBase
 		final KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
 		wa.walk(as, root);
 		final JDFAssembly as2 = (JDFAssembly) root.getElement(ElementName.ASSEMBLY);
-		assertNotNull(as2);
-		assertNull(as2.getPageAssignedList(0));
-		assertNull(as.getPageList());
-		assertNotNull(as.getAssemblySection(0));
+		Assertions.assertNotNull(as2);
+		Assertions.assertNull(as2.getPageAssignedList(0));
+		Assertions.assertNull(as.getPageList());
+		Assertions.assertNotNull(as.getAssemblySection(0));
 	}
 
 	/**
@@ -92,7 +88,7 @@ public class WalkAssemblyTest extends JDFTestCaseBase
 		final KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
 		wa.walk(as, root);
 		final JDFAssembly as2 = (JDFAssembly) root.getElement(ElementName.ASSEMBLY);
-		assertNull(as2.getNonEmpty(AttributeName.PHYSICALSECTION));
+		Assertions.assertNull(as2.getNonEmpty(AttributeName.PHYSICALSECTION));
 	}
 
 	/**
@@ -108,8 +104,8 @@ public class WalkAssemblyTest extends JDFTestCaseBase
 		final KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
 		wa.walk(as, root);
 		final JDFAssembly as2 = (JDFAssembly) root.getElement(ElementName.ASSEMBLY);
-		assertNull(as2.getNonEmpty(AttributeName.ASSEMBLYIDS));
-		assertEquals("a1", as2.getNonEmpty(XJDFConstants.BinderySignatureIDs));
+		Assertions.assertNull(as2.getNonEmpty(AttributeName.ASSEMBLYIDS));
+		Assertions.assertEquals("a1", as2.getNonEmpty(XJDFConstants.BinderySignatureIDs));
 	}
 
 	/**
@@ -121,7 +117,7 @@ public class WalkAssemblyTest extends JDFTestCaseBase
 		final JDFAssembly as = (JDFAssembly) new JDFDoc(ElementName.ASSEMBLY).getRoot();
 		final WalkAssembly wa = new WalkAssembly();
 		wa.setParent(new JDFToXJDF());
-		assertTrue(wa.matches(as));
+		Assertions.assertTrue(wa.matches(as));
 	}
 
 	/**
@@ -132,7 +128,7 @@ public class WalkAssemblyTest extends JDFTestCaseBase
 	{
 		final JDFAssembly as = (JDFAssembly) new JDFDoc(ElementName.ASSEMBLY).getRoot();
 		final WalkAssembly wa = new WalkAssembly();
-		assertTrue(wa.getElementNames().contains(as.getLocalName()));
+		Assertions.assertTrue(wa.getElementNames().contains(as.getLocalName()));
 	}
 
 }

@@ -36,9 +36,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
 import org.cip4.jdflib.core.AttributeName;
@@ -51,7 +48,8 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkResourceInfoTest extends JDFTestCaseBase
 {
@@ -70,7 +68,7 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 
-		assertEquals("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
+		Assertions.assertEquals("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
 	}
 
 	/**
@@ -87,9 +85,9 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 
-		assertEquals("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@TotalAmount", null));
-		assertEquals(null, xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
-		assertEquals("Job", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@Scope", null));
+		Assertions.assertEquals("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@TotalAmount", null));
+		Assertions.assertEquals(null, xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
+		Assertions.assertEquals("Job", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@Scope", null));
 	}
 
 	/**
@@ -107,9 +105,9 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 
-		assertEquals("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@TotalAmount", null));
-		assertEquals("Media", xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/@Name", null));
-		assertEquals("Job", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@Scope", null));
+		Assertions.assertEquals("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@TotalAmount", null));
+		Assertions.assertEquals("Media", xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/@Name", null));
+		Assertions.assertEquals("Job", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@Scope", null));
 	}
 
 	/**
@@ -127,7 +125,7 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 
-		assertEquals(-1, xjmf.toXML().indexOf(ElementName.AUDITPOOL));
+		Assertions.assertEquals(-1, xjmf.toXML().indexOf(ElementName.AUDITPOOL));
 	}
 
 	/**
@@ -145,7 +143,7 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 
-		assertEquals("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet[@Name=\"Media\"]/Resource/AmountPool/PartAmount/@Amount", null));
+		Assertions.assertEquals("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet[@Name=\"Media\"]/Resource/AmountPool/PartAmount/@Amount", null));
 	}
 
 	/**
@@ -164,7 +162,7 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 
-		assertEquals("Rework", xjmf.getXPathAttribute("SignalResource/ResourceInfo/MISDetails/@WorkType", null));
+		Assertions.assertEquals("Rework", xjmf.getXPathAttribute("SignalResource/ResourceInfo/MISDetails/@WorkType", null));
 	}
 
 	/**
@@ -182,7 +180,7 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 
-		assertNull("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@ResourceName", null));
+		Assertions.assertNull(xjmf.getXPathAttribute("SignalResource/ResourceInfo/@ResourceName", null), "42");
 	}
 
 	/**
@@ -201,6 +199,6 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 
-		assertNull("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@ResourceName", null));
+		Assertions.assertNull(xjmf.getXPathAttribute("SignalResource/ResourceInfo/@ResourceName", null), "42");
 	}
 }

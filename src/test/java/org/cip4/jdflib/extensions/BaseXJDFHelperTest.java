@@ -36,16 +36,15 @@
  */
 package org.cip4.jdflib.extensions;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  *
@@ -61,6 +60,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -144,7 +144,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetAttribute()
 	{
-		assertNull(theHelper.getAttribute("foo"));
+		Assertions.assertNull(theHelper.getAttribute("foo"));
 		theHelper.setAttribute("foo", "bar");
 		assertEquals("bar", theHelper.getAttribute("foo"));
 	}
@@ -189,7 +189,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	public void testClone()
 	{
 		assertEquals(theHelper, theHelper);
-		assertFalse(theHelper.equals(theHelper.clone()));
+		Assertions.assertFalse(theHelper.equals(theHelper.clone()));
 		assertEquals(theHelper.toString(), theHelper.clone().toString());
 	}
 
@@ -203,7 +203,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 		final XJDFHelper clone = theHelper.clone();
 		final SetHelper s = clone.appendSet(null, "foo", null);
 		theHelper.copyHelper(s);
-		assertNotNull(theHelper.getSet("foo", null));
+		Assertions.assertNotNull(theHelper.getSet("foo", null));
 	}
 
 	/**
@@ -214,10 +214,10 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	public void testDeleteNode()
 	{
 		assertEquals(theHelper, theHelper);
-		assertNotNull(theHelper.getRoot());
+		Assertions.assertNotNull(theHelper.getRoot());
 		theHelper.deleteNode();
 		assertEquals(theHelper, theHelper);
-		assertNull(theHelper.getRoot());
+		Assertions.assertNull(theHelper.getRoot());
 	}
 
 	/**

@@ -70,10 +70,6 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.AttributeName;
@@ -83,7 +79,9 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -107,14 +105,15 @@ public class JDFComponentTest extends JDFTestCaseBase
 	public final void testSetDimensions()
 	{
 		c.setDimensions(new JDFXYPair(1, 2));
-		assertEquals(new JDFShape(1, 2, 0), c.getDimensions());
+		Assertions.assertEquals(new JDFShape(1, 2, 0), c.getDimensions());
 	}
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -130,7 +129,7 @@ public class JDFComponentTest extends JDFTestCaseBase
 	public void testSetComponentTypeAuto()
 	{
 		c.setComponentType(null);
-		assertFalse(c.hasAttribute(AttributeName.COMPONENTTYPE));
+		Assertions.assertFalse(c.hasAttribute(AttributeName.COMPONENTTYPE));
 	}
 
 	/**
@@ -140,14 +139,14 @@ public class JDFComponentTest extends JDFTestCaseBase
 	public void testIsComponentType()
 	{
 		c.setComponentType(EnumComponentType.FinalProduct, null);
-		assertTrue(c.isComponentType(EnumComponentType.FinalProduct));
-		assertFalse(c.isComponentType(EnumComponentType.PartialProduct));
-		assertFalse(c.isComponentType(EnumComponentType.Web));
+		Assertions.assertTrue(c.isComponentType(EnumComponentType.FinalProduct));
+		Assertions.assertFalse(c.isComponentType(EnumComponentType.PartialProduct));
+		Assertions.assertFalse(c.isComponentType(EnumComponentType.Web));
 		c.setComponentType(EnumComponentType.FinalProduct, EnumComponentType.Sheet);
-		assertTrue(c.isComponentType(EnumComponentType.FinalProduct));
-		assertTrue(c.isComponentType(EnumComponentType.Sheet));
-		assertFalse(c.isComponentType(EnumComponentType.PartialProduct));
-		assertFalse(c.isComponentType(EnumComponentType.Web));
+		Assertions.assertTrue(c.isComponentType(EnumComponentType.FinalProduct));
+		Assertions.assertTrue(c.isComponentType(EnumComponentType.Sheet));
+		Assertions.assertFalse(c.isComponentType(EnumComponentType.PartialProduct));
+		Assertions.assertFalse(c.isComponentType(EnumComponentType.Web));
 	}
 
 	/**
@@ -159,9 +158,9 @@ public class JDFComponentTest extends JDFTestCaseBase
 		c.setComponentType(null);
 		JDFLayout lo = c.appendLayout();
 		JDFMedia m = lo.appendMedia();
-		assertEquals(m, c.getMedia());
+		Assertions.assertEquals(m, c.getMedia());
 		lo.makeRootResource(null, null, true);
-		assertEquals(m, c.getMedia());
+		Assertions.assertEquals(m, c.getMedia());
 	}
 
 	/**
@@ -172,7 +171,7 @@ public class JDFComponentTest extends JDFTestCaseBase
 	{
 		c.setComponentType(null);
 		JDFMedia m = (JDFMedia) c.appendElement(ElementName.MEDIA);
-		assertEquals(m, c.getMedia());
+		Assertions.assertEquals(m, c.getMedia());
 	}
 
 	/**
@@ -183,14 +182,14 @@ public class JDFComponentTest extends JDFTestCaseBase
 	public void testSetComponentType()
 	{
 		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
-		assertTrue(c.hasAttribute(AttributeName.COMPONENTTYPE));
-		assertEquals(c.getComponentType().size(), 2);
-		assertTrue(c.getComponentType().contains(EnumComponentType.PartialProduct));
+		Assertions.assertTrue(c.hasAttribute(AttributeName.COMPONENTTYPE));
+		Assertions.assertEquals(c.getComponentType().size(), 2);
+		Assertions.assertTrue(c.getComponentType().contains(EnumComponentType.PartialProduct));
 	}
 
 	/**
 	 * 	@Override
-	 * @see org.cip4.jdflib.JDFTestCaseBase#toString()
+	 * @see JDFTestCaseBase#toString()
 	 */
 	@Override
 	public String toString()

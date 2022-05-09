@@ -71,10 +71,6 @@
  */
 package org.cip4.jdflib.elementwalker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -84,7 +80,9 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -108,8 +106,8 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	{
 		final UnLinkFinder uf = new UnLinkFinder();
 		final VElement v = uf.getUnlinkedResources(n);
-		assertEquals(v.size(), 1);
-		assertTrue(v.contains(r));
+		Assertions.assertEquals(v.size(), 1);
+		Assertions.assertTrue(v.contains(r));
 	}
 
 	/**
@@ -120,10 +118,10 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	{
 		final UnLinkFinder uf = new UnLinkFinder();
 		final VElement v = uf.getAllUnlinked(n);
-		assertEquals(v.size(), 3);
-		assertTrue(v.contains(r));
-		assertTrue(v.contains(rl));
-		assertTrue(v.contains(re));
+		Assertions.assertEquals(v.size(), 3);
+		Assertions.assertTrue(v.contains(r));
+		Assertions.assertTrue(v.contains(rl));
+		Assertions.assertTrue(v.contains(re));
 	}
 
 	/**
@@ -134,9 +132,9 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	{
 		final UnLinkFinder uf = new UnLinkFinder();
 		final VElement v = uf.getUnlinkedRefs(n);
-		assertEquals(v.size(), 2);
-		assertTrue(v.contains(rl));
-		assertTrue(v.contains(re));
+		Assertions.assertEquals(v.size(), 2);
+		Assertions.assertTrue(v.contains(rl));
+		Assertions.assertTrue(v.contains(re));
 	}
 
 	/**
@@ -148,11 +146,11 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 		final UnLinkFinder uf = new UnLinkFinder();
 		uf.eraseUnlinkedResources(n);
 		VElement v = uf.getUnlinkedResources(n);
-		assertNull(v);
+		Assertions.assertNull(v);
 		v = uf.getUnlinkedRefs(n);
-		assertEquals(v.size(), 2);
+		Assertions.assertEquals(v.size(), 2);
 		v = uf.getAllUnlinked(n);
-		assertEquals(v.size(), 2);
+		Assertions.assertEquals(v.size(), 2);
 
 	}
 
@@ -165,11 +163,11 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 		final UnLinkFinder uf = new UnLinkFinder();
 		uf.eraseUnlinkedRefs(n);
 		VElement v = uf.getUnlinkedResources(n);
-		assertEquals(v.size(), 1);
+		Assertions.assertEquals(v.size(), 1);
 		v = uf.getAllUnlinked(n);
-		assertEquals(v.size(), 1);
+		Assertions.assertEquals(v.size(), 1);
 		v = uf.getUnlinkedRefs(n);
-		assertNull(v);
+		Assertions.assertNull(v);
 	}
 
 	/**
@@ -185,11 +183,11 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 		uf.setIgnoreForeign(true);
 		uf.eraseUnlinkedRefs(n);
 		VElement v = uf.getUnlinkedResources(n);
-		assertEquals(v.size(), 1);
+		Assertions.assertEquals(v.size(), 1);
 		v = uf.getAllUnlinked(n);
-		assertEquals(v.size(), 1);
+		Assertions.assertEquals(v.size(), 1);
 		v = uf.getUnlinkedRefs(n);
-		assertNull(v);
+		Assertions.assertNull(v);
 	}
 
 	/**
@@ -201,14 +199,15 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 		final UnLinkFinder uf = new UnLinkFinder();
 		uf.eraseUnlinked(n);
 		VElement v = uf.getUnlinkedResources(n);
-		assertNull(v);
+		Assertions.assertNull(v);
 		v = uf.getUnlinkedRefs(n);
-		assertNull(v);
+		Assertions.assertNull(v);
 		v = uf.getAllUnlinked(n);
-		assertNull(v);
+		Assertions.assertNull(v);
 	}
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();

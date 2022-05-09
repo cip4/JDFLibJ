@@ -68,14 +68,13 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkAuditTest extends JDFTestCaseBase
 {
@@ -88,7 +87,7 @@ public class WalkAuditTest extends JDFTestCaseBase
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		KElement xjdf = new JDFToXJDF().convert(n);
-		assertNotNull(xjdf.getXPathAttribute("AuditPool/AuditCreated/Header/@Time", null));
+		Assertions.assertNotNull(xjdf.getXPathAttribute("AuditPool/AuditCreated/Header/@Time", null));
 	}
 
 }

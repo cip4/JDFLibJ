@@ -69,15 +69,13 @@
  */
 package org.cip4.jdflib.resource;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class JDFPageCellTest extends JDFTestCaseBase
 {
@@ -89,13 +87,13 @@ public class JDFPageCellTest extends JDFTestCaseBase
 	public void testGetClipBox()
 	{
 		JDFPageCell pc = (JDFPageCell) new JDFDoc(ElementName.PAGECELL).getRoot();
-		assertNull(pc.getClipBox());
+		Assertions.assertNull(pc.getClipBox());
 		JDFXYPair size = new JDFXYPair(10, 20);
 		pc.setTrimSize(size);
-		assertEquals(pc.getClipBox().getSize(), size);
+		Assertions.assertEquals(pc.getClipBox().getSize(), size);
 		JDFRectangle rect = new JDFRectangle(1, 2, 33, 44);
 		pc.setClipBox(rect);
-		assertEquals(pc.getClipBox(), rect);
+		Assertions.assertEquals(pc.getClipBox(), rect);
 	}
 
 	/**
@@ -105,13 +103,13 @@ public class JDFPageCellTest extends JDFTestCaseBase
 	public void testTrimSize()
 	{
 		JDFPageCell pc = (JDFPageCell) new JDFDoc(ElementName.PAGECELL).getRoot();
-		assertNull(pc.getTrimSize());
+		Assertions.assertNull(pc.getTrimSize());
 		JDFRectangle rect = new JDFRectangle(1, 2, 33, 44);
 		pc.setClipBox(rect);
-		assertEquals(pc.getTrimSize(), rect.getSize());
+		Assertions.assertEquals(pc.getTrimSize(), rect.getSize());
 		JDFXYPair size = new JDFXYPair(10, 20);
 		pc.setTrimSize(size);
-		assertEquals(pc.getTrimSize(), size);
+		Assertions.assertEquals(pc.getTrimSize(), size);
 	}
 
 }

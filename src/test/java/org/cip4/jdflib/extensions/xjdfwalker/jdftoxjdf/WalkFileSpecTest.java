@@ -36,13 +36,12 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.resource.process.JDFExternalImpositionTemplate;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class WalkFileSpecTest
 {
@@ -56,7 +55,7 @@ public class WalkFileSpecTest
 		final JDFExternalImpositionTemplate et = (JDFExternalImpositionTemplate) new JDFDoc(ElementName.EXTERNALIMPOSITIONTEMPLATE).getRoot();
 		final JDFFileSpec fs = et.appendFileSpec("./foo.jdf");
 		new WalkFileSpec().ensureResUsage(fs);
-		assertEquals(ElementName.EXTERNALIMPOSITIONTEMPLATE, fs.getResourceUsage());
+		Assertions.assertEquals(ElementName.EXTERNALIMPOSITIONTEMPLATE, fs.getResourceUsage());
 	}
 
 }

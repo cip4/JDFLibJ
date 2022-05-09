@@ -53,6 +53,7 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.XJMFHelper;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFColorMeasurementConditions;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFPatch;
@@ -64,7 +65,8 @@ import org.cip4.jdflib.resource.process.JDFQualityControlParams;
 import org.cip4.jdflib.resource.process.JDFQualityControlResult;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -78,6 +80,7 @@ public class XJDFQCExampleTest extends ExampleTest
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -94,8 +97,8 @@ public class XJDFQCExampleTest extends ExampleTest
 	public final void testColorQualityControlSpectrum()
 	{
 		final XJDFHelper h = new XJDFHelper(EnumVersion.Version_2_1, "qc1");
-		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
-		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.QualityControl);
+		h.addType(JDFNode.EnumType.ConventionalPrinting);
+		h.addType(JDFNode.EnumType.QualityControl);
 		final SetHelper sh = h.appendResourceSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		vMap.extendMap(AttributeName.SEPARATION, JDFConstants.SEPARATIONS_CMYK);
@@ -134,8 +137,8 @@ public class XJDFQCExampleTest extends ExampleTest
 	public final void testColorQualityControl()
 	{
 		final XJDFHelper h = new XJDFHelper(EnumVersion.Version_2_1, "qc1");
-		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
-		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.QualityControl);
+		h.addType(JDFNode.EnumType.ConventionalPrinting);
+		h.addType(JDFNode.EnumType.QualityControl);
 		final SetHelper sh = h.appendResourceSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		vMap.extendMap(AttributeName.SEPARATION, JDFConstants.SEPARATIONS_CMYK);
@@ -173,8 +176,8 @@ public class XJDFQCExampleTest extends ExampleTest
 	public final void testInspectionQualityControlParams()
 	{
 		final XJDFHelper h = new XJDFHelper(EnumVersion.Version_2_1, "qcinspection");
-		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
-		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.QualityControl);
+		h.addType(JDFNode.EnumType.ConventionalPrinting);
+		h.addType(JDFNode.EnumType.QualityControl);
 		final SetHelper sh = h.appendResourceSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
 		final ResourceHelper rh = sh.getCreatePartition(0, true);
 		final JDFQualityControlParams qpr = (JDFQualityControlParams) rh.getResource();
@@ -197,8 +200,8 @@ public class XJDFQCExampleTest extends ExampleTest
 	public final void testInspectionQualityControlResult()
 	{
 		final XJDFHelper h = new XJDFHelper(EnumVersion.Version_2_1, "qcinspection");
-		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
-		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.QualityControl);
+		h.addType(JDFNode.EnumType.ConventionalPrinting);
+		h.addType(JDFNode.EnumType.QualityControl);
 		final SetHelper sh = h.appendResourceSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
 		final ResourceHelper rh = sh.getCreatePartition(0, true);
 		final JDFQualityControlParams qpr = (JDFQualityControlParams) rh.getResource();
@@ -248,8 +251,8 @@ public class XJDFQCExampleTest extends ExampleTest
 	public final void testInspectionQualityControlResultXJMF()
 	{
 		final XJDFHelper h = new XJDFHelper(EnumVersion.Version_2_1, "qcinspection");
-		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
-		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.QualityControl);
+		h.addType(JDFNode.EnumType.ConventionalPrinting);
+		h.addType(JDFNode.EnumType.QualityControl);
 		final SetHelper sh = h.appendResourceSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
 		final ResourceHelper rh = sh.getCreatePartition(0, true);
 		final JDFQualityControlParams qpr = (JDFQualityControlParams) rh.getResource();
