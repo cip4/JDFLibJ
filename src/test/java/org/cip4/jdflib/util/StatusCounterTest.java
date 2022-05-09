@@ -138,20 +138,19 @@ public class StatusCounterTest extends JDFTestCaseBase
 	@Override
 	public void setUp() throws Exception
 	{
-		// d = creatXMDoc();
-		// n = d.getJDFRoot();
-		// xpMedia = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null,
-		// 0);
-		// final JDFResourceLink rlxp = n.getLink(xpMedia, null);
-		// rlxp.setAmount(100, null);
-		// sc = new StatusCounter(n, null, null);
-		// deviceID = "Status-counter-TestDevice";
-		// sc.setDeviceID(deviceID);
-		// resID = xpMedia.getID();
-		// sc.setFirstRefID(resID);
-		// sc.addPhase(resID, 200, 0, true);
-		// employee = (JDFEmployee) new JDFDoc("Employee").getRoot();
-		// employee.setPersonalID("P1");
+		d = creatXMDoc();
+		n = d.getJDFRoot();
+		xpMedia = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
+		final JDFResourceLink rlxp = n.getLink(xpMedia, null);
+		rlxp.setAmount(100, null);
+		sc = new StatusCounter(n, null, null);
+		deviceID = "Status-counter-TestDevice";
+		sc.setDeviceID(deviceID);
+		resID = xpMedia.getID();
+		sc.setFirstRefID(resID);
+		sc.addPhase(resID, 200, 0, true);
+		employee = (JDFEmployee) new JDFDoc("Employee").getRoot();
+		employee.setPersonalID("P1");
 		super.setUp();
 	}
 
