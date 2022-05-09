@@ -74,6 +74,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
@@ -122,9 +124,9 @@ public class StatusCounterTest extends JDFTestCaseBase
 		final JDFNode n0 = (JDFNode) e.appendElement(ElementName.JDF);
 		n0.setJobID("NestedJob");
 		n0.appendStatusPool();
-		assertNotNull("Status Pool could not be added", n0.getStatusPool());
+		assertNotNull(n0.getStatusPool(), "Status Pool could not be added");
 		n2.fixVersion(JDFElement.EnumVersion.Version_1_3);
-		assertNotNull("Status Pool did not survive: " + n2.toDisplayXML(4), n0.getStatusPool());
+		assertNotNull(n0.getStatusPool(), "Status Pool did not survive: " + n2.toDisplayXML(4));
 	}
 
 	/**
@@ -267,7 +269,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		JDFJMF jmf = d.getJMFRoot();
 		final JDFNotification noti = jmf.getSignal(0).getNotification();
 		Assertions.assertEquals(noti.getJobID(), n.getJobID(true));
-		Assertions.assertNotNull(noti.getEvent());
+		assertNotNull(noti.getEvent());
 		d.write2File(sm_dirTestDataTemp + "jmfNotification.jmf", 2, false);
 		Assertions.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 		sc.setEvent("id1", "value", "blah blah");
@@ -364,7 +366,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		docJMF = sc.getDocJMFPhaseTime();
 		sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		deviceInfo = sig.getDeviceInfo(0);
-		Assertions.assertNotNull(deviceInfo.getEmployee(0));
+		assertNotNull(deviceInfo.getEmployee(0));
 
 	}
 
