@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -69,6 +69,7 @@
 package org.cip4.jdflib.elementwalker.fixversion;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.JDFResource;
@@ -77,7 +78,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * June 7, 2009
+ *         June 7, 2009
  */
 public class WalkResource extends WalkElement
 {
@@ -98,13 +99,12 @@ public class WalkResource extends WalkElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return (toCheck instanceof JDFResource);
+		return (toCheck instanceof JDFResource && JDFElement.isInJDFNameSpaceStatic(toCheck));
 	}
 
 	/**
-	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
-	 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
-	 * high versions but potentially fail when attempting to move from higher to lower versions
+	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine for JDF uses heuristics to modify this element and its children to be
+	 *      compatible with a given version in general, it will be able to move from low to high versions but potentially fail when attempting to move from higher to lower versions
 	 */
 	@Override
 	public KElement walk(final KElement e1, final KElement trackElem)
