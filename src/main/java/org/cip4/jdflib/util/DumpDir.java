@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -51,11 +51,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- *
- * @author rainer
- *
- *         very trivial temp file dump
- *
+ * @author rainer very trivial temp file dump
  */
 public class DumpDir
 {
@@ -70,7 +66,6 @@ public class DumpDir
 	public boolean quiet = true;
 
 	/**
-	 *
 	 * @return
 	 */
 	int increment()
@@ -151,7 +146,6 @@ public class DumpDir
 	 * @param header the header to print prior to the xml
 	 * @param ext the additional extension to add prior to .tmp
 	 * @return
-	 *
 	 */
 	public File newFile(final String header, final String ext)
 	{
@@ -193,7 +187,6 @@ public class DumpDir
 	 * @param is the input stream to fill
 	 * @param ext the additional extension
 	 * @return the new file
-	 *
 	 */
 	public File newFileFromStream(final String header, InputStream is, final String ext)
 	{
@@ -259,7 +252,7 @@ public class DumpDir
 	 */
 	void cleanup(final int inc)
 	{
-		if ((inc % 42) == 0)
+		if ((inc % 42) == 0 || Math.random() < 0.01)
 		{
 			synchronized (listMap.get(baseDir))
 			{
@@ -278,7 +271,6 @@ public class DumpDir
 	}
 
 	/**
-	 *
 	 * clean up single file including any unpacked directories
 	 *
 	 * @param f
