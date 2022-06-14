@@ -2021,12 +2021,12 @@ public class JDFResource extends JDFElement
 			}
 			if (bLink)
 			{
-				final VElement vNodes = n.getvJDFNode(null, null, false);
+				final List<JDFNode> vNodes = n.getTreeByClass(JDFNode.class, true);
 				if (vRet == null)
 					vRet = new VElement();
-				for (final KElement nE : vNodes)
+				for (final JDFNode nE : vNodes)
 				{
-					JDFResourceLinkPool rlp = ((JDFNode) nE).getResourceLinkPool();
+					JDFResourceLinkPool rlp = nE.getResourceLinkPool();
 					List<JDFResourceLink> vTmp = rlp == null ? null : rlp.getLinkArray();
 					if (vTmp != null)
 					{
@@ -3624,8 +3624,7 @@ public class JDFResource extends JDFElement
 			}
 		}
 
-		private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves,
-				final boolean removeEqual)
+		private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves, final boolean removeEqual)
 		{
 			final int localSize = localLeaves.size();
 			for (final String att : atts)
@@ -4503,8 +4502,7 @@ public class JDFResource extends JDFElement
 	 * @default getChildElementVector(null, null, null, true, 0, false)
 	 */
 	@Override
-	public VElement getChildElementVector(final String element, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize,
-			final boolean bResolveTarget)
+	public VElement getChildElementVector(final String element, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize, final boolean bResolveTarget)
 	{
 		VElement v = null;
 		final String nodeName = getNodeName();

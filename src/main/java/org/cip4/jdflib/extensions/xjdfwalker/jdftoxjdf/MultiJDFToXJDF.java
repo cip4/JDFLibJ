@@ -202,10 +202,10 @@ class MultiJDFToXJDF
 	 */
 	VElement getProcessNodes(final JDFNode rootNode)
 	{
-		final VElement v = rootNode.getvJDFNode(null, null, false);
+		final List<JDFNode> v = rootNode.getTreeByClass(JDFNode.class, true);
 		for (int i = v.size() - 1; i >= 0; i--)
 		{
-			final JDFNode n = (JDFNode) v.elementAt(i);
+			final JDFNode n = v.get(i);
 			if (!n.isProcessNode())
 			{
 				v.remove(i);
@@ -215,7 +215,9 @@ class MultiJDFToXJDF
 				ensureJobPartID(i, n);
 			}
 		}
-		return v;
+		VElement v2 = new VElement();
+		v2.addAll(v);
+		return v2;
 	}
 
 	/**

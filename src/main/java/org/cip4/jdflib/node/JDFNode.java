@@ -3546,7 +3546,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public VElement getvJDFNode(final String task, final EnumActivation active, final boolean bDirect)
 	{
-
 		final VElement v = new VElement();
 		final List<KElement> l = bDirect ? getTree(ElementName.JDF, null, null, bDirect, true) : getTree(ElementName.JDF);
 		if (!bDirect && l.size() > 1)

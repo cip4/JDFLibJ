@@ -58,7 +58,6 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNameRange;
@@ -371,11 +370,10 @@ public class XJDFToJDFImpl extends PackageElementWalker
 			}
 			if (jpID == null)
 			{
-				final VElement nodes = root.getvJDFNode(null, null, false);
+				final List<JDFNode> nodes = root.getTreeByClass(JDFNode.class, true);
 				final VString xTypes = StringUtil.tokenize(xjdf.getAttribute(AttributeName.TYPES), null, false);
-				for (final KElement e : nodes)
+				for (final JDFNode n2 : nodes)
 				{
-					final JDFNode n2 = (JDFNode) e;
 					final VString vtypes = n2.getAllTypes();
 					if (vtypes != null && xTypes != null && vtypes.containsAll(xTypes))
 					{
