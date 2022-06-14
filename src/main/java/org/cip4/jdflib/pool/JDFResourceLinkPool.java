@@ -84,6 +84,7 @@
 package org.cip4.jdflib.pool;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -153,7 +154,7 @@ public class JDFResourceLinkPool extends JDFPool
 	/**
 	 *
 	 * @return
-	*/
+	 */
 	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
@@ -269,7 +270,9 @@ public class JDFResourceLinkPool extends JDFPool
 				if (linkRoot != null)
 				{
 					boolean bNameMatches = (resName == null) || (bColon ? linkRoot.getNodeName().equals(resName) : linkRoot.getLocalName().equals(resName));
-					if (bNameMatches && (resName != null) && JDFElement.isInJDFNameSpaceStatic(l) ^ JDFElement.isInJDFNameSpaceStatic(nameSpaceURI)) // the name matches but not necessarily the namespace since
+					if (bNameMatches && (resName != null) && JDFElement.isInJDFNameSpaceStatic(l) ^ JDFElement.isInJDFNameSpaceStatic(nameSpaceURI)) // the name matches but not
+																																						// necessarily the namespace
+																																						// since
 					{
 						bNameMatches = bColon;
 					}
@@ -645,7 +648,7 @@ public class JDFResourceLinkPool extends JDFPool
 								}
 								else
 								{ // already replaced one, clear all other
-										// matches
+									// matches
 									vMap.clear();
 								}
 
@@ -735,6 +738,15 @@ public class JDFResourceLinkPool extends JDFPool
 	}
 
 	/**
+	 *
+	 * @return
+	 */
+	public List<JDFResourceLink> getLinkArray()
+	{
+		return getChildArrayByClass(JDFResourceLink.class, false, 0);
+	}
+
+	/**
 	 * Gets all children with the attribute <code>name, mAttrib, nameSpaceURI</code> out of the pool
 	 *
 	 * @param strName name of the Child
@@ -743,7 +755,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 *
 	 * @return VElement: a vector with all elements in the pool matching the conditions
 	 *
-	 * default: getPoolChildren(null, null, null)
+	 *         default: getPoolChildren(null, null, null)
 	 */
 	public VElement getPoolChildren(final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
 	{
@@ -805,7 +817,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @param nMax maximum size of the returned vector
 	 * @return Vector - vector of unknown element nodenames
 	 *
-	 * !!! Do not change the signature of this method
+	 *         !!! Do not change the signature of this method
 	 */
 	@Override
 	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
@@ -823,7 +835,7 @@ public class JDFResourceLinkPool extends JDFPool
 	@Override
 	public HashSet<JDFElement> getAllRefs(HashSet<JDFElement> vDoneRefs, final boolean bRecurse)
 	{
-		final Vector<JDFResourceLink> vResourceLinks = getLinks();
+		final List<JDFResourceLink> vResourceLinks = getLinkArray();
 		if (vResourceLinks != null)
 		{
 			for (final JDFResourceLink rl : vResourceLinks)

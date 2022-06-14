@@ -276,7 +276,8 @@ public class JDFResource extends JDFElement
 		atrInfoTable_Abstract[8] = new AtrInfoTable(AttributeName.PIPEURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable_Abstract[9] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_Abstract[10] = new AtrInfoTable(AttributeName.RREFS, 0x44444433, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSpawnStatus.getEnum(0), EnumSpawnStatus.NotSpawned.getName());
+		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSpawnStatus.getEnum(0),
+				EnumSpawnStatus.NotSpawned.getName());
 		atrInfoTable_Abstract[12] = new AtrInfoTable(AttributeName.SPAWNIDS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_Abstract[13] = new AtrInfoTable(AttributeName.SORTING, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_Abstract[14] = new AtrInfoTable(AttributeName.SORTAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
@@ -311,7 +312,8 @@ public class JDFResource extends JDFElement
 	{
 		atrInfoTable_ID_Class_Required[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
 		atrInfoTable_ID_Class_Required[1] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumResourceClass.getEnum(0), null);
-		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), EnumPartUsage.Explicit.getName());
+		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0),
+				EnumPartUsage.Explicit.getName());
 
 	}
 
@@ -531,8 +533,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/*
-	 * These three constructors are defined first in ElementNSImpl they correspond to the three createElement methods in DocumentJDFImpl which are used to
-	 * create the JDF elements during parsing
+	 * These three constructors are defined first in ElementNSImpl they correspond to the three createElement methods in DocumentJDFImpl which are used to create the JDF elements
+	 * during parsing
 	 *
 	 * they are necessary in every class, which is inherited from JDFElement
 	 */
@@ -1468,8 +1470,7 @@ public class JDFResource extends JDFElement
 	/**
 	 * Tests whether Status of resource is Available
 	 *
-	 * @param bRecurseRefs if bRecurseRefs is set to true, also recurses into all resources linked by rRefs and returns true if the minimum Status is
-	 *            Status_Available
+	 * @param bRecurseRefs if bRecurseRefs is set to true, also recurses into all resources linked by rRefs and returns true if the minimum Status is Status_Available
 	 *
 	 * @return boolean true, if Status is Available
 	 * @deprecated use getStatus default: IsAvailable(false)
@@ -1684,14 +1685,13 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Makes from 'this' resource subelement a root resource element (direct child) of the specified parentPool or (in default case) of ResourcePool, where it
-	 * lives. <br>
+	 * Makes from 'this' resource subelement a root resource element (direct child) of the specified parentPool or (in default case) of ResourcePool, where it lives. <br>
 	 *
 	 * The Status and SpawnStatus attribute values of the new root resource are taken from the old root resource.
 	 *
 	 * @param alias id attribute of the newly created resource
 	 * @param parentPool the pool where the newly created resource is stored <br>
-	 *            if null the local pool is used. Must use JDFElement for the pool because of recursive #defines
+	 *        if null the local pool is used. Must use JDFElement for the pool because of recursive #defines
 	 * @param bLinkHere if true, creates a refelement (link) to the newly created resource at the position where 'this' originally resided.
 	 *
 	 * @return JDFResource the moved resource
@@ -2010,7 +2010,7 @@ public class JDFResource extends JDFElement
 			}
 		}
 
-		private VElement getRootLinksAndRefs(final JDFNode n, final String resID)
+		VElement getRootLinksAndRefs(final JDFNode n, final String resID)
 		{
 			final JDFAttributeMap mID = new JDFAttributeMap(AttributeName.RREF, resID);
 
@@ -2026,12 +2026,12 @@ public class JDFResource extends JDFElement
 					vRet = new VElement();
 				for (final KElement nE : vNodes)
 				{
-					final VElement vTmp = ((JDFNode) nE).getResourceLinks(null);
+					JDFResourceLinkPool rlp = ((JDFNode) nE).getResourceLinkPool();
+					List<JDFResourceLink> vTmp = rlp == null ? null : rlp.getLinkArray();
 					if (vTmp != null)
 					{
-						for (final KElement lE : vTmp)
+						for (final JDFResourceLink link : vTmp)
 						{
-							final JDFResourceLink link = (JDFResourceLink) lE;
 							if (resID.equals(link.getAttributeRaw(AttributeName.RREF)))
 							{
 								vRet.add(link);
@@ -2056,8 +2056,7 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * list of valid node names of potential parents for a resource that impy a real resource root with class, id etc list of valid node names of potential
-	 * parents for a resource
+	 * list of valid node names of potential parents for a resource that impy a real resource root with class, id etc list of valid node names of potential parents for a resource
 	 *
 	 * @param nodeName the name of the node to check against
 	 * @return {@link Boolean} true if nodeName is the name of a valid resource parent element
@@ -2091,7 +2090,7 @@ public class JDFResource extends JDFElement
 	 *
 	 * @param m the map of key-value partitions (where key - PartIDKey, value - its value)
 	 * @param bIncomplete if true, also accept nodes that are are not completely specified in the partmap, <br>
-	 *            e.g. if partitioned by run, RunPage and only Run is specified
+	 *        e.g. if partitioned by run, RunPage and only Run is specified
 	 *
 	 * @return JDFResource - the first matching resource leaf or node
 	 * @deprecated use getPartition(JDFAttributeMap m, JDFResource.EnumPartUsage partUsage)
@@ -2135,8 +2134,7 @@ public class JDFResource extends JDFElement
 	 *
 	 * @param key the PartIDKey attribute name
 	 * @param value the string value of the partition key
-	 * @param bIncomplete if true, also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is
-	 *            specified
+	 * @param bIncomplete if true, also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
 	 *
 	 * @return JDFResource the first matching resource leaf or node
 	 *
@@ -2353,7 +2351,7 @@ public class JDFResource extends JDFElement
 	 * Gets a list of all direct leaves
 	 *
 	 * @param bAll if true include all intermediate and leaf nodes including this<br>
-	 *            if false, include only the final leaves
+	 *        if false, include only the final leaves
 	 *
 	 * @return VElement - the vector of all leaves - never null
 	 *
@@ -2371,7 +2369,7 @@ public class JDFResource extends JDFElement
 	 * Gets a list of all direct leaves
 	 *
 	 * @param bAll if true include all intermediate and leaf nodes including this<br>
-	 *            if false, include only the final leaves
+	 *        if false, include only the final leaves
 	 *
 	 * @return VElement - the vector of all leaves - never null
 	 *
@@ -3063,7 +3061,7 @@ public class JDFResource extends JDFElement
 	 * Reduces partition so that only the parts that overlap with vResources remain
 	 *
 	 * @param vValidParts vector of partmaps that define the individual valid parts.<br>
-	 *            The individual PartMaps are ored to define the final resource.
+	 *        The individual PartMaps are ored to define the final resource.
 	 */
 	public void reducePartitions(VJDFAttributeMap vValidParts)
 	{
@@ -3626,7 +3624,8 @@ public class JDFResource extends JDFElement
 			}
 		}
 
-		private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves, final boolean removeEqual)
+		private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves,
+				final boolean removeEqual)
 		{
 			final int localSize = localLeaves.size();
 			for (final String att : atts)
@@ -3906,7 +3905,7 @@ public class JDFResource extends JDFElement
 	 *
 	 * @param m the map of key-value partitions (where key - PartIDKey, value - its value)
 	 * @param bIncomplete if true, also accept nodes that are are not completely specified in the partmap,<br>
-	 *            e.g. if partitioned by run, RunPage and only Run is specified
+	 *        e.g. if partitioned by run, RunPage and only Run is specified
 	 *
 	 * @return VElement - the vector of matching resource leaves or nodes
 	 * @deprecated use getPartitionVector(JDFAttributeMap m, EnumPartUsage partUsage)
@@ -4028,8 +4027,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Finds the canonical vector of parts that defines the vector of parts that fits to vParts. If all children of a parent node are in vParts, they are
-	 * replaced by their parent. <br>
+	 * Finds the canonical vector of parts that defines the vector of parts that fits to vParts. If all children of a parent node are in vParts, they are replaced by their parent.
+	 * <br>
 	 * for example the canonical vector of all leaves is the root
 	 *
 	 * @param vParts the vector of parts to check against 'this'
@@ -4363,13 +4362,12 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * update the amount of a resource based on the connected resource links Only Condition="Good" is counted if no explicit partioning by condition is
-	 * specified
+	 * update the amount of a resource based on the connected resource links Only Condition="Good" is counted if no explicit partioning by condition is specified
 	 *
 	 * @param keepPrevious if true, the previous amounts etc. are retained, if false they are completely recalculated from the linkx
 	 *
-	 * @since 2011.1.15 note the change of interface. The prior usage of previousamount was inheritently flawed. Update note: if you used a previousAmount!=0,
-	 *        you probably want to use keepPrevious=false whereas a 0 value retains the orignal value (leepPrevious=true)
+	 * @since 2011.1.15 note the change of interface. The prior usage of previousamount was inheritently flawed. Update note: if you used a previousAmount!=0, you probably want to
+	 *        use keepPrevious=false whereas a 0 value retains the orignal value (leepPrevious=true)
 	 */
 	public void updateAmounts(final boolean keepPrevious)
 	{
@@ -4505,7 +4503,8 @@ public class JDFResource extends JDFElement
 	 * @default getChildElementVector(null, null, null, true, 0, false)
 	 */
 	@Override
-	public VElement getChildElementVector(final String element, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize, final boolean bResolveTarget)
+	public VElement getChildElementVector(final String element, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize,
+			final boolean bResolveTarget)
 	{
 		VElement v = null;
 		final String nodeName = getNodeName();
@@ -4604,8 +4603,8 @@ public class JDFResource extends JDFElement
 	/**
 	 * Tests if the given resources are compatible regarding their partitioning.
 	 *
-	 * The resources are compatible if the PartIDKeys for the common start sequence of the PartIDKeys vectors are the same. The resources are not compatible if
-	 * one has PartIDKeys and the other not.
+	 * The resources are compatible if the PartIDKeys for the common start sequence of the PartIDKeys vectors are the same. The resources are not compatible if one has PartIDKeys
+	 * and the other not.
 	 *
 	 * @param other the other resource to check.
 	 *
@@ -4628,8 +4627,8 @@ public class JDFResource extends JDFElement
 	/**
 	 * Tests if the resource is compatible with the given partition keys.
 	 *
-	 * The resource is compatible if all PartIDKeys in vsPartitions are contained in this, regardless of sequence The resource is not compatible if one has
-	 * PartIDKeys and the other not.
+	 * The resource is compatible if all PartIDKeys in vsPartitions are contained in this, regardless of sequence The resource is not compatible if one has PartIDKeys and the other
+	 * not.
 	 *
 	 * @param vsPartitions the given partition keys to compare
 	 *
@@ -4783,8 +4782,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Gets of 'this' the iSkip-th IdentificationField element, optionally creates it, if it doesn't exist. If iSkip is more than one larger than the number of
-	 * elements, only one will be created and appended.
+	 * Gets of 'this' the iSkip-th IdentificationField element, optionally creates it, if it doesn't exist. If iSkip is more than one larger than the number of elements, only one
+	 * will be created and appended.
 	 *
 	 * @param iSkip number of child IdentificationField elements to skip
 	 * @return JDFIdentificationField - the matching IdentificationField element
@@ -4878,8 +4877,7 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Sets the 1st-nth element as identical to the 0th elemennt ov vPartMap i.e. the partition leaves that match vPartMap[1]...vPartMap[size-1] are set
-	 * identical to vPartMap[0]
+	 * Sets the 1st-nth element as identical to the 0th elemennt ov vPartMap i.e. the partition leaves that match vPartMap[1]...vPartMap[size-1] are set identical to vPartMap[0]
 	 *
 	 * @param vPartMap VJDFAttributeMap to correspond to
 	 */
@@ -4901,8 +4899,7 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Appends new child Identifical element that refers to target also removes all subelements and attributes If an identical already exists, the part element
-	 * is overwritten
+	 * Appends new child Identifical element that refers to target also removes all subelements and attributes If an identical already exists, the part element is overwritten
 	 *
 	 * @param target the resource leaf that this leaf should reference as identical
 	 *
@@ -4951,8 +4948,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Gets of 'this' the iSkip-th QualityControlResult element, optionally creates it, if it doesn't exist. If iSkip is more than one larger that the number of
-	 * elements, only one will be created and appended.
+	 * Gets of 'this' the iSkip-th QualityControlResult element, optionally creates it, if it doesn't exist. If iSkip is more than one larger that the number of elements, only one
+	 * will be created and appended.
 	 *
 	 * @param iSkip number of child QualityControlResult elements to skip
 	 * @return JDFQualityControlResult - the matching QualityControlResult element
@@ -5944,8 +5941,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * if set to true, the default @PartUsage of unpartitioned resources is Implicit. Note: this is NOT according to the specification since the Specification
-	 * defaults PartUsage to Explicit for all Resources.
+	 * if set to true, the default @PartUsage of unpartitioned resources is Implicit. Note: this is NOT according to the specification since the Specification defaults PartUsage to
+	 * Explicit for all Resources.
 	 *
 	 * @param bUnpartitiondImplicit the bUnpartitiondImplicit to set
 	 */
@@ -5955,8 +5952,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Gets typesafe enumerated value of attribute PartUsage; defaults to PartUsage_Explicit unless setUnpartitiondImplicit(true) has been called and the
-	 * resource is not partitioned, in which case PartUsage_Implicit is called.
+	 * Gets typesafe enumerated value of attribute PartUsage; defaults to PartUsage_Explicit unless setUnpartitiondImplicit(true) has been called and the resource is not
+	 * partitioned, in which case PartUsage_Implicit is called.
 	 *
 	 * Achtung - mieser Balkon!
 	 *
@@ -7394,7 +7391,8 @@ public class JDFResource extends JDFElement
 			// partition attribute values
 			{
 				final KElement parent = getParentNode_KElement();
-				final List<KElement> vThis = parent.getChildArray_KElement(getNodeName(), getNamespaceURI(), new JDFAttributeMap(currentPartition, getAttribute_KElement(currentPartition)), true, 999);
+				final List<KElement> vThis = parent.getChildArray_KElement(getNodeName(), getNamespaceURI(),
+						new JDFAttributeMap(currentPartition, getAttribute_KElement(currentPartition)), true, 999);
 				if (vThis.size() > 1)
 				{
 					vAtts.appendUnique(currentPartition);

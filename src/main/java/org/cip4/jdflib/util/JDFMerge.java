@@ -146,7 +146,7 @@ public class JDFMerge
 	 * @throws JDFException if subJDFNode was not spawned from this
 	 * @throws JDFException if subJDFNode has no AncestorPool
 	 *
-	 *             default: mergeJDF(subJDFNode, null, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None)
+	 *         default: mergeJDF(subJDFNode, null, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None)
 	 */
 	public JDFNode mergeJDF(final JDFNode _toMerge, final String urlMerge, final EnumCleanUpMerge cleanPolicy, final JDFResource.EnumAmountMerge amountPolicy)
 	{
@@ -497,8 +497,8 @@ public class JDFMerge
 			final JDFNode.EnumNodeStatus stat = toMergeLocalNode.getStatus();
 			if (stat != null && !stat.equals(JDFElement.EnumNodeStatus.Part) && !stat.equals(JDFElement.EnumNodeStatus.Pool) && numParts > 0)
 			{
-				log.error("updating inconsistent node status from root status JobID=" + toMergeLocalNode.getJobID(true) + " / " + toMergeLocalNode.getJobPartID(false) + " "
-						+ parts);
+				log.error(
+						"updating inconsistent node status from root status JobID=" + toMergeLocalNode.getJobID(true) + " / " + toMergeLocalNode.getJobPartID(false) + " " + parts);
 				toMergeLocalNode.setPartStatus(parts, stat, null);
 			}
 		}
@@ -640,7 +640,8 @@ public class JDFMerge
 	/*
 	 * mergePartition will stay public, as long as deprecated JDFResource.mergePartition is not deleted
 	 */
-	static public JDFResource mergePartition(final JDFResource targetRes, final JDFResource resToMerge, final String spawnID, final EnumAmountMerge amountPolicy, final boolean bLocalResource)
+	static public JDFResource mergePartition(final JDFResource targetRes, final JDFResource resToMerge, final String spawnID, final EnumAmountMerge amountPolicy,
+			final boolean bLocalResource)
 	{
 		if (resToMerge == null)
 			return null;
@@ -685,8 +686,8 @@ public class JDFMerge
 			// this is still better than throwing an exception or silently ignoring the rw resource
 			if ((src.getLocked() == false) && (trgMap.size() < srcMap.size()))
 			{
-				LogFactory.getLog(JDFMerge.class).warn(targetRes.getLocalName() + " ID=" + targetRes.getID() + " - creating non existing rw partition: " + srcMap.showKeys(null)
-						+ " in " + trgMap.showKeys(null));
+				LogFactory.getLog(JDFMerge.class).warn(
+						targetRes.getLocalName() + " ID=" + targetRes.getID() + " - creating non existing rw partition: " + srcMap.showKeys(null) + " in " + trgMap.showKeys(null));
 				trg = targetRes.getCreatePartition(srcMap, partIDKeys);
 				// fool the algorithm to think that the new partition is rw (which it probably was)
 				trg.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
@@ -1191,7 +1192,7 @@ public class JDFMerge
 	 */
 	void expandLinkedResources(final JDFResourceLinkPool resourceLinkPool)
 	{
-		final List<JDFResourceLink> links = resourceLinkPool == null ? null : resourceLinkPool.getLinks();
+		final List<JDFResourceLink> links = resourceLinkPool == null ? null : resourceLinkPool.getLinkArray();
 		if (links != null)
 		{
 			for (final JDFResourceLink rl : links)
@@ -1521,7 +1522,8 @@ public class JDFMerge
 		if (bAddMergeToProcessRun)
 		{
 			final VElement vProcessRun = subJDFNode.getChildrenByTagName(ElementName.PROCESSRUN, null, new JDFAttributeMap(AttributeName.SPAWNID, spawnID), false, true, -1);
-			final JDFSpawned spawned = (JDFSpawned) overWriteTmpNode.getChildByTagName(ElementName.SPAWNED, null, 0, new JDFAttributeMap(AttributeName.NEWSPAWNID, spawnID), false, true);
+			final JDFSpawned spawned = (JDFSpawned) overWriteTmpNode.getChildByTagName(ElementName.SPAWNED, null, 0, new JDFAttributeMap(AttributeName.NEWSPAWNID, spawnID), false,
+					true);
 			final JDFMerged merged = (JDFMerged) overWriteTmpNode.getChildByTagName(ElementName.MERGED, null, 0, new JDFAttributeMap(AttributeName.MERGEID, spawnID), false, true);
 			for (int k = 0; k < vProcessRun.size(); k++)
 			{
