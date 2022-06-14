@@ -685,43 +685,6 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetExeEntries()
-	{
-		InputStream is = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "CIP4 JDFEditor 2.4-SNAPSHOT.exe"));
-		if (is == null)
-			is = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "CIP4_JDFEditor_2.4-SNAPSHOT.exe"));
-		final Vector<ZipReader> v = ZipReader.getZipReaders(is, -1);
-		Assertions.assertTrue(v.size() > 0);
-		for (final ZipReader zr : v)
-		{
-			final Vector<ZipEntry> vze = zr.getEntries();
-			for (final ZipEntry ze : vze)
-			{
-				log.info("Class name: " + ze.getName());
-			}
-		}
-	}
-
-	/**
-	 *
-	 *
-	 */
-	@Test
-	public void testGetZipReaderFile()
-	{
-		ZipReader zr = ZipReader.getZipReader(new File(sm_dirTestData + "CIP4 JDFEditor 2.4-SNAPSHOT.exe"));
-		if (zr == null)
-			zr = ZipReader.getZipReader(new File(sm_dirTestData + "CIP4_JDFEditor_2.4-SNAPSHOT.exe"));
-		final Vector<ZipEntry> vze = zr.getEntries();
-		Assertions.assertTrue(vze.size() > 42);
-		zr.close();
-	}
-
-	/**
-	 *
-	 *
-	 */
-	@Test
 	public void testGetMatchingEntry()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");

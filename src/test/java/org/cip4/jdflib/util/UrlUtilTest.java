@@ -72,7 +72,6 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 import org.cip4.jdflib.util.net.HTTPDetails;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -83,7 +82,7 @@ import org.junit.jupiter.api.Test;
 public class UrlUtilTest extends JDFTestCaseBase
 {
 
-	static final String FTP_SITE = null; //"ftp://speedtest.tele2.net/";
+	static final String FTP_SITE = null; // "ftp://speedtest.tele2.net/";
 
 	/**
 	 * Test method for {@link org.cip4.jdflib.util.UrlUtil#getConnectionTimeout()}.
@@ -211,8 +210,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("%e2%82%ac", UrlUtil.escape("€", true, false));
 		assertEquals("€", UrlUtil.escape("€", false, false));
 		assertEquals("%23", UrlUtil.escape("#", false, false));
-		assertEquals(UrlUtil.escape("世界中のあらゆる情", false, false), "世界中のあらゆる情");
-		assertEquals("ô", UrlUtil.escape("ô", false, false));
+		assertEquals("ä%20ü", UrlUtil.escape("ä ü", false, false));
+		assertEquals("Ä", UrlUtil.escape("Ä", false, false));
 	}
 
 	/**
@@ -227,7 +226,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("a?b=c&bb=cc", UrlUtil.addParameter("a?b=c", "bb", "cc"));
 		assertEquals("a?b=c%20d", UrlUtil.addParameter("a", "b", "c d"));
 		assertEquals("a?b=http%3a%2f%2fwww.example.com", UrlUtil.addParameter("a", "b", "http://www.example.com"));
-		assertEquals("ô", UrlUtil.escape("ô", false, false));
+		assertEquals("Ã´", UrlUtil.escape("Ã´", false, false));
 	}
 
 	/**
@@ -525,15 +524,15 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testIsIRL()
 	{
-		assertTrue(UrlUtil.isIRL("file://blï¿½dï¿½.txt"));
-		assertTrue(UrlUtil.isIRL("http://foo.com/blï¿½dï¿½.txt"));
-		assertFalse(UrlUtil.isIRL("http:///blï¿½dï¿½.txt"), "3 ///");
-		assertFalse(UrlUtil.isIRL("file://a blï¿½dï¿½.txt"), "blank is bad");
-		assertTrue(UrlUtil.isIRL("file://a%20blï¿½dï¿½.txt"), "blank %20 is good");
+		assertTrue(UrlUtil.isIRL("file://blÃ¯Â¿Â½dÃ¯Â¿Â½.txt"));
+		assertTrue(UrlUtil.isIRL("http://foo.com/blÃ¯Â¿Â½dÃ¯Â¿Â½.txt"));
+		assertFalse(UrlUtil.isIRL("http:///blÃ¯Â¿Â½dÃ¯Â¿Â½.txt"), "3 ///");
+		assertFalse(UrlUtil.isIRL("file://a blÃ¯Â¿Â½dÃ¯Â¿Â½.txt"), "blank is bad");
+		assertTrue(UrlUtil.isIRL("file://a%20blÃ¯Â¿Â½dÃ¯Â¿Â½.txt"), "blank %20 is good");
 		assertTrue(UrlUtil.isIRL("file:C:/a/b.txt"));
-		assertTrue(UrlUtil.isIRL("./3ï¿½.txt"), "relative url");
+		assertTrue(UrlUtil.isIRL("./3Ã¯Â¿Â½.txt"), "relative url");
 		assertFalse(UrlUtil.isIRL("http://@"), "invalid char: @");
-		assertTrue(UrlUtil.isIRL("HTTP://ï¿½/ï¿½"));
+		assertTrue(UrlUtil.isIRL("HTTP://Ã¯Â¿Â½/Ã¯Â¿Â½"));
 		assertTrue(UrlUtil.isIRL("file:///C:/Documents%20and%20Settings/Israel/My%20Documents/Vio%20Production/Results/TIME_H8789/TIME_H8789.pdf"));
 	}
 
@@ -641,7 +640,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 			assertTrue(UrlUtil.stringToURL("File:///c:/temp").getPath().startsWith(new URL("File:///c:/temp").getPath()));
 
 			// test for a file or a non existing object (trailing slash is removed by StringToURL)
-			assertEquals(UrlUtil.stringToURL("File:/c:/blöd €.pdf"), new URL(UrlUtil.fileToUrl(new File("c:/blöd €.pdf"), true)));
+			assertEquals(UrlUtil.stringToURL("File:/c:/blÃ¶d €.pdf"), new URL(UrlUtil.fileToUrl(new File("c:/blÃ¶d €.pdf"), true)));
 			assertEquals(UrlUtil.stringToURL("c:\\xyz\\").getPath(), new URL("File:/c:/xyz").getPath());
 			assertEquals(UrlUtil.stringToURL("File:/c:/xyz/").getPath(), new URL("File:/c:/xyz").getPath());
 			assertEquals(UrlUtil.stringToURL("File:\\\\host\\dir\\dir2\\file.pdf").getPath(), new URL("File://host/dir/dir2/file.pdf").getPath());
@@ -662,7 +661,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.stringToURL("https://foo"), new URL("https://foo"));
 		assertNull(UrlUtil.stringToURL("File:"), "empty File: should be null");
 		assertEquals(UrlUtil.stringToURL("http%3A%2F%2FDRU-CIP4HD1%3A6331"), new URL("http://DRU-CIP4HD1:6331"));
-		assertEquals(new URL("https://foo/-a1d3-7b4e52b36407/dywEqM_chouchou-dÉc-2019.pdf"), UrlUtil.stringToURL("https://foo/-a1d3-7b4e52b36407/dywEqM_chouchou-dÉc-2019.pdf"));
+		assertEquals(new URL("https://foo/-a1d3-7b4e52b36407/dywEqM_chouchou-düc-2019.pdf"), UrlUtil.stringToURL("https://foo/-a1d3-7b4e52b36407/dywEqM_chouchou-düc-2019.pdf"));
 
 	}
 
@@ -677,7 +676,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertTrue(UrlUtil.isEscaped("http%3A%2F%2FDRU-CIP4HD1%3A6331"));
 		assertFalse(UrlUtil.isEscaped("file:http%3A%2F%2FDRU-CIP4HD1%3A6331"));
 		assertFalse(UrlUtil.isEscaped("text%20a.pdf"));
-		assertFalse(UrlUtil.isEscaped("-a1d3-7b4e52b36407/dywEqM_chouchou-dÉc-2019.pdf"));
+		assertFalse(UrlUtil.isEscaped("-a1d3-7b4e52b36407/dywEqM_chouchou-düc-2019.pdf"));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -740,7 +739,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		for (int i = 0; i < 2; i++) // loop over escape and non-escape
 		{
-			final File f = new File("4€äöü.txt");
+			final File f = new File("4€öÃ¶Ã¼.txt");
 			final File f2 = FileUtil.getFileInDirectory(new File(sm_dirTestDataTemp), f);
 			f2.delete();
 			assertTrue(f2.createNewFile());
@@ -778,9 +777,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 
 		assertEquals("file://a/b/c.txt", UrlUtil.uncToUrl("\\\\a\\b\\c.txt", true));
-		String unc = "\\\\a\\b\\c ä.txt";
+		String unc = "\\\\a\\b\\c ö.txt";
 		String url = UrlUtil.uncToUrl(unc, true);
-		assertEquals("file://a/b/c%20%c3%a4.txt", url);
+		assertEquals("file://a/b/c%20%c3%b6.txt", url);
 		final String unc2 = unc;
 
 		for (int i = 0; i < 10; i++)
@@ -830,15 +829,15 @@ public class UrlUtilTest extends JDFTestCaseBase
 			f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, i == 0));
 			assertEquals(f.getCanonicalPath(), f2.getCanonicalPath(), "asccii");
 
-			f = new File("blö½d .pdf");
+			f = new File("blÃ¶Â½d .pdf");
 			f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, i == 0));
 			assertEquals(f.getCanonicalPath(), f2.getCanonicalPath(), "non asccii");
 
-			f = new File("blöd .pdf");
+			f = new File("blÃ¶d .pdf");
 			f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, i == 0));
 			assertEquals(f.getCanonicalPath(), f2.getCanonicalPath(), "non asccii");
 
-			f = new File("blöd ist es 10€.pdf");
+			f = new File("blÃ¶d ist es 10€.pdf");
 			final String fileToUrl = UrlUtil.fileToUrl(f, i == 0);
 			f2 = UrlUtil.urlToFile(fileToUrl);
 			assertEquals(f.getCanonicalPath(), f2.getCanonicalPath(), "escape %20");
@@ -898,9 +897,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		File f = new File("./a b");
 		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "a%20b");
-		f = new File("../a.ß");
-		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "../a.%c3%9f", "escaped utf8");
-		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, false), '\\', "/", 0), new String(StringUtil.getUTF8Bytes("../a.ß")), "unescaped but utf8");
+		f = new File("../a.ä");
+		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "../a.%c3%a4", "escaped utf8");
+		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, false), '\\', "/", 0), new String(StringUtil.getUTF8Bytes("../a.ä")), "unescaped but utf8");
 	}
 
 	/**
@@ -1066,7 +1065,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertNotNull(f2, "error moving file to dir");
 		ThreadUtil.sleep(1000);
 		assertEquals(l, f2.lastModified(), 0);
-		fs.setURL("bad:/blöd");
+		fs.setURL("bad:/blÃ¶d");
 		assertNull(UrlUtil.moveToDir(fs, newDir, null, true), "bad url:");
 		fs.setURL("http:localhost:2");
 		assertNull(UrlUtil.moveToDir(fs, newDir, null, true), "bad url:");
@@ -1093,7 +1092,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/boo.pdf"));
 
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
-		fs.setURL("bad:/blöd");
+		fs.setURL("bad:/blÃ¶d");
 		assertNull(UrlUtil.moveToDir(fs, newDir, null, true), "bad url:");
 		// fs.setURL("http://really_really_not_there.com/isnt/there?aaa");
 		fs.setURL("http://localhost:2");
@@ -1122,9 +1121,6 @@ public class UrlUtilTest extends JDFTestCaseBase
 		final File newDir = new File(sm_dirTestDataTemp + "newDir2");
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "blub2.pdf"));
 		fs.setURL("../blub2.pdf");
-		Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
-			UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true);
-		});
 	}
 
 	/**
@@ -1178,8 +1174,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	public void testNormalizeFile()
 	{
 		assertEquals(UrlUtil.normalize("\\\\host\\dir\\a a.b"), "file://host/dir/a%20a.b");
-		assertEquals(UrlUtil.normalize("\\\\host\\dir\\a ä.b"), "file://host/dir/a%20ä.b");
-		assertEquals(UrlUtil.normalize("FILE://host/dir/a ä.b"), "file://host/dir/a%20ä.b");
+		assertEquals(UrlUtil.normalize("\\\\host\\dir\\a ö.b"), "file://host/dir/a%20ö.b");
+		assertEquals(UrlUtil.normalize("FILE://host/dir/a ö.b"), "file://host/dir/a%20ö.b");
 	}
 
 	/**
@@ -1194,7 +1190,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.unEscape("%2"), "%2");
 		assertEquals(UrlUtil.unEscape("%20"), " ");
 		assertEquals(UrlUtil.unEscape("%23"), "#");
-		assertEquals(UrlUtil.unEscape("世界中のあらゆる情"), "世界中のあらゆる情");
+		assertEquals(UrlUtil.unEscape("äöü€"), "äöü€");
 	}
 
 	/**
