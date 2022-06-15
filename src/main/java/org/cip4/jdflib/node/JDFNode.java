@@ -1778,8 +1778,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		 * @param resourceLink
 		 * @param types
 		 */
-		public static void generateCombinedProcessIndex(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage,
-				final JDFResourceLink resourceLink, final VString types)
+		public static void generateCombinedProcessIndex(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage, final JDFResourceLink resourceLink, final VString types)
 		{
 			if (resourceLink == null || jdfResource == null || resourceLink instanceof JDFPartAmount)
 				return;
@@ -1814,7 +1813,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					}
 					if (bMatchUsage && linkInfoLast != null)
 					{
-						bAddCPI = cleanCombinedProcessIndex(usage, linkInfo, cpi, resName, linkInfoLast, bAddCPI);
+						bAddCPI = cleanCombinedProcessIndex(usage, linkInfo, cpi, linkInfoLast, bAddCPI);
 					}
 					if (bAddCPI)
 					{
@@ -1833,8 +1832,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			}
 		}
 
-		private static boolean cleanCombinedProcessIndex(final EnumUsage usage, final LinkInfo linkInfo, final JDFIntegerList cpi, final String resName,
-				final LinkInfo linkInfoLast, boolean bAddCPI)
+		private static boolean cleanCombinedProcessIndex(final EnumUsage usage, final LinkInfo linkInfo, final JDFIntegerList cpi, final LinkInfo linkInfoLast, boolean bAddCPI)
 		{
 			boolean bOut = linkInfoLast.hasOutput(null);
 			if (!bOut)
@@ -2527,8 +2525,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @deprecated use the version with deviceID
 	 */
 	@Deprecated
-	public JDFDoc setPhase(final EnumNodeStatus nodeStatus, final String nodeStatusDetails, final EnumDeviceStatus deviceStatus, final String deviceStatusDetails,
-			final VJDFAttributeMap vPartMap)
+	public JDFDoc setPhase(final EnumNodeStatus nodeStatus, final String nodeStatusDetails, final EnumDeviceStatus deviceStatus, final String deviceStatusDetails, final VJDFAttributeMap vPartMap)
 	{
 		final StatusCounter sc = new StatusCounter(this, vPartMap, null);
 		sc.setPhase(nodeStatus, nodeStatusDetails, deviceStatus, deviceStatusDetails);
@@ -2902,8 +2899,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @default addResource(name, null, bInput, null, true, null)
 	 */
 	@Deprecated
-	public JDFResource addResource(final String strName, final JDFResource.EnumResourceClass resClass, final boolean bInput, final JDFNode resRoot, final boolean bLink,
-			final String nameSpaceURI)
+	public JDFResource addResource(final String strName, final JDFResource.EnumResourceClass resClass, final boolean bInput, final JDFNode resRoot, final boolean bLink, final String nameSpaceURI)
 	{
 		EnumUsage usage = null;
 		if (bLink)
@@ -2941,8 +2937,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @default addResource(name, null, usage, null, null, null,null)
 	 */
-	public JDFResource addResource(final String strName, JDFResource.EnumResourceClass resClass, final EnumUsage usage, final EnumProcessUsage processUsage, JDFNode resRoot,
-			final String nameSpaceURI, final JDFResource toReplace)
+	public JDFResource addResource(final String strName, JDFResource.EnumResourceClass resClass, final EnumUsage usage, final EnumProcessUsage processUsage, JDFNode resRoot, final String nameSpaceURI, final JDFResource toReplace)
 	{
 		if (resRoot == null)
 		{
@@ -4389,8 +4384,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @default spawn(parentURL, null, null, null, false, false, false, false)
 	 */
 	@Deprecated
-	public JDFNode spawn(final String parentURL, final String spawnURL, final VString vRWResources_in, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly,
-			final boolean bCopyNodeInfo, final boolean bCopyCustomerInfo, final boolean bCopyComments)
+	public JDFNode spawn(final String parentURL, final String spawnURL, final VString vRWResources_in, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo, final boolean bCopyCustomerInfo, final boolean bCopyComments)
 	{
 		final JDFSpawn spawn = new JDFSpawn(this);
 		return spawn.spawn(parentURL, spawnURL, vRWResources_in, vSpawnParts, bSpawnROPartsOnly, bCopyNodeInfo, bCopyCustomerInfo, bCopyComments);
@@ -4419,8 +4413,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @deprecated use JDFSpawn.spawnInformative()
 	 */
 	@Deprecated
-	public JDFNode spawnInformative(final String parentURL, final String spawnURL, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo,
-			final boolean bCopyCustomerInfo, final boolean bCopyComments)
+	public JDFNode spawnInformative(final String parentURL, final String spawnURL, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo, final boolean bCopyCustomerInfo, final boolean bCopyComments)
 	{
 		final JDFSpawn _spawn = new JDFSpawn(this);
 		return _spawn.spawnInformative(parentURL, spawnURL, vSpawnParts, bSpawnROPartsOnly, bCopyNodeInfo, bCopyCustomerInfo, bCopyComments);
@@ -8111,8 +8104,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	private class ExecCheck
 	{
-		private ExecPartFlags addExecutablePartitions(final JDFResourceLink link, final JDFResource res, final VString vsPartIDKeys, final VJDFAttributeMap vamPartMaps,
-				final JDFResource.EnumResStatus minStatus, final boolean bCheckNodeStatus)
+		private ExecPartFlags addExecutablePartitions(final JDFResourceLink link, final JDFResource res, final VString vsPartIDKeys, final VJDFAttributeMap vamPartMaps, final JDFResource.EnumResStatus minStatus, final boolean bCheckNodeStatus)
 		{
 			final JDFAttributeMap amPartMap = res.getPartMap();
 
@@ -8217,8 +8209,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			return new ExecPartFlags(isAvailable, isProcStatOK);
 		}
 
-		private void modifyPartMap(final VJDFAttributeMap vamPartMaps, final JDFAttributeMap amPartMap, final boolean isLeaf, final JDFElement.EnumNodeStatus stat,
-				final boolean isExecutable)
+		private void modifyPartMap(final VJDFAttributeMap vamPartMaps, final JDFAttributeMap amPartMap, final boolean isLeaf, final JDFElement.EnumNodeStatus stat, final boolean isExecutable)
 		{
 			if (isExecutable)
 			{
