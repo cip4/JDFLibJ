@@ -53,6 +53,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  *
@@ -153,7 +154,9 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		}
 	}
 
+	@TempDir
 	File theHFDir;
+	@TempDir
 	File tmpHFDir;
 	static AtomicInteger ai = new AtomicInteger(0);
 
@@ -167,13 +170,6 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	{
 		OrderedTaskQueue.shutDownAll();
 		super.setUp();
-		final int n = ai.incrementAndGet();
-		theHFDir = new File(sm_dirTestDataTemp + File.separator + "StHFTest" + n);
-		FileUtil.deleteAll(theHFDir);
-		theHFDir.mkdirs();
-
-		tmpHFDir = new File(sm_dirTestDataTemp + File.separator + "StHFTemp" + n);
-		FileUtil.deleteAll(tmpHFDir);
 
 		log.info("Setting up: " + theHFDir);
 		HotFolder.setDefaultStabilizeTime(100);
