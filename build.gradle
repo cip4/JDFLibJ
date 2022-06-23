@@ -147,6 +147,10 @@ test {
     useJUnitPlatform()
     systemProperty "file.encoding", "utf-8"
     maxParallelForks = Math.max(1, Math.ceil(Runtime.getRuntime().availableProcessors() * 0.75))
+
+    testLogging {
+        exceptionFormat = 'full'
+    }
 }
 
 jar {
