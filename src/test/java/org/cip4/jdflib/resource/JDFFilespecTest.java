@@ -47,6 +47,8 @@ package org.cip4.jdflib.resource;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
@@ -70,6 +72,7 @@ import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -78,6 +81,9 @@ import org.junit.jupiter.api.Test;
  */
 public class JDFFilespecTest extends JDFTestCaseBase
 {
+	@TempDir
+	private Path tempDir;
+	
 	/**
 	 *
 	 */
@@ -168,10 +174,13 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	@Test
 	public void testGetURLCidStream() throws Exception
 	{
-		new MimeUtilTest().testBuildMimePackageDocJMF();
-		final String fileName = sm_dirTestDataTemp + "testMimePackageDoc0.mjm";
-		Assertions.assertTrue(new File(fileName).canRead());
-		final Multipart mp = MimeUtil.getMultiPart(fileName);
+		new MimeUtilTest().testBuildMimePackageDocJMF(tempDir);
+		final Path sourceFile = tempDir.resolve("testMimePackageDoc0.mjm");
+		Assertions.assertTrue(Files.isReadable(sourceFile));
+		final Multipart mp;
+		try (InputStream fileStream = Files.newInputStream(sourceFile)) {
+			mp = MimeUtil.getMultiPart(fileStream);
+		}
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
 		final JDFDoc d = MimeUtil.getJDFDoc(bp);
 		final JDFNode n = d.getJDFRoot();
@@ -195,17 +204,17 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFRunList rli = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
-		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "localjdf.jdf", 2, false);
+		n.getOwnerDocument_JDFElement().write2File(tempDir.resolve("localjdf.jdf").toFile(), 2, false);
 		rli = rli.addRun("dummy.txt", 0, -1);
 		final String contents = "Test contents";
-		final ByteArrayIOStream bos = new ByteArrayIOStream(contents.getBytes());
-		FileUtil.streamToFile(bos.getInputStream(), sm_dirTestDataTemp + "dummy.txt");
-		final InputStream is = rli.getFileSpec().getURLInputStream();
-		Assertions.assertNotNull(is);
-		bos.close();
-		final ByteArrayIOStream bos2 = new ByteArrayIOStream(is);
-		Assertions.assertEquals(contents.getBytes().length, bos2.size());
-		bos2.close();
+		Files.write(tempDir.resolve("dummy.txt"), contents.getBytes());
+
+		try (final InputStream is = rli.getFileSpec().getURLInputStream()) {
+			Assertions.assertNotNull(is);
+			try (ByteArrayIOStream bos = new ByteArrayIOStream(is)) {
+				Assertions.assertEquals(contents.getBytes().length, bos.size());
+			}
+		}
 	}
 
 	/**
@@ -216,15 +225,18 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	@Test
 	public void testMoveToDir() throws MessagingException, IOException
 	{
-		new MimeUtilTest().testBuildMimePackageDocJMF();
-		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + "testMimePackageDoc0.mjm");
+		new MimeUtilTest().testBuildMimePackageDocJMF(tempDir);
+		final Multipart mp;
+		try (InputStream fileStream = Files.newInputStream(tempDir.resolve("testMimePackageDoc0.mjm"))) {
+			mp = MimeUtil.getMultiPart(fileStream);
+		}
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
 		final JDFDoc d = MimeUtil.getJDFDoc(bp);
 		final JDFNode n = d.getJDFRoot();
 		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.getMatchingResource(ElementName.COLORSPACECONVERSIONPARAMS, null, null, 0);
 		Assertions.assertNotNull(cscp);
 		final JDFFileSpec fs = cscp.getFinalTargetDevice();
-		final File newDir = new File(sm_dirTestDataTemp + "newDir");
+		final File newDir = tempDir.resolve("newDir").toFile();
 		final File f = UrlUtil.moveToDir(fs, newDir, null, true);
 		Assertions.assertNotNull(f, "error moving file to dir");
 		for (int i = 0; i < 10; i++)
@@ -237,7 +249,6 @@ public class JDFFilespecTest extends JDFTestCaseBase
 			log.info("Waiting " + i);
 		}
 		Assertions.assertTrue(fs.getURL().contains(UrlUtil.fileToUrl(newDir, false)));
-
 	}
 
 	/**
@@ -251,7 +262,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final JDFFileSpec fileSpec = (JDFFileSpec) new JDFDoc(ElementName.FILESPEC).getRoot();
 		fileSpec.setURL(sm_dirTestData + "url1.pdf");
 		fileSpec.setUserFileName("newName1.pdf");
-		final File copy = UrlUtil.moveToDir(fileSpec, new File(sm_dirTestDataTemp).getAbsoluteFile(), null, true);
+		final File copy = UrlUtil.moveToDir(fileSpec, tempDir.toAbsolutePath().toFile(), null, true);
 		Assertions.assertEquals(copy.getName(), "newName1.pdf");
 		Assertions.assertEquals(UrlUtil.urlToFile(fileSpec.getURL()), copy);
 	}

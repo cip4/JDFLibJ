@@ -52,6 +52,8 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Vector;
 
 import javax.mail.BodyPart;
@@ -103,8 +105,12 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBuildMimePackageDocJMF() throws MessagingException, IOException
-	{
+	public void testBuildMimePackageDocJMF() throws MessagingException, IOException {
+		Path tempPath = new File(sm_dirTestDataTemp).toPath();
+		testBuildMimePackageDocJMF(tempPath);
+	}
+
+	public void testBuildMimePackageDocJMF(Path tempDir) throws MessagingException, IOException {
 		for (int ii = 0; ii < 3; ii++)
 		{
 			final JDFDoc docJMF = new JDFDoc("JMF");
@@ -137,13 +143,21 @@ public class MimeUtilTest extends JDFTestCaseBase
 			{
 				md.transferEncoding = UrlUtil.BINARY;
 			}
-			final File out = MimeUtil.writeToFile(m, sm_dirTestDataTemp + File.separator + "testMimePackageDoc" + ii + ".mjm", md);
+			final File out = MimeUtil.writeToFile(
+					m,
+					tempDir.resolve("testMimePackageDoc" + ii + ".mjm").toString(),
+					md
+			);
 			Assertions.assertTrue(out.canRead());
-			final MimeReader mr = new MimeReader(FileUtil.getBufferedInputStream(out));
+			final MimeReader mr;
+			try (InputStream inputStream = Files.newInputStream(out.toPath())) {
+				mr = new MimeReader(inputStream);
+			}
 			final Multipart mp = mr.getMultiPart();
 			Assertions.assertEquals(mr.getBodyParts().length, 5);
 			final MimeWriter mw = new MimeWriter(mp);
 			mw.writeToDir(new File(UrlUtil.newExtension(out.getPath(), null)));
+			Assertions.assertTrue(out.renameTo(out), "File '" + out + "' is still locked.");
 		}
 	}
 
