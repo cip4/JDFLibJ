@@ -49,8 +49,8 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.thread.OrderedTaskQueue;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -405,7 +405,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			log.warn("run over " + theHFDir.listFiles().length);
 		}
 		Assertions.assertEquals(ok.listFiles().length, 42, 13);
-		Assertions.assertEquals(tmpHFDir.listFiles().length, 0, 1);
+		Assertions.assertEquals(0, tmpHFDir.listFiles().length, 1);
 		Assertions.assertEquals(error.listFiles().length, 42, 13);
 
 		hf.stop();
