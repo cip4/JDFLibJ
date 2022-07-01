@@ -64,7 +64,6 @@ import org.cip4.jdflib.resource.process.JDFFileSpec.EnumResourceUsage;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.ByteArrayIOStream;
-import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MimeUtilTest;
 import org.cip4.jdflib.util.PlatformUtil;
@@ -82,8 +81,8 @@ import org.junit.jupiter.api.io.TempDir;
 public class JDFFilespecTest extends JDFTestCaseBase
 {
 	@TempDir
-	private Path tempDir;
-	
+	Path tempDir;
+
 	/**
 	 *
 	 */
@@ -178,7 +177,8 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final Path sourceFile = tempDir.resolve("testMimePackageDoc0.mjm");
 		Assertions.assertTrue(Files.isReadable(sourceFile));
 		final Multipart mp;
-		try (InputStream fileStream = Files.newInputStream(sourceFile)) {
+		try (InputStream fileStream = Files.newInputStream(sourceFile))
+		{
 			mp = MimeUtil.getMultiPart(fileStream);
 		}
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
@@ -209,9 +209,11 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final String contents = "Test contents";
 		Files.write(tempDir.resolve("dummy.txt"), contents.getBytes());
 
-		try (final InputStream is = rli.getFileSpec().getURLInputStream()) {
+		try (final InputStream is = rli.getFileSpec().getURLInputStream())
+		{
 			Assertions.assertNotNull(is);
-			try (ByteArrayIOStream bos = new ByteArrayIOStream(is)) {
+			try (ByteArrayIOStream bos = new ByteArrayIOStream(is))
+			{
 				Assertions.assertEquals(contents.getBytes().length, bos.size());
 			}
 		}
@@ -227,7 +229,8 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	{
 		new MimeUtilTest().testBuildMimePackageDocJMF(tempDir);
 		final Multipart mp;
-		try (InputStream fileStream = Files.newInputStream(tempDir.resolve("testMimePackageDoc0.mjm"))) {
+		try (InputStream fileStream = Files.newInputStream(tempDir.resolve("testMimePackageDoc0.mjm")))
+		{
 			mp = MimeUtil.getMultiPart(fileStream);
 		}
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
