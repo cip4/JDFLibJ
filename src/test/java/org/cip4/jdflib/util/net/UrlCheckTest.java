@@ -42,7 +42,7 @@ import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -53,8 +53,8 @@ import org.junit.jupiter.api.Test;
 public class UrlCheckTest extends JDFTestCaseBase
 {
 
-	@BeforeAll
-	static void beforeAll()
+	@BeforeEach
+	void beforeEach()
 	{
 		ProxyUtil.setUseSystemDefault(true);
 	}
