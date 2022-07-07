@@ -43,8 +43,8 @@ import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -53,8 +53,8 @@ import org.junit.jupiter.api.Test;
  */
 public class RollingBackupTest extends JDFTestCaseBase
 {
+	@TempDir
 	private File dir;
-	private int n;
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**
@@ -221,20 +221,4 @@ public class RollingBackupTest extends JDFTestCaseBase
 		rbf.clearAll();
 		Assertions.assertEquals(dir.listFiles().length, 0);
 	}
-
-	// /////////////////////////////////////////////////////////////////////////
-
-	/**
-	 * @see JDFTestCaseBase#setUp()
-	 */
-	@Override
-	@BeforeEach
-	public void setUp() throws Exception
-	{
-		super.setUp();
-		dir = FileUtil.getFileInDirectory(new File(sm_dirTestDataTemp), new File("Rolling" + n++));
-		FileUtil.deleteAll(dir);
-		dir.mkdirs();
-	}
-
 }
