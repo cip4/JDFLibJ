@@ -38,6 +38,7 @@ package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -405,7 +406,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			log.warn("run over " + theHFDir.listFiles().length);
 		}
 		Assertions.assertEquals(42, ok.listFiles().length, 13);
-		Assertions.assertEquals(0, tmpHFDir.listFiles().length, 1, "Found files: " + tmpHFDir.listFiles());
+		Assertions.assertEquals(0, tmpHFDir.listFiles().length, 1, "Found files: " + Arrays.toString(tmpHFDir.listFiles()));
 		Assertions.assertEquals(42, error.listFiles().length, 13);
 
 		hf.stop();
