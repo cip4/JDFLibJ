@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.util.net;
 
+import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.ThreadUtil;
@@ -44,6 +45,11 @@ import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.charset.Charset;
 
 /**
  *
@@ -76,7 +82,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 				break;
 		}
 
-		Assertions.assertNotNull(ping);
+		Assertions.assertNotNull(ping, debugConnection());
 	}
 
 	/**
@@ -99,7 +105,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 				break;
 		}
 
-		Assertions.assertNotNull(ping);
+		Assertions.assertNotNull(ping, debugConnection());
 	}
 
 	/**
@@ -112,7 +118,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 		final HTTPDetails det = new HTTPDetails();
 		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.setHTTPDetails(det);
-		Assertions.assertNotNull(urlCheck.toString());
+		Assertions.assertNotNull(urlCheck.toString(), debugConnection());
 	}
 
 	/**
@@ -127,7 +133,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.setBuffer(true);
 		final UrlPart ping = urlCheck.ping(5555);
-		Assertions.assertNotNull(ping.getResponseStream());
+		Assertions.assertNotNull(ping.getResponseStream(), debugConnection());
 	}
 
 	/**
@@ -139,7 +145,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		Assertions.assertEquals(200, new UrlCheck("https://www.google.com").pingRC(8888));
+		Assertions.assertEquals(200, new UrlCheck("https://www.google.com").pingRC(8888), debugConnection());
 	}
 
 	/**
@@ -151,7 +157,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		Assertions.assertEquals(200, new UrlCheck("https://www.google.com", UrlUtil.GET).pingRC(5555));
+		Assertions.assertEquals(200, new UrlCheck("https://www.google.com", UrlUtil.GET).pingRC(5555), debugConnection());
 	}
 
 	/**
@@ -181,6 +187,19 @@ public class UrlCheckTest extends JDFTestCaseBase
 		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.startPing(5555);
 		ThreadUtil.sleep(111);
-		Assertions.assertEquals(200, urlCheck.getPingRC());
+		Assertions.assertEquals(200, urlCheck.getPingRC(), debugConnection());
+	}
+
+	public String debugConnection()
+	{
+		final String url = "https://ifconfig.me/";
+		try (InputStream in = new URL(url).openStream())
+		{
+			return "Requesting from IP: " + IOUtils.toString(in, Charset.defaultCharset());
+		} catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+
 	}
 }
