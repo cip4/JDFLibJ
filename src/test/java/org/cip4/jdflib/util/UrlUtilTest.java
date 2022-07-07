@@ -101,13 +101,13 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		assertNull(UrlUtil.getLocalURL("foo", "foo"));
 		assertNull(UrlUtil.getLocalURL("foo", null));
-		assertEquals(UrlUtil.getLocalURL("foo", "foo/bar"), "bar");
-		assertEquals(UrlUtil.getLocalURL("/foo", "foo/bar"), "bar");
-		assertEquals(UrlUtil.getLocalURL("foo", "/foo/bar"), "bar");
-		assertEquals(UrlUtil.getLocalURL("foo/", "foo/bar"), "bar");
-		assertEquals(UrlUtil.getLocalURL(null, "foo/bar"), "foo/bar");
-		assertEquals(UrlUtil.getLocalURL("", "foo/bar"), "foo/bar");
-		assertEquals(UrlUtil.getLocalURL("file://foo", "File://foo/bar/a.b"), "bar/a.b");
+		assertEquals("bar", UrlUtil.getLocalURL("foo", "foo/bar"));
+		assertEquals("bar", UrlUtil.getLocalURL("/foo", "foo/bar"));
+		assertEquals("bar", UrlUtil.getLocalURL("foo", "/foo/bar"));
+		assertEquals("bar", UrlUtil.getLocalURL("foo/", "foo/bar"));
+		assertEquals("foo/bar", UrlUtil.getLocalURL(null, "foo/bar"));
+		assertEquals("foo/bar", UrlUtil.getLocalURL("", "foo/bar"));
+		assertEquals("bar/a.b", UrlUtil.getLocalURL("file://foo", "File://foo/bar/a.b"));
 	}
 
 	/**
@@ -181,6 +181,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("foo", UrlUtil.extension(".foo"));
 		assertEquals("foo", UrlUtil.extension("a.b.foo"));
 		assertEquals("foo", UrlUtil.extension("a.b..foo"));
+		assertNull(UrlUtil.extension("/a/b.e/c"));
 	}
 
 	/**
@@ -719,15 +720,15 @@ public class UrlUtilTest extends JDFTestCaseBase
 		{ // on windows
 			final File f = new File("C:\\IO.SYS");
 			String s = UrlUtil.fileToUrl(f, false);
-			assertEquals(s, "file:///C:/IO.SYS");
+			assertEquals("file:///C:/IO.SYS", s);
 			s = UrlUtil.fileToUrl(new File("\\\\fooBar\\4€.txt"), false);
-			assertEquals(s, "file://fooBar/4€.txt");
+			assertEquals("file://fooBar/4€.txt", s);
 		}
 		else
 		{
 			final String s = UrlUtil.fileToUrl(new File("/fooBar/4€.txt"), true);
-			assertEquals(s, "file:/fooBar/4%e2%82%ac.txt");
-			assertEquals(UrlUtil.fileToUrl(new File("/a/4%.txt"), false), "file:/a/4%25.txt");
+			assertEquals("file:/fooBar/4%e2%82%ac.txt", s);
+			assertEquals("file:/a/4%25.txt", UrlUtil.fileToUrl(new File("/a/4%.txt"), false));
 		}
 	}
 
@@ -896,10 +897,10 @@ public class UrlUtilTest extends JDFTestCaseBase
 	public void testGetRelativeURI()
 	{
 		File f = new File("./a b");
-		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "a%20b");
+		assertEquals("a%20b", StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0));
 		f = new File("../a.ä");
-		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "../a.%c3%a4", "escaped utf8");
-		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, false), '\\', "/", 0), new String(StringUtil.getUTF8Bytes("../a.ä")), "unescaped but utf8");
+		assertEquals("../a.%c3%a4", StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "escaped utf8");
+		assertEquals(new String(StringUtil.getUTF8Bytes("../a.ä")), StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, false), '\\', "/", 0), "unescaped but utf8");
 	}
 
 	/**
@@ -924,13 +925,13 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		File file = new File("c:\\a\\b\\c.txt");
 		final File cwd = new File("c:\\a\\b1");
-		assertEquals(UrlUtil.getRelativeURL(file, cwd, true), "../b/c.txt");
+		assertEquals("../b/c.txt", UrlUtil.getRelativeURL(file, cwd, true));
 		file = new File("c:\\a\\b1\\c.txt");
-		assertEquals(UrlUtil.getRelativeURL(file, cwd, true), "c.txt");
+		assertEquals("c.txt", UrlUtil.getRelativeURL(file, cwd, true));
 		file = new File("a\\..\\b\\c.txt");
-		assertEquals(UrlUtil.getRelativeURL(file, null, true), "b/c.txt");
+		assertEquals("b/c.txt", UrlUtil.getRelativeURL(file, null, true));
 		file = cwd;
-		assertEquals(UrlUtil.getRelativeURL(file, cwd, true), ".");
+		assertEquals(".", UrlUtil.getRelativeURL(file, cwd, true));
 	}
 
 	/**
@@ -983,11 +984,12 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testRemoveExtension()
 	{
-		assertEquals(UrlUtil.prefix("a.b"), "a");
-		assertEquals(UrlUtil.prefix("a"), "a");
-		assertEquals(UrlUtil.prefix("a."), "a");
-		assertEquals(UrlUtil.prefix("a.b.c"), "a.b");
-		assertEquals(UrlUtil.prefix("."), "");
+		assertEquals("a", UrlUtil.prefix("a.b"));
+		assertEquals("a", UrlUtil.prefix("a"));
+		assertEquals("a", UrlUtil.prefix("a."));
+		assertEquals("a.b", UrlUtil.prefix("a.b.c"));
+		assertEquals("", UrlUtil.prefix("."));
+		assertEquals("/a/b.e/c", UrlUtil.prefix("/a/b.e/c"));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -998,15 +1000,15 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testCleanDots()
 	{
-		assertEquals(UrlUtil.cleanDots("."), ".");
-		assertEquals(UrlUtil.cleanDots(".."), "..");
-		assertEquals(UrlUtil.cleanDots("a/.."), ".");
-		assertEquals(UrlUtil.cleanDots("../../c.pdf"), "../../c.pdf");
-		assertEquals(UrlUtil.cleanDots(".././../c.pdf"), "../../c.pdf");
-		assertEquals(UrlUtil.cleanDots("File://a/../b"), "File://b");
-		assertEquals(UrlUtil.cleanDots("File://a/.././c/../b.pdf"), "File://b.pdf");
-		assertEquals(UrlUtil.cleanDots("File:///c:/a/.././c/../b.pdf"), "File:///c:/b.pdf");
-		assertEquals(UrlUtil.cleanDots("/."), "/.");
+		assertEquals(".", UrlUtil.cleanDots("."));
+		assertEquals("..", UrlUtil.cleanDots(".."));
+		assertEquals(".", UrlUtil.cleanDots("a/.."));
+		assertEquals("../../c.pdf", UrlUtil.cleanDots("../../c.pdf"));
+		assertEquals("../../c.pdf", UrlUtil.cleanDots(".././../c.pdf"));
+		assertEquals("File://b", UrlUtil.cleanDots("File://a/../b"));
+		assertEquals("File://b.pdf", UrlUtil.cleanDots("File://a/.././c/../b.pdf"));
+		assertEquals("File:///c:/b.pdf", UrlUtil.cleanDots("File:///c:/a/.././c/../b.pdf"));
+		assertEquals("/.", UrlUtil.cleanDots("/."));
 	}
 
 	/**
@@ -1015,10 +1017,10 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testCleanHttpUrl()
 	{
-		assertEquals(UrlUtil.cleanHttpURL("localhost"), "http://localhost");
-		assertEquals(UrlUtil.cleanHttpURL("/http/localhost"), "http://localhost");
-		assertEquals(UrlUtil.cleanHttpURL("http:/localhost"), "http://localhost");
-		assertEquals(UrlUtil.cleanHttpURL("http:/localhost:8080//ggg"), "http://localhost:8080/ggg");
+		assertEquals("http://localhost", UrlUtil.cleanHttpURL("localhost"));
+		assertEquals("http://localhost", UrlUtil.cleanHttpURL("/http/localhost"));
+		assertEquals("http://localhost", UrlUtil.cleanHttpURL("http:/localhost"));
+		assertEquals("http://localhost:8080/ggg", UrlUtil.cleanHttpURL("http:/localhost:8080//ggg"));
 	}
 
 	/**
@@ -1028,9 +1030,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testCreateHttpUrl()
 	{
-		assertEquals(UrlUtil.createHttpUrl(false, "d", 0, "a"), "http://d/a");
-		assertEquals(UrlUtil.createHttpUrl(false, "d", 8080, "a"), "http://d:8080/a");
-		assertEquals(UrlUtil.createHttpUrl(true, "d", 8080, "a"), "https://d:8080/a");
+		assertEquals("http://d/a", UrlUtil.createHttpUrl(false, "d", 0, "a"));
+		assertEquals("http://d:8080/a", UrlUtil.createHttpUrl(false, "d", 8080, "a"));
+		assertEquals("https://d:8080/a", UrlUtil.createHttpUrl(true, "d", 8080, "a"));
 	}
 
 	/**
@@ -1152,17 +1154,17 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testNormalize()
 	{
-		assertEquals(UrlUtil.normalize("a.b"), "a.b");
-		assertEquals(UrlUtil.normalize("./a.b"), "a.b");
-		assertEquals(UrlUtil.normalize("././a.b"), "a.b");
-		assertEquals(UrlUtil.normalize("http://a/a.b"), "http://a/a.b");
-		assertEquals(UrlUtil.normalize("http://a/a%20.b"), "http://a/a%20.b");
-		assertEquals(UrlUtil.normalize("HTTP://a/a.b"), "http://a/a.b");
-		assertEquals(UrlUtil.normalize("HTTP://a//a.b"), "http://a/a.b");
-		assertEquals(UrlUtil.normalize("cid:a.b"), "cid:a.b");
-		assertEquals(UrlUtil.normalize("<cid:a.b>"), "cid:a.b");
-		assertEquals(UrlUtil.normalize("http://a/a.b?f=g"), "http://a/a.b?f=g");
-		assertEquals(UrlUtil.normalize("http:/a/a.b?f=g"), "http:/a/a.b?f=g");
+		assertEquals("a.b", UrlUtil.normalize("a.b"));
+		assertEquals("a.b", UrlUtil.normalize("./a.b"));
+		assertEquals("a.b", UrlUtil.normalize("././a.b"));
+		assertEquals("http://a/a.b", UrlUtil.normalize("http://a/a.b"));
+		assertEquals("http://a/a%20.b", UrlUtil.normalize("http://a/a%20.b"));
+		assertEquals("http://a/a.b", UrlUtil.normalize("HTTP://a/a.b"));
+		assertEquals("http://a/a.b", UrlUtil.normalize("HTTP://a//a.b"));
+		assertEquals("cid:a.b", UrlUtil.normalize("cid:a.b"));
+		assertEquals("cid:a.b", UrlUtil.normalize("<cid:a.b>"));
+		assertEquals("http://a/a.b?f=g", UrlUtil.normalize("http://a/a.b?f=g"));
+		assertEquals("http:/a/a.b?f=g", UrlUtil.normalize("http:/a/a.b?f=g"));
 		assertNull(UrlUtil.normalize("http://a:b"));
 	}
 
@@ -1173,9 +1175,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testNormalizeFile()
 	{
-		assertEquals(UrlUtil.normalize("\\\\host\\dir\\a a.b"), "file://host/dir/a%20a.b");
-		assertEquals(UrlUtil.normalize("\\\\host\\dir\\a ö.b"), "file://host/dir/a%20ö.b");
-		assertEquals(UrlUtil.normalize("FILE://host/dir/a ö.b"), "file://host/dir/a%20ö.b");
+		assertEquals("file://host/dir/a%20a.b", UrlUtil.normalize("\\\\host\\dir\\a a.b"));
+		assertEquals("file://host/dir/a%20ö.b", UrlUtil.normalize("\\\\host\\dir\\a ö.b"));
+		assertEquals("file://host/dir/a%20ö.b", UrlUtil.normalize("FILE://host/dir/a ö.b"));
 	}
 
 	/**
@@ -1184,13 +1186,13 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testUnEscape()
 	{
-		assertEquals(UrlUtil.unEscape("a.b"), "a.b");
-		assertEquals(UrlUtil.unEscape("a.b"), "a.b");
-		assertEquals(UrlUtil.unEscape("aaa%"), "aaa%");
-		assertEquals(UrlUtil.unEscape("%2"), "%2");
-		assertEquals(UrlUtil.unEscape("%20"), " ");
-		assertEquals(UrlUtil.unEscape("%23"), "#");
-		assertEquals(UrlUtil.unEscape("äöü€"), "äöü€");
+		assertEquals("a.b", UrlUtil.unEscape("a.b"));
+		assertEquals("a.b", UrlUtil.unEscape("a.b"));
+		assertEquals("aaa%", UrlUtil.unEscape("aaa%"));
+		assertEquals("%2", UrlUtil.unEscape("%2"));
+		assertEquals(" ", UrlUtil.unEscape("%20"));
+		assertEquals("#", UrlUtil.unEscape("%23"));
+		assertEquals("äöü€", UrlUtil.unEscape("äöü€"));
 	}
 
 	/**
@@ -1199,14 +1201,15 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testNewExtension()
 	{
-		assertEquals(UrlUtil.newExtension("a.b", "c"), "a.c");
-		assertEquals(UrlUtil.newExtension("a.b.c", "c"), "a.b.c");
-		assertEquals(UrlUtil.newExtension("a.b", null), "a");
-		assertEquals(UrlUtil.newExtension("a.b", ".c"), "a.c");
-		assertEquals(UrlUtil.newExtension("a.b", ".c.d"), "a.c.d");
-		assertEquals(UrlUtil.newExtension("a.b", "c.d"), "a.c.d");
-		assertEquals(UrlUtil.newExtension("a.b.bb", "c.d"), "a.b.c.d");
-		assertEquals(UrlUtil.newExtension(".b", ".c"), ".c");
-		assertEquals(UrlUtil.newExtension("a", ".c"), "a.c");
+		assertEquals("a.c", UrlUtil.newExtension("a.b", "c"));
+		assertEquals("a.b.c", UrlUtil.newExtension("a.b.c", "c"));
+		assertEquals("a", UrlUtil.newExtension("a.b", null));
+		assertEquals("a.c", UrlUtil.newExtension("a.b", ".c"));
+		assertEquals("a.c.d", UrlUtil.newExtension("a.b", ".c.d"));
+		assertEquals("a.c.d", UrlUtil.newExtension("a.b", "c.d"));
+		assertEquals("a.b.c.d", UrlUtil.newExtension("a.b.bb", "c.d"));
+		assertEquals(".c", UrlUtil.newExtension(".b", ".c"));
+		assertEquals("a.c", UrlUtil.newExtension("a", ".c"));
+		assertEquals("/a/b.e/c.txt", UrlUtil.newExtension("/a/b.e/c", ".txt"));
 	}
 }

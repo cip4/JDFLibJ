@@ -60,6 +60,7 @@ import javax.mail.BodyPart;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -470,8 +471,9 @@ public class UrlUtil
 			return null;
 		}
 
-		final int index = pathName.lastIndexOf(".");
-		return (index == -1) ? null : pathName.substring(index + 1);
+		final String filename = FilenameUtils.getName(pathName);
+		final int index = filename.lastIndexOf(".");
+		return (index == -1) ? null : filename.substring(index + 1);
 	}
 
 	/**
