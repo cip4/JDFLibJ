@@ -90,6 +90,7 @@ import org.cip4.jdflib.util.mime.MimeReader;
 import org.cip4.jdflib.util.mime.MimeWriter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -98,6 +99,9 @@ import org.junit.jupiter.api.Test;
  */
 public class MimeUtilTest extends JDFTestCaseBase
 {
+
+	@TempDir
+	private Path testDir;
 
 	/**
 	 * @throws IOException
@@ -619,18 +623,22 @@ public class MimeUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWriteToDir() throws Exception
 	{
-		testBuildMimePackageDocJMF();
+		testBuildMimePackageDocJMF(testDir);
 
-		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc0.mjm");
-		Assertions.assertNotNull(mp);
-		final String baseDir = sm_dirTestDataTemp + File.separator + "TestWriteMime2";
-		final File directory = new File(baseDir);
-		if (directory.exists())
+		final Multipart mp;
+		try (InputStream mimePackageStream = Files.newInputStream(testDir.resolve("testMimePackageDoc0.mjm")))
 		{
-			directory.delete();
+			mp = MimeUtil.getMultiPart(mimePackageStream);
+		}
+		Assertions.assertNotNull(mp);
+		final Path baseDir = testDir.resolve("TestWriteMime2");
+		final File directory = baseDir.toFile();
+		if (Files.exists(baseDir))
+		{
+			Files.delete(baseDir);
 		}
 		MimeUtil.writeToDir(mp, directory);
-		Assertions.assertTrue(new File(baseDir, "test.icc").exists());
+		Assertions.assertTrue(Files.exists(baseDir.resolve("test.icc")));
 	}
 
 	/**
