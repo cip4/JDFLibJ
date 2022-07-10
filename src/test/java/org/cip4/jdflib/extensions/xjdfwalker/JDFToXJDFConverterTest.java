@@ -2977,6 +2977,21 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		h.writeToFile(sm_dirTestDataTemp + "prepress.xjdf");
 	}
 
+	@Test
+	public void testRemoveAgentFromResource()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+
+		JDFResource runList = n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		runList.setAttribute(AttributeName.NPAGE, "4");
+		runList.setAgentName("resource agent name");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+
+		assertNull(xjdf.getXPathAttribute("//ResourceSet[@Name=RunList]/Resource/@AgentName", null));
+	}
+
 	/**
 	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
