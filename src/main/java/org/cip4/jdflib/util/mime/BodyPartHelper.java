@@ -470,7 +470,10 @@ public class BodyPartHelper
 			throw new MessagingException("illegal filename " + fileName);
 		}
 		final File outFile = new File(directory.getPath() + File.separator + fileName);
-		FileUtil.streamToFile(getInputStream(), outFile);
+		try (InputStream inputStream = getInputStream())
+		{
+			FileUtil.streamToFile(inputStream, outFile);
+		}
 	}
 
 	/**

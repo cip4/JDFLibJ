@@ -85,8 +85,9 @@ import java.util.List;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -98,6 +99,12 @@ import org.junit.jupiter.api.Test;
 public class ProxyUtilTest extends JDFTestCaseBase
 {
 	ProxySelector defaultSel;
+
+	@AfterAll
+	static void afterAll()
+	{
+		ProxyUtil.setUseSystemDefault(true);
+	}
 
 	/**
 	 * @throws Exception if snafu

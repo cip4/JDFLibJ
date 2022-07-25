@@ -45,14 +45,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class FileTimeTest extends JDFTestCaseBase
 {
+
+	@TempDir
+	private Path tempPath;
 
 	@Test
 	public void testExists()
@@ -63,7 +68,7 @@ public class FileTimeTest extends JDFTestCaseBase
 	@Test
 	public void testmodified()
 	{
-		final FileTime ft = new FileTime(new File(sm_dirTestData), false);
+		final FileTime ft = new FileTime(tempPath.toFile(), false);
 		final long updateModified = ft.updateModified();
 		assertEquals(System.currentTimeMillis(), updateModified, 1000);
 		ThreadUtil.sleep(400);
@@ -75,7 +80,7 @@ public class FileTimeTest extends JDFTestCaseBase
 	{
 		for (final boolean b : new boolean[] { true, false })
 		{
-			final File dummy = new File(sm_dirTestDataTemp + System.nanoTime() + ".file");
+			final File dummy = tempPath.resolve(System.nanoTime() + ".file").toFile();
 			final FileTime ft = new FileTime(dummy, b);
 			assertTrue(FileUtil.forceDelete(dummy));
 			FileUtil.createNewFile(dummy);
