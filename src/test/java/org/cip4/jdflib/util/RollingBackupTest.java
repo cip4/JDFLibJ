@@ -54,7 +54,7 @@ import org.junit.jupiter.api.io.TempDir;
 public class RollingBackupTest extends JDFTestCaseBase
 {
 	@TempDir
-	private File dir;
+	File dir;
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**

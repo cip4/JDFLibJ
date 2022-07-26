@@ -57,7 +57,7 @@ public class FileTimeTest extends JDFTestCaseBase
 {
 
 	@TempDir
-	private Path tempPath;
+	Path tempPath;
 
 	@Test
 	public void testExists()

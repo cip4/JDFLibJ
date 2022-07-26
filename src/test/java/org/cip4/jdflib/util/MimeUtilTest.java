@@ -101,7 +101,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 {
 
 	@TempDir
-	private Path testDir;
+	Path testDir;
 
 	/**
 	 * @throws IOException
@@ -109,12 +109,14 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBuildMimePackageDocJMF() throws MessagingException, IOException {
+	public void testBuildMimePackageDocJMF() throws MessagingException, IOException
+	{
 		Path tempPath = new File(sm_dirTestDataTemp).toPath();
 		testBuildMimePackageDocJMF(tempPath);
 	}
 
-	public void testBuildMimePackageDocJMF(Path tempDir) throws MessagingException, IOException {
+	public void testBuildMimePackageDocJMF(Path tempDir) throws MessagingException, IOException
+	{
 		for (int ii = 0; ii < 3; ii++)
 		{
 			final JDFDoc docJMF = new JDFDoc("JMF");
@@ -147,14 +149,11 @@ public class MimeUtilTest extends JDFTestCaseBase
 			{
 				md.transferEncoding = UrlUtil.BINARY;
 			}
-			final File out = MimeUtil.writeToFile(
-					m,
-					tempDir.resolve("testMimePackageDoc" + ii + ".mjm").toString(),
-					md
-			);
+			final File out = MimeUtil.writeToFile(m, tempDir.resolve("testMimePackageDoc" + ii + ".mjm").toString(), md);
 			Assertions.assertTrue(out.canRead());
 			final MimeReader mr;
-			try (InputStream inputStream = Files.newInputStream(out.toPath())) {
+			try (InputStream inputStream = Files.newInputStream(out.toPath()))
+			{
 				mr = new MimeReader(inputStream);
 			}
 			final Multipart mp = mr.getMultiPart();
@@ -173,7 +172,8 @@ public class MimeUtilTest extends JDFTestCaseBase
 	{
 		final JDFNode n = doc.getJDFRoot();
 		n.setType(EnumType.ColorSpaceConversion);
-		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null,
+				null);
 		final JDFFileSpec fs0 = cscp.appendFinalTargetDevice();
 		final String unc = sm_dirTestData + File.separator + "test.icc";
 		fs0.setURL(StringUtil.uncToUrl(unc, true));
@@ -196,13 +196,13 @@ public class MimeUtilTest extends JDFTestCaseBase
 		 * final JDFDoc docJMF = new JDFDoc("JMF"); docJMF.setOriginalFileName("JMF.jmf"); final JDFJMF jmf = docJMF.getJMFRoot(); final JDFCommand com = (JDFCommand)
 		 * jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry); com.appendQueueSubmissionParams().setURL("TheJDF");
 		 *
-		 * final JDFDoc doc = new JDFDoc("JDF"); doc.setOriginalFileName("JDF.jdf"); final JDFNode n = doc.getJDFRoot(); n.setType(EnumType.ColorSpaceConversion); final JDFColorSpaceConversionParams
-		 * cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null); final JDFFileSpec fs0 =
-		 * cscp.appendFinalTargetDevice(); fs0.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "test.icc", true)); final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST,
-		 * null, EnumUsage.Input, null, null, null, null); rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "url1.pdf", false), 0, -1); for (int i = 0; i < 100; i++) {
-		 * rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "url?.pdf", false), 0, -1); } final Multipart m = MimeUtil.buildMimePackage(docJMF, doc, true); final HttpURLConnection uc =
-		 * MimeUtil.writeToURL(m, "http://192.168.14.143:8010/FJC/Fiery", null); assertEquals(uc.getResponseCode(), 200); assertTrue(uc.getContentLength() > 0); final InputStream is =
-		 * uc.getInputStream(); IOUtils.copy(is, System.out);
+		 * final JDFDoc doc = new JDFDoc("JDF"); doc.setOriginalFileName("JDF.jdf"); final JDFNode n = doc.getJDFRoot(); n.setType(EnumType.ColorSpaceConversion); final
+		 * JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null,
+		 * null); final JDFFileSpec fs0 = cscp.appendFinalTargetDevice(); fs0.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "test.icc", true)); final JDFRunList rl =
+		 * (JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null); rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator +
+		 * "url1.pdf", false), 0, -1); for (int i = 0; i < 100; i++) { rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "url?.pdf", false), 0, -1); } final Multipart
+		 * m = MimeUtil.buildMimePackage(docJMF, doc, true); final HttpURLConnection uc = MimeUtil.writeToURL(m, "http://192.168.14.143:8010/FJC/Fiery", null);
+		 * assertEquals(uc.getResponseCode(), 200); assertTrue(uc.getContentLength() > 0); final InputStream is = uc.getInputStream(); IOUtils.copy(is, System.out);
 		 */
 	}
 
@@ -224,7 +224,8 @@ public class MimeUtilTest extends JDFTestCaseBase
 		doc.setOriginalFileName("JDF.jdf");
 		final JDFNode n = doc.getJDFRoot();
 		n.setType(EnumType.ColorSpaceConversion);
-		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null,
+				null);
 		final JDFFileSpec fs0 = cscp.appendFinalTargetDevice();
 		fs0.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "test.icc", true));
 		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
@@ -492,7 +493,8 @@ public class MimeUtilTest extends JDFTestCaseBase
 		doc.setOriginalFileName("JDF.jdf");
 		final JDFNode n = doc.getJDFRoot();
 		n.setType(EnumType.ColorSpaceConversion);
-		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null,
+				null);
 		final JDFFileSpec fs0 = cscp.appendFinalTargetDevice();
 		fs0.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "test.icc", true));
 		final Multipart mp = MimeUtil.buildMimePackage(null, doc, true);
