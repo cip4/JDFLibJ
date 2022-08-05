@@ -116,6 +116,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(h.getRoot());
 		Assertions.assertNull(StringUtil.getNonEmpty(d.getJMFRoot().getDeviceID()));
+		Assertions.assertEquals("xjmfdev", d.getJMFRoot().getSenderID());
 	}
 
 	/**
@@ -131,7 +132,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 		mh.appendElement(ElementName.SUBSCRIPTION).setAttribute(AttributeName.URL, "foo");
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(h.getRoot());
-		Assertions.assertNull(StringUtil.getNonEmpty(d.getJMFRoot().getQuery(0).getSenderID()));
+		Assertions.assertEquals("qdev", d.getJMFRoot().getQuery(0).getSenderID());
 	}
 
 }
