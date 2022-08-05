@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -213,6 +213,9 @@ public class JMFBuilder implements Cloneable
 		jmf.setSenderID(senderID);
 		jmf.setAgentName(agentName);
 		jmf.setAgentVersion(agentVersion);
+		m.setSenderID(senderID);
+		m.setAgentName(agentName);
+		m.setAgentVersion(agentVersion);
 		return jmf;
 	}
 

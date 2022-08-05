@@ -118,4 +118,20 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 		Assertions.assertNull(StringUtil.getNonEmpty(d.getJMFRoot().getDeviceID()));
 	}
 
+	/**
+	 *
+	 */
+	@Test
+	public void testSenderID3()
+	{
+		final XJMFHelper h = new XJMFHelper();
+		h.getHeader().setAttribute(AttributeName.DEVICEID, "xjmfdev");
+		final MessageHelper mh = h.appendMessage(EnumFamily.Query, EnumType.Status);
+		mh.getHeader().setAttribute(AttributeName.DEVICEID, "qdev");
+		mh.appendElement(ElementName.SUBSCRIPTION).setAttribute(AttributeName.URL, "foo");
+		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		final JDFDoc d = xc.convert(h.getRoot());
+		Assertions.assertNull(StringUtil.getNonEmpty(d.getJMFRoot().getQuery(0).getSenderID()));
+	}
+
 }

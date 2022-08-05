@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,9 +40,14 @@ package org.cip4.jdflib.jmf;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
-import org.cip4.jdflib.core.*;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
@@ -281,6 +286,23 @@ public class JMFBuilderTest extends JDFTestCaseBase
 		b.setSenderID(null);
 		jmf = b.buildMilestone("PrepressCompleted", "jobID");
 		Assertions.assertEquals(jmf.getSenderID(), "");
+	}
+
+	/**
+	 *
+	 * test milestone
+	 */
+	@Test
+	public void testSenderIDMessage()
+	{
+		JDFJMF jmf = b.buildMilestone("PrepressCompleted", "jobID");
+		Assertions.assertEquals(jmf.getSenderID(), JDFJMF.getTheSenderID());
+		b.setSenderID("fooBar");
+		jmf = b.buildMilestone("PrepressCompleted", "jobID");
+		Assertions.assertEquals(jmf.getMessageElement(null, null, 0).getSenderID(), "fooBar");
+		b.setSenderID(null);
+		jmf = b.buildMilestone("PrepressCompleted", "jobID");
+		Assertions.assertEquals(jmf.getMessageElement(null, null, 0).getSenderID(), "");
 	}
 
 }
