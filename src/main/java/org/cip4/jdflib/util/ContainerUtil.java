@@ -1112,4 +1112,38 @@ public class ContainerUtil
 		return (List<A>) getKeyArray(m);
 	}
 
+	/**
+	 * 
+	 * @param <A>
+	 * @param <B>
+	 * @param map
+	 * @param map2
+	 * @return
+	 */
+	public static <A, B> Map<A, B> putAll(Map<A, B> map, Map<A, B> map2)
+	{
+		if (map == null)
+			return map2;
+		if (map2 != null)
+			map.putAll(map2);
+		return map;
+
+	}
+
+	/**
+	 * 
+	 * @param <A>
+	 * @param <B>
+	 * @param map
+	 * @param map2
+	 * @return
+	 */
+	public static <A, B> B put(Map<A, B> map, A key, B value)
+	{
+		if (map != null && key != null && value != null)
+			return map.put(key, value);
+		return null;
+
+	}
+
 }

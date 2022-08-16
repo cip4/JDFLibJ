@@ -226,6 +226,32 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 *
 	 */
+	// no test
+	public void testSpeed()
+	{
+		final JDFToXJDF conv = new JDFToXJDF();
+
+		final JDFNode n = JDFNode.parseFile("C:\\data\\265276-PD\\digital.main.jdf");
+		final KElement x = conv.convert(n);
+		final XJDFHelper h = XJDFHelper.getHelper(x);
+		h.writeToFile("C:\\data\\265276-PD\\digital.main.xjdf");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testToString()
+	{
+		final JDFToXJDF conv = new JDFToXJDF();
+		assertNotNull(conv.toString());
+	}
+
+	/**
+	 *
+	 *
+	 */
 	@Test
 	public void testCustomerInfoContactPersonAddress()
 	{

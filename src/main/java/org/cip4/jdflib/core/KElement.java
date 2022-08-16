@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1159,6 +1159,30 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				return oldVal;
 			}
+		}
+	}
+
+	/**
+	 * Append the contents of value to the existing attribute key. Create Key, if it does not exist
+	 *
+	 * @param key attribute key
+	 * @param value string to be appended
+	 * @param nameSpaceURI namespace of key
+	 * @param sep separator between the original attribute value and value, defaults to " " if null
+	 * @param bUnique if true, the attribute will only be appended if it is not yet within the current attribute value
+	 *        appendAttribute("key","next",JDFCoreConstants.EMPTYSTRING,JDFCoreConstants .COMMA) applied to <xml key="first"/> results in <xml key="first,next"/>
+	 * @default appendAttribute(key, value, null, null, false)
+	 * @return the updated value; null if none exists
+	 */
+	public void appendAttributes(final String key, final List<String> value, final String nameSpaceURI, String sep, final boolean bUnique)
+	{
+		if (!ContainerUtil.isEmpty(value))
+		{
+			StringArray old = StringArray.getVString(getAttribute(key, nameSpaceURI, sep), null);
+			Collection<String> addAll = ContainerUtil.addAll(old, value);
+			if (bUnique)
+				ContainerUtil.unify(addAll);
+			setAttribute(key, (List<String>) addAll, nameSpaceURI);
 		}
 	}
 

@@ -45,6 +45,8 @@
  */
 package org.cip4.jdflib.core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.File;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -73,8 +75,8 @@ import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 
 /**
@@ -2257,7 +2259,8 @@ public class KElementTest extends JDFTestCaseBase
 		Assertions.assertEquals(root.getElement("foo").getElement("bar").getNextSiblingElement("bar", null).numChildElements("fnarf", null), 5, "");
 		Assertions.assertNotNull(root.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[@a=\"b\"]"), "create by attribute value now implemented");
 		Assertions.assertEquals("blahblah", root.getCreateXPathElement("./foo/bar[@blub=\"blahblah\"]").getAttribute("blub"), "getCreate actually sets the attribute");
-		Assertions.assertEquals("blahblah", root.getCreateXPathElement("./foo/bar[gaga/@blub=\"blahblah\"]").getXPathAttribute("gaga/@blub", null), "getCreate actually sets the attribute");
+		Assertions.assertEquals("blahblah", root.getCreateXPathElement("./foo/bar[gaga/@blub=\"blahblah\"]").getXPathAttribute("gaga/@blub", null),
+				"getCreate actually sets the attribute");
 	}
 
 	/**
@@ -3085,6 +3088,25 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
+	public void testAppendAttributes() throws DataFormatException
+	{
+		final KElement e = KElement.createRoot("a", null);
+		VString v1 = new VString("a b");
+		VString v2 = new VString("a c");
+		e.appendAttributes("a", null, null, null, false);
+		e.appendAttributes("a", null, null, null, true);
+		e.appendAttributes("a", v1, null, null, true);
+		e.appendAttributes("a", v2, null, null, true);
+		assertEquals("a b c", e.getNonEmpty("a"));
+		e.appendAttributes("a", v2, null, null, false);
+		assertEquals("a b c a c", e.getNonEmpty("a"));
+	}
+
+	/**
 	 *
 	 */
 	@Test
@@ -3179,7 +3201,8 @@ public class KElementTest extends JDFTestCaseBase
 		}
 		Assertions.assertEquals(root.getElementHashMap(null, null, "ID").size(), 2000, "");
 		Assertions.assertEquals(root.getElementHashMap(null, "myns", "ID").size(), 1000, "");
-		Assertions.assertEquals(root.getElementHashMap(null, null, "ID").get("id1_50"), root.getChildByTagName("child1", null, 0, new JDFAttributeMap("ID", "id1_50"), true, true), "");
+		Assertions.assertEquals(root.getElementHashMap(null, null, "ID").get("id1_50"), root.getChildByTagName("child1", null, 0, new JDFAttributeMap("ID", "id1_50"), true, true),
+				"");
 	}
 
 	/**

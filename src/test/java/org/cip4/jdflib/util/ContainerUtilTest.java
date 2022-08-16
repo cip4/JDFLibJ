@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,6 +38,9 @@
  * @author muchadie
  */
 package org.cip4.jdflib.util;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -252,6 +255,36 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		Assertions.assertEquals(ContainerUtil.addAll(null, v1), v1);
 		Assertions.assertEquals(ContainerUtil.addAll(v1, v2), v3);
 		Assertions.assertEquals(v1, v3);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testPutAll()
+	{
+		JDFAttributeMap m0 = new JDFAttributeMap("a", "b");
+		JDFAttributeMap m1 = new JDFAttributeMap("a1", "b1");
+		assertNull(ContainerUtil.putAll(null, null));
+		assertEquals(m0, ContainerUtil.putAll(null, m0));
+		assertEquals(m0, ContainerUtil.putAll(m0, null));
+		assertEquals(m0, ContainerUtil.putAll(m0, m1));
+		assertEquals(2, m0.size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testPut()
+	{
+		JDFAttributeMap m0 = new JDFAttributeMap("a", "b");
+		JDFAttributeMap m1 = new JDFAttributeMap("a1", "b1");
+		assertNull(ContainerUtil.put(null, null, null));
+		assertNull(ContainerUtil.put(null, "a", null));
+		assertNull(ContainerUtil.put(null, null, "b"));
+		assertNull(ContainerUtil.put(null, "a", "b"));
+		assertEquals("b", ContainerUtil.put(m0, "a", "b1"));
 	}
 
 	/**

@@ -38,6 +38,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -109,6 +110,7 @@ public class JDFToXJDF extends PackageElementWalker
 		KElement.uniqueID(-1000); // don't start at zero to avoid collisions in short ID scenarios
 		componentProductMap = new JDFAttributeMap();
 		resourceAlias = new HashSet<>();
+		completedRefs = new HashMap<>();
 		wantDependent = true;
 		newVersion = getDefaultVersion();
 	}
@@ -305,6 +307,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	final private JDFAttributeMap componentProductMap;
 	final Set<String> resourceAlias;
+	final HashMap<JDFAttributeMap, String> completedRefs;
 
 	/**
 	 *
@@ -1082,11 +1085,12 @@ public class JDFToXJDF extends PackageElementWalker
 	@Override
 	public String toString()
 	{
-		return "JDFToXJDF [trackAudits=" + trackAudits + ", newRoot=" + newRoot + ", oldRoot=" + oldRoot + ", first=" + first + ", bExplicitWaste=" + bExplicitWaste + ", bRetainAll=" + bRetainAll
-				+ ", bCleanup=" + bCleanup + ", bMergeLayout=" + bMergeLayout + ", bMergeLayoutPrep=" + bMergeLayoutPrep + ", bMergeRunList=" + bMergeRunList + ", bRetainSpawnInfo=" + bRetainSpawnInfo
-				+ ", bSingleNode=" + bSingleNode + ", bUpdateVersion=" + bUpdateVersion + ", bTypeSafeMessage=" + bTypeSafeMessage + ", bAbstractMessage=" + bAbstractMessage + ", bSpanAsAttribute="
-				+ bSpanAsAttribute + ", bIntentPartition=" + bIntentPartition + ", bParameterSet=" + bParameterSet + ", wantProduct=" + wantProduct + ", componentProductMap=" + componentProductMap
-				+ ", resourceAlias=" + resourceAlias + ", bHTMLColor=" + bHTMLColor + ", bConvertTilde=" + bConvertTilde + ", rootID=" + rootID + ", removeSignatureName=" + removeSignatureName
-				+ ", processPartition=" + processPartition + ", wantDependent=" + wantDependent + ", newVersion=" + newVersion + "]";
+		return "JDFToXJDF [trackAudits=" + trackAudits + ", newRoot=" + newRoot + ", oldRoot=" + oldRoot + ", first=" + first + ", bExplicitWaste=" + bExplicitWaste
+				+ ", bRetainAll=" + bRetainAll + ", bCleanup=" + bCleanup + ", bMergeLayout=" + bMergeLayout + ", bMergeLayoutPrep=" + bMergeLayoutPrep + ", bMergeRunList="
+				+ bMergeRunList + ", bRetainSpawnInfo=" + bRetainSpawnInfo + ", bSingleNode=" + bSingleNode + ", bUpdateVersion=" + bUpdateVersion + ", bTypeSafeMessage="
+				+ bTypeSafeMessage + ", bAbstractMessage=" + bAbstractMessage + ", bSpanAsAttribute=" + bSpanAsAttribute + ", bIntentPartition=" + bIntentPartition
+				+ ", bParameterSet=" + bParameterSet + ", wantProduct=" + wantProduct + ", componentProductMap=" + componentProductMap + ", resourceAlias=" + resourceAlias
+				+ ", bHTMLColor=" + bHTMLColor + ", bConvertTilde=" + bConvertTilde + ", rootID=" + rootID + ", removeSignatureName=" + removeSignatureName + ", processPartition="
+				+ processPartition + ", wantDependent=" + wantDependent + ", newVersion=" + newVersion + "]";
 	}
 }

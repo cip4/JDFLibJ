@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,17 +40,19 @@ import java.util.List;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.intent.JDFProductionIntent;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
@@ -133,29 +135,49 @@ public class WalkRefElement extends WalkJDFElement
 	 */
 	protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
 	{
-		final JDFResource target = re.getTarget();
-		final JDFResourceLink rl = getLinkForRef(re, target);
-		final KElement refRoot = getRefRoot(xjdf);
-		if (rl != null)
+		JDFAttributeMap map = getRefMap(re);
+		String id = jdfToXJDF.completedRefs.get(map);
+		final String attName = getRefName(re);
+		if (id != null)
 		{
-			setResource(rl, target, refRoot);
+			xjdf.setAttribute(attName, id);
 		}
-		final VJDFAttributeMap partMapVector = rl == null ? null : rl.getPartMapVector();
-		final boolean overlap = VJDFAttributeMap.isEmpty(partMapVector) || partMapVector.overlapsMap(re.getPartMap());
-		final List<KElement> v = overlap ? setResource(re, target, refRoot) : null;
-		if (v != null)
+		else
 		{
-			final String attName = getRefName(re);
-			for (final KElement ref : v)
+			final JDFResource target = re.getTarget();
+			final JDFResourceLink rl = getLinkForRef(re, target);
+			final KElement refRoot = getRefRoot(xjdf);
+			if (rl != null)
 			{
-				if (!ref.hasNonEmpty(AttributeName.ID))
+				setResource(rl, target, refRoot);
+			}
+			final VJDFAttributeMap partMapVector = rl == null ? null : rl.getPartMapVector();
+			final boolean overlap = VJDFAttributeMap.isEmpty(partMapVector) || partMapVector.overlapsMap(re.getPartMap());
+			final List<KElement> v = overlap ? setResource(re, target, refRoot) : null;
+			StringArray ids = new StringArray();
+			if (v != null)
+			{
+				for (final KElement ref : v)
 				{
-					ref.setID(ref.generateDotID(AttributeName.ID, null));
+					if (!ref.hasNonEmpty(AttributeName.ID))
+					{
+						ref.setID(ref.generateDotID(AttributeName.ID, null));
+					}
+					ids.add(ref.getID());
 				}
-				xjdf.appendAttribute(attName, ref.getID(), null, JDFConstants.BLANK, true);
+				xjdf.appendAttributes(attName, ids, null, null, true);
+				jdfToXJDF.completedRefs.put(map, StringUtil.setvString(ids));
 			}
 		}
 		re.deleteNode();
+	}
+
+	JDFAttributeMap getRefMap(JDFRefElement re)
+	{
+		JDFAttributeMap map = new JDFAttributeMap(AttributeName.ID, re.getrRef());
+		JDFAttributeMap partMap = re.getPartMap();
+		ContainerUtil.putAll(map, partMap);
+		return map;
 	}
 
 	/**
