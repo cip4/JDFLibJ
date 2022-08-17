@@ -195,6 +195,7 @@ class MultiJDFToXJDF
 		final XJDFHelper xjdfHelper = new XJDFHelper(xjdf);
 		if (jdfToXJDF.isCleanup())
 			xjdfHelper.cleanUp();
+		jdfToXJDF.completedRefs.clear();
 		return xjdfHelper;
 	}
 
