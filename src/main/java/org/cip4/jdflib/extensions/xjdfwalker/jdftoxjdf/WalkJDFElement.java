@@ -448,6 +448,7 @@ public class WalkJDFElement extends WalkElement
 	List<KElement> loopLeaves(final JDFElement rl, final String className, final KElement resourceSet, final int nLeaves, final VElement vRes)
 	{
 		final List<KElement> v = new ArrayList<>();
+		SetHelper setHelper = new SetHelper(resourceSet);
 		for (final KElement e : vRes)
 		{
 			final JDFResource r = (JDFResource) e;
@@ -455,8 +456,8 @@ public class WalkJDFElement extends WalkElement
 			for (final KElement eLeaf : vLeaves)
 			{
 				final JDFResource leaf = (JDFResource) eLeaf;
-				final KElement newBaseRes = setBaseResource(rl, leaf, resourceSet);
-				final int nn = resourceSet.numChildElements(className, null);
+				final KElement newBaseRes = setBaseResource(rl, leaf, setHelper);
+				final int nn = resourceSet.numChildElements_KElement(className, null);
 				if (nn > nLeaves)
 				{
 					jdfToXJDF.walkTree(leaf, newBaseRes);
@@ -491,8 +492,8 @@ public class WalkJDFElement extends WalkElement
 	 */
 	boolean isExchangeResource(final JDFResourceLink resLink, final JDFResource linkTarget)
 	{
-		if (!jdfToXJDF.isSingleNode() || (resLink != null && EnumUsage.Input.equals(resLink.getUsage())
-				&& resLink.hasNonEmpty(AttributeName.COMBINEDPROCESSINDEX) && !resLink.getCombinedProcessIndex().contains(0)))
+		if (!jdfToXJDF.isSingleNode() || (resLink != null && EnumUsage.Input.equals(resLink.getUsage()) && resLink.hasNonEmpty(AttributeName.COMBINEDPROCESSINDEX)
+				&& !resLink.getCombinedProcessIndex().contains(0)))
 		{
 
 			final JDFResource resInRoot = linkTarget == null ? null : linkTarget.getResourceRoot();
@@ -529,9 +530,8 @@ public class WalkJDFElement extends WalkElement
 	 * @return
 	 *
 	 */
-	protected KElement setBaseResource(final JDFElement rl, final JDFResource r, final KElement xjdfSet)
+	protected KElement setBaseResource(final JDFElement rl, final JDFResource r, final SetHelper sh)
 	{
-		final SetHelper sh = new SetHelper(xjdfSet);
 		final KElement newLeaf;
 		if (jdfToXJDF.getResourceAlias().contains(r.getID()))
 		{

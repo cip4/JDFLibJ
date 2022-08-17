@@ -134,6 +134,8 @@ class MultiJDFToXJDF
 		final VElement v = getProcessNodes(root);
 		final boolean keepProduct = this.jdfToXJDF.wantProduct;
 		jdfToXJDF.wantProduct = true;
+		jdfToXJDF.preFixVersion(root);
+		jdfToXJDF.setPreprocess(false);
 		if (JDFConstants.PRODUCT.equals(root.getType()))
 		{
 			final XJDFHelper xjdfHelper = convertSingle(root);
@@ -149,7 +151,8 @@ class MultiJDFToXJDF
 			final XJDFHelper xjdfHelper = convertSingle(n);
 			vRet.add(xjdfHelper);
 		}
-		this.jdfToXJDF.wantProduct = keepProduct;
+		jdfToXJDF.wantProduct = keepProduct;
+		jdfToXJDF.setPreprocess(true);
 		return vRet;
 	}
 

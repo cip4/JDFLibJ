@@ -238,6 +238,18 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	private boolean bRetainAll = false;
 	private boolean bCleanup = true;
+	private boolean bPreprocess = true;
+
+	public boolean isPreprocess()
+	{
+		return bPreprocess;
+	}
+
+	public void setPreprocess(boolean bPreprocess)
+	{
+		this.bPreprocess = bPreprocess;
+	}
+
 	/**
 	 * if true merge stripping and layout
 	 */
@@ -469,12 +481,15 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	void preFixVersion(final JDFElement root)
 	{
-		final FixVersion vers = new FixVersion(getNewVersion());
-		vers.setLayoutPrepToStripping(bMergeLayoutPrep);
-		vers.setZappDeprecated(true);
-		vers.addIgnore(ElementName.ACTIVITY, AttributeName.ROLES);
+		if (isPreprocess())
+		{
+			final FixVersion vers = new FixVersion(getNewVersion());
+			vers.setLayoutPrepToStripping(bMergeLayoutPrep);
+			vers.setZappDeprecated(true);
+			vers.addIgnore(ElementName.ACTIVITY, AttributeName.ROLES);
 
-		vers.walkTree(root, null);
+			vers.walkTree(root, null);
+		}
 	}
 
 	/**

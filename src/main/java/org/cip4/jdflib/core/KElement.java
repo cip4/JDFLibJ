@@ -710,7 +710,7 @@ public class KElement extends ElementNSImpl implements Element
 				}
 
 				// remove any twin dom lvl 1 attributes - just in case
-				removeAttribute(key);
+				super.removeAttribute(key);
 				if (nameSpaceURI.equals(getNamespaceURI()))
 				{
 					// clean up any attribute that may be in the same ns but with a different prefix
