@@ -227,8 +227,8 @@ public class JDFSpawn
 	}
 
 	/**
-	 * spawn a node; url is the file name of the new node, vRWResourceUsage is the vector of Resources Usages (or Names if no usage exists for the process) that are spawned RW, all others are spawned
-	 * read only; vParts is the vector of part maps that are to be spawned, defaults to no part, i.e. the whole thing
+	 * spawn a node; url is the file name of the new node, vRWResourceUsage is the vector of Resources Usages (or Names if no usage exists for the process) that are spawned RW, all
+	 * others are spawned read only; vParts is the vector of part maps that are to be spawned, defaults to no part, i.e. the whole thing
 	 *
 	 * the format is one of:<br>
 	 * ResName:Input<br>
@@ -630,8 +630,7 @@ public class JDFSpawn
 		return nSpawned;
 	}
 
-	int singleLoop(final JDFSpawned spawnAudit, final VString vRWResources, int nSpawned, final JDFResourcePool rPoolOut, final HashSet<JDFElement> vMainLinks, final HashSet<String> allIDsCopied,
-			final String spawnID, final int loopRORW)
+	int singleLoop(final JDFSpawned spawnAudit, final VString vRWResources, int nSpawned, final JDFResourcePool rPoolOut, final HashSet<JDFElement> vMainLinks, final HashSet<String> allIDsCopied, final String spawnID, final int loopRORW)
 	{
 		// loop over all links
 		for (final JDFElement liRoot : vMainLinks)
@@ -968,14 +967,15 @@ public class JDFSpawn
 		{
 			finalizePartitions(spawnAudit, outLinks, mainLinks);
 		}
-		removeRO(outLinks, spawnAudit.getNewSpawnID(), false);
-		removeRO(mainLinks, spawnAudit.getNewSpawnID(), true);
+		VString rw = spawnAudit.getrRefsRWCopied();
+		removeRO(outLinks, spawnAudit.getNewSpawnID(), rw, false);
+		removeRO(mainLinks, spawnAudit.getNewSpawnID(), rw, true);
 		finalizeStatusAndAudits(spawnAudit);
 	}
 
 	final static String ro = EnumSpawnStatus.SpawnedRO.getName();
 
-	private void removeRO(final VElement outLinks, final String spawnID, final boolean isMain)
+	private void removeRO(final VElement outLinks, final String spawnID, VString rw, final boolean isMain)
 	{
 		for (final KElement e : outLinks)
 		{
@@ -986,26 +986,32 @@ public class JDFSpawn
 				final List<JDFResource> v = linkRoot.getLeafArray(true);
 				for (final KElement r : v)
 				{
-					removeROFromLeaf(spawnID, r);
+					removeROFromLeaf(spawnID, rw, r);
 				}
 			}
 		}
 	}
 
-	void removeROFromLeaf(final String spawnID, final KElement r)
+	void removeROFromLeaf(final String spawnID, VString rw, final KElement r)
 	{
 		if (ro.equals(r.getAttribute_KElement(AttributeName.SPAWNSTATUS)))
 		{
-			r.removeFromAttribute(AttributeName.SPAWNIDS, spawnID, null, null, 0);
 			r.removeAttribute_KElement(AttributeName.SPAWNSTATUS, null);
+			r.removeFromAttribute(AttributeName.SPAWNIDS, spawnID, null, null, 0);
+		}
+		else if (!rw.contains(r.getID()) && r.hasNonEmpty_KElement(AttributeName.SPAWNIDS))
+		{
+			r.removeFromAttribute(AttributeName.SPAWNIDS, spawnID, null, null, 0);
+			if (!r.hasNonEmpty_KElement(AttributeName.SPAWNIDS))
+				r.removeAttribute_KElement(AttributeName.SPAWNSTATUS, null);
 		}
 		if (r instanceof JDFElement)
 		{
-			removeROFromElement(spawnID, r);
+			removeROFromElement(spawnID, rw, r);
 		}
 	}
 
-	void removeROFromElement(final String spawnID, final KElement r)
+	void removeROFromElement(final String spawnID, VString rw, final KElement r)
 	{
 		final List<JDFRefElement> refs = r.getChildArrayByClass_KElement(JDFRefElement.class, false, 0);
 		if (refs != null)
@@ -1022,6 +1028,12 @@ public class JDFSpawn
 						{
 							target.removeFromAttribute(AttributeName.SPAWNIDS, spawnID, null, null, 0);
 							target.removeAttribute_KElement(AttributeName.SPAWNSTATUS, null);
+						}
+						else if (!rw.contains(r.getID()))
+						{
+							target.removeFromAttribute(AttributeName.SPAWNIDS, spawnID, null, null, 0);
+							if (!target.hasNonEmpty_KElement(AttributeName.SPAWNIDS))
+								target.removeAttribute_KElement(AttributeName.SPAWNSTATUS, null);
 						}
 					}
 				}
@@ -1371,8 +1383,7 @@ public class JDFSpawn
 	 * @param identical
 	 * @return the reduced partitions
 	 */
-	private Set<KElement> reducePartitions(final JDFResource r, final String nodeName, final String nsURI, final VString partIDKeys, final int partIDPos, final JDFAttributeMap parentMap,
-			final VElement identical)
+	private Set<KElement> reducePartitions(final JDFResource r, final String nodeName, final String nsURI, final VString partIDKeys, final int partIDPos, final JDFAttributeMap parentMap, final VElement identical)
 	{
 		final Set<KElement> bad = new HashSet<>();
 		final VElement children = r.getChildElementVector_KElement(nodeName, nsURI, null, true, -1);
@@ -1660,8 +1671,7 @@ public class JDFSpawn
 	 * @param allIDsCopied
 	 *
 	 */
-	private void copySpawnedResource(final JDFResourcePool targetResPool, final JDFResource r, JDFResource.EnumSpawnStatus copyStatus, final String spawnID, final VString vRWResources,
-			final HashSet<String> vRWIDs, final HashSet<String> vROIDs, final HashSet<String> allIDsCopied, final VJDFAttributeMap vLinkMap)
+	private void copySpawnedResource(final JDFResourcePool targetResPool, final JDFResource r, JDFResource.EnumSpawnStatus copyStatus, final String spawnID, final VString vRWResources, final HashSet<String> vRWIDs, final HashSet<String> vROIDs, final HashSet<String> allIDsCopied, final VJDFAttributeMap vLinkMap)
 	{
 		if (r == null)
 		{
@@ -1827,8 +1837,7 @@ public class JDFSpawn
 		}
 	}
 
-	private void copyPartImpl(final JDFResource r, final JDFResource target, final VString partIDKeys, final int depth, final JDFAttributeMap currentMap, final VJDFAttributeMap linkedIdentical,
-			final String resName)
+	private void copyPartImpl(final JDFResource r, final JDFResource target, final VString partIDKeys, final int depth, final JDFAttributeMap currentMap, final VJDFAttributeMap linkedIdentical, final String resName)
 	{
 		final String key0 = partIDKeys.get(depth);
 		final int size = partIDKeys.size();
@@ -1953,8 +1962,7 @@ public class JDFSpawn
 			}
 		}
 
-		JDFResource.EnumSpawnStatus spawnPartitionedPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain,
-				final VJDFAttributeMap vLinkMap, final boolean isRW)
+		JDFResource.EnumSpawnStatus spawnPartitionedPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain, final VJDFAttributeMap vLinkMap, final boolean isRW)
 		{
 			final JDFAttributeMap partMap = r.getPartMap();
 			final VElement vSubParts = getSubParts(r, partMap, vLinkMap);
@@ -2073,11 +2081,11 @@ public class JDFSpawn
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * spawn a node in informative mode without modifying the root JDF; url is the file name of the new node, the parameters except for the list of rw resources, which are by definition empty, are
-	 * identical to those of Spawn
+	 * spawn a node in informative mode without modifying the root JDF; url is the file name of the new node, the parameters except for the list of rw resources, which are by
+	 * definition empty, are identical to those of Spawn
 	 *
-	 * vRWResourceUsage is the vector of Resources Usages, Resource Names or Resource IDs that are spawned RW, all others are spawned read only; vParts is the vector of part maps that are to be
-	 * spawned, defaults to no part, i.e. the whole thing
+	 * vRWResourceUsage is the vector of Resources Usages, Resource Names or Resource IDs that are spawned RW, all others are spawned read only; vParts is the vector of part maps
+	 * that are to be spawned, defaults to no part, i.e. the whole thing
 	 *
 	 * @return JDFDoc: The spawned node's owner document.
 	 *
@@ -2123,16 +2131,16 @@ public class JDFSpawn
 	}
 
 	/**
-	 * spawn a node; url is the file name of the new node, vRWResourceUsage is the vector of Resources Usages (or Names if no usage exists for the process) that are spawned RW, all others are spawned
-	 * read only; vParts is the vector of part maps that are to be spawned, defaults to no part, i.e. the whole thing
+	 * spawn a node; url is the file name of the new node, vRWResourceUsage is the vector of Resources Usages (or Names if no usage exists for the process) that are spawned RW, all
+	 * others are spawned read only; vParts is the vector of part maps that are to be spawned, defaults to no part, i.e. the whole thing
 	 *
 	 * @param _parentURL
 	 * @param _spawnURL : URL of the spawned JDF file
 	 * @param _vRWResources_in : vector of resource names and Usage / ProcessUsage that are spawned as rw <br>
-	 *            the format is one of:<br>
-	 *            ResName:Input<br>
-	 *            ResName:Output<br>
-	 *            ResName:ProcessUsage<br>
+	 *        the format is one of:<br>
+	 *        ResName:Input<br>
+	 *        ResName:Output<br>
+	 *        ResName:ProcessUsage<br>
 	 * @param _vSpawnParts vector of mAttributes that describe the parts to spawn, only valid PartIDKeys are allowed
 	 * @param _bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else the complete resource is spawned
 	 * @param _bCopyNodeInfo copy the NodeInfo elements into the Ancestors
@@ -2142,8 +2150,7 @@ public class JDFSpawn
 	 * @return The spawned node
 	 * @since 050831 added bCopyComments @ tbd enhance nested spawning of partitioned nodes default: spawn(parentURL, null, null, null, false, false, false, false)
 	 */
-	public JDFNode spawn(final String _parentURL, final String _spawnURL, final VString _vRWResources_in, final VJDFAttributeMap _vSpawnParts, final boolean _bSpawnROPartsOnly,
-			final boolean _bCopyNodeInfo, final boolean _bCopyCustomerInfo, final boolean _bCopyComments)
+	public JDFNode spawn(final String _parentURL, final String _spawnURL, final VString _vRWResources_in, final VJDFAttributeMap _vSpawnParts, final boolean _bSpawnROPartsOnly, final boolean _bCopyNodeInfo, final boolean _bCopyCustomerInfo, final boolean _bCopyComments)
 	{
 		bCopyComments = _bCopyComments;
 		bCopyCustomerInfo = _bCopyCustomerInfo;
@@ -2160,11 +2167,11 @@ public class JDFSpawn
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * spawn a node in informative mode without modifying the root JDF; url is the file name of the new node, the parameters except for the list of rw resources, which are by definition empty, are
-	 * identical to those of Spawn
+	 * spawn a node in informative mode without modifying the root JDF; url is the file name of the new node, the parameters except for the list of rw resources, which are by
+	 * definition empty, are identical to those of Spawn
 	 *
-	 * vRWResourceUsage is the vector of Resources Usages, Resource Names or Resource IDs that are spawned RW, all others are spawned read only; vParts is the vector of part maps that are to be
-	 * spawned, defaults to no part, i.e. the whole thing
+	 * vRWResourceUsage is the vector of Resources Usages, Resource Names or Resource IDs that are spawned RW, all others are spawned read only; vParts is the vector of part maps
+	 * that are to be spawned, defaults to no part, i.e. the whole thing
 	 *
 	 * @param _parentURL
 	 *
@@ -2179,8 +2186,7 @@ public class JDFSpawn
 	 * @default spawnInformative(parentURL, null, null, false, false, false, false);
 	 *
 	 */
-	public JDFNode spawnInformative(final String _parentURL, final String _spawnURL, final VJDFAttributeMap _vSpawnParts, final boolean _bSpawnROPartsOnly, final boolean _bCopyNodeInfo,
-			final boolean _bCopyCustomerInfo, final boolean _bCopyComments)
+	public JDFNode spawnInformative(final String _parentURL, final String _spawnURL, final VJDFAttributeMap _vSpawnParts, final boolean _bSpawnROPartsOnly, final boolean _bCopyNodeInfo, final boolean _bCopyCustomerInfo, final boolean _bCopyComments)
 	{
 		bCopyComments = _bCopyComments;
 		bCopyCustomerInfo = _bCopyCustomerInfo;
@@ -2271,8 +2277,8 @@ public class JDFSpawn
 		}
 
 		/**
-		 * unSpawnNode - undo a spawn of a node hier muss noch nachportiert werden - es gibt jetzt in JDFRoot eine Methode gleichen Namens, bei der man komfortabler das undo aufrufen kann. die Methode
-		 * hier in JDFNode wird dann umbenannt (protected) und aus JDFRoot heraus aufgerufen.
+		 * unSpawnNode - undo a spawn of a node hier muss noch nachportiert werden - es gibt jetzt in JDFRoot eine Methode gleichen Namens, bei der man komfortabler das undo
+		 * aufrufen kann. die Methode hier in JDFNode wird dann umbenannt (protected) und aus JDFRoot heraus aufgerufen.
 		 *
 		 *
 		 *
