@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1006,7 +1006,33 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	}
 
-	// //////////////////////////
+	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
+	public void testRemoveFromTypes0() throws DataFormatException
+	{
+		final JDFDoc gd = new JDFDoc("JDF");
+		final JDFNode n = gd.getJDFRoot();
+		n.setCombined(new VString("Interpreting Rendering Screening", null));
+		final JDFResource r1 = n.addResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input);
+		final JDFResourceLink rl1 = n.getLink(r1, null);
+		assertEquals(rl1.getCombinedProcessIndex(), new JDFIntegerList("0"));
+		final JDFResource r2 = n.addResource(ElementName.RENDERINGPARAMS, EnumUsage.Input);
+		final JDFResourceLink rl2 = n.getLink(r2, null);
+		assertEquals(rl2.getCombinedProcessIndex(), new JDFIntegerList("1"));
+		final JDFResource r3 = n.addResource(ElementName.SCREENINGPARAMS, EnumUsage.Input);
+		final JDFResourceLink rl3 = n.getLink(r3, null);
+		assertEquals(rl3.getCombinedProcessIndex(), new JDFIntegerList("2"));
+		n.removeFromTypes("Interpreting", 1, true);
+		assertNotNull(n.getLink(r1, null));
+		assertEquals(rl3.getCombinedProcessIndex(), new JDFIntegerList("2"));
+		n.removeFromTypes("Interpreting", 0, true);
+		assertNull(n.getLink(r1, null));
+		assertEquals(rl3.getCombinedProcessIndex(), new JDFIntegerList("1"));
+
+	}
 
 	/**
 	 *
