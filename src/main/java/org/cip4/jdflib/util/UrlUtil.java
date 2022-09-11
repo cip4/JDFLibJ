@@ -670,7 +670,7 @@ public class UrlUtil
 		}
 
 		final File f = new File(urlString);
-		if (f.canRead())
+		if (f.exists())
 		{
 			return f;
 		}
@@ -924,7 +924,7 @@ public class UrlUtil
 	 */
 	public static boolean isFileOK(final File f)
 	{
-		return f != null && !f.isDirectory() && f.canRead();
+		return f != null && f.exists() && !f.isDirectory() && f.canRead();
 	}
 
 	/**

@@ -455,7 +455,6 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("foo", UrlUtil.removeProtocol("CID:foo"));
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
 	/**
 	 *
 	 */
@@ -810,6 +809,19 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("//host/dir/file"));
 		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("file://host/dir/file"));
 		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("file:\\\\host\\dir\\file"));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testIsFileOK() throws Exception
+	{
+		assertFalse(UrlUtil.isFileOK(null));
+		assertFalse(UrlUtil.isFileOK(new File(".")));
+		File file = new File(sm_dirTestDataTemp + "dummy.tmp");
+		file.createNewFile();
+		assertTrue(UrlUtil.isFileOK(file));
 	}
 
 	/**
