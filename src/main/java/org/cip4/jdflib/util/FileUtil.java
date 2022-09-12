@@ -1109,7 +1109,7 @@ public class FileUtil
 	 */
 	public static boolean isDirectory(final File f)
 	{
-		if (f == null)
+		if (f == null || !f.exists())
 			return false;
 		if (f.isDirectory())
 			return true;
