@@ -62,6 +62,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -906,10 +907,12 @@ public class FileUtil
 		}
 		try
 		{
-			return streamToFile(new FileInputStream(fromFile), toFile) != null;
+			FileUtils.copyFile(fromFile, toFile);
+			return true;
 		}
-		catch (final FileNotFoundException e)
+		catch (final Exception e)
 		{
+			log.error("Problems copying " + fromFile + " -> " + toFile, e);
 			return false;
 		}
 	}

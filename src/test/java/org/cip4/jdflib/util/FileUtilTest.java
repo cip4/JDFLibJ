@@ -680,6 +680,54 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public void testCopyFileNull() throws Exception
+	{
+		final File fNew = new File(sm_dirTestDataTemp + "test.txt");
+		final byte[] b = new byte[1000];
+		for (int i = 0; i < 1000; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		final OutputStream os = FileUtil.getBufferedOutputStream(fNew);
+		os.write(b);
+
+		os.flush();
+		os.close();
+		final File copy = new File(sm_dirTestDataTemp + "test2.txt");
+		Assertions.assertFalse(FileUtil.copyFile(fNew, null));
+
+		fNew.delete();
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testCopyFileEvil() throws Exception
+	{
+		final File fNew = new File(sm_dirTestDataTemp + "test.txt");
+		final byte[] b = new byte[1000];
+		for (int i = 0; i < 1000; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		final OutputStream os = FileUtil.getBufferedOutputStream(fNew);
+		os.write(b);
+
+		os.flush();
+		os.close();
+		final File copy = new File(sm_dirTestDataTemp + "<.txt");
+		Assertions.assertFalse(FileUtil.copyFile(fNew, copy));
+
+		fNew.delete();
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	public void testMoveFileLarge() throws Exception
 	{
 		final File fNew = new File(sm_dirTestDataTemp + "Big3.txt");
