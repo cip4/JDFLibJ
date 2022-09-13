@@ -717,7 +717,7 @@ public class FileUtilTest extends JDFTestCaseBase
 
 		os.flush();
 		os.close();
-		final File copy = new File(sm_dirTestDataTemp + "<.txt");
+		final File copy = new File(sm_dirTestDataTemp + "<?>/\\.txt");
 		Assertions.assertFalse(FileUtil.copyFile(fNew, copy));
 
 		fNew.delete();
