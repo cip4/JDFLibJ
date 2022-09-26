@@ -1998,6 +1998,10 @@ class PostXJDFWalker extends BaseElementWalker
 					newPart.getRoot().moveElement(c, null);
 					newPart.getRoot().moveAttribute(XJDFConstants.ExternalID, c);
 				}
+				else
+				{
+					c.deleteNode();
+				}
 			}
 		}
 
