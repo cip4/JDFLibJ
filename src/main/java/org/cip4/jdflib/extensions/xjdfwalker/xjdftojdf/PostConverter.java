@@ -120,6 +120,7 @@ class PostConverter
 			mergeProductLinks(theNode, root);
 		}
 		fixDelivery();
+		fixCSR();
 		new GangCleaner().cleanGangLinks();
 		new ResourceCleaner().cleanResources();
 		new ProcessCleaner().cleanProcesses();
@@ -135,6 +136,20 @@ class PostConverter
 
 		final RemoveEmpty re = new RemoveEmpty();
 		re.removEmpty(root);
+	}
+
+	void fixCSR()
+	{
+		JDFEmployee contact = (JDFEmployee) theNode.getResource(ElementName.EMPLOYEE, null, 0);
+		if (contact != null && contact.getRoles().contains("CSR"))
+		{
+			JDFNodeInfo ni = theNode.getNodeInfo();
+			if (ni != null)
+			{
+				ni.moveElement(contact, null);
+			}
+		}
+
 	}
 
 	private class GangCleaner

@@ -1517,6 +1517,34 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testNodeInfoEmployee()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFNodeInfo ni = n.getCreateNodeInfo();
+		final JDFEmployee emp = ni.appendEmployee();
+		final VString roles = new VString("ShiftLeader TelephoneSanitizer", null);
+		emp.setRoles(roles);
+		emp.setPersonalID("P1");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Part/@ContactType", null), ElementName.EMPLOYEE);
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/@ContactTypeDetails", null), "ShiftLeader TelephoneSanitizer CSR");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/@ExternalID", null), "P1");
+
+		final XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
+		final JDFDoc d = invert.convert(xjdf);
+		final JDFNode n2 = d.getJDFRoot();
+		final JDFEmployee emp3 = (JDFEmployee) n2.getResource(ElementName.EMPLOYEE, EnumUsage.Input, 0);
+		assertNull(emp3);
+		JDFEmployee emp2 = n.getNodeInfo().getEmployee();
+		assertEquals(emp2.getPersonalID(), "P1");
+		assertEquals(emp2.getRoles(), roles);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testRef()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();

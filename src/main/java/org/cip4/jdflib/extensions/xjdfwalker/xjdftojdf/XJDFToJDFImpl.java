@@ -194,6 +194,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		typeLinks = false;
 		heuristicLink = true;
 		version = getVersion(template);
+		createProduct = false;
 	}
 
 	private EnumVersion getVersion(final JDFDoc template)

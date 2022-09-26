@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,8 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -101,6 +103,7 @@ public class WalkEmployee extends WalkResource
 
 	/**
 	 * the new name
+	 * 
 	 * @param jdf
 	 * @return
 	 */
@@ -150,12 +153,23 @@ public class WalkEmployee extends WalkResource
 		}
 		else
 		{
-			KElement e = moveToContact(jdf);
-			KElement walk = super.walk(e, xjdf);
-			ResourceHelper helper = ResourceHelper.getHelper(xjdf);
-			helper.appendPartMap(new JDFAttributeMap(XJDFConstants.ContactType, ElementName.EMPLOYEE));
+			if (parent instanceof JDFNodeInfo)
+			{
+				jdf.appendAttribute(AttributeName.ROLES, "CSR", null, JDFConstants.BLANK, true);
+				KElement e = moveToContact(jdf);
+				KElement walk = super.walk(e, xjdf);
+				walk.moveAttribute(XJDFConstants.ExternalID, e);
+				return walk;
+			}
+			else
+			{
+				KElement e = moveToContact(jdf);
+				KElement walk = super.walk(e, xjdf);
 
-			return walk;
+				ResourceHelper helper = ResourceHelper.getHelper(xjdf);
+				helper.appendPartMap(new JDFAttributeMap(XJDFConstants.ContactType, ElementName.EMPLOYEE));
+				return walk;
+			}
 		}
 	}
 

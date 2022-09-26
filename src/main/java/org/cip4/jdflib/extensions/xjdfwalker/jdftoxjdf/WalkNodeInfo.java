@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -115,7 +115,6 @@ public class WalkNodeInfo extends WalkResource
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final KElement walk = super.walk(jdf, xjdf);
-		jdf.removeChild(ElementName.EMPLOYEE, null, 0);
 		return walk;
 	}
 

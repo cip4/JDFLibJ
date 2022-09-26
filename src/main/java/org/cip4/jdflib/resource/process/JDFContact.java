@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -193,6 +193,8 @@ public class JDFContact extends JDFAutoContact implements IMatches
 		/** */
 		public static final EnumContactType Editor = new EnumContactType("Editor");
 		/** */
+		public static final EnumContactType Employee = new EnumContactType("Employee");
+		/** */
 		public static final EnumContactType Illustrator = new EnumContactType("Illustrator");
 		/** */
 		public static final EnumContactType Owner = new EnumContactType("Owner");
@@ -212,6 +214,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 
 	/**
 	 * Constructor for JDFContact
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -223,6 +226,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 
 	/**
 	 * Constructor for JDFContact
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -236,6 +240,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 
 	/**
 	 * Constructor for JDFContact
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -362,6 +367,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 
 	/**
 	 * merge two contacts while avoiding duplicates
+	 * 
 	 * @param other
 	 */
 	public void merge(JDFContact other)
@@ -422,8 +428,8 @@ public class JDFContact extends JDFAutoContact implements IMatches
 	}
 
 	/**
-	 * checks a match if subset is a String, then we check userID (ignoring case) if subset is a JDFContact, we do heuristic matching of the person, company and
-	 * address
+	 * checks a match if subset is a String, then we check userID (ignoring case) if subset is a JDFContact, we do heuristic matching of the person, company and address
+	 * 
 	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 	 */
 	@Override
@@ -459,6 +465,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 	/**
 	 * 
 	 * also search in person
+	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoContact#getAddress()
 	 */
 	@Override
@@ -476,6 +483,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 
 	/**
 	 * also search in person
+	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoContact#getCreateAddress()
 	 */
 	@Override

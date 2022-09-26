@@ -51,6 +51,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -86,6 +87,7 @@ import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
+import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDrop;
@@ -1783,8 +1785,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement,
-		 *      java.lang.String)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
 		 */
 		@Override
 		void moveToMisconsumable(final KElement xjdf)
@@ -1867,8 +1868,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement,
-		 *      java.lang.String)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
 		 */
 		@Override
 		void moveToMisconsumable(final KElement xjdf)
@@ -1924,8 +1924,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement,
-		 *      java.lang.String)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
 		 */
 		@Override
 		void moveToMisconsumable(final KElement xjdf)
@@ -1948,6 +1947,65 @@ class PostXJDFWalker extends BaseElementWalker
 				lp.removeAttribute(AttributeName.HARDENERTYPE);
 			}
 
+		}
+
+	}
+
+	/**
+	 *
+	 * @author rainer prosi
+	 *
+	 */
+	public class WalkNodeInfo extends WalkResourceElement
+	{
+		/**
+		 *
+		 */
+		public WalkNodeInfo()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !isRetainAll();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.NODEINFO, null);
+		}
+
+		void moveEmployee(final KElement xjdf)
+		{
+			JDFContact c = ((JDFNodeInfo) xjdf).getContact();
+			if (c != null)
+			{
+				SetHelper contactSet = newRootHelper.getCreateSet(ElementName.CONTACT, EnumUsage.Input);
+				ResourceHelper newPart = contactSet.getCreatePartition(XJDFConstants.ContactType, "Employee", false);
+				if (newPart.getResource() == null)
+				{
+					newPart.getRoot().moveElement(c, null);
+					newPart.getRoot().moveAttribute(XJDFConstants.ExternalID, c);
+				}
+			}
+		}
+
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+			moveEmployee(xjdf);
+			return super.walk(xjdf, dummy);
 		}
 
 	}
@@ -1988,8 +2046,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement,
-		 *      org.cip4.jdflib.core.KElement)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
@@ -2057,8 +2114,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement,
-		 *      java.lang.String)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
 		 */
 		@Override
 		void moveToMisconsumable(final KElement xjdf)
@@ -2115,8 +2171,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement,
-		 *      java.lang.String)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
 		 */
 		void moveToStacking(final KElement xjdf)
 		{
@@ -2137,8 +2192,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement,
-		 *      org.cip4.jdflib.core.KElement)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
@@ -2279,8 +2333,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement,
-		 *      java.lang.String)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
 		 */
 		@Override
 		void moveToMisconsumable(final KElement xjdf)
@@ -2609,8 +2662,7 @@ class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 *
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement,
-		 *      org.cip4.jdflib.core.KElement)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
 		public KElement walk(final KElement strippingParams, final KElement dummy)
