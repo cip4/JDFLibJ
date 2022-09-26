@@ -146,6 +146,8 @@ class PostConverter
 			JDFNodeInfo ni = theNode.getNodeInfo();
 			if (ni != null)
 			{
+				contact.removeAttribute(AttributeName.ID);
+				contact.removeAttribute(AttributeName.STATUS);
 				ni.moveElement(contact, null);
 			}
 		}
