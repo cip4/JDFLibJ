@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -309,7 +309,7 @@ class StorageHotFolderListener implements HotFolderListener
 	{
 		final int nHot = bOK ? nHotOK.incrementAndGet() : nHotError.incrementAndGet();
 		final int check = Math.max(1, maxAux / 4);
-		if (nHot % check == 0)
+		if ((nHot % check == 0) || (Math.random() < 0.1))
 		{
 			final FileSorter fs = new FileSorter(bOK ? okStorage : errorStorage);
 			final File[] list = fs.sortLastModified(true);
@@ -374,8 +374,7 @@ class StorageHotFolderListener implements HotFolderListener
 			ok = FileUtil.moveFile(hotFile, newAbsoluteFile);
 			if (!ok)
 			{
-				log.warn("retry " + i + " moving file from: " + hotFile.getAbsolutePath() + " to "
-						+ newAbsoluteFile.getAbsolutePath());
+				log.warn("retry " + i + " moving file from: " + hotFile.getAbsolutePath() + " to " + newAbsoluteFile.getAbsolutePath());
 				if (!hotFile.exists() || !hotFile.canRead())
 				{
 					log.error("file disappeared while waiting: " + hotFile.getAbsolutePath());
@@ -383,8 +382,7 @@ class StorageHotFolderListener implements HotFolderListener
 				}
 				if (!ThreadUtil.sleep((i + 2) * parent.getStabilizeTime()))
 				{
-					log.error("Interrupted while waiting to move file from: " + hotFile.getAbsolutePath() + " to "
-							+ newAbsoluteFile.getAbsolutePath());
+					log.error("Interrupted while waiting to move file from: " + hotFile.getAbsolutePath() + " to " + newAbsoluteFile.getAbsolutePath());
 					return null;
 				}
 			}
@@ -395,8 +393,7 @@ class StorageHotFolderListener implements HotFolderListener
 		}
 		else
 		{
-			log.error(
-					"cannot move file from: " + hotFile.getAbsolutePath() + " to " + newAbsoluteFile.getAbsolutePath());
+			log.error("cannot move file from: " + hotFile.getAbsolutePath() + " to " + newAbsoluteFile.getAbsolutePath());
 		}
 		if (ok)
 		{
@@ -448,8 +445,7 @@ class StorageHotFolderListener implements HotFolderListener
 	}
 
 	/**
-	 * @param maxAuxDirs the auxFactor to set if >1 then aux files get zapped
-	 *            earlier
+	 * @param maxAuxDirs the auxFactor to set if >1 then aux files get zapped earlier
 	 */
 	public void setMaxAux(final int maxAuxDirs)
 	{
@@ -462,10 +458,8 @@ class StorageHotFolderListener implements HotFolderListener
 	@Override
 	public String toString()
 	{
-		return "StorageHotFolderListener [" + (storage != null ? "storage=" + storage + ", " : "")
-				+ (errorStorage != null ? "errorStorage=" + errorStorage + ", " : "")
-				+ (okStorage != null ? "okStorage=" + okStorage + ", " : "")
-				+ (parent != null ? "parent=" + parent + ", " : "") + "nHotOK=" + nHotOK + ", nHotError=" + nHotError
+		return "StorageHotFolderListener [" + (storage != null ? "storage=" + storage + ", " : "") + (errorStorage != null ? "errorStorage=" + errorStorage + ", " : "")
+				+ (okStorage != null ? "okStorage=" + okStorage + ", " : "") + (parent != null ? "parent=" + parent + ", " : "") + "nHotOK=" + nHotOK + ", nHotError=" + nHotError
 				+ ", nQueued=" + nQueued + ", maxStore=" + maxStore + ", maxAux=" + maxAux + "]";
 	}
 

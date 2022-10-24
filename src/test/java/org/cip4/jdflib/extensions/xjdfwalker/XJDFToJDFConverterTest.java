@@ -451,6 +451,34 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testNodeInfoStatusSparse()
+	{
+		final XJDFHelper h = new XJDFHelper("j", "p", null);
+		h.setTypes(EnumType.ImageSetting.getName());
+		final ResourceHelper partition = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input).getCreatePartition(0, true);
+		partition.setStatus(EnumResStatus.Available);
+		final ResourceHelper partition2 = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input).getCreatePartition(1, true);
+		partition2.setStatus(EnumResStatus.Unavailable);
+		partition2.setPartMap(new JDFAttributeMap("SheetName", "S1"));
+		final JDFNodeInfo ni = (JDFNodeInfo) partition.getResource();
+		ni.setAttribute(AttributeName.STATUS, "Waiting");
+		final JDFNodeInfo ni2 = (JDFNodeInfo) partition2.getResource();
+		ni2.setAttribute(AttributeName.STATUS, "InProgress");
+
+		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		final JDFDoc docjdf = conv.convert(h);
+		final JDFNodeInfo nij = docjdf.getJDFRoot().getNodeInfo();
+		assertEquals(EnumResStatus.Available, nij.getResStatus(false));
+		assertEquals(EnumNodeStatus.InProgress, nij.getNodeStatus());
+		JDFNodeInfo nir = (JDFNodeInfo) nij.getResourceRoot();
+		assertEquals(EnumNodeStatus.Waiting, nir.getNodeStatus());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testNodeInfoWSID()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
