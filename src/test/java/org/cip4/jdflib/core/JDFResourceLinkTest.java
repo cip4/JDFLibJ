@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1257,7 +1257,6 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
 		final JDFResource r = n.addResource(ElementName.SCREENINGINTENT, null, EnumUsage.Input, null, null, null, null);
-
 		final JDFResourceLink rl = n.getLink(r, null);
 		// the root always exists
 		Assertions.assertTrue(rl.hasResourcePartMap(null, false));
@@ -1554,6 +1553,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		il.add(0);
 		rl.setCombinedProcessIndex(il);
 		Assertions.assertEquals(rl.getCombinedProcessIndex(), il);
+	}
+
+	@Override
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		JDFResource.setUnpartitiondImplicit(false);
 	}
 
 }
