@@ -138,6 +138,8 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		assertNotNull(hl.toString());
 		hl.setOKStorage(null);
 		assertNotNull(hl.toString());
+		final StorageHotFolderListener hlnull = new StorageHotFolderListener(null, new BoomListener(), null);
+		assertNotNull(hlnull.toString());
 	}
 
 	/**
