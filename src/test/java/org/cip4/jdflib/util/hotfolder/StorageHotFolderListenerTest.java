@@ -120,6 +120,7 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		theHFDir.mkdirs();
 		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
 		assertNull(hl.getStoredFile(new File("a")));
+		assertNull(hl.getStoredFile(null));
 	}
 
 	/**

@@ -46,7 +46,6 @@ import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.RollingBackupFile;
-import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.file.FileSorter;
 
@@ -360,12 +359,12 @@ class StorageHotFolderListener implements HotFolderListener
 
 	MyPair<File, File> getStoredFile(final File hotFile)
 	{
-		final String name = hotFile == null ? null : hotFile.getName();
-		if (StringUtil.isEmpty(name))
+		if (hotFile == null)
 		{
 			log.error("invalid hot file: " + hotFile);
 			return null;
 		}
+		final String name = hotFile.getName();
 		final File tmpDir = getTmpDir();
 		final File newAbsoluteFile = FileUtil.getFileInDirectory(tmpDir, new File(name));
 		boolean ok = false;
