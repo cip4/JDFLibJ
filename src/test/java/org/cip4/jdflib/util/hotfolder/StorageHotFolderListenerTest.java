@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,12 +36,16 @@
  */
 package org.cip4.jdflib.util.hotfolder;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class StorageHotFolderListenerTest extends JDFTestCaseBase
@@ -89,7 +93,7 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		FileUtil.deleteAll(theHFDir);
 		theHFDir.mkdirs();
 		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new DummyListener(), null);
-		Assertions.assertNotNull(hl);
+		assertNotNull(hl);
 	}
 
 	/**
@@ -102,7 +106,37 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		FileUtil.deleteAll(theHFDir);
 		theHFDir.mkdirs();
 		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
-		Assertions.assertFalse(hl.hotFile(new File("a")));
+		assertFalse(hl.hotFile(new File("a")));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testgetStored()
+	{
+		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
+		FileUtil.deleteAll(theHFDir);
+		theHFDir.mkdirs();
+		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
+		assertNull(hl.getStoredFile(new File("a")));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testToString()
+	{
+		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
+		FileUtil.deleteAll(theHFDir);
+		theHFDir.mkdirs();
+		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
+		assertNotNull(hl.toString());
+		hl.setErrorStorage(null);
+		assertNotNull(hl.toString());
+		hl.setOKStorage(null);
+		assertNotNull(hl.toString());
 	}
 
 	/**
@@ -118,7 +152,7 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		final File file = new File(theHFDir, "a");
 		file.createNewFile();
 		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
-		Assertions.assertFalse(hl.hotFile(file));
+		assertFalse(hl.hotFile(file));
 	}
 
 	/**
@@ -138,10 +172,10 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
 		hl.setOKStorage(new File("ok"));
 		hl.setErrorStorage(new File("nok"));
-		Assertions.assertTrue(hl.handleBad(file, true));
-		Assertions.assertFalse(file.exists());
-		Assertions.assertTrue(hl.handleBad(file2, false));
-		Assertions.assertFalse(file2.exists());
+		assertTrue(hl.handleBad(file, true));
+		assertFalse(file.exists());
+		assertTrue(hl.handleBad(file2, false));
+		assertFalse(file2.exists());
 	}
 
 }
