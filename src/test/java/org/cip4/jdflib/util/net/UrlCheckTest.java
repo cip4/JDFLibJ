@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,20 +36,23 @@
  */
 package org.cip4.jdflib.util.net;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.charset.Charset;
+
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.nio.charset.Charset;
 
 /**
  *
@@ -82,7 +85,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 				break;
 		}
 
-		Assertions.assertNotNull(ping, debugConnection());
+		assertNotNull(ping, debugConnection());
 	}
 
 	/**
@@ -105,7 +108,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 				break;
 		}
 
-		Assertions.assertNotNull(ping, debugConnection());
+		assertNotNull(ping, debugConnection());
 	}
 
 	/**
@@ -118,7 +121,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 		final HTTPDetails det = new HTTPDetails();
 		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.setHTTPDetails(det);
-		Assertions.assertNotNull(urlCheck.toString(), debugConnection());
+		assertNotNull(urlCheck.toString(), debugConnection());
 	}
 
 	/**
@@ -133,7 +136,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.setBuffer(true);
 		final UrlPart ping = urlCheck.ping(5555);
-		Assertions.assertNotNull(ping.getResponseStream(), debugConnection());
+		assertNotNull(ping.getResponseStream(), debugConnection());
 	}
 
 	/**
@@ -145,7 +148,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		Assertions.assertEquals(200, new UrlCheck("https://www.google.com").pingRC(8888), debugConnection());
+		assertEquals(200, new UrlCheck("https://www.google.com").pingRC(8888), debugConnection());
 	}
 
 	/**
@@ -157,7 +160,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		Assertions.assertEquals(200, new UrlCheck("https://www.google.com", UrlUtil.GET).pingRC(5555), debugConnection());
+		assertEquals(200, new UrlCheck("https://www.google.com", UrlUtil.GET).pingRC(5555), debugConnection());
 	}
 
 	/**
@@ -172,7 +175,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 			return;
 		final UrlCheck urlCheck = new UrlCheck("https://www.google.com", UrlUtil.POST);
 		urlCheck.setStream(new ByteArrayIOStream("test".getBytes()).getInputStream());
-		Assertions.assertTrue(urlCheck.pingRC(8888) > 200, "Google does not accept post... ");
+		assertTrue(urlCheck.pingRC(8888) > 200, "Google does not accept post... ");
 	}
 
 	/**
@@ -187,7 +190,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.startPing(5555);
 		ThreadUtil.sleep(111);
-		Assertions.assertEquals(200, urlCheck.getPingRC(), debugConnection());
+		assertEquals(200, urlCheck.getPingRC(), debugConnection());
 	}
 
 	public String debugConnection()
@@ -196,9 +199,11 @@ public class UrlCheckTest extends JDFTestCaseBase
 		try (InputStream in = new URL(url).openStream())
 		{
 			return "Requesting from IP: " + IOUtils.toString(in, Charset.defaultCharset());
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
-			throw new RuntimeException(e);
+			log.warn("nasty net exception - ignore", e);
+			return "bad connection";
 		}
 
 	}
