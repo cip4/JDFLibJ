@@ -3478,7 +3478,6 @@ public class JDFResource extends JDFElement
 		 * Expand so that each leaf is complete (except for ID)
 		 *
 		 * @param bDeleteFromNode if true, removes all intermediate elements and attributes
-		 *
 		 * @default expand(false)
 		 */
 		void expand(final boolean bDeleteFromNode)
@@ -3582,7 +3581,6 @@ public class JDFResource extends JDFElement
 		 *
 		 * @param bCollapseToNode only collapse redundant attributes and elements that pre-exist in the nodes
 		 * @param bCollapseElements if true, collapse elements, else only collapse attributes
-		 *
 		 * @default Collapse(false)
 		 */
 		void collapse(final boolean bCollapseToNode, final boolean bCollapseElements)
@@ -3605,7 +3603,9 @@ public class JDFResource extends JDFElement
 
 				while (true)
 				{
-					final VElement kids = parent.getChildElementVector_JDFElement(getNodeName(), null, null, true, 0, false);
+					// final VElement kids = parent.getChildElementVector_JDFElement(getNodeName(), null, null, true, 0, false);
+					final VElement kids = new VElement();
+					kids.addAll(parent.getDirectPartitionArray());
 					final VElement localLeaves = hasIdentical ? JDFIdentical.removeIdenticals(kids) : kids;
 					collapseAttributes(bCollapseToNode, leaf, atts, parent, localLeaves, true);
 					// since 190602 also collapse elements
@@ -3677,11 +3677,11 @@ public class JDFResource extends JDFElement
 		private void collapseElements(final boolean bCollapseToNode, final JDFResource leaf, final JDFResource parent, final VElement localLeaves)
 		{
 			final int localSize = localLeaves.size();
-			final VElement vElm = leaf.getChildElementVector_JDFElement(null, null, null, true, 0, false);
+			final List<KElement> vElm = leaf.getChildArray_KElement(null, null, null, true, 0);
 			final String resName = parent.getNodeName();
-			for (int j = 0; j < vElm.size(); j++)
+			for (KElement e : vElm)
 			{
-				final String nodeName = (vElm.elementAt(j)).getNodeName();
+				final String nodeName = e.getNodeName();
 				if (resName.equals(nodeName))
 				{
 					continue; // don't collapse partitions
@@ -3754,10 +3754,31 @@ public class JDFResource extends JDFElement
 					// delete all intermediate children before copying
 					if (!bCollapseToNode)
 					{
-						parent.removeChildren(nodeName, null, null);
-						for (int k = 0; k < elm0Size; k++)
+						boolean hasChild = parent.getElement_KElement(nodeName, null, 0) != null;
+						if (!hasChild)
 						{
-							parent.copyElement(localNamedElements0.elementAt(k), null);
+							for (int kk = 0; kk < localSize; kk++)
+							{
+								KElement localLeafN = localLeaves.elementAt(kk);
+								if (localLeafN.getElement_KElement(nodeName, null, 0) != null)
+								{
+									for (int k = 0; k < elm0Size; k++)
+									{
+										KElement elem = localLeafN.getElement_KElement(nodeName, null, 0);
+										parent.moveElement(elem, null);
+									}
+									hasChild = true;
+									break;
+								}
+							}
+							if (!hasChild)
+							{
+								for (int k = 0; k < elm0Size; k++)
+								{
+									KElement elem = localNamedElements0.elementAt(k);
+									parent.copyElement(elem, null);
+								}
+							}
 						}
 					}
 					for (int kk = 0; kk < localSize; kk++)

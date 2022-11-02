@@ -2964,11 +2964,8 @@ public class KElement extends ElementNSImpl implements Element
 		for (int i = 0; i < length; i++)
 		{
 			final Node node = atts.item(i);
-			final String key = node.getNodeName();
-			final Node kNode = katts.getNamedItem(key);
-			if (kNode == null)
-				return false;
-			if (!key.equals(kNode.getNodeName()))
+			final Node kNode = katts.item(i);
+			if (!node.getNodeName().equals(kNode.getNodeName()))
 				return false;
 			if (!node.getNodeValue().equals(kNode.getNodeValue()))
 				return false;
