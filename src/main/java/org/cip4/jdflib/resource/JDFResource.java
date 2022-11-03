@@ -3754,7 +3754,7 @@ public class JDFResource extends JDFElement
 					// delete all intermediate children before copying
 					if (!bCollapseToNode)
 					{
-						boolean hasChild = parent.getElement_KElement(nodeName, null, 0) != null;
+						final boolean hasChild = parent.getElement_KElement(nodeName, null, 0) != null;
 						if (!hasChild)
 						{
 							for (int kk = 0; kk < localSize; kk++)
@@ -3767,16 +3767,7 @@ public class JDFResource extends JDFElement
 										KElement elem = localLeafN.getElement_KElement(nodeName, null, 0);
 										parent.moveElement(elem, null);
 									}
-									hasChild = true;
 									break;
-								}
-							}
-							if (!hasChild)
-							{
-								for (int k = 0; k < elm0Size; k++)
-								{
-									KElement elem = localNamedElements0.elementAt(k);
-									parent.copyElement(elem, null);
 								}
 							}
 						}
