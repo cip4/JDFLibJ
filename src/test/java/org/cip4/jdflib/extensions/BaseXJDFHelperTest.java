@@ -36,6 +36,8 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -43,8 +45,6 @@ import org.cip4.jdflib.core.KElement;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  *
@@ -109,6 +109,17 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 */
 	@Test
 	public void testGetXRoot()
+	{
+		final ProductHelper p = theHelper.appendProduct();
+		assertEquals(theHelper, p.getXRoot());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetXJDFRoot()
 	{
 		final ProductHelper p = theHelper.appendProduct();
 		assertEquals(theHelper, p.getXRoot());

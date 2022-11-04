@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,10 +68,13 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -79,7 +82,8 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class IntentHelperTest {
+public class IntentHelperTest
+{
 	/**
 	 *
 	 */
@@ -92,8 +96,22 @@ public class IntentHelperTest {
 		final IntentHelper intentHelper = new IntentHelper(intent);
 		intentHelper.setSpan("a", "42", "IntegerSpan");
 		intentHelper.setSpan("b/a", "43", "IntegerSpan");
-		Assertions.assertEquals(intentHelper.getSpan("a"), "42");
-		Assertions.assertEquals(intentHelper.getSpan("b/a"), "43");
+		assertEquals(intentHelper.getSpan("a"), "42");
+		assertEquals(intentHelper.getSpan("b/a"), "43");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetSpanList()
+	{
+		final KElement intent = new JDFDoc("Intent").getRoot();
+		intent.appendElement("Comment");
+		intent.appendElement("foo");
+		final IntentHelper intentHelper = new IntentHelper(intent);
+		intentHelper.setSpan("a", "42 43", "IntegerSpan");
+		assertEquals(2, intentHelper.getSpanList("a").size());
 	}
 
 	/**
@@ -107,8 +125,8 @@ public class IntentHelperTest {
 		final IntentHelper intentHelper = new IntentHelper(intent);
 		intentHelper.setSpan("a", "42");
 		intentHelper.setSpan("b/a", "43");
-		Assertions.assertEquals(intentHelper.getSpan("a"), "42");
-		Assertions.assertEquals(intentHelper.getSpan("b/a"), "43");
+		assertEquals(intentHelper.getSpan("a"), "42");
+		assertEquals(intentHelper.getSpan("b/a"), "43");
 	}
 
 	/**
@@ -121,8 +139,8 @@ public class IntentHelperTest {
 		intent.setAttribute("Name", "foo");
 		final KElement foo = intent.appendElement("foo");
 		final KElement c = intent.appendElement(ElementName.COMMENT);
-		Assertions.assertTrue(IntentHelper.isIntentResource(foo));
-		Assertions.assertFalse(IntentHelper.isIntentResource(intent));
-		Assertions.assertFalse(IntentHelper.isIntentResource(c));
+		assertTrue(IntentHelper.isIntentResource(foo));
+		assertFalse(IntentHelper.isIntentResource(intent));
+		assertFalse(IntentHelper.isIntentResource(c));
 	}
 }

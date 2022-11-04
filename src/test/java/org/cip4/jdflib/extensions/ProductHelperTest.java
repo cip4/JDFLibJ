@@ -45,6 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.ProductHelper.eProductType;
 import org.junit.jupiter.api.Test;
@@ -105,6 +106,26 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final ProductHelper ph = new ProductHelper(product);
 		ph.setRoot();
 		assertEquals("true", product.getAttribute("IsRoot", null, null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetNodeInfo()
+	{
+		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		final KElement root = theHelper.getRoot();
+		final KElement productList = root.appendElement("ProductList");
+		final KElement product = productList.appendElement("Product");
+		final ProductHelper ph = new ProductHelper(product);
+		ph.setRoot();
+		SetHelper s1 = theHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input, null);
+		SetHelper s2 = theHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input, "Product");
+		assertEquals(s2, ph.getProductSet(ElementName.NODEINFO));
+		assertEquals(s2, ph.getNodeInfo());
+		s2.deleteNode();
+		assertEquals(s1, ph.getProductSet(ElementName.NODEINFO));
 	}
 
 	/**

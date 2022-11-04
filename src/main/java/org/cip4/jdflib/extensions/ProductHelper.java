@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-20229 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,6 +44,7 @@ import java.util.Vector;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
@@ -190,6 +191,33 @@ public class ProductHelper extends BaseXJDFHelper
 		KElement intent = theElement.getChildWithAttribute(XJDFConstants.Intent, AttributeName.NAME, null, intentName, 0, true);
 		intent = intent == null ? null : intent.getElement(intentName);
 		return intent == null ? null : intent.getNonEmpty(attName);
+	}
+
+	/**
+	 * get an attribute from an explicit intent resource
+	 *
+	 * @param intentName
+	 * @param attName
+	 * @return
+	 */
+	public SetHelper getNodeInfo()
+	{
+		return getProductSet(ElementName.NODEINFO);
+	}
+
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public SetHelper getProductSet(String name)
+	{
+		SetHelper sh = getXJDFRoot().getSet(name, EnumUsage.Input, XJDFConstants.Product);
+		if (sh == null)
+		{
+			sh = getXJDFRoot().getSet(name, EnumUsage.Input);
+		}
+		return sh;
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,6 +40,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.StringUtil;
@@ -220,6 +221,17 @@ public class IntentHelper extends BaseXJDFHelper
 			s = resource.getXPathAttribute(spanName + "/@Actual", null);
 		}
 		return s;
+	}
+
+	/**
+	 * 
+	 * 
+	 * @param attName the attribute
+	 * @return the attribute value as a list
+	 */
+	public StringArray getSpanList(final String attName)
+	{
+		return StringArray.getVString(getSpan(attName), null);
 	}
 
 	/**

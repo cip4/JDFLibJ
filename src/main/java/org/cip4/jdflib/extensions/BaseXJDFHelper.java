@@ -234,6 +234,15 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 *
+	 * @return the underlying parent XJDF element
+	 */
+	public XJDFHelper getXJDFRoot()
+	{
+		return XJDFHelper.getHelper(theElement);
+	}
+
+	/**
+	 *
 	 * @return
 	 */
 	public KElement deleteNode()

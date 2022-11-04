@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,11 +68,16 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.extensions.ColorIntentHelper.EnumSurface;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -80,7 +85,8 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class ColorIntentHelperTest {
+public class ColorIntentHelperTest
+{
 
 	/**
 	 *
@@ -92,9 +98,9 @@ public class ColorIntentHelperTest {
 		intent.setAttribute("Name", ElementName.COLORINTENT);
 		final KElement foo = intent.appendElement(ElementName.COLORINTENT);
 		final KElement c = intent.appendElement(ElementName.COMMENT);
-		Assertions.assertTrue(IntentHelper.isIntentResource(foo));
-		Assertions.assertFalse(IntentHelper.isIntentResource(intent));
-		Assertions.assertFalse(IntentHelper.isIntentResource(c));
+		assertTrue(IntentHelper.isIntentResource(foo));
+		assertFalse(IntentHelper.isIntentResource(intent));
+		assertFalse(IntentHelper.isIntentResource(c));
 
 	}
 
@@ -107,12 +113,46 @@ public class ColorIntentHelperTest {
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
 		ColorIntentHelper intent = (ColorIntentHelper) ph.getIntent(ElementName.COLORINTENT);
-		Assertions.assertNull(intent);
+		assertNull(intent);
 		intent = (ColorIntentHelper) ph.appendIntent(ElementName.COLORINTENT);
 		intent.setNumColors(2, 6);
 		final KElement sc = intent.getSurfaceColor(EnumSurface.Front);
-		Assertions.assertEquals("Black Cyan", sc.getAttribute(ElementName.COLORSUSED));
+		assertEquals("Black Cyan", sc.getAttribute(ElementName.COLORSUSED));
 		final KElement scb = intent.getSurfaceColor(EnumSurface.Back);
-		Assertions.assertEquals("Black Cyan Magenta Yellow Spot1 Spot2", scb.getAttribute(ElementName.COLORSUSED));
+		assertEquals("Black Cyan Magenta Yellow Spot1 Spot2", scb.getAttribute(ElementName.COLORSUSED));
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testGetSurfaceAttribute()
+	{
+		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		final ProductHelper ph = theHelper.appendProduct();
+		ColorIntentHelper intent = (ColorIntentHelper) ph.getIntent(ElementName.COLORINTENT);
+		assertNull(intent);
+		intent = (ColorIntentHelper) ph.appendIntent(ElementName.COLORINTENT);
+		intent.setNumColors(2, 0);
+		assertEquals("Black Cyan", intent.getSurfaceAttribute(EnumSurface.Front, ElementName.COLORSUSED));
+		assertNull(intent.getSurfaceAttribute(EnumSurface.Back, ElementName.COLORSUSED));
+		assertNull(intent.getSurfaceAttribute(EnumSurface.Front, ElementName.COVERAGE));
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testGetSurfaceList()
+	{
+		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		final ProductHelper ph = theHelper.appendProduct();
+		ColorIntentHelper intent = (ColorIntentHelper) ph.getIntent(ElementName.COLORINTENT);
+		assertNull(intent);
+		intent = (ColorIntentHelper) ph.appendIntent(ElementName.COLORINTENT);
+		intent.setNumColors(2, 0);
+		assertEquals(new StringArray("Black Cyan", null), intent.getSurfaceList(EnumSurface.Front, ElementName.COLORSUSED));
+		assertNull(intent.getSurfaceAttribute(EnumSurface.Back, ElementName.COLORSUSED));
+		assertNull(intent.getSurfaceAttribute(EnumSurface.Front, ElementName.COVERAGE));
 	}
 }

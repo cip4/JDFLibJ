@@ -88,6 +88,29 @@ public class ColorIntentHelper extends IntentHelper
 		return i == null ? null : i.getChildWithAttribute(XJDFConstants.SurfaceColor, XJDFConstants.Surface, null, front.name(), 0, true);
 	}
 
+	/**
+	 * 
+	 * @param theside
+	 * @param attNamethe attribute
+	 * @return the attribute value
+	 */
+	public String getSurfaceAttribute(final EnumSurface front, final String attName)
+	{
+		KElement s = getSurfaceColor(front);
+		return s == null ? null : s.getNonEmpty(attName);
+	}
+
+	/**
+	 * 
+	 * @param theside
+	 * @param attNamethe attribute
+	 * @return the attribute value as a list
+	 */
+	public StringArray getSurfaceList(final EnumSurface front, final String attName)
+	{
+		return StringArray.getVString(getSurfaceAttribute(front, attName), null);
+	}
+
 	public KElement getCreateSurfaceColor(final EnumSurface front, final List<String> surfaceColors)
 	{
 		final KElement i = getCreateResource();
