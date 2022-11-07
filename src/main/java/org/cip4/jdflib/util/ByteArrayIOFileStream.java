@@ -365,6 +365,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		{
 			final InputStream fis = FileUtil.getBufferedInputStream(f);
 			setStream(fis);
+			StreamUtil.close(fis);
 		}
 	}
 
@@ -587,6 +588,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	@Override
 	public synchronized String toString()
 	{
-		return "ByteArrayIOFileStream [maxLength=" + maxLength + ", " + (file != null ? "file=" + file + ", " : "") + "isTmpFile=" + isTmpFile + ", isCopy=" + isCopy + ", id=" + id + "]";
+		return "ByteArrayIOFileStream [maxLength=" + maxLength + ", " + (file != null ? "file=" + file + ", " : "") + "isTmpFile=" + isTmpFile + ", isCopy=" + isCopy + ", id=" + id
+				+ "]";
 	}
 }
