@@ -54,6 +54,7 @@ public class WalkKElement extends WalkElement
 	public WalkKElement()
 	{
 		super();
+		depth += 42;
 	}
 
 	/**
