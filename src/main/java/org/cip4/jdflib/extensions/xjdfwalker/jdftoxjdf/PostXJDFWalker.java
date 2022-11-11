@@ -2703,9 +2703,9 @@ class PostXJDFWalker extends BaseElementWalker
 				layoutMap.remove(AttributeName.SIGNATURENAME);
 			}
 			final boolean cloneBS = layoutMap != null;
-			final String bsName = getBSName(strippingParams, layoutMap);
-			final String bsID = getBSID(strippingParams, bsName);
 			final String bsResID = strippingParams.getNonEmpty("BinderySignatureRef");
+			final String bsName = getBSName(strippingParams, layoutMap, bsResID);
+			final String bsID = getBSID(strippingParams, bsName);
 			final JDFAttributeMap bsMap = new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsID);
 			final String cellIndex = layoutMap == null ? null : layoutMap.remove(AttributeName.CELLINDEX);
 			final ResourceHelper layoutPartitionH = layoutseth.getCreateVPartition(layoutMaps, true);
@@ -2808,6 +2808,7 @@ class PostXJDFWalker extends BaseElementWalker
 		/**
 		 * @param strippingParams
 		 * @param bsName
+		 * @param bsResID
 		 * @return
 		 */
 		private String getBSID(final JDFStrippingParams strippingParams, final String bsName)
@@ -2871,21 +2872,19 @@ class PostXJDFWalker extends BaseElementWalker
 		 *
 		 * @param strippingParams
 		 * @param map
+		 * @param bsResID
 		 * @return
 		 */
-		String getBSName(final JDFStrippingParams strippingParams, final JDFAttributeMap map)
+		String getBSName(final JDFStrippingParams strippingParams, final JDFAttributeMap map, String bsResID)
 		{
 			String bsName = map == null ? null : map.remove(AttributeName.BINDERYSIGNATURENAME);
 			if (bsName == null)
 				bsName = map == null ? null : map.remove(XJDFConstants.BinderySignatureID);
-			final String bsn2 = strippingParams.getNonEmpty(XJDFConstants.BinderySignatureIDs);
-			if (bsn2 != null)
-			{
-				bsName = bsn2;
-			}
+			if (bsName == null)
+				bsName = strippingParams.getNonEmpty(XJDFConstants.BinderySignatureIDs);
 			if (bsName == null)
 			{
-				bsName = "BS";
+				bsName = StringUtil.isEmpty(bsResID) ? "BS" : bsResID;
 			}
 			return bsName;
 		}

@@ -44,6 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.Map.Entry;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -2244,6 +2245,36 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/@Automated", null), "true");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testLayoutPrepMultiBS()
+	{
+		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "idpxjdf/lpp.jdf");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		xjdf.write2File(sm_dirTestDataTemp + "lpp.xjdf");
+		XJDFHelper xh = new XJDFHelper(xjdf);
+		SetHelper bs = xh.getSet(ElementName.BINDERYSIGNATURE, 0);
+		SetHelper lo = xh.getSet(ElementName.LAYOUT, 0);
+		VJDFAttributeMap pbs = bs.getPartMapVector();
+		assertEquals(3, pbs.size());
+		VString vv = pbs.getPartValues("BinderySignatureID", true);
+		assertEquals(3, vv.size());
+		JDFAttributeMap vlo = lo.getRoot().getXPathValueMap();
+		for (Entry<String, String> e : vlo.entrySet())
+		{
+			if (e.getKey().endsWith("@BinderySignatureID"))
+			{
+				assertTrue(vv.contains(e.getValue()));
+				vv.remove(e.getValue());
+			}
+		}
+		assertTrue(vv.isEmpty());
 	}
 
 	/**
