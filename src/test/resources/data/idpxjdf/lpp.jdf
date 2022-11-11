@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Print 25 copies of a 16 page document printed two-sided on letter sized cover and text stock and 
+three-hole punched on the left edge.  -->
+<JDF Category="IDP.DigitalPrinting" ICSVersions="IDP_L1-1.5" ID="J1" JobID="n_220419_133835857_045479" JobPartID="ID345" MaxVersion="1.5" Status="Waiting" Type="Combined" Types="LayoutPreparation Interpreting Rendering ColorSpaceConversion DigitalPrinting HoleMaking" Version="1.5" xmlns="http://www.CIP4.org/JDFSchema_1_1" xmlns:kdda="http://www.kdsda.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Combined">
+      <ResourcePool>
+        <LayoutPreparationParams Class="Parameter" ID="LP0001" PartIDKeys="RunIndex" Sides="TwoSidedFlipY" Status="Available">
+            <LayoutPreparationParams RunIndex="0" Sides="OneSidedFront">
+                <MediaRef rRef="IDM0002"/>
+            </LayoutPreparationParams>
+            <LayoutPreparationParams RunIndex="1 ~ -2">
+                <MediaRef rRef="IDM0001"/>
+            </LayoutPreparationParams>
+            <LayoutPreparationParams RunIndex="-1" Sides="OneSidedBackFlipY">
+                <MediaRef rRef="IDM0002"/>
+            </LayoutPreparationParams>
+        </LayoutPreparationParams>
+      </ResourcePool>
+    <ResourceLinkPool>
+        <LayoutPreparationParamsLink CombinedProcessIndex="0" Usage="Input" rRef="LP0001"/>
+     </ResourceLinkPool>
+</JDF>
