@@ -2253,7 +2253,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testLayoutPrepMultiBS()
 	{
-		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "idpxjdf/lpp.jdf");
+		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/lpp.jdf");
 
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
