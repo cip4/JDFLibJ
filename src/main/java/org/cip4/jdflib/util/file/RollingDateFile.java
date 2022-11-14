@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,18 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class RollingDateFile extends RollingFile
 {
+	FileJanitor janitor;
+
+	public FileJanitor getJanitor()
+	{
+		return janitor;
+	}
+
+	public void setJanitor(long seconds)
+	{
+		janitor = new FileJanitor(this, seconds);
+	}
+
 	/**
 	 *
 	 */
@@ -108,6 +120,7 @@ public class RollingDateFile extends RollingFile
 	{
 		super(pathname, baseName);
 		format = DD;
+		janitor = null;
 	}
 
 	@Override
@@ -146,8 +159,7 @@ public class RollingDateFile extends RollingFile
 	/**
 	 * Setter for format attribute used to format the file names
 	 * 
-	 * @param format
-	 *            the format to set
+	 * @param format the format to set
 	 */
 	public void setFormat(final String format)
 	{
@@ -155,13 +167,12 @@ public class RollingDateFile extends RollingFile
 	}
 
 	/**
-	 * @param t
-	 *            the time in milliseconds that applies to this file
+	 * @param t the time in milliseconds that applies to this file
 	 * @return the file to write, null if error occurred
 	 */
 	public File getNewFile(final long t)
 	{
-		File file = FileUtil.getFileInDirectory(this, new File(getNewFileName(t)));
+		File file = new File(this, getNewFileName(t));
 		if (!file.exists())
 		{
 			final boolean bSnafu = !FileUtil.createNewFile(file);
@@ -185,7 +196,8 @@ public class RollingDateFile extends RollingFile
 	 */
 	public void init(final File file)
 	{
-		// nop
+		if (janitor != null)
+			janitor.cleanup();
 
 	}
 

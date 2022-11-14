@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,8 +68,14 @@
  */
 package org.cip4.jdflib.util.file;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -90,7 +96,22 @@ public class RollingDateFileTest extends JDFTestCaseBase
 	public void testGetFileNameInt()
 	{
 		long t = 1332096687756l; // System.currentTimeMillis();
-		Assertions.assertTrue(rdf.getNewFileName(t).equals("Date.120318.txt") || rdf.getNewFileName(t).equals("Date.120319.txt"));
+		assertTrue(rdf.getNewFileName(t).equals("Date.120318.txt") || rdf.getNewFileName(t).equals("Date.120319.txt"));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testSetJanitor()
+	{
+		rdf.setFormat("yyyy");
+		assertNull(rdf.getJanitor());
+		rdf.init(new File(rdf, "dummy"));
+		rdf.setJanitor(4);
+		assertNotNull(rdf.getJanitor());
+		rdf.init(new File(rdf, "dummy2"));
 	}
 
 	/**
@@ -102,7 +123,7 @@ public class RollingDateFileTest extends JDFTestCaseBase
 	{
 		long t = 1332096687756l; // System.currentTimeMillis();
 		rdf.setFormat("yyyy");
-		Assertions.assertEquals(rdf.getNewFileName(t), "Date.2012.txt");
+		assertEquals(rdf.getNewFileName(t), "Date.2012.txt");
 	}
 
 	/**
