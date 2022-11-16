@@ -138,7 +138,7 @@ public class WalkProduct extends WalkJDF
 	 * @param node
 	 * @param prod
 	 */
-	private boolean readComponent(final JDFNode node, final KElement prod)
+	boolean readComponent(final JDFNode node, final KElement prod)
 	{
 		final JDFResourceLink cOutLink = node.getLink(0, ElementName.COMPONENT, new JDFAttributeMap(AttributeName.USAGE, EnumUsage.Output), null);
 		if (cOutLink == null)
@@ -154,11 +154,11 @@ public class WalkProduct extends WalkJDF
 		final JDFComponent component = (JDFComponent) cOutLink.getTarget();
 		if (component != null)
 		{
-			prod.copyAttribute(AttributeName.PRODUCTTYPE, component);
-			prod.copyAttribute(AttributeName.PARTVERSION, component);
-			prod.copyAttribute(AttributeName.PRODUCTTYPEDETAILS, component);
-			prod.copyAttribute(XJDFConstants.ExternalID, component, AttributeName.PRODUCTID, null, null);
-			prod.copyAttribute(AttributeName.DESCRIPTIVENAME, component);
+			prod.copyAttribute(AttributeName.PRODUCTTYPE, component, false);
+			prod.copyAttribute(AttributeName.PARTVERSION, component, false);
+			prod.copyAttribute(AttributeName.PRODUCTTYPEDETAILS, component, false);
+			prod.copyAttribute(XJDFConstants.ExternalID, component, AttributeName.PRODUCTID, null, null, false);
+			prod.copyAttribute(AttributeName.DESCRIPTIVENAME, component, false);
 			if (component.isComponentType(EnumComponentType.FinalProduct))
 			{
 				new ProductHelper(prod).setRoot();

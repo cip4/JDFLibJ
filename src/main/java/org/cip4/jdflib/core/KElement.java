@@ -5313,6 +5313,24 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String copyAttribute(String attrib, final KElement src, final String srcAttrib, final String nameSpaceURI, final String srcNameSpaceURI)
 	{
+		return copyAttribute(attrib, src, srcAttrib, nameSpaceURI, srcNameSpaceURI, true);
+	}
+
+	/**
+	 * copy an attribute from src to this, if null - remove the attribute
+	 * <p>
+	 * default: copyAttribute(attrib, src, null, null, null)
+	 *
+	 * @param attrib the name of the attribute to copy (if source attribute is different only the value will be copied)
+	 * @param src source element where the attribute to be copied resides
+	 * @param srcAttrib attribute to copy, defaults to the value of attrib
+	 * @param nameSpaceURI of the attribute in the destination
+	 * @param srcNameSpaceURI of the attribute in the source, defaults to the value of nameSpaceURI
+	 * @default copyAttribute(attrib,src,null,null,null);
+	 * @return the value of the copied attribute
+	 */
+	public String copyAttribute(String attrib, final KElement src, final String srcAttrib, final String nameSpaceURI, final String srcNameSpaceURI, boolean overwriteEmpty)
+	{
 		final String strSrcAttrib = (srcAttrib == null) || srcAttrib.equals(JDFCoreConstants.EMPTYSTRING) ? attrib : srcAttrib;
 		final String strNameSpace = (srcNameSpaceURI == null) || srcNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING) ? nameSpaceURI : srcNameSpaceURI;
 		if (strNameSpace != null && KElement.xmlnsPrefix(attrib) == null)
@@ -5328,9 +5346,12 @@ public class KElement extends ElementNSImpl implements Element
 			}
 		}
 
-		final String srcAtt = src == null ? null : src.getAttribute_KElement(strSrcAttrib, srcNameSpaceURI, null);
-		setAttribute(attrib, srcAtt, strNameSpace);
-		return srcAtt;
+		final String srcValue = src == null ? null : src.getAttribute_KElement(strSrcAttrib, srcNameSpaceURI, null);
+		if (overwriteEmpty || !StringUtil.isEmpty(srcValue))
+		{
+			setAttribute(attrib, srcValue, strNameSpace);
+		}
+		return srcValue;
 	}
 
 	/**
@@ -5345,6 +5366,20 @@ public class KElement extends ElementNSImpl implements Element
 	public String copyAttribute(final String attrib, final KElement src)
 	{
 		return copyAttribute(attrib, src, null, null, null);
+	}
+
+	/**
+	 * copy an attribute from src to this - shorthand if no renaming or namespace handling is necessary
+	 * <p>
+	 * default: copyAttribute(attrib, src, null, null, null)
+	 *
+	 * @param attrib the name of the attribute to copy (if source attribute is different only the value will be copied)
+	 * @param src source element where the attribute to be copied resides
+	 * @return the value of the copied attribute
+	 */
+	public String copyAttribute(final String attrib, final KElement src, boolean overwriteEmpty)
+	{
+		return copyAttribute(attrib, src, null, null, null, overwriteEmpty);
 	}
 
 	/**
