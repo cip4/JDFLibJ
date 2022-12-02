@@ -729,7 +729,7 @@ public class UrlUtil
 			urlString = urlString.substring(5); // remove "file:"
 		}
 
-		if (StringUtil.getNonEmpty(urlString) == null)
+		if (StringUtil.getNonEmpty(urlString) == null || isWindowsLocalPath(urlString))
 		{
 			return null;
 		}
