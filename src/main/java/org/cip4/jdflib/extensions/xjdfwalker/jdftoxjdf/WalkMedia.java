@@ -36,7 +36,11 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumHoleType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
@@ -90,6 +94,7 @@ public class WalkMedia extends WalkIntentResource
 	@Override
 	protected void updateAttributes(final JDFAttributeMap map)
 	{
+		map.remove(AttributeName.HOLETYPE);
 		map.remove(AttributeName.PREPRINTED);
 		final String mediaType = map.get(AttributeName.MEDIATYPE);
 		if (mediaType == null || EnumMediaType.Unknown.getName().equals(mediaType))
@@ -149,6 +154,28 @@ public class WalkMedia extends WalkIntentResource
 		}
 		map.remove(att);
 		map.putNotNull(att, value);
+	}
+
+	@Override
+	protected void setAttributes(KElement jdf, KElement xjdf)
+	{
+		movePattern((JDFMedia) jdf, xjdf);
+		super.setAttributes(jdf, xjdf);
+	}
+
+	void movePattern(JDFMedia media, KElement xjdf)
+	{
+		Vector<? extends ValuedEnum> pattern = media.getHoleType();
+		if (pattern != null)
+		{
+			pattern.remove(EnumHoleType.None);
+			pattern.remove(EnumHoleType.Explicit); // Handeled by HoleList
+			for (ValuedEnum t : pattern)
+			{
+				xjdf.appendElement(XJDFConstants.HolePattern).setAttribute(AttributeName.PATTERN, t.getName());
+			}
+		}
+
 	}
 
 }
