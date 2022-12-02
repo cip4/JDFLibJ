@@ -2602,6 +2602,25 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testMediaSetCount()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		final JDFMedia med = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		med.setMediaType(EnumMediaType.Paper);
+		med.setMediaSetCount(42);
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdfc = conv.convert(n);
+		final JDFMedia m = (JDFMedia) xjdfc.getXPathElement("ResourceSet[@Name=\"Media\"]/Resource/Media");
+		assertEquals(42, m.getMediaSetCount());
+		writeRoundTripX(xjdfc, "MediaSetCount", EnumValidationLevel.Incomplete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testMediaUMT()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
