@@ -435,7 +435,7 @@ public class WalkJDFElement extends WalkElement
 				}
 				else
 				{
-					newTargetVector.addAll(((JDFResource) e).getLeaves(!EnumPartUsage.Explicit.equals(linkTarget.getPartUsage())));
+					newTargetVector.addAll(((JDFResource) e).getLeaves(EnumPartUsage.Implicit.equals(linkTarget.getPartUsage())));
 					changed = true;
 				}
 			}
@@ -456,7 +456,7 @@ public class WalkJDFElement extends WalkElement
 		for (final KElement e : vRes)
 		{
 			final JDFResource r = (JDFResource) e;
-			final List<JDFResource> vLeaves = r.getLeafArray(!EnumPartUsage.Explicit.equals(r.getPartUsage()));
+			final List<JDFResource> vLeaves = r.getLeafArray(EnumPartUsage.Implicit.equals(r.getPartUsage()));
 			for (final KElement eLeaf : vLeaves)
 			{
 				final JDFResource leaf = (JDFResource) eLeaf;
