@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,10 +36,18 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+
+import org.cip4.jdflib.JDFTestCaseBase;
+
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -75,6 +83,7 @@ package org.cip4.jdflib.elementwalker;
 
 import org.cip4.jdflib.auto.JDFAutoFitPolicy.EnumSizePolicy;
 import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumBindingEdge;
+import org.cip4.jdflib.auto.JDFAutoPosition.EnumOrientation;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
@@ -83,10 +92,10 @@ import org.cip4.jdflib.resource.JDFLayoutPreparationParams;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
-import org.junit.jupiter.api.Assertions;
+import org.cip4.jdflib.resource.process.JDFPosition;
 import org.junit.jupiter.api.Test;
 
-public class StrippingConverterTest
+public class StrippingConverterTest extends JDFTestCaseBase
 {
 
 	@Test
@@ -98,9 +107,9 @@ public class StrippingConverterTest
 		final StrippingConverter strippingConverter = new StrippingConverter(lpp, parentJDF);
 		strippingConverter.convert();
 		final JDFBinderySignature bs = strippingConverter.getBinderySignature();
-		Assertions.assertEquals(EnumBindingEdge.Bottom.getName(), bs.getBindingEdge().getName());
+		assertEquals(EnumBindingEdge.Bottom.getName(), bs.getBindingEdge().getName());
 		final JDFAssembly ass = strippingConverter.getAssembly();
-		Assertions.assertEquals(EnumBindingEdge.Bottom.getName(), ass.getBindingSide().getName());
+		assertEquals(EnumBindingEdge.Bottom.getName(), ass.getBindingSide().getName());
 	}
 
 	@Test
@@ -113,7 +122,7 @@ public class StrippingConverterTest
 		strippingConverter.convert();
 		final JDFBinderySignature bs = strippingConverter.getBinderySignature();
 		final JDFStrippingParams sp = strippingConverter.getStrippingParams();
-		Assertions.assertNotNull(sp.getElement(ElementName.FITPOLICY));
+		assertNotNull(sp.getElement(ElementName.FITPOLICY));
 	}
 
 	@Test
@@ -125,7 +134,7 @@ public class StrippingConverterTest
 		final StrippingConverter strippingConverter = new StrippingConverter(lpp, parentJDF);
 		strippingConverter.convert();
 		final JDFStrippingParams spp = (JDFStrippingParams) parentJDF.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
-		Assertions.assertTrue(spp.getAutomated());
+		assertTrue(spp.getAutomated());
 	}
 
 	/**
@@ -137,6 +146,27 @@ public class StrippingConverterTest
 		final JDFNode n = JDFNode.createRoot();
 		n.setType(EnumType.LayoutPreparation);
 		return (JDFLayoutPreparationParams) n.addResource(ElementName.LAYOUTPREPARATIONPARAMS, EnumUsage.Input);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testLayoutPrepMultiBS2()
+	{
+		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/DigitalPrintingMultiPDF_IDP-ICS-1.5.jdf");
+		JDFLayoutPreparationParams lpp = (JDFLayoutPreparationParams) n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, EnumUsage.Input, 0);
+		final StrippingConverter strippingConverter = new StrippingConverter(lpp, n);
+		strippingConverter.convert();
+
+		n.write2File(sm_dirTestDataTemp + "lpp2.jdf");
+		final JDFStrippingParams spp = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+
+		List<JDFPosition> poss = spp.getChildArrayByClass_KElement(JDFPosition.class, true, 0);
+		assertEquals(3, poss.size());
+		assertEquals(EnumOrientation.Rotate0, poss.get(0).getOrientation());
+		assertEquals(EnumOrientation.Flip180, poss.get(2).getOrientation());
+
 	}
 
 }

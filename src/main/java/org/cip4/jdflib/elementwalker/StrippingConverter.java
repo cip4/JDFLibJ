@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,6 +44,7 @@ import org.cip4.jdflib.auto.JDFAutoContentObject.EnumAnchor;
 import org.cip4.jdflib.auto.JDFAutoImageShift.EnumPositionX;
 import org.cip4.jdflib.auto.JDFAutoImageShift.EnumPositionY;
 import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumFinishingOrder;
+import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumRotate;
 import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoStripCellParams;
 import org.cip4.jdflib.auto.JDFAutoStripMark.EnumMarkSide;
@@ -55,6 +56,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
@@ -185,7 +187,7 @@ public class StrippingConverter
 	/**
 	 *
 	 */
-	private void setStripCellParams()
+	void setStripCellParams()
 	{
 		final JDFPageCell pageCell = layPrepParams.getPageCell();
 		if (pageCell != null)
@@ -197,11 +199,7 @@ public class StrippingConverter
 			}
 		}
 		final EnumSides sides = layPrepParams.getSides();
-		if (EnumSides.OneSidedFront.equals(sides))
-		{
-			strippingParams.getCreateStripCellParams().setSides(JDFAutoStripCellParams.EnumSides.OneSided);
-		}
-		else if (EnumSides.TwoSidedFlipY.equals(sides))
+		if (EnumSides.TwoSidedFlipY.equals(sides))
 		{
 			strippingParams.getCreateStripCellParams().setSides(JDFAutoStripCellParams.EnumSides.TwoSidedHeadToHead);
 		}
@@ -209,13 +207,17 @@ public class StrippingConverter
 		{
 			strippingParams.getCreateStripCellParams().setSides(JDFAutoStripCellParams.EnumSides.TwoSidedHeadToFoot);
 		}
+		else
+		{
+			strippingParams.getCreateStripCellParams().setSides(JDFAutoStripCellParams.EnumSides.OneSided);
+		}
 
 	}
 
 	/**
 	 * copy data from PageCell to SignatureCell
 	 */
-	private void setSignatureCell()
+	void setSignatureCell()
 	{
 		final JDFPageCell pageCell = layPrepParams.getPageCell();
 		if (pageCell == null)
@@ -301,14 +303,26 @@ public class StrippingConverter
 	 * @param n
 	 * @param numberUp
 	 */
-	private void addSinglePosition(final int x, final int y, final int n, final JDFXYPair numberUp)
+	JDFPosition addSinglePosition(final int x, final int y, final int n, final JDFXYPair numberUp)
 	{
 		final String bsName = getBSName(x, y, n, numberUp);
 		final JDFStrippingParams sp = (JDFStrippingParams) (bsName == null ? strippingParams
 				: strippingParams.getCreatePartition(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bsName), null));
 		final JDFPosition position = sp.appendPosition();
 		position.setRelativeBox(getRelativeBox(x, y, n, numberUp));
-		position.copyAttribute(AttributeName.ORIENTATION, layPrepParams, AttributeName.ROTATE, null, null);
+		EnumRotate r = layPrepParams.getRotate();
+		JDFMatrix m = new JDFMatrix(org.cip4.jdflib.core.JDFElement.EnumOrientation.getEnum(r.getName()), 0, 0);
+		final EnumSides sides = layPrepParams.getSides();
+		if (EnumSides.OneSidedBackFlipX.equals(sides))
+		{
+			m.concat(new JDFMatrix(org.cip4.jdflib.core.JDFElement.EnumOrientation.Flip0, 0, 0));
+		}
+		else if (EnumSides.OneSidedBackFlipY.equals(sides))
+		{
+			m.concat(new JDFMatrix(org.cip4.jdflib.core.JDFElement.EnumOrientation.Flip180, 0, 0));
+		}
+		position.setAttribute(AttributeName.ORIENTATION, m.getOrientation().getName());
+		return position;
 	}
 
 	/**

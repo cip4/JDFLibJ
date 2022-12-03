@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JDF ID="J1"
+     JobID="00001"
+     JobPartID="00001.1"
+     ICSVersions="IDP_L1-1.5"
+     Type="Combined"
+     Types="LayoutPreparation DigitalPrinting"
+     Version="1.5"
+     ProjectID="JDF_Testing"
+     xmlns="http://www.CIP4.org/JDFSchema_1_1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:type="Combined"
+     Status="Waiting">
+	<ResourcePool>
+		<RunList Class="Parameter"
+		         ID="IDRL0001"
+		         Status="Available">
+			<LayoutElement>
+				<FileSpec MimeType="application/pdf"
+				          URL="http://localhost:9095/JobFiles/Lorem-Ipsum_12-pages.pdf"/>
+			</LayoutElement>
+		</RunList>
+		<Media Class="Consumable"
+		       Status="Available"
+		       ID="IDM0001"
+		       ProductID="PIDM0001"
+		       DescriptiveName="Paper #1"
+		       Brand="Fancy Papers R Us"
+		       Dimension="612 793"
+		       MediaType="Paper"
+		       MediaTypeDetails="Stationery"
+		       Weight="35"
+		       Thickness="100"
+		       MediaColorName="Blue"
+		       MediaColorNameDetails="Cerulean Blue"
+		       FrontCoatings="Coated"
+		       FrontCoatingDetail="Semigloss"
+		       BackCoatings="Coated"
+		       BackCoatingDetail="Semigloss"
+		       GrainDirection="XDirection"
+		       HoleType="R2-generic"
+		       RecycledPercentage="10"
+		       Texture="Stipple"
+		       MediaSetCount="10"
+		       PrePrinted="true">
+			<TabDimensions TabExtensionDistance="72"
+			               TabOffset="72"
+			               TabSetCollationOrder="Forward"
+			               TabWidth="144"
+			               TabsPerBank="15"/>
+		</Media>
+		<LayoutPreparationParams Class="Parameter"
+		                         ID="IDLP0001"
+		                         Sides="TwoSidedFlipY"
+		                         Status="Available"/>
+		<DigitalPrintingParams Class="Parameter"
+		                       ID="IDDP0001"
+		                       Sides="TwoSidedFlipY"
+		                       Status="Available">
+			<MediaRef rRef="IDM0001"/>
+		</DigitalPrintingParams>
+		<Component Class="Quantity"
+		           ComponentType="FinalProduct"
+		           ID="IDC0002"
+		           Status="Unavailable"/>
+	</ResourcePool>
+	<ResourceLinkPool>
+		<RunListLink rRef="IDRL0001"
+		             Usage="Input"
+		             CombinedProcessIndex="0"/>
+		<MediaLink rRef="IDM0001"
+		           Usage="Input"
+		           CombinedProcessIndex="1"/>
+		<LayoutPreparationParamsLink CombinedProcessIndex="0"
+		                             Usage="Input"
+		                             rRef="IDLP0001"/>
+		<DigitalPrintingParamsLink CombinedProcessIndex="1"
+		                           Usage="Input"
+		                           rRef="IDDP0001"/>
+		<ComponentLink Amount="1"
+		               CombinedProcessIndex="1"
+		               Usage="Output"
+		               rRef="IDC0002"/>
+	</ResourceLinkPool>
+</JDF>

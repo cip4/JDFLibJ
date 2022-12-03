@@ -1007,17 +1007,6 @@ public class JDFResource extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		/**
-		 * @see java.lang.Object#toString()
-		 * @deprecated [BLD009] just for compiling PrintReady, to be removed afterwards
-		 */
-		@Deprecated
-		@Override
-		public String toString()
-		{
-			return getName();
-		}
-
 		private EnumPartIDKey(final String name)
 		{
 			super(name, m_startValue++);
@@ -1063,6 +1052,12 @@ public class JDFResource extends JDFElement
 		public static Iterator<EnumPartIDKey> iterator()
 		{
 			return iterator(EnumPartIDKey.class);
+		}
+
+		public boolean isXJDF()
+		{
+			return EnumPartIDKey.BinderySignatureID.equals(this) || EnumPartIDKey.ContactType.equals(this) || EnumPartIDKey.Metadata.equals(this)
+					|| EnumPartIDKey.Product.equals(this) || EnumPartIDKey.ProductPart.equals(this);
 		}
 
 		/**
@@ -1372,6 +1367,14 @@ public class JDFResource extends JDFElement
 		 * 1.7++
 		 */
 		public static final EnumPartIDKey DropID = new EnumPartIDKey(AttributeName.DROPID);
+
+		/**
+		 * 2.0
+		 */
+		public static final EnumPartIDKey BinderySignatureID = new EnumPartIDKey(XJDFConstants.BinderySignatureID);
+		public static final EnumPartIDKey ContactType = new EnumPartIDKey(XJDFConstants.ContactType);
+		public static final EnumPartIDKey Metadata = new EnumPartIDKey(XJDFConstants.Metadata);
+		public static final EnumPartIDKey Product = new EnumPartIDKey(XJDFConstants.Product);
 
 	}
 

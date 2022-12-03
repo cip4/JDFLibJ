@@ -2281,6 +2281,36 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testLayoutPrepMultiBS2()
+	{
+		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/DigitalPrintingMultiPDF_IDP-ICS-1.5.jdf");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		xjdf.write2File(sm_dirTestDataTemp + "lpp2.xjdf");
+		XJDFHelper xh = new XJDFHelper(xjdf);
+		SetHelper bs = xh.getSet(ElementName.BINDERYSIGNATURE, 0);
+		SetHelper lo = xh.getSet(ElementName.LAYOUT, 0);
+		VJDFAttributeMap pbs = bs.getPartMapVector();
+		assertEquals(3, pbs.size());
+		VString vv = pbs.getPartValues("BinderySignatureID", true);
+		assertEquals(3, vv.size());
+		JDFAttributeMap vlo = lo.getRoot().getXPathValueMap();
+		for (Entry<String, String> e : vlo.entrySet())
+		{
+			if (e.getKey().endsWith("@BinderySignatureID"))
+			{
+				assertTrue(vv.contains(e.getValue()));
+				vv.remove(e.getValue());
+			}
+		}
+		assertTrue(vv.isEmpty());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testLayoutDescName()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();

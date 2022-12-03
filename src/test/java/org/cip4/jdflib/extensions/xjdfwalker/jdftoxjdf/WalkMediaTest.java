@@ -47,6 +47,8 @@ import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.jupiter.api.Test;
@@ -101,6 +103,20 @@ public class WalkMediaTest extends JDFTestCaseBase
 		walkMedia.walk(m, res);
 		assertEquals(null, res.getXPathAttribute("Media/HolePattern/@Pattern", null));
 		assertEquals(null, res.getXPathAttribute("Media/@HoleType", null));
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testHolePatternComplet()
+	{
+		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/Media_HoleType.jdf");
+		JDFToXJDF c = new JDFToXJDF();
+		KElement xjdf = c.convert(n);
+		XJDFHelper h = XJDFHelper.getHelper(xjdf);
+		KElement m = h.getSet(ElementName.MEDIA, 0).getPartition(0).getResource();
+		assertEquals("R2-generic", m.getElement(XJDFConstants.HolePattern).getAttribute(XJDFConstants.Pattern));
 	}
 
 	/**
