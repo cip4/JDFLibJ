@@ -37,22 +37,30 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.*;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -78,7 +86,33 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 			vh.add(h);
 		}
 		final XJDFHelper hc = new MultiXJDFCombiner(vh).getCombinedHelper();
-		Assertions.assertEquals(2, hc.getSet(ElementName.NODEINFO, EnumUsage.Input).getPartitions().size());
+		assertEquals(2, hc.getSet(ElementName.NODEINFO, EnumUsage.Input).getPartitions().size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSammelStripping()
+	{
+		final JDFToXJDF conv = new JDFToXJDF();
+		final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel18.jdf");
+		final VElement v0 = root.getChildrenByTagName(null, null, null, false, true, 0);
+		for (final KElement e : v0)
+		{
+			e.removeAttribute(AttributeName.DESCRIPTIVENAME);
+			if ((e instanceof JDFResourceLink) && !"StrippingParamsLink".equals(e.getNodeName()))
+				e.deleteNode();
+
+			if ("AuditPool".equals(e.getNodeName()) || "Comment".equals(e.getNodeName()))
+				e.deleteNode();
+		}
+		final List<XJDFHelper> v = conv.getXJDFs(root);
+		final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
+		writeRoundTripX(hc.getRoot(), "sammel18", null);
+		assertEquals(0, hc.getSet(ElementName.NODEINFO, 0).getCombinedProcessIndex().get(0));
+		assertEquals(1, hc.getSet(ElementName.NODEINFO, 1).getCombinedProcessIndex().get(0));
+		assertEquals(2, hc.getSet(ElementName.NODEINFO, 2).getCombinedProcessIndex().get(0));
 	}
 
 	/**
@@ -93,12 +127,12 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 		for (final KElement e : v0)
 			e.removeAttribute(AttributeName.DESCRIPTIVENAME);
 		final List<XJDFHelper> v = conv.getXJDFs(root);
-		Assertions.assertEquals(3, v.size());
+		assertEquals(3, v.size());
 		final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
-		Assertions.assertEquals(0, hc.getSet(ElementName.NODEINFO, 0).getCombinedProcessIndex().get(0));
-		Assertions.assertEquals(1, hc.getSet(ElementName.NODEINFO, 1).getCombinedProcessIndex().get(0));
-		Assertions.assertEquals(2, hc.getSet(ElementName.NODEINFO, 2).getCombinedProcessIndex().get(0));
 		writeRoundTripX(hc.getRoot(), "sammel18", null);
+		assertEquals(0, hc.getSet(ElementName.NODEINFO, 0).getCombinedProcessIndex().get(0));
+		assertEquals(1, hc.getSet(ElementName.NODEINFO, 1).getCombinedProcessIndex().get(0));
+		assertEquals(2, hc.getSet(ElementName.NODEINFO, 2).getCombinedProcessIndex().get(0));
 	}
 
 	/**
@@ -111,7 +145,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 		final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel18.jdf");
 		final List<XJDFHelper> v = conv.getXJDFs(root);
 		final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
-		Assertions.assertNull(hc.getRoot().getElementByClass(JDFSeparationSpec.class, 0, true));
+		assertNull(hc.getRoot().getElementByClass(JDFSeparationSpec.class, 0, true));
 	}
 
 	/**
@@ -128,7 +162,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 			conv.setWantDependent(false);
 			final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel19.jdf");
 			final List<XJDFHelper> v = conv.getXJDFs(root);
-			Assertions.assertEquals(11, v.size());
+			assertEquals(11, v.size());
 			final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
 			writeRoundTripX(hc.getRoot(), "sammel19", null);
 		}
@@ -143,11 +177,23 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		conv.setSingleNode(false);
 		final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel18.jdf");
+		final VElement v0 = root.getChildrenByTagName(null, null, null, false, true, 0);
+		for (final KElement e : v0)
+		{
+			e.removeAttribute(AttributeName.DESCRIPTIVENAME);
+			// if ((e instanceof JDFResourceLink) && !"DeliveryIntentLink".equals(e.getNodeName()))
+			// e.deleteNode();
+
+			if ("AuditPool".equals(e.getNodeName()) || "Comment".equals(e.getNodeName()))
+				e.deleteNode();
+		}
+
 		final KElement e = conv.convert(root);
 		final XJDFHelper h = XJDFHelper.getHelper(e);
+		h.writeToFile(sm_dirTestDataTemp + "del.xjdf");
 		final SetHelper delivery = h.getSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
-		Assertions.assertEquals(1, delivery.getPartitions().size());
-		Assertions.assertNotNull(delivery.getPartition(0).getXPathElement("DeliveryParams/DropItem[6]"));
+		assertEquals(1, delivery.getPartitions().size());
+		assertNotNull(delivery.getPartition(0).getXPathElement("DeliveryParams/DropItem[6]"));
 	}
 
 	/**
@@ -162,8 +208,8 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 		final KElement e = conv.convert(root);
 		final XJDFHelper h = XJDFHelper.getHelper(e);
 		final SetHelper delivery = h.getSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
-		Assertions.assertEquals(1, delivery.getPartitions().size());
-		Assertions.assertNotNull(delivery.getPartition(0).getXPathElement("DeliveryParams/DropItem[6]"));
+		assertEquals(1, delivery.getPartitions().size());
+		assertNotNull(delivery.getPartition(0).getXPathElement("DeliveryParams/DropItem[6]"));
 	}
 
 	/**
@@ -183,10 +229,14 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 			}
 		}
 		final JDFNode s = new JDFSpawn(root).spawn();
+		s.removeChildren(ElementName.ANCESTORPOOL, null);
+		s.removeChildren(ElementName.COMMENT, null);
+		s.removeChildren(ElementName.AUDITPOOL, null);
+		s.getResource(ElementName.STRIPPINGPARAMS, null, 0).setPartUsage(EnumPartUsage.Explicit);
 		final KElement e = conv.convert(s);
 		final XJDFHelper h = XJDFHelper.getHelper(e);
 		final SetHelper bs = h.getSet(ElementName.BINDERYSIGNATURE, null);
-		Assertions.assertEquals(6, bs.getPartitions().size());
+		assertEquals(6, bs.getPartitions().size());
 		writeRoundTripX(e, "testsig", null);
 	}
 

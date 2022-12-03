@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -145,6 +145,21 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 				vMap.add(new JDFAttributeMap());
 		}
 		return vMap;
+	}
+
+	/**
+	 * 
+	 * @param exactMap the map that must be present
+	 * @return
+	 */
+	public boolean hasPartition(JDFAttributeMap exactMap)
+	{
+		VJDFAttributeMap partMapVector = getPartMapVector();
+		if (JDFAttributeMap.isEmpty(exactMap))
+		{
+			return VJDFAttributeMap.isEmpty(partMapVector);
+		}
+		return partMapVector.contains(exactMap);
 	}
 
 	/**

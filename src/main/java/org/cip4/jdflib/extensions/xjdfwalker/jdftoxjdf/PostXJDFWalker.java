@@ -82,7 +82,6 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFArtDelivery;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
-import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
@@ -91,6 +90,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDrop;
+import org.cip4.jdflib.resource.process.JDFDropItem;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -902,12 +902,12 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
-	public class WalkDeliveryIntentSet extends WalkIntentSet
+	public class WalkDeliveryParamsSet extends WalkResourceSet
 	{
 		/**
 		 *
 		 */
-		public WalkDeliveryIntentSet()
+		public WalkDeliveryParamsSet()
 		{
 			super();
 		}
@@ -921,7 +921,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return !bDeliveryIntent && (super.matches(toCheck) && ElementName.DELIVERYINTENT.equals(toCheck.getAttribute("Name")));
+			return super.matches(toCheck) && ElementName.DELIVERYPARAMS.equals(toCheck.getAttribute("Name"));
 		}
 
 		/**
@@ -933,16 +933,51 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			final KElement intent = super.walk(xjdf, dummy);
-			if (intent != null)
+			SetHelper sh = SetHelper.getHelper(xjdf);
+
+			List<ResourceHelper> partitionList = sh.getPartitionList();
+
+			for (ResourceHelper rh : partitionList)
 			{
-				final XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFConstants.XJDF, 0));
-				final SetHelper delResHelper = h.getCreateSet(XJDFConstants.Resource, ElementName.DELIVERYPARAMS, EnumUsage.Input);
-				final ResourceHelper ph = delResHelper.appendPartition(null, true);
-				final JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
-				dp.setFromDeliveryIntent((JDFDeliveryIntent) intent.getElement(ElementName.DELIVERYINTENT));
+				JDFDeliveryParams dp = (JDFDeliveryParams) rh.getResource();
+				for (JDFDrop drop : dp.getAllDrop())
+				{
+					String dropid = drop.getDropID();
+					ResourceHelper rh2 = StringUtil.isEmpty(dropid) ? sh.getCreateExactPartition(null, false)
+							: sh.getCreateExactPartition(new JDFAttributeMap(AttributeName.DROPID, dropid), false);
+					JDFDeliveryParams dp2 = (JDFDeliveryParams) rh2.getResource();
+					if (dp2 == null)
+					{
+						dp2 = (JDFDeliveryParams) rh2.getRoot().copyElement(dp, null);
+						dp2.removeChildren(ElementName.DROP, null);
+					}
+					for (JDFDropItem dropitem : drop.getAllDropItem())
+					{
+						dropitem.renameAttribute("ProductRef", XJDFConstants.ItemRef);
+						dropitem.renameAttribute("ComponentRef", XJDFConstants.ItemRef);
+						if (!dropitem.hasNonEmpty(XJDFConstants.ItemRef))
+						{
+							String productRef = rh.getPartKey(XJDFConstants.Product);
+							if (productRef != null)
+							{
+								XJDFHelper xh = sh.getXJDF();
+								ProductHelper p = xh.getProductByExternalID(productRef);
+								if (p != null)
+								{
+									productRef = p.ensureID();
+								}
+							}
+							dropitem.setAttribute(XJDFConstants.ItemRef, productRef);
+						}
+						if (dropitem.hasNonEmpty(XJDFConstants.ItemRef))
+						{
+							dp2.moveElement(dropitem, null);
+						}
+					}
+				}
+				rh.deleteNode();
 			}
-			return intent;
+			return super.walk(xjdf, dummy);
 		}
 	}
 
@@ -969,7 +1004,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return !retainAll && toCheck instanceof JDFDeliveryParams;
+			return false && !retainAll && toCheck instanceof JDFDeliveryParams;
 		}
 
 		/**
@@ -994,6 +1029,7 @@ class PostXJDFWalker extends BaseElementWalker
 					final SetHelper sh = new SetHelper(set);
 					final JDFAttributeMap partMap = ph.getPartMap();
 					partMap.put(XJDFConstants.DropID, "DROP_0");
+					partMap.remove(XJDFConstants.Product);
 					ph.setPartMap(partMap);
 
 					delParams.removeChildren(ElementName.DROP, null, null);
@@ -1002,7 +1038,7 @@ class PostXJDFWalker extends BaseElementWalker
 						final int i = (j + 1) % size;
 						partMap.put(XJDFConstants.DropID, "DROP_" + i);
 						KElement newDrop;
-						ResourceHelper newParam;
+						ResourceHelper newParam = sh.getPartition(partMap);
 						if (i != 0)
 						{
 							newParam = sh.getCreatePartition(partMap, true);
@@ -1029,59 +1065,6 @@ class PostXJDFWalker extends BaseElementWalker
 		{
 			return VString.getVString(ElementName.DELIVERYPARAMS, null);
 		}
-	}
-
-	/**
-	 *
-	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
-	 */
-	public class WalkDropItem extends WalkElement
-	{
-		/**
-		 *
-		 */
-		public WalkDropItem()
-		{
-			super();
-		}
-
-		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#updateAttributes(org.cip4.jdflib.core.KElement)
-		 */
-		@Override
-		void updateAttributes(final KElement xjdf)
-		{
-			xjdf.renameAttribute("ProductRef", XJDFConstants.ItemRef);
-			xjdf.renameAttribute("ComponentRef", XJDFConstants.ItemRef);
-			super.updateAttributes(xjdf);
-		}
-
-		/**
-		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-		 */
-		@Override
-		public VString getElementNames()
-		{
-			return VString.getVString(ElementName.DROPITEM, null);
-		}
-
-		/**
-		 * we zapp dropitems that don't reference anything
-		 *
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 */
-		@Override
-		public KElement walk(final KElement xjdf, final KElement dummy)
-		{
-			final KElement ret = super.walk(xjdf, dummy);
-			if (!xjdf.hasAttribute(XJDFConstants.ItemRef))
-			{
-				xjdf.deleteNode();
-				return null;
-			}
-			return ret;
-		}
-
 	}
 
 	/**

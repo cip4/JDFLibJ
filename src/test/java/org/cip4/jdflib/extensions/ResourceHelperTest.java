@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,6 +36,11 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -46,7 +51,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -65,7 +69,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
 		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
 		final ResourceHelper rh = sh.getCreatePartition(map, false);
-		Assertions.assertEquals(map, rh.getPartMap());
+		assertEquals(map, rh.getPartMap());
 	}
 
 	/**
@@ -78,7 +82,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
 		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
 		final ResourceHelper rh = sh.getCreatePartition(map, false);
-		Assertions.assertEquals("s1", rh.getPartKey(AttributeName.SHEETNAME));
+		assertEquals("s1", rh.getPartKey(AttributeName.SHEETNAME));
 	}
 
 	/**
@@ -91,10 +95,10 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
 		final ResourceHelper rh = sh.getCreatePartition(null, false);
 		final VJDFAttributeMap vmap = new VJDFAttributeMap();
-		Assertions.assertTrue(rh.matches(new JDFAttributeMap()));
-		Assertions.assertTrue(rh.matches(vmap));
+		assertTrue(rh.matches(new JDFAttributeMap()));
+		assertTrue(rh.matches(vmap));
 		vmap.add(new JDFAttributeMap());
-		Assertions.assertTrue(rh.matches(vmap));
+		assertTrue(rh.matches(vmap));
 	}
 
 	/**
@@ -107,10 +111,10 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
 		final ResourceHelper rh = sh.getCreatePartition(new JDFAttributeMap("Run", "r1"), false);
 		final VJDFAttributeMap vmap = new VJDFAttributeMap();
-		Assertions.assertFalse(rh.matches(new JDFAttributeMap()));
-		Assertions.assertFalse(rh.matches(vmap));
+		assertFalse(rh.matches(new JDFAttributeMap()));
+		assertFalse(rh.matches(vmap));
 		vmap.add(new JDFAttributeMap());
-		Assertions.assertFalse(rh.matches(vmap));
+		assertFalse(rh.matches(vmap));
 
 	}
 
@@ -126,7 +130,34 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		root.getCreateXPathElement("ResourceSet/Resource/Part");
 		final KElement m = root.getCreateXPathElement("ResourceSet/Resource/Media");
 		final ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
-		Assertions.assertEquals(ph.getResource(), m);
+		assertEquals(ph.getResource(), m);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testHasPartition()
+	{
+		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
+		final KElement root = d.getRoot();
+
+		root.getCreateXPathElement("ResourceSet/Resource/Part");
+		final ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
+		assertTrue(ph.hasPartition(null));
+		assertTrue(ph.hasPartition(new JDFAttributeMap()));
+		assertFalse(ph.hasPartition(new JDFAttributeMap("a", "b")));
+
+		ph.setPartMap(new JDFAttributeMap("a", "b"));
+		assertFalse(ph.hasPartition(null));
+		assertFalse(ph.hasPartition(new JDFAttributeMap()));
+		assertTrue(ph.hasPartition(new JDFAttributeMap("a", "b")));
+
+		ph.appendPartMap(new JDFAttributeMap("a", "c"));
+		assertFalse(ph.hasPartition(null));
+		assertFalse(ph.hasPartition(new JDFAttributeMap()));
+		assertTrue(ph.hasPartition(new JDFAttributeMap("a", "b")));
+		assertTrue(ph.hasPartition(new JDFAttributeMap("a", "c")));
 	}
 
 	/**
@@ -136,9 +167,9 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	public void testSetResourceAttribute()
 	{
 		final ResourceHelper rh = new XJDFHelper("j1", null).getCreateSet(ElementName.MEDIA, EnumUsage.Input).getCreatePartition(0, false);
-		Assertions.assertNull(rh.getResourceAttribute("foo"));
+		assertNull(rh.getResourceAttribute("foo"));
 		rh.setResourceAttribute("foo", "bar");
-		Assertions.assertEquals("bar", rh.getResourceAttribute("foo"));
+		assertEquals("bar", rh.getResourceAttribute("foo"));
 	}
 
 	/**
@@ -152,7 +183,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 
 		root.getCreateXPathElement("ResourceSet/Resource/Part");
 		final ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
-		Assertions.assertNull(ph.getStatus());
+		assertNull(ph.getStatus());
 	}
 
 	/**
@@ -167,11 +198,11 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		root.getCreateXPathElement("ResourceSet/Resource/Part");
 		final ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
 		ph.setStatus(EnumResStatus.Available);
-		Assertions.assertEquals(EnumResStatus.Available, ph.getStatus());
+		assertEquals(EnumResStatus.Available, ph.getStatus());
 		ph.setStatus(EnumResStatus.Unavailable);
-		Assertions.assertEquals(EnumResStatus.Unavailable, ph.getStatus());
+		assertEquals(EnumResStatus.Unavailable, ph.getStatus());
 		ph.setStatus(EnumResStatus.Draft);
-		Assertions.assertNull(ph.getStatus());
+		assertNull(ph.getStatus());
 	}
 
 	/**
@@ -186,9 +217,9 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		root.getCreateXPathElement("ResourceSet[@Name=\"Media\"]/Resource/Part");
 		final KElement m = root.getCreateXPathElement("ResourceSet/Resource/Media");
 		final ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
-		Assertions.assertEquals(ph.getResource(), m);
-		Assertions.assertEquals(ResourceHelper.getHelper(m), ph);
-		Assertions.assertEquals(ResourceHelper.getHelper(m.getParentNode_KElement()), ph);
+		assertEquals(ph.getResource(), m);
+		assertEquals(ResourceHelper.getHelper(m), ph);
+		assertEquals(ResourceHelper.getHelper(m.getParentNode_KElement()), ph);
 	}
 
 	/**
@@ -203,7 +234,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final KElement set = root.getCreateXPathElement("ResourceSet");
 		set.getCreateXPathElement("Resource/Part");
 		final ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
-		Assertions.assertEquals(ph.getSet(), new SetHelper(set));
+		assertEquals(ph.getSet(), new SetHelper(set));
 	}
 
 	/**
@@ -220,9 +251,9 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final KElement p = set.getCreateXPathElement("Resource/Part");
 		final KElement m = set.getCreateXPathElement("Resource/Media");
 		final KElement res = root.getXPathElement("ResourceSet/Resource");
-		Assertions.assertTrue(ResourceHelper.isAsset(res));
-		Assertions.assertFalse(ResourceHelper.isAsset(m));
-		Assertions.assertFalse(ResourceHelper.isAsset(p));
+		assertTrue(ResourceHelper.isAsset(res));
+		assertFalse(ResourceHelper.isAsset(m));
+		assertFalse(ResourceHelper.isAsset(p));
 	}
 
 	/**
@@ -239,11 +270,11 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final KElement p = set.getCreateXPathElement("Resource/Part");
 		final KElement m = set.getCreateXPathElement("Resource/Media");
 		final KElement res = root.getXPathElement("ResourceSet/Resource");
-		Assertions.assertTrue(ResourceHelper.isAsset(res, null));
-		Assertions.assertTrue(ResourceHelper.isAsset(res, "Media"));
-		Assertions.assertFalse(ResourceHelper.isAsset(res, "ExposedMedia"));
-		Assertions.assertFalse(ResourceHelper.isAsset(m, "Media"));
-		Assertions.assertFalse(ResourceHelper.isAsset(p, null));
+		assertTrue(ResourceHelper.isAsset(res, null));
+		assertTrue(ResourceHelper.isAsset(res, "Media"));
+		assertFalse(ResourceHelper.isAsset(res, "ExposedMedia"));
+		assertFalse(ResourceHelper.isAsset(m, "Media"));
+		assertFalse(ResourceHelper.isAsset(p, null));
 	}
 
 	/**
@@ -258,7 +289,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final KElement set = root.getCreateXPathElement("ResourceSet");
 		set.getCreateXPathElement("Resource/Part");
 		final ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
-		Assertions.assertEquals(ph.getXJDF(), new XJDFHelper(root));
+		assertEquals(ph.getXJDF(), new XJDFHelper(root));
 	}
 
 	/**
@@ -275,9 +306,9 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final KElement p = set.getCreateXPathElement("Resource/Part");
 		final KElement m = set.getCreateXPathElement("Resource/Media");
 		final KElement res = root.getXPathElement("ResourceSet/Resource");
-		Assertions.assertFalse(ResourceHelper.isResourceElement(res));
-		Assertions.assertTrue(ResourceHelper.isResourceElement(m));
-		Assertions.assertFalse(ResourceHelper.isResourceElement(p));
+		assertFalse(ResourceHelper.isResourceElement(res));
+		assertTrue(ResourceHelper.isResourceElement(m));
+		assertFalse(ResourceHelper.isResourceElement(p));
 	}
 
 	/**
@@ -294,7 +325,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
 		m.getParentNode_KElement().setID("iii");
 		ph.cleanUp();
-		Assertions.assertEquals("iii", m.getParentNode_KElement().getAttribute(AttributeName.ID, null, null));
+		assertEquals("iii", m.getParentNode_KElement().getAttribute(AttributeName.ID, null, null));
 	}
 
 	/**
@@ -314,8 +345,8 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final KElement m3 = ml.appendElement(ElementName.MEDIA);
 		final ResourceHelper ph = new ResourceHelper(r1);
 		ph.cleanUp();
-		Assertions.assertEquals(m1.getNextSiblingElement(), m2);
-		Assertions.assertEquals(m2.getNextSiblingElement(), m3);
+		assertEquals(m1.getNextSiblingElement(), m2);
+		assertEquals(m2.getNextSiblingElement(), m3);
 	}
 
 	/**
@@ -330,7 +361,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
 		final JDFAttributeMap map = new JDFAttributeMap("Drop", "D1");
 		ph.setPartMap(map);
-		Assertions.assertEquals(ph.getPartMap(), map);
+		assertEquals(ph.getPartMap(), map);
 	}
 
 	/**
@@ -346,10 +377,10 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final JDFAttributeMap map = new JDFAttributeMap("Drop", "D1");
 		final VJDFAttributeMap vMap = new VJDFAttributeMap(map);
 		ph.appendPartMapVector(vMap);
-		Assertions.assertEquals(ph.getPartMapVector(), vMap);
+		assertEquals(ph.getPartMapVector(), vMap);
 		vMap.add(new JDFAttributeMap("Drop", "D2"));
 		ph.appendPartMapVector(vMap);
-		Assertions.assertEquals(ph.getPartMapVector(), vMap);
+		assertEquals(ph.getPartMapVector(), vMap);
 	}
 
 	/**
@@ -364,12 +395,12 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
 		final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.RibbonName, "D1");
 		ph.setAmount(22, null, true);
-		Assertions.assertEquals(22, ph.getAmount(null, true), 0.001);
+		assertEquals(22, ph.getAmount(null, true), 0.001);
 		ph.setAmount(33, null, true);
-		Assertions.assertEquals(33, ph.getAmount(null, true), 0.001);
+		assertEquals(33, ph.getAmount(null, true), 0.001);
 		ph.setAmount(333, map, true);
-		Assertions.assertEquals(333, ph.getAmount(map, true), 0.001);
-		Assertions.assertEquals(33, ph.getAmount(null, true), 0.001);
+		assertEquals(333, ph.getAmount(map, true), 0.001);
+		assertEquals(33, ph.getAmount(null, true), 0.001);
 	}
 
 	/**
@@ -385,11 +416,11 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.RibbonName, "D1");
 		ph.setAmount(22, null, true);
 		ph.setAmount(33, null, false);
-		Assertions.assertEquals(22, ph.getAmountSum(true), 0.001);
-		Assertions.assertEquals(33, ph.getAmountSum(false), 0.001);
+		assertEquals(22, ph.getAmountSum(true), 0.001);
+		assertEquals(33, ph.getAmountSum(false), 0.001);
 		ph.setAmount(333, map, true);
-		Assertions.assertEquals(355, ph.getAmountSum(true), 0.001);
-		Assertions.assertEquals(33, ph.getAmountSum(false), 0.001);
+		assertEquals(355, ph.getAmountSum(true), 0.001);
+		assertEquals(33, ph.getAmountSum(false), 0.001);
 	}
 
 	/**
@@ -404,11 +435,11 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
 		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "S1");
 		ph.ensurePart("SheetName", "S1");
-		Assertions.assertEquals(ph.getPartMap(), map);
+		assertEquals(ph.getPartMap(), map);
 		ph.ensurePart("Side", "Front");
 		map.put("Side", "Front");
 
-		Assertions.assertEquals(ph.getPartMap(), map);
+		assertEquals(ph.getPartMap(), map);
 	}
 
 	/**
@@ -421,7 +452,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final ResourceHelper rhm = h.getCreateSet(ElementName.MEDIA, null).getCreatePartition(null, false);
 		final KElement comp = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Input).getCreatePartition(null, true).getResource();
 		rhm.ensureReference(comp, null);
-		Assertions.assertEquals(rhm.getID(), comp.getAttribute("MediaRef"));
+		assertEquals(rhm.getID(), comp.getAttribute("MediaRef"));
 	}
 
 	/**
@@ -434,7 +465,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final ResourceHelper rhm = h.getCreateSet(ElementName.MEDIA, null).getCreatePartition(null, false);
 		final ResourceHelper comp = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Input).getCreatePartition(null, true);
 		rhm.ensureReference(comp, null);
-		Assertions.assertEquals(rhm.getID(), comp.getResourceAttribute("MediaRef"));
+		assertEquals(rhm.getID(), comp.getResourceAttribute("MediaRef"));
 	}
 
 	/**
@@ -445,7 +476,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null);
 		final ResourceHelper rhm = h.getCreateSet(ElementName.MEDIA, null).getCreatePartition(null, false);
-		Assertions.assertEquals(ElementName.MEDIA, rhm.getName());
+		assertEquals(ElementName.MEDIA, rhm.getName());
 	}
 
 }

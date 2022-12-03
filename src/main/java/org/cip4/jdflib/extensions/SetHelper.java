@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -221,6 +221,37 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 		if (addRes)
 			e.getCreateResource();
 		return e;
+	}
+
+	/**
+	 * get an existing partition with at least a matching partmap
+	 *
+	 * @param vmap
+	 * @param addRes
+	 * @return
+	 */
+	public ResourceHelper getCreateExactPartition(final JDFAttributeMap map, final boolean addRes)
+	{
+		ResourceHelper h = getExactPartition(map);
+
+		return h != null ? h : appendPartition(map, addRes);
+	}
+
+	/**
+	 * 
+	 * @param map
+	 * @return
+	 */
+	public ResourceHelper getExactPartition(final JDFAttributeMap map)
+	{
+		for (ResourceHelper h : getPartitionList())
+		{
+			if (h.hasPartition(map))
+			{
+				return h;
+			}
+		}
+		return null;
 	}
 
 	/**

@@ -72,7 +72,7 @@ public class WalkResource extends WalkJDFElement
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final JDFResource r = (JDFResource) jdf;
-		if (r.getNoOp())
+		if (r.getNoOp() || jdf.getNodeName().equals(xjdf.getNodeName()))
 			return null;
 		final KElement newResLeaf = super.walk(jdf, xjdf);
 

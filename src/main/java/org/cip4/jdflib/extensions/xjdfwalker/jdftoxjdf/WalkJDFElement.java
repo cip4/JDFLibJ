@@ -435,7 +435,7 @@ public class WalkJDFElement extends WalkElement
 				}
 				else
 				{
-					newTargetVector.addAll(((JDFResource) e).getLeaves(EnumPartUsage.Implicit.equals(linkTarget.getPartUsage())));
+					newTargetVector.addAll(((JDFResource) e).getLeaves(checkAllLeaves(linkTarget)));
 					changed = true;
 				}
 			}
@@ -449,6 +449,11 @@ public class WalkJDFElement extends WalkElement
 		}
 	}
 
+	protected boolean checkAllLeaves(final JDFResource linkTarget)
+	{
+		return EnumPartUsage.Implicit.equals(linkTarget.getPartUsage()) && !(linkTarget instanceof JDFLayout) && !(linkTarget instanceof JDFStrippingParams);
+	}
+
 	List<KElement> loopLeaves(final JDFElement rl, final String className, final KElement resourceSet, final int nLeaves, final VElement vRes)
 	{
 		final List<KElement> v = new ArrayList<>();
@@ -456,17 +461,20 @@ public class WalkJDFElement extends WalkElement
 		for (final KElement e : vRes)
 		{
 			final JDFResource r = (JDFResource) e;
-			final List<JDFResource> vLeaves = r.getLeafArray(EnumPartUsage.Implicit.equals(r.getPartUsage()));
+			final List<JDFResource> vLeaves = r.getLeafArray(checkAllLeaves(r));
 			for (final KElement eLeaf : vLeaves)
 			{
 				final JDFResource leaf = (JDFResource) eLeaf;
 				final KElement newBaseRes = setBaseResource(rl, leaf, setHelper);
-				final int nn = resourceSet.numChildElements_KElement(className, null);
-				if (nn > nLeaves)
+				if (newBaseRes != null)
 				{
-					jdfToXJDF.walkTree(leaf, newBaseRes);
+					final int nn = resourceSet.numChildElements_KElement(className, null);
+					if (nn > nLeaves)
+					{
+						jdfToXJDF.walkTree(leaf, newBaseRes);
+					}
+					v.add(newBaseRes);
 				}
-				v.add(newBaseRes);
 			}
 		}
 		return v;
@@ -545,7 +553,10 @@ public class WalkJDFElement extends WalkElement
 		{
 			JDFAttributeMap map = r.getPartMap();
 			map = convertRanges(map, r);
-			newLeaf = sh.getCreatePartition(map, false).getPartition();
+			if (sh.getExactPartition(map) != null)
+				return null;
+
+			newLeaf = sh.getCreateExactPartition(map, false).getPartition();
 		}
 		setLeafAttributes(r, rl, newLeaf);
 		return newLeaf;
@@ -631,7 +642,7 @@ public class WalkJDFElement extends WalkElement
 			}
 			e.deleteNode();
 		}
-		if (!vsep.isEmpty())
+		if (!vsep.isEmpty() && xjdf != null)
 		{
 			xjdf.setAttribute(attName, StringUtil.setvString(vsep));
 		}
