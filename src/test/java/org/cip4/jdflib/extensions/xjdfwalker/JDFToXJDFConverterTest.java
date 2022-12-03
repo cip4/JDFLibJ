@@ -119,6 +119,7 @@ import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
@@ -1654,6 +1655,47 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
 		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/@Locked", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testPartUsagePartsExplicit()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFResource dpp = n.addResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
+		dpp.setDescriptiveName("d");
+		JDFResource dpp1 = dpp.addPartition(EnumPartIDKey.RunIndex, "1");
+		dpp1.setDescriptiveName("d1");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		XJDFHelper h = new XJDFHelper(xjdf);
+		SetHelper s = h.getSet(ElementName.DIGITALPRINTINGPARAMS, 0);
+		assertEquals(1, s.getPartitionList().size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testPartUsagePartsImplicit()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFResource dpp = n.addResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
+		dpp.setDescriptiveName("d");
+		dpp.setBrand("b");
+		dpp.setPartUsage(EnumPartUsage.Implicit);
+		JDFResource dpp1 = dpp.addPartition(EnumPartIDKey.RunIndex, "1");
+		dpp1.setDescriptiveName("d1");
+		dpp.setBrand("b1");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		XJDFHelper h = new XJDFHelper(xjdf);
+		SetHelper s = h.getSet(ElementName.DIGITALPRINTINGPARAMS, 0);
+		assertEquals(2, s.getPartitionList().size());
 	}
 
 	/**

@@ -61,6 +61,7 @@ import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFComponent;
@@ -143,25 +144,28 @@ public class WalkJDFElement extends WalkElement
 	 */
 	void cleanRefs(final JDFElement je, JDFResource r)
 	{
-		final JDFNode parentJDF = je.getParentJDF();
-		if (parentJDF != null)
+		if (r.isResourceElement())
 		{
-			r = r.makeRootResource(null, parentJDF, false);
-			final JDFResourcePool prevPool = parentJDF.getResourcePool();
-			if (prevPool != null)
+			final JDFNode parentJDF = je.getParentJDF();
+			if (parentJDF != null)
 			{
-				r = removeDuplicateRefs(r, prevPool);
+				r = r.makeRootResource(null, parentJDF, false);
+				final JDFResourcePool prevPool = parentJDF.getResourcePool();
+				if (prevPool != null)
+				{
+					r = removeDuplicateRefs(r, prevPool);
+				}
+				jdfToXJDF.getResourceAlias().add(r.getID());
 			}
-			jdfToXJDF.getResourceAlias().add(r.getID());
+			else if (je.getJMFRoot() != null)
+			{
+				final JDFResource resourceRoot = r.getResourceRoot();
+				final JDFElement parent = (JDFElement) (resourceRoot == null ? null : resourceRoot.getParentNode_KElement());
+				r = r.makeRootResource(null, parent, false);
+			}
+			r.setResStatus(EnumResStatus.Available, true);
+			je.refElement(r);
 		}
-		else if (je.getJMFRoot() != null)
-		{
-			final JDFResource resourceRoot = r.getResourceRoot();
-			final JDFElement parent = (JDFElement) (resourceRoot == null ? null : resourceRoot.getParentNode_KElement());
-			r = r.makeRootResource(null, parent, false);
-		}
-		r.setResStatus(EnumResStatus.Available, true);
-		je.refElement(r);
 	}
 
 	/**
@@ -431,7 +435,7 @@ public class WalkJDFElement extends WalkElement
 				}
 				else
 				{
-					newTargetVector.addAll(((JDFResource) e).getLeaves(false));
+					newTargetVector.addAll(((JDFResource) e).getLeaves(!EnumPartUsage.Explicit.equals(linkTarget.getPartUsage())));
 					changed = true;
 				}
 			}
@@ -452,7 +456,7 @@ public class WalkJDFElement extends WalkElement
 		for (final KElement e : vRes)
 		{
 			final JDFResource r = (JDFResource) e;
-			final List<JDFResource> vLeaves = r.getLeafArray(false);
+			final List<JDFResource> vLeaves = r.getLeafArray(!EnumPartUsage.Explicit.equals(r.getPartUsage()));
 			for (final KElement eLeaf : vLeaves)
 			{
 				final JDFResource leaf = (JDFResource) eLeaf;

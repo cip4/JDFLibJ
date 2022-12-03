@@ -39,6 +39,9 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.util.Map;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -47,7 +50,8 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.junit.jupiter.api.Assertions;
+import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -68,7 +72,7 @@ public class IDFinderTest extends JDFTestCaseBase
 	{
 		final IDFinder finder = new IDFinder();
 		final Map<String, IDPart> m = finder.getMap(root);
-		Assertions.assertEquals(m.size(), 9 + 3);
+		assertEquals(m.size(), 9 + 3);
 	}
 
 	/**
@@ -89,12 +93,29 @@ public class IDFinderTest extends JDFTestCaseBase
 				final String sh = p.get(AttributeName.SHEETNAME);
 				if (sh != null)
 				{
-					Assertions.assertEquals("Sig_" + sh, p.get(AttributeName.SIGNATURENAME));
+					assertEquals("Sig_" + sh, p.get(AttributeName.SIGNATURENAME));
 					n++;
 				}
 			}
 		}
-		Assertions.assertEquals(9, n);
+		assertEquals(9, n);
+	}
+
+	/**
+	 * Test method for {@link IDFinder#getMap(KElement)}.
+	 */
+	@Test
+	public void testContactType()
+	{
+		JDFPart part = (JDFPart) new JDFDoc("Part").getRoot();
+		for (EnumPartIDKey e : EnumPartIDKey.getEnumList())
+		{
+			JDFPart p2 = (JDFPart) part.cloneNewDoc();
+			p2.setAttribute(e.getName(), e.getName());
+			if (e.isXJDF())
+				assertNull(IDFinder.getPartMap(p2).get(e.getName()), e.getName());
+
+		}
 	}
 
 	/**

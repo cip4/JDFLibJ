@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -99,15 +99,14 @@ public class IDFinder extends BaseElementWalker
 			{
 				checkKey(p, key);
 			}
-			p.remove(AttributeName.PRODUCTPART);
-			p.remove(XJDFConstants.ContactType);
 		}
 		return p;
 	}
 
 	static void checkKey(final JDFAttributeMap p, final String key)
 	{
-		if (EnumPartIDKey.getEnum(key) == null && !AttributeName.DROPID.equals(key))
+		EnumPartIDKey eKey = EnumPartIDKey.getEnum(key);
+		if (eKey == null || eKey.isXJDF())
 		{
 			p.remove(key);
 		}
