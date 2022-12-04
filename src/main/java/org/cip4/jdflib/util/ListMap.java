@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 
 /**
  * HashMap of multiple elements utility class
@@ -106,6 +105,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * fill this with the values in map by switching key and value
+	 * 
 	 * @param map
 	 */
 	public void fillInvertedMap(final Map<listObject, key> map)
@@ -137,6 +137,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * get the value for key
+	 * 
 	 * @param key the search key
 	 * @param i the index in the vecor matching key; if <0 count from the back of the vector
 	 * @return the matching vectorObject; null if the key does not exist or i is out of range
@@ -165,6 +166,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * get the index of singleObject in the vector of key
+	 * 
 	 * @param key the key of the vector
 	 * @param singleObject the object to search
 	 * @return -2: no such key; -1: no value in key; else the index in the vexctor of key
@@ -181,6 +183,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * get the size of the vector for key
+	 * 
 	 * @param key the key of the vector
 	 * @return the size of the vector for key, 0 if no key exists
 	 */
@@ -196,6 +199,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * put the value for key, ensuring uniqueness
+	 * 
 	 * @param key the key of the vector
 	 * @param val the vector element
 	 */
@@ -204,7 +208,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 		List<listObject> v = get(key);
 		if (v == null)
 		{
-			v = new Vector<listObject>();
+			v = new ArrayList<listObject>();
 			put(key, v);
 		}
 		if (!bUnique || !v.contains(val))
@@ -216,6 +220,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 	/**
 	 *
 	 * append a map, ensuring uniqueness
+	 * 
 	 * @param key the key of the vector
 	 * @param vVal the vector of elements
 	 */
@@ -235,6 +240,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 	/**
 	 *
 	 * append a VectorMap, ensuring uniqueness
+	 * 
 	 * @param map the map to add
 	 *
 	 */
@@ -252,6 +258,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * get all values as one big vector, multiple entries are retained (see {@link ContainerUtil}.unify())
+	 * 
 	 * @return a vector of all values, null if empty
 	 */
 	public List<listObject> getAllValues()
@@ -269,6 +276,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 	/**
 	 * get an inverted map that uses all entries a s keys and vice versa<br/>
 	 * note that the behavior is undefined in case of multiple identical values
+	 * 
 	 * @return an inverted map
 	 */
 	public Map<listObject, key> getInvertedMap()
@@ -348,7 +356,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 		List<listObject> v = get(key);
 		if (v == null)
 		{
-			v = new Vector<listObject>();
+			v = new ArrayList<listObject>();
 			put(key, v);
 		}
 		if (pos < 0)
@@ -364,6 +372,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * Getter for bUnique attribute.
+	 * 
 	 * @return the bUnique
 	 */
 	public boolean isUnique()
@@ -373,6 +382,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * Setter for bUnique attribute.
+	 * 
 	 * @param bUnique the bUnique to set
 	 */
 	public void setUnique(final boolean bUnique)
