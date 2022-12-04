@@ -40,7 +40,9 @@
 package org.cip4.jdflib.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -57,7 +59,6 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.resource.process.JDFCostCenter;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -152,11 +153,11 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	@Test
 	public void testEquals()
 	{
-		Assertions.assertTrue(ContainerUtil.equals(null, null));
-		Assertions.assertFalse(ContainerUtil.equals(null, ""));
-		Assertions.assertFalse(ContainerUtil.equals("", null));
-		Assertions.assertFalse(ContainerUtil.equals("", " "));
-		Assertions.assertTrue(ContainerUtil.equals("a", "a"));
+		assertTrue(ContainerUtil.equals(null, null));
+		assertFalse(ContainerUtil.equals(null, ""));
+		assertFalse(ContainerUtil.equals("", null));
+		assertFalse(ContainerUtil.equals("", " "));
+		assertTrue(ContainerUtil.equals("a", "a"));
 	}
 
 	/**
@@ -169,14 +170,14 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		cs.setCostCenterID("CS");
 		final JDFCostCenter cs2 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs2.setCostCenterID("CS");
-		Assertions.assertTrue(ContainerUtil.matches(cs, cs2));
-		Assertions.assertTrue(ContainerUtil.matches(cs, "CS"));
-		Assertions.assertTrue(ContainerUtil.matches(null, null));
+		assertTrue(ContainerUtil.matches(cs, cs2));
+		assertTrue(ContainerUtil.matches(cs, "CS"));
+		assertTrue(ContainerUtil.matches(null, null));
 		cs2.setCostCenterID("CS2");
-		Assertions.assertFalse(ContainerUtil.matches(cs, cs2));
-		Assertions.assertFalse(ContainerUtil.matches(cs, null));
-		Assertions.assertFalse(ContainerUtil.matches(cs, "CS2"));
-		Assertions.assertFalse(ContainerUtil.matches(null, "CS2"));
+		assertFalse(ContainerUtil.matches(cs, cs2));
+		assertFalse(ContainerUtil.matches(cs, null));
+		assertFalse(ContainerUtil.matches(cs, "CS2"));
+		assertFalse(ContainerUtil.matches(null, "CS2"));
 	}
 
 	/**
@@ -189,14 +190,14 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		cs.setCostCenterID("CS");
 		final JDFCostCenter cs2 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs2.setCostCenterID("CS");
-		Assertions.assertTrue(ContainerUtil.matchesExisting(cs, cs2));
-		Assertions.assertTrue(ContainerUtil.matchesExisting(cs, "CS"));
-		Assertions.assertTrue(ContainerUtil.matchesExisting(null, null));
-		Assertions.assertTrue(ContainerUtil.matchesExisting(cs, null));
-		Assertions.assertTrue(ContainerUtil.matchesExisting(null, "CS2"));
+		assertTrue(ContainerUtil.matchesExisting(cs, cs2));
+		assertTrue(ContainerUtil.matchesExisting(cs, "CS"));
+		assertTrue(ContainerUtil.matchesExisting(null, null));
+		assertTrue(ContainerUtil.matchesExisting(cs, null));
+		assertTrue(ContainerUtil.matchesExisting(null, "CS2"));
 		cs2.setCostCenterID("CS2");
-		Assertions.assertFalse(ContainerUtil.matchesExisting(cs, cs2));
-		Assertions.assertFalse(ContainerUtil.matchesExisting(cs, "CS2"));
+		assertFalse(ContainerUtil.matchesExisting(cs, cs2));
+		assertFalse(ContainerUtil.matchesExisting(cs, "CS2"));
 	}
 
 	/**
@@ -215,7 +216,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		vcs.add(cs);
 		vcs.add(cs2);
 		vcs.add(cs3);
-		Assertions.assertEquals(ContainerUtil.unifyMatches(vcs).size(), 2);
+		assertEquals(ContainerUtil.unifyMatches(vcs).size(), 2);
 	}
 
 	/**
@@ -238,7 +239,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 			vcs.add(new FilterMatch("b" + i));
 		}
 		ContainerUtil.unifyMatches(vcs);
-		Assertions.assertEquals(2, vcs.size());
+		assertEquals(2, vcs.size());
 	}
 
 	/**
@@ -250,11 +251,24 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		final VString v1 = new VString("a b c", null);
 		final VString v2 = new VString("e f g", null);
 		final VString v3 = new VString("a b c e f g", null);
-		Assertions.assertEquals(ContainerUtil.addAll(null, (List<String>) null), null);
-		Assertions.assertEquals(ContainerUtil.addAll(v1, (List<String>) null), v1);
-		Assertions.assertEquals(ContainerUtil.addAll(null, v1), v1);
-		Assertions.assertEquals(ContainerUtil.addAll(v1, v2), v3);
-		Assertions.assertEquals(v1, v3);
+		assertEquals(ContainerUtil.addAll(null, (List<String>) null), null);
+		assertEquals(ContainerUtil.addAll(v1, (List<String>) null), v1);
+		assertEquals(ContainerUtil.addAll(null, v1), v1);
+		assertEquals(ContainerUtil.addAll(v1, v2), v3);
+		assertEquals(v1, v3);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAdd()
+	{
+		final VString v1 = new VString();
+
+		assertEquals(v1, ContainerUtil.add(v1, "a"));
+		assertEquals(v1, ContainerUtil.add(ContainerUtil.add(v1, "b"), "c"));
+		assertEquals("a b c", v1.getString());
 	}
 
 	/**
@@ -299,8 +313,8 @@ public class ContainerUtilTest extends JDFTestCaseBase
 			v.add(new SimpleMatch(i % 2));
 		}
 		final SimpleMatch simpleMatch1 = new SimpleMatch(1);
-		Assertions.assertEquals(ContainerUtil.getMatches(v, simpleMatch1).size(), 5);
-		Assertions.assertEquals(ContainerUtil.getMatch(v, simpleMatch1, 0), simpleMatch1);
+		assertEquals(ContainerUtil.getMatches(v, simpleMatch1).size(), 5);
+		assertEquals(ContainerUtil.getMatch(v, simpleMatch1, 0), simpleMatch1);
 	}
 
 	/**
@@ -315,8 +329,8 @@ public class ContainerUtilTest extends JDFTestCaseBase
 			v.add(new SimpleMatch(i % 2));
 		}
 		final SimpleMatch simpleMatch1 = new SimpleMatch(1);
-		Assertions.assertEquals(ContainerUtil.getMatchesList(v, simpleMatch1).size(), 5);
-		Assertions.assertEquals(ContainerUtil.getMatch(v, simpleMatch1, 0), simpleMatch1);
+		assertEquals(ContainerUtil.getMatchesList(v, simpleMatch1).size(), 5);
+		assertEquals(ContainerUtil.getMatch(v, simpleMatch1, 0), simpleMatch1);
 	}
 
 	/**
@@ -331,8 +345,8 @@ public class ContainerUtilTest extends JDFTestCaseBase
 			v.add(Integer.valueOf(i % 2));
 		}
 		final SimpleMatch simpleMatch1 = new SimpleMatch(1);
-		Assertions.assertEquals(ContainerUtil.getMatches(simpleMatch1, v).size(), 5);
-		Assertions.assertEquals(ContainerUtil.getMatch(simpleMatch1, v, 0), Integer.valueOf(1));
+		assertEquals(ContainerUtil.getMatches(simpleMatch1, v).size(), 5);
+		assertEquals(ContainerUtil.getMatch(simpleMatch1, v, 0), Integer.valueOf(1));
 	}
 
 	/**
@@ -347,8 +361,8 @@ public class ContainerUtilTest extends JDFTestCaseBase
 			v.add(Integer.valueOf(i % 2));
 		}
 		final SimpleMatch simpleMatch1 = new SimpleMatch(1);
-		Assertions.assertEquals(ContainerUtil.getMatchesList(simpleMatch1, v).size(), 5);
-		Assertions.assertEquals(ContainerUtil.getMatch(simpleMatch1, v, 0), Integer.valueOf(1));
+		assertEquals(ContainerUtil.getMatchesList(simpleMatch1, v).size(), 5);
+		assertEquals(ContainerUtil.getMatch(simpleMatch1, v, 0), Integer.valueOf(1));
 	}
 
 	/**
@@ -359,10 +373,10 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	{
 		final String[] a = { "a", "b" };
 		final Set<String> s = ContainerUtil.toHashSet(a);
-		Assertions.assertTrue(s.contains("a"));
-		Assertions.assertTrue(s.contains("b"));
-		Assertions.assertFalse(s.contains("c"));
-		Assertions.assertEquals(s.size(), a.length);
+		assertTrue(s.contains("a"));
+		assertTrue(s.contains("b"));
+		assertFalse(s.contains("c"));
+		assertEquals(s.size(), a.length);
 	}
 
 	/**
@@ -373,10 +387,10 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	{
 		final String[] a = { "a", "b" };
 		final List<String> s = ContainerUtil.toArrayList(a);
-		Assertions.assertTrue(s.contains("a"));
-		Assertions.assertTrue(s.contains("b"));
-		Assertions.assertFalse(s.contains("c"));
-		Assertions.assertEquals(s.size(), a.length);
+		assertTrue(s.contains("a"));
+		assertTrue(s.contains("b"));
+		assertFalse(s.contains("c"));
+		assertEquals(s.size(), a.length);
 	}
 
 	/**
@@ -391,13 +405,13 @@ public class ContainerUtilTest extends JDFTestCaseBase
 			hm.put("" + i, "a" + i);
 		}
 		final Vector<String> v = ContainerUtil.toValueVector(hm, false);
-		Assertions.assertEquals(v.size(), 10);
+		assertEquals(v.size(), 10);
 		final Vector<String> vs = ContainerUtil.toValueVector(hm, true);
-		Assertions.assertTrue(vs.containsAll(v));
-		Assertions.assertTrue(v.containsAll(vs));
+		assertTrue(vs.containsAll(v));
+		assertTrue(v.containsAll(vs));
 		for (int i = 1; i < 10; i++)
 		{
-			Assertions.assertTrue(vs.get(i - 1).compareTo(vs.get(i)) < 0);
+			assertTrue(vs.get(i - 1).compareTo(vs.get(i)) < 0);
 		}
 	}
 
@@ -413,13 +427,13 @@ public class ContainerUtilTest extends JDFTestCaseBase
 			hm.put("" + i, "a" + i);
 		}
 		final List<String> v = ContainerUtil.toArrayList(hm, false);
-		Assertions.assertEquals(v.size(), 10);
+		assertEquals(v.size(), 10);
 		final List<String> vs = ContainerUtil.toArrayList(hm, true);
-		Assertions.assertTrue(vs.containsAll(v));
-		Assertions.assertTrue(v.containsAll(vs));
+		assertTrue(vs.containsAll(v));
+		assertTrue(v.containsAll(vs));
 		for (int i = 1; i < 10; i++)
 		{
-			Assertions.assertTrue(vs.get(i - 1).compareTo(vs.get(i)) < 0);
+			assertTrue(vs.get(i - 1).compareTo(vs.get(i)) < 0);
 		}
 	}
 
@@ -435,13 +449,13 @@ public class ContainerUtilTest extends JDFTestCaseBase
 			hm.put("" + i, "a" + i);
 		}
 		final Vector<String> v = ContainerUtil.getKeyVector(hm);
-		Assertions.assertEquals(v.size(), 10);
+		assertEquals(v.size(), 10);
 		final Vector<String> vs = ContainerUtil.getKeyVector(hm);
-		Assertions.assertTrue(vs.containsAll(v));
-		Assertions.assertTrue(v.containsAll(vs));
+		assertTrue(vs.containsAll(v));
+		assertTrue(v.containsAll(vs));
 		for (int i = 0; i < 10; i++)
 		{
-			Assertions.assertTrue(v.contains("" + i));
+			assertTrue(v.contains("" + i));
 		}
 	}
 
@@ -457,13 +471,13 @@ public class ContainerUtilTest extends JDFTestCaseBase
 			hm.put("" + i, "a" + i);
 		}
 		final Collection<String> v = ContainerUtil.getKeyArray(hm);
-		Assertions.assertEquals(v.size(), 10);
+		assertEquals(v.size(), 10);
 		final ArrayList<String> vs = (ArrayList<String>) ContainerUtil.getKeyArray(hm);
-		Assertions.assertTrue(vs.containsAll(v));
-		Assertions.assertTrue(v.containsAll(vs));
+		assertTrue(vs.containsAll(v));
+		assertTrue(v.containsAll(vs));
 		for (int i = 0; i < 10; i++)
 		{
-			Assertions.assertTrue(v.contains("" + i));
+			assertTrue(v.contains("" + i));
 		}
 	}
 
@@ -479,22 +493,22 @@ public class ContainerUtilTest extends JDFTestCaseBase
 			hm.put("" + i, "a" + i);
 		}
 		VectorMap<String, String> inv = ContainerUtil.getInvertedMap(hm);
-		Assertions.assertEquals(inv.size(), 10);
+		assertEquals(inv.size(), 10);
 		for (int i = 0; i < 10; i++)
 		{
-			Assertions.assertEquals(inv.getOne("a" + i, 0), "" + i);
+			assertEquals(inv.getOne("a" + i, 0), "" + i);
 		}
 		for (int i = 0; i < 10; i++)
 		{
 			hm.put("b" + i, "a" + i);
 		}
 		inv = ContainerUtil.getInvertedMap(hm);
-		Assertions.assertEquals(inv.size(), 10);
+		assertEquals(inv.size(), 10);
 		for (int i = 0; i < 10; i++)
 		{
-			Assertions.assertEquals(inv.get("a" + i).size(), 2);
-			Assertions.assertTrue(inv.get("a" + i).contains("b" + i));
-			Assertions.assertTrue(inv.get("a" + i).contains("" + i));
+			assertEquals(inv.get("a" + i).size(), 2);
+			assertTrue(inv.get("a" + i).contains("b" + i));
+			assertTrue(inv.get("a" + i).contains("" + i));
 		}
 	}
 
@@ -505,11 +519,11 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	public void testGetNonEmpty()
 	{
 		final Vector<String> v = new Vector<>();
-		Assertions.assertNull(ContainerUtil.getNonEmpty(v));
-		Assertions.assertNull(ContainerUtil.getNonEmpty((Map) null));
+		assertNull(ContainerUtil.getNonEmpty(v));
+		assertNull(ContainerUtil.getNonEmpty((Map) null));
 
 		v.add("a");
-		Assertions.assertEquals(v, ContainerUtil.getNonEmpty(v));
+		assertEquals(v, ContainerUtil.getNonEmpty(v));
 	}
 
 	/**
@@ -519,11 +533,11 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	public void testIsEmpty()
 	{
 		final Vector<String> v = new Vector<>();
-		Assertions.assertTrue(ContainerUtil.isEmpty(v));
-		Assertions.assertTrue(ContainerUtil.isEmpty((Map) null));
+		assertTrue(ContainerUtil.isEmpty(v));
+		assertTrue(ContainerUtil.isEmpty((Map) null));
 
 		v.add("a");
-		Assertions.assertFalse(ContainerUtil.isEmpty(v));
+		assertFalse(ContainerUtil.isEmpty(v));
 	}
 
 	/**
@@ -533,11 +547,11 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	public void testSize()
 	{
 		final JDFAttributeMap m = new JDFAttributeMap();
-		Assertions.assertEquals(0, ContainerUtil.size(m));
-		Assertions.assertEquals(0, ContainerUtil.size((List) null));
+		assertEquals(0, ContainerUtil.size(m));
+		assertEquals(0, ContainerUtil.size((List) null));
 
 		m.put("a", "b");
-		Assertions.assertEquals(1, ContainerUtil.size(m));
+		assertEquals(1, ContainerUtil.size(m));
 	}
 
 	/**
@@ -547,13 +561,13 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	public void testGetNonEmptyCollection()
 	{
 		final Vector<VString> v = new Vector<>();
-		Assertions.assertNull(ContainerUtil.getNonEmptyCollection(v));
-		Assertions.assertNull(ContainerUtil.getNonEmptyCollection(null));
+		assertNull(ContainerUtil.getNonEmptyCollection(v));
+		assertNull(ContainerUtil.getNonEmptyCollection(null));
 
 		v.add(new VString());
-		Assertions.assertNull(ContainerUtil.getNonEmptyCollection(v));
+		assertNull(ContainerUtil.getNonEmptyCollection(v));
 		v.add(new VString());
-		Assertions.assertEquals(v, ContainerUtil.getNonEmptyCollection(v));
+		assertEquals(v, ContainerUtil.getNonEmptyCollection(v));
 	}
 
 	/**
@@ -577,7 +591,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		}
 
 		ContainerUtil.unify(v);
-		Assertions.assertEquals(v, v2);
+		assertEquals(v, v2);
 	}
 
 	/**
@@ -588,10 +602,10 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	{
 		final VString v = new VString();
 		ContainerUtil.ensureSize(4, v);
-		Assertions.assertEquals(v.size(), 4);
+		assertEquals(v.size(), 4);
 		v.set(2, "foo");
-		Assertions.assertEquals(v.get(2), "foo");
-		Assertions.assertNull(v.get(0));
+		assertEquals(v.get(2), "foo");
+		assertNull(v.get(0));
 	}
 
 	/**
@@ -600,12 +614,12 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	@Test
 	public void testCompare()
 	{
-		Assertions.assertEquals(ContainerUtil.compare("1", "0"), 1);
-		Assertions.assertEquals(ContainerUtil.compare("1", "1"), 0);
-		Assertions.assertEquals(ContainerUtil.compare("1", "2"), -1);
-		Assertions.assertEquals(ContainerUtil.compare("1", null), 1);
-		Assertions.assertEquals(ContainerUtil.compare(null, "2"), -1);
-		Assertions.assertEquals(ContainerUtil.compare(null, null), 0);
+		assertEquals(ContainerUtil.compare("1", "0"), 1);
+		assertEquals(ContainerUtil.compare("1", "1"), 0);
+		assertEquals(ContainerUtil.compare("1", "2"), -1);
+		assertEquals(ContainerUtil.compare("1", null), 1);
+		assertEquals(ContainerUtil.compare(null, "2"), -1);
+		assertEquals(ContainerUtil.compare(null, null), 0);
 	}
 
 	/**
@@ -614,11 +628,11 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	@Test
 	public void testContains()
 	{
-		Assertions.assertFalse(ContainerUtil.contains(null, null));
-		Assertions.assertFalse(ContainerUtil.contains(null, "a"));
-		Assertions.assertFalse(ContainerUtil.contains(new VString("a"), null));
-		Assertions.assertFalse(ContainerUtil.contains(new VString("a b"), "f"));
-		Assertions.assertTrue(ContainerUtil.contains(new VString("a b c d"), "c"));
+		assertFalse(ContainerUtil.contains(null, null));
+		assertFalse(ContainerUtil.contains(null, "a"));
+		assertFalse(ContainerUtil.contains(new VString("a"), null));
+		assertFalse(ContainerUtil.contains(new VString("a b"), "f"));
+		assertTrue(ContainerUtil.contains(new VString("a b c d"), "c"));
 	}
 
 	/**
@@ -627,11 +641,11 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	@Test
 	public void testContainsAll()
 	{
-		Assertions.assertTrue(ContainerUtil.containsAll(null, null));
-		Assertions.assertFalse(ContainerUtil.containsAll(null, new VString("a")));
-		Assertions.assertTrue(ContainerUtil.containsAll(new VString("a"), null));
-		Assertions.assertFalse(ContainerUtil.containsAll(new VString("a b"), new VString("a b c")));
-		Assertions.assertTrue(ContainerUtil.containsAll(new VString("a b c d"), new VString("a b c")));
+		assertTrue(ContainerUtil.containsAll(null, null));
+		assertFalse(ContainerUtil.containsAll(null, new VString("a")));
+		assertTrue(ContainerUtil.containsAll(new VString("a"), null));
+		assertFalse(ContainerUtil.containsAll(new VString("a b"), new VString("a b c")));
+		assertTrue(ContainerUtil.containsAll(new VString("a b c d"), new VString("a b c")));
 	}
 
 	/**
@@ -640,10 +654,10 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	@Test
 	public void testContainsAny()
 	{
-		Assertions.assertTrue(ContainerUtil.containsAny(null, null));
-		Assertions.assertFalse(ContainerUtil.containsAny(null, new VString("a")));
-		Assertions.assertTrue(ContainerUtil.containsAny(new VString("a"), null));
-		Assertions.assertTrue(ContainerUtil.containsAny(new VString("a b"), new VString("a")));
-		Assertions.assertTrue(ContainerUtil.containsAny(new VString("a b"), new VString("a")));
+		assertTrue(ContainerUtil.containsAny(null, null));
+		assertFalse(ContainerUtil.containsAny(null, new VString("a")));
+		assertTrue(ContainerUtil.containsAny(new VString("a"), null));
+		assertTrue(ContainerUtil.containsAny(new VString("a b"), new VString("a")));
+		assertTrue(ContainerUtil.containsAny(new VString("a b"), new VString("a")));
 	}
 }

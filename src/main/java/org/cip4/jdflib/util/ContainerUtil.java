@@ -333,7 +333,7 @@ public class ContainerUtil
 	 *
 	 * @param strings the array of strings to append to <code>this</code>
 	 */
-	public static <A> void addAll(final Collection<A> c, final A[] a)
+	public static <A> Collection<A> addAll(final Collection<A> c, final A[] a)
 	{
 		if (a != null && c != null)
 		{
@@ -343,6 +343,7 @@ public class ContainerUtil
 					c.add(aa);
 			}
 		}
+		return c;
 	}
 
 	/**
@@ -350,10 +351,11 @@ public class ContainerUtil
 	 *
 	 * @param strings the array of strings to append to <code>this</code>
 	 */
-	public static <A> void add(final Collection<A> c, final A a)
+	public static <A> Collection<A> add(final Collection<A> c, final A a)
 	{
 		if (c != null && a != null)
 			c.add(a);
+		return c;
 	}
 
 	/**
@@ -749,12 +751,13 @@ public class ContainerUtil
 	 *
 	 * @param a the A to append, if null nothing is added
 	 */
-	public static <A> void appendUnique(final Collection<A> c, final A a)
+	public static <A> Collection<A> appendUnique(final Collection<A> c, final A a)
 	{
 		if (a != null && !c.contains(a))
 		{
 			c.add(a);
 		}
+		return c;
 	}
 
 	/**
