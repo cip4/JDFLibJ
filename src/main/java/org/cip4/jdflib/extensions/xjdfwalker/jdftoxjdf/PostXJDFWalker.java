@@ -940,9 +940,12 @@ class PostXJDFWalker extends BaseElementWalker
 			for (ResourceHelper rh : partitionList)
 			{
 				JDFDeliveryParams dp = (JDFDeliveryParams) rh.getResource();
+				int i = 0;
 				for (JDFDrop drop : dp.getAllDrop())
 				{
 					String dropid = drop.getDropID();
+					if (StringUtil.isEmpty(dropid))
+						dropid = "DROP_" + i++;
 					ResourceHelper rh2 = StringUtil.isEmpty(dropid) ? sh.getCreateExactPartition(null, false)
 							: sh.getCreateExactPartition(new JDFAttributeMap(AttributeName.DROPID, dropid), false);
 					JDFDeliveryParams dp2 = (JDFDeliveryParams) rh2.getResource();
