@@ -46,6 +46,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.ContainerUtil;
 
 /**
@@ -367,9 +368,10 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 * @param nodeName
+	 * copy the helper src into this
+	 * 
+	 * @param src
 	 * @return
-	 * @see org.cip4.jdflib.core.KElement#getCreateElement(java.lang.String)
 	 */
 	public KElement copyHelper(final BaseXJDFHelper src)
 	{
@@ -475,6 +477,16 @@ public abstract class BaseXJDFHelper
 	public String getDescriptiveName()
 	{
 		return getAttribute(AttributeName.DESCRIPTIVENAME);
+	}
+
+	public JDFAttributeMap getAttributeMap()
+	{
+		return theElement == null ? null : theElement.getAttributeMap();
+	}
+
+	public KElement appendElement(String elementName, String nameSpaceURI)
+	{
+		return theElement == null ? null : theElement.appendElement(elementName, nameSpaceURI);
 	}
 
 }

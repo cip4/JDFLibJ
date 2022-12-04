@@ -165,6 +165,18 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetAttributeMap()
+	{
+		Assertions.assertNull(theHelper.getAttribute("foo"));
+		theHelper.setAttribute("foo", "bar");
+		assertEquals("bar", theHelper.getAttributeMap().get("foo"));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testGetLocalName()
 	{
 		assertEquals(XJDFConstants.XJDF, theHelper.getLocalName());
