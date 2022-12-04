@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,6 +36,11 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -49,7 +54,6 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.resource.JDFNotification;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -76,7 +80,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
 		final JDFSubscription sub = mh.subscribe("http://foo");
-		Assertions.assertNotNull(sub);
+		assertNotNull(sub);
 		writeRoundTripX(xjmfHelper.theElement, "subscribe.xjmf", EnumValidationLevel.Complete);
 	}
 
@@ -94,8 +98,8 @@ public class MessageHelperTest extends JDFTestCaseBase
 		final MessageHelper ah = new MessageHelper(resp);
 		final KElement header = resp.appendElement(XJDFConstants.Header);
 		ah.cleanUp();
-		Assertions.assertEquals(not.getNextSiblingElement(), ms);
-		Assertions.assertEquals(header.getNextSiblingElement(), not);
+		assertEquals(not.getNextSiblingElement(), ms);
+		assertEquals(header.getNextSiblingElement(), not);
 	}
 
 	/**
@@ -111,8 +115,8 @@ public class MessageHelperTest extends JDFTestCaseBase
 		final MessageHelper ah = new MessageHelper(resp);
 		final KElement header = resp.appendElement(XJDFConstants.Header);
 		ah.cleanUp();
-		Assertions.assertEquals(sub.getNextSiblingElement(), ms);
-		Assertions.assertEquals(header.getNextSiblingElement(), sub);
+		assertEquals(sub.getNextSiblingElement(), ms);
+		assertEquals(header.getNextSiblingElement(), sub);
 	}
 
 	/**
@@ -123,9 +127,9 @@ public class MessageHelperTest extends JDFTestCaseBase
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
-		Assertions.assertTrue(mh.isQuery());
+		assertTrue(mh.isQuery());
 		mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
-		Assertions.assertFalse(mh.isQuery());
+		assertFalse(mh.isQuery());
 	}
 
 	/**
@@ -136,9 +140,9 @@ public class MessageHelperTest extends JDFTestCaseBase
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
-		Assertions.assertTrue(mh.isCommand());
+		assertTrue(mh.isCommand());
 		mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
-		Assertions.assertFalse(mh.isCommand());
+		assertFalse(mh.isCommand());
 	}
 
 	/**
@@ -149,9 +153,24 @@ public class MessageHelperTest extends JDFTestCaseBase
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
-		Assertions.assertEquals(EFamily.Command, mh.getEFamily());
+		assertEquals(EFamily.Command, mh.getEFamily());
 		mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
-		Assertions.assertEquals(EFamily.Signal, mh.getEFamily());
+		assertEquals(EFamily.Signal, mh.getEFamily());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetFamilyEnum()
+	{
+		for (EFamily f : EFamily.values())
+		{
+			assertEquals(f, EFamily.getEnum(f.name().toLowerCase()));
+			assertEquals(f, EFamily.getEnum(f.name()));
+		}
+		assertEquals(null, EFamily.getEnum(null));
+		assertEquals(null, EFamily.getEnum("abc"));
 	}
 
 	/**
@@ -162,7 +181,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
-		Assertions.assertEquals(EnumType.Status.getName(), mh.getType());
+		assertEquals(EnumType.Status.getName(), mh.getType());
 	}
 
 	/**
@@ -173,9 +192,9 @@ public class MessageHelperTest extends JDFTestCaseBase
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
-		Assertions.assertTrue(mh.isSignal());
+		assertTrue(mh.isSignal());
 		mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
-		Assertions.assertFalse(mh.isSignal());
+		assertFalse(mh.isSignal());
 	}
 
 	/**
@@ -186,7 +205,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
-		Assertions.assertTrue(MessageHelper.isMessage(mh.getRoot()));
+		assertTrue(MessageHelper.isMessage(mh.getRoot()));
 	}
 
 	/**
@@ -196,7 +215,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	public void testIsMessageForeign()
 	{
 		final XMLDoc d = new XMLDoc("foo:CommandBar", "foo");
-		Assertions.assertTrue(MessageHelper.isMessage(d.getRoot()));
+		assertTrue(MessageHelper.isMessage(d.getRoot()));
 	}
 
 	/**
@@ -206,7 +225,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	public void testFamilyMessageForeign()
 	{
 		final XMLDoc d = new XMLDoc("foo:CommandBar", "foo");
-		Assertions.assertEquals(EFamily.Command, new MessageHelper(d.getRoot()).getEFamily());
+		assertEquals(EFamily.Command, new MessageHelper(d.getRoot()).getEFamily());
 	}
 
 	/**
@@ -217,9 +236,9 @@ public class MessageHelperTest extends JDFTestCaseBase
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
-		Assertions.assertTrue(mh.isResponse());
+		assertTrue(mh.isResponse());
 		mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
-		Assertions.assertFalse(mh.isResponse());
+		assertFalse(mh.isResponse());
 	}
 
 	/**
@@ -230,9 +249,9 @@ public class MessageHelperTest extends JDFTestCaseBase
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
-		Assertions.assertEquals(0, mh.getReturnCode());
+		assertEquals(0, mh.getReturnCode());
 		mh.setAttribute(AttributeName.RETURNCODE, "6");
-		Assertions.assertEquals(6, mh.getReturnCode());
+		assertEquals(6, mh.getReturnCode());
 	}
 
 	/**
@@ -244,7 +263,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
 		mh.getHeader().setAttribute(AttributeName.DEVICEID, "d");
-		Assertions.assertEquals("d", mh.getDeviceID());
+		assertEquals("d", mh.getDeviceID());
 	}
 
 	/**
@@ -257,7 +276,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
 		final MessageHelper mhc = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
 		mh.setQuery(mhc);
-		Assertions.assertEquals(mhc.getHeader().getID(), mh.getHeader().getAttribute(AttributeName.REFID));
+		assertEquals(mhc.getHeader().getID(), mh.getHeader().getAttribute(AttributeName.REFID));
 		writeRoundTripX(xjmfHelper.theElement, "setQuery.xjmf", EnumValidationLevel.Complete);
 	}
 
@@ -273,7 +292,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 
 		final MessageHelper mhc = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
 		mh.setQuery(mhc);
-		Assertions.assertEquals(mhc.getHeader().getID(), mh.getHeader().getAttribute(AttributeName.REFID));
+		assertEquals(mhc.getHeader().getID(), mh.getHeader().getAttribute(AttributeName.REFID));
 		writeRoundTripX(xjmfHelper.theElement, "setQuerySignal.xjmf", EnumValidationLevel.Complete);
 	}
 
