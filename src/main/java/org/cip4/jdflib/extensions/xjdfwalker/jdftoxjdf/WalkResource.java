@@ -172,6 +172,7 @@ public class WalkResource extends WalkJDFElement
 	{
 		newResLeaf.removeAttributes(r.getPartIDKeys());
 		newResLeaf.removeAttribute(AttributeName.PARTIDKEYS);
+		newResLeaf.removeAttribute(AttributeName.PARTUSAGE);
 		newResLeaf.removeAttribute(AttributeName.CLASS);
 		newResLeaf.removeAttribute(AttributeName.LOCKED);
 		newResLeaf.removeAttribute(AttributeName.SPAWNIDS);

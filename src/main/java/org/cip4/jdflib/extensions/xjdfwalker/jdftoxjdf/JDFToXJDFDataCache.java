@@ -176,13 +176,13 @@ class JDFToXJDFDataCache
 	 */
 	private List<String> generateResourceAttributes()
 	{
-		VString ra = new VString();
+		StringArray ra = new StringArray();
 		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc(ElementName.RESOURCEPOOL).getRoot();
 		final JDFResource intRes = dummyResPool.appendResource("intent", EnumResourceClass.Intent, null);
 		final JDFResource physRes = dummyResPool.appendResource("physical", EnumResourceClass.Consumable, null);
 		final JDFResource paramRes = dummyResPool.appendResource("param", EnumResourceClass.Parameter, null);
 		final JDFPart part = (JDFPart) dummyResPool.appendElement(ElementName.PART);
-		ra = paramRes.knownAttributes();
+		ra.addAll(paramRes.knownAttributes());
 		ra.appendUnique(physRes.knownAttributes());
 		ra.appendUnique(intRes.knownAttributes());
 		ra.appendUnique(part.knownAttributes());

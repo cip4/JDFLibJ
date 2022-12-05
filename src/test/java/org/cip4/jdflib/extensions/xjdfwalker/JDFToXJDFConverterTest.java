@@ -1696,6 +1696,52 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		XJDFHelper h = new XJDFHelper(xjdf);
 		SetHelper s = h.getSet(ElementName.DIGITALPRINTINGPARAMS, 0);
 		assertEquals(2, s.getPartitionList().size());
+		assertNull(s.getPartition(0).getAttribute(AttributeName.PARTUSAGE));
+		assertNull(s.getPartition(1).getAttribute(AttributeName.PARTUSAGE));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testPartUsagePartsImplicitRoot()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFResource dpp = n.addResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
+		dpp.setPartUsage(EnumPartUsage.Implicit);
+		dpp.setDescriptiveName("root");
+		final JDFResource dpp1 = dpp.addPartition(EnumPartIDKey.RunIndex, "1");
+		dpp1.setDescriptiveName("d1");
+		final JDFResource dpp2 = dpp.addPartition(EnumPartIDKey.RunIndex, "2");
+		dpp2.setDescriptiveName("d2");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		final XJDFHelper h = new XJDFHelper(xjdf);
+		final SetHelper s = h.getSet(ElementName.DIGITALPRINTINGPARAMS, 0);
+		assertEquals(3, s.getPartitionList().size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testPartUsagePartsImplicitRootRetain()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFResource dpp = n.addResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
+		dpp.setPartUsage(EnumPartUsage.Implicit);
+		final JDFResource dpp1 = dpp.addPartition(EnumPartIDKey.RunIndex, "1");
+		dpp1.setDescriptiveName("d1");
+		final JDFResource dpp2 = dpp.addPartition(EnumPartIDKey.RunIndex, "2");
+		dpp2.setDescriptiveName("d2");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		conv.setRetainAll(true);
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		final XJDFHelper h = new XJDFHelper(xjdf);
+		final SetHelper s = h.getSet(ElementName.DIGITALPRINTINGPARAMS, 0);
+		assertEquals(2, s.getPartitionList().size());
 	}
 
 	/**
