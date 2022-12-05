@@ -1748,6 +1748,30 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testPartUsagePartsImplicitRootWantImplicitNot()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFResource dpp = n.addResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
+		dpp.setPartUsage(EnumPartUsage.Implicit);
+		dpp.setDescriptiveName("boo");
+		final JDFResource dpp1 = dpp.addPartition(EnumPartIDKey.RunIndex, "1");
+		dpp1.setDescriptiveName("d1");
+		final JDFResource dpp2 = dpp.addPartition(EnumPartIDKey.RunIndex, "2");
+		dpp2.setDescriptiveName("d2");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		conv.setRetainAll(true);
+		conv.setwantImplicit(false);
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		final XJDFHelper h = new XJDFHelper(xjdf);
+		final SetHelper s = h.getSet(ElementName.DIGITALPRINTINGPARAMS, 0);
+		assertEquals(2, s.getPartitionList().size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testResUnit()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();

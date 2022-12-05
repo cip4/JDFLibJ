@@ -113,6 +113,7 @@ public class JDFToXJDF extends PackageElementWalker
 		completedRefs = new HashMap<>();
 		wantDependent = true;
 		newVersion = getDefaultVersion();
+		wantImplicit = true;
 	}
 
 	/**
@@ -1107,5 +1108,17 @@ public class JDFToXJDF extends PackageElementWalker
 				+ ", bParameterSet=" + bParameterSet + ", wantProduct=" + wantProduct + ", componentProductMap=" + componentProductMap + ", resourceAlias=" + resourceAlias
 				+ ", bHTMLColor=" + bHTMLColor + ", bConvertTilde=" + bConvertTilde + ", rootID=" + rootID + ", removeSignatureName=" + removeSignatureName + ", processPartition="
 				+ processPartition + ", wantDependent=" + wantDependent + ", newVersion=" + newVersion + "]";
+	}
+
+	boolean wantImplicit;
+
+	public boolean wantImplicit()
+	{
+		return wantImplicit;
+	}
+
+	public void setwantImplicit(boolean wantImplicit)
+	{
+		this.wantImplicit = wantImplicit;
 	}
 }
