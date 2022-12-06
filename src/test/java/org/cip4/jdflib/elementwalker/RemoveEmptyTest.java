@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,10 +36,19 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
-import org.cip4.jdflib.core.*;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -49,7 +58,6 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFContact;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -83,9 +91,9 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 		final KElement root = d.getRoot();
 		root.setXPathAttribute("foo/@bar", "");
 		final RemoveEmpty emp = new RemoveEmpty();
-		Assertions.assertNotNull(root.getXPathAttribute("foo/@bar", null));
+		assertNotNull(root.getXPathAttribute("foo/@bar", null));
 		emp.removEmptyAttributes(root);
-		Assertions.assertNull(root.getXPathAttribute("foo/@bar", null));
+		assertNull(root.getXPathAttribute("foo/@bar", null));
 		d.write2File(sm_dirTestDataTemp + "expty.xml", 2, false);
 	}
 
@@ -98,10 +106,11 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
-		n.addResource(ElementName.LAYOUT, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side, "Front");
+		n.addResource(ElementName.LAYOUT, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "s1")
+				.addPartition(EnumPartIDKey.Side, "Front");
 		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
-		Assertions.assertFalse(n.toXML().contains(ElementName.LAYOUT));
+		assertFalse(n.toXML().contains(ElementName.LAYOUT));
 	}
 
 	/**
@@ -119,7 +128,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 		xm.refElement(m);
 		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
-		Assertions.assertEquals(n.getResource(ElementName.MEDIA, EnumUsage.Input, 0), m);
+		assertEquals(n.getResource(ElementName.MEDIA, EnumUsage.Input, 0), m);
 	}
 
 	/**
@@ -131,11 +140,11 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
-		n.addResource(ElementName.LAYOUT, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side, "Front")
-				.appendXMLComment("foo", null);
+		n.addResource(ElementName.LAYOUT, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "s1")
+				.addPartition(EnumPartIDKey.Side, "Front").appendXMLComment("foo", null);
 		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
-		Assertions.assertTrue(n.toXML().contains(ElementName.LAYOUT));
+		assertTrue(n.toXML().contains(ElementName.LAYOUT));
 	}
 
 	/**
@@ -150,7 +159,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 		n.appendComment();
 		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
-		Assertions.assertFalse(n.toXML().contains(ElementName.COMMENT));
+		assertFalse(n.toXML().contains(ElementName.COMMENT));
 	}
 
 	/**
@@ -167,7 +176,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
 		final JDFStrippingParams sp2 = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
-		Assertions.assertNotNull(sp2.getPosition(0));
+		assertNotNull(sp2.getPosition(0));
 	}
 
 	/**
@@ -180,7 +189,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
 		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmptyElement(jmf);
-		Assertions.assertNotNull(jmf.getResponse(0));
+		assertNotNull(jmf.getResponse(0));
 	}
 
 	/**
@@ -196,7 +205,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 		n.appendElement("foo");
 		final ExtendedRemoveEmpty emp = new ExtendedRemoveEmpty();
 		emp.removEmpty(n);
-		Assertions.assertFalse(n.toXML().contains("<foo"));
+		assertFalse(n.toXML().contains("<foo"));
 	}
 
 	/**
@@ -214,6 +223,6 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 		c.setChannelType(EnumChannelType.Email);
 		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
-		Assertions.assertFalse(n.toXML().contains(ElementName.COMCHANNEL));
+		assertFalse(n.toXML().contains(ElementName.COMCHANNEL));
 	}
 }

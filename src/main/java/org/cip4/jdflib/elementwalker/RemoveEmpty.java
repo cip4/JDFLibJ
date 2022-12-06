@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,6 +41,7 @@ package org.cip4.jdflib.elementwalker;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -71,7 +72,7 @@ public class RemoveEmpty extends BaseElementWalker
 {
 	boolean zappElements;
 	final JDFPart part;
-	final VString ignoreElements;
+	final Collection<String> ignoreElements;
 	LinkRefFinder rf;
 
 	/**
@@ -80,7 +81,7 @@ public class RemoveEmpty extends BaseElementWalker
 	public RemoveEmpty()
 	{
 		super(new BaseWalkerFactory());
-		ignoreElements = new VString();
+		ignoreElements = new HashSet<>();
 		addIgnoreElement(ElementName.POSITION);
 		zappElements = true;
 		part = (JDFPart) new JDFDoc(ElementName.PART).getRoot();

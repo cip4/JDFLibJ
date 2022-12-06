@@ -40,147 +40,92 @@
 package org.cip4.jdflib.elementwalker;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.util.MyPair;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
- *         walker that removes generated attributes for better comparison
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG<br/>
+ *         removes any empty or unlinked resources
+ *
  */
-public class XMLCompareWalker extends BaseElementWalker
+public class RemoveCompare extends BaseElementWalker
 {
-	final Map<String, MyPair<String, String>> theMap;
-	private boolean first;
-	private double precision;
+	final Collection<String> removeAttributes;
 
 	/**
-	 * @param precision the precision delta to set
+	 *
 	 */
-	public void setPrecision(final double precision)
+	public RemoveCompare()
 	{
-		this.precision = precision;
-	}
-
-	/**
-	 * @param e
-	 * @return the number of xpaths
-	 */
-	public Map<String, MyPair<String, String>> compare()
-	{
-		theMap.clear();
-		first = true;
-		walkTree(e1, e2);
-		first = false;
-		walkTree(e2, e1);
-		return theMap;
-	}
-
-	private int method;
-	private final KElement e2;
-	private final KElement e1;
-	private final Set<String> ignore;
-	private final Set<String> ignoreValue;
-
-	public static XMLCompareWalker getStandardWalker(final KElement e1, final KElement e2)
-	{
-		XMLCompareWalker xmlCompareWalker = new XMLCompareWalker(e1, e2);
-		xmlCompareWalker.setStandard();
-		return xmlCompareWalker;
+		super(new BaseWalkerFactory());
+		removeAttributes = new HashSet<>();
+		new BaseWalker(getFactory()); // need a default walker
 	}
 
 	public void setStandard()
 	{
-		addIgnore(AttributeName.ID, true);
-		addIgnore(AttributeName.RREF, true);
-		addIgnore(AttributeName.TIMESTAMP, true);
-		addIgnore(AttributeName.AGENTVERSION, true);
+		addRemoveAttribute(AttributeName.ID);
+		addRemoveAttribute(AttributeName.RREF);
+		addRemoveAttribute(AttributeName.TIMESTAMP);
+		addRemoveAttribute(AttributeName.AGENTVERSION);
 	}
 
-	/**
-	 * @param w
-	 */
-	public XMLCompareWalker(final KElement e1, final KElement e2)
+	public void addRemoveAttribute(final String name)
 	{
-		super(new BaseWalkerFactory());
-		theMap = new HashMap<>();
-		method = 1;
-		this.e1 = e1;
-		this.e2 = e2;
-		precision = -1;
-		ignore = new HashSet<>();
-		ignoreValue = new HashSet<>();
+		removeAttributes.add(name);
 	}
 
 	/**
-	 * the link and ref walker
+	 *
+	 *
+	 * @param e
+	 */
+	public void cleanup(final KElement e)
+	{
+		walkTree(e, null);
+	}
+
+	/**
+	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
 	 *
 	 * @author prosirai
 	 *
 	 */
-	public class WalkAll extends BaseWalker
+	public class WalkElement extends BaseWalker
 	{
+
 		/**
 		 * fills this into the factory
 		 */
-		public WalkAll()
+		public WalkElement()
 		{
 			super(getFactory());
 		}
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e
-		 * @param trackElem
-		 * @return
+		 * @param e1 - the element to track
+		 * @param trackElem - always null
+		 * @return the element to continue walking
 		 */
 		@Override
-		public KElement walk(final KElement e, final KElement trackElem)
+		public KElement walk(final KElement e1, final KElement trackElem)
 		{
-			final String myPath = e.buildRelativeXPath(e.getParentNode_KElement(), method);
-			final KElement eNew = trackElem == null ? null : trackElem.getXPathElement(myPath);
-			final VString keys = e.getAttributeVector();
-			for (final String key : keys)
+			final JDFAttributeMap map = e1.getAttributeMap_KElement();
+			final Set<String> allKeys = map.keySet();
+			for (final String key : allKeys)
 			{
-				final MyPair<String, String> diff = myCompare(key, e.getAttribute(key), eNew == null ? null : eNew.getNonEmpty(key));
-				if (diff != null)
+				if (StringUtil.isEmpty(map.get(key)) || removeAttributes.contains(key))
 				{
-					final String ret = e.buildRelativeXPath((first ? e1.getParentNode_KElement() : eNew.getParentNode_KElement()), method) + "/@" + key;
-					theMap.put(ret, diff);
+					e1.removeAttribute(key);
 				}
 			}
-			return eNew;
-		}
-
-		MyPair<String, String> myCompare(final String key, final String attribute, final String attribute2)
-		{
-			if (wantKey(key))
-			{
-				final boolean ok = wantValue(key) ? StringUtil.equals(attribute, attribute2, precision) : StringUtil.isEmpty(attribute) == StringUtil.isEmpty(attribute2);
-				if (!ok)
-				{
-					return first ? new MyPair<>(attribute, attribute2) : new MyPair<>(attribute2, attribute);
-				}
-			}
-			return null;
-		}
-
-		boolean wantKey(final String key)
-		{
-			return !ignore.contains(key);
-		}
-
-		boolean wantValue(final String key)
-		{
-			return !ignoreValue.contains(key);
+			return e1;
 		}
 
 		/**
@@ -192,44 +137,6 @@ public class XMLCompareWalker extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return true;
-		}
-	}
-
-	/**
-	 * @param method the method to set
-	 */
-	public void setMethod(final int method)
-	{
-		this.method = method;
-	}
-
-	/**
-	 *
-	 * @param keys
-	 * @param valueOnly
-	 */
-	public void addIgnore(final Collection<String> keys, final boolean valueOnly)
-	{
-		if (keys != null)
-		{
-			for (final String key : keys)
-				addIgnore(key, valueOnly);
-		}
-	}
-
-	/**
-	 *
-	 * @param key
-	 * @param valueOnly
-	 */
-	public void addIgnore(final String key, final boolean valueOnly)
-	{
-		if (!StringUtil.isEmpty(key))
-		{
-			if (valueOnly)
-				ignoreValue.add(key);
-			else
-				ignore.add(key);
 		}
 	}
 
