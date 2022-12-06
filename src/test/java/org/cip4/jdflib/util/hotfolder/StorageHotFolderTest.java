@@ -38,6 +38,7 @@ package org.cip4.jdflib.util.hotfolder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -339,6 +340,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		ThreadUtil.sleep(1000);
 		assertTrue(file.exists());
 		hf.addListener(new CountListener(), ".txt");
+		assertNotNull(hf.getListener(1));
 		for (int i = 0; i < 100; i++)
 		{
 			ThreadUtil.sleep(200);
