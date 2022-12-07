@@ -117,7 +117,7 @@ public class WalkDeliveryIntent extends WalkResource
 	@Override
 	protected String getClassName(final JDFResource r)
 	{
-		return XJDFConstants.Resource;
+		return (jdfToXJDF.wantProduct) ? XJDFConstants.Resource : null;
 	}
 
 	/**

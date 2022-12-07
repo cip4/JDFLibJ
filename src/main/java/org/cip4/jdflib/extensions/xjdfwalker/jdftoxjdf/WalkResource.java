@@ -212,7 +212,7 @@ public class WalkResource extends WalkJDFElement
 		}
 		else if (resourceClass.equals(EnumResourceClass.Intent))
 		{
-			className = resourceClass.getName();
+			className = (jdfToXJDF.wantProduct) ? resourceClass.getName() : null;
 		}
 		else if (resourceClass.equals(EnumResourceClass.PlaceHolder))
 		{
