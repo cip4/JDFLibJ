@@ -1013,6 +1013,16 @@ public class JDFResource extends JDFElement
 		}
 
 		/**
+		 * @see java.lang.Object#toString()
+		 * 
+		 */
+		@Override
+		public String toString()
+		{
+			return getName();
+		}
+
+		/**
 		 * @param enumName
 		 * @return
 		 */
