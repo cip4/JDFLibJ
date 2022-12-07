@@ -460,20 +460,23 @@ public class WalkJDFElement extends WalkElement
 	{
 		final List<KElement> v = new ArrayList<>();
 		SetHelper setHelper = new SetHelper(resourceSet);
+		int currentLeaves = nLeaves;
 		for (final KElement e : vRes)
 		{
 			final JDFResource r = (JDFResource) e;
 			final List<JDFResource> vLeaves = r.getLeafArray(checkAllLeaves(r));
-			for (final KElement eLeaf : vLeaves)
+			for (final JDFResource leaf : vLeaves)
 			{
-				final JDFResource leaf = (JDFResource) eLeaf;
+				if (AttributeName.SIGNATURENAME.equals(leaf.getLocalPartitionKey()))
+					continue;
 				final KElement newBaseRes = setBaseResource(rl, leaf, setHelper);
 				if (newBaseRes != null)
 				{
 					final int nn = resourceSet.numChildElements_KElement(className, null);
-					if (nn > nLeaves)
+					if (nn > currentLeaves)
 					{
 						jdfToXJDF.walkTree(leaf, newBaseRes);
+						currentLeaves = nn;
 					}
 					v.add(newBaseRes);
 				}

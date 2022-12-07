@@ -44,6 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.zip.DataFormatException;
 
@@ -167,6 +168,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.cip4.jdflib.span.JDFSpanScreeningType.EnumSpanScreeningType;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.JDFDate;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -1658,6 +1660,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFNodeInfo ni = n.getCreateNodeInfo();
+		ni.setNodeStatus(EnumNodeStatus.Waiting);
 		final JDFEmployee emp = ni.appendEmployee();
 		final VString roles = new VString("ShiftLeader TelephoneSanitizer", null);
 		emp.setRoles(roles);
@@ -1667,6 +1670,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Part/@ContactType", null), ElementName.EMPLOYEE);
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/@ContactTypeDetails", null), "ShiftLeader TelephoneSanitizer CSR");
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/@ExternalID", null), "P1");
+		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"NodeInfo\"]/Resource/NodeInfo/@ContactRef", null));
 
 		final XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		final JDFDoc d = invert.convert(xjdf);
@@ -1676,6 +1680,31 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFEmployee emp2 = n.getNodeInfo().getEmployee();
 		assertEquals(emp2.getPersonalID(), "P1");
 		assertEquals(emp2.getRoles(), roles);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testNodeInfoPartition()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFNodeInfo ni = n.getCreateNodeInfo();
+		ni.setStart(new JDFDate());
+		JDFNodeInfo nis = (JDFNodeInfo) ni.addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "S1");
+		ni.setNodeStatus(EnumNodeStatus.Waiting);
+		nis.setEnd(new JDFDate());
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		SetHelper niSet = XJDFHelper.getHelper(xjdf).getNodeInfo();
+		List<ResourceHelper> partitionList = niSet.getPartitionList();
+		assertEquals(2, partitionList.size());
+		for (ResourceHelper rh : partitionList)
+		{
+			assertNotNull(rh.getRoot().getElement(ElementName.NODEINFO, null, 0));
+			assertNull(rh.getRoot().getElement(ElementName.NODEINFO, null, 1));
+		}
 	}
 
 	/**

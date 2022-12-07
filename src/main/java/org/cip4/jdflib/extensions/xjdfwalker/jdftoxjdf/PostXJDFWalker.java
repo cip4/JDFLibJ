@@ -2626,8 +2626,8 @@ class PostXJDFWalker extends BaseElementWalker
 		 */
 		private JDFAttributeMap mergeStrippingParamsLayout(final JDFStrippingParams strippingParams, final SetHelper layoutseth, final VJDFAttributeMap layoutMaps)
 		{
-			final JDFAttributeMap layoutMap = VJDFAttributeMap.isEmpty(layoutMaps) ? null : layoutMaps.get(0);
-			if (isRemoveSignatureName() && layoutMap != null)
+			final JDFAttributeMap layoutMap = VJDFAttributeMap.isEmpty(layoutMaps) ? new JDFAttributeMap() : layoutMaps.get(0);
+			if (isRemoveSignatureName())
 			{
 				layoutMap.remove(AttributeName.SIGNATURENAME);
 			}
@@ -2641,7 +2641,7 @@ class PostXJDFWalker extends BaseElementWalker
 				bsID = getBSID(strippingParams, bsName);
 				newBSID = getNewBSID(bsID, layoutseth);
 			}
-			final String cellIndex = layoutMap == null ? null : layoutMap.remove(AttributeName.CELLINDEX);
+			final String cellIndex = layoutMap.remove(AttributeName.CELLINDEX);
 			layoutMap.remove(AttributeName.BINDERYSIGNATURENAME);
 			layoutMap.remove(XJDFConstants.BinderySignatureID);
 			final ResourceHelper layoutPartitionH = layoutseth.getCreateVPartition(layoutMaps, true);
