@@ -896,8 +896,10 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 * @param root the element to parse
 	 * @return the helper
 	 */
-	public static SetHelper getHelper(final KElement e)
+	public static SetHelper getHelper(KElement e)
 	{
+		while (e != null && !isSet(e))
+			e = e.getParentNode_KElement();
 		return isSet(e) ? new SetHelper(e) : null;
 	}
 

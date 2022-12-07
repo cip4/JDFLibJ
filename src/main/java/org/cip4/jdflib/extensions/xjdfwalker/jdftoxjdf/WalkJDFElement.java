@@ -52,6 +52,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
@@ -554,9 +555,11 @@ public class WalkJDFElement extends WalkElement
 		{
 			JDFAttributeMap map = r.getPartMap();
 			map = convertRanges(map, r);
-			if (sh.getExactPartition(map) != null)
-				return null;
-
+			ResourceHelper tmp = sh.getExactPartition(map);
+			if (tmp != null)
+			{
+				return tmp.getRoot();
+			}
 			newLeaf = sh.getCreateExactPartition(map, false).getPartition();
 		}
 		setLeafAttributes(r, rl, newLeaf);

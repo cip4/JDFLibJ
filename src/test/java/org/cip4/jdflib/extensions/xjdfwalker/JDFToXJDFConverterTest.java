@@ -134,6 +134,7 @@ import org.cip4.jdflib.resource.process.JDFApprovalDetails;
 import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
+import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
@@ -151,6 +152,7 @@ import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.resource.process.JDFPerson;
+import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFTransferCurve;
@@ -600,6 +602,139 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(xjdf);
 		assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource/TransferCurve/@Curve", null));
 		assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[2]/TransferCurve/@Curve", null));
+	}
+
+	/**
+	 *
+	 * @return
+	 * @throws DataFormatException
+	 */
+	@Test
+	public void testStrippingMultiBS() throws DataFormatException
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setType(EnumType.Stripping);
+
+		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Output);
+		final JDFLayout lo1 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFLayout lo2 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s2");
+		final JDFLayout lo3 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s3");
+
+		final JDFBinderySignature bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		final JDFBinderySignature bs1 = (JDFBinderySignature) bs.addPartition(EnumPartIDKey.BinderySignatureName, "bs1");
+		bs1.appendSignatureCell().setFrontPages(JDFIntegerList.createIntegerList("1 2"));
+		final JDFBinderySignature bs2 = (JDFBinderySignature) bs.addPartition(EnumPartIDKey.BinderySignatureName, "bs2");
+		bs2.appendSignatureCell().setFrontPages(JDFIntegerList.createIntegerList("1 2 3 4"));
+
+		final JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+		final JDFStrippingParams sp1 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.SheetName, "s1");
+		sp1.refBinderySignature(bs1);
+		final JDFStrippingParams sp2 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.SheetName, "s2");
+		sp2.refBinderySignature(bs2);
+		final JDFStrippingParams sp3 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.SheetName, "s3");
+		sp3.refBinderySignature(bs2);
+
+		final JDFToXJDF xjdf20 = new JDFToXJDF();
+		xjdf20.setSingleNode(true);
+		final KElement xjdf = xjdf20.makeNewJDF(n, null);
+		xjdf.write2File(sm_dirTestDataTemp + "bs.xjdf");
+		assertNotNull(xjdf);
+		assertEquals(3, XJDFHelper.getHelper(xjdf).getSet(ElementName.BINDERYSIGNATURE, 0).getPartitionList().size());
+	}
+
+	/**
+	 *
+	 * @return
+	 * @throws DataFormatException
+	 */
+	@Test
+	public void testStrippingMultiBSPos() throws DataFormatException
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setType(EnumType.Stripping);
+
+		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Output);
+		final JDFLayout lo1 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFLayout lo2 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s2");
+		final JDFLayout lo3 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s3");
+
+		final JDFBinderySignature bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		final JDFBinderySignature bs1 = (JDFBinderySignature) bs.addPartition(EnumPartIDKey.BinderySignatureName, "bs1");
+		bs1.appendSignatureCell().setFrontPages(JDFIntegerList.createIntegerList("1 2"));
+		final JDFBinderySignature bs2 = (JDFBinderySignature) bs.addPartition(EnumPartIDKey.BinderySignatureName, "bs2");
+		bs2.appendSignatureCell().setFrontPages(JDFIntegerList.createIntegerList("1 2 3 4"));
+
+		final JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+		final JDFStrippingParams sp1 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.SheetName, "s1");
+		sp1.refBinderySignature(bs1);
+		sp1.appendPosition();
+		sp1.appendPosition();
+		final JDFStrippingParams sp2 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.SheetName, "s2");
+		sp2.refBinderySignature(bs2);
+		sp2.appendPosition();
+		sp2.appendPosition();
+		final JDFStrippingParams sp3 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.SheetName, "s3");
+		sp3.refBinderySignature(bs2);
+		sp3.appendPosition();
+		sp3.appendPosition();
+
+		final JDFToXJDF xjdf20 = new JDFToXJDF();
+		xjdf20.setSingleNode(true);
+		final KElement xjdf = xjdf20.makeNewJDF(n, null);
+		xjdf.write2File(sm_dirTestDataTemp + "bs.xjdf");
+		assertNotNull(xjdf);
+		assertEquals(3, XJDFHelper.getHelper(xjdf).getSet(ElementName.BINDERYSIGNATURE, 0).getPartitionList().size());
+		assertEquals(6, xjdf.getChildArrayByClass(JDFPosition.class, true, 0).size());
+		assertEquals(2, xjdf.getChildrenByTagName(ElementName.POSITION, null, new JDFAttributeMap(XJDFConstants.BinderySignatureID, "bs2.1"), false, false, 0).size());
+	}
+
+	/**
+	 *
+	 * @return
+	 * @throws DataFormatException
+	 */
+	@Test
+	public void testStrippingMultiBSPosBSName() throws DataFormatException
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setType(EnumType.Stripping);
+
+		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Output);
+		final JDFLayout lo1 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFLayout lo2 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s2");
+		final JDFLayout lo3 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s3");
+
+		final JDFBinderySignature bs1 = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		bs1.appendSignatureCell().setFrontPages(JDFIntegerList.createIntegerList("1 2"));
+
+		final JDFBinderySignature bs2 = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		bs2.appendSignatureCell().setFrontPages(JDFIntegerList.createIntegerList("1 2 3 4"));
+
+		final JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+		final JDFStrippingParams sp1 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.SheetName, "s1");
+		sp1.refBinderySignature(bs1);
+		sp1.setAssemblyID("ass1");
+		sp1.appendPosition();
+		sp1.appendPosition();
+		final JDFStrippingParams sp2 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.SheetName, "s2");
+		sp2.refBinderySignature(bs2);
+		sp2.setAssemblyID("ass2");
+		sp2.appendPosition();
+		sp2.appendPosition();
+		final JDFStrippingParams sp3 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.SheetName, "s3");
+		sp3.refBinderySignature(bs2);
+		sp3.setAssemblyID("ass2");
+		sp3.appendPosition();
+		sp3.appendPosition();
+
+		final JDFToXJDF xjdf20 = new JDFToXJDF();
+		xjdf20.setSingleNode(true);
+		final KElement xjdf = xjdf20.makeNewJDF(n, null);
+		xjdf.write2File(sm_dirTestDataTemp + "bs.xjdf");
+		assertNotNull(xjdf);
+		assertEquals(2, XJDFHelper.getHelper(xjdf).getSet(ElementName.BINDERYSIGNATURE, 0).getPartitionList().size());
+		assertEquals(6, xjdf.getChildArrayByClass(JDFPosition.class, true, 0).size());
+		assertEquals(4, xjdf.getChildrenByTagName(ElementName.POSITION, null, new JDFAttributeMap(XJDFConstants.BinderySignatureID, "ass2"), false, false, 0).size());
 	}
 
 	/**

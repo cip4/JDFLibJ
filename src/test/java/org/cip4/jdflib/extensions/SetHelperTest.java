@@ -78,6 +78,17 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetSetDeep()
+	{
+		assertNull(SetHelper.getHelper(null));
+		final SetHelper sh = SetHelper.getHelper(root.getElement(SetHelper.RESOURCE_SET));
+		assertEquals(sh, SetHelper.getHelper(sh.getPartition(0).getRoot()));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetAmountSum()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
