@@ -57,6 +57,18 @@ public class RemoveCompare extends BaseElementWalker
 {
 	final Collection<String> removeAttributes;
 
+	boolean removeAllIdAndRef;
+
+	public boolean isRemoveAllIdAndRef()
+	{
+		return removeAllIdAndRef;
+	}
+
+	public void setRemoveAllIdAndRef(boolean removeAllIdAndRef)
+	{
+		this.removeAllIdAndRef = removeAllIdAndRef;
+	}
+
 	/**
 	 *
 	 */
@@ -65,6 +77,7 @@ public class RemoveCompare extends BaseElementWalker
 		super(new BaseWalkerFactory());
 		removeAttributes = new HashSet<>();
 		new BaseWalker(getFactory()); // need a default walker
+		removeAllIdAndRef = false;
 	}
 
 	public void setStandard()
@@ -120,7 +133,8 @@ public class RemoveCompare extends BaseElementWalker
 			final Set<String> allKeys = map.keySet();
 			for (final String key : allKeys)
 			{
-				if (StringUtil.isEmpty(map.get(key)) || removeAttributes.contains(key))
+				if (StringUtil.isEmpty(map.get(key)) || removeAttributes.contains(key)
+						|| isRemoveAllIdAndRef() && (key.toLowerCase().endsWith("id") || key.toLowerCase().endsWith("ref")))
 				{
 					e1.removeAttribute(key);
 				}

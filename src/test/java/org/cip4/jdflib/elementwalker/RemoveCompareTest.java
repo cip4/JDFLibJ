@@ -64,4 +64,19 @@ public class RemoveCompareTest extends JDFTestCaseBase
 		emp.cleanup(jmf);
 		assertNotNull(jmf.getResponse(0));
 	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testRemoveJMFCompareVoodoo()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
+		final RemoveCompare emp = new RemoveCompare();
+		emp.setStandard();
+		emp.setRemoveAllIdAndRef(true);
+		emp.cleanup(jmf);
+		assertNotNull(jmf.getResponse(0));
+	}
 }
