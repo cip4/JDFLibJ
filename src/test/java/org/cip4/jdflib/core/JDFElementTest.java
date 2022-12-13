@@ -53,6 +53,7 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
@@ -70,6 +71,8 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.goldenticket.MISCPGoldenTicket;
+import org.cip4.jdflib.goldenticket.ProductGoldenTicket;
 import org.cip4.jdflib.jmf.JDFAcknowledge;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -155,6 +158,42 @@ public class JDFElementTest extends JDFTestCaseBase
 		final JDFGeneralID gi2 = r.appendGeneralID("foo2", "bar2");
 		assertEquals(gi1.getNextSiblingElement(), gi2);
 		assertEquals(gi2.getNextSiblingElement(), r.getAuditPool());
+	}
+
+	@Test
+	public void testEnumValidationLevel()
+	{
+		for (Object e : EnumValidationLevel.getEnumList())
+		{
+			EnumValidationLevel v = (EnumValidationLevel) e;
+			EnumValidationLevel.incompleteLevel(v);
+			EnumValidationLevel.isRecursive(v);
+			EnumValidationLevel.isRequired(v);
+		}
+	}
+
+	@Test
+	public void testValueForNewAttribute()
+	{
+		ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_7, 0, 0);
+		pgt.assign(null);
+		pgt.createFlyer();
+
+		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(2, EnumVersion.Version_1_7, 1, 3, true, null);
+		cpGoldenTicket.setParent(pgt);
+		cpGoldenTicket.nCols[0] = cpGoldenTicket.nCols[1] = 6;
+		cpGoldenTicket.workStyle = EnumWorkStyle.WorkAndTurn;
+
+		cpGoldenTicket.assign(null);
+		cpGoldenTicket.good = 1000;
+		cpGoldenTicket.waste = 90;
+		JDFNode n = cpGoldenTicket.getNode();
+		for (KElement e : n.getChildrenByTagName(null, null, null, false, false, 0))
+		{
+			JDFElement.getValueForNewAttribute(e, null);
+			for (String s : e.getAttributeArray_KElement())
+				JDFElement.getValueForNewAttribute(e, s);
+		}
 	}
 
 	/**
