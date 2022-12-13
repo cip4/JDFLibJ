@@ -86,6 +86,7 @@ import java.net.URL;
 import org.apache.xerces.parsers.DOMParser;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
@@ -315,6 +316,21 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 */
+	@Test
+	public void testGetNSMap()
+	{
+		final XMLDoc doc0 = new XMLDoc();
+		assertTrue(doc0.getNSMap().isEmpty());
+		final XMLDoc doc = new XMLDoc("abcde:test", "abcde.com");
+		doc.getRoot().addNameSpace("abcde", "abcde.com");
+		final JDFAttributeMap m = doc.getNSMap();
+		assertEquals("abcde.com", m.get("abcde"));
+	}
+
+	/*
+	 * 
 	 *
 	 */
 	@Test
