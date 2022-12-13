@@ -225,13 +225,4 @@ public class JDFDocumentBuilder extends DocumentBuilder
 		return (doc);
 	}
 
-	/**
-	 * @see java.lang.Object#finalize()
-	 */
-	@Override
-	protected void finalize() throws Throwable
-	{
-		JDFParserFactory.getFactory().push(m_parser);
-		super.finalize();
-	}
 }
