@@ -252,7 +252,10 @@ public class URLWriter
 		if (addDirect)
 			return ProxyUtil.getProxiesWithLocal(uri);
 		else
-			return ProxySelector.getDefault().select(uri);
+		{
+			List<Proxy> select = ProxySelector.getDefault().select(uri);
+			return select.isEmpty() ? ProxyUtil.getProxiesWithLocal(uri) : select;
+		}
 
 	}
 

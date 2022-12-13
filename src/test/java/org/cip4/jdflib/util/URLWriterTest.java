@@ -93,6 +93,8 @@ public class URLWriterTest extends JDFTestCaseBase
 	{
 		URLWriter urlWriter = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertTrue(urlWriter.getProxies(new URI("http://www.example.com")).contains(Proxy.NO_PROXY));
+		urlWriter.setAddDirect(false);
+		assertFalse(urlWriter.getProxies(new URI("http://www.example.com")).isEmpty());
 	}
 
 	/**
