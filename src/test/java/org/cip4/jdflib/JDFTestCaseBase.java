@@ -75,14 +75,15 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.net.ProxyUtil;
 import org.cip4.jdflib.util.net.UrlCheck;
 import org.cip4.jdflib.util.thread.RegularJanitor;
 import org.cip4.jdflib.validate.JDFValidator;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Node;
 
@@ -331,6 +332,8 @@ public abstract class JDFTestCaseBase
 	protected long getCurrentMem()
 	{
 		System.gc();
+		ThreadUtil.sleep(3);
+
 		final Runtime rt = Runtime.getRuntime();
 		return rt.totalMemory() - rt.freeMemory();
 	}

@@ -39,6 +39,8 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -73,8 +75,6 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -311,7 +311,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	{
 		sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		final VElement v = new VElement();
-		for (int i = 0; i < 2222; i++)
+		for (int i = 0; i < 222; i++)
 		{
 			if (i % 1000 == 0)
 				log.info(i + " " + getCurrentMem() + " " + (getCurrentMem() / (i + 1)));
@@ -327,7 +327,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	{
 		sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		final VJDFAttributeMap v = new VJDFAttributeMap();
-		for (int i = 0; i < 2222; i++)
+		for (int i = 0; i < 222; i++)
 		{
 			if (i % 1000 == 0)
 				log.info(i + " " + getCurrentMem() + " " + (getCurrentMem() / (i + 1)));

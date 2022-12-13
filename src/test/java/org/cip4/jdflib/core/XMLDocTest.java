@@ -705,18 +705,14 @@ public class XMLDocTest extends JDFTestCaseBase
 	@Test
 	public void testCloneMem()
 	{
-		System.gc();
-		final XMLDoc doc = new XMLDoc("foobar", null);
-		final long l = doc.getDocMemoryUsed();
+		final XMLDoc doc = new XMLDoc("foobar44", null);
+		final long l = getCurrentMem();
 		for (int i = 0; i < 100000; i++)
 		{
 			doc.clone();
-			if (i % 1000 == 0)
-				System.gc();
 		}
-		System.gc();
-		final long l2 = doc.getDocMemoryUsed();
-		assertEquals(l, l2, 2000000);
+		final long l2 = getCurrentMem();
+		assertTrue(l2 - l < 2000000);
 	}
 
 	/**
