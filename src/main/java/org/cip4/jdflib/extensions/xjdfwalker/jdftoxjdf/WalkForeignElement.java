@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,11 +69,13 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.AuditHelper;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
@@ -87,6 +89,7 @@ public class WalkForeignElement extends WalkElement
 	public WalkForeignElement()
 	{
 		super();
+		depth += 10;
 	}
 
 	/**
@@ -117,6 +120,6 @@ public class WalkForeignElement extends WalkElement
 	@Override
 	public boolean matches(KElement e)
 	{
-		return !JDFElement.isInXJDFNameSpaceStatic(e);
+		return !JDFElement.isInAnyJDFNameSpaceStatic(e) && !(e instanceof JDFResourceLink) && !(e instanceof JDFResource);
 	}
 }

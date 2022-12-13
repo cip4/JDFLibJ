@@ -395,8 +395,7 @@ public class XMLDoc implements Cloneable
 	}
 
 	/**
-	 * write2File - write to a file; Create if it doesn't exist
-	 * DO NOT attempt any url escaping voodoo @see write2URL
+	 * write2File - write to a file; Create if it doesn't exist DO NOT attempt any url escaping voodoo @see write2URL
 	 *
 	 * @param oFilePath the file path where to write the file
 	 * @param indent indentation
@@ -672,8 +671,8 @@ public class XMLDoc implements Cloneable
 	}
 
 	/**
-	 * createElement create a JDFElement that floats in nirvana. This must be appended to a node with appendChild (created in namespace
-	 * JDFCoreConstants.NONAMESPACE (DOM Level 2)).<br>
+	 * createElement create a JDFElement that floats in nirvana. This must be appended to a node with appendChild (created in namespace JDFCoreConstants.NONAMESPACE (DOM Level
+	 * 2)).<br>
 	 * Another way would be to use KElement.appendElement(String elementName, String nameSpaceURI)
 	 *
 	 * @param elementName name of the element that is created
@@ -1016,6 +1015,19 @@ public class XMLDoc implements Cloneable
 	}
 
 	/**
+	 * get a copy of the nsmap
+	 *
+	 */
+	public JDFAttributeMap getNSMap()
+	{
+		if (m_doc != null)
+		{
+			return new JDFAttributeMap(m_doc.nsMap);
+		}
+		return null;
+	}
+
+	/**
 	 * get node type
 	 *
 	 * @return a <i>short</i> representing the node type
@@ -1185,8 +1197,7 @@ public class XMLDoc implements Cloneable
 	 * @param version version number of the package name to test
 	 *
 	 * @return boolean - true, if the feature is sopported
-	 * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/NodeImpl.html#isSupported(java.lang.String,%20java.lang.String)"
-	 *      <a>Xerxes-Documentation</a>
+	 * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/NodeImpl.html#isSupported(java.lang.String,%20java.lang.String)" <a>Xerxes-Documentation</a>
 	 */
 	public boolean isSupported(final String feature, final String version)
 	{
@@ -1570,21 +1581,21 @@ public class XMLDoc implements Cloneable
 	 *
 	 * @param nodeType the DOM node type to get <blockquote> - copy from KElement -
 	 *
-	 *            <ul>
-	 *            <li>ELEMENT_NODE = 1
-	 *            <li>ATTRIBUTE_NODE = 2
-	 *            <li>TEXT_NODE = 3
-	 *            <li>CDATA_SECTION_NODE = 4
-	 *            <li>ENTITY_REFERENCE_NODE = 5
-	 *            <li>ENTITY_NODE = 6
-	 *            <li>PROCESSING_INSTRUCTION_NODE = 7
-	 *            <li>COMMENT_NODE = 8
-	 *            <li>DOCUMENT_NODE = 9
-	 *            <li>DOCUMENT_TYPE_NODE = 10
-	 *            <li>DOCUMENT_FRAGMENT_NODE = 11
-	 *            <li>NOTATION_NODE = 12
-	 *            <li>XML_DECL_NODE = 13 </blockquote>
-	 *            </ul>
+	 *        <ul>
+	 *        <li>ELEMENT_NODE = 1
+	 *        <li>ATTRIBUTE_NODE = 2
+	 *        <li>TEXT_NODE = 3
+	 *        <li>CDATA_SECTION_NODE = 4
+	 *        <li>ENTITY_REFERENCE_NODE = 5
+	 *        <li>ENTITY_NODE = 6
+	 *        <li>PROCESSING_INSTRUCTION_NODE = 7
+	 *        <li>COMMENT_NODE = 8
+	 *        <li>DOCUMENT_NODE = 9
+	 *        <li>DOCUMENT_TYPE_NODE = 10
+	 *        <li>DOCUMENT_FRAGMENT_NODE = 11
+	 *        <li>NOTATION_NODE = 12
+	 *        <li>XML_DECL_NODE = 13 </blockquote>
+	 *        </ul>
 	 * @param iPos the index of the node with default 0 for the first occurance
 	 * @return KElement: a node that matches the filter, null if iPos is higher then the number of child nodes
 	 */
