@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -43,11 +43,17 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.net.MalformedURLException;
+import java.net.Proxy;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class URLWriterTest extends JDFTestCaseBase
@@ -61,7 +67,43 @@ public class URLWriterTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		Assertions.assertNotNull(new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null).writeToURL());
+		assertNotNull(new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null).writeToURL());
+	}
+
+	/**
+	 * @throws MalformedURLException
+	 *
+	 */
+	@Test
+	public void testgetAddDirect() throws MalformedURLException
+	{
+		URLWriter urlWriter = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		assertTrue(urlWriter.isAddDirect());
+		urlWriter.setAddDirect(false);
+		assertFalse(urlWriter.isAddDirect());
+	}
+
+	/**
+	 * @throws MalformedURLException
+	 * @throws URISyntaxException
+	 *
+	 */
+	@Test
+	public void testgetProxyList() throws MalformedURLException, URISyntaxException
+	{
+		URLWriter urlWriter = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		assertTrue(urlWriter.getProxies(new URI("http://www.example.com")).contains(Proxy.NO_PROXY));
+	}
+
+	/**
+	 * @throws MalformedURLException
+	 *
+	 */
+	@Test
+	public void testTostringt() throws MalformedURLException
+	{
+		URLWriter urlWriter = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		assertNotNull(urlWriter.toString());
 	}
 
 	/**
@@ -74,7 +116,7 @@ public class URLWriterTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		final UrlPart writeToURL = new URLWriter(null, new URL("http://www.google.com"), UrlUtil.POST, UrlUtil.TEXT_PLAIN, null).writeToURL();
-		Assertions.assertNotNull(writeToURL);
+		assertNotNull(writeToURL);
 		writeToURL.buffer();
 	}
 

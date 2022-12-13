@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,6 +44,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.Proxy;
+import java.net.ProxySelector;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
@@ -67,7 +68,7 @@ public class URLWriter
 	@Override
 	public String toString()
 	{
-		return "UrlWriter: " + method + " / " + contentType + " --> " + url;
+		return "UrlWriter: " + method + " addDirect=" + addDirect + " / " + contentType + " --> " + url;
 	}
 
 	static final Log log = LogFactory.getLog(URLWriter.class);
@@ -78,6 +79,17 @@ public class URLWriter
 	private final HTTPDetails details;
 	private final IStreamWriter writer;
 	private static int nLogged = 0;
+	private boolean addDirect;
+
+	public boolean isAddDirect()
+	{
+		return addDirect;
+	}
+
+	public void setAddDirect(boolean addDirect)
+	{
+		this.addDirect = addDirect;
+	}
 
 	/**
 	 * @param strUrl the URL to write to
@@ -89,6 +101,7 @@ public class URLWriter
 	 */
 	public URLWriter(final URL url, final IStreamWriter streamWriter, final String method, String contentType, final HTTPDetails details)
 	{
+		this.addDirect = true;
 		this.url = url;
 		this.method = method;
 		if (contentType == null)
@@ -143,6 +156,7 @@ public class URLWriter
 		this.details = details;
 		this.stream = (is == null) ? null : new ByteArrayIOFileStream(is, UrlUtil.MAX_STREAM);
 		this.writer = null;
+		addDirect = true;
 	}
 
 	private ByteArrayIOStream getStream(final IStreamWriter inWriter)
@@ -184,7 +198,7 @@ public class URLWriter
 			if (uri == null) // redundant but makes compiler happy
 				return null;
 
-			final List<Proxy> list = ProxyUtil.getProxiesWithLocal(uri);
+			final List<Proxy> list = getProxies(uri);
 
 			for (final Proxy proxy : list)
 			{
@@ -233,6 +247,15 @@ public class URLWriter
 
 	}
 
+	protected List<Proxy> getProxies(final URI uri)
+	{
+		if (addDirect)
+			return ProxyUtil.getProxiesWithLocal(uri);
+		else
+			return ProxySelector.getDefault().select(uri);
+
+	}
+
 	/**
 	 * @return
 	 */
@@ -262,7 +285,7 @@ public class URLWriter
 	 * @param bWantLog
 	 * @return
 	 */
-	private UrlPart callProxy(final Proxy proxy, final boolean bWantLog)
+	protected UrlPart callProxy(final Proxy proxy, final boolean bWantLog)
 	{
 
 		try
