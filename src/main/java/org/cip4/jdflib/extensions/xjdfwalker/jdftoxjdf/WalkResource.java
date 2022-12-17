@@ -91,8 +91,11 @@ public class WalkResource extends WalkJDFElement
 				if (status != null)
 				{
 					ResourceHelper h = ResourceHelper.getHelper(xjdf);
-					EnumResStatus newStatus = status.compareTo(EnumResStatus.Available) >= 0 ? EnumResStatus.Available : EnumResStatus.Unavailable;
-					h.setStatus(newStatus);
+					if (h != null)
+					{
+						EnumResStatus newStatus = status.compareTo(EnumResStatus.Available) >= 0 ? EnumResStatus.Available : EnumResStatus.Unavailable;
+						h.setStatus(newStatus);
+					}
 				}
 
 				xjdf.removeAttribute(AttributeName.STATUSDETAILS);

@@ -447,12 +447,13 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 			theElement.setAttribute(AttributeName.NAME, getName());
 		}
 		final List<ResourceHelper> kids = getPartitionList();
-		if (kids != null)
+		if (!ContainerUtil.isEmpty(kids))
 		{
 			for (final ResourceHelper kid : kids)
 			{
 				kid.cleanUp();
 			}
+			theElement.sortChildren(new XJDFSetCleanupComparator());
 		}
 	}
 

@@ -1913,6 +1913,22 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testMixedMediaRef()
+	{
+		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "mixedMediaRef.jdf");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		final XJDFHelper h = new XJDFHelper(xjdf);
+		final SetHelper s = h.getSet(ElementName.DIGITALPRINTINGPARAMS, 0);
+		assertEquals(2, s.getPartitionList().size());
+		assertEquals(1, s.getPartition(0).getPartMap().size());
+		assertEquals(0, s.getPartition(1).getPartMap().size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testPartUsagePartsImplicitRootWantImplicitNot()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();

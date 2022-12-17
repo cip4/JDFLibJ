@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+		Saddle Stitched booklet job ticket intended to be IDP ICS 1.4 Level 1 conformant.
+		Layout Element references pre-imposed 11x17 sheet surfaced to be imaged in Front/Back sequence.
+		The first two imposed sheet surfaces represent the outside / inside cover respectively.
+		Remaining odd/even sequence of pre-imposed surfaces comprise the text section of the document.
+		The two sided cover sheet is printed on Glossy media, and text section sheets printed on Coated media. -->
+<JDF ID="J1" Category="IDP.DigitalPrinting" ICSVersions="IDP_L1-1.4" JobID="008_SaddleStitchBooklet_MixedMedia_IDPICS_1.4-L1" JobPartID="008.1" MaxVersion="1.4" ProjectID="JDF_Testing" Status="Waiting" Type="Combined" Types="LayoutPreparation Interpreting Rendering ColorSpaceConversion DigitalPrinting Gathering Stitching Folding" Version="1.4" xmlns="http://www.CIP4.org/JDFSchema_1_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Combined">
+	<ResourcePool>
+			<Media Class="Consumable" Dimension="1226 792" FrontCoatings="Coated" ID="IDM0001" MediaType="Paper" ProductID="Coated30#White" Status="Available"/>
+		<Media Class="Consumable" Dimension="1226 792" FrontCoatings="Glossy" Brand="Avery" ID="IDM0002" MediaType="Paper" ProductID="Glossy40#White" MediaColorName="White" MediaColorNameDetails="Stationary60" PrePrinted="true" Recycled="true" Texture="Calendared" RecycledPercentage="35" Status="Available"/>
+			<DigitalPrintingParams PartUsage="Implicit" Class="Parameter" PartIDKeys="RunIndex" Collate="Sheet" ID="IDDPP0001" PageDelivery="SameOrderFaceDown" Status="Available">
+			<MediaRef rRef="IDM0002"/>
+			<DigitalPrintingParams RunIndex="2 ~ -1">
+				<MediaRef rRef="IDM0001"/>
+			</DigitalPrintingParams>
+		</DigitalPrintingParams>
+	</ResourcePool>
+	<ResourceLinkPool>
+		<MediaLink CombinedProcessIndex="4" Usage="Input" rRef="IDM0001"/>
+		<MediaLink CombinedProcessIndex="4" Usage="Input" rRef="IDM0002"/>
+		<DigitalPrintingParamsLink CombinedProcessIndex="4" Usage="Input" rRef="IDDPP0001"/>
+		</ResourceLinkPool>
+</JDF>
