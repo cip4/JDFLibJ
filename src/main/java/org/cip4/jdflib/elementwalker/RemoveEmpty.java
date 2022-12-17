@@ -53,6 +53,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
@@ -208,7 +209,7 @@ public class RemoveEmpty extends BaseElementWalker
 			final JDFAttributeMap map = e1.getAttributeMap_KElement();
 			final Set<String> allKeys = map.keySet();
 			boolean hasGood = !zappElements;
-			final VString dummy = zappElements ? getDummyAttributes() : null;
+			final StringArray dummy = zappElements ? getDummyAttributes() : null;
 			for (final String key : allKeys)
 			{
 				if (StringUtil.isEmpty(map.get(key)))
@@ -227,9 +228,9 @@ public class RemoveEmpty extends BaseElementWalker
 		 *
 		 * @return
 		 */
-		protected VString getDummyAttributes()
+		protected StringArray getDummyAttributes()
 		{
-			final VString dummy = new VString();
+			final StringArray dummy = new StringArray();
 			dummy.add(AttributeName.ID);
 			dummy.add(AttributeName.AGENTNAME);
 			dummy.add(AttributeName.AGENTVERSION);
@@ -441,9 +442,9 @@ public class RemoveEmpty extends BaseElementWalker
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#getDummyAttributes()
 		 */
 		@Override
-		protected VString getDummyAttributes()
+		protected StringArray getDummyAttributes()
 		{
-			final VString v = super.getDummyAttributes();
+			final StringArray v = super.getDummyAttributes();
 			v.add(AttributeName.CLASS);
 			v.add(AttributeName.STATUS);
 			v.add(AttributeName.PARTIDKEYS);
@@ -604,9 +605,9 @@ public class RemoveEmpty extends BaseElementWalker
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#getDummyAttributes()
 		 */
 		@Override
-		protected VString getDummyAttributes()
+		protected StringArray getDummyAttributes()
 		{
-			final VString v = super.getDummyAttributes();
+			final StringArray v = super.getDummyAttributes();
 			// if only channeltype is specified, we have an empty dummy
 			v.add(AttributeName.CHANNELTYPE);
 			return v;

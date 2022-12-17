@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.elementwalker.RemoveEmpty;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -120,14 +121,14 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#getDummyAttributes()
 		 */
 		@Override
-		protected VString getDummyAttributes()
+		protected StringArray getDummyAttributes()
 		{
-			final VString v = super.getDummyAttributes();
+			final StringArray v = super.getDummyAttributes();
 			v.add(AttributeName.COMBINEDPROCESSINDEX);
 			v.add(AttributeName.NAME);
 			v.add(AttributeName.USAGE);
 			v.add(AttributeName.PROCESSUSAGE);
-			v.add(AttributeName.ID);
+			v.add(AttributeName.STATUS);
 			return v;
 		}
 
@@ -177,12 +178,25 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 
 		/**
 		 * part elements are ignored
+		 * 
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#hasChild(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
 		protected boolean hasChild(final KElement e1)
 		{
 			return ContainerUtil.getNonEmpty(e1.getChildrenIgnoreList(VString.getVString(ElementName.PART, null), true, null)) != null;
+		}
+
+		/**
+		 *
+		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#getDummyAttributes()
+		 */
+		@Override
+		protected StringArray getDummyAttributes()
+		{
+			final StringArray v = super.getDummyAttributes();
+			v.add(AttributeName.STATUS);
+			return v;
 		}
 
 	}

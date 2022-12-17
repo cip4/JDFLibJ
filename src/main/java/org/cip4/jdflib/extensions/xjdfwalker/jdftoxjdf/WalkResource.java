@@ -42,9 +42,11 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 
 // //////////////////////////////////////////////////////////////////////////////
@@ -85,7 +87,14 @@ public class WalkResource extends WalkJDFElement
 			if (bRoot)
 			{
 				removeDeprecatedResourceAttribs(r, xjdf);
-				xjdf.removeAttribute(AttributeName.STATUS);
+				EnumResStatus status = r.getResStatus(false);
+				if (status != null)
+				{
+					ResourceHelper h = ResourceHelper.getHelper(xjdf);
+					EnumResStatus newStatus = status.compareTo(EnumResStatus.Available) >= 0 ? EnumResStatus.Available : EnumResStatus.Unavailable;
+					h.setStatus(newStatus);
+				}
+
 				xjdf.removeAttribute(AttributeName.STATUSDETAILS);
 			}
 		}

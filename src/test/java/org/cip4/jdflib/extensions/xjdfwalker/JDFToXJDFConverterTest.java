@@ -121,6 +121,7 @@ import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
@@ -2105,6 +2106,38 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.makeNewJDF(n, null);
 		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/@URL", null));
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/FileSpec/@URL", null), "previewURL");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testResStatus()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Input);
+		pv.setURL("previewURL");
+		pv.setResStatus(EnumResStatus.Available, false);
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		assertEquals(EnumResStatus.Available, new XJDFHelper(xjdf).getSet(ElementName.PREVIEW, 0).getPartition(0).getStatus());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testResStatusMove()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Input);
+		pv.setURL("previewURL");
+		pv.setResStatus(EnumResStatus.Incomplete, false);
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		assertEquals(EnumResStatus.Unavailable, new XJDFHelper(xjdf).getSet(ElementName.PREVIEW, 0).getPartition(0).getStatus());
 	}
 
 	/**
