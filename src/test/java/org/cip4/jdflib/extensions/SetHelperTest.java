@@ -162,6 +162,23 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testSize()
+	{
+		final SetHelper sh = new SetHelper(null);
+		assertEquals(0, sh.size());
+		final SetHelper sh2 = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		sh2.removePartitions();
+		for (int i = 0; i < 4; i++)
+		{
+			assertEquals(i, sh2.size());
+			sh2.appendPartition("Run", "k" + i, true);
+		}
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetCPI()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));

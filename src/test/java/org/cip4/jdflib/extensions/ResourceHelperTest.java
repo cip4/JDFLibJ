@@ -38,6 +38,8 @@ package org.cip4.jdflib.extensions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -70,6 +72,21 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
 		final ResourceHelper rh = sh.getCreatePartition(map, false);
 		assertEquals(map, rh.getPartMap());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testClone()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
+		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
+		final ResourceHelper rh = sh.getCreatePartition(map, false);
+		ResourceHelper rh2 = rh.clonePartition();
+		assertNotEquals(rh, rh2);
+		assertNotNull(rh2);
 	}
 
 	/**

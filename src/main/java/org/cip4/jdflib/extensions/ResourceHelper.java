@@ -664,4 +664,19 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 		return resource == null ? null : resource.getNonEmpty(string);
 	}
 
+	/**
+	 * return a clone of this, placed just behind this
+	 * 
+	 * @return
+	 */
+	public ResourceHelper clonePartition()
+	{
+		if (theElement == null || theElement.getParentNode_KElement() == null)
+		{
+			return new ResourceHelper(null);
+		}
+		KElement newElement = theElement.getParentNode_KElement().copyElement(theElement, theElement.getNextSiblingElement());
+		return new ResourceHelper(newElement);
+	}
+
 }

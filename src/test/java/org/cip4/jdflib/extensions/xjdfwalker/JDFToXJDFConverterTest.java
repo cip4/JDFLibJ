@@ -1790,6 +1790,22 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testRunListPages()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.RasterReading);
+		final JDFRunList r1 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		r1.setFileURL("file:///foo.pdf");
+		r1.setPages(JDFIntegerRangeList.createIntegerRangeList("0~2 4~6 7"));
+		final JDFRunList r2 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
+		r2.setFileURL("file:///fooout.pdf");
+		writeRoundTrip(n, "RunListPages");
+	}
+
+	/**
+	*
+	*/
+	@Test
 	public void testMetaDataMulti()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();

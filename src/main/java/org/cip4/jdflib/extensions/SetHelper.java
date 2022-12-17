@@ -945,4 +945,9 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 			return false;
 		return true;
 	}
+
+	public int size()
+	{
+		return theElement == null ? 0 : ContainerUtil.size(theElement.getChildList(getPartitionName(), null));
+	}
 }

@@ -95,6 +95,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStation;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
@@ -818,6 +819,86 @@ class PostXJDFWalker extends BaseElementWalker
 		/**
 		 * @author Rainer Prosi, Heidelberger Druckmaschinen
 		 */
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 */
+	protected class WalkRunListSet extends WalkResourceSet
+	{
+		/**
+		 *
+		 */
+		public WalkRunListSet()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !retainAll && toCheck.getLocalName().equals(SetHelper.RESOURCE_SET) && ElementName.RUNLIST.equals(toCheck.getAttribute(AttributeName.NAME));
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param xjdf
+		 * @param dummy
+		 * @return null or super depending on the value of mergelayout
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			splitPages(xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		/**
+		 * @author Rainer Prosi, Heidelberger Druckmaschinen
+		 */
+
+		void splitPages(KElement xjdf)
+		{
+			SetHelper sh = SetHelper.getHelper(xjdf);
+			if (sh.size() > 0)
+			{
+				int i = 0;
+				for (ResourceHelper rh : sh.getPartitionList())
+				{
+					JDFRunList ruli = (JDFRunList) rh.getResource();
+					JDFIntegerList pages = ruli == null ? null : JDFIntegerList.createIntegerList(ruli.getNonEmpty(AttributeName.PAGES));
+					ResourceHelper rh2 = rh;
+					if (pages != null)
+					{
+						if (pages.size() > 2)
+						{
+							for (int pos = 0; pos < pages.size(); pos += 2)
+							{
+								rh2 = (pos > 0) ? rh2.clonePartition() : rh;
+								VJDFAttributeMap vParts = rh2.getPartMapVector();
+								if (!VJDFAttributeMap.isEmpty(vParts))
+								{
+									vParts.put("Run", "SplitRun" + i++);
+									rh2.setPartMapVector(vParts);
+								}
+								else
+								{
+									rh2.setPartMap(new JDFAttributeMap("Run", "SplitRun" + i++));
+								}
+								JDFRunList ruli2 = (JDFRunList) rh2.getResource();
+								ruli2.setAttribute(AttributeName.PAGES, pages.getInt(pos) + " " + pages.getInt(pos + 1));
+								ruli2.setAttribute(AttributeName.NPAGE, "" + (1 + Math.abs(pages.getInt(pos) - pages.getInt(pos + 1))));
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**
