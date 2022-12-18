@@ -679,7 +679,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		if (name == null)
 			name = "Set";
 		final SetHelper h = new SetHelper(newSet);
-		h.setID(name + KElement.uniqueID(0));
+		h.setID(KElement.xmlnsLocalName(name) + KElement.uniqueID(0));
 		if (usage != null)
 			h.setUsage(usage);
 		return h;
