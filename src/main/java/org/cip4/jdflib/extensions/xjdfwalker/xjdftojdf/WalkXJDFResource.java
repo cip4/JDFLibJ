@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -351,7 +351,8 @@ public class WalkXJDFResource extends WalkXElement
 			}
 			// parameters and consumables are assumed to be available by default
 			final EnumResourceClass resClass = res.getResourceClass();
-			if (isNew && EnumUsage.Input.equals(inOut) && (EnumResourceClass.Parameter.equals(resClass) || EnumResourceClass.Consumable.equals(resClass) || EnumResourceClass.Intent.equals(resClass)))
+			if (isNew && EnumUsage.Input.equals(inOut)
+					&& (EnumResourceClass.Parameter.equals(resClass) || EnumResourceClass.Consumable.equals(resClass) || EnumResourceClass.Intent.equals(resClass)))
 			{
 				res.setResStatus(EnumResStatus.Available, false);
 			}
@@ -384,7 +385,8 @@ public class WalkXJDFResource extends WalkXElement
 		if (inOut == null && xjdfToJDFImpl.isHeuristicLink())
 		{
 			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name) && !ElementName.COMPONENT.equals(name)
-					&& !ElementName.COLORPOOL.equals(name) && !ElementName.MEDIA.equals(name) && !ElementName.EXPOSEDMEDIA.equals(name) && theNode.isValidLink(name, EnumUsage.Input, processUsage))
+					&& !ElementName.COLORPOOL.equals(name) && !ElementName.MEDIA.equals(name) && !ElementName.EXPOSEDMEDIA.equals(name)
+					&& theNode.isValidLink(name, EnumUsage.Input, processUsage))
 			{
 				inOut = EnumUsage.Input;
 			}
@@ -422,7 +424,7 @@ public class WalkXJDFResource extends WalkXElement
 
 	}
 
-	private JDFAttributeMap getResMap(final KElement xjdfRes)
+	protected JDFAttributeMap getResMap(final KElement xjdfRes)
 	{
 		final JDFAttributeMap map = xjdfRes.getAttributeMap();
 		map.remove(AttributeName.ID);

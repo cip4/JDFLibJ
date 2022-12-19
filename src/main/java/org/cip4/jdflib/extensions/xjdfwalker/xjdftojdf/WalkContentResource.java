@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.resource.process.JDFPageData;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
- * walker for the colorSet - this gets translated back to a colorpool
+ *         walker for the colorSet - this gets translated back to a colorpool
  */
 public class WalkContentResource extends WalkXJDFResource
 {
@@ -96,6 +96,15 @@ public class WalkContentResource extends WalkXJDFResource
 	public WalkContentResource()
 	{
 		super();
+	}
+
+	@Override
+	protected JDFAttributeMap getResMap(final KElement xjdfRes)
+	{
+		final JDFAttributeMap map = super.getResMap(xjdfRes);
+		map.remove(AttributeName.STATUS);
+		map.remove(AttributeName.STATUSDETAILS);
+		return map;
 	}
 
 	/**
@@ -111,7 +120,8 @@ public class WalkContentResource extends WalkXJDFResource
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#createPartition(org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.datatypes.JDFAttributeMap, org.cip4.jdflib.node.JDFNode)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#createPartition(org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.datatypes.JDFAttributeMap,
+	 *      org.cip4.jdflib.node.JDFNode)
 	 */
 	@Override
 	protected KElement createPartition(final JDFResource jdfRes, final JDFAttributeMap partMap, final JDFNode theNode)

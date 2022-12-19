@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,6 +76,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
  * continue walking on these without copying e
+ * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
 public class WalkContent extends WalkResource
