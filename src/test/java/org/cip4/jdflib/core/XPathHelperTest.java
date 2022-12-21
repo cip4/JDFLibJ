@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,6 +36,13 @@
  */
 package org.cip4.jdflib.core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Map;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -45,7 +52,6 @@ import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.StatusCounterTest;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -65,7 +71,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 	public void testSetNull()
 	{
 		theHelper.setXPathAttribute("@bar", null);
-		Assertions.assertFalse(theHelper.hasXPathNode("@bar"));
+		assertFalse(theHelper.hasXPathNode("@bar"));
 	}
 
 	/**
@@ -77,8 +83,8 @@ public class XPathHelperTest extends JDFTestCaseBase
 		theHelper.setXPathAttribute("@foo:bar", "b1");
 		theHelper.setXPathAttribute("@xmlns:foo", "www.foo.com");
 		theHelper.setXPathAttribute("@foo:bar2", "b2");
-		Assertions.assertFalse(theHelper.hasXPathNode("@bar"));
-		Assertions.assertFalse(theHelper.hasXPathNode("@bar2"));
+		assertFalse(theHelper.hasXPathNode("@bar"));
+		assertFalse(theHelper.hasXPathNode("@bar2"));
 	}
 
 	/**
@@ -153,7 +159,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 		dNew.getRoot().setXPathValues(map);
 		log.info(" set " + ct.getSingleSummary());
 		ct.stop();
-		Assertions.assertTrue(ct.getTotalRealTime() < 12345);
+		assertTrue(ct.getTotalRealTime() < 12345);
 	}
 
 	/**
@@ -175,7 +181,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 				log.info(i + " " + ct.getSingleSummary());
 			ct.stop();
 		}
-		Assertions.assertEquals(ct.getTotalCPUTime(), 20.0E9, 20.0E9);
+		assertEquals(ct.getTotalCPUTime(), 20.0E9, 20.0E9);
 	}
 
 	/**
@@ -190,7 +196,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 
 		final JDFDoc dNew = new JDFDoc("JDF");
 		dNew.setXPathValues(map);
-		Assertions.assertTrue(dNew.getRoot().getLocalName().equals("JDF"));
+		assertTrue(dNew.getRoot().getLocalName().equals("JDF"));
 	}
 
 	/**
@@ -206,7 +212,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 
 		final XMLDoc dNew = new XMLDoc();
 		dNew.setXPathValues(map);
-		Assertions.assertTrue(dNew.getRoot().isEqual(root));
+		assertTrue(dNew.getRoot().isEqual(root));
 	}
 
 	/**
@@ -219,9 +225,9 @@ public class XPathHelperTest extends JDFTestCaseBase
 		final KElement root = d.getRoot();
 		final KElement y = root.appendElement("y");
 		y.setAttribute("a", "b");
-		Assertions.assertEquals(y, root.getXPathElement("y[@a=\"b\"]"));
+		assertEquals(y, root.getXPathElement("y[@a=\"b\"]"));
 		root.removeXPathElement("y[@a=\"b\"]");
-		Assertions.assertNull(root.getXPathElement("y[@a=\"b\"]"));
+		assertNull(root.getXPathElement("y[@a=\"b\"]"));
 	}
 
 	/**
@@ -238,14 +244,14 @@ public class XPathHelperTest extends JDFTestCaseBase
 
 		final XMLDoc dNew = new XMLDoc();
 		dNew.setXPathValues(map);
-		Assertions.assertEquals(dNew.getRoot().toXML(), root.toXML());
+		assertEquals(dNew.getRoot().toXML(), root.toXML());
 		final String s = dNew.toXML();
 		final XMLDoc dParsed = new XMLParser().parseString(s);
 		final KElement root2 = dParsed.getRoot();
 		final JDFAttributeMap map2 = root2.getXPathValueMap();
 		final XMLDoc dNew2 = new XMLDoc();
 		dNew2.setXPathValues(map2);
-		Assertions.assertEquals(dNew2.getRoot().toXML(), root.toXML());
+		assertEquals(dNew2.getRoot().toXML(), root.toXML());
 	}
 
 	/**
@@ -262,7 +268,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 
 		final XMLDoc dNew = new XMLDoc();
 		dNew.setXPathValues(map);
-		Assertions.assertEquals(dNew.getRoot().toXML(), root.toXML());
+		assertEquals(dNew.getRoot().toXML(), root.toXML());
 
 		final String s = dNew.toXML();
 
@@ -271,6 +277,42 @@ public class XPathHelperTest extends JDFTestCaseBase
 		final JDFAttributeMap map2 = root2.getXPathValueMap();
 		final XMLDoc dNew2 = new XMLDoc();
 		dNew2.setXPathValues(map2);
-		Assertions.assertEquals(dNew2.getRoot().toXML(), root.toXML());
+		assertEquals(dNew2.getRoot().toXML(), root.toXML());
 	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetXPathValueMapNotRoot()
+	{
+		final XMLDoc jdfDoc = new XMLDoc("a", null);
+		final KElement root = jdfDoc.getRoot();
+		final KElement b = root.appendElement("bbb");
+		b.setXPathAttribute("b/c[3]/d/@foo", "bar3");
+		b.setXPathAttribute("b/c[5]/d/@foo", "bar5");
+		b.setAttribute("test", "it");
+		final Map<String, String> m = b.getXPathValueMap();
+		assertEquals(m.get("b[1]/c[3]/d[1]/@foo"), "bar3");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetXPathValueMapNotRootset()
+	{
+		final XMLDoc jdfDoc = new XMLDoc("a", null);
+		final KElement root = jdfDoc.getRoot();
+		final KElement b = root.appendElement("bbb");
+		b.setXPathAttribute("b/c[3]/d/@foo", "bar3");
+		b.setXPathAttribute("b/c[5]/d/@foo", "bar5");
+		b.setAttribute("test", "it");
+		final JDFAttributeMap m = b.getXPathValueMap();
+		assertEquals(m.get("b[1]/c[3]/d[1]/@foo"), "bar3");
+		KElement b2 = root.appendElement("bbb");
+		b2.setXPathValues(m);
+		assertTrue(b.isEqual(b2));
+	}
+
 }

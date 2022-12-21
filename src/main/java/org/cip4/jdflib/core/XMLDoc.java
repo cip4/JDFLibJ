@@ -786,9 +786,15 @@ public class XMLDoc implements Cloneable
 		{
 			if (getRoot() == null)
 			{
-				String root = valueMap.keySet().iterator().next();
-				root = StringUtil.token(root, 0, "/");
-				setRoot(root, null);
+				for (String root : valueMap.keySet())
+				{
+					if (root.startsWith("/"))
+					{
+						root = StringUtil.token(root, 0, "/[");
+						setRoot(root, null);
+						break;
+					}
+				}
 			}
 			getRoot().setXPathValues(valueMap);
 		}

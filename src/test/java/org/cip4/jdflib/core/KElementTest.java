@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -88,7 +88,6 @@ import org.w3c.dom.Element;
  * test class for KElement
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class KElementTest extends JDFTestCaseBase
 {
@@ -298,7 +297,9 @@ public class KElementTest extends JDFTestCaseBase
 		}
 		final long currentMem = getCurrentMem();
 		if (currentMem > currentMem0)
+		{
 			assertEquals(currentMem, currentMem0, 142 * 100000); // allow 142 per element
+		}
 	}
 
 	/**
@@ -1294,7 +1295,6 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * @throws CloneNotSupportedException
-	 *
 	 */
 	@Test
 	public void testClone() throws CloneNotSupportedException
@@ -1319,7 +1319,6 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * @throws CloneNotSupportedException
-	 *
 	 */
 	@Test
 	public void testCloneNewDoc() throws CloneNotSupportedException
@@ -1344,7 +1343,6 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * @throws CloneNotSupportedException
-	 *
 	 */
 	@Test
 	public void testCloneNewDocText() throws CloneNotSupportedException
@@ -1474,7 +1472,9 @@ public class KElementTest extends JDFTestCaseBase
 		while (l > 4200000)
 		{
 			if (i++ > 10)
+			{
 				assertEquals(0, l, 4200000);
+			}
 			System.gc();
 			ThreadUtil.sleep(10);
 			l = getCurrentMem() - mem;
@@ -2102,10 +2102,10 @@ public class KElementTest extends JDFTestCaseBase
 		final KElement root = jdfDoc.getRoot();
 		root.setXPathAttribute("b/c[3]/d/@foo", "bar3");
 		root.setXPathAttribute("b/c[5]/d/@foo", "bar5");
-		KElement b = root.getElement("b");
-		Map<String, String> m = b.getXPathAttributeMap(".//@*");
+		final KElement b = root.getElement("b");
+		final Map<String, String> m = b.getXPathAttributeMap(".//@*");
 		assertEquals(m.size(), 2);
-		Map<String, String> m2 = b.getXPathAttributeMap(null);
+		final Map<String, String> m2 = b.getXPathAttributeMap(null);
 		assertEquals(m2.size(), 2);
 		assertEquals(b.getXPathAttribute("c[3]/d/@foo", null), "bar3");
 		assertEquals(b.getXPathAttribute("c[5]/d/@foo", null), "bar5");
@@ -2760,7 +2760,6 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetDeepParentChild.
-	 *
 	 */
 	@Test
 	public void testGetDeepParent()
@@ -2782,7 +2781,6 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetDeepParentChild.
-	 *
 	 */
 	@Test
 	public void testGetDeepParentChild()
@@ -2803,7 +2801,6 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetDeepParentNotName.
-	 *
 	 */
 	@Test
 	public void testGetDeepParentNotName()
@@ -3103,7 +3100,6 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	public void testSetAttributeDate() throws DataFormatException
@@ -3115,7 +3111,6 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	public void testSetAttributeXYPair() throws DataFormatException
@@ -3127,14 +3122,13 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	public void testAppendAttributes() throws DataFormatException
 	{
 		final KElement e = KElement.createRoot("a", null);
-		VString v1 = new VString("a b");
-		VString v2 = new VString("a c");
+		final VString v1 = new VString("a b");
+		final VString v2 = new VString("a c");
 		e.appendAttributes("a", null, null, null, false);
 		e.appendAttributes("a", null, null, null, true);
 		e.appendAttributes("a", v1, null, null, true);
@@ -4357,7 +4351,6 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test the flush method also for xml comments, cdata and similar crap
 	 */
 	@Test
