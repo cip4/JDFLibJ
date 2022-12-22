@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -45,12 +45,15 @@
  */
 package org.cip4.jdflib.core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
 import org.apache.xerces.parsers.DOMParser;
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.XMLDocUserData.EnumDirtyPolicy;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -62,8 +65,8 @@ import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -406,6 +409,20 @@ public class JDFDocTest extends JDFTestCaseBase
 		final JDFNode root = doc.getJDFRoot();
 		final JDFNode e = (JDFNode) doc.createElement("JDF");
 		root.insertBefore(e, null);
+	}
+
+	/**
+	 * tests the correct handling of the namespaceuri when a namespace attribute is set
+	 */
+	@Test
+	public void testVersionFromName()
+	{
+		assertEquals(EnumVersion.Version_1_1, JDFDoc.getVersionFromDocType(null));
+		assertEquals(EnumVersion.Version_1_1, JDFDoc.getVersionFromDocType("JDF"));
+		assertEquals(EnumVersion.Version_1_1, JDFDoc.getVersionFromDocType("JMF"));
+		assertEquals(EnumVersion.Version_1_1, JDFDoc.getVersionFromDocType("Foo"));
+		assertEquals(EnumVersion.Version_2_0, JDFDoc.getVersionFromDocType("XJDF"));
+		assertEquals(EnumVersion.Version_2_0, JDFDoc.getVersionFromDocType("XJMF"));
 	}
 
 	/**

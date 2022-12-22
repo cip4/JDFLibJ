@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -55,6 +55,7 @@ import javax.mail.BodyPart;
 
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -161,9 +162,14 @@ public class JDFDoc extends XMLDoc
 	 */
 	public JDFDoc(final String strDocType)
 	{
-		super(strDocType, JDFElement.getSchemaURL());
+		super(strDocType, JDFElement.getSchemaURL(getVersionFromDocType(strDocType)));
 		((DocumentJDFImpl) m_doc).bInitOnCreate = true;
 		((DocumentJDFImpl) m_doc).bKElementOnly = false;
+	}
+
+	static EnumVersion getVersionFromDocType(String strDocType)
+	{
+		return XJDFConstants.XJDF.equals(strDocType) || XJDFConstants.XJMF.equals(strDocType) ? EnumVersion.Version_2_0 : EnumVersion.Version_1_1;
 	}
 
 	/**
@@ -503,8 +509,8 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
-	 * This method sends the contents of this JDFDoc to the URL <code>strURL</code> and receives the response in the returned JDFDoc. the content type is
-	 * automagically set to either text/xml for undefined xml or to application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml
+	 * This method sends the contents of this JDFDoc to the URL <code>strURL</code> and receives the response in the returned JDFDoc. the content type is automagically set to
+	 * either text/xml for undefined xml or to application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml
 	 *
 	 * @param strURL the URL to write to
 	 *
@@ -516,8 +522,8 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
-	 * This method sends the contents of this JDFDoc to the URL <code>strURL</code> and receives the response in the returned JDFDoc. the content type is
-	 * automagically set to either text/xml for undefined xml or to application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml
+	 * This method sends the contents of this JDFDoc to the URL <code>strURL</code> and receives the response in the returned JDFDoc. the content type is automagically set to
+	 * either text/xml for undefined xml or to application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml
 	 *
 	 * @param strURL the URL to write to
 	 *
