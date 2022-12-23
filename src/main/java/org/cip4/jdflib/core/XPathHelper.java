@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -92,7 +92,7 @@ class XPathHelper
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 	 * @return KElement the specified element
 	 */
 	KElement getCreateXPathElement(final String path)
@@ -107,7 +107,7 @@ class XPathHelper
 		 *
 		 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 		 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-		 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+		 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 		 * @return KElement the specified element
 		 */
 		KElement getCreateXPathElement(final String path)
@@ -228,17 +228,17 @@ class XPathHelper
 		{
 			final KElement r = theElement.getDocRoot();
 			final int nextPos = path.indexOf(JDFCoreConstants.SLASH, 2);
-
-			if (nextPos == -1)
+          
+          	if (nextPos == -1)
 			{
 				return theElement;
 			}
-
+          
 			if (!path.substring(1, nextPos).equals(r.getNodeName()))
 			{
 				throw new JDFException("GetCreateXPathElement:: invalid path: " + path);
 			}
-
+          
 			return new XPathHelper(r).getCreateXPathElement(path.substring(nextPos + 1));
 		}
 
@@ -414,7 +414,7 @@ class XPathHelper
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 *            <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param value string to be set as attribute value
 	 */
 	void setXPathValue(final String path, final String value)
@@ -479,7 +479,7 @@ class XPathHelper
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 *            <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param value string to be set as attribute value
 	 * @throws JDFException if the defined path is a bad attribute path
 	 */
@@ -531,7 +531,7 @@ class XPathHelper
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported TODO fix bug for attribute searches where the att value contains xpath syntax
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param def default value if it doesn't exist
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
@@ -570,7 +570,7 @@ class XPathHelper
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported TODO fix bug for attribute searches where the att value contains xpath syntax
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param def default value if it doesn't exist
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
@@ -617,7 +617,7 @@ class XPathHelper
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code> if null, assume .//@*, i.e. all of this
+	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code> if null, assume .//@*, i.e. all of this
 	 * @param bWantText if true, also add text
 	 *
 	 * @return String the String value of the attribute or null if the xpath element does not exist
@@ -626,30 +626,25 @@ class XPathHelper
 	JDFAttributeMap getXPathAttributeMap(final String path, final boolean bWantText)
 	{
 		final int pos = path == null ? -1 : path.lastIndexOf(JDFCoreConstants.AET);
-		final String attName = path == null ? null : pos < 0 ? path : path.substring(pos + 1);
+		final String attName = path == null ? null : path.substring(pos + 1);
 		final String subele = path == null ? ".//*" : path.substring(0, pos);
 		final VElement vEle = theElement.getXPathElementVector(subele, 0);
 		if (vEle == null)
 		{
 			return null;
 		}
-		final String base = path == null ? buildXPath((String) null, 1) : path;
-		String rootName = StringUtil.token(base, 0, "/[");
+		final String base = path == null ? null : buildXPath((String) null, 1);
 		final JDFAttributeMap map = new JDFAttributeMap();
 		for (final KElement e : vEle)
 		{
 			final Collection<String> vKeys = e.getAttributeArray_KElement();
-			String baseXPath = new XPathHelper(e).buildXPath(base, 1);
-			if (baseXPath.equals(".") && theElement.equals(theElement.getDocRoot()))
-			{
-				baseXPath = base;
-			}
+			final String baseXPath = new XPathHelper(e).buildXPath(base, 1);
 			final String nodeName = e.getNodeName();
 			String prefix = KElement.xmlnsPrefix(nodeName);
 			if (prefix != null)
 			{
 				final String uri = e.getNamespaceURI();
-				map.put("/" + rootName + "/@xmlns:" + prefix, uri);
+				map.put(JDFConstants.SLASH + StringUtil.token(baseXPath, 0, JDFConstants.SLASH) + "/@xmlns:" + prefix, uri);
 			}
 			if (vKeys != null)
 			{
@@ -662,7 +657,7 @@ class XPathHelper
 						if (prefix != null)
 						{
 							final String uri = e.getNamespaceURIFromPrefix(prefix);
-							map.put("/" + rootName + "/@xmlns:" + prefix, uri);
+							map.put(JDFConstants.SLASH + StringUtil.token(baseXPath, 0, JDFConstants.SLASH) + "/@xmlns:" + prefix, uri);
 						}
 					}
 				}
@@ -686,7 +681,7 @@ class XPathHelper
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[./foo/@foo=\"bar\"]</code>
+	 *            <code>parentElement[@a=\"b\"]/thisElement[./foo/@foo=\"bar\"]</code>
 	 * @return KElement the specified element
 	 * @throws IllegalArgumentException if path is not supported
 	 */
@@ -736,7 +731,7 @@ class XPathHelper
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@,// are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 	 * @param maxSize
 	 * @param bLocal
 	 * @return VElement the vector of matching elements
@@ -754,7 +749,7 @@ class XPathHelper
 		 *
 		 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@,// are supported
 		 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-		 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+		 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 		 * @param maxSize
 		 * @param bLocal
 		 * @return VElement the vector of matching elements

@@ -4990,8 +4990,23 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public JDFAttributeMap getXPathValueMap()
 	{
+		return getXPathValueMap(false);
+	}
+
+	/**
+	 * Gets a map of attribute values as defined by XPath namespace prefixes are resolved <br>
+	 *
+	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
+	 *
+	 *      <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code> if null, assume .//@*, i.e. all of this
+	 *
+	 * @return String the String value of the xpath
+	 *
+	 */
+	public JDFAttributeMap getXPathValueMap(boolean isRelative)
+	{
 		final XPathHelper xPathHelper = new XPathHelper(this);
-		return xPathHelper.getXPathAttributeMap(null, true);
+		return xPathHelper.getXPathAttributeMap(isRelative ? ".//@*" : null, true);
 	}
 
 	/**
