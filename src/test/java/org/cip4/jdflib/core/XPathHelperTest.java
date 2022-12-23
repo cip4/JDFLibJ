@@ -293,7 +293,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 		b.setXPathAttribute("b/c[5]/d/@foo", "bar5");
 		b.setAttribute("test", "it");
 		final Map<String, String> m = b.getXPathValueMap();
-		assertEquals(m.get("b[1]/c[3]/d[1]/@foo"), "bar3");
+		assertEquals(m.get("./b[1]/c[3]/d[1]/@foo"), "bar3");
 	}
 
 	/**
@@ -309,7 +309,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 		b.setXPathAttribute("b/c[5]/d/@foo", "bar5");
 		b.setAttribute("test", "it");
 		final JDFAttributeMap m = b.getXPathValueMap();
-		assertEquals(m.get("b[1]/c[3]/d[1]/@foo"), "bar3");
+		assertEquals(m.get("./b[1]/c[3]/d[1]/@foo"), "bar3");
 		KElement b2 = root.appendElement("bbb");
 		b2.setXPathValues(m);
 		assertTrue(b.isEqual(b2));

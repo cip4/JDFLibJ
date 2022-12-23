@@ -41,7 +41,6 @@ import java.util.Set;
 
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.StringUtil;
-import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Node;
 
 /**
@@ -642,9 +641,9 @@ class XPathHelper
 			final Collection<String> vKeys = e.getAttributeArray_KElement();
 			String baseXPath = new XPathHelper(e).buildXPath(base, 1);
 			if (baseXPath.equals(".") && theElement.equals(theElement.getDocRoot()))
+			{
 				baseXPath = base;
-			else
-				baseXPath = UrlUtil.cleanDots(baseXPath);
+			}
 			final String nodeName = e.getNodeName();
 			String prefix = KElement.xmlnsPrefix(nodeName);
 			if (prefix != null)
