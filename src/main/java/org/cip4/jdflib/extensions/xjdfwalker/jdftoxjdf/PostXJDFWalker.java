@@ -873,6 +873,7 @@ class PostXJDFWalker extends BaseElementWalker
 					JDFRunList ruli = (JDFRunList) rh.getResource();
 					JDFIntegerList pages = ruli == null ? null : JDFIntegerList.createIntegerList(ruli.getNonEmpty(AttributeName.PAGES));
 					ResourceHelper rh2 = rh;
+					int lastNPage = 0;
 					if (pages != null)
 					{
 						if (pages.size() > 2)
@@ -892,7 +893,13 @@ class PostXJDFWalker extends BaseElementWalker
 								}
 								JDFRunList ruli2 = (JDFRunList) rh2.getResource();
 								ruli2.setAttribute(AttributeName.PAGES, pages.getInt(pos) + " " + pages.getInt(pos + 1));
-								ruli2.setAttribute(AttributeName.NPAGE, "" + (1 + Math.abs(pages.getInt(pos) - pages.getInt(pos + 1))));
+								int nPage = 1 + Math.abs(pages.getInt(pos) - pages.getInt(pos + 1));
+								ruli2.setAttribute(AttributeName.NPAGE, "" + nPage);
+								if (ruli2.hasNonEmpty(AttributeName.LOGICALPAGE) && lastNPage > 0)
+								{
+									ruli2.addAttribute(AttributeName.LOGICALPAGE, lastNPage, null);
+								}
+								lastNPage = nPage;
 							}
 						}
 					}
