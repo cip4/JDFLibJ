@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -110,8 +110,11 @@ public class WalkPreviewGenerationParams extends WalkResource
 	{
 		final String typ = jdf.getAttribute(AttributeName.PREVIEWUSAGE);
 		final KElement xjdfPreview = super.walk(jdf, xjdf);
-		final ResourceHelper ph = new ResourceHelper(xjdfPreview.getParentNode_KElement());
-		ph.ensurePart(AttributeName.PREVIEWTYPE, typ);
+		if (xjdfPreview != null)
+		{
+			final ResourceHelper ph = new ResourceHelper(xjdfPreview.getParentNode_KElement());
+			ph.ensurePart(AttributeName.PREVIEWTYPE, typ);
+		}
 		return xjdfPreview;
 	}
 
