@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -104,6 +104,7 @@ public abstract class XJDFConstants
 	public static final String IsRoot = "IsRoot";
 	public static final String ItemRef = "ItemRef";
 
+	public static final String LayerType = "LayerType";
 	public static final String LooseBinding = "LooseBinding";
 	public static final String LooseBindingParams = "LooseBindingParams";
 
