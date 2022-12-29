@@ -285,6 +285,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		}
 		xjdf.setAttribute(AttributeName.MAXVERSION, getXJDFVersion().getName());
 		xjdf.setAttribute(AttributeName.VERSION, getVersion().getName());
+		new XJDFPrepWalker().walkTree(newXJDF, null);
 		xjdf.cleanUp(false);
 		return isJMF;
 	}

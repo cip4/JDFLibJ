@@ -34,70 +34,27 @@
  *
  *
  */
-package org.cip4.jdflib.extensions.xjdfwalker;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
-import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
-import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumScope;
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJMFHelper;
-import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
-import org.cip4.jdflib.jmf.JDFResourceQuParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Test;
 
-/**
- * @author rainer prosi
- *
- */
-public class XJMFToJMFConverterTest extends JDFTestCaseBase
+class XJDFPrepWalkerTest
 {
-
-	/**
-	 *
-	 */
-	@Test
-	public void testResubmitQueueEntry()
-	{
-		final XJMFHelper h = new XJMFHelper();
-		final MessageHelper mh = h.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry);
-		mh.appendElement(ElementName.RESUBMISSIONPARAMS).setAttribute(AttributeName.UPDATEMETHOD, EnumUpdateMethod.Incremental.getName());
-		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
-		final JDFDoc d = xc.convert(h.getRoot());
-		assertNotNull(d);
-		// assertTrue(d.getJMFRoot().isValid(EnumValidationLevel.Incomplete));
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	public void testScope()
-	{
-		final XJMFHelper h = new XJMFHelper();
-		final MessageHelper mh = h.appendMessage(EnumFamily.Query, EnumType.Resource);
-		mh.appendElement(ElementName.RESOURCEQUPARAMS).setAttribute(AttributeName.SCOPE, EnumScope.Allowed.getName());
-		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
-		final JDFDoc d = xc.convert(h.getRoot());
-		final JDFResourceQuParams rqp2 = d.getJMFRoot().getQuery(0).getResourceQuParams();
-		assertEquals(EnumScope.Allowed, rqp2.getScope());
-	}
 
 	/**
 	 *
@@ -121,59 +78,10 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 			m.setMediaType(EnumMediaType.Paper);
 			m.setWeight(80 + 20 * i);
 		}
-		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
-		final JDFDoc d = xc.convert(h.getRoot());
-		JDFJMF jmf = d.getJMFRoot();
-		assertNotNull(jmf.getResponse(0).getResourceInfo(0));
-		assertNotNull(jmf.getResponse(0).getResourceInfo(1));
-		assertNull(jmf.getResponse(0).getResourceInfo(2));
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	public void testSenderID()
-	{
-		final XJMFHelper h = new XJMFHelper();
-		final MessageHelper mh = h.appendMessage(EnumFamily.Signal, EnumType.Status);
-		mh.appendElement(ElementName.DEVICEINFO).setAttribute(AttributeName.DEVICEID, "d1");
-		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
-		final JDFDoc d = xc.convert(h.getRoot());
-		assertNull(StringUtil.getNonEmpty(d.getJMFRoot().getDeviceID()));
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	public void testSenderID2()
-	{
-		final XJMFHelper h = new XJMFHelper();
-		h.getHeader().setAttribute(AttributeName.DEVICEID, "xjmfdev");
-		final MessageHelper mh = h.appendMessage(EnumFamily.Query, EnumType.Status);
-		mh.getHeader().setAttribute(AttributeName.DEVICEID, "qdev");
-		mh.appendElement(ElementName.SUBSCRIPTION).setAttribute(AttributeName.URL, "foo");
-		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
-		final JDFDoc d = xc.convert(h.getRoot());
-		assertNull(StringUtil.getNonEmpty(d.getJMFRoot().getDeviceID()));
-		assertEquals("xjmfdev", d.getJMFRoot().getSenderID());
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	public void testSenderID3()
-	{
-		final XJMFHelper h = new XJMFHelper();
-		h.getHeader().setAttribute(AttributeName.DEVICEID, "xjmfdev");
-		final MessageHelper mh = h.appendMessage(EnumFamily.Query, EnumType.Status);
-		mh.getHeader().setAttribute(AttributeName.DEVICEID, "qdev");
-		mh.appendElement(ElementName.SUBSCRIPTION).setAttribute(AttributeName.URL, "foo");
-		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
-		final JDFDoc d = xc.convert(h.getRoot());
-		assertEquals("qdev", d.getJMFRoot().getQuery(0).getSenderID());
+		final XJDFPrepWalker w = new XJDFPrepWalker();
+		KElement root = h.getRoot();
+		w.walkTree(root, null);
+		assertEquals(2, mh.getRoot().numChildElements(ElementName.RESOURCEINFO, null));
 	}
 
 }
