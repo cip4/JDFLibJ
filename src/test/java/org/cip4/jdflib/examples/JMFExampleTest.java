@@ -38,12 +38,16 @@ package org.cip4.jdflib.examples;
 
 import java.util.Vector;
 
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumScope;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -55,12 +59,14 @@ import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFQuery;
+import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -131,7 +137,96 @@ public class JMFExampleTest extends ExampleTest
 	{
 		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		final JDFJMF jmf = b.buildKnownDevicesQuery(JDFDeviceFilter.EnumDeviceDetails.Brief);
+		jmf.getQuery(0).setID("ID_KnownDev");
 		writeTest(jmf, "introduction/knowndevices.jmf", true, null);
+	}
+
+	/**
+	 *
+	 * test status subscription
+	 */
+	@Test
+	public void testBuildAbort()
+	{
+		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		final JDFJMF jmf = b.buildAbortQueueEntry("entry1");
+		writeTest(jmf, "AbortQueueEntry.jmf", true, null);
+	}
+
+	/**
+	 *
+	 * test status subscription
+	 */
+	@Test
+	public void testBuildResume()
+	{
+		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		final JDFJMF jmf = b.buildResumeQueueEntry("entry1");
+		jmf.getCommand(0).setID("ID_ResumeQuery");
+		writeTest(jmf, "ResumeQueueEntry.jmf", true, null);
+
+	}
+
+	/**
+	 *
+	 * test status subscription
+	 */
+	@Test
+	public void testRespondResume()
+	{
+		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		final JDFJMF jmf = b.buildResumeQueueEntry("entry1");
+		jmf.getCommand(0).setID("ID_ResumeQuery");
+
+		JDFJMF jmfr = jmf.createResponse();
+
+		JDFResponse r = jmfr.getResponse(0);
+		JDFQueueEntry qe = r.appendQueue().appendQueueEntry();
+		qe.setQueueEntryID("entry1");
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
+		writeTest(jmfr, "ResponseResumeQueueEntry.jmf", true, null);
+
+	}
+
+	/**
+	 *
+	 * test status subscription
+	 */
+	@Test
+	public void testRespondKnownDevices()
+	{
+		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		final JDFJMF jmf = b.buildKnownDevicesQuery(JDFDeviceFilter.EnumDeviceDetails.Brief);
+		jmf.getQuery(0).setID("ID_KnownDev");
+
+		JDFJMF jmfr = jmf.createResponse();
+
+		JDFResponse r = jmfr.getResponse(0);
+		JDFDeviceList dl = r.appendDeviceList();
+		dl.getCreateDeviceInfo(0).setDeviceID("d1");
+		dl.getCreateDeviceInfo(1).setDeviceID("d2");
+		writeTest(jmfr, "ResponseKnownDevice.jmf", true, null);
+
+	}
+
+	/**
+	 *
+	 * test status subscription
+	 */
+	@Test
+	public void testStatusSignal()
+	{
+		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		final JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		JDFSignal s = jmf.getSignal(0);
+		s.getStatusQuParams().setJobID("job1");
+		JDFDeviceInfo di = s.getDeviceInfo(0);
+		di.setDeviceStatus(EnumDeviceStatus.Setup);
+		JDFJobPhase jp = di.getCreateJobPhase(0);
+		jp.setJobID("job1");
+		jp.setStatus(EnumNodeStatus.Setup);
+		writeTest(jmf, "StatusSignal.jmf", true, null);
+
 	}
 
 	/**
@@ -150,6 +245,18 @@ public class JMFExampleTest extends ExampleTest
 
 		query.getResourceQuParams().setClasses(v);
 		query.getResourceQuParams().setScope(EnumScope.Allowed);
+		writeTest(jmf, "jmf/lotquery.jmf", true, null);
+	}
+
+	/**
+	 *
+	 * new activity element in JobPhase
+	 */
+	@Test
+	public void testAbortQueueEntry()
+	{
+		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		final JDFJMF jmf = b.buildAbortQueueEntry("qeid");
 		writeTest(jmf, "jmf/lotquery.jmf", true, null);
 	}
 
@@ -186,6 +293,7 @@ public class JMFExampleTest extends ExampleTest
 	public void setUp() throws Exception
 	{
 		super.setUp();
+		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_8);
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentName(null);
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentVersion(null);
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID(null);

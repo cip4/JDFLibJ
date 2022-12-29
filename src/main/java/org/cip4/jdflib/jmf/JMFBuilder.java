@@ -51,8 +51,11 @@ import org.cip4.jdflib.auto.JDFAutoShutDownCmdParams.EnumShutDownType;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.NodeIdentifier;
@@ -148,6 +151,8 @@ public class JMFBuilder implements Cloneable
 	public JDFJMF buildAbortQueueEntry(final String queueEntryId)
 	{
 		final JDFJMF jmf = buildQueueEntryCommand(queueEntryId, EnumType.AbortQueueEntry);
+		JDFAbortQueueEntryParams aqp = jmf.getCommand(0).getAbortQueueEntryParams();
+		aqp.setEndStatus(EnumNodeStatus.Aborted);
 		return lastSteps(jmf);
 	}
 
@@ -170,7 +175,7 @@ public class JMFBuilder implements Cloneable
 	 * @param typ
 	 * @return the jmf
 	 */
-	private JDFJMF buildQueueEntryCommand(final String queueEntryId, final EnumType typ)
+	JDFJMF buildQueueEntryCommand(final String queueEntryId, final EnumType typ)
 	{
 		if (queueEntryId == null)
 		{
@@ -178,8 +183,10 @@ public class JMFBuilder implements Cloneable
 		}
 		final JDFJMF jmf = createJMF(EnumFamily.Command, typ);
 		final JDFCommand command = jmf.getCommand(0);
-
-		command.appendQueueEntryDef().setQueueEntryID(queueEntryId);
+		String params = typ.getName() + "Params";
+		KElement paramsEle = command.appendElement(params);
+		JDFQueueFilter qf = (JDFQueueFilter) paramsEle.appendElement(ElementName.QUEUEFILTER);
+		JDFQueueEntryDef qed = qf.appendQueueEntryDef(queueEntryId);
 		return lastSteps(jmf);
 	}
 

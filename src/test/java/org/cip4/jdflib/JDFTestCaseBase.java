@@ -507,10 +507,15 @@ public abstract class JDFTestCaseBase
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		conv.setTrackAudits(false);
+
 		final String v = e.getAttribute(AttributeName.VERSION);
 		if ("1.7".equals(v))
 		{
 			conv.setNewVersion(EnumVersion.Version_2_1);
+		}
+		else if ("1.8".equals(v))
+		{
+			conv.setNewVersion(EnumVersion.Version_2_2);
 		}
 		final KElement x = conv.convert(e);
 		return x;

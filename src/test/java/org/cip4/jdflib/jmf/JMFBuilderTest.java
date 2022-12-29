@@ -37,6 +37,11 @@
  */
 package org.cip4.jdflib.jmf;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
@@ -55,7 +60,6 @@ import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -102,8 +106,8 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	{
 		final JDFJMF jmf = b.buildSubmitQueueEntry("retURL", "xxx");
 		final JDFQueueSubmissionParams queueSubmissionParams = jmf.getCommand(0).getQueueSubmissionParams(0);
-		Assertions.assertEquals(queueSubmissionParams.getURL(), "xxx");
-		Assertions.assertEquals(queueSubmissionParams.getReturnJMF(), "retURL");
+		assertEquals(queueSubmissionParams.getURL(), "xxx");
+		assertEquals(queueSubmissionParams.getReturnJMF(), "retURL");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "submitQueueEntry");
 	}
 
@@ -115,17 +119,17 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 */
 	private void roundTrip(final JDFJMF jmf, final EnumValidationLevel level, final String dir)
 	{
-		Assertions.assertTrue(jmf.isValid(level));
+		assertTrue(jmf.isValid(level));
 		jmf.write2File(dir + ".jmf");
 		final JDFToXJDF xc = new XJDF20();
 		xc.setTypeSafeMessage(true);
 		final KElement e = xc.convert(jmf);
-		Assertions.assertNotNull(e);
+		assertNotNull(e);
 		e.write2File(dir + ".xjmf");
 		final XJDFToJDFConverter xc2 = new XJDFToJDFConverter(null);
 		final JDFDoc doc = xc2.convert(e);
 		doc.write2File(dir + ".xjmf.jmf", 2, false);
-		Assertions.assertTrue(doc.getJMFRoot().isValid(level));
+		assertTrue(doc.getJMFRoot().isValid(level));
 
 	}
 
@@ -137,7 +141,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testBuildResourceSignal()
 	{
 		final JDFJMF jmf = b.buildResourceSignal(true, null);
-		Assertions.assertEquals(jmf.getSignal(0).getType(), "Resource");
+		assertEquals(jmf.getSignal(0).getType(), "Resource");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "resourceSignal");
 	}
 
@@ -161,7 +165,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 		map.put(AttributeName.CONDITION, "Waste");
 		rl.setActualAmount(33, map);
 		final JDFJMF jmf = b.buildResourceSignal(true, rl);
-		Assertions.assertEquals(jmf.getSignal(0).getType(), "Resource");
+		assertEquals(jmf.getSignal(0).getType(), "Resource");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "resourceSignalWaste");
 	}
 
@@ -195,7 +199,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 				ap.appendPartAmount(map).setActualAmount(125 + (i * 42 * sep.hashCode()) % 123);
 			}
 		}
-		Assertions.assertEquals(signal.getType(), "Resource");
+		assertEquals(signal.getType(), "Resource");
 		jmf.write2File(sm_dirTestDataTemp + "resourceInk.jmf");
 	}
 
@@ -207,7 +211,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testBuildStatusSignal()
 	{
 		final JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
-		Assertions.assertEquals(jmf.getSignal(0).getType(), "Status");
+		assertEquals(jmf.getSignal(0).getType(), "Status");
 		roundTrip(jmf, EnumValidationLevel.Incomplete, sm_dirTestDataTemp + "statusSignal");
 	}
 
@@ -219,11 +223,11 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testBuildNewJDFCommand()
 	{
 		final JDFJMF jmf = b.buildNewJDFCommand();
-		Assertions.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 		final JDFToXJDF xc = new XJDF20();
 		xc.setTypeSafeMessage(true);
 		final KElement e = xc.convert(jmf);
-		Assertions.assertNull(e);
+		assertNull(e);
 
 	}
 
@@ -236,6 +240,28 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	{
 		final JDFJMF jmf = b.buildStatusSubscription("signalurl", 30, -1, null);
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "SubscriptionStatus");
+	}
+
+	/**
+	 *
+	 * test status subscription
+	 */
+	@Test
+	public void testBuildAbort()
+	{
+		final JDFJMF jmf = b.buildAbortQueueEntry("q1");
+		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "Abort");
+	}
+
+	/**
+	 *
+	 * test status subscription
+	 */
+	@Test
+	public void testBuildHold()
+	{
+		final JDFJMF jmf = b.buildHoldQueueEntry("q1");
+		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "Hold");
 	}
 
 	/**
@@ -279,13 +305,13 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testSenderID()
 	{
 		JDFJMF jmf = b.buildMilestone("PrepressCompleted", "jobID");
-		Assertions.assertEquals(jmf.getSenderID(), JDFJMF.getTheSenderID());
+		assertEquals(jmf.getSenderID(), JDFJMF.getTheSenderID());
 		b.setSenderID("fooBar");
 		jmf = b.buildMilestone("PrepressCompleted", "jobID");
-		Assertions.assertEquals(jmf.getSenderID(), "fooBar");
+		assertEquals(jmf.getSenderID(), "fooBar");
 		b.setSenderID(null);
 		jmf = b.buildMilestone("PrepressCompleted", "jobID");
-		Assertions.assertEquals(jmf.getSenderID(), "");
+		assertEquals(jmf.getSenderID(), "");
 	}
 
 	/**
@@ -296,13 +322,13 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testSenderIDMessage()
 	{
 		JDFJMF jmf = b.buildMilestone("PrepressCompleted", "jobID");
-		Assertions.assertEquals(jmf.getSenderID(), JDFJMF.getTheSenderID());
+		assertEquals(jmf.getSenderID(), JDFJMF.getTheSenderID());
 		b.setSenderID("fooBar");
 		jmf = b.buildMilestone("PrepressCompleted", "jobID");
-		Assertions.assertEquals(jmf.getMessageElement(null, null, 0).getSenderID(), "fooBar");
+		assertEquals(jmf.getMessageElement(null, null, 0).getSenderID(), "fooBar");
 		b.setSenderID(null);
 		jmf = b.buildMilestone("PrepressCompleted", "jobID");
-		Assertions.assertEquals(jmf.getMessageElement(null, null, 0).getSenderID(), "");
+		assertEquals(jmf.getMessageElement(null, null, 0).getSenderID(), "");
 	}
 
 }
