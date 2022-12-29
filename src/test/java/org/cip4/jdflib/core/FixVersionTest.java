@@ -789,7 +789,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	{
 		final JDFJMF jmf = new JMFBuilder().buildAbortQueueEntry("42");
 		final JDFCommand command = jmf.getCommand(0);
-		assertNotNull(command.getQueueEntryDef(0));
+		assertNull(command.getQueueEntryDef(0));
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.walkTree(jmf, null);
 		assertNull(command.getQueueEntryDef(0));
