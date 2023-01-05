@@ -321,8 +321,8 @@ public class HotFolder
 			log.error("Cannot use read only hot folder at " + this);
 		}
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
-		r.add(this);
 		setMaxConcurrent(mc);
+		r.add(this);
 		lastModified = -1;
 		hfRunning.clear();
 	}
@@ -363,11 +363,7 @@ public class HotFolder
 					log.warn("ignoring read only file in hot folder: " + file);
 					files[i] = null;
 				}
-				else if (file.isDirectory() || file.isHidden())
-				{
-					files[i] = null;
-				}
-				else if (hfRunning.contains(file))
+				else if (file.isDirectory() || file.isHidden() || hfRunning.contains(file))
 				{
 					files[i] = null;
 				}
@@ -390,6 +386,7 @@ public class HotFolder
 		}
 		else if (!lftAt.exists())
 		{
+			log.warn("removed disappearing hot file " + lftAt);
 			lastFileTime.remove(lftAt);
 			found = false;
 		}
@@ -438,6 +435,7 @@ public class HotFolder
 			if (fileJ != null)
 			{
 				hfRunning.remove(fileJ);
+				log.info("completed running " + this);
 			}
 		}
 

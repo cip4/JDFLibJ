@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -63,6 +63,7 @@ class HotFolderRunner extends Thread
 	{
 		if (getTherunner() != null)
 		{
+			log.info("shutdown hot folder runner: " + getTherunner());
 			getTherunner().quit();
 		}
 	}
@@ -79,7 +80,7 @@ class HotFolderRunner extends Thread
 		ThreadUtil.notifyAll(mutex);
 		MultiTaskQueue.shutDown(name);
 		ThreadUtil.notifyAll(this);
-		log.info("Finished stopping hot folder: " + name);
+		log.info("Finished stopping hot folder: " + this);
 		theRunner.set(null);
 	}
 
@@ -102,6 +103,7 @@ class HotFolderRunner extends Thread
 	public synchronized void remove(final HotFolder hotFolder)
 	{
 		hotfolders.remove(hotFolder);
+		log.info("removing " + hotFolder.getDir());
 		if (hotfolders.isEmpty())
 		{
 			quit();
@@ -114,7 +116,7 @@ class HotFolderRunner extends Thread
 		super("HotFolderRunner");
 		hotfolders = new ArrayList<>();
 		setDaemon(true);
-		log.info("Starting hotfolder runner thread");
+		log.info("Starting hotfolder runner thread " + getName());
 		interrupt = new AtomicBoolean(false);
 		mutex = new MyMutex();
 		ran = 0;
@@ -143,7 +145,7 @@ class HotFolderRunner extends Thread
 	}
 
 	final AtomicBoolean interrupt;
-	int maxConcurrent;
+	private int maxConcurrent;
 
 	/**
 	 * @see java.lang.Thread#run()
@@ -164,7 +166,7 @@ class HotFolderRunner extends Thread
 					mod = folder.loop() || mod;
 					if (interrupt.get())
 					{
-						log.info("interrupted in hotfilder loop " + folder);
+						log.info("interrupted in hotfolder loop " + folder);
 						break;
 					}
 				}
@@ -215,7 +217,7 @@ class HotFolderRunner extends Thread
 	@Override
 	public String toString()
 	{
-		return "HotFolderRunner [" + (hotfolders != null ? "hotfolder size=" + hotfolders.size() + ", " : "") + "interrupt=" + interrupt + ", maxConcurrent=" + maxConcurrent + "]";
+		return "HotFolderRunner [" + "hotfolders[" + hotfolders.size() + "] " + (interrupt.get() ? "interrupt" : "") + ", maxConcurrent=" + maxConcurrent + "]";
 	}
 
 	/**
@@ -231,15 +233,17 @@ class HotFolderRunner extends Thread
 		ran++;
 		if (getMaxConcurrent() == 1)
 		{
+			log.info("running concurrent " + runner);
 			runner.run();
 		}
 		else
 		{
 			final MultiTaskQueue taskQueue = MultiTaskQueue.getCreateQueue(getName(), getMaxConcurrent());
-			if (ran % 100 == 0 && taskQueue.size() > 2 * getMaxConcurrent())
+			if (ran % 10 == 0 && taskQueue.size() > 2 * getMaxConcurrent())
 			{
-				log.info("Queueing into full hf queue; size=" + taskQueue.size());
+				log.warn("Queueing into full hf queue; size=" + taskQueue.size());
 			}
+			log.info("queueing " + runner);
 			return taskQueue.queue(runner);
 		}
 		return true;

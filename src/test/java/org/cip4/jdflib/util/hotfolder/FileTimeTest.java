@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,6 +40,7 @@ package org.cip4.jdflib.util.hotfolder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -63,6 +64,13 @@ public class FileTimeTest extends JDFTestCaseBase
 	public void testExists()
 	{
 		assertTrue(new FileTime(new File(sm_dirTestData), false).exists());
+	}
+
+	@Test
+	public void testToString()
+	{
+		assertNotNull(new FileTime(new File(sm_dirTestData), true).toString());
+		assertNotNull(new FileTime(new File(sm_dirTestData), false).toString());
 	}
 
 	@Test

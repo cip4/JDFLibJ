@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -84,11 +84,7 @@ public class ColdFolder extends HotFolder
 		{
 			for (int i = 0; i < files.length; i++)
 			{
-				if (files[i].isDirectory())
-				{
-					files[i] = null;
-				}
-				else if (hfRunning.contains(files[i]))
+				if (files[i].isDirectory() || hfRunning.contains(files[i]))
 				{
 					files[i] = null;
 				}
