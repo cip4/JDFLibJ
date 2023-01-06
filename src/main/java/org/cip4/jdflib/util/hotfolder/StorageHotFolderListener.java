@@ -165,23 +165,25 @@ class StorageHotFolderListener implements HotFolderListener
 				copyCompleted(hotFile, false);
 				ok = false; // not good
 			}
-			try
+			else
 			{
-				ok = theListener.hotFile(storedFiles.getA());
-			}
-			catch (final Throwable t)
-			{
-				log.error("Could not process " + hotFile, t);
-			}
-			copyCompleted(storedFiles.getA(), ok);
-			log.info("deleting tmp file: " + storedFiles.getB());
-			final boolean deleted = FileUtil.deleteAll(storedFiles.getB());
-			if (!deleted)
-			{
-				log.warn("Problems deleting: " + storedFiles.getB());
+				try
+				{
+					ok = theListener.hotFile(storedFiles.getA());
+				}
+				catch (final Throwable t)
+				{
+					log.error("Could not process " + hotFile, t);
+				}
+				copyCompleted(storedFiles.getA(), ok);
+				log.info("deleting tmp file: " + storedFiles.getB());
+				final boolean deleted = FileUtil.deleteAll(storedFiles.getB());
+				if (!deleted)
+				{
+					log.warn("Problems deleting: " + storedFiles.getB());
+				}
 			}
 		}
-
 	}
 
 	/**
