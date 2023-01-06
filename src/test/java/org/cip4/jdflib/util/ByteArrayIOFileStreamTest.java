@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -466,6 +466,66 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 			n++;
 		}
 		assertEquals(n, len);
+	}
+
+	/**
+	 * @throws Throwable
+	 */
+	@Test
+	public void testGetBufferedInputStreamFinalize() throws Throwable
+	{
+		final File f = new File(sm_dirTestDataTemp + "bios224.fil");
+		f.delete();
+		f.createNewFile();
+		final FileOutputStream fos = new FileOutputStream(f);
+		for (int i = 0; i < 20000; i++)
+		{
+			fos.write(i % 256);
+		}
+		fos.close();
+		ByteArrayIOFileStream ios = new ByteArrayIOFileStream(f, 333, true);
+		ByteArrayIOFileStream ios2 = new ByteArrayIOFileStream(ios.getInputStream(), 333);
+		ios.finalize();
+		ByteArrayIOInputStream is = ios2.getInputStream();
+		int n = 0;
+		while (is.read() >= 0)
+		{
+			n++;
+		}
+		assertEquals(n, 20000);
+		ios2.close();
+
+	}
+
+	/**
+	 * @throws Throwable
+	 */
+	@Test
+	public void testreadFinalize() throws Throwable
+	{
+		final File f = new File(sm_dirTestDataTemp + "bios223.fil");
+		f.delete();
+		f.createNewFile();
+		final FileOutputStream fos = new FileOutputStream(f);
+		for (int i = 0; i < 20000; i++)
+		{
+			fos.write(i % 256);
+		}
+		fos.close();
+		ByteArrayIOFileStream ios = new ByteArrayIOFileStream(f, 333, true);
+		ByteArrayIOInputStream is = ios.getInputStream();
+		ios.finalize();
+		int n = 0;
+		try
+		{
+			is.read();
+			fail();
+		}
+		catch (Exception e)
+		{
+			// nop
+		}
+
 	}
 
 }

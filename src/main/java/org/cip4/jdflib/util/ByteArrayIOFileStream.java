@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -56,6 +56,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.util.thread.DelayedPersist;
+import org.cip4.jdflib.util.thread.IPersistable;
 
 /**
  * Shared input / outputStream class write once, read many...
@@ -71,6 +73,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	private RandomAccessFile os;
 	private boolean isTmpFile;
 	private boolean isCopy;
+	private boolean hasCopy;
 	private final int id;
 	private static AtomicInteger n = new AtomicInteger();
 
@@ -316,6 +319,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		os = null;
 		id = n.incrementAndGet();
 		isCopy = false;
+		hasCopy = false;
 	}
 
 	/**
@@ -511,8 +515,25 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	protected void finalize() throws Throwable
 	{
 		if (!isCopy)
-			close();
+		{
+			if (hasCopy)
+				DelayedPersist.getDelayedPersist().queue(new CloseRunner(), 123456);
+			else
+				close();
+		}
 		super.finalize();
+	}
+
+	private class CloseRunner implements IPersistable
+	{
+
+		@Override
+		public boolean persist()
+		{
+			close();
+			return true;
+		}
+
 	}
 
 	/**
@@ -526,6 +547,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		{
 			final ByteArrayIOFileInputStream bais = (ByteArrayIOFileInputStream) is;
 			file = bais.ios.file;
+			bais.ios.hasCopy = true;
 			isTmpFile = false;
 			isCopy = true;
 			os = bais.ios.os;
