@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.util.hotfolder;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -46,6 +47,7 @@ import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.hotfolder.StorageHotFolderListener.DelayedRunner;
 import org.junit.jupiter.api.Test;
 
 public class StorageHotFolderListenerTest extends JDFTestCaseBase
@@ -140,6 +142,23 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		assertNotNull(hl.toString());
 		final StorageHotFolderListener hlnull = new StorageHotFolderListener(null, new BoomListener(), null);
 		assertNotNull(hlnull.toString());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testDelayedRunner()
+	{
+		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
+		FileUtil.deleteAll(theHFDir);
+		theHFDir.mkdirs();
+		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
+		File hotFile = new File("a");
+		DelayedRunner dr = hl.new DelayedRunner(hotFile);
+		assertNotNull(dr.toString());
+		assertFalse(dr.ok);
+		assertEquals(hotFile, dr.hotFile);
 	}
 
 	/**

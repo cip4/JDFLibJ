@@ -48,6 +48,7 @@ import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.RollingBackupFile;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.file.FileSorter;
+import org.cip4.jdflib.util.thread.MultiTaskQueue;
 
 /**
  * hotfolder listener that also moves to a done dir
@@ -135,38 +136,71 @@ class StorageHotFolderListener implements HotFolderListener
 	HotFolderListener theListener;
 	private int maxAux;
 
+	class DelayedRunner implements Runnable
+	{
+		public DelayedRunner(File hotFile)
+		{
+			super();
+			this.hotFile = hotFile;
+			ok = false;
+		}
+
+		@Override
+		public String toString()
+		{
+			return "DelayedRunner [hotFile=" + hotFile + ", ok=" + ok + "]";
+		}
+
+		boolean ok;
+		final File hotFile;
+
+		@Override
+		public void run()
+		{
+			log.info("processing hot file: " + hotFile);
+			final MyPair<File, File> storedFiles = getStoredFile(hotFile);
+			if (storedFiles == null)
+			{
+				log.warn("snafu retrieving file " + hotFile.getAbsolutePath());
+				copyCompleted(hotFile, false);
+				ok = false; // not good
+			}
+			try
+			{
+				ok = theListener.hotFile(storedFiles.getA());
+			}
+			catch (final Throwable t)
+			{
+				log.error("Could not process " + hotFile, t);
+			}
+			copyCompleted(storedFiles.getA(), ok);
+			log.info("deleting tmp file: " + storedFiles.getB());
+			final boolean deleted = FileUtil.deleteAll(storedFiles.getB());
+			if (!deleted)
+			{
+				log.warn("Problems deleting: " + storedFiles.getB());
+			}
+		}
+
+	}
+
 	/**
 	 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
 	 */
 	@Override
 	public boolean hotFile(final File hotFile)
 	{
-		log.info("processing hot file: " + hotFile);
-		final MyPair<File, File> storedFiles = getStoredFile(hotFile);
-		if (storedFiles == null)
+		DelayedRunner runner = new DelayedRunner(hotFile);
+		if (parent.isSynchronous())
 		{
-			log.warn("snafu retrieving file " + hotFile.getAbsolutePath());
-			copyCompleted(hotFile, false);
-			return false; // not good
+			runner.run();
+			return runner.ok;
 		}
-		boolean b = false;
-		try
+		else
 		{
-			b = theListener.hotFile(storedFiles.getA());
+			MultiTaskQueue.getCreateQueue("DelayedRunner", parent.getMaxConcurrent()).queue(runner);
+			return true;
 		}
-		catch (final Throwable t)
-		{
-			log.error("Could not process " + hotFile, t);
-		}
-		copyCompleted(storedFiles.getA(), b);
-		log.info("deleting tmp file: " + storedFiles.getB());
-		final boolean deleted = FileUtil.deleteAll(storedFiles.getB());
-		if (!deleted)
-		{
-			log.warn("Problems deleting: " + storedFiles.getB());
-
-		}
-		return b;
 	}
 
 	/**
