@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -99,7 +99,7 @@ public class JDFMerge
 	private JDFNode overWriteNode;
 	private HashMap<String, JDFSpawned> newSpawnMap = null;
 	private String urlMerge;
-	private final Log log;
+	private final static Log log = LogFactory.getLog(JDFMerge.class);
 
 	/**
 	 * set this to true if you want to update the stati of the relevant parent nodes based on the new Stati of the merged node
@@ -127,7 +127,6 @@ public class JDFMerge
 		parts = null;
 		cleanPolicy = EnumCleanUpMerge.None;
 		amountPolicy = EnumAmountMerge.None;
-		log = LogFactory.getLog(getClass());
 	}
 
 	/**
@@ -640,23 +639,21 @@ public class JDFMerge
 	/*
 	 * mergePartition will stay public, as long as deprecated JDFResource.mergePartition is not deleted
 	 */
-	static public JDFResource mergePartition(final JDFResource targetRes, final JDFResource resToMerge, final String spawnID, final EnumAmountMerge amountPolicy,
-			final boolean bLocalResource)
+	static public JDFResource mergePartition(final JDFResource targetRes, final JDFResource toMerge, final String spawnID, final EnumAmountMerge amountPolicy, final boolean bLocalResource)
 	{
-		if (resToMerge == null)
+		if (toMerge == null)
 			return null;
 
-		if (!targetRes.getID().equals(resToMerge.getID()))
+		if (!targetRes.getID().equals(toMerge.getID()))
 		{
-			throw new JDFException("JDFResource.mergePartition  merging incompatible resources ID=" + targetRes.getID() + " IDMerge=" + resToMerge.getID());
+			throw new JDFException("JDFResource.mergePartition  merging incompatible resources ID=" + targetRes.getID() + " IDMerge=" + toMerge.getID());
 		}
 
 		// / TBD RP SpawnStatus Handling!!!!
-		final JDFResource toMerge = resToMerge;
 		JDFResource root = targetRes.getResourceRoot();
 		final VString partIDKeys = root.getPartIDKeys();
 		final VString mergeIDKeys = toMerge.getPartIDKeys();
-		final List<JDFResource> allChildren = resToMerge.getNodesWithSpawnID(spawnID);
+		final List<JDFResource> allChildren = toMerge.getNodesWithSpawnID(spawnID);
 
 		// No spawntargets take all
 		if (allChildren.isEmpty())
@@ -686,8 +683,7 @@ public class JDFMerge
 			// this is still better than throwing an exception or silently ignoring the rw resource
 			if ((src.getLocked() == false) && (trgMap.size() < srcMap.size()))
 			{
-				LogFactory.getLog(JDFMerge.class).warn(
-						targetRes.getLocalName() + " ID=" + targetRes.getID() + " - creating non existing rw partition: " + srcMap.showKeys(null) + " in " + trgMap.showKeys(null));
+				log.warn(targetRes.getLocalName() + " ID=" + targetRes.getID() + " creating non existing rw partition: " + srcMap.showKeys(null) + " in " + trgMap.showKeys(null));
 				trg = targetRes.getCreatePartition(srcMap, partIDKeys);
 				// fool the algorithm to think that the new partition is rw (which it probably was)
 				trg.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
@@ -701,11 +697,13 @@ public class JDFMerge
 					if (trgMap.isEmpty())
 					{ // we actually replaced the root nothing left to do
 						bTargetGone = true;
+						checkNamespace(src, trg);
 						trg = (JDFResource) targetRes.replaceElement(src);
 						root = trg.getResourceRoot();
 					}
 					else
 					{
+						checkNamespace(src, trg);
 						final KElement copyElement = targetRes.copyElement(src, null);
 						trg = (JDFResource) trg.replaceElement(copyElement);
 					}
@@ -758,6 +756,27 @@ public class JDFMerge
 			root.setPartIDKeys(partIDKeys);
 		}
 		return root;
+	}
+
+	static void checkNamespace(final JDFResource src, JDFResource trg)
+	{
+		JDFAttributeMap map = src.getAttributeMap();
+		for (String key : map.keySet())
+		{
+			String prefix = KElement.xmlnsPrefix(key);
+			if (prefix != null)
+			{
+				String uri = trg.getNamespaceURIFromPrefix(prefix);
+				if (uri == null)
+				{
+					uri = src.getNamespaceURIFromPrefix(prefix);
+					if (uri != null)
+					{
+						trg.addNameSpace(prefix, uri);
+					}
+				}
+			}
+		}
 	}
 
 	void mergeLocalResource(final JDFResource.EnumAmountMerge amountPolicy, final JDFResourcePool poolToMerge, JDFResource res1)
