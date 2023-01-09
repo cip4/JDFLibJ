@@ -107,7 +107,10 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
 		FileUtil.deleteAll(theHFDir);
 		theHFDir.mkdirs();
-		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
+		StorageHotFolder parent = new StorageHotFolder(theHFDir, theHFDir, null, null);
+		parent.setSynchronous(true);
+		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), parent);
+
 		assertFalse(hl.hotFile(new File("a")));
 	}
 
@@ -173,7 +176,9 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		theHFDir.mkdirs();
 		final File file = new File(theHFDir, "a");
 		file.createNewFile();
-		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
+		StorageHotFolder parent = new StorageHotFolder(theHFDir, theHFDir, null, null);
+		parent.setSynchronous(true);
+		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), parent);
 		assertFalse(hl.hotFile(file));
 	}
 
