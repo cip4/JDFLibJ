@@ -91,7 +91,7 @@ public class StorageHotFolder
 	public StorageHotFolder(final File _hotFolderDir, final File storageDir, final String ext, final HotFolderListener hfListener)
 	{
 		super();
-		synchronous = true;
+		synchronous = false;
 		retry = 1;
 		log = LogFactory.getLog(getClass());
 		this.storageDir = storageDir;
