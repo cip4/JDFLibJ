@@ -172,7 +172,7 @@ class HotFolderRunner extends Thread
 				}
 				catch (final Throwable t)
 				{
-					log.error("snafu in " + this, t);
+					log.error("snafu in " + folder, t);
 				}
 			}
 			if (!interrupt.get())
@@ -182,7 +182,7 @@ class HotFolderRunner extends Thread
 				ThreadUtil.wait(mutex, Math.max(100, millis));
 			}
 		}
-		log.info("end of loop " + this);
+		log.info("end of hot folder loop " + this);
 	}
 
 	/**
