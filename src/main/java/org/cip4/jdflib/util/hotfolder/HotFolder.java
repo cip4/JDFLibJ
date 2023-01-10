@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -124,41 +124,33 @@ public class HotFolder
 		{
 			lastModified = lastMod;
 			File[] files = getHotFiles();
-			if ((lastFileTime.size() > 0) && (files != null))
-			{
-				final int fileListLength = files.length;
-				for (int i = 0; i < lastFileTime.size(); i++)
-				{
-					boolean found = false;
-					final FileTime lftAt = lastFileTime.get(i);
-					for (int j = 0; j < fileListLength; j++)
-					// loop over all matching files in the directory
-					{
-						final File fileJ = files[j];
-						if (fileJ != null && fileJ.equals(lftAt.f))
-						{
-							final boolean processed = processSingleFile(lftAt);
-							if (processed)
-							{
-								found = processed;
-								files[j] = null;
-							}
-						}
-					}
-
-					if (!found)
-					{
-						final FileTime ft = lastFileTime.get(i);
-						if (!ft.exists())// not there anymore - note the -- for undo remove
-						{
-							lastFileTime.remove(i--);
-						}
-					}
-				}
-			}
-
 			if (files != null)
 			{
+				if (!lastFileTime.isEmpty())
+				{
+					final int fileListLength = files.length;
+					for (int i = 0; i < lastFileTime.size(); i++)
+					{
+						final FileTime lftAt = lastFileTime.get(i);
+						for (int j = 0; j < fileListLength; j++)
+						// loop over all matching files in the directory
+						{
+							final File fileJ = files[j];
+							if (fileJ != null && fileJ.equals(lftAt.f))
+							{
+								final boolean processed = processSingleFile(lftAt);
+								if (processed)
+								{
+									files[j] = null;
+									i--;
+									break;
+								}
+							}
+						}
+
+					}
+				}
+
 				final List<File> vf = ContainerUtil.toArrayList(files);
 				for (int i = vf.size() - 1; i >= 0; i--)
 				{
@@ -376,9 +368,14 @@ public class HotFolder
 		return n == 0 ? null : files;
 	}
 
+	/**
+	 * return false processed or removed
+	 * 
+	 * @param lftAt
+	 * @return
+	 */
 	boolean processSingleFile(final FileTime lftAt)
 	{
-		boolean found = true;
 		if (lftAt.sameModified() && ((lftAt.modified + stabilizeTime) < System.currentTimeMillis()))
 		{
 			lastFileTime.remove(lftAt);
@@ -388,14 +385,14 @@ public class HotFolder
 		{
 			log.warn("removed disappearing hot file " + lftAt);
 			lastFileTime.remove(lftAt);
-			found = false;
 		}
 		else
 		{
 			lftAt.updateModified();
+			return false;
 		}
 
-		return found;
+		return true;
 	}
 
 	/**
