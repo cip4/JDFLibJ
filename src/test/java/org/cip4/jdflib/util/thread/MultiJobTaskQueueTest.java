@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,6 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.jupiter.api.Test;
 
@@ -118,7 +119,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	@Test
 	public void testMulti()
 	{
-		final MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij1", 7);
+		final MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij1" + KElement.uniqueID(0), 7);
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 10; i++)
@@ -128,7 +129,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 		for (int i = 0; i < 342; i++)
 		{
 			ThreadUtil.sleep(42);
-			if (q.size() <= 7)
+			if (q.size() <= 6)
 			{
 				break;
 			}
