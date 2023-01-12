@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,7 +40,9 @@
 package org.cip4.jdflib.elementwalker;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.cip4.jdflib.core.KElement;
@@ -90,7 +92,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	protected final String baseURL;
 	protected Set<URLProtocol> protocols;
 	protected final String currentURL;
-	protected final Set<String> saved;
+	protected final Map<String, String> saved;
 	protected boolean deleteFile;
 
 	/**
@@ -116,7 +118,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	 */
 	public Set<String> getSaved()
 	{
-		return saved;
+		return saved.keySet();
 	}
 
 	private boolean wantLog;
@@ -132,7 +134,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 		dir = dumpDir;
 		this.baseURL = baseURL;
 		this.currentURL = currentURL;
-		saved = new HashSet<>();
+		saved = new HashMap<>();
 		protocols = null;
 		setDeleteFile(false);
 		setWantLog(false);
@@ -193,8 +195,13 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 			{
 				return e;
 			}
+			String newUrl = saved.get(url);
+			if (!StringUtil.isEmpty(newUrl))
+			{
+				urlSetter.setURL(newUrl);
+			}
 			// we have a circular reference to something we put here ourselves - no need to do anything
-			if (baseURL != null && url.startsWith(baseURL))
+			if (baseURL != null && url.startsWith(baseURL) || newUrl != null)
 				return e;
 
 			if (protocols != null)
@@ -206,42 +213,40 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 				}
 			}
 			final boolean fileOK = checkFile(url);
-			if (!fileOK)
+			if (fileOK)
 			{
-				return e;
-			}
-
-			final boolean bOverwrite = !saved.contains(url);
-			File newFile = UrlUtil.moveToDir(urlSetter, dir, currentURL, bOverwrite, deleteFile);
-			for (int i = 1; i < 4; i++)
-			{
-				if (newFile != null || saved.contains(url) || UrlUtil.isRelativeURL(url))
-					break;
-				if (!ThreadUtil.sleep(4200))
+				File newFile = UrlUtil.moveToDir(urlSetter, dir, currentURL, true, deleteFile);
+				for (int i = 1; i < 4; i++)
 				{
-					return null;
+					if (newFile != null || UrlUtil.isRelativeURL(url))
+						break;
+					if (!ThreadUtil.sleep(1234))
+					{
+						return null;
+					}
+					newFile = UrlUtil.moveToDir(urlSetter, dir, currentURL, true, deleteFile);
+					log.warn("attempting download # " + i + " of URL " + url);
 				}
-				newFile = UrlUtil.moveToDir(urlSetter, dir, currentURL, bOverwrite, deleteFile);
-				log.warn("attempting download # " + i + " of URL " + url);
-			}
-			if (newFile != null)
-			{
-				if (baseURL != null)
+				if (newFile != null)
 				{
-					final String s = UrlUtil.isRelativeURL(url) ? url : UrlUtil.escape(newFile.getName(), false, false);
-					final String urlWithDirectory = UrlUtil.getURLWithDirectory(baseURL, s);
-					urlSetter.setURL(urlWithDirectory);
+					if (baseURL != null)
+					{
+						final String s = UrlUtil.isRelativeURL(url) ? url : UrlUtil.escape(newFile.getName(), false, false);
+						final String urlWithDirectory = UrlUtil.getURLWithDirectory(baseURL, s);
+						urlSetter.setURL(urlWithDirectory);
+					}
+					saved.put(url, urlSetter.getURL());
+					if (wantLog)
+					{
+						log.info((deleteFile ? "moved" : "copied ") + url + " to " + urlSetter.getURL());
+					}
 				}
-				if (wantLog && bOverwrite)
+				else if (wantLog)
 				{
-					log.info((deleteFile ? "moved" : "copied ") + url + " to " + urlSetter.getURL());
+					log.warn((deleteFile ? "could not move " : "could not copy ") + url + " to " + dir);
+					saved.put(url, "");
 				}
 			}
-			else if (wantLog)
-			{
-				log.warn((deleteFile ? "could not move " : "could not copy ") + url + " to " + dir);
-			}
-			saved.add(url);
 			return e; // continue
 		}
 
