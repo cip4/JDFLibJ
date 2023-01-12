@@ -116,7 +116,6 @@ import org.w3c.dom.Node;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class JDFSpawnTest extends JDFTestCaseBase
 {
@@ -799,7 +798,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test wierd sequences of spawning and merging with the same res being spawned both rw and ro
-	 *
 	 */
 	@Test
 	public void testSpawnPartMultiRORW()
@@ -1341,18 +1339,18 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	@Test
 	public void testSpawnRWRO()
 	{
-		JDFNode n = JDFNode.createRoot();
+		final JDFNode n = JDFNode.createRoot();
 		n.setType(EnumType.Product);
-		JDFNode n0 = n.addJDFNode(EnumType.BoxFolding);
-		JDFNode n1 = n.addJDFNode(EnumType.BlockPreparation);
-		JDFResource r = n.getCreateResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Input, 0);
+		final JDFNode n0 = n.addJDFNode(EnumType.BoxFolding);
+		final JDFNode n1 = n.addJDFNode(EnumType.BlockPreparation);
+		final JDFResource r = n.getCreateResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Input, 0);
 		n0.linkResource(r, EnumUsage.Input, null);
 		n1.linkResource(r, EnumUsage.Input, null);
-		JDFSpawn sp0 = new JDFSpawn(n0);
-		JDFSpawn sp1 = new JDFSpawn(n1);
-		JDFNode nsp0 = sp0.spawn(null, null, new VString(r.getID()), null, false, false, false, false);
+		final JDFSpawn sp0 = new JDFSpawn(n0);
+		final JDFSpawn sp1 = new JDFSpawn(n1);
+		final JDFNode nsp0 = sp0.spawn(null, null, new VString(r.getID()), null, false, false, false, false);
 		assertEquals(1, r.getSpawnIDs(false).size());
-		JDFNode nsp1 = sp1.spawn(null, null, new VString(), null, false, false, false, false);
+		final JDFNode nsp1 = sp1.spawn(null, null, new VString(), null, false, false, false, false);
 		assertEquals(1, r.getSpawnIDs(false).size());
 	}
 
@@ -1823,9 +1821,13 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFNode spawned = spawn.spawn(null, null, new VString("ExposedMedia", null), vSpawnParts, true, true, true, true);
 
 			if (spawn.bSpawnIdentical)
+			{
 				assertNotNull(spawned.getChildByTagName(ElementName.IDENTICAL, null, 0, null, false, false));
+			}
 			else
+			{
 				assertNull(spawned.getChildByTagName(ElementName.IDENTICAL, null, 0, null, false, false));
+			}
 		}
 	}
 
@@ -1855,7 +1857,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				}
 				final VString vRWRes = new VString();
 				if (i > 0)
+				{
 					vRWRes.add(ElementName.EXPOSEDMEDIA);
+				}
 				final VJDFAttributeMap vPartMap = new VJDFAttributeMap();
 				final JDFAttributeMap map = new JDFAttributeMap("SheetName", "s1");
 				map.put("PartVersion", "EN");
@@ -2007,6 +2011,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				for (int k = 0; k < 2; k++)
 				{
 					final boolean bSpawnroOnly = j == 1;
+					final String ijk = "i=" + i + " j=" + j + " k=" + k;
 					final JDFDoc d = JDFTestCaseBase.creatXMDoc();
 					JDFNode n = d.getJDFRoot();
 					n.removeNodeInfo();
@@ -2088,7 +2093,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 					assertNotNull(xmSpawnFrontEn);
 
 					final JDFResourceLink loRL = spawnedNode.getMatchingLink(ElementName.LAYOUT, EnumProcessUsage.AnyInput, 0);
-					assertNull(loRL.getPartMapVector());
+					assertNull(loRL.getPartMapVector(), ijk);
 
 					n = d.getJDFRoot();
 					final JDFComment comment2 = n.appendComment();
@@ -2510,7 +2515,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 *
 	 */
 	@Test
 	public void testSpawnNI13()
@@ -2555,7 +2559,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 *
 	 */
 	@Test
 	public void testUnSpawnChild()
@@ -2581,7 +2584,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 *
 	 */
 	@Test
 	public void testUnSpawn()
@@ -2613,7 +2615,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 *
 	 */
 	@Test
 	public void testUnSpawnNull()
@@ -2651,7 +2652,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test auditpool spawn merge stuff to information in the AncestorPool
-	 *
 	 */
 	@Test
 	public void testSpawnAuditPool()
@@ -2705,7 +2705,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 *
 	 */
 	@Test
 	public void testSpawnNI()
@@ -2754,7 +2753,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 *
 	 */
 	@Test
 	public void testSpawnNIStatus()
@@ -2787,7 +2785,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 *
 	 */
 	@Test
 	public void testSpawnNILocalPartStatus()
@@ -2828,7 +2825,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 *
 	 */
 	@Test
 	public void testSpawnCINI()
@@ -2921,7 +2917,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 *
 	 */
 	@Test
 	public void testSpawnLayout()
@@ -3038,9 +3033,13 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				nodeProc = nodeRoot.getJobPart(jobPartID, null); // in case it was
 				// overwritten by a previous s-m
 				if (i == 1 || j == 1)
+				{
 					spawn = new JDFSpawn(nodeProc);
+				}
 				else if (spawn != null)
+				{
 					spawn.setNode(nodeProc);
+				}
 				else
 				{
 					fail("whazzup?");
@@ -3103,9 +3102,13 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				nodeProc = nodeRoot.getJobPart(jobPartID, null); // in case it was
 				// overwritten by a previous s-m
 				if (i == 1 || j == 1)
+				{
 					spawn = new JDFSpawn(nodeProc);
+				}
 				else if (spawn != null)
+				{
 					spawn.setNode(nodeProc);
+				}
 				else
 				{
 					fail("whazzup?");
@@ -3155,7 +3158,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				final VString vsRWResourceIDs = new VString();
 				vsRWResourceIDs.add("Output");
 				if (i == 0 || j > 2)
+				{
 					spawn = new JDFSpawn(nodeProc);
+				}
 				if (spawn == null)
 				{
 					fail("whazzup?");
@@ -3163,9 +3168,13 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				}
 				final JDFNode nodeSubJDF;
 				if (j == 0)
+				{
 					nodeSubJDF = spawn.spawnInformative(strJDFPath, null, vMap1, true, true, true, true);
+				}
 				else
+				{
 					nodeSubJDF = spawn.spawn(strJDFPath, null, vsRWResourceIDs, vMap1, true, true, true, true);
+				}
 
 				assertNotNull(nodeSubJDF);
 				final long t1 = System.currentTimeMillis();
@@ -3404,7 +3413,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @param strXMLFile
 	 * @param strSpawnedFile
 	 * @param strElementID
@@ -3571,7 +3579,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFNode node = sp.spawn(null, null, new VString("RunList:Output", null), v, false, true, true, true);
 			nodes.add(node);
 			if ((i % 100) == 99)
+			{
 				log.info(i + " " + ct.toString());
+			}
 			ct.stop();
 		}
 		ct = new CPUTimer(false);
@@ -3582,7 +3592,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			m.mergeJDF((JDFNode) nodes.get(i), null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
 			nodes.setElementAt(null, i);
 			if ((i % 100) == 99)
+			{
 				log.info(i + " " + ct.toString());
+			}
 			ct.stop();
 		}
 		root.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "sm_many.jdf", 0, true);
@@ -4065,7 +4077,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 			final JDFMerge m = new JDFMerge(n);
 			if (i == 1)
+			{
 				m.setCleanPolicy(EnumCleanUpMerge.RemoveAll);
+			}
 
 			final JDFNode merged = m.mergeJDF((JDFNode) spNode.clone());
 
@@ -4196,7 +4210,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test merging amounts - also over multiple nodes
-	 *
 	 */
 	@Test
 	public void testMergeAmount()
@@ -4369,7 +4382,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	@Test
 	public void testMergeJDFNewXMLNS()
 	{
-		JDFNode root = JDFNode.createRoot();
+		final JDFNode root = JDFNode.createRoot();
 		root.setType(EnumType.Product);
 		final VString rwResources = new VString();
 		JDFNode spawnnode = root.addJDFNode(EnumType.AdhesiveBinding);
@@ -4379,7 +4392,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 		spawnnode = spawn.spawn(sm_dirTestData + "testMergeJDF2.jdf", sm_dirTestDataTemp + "myTest_spawned.jdf", rwResources, null, false, false, false, false);
 		spawnnode.appendElement("dummy:foobar", "www.dummy.com");
-		JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
+		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
 		assertNotNull(JDFNode.parseString(root.toXML()));
 	}
 
@@ -4389,7 +4402,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	@Test
 	public void testMergeJDFNewXMLNS2()
 	{
-		JDFNode root = JDFNode.createRoot();
+		final JDFNode root = JDFNode.createRoot();
 		root.setType(EnumType.Product);
 		final VString rwResources = new VString();
 		JDFNode spawnnode = root.addJDFNode(EnumType.AdhesiveBinding);
@@ -4400,7 +4413,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		spawnnode = spawn.spawn(sm_dirTestData + "testMergeJDF2.jdf", sm_dirTestDataTemp + "myTest_spawned.jdf", rwResources, null, false, false, false, false);
 		spawnnode.addNameSpace("dummy", "www.dummy.com");
 		spawnnode.appendElement("dummy:foobar");
-		JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
+		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
 		assertNotNull(JDFNode.parseString(root.toXML()));
 	}
 
@@ -4410,11 +4423,11 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	@Test
 	public void testMergeJDFNewXMLNS3()
 	{
-		JDFNode root = JDFNode.createRoot();
+		final JDFNode root = JDFNode.createRoot();
 		root.setType(EnumType.Product);
 		final VString rwResources = new VString();
 		JDFNode spawnnode = root.addJDFNode(EnumType.AdhesiveBinding);
-		JDFNodeInfo ni = spawnnode.appendNodeInfo();
+		final JDFNodeInfo ni = spawnnode.appendNodeInfo();
 		ni.addPartition(EnumPartIDKey.Option, "o1");
 		ni.addPartition(EnumPartIDKey.Option, "o2");
 
@@ -4425,7 +4438,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				new VJDFAttributeMap(new JDFAttributeMap("Option", "o1")), false, false, false, false);
 		spawnnode.addNameSpace("dummy", "www.dummy.com");
 		spawnnode.appendElement("dummy:foobar");
-		JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
+		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
 		assertNotNull(JDFNode.parseString(root.toXML()));
 	}
 
@@ -4435,11 +4448,11 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	@Test
 	public void testMergeJDFNewXMLNS4()
 	{
-		JDFNode root = JDFNode.createRoot();
+		final JDFNode root = JDFNode.createRoot();
 		root.setType(EnumType.Product);
 		final VString rwResources = new VString();
 		JDFNode spawnnode = root.addJDFNode(EnumType.AdhesiveBinding);
-		JDFNodeInfo ni = spawnnode.appendNodeInfo();
+		final JDFNodeInfo ni = spawnnode.appendNodeInfo();
 		ni.addPartition(EnumPartIDKey.Option, "o1");
 		ni.addPartition(EnumPartIDKey.Option, "o2");
 
@@ -4449,7 +4462,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		spawnnode = spawn.spawn(sm_dirTestData + "testMergeJDF2.jdf", sm_dirTestDataTemp + "myTest_spawned.jdf", rwResources,
 				new VJDFAttributeMap(new JDFAttributeMap("Option", "o1")), false, false, false, false);
 		spawnnode.appendElement("dummy:foobar", "www.dummy.com");
-		JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
+		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
 		assertNotNull(JDFNode.parseString(root.toXML()));
 	}
 
@@ -4459,14 +4472,14 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	@Test
 	public void testMergeJDFNewXMLNSDeep()
 	{
-		JDFNode root = JDFNode.createRoot();
+		final JDFNode root = JDFNode.createRoot();
 		root.setType(EnumType.Product);
 		final VString rwResources = new VString();
 		JDFNode spawnnode = root.addJDFNode(EnumType.AdhesiveBinding);
-		JDFNodeInfo ni = spawnnode.appendNodeInfo();
+		final JDFNodeInfo ni = spawnnode.appendNodeInfo();
 		ni.addPartition(EnumPartIDKey.Option, "o1");
 		ni.addPartition(EnumPartIDKey.Option, "o2");
-		JDFComponent c = (JDFComponent) root.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFComponent c = (JDFComponent) root.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		spawnnode.linkResource(c, EnumUsage.Output, null);
 
 		rwResources.add("Output");
@@ -4477,7 +4490,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		spawnnode.addNameSpace("dummy", "www.dummy.com");
 		spawnnode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0).setAttribute("dummy:bad", "nasty");
 
-		JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
+		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
 		assertNotNull(JDFNode.parseString(root.toXML()));
 	}
 
@@ -4518,7 +4531,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
