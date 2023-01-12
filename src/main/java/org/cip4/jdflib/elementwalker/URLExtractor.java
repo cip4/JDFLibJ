@@ -241,7 +241,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 						log.info((deleteFile ? "moved" : "copied ") + url + " to " + urlSetter.getURL());
 					}
 				}
-				else if (wantLog)
+				else
 				{
 					log.warn((deleteFile ? "could not move " : "could not copy ") + url + " to " + dir);
 					saved.put(url, "");
