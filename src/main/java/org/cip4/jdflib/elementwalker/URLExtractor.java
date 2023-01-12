@@ -312,10 +312,10 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	 * @see org.cip4.jdflib.ifaces.IElementConverter#convert(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement convert(final KElement e)
+	public KElement convert(final KElement root)
 	{
-		walkTree(e, null);
-		return e;
+		walkTree(root, null);
+		return root;
 	}
 
 	/**
@@ -324,6 +324,6 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	@Override
 	public String toString()
 	{
-		return super.toString() + "\n " + protocols + " baseURL: " + baseURL + " currentURL: " + currentURL + " dir: " + dir + " delete: " + deleteFile;
+		return super.toString() + protocols + " baseURL: " + baseURL + " currentURL: " + currentURL + " dir: " + dir + " delete: " + deleteFile;
 	}
 }

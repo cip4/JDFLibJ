@@ -310,6 +310,18 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testToString()
+	{
+		final File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut1");
+		FileUtil.deleteAll(dumpDir);
+		final URLExtractor ex = new URLExtractor(dumpDir, null, null);
+		assertNotNull(ex.toString());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testFromJDFDouble()
 	{
 		final File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn1a");
@@ -327,7 +339,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 		d.write2File(sm_dirTestDataTemp + "URLIn1a/dummy.jdf", 2, false);
 
 		final URLExtractor ex = new URLExtractor(dumpDir, null, null);
-		ex.walkTree(d.getJDFRoot(), null);
+		ex.convert(d.getJDFRoot());
 		final String write2String = rl.toDisplayXML(2);
 		assertTrue(write2String.indexOf("URLOut1a/boooo.pdf") > 0);
 		File outFile = new File(sm_dirTestDataTemp + "URLOut1a/boooo.pdf");
