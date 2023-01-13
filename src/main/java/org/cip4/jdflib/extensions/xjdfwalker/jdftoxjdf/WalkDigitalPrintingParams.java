@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -37,6 +37,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumCollate;
+import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
@@ -94,15 +95,33 @@ public class WalkDigitalPrintingParams extends WalkResource
 		map.remove(AttributeName.NONPRINTABLEMARGINRIGHT);
 		map.remove(AttributeName.NONPRINTABLEMARGINTOP);
 		updateCollate(map);
+		updateSides(map);
 		super.updateAttributes(map);
 	}
 
-	private void updateCollate(final JDFAttributeMap map)
+	void updateCollate(final JDFAttributeMap map)
 	{
 		final String collate = map.get(AttributeName.COLLATE);
 		if (collate != null && (EnumCollate.SheetAndSet.getName().equals(collate) || EnumCollate.SheetSetAndJob.getName().equals(collate)))
 		{
 			map.put(AttributeName.COLLATE, EnumCollate.Sheet.getName());
+		}
+
+	}
+
+	void updateSides(final JDFAttributeMap map)
+	{
+		final String sides = map.get(AttributeName.SIDES);
+		if (sides != null)
+		{
+			if (EnumSides.TwoSidedFlipX.getName().equals(sides) || EnumSides.TwoSidedFlipY.getName().equals(sides))
+			{
+				map.put(AttributeName.SIDES, EnumSides.TwoSided.getName());
+			}
+			else if (EnumSides.OneSidedBackFlipX.getName().equals(sides) || EnumSides.OneSidedBackFlipY.getName().equals(sides))
+			{
+				map.put(AttributeName.SIDES, EnumSides.OneSidedBack.getName());
+			}
 		}
 
 	}
