@@ -136,6 +136,15 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public ResourceHelper getPartition(final JDFAttributeMap map)
 	{
+		return getResource(map);
+	}
+
+	/**
+	 * @param map
+	 * @return
+	 */
+	public ResourceHelper getResource(final JDFAttributeMap map)
+	{
 		final List<ResourceHelper> v = getPartitionList();
 		for (final ResourceHelper ph : v)
 		{
@@ -153,7 +162,16 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public ResourceHelper getPartition(final String key, final String value)
 	{
-		return getPartition(new JDFAttributeMap(key, value));
+		return getResource(new JDFAttributeMap(key, value));
+	}
+
+	/**
+	 * @param map
+	 * @return
+	 */
+	public ResourceHelper getResource(final String key, final String value)
+	{
+		return getResource(new JDFAttributeMap(key, value));
 	}
 
 	/**
@@ -162,7 +180,16 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public ResourceHelper getPartition(final int index)
 	{
-		return ContainerUtil.get(getPartitionList(), index);
+		return ContainerUtil.get(getResourceList(), index);
+	}
+
+	/**
+	 * @param index
+	 * @return
+	 */
+	public ResourceHelper getResource(final int index)
+	{
+		return ContainerUtil.get(getResourceList(), index);
 	}
 
 	/**
@@ -172,7 +199,17 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public ResourceHelper getCreatePartition(final JDFAttributeMap map, final boolean addRes)
 	{
-		ResourceHelper e = getPartition(map);
+		return getCreateResource(map, addRes);
+	}
+
+	/**
+	 * @param map
+	 * @param addRes
+	 * @return
+	 */
+	public ResourceHelper getCreateResource(final JDFAttributeMap map, final boolean addRes)
+	{
+		ResourceHelper e = getResource(map);
 		if (e == null)
 		{
 			e = appendPartition(map, addRes);
@@ -300,22 +337,32 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public ResourceHelper getCreatePartition(int index, final boolean addRes)
 	{
-		List<ResourceHelper> v = getPartitionList();
+		return getCreateResource(index, addRes);
+	}
+
+	/**
+	 * @param index
+	 * @param addRes
+	 * @return
+	 */
+	public ResourceHelper getCreateResource(int index, final boolean addRes)
+	{
+		List<ResourceHelper> v = getResourceList();
 		int size = v.size();
 		if (index < 0)
 			index += size;
 		while (index < 0)
 		{
-			appendPartition(null, addRes);
+			appendResource((JDFAttributeMap) null, addRes);
 			index++;
 		}
 		while (index >= size)
 		{
-			appendPartition(null, addRes);
+			appendResource((JDFAttributeMap) null, addRes);
 			size++;
 		}
 		if (size != v.size())
-			v = getPartitions();
+			v = getResourceList();
 		final ResourceHelper ph = v.get(index);
 		if (addRes)
 			ph.getCreateResource();
@@ -342,9 +389,22 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 * @param addRes
 	 * @return
 	 */
+	public ResourceHelper appendResource(final String partKey, final String partValue, final boolean addRes)
+	{
+		return appendResource(new JDFAttributeMap(partKey, partValue), addRes);
+	}
+
+	/**
+	 * convenience ... @see {@link SetHelper#appendPartition(JDFAttributeMap, boolean)}
+	 *
+	 * @param partKey
+	 * @param partValue
+	 * @param addRes
+	 * @return
+	 */
 	public ResourceHelper appendPartition(final String partKey, final String partValue, final boolean addRes)
 	{
-		return appendPartition(new JDFAttributeMap(partKey, partValue), addRes);
+		return appendResource(partKey, partValue, addRes);
 	}
 
 	/**
@@ -365,9 +425,19 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 * @param addRes if true, also add the detailed resource element, e.g. Layout
 	 * @return
 	 */
-	public ResourceHelper appendPartition(final JDFAttributeMap partMap, final boolean addRes)
+	public ResourceHelper appendResource(final JDFAttributeMap partMap, final boolean addRes)
 	{
 		return appendResource(JDFAttributeMap.isEmpty(partMap) ? null : new VJDFAttributeMap(partMap), addRes);
+	}
+
+	/**
+	 * @param partMap
+	 * @param addRes if true, also add the detailed resource element, e.g. Layout
+	 * @return
+	 */
+	public ResourceHelper appendPartition(final JDFAttributeMap partMap, final boolean addRes)
+	{
+		return appendResource(partMap, addRes);
 	}
 
 	/**
@@ -422,6 +492,14 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 * @return the vector of partition helpers
 	 */
 	public List<ResourceHelper> getPartitionList()
+	{
+		return getResourceList();
+	}
+
+	/**
+	 * @return the vector of partition helpers
+	 */
+	public List<ResourceHelper> getResourceList()
 	{
 		final Collection<KElement> v = theElement.getChildList(getPartitionName(), null);
 
