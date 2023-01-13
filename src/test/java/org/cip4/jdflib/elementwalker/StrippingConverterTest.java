@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -83,6 +83,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 
 import org.cip4.jdflib.auto.JDFAutoFitPolicy.EnumSizePolicy;
 import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumBindingEdge;
+import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoPosition.EnumOrientation;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -93,6 +94,7 @@ import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFPosition;
+import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.junit.jupiter.api.Test;
 
 public class StrippingConverterTest extends JDFTestCaseBase
@@ -110,6 +112,22 @@ public class StrippingConverterTest extends JDFTestCaseBase
 		assertEquals(EnumBindingEdge.Bottom.getName(), bs.getBindingEdge().getName());
 		final JDFAssembly ass = strippingConverter.getAssembly();
 		assertEquals(EnumBindingEdge.Bottom.getName(), ass.getBindingSide().getName());
+	}
+
+	@Test
+	public void testSidesBack()
+	{
+		for (EnumSides s : new EnumSides[] { EnumSides.OneSidedBackFlipX, EnumSides.OneSidedBackFlipY })
+		{
+			final JDFLayoutPreparationParams lpp = createlpp();
+			lpp.setSides(s);
+			final JDFNode parentJDF = lpp.getParentJDF();
+			final StrippingConverter strippingConverter = new StrippingConverter(lpp, parentJDF);
+			strippingConverter.convert();
+			final JDFStrippingParams sp = strippingConverter.getStrippingParams();
+			JDFStripCellParams scp = sp.getStripCellParams();
+			assertEquals(org.cip4.jdflib.auto.JDFAutoStripCellParams.EnumSides.OneSidedBack, scp.getSides());
+		}
 	}
 
 	@Test

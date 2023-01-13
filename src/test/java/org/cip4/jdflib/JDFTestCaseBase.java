@@ -68,6 +68,7 @@ import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
@@ -356,6 +357,7 @@ public abstract class JDFTestCaseBase
 		JDFAudit.setStaticAuthor(author);
 		JDFNodeInfo.setDefaultWorkStepID(false);
 		DocumentJDFImpl.setStaticStrictNSCheck(true);
+		JDFResource.setUnpartitiondImplicit(false);
 		RegularJanitor.feierabend();
 	}
 
