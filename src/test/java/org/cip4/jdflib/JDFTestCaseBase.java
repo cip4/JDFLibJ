@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -68,9 +68,11 @@ import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
+import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.util.JDFDate;
@@ -234,7 +236,8 @@ public abstract class JDFTestCaseBase
 		n.setType("ConventionalPrinting", true);
 		n.appendElement("NS:Foobar", "www.foobar.com");
 
-		n.appendMatchingResource("Layout", JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFLayout lo = (JDFLayout) n.appendMatchingResource("Layout", JDFNode.EnumProcessUsage.AnyInput, null);
+		lo.setPartUsage(EnumPartUsage.Explicit);
 		final JDFComponent comp = (JDFComponent) n.appendMatchingResource(ElementName.COMPONENT, JDFNode.EnumProcessUsage.AnyOutput, null);
 		final JDFExposedMedia xm = (JDFExposedMedia) n.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.Plate, null);
 		final JDFNodeInfo ni = n.appendNodeInfo();
