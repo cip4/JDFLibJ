@@ -1255,6 +1255,25 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 	/**
 	 *
+	 */
+	@Test
+	public void testDisjointingDPP()
+	{
+		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/Disjointing.jdf");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		xjdf.write2File(sm_dirTestDataTemp + "Disjointing.xjdf");
+		XJDFHelper h = XJDFHelper.getHelper(xjdf);
+		assertTrue(h.getTypes().contains("Stacking"));
+		SetHelper sp = h.getSet(ElementName.STACKINGPARAMS, 0);
+		assertNotNull(sp.getPartition(0).getResource().getElement(ElementName.DISJOINTING));
+		SetHelper dpp = h.getSet(ElementName.DIGITALPRINTINGPARAMS, 0);
+		assertNotNull(dpp);
+	}
+
+	/**
+	 *
 	 *
 	 */
 	@Test

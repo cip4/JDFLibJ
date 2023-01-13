@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -6442,11 +6442,43 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public void addTypes(final EnumType typ)
 	{
+		addTypes(typ, null, false);
+	}
+
+	/**
+	 * add typ to the types list if this is a combined node or gray box
+	 *
+	 * @param typ
+	 * @param combineType one of null, Combined or ProcessGroup
+	 */
+	public void addTypes(final EnumType typ, EnumType combineType, boolean unique)
+	{
+		if (EnumType.Combined.equals(combineType) || EnumType.ProcessGroup.equals(combineType))
+		{
+			ensureCombined(combineType);
+		}
 		if (!isTypesNode() || typ == null)
 		{
 			return;
 		}
-		appendAttribute(AttributeName.TYPES, typ.getName(), null, " ", false);
+		appendAttribute(AttributeName.TYPES, typ.getName(), null, " ", unique);
+	}
+
+	/**
+	 * one of Combined or ProcessGroup
+	 * 
+	 * @param combineType
+	 */
+	public void ensureCombined(EnumType combineType)
+	{
+		boolean isCombined = isTypesNode();
+
+		if (!isCombined && !isProduct())
+		{
+			renameAttribute(AttributeName.TYPE, AttributeName.TYPES);
+		}
+		setType(combineType);
+
 	}
 
 	/**
@@ -6495,10 +6527,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		return vs;
 	}
 
-	// new since Ver 2.0
-	/*
-	 * Attribute Types must be defined in Combined Nodes (Type="Combined") and may be defined in ProcessGroup Nodes (Type="ProcessGroup")
-	 */
 	/**
 	 * set node Types , also set Type to Combined
 	 *

@@ -643,8 +643,6 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -663,7 +661,25 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(mainNode.getEnumTypes().size(), 3);
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 *
+	 */
+	@Test
+	public void testAddTypes2()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode mainNode = doc.getJDFRoot();
+		mainNode.addTypes(EnumType.Shrinking, EnumType.ProcessGroup, false);
+		assertTrue(mainNode.getEnumTypes().contains(EnumType.Shrinking));
+		assertEquals(EnumType.ProcessGroup, mainNode.getEnumType());
+		mainNode.addTypes(EnumType.Varnishing, EnumType.Combined, false);
+		assertEquals(EnumType.Combined, mainNode.getEnumType());
+		assertEquals(mainNode.getEnumTypes().size(), 2);
+		mainNode.addTypes(EnumType.Shrinking, EnumType.ProcessGroup, true);
+		assertEquals(mainNode.getEnumTypes().size(), 2);
+		mainNode.addTypes(EnumType.Shrinking, EnumType.ProcessGroup, false);
+		assertEquals(mainNode.getEnumTypes().size(), 3);
+	}
 
 	/**
 	 *

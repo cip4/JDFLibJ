@@ -134,7 +134,6 @@ public class WalkDigitalPrintingParams extends WalkResource
 	{
 		jdf.removeChild(ElementName.APPROVALPARAMS, null, 0);
 		jdf.removeChild(ElementName.COMPONENT, null, 0);
-		jdf.removeChild(ElementName.DISJOINTING, null, 0);
 		super.removeUnusedElements(jdf);
 	}
 
