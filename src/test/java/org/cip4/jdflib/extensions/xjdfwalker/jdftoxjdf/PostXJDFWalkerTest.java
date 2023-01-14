@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,9 +39,13 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoResourceLink.EnumOrientation;
-import org.cip4.jdflib.core.*;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
@@ -118,7 +122,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 			j++;
 			final KElement rs0 = ri.appendElement(XJDFConstants.ResourceSet);
 			rs0.setAttribute(AttributeName.NAME, "Media");
-			new SetHelper(rs0).appendResource(null, true).setDescriptiveName("foo " + j);
+			new SetHelper(rs0).appendResource((JDFAttributeMap) null, true).setDescriptiveName("foo " + j);
 		}
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(mh.getRoot(), null);
@@ -247,7 +251,8 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		tsp.setAttribute(AttributeName.HARDENERTYPE, "toughstough");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		Assertions.assertEquals("toughstough", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Hardener").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
+		Assertions.assertEquals("toughstough",
+				h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Hardener").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
 	}
 
 	/**
