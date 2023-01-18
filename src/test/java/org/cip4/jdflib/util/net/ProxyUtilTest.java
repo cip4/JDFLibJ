@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,6 +76,11 @@
  */
 package org.cip4.jdflib.util.net;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.ProxySelector;
@@ -87,14 +92,13 @@ import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * 12.01.2009
+ *         12.01.2009
  */
 public class ProxyUtilTest extends JDFTestCaseBase
 {
@@ -128,7 +132,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
 			if (p != null)
 				i++;
-			Assertions.assertTrue(i > 0);
+			assertTrue(i > 0);
 		}
 	}
 
@@ -149,9 +153,22 @@ public class ProxyUtilTest extends JDFTestCaseBase
 			}
 			catch (Exception x)
 			{
-				Assertions.fail(x.toString());
+				fail(x.toString());
 			}
 		}
+	}
+
+	/**
+	 * @throws Exception if snafu
+	 */
+	@Test
+	public void testGetProxy() throws Exception
+	{
+		assertNull(ProxyUtil.getProxy(null));
+		assertNull(ProxyUtil.getProxy(""));
+		assertNull(ProxyUtil.getProxy("foobar"));
+		assertNotNull(ProxyUtil.getProxy("http://example.com"));
+
 	}
 
 	/**
@@ -203,7 +220,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		ProxyUtil.setUseSystemDefault(true);
-		Assertions.assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
+		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
 
 	/**
@@ -216,7 +233,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 			return;
 		ProxyUtil.setUseSystemDefault(true);
 		UrlPart part = UrlUtil.writeToURL("https://www.google.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		Assertions.assertNotNull(part);
+		assertNotNull(part);
 		part.buffer();
 	}
 
