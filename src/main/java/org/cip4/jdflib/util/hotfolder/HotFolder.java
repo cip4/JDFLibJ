@@ -50,7 +50,6 @@ package org.cip4.jdflib.util.hotfolder;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -59,7 +58,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
-import org.cip4.jdflib.util.file.FileSorter;
 
 /**
  * a very simple hotfolder watcher subdirectories are ignored
@@ -77,6 +75,17 @@ public class HotFolder
 	 * the time in milliseconds to wait for stabilization
 	 */
 	public int stabilizeTime = defaultStabilizeTime; // time between reads in milliseconds - also minimum length of non-modification
+	private int maxCheck;
+
+	public int getMaxCheck()
+	{
+		return maxCheck;
+	}
+
+	public void setMaxCheck(int maxCheck)
+	{
+		this.maxCheck = maxCheck;
+	}
 
 	/**
 	 * @param maxConcurrent the maxConcurrent to set note will only add
@@ -119,59 +128,39 @@ public class HotFolder
 		final long t0 = System.currentTimeMillis();
 		final long lastMod = dir.lastModified();
 		final int n = lastFileTime.size();
+		boolean mod = false;
 		if (lastMod > lastModified || n > 0 || (t0 - lastModified) < 42000)
-		// has the directory been touched?
 		{
 			lastModified = lastMod;
 			File[] files = getHotFiles();
 			if (files != null)
 			{
+				Set<File> hotFiles = ContainerUtil.toHashSet(files);
 				if (!lastFileTime.isEmpty())
 				{
-					final int fileListLength = files.length;
 					for (int i = 0; i < lastFileTime.size(); i++)
 					{
 						final FileTime lftAt = lastFileTime.get(i);
-						for (int j = 0; j < fileListLength; j++)
-						// loop over all matching files in the directory
+						boolean hasFile = hotFiles.remove(lftAt.f);
+						final boolean processed = hasFile && processSingleFile(lftAt);
+						if (processed)
 						{
-							final File fileJ = files[j];
-							if (fileJ != null && fileJ.equals(lftAt.f))
-							{
-								final boolean processed = processSingleFile(lftAt);
-								if (processed)
-								{
-									files[j] = null;
-									i--;
-									break;
-								}
-							}
+							mod = true;
+							i--;
 						}
-
 					}
 				}
 
-				final List<File> vf = ContainerUtil.toArrayList(files);
-				for (int i = vf.size() - 1; i >= 0; i--)
+				for (final File f : hotFiles) // the file is new - add to list for next check
 				{
-					if (vf.get(i) == null)
-					{
-						vf.remove(i);
-					}
-				}
-				if (!vf.isEmpty())
-				{
-					files = vf.toArray(new File[0]);
-					files = new FileSorter(files).sortLastModified(false);
-
-					for (final File f : files) // the file is new - add to list for next check
-					{
-						lastFileTime.add(new FileTime(f, false));
-					}
+					lastFileTime.add(new FileTime(f, false));
+					mod = true;
 				}
 			}
 		}
-		return lastFileTime.size() != n;
+
+		return mod;
+
 	}
 
 	/**
@@ -343,10 +332,11 @@ public class HotFolder
 		if (r == null)
 			return null;
 
-		final File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions());
+		final File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions(), maxCheck);
 		int n = 0;
 		if (files != null)
 		{
+
 			for (int i = 0; i < files.length; i++)
 			{
 				final File file = files[i];

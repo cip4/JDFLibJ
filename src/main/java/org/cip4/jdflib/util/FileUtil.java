@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -146,6 +146,11 @@ public class FileUtil
 		return file != null && file.exists();
 	}
 
+	public static boolean isFile(final File file)
+	{
+		return file != null && file.isFile();
+	}
+
 	/**
 	 * get any auxiliary directory with the same name as a file
 	 *
@@ -188,14 +193,19 @@ public class FileUtil
 	 * @param extension comma separated list of extensions to check for (null = list all)
 	 * @return Files[] the matching files, null if none are found
 	 */
-	public static File[] listFilesWithExtension(final File dir, final String extension)
+	public static File[] listFilesWithExtension(final File dir, final String extension, int max)
 	{
 		if (dir == null)
 		{
 			return null;
 		}
-		final File[] files = dir.listFiles(new ExtensionFileFilter(extension));
+		final File[] files = dir.listFiles(new ExtensionFileFilter(extension, max));
 		return (files == null || files.length == 0) ? null : files;
+	}
+
+	public static File[] listFilesWithExtension(File dir, String allExtensions)
+	{
+		return listFilesWithExtension(dir, allExtensions, -1);
 	}
 
 	/**
@@ -207,11 +217,23 @@ public class FileUtil
 	 */
 	public static File[] listFilesWithExpression(final File dir, final String expression)
 	{
+		return listFilesWithExpression(dir, expression, -1);
+	}
+
+	/**
+	 * list all files matching given regexp
+	 *
+	 * @param dir the directory to search
+	 * @param expression regular expression - uses the simplified syntax
+	 * @return Files[] the matching files, null if none are found
+	 */
+	public static File[] listFilesWithExpression(final File dir, final String expression, int max)
+	{
 		if (dir == null)
 		{
 			return null;
 		}
-		final File[] files = dir.listFiles(new ExpressionFileFilter(expression));
+		final File[] files = dir.listFiles(new ExpressionFileFilter(expression, max));
 		return (files == null || files.length == 0) ? null : files;
 	}
 
@@ -358,15 +380,21 @@ public class FileUtil
 	/************************
 	 * Inner class *********************** UtilFileFilter
 	 ************************************************************/
-	public static class ExtensionFileFilter implements FileFilter
+	public static class ExtensionFileFilter extends CountFileFilter
 	{
 		private Set<String> m_extension;
+
+		protected ExtensionFileFilter(final String fileExtension)
+		{
+			this(fileExtension, -1);
+		}
 
 		/**
 		 * @param fileExtension comma separated list of valid regular expressions
 		 */
-		protected ExtensionFileFilter(final String fileExtension)
+		protected ExtensionFileFilter(final String fileExtension, int max)
 		{
+			super(max);
 			if (fileExtension != null)
 			{
 				final VString list = StringUtil.tokenize(fileExtension, ",", false);
@@ -384,11 +412,17 @@ public class FileUtil
 			}
 		}
 
+		protected ExtensionFileFilter(final VString fileExtensions)
+		{
+			this(fileExtensions, -1);
+		}
+
 		/**
 		 * @param fileExtensionVector Vector of valid regular expressions
 		 */
-		protected ExtensionFileFilter(final VString fileExtensionVector)
+		protected ExtensionFileFilter(final VString fileExtensionVector, int max)
 		{
+			super(max);
 			if (fileExtensionVector != null)
 			{
 				m_extension = new HashSet<>();
@@ -412,13 +446,13 @@ public class FileUtil
 		@Override
 		public boolean accept(final File checkFile)
 		{
-			if ((checkFile == null) || !checkFile.isFile())
+			if (!FileUtil.isFile(checkFile))
 			{
 				return false;
 			}
 			if (m_extension == null)
 			{
-				return true;
+				return super.accept(checkFile);
 			}
 			String xt = UrlUtil.extension(checkFile.getPath());
 			if (xt == null)
@@ -430,7 +464,33 @@ public class FileUtil
 				xt = xt.toLowerCase();
 			}
 
-			return m_extension.contains(xt);
+			return m_extension.contains(xt) && super.accept(checkFile);
+		}
+	}
+
+	static class CountFileFilter implements FileFilter
+	{
+		private final int max;
+		int current;
+
+		/**
+		 * @param fileExtension comma separated list of valid regular expressions
+		 */
+		protected CountFileFilter(int max)
+		{
+			this.max = max <= 0 ? Integer.MAX_VALUE : max;
+			current = 0;
+		}
+
+		/**
+		 * (non-Javadoc)
+		 *
+		 * @see java.io.FileFilter#accept(java.io.File)
+		 */
+		@Override
+		public boolean accept(final File checkFile)
+		{
+			return current++ < max;
 		}
 	}
 
@@ -458,7 +518,7 @@ public class FileUtil
 	 *
 	 * @author Rainer Prosi
 	 */
-	protected static class ExpressionFileFilter implements FileFilter
+	protected static class ExpressionFileFilter extends CountFileFilter
 	{
 		private final String regExp;
 
@@ -467,6 +527,15 @@ public class FileUtil
 		 */
 		public ExpressionFileFilter(final String _regExp)
 		{
+			this(_regExp, -1);
+		}
+
+		/**
+		 * @param _regExp the simplified regular expression to match
+		 */
+		public ExpressionFileFilter(final String _regExp, int max)
+		{
+			super(max);
 			regExp = StringUtil.simpleRegExptoRegExp(_regExp);
 		}
 
@@ -478,7 +547,7 @@ public class FileUtil
 		@Override
 		public boolean accept(final File checkFile)
 		{
-			return checkFile != null && StringUtil.matchesSimple(checkFile.getName(), regExp);
+			return checkFile != null && StringUtil.matchesSimple(checkFile.getName(), regExp) && super.accept(checkFile);
 		}
 	}
 
@@ -1112,7 +1181,7 @@ public class FileUtil
 	 */
 	public static boolean isDirectory(final File f)
 	{
-		if (f == null || !f.exists())
+		if (!exists(f))
 			return false;
 		if (f.isDirectory())
 			return true;
@@ -1321,4 +1390,5 @@ public class FileUtil
 	{
 		return PlatformUtil.isWindows();
 	}
+
 }

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -421,6 +421,51 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			assertEquals(42, ok.listFiles().length, 13);
 			assertEquals(0, tmpHFDir.listFiles().length, 4, "Found files: " + Arrays.toString(tmpHFDir.list()));
 			assertEquals(42, error.listFiles().length, 13);
+
+			hf.stop();
+		}
+	}
+
+	/**
+	 *
+	 * ok or error folder testing
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public synchronized void testOKErrorMaxCheck() throws Exception
+	{
+		for (boolean synch : new boolean[] { true, false })
+		{
+			setUp();
+			final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+			hf.setStabilizeTime(100);
+			hf.setSynchronous(synch);
+			File error = new File("error");
+			hf.setErrorStorage(error);
+			File ok = new File("ok");
+			hf.setOKStorage(ok);
+			hf.setMaxStore(42);
+			hf.setMaxCheck(10);
+			hf.restart();
+			ThreadUtil.sleep(1000);
+
+			for (int i = 0; i < 60; i++)
+			{
+				final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
+				file.createNewFile();
+			}
+			ok = FileUtil.getFileInDirectory(theHFDir, ok);
+			error = FileUtil.getFileInDirectory(theHFDir, error);
+			for (int i = 0; i < 420; i++)
+			{
+				ThreadUtil.sleep(111);
+				if (ok.listFiles().length == 30 && error.listFiles().length == 30)
+					break;
+			}
+			assertEquals(30, ok.listFiles().length, 4);
+			assertEquals(0, tmpHFDir.listFiles().length, 4);
+			assertEquals(30, error.listFiles().length, 4);
 
 			hf.stop();
 		}

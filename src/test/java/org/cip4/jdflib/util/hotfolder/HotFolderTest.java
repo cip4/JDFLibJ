@@ -236,6 +236,54 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public synchronized void testManyLimited() throws Exception
+	{
+		final int n0 = Thread.activeCount();
+		final File manyDir = new File(sm_dirTestDataTemp, "manyhfmax");
+		FileUtil.forceDelete(manyDir);
+		final HotFolder[] hotfolders = new HotFolder[10];
+		for (int i = 0; i < 10; i++)
+		{
+			final File singleHF = new File(manyDir, "single" + i);
+			hotfolders[i] = new HotFolder(singleHF, null, new MyListener(true));
+			hotfolders[i].setMaxCheck(10);
+		}
+		assertTrue(Thread.activeCount() - n0 < 17, "Loop ");
+		for (HotFolder hotfolder : hotfolders)
+		{
+			for (int j = 0; j < 100; j++)
+			{
+				final File towrite = new File(hotfolder.getDir(), j + ".txt");
+				assertTrue(towrite.createNewFile());
+			}
+		}
+		for (int l = 0; l < 100; l++)
+		{
+			int n = 0;
+			ThreadUtil.sleep(100);
+			for (HotFolder hotfolder : hotfolders)
+			{
+				for (int j = 0; j < 100; j++)
+				{
+					final File towrite = new File(hotfolder.getDir(), j + ".txt");
+					if (towrite.exists())
+					{
+						n++;
+					}
+				}
+			}
+			if (n == 0)
+			{
+				return;
+			}
+		}
+		fail("not gone");
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	public synchronized void testRestartManyConcurrent() throws Exception
 	{
 		for (int j = 0; j < 10; j++)

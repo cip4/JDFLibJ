@@ -314,4 +314,9 @@ public class StorageHotFolder
 		this.synchronous = synchronous;
 	}
 
+	public void setMaxCheck(int maxCheck)
+	{
+		hf.setMaxCheck(maxCheck);
+	}
+
 }

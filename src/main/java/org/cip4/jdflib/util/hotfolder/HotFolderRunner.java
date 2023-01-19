@@ -179,7 +179,7 @@ class HotFolderRunner extends Thread
 			{
 				final long t1 = System.currentTimeMillis();
 				final int millis = mod ? 0 : HotFolder.getDefaultStabilizeTime() - (int) (t1 - t0);
-				ThreadUtil.wait(mutex, Math.max(100, millis));
+				ThreadUtil.wait(mutex, Math.max(42, millis));
 			}
 		}
 		log.info("end of hot folder loop " + this);

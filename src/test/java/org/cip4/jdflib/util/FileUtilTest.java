@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -415,24 +415,12 @@ public class FileUtilTest extends JDFTestCaseBase
 			}
 		}
 		assertEquals(FileUtil.listFilesWithExtension(f, "a").length, 3);
-		// TODO @Raier (2013-03-10) - File order depends from target system
-		// assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[0].getName(), "0.a");
 		assertEquals(FileUtil.listFilesWithExtension(f, null).length, 18);
 		assertNull(FileUtil.listFilesWithExtension(f, "CC"));
 		assertNull(FileUtil.listFilesWithExtension(f, ".CC,.dd"));
 		new File(f.getAbsolutePath() + File.separator + "a").createNewFile();
 		assertEquals(FileUtil.listFilesWithExtension(f, null).length, 19);
-		// TODO @Raier (2013-03-10) - Works not on Linux Systems
-		// assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 1);
-		new File(f.getAbsolutePath() + File.separator + "b.").createNewFile();
-		// TODO @Raier (2013-03-10) - Works not on Linux Systems
-		// assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 2);
-
-		if (PlatformUtil.isWindows())
-		{
-			assertEquals(FileUtil.listFilesWithExtension(f, "C")[0].getName(), "0.c");
-			assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[8].getName(), "2.c");
-		}
+		assertEquals(FileUtil.listFilesWithExtension(f, null, 10).length, 10);
 
 	}
 
@@ -454,6 +442,9 @@ public class FileUtilTest extends JDFTestCaseBase
 		final File[] listFilesWithExpression = FileUtil.listFilesWithExpression(f, "*.b.c");
 		assertEquals(listFilesWithExpression[0], f1);
 		assertEquals(listFilesWithExpression.length, 1);
+		FileUtil.createNewFile(FileUtil.getFileInDirectory(f, new File("a2.b.c")));
+		assertEquals(2, FileUtil.listFilesWithExpression(f, "*.b.c").length);
+		assertEquals(1, FileUtil.listFilesWithExpression(f, "*.b.c", 1).length);
 	}
 
 	/**
