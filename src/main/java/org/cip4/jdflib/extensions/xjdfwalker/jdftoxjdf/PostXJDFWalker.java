@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1026,6 +1026,7 @@ class PostXJDFWalker extends BaseElementWalker
 					if (dp2 == null)
 					{
 						dp2 = (JDFDeliveryParams) rh2.getRoot().copyElement(dp, null);
+						dp2.setAttributes(drop);
 						dp2.removeChildren(ElementName.DROP, null);
 					}
 					for (final JDFDropItem dropitem : drop.getAllDropItem())
@@ -1055,90 +1056,6 @@ class PostXJDFWalker extends BaseElementWalker
 				rh.deleteNode();
 			}
 			return super.walk(xjdf, dummy);
-		}
-	}
-
-	/**
-	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
-	 */
-	public class WalkDeliveryParams extends WalkResourceElement
-	{
-		/**
-		 *
-		 */
-		public WalkDeliveryParams()
-		{
-			super();
-		}
-
-		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
-		 * @param toCheck
-		 * @return
-		 */
-		@Override
-		public boolean matches(final KElement toCheck)
-		{
-			return false && !retainAll && toCheck instanceof JDFDeliveryParams;
-		}
-
-		/**
-		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param xjdf
-		 * @param dummy
-		 * @return
-		 */
-		@Override
-		public KElement walk(final KElement xjdf, final KElement dummy)
-		{
-			final KElement delParams = super.walk(xjdf, dummy);
-			if (delParams != null)
-			{
-				final Vector<JDFDrop> vDrop = delParams.getChildrenByClass(JDFDrop.class, false, 0);
-				final int size = vDrop == null ? 0 : vDrop.size();
-				final KElement param = delParams.getParentNode_KElement();
-				final KElement set = param == null ? null : param.getParentNode_KElement();
-				if (set != null)
-				{
-					final ResourceHelper ph = new ResourceHelper(param);
-					final SetHelper sh = new SetHelper(set);
-					final JDFAttributeMap partMap = ph.getPartMap();
-					partMap.put(XJDFConstants.DropID, "DROP_0");
-					partMap.remove(XJDFConstants.Product);
-					ph.setPartMap(partMap);
-
-					delParams.removeChildren(ElementName.DROP, null, null);
-					for (int j = 0; j < size; j++)
-					{
-						final int i = (j + 1) % size;
-						partMap.put(XJDFConstants.DropID, "DROP_" + i);
-						KElement newDrop;
-						ResourceHelper newParam = sh.getPartition(partMap);
-						if (i != 0)
-						{
-							newParam = sh.getCreatePartition(partMap, true);
-							newDrop = newParam.getResource();
-							newDrop.copyInto(delParams, false);
-						}
-						else
-						{
-							newDrop = delParams;
-							newParam = ph;
-						}
-						newDrop.copyInto(vDrop.get(i), false);
-					}
-				}
-			}
-			return delParams;
-		}
-
-		/**
-		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-		 */
-		@Override
-		public VString getElementNames()
-		{
-			return VString.getVString(ElementName.DELIVERYPARAMS, null);
 		}
 	}
 

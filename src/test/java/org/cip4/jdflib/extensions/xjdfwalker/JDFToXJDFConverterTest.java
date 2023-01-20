@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -126,6 +126,7 @@ import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
+import org.cip4.jdflib.resource.intent.JDFDropIntent;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
@@ -506,10 +507,13 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) nP.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
 		final JDFComponent c = (JDFComponent) nP.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		nP.getLink(c, null).setAmount(66);
-		final JDFDropItemIntent dropItemIntent = di.appendDropIntent().appendDropItemIntent();
+		JDFDropIntent dropIntent = di.appendDropIntent();
+		JDFDate date = new JDFDate();
+		dropIntent.appendRequired().setActual(date);
+		final JDFDropItemIntent dropItemIntent = dropIntent.appendDropItemIntent();
 		dropItemIntent.refComponent(c);
 		dropItemIntent.setAmount(42);
-		final JDFDropItemIntent dropItemIntent2 = di.appendDropIntent().appendDropItemIntent();
+		final JDFDropItemIntent dropItemIntent2 = dropIntent.appendDropItemIntent();
 		dropItemIntent2.refComponent(c);
 		dropItemIntent2.setAmount(63);
 		final XJDF20 xjdf20 = new XJDF20();
@@ -518,7 +522,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf.write2File(sm_dirTestDataTemp + "delTest2.xjdf");
 		assertNotNull(xjdf);
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/DeliveryParams/DropItem/@Amount", null), "42");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[2]/DeliveryParams/DropItem/@Amount", null), "63");
+		assertEquals(date.getDateTimeISO(), xjdf.getXPathAttribute("ResourceSet/Resource/DeliveryParams/@Required", null));
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/DeliveryParams/DropItem[2]/@Amount", null), "63");
 		return xjdf;
 	}
 
