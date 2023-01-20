@@ -68,6 +68,17 @@ public class StorageHotFolder
 	final Log log;
 	int retry;
 	boolean synchronous;
+	boolean processAux;
+
+	public boolean isProcessAux()
+	{
+		return processAux;
+	}
+
+	public void setProcessAux(boolean processAux)
+	{
+		this.processAux = processAux;
+	}
 
 	/**
 	 * @return the hotfolder directory
@@ -92,6 +103,7 @@ public class StorageHotFolder
 	{
 		super();
 		synchronous = false;
+		processAux = true;
 		retry = 1;
 		log = LogFactory.getLog(getClass());
 		this.storageDir = storageDir;
@@ -265,7 +277,7 @@ public class StorageHotFolder
 	@Override
 	public String toString()
 	{
-		return getClass().getSimpleName() + "[hf=" + hf + ", storageDir=" + storageDir + " retry=" + retry;
+		return getClass().getSimpleName() + " [hf=" + hf + ", storageDir=" + storageDir + " retry=" + retry + " synch=" + synchronous + " aux=" + processAux;
 	}
 
 	/**

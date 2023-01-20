@@ -481,6 +481,15 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		assertEquals(99, hf.retry);
 	}
 
+	@Test
+	public synchronized void testProcessAux() throws Exception
+	{
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		assertTrue(hf.isProcessAux());
+		hf.setProcessAux(false);
+		assertFalse(hf.isProcessAux());
+	}
+
 	/**
 	 *
 	 * ok or error folder testing also check whether we run into a dead loop with retry>1
@@ -778,15 +787,56 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		hf.setOKStorage(ok);
 		hf.setMaxStore(42);
 		hf.restart();
-		ThreadUtil.sleep(1000);
+		ThreadUtil.sleep(123);
 
 		createPair(0);
 
 		ok = FileUtil.getFileInDirectory(theHFDir, ok);
 		error = FileUtil.getFileInDirectory(theHFDir, error);
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 1000; i++)
 		{
-			ThreadUtil.sleep(200);
+			ThreadUtil.sleep(42);
+			if (ok.listFiles().length == 2)
+				break;
+		}
+
+		assertEquals(2, ok.listFiles().length, 1);
+		assertEquals(0, tmpHFDir.listFiles().length, 1);
+
+		hf.stop();
+	}
+
+	/**
+	 *
+	 * ok or error folder testing
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public synchronized void testNoAux() throws Exception
+	{
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		hf.setMaxConcurrent(5);
+		hf.setStabilizeTime(100);
+		File error = new File("error");
+		hf.setErrorStorage(error);
+		File ok = new File("ok");
+		hf.setOKStorage(ok);
+		hf.setMaxStore(42);
+		hf.restart();
+		hf.setProcessAux(false);
+		ThreadUtil.sleep(123);
+
+		createPair(0);
+		createPair(1);
+		createPair(2);
+		createPair(3);
+
+		ok = FileUtil.getFileInDirectory(theHFDir, ok);
+		error = FileUtil.getFileInDirectory(theHFDir, error);
+		for (int i = 0; i < 1000; i++)
+		{
+			ThreadUtil.sleep(42);
 			if (ok.listFiles().length == 2)
 				break;
 		}

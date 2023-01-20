@@ -214,7 +214,7 @@ class StorageHotFolderListener implements HotFolderListener
 	 */
 	void copyCompleted(final File storedFile, final boolean bOK)
 	{
-		final File auxFile = FileUtil.getAuxDir(storedFile);
+		final File auxFile = parent.isProcessAux() ? FileUtil.getAuxDir(storedFile) : null;
 
 		if (bOK)
 		{
@@ -320,7 +320,7 @@ class StorageHotFolderListener implements HotFolderListener
 		{
 			log.warn("could not move error " + storedFile + " to " + errorStorage.getAbsolutePath());
 		}
-		final File auxFile = FileUtil.getAuxDir(storedFile);
+		final File auxFile = parent.isProcessAux() ? null : FileUtil.getAuxDir(storedFile);
 		FileUtil.deleteAll(auxFile);
 
 		final boolean bZapp = storedFile.delete();
@@ -378,7 +378,7 @@ class StorageHotFolderListener implements HotFolderListener
 				log.warn("failed to delete temporary file " + hotFile.getAbsolutePath());
 			}
 		}
-		final File aux = ((i > maxStore) || (i > maxAux)) ? FileUtil.getAuxDir(hotFile) : null;
+		final File aux = parent.isProcessAux() && ((i > maxStore) || (i > maxAux)) ? FileUtil.getAuxDir(hotFile) : null;
 		if (aux != null)
 		{
 			final boolean ok = FileUtil.deleteAll(aux);
@@ -439,7 +439,7 @@ class StorageHotFolderListener implements HotFolderListener
 
 	void processAux(final File hotFile, final File tmpDir)
 	{
-		final File aux = FileUtil.getAuxDir(hotFile);
+		final File aux = parent.isProcessAux() ? FileUtil.getAuxDir(hotFile) : null;
 		if (aux != null)
 		{
 			final File newaux = FileUtil.getFileInDirectory(tmpDir, new File(aux.getName()));

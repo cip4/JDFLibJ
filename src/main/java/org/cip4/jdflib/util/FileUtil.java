@@ -446,7 +446,7 @@ public class FileUtil
 		@Override
 		public boolean accept(final File checkFile)
 		{
-			if (!FileUtil.isFile(checkFile))
+			if (isFull() || !FileUtil.isFile(checkFile))
 			{
 				return false;
 			}
@@ -491,6 +491,11 @@ public class FileUtil
 		public boolean accept(final File checkFile)
 		{
 			return current++ < max;
+		}
+
+		protected boolean isFull()
+		{
+			return current >= max;
 		}
 	}
 
@@ -547,7 +552,7 @@ public class FileUtil
 		@Override
 		public boolean accept(final File checkFile)
 		{
-			return checkFile != null && StringUtil.matchesSimple(checkFile.getName(), regExp) && super.accept(checkFile);
+			return checkFile != null && !isFull() && StringUtil.matchesSimple(checkFile.getName(), regExp) && super.accept(checkFile);
 		}
 	}
 
