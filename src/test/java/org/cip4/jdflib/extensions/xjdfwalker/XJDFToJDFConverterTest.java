@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1030,7 +1030,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNull(dp);
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) d.getJDFRoot().getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
 		assertNotNull(di);
-		assertNotNull(di.getDropIntent(1).getDropItemIntent(0).getComponent(), "The ProductRef was not translated");
+		assertNotNull(di.getDropIntent(0).getDropItemIntent(1).getComponent(), "The ProductRef was not translated");
 	}
 
 	/**
@@ -1114,7 +1114,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) d.getJDFRoot().getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
 		assertNotNull(di);
 		assertEquals("DROP_0", di.getDropIntent(0).getDropID());
-		assertEquals("DROP_1", di.getDropIntent(1).getDropID());
+		assertEquals(2, di.getDropIntent(0).getAllDropItemIntent().size());
 	}
 
 	/**
@@ -1143,7 +1143,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) d.getJDFRoot().getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
 		assertNotNull(di);
 		assertEquals("DROP_0", di.getDropIntent(0).getDropID());
-		assertEquals("DROP_1", di.getDropIntent(1).getDropID());
+		assertNotNull(di.getDropIntent(0).getContact(0));
 	}
 
 	/**
@@ -1173,11 +1173,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(di);
 		final JDFContact contact = di.getDropIntent(0).getContact(0);
 		assertFalse(contact.getPartIDKeys().contains(AttributeName.DROPID));
-		final JDFContact contact2 = di.getDropIntent(1).getContact(0);
-		assertFalse(contact2.getPartIDKeys().contains(AttributeName.DROPID));
-		assertFalse(contact.isEqual(contact2));
 		assertEquals("S0", contact.getAddress().getStreet());
-		assertEquals("S1", contact2.getAddress().getStreet());
 	}
 
 	/**
