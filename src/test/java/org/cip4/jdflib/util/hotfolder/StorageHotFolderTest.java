@@ -439,7 +439,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		{
 			setUp();
 			final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
-			hf.setStabilizeTime(100);
+			hf.setStabilizeTime(42);
 			hf.setSynchronous(synch);
 			File error = new File("error");
 			hf.setErrorStorage(error);

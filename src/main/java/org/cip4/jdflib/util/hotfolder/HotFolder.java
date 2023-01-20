@@ -141,8 +141,8 @@ public class HotFolder
 					for (int i = 0; i < lastFileTime.size(); i++)
 					{
 						final FileTime lftAt = lastFileTime.get(i);
-						boolean hasFile = hotFiles.remove(lftAt.f);
-						final boolean processed = hasFile && processSingleFile(lftAt);
+						hotFiles.remove(lftAt.f);
+						final boolean processed = processSingleFile(lftAt);
 						if (processed)
 						{
 							mod = true;
