@@ -490,6 +490,13 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		assertFalse(hf.isProcessAux());
 	}
 
+	@Test
+	public synchronized void testToString() throws Exception
+	{
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		assertNotNull(hf.toString());
+	}
+
 	/**
 	 *
 	 * ok or error folder testing also check whether we run into a dead loop with retry>1
