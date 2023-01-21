@@ -55,12 +55,16 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.channels.OverlappingFileLockException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -199,8 +203,34 @@ public class FileUtil
 		{
 			return null;
 		}
-		final File[] files = dir.listFiles(new ExtensionFileFilter(extension, max));
-		return (files == null || files.length == 0) ? null : files;
+		try (Stream<Path> stream = Files.list(dir.toPath()))
+		{
+			Stream<Path> stream2 = stream.filter(new ExtensionFileFilter(extension));
+			if (max > 0)
+				stream2 = stream2.limit(max);
+
+			return streamToArray(stream2);
+		}
+		catch (IOException e)
+		{
+		}
+		return null;
+
+	}
+
+	static File[] streamToArray(Stream<Path> stream)
+	{
+		Object[] array = stream.toArray();
+		if (array.length != 0)
+		{
+			File[] ret = new File[array.length];
+			for (int i = 0; i < ret.length; i++)
+			{
+				ret[i] = ((Path) array[i]).toFile();
+			}
+			return ret;
+		}
+		return null;
 	}
 
 	public static File[] listFilesWithExtension(File dir, String allExtensions)
@@ -233,8 +263,18 @@ public class FileUtil
 		{
 			return null;
 		}
-		final File[] files = dir.listFiles(new ExpressionFileFilter(expression, max));
-		return (files == null || files.length == 0) ? null : files;
+		try (Stream<Path> stream = Files.list(dir.toPath()))
+		{
+			Stream<Path> stream2 = stream.filter(new ExpressionFileFilter(expression));
+			if (max > 0)
+				stream2 = stream2.limit(max);
+
+			return streamToArray(stream2);
+		}
+		catch (IOException e)
+		{
+		}
+		return null;
 	}
 
 	/**
@@ -377,24 +417,20 @@ public class FileUtil
 
 	// //////////////////////////////////////////////////////////////////////////
 
-	/************************
-	 * Inner class *********************** UtilFileFilter
-	 ************************************************************/
-	public static class ExtensionFileFilter extends CountFileFilter
+	/**
+	 * 
+	 * @author prosirai
+	 *
+	 */
+	public static class ExtensionFileFilter implements Predicate<Path>
 	{
-		private Set<String> m_extension;
-
-		protected ExtensionFileFilter(final String fileExtension)
-		{
-			this(fileExtension, -1);
-		}
+		private final Set<String> m_extension;
 
 		/**
 		 * @param fileExtension comma separated list of valid regular expressions
 		 */
-		protected ExtensionFileFilter(final String fileExtension, int max)
+		protected ExtensionFileFilter(final String fileExtension)
 		{
-			super(max);
 			if (fileExtension != null)
 			{
 				final VString list = StringUtil.tokenize(fileExtension, ",", false);
@@ -410,19 +446,14 @@ public class FileUtil
 					m_extension.add(st);
 				}
 			}
+			else
+			{
+				m_extension = null;
+			}
 		}
 
-		protected ExtensionFileFilter(final VString fileExtensions)
+		protected ExtensionFileFilter(final VString fileExtensionVector)
 		{
-			this(fileExtensions, -1);
-		}
-
-		/**
-		 * @param fileExtensionVector Vector of valid regular expressions
-		 */
-		protected ExtensionFileFilter(final VString fileExtensionVector, int max)
-		{
-			super(max);
 			if (fileExtensionVector != null)
 			{
 				m_extension = new HashSet<>();
@@ -436,6 +467,10 @@ public class FileUtil
 					m_extension.add(st);
 				}
 			}
+			else
+			{
+				m_extension = null;
+			}
 		}
 
 		/**
@@ -444,17 +479,17 @@ public class FileUtil
 		 * @see java.io.FileFilter#accept(java.io.File)
 		 */
 		@Override
-		public boolean accept(final File checkFile)
+		public boolean test(final Path checkFile)
 		{
-			if (isFull() || !FileUtil.isFile(checkFile))
+			if (!Files.isRegularFile(checkFile))
 			{
 				return false;
 			}
 			if (m_extension == null)
 			{
-				return super.accept(checkFile);
+				return true;
 			}
-			String xt = UrlUtil.extension(checkFile.getPath());
+			String xt = UrlUtil.extension(checkFile.toString());
 			if (xt == null)
 			{
 				xt = "";
@@ -464,38 +499,7 @@ public class FileUtil
 				xt = xt.toLowerCase();
 			}
 
-			return m_extension.contains(xt) && super.accept(checkFile);
-		}
-	}
-
-	static class CountFileFilter implements FileFilter
-	{
-		private final int max;
-		int current;
-
-		/**
-		 * @param fileExtension comma separated list of valid regular expressions
-		 */
-		protected CountFileFilter(int max)
-		{
-			this.max = max <= 0 ? Integer.MAX_VALUE : max;
-			current = 0;
-		}
-
-		/**
-		 * (non-Javadoc)
-		 *
-		 * @see java.io.FileFilter#accept(java.io.File)
-		 */
-		@Override
-		public boolean accept(final File checkFile)
-		{
-			return current++ < max;
-		}
-
-		protected boolean isFull()
-		{
-			return current >= max;
+			return m_extension.contains(xt);
 		}
 	}
 
@@ -523,7 +527,7 @@ public class FileUtil
 	 *
 	 * @author Rainer Prosi
 	 */
-	protected static class ExpressionFileFilter extends CountFileFilter
+	protected static class ExpressionFileFilter implements Predicate<Path>
 	{
 		private final String regExp;
 
@@ -532,15 +536,6 @@ public class FileUtil
 		 */
 		public ExpressionFileFilter(final String _regExp)
 		{
-			this(_regExp, -1);
-		}
-
-		/**
-		 * @param _regExp the simplified regular expression to match
-		 */
-		public ExpressionFileFilter(final String _regExp, int max)
-		{
-			super(max);
 			regExp = StringUtil.simpleRegExptoRegExp(_regExp);
 		}
 
@@ -550,9 +545,9 @@ public class FileUtil
 		 * @see java.io.FileFilter#accept(java.io.File)
 		 */
 		@Override
-		public boolean accept(final File checkFile)
+		public boolean test(final Path checkFile)
 		{
-			return checkFile != null && !isFull() && StringUtil.matchesSimple(checkFile.getName(), regExp) && super.accept(checkFile);
+			return checkFile != null && StringUtil.matchesSimple(checkFile.getFileName().toString(), regExp);
 		}
 	}
 
