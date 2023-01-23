@@ -496,7 +496,9 @@ public class WalkJDFElement extends WalkElement
 		String resID = linkTarget.getID();
 		if (jdfToXJDF.getResourceAlias().contains(resID) && (rl instanceof JDFRefElement))
 		{
-			resID = rl.getParentNode_KElement().getLocalName();
+			// we don't want a new res for each refelement
+			String localName = rl.getParentNode_KElement().getLocalName();
+			resID = localName + "_" + (localName.hashCode() % 100000);
 		}
 		return resID;
 	}
