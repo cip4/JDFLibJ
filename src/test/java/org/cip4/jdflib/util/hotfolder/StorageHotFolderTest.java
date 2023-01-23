@@ -844,7 +844,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		for (int i = 0; i < 1000; i++)
 		{
 			ThreadUtil.sleep(42);
-			if (ok.listFiles().length == 2)
+			if (ok.listFiles().length == 2 && tmpHFDir.listFiles().length == 0)
 				break;
 		}
 
