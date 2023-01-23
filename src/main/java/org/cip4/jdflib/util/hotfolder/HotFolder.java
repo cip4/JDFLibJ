@@ -153,8 +153,11 @@ public class HotFolder
 
 				for (final File f : hotFiles) // the file is new - add to list for next check
 				{
-					lastFileTime.add(new FileTime(f, false));
-					mod = true;
+					if (f != null)
+					{
+						lastFileTime.add(new FileTime(f, false));
+						mod = true;
+					}
 				}
 			}
 		}
