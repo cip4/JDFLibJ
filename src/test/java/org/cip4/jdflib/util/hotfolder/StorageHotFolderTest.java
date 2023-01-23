@@ -224,13 +224,14 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		final File content = new File(hfPath + "/dummy/boo.pdf");
 		FileUtil.createNewFile(content);
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new ExtractListener());
+		hf.setProcessAux(true);
 		ThreadUtil.sleep(333);
 		d.write2File(hfPath + "/dummy.jdf", 2, false);
 		final File file = new File(hfPath + "/dummy.jdf");
 		assertTrue(file.exists());
 		for (int i = 0; i < 4800; i++)
 		{
-			ThreadUtil.sleep(10);
+			ThreadUtil.sleep(42);
 			if (!file.exists() && !content.exists() && tmpHFDir.listFiles().length == 0)
 				break;
 		}
@@ -313,7 +314,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		file.createNewFile();
 		for (int i = 0; i < 1234; i++)
 		{
-			ThreadUtil.sleep(4);
+			ThreadUtil.sleep(42);
 			if (!file.exists() && tmpHFDir.listFiles().length == 0)
 			{
 				break;
