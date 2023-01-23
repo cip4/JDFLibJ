@@ -213,6 +213,7 @@ public class FileUtil
 		}
 		catch (IOException e)
 		{
+			// nop
 		}
 		return null;
 
@@ -273,6 +274,7 @@ public class FileUtil
 		}
 		catch (IOException e)
 		{
+			// nop
 		}
 		return null;
 	}
