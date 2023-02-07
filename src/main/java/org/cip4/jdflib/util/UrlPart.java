@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -53,6 +53,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.core.XMLParserFactory;
 import org.cip4.jdflib.ifaces.IStreamWriter;
+import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.net.IPollDetails;
 
 /**
@@ -208,6 +209,18 @@ public class UrlPart implements IPollDetails, IStreamWriter
 	}
 
 	/**
+	 * 
+	 * @param maxLen
+	 * @return
+	 */
+	public String getResponseString(int maxLen)
+	{
+		buffer();
+		ByteArrayIOInputStream bios = bufferStream.getInputStream();
+		return bios.asString(maxLen);
+	}
+
+	/**
 	 * the content length of this UrlPart
 	 */
 	public long contentLength;
@@ -247,7 +260,7 @@ public class UrlPart implements IPollDetails, IStreamWriter
 	@Override
 	public String toString()
 	{
-		return "URLPart: " + contentType + " length=" + contentLength + " rc=" + rc + " URL=" + url + "\n" + ((bufferStream == null) ? " <not buffered>" : bufferStream);
+		return "URLPart: " + contentType + " length=" + contentLength + " rc=" + rc + " URL=" + url + "\n" + ((bufferStream == null) ? " <not buffered>" : getResponseString(1234));
 	}
 
 	/**

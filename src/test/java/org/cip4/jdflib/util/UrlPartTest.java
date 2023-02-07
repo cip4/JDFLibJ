@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,10 +68,15 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -91,10 +96,24 @@ public class UrlPartTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		Assertions.assertNotNull(writeToURL);
-		Assertions.assertTrue(writeToURL.toString().contains("<not buffered>"));
+		assertNotNull(writeToURL);
+		assertTrue(writeToURL.toString().contains("<not buffered>"));
 		writeToURL.buffer();
-		Assertions.assertFalse(writeToURL.toString().contains("<not buffered>"));
+		assertFalse(writeToURL.toString().contains("<not buffered>"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testRespString()
+	{
+		if (!isTestNetwork())
+			return;
+		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		assertNotNull(writeToURL);
+		String responseString = writeToURL.getResponseString(42);
+		assertFalse(responseString.contains("<not buffered>"));
 	}
 
 	/**
@@ -106,8 +125,8 @@ public class UrlPartTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		Assertions.assertNotNull(writeToURL);
-		Assertions.assertNull(writeToURL.getXMLDoc());
+		assertNotNull(writeToURL);
+		assertNull(writeToURL.getXMLDoc());
 	}
 
 	/**
@@ -119,7 +138,7 @@ public class UrlPartTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		Assertions.assertNotNull(writeToURL);
+		assertNotNull(writeToURL);
 		writeToURL.buffer();
 		final ByteArrayIOStream byteArrayIOStream = new ByteArrayIOStream(writeToURL.getResponseStream());
 		byteArrayIOStream.close();
@@ -134,10 +153,10 @@ public class UrlPartTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		Assertions.assertNotNull(writeToURL);
+		assertNotNull(writeToURL);
 		final File file = new File(sm_dirTestDataTemp + "s1.html");
 		FileUtil.writeFile(writeToURL, file);
-		Assertions.assertTrue(file.exists());
+		assertTrue(file.exists());
 	}
 
 	/**
@@ -148,7 +167,7 @@ public class UrlPartTest extends JDFTestCaseBase
 	public void testFile() throws Exception
 	{
 		final UrlPart p = new UrlPart(new File("Test.xml"));
-		Assertions.assertEquals(p.getContentType(), UrlUtil.TEXT_XML);
+		assertEquals(p.getContentType(), UrlUtil.TEXT_XML);
 	}
 
 	/**
@@ -158,12 +177,12 @@ public class UrlPartTest extends JDFTestCaseBase
 	@Test
 	public void testRCOK() throws Exception
 	{
-		Assertions.assertFalse(UrlPart.isReturnCodeOK(null));
-		Assertions.assertFalse(UrlPart.isReturnCodeOK(new UrlPart(new File("certainly not there"))));
+		assertFalse(UrlPart.isReturnCodeOK(null));
+		assertFalse(UrlPart.isReturnCodeOK(new UrlPart(new File("certainly not there"))));
 		if (!isTestNetwork())
 			return;
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		Assertions.assertTrue(UrlPart.isReturnCodeOK(writeToURL));
+		assertTrue(UrlPart.isReturnCodeOK(writeToURL));
 	}
 
 }

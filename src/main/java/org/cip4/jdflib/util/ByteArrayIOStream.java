@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -101,6 +101,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	/**
 	 * 
 	 * get a completely buffered and resizable input stream
+	 * 
 	 * @param is
 	 * @return
 	 */
@@ -121,7 +122,8 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 
 	/**
 	 * 
-	 *bytearrayinputstream that allows duplication without copying
+	 * bytearrayinputstream that allows duplication without copying
+	 * 
 	 * @author rainer prosi
 	 * @date Feb 29, 2012
 	 */
@@ -167,7 +169,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		/**
 		 * @param buf
 		 * @param count
-		 *  
+		 * 
 		 */
 		protected ByteArrayIOInputStream(byte[] buf, int count)
 		{
@@ -175,8 +177,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		}
 
 		/**
-		 * creates an input output stream class from any stream
-		 * if is already is a buffered inputstream, no copy is made
+		 * creates an input output stream class from any stream if is already is a buffered inputstream, no copy is made
 		 * 
 		 * @param is the inputstream to buffer
 		 */
@@ -192,6 +193,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		/**
 		 * 
 		 * get a new input stream that starts at pos
+		 * 
 		 * @return
 		 */
 		public ByteArrayIOInputStream getNewStream()
@@ -225,6 +227,13 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		{
 			return count;
 		}
+
+		public String asString(int maxLen)
+		{
+			if (maxLen <= 0 || maxLen > count)
+				maxLen = count;
+			return new String(buf, 0, maxLen);
+		}
 	}
 
 	/**
@@ -250,8 +259,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	}
 
 	/**
-	 * creates an input output stream class from any stream
-	 * if is alraedy is a buffered inputstream, no copy is made
+	 * creates an input output stream class from any stream if is alraedy is a buffered inputstream, no copy is made
 	 * 
 	 * @param is the inputstream to buffer
 	 */
@@ -299,6 +307,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 
 	/**
 	 * create a ByteArrayIOStream from a file
+	 * 
 	 * @param f the file
 	 * @throws IOException
 	 */
@@ -342,6 +351,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 
 	/**
 	 * get the internal buffer - be careful, this is THE buffer
+	 * 
 	 * @return the internal buffer
 	 * 
 	 */
@@ -371,7 +381,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		}
 		catch (IOException e)
 		{
-			// NOP -  super.close() is a nop anyhow
+			// NOP - super.close() is a nop anyhow
 		}
 	}
 }

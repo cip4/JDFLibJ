@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,6 +76,9 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -83,13 +86,12 @@ import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * Jul 16, 2009
+ *         Jul 16, 2009
  */
 public class ByteArrayIOStreamTest extends JDFTestCaseBase
 {
@@ -105,7 +107,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		for (int i = 0; i < 12345; i++)
 		{
 			ios.write(i);
-			Assertions.assertEquals(ios.size(), 1 + i);
+			assertEquals(ios.size(), 1 + i);
 		}
 		ios.close();
 	}
@@ -122,12 +124,12 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 			ios.write(i);
 		}
 		ByteArrayIOInputStream in = ios.getInputStream();
-		Assertions.assertEquals(0, in.tell());
+		assertEquals(0, in.tell());
 		in.seek(-1);
-		Assertions.assertTrue(in.read() >= 0);
-		Assertions.assertTrue(in.read() < 0);
+		assertTrue(in.read() >= 0);
+		assertTrue(in.read() < 0);
 		in.seek(42);
-		Assertions.assertEquals(42, in.tell());
+		assertEquals(42, in.tell());
 		ios.close();
 	}
 
@@ -143,7 +145,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 			ios.write(i);
 		}
 		final ByteArrayIOStream ios2 = new ByteArrayIOStream(ios.getInputStream());
-		Assertions.assertEquals(ios.toString(), ios2.toString());
+		assertEquals(ios.toString(), ios2.toString());
 		ios.close();
 		ios2.close();
 	}
@@ -168,7 +170,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		final InputStream is = ios.getInputStream();
 		for (int i = 0; i < 20000; i++)
 		{
-			Assertions.assertEquals(is.read(), i % 256);
+			assertEquals(is.read(), i % 256);
 		}
 		ios.close();
 	}
@@ -184,13 +186,13 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		FileUtil.forceDelete(f);
 		ByteArrayIOStream ios = new ByteArrayIOStream(f);
 		InputStream is = ios.getInputStream();
-		Assertions.assertEquals(is.available(), 0);
+		assertEquals(is.available(), 0);
 		ios.close();
 		// now null
 		f = null;
 		ios = new ByteArrayIOStream(f);
 		is = ios.getInputStream();
-		Assertions.assertEquals(is.available(), 0);
+		assertEquals(is.available(), 0);
 		ios.close();
 	}
 
@@ -203,7 +205,22 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		final byte[] b = "abc".getBytes();
 		final ByteArrayIOStream ios = new ByteArrayIOStream(b);
 
-		Assertions.assertEquals(ios.getInputStream().available(), 3);
+		assertEquals(ios.getInputStream().available(), 3);
+		ios.close();
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAsString()
+	{
+		final byte[] b = "abcdefgh".getBytes();
+		final ByteArrayIOStream ios = new ByteArrayIOStream(b);
+
+		assertEquals("abc", ios.getInputStream().asString(3));
+		assertEquals("abcdefgh", ios.getInputStream().asString(9999));
+		assertEquals("abcdefgh", ios.getInputStream().asString(0));
 		ios.close();
 	}
 
@@ -223,10 +240,10 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		int i;
 		while ((i = is.read()) >= 0)
 		{
-			Assertions.assertEquals(i, n % 256, "" + n);
+			assertEquals(i, n % 256, "" + n);
 			n++;
 		}
-		Assertions.assertEquals(n, 200000);
+		assertEquals(n, 200000);
 		ios.close();
 	}
 
@@ -248,11 +265,11 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		while ((i = is.read()) >= 0)
 		{
 			final int jj = is2.read();
-			Assertions.assertEquals(i, n % 256, "" + n);
-			Assertions.assertEquals(jj, i);
+			assertEquals(i, n % 256, "" + n);
+			assertEquals(jj, i);
 			n++;
 		}
-		Assertions.assertEquals(n, 50000);
+		assertEquals(n, 50000);
 		ios.close();
 	}
 
@@ -274,11 +291,11 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		while ((i = is.read()) >= 0)
 		{
 			final int jj = is2.read();
-			Assertions.assertEquals(i, n % 256, "" + n);
-			Assertions.assertEquals(jj, i);
+			assertEquals(i, n % 256, "" + n);
+			assertEquals(jj, i);
 			n++;
 		}
-		Assertions.assertEquals(n, 50000);
+		assertEquals(n, 50000);
 		ios.close();
 	}
 
@@ -300,11 +317,11 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		while ((i = is.read()) >= 0)
 		{
 			final int jj = is2.read();
-			Assertions.assertEquals(i, n % 256, "" + n);
-			Assertions.assertEquals(jj, i);
+			assertEquals(i, n % 256, "" + n);
+			assertEquals(jj, i);
 			n++;
 		}
-		Assertions.assertEquals(n, 50000);
+		assertEquals(n, 50000);
 		ios.close();
 	}
 
