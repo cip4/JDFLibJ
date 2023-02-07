@@ -75,6 +75,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.Test;
@@ -88,31 +89,28 @@ public class UrlPartTest extends JDFTestCaseBase
 {
 
 	/**
+	 * @throws IOException
 	 *
 	 */
 	@Test
-	public void testToString()
+	public void testToString() throws IOException
 	{
-		if (!isTestNetwork())
-			return;
-		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		assertNotNull(writeToURL);
-		assertTrue(writeToURL.toString().contains("<not buffered>"));
-		writeToURL.buffer();
-		assertFalse(writeToURL.toString().contains("<not buffered>"));
+		final UrlPart p = new UrlPart(new File(sm_dirTestData + "29694232.ptk"));
+		assertNotNull(p);
+		assertTrue(p.toString().contains("<not buffered>"));
+		p.buffer();
+		assertFalse(p.toString().contains("<not buffered>"));
 	}
 
 	/**
+	 * @throws IOException
 	 *
 	 */
 	@Test
-	public void testRespString()
+	public void testRespString() throws IOException
 	{
-		if (!isTestNetwork())
-			return;
-		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		assertNotNull(writeToURL);
-		String responseString = writeToURL.getResponseString(42);
+		final UrlPart p = new UrlPart(new File(sm_dirTestData + "29694232.ptk"));
+		String responseString = p.getResponseString(142);
 		assertFalse(responseString.contains("<not buffered>"));
 	}
 
