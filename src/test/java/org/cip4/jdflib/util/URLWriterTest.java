@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-20223 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -45,6 +45,7 @@ package org.cip4.jdflib.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.MalformedURLException;
@@ -68,6 +69,20 @@ public class URLWriterTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		assertNotNull(new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null).writeToURL());
+	}
+
+	/**
+	 * @throws MalformedURLException
+	 *
+	 */
+	@Test
+	public void testWriteToURLBad() throws MalformedURLException
+	{
+		if (!isTestNetwork())
+			return;
+		URLWriter urlWriter = new URLWriter(null, new URL("http://nosuchhost123456789"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		assertNull(urlWriter.writeToURL());
+		assertNotNull(urlWriter.getLastException());
 	}
 
 	/**

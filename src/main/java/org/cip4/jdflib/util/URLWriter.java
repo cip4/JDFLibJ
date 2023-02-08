@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -43,6 +43,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.ProtocolException;
 import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.URI;
@@ -80,6 +81,7 @@ public class URLWriter
 	private final IStreamWriter writer;
 	private static int nLogged = 0;
 	private boolean addDirect;
+	private Throwable lastException;
 
 	public boolean isAddDirect()
 	{
@@ -110,6 +112,7 @@ public class URLWriter
 		this.details = details;
 		this.stream = getStream(streamWriter);
 		this.writer = stream != null ? null : streamWriter;
+		lastException = null;
 	}
 
 	/**
@@ -157,6 +160,7 @@ public class URLWriter
 		this.stream = (is == null) ? null : new ByteArrayIOFileStream(is, UrlUtil.MAX_STREAM);
 		this.writer = null;
 		addDirect = true;
+		lastException = null;
 	}
 
 	private ByteArrayIOStream getStream(final IStreamWriter inWriter)
@@ -293,25 +297,7 @@ public class URLWriter
 
 		try
 		{
-			final URLConnection urlConnection = url.openConnection(proxy);
-			urlConnection.setConnectTimeout(UrlUtil.getConnectionTimeout());
-			urlConnection.setRequestProperty("Connection", UrlUtil.KEEPALIVE);
-			urlConnection.setRequestProperty(UrlUtil.CONTENT_TYPE, contentType);
-			if (urlConnection instanceof HttpURLConnection)
-			{
-				final HttpURLConnection httpUrlConnection = (HttpURLConnection) urlConnection;
-				httpUrlConnection.setRequestMethod(method);
-				if (details != null)
-				{
-					details.applyTo(httpUrlConnection);
-				}
-				output(httpUrlConnection);
-				return new UrlPart(httpUrlConnection);
-			}
-			else if (UrlUtil.isFtp(UrlUtil.urlToString(url)))
-			{
-				return new UrlPart(urlConnection, false);
-			}
+			return callProxy(proxy);
 		}
 		catch (final Throwable x)
 		{
@@ -319,6 +305,31 @@ public class URLWriter
 			{
 				log.warn(x.getClass().getCanonicalName() + " snafu #" + nLogged + " writing to url: " + url + " " + x.getMessage());
 			}
+			lastException = x;
+		}
+		return null;
+	}
+
+	protected UrlPart callProxy(final Proxy proxy) throws IOException, ProtocolException
+	{
+		final URLConnection urlConnection = url.openConnection(proxy);
+		urlConnection.setConnectTimeout(UrlUtil.getConnectionTimeout());
+		urlConnection.setRequestProperty("Connection", UrlUtil.KEEPALIVE);
+		urlConnection.setRequestProperty(UrlUtil.CONTENT_TYPE, contentType);
+		if (urlConnection instanceof HttpURLConnection)
+		{
+			final HttpURLConnection httpUrlConnection = (HttpURLConnection) urlConnection;
+			httpUrlConnection.setRequestMethod(method);
+			if (details != null)
+			{
+				details.applyTo(httpUrlConnection);
+			}
+			output(httpUrlConnection);
+			return new UrlPart(httpUrlConnection);
+		}
+		else if (UrlUtil.isFtp(UrlUtil.urlToString(url)))
+		{
+			return new UrlPart(urlConnection, false);
 		}
 		return null;
 	}
@@ -341,5 +352,10 @@ public class URLWriter
 			out.flush();
 			out.close();
 		}
+	}
+
+	public Throwable getLastException()
+	{
+		return lastException;
 	}
 }
