@@ -1269,17 +1269,6 @@ public class StringUtil
 	}
 
 	/**
-	 * return true if s==null or s==""
-	 *
-	 * @param s
-	 * @return
-	 */
-	public static boolean hasContent(final String s)
-	{
-		return trim(s, null) != null;
-	}
-
-	/**
 	 * are we null or empty or contain only an empty JDFAttributeMap
 	 *
 	 * @param v
