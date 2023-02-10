@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,6 +36,11 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,7 +49,6 @@ import java.nio.charset.StandardCharsets;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.VString;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -65,7 +69,7 @@ public class StreamUtilTest extends JDFTestCaseBase
 		final ByteArrayIOStream bos = new ByteArrayIOStream();
 		bos.write("foooo\nbar\nbar2".getBytes());
 		final VString vs = StreamUtil.getLines(bos.getInputStream());
-		Assertions.assertEquals(3, vs.size());
+		assertEquals(3, vs.size());
 		bos.close();
 	}
 
@@ -81,13 +85,28 @@ public class StreamUtilTest extends JDFTestCaseBase
 		s.mark(42);
 		final byte[] b = new byte[4];
 		s.read(b);
-		Assertions.assertEquals(new String(b), "%PDF");
+		assertEquals(new String(b), "%PDF");
 		StreamUtil.reset(s);
 		s.read(b);
-		Assertions.assertEquals(new String(b), "%PDF");
+		assertEquals(new String(b), "%PDF");
 		StreamUtil.reset(null);
 		s.read(b);
-		Assertions.assertNotSame(new String(b), "%PDF");
+		assertNotSame(new String(b), "%PDF");
+	}
+
+	/**
+	 *
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public void testCopy() throws IOException
+	{
+		final InputStream s = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
+		OutputStream os = new ByteArrayIOStream();
+		StreamUtil.copy(null, os);
+		StreamUtil.copy(s, null);
+		StreamUtil.copy(s, os);
 	}
 
 	/**
@@ -102,11 +121,11 @@ public class StreamUtilTest extends JDFTestCaseBase
 		final InputStream s = FileUtil.getBufferedInputStream(f1);
 		final File f2 = new File(sm_dirTestDataTemp + "page1.pdf");
 		final OutputStream os = FileUtil.getBufferedOutputStream(f2);
-		Assertions.assertTrue(StreamUtil.replaceBytes(s, os, "QuarkXPress".getBytes(StandardCharsets.UTF_8), "CIP4Library".getBytes(StandardCharsets.UTF_8), -1));
+		assertTrue(StreamUtil.replaceBytes(s, os, "QuarkXPress".getBytes(StandardCharsets.UTF_8), "CIP4Library".getBytes(StandardCharsets.UTF_8), -1));
 		StreamUtil.close(s);
 
 		StreamUtil.close(os);
-		Assertions.assertEquals(f1.length(), f2.length());
+		assertEquals(f1.length(), f2.length());
 	}
 
 	/**
@@ -124,7 +143,7 @@ public class StreamUtilTest extends JDFTestCaseBase
 		asserTrue(StreamUtil.replaceBytes(s, os, "QuarkXPress".getBytes(StandardCharsets.UTF_8), "CIP4Library AND LOTS Longer".getBytes(StandardCharsets.UTF_8), 1));
 		StreamUtil.close(s);
 		StreamUtil.close(os);
-		Assertions.assertEquals(f1.length(), f2.length() - "CIP4Library AND LOTS Longer".length() + "QuarkXPress".length());
+		assertEquals(f1.length(), f2.length() - "CIP4Library AND LOTS Longer".length() + "QuarkXPress".length());
 
 	}
 
@@ -148,13 +167,13 @@ public class StreamUtilTest extends JDFTestCaseBase
 			s.mark(42);
 			final byte[] b = new byte[4];
 			s.read(b);
-			Assertions.assertEquals(new String(b), "%PDF");
+			assertEquals(new String(b), "%PDF");
 			StreamUtil.reset(s);
 			s.read(b);
-			Assertions.assertEquals(new String(b), "%PDF");
+			assertEquals(new String(b), "%PDF");
 			StreamUtil.reset(null);
 			s.read(b);
-			Assertions.assertNotSame(new String(b), "%PDF");
+			assertNotSame(new String(b), "%PDF");
 			StreamUtil.close(s);
 		}
 	}
@@ -169,12 +188,12 @@ public class StreamUtilTest extends JDFTestCaseBase
 	{
 		final InputStream s = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
 		final byte[] md5 = StreamUtil.getMD5(s);
-		Assertions.assertNotNull(md5);
+		assertNotNull(md5);
 		s.close();
 		final InputStream s2 = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
 		final byte[] md52 = StreamUtil.getMD5(s2);
 		for (int i = 0; i < md5.length; i++)
-			Assertions.assertEquals(md5[i], md52[i]);
+			assertEquals(md5[i], md52[i]);
 		s2.close();
 	}
 }
