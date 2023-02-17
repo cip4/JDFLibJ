@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,6 +73,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFQueueFilter;
 
 /**
@@ -118,5 +119,14 @@ public class WalkQueueFilter extends WalkJDFElement
 	{
 		map.remove(AttributeName.QUEUEENTRYDETAILS);
 		super.updateAttributes(map);
+	}
+
+	@Override
+	public KElement walk(KElement jdf, KElement xjdf)
+	{
+		KElement parent = jdf.getParentNode_KElement();
+		if (parent instanceof JDFCommand)
+			return null;
+		return super.walk(jdf, xjdf);
 	}
 }
