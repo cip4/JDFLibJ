@@ -71,7 +71,7 @@ public class WalkJMF extends WalkXElement
 		final KElement dummy = super.walk(e, trackElem);
 		trackElem.setAttributes(dummy);
 		((JDFJMF) trackElem).setVersion(xjdfToJDFImpl.getVersion());
-		((JDFJMF) trackElem).setMaxVersion(xjdfToJDFImpl.getXJDFVersion());
+		((JDFJMF) trackElem).setMaxVersion(xjdfToJDFImpl.getVersion());
 
 		dummy.deleteNode();
 		return trackElem;
