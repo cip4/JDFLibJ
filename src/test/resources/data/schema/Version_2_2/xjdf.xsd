@@ -1877,6 +1877,7 @@
                     </xs:simpleType>
                 </xs:attribute>
                 <xs:attribute name="PresentationURL" type="URL" use="optional"/>
+                <xs:attribute name="RestApiBaseURL" type="URL" use="optional"/>
                 <xs:attribute name="Revision" type="xs:string" use="optional"/>
                 <xs:attribute name="SerialNumber" type="xs:string" use="optional"/>
                 <xs:attribute name="URLSchemes" type="xs:NMTOKENS" use="optional"/>

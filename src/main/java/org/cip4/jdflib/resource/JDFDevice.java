@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -74,10 +74,12 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDevice;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.util.StringUtil;
@@ -86,7 +88,7 @@ import org.w3c.dom.DOMException;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * way before June 3, 2009
+ *         way before June 3, 2009
  */
 public class JDFDevice extends JDFAutoDevice
 {
@@ -94,6 +96,7 @@ public class JDFDevice extends JDFAutoDevice
 
 	/**
 	 * Constructor for JDFDevice
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -106,6 +109,7 @@ public class JDFDevice extends JDFAutoDevice
 
 	/**
 	 * Constructor for JDFDevice
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -119,6 +123,7 @@ public class JDFDevice extends JDFAutoDevice
 
 	/**
 	 * Constructor for JDFDevice
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -223,7 +228,7 @@ public class JDFDevice extends JDFAutoDevice
 	 * 
 	 * @param docRoot the node we test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 * Will be used in fitsValue method of the State class.
+	 *        Will be used in fitsValue method of the State class.
 	 * @param validationLevel validation level
 	 * @return VElement - vector of executable JDFNodes
 	 */
@@ -255,7 +260,7 @@ public class JDFDevice extends JDFAutoDevice
 	 * 
 	 * @param jdfRoot the node to test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 * Will be used in fitsValue method of the State class.
+	 *        Will be used in fitsValue method of the State class.
 	 * @param level validation level
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
 	 */
@@ -327,6 +332,20 @@ public class JDFDevice extends JDFAutoDevice
 	{
 		final String ret = StringUtil.getNonEmpty(super.getDescriptiveName());
 		return ret != null ? ret : getFriendlyName();
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getRestApiBaseURL()
+	{
+		return getAttribute(XJDFConstants.RestApiBaseURL, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	public void setRestApiBaseURL(String value)
+	{
+		setAttribute(XJDFConstants.RestApiBaseURL, value, null);
 	}
 
 }

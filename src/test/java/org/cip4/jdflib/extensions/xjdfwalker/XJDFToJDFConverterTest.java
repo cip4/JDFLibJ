@@ -88,6 +88,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFInsert;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -150,6 +151,20 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFNode root = d.getJDFRoot();
 		final JDFContact contact = (JDFContact) root.getResource("Contact", EnumUsage.Input, 0);
 		assertEquals(contact.getCompany().getProductID(), "company_id");
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testDevice()
+	{
+		final XJDFHelper h = new XJDFHelper(EnumVersion.Version_2_2, "j1");
+		h.setTypes(EnumType.RasterReading.getName());
+		final JDFDevice dev = (JDFDevice) h.getCreateResource(ElementName.DEVICE, EnumUsage.Input, null);
+		dev.setRestApiBaseURL("http://rest");
+		dev.setDeviceID("d1");
+		writeRoundTripX(h, "RestAPI", EnumValidationLevel.Incomplete);
 	}
 
 	/**

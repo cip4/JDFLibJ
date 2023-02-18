@@ -69,7 +69,7 @@ public class WalkXJDF extends WalkXElement
 		final JDFNode jdfNode = getParentProduct(xjdf, jdf);
 		jdfNode.setAttributes(xjdf);
 		jdfNode.setVersion(xjdfToJDFImpl.getVersion());
-		jdfNode.setMaxVersion(xjdfToJDFImpl.getXJDFVersion());
+		jdfNode.setMaxVersion(xjdfToJDFImpl.getVersion());
 		jdfNode.setStatus(EnumNodeStatus.Part);
 		xjdfToJDFImpl.currentJDFNode = jdfNode;
 		updateJobID();

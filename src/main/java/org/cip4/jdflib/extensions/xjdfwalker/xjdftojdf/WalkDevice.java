@@ -68,7 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -79,12 +78,12 @@ import org.cip4.jdflib.extensions.XJDFConstants;
  * 
  * 
  */
-public class WalkInk extends WalkResource
+public class WalkDevice extends WalkResource
 {
 	/**
 	 * 
 	 */
-	public WalkInk()
+	public WalkDevice()
 	{
 		super();
 	}
@@ -95,7 +94,7 @@ public class WalkInk extends WalkResource
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString(ElementName.INK, null);
+		return VString.getVString(ElementName.DEVICE, null);
 	}
 
 	/**
@@ -104,18 +103,7 @@ public class WalkInk extends WalkResource
 	@Override
 	protected void updateAttributes(KElement elem)
 	{
-		VString inkType = VString.getVString(elem.getNonEmpty(XJDFConstants.InkType), null);
-		if (inkType != null)
-		{
-			if (inkType.size() == 1)
-			{
-				elem.renameAttribute(XJDFConstants.InkType, AttributeName.FAMILY);
-			}
-			else
-			{
-				elem.renameAttribute(XJDFConstants.InkType, AttributeName.SPECIALINK);
-			}
-		}
+		elem.removeAttribute(XJDFConstants.RestApiBaseURL);
 		super.updateAttributes(elem);
 	}
 

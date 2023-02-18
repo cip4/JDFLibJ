@@ -37,6 +37,10 @@
  */
 package org.cip4.jdflib;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.net.URL;
 
@@ -85,7 +89,6 @@ import org.cip4.jdflib.util.net.UrlCheck;
 import org.cip4.jdflib.util.thread.RegularJanitor;
 import org.cip4.jdflib.validate.JDFValidator;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Node;
@@ -111,7 +114,7 @@ public abstract class JDFTestCaseBase
 	protected boolean reparse(final KElement e, final int major, final int minor)
 	{
 		final String written = e.toXML();
-		Assertions.assertNotNull(written);
+		assertNotNull(written);
 		final JDFParser p = getSchemaParser(major, minor);
 		final JDFDoc xParsed = p.parseString(written);
 		return xParsed.isSchemaValid();
@@ -218,8 +221,8 @@ public abstract class JDFTestCaseBase
 		final JDFParser jdfParser = getSchemaParser();
 		final JDFDoc doc = jdfParser.parseString(string);
 		JDFParserFactory.getFactory().push(jdfParser);
-		Assertions.assertEquals(doc.getValidationResult().getRoot().getAttribute("ValidationResult"), VALID);
-		Assertions.assertTrue(((JDFElement) doc.getRoot()).isValid(level));
+		assertEquals(doc.getValidationResult().getRoot().getAttribute("ValidationResult"), VALID);
+		assertTrue(((JDFElement) doc.getRoot()).isValid(level));
 	}
 
 	/**
@@ -495,7 +498,7 @@ public abstract class JDFTestCaseBase
 				final XMLDoc dVal = xParsed.getValidationResult();
 				dVal.write2File(UrlUtil.newExtension(xjdfFile, "val.xml"), 2, false);
 			}
-			Assertions.assertTrue(xParsed.isSchemaValid(), VALID);
+			assertTrue(xParsed.isSchemaValid(), VALID);
 			return xParsed;
 
 		}
@@ -548,7 +551,7 @@ public abstract class JDFTestCaseBase
 		{
 			printValid(root.getOwnerDocument_JDFElement());
 		}
-		Assertions.assertTrue(valid, tmpJDF);
+		assertTrue(valid, tmpJDF);
 		final JDFParser jdfparser = getSchemaParser(version);
 		final JDFDoc docJDF = jdfparser.parseFile(tmpJDFPath);
 		final XMLDoc dVal0 = docJDF.getValidationResult();
@@ -557,7 +560,7 @@ public abstract class JDFTestCaseBase
 		{
 			dVal0.write2File(sm_dirTestDataTemp + fileBase + ".jdf.val.xml", 2, false);
 		}
-		Assertions.assertEquals(valResult0, VALID);
+		assertEquals(valResult0, VALID);
 
 		final XJDF20 xjdfConv = new XJDF20();
 		xjdfConv.setNewVersion(version);
@@ -574,7 +577,7 @@ public abstract class JDFTestCaseBase
 		{
 			dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.xml", 2, false);
 		}
-		Assertions.assertEquals(valResult, VALID);
+		assertEquals(valResult, VALID);
 		log.info("Successfully converted " + tmpXJDF);
 		final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		final JDFDoc converted = jdfConverter.convert(xjdfRoot);
@@ -588,7 +591,7 @@ public abstract class JDFTestCaseBase
 			printValid(converted);
 		}
 		JDFParserFactory.getFactory().push(p);
-		Assertions.assertTrue(valid, fileBase + ".xjdf.jdf");
+		assertTrue(valid, fileBase + ".xjdf.jdf");
 	}
 
 	static protected XMLDoc printValid(final JDFDoc converted)
@@ -631,7 +634,7 @@ public abstract class JDFTestCaseBase
 		{
 			dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.xml", 2, false);
 		}
-		Assertions.assertEquals(VALID, valResult);
+		assertEquals(VALID, valResult);
 		if (level != null)
 		{
 			final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
@@ -646,11 +649,11 @@ public abstract class JDFTestCaseBase
 			{
 				printValid(converted);
 			}
-			Assertions.assertTrue(valid, fileBase + ".xjdf.jdf");
-			final JDFDoc schemaParsed = getSchemaParser().parseFile(fileXJ);
+			assertTrue(valid, fileBase + ".xjdf.jdf");
+			final JDFDoc schemaParsed = getSchemaParser(EnumVersion.Version_1_8).parseFile(fileXJ);
 			dVal = schemaParsed.getValidationResult();
 			valResult = dVal.getRoot().getAttribute("ValidationResult");
-			Assertions.assertEquals(valResult, VALID);
+			assertEquals(valResult, VALID);
 
 			final XJDF20 xjdfConv = new XJDF20();
 			final KElement root = xjdfConv.convert(jxRoot);
@@ -664,7 +667,7 @@ public abstract class JDFTestCaseBase
 			{
 				dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.jdf.xml", 2, false);
 			}
-			Assertions.assertEquals(valResult, VALID);
+			assertEquals(valResult, VALID);
 		}
 		JDFParserFactory.getFactory().push(p);
 	}
@@ -764,7 +767,7 @@ public abstract class JDFTestCaseBase
 			minor = 8;
 		final JDFParser parser = JDFParserFactory.getFactory().get();
 		final File jdfxsd = new File(sm_dirTestSchemaBase + "1_" + minor + File.separator + "JDF.xsd");
-		Assertions.assertTrue(jdfxsd.canRead());
+		assertTrue(jdfxsd.canRead());
 		parser.setJDFSchemaLocation(jdfxsd);
 		return parser;
 	}

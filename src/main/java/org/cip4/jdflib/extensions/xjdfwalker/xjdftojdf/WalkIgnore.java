@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -74,6 +74,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
  * simply stop walking on these
+ * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
 public class WalkIgnore extends WalkXElement
@@ -105,10 +106,11 @@ public class WalkIgnore extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		boolean matches = super.matches(toCheck);
-		matches = matches || XJDFConstants.ChildProduct.equals(toCheck.getLocalName());
-		matches = matches || XJDFConstants.ProcessList.equals(toCheck.getLocalName());
-		matches = matches || XJDFConstants.Dependent.equals(toCheck.getLocalName());
-		matches = matches || XJDFConstants.PreflightItem.equals(toCheck.getLocalName());
+		String localName = toCheck.getLocalName();
+		matches = matches || XJDFConstants.ChildProduct.equals(localName);
+		matches = matches || XJDFConstants.ProcessList.equals(localName);
+		matches = matches || XJDFConstants.Dependent.equals(localName);
+		matches = matches || XJDFConstants.PreflightItem.equals(localName);
 		return matches;
 	}
 
