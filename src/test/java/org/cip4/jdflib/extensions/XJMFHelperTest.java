@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -37,6 +37,11 @@
 
 package org.cip4.jdflib.extensions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -44,7 +49,6 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.util.JDFDate;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -75,7 +79,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	public void testAddMessage()
 	{
 		final MessageHelper mh = theHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry);
-		Assertions.assertEquals("CommandSubmitQueueEntry", mh.getRoot().getLocalName());
+		assertEquals("CommandSubmitQueueEntry", mh.getRoot().getLocalName());
 	}
 
 	/**
@@ -85,7 +89,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	public void testGetMessageName()
 	{
 		final String s = theHelper.getMessageName(EnumFamily.Command, "SubmitQueueEntry");
-		Assertions.assertEquals("CommandSubmitQueueEntry", s);
+		assertEquals("CommandSubmitQueueEntry", s);
 	}
 
 	/**
@@ -95,9 +99,9 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	public void testGetMessageNameDeprecated()
 	{
 		final String s = theHelper.getMessageName(EnumFamily.Registration, "SubmitQueueEntry");
-		Assertions.assertNull(s);
+		assertNull(s);
 		final String s2 = theHelper.getMessageName(EnumFamily.Acknowledge, "SubmitQueueEntry");
-		Assertions.assertNull(s2);
+		assertNull(s2);
 	}
 
 	/**
@@ -107,7 +111,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	public void testAddMessageNull()
 	{
 		final MessageHelper mh = theHelper.appendMessage(EnumFamily.Command, "");
-		Assertions.assertNull(mh);
+		assertNull(mh);
 	}
 
 	/**
@@ -117,7 +121,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	public void testAddMessageDeprecated()
 	{
 		final MessageHelper mh = theHelper.appendMessage(EnumFamily.Registration, "Resource");
-		Assertions.assertNull(mh);
+		assertNull(mh);
 	}
 
 	/**
@@ -126,7 +130,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testHeaderID()
 	{
-		Assertions.assertNotNull(theHelper.getXPathValue("Header/@ID"));
+		assertNotNull(theHelper.getXPathValue("Header/@ID"));
 	}
 
 	/**
@@ -135,7 +139,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testHeaderID2()
 	{
-		Assertions.assertNull(theHelper.getXPathElement("Header/Header"));
+		assertNull(theHelper.getXPathElement("Header/Header"));
 	}
 
 	/**
@@ -144,7 +148,23 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testHeaderDate()
 	{
-		Assertions.assertNotNull(JDFDate.createDate(theHelper.getXPathValue("Header/@Time")));
+		assertNotNull(JDFDate.createDate(theHelper.getXPathValue("Header/@Time")));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testParseFile()
+	{
+		theHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry);
+		final File file = new File(sm_dirTestDataTemp + "xjmf.xjmf");
+		file.delete();
+		theHelper.writeToFile(sm_dirTestDataTemp + "xjmf.xjmf");
+		assertTrue(file.exists());
+		XJMFHelper h2 = XJMFHelper.parseFile(file.getAbsolutePath());
+		XJMFHelper h3 = XJMFHelper.parseFile(file);
+		assertTrue(h2.isEqual(h3));
 	}
 
 	/**
@@ -157,7 +177,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 		final File file = new File(sm_dirTestDataTemp + "xjmf.xjmf");
 		file.delete();
 		theHelper.writeToFile(sm_dirTestDataTemp + "xjmf.xjmf");
-		Assertions.assertTrue(file.exists());
+		assertTrue(file.exists());
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -37,6 +37,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -90,12 +91,19 @@ public class WalkModuleStatus extends WalkJDFSubElement
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final JDFModuleStatus ms = (JDFModuleStatus) jdf;
-		final EnumDeviceStatus ds = ms.getDeviceStatus();
-		final EnumDeviceStatus dsi = (xjdf instanceof JDFDeviceInfo) ? ((JDFDeviceInfo) xjdf).getDeviceStatus() : null;
+		String moduleStatus = ms.getNonEmpty(AttributeName.DEVICESTATUS);
+		EnumDeviceStatus eModuleStatus = EnumDeviceStatus.getEnum(moduleStatus);
+		String deviceStatus = (xjdf instanceof JDFDeviceInfo) ? xjdf.getAttribute(AttributeName.STATUS) : null;
+		if ("Production".equals(deviceStatus))
+			deviceStatus = "Running";
+		EnumDeviceStatus eDeviceInfoStatus = EnumDeviceStatus.getEnum(deviceStatus);
 		final EnumNodeStatus ns = (xjdf instanceof JDFJobPhase) ? ((JDFJobPhase) xjdf).getStatus() : null;
-		final boolean bModuleIdle = EnumDeviceStatus.Down.equals(ds) || EnumDeviceStatus.Idle.equals(ds) || EnumDeviceStatus.Stopped.equals(ds);
-		final boolean bPhaseeIdle = !EnumNodeStatus.InProgress.equals(ns);
-		final boolean needCopy = ds == null || (dsi != null ? dsi.equals(ds) : bModuleIdle == bPhaseeIdle);
+		final boolean bDeviceIdle = EnumDeviceStatus.Down.equals(eDeviceInfoStatus) || EnumDeviceStatus.Idle.equals(eDeviceInfoStatus)
+				|| EnumDeviceStatus.Stopped.equals(eDeviceInfoStatus);
+		final boolean bModuleIdle = EnumDeviceStatus.Down.equals(eModuleStatus) || EnumDeviceStatus.Idle.equals(eModuleStatus) || EnumDeviceStatus.Stopped.equals(eModuleStatus);
+		final boolean bPhaseeIdle = !EnumNodeStatus.InProgress.equals(ns) && !EnumNodeStatus.Setup.equals(ns) && !!EnumNodeStatus.Cleanup.equals(ns);
+
+		final boolean needCopy = moduleStatus == null || bModuleIdle == bPhaseeIdle || bDeviceIdle == bPhaseeIdle;
 		if (needCopy)
 		{
 			final String id = StringUtil.getNonEmpty(ms.getModuleID());

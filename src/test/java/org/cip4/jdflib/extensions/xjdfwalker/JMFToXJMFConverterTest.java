@@ -272,6 +272,19 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testComplexStatus()
+	{
+		final JDFJMF jmf = JDFJMF.parseFile(sm_dirTestData + "jmf/JMF1.jmf");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		xjmf.write2File(sm_dirTestDataTemp + "JMF1.xjmf");
+		assertEquals("0 1 2 3 4 5 6 7", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@ModuleIDs", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testJobPhaseWaste()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);

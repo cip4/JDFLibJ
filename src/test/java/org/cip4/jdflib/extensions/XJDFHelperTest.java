@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -37,20 +37,29 @@
 
 package org.cip4.jdflib.extensions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.*;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -69,7 +78,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testGetSet()
 	{
 		final KElement rlSet = theHelper.appendResourceSet(ElementName.RUNLIST, null).getSet();
-		Assertions.assertEquals(rlSet, theHelper.getSet(ElementName.RUNLIST, 0).getSet());
+		assertEquals(rlSet, theHelper.getSet(ElementName.RUNLIST, 0).getSet());
 	}
 
 	/**
@@ -80,7 +89,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testAppendSet()
 	{
 		final KElement rlSet = theHelper.appendSet(null, ElementName.RUNLIST, null).getSet();
-		Assertions.assertEquals(rlSet.getLocalName(), XJDFConstants.ResourceSet);
+		assertEquals(rlSet.getLocalName(), XJDFConstants.ResourceSet);
 	}
 
 	/**
@@ -92,15 +101,15 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	{
 		theHelper.setTypes("Folding");
 		theHelper.addType("Cutting", 0);
-		Assertions.assertEquals(theHelper.getTypes().get(1), "Folding");
-		Assertions.assertEquals(theHelper.getTypes().get(0), "Cutting");
+		assertEquals(theHelper.getTypes().get(1), "Folding");
+		assertEquals(theHelper.getTypes().get(0), "Cutting");
 		theHelper.addType("Stitching", -1);
-		Assertions.assertEquals(theHelper.getTypes().get(1), "Folding");
-		Assertions.assertEquals(theHelper.getTypes().get(0), "Cutting");
-		Assertions.assertEquals(theHelper.getTypes().get(2), "Stitching");
+		assertEquals(theHelper.getTypes().get(1), "Folding");
+		assertEquals(theHelper.getTypes().get(0), "Cutting");
+		assertEquals(theHelper.getTypes().get(2), "Stitching");
 		theHelper.addType("Imposition", 0);
-		Assertions.assertEquals(theHelper.getTypes().get(0), "Imposition");
-		Assertions.assertEquals(theHelper.getTypes().get(3), "Stitching");
+		assertEquals(theHelper.getTypes().get(0), "Imposition");
+		assertEquals(theHelper.getTypes().get(3), "Stitching");
 	}
 
 	/**
@@ -112,15 +121,15 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	{
 		theHelper.setTypes("Folding");
 		theHelper.addType("Cutting", 0);
-		Assertions.assertEquals(0, theHelper.indexOfType("Cutting", 0));
-		Assertions.assertEquals(-1, theHelper.indexOfType("Cutting", 1));
-		Assertions.assertEquals(-1, theHelper.indexOfType("Cutting", 42));
-		Assertions.assertEquals(1, theHelper.indexOfType("Folding", 0));
+		assertEquals(0, theHelper.indexOfType("Cutting", 0));
+		assertEquals(-1, theHelper.indexOfType("Cutting", 1));
+		assertEquals(-1, theHelper.indexOfType("Cutting", 42));
+		assertEquals(1, theHelper.indexOfType("Folding", 0));
 		theHelper.addType("Cutting", -1);
 		theHelper.addType("Cutting", -1);
-		Assertions.assertEquals(2, theHelper.indexOfType("Cutting", 1));
-		Assertions.assertEquals(3, theHelper.indexOfType("Cutting", 2));
-		Assertions.assertEquals(-1, theHelper.indexOfType("Cutting", 3));
+		assertEquals(2, theHelper.indexOfType("Cutting", 1));
+		assertEquals(3, theHelper.indexOfType("Cutting", 2));
+		assertEquals(-1, theHelper.indexOfType("Cutting", 3));
 	}
 
 	/**
@@ -131,8 +140,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testAddTypeChain()
 	{
 		theHelper.addType("Cutting").addType("Folding");
-		Assertions.assertEquals(theHelper.getTypes().get(1), "Folding");
-		Assertions.assertEquals(theHelper.getTypes().get(0), "Cutting");
+		assertEquals(theHelper.getTypes().get(1), "Folding");
+		assertEquals(theHelper.getTypes().get(0), "Cutting");
 	}
 
 	/**
@@ -145,10 +154,10 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		theHelper.setTypes("Folding");
 		theHelper.addType("Cutting", 0);
 		theHelper.removeType("Foo", 0);
-		Assertions.assertEquals(theHelper.getTypes().get(1), "Folding");
-		Assertions.assertEquals(theHelper.getTypes().get(0), "Cutting");
+		assertEquals(theHelper.getTypes().get(1), "Folding");
+		assertEquals(theHelper.getTypes().get(0), "Cutting");
 		theHelper.removeType("Cutting", 0);
-		Assertions.assertEquals(theHelper.getTypes().get(0), "Folding");
+		assertEquals(theHelper.getTypes().get(0), "Folding");
 	}
 
 	/**
@@ -162,7 +171,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		final SetHelper rlSet = theHelper.appendSet(null, ElementName.FOLDINGPARAMS, null);
 		rlSet.setCombinedProcessIndex(JDFIntegerList.createIntegerList("0"));
 		theHelper.addType("Cutting", 0);
-		Assertions.assertEquals(1, rlSet.getCombinedProcessIndex().getInt(0));
+		assertEquals(1, rlSet.getCombinedProcessIndex().getInt(0));
 	}
 
 	/**
@@ -176,9 +185,9 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		final SetHelper rlSet = theHelper.appendSet(null, ElementName.FOLDINGPARAMS, null);
 		rlSet.setCombinedProcessIndex(JDFIntegerList.createIntegerList("0"));
 		theHelper.addType("Cutting", 0);
-		Assertions.assertEquals(1, rlSet.getCombinedProcessIndex().getInt(0));
+		assertEquals(1, rlSet.getCombinedProcessIndex().getInt(0));
 		theHelper.removeType("Cutting", 0);
-		Assertions.assertEquals(0, rlSet.getCombinedProcessIndex().getInt(0));
+		assertEquals(0, rlSet.getCombinedProcessIndex().getInt(0));
 	}
 
 	/**
@@ -188,12 +197,12 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetCreateResourceSet()
 	{
-		Assertions.assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input, null));
+		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input, null));
 		final SetHelper sh1 = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Input);
-		Assertions.assertNotNull(sh1);
+		assertNotNull(sh1);
 		final SetHelper sh2 = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
-		Assertions.assertNotNull(sh2);
-		Assertions.assertNotSame(sh1, sh2);
+		assertNotNull(sh2);
+		assertNotSame(sh1, sh2);
 
 	}
 
@@ -204,12 +213,12 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetCreateResource()
 	{
-		Assertions.assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input, null));
+		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input, null));
 		final JDFRunList rl = (JDFRunList) theHelper.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, null);
-		Assertions.assertNotNull(rl);
+		assertNotNull(rl);
 		final SetHelper sh = theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input, null);
-		Assertions.assertNotNull(sh);
-		Assertions.assertEquals(1, sh.getPartitions().size());
+		assertNotNull(sh);
+		assertEquals(1, sh.getPartitions().size());
 	}
 
 	/**
@@ -219,12 +228,12 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetCreateResourceSet2()
 	{
-		Assertions.assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input));
+		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input));
 		final SetHelper sh1 = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Input);
-		Assertions.assertNotNull(sh1);
+		assertNotNull(sh1);
 		final SetHelper sh2 = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
-		Assertions.assertNotNull(sh2);
-		Assertions.assertNotSame(sh1, sh2);
+		assertNotNull(sh2);
+		assertNotSame(sh1, sh2);
 
 	}
 
@@ -235,12 +244,12 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetCreateSet4()
 	{
-		Assertions.assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input));
+		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input));
 		final SetHelper sh1 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", new JDFIntegerList(1));
-		Assertions.assertNotNull(sh1);
+		assertNotNull(sh1);
 		final SetHelper sh2 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", new JDFIntegerList(2));
-		Assertions.assertNotNull(sh2);
-		Assertions.assertNotSame(sh1, sh2);
+		assertNotNull(sh2);
+		assertNotSame(sh1, sh2);
 
 	}
 
@@ -252,20 +261,20 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testNumProduct()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);
-		Assertions.assertEquals(h.numProductHelpers(true), 0);
-		Assertions.assertEquals(h.numProductHelpers(false), 0);
+		assertEquals(h.numProductHelpers(true), 0);
+		assertEquals(h.numProductHelpers(false), 0);
 		final ProductHelper cover = h.appendProduct();
-		Assertions.assertEquals(h.numProductHelpers(true), 1);
-		Assertions.assertEquals(h.numProductHelpers(false), 1);
+		assertEquals(h.numProductHelpers(true), 1);
+		assertEquals(h.numProductHelpers(false), 1);
 		final ProductHelper body = h.appendProduct();
-		Assertions.assertEquals(h.numProductHelpers(true), 1);
-		Assertions.assertEquals(h.numProductHelpers(false), 2);
+		assertEquals(h.numProductHelpers(true), 1);
+		assertEquals(h.numProductHelpers(false), 2);
 		final ProductHelper book = h.appendProduct();
 		book.setRoot();
 		book.setChild(cover);
 		book.setChild(body);
-		Assertions.assertEquals(h.numProductHelpers(true), 1);
-		Assertions.assertEquals(h.numProductHelpers(false), 3);
+		assertEquals(h.numProductHelpers(true), 1);
+		assertEquals(h.numProductHelpers(false), 3);
 	}
 
 	/**
@@ -279,7 +288,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		final ProductHelper ph = h.getCreateRootProduct(0);
 		ph.setAmount(10);
 		ph.setID("iii");
-		Assertions.assertEquals(ph, h.getProduct("iii"));
+		assertEquals(ph, h.getProduct("iii"));
 	}
 
 	/**
@@ -293,7 +302,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		final ProductHelper ph = h.getCreateRootProduct(0);
 		ph.setAmount(10);
 		ph.setExternalID("xid");
-		Assertions.assertEquals(ph, h.getProductByExternalID("xid"));
+		assertEquals(ph, h.getProductByExternalID("xid"));
 	}
 
 	/**
@@ -306,13 +315,13 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		final SetHelper rlSet = theHelper.appendResourceSet("RunList", EnumUsage.Input);
 		final SetHelper rlSet2 = theHelper.appendResourceSet("Media", EnumUsage.Output);
 
-		Assertions.assertEquals(rlSet, theHelper.getSets(ElementName.RUNLIST, null).get(0));
-		Assertions.assertEquals(rlSet2, theHelper.getSets(ElementName.MEDIA, null).get(0));
-		Assertions.assertEquals(rlSet2, theHelper.getSets(ElementName.MEDIA, EnumUsage.Output).get(0));
-		Assertions.assertEquals(rlSet, theHelper.getSets(ElementName.RUNLIST, EnumUsage.Input).get(0));
-		Assertions.assertEquals(rlSet, theHelper.getSets(null, EnumUsage.Input).get(0));
-		Assertions.assertEquals(1, theHelper.getSets(null, EnumUsage.Input).size());
-		Assertions.assertEquals(rlSet2, theHelper.getSets(null, EnumUsage.Output).get(0));
+		assertEquals(rlSet, theHelper.getSets(ElementName.RUNLIST, null).get(0));
+		assertEquals(rlSet2, theHelper.getSets(ElementName.MEDIA, null).get(0));
+		assertEquals(rlSet2, theHelper.getSets(ElementName.MEDIA, EnumUsage.Output).get(0));
+		assertEquals(rlSet, theHelper.getSets(ElementName.RUNLIST, EnumUsage.Input).get(0));
+		assertEquals(rlSet, theHelper.getSets(null, EnumUsage.Input).get(0));
+		assertEquals(1, theHelper.getSets(null, EnumUsage.Input).size());
+		assertEquals(rlSet2, theHelper.getSets(null, EnumUsage.Output).get(0));
 	}
 
 	/**
@@ -323,9 +332,9 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testGetTyp()
 	{
 		theHelper.setTypes("ConventionalPrinting");
-		Assertions.assertEquals(theHelper.getType(), EnumType.ConventionalPrinting);
+		assertEquals(theHelper.getType(), EnumType.ConventionalPrinting);
 		theHelper.setTypes("PreviewGeneration ConventionalPrinting");
-		Assertions.assertEquals(theHelper.getType(), EnumType.ProcessGroup);
+		assertEquals(theHelper.getType(), EnumType.ProcessGroup);
 	}
 
 	/**
@@ -336,11 +345,11 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testGetSetUsage()
 	{
 		final SetHelper seta = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
-		Assertions.assertNull(theHelper.getSet(ElementName.NODEINFO, EnumUsage.Output));
+		assertNull(theHelper.getSet(ElementName.NODEINFO, EnumUsage.Output));
 		final SetHelper setb = theHelper.appendResourceSet(ElementName.NODEINFO, EnumUsage.Output);
-		Assertions.assertEquals(theHelper.getSet(ElementName.NODEINFO, EnumUsage.Input), seta);
-		Assertions.assertEquals(theHelper.getSet(ElementName.NODEINFO, EnumUsage.Output), setb);
-		Assertions.assertEquals(theHelper.getSet(ElementName.NODEINFO, null), seta);
+		assertEquals(theHelper.getSet(ElementName.NODEINFO, EnumUsage.Input), seta);
+		assertEquals(theHelper.getSet(ElementName.NODEINFO, EnumUsage.Output), setb);
+		assertEquals(theHelper.getSet(ElementName.NODEINFO, null), seta);
 	}
 
 	/**
@@ -359,7 +368,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		v.add(map2);
 		sh.getCreatePartition(map2, true);
 		final VJDFAttributeMap vp = theHelper.getPartMapVector();
-		Assertions.assertEquals(vp, v);
+		assertEquals(vp, v);
 	}
 
 	/**
@@ -370,18 +379,18 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testGetDependentPartIDKeys()
 	{
 		final SetHelper sh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
-		Assertions.assertNull(theHelper.getDependentJobParts(null));
-		Assertions.assertNull(theHelper.getDependentJobParts(EnumUsage.Output));
+		assertNull(theHelper.getDependentJobParts(null));
+		assertNull(theHelper.getDependentJobParts(EnumUsage.Output));
 		sh.setXPathValue("Dependent[1]/@JobPartID", "p1");
-		Assertions.assertEquals(theHelper.getDependentJobParts(EnumUsage.Input).get(0), "p1");
-		Assertions.assertEquals(theHelper.getDependentJobParts(null).get(0), "p1");
-		Assertions.assertNull(theHelper.getDependentJobParts(EnumUsage.Output));
+		assertEquals(theHelper.getDependentJobParts(EnumUsage.Input).get(0), "p1");
+		assertEquals(theHelper.getDependentJobParts(null).get(0), "p1");
+		assertNull(theHelper.getDependentJobParts(EnumUsage.Output));
 		sh.setXPathValue("Dependent[3]/@JobPartID", "p2");
-		Assertions.assertEquals(theHelper.getDependentJobParts(EnumUsage.Input).get(1), "p2");
+		assertEquals(theHelper.getDependentJobParts(EnumUsage.Input).get(1), "p2");
 		final SetHelper sh2 = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Output);
-		Assertions.assertNull(theHelper.getDependentJobParts(EnumUsage.Output));
+		assertNull(theHelper.getDependentJobParts(EnumUsage.Output));
 		sh2.setXPathValue("Dependent[1]/@JobPartID", "o1");
-		Assertions.assertEquals(theHelper.getDependentJobParts(EnumUsage.Output).get(0), "o1");
+		assertEquals(theHelper.getDependentJobParts(EnumUsage.Output).get(0), "o1");
 	}
 
 	/**
@@ -394,7 +403,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		final SetHelper rlSet = theHelper.appendResourceSet("RunList", null);
 		theHelper.cleanUp();
 		rlSet.setID("id");
-		Assertions.assertEquals(rlSet, theHelper.getSet(rlSet.getID()));
+		assertEquals(rlSet, theHelper.getSet(rlSet.getID()));
 	}
 
 	/**
@@ -408,7 +417,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 
 		final KElement set = root.getCreateXPathElement("ResourceSet");
 		set.getCreateXPathElement("Resource/Part");
-		Assertions.assertEquals(XJDFHelper.getHelper(set), new XJDFHelper(root));
+		assertEquals(XJDFHelper.getHelper(set), new XJDFHelper(root));
 	}
 
 	/**
@@ -418,9 +427,9 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testJobPartID()
 	{
 		theHelper = new XJDFHelper("j", "p", null);
-		Assertions.assertEquals("p", theHelper.getJobPartID());
+		assertEquals("p", theHelper.getJobPartID());
 		theHelper.setJobPartID("p2");
-		Assertions.assertEquals("p2", theHelper.getJobPartID());
+		assertEquals("p2", theHelper.getJobPartID());
 	}
 
 	/**
@@ -430,9 +439,9 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testJobID()
 	{
 		theHelper = new XJDFHelper("j", "p", null);
-		Assertions.assertEquals("j", theHelper.getJobID());
+		assertEquals("j", theHelper.getJobID());
 		theHelper.setJobID("j2");
-		Assertions.assertEquals("j2", theHelper.getJobID());
+		assertEquals("j2", theHelper.getJobID());
 	}
 
 	/**
@@ -443,10 +452,10 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testGetPartition()
 	{
 		final KElement rlSet = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", null).getCreatePartition(0, true).getResource();
-		Assertions.assertEquals(rlSet, theHelper.getResource("RunList", 0, 0));
-		Assertions.assertNull(theHelper.getResource("RunList", 0, 1));
-		Assertions.assertNull(theHelper.getResource("RunList", 1, 1));
-		Assertions.assertNull(theHelper.getResource("RunList", 1, 0));
+		assertEquals(rlSet, theHelper.getResource("RunList", 0, 0));
+		assertNull(theHelper.getResource("RunList", 0, 1));
+		assertNull(theHelper.getResource("RunList", 1, 1));
+		assertNull(theHelper.getResource("RunList", 1, 0));
 	}
 
 	/**
@@ -457,10 +466,10 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testGetPartitionByID()
 	{
 		final ResourceHelper rlSet = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", null).getCreatePartition(0, true);
-		Assertions.assertEquals(rlSet, theHelper.getPartition("RunList", 0, 0));
+		assertEquals(rlSet, theHelper.getPartition("RunList", 0, 0));
 		theHelper.cleanUp();
 		rlSet.setID("id");
-		Assertions.assertEquals(theHelper.getPartition(rlSet.getID()), rlSet);
+		assertEquals(theHelper.getPartition(rlSet.getID()), rlSet);
 	}
 
 	/**
@@ -472,8 +481,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		final KElement root = theHelper.getRoot();
-		Assertions.assertNotNull(theHelper.getSet("NodeInfo", 0));
-		Assertions.assertNotNull(root);
+		assertNotNull(theHelper.getSet("NodeInfo", 0));
+		assertNotNull(root);
 	}
 
 	/**
@@ -485,7 +494,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	{
 		theHelper = new XJDFHelper(EnumVersion.Version_2_1, "j1");
 		final KElement root = theHelper.getRoot();
-		Assertions.assertEquals(JDFElement.getSchemaURL(2, 1), root.getNamespaceURI());
+		assertEquals(JDFElement.getSchemaURL(2, 1), root.getNamespaceURI());
 	}
 
 	/**
@@ -497,8 +506,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	{
 		final XJDFHelper clone = theHelper.clone();
 		theHelper.appendResourceSet(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
-		Assertions.assertNotNull(theHelper.getSet(ElementName.DIGITALPRINTINGPARAMS, 0));
-		Assertions.assertNull(clone.getSet(ElementName.DIGITALPRINTINGPARAMS, 0));
+		assertNotNull(theHelper.getSet(ElementName.DIGITALPRINTINGPARAMS, 0));
+		assertNull(clone.getSet(ElementName.DIGITALPRINTINGPARAMS, 0));
 	}
 
 	/**
@@ -509,9 +518,9 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testFactory()
 	{
 		XMLDoc d = new XMLDoc(XJDFConstants.XJDF, null);
-		Assertions.assertNotNull(XJDFHelper.getHelper(d));
+		assertNotNull(XJDFHelper.getHelper(d));
 		d = new XMLDoc("abc", null);
-		Assertions.assertNull(XJDFHelper.getHelper(d));
+		assertNull(XJDFHelper.getHelper(d));
 	}
 
 	/**
@@ -522,9 +531,9 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testFactoryElem()
 	{
 		XMLDoc d = new XMLDoc(XJDFConstants.XJDF, null);
-		Assertions.assertNotNull(XJDFHelper.getHelper(d.getRoot()));
+		assertNotNull(XJDFHelper.getHelper(d.getRoot()));
 		d = new XMLDoc("abc", null);
-		Assertions.assertNull(XJDFHelper.getHelper(d.getRoot()));
+		assertNull(XJDFHelper.getHelper(d.getRoot()));
 	}
 
 	/**
@@ -536,10 +545,10 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		final KElement root = theHelper.getRoot();
-		Assertions.assertNull(theHelper.getRootProductHelpers());
+		assertNull(theHelper.getRootProductHelpers());
 		root.setXPathAttribute("ProductList/Product/@ID", "idproduct");
 		root.setXPathAttribute("ProductList/@RootProducts", "idproduct");
-		Assertions.assertNotNull(theHelper.getRootProductHelpers().get(0));
+		assertNotNull(theHelper.getRootProductHelpers().get(0));
 	}
 
 	@Test
@@ -550,8 +559,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		theHelper.appendProduct().setRoot();
 		theHelper.cleanUp();
 		final KElement ap = theHelper.getRoot().getElement(ElementName.AUDITPOOL);
-		Assertions.assertEquals(theHelper.getRoot().getFirstChildElement(), ap);
-		Assertions.assertEquals(theHelper.getRootProduct(0).getRoot().getParentNode_KElement().getPreviousSiblingElement(), ap);
+		assertEquals(theHelper.getRoot().getFirstChildElement(), ap);
+		assertEquals(theHelper.getRootProduct(0).getRoot().getParentNode_KElement().getPreviousSiblingElement(), ap);
 	}
 
 	/**
@@ -577,9 +586,9 @@ public class XJDFHelperTest extends JDFTestCaseBase
 
 		theHelper.cleanUp();
 		final Vector<ProductHelper> vp = theHelper.getProductHelpers();
-		Assertions.assertEquals(0, vp.indexOf(ph));
-		Assertions.assertTrue(vp.indexOf(ph2) < vp.indexOf(ph22));
-		Assertions.assertTrue(vp.indexOf(ph2) < vp.indexOf(ph21));
+		assertEquals(0, vp.indexOf(ph));
+		assertTrue(vp.indexOf(ph2) < vp.indexOf(ph22));
+		assertTrue(vp.indexOf(ph2) < vp.indexOf(ph21));
 	}
 
 	/**
@@ -592,12 +601,12 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		final KElement root = theHelper.getRoot();
 		root.setXPathAttribute("ProductList/Product/@ID", "idproduct");
-		Assertions.assertNotNull(theHelper.getRootProduct(0));
+		assertNotNull(theHelper.getRootProduct(0));
 		root.setXPathAttribute("ProductList/@RootProducts", "idproduct");
-		Assertions.assertNotNull(theHelper.getRootProduct(0));
-		Assertions.assertNotNull(theHelper.getRootProduct(-1));
-		Assertions.assertNull(theHelper.getRootProduct(1));
-		Assertions.assertNull(theHelper.getRootProduct(-2));
+		assertNotNull(theHelper.getRootProduct(0));
+		assertNotNull(theHelper.getRootProduct(-1));
+		assertNull(theHelper.getRootProduct(1));
+		assertNull(theHelper.getRootProduct(-2));
 	}
 
 	/**
@@ -611,8 +620,26 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		final String foo = sm_dirTestDataTemp + "foo";
 		FileUtil.deleteAll(new File(foo));
 		theHelper.writeToDir(foo);
-		final XMLDoc parsed = XMLDoc.parseFile(foo + "/jID.jpID.xjdf");
-		Assertions.assertNotNull(parsed);
+		String fileName = foo + "/jID.jpID.xjdf";
+		final XMLDoc parsed = XMLDoc.parseFile(fileName);
+		assertNotNull(parsed);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testParseFile()
+	{
+		theHelper = new XJDFHelper("jID", "jpID", null);
+		final String foo = sm_dirTestDataTemp + "foo";
+		FileUtil.deleteAll(new File(foo));
+		theHelper.writeToDir(foo);
+		String fileName = foo + "/jID.jpID.xjdf";
+		final XJDFHelper parsed = XJDFHelper.parseFile(fileName);
+		final XJDFHelper parsedf = XJDFHelper.parseFile(new File(fileName));
+		assertTrue(parsed.isEqual(parsedf));
 	}
 
 	/**
@@ -623,14 +650,14 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testGetCreateRootProduct()
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
-		Assertions.assertNotNull(theHelper.getCreateRootProduct(0));
-		Assertions.assertNotNull(theHelper.getRootProduct(0));
-		Assertions.assertNotNull(theHelper.getRootProduct(-1));
-		Assertions.assertNull(theHelper.getRootProduct(1));
-		Assertions.assertNull(theHelper.getRootProduct(-2));
+		assertNotNull(theHelper.getCreateRootProduct(0));
+		assertNotNull(theHelper.getRootProduct(0));
+		assertNotNull(theHelper.getRootProduct(-1));
+		assertNull(theHelper.getRootProduct(1));
+		assertNull(theHelper.getRootProduct(-2));
 		final ProductHelper createRootProduct = theHelper.getCreateRootProduct(1);
-		Assertions.assertNotNull(createRootProduct);
-		Assertions.assertNotSame(createRootProduct, theHelper.getCreateRootProduct(0));
+		assertNotNull(createRootProduct);
+		assertNotSame(createRootProduct, theHelper.getCreateRootProduct(0));
 
 	}
 

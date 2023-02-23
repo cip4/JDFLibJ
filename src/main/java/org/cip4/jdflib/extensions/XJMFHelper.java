@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -212,6 +213,26 @@ public class XJMFHelper extends MessagePoolHelper
 		if (!root.getLocalName().equals(XJDFConstants.XJMF))
 			root = root.getDeepParent(XJDFConstants.XJMF, 0);
 		return (root != null) ? new XJMFHelper(root) : null;
+	}
+
+	/**
+	 *
+	 * @param fileName
+	 * @return
+	 */
+	public static XJMFHelper parseFile(final String fileName)
+	{
+		return getHelper(JDFDoc.parseFile(fileName));
+	}
+
+	/**
+	 *
+	 * @param fileName
+	 * @return
+	 */
+	public static XJMFHelper parseFile(final File file)
+	{
+		return getHelper(JDFDoc.parseFile(file));
 	}
 
 	/**
