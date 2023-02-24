@@ -37,6 +37,7 @@
 package org.cip4.jdflib.util.thread;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -116,6 +117,21 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	{
 		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi0", 3);
 		assertEquals(3, q.getMaxParallel());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	synchronized public void testString()
+	{
+		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi42", 3);
+		assertNotNull(q.toString());
+		for (int i = 0; i < 10; i++)
+			q.queue(new WaitRunner(i, i));
+		String shortString = q.shortString();
+		assertNotNull(shortString);
 	}
 
 	/**

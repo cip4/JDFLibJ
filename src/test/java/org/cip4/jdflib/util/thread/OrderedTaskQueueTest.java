@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,9 +36,13 @@
  */
 package org.cip4.jdflib.util.thread;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -121,7 +125,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 			if (q.getCurrentRunning() > 2)
 				ThreadUtil.sleep(3);
 		}
-		Assertions.assertEquals(q.getCurrentRunning(), 2);
+		assertEquals(q.getCurrentRunning(), 2);
 		ThreadUtil.sleep(33);
 		q.interruptCurrent(0);
 		ThreadUtil.sleep(33);
@@ -131,8 +135,8 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 			if (q.getCurrentRunning() > 0 || q.size() > 0)
 				ThreadUtil.sleep(3);
 		}
-		Assertions.assertEquals(0, q.getCurrentRunning());
-		Assertions.assertEquals(0, q.size());
+		assertEquals(0, q.getCurrentRunning());
+		assertEquals(0, q.size());
 	}
 
 	/**
@@ -143,17 +147,17 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	synchronized public void test3Entry()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test");
-		Assertions.assertEquals(q.getAvQueue(), 0);
-		Assertions.assertTrue(q.queue(new WaitRunner(1, 2)));
-		Assertions.assertTrue(q.queue(new WaitRunner(2, 2)));
-		Assertions.assertTrue(q.queue(new WaitRunner(3, 2)));
+		assertEquals(q.getAvQueue(), 0);
+		assertTrue(q.queue(new WaitRunner(1, 2)));
+		assertTrue(q.queue(new WaitRunner(2, 2)));
+		assertTrue(q.queue(new WaitRunner(3, 2)));
 		while (q.getAvRun() == 0)
 			ThreadUtil.sleep(5);
-		Assertions.assertTrue(q.queue(new WaitRunner(4, 2)));
+		assertTrue(q.queue(new WaitRunner(4, 2)));
 		while (q.getAvRun() == 0)
 			ThreadUtil.sleep(5);
-		Assertions.assertTrue(q.getAvRun() > 0);
-		Assertions.assertTrue(q.getAvQueue() > 0);
+		assertTrue(q.getAvRun() > 0);
+		assertTrue(q.getAvQueue() > 0);
 
 	}
 
@@ -165,7 +169,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	synchronized public void testStop()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("tesffft2");
-		Assertions.assertTrue(q.queue(new WaitRunner(1)));
+		assertTrue(q.queue(new WaitRunner(1)));
 		q.shutDown();
 		for (int i = 0; i < 100; i++)
 		{
@@ -174,7 +178,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 			else
 				ThreadUtil.sleep(2);
 		}
-		Assertions.assertFalse(q.queue(new WaitRunner(2)));
+		assertFalse(q.queue(new WaitRunner(2)));
 	}
 
 	/**
@@ -185,9 +189,9 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	synchronized public void testIsLive()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("live");
-		Assertions.assertTrue(q.isLive());
-		Assertions.assertTrue(q.queue(new WaitRunner(1)));
-		Assertions.assertTrue(q.isLive());
+		assertTrue(q.isLive());
+		assertTrue(q.queue(new WaitRunner(1)));
+		assertTrue(q.isLive());
 		q.shutDown();
 	}
 
@@ -199,20 +203,20 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	synchronized public void testInterruptCurrent()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test3r33");
-		Assertions.assertTrue(q.queue(new WaitRunner(1, 10000)));
-		Assertions.assertTrue(q.queue(new WaitRunner(2, 10000)));
+		assertTrue(q.queue(new WaitRunner(1, 10000)));
+		assertTrue(q.queue(new WaitRunner(2, 10000)));
 		ThreadUtil.sleep(420);
 		log.info(q);
-		Assertions.assertFalse(q.interruptCurrent(2000));
+		assertFalse(q.interruptCurrent(2000));
 		log.info(q);
 		ThreadUtil.sleep(200);
-		Assertions.assertTrue(q.interruptCurrent(1));
+		assertTrue(q.interruptCurrent(1));
 		ThreadUtil.sleep(100);
 		log.info(q);
-		Assertions.assertTrue(q.interruptCurrent(1));
+		assertTrue(q.interruptCurrent(1));
 		ThreadUtil.sleep(100);
 		log.info(q);
-		Assertions.assertTrue(q.interruptCurrent(1));
+		assertTrue(q.interruptCurrent(1));
 	}
 
 	/**
@@ -223,7 +227,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	synchronized public void testStopOne()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("teffst4");
-		Assertions.assertTrue(q.queue(new WaitRunner(1)));
+		assertTrue(q.queue(new WaitRunner(1)));
 		OrderedTaskQueue.shutDown("teffst4");
 		for (int i = 0; i < 100; i++)
 		{
@@ -232,7 +236,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 			else
 				ThreadUtil.sleep(12);
 		}
-		Assertions.assertFalse(q.queue(new WaitRunner(2)));
+		assertFalse(q.queue(new WaitRunner(2)));
 	}
 
 	/**
@@ -243,7 +247,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	synchronized public void testStopAll()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test554445");
-		Assertions.assertTrue(q.queue(new WaitRunner(1, 200)));
+		assertTrue(q.queue(new WaitRunner(1, 200)));
 		OrderedTaskQueue.shutDownAll();
 		for (int i = 0; i < 1000; i++)
 		{
@@ -252,7 +256,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 			else
 				ThreadUtil.sleep(12);
 		}
-		Assertions.assertFalse(q.queue(new WaitRunner(2, 200)));
+		assertFalse(q.queue(new WaitRunner(2, 200)));
 	}
 
 	/**
@@ -263,8 +267,23 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	synchronized public void testQueue()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test42");
-		Assertions.assertTrue(q.queue(new WaitRunner(1, 200)));
-		Assertions.assertEquals(0, q.idle.get());
+		assertTrue(q.queue(new WaitRunner(1, 200)));
+		assertEquals(0, q.idle.get());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	synchronized public void testString()
+	{
+		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test42");
+		assertNotNull(q.toString());
+		for (int i = 0; i < 100; i++)
+			q.queue(new WaitRunner(i, i));
+		String shortString = q.shortString();
+		assertNotNull(shortString);
 	}
 
 	@Override

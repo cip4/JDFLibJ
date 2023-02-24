@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,8 +38,13 @@
  */
 package org.cip4.jdflib.util.hotfolder;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class HotFolderRunnerTest extends JDFTestCaseBase
@@ -49,21 +54,34 @@ public class HotFolderRunnerTest extends JDFTestCaseBase
 	public void testTostring()
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
-		Assertions.assertNotNull(r.toString());
+		assertNotNull(r.toString());
+	}
+
+	@Test
+	public void testRunFile()
+	{
+		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
+		r.setMaxConcurrent(1);
+		HotFolder hf = new HotFolder(new File(sm_dirTestDataTemp + "dummy"), null, null);
+		for (int i = 0; i < 10; i++)
+			r.runFile(hf.new HotFileRunner(new File("nix")));
+		r.setMaxConcurrent(3);
+		for (int i = 0; i < 10; i++)
+			r.runFile(hf.new HotFileRunner(new File("nix")));
 	}
 
 	@Test
 	public void testGet()
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
-		Assertions.assertEquals(r, HotFolderRunner.getTherunner());
+		assertEquals(r, HotFolderRunner.getTherunner());
 	}
 
 	@Test
 	public void testGetCreate()
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
-		Assertions.assertEquals(r, HotFolderRunner.getCreateTherunner());
+		assertEquals(r, HotFolderRunner.getCreateTherunner());
 	}
 
 	@Test
@@ -71,7 +89,7 @@ public class HotFolderRunnerTest extends JDFTestCaseBase
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
 		r.setMaxConcurrent(-1);
-		Assertions.assertTrue(r.getMaxConcurrent() > 0);
+		assertTrue(r.getMaxConcurrent() > 0);
 	}
 
 	@Test
@@ -79,7 +97,7 @@ public class HotFolderRunnerTest extends JDFTestCaseBase
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
 		r.setMaxConcurrent(42);
-		Assertions.assertEquals(13, r.getMaxConcurrent());
+		assertEquals(13, r.getMaxConcurrent());
 	}
 
 }

@@ -425,7 +425,7 @@ public class HotFolder
 			if (fileJ != null)
 			{
 				hfRunning.remove(fileJ);
-				log.info("completed running " + this);
+				log.info("completed running " + shortString());
 			}
 		}
 
@@ -436,6 +436,14 @@ public class HotFolder
 		public String toString()
 		{
 			return "HotFileRunner [fileJ=" + fileJ + "]";
+		}
+
+		/**
+		 * @see java.lang.Object#toString()
+		 */
+		public String shortString()
+		{
+			return dir.getName() + "/" + fileJ.getName();
 		}
 	}
 

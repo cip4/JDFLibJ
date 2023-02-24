@@ -239,11 +239,14 @@ class HotFolderRunner extends Thread
 		else
 		{
 			final MultiTaskQueue taskQueue = MultiTaskQueue.getCreateQueue(getName(), getMaxConcurrent());
-			if (ran % 10 == 0 && taskQueue.size() > 2 * getMaxConcurrent())
+			if (taskQueue.size() > (2 * getMaxConcurrent()))
 			{
-				log.warn("Queueing into full hf queue; size=" + taskQueue.size());
+				log.warn("queueing into full " + runner.shortString() + "-->" + taskQueue.shortString());
 			}
-			log.info("queueing " + runner);
+			else
+			{
+				log.info("queueing " + runner.shortString() + "-->" + taskQueue.shortString());
+			}
 			return taskQueue.queue(runner);
 		}
 		return true;
