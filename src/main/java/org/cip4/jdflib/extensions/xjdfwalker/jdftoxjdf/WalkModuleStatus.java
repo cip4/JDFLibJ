@@ -101,7 +101,7 @@ public class WalkModuleStatus extends WalkJDFSubElement
 		final boolean bDeviceIdle = EnumDeviceStatus.Down.equals(eDeviceInfoStatus) || EnumDeviceStatus.Idle.equals(eDeviceInfoStatus)
 				|| EnumDeviceStatus.Stopped.equals(eDeviceInfoStatus);
 		final boolean bModuleIdle = EnumDeviceStatus.Down.equals(eModuleStatus) || EnumDeviceStatus.Idle.equals(eModuleStatus) || EnumDeviceStatus.Stopped.equals(eModuleStatus);
-		final boolean bPhaseeIdle = !EnumNodeStatus.InProgress.equals(ns) && !EnumNodeStatus.Setup.equals(ns) && !!EnumNodeStatus.Cleanup.equals(ns);
+		final boolean bPhaseeIdle = !EnumNodeStatus.InProgress.equals(ns) && !EnumNodeStatus.Setup.equals(ns) && !EnumNodeStatus.Cleanup.equals(ns);
 
 		final boolean needCopy = moduleStatus == null || bModuleIdle == bPhaseeIdle || bDeviceIdle == bPhaseeIdle;
 		if (needCopy)
