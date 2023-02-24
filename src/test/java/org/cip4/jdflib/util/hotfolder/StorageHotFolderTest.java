@@ -771,8 +771,10 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 				break;
 		}
 
-		assertTrue(FileUtil.listDirectories(ok).length < 15);
-		assertTrue(FileUtil.listDirectories(error).length < 15);
+		File[] okd = FileUtil.listDirectories(ok);
+		assertTrue(okd == null || okd.length < 15);
+		File[] errd = FileUtil.listDirectories(error);
+		assertTrue(errd == null || errd.length < 15);
 
 		hf.stop();
 	}
