@@ -193,7 +193,20 @@ public class StringUtil
 			"Base eight is just like base ten really - if you're missing two fingers", "Biology is the only science in which multiplication means the same thing as division.",
 			"My dog's not eating, he no longer barks; He hit the propeller and turned into sparks",
 			"One leg is missing; the other is gone; The third leg is scattered all over the lawn; No need explaining the one leg remaining is spinning on the carport floor",
-			"\"Once the rockets are up, who cares where they come down? That's not my department,\" says Wernher von Braun.", "Last quote" };
+			"\"Once the rockets are up, who cares where they come down? That's not my department,\" says Wernher von Braun.",
+			"Knock, knock … Who’s there? … *very long pause* … Java.", "Programming made the impossible possible. You can have a null object and a constant variable.",
+			"Voodoo Programming", "It’s not a bug — it’s an undocumented feature.", "Linux is only free if your time has no value.",
+			"A system administrator has two problems: 1. Dumb users. 2. Smart users.", "When we had no computers, we had no programming problems either.",
+			"I’ve reached that age where my brain goes from 'You probably shouldn't say that' to 'What the hell, let's see what happens.'",
+			"An apple a day keeps anyone away if you throw it hard enough.", "When someone says 'Expect the unexpected', slap them and say 'You didn't expect that, did you?'",
+			"Remember if you can't say something nice…make it funny.", "Be careful when you follow the masses. Sometimes the M is silent.",
+			"When in doubt, remember FISH: F-ck it, sh-t happens.",
+			"Theorien wie Stringtheorien und Paralleluniversen sind mindestens genauso gewagt wie die Vorstellung, dass hier pausenlos irgendwelche Außerirdischen landen.",
+			"Wenn alle nur lauschen, wird es logischerweise zu keiner interplanetaren Kommunikation kommen.",
+			"Wir können das Universum nicht erklären, sondern nur beschreiben; und wir wissen nicht, ob unsere Theorien wahr sind, wir wissen nur, dass sie nicht falsch sind.",
+			"The good thing about science is that it's true whether or not you believe in it.",
+			"We are all connected; To each other, biologically. To the earth, chemically. To the rest of the universe atomically.",
+			"Curious that we spend more time congratulating people who have succeeded than encouraging people who have not.", "Last quote" };
 
 	/**
 	 * returns a random string for testing fun stuff - similar to unix fortune but biased towards monty python or the hitchhikers guide to the galaxy
