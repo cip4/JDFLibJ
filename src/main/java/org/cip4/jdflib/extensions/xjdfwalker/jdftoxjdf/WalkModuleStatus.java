@@ -90,20 +90,27 @@ public class WalkModuleStatus extends WalkJDFSubElement
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
+		final boolean parentIdle;
+		if (xjdf instanceof JDFJobPhase)
+		{
+			final EnumNodeStatus ns = ((JDFJobPhase) xjdf).getStatus();
+			parentIdle = !EnumNodeStatus.InProgress.equals(ns) && !EnumNodeStatus.Setup.equals(ns) && !EnumNodeStatus.Cleanup.equals(ns);
+		}
+		else
+		{
+			String deviceStatus = (xjdf instanceof JDFDeviceInfo) ? xjdf.getAttribute(AttributeName.STATUS) : null;
+			if ("Production".equals(deviceStatus))
+				deviceStatus = "Running";
+			EnumDeviceStatus eDeviceInfoStatus = EnumDeviceStatus.getEnum(deviceStatus);
+			parentIdle = EnumDeviceStatus.Down.equals(eDeviceInfoStatus) || EnumDeviceStatus.Idle.equals(eDeviceInfoStatus) || EnumDeviceStatus.Stopped.equals(eDeviceInfoStatus);
+		}
+
 		final JDFModuleStatus ms = (JDFModuleStatus) jdf;
 		String moduleStatus = ms.getNonEmpty(AttributeName.DEVICESTATUS);
 		EnumDeviceStatus eModuleStatus = EnumDeviceStatus.getEnum(moduleStatus);
-		String deviceStatus = (xjdf instanceof JDFDeviceInfo) ? xjdf.getAttribute(AttributeName.STATUS) : null;
-		if ("Production".equals(deviceStatus))
-			deviceStatus = "Running";
-		EnumDeviceStatus eDeviceInfoStatus = EnumDeviceStatus.getEnum(deviceStatus);
-		final EnumNodeStatus ns = (xjdf instanceof JDFJobPhase) ? ((JDFJobPhase) xjdf).getStatus() : null;
-		final boolean bDeviceIdle = EnumDeviceStatus.Down.equals(eDeviceInfoStatus) || EnumDeviceStatus.Idle.equals(eDeviceInfoStatus)
-				|| EnumDeviceStatus.Stopped.equals(eDeviceInfoStatus);
 		final boolean bModuleIdle = EnumDeviceStatus.Down.equals(eModuleStatus) || EnumDeviceStatus.Idle.equals(eModuleStatus) || EnumDeviceStatus.Stopped.equals(eModuleStatus);
-		final boolean bPhaseeIdle = !EnumNodeStatus.InProgress.equals(ns) && !EnumNodeStatus.Setup.equals(ns) && !EnumNodeStatus.Cleanup.equals(ns);
 
-		final boolean needCopy = moduleStatus == null || bModuleIdle == bPhaseeIdle || bDeviceIdle == bPhaseeIdle;
+		final boolean needCopy = moduleStatus == null || bModuleIdle == parentIdle;
 		if (needCopy)
 		{
 			final String id = StringUtil.getNonEmpty(ms.getModuleID());
