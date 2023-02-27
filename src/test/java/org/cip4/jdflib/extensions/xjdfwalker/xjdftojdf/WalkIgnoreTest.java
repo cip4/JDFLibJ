@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -53,6 +54,7 @@ public class WalkIgnoreTest extends JDFTestCaseBase
 		{
 			assertTrue(w.matches(KElement.createRoot(s, null)));
 		}
+		assertFalse(w.matches(KElement.createRoot("blub", null)));
 	}
 
 }

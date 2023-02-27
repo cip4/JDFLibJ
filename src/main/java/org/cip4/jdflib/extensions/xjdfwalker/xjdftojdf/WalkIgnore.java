@@ -106,8 +106,8 @@ public class WalkIgnore extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		String localName = toCheck.getLocalName();
-		boolean matches = super.matches(toCheck) || XJDFConstants.ChildProduct.equals(localName) || XJDFConstants.ProcessList.equals(localName)
-				|| XJDFConstants.Dependent.equals(localName) || XJDFConstants.PreflightItem.equals(localName);
+		boolean matches = super.matches(toCheck) && (XJDFConstants.ChildProduct.equals(localName) || XJDFConstants.ProcessList.equals(localName)
+				|| XJDFConstants.Dependent.equals(localName) || XJDFConstants.PreflightItem.equals(localName));
 		return matches;
 	}
 
