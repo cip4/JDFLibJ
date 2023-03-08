@@ -428,6 +428,33 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public void testNumFiles() throws Exception
+	{
+		final File f = new File(sm_dirTestDataTemp + "/foo2");
+		FileUtil.deleteAll(f);
+		f.mkdir(); // make sure we have one
+
+		assertEquals(0, FileUtil.numFiles(null, 42));
+		assertEquals(0, FileUtil.numFiles(f, 42));
+		for (char c = 'a'; c < 'g'; c++)
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				final File f2 = new File(f.getAbsolutePath() + File.separator + i + "." + c);
+				System.out.println("Create new File: " + f2.getAbsolutePath());
+				assertTrue(f2.createNewFile());
+				System.out.println("Is Created: " + f2.exists());
+				assertTrue(f2.exists());
+			}
+		}
+		assertEquals(18, FileUtil.numFiles(f, 999));
+		assertEquals(9, FileUtil.numFiles(f, 9));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	public void testListFilesWithExpression() throws Exception
 	{
 		final File f = new File(sm_dirTestDataTemp + "/foo");

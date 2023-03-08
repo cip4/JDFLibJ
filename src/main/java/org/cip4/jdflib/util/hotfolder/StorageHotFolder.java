@@ -72,7 +72,7 @@ public class StorageHotFolder
 
 	public boolean isProcessAux()
 	{
-		return processAux;
+		return processAux || FileUtil.numFiles(hf.getDir(), 123) < 120;
 	}
 
 	public void setProcessAux(boolean processAux)

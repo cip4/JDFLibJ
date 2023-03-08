@@ -172,6 +172,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	{
 		OrderedTaskQueue.shutDownAll();
 		super.setUp();
+		ThreadUtil.sleep(42);
 		final int n = ai.incrementAndGet();
 		theHFDir = new File(sm_dirTestDataTemp + File.separator + "StHFTest" + n);
 		FileUtil.deleteAll(theHFDir);
@@ -181,7 +182,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		FileUtil.deleteAll(tmpHFDir);
 
 		log.info("Setting up: " + theHFDir);
-		HotFolder.setDefaultStabilizeTime(100);
+		HotFolder.setDefaultStabilizeTime(42);
 	}
 
 	/**
@@ -385,7 +386,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			for (int i = 0; i < 42; i++)
 			{
 				ThreadUtil.sleep(111);
-				if (ok.listFiles().length == 2 && error.listFiles().length == 2)
+				if (ok.listFiles().length == 2 && error.listFiles().length == 2 && tmpHFDir.listFiles().length == 0)
 					break;
 			}
 			assertEquals(2, ok.listFiles().length, 1);
@@ -486,9 +487,16 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	public synchronized void testProcessAux() throws Exception
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		hf.stop();
 		assertTrue(hf.isProcessAux());
 		hf.setProcessAux(false);
+		assertTrue(hf.isProcessAux());
+		for (int i = 0; i < 199; i++)
+		{
+			new File(theHFDir, "dummy" + i).createNewFile();
+		}
 		assertFalse(hf.isProcessAux());
+
 	}
 
 	@Test
@@ -847,11 +855,11 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		for (int i = 0; i < 1000; i++)
 		{
 			ThreadUtil.sleep(42);
-			if (ok.listFiles().length == 2 && tmpHFDir.listFiles().length == 0)
+			if (ok.listFiles().length >= 4 && tmpHFDir.listFiles().length == 0)
 				break;
 		}
 
-		assertEquals(2, ok.listFiles().length, 1);
+		assertEquals(4, ok.listFiles().length, 2);
 		assertEquals(0, tmpHFDir.listFiles().length, 1);
 
 		hf.stop();

@@ -266,6 +266,8 @@ public class FileUtil
 		}
 		try (Stream<Path> stream = Files.list(dir.toPath()))
 		{
+			if (stream == null)
+				return null;
 			Stream<Path> stream2 = stream.filter(new ExpressionFileFilter(expression));
 			if (max > 0)
 				stream2 = stream2.limit(max);
@@ -277,6 +279,36 @@ public class FileUtil
 			// nop
 		}
 		return null;
+	}
+
+	/**
+	 * number of files - at most max
+	 *
+	 * @param dir the directory to search
+	 * @param expression regular expression - uses the simplified syntax
+	 * @return Files[] the matching files, null if none are found
+	 */
+	public static int numFiles(final File dir, int max)
+	{
+		if (dir == null)
+		{
+			return 0;
+		}
+		try (Stream<Path> stream = Files.list(dir.toPath()))
+		{
+			Stream<Path> stream2 = stream;
+			if (max > 0)
+			{
+				stream2 = stream2.limit(max);
+			}
+			File[] streamToArray = streamToArray(stream2);
+			return streamToArray == null ? 0 : streamToArray.length;
+		}
+		catch (IOException e)
+		{
+			// nop
+		}
+		return 0;
 	}
 
 	/**
