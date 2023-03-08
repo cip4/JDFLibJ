@@ -660,7 +660,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			cl.setDelay(2000);
 			final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, cl);
 			hf.setSynchronous(synch);
-			hf.setStabilizeTime(100);
+			hf.setStabilizeTime(42);
 			File error = new File("error");
 			hf.setErrorStorage(error);
 			File ok = new File("ok");
@@ -705,14 +705,14 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setMaxConcurrent(5);
-		hf.setStabilizeTime(100);
+		hf.setStabilizeTime(42);
 		File error = new File("error");
 		hf.setErrorStorage(error);
 		File ok = new File("ok");
 		hf.setOKStorage(ok);
 		hf.setMaxStore(42);
 		hf.restart();
-		ThreadUtil.sleep(1000);
+		ThreadUtil.sleep(100);
 
 		for (int i = 0; i < 20; i++)
 		{
@@ -732,9 +732,9 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		ok = FileUtil.getFileInDirectory(theHFDir, ok);
 		error = FileUtil.getFileInDirectory(theHFDir, error);
 
-		assertEquals(20, ok.listFiles().length, 4);
-		assertEquals(0, tmpHFDir.listFiles().length, 4);
-		assertEquals(20, error.listFiles().length, 4);
+		assertEquals(20, ok.listFiles().length, 5);
+		assertEquals(0, tmpHFDir.listFiles().length, 5);
+		assertEquals(20, error.listFiles().length, 5);
 
 		hf.stop();
 	}
@@ -860,12 +860,16 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	void createPair(final int i) throws IOException
 	{
 		final String fileName = "f" + i;
-		final File dir = new File(theHFDir + File.separator + fileName + ".dir");
+		final File dir = new File(theHFDir, fileName + ".dir");
 		while (dir.exists())
 		{
 			ThreadUtil.sleep(1);
 		}
-		dir.mkdir();
+		for (int j = 0; j < 3; j++)
+		{
+			File fil = new File(dir, j + "aux.tmp");
+			FileUtil.stringToFile("dummy" + j, fil);
+		}
 		final File file = new File(theHFDir + File.separator + fileName + ".txt");
 		file.createNewFile();
 	}
@@ -921,7 +925,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		File ok = new File("ok");
 		hf.setOKStorage(ok);
 		hf.setMaxStore(42);
-		ThreadUtil.sleep(1000);
+		ThreadUtil.sleep(123);
 		for (int i = 0; i < 4; i++)
 		{
 			final File file = new File(theHFDir + File.separator + "()&¢$[]f ä ö ü +&€" + i + ".txt");

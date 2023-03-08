@@ -921,7 +921,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		FileUtil.forceDelete(f);
 
 		final String s0 = "abcdefg";
-		FileUtil.stringToFile(s0, f);
+		assertNotNull(FileUtil.stringToFile(s0, f));
 		assertTrue(f.exists());
 		assertEquals(f.length(), 7, 100);
 
