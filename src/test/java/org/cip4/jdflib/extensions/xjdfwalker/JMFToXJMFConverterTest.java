@@ -90,6 +90,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
+import org.cip4.jdflib.util.JDFDate;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -251,6 +252,27 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		final XJMFHelper xh = new XJMFHelper(xjmf);
 		assertEquals("d1", xh.getMessageHelper(0).getHeader().getAttribute(AttributeName.DEVICEID));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testDeviceInfoEndTime()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		JDFDeviceInfo di = jmf.getSignal(0).appendDeviceInfo();
+		di.appendDevice().setDeviceID("d1");
+		JDFDate now = new JDFDate();
+		di.appendJobPhase().setEndTime(now);
+		di.setEndTime(now);
+		di.appendActivity().setEndTime(now);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		final XJMFHelper xh = new XJMFHelper(xjmf);
+		assertEquals("d1", xh.getMessageHelper(0).getHeader().getAttribute(AttributeName.DEVICEID));
+		KElement xdi = xh.getMessageHelper(0).getRoot().getElement(ElementName.DEVICEINFO);
+		assertEquals(now.getDateTimeISO(), xdi.getAttribute(AttributeName.ENDTIME));
 	}
 
 	/**

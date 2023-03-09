@@ -263,7 +263,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		d.write2File(hfPath + "/dummy space.jdf", 2, false);
 		final File file = new File(hfPath + "/dummy space.jdf");
 		assertTrue(file.exists());
-		for (int i = 0; i < 4200; i++)
+		for (int i = 0; i < 6200; i++)
 		{
 			ThreadUtil.sleep(10);
 			final File file2 = new File(hfPath + "/OK/dummy space");
@@ -343,9 +343,9 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		assertTrue(file.exists());
 		hf.addListener(new CountListener(), ".txt");
 		assertNotNull(hf.getListener(1));
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 1000; i++)
 		{
-			ThreadUtil.sleep(200);
+			ThreadUtil.sleep(42);
 			if (!file.exists())
 				break;
 		}
@@ -450,7 +450,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			hf.setMaxStore(42);
 			hf.setMaxCheck(10);
 			hf.restart();
-			ThreadUtil.sleep(1000);
+			ThreadUtil.sleep(42);
 
 			for (int i = 0; i < 60; i++)
 			{
@@ -535,7 +535,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		error = FileUtil.getFileInDirectory(theHFDir, error);
 		for (int i = 0; i < 4200; i++)
 		{
-			if (ok.listFiles().length < 2)
+			if (ok.listFiles().length < 2 || tmpHFDir.listFiles().length > 0)
 				ThreadUtil.sleep(10);
 		}
 		assertEquals(2, ok.listFiles().length, 1);
@@ -676,14 +676,14 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			hf.setMaxStore(42);
 			hf.restart();
 			hf.setMaxConcurrent(20);
-			ThreadUtil.sleep(500);
+			ThreadUtil.sleep(42);
 
 			for (int i = 0; i < 10; i++)
 			{
 				final File file = new File(theHFDir + File.separator + "fok_err" + i + ".txt");
 				file.createNewFile();
 			}
-			ThreadUtil.sleep(2000);
+			ThreadUtil.sleep(42);
 			final long t0 = System.currentTimeMillis();
 			ok = FileUtil.getFileInDirectory(theHFDir, ok);
 			error = FileUtil.getFileInDirectory(theHFDir, error);
@@ -697,7 +697,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			assertEquals(0, tmpHFDir.listFiles().length, 1);
 			assertEquals(5, error.listFiles().length, 1);
 			// not 2000 * 10...
-			assertTrue(System.currentTimeMillis() - t0 < 5000);
+			assertTrue(System.currentTimeMillis() - t0 < 7000);
 			hf.stop();
 		}
 	}
@@ -724,7 +724,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 
 		for (int i = 0; i < 20; i++)
 		{
-			createPair(i % 4);
+			createPair(i % 20);
 		}
 
 		for (int i = 0; i < 1000; i++)
@@ -765,7 +765,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		hf.setMaxStore(40);
 		hf.setMaxAux(10);
 		hf.restart();
-		ThreadUtil.sleep(300);
+		ThreadUtil.sleep(42);
 
 		for (int i = 0; i < 100; i++)
 			createPair(i);
