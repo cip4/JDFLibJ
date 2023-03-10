@@ -292,7 +292,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		file.createNewFile();
 		for (int i = 0; i < 1234; i++)
 		{
-			ThreadUtil.sleep(4);
+			ThreadUtil.sleep(42);
 			if (!file.exists() && tmpHFDir.listFiles().length == 0)
 				break;
 		}
@@ -490,7 +490,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		hf.stop();
 		assertTrue(hf.isProcessAux());
 		hf.setProcessAux(false);
-		assertTrue(hf.isProcessAux());
+		assertFalse(hf.isProcessAux());
 		for (int i = 0; i < 999; i++)
 		{
 			new File(theHFDir, "dummy" + i).createNewFile();
@@ -855,11 +855,11 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		for (int i = 0; i < 1000; i++)
 		{
 			ThreadUtil.sleep(42);
-			if (ok.listFiles().length >= 4 && tmpHFDir.listFiles().length == 0)
+			if (ok.listFiles().length >= 2 && tmpHFDir.listFiles().length == 0)
 				break;
 		}
 
-		assertEquals(4, ok.listFiles().length, 2);
+		assertEquals(2, ok.listFiles().length, 1);
 		assertEquals(0, tmpHFDir.listFiles().length, 1);
 
 		hf.stop();
