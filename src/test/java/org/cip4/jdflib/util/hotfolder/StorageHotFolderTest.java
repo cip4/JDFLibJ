@@ -491,7 +491,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		assertTrue(hf.isProcessAux());
 		hf.setProcessAux(false);
 		assertTrue(hf.isProcessAux());
-		for (int i = 0; i < 199; i++)
+		for (int i = 0; i < 999; i++)
 		{
 			new File(theHFDir, "dummy" + i).createNewFile();
 		}
