@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -780,7 +780,8 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 * getKeyIterator - returns an iterator over the elements in this set. The elements are returned in no particular order (unless this set is an instance of some class that provides a guarantee).
+	 * getKeyIterator - returns an iterator over the elements in this set. The elements are returned in no particular order (unless this set is an instance of some class that
+	 * provides a guarantee).
 	 *
 	 * @return Iterator - an iterator over the elements in this set
 	 */
@@ -860,7 +861,8 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public String getIgnoreCase(final String strLocalName)
 	{
-		if (!StringUtil.isEmpty(strLocalName))
+		String val = get(strLocalName);
+		if (val == null && !StringUtil.isEmpty(strLocalName))
 		{
 			for (final String key : keySet())
 			{
@@ -870,6 +872,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 				}
 			}
 		}
-		return null;
+
+		return val;
 	}
 }
