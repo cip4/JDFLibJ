@@ -75,6 +75,17 @@ public class SetHelperTest extends JDFTestCaseBase
 	}
 
 	/**
+	*
+	*/
+	@Test
+	public void testGetHelper()
+	{
+		assertNull(SetHelper.getHelper(null));
+		assertNull(SetHelper.getHelper(root));
+		assertEquals(BaseXJDFHelper.getBaseHelper(root.getElement(XJDFConstants.ResourceSet)), SetHelper.getHelper(root.getElement(SetHelper.RESOURCE_SET)));
+	}
+
+	/**
 	 *
 	 */
 	@Test

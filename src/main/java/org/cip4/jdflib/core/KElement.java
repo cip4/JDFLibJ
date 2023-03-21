@@ -2283,6 +2283,17 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * convenience helper
+	 * 
+	 * @param elementName
+	 * @return
+	 */
+	public VElement getChildrenByTagName(final String elementName)
+	{
+		return getChildrenByTagName(elementName, null, null, false, true, 0);
+	}
+
+	/**
 	 * Gets children of 'this' by tag name, nameSpaceURI and attribute map, if the attribute map is not empty.<br>
 	 * Searches the entire tree including hidden nodes that are children of non-matching nodes
 	 *

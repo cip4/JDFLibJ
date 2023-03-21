@@ -104,6 +104,7 @@ public abstract class XJDFConstants
 	public static final String IsRoot = "IsRoot";
 	public static final String ItemRef = "ItemRef";
 
+	@Deprecated
 	public static final String LayerType = "LayerType";
 	public static final String LooseBinding = "LooseBinding";
 	public static final String LooseBindingParams = "LooseBindingParams";

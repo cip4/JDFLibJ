@@ -36,11 +36,13 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.AuditHelper.eAudit;
-
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -48,7 +50,8 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class AuditPoolHelperTest {
+public class AuditPoolHelperTest
+{
 
 	/**
 	 *
@@ -62,7 +65,7 @@ public class AuditPoolHelperTest {
 		final AuditPoolHelper ah = new AuditPoolHelper(auditPool);
 
 		ah.cleanUp();
-		Assertions.assertEquals(created.getNextSiblingElement(), ar);
+		assertEquals(created.getNextSiblingElement(), ar);
 	}
 
 	/**
@@ -74,7 +77,7 @@ public class AuditPoolHelperTest {
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
 		final AuditPoolHelper aph = new AuditPoolHelper(auditPool);
 		final AuditHelper ah = aph.appendAudit(ElementName.NOTIFICATION);
-		Assertions.assertNotNull(ah.getHeader());
+		assertNotNull(ah.getHeader());
 	}
 
 	/**
@@ -86,8 +89,8 @@ public class AuditPoolHelperTest {
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
 		final AuditPoolHelper aph = new AuditPoolHelper(auditPool);
 		final AuditHelper ah = aph.appendAudit(eAudit.Created);
-		Assertions.assertNotNull(ah.getHeader());
-		Assertions.assertNull(aph.appendAudit((eAudit) null));
+		assertNotNull(ah.getHeader());
+		assertNull(aph.appendAudit((eAudit) null));
 	}
 
 	/**
@@ -97,7 +100,8 @@ public class AuditPoolHelperTest {
 	public void testGetHelper()
 	{
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
-		Assertions.assertNull(AuditPoolHelper.getHelper(null));
-		Assertions.assertEquals(auditPool, AuditPoolHelper.getHelper(auditPool).getRoot());
+		assertNull(AuditPoolHelper.getHelper(null));
+		assertEquals(auditPool, AuditPoolHelper.getHelper(auditPool).getRoot());
+		assertEquals(BaseXJDFHelper.getBaseHelper(auditPool), AuditPoolHelper.getHelper(auditPool));
 	}
 }

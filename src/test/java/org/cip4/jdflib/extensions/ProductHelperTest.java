@@ -325,6 +325,22 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetProduct()
+	{
+		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		final KElement root = theHelper.getRoot();
+		final KElement productList = root.appendElement("ProductList");
+		final KElement product = productList.appendElement("Product");
+		final ProductHelper ph = ProductHelper.getHelper(product);
+		assertNotNull(ph);
+		final ProductHelper ph2 = (ProductHelper) BaseXJDFHelper.getBaseHelper(product);
+		assertEquals(ph, ph2);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testOverProduction()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);

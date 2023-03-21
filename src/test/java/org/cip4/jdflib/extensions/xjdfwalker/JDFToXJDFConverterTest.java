@@ -2314,6 +2314,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditStatus/Header/@Author", null), "me");
+		assertEquals(n.getAuditPool().getAudit(0, EnumAuditType.PhaseTime, null, null).getEmployee(0).getDescriptiveName(), "me");
 
 		final XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		final JDFDoc d = invert.convert(xjdf);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -96,6 +96,19 @@ public class ProductHelper extends BaseXJDFHelper
 	{
 		theElement = product;
 		theElement.appendAnchor(null);
+	}
+
+	/**
+	 * factory to create a helper from an element
+	 *
+	 * @param root the element to parse
+	 * @return the helper
+	 */
+	public static ProductHelper getHelper(KElement e)
+	{
+		while (e != null && !PRODUCT.equals(e.getLocalName()))
+			e = e.getParentNode_KElement();
+		return e != null ? new ProductHelper(e) : null;
 	}
 
 	/**

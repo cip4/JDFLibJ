@@ -79,7 +79,15 @@ public abstract class BaseXJDFHelper
 	 */
 	public static BaseXJDFHelper getBaseHelper(final KElement root)
 	{
-		BaseXJDFHelper h = XJDFHelper.getHelper(root);
+		BaseXJDFHelper h = AuditPoolHelper.getHelper(root);
+		if (h == null)
+			h = ResourceHelper.getHelper(root);
+		if (h == null)
+			h = SetHelper.getHelper(root);
+		if (h == null)
+			h = ProductHelper.getHelper(root);
+		if (h == null)
+			h = XJDFHelper.getHelper(root);
 		if (h == null)
 			h = XJMFHelper.getHelper(root);
 		return h;
