@@ -111,7 +111,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	public void testGetXRoot()
 	{
 		final ProductHelper p = theHelper.appendProduct();
-		assertEquals(theHelper, p.getXRoot());
+		assertEquals(p, p.getXRoot());
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	public void testGetXJDFRoot()
 	{
 		final ProductHelper p = theHelper.appendProduct();
-		assertEquals(theHelper, p.getXRoot());
+		assertEquals(theHelper, p.getXJDFRoot());
 	}
 
 	/**
