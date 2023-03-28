@@ -103,6 +103,21 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testForeignJMF()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Query, JDFMessage.EnumType.PipeClose);
+		JDFQuery query = jmf.getQuery(0);
+		query.setType("foo:bar");
+		query.appendSubscription().setURL("http://foo/bar");
+		final JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		assertNull(xjmf);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testPipeJMF()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.PipeClose);

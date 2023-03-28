@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -37,6 +37,7 @@
 package org.cip4.jdflib.extensions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -103,5 +104,23 @@ public class AuditPoolHelperTest
 		assertNull(AuditPoolHelper.getHelper(null));
 		assertEquals(auditPool, AuditPoolHelper.getHelper(auditPool).getRoot());
 		assertEquals(BaseXJDFHelper.getBaseHelper(auditPool), AuditPoolHelper.getHelper(auditPool));
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testGetCreateAudit()
+	{
+		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
+		final AuditPoolHelper aph = new AuditPoolHelper(auditPool);
+		final AuditHelper ah = aph.getCreateAudit(eAudit.Created, 0);
+		assertNotNull(ah.getHeader());
+		final AuditHelper ah2 = aph.getCreateAudit(eAudit.Created, 0);
+		assertEquals(ah, ah2);
+		final AuditHelper ah3 = aph.getCreateAudit(eAudit.Created, -1);
+		assertEquals(ah, ah3);
+		final AuditHelper ah4 = aph.getCreateAudit(eAudit.Created, 1);
+		assertNotEquals(ah, ah4);
 	}
 }

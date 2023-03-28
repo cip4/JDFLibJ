@@ -93,8 +93,20 @@ public class AuditPoolHelper extends MessagePoolHelper
 	 */
 	public AuditHelper appendAudit(final eAudit auditType)
 	{
-		final MessageHelper appendMessage = appendMessage(auditType == null ? null : auditType.getAuditName());
-		return appendMessage == null ? null : new AuditHelper(appendMessage.theElement);
+		final MessageHelper m = appendMessage(auditType == null ? null : auditType.getAuditName());
+		return m == null ? null : new AuditHelper(m.theElement);
+	}
+
+	/**
+	 *
+	 * @param auditType
+	 * @param skip
+	 * @return
+	 */
+	public AuditHelper getCreateAudit(final eAudit auditType, int skip)
+	{
+		final MessageHelper m = getCreateMessage(auditType == null ? null : auditType.getAuditName(), skip);
+		return m == null ? null : new AuditHelper(m.theElement);
 	}
 
 	/**
