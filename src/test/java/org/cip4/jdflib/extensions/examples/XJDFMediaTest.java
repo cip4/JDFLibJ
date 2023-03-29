@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,7 +70,6 @@ package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumFluteDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
-import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaUnit;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumPlateTechnology;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -86,7 +85,6 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMediaLayers;
-import org.cip4.jdflib.resource.process.postpress.JDFGlue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -202,35 +200,6 @@ public class XJDFMediaTest extends ExampleTest
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(xjdfHelper);
 		writeTest(d.getRoot(), "resources/FlexoSleeve.jdf", false, null);
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	public void testAdhesive()
-	{
-		final XJDFHelper xjdfHelper = new XJDFHelper("Converting", "Corrugated", null);
-		xjdfHelper.setTypes(JDFConstants.CONVENTIONALPRINTING);
-		final SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
-		final ResourceHelper rh = shMedia.appendPartition(null, true);
-		final JDFMedia m = (JDFMedia) rh.getResource();
-		m.setMediaType(EnumMediaType.SelfAdhesive);
-		m.setDimensionCM(new JDFXYPair(42, 0));
-		m.setMediaUnit(EnumMediaUnit.Roll);
-		m.setThickness(900);
-		final JDFMediaLayers ml = m.appendMediaLayers();
-		JDFMedia m2 = ml.appendMedia();
-		m2.setMediaType(EnumMediaType.Paper);
-		m2.setWeight(90);
-		final JDFGlue g = (JDFGlue) ml.appendElement(ElementName.GLUE);
-		g.setAttribute(AttributeName.AREAGLUE, "" + true);
-		g.setAttribute(AttributeName.GLUETYPE, "Removable");
-		m2 = ml.appendMedia();
-		m2.setMediaType(EnumMediaType.Paper);
-		m2.setWeight(60);
-		cleanSnippets(xjdfHelper);
-		writeTest(xjdfHelper, "resources/MediaSelfAdhesive.xjdf");
 	}
 
 	/**

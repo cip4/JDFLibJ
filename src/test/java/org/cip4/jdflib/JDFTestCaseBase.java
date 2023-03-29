@@ -460,6 +460,10 @@ public abstract class JDFTestCaseBase
 		}
 		else
 		{
+			assertTrue(((JDFElement) e).isValid(EnumValidationLevel.NoWarnComplete));
+			final KElement snippet0 = e.getXPathElement(snippetPath);
+			setSnippet(snippet0, true);
+
 			if (e.getParentNode_KElement() == null)
 			{
 				e.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "jdfexamples/" + filename, 2, false);

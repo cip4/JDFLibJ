@@ -45,6 +45,7 @@ import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -257,7 +258,11 @@ public class JMFExampleTest extends ExampleTest
 	{
 		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		final JDFJMF jmf = b.buildAbortQueueEntry("qeid");
-		writeTest(jmf, "jmf/lotquery.jmf", true, null);
+
+		writeTest(jmf, "jmf/abortqueentry.jmf", true, "Command");
+
+		JDFJMF jmf2 = jmf.createResponse();
+		writeTest(jmf2, "jmf/abortqueentryresponse.jmf", true, "Response");
 	}
 
 	/**
@@ -293,6 +298,9 @@ public class JMFExampleTest extends ExampleTest
 	public void setUp() throws Exception
 	{
 		super.setUp();
+		JDFAudit.setStaticAgentName(null);
+		JDFAudit.setStaticAgentVersion(null);
+
 		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_8);
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentName(null);
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentVersion(null);

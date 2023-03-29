@@ -416,7 +416,8 @@ public class JDFJMF extends JDFAutoJMF
 		/**
 		 *
 		 */
-		public static final EnumJMFReturnCode QUEUE_ENTRY_COMPLETED_OR_ABORTED = new EnumJMFReturnCode(114, "Queue entry is already completed or aborted and therefore does not accept changes");
+		public static final EnumJMFReturnCode QUEUE_ENTRY_COMPLETED_OR_ABORTED = new EnumJMFReturnCode(114,
+				"Queue entry is already completed or aborted and therefore does not accept changes");
 
 		/**
 		 *
@@ -508,9 +509,8 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param i message index
 	 *
 	 * @return JDFMessage - the ith message
-	 * @deprecated use getMessageElement(null)
+	 *
 	 */
-	@Deprecated
 	public JDFMessage getMessage(final int i)
 	{
 		return getMessageElement(null, null, i);
@@ -520,7 +520,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * Get the 0h command
 	 *
 	 * @return JDFCommand: the message element
-	 * @deprecated use getMessageElement
+	 * 
 	 */
 	@Deprecated
 	public JDFCommand getCommand()
