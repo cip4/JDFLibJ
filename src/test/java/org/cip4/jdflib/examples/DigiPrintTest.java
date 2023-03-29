@@ -72,6 +72,7 @@ package org.cip4.jdflib.examples;
 import java.io.File;
 
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
+import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoLayoutElement;
@@ -83,6 +84,7 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -155,6 +157,7 @@ public class DigiPrintTest extends ExampleTest
 
 	/**
 	 * test amount handling
+	 * 
 	 * @throws Exception
 	 *
 	 */
@@ -196,6 +199,7 @@ public class DigiPrintTest extends ExampleTest
 
 	/**
 	 * test amount handling
+	 * 
 	 * @throws Exception
 	 *
 	 */
@@ -356,6 +360,8 @@ public class DigiPrintTest extends ExampleTest
 	{
 		final JDFAuditPool ap = n.getCreateAuditPool();
 		ap.appendXMLComment("JDF 1.3 compatible auditing of module phases with updates", null);
+		n.setVersion(EnumVersion.Version_1_3);
+
 		final JDFPhaseTime pt = ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
 		final JDFPhaseTime pt2 = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
 		final JDFPhaseTime pt3 = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
@@ -364,12 +370,10 @@ public class DigiPrintTest extends ExampleTest
 		mpRIP.setModuleType("Imaging");
 		final JDFModulePhase mpJob = pt.appendModulePhase();
 		mpJob.setModuleType("Manual");
-		mpJob.setStatus(EnumNodeStatus.InProgress);
 		final JDFModulePhase mpPrint = pt.appendModulePhase();
 		mpPrint.setModuleType("Printing");
 
-		mpRIP.setStatus(EnumNodeStatus.InProgress);
-		pt.setStart(date);
+		// mpRIP.setStatus(EnumNodeStatus.InProgress);
 		mpRIP.setStart(date);
 		date.addOffset(0, 5, 0, 0);
 		pt.setEnd(date);
@@ -377,7 +381,7 @@ public class DigiPrintTest extends ExampleTest
 		pt2.copyElement(mpRIP, null);
 		pt2.copyElement(mpJob, null);
 		pt2.copyElement(mpPrint, null);
-		mpPrint.setStatus(EnumNodeStatus.InProgress);
+		// mpPrint.setStatus(EnumNodeStatus.InProgress);
 		pt2.setStart(date);
 		mpPrint.setStart(date);
 		date.addOffset(0, 30, 0, 0);
@@ -395,6 +399,7 @@ public class DigiPrintTest extends ExampleTest
 
 	/**
 	 * test amount handling
+	 * 
 	 * @throws Exception
 	 *
 	 */
@@ -537,6 +542,7 @@ public class DigiPrintTest extends ExampleTest
 
 	/**
 	 * test devcaps for usagecounters
+	 * 
 	 * @throws Exception
 	 *
 	 */
@@ -613,6 +619,7 @@ public class DigiPrintTest extends ExampleTest
 
 	/**
 	 * test amount handling
+	 * 
 	 * @throws Exception
 	 *
 	 */
@@ -996,7 +1003,9 @@ public class DigiPrintTest extends ExampleTest
 			runSet.setEndOfSet(true);
 			run.setAttribute("SkipBlankOrds", "1");
 			run.setNPage(page + 1);
-			run.setXMLComment("SkipBlankOrds specifies the relative position of pages to skip\n1 specifies that the first back sheet is skipped\nNPage MUST be incremented by the # of skipped pages.", true);
+			run.setXMLComment(
+					"SkipBlankOrds specifies the relative position of pages to skip\n1 specifies that the first back sheet is skipped\nNPage MUST be incremented by the # of skipped pages.",
+					true);
 			pd = pl.appendPageData();
 			pd.refContentData(brochure);
 			pd.setAttribute("PageIndex", pageCount + " ~ " + (pageCount + page - 1));
@@ -1024,6 +1033,7 @@ public class DigiPrintTest extends ExampleTest
 		n.setType(EnumType.Combined);
 		n.setTypes(new VString("Interpreting Rendering DigitalPrinting Stitching", " "));
 		comp = (JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
+		comp.setComponentType(EnumComponentType.FinalProduct, null);
 		rlComp = n.getLink(comp, null);
 		digiParams = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
 		med = (JDFMedia) n.appendMatchingResource(ElementName.MEDIA, EnumProcessUsage.AnyInput, null);

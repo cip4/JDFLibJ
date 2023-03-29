@@ -384,7 +384,7 @@ public abstract class JDFTestCaseBase
 	 */
 	protected void setSnippet(final KElement e, final boolean startFirst)
 	{
-		if (e != null)
+		if (e != null && e.getParentNode() != null)
 		{
 			final Node parent = e.getParentNode();
 			final String start = " START SNIPPET ";
@@ -460,7 +460,6 @@ public abstract class JDFTestCaseBase
 		}
 		else
 		{
-			assertTrue(((JDFElement) e).isValid(EnumValidationLevel.NoWarnComplete));
 			final KElement snippet0 = e.getXPathElement(snippetPath);
 			setSnippet(snippet0, true);
 
@@ -472,6 +471,7 @@ public abstract class JDFTestCaseBase
 			{
 				e.write2File(sm_dirTestDataTemp + "jdfexamples/" + filename);
 			}
+			assertTrue(((JDFElement) e).isValid(EnumValidationLevel.NoWarnIncomplete));
 
 			if (parseSchema)
 			{

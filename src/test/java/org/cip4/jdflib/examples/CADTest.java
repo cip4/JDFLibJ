@@ -78,6 +78,7 @@ import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
@@ -104,8 +105,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * tests for CAD production
+ * @author Rainer Prosi, Heidelberger Druckmaschinen tests for CAD production
  */
 public class CADTest extends JDFTestCaseBase
 {
@@ -127,6 +127,7 @@ public class CADTest extends JDFTestCaseBase
 
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -152,6 +153,7 @@ public class CADTest extends JDFTestCaseBase
 
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -164,6 +166,7 @@ public class CADTest extends JDFTestCaseBase
 
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -215,11 +218,12 @@ public class CADTest extends JDFTestCaseBase
 		filespec.setDescriptiveName("This is the optional location of the input cff2 (or evd), Note the escaping of Blanks. - chars > 127 may but need not be encoded as utf-8");
 
 		for (int i = 0; i < nOptions; i++)
-			createShapeDef(EnumUsage.Input, i, nOptions);
+			createShapeDef(EnumUsage.Output, i, nOptions);
 	}
 
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -232,8 +236,8 @@ public class CADTest extends JDFTestCaseBase
 
 		final JDFResource dlpp = n.addResource("DieLayoutProductionParams", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
 
-		dlpp.setAttribute("Esimate", true, null);
-		dlpp.setAttribute("Anchor", "Center");
+		dlpp.setAttribute(AttributeName.ESTIMATE, true, null);
+		dlpp.setAttribute("Position", "Center");
 
 		final JDFElement convertingConfig = (JDFElement) dlpp.appendElement("ConvertingConfig");
 		final JDFNumberRange range = new JDFNumberRange();
@@ -258,6 +262,7 @@ public class CADTest extends JDFTestCaseBase
 
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -280,9 +285,9 @@ public class CADTest extends JDFTestCaseBase
 
 		JDFDieLayout dl = createDieLayout(EnumUsage.Input, "//host/share/dir1/dir2/dieLayout.cff2");
 		dl.setDescriptiveName("the abstract die layout ");
-		dl = createDieLayout(EnumUsage.Input, "//host/share/dir1/dir2/dieLayoutUpper.cff2");
+		dl = createDieLayout(EnumUsage.Output, "//host/share/dir1/dir2/dieLayoutUpper.cff2");
 		dl.setDescriptiveName("the upper die layout ");
-		dl = createDieLayout(EnumUsage.Input, "//host/share/dir1/dir2/dieLayoutLower.cff2");
+		dl = createDieLayout(EnumUsage.Output, "//host/share/dir1/dir2/dieLayoutLower.cff2");
 		dl.setDescriptiveName("the lower die layout ");
 
 		writeTest(n, "CAD_DieDesign.jdf", true, null);
@@ -306,6 +311,7 @@ public class CADTest extends JDFTestCaseBase
 
 	/**
 	 * note that this may be calle multiple times to describe multiple one-ups per sheet
+	 * 
 	 * @param inOut input or output
 	 * @param option
 	 * @param nOptions

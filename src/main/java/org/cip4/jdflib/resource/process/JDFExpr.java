@@ -76,6 +76,8 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoExpr;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.w3c.dom.DOMException;
@@ -89,6 +91,7 @@ public class JDFExpr extends JDFAutoExpr
 
 	/**
 	 * Constructor for JDFRunList
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * 
@@ -101,6 +104,7 @@ public class JDFExpr extends JDFAutoExpr
 
 	/**
 	 * Constructor for JDFRunList
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -114,6 +118,7 @@ public class JDFExpr extends JDFAutoExpr
 
 	/**
 	 * Constructor for JDFRunList
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -128,7 +133,7 @@ public class JDFExpr extends JDFAutoExpr
 
 	/**
 	 * 
-	 *  
+	 * 
 	 * @param term
 	 * @return
 	 */
@@ -139,9 +144,9 @@ public class JDFExpr extends JDFAutoExpr
 
 	/**
 	 * 
-	 *  
+	 * 
 	 * @param term
-	 * @param i 
+	 * @param i
 	 * @return
 	 */
 	public JDFTerm getTerm(EnumTerm term, int i)
@@ -158,9 +163,9 @@ public class JDFExpr extends JDFAutoExpr
 
 	/**
 	 * 
-	 *  
+	 * 
 	 * @param term
-	 * @param i 
+	 * @param i
 	 * @return
 	 */
 	public JDFTerm getCreateTerm(EnumTerm term, int i)
@@ -178,4 +183,27 @@ public class JDFExpr extends JDFAutoExpr
 	{
 		return "JDFExpr[ --> " + super.toString() + " ]";
 	}
+
+	@Override
+	public VString optionalElements()
+	{
+		VString optionalElements = super.optionalElements();
+		optionalElements.add(ElementName.NAMEEVALUATION);
+		return optionalElements;
+	}
+
+	@Override
+	public boolean isValid(EnumValidationLevel level)
+	{
+		// TODO Auto-generated method stub
+		return super.isValid(level);
+	}
+
+	@Override
+	public boolean isValid_JDFElement(EnumValidationLevel level)
+	{
+		// TODO Auto-generated method stub
+		return super.isValid_JDFElement(level);
+	}
+
 }

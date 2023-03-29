@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -167,7 +167,7 @@ public class FilespecExampleTest extends JDFTestCaseBase
 		final JDFFileSpec c2 = (JDFFileSpec) c.makeRootResource("ID_Container", null, true);
 		setSnippet(c2, true);
 		c2.setResStatus(EnumResStatus.Available, true);
-		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
 		final JDFFileSpec fs2 = rl.appendLayoutElement().appendFileSpec();
 		fs2.appendContainer().refElement(c2);
 		fs2.setMimeType(MimeUtil.APPLICATION_PDF);

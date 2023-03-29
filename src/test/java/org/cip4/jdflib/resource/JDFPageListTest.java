@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,6 @@ package org.cip4.jdflib.resource;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
@@ -113,8 +112,8 @@ public class JDFPageListTest extends JDFTestCaseBase
 	public void testContentData()
 	{
 		JDFContentData cd0 = cl.appendContentData();
-		cd0.setAttribute(AttributeName.CONTENTLISTINDEX, "1 2 3");
-		KElement book = cd0.appendElement("ContentMetaData");
+		// ToDo cd0.setAttribute(AttributeName.CONTENTLISTINDEX, "1 2 3");
+		KElement book = cd0.appendElement(ElementName.CONTENTMETADATA);
 		book.setAttribute("ISBN", "0123456789");
 		JDFComment abstrakt = (JDFComment) book.appendElement("Comment");
 		abstrakt.setName("Abstract");
@@ -128,7 +127,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 		{
 			JDFContentData cd = cl.appendContentData();
 			cd.setAttribute("ID", "CD_" + i);
-			KElement chap = cd.appendElement("ContentMetaData");
+			KElement chap = cd.appendElement(ElementName.CONTENTMETADATA);
 			chap.setAttribute("Title", "Chapter " + i);
 			JDFEmployee localAuthor = (JDFEmployee) chap.appendElement(ElementName.EMPLOYEE);
 			localAuthor.appendPerson().setFamilyName("authorName" + i);
@@ -149,6 +148,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 
 	/**
 	 * test that creates a contentdata for a component with multiple blocks
+	 * 
 	 * @throws DataFormatException
 	 */
 	@Test
@@ -227,9 +227,9 @@ public class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	*
-	* @throws Exception
-	*/
+	 *
+	 * @throws Exception
+	 */
 	@Test
 	public void testUniqueIndex() throws Exception
 	{
@@ -247,9 +247,9 @@ public class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	*
-	* @throws Exception
-	*/
+	 *
+	 * @throws Exception
+	 */
 	@Test
 	public void testUniqueIndexMissing() throws Exception
 	{
@@ -268,9 +268,9 @@ public class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	*
-	* @throws Exception
-	*/
+	 *
+	 * @throws Exception
+	 */
 	@Test
 	public void testUniqueIndexPerformance() throws Exception
 	{

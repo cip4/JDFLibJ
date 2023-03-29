@@ -44,10 +44,17 @@ import java.util.Collection;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoColorantControl.EnumInternalColorModel;
 import org.cip4.jdflib.auto.JDFAutoColorantControl.EnumMappingSelection;
-import org.cip4.jdflib.core.*;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.JDFSeparationList;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -57,9 +64,9 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.util.StringUtil;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
 import org.xml.sax.SAXException;
 
 /**
@@ -80,6 +87,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	@Test
 	public final void testColorantAlias()
 	{
+		elem.setType(EnumType.ColorSpaceConversion);
 		final JDFColorantAlias ca = colControl.appendColorantAlias();
 		ca.setXMLComment("ColorantAlias that maps the predefined separation Black", true);
 		ca.setReplacementColorantName("Green");
@@ -113,7 +121,9 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 
 		colControl.setXMLComment("ColorantControl after prepress has correctly set ActualColorName based on pdl content", true);
 		JDFColor co = colPool.appendColorWithName("Black", null);
-		co.setXMLComment("Color that maps the predefined separation Black\n" + "ActualColorName is the new attribute that replaces ExposedMedia/@DescriptiveName as the \"Main\" PDL color", true);
+		co.setXMLComment(
+				"Color that maps the predefined separation Black\n" + "ActualColorName is the new attribute that replaces ExposedMedia/@DescriptiveName as the \"Main\" PDL color",
+				true);
 		co.setCMYK(new JDFCMYKColor(0, 0, 0, 1));
 		Assertions.assertTrue(co.isValid(EnumValidationLevel.Incomplete));
 		co.setAttribute("ActualColorName", "Schwarz");

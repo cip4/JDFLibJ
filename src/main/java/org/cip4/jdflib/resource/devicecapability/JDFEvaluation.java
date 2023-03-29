@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -106,7 +106,7 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * 
- *  
+ * 
  * @author rainer prosi
  * @date Mar 17, 2013
  */
@@ -114,10 +114,11 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 {
 	private static final long serialVersionUID = -1231679460732331896L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.RREF, 0x33333333, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PATH, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -189,14 +190,10 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	}
 
 	/**
-	 * fitsMap - tests whether attribute map 'm' has a key specified by
-	 * BasicPreflightTest/@Name. If this the case, it is checked whether its
-	 * value fits the testlist.
+	 * fitsMap - tests whether attribute map 'm' has a key specified by BasicPreflightTest/@Name. If this the case, it is checked whether its value fits the testlist.
 	 * 
-	 * @param m
-	 *            key-value pair attribute map to take the value from
-	 * @return boolean - true, if 'm' has a key specified by BasicPreflightTest/@Name
-	 *         and fitsValue(value) returns true
+	 * @param m key-value pair attribute map to take the value from
+	 * @return boolean - true, if 'm' has a key specified by BasicPreflightTest/@Name and fitsValue(value) returns true
 	 */
 	@Override
 	public final boolean fitsMap(JDFAttributeMap m)
@@ -215,12 +212,9 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	}
 
 	/**
-	 * fitsJDF - tests whether JDFNode 'jdf' can be accepted by the Device.
-	 * Tests if the value of resource attribute, decribed with this Evaluation,
-	 * fits Evaluation/@ValueList
+	 * fitsJDF - tests whether JDFNode 'jdf' can be accepted by the Device. Tests if the value of resource attribute, decribed with this Evaluation, fits Evaluation/@ValueList
 	 * 
-	 * @param jdf
-	 *            jdf node to test
+	 * @param jdf jdf node to test
 	 * @return boolean - true, if 'jdf' can be accepted by the Device
 	 */
 	@Override
@@ -328,24 +322,18 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	}
 
 	/**
-	 * fitsValue - checks whether the <code>value</code> matches the testlists
-	 * specified for this Evaluation
+	 * fitsValue - checks whether the <code>value</code> matches the testlists specified for this Evaluation
 	 * 
-	 * @param value
-	 *            value to test
-	 * @return boolean - true, if the value matches testlists or if testlists
-	 *         are not specified
+	 * @param value value to test
+	 * @return boolean - true, if the value matches testlists or if testlists are not specified
 	 */
 	abstract public boolean fitsValue(String value);
 
 	/**
-	 * fitsValue - checks whether <code>elem</code> matches the testlists
-	 * specified for this Evaluation
+	 * fitsValue - checks whether <code>elem</code> matches the testlists specified for this Evaluation
 	 * 
-	 * @param elem
-	 *            element to test
-	 * @return boolen - true, if the value matches testlists or if testlists are
-	 *         not specified
+	 * @param elem element to test
+	 * @return boolen - true, if the value matches testlists or if testlists are not specified
 	 */
 	public boolean fitsValue(KElement elem)
 	{
@@ -356,8 +344,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	/**
 	 * gets the ListType from a corresponding State/BasicPreflightTest element
 	 * 
-	 * @return JDFBasicPreflightTest::EnumListType - the value of ListType
-	 *         attribute
+	 * @return JDFBasicPreflightTest::EnumListType - the value of ListType attribute
 	 */
 	public JDFBasicPreflightTest.EnumListType getListType()
 	{
@@ -373,8 +360,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	/**
 	 * gets the XPath to the attributes of a given JDF node
 	 * 
-	 * @param jdf
-	 *            JDF node to test
+	 * @param jdf JDF node to test
 	 * @return String - the XPath to the attributes
 	 */
 	protected String getEvalXPath(KElement jdf)
@@ -548,7 +534,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * setRefTarget() set the target referencened in @rRef
-	 * @param e 
+	 * 
+	 * @param e
 	 * 
 	 */
 	public void setRefTarget(JDFElement e)
@@ -567,8 +554,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	/**
 	 * getRefTarget() get the target referencened in @rRef
 	 * 
-	 * @return ICapabilityElement the referenced element, either state or a
-	 *         devcap
+	 * @return ICapabilityElement the referenced element, either state or a devcap
 	 */
 	public ICapabilityElement getRefTarget()
 	{
@@ -598,10 +584,9 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * Sets String attribute <code>rRef</code><br>
-	 * Since rRef is independent of the data type of the State element, the
-	 * setter is defined here
+	 * Since rRef is independent of the data type of the State element, the setter is defined here
 	 * 
-	 * @param  value the value to set the attribute to
+	 * @param value the value to set the attribute to
 	 */
 	public void setrRef(String value)
 	{
@@ -610,8 +595,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * Gets String attribute <code>rRef</code><br>
-	 * Since rRef is independent of the data type of the State element,the
-	 * getter is defined here
+	 * Since rRef is independent of the data type of the State element,the getter is defined here
 	 * 
 	 * @return String: the attribute value
 	 */
@@ -622,10 +606,9 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * Sets String attribute <code>rRef</code><br>
-	 * Since rRef is independent of the data type of the State element, the
-	 * setter is defined here
+	 * Since rRef is independent of the data type of the State element, the setter is defined here
 	 * 
-	 * @param  value the value to set the attribute to
+	 * @param value the value to set the attribute to
 	 */
 	public void setPath(String value)
 	{
@@ -647,8 +630,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	 */
 	// @{
 	/**
-	 * Get element <code>BasicPreflightTest</code>. Creates it if it doesn't
-	 * exist
+	 * Get element <code>BasicPreflightTest</code>. Creates it if it doesn't exist
 	 * <p>
 	 * default: getCreateBasicPreflightTest(0
 	 * 
@@ -660,13 +642,11 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	}
 
 	/**
-	 * Gets the iSkip-th element <code>BasicPreflightTest</code>. If doesn't
-	 * exist, creates it
+	 * Gets the iSkip-th element <code>BasicPreflightTest</code>. If doesn't exist, creates it
 	 * <p>
 	 * default getCreateBasicPreflightTest(0)
 	 * 
-	 * @param iSkip
-	 *            number of elements to skip
+	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest: the matching element
 	 * @deprecated use getCreateBasicPreflightTest()
 	 */
@@ -691,8 +671,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	 * <p>
 	 * default: getBasicPreflightTest(0)
 	 * 
-	 * @param iSkip
-	 *            number of elements to skip
+	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest: the matching element or null
 	 * @deprecated use getBasicPreflightTest()
 	 */
@@ -703,8 +682,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	}
 
 	/**
-	 * Appends element <code>BasicPreflightTest</code> to the end of
-	 * <code>this</code>
+	 * Appends element <code>BasicPreflightTest</code> to the end of <code>this</code>
 	 * 
 	 * @return JDFBasicPreflightTest: newly created BasicPreflightTest element
 	 * @deprecated use appendBasicPreflightTest(name)
@@ -716,11 +694,9 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	}
 
 	/**
-	 * Appends element <code>BasicPreflightTest</code> to the end of
-	 * <code>this</code> and sets @Name to name
+	 * Appends element <code>BasicPreflightTest</code> to the end of <code>this</code> and sets @Name to name
 	 * 
-	 * @param testName
-	 *            the new Name attribute of the BasicPreflightTest
+	 * @param testName the new Name attribute of the BasicPreflightTest
 	 * @return JDFBasicPreflightTest: newly created BasicPreflightTest element
 	 */
 	public JDFBasicPreflightTest appendBasicPreflightTest(String testName)

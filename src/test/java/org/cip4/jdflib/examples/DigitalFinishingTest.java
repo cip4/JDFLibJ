@@ -183,6 +183,7 @@ public class DigitalFinishingTest extends ExampleTest
 		final JDFNode n = jdfDoc.getJDFRoot();
 		n.setJobID("J1");
 		n.setType(JDFNode.EnumType.ProcessGroup);
+		n.setVersion(EnumVersion.Version_1_5);
 
 		JDFNode idp = n.addCombined(new VString("DigitalPrinting", null));
 		JDFComponent c = (JDFComponent) idp.addResource(ElementName.COMPONENT, null);
@@ -251,7 +252,7 @@ public class DigitalFinishingTest extends ExampleTest
 		c.setAttribute("Automation", "Dynamic");
 		c.setPipeID("PipeSheet");
 		c.setPipeProtocol("JMFPush");
-		c.setPipeURL("http:foo.com");
+		c.setPipeURL("http://foo.com");
 		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 
 		c = (JDFComponent) c.addPartition(EnumPartIDKey.SetIndex, "0~-1");
