@@ -137,17 +137,17 @@ public class CADTest extends JDFTestCaseBase
 		final StatusCounter sc = new StatusCounter(null, null, null);
 		sc.setDeviceID("EngView");
 		JDFDoc dJMF = sc.getDocJMFPhaseTime();
-		writeTest(dJMF, "Idle.jmf");
+		// writeTest(dJMF, "Idle.jmf");
 		sc.setActiveNode(n, null, null);
 		sc.setPhase(EnumNodeStatus.InProgress, "Processing", EnumDeviceStatus.Running, "inUse");
 		dJMF = sc.getDocJMFPhaseTime();
-		writeTest(dJMF, "Running.jmf");
+		// writeTest(dJMF, "Running.jmf");
 		sc.setPhase(EnumNodeStatus.Completed, null, EnumDeviceStatus.Idle, null);
 		dJMF = sc.getDocJMFPhaseTime();
-		writeTest(dJMF, "Completed.jmf");
+		// writeTest(dJMF, "Completed.jmf");
 		sc.setActiveNode(null, null, null);
 
-		writeTest(dJMF, "CompletedShapeDef.jmf");
+		// writeTest(dJMF, "CompletedShapeDef.jmf");
 
 	}
 
