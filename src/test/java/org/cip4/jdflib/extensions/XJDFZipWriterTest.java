@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,14 +68,19 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.zip.ZipReader;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class XJDFZipWriterTest extends JDFTestCaseBase
@@ -93,7 +98,24 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 		w.addXJDF(h);
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		w.writeStream(ios);
-		Assertions.assertTrue(ios.size() > 13);
+		assertTrue(ios.size() > 13);
+	}
+
+	/**
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public void testMultiXJDF() throws IOException
+	{
+		final XJDFZipWriter w = new XJDFZipWriter();
+		for (int i = 0; i < 3; i++)
+		{
+			final XJDFHelper h = new XJDFHelper("j1", "p" + i, null);
+			w.addXJDF(h);
+		}
+		File f = FileUtil.writeFile(w, new File(sm_dirTestDataTemp + "multi.xjdf.zip"));
+		assertNotNull(f);
 	}
 
 	/**
@@ -107,7 +129,67 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 		final XJDFZipWriter w = new XJDFZipWriter();
 		w.addXJDF(h);
 		final XJMFHelper jmf = w.ensureXJMF();
-		Assertions.assertEquals("xjdf/j1.00.xjdf", jmf.getXPathValue("CommandSubmitQueueEntry/QueueSubmissionParams/@URL"));
+		assertEquals("xjdf/j1.00.xjdf", jmf.getXPathValue("CommandSubmitQueueEntry/QueueSubmissionParams/@URL"));
+	}
+
+	/**
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public void testToString() throws IOException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final XJDFZipWriter w = new XJDFZipWriter();
+		w.addXJDF(h);
+		final XJMFHelper jmf = w.ensureXJMF();
+		assertNotNull(w.toString());
+	}
+
+	/**
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public void testEnsureXJMFReturn() throws IOException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final XJDFZipWriter w = new XJDFZipWriter();
+		w.setCommandType(EnumType.ReturnQueueEntry);
+		w.setQeID("q1");
+		assertEquals("q1", w.getQeID());
+		assertEquals(EnumType.ReturnQueueEntry, w.getCommandType());
+		w.addXJDF(h);
+		final XJMFHelper jmf = w.ensureXJMF();
+		assertEquals("xjdf/j1.00.xjdf", jmf.getXPathValue("CommandReturnQueueEntry/ReturnQueueEntryParams/@URL"));
+	}
+
+	/**
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public void testSetCommand() throws IOException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final XJDFZipWriter w = new XJDFZipWriter();
+		assertThrows(IllegalArgumentException.class, () -> w.setCommandType(null));
+	}
+
+	/**
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public void testEnsureXJMFResubmit() throws IOException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final XJDFZipWriter w = new XJDFZipWriter();
+		w.setCommandType(EnumType.ResubmitQueueEntry);
+		w.setQeID("q1");
+		w.addXJDF(h);
+		final XJMFHelper jmf = w.ensureXJMF();
+		assertEquals("xjdf/j1.00.xjdf", jmf.getXPathValue("CommandResubmitQueueEntry/ResubmissionParams/@URL"));
 	}
 
 	/**
@@ -125,8 +207,8 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 		file.delete();
 		FileUtil.writeFile(w, file);
 		final ZipReader zr = new ZipReader(file);
-		Assertions.assertNotNull(zr.getEntry("pdf/foo.pdf"));
-		Assertions.assertNotNull(zr.getInputStream());
+		assertNotNull(zr.getEntry("pdf/foo.pdf"));
+		assertNotNull(zr.getInputStream());
 
 	}
 
@@ -143,10 +225,10 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 		final File file = new File(sm_dirTestDataTemp + "testx.zip");
 		file.delete();
 		FileUtil.writeFile(w, file);
-		Assertions.assertTrue(file.canRead());
+		assertTrue(file.canRead());
 		final ZipReader zr = new ZipReader(file);
 		zr.getNextEntry();
-		Assertions.assertNotNull(zr.getXMLDoc());
+		assertNotNull(zr.getXMLDoc());
 	}
 
 }

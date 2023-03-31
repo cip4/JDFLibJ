@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -111,6 +113,28 @@ public class XJDFProcessExampleTest extends ExampleTest
 
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "processes/CombinedExample.xjdf");
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public final void testConventionalPrinting()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper("ConventionalPrintingExample", null, null);
+		xjdfHelper.addType(EnumType.ConventionalPrinting);
+		SetHelper cpp = xjdfHelper.getCreateSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+		cpp.getCreateResource(0, true).setResourceAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
+
+		SetHelper inComp = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
+		SetHelper outComp = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
+		SetHelper mediaSet = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
+		ResourceHelper media = mediaSet.getCreateResource();
+		media.ensureReference(inComp.getCreateResource(), null);
+		media.ensureReference(outComp.getCreateResource(), null);
+		media.setResourceEnum(AttributeName.MEDIATYPE, EnumMediaType.Paper);
+		writeTest(xjdfHelper, "processes/ConventionalPrintingExample.xjdf");
 	}
 
 	/**

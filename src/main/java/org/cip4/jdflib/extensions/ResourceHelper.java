@@ -38,6 +38,7 @@ package org.cip4.jdflib.extensions;
 
 import java.util.Collection;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
@@ -543,6 +544,14 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public void setResourceAttribute(final String attrib, final String value)
 	{
 		getCreateResource().setAttribute(attrib, value);
+	}
+
+	/**
+	 *
+	 */
+	public void setResourceEnum(final String attrib, final ValuedEnum value)
+	{
+		setResourceAttribute(attrib, value == null ? null : value.getName());
 	}
 
 	/**

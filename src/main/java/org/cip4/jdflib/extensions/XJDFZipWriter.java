@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,9 +71,9 @@ package org.cip4.jdflib.extensions;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -82,9 +82,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.ifaces.IStreamWriter;
+import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFQueueSubmissionParams;
+import org.cip4.jdflib.jmf.JDFResubmissionParams;
+import org.cip4.jdflib.jmf.JDFReturnQueueEntryParams;
 import org.cip4.jdflib.util.NumberFormatter;
 import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.StringUtil;
@@ -96,9 +99,9 @@ public class XJDFZipWriter implements IStreamWriter
 	{
 		super();
 		xjmf = null;
-		vxjdf = new Vector<>();
+		vxjdf = new ArrayList<>();
 		auxMap = new HashMap<>();
-		log = LogFactory.getLog(getClass());
+		commandType = EnumType.SubmitQueueEntry;
 	}
 
 	/**
@@ -130,10 +133,13 @@ public class XJDFZipWriter implements IStreamWriter
 		}
 	}
 
-	Log log;
+	private static final Log log = LogFactory.getLog(XJDFZipWriter.class);
+
 	private XJMFHelper xjmf;
-	private final Vector<XJDFHelper> vxjdf;
+	private final ArrayList<XJDFHelper> vxjdf;
 	private final Map<String, InputStream> auxMap;
+	private EnumType commandType;
+	private String qeID;
 
 	void writeAux(final ZipOutputStream zos)
 	{
@@ -226,8 +232,22 @@ public class XJDFZipWriter implements IStreamWriter
 		if (xjmf == null)
 		{
 			xjmf = new XJMFHelper();
-			final MessageHelper mh = xjmf.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry);
-			final JDFQueueSubmissionParams qsp = (JDFQueueSubmissionParams) mh.appendElement(ElementName.QUEUESUBMISSIONPARAMS);
+			final MessageHelper mh = xjmf.appendMessage(EnumFamily.Command, commandType);
+			IURLSetter qsp = null;
+			if (EnumType.SubmitQueueEntry.equals(commandType))
+			{
+				qsp = (JDFQueueSubmissionParams) mh.appendElement(ElementName.QUEUESUBMISSIONPARAMS);
+			}
+			else if (EnumType.ResubmitQueueEntry.equals(commandType))
+			{
+				qsp = (JDFResubmissionParams) mh.appendElement(ElementName.RESUBMISSIONPARAMS);
+				((JDFResubmissionParams) qsp).setQueueEntryID(qeID);
+			}
+			else if (EnumType.ReturnQueueEntry.equals(commandType))
+			{
+				qsp = (JDFReturnQueueEntryParams) mh.appendElement(ElementName.RETURNQUEUEENTRYPARAMS);
+				((JDFReturnQueueEntryParams) qsp).setQueueEntryID(qeID);
+			}
 			if (vxjdf.size() == 1)
 			{
 				qsp.setURL(getXJDFPath(0));
@@ -274,13 +294,32 @@ public class XJDFZipWriter implements IStreamWriter
 		StreamUtil.close(os);
 	}
 
-	/**
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "XJDFZipWriter [" + (xjmf != null ? "xjmf=" + xjmf + ", " : "") + (vxjdf != null ? "vxjdf=" + vxjdf + ", " : "") + (auxMap != null ? "auxMap=" + auxMap : "") + "]";
+		return "XJDFZipWriter [commandType=" + commandType + ", qeID=" + qeID + ", xjmf=" + xjmf + ", vxjdf=" + vxjdf.size() + "]";
+	}
+
+	public EnumType getCommandType()
+	{
+		return commandType;
+	}
+
+	public void setCommandType(EnumType commandType)
+	{
+		if (!EnumType.SubmitQueueEntry.equals(commandType) && !EnumType.ResubmitQueueEntry.equals(commandType) && !EnumType.ReturnQueueEntry.equals(commandType))
+			throw new IllegalArgumentException("Invalid command type " + commandType);
+		this.commandType = commandType;
+	}
+
+	public String getQeID()
+	{
+		return qeID;
+	}
+
+	public void setQeID(String qeID)
+	{
+		this.qeID = qeID;
 	}
 
 }

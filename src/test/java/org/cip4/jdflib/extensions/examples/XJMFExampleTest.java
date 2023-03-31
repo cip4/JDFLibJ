@@ -184,6 +184,22 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
+	public void testCommandReturnQE()
+	{
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ReturnQueueEntry.getName());
+		command.setXPathValue(ElementName.RETURNQUEUEENTRYPARAMS + "/@" + AttributeName.URL, "http://device.xjdf.org?job1");
+		command.setXPathValue(ElementName.RETURNQUEUEENTRYPARAMS + "/@" + AttributeName.QUEUEENTRYID, "qe1");
+		command.getHeader().setAttribute(AttributeName.ID, "C1");
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "structure/commandReturnQE.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testCommandResubmitQERemove()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
