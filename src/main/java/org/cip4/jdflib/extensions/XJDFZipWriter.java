@@ -233,7 +233,7 @@ public class XJDFZipWriter implements IStreamWriter
 		{
 			xjmf = new XJMFHelper();
 			final MessageHelper mh = xjmf.appendMessage(EnumFamily.Command, commandType);
-			IURLSetter qsp = null;
+			final IURLSetter qsp;
 			if (EnumType.SubmitQueueEntry.equals(commandType))
 			{
 				qsp = (JDFQueueSubmissionParams) mh.appendElement(ElementName.QUEUESUBMISSIONPARAMS);
@@ -247,6 +247,11 @@ public class XJDFZipWriter implements IStreamWriter
 			{
 				qsp = (JDFReturnQueueEntryParams) mh.appendElement(ElementName.RETURNQUEUEENTRYPARAMS);
 				((JDFReturnQueueEntryParams) qsp).setQueueEntryID(qeID);
+			}
+			else
+			{
+				log.warn("Invalid command typ" + commandType);
+				return null;
 			}
 			if (vxjdf.size() == 1)
 			{

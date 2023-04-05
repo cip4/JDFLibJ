@@ -210,7 +210,7 @@ public class XJMFExampleTest extends ExampleTest
 		command.getHeader().setAttribute(AttributeName.ID, "C1");
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
-		writeTest(xjmfHelper, "building/commandResubmitQE.xjmf");
+		writeTest(xjmfHelper, "building/commandResubmitQEZapp.xjmf");
 	}
 
 	/**
