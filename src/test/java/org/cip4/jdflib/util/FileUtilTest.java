@@ -47,6 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedInputStream;
@@ -87,6 +88,20 @@ public class FileUtilTest extends JDFTestCaseBase
 			assertTrue(FileUtil.isAbsoluteFile("c:\\a"));
 			assertTrue(FileUtil.isAbsoluteFile(new File("c:/a")));
 		}
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAddSecure()
+	{
+		assertThrows(IllegalArgumentException.class, () -> FileUtil.addSecure(new File("."), null));
+		assertThrows(IllegalArgumentException.class, () -> FileUtil.addSecure(new File("abc"), new File("..")));
+		assertThrows(IllegalArgumentException.class, () -> FileUtil.addSecure(new File("abc"), new File("a/../b")));
+		assertEquals("abc" + File.separatorChar + "a", FileUtil.addSecure(new File("abc"), new File("a")).getPath());
+		assertEquals("abc" + File.separatorChar + "a" + File.separatorChar + "b", FileUtil.addSecure(new File("abc"), new File("a/b")).getPath());
+
 	}
 
 	/**

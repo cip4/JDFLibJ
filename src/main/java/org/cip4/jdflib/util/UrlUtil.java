@@ -1454,6 +1454,31 @@ public class UrlUtil
 	}
 
 	/**
+	 * securely add a subdirectory
+	 * 
+	 * @param baseURL
+	 * @param url
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	public static String addSecure(String baseURL, String url) throws IllegalArgumentException
+	{
+		if (!isRelativeURL(url))
+			throw new IllegalArgumentException("url must be relative " + url);
+		if (StringUtil.isEmpty(baseURL))
+			throw new IllegalArgumentException("base url must not be empty");
+		if (isRelativeURL(baseURL))
+			throw new IllegalArgumentException("base url must not be relative " + baseURL);
+		if (StringUtil.hasToken(baseURL, "..", "/\\", 0))
+			throw new IllegalArgumentException("base url must not contain .. " + baseURL);
+		if (StringUtil.hasToken(url, "..", "/\\", 0))
+			throw new IllegalArgumentException("url must not contain .. " + url);
+
+		return StringUtil.addToken(baseURL, JDFConstants.SLASH, url);
+
+	}
+
+	/**
 	 * concatenate directory and url to a single path IF and only IF url is a relative url<br>
 	 * relative urls MUST NOT have a scheme (e.g. file:)
 	 *

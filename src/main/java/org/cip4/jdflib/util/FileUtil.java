@@ -1114,6 +1114,29 @@ public class FileUtil
 	}
 
 	/**
+	 * securely add a subdirectory
+	 * 
+	 * @param baseFile
+	 * @param file
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	public static File addSecure(File baseFile, File file) throws IllegalArgumentException
+	{
+		if (file == null || isAbsoluteFile(file))
+			throw new IllegalArgumentException("file must be relative " + file);
+		if (baseFile == null)
+			throw new IllegalArgumentException("base file must not be null");
+		if (StringUtil.hasToken(baseFile.getPath(), "..", "/\\", 0))
+			throw new IllegalArgumentException("base path must not contain .. " + baseFile);
+		if (StringUtil.hasToken(file.getPath(), "..", "/\\", 0))
+			throw new IllegalArgumentException("file must not contain .. " + file);
+
+		return new File(baseFile, file.getPath());
+
+	}
+
+	/**
 	 * forces deletion of a file
 	 *
 	 * @param file the file to delete

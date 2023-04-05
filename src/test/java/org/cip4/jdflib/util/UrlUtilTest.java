@@ -47,6 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
@@ -1022,6 +1023,20 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("File://b.pdf", UrlUtil.cleanDots("File://a/.././c/../b.pdf"));
 		assertEquals("File:///c:/b.pdf", UrlUtil.cleanDots("File:///c:/a/.././c/../b.pdf"));
 		assertEquals("/.", UrlUtil.cleanDots("/."));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAddSecure()
+	{
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addSecure(".", null));
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addSecure("file://abc", ".."));
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addSecure("file://abc", "a/../c"));
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addSecure("file://abc", "a\\..\\b"));
+		assertEquals("file://abc/a/b", UrlUtil.addSecure("file://abc", "a/b"));
+		assertEquals("file://abc/a/b", UrlUtil.addSecure("file://abc/", "a/b"));
 	}
 
 	/**
