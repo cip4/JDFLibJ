@@ -250,7 +250,7 @@ public class XJDFZipWriter implements IStreamWriter
 			}
 			else
 			{
-				log.warn("Invalid command typ" + commandType);
+				// can never get here
 				return null;
 			}
 			if (vxjdf.size() == 1)

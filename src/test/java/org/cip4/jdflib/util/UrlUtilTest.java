@@ -1032,6 +1032,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	public void testAddSecure()
 	{
 		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addSecure(".", null));
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addSecure("a", "b"));
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addSecure("file://abc", ""));
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addSecure("file://abc/../c", "a"));
 		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addSecure("file://abc", ".."));
 		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addSecure("file://abc", "a/../c"));
 		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addSecure("file://abc", "a\\..\\b"));

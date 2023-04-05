@@ -97,7 +97,9 @@ public class FileUtilTest extends JDFTestCaseBase
 	public void testAddSecure()
 	{
 		assertThrows(IllegalArgumentException.class, () -> FileUtil.addSecure(new File("."), null));
+		assertThrows(IllegalArgumentException.class, () -> FileUtil.addSecure(null, new File("a")));
 		assertThrows(IllegalArgumentException.class, () -> FileUtil.addSecure(new File("abc"), new File("..")));
+		assertThrows(IllegalArgumentException.class, () -> FileUtil.addSecure(new File("abc/../a"), new File("a")));
 		assertThrows(IllegalArgumentException.class, () -> FileUtil.addSecure(new File("abc"), new File("a/../b")));
 		assertEquals("abc" + File.separatorChar + "a", FileUtil.addSecure(new File("abc"), new File("a")).getPath());
 		assertEquals("abc" + File.separatorChar + "a" + File.separatorChar + "b", FileUtil.addSecure(new File("abc"), new File("a/b")).getPath());

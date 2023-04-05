@@ -174,6 +174,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();
 		assertThrows(IllegalArgumentException.class, () -> w.setCommandType(null));
+		assertThrows(IllegalArgumentException.class, () -> w.setCommandType(EnumType.CloseQueue));
 	}
 
 	/**
