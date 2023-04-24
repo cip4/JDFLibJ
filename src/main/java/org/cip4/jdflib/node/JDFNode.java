@@ -114,6 +114,7 @@ import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.pool.JDFStatusPool;
 import org.cip4.jdflib.resource.JDFCreated;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
@@ -3326,7 +3327,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public VElement getPredecessors(final boolean bPre, final boolean bDirect)
 	{
 		final HashSet<KElement> hashSet = new HashSet<>();
-		getPredecessorImpl(bPre, bDirect, hashSet);
+		final HashSet<String> done = new HashSet<>();
+		getPredecessorImpl(bPre, bDirect, hashSet, done);
 		final VElement v = new VElement();
 		v.addAll(hashSet);
 		return v;
@@ -3338,8 +3340,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @param bPre
 	 * @param bDirect
 	 * @param h
+	 * @param done
 	 */
-	private void getPredecessorImpl(final boolean bPre, final boolean bDirect, final HashSet<KElement> h)
+	void getPredecessorImpl(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, HashSet<String> done)
 	{
 		final JDFResourceLinkPool rlp = getResourceLinkPool();
 
@@ -3350,7 +3353,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			for (final KElement resElem : vLoc)
 			{
+				if ((resElem instanceof JDFNodeInfo) || (resElem instanceof JDFDevice))
+				{
+					continue;
+				}
 				final JDFResource r = (JDFResource) resElem;
+				String id = r.getID();
+				if (!done.add(id))
+				{
+					continue;
+				}
 				// get all creator or consumer processes
 				final VElement vNode = r.getCreator(bPre);
 
@@ -3380,7 +3392,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 							if (!bDirect)
 							{
-								p.getPredecessorImpl(bPre, bDirect, h);
+								p.getPredecessorImpl(bPre, bDirect, h, done);
 							}
 						}
 					}
