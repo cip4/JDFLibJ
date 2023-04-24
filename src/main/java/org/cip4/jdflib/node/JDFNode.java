@@ -3371,30 +3371,29 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					final JDFResourceLink rl = getLink(r, bPre ? EnumUsage.Input : EnumUsage.Output);
 					if (rl != null)
 					{
-						final VJDFAttributeMap vMaps = rl.getPartMapVector();
-						for (final KElement nodeElem : vNode)
-						{
-							final JDFNode p = (JDFNode) nodeElem;
-							if (h.contains(p) || p == this)
-							{
-								continue; // snafu
-							}
-							final JDFResourceLink rl2 = p.getLink(r, bPre ? EnumUsage.Output : EnumUsage.Input);
-							if (rl2 == null)
-							{
-								continue;
-							}
-							if (vMaps != null && !vMaps.overlapsMap(rl2.getPartMapVector()))
-							{
-								continue;
-							}
-							h.add(p);
+						checkPredecessorLink(bPre, bDirect, h, done, r, vNode, rl);
+					}
+				}
+			}
+		}
+	}
 
-							if (!bDirect)
-							{
-								p.getPredecessorImpl(bPre, bDirect, h, done);
-							}
-						}
+	void checkPredecessorLink(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, HashSet<String> done, final JDFResource r, final VElement vNode, final JDFResourceLink rl)
+	{
+		final VJDFAttributeMap vMaps = rl.getPartMapVector();
+		for (final KElement nodeElem : vNode)
+		{
+			final JDFNode p = (JDFNode) nodeElem;
+			if (!h.contains(p) && p != this)
+			{
+				final JDFResourceLink rl2 = p.getLink(r, bPre ? EnumUsage.Output : EnumUsage.Input);
+				if ((rl2 != null) && (vMaps == null || vMaps.overlapsMap(rl2.getPartMapVector())))
+				{
+					h.add(p);
+
+					if (!bDirect)
+					{
+						p.getPredecessorImpl(bPre, bDirect, h, done);
 					}
 				}
 			}
