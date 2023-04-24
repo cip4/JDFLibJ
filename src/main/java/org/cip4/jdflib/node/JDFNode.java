@@ -3353,26 +3353,29 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			for (final KElement resElem : vLoc)
 			{
-				if ((resElem instanceof JDFNodeInfo) || (resElem instanceof JDFDevice))
+				if (!(resElem instanceof JDFNodeInfo) && !(resElem instanceof JDFDevice))
 				{
-					continue;
+					checkPredecessorResource(bPre, bDirect, h, done, resElem);
 				}
-				final JDFResource r = (JDFResource) resElem;
-				String id = r.getID();
-				if (!done.add(id))
-				{
-					continue;
-				}
-				// get all creator or consumer processes
-				final VElement vNode = r.getCreator(bPre);
+			}
+		}
+	}
 
-				if (vNode != null)
+	protected void checkPredecessorResource(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, HashSet<String> done, final KElement resElem)
+	{
+		final JDFResource r = (JDFResource) resElem;
+		String id = r.getID();
+		if (done.add(id))
+		{
+			// get all creator or consumer processes
+			final VElement vNode = r.getCreator(bPre);
+
+			if (vNode != null)
+			{
+				final JDFResourceLink rl = getLink(r, bPre ? EnumUsage.Input : EnumUsage.Output);
+				if (rl != null)
 				{
-					final JDFResourceLink rl = getLink(r, bPre ? EnumUsage.Input : EnumUsage.Output);
-					if (rl != null)
-					{
-						checkPredecessorLink(bPre, bDirect, h, done, r, vNode, rl);
-					}
+					checkPredecessorLink(bPre, bDirect, h, done, r, vNode, rl);
 				}
 			}
 		}
