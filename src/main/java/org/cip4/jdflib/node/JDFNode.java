@@ -68,6 +68,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -1651,6 +1652,41 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			}
 
 			return bRet;
+		}
+	}
+
+	private static class ResPart
+	{
+		ResPart(JDFResource res)
+		{
+			super();
+			this.res = res;
+			this.part = res.getAttributeMap();
+		}
+
+		private JDFResource res;
+		private JDFAttributeMap part;
+
+		@Override
+		public int hashCode()
+		{
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + Objects.hash(part, res);
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj)
+		{
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			ResPart other = (ResPart) obj;
+			return Objects.equals(part, other.part) && Objects.equals(res, other.res);
 		}
 	}
 
@@ -3327,7 +3363,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public VElement getPredecessors(final boolean bPre, final boolean bDirect)
 	{
 		final HashSet<KElement> hashSet = new HashSet<>();
-		final HashSet<String> done = new HashSet<>();
+		final HashSet<ResPart> done = new HashSet<>();
 		getPredecessorImpl(bPre, bDirect, hashSet, done);
 		final VElement v = new VElement();
 		v.addAll(hashSet);
@@ -3342,7 +3378,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @param h
 	 * @param done
 	 */
-	void getPredecessorImpl(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, HashSet<String> done)
+	void getPredecessorImpl(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, HashSet<ResPart> done)
 	{
 		final JDFResourceLinkPool rlp = getResourceLinkPool();
 
@@ -3361,10 +3397,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		}
 	}
 
-	protected void checkPredecessorResource(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, HashSet<String> done, final KElement resElem)
+	protected void checkPredecessorResource(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, HashSet<ResPart> done, final KElement resElem)
 	{
 		final JDFResource r = (JDFResource) resElem;
-		String id = r.getID();
+		ResPart id = new ResPart(r);
 		if (done.add(id))
 		{
 			// get all creator or consumer processes
@@ -3381,7 +3417,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		}
 	}
 
-	void checkPredecessorLink(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, HashSet<String> done, final JDFResource r, final VElement vNode, final JDFResourceLink rl)
+	void checkPredecessorLink(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, HashSet<ResPart> done, final JDFResource r, final VElement vNode, final JDFResourceLink rl)
 	{
 		final VJDFAttributeMap vMaps = rl.getPartMapVector();
 		for (final KElement nodeElem : vNode)
