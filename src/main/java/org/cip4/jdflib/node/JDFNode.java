@@ -1655,13 +1655,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		}
 	}
 
-	private static class ResPart
+	static class ResPart
 	{
 		ResPart(JDFResource res)
 		{
 			super();
 			this.res = res;
-			this.part = res.getAttributeMap();
+			this.part = res == null ? null : res.getAttributeMap();
 		}
 
 		private JDFResource res;

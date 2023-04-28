@@ -40,6 +40,7 @@ package org.cip4.jdflib.node;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -82,6 +83,7 @@ import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.node.JDFNode.ResPart;
 import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
@@ -122,11 +124,28 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 *
 	 *
 	 */
+	@Test
 	public void testgetLinkedResourceVector()
 	{
 		final JDFNode n = creatXMDoc().getJDFRoot();
 		assertNull(n.getLinkedResourceVector(EnumUsage.Output, ElementName.EXPOSEDMEDIA, null, true));
 		assertEquals(n.getLinkedResourceVector(EnumUsage.Input, ElementName.EXPOSEDMEDIA, null, true).size(), 8);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testRespartEquals()
+	{
+		ResPart rp0 = new ResPart(null);
+		assertFalse(rp0.equals(null));
+		assertTrue(rp0.equals(rp0));
+		assertTrue(rp0.equals(new ResPart(null)));
+		JDFResource r = (JDFResource) JDFElement.createRoot(ElementName.RUNLIST);
+		assertEquals(new ResPart(r), new ResPart(r));
+		assertNotEquals(new ResPart(r), rp0);
 	}
 
 	/**
