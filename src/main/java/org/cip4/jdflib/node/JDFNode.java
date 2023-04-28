@@ -2372,18 +2372,18 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * get the node's partition status, even if the link does not match mattr
 	 *
-	 * @param mattr Attribute map of partition
+	 * @param attMap Attribute map of partition
 	 * @param method : -1, 0 or 1; -1 min status; 0 equals, 1 max status
 	 * @return JDFElement.EnumNodeStatus: Status of the partition, null if no Status exists
 	 */
-	public JDFElement.EnumNodeStatus getPartStatus(final JDFAttributeMap mattr, final int method)
+	public JDFElement.EnumNodeStatus getPartStatus(final JDFAttributeMap attMap, final int method)
 	{
-		EnumNodeStatus stat = getStatus();
-		if ((stat != EnumNodeStatus.Pool) && (stat != EnumNodeStatus.Part))
+		EnumNodeStatus status = getStatus();
+		if ((status != EnumNodeStatus.Pool) && (status != EnumNodeStatus.Part))
 		{
-			return stat;
+			return status;
 		}
-		else if (stat == EnumNodeStatus.Part)
+		else if (status == EnumNodeStatus.Part)
 		{
 			final JDFNodeInfo niBase = getNodeInfo();
 			if (niBase == null)
@@ -2391,26 +2391,26 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				return null;
 			}
 			// this is required to compare lower partitions
-			final int numParts = mattr == null ? 0 : mattr.size();
-			JDFNodeInfo ni = (JDFNodeInfo) niBase.getPartition(mattr, null);
+			final int numParts = attMap == null ? 0 : attMap.size();
+			JDFNodeInfo ni = (JDFNodeInfo) niBase.getPartition(attMap, null);
 			if (ni == null)
 			{
-				ni = (JDFNodeInfo) niBase.getResourceRoot().getPartition(mattr, null);
+				ni = (JDFNodeInfo) niBase.getResourceRoot().getPartition(attMap, null);
 			}
 			if (ni == null)
 			{
 				return null;
 			}
 			JDFAttributeMap identicalSrcMap = null;
-			if (mattr != null && !mattr.overlapMap(ni.getPartMap()))
+			if (attMap != null && !attMap.overlapMap(ni.getPartMap()))
 			{
 				final PartitionGetter partitionGetter = new PartitionGetter(niBase);
 				partitionGetter.setFollowIdentical(false);
-				final JDFNodeInfo identicalSrc = (JDFNodeInfo) partitionGetter.getPartition(mattr, null);
+				final JDFNodeInfo identicalSrc = (JDFNodeInfo) partitionGetter.getPartition(attMap, null);
 				if (identicalSrc != null)
 					identicalSrcMap = identicalSrc.getPartMap();
 			}
-			stat = null;
+			status = null;
 
 			final List<JDFResource> vLeaves = ni.getLeafArray(false);
 			final int size = vLeaves.size();
@@ -2421,7 +2421,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				JDFAttributeMap map = niCmp.getPartMap();
 				if (identicalSrcMap != null)
 					map.putAll(identicalSrcMap);
-				if (map != null && !JDFPart.overlapPartMap(map, mattr, false))
+				if (map != null && !JDFPart.overlapPartMap(map, attMap, false))
 				{
 					continue;
 				}
@@ -2429,11 +2429,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				{
 					final int mapParts = map == null ? 0 : map.size();
 					final EnumNodeStatus nodeStatus = niCmp.getNodeStatus();
-					if (!ContainerUtil.equals(nodeStatus, stat))
+					if (!ContainerUtil.equals(nodeStatus, status))
 					{
-						if (stat == null)
+						if (status == null)
 						{
-							stat = nodeStatus;
+							status = nodeStatus;
 						}
 						else if (nodeStatus == null || method == 0)
 						{
@@ -2441,11 +2441,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 						}
 						else if (method < 0)
 						{
-							stat = (EnumNodeStatus) EnumUtil.min(stat, nodeStatus);
+							status = (EnumNodeStatus) EnumUtil.min(status, nodeStatus);
 						}
 						else if (method > 0)
 						{
-							stat = (EnumNodeStatus) EnumUtil.max(stat, nodeStatus);
+							status = (EnumNodeStatus) EnumUtil.max(status, nodeStatus);
 						}
 					}
 					final KElement parent = niCmp.getParentNode_KElement();
@@ -2462,25 +2462,25 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					}
 				}
 			}
-			if (stat == null)
+			if (status == null)
 			{
-				ni = (JDFNodeInfo) ni.getPartition(mattr, null);
+				ni = (JDFNodeInfo) ni.getPartition(attMap, null);
 				if (ni != null)
 				{
-					stat = ni.getNodeStatus();
+					status = ni.getNodeStatus();
 				}
 			}
 		}
-		else if (stat == EnumNodeStatus.Pool)
+		else if (status == EnumNodeStatus.Pool)
 		{
 			final JDFStatusPool statusPool = getStatusPool();
 			if (statusPool == null)
 			{
 				return null;
 			}
-			stat = statusPool.getStatus(mattr);
+			status = statusPool.getStatus(attMap);
 		}
-		return stat;
+		return status;
 	}
 
 	/**
@@ -2634,19 +2634,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public VJDFAttributeMap getNodeInfoPartMapVector()
 	{
-		VJDFAttributeMap vm = getPartMapVector();
-		if (vm == null)
+		VJDFAttributeMap parts = getPartMapVector();
+		if (parts == null)
 		{
 			final JDFNodeInfo ni = getNodeInfo();
-			vm = ni == null ? null : ni.getPartMapVector(false);
-			if (vm == null)
+			parts = ni == null ? null : ni.getPartMapVector(false);
+			if (parts == null)
 			{
 				final JDFResource output = getResource(null, EnumUsage.Output, null, 0);
-				vm = output == null ? null : output.getPartMapVector(false);
+				parts = output == null ? null : output.getPartMapVector(false);
 			}
 
 		}
-		return vm == null || vm.size() == 0 ? null : vm;
+		return ContainerUtil.isEmpty(parts) ? null : parts;
 	}
 
 	/**
