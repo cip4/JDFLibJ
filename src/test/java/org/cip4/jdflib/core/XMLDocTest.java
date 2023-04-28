@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -869,6 +869,28 @@ public class XMLDocTest extends JDFTestCaseBase
 		d.write2Stream(bos, 2, false);
 		s = new String(bos.getBuf());
 		assertTrue(s.indexOf(text) > 0);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testWriteToStreamNull()
+	{
+		final XMLDoc d = new XMLDoc("a", null);
+		final KElement e = d.getRoot();
+		final KElement b = e.appendElement("b");
+		try
+		{
+			d.write2Stream(null, 2, false);
+		}
+		catch (IOException e1)
+		{
+			// TODO Auto-generated catch block
+			log.info("boom", e1);
+			return;
+		}
+		fail("no exception");
 	}
 
 	/**
