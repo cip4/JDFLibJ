@@ -1340,9 +1340,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			}
 
 			// loop over all links and remove non-matching entries
-			for (int i = vLinks.size() - 1; i >= 0; i--)
+			for (int iLink = vLinks.size() - 1; iLink >= 0; iLink--)
 			{
-				final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
+				final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(iLink);
 				final JDFIntegerList cpi = rl.getCombinedProcessIndex();
 				if (cpi != null) // there is a cpi, check if it matches
 				{
@@ -1385,11 +1385,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					// found non matching cpi - remove link
 					if (!bFound)
 					{
-						vLinks.remove(i);
+						vLinks.remove(iLink);
 					}
 				}
 			}
-			return vLinks.size() == 0 ? null : vLinks;
+			return vLinks.isEmpty() ? null : vLinks;
 		}
 
 		/**
@@ -1687,6 +1687,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				return false;
 			ResPart other = (ResPart) obj;
 			return Objects.equals(part, other.part) && Objects.equals(res, other.res);
+		}
+
+		@Override
+		public String toString()
+		{
+			return "ResPart [res=" + res + ", part=" + part + "]";
 		}
 	}
 

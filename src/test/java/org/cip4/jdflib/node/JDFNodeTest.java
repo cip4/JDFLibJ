@@ -146,6 +146,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		JDFResource r = (JDFResource) JDFElement.createRoot(ElementName.RUNLIST);
 		assertEquals(new ResPart(r), new ResPart(r));
 		assertNotEquals(new ResPart(r), rp0);
+		assertNotNull(rp0.toString());
 	}
 
 	/**
