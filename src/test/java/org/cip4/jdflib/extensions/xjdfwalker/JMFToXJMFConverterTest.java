@@ -421,6 +421,23 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testMessageServiceType()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.KnownMessages);
+		final JDFMessageService ms = jmf.getResponse(0).appendMessageService();
+		ms.setChannelMode(EnumChannelMode.FireAndForget);
+		ms.setType(EnumType.KnownMessages);
+		ms.setQuery(true);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals("QueryKnownMessages", xjmf.getXPathAttribute("ResponseKnownMessages/MessageService/@Type", null));
+		writeRoundTrip(jmf, "MessageService2");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testMessageServiceState()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.KnownMessages);

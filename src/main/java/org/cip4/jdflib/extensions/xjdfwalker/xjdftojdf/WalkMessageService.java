@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFMessageService;
@@ -115,6 +116,7 @@ public class WalkMessageService extends WalkXElement
 	@Override
 	protected void updateAttributes(KElement elem)
 	{
+		JDFMessageService ms = (JDFMessageService) elem;
 		elem.renameAttribute(XJDFConstants.ResponseModes, AttributeName.CHANNELMODE);
 		VString mode = StringUtil.tokenize(elem.getNonEmpty(AttributeName.CHANNELMODE), null, false);
 		if (mode != null)
@@ -125,6 +127,16 @@ public class WalkMessageService extends WalkXElement
 				elem.removeAttribute(AttributeName.CHANNELMODE);
 			}
 		}
+		String t = ms.getType();
+		for (String s : new StringArray("Command Query Signal"))
+		{
+			if (t.startsWith(s))
+			{
+				ms.setAttribute(s, true, null);
+				ms.setType(t.substring(s.length()));
+			}
+		}
+
 		super.updateAttributes(elem);
 	}
 

@@ -73,6 +73,7 @@ import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
@@ -2522,6 +2523,79 @@ class PostXJDFWalker extends BaseElementWalker
 		public VString getElementNames()
 		{
 			return new VString("SignalResource ResponseResource");
+		}
+
+	}
+
+	/**
+	 * class that ensures that we do not have signaturename partitions
+	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 */
+	protected class WalkKnownMessageResponse extends WalkMessage
+	{
+
+		/**
+		 *
+		 */
+		public WalkKnownMessageResponse()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			splitMessageServices(xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		void splitMessageServices(KElement xjdf)
+		{
+			List<JDFMessageService> v = xjdf.getChildArrayByClass(JDFMessageService.class, false, 0);
+			for (JDFMessageService ms : v)
+			{
+				splitMessageService(xjdf, ms);
+			}
+		}
+
+		void splitMessageService(KElement xjdf, JDFMessageService ms)
+		{
+			int i = 0;
+			boolean c = ms.getCommand();
+			boolean s = ms.getSignal();
+			boolean q = ms.getQuery();
+			String t = ms.getType();
+			ms.removeAttributes(new StringArray("Command Query Signal"));
+			if (c)
+			{
+				ms.setType(ElementName.COMMAND + t);
+				i++;
+			}
+			if (s)
+			{
+				JDFMessageService ms0 = (JDFMessageService) (i > 0 ? xjdf.copyElement(ms, ms) : ms);
+				ms0.setType(ElementName.SIGNAL + t);
+				i++;
+			}
+			if (q)
+			{
+				JDFMessageService ms0 = (JDFMessageService) (i > 0 ? xjdf.copyElement(ms, ms) : ms);
+				ms0.setType(ElementName.QUERY + t);
+			}
+
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString("ResponseKnownMessages");
 		}
 
 	}

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -42,20 +42,25 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJMFHelper;
+import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResourceQuParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
@@ -82,6 +87,26 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = xc.convert(h.getRoot());
 		assertNotNull(d);
 		// assertTrue(d.getJMFRoot().isValid(EnumValidationLevel.Incomplete));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMessageServiceType()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.KnownMessages);
+		final JDFMessageService ms = jmf.getResponse(0).appendMessageService();
+		ms.setChannelMode(EnumChannelMode.FireAndForget);
+		ms.setType(EnumType.KnownMessages);
+		ms.setQuery(true);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals("QueryKnownMessages", xjmf.getXPathAttribute("ResponseKnownMessages/MessageService/@Type", null));
+		final XJDFToJDFConverter xjdfConv = new XJDFToJDFConverter(null);
+		final JDFJMF jmf1 = xjdfConv.convert(xjmf).getJMFRoot();
+		assertEquals("KnownMessages", jmf1.getXPathAttribute("Response/MessageService/@Type", null));
+
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -121,12 +121,9 @@ public class WalkMessageService extends WalkJDFSubElement
 	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.ACKNOWLEDGE);
-		map.remove(AttributeName.COMMAND);
 		map.remove(AttributeName.GENERICATTRIBUTES);
 		map.remove(AttributeName.PERSISTENT);
-		map.remove(AttributeName.QUERY);
 		map.remove(AttributeName.REGISTRATION);
-		map.remove(AttributeName.SIGNAL);
 		final String urlschemes = map.get(AttributeName.URLSCHEMES);
 		if (urlschemes != null)
 		{
