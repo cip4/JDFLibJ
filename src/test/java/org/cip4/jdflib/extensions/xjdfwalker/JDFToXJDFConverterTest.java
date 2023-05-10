@@ -2794,6 +2794,22 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testLayoutIntentPages()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Product);
+		JDFLayoutIntent li = (JDFLayoutIntent) n.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
+		li.appendPages().setActual(3);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		assertEquals("3", xjdf.getXPathAttribute("ProductList/Product/Intent/LayoutIntent/@Pages", null));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testLayoutContent()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
