@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -214,8 +214,7 @@ public class JDFResponse extends JDFAutoResponse
 	}
 
 	/**
-	 * Set ErrorText, (Notification/Comment/#text) also sets Notification/@Type=Error and Notification/@Class=Error doesn't create a notification if
-	 * ErroerText=null
+	 * Set ErrorText, (Notification/Comment/#text) also sets Notification/@Type=Error and Notification/@Class=Error doesn't create a notification if ErroerText=null
 	 * 
 	 * @param errorText new error text
 	 * @return JDFNotification the newly created Notification element
@@ -227,19 +226,18 @@ public class JDFResponse extends JDFAutoResponse
 		return setErrorText(errorText, null);
 	}
 
-	/** 
-	* 
-	*  
-	* @return JDFNotification the element
-	*/
+	/**
+	 * 
+	 * 
+	 * @return JDFNotification the element
+	 */
 	public JDFNotification getCreateNotification()
 	{
 		return getCreateNotification(0);
 	}
 
 	/**
-	 * Set ErrorText, (Notification/Comment/#text) also sets Notification/@Type=Error and Notification/@Class=Error doesn't create a notification if
-	 * ErroerText=null
+	 * Set ErrorText, (Notification/Comment/#text) also sets Notification/@Type=Error and Notification/@Class=Error doesn't create a notification if ErroerText=null
 	 * 
 	 * @param errorText new error text
 	 * @param errorClass the error class
@@ -272,7 +270,19 @@ public class JDFResponse extends JDFAutoResponse
 	}
 
 	/**
+	 * @return true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setReturnCode(0);
+		return bRet;
+	}
+
+	/**
 	 * create an acknowledge JMF and set this to a pure acknowledge response
+	 * 
 	 * @return an Acknowledge element that corresponds to this
 	 */
 	public JDFAcknowledge splitAcknowledge()
@@ -286,7 +296,8 @@ public class JDFResponse extends JDFAutoResponse
 
 	/**
 	 * legacy get first notification
-	 * @return 
+	 * 
+	 * @return
 	 */
 	public JDFNotification getNotification()
 	{

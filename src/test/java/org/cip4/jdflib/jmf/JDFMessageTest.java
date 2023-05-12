@@ -38,14 +38,24 @@
  */
 package org.cip4.jdflib.jmf;
 
-import org.cip4.jdflib.core.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -54,7 +64,8 @@ import org.junit.jupiter.api.Test;
  *
  *         far before May 17, 2009
  */
-public class JDFMessageTest {
+public class JDFMessageTest
+{
 	private JDFJMF jmf;
 
 	/**
@@ -64,8 +75,8 @@ public class JDFMessageTest {
 	@Test
 	public void testEnumFamily()
 	{
-		Assertions.assertEquals(EnumFamily.getEnumMap().get("Signal"), EnumFamily.Signal);
-		Assertions.assertNotNull(EnumFamily.getEnumList().get(2));
+		assertEquals(EnumFamily.getEnumMap().get("Signal"), EnumFamily.Signal);
+		assertNotNull(EnumFamily.getEnumList().get(2));
 	}
 
 	/**
@@ -77,7 +88,7 @@ public class JDFMessageTest {
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
 		final JDFSignal s = jmf.getSignal(0);
-		Assertions.assertNotNull(StringUtil.getNonEmpty(s.getID()));
+		assertNotNull(StringUtil.getNonEmpty(s.getID()));
 	}
 
 	/**
@@ -87,24 +98,24 @@ public class JDFMessageTest {
 	public void testIsValidMessageElement()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
-		Assertions.assertTrue(sig.isValidMessageElement(ElementName.UPDATEJDFCMDPARAMS, 0));
-		Assertions.assertFalse(sig.isValidMessageElement(ElementName.MODIFYNODECMDPARAMS, 0));
+		assertTrue(sig.isValidMessageElement(ElementName.UPDATEJDFCMDPARAMS, 0));
+		assertFalse(sig.isValidMessageElement(ElementName.MODIFYNODECMDPARAMS, 0));
 
 		final JDFResponse resp = (JDFResponse) jmf.appendMessageElement(EnumFamily.Response, EnumType.RepeatMessages);
-		Assertions.assertTrue(resp.isValidMessageElement(ElementName.SIGNAL, 3));
-		Assertions.assertTrue(resp.isValidMessageElement(ElementName.REGISTRATION, 3));
-		Assertions.assertFalse(resp.isValidMessageElement(ElementName.QUEUE, 0));
+		assertTrue(resp.isValidMessageElement(ElementName.SIGNAL, 3));
+		assertTrue(resp.isValidMessageElement(ElementName.REGISTRATION, 3));
+		assertFalse(resp.isValidMessageElement(ElementName.QUEUE, 0));
 
 		final JDFRegistration reg = (JDFRegistration) jmf.appendMessageElement(EnumFamily.Registration, EnumType.RepeatMessages);
-		Assertions.assertFalse(reg.isValidMessageElement(ElementName.SIGNAL, 3));
+		assertFalse(reg.isValidMessageElement(ElementName.SIGNAL, 3));
 
 		final JDFQuery q = (JDFQuery) jmf.appendMessageElement(EnumFamily.Query, EnumType.KnownSubscriptions);
-		Assertions.assertTrue(q.isValidMessageElement(ElementName.SUBSCRIPTIONFILTER, 0));
-		Assertions.assertFalse(q.isValidMessageElement(ElementName.SUBSCRIPTIONINFO, 0));
+		assertTrue(q.isValidMessageElement(ElementName.SUBSCRIPTIONFILTER, 0));
+		assertFalse(q.isValidMessageElement(ElementName.SUBSCRIPTIONINFO, 0));
 
 		final JDFCommand c = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.RequestForAuthentication);
-		Assertions.assertTrue(c.isValidMessageElement(ElementName.AUTHENTICATIONCMDPARAMS, 0));
-		Assertions.assertFalse(c.isValidMessageElement(ElementName.AUTHENTICATIONQUPARAMS, 0));
+		assertTrue(c.isValidMessageElement(ElementName.AUTHENTICATIONCMDPARAMS, 0));
+		assertFalse(c.isValidMessageElement(ElementName.AUTHENTICATIONQUPARAMS, 0));
 
 	}
 
@@ -115,7 +126,7 @@ public class JDFMessageTest {
 	public void testAppendValidElement()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
-		Assertions.assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
+		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
 	}
 
 	/**
@@ -125,7 +136,7 @@ public class JDFMessageTest {
 	public void testAppendNotificationFilter()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Notification);
-		Assertions.assertNotNull(sig.appendValidElement(ElementName.NOTIFICATIONFILTER, null));
+		assertNotNull(sig.appendValidElement(ElementName.NOTIFICATIONFILTER, null));
 	}
 
 	/**
@@ -135,11 +146,11 @@ public class JDFMessageTest {
 	public void testAppendGangInfoQu()
 	{
 		final JDFQuery sig = (JDFQuery) jmf.appendMessageElement(EnumFamily.Query, EnumType.GangStatus);
-		Assertions.assertNotNull(sig.appendGangQuFilter());
+		assertNotNull(sig.appendGangQuFilter());
 		try
 		{
 			sig.appendValidElement(ElementName.GANGINFO, null);
-			Assertions.fail("want exception");
+			fail("want exception");
 		}
 		catch (final JDFException x)
 		{
@@ -158,17 +169,17 @@ public class JDFMessageTest {
 		sig.appendGangInfo();
 		try
 		{
-			Assertions.assertNotNull(sig.appendGangQuFilter());
+			assertNotNull(sig.appendGangQuFilter());
 			sig.appendValidElement(ElementName.GANGINFO, null);
-			Assertions.fail("want exception");
+			fail("want exception");
 		}
 		catch (final JDFException x)
 		{
 			//
 		}
-		Assertions.assertNotNull(sig.getGangInfo(1));
-		Assertions.assertNotNull(sig.getGangInfo(-1));
-		Assertions.assertNull(sig.getGangInfo(5));
+		assertNotNull(sig.getGangInfo(1));
+		assertNotNull(sig.getGangInfo(-1));
+		assertNull(sig.getGangInfo(5));
 	}
 
 	/**
@@ -178,7 +189,7 @@ public class JDFMessageTest {
 	public void testGetValidTypeVector()
 	{
 		final JDFMessage sig = jmf.appendMessageElement(EnumFamily.Signal, null);
-		Assertions.assertTrue(sig.getValidTypeVector(ElementName.NOTIFICATIONFILTER, 0).contains(EnumType.Notification));
+		assertTrue(sig.getValidTypeVector(ElementName.NOTIFICATIONFILTER, 0).contains(EnumType.Notification));
 	}
 
 	/**
@@ -188,7 +199,7 @@ public class JDFMessageTest {
 	public void testOptionalElements()
 	{
 		final JDFMessage sig = jmf.appendMessageElement(EnumFamily.Signal, EnumType.Notification);
-		Assertions.assertTrue(sig.optionalElements().contains(ElementName.NOTIFICATIONFILTER));
+		assertTrue(sig.optionalElements().contains(ElementName.NOTIFICATIONFILTER));
 	}
 
 	/**
@@ -198,7 +209,7 @@ public class JDFMessageTest {
 	public void testAbortQEParams()
 	{
 		final JDFCommand m = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.AbortQueueEntry);
-		Assertions.assertNotNull(m.appendValidElement(ElementName.ABORTQUEUEENTRYPARAMS, null));
+		assertNotNull(m.appendValidElement(ElementName.ABORTQUEUEENTRYPARAMS, null));
 	}
 
 	/**
@@ -208,17 +219,17 @@ public class JDFMessageTest {
 	public void testAbortQEParams2()
 	{
 		final JDFCommand m = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.AbortQueueEntry);
-		Assertions.assertNotNull(m.appendAbortQueueEntryParams());
+		assertNotNull(m.appendAbortQueueEntryParams());
 		try
 		{
 			m.appendAbortQueueEntryParams();
-			Assertions.fail("only one bortQueueEntryParam");
+			fail("only one bortQueueEntryParam");
 		}
 		catch (final Exception e)
 		{
 			// nop
 		}
-		Assertions.assertEquals(m.getAbortQueueEntryParams(), m.getCreateAbortQueueEntryParams());
+		assertEquals(m.getAbortQueueEntryParams(), m.getCreateAbortQueueEntryParams());
 	}
 
 	/**
@@ -228,36 +239,36 @@ public class JDFMessageTest {
 	public void testGetDeviceInfo()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Status);
-		Assertions.assertNull(sig.getDeviceInfo("DevID"));
+		assertNull(sig.getDeviceInfo("DevID"));
 		final JDFDeviceInfo d1 = sig.getCreateDeviceInfo("DevID");
 		final JDFDeviceInfo d2 = sig.getCreateDeviceInfo("DevID2");
-		Assertions.assertNotNull(d1);
-		Assertions.assertNotNull(d2);
-		Assertions.assertNotSame(d1, d2);
-		Assertions.assertEquals(d2, sig.getDeviceInfo("DevID2"));
+		assertNotNull(d1);
+		assertNotNull(d2);
+		assertNotSame(d1, d2);
+		assertEquals(d2, sig.getDeviceInfo("DevID2"));
 
 		final JDFResponse res = (JDFResponse) jmf.appendMessageElement(EnumFamily.Response, EnumType.Status);
-		Assertions.assertNull(res.getDeviceInfo("DevID"));
+		assertNull(res.getDeviceInfo("DevID"));
 		final JDFDeviceInfo d21 = res.getCreateDeviceInfo("DevID");
 		final JDFDeviceInfo d22 = res.getCreateDeviceInfo("DevID2");
-		Assertions.assertNotNull(d21);
-		Assertions.assertNotNull(d22);
-		Assertions.assertNotSame(d21, d22);
+		assertNotNull(d21);
+		assertNotNull(d22);
+		assertNotSame(d21, d22);
 
 		final JDFAcknowledge ack = (JDFAcknowledge) jmf.appendMessageElement(EnumFamily.Acknowledge, EnumType.Status);
-		Assertions.assertNull(ack.getDeviceInfo("DevID"));
+		assertNull(ack.getDeviceInfo("DevID"));
 		final JDFDeviceInfo d31 = ack.getCreateDeviceInfo("DevID");
 		final JDFDeviceInfo d32 = ack.getCreateDeviceInfo("DevID2");
-		Assertions.assertNotNull(d31);
-		Assertions.assertNotNull(d32);
-		Assertions.assertNotSame(d31, d32);
+		assertNotNull(d31);
+		assertNotNull(d32);
+		assertNotSame(d31, d32);
 
 		final JDFAcknowledge ack2 = (JDFAcknowledge) jmf.appendMessageElement(EnumFamily.Acknowledge, EnumType.Resource);
 
 		try
 		{
-			Assertions.assertNull(ack2.getDeviceInfo("DevID"));
-			Assertions.fail("nogo here");
+			assertNull(ack2.getDeviceInfo("DevID"));
+			fail("nogo here");
 		}
 		catch (final JDFException x)
 		{
@@ -273,12 +284,12 @@ public class JDFMessageTest {
 	public void testAppendValidElementStrictLax()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
-		Assertions.assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
+		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
 
 		try
 		{
 			sig.appendStatusQuParams();
-			Assertions.fail("strict checking must fail");
+			fail("strict checking must fail");
 		}
 		catch (final Exception x)
 		{
@@ -287,7 +298,7 @@ public class JDFMessageTest {
 		try
 		{
 			sig.appendUpdateJDFCmdParams();
-			Assertions.fail("strict checking must fail on 2nd element");
+			fail("strict checking must fail on 2nd element");
 		}
 		catch (final Exception x)
 		{
@@ -295,14 +306,14 @@ public class JDFMessageTest {
 		}
 		// set to lax
 		JDFMessage.setStrictValidation(false);
-		Assertions.assertNotNull(sig.appendStatusQuParams(), "appending anything goes");
-		Assertions.assertNotNull(sig.appendUpdateJDFCmdParams(), "appending anything goes");
+		assertNotNull(sig.appendStatusQuParams(), "appending anything goes");
+		assertNotNull(sig.appendUpdateJDFCmdParams(), "appending anything goes");
 		// now set back to strict
 		JDFMessage.setStrictValidation(true);
 		try
 		{
 			sig.appendStatusQuParams();
-			Assertions.fail("strict checking must fail");
+			fail("strict checking must fail");
 		}
 		catch (final Exception x)
 		{
@@ -311,7 +322,7 @@ public class JDFMessageTest {
 		try
 		{
 			sig.appendUpdateJDFCmdParams();
-			Assertions.fail("strict checking must fail on 2nd element");
+			fail("strict checking must fail on 2nd element");
 		}
 		catch (final Exception x)
 		{
@@ -328,10 +339,10 @@ public class JDFMessageTest {
 	public void testGetInvalidAttributes()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
-		Assertions.assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
-		Assertions.assertFalse(sig.getInvalidAttributes(EnumValidationLevel.Complete, true, 999).contains(AttributeName.XSITYPE));
+		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
+		assertFalse(sig.getInvalidAttributes(EnumValidationLevel.Complete, true, 999).contains(AttributeName.XSITYPE));
 		sig.setAttribute("Type", EnumType.AbortQueueEntry.getName());
-		Assertions.assertTrue(sig.getInvalidAttributes(EnumValidationLevel.Complete, true, 999).contains(AttributeName.XSITYPE));
+		assertTrue(sig.getInvalidAttributes(EnumValidationLevel.Complete, true, 999).contains(AttributeName.XSITYPE));
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -345,15 +356,15 @@ public class JDFMessageTest {
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.ModifyNode);
 		final JDFModifyNodeCmdParams mnp = sig.appendModifyNodeCmdParams();
-		Assertions.assertNotNull(mnp);
+		assertNotNull(mnp);
 		JDFModifyNodeCmdParams mnp2 = sig.getModifyNodeCmdParams();
-		Assertions.assertEquals(mnp, mnp2);
+		assertEquals(mnp, mnp2);
 		mnp2 = sig.getCreateModifyNodeCmdParams();
-		Assertions.assertEquals(mnp, mnp2);
+		assertEquals(mnp, mnp2);
 		try
 		{
 			sig.appendModifyNodeCmdParams();
-			Assertions.fail("oops");
+			fail("oops");
 		}
 		catch (final JDFException e)
 		{
@@ -372,15 +383,15 @@ public class JDFMessageTest {
 	{
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		final JDFUpdateJDFCmdParams ujn = command.appendUpdateJDFCmdParams();
-		Assertions.assertNotNull(ujn);
+		assertNotNull(ujn);
 		JDFUpdateJDFCmdParams ujn2 = command.getUpdateJDFCmdParams();
-		Assertions.assertEquals(ujn, ujn2);
+		assertEquals(ujn, ujn2);
 		ujn2 = command.getCreateUpdateJDFCmdParams();
-		Assertions.assertEquals(ujn, ujn2);
+		assertEquals(ujn, ujn2);
 		try
 		{
 			command.appendUpdateJDFCmdParams();
-			Assertions.fail("oops");
+			fail("oops");
 		}
 		catch (final JDFException e)
 		{
@@ -399,14 +410,14 @@ public class JDFMessageTest {
 	{
 		final JDFSignal sig = jmf.appendSignal(EnumType.KnownSubscriptions);
 		final JDFCommand cmd = jmf.appendCommand(EnumType.KnownSubscriptions);
-		Assertions.assertNotNull(sig.appendSubscriptionFilter());
-		Assertions.assertNotNull(sig.appendSubscriptionInfo());
-		Assertions.assertNotNull(sig.appendSubscriptionInfo());
-		Assertions.assertNotSame(sig.appendSubscriptionInfo(), sig.appendSubscriptionInfo());
+		assertNotNull(sig.appendSubscriptionFilter());
+		assertNotNull(sig.appendSubscriptionInfo());
+		assertNotNull(sig.appendSubscriptionInfo());
+		assertNotSame(sig.appendSubscriptionInfo(), sig.appendSubscriptionInfo());
 		try
 		{
 			sig.appendSubscriptionFilter();
-			Assertions.fail("one is enough");
+			fail("one is enough");
 		}
 		catch (final JDFException x)
 		{
@@ -415,7 +426,7 @@ public class JDFMessageTest {
 		try
 		{
 			cmd.appendSubscriptionFilter();
-			Assertions.fail("not a command");
+			fail("not a command");
 		}
 		catch (final JDFException x)
 		{
@@ -424,7 +435,7 @@ public class JDFMessageTest {
 		try
 		{
 			cmd.appendSubscriptionInfo();
-			Assertions.fail("not a command");
+			fail("not a command");
 		}
 		catch (final JDFException x)
 		{
@@ -440,19 +451,19 @@ public class JDFMessageTest {
 	public void testSetType()
 	{
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
-		Assertions.assertEquals(command.getXSIType(), "CommandUpdateJDF");
+		assertEquals(command.getXSIType(), "CommandUpdateJDF");
 		command.setType("foo:bar");
-		Assertions.assertNull(command.getXSIType());
-		Assertions.assertEquals(command.getType(), "foo:bar");
+		assertNull(command.getXSIType());
+		assertEquals(command.getType(), "foo:bar");
 	}
 
 	/**
 	 * @throws Exception
 	 */
 	@BeforeEach
-    public void setUp() throws Exception
+	public void setUp() throws Exception
 	{
-        jmf = new JDFDoc(ElementName.JMF).getJMFRoot();
+		jmf = new JDFDoc(ElementName.JMF).getJMFRoot();
 	}
 
 	/**
@@ -462,9 +473,9 @@ public class JDFMessageTest {
 	public void testSenderID()
 	{
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
-		Assertions.assertEquals(jmf.getSenderID(), command.getSenderID());
+		assertEquals(jmf.getSenderID(), command.getSenderID());
 		command.setSenderID("foo:bar");
-		Assertions.assertEquals(command.getSenderID(), "foo:bar");
+		assertEquals(command.getSenderID(), "foo:bar");
 	}
 
 	/**
@@ -474,10 +485,10 @@ public class JDFMessageTest {
 	public void testGetTime()
 	{
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
-		Assertions.assertEquals(jmf.getTimeStamp(), command.getTime());
+		assertEquals(jmf.getTimeStamp(), command.getTime());
 		final JDFDate newDate = new JDFDate(10000000);
 		command.setTime(newDate);
-		Assertions.assertEquals(command.getTime(), newDate);
+		assertEquals(command.getTime(), newDate);
 	}
 
 	/**
@@ -498,7 +509,7 @@ public class JDFMessageTest {
 				for (int ii = 0; ii < 10; ii++)
 				{
 					s.appendDeviceInfo();
-					Assertions.assertNotNull(s.getDeviceInfo(ii));
+					assertNotNull(s.getDeviceInfo(ii));
 				}
 				s.appendStatusQuParams();
 			}
@@ -510,9 +521,6 @@ public class JDFMessageTest {
 
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
-
 	/**
 	 *
 	 */
@@ -520,15 +528,17 @@ public class JDFMessageTest {
 	public void testCreateResponse()
 	{
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
-		Assertions.assertEquals(command.getXSIType(), "CommandUpdateJDF");
+		assertEquals(command.getXSIType(), "CommandUpdateJDF");
 		command.setType("foo:bar");
-		Assertions.assertNull(command.getXSIType());
-		Assertions.assertEquals(command.getType(), "foo:bar");
+		assertNull(command.getXSIType());
+		assertEquals(command.getType(), "foo:bar");
 		final JDFJMF resp = command.createResponse();
 		final JDFResponse response = resp.getResponse(0);
-		Assertions.assertEquals(response, resp.getMessageElement(null, null, 0));
-		Assertions.assertEquals(response.getType(), "foo:bar");
-		Assertions.assertEquals(response.getrefID(), command.getID());
+		assertEquals(response, resp.getMessageElement(null, null, 0));
+		assertEquals(response.getType(), "foo:bar");
+		assertEquals(response.getrefID(), command.getID());
+		assertEquals(0, response.getReturnCode());
+		assertEquals(0, response.getIntAttribute(AttributeName.RETURNCODE, null, -1));
 
 	}
 
@@ -539,15 +549,15 @@ public class JDFMessageTest {
 	public void testCreateSignal()
 	{
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
-		Assertions.assertEquals(command.getXSIType(), "CommandUpdateJDF");
+		assertEquals(command.getXSIType(), "CommandUpdateJDF");
 		command.setType("foo:bar");
-		Assertions.assertNull(command.getXSIType());
-		Assertions.assertEquals(command.getType(), "foo:bar");
+		assertNull(command.getXSIType());
+		assertEquals(command.getType(), "foo:bar");
 		final JDFJMF sig = command.createSignal();
 		final JDFSignal signal = sig.getSignal(0);
-		Assertions.assertEquals(signal, sig.getMessageElement(null, null, 0));
-		Assertions.assertEquals(signal.getType(), "foo:bar");
-		Assertions.assertEquals(signal.getrefID(), command.getID());
+		assertEquals(signal, sig.getMessageElement(null, null, 0));
+		assertEquals(signal.getType(), "foo:bar");
+		assertEquals(signal.getrefID(), command.getID());
 
 	}
 
@@ -559,14 +569,14 @@ public class JDFMessageTest {
 	{
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		jmf.setVersion(EnumVersion.Version_1_3);
-		Assertions.assertEquals(command.getXSIType(), "CommandUpdateJDF");
+		assertEquals(command.getXSIType(), "CommandUpdateJDF");
 		command.setType("foo:bar");
-		Assertions.assertNull(command.getXSIType());
-		Assertions.assertEquals(command.getType(), "foo:bar");
+		assertNull(command.getXSIType());
+		assertEquals(command.getType(), "foo:bar");
 		final JDFJMF sig = command.createSignal();
 		final JDFSignal signal = sig.getSignal(0);
-		Assertions.assertEquals(EnumVersion.Version_1_3, signal.getVersion(false));
-		Assertions.assertEquals(EnumVersion.Version_1_3, signal.getJMFRoot().getVersion(true));
+		assertEquals(EnumVersion.Version_1_3, signal.getVersion(false));
+		assertEquals(EnumVersion.Version_1_3, signal.getJMFRoot().getVersion(true));
 
 	}
 
