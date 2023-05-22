@@ -199,6 +199,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 			if (!StringUtil.isEmpty(newUrl))
 			{
 				urlSetter.setURL(newUrl);
+				return e;
 			}
 			// we have a circular reference to something we put here ourselves - no need to do anything
 			if (baseURL != null && url.startsWith(baseURL) || newUrl != null)
