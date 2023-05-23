@@ -695,27 +695,29 @@ public class KElement extends ElementNSImpl implements Element
 			}
 			else
 			{
-				String namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), true);
-
-				if (namespaceURI2 != null && !JDFCoreConstants.EMPTYSTRING.equals(namespaceURI2) && !namespaceURI2.equals(nameSpaceURI))
-				{ // in case multiple namespace uris are defined for the same prefix, all we can do is to bail out loudly
-					namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
-					if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
-					{
-						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
-								+ "; attempting to set URI: " + nameSpaceURI;
-						kLog.error(message);
-						throw new JDFException(message);
+				String xmlnsPrefix = xmlnsPrefix(key);
+				if (xmlnsPrefix != null)
+				{
+					String namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix, true);
+					if (namespaceURI2 != null && !JDFCoreConstants.EMPTYSTRING.equals(namespaceURI2) && !namespaceURI2.equals(nameSpaceURI))
+					{ // in case multiple namespace uris are defined for the same prefix, all we can do is to bail out loudly
+						namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix, false);
+						if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
+						{
+							final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix + "; existing URI: " + namespaceURI2
+									+ "; attempting to set URI: " + nameSpaceURI;
+							kLog.error(message);
+							throw new JDFException(message);
+						}
 					}
 				}
-
 				// remove any twin dom lvl 1 attributes - just in case
 				super.removeAttribute(key);
 				if (nameSpaceURI.equals(getNamespaceURI()))
 				{
 					// clean up any attribute that may be in the same ns but with a different prefix
 					removeAttributeNS(nameSpaceURI, xmlnsLocalName(key));
-					if (xmlnsPrefix(key) == null)
+					if (xmlnsPrefix == null)
 					{
 						nameSpaceURI = null; // avoid spurious NS1 prefix
 					}
