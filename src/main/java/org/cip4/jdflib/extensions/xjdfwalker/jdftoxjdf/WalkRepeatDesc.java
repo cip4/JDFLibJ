@@ -72,6 +72,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.node.JDFNode;
 
 /**
  *
@@ -117,7 +118,8 @@ public class WalkRepeatDesc extends WalkJDFSubElement
 		final String shapedefref = map.getNonEmpty("ShapeDefRef");
 		if (shapedefref == null)
 		{
-			final KElement e = jdfToXJDF.oldRoot.getChildByTagName(ElementName.SHAPEDEF, null, 0, null, false, true);
+			JDFNode oldRoot = jdfToXJDF.oldRoot;
+			final KElement e = oldRoot == null ? null : oldRoot.getChildByTagName(ElementName.SHAPEDEF, null, 0, null, false, true);
 			if (e != null)
 			{
 				map.put("ShapeDefRef", e.getID());

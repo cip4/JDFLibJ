@@ -88,8 +88,10 @@ import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFEvent;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
+import org.cip4.jdflib.resource.process.JDFDieLayoutProductionParams;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
+import org.cip4.jdflib.resource.process.JDFRepeatDesc;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.jupiter.api.Test;
 
@@ -962,6 +964,28 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		assertEquals("Job", xjmf.getXPathAttribute("SignalResource/ResourceInfo[2]/@Scope", null));
 
 		xjmf.write2File(sm_dirTestDataTemp + "resourceSpeed.xjmf");
+	}
+
+	/**
+	 *
+	 * test ink resource signal
+	 */
+	@Test
+	public void testResourceSignalRepeatDesc()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
+
+		final JDFSignal signal = jmf.getSignal(0);
+		final JDFResourceQuParams rqp = signal.getCreateResourceQuParams(0);
+		rqp.setJobID("job1");
+		final JDFResourceInfo ri = signal.getCreateResourceInfo(0);
+		ri.setResourceName(ElementName.DIELAYOUTPRODUCTIONPARAMS);
+		JDFDieLayoutProductionParams dlp = (JDFDieLayoutProductionParams) ri.getCreateResource(null);
+		JDFRepeatDesc rd = dlp.appendRepeatDesc();
+		rd.setGutterX(0);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		xjmf.write2File(sm_dirTestDataTemp + "repeatdesc.xjmf");
 	}
 
 	/**
