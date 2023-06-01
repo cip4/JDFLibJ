@@ -1867,6 +1867,18 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 
 	/**
 	 *
+	 */
+	@Test
+	public void testCanConvert()
+	{
+		assertTrue(XJDFToJDFConverter.canConvert(JDFElement.createRoot(XJDFConstants.XJDF)));
+		assertTrue(XJDFToJDFConverter.canConvert(JDFElement.createRoot(XJDFConstants.XJMF)));
+		assertFalse(XJDFToJDFConverter.canConvert(JDFElement.createRoot(ElementName.JDF)));
+
+	}
+
+	/**
+	 *
 	 *
 	 */
 	@Test

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -346,9 +346,9 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 * @param xjdf
 	 * @return true if the element can be converted
 	 */
-	public boolean canConvert(final KElement xjdf)
+	public static boolean canConvert(final KElement xjdf)
 	{
-		return xjdf == null ? false : XJDFConstants.XJDF.equals(xjdf.getLocalName());
+		return XJDFHelper.isXJDF(xjdf) || XJDFHelper.isXJMF(xjdf);
 	}
 
 	/**
