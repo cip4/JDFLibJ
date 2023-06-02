@@ -80,6 +80,7 @@ package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoTool;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
@@ -131,15 +132,14 @@ public class JDFTool extends JDFAutoTool
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * toString
-	 * 
-	 * @return String
-	 */
 	@Override
-	public String toString()
+	public void setToolID(String value)
 	{
-		return "JDFTool[  --> " + super.toString() + " ]";
+		if (!hasNonEmpty_KElement(AttributeName.PRODUCTID))
+		{
+			setProductID(value);
+		}
+		super.setToolID(value);
 	}
 
 	@Override
