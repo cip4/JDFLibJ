@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,10 +71,14 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMarkObject.EnumAnchor;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -96,7 +100,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	@Test
 	public void testMin()
 	{
-		Assertions.assertEquals(EnumUtil.min(EnumResStatus.Incomplete, EnumResStatus.Available), EnumResStatus.Incomplete);
+		assertEquals(EnumUtil.min(EnumResStatus.Incomplete, EnumResStatus.Available), EnumResStatus.Incomplete);
 	}
 
 	/**
@@ -105,7 +109,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	@Test
 	public void testMax()
 	{
-		Assertions.assertEquals(EnumUtil.max(EnumResStatus.Incomplete, EnumResStatus.Available), EnumResStatus.Available);
+		assertEquals(EnumUtil.max(EnumResStatus.Incomplete, EnumResStatus.Available), EnumResStatus.Available);
 	}
 
 	/**
@@ -114,9 +118,11 @@ public class EnumUtilTest extends JDFTestCaseBase
 	@Test
 	public void testLessEq()
 	{
-		Assertions.assertTrue(EnumUtil.aLessEqualsThanB(EnumResStatus.Incomplete, EnumResStatus.Incomplete));
-		Assertions.assertTrue(EnumUtil.aLessEqualsThanB(EnumResStatus.Incomplete, EnumResStatus.Available));
-		Assertions.assertFalse(EnumUtil.aLessEqualsThanB(EnumResStatus.Available, EnumResStatus.Incomplete));
+		assertTrue(EnumUtil.aLessEqualsThanB(EnumResStatus.Incomplete, EnumResStatus.Incomplete));
+		assertTrue(EnumUtil.aLessEqualsThanB(null, EnumResStatus.Incomplete));
+		assertTrue(EnumUtil.aLessEqualsThanB(EnumResStatus.Incomplete, EnumResStatus.Available));
+		assertFalse(EnumUtil.aLessEqualsThanB(EnumResStatus.Available, EnumResStatus.Incomplete));
+		assertFalse(EnumUtil.aLessEqualsThanB(EnumResStatus.Available, null));
 	}
 
 	/**
@@ -125,9 +131,11 @@ public class EnumUtilTest extends JDFTestCaseBase
 	@Test
 	public void testLess()
 	{
-		Assertions.assertFalse(EnumUtil.aLessThanB(EnumResStatus.Incomplete, EnumResStatus.Incomplete));
-		Assertions.assertTrue(EnumUtil.aLessThanB(EnumResStatus.Incomplete, EnumResStatus.Available));
-		Assertions.assertFalse(EnumUtil.aLessThanB(EnumResStatus.Available, EnumResStatus.Incomplete));
+		assertFalse(EnumUtil.aLessThanB(EnumResStatus.Incomplete, EnumResStatus.Incomplete));
+		assertTrue(EnumUtil.aLessThanB(EnumResStatus.Incomplete, EnumResStatus.Available));
+		assertTrue(EnumUtil.aLessThanB(null, EnumResStatus.Available));
+		assertFalse(EnumUtil.aLessThanB(EnumResStatus.Available, EnumResStatus.Incomplete));
+		assertFalse(EnumUtil.aLessThanB(EnumResStatus.Available, null));
 	}
 
 	/**
@@ -136,7 +144,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetEnumName()
 	{
-		Assertions.assertEquals(EnumUtil.getEnumName(EnumAnchor.BottomRight), "EnumAnchor");
+		assertEquals(EnumUtil.getEnumName(EnumAnchor.BottomRight), "EnumAnchor");
 	}
 
 	/**
@@ -145,11 +153,11 @@ public class EnumUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetEnumIgnorecase()
 	{
-		Assertions.assertNull(EnumUtil.getEnumIgnoreCase(EnumAnchor.class, E.a));
-		Assertions.assertNull(EnumUtil.getEnumIgnoreCase(EnumAnchor.class, (String) null));
-		Assertions.assertNull(EnumUtil.getEnumIgnoreCase(EnumAnchor.class, "foo"));
-		Assertions.assertNull(EnumUtil.getEnumIgnoreCase(null, E.a));
-		Assertions.assertEquals(EnumAnchor.BottomLeft, EnumUtil.getEnumIgnoreCase(EnumAnchor.class, E.BOTTOMLEFT));
-		Assertions.assertEquals(EnumAnchor.BottomRight, EnumUtil.getEnumIgnoreCase(EnumAnchor.class, "bottomright"));
+		assertNull(EnumUtil.getEnumIgnoreCase(EnumAnchor.class, E.a));
+		assertNull(EnumUtil.getEnumIgnoreCase(EnumAnchor.class, (String) null));
+		assertNull(EnumUtil.getEnumIgnoreCase(EnumAnchor.class, "foo"));
+		assertNull(EnumUtil.getEnumIgnoreCase(null, E.a));
+		assertEquals(EnumAnchor.BottomLeft, EnumUtil.getEnumIgnoreCase(EnumAnchor.class, E.BOTTOMLEFT));
+		assertEquals(EnumAnchor.BottomRight, EnumUtil.getEnumIgnoreCase(EnumAnchor.class, "bottomright"));
 	}
 }
