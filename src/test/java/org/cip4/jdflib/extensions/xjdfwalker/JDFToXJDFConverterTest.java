@@ -43,9 +43,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -243,6 +245,63 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement x = conv.convert(n);
 		final XJDFHelper h = XJDFHelper.getHelper(x);
 		h.writeToFile("C:\\data\\265276-PD\\digital.main.xjdf");
+	}
+
+	/**
+	 * @throws IOException
+	 * @throws JDF_AccessException
+	 * @throws StorageAccessException
+	 */
+	@Test
+	public void testparseRef()
+	{
+		final long ct = System.currentTimeMillis();
+		final String jobID = "Varnish" + ct;
+		final XJDFHelper xjdfHelper = new XJDFHelper(EnumVersion.Version_2_1, jobID);
+		xjdfHelper.setTypes(new VString("ConventionalPrinting"));
+
+		final SetHelper pm = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
+
+		String v1 = "varnish1";
+		final ResourceHelper mediaPartV = pm.getCreatePartition(new JDFAttributeMap(AttributeName.SEPARATION, v1), true);
+		final JDFMedia plateMediaV = (JDFMedia) mediaPartV.getResource();
+		plateMediaV.setDimensionCM(new JDFXYPair(130, 80));
+		plateMediaV.setMediaType(EnumMediaType.Blanket);
+
+		final ResourceHelper mediaPart = pm.getCreatePartition(null, true);
+
+		final JDFMedia plateMedia = (JDFMedia) mediaPart.getResource();
+		plateMedia.setDimensionCM(new JDFXYPair(130, 80));
+		plateMedia.setMediaType(EnumMediaType.Plate);
+
+		final SetHelper xmH = xjdfHelper.getCreateSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+
+		final JDFAttributeMap surfaceMap = new JDFAttributeMap(AttributeName.SHEETNAME, "S1");
+		surfaceMap.put(AttributeName.SIDE, "Front");
+
+		final VJDFAttributeMap front1 = new VJDFAttributeMap(surfaceMap);
+		List<String> cmykSeparations = new VString("Black");
+		front1.extendMap(AttributeName.SEPARATION, cmykSeparations);
+
+		List<String> allSeparations = new VString("Black");
+		allSeparations.add(v1);
+		final VJDFAttributeMap allColors = new VJDFAttributeMap(new JDFAttributeMap());
+		allColors.extendMap(AttributeName.SEPARATION, allSeparations);
+
+		final VJDFAttributeMap varnishes = new VJDFAttributeMap(surfaceMap);
+		varnishes.extendMap(AttributeName.SEPARATION, new VString(v1, null));
+
+		Vector<ResourceHelper> vXM = xmH.getCreatePartitions(allColors, true);
+		for (ResourceHelper xm : vXM)
+		{
+			JDFExposedMedia xmr = (JDFExposedMedia) xm.getResource();
+			mediaPart.ensureReference(xmr, XJDFConstants.MediaRef);
+		}
+		JDFExposedMedia xmv = (JDFExposedMedia) xmH.getPartition(varnishes.get(0)).getResource();
+		mediaPartV.ensureReference(xmv, XJDFConstants.MediaRef);
+
+		cleanSnippets(xjdfHelper);
+		writeRoundTripX(xjdfHelper.getRoot(), "xmsparse", EnumValidationLevel.Incomplete);
 	}
 
 	/**

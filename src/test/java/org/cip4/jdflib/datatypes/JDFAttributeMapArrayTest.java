@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,6 +44,8 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -66,6 +68,46 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 		Assertions.assertNull(JDFAttributeMapArray.getArray(new JDFAttributeMap()));
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		Assertions.assertEquals(m1, JDFAttributeMapArray.getArray(m1).get(0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testExtendMap()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMapArray v = new JDFAttributeMapArray();
+		v.add(m1);
+		v.extendMap("b", new VString("b1 b2 b3", null));
+
+		assertEquals(3, v.size());
+		v.extendMap("c", new VString("c1 c2 c3", null));
+		assertEquals(9, v.size());
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testExtendMapNull()
+	{
+		final JDFAttributeMapArray v = new JDFAttributeMapArray();
+		v.extendMap("b", null);
+
+		assertEquals(0, v.size());
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testExtendMapEmpty()
+	{
+		final JDFAttributeMapArray v = new JDFAttributeMapArray(new JDFAttributeMap());
+		v.extendMap("b", new VString("", null));
+
+		assertEquals(1, v.size());
 	}
 
 	/**

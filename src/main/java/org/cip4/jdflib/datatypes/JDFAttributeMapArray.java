@@ -58,6 +58,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.HashUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  *
@@ -726,6 +727,39 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * replace all maps in this with n maps that have the values strKey, vsValues
+	 *
+	 * @param strKey the new key to add
+	 * @param vsValues String of values
+	 */
+	public void extendMap(final String strKey, final List<String> vsValues)
+	{
+		if (StringUtil.isEmpty(vsValues) || StringUtil.isEmpty(strKey))
+		{
+			return;
+		}
+
+		final JDFAttributeMapArray vec = new JDFAttributeMapArray();
+
+		if (isEmpty())
+		{
+			add(new JDFAttributeMap());
+		}
+		for (final JDFAttributeMap map : this)
+		{
+			for (final String val : vsValues)
+			{
+				final JDFAttributeMap mapNew = new JDFAttributeMap(map);
+				mapNew.put(strKey, val);
+				vec.add(mapNew);
+			}
+		}
+
+		clear();
+		ContainerUtil.addAll(this, vec);
 	}
 
 	/**

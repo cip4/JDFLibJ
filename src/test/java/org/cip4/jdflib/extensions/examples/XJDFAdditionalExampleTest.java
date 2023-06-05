@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,14 +36,21 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Vector;
 
+import org.cip4.jdflib.auto.JDFAutoColor.EnumColorType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoVarnishingParams.EnumVarnishArea;
+import org.cip4.jdflib.auto.JDFAutoVarnishingParams.EnumVarnishMethod;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
@@ -55,7 +62,12 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFTool;
+import org.cip4.jdflib.resource.JDFVarnishingParams;
+import org.cip4.jdflib.resource.process.JDFColor;
+import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.prepress.JDFInk;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -147,6 +159,227 @@ public class XJDFAdditionalExampleTest extends ExampleTest
 	{
 		JDFElement.setLongID(false);
 		super.setUp();
+	}
+
+	/**
+	 * @throws IOException
+	 * @throws JDF_AccessException
+	 * @throws StorageAccessException
+	 */
+	@Test
+	public void testSubmitVarnishXJDFFlood()
+	{
+		final long ct = System.currentTimeMillis();
+		final String jobID = "Flood" + ct;
+		final XJDFHelper xjdfHelper = new XJDFHelper(EnumVersion.Version_2_1, jobID);
+		xjdfHelper.setTypes(new VString("ConventionalPrinting Varnishing"));
+
+		final SetHelper cp = xjdfHelper.getCreateSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+		cp.getCreatePartition(null, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
+
+		final SetHelper pm = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
+		final SetHelper pmPaper = xjdfHelper.appendSet(ElementName.MEDIA, null);
+		final ResourceHelper mediaPartPaper = pmPaper.getCreatePartition(null, true);
+		final JDFMedia paperMedia = (JDFMedia) mediaPartPaper.getResource();
+		paperMedia.setDimensionCM(new JDFXYPair(120, 75));
+		paperMedia.setMediaType(EnumMediaType.Paper);
+		paperMedia.setISOPaperSubstrate(EnumISOPaperSubstrate.PS2);
+
+		String v1 = "varnish1";
+		final ResourceHelper mediaPartV = pm.getCreatePartition(new JDFAttributeMap(AttributeName.SEPARATION, v1), true);
+		final JDFMedia plateMediaV = (JDFMedia) mediaPartV.getResource();
+		plateMediaV.setDimensionCM(new JDFXYPair(130, 80));
+		plateMediaV.setMediaType(EnumMediaType.Blanket);
+
+		final ResourceHelper mediaPart = pm.getCreatePartition(null, true);
+
+		final JDFMedia plateMedia = (JDFMedia) mediaPart.getResource();
+		plateMedia.setDimensionCM(new JDFXYPair(130, 80));
+		plateMedia.setMediaType(EnumMediaType.Plate);
+
+		final SetHelper compH = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
+		final ResourceHelper compR = compH.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		compR.setAmount(1000, null, true);
+		mediaPartPaper.ensureReference(compR, XJDFConstants.MediaRef);
+
+		final SetHelper compIn = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
+		final ResourceHelper compInR = compIn.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		compInR.setAmount(100, null, false);
+		compInR.setAmount(1000, null, true);
+		mediaPartPaper.ensureReference(compInR, XJDFConstants.MediaRef);
+
+		final SetHelper xmH = xjdfHelper.getCreateSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+
+		final SetHelper colorH = xjdfHelper.getCreateSet(ElementName.COLOR, EnumUsage.Input);
+
+		final SetHelper inkH = xjdfHelper.getCreateSet(ElementName.INK, EnumUsage.Input);
+
+		final SetHelper niH = xjdfHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
+		niH.removePartitions();
+
+		final SetHelper vp = xjdfHelper.getCreateSet(ElementName.VARNISHINGPARAMS, EnumUsage.Input);
+		final SetHelper tool = xjdfHelper.getCreateSet(ElementName.TOOL, EnumUsage.Input);
+
+		final JDFAttributeMap surfaceMap = new JDFAttributeMap(AttributeName.SHEETNAME, "S1");
+		surfaceMap.put(AttributeName.SIDE, "Front");
+
+		final VJDFAttributeMap front1 = new VJDFAttributeMap(surfaceMap);
+		List<String> cmykSeparations = JDFColor.getCMYKSeparations();
+		front1.extendMap(AttributeName.SEPARATION, cmykSeparations);
+
+		List<String> allSeparations = JDFColor.getCMYKSeparations();
+		allSeparations.add(v1);
+		final VJDFAttributeMap allColors = new VJDFAttributeMap(new JDFAttributeMap());
+		allColors.extendMap(AttributeName.SEPARATION, allSeparations);
+
+		final VJDFAttributeMap varnishes = new VJDFAttributeMap(surfaceMap);
+		varnishes.extendMap(AttributeName.SEPARATION, new VString(v1, null));
+
+		JDFVarnishingParams vpr = (JDFVarnishingParams) vp.getCreatePartitions(varnishes, true).get(0).getResource();
+		vpr.setVarnishArea(EnumVarnishArea.Full);
+		vpr.setVarnishMethod(EnumVarnishMethod.Blanket);
+
+		ResourceHelper toolRH = tool.getCreatePartitions(varnishes, true).get(0);
+		toolRH.setExternalID("R123");
+		JDFTool toolRes = (JDFTool) toolRH.getResource();
+		toolRes.setToolType("ScreeningRoller");
+
+		Vector<ResourceHelper> vXM = xmH.getCreatePartitions(allColors, true);
+		for (ResourceHelper xm : vXM)
+		{
+			JDFExposedMedia xmr = (JDFExposedMedia) xm.getResource();
+			mediaPart.ensureReference(xmr, XJDFConstants.MediaRef);
+		}
+		JDFExposedMedia xmv = (JDFExposedMedia) xmH.getPartition(varnishes.get(0)).getResource();
+		mediaPartV.ensureReference(xmv, XJDFConstants.MediaRef);
+
+		Vector<ResourceHelper> vColors = colorH.getCreatePartitions(allColors, true);
+		int i = 0;
+		for (ResourceHelper c : vColors)
+		{
+			((JDFColor) (c.getResource())).setColorType(i++ == 4 ? EnumColorType.Transparent : EnumColorType.Normal);
+		}
+		Vector<ResourceHelper> vInks = inkH.getCreatePartitions(allColors, true);
+		i = 0;
+		for (ResourceHelper ink : vInks)
+		{
+			((JDFInk) (ink.getResource())).setAttribute(XJDFConstants.InkType, (i++ == 4 ? "Varnish" : "Ink"));
+		}
+
+		cleanSnippets(xjdfHelper);
+		writeRoundTripX(xjdfHelper.getRoot(), "floodvarnish", EnumValidationLevel.Complete);
+	}
+
+	/**
+	 * @throws IOException
+	 * @throws JDF_AccessException
+	 * @throws StorageAccessException
+	 */
+	@Test
+	public void testSubmitVarnishXJDFFlexo()
+	{
+		final long ct = System.currentTimeMillis();
+		final String jobID = "Flexo" + ct;
+		final XJDFHelper xjdfHelper = new XJDFHelper(EnumVersion.Version_2_1, jobID);
+		xjdfHelper.setTypes(new VString("ConventionalPrinting Varnishing"));
+
+		final SetHelper cp = xjdfHelper.getCreateSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+		cp.getCreatePartition(null, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
+
+		final SetHelper pm = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
+		final SetHelper pmPaper = xjdfHelper.appendSet(ElementName.MEDIA, null);
+		final ResourceHelper mediaPartPaper = pmPaper.getCreatePartition(null, true);
+		final JDFMedia paperMedia = (JDFMedia) mediaPartPaper.getResource();
+		paperMedia.setDimensionCM(new JDFXYPair(120, 75));
+		paperMedia.setMediaType(EnumMediaType.Paper);
+		paperMedia.setISOPaperSubstrate(EnumISOPaperSubstrate.PS2);
+
+		String v1 = "varnish1";
+		final ResourceHelper mediaPartV = pm.getCreatePartition(new JDFAttributeMap(AttributeName.SEPARATION, v1), true);
+		final JDFMedia plateMediaV = (JDFMedia) mediaPartV.getResource();
+		plateMediaV.setDimensionCM(new JDFXYPair(130, 80));
+		plateMediaV.setMediaType(EnumMediaType.Blanket);
+
+		final ResourceHelper mediaPart = pm.getCreatePartition(null, true);
+
+		final JDFMedia plateMedia = (JDFMedia) mediaPart.getResource();
+		plateMedia.setDimensionCM(new JDFXYPair(130, 80));
+		plateMedia.setMediaType(EnumMediaType.Plate);
+
+		final SetHelper compH = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
+		final ResourceHelper compR = compH.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		compR.setAmount(1000, null, true);
+		mediaPartPaper.ensureReference(compR, XJDFConstants.MediaRef);
+
+		final SetHelper compIn = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
+		final ResourceHelper compInR = compIn.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		compInR.setAmount(100, null, false);
+		compInR.setAmount(1000, null, true);
+		mediaPartPaper.ensureReference(compInR, XJDFConstants.MediaRef);
+
+		final SetHelper xmH = xjdfHelper.getCreateSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+
+		final SetHelper colorH = xjdfHelper.getCreateSet(ElementName.COLOR, EnumUsage.Input);
+
+		final SetHelper inkH = xjdfHelper.getCreateSet(ElementName.INK, EnumUsage.Input);
+
+		final SetHelper niH = xjdfHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
+		niH.removePartitions();
+
+		final SetHelper vp = xjdfHelper.getCreateSet(ElementName.VARNISHINGPARAMS, EnumUsage.Input);
+		final SetHelper tool = xjdfHelper.getCreateSet(ElementName.TOOL, EnumUsage.Input);
+
+		final JDFAttributeMap surfaceMap = new JDFAttributeMap(AttributeName.SHEETNAME, "S1");
+		surfaceMap.put(AttributeName.SIDE, "Front");
+
+		final VJDFAttributeMap front1 = new VJDFAttributeMap(surfaceMap);
+		List<String> cmykSeparations = JDFColor.getCMYKSeparations();
+		front1.extendMap(AttributeName.SEPARATION, cmykSeparations);
+
+		List<String> allSeparations = JDFColor.getCMYKSeparations();
+		allSeparations.add(v1);
+		final VJDFAttributeMap allColors = new VJDFAttributeMap(new JDFAttributeMap());
+		allColors.extendMap(AttributeName.SEPARATION, allSeparations);
+
+		final VJDFAttributeMap varnishes = new VJDFAttributeMap(surfaceMap);
+		varnishes.extendMap(AttributeName.SEPARATION, new VString(v1, null));
+
+		JDFVarnishingParams vpr = (JDFVarnishingParams) vp.getCreatePartitions(varnishes, true).get(0).getResource();
+		vpr.setVarnishArea(EnumVarnishArea.Spot);
+		vpr.setVarnishMethod(EnumVarnishMethod.Plate);
+		vpr.setModuleType("CoatingModule");
+
+		ResourceHelper toolRH = tool.getCreatePartitions(varnishes, true).get(0);
+		toolRH.setExternalID("R123");
+		JDFTool toolRes = (JDFTool) toolRH.getResource();
+		toolRes.setToolType("ScreeningRoller");
+
+		Vector<ResourceHelper> vXM = xmH.getCreatePartitions(allColors, true);
+		for (ResourceHelper xm : vXM)
+		{
+			JDFExposedMedia xmr = (JDFExposedMedia) xm.getResource();
+			mediaPart.ensureReference(xmr, XJDFConstants.MediaRef);
+		}
+		ResourceHelper xmvr = xmH.getPartition(varnishes.get(0));
+		JDFExposedMedia xmv = (JDFExposedMedia) xmvr.getResource();
+		xmvr.setExternalID("FlexoPlate123");
+		mediaPartV.ensureReference(xmv, XJDFConstants.MediaRef);
+
+		Vector<ResourceHelper> vColors = colorH.getCreatePartitions(allColors, true);
+		int i = 0;
+		for (ResourceHelper c : vColors)
+		{
+			((JDFColor) (c.getResource())).setColorType(i++ == 4 ? EnumColorType.Transparent : EnumColorType.Normal);
+		}
+		Vector<ResourceHelper> vInks = inkH.getCreatePartitions(allColors, true);
+		i = 0;
+		for (ResourceHelper ink : vInks)
+		{
+			((JDFInk) (ink.getResource())).setAttribute(XJDFConstants.InkType, (i++ == 4 ? "Varnish" : "Ink"));
+		}
+
+		cleanSnippets(xjdfHelper);
+		writeRoundTripX(xjdfHelper.getRoot(), "flexovarnish", EnumValidationLevel.Complete);
 	}
 
 	/**

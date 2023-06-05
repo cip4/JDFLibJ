@@ -224,7 +224,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @param strKey the new key to add
 	 * @param vsValues String of values
 	 */
-	public void extendMap(final String strKey, final VString vsValues)
+	public void extendMap(final String strKey, final List<String> vsValues)
 	{
 		if (StringUtil.isEmpty(vsValues) || StringUtil.isEmpty(strKey))
 		{
@@ -247,7 +247,8 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 			}
 		}
 
-		setVector(vec);
+		clear();
+		ContainerUtil.addAll(this, vec);
 	}
 
 	/**
