@@ -474,9 +474,30 @@ public class FixVersionTest extends JDFTestCaseBase
 	public void testNamedFeature()
 	{
 		n.setNamedFeatures(new VString("a b", null));
-		assertTrue(new FixVersion(EnumVersion.Version_1_5).convert(n));
+		FixVersion fv15 = new FixVersion(EnumVersion.Version_1_5);
+		assertTrue(fv15.convert(n));
+		assertTrue(fv15.convert(n));
 		assertEquals(n.getGeneralID("a", 0), "b");
-		assertNull(n.getAttribute(AttributeName.NAMEDFEATURES, null, null));
+		assertNull(n.getGeneralID("a", 1));
+		assertEquals(n.getAttribute(AttributeName.NAMEDFEATURES, null, null), "a b");
+		assertTrue(new FixVersion(EnumVersion.Version_1_4).convert(n));
+		assertEquals(n.getAttribute(AttributeName.NAMEDFEATURES, null, null), "a b");
+		assertNull(n.getGeneralID(null, 0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testNamedFeatureZapp()
+	{
+		n.setNamedFeatures(new VString("a b", null));
+		FixVersion fv15 = new FixVersion(EnumVersion.Version_1_5);
+		fv15.setZappDeprecated(true);
+		assertTrue(fv15.convert(n));
+		assertEquals(n.getGeneralID("a", 0), "b");
+		assertNull(n.getGeneralID("a", 1));
+		assertEquals(null, n.getAttribute(AttributeName.NAMEDFEATURES, null, null));
 		assertTrue(new FixVersion(EnumVersion.Version_1_4).convert(n));
 		assertEquals(n.getAttribute(AttributeName.NAMEDFEATURES, null, null), "a b");
 		assertNull(n.getGeneralID(null, 0));

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -113,8 +113,12 @@ public class WalkGeneralIDNamedFeature extends WalkGeneralID
 		{
 			JDFNode n = (JDFNode) e1.getParentNode();
 			JDFGeneralID gid = (JDFGeneralID) e1;
-			n.appendAttribute(AttributeName.NAMEDFEATURES, gid.getIDUsage(), null, " ", false);
-			n.appendAttribute(AttributeName.NAMEDFEATURES, gid.getIDValue(), null, " ", false);
+			String check = gid.getIDUsage() + " " + gid.getIDValue();
+			if (!n.hasNonEmpty(AttributeName.NAMEDFEATURES) || n.getAttribute(AttributeName.NAMEDFEATURES).indexOf(check) < 0)
+			{
+				n.appendAttribute(AttributeName.NAMEDFEATURES, gid.getIDUsage(), null, " ", false);
+				n.appendAttribute(AttributeName.NAMEDFEATURES, gid.getIDValue(), null, " ", false);
+			}
 			gid.deleteNode();
 			return null;
 		}

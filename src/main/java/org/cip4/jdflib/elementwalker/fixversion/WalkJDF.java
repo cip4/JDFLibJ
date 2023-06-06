@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -82,8 +82,9 @@ public class WalkJDF extends WalkElement
 	}
 
 	/**
-	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine for JDF uses heuristics to modify this element and its children to be compatible with
-	 *      a given version in general, it will be able to move from low to high versions but potentially fail when attempting to move from higher to lower versions
+	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine for JDF uses heuristics to modify this element and its children to
+	 *      be compatible with a given version in general, it will be able to move from low to high versions but potentially fail when attempting to move from higher to lower
+	 *      versions
 	 */
 	@Override
 	public KElement walk(final KElement e1, final KElement trackElem)
@@ -127,7 +128,7 @@ public class WalkJDF extends WalkElement
 	 * @param trackElem
 	 * @param n
 	 */
-	private void fixNamedFeatures(final JDFNode n, final KElement trackElem)
+	void fixNamedFeatures(final JDFNode n, final KElement trackElem)
 	{
 		if (EnumUtil.aLessThanB(EnumVersion.Version_1_4, fixVersion.version))
 		{
@@ -137,9 +138,10 @@ public class WalkJDF extends WalkElement
 			{
 				final String key = v.get(i * 2);
 				final String val = v.get(i * 2 + 1);
-				n.appendGeneralID(key, val).setDataType(EnumDataType.NamedFeature);
+				n.setGeneralID(key, val).setDataType(EnumDataType.NamedFeature);
 			}
-			n.removeAttribute(AttributeName.NAMEDFEATURES);
+			if (fixVersion.isZappDeprecated())
+				n.removeAttribute(AttributeName.NAMEDFEATURES);
 		}
 	}
 
