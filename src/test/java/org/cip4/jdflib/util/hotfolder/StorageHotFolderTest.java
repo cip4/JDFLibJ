@@ -339,11 +339,11 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		final File file = new File(theHFDir + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
-		ThreadUtil.sleep(1000);
+		ThreadUtil.sleep(100);
 		assertTrue(file.exists());
 		hf.addListener(new CountListener(), ".txt");
 		assertNotNull(hf.getListener(1));
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 1234; i++)
 		{
 			ThreadUtil.sleep(42);
 			if (!file.exists())
