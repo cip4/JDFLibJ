@@ -664,4 +664,16 @@ public class JDFIntegerRange extends JDFRange
 		return inRange(((Integer) other).intValue());
 	}
 
+	@Override
+	public String getRightString(int precision)
+	{
+		return StringUtil.formatInteger(getRight());
+	}
+
+	@Override
+	public String getLeftString(int precision)
+	{
+		return StringUtil.formatInteger(getLeft());
+	}
+
 }
