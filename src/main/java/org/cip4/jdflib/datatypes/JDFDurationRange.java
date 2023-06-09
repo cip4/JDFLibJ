@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-20064 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -178,21 +178,6 @@ public class JDFDurationRange extends JDFRange
 	// *********************************************
 
 	/**
-	 * toString
-	 * 
-	 * @return String
-	 */
-	@Override
-	public String toString()
-	{
-		if (m_left.equals(m_right))
-		{
-			return m_left.getDurationISO();
-		}
-		return m_left.getDurationISO() + " ~ " + m_right.getDurationISO();
-	}
-
-	/**
 	 * isValid - validate the given String
 	 * 
 	 * @param s the given string
@@ -304,13 +289,13 @@ public class JDFDurationRange extends JDFRange
 	}
 
 	@Override
-	protected Object getRightObject()
+	protected JDFDuration getRightObject()
 	{
 		return m_right;
 	}
 
 	@Override
-	protected Object getLeftObject()
+	protected JDFDuration getLeftObject()
 	{
 		return m_left;
 	}
@@ -319,6 +304,18 @@ public class JDFDurationRange extends JDFRange
 	protected boolean inObjectRange(Object other)
 	{
 		return inRange((JDFDuration) other);
+	}
+
+	@Override
+	public String getRightString(int precision)
+	{
+		return m_right.getDurationISO();
+	}
+
+	@Override
+	public String getLeftString(int precision)
+	{
+		return m_left.getDurationISO();
 	}
 
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,89 +76,118 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.util.JDFDuration;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFDurationRangeTest {
+public class JDFDurationRangeTest
+{
 
 	/*
 	 * Constructors JDFDurationRange(JDFDuration) and JDFDurationRange(JDFDuration, JDFDuration)
 	 */
 	@Test
-	public final void testJDFDurationRangeJDFDuration() throws Exception {
+	public final void testJDFDurationRangeJDFDuration() throws Exception
+	{
 		JDFDurationRange r = new JDFDurationRange(new JDFDuration("PT5M"), new JDFDuration("PT15M"));
 		JDFDurationRange r2 = new JDFDurationRange(new JDFDuration("PT5M"));
 
-		Assertions.assertTrue(r.toString().equals("PT5M ~ PT15M"), "Bad Constructor ");
-		Assertions.assertTrue(r2.toString().equals("PT5M"), "Bad Constructor ");
+		assertTrue(r.toString().equals("PT5M ~ PT15M"), "Bad Constructor ");
+		assertTrue(r2.toString().equals("PT5M"), "Bad Constructor ");
 	}
 
 	/*
 	 * Class under test for void JDFDurationRange(JDFDurationRange)
 	 */
 	@Test
-	public final void testJDFDurationRangeJDFDurationRange() throws Exception {
+	public final void testJDFDurationRangeJDFDurationRange() throws Exception
+	{
 		JDFDurationRange r = new JDFDurationRange(new JDFDuration("PT5M"), new JDFDuration("PT25M"));
 		JDFDurationRange r2 = new JDFDurationRange(new JDFDuration("PT15M"));
 		JDFDurationRange r3 = new JDFDurationRange(r2);
 		r3.setRight(new JDFDuration("PT25M"));
-		Assertions.assertTrue(r.toString().equals("PT5M ~ PT25M"), "Bad Constructor" + r.toString());
-		Assertions.assertTrue(r2.toString().equals("PT15M"), "Bad Constructor" + r2.toString());
-		Assertions.assertTrue(r3.toString().equals("PT15M ~ PT25M"), "Bad CopyConstructor" + r3.toString());
+		assertTrue(r.toString().equals("PT5M ~ PT25M"), "Bad Constructor" + r.toString());
+		assertTrue(r2.toString().equals("PT15M"), "Bad Constructor" + r2.toString());
+		assertTrue(r3.toString().equals("PT15M ~ PT25M"), "Bad CopyConstructor" + r3.toString());
 	}
 
 	@Test
-	public final void testJDFDurationRangeString() throws Exception {
+	public final void testJDFDurationRangeString() throws Exception
+	{
 		JDFDurationRange r = new JDFDurationRange(" PT5M ~ PT15M ");
 
-		Assertions.assertTrue(r.toString().equals("PT5M ~ PT15M"), "Bad Constructor" + r.toString());
+		assertTrue(r.toString().equals("PT5M ~ PT15M"), "Bad Constructor" + r.toString());
 	}
 
 	@Test
-	public final void testInRange() throws Exception {
+	public final void testInRange() throws Exception
+	{
 		JDFDurationRangeList rangelist = new JDFDurationRangeList("PT5M ~ PT15M  PT1H5M ~ PT1H15M");
 
-		Assertions.assertTrue(rangelist.inRange(new JDFDuration("PT15M")), "InRange: ");
-		Assertions.assertTrue(rangelist.inRange(new JDFDuration("PT1H15M")), "InRange: ");
-		Assertions.assertFalse(rangelist.inRange(new JDFDuration("PT1H25M")), "NOT InRange: ");
-		Assertions.assertFalse(rangelist.inRange(new JDFDuration("PT55S")), "NOT InRange: ");
+		assertTrue(rangelist.inRange(new JDFDuration("PT15M")), "InRange: ");
+		assertTrue(rangelist.inRange(new JDFDuration("PT1H15M")), "InRange: ");
+		assertFalse(rangelist.inRange(new JDFDuration("PT1H25M")), "NOT InRange: ");
+		assertFalse(rangelist.inRange(new JDFDuration("PT55S")), "NOT InRange: ");
 
 	}
 
 	@Test
-	public final void testJDFDuration() throws Exception {
+	public final void testString() throws Exception
+	{
+		JDFDurationRange range = new JDFDurationRange("PT5M ~ PT15M");
+		assertEquals("PT5M PT15M", range.getXJDFString(0));
+		assertEquals("PT5M ~ PT15M", range.getString(0));
+		assertEquals("PT5M ~ PT15M", range.toString());
+		JDFDurationRange range2 = new JDFDurationRange("PT5M");
+		assertEquals("PT5M", range2.toString());
+		assertEquals("PT5M PT5M", range2.getXJDFString(0));
+
+	}
+
+	@Test
+	public final void testJDFDuration() throws Exception
+	{
 
 		JDFDuration d = new JDFDuration("PT5M");
 		JDFDuration d1 = new JDFDuration("PT50M");
 
-		try {
+		try
+		{
 			new JDFDuration("P0T5M");
-			Assertions.fail("invalid duration String");
+			fail("invalid duration String");
 
-		} catch (DataFormatException dfe) {
+		}
+		catch (DataFormatException dfe)
+		{
 			//
 		}
 
-		try {
+		try
+		{
 			new JDFDuration("PT5MS");
-			Assertions.fail("invalid duration String");
+			fail("invalid duration String");
 
-		} catch (DataFormatException dfe) {
+		}
+		catch (DataFormatException dfe)
+		{
 			//
 		}
 		JDFDuration p1 = new JDFDuration("P1Y2M3DT50M");
 		JDFDuration p11 = new JDFDuration("P01Y02M03DT50M");
-		Assertions.assertEquals(p1, p11);
+		assertEquals(p1, p11);
 		JDFDuration p2 = new JDFDuration("P01Y02M03D");
 		JDFDuration p3 = new JDFDuration("P1Y2M3DT10H30M");
-		Assertions.assertTrue(d.getDuration() == 300, "Bad Constructor d");
-		Assertions.assertTrue(d1.getDuration() == 3000, "Bad Constructor d1");
-		Assertions.assertTrue(p1.getDurationISO().equals("P1Y2M3DT50M"), "Bad Constructor p1");
-		Assertions.assertTrue(p2.getDurationISO().equals("P1Y2M3D"), "Bad Constructor p2");
-		Assertions.assertTrue(p3.getDurationISO().equals("P1Y2M3DT10H30M"), "Bad Constructor p2");
+		assertTrue(d.getDuration() == 300, "Bad Constructor d");
+		assertTrue(d1.getDuration() == 3000, "Bad Constructor d1");
+		assertTrue(p1.getDurationISO().equals("P1Y2M3DT50M"), "Bad Constructor p1");
+		assertTrue(p2.getDurationISO().equals("P1Y2M3D"), "Bad Constructor p2");
+		assertTrue(p3.getDurationISO().equals("P1Y2M3DT10H30M"), "Bad Constructor p2");
 
 	}
 }

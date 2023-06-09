@@ -1873,6 +1873,31 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testRunListRunPage()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.RasterReading);
+		final JDFRunList r1 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		JDFRunList r1r = (JDFRunList) r1.addPartition(EnumPartIDKey.Run, "r1");
+		JDFRunList r1rp = (JDFRunList) r1r.addPartition(EnumPartIDKey.RunPage, "1");
+		r1rp.setFileURL("file:///foo.pdf");
+		JDFRunList r1rp2 = (JDFRunList) r1r.addPartition(EnumPartIDKey.RunPage, "2");
+		r1rp2.setFileURL("file:///foo.pdf");
+
+		final JDFRunList r2 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
+		r2.setFileURL("file:///fooout.pdf");
+
+		writeRoundTrip(n, "RunListCopies");
+		JDFToXJDF c = new JDFToXJDF();
+		KElement e = c.convert(n);
+		ResourceHelper rl = new XJDFHelper(e).getSet(ElementName.RUNLIST, 0).getResource(0);
+		assertEquals("1 1", rl.getPartMap().get(AttributeName.PAGENUMBER));
+	}
+
+	/**
+	*
+	*/
+	@Test
 	public void testRunListPages()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();

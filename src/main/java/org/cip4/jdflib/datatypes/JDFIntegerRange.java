@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,8 +86,8 @@ import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * This class represents an integer range (JDFIntegerRange). It is a pair of 2 integer values separated by a tilde "~", for example "123 ~ 145" negative values
- * are treated differently depending on the value of m_defaultXDef @see getDefaultDef
+ * This class represents an integer range (JDFIntegerRange). It is a pair of 2 integer values separated by a tilde "~", for example "123 ~ 145" negative values are treated
+ * differently depending on the value of m_defaultXDef @see getDefaultDef
  */
 public class JDFIntegerRange extends JDFRange
 {
@@ -100,6 +100,7 @@ public class JDFIntegerRange extends JDFRange
 
 	/**
 	 * factory for JDFIntegerRange that silently returns null in case of illegal strings
+	 * 
 	 * @param s the string to parse
 	 * @return the JDFIntegerRange, null if s is not compatible
 	 */
@@ -270,23 +271,6 @@ public class JDFIntegerRange extends JDFRange
 		}
 
 		this.setDef(xdef); // set xDef
-	}
-
-	// **************************************** Methods
-	// *********************************************
-	/**
-	 * toString
-	 *
-	 * @return String
-	 */
-	@Override
-	public String toString()
-	{
-		if (getLeft() == getRight())
-		{
-			return StringUtil.formatInteger(getRight());
-		}
-		return StringUtil.formatInteger(getLeft()) + " ~ " + StringUtil.formatInteger(getRight());
 	}
 
 	/**
@@ -492,8 +476,8 @@ public class JDFIntegerRange extends JDFRange
 	}
 
 	/**
-	 * getElementCount - returns the number of elements in this range, on the C++ side of the JDF library this method is called NElements if any if any range
-	 * cannot be resolved due to an unknown negative value without a known default, -1 is returned
+	 * getElementCount - returns the number of elements in this range, on the C++ side of the JDF library this method is called NElements if any if any range cannot be resolved due
+	 * to an unknown negative value without a known default, -1 is returned
 	 *
 	 * @return int - the number of elements in this range, -1 if any range cannot be resolved
 	 */
@@ -507,8 +491,8 @@ public class JDFIntegerRange extends JDFRange
 	}
 
 	/**
-	 * append - appends a value to this range, returns true if possible returns false if the element is not the next element in the list, it only appends on the
-	 * right side of the range. For example:
+	 * append - appends a value to this range, returns true if possible returns false if the element is not the next element in the list, it only appends on the right side of the
+	 * range. For example:
 	 *
 	 * <pre>
 	 * &quot;3&tilde;5&quot;        append(6)   -&gt; &quot;3&tilde;6&quot;
@@ -561,8 +545,8 @@ public class JDFIntegerRange extends JDFRange
 
 	/**
 	 * Element - value of the ith element in the range.<br>
-	 * If the index is negativ the position is counted from the end of the range. For example the range is 3~7, the 2nd element is 5 and the -2nd element is 6.
-	 * On the C++ side of the JDF library this method is called Element.
+	 * If the index is negativ the position is counted from the end of the range. For example the range is 3~7, the 2nd element is 5 and the -2nd element is 6. On the C++ side of
+	 * the JDF library this method is called Element.
 	 *
 	 * @param i the position, if it is a negativ value start counting from the right side +1
 	 *
@@ -663,13 +647,13 @@ public class JDFIntegerRange extends JDFRange
 	}
 
 	@Override
-	protected Object getRightObject()
+	protected Integer getRightObject()
 	{
 		return Integer.valueOf(m_right);
 	}
 
 	@Override
-	protected Object getLeftObject()
+	protected Integer getLeftObject()
 	{
 		return Integer.valueOf(m_left);
 	}

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -45,6 +45,7 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.HashUtil;
 
@@ -122,6 +123,38 @@ public abstract class JDFRange implements JDFBaseDataTypes
 	 */
 	public String getString(final int precision)
 	{
-		return toString();
+		if (getLeftObject().equals(getRightObject()))
+		{
+			return getLeftString(precision);
+		}
+		return getLeftString(precision) + " ~ " + getRightString(precision);
+	}
+
+	/**
+	 *
+	 * get a string with precision digits after each decimal
+	 *
+	 * @param precision
+	 * @return
+	 */
+	public String getXJDFString(final int precision)
+	{
+		return getLeftString(precision) + JDFConstants.BLANK + getRightString(precision);
+	}
+
+	public String getRightString(int precision)
+	{
+		return JDFConstants.EMPTYSTRING + getRightObject();
+	}
+
+	public String getLeftString(int precision)
+	{
+		return JDFConstants.EMPTYSTRING + getLeftObject();
+	}
+
+	@Override
+	public String toString()
+	{
+		return getString(42);
 	}
 }

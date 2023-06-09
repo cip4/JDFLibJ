@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -190,11 +190,18 @@ public class JDFDateTimeRange extends JDFRange
 	@Override
 	public String toString()
 	{
-		if (m_left.equals(m_right))
-		{
-			return m_left.getDateTimeISO();
-		}
-		return m_left.getDateTimeISO() + (" ~ ") + m_right.getDateTimeISO();
+		return getString(0);
+	}
+
+	/**
+	 * toString
+	 *
+	 * @return String
+	 */
+	@Override
+	public String getXJDFString(final int precision)
+	{
+		return m_left.getDateTimeISO() + " . " + m_right.getDateTimeISO();
 	}
 
 	/**
@@ -309,13 +316,13 @@ public class JDFDateTimeRange extends JDFRange
 	}
 
 	@Override
-	protected Object getRightObject()
+	protected JDFDate getRightObject()
 	{
 		return m_right;
 	}
 
 	@Override
-	protected Object getLeftObject()
+	protected JDFDate getLeftObject()
 	{
 		return m_left;
 	}
@@ -324,6 +331,18 @@ public class JDFDateTimeRange extends JDFRange
 	protected boolean inObjectRange(final Object other)
 	{
 		return inRange((JDFDate) other);
+	}
+
+	@Override
+	public String getRightString(int precision)
+	{
+		return getRight().getDateISO();
+	}
+
+	@Override
+	public String getLeftString(int precision)
+	{
+		return getLeft().getDateISO();
 	}
 
 }

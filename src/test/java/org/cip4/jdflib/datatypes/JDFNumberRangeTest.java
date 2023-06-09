@@ -80,8 +80,6 @@ package org.cip4.jdflib.datatypes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.Test;
@@ -91,112 +89,26 @@ import org.junit.jupiter.api.Test;
  *
  *         May 14, 2009
  */
-public class JDFIntegerRangeTest extends JDFTestCaseBase
+public class JDFNumberRangeTest extends JDFTestCaseBase
 {
 
 	/**
 	 * @throws Exception
 	 */
 	@Test
-	public final void testJDFIntegerRangeString() throws Exception
+	public final void testJDFNumberRangeString() throws Exception
 	{
 
-		JDFIntegerRange range = new JDFIntegerRange();
-		range = new JDFIntegerRange(" 0 ~ 1 ");
+		JDFNumberRange range = new JDFNumberRange();
+		range = new JDFNumberRange(" 0.1 ~ 1.1 ");
 
 		// rangeList is not empty
 		assertFalse(range.toString().length() == 0, "Bad Constructor from a given String");
 		// must be trasformed into the string "0~1"
-		assertEquals(range.toString(), "0 ~ 1", "Bad Constructor from a given String");
-		range = new JDFIntegerRange(" 1 ~ 1 ");
-		assertEquals(range.toString(), "1", "Bad Constructor from a given String");
+		assertEquals(range.toString(), "0.1 ~ 1.1", "Bad Constructor from a given String");
+		range = new JDFNumberRange(" 1.1 ~ 1.1 ");
+		assertEquals(range.toString(), "1.1", "Bad Constructor from a given String");
 
-	}
-
-	/**
-	 * @throws Exception
-	 */
-	@Test
-	public final void testAppend() throws Exception
-	{
-		final JDFIntegerRange range = new JDFIntegerRange(" 0 ~ 1 ");
-
-		// rangeList is not empty
-		assertFalse(range.toString().length() == 0, "Bad Constructor from a given String");
-		// must be trasformed into the string "0~1"
-		assertEquals(range.toString(), "0 ~ 1", "Bad Constructor from a given String");
-		assertFalse(range.append(4));
-		assertEquals(range.toString(), "0 ~ 1", "Bad Constructor from a given String");
-		assertFalse(range.append(-5));
-		assertEquals(range.toString(), "0 ~ 1", "Bad Constructor from a given String");
-		assertTrue(range.append(2));
-		assertEquals(range.toString(), "0 ~ 2", "Bad Constructor from a given String");
-		assertFalse(range.append(2));
-		assertEquals(range.toString(), "0 ~ 2", "Bad Constructor from a given String");
-		assertFalse(range.append(1));
-		assertEquals(range.toString(), "0 ~ 2", "Bad Constructor from a given String");
-	}
-
-	/**
-		 *
-		 */
-	@Test
-	public final void testCopyConstructor()
-	{
-		final JDFIntegerRange range = new JDFIntegerRange(4, -1, 8);
-		assertTrue(range.inRange(4));
-		assertFalse(range.inRange(3));
-		assertTrue(range.inRange(7));
-		assertFalse(range.inRange(8));
-		final JDFIntegerRange range2 = new JDFIntegerRange(range);
-		assertTrue(range2.inRange(4));
-		assertFalse(range2.inRange(3));
-		assertTrue(range2.inRange(7));
-		assertFalse(range2.inRange(8));
-	}
-
-	/**
-	 * @throws Exception
-	 */
-	@Test
-	public final void testDefaultDef() throws Exception
-	{
-		JDFIntegerRange range = new JDFIntegerRange("0~-1");
-		assertFalse(range.inRange(4));
-		JDFIntegerRange.setDefaultDef(Integer.MAX_VALUE);
-		range = new JDFIntegerRange("0~-1");
-		assertTrue(range.inRange(4));
-		JDFIntegerRange.setDefaultDef(0);
-		range = new JDFIntegerRange("0~-1");
-		assertFalse(range.inRange(4));
-		assertFalse(range.inRange(-4));
-		assertTrue(range.inRange(0));
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	public void testScale()
-	{
-		final JDFIntegerRange range = new JDFIntegerRange(4, 5, 0);
-		range.scale(2);
-		assertEquals(range.getLeft(), 8);
-		assertEquals(range.getRight(), 10);
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	public void testGetIntegerRange()
-	{
-		assertEquals(JDFIntegerRange.getIntegerRange("8").getLeft(), 8);
-		assertEquals(JDFIntegerRange.getIntegerRange("8~22").getLeft(), 8);
-		assertEquals(JDFIntegerRange.getIntegerRange("8~22").getRight(), 22);
-		assertNull(JDFIntegerRange.getIntegerRange("8~22a"));
-		assertNull(JDFIntegerRange.getIntegerRange(""));
-		assertNull(JDFIntegerRange.getIntegerRange(null));
 	}
 
 	/**
@@ -205,34 +117,12 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
 	@Test
 	public void testGetString()
 	{
-		JDFIntegerRange integerRange = JDFIntegerRange.getIntegerRange("8~22");
-		assertEquals("8 ~ 22", integerRange.getString(0));
-		integerRange = JDFIntegerRange.getIntegerRange("8~77");
-		assertEquals("8 ~ 77", integerRange.getString(2));
-		assertEquals("8 77", integerRange.getXJDFString(2));
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	public void testGetIntegerList()
-	{
-		JDFIntegerRange range = new JDFIntegerRange(0, -1, 0);
-		JDFIntegerList il = range.getIntegerList();
-		assertEquals(il.size(), 0);
-
-		range = new JDFIntegerRange(0);
-		il = range.getIntegerList();
-		assertEquals(il.size(), 1);
-		range = new JDFIntegerRange(0, -1, -1);
-		il = range.getIntegerList();
-		assertEquals(il.size(), 0);
-		range.setDef(2000);
-		il = range.getIntegerList();
-		assertEquals(il.size(), 2000);
-		range.setDef(20000);
-		il = range.getIntegerList();
-		assertEquals(il.size(), 20000);
+		JDFNumberRange nr = JDFNumberRange.createNumberRange("8.1~22.234");
+		assertEquals("8 ~ 22", nr.getString(0));
+		assertEquals("8.1 ~ 22.23", nr.getString(2));
+		assertEquals("8.1 ~ 22.234", nr.getString(4));
+		nr = JDFNumberRange.createNumberRange("8.1~8.1");
+		assertEquals("8.1", nr.getString(4));
+		assertEquals("8.1 8.1", nr.getXJDFString(4));
 	}
 }

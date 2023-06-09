@@ -60,6 +60,8 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFIntegerRange;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
@@ -374,6 +376,21 @@ class PostXJDFWalker extends BaseElementWalker
 			part.removeAttribute(AttributeName.PREFLIGHTRULE);
 			part.renameAttribute(AttributeName.RUNPAGE, AttributeName.PAGENUMBER);
 			part.renameAttribute(AttributeName.RUNPAGERANGE, AttributeName.PAGENUMBER);
+			String pn = part.getNonEmpty(AttributeName.PAGENUMBER);
+			if (pn != null)
+			{
+				JDFIntegerList pns = JDFIntegerList.createIntegerList(pn);
+				if (pns != null)
+				{
+					int[] ia = pns.getIntArray();
+					JDFIntegerRangeList pnr = new JDFIntegerRangeList(ia);
+					if (pnr.size() == 1)
+					{
+						JDFIntegerRange r = (JDFIntegerRange) pnr.elementAt(0);
+						part.setAttribute(AttributeName.PAGENUMBER, r.getXJDFString(0));
+					}
+				}
+			}
 			part.removeAttribute(AttributeName.RUNSET);
 			part.removeAttribute(AttributeName.RUNTAGS);
 			part.removeAttribute(AttributeName.SECTIONINDEX);

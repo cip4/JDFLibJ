@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,13 +86,13 @@ import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * This class represents a number range (JDFNumberRange). It is a whitespace separated list of 2 double values separated by a tilde "~", for example
- * "1.23 ~ 1.45"
+ * This class represents a number range (JDFNumberRange). It is a whitespace separated list of 2 double values separated by a tilde "~", for example "1.23 ~ 1.45"
  */
 public class JDFNumberRange extends JDFRange
 {
 	/**
 	 * factory for JDFNumberRange that silently returns null in case of illegal strings
+	 * 
 	 * @param s the string to parse
 	 * @return the JDFNumberRange, null if s is not compatible
 	 */
@@ -221,23 +221,6 @@ public class JDFNumberRange extends JDFRange
 		}
 	}
 
-	// **************************************** Methods
-	// *********************************************
-	/**
-	 * toString
-	 * 
-	 * @return String
-	 */
-	@Override
-	public String toString()
-	{
-		if (Math.abs(this.getLeft() - this.getRight()) < JDFBaseDataTypes.EPSILON)
-		{
-			return JDFConstants.EMPTYSTRING + getRightString();
-		}
-		return getLeftString() + " ~ " + getRightString();
-	}
-
 	/**
 	 * isValid - validate the given String
 	 * 
@@ -318,20 +301,24 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * returns the string representation of the left value of the range
+	 * 
 	 * @param precision
 	 * @return
 	 */
-	private String getLeftString(int precision)
+	@Override
+	public String getLeftString(int precision)
 	{
 		return StringUtil.formatDouble(getLeft(), precision);
 	}
 
 	/**
 	 * returns the string representation of the left value of the range
+	 * 
 	 * @param precision
 	 * @return
 	 */
-	private String getRightString(int precision)
+	@Override
+	public String getRightString(int precision)
 	{
 		return StringUtil.formatDouble(getRight(), precision);
 	}

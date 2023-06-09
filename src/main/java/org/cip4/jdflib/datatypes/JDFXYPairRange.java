@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2004 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -82,12 +82,10 @@ package org.cip4.jdflib.datatypes;
 
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
- * This class represents a x y pair range (JDFXYPairRange). It is a whitespace separated list of 2 xy pairs separated by
- * a tilde "~", for example "1.23 3.24 ~ 2.34 7.12"
+ * This class represents a x y pair range (JDFXYPairRange). It is a whitespace separated list of 2 xy pairs separated by a tilde "~", for example "1.23 3.24 ~ 2.34 7.12"
  */
 public class JDFXYPairRange extends JDFRange
 {
@@ -182,24 +180,6 @@ public class JDFXYPairRange extends JDFRange
 		{
 			throw new DataFormatException("JDFXYPairRange illegal string: " + s);
 		}
-	}
-
-	// **************************************** Methods
-	// *********************************************
-
-	/**
-	 * toString - returns the range as a String
-	 * 
-	 * @return String - the range as a String
-	 */
-	@Override
-	public String toString()
-	{
-		if (m_left.equals(m_right))
-		{
-			return JDFConstants.EMPTYSTRING + getLeft();
-		}
-		return getLeft().toString() + " ~ " + getRight().toString();
 	}
 
 	/**
@@ -406,6 +386,18 @@ public class JDFXYPairRange extends JDFRange
 	protected Object getRightObject()
 	{
 		return m_right;
+	}
+
+	@Override
+	public String getRightString(int precision)
+	{
+		return getRight().getString(precision);
+	}
+
+	@Override
+	public String getLeftString(int precision)
+	{
+		return getLeft().getString(precision);
 	}
 
 	@Override

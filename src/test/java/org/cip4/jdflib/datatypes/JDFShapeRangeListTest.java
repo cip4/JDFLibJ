@@ -8,159 +8,134 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.zip.DataFormatException;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFShapeRangeListTest {
+public class JDFShapeRangeListTest
+{
 	/*
 	 * Class under test for void append(JDFShapeRange)
 	 */
 	@Test
-	public final void testAppendJDFShapeRange() {
+	public final void testAppendJDFShapeRange() throws DataFormatException
+	{
 		JDFShapeRangeList rangeList = new JDFShapeRangeList();
-		try {
-			rangeList = new JDFShapeRangeList("0 0 3 1 2 3~4 5 6 4 2 3~4 5 6");
-			rangeList.append(new JDFShapeRange("7.5 8.5 9.5"));
-		} catch (DataFormatException dfe) {
-			System.out.println(dfe.toString());
-		}
+		rangeList = new JDFShapeRangeList("0 0 3 1 2 3~4 5 6 4 2 3~4 5 6");
+		rangeList.append(new JDFShapeRange("7.5 8.5 9.5"));
 
-		Assertions.assertEquals(rangeList.toString(), "0 0 3 1 2 3 ~ 4 5 6 4 2 3 ~ 4 5 6 7.5 8.5 9.5", "original rangeList wrong:");
-		Assertions.assertTrue(rangeList.size() == 4, "Bad append" + rangeList.toString());
+		assertEquals(rangeList.toString(), "0 0 3 1 2 3 ~ 4 5 6 4 2 3 ~ 4 5 6 7.5 8.5 9.5", "original rangeList wrong:");
+		assertTrue(rangeList.size() == 4, "Bad append" + rangeList.toString());
+
 	}
 
 	@Test
-	public final void testSetString() {
+	public final void testSetString() throws DataFormatException
+	{
 		JDFShapeRangeList rangelist = new JDFShapeRangeList();
-		try {
-			rangelist = new JDFShapeRangeList("1 2 3 ~ 4 5 6   1.55 3.75 5.85");
-		} catch (DataFormatException dfe) {
-			System.out.println(dfe.toString());
-		}
+		rangelist = new JDFShapeRangeList("1 2 3 ~ 4 5 6   1.55 3.75 5.85");
 
 		// rangeList is not empty
-		Assertions.assertTrue(rangelist.size() == 2, "Bad setString: " + rangelist.size());
+		assertTrue(rangelist.size() == 2, "Bad setString: " + rangelist.size());
+		assertEquals("7.56 8.56 9.56 7.56 8.56 9.56", new JDFShapeRange("7.555 8.555 9.555").getXJDFString(2));
 	}
 
 	@Test
-	public final void testInRange() {
+	public final void testInRange() throws DataFormatException
+	{
 		JDFShapeRangeList rangelist = new JDFShapeRangeList();
-		try {
-			rangelist = new JDFShapeRangeList("1 2 3 ~ 4 5 6  7 8 9~10 11 12");
-		} catch (DataFormatException dfe) {
-			System.out.println(dfe.toString());
-		}
-		Assertions.assertTrue(rangelist.inRange(new JDFShape(3, 4, 5)), "Bad setString: ");
-		Assertions.assertTrue(rangelist.inRange(new JDFShape(4, 5, 6)), "Bad setString: ");
-		Assertions.assertFalse(rangelist.inRange(new JDFShape(6, 7, 8)), "Bad setString: ");
-		Assertions.assertFalse(rangelist.inRange(new JDFShape(10, 12, 12)), "Bad setString: ");
+		rangelist = new JDFShapeRangeList("1 2 3 ~ 4 5 6  7 8 9~10 11 12");
+		assertTrue(rangelist.inRange(new JDFShape(3, 4, 5)), "Bad setString: ");
+		assertTrue(rangelist.inRange(new JDFShape(4, 5, 6)), "Bad setString: ");
+		assertFalse(rangelist.inRange(new JDFShape(6, 7, 8)), "Bad setString: ");
+		assertFalse(rangelist.inRange(new JDFShape(10, 12, 12)), "Bad setString: ");
 	}
 
 	@Test
-	public final void testIsPartOfRange() {
+	public final void testIsPartOfRange() throws DataFormatException
+	{
 		JDFShapeRangeList rangelist = new JDFShapeRangeList();
 
-		try {
-			rangelist = new JDFShapeRangeList("1 2 3 ~ 4 5 6  7 8 9~10 11 12");
-		} catch (DataFormatException dfe) {
-			System.out.println(dfe.toString());
-		}
-		Assertions.assertTrue(rangelist.isPartOfRange(new JDFShapeRange(new JDFShape(3, 4, 5), new JDFShape(4, 5, 6))), "Bad setString: ");
-		Assertions.assertTrue(rangelist.isPartOfRange(new JDFShapeRange(new JDFShape(9, 9, 9), new JDFShape(10, 10, 10))), "Bad setString: ");
-		Assertions.assertFalse(rangelist.isPartOfRange(new JDFShapeRange(new JDFShape(9, 9, 9), new JDFShape(12, 12, 12))), "Bad setString: ");
-		Assertions.assertFalse(rangelist.isPartOfRange(new JDFShapeRange(new JDFShape(4, 5, 6), new JDFShape(7, 8, 9))), "Bad setString: ");
+		rangelist = new JDFShapeRangeList("1 2 3 ~ 4 5 6  7 8 9~10 11 12");
+		assertTrue(rangelist.isPartOfRange(new JDFShapeRange(new JDFShape(3, 4, 5), new JDFShape(4, 5, 6))), "Bad setString: ");
+		assertTrue(rangelist.isPartOfRange(new JDFShapeRange(new JDFShape(9, 9, 9), new JDFShape(10, 10, 10))), "Bad setString: ");
+		assertFalse(rangelist.isPartOfRange(new JDFShapeRange(new JDFShape(9, 9, 9), new JDFShape(12, 12, 12))), "Bad setString: ");
+		assertFalse(rangelist.isPartOfRange(new JDFShapeRange(new JDFShape(4, 5, 6), new JDFShape(7, 8, 9))), "Bad setString: ");
 	}
 
 	@Test
-	public final void testIsList_False() {
+	public final void testIsList_False() throws DataFormatException
+	{
 		JDFShapeRangeList rangelist = new JDFShapeRangeList();
-		try {
-			rangelist = new JDFShapeRangeList("0 0 4");
-			rangelist.append(new JDFShapeRange(new JDFShape("0 0 5"), new JDFShape("0 0 6")));
-			rangelist.append(new JDFShape("0 0 6"));
-			rangelist.append(new JDFShape("0 0 7"));
-		} catch (DataFormatException dfe) {
-			System.out.println(dfe.toString());
-		}
-
-		Assertions.assertFalse(rangelist.isList(), "Bad isList");
+		rangelist = new JDFShapeRangeList("0 0 4");
+		rangelist.append(new JDFShapeRange(new JDFShape("0 0 5"), new JDFShape("0 0 6")));
+		rangelist.append(new JDFShape("0 0 6"));
+		rangelist.append(new JDFShape("0 0 7"));
+		assertFalse(rangelist.isList(), "Bad isList");
 	}
 
 	@Test
-	public final void testIsUnique_False() {
+	public final void testIsUnique_False() throws DataFormatException
+	{
 		JDFShapeRangeList rangelist = new JDFShapeRangeList();
-		try {
-			rangelist = new JDFShapeRangeList("0 0 4");
-			rangelist.append(new JDFShapeRange(new JDFShape("0 0 5"), new JDFShape("0 0 6")));
-			rangelist.append(new JDFShape("0 0 5.5")); // in "0 0 5 ~ 0 0 6"
-			rangelist.append(new JDFShape("0 0 7"));
-		} catch (DataFormatException dfe) {
-			System.out.println(dfe.toString());
-		}
+		rangelist = new JDFShapeRangeList("0 0 4");
+		rangelist.append(new JDFShapeRange(new JDFShape("0 0 5"), new JDFShape("0 0 6")));
+		rangelist.append(new JDFShape("0 0 5.5")); // in "0 0 5 ~ 0 0 6"
+		rangelist.append(new JDFShape("0 0 7"));
 
-		Assertions.assertFalse(rangelist.isUnique(), "Bad isUnique");
+		assertFalse(rangelist.isUnique(), "Bad isUnique");
 	}
 
 	@Test
-	public final void testIsOrdered_False() {
+	public final void testIsOrdered_False() throws DataFormatException
+	{
 		JDFShapeRangeList rangelist = new JDFShapeRangeList();
-		try {
-			rangelist = new JDFShapeRangeList("0 0 4");
-			rangelist.append(new JDFShape("0 0 5"));
-			rangelist.append(new JDFShapeRange(new JDFShape("0 0 5.5"), new JDFShape("0 0 6")));
-			rangelist.append(new JDFShape("0 0 5"));
-			rangelist.append(new JDFShape("0 0 7"));
-		} catch (DataFormatException dfe) {
-			System.out.println(dfe.toString());
-		}
+		rangelist = new JDFShapeRangeList("0 0 4");
+		rangelist.append(new JDFShape("0 0 5"));
+		rangelist.append(new JDFShapeRange(new JDFShape("0 0 5.5"), new JDFShape("0 0 6")));
+		rangelist.append(new JDFShape("0 0 5"));
+		rangelist.append(new JDFShape("0 0 7"));
 
-		Assertions.assertFalse(rangelist.isOrdered(), "Bad isOrdered");
+		assertFalse(rangelist.isOrdered(), "Bad isOrdered");
 	}
 
 	@Test
-	public final void testIsOrdered_Reverse_True() {
+	public final void testIsOrdered_Reverse_True() throws DataFormatException
+	{
 		JDFShapeRangeList rangelist = new JDFShapeRangeList();
-		try {
-			rangelist = new JDFShapeRangeList("0 0 7");
-			rangelist.append(new JDFShape(0, 0, 5));
-			rangelist.append(new JDFShapeRange("0 0 4~0 0 2"));
-		} catch (DataFormatException dfe) {
-			System.out.println(dfe.toString());
-		}
+		rangelist = new JDFShapeRangeList("0 0 7");
+		rangelist.append(new JDFShape(0, 0, 5));
+		rangelist.append(new JDFShapeRange("0 0 4~0 0 2"));
 
-		Assertions.assertTrue(rangelist.isOrdered(), "Bad isOrdered");
+		assertTrue(rangelist.isOrdered(), "Bad isOrdered");
 	}
 
 	@Test
-	public final void testIsUniqueOrdered_Reverse_False() {
+	public final void testIsUniqueOrdered_Reverse_False() throws DataFormatException
+	{
 		JDFShapeRangeList rangelist = new JDFShapeRangeList();
-		try {
-			rangelist = new JDFShapeRangeList("0 0 7");
-			rangelist.append(new JDFShape("0 0 5"));
-			rangelist.append(new JDFShapeRange("0 0 4~0 0 2"));
-			rangelist.append(new JDFShape("0 0 5"));
-		} catch (DataFormatException dfe) {
-			System.out.println(dfe.toString());
-		}
+		rangelist = new JDFShapeRangeList("0 0 7");
+		rangelist.append(new JDFShape("0 0 5"));
+		rangelist.append(new JDFShapeRange("0 0 4~0 0 2"));
+		rangelist.append(new JDFShape("0 0 5"));
 
-		Assertions.assertFalse(rangelist.isUniqueOrdered(), "Bad isUniqueOrdered");
+		assertFalse(rangelist.isUniqueOrdered(), "Bad isUniqueOrdered");
 	}
 
 	@Test
-	public final void testIsUniqueOrdered_True() {
+	public final void testIsUniqueOrdered_True() throws DataFormatException
+	{
 		JDFShapeRangeList rangelist = new JDFShapeRangeList();
-		try {
-			rangelist = new JDFShapeRangeList("0 0 4");
-			rangelist.append(new JDFShape("0 0 5"));
-			rangelist.append(new JDFShapeRange(new JDFShape("0 0 5.5"), new JDFShape("0 0 6")));
-			// rangelist.append(new JDFShape("0 0 5"));
-			rangelist.append(new JDFShape("0 0 7"));
-		} catch (DataFormatException dfe) {
-			System.out.println(dfe.toString());
-		}
+		rangelist = new JDFShapeRangeList("0 0 4");
+		rangelist.append(new JDFShape("0 0 5"));
+		rangelist.append(new JDFShapeRange(new JDFShape("0 0 5.5"), new JDFShape("0 0 6")));
+		// rangelist.append(new JDFShape("0 0 5"));
+		rangelist.append(new JDFShape("0 0 7"));
 
-		Assertions.assertTrue(rangelist.isUniqueOrdered(), "Bad isUniqueOrdered");
+		assertTrue(rangelist.isUniqueOrdered(), "Bad isUniqueOrdered");
 	}
 }

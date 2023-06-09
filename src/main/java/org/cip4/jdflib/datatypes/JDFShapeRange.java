@@ -82,11 +82,22 @@ package org.cip4.jdflib.datatypes;
 
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.util.HashUtil;
 
 public class JDFShapeRange extends JDFRange
 {
+	@Override
+	public String getRightString(int precision)
+	{
+		return getRight().getString(precision);
+	}
+
+	@Override
+	public String getLeftString(int precision)
+	{
+		return getLeft().getString(precision);
+	}
+
 	// **************************************** Attributes
 	// ******************************************
 	private JDFShape m_left = null;
@@ -179,24 +190,6 @@ public class JDFShapeRange extends JDFRange
 		{
 			throw new DataFormatException("JDFShapeRange illegal string: " + s);
 		}
-	}
-
-	// **************************************** Methods
-	// *********************************************
-
-	/**
-	 * getString - returns the range as a String
-	 * 
-	 * @return String - the range as a String
-	 */
-	@Override
-	public String toString()
-	{
-		if (m_left.equals(m_right))
-		{
-			return JDFConstants.EMPTYSTRING + getLeft();
-		}
-		return getLeft() + " ~ " + getRight();
 	}
 
 	/**

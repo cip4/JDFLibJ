@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2004 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -82,7 +82,6 @@ package org.cip4.jdflib.datatypes;
 
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.util.HashUtil;
 
 public class JDFRectangleRange extends JDFRange
@@ -181,24 +180,6 @@ public class JDFRectangleRange extends JDFRange
 		}
 	}
 
-	// **************************************** Methods
-	// *********************************************
-
-	/**
-	 * getString - returns the range as a String
-	 * 
-	 * @return String - the range as a String
-	 */
-	@Override
-	public String toString()
-	{
-		if (m_left.equals(m_right))
-		{
-			return JDFConstants.EMPTYSTRING + getLeft();
-		}
-		return getLeft() + " ~ " + getRight();
-	}
-
 	/**
 	 * isValid - validate the given String
 	 * 
@@ -222,7 +203,7 @@ public class JDFRectangleRange extends JDFRange
 	/**
 	 * equals - returns true if both JDFRectangleRanges are equal otherwise false
 	 * 
-	 *@param other the JDFRectangleRange to compare
+	 * @param other the JDFRectangleRange to compare
 	 * @return boolean - true if equal, otherwise false
 	 */
 	@Override
