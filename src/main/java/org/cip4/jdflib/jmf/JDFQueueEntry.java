@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -111,7 +111,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 *
-	 * Apr 29, 2009
+	 *         Apr 29, 2009
 	 */
 	public static class QueueEntryComparator implements Comparator<KElement>
 	{
@@ -142,7 +142,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 		 * @param o1
 		 * @param o2
 		 * @return
-		*/
+		 */
 		@Override
 		public int compare(final KElement o1, final KElement o2)
 		{
@@ -362,7 +362,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	/**
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setPriority(int)
 	 * @param value
-	*/
+	 */
 	@Override
 	public void setPriority(final int value)
 	{
@@ -409,8 +409,8 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	}
 
 	/**
-	 * sets the QueueEntry/@Status if the queue is automated, also resorts the queue to reflect the new Status and sets the Queue/@Status based on the maximum
-	 * number of concurrently running jobs also sets StartTime and EndTime appropriately if the queue is automated
+	 * sets the QueueEntry/@Status if the queue is automated, also resorts the queue to reflect the new Status and sets the Queue/@Status based on the maximum number of
+	 * concurrently running jobs also sets StartTime and EndTime appropriately if the queue is automated
 	 *
 	 * @param value the queuentry status to set
 	 *
@@ -478,6 +478,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * gets the NodeIdentifier that matches this
+	 * 
 	 * @param ni
 	 *
 	 *
@@ -616,10 +617,11 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	}
 
 	/**
-	* (24) const get element JobPhase
-	* @return JDFJobPhase the element
-	* @deprecated use getJobPhase(n) this is a legacy version
-	*/
+	 * (24) const get element JobPhase
+	 * 
+	 * @return JDFJobPhase the element
+	 * @deprecated use getJobPhase(n) this is a legacy version
+	 */
 	@Deprecated
 	public JDFJobPhase getJobPhase()
 	{
@@ -627,10 +629,11 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	}
 
 	/**
-	* (24) const get element JobPhase
-	* @return JDFJobPhase the element
-	* @deprecated use getCreateJobPhase(n) this is a legacy version
-	*/
+	 * (24) const get element JobPhase
+	 * 
+	 * @return JDFJobPhase the element
+	 * @deprecated use getCreateJobPhase(n) this is a legacy version
+	 */
 	@Deprecated
 	public JDFJobPhase getCreateJobPhase()
 	{
@@ -638,8 +641,9 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	}
 
 	/**
-	 * return a value based on QueueEntryStatus and Priority to sort the queue the status is the major order whereas the priority is used to order within
-	 * regions of identical status
+	 * return a value based on QueueEntryStatus and Priority to sort the queue the status is the major order whereas the priority is used to order within regions of identical
+	 * status
+	 * 
 	 * @param status
 	 * @param priority
 	 *
@@ -696,7 +700,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	/**
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setEndTime(org.cip4.jdflib.util.JDFDate)
 	 * @param value
-	*/
+	 */
 	@Override
 	public void setEndTime(JDFDate value)
 	{
@@ -706,7 +710,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	/**
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setStartTime(org.cip4.jdflib.util.JDFDate)
 	 * @param value
-	*/
+	 */
 	@Override
 	public void setStartTime(JDFDate value)
 	{
@@ -722,26 +726,25 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 		if (value == null)
 			value = new JDFDate().getDateTimeISO();
 		final String oldVal = getAttribute(attName, null, null);
-		if (isAutomated() && !ContainerUtil.equals(oldVal, value))
-		{
-			final JDFQueue queue = (JDFQueue) getParentNode_KElement();
-			synchronized (queue)
-			{
-				super.setAttribute(attName, value);
-				queue.sortChild(this);
-			}
-		}
-		else if (!ContainerUtil.equals(oldVal, value)) // non automated
+		if (!ContainerUtil.equals(oldVal, value))
 		{
 			super.setAttribute(attName, value);
+			final JDFQueue queue = isAutomated() ? (JDFQueue) getParentNode_KElement() : null;
+			if (queue != null)
+			{
+				synchronized (queue)
+				{
+					super.setAttribute(attName, value);
+					queue.sortChild(this);
+				}
+			}
 		}
-
 	}
 
 	/**
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setSubmissionTime(org.cip4.jdflib.util.JDFDate)
 	 * @param value
-	*/
+	 */
 	@Override
 	public void setSubmissionTime(JDFDate value)
 	{

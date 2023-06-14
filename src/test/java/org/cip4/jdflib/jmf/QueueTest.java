@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,6 +38,13 @@
  */
 package org.cip4.jdflib.jmf;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Map;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -46,6 +53,7 @@ import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -56,7 +64,6 @@ import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -126,13 +133,13 @@ public class QueueTest extends JDFTestCaseBase
 	@Test
 	public void testGetQueueEntry()
 	{
-		Assertions.assertEquals(q.getQueueEntry(1).getQueueEntryID(), "qe2", "qe2");
-		Assertions.assertEquals(q.getQueueEntry("qe1").getQueueEntryID(), "qe1", "qe2");
-		Assertions.assertEquals(q.getQueueEntry("qe2").getQueueEntryID(), "qe2", "qe2");
-		Assertions.assertEquals(q.getQueueEntry("qe3").getQueueEntryID(), "qe3", "qe2");
-		Assertions.assertNull(q.getQueueEntry("qe6"), "qe6");
-		Assertions.assertEquals(-1, q.getQueueEntryPos("qe6"), "qe6");
-		Assertions.assertEquals(1, q.getQueueEntryPos("qe2"), "qe2");
+		assertEquals(q.getQueueEntry(1).getQueueEntryID(), "qe2", "qe2");
+		assertEquals(q.getQueueEntry("qe1").getQueueEntryID(), "qe1", "qe2");
+		assertEquals(q.getQueueEntry("qe2").getQueueEntryID(), "qe2", "qe2");
+		assertEquals(q.getQueueEntry("qe3").getQueueEntryID(), "qe3", "qe2");
+		assertNull(q.getQueueEntry("qe6"), "qe6");
+		assertEquals(-1, q.getQueueEntryPos("qe6"), "qe6");
+		assertEquals(1, q.getQueueEntryPos("qe2"), "qe2");
 	}
 
 	/**
@@ -142,8 +149,8 @@ public class QueueTest extends JDFTestCaseBase
 	public void testGetQueueEntryMap()
 	{
 		final Map<String, JDFQueueEntry> map = q.getQueueEntryIDMap();
-		Assertions.assertEquals(map.size(), q.numEntries(null));
-		Assertions.assertEquals(map.get("qe2"), q.getQueueEntry("qe2"));
+		assertEquals(map.size(), q.numEntries(null));
+		assertEquals(map.get("qe2"), q.getQueueEntry("qe2"));
 	}
 
 	/**
@@ -157,12 +164,12 @@ public class QueueTest extends JDFTestCaseBase
 		q.setMaxWaitingEntries(3);
 		q.flushQueue(null);
 		JDFQueueEntry qe = q.createQueueEntry(false);
-		Assertions.assertEquals(qe.getQueueEntryStatus(), EnumQueueEntryStatus.Waiting);
+		assertEquals(qe.getQueueEntryStatus(), EnumQueueEntryStatus.Waiting);
 		qe = q.createQueueEntry(true);
-		Assertions.assertEquals(qe.getQueueEntryStatus(), EnumQueueEntryStatus.Held);
+		assertEquals(qe.getQueueEntryStatus(), EnumQueueEntryStatus.Held);
 		q.setMaxWaitingEntries(1);
 		qe = q.createQueueEntry(true);
-		Assertions.assertNull(qe);
+		assertNull(qe);
 	}
 
 	// ///////////////////////////////////
@@ -176,39 +183,39 @@ public class QueueTest extends JDFTestCaseBase
 		q.setMaxRunningEntries(2);
 		q.setMaxWaitingEntries(3);
 		q.flushQueue(null);
-		Assertions.assertEquals(q.openQueue(), EnumQueueStatus.Waiting);
-		Assertions.assertTrue(q.canAccept());
-		Assertions.assertTrue(q.canExecute());
-		Assertions.assertEquals(q.closeQueue(), EnumQueueStatus.Closed);
-		Assertions.assertFalse(q.canAccept());
-		Assertions.assertTrue(q.canExecute());
-		Assertions.assertEquals(q.openQueue(), EnumQueueStatus.Waiting);
-		Assertions.assertEquals(q.holdQueue(), EnumQueueStatus.Held);
-		Assertions.assertTrue(q.canAccept());
-		Assertions.assertFalse(q.canExecute());
-		Assertions.assertEquals(q.resumeQueue(), EnumQueueStatus.Waiting);
-		Assertions.assertEquals(q.holdQueue(), EnumQueueStatus.Held);
-		Assertions.assertEquals(q.closeQueue(), EnumQueueStatus.Blocked);
-		Assertions.assertFalse(q.canAccept());
-		Assertions.assertFalse(q.canExecute());
-		Assertions.assertEquals(q.resumeQueue(), EnumQueueStatus.Closed);
-		Assertions.assertEquals(q.openQueue(), EnumQueueStatus.Waiting);
+		assertEquals(q.openQueue(), EnumQueueStatus.Waiting);
+		assertTrue(q.canAccept());
+		assertTrue(q.canExecute());
+		assertEquals(q.closeQueue(), EnumQueueStatus.Closed);
+		assertFalse(q.canAccept());
+		assertTrue(q.canExecute());
+		assertEquals(q.openQueue(), EnumQueueStatus.Waiting);
+		assertEquals(q.holdQueue(), EnumQueueStatus.Held);
+		assertTrue(q.canAccept());
+		assertFalse(q.canExecute());
+		assertEquals(q.resumeQueue(), EnumQueueStatus.Waiting);
+		assertEquals(q.holdQueue(), EnumQueueStatus.Held);
+		assertEquals(q.closeQueue(), EnumQueueStatus.Blocked);
+		assertFalse(q.canAccept());
+		assertFalse(q.canExecute());
+		assertEquals(q.resumeQueue(), EnumQueueStatus.Closed);
+		assertEquals(q.openQueue(), EnumQueueStatus.Waiting);
 		JDFQueueEntry qe = q.createQueueEntry(false);
 		qe = q.createQueueEntry(false);
-		Assertions.assertTrue(q.canAccept());
-		Assertions.assertEquals(q.getQueueStatus(), EnumQueueStatus.Waiting);
+		assertTrue(q.canAccept());
+		assertEquals(q.getQueueStatus(), EnumQueueStatus.Waiting);
 		qe = q.createQueueEntry(false);
-		Assertions.assertFalse(q.canAccept(), "max 3 waiting - see above ");
-		Assertions.assertEquals(q.getQueueStatus(), EnumQueueStatus.Closed);
+		assertFalse(q.canAccept(), "max 3 waiting - see above ");
+		assertEquals(q.getQueueStatus(), EnumQueueStatus.Closed);
 		qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
-		Assertions.assertTrue(q.canAccept(), "max 3 waiting - see above ");
-		Assertions.assertTrue(q.canExecute(), "max 3 waiting - see above ");
-		Assertions.assertEquals(q.getQueueStatus(), EnumQueueStatus.Waiting);
+		assertTrue(q.canAccept(), "max 3 waiting - see above ");
+		assertTrue(q.canExecute(), "max 3 waiting - see above ");
+		assertEquals(q.getQueueStatus(), EnumQueueStatus.Waiting);
 		qe = q.createQueueEntry(false);
 		qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
-		Assertions.assertEquals(q.getQueueStatus(), EnumQueueStatus.Running);
+		assertEquals(q.getQueueStatus(), EnumQueueStatus.Running);
 		qe = q.createQueueEntry(false);
-		Assertions.assertEquals(q.getQueueStatus(), EnumQueueStatus.Full);
+		assertEquals(q.getQueueStatus(), EnumQueueStatus.Full);
 
 	}
 
@@ -220,8 +227,8 @@ public class QueueTest extends JDFTestCaseBase
 	{
 		q.flush();
 		q.setAutomated(true);
-		Assertions.assertEquals(q.isAutomated(), true);
-		Assertions.assertEquals(q.getQueueStatus(), EnumQueueStatus.Waiting);
+		assertEquals(q.isAutomated(), true);
+		assertEquals(q.getQueueStatus(), EnumQueueStatus.Waiting);
 	}
 
 	/**
@@ -233,9 +240,9 @@ public class QueueTest extends JDFTestCaseBase
 		q.setAutomated(true);
 		q.setMaxWaitingEntries(1);
 		q.setMaxRunningEntries(1);
-		Assertions.assertEquals(q.getQueueStatus(), EnumQueueStatus.Full);
+		assertEquals(q.getQueueStatus(), EnumQueueStatus.Full);
 		q.flushQueue(null);
-		Assertions.assertEquals(q.getQueueStatus(), EnumQueueStatus.Waiting);
+		assertEquals(q.getQueueStatus(), EnumQueueStatus.Waiting);
 
 	}
 
@@ -247,18 +254,18 @@ public class QueueTest extends JDFTestCaseBase
 	{
 		q.getQueueEntry(1).setJobID("j7");
 		final NodeIdentifier ni = new NodeIdentifier("j7", null, null);
-		Assertions.assertEquals(q.getQueueEntry(ni, 0), q.getQueueEntry(1));
-		Assertions.assertEquals(q.getQueueEntry(ni, -1), q.getQueueEntry(1));
-		Assertions.assertNull(q.getQueueEntry(ni, -2));
-		Assertions.assertNull(q.getQueueEntry(ni, 1));
+		assertEquals(q.getQueueEntry(ni, 0), q.getQueueEntry(1));
+		assertEquals(q.getQueueEntry(ni, -1), q.getQueueEntry(1));
+		assertNull(q.getQueueEntry(ni, -2));
+		assertNull(q.getQueueEntry(ni, 1));
 		q.getQueueEntry(3).setJobID("j7");
 
-		Assertions.assertEquals(q.getQueueEntry(ni, 0), q.getQueueEntry(1));
-		Assertions.assertEquals(q.getQueueEntry(ni, -1), q.getQueueEntry(3));
-		Assertions.assertEquals(q.getQueueEntry(ni, 1), q.getQueueEntry(3));
-		Assertions.assertEquals(q.getQueueEntry(ni, -2), q.getQueueEntry(1));
-		Assertions.assertNull(q.getQueueEntry(ni, -3));
-		Assertions.assertNull(q.getQueueEntry(ni, 4));
+		assertEquals(q.getQueueEntry(ni, 0), q.getQueueEntry(1));
+		assertEquals(q.getQueueEntry(ni, -1), q.getQueueEntry(3));
+		assertEquals(q.getQueueEntry(ni, 1), q.getQueueEntry(3));
+		assertEquals(q.getQueueEntry(ni, -2), q.getQueueEntry(1));
+		assertNull(q.getQueueEntry(ni, -3));
+		assertNull(q.getQueueEntry(ni, 4));
 	}
 
 	/**
@@ -268,9 +275,9 @@ public class QueueTest extends JDFTestCaseBase
 	public void testGetQueueEntryVectorByIdentifier()
 	{
 		final NodeIdentifier ni = new NodeIdentifier("j2", null, null);
-		Assertions.assertEquals(q.getQueueEntryVector(ni).elementAt(0), q.getQueueEntry(1));
-		Assertions.assertEquals(q.getQueueEntryVector(null).elementAt(0), q.getQueueEntry(0));
-		Assertions.assertEquals(q.getQueueEntryVector(null).size(), q.numChildElements(ElementName.QUEUEENTRY, null));
+		assertEquals(q.getQueueEntryVector(ni).elementAt(0), q.getQueueEntry(1));
+		assertEquals(q.getQueueEntryVector(null).elementAt(0), q.getQueueEntry(0));
+		assertEquals(q.getQueueEntryVector(null).size(), q.numChildElements(ElementName.QUEUEENTRY, null));
 	}
 
 	/**
@@ -282,10 +289,21 @@ public class QueueTest extends JDFTestCaseBase
 		final JDFQueueEntry qe = q.getQueueEntry(0);
 		qe.setQueueEntryID("qe1");
 		JDFDate d = qe.getEndTime();
-		Assertions.assertNull(d, "date");
-		qe.setEndTime(null);
-		d = qe.getEndTime();
-		Assertions.assertEquals(d.getTimeInMillis(), new JDFDate().getTimeInMillis(), 420000, "date");
+		assertNull(d, "date");
+		for (boolean b : new boolean[] { true, false })
+		{
+			q.setAutomated(b);
+			qe.setEndTime(null);
+			d = qe.getEndTime();
+			assertEquals(d.getTimeInMillis(), new JDFDate().getTimeInMillis(), 420000, "date");
+			qe.setStartTime(null);
+			d = qe.getStartTime();
+			assertEquals(d.getTimeInMillis(), new JDFDate().getTimeInMillis(), 420000, "date");
+			JDFQueueEntry qe2 = (JDFQueueEntry) JDFElement.createRoot(ElementName.QUEUEENTRY);
+			qe2.setEndTime(null);
+			d = qe2.getEndTime();
+			assertEquals(d.getTimeInMillis(), new JDFDate().getTimeInMillis(), 420000, "date");
+		}
 	}
 
 	/**
@@ -297,9 +315,9 @@ public class QueueTest extends JDFTestCaseBase
 		final JDFQueueFilter qf = (JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();
 		qf.appendQueueEntryDef("qe5");
 		final VElement v = q.flushQueue(qf);
-		Assertions.assertEquals(v.size(), 1);
-		Assertions.assertEquals(((JDFQueueEntry) v.get(0)).getQueueEntryID(), "qe5");
-		Assertions.assertEquals(q.numEntries(null), 4);
+		assertEquals(v.size(), 1);
+		assertEquals(((JDFQueueEntry) v.get(0)).getQueueEntryID(), "qe5");
+		assertEquals(q.numEntries(null), 4);
 
 	}
 
@@ -319,7 +337,7 @@ public class QueueTest extends JDFTestCaseBase
 		final long l1 = System.currentTimeMillis();
 		q.sortChildren();
 		final long l2 = System.currentTimeMillis();
-		Assertions.assertEquals(3000, (l2 - l1), 3000, "Sort time <6 seconds");
+		assertEquals(3000, (l2 - l1), 3000, "Sort time <6 seconds");
 	}
 
 	/**
@@ -340,7 +358,7 @@ public class QueueTest extends JDFTestCaseBase
 			final JDFDate d = new JDFDate(System.currentTimeMillis() + i * 1000000);
 			qe.setEndTime(d);
 		}
-		Assertions.assertTrue(q.getQueueEntry(2).getEndTime().isEarlier(q.getQueueEntry(1).getEndTime()));
+		assertTrue(q.getQueueEntry(2).getEndTime().isEarlier(q.getQueueEntry(1).getEndTime()));
 	}
 
 	/**
@@ -381,7 +399,7 @@ public class QueueTest extends JDFTestCaseBase
 			ThreadUtil.sleep(1000); // wait for threads to be over
 			log.info("threads: " + iThread + " " + n);
 		}
-		Assertions.assertEquals(q.getQueueSize(), 1000);
+		assertEquals(q.getQueueSize(), 1000);
 		VElement v = q.getQueueEntryVector();
 		JDFQueueEntry qeLast = null;
 		for (int i = 0; i < v.size(); i++)
@@ -389,7 +407,7 @@ public class QueueTest extends JDFTestCaseBase
 			final JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
 			System.out.println(i + " " + qe.getPriority() + " " + qe.getQueueEntryID() + " " + qe.getQueueEntryStatus());
 			final boolean b = qe.compareTo(qeLast) >= 0;
-			Assertions.assertTrue(b);
+			assertTrue(b);
 			qeLast = qe;
 		}
 
@@ -404,13 +422,13 @@ public class QueueTest extends JDFTestCaseBase
 			}
 		}
 
-		Assertions.assertEquals(v.size(), 100);
+		assertEquals(v.size(), 100);
 		v = q.getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS, "Running"), null);
-		Assertions.assertNull(v);
+		assertNull(v);
 		v = q.getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS, "Held"), null);
-		Assertions.assertEquals(v.size(), 500);
+		assertEquals(v.size(), 500);
 		v = q.getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS, "Waiting"), null);
-		Assertions.assertEquals(v.size(), 400);
+		assertEquals(v.size(), 400);
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -422,8 +440,8 @@ public class QueueTest extends JDFTestCaseBase
 	@Test
 	public void testNumEntries()
 	{
-		Assertions.assertEquals(5, q.numEntries(null));
-		Assertions.assertEquals(2, q.numEntries(EnumQueueEntryStatus.Waiting));
+		assertEquals(5, q.numEntries(null));
+		assertEquals(2, q.numEntries(EnumQueueEntryStatus.Waiting));
 	}
 
 	/**
@@ -432,11 +450,11 @@ public class QueueTest extends JDFTestCaseBase
 	@Test
 	public void testHasFewerEntries()
 	{
-		Assertions.assertEquals(true, q.hasFewerEntries(null, 4));
-		Assertions.assertEquals(true, q.hasFewerEntries(null, 5));
-		Assertions.assertEquals(false, q.hasFewerEntries(null, 6));
-		Assertions.assertEquals(true, q.hasFewerEntries(EnumQueueEntryStatus.Waiting, 2));
-		Assertions.assertEquals(false, q.hasFewerEntries(EnumQueueEntryStatus.Waiting, 3));
+		assertEquals(true, q.hasFewerEntries(null, 4));
+		assertEquals(true, q.hasFewerEntries(null, 5));
+		assertEquals(false, q.hasFewerEntries(null, 6));
+		assertEquals(true, q.hasFewerEntries(EnumQueueEntryStatus.Waiting, 2));
+		assertEquals(false, q.hasFewerEntries(EnumQueueEntryStatus.Waiting, 3));
 	}
 
 	/**
@@ -445,8 +463,8 @@ public class QueueTest extends JDFTestCaseBase
 	@Test
 	public void testGetQueueEntryVector()
 	{
-		Assertions.assertEquals(5, q.getQueueEntryVector().size());
-		Assertions.assertEquals(2, q.getQueueEntryVector(new JDFAttributeMap("Status", EnumQueueEntryStatus.Waiting), null).size());
+		assertEquals(5, q.getQueueEntryVector().size());
+		assertEquals(2, q.getQueueEntryVector(new JDFAttributeMap("Status", EnumQueueEntryStatus.Waiting), null).size());
 	}
 
 	/**
@@ -455,13 +473,13 @@ public class QueueTest extends JDFTestCaseBase
 	@Test
 	public void testCanExecute()
 	{
-		Assertions.assertFalse(q.canExecute());
+		assertFalse(q.canExecute());
 		q.setMaxRunningEntries(2);
-		Assertions.assertTrue(q.canExecute());
+		assertTrue(q.canExecute());
 		q.setQueueStatus(EnumQueueStatus.Held);
-		Assertions.assertFalse(q.canExecute());
+		assertFalse(q.canExecute());
 		q.setQueueStatus(EnumQueueStatus.Waiting);
-		Assertions.assertTrue(q.canExecute(), "note that this is inconsistent");
+		assertTrue(q.canExecute(), "note that this is inconsistent");
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -511,16 +529,16 @@ public class QueueTest extends JDFTestCaseBase
 		q.setQueueStatus(EnumQueueStatus.Waiting);
 		q.sortChildren();
 		q.setExecuteCallback(new TestCanExecute("d1", null));
-		Assertions.assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
+		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
 		q.getQueueEntry("qe4").setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
 		q.setExecuteCallback(new TestCanExecute("d2", null));
-		Assertions.assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
+		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
 		q.getQueueEntry("qe2").setDeviceID("d1");
-		Assertions.assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe1"));
+		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe1"));
 		q.setExecuteCallback(new TestCanExecute("d1", "foo:foo2"));
-		Assertions.assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
+		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
 		q.getQueueEntry("qe2").setAttribute("foo:foo2", "bar", "www.foo");
-		Assertions.assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe1"));
+		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe1"));
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -532,17 +550,17 @@ public class QueueTest extends JDFTestCaseBase
 	@Test
 	public void testGetNextExecutableQueueEntry()
 	{
-		Assertions.assertNull(q.getNextExecutableQueueEntry());
+		assertNull(q.getNextExecutableQueueEntry());
 		q.setMaxRunningEntries(2);
 		q.sortChildren();
-		Assertions.assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
+		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
 		q.setQueueStatus(EnumQueueStatus.Held);
-		Assertions.assertNull(q.getNextExecutableQueueEntry());
+		assertNull(q.getNextExecutableQueueEntry());
 		q.setQueueStatus(EnumQueueStatus.Waiting);
-		Assertions.assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
+		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
 		q.getQueueEntry("qe4").setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
 		q.getQueueEntry("qe2").setDeviceID("d1");
-		Assertions.assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
+		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
 	}
 
 	/**
@@ -551,16 +569,16 @@ public class QueueTest extends JDFTestCaseBase
 	@Test
 	public void testGetNextExecutableQueueEntryActivation()
 	{
-		Assertions.assertNull(q.getNextExecutableQueueEntry());
+		assertNull(q.getNextExecutableQueueEntry());
 		q.setMaxRunningEntries(2);
 		q.sortChildren();
 
 		final JDFQueueEntry qe2 = q.getQueueEntry("qe2");
-		Assertions.assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
-		Assertions.assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
+		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
+		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
 		qe2.setActivation(EnumActivation.Held);
 		final JDFQueueEntry next = q.getNextExecutableQueueEntry();
-		Assertions.assertEquals(next, q.getQueueEntry("qe1"));
+		assertEquals(next, q.getQueueEntry("qe1"));
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -574,19 +592,19 @@ public class QueueTest extends JDFTestCaseBase
 	{
 		final JDFQueueEntry qe = q.appendQueueEntry();
 		final MyClean myClean = new MyClean();
-		Assertions.assertEquals(myClean.i, 0);
+		assertEquals(myClean.i, 0);
 		q.setCleanupCallback(myClean);
 		qe.setQueueEntryStatus(EnumQueueEntryStatus.Removed);
 		q.setAutomated(true);
 		q.setMaxCompletedEntries(1);
-		Assertions.assertFalse(q.getQueueEntryVector().contains(qe));
-		Assertions.assertEquals(myClean.i, 1);
-		Assertions.assertEquals(q.numEntries(null), 5, "removed completed and aborted");
+		assertFalse(q.getQueueEntryVector().contains(qe));
+		assertEquals(myClean.i, 1);
+		assertEquals(q.numEntries(null), 5, "removed completed and aborted");
 		q.setMaxCompletedEntries(0);
 		q.cleanup();
-		Assertions.assertEquals(myClean.i, 2);
+		assertEquals(myClean.i, 2);
 
-		Assertions.assertEquals(q.numEntries(null), 4, "removed completed and aborted");
+		assertEquals(q.numEntries(null), 4, "removed completed and aborted");
 	}
 
 	/**
@@ -599,16 +617,16 @@ public class QueueTest extends JDFTestCaseBase
 		final JDFQueueFilter qf = (JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();
 		qf.setMaxEntries(3);
 		JDFQueue q2 = q.copyToResponse(r, qf, null);
-		Assertions.assertEquals(q2, r.getQueue(0));
-		Assertions.assertEquals(q2.numEntries(null), 3);
-		Assertions.assertNotSame(q, q2);
-		Assertions.assertTrue(q.numEntries(null) > 3);
+		assertEquals(q2, r.getQueue(0));
+		assertEquals(q2.numEntries(null), 3);
+		assertNotSame(q, q2);
+		assertTrue(q.numEntries(null) > 3);
 		q2 = q.copyToResponse(r, qf, null);
-		Assertions.assertEquals(q2, r.getQueue(0));
-		Assertions.assertNull(r.getElement("Queue", null, 1));
-		Assertions.assertEquals(q2.numEntries(null), 3);
-		Assertions.assertNotSame(q, q2);
-		Assertions.assertTrue(q.numEntries(null) > 3);
+		assertEquals(q2, r.getQueue(0));
+		assertNull(r.getElement("Queue", null, 1));
+		assertEquals(q2.numEntries(null), 3);
+		assertNotSame(q, q2);
+		assertTrue(q.numEntries(null) > 3);
 	}
 
 	/**
@@ -619,13 +637,13 @@ public class QueueTest extends JDFTestCaseBase
 	{
 		JDFResponse r = JDFJMF.createJMF(JDFMessage.EnumFamily.Response, EnumType.AbortQueueEntry).getResponse(0);
 		JDFQueue q2 = q.copyToResponse(r, null, null);
-		Assertions.assertEquals(q2, r.getQueue(0));
-		Assertions.assertNull(q2);
+		assertEquals(q2, r.getQueue(0));
+		assertNull(q2);
 
 		r = JDFJMF.createJMF(JDFMessage.EnumFamily.Response, EnumType.QueueStatus).getResponse(0);
 		q2 = q.copyToResponse(r, null, null);
-		Assertions.assertEquals(q2, r.getQueue(0));
-		Assertions.assertNotNull(q2);
+		assertEquals(q2, r.getQueue(0));
+		assertNotNull(q2);
 
 	}
 
@@ -674,8 +692,8 @@ public class QueueTest extends JDFTestCaseBase
 	@Test
 	public void testgetQueueSize()
 	{
-		Assertions.assertEquals(q.getQueueSize(), 5, "no size set - count entries");
+		assertEquals(q.getQueueSize(), 5, "no size set - count entries");
 		q.setQueueSize(10);
-		Assertions.assertEquals(q.getQueueSize(), 10);
+		assertEquals(q.getQueueSize(), 10);
 	}
 }
