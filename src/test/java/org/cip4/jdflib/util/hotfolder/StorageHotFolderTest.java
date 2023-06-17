@@ -413,7 +413,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			for (int i = 0; i < 1000; i++)
 			{
 				ThreadUtil.sleep(200);
-				if (theHFDir.listFiles().length <= 2 && tmpHFDir.listFiles().length < 2)
+				if (theHFDir.listFiles().length <= 2 && tmpHFDir.listFiles().length == 0)
 				{
 					log.info("stop " + i);
 					break;
@@ -421,10 +421,12 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 				log.warn("run over " + theHFDir.listFiles().length);
 			}
 			assertEquals(42, ok.listFiles().length, 13);
-			assertEquals(0, tmpHFDir.listFiles().length, 4, "Found files: " + Arrays.toString(tmpHFDir.list()));
+			assertEquals(0, tmpHFDir.listFiles().length, 6, "Found files: " + Arrays.toString(tmpHFDir.list()));
 			assertEquals(42, error.listFiles().length, 13);
 
 			hf.stop();
+			if (synch)
+				ThreadUtil.sleep(420);
 		}
 	}
 
@@ -463,7 +465,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			for (int i = 0; i < 420; i++)
 			{
 				ThreadUtil.sleep(111);
-				if (ok.listFiles().length == 30 && error.listFiles().length == 30)
+				if (ok.listFiles().length == 30 && error.listFiles().length == 30 && tmpHFDir.listFiles().length == 0)
 					break;
 			}
 			assertEquals(30, ok.listFiles().length, 5);
@@ -471,6 +473,9 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			assertEquals(30, error.listFiles().length, 5);
 
 			hf.stop();
+			if (synch)
+				ThreadUtil.sleep(420);
+
 		}
 	}
 
@@ -649,6 +654,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			assertEquals(42, error.listFiles().length, 13);
 
 			hf.stop();
+			if (synch)
+				ThreadUtil.sleep(420);
 		}
 	}
 
@@ -700,6 +707,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			// not 2000 * 10...
 			assertTrue(System.currentTimeMillis() - t0 < 7000);
 			hf.stop();
+			if (synch)
+				ThreadUtil.sleep(420);
 		}
 	}
 
