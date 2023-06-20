@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -166,7 +166,7 @@ public class EnumUtil
 	/**
 	 * null save convenience name getter
 	 *
-	 * @param en the enum to get the name
+	 * @param en the enum to get the name of the class
 	 * @return
 	 */
 	public static String getName(final ValuedEnum en)

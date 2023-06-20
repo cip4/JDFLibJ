@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -54,6 +54,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.ifaces.IURLSetter;
+import org.cip4.jdflib.util.MyPair;
 
 // ----------------------------------
 /**
@@ -129,6 +130,20 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams imple
 	 */
 	public JDFResponse addEntry(final JDFQueue theQueue, final JDFJMF responseIn, JDFQueueFilter filter)
 	{
+		return addQueueEntry(theQueue, responseIn, filter).getA();
+	}
+
+	/**
+	 * add a queueentry to a queue based on the parameters of this you can get the new queueentry by getQueueEntry(0) on the response
+	 *
+	 * @param theQueue the queue to submit to, note that the queue IS modified by this call
+	 * @param responseIn the jmf that serves as a container for the new response
+	 * @param filter the filter to apply
+	 *
+	 * @return the response jmf to the submission message
+	 */
+	public MyPair<JDFResponse, JDFQueueEntry> addQueueEntry(final JDFQueue theQueue, final JDFJMF responseIn, JDFQueueFilter filter)
+	{
 		final JDFCommand command = (JDFCommand) getParentNode_KElement();
 		final JDFJMF jmf = command.createResponse();
 		if (filter == null)
@@ -140,44 +155,48 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams imple
 		{
 			resp = (JDFResponse) responseIn.copyElement(resp, null);
 		}
+		MyPair<JDFResponse, JDFQueueEntry> ret = new MyPair<JDFResponse, JDFQueueEntry>(resp, null);
+
 		if (theQueue == null)
 		{
 			resp.setErrorText("No Queue specified", EnumClass.Error);
 			resp.setReturnCode(2); //
-			return resp;
-		}
-
-		final boolean bAuto = theQueue.isAutomated();
-		if (bAuto)
-		{
-			theQueue.setAutomated(false);
-		}
-		final JDFQueueEntry qe = theQueue.createQueueEntry(getHold());
-		if (qe == null) // can't accept
-		{
-			resp.setReturnCode(112);
-			theQueue.copyToResponse(resp, filter, null);
 		}
 		else
 		{
-			internalAdd(theQueue, filter, resp, bAuto, qe);
+			final boolean bAuto = theQueue.isAutomated();
+			if (bAuto)
+			{
+				theQueue.setAutomated(false);
+			}
+			final JDFQueueEntry qe = theQueue.createQueueEntry(getHold());
+			if (qe == null) // can't accept
+			{
+				resp.setReturnCode(112);
+				theQueue.copyToResponse(resp, filter, null);
+			}
+			else
+			{
+				ret.setB(qe);
+				internalAdd(theQueue, filter, resp, bAuto, qe);
+			}
+			if (bAuto)
+			{
+				theQueue.setAutomated(true);
+			}
 		}
-		if (bAuto)
-		{
-			theQueue.setAutomated(true);
-		}
-		return resp;
+
+		return ret;
 	}
+
+	private static final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY, AttributeName.DESCRIPTIVENAME, AttributeName.PRIORITY,
+			AttributeName.ACTIVATION };
 
 	void internalAdd(final JDFQueue theQueue, final JDFQueueFilter filter, final JDFResponse resp, final boolean bAuto, final JDFQueueEntry qe)
 	{
-		final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY, AttributeName.DESCRIPTIVENAME, AttributeName.PRIORITY, AttributeName.ACTIVATION };
 		for (final String copyAtt : copyAtts)
 		{
-			if (hasAttribute(copyAtt))
-			{
-				qe.copyAttribute(copyAtt, this, null, null, null);
-			}
+			qe.copyAttribute(copyAtt, this);
 		}
 
 		if (bAuto)
@@ -185,12 +204,7 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams imple
 			theQueue.sortChild(qe);
 		}
 
-		final JDFDoc ownerDocumentResp = resp.getOwnerDocument_JDFElement();
-		final boolean b = ownerDocumentResp.getInitOnCreate();
-		ownerDocumentResp.setInitOnCreate(false);
-		theQueue.copyToResponse(resp, filter, null);
 		resp.copyElement(qe, null);
-		ownerDocumentResp.setInitOnCreate(b);
 	}
 
 	/**

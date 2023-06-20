@@ -520,6 +520,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	 *
 	 * @return Vector<EnumQueueEntryStatus> the vector of valid new stati
 	 */
+	@SuppressWarnings("unchecked")
 	public Vector<EnumQueueEntryStatus> getNextStatusVector()
 	{
 		final Vector<EnumQueueEntryStatus> v = new Vector<EnumQueueEntryStatus>();

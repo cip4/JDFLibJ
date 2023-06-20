@@ -151,6 +151,16 @@ public class EnumUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetEnumValue()
+	{
+		assertEquals(EnumUtil.getName(EnumAnchor.BottomRight), "BottomRight");
+		assertEquals(EnumUtil.getName(null), "null");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetEnumIgnorecase()
 	{
 		assertNull(EnumUtil.getEnumIgnoreCase(EnumAnchor.class, E.a));

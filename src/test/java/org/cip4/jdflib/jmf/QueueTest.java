@@ -618,13 +618,13 @@ public class QueueTest extends JDFTestCaseBase
 		qf.setMaxEntries(3);
 		JDFQueue q2 = q.copyToResponse(r, qf, null);
 		assertEquals(q2, r.getQueue(0));
-		assertEquals(q2.numEntries(null), 3);
+		assertNull(q2);
 		assertNotSame(q, q2);
 		assertTrue(q.numEntries(null) > 3);
 		q2 = q.copyToResponse(r, qf, null);
 		assertEquals(q2, r.getQueue(0));
 		assertNull(r.getElement("Queue", null, 1));
-		assertEquals(q2.numEntries(null), 3);
+		assertNull(q2);
 		assertNotSame(q, q2);
 		assertTrue(q.numEntries(null) > 3);
 	}

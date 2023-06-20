@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,11 @@
  */
 package org.cip4.jdflib.jmf;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.io.File;
 import java.net.URL;
 
@@ -88,8 +93,8 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.MimeUtil;
+import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -126,7 +131,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	public void testAddNull()
 	{
 		JDFResponse resp = qsp.addEntry(null, null, null);
-		Assertions.assertEquals(2, resp.getReturnCode());
+		assertEquals(2, resp.getReturnCode());
 	}
 
 	/**
@@ -136,9 +141,20 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	public void testAddEntry()
 	{
 		JDFResponse resp = qsp.addEntry(theQueue, null, null);
-		Assertions.assertEquals(0, resp.getReturnCode());
-		theQueue = resp.getQueue(0);
-		Assertions.assertEquals(theQueue.numEntries(null), 0);
+		assertEquals(0, resp.getReturnCode());
+		assertNull(resp.getQueue(0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAddQueueEntry()
+	{
+		MyPair<JDFResponse, JDFQueueEntry> resp = qsp.addQueueEntry(theQueue, null, null);
+		assertEquals(0, resp.a.getReturnCode());
+		assertNull(resp.a.getQueue(0));
+		assertEquals(theQueue.getQueueEntry(0), resp.b);
 	}
 
 	/**
@@ -161,9 +177,9 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 			{
 				t.start();
 				JDFResponse resp = qsp.addEntry(theQueue, null, f);
-				Assertions.assertEquals(0, resp.getReturnCode());
+				assertEquals(0, resp.getReturnCode());
 				JDFQueueEntry queueResp = resp.getQueueEntry(0);
-				Assertions.assertNotNull(queueResp);
+				assertNotNull(queueResp);
 				t.stop();
 				if (i % 100 == 0)
 				{
@@ -198,13 +214,13 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 		Multipart m = MimeUtil.buildMimePackage(d1, doc, true);
 
 		JDFDoc[] d2 = MimeUtil.getJMFSubmission(m);
-		Assertions.assertNotNull(d2);
+		assertNotNull(d2);
 		final JDFQueueSubmissionParams queueSubmissionParams = d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0);
-		Assertions.assertEquals(queueSubmissionParams.getURL(), "cid:JDF.jdf");
-		Assertions.assertEquals(d2[1].getJDFRoot().getEnumType(), JDFNode.EnumType.ColorSpaceConversion);
+		assertEquals(queueSubmissionParams.getURL(), "cid:JDF.jdf");
+		assertEquals(d2[1].getJDFRoot().getEnumType(), JDFNode.EnumType.ColorSpaceConversion);
 		JDFDoc d3 = queueSubmissionParams.getURLDoc();
-		Assertions.assertNotNull(d3);
-		Assertions.assertEquals(d3.getJDFRoot().getEnumType(), JDFNode.EnumType.ColorSpaceConversion);
+		assertNotNull(d3);
+		assertEquals(d3.getJDFRoot().getEnumType(), JDFNode.EnumType.ColorSpaceConversion);
 	}
 
 	/**
@@ -214,9 +230,9 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	public void testSetReturnURL() throws Exception
 	{
 		qsp.setReturnURL((URL) null);
-		Assertions.assertFalse(qsp.hasAttribute(AttributeName.RETURNURL));
+		assertFalse(qsp.hasAttribute(AttributeName.RETURNURL));
 		qsp.setReturnURL(new URL("http://localhost"));
-		Assertions.assertEquals(qsp.getReturnURL(), "http://localhost");
+		assertEquals(qsp.getReturnURL(), "http://localhost");
 	}
 
 	/**
@@ -226,8 +242,8 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	public void testSetReturnJMFL() throws Exception
 	{
 		qsp.setReturnJMF((URL) null);
-		Assertions.assertFalse(qsp.hasAttribute(AttributeName.RETURNJMF));
+		assertFalse(qsp.hasAttribute(AttributeName.RETURNJMF));
 		qsp.setReturnJMF(new URL("http://localhost"));
-		Assertions.assertEquals(qsp.getReturnJMF(), "http://localhost");
+		assertEquals(qsp.getReturnJMF(), "http://localhost");
 	}
 }

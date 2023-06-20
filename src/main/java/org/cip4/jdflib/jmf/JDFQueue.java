@@ -587,8 +587,8 @@ public class JDFQueue extends JDFAutoQueue
 	}
 
 	/**
-	 * Get the next QueueEntry to be processed the first entry with highest priority gets selected if deviceID is specified, the entries with an explicit non matching deviceID are ignored the status
-	 * of the QueueEntry MUST be waiting
+	 * Get the next QueueEntry to be processed the first entry with highest priority gets selected if deviceID is specified, the entries with an explicit non matching deviceID are
+	 * ignored the status of the QueueEntry MUST be waiting
 	 *
 	 * proxy and represents previously submitted jobs as waiting
 	 *
@@ -699,6 +699,7 @@ public class JDFQueue extends JDFAutoQueue
 	 *
 	 */
 
+	@Override
 	public synchronized void cleanup()
 	{
 		final VElement v = getQueueEntryVector();
@@ -776,13 +777,16 @@ public class JDFQueue extends JDFAutoQueue
 		}
 		resp.removeChildren(ElementName.QUEUE, null, null);
 		final JDFQueue newQueue;
-		if (filter != null)
+		if (EnumType.QueueStatus.equals(resp.getEnumType()))
 		{
-			newQueue = filter.copy(this, priorQueue, resp);
-		}
-		else if (EnumType.QueueStatus.equals(resp.getEnumType()))
-		{
-			newQueue = (JDFQueue) resp.copyElement(this, null);
+			if (filter != null)
+			{
+				newQueue = filter.copy(this, priorQueue, resp);
+			}
+			else
+			{
+				newQueue = (JDFQueue) resp.copyElement(this, null);
+			}
 		}
 		else
 		{
