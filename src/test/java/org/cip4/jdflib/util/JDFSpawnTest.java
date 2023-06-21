@@ -4256,6 +4256,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	@Test
 	public void testMergeJDF()
 	{
+		testBookintent();
 		// job.jdf subjdf.jdf -o merged.jdf
 		final String m_xmlFile1 = "_bookintent.jdf";
 		final String m_xmlFile2 = "spawned.jdf";
