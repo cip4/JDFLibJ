@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,6 +36,8 @@
  */
 package org.cip4.jdflib.jmf;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
@@ -43,7 +45,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -63,8 +64,8 @@ public class JDFQueueTest extends JDFTestCaseBase
 		final JDFQueue q = (JDFQueue) new JDFDoc(ElementName.QUEUE).getRoot();
 		for (int i = 0; i < 42; i++)
 		{
-			Assertions.assertEquals(q.numEntries(null), i);
-			Assertions.assertEquals(q.getEntryCount(), i);
+			assertEquals(q.numEntries(null), i);
+			assertEquals(q.getEntryCount(), i);
 			q.appendQueueEntry();
 		}
 	}
@@ -78,7 +79,25 @@ public class JDFQueueTest extends JDFTestCaseBase
 	{
 		final JDFQueue q = (JDFQueue) new JDFDoc(ElementName.QUEUE).getRoot();
 		q.setQueueStatus(EnumQueueStatus.Running);
-		Assertions.assertEquals(EnumQueueStatus.Running, q.getQueueStatus());
+		assertEquals(EnumQueueStatus.Running, q.getQueueStatus());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testAutomated()
+	{
+		final JDFQueue q = (JDFQueue) new JDFDoc(ElementName.QUEUE).getRoot();
+		q.setQueueStatus(EnumQueueStatus.Running);
+		q.setAutomated(true);
+		assertEquals(EnumQueueStatus.Waiting, q.getQueueStatus());
+		q.setQueueStatus(EnumQueueStatus.Blocked);
+		q.setAutomated(true, false);
+		assertEquals(EnumQueueStatus.Blocked, q.getQueueStatus());
+		q.setAutomated(true, true);
+		assertEquals(EnumQueueStatus.Waiting, q.getQueueStatus());
 	}
 
 	/**
@@ -100,7 +119,7 @@ public class JDFQueueTest extends JDFTestCaseBase
 		}
 		q.setStatusFromEntries();
 		final KElement xjmf = convertToXJDF(jmf);
-		Assertions.assertEquals(42, xjmf.getChildrenByClass(JDFQueueEntry.class, true, 0).size());
+		assertEquals(42, xjmf.getChildrenByClass(JDFQueueEntry.class, true, 0).size());
 		writeRoundTrip(jmf, "QueueStatus.jmf");
 	}
 
