@@ -182,7 +182,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		FileUtil.deleteAll(tmpHFDir);
 
 		log.info("Setting up: " + theHFDir);
-		HotFolder.setDefaultStabilizeTime(42);
+		HotFolder.setDefaultStabilizeTime(12);
 	}
 
 	/**
@@ -336,16 +336,16 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	public synchronized void testAddListener() throws IOException
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, ".xml", new CountListener());
-		final File file = new File(theHFDir + File.separator + "f1.txt");
+		final File file = new File(theHFDir + File.separator + "ffff1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
 		ThreadUtil.sleep(100);
 		assertTrue(file.exists());
 		hf.addListener(new CountListener(), ".txt");
 		assertNotNull(hf.getListener(1));
-		for (int i = 0; i < 1234; i++)
+		for (int i = 0; i < 2234; i++)
 		{
-			ThreadUtil.sleep(42);
+			ThreadUtil.sleep(21);
 			if (!file.exists())
 				break;
 		}
