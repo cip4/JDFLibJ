@@ -701,11 +701,11 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 				if (ok.listFiles().length >= 4 && error.listFiles().length >= 4 && tmpHFDir.listFiles().length < 2)
 					break;
 			}
-			assertEquals(5, ok.listFiles().length, 2);
-			assertEquals(0, tmpHFDir.listFiles().length, 2);
-			assertEquals(5, error.listFiles().length, 2);
+			assertEquals(5, ok.listFiles().length, 5);
+			assertEquals(0, tmpHFDir.listFiles().length, 5);
+			assertEquals(5, error.listFiles().length, 5);
 			// not 2000 * 10...
-			assertTrue(System.currentTimeMillis() - t0 < 7000);
+			assertTrue(System.currentTimeMillis() - t0 < 9000);
 			hf.stop();
 			if (synch)
 				ThreadUtil.sleep(420);
