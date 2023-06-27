@@ -104,7 +104,7 @@ public class XMLDoc implements Cloneable
 {
 
 	protected DocumentXMLImpl m_doc;
-	protected final Log log;
+	final private static Log log = LogFactory.getLog(XMLDoc.class);
 
 	// **************************************** Constructors
 	// ****************************************
@@ -114,7 +114,6 @@ public class XMLDoc implements Cloneable
 	public XMLDoc()
 	{
 		m_doc = getImpl();
-		log = LogFactory.getLog(getClass());
 	}
 
 	/**
@@ -157,7 +156,6 @@ public class XMLDoc implements Cloneable
 	 */
 	public XMLDoc(final Document document)
 	{
-		log = LogFactory.getLog(getClass());
 		if (document == null)
 		{
 			throw new JDFException("XMLDoc(Document) null input Document");
@@ -233,7 +231,6 @@ public class XMLDoc implements Cloneable
 	 */
 	public XMLDoc(final DocumentXMLImpl document)
 	{
-		log = LogFactory.getLog(getClass());
 		if (document == null)
 		{
 			throw new JDFException("XMLDoc(DocumentXMLImpl) null input Document");
@@ -248,7 +245,6 @@ public class XMLDoc implements Cloneable
 	 */
 	public XMLDoc(final XMLDoc other)
 	{
-		log = LogFactory.getLog(getClass());
 		m_doc = other == null ? null : other.m_doc;
 	}
 
@@ -271,7 +267,6 @@ public class XMLDoc implements Cloneable
 	 */
 	public XMLDoc(final String strDocType, final String namespaceURI)
 	{
-		log = LogFactory.getLog(getClass());
 		m_doc = getImpl();
 		setRoot(strDocType, namespaceURI);
 	}

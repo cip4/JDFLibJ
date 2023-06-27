@@ -55,6 +55,8 @@ import java.io.RandomAccessFile;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.util.thread.DelayedPersist;
 import org.cip4.jdflib.util.thread.IPersistable;
@@ -67,6 +69,7 @@ import org.cip4.jdflib.util.thread.IPersistable;
  */
 public class ByteArrayIOFileStream extends ByteArrayIOStream
 {
+	private static final Log log = LogFactory.getLog(ByteArrayIOFileStream.class);
 
 	private final long maxLength;
 	private File file;

@@ -117,7 +117,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		return inputStream;
 	}
 
-	final Log log;
+	private static final Log log = LogFactory.getLog(ByteArrayIOStream.class);
 	int pos;
 
 	/**
@@ -242,7 +242,6 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	public ByteArrayIOStream()
 	{
 		super();
-		log = LogFactory.getLog(getClass());
 		pos = 0;
 	}
 
@@ -255,7 +254,6 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	{
 		super(i);
 		pos = 0;
-		log = LogFactory.getLog(getClass());
 	}
 
 	/**
@@ -266,7 +264,6 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	public ByteArrayIOStream(final InputStream is)
 	{
 		super(1000);
-		log = LogFactory.getLog(getClass());
 		setStream(is);
 	}
 
@@ -314,7 +311,6 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	public ByteArrayIOStream(final File f) throws IOException
 	{
 		super(10);
-		log = LogFactory.getLog(getClass());
 		if (f != null && f.length() > 10)
 		{
 			buf = new byte[(int) f.length() + 100];
@@ -331,7 +327,6 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	public ByteArrayIOStream(final byte[] b)
 	{
 		super();
-		log = LogFactory.getLog(getClass());
 		buf = b;
 		count = b.length;
 	}

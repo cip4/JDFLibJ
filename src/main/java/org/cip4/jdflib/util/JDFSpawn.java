@@ -104,7 +104,7 @@ public class JDFSpawn
 	private final Set<String> isReduced;
 	private final Map<String, KElement> mapResources;
 	private boolean idCacheFilled;
-	private final Log log;
+	final private static Log log = LogFactory.getLog(JDFSpawn.class);
 	/**
 	 * if true, reduce read only partitions, else retain entire resource
 	 */
@@ -194,7 +194,6 @@ public class JDFSpawn
 	 */
 	public JDFSpawn(final JDFNode nodeToSpawn)
 	{
-		log = LogFactory.getLog(getClass());
 		node = nodeToSpawn;
 		informativeRoot = null;
 		mapRefs = new HashMap<>();

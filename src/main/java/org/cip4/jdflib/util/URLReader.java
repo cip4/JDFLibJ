@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,7 +70,8 @@ package org.cip4.jdflib.util;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.ZipEntry;
 
 import javax.mail.BodyPart;
@@ -93,8 +94,8 @@ public class URLReader
 	private final String urlString;
 	private BodyPart bodypart;
 	private ZipReader zip;
-	private final Vector<File> localRoots;
-	private final Log log;
+	private final List<File> localRoots;
+	private final static Log log = LogFactory.getLog(URLReader.class);
 	private File notRelative;
 
 	/**
@@ -104,8 +105,7 @@ public class URLReader
 	public URLReader(final String urlString)
 	{
 		this.urlString = urlString;
-		localRoots = new Vector<>();
-		log = LogFactory.getLog(getClass());
+		localRoots = new ArrayList<>();
 		notRelative = null;
 	}
 

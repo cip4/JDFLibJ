@@ -109,10 +109,11 @@ public class FileJanitor
 					if (logSingle)
 					{
 						if (file.isDirectory())
-							log.info("removing empty directory: " + file.getAbsolutePath() + " last touched: " + new JDFDate(file.lastModified()).getFormattedDateTime(JDFDate.DATETIMEREADABLE));
+							log.info("removing empty directory: " + file.getAbsolutePath() + " last touched: "
+									+ new JDFDate(file.lastModified()).getFormattedDateTime(JDFDate.DATETIMEREADABLE));
 						else
-							log.info("removing old file: " + file.getAbsolutePath() + " last touched: " + new JDFDate(file.lastModified()).getFormattedDateTime(JDFDate.DATETIMEREADABLE) + " size="
-									+ file.length());
+							log.info("removing old file: " + file.getAbsolutePath() + " last touched: "
+									+ new JDFDate(file.lastModified()).getFormattedDateTime(JDFDate.DATETIMEREADABLE) + " size=" + file.length());
 
 					}
 					file.delete();
@@ -125,7 +126,7 @@ public class FileJanitor
 	private final File baseDir;
 	private KillFilter filter;
 	boolean logSingle;
-	private final Log log;
+	final private static Log log = LogFactory.getLog(FileJanitor.class);
 	boolean delEmpty;
 
 	/**
@@ -160,7 +161,6 @@ public class FileJanitor
 		if (filter != null)
 			this.filter = new KillFilter(filter);
 		this.baseDir = baseDir;
-		this.log = LogFactory.getLog(getClass());
 		logSingle = false;
 		delEmpty = false;
 	}

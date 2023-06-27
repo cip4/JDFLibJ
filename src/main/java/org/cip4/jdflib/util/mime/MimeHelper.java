@@ -62,7 +62,7 @@ public class MimeHelper
 	protected Multipart theMultipart;
 	private static boolean bNeedAParser = true;
 	protected int markSize;
-	protected final Log log;
+	protected final static Log log = LogFactory.getLog(MimeHelper.class);
 
 	/**
 	 *
@@ -70,7 +70,6 @@ public class MimeHelper
 	public MimeHelper()
 	{
 		super();
-		log = LogFactory.getLog(getClass());
 		// there is a bug in xerces that screws up the reference count for shared files when the static stuff in domparser is initialized.
 		// make sure that this happens prior to any mime related tasks and all is well
 		if (bNeedAParser)
@@ -217,10 +216,10 @@ public class MimeHelper
 	}
 
 	/**
-	 * 	get the MIME BodyPart from a multiPart package with a given header
-	*
-	* @return BodyPartHelper the matching BodyPart, null if none is found
-	*/
+	 * get the MIME BodyPart from a multiPart package with a given header
+	 *
+	 * @return BodyPartHelper the matching BodyPart, null if none is found
+	 */
 	public BodyPartHelper getPartHelperByAttribute(final String key, final String value)
 	{
 		try

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -66,7 +66,7 @@ public class XSLTransformHelper implements IStreamWriter
 {
 	private final KElement elem;
 	private final XMLDoc xsl;
-	private final Log log;
+	final private static Log log = LogFactory.getLog(XSLTransformHelper.class);
 
 	/**
 	 * @param e
@@ -78,7 +78,6 @@ public class XSLTransformHelper implements IStreamWriter
 		System.setProperty("javax.xml.transform.TransformerFactory", "com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl");
 		elem = e;
 		this.xsl = xsl;
-		log = LogFactory.getLog(getClass());
 	}
 
 	/**

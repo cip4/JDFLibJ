@@ -72,7 +72,7 @@ public class ZipReader
 	final InputStream is;
 	ByteArrayIOStream bios;
 	ZipInputStream zis;
-	final Log log;
+	static final Log log = LogFactory.getLog(ZipReader.class);
 	ZipEntry currentEntry;
 	String rootEntry;
 	int maxBuffer;
@@ -148,7 +148,6 @@ public class ZipReader
 	 */
 	public ZipReader(final InputStream inStream, final int maxBuffer)
 	{
-		log = LogFactory.getLog(getClass());
 		is = inStream;
 		this.maxBuffer = maxBuffer;
 		zis = new ZipInputStream(is);
@@ -171,7 +170,6 @@ public class ZipReader
 	 */
 	public ZipReader(final File file, final int maxBuffer)
 	{
-		log = LogFactory.getLog(getClass());
 		this.maxBuffer = maxBuffer;
 		zis = null;
 		is = null;

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -49,6 +49,8 @@ import javax.mail.Multipart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.ByteArrayIOStream;
@@ -64,6 +66,8 @@ import org.cip4.jdflib.util.UrlUtil;
  */
 public class MimeReader extends MimeHelper
 {
+	protected final static Log log = LogFactory.getLog(MimeReader.class);
+
 	/**
 	 *
 	 */
@@ -131,7 +135,7 @@ public class MimeReader extends MimeHelper
 
 		try
 		{
-			//final InputStream newStream = new PrefixInputStream("\n", StreamUtil.getBufferedInputStream(mimeStream));
+			// final InputStream newStream = new PrefixInputStream("\n", StreamUtil.getBufferedInputStream(mimeStream));
 			final InputStream newStream = StreamUtil.getBufferedInputStream(mimeStream);
 			final Message mimeMessage = new MimeMessage(null, newStream);
 

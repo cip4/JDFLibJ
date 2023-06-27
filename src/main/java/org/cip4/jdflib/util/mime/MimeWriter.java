@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -57,6 +57,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -89,6 +91,8 @@ import org.cip4.jdflib.util.UrlUtil;
  */
 public class MimeWriter extends MimeHelper implements IStreamWriter
 {
+	protected final static Log log = LogFactory.getLog(MimeReader.class);
+
 	public enum eMimeSubType
 	{
 		related, formdata;
@@ -495,7 +499,8 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	/**
 	 * build a MIME package that contains all references in all FileSpecs of a given JDFDoc the doc is modified so that all URLs are cids
 	 *
-	 * @param docJMF the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must already be specified as a CID
+	 * @param docJMF the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must already be specified
+	 *        as a CID
 	 * @param docJDF the JDFDoc representation of the JDF to package
 	 * @param extendReferenced if true, also package any further reeferenced files
 	 */
@@ -653,8 +658,8 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	 * Returns the values of the <i>URL</i> attribute of each element in the input list.
 	 *
 	 * @param fileSpecs a list of elements with <i>URL</i> attributes
-	 * @return an array containing the value of the <i>URL</i> attribute of each element in the input list. The order of values in the returned array corresponds to the order of the elements in the
-	 *         input list.
+	 * @return an array containing the value of the <i>URL</i> attribute of each element in the input list. The order of values in the returned array corresponds to the order of
+	 *         the elements in the input list.
 	 */
 	private static String[] listURLs(final VElement fileSpecs)
 	{
