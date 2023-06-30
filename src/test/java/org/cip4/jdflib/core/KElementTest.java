@@ -78,6 +78,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.CPUTimer;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
@@ -105,6 +106,17 @@ public class KElementTest extends JDFTestCaseBase
 
 		final KElement r2 = KElement.parseFile(fn);
 		assertTrue(root.isEqual(r2));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testStreamWriter()
+	{
+		final KElement d = KElement.createRoot("aa", null);
+		File f = FileUtil.writeFile(d, new File(sm_dirTestDataTemp + "aa.xml"));
+		assertNotNull(f);
 	}
 
 	/**

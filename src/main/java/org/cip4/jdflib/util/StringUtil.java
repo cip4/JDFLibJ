@@ -68,6 +68,7 @@ import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.datatypes.JDFNumberList;
+import org.cip4.jdflib.ifaces.IStreamWriter;
 
 /**
  * collection of static string utilities
@@ -248,6 +249,28 @@ public class StringUtil
 			}
 		}
 		return s.toString();
+	}
+
+	/**
+	 * write to a file
+	 *
+	 * @param file the file to write
+	 * @param w the writer to write to
+	 *
+	 * @return the file that was created, null if snafu
+	 */
+	public static String write2String(final IStreamWriter w)
+	{
+		ByteArrayIOStream os = new ByteArrayIOStream();
+		try
+		{
+			w.writeStream(os);
+		}
+		catch (IOException e)
+		{
+			return null;
+		}
+		return new String(os.toByteArray(), StandardCharsets.UTF_8);
 	}
 
 	/**

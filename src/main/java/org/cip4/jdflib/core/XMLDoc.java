@@ -63,6 +63,7 @@ import org.apache.xerces.dom.ElementDefinitionImpl;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.HashUtil;
@@ -100,7 +101,7 @@ import org.w3c.dom.traversal.TreeWalker;
  *         < July 15, 2009
  */
 @SuppressWarnings("deprecation")
-public class XMLDoc implements Cloneable
+public class XMLDoc implements Cloneable, IStreamWriter
 {
 
 	protected DocumentXMLImpl m_doc;
@@ -506,15 +507,26 @@ public class XMLDoc implements Cloneable
 	}
 
 	/**
-	 * @deprecated use write2Stream(outStream, indent, true);
 	 * @param outStream
 	 * @param indent
 	 * @throws IOException
 	 */
-	@Deprecated
 	public void write2Stream(final OutputStream outStream, final int indent) throws IOException
 	{
 		write2Stream(outStream, indent, indent == 0);
+	}
+
+	@Override
+	public void writeStream(final OutputStream stream)
+	{
+		try
+		{
+			write2Stream(stream, 2);
+		}
+		catch (IOException e)
+		{
+			// nop
+		}
 	}
 
 	/**

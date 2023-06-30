@@ -45,6 +45,7 @@ package org.cip4.jdflib.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -59,6 +60,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
@@ -447,6 +449,15 @@ public class StringUtilTest extends JDFTestCaseBase
 	public void testUnEscape()
 	{
 		assertEquals("\\", StringUtil.unEscape("\\\\", "\\", -1, 1));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testWrite2String()
+	{
+		assertNotNull(KElement.parseString(StringUtil.write2String(KElement.createRoot("a", null))));
 	}
 
 	/**

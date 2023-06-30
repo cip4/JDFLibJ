@@ -91,6 +91,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.util.ByteArrayIOStream;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.PlatformUtil;
@@ -891,6 +892,17 @@ public class XMLDocTest extends JDFTestCaseBase
 			return;
 		}
 		fail("no exception");
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testStreamWriter()
+	{
+		final XMLDoc d = new XMLDoc("a", null);
+		File f = FileUtil.writeFile(d, new File(sm_dirTestDataTemp + "a.xml"));
+		assertNotNull(f);
 	}
 
 	/**

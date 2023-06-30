@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -105,11 +105,11 @@ import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNumList;
+import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.MyPair;
-import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Attr;
@@ -136,7 +136,7 @@ import org.w3c.dom.Text;
  * @author CIP4
  * @see JDFElement for the first element class that is aware of JDF
  */
-public class KElement extends ElementNSImpl implements Element
+public class KElement extends ElementNSImpl implements Element, IStreamWriter
 {
 	private static final long serialVersionUID = 1L;
 	private static final Log kLog = LogFactory.getLog(JDFElement.class);
@@ -6566,6 +6566,12 @@ public class KElement extends ElementNSImpl implements Element
 		}
 	}
 
+	@Override
+	public void writeStream(final OutputStream stream)
+	{
+		write2Stream(stream);
+	}
+
 	/**
 	 *
 	 * write myself to a file
@@ -6575,10 +6581,8 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public boolean write2File(final File file)
 	{
-		final OutputStream stream = FileUtil.getBufferedOutputStream(file);
-		final boolean written = write2Stream(stream);
-		StreamUtil.close(stream);
-		return written;
+		File f = FileUtil.writeFile(this, file);
+		return f != null;
 	}
 
 	/**
