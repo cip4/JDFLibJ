@@ -74,6 +74,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -903,6 +904,18 @@ public class XMLDocTest extends JDFTestCaseBase
 		final XMLDoc d = new XMLDoc("a", null);
 		File f = FileUtil.writeFile(d, new File(sm_dirTestDataTemp + "a.xml"));
 		assertNotNull(f);
+	}
+
+	/**
+	 * @throws IOException
+	 * @throws Exception
+	 */
+	@Test
+
+	public void testStreamWriterNull() throws IOException
+	{
+		final XMLDoc d = new XMLDoc("a", null);
+		assertThrows(IOException.class, () -> d.writeStream(null));
 	}
 
 	/**

@@ -50,8 +50,10 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
@@ -64,10 +66,12 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
+import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.util.StringUtil.EDataType;
 import org.cip4.jdflib.util.StringUtil.StringReplacer;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 /**
  * @author MatternK
@@ -458,6 +462,18 @@ public class StringUtilTest extends JDFTestCaseBase
 	public void testWrite2String()
 	{
 		assertNotNull(KElement.parseString(StringUtil.write2String(KElement.createRoot("a", null))));
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	public void testWrite2StringBad() throws IOException
+	{
+		IStreamWriter w = Mockito.mock(IStreamWriter.class);
+		Mockito.doThrow(IOException.class).when(w).writeStream(any());
+		assertNull(StringUtil.write2String(w));
 	}
 
 	/**

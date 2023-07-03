@@ -517,16 +517,9 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	}
 
 	@Override
-	public void writeStream(final OutputStream stream)
+	public void writeStream(final OutputStream stream) throws IOException
 	{
-		try
-		{
-			write2Stream(stream, 2);
-		}
-		catch (IOException e)
-		{
-			// nop
-		}
+		write2Stream(stream, 2);
 	}
 
 	/**
