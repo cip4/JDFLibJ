@@ -157,7 +157,7 @@ class StorageHotFolderListener implements HotFolderListener
 		@Override
 		public void run()
 		{
-			log.info("processing hot file: " + hotFile);
+			log.info("processing hot file: " + hotFile + " #" + nQueued.get());
 			final MyPair<File, File> storedFiles = getStoredFile(hotFile);
 			if (storedFiles == null)
 			{
@@ -176,7 +176,10 @@ class StorageHotFolderListener implements HotFolderListener
 					log.error("Could not process " + hotFile, t);
 				}
 				copyCompleted(storedFiles.getA(), ok);
-				log.info("deleting tmp file: " + storedFiles.getB());
+				if (nQueued.get() % 100 == 0)
+				{
+					log.info("deleting tmp file: " + storedFiles.getB());
+				}
 				final boolean deleted = FileUtil.deleteAll(storedFiles.getB());
 				if (!deleted)
 				{
@@ -307,7 +310,6 @@ class StorageHotFolderListener implements HotFolderListener
 				FileUtil.deleteAll(auxFile);
 			}
 		}
-		final File tmp = storedFile.getParentFile();
 	}
 
 	protected boolean handleBad(final File storedFile, final boolean bOK)
@@ -425,14 +427,11 @@ class StorageHotFolderListener implements HotFolderListener
 		if (ok)
 		{
 			log.info("moving file from: " + hotFile.getAbsolutePath() + " to " + newAbsoluteFile.getAbsolutePath());
+			processAux(hotFile, tmpDir);
 		}
 		else
 		{
 			log.error("cannot move file from: " + hotFile.getAbsolutePath() + " to " + newAbsoluteFile.getAbsolutePath());
-		}
-		if (ok)
-		{
-			processAux(hotFile, tmpDir);
 		}
 		return ok ? new MyPair<>(newAbsoluteFile, tmpDir) : null;
 	}

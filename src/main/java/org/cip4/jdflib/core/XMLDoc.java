@@ -1956,11 +1956,11 @@ public class XMLDoc implements Cloneable, IStreamWriter
 		final XMLParserFactory factory = XMLParserFactory.getFactory();
 		final XMLParser p = factory.get();
 		final InputStream inStream = UrlUtil.getURLInputStream(url, bp);
-		final File f = UrlUtil.urlToFile(url);
 		XMLDoc d = p.parseStream(inStream);
 		if (d != null)
 		{
 			d = new XMLDoc(d.getMemberDocument());
+			final File f = UrlUtil.urlToFile(url);
 			if (f != null && f.canRead())
 			{
 				d.setOriginalFileName(f.getAbsolutePath());

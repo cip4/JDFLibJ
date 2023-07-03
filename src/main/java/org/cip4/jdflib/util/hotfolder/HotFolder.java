@@ -51,6 +51,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -235,7 +236,7 @@ public class HotFolder
 	}
 
 	protected final ArrayList<ExtensionListener> hfl;
-	final Set<File> hfRunning;
+	final AtomicReference<Set<File>> hfRunning;
 	static final private Log log = LogFactory.getLog(HotFolder.class);
 
 	/**
@@ -279,7 +280,7 @@ public class HotFolder
 
 		lastFileTime = new ArrayList<>();
 		hfl = new ArrayList<>();
-		hfRunning = new HashSet<>();
+		hfRunning = new AtomicReference<>(new HashSet<>());
 		allExtensions = null;
 		HotFolderRunner.getCreateTherunner();
 		if (_hfl != null)
@@ -308,7 +309,7 @@ public class HotFolder
 		setMaxConcurrent(mc);
 		r.add(this);
 		lastModified = -1;
-		hfRunning.clear();
+		hfRunning.get().clear();
 	}
 
 	/**
@@ -339,7 +340,7 @@ public class HotFolder
 		int n = 0;
 		if (files != null)
 		{
-
+			Set<File> running = hfRunning.get();
 			for (int i = 0; i < files.length; i++)
 			{
 				final File file = files[i];
@@ -348,13 +349,16 @@ public class HotFolder
 					log.warn("ignoring read only file in hot folder: " + file);
 					files[i] = null;
 				}
-				else if (file.isDirectory() || file.isHidden() || hfRunning.contains(file))
-				{
-					files[i] = null;
-				}
 				else
 				{
-					n++;
+					if (running.contains(file) || file.isDirectory() || file.isHidden())
+					{
+						files[i] = null;
+					}
+					else
+					{
+						n++;
+					}
 				}
 			}
 		}
@@ -400,7 +404,7 @@ public class HotFolder
 		HotFileRunner(final File fileJ)
 		{
 			super();
-			hfRunning.add(fileJ);
+			hfRunning.get().add(fileJ);
 			this.fileJ = fileJ;
 		}
 
@@ -411,20 +415,20 @@ public class HotFolder
 		@Override
 		public void run()
 		{
-			for (final ExtensionListener xl : hfl)
-			{
-				try
-				{
-					xl.hotFile(fileJ); // exists and stabilized - call callbacks
-				}
-				catch (final Throwable x)
-				{
-					log.error("exception processing hot file", x);
-				}
-			}
 			if (fileJ != null)
 			{
-				hfRunning.remove(fileJ);
+				for (final ExtensionListener xl : hfl)
+				{
+					try
+					{
+						xl.hotFile(fileJ); // exists and stabilized - call callbacks
+					}
+					catch (final Throwable x)
+					{
+						log.error("exception processing hot file", x);
+					}
+				}
+				hfRunning.get().remove(fileJ);
 				log.info("completed running " + shortString());
 			}
 		}

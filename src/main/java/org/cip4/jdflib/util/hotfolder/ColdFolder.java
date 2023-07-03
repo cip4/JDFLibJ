@@ -49,6 +49,7 @@ package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.cip4.jdflib.util.FileUtil;
 
@@ -82,9 +83,10 @@ public class ColdFolder extends HotFolder
 		int found = 0;
 		if (files != null)
 		{
+			Set<File> running = hfRunning.get();
 			for (int i = 0; i < files.length; i++)
 			{
-				if (files[i].isDirectory() || hfRunning.contains(files[i]))
+				if (running.contains(files[i]) || files[i].isDirectory())
 				{
 					files[i] = null;
 				}
