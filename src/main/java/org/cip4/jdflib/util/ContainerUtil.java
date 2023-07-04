@@ -289,6 +289,28 @@ public class ContainerUtil
 	 *
 	 * @param <A>
 	 * @param c
+	 * @param other
+	 * @return
+	 */
+	public static <A> int count(final Collection<A> c, final A other)
+	{
+		int n = 0;
+		if (c != null)
+		{
+			for (A a : c)
+			{
+				if (equals(a, other))
+					n++;
+			}
+		}
+		return n;
+	}
+
+	/**
+	 * null safe helper
+	 *
+	 * @param <A>
+	 * @param c
 	 * @param others
 	 * @return
 	 */
