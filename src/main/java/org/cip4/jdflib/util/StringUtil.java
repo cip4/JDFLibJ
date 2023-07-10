@@ -2759,6 +2759,28 @@ public class StringUtil
 		return token(pathName, -1, "/");
 	}
 
+	public static String underToCamel(final String toConvert)
+	{
+		final StringArray v = StringArray.getVString(toConvert, JDFConstants.UNDERSCORE);
+		if (StringArray.isEmpty(v))
+		{
+			return null;
+		}
+		if (v.size() == 1)
+		{
+			return StringUtils.isAllUpperCase(v.get(0)) ? StringUtils.capitalize(v.get(0).toLowerCase()) : StringUtils.capitalize(v.get(0));
+		}
+		else
+		{
+			String ret = "";
+			for (final String s : v)
+			{
+				ret += StringUtils.capitalize(s.toLowerCase());
+			}
+			return ret;
+		}
+	}
+
 	/**
 	 * @param pathName
 	 * @return

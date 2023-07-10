@@ -114,6 +114,38 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	}
 
+	@Test
+	public void testUndertoCamel()
+	{
+		assertNull(StringUtil.underToCamel(""));
+		assertNull(StringUtil.underToCamel(""));
+		assertEquals("AaBb", StringUtil.underToCamel("AA_BB"));
+	}
+
+	@Test
+	public void testUndertoCamelLower()
+	{
+		assertEquals("AaBb", StringUtil.underToCamel("aa_bb"));
+	}
+
+	@Test
+	public void testUndertoCamelLower1()
+	{
+		assertEquals("Aa", StringUtil.underToCamel("aa"));
+	}
+
+	@Test
+	public void testUndertoCamel1()
+	{
+		assertEquals("Aa", StringUtil.underToCamel("AA"));
+	}
+
+	@Test
+	public void testUndertoCamelCamel()
+	{
+		assertEquals("AaBb", StringUtil.underToCamel("AaBb"));
+	}
+
 	/**
 	 *
 	 */
