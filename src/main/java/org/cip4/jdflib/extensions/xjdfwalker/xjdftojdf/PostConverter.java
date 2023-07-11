@@ -358,6 +358,16 @@ class PostConverter
 	 */
 	class ResourceCleaner
 	{
+		private VElement products;
+		private HashSet<KElement> rootLinks;
+
+		public ResourceCleaner()
+		{
+			super();
+			products = theNode.getvJDFNode(EnumType.Product.getName(), null, false);
+			rootLinks = new HashSet<>();
+		}
+
 		/**
 		 *
 		 */
@@ -375,6 +385,14 @@ class PostConverter
 				{
 					cleanResource(rr);
 				}
+			}
+			for (KElement product : products)
+			{
+				product.removeAttribute(XJDFConstants.ExternalID);
+			}
+			for (KElement link : rootLinks)
+			{
+				link.deleteNode();
 			}
 		}
 
@@ -403,7 +421,7 @@ class PostConverter
 		 *
 		 * @param eRoot
 		 */
-		private void cleanResource(final KElement eRoot)
+		void cleanResource(final KElement eRoot)
 		{
 			final JDFResource resRoot = (JDFResource) eRoot;
 			if (resRoot != null)
@@ -432,10 +450,35 @@ class PostConverter
 				}
 				cleanLeaf(resRoot, false);
 				final List<JDFResource> leaves = resRoot.getLeafArray(true);
-				for (final KElement leaf : leaves)
+				for (final JDFResource leaf : leaves)
 				{
-					leaf.removeChildrenByClass(JDFPart.class);
+					checkParts(leaf);
 				}
+			}
+		}
+
+		void checkParts(final JDFResource leaf)
+		{
+			for (JDFPart part : leaf.getChildArrayByClass(JDFPart.class, false, 0))
+			{
+				String extID = part.getNonEmpty(XJDFConstants.Product);
+				if (extID == null)
+				{
+					extID = part.getNonEmpty(XJDFConstants.ProductPart);
+				}
+				if (extID != null)
+				{
+					for (KElement product : products)
+					{
+						if (product.getID().equals(extID) || extID.equals(product.getNonEmpty(XJDFConstants.ExternalID)))
+						{
+							JDFResourceLink baselink = theNode.getLink(leaf, null);
+							((JDFNode) product).ensureLinkPU(leaf, baselink == null ? null : baselink.getUsage(), baselink == null ? null : baselink.getProcessUsage());
+							ContainerUtil.add(rootLinks, baselink);
+						}
+					}
+				}
+				part.deleteNode();
 			}
 		}
 

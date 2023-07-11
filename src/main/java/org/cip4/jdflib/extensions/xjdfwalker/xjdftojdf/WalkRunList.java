@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -115,17 +115,18 @@ public class WalkRunList extends WalkResource
 
 	/**
 	 * split a RunList into a RunList and a RunList/LayoutElement
+	 * 
 	 * @param xjdf
 	 */
-	private void splitLayoutElem(final KElement xjdf, KElement trackJDF)
+	void splitLayoutElem(final KElement xjdf, KElement trackJDF)
 	{
-		if (trackJDF != null && trackJDF.hasChildElement(ElementName.LAYOUTELEMENT, null))
+		if (trackJDF != null && trackJDF.getXPathElement("LayoutElement/FileSpec") != null)
 		{
 			xjdf.removeChildren(ElementName.FILESPEC, null, null);
 		}
-		else if (!xjdf.hasChildElement(ElementName.LAYOUTELEMENT, null))
+		else
 		{
-			final JDFElement loe = (JDFElement) xjdf.appendElement(ElementName.LAYOUTELEMENT);
+			final JDFElement loe = (JDFElement) xjdf.getCreateElement(ElementName.LAYOUTELEMENT);
 			final VString vAtt = loe.knownAttributes();
 			vAtt.appendUnique(ElementName.DEPENDENCIES);
 			final JDFAttributeMap map = xjdf.getAttributeMap();

@@ -113,7 +113,8 @@ public class WalkProduct extends WalkXElement
 		copyToNode(xjdfProduct, theNode);
 		final JDFComponent c = fixComponent(theNode, xjdfProduct);
 		// we only do voodoo default if no explicit deliveryparams exists
-		if (productHelper.isRootProduct() && xjdfToJDFImpl.xjdf.getSet(ElementName.DELIVERYPARAMS, 0) == null && new ProductHelper(xjdfProduct).getIntent(ElementName.DELIVERYINTENT) == null)
+		if (productHelper.isRootProduct() && xjdfToJDFImpl.xjdf.getSet(ElementName.DELIVERYPARAMS, 0) == null
+				&& new ProductHelper(xjdfProduct).getIntent(ElementName.DELIVERYINTENT) == null)
 		{
 			updateDeliveryIntent(xjdfProduct, theNode, c);
 		}
@@ -175,6 +176,7 @@ public class WalkProduct extends WalkXElement
 		}
 		theNode.setAttributes(e, ignore);
 		updateAttributes(theNode);
+		theNode.copyAttribute(XJDFConstants.ExternalID, theNode, AttributeName.PRODUCTID, null, null);
 
 	}
 

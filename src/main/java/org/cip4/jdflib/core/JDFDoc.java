@@ -53,8 +53,6 @@ import java.net.URL;
 
 import javax.mail.BodyPart;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -76,10 +74,7 @@ import org.w3c.dom.Node;
  */
 public class JDFDoc extends XMLDoc
 {
-	final protected static Log log = LogFactory.getLog(JDFDoc.class);
 
-	// **************************************** Constructors
-	// ****************************************
 	/**
 	 * constructor
 	 */
