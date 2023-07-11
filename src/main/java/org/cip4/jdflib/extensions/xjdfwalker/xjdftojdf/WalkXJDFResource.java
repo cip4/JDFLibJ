@@ -326,6 +326,7 @@ public class WalkXJDFResource extends WalkXElement
 				isNew = true;
 				res = createNewResource(theNode, name, id, setRoot);
 			}
+			res = res.getResourceRoot();
 			if (theNode != newRoot)
 			{
 				newRoot.getCreateResourcePool().moveElement(res, null);
