@@ -581,7 +581,7 @@ public class FileUtil
 		@Override
 		public boolean test(final Path checkFile)
 		{
-			return checkFile != null && StringUtil.matchesSimple(checkFile.getFileName().toString(), regExp);
+			return checkFile != null && StringUtil.matches(checkFile.getFileName().toString(), regExp);
 		}
 	}
 
