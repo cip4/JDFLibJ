@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -62,6 +62,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
+import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -112,8 +113,11 @@ public class RemoveEmpty extends BaseElementWalker
 			rf.getMap(n);
 		}
 
-		removEmptyElement(n);
-		unLinkFinder.eraseUnlinked(n);
+		int last = removEmptyElement(n);
+		if (last > 0)
+			last = unLinkFinder.eraseUnlinked(n);
+		if (last > 0)
+			removEmptyElement(n);
 	}
 
 	/**
@@ -121,9 +125,9 @@ public class RemoveEmpty extends BaseElementWalker
 	 *
 	 * @param e
 	 */
-	public void removEmptyElement(final KElement e)
+	public int removEmptyElement(final KElement e)
 	{
-		walkTreeKidsFirst(e);
+		return walkTreeKidsFirst(e);
 	}
 
 	/**
@@ -350,6 +354,57 @@ public class RemoveEmpty extends BaseElementWalker
 		{
 			return VString.getVString(ElementName.COMMENT, null);
 		}
+	}
+
+	/**
+	 * zapp me
+	 *
+	 * @author prosirai
+	 *
+	 */
+	public class WalkSpan extends WalkElement
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param e1 - the element to track
+		 * @param trackElem - always null
+		 * @return the element to continue walking
+		 */
+		@Override
+		public KElement walk(final KElement e1, final KElement trackElem)
+		{
+			final boolean hasAny = walkAttributes(e1);
+			if (!hasAny)
+			{
+				e1.deleteNode();
+				return null;
+			}
+			else
+			{
+				return e1;
+			}
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFSpanBase;
+		}
+
+		@Override
+		protected StringArray getDummyAttributes()
+		{
+			StringArray dummyAttributes = super.getDummyAttributes();
+			dummyAttributes.add(AttributeName.DATATYPE);
+			dummyAttributes.add(AttributeName.PRIORITY);
+			return dummyAttributes;
+		}
+
 	}
 
 	/**

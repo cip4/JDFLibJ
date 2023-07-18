@@ -49,6 +49,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -56,6 +57,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.junit.jupiter.api.Test;
@@ -111,6 +113,40 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
 		assertFalse(n.toXML().contains(ElementName.LAYOUT));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testRemoveSpan()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		JDFLayoutIntent loi = (JDFLayoutIntent) n.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
+		loi.appendFinishedDimensions();
+		loi.appendDimensions().setPreferred(new JDFXYPair(2, 3));
+		final RemoveEmpty emp = new RemoveEmpty();
+		emp.removEmpty(n);
+		assertNull(loi.getFinishedDimensions());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testRemoveSpan2()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		JDFLayoutIntent loi = (JDFLayoutIntent) n.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
+		loi.appendFinishedDimensions();
+		final RemoveEmpty emp = new RemoveEmpty();
+		emp.removEmpty(n);
+		assertNull(loi.getFinishedDimensions());
+		assertNull(n.getResourceLinkPool());
 	}
 
 	/**

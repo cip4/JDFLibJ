@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.util.ListMap;
 /**
  * @author Dr. Rainer Prosi
  *
- *  finds unlinked resources - example usage of the walker classes
+ *         finds unlinked resources - example usage of the walker classes
  */
 public class UnLinkFinder extends BaseElementWalker
 {
@@ -175,9 +175,9 @@ public class UnLinkFinder extends BaseElementWalker
 	 *
 	 * @param n the node to clean
 	 */
-	public void eraseUnlinkedResources(final JDFNode n)
+	public int eraseUnlinkedResources(final JDFNode n)
 	{
-		eraseUnlinked(n, false, true);
+		return eraseUnlinked(n, false, true);
 	}
 
 	/**
@@ -185,9 +185,9 @@ public class UnLinkFinder extends BaseElementWalker
 	 *
 	 * @param n the node to clean
 	 */
-	public void eraseUnlinkedRefs(final JDFNode n)
+	public int eraseUnlinkedRefs(final JDFNode n)
 	{
-		eraseUnlinked(n, true, false);
+		return eraseUnlinked(n, true, false);
 	}
 
 	/**
@@ -195,9 +195,9 @@ public class UnLinkFinder extends BaseElementWalker
 	 *
 	 * @param n the node to clean
 	 */
-	public void eraseUnlinked(final JDFNode n)
+	public int eraseUnlinked(final JDFNode n)
 	{
-		eraseUnlinked(n, true, true);
+		return eraseUnlinked(n, true, true);
 	}
 
 	/**
@@ -207,7 +207,7 @@ public class UnLinkFinder extends BaseElementWalker
 	 * @param ref
 	 * @param res
 	 */
-	private void eraseUnlinked(final JDFNode n, final boolean ref, final boolean res)
+	private int eraseUnlinked(final JDFNode n, final boolean ref, final boolean res)
 	{
 		VElement v = null;
 		if (ref && res)
@@ -222,19 +222,17 @@ public class UnLinkFinder extends BaseElementWalker
 		{
 			v = getUnlinkedResources(n);
 		}
-		if (v != null)
+		int siz = ContainerUtil.size(v);
+		if (siz > 0)
 		{
-			final int siz = v.size();
 			for (int i = 0; i < siz; i++)
 			{
 				v.get(i).deleteNode();
 			}
 
-			if (siz > 0)
-			{
-				eraseUnlinked(n, ref, res);
-			}
+			siz += eraseUnlinked(n, ref, res);
 		}
+		return siz;
 	}
 
 	/**
