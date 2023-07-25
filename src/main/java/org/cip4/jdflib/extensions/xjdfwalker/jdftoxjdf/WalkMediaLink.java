@@ -132,6 +132,7 @@ public class WalkMediaLink extends WalkResLink
 				final JDFMedia rLeaf = (JDFMedia) leaf;
 				final JDFComponent twin = (JDFComponent) comp.getPartition(rLeaf.getPartMap(), null);
 				twin.refMedia(rLeaf);
+				twin.setProductType(rLeaf.getPrePrinted() ? "Preprinted" : "Media");
 			}
 			rlComp.setPartMapVector(rl.getPartMapVector());
 			rlComp.moveElement(rl.getAmountPool(), null);

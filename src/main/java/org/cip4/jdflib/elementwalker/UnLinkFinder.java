@@ -223,13 +223,12 @@ public class UnLinkFinder extends BaseElementWalker
 			v = getUnlinkedResources(n);
 		}
 		int siz = ContainerUtil.size(v);
-		if (siz > 0)
+		if (siz > 0 && v != null)
 		{
-			for (int i = 0; i < siz; i++)
+			for (KElement e : v)
 			{
-				v.get(i).deleteNode();
+				e.deleteNode();
 			}
-
 			siz += eraseUnlinked(n, ref, res);
 		}
 		return siz;
