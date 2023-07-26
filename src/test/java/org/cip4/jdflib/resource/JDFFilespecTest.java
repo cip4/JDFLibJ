@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,6 +44,11 @@
  */
 package org.cip4.jdflib.resource;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,6 +62,7 @@ import javax.mail.Multipart;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
@@ -69,7 +75,6 @@ import org.cip4.jdflib.util.MimeUtilTest;
 import org.cip4.jdflib.util.PlatformUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -97,8 +102,8 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		{
 			fs.setAbsoluteFileURL(new File("C:\\ist blöd\\fnord is €"), false);
 			fs2.setAbsoluteFileURL(new File("C:\\ist blöd\\fnord is €"), true);
-			Assertions.assertEquals(fs.getURL(), "file:///C:/ist%20blöd/fnord%20is%20€");
-			Assertions.assertEquals(fs2.getURL(), "file:///C:/ist%20bl%c3%b6d/fnord%20is%20%e2%82%ac");
+			assertEquals(fs.getURL(), "file:///C:/ist%20blöd/fnord%20is%20€");
+			assertEquals(fs2.getURL(), "file:///C:/ist%20bl%c3%b6d/fnord%20is%20%e2%82%ac");
 
 		}
 	}
@@ -112,9 +117,9 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
 		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, null, EnumUsage.Input, null, null, null, null);
-		Assertions.assertEquals(-1l, fs.getFileSizeLong());
+		assertEquals(-1l, fs.getFileSizeLong());
 		fs.setFileSize(42);
-		Assertions.assertEquals(42l, fs.getFileSizeLong());
+		assertEquals(42l, fs.getFileSizeLong());
 	}
 
 	/**
@@ -127,8 +132,8 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final JDFNode n = doc.getJDFRoot();
 		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, EnumUsage.Input);
 		fs.setResourceUsage(EnumResourceUsage.CIP3);
-		Assertions.assertEquals("CIP3", fs.getResourceUsage());
-		Assertions.assertEquals(EnumResourceUsage.CIP3, fs.getResourceUsageEnum());
+		assertEquals("CIP3", fs.getResourceUsage());
+		assertEquals(EnumResourceUsage.CIP3, fs.getResourceUsageEnum());
 	}
 
 	@Test
@@ -138,8 +143,8 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final JDFNode n = doc.getJDFRoot();
 		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, EnumUsage.Input);
 		fs.setResourceUsage("aa");
-		Assertions.assertEquals("aa", fs.getResourceUsage());
-		Assertions.assertNull(fs.getResourceUsageEnum());
+		assertEquals("aa", fs.getResourceUsage());
+		assertNull(fs.getResourceUsageEnum());
 	}
 
 	@Test
@@ -147,7 +152,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	{
 		for (final EnumResourceUsage e : EnumResourceUsage.values())
 		{
-			Assertions.assertEquals(e, EnumResourceUsage.getEnum(e.name().toLowerCase()));
+			assertEquals(e, EnumResourceUsage.getEnum(e.name().toLowerCase()));
 		}
 	}
 
@@ -162,8 +167,8 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, null, EnumUsage.Input, null, null, null, null);
 		final byte[] b = new byte[] { 0, (byte) 255, (byte) 0x99, 64 };
 		fs.setCheckSum(b);
-		Assertions.assertEquals(fs.getCheckSum(), "00FF9940");
-		Assertions.assertEquals(new String(fs.getCheckSumBytes()), new String(b));
+		assertEquals(fs.getCheckSum(), "00FF9940");
+		assertEquals(new String(fs.getCheckSumBytes()), new String(b));
 
 	}
 
@@ -175,7 +180,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	{
 		new MimeUtilTest().testBuildMimePackageDocJMF(tempDir);
 		final Path sourceFile = tempDir.resolve("testMimePackageDoc0.mjm");
-		Assertions.assertTrue(Files.isReadable(sourceFile));
+		assertTrue(Files.isReadable(sourceFile));
 		final Multipart mp;
 		try (InputStream fileStream = Files.newInputStream(sourceFile))
 		{
@@ -185,15 +190,15 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final JDFDoc d = MimeUtil.getJDFDoc(bp);
 		final JDFNode n = d.getJDFRoot();
 		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.getMatchingResource(ElementName.COLORSPACECONVERSIONPARAMS, null, null, 0);
-		Assertions.assertNotNull(cscp);
+		assertNotNull(cscp);
 		final JDFFileSpec fs = cscp.getFinalTargetDevice();
 		final InputStream is = fs.getURLInputStream();
-		Assertions.assertNotNull(is);
+		assertNotNull(is);
 		final byte b[] = new byte[100];
 		final int i = is.read(b);
-		Assertions.assertTrue(i > 0);
+		assertTrue(i > 0);
 		final String s = new String(b);
-		Assertions.assertTrue(s.indexOf("I C C") >= 0);
+		assertTrue(s.indexOf("I C C") >= 0);
 	}
 
 	/**
@@ -211,10 +216,10 @@ public class JDFFilespecTest extends JDFTestCaseBase
 
 		try (final InputStream is = rli.getFileSpec().getURLInputStream())
 		{
-			Assertions.assertNotNull(is);
+			assertNotNull(is);
 			try (ByteArrayIOStream bos = new ByteArrayIOStream(is))
 			{
-				Assertions.assertEquals(contents.getBytes().length, bos.size());
+				assertEquals(contents.getBytes().length, bos.size());
 			}
 		}
 	}
@@ -237,11 +242,11 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final JDFDoc d = MimeUtil.getJDFDoc(bp);
 		final JDFNode n = d.getJDFRoot();
 		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.getMatchingResource(ElementName.COLORSPACECONVERSIONPARAMS, null, null, 0);
-		Assertions.assertNotNull(cscp);
+		assertNotNull(cscp);
 		final JDFFileSpec fs = cscp.getFinalTargetDevice();
 		final File newDir = tempDir.resolve("newDir").toFile();
 		final File f = UrlUtil.moveToDir(fs, newDir, null, true);
-		Assertions.assertNotNull(f, "error moving file to dir");
+		assertNotNull(f, "error moving file to dir");
 		for (int i = 0; i < 10; i++)
 		{
 			ThreadUtil.sleep(1000);
@@ -251,7 +256,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 			}
 			log.info("Waiting " + i);
 		}
-		Assertions.assertTrue(fs.getURL().contains(UrlUtil.fileToUrl(newDir, false)));
+		assertTrue(fs.getURL().contains(UrlUtil.fileToUrl(newDir, false)));
 	}
 
 	/**
@@ -266,8 +271,8 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		fileSpec.setURL(sm_dirTestData + "url1.pdf");
 		fileSpec.setUserFileName("newName1.pdf");
 		final File copy = UrlUtil.moveToDir(fileSpec, tempDir.toAbsolutePath().toFile(), null, true);
-		Assertions.assertEquals(copy.getName(), "newName1.pdf");
-		Assertions.assertEquals(UrlUtil.urlToFile(fileSpec.getURL()), copy);
+		assertEquals(copy.getName(), "newName1.pdf");
+		assertEquals(UrlUtil.urlToFile(fileSpec.getURL()), copy);
 	}
 
 	/**
@@ -276,13 +281,11 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	@Test
 	public void testGetMimeTypeFromURL()
 	{
-		Assertions.assertEquals("text/unknown", UrlUtil.getMimeTypeFromURL(null));
-		Assertions.assertEquals("text/unknown", UrlUtil.getMimeTypeFromURL("blubb"));
-		Assertions.assertEquals("application/pdf", UrlUtil.getMimeTypeFromURL("file://a/b/./testtif.foo.PDF"));
-		Assertions.assertEquals("image/tiff", UrlUtil.getMimeTypeFromURL("http://a/b/./testtif.foo.tiff"));
+		assertEquals("text/unknown", UrlUtil.getMimeTypeFromURL(null));
+		assertEquals("text/unknown", UrlUtil.getMimeTypeFromURL("blubb"));
+		assertEquals("application/pdf", UrlUtil.getMimeTypeFromURL("file://a/b/./testtif.foo.PDF"));
+		assertEquals("image/tiff", UrlUtil.getMimeTypeFromURL("http://a/b/./testtif.foo.tiff"));
 	}
-
-	// //////////////////////////////////////////////////////////////
 
 	/**
 	 *
@@ -293,7 +296,22 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("FileSpec");
 		final JDFFileSpec fs = (JDFFileSpec) d.getRoot();
 		fs.setMimeURL("file:/c/test.pdf");
-		Assertions.assertEquals(fs.getMimeType(), "application/pdf");
-		Assertions.assertEquals(fs.getURL(), "file:/c/test.pdf");
+		assertEquals(fs.getMimeType(), "application/pdf");
+		assertEquals(fs.getURL(), "file:/c/test.pdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetFileName()
+	{
+		final JDFFileSpec fs = (JDFFileSpec) JDFElement.createRoot(ElementName.FILESPEC);
+
+		fs.setMimeURL("file:/c/test.pdf");
+		assertEquals(fs.getMimeType(), "application/pdf");
+		assertEquals(fs.getFileName(), "test.pdf");
+		fs.setUserFileName("dummy.pdf");
+		assertEquals(fs.getFileName(), "dummy.pdf");
 	}
 }
