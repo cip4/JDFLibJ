@@ -75,6 +75,7 @@ import java.util.Vector;
 
 import org.apache.commons.lang.enums.EnumUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 
 /**
@@ -107,6 +108,28 @@ public class EnumUtil
 		}
 
 		return namesVector;
+	}
+
+	/**
+	 * get a vector of names in an iteration
+	 *
+	 * @param e any member of the enum to iterate over
+	 * @return VString - the vector of enum names
+	 */
+	@SuppressWarnings("unchecked")
+	public static StringArray getNamesList(final Class<? extends ValuedEnum> e)
+	{
+		if (e == null)
+			return null;
+
+		final StringArray list = new StringArray();
+		final Iterator<ValuedEnum> it = EnumUtils.iterator(e);
+		while (it.hasNext())
+		{
+			list.add(it.next().getName());
+		}
+
+		return list;
 	}
 
 	/**
@@ -235,14 +258,17 @@ public class EnumUtil
 	 */
 	public static ValuedEnum getEnumIgnoreCase(final Class<? extends ValuedEnum> clazz, final String s)
 	{
-		final VString v = getNamesVector(clazz);
-		if (v == null || s == null)
-			return null;
-		for (final String vs : v)
+		if (!StringUtil.isEmpty(s) && clazz != null)
 		{
-			if (s.equalsIgnoreCase(vs))
+			@SuppressWarnings("unchecked")
+			final Iterator<ValuedEnum> it = EnumUtils.iterator(clazz);
+			while (it.hasNext())
 			{
-				return (ValuedEnum) EnumUtils.getEnum(clazz, vs);
+				ValuedEnum next = it.next();
+				if (s.equalsIgnoreCase(next.getName()))
+				{
+					return (ValuedEnum) EnumUtils.getEnum(clazz, next.getName());
+				}
 			}
 		}
 		return null;

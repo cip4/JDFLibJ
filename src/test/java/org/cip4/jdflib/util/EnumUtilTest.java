@@ -151,6 +151,16 @@ public class EnumUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetEnumList()
+	{
+		assertEquals(9, EnumUtil.getNamesList(EnumAnchor.class).size());
+		assertNull(EnumUtil.getNamesList(null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetEnumValue()
 	{
 		assertEquals(EnumUtil.getName(EnumAnchor.BottomRight), "BottomRight");
