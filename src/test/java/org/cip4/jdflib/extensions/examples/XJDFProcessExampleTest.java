@@ -88,7 +88,9 @@ import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFConvertingConfig;
 import org.cip4.jdflib.resource.process.JDFDieLayoutProductionParams;
 import org.cip4.jdflib.resource.process.JDFRepeatDesc;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFShapeDef;
+import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -135,6 +137,33 @@ public class XJDFProcessExampleTest extends ExampleTest
 		media.ensureReference(outComp.getCreateResource(), null);
 		media.setResourceEnum(AttributeName.MEDIATYPE, EnumMediaType.Paper);
 		writeTest(xjdfHelper, "processes/ConventionalPrintingExample.xjdf");
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public final void testPDLCreation()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper("PDLCreationExample", null, null);
+		xjdfHelper.addType(EnumType.PDLCreation);
+		SetHelper pcp = xjdfHelper.getCreateSet(ElementName.PDLCREATIONPARAMS, EnumUsage.Input);
+		pcp.getCreateResource(0, true).setResourceAttribute(AttributeName.MIMETYPE, UrlUtil.APPLICATION_PDF);
+
+		SetHelper inRuLi = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input);
+		for (int i = 0; i < 2; i++)
+		{
+			JDFRunList ruliLeaf = (JDFRunList) inRuLi.appendPartition(AttributeName.PAGENUMBER, i + " " + i, true).getResource();
+			ruliLeaf.setFileSpecURL("file://page" + i + ".tif");
+			ruliLeaf.setNPage(1);
+		}
+		SetHelper outRuLi = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Output);
+		JDFRunList ruliLeaf = (JDFRunList) outRuLi.getCreatePartition(0, true).getResource();
+		ruliLeaf.setFileSpecURL("file://2page.pdf");
+		ruliLeaf.setNPage(2);
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "processes/PDLCreationExample.xjdf");
 	}
 
 	/**

@@ -611,11 +611,12 @@ public abstract class JDFTestCaseBase
 	 * @param h convenience method for XJDFHelper
 	 * @param fileBase the filename without extension
 	 * @param level the level to validate the returned JDF
+	 * @return
 	 */
-	protected void writeRoundTripX(final BaseXJDFHelper h, final String fileBase, final EnumValidationLevel level)
+	protected JDFElement writeRoundTripX(final BaseXJDFHelper h, final String fileBase, final EnumValidationLevel level)
 	{
 		h.cleanUp();
-		writeRoundTripX(h.getRoot(), fileBase, level);
+		return writeRoundTripX(h.getRoot(), fileBase, level);
 	}
 
 	/**
@@ -624,8 +625,9 @@ public abstract class JDFTestCaseBase
 	 * @param xjdfRoot the xjdf node or xjmf root
 	 * @param fileBase the filename without extension
 	 * @param level the level to validate the returned JDF
+	 * @return
 	 */
-	protected void writeRoundTripX(final KElement xjdfRoot, final String fileBase, final EnumValidationLevel level)
+	protected JDFElement writeRoundTripX(final KElement xjdfRoot, final String fileBase, final EnumValidationLevel level)
 	{
 		final String tmpXJDF = sm_dirTestDataTemp + fileBase + ".xjdf";
 		xjdfRoot.getOwnerDocument_KElement().write2File(tmpXJDF, 2, false);
@@ -639,13 +641,14 @@ public abstract class JDFTestCaseBase
 			dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.xml", 2, false);
 		}
 		assertEquals(VALID, valResult);
+		JDFElement jxRoot = null;
 		if (level != null)
 		{
 			final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 			final JDFDoc converted = jdfConverter.convert(xjdfRoot);
 			final String fileXJ = sm_dirTestDataTemp + fileBase + ".xjdf.jdf";
 			converted.write2File(fileXJ, 2, false);
-			JDFElement jxRoot = converted.getJDFRoot();
+			jxRoot = converted.getJDFRoot();
 			if (jxRoot == null)
 				jxRoot = converted.getJMFRoot();
 			final boolean valid = jxRoot.isValid(level);
@@ -674,6 +677,7 @@ public abstract class JDFTestCaseBase
 			assertEquals(valResult, VALID);
 		}
 		JDFParserFactory.getFactory().push(p);
+		return jxRoot;
 	}
 
 	/**

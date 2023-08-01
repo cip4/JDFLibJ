@@ -93,6 +93,7 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFInsert;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFStrippingParams;
@@ -166,7 +167,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFDevice dev = (JDFDevice) h.getCreateResource(ElementName.DEVICE, EnumUsage.Input, null);
 		dev.setRestApiBaseURL("http://rest");
 		dev.setDeviceID("d1");
-		writeRoundTripX(h, "RestAPI", EnumValidationLevel.Incomplete);
+		JDFNode jdf = (JDFNode) writeRoundTripX(h, "RestAPI", EnumValidationLevel.Incomplete);
+		assertEquals(EnumPartUsage.Implicit, jdf.getResource(ElementName.DEVICE, EnumUsage.Input, 0).getPartUsage());
 	}
 
 	/**
