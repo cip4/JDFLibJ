@@ -456,9 +456,8 @@ class PostConverter
 					checkParts(leaf);
 				}
 				EnumResourceClass c = resRoot.getResourceClass();
-				if (EnumResourceClass.Implementation.equals(c) || EnumResourceClass.Parameter.equals(c) && !(resRoot instanceof JDFRunList))
+				if (EnumResourceClass.Implementation.equals(c) || EnumResourceClass.Parameter.equals(c) && (resRoot.getNodeName().endsWith("Params")))
 				{
-
 					resRoot.setPartUsage(EnumPartUsage.Implicit);
 				}
 
