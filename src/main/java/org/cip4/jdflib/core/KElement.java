@@ -4321,8 +4321,12 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			super();
 			this.xPath = xPath;
 			this.invert = pInvert ? -1 : 1;
+			checkNumber = true;
+			caseSensitive = true;
 		}
 
+		boolean checkNumber;
+		boolean caseSensitive;
 		final String xPath;
 		final int invert;
 
@@ -4337,7 +4341,12 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		{
 			final String attribute1 = o1.getXPathAttribute(xPath, null);
 			final String attribute2 = o2.getXPathAttribute(xPath, null);
-			if (StringUtil.isNumber(attribute1) && StringUtil.isNumber(attribute2))
+			return compare(attribute1, attribute2);
+		}
+
+		int compare(final String attribute1, final String attribute2)
+		{
+			if (checkNumber && StringUtil.isNumber(attribute1) && StringUtil.isNumber(attribute2))
 			{
 				final double d1 = StringUtil.parseDouble(attribute1, 0);
 				final double d2 = StringUtil.parseDouble(attribute2, 0);
@@ -4354,7 +4363,27 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 					return invert;
 				}
 			}
-			return invert * ContainerUtil.compare(attribute1, attribute2);
+			return invert * StringUtil.compare(attribute1, attribute2, !caseSensitive);
+		}
+
+		public boolean isCheckNumber()
+		{
+			return checkNumber;
+		}
+
+		public void setCheckNumber(boolean checkNumber)
+		{
+			this.checkNumber = checkNumber;
+		}
+
+		public boolean isCaseSensitive()
+		{
+			return caseSensitive;
+		}
+
+		public void setCaseSensitive(boolean caseSensitive)
+		{
+			this.caseSensitive = caseSensitive;
 		}
 	}
 
@@ -4388,24 +4417,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		{
 			final String a1 = o1.getAttribute_KElement(xPath, null, null);
 			final String a2 = o2.getAttribute_KElement(xPath, null, null);
-			if (StringUtil.isNumber(a1) && StringUtil.isNumber(a2))
-			{
-				final double d1 = StringUtil.parseDouble(a1, 0);
-				final double d2 = StringUtil.parseDouble(a2, 0);
-				if (d1 < d2)
-				{
-					return -invert;
-				}
-				else if (d1 == d2)
-				{
-					return 0;
-				}
-				else
-				{
-					return invert;
-				}
-			}
-			return invert * ContainerUtil.compare(a1, a2);
+			return compare(a1, a2);
 		}
 	}
 

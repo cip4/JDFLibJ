@@ -1479,8 +1479,6 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.isEqual(4, 4), "int");
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -1492,6 +1490,19 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(1, StringUtil.compareTo(3, 2));
 		assertEquals(1, StringUtil.compareTo(3, 2));
 		assertEquals(0, StringUtil.compareTo(2 + 0.5 * JDFBaseDataTypes.EPSILON, 2));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCompare()
+	{
+		assertEquals(-1, StringUtil.compare(null, "a", true));
+		assertEquals(-1, StringUtil.compare(null, "a", false));
+		assertEquals(0, StringUtil.compare(null, null, true));
+		assertEquals(0, StringUtil.compare("a", "A", true));
+		assertEquals(32, StringUtil.compare("a", "A", false));
 	}
 
 	/**

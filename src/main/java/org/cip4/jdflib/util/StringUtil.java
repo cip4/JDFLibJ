@@ -1468,6 +1468,27 @@ public class StringUtil
 	}
 
 	/**
+	 * static implementation of compare for any comparable object that gracefully handles null<br/>
+	 * null is always the smallest
+	 *
+	 * @param c0
+	 * @param c1
+	 * @return -1 if c0 &lt; c1, 0 if equal, 1 if c0 &gt; c1;
+	 */
+	public static int compare(final String c0, final String c1, boolean ignoreCase)
+	{
+		if (c0 == null)
+		{
+			return c1 == null ? 0 : -1;
+		}
+		if (c1 == null)
+		{
+			return 1;
+		}
+		return ignoreCase ? c0.compareToIgnoreCase(c1) : c0.compareTo(c1);
+	}
+
+	/**
 	 * checks whether a string is matches an NMTOKENS list
 	 *
 	 * @param strWork the string to check
