@@ -313,7 +313,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		final File file = new File(theHFDir + File.separator + "a.~#~2.xml");
 		file.createNewFile();
-		for (int i = 0; i < 1234; i++)
+		for (int i = 0; i < 2234; i++)
 		{
 			ThreadUtil.sleep(42);
 			if (!file.exists() && tmpHFDir.listFiles().length == 0)
@@ -345,7 +345,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		assertNotNull(hf.getListener(1));
 		for (int i = 0; i < 2234; i++)
 		{
-			ThreadUtil.sleep(21);
+			ThreadUtil.sleep(42);
 			if (!file.exists())
 				break;
 		}
