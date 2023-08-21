@@ -70,6 +70,10 @@
 
 package org.cip4.jdflib.resource;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -90,7 +94,6 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.resource.process.JDFPageElement;
 import org.cip4.jdflib.resource.process.JDFRunList;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -172,16 +175,16 @@ public class JDFPageListTest extends JDFTestCaseBase
 	@Test
 	public void testGetNPage() throws Exception
 	{
-		Assertions.assertEquals(pl.getNPage(), 0);
+		assertEquals(pl.getNPage(), 0);
 		JDFPageData pd1 = pl.appendPageData();
-		Assertions.assertEquals(pl.getNPage(), 1);
+		assertEquals(pl.getNPage(), 1);
 		JDFPageData pd2 = pl.appendPageData();
-		Assertions.assertEquals(pl.getNPage(), 2);
+		assertEquals(pl.getNPage(), 2);
 		pd1.setPageIndex(new JDFIntegerRangeList("0 2 4"));
 		pd2.setPageIndex(new JDFIntegerRangeList("1 3 5"));
-		Assertions.assertEquals(pl.getNPage(), 6);
+		assertEquals(pl.getNPage(), 6);
 		pd2.setPageIndex(new JDFIntegerRangeList("1 3 4 5"));
-		Assertions.assertEquals(pl.getNPage(), 6);
+		assertEquals(pl.getNPage(), 6);
 	}
 
 	/**
@@ -191,18 +194,18 @@ public class JDFPageListTest extends JDFTestCaseBase
 	@Test
 	public void testIsIndexed() throws Exception
 	{
-		Assertions.assertTrue(pl.isIndexed());
+		assertTrue(pl.isIndexed());
 		JDFPageData pd1 = pl.appendPageData();
-		Assertions.assertFalse(pl.isIndexed());
+		assertFalse(pl.isIndexed());
 		JDFPageData pd2 = pl.appendPageData();
-		Assertions.assertFalse(pl.isIndexed());
+		assertFalse(pl.isIndexed());
 		pd1.setPageIndex(0);
-		Assertions.assertFalse(pl.isIndexed());
+		assertFalse(pl.isIndexed());
 		pd2.setPageIndex(1);
-		Assertions.assertTrue(pl.isIndexed());
+		assertTrue(pl.isIndexed());
 		pd1.setPageIndex(new JDFIntegerRangeList("0 2 4"));
 		pd2.setPageIndex(new JDFIntegerRangeList("1 3 5"));
-		Assertions.assertTrue(pl.isIndexed());
+		assertTrue(pl.isIndexed());
 	}
 
 	/**
@@ -212,18 +215,18 @@ public class JDFPageListTest extends JDFTestCaseBase
 	@Test
 	public void testIsNormal() throws Exception
 	{
-		Assertions.assertTrue(pl.isNormal());
+		assertTrue(pl.isNormal());
 		JDFPageData pd1 = pl.appendPageData();
-		Assertions.assertFalse(pl.isNormal());
+		assertFalse(pl.isNormal());
 		JDFPageData pd2 = pl.appendPageData();
-		Assertions.assertFalse(pl.isNormal());
+		assertFalse(pl.isNormal());
 		pd1.setPageIndex(0);
-		Assertions.assertFalse(pl.isNormal());
+		assertFalse(pl.isNormal());
 		pd2.setPageIndex(1);
-		Assertions.assertTrue(pl.isNormal());
+		assertTrue(pl.isNormal());
 		pd1.setPageIndex(new JDFIntegerRangeList("0 2 4"));
 		pd2.setPageIndex(new JDFIntegerRangeList("1 3 5"));
-		Assertions.assertFalse(pl.isNormal());
+		assertFalse(pl.isNormal());
 	}
 
 	/**
@@ -233,17 +236,17 @@ public class JDFPageListTest extends JDFTestCaseBase
 	@Test
 	public void testUniqueIndex() throws Exception
 	{
-		Assertions.assertTrue(pl.isNormal());
+		assertTrue(pl.isNormal());
 		JDFPageData pd1 = pl.appendPageData();
-		Assertions.assertFalse(pl.isNormal());
+		assertFalse(pl.isNormal());
 		JDFPageData pd2 = pl.appendPageData();
 
 		pd1.setPageIndex(new JDFIntegerRangeList("0 2 4"));
 		pd2.setPageIndex(new JDFIntegerRangeList("1 3 4 5 "));
-		Assertions.assertFalse(pl.isNormal());
+		assertFalse(pl.isNormal());
 		pl.uniqueIndex();
-		Assertions.assertTrue(pl.isNormal());
-		Assertions.assertEquals(pl.getChildrenByClass(JDFPageData.class, false, 0).size(), 6);
+		assertTrue(pl.isNormal());
+		assertEquals(pl.getChildArrayByClass(JDFPageData.class, false, 0).size(), 6);
 	}
 
 	/**
@@ -253,18 +256,18 @@ public class JDFPageListTest extends JDFTestCaseBase
 	@Test
 	public void testUniqueIndexMissing() throws Exception
 	{
-		Assertions.assertTrue(pl.isNormal());
+		assertTrue(pl.isNormal());
 		JDFPageData pd1 = pl.appendPageData();
-		Assertions.assertFalse(pl.isNormal());
+		assertFalse(pl.isNormal());
 		JDFPageData pd2 = pl.appendPageData();
 
 		pd1.setPageIndex(new JDFIntegerRangeList("0  4"));
 		pd2.setPageIndex(new JDFIntegerRangeList("1 8"));
-		Assertions.assertFalse(pl.isNormal());
+		assertFalse(pl.isNormal());
 		pl.uniqueIndex();
-		Assertions.assertTrue(pl.isNormal());
-		Assertions.assertTrue(pl.isIndexed());
-		Assertions.assertEquals(pl.getChildrenByClass(JDFPageData.class, false, 0).size(), 9);
+		assertTrue(pl.isNormal());
+		assertTrue(pl.isIndexed());
+		assertEquals(pl.getChildArrayByClass(JDFPageData.class, false, 0).size(), 9);
 	}
 
 	/**
@@ -274,7 +277,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	@Test
 	public void testUniqueIndexPerformance() throws Exception
 	{
-		Assertions.assertTrue(pl.isNormal());
+		assertTrue(pl.isNormal());
 		for (int i = 0; i <= 10000; i++)
 		{
 			JDFPageData pd = pl.appendPageData();
@@ -285,10 +288,10 @@ public class JDFPageListTest extends JDFTestCaseBase
 			pd.setPageIndex(irl);
 
 		}
-		Assertions.assertFalse(pl.isNormal());
+		assertFalse(pl.isNormal());
 		pl.uniqueIndex();
-		Assertions.assertTrue(pl.isNormal());
-		Assertions.assertEquals(pl.getChildrenByClass(JDFPageData.class, false, 0).size(), 160001);
+		assertTrue(pl.isNormal());
+		assertEquals(pl.getChildArrayByClass(JDFPageData.class, false, 0).size(), 160001);
 	}
 
 	/**
@@ -298,16 +301,16 @@ public class JDFPageListTest extends JDFTestCaseBase
 	@Test
 	public void testGetPageDataByIndex() throws Exception
 	{
-		Assertions.assertEquals(pl.getNPage(), 0);
+		assertEquals(pl.getNPage(), 0);
 		JDFPageData pd1 = pl.appendPageData();
 		JDFPageData pd2 = pl.appendPageData();
-		Assertions.assertEquals(pl.getPageDataByIndex(0), pd1);
-		Assertions.assertEquals(pl.getPageDataByIndex(-2), pd1);
+		assertEquals(pl.getPageDataByIndex(0), pd1);
+		assertEquals(pl.getPageDataByIndex(-2), pd1);
 		pd1.setPageIndex(new JDFIntegerRangeList("0 2 4"));
 		pd2.setPageIndex(new JDFIntegerRangeList("1 3 5"));
-		Assertions.assertEquals(pl.getPageDataByIndex(0), pd1);
-		Assertions.assertEquals(pl.getPageDataByIndex(-2), pd1);
-		Assertions.assertEquals(pl.getPageDataByIndex(-5), pd2);
+		assertEquals(pl.getPageDataByIndex(0), pd1);
+		assertEquals(pl.getPageDataByIndex(-2), pd1);
+		assertEquals(pl.getPageDataByIndex(-5), pd2);
 	}
 
 	// //////////////////////////////////////////////////////////////

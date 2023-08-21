@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,6 +79,7 @@
 package org.cip4.jdflib.resource;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -92,7 +93,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * 
- *  
+ * 
  * @author rainer prosi
  * @date way before Jan 9, 2012
  */
@@ -102,9 +103,10 @@ public class JDFPageList extends JDFAutoPageList
 
 	/**
 	 * Constructor for JDFPageList
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
-	 * @throws DOMException 
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
 	 * 
 	 */
 	public JDFPageList(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
@@ -114,8 +116,9 @@ public class JDFPageList extends JDFAutoPageList
 
 	/**
 	 * Constructor for JDFPageList
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * 
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -127,11 +130,12 @@ public class JDFPageList extends JDFAutoPageList
 
 	/**
 	 * Constructor for JDFPageList
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * @throws DOMException 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
 	 * 
 	 */
 	public JDFPageList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
@@ -153,6 +157,7 @@ public class JDFPageList extends JDFAutoPageList
 	/**
 	 * 
 	 * get the number of pages in this pagelist
+	 * 
 	 * @return
 	 */
 	public int getNPage()
@@ -188,6 +193,7 @@ public class JDFPageList extends JDFAutoPageList
 	/**
 	 * 
 	 * get pagedata by zero based page index
+	 * 
 	 * @param index page index, if <0, count backwards (-1=last...)
 	 * @return
 	 */
@@ -227,13 +233,14 @@ public class JDFPageList extends JDFAutoPageList
 
 	/**
 	 * ensure a normalized pagelist where @PageIndex is a single Integer and all PageData are ordered by PageIndex
+	 * 
 	 * @see org.cip4.jdflib.core.KElement#normalize()
 	 */
 	public void uniqueIndex()
 	{
 		if (!isIndexed())
 		{
-			Vector<JDFPageData> v = getChildrenByClass(JDFPageData.class, false, 0);
+			List<JDFPageData> v = getChildArrayByClass(JDFPageData.class, false, 0);
 			if (v != null)
 			{
 				for (int i = 0; i < v.size(); i++)
@@ -244,7 +251,7 @@ public class JDFPageList extends JDFAutoPageList
 		}
 		else if (!isNormal())
 		{
-			Vector<JDFPageData> v = getChildrenByClass(JDFPageData.class, false, 0);
+			List<JDFPageData> v = getChildArrayByClass(JDFPageData.class, false, 0);
 			int lastEmpty = 0;
 			if (v != null)
 			{
@@ -270,7 +277,7 @@ public class JDFPageList extends JDFAutoPageList
 					else
 					{
 						v.remove(pageData);
-						v.insertElementAt(pageData, lastEmpty++);
+						v.add(lastEmpty++, pageData);
 					}
 				}
 				for (int i = 0; i < lastEmpty; i++)
@@ -278,7 +285,7 @@ public class JDFPageList extends JDFAutoPageList
 					v.remove(0).deleteNode();
 				}
 
-				Collections.sort(v, new SingleAttributeComparator(AttributeName.PAGEINDEX, false));
+				Collections.sort(v, new SingleAttributeComparator(AttributeName.PAGEINDEX, false, true, true));
 
 				// bake in reordered list
 				for (int i = 0; i < v.size(); i++)
@@ -286,7 +293,7 @@ public class JDFPageList extends JDFAutoPageList
 					JDFPageData pd = v.get(i);
 					int index = StringUtil.parseInt(pd.getAttribute(AttributeName.PAGEINDEX), -1);
 
-					// remove any duplicates					
+					// remove any duplicates
 					if (index < i)
 					{
 						pd.deleteNode();
@@ -299,7 +306,7 @@ public class JDFPageList extends JDFAutoPageList
 						while (index > i)
 						{
 							JDFPageData newPageData = appendPageData();
-							v.insertElementAt(newPageData, i);
+							v.add(i, newPageData);
 							newPageData.setPageIndex(i++);
 						}
 						moveElement(pd, null);

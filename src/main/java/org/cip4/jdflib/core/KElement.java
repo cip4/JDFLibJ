@@ -4318,11 +4318,15 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		 */
 		public SingleXPathComparator(final String xPath, final boolean pInvert)
 		{
-			super();
+			this(xPath, pInvert, false, true);
+		}
+
+		public SingleXPathComparator(String xPath, boolean pInvert, boolean checkNumber, boolean caseSensitive)
+		{
 			this.xPath = xPath;
 			this.invert = pInvert ? -1 : 1;
-			checkNumber = true;
-			caseSensitive = true;
+			this.checkNumber = checkNumber;
+			this.caseSensitive = caseSensitive;
 		}
 
 		boolean checkNumber;
@@ -4346,7 +4350,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 		int compare(final String attribute1, final String attribute2)
 		{
-			if (checkNumber && StringUtil.isNumber(attribute1) && StringUtil.isNumber(attribute2))
+			if (checkNumber)
 			{
 				final double d1 = StringUtil.parseDouble(attribute1, 0);
 				final double d2 = StringUtil.parseDouble(attribute2, 0);
@@ -4363,7 +4367,10 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 					return invert;
 				}
 			}
-			return invert * StringUtil.compare(attribute1, attribute2, !caseSensitive);
+			else
+			{
+				return invert * StringUtil.compare(attribute1, attribute2, !caseSensitive);
+			}
 		}
 
 		public boolean isCheckNumber()
@@ -4404,6 +4411,11 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		public SingleAttributeComparator(final String pAttName, final boolean pInvert)
 		{
 			super(pAttName, pInvert);
+		}
+
+		public SingleAttributeComparator(final String pAttName, final boolean pInvert, final boolean checkNumber, boolean caseSensitive)
+		{
+			super(pAttName, pInvert, checkNumber, caseSensitive);
 		}
 
 		/**

@@ -814,6 +814,37 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testSortChildrenAttributeNumber()
+	{
+		final XMLDoc d = new JDFDoc("parent");
+		final KElement e = d.getRoot();
+		final KElement b = e.appendElement("b");
+		final KElement a = e.appendElement("a");
+		a.setAttribute("at", "1");
+		b.setAttribute("at", "2");
+		final KElement c = e.appendElement("c");
+		c.setAttribute("at", "11");
+		// sort forward
+		KElement.SingleAttributeComparator comparator = new KElement.SingleAttributeComparator("at", false);
+		comparator.setCheckNumber(true);
+		e.sortChildren(comparator);
+		assertEquals(e.getFirstChildElement(), a);
+		assertEquals(a.getNextSiblingElement(), b);
+		assertEquals(b.getNextSiblingElement(), c);
+		// now invert
+		KElement.SingleAttributeComparator comparator2 = new KElement.SingleAttributeComparator("at", true);
+		comparator2.setCheckNumber(true);
+		e.sortChildren(comparator2);
+		assertEquals(e.getFirstChildElement(), c);
+		assertEquals(c.getNextSiblingElement(), b);
+		assertEquals(b.getNextSiblingElement(), a);
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testSortChildrenXPath()
 	{
 		final XMLDoc d = new JDFDoc("parent");
