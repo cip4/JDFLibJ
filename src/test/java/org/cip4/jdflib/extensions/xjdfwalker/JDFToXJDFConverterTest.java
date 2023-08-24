@@ -126,6 +126,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
+import org.cip4.jdflib.resource.intent.JDFBindingIntent;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDropIntent;
@@ -3270,6 +3271,22 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.convert(node);
 
 		assertNotNull(xjdf.getXPathElement("ProductList/Product/Intent[@Name=\"AssemblingIntent\"]/AssemblingIntent/BindIn"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testIntentDescName()
+	{
+		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.Product);
+		final JDFBindingIntent bi = (JDFBindingIntent) node.addResource(ElementName.BINDINGINTENT, EnumUsage.Input);
+		bi.setDescriptiveName("desc");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(node);
+
+		assertEquals("desc", xjdf.getXPathAttribute("ProductList/Product/Intent[@Name=\"BindingIntent\"]/@DescriptiveName", null));
 	}
 
 	/**

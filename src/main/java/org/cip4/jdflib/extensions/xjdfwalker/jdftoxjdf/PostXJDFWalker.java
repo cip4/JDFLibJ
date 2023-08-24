@@ -1395,7 +1395,6 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		void updateAttributes(final KElement xjdf)
 		{
-			xjdf.removeAttribute(AttributeName.DESCRIPTIVENAME);
 			xjdf.removeAttribute(AttributeName.STATUS);
 			xjdf.removeAttribute(AttributeName.STATUSDETAILS);
 			xjdf.removeAttribute(AttributeName.ID);

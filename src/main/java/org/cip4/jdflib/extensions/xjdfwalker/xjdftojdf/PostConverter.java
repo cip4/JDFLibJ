@@ -136,6 +136,7 @@ class PostConverter
 		fixNS.walk(root);
 
 		final RemoveEmpty re = new RemoveEmpty();
+		re.addIgnoreElement(ElementName.BINDINGINTENT);
 		re.removEmpty(root);
 	}
 
