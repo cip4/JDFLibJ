@@ -424,7 +424,8 @@ public class PartitionGetter
 	{
 		final int maxSize = 1 + lastPos(m, resourceRoot.getPartIDKeys(), true);
 		JDFAttributeMapArray v = new JDFAttributeMapArray();
-		final JDFAttributeMapArray vExp = !EnumPartUsage.Explicit.equals(partUsage) ? new JDFAttributeMapArray() : null;
+		boolean badPart = EnumPartUsage.Explicit.equals(partUsage) || (m != null && EnumPartUsage.Sparse.equals(partUsage) && m.keySet().contains(AttributeName.PARTVERSION));
+		final JDFAttributeMapArray vExp = badPart ? null : new JDFAttributeMapArray();
 		for (final JDFAttributeMap map : leafMap.keySet())
 		{
 			if (map.size() <= maxSize)
