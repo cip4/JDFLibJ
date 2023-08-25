@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -424,8 +424,7 @@ public class PartitionGetter
 	{
 		final int maxSize = 1 + lastPos(m, resourceRoot.getPartIDKeys(), true);
 		JDFAttributeMapArray v = new JDFAttributeMapArray();
-		final JDFAttributeMapArray vExp = EnumPartUsage.Implicit.equals(partUsage)
-				&& !resourceRoot.getPartIDKeyList().contains(AttributeName.PARTVERSION) ? new JDFAttributeMapArray() : null;
+		final JDFAttributeMapArray vExp = !EnumPartUsage.Explicit.equals(partUsage) ? new JDFAttributeMapArray() : null;
 		for (final JDFAttributeMap map : leafMap.keySet())
 		{
 			if (map.size() <= maxSize)
@@ -825,8 +824,8 @@ public class PartitionGetter
 		final int s = vPartIDKeys == null ? 0 : vPartIDKeys.size();
 		if (s < partMap.size())
 		{
-			throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + leafMap.getPartIDKeys()
-					+ " for " + partMap);
+			throw new JDFException(
+					"GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + leafMap.getPartIDKeys() + " for " + partMap);
 		}
 		// create all partitions
 		JDFAttributeMap map = thisMap;
@@ -1204,8 +1203,8 @@ public class PartitionGetter
 				if (!JDFPart.overlapPartMap(localPartMap, partMap, strictPartVersion))
 				{
 					if (create)
-						throw new JDFException("Incompatible part maps: local: " + localPartMap.showKeys(null) + " request: " + partMap.showKeys(null) + " ID="
-								+ resourceRoot.getID());
+						throw new JDFException(
+								"Incompatible part maps: local: " + localPartMap.showKeys(null) + " request: " + partMap.showKeys(null) + " ID=" + resourceRoot.getID());
 					else
 						return null;
 				}
