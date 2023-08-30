@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,6 +44,7 @@
 
 package org.cip4.jdflib.resource.process;
 
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -120,6 +121,17 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	public JDFPreview(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * get the input stream that reads from URL
+	 *
+	 * @return InputStream the input stream that the url points to, null if the url is inaccessible
+	 */
+	@Override
+	public InputStream getURLInputStream()
+	{
+		return getURLInputStream(getURL());
 	}
 
 	/**

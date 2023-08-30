@@ -145,6 +145,17 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 {
 	/**
+	 * get the input stream that reads from URL
+	 *
+	 * @return InputStream the input stream that the url points to, null if the url is inaccessible
+	 */
+	@Override
+	public InputStream getURLInputStream()
+	{
+		return getURLInputStream(getURL());
+	}
+
+	/**
 	 * 0x22222222 is the HexValue used so programmers know which attribute/element is REQUIRED when "Add Required elements/attributes" is selected. The validation tool will also
 	 * throw an error until the attribute/element is added.
 	 */

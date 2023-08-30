@@ -109,6 +109,16 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 */
+	@Test
+	public void testURLInput()
+	{
+		JDFFileSpec fs = (JDFFileSpec) JDFElement.createRoot(ElementName.FILESPEC);
+		assertNull(fs.getURLInputStream());
+	}
+
+	/**
 	*
 	*/
 	@Test

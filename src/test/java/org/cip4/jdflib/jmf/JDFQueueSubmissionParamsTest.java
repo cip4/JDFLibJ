@@ -138,6 +138,15 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testURLInput()
+	{
+		assertNull(qsp.getURLInputStream());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testAddEntry()
 	{
 		JDFResponse resp = qsp.addEntry(theQueue, null, null);

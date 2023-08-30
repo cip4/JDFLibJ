@@ -178,7 +178,6 @@ public class JDFNodeTest extends JDFTestCaseBase
 		System.out.println(ct.toString());
 	}
 
-	// /////////////////////////////////////////////////////
 	/**
 	 *
 	 */
@@ -679,6 +678,16 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(mainNode.getEnumTypes().size(), 2);
 		mainNode.addTypes(EnumType.Verification);
 		assertEquals(mainNode.getEnumTypes().size(), 3);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testURLInput()
+	{
+		JDFNode n = JDFNode.createRoot();
+		assertNull(n.getURLInputStream());
 	}
 
 	/**

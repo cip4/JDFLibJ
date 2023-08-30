@@ -39,12 +39,15 @@
 
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumPreviewType;
 import org.cip4.jdflib.auto.JDFAutoPreview.EnumPreviewUsage;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -133,6 +136,16 @@ public class JDFPreviewTest extends JDFTestCaseBase
 		pv.setPreviewUsage(EnumPreviewUsage.Separation);
 		final String s = n.getOwnerDocument_JDFElement().write2String(2);
 		Assertions.assertTrue(s.indexOf(EnumPreviewUsage.Separation.getName()) > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testURLInput()
+	{
+		JDFPreview fs = (JDFPreview) JDFElement.createRoot(ElementName.PREVIEW);
+		assertNull(fs.getURLInputStream());
 	}
 
 	/**

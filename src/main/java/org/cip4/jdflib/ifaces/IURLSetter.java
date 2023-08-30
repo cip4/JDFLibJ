@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,6 +69,8 @@
  */
 package org.cip4.jdflib.ifaces;
 
+import java.io.InputStream;
+
 /**
  * Interface for elements that can set or get a URL - used when unpacking or forwarding the respective url target
  * 
@@ -84,7 +86,7 @@ public interface IURLSetter
 
 	/**
 	 * 
-	 * @return the URL of this 
+	 * @return the URL of this
 	 */
 	public String getURL();
 
@@ -93,4 +95,12 @@ public interface IURLSetter
 	 * @return the filename of this; null if not implemented
 	 */
 	public String getUserFileName();
+
+	/**
+	 * get the input stream that reads from URL
+	 *
+	 * @return InputStream the input stream that the url points to, null if the url is inaccessible
+	 */
+	public InputStream getURLInputStream();
+
 }

@@ -45,6 +45,7 @@
 
 package org.cip4.jdflib.jmf;
 
+import java.io.InputStream;
 import java.net.URL;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -131,6 +132,17 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams imple
 	public JDFResponse addEntry(final JDFQueue theQueue, final JDFJMF responseIn, JDFQueueFilter filter)
 	{
 		return addQueueEntry(theQueue, responseIn, filter).getA();
+	}
+
+	/**
+	 * get the input stream that reads from URL
+	 *
+	 * @return InputStream the input stream that the url points to, null if the url is inaccessible
+	 */
+	@Override
+	public InputStream getURLInputStream()
+	{
+		return getURLInputStream(getURL());
 	}
 
 	/**
