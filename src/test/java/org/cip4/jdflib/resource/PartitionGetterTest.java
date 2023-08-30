@@ -278,6 +278,32 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
+	public void testPVAll()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
+		final JDFResource ab = r.addPartition(EnumPartIDKey.SheetName, "sh1").addPartition(EnumPartIDKey.PartVersion, "a b");
+		final JDFResource cd = r.addPartition(EnumPartIDKey.SheetName, "sh2").addPartition(EnumPartIDKey.PartVersion, "c d");
+		final JDFResource all = r.addPartition(EnumPartIDKey.SheetName, "sh3").addPartition(EnumPartIDKey.PartVersion, "All");
+		final JDFResource abs1 = ab.addPartition(EnumPartIDKey.Separation, "s1");
+		final JDFResource cds1 = cd.addPartition(EnumPartIDKey.Separation, "s1");
+		final JDFResource cds2 = cd.addPartition(EnumPartIDKey.Separation, "s2");
+		final JDFResource cda3 = all.addPartition(EnumPartIDKey.Separation, "s3");
+
+		final PartitionGetter pg = new PartitionGetter(r);
+		pg.setStrictPartVersion(false);
+
+		final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.PartVersion, "c");
+		m1.put(EnumPartIDKey.Separation, "s3");
+
+		assertEquals(cda3, pg.getPartition(m1, EnumPartUsage.Implicit));
+		assertEquals(cda3, pg.getPartition(m1, EnumPartUsage.Sparse));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testReorderPartitions()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
