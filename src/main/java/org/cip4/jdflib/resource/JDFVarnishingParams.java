@@ -1,6 +1,6 @@
 /**
  *
- * Copyright (c) 2010 Heidelberger Druckmaschinen AG, All Rights Reserved.
+ * Copyright (c) 2010-2023 Heidelberger Druckmaschinen AG, All Rights Reserved.
  *
  * JDFVarnishingParams.java
  *
@@ -63,5 +63,15 @@ public class JDFVarnishingParams extends JDFAutoVarnishingParams
 	public String toString()
 	{
 		return "JDFVarnishingParams[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * 
+	 * @return true if we are a varnish with offset plates rather than flexo / varnishing plates
+	 */
+	public boolean isPressModule()
+	{
+		String mt = getModuleType();
+		return "PrintModule".equalsIgnoreCase(mt);
 	}
 }
