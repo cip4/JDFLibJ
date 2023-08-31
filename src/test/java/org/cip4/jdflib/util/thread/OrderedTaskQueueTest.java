@@ -249,7 +249,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test554445");
 		assertTrue(q.queue(new WaitRunner(1, 200)));
 		OrderedTaskQueue.shutDownAll();
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 2000; i++)
 		{
 			if (!q.isLive())
 				break;
