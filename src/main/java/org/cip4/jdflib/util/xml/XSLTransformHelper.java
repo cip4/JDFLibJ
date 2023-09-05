@@ -53,6 +53,7 @@ import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.ifaces.IStreamWriter;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -64,9 +65,33 @@ import org.w3c.dom.Node;
  */
 public class XSLTransformHelper implements IStreamWriter
 {
+	public static final String JAVAX_XML_TRANSFORM_TRANSFORMER_FACTORY = "javax.xml.transform.TransformerFactory";
 	private final KElement elem;
 	private final XMLDoc xsl;
 	final private static Log log = LogFactory.getLog(XSLTransformHelper.class);
+	static
+	{
+		setFactory();
+	}
+
+	/**
+	 * @param e
+	 * @param xsl
+	 */
+	private static void setFactory()
+	{
+		// use well-defined xslt
+		String property = System.getProperty(JAVAX_XML_TRANSFORM_TRANSFORMER_FACTORY);
+		if (StringUtil.isEmpty(property))
+		{
+			System.setProperty(JAVAX_XML_TRANSFORM_TRANSFORMER_FACTORY, "com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl");
+			log.info("Setting " + JAVAX_XML_TRANSFORM_TRANSFORMER_FACTORY + " to: " + System.getProperty(JAVAX_XML_TRANSFORM_TRANSFORMER_FACTORY));
+		}
+		else
+		{
+			log.info("using predefined " + JAVAX_XML_TRANSFORM_TRANSFORMER_FACTORY + ": " + System.getProperty(JAVAX_XML_TRANSFORM_TRANSFORMER_FACTORY));
+		}
+	}
 
 	/**
 	 * @param e
@@ -75,7 +100,6 @@ public class XSLTransformHelper implements IStreamWriter
 	public XSLTransformHelper(final KElement e, final XMLDoc xsl)
 	{
 		// use well-defined xslt
-		System.setProperty("javax.xml.transform.TransformerFactory", "com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl");
 		elem = e;
 		this.xsl = xsl;
 	}
