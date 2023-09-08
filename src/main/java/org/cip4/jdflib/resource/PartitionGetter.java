@@ -423,10 +423,10 @@ public class PartitionGetter
 	JDFAttributeMapArray specialSearch(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
 		final int maxSize = 1 + lastPos(m, resourceRoot.getPartIDKeys(), true);
-		JDFAttributeMapArray v = new JDFAttributeMapArray();
-		// boolean badPart = !EnumPartUsage.Implicit.equals(partUsage);
-		boolean badPart = EnumPartUsage.Explicit.equals(partUsage) || (m != null && EnumPartUsage.Sparse.equals(partUsage) && m.keySet().contains(AttributeName.PARTVERSION));
-		final JDFAttributeMapArray vExp = badPart ? null : new JDFAttributeMapArray();
+		final JDFAttributeMapArray v = new JDFAttributeMapArray();
+		final boolean ignoreExplicit = EnumPartUsage.Explicit.equals(partUsage)
+				|| (m != null && EnumPartUsage.Sparse.equals(partUsage) && m.keySet().contains(AttributeName.PARTVERSION));
+		final JDFAttributeMapArray vExplicit = ignoreExplicit ? null : new JDFAttributeMapArray();
 		for (final JDFAttributeMap map : leafMap.keySet())
 		{
 			if (map.size() <= maxSize)
@@ -434,9 +434,9 @@ public class PartitionGetter
 				if (JDFPart.subPartMap(map, m, strictPartVersion))
 				{
 					v.add(map);
-					if (vExp != null)
+					if (vExplicit != null)
 					{
-						vExp.add(map);
+						vExplicit.add(map);
 					}
 				}
 				else if (EnumPartUsage.Implicit.equals(partUsage) && JDFPart.overlapPartMap(map, m, strictPartVersion))
@@ -450,14 +450,13 @@ public class PartitionGetter
 			}
 		}
 
-		if (!ContainerUtil.isEmpty(vExp))
-			v = vExp;
-		v.unify();
-		if (!badPart && v.size() > 1)
+		JDFAttributeMapArray v2 = ContainerUtil.isEmpty(vExplicit) ? v : vExplicit;
+		v2.unify();
+		if (!ignoreExplicit && v2.size() > 1)
 		{
-			removeImplicitDuplicates(v);
+			removeImplicitDuplicates(v2);
 		}
-		return v;
+		return v2;
 	}
 
 	/**
