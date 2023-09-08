@@ -424,6 +424,7 @@ public class PartitionGetter
 	{
 		final int maxSize = 1 + lastPos(m, resourceRoot.getPartIDKeys(), true);
 		JDFAttributeMapArray v = new JDFAttributeMapArray();
+		// boolean badPart = !EnumPartUsage.Implicit.equals(partUsage);
 		boolean badPart = EnumPartUsage.Explicit.equals(partUsage) || (m != null && EnumPartUsage.Sparse.equals(partUsage) && m.keySet().contains(AttributeName.PARTVERSION));
 		final JDFAttributeMapArray vExp = badPart ? null : new JDFAttributeMapArray();
 		for (final JDFAttributeMap map : leafMap.keySet())
@@ -452,7 +453,7 @@ public class PartitionGetter
 		if (!ContainerUtil.isEmpty(vExp))
 			v = vExp;
 		v.unify();
-		if (EnumPartUsage.Implicit.equals(partUsage))
+		if (!badPart && v.size() > 1)
 		{
 			removeImplicitDuplicates(v);
 		}
@@ -602,9 +603,8 @@ public class PartitionGetter
 					// not nice, but this is what the old algorithm did - find the closest common ancestor
 					partitionFromMap = vMap.getCommonMap();
 					final StringArray partIDKeys = resourceRoot.getPartIDKeyList();
-					final int lastPos = lastPos(partitionFromMap, partIDKeys, false) - 1;
 					final int firstPos = firstPos(partitionFromMap, partIDKeys);
-					for (int i = Math.max(firstPos, lastPos); i < partIDKeys.size(); i++)
+					for (int i = firstPos; i < partIDKeys.size(); i++)
 					{
 						partitionFromMap.remove(partIDKeys.get(i));
 					}
