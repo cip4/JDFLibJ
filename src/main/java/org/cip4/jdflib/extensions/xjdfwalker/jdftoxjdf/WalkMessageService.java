@@ -125,7 +125,7 @@ public class WalkMessageService extends WalkJDFSubElement
 		map.remove(AttributeName.ACKNOWLEDGE);
 		map.remove(AttributeName.GENERICATTRIBUTES);
 		String pers = map.remove(AttributeName.PERSISTENT);
-		String query = map.remove(AttributeName.QUERY);
+		String query = map.get(AttributeName.QUERY);
 		StringArray cm = new StringArray(map.remove(AttributeName.CHANNELMODE));
 		if (StringUtil.parseBoolean(pers, false))
 			cm.appendUnique(EnumChannelMode.FireAndForget.getName());
