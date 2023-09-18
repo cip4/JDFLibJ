@@ -126,6 +126,10 @@ public class WalkMessageService extends WalkXElement
 			{
 				elem.removeAttribute(AttributeName.CHANNELMODE);
 			}
+			else
+			{
+				elem.setAttribute(AttributeName.CHANNELMODE, mode, null);
+			}
 		}
 		String t = ms.getType();
 		for (String s : new StringArray("Command Query Signal"))

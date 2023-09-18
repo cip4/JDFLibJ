@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,15 +68,24 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Vector;
+
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -100,9 +109,74 @@ public class WalkMessageServiceTest extends JDFTestCaseBase
 		ms.appendDevCaps();
 		KElement e = new JDFToXJDF().convert(jmf);
 		JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
-		Assertions.assertNull(msNew.getActionPool());
-		Assertions.assertNull(msNew.getDevCapPool());
-		Assertions.assertNull(msNew.getDevCaps(0));
+		assertNull(msNew.getActionPool());
+		assertNull(msNew.getDevCapPool());
+		assertNull(msNew.getDevCaps(0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testRespModesquery()
+	{
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
+		JDFMessageService ms = jmf.getResponse(0).appendMessageService();
+		ms.setType(EnumType.Status);
+		Vector<EnumFamily> fams = new Vector<EnumFamily>();
+		fams.add(EnumFamily.Query);
+		ms.setFamilies(fams);
+
+		KElement e = new JDFToXJDF().convert(jmf);
+		JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
+		String rm = msNew.getAttribute(XJDFConstants.ResponseModes);
+		assertEquals("Response", rm);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testRespModesSignal()
+	{
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
+		JDFMessageService ms = jmf.getResponse(0).appendMessageService();
+		ms.setType(EnumType.Status);
+		Vector<EnumFamily> fams = new Vector<EnumFamily>();
+		fams.add(EnumFamily.Query);
+		ms.setFamilies(fams);
+		ms.setPersistent(true);
+		KElement e = new JDFToXJDF().convert(jmf);
+		JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
+		String rm = msNew.getAttribute(XJDFConstants.ResponseModes);
+		assertTrue(new StringArray(rm).contains("FireAndForget"));
+		assertTrue(new StringArray(rm).contains("Response"));
+		writeRoundTrip(jmf, "msgservice");
+
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testRespModesCM()
+	{
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
+		JDFMessageService ms = jmf.getResponse(0).appendMessageService();
+		ms.setType(EnumType.Status);
+		Vector<EnumFamily> fams = new Vector<EnumFamily>();
+		fams.add(EnumFamily.Query);
+		ms.setFamilies(fams);
+		ms.setPersistent(true);
+		ms.setChannelMode(EnumChannelMode.Reliable);
+		KElement e = new JDFToXJDF().convert(jmf);
+		JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
+		String rm = msNew.getAttribute(XJDFConstants.ResponseModes);
+		assertTrue(new StringArray(rm).contains("Reliable"));
+		assertTrue(new StringArray(rm).contains("FireAndForget"));
+		assertTrue(new StringArray(rm).contains("Response"));
+		writeRoundTrip(jmf, "msgservice2");
+
 	}
 
 }

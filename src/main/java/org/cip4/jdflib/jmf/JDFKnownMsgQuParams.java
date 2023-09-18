@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoKnownMsgQuParams;
+import org.cip4.jdflib.core.AttributeName;
 
 //----------------------------------
 /**
@@ -125,15 +126,17 @@ public class JDFKnownMsgQuParams extends JDFAutoKnownMsgQuParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * toString()
-	 * 
-	 * @see org.cip4.jdflib.auto.JDFAutoKnownMsgQuParams#toString()
-	 * @return String
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ChannelMode ---------------------------------------------------------------------
 	 */
-	@Override
-	public String toString()
+	/**
+	 * (5) set attribute ChannelMode
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 */
+	public void setChannelMode(EnumChannelMode enumVar)
 	{
-		return "JDFKnownMsgQuParams[  --> " + super.toString() + " ]";
+		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.getName(), null);
 	}
+
 }

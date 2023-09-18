@@ -202,6 +202,19 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 		return getCommand();
 	}
 
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ChannelMode ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ChannelMode
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 */
+	public void setChannelMode(EnumChannelMode enumVar)
+	{
+		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.getName(), null);
+	}
+
 	/**
 	 * Method isQuery.
 	 *

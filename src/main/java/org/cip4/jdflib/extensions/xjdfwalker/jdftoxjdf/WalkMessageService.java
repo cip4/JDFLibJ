@@ -68,9 +68,11 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -122,14 +124,21 @@ public class WalkMessageService extends WalkJDFSubElement
 	{
 		map.remove(AttributeName.ACKNOWLEDGE);
 		map.remove(AttributeName.GENERICATTRIBUTES);
-		map.remove(AttributeName.PERSISTENT);
+		String pers = map.remove(AttributeName.PERSISTENT);
+		String query = map.remove(AttributeName.QUERY);
+		StringArray cm = new StringArray(map.remove(AttributeName.CHANNELMODE));
+		if (StringUtil.parseBoolean(pers, false))
+			cm.appendUnique(EnumChannelMode.FireAndForget.getName());
+		if (StringUtil.parseBoolean(query, false))
+			cm.appendUnique(ElementName.RESPONSE);
+		map.put(XJDFConstants.ResponseModes, cm.getString());
+
 		map.remove(AttributeName.REGISTRATION);
 		final String urlschemes = map.get(AttributeName.URLSCHEMES);
 		if (urlschemes != null)
 		{
 			map.put(AttributeName.URLSCHEMES, StringUtil.removeToken(urlschemes, "file", null));
 		}
-		map.renameKey(AttributeName.CHANNELMODE, XJDFConstants.ResponseModes);
 		super.updateAttributes(map);
 	}
 
