@@ -208,7 +208,7 @@ class PostConverter
 		}
 	}
 
-	private class LinkAmountCleaner
+	class LinkAmountCleaner
 	{
 		void cleanLinkAmounts()
 		{
@@ -229,7 +229,7 @@ class PostConverter
 
 		void cleanLink(final KElement e)
 		{
-			if (ElementName.BINDERYSIGNATURE.equals(((JDFResourceLink) e).getLinkedResourceName()))
+			if (ElementName.BINDERYSIGNATURE.equals(((JDFResourceLink) e).getLinkedResourceName()) && !ContainerUtil.contains(theNode.getAllTypes(), EnumType.Stripping.getName()))
 			{
 				e.deleteNode();
 			}

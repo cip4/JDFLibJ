@@ -90,7 +90,6 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFDevice;
-import org.cip4.jdflib.resource.JDFInsert;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
@@ -101,7 +100,6 @@ import org.cip4.jdflib.resource.PartitionGetter;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDropIntent;
-import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
@@ -1541,25 +1539,41 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 */
+	@Test
+	public void testAssemblingIntentBindInt()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Stripping);
+		final JDFAssembly as = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
+		as.setOrder(EnumOrder.Collecting);
+		as.setAssemblyIDs(VString.getVString("AS1 AS2 AS3", null));
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		final SetHelper sh = new XJDFHelper(xjdf).getSet(ElementName.ASSEMBLY, EnumUsage.Input);
+		final JDFAssembly asx = (JDFAssembly) sh.getPartition(0).getResource();
+		assertEquals("AS1 AS2 AS3", asx.getNonEmpty(XJDFConstants.BinderySignatureIDs));
+
+		sh.cleanUp();
+		assertEquals("AS1 AS2 AS3", asx.getNonEmpty(XJDFConstants.BinderySignatureIDs));
+	}
+
+	/**
 	*
 	*
 	*/
 	@Test
-	public void testAssemblingIntentBindIn()
+	public void testBinderySignature()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
-		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
-		final ProductHelper ph = xjdf.appendProduct();
-		final IntentHelper h = ph.appendIntent(XJDFConstants.AssemblingIntent);
-		h.getCreateResource().appendElement(XJDFConstants.BindIn);
+		final XJDFHelper xjdf = XJDFHelper.parseFile(sm_dirTestData + "xjdf/tnr.strip.red.xjdf");
 		final JDFDoc jdf = xCon.convert(xjdf);
+		jdf.write2File(sm_dirTestDataTemp + "tnr.strip.red.jdf", 2, false);
 		final JDFNode root = jdf.getJDFRoot();
-		final JDFInsertingIntent insertingIntent = (JDFInsertingIntent) root.getResource(ElementName.INSERTINGINTENT, EnumUsage.Input, 0);
-		assertNotNull(insertingIntent);
-		assertNotNull(insertingIntent.getInsertList());
-		final JDFInsert insert = insertingIntent.getInsertList().getInsert(0);
-		assertNotNull(insert);
-		assertEquals(JDFIntentResource.guessActual(insert, "Method"), "BindIn");
+		final JDFResource bs = root.getResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input, 0);
+		assertNotNull(bs);
 	}
 
 	/**

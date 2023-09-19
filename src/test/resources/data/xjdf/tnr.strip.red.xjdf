@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XJDF
+  CommentURL="http://192.168.50.168/jdf/jobbag/1232020.pdf?device=148&amp;subjob=17136"
+  DescriptiveName="Test with S16-1 impose XJDF"
+  ICSVersions="Base_L2-2.1 MIS_L3-2.1 MISCPS_L3-2.1 JMF_L2-2.1"
+  JobID="1232020" JobPartID="17136_000"
+  Types="Product Stripping Imposition ImageSetting PreviewGeneration InkZoneCalculation ConventionalPrinting"
+  Version="2.1" xmlns="http://www.CIP4.org/JDFSchema_2_0">
+ <ResourceSet Name="BinderySignature" Usage="Input">
+    <Resource DescriptiveName="BinderySignature" Status="Available">
+      <Part BinderySignatureID="BIS_ID001"/>
+      <BinderySignature BinderySignatureType="Grid" FoldCatalog="F2-1" NumberUp="1 1">
+        <SignatureCell BleedFace="0" BleedFoot="0" BleedHead="0"
+          BleedSpine="0" Sides="TwoSidedHeadToHead" TrimFace="0"
+          TrimFoot="0" TrimHead="0" TrimSize="2494.48818898 1785.82677165"/>
+      </BinderySignature>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet Name="Media" Usage="Input">
+    <Resource>
+      <Media BackCoating="Matte" Coating="Gloss"
+        Dimension="2494.48818898 1785.82677165"
+        GrainDirection="XDirection" ISOPaperSubstrate="PS1"
+        MediaType="Paper" Weight="250"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet Name="Media" Usage="Input">
+    <Resource DescriptiveName="SPEEDM (102) CTP ctp102"
+      ExternalID="ctp102" ID="2" Status="Available">
+      <Media Dimension="2919.68503937 2239.37007874" MediaType="Plate"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet Name="Layout" Usage="Output">
+    <Resource Status="Unavailable">
+      <Part SheetName="1.Selfcover16pag."/>
+      <Layout>
+        <Position Orientation="Rotate0" RelativeBox="0 0 1 1"/>
+      </Layout>
+    </Resource>
+  </ResourceSet>
+   <ResourceSet Name="Assembly" Usage="Input">
+    <Resource>
+      <Assembly BinderySignatureIDs="BIS_ID001" Order="None"/>
+    </Resource>
+  </ResourceSet>
+
+</XJDF>
