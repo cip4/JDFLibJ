@@ -71,54 +71,21 @@
 package org.cip4.jdflib.jmf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
-import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
+import org.cip4.jdflib.auto.JDFAutoKnownMsgQuParams.EnumChannelMode;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class JDFMessageServiceTest
+public class JDFKnownMsgQuParamsTest
 {
-
-	/**
-	 * 
-	 */
-	@Test
-	public void testgetFamilies()
-	{
-		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
-		JDFMessageService ms = (JDFMessageService) doc.getRoot();
-		ms.setQuery(true);
-		assertEquals(ms.getFamilies().elementAt(0), EnumFamily.Query);
-		assertEquals(ms.getFamilies().size(), 1);
-		assertFalse(ms.getFamilies().contains(EnumFamily.Command));
-		ms.setCommand(true);
-		assertTrue(ms.getFamilies().contains(EnumFamily.Query));
-		assertTrue(ms.getFamilies().contains(EnumFamily.Command));
-		assertEquals(ms.getFamilies().size(), 2);
-	}
-
-	/**
-	 * 
-	 */
-	@Test
-	public void testsetFamily()
-	{
-		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
-		JDFMessageService ms = (JDFMessageService) doc.getRoot();
-		ms.setFamily(EnumFamily.Query);
-		assertTrue(ms.getQuery());
-	}
 
 	/**
 	 * 
@@ -126,8 +93,8 @@ public class JDFMessageServiceTest
 	@Test
 	public void testsetChannelMode()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
-		JDFMessageService ms = (JDFMessageService) doc.getRoot();
+		JDFDoc doc = new JDFDoc(ElementName.KNOWNMSGQUPARAMS);
+		JDFKnownMsgQuParams ms = (JDFKnownMsgQuParams) doc.getRoot();
 		ms.setChannelMode((EnumChannelMode) null);
 		ms.setChannelMode(EnumChannelMode.FireAndForget);
 		assertEquals(EnumChannelMode.FireAndForget, ms.getChannelMode().get(0));
@@ -139,33 +106,13 @@ public class JDFMessageServiceTest
 	@Test
 	public void testsetChannelMode2()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
-		JDFMessageService ms = (JDFMessageService) doc.getRoot();
+		JDFDoc doc = new JDFDoc(ElementName.KNOWNMSGQUPARAMS);
+		JDFKnownMsgQuParams ms = (JDFKnownMsgQuParams) doc.getRoot();
 		ms.setChannelMode(EnumChannelMode.FireAndForget);
 		Vector<? extends ValuedEnum> channelMode = ms.getChannelMode();
 		ms.setChannelMode((EnumChannelMode) null);
 		ms.setChannelMode(channelMode);
 		assertEquals(EnumChannelMode.FireAndForget, channelMode.get(0));
 	}
-
-	/**
-	 * 
-	 */
-	@Test
-	public void testsetFamilies()
-	{
-		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
-		JDFMessageService ms = (JDFMessageService) doc.getRoot();
-		Vector<EnumFamily> v = new Vector<EnumFamily>();
-		v.add(EnumFamily.Query);
-		v.add(EnumFamily.Command);
-		ms.setFamilies(v);
-		assertTrue(ms.getQuery());
-		assertTrue(ms.getCommand());
-		assertFalse(ms.getRegistration());
-	}
-
-	////////////////////////////////////////////////////////////////////////////
-	// /////////////////
 
 }
