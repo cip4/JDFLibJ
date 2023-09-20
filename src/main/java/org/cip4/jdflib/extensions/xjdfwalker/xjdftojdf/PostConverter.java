@@ -43,6 +43,7 @@ import java.util.List;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFRefElement;
@@ -67,6 +68,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
@@ -229,13 +231,65 @@ class PostConverter
 
 		void cleanLink(final KElement e)
 		{
-			if (ElementName.BINDERYSIGNATURE.equals(((JDFResourceLink) e).getLinkedResourceName()) && !ContainerUtil.contains(theNode.getAllTypes(), EnumType.Stripping.getName()))
+			JDFResourceLink rl = (JDFResourceLink) e;
+			if (ElementName.BINDERYSIGNATURE.equals(rl.getLinkedResourceName()))
 			{
-				e.deleteNode();
+				cleanBinderySignatureLink(e, rl);
 			}
 			else
 			{
 				cleanLinkAmount(e);
+			}
+		}
+
+		void cleanBinderySignatureLink(final KElement e, JDFResourceLink rl)
+		{
+			JDFStrippingParams sp = (JDFStrippingParams) theNode.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+			if (sp != null)
+			{
+				List<JDFResource> targets = rl.getTargetList();
+				if (targets != null)
+				{
+					for (JDFResource l : targets)
+					{
+						for (JDFResource target : l.getLeafArray(false))
+						{
+							for (JDFResource sp1 : sp.getLeafArray(false))
+							{
+								cleanSingleStripping(target, sp1);
+							}
+						}
+					}
+				}
+			}
+			e.deleteNode();
+		}
+
+		void cleanSingleStripping(JDFResource binderySignature, JDFResource sp1)
+		{
+			JDFStrippingParams sp0 = (JDFStrippingParams) sp1;
+			JDFBinderySignature bs = sp0.getBinderySignature();
+			if (bs == null)
+			{
+				JDFBinderySignature bs0 = (JDFBinderySignature) binderySignature;
+				JDFResource bs1 = bs0;
+				if (!bs0.isLeaf())
+				{
+					try
+					{
+						bs1 = bs0.getPartition(sp0.getPartMap(), EnumPartUsage.Implicit);
+					}
+					catch (JDFException x)
+					{
+						bs1 = bs0.getResourceRoot().getPartition(sp0.getPartMap(), EnumPartUsage.Implicit);
+					}
+					if (bs1 == null)
+					{
+						bs1 = bs0;
+					}
+					bs1 = bs1.getLeaf(0);
+				}
+				sp0.refBinderySignature((JDFBinderySignature) bs1);
 			}
 		}
 

@@ -1573,7 +1573,9 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		jdf.write2File(sm_dirTestDataTemp + "tnr.strip.red.jdf", 2, false);
 		final JDFNode root = jdf.getJDFRoot();
 		final JDFResource bs = root.getResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input, 0);
-		assertNotNull(bs);
+		assertNull(bs);
+		final JDFStrippingParams sp = (JDFStrippingParams) root.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0);
+		assertNotNull(sp.getBinderySignature());
 	}
 
 	/**
