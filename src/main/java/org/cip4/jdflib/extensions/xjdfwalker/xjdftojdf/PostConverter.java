@@ -256,7 +256,7 @@ class PostConverter
 						{
 							for (JDFResource sp1 : sp.getLeafArray(false))
 							{
-								cleanSingleStripping(target, sp1);
+								cleanSingleStripping(target, (JDFStrippingParams) sp1);
 							}
 						}
 					}
@@ -265,9 +265,8 @@ class PostConverter
 			e.deleteNode();
 		}
 
-		void cleanSingleStripping(JDFResource binderySignature, JDFResource sp1)
+		void cleanSingleStripping(JDFResource binderySignature, JDFStrippingParams sp0)
 		{
-			JDFStrippingParams sp0 = (JDFStrippingParams) sp1;
 			JDFBinderySignature bs = sp0.getBinderySignature();
 			if (bs == null)
 			{
@@ -275,22 +274,29 @@ class PostConverter
 				JDFResource bs1 = bs0;
 				if (!bs0.isLeaf())
 				{
-					try
-					{
-						bs1 = bs0.getPartition(sp0.getPartMap(), EnumPartUsage.Implicit);
-					}
-					catch (JDFException x)
-					{
-						bs1 = bs0.getResourceRoot().getPartition(sp0.getPartMap(), EnumPartUsage.Implicit);
-					}
-					if (bs1 == null)
-					{
-						bs1 = bs0;
-					}
-					bs1 = bs1.getLeaf(0);
+					bs1 = findLeaf(bs0, sp0);
 				}
 				sp0.refBinderySignature((JDFBinderySignature) bs1);
 			}
+		}
+
+		JDFResource findLeaf(JDFBinderySignature bs0, JDFStrippingParams sp0)
+		{
+			JDFResource bs1 = null;
+			try
+			{
+				bs1 = bs0.getPartition(sp0.getPartMap(), EnumPartUsage.Implicit);
+			}
+			catch (JDFException x)
+			{
+				bs1 = bs0.getResourceRoot().getPartition(sp0.getPartMap(), EnumPartUsage.Implicit);
+			}
+			if (bs1 == null)
+			{
+				bs1 = bs0;
+			}
+			bs1 = bs1.getLeaf(0);
+			return bs1;
 		}
 
 		/**

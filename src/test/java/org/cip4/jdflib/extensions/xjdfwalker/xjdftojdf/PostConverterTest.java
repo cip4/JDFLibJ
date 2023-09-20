@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,19 +68,29 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
+import org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.PostConverter.LinkAmountCleaner;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-public class PostConverterTest
+public class PostConverterTest extends JDFTestCaseBase
 {
 
 	/**
@@ -103,9 +113,52 @@ public class PostConverterTest
 		final PostConverter pc = new PostConverter(null, n);
 		pc.new ResourceCleaner().cleanResources();
 
-		Assertions.assertEquals("sep 1", cc.getColorantParams().getSeparation(0));
-		Assertions.assertNotNull(cp.getColorWithName("sep 1"));
-		Assertions.assertNull(cp.getColorWithName("sep_1"));
+		assertEquals("sep 1", cc.getColorantParams().getSeparation(0));
+		assertNotNull(cp.getColorWithName("sep 1"));
+		assertNull(cp.getColorWithName("sep_1"));
 	}
 
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testBinderySignature()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper xjdf = XJDFHelper.parseFile(sm_dirTestData + "xjdf/tnr.strip.red.xjdf");
+		final JDFDoc jdf = xCon.convert(xjdf);
+		jdf.write2File(sm_dirTestDataTemp + "tnr.strip.red.jdf", 2, false);
+		final JDFNode root = jdf.getJDFRoot();
+		JDFResource bs = root.getResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input, 0);
+		assertNull(bs);
+		final JDFStrippingParams sp = (JDFStrippingParams) root.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0);
+		assertNotNull(sp.getBinderySignature());
+		final PostConverter pc = new PostConverter(null, null);
+		LinkAmountCleaner lac = pc.new LinkAmountCleaner();
+		bs = (JDFResource) root.getResourcePool().getElement(ElementName.BINDERYSIGNATURE);
+		lac.findLeaf((JDFBinderySignature) bs, sp);
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testBinderySignature2()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper xjdf = XJDFHelper.parseFile(sm_dirTestData + "xjdf/tnr.strip.red.xjdf");
+		final JDFDoc jdf = xCon.convert(xjdf);
+		jdf.write2File(sm_dirTestDataTemp + "tnr.strip.red.jdf", 2, false);
+		final JDFNode root = jdf.getJDFRoot();
+		JDFResource bs = root.getResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input, 0);
+		assertNull(bs);
+		final JDFStrippingParams sp = (JDFStrippingParams) root.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0);
+		sp.removeChild("BinderySignatureRef", null, 0);
+		final PostConverter pc = new PostConverter(null, null);
+		LinkAmountCleaner lac = pc.new LinkAmountCleaner();
+		bs = (JDFResource) root.getResourcePool().getElement(ElementName.BINDERYSIGNATURE);
+		lac.cleanSingleStripping(bs, sp);
+	}
 }
