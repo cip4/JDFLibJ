@@ -48,7 +48,9 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.util.StringUtil;
@@ -172,12 +174,22 @@ public class WalkLayout extends WalkStrippingParams
 			final JDFStrippingParams part = (JDFStrippingParams) sp.getCreatePartition(partMap, trackLayout.getPartIDKeys());
 			final KElement foo = part.appendElement(ElementName.RESOURCEPOOL);
 			xjdfToJDFImpl.walkTree(stripParams, foo);
-			final KElement tmpStripParams = foo.getElement(ElementName.STRIPPINGPARAMS);
+			final JDFResource tmpStripParams = (JDFResource) foo.getElement(ElementName.STRIPPINGPARAMS);
 			tmpStripParams.removeAttribute(AttributeName.CLASS);
 			tmpStripParams.removeAttribute(AttributeName.ID);
 			tmpStripParams.copyAttribute(AttributeName.STATUS, trackLayout);
-
 			tmpStripParams.removeAttribute(AttributeName.PARTIDKEYS);
+			List<? extends KElement> vLeaves = tmpStripParams.getDirectPartitionArray();
+			for (KElement leaf : vLeaves)
+			{
+				JDFResource rLeaf = (JDFResource) leaf;
+				String bs = rLeaf.getBinderySignatureName();
+				JDFResource bsPart = part.getPartition(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bs), EnumPartUsage.Explicit);
+				if (bsPart != null)
+				{
+					rLeaf.deleteNode();
+				}
+			}
 
 			part.copyAttribute(AttributeName.DESCRIPTIVENAME, trackLayout);
 			part.copyInto(tmpStripParams, false);
