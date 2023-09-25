@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -156,8 +156,19 @@ public class WalkLayout extends WalkStrippingParams
 		}
 		else
 		{
+			JDFNode layoutParent = trackLayout.getParentJDF();
+			JDFStrippingParams sp0 = layoutParent == null ? null : (JDFStrippingParams) layoutParent.getResourcePool().getResource(ElementName.STRIPPINGPARAMS, 0, null);
 			final JDFAttributeMap partMap = trackLayout.getPartMap();
-			final JDFStrippingParams sp = (JDFStrippingParams) node.getCreateResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+			final JDFStrippingParams sp;
+			if (sp0 != null)
+			{
+				sp = sp0;
+				node.ensureLink(sp, EnumUsage.Input, null);
+			}
+			else
+			{
+				sp = (JDFStrippingParams) node.getCreateResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+			}
 			final JDFStrippingParams part = (JDFStrippingParams) sp.getCreatePartition(partMap, trackLayout.getPartIDKeys());
 			final KElement foo = part.appendElement(ElementName.RESOURCEPOOL);
 			xjdfToJDFImpl.walkTree(stripParams, foo);
