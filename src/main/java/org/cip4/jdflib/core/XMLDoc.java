@@ -391,6 +391,34 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	}
 
 	/**
+	 * write2File - write to a file; Create if it doesn't exist always assume utf-8 encoding
+	 *
+	 * @param oFilePath
+	 * @param indent
+	 *
+	 * @return boolean
+	 * @default write2File(String oFilePath, 0)
+	 */
+	public boolean write2File(final String oFilePath)
+	{
+		return write2File(oFilePath, 2, false);
+	}
+
+	/**
+	 * write2File - write to a file; Create if it doesn't exist always assume utf-8 encoding
+	 *
+	 * @param oFilePath
+	 * @param indent
+	 *
+	 * @return boolean
+	 * @default write2File(String oFilePath, 0)
+	 */
+	public boolean write2File(final File oFilePath)
+	{
+		return write2File(oFilePath, 2, false);
+	}
+
+	/**
 	 * write2File - write to a file; Create if it doesn't exist DO NOT attempt any url escaping voodoo @see write2URL
 	 *
 	 * @param oFilePath the file path where to write the file

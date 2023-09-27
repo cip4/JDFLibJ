@@ -75,7 +75,7 @@ public class AuditPoolHelperTest
 	@Test
 	public void testAppendAudit()
 	{
-		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
+		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL);
 		final AuditPoolHelper aph = new AuditPoolHelper(auditPool);
 		final AuditHelper ah = aph.appendAudit(ElementName.NOTIFICATION);
 		assertNotNull(ah.getHeader());
@@ -87,7 +87,7 @@ public class AuditPoolHelperTest
 	@Test
 	public void testAppendAuditEnum()
 	{
-		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
+		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL);
 		final AuditPoolHelper aph = new AuditPoolHelper(auditPool);
 		final AuditHelper ah = aph.appendAudit(eAudit.Created);
 		assertNotNull(ah.getHeader());

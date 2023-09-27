@@ -152,7 +152,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		final MyListener myListener = new MyListener();
 		final File file = new File(theHF + File.separator + "f1.jdf");
 
-		doc.write2File(file, 2, false);
+		doc.write2File(file);
 		assertTrue(file.exists());
 
 		assertNull(FileUtil.listFilesWithExtension(theStorage, null));

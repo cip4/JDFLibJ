@@ -6545,6 +6545,19 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
+	 *
+	 * create a new root document
+	 *
+	 * @param nodename
+	 * @param namespaceURI
+	 * @return
+	 */
+	public static KElement createRoot(final String nodename)
+	{
+		return new XMLDoc(nodename).getRoot();
+	}
+
+	/**
 	 * get the number of sibling elements
 	 *
 	 * @param elementName , if null any and all at the same level

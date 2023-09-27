@@ -148,6 +148,19 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testAddPartIDKey()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.addPartIDKey(EnumPartIDKey.Run);
+		rl.addPartIDKey(EnumPartIDKey.Run);
+		assertNull(rl.getPartIDKeyList().get(1));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetCreatorPartition()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
