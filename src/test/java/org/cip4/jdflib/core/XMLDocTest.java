@@ -798,7 +798,7 @@ public class XMLDocTest extends JDFTestCaseBase
 
 		out += File.separator + "d.xml";
 
-		assertTrue(d.write2File(out, 2, true));
+		assertTrue(d.write2File(out));
 		final File f = new File(out);
 		assertTrue(f.canRead());
 	}
@@ -1188,7 +1188,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		new File(file).delete();
 		assertFalse(d.write2File((File) null, 2, false));
 		d.setOriginalFileName(file);
-		d.write2File((File) null, 2, false);
+		d.write2File((File) null);
 		assertTrue(new File(file).exists());
 	}
 
