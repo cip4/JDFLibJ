@@ -1,4 +1,6 @@
 import org.apache.tools.ant.filters.ReplaceTokens
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
     id 'java-library'
@@ -15,10 +17,10 @@ version = project.hasProperty('projectVersion') ? project.projectVersion : '2.1.
 java {
     withJavadocJar()
     withSourcesJar()
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
 }
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
@@ -48,11 +50,11 @@ publishing {
                 }
                 developers {
                     developer {
-                        id = "rainer"
+                        id = "rainer-prosi"
                         name = "Dr. Rainer Prosi"
                     }
                     developer {
-                        id = "stefan"
+                        id = "meiXXI"
                         name = "Stefan Meissner"
                     }
                 }
@@ -111,8 +113,8 @@ javadoc {
 }
 
 processResources {
-    filesMatching('**/*.properties') {
-        filter(ReplaceTokens, tokens:  [
+    filesMatching(['**/*.properties']) {
+        filter(ReplaceTokens, tokens: [
                 'name': project.properties['description'],
                 'version': project.properties['version'],
                 'artifactId': project.properties['name'],
@@ -122,17 +124,17 @@ processResources {
 }
 
 dependencies {
-    compile 'commons-lang:commons-lang:2.6'
-    compile 'commons-io:commons-io:2.11.0'
-    compile 'commons-logging:commons-logging:1.2'
-    compile ('xerces:xercesImpl:2.12.2'){
+    implementation 'commons-lang:commons-lang:2.6'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'commons-logging:commons-logging:1.2'
+    implementation ('xerces:xercesImpl:2.12.2'){
 	// exclude group: 'xml-apis'
 	}
-    compile 'javax.mail:mailapi:1.4.3'
+    implementation 'javax.mail:mailapi:1.4.3'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
     testImplementation 'org.mockito:mockito-core:4.11.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
 }
 
 jacocoTestReport {
@@ -147,10 +149,6 @@ test {
     useJUnitPlatform()
     systemProperty "file.encoding", "utf-8"
     maxParallelForks = Math.max(1, Math.ceil(Runtime.getRuntime().availableProcessors() * 0.75))
-
-    testLogging {
-        exceptionFormat = 'full'
-    }
 }
 
 jar {
@@ -163,5 +161,16 @@ jar {
                 "Specification-Version": project.version,
                 "Build-Jdk": JavaVersion.current(),
         )
+    }
+}
+
+tasks.withType(Test) {
+    testLogging {
+        events TestLogEvent.FAILED,
+               TestLogEvent.SKIPPED
+        exceptionFormat TestExceptionFormat.FULL
+        showExceptions true
+        showCauses true
+        showStackTraces true
     }
 }

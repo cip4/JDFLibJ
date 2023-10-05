@@ -9,7 +9,7 @@ on:
     branches: [ master ]
 
 jobs:
-  call-release:
+  call-workflow:
     name: 🏭
     uses: cip4/.github/.github/workflows/pull-request.yml@master
     with:
