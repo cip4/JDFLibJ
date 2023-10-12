@@ -408,9 +408,7 @@ public class XJMFExampleTest extends ExampleTest
 		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(16, 59, 0).getDateTimeISO());
 		JDFDeviceInfo di = (JDFDeviceInfo) s.getRoot().appendElement(ElementName.DEVICEINFO);
 		di.setAttribute(AttributeName.STATUS, "Production");
-		JDFJobPhase p = di.appendJobPhase();
-		p.setJobID("j1");
-		p.setJobPartID("p1");
+		JDFJobPhase p = addJobPhase(di, "j1", "sheet1");
 		p.setStatus(EnumNodeStatus.Setup);
 		p.setStartTime(new JDFDate().setTime(16, 0, 0));
 		xjmfHelper.cleanUp();
@@ -425,14 +423,21 @@ public class XJMFExampleTest extends ExampleTest
 		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
 		di = (JDFDeviceInfo) s.getRoot().appendElement(ElementName.DEVICEINFO);
 		di.setAttribute(AttributeName.STATUS, "Production");
-		p = di.appendJobPhase();
-		p.setJobID("j1");
-		p.setJobPartID("p1");
+		p = addJobPhase(di, "j1", "sheet1");
 		p.setStatus(EnumNodeStatus.InProgress);
 		p.setStartTime(new JDFDate().setTime(17, 0, 0));
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
 		writeTest(xjmfHelper, "jmf/statusSignal.xjmf");
+	}
+
+	JDFJobPhase addJobPhase(JDFDeviceInfo di, String jobID, String sheetName)
+	{
+		JDFJobPhase p = di.appendJobPhase();
+		p.setJobID(jobID);
+		p.setJobPartID("p1");
+		p.setPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, sheetName));
+		return p;
 	}
 
 	/**
