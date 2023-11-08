@@ -796,6 +796,52 @@ public class UrlUtil
 	}
 
 	/**
+	 * adds a parameter to a given url using either ? or &
+	 *
+	 * @param baseUrl the base url - already escaped and ready to go
+	 * @param key the key to add - NOT escaped
+	 * @param val the value to add - NOT escaped - if null nothing is set
+	 * @return the escaped new url
+	 */
+	public static String setParameter(String baseUrl, String key, String val)
+	{
+		if (StringUtil.isEmpty(baseUrl) || StringUtil.isEmpty(key))
+			return baseUrl;
+
+		String oldval = getParameter(baseUrl, key);
+		if (oldval != null)
+		{
+			String keyval = escape(key, true, false) + "=" + escape(oldval, true, false);
+			baseUrl = baseUrl.replace(keyval, "");
+			baseUrl = baseUrl.replace("?&", "?");
+			baseUrl = baseUrl.replace("&&", "&");
+			if (baseUrl.endsWith("?") || baseUrl.endsWith("&"))
+				baseUrl = StringUtil.leftStr(baseUrl, -1);
+		}
+		return addParameter(baseUrl, key, val);
+	}
+
+	public static String getParameter(String baseUrl, String key)
+	{
+		if (!StringUtil.isEmpty(baseUrl) && !StringUtil.isEmpty(key))
+		{
+			String keye = escape(key, true, false) + "=";
+			int pos = baseUrl.indexOf(keye);
+			if (pos > 0 && "?&".contains(baseUrl.substring(pos - 1, pos)))
+			{
+				int posEnd = baseUrl.indexOf('&', pos);
+				if (posEnd < 0)
+					posEnd = baseUrl.length();
+				String val = baseUrl.substring(pos + keye.length(), posEnd);
+				return unEscape(val);
+			}
+
+		}
+		return null;
+
+	}
+
+	/**
 	 * adds a path to a given url , keeping the parameters
 	 *
 	 * @param baseUrl the base url - already escaped and ready to go

@@ -232,6 +232,37 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test adding a parameter
+	 */
+	@Test
+	public void testSetParameter()
+	{
+		assertEquals("a?b=c", UrlUtil.setParameter("a", "b", "c"));
+		assertEquals("a", UrlUtil.setParameter("a", "", "c"));
+		assertEquals("a", UrlUtil.setParameter("a", "a", null));
+		assertEquals("a?b=c&bb=cc", UrlUtil.setParameter("a?b=c", "bb", "cc"));
+		assertEquals("a?b=dd", UrlUtil.setParameter("a?b=c", "b", "dd"));
+		assertEquals("a", UrlUtil.setParameter("a?b=c", "b", ""));
+		assertEquals("a", UrlUtil.setParameter("a?b=c", "b", null));
+		assertEquals("a?c=1&b=dd", UrlUtil.setParameter("a?b=c&c=1", "b", "dd"));
+		assertEquals("a?b=dd&c=2", UrlUtil.setParameter("a?b=dd&c=1", "c", "2"));
+		assertEquals("a?b=c%20d", UrlUtil.setParameter("a", "b", "c d"));
+		assertEquals("a?b=http%3a%2f%2fwww.example.com", UrlUtil.setParameter("a", "b", "http://www.example.com"));
+	}
+
+	/**
+	 * test adding a parameter
+	 */
+	@Test
+	public void testGetParameter()
+	{
+		assertEquals("c", UrlUtil.getParameter("a?b=c", "b"));
+		assertEquals(null, UrlUtil.getParameter("a?b=c", "c"));
+		assertEquals(null, UrlUtil.getParameter("a", "c"));
+		assertEquals("http://www.example.com", UrlUtil.getParameter("a?b=http%3a%2f%2fwww.example.com", "b"));
+	}
+
+	/**
 	 * test adding a path to a url
 	 */
 	@Test
