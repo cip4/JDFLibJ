@@ -414,7 +414,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testListFilesWithExtension() throws Exception
 	{
-		final File f = new File(sm_dirTestDataTemp + "/foo");
+		final File f = new File(sm_dirTestDataTemp + "/fooExt");
 		f.mkdir(); // make sure we have one
 		assertTrue(FileUtil.deleteAll(f));
 		assertTrue(f.mkdir());
@@ -425,10 +425,8 @@ public class FileUtilTest extends JDFTestCaseBase
 			for (int i = 0; i < 3; i++)
 			{
 				final File f2 = new File(f.getAbsolutePath() + File.separator + i + "." + c);
-				System.out.println("Create new File: " + f2.getAbsolutePath());
-				assertTrue(f2.createNewFile());
-				System.out.println("Is Created: " + f2.exists());
-				assertTrue(f2.exists());
+				assertTrue(f2.createNewFile(), f2.getAbsolutePath());
+				assertTrue(f2.exists(), f2.getAbsolutePath());
 			}
 		}
 		assertEquals(FileUtil.listFilesWithExtension(f, "a").length, 3);
