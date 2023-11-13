@@ -71,6 +71,7 @@ package org.cip4.jdflib.auto;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -210,7 +211,7 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 		Method[] methods = c.getMethods();
 		for (Method method : methods)
 		{
-			if (method.getName().startsWith("set"))
+			if (method.getName().startsWith("set") && !Modifier.isStatic(method.getModifiers()))
 			{
 				Class<?>[] types = method.getParameterTypes();
 				try
