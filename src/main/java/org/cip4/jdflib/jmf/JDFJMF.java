@@ -227,7 +227,7 @@ public class JDFJMF extends JDFAutoJMF
 	@Override
 	public void setMaxVersion(final EnumVersion enumVer)
 	{
-		setAttribute(AttributeName.MAXVERSION, enumVer.getName(), null);
+		setAttribute(AttributeName.MAXVERSION, enumVer == null ? null : enumVer.getName(), null);
 	}
 
 	/**

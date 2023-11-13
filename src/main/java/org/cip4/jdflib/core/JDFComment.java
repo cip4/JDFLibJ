@@ -127,7 +127,7 @@ public class JDFComment extends JDFAutoComment
 	public boolean init()
 	{
 		final EnumVersion v = getVersion(true);
-		if (v.getValue() >= EnumVersion.Version_1_3.getValue() && getLocalName().equals(ElementName.COMMENT))
+		if (v != null && v.getValue() >= EnumVersion.Version_1_3.getValue() && getLocalName().equals(ElementName.COMMENT))
 		{
 			appendAnchor(null);
 			setAgentName(JDFAudit.getStaticAgentName());

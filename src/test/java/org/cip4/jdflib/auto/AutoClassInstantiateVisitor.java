@@ -69,17 +69,24 @@
 package org.cip4.jdflib.auto;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.node.JDFNode;
 import org.w3c.dom.DOMException;
 
 public class AutoClassInstantiateVisitor implements DirectoryVisitor
 {
 	boolean totalResult = true;
+	final static Log log = LogFactory.getLog(AutoClassInstantiateVisitor.class);
 
 	@Override
 	public void enterDirectory(final File dir)
@@ -100,10 +107,18 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 	@Override
 	public void visitFile(final File file)
 	{
-		testJDFClass(file.getName());
+		try
+		{
+			testJDFClass(file.getName());
+		}
+		catch (Exception e)
+		{
+			log.error("bad autofile", e);
+			throw new JDFException(e.getMessage());
+		}
 	}
 
-	private void testJDFClass(final String fileName)
+	private void testJDFClass(final String fileName) throws Exception
 	{
 		boolean result = false;
 
@@ -137,14 +152,118 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 		createdClass = createdClass.substring(createdClass.lastIndexOf(".") + 1);
 
 		result = elementName.equals(createdClass.substring("JDF".length())) || (elementName.equals(ElementName.COLORSUSED) && createdClass.equals("JDFSeparationList"))
-				|| (elementName.equals(ElementName.CONTENTMETADATA) && createdClass.equals("JDFContentMetaData")) || (elementName.equals(ElementName.SHAPE) && createdClass.equals("JDFShapeElement"))
+				|| (elementName.equals(ElementName.CONTENTMETADATA) && createdClass.equals("JDFContentMetaData"))
+				|| (elementName.equals(ElementName.SHAPE) && createdClass.equals("JDFShapeElement"))
 				|| (elementName.endsWith(JDFConstants.LINK) && createdClass.substring("JDF".length()).equals(ElementName.RESOURCELINK));
 
+		coverSetters(kElem);
+		coverGetters(kElem);
 		if (!result)
 		{
 			totalResult = false;
-			throw new DOMException(DOMException.NOT_FOUND_ERR,
-					"AutoClassIntantiateVisitor: Class JDF" + elementName + " (for " + fileName + ") could not be instantiated!" + " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "AutoClassIntantiateVisitor: Class JDF" + elementName + " (for " + fileName + ") could not be instantiated!"
+					+ " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
+		}
+	}
+
+	private void coverGetters(KElement kElem) throws Exception
+	{
+		Class<? extends KElement> c = kElem.getClass();
+		Method[] methods = c.getMethods();
+		for (Method method : methods)
+		{
+			if (method.getName().startsWith("get"))
+			{
+				Class<?>[] types = method.getParameterTypes();
+				try
+				{
+					if (types.length == 0)
+					{
+						method.invoke(kElem, new Object[] {});
+						//
+					}
+				}
+				catch (InvocationTargetException i)
+				{
+					Throwable t = i.getTargetException();
+					if (t instanceof RuntimeException)
+					{
+						log.warn("Runtime Exception :", t);
+					}
+					else
+					{
+						throw i;
+					}
+				}
+				catch (Exception j)
+				{
+
+					log.warn("snafu ", j);
+				}
+			}
+		}
+	}
+
+	private void coverSetters(KElement kElem) throws Exception
+	{
+		Class<? extends KElement> c = kElem.getClass();
+		Method[] methods = c.getMethods();
+		for (Method method : methods)
+		{
+			if (method.getName().startsWith("set"))
+			{
+				Class<?>[] types = method.getParameterTypes();
+				try
+				{
+					if (types.length == 1)
+					{
+
+						if (String.class.equals(types[0]))
+						{
+							method.invoke(kElem, "test");
+						}
+						else if (VString.class.equals(types[0]))
+						{
+							method.invoke(kElem, new VString("test1 test2"));
+						}
+						else if (int.class.equals(types[0]))
+						{
+							method.invoke(kElem, 1);
+						}
+						else if (boolean.class.equals(types[0]))
+						{
+							method.invoke(kElem, true);
+						}
+						else if (double.class.equals(types[0]))
+						{
+							method.invoke(kElem, 42.0);
+						}
+						else
+						{
+							method.invoke(kElem, new Object[] { null });
+							log.info("" + types[0]);
+						}
+						//
+					}
+				}
+				catch (InvocationTargetException i)
+				{
+					Throwable t = i.getTargetException();
+					if (t instanceof RuntimeException)
+					{
+						log.warn("Runtime Exception :", t);
+					}
+					else
+					{
+						throw i;
+					}
+				}
+				catch (Exception j)
+				{
+
+					log.warn("snafu ", j);
+				}
+			}
 		}
 	}
 }

@@ -7369,7 +7369,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public void setMaxVersion(final EnumVersion enumVer)
 	{
-		setAttribute(AttributeName.MAXVERSION, enumVer.getName(), null);
+		setAttribute(AttributeName.MAXVERSION, enumVer == null ? null : enumVer.getName(), null);
 	}
 
 	/**

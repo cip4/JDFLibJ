@@ -136,7 +136,8 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 	}
 
 	/**
-	 * Get of 'this' the value of attribute AdditionalAmount. If not specified, get the default value of attribute AdditionalAmount, that is specified in it's parent element (node DeliveryIntent)
+	 * Get of 'this' the value of attribute AdditionalAmount. If not specified, get the default value of attribute AdditionalAmount, that is specified in it's parent element (node
+	 * DeliveryIntent)
 	 *
 	 * @return WString: attribute value
 	 * @deprecated
@@ -156,7 +157,7 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 	{
 		if (hasAttribute(AttributeName.ADDITIONALAMOUNT))
 		{
-			return getAdditionalAmount();
+			return super.getAdditionalAmount();
 		}
 		return getParentDeliveryIntent().getAdditionalAmount();
 	}
