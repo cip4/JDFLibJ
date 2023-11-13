@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -2360,7 +2360,11 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertNotNull(rAdd);
 		r = n.getResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input, 0);
 		assertEquals(r, rAdd);
-		r = n.getResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input, -1);
+		r = n.getResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input, 0);
+		assertEquals(r, rAdd);
+		r = n.getResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input);
+		assertEquals(r, rAdd);
+		r = n.getResource(ElementName.SADDLESTITCHINGPARAMS);
 		assertEquals(r, rAdd);
 		final JDFResource rAdd2 = n.addResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input);
 		assertNotNull(rAdd2);

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,6 +39,11 @@
 
 package org.cip4.jdflib.util.mime;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.Arrays;
@@ -46,16 +51,18 @@ import java.util.Arrays;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFReturnQueueEntryParams;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.mime.MimeWriter.FixSemiColonStream;
 import org.cip4.jdflib.util.mime.MimeWriter.eMimeSubType;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -79,7 +86,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 		final byte b[] = new byte[100];
 		is.read(b);
 		final String s = new String(b);
-		Assertions.assertTrue(s.indexOf("related;") < 0);
+		assertTrue(s.indexOf("related;") < 0);
 	}
 
 	/**
@@ -104,8 +111,8 @@ public class MimeWriterTest extends JDFTestCaseBase
 		mw.writeToStream(ios);
 		final byte[] b = ios.getBuf();
 		final String string = new String(b);
-		Assertions.assertTrue(string.startsWith("MIME-Version"));
-		Assertions.assertEquals(-1, string.indexOf("Message-ID"));
+		assertTrue(string.startsWith("MIME-Version"));
+		assertEquals(-1, string.indexOf("Message-ID"));
 	}
 
 	/**
@@ -123,8 +130,8 @@ public class MimeWriterTest extends JDFTestCaseBase
 		final byte b[] = new byte[100];
 		is.read(b);
 		final String s = new String(b);
-		Assertions.assertTrue(s.indexOf("related;") < 0);
-		Assertions.assertTrue(s.indexOf("\nbbb") > 0);
+		assertTrue(s.indexOf("related;") < 0);
+		assertTrue(s.indexOf("\nbbb") > 0);
 	}
 
 	/**
@@ -146,8 +153,8 @@ public class MimeWriterTest extends JDFTestCaseBase
 		final MimeWriter mw = new MimeWriter();
 		mw.buildMimePackage(docJMF, docJDF, false);
 		final File f = new File(sm_dirTestDataTemp + "mimestream.mjm");
-		Assertions.assertNotNull(FileUtil.writeFile(mw, f));
-		Assertions.assertTrue(f.exists());
+		assertNotNull(FileUtil.writeFile(mw, f));
+		assertTrue(f.exists());
 	}
 
 	/**
@@ -158,11 +165,11 @@ public class MimeWriterTest extends JDFTestCaseBase
 	{
 		final MimeWriter mw = new MimeWriter(eMimeSubType.formdata);
 		final BodyPartHelper bph = new BodyPartHelper();
-		Assertions.assertTrue(bph.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
+		assertTrue(bph.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
 		mw.addBodyPart(bph);
 		final File f = new File(sm_dirTestDataTemp + "mimetext.mim");
-		Assertions.assertNotNull(FileUtil.writeFile(mw, f));
-		Assertions.assertTrue(f.exists());
+		assertNotNull(FileUtil.writeFile(mw, f));
+		assertTrue(f.exists());
 	}
 
 	/**
@@ -174,14 +181,14 @@ public class MimeWriterTest extends JDFTestCaseBase
 		final MimeWriter mw = new MimeWriter(eMimeSubType.formdata);
 		final BodyPartHelper bph = new BodyPartHelper();
 		final byte[] bytes = "{ \"a\":\"€\"}".getBytes();
-		Assertions.assertTrue(bph.setContent(new ByteArrayInputStream(bytes), UrlUtil.VND_XJDF_J));
+		assertTrue(bph.setContent(new ByteArrayInputStream(bytes), UrlUtil.VND_XJDF_J));
 		mw.addBodyPart(bph);
 		final File f = new File(sm_dirTestDataTemp + "mimejson.mim");
-		Assertions.assertNotNull(FileUtil.writeFile(mw, f));
-		Assertions.assertTrue(f.exists());
+		assertNotNull(FileUtil.writeFile(mw, f));
+		assertTrue(f.exists());
 		final MimeReader mr = new MimeReader(sm_dirTestDataTemp + "mimejson.mim");
 		final BodyPartHelper bph2 = mr.getBodyPartHelper(0);
-		Assertions.assertArrayEquals(bytes, Arrays.copyOf(new ByteArrayIOStream(bph2.getInputStream()).getBuf(), bytes.length));
+		assertArrayEquals(bytes, Arrays.copyOf(new ByteArrayIOStream(bph2.getInputStream()).getBuf(), bytes.length));
 	}
 
 	/**
@@ -193,24 +200,24 @@ public class MimeWriterTest extends JDFTestCaseBase
 		final MimeWriter mw = new MimeWriter(eMimeSubType.formdata);
 		final BodyPartHelper bphM = new BodyPartHelper();
 		final byte[] bytesM = "{ \"XJMF\":{\"JobID\":\"j1\"}}".getBytes();
-		Assertions.assertTrue(bphM.setContent(new ByteArrayInputStream(bytesM), UrlUtil.VND_XJMF_J));
+		assertTrue(bphM.setContent(new ByteArrayInputStream(bytesM), UrlUtil.VND_XJMF_J));
 		bphM.setFileName("submit.xjmf");
 		mw.addBodyPart(bphM);
 		final byte[] bytes = "{ \"XJDF\":{\"JobID\":\"j1\"}}".getBytes();
 		final BodyPartHelper bph = new BodyPartHelper();
-		Assertions.assertTrue(bph.setContent(new ByteArrayInputStream(bytes), UrlUtil.VND_XJDF_J));
+		assertTrue(bph.setContent(new ByteArrayInputStream(bytes), UrlUtil.VND_XJDF_J));
 		bph.setFileName("submit.xjdf");
 		mw.addBodyPart(bph);
 		final File f = new File(sm_dirTestDataTemp + "mimexjmf.mim");
-		Assertions.assertNotNull(FileUtil.writeFile(mw, f));
-		Assertions.assertTrue(f.exists());
+		assertNotNull(FileUtil.writeFile(mw, f));
+		assertTrue(f.exists());
 		final MimeReader mr = new MimeReader(sm_dirTestDataTemp + "mimexjmf.mim");
 		final BodyPartHelper bphM2 = mr.getBodyPartHelper(0);
-		Assertions.assertEquals("submit.xjmf", bphM2.getFileName());
-		Assertions.assertArrayEquals(bytesM, Arrays.copyOf(new ByteArrayIOStream(bphM2.getInputStream()).getBuf(), bytes.length));
+		assertEquals("submit.xjmf", bphM2.getFileName());
+		assertArrayEquals(bytesM, Arrays.copyOf(new ByteArrayIOStream(bphM2.getInputStream()).getBuf(), bytes.length));
 		final BodyPartHelper bph2 = mr.getBodyPartHelper(1);
-		Assertions.assertArrayEquals(bytes, Arrays.copyOf(new ByteArrayIOStream(bph2.getInputStream()).getBuf(), bytes.length));
-		Assertions.assertEquals("submit.xjdf", bph2.getFileName());
+		assertArrayEquals(bytes, Arrays.copyOf(new ByteArrayIOStream(bph2.getInputStream()).getBuf(), bytes.length));
+		assertEquals("submit.xjdf", bph2.getFileName());
 	}
 
 	/**
@@ -233,6 +240,46 @@ public class MimeWriterTest extends JDFTestCaseBase
 		mw.buildMimePackage(docJMF, docJDF, false);
 		final File f = new File(sm_dirTestDataTemp + "mimeurl.mjm");
 		mw.writeToFile(f.getAbsolutePath());
-		Assertions.assertTrue(f.exists());
+		assertTrue(f.exists());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testExtendRef() throws Exception
+	{
+		final JDFDoc docJMF = new JDFDoc("JMF");
+		final JDFJMF jmf = docJMF.getJMFRoot();
+		jmf.setSenderID("DeviceID");
+		final JDFCommand com = (JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.ReturnQueueEntry);
+		final JDFReturnQueueEntryParams returnQEParams = com.appendReturnQueueEntryParams();
+
+		final String queueEntryID = "qe1";
+		returnQEParams.setQueueEntryID(queueEntryID);
+		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
+		JDFPreview pv = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		pv.setURL(sm_dirTestData + "url1.pdf");
+		JDFPreview pv1 = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		pv1.setURL(sm_dirTestData + "URL1.pdf");
+		returnQEParams.setURL("cid:dummy"); // will be overwritten by buildMimePackage
+		final MimeWriter mw = new MimeWriter();
+		mw.buildMimePackage(docJMF, docJDF, true);
+		assertEquals(3, mw.getCount());
+
+		final File f = new File(sm_dirTestDataTemp + "mimeurlpv.mjm");
+		mw.writeToFile(f.getAbsolutePath());
+		MimeReader mr = new MimeReader(f);
+		assertTrue(f.exists());
+		assertNotNull(mr.getPartHelperByLocalName("url1.pdf"));
+		JDFNode n = mr.getBodyPartHelper(1).getJDFDoc().getJDFRoot();
+		JDFPreview pv2 = (JDFPreview) n.getResource(ElementName.PREVIEW);
+		assertNotNull(pv2.getURL());
+		assertNotNull(pv2.getURLInputStream());
+		assertEquals(3, mr.getCount());
+		JDFPreview pv3 = (JDFPreview) n.getResource(ElementName.PREVIEW, null, 1);
+		assertEquals(pv2.getURL(), pv3.getURL());
+		assertNotNull(pv3.getURLInputStream());
+
 	}
 }

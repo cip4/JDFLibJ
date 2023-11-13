@@ -45,6 +45,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.activation.DataHandler;
@@ -60,13 +64,13 @@ import javax.mail.util.ByteArrayDataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.ifaces.IStreamWriter;
+import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -553,6 +557,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 		else
 		{
 			updateXMLMultipart(docJDF, cid);
+
 		}
 	}
 
@@ -560,10 +565,11 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	 * Adds a JDF document to a multipart. Any files referenced by the JDF document using FileSpec/@URL are also included in the multipart.
 	 *
 	 * @param docJDF the JDF document
+	 * @param cid
 	 * @param cid the CID the JDF document should have in the multipart
 	 * @return the number of files added to the multipart
 	 */
-	private int extendMultipart(final XMLDoc docJDF, final String cid)
+	int extendMultipart(final XMLDoc docJDF, String cid)
 	{
 		int n = 0;
 
@@ -575,69 +581,63 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 
 		// Get all FileSpec elements
 		final KElement e = docJDF.getRoot();
-		final VElement fileSpecs = e.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
+		final VElement fileSpecs = e.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
+		Map<File, File> done = new HashMap<>();
+		List<BodyPartHelper> bodyparts = new ArrayList<>();
 		if (fileSpecs != null)
 		{
-			final int vSize = fileSpecs.size();
-
-			final String[] urlStrings = listURLs(fileSpecs);
-			for (int i = 0; i < urlStrings.length; i++)
+			for (KElement fs : fileSpecs)
 			{
-				if (urlStrings[i] != null)
+				if (fs instanceof IURLSetter)
 				{
+					IURLSetter ius = (IURLSetter) fs;
 					// Convert URL to CID and update FileSpec
-					File f = UrlUtil.urlToFile(urlStrings[i]);
-					if (f != null && !f.isAbsolute())
+					String url = ius.getURL();
+					File f = UrlUtil.urlToFile(url);
+					if (f != null)
 					{
-						// Resolve relative URLs
-						if (docJDF.getOriginalFileName() != null)
+						if (!f.isAbsolute())
 						{
-							final File jdfFile = new File(docJDF.getOriginalFileName());
-							f = new File(jdfFile.getParent(), f.getPath());
-							urlStrings[i] = UrlUtil.fileToUrl(f, false);
+							// Resolve relative URLs
+							if (docJDF.getOriginalFileName() != null)
+							{
+								final File jdfFile = new File(docJDF.getOriginalFileName());
+								f = new File(jdfFile.getParent(), f.getPath());
+								url = UrlUtil.fileToUrl(f, false);
+							}
 						}
-					}
-					if (f == null || !f.canRead())
-					{
-						// Ignore unreadable files
-						urlStrings[i] = null;
-					}
-					else
-					{
-						// Update FileSpec's URL
-						fileSpecs.item(i).setAttribute(AttributeName.URL, MimeUtil.urlToCid(urlStrings[i]), null);
-					}
-					// Set duplicate URLs to null so that the file is only added
-					// once to multipart
-					for (int j = 0; j < i; j++)
-					{
-						if (urlStrings[i] != null && urlStrings[i].equals(urlStrings[j]))
+						File f2 = done.get(f);
+						if (f2 == null)
 						{
-							urlStrings[i] = null;
+							if (f.canRead())
+							{
+								ius.setURL(MimeUtil.urlToCid(url));
+							}
+							final BodyPartHelper bph = new BodyPartHelper();
+							final BodyPart bp = bph.createFromURL(url);
+							if (bp != null)
+							{
+								bodyparts.add(bph);
+								n++;
+							}
+							done.put(f, f);
 						}
-					}
-				}
-			}
-
-			updateXMLMultipart(docJDF, cid);
-
-			// add a new body part for each url
-			for (int i = 0; i < vSize; i++)
-			{
-				final String urlString = urlStrings[i];
-				if (urlString != null)
-				{
-					final BodyPartHelper bph = new BodyPartHelper();
-					final BodyPart bp = bph.createFromURL(urlString);
-					if (bp != null)
-					{
-						addBodyPart(bph);
-						n++;
+						else
+						{
+							url = UrlUtil.fileToUrl(f2, false);
+							ius.setURL(MimeUtil.urlToCid(url));
+						}
 					}
 				}
 			}
 		}
 
+		updateXMLMultipart(docJDF, cid);
+
+		for (BodyPartHelper bph : bodyparts)
+		{
+			addBodyPart(bph);
+		}
 		return n;
 	}
 
@@ -654,30 +654,6 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 		{
 			log.error("cannot add bodypart", e);
 		}
-	}
-
-	/**
-	 * Returns the values of the <i>URL</i> attribute of each element in the input list.
-	 *
-	 * @param fileSpecs a list of elements with <i>URL</i> attributes
-	 * @return an array containing the value of the <i>URL</i> attribute of each element in the input list. The order of values in the returned array corresponds to the order of
-	 *         the elements in the input list.
-	 */
-	private static String[] listURLs(final VElement fileSpecs)
-	{
-		String[] urlStrings = new String[0];
-
-		if (fileSpecs != null)
-		{
-			final int vSize = fileSpecs.size();
-			urlStrings = new String[vSize];
-			for (int i = 0; i < vSize; i++)
-			{
-				urlStrings[i] = fileSpecs.item(i).getAttribute(AttributeName.URL, null, null);
-			}
-		}
-
-		return urlStrings;
 	}
 
 	/**

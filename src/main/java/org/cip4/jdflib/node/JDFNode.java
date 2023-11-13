@@ -2777,12 +2777,35 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param strName the resource name
 	 * @param usage the ResourceLink Usage, if null either in or out are accepted
-	 * @param i the nuber of matches to skip, if negative, count backwards
+	 * @param i the number of matches to skip, if negative, count backwards
 	 * @return the matching resource, null if none matches
 	 */
 	public JDFResource getResource(final String strName, final EnumUsage usage, final int i)
 	{
 		return getResource(strName, usage, null, null, i);
+	}
+
+	/**
+	 * Get the linked resource with name=strName
+	 *
+	 * @param strName the resource name
+	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @return the matching resource, null if none matches
+	 */
+	public JDFResource getResource(final String strName, final EnumUsage usage)
+	{
+		return getResource(strName, usage, null, null, 0);
+	}
+
+	/**
+	 * Get the linked resource with name=strName
+	 *
+	 * @param strName the resource name
+	 * @return the matching resource, null if none matches
+	 */
+	public JDFResource getResource(final String strName)
+	{
+		return getResource(strName, null, null, null, 0);
 	}
 
 	/**

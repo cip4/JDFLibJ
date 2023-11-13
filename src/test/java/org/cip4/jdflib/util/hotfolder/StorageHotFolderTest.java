@@ -366,7 +366,6 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		{
 			setUp();
 			final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
-			hf.setStabilizeTime(100);
 			hf.setSynchronous(synch);
 			File error = new File("error");
 			hf.setErrorStorage(error);
@@ -374,7 +373,6 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			hf.setOKStorage(ok);
 			hf.setMaxStore(42);
 			hf.restart();
-			ThreadUtil.sleep(1000);
 
 			for (int i = 0; i < 4; i++)
 			{
@@ -383,7 +381,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			}
 			ok = FileUtil.getFileInDirectory(theHFDir, ok);
 			error = FileUtil.getFileInDirectory(theHFDir, error);
-			for (int i = 0; i < 42; i++)
+			for (int i = 0; i < 142; i++)
 			{
 				ThreadUtil.sleep(111);
 				if (ok.listFiles().length == 2 && error.listFiles().length == 2 && tmpHFDir.listFiles().length == 0)

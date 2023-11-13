@@ -55,6 +55,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.URLReader;
 import org.cip4.jdflib.util.UrlUtil;
@@ -66,7 +67,7 @@ import org.cip4.jdflib.util.UrlUtil;
  */
 public class MimeReader extends MimeHelper
 {
-	protected final static Log log = LogFactory.getLog(MimeReader.class);
+	private final static Log log = LogFactory.getLog(MimeReader.class);
 
 	/**
 	 *
@@ -118,6 +119,17 @@ public class MimeReader extends MimeHelper
 	{
 		super();
 		theMultipart = getMultiPart(url);
+	}
+
+	/**
+	 * create a root multipart from an input stream
+	 *
+	 * @param url the url or file name
+	 */
+	public MimeReader(final File file)
+	{
+		super();
+		theMultipart = getMultiPart(FileUtil.getBufferedInputStream(file));
 	}
 
 	/**
