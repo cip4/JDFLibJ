@@ -41,6 +41,7 @@ package org.cip4.jdflib.util.mime;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -60,6 +61,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.PlatformUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.mime.MimeWriter.FixSemiColonStream;
 import org.cip4.jdflib.util.mime.MimeWriter.eMimeSubType;
@@ -261,7 +263,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 		JDFPreview pv = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
 		pv.setURL(sm_dirTestData + "url1.pdf");
 		JDFPreview pv1 = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
-		pv1.setURL(sm_dirTestData + "URL1.pdf");
+		pv1.setURL(sm_dirTestData + (PlatformUtil.isWindows() ? "URL1.pdf" : "url1.pdf"));
 		returnQEParams.setURL("cid:dummy"); // will be overwritten by buildMimePackage
 		final MimeWriter mw = new MimeWriter();
 		mw.buildMimePackage(docJMF, docJDF, true);
@@ -279,6 +281,83 @@ public class MimeWriterTest extends JDFTestCaseBase
 		assertEquals(3, mr.getCount());
 		JDFPreview pv3 = (JDFPreview) n.getResource(ElementName.PREVIEW, null, 1);
 		assertEquals(pv2.getURL(), pv3.getURL());
+		assertNotNull(pv3.getURLInputStream());
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testWriteQueue() throws Exception
+	{
+		final JDFDoc docJMF = new JDFDoc("JMF");
+		final JDFJMF jmf = docJMF.getJMFRoot();
+		jmf.setSenderID("DeviceID");
+		final JDFCommand com = (JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.ReturnQueueEntry);
+		final JDFReturnQueueEntryParams returnQEParams = com.appendReturnQueueEntryParams();
+
+		final String queueEntryID = "qe1";
+		returnQEParams.setQueueEntryID(queueEntryID);
+		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
+		JDFPreview pv = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		pv.setURL(sm_dirTestData + "url1.pdf");
+		JDFPreview pv1 = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		pv1.setURL(sm_dirTestData + (PlatformUtil.isWindows() ? "URL1.pdf" : "url1.pdf"));
+		returnQEParams.setURL("cid:dummy"); // will be overwritten by buildMimePackage
+		final MimeWriter mw = new MimeWriter();
+		File f = new File(sm_dirTestDataTemp + "mimeurlpv2.mjm");
+		mw.writeToQueue(docJMF, docJDF, UrlUtil.fileToUrl(f, false), true);
+		assertEquals(3, mw.getCount());
+
+		MimeReader mr = new MimeReader(f);
+		assertTrue(f.exists());
+		assertNotNull(mr.getPartHelperByLocalName("url1.pdf"));
+		JDFNode n = mr.getBodyPartHelper(1).getJDFDoc().getJDFRoot();
+		JDFPreview pv2 = (JDFPreview) n.getResource(ElementName.PREVIEW);
+		assertNotNull(pv2.getURL());
+		assertNotNull(pv2.getURLInputStream());
+		assertEquals(3, mr.getCount());
+		JDFPreview pv3 = (JDFPreview) n.getResource(ElementName.PREVIEW, null, 1);
+		assertEquals(pv2.getURL(), pv3.getURL());
+		assertNotNull(pv3.getURLInputStream());
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testWriteQueueNoExtend() throws Exception
+	{
+		final JDFDoc docJMF = new JDFDoc("JMF");
+		final JDFJMF jmf = docJMF.getJMFRoot();
+		jmf.setSenderID("DeviceID");
+		final JDFCommand com = (JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.ReturnQueueEntry);
+		final JDFReturnQueueEntryParams returnQEParams = com.appendReturnQueueEntryParams();
+
+		final String queueEntryID = "qe1";
+		returnQEParams.setQueueEntryID(queueEntryID);
+		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
+		JDFPreview pv = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		pv.setURL(sm_dirTestData + "url1.pdf");
+		JDFPreview pv1 = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		pv1.setURL(sm_dirTestData + "URL1.pdf");
+		returnQEParams.setURL("cid:dummy"); // will be overwritten by buildMimePackage
+		final MimeWriter mw = new MimeWriter();
+		File f = new File(sm_dirTestDataTemp + "mimeurlpv3.mjm");
+		mw.writeToQueue(docJMF, docJDF, UrlUtil.fileToUrl(f, false), false);
+		assertEquals(2, mw.getCount());
+
+		MimeReader mr = new MimeReader(f);
+		assertTrue(f.exists());
+		JDFNode n = mr.getBodyPartHelper(1).getJDFDoc().getJDFRoot();
+		JDFPreview pv2 = (JDFPreview) n.getResource(ElementName.PREVIEW);
+		assertNotNull(pv2.getURL());
+		assertNotNull(pv2.getURLInputStream());
+		assertEquals(2, mr.getCount());
+		JDFPreview pv3 = (JDFPreview) n.getResource(ElementName.PREVIEW, null, 1);
+		assertNotEquals(pv2.getURL(), pv3.getURL());
 		assertNotNull(pv3.getURLInputStream());
 
 	}

@@ -93,16 +93,11 @@ public class MimeUtil extends UrlUtil
 		 * if true, the stream will be parsed for a semicolon after the mime multipart and said semicolon will be replaced with a cr/lf
 		 */
 		public boolean modifyBoundarySemicolon = false;
-		/**
-		 * if true references such as pdfs are added to the mime package
-		 */
-		public boolean extendReferenced = false;
 
 		@Override
 		public String toString()
 		{
-			return "MIMEDetails [httpDetails=" + httpDetails + ", transferEncoding=" + transferEncoding + ", modifyBoundarySemicolon=" + modifyBoundarySemicolon
-					+ ", extendReferenced=" + extendReferenced + "]";
+			return "MIMEDetails [httpDetails=" + httpDetails + ", transferEncoding=" + transferEncoding + ", modifyBoundarySemicolon=" + modifyBoundarySemicolon + "]";
 		}
 	}
 
@@ -568,7 +563,8 @@ public class MimeUtil extends UrlUtil
 	public static JDFDoc writeToQueue(final JDFDoc docJMF, final JDFDoc docJDF, final String strUrl, final MIMEDetails urlDet) throws IOException, MessagingException
 	{
 		final MimeWriter mw = new MimeWriter();
-		return mw.writeToQueue(docJMF, docJDF, strUrl);
+		mw.setMIMEDetails(urlDet);
+		return mw.writeToQueue(docJMF, docJDF, strUrl, false);
 	}
 
 	/**

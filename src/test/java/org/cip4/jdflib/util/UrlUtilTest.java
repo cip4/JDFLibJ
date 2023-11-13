@@ -239,6 +239,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testSetParameter()
 	{
+		assertEquals("", UrlUtil.setParameter("", "b", "c"));
+		assertEquals("a?b=c", UrlUtil.setParameter("a", "b", "c"));
 		assertEquals("a?b=c", UrlUtil.setParameter("a", "b", "c"));
 		assertEquals("a", UrlUtil.setParameter("a", "", "c"));
 		assertEquals("a", UrlUtil.setParameter("a", "a", null));
@@ -259,8 +261,11 @@ public class UrlUtilTest extends JDFTestCaseBase
 	public void testGetParameter()
 	{
 		assertEquals("c", UrlUtil.getParameter("a?b=c", "b"));
+		assertEquals("c", UrlUtil.getParameter("a?d=e&b=c", "b"));
 		assertEquals(null, UrlUtil.getParameter("a?b=c", "c"));
 		assertEquals(null, UrlUtil.getParameter("a", "c"));
+		assertEquals(null, UrlUtil.getParameter("a", ""));
+		assertEquals(null, UrlUtil.getParameter("", "c"));
 		assertEquals("http://www.example.com", UrlUtil.getParameter("a?b=http%3a%2f%2fwww.example.com", "b"));
 	}
 
@@ -412,6 +417,18 @@ public class UrlUtilTest extends JDFTestCaseBase
 			return;
 		final InputStream is = UrlUtil.getURLInputStream("https://google.ch");
 		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	public void testGetBodyInputstream() throws IOException
+	{
+		final InputStream is = UrlUtil.getURLInputStream(UrlUtil.fileToUrl(new File(sm_dirTestData + "url1.pdf"), false), null);
+		assertNotNull(is);
+		is.close();
 	}
 
 	/**

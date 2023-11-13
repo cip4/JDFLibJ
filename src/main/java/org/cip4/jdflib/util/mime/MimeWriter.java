@@ -665,12 +665,30 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	 * @return
 	 * @throws IOException
 	 * @throws MessagingException
+	 * @deprecated Use {@link #writeToQueue(JDFDoc,JDFDoc,String,boolean)} instead
 	 */
+	@Deprecated
 	public JDFDoc writeToQueue(final JDFDoc docJMF, final JDFDoc docJDF, final String strUrl) throws IOException, MessagingException
+	{
+		return writeToQueue(docJMF, docJDF, strUrl, false);
+	}
+
+	/**
+	 * submit a multipart file to a queue
+	 *
+	 * @param docJMF the jmf document containing the submitqueueentry or resubmitqueueentry
+	 * @param docJDF the jdf to submit
+	 * @param strUrl the url to submit to
+	 * @param extendRef TODO
+	 * @return
+	 * @throws IOException
+	 * @throws MessagingException
+	 */
+	public JDFDoc writeToQueue(final JDFDoc docJMF, final JDFDoc docJDF, final String strUrl, boolean extendRef) throws IOException, MessagingException
 	{
 		JDFDoc doc = null;
 
-		buildMimePackage(docJMF, docJDF, md == null ? false : md.extendReferenced);
+		buildMimePackage(docJMF, docJDF, extendRef);
 		final UrlPart uc = writeToURL(strUrl);
 		if (uc == null)
 		{
