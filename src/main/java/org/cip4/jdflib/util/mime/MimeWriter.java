@@ -261,6 +261,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	{
 		super();
 		subType = subtype;
+		md = new MIMEDetails();
 		createMimePackage();
 	}
 
@@ -271,6 +272,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	public MimeWriter(final Multipart mp)
 	{
 		super();
+		md = new MIMEDetails();
 		theMultipart = mp;
 		subType = eMimeSubType.getEnum(mp.getContentType());
 	}
@@ -692,7 +694,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	{
 		JDFDoc doc = null;
 
-		buildMimePackage(docJMF, docJDF, true);
+		buildMimePackage(docJMF, docJDF, md == null ? false : md.extendReferenced);
 		final UrlPart uc = writeToURL(strUrl);
 		if (uc == null)
 		{

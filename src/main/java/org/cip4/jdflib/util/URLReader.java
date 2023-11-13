@@ -288,9 +288,8 @@ public class URLReader
 		if (UrlUtil.isNet(urlString))
 		{
 			final UrlPart part = UrlUtil.writeToURL(urlString, null, UrlUtil.GET, null, null);
-			if (part == null)
-				return null;
-			return UrlUtil.isReturnCodeOK(part.getResponseCode()) ? part.getResponseStream() : null;
+			if (UrlUtil.isReturnCodeOK(part))
+				return part.getResponseStream();
 		}
 		return null;
 	}

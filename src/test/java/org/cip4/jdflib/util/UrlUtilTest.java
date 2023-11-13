@@ -45,6 +45,7 @@ package org.cip4.jdflib.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -73,6 +74,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 import org.cip4.jdflib.util.net.HTTPDetails;
+import org.cip4.jdflib.util.zip.ZipReader;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -410,6 +412,19 @@ public class UrlUtilTest extends JDFTestCaseBase
 			return;
 		final InputStream is = UrlUtil.getURLInputStream("https://google.ch");
 		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 *
+	 */
+	@Test
+	public void testGetZipInputstream() throws IOException
+	{
+		final ZipReader r = new ZipReader(sm_dirTestData + "testZip.zip");
+		final InputStream is2 = UrlUtil.getURLInputStream("content/boo.pdf", null, r);
+		assertNotEquals(0, is2.read());
 	}
 
 	/**

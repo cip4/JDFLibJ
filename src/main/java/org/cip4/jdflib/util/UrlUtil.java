@@ -73,6 +73,7 @@ import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
+import org.cip4.jdflib.util.zip.ZipReader;
 
 /**
  * collection of helper routines to convert urls
@@ -558,13 +559,27 @@ public class UrlUtil
 	 *
 	 * @param urlString
 	 * @param bodyPart
+	 * @param zr
+	 * @return
+	 */
+	public static InputStream getURLInputStream(final String urlString, final BodyPart bodyPart, ZipReader zr)
+	{
+		final URLReader reader = new URLReader(urlString);
+		reader.setBodyPart(bodyPart);
+		reader.setZipReader(zr);
+		return reader.getURLInputStream();
+	}
+
+	/**
+	 * get the opened input stream for a given url string
+	 *
+	 * @param urlString
+	 * @param bodyPart
 	 * @return
 	 */
 	public static InputStream getURLInputStream(final String urlString, final BodyPart bodyPart)
 	{
-		final URLReader reader = new URLReader(urlString);
-		reader.setBodyPart(bodyPart);
-		return reader.getURLInputStream();
+		return getURLInputStream(urlString, bodyPart, null);
 	}
 
 	/**

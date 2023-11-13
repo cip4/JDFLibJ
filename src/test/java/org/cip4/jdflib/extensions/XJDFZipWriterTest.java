@@ -77,9 +77,13 @@ import java.io.File;
 import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.zip.ZipReader;
 import org.junit.jupiter.api.Test;
 
@@ -99,6 +103,24 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		w.writeStream(ios);
 		assertTrue(ios.size() > 13);
+	}
+
+	/**
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public void testSimpleXJDFAux() throws IOException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		JDFRunList ruli = (JDFRunList) h.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input).getCreateResource().getResource();
+		ruli.setFileSpecURL(UrlUtil.fileToUrl(new File(sm_dirTestData + "url1.pdf"), false));
+		final XJDFZipWriter w = new XJDFZipWriter();
+		w.addXJDF(h, true);
+		final ByteArrayIOStream ios = new ByteArrayIOStream();
+		w.writeStream(ios);
+		assertTrue(ios.size() > 13);
+		assertEquals(1, w.numAux());
 	}
 
 	/**

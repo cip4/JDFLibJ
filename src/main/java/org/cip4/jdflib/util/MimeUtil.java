@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -93,6 +93,17 @@ public class MimeUtil extends UrlUtil
 		 * if true, the stream will be parsed for a semicolon after the mime multipart and said semicolon will be replaced with a cr/lf
 		 */
 		public boolean modifyBoundarySemicolon = false;
+		/**
+		 * if true references such as pdfs are added to the mime package
+		 */
+		public boolean extendReferenced = false;
+
+		@Override
+		public String toString()
+		{
+			return "MIMEDetails [httpDetails=" + httpDetails + ", transferEncoding=" + transferEncoding + ", modifyBoundarySemicolon=" + modifyBoundarySemicolon
+					+ ", extendReferenced=" + extendReferenced + "]";
+		}
 	}
 
 	/**
@@ -379,6 +390,7 @@ public class MimeUtil extends UrlUtil
 		return JDFConstants.MIME_JDF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_XJDF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_JMF.equalsIgnoreCase(mimeType)
 				|| JDFConstants.MIME_XJMF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeType) || UrlUtil.APPLICATION_XML.equalsIgnoreCase(mimeType);
 	}
+
 	/**
 	 * checks whether the mime type corresponds to ppf
 	 *
@@ -427,7 +439,8 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * build a MIME package that contains all references in all FileSpecs of a given JDFDoc the doc is modified so that all URLs are cids
 	 *
-	 * @param docJMF the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must already be specified as a CID
+	 * @param docJMF the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must already be specified
+	 *        as a CID
 	 * @param docJDF the JDFDoc representation of the JDF to package
 	 * @param extendReferenced if true, also package any further referenced files
 	 * @return a Message representing the resulting MIME package, null if an error occurred

@@ -81,6 +81,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -91,6 +93,7 @@ import org.cip4.jdflib.jmf.JDFReturnQueueEntryParams;
 import org.cip4.jdflib.util.NumberFormatter;
 import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
 
 public class XJDFZipWriter implements IStreamWriter
 {
@@ -117,7 +120,39 @@ public class XJDFZipWriter implements IStreamWriter
 	 */
 	public void addXJDF(final XJDFHelper xjdf)
 	{
+		addXJDF(xjdf, false);
+	}
+
+	/**
+	 * @param xjdf the xjdf to add
+	 */
+	public void addXJDF(final XJDFHelper xjdf, boolean addReferenced)
+	{
 		vxjdf.add(xjdf);
+		if (addReferenced)
+		{
+			VElement v = xjdf.getRoot().getChildrenByTagName(null);
+			for (KElement e : v)
+			{
+				if (e instanceof IURLSetter)
+				{
+					IURLSetter u = (IURLSetter) e;
+					InputStream is = u.getURLInputStream();
+					if (is != null)
+					{
+						String url = u.getURL();
+						url = updateUrl(url);
+						u.setURL(url);
+						addAux(url, is);
+					}
+				}
+			}
+		}
+	}
+
+	String updateUrl(String url)
+	{
+		return "content/" + UrlUtil.getFileName(url, null);
 	}
 
 	/**
@@ -147,7 +182,15 @@ public class XJDFZipWriter implements IStreamWriter
 		{
 			writeAux(zos, path);
 		}
+	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public int numAux()
+	{
+		return auxMap.size();
 	}
 
 	/**
@@ -310,6 +353,11 @@ public class XJDFZipWriter implements IStreamWriter
 		return commandType;
 	}
 
+	/**
+	 * 
+	 * @param commandType
+	 * @throws IllegalArgumentException if commandType is invalid
+	 */
 	public void setCommandType(EnumType commandType)
 	{
 		if (!EnumType.SubmitQueueEntry.equals(commandType) && !EnumType.ResubmitQueueEntry.equals(commandType) && !EnumType.ReturnQueueEntry.equals(commandType))
