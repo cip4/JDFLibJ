@@ -362,70 +362,72 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testOKError() throws Exception
 	{
-		for (boolean synch : new boolean[] { true, false })
-		{
-			setUp();
-			final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
-			hf.setSynchronous(synch);
-			File error = new File("error");
-			hf.setErrorStorage(error);
-			File ok = new File("ok");
-			hf.setOKStorage(ok);
-			hf.setMaxStore(42);
-			hf.restart();
+		for (int retry : new int[] { 1, 99 })
+			for (boolean synch : new boolean[] { true, false })
+			{
+				setUp();
+				final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+				hf.setSynchronous(synch);
+				hf.setRetry(retry);
+				File error = new File("error");
+				hf.setErrorStorage(error);
+				File ok = new File("ok");
+				hf.setOKStorage(ok);
+				hf.setMaxStore(42);
+				hf.restart();
 
-			for (int i = 0; i < 4; i++)
-			{
-				final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
-				file.createNewFile();
-			}
-			ok = FileUtil.getFileInDirectory(theHFDir, ok);
-			error = FileUtil.getFileInDirectory(theHFDir, error);
-			for (int i = 0; i < 142; i++)
-			{
-				ThreadUtil.sleep(111);
-				if (ok.listFiles().length == 2 && error.listFiles().length == 2 && tmpHFDir.listFiles().length == 0)
-					break;
-			}
-			assertEquals(2, ok.listFiles().length, 1);
-			assertEquals(0, tmpHFDir.listFiles().length, 1);
-			assertEquals(2, error.listFiles().length, 1);
-			for (int i = 0; i < 4; i++)
-			{
-				final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
-				file.createNewFile();
-			}
-			for (int i = 0; i < 42; i++)
-			{
-				ThreadUtil.sleep(111);
-				if (ok.listFiles().length == 4 && error.listFiles().length == 4)
-					break;
-			}
-			assertEquals(4, ok.listFiles().length, 1);
-			assertEquals(0, tmpHFDir.listFiles().length, 2);
-			for (int i = 0; i < 100; i++)
-			{
-				final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
-				file.createNewFile();
-			}
-			for (int i = 0; i < 1000; i++)
-			{
-				ThreadUtil.sleep(200);
-				if (theHFDir.listFiles().length <= 2 && tmpHFDir.listFiles().length == 0)
+				for (int i = 0; i < 4; i++)
 				{
-					log.info("stop " + i);
-					break;
+					final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
+					file.createNewFile();
 				}
-				log.warn("run over " + theHFDir.listFiles().length);
-			}
-			assertEquals(42, ok.listFiles().length, 13);
-			assertEquals(0, tmpHFDir.listFiles().length, 6, "Found files: " + Arrays.toString(tmpHFDir.list()));
-			assertEquals(42, error.listFiles().length, 13);
+				ok = FileUtil.getFileInDirectory(theHFDir, ok);
+				error = FileUtil.getFileInDirectory(theHFDir, error);
+				for (int i = 0; i < 142; i++)
+				{
+					ThreadUtil.sleep(111);
+					if (ok.listFiles().length == 2 && error.listFiles().length == 2 && tmpHFDir.listFiles().length == 0)
+						break;
+				}
+				assertEquals(2, ok.listFiles().length, 1);
+				assertEquals(0, tmpHFDir.listFiles().length, 1);
+				assertEquals(2, error.listFiles().length, 1);
+				for (int i = 0; i < 4; i++)
+				{
+					final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
+					file.createNewFile();
+				}
+				for (int i = 0; i < 42; i++)
+				{
+					ThreadUtil.sleep(111);
+					if (ok.listFiles().length == 4 && error.listFiles().length == 4)
+						break;
+				}
+				assertEquals(4, ok.listFiles().length, 1);
+				assertEquals(0, tmpHFDir.listFiles().length, 2);
+				for (int i = 0; i < 100; i++)
+				{
+					final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
+					file.createNewFile();
+				}
+				for (int i = 0; i < 1000; i++)
+				{
+					ThreadUtil.sleep(200);
+					if (theHFDir.listFiles().length <= 2 && tmpHFDir.listFiles().length <= 2)
+					{
+						log.info("stop " + i);
+						break;
+					}
+					log.warn("run over " + theHFDir.listFiles().length);
+				}
+				assertEquals(42, ok.listFiles().length, 13);
+				assertEquals(0, tmpHFDir.listFiles().length, 6, "Found files: " + Arrays.toString(tmpHFDir.list()));
+				assertEquals(42, error.listFiles().length, 13);
 
-			hf.stop();
-			if (synch)
-				ThreadUtil.sleep(420);
-		}
+				hf.stop();
+				if (synch)
+					ThreadUtil.sleep(420);
+			}
 	}
 
 	/**
@@ -627,7 +629,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			for (int i = 0; i < 1000; i++)
 			{
 				ThreadUtil.sleep(50);
-				if (ok.listFiles().length >= 4 && tmpHFDir.listFiles().length < 1)
+				if (ok.listFiles().length >= 4 && tmpHFDir.listFiles().length <= 2)
 					break;
 			}
 			assertEquals(4, ok.listFiles().length, 1);
@@ -783,7 +785,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		for (int i = 0; i < 1000; i++)
 		{
 			ThreadUtil.sleep(20);
-			if (tmpHFDir.listFiles().length == 0 && theHFDir.listFiles().length <= 2)
+			if (tmpHFDir.listFiles().length <= 2 && theHFDir.listFiles().length <= 2)
 				break;
 		}
 

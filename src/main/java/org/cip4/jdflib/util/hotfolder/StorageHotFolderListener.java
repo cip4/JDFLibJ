@@ -404,7 +404,7 @@ class StorageHotFolderListener implements HotFolderListener
 		}
 		final String name = hotFile.getName();
 		final File tmpDir = getTmpDir();
-		final File newAbsoluteFile = FileUtil.getFileInDirectory(tmpDir, new File(name));
+		final File newAbsoluteFile = new File(tmpDir, name);
 		boolean ok = false;
 		for (int i = 0; !ok && (i < parent.getRetry()); i++)
 		{

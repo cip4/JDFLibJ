@@ -61,7 +61,7 @@ class FileTime
 	{
 		f = _f;
 		modified = -1;
-		length = 0;
+		length = -1;
 		this.readOnly = readOnly;
 		if (readOnly)
 			updateModified();
