@@ -92,7 +92,9 @@ public class FileTimeTest extends JDFTestCaseBase
 			final FileTime ft = new FileTime(dummy, b);
 			assertTrue(FileUtil.forceDelete(dummy));
 			FileUtil.createNewFile(dummy);
-			ThreadUtil.sleep(2);
+			for (int i = 0; i < 42; i++)
+				if (!dummy.exists())
+					ThreadUtil.sleep(2);
 			for (int i = 0; i < 3; i++)
 			{
 				final FileOutputStream fos = new FileOutputStream(dummy, true);

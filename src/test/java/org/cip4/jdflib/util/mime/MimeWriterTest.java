@@ -342,7 +342,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 		JDFPreview pv = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
 		pv.setURL(sm_dirTestData + "url1.pdf");
 		JDFPreview pv1 = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
-		pv1.setURL(sm_dirTestData + "URL1.pdf");
+		pv1.setURL(sm_dirTestData + (PlatformUtil.isWindows() ? "URL1.pdf" : "url1.pdf"));
 		returnQEParams.setURL("cid:dummy"); // will be overwritten by buildMimePackage
 		final MimeWriter mw = new MimeWriter();
 		File f = new File(sm_dirTestDataTemp + "mimeurlpv3.mjm");
