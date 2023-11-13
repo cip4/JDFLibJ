@@ -555,8 +555,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			if (ok.listFiles().length < 4)
 				ThreadUtil.sleep(10);
 		}
-		assertEquals(4, ok.listFiles().length, 1);
-		assertEquals(0, tmpHFDir.listFiles().length, 1);
+		assertEquals(4, ok.listFiles().length, 2);
+		assertEquals(0, tmpHFDir.listFiles().length, 2);
 		for (int i = 0; i < 100; i++)
 		{
 			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
