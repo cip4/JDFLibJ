@@ -512,23 +512,23 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * ---------------------------------------------------------------------
 	 */
 	/**
-	 * (36) set attribute QueueEntryID
+	 * set attribute QueueEntryID
 	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setQueueEntryID(String value)
 	{
-		setAttribute(AttributeName.QUEUEENTRYID, value, null);
+		setAttribute(AttributeName.QUEUEENTRYID, value);
 	}
 
 	/**
-	 * (23) get String attribute QueueEntryID
+	 * get String attribute QueueEntryID
 	 * 
 	 * @return the value of the attribute
 	 */
 	public String getQueueEntryID()
 	{
-		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.QUEUEENTRYID);
 	}
 
 	/*
@@ -536,23 +536,23 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * ---------------------------------------------------------------------
 	 */
 	/**
-	 * (36) set attribute RelatedJobID
+	 * set attribute RelatedJobID
 	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setRelatedJobID(String value)
 	{
-		setAttribute(AttributeName.RELATEDJOBID, value, null);
+		setAttribute(AttributeName.RELATEDJOBID, value);
 	}
 
 	/**
-	 * (23) get String attribute RelatedJobID
+	 * get String attribute RelatedJobID
 	 * 
 	 * @return the value of the attribute
 	 */
 	public String getRelatedJobID()
 	{
-		return getAttribute(AttributeName.RELATEDJOBID, null, JDFCoreConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.RELATEDJOBID);
 	}
 
 	/*
@@ -560,23 +560,23 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * ---------------------------------------------------------------------
 	 */
 	/**
-	 * (36) set attribute RelatedJobPartID
+	 * set attribute RelatedJobPartID
 	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setRelatedJobPartID(String value)
 	{
-		setAttribute(AttributeName.RELATEDJOBPARTID, value, null);
+		setAttribute(AttributeName.RELATEDJOBPARTID, value);
 	}
 
 	/**
-	 * (23) get String attribute RelatedJobPartID
+	 * get String attribute RelatedJobPartID
 	 * 
 	 * @return the value of the attribute
 	 */
 	public String getRelatedJobPartID()
 	{
-		return getAttribute(AttributeName.RELATEDJOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.RELATEDJOBPARTID);
 	}
 
 	/*
