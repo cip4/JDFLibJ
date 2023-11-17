@@ -39,6 +39,7 @@
 package org.cip4.jdflib.util.thread;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -103,11 +104,12 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 		name = getThreadName(name);
 		synchronized (theMap)
 		{
-			OrderedTaskQueue orderedTaskQueue = theMap.get(name);
+			Map<String, OrderedTaskQueue> map = theMap.get();
+			OrderedTaskQueue orderedTaskQueue = map.get(name);
 			if (!(orderedTaskQueue instanceof MultiJobTaskQueue))
 			{
 				orderedTaskQueue = new MultiJobTaskQueue(name);
-				theMap.put(name, orderedTaskQueue);
+				map.put(name, orderedTaskQueue);
 			}
 			final MultiJobTaskQueue multiTaskQueue = (MultiJobTaskQueue) orderedTaskQueue;
 			multiTaskQueue.setMaxParallel(maxParallel);

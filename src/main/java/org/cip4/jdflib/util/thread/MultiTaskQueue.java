@@ -39,6 +39,7 @@
 package org.cip4.jdflib.util.thread;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -96,11 +97,12 @@ public class MultiTaskQueue extends OrderedTaskQueue
 		name = getThreadName(name);
 		synchronized (theMap)
 		{
-			OrderedTaskQueue orderedTaskQueue = theMap.get(name);
+			Map<String, OrderedTaskQueue> map = theMap.get();
+			OrderedTaskQueue orderedTaskQueue = map.get(name);
 			if (!(orderedTaskQueue instanceof MultiTaskQueue))
 			{
 				orderedTaskQueue = new MultiTaskQueue(name);
-				theMap.put(name, orderedTaskQueue);
+				map.put(name, orderedTaskQueue);
 			}
 			final MultiTaskQueue multiTaskQueue = (MultiTaskQueue) orderedTaskQueue;
 			multiTaskQueue.setMaxParallel(maxParallel);
