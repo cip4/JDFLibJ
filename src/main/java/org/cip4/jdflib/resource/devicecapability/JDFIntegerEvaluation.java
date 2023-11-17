@@ -182,9 +182,17 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	 */
 	public void appendValueList(int value)
 	{
-		JDFIntegerRangeList irl = getValueList();
+		JDFIntegerRangeList irl = getCreateValueList();
 		irl.append(value);
 		setValueList(irl);
+	}
+
+	public JDFIntegerRangeList getCreateValueList()
+	{
+		JDFIntegerRangeList irl = getValueList();
+		if (irl == null)
+			irl = new JDFIntegerRangeList();
+		return irl;
 	}
 
 	/**
