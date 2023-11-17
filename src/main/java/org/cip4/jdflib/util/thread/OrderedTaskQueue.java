@@ -43,6 +43,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -173,7 +174,14 @@ public class OrderedTaskQueue extends Thread
 	long sumQueue;
 	long sumRun;
 	TaskRunner currentRunning;
-	static Map<String, OrderedTaskQueue> theMap = new HashMap<>();
+	final static AtomicReference<Map<String, OrderedTaskQueue>> theMap = createqueue();
+
+	static AtomicReference<Map<String, OrderedTaskQueue>> createqueue()
+	{
+		AtomicReference<Map<String, OrderedTaskQueue>> atomicReference = new AtomicReference<>();
+		atomicReference.set(new HashMap<>());
+		return atomicReference;
+	}
 
 	/**
 	 *
@@ -187,11 +195,12 @@ public class OrderedTaskQueue extends Thread
 		name = getThreadName(name);
 		synchronized (theMap)
 		{
-			OrderedTaskQueue orderedTaskQueue = theMap.get(name);
+			Map<String, OrderedTaskQueue> map = theMap.get();
+			OrderedTaskQueue orderedTaskQueue = map.get(name);
 			if (orderedTaskQueue == null)
 			{
 				orderedTaskQueue = new OrderedTaskQueue(name);
-				theMap.put(name, orderedTaskQueue);
+				map.put(name, orderedTaskQueue);
 			}
 			orderedTaskQueue.idle.set(0);
 			return orderedTaskQueue;
@@ -210,7 +219,7 @@ public class OrderedTaskQueue extends Thread
 		name = getThreadName(name);
 		synchronized (theMap)
 		{
-			final OrderedTaskQueue orderedTaskQueue = theMap.get(name);
+			final OrderedTaskQueue orderedTaskQueue = theMap.get().get(name);
 			if (orderedTaskQueue != null)
 			{
 				orderedTaskQueue.shutDown();
@@ -246,18 +255,19 @@ public class OrderedTaskQueue extends Thread
 	 */
 	public static void shutDownAll()
 	{
-		final int size = theMap.size();
+		Map<String, OrderedTaskQueue> map = theMap.get();
+		final int size = map.size();
 		if (size > 0)
 		{
 			LogFactory.getLog(OrderedTaskQueue.class).info("shutting down " + size + " ordered queues");
 			synchronized (theMap)
 			{
-				final Collection<String> v = ContainerUtil.getKeyArray(theMap);
+				final Collection<String> v = ContainerUtil.getKeyArray(map);
 				if (v != null)
 				{
 					for (final String key : v)
 					{
-						theMap.get(key).shutDown();
+						map.get(key).shutDown();
 					}
 				}
 			}
@@ -274,7 +284,7 @@ public class OrderedTaskQueue extends Thread
 	public void shutDown()
 	{
 		idle.set(-1);
-		theMap.remove(getName());
+		theMap.get().remove(getName());
 		ThreadUtil.notifyAll(mutex);
 	}
 
