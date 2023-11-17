@@ -201,10 +201,8 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 			}
 		});
 
-		File entry;
-		for (final File entrie : entries)
+		for (final File entry : entries)
 		{
-			entry = entrie;
 			if (entry.isDirectory())
 			{
 				traverseAutoClassesAndCheckForCorrespondingNormalClass(entry, visitor);

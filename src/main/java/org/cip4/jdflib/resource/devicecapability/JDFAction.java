@@ -173,8 +173,7 @@ public class JDFAction extends JDFAutoAction
 	}
 
 	/**
-	 * get the root Term of the Test element in the TestPool that is referenced
-	 * by this action
+	 * get the root Term of the Test element in the TestPool that is referenced by this action
 	 * 
 	 * @return JDFTerm: the referenced term, null if none exists
 	 */
@@ -222,27 +221,35 @@ public class JDFAction extends JDFAutoAction
 	/**
 	 * set testRef to the value of test/@ID
 	 * 
-	 * @param test
-	 *            the value to set testRef to
+	 * @param test the value to set testRef to
 	 */
 	public void setTest(JDFTest test)
 	{
-		test.appendAnchor(null); // just in case it is missing
-		final String id2 = test.getID();
-		setTestRef(id2);
+		if (test != null)
+		{
+			test.appendAnchor(null); // just in case it is missing
+			final String id2 = test.getID();
+			setTestRef(id2);
+		}
+		else
+		{
+			setTestRef(null);
+		}
 	}
 
 	/**
 	 * set PreflightAction/@SetRef to the value of test/@ID
 	 * 
-	 * @param test
-	 *            the test to use
+	 * @param test the test to use
 	 */
 	public void setPreflightActionSetRef(JDFTest test)
 	{
-		test.appendAnchor(null); // just in case it is missing
-		final String id2 = test.getID();
-		getCreatePreflightAction(0).setSetRef(id2);
+		if (test != null)
+		{
+			test.appendAnchor(null); // just in case it is missing
+			final String id2 = test.getID();
+			getCreatePreflightAction(0).setSetRef(id2);
+		}
 	}
 
 	/**

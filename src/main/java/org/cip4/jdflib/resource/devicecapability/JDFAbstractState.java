@@ -114,11 +114,12 @@ import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
+import org.w3c.dom.Node;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * befoer June 7, 2009
+ *         befoer June 7, 2009
  */
 public abstract class JDFAbstractState extends JDFElement implements JDFBaseDataTypes, ICapabilityElement
 {
@@ -134,7 +135,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.EDITABLE, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, JDFConstants.TRUE);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.HASDEFAULT, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, JDFConstants.TRUE);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.ID, 0x33333311, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.LISTTYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumListType.getEnum(0), EnumListType.SingleValue.getName());
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.LISTTYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumListType.getEnum(0),
+				EnumListType.SingleValue.getName());
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.MACROREFS, 0x33333311, AttributeInfo.EnumAttributeType.IDREFS, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.MAXOCCURS, 0x33333311, AttributeInfo.EnumAttributeType.unbounded, null, "1");
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.MINOCCURS, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
@@ -142,7 +144,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.NAME, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.REQUIRED, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.SPAN, 0x44444431, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.USERDISPLAY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumUserDisplay.getEnum(0), EnumUserDisplay.Display.getName());
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.USERDISPLAY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumUserDisplay.getEnum(0),
+				EnumUserDisplay.Display.getName());
 	}
 
 	@Override
@@ -202,7 +205,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 *
-	 * June 7, 2009
+	 *         June 7, 2009
 	 */
 	@SuppressWarnings("unchecked")
 	public static class EnumUserDisplay extends ValuedEnum
@@ -340,7 +343,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	/**
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getNamePathVector()
 	 * @return
-	*/
+	 */
 	@Override
 	public final VString getNamePathVector()
 	{
@@ -415,7 +418,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	@Override
 	public void setAvailability(final EnumAvailability value)
 	{
-		setAttribute(AttributeName.AVAILABILITY, value.getName(), null);
+		setAttribute(AttributeName.AVAILABILITY, value == null ? null : value.getName(), null);
 	}
 
 	/**
@@ -446,7 +449,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public JDFDevCap getParentDevCap()
 	{
-		return (JDFDevCap) getParentNode();
+		Node parentNode = getParentNode();
+		return (parentNode instanceof JDFDevCap) ? (JDFDevCap) parentNode : null;
 	}
 
 	/**
@@ -583,7 +587,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public void setListType(final EnumListType value)
 	{
-		setAttribute(AttributeName.LISTTYPE, value.getName(), null);
+		setAttribute(AttributeName.LISTTYPE, value == null ? null : value.getName(), null);
 	}
 
 	/**
@@ -603,12 +607,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public void setActionRefs(final VString value)
 	{
-		final StringBuffer strActionRefs = new StringBuffer(100);
-		for (int i = 0; i < value.size(); i++)
-		{
-			strActionRefs.append(value.elementAt(i));
-		}
-		setAttribute(AttributeName.ACTIONREFS, strActionRefs.toString());
+		setAttribute(AttributeName.ACTIONREFS, value, null);
 	}
 
 	/**
@@ -695,7 +694,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public void setUserDisplay(final EnumUserDisplay value)
 	{
-		setAttribute(AttributeName.USERDISPLAY, value.getName(), null);
+		setAttribute(AttributeName.USERDISPLAY, value == null ? null : value.getName(), null);
 	}
 
 	/**
@@ -1188,7 +1187,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	/**
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getModulePool()
 	 * @return
-	*/
+	 */
 	@Override
 	public JDFModulePool getModulePool()
 	{
@@ -1198,7 +1197,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	/**
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getCreateModulePool()
 	 * @return
-	*/
+	 */
 	@Override
 	public JDFModulePool getCreateModulePool()
 	{
@@ -1207,6 +1206,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * get the DEvCapPool that contains devcap elements referenced by this
+	 * 
 	 * @param poolName
 	 *
 	 * @return KElement the pool
@@ -1219,6 +1219,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * get the DEvCapPool that contains devcap elements referenced by this
+	 * 
 	 * @param poolName
 	 *
 	 * @return KElement the pool
@@ -1262,7 +1263,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#appendModuleRef(java.lang.String)
 	 * @param id
 	 * @return
-	*/
+	 */
 	@Override
 	public JDFModuleCap appendModuleRef(final String id)
 	{
@@ -1272,7 +1273,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	/**
 	 * @see org.cip4.jdflib.core.KElement#init()
 	 * @return
-	*/
+	 */
 	@Override
 	public boolean init()
 	{
@@ -1294,7 +1295,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	/**
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 * @return
-	*/
+	 */
 	@Override
 	public abstract EnumTerm getEvaluationType();
 

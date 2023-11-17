@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.auto;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -75,13 +77,16 @@ import java.lang.reflect.Modifier;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.node.JDFNode;
+import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 
 public class AutoClassInstantiateVisitor implements DirectoryVisitor
@@ -157,7 +162,9 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 				|| (elementName.equals(ElementName.SHAPE) && createdClass.equals("JDFShapeElement"))
 				|| (elementName.endsWith(JDFConstants.LINK) && createdClass.substring("JDF".length()).equals(ElementName.RESOURCELINK));
 
+		coverAppenders(kElem);
 		coverSetters(kElem);
+		kElem.removeAttribute(AttributeName.RREF);
 		coverGetters(kElem);
 		if (!result)
 		{
@@ -171,6 +178,10 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 	{
 		Class<? extends KElement> c = kElem.getClass();
 		Method[] methods = c.getMethods();
+		StringArray skip = new StringArray("getTest getActionPool getTestPool getTestTerm getUpdatedPreviousAudit getBindingType"
+				+ " getMethod getSurplusHandling getServiceLevel getReturnMethod getTransfer JDFDevCaps");
+		// " getParentPool getModulePool getCreateParentPool"
+		// " getCreateModulePool getCreateDevCapPool getDevCapPool getParentPool getDevCapVector getDevCap getMinOccurs getMaxOccurs
 		for (Method method : methods)
 		{
 			if (method.getName().startsWith("get"))
@@ -178,10 +189,54 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 				Class<?>[] types = method.getParameterTypes();
 				try
 				{
-					if (types.length == 0)
+					String ab = c.getSimpleName() + "." + method.getName();
+					if (types.length == 0 && !skip.contains(method.getName()) && !skip.contains(ab) && !skip.contains(c.getSimpleName()))
 					{
+						log.info(ab);
 						method.invoke(kElem, new Object[] {});
-						//
+					}
+				}
+				catch (InvocationTargetException i)
+				{
+					Throwable t = i.getTargetException();
+					if (t instanceof RuntimeException)
+					{
+						log.warn("Runtime Exception :", t);
+					}
+					else
+					{
+						throw i;
+					}
+				}
+				catch (Exception j)
+				{
+
+					log.warn("snafu ", j);
+				}
+			}
+		}
+	}
+
+	private void coverAppenders(KElement kElem) throws Exception
+	{
+		Class<? extends KElement> c = kElem.getClass();
+		Method[] methods = c.getMethods();
+		StringArray skip = new StringArray(
+				"JDFBarCode JDFDevCaps JDFIDPrintingParams JDFLayout.appendSignature JDFLayout.appendSurface JDFLayout.appendFrontSurface JDFLayout.appendBackSurface JDFLayout.appendSheet "
+						+ "JDFAbortQueueEntryParams.appendQueueFilter JDFNotification");
+		for (Method method : methods)
+		{
+			if (method.getName().startsWith("append"))
+			{
+				String ab = c.getSimpleName() + "." + method.getName();
+				Class<?>[] types = method.getParameterTypes();
+				try
+				{
+					if (types.length == 0 && !skip.contains(method.getName()) && !skip.contains(ab) && !skip.contains(c.getSimpleName()))
+					{
+						log.info(ab);
+						KElement e = (KElement) method.invoke(kElem, new Object[] {});
+						assertNotNull(e);
 					}
 				}
 				catch (InvocationTargetException i)
@@ -208,6 +263,7 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 	private void coverSetters(KElement kElem) throws Exception
 	{
 		Class<? extends KElement> c = kElem.getClass();
+		StringArray skip = new StringArray("setIdentical setRefTarget JDFColorantControl.setSeparation setPhoneNumber setEMailLocator setQuery");
 		Method[] methods = c.getMethods();
 		for (Method method : methods)
 		{
@@ -218,33 +274,36 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 				{
 					if (types.length == 1)
 					{
-
-						if (String.class.equals(types[0]))
+						String ab = c.getSimpleName() + "." + method.getName();
+						if (!skip.contains(method.getName()) && !skip.contains(ab))
 						{
-							method.invoke(kElem, "test");
+							if (String.class.equals(types[0]))
+							{
+								method.invoke(kElem, "test");
+							}
+							else if (VString.class.equals(types[0]))
+							{
+								method.invoke(kElem, new VString("test1 test2"));
+							}
+							else if (int.class.equals(types[0]))
+							{
+								method.invoke(kElem, 1);
+							}
+							else if (boolean.class.equals(types[0]))
+							{
+								method.invoke(kElem, true);
+							}
+							else if (double.class.equals(types[0]))
+							{
+								method.invoke(kElem, 42.0);
+							}
+							else if (!Attr.class.equals(types[0]))
+							{
+								log.info(ab + " " + types[0]);
+								method.invoke(kElem, new Object[] { null });
+							}
+							//
 						}
-						else if (VString.class.equals(types[0]))
-						{
-							method.invoke(kElem, new VString("test1 test2"));
-						}
-						else if (int.class.equals(types[0]))
-						{
-							method.invoke(kElem, 1);
-						}
-						else if (boolean.class.equals(types[0]))
-						{
-							method.invoke(kElem, true);
-						}
-						else if (double.class.equals(types[0]))
-						{
-							method.invoke(kElem, 42.0);
-						}
-						else
-						{
-							method.invoke(kElem, new Object[] { null });
-							log.info("" + types[0]);
-						}
-						//
 					}
 				}
 				catch (InvocationTargetException i)

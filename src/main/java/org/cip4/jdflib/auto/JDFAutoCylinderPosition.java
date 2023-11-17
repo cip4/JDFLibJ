@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
  *****************************************************************************
  * class JDFAutoCylinderPosition : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCylinderPosition extends JDFElement
@@ -155,7 +155,7 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPlateType(String name)
+		protected EnumPlateType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -218,7 +218,7 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPlateUsage(String name)
+		protected EnumPlateUsage(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -271,14 +271,14 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 		public static final EnumPlateUsage Reuse = new EnumPlateUsage("Reuse");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PlatePosition
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PlatePosition
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PlatePosition
 	 *
@@ -286,7 +286,7 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 	 */
 	public void setPlatePosition(JDFXYPairRangeList value)
 	{
-		setAttribute(AttributeName.PLATEPOSITION, value.toString(), null);
+		setAttribute(AttributeName.PLATEPOSITION, value == null ? null : value.toString(), null);
 	}
 
 	/**
@@ -301,9 +301,9 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PlateType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PlateType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PlateType
 	 *
@@ -324,9 +324,9 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 		return EnumPlateType.getEnum(getAttribute(AttributeName.PLATETYPE, null, "Exposed"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PlateUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PlateUsage ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PlateUsage
 	 *
@@ -347,9 +347,10 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 		return EnumPlateUsage.getEnum(getAttribute(AttributeName.PLATEUSAGE, null, "Original"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceModuleIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceModuleIndex
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DeviceModuleIndex
 	 *

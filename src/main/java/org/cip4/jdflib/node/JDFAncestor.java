@@ -137,26 +137,6 @@ public class JDFAncestor extends JDFAutoAncestor
 	}
 
 	/**
-	 * @see org.cip4.jdflib.core.JDFElement#setVersion(org.cip4.jdflib.core.JDFElement.EnumVersion)
-	 */
-	@Override
-	public void setVersion(final EnumVersion enumVar)
-	{
-		setAttribute(AttributeName.VERSION, enumVar.getName(), null);
-	}
-
-	/**
-	 * overrides the deprecated method JDFElement.getVersion()
-	 * 
-	 * @return
-	 */
-	@Override
-	public EnumVersion getVersion()
-	{
-		return EnumVersion.getEnum(getAttribute(AttributeName.VERSION, null, null));
-	}
-
-	/**
 	 * @param value
 	 */
 	public void setCategory(final String value)

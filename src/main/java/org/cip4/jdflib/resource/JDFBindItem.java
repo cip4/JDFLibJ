@@ -15,6 +15,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.intent.JDFBindingIntent;
 import org.cip4.jdflib.span.JDFSpanBindingType;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Node;
 
 public class JDFBindItem extends JDFAutoBindItem
 {
@@ -77,13 +78,13 @@ public class JDFBindItem extends JDFAutoBindItem
 	 */
 	public JDFBindingIntent getParentBindingIntent()
 	{
-		return (JDFBindingIntent) getParentNode();
+		Node parentNode = getParentNode();
+		return (parentNode instanceof JDFBindingIntent) ? (JDFBindingIntent) parentNode : null;
 	}
 
 	/**
 	 * Get the value of the BindingType element of <code>this</code>.<br>
-	 * If not specified, defaults to the value of the BindingType which is specified in its parent element (node
-	 * BindingIntent).
+	 * If not specified, defaults to the value of the BindingType which is specified in its parent element (node BindingIntent).
 	 * 
 	 * @return JDFSpanBindingType: BindingType value
 	 */

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
  *****************************************************************************
  * class JDFAutoColorSpaceConversionParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
@@ -117,7 +117,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333333);
 		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORSPACECONVERSIONOP, 0x33333333);
 	}
 
@@ -129,7 +129,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoColorSpaceConversionParams
-	 *
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -140,7 +140,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoColorSpaceConversionParams
-	 *
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -152,7 +152,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoColorSpaceConversionParams
-	 *
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -169,7 +169,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -193,7 +193,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumICCProfileUsage(String name)
+		protected EnumICCProfileUsage(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -246,17 +246,17 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 		public static final EnumICCProfileUsage UseSupplied = new EnumICCProfileUsage("UseSupplied");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ICCProfileUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ICCProfileUsage
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ICCProfileUsage
-	 *
+	 * 
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setICCProfileUsage(EnumICCProfileUsage enumVar)
@@ -266,7 +266,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * (9) get attribute ICCProfileUsage
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public EnumICCProfileUsage getICCProfileUsage()
@@ -274,12 +274,13 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 		return EnumICCProfileUsage.getEnum(getAttribute(AttributeName.ICCPROFILEUSAGE, null, "UsePDL"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorManagementSystem
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorManagementSystem
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ColorManagementSystem
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setColorManagementSystem(String value)
@@ -289,7 +290,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * (23) get String attribute ColorManagementSystem
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public String getColorManagementSystem()
@@ -297,12 +298,13 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 		return getAttribute(AttributeName.COLORMANAGEMENTSYSTEM, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ConvertDevIndepColors
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ConvertDevIndepColors
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ConvertDevIndepColors
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setConvertDevIndepColors(boolean value)
@@ -312,7 +314,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute ConvertDevIndepColors
-	 *
+	 * 
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getConvertDevIndepColors()
@@ -320,44 +322,55 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 		return getBoolAttribute(AttributeName.CONVERTDEVINDEPCOLORS, null, false);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
-	 * (24) const get element FileSpec
-	 *
+	 * (26) getCreateFileSpec
+	 * 
+	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getFileSpec()
+	public JDFFileSpec getCreateFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**
-	 * (25) getCreateFileSpec
-	 *
-	 * @return JDFFileSpec the element
+	 * (27) const get element FileSpec
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element default is getFileSpec(0)
 	 */
-	public JDFFileSpec getCreateFileSpec()
+	public JDFFileSpec getFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**
-	 * (29) append element FileSpec
-	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * Get all FileSpec from the current element
+	 * 
+	 * @return Collection<JDFFileSpec>, null if none are available
+	 */
+	public Collection<JDFFileSpec> getAllFileSpec()
+	{
+		return getChildArrayByClass(JDFFileSpec.class, false, 0);
+	}
+
+	/**
+	 * (30) append element FileSpec
+	 * 
+	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
-		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+		return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 *
+	 * 
 	 * @param refTarget the element that is referenced
 	 */
 	public void refFileSpec(JDFFileSpec refTarget)
@@ -367,7 +380,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * (26) getCreateColorSpaceConversionOp
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorSpaceConversionOp the element
 	 */
@@ -378,7 +391,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * (27) const get element ColorSpaceConversionOp
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorSpaceConversionOp the element default is getColorSpaceConversionOp(0)
 	 */
@@ -389,7 +402,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * Get all ColorSpaceConversionOp from the current element
-	 *
+	 * 
 	 * @return Collection<JDFColorSpaceConversionOp>, null if none are available
 	 */
 	public Collection<JDFColorSpaceConversionOp> getAllColorSpaceConversionOp()
@@ -399,7 +412,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * (30) append element ColorSpaceConversionOp
-	 *
+	 * 
 	 * @return JDFColorSpaceConversionOp the element
 	 */
 	public JDFColorSpaceConversionOp appendColorSpaceConversionOp()

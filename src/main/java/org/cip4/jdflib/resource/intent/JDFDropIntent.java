@@ -61,6 +61,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Node;
 
 public class JDFDropIntent extends JDFAutoDropIntent
 {
@@ -118,11 +119,13 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 */
 	public JDFDeliveryIntent getParentDeliveryIntent()
 	{
-		return (JDFDeliveryIntent) getParentNode();
+		Node parentNode = getParentNode();
+		return (parentNode instanceof JDFDeliveryIntent) ? (JDFDeliveryIntent) parentNode : null;
 	}
 
 	/**
-	 * Get of 'this' the value of attribute AdditionalAmount. If not specified, get the default value of attribute AdditionalAmount, that is specified in it's parent element (node DeliveryIntent)
+	 * Get of 'this' the value of attribute AdditionalAmount. If not specified, get the default value of attribute AdditionalAmount, that is specified in it's parent element (node
+	 * DeliveryIntent)
 	 *
 	 * @return WString: attribute value
 	 */
@@ -137,7 +140,8 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	}
 
 	/**
-	 * Get of 'this' the value of attribute BuyerAccount. If not specified, get the default value of attribute BuyerAccount, that is specified in it's parent element (node DeliveryIntent)
+	 * Get of 'this' the value of attribute BuyerAccount. If not specified, get the default value of attribute BuyerAccount, that is specified in it's parent element (node
+	 * DeliveryIntent)
 	 *
 	 * @return WString: attribute value
 	 */
@@ -167,7 +171,8 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	}
 
 	/**
-	 * Get of 'this' the value of element ReturnMethod. If not specified, get the default value of element ReturnMethod, that is specified in it's parent element (node DeliveryIntent)
+	 * Get of 'this' the value of element ReturnMethod. If not specified, get the default value of element ReturnMethod, that is specified in it's parent element (node
+	 * DeliveryIntent)
 	 *
 	 * @return JDFNameSpan: element value
 	 */
@@ -182,7 +187,8 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	}
 
 	/**
-	 * Get of 'this' the value of element ServiceLevel. If not specified, get the default value of element ServiceLevel, that is specified in it's parent element (node DeliveryIntent)
+	 * Get of 'this' the value of element ServiceLevel. If not specified, get the default value of element ServiceLevel, that is specified in it's parent element (node
+	 * DeliveryIntent)
 	 *
 	 * @return JDFStringSpan: element value
 	 */
@@ -197,7 +203,8 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	}
 
 	/**
-	 * Get of 'this' the value of element SurplusHandling. If not specified, get the default value of element SurplusHandling, that is specified in it's parent element (node DeliveryIntent)
+	 * Get of 'this' the value of element SurplusHandling. If not specified, get the default value of element SurplusHandling, that is specified in it's parent element (node
+	 * DeliveryIntent)
 	 *
 	 * @return JDFSpanSurplusHandling: element value
 	 */
@@ -292,20 +299,23 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 */
 	public void setFromDrop(final JDFDrop drop)
 	{
-		final List<JDFDropItem> vdi = drop.getChildArrayByClass(JDFDropItem.class, false, 0);
-		for (final JDFDropItem dropItem : vdi)
+		if (drop != null)
 		{
-			final JDFDropItemIntent dropItemIntent = appendDropItemIntent();
-			dropItemIntent.setFromDropItem(dropItem);
-		}
+			final List<JDFDropItem> vdi = drop.getChildArrayByClass(JDFDropItem.class, false, 0);
+			for (final JDFDropItem dropItem : vdi)
+			{
+				final JDFDropItemIntent dropItemIntent = appendDropItemIntent();
+				dropItemIntent.setFromDropItem(dropItem);
+			}
 
-		JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.METHOD);
-		JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.EARLIEST);
-		JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.REQUIRED);
-		copyAttribute(AttributeName.DROPID, drop);
-		copyChildren(ElementName.CONTACT, drop);
-		copyChildren(ElementName.FILESPEC, drop);
-		// TODO more
+			JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.METHOD);
+			JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.EARLIEST);
+			JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.REQUIRED);
+			copyAttribute(AttributeName.DROPID, drop);
+			copyChildren(ElementName.CONTACT, drop);
+			copyChildren(ElementName.FILESPEC, drop);
+			// TODO more
+		}
 	}
 
 }

@@ -91,10 +91,11 @@ import org.cip4.jdflib.span.JDFSpanDeliveryCharge;
 import org.cip4.jdflib.span.JDFSpanTransfer;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Node;
 
 /**
  * 
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFArtDelivery extends JDFAutoArtDelivery
 {
@@ -102,9 +103,10 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 
 	/**
 	 * Constructor for JDFArtDelivery
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
-	 * @throws DOMException 
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
 	 * 
 	 */
 	public JDFArtDelivery(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
@@ -114,9 +116,10 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 
 	/**
 	 * Constructor for JDFArtDelivery
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
 	 * 
 	 * @throws DOMException
 	 */
@@ -127,11 +130,12 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 
 	/**
 	 * Constructor for JDFArtDelivery
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * @throws DOMException 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
 	 * 
 	 */
 	public JDFArtDelivery(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
@@ -159,13 +163,13 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 	 */
 	public JDFArtDeliveryIntent getParentArtDeliveryIntent()
 	{
-		return (JDFArtDeliveryIntent) getParentNode();
+		Node parentNode = getParentNode();
+		return (parentNode instanceof JDFArtDeliveryIntent) ? (JDFArtDeliveryIntent) parentNode : null;
 	}
 
 	/**
-	 * Get of 'this' the value of element ArtHandling. If not specified, get the
-	 * default value of element ArtHandling, that is specified in it's parent
-	 * element (node ArtDeliveryIntent)
+	 * Get of 'this' the value of element ArtHandling. If not specified, get the default value of element ArtHandling, that is specified in it's parent element (node
+	 * ArtDeliveryIntent)
 	 * 
 	 * @return JDFSpanArtHandling: element value
 	 */
@@ -176,13 +180,13 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 		{
 			return super.getArtHandling();
 		}
-		return getParentArtDeliveryIntent().getArtHandling();
+		JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
+		return parentArtDeliveryIntent == null ? null : parentArtDeliveryIntent.getArtHandling();
 	}
 
 	/**
-	 * Get of 'this' the value of element DeliveryCharge. If not specified, get
-	 * the default value of element DeliveryCharge, that is specified in it's
-	 * parent element (node ArtDeliveryIntent)
+	 * Get of 'this' the value of element DeliveryCharge. If not specified, get the default value of element DeliveryCharge, that is specified in it's parent element (node
+	 * ArtDeliveryIntent)
 	 * 
 	 * @return JDFSpanDeliveryCharge: element value
 	 */
@@ -193,13 +197,12 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 		{
 			return super.getDeliveryCharge();
 		}
-		return getParentArtDeliveryIntent().getDeliveryCharge();
+		JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
+		return parentArtDeliveryIntent == null ? null : parentArtDeliveryIntent.getDeliveryCharge();
 	}
 
 	/**
-	 * Get of 'this' the value of element Method. If not specified, get the
-	 * default value of element Method, that is specified in it's parent element
-	 * (node ArtDeliveryIntent)
+	 * Get of 'this' the value of element Method. If not specified, get the default value of element Method, that is specified in it's parent element (node ArtDeliveryIntent)
 	 * 
 	 * @return JDFNameSpan: element value
 	 */
@@ -210,13 +213,13 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 		{
 			return super.getMethod();
 		}
-		return getParentArtDeliveryIntent().getMethod();
+		JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
+		return parentArtDeliveryIntent == null ? null : parentArtDeliveryIntent.getMethod();
 	}
 
 	/**
-	 * Get of 'this' the value of attribute PreflightStatus. If not specified,
-	 * get the default value of attribute PreflightStatus, that is specified in
-	 * it's parent element (node ArtDeliveryIntent)
+	 * Get of 'this' the value of attribute PreflightStatus. If not specified, get the default value of attribute PreflightStatus, that is specified in it's parent element (node
+	 * ArtDeliveryIntent)
 	 * 
 	 * @return EnumPreflightStatus: attribute value
 	 */
@@ -230,9 +233,8 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 	// return getParentArtDeliveryIntent().getPreflightStatus();
 	// }
 	/**
-	 * Get of 'this' the value of element ReturnMethod. If not specified, get
-	 * the default value of element ReturnMethod, that is specified in it's
-	 * parent element (node ArtDeliveryIntent)
+	 * Get of 'this' the value of element ReturnMethod. If not specified, get the default value of element ReturnMethod, that is specified in it's parent element (node
+	 * ArtDeliveryIntent)
 	 * 
 	 * @return JDFNameSpan: element value
 	 */
@@ -243,13 +245,13 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 		{
 			return super.getReturnMethod();
 		}
-		return getParentArtDeliveryIntent().getReturnMethod();
+		JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
+		return parentArtDeliveryIntent == null ? null : parentArtDeliveryIntent.getReturnMethod();
 	}
 
 	/**
-	 * Get of 'this' the value of element ServiceLevel. If not specified, get
-	 * the default value of element ServiceLevel, that is specified in it's
-	 * parent element (node ArtDeliveryIntent)
+	 * Get of 'this' the value of element ServiceLevel. If not specified, get the default value of element ServiceLevel, that is specified in it's parent element (node
+	 * ArtDeliveryIntent)
 	 * 
 	 * @return JDFStringSpan: element value
 	 */
@@ -260,13 +262,12 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 		{
 			return super.getServiceLevel();
 		}
-		return getParentArtDeliveryIntent().getServiceLevel();
+		JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
+		return parentArtDeliveryIntent == null ? null : parentArtDeliveryIntent.getServiceLevel();
 	}
 
 	/**
-	 * Get of 'this' the value of element Transfer. If not specified, get the
-	 * default value of element Transfer, that is specified in it's parent
-	 * element (node ArtDeliveryIntent)
+	 * Get of 'this' the value of element Transfer. If not specified, get the default value of element Transfer, that is specified in it's parent element (node ArtDeliveryIntent)
 	 * 
 	 * @return JDFSpanTransfer: element value
 	 */
@@ -277,12 +278,12 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 		{
 			return super.getTransfer();
 		}
-		return getParentArtDeliveryIntent().getTransfer();
+		JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
+		return parentArtDeliveryIntent == null ? null : parentArtDeliveryIntent.getTransfer();
 	}
 
 	/**
-	 * Get of 'this' the iSkip-th child element Contact. If not specified, get
-	 * the child element Contact of it's parent element (node ArtDeliveryIntent)
+	 * Get of 'this' the iSkip-th child element Contact. If not specified, get the child element Contact of it's parent element (node ArtDeliveryIntent)
 	 * 
 	 * @return JDFContact: the found element
 	 */
@@ -293,7 +294,8 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 		{
 			return super.getContact(iSkip);
 		}
-		return getParentArtDeliveryIntent().getContact();
+		JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
+		return parentArtDeliveryIntent == null ? null : parentArtDeliveryIntent.getContact();
 	}
 
 	/**

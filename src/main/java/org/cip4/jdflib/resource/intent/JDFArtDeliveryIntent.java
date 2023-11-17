@@ -78,7 +78,7 @@
  */
 package org.cip4.jdflib.resource.intent;
 
-import java.util.Vector;
+import java.util.List;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoArtDeliveryIntent;
@@ -140,7 +140,7 @@ public class JDFArtDeliveryIntent extends JDFAutoArtDeliveryIntent
 			return false;
 
 		boolean done = false;
-		Vector<JDFDrop> v = delParams.getChildrenByClass(JDFDrop.class, false, 0);
+		List<JDFDrop> v = delParams.getChildArrayByClass(JDFDrop.class, false, 0);
 		for (JDFDrop d : v)
 		{
 			if (d.isArtDeliveryIntent())
@@ -158,11 +158,14 @@ public class JDFArtDeliveryIntent extends JDFAutoArtDeliveryIntent
 	 */
 	public void setFromDrop(JDFDrop drop)
 	{
-		Vector<JDFDropItem> vdi = drop.getChildrenByClass(JDFDropItem.class, false, 0);
-		for (JDFDropItem dropItem : vdi)
+		if (drop != null)
 		{
-			JDFArtDelivery artDel = appendArtDelivery();
-			artDel.setFromDropItem(dropItem);
+			List<JDFDropItem> vdi = drop.getChildArrayByClass(JDFDropItem.class, false, 0);
+			for (JDFDropItem dropItem : vdi)
+			{
+				JDFArtDelivery artDel = appendArtDelivery();
+				artDel.setFromDropItem(dropItem);
+			}
 		}
 	}
 

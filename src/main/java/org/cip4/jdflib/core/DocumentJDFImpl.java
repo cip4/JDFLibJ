@@ -202,8 +202,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 
 			if (namespaceURI != null)
 				bInJDFJMF = namespaceURI.startsWith(jdfNSURIPrefix);
-			bInJDFJMF = bInJDFJMF || ElementName.JDF.equals(localPart) || XJDFConstants.XJDF.equals(localPart) || XJDFConstants.XJMF.equals(localPart) || ElementName.JMF.equals(localPart)
-					|| PRINTTALK.equals(localPart);
+			bInJDFJMF = bInJDFJMF || ElementName.JDF.equals(localPart) || XJDFConstants.XJDF.equals(localPart) || XJDFConstants.XJMF.equals(localPart)
+					|| ElementName.JMF.equals(localPart) || PRINTTALK.equals(localPart);
 		}
 
 		synchronized (data.sm_hashCtorElementNS)
@@ -228,7 +228,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 					classOfConstructor = getFactoryClass(namespaceURI, qualifiedName, localPart, path);
 					if (classOfConstructor != null)
 					{
-						final Class<?>[] constructorParameters = { org.apache.xerces.dom.CoreDocumentImpl.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, };
+						final Class<?>[] constructorParameters = { org.apache.xerces.dom.CoreDocumentImpl.class, java.lang.String.class, java.lang.String.class,
+								java.lang.String.class, };
 
 						constructi = classOfConstructor.getDeclaredConstructor(constructorParameters);
 						putConstructorToHashMap(qualifiedName, constructi, path);
@@ -317,8 +318,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	}
 
 	/**
-	 * Searches for the matching factory class in sm_PackageNames If a match could not be found then JDFResource.class is returned if the element is in a resource pool else if the element is in the
-	 * default name space JDFElement.class is returned else KElement.class is returned
+	 * Searches for the matching factory class in sm_PackageNames If a match could not be found then JDFResource.class is returned if the element is in a resource pool else if the
+	 * element is in the default name space JDFElement.class is returned else KElement.class is returned
 	 *
 	 * will return JDFElement.class or JDFResource.class only.
 	 *
@@ -413,7 +414,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		else
 		{
 			strClassPath = data.sm_PackageNames.get(qualifiedName);
-			if (strClassPath == null && (null == strNameSpaceURI || (strNameSpaceURI != null && strNameSpaceURI.startsWith(jdfNSURIPrefix)) || JDFConstants.EMPTYSTRING.equals(strNameSpaceURI)))
+			if (strClassPath == null
+					&& (null == strNameSpaceURI || (strNameSpaceURI != null && strNameSpaceURI.startsWith(jdfNSURIPrefix)) || JDFConstants.EMPTYSTRING.equals(strNameSpaceURI)))
 			{ // the maps only contain local names for jdf - recheck in case of prefix
 				strClassPath = data.sm_PackageNames.get(localPart);
 			}
@@ -535,7 +537,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	protected String getHoleTypeClass(final String strParentNodeClass)
 	{
 		final String strClassPath;
-		if ("org.cip4.jdflib.resource.process.postpress.JDFRingBinding".equals(strParentNodeClass))
+		String simple = StringUtil.token(strParentNodeClass, -1, ".");
+		if ("JDFRingBinding".equals(simple) || "JDFCoilBinding".equals(simple))
 		{
 			strClassPath = "org.cip4.jdflib.span.JDFSpanHoleType";
 		}

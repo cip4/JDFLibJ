@@ -640,9 +640,12 @@ public class JDFMessage extends JDFAutoMessage
 			final String message = f == null ? "JDFMessage.setQuery: illegal family type " : "JDFMessage.setQuery: illegal family type " + f.getName();
 			throw new JDFException(message);
 		}
-		setVersion(q.getVersion(true));
-		setrefID(q.getID());
-		setType(q.getType());
+		if (q != null)
+		{
+			setVersion(q.getVersion(true));
+			setrefID(q.getID());
+			setType(q.getType());
+		}
 	}
 
 	/**
@@ -796,7 +799,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{ // validation for cardinality '?' or '-', when no more than 1
-					// element are allowed
+				// element are allowed
 				validList.add(EnumType.FlushQueue);
 			}
 
@@ -805,7 +808,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{ // validation for cardinality '?' or '-', when no more than 1
-					// element are allowed
+				// element are allowed
 				validList.add(EnumType.FlushQueue);
 			}
 

@@ -362,6 +362,8 @@ public final class AttributeName
 	public static final String BITSPERSAMPLE = "BitsPerSample";
 	/** */
 	public static final String BLACKCOLORLIMIT = "BlackColorLimit";
+	public static final String BLACKPOINTCOMPENSATION = "BlackPointCompensation";
+	public static final String BLACKPOINTCOMPENSATIONDETAILS = "BlackPointCompensationDetails";
 	/** */
 	public static final String BLACKDENSITYLIMIT = "BlackDensityLimit";
 	/** */

@@ -77,7 +77,7 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import java.util.Vector;
+import java.util.List;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDrop;
@@ -91,7 +91,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * 
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFDrop extends JDFAutoDrop
 {
@@ -164,20 +164,24 @@ public class JDFDrop extends JDFAutoDrop
 
 	/**
 	 * copy all data from dropintent to this
+	 * 
 	 * @param di
 	 */
 	public void setFromDropIntent(JDFDropIntent di)
 	{
-		Vector<JDFDropItemIntent> vdii = di.getChildrenByClass(JDFDropItemIntent.class, false, 0);
-		for (JDFDropItemIntent dii : vdii)
+		if (di != null)
 		{
-			JDFDropItem dropItem = appendDropItem();
-			dropItem.setFromDropItemIntent(dii);
+			List<JDFDropItemIntent> vdii = di.getChildArrayByClass(JDFDropItemIntent.class, false, 0);
+			for (JDFDropItemIntent dii : vdii)
+			{
+				JDFDropItem dropItem = appendDropItem();
+				dropItem.setFromDropItemIntent(dii);
+			}
+			JDFIntentResource.copyActualToProcess(di, this, AttributeName.METHOD, null);
+			JDFIntentResource.copyActualToProcess(di, this, AttributeName.EARLIEST, null);
+			JDFIntentResource.copyActualToProcess(di, this, AttributeName.REQUIRED, null);
 		}
-		JDFIntentResource.copyActualToProcess(di, this, AttributeName.METHOD, null);
-		JDFIntentResource.copyActualToProcess(di, this, AttributeName.EARLIEST, null);
-		JDFIntentResource.copyActualToProcess(di, this, AttributeName.REQUIRED, null);
-		//TODO more
+		// TODO more
 	}
 
 	/**

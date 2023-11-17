@@ -168,12 +168,11 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 	/**
 	 * set attribute <code>ValueList</code>
 	 * 
-	 * @param value
-	 *            the value to set the attribute to
+	 * @param value the value to set the attribute to
 	 */
 	public void setValueList(JDFDateTimeRangeList value)
 	{
-		setAttribute(AttributeName.VALUELIST, value.toString());
+		setAttribute(AttributeName.VALUELIST, value == null ? null : value.toString());
 	}
 
 	/**
@@ -198,12 +197,11 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 	/**
 	 * set attribute <code>ValueDurationList</code>
 	 * 
-	 * @param value
-	 *            the value to set the attribute to
+	 * @param value the value to set the attribute to
 	 */
 	public void setValueDurationList(JDFDurationRangeList value)
 	{
-		setAttribute(AttributeName.VALUEDURATIONLIST, value.toString());
+		setAttribute(AttributeName.VALUEDURATIONLIST, value == null ? null : value.toString());
 	}
 
 	/**
@@ -229,13 +227,10 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 	 */
 
 	/**
-	 * fitsValue - tests, if the defined value matches ValueList, specified for
-	 * this Evaluation
+	 * fitsValue - tests, if the defined value matches ValueList, specified for this Evaluation
 	 * 
-	 * @param value
-	 *            value to test
-	 * @return boolean - true, if the value matches ValueList or if ValueList is
-	 *         not specified
+	 * @param value value to test
+	 * @return boolean - true, if the value matches ValueList or if ValueList is not specified
 	 */
 	@Override
 	public final boolean fitsValue(String value)
@@ -256,11 +251,9 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 	}
 
 	/**
-	 * fitsListType - tests, if the defined <code>value</code> matches the value
-	 * of the ListType attribute, specified for this Evaluation
+	 * fitsListType - tests, if the defined <code>value</code> matches the value of the ListType attribute, specified for this Evaluation
 	 * 
-	 * @param value
-	 *            value to test
+	 * @param value value to test
 	 * @return boolean - true, if <code>value</code> matches specified ListType
 	 */
 	private final boolean fitsListType(String value)
@@ -340,14 +333,11 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 	}
 
 	/**
-	 * fitsValueList - tests, if the defined <code>rangelist</code> matches the
-	 * ValueList specified for this Evaluation
+	 * fitsValueList - tests, if the defined <code>rangelist</code> matches the ValueList specified for this Evaluation
 	 * 
-	 * @param rangelist
-	 *            range list to test
+	 * @param rangelist range list to test
 	 * 
-	 * @return boolean - true, if <code>rangelist</code> matches the valuelist
-	 *         or if ValueList is not specified
+	 * @return boolean - true, if <code>rangelist</code> matches the valuelist or if ValueList is not specified
 	 */
 	private final boolean fitsValueList(JDFDateTimeRangeList rangelist)
 	{
@@ -357,14 +347,10 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 	}
 
 	/**
-	 * fitsValueDurationList - tests, if the duration of the defined 'rangelist'
-	 * value matches ValueDurationList, specified for this State
+	 * fitsValueDurationList - tests, if the duration of the defined 'rangelist' value matches ValueDurationList, specified for this State
 	 * 
-	 * @param rangelist
-	 *            range list to test
-	 * @return boolean - true, if the duration of the defined
-	 *         <code>rangelist</code> is in the ValueList or if
-	 *         ValueDurationList is not specified
+	 * @param rangelist range list to test
+	 * @return boolean - true, if the duration of the defined <code>rangelist</code> is in the ValueList or if ValueDurationList is not specified
 	 */
 	private final boolean fitsValueDurationList(JDFDateTimeRangeList rangelist)
 	{

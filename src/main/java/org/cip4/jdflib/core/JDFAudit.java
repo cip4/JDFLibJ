@@ -375,7 +375,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	@Deprecated
 	public void setSeverity(final EnumSeverity s)
 	{
-		setAttribute(JDFConstants.SEVERITY, s.getName(), null);
+		setAttribute(JDFConstants.SEVERITY, s == null ? null : s.getName(), null);
 	}
 
 	/**
@@ -410,7 +410,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	@Deprecated
 	public void setEndStatus(final JDFElement.EnumNodeStatus s)
 	{
-		setAttribute(AttributeName.ENDSTATUS, s.getName(), null);
+		setAttribute(AttributeName.ENDSTATUS, s == null ? null : s.getName(), null);
 	}
 
 	/**

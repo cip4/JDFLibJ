@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -166,6 +166,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.BINDINGTYPE, JDFLIB + "span.JDFSpanBindingType");
 		sm_PackageNames.put(ElementName.BINDITEM, JDFLIB + "resource.JDFBindItem");
 		sm_PackageNames.put(ElementName.BINDLIST, JDFLIB + "resource.JDFBindList");
+		sm_PackageNames.put(ElementName.BLEED, NUMBER_SPAN);
 		sm_PackageNames.put(ElementName.BLOCKPREPARATIONPARAMS, JDFLIB + "resource.JDFBlockPreparationParams");
 		sm_PackageNames.put(ElementName.BLOCKTHREADSEWING, OPTION_SPAN);
 		sm_PackageNames.put(ElementName.BOOKCASE, JDFLIB + "resource.intent.JDFBookCase");
@@ -257,7 +258,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.CONVERTINGCONFIG, JDFLIB + "resource.process.JDFConvertingConfig");
 		sm_PackageNames.put(ElementName.COSTCENTER, JDFLIB + "resource.process.JDFCostCenter");
 		sm_PackageNames.put(ElementName.COUNTERRESET, JDFLIB + "resource.JDFCounterReset");
-		sm_PackageNames.put(ElementName.COVER, JDFLIB + "resource.process.JDFCover");
+		sm_PackageNames.put(ElementName.COVER, OPTION_SPAN);
 		sm_PackageNames.put(ElementName.COVERAGE, NUMBER_SPAN);
 		sm_PackageNames.put(ElementName.COVERAPPLICATIONPARAMS, JDFLIB + "resource.JDFCoverApplicationParams");
 		sm_PackageNames.put(ElementName.COVERCOLOR, SPAN_NAMED_COLOR);
@@ -273,6 +274,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.CUSTOMERMESSAGE, JDFLIB + "core.JDFCustomerMessage");
 		sm_PackageNames.put(ElementName.CUT, JDFLIB + "resource.process.postpress.JDFCut");
 		sm_PackageNames.put(ElementName.CUTBLOCK, JDFLIB + "resource.process.JDFCutBlock");
+		sm_PackageNames.put(ElementName.CUTLINES, SEPARATION_LIST);
 		sm_PackageNames.put(ElementName.CUTMARK, JDFLIB + "resource.process.postpress.JDFCutMark");
 		sm_PackageNames.put(ElementName.CUTTINGPARAMS, JDFLIB + "resource.JDFCuttingParams");
 		sm_PackageNames.put(ElementName.CUTTYPE, JDFLIB + "span.JDFSpanCutType");
@@ -636,7 +638,6 @@ class DocumentData
 		sm_PackageNames.put(ElementName.PLASTICCOMBBINDINGPARAMS, JDFLIB + "resource.process.postpress.JDFPlasticCombBindingParams");
 		sm_PackageNames.put(ElementName.PLASTICCOMBTYPE, NAME_SPAN);
 		sm_PackageNames.put(ElementName.PLATECOPYPARAMS, JDFLIB + "resource.process.JDFPlateCopyParams");
-		sm_PackageNames.put(ElementName.POSITION, JDFLIB + "resource.process.JDFPosition");
 		sm_PackageNames.put(ElementName.POSITIONOBJ, JDFLIB + "resource.process.JDFPositionObj");
 		sm_PackageNames.put(ElementName.PREFLIGHTACTION, JDFLIB + "resource.process.JDFPreflightAction");
 		sm_PackageNames.put(ElementName.PREFLIGHTANALYSIS, JDFLIB + "resource.JDFPreflightAnalysis");
@@ -754,12 +755,12 @@ class DocumentData
 		sm_PackageNames.put(ElementName.SEARCHPATH, JDF_COMMENT);
 		sm_PackageNames.put(ElementName.SEPARATIONCONTROLPARAMS, JDFLIB + "resource.process.JDFSeparationControlParams");
 		sm_PackageNames.put(ElementName.SEPARATIONLIST, SEPARATION_LIST);
+		sm_PackageNames.put(ElementName.SEPARATIONLISTBACK, SEPARATION_LIST);
+		sm_PackageNames.put(ElementName.SEPARATIONLISTFRONT, SEPARATION_LIST);
 		sm_PackageNames.put(ElementName.SEPARATIONSPEC, JDFLIB + "resource.process.JDFSeparationSpec");
 		sm_PackageNames.put(ElementName.SEPARATIONTINT, JDFLIB + "resource.JDFSeparationTint");
 		sm_PackageNames.put(ElementName.SERVICELEVEL, STRING_SPAN);
 		sm_PackageNames.put(ElementName.SET, JDFLIB + "resource.devicecapability.JDFset");
-		// "Shape" is context sensitive, see handleOtherElements() and
-		// putConstructorToHashMap()
 		sm_PackageNames.put(ElementName.SHAPECUT, JDFLIB + "resource.intent.JDFShapeCut");
 		sm_PackageNames.put(ElementName.SHAPECUTTINGINTENT, JDFLIB + "resource.intent.JDFShapeCuttingIntent");
 		sm_PackageNames.put(ElementName.SHAPECUTTINGPARAMS, JDFLIB + "resource.JDFShapeCuttingParams");

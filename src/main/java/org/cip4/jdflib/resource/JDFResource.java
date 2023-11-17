@@ -5405,7 +5405,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setBundleItemIndex(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.BUNDLEITEMINDEX, value.toString());
+		setAttribute(AttributeName.BUNDLEITEMINDEX, value == null ? null : value.toString());
 	}
 
 	/**
@@ -5474,7 +5474,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setCellIndex(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.CELLINDEX, value.toString());
+		setAttribute(AttributeName.CELLINDEX, value == null ? null : value.toString());
 	}
 
 	/**
@@ -5525,7 +5525,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setDocCopies(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.DOCCOPIES, value.toString());
+		setAttribute(AttributeName.DOCCOPIES, value == null ? null : value.toString());
 	}
 
 	/**
@@ -5556,7 +5556,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setDocIndex(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.DOCINDEX, value.toString());
+		setAttribute(AttributeName.DOCINDEX, value == null ? null : value.toString());
 	}
 
 	/**
@@ -5619,7 +5619,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setDocRunIndex(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.DOCRUNINDEX, value.toString());
+		setAttribute(AttributeName.DOCRUNINDEX, value == null ? null : value.toString());
 	}
 
 	/**
@@ -5650,7 +5650,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setDocSheetIndex(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.DOCSHEETINDEX, value.toString());
+		setAttribute(AttributeName.DOCSHEETINDEX, value == null ? null : value.toString());
 	}
 
 	/**
@@ -5721,7 +5721,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setLayerIDs(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.LAYERIDS, value.toString());
+		setAttribute(AttributeName.LAYERIDS, value == null ? null : value.toString());
 	}
 
 	/**
@@ -5836,7 +5836,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setPageNumber(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.PAGENUMBER, value.toString());
+		setAttribute(AttributeName.PAGENUMBER, value == null ? null : value.toString());
 	}
 
 	/**
@@ -6009,7 +6009,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setLotControl(final EnumLotControl value)
 	{
-		setAttribute(AttributeName.LOTCONTROL, value.getName(), null);
+		setAttribute(AttributeName.LOTCONTROL, value == null ? null : value.getName(), null);
 	}
 
 	/**
@@ -6141,11 +6141,14 @@ public class JDFResource extends JDFElement
 	{
 		final VString vPartIDKeys = getPartIDKeys();
 		final Vector<EnumPartIDKey> v = (Vector<EnumPartIDKey>) getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPartIDKey.getEnum(0), false);
-		for (int i = 0; i < v.size(); i++)
+		if (v != null)
 		{
-			if (!vPartIDKeys.contains((v.elementAt(i)).getName()))
+			for (EnumPartIDKey p : v)
 			{
-				throw new JDFException("JDFResource.getPipePartIDKeys: key " + v.elementAt(i) + " is not subset of PartIDKey");
+				if (!vPartIDKeys.contains(p.getName()))
+				{
+					throw new JDFException("JDFResource.getPipePartIDKeys: key " + p + " is not subset of PartIDKey");
+				}
 			}
 		}
 		return v;
@@ -6162,9 +6165,12 @@ public class JDFResource extends JDFElement
 	{
 		final VString vPipePartIDKeys = new VString();
 		final Vector<EnumPartIDKey> v = getPipePartIDKeysEnum();
-		for (int i = 0; i < v.size(); i++)
+		if (v != null)
 		{
-			vPipePartIDKeys.add((v.elementAt(i)).getName());
+			for (int i = 0; i < v.size(); i++)
+			{
+				vPipePartIDKeys.add((v.elementAt(i)).getName());
+			}
 		}
 
 		return vPipePartIDKeys;
@@ -6495,7 +6501,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setRunIndex(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.RUNINDEX, value.toString());
+		setAttribute(AttributeName.RUNINDEX, value == null ? null : value.toString());
 	}
 
 	/**
@@ -6570,7 +6576,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSectionIndex(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.SECTIONINDEX, value.toString());
+		setAttribute(AttributeName.SECTIONINDEX, value == null ? null : value.toString());
 	}
 
 	/**
@@ -6621,7 +6627,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSetDocIndex(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.SETDOCINDEX, value.toString());
+		setAttribute(AttributeName.SETDOCINDEX, value == null ? null : value.toString());
 	}
 
 	/**
@@ -6652,7 +6658,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSetIndex(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.SETINDEX, value.toString());
+		setAttribute(AttributeName.SETINDEX, value == null ? null : value.toString());
 	}
 
 	/**
@@ -6683,7 +6689,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSetRunIndex(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.SETRUNINDEX, value.toString());
+		setAttribute(AttributeName.SETRUNINDEX, value == null ? null : value.toString());
 	}
 
 	/**
@@ -6714,7 +6720,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSetSheetIndex(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.SETSHEETINDEX, value.toString());
+		setAttribute(AttributeName.SETSHEETINDEX, value == null ? null : value.toString());
 	}
 
 	/**
@@ -6876,7 +6882,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSorting(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.SORTING, value.toString(), null);
+		setAttribute(AttributeName.SORTING, value == null ? null : value.toString(), null);
 	}
 
 	/**
@@ -6988,7 +6994,7 @@ public class JDFResource extends JDFElement
 	@Deprecated
 	public void setStatus(final EnumResStatus value)
 	{
-		setAttribute(AttributeName.STATUS, value.getName(), null);
+		setAttribute(AttributeName.STATUS, value == null ? null : value.getName(), null);
 	}
 
 	/**
@@ -7114,7 +7120,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setTileID(final JDFXYPair value)
 	{
-		setAttribute(AttributeName.TILEID, value.toString());
+		setAttribute(AttributeName.TILEID, value == null ? null : value.toString());
 	}
 
 	/**

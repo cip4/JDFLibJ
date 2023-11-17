@@ -93,6 +93,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
+import org.cip4.jdflib.util.ContainerUtil;
 
 public class JDFBooleanState extends JDFAbstractState
 {
@@ -223,11 +224,7 @@ public class JDFBooleanState extends JDFAbstractState
 	public Vector getAllowedValueList()
 	{
 		final Vector<ValuedEnum> enumerationsAttribute = (Vector<ValuedEnum>) getEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, null, EnumBoolean.True, false);
-		if (!enumerationsAttribute.isEmpty())
-		{
-			return enumerationsAttribute;
-		}
-		return null;
+		return (Vector) ContainerUtil.getNonEmpty(enumerationsAttribute);
 	}
 
 	/**
@@ -273,7 +270,7 @@ public class JDFBooleanState extends JDFAbstractState
 	 * 
 	 * @param value value to test
 	 * @param testlists test lists, that the value has to match. In this State there is only one test list - ValueList.<br>
-	 * Choose one of two values: FitsValue_Allowed or FitsValue_Present. Defaults to Allowed.
+	 *        Choose one of two values: FitsValue_Allowed or FitsValue_Present. Defaults to Allowed.
 	 * 
 	 * @return boolean - true, if <code>value</code> matches testlists or if AllowedValueList is not specified
 	 */

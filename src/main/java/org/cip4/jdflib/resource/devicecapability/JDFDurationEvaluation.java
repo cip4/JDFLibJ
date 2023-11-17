@@ -164,12 +164,11 @@ public class JDFDurationEvaluation extends JDFEvaluation
 	/**
 	 * set attribute <code>ValueList</code>
 	 * 
-	 * @param value
-	 *            the value to set
+	 * @param value the value to set
 	 */
 	public void setValueList(JDFDurationRangeList value)
 	{
-		setAttribute(AttributeName.VALUELIST, value.toString());
+		setAttribute(AttributeName.VALUELIST, value == null ? null : value.toString());
 	}
 
 	/**
@@ -195,13 +194,10 @@ public class JDFDurationEvaluation extends JDFEvaluation
 	 */
 
 	/**
-	 * fitsValue - tests, if the defined value matches ValueList, specified for
-	 * this Evaluation
+	 * fitsValue - tests, if the defined value matches ValueList, specified for this Evaluation
 	 * 
-	 * @param value
-	 *            value to test
-	 * @return boolean - true, if the value matches ValueList or if ValueList is
-	 *         not specified
+	 * @param value value to test
+	 * @return boolean - true, if the value matches ValueList or if ValueList is not specified
 	 */
 	@Override
 	public final boolean fitsValue(String value)
@@ -222,11 +218,9 @@ public class JDFDurationEvaluation extends JDFEvaluation
 	}
 
 	/**
-	 * fitsListType - tests, if the defined 'value' matches value of ListType
-	 * attribute, specified for this Evaluation
+	 * fitsListType - tests, if the defined 'value' matches value of ListType attribute, specified for this Evaluation
 	 * 
-	 * @param value
-	 *            value to test
+	 * @param value value to test
 	 * @return boolean - true, if 'value' matches specified ListType
 	 */
 	private final boolean fitsListType(String value)
@@ -307,14 +301,11 @@ public class JDFDurationEvaluation extends JDFEvaluation
 	}
 
 	/**
-	 * fitsValueList - tests, if the defined 'rangelist' matches ValueList
-	 * specified for this Evaluation
+	 * fitsValueList - tests, if the defined 'rangelist' matches ValueList specified for this Evaluation
 	 * 
-	 * @param rangelist
-	 *            range list to test
+	 * @param rangelist range list to test
 	 * 
-	 * @return boolean - true, if 'rangelist' matches the valuelist or if
-	 *         ValueList is not specified
+	 * @return boolean - true, if 'rangelist' matches the valuelist or if ValueList is not specified
 	 */
 	private final boolean fitsValueList(JDFDurationRangeList rangelist)
 	{

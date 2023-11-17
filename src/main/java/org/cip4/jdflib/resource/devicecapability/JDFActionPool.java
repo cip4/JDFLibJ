@@ -82,6 +82,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoActionPool;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.ifaces.IDeviceCapable;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
@@ -147,18 +148,15 @@ public class JDFActionPool extends JDFAutoActionPool
 	 */
 	public IDeviceCapable getDeviceCap()
 	{
-		return (IDeviceCapable) getParentNode_KElement();
+		KElement dc = getParentNode_KElement();
+		return (dc instanceof IDeviceCapable) ? (IDeviceCapable) dc : null;
 	}
 
 	/**
-	 * append an action to this that references a Test with a term of type term
-	 * in the parallel TestPool
+	 * append an action to this that references a Test with a term of type term in the parallel TestPool
 	 * 
-	 * @param term
-	 *            the type of term in the test
-	 * @param bActionFailsOnTestTrue
-	 *            if true the term is linked directly, if false a the term is
-	 *            inverted by enclosing it in a <not> term
+	 * @param term the type of term in the test
+	 * @param bActionFailsOnTestTrue if true the term is linked directly, if false a the term is inverted by enclosing it in a <not> term
 	 */
 	public JDFAction appendActionTest(EnumTerm term, boolean bActionFailsOnTestTrue)
 	{
@@ -179,17 +177,12 @@ public class JDFActionPool extends JDFAutoActionPool
 	}
 
 	/**
-	 * append an action to this that references a Test with a term of type term
-	 * in the parallel TestPool
+	 * append an action to this that references a Test with a term of type term in the parallel TestPool
 	 * 
-	 * @param term
-	 *            the type of term in the test
-	 * @param setTerm
-	 *            the term referenced by PreflightAction@SetRef
-	 * @param bActionFailsOnTestTrue
-	 *            if true the term is linked directly, if false a the term is
-	 *            inverted by enclosing it in a <not> term note that the setTest
-	 *            always MUST be true to evaluate.
+	 * @param term the type of term in the test
+	 * @param setTerm the term referenced by PreflightAction@SetRef
+	 * @param bActionFailsOnTestTrue if true the term is linked directly, if false a the term is inverted by enclosing it in a <not> term note that the setTest always MUST be true
+	 *        to evaluate.
 	 * 
 	 * @return the newly created action
 	 */
@@ -203,13 +196,10 @@ public class JDFActionPool extends JDFAutoActionPool
 	}
 
 	/**
-	 * append an action to this that references a Test that defines an exclusion
-	 * of two values
+	 * append an action to this that references a Test that defines an exclusion of two values
 	 * 
-	 * @param id1
-	 *            the id of the first state or devcap to reference
-	 * @param id2
-	 *            the id of the 2nd state or devcap to reference
+	 * @param id1 the id of the first state or devcap to reference
+	 * @param id2 the id of the 2nd state or devcap to reference
 	 * 
 	 * @return the newly created action
 	 */

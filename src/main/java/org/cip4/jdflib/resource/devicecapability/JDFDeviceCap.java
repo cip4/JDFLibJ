@@ -297,7 +297,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 *
 	 * @param jdfRoot the node we test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *            Will be used in fitsValue method of the State class.
+	 *        Will be used in fitsValue method of the State class.
 	 * @param level validation level
 	 * @return VElement - vector of executable JDFNodes, null if none found
 	 */
@@ -353,7 +353,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 *
 	 * @param jdfRoot the node to test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *            Will be used in fitsValue method of the State class.
+	 *        Will be used in fitsValue method of the State class.
 	 * @param level validation level
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
 	 */
@@ -396,7 +396,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * @param jmfRoot the node to test
 	 * @param knownMessagesResp
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *            Will be used in fitsValue method of the State class.
+	 *        Will be used in fitsValue method of the State class.
 	 * @param level validation level
 	 * @param ignoreExtensions
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
@@ -480,19 +480,20 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * Checks if Device can execute the given JDFNode 'jdfRoot'.<br>
-	 * First validates 'jdfRoot' and checks if its Type/Types attributes fit the values of DeviceCap/@Types and DeviceCap/@CombinedMethod. If Node is invalid or Type/Types don't fit it doesn't check
-	 * it more detailed.<br>
+	 * First validates 'jdfRoot' and checks if its Type/Types attributes fit the values of DeviceCap/@Types and DeviceCap/@CombinedMethod. If Node is invalid or Type/Types don't
+	 * fit it doesn't check it more detailed.<br>
 	 * If Type/Types fit, the whole JDFNode - all elements and attributes - will be tested iot check if a Device can accept it.<br>
 	 * This method composes a detailed report of the found errors in XML form, if jdfRoot is rejected.<br>
 	 * If XMLDoc is null, there are no errors and 'jdfRoot' is accepted
 	 *
 	 * @param jdfRoot the node to test
 	 * @param fitsValue testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *            Will be used in fitsValue method of the State class.
+	 *        Will be used in fitsValue method of the State class.
 	 * @param level validation level
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is <code>null</code> there are no errors, 'jdfRoot' is accepted
 	 *
-	 * @throws JDFException if DeviceCapabilities file is invalid: illegal value of Types(TypeExpression) attribute (if CombinedMethod is None and Types contains more than 1 process)
+	 * @throws JDFException if DeviceCapabilities file is invalid: illegal value of Types(TypeExpression) attribute (if CombinedMethod is None and Types contains more than 1
+	 *         process)
 	 * @throws JDFException if DeviceCapabilities file is invalid: illegal value of CombinedMethod attribute
 	 */
 	private final KElement report(final JDFNode jdfRoot, final EnumFitsValue fitsValue, final EnumValidationLevel level, final KElement parentRoot)
@@ -615,7 +616,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 					v.add(testRoot);
 				}
 			}
-			else if (combMethod.equals(EnumCombinedMethod.GrayBox) || combMethod.equals(EnumCombinedMethod.CombinedProcessGroup) && typeNode.equals("ProcessGroup") && !testRoot.isGroupNode())
+			else if (combMethod.equals(EnumCombinedMethod.GrayBox)
+					|| combMethod.equals(EnumCombinedMethod.CombinedProcessGroup) && typeNode.equals("ProcessGroup") && !testRoot.isGroupNode())
 			{
 				if (fitsTypes(testRoot.getAllTypes(), true))
 				{
@@ -668,8 +670,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	}
 
 	/**
-	 * Tests JDFNode/@Types (or its equivalent of Types in the ProcessGroupNodes - the concatenated string of all Type attributes in the children Nodes) iot check whether it matches DeviceCap/@Types
-	 * or DeviceCap/@TypeExpression
+	 * Tests JDFNode/@Types (or its equivalent of Types in the ProcessGroupNodes - the concatenated string of all Type attributes in the children Nodes) iot check whether it
+	 * matches DeviceCap/@Types or DeviceCap/@TypeExpression
 	 *
 	 * @param typesNode attribute Types of the tested JDFNode
 	 * @param bSubset if true, a match is sufficient if a subset is specified
@@ -706,13 +708,13 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	}
 
 	/**
-	 * Checks whether a device can execute the given ProcessGroup JDFNode 'jdfRoot' (JDFNode/@Type=ProcessGroup). If JDFNode/@Types fits DeviceCap/@Types, the whole JDFNode - all elements and
-	 * attributes - is tested iot check whether a device can accept it.<br>
+	 * Checks whether a device can execute the given ProcessGroup JDFNode 'jdfRoot' (JDFNode/@Type=ProcessGroup). If JDFNode/@Types fits DeviceCap/@Types, the whole JDFNode - all
+	 * elements and attributes - is tested iot check whether a device can accept it.<br>
 	 * Composes a detailed report of the found errors in XML form, if JDFNode is rejected.
 	 *
 	 * @param jdfRoot the node to test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *            Will be used in fitsValue method of the State class.
+	 *        Will be used in fitsValue method of the State class.
 	 * @param level validation level
 	 *
 	 * @return XMLDoc - XMLDoc output of the error messages. <br>
@@ -755,7 +757,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 *
 	 * @param jdfRoot the node we test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *            Will be used in fitsValue method of the State class.
+	 *        Will be used in fitsValue method of the State class.
 	 * @param level validation level
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is <code>null</code> there are no errors, 'jdfRoot' is accepted
 	 */
@@ -792,8 +794,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * @return boolean - true if invalid devcaps were found
 	 * @throws JDFException if DeviceCap is invalid: has a wrong attribute Context value
 	 */
-	private static boolean invalidDevCaps(final KElement parent, final KElement jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level, final KElement parentReport,
-			final boolean ignoreExtensions)
+	private static boolean invalidDevCaps(final KElement parent, final KElement jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level, final KElement parentReport, final boolean ignoreExtensions)
 	{
 		final KElement mrp = parentReport.appendElement((jdfRoot instanceof JDFNode) ? "MissingResources" : "MissingElements");
 		final KElement irp = parentReport.appendElement((jdfRoot instanceof JDFNode) ? "InvalidResources" : "InvalidElements");
@@ -886,8 +887,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	}
 
 	/**
-	 * checkNodeInfoCustomerInfo - tests if there are JDFNode/NodeInfo or JDFNode/CustomerInfo elements that are not described by DevCaps. If missing DevCaps are found, jdfRoot has elements unknown
-	 * for this Device resources or elements
+	 * checkNodeInfoCustomerInfo - tests if there are JDFNode/NodeInfo or JDFNode/CustomerInfo elements that are not described by DevCaps. If missing DevCaps are found, jdfRoot has
+	 * elements unknown for this Device resources or elements
 	 *
 	 * @param jdfRoot node to test
 	 * @param root root of the XMLDoc output
@@ -914,7 +915,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * Composes a detailed report of the found errors in XML form. If XMLDoc is <code>null</code> - there are no errors
 	 *
 	 * @param jdfRoot node to test
-	 * @return KElement - KElement output of the error messages. If KElement is <code>null</code> there are no errors, JDFNode fits the ActionPool of this DeviceCap and will be accepted by the device.
+	 * @return KElement - KElement output of the error messages. If KElement is <code>null</code> there are no errors, JDFNode fits the ActionPool of this DeviceCap and will be
+	 *         accepted by the device.
 	 * @throws JDFException if DeviceCap is invalid: ActionPool refers to the non-existent TestPool
 	 * @throws JDFException if DeviceCap is invalid: Action refers to the non-existent Test
 	 */
@@ -1222,7 +1224,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 */
 	public void setCombinedMethod(final EnumCombinedMethod method)
 	{
-		setAttribute(AttributeName.COMBINEDMETHOD, method.getName(), null);
+		setAttribute(AttributeName.COMBINEDMETHOD, method == null ? null : method.getName(), null);
 	}
 
 	/**

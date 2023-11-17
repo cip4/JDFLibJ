@@ -90,6 +90,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 public class JDFBooleanEvaluation extends JDFEvaluation
@@ -191,13 +192,12 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 	/**
 	 * set ValueList
 	 * 
-	 * @param value
-	 *            vector of Boolean values
+	 * @param value vector of Boolean values
 	 */
 	public void setValueList(Vector value)
 	{
 		String s = JDFConstants.EMPTYSTRING;
-		for (int i = 0; i < value.size(); i++)
+		for (int i = 0; i < ContainerUtil.size(value); i++)
 		{
 			Boolean b = (Boolean) value.elementAt(i);
 			if (b.booleanValue())
@@ -218,8 +218,7 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 	/**
 	 * convenience method for single valued boolean lists
 	 * 
-	 * @param value
-	 *            the single boolean to set ValueList to
+	 * @param value the single boolean to set ValueList to
 	 */
 	public void setValueList(boolean value)
 	{
@@ -231,13 +230,10 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 	 */
 
 	/**
-	 * fitsValue - tests, if the defined value matches ValueList, specified for
-	 * this Evaluation
+	 * fitsValue - tests, if the defined value matches ValueList, specified for this Evaluation
 	 * 
-	 * @param valueStr
-	 *            value to test
-	 * @return boolean - true, if <code>value</code> matches testlists or if
-	 *         ValueList is not specified
+	 * @param valueStr value to test
+	 * @return boolean - true, if <code>value</code> matches testlists or if ValueList is not specified
 	 */
 	@Override
 	public final boolean fitsValue(String valueStr)
@@ -259,10 +255,8 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 	/**
 	 * fitsValueList - tests, if the defined 'value' matches ValueList,
 	 * 
-	 * @param value
-	 *            token to test
-	 * @return boolean - true, if <code>value</code> matches valuelist or if
-	 *         ValueList is not specified
+	 * @param value token to test
+	 * @return boolean - true, if <code>value</code> matches valuelist or if ValueList is not specified
 	 */
 	private final boolean fitsValueList(String value)
 	{
@@ -284,11 +278,9 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 	}
 
 	/**
-	 * fitsListType - tests, if the defined 'value' matches value of ListType
-	 * attribute, specified for this Evaluation
+	 * fitsListType - tests, if the defined 'value' matches value of ListType attribute, specified for this Evaluation
 	 * 
-	 * @param value
-	 *            value to test
+	 * @param value value to test
 	 * @return boolean - true, if 'value' matches specified value of ListType
 	 */
 	private final boolean fitsListType(String value)
