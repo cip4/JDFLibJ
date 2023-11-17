@@ -95,6 +95,7 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.AttrNSImpl;
@@ -915,6 +916,19 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public void setAttribute(final String key, final int value, final String nameSpaceURI)
 	{
 		setAttribute(key, StringUtil.formatInteger(value), nameSpaceURI);
+	}
+
+	/**
+	 * Sets an element attribute
+	 *
+	 * @param key the name of the attribute to set
+	 * @param value the value for the attribute
+	 * @param nameSpaceURI the namespace the element is in
+	 * @default SetAttribute(key, value, null)
+	 */
+	public void setAttribute(final String key, final ValuedEnum value, final String nameSpaceURI)
+	{
+		setAttribute(key, value == null ? null : value.getName(), nameSpaceURI);
 	}
 
 	/**

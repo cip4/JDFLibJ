@@ -418,7 +418,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	@Override
 	public void setAvailability(final EnumAvailability value)
 	{
-		setAttribute(AttributeName.AVAILABILITY, value == null ? null : value.getName(), null);
+		setAttribute(AttributeName.AVAILABILITY, value, null);
 	}
 
 	/**
@@ -587,7 +587,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public void setListType(final EnumListType value)
 	{
-		setAttribute(AttributeName.LISTTYPE, value == null ? null : value.getName(), null);
+		setAttribute(AttributeName.LISTTYPE, value, null);
 	}
 
 	/**
@@ -694,7 +694,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public void setUserDisplay(final EnumUserDisplay value)
 	{
-		setAttribute(AttributeName.USERDISPLAY, value == null ? null : value.getName(), null);
+		setAttribute(AttributeName.USERDISPLAY, value, null);
 	}
 
 	/**

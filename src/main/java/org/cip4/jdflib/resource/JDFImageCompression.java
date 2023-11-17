@@ -146,7 +146,7 @@ public class JDFImageCompression extends JDFAutoImageCompression
 	 */
 	public void setEnumImageFilter(EnumImageFilter value)
 	{
-		setAttribute(AttributeName.IMAGEFILTER, value.getName(), null);
+		setAttribute(AttributeName.IMAGEFILTER, value, null);
 	}
 
 	// /////////////////////////////////////////////////////////////////////
@@ -161,4 +161,4 @@ public class JDFImageCompression extends JDFAutoImageCompression
 	}
 
 } // class JDFIDPLayout
-// ==========================================================================
+	// ==========================================================================

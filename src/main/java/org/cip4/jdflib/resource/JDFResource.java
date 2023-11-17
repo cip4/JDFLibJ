@@ -5880,12 +5880,6 @@ public class JDFResource extends JDFElement
 		r.appendAttribute(AttributeName.PARTIDKEYS, s, null, JDFConstants.BLANK, true);
 	}
 
-	/**
-	 * Sets the value of attribute, specified by key
-	 *
-	 * @param key the PartIDKey attribute name
-	 * @param value the value to set key to
-	 */
 	public void setPartIDKey(final EnumPartIDKey key, final String value)
 	{
 		final String keyName = key.getName();
@@ -5960,7 +5954,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setPartUsage(final EnumPartUsage value)
 	{
-		setAttribute(AttributeName.PARTUSAGE, value == null ? null : value.getName(), null);
+		setAttribute(AttributeName.PARTUSAGE, value, null);
 	}
 
 	/**
@@ -6009,7 +6003,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setLotControl(final EnumLotControl value)
 	{
-		setAttribute(AttributeName.LOTCONTROL, value == null ? null : value.getName(), null);
+		setAttribute(AttributeName.LOTCONTROL, value, null);
 	}
 
 	/**
@@ -6243,7 +6237,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setPreviewType(final JDFPart.EnumPreviewType value)
 	{
-		setAttribute(AttributeName.PREVIEWTYPE, value == null ? null : value.getName(), null);
+		setAttribute(AttributeName.PREVIEWTYPE, value, null);
 	}
 
 	/**
@@ -6994,7 +6988,7 @@ public class JDFResource extends JDFElement
 	@Deprecated
 	public void setStatus(final EnumResStatus value)
 	{
-		setAttribute(AttributeName.STATUS, value == null ? null : value.getName(), null);
+		setAttribute(AttributeName.STATUS, value, null);
 	}
 
 	/**
@@ -7039,7 +7033,7 @@ public class JDFResource extends JDFElement
 		{
 			removeAttributeFromLeaves(AttributeName.STATUS, null);
 		}
-		setAttribute(AttributeName.STATUS, value == null ? null : value.getName(), null);
+		setAttribute(AttributeName.STATUS, value, null);
 	}
 
 	/**

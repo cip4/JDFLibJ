@@ -14,6 +14,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.resource.JDFResource;
 import org.w3c.dom.DOMException;
 
+@Deprecated
 public class JDFSealing extends JDFResource
 {
 	private static final long serialVersionUID = 1L;
@@ -63,4 +64,4 @@ public class JDFSealing extends JDFResource
 		return "JDFSealing[  --> " + super.toString() + " ]";
 	}
 } // class JDFIDPLayout
-// ==========================================================================
+	// ==========================================================================

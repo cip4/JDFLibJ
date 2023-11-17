@@ -125,6 +125,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.APPROVALPARAMS, JDFLIB + "resource.process.JDFApprovalParams");
 		sm_PackageNames.put(ElementName.APPROVALPERSON, JDFLIB + "resource.process.JDFApprovalPerson");
 		sm_PackageNames.put(ElementName.APPROVALSUCCESS, JDFLIB + "resource.process.JDFApprovalSuccess");
+		sm_PackageNames.put(ElementName.AREA, NUMBER_SPAN);
 		sm_PackageNames.put(ElementName.ARGUMENTVALUE, JDFLIB + "resource.process.JDFArgumentValue");
 		sm_PackageNames.put(ElementName.ARTDELIVERY, JDFLIB + "resource.intent.JDFArtDelivery");
 		sm_PackageNames.put(ElementName.ARTDELIVERYDATE, TIME_SPAN);
@@ -141,6 +142,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.AUTHENTICATIONQUPARAMS, JDFLIB + "jmf.JDFAuthenticationQuParams");
 		sm_PackageNames.put(ElementName.AUTHENTICATIONRESP, JDFLIB + "jmf.JDFAuthenticationResp");
 		sm_PackageNames.put(ElementName.AUTOMATEDOVERPRINTPARAMS, JDFLIB + "resource.process.JDFAutomatedOverPrintParams");
+		sm_PackageNames.put(ElementName.AVERAGEPAGES, INTEGER_SPAN);
 
 		sm_PackageNames.put(ElementName.BACKCOATINGS, JDFLIB + "span.JDFSpanCoatings");
 		sm_PackageNames.put(ElementName.BACKCOVERCOLOR, SPAN_NAMED_COLOR);
@@ -274,6 +276,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.CUSTOMERMESSAGE, JDFLIB + "core.JDFCustomerMessage");
 		sm_PackageNames.put(ElementName.CUT, JDFLIB + "resource.process.postpress.JDFCut");
 		sm_PackageNames.put(ElementName.CUTBLOCK, JDFLIB + "resource.process.JDFCutBlock");
+		sm_PackageNames.put(ElementName.CUTDEPTH, JDFLIB + "span.JDFSpanCutDepth");
 		sm_PackageNames.put(ElementName.CUTLINES, SEPARATION_LIST);
 		sm_PackageNames.put(ElementName.CUTMARK, JDFLIB + "resource.process.postpress.JDFCutMark");
 		sm_PackageNames.put(ElementName.CUTTINGPARAMS, JDFLIB + "resource.JDFCuttingParams");
@@ -385,6 +388,8 @@ class DocumentData
 		sm_PackageNames.put(ElementName.FOILCOLORDETAILS, STRING_SPAN);
 		sm_PackageNames.put(ElementName.FOLD, JDFLIB + "resource.process.postpress.JDFFold");
 		sm_PackageNames.put(ElementName.FOLDERPRODUCTION, JDFLIB + "resource.process.JDFFolderProduction");
+		sm_PackageNames.put(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, JDFLIB + "resource.process.JDFProductionSubPath");
+
 		sm_PackageNames.put(ElementName.FOLDINGCATALOG, NAME_SPAN);
 		sm_PackageNames.put(ElementName.FOLDINGINTENT, JDFLIB + "resource.intent.JDFFoldingIntent");
 		sm_PackageNames.put(ElementName.FOLDINGPARAMS, JDFLIB + "resource.process.postpress.JDFFoldingParams");
@@ -527,6 +532,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.MATERIAL, STRING_SPAN);
 		sm_PackageNames.put(ElementName.MATRIXEVALUATION, JDFLIB + "resource.devicecapability.JDFMatrixEvaluation");
 		sm_PackageNames.put(ElementName.MATRIXSTATE, JDFLIB + "resource.devicecapability.JDFMatrixState");
+		sm_PackageNames.put(ElementName.MAXPAGES, INTEGER_SPAN);
 		sm_PackageNames.put(ElementName.MEDIA, JDFLIB + "resource.process.JDFMedia");
 		sm_PackageNames.put(ElementName.MEDIACOLOR, SPAN_NAMED_COLOR);
 		sm_PackageNames.put(ElementName.MEDIACOLORDETAILS, STRING_SPAN);
@@ -535,15 +541,14 @@ class DocumentData
 		sm_PackageNames.put(ElementName.MEDIAQUALITY, STRING_SPAN);
 		sm_PackageNames.put(ElementName.MEDIASOURCE, JDFLIB + "resource.process.JDFMediaSource");
 		sm_PackageNames.put(ElementName.MEDIATYPE, JDFLIB + "span.JDFSpanMediaType");
-		sm_PackageNames.put(ElementName.MEDIATYPEDETAILS, STRING_SPAN);
+		sm_PackageNames.put(ElementName.MEDIATYPEDETAILS, NAME_SPAN);
 		sm_PackageNames.put(ElementName.MEDIAUNIT, JDFLIB + "span.JDFSpanMediaUnit");
 		sm_PackageNames.put(ElementName.MERGED, JDFLIB + "resource.JDFMerged");
 		sm_PackageNames.put(ElementName.MESSAGE, JDFLIB + "jmf.JDFMessage");
 		sm_PackageNames.put(ElementName.MESSAGESERVICE, JDFLIB + "jmf.JDFMessageService");
 		sm_PackageNames.put(ElementName.METADATAMAP, JDFLIB + "resource.process.JDFMetadataMap");
-		// "Method" is context sensitive, see handleOtherElements() and
-		// putConstructorToHashMap()
 		sm_PackageNames.put(ElementName.MILESTONE, JDFLIB + "resource.JDFMilestone");
+		sm_PackageNames.put(ElementName.MINPAGES, INTEGER_SPAN);
 		sm_PackageNames.put(ElementName.MISCCONSUMABLE, JDFLIB + "resource.process.JDFMiscConsumable");
 		sm_PackageNames.put(ElementName.MISDETAILS, JDFLIB + "resource.process.JDFMISDetails");
 		sm_PackageNames.put(ElementName.MODIFIED, JDFLIB + "resource.JDFModified");
@@ -575,6 +580,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.NUMBERINGPARAM, JDFLIB + "resource.process.JDFNumberingParam");
 		sm_PackageNames.put(ElementName.NUMBERINGPARAMS, JDFLIB + "resource.JDFNumberingParams");
 		sm_PackageNames.put(ElementName.NUMBERITEM, JDFLIB + "resource.JDFNumberItem");
+		sm_PackageNames.put(ElementName.NUMBEROFCOPIES, INTEGER_SPAN);
 		sm_PackageNames.put(ElementName.NUMBERSTATE, JDFLIB + "resource.devicecapability.JDFNumberState");
 
 		sm_PackageNames.put(ElementName.OBJECTMODEL, JDFLIB + "resource.process.JDFObjectModel");
@@ -639,6 +645,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.PLASTICCOMBTYPE, NAME_SPAN);
 		sm_PackageNames.put(ElementName.PLATECOPYPARAMS, JDFLIB + "resource.process.JDFPlateCopyParams");
 		sm_PackageNames.put(ElementName.POSITIONOBJ, JDFLIB + "resource.process.JDFPositionObj");
+		sm_PackageNames.put(ElementName.POSTPRESSCOMPONENTPATH, JDFLIB + "resource.process.JDFProductionSubPath");
 		sm_PackageNames.put(ElementName.PREFLIGHTACTION, JDFLIB + "resource.process.JDFPreflightAction");
 		sm_PackageNames.put(ElementName.PREFLIGHTANALYSIS, JDFLIB + "resource.JDFPreflightAnalysis");
 		sm_PackageNames.put(ElementName.PREFLIGHTARGUMENT, JDFLIB + "resource.process.JDFPreflightArgument");
@@ -662,6 +669,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.PRICING, JDFLIB + "resource.intent.JDFPricing");
 		sm_PackageNames.put(ElementName.PRINTCONDITION, JDFLIB + "resource.process.press.JDFPrintCondition");
 		sm_PackageNames.put(ElementName.PRINTCONDITIONCOLOR, JDFLIB + "resource.process.JDFPrintConditionColor");
+		sm_PackageNames.put(ElementName.PRINTINGUNITWEBPATH, JDFLIB + "resource.process.JDFProductionSubPath");
 		sm_PackageNames.put(ElementName.PRINTPREFERENCE, JDFLIB + "span.JDFSpanPrintPreference");
 		sm_PackageNames.put(ElementName.PRINTPROCESS, NAME_SPAN);
 		sm_PackageNames.put(ElementName.PRINTROLLINGPARAMS, JDFLIB + "resource.process.JDFPrintRollingParams");
@@ -751,7 +759,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.SCREENINGINTENT, JDFLIB + "resource.intent.JDFScreeningIntent");
 		sm_PackageNames.put(ElementName.SCREENINGTYPE, JDFLIB + "span.JDFSpanScreeningType");
 		sm_PackageNames.put(ElementName.SCREENSELECTOR, JDFLIB + "resource.process.JDFScreenSelector");
-		sm_PackageNames.put(ElementName.SEALING, JDFLIB + "resource.process.JDFSealing");
+		sm_PackageNames.put(ElementName.SEALING, OPTION_SPAN);
 		sm_PackageNames.put(ElementName.SEARCHPATH, JDF_COMMENT);
 		sm_PackageNames.put(ElementName.SEPARATIONCONTROLPARAMS, JDFLIB + "resource.process.JDFSeparationControlParams");
 		sm_PackageNames.put(ElementName.SEPARATIONLIST, SEPARATION_LIST);
@@ -800,6 +808,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.SPINETAPINGPARAMS, JDFLIB + "resource.JDFSpineTapingParams");
 		sm_PackageNames.put(ElementName.STACK, JDFLIB + "resource.process.JDFStack");
 		sm_PackageNames.put(ElementName.STACKINGPARAMS, JDFLIB + "resource.JDFStackingParams");
+		sm_PackageNames.put(ElementName.STAPLESHAPE, JDFLIB + "span.JDFSpanStapleShape");
 		sm_PackageNames.put(ElementName.STATION, JDFLIB + "resource.process.JDFStation");
 		sm_PackageNames.put(ElementName.STATICBLOCKINGPARAMS, JDFLIB + "resource.process.postpress.JDFStaticBlockingParams");
 		sm_PackageNames.put(ElementName.STATUSPOOL, JDFLIB + "pool.JDFStatusPool");
@@ -880,6 +889,8 @@ class DocumentData
 		sm_PackageNames.put(ElementName.VALUE, JDFLIB + "resource.JDFValue");
 		sm_PackageNames.put(ElementName.VALUELOC, JDFLIB + "resource.devicecapability.JDFValueLoc");
 		sm_PackageNames.put(ElementName.VARIABLEINTENT, JDFLIB + "resource.intent.JDFVariableIntent");
+		sm_PackageNames.put(ElementName.VARIABLEQUALITY, JDFLIB + "span.JDFSpanVariableQuality");
+		sm_PackageNames.put(ElementName.VARIABLETYPE, JDFLIB + "span.JDFSpanVariableType");
 		sm_PackageNames.put(ElementName.VARNISHINGPARAMS, JDFLIB + "resource.JDFVarnishingParams");
 		sm_PackageNames.put(ElementName.VELOBINDING, JDFLIB + "resource.process.postpress.JDFVeloBinding");
 		sm_PackageNames.put(ElementName.VERIFICATIONPARAMS, JDFLIB + "resource.JDFVerificationParams");
@@ -894,7 +905,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.WIRECOMBBINDINGPARAMS, JDFLIB + "resource.process.postpress.JDFWireCombBindingParams");
 		sm_PackageNames.put(ElementName.WIRECOMBBRAND, STRING_SPAN);
 		sm_PackageNames.put(ElementName.WIRECOMBMATERIAL, JDFLIB + "span.JDFSpanWireCombMaterial");
-		sm_PackageNames.put(ElementName.WIRECOMBSHAPE, JDFLIB + "span.JDFSpanWireCombShape");
+		sm_PackageNames.put(ElementName.WIRECOMBSHAPE, NAME_SPAN);
 		sm_PackageNames.put(ElementName.WRAPPEDQUANTITY, INTEGER_SPAN);
 		sm_PackageNames.put(ElementName.WRAPPINGMATERIAL, NAME_SPAN);
 		sm_PackageNames.put(ElementName.WRAPPINGPARAMS, JDFLIB + "resource.JDFWrappingParams");

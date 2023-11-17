@@ -76,12 +76,11 @@ public class JDFEndSheet extends JDFAutoEndSheet
 	/**
 	 * set attribute Side
 	 * 
-	 * @param EnumSide
-	 *            value: the value to set the attribute to
+	 * @param EnumSide value: the value to set the attribute to
 	 */
 	public void setSide(EnumSide value)
 	{
-		setAttribute(AttributeName.SIDE, value.getName(), null);
+		setAttribute(AttributeName.SIDE, value, null);
 	}
 
 	/**
@@ -100,4 +99,4 @@ public class JDFEndSheet extends JDFAutoEndSheet
 		return "JDFEndSheet[  --> " + super.toString() + " ]";
 	}
 } // class JDFIDPLayout
-// ==========================================================================
+	// ==========================================================================

@@ -261,9 +261,14 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	 */
 	public void setDimensionCM(final JDFXYPair value)
 	{
-		final JDFXYPair xyp = new JDFXYPair(value); // don't change the original
-		xyp.scale(72.0 / 2.54);
-		setDimension(xyp);
+		if (value == null)
+			setDimension(null);
+		else
+		{
+			final JDFXYPair xyp = new JDFXYPair(value); // don't change the original
+			xyp.scale(72.0 / 2.54);
+			setDimension(xyp);
+		}
 	}
 
 	/**
@@ -296,9 +301,14 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	 */
 	public void setDimensionInch(final JDFXYPair value)
 	{
-		final JDFXYPair xyp = new JDFXYPair(value); // don't change the original
-		xyp.scale(72.0);
-		setDimension(xyp);
+		if (value == null)
+			setDimension(null);
+		else
+		{
+			final JDFXYPair xyp = new JDFXYPair(value); // don't change the original
+			xyp.scale(72.0);
+			setDimension(xyp);
+		}
 	}
 
 	/**
@@ -379,7 +389,8 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 			{
 				matches = StringUtil.getDistance(getBrand(), other.getBrand(), true, true, true) == 0;
 				matches = matches && StringUtil.getDistance(getMediaQuality(), other.getMediaQuality(), true, true, true) == 0;
-				matches = matches && StringUtil.getDistance(getAttribute(AttributeName.ISOPAPERSUBSTRATE), other.getAttribute(AttributeName.ISOPAPERSUBSTRATE), true, true, true) == 0;
+				matches = matches
+						&& StringUtil.getDistance(getAttribute(AttributeName.ISOPAPERSUBSTRATE), other.getAttribute(AttributeName.ISOPAPERSUBSTRATE), true, true, true) == 0;
 				matches = matches && (getGrade() == 0 || other.getGrade() == 0 || other.getGrade() == getGrade());
 				matches = matches && (getBackGrade() == 0 || other.getBackGrade() == 0 || other.getBackGrade() == getBackGrade());
 				matches = matches && (getWeight() == 0 || other.getWeight() == 0 || Math.abs(other.getWeight() - getWeight()) < 1);

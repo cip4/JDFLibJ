@@ -67,14 +67,14 @@
  *
  *
  *//**
-*
-* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
-*
-* JDFUsageCounter.java
-*
-* Last changes
-*
-*/
+	*
+	* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
+	*
+	* JDFUsageCounter.java
+	*
+	* Last changes
+	*
+	*/
 package org.cip4.jdflib.resource.process;
 
 import java.util.Iterator;
@@ -101,9 +101,10 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 
 	/**
 	 * Constructor for JDFUsageCounter
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
-	 * @throws DOMException 
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
 	 * 
 	 */
 	public JDFUsageCounter(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
@@ -113,10 +114,11 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 
 	/**
 	 * Constructor for JDFUsageCounter
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @throws DOMException 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
 	 * 
 	 */
 	public JDFUsageCounter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
@@ -126,10 +128,11 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 
 	/**
 	 * Constructor for JDFUsageCounter
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
 	 * 
 	 * @throws DOMException
 	 */
@@ -153,7 +156,7 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 
 	/**
 	 * 
-	 *  
+	 * 
 	 * @author rainerprosi
 	 * @date Jan 10, 2012
 	 */
@@ -169,7 +172,7 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 
 		/**
 		 * 
-		 *  
+		 * 
 		 * @param enumName
 		 * @return
 		 */
@@ -180,7 +183,7 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 
 		/**
 		 * 
-		 *  
+		 * 
 		 * @param enumValue
 		 * @return
 		 */
@@ -192,6 +195,7 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 		/**
 		 * 
 		 * TODO Please insert comment!
+		 * 
 		 * @return
 		 */
 		public static Map getEnumMap()
@@ -211,7 +215,7 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 
 		/**
 		 * 
-		 *  
+		 * 
 		 * @return
 		 */
 		public static Iterator iterator()
@@ -256,26 +260,23 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 	}
 
 	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute CounterTypes
+	 * --------------------------------------------------------------------- Methods for Attribute CounterTypes
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute CounterTypes
 	 * 
-	 * @param enumVar
-	 *            : the enumVar to set the attribute to
+	 * @param enumVar : the enumVar to set the attribute to
 	 */
 	public void setCounterTypes(EnumCounterType enumVar)
 	{
-		setAttribute(AttributeName.COUNTERTYPES, enumVar.getName(), null);
+		setAttribute(AttributeName.COUNTERTYPES, enumVar, null);
 	}
 
 	/**
 	 * (5) set attribute CounterTypes
 	 * 
-	 * @param vVar vector of EnumCounterType 
-	 *            : the enumVar to set the attribute to
+	 * @param vVar vector of EnumCounterType : the enumVar to set the attribute to
 	 */
 	public void setCounterTypes(Vector<EnumCounterType> vVar)
 	{
@@ -286,8 +287,7 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 	/**
 	 * append a countertype to attribute CounterTypes
 	 * 
-	 * @param cType  EnumCounterType 
-	 *            : the enumVar to set the attribute to
+	 * @param cType EnumCounterType : the enumVar to set the attribute to
 	 */
 	public void appendCounterType(EnumCounterType cType)
 	{
@@ -308,8 +308,7 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 	}
 
 	/**
-	 * also checks for matching counterID or CounteType mangled with "_", e.g.
-	 * UsageCounter:ID_CounterA UsageCounter:Black_SingleSided etc.
+	 * also checks for matching counterID or CounteType mangled with "_", e.g. UsageCounter:ID_CounterA UsageCounter:Black_SingleSided etc.
 	 */
 	@Override
 	public boolean matchesString(String namedResLink)

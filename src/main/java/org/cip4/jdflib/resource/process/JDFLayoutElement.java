@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,6 +72,7 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoLayoutElement;
+import org.cip4.jdflib.resource.JDFPageList;
 import org.w3c.dom.DOMException;
 
 public class JDFLayoutElement extends JDFAutoLayoutElement
@@ -134,8 +135,7 @@ public class JDFLayoutElement extends JDFAutoLayoutElement
 	/**
 	 * SetFileName set FileName and URL in the FileSpec
 	 * 
-	 * @param String
-	 *            fileName
+	 * @param String fileName
 	 * @deprecated use setMimeURL
 	 */
 	@Deprecated
@@ -147,8 +147,7 @@ public class JDFLayoutElement extends JDFAutoLayoutElement
 	/**
 	 * SetFileName set FileName and URL in the FileSpec
 	 * 
-	 * @param String
-	 *            fileName
+	 * @param String fileName
 	 */
 	public void setMimeURL(String fileName)
 	{
@@ -164,6 +163,7 @@ public class JDFLayoutElement extends JDFAutoLayoutElement
 	public JDFPageData getPageListPageData()
 	{
 		// TODO lena - make vector
-		return getPageList().getPageData(0);
+		JDFPageList pageList = getPageList();
+		return pageList == null ? null : pageList.getPageData(0);
 	}
 }

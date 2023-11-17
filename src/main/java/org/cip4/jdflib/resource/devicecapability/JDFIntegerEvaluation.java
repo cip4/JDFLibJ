@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2004 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -168,8 +168,7 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	/**
 	 * set attribute <code>ValueList</code>
 	 * 
-	 * @param value
-	 *            the value to set the attribute to
+	 * @param value the value to set the attribute to
 	 */
 	public void setValueList(JDFIntegerRangeList value)
 	{
@@ -179,8 +178,7 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	/**
 	 * append the value of int to @ValueList
 	 * 
-	 * @param value
-	 *            the integer value to append
+	 * @param value the integer value to append
 	 */
 	public void appendValueList(int value)
 	{
@@ -196,21 +194,13 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	 */
 	public JDFIntegerRangeList getValueList()
 	{
-		try
-		{
-			return new JDFIntegerRangeList(getAttribute(AttributeName.VALUELIST, null, JDFConstants.EMPTYSTRING));
-		}
-		catch (DataFormatException e)
-		{
-			throw new JDFException("JDFIntegerEvaluation.getValueList: Unable to create JDFIntegerRangeList from Attribute value \"ValueList\"");
-		}
+		return JDFIntegerRangeList.createIntegerRangeList(getAttribute(AttributeName.VALUELIST, null, JDFConstants.EMPTYSTRING));
 	}
 
 	/**
 	 * set attribute <code>ValueMod</code>
 	 * 
-	 * @param value
-	 *            the value to set the attribute to
+	 * @param value the value to set the attribute to
 	 */
 	public void setValueMod(JDFXYPair value)
 	{
@@ -224,14 +214,7 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	 */
 	public JDFXYPair getValueMod()
 	{
-		try
-		{
-			return new JDFXYPair(getAttribute(AttributeName.VALUEMOD));
-		}
-		catch (DataFormatException e)
-		{
-			throw new JDFException("JDFIntegerEvaluation.getValueMod: The XYPair value is invalid!");
-		}
+		return JDFXYPair.createXYPair(getAttribute(AttributeName.VALUEMOD));
 	}
 
 	/*
@@ -239,13 +222,10 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	 */
 
 	/**
-	 * fitsValue - tests if the defined 'value' matches testlists, specified for
-	 * this Evaluation
+	 * fitsValue - tests if the defined 'value' matches testlists, specified for this Evaluation
 	 * 
-	 * @param value
-	 *            value to test
-	 * @return boolean - true, if 'value' matches testlists or if testlists are
-	 *         not specified
+	 * @param value value to test
+	 * @return boolean - true, if 'value' matches testlists or if testlists are not specified
 	 */
 	@Override
 	public boolean fitsValue(String value)
@@ -269,11 +249,9 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	}
 
 	/**
-	 * fitsListType - tests if the defined 'value' matches ListType attribute,
-	 * specified for this Evaluation
+	 * fitsListType - tests if the defined 'value' matches ListType attribute, specified for this Evaluation
 	 * 
-	 * @param value
-	 *            value to test
+	 * @param value value to test
 	 * @return boolean - true, if 'value' matches specified value of ListType
 	 */
 	private final boolean fitsListType(String value)
@@ -345,13 +323,10 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	}
 
 	/**
-	 * fitsValueList - tests if the defined 'rangelist' matches the ValueList,
-	 * specified for this Evaluation
+	 * fitsValueList - tests if the defined 'rangelist' matches the ValueList, specified for this Evaluation
 	 * 
-	 * @param rangelist
-	 *            range list to test
-	 * @return boolean - true, if 'rangelist' matches the ValueList or if
-	 *         ValueList is not specified
+	 * @param rangelist range list to test
+	 * @return boolean - true, if 'rangelist' matches the ValueList or if ValueList is not specified
 	 */
 	private final boolean fitsValueList(JDFIntegerRangeList rangelist)
 	{
@@ -385,13 +360,10 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	}
 
 	/**
-	 * fitsValueMod - tests if the defined 'rangelist' matches the ValueMod,
-	 * specified for this Evaluation
+	 * fitsValueMod - tests if the defined 'rangelist' matches the ValueMod, specified for this Evaluation
 	 * 
-	 * @param rangelist
-	 *            range list to test
-	 * @return boolean - true, if 'rangelist' matches the ValueMod or if
-	 *         ValueMod is not specified
+	 * @param rangelist range list to test
+	 * @return boolean - true, if 'rangelist' matches the ValueMod or if ValueMod is not specified
 	 */
 	private final boolean fitsValueMod(JDFIntegerRangeList rangelist)
 	{
@@ -419,13 +391,10 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	}
 
 	/**
-	 * fitsContainedList - tests for the case, when ListType=CompleteList, does
-	 * the defined 'value' match ValueList, specified for this Evaluation
+	 * fitsContainedList - tests for the case, when ListType=CompleteList, does the defined 'value' match ValueList, specified for this Evaluation
 	 * 
-	 * @param value
-	 *            value to test
-	 * @param list
-	 *            specified ValueList
+	 * @param value value to test
+	 * @param list specified ValueList
 	 * @return boolean - true, if 'value' matches testlist
 	 */
 	private final boolean fitsCompleteList(JDFIntegerRangeList value, JDFIntegerRangeList list)
@@ -463,13 +432,10 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	}
 
 	/**
-	 * fitsCompleteOrderedList - tests whether <code>value</code> matches the
-	 * given ValueList (ListType=CompleteOrderedList)
+	 * fitsCompleteOrderedList - tests whether <code>value</code> matches the given ValueList (ListType=CompleteOrderedList)
 	 * 
-	 * @param value
-	 *            value to test
-	 * @param list
-	 *            specified ValueList
+	 * @param value value to test
+	 * @param list specified ValueList
 	 * @return boolean - true, if 'value' matches testlist
 	 */
 	private final boolean fitsCompleteOrderedList(JDFIntegerRangeList value, JDFIntegerRangeList list)
@@ -494,13 +460,10 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	}
 
 	/**
-	 * fitsContainedList - tests whether <code>value</code> matches the given
-	 * ValueList (ListType=ContainedList)
+	 * fitsContainedList - tests whether <code>value</code> matches the given ValueList (ListType=ContainedList)
 	 * 
-	 * @param value
-	 *            value to test
-	 * @param list
-	 *            specified ValueList
+	 * @param value value to test
+	 * @param list specified ValueList
 	 * @return boolean - true, if <code>value</code> matches testlist
 	 */
 	private final boolean fitsContainedList(JDFIntegerRangeList value, JDFIntegerRangeList list)

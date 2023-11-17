@@ -189,6 +189,7 @@ public class JDFIDInfo extends JDFAutoIDInfo implements INodeIdentifiable
 
 	/**
 	 * returns the parentjobid which defaults to jobID
+	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoIDInfo#getParentJobID()
 	 */
 	@Override
@@ -201,6 +202,7 @@ public class JDFIDInfo extends JDFAutoIDInfo implements INodeIdentifiable
 	/**
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#getIdentifier()
 	 */
+	@Override
 	public NodeIdentifier getIdentifier()
 	{
 		return new NodeIdentifier(getJobID(), getJobPartID(), null);
@@ -209,9 +211,13 @@ public class JDFIDInfo extends JDFAutoIDInfo implements INodeIdentifiable
 	/**
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
 	 */
+	@Override
 	public void setIdentifier(final NodeIdentifier ni)
 	{
-		setJobID(ni.getJobID());
-		setJobPartID(ni.getJobPartID());
+		if (ni != null)
+		{
+			setJobID(ni.getJobID());
+			setJobPartID(ni.getJobPartID());
+		}
 	}
 }

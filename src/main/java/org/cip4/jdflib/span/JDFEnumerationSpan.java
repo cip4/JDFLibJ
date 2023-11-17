@@ -137,7 +137,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 */
 	public void setActual(final ValuedEnum value)
 	{
-		setAttribute(AttributeName.ACTUAL, value == null ? null : value.getName(), null);
+		setAttribute(AttributeName.ACTUAL, value, null);
 	}
 
 	/**
@@ -157,7 +157,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 */
 	public void setPreferred(final ValuedEnum value)
 	{
-		setAttribute(AttributeName.PREFERRED, value == null ? null : value.getName(), null);
+		setAttribute(AttributeName.PREFERRED, value, null);
 	}
 
 	/**

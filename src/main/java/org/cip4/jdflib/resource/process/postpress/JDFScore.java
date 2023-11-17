@@ -191,12 +191,11 @@ public class JDFScore extends JDFAutoScore
 	/**
 	 * set attribute Side
 	 * 
-	 * @param EnumScoreSide
-	 *            value: the value to set the attribute to
+	 * @param EnumScoreSide value: the value to set the attribute to
 	 */
 	public void setSide(EnumScoreSide value)
 	{
-		setAttribute(AttributeName.SIDE, value.getName(), null);
+		setAttribute(AttributeName.SIDE, value, null);
 	}
 
 	/**
@@ -215,4 +214,4 @@ public class JDFScore extends JDFAutoScore
 		return "JDFScore[  --> " + super.toString() + " ]";
 	}
 } // class
-// ==========================================================================
+	// ==========================================================================

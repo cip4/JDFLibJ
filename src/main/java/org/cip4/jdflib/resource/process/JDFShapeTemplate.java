@@ -159,11 +159,12 @@ public class JDFShapeTemplate extends JDFAutoShapeTemplate
 	}
 
 	/**
-	* Constructor for JDFShapeTemplate
-	* @param myOwnerDocument 
-	* @param qualifiedName 
-	* 	
-	*/
+	 * Constructor for JDFShapeTemplate
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * 
+	 */
 	public JDFShapeTemplate(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
@@ -171,9 +172,10 @@ public class JDFShapeTemplate extends JDFAutoShapeTemplate
 
 	/**
 	 * Constructor for JDFShapeTemplate
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
 	 * 
 	 */
 	public JDFShapeTemplate(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
@@ -183,10 +185,11 @@ public class JDFShapeTemplate extends JDFAutoShapeTemplate
 
 	/**
 	 * Constructor for JDFShapeTemplate
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
 	 * 
 	 */
 	public JDFShapeTemplate(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
@@ -206,22 +209,24 @@ public class JDFShapeTemplate extends JDFAutoShapeTemplate
 		return "JDFShapeTemplate[  --> " + super.toString() + " ]";
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Standard
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Standard ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Standard
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Standard
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setStandard(EnumStandard value)
 	{
-		setAttribute(AttributeName.STANDARD, value == null ? null : value.getName(), null);
+		setAttribute(AttributeName.STANDARD, value, null);
 	}
 
 	/**
-	  * get enumerated attribute Standard
-	  * @return value the value to set the attribute to
-	  */
+	 * get enumerated attribute Standard
+	 * 
+	 * @return value the value to set the attribute to
+	 */
 	public EnumStandard getEnumStandard()
 	{
 		return EnumStandard.getEnum(getStandard());

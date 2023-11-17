@@ -5745,7 +5745,7 @@ public class JDFElement extends KElement
 	 */
 	public void setSettingsPolicy(final EnumSettingsPolicy value)
 	{
-		setAttribute(AttributeName.SETTINGSPOLICY, value == null ? null : value.getName(), null);
+		setAttribute(AttributeName.SETTINGSPOLICY, value, null);
 	}
 
 	/**

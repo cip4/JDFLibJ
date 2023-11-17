@@ -119,6 +119,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * Constructor for JDFNotification
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -129,6 +130,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * Constructor for JDFNotification
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -140,6 +142,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * Constructor for JDFNotification
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -196,6 +199,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * toString()
+	 * 
 	 * @return String
 	 */
 	@Override
@@ -235,6 +239,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get part map vector
+	 * 
 	 * @return VJDFAttributeMap: vector of mAttribute, one for each part
 	 */
 	@Override
@@ -245,6 +250,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * set all parts to those defined in vParts
+	 * 
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
@@ -255,6 +261,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * set all parts to those defined by mPart
+	 * 
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
@@ -265,6 +272,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * remove the part defined by mPart
+	 * 
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
@@ -275,6 +283,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * check whether the part defined in mPart is included
+	 * 
 	 * @param mPart attribute map for the part to remove
 	 * @return boolean - returns true if the part exists
 	 */
@@ -286,6 +295,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>Barcode</code>, create if it doesn't exist
+	 * 
 	 * @return JDFBarcode: the element
 	 */
 	public JDFBarcode getCreateBarcode()
@@ -295,6 +305,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append element <code>Barcode</code>
+	 * 
 	 * @return JDFBarcode: the element
 	 */
 	public JDFBarcode appendBarcode()
@@ -304,18 +315,20 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>Barcode</code>
+	 * 
 	 * @return JDFBarcode: the element
 	 */
 	public JDFBarcode getBarcode()
 	{
 		final JDFElement notificationDetails = getNotificationDetails();
 		if (notificationDetails == null || !(notificationDetails instanceof JDFBarcode))
-			return (JDFBarcode) getElement(ElementName.EVENT);
+			return (JDFBarcode) getElement(ElementName.BARCODE);
 		return (JDFBarcode) notificationDetails;
 	}
 
 	/**
 	 * get element <code>FCNKey</code>, create if it doesn't exist
+	 * 
 	 * @return JDFFCNKey: the element
 	 */
 	public JDFFCNKey getCreateFCNKey()
@@ -325,6 +338,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append element <code>FCNKey</code>
+	 * 
 	 * @return JDFFCNKey: the element
 	 */
 	public JDFFCNKey appendFCNKey()
@@ -334,6 +348,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>FCNKey</code>
+	 * 
 	 * @return JDFFCNKey: the element
 	 */
 	public JDFFCNKey getFCNKey()
@@ -346,6 +361,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>SystemTimeSet</code>, create if it doesn't exist
+	 * 
 	 * @return JDFSystemTimeSet: the element
 	 */
 	public JDFSystemTimeSet getCreateSystemTimeSet()
@@ -355,6 +371,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append element <code>SystemTimeSet</code>
+	 * 
 	 * @return JDFSystemTimeSet: the element
 	 */
 	public JDFSystemTimeSet appendSystemTimeSet()
@@ -364,6 +381,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>SystemTimeSet</code>
+	 * 
 	 * @return JDFSystemTimeSet: the element
 	 */
 	public JDFSystemTimeSet getSystemTimeSet()
@@ -376,6 +394,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>CreateCounterReset</code>, create if it doesn't exist
+	 * 
 	 * @return JDFCreateCounterReset: the element
 	 */
 	public JDFCounterReset getCreateCounterReset()
@@ -385,6 +404,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append element <code>CreateCounterReset</code>
+	 * 
 	 * @return JDFCreateCounterReset: the element
 	 */
 	public JDFCounterReset appendCounterReset()
@@ -394,6 +414,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>CreateCounterReset</code>
+	 * 
 	 * @return JDFCreateCounterReset: the element
 	 */
 	public JDFCounterReset getCounterReset()
@@ -406,6 +427,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get comment text if available,
+	 * 
 	 * @return String the comment text, else null
 	 */
 	public String getCommentText()
@@ -420,6 +442,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * set comment text , also creates the comment if not there
+	 * 
 	 * @param text the comment text to set
 	 * @return {@link JDFComment} the comment
 	 */
@@ -432,6 +455,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>Error</code>, create if it doesn't exist
+	 * 
 	 * @return JDFError: the element
 	 */
 	public JDFError getCreateError()
@@ -441,6 +465,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append element <code>Error</code>
+	 * 
 	 * @return JDFError: the element
 	 */
 	public JDFError appendError()
@@ -450,6 +475,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>Error</code>
+	 * 
 	 * @return JDFError: the element
 	 */
 	public JDFError getError()
@@ -463,6 +489,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>Event</code>, create if it doesn't exist
+	 * 
 	 * @return JDFEvent: the element
 	 */
 	public JDFEvent getCreateEvent()
@@ -472,6 +499,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append element <code>Event</code>
+	 * 
 	 * @return JDFEvent: the element
 	 */
 	public JDFEvent appendEvent()
@@ -482,6 +510,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	/**
 	 * set this to an event, append the Event element and optionally the comment<br/>
 	 * overwrites existing values
+	 * 
 	 * @param eventID Event/@EventID to set
 	 * @param eventValue Event/@EventValue to set
 	 * @param comment the comment text, if null no comment is set
@@ -524,6 +553,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append one of the predefined notification details
+	 * 
 	 * @param details
 	 * @return
 	 */
@@ -540,6 +570,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append one of the predefined notification details
+	 * 
 	 * @param details
 	 * @return
 	 */
@@ -560,6 +591,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get the predefined notification details
+	 * 
 	 * @param details
 	 * @return
 	 */
@@ -588,6 +620,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>Event</code>
+	 * 
 	 * @return JDFEvent: the element
 	 */
 	public JDFEvent getEvent()
@@ -600,6 +633,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>Milestone</code>, create if it doesn't exist
+	 * 
 	 * @return JDFMilestone: the element
 	 */
 	public JDFMilestone getCreateMilestone()
@@ -609,6 +643,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append element <code>Milestone</code>
+	 * 
 	 * @return JDFMilestone: the element
 	 */
 	public JDFMilestone appendMilestone()
@@ -618,6 +653,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>Milestone</code>
+	 * 
 	 * @return JDFMilestone: the element
 	 */
 	public JDFMilestone getMilestone()
@@ -630,6 +666,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * gets the NodeIdetifier that matches this
+	 * 
 	 * @return the matching node identifier
 	 */
 	@Override
@@ -657,6 +694,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * creates a JDFJMF that corresponds to this
+	 * 
 	 * @see org.cip4.jdflib.ifaces.ISignalAudit#toSignalJMF()
 	 */
 	@Override
@@ -698,22 +736,24 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * SetSeverity
+	 * 
 	 * @param s
 	 */
 	@Override
 	public void setSeverity(final EnumSeverity s)
 	{
-		setAttribute(JDFConstants.SEVERITY, s.getName(), null);
+		setAttribute(JDFConstants.SEVERITY, s, null);
 	}
 
 	/**
 	 * GetSeverity
+	 * 
 	 * @return EnumSeverity
 	 */
 	@Override
 	public EnumSeverity getSeverity()
 	{
-		return EnumSeverity.getEnum(getAttribute(JDFConstants.SEVERITY, null, null));
+		return EnumSeverity.getEnum(getAttribute(JDFConstants.SEVERITY));
 	}
 
 } // class JDFNotification

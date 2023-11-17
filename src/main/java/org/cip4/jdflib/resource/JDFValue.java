@@ -230,8 +230,7 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueUsage
-	 * ---------------------------------------------------------------------
+	 * --------------------------------------------------------------------- Methods for Attribute ValueUsage ---------------------------------------------------------------------
 	 */
 	// //////////////////////////////////////////////////////////////////////
 	/**
@@ -241,7 +240,7 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 	 */
 	public void setValueUsage(final EnumValueUsage enumVar)
 	{
-		setAttribute(AttributeName.VALUEUSAGE, enumVar.getName(), null);
+		setAttribute(AttributeName.VALUEUSAGE, enumVar, null);
 	}
 
 	/**

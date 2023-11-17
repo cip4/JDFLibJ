@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -512,7 +512,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 */
 	public JDFResource.EnumResStatus getStatusJDF()
 	{
-		return JDFResource.EnumResStatus.getEnum(getLinkRoot().getResStatus(false).getName());
+		EnumResStatus resStatus = getLinkRoot().getResStatus(false);
+		return resStatus == null ? null : JDFResource.EnumResStatus.getEnum(resStatus.getName());
 	}
 
 	/**
@@ -778,7 +779,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 * Actual behavior varies according to the value of PartUsage of the referenced resource:<br>
 	 * if PartUsage="Explicit", all elements that are referenced in PartIDKeys and the ResourceLink must exist and fit<br>
 	 * if PartUsage="Implicit", the best fitting intermediate node of the partitioned resource is returned.<br>
-	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored when searching the part.
+	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored when searching the
+	 * part.
 	 *
 	 * @param nMax maximum number of requested resources; -1= all
 	 *
@@ -794,11 +796,13 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * Method getTargetVector gets the resource nodes this resourcelink refers to including all leaves with identical elements. Skips links that do not exist or where the name mangling is illegal.<br>
+	 * Method getTargetVector gets the resource nodes this resourcelink refers to including all leaves with identical elements. Skips links that do not exist or where the name
+	 * mangling is illegal.<br>
 	 * Actual behavior varies according to the value of PartUsage of the referenced resource:<br>
 	 * if PartUsage="Explicit", all elements that are referenced in PartIDKeys and the ResourceLink must exist and fit<br>
 	 * if PartUsage="Implicit", the best fitting intermediate node of the partitioned resource is returned.<br>
-	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored when searching the part.
+	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored when searching the
+	 * part.
 	 *
 	 * @param nMax maximum number of requested resources; -1= all
 	 *
@@ -817,7 +821,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 * Actual behavior varies according to the value of PartUsage of the referenced resource:<br>
 	 * if PartUsage="Explicit", all elements that are referenced in PartIDKeys and the ResourceLink must exist and fit<br>
 	 * if PartUsage="Implicit", the best fitting intermediate node of the partitioned resource is returned.<br>
-	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored when searching the part.
+	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored when searching the
+	 * part.
 	 *
 	 * @param vmParts target map to use
 	 * @param nMax maximum number of requested resources; -1= all
@@ -864,7 +869,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	public JDFPool getPool()
 	{
 		final KElement deepParentNotName = getDeepParentNotName(getLocalName());
-		if (deepParentNotName != null)
+		if (deepParentNotName != null && (deepParentNotName instanceof JDFPool))
 		{
 			return (JDFPool) deepParentNotName;
 		}
@@ -1014,7 +1019,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 *
 	 * @param resourceToCheck The resource which may be selected by the ResourceLink.
 	 *
-	 *            This ResourceLink must always be the full ResourceLink, i.e. Part Elements are not allowed as parameters.
+	 *        This ResourceLink must always be the full ResourceLink, i.e. Part Elements are not allowed as parameters.
 	 *
 	 * @return true, if the resource link selects the resource
 	 */
@@ -1369,8 +1374,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * reduce the parts to the canonical representation. If all children of a parent node are in defined in parts, they are replaced by their parent. E.g. the canonical representation of all leaves is
-	 * the root.
+	 * reduce the parts to the canonical representation. If all children of a parent node are in defined in parts, they are replaced by their parent. E.g. the canonical
+	 * representation of all leaves is the root.
 	 */
 	public void reduceParts()
 	{
@@ -1597,7 +1602,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * get the sum of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e. mPart is a submap of the searched PartAmount elements
+	 * get the sum of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e. mPart is a submap of the searched
+	 * PartAmount elements
 	 *
 	 *
 	 * @param attName the Attribute name , e.g Amount, ActualAmount
@@ -1778,6 +1784,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		Vector<EnumPartIDKey> v = null;
 
 		final JDFResource res = getTarget();
+		if (res == null)
+			return null;
 		final VString vPartIDKeys = res.getPartIDKeys();
 		if (hasAttribute(AttributeName.PIPEPARTIDKEYS))
 		{
