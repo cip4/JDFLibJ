@@ -183,6 +183,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 
 		log.info("Setting up: " + theHFDir);
 		HotFolder.setDefaultStabilizeTime(12);
+		ThreadUtil.sleep(1);
 	}
 
 	/**

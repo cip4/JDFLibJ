@@ -175,8 +175,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		{
 			if (!q.isLive())
 				break;
-			else
-				ThreadUtil.sleep(2);
+			ThreadUtil.sleep(2);
 		}
 		assertFalse(q.queue(new WaitRunner(2)));
 	}
@@ -233,8 +232,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		{
 			if (!q.isLive())
 				break;
-			else
-				ThreadUtil.sleep(12);
+			ThreadUtil.sleep(12);
 		}
 		assertFalse(q.queue(new WaitRunner(2)));
 	}
@@ -253,8 +251,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		{
 			if (!q.isLive())
 				break;
-			else
-				ThreadUtil.sleep(12);
+			ThreadUtil.sleep(12);
 		}
 		assertFalse(q.queue(new WaitRunner(2, 200)));
 	}
