@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -116,6 +116,28 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	}
 
 	/**
+	 * (26) getCreateFileSpec
+	 * 
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (27) const get element FileSpec
+	 * 
+	 * 
+	 * @return JDFFileSpec the element default is getFileSpec(0)
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
 	 * Constructor for JDFColorSpaceConversionOp
 	 *
 	 * @param ownerDocument
@@ -152,8 +174,7 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	}
 
 	/**
-	 * Gets of 'this' child FileSpec(AbstractProfile) element, optionally
-	 * creates it, if it doesn't exist.
+	 * Gets of 'this' child FileSpec(AbstractProfile) element, optionally creates it, if it doesn't exist.
 	 *
 	 * @return JDFFileSpec the matching AbstractProfile element
 	 */
@@ -191,8 +212,7 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	}
 
 	/**
-	 * Gets of 'this' child FileSpec(SourceProfile) element, optionally creates
-	 * it, if it doesn't exist.
+	 * Gets of 'this' child FileSpec(SourceProfile) element, optionally creates it, if it doesn't exist.
 	 *
 	 * @return JDFFileSpec the matching SourceProfile element
 	 */
