@@ -137,4 +137,19 @@ public class URLWriterTest extends JDFTestCaseBase
 		writeToURL.buffer();
 	}
 
+	/**
+	 * @throws MalformedURLException
+	 *
+	 */
+	@Test
+	public void testWriteToURLPatch() throws MalformedURLException
+	{
+		if (!isTestNetwork())
+			return;
+		URLWriter w = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.PATCH, UrlUtil.TEXT_PLAIN, null);
+		final UrlPart writeToURL = w.writeToURL();
+		assertNotNull(writeToURL);
+		writeToURL.buffer();
+	}
+
 }

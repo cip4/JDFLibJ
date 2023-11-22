@@ -318,8 +318,7 @@ public class URLWriter
 		urlConnection.setRequestProperty(UrlUtil.CONTENT_TYPE, contentType);
 		if (urlConnection instanceof HttpURLConnection)
 		{
-			final HttpURLConnection httpUrlConnection = (HttpURLConnection) urlConnection;
-			httpUrlConnection.setRequestMethod(method);
+			final HttpURLConnection httpUrlConnection = setHttpMethod(urlConnection);
 			if (details != null)
 			{
 				details.applyTo(httpUrlConnection);
@@ -332,6 +331,29 @@ public class URLWriter
 			return new UrlPart(urlConnection, false);
 		}
 		return null;
+	}
+
+	HttpURLConnection setHttpMethod(final URLConnection urlConnection) throws ProtocolException
+	{
+		final HttpURLConnection httpUrlConnection = (HttpURLConnection) urlConnection;
+		try
+		{
+			httpUrlConnection.setRequestMethod(method);
+		}
+		catch (ProtocolException ex)
+		{
+			// known java issue - patch is not in the list of valid messages
+			if (UrlUtil.PATCH.equalsIgnoreCase(method))
+			{
+				httpUrlConnection.setRequestMethod(UrlUtil.POST);
+				httpUrlConnection.setRequestProperty("X-HTTP-Method-Override", UrlUtil.PATCH);
+			}
+			else
+			{
+				throw ex;
+			}
+		}
+		return httpUrlConnection;
 	}
 
 	/**
