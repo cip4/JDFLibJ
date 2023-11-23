@@ -48,7 +48,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.Proxy;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -56,6 +59,7 @@ import java.net.URL;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 public class URLWriterTest extends JDFTestCaseBase
 {
@@ -139,6 +143,8 @@ public class URLWriterTest extends JDFTestCaseBase
 
 	/**
 	 * @throws MalformedURLException
+	 * @throws IOException
+	 * @throws ProtocolException
 	 *
 	 */
 	@Test
@@ -150,6 +156,37 @@ public class URLWriterTest extends JDFTestCaseBase
 		final UrlPart writeToURL = w.writeToURL();
 		assertNotNull(writeToURL);
 		writeToURL.buffer();
+	}
+
+	/**
+	 * @throws IOException
+	 * @throws ProtocolException
+	 *
+	 */
+	@Test
+	public void testWriteToURLPatch2() throws ProtocolException, IOException
+	{
+		URLWriter w = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.PATCH, UrlUtil.TEXT_PLAIN, null);
+
+		HttpURLConnection c = Mockito.mock(HttpURLConnection.class);
+		Mockito.doThrow(ProtocolException.class).when(c).setRequestMethod(UrlUtil.PATCH);
+		w.setHttpMethod(c);
+
+	}
+
+	/**
+	 * @throws MalformedURLException
+	 *
+	 */
+	@Test
+	public void testWriteToURLBadMethod() throws MalformedURLException
+	{
+		if (!isTestNetwork())
+			return;
+
+		URLWriter w = new URLWriter(null, new URL("http://www.example.com"), "bad", UrlUtil.TEXT_PLAIN, null);
+		final UrlPart writeToURL = w.writeToURL();
+		assertNull(writeToURL);
 	}
 
 }
