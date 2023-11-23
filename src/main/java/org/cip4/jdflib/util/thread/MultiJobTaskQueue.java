@@ -113,6 +113,7 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 			}
 			final MultiJobTaskQueue multiTaskQueue = (MultiJobTaskQueue) orderedTaskQueue;
 			multiTaskQueue.setMaxParallel(maxParallel);
+			theMap.set(map);
 			return multiTaskQueue;
 		}
 	}

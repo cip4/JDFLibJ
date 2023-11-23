@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -45,6 +45,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.ThreadUtil;
 
 /**
@@ -58,6 +60,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	private ThreadPoolExecutor executor;
 	private final Vector<TaskRunner> current;
 	int nThread;
+	private static final Log log = LogFactory.getLog(MultiJobTaskQueue.class);
 
 	private class NextRunner extends TaskRunner
 	{
@@ -106,6 +109,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 			}
 			final MultiTaskQueue multiTaskQueue = (MultiTaskQueue) orderedTaskQueue;
 			multiTaskQueue.setMaxParallel(maxParallel);
+			theMap.set(map);
 			return multiTaskQueue;
 		}
 	}

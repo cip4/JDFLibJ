@@ -167,7 +167,8 @@ public class OrderedTaskQueue extends Thread
 
 	final Vector<TaskRunner> queue;
 	final AtomicInteger idle;
-	final Log log;
+	private static final Log log = LogFactory.getLog(OrderedTaskQueue.class);
+
 	MyMutex mutex;
 	int started;
 	int done;
@@ -203,6 +204,7 @@ public class OrderedTaskQueue extends Thread
 				map.put(name, orderedTaskQueue);
 			}
 			orderedTaskQueue.idle.set(0);
+			theMap.set(map);
 			return orderedTaskQueue;
 		}
 	}
@@ -219,10 +221,12 @@ public class OrderedTaskQueue extends Thread
 		name = getThreadName(name);
 		synchronized (theMap)
 		{
-			final OrderedTaskQueue orderedTaskQueue = theMap.get().get(name);
+			Map<String, OrderedTaskQueue> map = theMap.get();
+			final OrderedTaskQueue orderedTaskQueue = map.get(name);
 			if (orderedTaskQueue != null)
 			{
 				orderedTaskQueue.shutDown();
+				theMap.set(map);
 			}
 		}
 	}
@@ -235,7 +239,6 @@ public class OrderedTaskQueue extends Thread
 	{
 		super(name);
 		setDaemon(true);
-		log = LogFactory.getLog(getClass());
 		queue = new Vector<>();
 		mutex = new MyMutex();
 		started = done = 0;
@@ -255,26 +258,20 @@ public class OrderedTaskQueue extends Thread
 	 */
 	public static void shutDownAll()
 	{
-		Map<String, OrderedTaskQueue> map = theMap.get();
-		final int size = map.size();
-		if (size > 0)
+		synchronized (theMap)
 		{
-			LogFactory.getLog(OrderedTaskQueue.class).info("shutting down " + size + " ordered queues");
-			synchronized (theMap)
+			Map<String, OrderedTaskQueue> map = theMap.get();
+			final int size = map.size();
+			log.info("shutting down " + size + " ordered queues");
+			final Collection<String> v = ContainerUtil.getKeyArray(map);
+			if (v != null)
 			{
-				final Collection<String> v = ContainerUtil.getKeyArray(map);
-				if (v != null)
+				for (final String key : v)
 				{
-					for (final String key : v)
-					{
-						map.get(key).shutDown();
-					}
+					map.get(key).shutDown();
 				}
 			}
-		}
-		else
-		{
-			LogFactory.getLog(OrderedTaskQueue.class).info("skipping shut down of " + size + " ordered queues");
+			theMap.set(map);
 		}
 	}
 
@@ -284,7 +281,9 @@ public class OrderedTaskQueue extends Thread
 	public void shutDown()
 	{
 		idle.set(-1);
-		theMap.get().remove(getName());
+		Map<String, OrderedTaskQueue> map = theMap.get();
+		map.remove(getName());
+		theMap.set(map);
 		ThreadUtil.notifyAll(mutex);
 	}
 
