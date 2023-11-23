@@ -162,6 +162,7 @@ import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.JDFSheetOptimizingParams;
 import org.cip4.jdflib.resource.process.JDFTransferCurve;
 import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
 import org.cip4.jdflib.resource.process.JDFTransferCurveSet;
@@ -2290,6 +2291,29 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.makeNewJDF(n, null);
 		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"DieLayout\"]/Resource/DieLayout/@MediaRef", null));
 		assertEquals("PS3", xjdf.getXPathAttribute("ResourceSet[@Name=\"DieLayout\"]/Resource/DieLayout/Media/@ISOPaperSubstrate", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGangElementMedia()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFSheetOptimizingParams sop = (JDFSheetOptimizingParams) n.addResource(ElementName.SHEETOPTIMIZINGPARAMS, EnumUsage.Input);
+
+		JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
+		m.setMediaType(EnumMediaType.Paper);
+		m.setProductID("pid");
+		m.setGrade(3);
+		for (int i = 0; i < 3; i++)
+		{
+			sop.appendGangElement().refMedia(m);
+		}
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"SheetOptimizingParams\"]/Resource/SheetOptimizingParams/GangElement[1]/@MediaRef", null));
+		assertEquals("PS3", xjdf.getXPathAttribute("ResourceSet[@Name=\"SheetOptimizingParams\"]/Resource/SheetOptimizingParams/GangElement[1]/Media/@ISOPaperSubstrate", null));
 	}
 
 	/**
