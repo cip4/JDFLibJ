@@ -243,6 +243,24 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 */
+	@Test
+	public void testCoverClasses()
+	{
+		// check that every auto class has a corresponding class
+		try
+		{
+			// cover classes
+			traverseNormalClassesAndInstantiate(dir.getParentFile(), new CoverageVisitor());
+		}
+		catch (final DOMException e)
+		{
+			Assertions.fail("DOMException : " + e.getMessage());
+		}
+	}
+
+	/**
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
