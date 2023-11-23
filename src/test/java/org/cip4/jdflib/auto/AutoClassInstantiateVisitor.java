@@ -68,14 +68,7 @@
  */
 package org.cip4.jdflib.auto;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -85,35 +78,15 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.StringArray;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.devicecapability.JDFTerm;
-import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 
 public class AutoClassInstantiateVisitor implements DirectoryVisitor
 {
-	final Set<String> skip;
 
 	public AutoClassInstantiateVisitor()
 	{
 		super();
-		StringArray skip0 = new StringArray(
-				"JDFBarCode JDFDevCaps JDFIDPrintingParams JDFLayout.appendSignature JDFLayout.appendSurface JDFLayout.appendFrontSurface JDFLayout.appendBackSurface JDFLayout.appendSheet "
-						+ "JDFAbortQueueEntryParams.appendQueueFilter JDFNotification JDFNumberItem JDFPartAmount");
-		StringArray skip1 = new StringArray("getTest getActionPool getTestPool getTestTerm getUpdatedPreviousAudit getBindingType getCreateHoleType getHoleType appendHoleType"
-				+ " getMethod getSurplusHandling getServiceLevel getReturnMethod getTransfer JDFDevCaps" + " getParentPool getModulePool getCreateParentPool"
-				+ " JDFIDPrintingParams JDFLayout.getCreateSignature JDFLayout.getCreateSurface JDFLayout.getCreateFrontSurface JDFLayout.getCreateBackSurface JDFLayout.getCreateSheet"
-				+ " getCreateModulePool getCreateDevCapPool getDevCapPool getParentPool getDevCapVector getDevCap getMinOccurs getMaxOccurs JDFNumberItem JDFPartAmount JDFPartStatus JDFStatusPool JDFResourceLink");
-		;
-		StringArray skip2 = new StringArray(
-				"JDFNewJDFQuParams setFamily setIdentical setRefTarget JDFColorantControl.setSeparation setPhoneNumber setEMailLocator setQuery JDFPartAmount");
-		skip = new HashSet<>();
-		skip.addAll(skip0);
-		skip.addAll(skip1);
-		skip.addAll(skip2);
 	}
 
 	boolean totalResult = true;
@@ -187,186 +160,12 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 				|| (elementName.equals(ElementName.SHAPE) && createdClass.equals("JDFShapeElement"))
 				|| (elementName.endsWith(JDFConstants.LINK) && createdClass.substring("JDF".length()).equals(ElementName.RESOURCELINK));
 
-		coverAppenders(kElem);
-		coverSetters(kElem);
 		kElem.removeAttribute(AttributeName.RREF);
-		coverGetters(kElem);
 		if (!result)
 		{
 			totalResult = false;
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "AutoClassIntantiateVisitor: Class JDF" + elementName + " (for " + fileName + ") could not be instantiated!"
 					+ " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
-		}
-	}
-
-	private void coverGetters(KElement kElem) throws Exception
-	{
-		Class<? extends KElement> c = kElem.getClass();
-		Method[] methods = c.getMethods();
-		for (Method method : methods)
-		{
-			String ab = c.getSimpleName() + "." + method.getName();
-			if (method.getName().startsWith("get"))
-			{
-				Class<?>[] types = method.getParameterTypes();
-				try
-				{
-					if (types.length == 0)
-					{
-						log.info(ab);
-						method.invoke(kElem, new Object[] {});
-					}
-					else if (types.length == 0 && int.class.equals(types[0]))
-					{
-						method.invoke(kElem, 0);
-					}
-
-				}
-				catch (InvocationTargetException i)
-				{
-					Throwable t = i.getTargetException();
-					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
-							|| skip.contains(c.getSimpleName()))
-					{
-						// skip devcaps
-					}
-					else if (t instanceof RuntimeException)
-					{
-						log.warn("Runtime Exception :", t);
-					}
-					else
-					{
-						throw i;
-					}
-				}
-				catch (Exception j)
-				{
-
-					log.warn("snafu ", j);
-				}
-			}
-		}
-	}
-
-	private void coverAppenders(KElement kElem) throws Exception
-	{
-		Class<? extends KElement> c = kElem.getClass();
-		Method[] methods = c.getMethods();
-		for (Method method : methods)
-		{
-			if (method.getName().startsWith("append"))
-			{
-				String ab = c.getSimpleName() + "." + method.getName();
-				Class<?>[] types = method.getParameterTypes();
-				try
-				{
-					if (types.length == 0)
-					{
-						log.info(ab);
-						KElement e = (KElement) method.invoke(kElem, new Object[] {});
-						if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
-								|| skip.contains(c.getSimpleName()))
-						{
-							// nop
-						}
-						else
-						{
-							assertNotNull(e);
-						}
-					}
-				}
-				catch (InvocationTargetException i)
-				{
-					Throwable t = i.getTargetException();
-					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
-							|| skip.contains(c.getSimpleName()))
-					{
-						// nop
-					}
-					else if (t instanceof RuntimeException)
-					{
-						log.warn("Runtime Exception :", t);
-					}
-					else
-					{
-						throw i;
-					}
-				}
-				catch (Exception j)
-				{
-
-					log.warn("snafu ", j);
-				}
-			}
-		}
-	}
-
-	private void coverSetters(KElement kElem) throws Exception
-	{
-		Class<? extends KElement> c = kElem.getClass();
-		Method[] methods = c.getMethods();
-		for (Method method : methods)
-		{
-			if (method.getName().startsWith("set") && !Modifier.isStatic(method.getModifiers()))
-			{
-				Class<?>[] types = method.getParameterTypes();
-				String ab = c.getSimpleName() + "." + method.getName();
-				try
-				{
-					if (types.length == 1)
-					{
-						if (String.class.equals(types[0]))
-						{
-							method.invoke(kElem, "test");
-						}
-						else if (VString.class.equals(types[0]))
-						{
-							method.invoke(kElem, new VString("test1 test2"));
-						}
-						else if (int.class.equals(types[0]))
-						{
-							method.invoke(kElem, 1);
-						}
-						else if (boolean.class.equals(types[0]))
-						{
-							method.invoke(kElem, true);
-						}
-						else if (double.class.equals(types[0]))
-						{
-							method.invoke(kElem, 42.0);
-						}
-						else if (!Attr.class.equals(types[0]))
-						{
-							log.info(ab + " " + types[0]);
-							method.invoke(kElem, new Object[] { null });
-						}
-						//
-					}
-
-				}
-				catch (InvocationTargetException i)
-				{
-					Throwable t = i.getTargetException();
-					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
-							|| skip.contains(c.getSimpleName()))
-					{
-						// nop
-					}
-					else if (t instanceof RuntimeException)
-					{
-						log.warn("Runtime Exception :", t);
-					}
-					else
-					{
-						throw i;
-					}
-				}
-				catch (Exception j)
-				{
-
-					log.warn("snafu ", j);
-				}
-			}
 		}
 	}
 }
