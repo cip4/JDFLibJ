@@ -151,6 +151,7 @@ import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
+import org.cip4.jdflib.resource.process.JDFDieLayout;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -2269,6 +2270,26 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.makeNewJDF(n, null);
 		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/@URL", null));
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/FileSpec/@URL", null), "previewURL");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testDieLayoutMedia()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFDieLayout dl = (JDFDieLayout) n.addResource(ElementName.DIELAYOUT, EnumUsage.Input);
+		dl.setProductID("id_dl");
+		JDFMedia m = dl.appendMedia();
+		m.setMediaType(EnumMediaType.Paper);
+		m.setProductID("pid");
+		m.setGrade(3);
+		m.makeRootResource("mid", null, true);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"DieLayout\"]/Resource/DieLayout/@MediaRef", null));
+		assertEquals("PS3", xjdf.getXPathAttribute("ResourceSet[@Name=\"DieLayout\"]/Resource/DieLayout/Media/@ISOPaperSubstrate", null));
 	}
 
 	/**

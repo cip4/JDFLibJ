@@ -76,7 +76,9 @@ public class WalkRefElement extends WalkJDFElement
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final JDFRefElement refElem = (JDFRefElement) jdf;
-		if (mustInline(refElem.getRefLocalName()) && refElem.getTarget() != null)
+		KElement parent = jdf.getParentNode_KElement();
+
+		if (mustInline(parent, refElem.getRefLocalName()) && refElem.getTarget() != null)
 		{
 			try
 			{
@@ -100,6 +102,14 @@ public class WalkRefElement extends WalkJDFElement
 			makeRefAttribute(refElem, xjdf);
 		}
 		return null;
+	}
+
+	boolean mustInline(KElement parent, String refLocalName)
+	{
+		boolean inline = mustInline(refLocalName);
+		WalkJDFElement walker = inline ? null : (WalkJDFElement) jdfToXJDF.getFactory().getWalker(parent);
+		inline = inline || walker != null && walker.mustInline(refLocalName);
+		return inline;
 	}
 
 	private boolean wantRef(final JDFRefElement refElem)
@@ -238,4 +248,5 @@ public class WalkRefElement extends WalkJDFElement
 	{
 		return toCheck instanceof JDFRefElement;
 	}
+
 }
