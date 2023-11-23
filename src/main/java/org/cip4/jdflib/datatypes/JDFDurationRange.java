@@ -83,6 +83,7 @@ package org.cip4.jdflib.datatypes;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.StringUtil;
 
 public class JDFDurationRange extends JDFRange
 {
@@ -316,6 +317,23 @@ public class JDFDurationRange extends JDFRange
 	public String getLeftString(int precision)
 	{
 		return m_left.getDurationISO();
+	}
+
+	public static JDFDurationRange createDurationRange(String duration)
+	{
+		duration = StringUtil.normalize(duration, false, null);
+		if (duration == null)
+			return null;
+
+		try
+		{
+			return new JDFDurationRange(duration);
+		}
+		catch (DataFormatException dfe)
+		{
+			return null;
+		}
+
 	}
 
 }

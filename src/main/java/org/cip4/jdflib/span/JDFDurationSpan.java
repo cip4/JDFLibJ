@@ -75,14 +75,11 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFDurationRange;
 import org.cip4.jdflib.util.JDFDuration;
 
@@ -161,48 +158,27 @@ public class JDFDurationSpan extends JDFSpanBase
 
 	public JDFDuration getActual()
 	{
-		try
-		{
-			return new JDFDuration(getAttribute(AttributeName.ACTUAL, null, JDFConstants.EMPTYSTRING));
-		}
-		catch (DataFormatException dfe)
-		{
-			throw new JDFException("not a valid date string. Malformed JDF");
-		}
+		return JDFDuration.createDuration(getAttribute(AttributeName.ACTUAL));
 	}
 
 	public void setPreferred(JDFDuration value)
 	{
-		setAttribute(AttributeName.PREFERRED, value == null ? null : value.getDurationISO(), JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.PREFERRED, value, null);
 	}
 
 	public JDFDuration getPreferred()
 	{
-		try
-		{
-			return new JDFDuration(getAttribute(AttributeName.PREFERRED, null, JDFConstants.EMPTYSTRING));
-		}
-		catch (DataFormatException dfe)
-		{
-			throw new JDFException("not a valid date string. Malformed JDF");
-		}
+		return JDFDuration.createDuration(getAttribute(AttributeName.PREFERRED));
 	}
 
 	public void setRange(JDFDurationRange value)
 	{
-		setAttribute(AttributeName.RANGE, value == null ? null : value.toString());
+		setAttribute(AttributeName.RANGE, value, null);
 	}
 
 	public JDFDurationRange getRange()
 	{
-		try
-		{
-			return new JDFDurationRange(getAttribute(AttributeName.RANGE));
-		}
-		catch (DataFormatException dfe)
-		{
-			throw new JDFException("not a valid DurationRange string. Malformed JDF");
-		}
+		return JDFDurationRange.createDurationRange(getAttribute(AttributeName.PREFERRED));
 	}
 
 	public void setOfferRange(JDFDurationRange value)
@@ -212,14 +188,7 @@ public class JDFDurationSpan extends JDFSpanBase
 
 	public JDFDurationRange getOfferRange()
 	{
-		try
-		{
-			return new JDFDurationRange(getAttribute(AttributeName.OFFERRANGE));
-		}
-		catch (DataFormatException dfe)
-		{
-			throw new JDFException("not a valid DurationRange string. Malformed JDF");
-		}
+		return JDFDurationRange.createDurationRange(getAttribute(AttributeName.OFFERRANGE));
 	}
 
 	@Override

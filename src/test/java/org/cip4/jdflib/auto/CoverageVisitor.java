@@ -88,7 +88,9 @@ import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm;
+import org.cip4.jdflib.span.JDFSpanBase;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 
@@ -150,8 +152,6 @@ public class CoverageVisitor implements DirectoryVisitor
 
 	private void testJDFCoverage(final String fileName) throws Exception
 	{
-		boolean result = false;
-
 		String elementName = fileName;
 		final String prefix = elementName.startsWith("JDFAuto") ? "JDFAuto" : "JDF";
 
@@ -174,10 +174,13 @@ public class CoverageVisitor implements DirectoryVisitor
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
 
-		final KElement kElem = jdfRoot.appendElement(elementName); // create a class
-																	// for
-																	// elementName
+		final KElement kElem = jdfRoot.appendElement(elementName);
 
+		cover(kElem);
+	}
+
+	void cover(final KElement kElem) throws Exception
+	{
 		coverAppenders(kElem);
 		coverSetters(kElem);
 		kElem.removeAttribute(AttributeName.RREF);
@@ -258,6 +261,8 @@ public class CoverageVisitor implements DirectoryVisitor
 						{
 							assertNotNull(e);
 						}
+						if ((e instanceof JDFAbstractState) || (e instanceof JDFSpanBase))
+							cover(e);
 					}
 				}
 				catch (InvocationTargetException i)

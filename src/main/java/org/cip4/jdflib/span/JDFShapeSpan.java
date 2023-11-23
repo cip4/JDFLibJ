@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,13 +75,10 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFShapeRangeList;
 
@@ -160,14 +157,7 @@ public class JDFShapeSpan extends JDFSpanBase
 
 	public JDFShape getActual()
 	{
-		try
-		{
-			return new JDFShape(getAttribute(AttributeName.ACTUAL));
-		}
-		catch (DataFormatException e)
-		{
-			throw new JDFException("JDFShapeState.getActual: Attribute Actual is not capable to create JDFShape");
-		}
+		return JDFShape.createShape(getAttribute(AttributeName.ACTUAL));
 	}
 
 	/**
@@ -183,36 +173,27 @@ public class JDFShapeSpan extends JDFSpanBase
 
 	public void setPreferred(JDFShape value)
 	{
-		setAttribute(AttributeName.PREFERRED, value.toString(), null);
+		setAttribute(AttributeName.PREFERRED, value, null);
 	}
 
 	public JDFShape getPreferred()
 	{
-		try
-		{
-			return new JDFShape(getAttribute(AttributeName.PREFERRED));
-		}
-		catch (DataFormatException e)
-		{
-			throw new JDFException("JDFShapeState.getPreferred: Attribute Preferred is not capable to create JDFShape");
-		}
+		return JDFShape.createShape(getAttribute(AttributeName.PREFERRED));
 	}
 
 	public void setRange(JDFShapeRangeList value)
 	{
-		setAttribute(AttributeName.RANGE, value.toString());
+		setAttribute(AttributeName.RANGE, value, null);
 	}
 
 	public JDFShapeRangeList getRange()
 	{
-		try
-		{
-			return new JDFShapeRangeList(getAttribute(AttributeName.RANGE));
-		}
-		catch (DataFormatException e)
-		{
-			throw new JDFException("JDFShapeState.getRange: Attribute Range is not capable to create JDFShapeRangeList");
-		}
+		return JDFShapeRangeList.createShapeRangeList(getAttribute(AttributeName.RANGE));
+	}
+
+	public JDFShapeRangeList getOfferRange()
+	{
+		return JDFShapeRangeList.createShapeRangeList(getAttribute(AttributeName.OFFERRANGE));
 	}
 
 	@Override

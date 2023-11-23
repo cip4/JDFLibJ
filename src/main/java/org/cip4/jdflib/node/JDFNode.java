@@ -7094,7 +7094,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			{
 				break;
 			}
-			if (pr.getStatus().equals(EnumNodeStatus.Completed))
+			if (EnumNodeStatus.Completed.equals(pr.getStatus()))
 			{
 				v2.addElement(pr);
 			}

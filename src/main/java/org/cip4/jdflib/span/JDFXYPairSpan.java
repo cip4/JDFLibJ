@@ -77,13 +77,10 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
 import org.w3c.dom.DOMException;
@@ -164,36 +161,22 @@ public class JDFXYPairSpan extends JDFSpanBase
 
 	public void setActual(JDFXYPair value)
 	{
-		setAttribute(AttributeName.ACTUAL, value.toString(), null);
+		setAttribute(AttributeName.ACTUAL, value, null);
 	}
 
 	public JDFXYPair getActual()
 	{
-		try
-		{
-			return new JDFXYPair(getAttribute(AttributeName.ACTUAL));
-		}
-		catch (DataFormatException e)
-		{
-			throw new JDFException("JDFXYPairState.getActual: Attribute Actual is not capable to create JDFXYPair");
-		}
+		return JDFXYPair.createXYPair(getAttribute(AttributeName.ACTUAL));
 	}
 
 	public void setPreferred(JDFXYPair value)
 	{
-		setAttribute(AttributeName.PREFERRED, value.toString(), null);
+		setAttribute(AttributeName.PREFERRED, value, null);
 	}
 
 	public JDFXYPair getPreferred()
 	{
-		try
-		{
-			return new JDFXYPair(getAttribute(AttributeName.PREFERRED));
-		}
-		catch (DataFormatException e)
-		{
-			throw new JDFException("JDFXYPairState.getPreferred: Attribute Preferred is not capable to create JDFXYPair");
-		}
+		return JDFXYPair.createXYPair(getAttribute(AttributeName.PREFERRED));
 	}
 
 	/**
@@ -214,14 +197,7 @@ public class JDFXYPairSpan extends JDFSpanBase
 
 	public JDFXYPairRangeList getRange()
 	{
-		try
-		{
-			return new JDFXYPairRangeList(getAttribute(AttributeName.RANGE));
-		}
-		catch (DataFormatException e)
-		{
-			throw new JDFException("JDFXYPairState.getRange: Attribute Range is not capable to create JDFXYPairRangeList");
-		}
+		return JDFXYPairRangeList.createXYPairRangeList(getAttribute(AttributeName.RANGE));
 	}
 
 	@Override
