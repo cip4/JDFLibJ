@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,8 +80,7 @@ import java.util.Properties;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * This class provides all version and build details of the library.
- * Attention - this only works in case the library is built with maven
+ * This class provides all version and build details of the library. Attention - this only works in case the library is built with maven
  *
  */
 public class JDFVersion
@@ -115,7 +114,7 @@ public class JDFVersion
 	/**
 	 * The minor version number of the JDF Library.
 	 */
-	public final static String LIB_MINOR_VERSION = getMinorVersion(LIB_VERSION);;
+	public final static String LIB_MINOR_VERSION = getMinorVersion(LIB_VERSION);
 
 	/**
 	 * The current JDF Version.
@@ -135,6 +134,7 @@ public class JDFVersion
 
 	/**
 	 * Read and returns a build property by key.
+	 * 
 	 * @param key The key of the build property.
 	 * @return The value of the build property by key.
 	 */
@@ -163,6 +163,7 @@ public class JDFVersion
 
 	/**
 	 * Generates and returns the major version number from the maven version number.
+	 * 
 	 * @return The major version number as String.
 	 */
 	private static String getMajorVersion(final String mvnVersion)
@@ -179,6 +180,7 @@ public class JDFVersion
 
 	/**
 	 * Generates and returns the minor version number from the maven version number.
+	 * 
 	 * @return The major version number as String.
 	 */
 	private static String getMinorVersion(final String mvnVersion)
