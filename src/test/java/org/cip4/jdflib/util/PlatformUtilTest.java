@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,11 +36,17 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.junit.jupiter.api.Assertions;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -60,7 +66,7 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	@Test
 	public void testIsWindows()
 	{
-		Assertions.assertEquals(File.separator.equals(JDFCoreConstants.BACK_SLASH), PlatformUtil.isWindows(), "Return value is not windows.");
+		assertEquals(File.separator.equals(JDFCoreConstants.BACK_SLASH), PlatformUtil.isWindows(), "Return value is not windows.");
 	}
 
 	/**
@@ -70,9 +76,9 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	public void testGetProperty()
 	{
 		System.setProperty("foo.bar", "");
-		Assertions.assertNull(PlatformUtil.getProperty("foo.bar"));
+		assertNull(PlatformUtil.getProperty("foo.bar"));
 		System.setProperty("foo.bar", "fnarf");
-		Assertions.assertEquals("fnarf", PlatformUtil.getProperty("foo.bar"));
+		assertEquals("fnarf", PlatformUtil.getProperty("foo.bar"));
 		System.setProperty("foo.bar", "");
 	}
 
@@ -83,7 +89,25 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	public void testGetJavaVersion()
 	{
 		log.info(PlatformUtil.getJavaVersion());
-		Assertions.assertNotNull(PlatformUtil.getJavaVersion());
+		assertNotNull(PlatformUtil.getJavaVersion());
+	}
+
+	/**
+	 * Test method for {@link org.cip4.jdflib.util.PlatformUtil#isWindows()}.
+	 */
+	@Test
+	public void testGetMap()
+	{
+		JDFAttributeMap m = PlatformUtil.listProperties(true, true);
+		for (String key : m.keySet())
+			assertTrue(PlatformUtil.hasProperty(key));
+		JDFAttributeMap m1 = PlatformUtil.listProperties(true, false);
+		for (String key : m1.keySet())
+			assertTrue(PlatformUtil.hasProperty(key));
+		JDFAttributeMap m2 = PlatformUtil.listProperties(true, false);
+		for (String key : m2.keySet())
+			assertTrue(PlatformUtil.hasProperty(key));
+
 	}
 
 	/**
@@ -93,9 +117,9 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	public void testHasProperty()
 	{
 		System.setProperty("foo.bar", "");
-		Assertions.assertFalse(PlatformUtil.hasProperty("foo.bar"));
+		assertFalse(PlatformUtil.hasProperty("foo.bar"));
 		System.setProperty("foo.bar", "fnarf");
-		Assertions.assertTrue(PlatformUtil.hasProperty("foo.bar"));
+		assertTrue(PlatformUtil.hasProperty("foo.bar"));
 		System.setProperty("foo.bar", "");
 	}
 
@@ -108,7 +132,7 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetConnectionTimeout()
 	{
-		Assertions.assertEquals(PlatformUtil.DEFAULT_CONNECTION_TIMEOUT, PlatformUtil.getConnectionTimeout(), "ConnectionTimeout value is wrong.");
+		assertEquals(PlatformUtil.DEFAULT_CONNECTION_TIMEOUT, PlatformUtil.getConnectionTimeout(), "ConnectionTimeout value is wrong.");
 	}
 
 }
