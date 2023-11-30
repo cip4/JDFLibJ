@@ -89,7 +89,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * 
- *  
+ * 
  * @author rainer prosi
  * @date before... Jan 9, 2012
  */
@@ -99,9 +99,10 @@ public class JDFPageData extends JDFAutoPageData
 
 	/**
 	 * Constructor for JDFPageData
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
-	 * @throws DOMException 
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
 	 */
 	public JDFPageData(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
@@ -110,8 +111,9 @@ public class JDFPageData extends JDFAutoPageData
 
 	/**
 	 * Constructor for JDFPageData
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -122,11 +124,12 @@ public class JDFPageData extends JDFAutoPageData
 
 	/**
 	 * Constructor for JDFPageData
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * @throws DOMException 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
 	 * 
 	 */
 	public JDFPageData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
@@ -153,7 +156,8 @@ public class JDFPageData extends JDFAutoPageData
 	public void refContentData(JDFContentData letter)
 	{
 		JDFPageElement pe = appendPageElement();
-		pe.setContentListIndex(letter.getIndex());
+		if (letter != null)
+			pe.setContentListIndex(letter.getIndex());
 	}
 
 	/**
@@ -181,6 +185,7 @@ public class JDFPageData extends JDFAutoPageData
 
 	/**
 	 * gets the AssemblyID but alse inherits from the parent PageList
+	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoPageData#getAssemblyID()
 	 */
 	@Override
@@ -196,6 +201,7 @@ public class JDFPageData extends JDFAutoPageData
 
 	/**
 	 * returns the parent pageList if the parent is a pagelist
+	 * 
 	 * @return
 	 */
 	public JDFPageList getPageList()
@@ -206,6 +212,7 @@ public class JDFPageData extends JDFAutoPageData
 
 	/**
 	 * convenience for a single integer index
+	 * 
 	 * @param value the integer value
 	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoPageData#setPageIndex(org.cip4.jdflib.datatypes.JDFIntegerRangeList)

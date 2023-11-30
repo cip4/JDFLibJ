@@ -104,7 +104,7 @@ import org.cip4.jdflib.resource.process.JDFSurface;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * 09.12.2008
+ *         09.12.2008
  */
 public class JDFSheet extends JDFSignature
 {
@@ -329,7 +329,8 @@ public class JDFSheet extends JDFSignature
 	public void refFrontSurface(final JDFSurface refTarget)
 	{
 		refElement(refTarget);
-		refTarget.setSide(EnumSide.Back);
+		if (refTarget != null)
+			refTarget.setSide(EnumSide.Back);
 	}
 
 	// _______________________________________________________________
@@ -400,7 +401,8 @@ public class JDFSheet extends JDFSignature
 	public void refBackSurface(final JDFSurface refTarget)
 	{
 		refElement(refTarget);
-		refTarget.setSide(EnumSide.Back);
+		if (refTarget != null)
+			refTarget.setSide(EnumSide.Back);
 	}
 
 	/**

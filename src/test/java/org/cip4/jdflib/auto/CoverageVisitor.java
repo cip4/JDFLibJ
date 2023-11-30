@@ -110,7 +110,7 @@ public class CoverageVisitor implements DirectoryVisitor
 				+ " getCreateModulePool getCreateDevCapPool getDevCapPool getParentPool getDevCapVector getDevCap getMinOccurs getMaxOccurs JDFNumberItem JDFPartAmount JDFPartStatus JDFStatusPool JDFResourceLink");
 		;
 		StringArray skip2 = new StringArray(
-				"JDFNewJDFQuParams setFamily setIdentical setRefTarget JDFColorantControl.setSeparation setPhoneNumber setEMailLocator setQuery JDFPartAmount");
+				"JDFNewJDFQuParams setFamily setIdentical setRefTarget JDFColorantControl.setSeparation setPhoneNumber setEMailLocator setQuery JDFPartAmount JDFLayout.refSurface JDFLayout.refSheet");
 		skip = new HashSet<>();
 		skip.addAll(skip0);
 		skip.addAll(skip1);
@@ -183,6 +183,7 @@ public class CoverageVisitor implements DirectoryVisitor
 	{
 		coverAppenders(kElem);
 		coverSetters(kElem);
+		coverrefs(kElem);
 		kElem.removeAttribute(AttributeName.RREF);
 		coverGetters(kElem);
 	}
@@ -263,6 +264,50 @@ public class CoverageVisitor implements DirectoryVisitor
 						}
 						if ((e instanceof JDFAbstractState) || (e instanceof JDFSpanBase))
 							cover(e);
+					}
+				}
+				catch (InvocationTargetException i)
+				{
+					Throwable t = i.getTargetException();
+					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
+							|| skip.contains(c.getSimpleName()))
+					{
+						// nop
+					}
+					else if (t instanceof RuntimeException)
+					{
+						log.warn("Runtime Exception :", t);
+					}
+					else
+					{
+						throw i;
+					}
+				}
+				catch (Exception j)
+				{
+
+					log.warn("snafu ", j);
+				}
+			}
+		}
+	}
+
+	private void coverrefs(KElement kElem) throws Exception
+	{
+		Class<? extends KElement> c = kElem.getClass();
+		Method[] methods = c.getMethods();
+		for (Method method : methods)
+		{
+			if (method.getName().startsWith("ref"))
+			{
+				String ab = c.getSimpleName() + "." + method.getName();
+				Class<?>[] types = method.getParameterTypes();
+				try
+				{
+					if (types.length == 1)
+					{
+						log.info(ab);
+						method.invoke(kElem, new Object[] { null });
 					}
 				}
 				catch (InvocationTargetException i)
