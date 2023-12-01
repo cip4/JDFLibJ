@@ -2962,6 +2962,21 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
+	 * Get the linked resource with name=strName; create it if it does not exist
+	 *
+	 * @param strName the resource name
+	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param i the nuber of matches to skip, if negative, count backwards
+	 * @return the matching resource,
+	 *
+	 * @throws JDFException if resource does not exist and EnumUsage is null
+	 */
+	public JDFResource getCreateResource(final String strName, final EnumUsage usage)
+	{
+		return getCreateResource(strName, usage, 0);
+	}
+
+	/**
 	 * addResource - add a resource to resroot and link it to this process
 	 *
 	 * @param strName the localname of the resource

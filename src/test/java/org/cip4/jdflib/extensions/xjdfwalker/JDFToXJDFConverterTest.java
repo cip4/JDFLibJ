@@ -57,6 +57,7 @@ import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumPageDelivery;
 import org.cip4.jdflib.auto.JDFAutoExposedMedia.EnumPlateType;
 import org.cip4.jdflib.auto.JDFAutoGlue.EnumWorkingDirection;
 import org.cip4.jdflib.auto.JDFAutoGlueApplication.EnumGluingTechnique;
@@ -152,6 +153,7 @@ import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.cip4.jdflib.resource.process.JDFDieLayout;
+import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -1773,6 +1775,20 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testNodeInfoStatus()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFNodeInfo ni = n.getCreateNodeInfo();
+		n.setPartStatus((VJDFAttributeMap) null, EnumNodeStatus.Completed, null);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		assertEquals("Completed", xjdf.getXPathAttribute("ResourceSet[@Name=\"NodeInfo\"]/Resource/NodeInfo/@Status", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testNodeInfoPartition()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -3299,6 +3315,88 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(vMap, ph.getPartMapVector());
 		assertNull(ph.getResource().getElement(ElementName.IDENTICAL));
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testImplicit()
+	{
+		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.DigitalPrinting);
+		JDFDigitalPrintingParams dp = (JDFDigitalPrintingParams) node.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
+		dp.setPartUsage(EnumPartUsage.Implicit);
+		dp.setPageDelivery(EnumPageDelivery.SameOrderFaceDown);
+		JDFMedia m0 = dp.appendMedia();
+		m0.setMediaType(EnumMediaType.Paper);
+		m0.setDescriptiveName("base media");
+		JDFDigitalPrintingParams dp1 = (JDFDigitalPrintingParams) dp.addPartition(EnumPartIDKey.RunIndex, "0");
+		dp1.setPageDelivery(EnumPageDelivery.SameOrderFaceUp);
+		JDFMedia m1 = dp1.appendMedia();
+		m1.setMediaType(EnumMediaType.Paper);
+		m1.setDescriptiveName("cover media");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final XJDFHelper xjdf = conv.convertToXJDF(node);
+		SetHelper setd = xjdf.getSet(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
+		assertEquals(2, setd.size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testExplicit()
+	{
+		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.DigitalPrinting);
+		JDFDigitalPrintingParams dp = (JDFDigitalPrintingParams) node.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
+		dp.setPageDelivery(EnumPageDelivery.SameOrderFaceDown);
+		JDFMedia m0 = dp.appendMedia();
+		m0.setMediaType(EnumMediaType.Paper);
+		m0.setDescriptiveName("base media");
+		JDFDigitalPrintingParams dp1 = (JDFDigitalPrintingParams) dp.addPartition(EnumPartIDKey.RunIndex, "0");
+		dp1.setPageDelivery(EnumPageDelivery.SameOrderFaceUp);
+		JDFMedia m1 = dp1.appendMedia();
+		m1.setMediaType(EnumMediaType.Paper);
+		m1.setDescriptiveName("cover media");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final XJDFHelper xjdf = conv.convertToXJDF(node);
+		SetHelper setd = xjdf.getSet(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
+		assertEquals(1, setd.size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testImplicit2()
+	{
+		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.DigitalPrinting);
+		JDFDigitalPrintingParams dp = (JDFDigitalPrintingParams) node.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
+		dp.setPartUsage(EnumPartUsage.Implicit);
+		dp.setPageDelivery(EnumPageDelivery.SameOrderFaceDown);
+
+		JDFMedia m0 = (JDFMedia) node.getCreateResource(ElementName.MEDIA, EnumUsage.Input);
+		dp.refMedia(m0);
+
+		m0.setMediaType(EnumMediaType.Paper);
+		m0.setDescriptiveName("base media");
+		JDFDigitalPrintingParams dp1 = (JDFDigitalPrintingParams) dp.addPartition(EnumPartIDKey.RunIndex, "0");
+		dp1.setPageDelivery(EnumPageDelivery.SameOrderFaceUp);
+		JDFMedia m1 = (JDFMedia) node.getCreateResource(ElementName.MEDIA, EnumUsage.Input, 1);
+		dp.refMedia(m1);
+		m1.setMediaType(EnumMediaType.Paper);
+		m1.setDescriptiveName("cover media");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final XJDFHelper xjdf = conv.convertToXJDF(node);
+		SetHelper setd = xjdf.getSet(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
+		assertEquals(2, setd.size());
+		SetHelper setm = xjdf.getSet(ElementName.MEDIA, null);
+		assertEquals(2, setm.size());
+		SetHelper setc = xjdf.getSet(ElementName.COMPONENT, EnumUsage.Input);
+		assertEquals(2, setc.size());
 	}
 
 	/**

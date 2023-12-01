@@ -183,9 +183,8 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		r.setType("SetGangQueueEntry");
 		r.setReturnCode(42);
 		final JDFToXJDF conv = new JDFToXJDF();
-		final KElement xjmf = conv.makeNewJMF(jmf);
-		final XJMFHelper xjmfHelper = new XJMFHelper(xjmf);
-		final MessageHelper messageHelper = xjmfHelper.getMessageHelper(0);
+		final XJMFHelper xjmf = conv.convertToXJMF(jmf);
+		final MessageHelper messageHelper = xjmf.getMessageHelper(0);
 		assertNotNull(messageHelper);
 		assertEquals(42, messageHelper.getReturnCode());
 	}

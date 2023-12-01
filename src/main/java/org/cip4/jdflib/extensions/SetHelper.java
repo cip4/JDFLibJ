@@ -1029,6 +1029,11 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 		return true;
 	}
 
+	/**
+	 * the number of partitions (resource elements)
+	 * 
+	 * @return
+	 */
 	public int size()
 	{
 		return theElement == null ? 0 : ContainerUtil.size(theElement.getChildList(getPartitionName(), null));

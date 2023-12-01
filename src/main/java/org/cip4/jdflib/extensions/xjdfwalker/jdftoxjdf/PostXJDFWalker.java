@@ -842,6 +842,44 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	protected class WalkMediaSet extends WalkResourceSet
+	{
+		/**
+		 *
+		 */
+		public WalkMediaSet()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !retainAll && toCheck.getLocalName().equals(SetHelper.RESOURCE_SET) && ElementName.MEDIA.equals(toCheck.getAttribute(AttributeName.NAME));
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param xjdf
+		 * @param dummy
+		 * @return null or super depending on the value of mergelayout
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			xjdf.removeAttribute(AttributeName.USAGE);
+			return super.walk(xjdf, dummy);
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 */
 	protected class WalkRunListSet extends WalkResourceSet
 	{
 		/**

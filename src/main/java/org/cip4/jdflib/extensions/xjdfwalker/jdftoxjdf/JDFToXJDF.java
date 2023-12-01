@@ -399,6 +399,26 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public XJDFHelper convertToXJDF(final KElement root)
+	{
+		return XJDFHelper.getHelper(convert(root));
+	}
+
+	/**
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public XJMFHelper convertToXJMF(final KElement root)
+	{
+		return XJMFHelper.getHelper(convert(root));
+	}
+
+	/**
 	 * @param root the jdf or jmf to transform
 	 * @return the root of the XJDF document
 	 */
