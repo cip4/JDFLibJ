@@ -872,7 +872,11 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			xjdf.removeAttribute(AttributeName.USAGE);
+			KElement parent = xjdf.getParentNode_KElement();
+			if (parent != null && XJDFConstants.XJDF.equals(parent.getLocalName()))
+			{
+				xjdf.removeAttribute(AttributeName.USAGE);
+			}
 			return super.walk(xjdf, dummy);
 		}
 	}
