@@ -873,7 +873,8 @@ class PostXJDFWalker extends BaseElementWalker
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			KElement parent = xjdf.getParentNode_KElement();
-			if (parent != null && XJDFConstants.XJDF.equals(parent.getLocalName()))
+			if (parent != null && XJDFConstants.XJDF.equals(parent.getLocalName()) && ContainerUtil.containsAny(newRootHelper.getTypes(),
+					new StringArray(new String[] { EnumType.ConventionalPrinting.getName(), EnumType.DigitalPrinting.getName() })))
 			{
 				xjdf.removeAttribute(AttributeName.USAGE);
 			}
