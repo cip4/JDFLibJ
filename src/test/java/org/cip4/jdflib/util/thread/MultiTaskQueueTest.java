@@ -258,4 +258,21 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 		}
 		assertEquals(System.currentTimeMillis() - t0, 1200, 1200);
 	}
+
+	@Override
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		MultiTaskQueue.setPercentQueue(100);
+
+	}
+
+	@Override
+	public void tearDown() throws Exception
+	{
+		MultiTaskQueue.setPercentQueue(100);
+		OrderedTaskQueue.shutDownAll();
+		super.tearDown();
+	}
+
 }

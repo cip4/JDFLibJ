@@ -307,7 +307,8 @@ public abstract class JDFTestCaseBase
 	protected String author;
 	protected String senderID;
 	protected long mem;
-	protected Log log;
+	protected Log log = LogFactory.getLog(getClass());
+
 	private static boolean netWorkChecked = false;
 	private static boolean bTestNetwork;
 
@@ -328,7 +329,6 @@ public abstract class JDFTestCaseBase
 		agentVersion = JDFAudit.getStaticAgentVersion();
 		author = JDFAudit.getStaticAuthor();
 		mem = getCurrentMem();
-		log = LogFactory.getLog(getClass());
 	}
 
 	/**
