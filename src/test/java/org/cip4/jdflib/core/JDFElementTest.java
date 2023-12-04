@@ -118,7 +118,6 @@ import org.junit.jupiter.api.Test;
  */
 public class JDFElementTest extends JDFTestCaseBase
 {
-	static final String fileSeparator = System.getProperty("file.separator");
 
 	// member variables for the fixture
 	private JDFDoc m_jdfDoc;

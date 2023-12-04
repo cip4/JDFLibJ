@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -4038,6 +4038,52 @@ public class JDFElement extends KElement
 	}
 
 	/**
+	 * set comment text , also creates the comment if not there
+	 * 
+	 * @param text the comment text to set
+	 * @return {@link JDFComment} the comment
+	 */
+	public JDFComment setCommentText(final String text)
+	{
+		if (StringUtil.isEmpty(text))
+		{
+			removeChildrenByClass(JDFComment.class);
+			return null;
+
+		}
+
+		final JDFComment c = getCreateComment(0);
+		c.setText(text);
+		return c;
+	}
+
+	/**
+	 * set comment text , also creates the comment if not there
+	 * 
+	 * @param text the comment text to set
+	 * @return {@link JDFComment} the comment
+	 */
+	public JDFComment setCommentText(final String text, String name)
+	{
+		if (StringUtil.isEmpty(text))
+		{
+			while (true)
+			{
+				JDFComment c = getComment(name, 0);
+				if (c == null)
+					break;
+				c.deleteNode();
+			}
+			return null;
+
+		}
+
+		final JDFComment c = getCreateComment(name, 0);
+		c.setText(text);
+		return c;
+	}
+
+	/**
 	 * Get string attribute CommentURL
 	 *
 	 * @return the value of the attribute commentURL
@@ -6174,7 +6220,7 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * Gets the Comment with a give @Name
+	 * Gets the Comment with a given @Name
 	 *
 	 * @param _name Comment/@Name
 	 * @param index number of elements to skip
@@ -6184,6 +6230,33 @@ public class JDFElement extends KElement
 	public JDFComment getComment(final String _name, final int index)
 	{
 		return (JDFComment) getChildWithAttribute(ElementName.COMMENT, AttributeName.NAME, null, _name, index, true);
+	}
+
+	/**
+	 * Gets the Comment with a given @Name
+	 *
+	 * @param _name Comment/@Name
+	 * @param index number of elements to skip
+	 * @return JDFComment - the matching element
+	 *
+	 */
+	public String getCommentText(final String _name, final int index)
+	{
+		JDFComment c = getComment(_name, index);
+		return c == null ? null : c.getText();
+	}
+
+	/**
+	 * Gets the Comment with a give @Name
+	 *
+	 * @param _name Comment/@Name
+	 * @param index number of elements to skip
+	 * @return JDFComment - the matching element
+	 *
+	 */
+	public JDFComment getCreateComment(final String _name, final int index)
+	{
+		return (JDFComment) getCreateChildWithAttribute(ElementName.COMMENT, AttributeName.NAME, null, _name, index);
 	}
 
 	// ////////////////////////////////////////////////////////////////////
@@ -6271,7 +6344,7 @@ public class JDFElement extends KElement
 	 * @return KElement the element which matches the above conditions
 	 */
 	@Override
-	public KElement getChildWithAttribute(String nodeName, final String attName, String nameSpaceURI, String attVal, final int index, final boolean bDirect)
+	public KElement getChildWithAttribute(String nodeName, final String attName, String nameSpaceURI, String attVal, int index, final boolean bDirect)
 	{
 		KElement kRet = null;
 		XMLDocUserData userData = null;
@@ -6307,7 +6380,7 @@ public class JDFElement extends KElement
 			attVal = null;
 		}
 
-		if (bDirect)
+		if (bDirect && index >= 0)
 		{ // inlined for performance
 			KElement e0 = getFirstChildElement();
 			if (e0 != null)
@@ -6327,7 +6400,7 @@ public class JDFElement extends KElement
 
 					if (e != null)
 					{
-						if ((bAlwaysFit || e.fitsName(nodeName, nameSpaceURI)) && (e.includesAttribute(attName, attVal)))
+						if ((bAlwaysFit || e.fitsName(nodeName, nameSpaceURI)) && (e.includesAttribute(attName, attVal)) && index-- == 0)
 						{
 							kRet = e;
 						}

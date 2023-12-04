@@ -175,7 +175,22 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final VString v = n.getPartIDKeys(null);
 		assertNotNull(v);
 		ct.stop();
-		System.out.println(ct.toString());
+		log.info(ct.toString());
+	}
+
+	/**
+	 * performance test
+	 */
+	@Test
+	public void testComment()
+	{
+		JDFNode n = JDFNode.createRoot();
+		n.setCommentText("foo");
+		assertEquals("foo", n.getComment(0).getText());
+		n.setCommentText("next", "bar");
+		assertEquals("next", n.getCommentText("bar", 0));
+		assertEquals(null, n.getCommentText("foo", 0));
+		assertEquals(null, n.getCommentText("bar", 1));
 	}
 
 	/**
