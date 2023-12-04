@@ -106,10 +106,34 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMaxParrallel()
+	public void testMaxParallel()
 	{
 		final MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij0", 3);
 		assertEquals(3, q.getMaxParallel());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMaxParallelPercent()
+	{
+		final MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij0", 3);
+		assertEquals(3, q.getMaxParallel());
+		MultiTaskQueue.setPercentQueue(10);
+		q.setMaxParallel(3);
+		assertEquals(1, q.getMaxParallel());
+		q.setMaxParallel(3333);
+		assertEquals(42, q.getMaxParallel());
+		MultiTaskQueue.setPercentQueue(0);
+		q.setMaxParallel(333);
+		assertEquals(1, q.getMaxParallel());
+		MultiTaskQueue.setPercentQueue(-1);
+		q.setMaxParallel(333);
+		assertEquals(1, q.getMaxParallel());
+		MultiTaskQueue.setPercentQueue(999999);
+		q.setMaxParallel(1);
+		assertEquals(42, q.getMaxParallel());
 	}
 
 	/**
@@ -232,5 +256,20 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 		}
 		ThreadUtil.sleep(40);
 		assertEquals(nRun, 44, 5);
+	}
+
+	@Override
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		MultiTaskQueue.setPercentQueue(100);
+
+	}
+
+	@Override
+	public void tearDown() throws Exception
+	{
+		MultiTaskQueue.setPercentQueue(100);
+		super.tearDown();
 	}
 }

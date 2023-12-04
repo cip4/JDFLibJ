@@ -61,6 +61,17 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	private final Vector<TaskRunner> current;
 	int nThread;
 	private static final Log log = LogFactory.getLog(MultiJobTaskQueue.class);
+	private static int percentQueue = 100;
+
+	public static int getPercentQueue()
+	{
+		return percentQueue;
+	}
+
+	public static void setPercentQueue(int percentQueue)
+	{
+		MultiTaskQueue.percentQueue = percentQueue;
+	}
 
 	private class NextRunner extends TaskRunner
 	{
@@ -120,12 +131,15 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	 */
 	public void setMaxParallel(final int maxParallel)
 	{
-		if (maxParallel > 0 && maxParallel != this.maxParallel)
+		int maxParallelTmp = maxParallel * percentQueue / 100;
+		maxParallelTmp = Math.max(1, maxParallelTmp);
+		maxParallelTmp = Math.min(42, maxParallelTmp);
+		if (maxParallelTmp != this.maxParallel)
 		{
-			this.maxParallel = maxParallel;
+			this.maxParallel = maxParallelTmp;
 			if (executor != null)
 				executor.shutdown();
-			executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(maxParallel, new MyThreadFactory());
+			executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(maxParallelTmp, new MyThreadFactory());
 		}
 	}
 
