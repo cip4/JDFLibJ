@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -65,7 +65,7 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 		super();
 	}
 
-	private static VString productResNames = new VString(new String[] { ElementName.CUSTOMERINFO, ElementName.NODEINFO });
+	private static VString productResNames = new VString(new String[] { ElementName.CUSTOMERINFO, ElementName.NODEINFO, ElementName.CONTACT });
 
 	/**
 	 * @see org.cip4.jdflib.ifaces.IXJDFSplit#splitXJDF(org.cip4.jdflib.extensions.XJDFHelper)

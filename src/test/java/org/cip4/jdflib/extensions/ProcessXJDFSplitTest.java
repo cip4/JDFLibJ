@@ -36,20 +36,34 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
-import org.cip4.jdflib.core.*;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCustomerInfo;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.jupiter.api.Assertions;
@@ -350,6 +364,31 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		final JDFNode root = d.getJDFRoot();
 		Assertions.assertEquals(d10, root.getNodeInfo().getEnd());
 		Assertions.assertEquals(d5, root.getJDF(0).getNodeInfo().getEnd());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testCustomerInfoContacts()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+		xCon.setSplitter(splitter);
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		final KElement e = h.getRoot();
+		h.getCreateSet(XJDFConstants.Resource, ElementName.CUSTOMERINFO, EnumUsage.Input).getCreatePartition(0, true).getResource().setAttribute(AttributeName.CUSTOMERORDERID,
+				"cc");
+		final SetHelper sh = h.getCreateSet(XJDFConstants.Resource, ElementName.CONTACT, EnumUsage.Input);
+		final ResourceHelper ph = sh.getCreatePartition(0, true);
+		ph.setPartMap(new JDFAttributeMap(XJDFConstants.ContactType, EnumContactType.Customer.getName()));
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		final JDFCustomerInfo ci = d.getJDFRoot().getCustomerInfo();
+		assertNotNull(ci);
+		final JDFContact contact = (JDFContact) d.getJDFRoot().getResource(ElementName.CONTACT, null, 0);
+		assertEquals(EnumContactType.Customer.getName(), contact.getContactTypes().get(0));
 	}
 
 	/**
