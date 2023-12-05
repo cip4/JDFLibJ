@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -154,6 +155,25 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 		w.addXJDF(h);
 		final XJMFHelper jmf = w.ensureXJMF();
 		assertEquals("xjdf/j1.00.xjdf", jmf.getXPathValue("CommandSubmitQueueEntry/QueueSubmissionParams/@URL"));
+	}
+
+	/**
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public void testEnsureXJMFMulti() throws IOException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final XJDFZipWriter w = new XJDFZipWriter();
+		w.addXJDF(h);
+		for (int i = 0; i < 33; i++)
+		{
+			final XJMFHelper jmf = w.ensureXJMF();
+			assertEquals("xjdf/j1.00.xjdf", jmf.getXPathValue("CommandSubmitQueueEntry/QueueSubmissionParams/@URL"));
+			assertNull(jmf.getXPathValue("CommandSubmitQueueEntry/QueueSubmissionParams[2]/@URL"));
+			assertNull(jmf.getXPathValue("CommandSubmitQueueEntry[2]/QueueSubmissionParams/@URL"));
+		}
 	}
 
 	/**

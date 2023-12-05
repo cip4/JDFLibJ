@@ -280,16 +280,16 @@ public class XJDFZipWriter implements IStreamWriter
 		final IURLSetter qsp;
 		if (EnumType.SubmitQueueEntry.equals(commandType))
 		{
-			qsp = (JDFQueueSubmissionParams) mh.appendElement(ElementName.QUEUESUBMISSIONPARAMS);
+			qsp = (JDFQueueSubmissionParams) mh.getCreateElement(ElementName.QUEUESUBMISSIONPARAMS);
 		}
 		else if (EnumType.ResubmitQueueEntry.equals(commandType))
 		{
-			qsp = (JDFResubmissionParams) mh.appendElement(ElementName.RESUBMISSIONPARAMS);
+			qsp = (JDFResubmissionParams) mh.getCreateElement(ElementName.RESUBMISSIONPARAMS);
 			((JDFResubmissionParams) qsp).setQueueEntryID(qeID);
 		}
 		else if (EnumType.ReturnQueueEntry.equals(commandType))
 		{
-			qsp = (JDFReturnQueueEntryParams) mh.appendElement(ElementName.RETURNQUEUEENTRYPARAMS);
+			qsp = (JDFReturnQueueEntryParams) mh.getCreateElement(ElementName.RETURNQUEUEENTRYPARAMS);
 			((JDFReturnQueueEntryParams) qsp).setQueueEntryID(qeID);
 		}
 		else
