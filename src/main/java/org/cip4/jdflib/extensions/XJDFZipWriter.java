@@ -275,35 +275,35 @@ public class XJDFZipWriter implements IStreamWriter
 		if (xjmf == null)
 		{
 			xjmf = new XJMFHelper();
-			final MessageHelper mh = xjmf.appendMessage(EnumFamily.Command, commandType);
-			final IURLSetter qsp;
-			if (EnumType.SubmitQueueEntry.equals(commandType))
-			{
-				qsp = (JDFQueueSubmissionParams) mh.appendElement(ElementName.QUEUESUBMISSIONPARAMS);
-			}
-			else if (EnumType.ResubmitQueueEntry.equals(commandType))
-			{
-				qsp = (JDFResubmissionParams) mh.appendElement(ElementName.RESUBMISSIONPARAMS);
-				((JDFResubmissionParams) qsp).setQueueEntryID(qeID);
-			}
-			else if (EnumType.ReturnQueueEntry.equals(commandType))
-			{
-				qsp = (JDFReturnQueueEntryParams) mh.appendElement(ElementName.RETURNQUEUEENTRYPARAMS);
-				((JDFReturnQueueEntryParams) qsp).setQueueEntryID(qeID);
-			}
-			else
-			{
-				// can never get here
-				return null;
-			}
-			if (vxjdf.size() == 1)
-			{
-				qsp.setURL(getXJDFPath(0));
-			}
-			else if (vxjdf.size() > 1)
-			{
-				qsp.setURL("xjdf");
-			}
+		}
+		final MessageHelper mh = xjmf.getCreateMessage(EnumFamily.Command, commandType, 0);
+		final IURLSetter qsp;
+		if (EnumType.SubmitQueueEntry.equals(commandType))
+		{
+			qsp = (JDFQueueSubmissionParams) mh.appendElement(ElementName.QUEUESUBMISSIONPARAMS);
+		}
+		else if (EnumType.ResubmitQueueEntry.equals(commandType))
+		{
+			qsp = (JDFResubmissionParams) mh.appendElement(ElementName.RESUBMISSIONPARAMS);
+			((JDFResubmissionParams) qsp).setQueueEntryID(qeID);
+		}
+		else if (EnumType.ReturnQueueEntry.equals(commandType))
+		{
+			qsp = (JDFReturnQueueEntryParams) mh.appendElement(ElementName.RETURNQUEUEENTRYPARAMS);
+			((JDFReturnQueueEntryParams) qsp).setQueueEntryID(qeID);
+		}
+		else
+		{
+			// can never get here
+			return null;
+		}
+		if (vxjdf.size() == 1)
+		{
+			qsp.setURL(getXJDFPath(0));
+		}
+		else if (vxjdf.size() > 1)
+		{
+			qsp.setURL("xjdf");
 		}
 		return xjmf;
 	}

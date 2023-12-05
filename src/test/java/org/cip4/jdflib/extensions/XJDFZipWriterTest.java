@@ -77,8 +77,10 @@ import java.io.File;
 import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.ByteArrayIOStream;
@@ -182,6 +184,47 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 		assertEquals("q1", w.getQeID());
 		assertEquals(EnumType.ReturnQueueEntry, w.getCommandType());
 		w.addXJDF(h);
+		final XJMFHelper jmf = w.ensureXJMF();
+		assertEquals("xjdf/j1.00.xjdf", jmf.getXPathValue("CommandReturnQueueEntry/ReturnQueueEntryParams/@URL"));
+	}
+
+	/**
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public void testEnsureXJMFReturnPre() throws IOException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final XJDFZipWriter w = new XJDFZipWriter();
+		w.setCommandType(EnumType.ReturnQueueEntry);
+		w.setQeID("q1");
+		assertEquals("q1", w.getQeID());
+		assertEquals(EnumType.ReturnQueueEntry, w.getCommandType());
+		w.addXJDF(h);
+		XJMFHelper mh = new XJMFHelper();
+		mh.appendMessage(EnumFamily.Command, EnumType.ReturnQueueEntry);
+		mh.getCreateElement(ElementName.RETURNQUEUEENTRYPARAMS).setAttribute(AttributeName.URL, "dummy");
+		final XJMFHelper jmf = w.ensureXJMF();
+		assertEquals("xjdf/j1.00.xjdf", jmf.getXPathValue("CommandReturnQueueEntry/ReturnQueueEntryParams/@URL"));
+	}
+
+	/**
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public void testEnsureXJMFReturnPreNoParams() throws IOException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final XJDFZipWriter w = new XJDFZipWriter();
+		w.setCommandType(EnumType.ReturnQueueEntry);
+		w.setQeID("q1");
+		assertEquals("q1", w.getQeID());
+		assertEquals(EnumType.ReturnQueueEntry, w.getCommandType());
+		w.addXJDF(h);
+		XJMFHelper mh = new XJMFHelper();
+		mh.appendMessage(EnumFamily.Command, EnumType.ReturnQueueEntry);
 		final XJMFHelper jmf = w.ensureXJMF();
 		assertEquals("xjdf/j1.00.xjdf", jmf.getXPathValue("CommandReturnQueueEntry/ReturnQueueEntryParams/@URL"));
 	}

@@ -39,6 +39,7 @@ package org.cip4.jdflib.extensions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -80,6 +81,20 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	{
 		final MessageHelper mh = theHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry);
 		assertEquals("CommandSubmitQueueEntry", mh.getRoot().getLocalName());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetCreateMessage()
+	{
+		final MessageHelper mh = theHelper.getCreateMessage(EnumFamily.Command, EnumType.SubmitQueueEntry, 0);
+		assertEquals("CommandSubmitQueueEntry", mh.getRoot().getLocalName());
+		final MessageHelper mh2 = theHelper.getCreateMessage(EnumFamily.Command, EnumType.SubmitQueueEntry, 0);
+		assertEquals(mh, mh2);
+		final MessageHelper mh3 = theHelper.getCreateMessage(EnumFamily.Command, EnumType.SubmitQueueEntry, 1);
+		assertNotSame(mh3, mh2);
 	}
 
 	/**

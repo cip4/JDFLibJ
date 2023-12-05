@@ -138,6 +138,20 @@ public class XJMFHelper extends MessagePoolHelper
 	 * @param typ
 	 * @return
 	 */
+	public MessageHelper getCreateMessage(final EnumFamily family, final EnumType typ, int iSkip)
+	{
+		if (family == null || typ == null)
+			return null;
+
+		return getCreateMessage(getMessageName(family, typ.getName()), iSkip);
+	}
+
+	/**
+	 *
+	 * @param family
+	 * @param typ
+	 * @return
+	 */
 	public MessageHelper appendMessage(final EnumFamily family, final String typ)
 	{
 		final String messageName = getMessageName(family, typ);
