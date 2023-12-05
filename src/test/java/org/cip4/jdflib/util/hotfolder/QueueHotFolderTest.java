@@ -57,6 +57,7 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -93,6 +94,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 	@BeforeEach
 	public void setUp() throws Exception
 	{
+		sequential.lock();
 		super.setUp();
 		theHF = new File(sm_dirTestDataTemp + File.separator + "QHFTest");
 		theStorage = new File(sm_dirTestDataTemp + File.separator + "QHFStore");
@@ -266,10 +268,12 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		super.tearDown();
 		hf.stop();
+		sequential.unlock();
 	}
 
 }

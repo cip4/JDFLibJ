@@ -44,6 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -290,5 +291,15 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	{
 		super.tearDown();
 		OrderedTaskQueue.shutDownAll();
+		sequential.unlock();
+
+	}
+
+	@Override
+	@BeforeEach
+	public void setUp() throws Exception
+	{
+		sequential.lock();
+		super.setUp();
 	}
 }

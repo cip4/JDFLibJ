@@ -170,6 +170,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@BeforeEach
 	public synchronized void setUp() throws Exception
 	{
+		sequential.lock();
 		OrderedTaskQueue.shutDownAll();
 		super.setUp();
 		ThreadUtil.sleep(42);
@@ -974,5 +975,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	{
 		OrderedTaskQueue.shutDownAll();
 		super.tearDown();
+		sequential.unlock();
+
 	}
 }

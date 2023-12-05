@@ -42,6 +42,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MultiTaskQueueTest extends JDFTestCaseBase
@@ -100,7 +102,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	@Test
 	synchronized public void testSize()
 	{
-		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi0", 3);
+		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("testSize", 3);
 		assertEquals(0, q.size());
 		q.queue(new WaitRunner(0, 1000));
 		ThreadUtil.sleep(2);
@@ -115,7 +117,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	@Test
 	synchronized public void testMaxParrallel()
 	{
-		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi0", 3);
+		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("testMaxParrallel", 3);
 		assertEquals(3, q.getMaxParallel());
 	}
 
@@ -141,7 +143,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	@Test
 	synchronized public void testMulti()
 	{
-		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi1", 3);
+		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("testMulti()", 3);
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 10; i++)
@@ -189,7 +191,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	synchronized public void testManyMulti()
 	{
 		nRun = 0;
-		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi2b", 3);
+		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("testManyMulti()", 3);
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 333; i++)
@@ -214,7 +216,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	@Test
 	synchronized public void testManyMultiIdle()
 	{
-		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi2aa", 3);
+		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("testManyMultiIdle", 3);
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 555; i++)
@@ -243,7 +245,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	@Test
 	synchronized public void testInterruptMulti()
 	{
-		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multiZapp", 3);
+		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("testInterruptMulti", 3);
 		for (int i = 0; i < 10; i++)
 			q.queue(new WaitRunner(i, 111));
 
@@ -260,19 +262,24 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	}
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		super.setUp();
+		sequential.lock();
 		MultiTaskQueue.setPercentQueue(100);
 
 	}
 
 	@Override
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		MultiTaskQueue.setPercentQueue(100);
 		OrderedTaskQueue.shutDownAll();
 		super.tearDown();
+		sequential.unlock();
+
 	}
 
 }

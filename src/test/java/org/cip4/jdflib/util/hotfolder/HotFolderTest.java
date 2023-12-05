@@ -56,6 +56,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -132,6 +133,8 @@ public class HotFolderTest extends JDFTestCaseBase
 	@Override
 	public synchronized void setUp() throws Exception
 	{
+		sequential.lock();
+
 		n.incrementAndGet();
 		super.setUp();
 		theHF = new File(sm_dirTestDataTemp + File.separator + "HFTest" + n.get());
@@ -677,9 +680,13 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
+	@AfterEach
 	public synchronized void tearDown() throws Exception
 	{
-		hf.stop();
+		if (hf != null)
+			hf.stop();
 		super.tearDown();
+		sequential.unlock();
+
 	}
 }

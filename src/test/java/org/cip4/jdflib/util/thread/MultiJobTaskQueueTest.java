@@ -43,6 +43,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.ThreadUtil;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MultiJobTaskQueueTest extends JDFTestCaseBase
@@ -258,18 +260,23 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	}
 
 	@Override
+	@BeforeEach
 	public void setUp() throws Exception
 	{
+		sequential.lock();
 		super.setUp();
 		MultiTaskQueue.setPercentQueue(100);
 
 	}
 
 	@Override
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		MultiTaskQueue.setPercentQueue(100);
 		OrderedTaskQueue.shutDownAll();
 		super.tearDown();
+		sequential.unlock();
+
 	}
 }
