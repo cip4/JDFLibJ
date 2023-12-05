@@ -178,7 +178,10 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 				break;
 			ThreadUtil.sleep(2);
 		}
-		assertFalse(q.queue(new WaitRunner(2)));
+		assertFalse(
+			q.queue(new WaitRunner(2)),
+			String.format("Adding job to shutdown queue (%s) should fail", q)
+		);
 	}
 
 	/**
@@ -235,7 +238,10 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 				break;
 			ThreadUtil.sleep(12);
 		}
-		assertFalse(q.queue(new WaitRunner(2)));
+		assertFalse(
+			q.queue(new WaitRunner(2)),
+			String.format("Adding job to shutdown queue (%s) should fail", q)
+		);
 	}
 
 	/**
@@ -255,7 +261,10 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 			ThreadUtil.sleep(12);
 			OrderedTaskQueue.shutDownAll();
 		}
-		assertFalse(q.queue(new WaitRunner(2, 200)));
+		assertFalse(
+			q.queue(new WaitRunner(2, 200)),
+			String.format("Adding job to shutdown queue (%s) should fail", q)
+		);
 	}
 
 	/**
