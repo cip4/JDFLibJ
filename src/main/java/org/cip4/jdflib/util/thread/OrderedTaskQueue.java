@@ -284,6 +284,7 @@ public class OrderedTaskQueue extends Thread
 		Map<String, OrderedTaskQueue> map = theMap.get();
 		map.remove(getName());
 		theMap.set(map);
+		queue.clear();
 		ThreadUtil.notifyAll(mutex);
 	}
 
@@ -361,7 +362,7 @@ public class OrderedTaskQueue extends Thread
 	{
 		if (idle.get() < 0)
 		{
-			log.error("cannot queue task in stopped queue");
+			log.error("cannot queue task in stopped queue " + shortString());
 			return false;
 		}
 		synchronized (queue)
@@ -398,6 +399,7 @@ public class OrderedTaskQueue extends Thread
 			if (idle.incrementAndGet() > 3)
 			{
 				shutDown();
+				break;
 			}
 			if (!ThreadUtil.wait(mutex, 100000))
 			{

@@ -178,10 +178,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 				break;
 			ThreadUtil.sleep(2);
 		}
-		assertFalse(
-			q.queue(new WaitRunner(2)),
-			String.format("Adding job to shutdown queue (%s) should fail", q)
-		);
+		assertFalse(q.queue(new WaitRunner(2)), String.format("Adding job to shutdown queue (%s) should fail", q));
 	}
 
 	/**
@@ -229,19 +226,16 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	@Test
 	synchronized public void testStopOne()
 	{
-		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("teffst4");
+		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("testStopOne");
 		assertTrue(q.queue(new WaitRunner(1)));
-		OrderedTaskQueue.shutDown("teffst4");
+		OrderedTaskQueue.shutDown("testStopOne");
 		for (int i = 0; i < 100; i++)
 		{
 			if (!q.isLive())
 				break;
 			ThreadUtil.sleep(12);
 		}
-		assertFalse(
-			q.queue(new WaitRunner(2)),
-			String.format("Adding job to shutdown queue (%s) should fail", q)
-		);
+		assertFalse(q.queue(new WaitRunner(2)), String.format("Adding job to shutdown queue (%s) should fail", q));
 	}
 
 	/**
@@ -251,7 +245,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	@Test
 	synchronized public void testStopAll()
 	{
-		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test554445");
+		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("testStopAll");
 		assertTrue(q.queue(new WaitRunner(1, 200)));
 		OrderedTaskQueue.shutDownAll();
 		for (int i = 0; i < 2000; i++)
@@ -261,10 +255,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 			ThreadUtil.sleep(12);
 			OrderedTaskQueue.shutDownAll();
 		}
-		assertFalse(
-			q.queue(new WaitRunner(2, 200)),
-			String.format("Adding job to shutdown queue (%s) should fail", q)
-		);
+		assertFalse(q.queue(new WaitRunner(2, 200)), String.format("Adding job to shutdown queue (%s) should fail", q));
 	}
 
 	/**
