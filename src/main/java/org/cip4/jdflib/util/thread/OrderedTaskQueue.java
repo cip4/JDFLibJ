@@ -281,6 +281,7 @@ public class OrderedTaskQueue extends Thread
 	public void shutDown()
 	{
 		idle.set(-1);
+		interruptCurrent(0);
 		ThreadUtil.notifyAll(mutex);
 		Map<String, OrderedTaskQueue> map = theMap.get();
 		map.remove(getName());
