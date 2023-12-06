@@ -171,9 +171,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	public synchronized void setUp() throws Exception
 	{
 		sequential.lock();
-		OrderedTaskQueue.shutDownAll();
 		super.setUp();
-		ThreadUtil.sleep(42);
+		ThreadUtil.sleep(12);
 		final int n = ai.incrementAndGet();
 		theHFDir = new File(sm_dirTestDataTemp + File.separator + "StHFTest" + n);
 		FileUtil.deleteAll(theHFDir);
@@ -184,7 +183,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 
 		log.info("Setting up: " + theHFDir);
 		HotFolder.setDefaultStabilizeTime(12);
-		ThreadUtil.sleep(1);
+		ThreadUtil.sleep(12);
 	}
 
 	/**
