@@ -45,8 +45,6 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.lang.reflect.Method;
-
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -77,11 +75,8 @@ public class JDFAuditTest extends ExampleTest
 	@Test
 	public void readVersionDetails() throws Exception
 	{
-		final Method m = JDFAudit.class.getDeclaredMethod("readBuildProperty", String.class);
-		m.setAccessible(true);
-
-		assertEquals("CIP4 JDF Writer Java", m.invoke(null, "lib.name"), "AgentName is wrong");
-		assertTrue(m.invoke(null, "lib.version").toString().startsWith("2.1."), "AgentVersion is wrong");
+		assertEquals("CIP4 JDF Writer Java", JDFAudit.readBuildProperty("lib.name"), "AgentName is wrong");
+		assertTrue(JDFAudit.readBuildProperty("lib.version").toString().startsWith("2.1."), "AgentVersion is wrong");
 	}
 
 	/**
