@@ -839,6 +839,11 @@ class PostXJDFWalker extends BaseElementWalker
 		 */
 	}
 
+	private static StringArray noPrint = new StringArray(
+			new String[] { EnumType.ImageSetting.getName(), EnumType.Imposition.getName(), EnumType.Interpreting.getName(), EnumType.Rendering.getName() });
+
+	private static StringArray print = new StringArray(new String[] { EnumType.ConventionalPrinting.getName(), EnumType.DigitalPrinting.getName() });
+
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
@@ -873,12 +878,19 @@ class PostXJDFWalker extends BaseElementWalker
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			KElement parent = xjdf.getParentNode_KElement();
-			if (parent != null && XJDFConstants.XJDF.equals(parent.getLocalName()) && ContainerUtil.containsAny(newRootHelper.getTypes(),
-					new StringArray(new String[] { EnumType.ConventionalPrinting.getName(), EnumType.DigitalPrinting.getName() })))
+			if (isRemoveUsage(parent))
 			{
 				xjdf.removeAttribute(AttributeName.USAGE);
 			}
 			return super.walk(xjdf, dummy);
+		}
+
+		boolean isRemoveUsage(KElement parent)
+		{
+			boolean isXJDF = parent != null && XJDFConstants.XJDF.equals(parent.getLocalName());
+			VString types = newRootHelper.getTypes();
+			isXJDF = isXJDF && ContainerUtil.containsAny(types, print);
+			return isXJDF && !ContainerUtil.containsAny(types, noPrint);
 		}
 	}
 

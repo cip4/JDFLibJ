@@ -1294,6 +1294,33 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
+	public void testRunListListName()
+	{
+		final XJDFHelper xjdf = new XJDFHelper("j1", null);
+		xjdf.setTypes("ImageSetting");
+		SetHelper rs = xjdf.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		ResourceHelper r1 = rs.appendPartition(AttributeName.RUN, "r1", true);
+		JDFRunList rl1 = (JDFRunList) r1.getResource();
+		rl1.setFileSpecURL("file:r1.pdf");
+		r1.setGeneralID("PageListName", "PL1");
+		ResourceHelper r2 = rs.appendPartition(AttributeName.RUN, "r2", true);
+		JDFRunList rl2 = (JDFRunList) r1.getResource();
+		rl2.setFileSpecURL("file:r2.pdf");
+		r2.setGeneralID("PageListName", "PL2");
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdf);
+		final JDFNode root = d.getJDFRoot();
+		d.write2File(sm_dirTestDataTemp + "PageList.name.jdf", 2, false);
+		assertEquals("PL1", root.getResource(ElementName.RUNLIST).getPartition(new JDFAttributeMap("Run", "r1"), null).getGeneralID("PageListName"));
+		assertTrue(root.isValid(EnumValidationLevel.Incomplete));
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Test
 	public void testPreview()
 	{
 		final KElement xjdf = new JDFToXJDFConverterTest()._testPreview();
