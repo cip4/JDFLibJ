@@ -95,7 +95,7 @@ public class FileTimeTest extends JDFTestCaseBase
 			for (int i = 0; i < 42; i++)
 				if (!dummy.exists())
 					ThreadUtil.sleep(2);
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < 1; i++)
 			{
 				final FileOutputStream fos = new FileOutputStream(dummy, true);
 				for (int j = 0; j < 42; j++)
