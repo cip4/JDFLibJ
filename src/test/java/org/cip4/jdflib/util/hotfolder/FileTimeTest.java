@@ -46,19 +46,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Path;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 public class FileTimeTest extends JDFTestCaseBase
 {
-
-	@TempDir
-	Path tempPath;
 
 	@Test
 	public void testExists()
@@ -76,11 +71,14 @@ public class FileTimeTest extends JDFTestCaseBase
 	@Test
 	public void testmodified()
 	{
-		final FileTime ft = new FileTime(tempPath.toFile(), false);
+		File f = new File(sm_dirTestDataTemp + "ft1.txt");
+		FileUtil.forceDelete(f);
+		FileUtil.createNewFile(f);
+		final FileTime ft = new FileTime(f, false);
 		final long updateModified = ft.updateModified();
 		assertEquals(System.currentTimeMillis(), updateModified, 1000);
-		ThreadUtil.sleep(400);
-		assertEquals(updateModified, ft.updateModified(), 300);
+		ThreadUtil.sleep(600);
+		assertEquals(updateModified, ft.updateModified(), 500);
 	}
 
 	@Test
@@ -88,16 +86,16 @@ public class FileTimeTest extends JDFTestCaseBase
 	{
 		for (final boolean b : new boolean[] { true, false })
 		{
-			final File dummy = tempPath.resolve(System.nanoTime() + ".file").toFile();
-			final FileTime ft = new FileTime(dummy, b);
-			assertTrue(FileUtil.forceDelete(dummy));
-			FileUtil.createNewFile(dummy);
+			File f = new File(sm_dirTestDataTemp + "ft" + b + ".txt");
+			final FileTime ft = new FileTime(f, b);
+			assertTrue(FileUtil.forceDelete(f));
+			FileUtil.createNewFile(f);
 			for (int i = 0; i < 42; i++)
-				if (!dummy.exists())
+				if (!f.exists())
 					ThreadUtil.sleep(2);
 			for (int i = 0; i < 1; i++)
 			{
-				final FileOutputStream fos = new FileOutputStream(dummy, true);
+				final FileOutputStream fos = new FileOutputStream(f, true);
 				for (int j = 0; j < 42; j++)
 				{// incrementally fill file
 					fos.write(i);
@@ -108,7 +106,6 @@ public class FileTimeTest extends JDFTestCaseBase
 				final long updateModified = ft.updateModified();
 				log.info("loop " + i + " " + updateModified % 10000 + " " + ft.length);
 				assertEquals(System.currentTimeMillis(), updateModified, 66000, "loop " + i + " " + b);
-
 			}
 		}
 	}
