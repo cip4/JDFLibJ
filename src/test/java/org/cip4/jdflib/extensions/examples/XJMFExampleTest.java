@@ -109,7 +109,7 @@ public class XJMFExampleTest extends ExampleTest
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, XJDFConstants.ModifyQueueEntry);
-		command.getHeader().setAttribute(AttributeName.ID, "C1");
+		command.setHeader(AttributeName.ID, "C1");
 		command.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/@" + AttributeName.OPERATION, "Abort");
 		command.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/" + ElementName.QUEUEFILTER + "/@" + AttributeName.JOBID, "j1");
 		xjmfHelper.cleanUp();

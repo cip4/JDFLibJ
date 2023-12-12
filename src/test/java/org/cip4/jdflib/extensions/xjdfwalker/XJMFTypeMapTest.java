@@ -68,6 +68,9 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -80,7 +83,6 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -97,20 +99,39 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 		JDFJMF jmf = b.buildHoldQueueEntry("q1");
 		JDFToXJDF c = new JDFToXJDF();
 		KElement xjmf = c.convert(jmf);
-		Assertions.assertEquals(xjmf.getLocalName(), XJDFConstants.XJMF);
+		assertEquals(xjmf.getLocalName(), XJDFConstants.XJMF);
 		KElement command = xjmf.getElement("CommandModifyQueueEntry");
-		Assertions.assertNotNull(command);
-		Assertions.assertEquals(command.getElement("ModifyQueueEntryParams").getAttribute(AttributeName.OPERATION), "Hold");
+		assertNotNull(command);
+		assertEquals(command.getElement("ModifyQueueEntryParams").getAttribute(AttributeName.OPERATION), "Hold");
 		KElement xjmfResp = new XMLDoc(XJDFConstants.XJMF, null).getRoot();
 		KElement response = xjmfResp.appendElement("ResponseModifyQueueEntry");
 		response.appendAnchor(null);
 		response.getCreateElement(XJDFConstants.Header).copyAttribute(AttributeName.REFID, command.getElement(XJDFConstants.Header), AttributeName.ID, null, null);
-		Assertions.assertEquals(1, XJMFTypeMap.getMap().size());
+		assertEquals(1, XJMFTypeMap.getMap().size());
 		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		JDFDoc newDoc = xc.convert(xjmfResp);
 		JDFJMF newJMF = newDoc.getJMFRoot();
-		Assertions.assertEquals(newJMF.getResponse(0).getType(), "HoldQueueEntry");
-		Assertions.assertEquals(0, XJMFTypeMap.getMap().size());
+		assertEquals(newJMF.getResponse(0).getType(), "HoldQueueEntry");
+		assertEquals(0, XJMFTypeMap.getMap().size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testToString()
+	{
+		assertNotNull(XJMFTypeMap.getMap().toString());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testPutNull()
+	{
+		XJMFTypeMap.getMap().put(null, "foo");
+		assertEquals("foo", XJMFTypeMap.getMap().get(null));
 	}
 
 	/**
@@ -123,20 +144,20 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 		JDFJMF jmf = b.createJMF(EnumFamily.Command, EnumType.PipePush);
 		JDFToXJDF c = new JDFToXJDF();
 		KElement xjmf = c.convert(jmf);
-		Assertions.assertEquals(xjmf.getLocalName(), XJDFConstants.XJMF);
+		assertEquals(xjmf.getLocalName(), XJDFConstants.XJMF);
 		KElement command = xjmf.getElement("CommandPipeControl");
-		Assertions.assertNotNull(command);
-		Assertions.assertEquals(command.getElement("PipeParams").getAttribute(AttributeName.OPERATION), "Push");
+		assertNotNull(command);
+		assertEquals(command.getElement("PipeParams").getAttribute(AttributeName.OPERATION), "Push");
 		KElement xjmfResp = new XMLDoc(XJDFConstants.XJMF, null).getRoot();
 		KElement response = xjmfResp.appendElement("ResponsePipeControl");
 		response.appendAnchor(null);
 		response.getCreateElement(XJDFConstants.Header).copyAttribute(AttributeName.REFID, command.getElement(XJDFConstants.Header), AttributeName.ID, null, null);
-		Assertions.assertEquals(1, XJMFTypeMap.getMap().size());
+		assertEquals(1, XJMFTypeMap.getMap().size());
 		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		JDFDoc newDoc = xc.convert(xjmfResp);
 		JDFJMF newJMF = newDoc.getJMFRoot();
-		Assertions.assertEquals(newJMF.getResponse(0).getType(), "PipePush");
-		Assertions.assertEquals(0, XJMFTypeMap.getMap().size());
+		assertEquals(newJMF.getResponse(0).getType(), "PipePush");
+		assertEquals(0, XJMFTypeMap.getMap().size());
 	}
 
 	/**

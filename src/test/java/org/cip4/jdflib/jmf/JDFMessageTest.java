@@ -223,7 +223,7 @@ public class JDFMessageTest
 		try
 		{
 			m.appendAbortQueueEntryParams();
-			fail("only one bortQueueEntryParam");
+			fail("only one AbortQueueEntryParam");
 		}
 		catch (final Exception e)
 		{

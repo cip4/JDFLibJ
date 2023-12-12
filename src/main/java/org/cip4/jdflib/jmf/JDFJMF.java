@@ -522,10 +522,9 @@ public class JDFJMF extends JDFAutoJMF
 	 * @return JDFCommand: the message element
 	 * 
 	 */
-	@Deprecated
 	public JDFCommand getCommand()
 	{
-		return getCommand(0, false);
+		return getCommand(0);
 	}
 
 	/**
@@ -550,13 +549,10 @@ public class JDFJMF extends JDFAutoJMF
 	 *
 	 * @return JDFQuery the message element
 	 *
-	 * @deprecated use getMessageElement
 	 */
-	// JDFQuery GetQuery(int i=0,bool bCreate=false);
-	@Deprecated
 	public JDFQuery getQuery()
 	{
-		return getQuery(0, false);
+		return getQuery(0);
 	}
 
 	/**
@@ -581,13 +577,11 @@ public class JDFJMF extends JDFAutoJMF
 	 * getResponse()
 	 *
 	 * @return JDFResponse the message element
-	 * @deprecated use getMessageElement
+	 *
 	 */
-	// JDFResponse GetResponse(int i=0,bool bCreate=false);
-	@Deprecated
 	public JDFResponse getResponse()
 	{
-		return getResponse(0, false);
+		return getResponse(0);
 	}
 
 	/**
@@ -612,13 +606,11 @@ public class JDFJMF extends JDFAutoJMF
 	 * Get the 0th signal,
 	 *
 	 * @return JDFSignal the message element
-	 * @deprecated use getMessageElement
+	 *
 	 */
-	// JDFSignal GetSignal(int i=0,bool bCreate=false);
-	@Deprecated
 	public JDFSignal getSignal()
 	{
-		return getSignal(0, false);
+		return getSignal(0);
 	}
 
 	/**
@@ -878,12 +870,11 @@ public class JDFJMF extends JDFAutoJMF
 	 * Get the 0 acknowledge,
 	 *
 	 * @return JDFAcknowledge: the message element
-	 * @deprecated use getMessageElement
+	 *
 	 */
-	@Deprecated
 	public JDFAcknowledge getAcknowledge()
 	{
-		return getAcknowledge(0, false);
+		return getAcknowledge(0);
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.xjdfwalker.XJMFTypeMap;
 
 public class WalkPipeControl extends WalkTypesafeMessage
@@ -90,8 +91,7 @@ public class WalkPipeControl extends WalkTypesafeMessage
 	@Override
 	public boolean matches(KElement toCheck)
 	{
-		String localName = toCheck.getLocalName();
-		return localName.endsWith("PipeControl") && super.matches(toCheck);
+		return true;
 	}
 
 	/**
@@ -119,5 +119,14 @@ public class WalkPipeControl extends WalkTypesafeMessage
 			operation = "Pipe" + operation;
 		}
 		return operation;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return VString.getVString("CommandPipeControl ResponsePipeControl", null);
 	}
 }

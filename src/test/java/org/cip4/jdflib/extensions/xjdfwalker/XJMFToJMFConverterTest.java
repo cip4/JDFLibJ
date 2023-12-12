@@ -43,6 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
+import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
@@ -61,8 +62,10 @@ import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFMessageService;
+import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResourceQuParams;
+import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Test;
@@ -122,6 +125,76 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = xc.convert(h.getRoot());
 		final JDFResourceQuParams rqp2 = d.getJMFRoot().getQuery(0).getResourceQuParams();
 		assertEquals(EnumScope.Allowed, rqp2.getScope());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testResponseModify()
+	{
+		final XJMFHelper h = new XJMFHelper();
+		final MessageHelper mh = h.appendMessage(EnumFamily.Response, "ModifyQueueEntry");
+		JDFQueueEntry qe = (JDFQueueEntry) mh.appendElement(ElementName.QUEUEENTRY);
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
+		qe.setQueueEntryID("q1");
+
+		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		final JDFDoc d = xc.convert(h.getRoot());
+		JDFJMF jmf = d.getJMFRoot();
+		JDFResponse r = jmf.getResponse();
+		assertEquals(0, r.getReturnCode());
+		assertNull(r.getElement(ElementName.QUEUEENTRY));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testResponseModifyType()
+	{
+		final XJMFHelper h0 = new XJMFHelper();
+		final MessageHelper mh0 = h0.appendMessage(EnumFamily.Command, "ModifyQueueEntry");
+		mh0.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/@" + AttributeName.OPERATION, "Abort");
+		mh0.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/" + ElementName.QUEUEFILTER + "/@" + AttributeName.JOBID, "j1");
+		mh0.setHeader(AttributeName.ID, "C2");
+		final XJDFToJDFConverter xc0 = new XJDFToJDFConverter(null);
+		final JDFDoc d0 = xc0.convert(h0.getRoot());
+
+		final XJMFHelper h = new XJMFHelper();
+		final MessageHelper mh = h.appendMessage(EnumFamily.Response, "ModifyQueueEntry");
+		mh.setQuery(mh0);
+		JDFQueueEntry qe = (JDFQueueEntry) mh.appendElement(ElementName.QUEUEENTRY);
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
+		qe.setQueueEntryID("q1");
+
+		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		final JDFDoc d = xc.convert(h.getRoot());
+		JDFJMF jmf = d.getJMFRoot();
+		JDFResponse r = jmf.getResponse();
+		assertEquals(0, r.getReturnCode());
+		assertNull(r.getElement(ElementName.QUEUEENTRY));
+		assertEquals("AbortQueueEntry", r.getType());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testResponseModifyReject()
+	{
+		final XJMFHelper h = new XJMFHelper();
+		final MessageHelper mh = h.appendMessage(EnumFamily.Response, "ModifyQueueEntry");
+		mh.setReturnCode(113);
+		JDFQueueEntry qe = (JDFQueueEntry) mh.appendElement(ElementName.QUEUEENTRY);
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
+		qe.setQueueEntryID("q1");
+		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		final JDFDoc d = xc.convert(h.getRoot());
+		JDFJMF jmf = d.getJMFRoot();
+		JDFResponse r = jmf.getResponse();
+		assertEquals(113, r.getReturnCode());
+		assertNull(r.getElement(ElementName.QUEUEENTRY));
 	}
 
 	/**

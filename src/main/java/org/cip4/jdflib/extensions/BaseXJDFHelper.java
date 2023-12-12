@@ -198,6 +198,17 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 *
+	 * @param attName
+	 * @param value
+	 * @return
+	 */
+	public void setAttribute(final String attName, final int value)
+	{
+		setAttribute(attName, Integer.toString(value));
+	}
+
+	/**
+	 *
 	 *
 	 * @param xpath
 	 * @param value

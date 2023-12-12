@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,9 +68,9 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
 
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.MyLong;
@@ -79,8 +79,7 @@ import org.cip4.jdflib.util.thread.RegularJanitor;
 import org.cip4.jdflib.util.thread.TimeSweeper;
 
 /**
- * class to maintain a map of refID to type values so that we can correctly modify @Type in responses
- * messages older than 4242 seconds are discarded
+ * class to maintain a map of refID to type values so that we can correctly modify @Type in responses messages older than 4242 seconds are discarded
  * 
  * @author rainer prosi
  *
@@ -100,6 +99,7 @@ public class XJMFTypeMap implements Runnable
 
 		/**
 		 * age in seconds
+		 * 
 		 * @return
 		 */
 		long age()
@@ -109,6 +109,7 @@ public class XJMFTypeMap implements Runnable
 
 		/**
 		 * age in seconds
+		 * 
 		 * @return
 		 */
 		void touch()
@@ -126,7 +127,7 @@ public class XJMFTypeMap implements Runnable
 		RegularJanitor.getJanitor().startSweep(42);
 	}
 
-	private static XJMFTypeMap theMap = null;
+	private static final XJMFTypeMap theMap = new XJMFTypeMap();;
 	private final Map<String, TimePair> map;
 
 	/**
@@ -135,9 +136,6 @@ public class XJMFTypeMap implements Runnable
 	 */
 	public static XJMFTypeMap getMap()
 	{
-		if (theMap == null)
-			theMap = new XJMFTypeMap();
-
 		return theMap;
 	}
 
@@ -158,7 +156,7 @@ public class XJMFTypeMap implements Runnable
 	 * @param key
 	 * @return
 	 */
-	public String remove(Object key)
+	public String remove(String key)
 	{
 		TimePair put = map.remove(key);
 		return put == null ? null : put.a;
@@ -169,7 +167,7 @@ public class XJMFTypeMap implements Runnable
 	 * @param key
 	 * @return
 	 */
-	public String get(Object key)
+	public String get(String key)
 	{
 		TimePair put = map.get(key);
 		if (put != null)
@@ -196,7 +194,7 @@ public class XJMFTypeMap implements Runnable
 	@Override
 	public void run()
 	{
-		Vector<String> keys = ContainerUtil.getKeyVector(map);
+		Collection<String> keys = ContainerUtil.getKeyArray(map);
 		if (keys == null)
 			return;
 		for (String key : keys)
@@ -214,9 +212,7 @@ public class XJMFTypeMap implements Runnable
 	 */
 	public static void shutDown()
 	{
-		if (theMap != null)
-			theMap.clear();
-		theMap = null;
+		theMap.clear();
 		RegularJanitor.feierabend();
 	}
 
@@ -227,5 +223,11 @@ public class XJMFTypeMap implements Runnable
 	public int size()
 	{
 		return map.size();
+	}
+
+	@Override
+	public String toString()
+	{
+		return "XJMFTypeMap [size=" + map.size() + "]";
 	}
 }

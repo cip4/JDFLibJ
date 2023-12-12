@@ -104,24 +104,25 @@ public class WalkModifyQueueEntry extends WalkTypesafeMessage
 		String operation = e.getXPathAttribute("ModifyQueueEntryParams/@Operation", null);
 		if (operation == null)
 		{
-			String refID = e.getAttribute(AttributeName.REFID, null, null);
-			if (refID != null)
+			String refID = e.getNonEmpty(AttributeName.REFID);
+			operation = XJMFTypeMap.getMap().remove(refID);
+			if (operation == null)
 			{
-				operation = XJMFTypeMap.getMap().remove(refID);
-				if (operation == null)
-				{
-					operation = super.getMessageType(e, messageName, family);
-				}
+				operation = super.getMessageType(e, messageName, family);
 			}
 		}
 		else
 		{
+			String id = e.getID();
 			if ("Complete".equals(operation))
 			{
 				operation = "Abort";
 			}
 			operation += "QueueEntry";
+			XJMFTypeMap.getMap().put(id, operation);
+
 		}
+
 		return operation;
 	}
 

@@ -169,6 +169,29 @@ public class MessageHelper extends BaseXJDFHelper
 
 	/**
 	 *
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	public void setReturnCode(int rc)
+	{
+		if (!isResponse())
+			throw new IllegalArgumentException("Can only set return code on response");
+		setAttribute(AttributeName.RETURNCODE, rc);
+	}
+
+	/**
+	 * 
+	 * @param headerAttribute
+	 * @param value
+	 */
+	public void setHeader(String headerAttribute, String value)
+	{
+		final KElement header = getCreateElement(XJDFConstants.Header);
+		header.setAttribute(headerAttribute, value);
+	}
+
+	/**
+	 *
 	 * @param url
 	 * @return null if we ain't no query, else the subscription which can be further updated
 	 */
@@ -242,7 +265,7 @@ public class MessageHelper extends BaseXJDFHelper
 
 	/**
 	 *
-	 * @param hQuery the query to set the refID to
+	 * @param hQuery the query or command to set the refID to
 	 *
 	 */
 	public void setQuery(final MessageHelper hQuery)

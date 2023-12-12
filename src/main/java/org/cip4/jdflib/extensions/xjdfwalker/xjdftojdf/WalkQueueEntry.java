@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,10 +72,11 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.jmf.JDFQueueEntry;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for QueueEntry elements
  */
 public class WalkQueueEntry extends WalkXElement
 {
@@ -85,17 +86,6 @@ public class WalkQueueEntry extends WalkXElement
 	public WalkQueueEntry()
 	{
 		super();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return toCheck instanceof JDFQueueEntry;
 	}
 
 	/**
@@ -119,6 +109,18 @@ public class WalkQueueEntry extends WalkXElement
 			elem.setAttribute(AttributeName.STATUS, "Running");
 		}
 		super.updateAttributes(elem);
+	}
+
+	@Override
+	public KElement walk(KElement e, KElement trackElem)
+	{
+		KElement parent = e == null ? null : e.getParentNode_KElement();
+		if (parent != null && EnumFamily.Response.getName().equals(parent.getLocalName())
+				&& ElementName.QUEUEENTRY.equals(StringUtil.rightStr(parent.getAttribute(AttributeName.TYPE), 10)))
+		{
+			return null;
+		}
+		return super.walk(e, trackElem);
 	}
 
 }

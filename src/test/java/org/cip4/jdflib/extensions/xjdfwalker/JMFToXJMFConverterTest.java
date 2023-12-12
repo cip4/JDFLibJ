@@ -64,6 +64,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJMFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFAbortQueueEntryParams;
+import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFHoldQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -143,7 +144,9 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	public void testAbortQE()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.AbortQueueEntry);
-		final JDFAbortQueueEntryParams pp = (JDFAbortQueueEntryParams) jmf.getCommand(0).appendElement(ElementName.ABORTQUEUEENTRYPARAMS);
+		JDFCommand command = jmf.getCommand(0);
+		command.setID("C1");
+		final JDFAbortQueueEntryParams pp = (JDFAbortQueueEntryParams) command.appendElement(ElementName.ABORTQUEUEENTRYPARAMS);
 		pp.appendQueueFilter().appendQueueEntryDef("q1e");
 		pp.setEndStatus(EnumNodeStatus.Aborted);
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -152,6 +155,22 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		assertEquals(mqp.getAttribute(AttributeName.OPERATION), "Abort");
 
 		writeRoundTrip(jmf, "abortqe.jmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAbortQEResp()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.AbortQueueEntry);
+		JDFResponse resp = jmf.getResponse(0);
+		resp.setID("R1");
+		resp.setrefID("C1");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+
+		writeRoundTrip(jmf, "abortqeresp.jmf");
 	}
 
 	/**
