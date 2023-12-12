@@ -268,7 +268,16 @@ public class OrderedTaskQueue extends Thread
 			{
 				for (final String key : v)
 				{
-					map.get(key).shutDown();
+					try
+					{
+						OrderedTaskQueue q = map.get(key);
+						if (q != null)
+							q.shutDown();
+					}
+					catch (Exception x)
+					{
+						// nop - no worries if duplicate deinitialzation
+					}
 				}
 			}
 			theMap.set(map);
