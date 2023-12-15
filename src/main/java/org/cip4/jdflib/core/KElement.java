@@ -2000,6 +2000,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public <A extends KElement> List<A> getChildArrayByClass_KElement(final Class<A> clazz, final boolean bRecurse, final int nMax)
 	{
 		final List<A> v = new ArrayList<>();
+		if (bRecurse && clazz.isInstance(this))
+			v.add((A) this);
 		getChildArrayByClass(clazz, bRecurse, nMax, v);
 		return v;
 	}

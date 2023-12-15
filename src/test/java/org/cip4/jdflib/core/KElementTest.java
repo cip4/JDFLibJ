@@ -3427,6 +3427,17 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetChildArrayByClassMe()
+	{
+		JDFNode n = JDFNode.createRoot();
+		assertEquals(n, n.getChildArrayByClass(n.getClass(), true, 0).get(0));
+		assertTrue(n.getChildArrayByClass(n.getClass(), false, 0).isEmpty());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetChildrenFromList()
 	{
 		final XMLDoc doc = new XMLDoc("Foo", null);
