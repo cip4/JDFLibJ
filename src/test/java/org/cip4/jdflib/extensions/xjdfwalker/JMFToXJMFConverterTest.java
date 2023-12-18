@@ -391,6 +391,22 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testJobPhaseWorkstepID()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		final JDFJobPhase jp = jmf.getSignal(0).appendDeviceInfo().appendJobPhase();
+		jp.setTotalAmount(42);
+		jp.setJobID("j1");
+		jp.setWorkStepID("wsid");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals("wsid", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/JobPhase/@WorkStepID", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testResumeQE()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.ResumeQueueEntry);
