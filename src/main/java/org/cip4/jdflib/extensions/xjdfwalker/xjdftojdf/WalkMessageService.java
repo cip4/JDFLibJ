@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.auto.JDFAutoMessageService.EnumJMFRole;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
@@ -140,7 +141,7 @@ public class WalkMessageService extends WalkXElement
 				ms.setType(t.substring(s.length()));
 			}
 		}
-
+		ms.setJMFRole(EnumJMFRole.Receiver);
 		super.updateAttributes(elem);
 	}
 
