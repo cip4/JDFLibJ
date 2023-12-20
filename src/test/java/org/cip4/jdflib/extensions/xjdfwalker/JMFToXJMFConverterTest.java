@@ -48,6 +48,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
+import org.cip4.jdflib.auto.JDFAutoMessageService.EnumJMFRole;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
@@ -447,6 +448,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final JDFMessageService ms = jmf.getResponse(0).appendMessageService();
 		ms.setChannelMode(EnumChannelMode.FireAndForget);
 		ms.setType(EnumType.KnownMessages);
+		ms.setJMFRole(EnumJMFRole.Receiver);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		assertEquals(xjmf.getXPathAttribute("ResponseKnownMessages/MessageService/@ResponseModes", null), "FireAndForget");

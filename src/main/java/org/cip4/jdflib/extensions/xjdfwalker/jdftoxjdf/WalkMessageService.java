@@ -124,6 +124,7 @@ public class WalkMessageService extends WalkJDFSubElement
 	{
 		map.remove(AttributeName.ACKNOWLEDGE);
 		map.remove(AttributeName.GENERICATTRIBUTES);
+		map.remove(AttributeName.JMFROLE);
 		String pers = map.remove(AttributeName.PERSISTENT);
 		String query = map.get(AttributeName.QUERY);
 		StringArray cm = new StringArray(map.remove(AttributeName.CHANNELMODE));
