@@ -3365,7 +3365,7 @@ public class JDFElement extends KElement
 					final KElement target = ((JDFRefElement) refElem).getTarget();
 					if (target == null)
 					{
-						jLog.warn("Ignoring missing refelemnt target: " + refElem.getNodeName() + " rRef=" + refElem.getAttribute(AttributeName.RREF));
+						jLog.warn("Ignoring missing refelement target: " + refElem.getNodeName() + " rRef=" + refElem.getAttribute(AttributeName.RREF));
 						v.remove(i);
 					}
 					else
