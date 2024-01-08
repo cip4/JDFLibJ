@@ -743,9 +743,10 @@ class PostConverter
 			final VJDFAttributeMap tmp = new VJDFAttributeMap();
 			if (!ContainerUtil.isEmpty(vsc))
 			{
+				int i = 0;
 				for (final KElement sc : vsc)
 				{
-					tmp.add(moveToStripCell(sc, sp));
+					tmp.add(moveToStripCell(sc, sp, i++));
 				}
 			}
 			return tmp.getKeys();
@@ -754,12 +755,13 @@ class PostConverter
 		/**
 		 *
 		 * @param sp
+		 * @param i
 		 * @param bs
 		 * @return
 		 */
-		JDFAttributeMap moveToStripCell(final KElement signatureCell, final JDFResource sp)
+		JDFAttributeMap moveToStripCell(final KElement signatureCell, final JDFResource sp, int i)
 		{
-			final JDFStripCellParams stripCell = (JDFStripCellParams) sp.getCreateElement(ElementName.STRIPCELLPARAMS);
+			final JDFStripCellParams stripCell = (JDFStripCellParams) sp.getCreateElement(ElementName.STRIPCELLPARAMS, null, i);
 			final VString stripCellKnown = stripCell.knownAttributes();
 			final JDFAttributeMap sigCelMap = signatureCell.getAttributeMap();
 			sigCelMap.reduceMap(stripCellKnown);

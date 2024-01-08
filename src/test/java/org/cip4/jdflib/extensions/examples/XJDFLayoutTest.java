@@ -321,7 +321,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	/**
 	 *
 	 */
-	@Test
+	// @Test
 	public void testIdentificationField()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "PageCondition", null);

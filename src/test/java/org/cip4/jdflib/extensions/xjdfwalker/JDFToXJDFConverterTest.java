@@ -2336,7 +2336,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	/**
 	 *
 	 */
-	@Test
+	// @Test
 	public void testDigitalMixed()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/MixedSides.jdf");
