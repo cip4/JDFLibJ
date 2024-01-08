@@ -2094,6 +2094,30 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testMixedMediaRef2()
+	{
+		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "SaddleStitchBooklet_MixedMedia2.jdf");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		final XJDFHelper h = new XJDFHelper(xjdf);
+		final SetHelper dpp = h.getSet(ElementName.DIGITALPRINTINGPARAMS, 0);
+		assertEquals(3, dpp.getPartitionList().size());
+		assertEquals(1, dpp.getPartition(0).getPartMap().size());
+		assertEquals(1, dpp.getPartition(1).getPartMap().size());
+		assertEquals(0, dpp.getPartition(2).getPartMap().size());
+		final SetHelper lo = h.getSet(ElementName.LAYOUT, 0);
+		assertEquals(3, lo.getPartitionList().size());
+
+		for (int i = 0; i < 3; i++)
+		{
+			assertNotNull(lo.getResource(i).getResourceAttribute(XJDFConstants.PaperRef));
+		}
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testPartUsagePartsImplicitRootWantImplicitNot()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -2307,6 +2331,16 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.makeNewJDF(n, null);
 		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"DieLayout\"]/Resource/DieLayout/@MediaRef", null));
 		assertEquals("PS3", xjdf.getXPathAttribute("ResourceSet[@Name=\"DieLayout\"]/Resource/DieLayout/Media/@ISOPaperSubstrate", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testDigitalMixed()
+	{
+		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/MixedSides.jdf");
+		writeRoundTrip(n, "mixedsides");
 	}
 
 	/**

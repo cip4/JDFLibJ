@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -180,7 +180,9 @@ public class StrippingConverterTest extends JDFTestCaseBase
 		n.write2File(sm_dirTestDataTemp + "lpp2.jdf");
 		final JDFStrippingParams spp = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
 
+		List<JDFPosition> pos0 = spp.getChildArrayByClass_KElement(JDFPosition.class, false, 0);
 		List<JDFPosition> poss = spp.getChildArrayByClass_KElement(JDFPosition.class, true, 0);
+		poss.removeAll(pos0);
 		assertEquals(3, poss.size());
 		assertEquals(EnumOrientation.Rotate0, poss.get(0).getOrientation());
 		assertEquals(EnumOrientation.Flip180, poss.get(2).getOrientation());

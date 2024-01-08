@@ -675,7 +675,7 @@ class PostConverter
 			final JDFResource strippingParams = theNode.getResource(ElementName.STRIPPINGPARAMS, null, 0);
 			if (strippingParams != null)
 			{
-				final List<JDFResource> spLeaves = strippingParams.getLeafArray(false);
+				final List<JDFResource> spLeaves = strippingParams.getLeafArray(true);
 				final Collection<String> moved = new HashSet<>();
 				for (final JDFResource sp : spLeaves)
 				{
@@ -687,7 +687,7 @@ class PostConverter
 					for (final JDFResource sp : spLeaves)
 					{
 						final JDFBinderySignature bs = (JDFBinderySignature) bsRoot.getPartition(sp.getPartMap(), EnumPartUsage.Implicit);
-						final Collection<JDFSignatureCell> scs = bs.getAllSignatureCell();
+						final Collection<JDFSignatureCell> scs = bs.getChildArrayByClass(JDFSignatureCell.class, true, 0);
 						for (final JDFSignatureCell sc : scs)
 						{
 							sc.removeAttributes(moved);
@@ -759,11 +759,11 @@ class PostConverter
 		 */
 		JDFAttributeMap moveToStripCell(final KElement signatureCell, final JDFResource sp)
 		{
-			final JDFStripCellParams stripCell = (JDFStripCellParams) sp.appendElement(ElementName.STRIPCELLPARAMS);
+			final JDFStripCellParams stripCell = (JDFStripCellParams) sp.getCreateElement(ElementName.STRIPCELLPARAMS);
 			final VString stripCellKnown = stripCell.knownAttributes();
 			final JDFAttributeMap sigCelMap = signatureCell.getAttributeMap();
 			sigCelMap.reduceMap(stripCellKnown);
-			if (sigCelMap.isEmpty())
+			if (sigCelMap.isEmpty() && stripCell.getAttributeMap().isEmpty())
 			{
 				stripCell.deleteNode();
 			}

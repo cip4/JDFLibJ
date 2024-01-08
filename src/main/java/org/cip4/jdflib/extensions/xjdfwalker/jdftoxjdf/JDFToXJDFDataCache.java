@@ -39,6 +39,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import java.util.HashSet;
 import java.util.List;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.StringArray;
@@ -57,20 +58,20 @@ import org.cip4.jdflib.resource.process.JDFContentObject;
  * @author rainer prosi
  *
  */
-class JDFToXJDFDataCache
+public class JDFToXJDFDataCache
 {
-	private static JDFToXJDFDataCache theCache;
+	private final static JDFToXJDFDataCache theCache = new JDFToXJDFDataCache();
 
 	/**
 	 *
 	 * @return
 	 */
-	static JDFToXJDFDataCache getCache()
+	public static JDFToXJDFDataCache getCache()
 	{
-		if (theCache == null)
-			theCache = new JDFToXJDFDataCache();
 		return theCache;
 	}
+
+	private final StringArray stripMarkElements;
 
 	/**
 	 *
@@ -81,6 +82,7 @@ class JDFToXJDFDataCache
 		elemAttribs = new StringArray(generateElementAttributes());
 		inlineSet = generateInlineSet();
 		placedObjectAttribs = new StringArray(generatePlacedObjectAttributes());
+		stripMarkElements = new StringArray("BarcodeReproParams,FillMark,IdentificationField,JobField", ",");
 		amountAttribs = new StringArray("Amount,ActualAmount,MinAmount,MaxAmount", ",");
 	}
 
@@ -94,7 +96,9 @@ class JDFToXJDFDataCache
 		final JDFMarkObject mo = (JDFMarkObject) new JDFDoc(ElementName.MARKOBJECT).getRoot();
 		final VString vco = co.knownAttributes();
 		final VString vmo = mo.knownAttributes();
-		return vmo.getOverlapping(vco);
+		VString overlapping = vmo.getOverlapping(vco);
+		overlapping.add(AttributeName.ID);
+		return overlapping;
 	}
 
 	private final StringArray elemAttribs;
@@ -131,6 +135,7 @@ class JDFToXJDFDataCache
 		set.add(ElementName.COLORANTALIAS);
 		set.add(ElementName.COMPANY);
 		set.add(ElementName.DEVICE);
+		set.add(ElementName.DEVICEMARK);
 		set.add(ElementName.DEVICENSPACE);
 		set.add(ElementName.EMPLOYEE);
 		set.add(ElementName.FOLD);
@@ -194,7 +199,7 @@ class JDFToXJDFDataCache
 	/**
 	 * @return the elemAttribs
 	 */
-	static StringArray getElemAttribs()
+	public static StringArray getElemAttribs()
 	{
 		return getCache().elemAttribs;
 	}
@@ -202,7 +207,7 @@ class JDFToXJDFDataCache
 	/**
 	 * @return the inlineSet
 	 */
-	static HashSet<String> getInlineSet()
+	public static HashSet<String> getInlineSet()
 	{
 		return getCache().inlineSet;
 	}
@@ -210,7 +215,7 @@ class JDFToXJDFDataCache
 	/**
 	 * @return the resAttribs
 	 */
-	static StringArray getResAttribs()
+	public static StringArray getResAttribs()
 	{
 		return getCache().resAttribs;
 	}
@@ -218,16 +223,24 @@ class JDFToXJDFDataCache
 	/**
 	 * @return the placedObjectAttribs
 	 */
-	static StringArray getPlacedObjectAttribs()
+	public static StringArray getPlacedObjectAttribs()
 	{
 		return getCache().placedObjectAttribs;
+	}
+
+	/**
+	 * @return the placedObjectAttribs
+	 */
+	public static StringArray getStripMarkElements()
+	{
+		return getCache().stripMarkElements;
 	}
 
 	/**
 	 *
 	 * @return
 	 */
-	static StringArray getAmountAttribs()
+	public static StringArray getAmountAttribs()
 	{
 		return getCache().amountAttribs;
 	}

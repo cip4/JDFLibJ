@@ -36,8 +36,11 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import java.util.List;
+
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
@@ -45,6 +48,7 @@ import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDFDataCache;
 
 /**
  * some generic preprocessing that is better done on the XJDF prior to XJDF--> JDF Conversion
@@ -128,6 +132,57 @@ class XJDFPrepWalker extends BaseElementWalker
 		public VString getElementNames()
 		{
 			return new VString(ElementName.RESOURCEINFO);
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 */
+	protected class WalkStripMark extends WalkElement
+	{
+
+		public WalkStripMark()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			List<KElement> kids = xjdf.getChildList();
+			StringArray names = JDFToXJDFDataCache.getStripMarkElements();
+			for (KElement kid : kids)
+			{
+				if (names.contains(kid.getLocalName()))
+				{
+					KElement parent = xjdf.getParentNode_KElement();
+
+					KElement mo = parent.getElement("PlacedObject/MarkObject");
+					if (mo == null)
+					{
+						KElement po = parent.insertBefore(XJDFConstants.PlacedObject, xjdf, null);
+						mo = po.appendElement(ElementName.MARKOBJECT);
+					}
+					for (KElement kid2 : kids)
+						mo.moveElement(kid2, null);
+					KElement dm = mo.appendElement(ElementName.DEVICEMARK);
+					dm.setAttributes(xjdf);
+					xjdf.deleteNode();
+					return super.walk(mo, dummy);
+				}
+			}
+			return super.walk(xjdf, dummy);
+		}
+
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.STRIPMARK);
 		}
 
 	}

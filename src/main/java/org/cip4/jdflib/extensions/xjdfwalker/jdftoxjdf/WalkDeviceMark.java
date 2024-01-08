@@ -68,38 +68,35 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.JDFDeviceMark;
 
 /**
- *
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkDeviceMark extends WalkJDFSubElement
 {
+
 	/**
 	 *
 	 */
-	public WalkStrippingParams()
+	public WalkDeviceMark()
 	{
 		super();
 	}
 
 	/**
-	 * @param xjdf
-	 * @return true if must continue
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	public boolean matches(final KElement toCheck)
 	{
-		final KElement e = super.walk(jdf, xjdf);
-		// TODO fix or remove
-		jdf.removeChildren(ElementName.DEVICE, null, null);
-		return e;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFDeviceMark;
 	}
 
 	/**
@@ -108,17 +105,28 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.STRIPPINGPARAMS, null);
+		return new VString(ElementName.DEVICEMARK, null);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(final JDFAttributeMap map)
+	protected void updateAttributes(JDFAttributeMap map)
 	{
-		map.remove(AttributeName.SECTIONLIST);
 		super.updateAttributes(map);
 	}
 
+	@Override
+	protected String getXJDFName(KElement jdf)
+	{
+		return ElementName.STRIPMARK;
+	}
+
+	@Override
+	public KElement walk(KElement jdf, KElement xjdf)
+	{
+		// TODO Auto-generated method stub
+		return super.walk(jdf, xjdf);
+	}
 }

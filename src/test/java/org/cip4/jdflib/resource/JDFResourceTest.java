@@ -161,6 +161,27 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testAddPartsCompatible()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource rl = n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		assertTrue(rl.isPartsCompatible(null));
+		assertTrue(rl.isPartsCompatible(null));
+		assertTrue(rl.isPartsCompatible(new VString()));
+		assertTrue(rl.isPartsCompatible(new VString("Run")));
+		rl.addPartIDKey(EnumPartIDKey.Run);
+		assertTrue(rl.isPartsCompatible(new VString("Run")));
+		assertFalse(rl.isPartsCompatible(new VString("Separation")));
+		assertTrue(rl.isPartsCompatible(new VString("Run Separatiom")));
+		rl.addPartIDKey(EnumPartIDKey.Separation);
+		assertTrue(rl.isPartsCompatible(new VString("Run Separation")));
+		assertFalse(rl.isPartsCompatible(new VString("Separation Run")));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetCreatorPartition()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -2909,6 +2930,57 @@ public class JDFResourceTest extends JDFTestCaseBase
 		r4.clonePartitions(s1, null);
 		size = r4.getLeaves(false).size();
 		assertEquals(size, 2, " multiple partial clone: after 5th application - only signatureName, sheetname 1");
+
+	}
+
+	/**
+	 * test clonePartitions method
+	 */
+	@Test
+	public void testClonePartionsExist()
+	{
+		final KElement pool = new JDFDoc("ResourcePool").getRoot();
+		final JDFResource r0 = (JDFResource) pool.appendElement("Preview");
+		final JDFResource sh1 = r0.addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "sh1");
+		final JDFResource sep1 = sh1.addPartition(EnumPartIDKey.Side, "Front").addPartition(EnumPartIDKey.Separation, "Black");
+		final JDFResource r1 = (JDFResource) pool.appendElement("Ink");
+		r1.addPartition(EnumPartIDKey.Separation, "Black");
+		r1.clonePartitions(r0, null);
+		int size = r1.getLeaves(false).size();
+		assertEquals(size, r0.getLeaves(false).size());
+		for (int i = 0; i < size; i++)
+		{
+			assertEquals(((JDFResource) r1.getLeaves(false).get(i)).getPartMap(), ((JDFResource) r0.getLeaves(false).get(i)).getPartMap());
+		}
+
+	}
+
+	/**
+	 * test clonePartitions method
+	 */
+	@Test
+	public void testClonePartionsExist2()
+	{
+		final KElement pool = new JDFDoc("ResourcePool").getRoot();
+		final JDFResource r0 = (JDFResource) pool.appendElement("Preview");
+		final JDFResource sh1 = r0.addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "sh1");
+		final JDFResource sep1 = sh1.addPartition(EnumPartIDKey.Side, "Front").addPartition(EnumPartIDKey.Separation, "Black");
+		final JDFResource sep2 = sh1.addPartition(EnumPartIDKey.Side, "Back").addPartition(EnumPartIDKey.Separation, "Black");
+		final JDFResource r1 = (JDFResource) pool.appendElement("Ink");
+		JDFResource black = r1.addPartition(EnumPartIDKey.Separation, "Black");
+		black.setDescriptiveName("black color");
+		black.addPartition(EnumPartIDKey.Side, "Back");
+		black.addPartition(EnumPartIDKey.Side, "Front");
+		r1.clonePartitions(r0, null);
+		int size = r1.getLeaves(false).size();
+		assertEquals(size, r0.getLeaves(false).size());
+		for (int i = 0; i < size; i++)
+		{
+			JDFResource l1 = (JDFResource) r1.getLeaves(false).get(i);
+			JDFResource l0 = (JDFResource) r0.getLeaves(false).get(i);
+			assertEquals(l1.getPartMap(), l0.getPartMap());
+			assertEquals("black color", l1.getDescriptiveName());
+		}
 
 	}
 

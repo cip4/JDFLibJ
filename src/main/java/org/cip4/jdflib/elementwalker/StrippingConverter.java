@@ -123,7 +123,8 @@ public class StrippingConverter
 		strippingParams = (JDFStrippingParams) parent.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
 		strippingParams.setAutomated(true);
 		strippingParams.clonePartitions(layPrepParams, null);
-		final List<JDFResource> vThis = layPrepParams.getLeafArray(false);
+		strippingParams.setPartUsage(layPrepParams.getPartUsage());
+		final List<JDFResource> vThis = layPrepParams.getLeafArray(true);
 		for (final KElement e : vThis)
 		{
 			new StrippingConverter((JDFLayoutPreparationParams) e, parent).convertLeaf();

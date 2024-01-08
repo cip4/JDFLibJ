@@ -42,6 +42,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoBundleItem.EnumOrientation;
+import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumPosition;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchorType;
@@ -49,6 +50,7 @@ import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -68,6 +70,7 @@ import org.cip4.jdflib.resource.JDFRefAnchor;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
+import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPosition;
@@ -312,7 +315,30 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 
 		xjdfHelper.cleanUp();
 		setSnippet(shLO, true);
-		// writeRoundTripX(xjdfHelper, "registerMark", EnumValidationLevel.Incomplete);
+		writeRoundTripX(xjdfHelper, "registerMark", EnumValidationLevel.Incomplete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testIdentificationField()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "PageCondition", null);
+		xjdfHelper.setTypes("Imposition");
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rh = shLO.appendPartition(AttributeName.SIDE, "Front", true);
+
+		final JDFLayout lo = (JDFLayout) rh.getResource();
+		final KElement po = lo.appendElement(XJDFConstants.PlacedObject);
+		po.setAttribute("Ord", "0");
+		po.setAttribute(AttributeName.CTM, JDFMatrix.getUnitMatrix().toString());
+		final JDFIdentificationField idf = (JDFIdentificationField) po.appendElement(ElementName.MARKOBJECT).appendElement(ElementName.IDENTIFICATIONFIELD);
+		idf.setPosition(EnumPosition.Back);
+
+		xjdfHelper.cleanUp();
+		setSnippet(shLO, true);
+		writeRoundTripX(xjdfHelper, "identificationfield", EnumValidationLevel.Incomplete);
 	}
 
 	/**

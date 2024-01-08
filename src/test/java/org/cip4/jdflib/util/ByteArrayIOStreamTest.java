@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,6 +77,7 @@
 package org.cip4.jdflib.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -95,8 +96,6 @@ import org.junit.jupiter.api.Test;
  */
 public class ByteArrayIOStreamTest extends JDFTestCaseBase
 {
-
-	// /////////////////////////////////////////////////////////////////////////
 	/**
 	 *
 	 */
@@ -134,6 +133,33 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @param in2
+	 *
+	 */
+	@Test
+	public void testGetNewStream()
+	{
+		final ByteArrayIOStream ios = new ByteArrayIOStream(20000);
+		for (int i = 0; i < 12345; i++)
+		{
+			ios.write(i);
+		}
+		ByteArrayIOInputStream in = ios.getInputStream();
+		assertTrue(in.read() >= 0);
+		in.seek(42);
+		assertEquals(42, in.tell());
+		ByteArrayIOInputStream in2 = ios.getNewStream();
+
+		assertEquals(42, in.tell());
+		assertEquals(0, in2.tell());
+		in.read();
+		assertEquals(43, in.tell());
+		assertEquals(0, in2.tell());
+
+		ios.close();
+	}
+
+	/**
 	 *
 	 */
 	@Test
@@ -159,7 +185,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	{
 		final File f = new File(sm_dirTestDataTemp + "bios.fil");
 		FileUtil.forceDelete(f);
-		f.createNewFile();
+		FileUtil.createNewFile(f);
 		final FileOutputStream fos = new FileOutputStream(f);
 		for (int i = 0; i < 20000; i++)
 		{
@@ -221,6 +247,20 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		assertEquals("abc", ios.getInputStream().asString(3));
 		assertEquals("abcdefgh", ios.getInputStream().asString(9999));
 		assertEquals("abcdefgh", ios.getInputStream().asString(0));
+		ios.close();
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testToString()
+	{
+		final byte[] b = "abcdefgh".getBytes();
+		final ByteArrayIOStream ios = new ByteArrayIOStream(b);
+
+		assertNotNull(ios.toString());
+		assertNotNull(ios.getInputStream().toString());
 		ios.close();
 	}
 

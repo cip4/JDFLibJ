@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,12 +84,13 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * <16.01.2009
+ *         <16.01.2009
  */
 public class JDFRegisterMark extends JDFAutoRegisterMark
 {
@@ -97,6 +98,7 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 
 	/**
 	 * Constructor for JDFRegisterMark
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -222,6 +224,7 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 
 	/**
 	 * legacy method to allow setting a single value as string
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setMarkType(final String value)
@@ -229,5 +232,10 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 		setAttribute(AttributeName.MARKTYPE, value, null);
 	}
 
-} // class JDFRegisterMark
-// ==========================================================================
+	public void setCenter(double x, double y)
+	{
+		setCenter(new JDFXYPair(x, y));
+
+	}
+
+}

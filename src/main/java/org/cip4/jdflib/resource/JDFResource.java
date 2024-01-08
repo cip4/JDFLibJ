@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -2181,17 +2181,48 @@ public class JDFResource extends JDFElement
 
 			if (!ContainerUtil.isEmpty(partIDKeys))
 			{
-				if (!ContainerUtil.containsAll(partIDKeys, getPartIDKeyList()))
+				JDFResource old = null;
+				if (!isPartsCompatible(partIDKeys))
+				{
+					old = (JDFResource) clone();
+					List<? extends KElement> a = getDirectPartitionArray();
+					for (KElement l : a)
+						l.deleteNode();
 					setPartIDKeys(partIDKeys);
+				}
 				final List<JDFResource> vLeaves = r.getLeafArray(false); // only need the real leaves
 				for (final JDFResource leaf : vLeaves)
 				{
 					final JDFAttributeMap partMap = leaf.getPartMap();
 					partMap.reduceMap(partIDKeys);
-					getCreatePartition(partMap, partIDKeys);
+					JDFResource newPart = getCreatePartition(partMap, partIDKeys);
+					if (old != null)
+					{
+						JDFResource oldPart = old.getPartition(partMap, EnumPartUsage.Implicit);
+						newPart.copyInto(oldPart, false);
+					}
 				}
 			}
 		}
+	}
+
+	/**
+	 * 
+	 * @param partIDKeys
+	 * @return
+	 */
+	boolean isPartsCompatible(List<String> partIDKeys)
+	{
+		StringArray list = getPartIDKeyList();
+		int size = ContainerUtil.size(list);
+		for (int i = 0; i < size; i++)
+		{
+			if (!StringUtil.equals(list.get(i), ContainerUtil.get(partIDKeys, i)))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**

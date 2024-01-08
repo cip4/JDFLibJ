@@ -1,7 +1,8 @@
-/**
+/*
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ *
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -66,59 +67,29 @@
  *
  *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
+package org.cip4.jdflib.resource.process;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.junit.jupiter.api.Test;
 
 /**
- *
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
-public class WalkStrippingParams extends WalkResource
+public class JDFRegisterMarkTest extends JDFTestCaseBase
 {
-	/**
-	 *
-	 */
-	public WalkStrippingParams()
-	{
-		super();
-	}
 
-	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	@Test
+	public void testSetCenter()
 	{
-		final KElement e = super.walk(jdf, xjdf);
-		// TODO fix or remove
-		jdf.removeChildren(ElementName.DEVICE, null, null);
-		return e;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return new VString(ElementName.STRIPPINGPARAMS, null);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
-	 */
-	@Override
-	protected void updateAttributes(final JDFAttributeMap map)
-	{
-		map.remove(AttributeName.SECTIONLIST);
-		super.updateAttributes(map);
+		JDFRegisterMark rm = (JDFRegisterMark) JDFElement.createRoot(ElementName.REGISTERMARK);
+		rm.setCenter(1, 2);
+		assertEquals(new JDFXYPair(1, 2), rm.getCenter());
 	}
 
 }

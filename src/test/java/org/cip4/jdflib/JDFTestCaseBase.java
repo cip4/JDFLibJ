@@ -541,6 +541,11 @@ public abstract class JDFTestCaseBase
 		writeRoundTrip(root, fileBase, BaseXJDFHelper.getDefaultVersion());
 	}
 
+	protected void writeRoundTrip(final JDFElement root, final String fileBase, final EnumVersion version)
+	{
+		writeRoundTrip(root, fileBase, version, EnumValidationLevel.Complete);
+	}
+
 	/**
 	 * write convert and unconvert
 	 *
@@ -548,12 +553,12 @@ public abstract class JDFTestCaseBase
 	 * @param fileBase the filename without extension
 	 * @param version 21
 	 */
-	protected void writeRoundTrip(final JDFElement root, final String fileBase, final EnumVersion version)
+	protected void writeRoundTrip(final JDFElement root, final String fileBase, final EnumVersion version, EnumValidationLevel level)
 	{
 		final String tmpJDF = fileBase + ".jdf";
 		final String tmpJDFPath = sm_dirTestDataTemp + tmpJDF;
 		root.write2File(tmpJDFPath);
-		boolean valid = root.isValid(EnumValidationLevel.Complete);
+		boolean valid = root.isValid(level);
 		if (!valid)
 		{
 			printValid(root.getOwnerDocument_JDFElement());
@@ -567,7 +572,7 @@ public abstract class JDFTestCaseBase
 		{
 			dVal0.write2File(sm_dirTestDataTemp + fileBase + ".jdf.val.xml", 2, false);
 		}
-		assertEquals(valResult0, VALID);
+		assertEquals(VALID, valResult0);
 
 		final XJDF20 xjdfConv = new XJDF20();
 		xjdfConv.setNewVersion(version);
@@ -584,7 +589,7 @@ public abstract class JDFTestCaseBase
 		{
 			dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.xml", 2, false);
 		}
-		assertEquals(valResult, VALID);
+		assertEquals(VALID, valResult);
 		log.info("Successfully converted " + tmpXJDF);
 		final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		final JDFDoc converted = jdfConverter.convert(xjdfRoot);
@@ -592,7 +597,7 @@ public abstract class JDFTestCaseBase
 		JDFElement jxRoot = converted.getJDFRoot();
 		if (jxRoot == null)
 			jxRoot = converted.getJMFRoot();
-		valid = jxRoot.isValid(EnumValidationLevel.Complete);
+		valid = jxRoot.isValid(level);
 		if (!valid)
 		{
 			printValid(converted);

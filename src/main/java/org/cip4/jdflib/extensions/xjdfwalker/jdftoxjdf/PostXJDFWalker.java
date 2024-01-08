@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -625,7 +625,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf
 		 * @return
 		 */
-		private KElement copyToPlaceObject(final KElement xjdf)
+		KElement copyToPlaceObject(final KElement xjdf)
 		{
 			final KElement po = xjdf.getParentNode_KElement().insertBefore(XJDFConstants.PlacedObject, xjdf, null);
 			final StringArray poAttribs = JDFToXJDFDataCache.getPlacedObjectAttribs();
@@ -633,8 +633,26 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				po.moveAttribute(att, xjdf);
 			}
+			moveToStripMark(xjdf);
 			po.moveElement(xjdf, null);
 			return po;
+		}
+
+		void moveToStripMark(KElement xjdf)
+		{
+			for (KElement child : xjdf.getChildList())
+			{
+				if (JDFToXJDFDataCache.getStripMarkElements().contains(child.getLocalName()))
+				{
+					KElement layout = xjdf.getDeepParent(ElementName.LAYOUT, 0);
+					if (layout != null)
+					{
+						KElement sm = layout.appendElement(ElementName.STRIPMARK);
+						sm.moveElement(child, null);
+					}
+				}
+			}
+
 		}
 
 		/**
@@ -1179,6 +1197,7 @@ class PostXJDFWalker extends BaseElementWalker
 		{
 			xjdf.removeAttribute(AttributeName.STATIONAMOUNT);
 			super.updateAttributes(xjdf);
+			xjdf.renameAttribute(XJDFConstants.BinderySignatureID, XJDFConstants.BinderySignatureIDs);
 		}
 
 	}
@@ -2225,7 +2244,7 @@ class PostXJDFWalker extends BaseElementWalker
 				xjdf.removeAttribute(XJDFConstants.MediaRef);
 				final ResourceHelper helper = ResourceHelper.getHelper(xjdf);
 				final VJDFAttributeMap maps = helper == null ? null : helper.getPartMapVector();
-				if (!VJDFAttributeMap.isEmpty(maps))
+				if (!ContainerUtil.isEmpty(maps))
 				{
 					// first check for automagically created component
 					KElement m = newRootHelper.getRoot().getChildWithAttribute(XJDFConstants.Resource, AttributeName.ID, null, "Comp." + ref, 0, false);
@@ -2236,9 +2255,8 @@ class PostXJDFWalker extends BaseElementWalker
 					final ResourceHelper medHelp = ResourceHelper.getHelper(m);
 					if (medHelp != null)
 					{
-
 						VJDFAttributeMap vPartMedia = medHelp.getPartMapVector();
-						vPartMedia = maps.getOrMaps(vPartMedia);
+						vPartMedia.appendUnique(maps);
 						medHelp.setPartMapVector(vPartMedia);
 					}
 				}

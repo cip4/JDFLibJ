@@ -62,12 +62,14 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFColorControlStrip;
 import org.cip4.jdflib.resource.process.JDFContentObject;
+import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRegisterMark;
@@ -166,13 +168,30 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testIDField()
+	{
+
+		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
+		JDFMarkObject mo = lo.appendMarkObject();
+		mo.setCTM(JDFMatrix.getUnitMatrix());
+		mo.setOrd(0);
+		final JDFIdentificationField idf = mo.appendIdentificationField();
+		idf.setValue("value");
+		n.setTypes(new VString("Stripping Imposition"), true);
+		writeRoundTrip(n, "idField", BaseXJDFHelper.getDefaultVersion(), EnumValidationLevel.Incomplete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetAllOrds()
 	{
 		final JDFLayout lo = prepare44();
 		final Vector<Integer> v = lo.getAllOrds();
 		Assertions.assertEquals(v.size(), 32);
 		for (int i = 0; i < 16; i++)
-			Assertions.assertTrue(v.contains(new Integer(i)), "pos: " + i);
+			Assertions.assertTrue(v.contains(Integer.valueOf(i)), "pos: " + i);
 	}
 
 	/**
@@ -300,7 +319,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 			mark0.setTrimSize(20, 30);
 			mark0.setCTM(new JDFMatrix(1, 0, 0, 1, 500 - 20, 350 - 30));
 			mark0.appendDeviceMark().setAttribute("Anchor", "TopRight");
-			mark0.appendRegisterMark().setXMLComment("mark metadata goes here", true);
+			JDFRegisterMark registerMark = mark0.appendRegisterMark();
+			registerMark.setXMLComment("mark metadata goes here", true);
+			registerMark.setCenter(10, 10);
 			appendRefAnchor(mark0, "TopRight", "Parent", null);
 		}
 
@@ -320,7 +341,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 			final JDFJobField jf = mark0.appendJobField();
 			jf.setXMLComment("Result: Sheet Printed by Dracula at the moonphase FullMoon", true);
 			jf.setAttribute("JobFormat", "Sheet Printed by %s at the moonphase %s");
-			jf.setAttribute("JobTemplate", "Operator,MoonPhase");
+			jf.setAttribute("JobTemplate", "Operator MoonPhase");
 			appendRefAnchor(mark0, "BottomCenter", "Parent", null);
 		}
 
@@ -342,9 +363,10 @@ public class JDFLayoutTest extends JDFTestCaseBase
 			final JDFJobField jf = mark0.appendJobField();
 			jf.setXMLComment("Result: Page # " + i + " for Customer, Polanski - Job: J11", true);
 			jf.setAttribute("JobFormat", "Page # %i for Customer, %s - Job: %s");
-			jf.setAttribute("JobTemplate", "Page,JobRecipientName,JobID");
+			jf.setAttribute("JobTemplate", "Page JobRecipientName JobID");
 			appendRefAnchor(mark0, "BottomCenter", "Sibling", id[i]);
 		}
+		// writeRoundTrip(doc.getJDFRoot(), "LayoutDynamicMarks", XJDF20.getDefaultVersion(), EnumValidationLevel.Incomplete);
 		doc.write2File(sm_dirTestDataTemp + "LayoutDynamicMarks.jdf", 2, false);
 
 	}
@@ -872,8 +894,8 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 * CTM or Position Position: See ImageShift PositionX and PositionY, Shift (Margins) --> See ShiftFront RelativeShift?
 	 *
-	 * Anchor Point (same as position ll, ul, cc, spine�) (if CTM is given) Orientation (rotation, matrix or ll, ul, ...) Contents Format/Template JobField (Replace, DynamicField?) SeparationList Mark
-	 * References (FoldMark, CIE, ...)
+	 * Anchor Point (same as position ll, ul, cc, spine�) (if CTM is given) Orientation (rotation, matrix or ll, ul, ...) Contents Format/Template JobField (Replace, DynamicField?)
+	 * SeparationList Mark References (FoldMark, CIE, ...)
 	 * 
 	 * @throws Exception
 	 */
@@ -918,7 +940,8 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		dm.setFont("Arial");
 		dm.setFontSize(10);
 
-		lo.appendXMLComment("This is a positioned registermark\nthe center of the mark is translated by 666 999\n the JobField is empty and serves aa a Marker that no external Content is requested",
+		lo.appendXMLComment(
+				"This is a positioned registermark\nthe center of the mark is translated by 666 999\n the JobField is empty and serves aa a Marker that no external Content is requested",
 				null);
 		mark = lo.appendMarkObject();
 		mark.setCTM(new JDFMatrix("1 0 0 1 666 999"));

@@ -452,8 +452,9 @@ public class WalkJDFElement extends WalkElement
 
 	protected boolean checkAllLeaves(final JDFResource linkTarget)
 	{
-		return jdfToXJDF.wantImplicit() && EnumPartUsage.Implicit.equals(linkTarget.getPartUsage()) && !(linkTarget instanceof JDFLayout)
-				&& !(linkTarget instanceof JDFStrippingParams);
+		boolean implicit = jdfToXJDF.wantImplicit() && EnumPartUsage.Implicit.equals(linkTarget.getPartUsage());
+		boolean isLayout = (linkTarget instanceof JDFLayout) || (linkTarget instanceof JDFStrippingParams);
+		return implicit && !(isLayout && ContainerUtil.contains(linkTarget.getPartIDKeyList(), AttributeName.SHEETNAME));
 	}
 
 	List<KElement> loopLeaves(final JDFElement rl, final String className, final KElement resourceSet, final int nLeaves, final VElement vRes)

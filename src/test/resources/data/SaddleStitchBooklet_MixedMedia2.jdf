@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JDF ID="J1"
+     Version="1.5"
+     Category="IDP.DigitalPrinting"
+     ICSVersions="IDP_L1-1.5"
+     JobID="002_Two_Left_Staples_IDPICS-1.5-L1.MixedSides"
+     JobPartID="ID345"
+     MaxVersion="1.5"
+     ProjectID="JDF_Testing"
+     Status="Waiting"
+     Type="Combined"
+     Types="LayoutPreparation Imposition Interpreting Rendering ColorSpaceConversion DigitalPrinting Stitching"
+     xmlns="http://www.CIP4.org/JDFSchema_1_1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:type="Combined">
+	<AuditPool>
+		<Created AgentName="Text Editor"
+		         AgentVersion="2.1.7.25"
+		         ID="a_220408_110556990_009040"
+		         TimeStamp="2022-04-08T11:05:56-04:00"/>
+	</AuditPool>
+	<ResourcePool>
+		<RunList Class="Parameter"
+		         ID="IDRL0001"
+		         Status="Available">
+			<LayoutElement>
+				<FileSpec MimeType="application/pdf"
+				          URL="file://myServer/test/JDF/twenty-pages.pdf"/>
+			</LayoutElement>
+		</RunList>
+		<Media Class="Consumable"
+		       Dimension="612 792"
+		       FrontCoatings="Coated"
+		       ID="IDM0001"
+		       MediaType="Paper"
+		       ProductID="Coated20#White"
+			   Weight="30"
+		       Status="Available"/>
+		<Media Class="Consumable"
+		       Dimension="612 792"
+		       ID="IDM0002"
+		       MediaType="Paper"
+		       ProductID="bond20#White"
+			   Weight="30"
+		       Status="Available"/>
+		<LayoutPreparationParams Class="Parameter"
+		                         ID="IDLP0001"
+		                         Status="Available"
+								 Sides="TwoSidedFlipY"
+		                         PartIDKeys="RunIndex"
+								 PartUsage="Implicit">
+			<MediaRef rRef="IDM0002"/>
+			<LayoutPreparationParams RunIndex="0"
+			                         Sides="OneSidedFront">
+				<MediaRef rRef="IDM0001"/>
+			</LayoutPreparationParams>
+			<LayoutPreparationParams RunIndex="-1"
+			                         Sides="OneSidedBackFlipY">
+				<MediaRef rRef="IDM0001"/>
+			</LayoutPreparationParams>
+		</LayoutPreparationParams>
+		<InterpretingParams Class="Parameter"
+		                    ID="IDIP0001"
+		                    Status="Available"/>
+		<RenderingParams Class="Parameter"
+		                 ID="IDRP0001"
+		                 Status="Available">
+			<AutomatedOverPrintParams OverPrintBlackText="true"/>
+		</RenderingParams>
+		<ColorSpaceConversionParams Class="Parameter"
+		                            ICCProfileUsage="UsePDL"
+		                            ID="IDCS0001"
+		                            Status="Available"/>
+		<ColorantControl Class="Parameter"
+		                 ID="IDC0001"
+		                 ProcessColorModel="DeviceCMYK"
+		                 SettingsPolicy="MustHonor"
+		                 Status="Available"/>
+		<DigitalPrintingParams Class="Parameter"
+		                       Collate="Sheet"
+		                       ID="IDDPP0001"
+		                       OutputBin="AutoSelect"
+		                       StackAmount="5000"
+		                       PageDelivery="SameOrderFaceDown"
+		                       Status="Available"
+							   Sides="TwoSided"
+		                       PartIDKeys="RunIndex"
+							   PartUsage="Implicit">
+			<MediaRef rRef="IDM0002"/>
+			<DigitalPrintingParams RunIndex="0"
+			                       Sides="OneSidedFront">
+				<MediaRef rRef="IDM0001"/>
+			</DigitalPrintingParams>
+			<DigitalPrintingParams RunIndex="-1"
+			                       Sides="OneSidedBack">
+				<MediaRef rRef="IDM0001"/>
+			</DigitalPrintingParams>
+		</DigitalPrintingParams>
+		<Component Class="Quantity"
+		           ComponentType="PartialProduct"
+		           ID="IDC001"
+		           PipeProtocol="Internal"
+		           Status="Unavailable"/>
+		<StitchingParams Class="Parameter"
+		                 ID="IDSP0001"
+		                 NumberOfStitches="2"
+		                 Status="Available"
+		                 StitchType="Side"/>
+		<Component Class="Quantity"
+		           ComponentType="FinalProduct"
+		           ID="IDC0002"
+		           Status="Unavailable"/>
+	</ResourcePool>
+	<ResourceLinkPool>
+		<RunListLink CombinedProcessIndex="0"
+		             Usage="Input"
+		             rRef="IDRL0001"/>
+		<MediaLink CombinedProcessIndex="0 5"
+		           Usage="Input"
+		           rRef="IDM0001"/>
+		<MediaLink CombinedProcessIndex="0 5"
+		           Usage="Input"
+		           rRef="IDM0002"/>
+		<LayoutPreparationParamsLink CombinedProcessIndex="0"
+		                             Usage="Input"
+		                             rRef="IDLP0001"/>
+		<InterpretingParamsLink CombinedProcessIndex="2"
+		                        Usage="Input"
+		                        rRef="IDIP0001"/>
+		<RenderingParamsLink CombinedProcessIndex="3"
+		                     Usage="Input"
+		                     rRef="IDRP0001"/>
+		<ColorSpaceConversionParamsLink CombinedProcessIndex="4"
+		                                Usage="Input"
+		                                rRef="IDCS0001"/>
+		<ColorantControlLink CombinedProcessIndex="4"
+		                     Usage="Input"
+		                     rRef="IDC0001"/>
+		<DigitalPrintingParamsLink CombinedProcessIndex="5"
+		                           Usage="Input"
+		                           rRef="IDDPP0001"/>
+		<ComponentLink CombinedProcessIndex="6"
+		               Orientation="Rotate0"
+		               Usage="Input"
+		               rRef="IDC001"/>
+		<StitchingParamsLink CombinedProcessIndex="6"
+		                     Usage="Input"
+		                     rRef="IDSP0001"/>
+		<ComponentLink Amount="1"
+		               CombinedProcessIndex="6"
+		               Usage="Output"
+		               rRef="IDC0002"/>
+	</ResourceLinkPool>
+</JDF>

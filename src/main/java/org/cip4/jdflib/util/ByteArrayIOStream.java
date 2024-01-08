@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,9 +72,6 @@
  *
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
  *
- * KString.java
- *
- * Last changes
  *
  */
 package org.cip4.jdflib.util;
@@ -207,7 +204,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		@Override
 		public synchronized String toString()
 		{
-			return "ByteArrayIOInputStream:\n" + new String(buf, 0, count);
+			return "ByteArrayIOInputStream: +count=" + count + " pos=" + pos + new String(buf, 0, count);
 		}
 
 		/**
@@ -332,13 +329,24 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	}
 
 	/**
-	 * gets an input stream based on the current byte contents - note this operates on the internal data
+	 * gets an input stream based on the current byte contents and positions - note this operates on the internal data
 	 * 
 	 * @return an input stream
 	 */
 	public ByteArrayIOInputStream getInputStream()
 	{
 		final ByteArrayIOInputStream is = new ByteArrayIOInputStream(buf, pos, count);
+		return is;
+	}
+
+	/**
+	 * gets an input stream starting at 0 based on the current byte contents - note this operates on the internal data
+	 * 
+	 * @return an input stream
+	 */
+	public ByteArrayIOInputStream getNewStream()
+	{
+		final ByteArrayIOInputStream is = new ByteArrayIOInputStream(buf, 0, count);
 		return is;
 	}
 

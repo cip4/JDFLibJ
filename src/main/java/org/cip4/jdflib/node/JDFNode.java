@@ -4103,7 +4103,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 * get the status synchroniter
+	 * get the status synchronizer
 	 *
 	 * @return
 	 */
@@ -6649,6 +6649,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			throw new JDFException("Setting Types on illegal node Type:" + getType());
 		}
+	}
+
+	/**
+	 * set node Types , also set Type to Combined
+	 *
+	 * @param vCombiNodes vector of types
+	 */
+	public void setTypes(final VString vCombiNodes, boolean isProcessGroup)
+	{
+		setType(isProcessGroup ? EnumType.ProcessGroup : EnumType.Combined);
+		setTypes(vCombiNodes);
 	}
 
 	/**
