@@ -964,12 +964,12 @@ class PostXJDFWalker extends BaseElementWalker
 					JDFRunList ruli = (JDFRunList) rh.getResource();
 					JDFIntegerList pages = ruli == null ? null : JDFIntegerList.createIntegerList(ruli.getNonEmpty(AttributeName.PAGES));
 					ResourceHelper rh2 = rh;
-					int lastNPage = 0;
 					int nPage = ruli.getNPage();
 					if (pages != null)
 					{
 						if (pages.size() > 2)
 						{
+							int nPage0 = 0;
 							for (int pos = 0; pos < pages.size(); pos += 2)
 							{
 								rh2 = (pos > 0) ? rh2.clonePartition() : rh;
@@ -987,24 +987,27 @@ class PostXJDFWalker extends BaseElementWalker
 								int pages0 = pages.getInt(pos);
 								int pages1 = pages.getInt(pos + 1);
 								ruli2.setAttribute(AttributeName.PAGES, pages0 + " " + pages1);
+								if (ruli2.hasNonEmpty(AttributeName.LOGICALPAGE) && nPage0 > 0)
+								{
+									ruli2.addAttribute(AttributeName.LOGICALPAGE, nPage0, null);
+								}
+								else if (pos > 0)
+								{
+									ruli2.setAttribute(AttributeName.LOGICALPAGE, null);
+								}
 								if (pages0 < 0)
 									pages0 += nPage;
 								if (pages1 < 0)
 									pages1 += nPage;
 								if (pages0 >= 0 && pages1 >= 0)
 								{
-									int nPage0 = 1 + Math.abs(pages0 - pages1);
+									nPage0 = 1 + Math.abs(pages0 - pages1);
 									ruli2.setAttribute(AttributeName.NPAGE, "" + nPage0);
-									lastNPage += nPage;
 								}
 								else
 								{
 									ruli2.setAttribute(AttributeName.NPAGE, null);
-									lastNPage = 0;
-								}
-								if (ruli2.hasNonEmpty(AttributeName.LOGICALPAGE) && lastNPage > 0)
-								{
-									ruli2.addAttribute(AttributeName.LOGICALPAGE, lastNPage, null);
+									nPage0 = 0;
 								}
 							}
 						}

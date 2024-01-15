@@ -1981,6 +1981,28 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testRunListPagesLogicalPageNeg()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.RasterReading);
+		final JDFRunList r1 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		r1.setFileURL("file:///foo.pdf");
+		r1.setPages(JDFIntegerRangeList.createIntegerRangeList("0~2 4~-8 10"));
+		r1.setLogicalPage(4);
+		final XJDF20 xjdfConv = new XJDF20();
+		final KElement xjdfRoot = xjdfConv.convert(n);
+
+		XJDFHelper h = new XJDFHelper(xjdfRoot);
+		SetHelper rls = h.getSet(ElementName.RUNLIST, null);
+		assertEquals(3, rls.size());
+		assertEquals("7", rls.getPartition(1).getResourceAttribute(AttributeName.LOGICALPAGE));
+		assertEquals(null, rls.getPartition(2).getResourceAttribute(AttributeName.LOGICALPAGE));
+	}
+
+	/**
+	*
+	*/
+	@Test
 	public void testMetaDataMulti()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
