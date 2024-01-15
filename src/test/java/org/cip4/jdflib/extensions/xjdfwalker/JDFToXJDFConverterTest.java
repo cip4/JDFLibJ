@@ -1933,6 +1933,32 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testRunListPagesNeg()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.RasterReading);
+		final JDFRunList r1 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		r1.setFileURL("file:///foo.pdf");
+		r1.setPages(JDFIntegerRangeList.createIntegerRangeList("0~2 4~-5"));
+		final JDFRunList r2 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
+		r2.setFileURL("file:///fooout.pdf");
+		writeRoundTrip(n, "RunListPagesNeg");
+
+		JDFToXJDF c = new JDFToXJDF();
+		KElement e = c.convert(n);
+		JDFRunList rl = (JDFRunList) new XJDFHelper(e).getSet(ElementName.RUNLIST, 0).getResource(0).getResource();
+		assertEquals(3, rl.getNPage());
+		assertEquals("0 2", rl.getAttribute(AttributeName.PAGES));
+		JDFRunList rl1 = (JDFRunList) new XJDFHelper(e).getSet(ElementName.RUNLIST, 0).getResource(1).getResource();
+		assertEquals(-1, rl1.getNPage());
+		assertEquals("4 -5", rl1.getAttribute(AttributeName.PAGES));
+
+	}
+
+	/**
+	*
+	*/
+	@Test
 	public void testRunListPagesLogicalPage()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
