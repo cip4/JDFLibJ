@@ -964,9 +964,9 @@ class PostXJDFWalker extends BaseElementWalker
 					JDFRunList ruli = (JDFRunList) rh.getResource();
 					JDFIntegerList pages = ruli == null ? null : JDFIntegerList.createIntegerList(ruli.getNonEmpty(AttributeName.PAGES));
 					ResourceHelper rh2 = rh;
-					int nPage = ruli.getNPage();
-					if (pages != null)
+					if (ruli != null && pages != null)
 					{
+						int nPage = ruli.getNPage();
 						if (pages.size() > 2)
 						{
 							int nPage0 = 0;
