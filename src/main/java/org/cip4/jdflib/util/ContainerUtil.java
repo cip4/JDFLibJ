@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -60,6 +60,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Vector;
 
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.ifaces.IMatches;
 
 /**
@@ -196,6 +197,33 @@ public class ContainerUtil
 	}
 
 	/**
+	 * create a sorted String - never null
+	 * 
+	 * @param <A>
+	 * @param c
+	 * @return
+	 */
+	public static <A> String toString(final Collection<A> c)
+	{
+		if (c == null)
+		{
+			return JDFConstants.EMPTYSTRING;
+		}
+		final List<A> l = new ArrayList<>();
+		l.addAll(c);
+		l.sort(null);
+		final StringBuilder b = new StringBuilder();
+		int i = 0;
+		for (final A e : l)
+		{
+			if (i++ > 0)
+				b.append(JDFConstants.COMMA);
+			b.append(e.toString());
+		}
+		return b.toString();
+	}
+
+	/**
 	 * create an ArrayList from an Array, skipping null elements
 	 *
 	 * @param <A> the type
@@ -297,7 +325,7 @@ public class ContainerUtil
 		int n = 0;
 		if (c != null)
 		{
-			for (A a : c)
+			for (final A a : c)
 			{
 				if (equals(a, other))
 					n++;
@@ -1142,7 +1170,7 @@ public class ContainerUtil
 	 * @param map2
 	 * @return
 	 */
-	public static <A, B> Map<A, B> putAll(Map<A, B> map, Map<A, B> map2)
+	public static <A, B> Map<A, B> putAll(final Map<A, B> map, final Map<A, B> map2)
 	{
 		if (map == null)
 			return map2;
@@ -1160,7 +1188,7 @@ public class ContainerUtil
 	 * @param map2
 	 * @return
 	 */
-	public static <A, B> B put(Map<A, B> map, A key, B value)
+	public static <A, B> B put(final Map<A, B> map, final A key, final B value)
 	{
 		if (map != null && key != null && value != null)
 			return map.put(key, value);

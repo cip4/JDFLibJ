@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -47,6 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -264,8 +265,8 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	@Test
 	public void testPutAll()
 	{
-		JDFAttributeMap m0 = new JDFAttributeMap("a", "b");
-		JDFAttributeMap m1 = new JDFAttributeMap("a1", "b1");
+		final JDFAttributeMap m0 = new JDFAttributeMap("a", "b");
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "b1");
 		assertNull(ContainerUtil.putAll(null, null));
 		assertEquals(m0, ContainerUtil.putAll(null, m0));
 		assertEquals(m0, ContainerUtil.putAll(m0, null));
@@ -279,8 +280,8 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	@Test
 	public void testPut()
 	{
-		JDFAttributeMap m0 = new JDFAttributeMap("a", "b");
-		JDFAttributeMap m1 = new JDFAttributeMap("a1", "b1");
+		final JDFAttributeMap m0 = new JDFAttributeMap("a", "b");
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "b1");
 		assertNull(ContainerUtil.put(null, null, null));
 		assertNull(ContainerUtil.put(null, "a", null));
 		assertNull(ContainerUtil.put(null, null, "b"));
@@ -466,6 +467,21 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		{
 			assertTrue(v.contains("" + i));
 		}
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testToString()
+	{
+		final Collection<Integer> l = new HashSet<Integer>();
+		for (int i = 10; i >= 0; i--)
+		{
+			l.add(Integer.valueOf(i));
+		}
+		assertEquals("", ContainerUtil.toString(null));
+		assertTrue(ContainerUtil.toString(l).startsWith("0,"));
 	}
 
 	/**
