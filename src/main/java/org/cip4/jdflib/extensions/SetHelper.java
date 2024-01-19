@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -47,6 +47,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFAttributeMapArray;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.IMatches;
@@ -494,7 +495,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 * @return the vector of partition helpers
+	 * @return the list of partition helpers - never null
 	 */
 	public List<ResourceHelper> getPartitionList()
 	{
@@ -502,19 +503,16 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 * @return the vector of partition helpers
+	 * @return the list of partition helpers - never null
 	 */
 	public List<ResourceHelper> getResourceList()
 	{
 		final Collection<KElement> v = theElement.getChildList(getPartitionName(), null);
 
 		final ArrayList<ResourceHelper> v2 = new ArrayList<>();
-		if (v != null)
+		for (final KElement e : v)
 		{
-			for (final KElement e : v)
-			{
-				v2.add(new ResourceHelper(e));
-			}
+			v2.add(new ResourceHelper(e));
 		}
 		return v2;
 	}
@@ -892,7 +890,24 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		for (final ResourceHelper ph : vph)
 		{
-			vMap.addAll(ph.getPartMapVector());
+			vMap.addAll(ph.getPartMapList());
+		}
+		vMap.unify();
+		return vMap;
+	}
+
+	/**
+	 * returns the unified partmaps
+	 *
+	 * @return
+	 */
+	public List<JDFAttributeMap> getPartMapList()
+	{
+		final List<ResourceHelper> vph = getPartitionList();
+		final JDFAttributeMapArray vMap = new JDFAttributeMapArray();
+		for (final ResourceHelper ph : vph)
+		{
+			vMap.addAll(ph.getPartMapList());
 		}
 		vMap.unify();
 		return vMap;
@@ -906,6 +921,21 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	{
 		final List<ResourceHelper> vph = getPartitionList();
 		final ArrayList<VJDFAttributeMap> vMap = new ArrayList<>();
+		for (final ResourceHelper ph : vph)
+		{
+			vMap.add(ph.getPartMapVector());
+		}
+		return vMap;
+	}
+
+	/**
+	 *
+	 * @return the ordered collection of PartMapVectors of each child resource
+	 */
+	public Collection<List<JDFAttributeMap>> getPartMapLists()
+	{
+		final List<ResourceHelper> vph = getPartitionList();
+		final ArrayList<List<JDFAttributeMap>> vMap = new ArrayList<>();
 		for (final ResourceHelper ph : vph)
 		{
 			vMap.add(ph.getPartMapVector());

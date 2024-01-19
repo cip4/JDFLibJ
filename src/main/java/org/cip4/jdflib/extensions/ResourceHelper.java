@@ -37,6 +37,7 @@
 package org.cip4.jdflib.extensions;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.AttributeName;
@@ -47,6 +48,7 @@ import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFAttributeMapArray;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.IAmountPoolContainer;
 import org.cip4.jdflib.pool.JDFAmountPool;
@@ -137,14 +139,26 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public VJDFAttributeMap getPartMapVector()
 	{
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		addParts(vMap);
+		return vMap;
+	}
+
+	private void addParts(final List<JDFAttributeMap> vMap)
+	{
 		final Collection<KElement> vParts = theElement.getChildList(ElementName.PART, null);
-		if (vParts != null)
-		{
-			for (final KElement e : vParts)
-				vMap.add(e.getAttributeMap());
-			if (vParts.size() == 0)
-				vMap.add(new JDFAttributeMap());
-		}
+		for (final KElement e : vParts)
+			vMap.add(e.getAttributeMap());
+		if (vParts.isEmpty())
+			vMap.add(new JDFAttributeMap());
+	}
+
+	/**
+	 * @return
+	 */
+	public List<JDFAttributeMap> getPartMapList()
+	{
+		final JDFAttributeMapArray vMap = new JDFAttributeMapArray();
+		addParts(vMap);
 		return vMap;
 	}
 

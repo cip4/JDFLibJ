@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1887,7 +1887,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @param mAttrib attributes you are lokking for
 	 * @param bAnd if true, a child is only added if it has all attributes specified in Attributes mAttrib
 	 * @param maxSize maximum size of the element vector
-	 * @return VElement vector with all found elements, an empty vector if no elements match
+	 * @return VElement vector with all found elements, an empty List if no elements match
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */

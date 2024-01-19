@@ -43,6 +43,8 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -50,6 +52,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFAttributeMapArray;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -311,6 +314,26 @@ public class SetHelperTest extends JDFTestCaseBase
 		v.add(new JDFAttributeMap());
 		sh.getCreatePartition(map2, true);
 		final VJDFAttributeMap vp = sh.getPartMapVector();
+		assertEquals(vp, v);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetPartMapList()
+	{
+		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		assertEquals(sh.getName(), "Media");
+		final JDFAttributeMapArray v = new JDFAttributeMapArray();
+		final JDFAttributeMap map1 = new JDFAttributeMap("SheetName", "S1");
+		v.add(map1);
+		sh.getCreatePartition(map1, true);
+		final JDFAttributeMap map2 = new JDFAttributeMap("SheetName", "S2");
+		v.add(map2);
+		v.add(new JDFAttributeMap());
+		sh.getCreatePartition(map2, true);
+		final List<JDFAttributeMap> vp = sh.getPartMapList();
 		assertEquals(vp, v);
 	}
 
