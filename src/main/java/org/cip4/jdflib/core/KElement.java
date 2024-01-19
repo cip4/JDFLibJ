@@ -1132,6 +1132,17 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
+	 * convenience
+	 *
+	 * @param key attribute key
+	 * @param value string to be appended
+	 */
+	public String appendAttribute(final String key, final String value, boolean unique)
+	{
+		return appendAttribute(key, value, null, null, unique);
+	}
+
+	/**
 	 * Append the contents of value to the existing attribute key. Create Key, if it does not exist
 	 *
 	 * @param key attribute key
