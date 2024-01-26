@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -179,7 +179,7 @@ public class OrderedTaskQueue extends Thread
 
 	static AtomicReference<Map<String, OrderedTaskQueue>> createqueue()
 	{
-		AtomicReference<Map<String, OrderedTaskQueue>> atomicReference = new AtomicReference<>();
+		final AtomicReference<Map<String, OrderedTaskQueue>> atomicReference = new AtomicReference<>();
 		atomicReference.set(new HashMap<>());
 		return atomicReference;
 	}
@@ -196,7 +196,7 @@ public class OrderedTaskQueue extends Thread
 		name = getThreadName(name);
 		synchronized (theMap)
 		{
-			Map<String, OrderedTaskQueue> map = theMap.get();
+			final Map<String, OrderedTaskQueue> map = theMap.get();
 			OrderedTaskQueue orderedTaskQueue = map.get(name);
 			if (orderedTaskQueue == null)
 			{
@@ -221,7 +221,7 @@ public class OrderedTaskQueue extends Thread
 		name = getThreadName(name);
 		synchronized (theMap)
 		{
-			Map<String, OrderedTaskQueue> map = theMap.get();
+			final Map<String, OrderedTaskQueue> map = theMap.get();
 			final OrderedTaskQueue orderedTaskQueue = map.get(name);
 			if (orderedTaskQueue != null)
 			{
@@ -260,7 +260,7 @@ public class OrderedTaskQueue extends Thread
 	{
 		synchronized (theMap)
 		{
-			Map<String, OrderedTaskQueue> map = theMap.get();
+			final Map<String, OrderedTaskQueue> map = theMap.get();
 			final int size = map.size();
 			log.info("shutting down " + size + " ordered queues");
 			final Collection<String> v = ContainerUtil.getKeyArray(map);
@@ -270,11 +270,11 @@ public class OrderedTaskQueue extends Thread
 				{
 					try
 					{
-						OrderedTaskQueue q = map.get(key);
+						final OrderedTaskQueue q = map.get(key);
 						if (q != null)
 							q.shutDown();
 					}
-					catch (Exception x)
+					catch (final Exception x)
 					{
 						// nop - no worries if duplicate deinitialzation
 					}
@@ -292,7 +292,7 @@ public class OrderedTaskQueue extends Thread
 		idle.set(-1);
 		interruptCurrent(0);
 		ThreadUtil.notifyAll(mutex);
-		Map<String, OrderedTaskQueue> map = theMap.get();
+		final Map<String, OrderedTaskQueue> map = theMap.get();
 		map.remove(getName());
 		theMap.set(map);
 		queue.clear();
@@ -372,7 +372,7 @@ public class OrderedTaskQueue extends Thread
 	 */
 	public boolean queue(final Runnable task)
 	{
-		if (idle.get() < 0)
+		if (idle.get() < 0 || !theMap.get().containsValue(this))
 		{
 			log.error("cannot queue task in stopped queue " + shortString());
 			return false;
