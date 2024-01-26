@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -239,20 +239,23 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		final ResourceHelper rh = shLO.appendPartition(AttributeName.TILEID, "0 0", true);
 		rh.ensurePart(AttributeName.SIDE, "Front");
 		final JDFLayout lo = (JDFLayout) rh.getResource();
-		lo.setSurfaceContentsBox(new JDFRectangle(0, 0, 600, 420));
-		KElement po = lo.appendElement(XJDFConstants.PlacedObject);
+		lo.setSurfaceContentsBox(new JDFRectangle(0, 0, 1820, 1220));
+		final KElement po = lo.appendElement(XJDFConstants.PlacedObject);
 		po.setAttribute("Ord", "0");
-		po.setAttribute(AttributeName.CLIPBOX, new JDFRectangle(0, 0, 600, 420).toString());
+		po.setAttribute(AttributeName.CLIPBOX, new JDFRectangle(0, 0, 620, 420).toString());
 		po.setAttribute("CTM", JDFMatrix.getUnitMatrix().toString());
+		po.setAttribute(AttributeName.TRIMSIZE, new JDFXYPair(600, 400).toString());
+		po.setAttribute(AttributeName.TRIMCTM, JDFMatrix.getUnitMatrix().shift(-10, -10).toString());
 		po.appendElement(ElementName.CONTENTOBJECT);
-		final ResourceHelper rh2 = shLO.appendPartition(AttributeName.TILEID, "1 1", true);
+		final ResourceHelper rh2 = shLO.appendPartition(AttributeName.TILEID, "2 2", true);
 		rh2.ensurePart(AttributeName.SIDE, "Front");
 		final JDFLayout lo2 = (JDFLayout) rh2.getResource();
-		lo2.setSurfaceContentsBox(new JDFRectangle(0, 0, 600, 420));
-		po = lo2.copyElement(po, null);
-		po.setAttribute("CTM", JDFMatrix.getUnitMatrix().shift(-600, -420).toString());
+		lo2.setAttributes(lo);
+		final KElement po2 = lo2.copyElement(po, null);
+		po2.setAttribute(AttributeName.TRIMCTM, JDFMatrix.getUnitMatrix().shift(-10, -10).shift(-1200, -800).toString());
+		po2.setAttribute("CTM", JDFMatrix.getUnitMatrix().shift(-1200, -800).toString());
 		xjdfHelper.cleanUp();
-		shLO.getRoot().appendXMLComment("More tiles here", rh2.getRoot());
+		shLO.getRoot().appendXMLComment("7 further tiles '0 1' to '2 1' omitted for brevity", rh2.getRoot());
 		setSnippet(shLO, true);
 		writeTest(xjdfHelper, "processes/impositionForTiling.xjdf");
 	}

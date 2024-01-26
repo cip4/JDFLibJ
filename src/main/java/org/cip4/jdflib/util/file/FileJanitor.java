@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,6 +44,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JDFDuration;
 
 /**
  * class to clean up files and directories the directories are retained longer since java knows only last modified. This is actually a good thing
@@ -71,10 +72,17 @@ public class FileJanitor
 			return arg0.lastModified() + age < t0;
 		}
 
+		@Override
+		public String toString()
+		{
+			return "AgeFilter [t0=" + new JDFDate(t0).getDateTimeISO() + ", age=" + new JDFDuration(age / 1000).getDurationISO() + "]";
+		}
+
 	}
 
 	class KillFilter implements FileFilter
 	{
+
 		private final FileFilter baseFilter;
 
 		/**
@@ -120,6 +128,12 @@ public class FileJanitor
 				}
 			}
 			return accept;
+		}
+
+		@Override
+		public String toString()
+		{
+			return "KillFilter [baseFilter=" + baseFilter + "]";
 		}
 	}
 
@@ -195,6 +209,6 @@ public class FileJanitor
 	@Override
 	public String toString()
 	{
-		return "FileJanitor " + baseDir + " delEmpty=" + delEmpty;
+		return "FileJanitor " + baseDir + " delEmpty=" + delEmpty + " filter=" + filter;
 	}
 }

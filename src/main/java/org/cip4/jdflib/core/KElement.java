@@ -696,7 +696,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			}
 			else
 			{
-				String xmlnsPrefix = xmlnsPrefix(key);
+				final String xmlnsPrefix = xmlnsPrefix(key);
 				if (xmlnsPrefix != null)
 				{
 					String namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix, true);
@@ -1137,7 +1137,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @param key attribute key
 	 * @param value string to be appended
 	 */
-	public String appendAttribute(final String key, final String value, boolean unique)
+	public String appendAttribute(final String key, final String value, final boolean unique)
 	{
 		return appendAttribute(key, value, null, null, unique);
 	}
@@ -1201,12 +1201,12 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @default appendAttribute(key, value, null, null, false)
 	 * @return the updated value; null if none exists
 	 */
-	public void appendAttributes(final String key, final List<String> value, final String nameSpaceURI, String sep, final boolean bUnique)
+	public void appendAttributes(final String key, final List<String> value, final String nameSpaceURI, final String sep, final boolean bUnique)
 	{
 		if (!ContainerUtil.isEmpty(value))
 		{
-			StringArray old = StringArray.getVString(getAttribute(key, nameSpaceURI, sep), null);
-			Collection<String> addAll = ContainerUtil.addAll(old, value);
+			final StringArray old = StringArray.getVString(getAttribute(key, nameSpaceURI, sep), null);
+			final Collection<String> addAll = ContainerUtil.addAll(old, value);
 			if (bUnique)
 				ContainerUtil.unify(addAll);
 			setAttribute(key, (List<String>) addAll, nameSpaceURI);
@@ -2488,41 +2488,37 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Get a vector of all IDs that occur multiple times
 	 *
-	 * @param JDFCoreConstants name of the attribute to test for
+	 * @param attName name of the attribute to test for
 	 * @return VString the list of multiply occurring ID values, null if all is well
 	 */
-	public VString getMultipleIDs(final String JDFCoreConstants)
+	public VString getMultipleIDs(final String attName)
 	{
 		final VString vRet = new VString();
-		getMultipleIDs(JDFCoreConstants, vRet, new HashSet<String>());
+		getMultipleIDs(attName, vRet, new HashSet<String>());
 		return vRet.isEmpty() ? null : vRet;
 	}
 
 	/**
 	 * Get a vector of all IDs that occur multiple times
 	 *
-	 * @param JDFCoreConstants name of the attribute to test for
+	 * @param attName name of the attribute to test for
 	 * @param vRet used for recursion; should be null
 	 * @param setID used for recursion; should be null
 	 */
-	private void getMultipleIDs(final String JDFCoreConstants, final VString vRet, final Set<String> setID)
+	private void getMultipleIDs(final String attName, final VString vRet, final Set<String> setID)
 	{
-		final String id = getAttribute_KElement(JDFCoreConstants, null, null);
+		final String id = getAttributeRaw(attName);
 		if (id != null)
 		{
-			if (setID.contains(id))
+			if (!setID.add(id))
 			{
 				vRet.appendUnique(id);
-			}
-			else
-			{
-				setID.add(id);
 			}
 		}
 		KElement child = getFirstChildElement();
 		while (child != null)
 		{
-			child.getMultipleIDs(JDFCoreConstants, vRet, setID);
+			child.getMultipleIDs(attName, vRet, setID);
 			child = child.getNextSiblingElement();
 		}
 	}
@@ -4348,7 +4344,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			this(xPath, pInvert, false, true);
 		}
 
-		public SingleXPathComparator(String xPath, boolean pInvert, boolean checkNumber, boolean caseSensitive)
+		public SingleXPathComparator(final String xPath, final boolean pInvert, final boolean checkNumber, final boolean caseSensitive)
 		{
 			this.xPath = xPath;
 			this.invert = pInvert ? -1 : 1;
@@ -4405,7 +4401,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			return checkNumber;
 		}
 
-		public void setCheckNumber(boolean checkNumber)
+		public void setCheckNumber(final boolean checkNumber)
 		{
 			this.checkNumber = checkNumber;
 		}
@@ -4415,7 +4411,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			return caseSensitive;
 		}
 
-		public void setCaseSensitive(boolean caseSensitive)
+		public void setCaseSensitive(final boolean caseSensitive)
 		{
 			this.caseSensitive = caseSensitive;
 		}
@@ -4440,7 +4436,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			super(pAttName, pInvert);
 		}
 
-		public SingleAttributeComparator(final String pAttName, final boolean pInvert, final boolean checkNumber, boolean caseSensitive)
+		public SingleAttributeComparator(final String pAttName, final boolean pInvert, final boolean checkNumber, final boolean caseSensitive)
 		{
 			super(pAttName, pInvert, checkNumber, caseSensitive);
 		}
@@ -5067,7 +5063,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @return String the String value of the xpath
 	 *
 	 */
-	public JDFAttributeMap getXPathValueMap(boolean isRelative)
+	public JDFAttributeMap getXPathValueMap(final boolean isRelative)
 	{
 		final XPathHelper xPathHelper = new XPathHelper(this);
 		return xPathHelper.getXPathAttributeMap(isRelative ? ".//@*" : null, true);
@@ -5256,7 +5252,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 	}
 
-	public <A extends KElement> List<A> getTreeByClass(Class<A> cl, final boolean addself)
+	public <A extends KElement> List<A> getTreeByClass(final Class<A> cl, final boolean addself)
 	{
 		final ArrayList<A> v = new ArrayList<>();
 		if (addself && (cl.isInstance(this)))
@@ -5390,7 +5386,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @default copyAttribute(attrib,src,null,null,null);
 	 * @return the value of the copied attribute
 	 */
-	public String copyAttribute(String attrib, final KElement src, final String srcAttrib, final String nameSpaceURI, final String srcNameSpaceURI)
+	public String copyAttribute(final String attrib, final KElement src, final String srcAttrib, final String nameSpaceURI, final String srcNameSpaceURI)
 	{
 		return copyAttribute(attrib, src, srcAttrib, nameSpaceURI, srcNameSpaceURI, true);
 	}
@@ -5408,7 +5404,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @default copyAttribute(attrib,src,null,null,null);
 	 * @return the value of the copied attribute
 	 */
-	public String copyAttribute(String attrib, final KElement src, final String srcAttrib, final String nameSpaceURI, final String srcNameSpaceURI, boolean overwriteEmpty)
+	public String copyAttribute(String attrib, final KElement src, final String srcAttrib, final String nameSpaceURI, final String srcNameSpaceURI, final boolean overwriteEmpty)
 	{
 		final String strSrcAttrib = (srcAttrib == null) || srcAttrib.equals(JDFCoreConstants.EMPTYSTRING) ? attrib : srcAttrib;
 		final String strNameSpace = (srcNameSpaceURI == null) || srcNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING) ? nameSpaceURI : srcNameSpaceURI;
@@ -5456,7 +5452,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @param src source element where the attribute to be copied resides
 	 * @return the value of the copied attribute
 	 */
-	public String copyAttribute(final String attrib, final KElement src, boolean overwriteEmpty)
+	public String copyAttribute(final String attrib, final KElement src, final boolean overwriteEmpty)
 	{
 		return copyAttribute(attrib, src, null, null, null, overwriteEmpty);
 	}
@@ -6645,7 +6641,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 */
 	public boolean write2File(final File file)
 	{
-		File f = FileUtil.writeFile(this, file);
+		final File f = FileUtil.writeFile(this, file);
 		return f != null;
 	}
 

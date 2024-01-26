@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,13 +36,18 @@
  */
 package org.cip4.jdflib.util.file;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.jupiter.api.Assertions;
+import org.cip4.jdflib.util.file.FileJanitor.AgeFilter;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -72,12 +77,12 @@ public class FileJanitorTest extends JDFTestCaseBase
 		FileJanitor fileJanitor = new FileJanitor(f, 2);
 		fileJanitor.setLogSingle(true);
 		Vector<File> cleanupList = fileJanitor.cleanup();
-		Assertions.assertEquals(cleanupList.size(), 2, 1);
+		assertEquals(cleanupList.size(), 2, 1);
 		ThreadUtil.sleep(2000);
 		fileJanitor = new FileJanitor(f, 1);
 		fileJanitor.setLogSingle(true);
 		cleanupList = fileJanitor.cleanup();
-		Assertions.assertEquals(cleanupList.size(), 3, 1);
+		assertEquals(cleanupList.size(), 3, 1);
 	}
 
 	/**
@@ -101,12 +106,12 @@ public class FileJanitorTest extends JDFTestCaseBase
 		fileJanitor.setLogSingle(false);
 		fileJanitor.setDeleteEmptyDir(true);
 		Vector<File> cleanupList = fileJanitor.cleanup();
-		Assertions.assertEquals(cleanupList.size(), 2, 1);
+		assertEquals(cleanupList.size(), 2, 1);
 		ThreadUtil.sleep(2000);
 		fileJanitor = new FileJanitor(f, 1);
 		fileJanitor.setLogSingle(true);
 		cleanupList = fileJanitor.cleanup();
-		Assertions.assertEquals(cleanupList.size(), 2, 1);
+		assertEquals(cleanupList.size(), 2, 1);
 	}
 
 	/**
@@ -121,9 +126,38 @@ public class FileJanitorTest extends JDFTestCaseBase
 		final FileJanitor fileJanitor = new FileJanitor(null, 2);
 		fileJanitor.setDeleteEmptyDir(true);
 
-		Assertions.assertTrue(fileJanitor.delEmpty);
+		assertTrue(fileJanitor.delEmpty);
 		fileJanitor.setDeleteEmptyDir(false);
-		Assertions.assertFalse(fileJanitor.delEmpty);
+		assertFalse(fileJanitor.delEmpty);
+	}
+
+	/**
+	 * @throws Exception
+	 *
+	 *
+	 */
+	@Test
+	public void testAgeTostring() throws Exception
+	{
+
+		final FileJanitor fileJanitor = new FileJanitor(null, 2);
+		final AgeFilter af = fileJanitor.new AgeFilter(10000000l);
+
+		assertNotNull(af.toString());
+	}
+
+	/**
+	 * @throws Exception
+	 *
+	 *
+	 */
+	@Test
+	public void testTostring() throws Exception
+	{
+
+		final FileJanitor fileJanitor = new FileJanitor(null, 2);
+
+		assertNotNull(fileJanitor.toString());
 	}
 
 	/**
@@ -138,8 +172,8 @@ public class FileJanitorTest extends JDFTestCaseBase
 		final FileJanitor fileJanitor = new FileJanitor(null, 2);
 		fileJanitor.setLogSingle(true);
 
-		Assertions.assertTrue(fileJanitor.logSingle);
+		assertTrue(fileJanitor.logSingle);
 		fileJanitor.setLogSingle(false);
-		Assertions.assertFalse(fileJanitor.logSingle);
+		assertFalse(fileJanitor.logSingle);
 	}
 }
