@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -4063,13 +4063,13 @@ public class JDFElement extends KElement
 	 * @param text the comment text to set
 	 * @return {@link JDFComment} the comment
 	 */
-	public JDFComment setCommentText(final String text, String name)
+	public JDFComment setCommentText(final String text, final String name)
 	{
 		if (StringUtil.isEmpty(text))
 		{
 			while (true)
 			{
-				JDFComment c = getComment(name, 0);
+				final JDFComment c = getComment(name, 0);
 				if (c == null)
 					break;
 				c.deleteNode();
@@ -5240,14 +5240,16 @@ public class JDFElement extends KElement
 		private static int m_startValue = 0;
 
 		/**
+		 * 
+		 * return the version as a readable string, e.g 1.7 or 2.1
+		 * 
 		 * @see java.lang.Object#toString()
-		 * @deprecated just for compiling PrintReady, to be removed afterwards
+		 *
 		 */
-		@Deprecated
 		@Override
 		public String toString()
 		{
-			return getName();
+			return getMajorVersion() + JDFConstants.DOT + getMinorVersion();
 		}
 
 		private EnumVersion(final String name)
@@ -6242,7 +6244,7 @@ public class JDFElement extends KElement
 	 */
 	public String getCommentText(final String _name, final int index)
 	{
-		JDFComment c = getComment(_name, index);
+		final JDFComment c = getComment(_name, index);
 		return c == null ? null : c.getText();
 	}
 

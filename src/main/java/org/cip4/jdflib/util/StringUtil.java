@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -261,12 +261,12 @@ public class StringUtil
 	 */
 	public static String write2String(final IStreamWriter w)
 	{
-		ByteArrayIOStream os = new ByteArrayIOStream();
+		final ByteArrayIOStream os = new ByteArrayIOStream();
 		try
 		{
 			w.writeStream(os);
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			return null;
 		}
@@ -1475,7 +1475,7 @@ public class StringUtil
 	 * @param c1
 	 * @return -1 if c0 &lt; c1, 0 if equal, 1 if c0 &gt; c1;
 	 */
-	public static int compare(final String c0, final String c1, boolean ignoreCase)
+	public static int compare(final String c0, final String c1, final boolean ignoreCase)
 	{
 		if (c0 == null)
 		{
@@ -3318,6 +3318,18 @@ public class StringUtil
 	public static String formatDouble(final double value, final int precision)
 	{
 		return new NumberFormatter().formatDouble(value, precision);
+	}
+
+	/**
+	 * 
+	 * @param in
+	 * @param search
+	 * @param i
+	 * @return
+	 */
+	public static int index(final String in, final String search, final int i)
+	{
+		return in == null || search == null ? -1 : in.indexOf(search, i);
 	}
 
 }

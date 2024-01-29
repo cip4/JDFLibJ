@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -125,6 +125,21 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testgetICSVersions()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		assertNull(n.appendICSVersion(null));
+		final ICSVersion expected = new ICSVersion("A", 1, EnumVersion.Version_1_4);
+		assertEquals(expected.toString(), n.appendICSVersion(expected));
+		assertEquals(expected.toString(), n.appendICSVersion(expected));
+		assertEquals(expected.toString(), n.setICSVersions(expected, expected).getString());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testgetLinkedResourceVector()
 	{
 		final JDFNode n = creatXMDoc().getJDFRoot();
@@ -139,11 +154,11 @@ public class JDFNodeTest extends JDFTestCaseBase
 	@Test
 	public void testRespartEquals()
 	{
-		ResPart rp0 = new ResPart(null);
+		final ResPart rp0 = new ResPart(null);
 		assertFalse(rp0.equals(null));
 		assertTrue(rp0.equals(rp0));
 		assertTrue(rp0.equals(new ResPart(null)));
-		JDFResource r = (JDFResource) JDFElement.createRoot(ElementName.RUNLIST);
+		final JDFResource r = (JDFResource) JDFElement.createRoot(ElementName.RUNLIST);
 		assertEquals(new ResPart(r), new ResPart(r));
 		assertNotEquals(new ResPart(r), rp0);
 		assertNotNull(rp0.toString());
@@ -184,7 +199,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	@Test
 	public void testComment()
 	{
-		JDFNode n = JDFNode.createRoot();
+		final JDFNode n = JDFNode.createRoot();
 		n.setCommentText("foo");
 		assertEquals("foo", n.getComment(0).getText());
 		n.setCommentText("next", "bar");
@@ -701,7 +716,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	@Test
 	public void testURLInput()
 	{
-		JDFNode n = JDFNode.createRoot();
+		final JDFNode n = JDFNode.createRoot();
 		assertNull(n.getURLInputStream());
 	}
 

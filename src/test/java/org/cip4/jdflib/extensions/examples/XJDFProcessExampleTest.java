@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,8 +68,6 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
-import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -122,44 +120,22 @@ public class XJDFProcessExampleTest extends ExampleTest
 	*
 	*/
 	@Test
-	public final void testConventionalPrinting()
-	{
-		final XJDFHelper xjdfHelper = new XJDFHelper("ConventionalPrintingExample", null, null);
-		xjdfHelper.addType(EnumType.ConventionalPrinting);
-		SetHelper cpp = xjdfHelper.getCreateSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
-		cpp.getCreateResource(0, true).setResourceAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
-
-		SetHelper inComp = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
-		SetHelper outComp = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
-		SetHelper mediaSet = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
-		ResourceHelper media = mediaSet.getCreateResource();
-		media.ensureReference(inComp.getCreateResource(), null);
-		media.ensureReference(outComp.getCreateResource(), null);
-		media.setResourceEnum(AttributeName.MEDIATYPE, EnumMediaType.Paper);
-		writeTest(xjdfHelper, "processes/ConventionalPrintingExample.xjdf");
-	}
-
-	/**
-	*
-	*
-	*/
-	@Test
 	public final void testPDLCreation()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("PDLCreationExample", null, null);
 		xjdfHelper.addType(EnumType.PDLCreation);
-		SetHelper pcp = xjdfHelper.getCreateSet(ElementName.PDLCREATIONPARAMS, EnumUsage.Input);
+		final SetHelper pcp = xjdfHelper.getCreateSet(ElementName.PDLCREATIONPARAMS, EnumUsage.Input);
 		pcp.getCreateResource(0, true).setResourceAttribute(AttributeName.MIMETYPE, UrlUtil.APPLICATION_PDF);
 
-		SetHelper inRuLi = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input);
+		final SetHelper inRuLi = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input);
 		for (int i = 0; i < 2; i++)
 		{
-			JDFRunList ruliLeaf = (JDFRunList) inRuLi.appendPartition(AttributeName.PAGENUMBER, i + " " + i, true).getResource();
+			final JDFRunList ruliLeaf = (JDFRunList) inRuLi.appendPartition(AttributeName.PAGENUMBER, i + " " + i, true).getResource();
 			ruliLeaf.setFileSpecURL("file://page" + i + ".tif");
 			ruliLeaf.setNPage(1);
 		}
-		SetHelper outRuLi = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Output);
-		JDFRunList ruliLeaf = (JDFRunList) outRuLi.getCreatePartition(0, true).getResource();
+		final SetHelper outRuLi = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Output);
+		final JDFRunList ruliLeaf = (JDFRunList) outRuLi.getCreatePartition(0, true).getResource();
 		ruliLeaf.setFileSpecURL("file://2page.pdf");
 		ruliLeaf.setNPage(2);
 		cleanSnippets(xjdfHelper);

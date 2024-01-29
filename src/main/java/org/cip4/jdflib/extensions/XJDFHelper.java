@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -55,6 +55,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.xjdfwalker.IDRemover;
+import org.cip4.jdflib.node.ICSVersion;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
@@ -1240,6 +1241,26 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	public void setVersion(final EnumVersion v)
 	{
 		setAttribute(AttributeName.VERSION, v == null ? defaultVersion().getName() : v.getName());
+	}
+
+	/**
+	 * set attribute ICSVersions
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public VString setICSVersions(final ICSVersion... versions)
+	{
+		setAttribute(AttributeName.ICSVERSIONS, null);
+		for (final ICSVersion v : versions)
+		{
+			appendICSVersion(v);
+		}
+		return VString.getVString(getAttribute(AttributeName.ICSVERSIONS), null);
+	}
+
+	public String appendICSVersion(final ICSVersion v)
+	{
+		return getRoot().appendAttribute(AttributeName.ICSVERSIONS, v == null ? null : v.toString(), true);
 	}
 
 	/**

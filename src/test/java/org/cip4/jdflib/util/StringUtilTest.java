@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -503,7 +503,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWrite2StringBad() throws IOException
 	{
-		IStreamWriter w = Mockito.mock(IStreamWriter.class);
+		final IStreamWriter w = Mockito.mock(IStreamWriter.class);
 		Mockito.doThrow(IOException.class).when(w).writeStream(any());
 		assertNull(StringUtil.write2String(w));
 	}
@@ -1400,7 +1400,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.equals("1", "1.0001", 0.001));
 		assertTrue(StringUtil.equals("1 2", "1.0001 2.0002", 0.001));
 		assertTrue(StringUtil.equals("true", "TRUE", 0));
-		JDFDate jdfDate = new JDFDate();
+		final JDFDate jdfDate = new JDFDate();
 		assertTrue(StringUtil.equals(jdfDate.getDateTimeISO(), jdfDate.addOffset(1, 0, 0, 0).getDateTimeISO(), 1234));
 	}
 
@@ -1552,6 +1552,22 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.isDate(new JDFDate().getDateTimeISO()));
 		assertTrue(StringUtil.isDate(new JDFDate().getDateISO()));
 		assertFalse(StringUtil.isDate("1abc"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testIndex()
+	{
+		assertEquals(-1, StringUtil.index(null, null, 0));
+		assertEquals(-1, StringUtil.index("a", null, 0));
+		assertEquals(-1, StringUtil.index("a", "b", 0));
+		assertEquals(0, StringUtil.index("a", "a", 0));
+		assertEquals(1, StringUtil.index("abc", "b", 0));
+		assertEquals(1, StringUtil.index("abc", "b", 1));
+		assertEquals(-1, StringUtil.index("abc", "b", 2));
+
 	}
 
 	/**

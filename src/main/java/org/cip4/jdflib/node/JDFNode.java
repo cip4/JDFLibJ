@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1668,15 +1668,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	static class ResPart
 	{
-		ResPart(JDFResource res)
+		ResPart(final JDFResource res)
 		{
 			super();
 			this.res = res;
 			this.part = res == null ? null : res.getAttributeMap();
 		}
 
-		private JDFResource res;
-		private JDFAttributeMap part;
+		private final JDFResource res;
+		private final JDFAttributeMap part;
 
 		@Override
 		public int hashCode()
@@ -1688,7 +1688,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		}
 
 		@Override
-		public boolean equals(Object obj)
+		public boolean equals(final Object obj)
 		{
 			if (this == obj)
 				return true;
@@ -1696,7 +1696,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			ResPart other = (ResPart) obj;
+			final ResPart other = (ResPart) obj;
 			return Objects.equals(part, other.part) && Objects.equals(res, other.res);
 		}
 
@@ -3433,7 +3433,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @param h
 	 * @param done
 	 */
-	void getPredecessorImpl(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, HashSet<ResPart> done)
+	void getPredecessorImpl(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, final HashSet<ResPart> done)
 	{
 		final JDFResourceLinkPool rlp = getResourceLinkPool();
 
@@ -3452,10 +3452,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		}
 	}
 
-	protected void checkPredecessorResource(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, HashSet<ResPart> done, final KElement resElem)
+	protected void checkPredecessorResource(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, final HashSet<ResPart> done, final KElement resElem)
 	{
 		final JDFResource r = (JDFResource) resElem;
-		ResPart id = new ResPart(r);
+		final ResPart id = new ResPart(r);
 		if (done.add(id))
 		{
 			// get all creator or consumer processes
@@ -3472,7 +3472,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		}
 	}
 
-	void checkPredecessorLink(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, HashSet<ResPart> done, final JDFResource r, final VElement vNode, final JDFResourceLink rl)
+	void checkPredecessorLink(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, final HashSet<ResPart> done, final JDFResource r, final VElement vNode, final JDFResourceLink rl)
 	{
 		final VJDFAttributeMap vMaps = rl.getPartMapVector();
 		for (final KElement nodeElem : vNode)
@@ -6556,7 +6556,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @param typ
 	 * @param combineType one of null, Combined or ProcessGroup
 	 */
-	public void addTypes(final EnumType typ, EnumType combineType, boolean unique)
+	public void addTypes(final EnumType typ, final EnumType combineType, final boolean unique)
 	{
 		if (EnumType.Combined.equals(combineType) || EnumType.ProcessGroup.equals(combineType))
 		{
@@ -6574,9 +6574,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * 
 	 * @param combineType
 	 */
-	public void ensureCombined(EnumType combineType)
+	public void ensureCombined(final EnumType combineType)
 	{
-		boolean isCombined = isTypesNode();
+		final boolean isCombined = isTypesNode();
 
 		if (!isCombined && !isProduct())
 		{
@@ -6656,7 +6656,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param vCombiNodes vector of types
 	 */
-	public void setTypes(final VString vCombiNodes, boolean isProcessGroup)
+	public void setTypes(final VString vCombiNodes, final boolean isProcessGroup)
 	{
 		setType(isProcessGroup ? EnumType.ProcessGroup : EnumType.Combined);
 		setTypes(vCombiNodes);
@@ -7369,6 +7369,26 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public void setICSVersions(final VString value)
 	{
 		setAttribute(AttributeName.ICSVERSIONS, value, null);
+	}
+
+	/**
+	 * set attribute ICSVersions
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public VString setICSVersions(final ICSVersion... versions)
+	{
+		setAttribute(AttributeName.ICSVERSIONS, null);
+		for (final ICSVersion v : versions)
+		{
+			appendICSVersion(v);
+		}
+		return getICSVersions(true);
+	}
+
+	public String appendICSVersion(final ICSVersion v)
+	{
+		return appendAttribute(AttributeName.ICSVERSIONS, v == null ? null : v.toString(), true);
 	}
 
 	/**
