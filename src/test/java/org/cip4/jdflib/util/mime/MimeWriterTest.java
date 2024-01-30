@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -61,6 +61,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.PlatformUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.mime.MimeWriter.FixSemiColonStream;
@@ -216,10 +217,40 @@ public class MimeWriterTest extends JDFTestCaseBase
 		final MimeReader mr = new MimeReader(sm_dirTestDataTemp + "mimexjmf.mim");
 		final BodyPartHelper bphM2 = mr.getBodyPartHelper(0);
 		assertEquals("submit.xjmf", bphM2.getFileName());
-		assertArrayEquals(bytesM, Arrays.copyOf(new ByteArrayIOStream(bphM2.getInputStream()).getBuf(), bytes.length));
+		assertArrayEquals(bytesM, Arrays.copyOf(new ByteArrayIOStream(bphM2.getInputStream()).getBuf(), bytesM.length));
 		final BodyPartHelper bph2 = mr.getBodyPartHelper(1);
 		assertArrayEquals(bytes, Arrays.copyOf(new ByteArrayIOStream(bph2.getInputStream()).getBuf(), bytes.length));
 		assertEquals("submit.xjdf", bph2.getFileName());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testWriteFormPTKJSON() throws Exception
+	{
+		final MimeWriter mw = new MimeWriter(eMimeSubType.formdata);
+		final BodyPartHelper bphM = new BodyPartHelper();
+		final byte[] bytesM = "{\"PrintTalk\":{...}}".getBytes();
+		assertTrue(bphM.setContent(new ByteArrayInputStream(bytesM), MimeUtil.VND_PTK_J));
+		bphM.setFileName("printtalk");
+		mw.addBodyPart(bphM);
+		final byte[] bytes = "%PDF-1.6...".getBytes();
+		final BodyPartHelper bph = new BodyPartHelper();
+		assertTrue(bph.setContent(new ByteArrayInputStream(bytes), UrlUtil.APPLICATION_PDF));
+		bph.setFileName("content.pdf");
+		mw.addBodyPart(bph);
+		final File f = new File(sm_dirTestDataTemp + "mimeptk.mim");
+		assertNotNull(FileUtil.writeFile(mw, f));
+		assertTrue(f.exists());
+
+		final MimeReader mr = new MimeReader(sm_dirTestDataTemp + "mimeptk.mim");
+		final BodyPartHelper bphM2 = mr.getBodyPartHelper(0);
+		assertEquals("printtalk", bphM2.getFileName());
+		assertArrayEquals(bytesM, Arrays.copyOf(new ByteArrayIOStream(bphM2.getInputStream()).getBuf(), bytesM.length));
+		final BodyPartHelper bph2 = mr.getBodyPartHelper(1);
+		assertArrayEquals(bytes, Arrays.copyOf(new ByteArrayIOStream(bph2.getInputStream()).getBuf(), bytes.length));
+		assertEquals("content.pdf", bph2.getFileName());
 	}
 
 	/**
@@ -260,9 +291,9 @@ public class MimeWriterTest extends JDFTestCaseBase
 		final String queueEntryID = "qe1";
 		returnQEParams.setQueueEntryID(queueEntryID);
 		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
-		JDFPreview pv = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		final JDFPreview pv = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
 		pv.setURL(sm_dirTestData + "url1.pdf");
-		JDFPreview pv1 = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		final JDFPreview pv1 = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
 		pv1.setURL(sm_dirTestData + (PlatformUtil.isWindows() ? "URL1.pdf" : "url1.pdf"));
 		returnQEParams.setURL("cid:dummy"); // will be overwritten by buildMimePackage
 		final MimeWriter mw = new MimeWriter();
@@ -271,15 +302,15 @@ public class MimeWriterTest extends JDFTestCaseBase
 
 		final File f = new File(sm_dirTestDataTemp + "mimeurlpv.mjm");
 		mw.writeToFile(f.getAbsolutePath());
-		MimeReader mr = new MimeReader(f);
+		final MimeReader mr = new MimeReader(f);
 		assertTrue(f.exists());
 		assertNotNull(mr.getPartHelperByLocalName("url1.pdf"));
-		JDFNode n = mr.getBodyPartHelper(1).getJDFDoc().getJDFRoot();
-		JDFPreview pv2 = (JDFPreview) n.getResource(ElementName.PREVIEW);
+		final JDFNode n = mr.getBodyPartHelper(1).getJDFDoc().getJDFRoot();
+		final JDFPreview pv2 = (JDFPreview) n.getResource(ElementName.PREVIEW);
 		assertNotNull(pv2.getURL());
 		assertNotNull(pv2.getURLInputStream());
 		assertEquals(3, mr.getCount());
-		JDFPreview pv3 = (JDFPreview) n.getResource(ElementName.PREVIEW, null, 1);
+		final JDFPreview pv3 = (JDFPreview) n.getResource(ElementName.PREVIEW, null, 1);
 		assertEquals(pv2.getURL(), pv3.getURL());
 		assertNotNull(pv3.getURLInputStream());
 
@@ -300,25 +331,25 @@ public class MimeWriterTest extends JDFTestCaseBase
 		final String queueEntryID = "qe1";
 		returnQEParams.setQueueEntryID(queueEntryID);
 		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
-		JDFPreview pv = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		final JDFPreview pv = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
 		pv.setURL(sm_dirTestData + "url1.pdf");
-		JDFPreview pv1 = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		final JDFPreview pv1 = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
 		pv1.setURL(sm_dirTestData + (PlatformUtil.isWindows() ? "URL1.pdf" : "url1.pdf"));
 		returnQEParams.setURL("cid:dummy"); // will be overwritten by buildMimePackage
 		final MimeWriter mw = new MimeWriter();
-		File f = new File(sm_dirTestDataTemp + "mimeurlpv2.mjm");
+		final File f = new File(sm_dirTestDataTemp + "mimeurlpv2.mjm");
 		mw.writeToQueue(docJMF, docJDF, UrlUtil.fileToUrl(f, false), true);
 		assertEquals(3, mw.getCount());
 
-		MimeReader mr = new MimeReader(f);
+		final MimeReader mr = new MimeReader(f);
 		assertTrue(f.exists());
 		assertNotNull(mr.getPartHelperByLocalName("url1.pdf"));
-		JDFNode n = mr.getBodyPartHelper(1).getJDFDoc().getJDFRoot();
-		JDFPreview pv2 = (JDFPreview) n.getResource(ElementName.PREVIEW);
+		final JDFNode n = mr.getBodyPartHelper(1).getJDFDoc().getJDFRoot();
+		final JDFPreview pv2 = (JDFPreview) n.getResource(ElementName.PREVIEW);
 		assertNotNull(pv2.getURL());
 		assertNotNull(pv2.getURLInputStream());
 		assertEquals(3, mr.getCount());
-		JDFPreview pv3 = (JDFPreview) n.getResource(ElementName.PREVIEW, null, 1);
+		final JDFPreview pv3 = (JDFPreview) n.getResource(ElementName.PREVIEW, null, 1);
 		assertEquals(pv2.getURL(), pv3.getURL());
 		assertNotNull(pv3.getURLInputStream());
 
@@ -339,24 +370,24 @@ public class MimeWriterTest extends JDFTestCaseBase
 		final String queueEntryID = "qe1";
 		returnQEParams.setQueueEntryID(queueEntryID);
 		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
-		JDFPreview pv = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		final JDFPreview pv = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
 		pv.setURL(sm_dirTestData + "url1.pdf");
-		JDFPreview pv1 = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		final JDFPreview pv1 = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
 		pv1.setURL(sm_dirTestData + (PlatformUtil.isWindows() ? "URL1.pdf" : "url1.pdf"));
 		returnQEParams.setURL("cid:dummy"); // will be overwritten by buildMimePackage
 		final MimeWriter mw = new MimeWriter();
-		File f = new File(sm_dirTestDataTemp + "mimeurlpv3.mjm");
+		final File f = new File(sm_dirTestDataTemp + "mimeurlpv3.mjm");
 		mw.writeToQueue(docJMF, docJDF, UrlUtil.fileToUrl(f, false), false);
 		assertEquals(2, mw.getCount());
 
-		MimeReader mr = new MimeReader(f);
+		final MimeReader mr = new MimeReader(f);
 		assertTrue(f.exists());
-		JDFNode n = mr.getBodyPartHelper(1).getJDFDoc().getJDFRoot();
-		JDFPreview pv2 = (JDFPreview) n.getResource(ElementName.PREVIEW);
+		final JDFNode n = mr.getBodyPartHelper(1).getJDFDoc().getJDFRoot();
+		final JDFPreview pv2 = (JDFPreview) n.getResource(ElementName.PREVIEW);
 		assertNotNull(pv2.getURL());
 		assertNotNull(pv2.getURLInputStream());
 		assertEquals(2, mr.getCount());
-		JDFPreview pv3 = (JDFPreview) n.getResource(ElementName.PREVIEW, null, 1);
+		final JDFPreview pv3 = (JDFPreview) n.getResource(ElementName.PREVIEW, null, 1);
 		if (PlatformUtil.isWindows())
 			assertNotEquals(pv2.getURL(), pv3.getURL());
 		assertNotNull(pv3.getURLInputStream());

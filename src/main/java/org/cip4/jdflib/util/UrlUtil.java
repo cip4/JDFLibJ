@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -248,6 +248,7 @@ public class UrlUtil
 	 */
 	public static final String VND_PPF = JDFCoreConstants.MIME_CIP3;
 	public static final String VND_PTK = JDFCoreConstants.MIME_PTK;
+	public static final String VND_PTK_J = JDFCoreConstants.MIME_PTK_JSON;
 	public static final String VND_JDF = JDFCoreConstants.MIME_JDF;
 	public static final String VND_JMF = JDFCoreConstants.MIME_JMF;
 	public static final String VND_XJDF = JDFCoreConstants.MIME_XJDF;
@@ -562,7 +563,7 @@ public class UrlUtil
 	 * @param zr
 	 * @return
 	 */
-	public static InputStream getURLInputStream(final String urlString, final BodyPart bodyPart, ZipReader zr)
+	public static InputStream getURLInputStream(final String urlString, final BodyPart bodyPart, final ZipReader zr)
 	{
 		final URLReader reader = new URLReader(urlString);
 		reader.setBodyPart(bodyPart);
@@ -818,15 +819,15 @@ public class UrlUtil
 	 * @param val the value to add - NOT escaped - if null nothing is set
 	 * @return the escaped new url
 	 */
-	public static String setParameter(String baseUrl, String key, String val)
+	public static String setParameter(String baseUrl, final String key, final String val)
 	{
 		if (StringUtil.isEmpty(baseUrl) || StringUtil.isEmpty(key))
 			return baseUrl;
 
-		String oldval = getParameter(baseUrl, key);
+		final String oldval = getParameter(baseUrl, key);
 		if (oldval != null)
 		{
-			String keyval = escape(key, true, false) + "=" + escape(oldval, true, false);
+			final String keyval = escape(key, true, false) + "=" + escape(oldval, true, false);
 			baseUrl = baseUrl.replace(keyval, "");
 			baseUrl = baseUrl.replace("?&", "?");
 			baseUrl = baseUrl.replace("&&", "&");
@@ -836,18 +837,18 @@ public class UrlUtil
 		return addParameter(baseUrl, key, val);
 	}
 
-	public static String getParameter(String baseUrl, String key)
+	public static String getParameter(final String baseUrl, final String key)
 	{
 		if (!StringUtil.isEmpty(baseUrl) && !StringUtil.isEmpty(key))
 		{
-			String keye = escape(key, true, false) + "=";
-			int pos = baseUrl.indexOf(keye);
+			final String keye = escape(key, true, false) + "=";
+			final int pos = baseUrl.indexOf(keye);
 			if (pos > 0 && "?&".contains(baseUrl.substring(pos - 1, pos)))
 			{
 				int posEnd = baseUrl.indexOf('&', pos);
 				if (posEnd < 0)
 					posEnd = baseUrl.length();
-				String val = baseUrl.substring(pos + keye.length(), posEnd);
+				final String val = baseUrl.substring(pos + keye.length(), posEnd);
 				return unEscape(val);
 			}
 
@@ -1523,7 +1524,7 @@ public class UrlUtil
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public static String addSecure(String baseURL, String url) throws IllegalArgumentException
+	public static String addSecure(final String baseURL, final String url) throws IllegalArgumentException
 	{
 		if (!isRelativeURL(url))
 			throw new IllegalArgumentException("url must be relative " + url);
