@@ -107,7 +107,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 		final ZipEntry entry = zr.getEntry("foo.pdf");
 		assertNotNull(entry);
 		assertNotNull(zr.getInputStream());
-		assertFalse(zr.unPack(new File(sm_dirTestDataTemp + "aux"), entry));
+		assertTrue(zr.unPack(new File(sm_dirTestDataTemp + "auxevil"), entry));
 	}
 
 	/**
