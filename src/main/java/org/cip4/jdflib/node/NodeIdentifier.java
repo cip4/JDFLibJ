@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -106,7 +106,7 @@ public final class NodeIdentifier implements IMatches, INodeIdentifiable
 	{
 		_jobID = KElement.isWildCard(jobID) ? null : jobID;
 		_jobPartID = KElement.isWildCard(jobPartID) ? null : jobPartID;
-		_partMapVector = partMapVector;
+		_partMapVector = VJDFAttributeMap.isEmpty(partMapVector) ? null : partMapVector;
 	}
 
 	/**
@@ -123,6 +123,7 @@ public final class NodeIdentifier implements IMatches, INodeIdentifiable
 	 * 
 	 * @param n
 	 */
+	@Override
 	public void setIdentifier(final NodeIdentifier n)
 	{
 		if (n == null)
@@ -186,10 +187,11 @@ public final class NodeIdentifier implements IMatches, INodeIdentifiable
 	 * 
 	 * @see IMatches
 	 * @param o the nodeidentifier that this should match<br/>
-	 * if o is a String, check for match with jobID
+	 *        if o is a String, check for match with jobID
 	 * 
 	 * @return true, if this matches o
 	 */
+	@Override
 	public boolean matches(final Object o)
 	{
 		if (o == null)
@@ -207,9 +209,8 @@ public final class NodeIdentifier implements IMatches, INodeIdentifiable
 		}
 		final NodeIdentifier niInput = ((INodeIdentifiable) o).getIdentifier();
 		boolean b = KElement.isWildCard(niInput._jobID) || ContainerUtil.equals(niInput._jobID, _jobID);
-		b = b
-				&& ((KElement.isWildCard(niInput._jobPartID) || ContainerUtil.equals(niInput._jobPartID, _jobPartID)) || (_jobPartID != null && niInput._jobPartID != null && _jobPartID.startsWith(niInput._jobPartID
-						+ ".")));
+		b = b && ((KElement.isWildCard(niInput._jobPartID) || ContainerUtil.equals(niInput._jobPartID, _jobPartID))
+				|| (_jobPartID != null && niInput._jobPartID != null && _jobPartID.startsWith(niInput._jobPartID + ".")));
 		return b && ((_partMapVector == null) || (_partMapVector != null && _partMapVector.overlapsMap(niInput._partMapVector)));
 	}
 
@@ -260,6 +261,7 @@ public final class NodeIdentifier implements IMatches, INodeIdentifiable
 	 * 
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#getIdentifier()
 	 */
+	@Override
 	public NodeIdentifier getIdentifier()
 	{
 		return this;

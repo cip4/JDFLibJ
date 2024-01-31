@@ -884,7 +884,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		assertFalse(UrlUtil.isFileOK(null));
 		assertFalse(UrlUtil.isFileOK(new File(".")));
-		File file = new File(sm_dirTestDataTemp + "dummy.tmp");
+		final File file = new File(sm_dirTestDataTemp + "dummy.tmp");
 		file.createNewFile();
 		assertTrue(UrlUtil.isFileOK(file));
 	}

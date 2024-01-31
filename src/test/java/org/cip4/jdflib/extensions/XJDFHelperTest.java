@@ -58,6 +58,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
 import org.junit.jupiter.api.BeforeEach;
@@ -90,6 +91,23 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	{
 		final KElement rlSet = theHelper.appendSet(null, ElementName.RUNLIST, null).getSet();
 		assertEquals(rlSet.getLocalName(), XJDFConstants.ResourceSet);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testsetNI()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p1");
+		h.setIdentifier(null);
+		assertEquals("j1", h.getJobID());
+		assertEquals("j1", h.getIdentifier().getJobID());
+		final NodeIdentifier ni = new NodeIdentifier("j2", "p2", null);
+		h.setIdentifier(ni);
+		assertEquals(ni, h.getIdentifier());
+		assertEquals("j2", h.getJobID());
 	}
 
 	/**
@@ -620,7 +638,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		final String foo = sm_dirTestDataTemp + "foo";
 		FileUtil.deleteAll(new File(foo));
 		theHelper.writeToDir(foo);
-		String fileName = foo + "/jID.jpID.xjdf";
+		final String fileName = foo + "/jID.jpID.xjdf";
 		final XMLDoc parsed = XMLDoc.parseFile(fileName);
 		assertNotNull(parsed);
 	}
@@ -636,7 +654,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		final String foo = sm_dirTestDataTemp + "foo";
 		FileUtil.deleteAll(new File(foo));
 		theHelper.writeToDir(foo);
-		String fileName = foo + "/jID.jpID.xjdf";
+		final String fileName = foo + "/jID.jpID.xjdf";
 		final XJDFHelper parsed = XJDFHelper.parseFile(fileName);
 		final XJDFHelper parsedf = XJDFHelper.parseFile(new File(fileName));
 		assertTrue(parsed.isEqual(parsedf));

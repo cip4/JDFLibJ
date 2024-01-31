@@ -55,8 +55,10 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.xjdfwalker.IDRemover;
+import org.cip4.jdflib.ifaces.INodeIdentifiable;
 import org.cip4.jdflib.node.ICSVersion;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
@@ -66,7 +68,7 @@ import org.cip4.jdflib.util.UrlUtil;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class XJDFHelper extends BaseXJDFHelper implements Cloneable
+public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdentifiable
 {
 	/**
 	 *
@@ -1288,6 +1290,24 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	public void setGeneralID(final String idUsage, final String idValue)
 	{
 		super.setGeneralID(idUsage, idValue);
+	}
+
+	@Override
+	public NodeIdentifier getIdentifier()
+	{
+		return new NodeIdentifier(getJobID(), getJobPartID(), getPartMapVector());
+	}
+
+	@Override
+	public void setIdentifier(final NodeIdentifier ni)
+	{
+		if (ni != null)
+		{
+			setJobID(ni.getJobID());
+			setJobPartID(ni.getJobPartID());
+			setParts(ni.getPartMapVector());
+		}
+
 	}
 
 }
