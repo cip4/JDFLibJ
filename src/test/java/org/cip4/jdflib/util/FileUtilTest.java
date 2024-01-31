@@ -107,6 +107,19 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 */
+	@Test
+	public void testGetSecure()
+	{
+		assertEquals("abc", FileUtil.getSecureFileName(new File("abc")));
+		assertEquals("invalid name", FileUtil.getSecureFileName(new File("../abc")));
+		assertThrows(IllegalArgumentException.class, () -> FileUtil.getSecureName(new File("../abc")));
+		assertThrows(IllegalArgumentException.class, () -> FileUtil.getSecurePath(new File("../abc"), true));
+		assertThrows(IllegalArgumentException.class, () -> FileUtil.getSecurePath(new File("/abc"), false));
+	}
+
+	/**
 	 * @throws IOException
 	 *
 	 */

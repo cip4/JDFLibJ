@@ -1154,7 +1154,7 @@ public class FileUtil
 	{
 		try
 		{
-			return getSecureFileName(file);
+			return getSecureName(file);
 		}
 		catch (final IllegalArgumentException x)
 		{
