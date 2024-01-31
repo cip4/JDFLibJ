@@ -1138,9 +1138,28 @@ public class FileUtil
 	 */
 	public static String getSecureName(final File file) throws IllegalArgumentException
 	{
-		getSecurePath(file, true);
-		return file.getName();
+		final String name = getSecurePath(file, true);
+		return new File(name).getName();
+	}
 
+	/**
+	 * secure check of a file name
+	 * 
+	 * 
+	 * @param file
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	public static String getSecureFileName(final File file)
+	{
+		try
+		{
+			return getSecureFileName(file);
+		}
+		catch (final IllegalArgumentException x)
+		{
+			return "invalid name";
+		}
 	}
 
 	/**
@@ -1413,12 +1432,12 @@ public class FileUtil
 		}
 		else if (!file.canRead())
 		{
-			log.warn("cannot access: " + file);
+			log.warn("cannot access: " + getSecureFileName(file));
 			return null;
 		}
 		else if (file.isDirectory())
 		{
-			log.warn("cannot extract stream from directory: " + file);
+			log.warn("cannot extract stream from directory: " + getSecureFileName(file));
 			return null;
 		}
 		FileInputStream fis;
@@ -1429,7 +1448,7 @@ public class FileUtil
 		}
 		catch (final IOException x)
 		{
-			log.warn("extracting stream from non-existing file: " + file.getAbsolutePath(), x);
+			log.warn("extracting stream from non-existing file: " + getSecureFileName(file), x);
 		}
 		return null;
 	}
