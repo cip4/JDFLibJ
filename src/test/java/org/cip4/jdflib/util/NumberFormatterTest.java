@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,8 +68,9 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -86,12 +87,12 @@ public class NumberFormatterTest extends JDFTestCaseBase
 	@Test
 	public void testFormat()
 	{
-		NumberFormatter numberFormatter = new NumberFormatter();
+		final NumberFormatter numberFormatter = new NumberFormatter();
 		numberFormatter.setZapp0(true);
-		Assertions.assertEquals("-3", numberFormatter.formatDouble(-2.999999999));
-		Assertions.assertEquals("-3", numberFormatter.formatDouble(-2.999999999, 3));
-		Assertions.assertEquals("-2.9999", numberFormatter.formatDouble(-2.9999, 4));
-		Assertions.assertEquals("-2.9999", numberFormatter.formatDouble(-2.9999, 5));
+		assertEquals("-3", numberFormatter.formatDouble(-2.999999999));
+		assertEquals("-3", numberFormatter.formatDouble(-2.999999999, 3));
+		assertEquals("-2.9999", numberFormatter.formatDouble(-2.9999, 4));
+		assertEquals("-2.9999", numberFormatter.formatDouble(-2.9999, 5));
 	}
 
 	/**
@@ -101,20 +102,20 @@ public class NumberFormatterTest extends JDFTestCaseBase
 	@Test
 	public void testFormatPrecision()
 	{
-		NumberFormatter numberFormatter = new NumberFormatter();
+		final NumberFormatter numberFormatter = new NumberFormatter();
 		numberFormatter.setZapp0(false);
-		Assertions.assertEquals("3", numberFormatter.formatDouble(3.2, 0));
-		Assertions.assertEquals("0", numberFormatter.formatDouble(0.1, 0));
-		Assertions.assertEquals("0", numberFormatter.formatDouble(0.49, 0));
-		Assertions.assertEquals("0", numberFormatter.formatDouble(-0.49, 0));
-		Assertions.assertEquals("1", numberFormatter.formatDouble(0.6, 0));
-		Assertions.assertEquals("-1", numberFormatter.formatDouble(-0.6, 0));
-		Assertions.assertEquals("3.2", numberFormatter.formatDouble(3.2, 1));
-		Assertions.assertEquals("3.20", numberFormatter.formatDouble(3.2, 2));
-		Assertions.assertEquals("3.20", numberFormatter.formatDouble(3.199, 2));
+		assertEquals("3", numberFormatter.formatDouble(3.2, 0));
+		assertEquals("0", numberFormatter.formatDouble(0.1, 0));
+		assertEquals("0", numberFormatter.formatDouble(0.49, 0));
+		assertEquals("0", numberFormatter.formatDouble(-0.49, 0));
+		assertEquals("1", numberFormatter.formatDouble(0.6, 0));
+		assertEquals("-1", numberFormatter.formatDouble(-0.6, 0));
+		assertEquals("3.2", numberFormatter.formatDouble(3.2, 1));
+		assertEquals("3.20", numberFormatter.formatDouble(3.2, 2));
+		assertEquals("3.20", numberFormatter.formatDouble(3.199, 2));
 		numberFormatter.setZapp0(true);
-		Assertions.assertEquals("3.2", numberFormatter.formatDouble(3.2, 2));
-		Assertions.assertEquals("3.2", numberFormatter.formatDouble(3.199, 2));
+		assertEquals("3.2", numberFormatter.formatDouble(3.2, 2));
+		assertEquals("3.2", numberFormatter.formatDouble(3.199, 2));
 	}
 
 	/**
@@ -124,11 +125,11 @@ public class NumberFormatterTest extends JDFTestCaseBase
 	@Test
 	public void testFormatInt()
 	{
-		NumberFormatter numberFormatter = new NumberFormatter();
+		final NumberFormatter numberFormatter = new NumberFormatter();
 		numberFormatter.setZapp0(false);
-		Assertions.assertEquals("3", numberFormatter.formatInt(3, 0));
-		Assertions.assertEquals("3", numberFormatter.formatInt(3, 1));
-		Assertions.assertEquals("03", numberFormatter.formatInt(3, 2));
+		assertEquals("3", numberFormatter.formatInt(3, 0));
+		assertEquals("3", numberFormatter.formatInt(3, 1));
+		assertEquals("03", numberFormatter.formatInt(3, 2));
 	}
 
 	/**
@@ -138,9 +139,9 @@ public class NumberFormatterTest extends JDFTestCaseBase
 	@Test
 	public void testFormatDouble()
 	{
-		NumberFormatter numberFormatter = new NumberFormatter();
-		Assertions.assertEquals("3", numberFormatter.formatDouble(3.0));
-		double d = Double.NaN;
-		Assertions.assertEquals(null, numberFormatter.formatDouble(d));
+		final NumberFormatter numberFormatter = new NumberFormatter();
+		assertEquals("3", numberFormatter.formatDouble(3.0));
+		final double d = Double.NaN;
+		assertEquals(null, numberFormatter.formatDouble(d));
 	}
 }

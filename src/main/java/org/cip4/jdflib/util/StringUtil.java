@@ -61,7 +61,6 @@ import java.util.regex.PatternSyntaxException;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
-import org.cip4.jdflib.cformat.PrintfFormat;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
@@ -308,7 +307,7 @@ public class StringUtil
 				vObj[i] = StringUtil.replaceString(s, "__comma__äö-eher selten", ","); // undo quick hack ;-)
 			}
 		}
-		return sprintf(format, vObj);
+		return String.format(format, vObj);
 	}
 
 	/**
@@ -320,56 +319,16 @@ public class StringUtil
 	 *
 	 * @return String the formatted string
 	 * @throws IllegalArgumentException in case format and o do not match, i.e. not eough objects are passed to fill format
+	 * @deprecated use String.format
 	 */
-	public static String sprintf(String format, final Object[] objects)
+	@Deprecated
+	public static String sprintf(final String format, final Object[] objects)
 	{
 		if (objects == null || format == null)
 		{
 			return null;
 		}
-
-		format = StringUtil.replaceString(format, "%%", "__percent__äö-eher selten"); // quick
-		// hack ;-)
-		final boolean bStart = format.startsWith("%");
-		final VString tokens = tokenize(format, "%", false);
-		final int nStart = (bStart ? 0 : 1);
-		if (tokens.size() > objects.length + nStart)
-		{
-			throw new IllegalArgumentException("not enough tokens to satisfy format");
-		}
-
-		// tokenize does not return an empty token if we start with %
-		String s = bStart ? "" : tokens.get(0);
-
-		for (int i = nStart; i < tokens.size(); i++)
-		{
-			final PrintfFormat f = new PrintfFormat("");
-			f.set("%" + tokens.get(i));
-			final Object ob = objects[i - nStart];
-			if (ob instanceof String)
-			{
-				s += f.tostr((String) ob);
-			}
-			else if (ob instanceof Integer)
-			{
-				s += f.tostr((Integer) ob);
-			}
-			else if (ob instanceof Long)
-			{
-				s += f.tostr((Long) ob);
-			}
-			else if (ob instanceof Double)
-			{
-				s += f.tostr((Double) ob);
-			}
-			else if (ob instanceof ValuedEnum)
-			{
-				s += f.tostr(((ValuedEnum) ob).getName());
-			}
-		}
-
-		return replaceString(s, "__percent__äö-eher selten", "%"); // undo quick
-		// hack ;-)
+		return String.format(format, objects);
 	}
 
 	/**

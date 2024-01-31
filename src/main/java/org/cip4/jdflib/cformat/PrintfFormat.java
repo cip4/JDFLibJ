@@ -20,9 +20,8 @@ import org.cip4.jdflib.util.StringUtil;
  * Object for formatting output in the same way as the C <tt>printf</tt> methodName.
  * 
  * <p>
- * A <tt>printf</tt> style format string is specified in the constructor. Once instantiated, the <tt>tostr</tt> methods
- * of this class may be used to convert primitives types (float, double, char, int, long, String) into Strings.
- * Alternatively, instances of this class may be passed as arguments to the <tt>printf</tt> methods of the
+ * A <tt>printf</tt> style format string is specified in the constructor. Once instantiated, the <tt>tostr</tt> methods of this class may be used to convert primitives types
+ * (float, double, char, int, long, String) into Strings. Alternatively, instances of this class may be passed as arguments to the <tt>printf</tt> methods of the
  * <tt>PrintfWriter</tt> or <tt>PrintfStream</tt> classes.
  * 
  * <p>
@@ -43,7 +42,9 @@ import org.cip4.jdflib.util.StringUtil;
  * @see PrintfWriter
  * @see PrintfStream
  * @.author John E. Lloyd
+ * @deprecated use String.format
  */
+@Deprecated
 public class PrintfFormat
 {
 	// ~ Static fields/initializers
@@ -76,14 +77,13 @@ public class PrintfFormat
 	// ///////////////////////////////////////////////////////////
 
 	/**
-	 * Creates a new instance of PrintfFormat from the supplied format string. The structure of the format string is
-	 * described in the documentation for the <tt>set</tt> method.
+	 * Creates a new instance of PrintfFormat from the supplied format string. The structure of the format string is described in the documentation for the <tt>set</tt> method.
 	 * 
 	 * @param fmt Format string
 	 * @throws IllegalArgumentException Malformed format string
 	 * @see PrintfFormat#set
 	 */
-	public PrintfFormat(String fmt) throws IllegalArgumentException
+	public PrintfFormat(final String fmt) throws IllegalArgumentException
 	{
 		output = new OutBuffer(1024);
 		set(fmt);
@@ -93,8 +93,7 @@ public class PrintfFormat
 	// ////////////////////////////////////////////////////////////////
 
 	/**
-	 * Gets the prefix string associated with the format. The prefix string is that part of the format that appears
-	 * before the conversion.
+	 * Gets the prefix string associated with the format. The prefix string is that part of the format that appears before the conversion.
 	 * 
 	 * @return Prefix string
 	 * @see PrintfFormat#setPrefix
@@ -105,8 +104,7 @@ public class PrintfFormat
 	}
 
 	/**
-	 * Gets the suffix string associated with the format. The suffix string is that part of the format that appears
-	 * after the conversion.
+	 * Gets the suffix string associated with the format. The suffix string is that part of the format that appears after the conversion.
 	 * 
 	 * @return Suffix string
 	 * @see PrintfFormat#setSuffix
@@ -117,123 +115,74 @@ public class PrintfFormat
 	}
 
 	/**
-	     * Sets the format characteristics according to the supplied
-	     * String.
-	     *
-	     * <p>
-	     * The format string has the same form as the one used by the C
-	     * <tt>printf</tt> methodName, except that only one conversion
-	     * sequence may be specified (because routines which
-	     * use PrintfFormat each convert only one object).
-	     *
-	     * <p>
-	     * The format string consists of an optional <em>prefix</em>
-	     * of regular characters, followed by a conversion sequence,
-	     * followed by an optional <em>suffix</em> of regular characters.
-	     *
-	     * <p>
-	     * The conversion sequence is introduced by a '%' character, and
-	     * is followed by any number of optional <em>flag</em> characters,
-	     * an optional unsigned decimal integer specifying a <em>field
-	     * width</em>, another optional unsigned decimal integer (preceded
-	     * by a '.' character) specifying a <em>precision</em>, and
-	     * finally a <tt>conversion character</tt>. To incorporate
-	     * a '%' character into either the prefix or suffix, one should
-	     * specify the sequence "%%".
-	     *
-	     * The allowed flag characters are:
-	     *
-	     * <dl>
-	     * <dt> #
-	     * <dd> The value is converted into an "alternate" form.
-	     *      For 'o' conversions, the output is always prefixed with a
-	     *      '0'. For 'x' and 'X' conversions, the output is prefixed
-	     *      with "0x" or "0X", respectively. For 'a', 'A', 'e', 'E',
-	     *      'f', 'g', and 'G' conversions, the result will always
-	     *      contain a decimal point. For 'g' and 'G' conversions,
-	     *      trailing zeros are not removed. There is no effect for
-	     *      other conversions.
-	     * <dt> 0
-	     * <dd> Use '0' to pad the field on the left, instead of blanks.
-	     *      If the conversion is 'd', 'i', 'o', 'u', 'x', or 'X',
-	     *      and a precision is given, then this flag is ignored.
-	     * <dt> -
-	     * <dd> The output is aligned with the left of the field
-	     *      boundary, and padded on the right with blanks.
-	     *      This flag overrides the '0' flag.
-	     * <dt> ' '
-	     * <dd> Leave a blank before a positive number produced by a
-	     *      signed conversion.
-	     * <dt> +
-	     * <dd> A '+' sign is placed before non-negative numbers produced
-	     *      by a signed conversion. This flag overrides the ' ' flag.
-	     * </dl>
-	     * <p>
-	     * The conversion character is one of:
-	     *
-	     * <dt> d,i
-	     * <dd> The integer argument is output as a signed decimal number.
-	     *      If a precision is given, it describes the minimum number
-	     *      of digits that must appear (default 1). If the precision
-	     *      exceeds the number of digits that would normally appear,
-	     *      the output is padded on the left with zeros. When 0 is
-	     *      printed with precision 0, the result is empty.
-	     * <dt> o,u,x,X
-	     * <dd> The integer argument is output as an unsigned number in
-	     *      either octal ('o'), decimal ('u'), or hexadecimal ('x' or
-	     *      'X'). The digits "abcdef" are used for 'x', and "ABCDEF"
-	     *      are used for 'X'. If a precision is given, it describes
-	     *      the minimum number of digits that must appear (default 1).
-	     *      If the precision exceeds the number of digits that would
-	     *      normally appear, the output is padded on the left with
-	     *      zeros. When 0 is printed with precision 0, the result is
-	     *      empty.
-	     * <dt> e,E
-	     * <dd> The floating point argument is output in the exponential
-	     *      form <tt>[-]d.ddde+dd</tt>, with the number of digits
-	     *      after the decimal point given by the precision. The
-	     *      default precision value is 6. No decimal point is output
-	     *      if the precision is 0. Conversion 'E' causes 'E' to be
-	     *      used as an exponent instead of 'e'. The exponent is
-	     *      always at least two characters.
-	     * <dt> f
-	     * <dd> The floating point argument is output in the form
-	     *      <tt>[-]ddd.ddd</tt>, with the number of digits
-	     *      after the decimal point given by the precision. The
-	     *      default precision value is 6. No decimal point is output
-	     *      if the precision is 0. If a decimal point appears, at
-	     *      least one digit appears before it.
-	     * <dt> g,G
-	     * <dd> The floating point argument is output in either the 'f'
-	     *      or 'e' style (or 'E' style of 'G' conversions). The
-	     *      precision gives the number of significant digits, with a
-	     *      default value of 6. Style 'e' is used if the resulting
-	     *      exponent is less than -4 or greater than or equal to the
-	     *      precision. Trailing zeros are removed from the fractional
-	     *      part of the result, and a decimal point appears if it is
-	     *      followed by at least one digit.
-	     * <dt> a,A
-	     * <dd> The floating point argument is output in the hexadecimal
-	     *      floating point form <tt>[-]0xh.hhhp+dd</tt>. The
-	     *      exponent is a decimal number and describes a power of 2.
-	     *      The 'A' style uses the prefix "0X", the hex digits
-	     *      "ABCDEF", and the exponent character 'P'. The number of
-	     *      digits after the decimal point is given by the precision.
-	     *      The default precision is enough for an exact
-	     *      representation of the value.
-	     * <dt> c
-	     * <dd> The single character argument is output as a character.
-	     * <dt> s
-	     * <dd> The string argument is output. If a precision is given,
-	     *      then the number of characters output is limited to this.
-	     * </dl>
-	     *
-	     * @param fmt Format string
-	     * @throws IllegalArgumentException Malformed format string
-	     */
-	public void set(String fmt) throws IllegalArgumentException
+	 * Sets the format characteristics according to the supplied String.
+	 *
+	 * <p>
+	 * The format string has the same form as the one used by the C <tt>printf</tt> methodName, except that only one conversion sequence may be specified (because routines which
+	 * use PrintfFormat each convert only one object).
+	 *
+	 * <p>
+	 * The format string consists of an optional <em>prefix</em> of regular characters, followed by a conversion sequence, followed by an optional <em>suffix</em> of regular
+	 * characters.
+	 *
+	 * <p>
+	 * The conversion sequence is introduced by a '%' character, and is followed by any number of optional <em>flag</em> characters, an optional unsigned decimal integer specifying
+	 * a <em>field width</em>, another optional unsigned decimal integer (preceded by a '.' character) specifying a <em>precision</em>, and finally a <tt>conversion character</tt>.
+	 * To incorporate a '%' character into either the prefix or suffix, one should specify the sequence "%%".
+	 *
+	 * The allowed flag characters are:
+	 *
+	 * <dl>
+	 * <dt>#
+	 * <dd>The value is converted into an "alternate" form. For 'o' conversions, the output is always prefixed with a '0'. For 'x' and 'X' conversions, the output is prefixed with
+	 * "0x" or "0X", respectively. For 'a', 'A', 'e', 'E', 'f', 'g', and 'G' conversions, the result will always contain a decimal point. For 'g' and 'G' conversions, trailing
+	 * zeros are not removed. There is no effect for other conversions.
+	 * <dt>0
+	 * <dd>Use '0' to pad the field on the left, instead of blanks. If the conversion is 'd', 'i', 'o', 'u', 'x', or 'X', and a precision is given, then this flag is ignored.
+	 * <dt>-
+	 * <dd>The output is aligned with the left of the field boundary, and padded on the right with blanks. This flag overrides the '0' flag.
+	 * <dt>' '
+	 * <dd>Leave a blank before a positive number produced by a signed conversion.
+	 * <dt>+
+	 * <dd>A '+' sign is placed before non-negative numbers produced by a signed conversion. This flag overrides the ' ' flag.
+	 * </dl>
+	 * <p>
+	 * The conversion character is one of:
+	 *
+	 * <dt>d,i
+	 * <dd>The integer argument is output as a signed decimal number. If a precision is given, it describes the minimum number of digits that must appear (default 1). If the
+	 * precision exceeds the number of digits that would normally appear, the output is padded on the left with zeros. When 0 is printed with precision 0, the result is empty.
+	 * <dt>o,u,x,X
+	 * <dd>The integer argument is output as an unsigned number in either octal ('o'), decimal ('u'), or hexadecimal ('x' or 'X'). The digits "abcdef" are used for 'x', and
+	 * "ABCDEF" are used for 'X'. If a precision is given, it describes the minimum number of digits that must appear (default 1). If the precision exceeds the number of digits
+	 * that would normally appear, the output is padded on the left with zeros. When 0 is printed with precision 0, the result is empty.
+	 * <dt>e,E
+	 * <dd>The floating point argument is output in the exponential form <tt>[-]d.ddde+dd</tt>, with the number of digits after the decimal point given by the precision. The
+	 * default precision value is 6. No decimal point is output if the precision is 0. Conversion 'E' causes 'E' to be used as an exponent instead of 'e'. The exponent is always at
+	 * least two characters.
+	 * <dt>f
+	 * <dd>The floating point argument is output in the form <tt>[-]ddd.ddd</tt>, with the number of digits after the decimal point given by the precision. The default precision
+	 * value is 6. No decimal point is output if the precision is 0. If a decimal point appears, at least one digit appears before it.
+	 * <dt>g,G
+	 * <dd>The floating point argument is output in either the 'f' or 'e' style (or 'E' style of 'G' conversions). The precision gives the number of significant digits, with a
+	 * default value of 6. Style 'e' is used if the resulting exponent is less than -4 or greater than or equal to the precision. Trailing zeros are removed from the fractional
+	 * part of the result, and a decimal point appears if it is followed by at least one digit.
+	 * <dt>a,A
+	 * <dd>The floating point argument is output in the hexadecimal floating point form <tt>[-]0xh.hhhp+dd</tt>. The exponent is a decimal number and describes a power of 2. The
+	 * 'A' style uses the prefix "0X", the hex digits "ABCDEF", and the exponent character 'P'. The number of digits after the decimal point is given by the precision. The default
+	 * precision is enough for an exact representation of the value.
+	 * <dt>c
+	 * <dd>The single character argument is output as a character.
+	 * <dt>s
+	 * <dd>The string argument is output. If a precision is given, then the number of characters output is limited to this.
+	 * </dl>
+	 *
+	 * @param fmt Format string
+	 * @throws IllegalArgumentException Malformed format string
+	 */
+	public void set(final String fmt) throws IllegalArgumentException
 	{
-		char[] buf = new char[fmt.length()];
+		final char[] buf = new char[fmt.length()];
 		int n;
 		char c;
 
@@ -410,9 +359,9 @@ public class PrintfFormat
 	 * @param s New prefix string
 	 * @see PrintfFormat#getPrefix
 	 */
-	public String setPrefix(String s)
+	public String setPrefix(final String s)
 	{
-		String old = prefix;
+		final String old = prefix;
 		prefix = s;
 
 		return old;
@@ -424,9 +373,9 @@ public class PrintfFormat
 	 * @param s New suffix string
 	 * @see PrintfFormat#getSuffix
 	 */
-	public String setSuffix(String s)
+	public String setSuffix(final String s)
 	{
-		String old = suffix;
+		final String old = suffix;
 		suffix = s;
 
 		return old;
@@ -438,7 +387,7 @@ public class PrintfFormat
 	 * @param x Float value to convert
 	 * @return Resulting string
 	 */
-	public String tostr(float x)
+	public String tostr(final float x)
 	{
 		return tostr((double) x);
 	}
@@ -449,7 +398,7 @@ public class PrintfFormat
 	 * @param x Float value to convert
 	 * @return Resulting string
 	 */
-	public String tostr(Double x)
+	public String tostr(final Double x)
 	{
 		return tostr(x.doubleValue());
 	}
@@ -460,7 +409,7 @@ public class PrintfFormat
 	 * @param x Float value to convert
 	 * @return Resulting string
 	 */
-	public String tostr(Integer x)
+	public String tostr(final Integer x)
 	{
 		return tostr(x.intValue());
 	}
@@ -471,7 +420,7 @@ public class PrintfFormat
 	 * @param x Double value to convert
 	 * @return Resulting string
 	 */
-	public String tostr(double x)
+	public String tostr(final double x)
 	{
 		if ("diuoxX".indexOf(type) > -1)
 			return tostr((long) x);
@@ -559,11 +508,11 @@ public class PrintfFormat
 	 * @param x Int value to convert
 	 * @return Resulting string
 	 */
-	public String tostr(int x)
+	public String tostr(final int x)
 	{
 		String intStr;
 
-		long lx = x;
+		final long lx = x;
 
 		if ((type == 'd') || (type == 'i'))
 		{
@@ -583,7 +532,7 @@ public class PrintfFormat
 	 * @param x Long value to convert
 	 * @return Resulting string
 	 */
-	public String tostr(long x)
+	public String tostr(final long x)
 	{
 		long xLocal = x;
 
@@ -686,7 +635,7 @@ public class PrintfFormat
 	 * @param x Char value to convert
 	 * @return Resulting string
 	 */
-	public String tostr(char x)
+	public String tostr(final char x)
 	{
 		if (type != 'c')
 		{
@@ -705,7 +654,7 @@ public class PrintfFormat
 	 * @param x String value to format
 	 * @return Resulting string
 	 */
-	public String tostr(String x)
+	public String tostr(final String x)
 	{
 		if (type != 's')
 		{
@@ -747,7 +696,7 @@ public class PrintfFormat
 	// }
 	// }
 
-	private void expFormat(DecDouble pdd, int p)
+	private void expFormat(final DecDouble pdd, final int p)
 	{
 		int i;
 
@@ -761,7 +710,7 @@ public class PrintfFormat
 
 		if (p > 0)
 		{
-			int kend = p + output.k0 + 2;
+			final int kend = p + output.k0 + 2;
 
 			while ((i < pdd.numd) && (output.kn < kend))
 			{
@@ -790,7 +739,7 @@ public class PrintfFormat
 		output.append(((type == 'G') || (type == 'E')) ? 'E' : 'e');
 		output.append((pdd.exp >= 0) ? '+' : '-');
 
-		String expStr = Long.toString(Math.abs(pdd.exp));
+		final String expStr = Long.toString(Math.abs(pdd.exp));
 
 		if (expStr.length() < 2)
 		{
@@ -800,7 +749,7 @@ public class PrintfFormat
 		output.append(expStr);
 	}
 
-	private void expHexFormat(double d, int p)
+	private void expHexFormat(final double d, final int p)
 	{
 		int pLocal = p;
 
@@ -880,14 +829,14 @@ public class PrintfFormat
 		output.append((type == 'A') ? 'P' : 'p');
 		output.append((e >= 0) ? '+' : '-');
 
-		String expStr = Long.toString(Math.abs(e));
+		final String expStr = Long.toString(Math.abs(e));
 		output.append(expStr);
 	}
 
-	private void fixedFormat(DecDouble pdd, int p)
+	private void fixedFormat(final DecDouble pdd, final int p)
 	{
 		int kend;
-		boolean freeFormat = ((type == 'g') || (type == 'G'));
+		final boolean freeFormat = ((type == 'g') || (type == 'G'));
 
 		int i = 0;
 
@@ -940,9 +889,9 @@ public class PrintfFormat
 		}
 	}
 
-	private void freeFormat(DecDouble pdd, int pprec)
+	private void freeFormat(final DecDouble pdd, final int pprec)
 	{
-		int p = Math.max(1, pprec);
+		final int p = Math.max(1, pprec);
 
 		if ((pdd.exp >= -4) && (pdd.exp < p))
 		{
@@ -956,7 +905,7 @@ public class PrintfFormat
 
 	private String pad()
 	{
-		int padcnt = width - (output.kn - output.k0);
+		final int padcnt = width - (output.kn - output.k0);
 
 		if (leftAdjust)
 		{
@@ -970,7 +919,7 @@ public class PrintfFormat
 		return prefix + output.getString() + suffix;
 	}
 
-	private void roundUpFixedOutput(OutBuffer out)
+	private void roundUpFixedOutput(final OutBuffer out)
 	{
 		int i;
 
@@ -996,7 +945,7 @@ public class PrintfFormat
 		}
 	}
 
-	private int scanRegularChars(char[] buf, String fmt)
+	private int scanRegularChars(final char[] buf, final String fmt)
 	{
 		int n = 0;
 		char c;
@@ -1024,7 +973,7 @@ public class PrintfFormat
 		return n;
 	}
 
-	private int scanUnsignedInt(String fmt)
+	private int scanUnsignedInt(final String fmt)
 	{
 		int value = 0;
 		char c;
@@ -1042,7 +991,7 @@ public class PrintfFormat
 		return value;
 	}
 
-	private void uconv(long val, int radix, char[] digits)
+	private void uconv(final long val, final int radix, final char[] digits)
 	{
 		long valLocal = val;
 
@@ -1087,8 +1036,8 @@ public class PrintfFormat
 	// //////////////////////////////////////////////////////////
 
 	/**
-	 * Stores the decimal representation of a double. Provides a canonical form from which the rest of the formatting is
-	 * easy. We let the java Double.toString() method do most of the work in creating the representation.
+	 * Stores the decimal representation of a double. Provides a canonical form from which the rest of the formatting is easy. We let the java Double.toString() method do most of
+	 * the work in creating the representation.
 	 */
 	private class DecDouble
 	{
@@ -1104,13 +1053,13 @@ public class PrintfFormat
 			set(0);
 		}
 
-		DecDouble(double d)
+		DecDouble(final double d)
 		{
 			init();
 			set(d);
 		}
 
-		void set(double d)
+		void set(final double d)
 		{
 			double dLocal = d;
 
@@ -1135,7 +1084,7 @@ public class PrintfFormat
 					dLocal = -dLocal;
 				}
 
-				String s = Double.toString(dLocal);
+				final String s = Double.toString(dLocal);
 
 				int k;
 				int len;
@@ -1199,7 +1148,7 @@ public class PrintfFormat
 			}
 		}
 
-		void setSignAndAlt(double d)
+		void setSignAndAlt(final double d)
 		{
 			alt = null;
 			sign = 1;
@@ -1242,8 +1191,7 @@ public class PrintfFormat
 	}
 
 	/**
-	 * OutBuffer is used to form the output character sequence. We defined this because it makes things a little faster
-	 * than working with strings.
+	 * OutBuffer is used to form the output character sequence. We defined this because it makes things a little faster than working with strings.
 	 */
 	private class OutBuffer
 	{
@@ -1251,18 +1199,18 @@ public class PrintfFormat
 		int k0;
 		int kn;
 
-		OutBuffer(int n)
+		OutBuffer(final int n)
 		{
 			buf = new char[n];
 			kn = k0 = 0;
 		}
 
-		final void append(char c)
+		final void append(final char c)
 		{
 			buf[kn++] = c;
 		}
 
-		final int append(String s)
+		final int append(final String s)
 		{
 			for (int i = 0; i < s.length(); i++)
 			{
@@ -1272,7 +1220,7 @@ public class PrintfFormat
 			return kn;
 		}
 
-		final int append(char c, int n)
+		final int append(final char c, final int n)
 		{
 			int nLocal = n;
 
@@ -1289,17 +1237,17 @@ public class PrintfFormat
 			return String.valueOf(buf, k0, kn - k0);
 		}
 
-		final void init(int base)
+		final void init(final int base)
 		{
 			kn = k0 = base;
 		}
 
-		final void prepend(char c)
+		final void prepend(final char c)
 		{
 			buf[--k0] = c;
 		}
 
-		final int prepend(String s)
+		final int prepend(final String s)
 		{
 			for (int i = s.length() - 1; i >= 0; i--)
 			{
@@ -1309,7 +1257,7 @@ public class PrintfFormat
 			return k0;
 		}
 
-		final int prepend(char c, int n)
+		final int prepend(final char c, final int n)
 		{
 			int nLocal = n;
 

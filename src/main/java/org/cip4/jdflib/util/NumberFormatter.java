@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,7 @@ import org.cip4.jdflib.core.JDFConstants;
 /**
  * class to format integers, longs, doubles etc.
  *
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class NumberFormatter
 {
@@ -93,7 +93,7 @@ public class NumberFormatter
 	 *
 	 * @param zapp0
 	 */
-	public void setZapp0(boolean zapp0)
+	public void setZapp0(final boolean zapp0)
 	{
 		this.zapp0 = zapp0;
 	}
@@ -108,17 +108,16 @@ public class NumberFormatter
 	 * @param length maximum precision, depending on value of zapp0, leading 0s are discarded or kept
 	 * @return the formatted string that represents the integer
 	 */
-	public String formatInt(final int i, int length)
+	public String formatInt(final int i, final int length)
 	{
-		final Integer[] ad = { Integer.valueOf(i) };
 		String s;
 		if (length > 0)
 		{
-			s = StringUtil.sprintf("%0" + length + "i", ad);
+			s = String.format("%0" + length + "d", i);
 		}
 		else
 		{
-			s = StringUtil.sprintf("%i", ad);
+			s = String.format("%d", i);
 		}
 		return s;
 	}
@@ -131,7 +130,7 @@ public class NumberFormatter
 	 * @param precision maximum precision, depending on value of zapp0, trailing 0s are discarded or kept
 	 * @return the formatted string that represents d TBD handle exp format, null if NaN
 	 */
-	public String formatDouble(final double d, int precision)
+	public String formatDouble(final double d, final int precision)
 	{
 		final String s;
 		if (d == Double.MAX_VALUE)
@@ -146,10 +145,9 @@ public class NumberFormatter
 		{
 			if (precision > 0)
 			{
-				final Double[] ad = { Double.valueOf(d) };
-				String ss = StringUtil.sprintf("%." + precision + "f", ad);
+				String ss = String.format("%." + precision + "f", d);
 				ss = zappTrailing(ss);
-				if ("nan".equals(ss))
+				if ("NaN".equals(ss))
 				{
 					s = null;
 				}
@@ -172,12 +170,12 @@ public class NumberFormatter
 
 	private String zappTrailing(String s)
 	{
-		int posDot = s.indexOf('.');
+		final int posDot = s.indexOf('.');
 		if (zapp0 && posDot >= 0)
 		{
 			int n;
 
-			int length = s.length();
+			final int length = s.length();
 			for (n = length; n > posDot; n--)
 			{
 				if (s.charAt(n - 1) != '0')

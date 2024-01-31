@@ -301,11 +301,11 @@ public class StringUtilTest extends JDFTestCaseBase
 	@Test
 	public void testSprintfString()
 	{
-		assertEquals(StringUtil.sprintf("part_%04i.txt", "" + 6), "part_0006.txt");
-		assertEquals(StringUtil.sprintf("abc%03idef", "5"), "abc005def");
-		assertEquals(StringUtil.sprintf("abc%03idef", "5.0"), "abc005def");
-		assertEquals(StringUtil.sprintf("abc%03i%02idef", "5.0,5"), "abc00505def");
-		assertEquals(StringUtil.sprintf("abc%03i%02idef%%%s", "5.0,5,abcdefghi"), "abc00505def%abcdefghi");
+		assertEquals(StringUtil.sprintf("part_%04d.txt", "" + 6), "part_0006.txt");
+		assertEquals(StringUtil.sprintf("abc%03ddef", "5"), "abc005def");
+		assertEquals(StringUtil.sprintf("abc%03ddef", "5"), "abc005def");
+		assertEquals(StringUtil.sprintf("abc%03d%02ddef", "5,5"), "abc00505def");
+		assertEquals(StringUtil.sprintf("abc%03d%02ddef%%%s", "5,5,abcdefghi"), "abc00505def%abcdefghi");
 		assertEquals(StringUtil.sprintf("%2x", "12"), " c");
 		assertEquals(StringUtil.sprintf("%2x", "18"), "12");
 		assertEquals(StringUtil.sprintf("%s", "\\,"), ",");
@@ -322,7 +322,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	{
 		Object[] o = new Object[1];
 		o[0] = new Integer(5);
-		assertEquals(StringUtil.sprintf("abc%03idef", o), "abc005def");
+		assertEquals(StringUtil.sprintf("abc%03def", o), "abc005ef");
 		o[0] = "foobar";
 		assertEquals(StringUtil.sprintf("abc%7sdef", o), "abc foobardef");
 		assertEquals(StringUtil.sprintf("abc%7s7def", o), "abc foobar7def");
@@ -342,14 +342,14 @@ public class StringUtilTest extends JDFTestCaseBase
 		}
 
 		o = new Object[] { new Integer(5), "foobar" };
-		assertEquals(StringUtil.sprintf("abc %02i%7sdef", o), "abc 05 foobardef");
-		assertEquals(StringUtil.sprintf("%02i%7sdef", o), "05 foobardef");
+		assertEquals(StringUtil.sprintf("abc %02d%7sdef", o), "abc 05 foobardef");
+		assertEquals(StringUtil.sprintf("%02d%7sdef", o), "05 foobardef");
 		o = new Object[] { new Long(5), "foobar" };
-		assertEquals(StringUtil.sprintf("abc %02i%7sdef", o), "abc 05 foobardef");
-		assertEquals(StringUtil.sprintf("%02i%7sdef", o), "05 foobardef");
-		o = new Object[] { "5", "foobar" };
-		assertEquals(StringUtil.sprintf("abc %02i%7sdef", o), "abc 05 foobardef");
-		assertEquals(StringUtil.sprintf("%02i%7sdef", o), "05 foobardef");
+		assertEquals(StringUtil.sprintf("abc %02d%7sdef", o), "abc 05 foobardef");
+		assertEquals(StringUtil.sprintf("%02d%7sdef", o), "05 foobardef");
+		o = new Object[] { 5, "foobar" };
+		assertEquals(StringUtil.sprintf("abc %02d%7sdef", o), "abc 05 foobardef");
+		assertEquals(StringUtil.sprintf("%02d%7sdef", o), "05 foobardef");
 	}
 
 	/**

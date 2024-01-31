@@ -18,42 +18,38 @@ import java.io.IOException;
 import java.io.Reader;
 
 /**
- * A Reader which implements C <tt>scanf</tt> functionality. Once created, an application can read various primitive
- * types from the underlying stream using various <tt>scan</tt> methods that implement <tt>scanf</tt> type input
- * formatting.
+ * A Reader which implements C <tt>scanf</tt> functionality. Once created, an application can read various primitive types from the underlying stream using various <tt>scan</tt>
+ * methods that implement <tt>scanf</tt> type input formatting.
  * 
  * <p>
- * There are scan methods to read float, double, long, int, char, char[], and String. The methods take as an argument
- * either a format string, a pre-allocated <tt>ScanfFormat</tt> object which is created from a format string, or no
- * argument (implying a default format). The format string is modeled after that accepted by the C <tt>scanf()</tt>
- * methodName, and is described in the documentation for the class <tt>ScanfFormat</tt>.
+ * There are scan methods to read float, double, long, int, char, char[], and String. The methods take as an argument either a format string, a pre-allocated <tt>ScanfFormat</tt>
+ * object which is created from a format string, or no argument (implying a default format). The format string is modeled after that accepted by the C <tt>scanf()</tt> methodName,
+ * and is described in the documentation for the class <tt>ScanfFormat</tt>.
  * 
  * <p>
- * Because Java does not permit variable-length argument lists, only one primitive type may be returned per method, and
- * the format used may contain only one conversion specification (which must be appropriate to the type being scanned).
+ * Because Java does not permit variable-length argument lists, only one primitive type may be returned per method, and the format used may contain only one conversion
+ * specification (which must be appropriate to the type being scanned).
  * 
  * <p>
- * Input errors in the underlying Reader result in a <tt>java.io.IOException</tt> being thrown, while a
- * <tt>java.io.EOFException</tt> is thrown if the end of input is reached before the scan can complete successfully. If
- * the input does not match the specified format, then a <tt>ScanfMatchException</tt> is thrown. In the event of a match
- * error, scanning stops at the first character from which it can be determined that the match will fail. This character
- * is remembered by the stream (see the discussion of the look-ahead character, below) and will be the first character
- * seen by the next <tt>scan</tt> or <tt>read</tt> method which is called. Finally, an invalid format string (or
+ * Input errors in the underlying Reader result in a <tt>java.io.IOException</tt> being thrown, while a <tt>java.io.EOFException</tt> is thrown if the end of input is reached
+ * before the scan can complete successfully. If the input does not match the specified format, then a <tt>ScanfMatchException</tt> is thrown. In the event of a match error,
+ * scanning stops at the first character from which it can be determined that the match will fail. This character is remembered by the stream (see the discussion of the look-ahead
+ * character, below) and will be the first character seen by the next <tt>scan</tt> or <tt>read</tt> method which is called. Finally, an invalid format string (or
  * <tt>ScanfFormat</tt> object) will trigger an <tt>InvalidArgumentException</tt>.
  * 
  * <p>
- * The class keeps track of the current line number (accessible with the methods <tt>getLineNumber</tt> and
- * <tt>setLineNumber</tt>), as well as the number of characters which have been consumed (accesible with the methods
- * <tt>getCharNumber</tt> and <tt>setCharNumber</tt>).
+ * The class keeps track of the current line number (accessible with the methods <tt>getLineNumber</tt> and <tt>setLineNumber</tt>), as well as the number of characters which have
+ * been consumed (accesible with the methods <tt>getCharNumber</tt> and <tt>setCharNumber</tt>).
  * 
  * <p>
- * The class usually keeps one character of look-ahead which has been read from the underlying reader but not yet
- * consumed by any scan method. If the underlying reader is used later in some other capacity, this look-ahead character
- * may have to be taken into account. If a look-ahead character is actually being stored, the
- * <tt>lookAheadCharValid</tt> method will return <tt>true</tt>, and the look-ahead character itself can then be
- * obtained using the <tt>getLookAheadChar</tt> method. The look-ahead character can be cleared using the
- * <tt>clearLookAheadChar</tt> method.
+ * The class usually keeps one character of look-ahead which has been read from the underlying reader but not yet consumed by any scan method. If the underlying reader is used
+ * later in some other capacity, this look-ahead character may have to be taken into account. If a look-ahead character is actually being stored, the <tt>lookAheadCharValid</tt>
+ * method will return <tt>true</tt>, and the look-ahead character itself can then be obtained using the <tt>getLookAheadChar</tt> method. The look-ahead character can be cleared
+ * using the <tt>clearLookAheadChar</tt> method.
+ * 
+ * @deprecated use Scanner
  */
+@Deprecated
 public class ScanfReader extends Reader
 {
 	// ~ Static fields/initializers
@@ -92,7 +88,7 @@ public class ScanfReader extends Reader
 	 * 
 	 * @param reader Underlying Reader
 	 */
-	public ScanfReader(Reader in)
+	public ScanfReader(final Reader in)
 	{
 		super();
 		reader = in;
@@ -141,8 +137,8 @@ public class ScanfReader extends Reader
 	}
 
 	/**
-	 * Gets the current line number. The initial value (when the Reader is created) is 1. A new line is recorded upon
-	 * reading a carriage return, a line feed, or a carriage return immediately followed by a line feed.
+	 * Gets the current line number. The initial value (when the Reader is created) is 1. A new line is recorded upon reading a carriage return, a line feed, or a carriage return
+	 * immediately followed by a line feed.
 	 * 
 	 * @return Current line number
 	 * @see ScanfReader#setLineNumber
@@ -180,8 +176,7 @@ public class ScanfReader extends Reader
 	}
 
 	/**
-	 * Reads characters into a portion of a character array. The method will block until input is available, an I/O
-	 * error occurs, or the end of the stream is reached.
+	 * Reads characters into a portion of a character array. The method will block until input is available, an I/O error occurs, or the end of the stream is reached.
 	 * 
 	 * @param cbuf Buffer to write characters into
 	 * @param off Offset to start writing at
@@ -190,7 +185,7 @@ public class ScanfReader extends Reader
 	 * @throws IOException An I/O error occurred
 	 */
 	@Override
-	public int read(char[] cbuf, int off, int len) throws IOException
+	public int read(final char[] cbuf, final int off, final int len) throws IOException
 	{
 		int offLocal = off;
 		int lenLocal = len;
@@ -265,7 +260,7 @@ public class ScanfReader extends Reader
 		{
 			val = scanChar(defaultCharFmt);
 		}
-		catch (IllegalArgumentException e)
+		catch (final IllegalArgumentException e)
 		{
 			// can't happen
 			e.printStackTrace();
@@ -278,9 +273,8 @@ public class ScanfReader extends Reader
 	 * Scan and return a single character.
 	 * 
 	 * <p>
-	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt>
-	 * , and must contain the conversion character 'c' or '['. If the conversion character is '[', then each character
-	 * scanned must match the sequence specified between the '[' and the closing ']' (see the documentation for
+	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt> , and must contain the conversion character 'c' or '['. If
+	 * the conversion character is '[', then each character scanned must match the sequence specified between the '[' and the closing ']' (see the documentation for
 	 * <tt>ScanfFormat</tt>).
 	 * 
 	 * <p>
@@ -294,14 +288,13 @@ public class ScanfReader extends Reader
 	 * @throws java.io.IOException Other input error
 	 * @see ScanfFormat
 	 */
-	public char scanChar(String s) throws IOException, ScanfMatchException, IllegalArgumentException
+	public char scanChar(final String s) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		return scanChar(new ScanfFormat(s));
 	}
 
 	/**
-	 * Scan and return a single character, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of
-	 * parsing the format from a string.
+	 * Scan and return a single character, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of parsing the format from a string.
 	 * 
 	 * @param fmt Format object
 	 * @return Scanned character
@@ -312,7 +305,7 @@ public class ScanfReader extends Reader
 	 * @see ScanfFormat
 	 * @see ScanfReader#scanChar(String)
 	 */
-	public char scanChar(ScanfFormat fmt) throws IOException, IllegalArgumentException
+	public char scanChar(final ScanfFormat fmt) throws IOException, IllegalArgumentException
 	{
 		char value = 0;
 
@@ -338,13 +331,12 @@ public class ScanfReader extends Reader
 	}
 
 	/**
-	 * Scan and return a character array, whose size is determined by the field width specified in the format string
-	 * (with a default width of 1 being assumed if no width is specified).
+	 * Scan and return a character array, whose size is determined by the field width specified in the format string (with a default width of 1 being assumed if no width is
+	 * specified).
 	 * 
 	 * <p>
-	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt>
-	 * , and must contain the conversion characters 'c' or '['. If the conversion character is '[', then each character
-	 * scanned must match the sequence specified between the '[' and the closing ']' (see the documentation for
+	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt> , and must contain the conversion characters 'c' or '['. If
+	 * the conversion character is '[', then each character scanned must match the sequence specified between the '[' and the closing ']' (see the documentation for
 	 * <tt>ScanfFormat</tt>).
 	 * 
 	 * <p>
@@ -358,14 +350,13 @@ public class ScanfReader extends Reader
 	 * @throws java.io.IOException Other input error
 	 * @see ScanfFormat
 	 */
-	public char[] scanChars(String s) throws IOException, ScanfMatchException, IllegalArgumentException
+	public char[] scanChars(final String s) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		return scanChars(new ScanfFormat(s));
 	}
 
 	/**
-	 * Scan and return a character array, using the default format string "%c", with the field width (number of
-	 * characters to read) supplanted by the argument <tt>n</tt>.
+	 * Scan and return a character array, using the default format string "%c", with the field width (number of characters to read) supplanted by the argument <tt>n</tt>.
 	 * 
 	 * @param n Number of characters to read
 	 * @return Scanned character array
@@ -376,7 +367,7 @@ public class ScanfReader extends Reader
 	 * @see ScanfFormat
 	 * @see ScanfReader#scanChars(String)
 	 */
-	public char[] scanChars(int n) throws IOException, ScanfMatchException, IllegalArgumentException
+	public char[] scanChars(final int n) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		if (n <= 0)
 		{
@@ -387,8 +378,7 @@ public class ScanfReader extends Reader
 	}
 
 	/**
-	 * Scan and return a character array, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of
-	 * parsing the format from a string.
+	 * Scan and return a character array, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of parsing the format from a string.
 	 * 
 	 * @param fmt Format object
 	 * @return Scanned character array
@@ -399,7 +389,7 @@ public class ScanfReader extends Reader
 	 * @see ScanfFormat
 	 * @see ScanfReader#scanChars(String)
 	 */
-	public char[] scanChars(ScanfFormat fmt) throws IOException, IllegalArgumentException
+	public char[] scanChars(final ScanfFormat fmt) throws IOException, IllegalArgumentException
 	{
 		return scanChars(fmt, fmt.width);
 	}
@@ -423,7 +413,7 @@ public class ScanfReader extends Reader
 		{
 			val = scanDec(defaultDecFmt, -1);
 		}
-		catch (IllegalArgumentException e)
+		catch (final IllegalArgumentException e)
 		{
 			// can't happen
 			e.printStackTrace();
@@ -436,9 +426,8 @@ public class ScanfReader extends Reader
 	 * Scan and return a signed decimal (long) integer.
 	 * 
 	 * <p>
-	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt>
-	 * , and must contain the conversion character 'd'. The integer itself must consist of an optional sign ('+' or '-')
-	 * followed by a sequence of digits. White space preceding the number is skipped.
+	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt> , and must contain the conversion character 'd'. The
+	 * integer itself must consist of an optional sign ('+' or '-') followed by a sequence of digits. White space preceding the number is skipped.
 	 * 
 	 * @param s Format string
 	 * @return Scanned integer
@@ -448,14 +437,13 @@ public class ScanfReader extends Reader
 	 * @throws java.io.IOException Other input error
 	 * @see ScanfFormat
 	 */
-	public long scanDec(String s) throws IOException, ScanfMatchException, IllegalArgumentException
+	public long scanDec(final String s) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		return scanDec(new ScanfFormat(s));
 	}
 
 	/**
-	 * Scan and return a signed decimal (long) integer, using a pre-allocated <tt>ScanfFormat</tt> object. This saves
-	 * the overhead of parsing the format from a string.
+	 * Scan and return a signed decimal (long) integer, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of parsing the format from a string.
 	 * 
 	 * @param fmt Format object
 	 * @return Scanned integer
@@ -466,7 +454,7 @@ public class ScanfReader extends Reader
 	 * @see ScanfFormat
 	 * @see ScanfReader#scanDec(String)
 	 */
-	public long scanDec(ScanfFormat fmt) throws IOException, IllegalArgumentException
+	public long scanDec(final ScanfFormat fmt) throws IOException, IllegalArgumentException
 	{
 		return scanDec(fmt, fmt.width);
 	}
@@ -489,7 +477,7 @@ public class ScanfReader extends Reader
 		{
 			val = scanDouble(defaultDoubleFmt);
 		}
-		catch (IllegalArgumentException e)
+		catch (final IllegalArgumentException e)
 		{
 			// can't happen
 			e.printStackTrace();
@@ -502,11 +490,9 @@ public class ScanfReader extends Reader
 	 * Scan and return a double.
 	 * 
 	 * <p>
-	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt>
-	 * , and must contain the conversion character 'f'. The number itself may consist of (a) an optional sign ('+' or
-	 * '-'), (b) a sequence of decimal digits, with an optional decimal point, (c) an optional exponent ('e' or 'E'),
-	 * which must by followed by an optionally signed sequence of decimal digits. White space immediately before the
-	 * number is skipped.
+	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt> , and must contain the conversion character 'f'. The number
+	 * itself may consist of (a) an optional sign ('+' or '-'), (b) a sequence of decimal digits, with an optional decimal point, (c) an optional exponent ('e' or 'E'), which must
+	 * by followed by an optionally signed sequence of decimal digits. White space immediately before the number is skipped.
 	 * 
 	 * @param s Format string
 	 * @return Scanned double value
@@ -516,14 +502,13 @@ public class ScanfReader extends Reader
 	 * @throws java.io.IOException Other input error
 	 * @see ScanfFormat
 	 */
-	public double scanDouble(String s) throws IOException, ScanfMatchException, IllegalArgumentException
+	public double scanDouble(final String s) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		return scanDouble(new ScanfFormat(s));
 	}
 
 	/**
-	 * Scan and return a double, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of parsing
-	 * the format from a string.
+	 * Scan and return a double, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of parsing the format from a string.
 	 * 
 	 * @param fmt Format object
 	 * @return Scanned double value
@@ -534,7 +519,7 @@ public class ScanfReader extends Reader
 	 * @see ScanfFormat
 	 * @see ScanfReader#scanDouble(String)
 	 */
-	public double scanDouble(ScanfFormat fmt) throws IOException, ScanfMatchException, IllegalArgumentException
+	public double scanDouble(final ScanfFormat fmt) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		// parse [-][0-9]*[.][0-9]*[eE][-][0-9]*
 		boolean hasDigits = false;
@@ -558,7 +543,7 @@ public class ScanfReader extends Reader
 		}
 		else
 		{
-			int skippedSpaces = skipWhiteSpace(w);
+			final int skippedSpaces = skipWhiteSpace(w);
 			w -= skippedSpaces;
 		}
 
@@ -600,7 +585,7 @@ public class ScanfReader extends Reader
 		{
 			value = Double.parseDouble(new String(buffer, 0, bcnt));
 		}
-		catch (NumberFormatException e)
+		catch (final NumberFormatException e)
 		{
 			throw new ScanfMatchException("Malformed floating point number");
 		}
@@ -626,8 +611,7 @@ public class ScanfReader extends Reader
 	}
 
 	/**
-	 * Scan and return a float. The format string <tt>s</tt> takes the same form as that described in the documentation
-	 * for <tt>scanDouble(String)</tt>.
+	 * Scan and return a float. The format string <tt>s</tt> takes the same form as that described in the documentation for <tt>scanDouble(String)</tt>.
 	 * 
 	 * @param s Format string
 	 * @return Scanned float value
@@ -638,14 +622,13 @@ public class ScanfReader extends Reader
 	 * @see ScanfFormat
 	 * @see ScanfReader#scanDouble(String)
 	 */
-	public float scanFloat(String s) throws IOException, ScanfMatchException, IllegalArgumentException
+	public float scanFloat(final String s) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		return (float) scanDouble(new ScanfFormat(s));
 	}
 
 	/**
-	 * Scan and return a float, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of parsing
-	 * the format from a string.
+	 * Scan and return a float, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of parsing the format from a string.
 	 * 
 	 * @param fmt Format object
 	 * @return Scanned float value
@@ -656,7 +639,7 @@ public class ScanfReader extends Reader
 	 * @see ScanfFormat
 	 * @see ScanfReader#scanDouble(String)
 	 */
-	public float scanFloat(ScanfFormat fmt) throws IOException, ScanfMatchException, IllegalArgumentException
+	public float scanFloat(final ScanfFormat fmt) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		return (float) scanDouble(fmt);
 	}
@@ -680,7 +663,7 @@ public class ScanfReader extends Reader
 		{
 			val = scanHex(defaultHexFmt, -1);
 		}
-		catch (IllegalArgumentException e)
+		catch (final IllegalArgumentException e)
 		{
 			// can't happen
 			e.printStackTrace();
@@ -693,9 +676,8 @@ public class ScanfReader extends Reader
 	 * Scan and return a hex (long) integer.
 	 * 
 	 * <p>
-	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt>
-	 * , and must contain the conversion character 'x'. The integer itself must be formed from the characters
-	 * [0-9a-fA-F], and white space which immediately precedes it is skipped.
+	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt> , and must contain the conversion character 'x'. The
+	 * integer itself must be formed from the characters [0-9a-fA-F], and white space which immediately precedes it is skipped.
 	 * 
 	 * @param s Format string
 	 * @return Scanned integer
@@ -705,14 +687,13 @@ public class ScanfReader extends Reader
 	 * @throws java.io.IOException Other input error
 	 * @see ScanfFormat
 	 */
-	public long scanHex(String s) throws IOException, ScanfMatchException, IllegalArgumentException
+	public long scanHex(final String s) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		return scanHex(new ScanfFormat(s));
 	}
 
 	/**
-	 * Scan and return a hex (long) integer, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead
-	 * of parsing the format from a string.
+	 * Scan and return a hex (long) integer, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of parsing the format from a string.
 	 * 
 	 * @param fmt Format object
 	 * @return Scanned integer
@@ -723,7 +704,7 @@ public class ScanfReader extends Reader
 	 * @see ScanfFormat
 	 * @see ScanfReader#scanHex(String)
 	 */
-	public long scanHex(ScanfFormat fmt) throws IOException, IllegalArgumentException
+	public long scanHex(final ScanfFormat fmt) throws IOException, IllegalArgumentException
 	{
 		return scanHex(fmt, fmt.width);
 	}
@@ -748,16 +729,14 @@ public class ScanfReader extends Reader
 	 * Scan and return a signed integer.
 	 * 
 	 * <p>
-	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt>
-	 * , and must contain one of the conversion characters "doxi".
+	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt> , and must contain one of the conversion characters "doxi".
 	 * 
 	 * <p>
 	 * Specifying the conversion characters 'd', 'o', or 'x' is equivalent to calling (int versions of) <tt>scanDec</tt>, <tt>scanOct</tt>, and <tt>scanHex</tt>, respectively.
 	 * 
 	 * <p>
-	 * If the conversion character is 'i', then after an optional sign ('+' or '-'), if the number begins with an <tt>0x</tt>,
-	 * then it is scanned as a hex number; if it begins with an <tt>0</tt>, then it is scanned as an octal number, and
-	 * otherwise it is scanned as a decimal number. White space preceding the number is skipped.
+	 * If the conversion character is 'i', then after an optional sign ('+' or '-'), if the number begins with an <tt>0x</tt>, then it is scanned as a hex number; if it begins with
+	 * an <tt>0</tt>, then it is scanned as an octal number, and otherwise it is scanned as a decimal number. White space preceding the number is skipped.
 	 * 
 	 * @param s Format string
 	 * @return Scanned integer
@@ -770,14 +749,13 @@ public class ScanfReader extends Reader
 	 * @see ScanfReader#scanOct(String)
 	 * @see ScanfReader#scanHex(String)
 	 */
-	public int scanInt(String s) throws IOException, ScanfMatchException, IllegalArgumentException
+	public int scanInt(final String s) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		return (int) scanLong(s);
 	}
 
 	/**
-	 * Scan and return a signed integer, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of
-	 * parsing the format from a string.
+	 * Scan and return a signed integer, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of parsing the format from a string.
 	 * 
 	 * @param fmt Format object
 	 * @return Scanned integer
@@ -788,7 +766,7 @@ public class ScanfReader extends Reader
 	 * @see ScanfFormat
 	 * @see ScanfReader#scanInt(String)
 	 */
-	public int scanInt(ScanfFormat fmt) throws IOException, IllegalArgumentException
+	public int scanInt(final ScanfFormat fmt) throws IOException, IllegalArgumentException
 	{
 		return (int) scanLong(fmt);
 	}
@@ -812,7 +790,7 @@ public class ScanfReader extends Reader
 		{
 			val = scanLong(defaultIntFmt);
 		}
-		catch (IllegalArgumentException e)
+		catch (final IllegalArgumentException e)
 		{
 			// can't happen
 			e.printStackTrace();
@@ -832,7 +810,7 @@ public class ScanfReader extends Reader
 	 * @throws java.io.IOException Other input error
 	 * @see ScanfReader#scanInt(String)
 	 */
-	public long scanLong(String s) throws IOException, ScanfMatchException, IllegalArgumentException
+	public long scanLong(final String s) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		return scanLong(new ScanfFormat(s));
 	}
@@ -848,7 +826,7 @@ public class ScanfReader extends Reader
 	 * @throws java.io.IOException Other input error
 	 * @see ScanfReader#scanInt(String)
 	 */
-	public long scanLong(ScanfFormat fmt) throws IOException, IllegalArgumentException
+	public long scanLong(final ScanfFormat fmt) throws IOException, IllegalArgumentException
 	{
 		if (fmt.type == 'd')
 		{
@@ -883,7 +861,7 @@ public class ScanfReader extends Reader
 			}
 			else
 			{
-				int skippedSpaces = skipWhiteSpace(width);
+				final int skippedSpaces = skipWhiteSpace(width);
 				width -= skippedSpaces;
 			}
 
@@ -993,7 +971,7 @@ public class ScanfReader extends Reader
 		{
 			val = scanOct(defaultOctFmt, -1);
 		}
-		catch (IllegalArgumentException e)
+		catch (final IllegalArgumentException e)
 		{
 			// can't happen
 			e.printStackTrace();
@@ -1006,9 +984,8 @@ public class ScanfReader extends Reader
 	 * Scan and return an octal (long) integer.
 	 * 
 	 * <p>
-	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt>
-	 * , and must contain the conversion character 'o'. The integer itself must be composed of the digits [0-7], and
-	 * white space which immediately precedes it is skipped.
+	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt> , and must contain the conversion character 'o'. The
+	 * integer itself must be composed of the digits [0-7], and white space which immediately precedes it is skipped.
 	 * 
 	 * @param s Format string
 	 * @return Scanned integer
@@ -1018,14 +995,13 @@ public class ScanfReader extends Reader
 	 * @throws java.io.IOException Other input error
 	 * @see ScanfFormat
 	 */
-	public long scanOct(String s) throws IOException, ScanfMatchException, IllegalArgumentException
+	public long scanOct(final String s) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		return scanOct(new ScanfFormat(s));
 	}
 
 	/**
-	 * Scan and return an octal (long) integer, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the
-	 * overhead of parsing the format from a string.
+	 * Scan and return an octal (long) integer, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of parsing the format from a string.
 	 * 
 	 * @param fmt Format object
 	 * @return Scanned integer
@@ -1036,7 +1012,7 @@ public class ScanfReader extends Reader
 	 * @see ScanfFormat
 	 * @see ScanfReader#scanOct(String)
 	 */
-	public long scanOct(ScanfFormat fmt) throws IOException, IllegalArgumentException
+	public long scanOct(final ScanfFormat fmt) throws IOException, IllegalArgumentException
 	{
 		return scanOct(fmt, fmt.width);
 	}
@@ -1060,7 +1036,7 @@ public class ScanfReader extends Reader
 		{
 			val = scanString(defaultStringFmt);
 		}
-		catch (IllegalArgumentException e)
+		catch (final IllegalArgumentException e)
 		{
 			// can't happen
 			e.printStackTrace();
@@ -1073,9 +1049,8 @@ public class ScanfReader extends Reader
 	 * Scan and return a <tt>String</tt>.
 	 * 
 	 * <p>
-	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt>
-	 * , and must contain the conversion character 's'. The string returned corresponds to the next non-white-space
-	 * sequence of characters found in the input, with preceding white space skipped.
+	 * The format string <tt>s</tt> must have the form described by the documentation for the class <tt>ScanfFormat</tt> , and must contain the conversion character 's'. The string
+	 * returned corresponds to the next non-white-space sequence of characters found in the input, with preceding white space skipped.
 	 * 
 	 * @param s Format string
 	 * @return Scanned <tt>String</tt>
@@ -1085,14 +1060,13 @@ public class ScanfReader extends Reader
 	 * @throws java.io.IOException Other input error
 	 * @see ScanfFormat
 	 */
-	public String scanString(String s) throws IOException, ScanfMatchException, IllegalArgumentException
+	public String scanString(final String s) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		return scanString(new ScanfFormat(s));
 	}
 
 	/**
-	 * Scan and return a <tt>String</tt>, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of
-	 * parsing the format from a string.
+	 * Scan and return a <tt>String</tt>, using a pre-allocated <tt>ScanfFormat</tt> object. This saves the overhead of parsing the format from a string.
 	 * 
 	 * @param fmt Format object
 	 * @return Scanned <tt>String</tt>
@@ -1103,7 +1077,7 @@ public class ScanfReader extends Reader
 	 * @see ScanfFormat
 	 * @see ScanfReader#scanString(String)
 	 */
-	public String scanString(ScanfFormat fmt) throws IOException, IllegalArgumentException
+	public String scanString(final ScanfFormat fmt) throws IOException, IllegalArgumentException
 	{
 		int blimit = BUFSIZE;
 
@@ -1120,7 +1094,7 @@ public class ScanfReader extends Reader
 		}
 		else
 		{
-			int skippedSpaces = skipWhiteSpace(blimit);
+			final int skippedSpaces = skipWhiteSpace(blimit);
 			blimit -= skippedSpaces;
 		}
 
@@ -1148,7 +1122,7 @@ public class ScanfReader extends Reader
 	 * @param n New character number
 	 * @see ScanfReader#getCharNumber
 	 */
-	public void setCharNumber(int n)
+	public void setCharNumber(final int n)
 	{
 		charCnt = n;
 	}
@@ -1159,14 +1133,13 @@ public class ScanfReader extends Reader
 	 * @param n New line number
 	 * @see ScanfReader#setLineNumber
 	 */
-	public void setLineNumber(int n)
+	public void setLineNumber(final int n)
 	{
 		lineCnt = n;
 	}
 
 	/**
-	 * White spaces are skipped at the beginning of a line if flag is <tt>true</tt> otherwise spaces are counted as
-	 * valid characters.
+	 * White spaces are skipped at the beginning of a line if flag is <tt>true</tt> otherwise spaces are counted as valid characters.
 	 */
 	public boolean useCstandard()
 	{
@@ -1174,15 +1147,14 @@ public class ScanfReader extends Reader
 	}
 
 	/**
-	 * White spaces are skipped at the beginning of a line if <tt>flag</tt> is <tt>true</tt> otherwise spaces are
-	 * counted as valid characters.
+	 * White spaces are skipped at the beginning of a line if <tt>flag</tt> is <tt>true</tt> otherwise spaces are counted as valid characters.
 	 */
-	public void useCstandard(boolean flag)
+	public void useCstandard(final boolean flag)
 	{
 		spacesCStandardFlag = flag;
 	}
 
-	private final boolean acceptChar(char c, int width) throws IOException
+	private final boolean acceptChar(final char c, final int width) throws IOException
 	{
 		boolean accept = false;
 
@@ -1205,7 +1177,7 @@ public class ScanfReader extends Reader
 		return accept;
 	}
 
-	private final boolean acceptDigits(int width) throws IOException
+	private final boolean acceptDigits(final int width) throws IOException
 	{
 		boolean matched = false;
 
@@ -1227,7 +1199,7 @@ public class ScanfReader extends Reader
 		return matched;
 	}
 
-	private final void checkTypeAndScanPrefix(ScanfFormat fmt, String type) throws IOException, IllegalArgumentException
+	private final void checkTypeAndScanPrefix(final ScanfFormat fmt, final String type) throws IOException, IllegalArgumentException
 	{
 		if (fmt.type == -1)
 		{
@@ -1288,13 +1260,13 @@ public class ScanfReader extends Reader
 		// charCnt = 0;
 	}
 
-	private void matchString(String s) throws IOException, ScanfMatchException
+	private void matchString(final String s) throws IOException, ScanfMatchException
 	{
 		initChar();
 
 		for (int i = 0; i < s.length(); i++)
 		{
-			char c = s.charAt(i);
+			final char c = s.charAt(i);
 
 			if (curChar == -1)
 			{
@@ -1326,7 +1298,7 @@ public class ScanfReader extends Reader
 	 * 
 	 * @see ScanfReader#scanChars(String)
 	 */
-	private char[] scanChars(ScanfFormat fmt, int w) throws IOException, IllegalArgumentException
+	private char[] scanChars(final ScanfFormat fmt, final int w) throws IOException, IllegalArgumentException
 	{
 		int wLocal = w;
 
@@ -1335,7 +1307,7 @@ public class ScanfReader extends Reader
 			wLocal = 1;
 		}
 
-		char[] value = new char[wLocal];
+		final char[] value = new char[wLocal];
 		checkTypeAndScanPrefix(fmt, "c[");
 		initChar();
 
@@ -1366,7 +1338,7 @@ public class ScanfReader extends Reader
 	 * 
 	 * @see ScanfReader#scanDec(String)
 	 */
-	private long scanDec(ScanfFormat fmt, int width) throws IOException, IllegalArgumentException
+	private long scanDec(final ScanfFormat fmt, final int width) throws IOException, IllegalArgumentException
 	{
 		int widthLocal = width;
 
@@ -1388,7 +1360,7 @@ public class ScanfReader extends Reader
 		}
 		else
 		{
-			int skippedSpaces = skipWhiteSpace(widthLocal);
+			final int skippedSpaces = skipWhiteSpace(widthLocal);
 			widthLocal -= skippedSpaces;
 		}
 
@@ -1433,7 +1405,7 @@ public class ScanfReader extends Reader
 	 * 
 	 * @see ScanfReader#scanHex(String)
 	 */
-	private long scanHex(ScanfFormat fmt, int width) throws IOException, IllegalArgumentException
+	private long scanHex(final ScanfFormat fmt, final int width) throws IOException, IllegalArgumentException
 	{
 		int widthLocal = width;
 
@@ -1454,7 +1426,7 @@ public class ScanfReader extends Reader
 		}
 		else
 		{
-			int skippedSpaces = skipWhiteSpace(widthLocal);
+			final int skippedSpaces = skipWhiteSpace(widthLocal);
 			widthLocal -= skippedSpaces;
 		}
 
@@ -1493,7 +1465,7 @@ public class ScanfReader extends Reader
 	 * 
 	 * @see ScanfReader#scanOct(String)
 	 */
-	private long scanOct(ScanfFormat fmt, int width) throws IOException, IllegalArgumentException
+	private long scanOct(final ScanfFormat fmt, final int width) throws IOException, IllegalArgumentException
 	{
 		int widthLocal = width;
 
@@ -1514,7 +1486,7 @@ public class ScanfReader extends Reader
 		}
 		else
 		{
-			int skippedSpaces = skipWhiteSpace(widthLocal);
+			final int skippedSpaces = skipWhiteSpace(widthLocal);
 			widthLocal -= skippedSpaces;
 		}
 
@@ -1551,7 +1523,7 @@ public class ScanfReader extends Reader
 	// }
 	// }
 
-	private final void scanSuffix(ScanfFormat fmt) throws IOException
+	private final void scanSuffix(final ScanfFormat fmt) throws IOException
 	{
 		if (fmt.suffix != null)
 		{
@@ -1583,7 +1555,7 @@ public class ScanfReader extends Reader
 	 * @param limit the maximum of the number that will be skipped
 	 * @return the number of skipped white spaces
 	 */
-	private int skipWhiteSpace(int limit) throws IOException
+	private int skipWhiteSpace(final int limit) throws IOException
 	{
 		initChar();
 

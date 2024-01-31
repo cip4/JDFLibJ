@@ -75,7 +75,6 @@ import java.io.OutputStream;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
-import org.cip4.jdflib.cformat.PrintfFormat;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -163,8 +162,9 @@ public class AutomatedLayoutTest extends ExampleTest
 		for (int loop = 0; loop < 3; loop++)
 		{
 
-			n.getAuditPool().appendXMLComment("This is a simple example of an automated layout used for conventional prepress\n"
-					+ "The structure is aligned as closely as possible with a static Layout", null);
+			n.getAuditPool().appendXMLComment(
+					"This is a simple example of an automated layout used for conventional prepress\n" + "The structure is aligned as closely as possible with a static Layout",
+					null);
 
 			final JDFRunList run = rl.addRun("file://host/data/test.pdf", 0, -1);
 			run.setNPage(128);
@@ -176,7 +176,7 @@ public class AutomatedLayoutTest extends ExampleTest
 
 			lo.setMaxOrd(4);
 			lo.setAutomated(true);
-			final String format = "Sheet%02i";
+			final String format = "Sheet%02d";
 			lo.setAttribute("NameFormat", format);
 			lo.setAttribute("NameTemplate", "SheetNum");
 			lo.appendXMLComment("Simple automated Layout with exactly one sheet\n", null);
@@ -208,10 +208,9 @@ public class AutomatedLayoutTest extends ExampleTest
 			rlSheet.setDirectory("file://host/out/");
 			if (loop == 0) // instantiate individually
 			{
-				final PrintfFormat fmt = new PrintfFormat(format);
 				for (int i = 0; i < 128; i += 4)
 				{
-					final String sheetName = fmt.tostr(1 + i / 4);
+					final String sheetName = String.format(format, 1 + i / 4);
 					final JDFRunList rlp = (JDFRunList) rlSheet.addPartition(EnumPartIDKey.SheetName, sheetName);
 					final JDFRunList rlF = (JDFRunList) rlp.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 					rlF.appendLayoutElement().setMimeURL(sheetName + "Front.pdf");
@@ -222,11 +221,10 @@ public class AutomatedLayoutTest extends ExampleTest
 			if (loop == 1) // instantiate individually
 			{
 				rlSheet.appendLayoutElement().setMimeURL("AllSheets.pdf");
-				final PrintfFormat fmt = new PrintfFormat(format);
 				final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList();
 				for (int i = 0; i < 128; i += 4)
 				{
-					final String sheetName = fmt.tostr(1 + i / 4);
+					final String sheetName = String.format(format, 1 + i / 4);
 					final JDFRunList rlp = (JDFRunList) rlSheet.addPartition(EnumPartIDKey.SheetName, sheetName);
 					final JDFRunList rlF = (JDFRunList) rlp.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 					integerRangeList.clear();
@@ -381,8 +379,10 @@ public class AutomatedLayoutTest extends ExampleTest
 	@Test
 	public void testAutomateLayout3() throws Exception
 	{
-		n.setXMLComment("This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"
-				+ "The structure is aligned as closely as possible with a static Layout\n" + "note that the actual processes and outputs have been omitted for brevity", true);
+		n.setXMLComment(
+				"This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"
+						+ "The structure is aligned as closely as possible with a static Layout\n" + "note that the actual processes and outputs have been omitted for brevity",
+				true);
 
 		setUpAutomatedInputRunList();
 		rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of 14 pages each in a ppml file");
@@ -393,8 +393,10 @@ public class AutomatedLayoutTest extends ExampleTest
 		lo.setMaxOrd(7);
 		lo.setMaxDocOrd(2);
 		lo.setAutomated(true);
-		lo.appendXMLComment("Layout for 2*1 Cover page and 2*6 2 up two sided body pages\n The number of pages per instance document is fixed\n"
-				+ "This Layout is an example of an 'almost conventional' automated layout\n" + "MaxDocOrd is set to 2. Thus 2 documents are positioned on each sheet.\n", null);
+		lo.appendXMLComment(
+				"Layout for 2*1 Cover page and 2*6 2 up two sided body pages\n The number of pages per instance document is fixed\n"
+						+ "This Layout is an example of an 'almost conventional' automated layout\n" + "MaxDocOrd is set to 2. Thus 2 documents are positioned on each sheet.\n",
+				null);
 		final JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Cover");
 		cover.setDescriptiveName("one sided cover - the inner = back side is empty");
 		final JDFLayout coverFront = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
@@ -449,8 +451,10 @@ public class AutomatedLayoutTest extends ExampleTest
 	@Test
 	public void testAutomateLayout4() throws Exception
 	{
-		n.setXMLComment("This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"
-				+ "The structure is aligned as closely as possible with a static Layout\n" + "note that the actual processes and outputs have been omitted for brevity", true);
+		n.setXMLComment(
+				"This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"
+						+ "The structure is aligned as closely as possible with a static Layout\n" + "note that the actual processes and outputs have been omitted for brevity",
+				true);
 
 		setUpAutomatedInputRunList();
 		rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of 14 pages each in a ppml file.\n" + "DocCopies requests a repeat of 50 copies per document");
@@ -521,7 +525,7 @@ public class AutomatedLayoutTest extends ExampleTest
 		h.cleanUp();
 		setSnippet(h, true);
 		setSnippet(h.getSet(ElementName.NODEINFO, 0), false);
-		//	writeTest(x, "processes/AutomatedStrippingCutStack.xjdf", true);
+		// writeTest(x, "processes/AutomatedStrippingCutStack.xjdf", true);
 	}
 
 	/**
