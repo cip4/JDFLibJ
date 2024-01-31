@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,8 +84,7 @@ import org.cip4.jdflib.util.UrlUtil;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- *         class to generate rolling backup files using a simple <FileName>.n
- *         naming algorithm.
+ *         class to generate rolling backup files using a simple <FileName>.n naming algorithm.
  *
  *         The oldest file dies when the maximum number is reached
  *
@@ -100,14 +99,10 @@ public class RollingFile extends File
 	protected final Log log;
 
 	/**
-	 * @param pathname
-	 *            the base filename
-	 * @param baseName
-	 *            the name of the base file, <br/>
-	 *            if a filename with double "." , e.g. xxx..txt is specified, the
-	 *            algorithm will generate names such as xxx.000001.txt, <br/>
-	 *            if a single "." e.g. xxx.txt is specified, the algorithm will
-	 *            generate names such as xxx000001.txt, <br/>
+	 * @param pathname the base filename
+	 * @param baseName the name of the base file, <br/>
+	 *        if a filename with double "." , e.g. xxx..txt is specified, the algorithm will generate names such as xxx.000001.txt, <br/>
+	 *        if a single "." e.g. xxx.txt is specified, the algorithm will generate names such as xxx000001.txt, <br/>
 	 */
 	public RollingFile(final String pathname, final String baseName)
 	{
@@ -198,7 +193,7 @@ public class RollingFile extends File
 	protected String getNewFileName()
 	{
 		String exp = getFileExpression();
-		exp = StringUtil.replaceString(exp, "(.)*", "%0" + digits + "i");
+		exp = StringUtil.replaceString(exp, "(.)*", "%0" + digits + "d");
 		exp = StringUtil.sprintf(exp, "" + pos.incrementAndGet());
 		return exp;
 	}
@@ -209,8 +204,7 @@ public class RollingFile extends File
 	private static final long serialVersionUID = 1521423479897L;
 
 	/**
-	 * @param digits
-	 *            the digits to set
+	 * @param digits the digits to set
 	 */
 	public void setDigits(final int digits)
 	{

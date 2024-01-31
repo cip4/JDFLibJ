@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -155,7 +155,7 @@ public class DumpDir
 			log.info("jmf dump service " + baseDir + " - " + inc + " " + new JDFDate().getDateTime());
 		}
 
-		final String s = ext == null ? StringUtil.sprintf("m%08i.tmp", "" + inc) : StringUtil.sprintf("m%08i.%s.tmp", "" + inc + "," + ext);
+		final String s = ext == null ? StringUtil.sprintf("m%08i.tmp", "" + inc) : StringUtil.sprintf("m%08d.%s.tmp", "" + inc + "," + ext);
 		final File f = FileUtil.getFileInDirectory(baseDir, new File(s));
 		if (header != null)
 		{

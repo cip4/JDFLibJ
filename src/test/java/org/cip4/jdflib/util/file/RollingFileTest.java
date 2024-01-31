@@ -86,7 +86,7 @@ public class RollingFileTest extends JDFTestCaseBase
 	{
 		for (int i = 1; i < 100; i++)
 		{
-			assertEquals(r.getNewFile().getName(), StringUtil.sprintf("dummy%06i.tst", "" + i));
+			assertEquals(r.getNewFile().getName(), StringUtil.sprintf("dummy%06d.tst", "" + i));
 		}
 	}
 
@@ -119,12 +119,12 @@ public class RollingFileTest extends JDFTestCaseBase
 		for (int i = 1; i < 100; i++)
 		{
 			final File newFile = r.getNewFile();
-			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
+			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06d", "" + i));
 			assertFalse(newFile.isDirectory());
 			assertTrue(newFile.delete());
 			newFile.mkdir();
 			assertTrue(newFile.isDirectory());
-			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
+			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06d", "" + i));
 		}
 	}
 
@@ -138,7 +138,7 @@ public class RollingFileTest extends JDFTestCaseBase
 		for (int i = 1; i < 100; i++)
 		{
 			final File newFile = r.getNewFile();
-			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
+			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06d", "" + i));
 			assertTrue(newFile.canRead());
 		}
 	}
