@@ -272,14 +272,9 @@ public class ZipReader
 			return false;
 		}
 		final String fileName = getEntryName(ze);
-		if (StringUtil.hasToken(fileName, "..", JDFConstants.SLASH, 0))
-		{
-			log.error("illegal entry name " + fileName);
-			return false;
-		}
 
 		final File file = new File(fileName);
-		final File newFile = FileUtil.getFileInDirectory(dir, file);
+		final File newFile = FileUtil.addSecure(dir, file);
 		try
 		{
 			if (ze.isDirectory())
@@ -315,7 +310,7 @@ public class ZipReader
 			}
 			zis.closeEntry();
 		}
-		catch (final IOException e)
+		catch (final Exception e)
 		{
 			log.error("Snafu unpacking zip to: " + fileName, e);
 			return false;
@@ -332,10 +327,8 @@ public class ZipReader
 	public static String getEntryName(final ZipEntry ze)
 	{
 		String fileName = ze == null ? null : ze.getName();
-		fileName = StringUtil.replaceChar(fileName, '\\', JDFConstants.SLASH, 0);
-		final String cleanDots = UrlUtil.cleanDots(fileName);
-
-		return cleanDots;
+		fileName = StringUtil.replaceString(fileName, JDFConstants.BACK_SLASH, JDFConstants.SLASH);
+		return UrlUtil.getSecurePath(fileName, false);
 	}
 
 	/**

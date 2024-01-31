@@ -1123,17 +1123,41 @@ public class FileUtil
 	 */
 	public static File addSecure(final File baseFile, final File file) throws IllegalArgumentException
 	{
-		if (file == null || isAbsoluteFile(file))
+		getSecurePath(baseFile, true);
+		return new File(baseFile, getSecurePath(file, false));
+
+	}
+
+	/**
+	 * secure check of a file name
+	 * 
+	 * 
+	 * @param file
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	public static String getSecureName(final File file) throws IllegalArgumentException
+	{
+		getSecurePath(file, true);
+		return file.getName();
+
+	}
+
+	/**
+	 * secure check of a file path
+	 * 
+	 * @param baseFile
+	 * @param file
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	public static String getSecurePath(final File file, final boolean allowAbsolute) throws IllegalArgumentException
+	{
+		if (file == null || !allowAbsolute && isAbsoluteFile(file))
 			throw new IllegalArgumentException("file must be relative " + file);
-		if (baseFile == null)
-			throw new IllegalArgumentException("base file must not be null");
-		if (StringUtil.hasToken(baseFile.getPath(), "..", "/\\", 0))
-			throw new IllegalArgumentException("base path must not contain .. " + baseFile);
 		if (StringUtil.hasToken(file.getPath(), "..", "/\\", 0))
 			throw new IllegalArgumentException("file must not contain .. " + file);
-
-		return new File(baseFile, file.getPath());
-
+		return file.getPath();
 	}
 
 	/**

@@ -812,6 +812,23 @@ public class UrlUtil
 	}
 
 	/**
+	 * secure check of a file path
+	 * 
+	 * @param baseFile
+	 * @param file
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	public static String getSecurePath(final String url, final boolean allowAbsolute) throws IllegalArgumentException
+	{
+		if (url == null || !allowAbsolute && !isRelativeURL(url))
+			throw new IllegalArgumentException("URL must be relative " + url);
+		if (StringUtil.hasToken(url, "..", "/\\", 0))
+			throw new IllegalArgumentException("URL must not contain .. " + url);
+		return cleanDots(url);
+	}
+
+	/**
 	 * adds a parameter to a given url using either ? or &
 	 *
 	 * @param baseUrl the base url - already escaped and ready to go
@@ -864,18 +881,22 @@ public class UrlUtil
 	 * @param path the path to add
 	 * @return the escaped new url
 	 */
-	public static String addPath(final String baseUrl, final String path)
+	public static String addPath(final String baseUrl, final String path) throws IllegalArgumentException
 	{
+
+		final String newBase = getSecurePath(baseUrl, true);
 		if (path == null)
-			return baseUrl;
-		if (baseUrl == null)
-			return path;
-		String request = StringUtil.token(baseUrl, 0, "?");
-		request = StringUtil.addToken(request, "/", path);
-		final String params = StringUtil.token(baseUrl, 1, "?");
+		{
+			return newBase;
+		}
+		final String newPath = getSecurePath(path, false);
+		String request = StringUtil.token(newBase, 0, "?");
+		request = StringUtil.addToken(request, "/", newPath);
+		final String params = StringUtil.token(newBase, 1, "?");
 		if (params != null)
 			request += "?" + params;
-		return request;
+
+		return cleanDots(request);
 	}
 
 	/**

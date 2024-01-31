@@ -126,18 +126,18 @@ public class XJDFZipWriter implements IStreamWriter
 	/**
 	 * @param xjdf the xjdf to add
 	 */
-	public void addXJDF(final XJDFHelper xjdf, boolean addReferenced)
+	public void addXJDF(final XJDFHelper xjdf, final boolean addReferenced)
 	{
 		vxjdf.add(xjdf);
 		if (addReferenced)
 		{
-			VElement v = xjdf.getRoot().getChildrenByTagName(null);
-			for (KElement e : v)
+			final VElement v = xjdf.getRoot().getChildrenByTagName(null);
+			for (final KElement e : v)
 			{
 				if (e instanceof IURLSetter)
 				{
-					IURLSetter u = (IURLSetter) e;
-					InputStream is = u.getURLInputStream();
+					final IURLSetter u = (IURLSetter) e;
+					final InputStream is = u.getURLInputStream();
 					if (is != null)
 					{
 						String url = u.getURL();
@@ -150,7 +150,7 @@ public class XJDFZipWriter implements IStreamWriter
 		}
 	}
 
-	String updateUrl(String url)
+	String updateUrl(final String url)
 	{
 		return "content/" + UrlUtil.getFileName(url, null);
 	}
@@ -162,9 +162,10 @@ public class XJDFZipWriter implements IStreamWriter
 	 */
 	public void addAux(final String path, final InputStream inStream)
 	{
-		if (inStream != null && !StringUtil.isEmpty(path))
+		final String newPath = UrlUtil.getSecurePath(path, false);
+		if (inStream != null)
 		{
-			auxMap.put(path, inStream);
+			auxMap.put(newPath, inStream);
 		}
 	}
 
@@ -358,7 +359,7 @@ public class XJDFZipWriter implements IStreamWriter
 	 * @param commandType
 	 * @throws IllegalArgumentException if commandType is invalid
 	 */
-	public void setCommandType(EnumType commandType)
+	public void setCommandType(final EnumType commandType)
 	{
 		if (!EnumType.SubmitQueueEntry.equals(commandType) && !EnumType.ResubmitQueueEntry.equals(commandType) && !EnumType.ReturnQueueEntry.equals(commandType))
 			throw new IllegalArgumentException("Invalid command type " + commandType);
@@ -370,7 +371,7 @@ public class XJDFZipWriter implements IStreamWriter
 		return qeID;
 	}
 
-	public void setQeID(String qeID)
+	public void setQeID(final String qeID)
 	{
 		this.qeID = qeID;
 	}

@@ -275,8 +275,13 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testAddPath()
 	{
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addPath("A", "/a"));
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addPath("A", "../a"));
+
+		assertEquals("/A/a", UrlUtil.addPath("/A", "a"));
 		assertEquals("A/a", UrlUtil.addPath("A", "a"));
-		assertEquals("A/a", UrlUtil.addPath("A/", "/a"));
+		assertEquals("A/a", UrlUtil.addPath("A/", "a"));
+		assertEquals("A/a..a", UrlUtil.addPath("A/", "a..a"));
 		assertEquals("A/a?b=c", UrlUtil.addPath("A?b=c", "a"));
 	}
 
