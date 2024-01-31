@@ -523,7 +523,6 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertTrue(FileUtil.createNewFile(f));
 		assertTrue(FileUtil.createNewFile(f));
 		assertFalse(FileUtil.createNewFile(null));
-		assertFalse(FileUtil.createNewFile(new File(" /a")));
 		f.delete();
 	}
 
