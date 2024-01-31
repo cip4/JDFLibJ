@@ -46,7 +46,6 @@ package org.cip4.jdflib.core;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -67,6 +66,7 @@ import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.HashUtil;
+import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlPart;
@@ -458,7 +458,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 */
 	public boolean write2File(File file, final int indent, final boolean bPreserveSpace)
 	{
-		boolean fSuccess = true;
 		if (file == null)
 		{
 			if (getOriginalFileName() != null)
@@ -471,60 +470,33 @@ public class XMLDoc implements Cloneable, IStreamWriter
 				return false;
 			}
 		}
-		OutputStream outStream = null;
 
+		if (file.isDirectory() && getOriginalFileName() != null)
+		{
+			final File orig = new File(getOriginalFileName());
+			file = new File(file + File.separator + orig.getName());
+		}
+
+		final OutputStream outStream = FileUtil.getBufferedOutputStream(file);
 		try
 		{
-			if (file.isDirectory() && getOriginalFileName() != null)
-			{
-				final File orig = new File(getOriginalFileName());
-				file = new File(file + File.separator + orig.getName());
-			}
-
-			// ensure having an empty file in case it did not exist
-			if (file.exists())
-			{
-				final boolean zapped = file.delete();
-				if (!zapped)
-					log.warn("could not delete: " + file.getAbsolutePath());
-			}
-			fSuccess = FileUtil.createNewFile(file);
-			if (fSuccess)
-			{
-				outStream = FileUtil.getBufferedOutputStream(file);
-				write2Stream(outStream, indent, bPreserveSpace);
-				if (getOriginalFileName() == null)
-				{
-					setOriginalFileName(file.getPath());
-				}
-			}
-		}
-		catch (final FileNotFoundException e)
-		{
-			log.error("writing to File, bailing out", e);
-			fSuccess = false;
+			write2Stream(outStream, indent, bPreserveSpace);
 		}
 		catch (final IOException e)
 		{
-			log.error("writing to File, bailing out", e);
-			fSuccess = false;
+			log.warn("could not write to file " + file, e);
+			return false;
 		}
 		finally
 		{
-			if (outStream != null)
-			{
-				try
-				{
-					outStream.close();
-				}
-				catch (final IOException e1)
-				{
-					log.error("closing File, bailing out", e1);
-					fSuccess = false;
-				}
-			}
+			StreamUtil.close(outStream);
 		}
-		return fSuccess;
+		if (getOriginalFileName() == null)
+		{
+			setOriginalFileName(file.getPath());
+		}
+
+		return true;
 	}
 
 	public String getRootName()

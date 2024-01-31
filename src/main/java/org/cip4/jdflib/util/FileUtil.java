@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -197,7 +197,7 @@ public class FileUtil
 	 * @param extension comma separated list of extensions to check for (null = list all)
 	 * @return Files[] the matching files, null if none are found
 	 */
-	public static File[] listFilesWithExtension(final File dir, final String extension, int max)
+	public static File[] listFilesWithExtension(final File dir, final String extension, final int max)
 	{
 		if (dir == null)
 		{
@@ -211,7 +211,7 @@ public class FileUtil
 
 			return streamToArray(stream2);
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			// nop
 		}
@@ -219,12 +219,12 @@ public class FileUtil
 
 	}
 
-	static File[] streamToArray(Stream<Path> stream)
+	static File[] streamToArray(final Stream<Path> stream)
 	{
-		Object[] array = stream.toArray();
+		final Object[] array = stream.toArray();
 		if (array.length != 0)
 		{
-			File[] ret = new File[array.length];
+			final File[] ret = new File[array.length];
 			for (int i = 0; i < ret.length; i++)
 			{
 				ret[i] = ((Path) array[i]).toFile();
@@ -234,7 +234,7 @@ public class FileUtil
 		return null;
 	}
 
-	public static File[] listFilesWithExtension(File dir, String allExtensions)
+	public static File[] listFilesWithExtension(final File dir, final String allExtensions)
 	{
 		return listFilesWithExtension(dir, allExtensions, -1);
 	}
@@ -258,7 +258,7 @@ public class FileUtil
 	 * @param expression regular expression - uses the simplified syntax
 	 * @return Files[] the matching files, null if none are found
 	 */
-	public static File[] listFilesWithExpression(final File dir, final String expression, int max)
+	public static File[] listFilesWithExpression(final File dir, final String expression, final int max)
 	{
 		if (dir == null)
 		{
@@ -274,7 +274,7 @@ public class FileUtil
 
 			return streamToArray(stream2);
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			// nop
 		}
@@ -288,7 +288,7 @@ public class FileUtil
 	 * @param expression regular expression - uses the simplified syntax
 	 * @return Files[] the matching files, null if none are found
 	 */
-	public static int numFiles(final File dir, int max)
+	public static int numFiles(final File dir, final int max)
 	{
 		if (dir == null)
 		{
@@ -301,10 +301,10 @@ public class FileUtil
 			{
 				stream2 = stream2.limit(max);
 			}
-			File[] streamToArray = streamToArray(stream2);
+			final File[] streamToArray = streamToArray(stream2);
 			return streamToArray == null ? 0 : streamToArray.length;
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			// nop
 		}
@@ -1121,7 +1121,7 @@ public class FileUtil
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public static File addSecure(File baseFile, File file) throws IllegalArgumentException
+	public static File addSecure(final File baseFile, final File file) throws IllegalArgumentException
 	{
 		if (file == null || isAbsoluteFile(file))
 			throw new IllegalArgumentException("file must be relative " + file);
@@ -1326,9 +1326,29 @@ public class FileUtil
 	 */
 	public static boolean createNewFile(final File file)
 	{
+		try
+		{
+			return createFile(file);
+		}
+		catch (final Exception x)
+		{
+			log.warn("could not create " + file, x);
+			return false;
+		}
+	}
+
+	/**
+	 * similar to File.createFile but also creates any required directories
+	 *
+	 * @param file the file to create
+	 * @return true if the file exists after the call, else false
+	 * @throws IOException
+	 */
+	public static boolean createFile(final File file) throws IOException
+	{
 		if (file == null)
 		{
-			return false;
+			throw new NullPointerException("file must not be null");
 		}
 		if (file.exists())
 		{
@@ -1339,14 +1359,7 @@ public class FileUtil
 		{
 			parent.mkdirs();
 		}
-		try
-		{
-			return file.createNewFile();
-		}
-		catch (final IOException x)
-		{
-			return false;
-		}
+		return file.createNewFile();
 	}
 
 	/**
@@ -1371,31 +1384,30 @@ public class FileUtil
 	{
 		if (file == null)
 		{
-			LogFactory.getLog(FileUtil.class).warn("extracting stream from null file");
+			log.warn("extracting stream from null file");
 			return null;
 		}
 		else if (!file.canRead())
 		{
-			LogFactory.getLog(FileUtil.class).warn("cannot access: " + file);
+			log.warn("cannot access: " + file);
 			return null;
 		}
 		else if (file.isDirectory())
 		{
-			LogFactory.getLog(FileUtil.class).warn("cannot extract stream from directory: " + file);
+			log.warn("cannot extract stream from directory: " + file);
 			return null;
 		}
 		FileInputStream fis;
 		try
 		{
 			fis = new FileInputStream(file);
+			return new BufferedInputStream(fis);
 		}
 		catch (final IOException x)
 		{
-			LogFactory.getLog(FileUtil.class).warn("extracting stream from non-existing file: " + file.getAbsolutePath(), x);
-			return null;
+			log.warn("extracting stream from non-existing file: " + file.getAbsolutePath(), x);
 		}
-		final BufferedInputStream bis = new BufferedInputStream(fis);
-		return bis;
+		return null;
 	}
 
 	/**
@@ -1421,20 +1433,20 @@ public class FileUtil
 		if (file == null)
 			return null;
 
-		if (!append || !file.exists())
-			createNewFile(file);
-
-		FileOutputStream fos;
-		try
+		for (int i = 1; i < 3; i++)
 		{
-			fos = new FileOutputStream(file, append);
+			try
+			{
+				createFile(file);
+				final FileOutputStream fos = new FileOutputStream(file, append);
+				return new BufferedOutputStream(fos);
+			}
+			catch (final Exception x)
+			{
+				ThreadUtil.sleep(i * 42);
+			}
 		}
-		catch (final FileNotFoundException x)
-		{
-			return null;
-		}
-		final BufferedOutputStream bos = new BufferedOutputStream(fos);
-		return bos;
+		return null;
 	}
 
 	/**

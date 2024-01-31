@@ -202,6 +202,8 @@ public class FileUtilTest extends JDFTestCaseBase
 		final BufferedInputStream bufferedInputStream = FileUtil.getBufferedInputStream(file);
 		assertNotNull(bufferedInputStream);
 		StreamUtil.close(bufferedInputStream);
+		assertNull(FileUtil.getBufferedInputStream(null));
+		assertNull(FileUtil.getBufferedInputStream(new File("")));
 	}
 
 	/**
@@ -521,6 +523,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertTrue(FileUtil.createNewFile(f));
 		assertTrue(FileUtil.createNewFile(f));
 		assertFalse(FileUtil.createNewFile(null));
+		assertFalse(FileUtil.createNewFile(new File(" /a")));
 		f.delete();
 	}
 
