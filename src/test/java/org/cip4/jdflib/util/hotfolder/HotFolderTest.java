@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -204,7 +204,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			hotfolders[i] = new HotFolder(singleHF, null, new MyListener(true));
 		}
 		assertTrue(Thread.activeCount() - n0 < 17, "Loop ");
-		for (HotFolder hotfolder : hotfolders)
+		for (final HotFolder hotfolder : hotfolders)
 		{
 			for (int j = 0; j < 10; j++)
 			{
@@ -216,7 +216,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		{
 			int n = 0;
 			ThreadUtil.sleep(100);
-			for (HotFolder hotfolder : hotfolders)
+			for (final HotFolder hotfolder : hotfolders)
 			{
 				for (int j = 0; j < 10; j++)
 				{
@@ -252,7 +252,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			hotfolders[i].setMaxCheck(10);
 		}
 		assertTrue(Thread.activeCount() - n0 < 17, "Loop ");
-		for (HotFolder hotfolder : hotfolders)
+		for (final HotFolder hotfolder : hotfolders)
 		{
 			for (int j = 0; j < 100; j++)
 			{
@@ -264,7 +264,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		{
 			int n = 0;
 			ThreadUtil.sleep(100);
-			for (HotFolder hotfolder : hotfolders)
+			for (final HotFolder hotfolder : hotfolders)
 			{
 				for (int j = 0; j < 100; j++)
 				{
@@ -612,7 +612,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		final FileOutputStream fos = new FileOutputStream(file, true);
 		for (int i = 0; i < 20; i++)
 		{
-			ThreadUtil.sleep(10);
+			ThreadUtil.sleep(1);
 			for (int j = 0; j < 200; j++)
 			{// incrementally fill file
 				fos.write(i);
@@ -649,7 +649,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		final FileOutputStream fos2 = new FileOutputStream(file2);
 		for (int i = 0; i < 20; i++) // incrementally fill file
 		{
-			ThreadUtil.sleep(2);
+			ThreadUtil.sleep(1);
 			for (int j = 0; j < 200; j++)
 			{
 				// incrementally fill file
