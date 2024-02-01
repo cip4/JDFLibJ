@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.Locale;
+
 import org.cip4.jdflib.core.JDFConstants;
 
 /**
@@ -88,6 +90,9 @@ public class NumberFormatter
 		zapp0 = true;
 	}
 
+	private final static String many0 = "000000000000000000000000000000000000000000000000000000";
+	private final static String manyMinus = "-000000000000000000000000000000000000000000000000000000";
+
 	/**
 	 * if set, remove trailing 0
 	 *
@@ -105,19 +110,21 @@ public class NumberFormatter
 	 * If precision=0, the . is stripped
 	 *
 	 * @param i the integer to format
-	 * @param length maximum precision, depending on value of zapp0, leading 0s are discarded or kept
+	 * @param length total length of including leading zeros
 	 * @return the formatted string that represents the integer
 	 */
 	public String formatInt(final int i, final int length)
 	{
-		String s;
+		String s = Integer.toString(length > 0 && i < 0 ? -i : i);
+
 		if (length > 0)
 		{
-			s = String.format("%0" + length + "d", i);
-		}
-		else
-		{
-			s = String.format("%d", i);
+			final int l0 = s.length();
+			if (l0 < length)
+			{
+				final String z = i < 0 ? manyMinus : many0;
+				s = z.substring(0, length - l0) + s;
+			}
 		}
 		return s;
 	}
@@ -145,7 +152,7 @@ public class NumberFormatter
 		{
 			if (precision > 0)
 			{
-				String ss = String.format("%." + precision + "f", d);
+				String ss = String.format(Locale.US, "%." + precision + "f", d);
 				ss = zappTrailing(ss);
 				if ("NaN".equals(ss))
 				{

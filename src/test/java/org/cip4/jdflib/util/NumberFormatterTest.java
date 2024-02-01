@@ -130,6 +130,11 @@ public class NumberFormatterTest extends JDFTestCaseBase
 		assertEquals("3", numberFormatter.formatInt(3, 0));
 		assertEquals("3", numberFormatter.formatInt(3, 1));
 		assertEquals("03", numberFormatter.formatInt(3, 2));
+		assertEquals("007", numberFormatter.formatInt(7, 3));
+		assertEquals("-3", numberFormatter.formatInt(-3, 2));
+		assertEquals("-03", numberFormatter.formatInt(-3, 3));
+		assertEquals("-007", numberFormatter.formatInt(-7, 4));
+		assertEquals("-3", numberFormatter.formatInt(-3, 0));
 	}
 
 	/**
@@ -144,4 +149,5 @@ public class NumberFormatterTest extends JDFTestCaseBase
 		final double d = Double.NaN;
 		assertEquals(null, numberFormatter.formatDouble(d));
 	}
+
 }
