@@ -477,17 +477,23 @@ public class JDFIntegerRange extends JDFRange
 
 	/**
 	 * getElementCount - returns the number of elements in this range, on the C++ side of the JDF library this method is called NElements if any if any range cannot be resolved due
-	 * to an unknown negative value without a known default, -1 is returned
+	 * to an unknown negative value without a known default or a negative value > default, -1 is returned
 	 *
 	 * @return int - the number of elements in this range, -1 if any range cannot be resolved
 	 */
 	public int getElementCount()
 	{
-		if (m_defaultXDef == 0 && (getRight() < 0 && getLeft() >= 0 || getLeft() < 0 && getRight() >= 0))
+		final int right = getRight();
+		final int left = getLeft();
+		if (m_xDef == 0 && (right < 0 && left >= 0 || left < 0 && right >= 0))
 		{
 			return -1;
 		}
-		return 1 + Math.abs(this.getLeft() - this.getRight());
+		else if (m_xDef != 0 && (left < 0 || right < 0))
+		{
+			return -1;
+		}
+		return 1 + Math.abs(left - right);
 	}
 
 	/**

@@ -231,6 +231,23 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws Exception
+	 *
+	 *
+	 */
+	@Test
+	public void testgetElementCountBad() throws Exception
+	{
+		JDFIntegerRange integerRange = JDFIntegerRange.getIntegerRange("1 ~ 4");
+		integerRange.setDef(2);
+		assertEquals(4, integerRange.getElementCount());
+
+		integerRange = JDFIntegerRange.getIntegerRange("-4");
+		integerRange.setDef(2);
+		assertEquals(-1, integerRange.getElementCount());
+	}
+
+	/**
 	 *
 	 */
 	@Test
