@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -108,6 +108,42 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		h.setIdentifier(ni);
 		assertEquals(ni, h.getIdentifier());
 		assertEquals("j2", h.getJobID());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testsetExternal()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p1");
+		h.setExternalID("ex");
+		assertEquals("ex", h.getNodeInfo().getExternalID());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testsetGeneralID()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p1");
+		h.setGeneralID("j", "ex");
+		assertEquals("ex", h.getGeneralID("j"));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testsetDesc()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p1");
+		h.setDescriptiveName("ex");
+		assertEquals("ex", h.getDescriptiveName());
 	}
 
 	/**
@@ -639,8 +675,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		FileUtil.deleteAll(new File(foo));
 		theHelper.writeToDir(foo);
 		final String fileName = foo + "/jID.jpID.xjdf";
-		final XMLDoc parsed = XMLDoc.parseFile(fileName);
-		assertNotNull(parsed);
+		final XJDFHelper parsed = XJDFHelper.parseFile(fileName);
+		assertEquals("jID", parsed.getJobID());
 	}
 
 	/**

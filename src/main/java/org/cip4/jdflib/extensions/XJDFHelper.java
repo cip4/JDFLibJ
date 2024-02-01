@@ -328,6 +328,15 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
+	 *
+	 * @return
+	 */
+	public SetHelper getCreateNodeInfo()
+	{
+		return getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
+	}
+
+	/**
 	 * @param id
 	 * @return the parameterset and resourceset with a child partiton with ID=iD
 	 */
@@ -1271,7 +1280,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	@Override
 	public void setExternalID(final String newID)
 	{
-		super.setExternalID(newID);
+		getCreateNodeInfo().setExternalID(newID);
 	}
 
 	/**
@@ -1281,15 +1290,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	public void setDescriptiveName(final String description)
 	{
 		super.setDescriptiveName(description);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setGeneralID(java.lang.String, java.lang.String)
-	 */
-	@Override
-	public void setGeneralID(final String idUsage, final String idValue)
-	{
-		super.setGeneralID(idUsage, idValue);
 	}
 
 	@Override
@@ -1308,6 +1308,15 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 			setParts(ni.getPartMapVector());
 		}
 
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setGeneralID(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void setGeneralID(final String idUsage, final String idValue)
+	{
+		super.setGeneralID(idUsage, idValue);
 	}
 
 }
