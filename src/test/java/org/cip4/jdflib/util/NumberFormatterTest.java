@@ -138,6 +138,8 @@ public class NumberFormatterTest extends JDFTestCaseBase
 		assertEquals("-3", numberFormatter.formatInt(-3, 1));
 		assertEquals("-42", numberFormatter.formatInt(-42, 2));
 		assertEquals("-42", numberFormatter.formatInt(-42, 1));
+		assertEquals("0", numberFormatter.formatInt(0, 0));
+		assertEquals("0000", numberFormatter.formatInt(0, 4));
 	}
 
 	/**
@@ -151,21 +153,32 @@ public class NumberFormatterTest extends JDFTestCaseBase
 		long t0 = System.currentTimeMillis();
 		for (int i = -1000000; i < 1000000; i++)
 		{
-			new NumberFormatter().formatInt(i, 0);
+			final String s = new NumberFormatter().formatInt(i, 0);
+			assertEquals(i, StringUtil.parseInt(s, 42));
 		}
 		long t1 = System.currentTimeMillis();
 		log.info("" + (t1 - t0));
 		t0 = System.currentTimeMillis();
 		for (int i = -1000000; i < 1000000; i++)
 		{
-			numberFormatter.formatInt(i, 0);
+			final String s = numberFormatter.formatInt(i, 0);
+			assertEquals(i, StringUtil.parseInt(s, 42));
 		}
 		t1 = System.currentTimeMillis();
 		log.info("" + (t1 - t0));
 		t0 = System.currentTimeMillis();
-		for (int i = -1000000; i < 1000000; i++)
+		for (int i = -10000; i < 10000; i++)
 		{
-			numberFormatter.formatDouble(i, 5);
+			final String s = numberFormatter.formatDouble(i, 5);
+			assertEquals(i, StringUtil.parseDouble(s, 42), 0.001);
+		}
+		t1 = System.currentTimeMillis();
+		log.info("" + (t1 - t0));
+		t0 = System.currentTimeMillis();
+		for (int i = -10000; i < 10000; i++)
+		{
+			final String s = numberFormatter.formatDouble(i * Math.PI, 5);
+			assertEquals(i * Math.PI, StringUtil.parseDouble(s, 42), 0.001);
 		}
 		t1 = System.currentTimeMillis();
 		log.info("" + (t1 - t0));

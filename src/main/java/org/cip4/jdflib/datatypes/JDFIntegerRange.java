@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -104,7 +104,7 @@ public class JDFIntegerRange extends JDFRange
 	 * @param s the string to parse
 	 * @return the JDFIntegerRange, null if s is not compatible
 	 */
-	public static JDFIntegerRange createIntegerRange(String s)
+	public static JDFIntegerRange createIntegerRange(final String s)
 	{
 		if (s != null && s.length() > 0)
 		{
@@ -112,7 +112,7 @@ public class JDFIntegerRange extends JDFRange
 			{
 				return new JDFIntegerRange(s);
 			}
-			catch (DataFormatException x)
+			catch (final DataFormatException x)
 			{
 				return null;
 			}
@@ -130,13 +130,13 @@ public class JDFIntegerRange extends JDFRange
 	 * @param range
 	 * @return
 	 */
-	public static JDFIntegerRange getIntegerRange(String range)
+	public static JDFIntegerRange getIntegerRange(final String range)
 	{
 		try
 		{
 			return new JDFIntegerRange(range);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			return null;
 		}
@@ -483,7 +483,7 @@ public class JDFIntegerRange extends JDFRange
 	 */
 	public int getElementCount()
 	{
-		if (m_defaultXDef == 0 && (getRight() < 0 || getLeft() < 0))
+		if (m_defaultXDef == 0 && (getRight() < 0 && getLeft() >= 0 || getLeft() < 0 && getRight() >= 0))
 		{
 			return -1;
 		}
@@ -640,7 +640,9 @@ public class JDFIntegerRange extends JDFRange
 		final int elementCount = getElementCount();
 		for (int i = 0; i < elementCount; i++)
 		{
-			irl.add(getElement(i));
+			final int ii = getElement(i);
+			if (ii >= 0)
+				irl.add(ii);
 		}
 		return irl;
 
@@ -665,13 +667,13 @@ public class JDFIntegerRange extends JDFRange
 	}
 
 	@Override
-	public String getRightString(int precision)
+	public String getRightString(final int precision)
 	{
 		return StringUtil.formatInteger(getRight());
 	}
 
 	@Override
-	public String getLeftString(int precision)
+	public String getLeftString(final int precision)
 	{
 		return StringUtil.formatInteger(getLeft());
 	}

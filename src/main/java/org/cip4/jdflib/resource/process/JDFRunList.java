@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -372,7 +372,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first index of the first page in the file - Sets the RunList FirstPage attribute
 	 * @param n the number of logical pages in this run
 	 * @param pageMajor if true, separations are ordered as page Major, i.e CMYKCMYK<br>
-	 *            if false, ordering is CCMMYYKK
+	 *        if false, ordering is CCMMYYKK
 	 *
 	 * @return JDFRunList
 	 */
@@ -1708,12 +1708,20 @@ public class JDFRunList extends JDFAutoRunList
 		{
 			irl = new JDFIntegerRangeList(new JDFIntegerRange(0, -1));
 		}
-		final int nPage = super.getNPage();
+		int nPage = getFileSpecNPage();
+		if (nPage == 0)
+			nPage = super.getNPage();
 		if (nPage > 0)
 		{
 			irl.setDef(nPage);
 		}
 		return irl;
+	}
+
+	public int getFileSpecNPage()
+	{
+		final JDFFileSpec fs = getFileSpec();
+		return fs == null ? 0 : fs.getNPage();
 	}
 
 	/**

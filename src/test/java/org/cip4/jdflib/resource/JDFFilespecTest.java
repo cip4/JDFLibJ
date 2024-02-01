@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -114,7 +114,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	@Test
 	public void testURLInput()
 	{
-		JDFFileSpec fs = (JDFFileSpec) JDFElement.createRoot(ElementName.FILESPEC);
+		final JDFFileSpec fs = (JDFFileSpec) JDFElement.createRoot(ElementName.FILESPEC);
 		assertNull(fs.getURLInputStream());
 	}
 
@@ -130,6 +130,19 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		assertEquals(-1l, fs.getFileSizeLong());
 		fs.setFileSize(42);
 		assertEquals(42l, fs.getFileSizeLong());
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testSetNPage()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, null, EnumUsage.Input, null, null, null, null);
+		assertEquals(0, fs.getNPage());
+		fs.setNPage(42);
+		assertEquals(42, fs.getNPage());
 	}
 
 	/**

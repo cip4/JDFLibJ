@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -216,11 +216,29 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetCount()
+	{
+		JDFIntegerRange integerRange = JDFIntegerRange.getIntegerRange("8~22");
+		assertEquals(15, integerRange.getElementCount());
+		integerRange = JDFIntegerRange.getIntegerRange("-1 ~ -1");
+		assertEquals(1, integerRange.getElementCount());
+		integerRange = JDFIntegerRange.getIntegerRange("-1 ~ -4");
+		assertEquals(4, integerRange.getElementCount());
+		integerRange = JDFIntegerRange.getIntegerRange("8~-1");
+		assertEquals(-1, integerRange.getElementCount());
+		integerRange.setDef(10);
+		assertEquals(2, integerRange.getElementCount());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetIntegerList()
 	{
 		JDFIntegerRange range = new JDFIntegerRange(0, -1, 0);
 		JDFIntegerList il = range.getIntegerList();
-		assertEquals(il.size(), 0);
+		assertEquals(0, il.size());
 
 		range = new JDFIntegerRange(0);
 		il = range.getIntegerList();
@@ -234,5 +252,17 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
 		range.setDef(20000);
 		il = range.getIntegerList();
 		assertEquals(il.size(), 20000);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetIntegerListNeg()
+	{
+		final JDFIntegerRange range = new JDFIntegerRange(-4, -1, 0);
+		final JDFIntegerList il = range.getIntegerList();
+		assertEquals(0, il.size());
+
 	}
 }
