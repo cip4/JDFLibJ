@@ -430,7 +430,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * TODO Please insert comment!
+	 * 
 	 * 
 	 * @throws Exception
 	 */

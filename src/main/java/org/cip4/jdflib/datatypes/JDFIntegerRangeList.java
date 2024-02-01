@@ -50,11 +50,11 @@ package org.cip4.jdflib.datatypes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
-import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.StringArray;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -369,7 +369,7 @@ public class JDFIntegerRangeList extends JDFRangeList
 		/**
 		 * only the last range list element, because its append
 		 */
-		if (rangeList != null && rangeList.size() > 0)
+		if (!ContainerUtil.isEmpty(rangeList))
 		{
 			final JDFIntegerRange r = (JDFIntegerRange) rangeList.get(rangeList.size() - 1);
 
@@ -378,7 +378,7 @@ public class JDFIntegerRangeList extends JDFRangeList
 				return;
 			}
 		}
-		this.append(new JDFIntegerRange(x, x, m_xDef));
+		append(new JDFIntegerRange(x, x, m_xDef));
 	}
 
 	/**
@@ -436,28 +436,28 @@ public class JDFIntegerRangeList extends JDFRangeList
 		if (siz == 0)
 			return false; // attempt to operate on a null element
 
-		final Vector<Integer> v = new Vector<>(); // vector of ranges
+		final ArrayList<Integer> test = new ArrayList<>(); // vector of ranges
 		for (int i = 0; i < siz; i++)
 		{
 			final JDFIntegerRange r = (JDFIntegerRange) rangeList.get(i);
-			v.addElement(Integer.valueOf(r.getLeft()));
+			test.add(Integer.valueOf(r.getLeft()));
 			if (r.getLeft() != r.getRight())
 			{
-				v.addElement(Integer.valueOf(r.getRight()));
+				test.add(Integer.valueOf(r.getRight()));
 			}
 		}
 
-		final int n = v.size() - 1;
+		final int n = test.size() - 1;
 		if (n == 0)
 			return true; // single value
 
-		final int first = (v.elementAt(0)).intValue();
-		final int last = (v.elementAt(n)).intValue();
+		final int first = (test.get(0)).intValue();
+		final int last = (test.get(n)).intValue();
 
 		for (int j = 0; j < n; j++)
 		{
-			final int value = (v.elementAt(j)).intValue();
-			final int nextvalue = (v.elementAt(j + 1)).intValue();
+			final int value = (test.get(j)).intValue();
+			final int nextvalue = (test.get(j + 1)).intValue();
 
 			if (((first == last && value == nextvalue) || (first < last && value <= nextvalue) || (first > last && value >= nextvalue)) == false)
 				return false;
@@ -480,24 +480,24 @@ public class JDFIntegerRangeList extends JDFRangeList
 			return false; // attempt to operate on a null element
 		}
 
-		final Vector<Integer> v = new Vector<>(); // vector of ranges
+		final ArrayList<Integer> a = new ArrayList<>(); // vector of ranges
 		for (int i = 0; i < siz; i++)
 		{
 			final JDFIntegerRange r = (JDFIntegerRange) rangeList.get(i);
-			v.addElement(Integer.valueOf(r.getLeft()));
+			a.add(Integer.valueOf(r.getLeft()));
 			if (!Integer.valueOf(r.getLeft()).equals(Integer.valueOf(r.getRight())))
 			{
-				v.addElement(Integer.valueOf(r.getRight()));
+				a.add(Integer.valueOf(r.getRight()));
 			}
 		}
 
-		final int n = v.size() - 1;
+		final int n = a.size() - 1;
 		if (n == 0)
 		{
 			return true; // single value
 		}
-		final int first = (v.elementAt(0)).intValue();
-		final int last = (v.elementAt(n)).intValue();
+		final int first = (a.get(0)).intValue();
+		final int last = (a.get(n)).intValue();
 
 		if (first == last)
 		{
@@ -505,8 +505,8 @@ public class JDFIntegerRangeList extends JDFRangeList
 		}
 		for (int j = 0; j < n; j++)
 		{
-			final int value = (v.elementAt(j)).intValue();
-			final int nextvalue = (v.elementAt(j + 1)).intValue();
+			final int value = (a.get(j)).intValue();
+			final int nextvalue = (a.get(j + 1)).intValue();
 
 			if (((first < last && value < nextvalue) || (first > last && value < nextvalue)) == false)
 				return false;
@@ -530,10 +530,10 @@ public class JDFIntegerRangeList extends JDFRangeList
 	 * isOverlapping
 	 *
 	 * @param newRange the range to check, if is overlapping one of the ranges in the list
-	 *            <p>
-	 *            x: x.upper < y.lower,<br>
-	 *            z: z.lower > y.upper,<br>
-	 *            one of these situation, means there is no overlapping
+	 *        <p>
+	 *        x: x.upper < y.lower,<br>
+	 *        z: z.lower > y.upper,<br>
+	 *        one of these situation, means there is no overlapping
 	 *
 	 * @param newRange
 	 * @param oldRange the JDFRangeList removed from the RangeList, before check for overlap. If null, the oldRange is ignored
