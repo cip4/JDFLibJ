@@ -79,7 +79,7 @@ import org.cip4.jdflib.core.JDFConstants;
  */
 public class NumberFormatter
 {
-	static private int defaultPrecision = 8;
+	static private final int defaultPrecision = 8;
 
 	/**
 	 * set up the defaults
@@ -106,8 +106,8 @@ public class NumberFormatter
 	private boolean zapp0;
 
 	/**
-	 * returns a formatted double. Truncates to exactly precision digits after the "." <br>
-	 * If precision=0, the . is stripped
+	 * returns a formatted integer with length digits<br>
+	 * 
 	 *
 	 * @param i the integer to format
 	 * @param length total length of including leading zeros
@@ -124,6 +124,10 @@ public class NumberFormatter
 			{
 				final String z = i < 0 ? manyMinus : many0;
 				s = z.substring(0, length - l0) + s;
+			}
+			else if (i < 0)
+			{
+				s = '-' + s;
 			}
 		}
 		return s;

@@ -135,6 +135,41 @@ public class NumberFormatterTest extends JDFTestCaseBase
 		assertEquals("-03", numberFormatter.formatInt(-3, 3));
 		assertEquals("-007", numberFormatter.formatInt(-7, 4));
 		assertEquals("-3", numberFormatter.formatInt(-3, 0));
+		assertEquals("-3", numberFormatter.formatInt(-3, 1));
+		assertEquals("-42", numberFormatter.formatInt(-42, 2));
+		assertEquals("-42", numberFormatter.formatInt(-42, 1));
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testFormatIntPerf()
+	{
+		final NumberFormatter numberFormatter = new NumberFormatter();
+		long t0 = System.currentTimeMillis();
+		for (int i = -1000000; i < 1000000; i++)
+		{
+			new NumberFormatter().formatInt(i, 0);
+		}
+		long t1 = System.currentTimeMillis();
+		log.info("" + (t1 - t0));
+		t0 = System.currentTimeMillis();
+		for (int i = -1000000; i < 1000000; i++)
+		{
+			numberFormatter.formatInt(i, 0);
+		}
+		t1 = System.currentTimeMillis();
+		log.info("" + (t1 - t0));
+		t0 = System.currentTimeMillis();
+		for (int i = -1000000; i < 1000000; i++)
+		{
+			numberFormatter.formatDouble(i, 5);
+		}
+		t1 = System.currentTimeMillis();
+		log.info("" + (t1 - t0));
+
 	}
 
 	/**
