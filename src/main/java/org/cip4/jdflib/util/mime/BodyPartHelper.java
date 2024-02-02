@@ -202,7 +202,7 @@ public class BodyPartHelper
 		if (s == null)
 		{
 			final int index = getIndex();
-			s = StringUtil.sprintf("part_%04d.txt", "" + index);
+			s = String.format("part_%04d.txt", index);
 		}
 
 		return s;

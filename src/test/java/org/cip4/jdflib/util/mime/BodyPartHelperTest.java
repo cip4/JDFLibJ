@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,11 +39,14 @@
 
 package org.cip4.jdflib.util.mime;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.ByteArrayInputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class BodyPartHelperTest extends JDFTestCaseBase
@@ -53,7 +56,7 @@ public class BodyPartHelperTest extends JDFTestCaseBase
 	public void testSetContent()
 	{
 		final BodyPartHelper h = new BodyPartHelper();
-		Assertions.assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
+		assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
 	}
 
 	@Test
@@ -61,7 +64,7 @@ public class BodyPartHelperTest extends JDFTestCaseBase
 	{
 		final BodyPartHelper h = new BodyPartHelper();
 		h.setHeader("a", "b");
-		Assertions.assertEquals("b", h.getHeaderMap().get("a"));
+		assertEquals("b", h.getHeaderMap().get("a"));
 	}
 
 	@Test
@@ -69,10 +72,10 @@ public class BodyPartHelperTest extends JDFTestCaseBase
 	{
 		final BodyPartHelper h = new BodyPartHelper();
 		h.setHeader("a", "b");
-		Assertions.assertFalse(h.matchesKey(null, null));
-		Assertions.assertFalse(h.matchesKey(null, "b"));
-		Assertions.assertFalse(h.matchesKey("a", "bb"));
-		Assertions.assertTrue(h.matchesKey("a", "b"));
+		assertFalse(h.matchesKey(null, null));
+		assertFalse(h.matchesKey(null, "b"));
+		assertFalse(h.matchesKey("a", "bb"));
+		assertTrue(h.matchesKey("a", "b"));
 	}
 
 	@Test
@@ -81,36 +84,44 @@ public class BodyPartHelperTest extends JDFTestCaseBase
 		final BodyPartHelper h = new BodyPartHelper();
 		h.setHeader("a", "b");
 		h.setFileName("a.b");
-		Assertions.assertFalse(h.matchesFileName(null));
-		Assertions.assertFalse(h.matchesFileName("b"));
-		Assertions.assertFalse(h.matchesFileName("a.bb"));
-		Assertions.assertTrue(h.matchesFileName("a.b"));
+		assertFalse(h.matchesFileName(null));
+		assertFalse(h.matchesFileName("b"));
+		assertFalse(h.matchesFileName("a.bb"));
+		assertTrue(h.matchesFileName("a.b"));
 	}
 
 	@Test
 	public void testSetContent2()
 	{
 		final BodyPartHelper h = new BodyPartHelper();
-		Assertions.assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
-		Assertions.assertEquals(UrlUtil.TEXT_PLAIN, h.getContentType());
+		assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
+		assertEquals(UrlUtil.TEXT_PLAIN, h.getContentType());
 	}
 
 	@Test
 	public void testGetContentType()
 	{
 		final BodyPartHelper h = new BodyPartHelper();
-		Assertions.assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
+		assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
 		h.setFileName("a.txt");
-		Assertions.assertEquals(UrlUtil.TEXT_PLAIN, h.getContentType());
+		assertEquals(UrlUtil.TEXT_PLAIN, h.getContentType());
 	}
 
 	@Test
 	public void testGetFileName()
 	{
 		final BodyPartHelper h = new BodyPartHelper();
-		Assertions.assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
+		assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
+		assertEquals("a.txt", h.getFileName());
+	}
+
+	@Test
+	public void testGetFileName2()
+	{
+		final BodyPartHelper h = new BodyPartHelper();
+		assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
 		h.setFileName("a.txt");
-		Assertions.assertEquals("a.txt", h.getFileName());
+		assertEquals("a.txt", h.getFileName());
 	}
 
 }
