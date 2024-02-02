@@ -112,7 +112,7 @@ public class BodyPartHelperTest extends JDFTestCaseBase
 	{
 		final BodyPartHelper h = new BodyPartHelper();
 		assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
-		assertEquals("a.txt", h.getFileName());
+		assertEquals("part_0000.txt", h.getFileName());
 	}
 
 	@Test
