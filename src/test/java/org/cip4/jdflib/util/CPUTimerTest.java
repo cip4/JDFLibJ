@@ -50,7 +50,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.CPUTimer.CPUTimerFactory;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -61,15 +60,13 @@ import org.junit.jupiter.api.Test;
 public class CPUTimerTest extends JDFTestCaseBase
 {
 
-	CPUTimer t;
-	CPUTimerFactory fac;
-
 	/**
 	 *
 	 */
 	@Test
 	public void testCPUTime()
 	{
+		final CPUTimer t = new CPUTimer(false);
 		t.start();
 		for (int i = 0; i < 100000000; i++)
 		{
@@ -88,6 +85,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	@Test
 	public void testToXML()
 	{
+		final CPUTimer t = new CPUTimer(false);
 		t.start();
 		for (int i = 0; i < 100000; i++)
 		{
@@ -106,6 +104,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	@Test
 	public void testGetSummary() throws InterruptedException
 	{
+		final CPUTimer t = new CPUTimer(false);
 		t.start();
 		assertNotNull(t.getSingleSummary());
 		t.stop();
@@ -121,6 +120,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	public void testStartStop()
 	{
 		int i = 0;
+		final CPUTimer t = new CPUTimer(false);
 		for (i = 1; i < 1000; i++)
 		{
 			t.start();
@@ -143,6 +143,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	@Test
 	public void testGetCurrentTimer()
 	{
+		final CPUTimerFactory fac = CPUTimer.getFactory();
 		CPUTimer ct0 = fac.getCurrentTimer(null);
 		assertNull(ct0);
 		ct0 = fac.getCreateCurrentTimer(null);
@@ -158,6 +159,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	@Test
 	public void testGetFactory()
 	{
+		final CPUTimerFactory fac = CPUTimer.getFactory();
 		assertNotNull(CPUTimer.getFactory());
 		assertEquals(fac, CPUTimer.getFactory());
 	}
@@ -171,6 +173,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 		long l = 0;
 		long lCPU = 0;
 		int ii;
+		final CPUTimer t = new CPUTimer(false);
 		for (ii = 1; ii < 142; ii++)
 		{
 			final CPUTimer t1 = new CPUTimer(true);
@@ -198,6 +201,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	@Test
 	public void testAverage()
 	{
+		final CPUTimer t = new CPUTimer(false);
 		assertEquals(0, t.getAverageRealTime());
 		assertEquals(0, t.getAverageCPUTime());
 		assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime());
@@ -217,29 +221,6 @@ public class CPUTimerTest extends JDFTestCaseBase
 		assertTrue(t.getTotalCPUTime() > 0);
 		assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime(), t.getAverageCPUTime() / i);
 		assertEquals(t.getTotalRealTime(), t.getAverageRealTime(), t.getAverageRealTime() / i);
-	}
-
-	/**
-	 * @see JDFTestCaseBase#setUp()
-	 * @throws Exception
-	 */
-	@Override
-	@BeforeEach
-	public void setUp() throws Exception
-	{
-		super.setUp();
-		t = new CPUTimer(false);
-		fac = CPUTimer.getFactory();
-	}
-
-	/**
-	 * @see JDFTestCaseBase#toString()
-	 * @return
-	 */
-	@Override
-	public String toString()
-	{
-		return super.toString() + " " + t;
 	}
 
 }
