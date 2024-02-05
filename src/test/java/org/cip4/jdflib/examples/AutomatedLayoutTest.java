@@ -128,7 +128,7 @@ public class AutomatedLayoutTest extends ExampleTest
 		stripParams.getParentNode_KElement().appendXMLComment("Simple automated StrippingParams with exactly one sheet class\n", stripParams);
 		final JDFStrippingParams stripSheet = (JDFStrippingParams) stripParams.addPartition(EnumPartIDKey.SheetName, "Sheets");
 		stripSheet.setAttribute(AttributeName.AUTOMATED, true, null);
-		final String format = "Sheet%02i";
+		final String format = "Sheet%02d";
 		stripSheet.setAttribute("NameFormat", format);
 		stripSheet.setAttribute("NameTemplate", "SheetNum");
 		stripSheet.appendBinderySignature().setNumberUp(new JDFXYPair(2, 2));
@@ -504,7 +504,7 @@ public class AutomatedLayoutTest extends ExampleTest
 		stripParams.getParentNode_KElement().appendXMLComment("Simple automated StrippingParams for the cut&stack example layout\n", stripParams);
 		final JDFStrippingParams stripSheet = (JDFStrippingParams) stripParams.addPartition(EnumPartIDKey.SheetName, "Sheets");
 		stripSheet.setAttribute(AttributeName.AUTOMATED, true, null);
-		final String format = "Sheet%02i";
+		final String format = "Sheet%02d";
 		stripSheet.setAttribute("NameFormat", format);
 		stripSheet.setAttribute("NameTemplate", "SheetNum");
 		final JDFStrippingParams stripStack0 = (JDFStrippingParams) stripSheet.addPartition(EnumPartIDKey.BinderySignatureName, "Stack0");

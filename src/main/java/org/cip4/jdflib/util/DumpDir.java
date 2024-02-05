@@ -155,7 +155,7 @@ public class DumpDir
 			log.info("jmf dump service " + baseDir + " - " + inc + " " + new JDFDate().getDateTime());
 		}
 
-		final String s = ext == null ? StringUtil.sprintf("m%08i.tmp", "" + inc) : StringUtil.sprintf("m%08d.%s.tmp", "" + inc + "," + ext);
+		final String s = ext == null ? String.format("m%08d.tmp", inc) : StringUtil.sprintf("m%08d.%s.tmp", "" + inc + "," + ext);
 		final File f = FileUtil.getFileInDirectory(baseDir, new File(s));
 		if (header != null)
 		{
