@@ -40,6 +40,7 @@
 package org.cip4.jdflib.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
@@ -155,9 +156,21 @@ public class DumpDirTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public void testNewFile() throws Exception
+	{
+		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir4");
+		final DumpDir dumpDir = new DumpDir(theDir);
+		assertNotNull(dumpDir.newFile(null, "ext"));
+		assertNotNull(dumpDir.newFile("header", "ext"));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	public void testCleanup() throws Exception
 	{
-		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir");
+		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir3");
 		final DumpDir dumpDir = new DumpDir(theDir);
 		final ByteArrayIOStream bis = new ByteArrayIOStream();
 		for (int i = 1; i < 10; i++)

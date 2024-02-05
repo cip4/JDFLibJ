@@ -156,14 +156,14 @@ public class DumpDir
 		}
 
 		final String s = ext == null ? String.format("m%08d.tmp", inc) : StringUtil.sprintf("m%08d.%s.tmp", "" + inc + "," + ext);
-		final File f = FileUtil.getFileInDirectory(baseDir, new File(s));
+		final File newFile = FileUtil.getFileInDirectory(baseDir, new File(s));
 		if (header != null)
 		{
-			newHeader(header, f, true);
+			newHeader(header, newFile, true);
 		}
 
 		cleanup(inc);
-		return f;
+		return newFile;
 	}
 
 	/**
