@@ -285,7 +285,7 @@ public class WalkJDFElement extends WalkElement
 	{
 		final JDFNode rlParent = (rl instanceof JDFNode) ? (JDFNode) rl : rl.getParentJDF();
 		final String parentID = getXJDFProductID(rlParent);
-		final KElement product = new XJDFHelper(xjdf).getCreateProduct(parentID, parentID).getProduct();
+		final KElement product = new XJDFHelper(xjdf).getCreateProduct(parentID, null).getProduct();
 		if (jdfToXJDF.isRetainAll())
 		{
 			product.copyAttribute(AttributeName.JOBPARTID, rlParent);

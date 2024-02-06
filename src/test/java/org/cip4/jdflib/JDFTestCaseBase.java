@@ -243,7 +243,7 @@ public abstract class JDFTestCaseBase
 		n.setType("ConventionalPrinting", true);
 		n.appendElement("NS:Foobar", "www.foobar.com");
 
-		JDFLayout lo = (JDFLayout) n.appendMatchingResource("Layout", JDFNode.EnumProcessUsage.AnyInput, null);
+		final JDFLayout lo = (JDFLayout) n.appendMatchingResource("Layout", JDFNode.EnumProcessUsage.AnyInput, null);
 		lo.setPartUsage(EnumPartUsage.Explicit);
 		final JDFComponent comp = (JDFComponent) n.appendMatchingResource(ElementName.COMPONENT, JDFNode.EnumProcessUsage.AnyOutput, null);
 		final JDFExposedMedia xm = (JDFExposedMedia) n.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.Plate, null);
@@ -553,7 +553,7 @@ public abstract class JDFTestCaseBase
 	 * @param fileBase the filename without extension
 	 * @param version 21
 	 */
-	protected void writeRoundTrip(final JDFElement root, final String fileBase, final EnumVersion version, EnumValidationLevel level)
+	protected void writeRoundTrip(final JDFElement root, final String fileBase, final EnumVersion version, final EnumValidationLevel level)
 	{
 		final String tmpJDF = fileBase + ".jdf";
 		final String tmpJDFPath = sm_dirTestDataTemp + tmpJDF;
@@ -682,7 +682,7 @@ public abstract class JDFTestCaseBase
 			{
 				dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.jdf.xml", 2, false);
 			}
-			assertEquals(valResult, VALID);
+			assertEquals(VALID, valResult);
 		}
 		JDFParserFactory.getFactory().push(p);
 		return jxRoot;
