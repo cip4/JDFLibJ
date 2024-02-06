@@ -285,7 +285,7 @@ public class WalkJDFElement extends WalkElement
 	{
 		final JDFNode rlParent = (rl instanceof JDFNode) ? (JDFNode) rl : rl.getParentJDF();
 		final String parentID = getXJDFProductID(rlParent);
-		final KElement product = new XJDFHelper(xjdf).getCreateProduct(parentID).getProduct();
+		final KElement product = new XJDFHelper(xjdf).getCreateProduct(parentID, parentID).getProduct();
 		if (jdfToXJDF.isRetainAll())
 		{
 			product.copyAttribute(AttributeName.JOBPARTID, rlParent);
@@ -452,15 +452,15 @@ public class WalkJDFElement extends WalkElement
 
 	protected boolean checkAllLeaves(final JDFResource linkTarget)
 	{
-		boolean implicit = jdfToXJDF.wantImplicit() && EnumPartUsage.Implicit.equals(linkTarget.getPartUsage());
-		boolean isLayout = (linkTarget instanceof JDFLayout) || (linkTarget instanceof JDFStrippingParams);
+		final boolean implicit = jdfToXJDF.wantImplicit() && EnumPartUsage.Implicit.equals(linkTarget.getPartUsage());
+		final boolean isLayout = (linkTarget instanceof JDFLayout) || (linkTarget instanceof JDFStrippingParams);
 		return implicit && !(isLayout && ContainerUtil.contains(linkTarget.getPartIDKeyList(), AttributeName.SHEETNAME));
 	}
 
 	List<KElement> loopLeaves(final JDFElement rl, final String className, final KElement resourceSet, final int nLeaves, final VElement vRes)
 	{
 		final List<KElement> v = new ArrayList<>();
-		SetHelper setHelper = new SetHelper(resourceSet);
+		final SetHelper setHelper = new SetHelper(resourceSet);
 		int currentLeaves = nLeaves;
 		for (final KElement e : vRes)
 		{
@@ -498,7 +498,7 @@ public class WalkJDFElement extends WalkElement
 		if (jdfToXJDF.getResourceAlias().contains(resID) && (rl instanceof JDFRefElement))
 		{
 			// we don't want a new res for each refelement
-			String localName = rl.getParentNode_KElement().getLocalName();
+			final String localName = rl.getParentNode_KElement().getLocalName();
 			resID = localName + "_" + (localName.hashCode() % 100000);
 		}
 		return resID;
@@ -561,7 +561,7 @@ public class WalkJDFElement extends WalkElement
 		{
 			JDFAttributeMap map = r.getPartMap();
 			map = convertRanges(map, r);
-			ResourceHelper tmp = sh.getExactPartition(map);
+			final ResourceHelper tmp = sh.getExactPartition(map);
 			if (tmp != null)
 			{
 				return tmp.getRoot();

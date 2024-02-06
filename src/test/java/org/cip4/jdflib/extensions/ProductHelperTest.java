@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -120,12 +120,29 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final KElement product = productList.appendElement("Product");
 		final ProductHelper ph = new ProductHelper(product);
 		ph.setRoot();
-		SetHelper s1 = theHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input, null);
-		SetHelper s2 = theHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input, "Product");
-		assertEquals(s2, ph.getProductSet(ElementName.NODEINFO));
-		assertEquals(s2, ph.getNodeInfo());
-		s2.deleteNode();
+		final SetHelper s1 = theHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input, null);
 		assertEquals(s1, ph.getProductSet(ElementName.NODEINFO));
+		final SetHelper s3 = theHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input, XJDFConstants.EndCustomer);
+		assertEquals(s3, ph.getNodeInfo());
+		final SetHelper s2 = theHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input, "Product");
+		assertEquals(s2, ph.getProductSet(ElementName.NODEINFO));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetCreateProductResource()
+	{
+		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		final ProductHelper ph = theHelper.getCreateProduct(null, "x1");
+		ph.setRoot();
+		final ResourceHelper ci1 = ph.getCreateProductResource(ElementName.CUSTOMERINFO);
+		final SetHelper s1 = ph.getProductSet(ElementName.CUSTOMERINFO);
+		assertEquals(s1, ci1.getSet());
+		assertEquals(XJDFConstants.Product, s1.getProcessUsage());
+		assertEquals("x1", ci1.getPartKey(XJDFConstants.ExternalID));
 	}
 
 	/**
@@ -208,7 +225,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 		assertNull(ph.getDescriptiveName());
 		theHelper.setDescriptiveName("foo");
 		assertEquals("foo", ph.getDescriptiveName());
-		ProductHelper ph2 = new ProductHelper(KElement.createRoot("Product", null));
+		final ProductHelper ph2 = new ProductHelper(KElement.createRoot("Product", null));
 		assertNull(ph2.getDescriptiveName());
 		ph.setDescriptiveName("bar");
 		assertEquals("bar", ph.getDescriptiveName());
@@ -364,8 +381,8 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 
 		final ProductHelper ph = theHelper.getCreateRootProduct(0);
-		final ProductHelper ph1 = theHelper.getCreateProduct("i1");
-		final ProductHelper ph2 = theHelper.getCreateProduct("i2");
+		final ProductHelper ph1 = theHelper.getCreateProduct("i1", null);
+		final ProductHelper ph2 = theHelper.getCreateProduct("i2", null);
 
 		ph.setChild(ph1);
 		assertEquals("i1", ph.getIntent(ElementName.BINDINGINTENT).getResource().getAttribute(XJDFConstants.ChildRefs));
@@ -382,10 +399,10 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 
 		final ProductHelper ph = theHelper.getCreateRootProduct(0);
-		final ProductHelper ph1 = theHelper.getCreateProduct("i1");
-		final ProductHelper ph2 = theHelper.getCreateProduct("i2");
-		final ProductHelper ph21 = theHelper.getCreateProduct("i21");
-		final ProductHelper ph22 = theHelper.getCreateProduct("i22");
+		final ProductHelper ph1 = theHelper.getCreateProduct("i1", null);
+		final ProductHelper ph2 = theHelper.getCreateProduct("i2", null);
+		final ProductHelper ph21 = theHelper.getCreateProduct("i21", null);
+		final ProductHelper ph22 = theHelper.getCreateProduct("i22", null);
 
 		ph.setChild(ph1);
 		assertEquals("i1", ph.getChildRefs(true).get(0));
@@ -418,8 +435,8 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 
 		final ProductHelper ph = theHelper.getCreateRootProduct(0);
-		final ProductHelper ph1 = theHelper.getCreateProduct("i1");
-		final ProductHelper ph2 = theHelper.getCreateProduct("i2");
+		final ProductHelper ph1 = theHelper.getCreateProduct("i1", null);
+		final ProductHelper ph2 = theHelper.getCreateProduct("i2", null);
 
 		ph.setChild(ph1);
 		assertEquals(ph, ph1.getParent());

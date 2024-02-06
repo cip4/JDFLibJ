@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -48,6 +48,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -223,14 +224,52 @@ public class ProductHelper extends BaseXJDFHelper
 	 * @param name
 	 * @return
 	 */
-	public SetHelper getProductSet(String name)
+	public SetHelper getProductSet(final String name)
 	{
-		SetHelper sh = getXJDFRoot().getSet(name, EnumUsage.Input, XJDFConstants.Product);
+		final XJDFHelper xjdfRoot = getXJDFRoot();
+		if (xjdfRoot == null)
+			return null;
+
+		SetHelper sh = xjdfRoot.getSet(name, EnumUsage.Input, XJDFConstants.Product);
 		if (sh == null)
 		{
-			sh = getXJDFRoot().getSet(name, EnumUsage.Input);
+			sh = xjdfRoot.getSet(name, EnumUsage.Input, XJDFConstants.EndCustomer);
+		}
+		if (sh == null)
+		{
+			sh = xjdfRoot.getSet(name, EnumUsage.Input);
 		}
 		return sh;
+	}
+
+	/**
+	 * 
+	 * @param name the resource set name
+	 * @return
+	 */
+	public ResourceHelper getCreateProductResource(final String name)
+	{
+		SetHelper sh = getProductSet(name);
+		if (sh == null || (XJDFConstants.Product + ',' + XJDFConstants.EndCustomer).contains(sh.getProcessUsage()))
+		{
+			sh = getXJDFRoot().getCreateSet(name, EnumUsage.Input, XJDFConstants.Product);
+		}
+
+		final JDFAttributeMap map = new JDFAttributeMap();
+		map.putNotNull(XJDFConstants.ExternalID, getExternalID());
+		return sh == null ? null : sh.getCreateExactPartition(map, true);
+	}
+
+	/**
+	 * 
+	 * @param name the resource set name
+	 * @return
+	 */
+	public ResourceHelper getProductResource(final String name)
+	{
+		final SetHelper sh = getProductSet(name);
+
+		return sh == null ? null : sh.getPartition(XJDFConstants.ExternalID, getExternalID());
 	}
 
 	/**
@@ -297,7 +336,7 @@ public class ProductHelper extends BaseXJDFHelper
 		String descName = getAttribute(AttributeName.DESCRIPTIVENAME);
 		if (StringUtil.isEmpty(descName))
 		{
-			XJDFHelper xh = XJDFHelper.getHelper(theElement);
+			final XJDFHelper xh = XJDFHelper.getHelper(theElement);
 			if (xh != null)
 				descName = xh.getDescriptiveName();
 		}

@@ -177,6 +177,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		theHelper.addType("Cutting", 0);
 		assertEquals(0, theHelper.indexOfType("Cutting", 0));
 		assertEquals(-1, theHelper.indexOfType("Cutting", 1));
+		assertEquals(-1, theHelper.indexOfType(null, 1));
 		assertEquals(-1, theHelper.indexOfType("Cutting", 42));
 		assertEquals(1, theHelper.indexOfType("Folding", 0));
 		theHelper.addType("Cutting", -1);
@@ -625,13 +626,13 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 
-		final ProductHelper ph21 = theHelper.getCreateProduct("i21");
+		final ProductHelper ph21 = theHelper.getCreateProduct("i21", null);
 		ph21.setRoot(false);
-		final ProductHelper ph22 = theHelper.getCreateProduct("i22");
-		final ProductHelper ph = theHelper.getCreateProduct("i");
+		final ProductHelper ph22 = theHelper.getCreateProduct("i22", null);
+		final ProductHelper ph = theHelper.getCreateProduct("i", null);
 		ph.setRoot();
-		final ProductHelper ph1 = theHelper.getCreateProduct("i1");
-		final ProductHelper ph2 = theHelper.getCreateProduct("i2");
+		final ProductHelper ph1 = theHelper.getCreateProduct("i1", null);
+		final ProductHelper ph2 = theHelper.getCreateProduct("i2", null);
 
 		ph.setChild(ph1);
 		ph.setChild(ph2);

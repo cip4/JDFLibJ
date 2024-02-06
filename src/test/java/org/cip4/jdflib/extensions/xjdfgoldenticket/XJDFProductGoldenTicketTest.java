@@ -86,10 +86,10 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 		final ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
 		ph.setProductType("Brochure");
 		ph.setAmount(10);
-		final ProductHelper phc = xjdfHelper.getCreateProduct("IDCover");
+		final ProductHelper phc = xjdfHelper.getCreateProduct("IDCover", null);
 		phc.setProductType("Cover");
 		phc.setAmount(1);
-		final ProductHelper phb = xjdfHelper.getCreateProduct("IDBody");
+		final ProductHelper phb = xjdfHelper.getCreateProduct("IDBody", null);
 		phb.setAmount(1);
 		final IntentHelper ih = ph.getCreateIntent(ElementName.BINDINGINTENT);
 		ih.getCreateResource().setAttribute(ElementName.BINDINGTYPE, "SaddleStitch");
@@ -111,22 +111,22 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 		final ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
 		ph.setAmount(10);
 
-		final ProductHelper phc = xjdfHelper.getCreateProduct("IDCover");
+		final ProductHelper phc = xjdfHelper.getCreateProduct("IDCover", null);
 		createCover(phc);
 
-		final ProductHelper pht = xjdfHelper.getCreateProduct("IDText");
+		final ProductHelper pht = xjdfHelper.getCreateProduct("IDText", null);
 		createText(pht);
 
-		final ProductHelper phCol = xjdfHelper.getCreateProduct("IDColor");
+		final ProductHelper phCol = xjdfHelper.getCreateProduct("IDColor", null);
 		createColorText(phCol);
 
-		final ProductHelper phMap = xjdfHelper.getCreateProduct("IDMap");
+		final ProductHelper phMap = xjdfHelper.getCreateProduct("IDMap", null);
 		createMap(phMap);
 
-		final ProductHelper phCol2 = xjdfHelper.getCreateProduct("IDColor2");
+		final ProductHelper phCol2 = xjdfHelper.getCreateProduct("IDColor2", null);
 		createColorText(phCol2);
 
-		final ProductHelper pht2 = xjdfHelper.getCreateProduct("IDText2");
+		final ProductHelper pht2 = xjdfHelper.getCreateProduct("IDText2", null);
 		createText(pht2);
 
 		createBook(ph);
@@ -271,13 +271,13 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 		final ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
 		ph.setAmount(10);
 		ph.setProductType("Notebook");
-		final ProductHelper phc = xjdfHelper.getCreateProduct("ICover");
+		final ProductHelper phc = xjdfHelper.getCreateProduct("ICover", null);
 		phc.setAmount(1);
 		phc.setProductType("FrontCover");
-		final ProductHelper phb = xjdfHelper.getCreateProduct("IBody");
+		final ProductHelper phb = xjdfHelper.getCreateProduct("IBody", null);
 		phb.setAmount(50);
 		phb.setProductType("BookBlock");
-		final ProductHelper phcb = xjdfHelper.getCreateProduct("IBack");
+		final ProductHelper phcb = xjdfHelper.getCreateProduct("IBack", null);
 		phcb.setProductType("BackCover");
 		phcb.setAmount(1);
 		final IntentHelper ih = ph.getCreateIntent(ElementName.BINDINGINTENT);
@@ -304,11 +304,11 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 		final ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
 		ph.setAmount(10);
 		ph.setProductType("FilledEnvelope");
-		final ProductHelper phe = xjdfHelper.getCreateProduct("ID_Envelope");
+		final ProductHelper phe = xjdfHelper.getCreateProduct("ID_Envelope", null);
 		phe.setAmount(1);
 		phe.setProductType("Envelope");
 		phe.setAttribute(XJDFConstants.ExternalID, "MISID_Envelope");
-		final ProductHelper phl = xjdfHelper.getCreateProduct("ID_Letter");
+		final ProductHelper phl = xjdfHelper.getCreateProduct("ID_Letter", null);
 		phl.setAmount(1);
 		phl.setProductType("Letter");
 		final IntentHelper ih = ph.getCreateIntent(XJDFConstants.AssemblingIntent);
@@ -335,15 +335,15 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBrochure", null, null, false);
 		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBook", null, null, false);
 		ih.getResource().setAttribute(XJDFConstants.VariableType, "Area");
-		final ProductHelper phh = xjdfHelper.getCreateProduct("IDBook");
+		final ProductHelper phh = xjdfHelper.getCreateProduct("IDBook", null);
 		phh.setAmount(1000);
 		phh.setProductType("Book");
 
-		final ProductHelper phhc = xjdfHelper.getCreateProduct("IDBookCover");
+		final ProductHelper phhc = xjdfHelper.getCreateProduct("IDBookCover", null);
 		phhc.setProductType("Cover");
 		phhc.setAmount(1);
 
-		final ProductHelper phb = xjdfHelper.getCreateProduct("IDBody");
+		final ProductHelper phb = xjdfHelper.getCreateProduct("IDBody", null);
 		phb.setAmount(1);
 
 		final IntentHelper ihb = phh.getCreateIntent(ElementName.BINDINGINTENT);
@@ -351,10 +351,10 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 		ihb.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBookCover", null, null, false);
 		ihb.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBody", null, null, false);
 
-		final ProductHelper phs = xjdfHelper.getCreateProduct("IDBrochure");
+		final ProductHelper phs = xjdfHelper.getCreateProduct("IDBrochure", null);
 		phs.setAmount(9000);
 
-		final ProductHelper phsc = xjdfHelper.getCreateProduct("IDBrochureCover");
+		final ProductHelper phsc = xjdfHelper.getCreateProduct("IDBrochureCover", null);
 		phsc.setProductType("Cover");
 		phsc.setAmount(1);
 

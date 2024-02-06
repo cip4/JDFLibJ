@@ -188,8 +188,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 		newXJDF(null);
 		if (jobID == null)
 			jobID = "Job_" + new JDFDate().getFormattedDateTime("MMdd_hhmmss");
-		theElement.setAttribute(AttributeName.JOBID, jobID);
-		theElement.setAttribute(AttributeName.JOBPARTID, jobPartID);
+		setAttribute(AttributeName.JOBID, jobID);
+		setAttribute(AttributeName.JOBPARTID, jobPartID);
 
 		setParts(parts);
 		cleanUp();
@@ -223,7 +223,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 */
 	private void setParts(final VJDFAttributeMap parts)
 	{
-		final SetHelper niHelper = getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
+		final SetHelper niHelper = getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
 		niHelper.getCreatePartitions(parts, true);
 	}
 
@@ -451,11 +451,23 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 */
 	public ProductHelper getCreateProduct(final String id)
 	{
+		return getCreateProduct(id, null);
+	}
+
+	/**
+	 *
+	 * @param id
+	 * @param externalID TODO
+	 * @return
+	 */
+	public ProductHelper getCreateProduct(final String id, final String externalID)
+	{
 		ProductHelper ph = getProduct(id);
 		if (ph == null)
 		{
 			ph = appendProduct();
 			ph.setID(id);
+			ph.setExternalID(externalID);
 		}
 		return ph;
 	}
@@ -602,13 +614,23 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	/**
 	 * @param name
 	 * @param usage
-	 * @param processUsage
+	 * @param processUsage - if uses as a type then the cpi is calculated and returned
 	 *
 	 * @return the SetHelper for the vector of resourcesets
 	 */
 	public SetHelper getSet(final String name, final EnumUsage usage, final String processUsage)
 	{
-		return getSet(name, usage, processUsage, null);
+		SetHelper set = getSet(name, usage, processUsage, null);
+
+		if (set == null)
+		{
+			final int cpi = indexOfType(processUsage, 0);
+			if (cpi >= 0)
+			{
+				set = getSet(name, usage, null, cpi);
+			}
+		}
+		return set;
 	}
 
 	/**
@@ -625,7 +647,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 		while (e != null)
 		{
 			if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE))
-					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE)) && (cpi == null || cpi.equals(new SetHelper(e).getCombinedProcessIndex())))
+					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE)) && ContainerUtil.containsAny(new SetHelper(e).getCombinedProcessIndex(), cpi))
 			{
 				return new SetHelper(e);
 			}
@@ -639,7 +661,30 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * @param usage
 	 * @param processUsage
 	 *
-	 * @return the SetHelper for the vector of resourcesets
+	 * @return the SetHelper
+	 */
+	public SetHelper getSet(final String name, final EnumUsage usage, final String processUsage, final int cpi)
+	{
+		KElement e = theElement.getFirstChildElement();
+		final String usageString = usage == null ? null : usage.getName();
+		while (e != null)
+		{
+			if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE))
+					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE)) && ContainerUtil.contains(new SetHelper(e).getCombinedProcessIndex(), cpi))
+			{
+				return new SetHelper(e);
+			}
+			e = e.getNextSiblingElement();
+		}
+		return null;
+	}
+
+	/**
+	 * @param name
+	 * @param usage
+	 * @param processUsage
+	 *
+	 * @return the SetHelper
 	 */
 	public SetHelper getCreateSet(final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
 	{
@@ -712,7 +757,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * @param name
 	 * @param usage
 	 * @return a new set element
+	 * @deprecated - all sets are now resource sets
 	 */
+	@Deprecated
 	public SetHelper getCreateSet(final String family, final String name, final EnumUsage usage)
 	{
 		SetHelper newSet = getSet(name, usage, null);
@@ -1215,7 +1262,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	public int indexOfType(final String typ, int iSkip)
 	{
 		final VString types = getTypes();
-		if (types == null)
+		if (types == null || typ == null)
 		{
 			return -1;
 		}
