@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -60,7 +60,7 @@ import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.net.HTTPDetails;
 import org.cip4.jdflib.util.net.ProxyUtil;
 
-public class URLWriter
+public class URLWriter implements Runnable
 {
 
 	/**
@@ -88,7 +88,7 @@ public class URLWriter
 		return addDirect;
 	}
 
-	public void setAddDirect(boolean addDirect)
+	public void setAddDirect(final boolean addDirect)
 	{
 		this.addDirect = addDirect;
 	}
@@ -257,7 +257,7 @@ public class URLWriter
 			return ProxyUtil.getProxiesWithLocal(uri);
 		else
 		{
-			List<Proxy> select = ProxySelector.getDefault().select(uri);
+			final List<Proxy> select = ProxySelector.getDefault().select(uri);
 			return select.isEmpty() ? ProxyUtil.getProxiesWithLocal(uri) : select;
 		}
 
@@ -340,7 +340,7 @@ public class URLWriter
 		{
 			httpUrlConnection.setRequestMethod(method);
 		}
-		catch (ProtocolException ex)
+		catch (final ProtocolException ex)
 		{
 			// known java issue - patch is not in the list of valid messages
 			if (UrlUtil.PATCH.equalsIgnoreCase(method))
@@ -379,5 +379,16 @@ public class URLWriter
 	public Throwable getLastException()
 	{
 		return lastException;
+	}
+
+	/**
+	 * useful for asynchronous sending to a url
+	 * 
+	 * @see java.lang.Runnable#run()
+	 */
+	@Override
+	public void run()
+	{
+		writeToURL();
 	}
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-20223 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -48,6 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -58,6 +59,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.util.thread.OrderedTaskQueue;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -73,6 +75,27 @@ public class URLWriterTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		assertNotNull(new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null).writeToURL());
+		new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null).run();
+	}
+
+	/**
+	 * @throws MalformedURLException
+	 *
+	 */
+	@Test
+	public void testRun() throws MalformedURLException
+	{
+		final URLWriter urlWriter0 = new URLWriter(null, UrlUtil.fileToUrl(new File(sm_dirTestDataTemp + "dummy.txt"), false), UrlUtil.POST, UrlUtil.TEXT_PLAIN, null);
+		urlWriter0.run();
+		if (!isTestNetwork())
+			return;
+		for (int i = 0; i < 3; i++)
+		{
+			final URLWriter urlWriter = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+			OrderedTaskQueue.getCreateQueue("uw").queue(urlWriter);
+			ThreadUtil.sleep(42);
+		}
+
 	}
 
 	/**
@@ -84,7 +107,7 @@ public class URLWriterTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		URLWriter urlWriter = new URLWriter(null, new URL("http://nosuchhost123456789"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		final URLWriter urlWriter = new URLWriter(null, new URL("http://nosuchhost123456789"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNull(urlWriter.writeToURL());
 		assertNotNull(urlWriter.getLastException());
 	}
@@ -96,7 +119,7 @@ public class URLWriterTest extends JDFTestCaseBase
 	@Test
 	public void testgetAddDirect() throws MalformedURLException
 	{
-		URLWriter urlWriter = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		final URLWriter urlWriter = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertTrue(urlWriter.isAddDirect());
 		urlWriter.setAddDirect(false);
 		assertFalse(urlWriter.isAddDirect());
@@ -110,7 +133,7 @@ public class URLWriterTest extends JDFTestCaseBase
 	@Test
 	public void testgetProxyList() throws MalformedURLException, URISyntaxException
 	{
-		URLWriter urlWriter = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		final URLWriter urlWriter = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertTrue(urlWriter.getProxies(new URI("http://www.example.com")).contains(Proxy.NO_PROXY));
 		urlWriter.setAddDirect(false);
 		assertFalse(urlWriter.getProxies(new URI("http://www.example.com")).isEmpty());
@@ -123,7 +146,7 @@ public class URLWriterTest extends JDFTestCaseBase
 	@Test
 	public void testTostringt() throws MalformedURLException
 	{
-		URLWriter urlWriter = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		final URLWriter urlWriter = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNotNull(urlWriter.toString());
 	}
 
@@ -152,7 +175,7 @@ public class URLWriterTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		URLWriter w = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.PATCH, UrlUtil.TEXT_PLAIN, null);
+		final URLWriter w = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.PATCH, UrlUtil.TEXT_PLAIN, null);
 		final UrlPart writeToURL = w.writeToURL();
 		assertNotNull(writeToURL);
 		writeToURL.buffer();
@@ -166,9 +189,9 @@ public class URLWriterTest extends JDFTestCaseBase
 	@Test
 	public void testWriteToURLPatch2() throws ProtocolException, IOException
 	{
-		URLWriter w = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.PATCH, UrlUtil.TEXT_PLAIN, null);
+		final URLWriter w = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.PATCH, UrlUtil.TEXT_PLAIN, null);
 
-		HttpURLConnection c = Mockito.mock(HttpURLConnection.class);
+		final HttpURLConnection c = Mockito.mock(HttpURLConnection.class);
 		Mockito.doThrow(ProtocolException.class).when(c).setRequestMethod(UrlUtil.PATCH);
 		w.setHttpMethod(c);
 
@@ -184,7 +207,7 @@ public class URLWriterTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 
-		URLWriter w = new URLWriter(null, new URL("http://www.example.com"), "bad", UrlUtil.TEXT_PLAIN, null);
+		final URLWriter w = new URLWriter(null, new URL("http://www.example.com"), "bad", UrlUtil.TEXT_PLAIN, null);
 		final UrlPart writeToURL = w.writeToURL();
 		assertNull(writeToURL);
 	}
