@@ -384,7 +384,8 @@ public class JDFElement extends KElement
 		final Document d = getOwnerDocument();
 		final Element e = d.getDocumentElement();
 		final String s = e.getAttribute(AttributeName.VERSION);
-		return EnumVersion.getEnum(s);
+		final EnumVersion v = EnumVersion.getEnum(s);
+		return v == null ? getDefaultJDFVersion() : v;
 	}
 
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];

@@ -4,7 +4,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -108,7 +108,7 @@ public class ElemInfo
 			if (masked == 2 || masked == 3 || masked == 5 || masked == 6)
 			{
 				if (i == 7)
-					return EnumVersion.Version_2_2;
+					return EnumVersion.Version_2_3;
 				else
 					return EnumVersion.getEnum(i + 1);
 			}

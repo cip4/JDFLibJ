@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -112,7 +112,8 @@ public class AtrInfo
 			return bigAtt.equals(smallAtt);
 		}
 
-		if ((dataType.equals(AttributeInfo.EnumAttributeType.NMTOKENS)) || (dataType.equals(AttributeInfo.EnumAttributeType.enumerations)) || (dataType.equals(AttributeInfo.EnumAttributeType.IDREFS)))
+		if ((dataType.equals(AttributeInfo.EnumAttributeType.NMTOKENS)) || (dataType.equals(AttributeInfo.EnumAttributeType.enumerations))
+				|| (dataType.equals(AttributeInfo.EnumAttributeType.IDREFS)))
 		{
 			return matchesTokenList(smallAtt, bigAtt);
 		}
@@ -394,7 +395,7 @@ public class AtrInfo
 			{
 				// dirty hack to allow FixVersion with 2.x, if all bits, we also assume jdf 2.2 (xjdf)
 				if (i == 7)
-					return EnumVersion.Version_2_2;
+					return EnumVersion.Version_2_3;
 				else
 					return EnumVersion.getEnum(i + 1);
 			}
