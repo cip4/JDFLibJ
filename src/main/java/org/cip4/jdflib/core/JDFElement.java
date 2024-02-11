@@ -104,6 +104,7 @@ import org.cip4.jdflib.datatypes.JDFRange;
 import org.cip4.jdflib.datatypes.JDFRangeList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.FixVersion;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -178,7 +179,7 @@ public class JDFElement extends KElement
 	private MyPair<AttributeInfo, ElementInfo> infotables;
 	private static final long serialVersionUID = 1L;
 	private static final Log jLog = LogFactory.getLog(JDFElement.class);
-	private static EnumVersion defaultVersion = EnumVersion.Version_1_6;
+	private static EnumVersion defaultVersion = EnumVersion.Version_1_7;
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
@@ -5205,7 +5206,20 @@ public class JDFElement extends KElement
 	 */
 	public EnumVersion getVersion(final boolean bInherit)
 	{
-		return EnumVersion.getEnum(bInherit ? getInheritedAttribute(AttributeName.VERSION, null, null) : getAttribute(AttributeName.VERSION, null, null));
+		final String versionName = bInherit ? getInheritedAttribute(AttributeName.VERSION, null, null) : getNonEmpty(AttributeName.VERSION);
+		if (StringUtil.isEmpty(versionName))
+		{
+			final KElement root = getDocRoot();
+			if (root != null)
+			{
+				final String rootName = root.getLocalName();
+				if ('J' == rootName.charAt(0) && (ElementName.JDF.equals(rootName) || ElementName.JMF.equals(rootName)))
+					return getDefaultJDFVersion();
+				else if (XJDFConstants.XJDF.equals(rootName) || XJDFConstants.XJMF.equals(rootName) || JDFConstants.PRINT_TALK.equals(rootName))
+					return XJDFHelper.getDefaultVersion();
+			}
+		}
+		return EnumVersion.getEnum(versionName);
 	}
 
 	/**
@@ -5265,10 +5279,11 @@ public class JDFElement extends KElement
 		 */
 		public static EnumVersion getEnum(String enumName)
 		{
+
 			if (enumName != null && enumName.indexOf(' ') >= 0)
 				enumName = StringUtil.normalize(enumName, false, null);
 			if (StringUtil.isEmpty(enumName))
-				return JDFElement.getDefaultJDFVersion();
+				return null;
 
 			final char charAt = enumName.charAt(0);
 			if (charAt == '1')
@@ -5327,6 +5342,10 @@ public class JDFElement extends KElement
 				else if ("2.2".equals(enumName))
 				{
 					return EnumVersion.Version_2_2;
+				}
+				else if ("2.3".equals(enumName))
+				{
+					return EnumVersion.Version_2_3;
 				}
 				else
 				{
@@ -5440,6 +5459,7 @@ public class JDFElement extends KElement
 		public static final EnumVersion Version_2_0 = new EnumVersion(JDFConstants.VERSION_2_0);
 		public static final EnumVersion Version_2_1 = new EnumVersion(JDFConstants.VERSION_2_1);
 		public static final EnumVersion Version_2_2 = new EnumVersion(JDFConstants.VERSION_2_2);
+		public static final EnumVersion Version_2_3 = new EnumVersion(JDFConstants.VERSION_2_3);
 
 		/**
 		 * gets the integer value of the minor version, e.g 2 for 1.3 etc

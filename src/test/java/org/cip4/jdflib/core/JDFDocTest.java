@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -90,6 +90,17 @@ public class JDFDocTest extends JDFTestCaseBase
 		root.setAttribute("xmlns:FOO", "www.foo.com");
 		final KElement e = (KElement) d.createElement("FOO:bar");
 		Assertions.assertNull(e.getNamespaceURI());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCreateElementNoNS2()
+	{
+		final JDFDoc d = new JDFDoc("FOO:TEST");
+		final JDFElement root = (JDFElement) d.getRoot();
+		assertEquals(null, root.getVersion(true));
 	}
 
 	/**

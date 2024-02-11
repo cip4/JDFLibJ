@@ -162,9 +162,9 @@ public class JDFElementTest extends JDFTestCaseBase
 	@Test
 	public void testEnumValidationLevel()
 	{
-		for (Object e : EnumValidationLevel.getEnumList())
+		for (final Object e : EnumValidationLevel.getEnumList())
 		{
-			EnumValidationLevel v = (EnumValidationLevel) e;
+			final EnumValidationLevel v = (EnumValidationLevel) e;
 			EnumValidationLevel.incompleteLevel(v);
 			EnumValidationLevel.isRecursive(v);
 			EnumValidationLevel.isRequired(v);
@@ -174,11 +174,11 @@ public class JDFElementTest extends JDFTestCaseBase
 	@Test
 	public void testValueForNewAttribute()
 	{
-		ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_7, 0, 0);
+		final ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_7, 0, 0);
 		pgt.assign(null);
 		pgt.createFlyer();
 
-		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(2, EnumVersion.Version_1_7, 1, 3, true, null);
+		final MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(2, EnumVersion.Version_1_7, 1, 3, true, null);
 		cpGoldenTicket.setParent(pgt);
 		cpGoldenTicket.nCols[0] = cpGoldenTicket.nCols[1] = 6;
 		cpGoldenTicket.workStyle = EnumWorkStyle.WorkAndTurn;
@@ -186,11 +186,11 @@ public class JDFElementTest extends JDFTestCaseBase
 		cpGoldenTicket.assign(null);
 		cpGoldenTicket.good = 1000;
 		cpGoldenTicket.waste = 90;
-		JDFNode n = cpGoldenTicket.getNode();
-		for (KElement e : n.getChildrenByTagName(null, null, null, false, false, 0))
+		final JDFNode n = cpGoldenTicket.getNode();
+		for (final KElement e : n.getChildrenByTagName(null, null, null, false, false, 0))
 		{
 			JDFElement.getValueForNewAttribute(e, null);
-			for (String s : e.getAttributeArray_KElement())
+			for (final String s : e.getAttributeArray_KElement())
 				JDFElement.getValueForNewAttribute(e, s);
 		}
 	}
@@ -218,9 +218,9 @@ public class JDFElementTest extends JDFTestCaseBase
 	public void testCopyElement()
 	{
 		final JDFDoc d = new JDFDoc("d1");
-		final JDFElement e = (JDFElement) d.getRoot();
+		final KElement e = d.getRoot();
 		final JDFDoc d2 = new JDFDoc("d2");
-		final JDFElement e2 = (JDFElement) d2.getRoot();
+		final KElement e2 = d2.getRoot();
 		final KElement e3 = e.copyElement(e2, null);
 		final JDFParser p = new JDFParser();
 		final JDFDoc dp = p.parseString("<Device xmlns=\"www.CIP4.org/JDFSchema_1_1\"/>");
@@ -455,14 +455,18 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	}
 
-	// //////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
 	@Test
 	public void testDefaultVersion()
 	{
+
+		final EnumVersion j = JDFElement.getDefaultJDFVersion();
+		final EnumVersion x = XJDFHelper.defaultVersion();
+		assertEquals(1, j.getMajorVersion());
+		assertEquals(2, x.getMajorVersion());
+		assertEquals(6, j.getMinorVersion() - x.getMinorVersion());
 
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();
@@ -482,7 +486,6 @@ public class JDFElementTest extends JDFTestCaseBase
 		doc = new JDFDoc("JMF");
 		final JDFJMF jmf = doc.getJMFRoot();
 		assertEquals(jmf.getVersion(true), EnumVersion.Version_1_2);
-
 	}
 
 	/**
@@ -791,6 +794,20 @@ public class JDFElementTest extends JDFTestCaseBase
 		final JDFElement e = new JDFDoc(ElementName.JMF).getJMFRoot();
 		assertTrue(JDFElement.getValueForNewAttribute(e, "ID").startsWith("I"));
 		assertNull(JDFElement.getValueForNewAttribute(e, null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testVersionFromRoot()
+	{
+		assertEquals(JDFElement.getDefaultJDFVersion(), new JDFDoc(ElementName.JMF).getJMFRoot().getVersion(true));
+		assertEquals(JDFElement.getDefaultJDFVersion(), new JDFDoc(ElementName.JDF).getJDFRoot().getVersion(true));
+		assertEquals(XJDFHelper.getDefaultVersion(), ((JDFElement) new JDFDoc(XJDFConstants.XJDF).getRoot()).getVersion(true));
+		assertEquals(XJDFHelper.getDefaultVersion(), ((JDFElement) new JDFDoc(XJDFConstants.XJMF).getRoot()).getVersion(true));
+		assertEquals(XJDFHelper.getDefaultVersion(), ((JDFElement) new JDFDoc(JDFConstants.PRINT_TALK).getRoot()).getVersion(true));
+		assertEquals(null, ((JDFElement) new JDFDoc("foobar").getRoot()).getVersion(true));
 	}
 
 	/**
