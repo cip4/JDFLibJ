@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -76,7 +76,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkDisjointing extends WalkElement
+public class WalkDisjointing extends WalkJDFElement
 {
 	/**
 	 * 
@@ -99,7 +99,7 @@ public class WalkDisjointing extends WalkElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.renameKey(AttributeName.OFFSETDIRECTION, AttributeName.DIRECTION);
 		super.updateAttributes(map);
