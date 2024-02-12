@@ -152,20 +152,17 @@ public class NumberFormatter
 		{
 			s = JDFConstants.NEGINF;
 		}
+		else if (Double.isNaN(d))
+		{
+			s = null;
+		}
 		else
 		{
 			if (precision > 0)
 			{
 				String ss = String.format(Locale.US, "%." + precision + "f", d);
 				ss = zappTrailing(ss);
-				if ("NaN".equals(ss))
-				{
-					s = null;
-				}
-				else
-				{
-					s = ss;
-				}
+				s = ss;
 			}
 			else if (d > 0)
 			{

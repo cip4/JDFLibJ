@@ -82,6 +82,7 @@ public class StringUtil
 		string, integer, number, bool, numberlist, date
 	}
 
+	private static final NumberFormatter formatter = new NumberFormatter();
 	/**
 	 *
 	 */
@@ -2053,7 +2054,7 @@ public class StringUtil
 	 */
 	public static String formatDouble(final double d)
 	{
-		return new NumberFormatter().formatDouble(d);
+		return formatter.formatDouble(d);
 	}
 
 	/**
@@ -3276,7 +3277,7 @@ public class StringUtil
 	 */
 	public static String formatDouble(final double value, final int precision)
 	{
-		return new NumberFormatter().formatDouble(value, precision);
+		return formatter.formatDouble(value, precision);
 	}
 
 	/**

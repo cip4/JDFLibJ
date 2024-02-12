@@ -162,6 +162,12 @@ public class NumberFormatterTest extends JDFTestCaseBase
 		for (int i = -1000000; i < 1000000; i++)
 		{
 			final String s = numberFormatter.formatInt(i, 0);
+		}
+		t1 = System.currentTimeMillis();
+		log.info("" + (t1 - t0));
+		for (int i = -1000000; i < 1000000; i++)
+		{
+			final String s = numberFormatter.formatInt(i, 0);
 			assertEquals(i, StringUtil.parseInt(s, 42));
 		}
 		t1 = System.currentTimeMillis();
@@ -170,11 +176,23 @@ public class NumberFormatterTest extends JDFTestCaseBase
 		for (int i = -10000; i < 10000; i++)
 		{
 			final String s = numberFormatter.formatDouble(i, 5);
+		}
+		t1 = System.currentTimeMillis();
+		log.info("" + (t1 - t0));
+		for (int i = -10000; i < 10000; i++)
+		{
+			final String s = numberFormatter.formatDouble(i, 5);
 			assertEquals(i, StringUtil.parseDouble(s, 42), 0.001);
 		}
 		t1 = System.currentTimeMillis();
 		log.info("" + (t1 - t0));
 		t0 = System.currentTimeMillis();
+		for (int i = -10000; i < 10000; i++)
+		{
+			final String s = numberFormatter.formatDouble(i * Math.PI, 5);
+		}
+		t1 = System.currentTimeMillis();
+		log.info("" + (t1 - t0));
 		for (int i = -10000; i < 10000; i++)
 		{
 			final String s = numberFormatter.formatDouble(i * Math.PI, 5);
@@ -196,6 +214,9 @@ public class NumberFormatterTest extends JDFTestCaseBase
 		assertEquals("3", numberFormatter.formatDouble(3.0));
 		final double d = Double.NaN;
 		assertEquals(null, numberFormatter.formatDouble(d));
+		assertEquals("3", numberFormatter.formatDouble(Math.PI, 0));
+		assertEquals("3", numberFormatter.formatDouble(Math.PI, -1));
+		assertEquals("3.14", numberFormatter.formatDouble(Math.PI, 2));
 	}
 
 }
