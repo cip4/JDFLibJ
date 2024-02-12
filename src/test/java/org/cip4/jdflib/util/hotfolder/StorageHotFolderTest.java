@@ -363,8 +363,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testOKError() throws Exception
 	{
-		for (int retry : new int[] { 1, 99 })
-			for (boolean synch : new boolean[] { true, false })
+		for (final int retry : new int[] { 1, 99 })
+			for (final boolean synch : new boolean[] { true, false })
 			{
 				setUp();
 				final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
@@ -440,7 +440,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testOKErrorMaxCheck() throws Exception
 	{
-		for (boolean synch : new boolean[] { true, false })
+		for (final boolean synch : new boolean[] { true, false })
 		{
 			setUp();
 			final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
@@ -591,7 +591,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testOKErrorMulti() throws Exception
 	{
-		for (boolean synch : new boolean[] { true, false })
+		for (final boolean synch : new boolean[] { true, false })
 		{
 			setUp();
 			final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
@@ -669,7 +669,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testOKErrorMultiDelay() throws Exception
 	{
-		for (boolean synch : new boolean[] { true, false })
+		for (final boolean synch : new boolean[] { true, false })
 		{
 			setUp();
 
@@ -738,10 +738,10 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			createPair(i % 20);
 		}
 
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 2000; i++)
 		{
-			ThreadUtil.sleep(200);
-			if (theHFDir.listFiles().length == 2 && tmpHFDir.listFiles().length < 3)
+			ThreadUtil.sleep(100);
+			if (theHFDir.listFiles().length == 2 && tmpHFDir.listFiles().length < 2)
 			{
 				log.info("stop " + i);
 				break;
@@ -790,9 +790,9 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 				break;
 		}
 
-		File[] okd = FileUtil.listDirectories(ok);
+		final File[] okd = FileUtil.listDirectories(ok);
 		assertTrue(okd == null || okd.length < 15);
-		File[] errd = FileUtil.listDirectories(error);
+		final File[] errd = FileUtil.listDirectories(error);
 		assertTrue(errd == null || errd.length < 15);
 
 		hf.stop();
@@ -886,7 +886,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		}
 		for (int j = 0; j < 3; j++)
 		{
-			File fil = new File(dir, j + "aux.tmp");
+			final File fil = new File(dir, j + "aux.tmp");
 			FileUtil.stringToFile("dummy" + j, fil);
 		}
 		final File file = new File(theHFDir + File.separator + fileName + ".txt");
