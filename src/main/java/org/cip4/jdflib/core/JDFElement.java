@@ -5140,11 +5140,12 @@ public class JDFElement extends KElement
 	public final String version()
 	{
 		final String ver = getInheritedAttribute(AttributeName.VERSION, null, JDFConstants.EMPTYSTRING);
-		if (JDFConstants.EMPTYSTRING.equals(ver))
+		final EnumVersion e = JDFElement.EnumVersion.getEnum(ver);
+		if (e == null)
 		{
 			return JDFConstants.VERSION_1_3;
 		}
-		return JDFElement.EnumVersion.getEnum(ver).getName();
+		return e.getName();
 	}
 
 	/**

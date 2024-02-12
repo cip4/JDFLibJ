@@ -808,6 +808,7 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertEquals(XJDFHelper.getDefaultVersion(), ((JDFElement) new JDFDoc(XJDFConstants.XJMF).getRoot()).getVersion(true));
 		assertEquals(XJDFHelper.getDefaultVersion(), ((JDFElement) new JDFDoc(JDFConstants.PRINT_TALK).getRoot()).getVersion(true));
 		assertEquals(null, ((JDFElement) new JDFDoc("foobar").getRoot()).getVersion(true));
+		assertEquals(EnumVersion.Version_1_3.getName(), ((JDFElement) new JDFDoc("foobar").getRoot()).version());
 	}
 
 	/**
