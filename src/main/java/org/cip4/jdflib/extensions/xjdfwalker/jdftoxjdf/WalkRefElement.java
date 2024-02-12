@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -76,7 +76,7 @@ public class WalkRefElement extends WalkJDFElement
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final JDFRefElement refElem = (JDFRefElement) jdf;
-		KElement parent = jdf.getParentNode_KElement();
+		final KElement parent = jdf.getParentNode_KElement();
 
 		if (mustInline(parent, refElem.getRefLocalName()) && refElem.getTarget() != null)
 		{
@@ -104,10 +104,10 @@ public class WalkRefElement extends WalkJDFElement
 		return null;
 	}
 
-	boolean mustInline(KElement parent, String refLocalName)
+	boolean mustInline(final KElement parent, final String refLocalName)
 	{
 		boolean inline = mustInline(refLocalName);
-		WalkJDFElement walker = inline ? null : (WalkJDFElement) jdfToXJDF.getFactory().getWalker(parent);
+		final WalkElement walker = inline ? null : (WalkElement) jdfToXJDF.getFactory().getWalker(parent);
 		inline = inline || walker != null && walker.mustInline(refLocalName);
 		return inline;
 	}
@@ -145,8 +145,8 @@ public class WalkRefElement extends WalkJDFElement
 	 */
 	protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
 	{
-		JDFAttributeMap map = getRefMap(re);
-		String id = jdfToXJDF.completedRefs.get(map);
+		final JDFAttributeMap map = getRefMap(re);
+		final String id = jdfToXJDF.completedRefs.get(map);
 		final String attName = getRefName(re);
 		if (id != null)
 		{
@@ -164,7 +164,7 @@ public class WalkRefElement extends WalkJDFElement
 			final VJDFAttributeMap partMapVector = rl == null ? null : rl.getPartMapVector();
 			final boolean overlap = VJDFAttributeMap.isEmpty(partMapVector) || partMapVector.overlapsMap(re.getPartMap());
 			final List<KElement> v = overlap ? setResource(re, target, refRoot) : null;
-			StringArray ids = new StringArray();
+			final StringArray ids = new StringArray();
 			if (v != null)
 			{
 				for (final KElement ref : v)
@@ -182,10 +182,10 @@ public class WalkRefElement extends WalkJDFElement
 		re.deleteNode();
 	}
 
-	JDFAttributeMap getRefMap(JDFRefElement re)
+	JDFAttributeMap getRefMap(final JDFRefElement re)
 	{
-		JDFAttributeMap map = new JDFAttributeMap(AttributeName.ID, re.getrRef());
-		JDFAttributeMap partMap = re.getPartMap();
+		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.ID, re.getrRef());
+		final JDFAttributeMap partMap = re.getPartMap();
 		ContainerUtil.putAll(map, partMap);
 		return map;
 	}
