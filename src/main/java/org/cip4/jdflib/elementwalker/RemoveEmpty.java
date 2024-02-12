@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -52,6 +52,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
@@ -399,7 +400,7 @@ public class RemoveEmpty extends BaseElementWalker
 		@Override
 		protected StringArray getDummyAttributes()
 		{
-			StringArray dummyAttributes = super.getDummyAttributes();
+			final StringArray dummyAttributes = super.getDummyAttributes();
 			dummyAttributes.add(AttributeName.DATATYPE);
 			dummyAttributes.add(AttributeName.PRIORITY);
 			return dummyAttributes;
@@ -557,10 +558,21 @@ public class RemoveEmpty extends BaseElementWalker
 		{
 			boolean hasGood = false;
 			final Collection<JDFResourceLink> links = getLinks(r);
+			boolean hasIn = false;
+			boolean hasOut = false;
 			if (links != null)
 			{
 				for (final JDFResourceLink rl : links)
 				{
+					final EnumUsage usage = rl.getUsage();
+					if (EnumUsage.Input.equals(usage))
+					{
+						hasIn = true;
+					}
+					else if (EnumUsage.Output.equals(usage))
+					{
+						hasOut = true;
+					}
 					removEmptyElement(rl);
 					if (rl.getAmountPool() != null || rl.getPart(0) != null)
 					{
@@ -571,7 +583,7 @@ public class RemoveEmpty extends BaseElementWalker
 					map.removeKeys(super.getDummyAttributes());
 					map.remove(AttributeName.RREF);
 					map.remove(AttributeName.USAGE);
-					if (!map.isEmpty())
+					if (hasIn && hasOut || !map.isEmpty())
 					{
 						hasGood = true;
 						break;

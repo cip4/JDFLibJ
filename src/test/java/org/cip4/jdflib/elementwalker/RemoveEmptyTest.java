@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -104,6 +104,25 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testRemoveExchangeResource()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setType(org.cip4.jdflib.node.JDFNode.EnumType.Product);
+
+		final JDFNode n1 = n.addJDFNode("ProcessGroup");
+		final JDFNode n2 = n.addJDFNode("ProcessGroup");
+		final JDFResource as = n1.addResource(ElementName.APPROVALSUCCESS, EnumUsage.Output);
+		n2.linkResource(as, EnumUsage.Input, null);
+		final RemoveEmpty emp = new RemoveEmpty();
+		emp.removEmpty(n);
+		assertEquals(n, as.getParentJDF());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testRemoveResource()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -124,7 +143,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
-		JDFLayoutIntent loi = (JDFLayoutIntent) n.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
+		final JDFLayoutIntent loi = (JDFLayoutIntent) n.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
 		loi.appendFinishedDimensions();
 		loi.appendDimensions().setPreferred(new JDFXYPair(2, 3));
 		final RemoveEmpty emp = new RemoveEmpty();
@@ -141,7 +160,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
-		JDFLayoutIntent loi = (JDFLayoutIntent) n.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
+		final JDFLayoutIntent loi = (JDFLayoutIntent) n.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
 		loi.appendFinishedDimensions();
 		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
