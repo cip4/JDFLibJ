@@ -100,6 +100,18 @@ public class NumberFormatterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testFormatExp()
+	{
+		final NumberFormatter numberFormatter = new NumberFormatter();
+		assertEquals("25000000000000000000000000000000000000000", numberFormatter.formatDouble(2.5e40));
+		assertEquals(2.5e40, StringUtil.parseDouble("25000000000000000000000000000000000000000", 0), 0.001);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testFormatPrecision()
 	{
 		final NumberFormatter numberFormatter = new NumberFormatter();
