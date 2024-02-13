@@ -2885,6 +2885,21 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testLayoutPrepLayoutUsage()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.LayoutPreparation);
+		n.addResource(ElementName.LAYOUTPREPARATIONPARAMS, EnumUsage.Input);
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final XJDFHelper xjdf = conv.convertToXJDF(n);
+		assertEquals(EnumUsage.Input, xjdf.getSet(ElementName.LAYOUT, 0).getUsage());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testLayoutPrepMultiBS()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/lpp.jdf");

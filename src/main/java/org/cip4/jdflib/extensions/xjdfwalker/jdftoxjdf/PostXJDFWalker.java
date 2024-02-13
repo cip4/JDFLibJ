@@ -376,17 +376,17 @@ class PostXJDFWalker extends BaseElementWalker
 			part.removeAttribute(AttributeName.PREFLIGHTRULE);
 			part.renameAttribute(AttributeName.RUNPAGE, AttributeName.PAGENUMBER);
 			part.renameAttribute(AttributeName.RUNPAGERANGE, AttributeName.PAGENUMBER);
-			String pn = part.getNonEmpty(AttributeName.PAGENUMBER);
+			final String pn = part.getNonEmpty(AttributeName.PAGENUMBER);
 			if (pn != null)
 			{
-				JDFIntegerList pns = JDFIntegerList.createIntegerList(pn);
+				final JDFIntegerList pns = JDFIntegerList.createIntegerList(pn);
 				if (pns != null)
 				{
-					int[] ia = pns.getIntArray();
-					JDFIntegerRangeList pnr = new JDFIntegerRangeList(ia);
+					final int[] ia = pns.getIntArray();
+					final JDFIntegerRangeList pnr = new JDFIntegerRangeList(ia);
 					if (pnr.size() == 1)
 					{
-						JDFIntegerRange r = (JDFIntegerRange) pnr.elementAt(0);
+						final JDFIntegerRange r = (JDFIntegerRange) pnr.elementAt(0);
 						part.setAttribute(AttributeName.PAGENUMBER, r.getXJDFString(0));
 					}
 				}
@@ -638,16 +638,16 @@ class PostXJDFWalker extends BaseElementWalker
 			return po;
 		}
 
-		void moveToStripMark(KElement xjdf)
+		void moveToStripMark(final KElement xjdf)
 		{
-			for (KElement child : xjdf.getChildList())
+			for (final KElement child : xjdf.getChildList())
 			{
 				if (JDFToXJDFDataCache.getStripMarkElements().contains(child.getLocalName()))
 				{
-					KElement layout = xjdf.getDeepParent(ElementName.LAYOUT, 0);
+					final KElement layout = xjdf.getDeepParent(ElementName.LAYOUT, 0);
 					if (layout != null)
 					{
-						KElement sm = layout.appendElement(ElementName.STRIPMARK);
+						final KElement sm = layout.appendElement(ElementName.STRIPMARK);
 						sm.moveElement(child, null);
 					}
 				}
@@ -895,7 +895,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			KElement parent = xjdf.getParentNode_KElement();
+			final KElement parent = xjdf.getParentNode_KElement();
 			if (isRemoveUsage(parent))
 			{
 				xjdf.removeAttribute(AttributeName.USAGE);
@@ -903,10 +903,10 @@ class PostXJDFWalker extends BaseElementWalker
 			return super.walk(xjdf, dummy);
 		}
 
-		boolean isRemoveUsage(KElement parent)
+		boolean isRemoveUsage(final KElement parent)
 		{
 			boolean isXJDF = parent != null && XJDFConstants.XJDF.equals(parent.getLocalName());
-			VString types = newRootHelper.getTypes();
+			final VString types = newRootHelper.getTypes();
 			isXJDF = isXJDF && ContainerUtil.containsAny(types, print);
 			return isXJDF && !ContainerUtil.containsAny(types, noPrint);
 		}
@@ -953,27 +953,27 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @author Rainer Prosi, Heidelberger Druckmaschinen
 		 */
 
-		void splitPages(KElement xjdf)
+		void splitPages(final KElement xjdf)
 		{
-			SetHelper sh = SetHelper.getHelper(xjdf);
+			final SetHelper sh = SetHelper.getHelper(xjdf);
 			if (sh.size() > 0)
 			{
 				int i = 0;
-				for (ResourceHelper rh : sh.getPartitionList())
+				for (final ResourceHelper rh : sh.getPartitionList())
 				{
-					JDFRunList ruli = (JDFRunList) rh.getResource();
-					JDFIntegerList pages = ruli == null ? null : JDFIntegerList.createIntegerList(ruli.getNonEmpty(AttributeName.PAGES));
+					final JDFRunList ruli = (JDFRunList) rh.getResource();
+					final JDFIntegerList pages = ruli == null ? null : JDFIntegerList.createIntegerList(ruli.getNonEmpty(AttributeName.PAGES));
 					ResourceHelper rh2 = rh;
 					if (ruli != null && pages != null)
 					{
-						int nPage = ruli.getNPage();
+						final int nPage = ruli.getNPage();
 						if (pages.size() > 2)
 						{
 							int nPage0 = 0;
 							for (int pos = 0; pos < pages.size(); pos += 2)
 							{
 								rh2 = (pos > 0) ? rh2.clonePartition() : rh;
-								VJDFAttributeMap vParts = rh2.getPartMapVector();
+								final VJDFAttributeMap vParts = rh2.getPartMapVector();
 								if (!VJDFAttributeMap.isEmpty(vParts))
 								{
 									vParts.put("Run", "SplitRun" + i++);
@@ -983,7 +983,7 @@ class PostXJDFWalker extends BaseElementWalker
 								{
 									rh2.setPartMap(new JDFAttributeMap("Run", "SplitRun" + i++));
 								}
-								JDFRunList ruli2 = (JDFRunList) rh2.getResource();
+								final JDFRunList ruli2 = (JDFRunList) rh2.getResource();
 								int pages0 = pages.getInt(pos);
 								int pages1 = pages.getInt(pos + 1);
 								ruli2.setAttribute(AttributeName.PAGES, pages0 + " " + pages1);
@@ -2273,7 +2273,7 @@ class PostXJDFWalker extends BaseElementWalker
 					final ResourceHelper medHelp = ResourceHelper.getHelper(m);
 					if (medHelp != null)
 					{
-						VJDFAttributeMap vPartMedia = medHelp.getPartMapVector();
+						final VJDFAttributeMap vPartMedia = medHelp.getPartMapVector();
 						vPartMedia.appendUnique(maps);
 						medHelp.setPartMapVector(vPartMedia);
 					}
@@ -2660,22 +2660,22 @@ class PostXJDFWalker extends BaseElementWalker
 			return super.walk(xjdf, dummy);
 		}
 
-		void splitMessageServices(KElement xjdf)
+		void splitMessageServices(final KElement xjdf)
 		{
-			List<JDFMessageService> v = xjdf.getChildArrayByClass(JDFMessageService.class, false, 0);
-			for (JDFMessageService ms : v)
+			final List<JDFMessageService> v = xjdf.getChildArrayByClass(JDFMessageService.class, false, 0);
+			for (final JDFMessageService ms : v)
 			{
 				splitMessageService(xjdf, ms);
 			}
 		}
 
-		void splitMessageService(KElement xjdf, JDFMessageService ms)
+		void splitMessageService(final KElement xjdf, final JDFMessageService ms)
 		{
 			int i = 0;
-			boolean c = ms.getCommand();
-			boolean s = ms.getSignal();
-			boolean q = ms.getQuery();
-			String t = ms.getType();
+			final boolean c = ms.getCommand();
+			final boolean s = ms.getSignal();
+			final boolean q = ms.getQuery();
+			final String t = ms.getType();
 			ms.removeAttributes(new StringArray("Command Query Signal"));
 			if (c)
 			{
@@ -2684,13 +2684,13 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 			if (s)
 			{
-				JDFMessageService ms0 = (JDFMessageService) (i > 0 ? xjdf.copyElement(ms, ms) : ms);
+				final JDFMessageService ms0 = (JDFMessageService) (i > 0 ? xjdf.copyElement(ms, ms) : ms);
 				ms0.setType(ElementName.SIGNAL + t);
 				i++;
 			}
 			if (q)
 			{
-				JDFMessageService ms0 = (JDFMessageService) (i > 0 ? xjdf.copyElement(ms, ms) : ms);
+				final JDFMessageService ms0 = (JDFMessageService) (i > 0 ? xjdf.copyElement(ms, ms) : ms);
 				ms0.setType(ElementName.QUERY + t);
 			}
 
@@ -2793,7 +2793,11 @@ class PostXJDFWalker extends BaseElementWalker
 			SetHelper layoutseth = newRootHelper.getSet(ElementName.LAYOUT, EnumUsage.Input);
 			if (layoutseth == null)
 			{
-				layoutseth = newRootHelper.getCreateSet(ElementName.LAYOUT, EnumUsage.Output);
+				layoutseth = newRootHelper.getSet(ElementName.LAYOUT, EnumUsage.Output);
+				if (layoutseth == null)
+				{
+					layoutseth = newRootHelper.getCreateSet(ElementName.LAYOUT, EnumUsage.Input);
+				}
 			}
 
 			final VJDFAttributeMap vmap = new ResourceHelper(strippingParams.getParentNode_KElement()).getPartMapVector();
