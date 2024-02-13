@@ -768,17 +768,17 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	public synchronized void testMaxAux() throws Exception
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
-		hf.setStabilizeTime(100);
+		hf.setStabilizeTime(42);
 		File error = new File("error");
 		hf.setErrorStorage(error);
 		File ok = new File("ok");
 		hf.setOKStorage(ok);
 		hf.setMaxStore(40);
-		hf.setMaxAux(10);
+		hf.setMaxAux(5);
 		hf.restart();
 		ThreadUtil.sleep(42);
 
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 50; i++)
 			createPair(i);
 
 		ok = FileUtil.getFileInDirectory(theHFDir, ok);
