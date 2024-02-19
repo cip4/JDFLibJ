@@ -116,6 +116,7 @@ import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
+import org.cip4.jdflib.resource.process.JDFDieLayout;
 import org.cip4.jdflib.resource.process.JDFDieLayoutProductionParams;
 import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -165,7 +166,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFDevice dev = (JDFDevice) h.getCreateResource(ElementName.DEVICE, EnumUsage.Input, null);
 		dev.setRestApiBaseURL("http://rest");
 		dev.setDeviceID("d1");
-		JDFNode jdf = (JDFNode) writeRoundTripX(h, "RestAPI", EnumValidationLevel.Incomplete);
+		final JDFNode jdf = (JDFNode) writeRoundTripX(h, "RestAPI", EnumValidationLevel.Incomplete);
 		assertEquals(EnumPartUsage.Implicit, jdf.getResource(ElementName.DEVICE, EnumUsage.Input, 0).getPartUsage());
 	}
 
@@ -178,19 +179,19 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final KElement e = new JDFDoc(XJDFConstants.XJDF, null).getRoot();
-		XJDFHelper xh = new XJDFHelper(e);
+		final XJDFHelper xh = new XJDFHelper(e);
 		xh.setTypes("Product");
 		xh.getCreateSet(ElementName.NODEINFO, EnumUsage.Input).getCreatePartition(0, true).getResource().setAttribute(AttributeName.STATUS, "Waiting");
 
 		final KElement c = e.appendElement(SetHelper.RESOURCE_SET);
 		c.setAttribute("Name", "Contact");
 		c.setAttribute("Usage", "Input");
-		KElement res = c.appendElement(XJDFConstants.Resource);
-		JDFContact contactX = (JDFContact) res.appendElement(ElementName.CONTACT);
+		final KElement res = c.appendElement(XJDFConstants.Resource);
+		final JDFContact contactX = (JDFContact) res.appendElement(ElementName.CONTACT);
 		contactX.setContactTypeDetails("CSR");
-		JDFPerson pers = contactX.appendPerson();
+		final JDFPerson pers = contactX.appendPerson();
 		pers.setFirstName("f1");
-		ResourceHelper rh = new ResourceHelper(res);
+		final ResourceHelper rh = new ResourceHelper(res);
 		rh.setPartMap(new JDFAttributeMap(XJDFConstants.ContactType, "Employee"));
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
@@ -487,7 +488,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFNodeInfo nij = docjdf.getJDFRoot().getNodeInfo();
 		assertEquals(EnumResStatus.Available, nij.getResStatus(false));
 		assertEquals(EnumNodeStatus.InProgress, nij.getNodeStatus());
-		JDFNodeInfo nir = (JDFNodeInfo) nij.getResourceRoot();
+		final JDFNodeInfo nir = (JDFNodeInfo) nij.getResourceRoot();
 		assertEquals(EnumNodeStatus.Waiting, nir.getNodeStatus());
 	}
 
@@ -774,7 +775,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final SetHelper rls = h.getCreateSet(ElementName.RUNLIST, EnumUsage.Input);
 		for (final String p : new String[] { "p1", "p2" })
 		{
-			ProductHelper pr = h.appendProduct();
+			final ProductHelper pr = h.appendProduct();
 			pr.setExternalID(p);
 			pr.setRoot();
 			final JDFAttributeMap partMap = new JDFAttributeMap("Run", p);
@@ -785,11 +786,11 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		}
 		final JDFDoc d = xCon.convert(h);
 		assertNotNull(d);
-		JDFNode jdfRoot = d.getJDFRoot();
+		final JDFNode jdfRoot = d.getJDFRoot();
 		assertEquals(jdfRoot.getResourcePool().numChildElements(ElementName.RUNLIST, null), 1);
-		VElement products = jdfRoot.getvJDFNode("Product", null, true);
+		final VElement products = jdfRoot.getvJDFNode("Product", null, true);
 		assertEquals(2, products.size());
-		for (KElement p : products)
+		for (final KElement p : products)
 		{
 			assertNotNull(((JDFNode) p).getResource(ElementName.RUNLIST, EnumUsage.Input, 0));
 		}
@@ -808,7 +809,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final SetHelper rls = h.getCreateSet(ElementName.RUNLIST, EnumUsage.Input);
 		for (final String p : new String[] { "p1", "p2" })
 		{
-			ProductHelper pr = h.appendProduct();
+			final ProductHelper pr = h.appendProduct();
 			pr.setExternalID(p);
 			pr.setRoot();
 			final JDFAttributeMap partMap = new JDFAttributeMap("Run", p);
@@ -818,11 +819,11 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 			rl.appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "file:" + p);
 		}
 		final JDFDoc d = xCon.convert(h);
-		JDFNode jdfRoot = d.getJDFRoot();
-		VElement products = jdfRoot.getvJDFNode("Product", null, true);
+		final JDFNode jdfRoot = d.getJDFRoot();
+		final VElement products = jdfRoot.getvJDFNode("Product", null, true);
 		assertEquals(2, products.size());
 		assertEquals(d.getJDFRoot().getResourcePool().numChildElements(ElementName.RUNLIST, null), 1);
-		for (KElement p : products)
+		for (final KElement p : products)
 		{
 			assertNotNull(((JDFNode) p).getResource(ElementName.RUNLIST, EnumUsage.Input, 0));
 		}
@@ -1298,13 +1299,13 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		final XJDFHelper xjdf = new XJDFHelper("j1", null);
 		xjdf.setTypes("ImageSetting");
-		SetHelper rs = xjdf.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input);
-		ResourceHelper r1 = rs.appendPartition(AttributeName.RUN, "r1", true);
-		JDFRunList rl1 = (JDFRunList) r1.getResource();
+		final SetHelper rs = xjdf.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		final ResourceHelper r1 = rs.appendPartition(AttributeName.RUN, "r1", true);
+		final JDFRunList rl1 = (JDFRunList) r1.getResource();
 		rl1.setFileSpecURL("file:r1.pdf");
 		r1.setGeneralID("PageListName", "PL1");
-		ResourceHelper r2 = rs.appendPartition(AttributeName.RUN, "r2", true);
-		JDFRunList rl2 = (JDFRunList) r1.getResource();
+		final ResourceHelper r2 = rs.appendPartition(AttributeName.RUN, "r2", true);
+		final JDFRunList rl2 = (JDFRunList) r1.getResource();
 		rl2.setFileSpecURL("file:r2.pdf");
 		r2.setGeneralID("PageListName", "PL2");
 
@@ -1615,9 +1616,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
 		final KElement e = h.getRoot();
-		h.getCreateSet(XJDFConstants.Resource, ElementName.CUSTOMERINFO, EnumUsage.Input).getCreatePartition(0, true).getResource().setAttribute(AttributeName.CUSTOMERORDERID,
-				"cc");
-		final SetHelper sh = h.getCreateSet(XJDFConstants.Resource, ElementName.CONTACT, EnumUsage.Input);
+		h.getCreateSet(ElementName.CUSTOMERINFO, EnumUsage.Input).getCreatePartition(0, true).getResource().setAttribute(AttributeName.CUSTOMERORDERID, "cc");
+		final SetHelper sh = h.getCreateSet(ElementName.CONTACT, EnumUsage.Input);
 		final ResourceHelper ph = sh.getCreatePartition(0, true);
 		ph.setPartMap(new JDFAttributeMap(XJDFConstants.ContactType, EnumContactType.Customer.getName()));
 		final JDFDoc d = xCon.convert(e);
@@ -1626,6 +1626,33 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(ci);
 		final JDFContact contact = (JDFContact) d.getJDFRoot().getResource(ElementName.CONTACT, null, 0);
 		assertEquals(EnumContactType.Customer.getName(), contact.getContactTypes().get(0));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testDieLayoutBindery()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		h.setTypes("Stripping");
+		final KElement e = h.getRoot();
+		final ResourceHelper dloRes = h.getCreateSet(ElementName.DIELAYOUT, null).getCreatePartition(0, true);
+		final JDFDieLayout dlo = (JDFDieLayout) dloRes.getResource();
+		dlo.appendStation().setStationName("station");
+
+		final JDFBinderySignature bs = (JDFBinderySignature) h.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input).getCreatePartition(0, true).getResource();
+		dloRes.ensureReference(bs, null);
+
+		final ResourceHelper loRes = h.getCreateSet(ElementName.LAYOUT, EnumUsage.Output).getCreatePartition(AttributeName.SHEETNAME, "S1", true);
+		final JDFLayout lo = (JDFLayout) loRes.getResource();
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex, null);
+
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+
 	}
 
 	/**
