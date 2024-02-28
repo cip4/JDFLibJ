@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -47,11 +47,13 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -621,6 +623,28 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 *
+	 * @param keys
+	 * @return
+	 */
+	public void removeEmpty()
+	{
+		final List<String> keys = new ArrayList<>();
+		for (final Entry<String, String> e : entrySet())
+		{
+			if (StringUtil.isEmpty(e.getValue()))
+			{
+				keys.add(e.getKey());
+			}
+		}
+		for (final String key : keys)
+		{
+			remove(key);
+		}
+
+	}
+
+	/**
+	 *
 	 *
 	 * get but always return null instead of empty string
 	 */
@@ -861,7 +885,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public String getIgnoreCase(final String strLocalName)
 	{
-		String val = get(strLocalName);
+		final String val = get(strLocalName);
 		if (val == null && !StringUtil.isEmpty(strLocalName))
 		{
 			for (final String key : keySet())

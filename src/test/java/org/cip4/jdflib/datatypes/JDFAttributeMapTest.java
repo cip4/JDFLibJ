@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -57,6 +57,7 @@ import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -79,6 +80,20 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals(m1.showKeys(" "), "(a1 = v1) (b1 = v2)");
 		assertEquals(m1.showKeys("\n"), "(a1 = v1)\n(b1 = v2)");
 		assertEquals(m1.showKeys(null), "(a1 = v1)(b1 = v2)");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testRemoveEmpty()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		m2.put("b", "");
+		m2.put("c", StringUtil.getNonEmpty(""));
+		m2.removeEmpty();
+		assertEquals(m1, m2);
 	}
 
 	/**

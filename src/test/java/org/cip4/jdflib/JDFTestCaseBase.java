@@ -83,6 +83,7 @@ import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -536,14 +537,14 @@ public abstract class JDFTestCaseBase
 		return x;
 	}
 
-	protected void writeRoundTrip(final JDFElement root, final String fileBase)
+	protected MyPair<BaseXJDFHelper, JDFElement> writeRoundTrip(final JDFElement root, final String fileBase)
 	{
-		writeRoundTrip(root, fileBase, BaseXJDFHelper.getDefaultVersion());
+		return writeRoundTrip(root, fileBase, BaseXJDFHelper.getDefaultVersion());
 	}
 
-	protected void writeRoundTrip(final JDFElement root, final String fileBase, final EnumVersion version)
+	protected MyPair<BaseXJDFHelper, JDFElement> writeRoundTrip(final JDFElement root, final String fileBase, final EnumVersion version)
 	{
-		writeRoundTrip(root, fileBase, version, EnumValidationLevel.Complete);
+		return writeRoundTrip(root, fileBase, version, EnumValidationLevel.Complete);
 	}
 
 	/**
@@ -553,7 +554,7 @@ public abstract class JDFTestCaseBase
 	 * @param fileBase the filename without extension
 	 * @param version 21
 	 */
-	protected void writeRoundTrip(final JDFElement root, final String fileBase, final EnumVersion version, final EnumValidationLevel level)
+	protected MyPair<BaseXJDFHelper, JDFElement> writeRoundTrip(final JDFElement root, final String fileBase, final EnumVersion version, final EnumValidationLevel level)
 	{
 		final String tmpJDF = fileBase + ".jdf";
 		final String tmpJDFPath = sm_dirTestDataTemp + tmpJDF;
@@ -604,6 +605,7 @@ public abstract class JDFTestCaseBase
 		}
 		JDFParserFactory.getFactory().push(p);
 		assertTrue(valid, fileBase + ".xjdf.jdf");
+		return new MyPair<BaseXJDFHelper, JDFElement>(BaseXJDFHelper.getBaseHelper(xjdfRoot), jxRoot);
 	}
 
 	static protected XMLDoc printValid(final JDFDoc converted)

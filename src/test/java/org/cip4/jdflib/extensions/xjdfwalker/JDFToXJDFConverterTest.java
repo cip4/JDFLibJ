@@ -95,6 +95,7 @@ import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFTransferFunction;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
@@ -178,6 +179,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.cip4.jdflib.span.JDFSpanScreeningType.EnumSpanScreeningType;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.MyPair;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -2511,6 +2513,32 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testProductCoverBody()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Product);
+
+		final JDFNode n1 = n.addJDFNode(EnumType.Product);
+		final JDFComponent c1 = (JDFComponent) n1.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		c1.setComponentType(EnumComponentType.PartialProduct, null);
+		c1.setProductType("Cover");
+
+		final JDFNode n2 = n.addJDFNode(EnumType.Product);
+		final JDFComponent c2 = (JDFComponent) n2.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		c2.setComponentType(EnumComponentType.FinalProduct, null);
+		c2.setProductType("Body");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		final XJDFHelper h = new XJDFHelper(xjdf);
+		assertEquals("Cover", h.getRootProduct(0).getAttribute(AttributeName.PRODUCTTYPE));
+		assertEquals("Body", h.getRootProduct(1).getAttribute(AttributeName.PRODUCTTYPE));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testNotificationAudit()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -3575,6 +3603,25 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		writeRoundTrip(node, "glue");
 
+	}
+
+	/**
+	 * @return
+	 *
+	 */
+	@Test
+	public void testGeneralID()
+	{
+		final JDFNode node = JDFNode.createRoot();
+		node.setJobID("gid");
+		node.setType(EnumType.Product);
+		node.setGeneralID("g1", "v1");
+		final JDFComponent c = (JDFComponent) node.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		c.setComponentType(EnumComponentType.FinalProduct, null);
+
+		final MyPair<BaseXJDFHelper, JDFElement> p = writeRoundTrip(node, "gid");
+		assertEquals("v1", p.a.getGeneralID("g1"));
+		assertEquals("v1", p.b.getGeneralID("g1"));
 	}
 
 	/**

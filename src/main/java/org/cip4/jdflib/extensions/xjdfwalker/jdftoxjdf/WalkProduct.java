@@ -42,6 +42,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -134,6 +135,9 @@ public class WalkProduct extends WalkJDF
 		}
 	}
 
+	final private static StringArray copyKeep = new StringArray(
+			new String[] { XJDFConstants.ExternalID, AttributeName.PRODUCTTYPE, AttributeName.PARTVERSION, AttributeName.PRODUCTTYPEDETAILS, AttributeName.DESCRIPTIVENAME });
+
 	/**
 	 * @param node
 	 * @param prod
@@ -154,11 +158,12 @@ public class WalkProduct extends WalkJDF
 		final JDFComponent component = (JDFComponent) cOutLink.getTarget();
 		if (component != null)
 		{
-			prod.copyAttribute(AttributeName.PRODUCTTYPE, component, false);
-			prod.copyAttribute(AttributeName.PARTVERSION, component, false);
-			prod.copyAttribute(AttributeName.PRODUCTTYPEDETAILS, component, false);
-			prod.copyAttribute(XJDFConstants.ExternalID, component, AttributeName.PRODUCTID, null, null, false);
-			prod.copyAttribute(AttributeName.DESCRIPTIVENAME, component, false);
+			final JDFAttributeMap map = component.getAttributeMap();
+			map.removeEmpty();
+
+			map.renameKey(AttributeName.PRODUCTID, XJDFConstants.ExternalID);
+			map.reduceMap(copyKeep);
+			prod.setAttributes(map);
 			if (component.isComponentType(EnumComponentType.FinalProduct))
 			{
 				new ProductHelper(prod).setRoot();
@@ -199,7 +204,7 @@ public class WalkProduct extends WalkJDF
 			map.remove(AttributeName.JOBID);
 			if (prod.getNonEmpty(XJDFConstants.ExternalID) == null)
 			{
-				String xid = WalkResLink.getXJDFExternalID(node);
+				final String xid = WalkResLink.getXJDFExternalID(node);
 				map.put(XJDFConstants.ExternalID, xid);
 			}
 

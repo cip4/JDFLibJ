@@ -468,8 +468,8 @@ public class VElement extends Vector<KElement>
 	}
 
 	/**
-	 * ToVector - parse a node list for elements spezified through parameters note that the vector is static - i.e. the elements are NOT modified by operations to the nodeList. This behavior is
-	 * different than that of the actual nodelist!
+	 * ToVector - parse a node list for elements spezified through parameters note that the vector is static - i.e. the elements are NOT modified by operations to the nodeList.
+	 * This behavior is different than that of the actual nodelist!
 	 *
 	 * @param element name of the element typ you want
 	 * @param mAttrib a attribute typ you want
@@ -559,7 +559,7 @@ public class VElement extends Vector<KElement>
 	 * @return the element that is a common ancestor of all vector members
 	 * @since 050721
 	 */
-	KElement getCommonAncestor()
+	public KElement getCommonAncestor()
 	{
 		final int siz = size();
 		if (siz == 0)
