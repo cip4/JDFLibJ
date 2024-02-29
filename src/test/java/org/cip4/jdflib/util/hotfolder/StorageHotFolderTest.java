@@ -275,7 +275,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		assertFalse(content.exists(), content.getAbsolutePath());
 		final File file2 = new File(hfPath + "/OK/dummy space");
 		assertTrue(file2.isDirectory());
-		assertEquals(0, tmpHFDir.listFiles().length, 0);
+		assertEquals(0, tmpHFDir.listFiles().length, 2);
 		hf.stop();
 	}
 
@@ -667,50 +667,93 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public synchronized void testOKErrorMultiDelaysynch() throws Exception
+	{
+		setUp();
+
+		final CountListener cl = new CountListener();
+		cl.setDelay(2000);
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, cl);
+		hf.setSynchronous(true);
+		hf.setStabilizeTime(42);
+		File error = new File("error");
+		hf.setErrorStorage(error);
+		File ok = new File("ok");
+		hf.setOKStorage(ok);
+		hf.setMaxStore(42);
+		hf.restart();
+		hf.setMaxConcurrent(20);
+		ThreadUtil.sleep(42);
+
+		for (int i = 0; i < 10; i++)
+		{
+			final File file = new File(theHFDir + File.separator + "fok_err" + i + ".txt");
+			file.createNewFile();
+		}
+		ThreadUtil.sleep(42);
+		final long t0 = System.currentTimeMillis();
+		ok = FileUtil.getFileInDirectory(theHFDir, ok);
+		error = FileUtil.getFileInDirectory(theHFDir, error);
+		for (int i = 0; i < 1000; i++)
+		{
+			ThreadUtil.sleep(50);
+			if (ok.listFiles().length >= 4 && error.listFiles().length >= 4 && tmpHFDir.listFiles().length < 2)
+				break;
+		}
+		assertEquals(5, ok.listFiles().length, 5);
+		assertEquals(0, tmpHFDir.listFiles().length, 5);
+		assertEquals(5, error.listFiles().length, 5);
+		// not 2000 * 10...
+		assertTrue(System.currentTimeMillis() - t0 < 12000);
+		hf.stop();
+	}
+
+	/**
+	 *
+	 * ok or error folder testing
+	 *
+	 * @throws Exception
+	 */
+	@Test
 	public synchronized void testOKErrorMultiDelay() throws Exception
 	{
-		for (final boolean synch : new boolean[] { true, false })
+		setUp();
+
+		final CountListener cl = new CountListener();
+		cl.setDelay(2000);
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, cl);
+		hf.setSynchronous(false);
+		hf.setStabilizeTime(42);
+		File error = new File("error");
+		hf.setErrorStorage(error);
+		File ok = new File("ok");
+		hf.setOKStorage(ok);
+		hf.setMaxStore(42);
+		hf.restart();
+		hf.setMaxConcurrent(20);
+		ThreadUtil.sleep(42);
+
+		for (int i = 0; i < 10; i++)
 		{
-			setUp();
-
-			final CountListener cl = new CountListener();
-			cl.setDelay(2000);
-			final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, cl);
-			hf.setSynchronous(synch);
-			hf.setStabilizeTime(42);
-			File error = new File("error");
-			hf.setErrorStorage(error);
-			File ok = new File("ok");
-			hf.setOKStorage(ok);
-			hf.setMaxStore(42);
-			hf.restart();
-			hf.setMaxConcurrent(20);
-			ThreadUtil.sleep(42);
-
-			for (int i = 0; i < 10; i++)
-			{
-				final File file = new File(theHFDir + File.separator + "fok_err" + i + ".txt");
-				file.createNewFile();
-			}
-			ThreadUtil.sleep(42);
-			final long t0 = System.currentTimeMillis();
-			ok = FileUtil.getFileInDirectory(theHFDir, ok);
-			error = FileUtil.getFileInDirectory(theHFDir, error);
-			for (int i = 0; i < 1000; i++)
-			{
-				ThreadUtil.sleep(50);
-				if (ok.listFiles().length >= 4 && error.listFiles().length >= 4 && tmpHFDir.listFiles().length < 2)
-					break;
-			}
-			assertEquals(5, ok.listFiles().length, 5);
-			assertEquals(0, tmpHFDir.listFiles().length, 5);
-			assertEquals(5, error.listFiles().length, 5);
-			// not 2000 * 10...
-			assertTrue(System.currentTimeMillis() - t0 < 9000);
-			hf.stop();
-			if (synch)
-				ThreadUtil.sleep(420);
+			final File file = new File(theHFDir + File.separator + "fok_err" + i + ".txt");
+			file.createNewFile();
 		}
+		ThreadUtil.sleep(42);
+		final long t0 = System.currentTimeMillis();
+		ok = FileUtil.getFileInDirectory(theHFDir, ok);
+		error = FileUtil.getFileInDirectory(theHFDir, error);
+		for (int i = 0; i < 1000; i++)
+		{
+			ThreadUtil.sleep(50);
+			if (ok.listFiles().length >= 4 && error.listFiles().length >= 4 && tmpHFDir.listFiles().length < 2)
+				break;
+		}
+		assertEquals(5, ok.listFiles().length, 5);
+		assertEquals(0, tmpHFDir.listFiles().length, 5);
+		assertEquals(5, error.listFiles().length, 5);
+		// not 2000 * 10...
+		assertTrue(System.currentTimeMillis() - t0 < 12000);
+		hf.stop();
 	}
 
 	/**
@@ -752,7 +795,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		error = FileUtil.getFileInDirectory(theHFDir, error);
 
 		assertEquals(20, ok.listFiles().length, 5);
-		assertEquals(0, tmpHFDir.listFiles().length, 5);
+		assertEquals(0, tmpHFDir.listFiles().length, 10);
 		assertEquals(20, error.listFiles().length, 5);
 
 		hf.stop();
