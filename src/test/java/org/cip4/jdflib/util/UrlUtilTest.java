@@ -286,6 +286,18 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test adding a path to a url
+	 */
+	@Test
+	public void testGetSecurePath()
+	{
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.getSecurePath("A/../B", true));
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.getSecurePath("A/../B", false));
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.getSecurePath("A/%2E%2E/B", false));
+		UrlUtil.getSecurePath("A/./B", false);
+	}
+
+	/**
 	 *
 	 */
 	@Test
@@ -959,6 +971,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertFalse(UrlUtil.isRelativeURL("http://c:8080/c/d/e.f"));
 		assertFalse(UrlUtil.isRelativeURL("c:\\foo"));
 		assertFalse(UrlUtil.isRelativeURL("cid:c/d/e.f"));
+		assertFalse(UrlUtil.isRelativeURL("?"));
+		assertTrue(UrlUtil.isRelativeURL("abc?foo=http://a"));
 	}
 
 	/**

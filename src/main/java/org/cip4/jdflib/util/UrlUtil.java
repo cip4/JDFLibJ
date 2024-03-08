@@ -819,8 +819,9 @@ public class UrlUtil
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public static String getSecurePath(final String url, final boolean allowAbsolute) throws IllegalArgumentException
+	public static String getSecurePath(String url, final boolean allowAbsolute) throws IllegalArgumentException
 	{
+		url = unEscape(url);
 		if (url == null || !allowAbsolute && !isRelativeURL(url))
 			throw new IllegalArgumentException("URL must be relative " + url);
 		if (StringUtil.hasToken(url, "..", "/\\", 0))
@@ -1887,8 +1888,9 @@ public class UrlUtil
 	 * @param url the url string to test
 	 * @return true if relative
 	 */
-	public static boolean isRelativeURL(final String url)
+	public static boolean isRelativeURL(String url)
 	{
+		url = StringUtil.token(url, 0, "?");
 		if (StringUtil.isEmpty(url))
 			return false;
 		return url.indexOf(":/") < 0 && url.indexOf(":\\") < 0 && !url.startsWith("/") && !url.startsWith("\\") && !isCID(url);
