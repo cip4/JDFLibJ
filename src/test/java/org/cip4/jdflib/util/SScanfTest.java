@@ -60,7 +60,7 @@ public class SScanfTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSScanfInt()
+	void testSScanfInt()
 	{
 		Vector<Object> o = SScanf.sscanf("4", "%i");
 		Integer i2 = (Integer) o.elementAt(0);
@@ -83,7 +83,7 @@ public class SScanfTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSScanfDouble()
+	void testSScanfDouble()
 	{
 		final Vector<Object> o = SScanf.sscanf("4", "%f");
 		final Double d2 = (Double) o.elementAt(0);
@@ -94,7 +94,7 @@ public class SScanfTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSScanfString()
+	void testSScanfString()
 	{
 		Vector<Object> o = SScanf.sscanf("4", "%s");
 		String s2 = (String) o.elementAt(0);
@@ -117,7 +117,7 @@ public class SScanfTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSScanfMemString()
+	void testSScanfMemString()
 	{
 		final long mem = new MemorySpy().getCurrentMem();
 		for (int i = 0; i < 100000; i++)
@@ -149,7 +149,7 @@ public class SScanfTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSScanfMulti()
+	void testSScanfMulti()
 	{
 		Vector<Object> o = SScanf.sscanf("abc 4", "%s %i");
 		String s2 = (String) o.elementAt(0);

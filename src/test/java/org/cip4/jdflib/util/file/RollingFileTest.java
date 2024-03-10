@@ -70,7 +70,7 @@ public class RollingFileTest extends JDFTestCaseBase
 	{
 
 		@Override
-		public void run()
+		void run()
 		{
 			files.add(r.getNewFile());
 
@@ -82,7 +82,7 @@ public class RollingFileTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNewFile()
+	void testGetNewFile()
 	{
 		for (int i = 1; i < 100; i++)
 		{
@@ -94,7 +94,7 @@ public class RollingFileTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNewFileThread()
+	void testGetNewFileThread()
 	{
 		for (int i = 0; i < 42; i++)
 		{
@@ -113,7 +113,7 @@ public class RollingFileTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNewFileDir()
+	void testGetNewFileDir()
 	{
 		r = new RollingFile(sm_dirTestDataTemp + "RollingFile", "dummyDir");
 		for (int i = 1; i < 100; i++)
@@ -132,7 +132,7 @@ public class RollingFileTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNewDeepFile()
+	void testGetNewDeepFile()
 	{
 		r = new RollingFile(sm_dirTestDataTemp + "RollingFile/foo/bar", "dummyDir");
 		for (int i = 1; i < 100; i++)
@@ -148,7 +148,7 @@ public class RollingFileTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPreExist() throws IOException
+	void testPreExist() throws IOException
 	{
 		FileUtil.getFileInDirectory(r, new File("dummy1234.tst")).createNewFile();
 		r = new RollingFile(sm_dirTestDataTemp + "RollingFile", "dummy.tst");
@@ -160,7 +160,7 @@ public class RollingFileTest extends JDFTestCaseBase
 	 * TODO Please insert comment!
 	 */
 	@Test
-	public void testDoubleDot()
+	void testDoubleDot()
 	{
 		r = new RollingFile(sm_dirTestDataTemp + "RollingFile", "dummy..tst");
 		assertEquals(r.getNewFile().getName(), "dummy.000001.tst");
@@ -172,7 +172,7 @@ public class RollingFileTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		final File f = new File(sm_dirTestDataTemp + "RollingFile");

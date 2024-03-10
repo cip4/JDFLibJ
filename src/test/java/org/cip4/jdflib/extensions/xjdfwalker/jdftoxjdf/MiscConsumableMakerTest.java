@@ -54,7 +54,7 @@ public class MiscConsumableMakerTest
 	 *
 	 */
 	@Test
-	public void testCreate()
+	void testCreate()
 	{
 		final XJDFHelper root = new XJDFHelper("j1", "p1", null);
 		final SetHelper sh = root.getCreateSet(XJDFConstants.Resource, ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input);
@@ -70,7 +70,7 @@ public class MiscConsumableMakerTest
 	 *
 	 */
 	@Test
-	public void testBrand()
+	void testBrand()
 	{
 		final XJDFHelper root = new XJDFHelper("j1", "p1", null);
 		final SetHelper sh = root.getCreateSet(XJDFConstants.Resource, ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input);
@@ -89,7 +89,7 @@ public class MiscConsumableMakerTest
 	 *
 	 */
 	@Test
-	public void testColor()
+	void testColor()
 	{
 		final XJDFHelper root = new XJDFHelper("j1", "p1", null);
 		final SetHelper sh = root.getCreateSet(XJDFConstants.Resource, ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input);
@@ -107,7 +107,7 @@ public class MiscConsumableMakerTest
 	 *
 	 */
 	@Test
-	public void testTypeDetails()
+	void testTypeDetails()
 	{
 		final XJDFHelper root = new XJDFHelper("j1", "p1", null);
 		final SetHelper sh = root.getCreateSet(XJDFConstants.Resource, ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input);

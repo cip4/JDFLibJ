@@ -90,7 +90,7 @@ public class WalkCutBlockTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWalk()
+	void testWalk()
 	{
 		JDFCutBlock cb = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
 		JDFRectangle box = new JDFRectangle(10, 20, 210, 420);

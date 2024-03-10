@@ -99,7 +99,7 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLink()
+	void testGetLink()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -122,7 +122,7 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetInOutLink()
+	void testGetInOutLink()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -152,7 +152,7 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLinkResource()
+	void testLinkResource()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -191,7 +191,7 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLinkResourcePartition()
+	void testLinkResourcePartition()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -218,7 +218,7 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinkedResources()
+	void testGetLinkedResources()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -234,7 +234,7 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 	 * tests the various combinations of links and resources + namespaces
 	 */
 	@Test
-	public void testGetLinkedResourcesNS()
+	void testGetLinkedResourcesNS()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();

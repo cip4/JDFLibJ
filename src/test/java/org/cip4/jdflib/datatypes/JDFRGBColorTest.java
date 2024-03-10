@@ -62,7 +62,7 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetHTMLcolor()
+	void testgetHTMLcolor()
 	{
 		JDFRGBColor c = new JDFRGBColor(0, 0, 0);
 		Assertions.assertEquals(c.getHTMLColor(), "#000000");
@@ -74,7 +74,7 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFromHTMLcolor()
+	void testFromHTMLcolor()
 	{
 		final JDFRGBColor c = JDFRGBColor.createRGBColor("#f08123");
 		Assertions.assertEquals(0xf0, c.getR255());
@@ -86,7 +86,7 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetHTMLcolorInt()
+	void testgetHTMLcolorInt()
 	{
 		final JDFRGBColor c = new JDFRGBColor(255, 255, 255);
 		Assertions.assertEquals(c.getHTMLColor(), "#ffffff");
@@ -96,7 +96,7 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testgetRGB255()
+	void testgetRGB255()
 	{
 		final JDFRGBColor c = new JDFRGBColor(0, 0.5, 1);
 		Assertions.assertEquals(0, c.getR255());
@@ -108,7 +108,7 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testsetRGB255()
+	void testsetRGB255()
 	{
 		final JDFRGBColor c = new JDFRGBColor(0, 0, 0);
 		c.setR255(0);
@@ -128,7 +128,7 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetCMYKcolor()
+	void testgetCMYKcolor()
 	{
 		JDFRGBColor co = new JDFRGBColor(0, 0, 0);
 		Assertions.assertEquals(co.getCMYK(), new JDFCMYKColor(0, 0, 0, 1));
@@ -153,7 +153,7 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testgetCMYKcolorInt()
+	void testgetCMYKcolorInt()
 	{
 		final CPUTimer ct2 = new CPUTimer(false);
 		for (int r = 0; r <= 255; r++)
@@ -179,7 +179,7 @@ public class JDFRGBColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetCMYKcolorPerformance()
+	void testgetCMYKcolorPerformance()
 	{
 		final CPUTimer ct = new CPUTimer(false);
 		for (double r = 0; r <= 1; r += 0.01)

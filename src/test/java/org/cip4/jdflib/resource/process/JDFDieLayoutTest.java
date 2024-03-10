@@ -139,7 +139,7 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStation()
+	void testStation()
 	{
 		final JDFDieLayout lo = (JDFDieLayout) n.addResource(ElementName.DIELAYOUT, EnumUsage.Input);
 		lo.appendStation();
@@ -151,7 +151,7 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRuleLength()
+	void testRuleLength()
 	{
 		final JDFDieLayout lo = (JDFDieLayout) n.addResource(ElementName.DIELAYOUT, EnumUsage.Input);
 		lo.appendRuleLength();
@@ -163,7 +163,7 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFileSpec()
+	void testFileSpec()
 	{
 		final JDFDieLayout lo = (JDFDieLayout) n.addResource(ElementName.DIELAYOUT, EnumUsage.Input);
 		final JDFFileSpec fs = lo.appendFileSpec();
@@ -176,7 +176,7 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

@@ -293,7 +293,7 @@ public class JDFMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCert()
+	void testCert()
 	{
 		final JDFMedia ci = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
 		ci.appendCertification().setOrganization("o1");

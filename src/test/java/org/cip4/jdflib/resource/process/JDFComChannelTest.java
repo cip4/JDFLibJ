@@ -89,7 +89,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetEMailLocator()
+	void testSetEMailLocator()
 	{
 		cc.setEMailLocator(" test@cip4.org");
 		Assertions.assertEquals(JDFComChannel.MAILTO + "test@cip4.org", cc.getLocator());
@@ -104,7 +104,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPhoneNumber()
+	void testSetPhoneNumber()
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
 		Assertions.assertEquals(JDFComChannel.TEL + "+49.431.123456", cc.getLocator());
@@ -115,7 +115,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetComChannel()
+	void testGetComChannel()
 	{
 		JDFPerson p = (JDFPerson) JDFElementColorParams.createRoot(ElementName.PERSON);
 		JDFComChannel.appendChannel(p, EnumChannelType.Phone, "1234");
@@ -127,7 +127,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPhoneNumberMobile()
+	void testSetPhoneNumberMobile()
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Mobile);
 		Assertions.assertEquals(JDFComChannel.TEL + "+49.431.123456", cc.getLocator());
@@ -138,7 +138,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChannelType()
+	void testGetChannelType()
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
 		cc.setChannelTypeDetails("Mobile");
@@ -149,7 +149,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatchesString()
+	void testMatchesString()
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
 		Assertions.assertTrue(cc.stringMatch("tel:+49 431 123456"));
@@ -160,7 +160,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatchesComChannel()
+	void testMatchesComChannel()
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
 		JDFComChannel ccNew = (JDFComChannel) cc.cloneNewDoc();
@@ -171,7 +171,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatches()
+	void testMatches()
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
 		JDFComChannel ccNew = (JDFComChannel) cc.cloneNewDoc();
@@ -189,7 +189,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPhoneNumberShort()
+	void testSetPhoneNumberShort()
 	{
 		cc.setChannelType(EnumChannelType.Phone);
 		cc.setPhoneNumber(" +49 431 123456 ");
@@ -214,7 +214,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		JDFDoc d = new JDFDoc(ElementName.COMCHANNEL);

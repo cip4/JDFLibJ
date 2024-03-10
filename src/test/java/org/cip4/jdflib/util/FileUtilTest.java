@@ -75,7 +75,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testisAbsoluteFile()
+	void testisAbsoluteFile()
 	{
 		assertFalse(FileUtil.isAbsoluteFile(new File("foo")));
 		assertFalse(FileUtil.isAbsoluteFile("foo"));
@@ -94,7 +94,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddSecure()
+	void testAddSecure()
 	{
 		assertThrows(IllegalArgumentException.class, () -> FileUtil.addSecure(new File("."), null));
 		assertThrows(IllegalArgumentException.class, () -> FileUtil.addSecure(null, new File("a")));
@@ -110,7 +110,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSecure()
+	void testGetSecure()
 	{
 		assertEquals("abc", FileUtil.getSecureFileName(new File("abc")));
 		assertEquals("invalid name", FileUtil.getSecureFileName(new File("../abc")));
@@ -124,7 +124,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testisLocked() throws IOException
+	void testisLocked() throws IOException
 	{
 		final File file = new File(sm_dirTestDataTemp + "no such file");
 		FileUtil.forceDelete(file);
@@ -140,7 +140,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testisDirectory()
+	void testisDirectory()
 	{
 		assertFalse(FileUtil.isDirectory(new File("foo")));
 		assertFalse(FileUtil.isDirectory("foo"));
@@ -156,7 +156,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetExtension()
+	void testGetExtension()
 	{
 		assertNull(FileUtil.getExtension(new File("foo")));
 		assertEquals("txt", FileUtil.getExtension(new File("foo.txt")));
@@ -166,7 +166,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAuxDir()
+	void testGetAuxDir()
 	{
 		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "FooAux");
 		FileUtil.deleteAll(theHFDir);
@@ -190,7 +190,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetBufferedOutputStream() throws IOException
+	void testGetBufferedOutputStream() throws IOException
 	{
 		final File file = new File(sm_dirTestDataTemp + "bufOut.txt");
 		file.delete();
@@ -205,7 +205,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetBufferedInputStream() throws IOException
+	void testGetBufferedInputStream() throws IOException
 	{
 		final File file = new File(sm_dirTestDataTemp + "bufOut.txt");
 		file.delete();
@@ -224,7 +224,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetBufferedInputStreamDir() throws IOException
+	void testGetBufferedInputStreamDir() throws IOException
 	{
 		final File file = new File(sm_dirTestDataTemp + "testDir");
 		FileUtil.deleteAll(file);
@@ -237,7 +237,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCleanDots()
+	void testCleanDots()
 	{
 		assertEquals(FileUtil.cleanDots(new File(".")), new File("."));
 		assertEquals(FileUtil.cleanDots(new File("..")), new File(".."));
@@ -257,7 +257,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNewExtension()
+	void testNewExtension()
 	{
 		assertNull(FileUtil.getExtension(new File("foo")));
 		assertEquals(new File("foo.bar"), FileUtil.newExtension(new File("foo"), "bar"));
@@ -269,7 +269,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyBytes()
+	void testCopyBytes()
 	{
 		final byte[] b = new byte[66666];
 		for (int i = 0; i < 66666; i++)
@@ -299,7 +299,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testgetFastMD5() throws Exception
+	void testgetFastMD5() throws Exception
 	{
 		final byte[] b1 = FileUtil.getFastMD5(new File(sm_dirTestData + "dir1.zip"), 1000000);
 		final byte[] b2 = FileUtil.getFastMD5(new File(sm_dirTestData + "dir1.zip"), 1000000);
@@ -315,7 +315,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testgetFastMD5NonExist() throws Exception
+	void testgetFastMD5NonExist() throws Exception
 	{
 		final byte[] b1 = FileUtil.getFastMD5(new File(sm_dirTestData + "nix"), 1000000);
 		assertNull(b1);
@@ -325,7 +325,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testgetFastMD5Null() throws Exception
+	void testgetFastMD5Null() throws Exception
 	{
 		final byte[] b1 = FileUtil.getFastMD5(null, 1000000);
 		assertNull(b1);
@@ -335,7 +335,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testFileToByteArray() throws Exception
+	void testFileToByteArray() throws Exception
 	{
 		final byte[] b = new byte[66666];
 		for (int i = 0; i < 66666; i++)
@@ -369,7 +369,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testisCleanURLFile()
+	void testisCleanURLFile()
 	{
 		if (PlatformUtil.isWindows())
 		{
@@ -384,7 +384,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testListTree()
+	void testListTree()
 	{
 		final File root = new File(sm_dirTestData + File.separator + "dir1");
 		Vector<File> list = FileUtil.listFilesInTree(root, "dir(.+)/");
@@ -401,7 +401,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testListTreeFilter()
+	void testListTreeFilter()
 	{
 		final File root = new File(sm_dirTestData + File.separator + "dir1");
 		final Vector<File> list = FileUtil.listFilesInTree(root, new FileUtil.DirectoryFileFilter());
@@ -415,7 +415,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testListTreeFilterNull()
+	void testListTreeFilterNull()
 	{
 		final File root = new File(sm_dirTestData + File.separator + "dir1");
 		final Vector<File> list = FileUtil.listFilesInTree(root, (FileFilter) null);
@@ -427,7 +427,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testListFilesWithExtension() throws Exception
+	void testListFilesWithExtension() throws Exception
 	{
 		final File f = new File(sm_dirTestDataTemp + "/fooExt");
 		f.mkdir(); // make sure we have one
@@ -458,7 +458,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testNumFiles() throws Exception
+	void testNumFiles() throws Exception
 	{
 		final File f = new File(sm_dirTestDataTemp + "/foo2");
 		FileUtil.deleteAll(f);
@@ -485,7 +485,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testListFilesWithExpression() throws Exception
+	void testListFilesWithExpression() throws Exception
 	{
 		final File f = new File(sm_dirTestDataTemp + "/foo");
 		f.mkdir(); // make sure we have one
@@ -508,7 +508,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testListDirectories() throws Exception
+	void testListDirectories() throws Exception
 	{
 		final File f = new File(sm_dirTestDataTemp + File.separator + "foo");
 		f.mkdir(); // make sure we have one
@@ -530,7 +530,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateFile()
+	void testCreateFile()
 	{
 		final File f = new File(sm_dirTestDataTemp + "/aaa_aaa/b/c.txt");
 		assertTrue(FileUtil.createNewFile(f));
@@ -543,7 +543,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEquals()
+	void testEquals()
 	{
 		assertTrue(FileUtil.equals(null, null));
 		assertFalse(FileUtil.equals(null, new File("a")));
@@ -564,7 +564,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testForceDelete() throws Exception
+	void testForceDelete() throws Exception
 	{
 		final File f = new File(sm_dirTestDataTemp + "forcedelete.txt");
 		assertTrue(FileUtil.forceDelete(null));
@@ -583,7 +583,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testMoveFileNull() throws Exception
+	void testMoveFileNull() throws Exception
 	{
 		final byte[] b = new byte[5555];
 		for (int i = 0; i < 5555; i++)
@@ -608,7 +608,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testMoveFileEquals() throws Exception
+	void testMoveFileEquals() throws Exception
 	{
 		final byte[] b = new byte[5555];
 		for (int i = 0; i < 5555; i++)
@@ -633,7 +633,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testMoveFile() throws Exception
+	void testMoveFile() throws Exception
 	{
 		final byte[] b = new byte[55555];
 		for (int i = 0; i < 55555; i++)
@@ -668,7 +668,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testMoveDir() throws Exception
+	void testMoveDir() throws Exception
 	{
 		final byte[] b = new byte[55555];
 		for (int i = 0; i < 55555; i++)
@@ -704,7 +704,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testCopyFileLarge() throws Exception
+	void testCopyFileLarge() throws Exception
 	{
 		final File fNew = new File(sm_dirTestDataTemp + "Big.txt");
 		final byte[] b = new byte[100000];
@@ -733,7 +733,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testCopyFileNull() throws Exception
+	void testCopyFileNull() throws Exception
 	{
 		final File fNew = new File(sm_dirTestDataTemp + "test.txt");
 		final byte[] b = new byte[1000];
@@ -757,7 +757,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testCopyFileEvil() throws Exception
+	void testCopyFileEvil() throws Exception
 	{
 		final File fNew = new File(sm_dirTestDataTemp + "test.txt");
 		final byte[] b = new byte[1000];
@@ -783,7 +783,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testMoveFileLarge() throws Exception
+	void testMoveFileLarge() throws Exception
 	{
 		final File fNew = new File(sm_dirTestDataTemp + "Big3.txt");
 		final byte[] b = new byte[100000];
@@ -817,7 +817,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testCopyFileToDir() throws Exception
+	void testCopyFileToDir() throws Exception
 	{
 		final byte[] b = new byte[55555];
 		for (int i = 0; i < 55555; i++)
@@ -851,7 +851,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testEnsureFileInDir() throws Exception
+	void testEnsureFileInDir() throws Exception
 	{
 		final byte[] b = new byte[55555];
 		for (int i = 0; i < 55555; i++)
@@ -886,7 +886,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testMoveFileToDir() throws Exception
+	void testMoveFileToDir() throws Exception
 	{
 		final byte[] b = new byte[55555];
 		for (int i = 0; i < 55555; i++)
@@ -922,7 +922,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testStreamToFile() throws Exception
+	void testStreamToFile() throws Exception
 	{
 		final byte[] b = new byte[55555];
 		for (int i = 0; i < 55555; i++)
@@ -971,7 +971,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testStringToFile() throws Exception
+	void testStringToFile() throws Exception
 	{
 
 		final File f = new File(sm_dirTestDataTemp + "string.dat");
@@ -994,7 +994,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testStreamToMD5File() throws Exception
+	void testStreamToMD5File() throws Exception
 	{
 		final byte[] b = new byte[55555];
 		for (int i = 0; i < 55555; i++)
@@ -1027,7 +1027,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetFileInDirectory()
+	void testGetFileInDirectory()
 	{
 		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a"), new File("b")));
 		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a/"), new File("b")));

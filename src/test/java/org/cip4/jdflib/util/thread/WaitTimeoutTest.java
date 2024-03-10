@@ -67,19 +67,19 @@ public class WaitTimeoutTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetFail()
+	void testGetFail()
 	{
 		Assertions.assertNull(new TestWait(12345, 12).getWaitedObject());
 	}
 
 	@Test
-	public void testGetOK()
+	void testGetOK()
 	{
 		Assertions.assertTrue(new TestWait(12, 12345).getWaitedObject().booleanValue());
 	}
 
 	@Test
-	public void testGetMillis()
+	void testGetMillis()
 	{
 		Assertions.assertEquals(123, new TestWait(12, 123).getWaitMillis());
 	}

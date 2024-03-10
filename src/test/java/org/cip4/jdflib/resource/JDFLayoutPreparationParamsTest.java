@@ -99,7 +99,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConvertStripMarks()
+	void testConvertStripMarks()
 	{
 		lpp.setFrontMarkList(new VString("RegisterMark FoldMark", null));
 		lpp.setBackMarkList(new VString("RegisterMark ColorBar", null));
@@ -114,7 +114,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConvertStripSimple()
+	void testConvertStripSimple()
 	{
 		lpp.convertToStripping(null);
 		Assertions.assertNull(n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0));
@@ -127,7 +127,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConvertStripStepRepeat() throws DataFormatException
+	void testConvertStripStepRepeat() throws DataFormatException
 	{
 		lpp.setNumberUp(new JDFXYPair(4, 9));
 		lpp.setStepRepeat(new JDFIntegerList("2 3 1"));
@@ -140,7 +140,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConvertStripDeep()
+	void testConvertStripDeep()
 	{
 		JDFNode nProd = new JDFDoc("JDF").getJDFRoot();
 		nProd.setType(EnumType.Product);
@@ -159,7 +159,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConvertStripSimpleCombined()
+	void testConvertStripSimpleCombined()
 	{
 		n.setCombined(new VString("LayoutPreparation Imposition", null));
 		lpp.convertToStripping(null);
@@ -173,7 +173,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBorderless()
+	void testBorderless()
 	{
 		JDFPageCell pc = lpp.appendPageCell();
 		pc.setTrimSize(new JDFXYPair(500, 700));
@@ -187,7 +187,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		n = new JDFDoc("JDF").getJDFRoot();
@@ -208,7 +208,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetClipBox()
+	void testGetClipBox()
 	{
 		Assertions.assertNull(lpp.getClipBox());
 		JDFPageCell pc = lpp.appendPageCell();
@@ -225,7 +225,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTrimSize()
+	void testTrimSize()
 	{
 		Assertions.assertNull(lpp.getTrimSize());
 		JDFPageCell pc = lpp.appendPageCell();

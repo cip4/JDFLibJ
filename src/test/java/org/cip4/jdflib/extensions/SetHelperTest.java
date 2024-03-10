@@ -70,7 +70,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSet()
+	void testGetSet()
 	{
 		assertNull(SetHelper.getHelper(null));
 		final SetHelper sh = SetHelper.getHelper(root.getElement(SetHelper.RESOURCE_SET));
@@ -81,7 +81,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetHelper()
+	void testGetHelper()
 	{
 		assertNull(SetHelper.getHelper(null));
 		assertNull(SetHelper.getHelper(root));
@@ -92,7 +92,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSetDeep()
+	void testGetSetDeep()
 	{
 		assertNull(SetHelper.getHelper(null));
 		final SetHelper sh = SetHelper.getHelper(root.getElement(SetHelper.RESOURCE_SET));
@@ -103,7 +103,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAmountSum()
+	void testGetAmountSum()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -125,7 +125,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetEmpty()
+	void testGetEmpty()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
@@ -140,7 +140,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetName()
+	void testGetName()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
@@ -150,7 +150,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsSet()
+	void testIsSet()
 	{
 		assertTrue(SetHelper.isSet(root.getElement(SetHelper.RESOURCE_SET)));
 		assertTrue(SetHelper.isSet("ResourceSet"));
@@ -162,7 +162,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartition()
+	void testGetPartition()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), ElementName.MEDIA);
@@ -176,7 +176,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSize()
+	void testSize()
 	{
 		final SetHelper sh = new SetHelper(null);
 		assertEquals(0, sh.size());
@@ -193,7 +193,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCPI()
+	void testGetCPI()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		sh.setCombinedProcessIndex(new JDFIntegerList(3));
@@ -205,7 +205,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXJDF()
+	void testGetXJDF()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getXJDF(), new XJDFHelper(root));
@@ -215,7 +215,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetName()
+	void testSetName()
 	{
 		final KElement set = KElement.createRoot(XJDFConstants.ResourceSet, null);
 		final SetHelper sh = new SetHelper(set);
@@ -227,7 +227,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDependentJobPart()
+	void testGetDependentJobPart()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertNull(sh.getDependentJobParts());
@@ -242,7 +242,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartitionMap()
+	void testGetPartitionMap()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
@@ -258,7 +258,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartitionsMap()
+	void testGetPartitionsMap()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
@@ -271,7 +271,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSuperPartitionsMap()
+	void testGetSuperPartitionsMap()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
@@ -284,7 +284,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSuperPartitionsMap2()
+	void testGetSuperPartitionsMap2()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
@@ -301,7 +301,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartMapVector()
+	void testGetPartMapVector()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
@@ -321,7 +321,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartMapList()
+	void testGetPartMapList()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
@@ -341,7 +341,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartitionsVMap()
+	void testGetPartitionsVMap()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
@@ -354,7 +354,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetExactPartition()
+	void testGetExactPartition()
 	{
 		final SetHelper sh = new XJDFHelper(root).appendSet("RunList", null);
 		ResourceHelper rh1 = sh.getCreateExactPartition(new JDFAttributeMap("SheetName", "S1"), true);
@@ -372,7 +372,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartitionByID()
+	void testGetPartitionByID()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertNull(sh.getPartition("fooo"));
@@ -386,7 +386,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreatePartition()
+	void testGetCreatePartition()
 	{
 		final SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
 		assertEquals(sh.getName(), "FoldingParams");
@@ -400,7 +400,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIndexOf()
+	void testIndexOf()
 	{
 		final SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
 		assertEquals(sh.indexOf(null), -1);
@@ -412,7 +412,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddTypeToCPI()
+	void testAddTypeToCPI()
 	{
 		final SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
 		sh.addTypeToCPI(0);
@@ -427,7 +427,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveTypeFromCPI()
+	void testRemoveTypeFromCPI()
 	{
 		final SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
 		sh.addTypeToCPI(0);
@@ -444,7 +444,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCleanup()
+	void testCleanup()
 	{
 		final KElement element = root.getElement("ResourceSet");
 		final SetHelper sh = new SetHelper(element);
@@ -457,7 +457,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		root = d.getRoot();

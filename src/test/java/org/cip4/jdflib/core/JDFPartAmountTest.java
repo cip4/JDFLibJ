@@ -100,7 +100,7 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -116,7 +116,7 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetInvalidAttributes()
+	void testGetInvalidAttributes()
 	{
 		Assertions.assertEquals(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).size(), 0);
 		rl.setAttribute("Amount", 20, null);
@@ -128,7 +128,7 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLot()
+	void testLot()
 	{
 		pa.getJDFRoot().setVersion(EnumVersion.Version_1_3);
 		pa.appendLot();
@@ -141,7 +141,7 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPartAmount()
+	void testPartAmount()
 	{
 		pa.appendElement("AmountPool");
 		Assertions.assertTrue(pa.getUnknownElements(false, 999).contains(ElementName.AMOUNTPOOL));
@@ -151,7 +151,7 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPartMapVector()
+	void testSetPartMapVector()
 	{
 		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "S1");
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();

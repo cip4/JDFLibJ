@@ -92,7 +92,7 @@ public class WideFormatGoldenTicketTest extends BaseGoldenTicketTest
 	@Override
 	@Test
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		BaseGoldenTicket.misURL = "http://192.168.14.143:8010/FJC/Fiery";
 		super.setUp();
@@ -114,7 +114,7 @@ public class WideFormatGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testSimple()
+	void testSimple()
 	{
 		write9GTFiles(theTicket, "DPW_Simple", null);
 	}
@@ -123,7 +123,7 @@ public class WideFormatGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testL3()
+	void testL3()
 	{
 		theTicket = new WideFormatGoldenTicket(3);
 		theTicket.assign(null);

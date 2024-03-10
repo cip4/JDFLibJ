@@ -88,7 +88,7 @@ public class IntentHelperTest
 	 *
 	 */
 	@Test
-	public void testGetSpan()
+	void testGetSpan()
 	{
 		final KElement intent = new JDFDoc("Intent").getRoot();
 		intent.appendElement("Comment");
@@ -104,7 +104,7 @@ public class IntentHelperTest
 	 *
 	 */
 	@Test
-	public void testGetSpanList()
+	void testGetSpanList()
 	{
 		final KElement intent = new JDFDoc("Intent").getRoot();
 		intent.appendElement("Comment");
@@ -118,7 +118,7 @@ public class IntentHelperTest
 	 *
 	 */
 	@Test
-	public void testSetSpan()
+	void testSetSpan()
 	{
 		final KElement intent = new JDFDoc("Intent").getRoot();
 		intent.appendElement("foo");
@@ -133,7 +133,7 @@ public class IntentHelperTest
 	 *
 	 */
 	@Test
-	public void testIsIntent()
+	void testIsIntent()
 	{
 		final KElement intent = new JDFDoc(XJDFConstants.Intent).getRoot();
 		intent.setAttribute("Name", "foo");

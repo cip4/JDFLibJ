@@ -162,7 +162,7 @@ public class DigiPrintTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testModules() throws Exception
+	void testModules() throws Exception
 	{
 		final JDFAuditPool ap = n.getCreateAuditPool();
 		ap.appendXMLComment("JDF 1.3 compatible auditing of module phases - note that modulephase start and end times are set outside of the phasetime start and end times", null);
@@ -204,7 +204,7 @@ public class DigiPrintTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testPDFVTStream() throws Exception
+	void testPDFVTStream() throws Exception
 	{
 		for (int strm = 0; strm < 3; strm++)
 		{
@@ -260,7 +260,7 @@ public class DigiPrintTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testHoldPipeRIP()
+	void testHoldPipeRIP()
 	{
 		final JDFDoc jdfDoc = new JDFDoc("JDF");
 		final JDFNode n = jdfDoc.getJDFRoot();
@@ -288,7 +288,7 @@ public class DigiPrintTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testHoldQueueRIP()
+	void testHoldQueueRIP()
 	{
 		final JDFDoc jdfDoc = new JDFDoc("JDF");
 		final JDFNode n = jdfDoc.getJDFRoot();
@@ -313,7 +313,7 @@ public class DigiPrintTest extends ExampleTest
 	 *
 	 *
 	 */
-	public void testPipePushSheet()
+	void testPipePushSheet()
 	{
 		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setSenderID("DFE");
@@ -356,7 +356,7 @@ public class DigiPrintTest extends ExampleTest
 	 * @throws Exception
 	 */
 	@Test
-	public void testModulesUpdate() throws Exception
+	void testModulesUpdate() throws Exception
 	{
 		final JDFAuditPool ap = n.getCreateAuditPool();
 		ap.appendXMLComment("JDF 1.3 compatible auditing of module phases with updates", null);
@@ -404,7 +404,7 @@ public class DigiPrintTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testModules14() throws Exception
+	void testModules14() throws Exception
 	{
 		final VString v = new VString("orig fullList end", null);
 		for (int i = 0; i < v.size(); i++)
@@ -547,7 +547,7 @@ public class DigiPrintTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testUsageCounterDevCaps() throws Exception
+	void testUsageCounterDevCaps() throws Exception
 	{
 		final JDFDoc duc = new JDFDoc("DeviceCap");
 		final JDFDeviceCap devicecap = (JDFDeviceCap) duc.getRoot();
@@ -567,7 +567,7 @@ public class DigiPrintTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testDirectProof()
+	void testDirectProof()
 	{
 		n.setXMLComment("Example workflow with initioal warmup phase, one direct proof and 100 copies of 10 sheets each.\n"
 				+ "The direct proof is acceptable and included in the good output", true);
@@ -625,7 +625,7 @@ public class DigiPrintTest extends ExampleTest
 	 */
 	@SuppressWarnings("deprecation")
 	@Test
-	public void testAmount() throws Exception
+	void testAmount() throws Exception
 	{
 		rlComp.setAmount(20, null);
 		rlComp.setDescriptiveName("The link points to 20 planned and 20 good + 2 Waste brochures");
@@ -726,7 +726,7 @@ public class DigiPrintTest extends ExampleTest
 	 * @throws Exception
 	 */
 	@Test
-	public void testContentDataRunList() throws Exception
+	void testContentDataRunList() throws Exception
 	{
 		final JDFContentList cl = (JDFContentList) n.addResource(ElementName.CONTENTLIST, null);
 		final JDFContentData cover = cl.appendContentData();
@@ -764,7 +764,7 @@ public class DigiPrintTest extends ExampleTest
 	 *
 	 *
 	 */
-	public void testVariableRipBookletPipe()
+	void testVariableRipBookletPipe()
 	{
 		final JDFDoc jdfDoc = new JDFDoc("JDF");
 		final JDFNode n = jdfDoc.getJDFRoot();
@@ -805,7 +805,7 @@ public class DigiPrintTest extends ExampleTest
 	 *
 	 *
 	 */
-	public void testPipePushSheetMeta()
+	void testPipePushSheetMeta()
 	{
 		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setSenderID("DFE");
@@ -849,7 +849,7 @@ public class DigiPrintTest extends ExampleTest
 	 *
 	 *
 	 */
-	public void testPipePushSetMeta()
+	void testPipePushSetMeta()
 	{
 		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setSenderID("DFE");
@@ -911,7 +911,7 @@ public class DigiPrintTest extends ExampleTest
 	 * @throws Exception
 	 */
 	@Test
-	public void testVariableManifests() throws Exception
+	void testVariableManifests() throws Exception
 	{
 		ruli.setXMLComment("the set / doc / ... structure is transferred from the pre-impositioning pdl", true);
 
@@ -1020,7 +1020,7 @@ public class DigiPrintTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		KElement.setLongID(false);
 		JDFAudit.setStaticAgentName(null);

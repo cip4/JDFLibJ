@@ -71,7 +71,7 @@ public class JMFPipeTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		JMFBuilderFactory.setSenderID(null, "ManagerID");
@@ -82,7 +82,7 @@ public class JMFPipeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPipePush()
+	void testPipePush()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Command, EnumType.PipePush);
 		final JDFPipeParams pp = jmf.appendCommand().appendPipeParams();

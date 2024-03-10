@@ -59,7 +59,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAllString()
+	void testGetAllString()
 	{
 		final VString v = new VString();
 		v.appendUnique("a");
@@ -74,7 +74,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGet()
+	void testGet()
 	{
 		final VString v = new VString();
 		v.add("a");
@@ -93,7 +93,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testElementAt()
+	void testElementAt()
 	{
 		final VString v = new VString();
 		v.add("a");
@@ -111,7 +111,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemove() throws Exception
+	void testRemove() throws Exception
 	{
 		final VString v = new VString("a b c", null);
 		Assertions.assertEquals(v.remove(-1), "c");
@@ -123,7 +123,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveStrings()
+	void testRemoveStrings()
 	{
 		final VString v = new VString();
 		v.add("a");
@@ -146,7 +146,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveStringsV()
+	void testRemoveStringsV()
 	{
 		final VString v = new VString();
 		v.add("a");
@@ -172,7 +172,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testContainsAny()
+	void testContainsAny()
 	{
 		final VString v = new VString();
 		v.appendUnique("a");
@@ -192,7 +192,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsEmpty()
+	void testIsEmpty()
 	{
 		Assertions.assertTrue(VString.isEmpty(null));
 		final VString v = new VString();
@@ -207,7 +207,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetOverlapping()
+	void testGetOverlapping()
 	{
 		final VString v = new VString();
 		v.appendUnique("a");
@@ -226,7 +226,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSort()
+	void testSort()
 	{
 		final VString v = new VString();
 		v.add("a");
@@ -240,7 +240,7 @@ public class VStringTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testPerformance()
+	void testPerformance()
 	{
 		final long t0 = System.currentTimeMillis();
 		for (int i = 0; i < 10000; i++)
@@ -297,7 +297,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetNull()
+	void testSetNull()
 	{
 		final VString v = new VString();
 		v.add((String) null);
@@ -310,7 +310,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSet()
+	void testGetSet()
 	{
 		final VString v = new VString();
 		v.add("a");
@@ -328,7 +328,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUnify()
+	void testUnify()
 	{
 		final VString v = new VString();
 		v.add("a");
@@ -353,7 +353,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetString()
+	void testGetString()
 	{
 		final VString v = new VString();
 		v.add("a");
@@ -367,7 +367,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetStringABC()
+	void testGetStringABC()
 	{
 		final VString v = new VString();
 		v.add("a");
@@ -381,7 +381,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddAll()
+	void testAddAll()
 	{
 		final VString v = new VString();
 		v.add("a");
@@ -406,7 +406,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddNonEmpty()
+	void testAddNonEmpty()
 	{
 		final VString v = new VString();
 		v.addNonEmpty("");
@@ -421,7 +421,7 @@ public class VStringTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAppendUnique()
+	void testAppendUnique()
 	{
 		final VString v = new VString();
 		v.appendUnique((String) null);
@@ -440,7 +440,7 @@ public class VStringTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAppendUniqueV()
+	void testAppendUniqueV()
 	{
 		final VString v = new VString();
 		v.appendUnique((String) null);
@@ -458,7 +458,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConstructEmpty()
+	void testConstructEmpty()
 	{
 		VString v = new VString("", ",");
 		Assertions.assertEquals(v.size(), 0);
@@ -478,7 +478,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConstructDouble()
+	void testConstructDouble()
 	{
 		VString v = new VString("a,b,c, ,", ",");
 		Assertions.assertEquals(v.get(-1), " ");
@@ -490,7 +490,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFactory()
+	void testFactory()
 	{
 		Assertions.assertNull(VString.getVString(null, null));
 		Assertions.assertNull(VString.getVString("", null));
@@ -501,7 +501,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testadd()
+	void testadd()
 	{
 		final VString v = new VString();
 		v.add(EnumType.AdhesiveBinding);
@@ -512,7 +512,7 @@ public class VStringTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetElementAt()
+	void testSetElementAt()
 	{
 		final VString v = new VString();
 		v.add("a");

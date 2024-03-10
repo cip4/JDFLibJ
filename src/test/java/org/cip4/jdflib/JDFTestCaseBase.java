@@ -322,7 +322,7 @@ public abstract class JDFTestCaseBase
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		JDFElement.setDefaultJDFVersion(defaultVersion);
 		senderID = "TestSender";
@@ -355,7 +355,7 @@ public abstract class JDFTestCaseBase
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		KElement.setLongID(true);
 		JDFElement.setDefaultJDFVersion(defaultVersion);
@@ -747,7 +747,7 @@ public abstract class JDFTestCaseBase
 	 *
 	 * @param bTestNetwork the bTestNetwork to set
 	 */
-	public void setTestNetwork(final boolean bTestNetwork)
+	void setTestNetwork(final boolean bTestNetwork)
 	{
 		JDFTestCaseBase.bTestNetwork = bTestNetwork;
 		netWorkChecked = true;

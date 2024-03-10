@@ -59,7 +59,7 @@ public class HTTPDetailsTest
 		}
 
 		@Override
-		public void connect() throws IOException
+		void connect() throws IOException
 		{
 			// TODO Auto-generated method stub
 
@@ -73,7 +73,7 @@ public class HTTPDetailsTest
 		}
 
 		@Override
-		public void disconnect()
+		void disconnect()
 		{
 			// TODO Auto-generated method stub
 
@@ -84,7 +84,7 @@ public class HTTPDetailsTest
 	 *
 	 */
 	@Test
-	public void testRedirect()
+	void testRedirect()
 	{
 		final HTTPDetails redirect = HTTPDetails.getRedirect(null);
 		Assertions.assertNotNull(redirect);
@@ -96,7 +96,7 @@ public class HTTPDetailsTest
 	 *
 	 */
 	@Test
-	public void testTimeOut()
+	void testTimeOut()
 	{
 		final HTTPDetails redirect = new HTTPDetails();
 		Assertions.assertEquals(UrlUtil.getConnectionTimeout(), redirect.getConnectionTimeout());
@@ -109,7 +109,7 @@ public class HTTPDetailsTest
 	 *
 	 */
 	@Test
-	public void testBearer() throws MalformedURLException
+	void testBearer() throws MalformedURLException
 	{
 		final HttpURLConnection uc = new TestConnection(new URL("http://foo.com"));
 		final HTTPDetails d = new HTTPDetails();
@@ -123,7 +123,7 @@ public class HTTPDetailsTest
 	 *
 	 */
 	@Test
-	public void testAccept() throws MalformedURLException
+	void testAccept() throws MalformedURLException
 	{
 		final HTTPDetails d = new HTTPDetails();
 		d.setAccept(new VString("a/b c/d"));
@@ -137,7 +137,7 @@ public class HTTPDetailsTest
 	 *
 	 */
 	@Test
-	public void testSetHeader() throws MalformedURLException
+	void testSetHeader() throws MalformedURLException
 	{
 		final HttpURLConnection uc = new TestConnection(new URL("http://foo.com"));
 		final HTTPDetails d = new HTTPDetails();
@@ -151,7 +151,7 @@ public class HTTPDetailsTest
 	 *
 	 */
 	@Test
-	public void testGetHeaders() throws MalformedURLException
+	void testGetHeaders() throws MalformedURLException
 	{
 		final HttpURLConnection uc = new TestConnection(new URL("http://foo.com"));
 		final HTTPDetails d = new HTTPDetails();
@@ -164,7 +164,7 @@ public class HTTPDetailsTest
 	 *
 	 */
 	@Test
-	public void testGetHeader() throws MalformedURLException
+	void testGetHeader() throws MalformedURLException
 	{
 		final HttpURLConnection uc = new TestConnection(new URL("http://foo.com"));
 		final HTTPDetails d = new HTTPDetails();

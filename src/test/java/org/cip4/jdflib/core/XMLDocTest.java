@@ -140,7 +140,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		public void run()
+		void run()
 		{
 			try
 			{
@@ -178,7 +178,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		public void runMyThread()
+		void runMyThread()
 		{
 			final KElement root = d.getRoot();
 			final NodeList nl = root.getElementsByTagName("elem" + iLoop % 3);
@@ -203,7 +203,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		 * @see org.cip4.jdflib.core.XMLDocTest.MyThread#runMyThread()
 		 */
 		@Override
-		public void runMyThread()
+		void runMyThread()
 		{
 			log.info("parsing " + sm_dirTestData + "job.jdf " + iLoop);
 			final XMLDoc d = XMLDoc.parseFile(sm_dirTestData + "job.jdf");
@@ -224,7 +224,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		public void runMyThread()
+		void runMyThread()
 		{
 			final KElement root = d.getRoot();
 			final NodeList nl = root.getChildNodes();
@@ -257,7 +257,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public void runMyThread()
+		void runMyThread()
 		{
 			final KElement root = d.getRoot();
 			final String baseDir = sm_dirTestDataTemp + File.separator + "threadDir";
@@ -291,7 +291,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testSetSchemaLocation() throws Exception
+	void testSetSchemaLocation() throws Exception
 	{
 		final XMLDoc doc = new XMLDoc("test", null);
 		doc.write2File(sm_dirTestDataTemp + "schematest.xml", 0, false); // create
@@ -308,7 +308,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNode()
+	void testGetNode()
 	{
 		final XMLDoc doc = new XMLDoc("test", null);
 		final KElement e = doc.getRoot();
@@ -321,7 +321,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNSMap()
+	void testGetNSMap()
 	{
 		final XMLDoc doc0 = new XMLDoc();
 		assertTrue(doc0.getNSMap().isEmpty());
@@ -336,7 +336,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetRootName()
+	void testGetRootName()
 	{
 		final XMLDoc doc = new XMLDoc("test", null);
 		assertEquals("test", doc.getRootName());
@@ -346,7 +346,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNodeProc()
+	void testGetNodeProc()
 	{
 		final XMLDoc doc = new XMLDoc("test", null);
 		doc.setXSLTURL("a.b");
@@ -358,7 +358,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXSLTURL()
+	void testGetXSLTURL()
 	{
 		final XMLDoc doc = new XMLDoc("test", null);
 		doc.setXSLTURL("a.b");
@@ -369,7 +369,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetRoot()
+	void testSetRoot()
 	{
 		final XMLDoc doc = new XMLDoc("test", null);
 		try
@@ -387,7 +387,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetValues()
+	void testSetValues()
 	{
 		final XMLDoc doc = new XMLDoc();
 		final XMLDoc docOld = new XMLDoc("test", null);
@@ -402,7 +402,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDirtyIDs()
+	void testDirtyIDs()
 	{
 		// -i bookintent.jdf -o spawned.jdf -p 4
 		final String xmlFile = "bookintent.jdf";
@@ -476,7 +476,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testCreateElement() throws Exception
+	void testCreateElement() throws Exception
 	{
 		final XMLDoc d = new XMLDoc("TEST", null);
 		final KElement e = (KElement) d.createElement("foo:bar");
@@ -492,7 +492,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateElementNoNS()
+	void testCreateElementNoNS()
 	{
 		final XMLDoc d = new XMLDoc("TEST", null);
 		final KElement e = (KElement) d.createElement("bar");
@@ -503,7 +503,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNewDocNS()
+	void testNewDocNS()
 	{
 		final XMLDoc d = new XMLDoc("src:test", "www.test.de");
 		final KElement e = d.getRoot();
@@ -516,7 +516,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateElementNS()
+	void testCreateElementNS()
 	{
 		final XMLDoc d1 = new XMLDoc("JDF2", null);
 		assertEquals(d1.getRoot().getClass(), KElement.class, "XMLDoc only creates KElement");
@@ -530,7 +530,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * test whether xmldoc.parse gives a clean empty kelement only doc
 	 */
 	@Test
-	public void testParseFileString()
+	void testParseFileString()
 	{
 		final XMLDoc d = new XMLDoc("JDF", null);
 		final KElement root = d.getRoot();
@@ -549,7 +549,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * test whether xmldoc.parse gives a clean empty kelement only doc
 	 */
 	@Test
-	public void testParseFile()
+	void testParseFile()
 	{
 		final XMLDoc d = new XMLDoc("Foo", null);
 		final KElement root = d.getRoot();
@@ -566,7 +566,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * test whether xmldoc.parse gives a clean empty kelement only doc
 	 */
 	@Test
-	public void testParseFileStringbad()
+	void testParseFileStringbad()
 	{
 		final XMLDoc d = XMLDoc.parseString("  \t<a/>   " + new String(new byte[] { 32, 0, 0, 0 }));
 		assertNotNull(d);
@@ -578,7 +578,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseDOM() throws SAXException, IOException
+	void testParseDOM() throws SAXException, IOException
 	{
 		final DOMParser domParser = new DOMParser();
 		domParser.parse(new InputSource(new StringReader("<JDF ID=\"1\"><AuditPool><Created ID=\"1\"/></AuditPool></JDF>")));
@@ -594,7 +594,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseNoNS()
+	void testParseNoNS()
 	{
 		final XMLDoc d = new XMLDoc("TEST", null);
 		final String fn = sm_dirTestDataTemp + "testParseNoNS.xml";
@@ -617,7 +617,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateAttribute()
+	void testCreateAttribute()
 	{
 		final XMLDoc d = new XMLDoc("TEST", null);
 		final Attr a = d.createAttribute("dom1");
@@ -649,7 +649,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRegisterClass()
+	void testRegisterClass()
 	{
 		JDFDoc.registerCustomClass("JDFTestType", "org.cip4.jdflib.core.JDFTestType");
 		JDFDoc.registerCustomClass("fnarf:JDFTestType", "org.cip4.jdflib.core.JDFTestType");
@@ -686,7 +686,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNSRoot()
+	void testNSRoot()
 	{
 		XMLDoc d = new XMLDoc("JDF:foo", null);
 		KElement e = d.getRoot();
@@ -721,7 +721,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * tests memory leaks in clone()
 	 */
 	@Test
-	public void testCloneMem()
+	void testCloneMem()
 	{
 		final XMLDoc doc = new XMLDoc("foobar44", null);
 		final long l = getCurrentMem();
@@ -737,7 +737,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * tests .clone()
 	 */
 	@Test
-	public void testClone()
+	void testClone()
 	{
 		final XMLDoc doc = new XMLDoc("foobar", null);
 		final XMLDoc doc2 = doc.clone();
@@ -758,7 +758,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * test graceful null handling
 	 */
 	@Test
-	public void testNull()
+	void testNull()
 	{
 		new XMLDoc((XMLDoc) null);
 		new XMLDoc((String) null, null);
@@ -768,7 +768,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyXMLDoc()
+	void testCopyXMLDoc()
 	{
 		final XMLDoc d1 = new XMLDoc("JDF", null);
 		final KElement root = d1.getRoot();
@@ -782,7 +782,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToFile()
+	void testWriteToFile()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		String out = sm_dirTestDataTemp + File.separator + "dir" + File.separator + "dir2";
@@ -807,7 +807,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToStringIndent()
+	void testWriteToStringIndent()
 	{
 		final XMLDoc d = new XMLDoc("a", null);
 		final KElement e = d.getRoot();
@@ -822,7 +822,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToStringEscape()
+	void testWriteToStringEscape()
 	{
 		final XMLDoc d = new XMLDoc("Example", null);
 		final KElement e = d.getRoot();
@@ -837,7 +837,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToStringHash13()
+	void testWriteToStringHash13()
 	{
 		final String s0 = "<Example at=\"a&#13;b\">AA&#13;BB</Example>";
 		final XMLDoc d = new XMLParser().parseString(s0);
@@ -849,7 +849,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteToStreamIndent() throws Exception
+	void testWriteToStreamIndent() throws Exception
 	{
 		final XMLDoc d = new XMLDoc("a", null);
 		final KElement e = d.getRoot();
@@ -877,7 +877,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteToStreamNull()
+	void testWriteToStreamNull()
 	{
 		final XMLDoc d = new XMLDoc("a", null);
 		final KElement e = d.getRoot();
@@ -899,7 +899,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testStreamWriter()
+	void testStreamWriter()
 	{
 		final XMLDoc d = new XMLDoc("a", null);
 		File f = FileUtil.writeFile(d, new File(sm_dirTestDataTemp + "a.xml"));
@@ -912,7 +912,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 */
 	@Test
 
-	public void testStreamWriterNull() throws IOException
+	void testStreamWriterNull() throws IOException
 	{
 		final XMLDoc d = new XMLDoc("a", null);
 		assertThrows(IOException.class, () -> d.writeStream(null));
@@ -922,7 +922,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToFileThreadRead()
+	void testWriteToFileThreadRead()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final String out = sm_dirTestDataTemp + File.separator + "Thread.jdf";
@@ -962,7 +962,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * see if we can concurrently parse files (locking/threading)
 	 */
 	@Test
-	public void testParseFileThreadRead()
+	void testParseFileThreadRead()
 	{
 		final MyParseThread[] threads = new MyParseThread[10];
 		for (int i = 0; i < 10; i++)
@@ -984,7 +984,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToFileThreadWrite()
+	void testWriteToFileThreadWrite()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final String out = sm_dirTestDataTemp + File.separator + "Thread.jdf";
@@ -1023,7 +1023,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * test many many writes in parallel threads note that the documents themselves are independent
 	 */
 	@Test
-	public void testWriteToFileThreadWriteMany()
+	void testWriteToFileThreadWriteMany()
 	{
 		final MyManyWriteThread[] threads = new MyManyWriteThread[10];
 		for (int i = 0; i < 10; i++)
@@ -1052,7 +1052,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToFileFile()
+	void testWriteToFileFile()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		String out = sm_dirTestDataTemp + File.separator + "dir" + File.separator + "dir2";
@@ -1078,7 +1078,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToFileBadFile()
+	void testWriteToFileBadFile()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final String out = "/bad::\\nogood\\junk.jdf";
@@ -1095,7 +1095,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToFileYen()
+	void testWriteToFileYen()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final String out = sm_dirTestDataTemp + "test-¥éç05-pdf - test-¥éç05";
@@ -1109,7 +1109,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToFileEscape()
+	void testWriteToFileEscape()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final String out = sm_dirTestDataTemp + "foo %20bar/fnarf.xml";
@@ -1123,7 +1123,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * @throws IOException TODO Include test case
 	 */
 	@Test
-	public void testWriteToHTTPURL() throws IOException
+	void testWriteToHTTPURL() throws IOException
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final URL url = UrlUtil.stringToURL("http://localhost:8010/httpdump/testXMLDoc?nodump=true");
@@ -1154,7 +1154,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * @throws IOException TODO Include test case
 	 */
 	@Test
-	public void testWriteToURL() throws IOException
+	void testWriteToURL() throws IOException
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final String url = UrlUtil.normalize("http://localhost:8088/httpdump/testXMLDoc?nodump=true");
@@ -1181,7 +1181,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToFileNull()
+	void testWriteToFileNull()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final String file = sm_dirTestDataTemp + "null.jdf";
@@ -1196,7 +1196,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToFileURL()
+	void testWriteToFileURL()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		String out = sm_dirTestDataTemp + File.separator + "dir" + File.separator + "dir2";
@@ -1225,7 +1225,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUmlaut()
+	void testUmlaut()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final String out = sm_dirTestDataTemp + "dir" + File.separator + "dir%20 Grüün";
@@ -1256,7 +1256,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSize()
+	void testSize()
 	{
 		Runtime.getRuntime().gc();
 		Runtime.getRuntime().gc();
@@ -1292,7 +1292,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateBig()
+	void testCreateBig()
 	{
 		for (int ii = 0; ii < 6; ii++)
 		{
@@ -1332,7 +1332,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * test whether the serializer correctly serializes quotes etc.
 	 */
 	@Test
-	public void testEscapeStrings()
+	void testEscapeStrings()
 	{
 		final XMLDoc d = new XMLDoc("foo", "www.foo.com");
 		final KElement e = d.getRoot();
@@ -1347,7 +1347,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElementsByTagName()
+	void testGetElementsByTagName()
 	{
 		final XMLDoc d = new XMLDoc("a", null);
 		final KElement root = d.getRoot();

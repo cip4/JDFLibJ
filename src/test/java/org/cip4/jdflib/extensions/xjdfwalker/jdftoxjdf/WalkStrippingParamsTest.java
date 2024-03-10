@@ -84,7 +84,7 @@ public class WalkStrippingParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSectionList()
+	void testSectionList()
 	{
 		final JDFStrippingParams sp = (JDFStrippingParams) new JDFDoc(ElementName.STRIPPINGPARAMS).getRoot();
 		sp.setSectionList(JDFIntegerList.createIntegerList("1"));
@@ -101,7 +101,7 @@ public class WalkStrippingParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElementNames()
+	void testGetElementNames()
 	{
 		final JDFStrippingParams sp = (JDFStrippingParams) new JDFDoc(ElementName.STRIPPINGPARAMS).getRoot();
 		final WalkStrippingParams wa = new WalkStrippingParams();

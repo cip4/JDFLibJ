@@ -100,7 +100,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInlineColorPool()
+	void testInlineColorPool()
 	{
 		final JDFNode node = doc.getJDFRoot();
 		final JDFResource cc = node.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
@@ -114,7 +114,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInlineMultiColorPool()
+	void testInlineMultiColorPool()
 	{
 		final JDFNode node = doc.getJDFRoot();
 		final JDFResource cc = node.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
@@ -129,7 +129,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInlineEmptyColorPool()
+	void testInlineEmptyColorPool()
 	{
 		final JDFNode node = doc.getJDFRoot();
 		final JDFResource cc = node.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
@@ -141,7 +141,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResourceAuditLinks()
+	void testResourceAuditLinks()
 	{
 		final JDFNode node = doc.getJDFRoot();
 		final JDFResource media = node.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -158,7 +158,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		doc = new JDFDoc(ElementName.JDF);
@@ -178,7 +178,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResourceInfo()
+	void testResourceInfo()
 	{
 		final JDFJMF jmf = JDFDoc.parseFile(sm_dirTestData + "ResourceInfo.jmf").getJMFRoot();
 		final JDFResourceInfo resourceInfo = jmf.getResponse(0).getResourceInfo(0);

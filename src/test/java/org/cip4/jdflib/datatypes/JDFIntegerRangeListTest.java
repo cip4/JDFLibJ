@@ -104,7 +104,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateIntegerRangeList()
+	void testCreateIntegerRangeList()
 	{
 		assertEquals(JDFIntegerRangeList.createIntegerRangeList("8").getElement(0), 8);
 		assertEquals(JDFIntegerRangeList.createIntegerRangeList("8~22").getElement(-1), 22);
@@ -298,7 +298,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetIntegerListLong()
+	void testGetIntegerListLong()
 	{
 		final JDFIntegerRange range = new JDFIntegerRange(0, -1, 0);
 		final JDFIntegerRangeList rangeList = new JDFIntegerRangeList(range);
@@ -513,7 +513,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJDFIntegerRangeList1()
+	void testJDFIntegerRangeList1()
 	{
 		final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList();
 		for (int i = 0; i <= 10; i++)
@@ -529,7 +529,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJDFIntegerRangeList2()
+	void testJDFIntegerRangeList2()
 	{
 		final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList();
 		for (int i = 0; i <= 10; i++)
@@ -573,7 +573,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInRange() throws Exception
+	void testInRange() throws Exception
 	{
 		final JDFIntegerRangeList irl = new JDFIntegerRangeList("-INF ~ 0 5 ~ INF");
 
@@ -588,7 +588,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInfiniteList() throws Exception
+	void testInfiniteList() throws Exception
 	{
 		final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList("0~-1", Integer.MAX_VALUE);
 		for (int i = 0; i <= 10; i++)
@@ -603,7 +603,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetElementCount() throws Exception
+	void testgetElementCount() throws Exception
 	{
 		JDFIntegerRangeList irl = new JDFIntegerRangeList("0 ~ 5");
 		assertEquals(6, irl.getElementCount());
@@ -627,7 +627,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetElementCountBad() throws Exception
+	void testgetElementCountBad() throws Exception
 	{
 		final JDFIntegerRangeList irl = new JDFIntegerRangeList("1 ~ 2 -2");
 		irl.setDef(1);
@@ -640,7 +640,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetElement() throws Exception
+	void testgetElement() throws Exception
 	{
 		final JDFIntegerRangeList irl = new JDFIntegerRangeList("5 ~ 8");
 		assertEquals(6, irl.getElement(1));
@@ -653,7 +653,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
 		super.setUp();
@@ -666,7 +666,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		// TODO Auto-generated method stub
 		super.tearDown();

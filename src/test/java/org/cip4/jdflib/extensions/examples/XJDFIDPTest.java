@@ -79,7 +79,7 @@ public class XJDFIDPTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIDPSimplex()
+	void testIDPSimplex()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
 		xjdfHelper.addType(EnumType.Stripping);
@@ -107,7 +107,7 @@ public class XJDFIDPTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIDPBooklet()
+	void testIDPBooklet()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Booklet", null);
 		xjdfHelper.addType(EnumType.Stripping);
@@ -146,7 +146,7 @@ public class XJDFIDPTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIDPSamples()
+	void testIDPSamples()
 	{
 		final File[] jdfs = FileUtil.listFilesWithExtension(new File(sm_dirTestData + "idpxjdf"), "jdf");
 		for (final File jdf : jdfs)
@@ -173,7 +173,7 @@ public class XJDFIDPTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentName(null);
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentVersion(null);

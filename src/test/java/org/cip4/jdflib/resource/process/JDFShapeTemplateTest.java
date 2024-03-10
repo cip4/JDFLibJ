@@ -87,7 +87,7 @@ public class JDFShapeTemplateTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetStandard()
+	void testSetStandard()
 	{
 		JDFShapeTemplate st = (JDFShapeTemplate) new JDFDoc(ElementName.SHAPETEMPLATE).getRoot();
 		st.setStandard(EnumStandard.FEFCO);
@@ -99,7 +99,7 @@ public class JDFShapeTemplateTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetEnumStandard()
+	void testGetEnumStandard()
 	{
 		JDFShapeTemplate st = (JDFShapeTemplate) new JDFDoc(ElementName.SHAPETEMPLATE).getRoot();
 		st.setStandard(EnumStandard.ECMA);
@@ -111,7 +111,7 @@ public class JDFShapeTemplateTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetNonStandard()
+	void testSetNonStandard()
 	{
 		JDFShapeTemplate st = (JDFShapeTemplate) new JDFDoc(ElementName.SHAPETEMPLATE).getRoot();
 		st.setStandard("myStandard");

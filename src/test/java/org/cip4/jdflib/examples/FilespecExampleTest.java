@@ -93,7 +93,7 @@ public class FilespecExampleTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -109,7 +109,7 @@ public class FilespecExampleTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void test1()
+	void test1()
 	{
 		fs.setMimeType(MimeUtil.APPLICATION_PDF);
 		fs.setURL("file://host/share/dir/a.pdf");
@@ -120,7 +120,7 @@ public class FilespecExampleTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void test2()
+	void test2()
 	{
 		fs.setMimeType(MimeUtil.APPLICATION_PDF);
 		fs.setURL("a.pdf");
@@ -133,7 +133,7 @@ public class FilespecExampleTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void test3()
+	void test3()
 	{
 		fs.setMimeType(MimeUtil.APPLICATION_PDF);
 		fs.setURL("file://host/share/dir/a.pdf");
@@ -145,7 +145,7 @@ public class FilespecExampleTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void test7()
+	void test7()
 	{
 		fs.setMimeType(MimeUtil.APPLICATION_PDF);
 		fs.setURL("a.pdf");
@@ -159,7 +159,7 @@ public class FilespecExampleTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void test9()
+	void test9()
 	{
 		fs.setMimeType(MimeUtil.APPLICATION_PDF);
 		fs.setURL("a.pdf");

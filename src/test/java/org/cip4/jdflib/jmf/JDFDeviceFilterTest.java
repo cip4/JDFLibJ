@@ -97,7 +97,7 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		KElement.setLongID(false);
 		final JDFDoc doc = new JDFDoc(ElementName.DEVICELIST);
@@ -120,7 +120,7 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testApplyToNone()
+	void testApplyToNone()
 	{
 		final JDFDeviceFilter filter = (JDFDeviceFilter) new JDFDoc("DeviceFilter").getRoot();
 		filter.setDeviceDetails(EnumDeviceDetails.None);
@@ -139,7 +139,7 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testApplyToBrief()
+	void testApplyToBrief()
 	{
 		final JDFDeviceFilter filter = (JDFDeviceFilter) new JDFDoc("DeviceFilter").getRoot();
 		filter.setDeviceDetails(EnumDeviceDetails.Brief);
@@ -158,7 +158,7 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testApplyToClass()
+	void testApplyToClass()
 	{
 		//ToDo upgrade Filter
 	}
@@ -167,7 +167,7 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testApplyToDetails()
+	void testApplyToDetails()
 	{
 		final JDFDeviceFilter filter = (JDFDeviceFilter) new JDFDoc("DeviceFilter").getRoot();
 		filter.setDeviceDetails(EnumDeviceDetails.Details);
@@ -187,7 +187,7 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testApplyToCaps()
+	void testApplyToCaps()
 	{
 		final JDFDeviceFilter filter = (JDFDeviceFilter) new JDFDoc("DeviceFilter").getRoot();
 		filter.setDeviceDetails(EnumDeviceDetails.Capability);

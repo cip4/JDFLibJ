@@ -54,7 +54,7 @@ public class PartitionMapTest
 	 *
 	 */
 	@Test
-	public void testCreate()
+	void testCreate()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final PartitionMap map = new PartitionMap(r);
@@ -65,7 +65,7 @@ public class PartitionMapTest
 	 *
 	 */
 	@Test
-	public void testHasMissingKeys()
+	void testHasMissingKeys()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		r.setPartIDKeys(new VString("SignatureName SheetName Side", null));
@@ -85,7 +85,7 @@ public class PartitionMapTest
 	 *
 	 */
 	@Test
-	public void testGet()
+	void testGet()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final PartitionMap map = new PartitionMap(r);
@@ -96,7 +96,7 @@ public class PartitionMapTest
 	 *
 	 */
 	@Test
-	public void testAdd()
+	void testAdd()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
@@ -108,7 +108,7 @@ public class PartitionMapTest
 	 *
 	 */
 	@Test
-	public void testSize()
+	void testSize()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d2");
@@ -121,7 +121,7 @@ public class PartitionMapTest
 	 *
 	 */
 	@Test
-	public void testMapSize()
+	void testMapSize()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");

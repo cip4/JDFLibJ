@@ -89,7 +89,7 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConstruct()
+	void testConstruct()
 	{
 		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
 		FileUtil.deleteAll(theHFDir);
@@ -102,7 +102,7 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBoom()
+	void testBoom()
 	{
 		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
 		FileUtil.deleteAll(theHFDir);
@@ -118,7 +118,7 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetStored()
+	void testgetStored()
 	{
 		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
 		FileUtil.deleteAll(theHFDir);
@@ -132,7 +132,7 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
 		FileUtil.deleteAll(theHFDir);
@@ -151,7 +151,7 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDelayedRunner()
+	void testDelayedRunner()
 	{
 		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
 		FileUtil.deleteAll(theHFDir);
@@ -169,7 +169,7 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBoom2() throws IOException
+	void testBoom2() throws IOException
 	{
 		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
 		FileUtil.deleteAll(theHFDir);
@@ -187,7 +187,7 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHandleBad() throws IOException
+	void testHandleBad() throws IOException
 	{
 		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "FooBad");
 		FileUtil.deleteAll(theHFDir);

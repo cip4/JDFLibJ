@@ -100,7 +100,7 @@ public class JDFDocThreadTest {
 		 * @see java.lang.Thread#run()
 		 */
 		@Override
-		public void run()
+		void run()
 		{
 			ThreadUtil.sleep(1);
 			JDFDoc d = new JDFParser().parseString("<JDF/>");
@@ -113,7 +113,7 @@ public class JDFDocThreadTest {
 	 * 
 	 */
 	@Test
-	public void testMultiThreadStart()
+	void testMultiThreadStart()
 	{
 		for (int i = 0; i < 10; i++)
 			new StartThread().start();

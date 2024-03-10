@@ -68,7 +68,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 	 * make sure we also get all valid deep elements
 	 */
 	@Test
-	public void testGetTransformElement()
+	void testGetTransformElement()
 	{
 		final XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
 		final KElement style = xsl.getRoot();
@@ -84,7 +84,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 	 * make sure we also get all valid deep elements
 	 */
 	@Test
-	public void testGetTransformElementV2()
+	void testGetTransformElementV2()
 	{
 		final XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
 		final KElement style = xsl.getRoot();
@@ -101,7 +101,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 	 * make sure we also get all valid deep elements
 	 */
 	@Test
-	public void testGetTransformMetadata()
+	void testGetTransformMetadata()
 	{
 		final XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
 		final KElement style = xsl.getRoot();
@@ -120,7 +120,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 	 * make sure we also get all valid deep elements
 	 */
 	@Test
-	public void testGetTransformStream()
+	void testGetTransformStream()
 	{
 		final XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
 		final KElement style = xsl.getRoot();
@@ -137,7 +137,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 	 * make sure we also get all valid deep elements
 	 */
 	@Test
-	public void testXSLMath()
+	void testXSLMath()
 	{
 		final XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
 		final KElement style = xsl.getRoot();
@@ -172,7 +172,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testXSLListMM()
+	void testXSLListMM()
 	{
 		final XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
 		final KElement style = xsl.getRoot();
@@ -201,7 +201,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJDFContactTypes()
+	void testJDFContactTypes()
 	{
 		final XMLDoc xsl = XMLDoc.parseFile(sm_dirTestData + "xsl/contacttype.xsl");
 		final JDFNode n = JDFNode.createRoot();
@@ -217,7 +217,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJMFMilestoneZapp()
+	void testJMFMilestoneZapp()
 	{
 		final JDFJMF jmf = new JMFBuilder().buildMilestone("dummy", "j");
 		final XMLDoc xsl = XMLDoc.parseFile(sm_dirTestData + "xsl/milestonedummy.xsl");
@@ -230,7 +230,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJDFRemoveLayoutLink()
+	void testJDFRemoveLayoutLink()
 	{
 		final XMLDoc xsl = XMLDoc.parseFile(sm_dirTestData + "xsl/removeLayout.xsl");
 		final JDFNode n = JDFNode.createRoot();

@@ -74,7 +74,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testunpack()
+	void testunpack()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		File dir = new File(sm_dirTestDataTemp + "schema.zip.dir");
@@ -94,7 +94,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testEvilPath() throws IOException
+	void testEvilPath() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();
@@ -115,7 +115,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testEvilPath2() throws IOException
+	void testEvilPath2() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();
@@ -134,7 +134,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testAuxPath() throws IOException
+	void testAuxPath() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();
@@ -152,7 +152,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testunpackSingle()
+	void testunpackSingle()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		final File dir = new File(sm_dirTestDataTemp + "schema.zip.dir");
@@ -169,7 +169,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetEntryStream()
+	void testGetEntryStream()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		ZipEntry e = r.getEntry("schema/Conditions.jdf");
@@ -187,7 +187,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testNonAscii()
+	void testNonAscii()
 	{
 		final File zipFile = new File(sm_dirTestDataTemp + "äöü.zip");
 		FileUtil.copyFile(new File(sm_dirTestData + "schema.zip"), zipFile);
@@ -207,7 +207,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXMLDoc()
+	void testGetXMLDoc()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		final ZipEntry e = r.getEntry("schema/Conditions.jdf");
@@ -223,7 +223,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetJDFDoc()
+	void testGetJDFDoc()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		final ZipEntry e = r.getMatchingEntry("*Conditions.jdf", 0);
@@ -239,7 +239,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetEntry()
+	void testGetEntry()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		ZipEntry e = r.getEntry("schema/Conditions.jdf");
@@ -258,7 +258,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetStream() throws IOException
+	void testGetStream() throws IOException
 	{
 		final ByteArrayIOStream crap = new ByteArrayIOStream();
 		for (int i = 0; i < 1; i++)
@@ -296,7 +296,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetStreamFile() throws IOException
+	void testGetStreamFile() throws IOException
 	{
 		final ByteArrayIOStream crap = new ByteArrayIOFileStream(999);
 		for (int i = 0; i < 1; i++)
@@ -333,7 +333,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetStreams() throws IOException
+	void testGetStreams() throws IOException
 	{
 		final ByteArrayIOStream crap = new ByteArrayIOStream();
 		for (int k = 0; k < 3; k++)
@@ -375,7 +375,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetEntryEscaped()
+	void testGetEntryEscaped()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "testZip.zip");
 		assertNotNull(r.getEntry("content/%20.pdf"));
@@ -395,7 +395,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetEntryAutoFileRoot()
+	void testGetEntryAutoFileRoot()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		ZipEntry e = r.getEntry("Conditions.jdf");
@@ -412,7 +412,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testunpackBackslash()
+	void testunpackBackslash()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "backslash.zip");
 		final File dir = new File(sm_dirTestDataTemp + "backslash.zip.dir");
@@ -429,7 +429,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetEntryBackslash()
+	void testgetEntryBackslash()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "backslash.zip");
 		assertNotNull(r.getEntry("b.jmf"));
@@ -446,7 +446,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetMatchingEntryBackslash()
+	void testgetMatchingEntryBackslash()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "backslash.zip");
 		assertNotNull(r.getMatchingEntry("?.jmf", 0));
@@ -460,7 +460,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetNextMatchingEntryBackslash()
+	void testgetNextMatchingEntryBackslash()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "backslash.zip");
 		r.buffer();
@@ -475,7 +475,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetRoot()
+	void testSetRoot()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		r.setRootEntry("schema/");
@@ -495,7 +495,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetBigEntryMemLeak()
+	void testGetBigEntryMemLeak()
 	{
 		final MemorySpy ms = new MemorySpy();
 		System.gc();
@@ -525,7 +525,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetBigEntry()
+	void testGetBigEntry()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "dir1.zip");
 		final ZipEntry e = r.getEntry("dir1/bigzip.pdf");
@@ -538,7 +538,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetBigEntryStatic()
+	void testGetBigEntryStatic()
 	{
 		final ZipReader r = ZipReader.getZipReader(new File(sm_dirTestData + "dir1.zip"));
 		final ZipEntry e = r.getEntry("dir1/bigzip.pdf");
@@ -551,7 +551,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetManyBigEntryStatic()
+	void testGetManyBigEntryStatic()
 	{
 		final ArrayList<ZipReader> l = new ArrayList<>();
 		for (int i = 0; i < 4; i++)
@@ -572,7 +572,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetManyReadersBigEntryStatic()
+	void testGetManyReadersBigEntryStatic()
 	{
 		final ArrayList<ZipReader> l = new ArrayList<>();
 		for (int i = 0; i < 1; i++)
@@ -593,7 +593,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetZipReaderFileNoSearch()
+	void testGetZipReaderFileNoSearch()
 	{
 		ZipReader zr = ZipReader.getZipReader(new File(sm_dirTestData + "CIP4 JDFEditor 2.4-SNAPSHOT.exe"), false);
 		if (zr == null)
@@ -609,7 +609,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetBigEntryStream() throws IOException
+	void testGetBigEntryStream() throws IOException
 	{
 		final ByteArrayIOStream bos = new ByteArrayIOFileStream(new File(sm_dirTestData + "dir1.zip"), 444444, true);
 		final ZipReader r = new ZipReader(bos.getInputStream());
@@ -637,7 +637,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetBigEntryStreamGone() throws IOException
+	void testGetBigEntryStreamGone() throws IOException
 	{
 		ByteArrayIOStream bos = new ByteArrayIOFileStream(FileUtil.getBufferedInputStream(new File(sm_dirTestData + "dir1.zip")), 4444);
 		final ZipReader r = new ZipReader(bos.getInputStream());
@@ -677,7 +677,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetBigEntries()
+	void testGetBigEntries()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "dir1.zip");
 		final Vector<ZipEntry> v = r.getEntries();
@@ -690,7 +690,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMatchingEntry()
+	void testGetMatchingEntry()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		final ZipEntry e = r.getMatchingEntry("*.jdf", 0);
@@ -708,7 +708,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMatchingEntryEscaped()
+	void testGetMatchingEntryEscaped()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "testZip.zip");
 		assertNotNull(r.getMatchingEntry("*boo.pdf", 0));
@@ -729,7 +729,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMatchingEntries()
+	void testGetMatchingEntries()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "testZip.zip");
 		final Vector<ZipEntry> v = r.getMatchingEntries("*", true);
@@ -746,7 +746,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetEntry()
+	void testSetEntry()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "testZip.zip");
 		final Vector<ZipEntry> v = r.getEntries();
@@ -763,7 +763,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMatchingEntryEscapedFile()
+	void testGetMatchingEntryEscapedFile()
 	{
 		final ZipReader r = new ZipReader(new File(sm_dirTestData + "testZip.zip"), 33);
 		assertNotNull(r.getMatchingEntry("*boo.pdf", 0));
@@ -784,7 +784,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetIgnoreCase()
+	void testGetIgnoreCase()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		ZipEntry e = r.getMatchingEntry("*.jdf", 0);
@@ -806,7 +806,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetEntries()
+	void testGetEntries()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
 		final Vector<ZipEntry> entries = r.getEntries();

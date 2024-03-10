@@ -84,7 +84,7 @@ public class XJDFSchemaCreatorTest extends JDFTestCaseBase
 	 * create a jdf 2.0 schema based on the jdf library
 	 */
 	@Test
-	public void testCreate()
+	void testCreate()
 	{
 		File baseDir = new File("./src/main/java/org/cip4/jdflib");
 		if (!baseDir.isDirectory())

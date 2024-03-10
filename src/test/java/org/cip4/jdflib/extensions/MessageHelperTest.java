@@ -65,7 +65,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -75,7 +75,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSubscribe()
+	void testSubscribe()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
@@ -88,7 +88,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCleanupNotification()
+	void testCleanupNotification()
 	{
 		final KElement resp = new XJMFHelper().getRoot().appendElement("ResponseKnownMessages");
 		final JDFMessageService ms = (JDFMessageService) resp.appendElement(ElementName.MESSAGESERVICE);
@@ -106,7 +106,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCleanupSubscription()
+	void testCleanupSubscription()
 	{
 		final KElement resp = new XJMFHelper().getRoot().appendElement("ResponseKnownMessages");
 		final JDFKnownMsgQuParams ms = (JDFKnownMsgQuParams) resp.appendElement(ElementName.KNOWNMSGQUPARAMS);
@@ -123,7 +123,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsQuery()
+	void testIsQuery()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
@@ -136,7 +136,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsCommand()
+	void testIsCommand()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
@@ -149,7 +149,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetFamily()
+	void testGetFamily()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
@@ -162,7 +162,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetFamilyEnum()
+	void testGetFamilyEnum()
 	{
 		for (EFamily f : EFamily.values())
 		{
@@ -177,7 +177,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetType()
+	void testGetType()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
@@ -188,7 +188,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsSignal()
+	void testIsSignal()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
@@ -201,7 +201,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsMessage()
+	void testIsMessage()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
@@ -212,7 +212,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsMessageForeign()
+	void testIsMessageForeign()
 	{
 		final XMLDoc d = new XMLDoc("foo:CommandBar", "foo");
 		assertTrue(MessageHelper.isMessage(d.getRoot()));
@@ -222,7 +222,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFamilyMessageForeign()
+	void testFamilyMessageForeign()
 	{
 		final XMLDoc d = new XMLDoc("foo:CommandBar", "foo");
 		assertEquals(EFamily.Command, new MessageHelper(d.getRoot()).getEFamily());
@@ -232,7 +232,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testIsResponse()
+	void testIsResponse()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
@@ -245,7 +245,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetReturnCode()
+	void testGetReturnCode()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
@@ -258,7 +258,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetDeviceID()
+	void testGetDeviceID()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
@@ -270,7 +270,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetQuery()
+	void testSetQuery()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
@@ -284,7 +284,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetQuerySignal()
+	void testSetQuerySignal()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
@@ -300,7 +300,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSchemaNotification()
+	void testSchemaNotification()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.KnownMessages);

@@ -85,7 +85,7 @@ public class CapabilitiesCreatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSimple()
+	void testSimple()
 	{
 		WideFormatGoldenTicket theTicket = new WideFormatGoldenTicket(1);
 		theTicket.assign(null);

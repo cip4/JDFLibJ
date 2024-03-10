@@ -90,7 +90,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetComChannelPerson()
+	void testGetComChannelPerson()
 	{
 		final JDFComChannel a = person.appendComChannel(EnumChannelType.Phone, "1234");
 		Assertions.assertEquals(a, person.getComChannel(EnumChannelType.Phone));
@@ -101,7 +101,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFamilyName()
+	void testFamilyName()
 	{
 		person.setFamilyName("Müller");
 		Assertions.assertEquals(person.getFamilyName(), "Müller");
@@ -118,7 +118,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFirstName()
+	void testFirstName()
 	{
 		person.setFirstName("Joe");
 		Assertions.assertEquals(person.getFirstName(), "Joe");
@@ -135,7 +135,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFirstLastName()
+	void testFirstLastName()
 	{
 		testFirstName();
 		person.setFamilyName("M�ller");
@@ -162,7 +162,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLastFirstName()
+	void testLastFirstName()
 	{
 		testFamilyName();
 		person.setFirstName("Joe");
@@ -174,7 +174,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testPhoneticFirstName()
+	void testPhoneticFirstName()
 	{
 		testFamilyName();
 		person.setPhoneticFirstName("Joe");
@@ -185,7 +185,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testPhoneticLastName()
+	void testPhoneticLastName()
 	{
 		testFamilyName();
 		person.setPhoneticLastName("Joe");
@@ -196,7 +196,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testKeepDescName()
+	void testKeepDescName()
 	{
 		person.setDescriptiveName("foo");
 		person.setFirstName("Joe");
@@ -208,7 +208,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDescName()
+	void testGetDescName()
 	{
 		person.setFirstName("Joe");
 		Assertions.assertEquals(person.getDescriptiveName(), "Joe");
@@ -229,7 +229,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		person = (JDFPerson) new JDFDoc(ElementName.PERSON).getRoot();

@@ -92,7 +92,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAbsoluteURL()
+	void testSetAbsoluteURL()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -112,7 +112,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testURLInput()
+	void testURLInput()
 	{
 		final JDFFileSpec fs = (JDFFileSpec) JDFElement.createRoot(ElementName.FILESPEC);
 		assertNull(fs.getURLInputStream());
@@ -122,7 +122,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetFileSize()
+	void testSetFileSize()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -136,7 +136,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetNPage()
+	void testSetNPage()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, null, EnumUsage.Input, null, null, null, null);
@@ -149,7 +149,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetResourceUsage()
+	void testSetResourceUsage()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -160,7 +160,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetResourceUsage()
+	void testGetResourceUsage()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -171,7 +171,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testResourceUsageEnum()
+	void testResourceUsageEnum()
 	{
 		for (final EnumResourceUsage e : EnumResourceUsage.values())
 		{
@@ -183,7 +183,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetCheckSum()
+	void testSetCheckSum()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -199,7 +199,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testGetURLCidStream() throws Exception
+	void testGetURLCidStream() throws Exception
 	{
 		new MimeUtilTest().testBuildMimePackageDocJMF(tempDir);
 		final Path sourceFile = tempDir.resolve("testMimePackageDoc0.mjm");
@@ -228,7 +228,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testLocalGetURLStream() throws Exception
+	void testLocalGetURLStream() throws Exception
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFRunList rli = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -253,7 +253,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveToDir() throws MessagingException, IOException
+	void testMoveToDir() throws MessagingException, IOException
 	{
 		new MimeUtilTest().testBuildMimePackageDocJMF(tempDir);
 		final Multipart mp;
@@ -288,7 +288,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveToDirUserFileName()
+	void testMoveToDirUserFileName()
 	{
 		final JDFFileSpec fileSpec = (JDFFileSpec) new JDFDoc(ElementName.FILESPEC).getRoot();
 		fileSpec.setURL(sm_dirTestData + "url1.pdf");
@@ -302,7 +302,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMimeTypeFromURL()
+	void testGetMimeTypeFromURL()
 	{
 		assertEquals("text/unknown", UrlUtil.getMimeTypeFromURL(null));
 		assertEquals("text/unknown", UrlUtil.getMimeTypeFromURL("blubb"));
@@ -314,7 +314,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetMimeURL()
+	void testSetMimeURL()
 	{
 		final JDFDoc d = new JDFDoc("FileSpec");
 		final JDFFileSpec fs = (JDFFileSpec) d.getRoot();
@@ -327,7 +327,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetFileName()
+	void testGetFileName()
 	{
 		final JDFFileSpec fs = (JDFFileSpec) JDFElement.createRoot(ElementName.FILESPEC);
 

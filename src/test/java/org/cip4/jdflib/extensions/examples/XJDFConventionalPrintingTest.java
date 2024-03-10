@@ -79,7 +79,7 @@ public class XJDFConventionalPrintingTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSimpleCP()
+	void testSimpleCP()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("SimpleCP", null);
 		xjdfHelper.setTypes(EnumType.ConventionalPrinting.getName());
@@ -105,7 +105,7 @@ public class XJDFConventionalPrintingTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testP2SCP()
+	void testP2SCP()
 	{
 
 		final XJDFHelper xjdfHelper = new XJDFHelper("CP2", null);
@@ -161,7 +161,7 @@ public class XJDFConventionalPrintingTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNarrowWeb()
+	void testNarrowWeb()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("NarrowWebCP", null);
 		xjdfHelper.addType(EnumType.Feeding.getName()).addType(EnumType.ConventionalPrinting.getName()).addType(EnumType.Winding.getName());
@@ -213,7 +213,7 @@ public class XJDFConventionalPrintingTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

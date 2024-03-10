@@ -93,7 +93,7 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testModifyQE()
+	void testModifyQE()
 	{
 		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		JDFJMF jmf = b.buildHoldQueueEntry("q1");
@@ -119,7 +119,7 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		assertNotNull(XJMFTypeMap.getMap().toString());
 	}
@@ -128,7 +128,7 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPutNull()
+	void testPutNull()
 	{
 		XJMFTypeMap.getMap().put(null, "foo");
 		assertEquals("foo", XJMFTypeMap.getMap().get(null));
@@ -138,7 +138,7 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPipePush()
+	void testPipePush()
 	{
 		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		JDFJMF jmf = b.createJMF(EnumFamily.Command, EnumType.PipePush);
@@ -165,7 +165,7 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		XJMFTypeMap.shutDown();
 		super.tearDown();
@@ -176,7 +176,7 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		XJMFTypeMap.shutDown();

@@ -60,7 +60,7 @@ class XJDFPrepWalkerTest
 	 *
 	 */
 	@Test
-	public void testResourceInfo()
+	void testResourceInfo()
 	{
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Response, EnumType.Resource);

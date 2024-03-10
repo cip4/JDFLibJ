@@ -87,7 +87,7 @@ public class BackupDirectoryTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGet()
+	void testGet()
 	{
 		for (int i = 0; i < 30; i++)
 		{
@@ -109,7 +109,7 @@ public class BackupDirectoryTest extends JDFTestCaseBase
 	*/
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{ // TODO Auto-generated method stub
 		super.setUp();
 		File d = new File(sm_dirTestDataTemp + "backupDir");

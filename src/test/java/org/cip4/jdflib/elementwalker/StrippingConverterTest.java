@@ -101,7 +101,7 @@ public class StrippingConverterTest extends JDFTestCaseBase
 {
 
 	@Test
-	public void testBindingEdge()
+	void testBindingEdge()
 	{
 		final JDFLayoutPreparationParams lpp = createlpp();
 		lpp.setBindingEdge(EnumBindingEdge.Bottom);
@@ -115,7 +115,7 @@ public class StrippingConverterTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSidesBack()
+	void testSidesBack()
 	{
 		for (EnumSides s : new EnumSides[] { EnumSides.OneSidedBackFlipX, EnumSides.OneSidedBackFlipY })
 		{
@@ -131,7 +131,7 @@ public class StrippingConverterTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testLPPFitPolicy()
+	void testLPPFitPolicy()
 	{
 		final JDFLayoutPreparationParams lpp = createlpp();
 		lpp.appendFitPolicy().setSizePolicy(EnumSizePolicy.ReduceToFit);
@@ -144,7 +144,7 @@ public class StrippingConverterTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testAutomated()
+	void testAutomated()
 	{
 		final JDFLayoutPreparationParams lpp = createlpp();
 		lpp.setBindingEdge(EnumBindingEdge.Bottom);
@@ -170,7 +170,7 @@ public class StrippingConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLayoutPrepMultiBS2()
+	void testLayoutPrepMultiBS2()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/DigitalPrintingMultiPDF_IDP-ICS-1.5.jdf");
 		JDFLayoutPreparationParams lpp = (JDFLayoutPreparationParams) n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, EnumUsage.Input, 0);

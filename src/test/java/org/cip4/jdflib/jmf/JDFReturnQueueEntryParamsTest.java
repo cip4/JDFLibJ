@@ -80,7 +80,7 @@ public class JDFReturnQueueEntryParamsTest extends JDFTestCaseBase
 {
 
 	@Test
-	public void testURLInput()
+	void testURLInput()
 	{
 		JDFReturnQueueEntryParams rsp = (JDFReturnQueueEntryParams) JDFElement.createRoot(ElementName.RETURNQUEUEENTRYPARAMS);
 		assertNull(rsp.getURLInputStream());

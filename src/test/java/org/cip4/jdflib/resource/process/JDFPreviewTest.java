@@ -142,7 +142,7 @@ public class JDFPreviewTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testURLInput()
+	void testURLInput()
 	{
 		JDFPreview fs = (JDFPreview) JDFElement.createRoot(ElementName.PREVIEW);
 		assertNull(fs.getURLInputStream());
@@ -153,7 +153,7 @@ public class JDFPreviewTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		JDFAudit.setStaticAuthor(null);
 		super.setUp();

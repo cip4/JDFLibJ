@@ -94,7 +94,7 @@ public class JDFMessageServiceTest
 	 * 
 	 */
 	@Test
-	public void testgetFamilies()
+	void testgetFamilies()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
 		JDFMessageService ms = (JDFMessageService) doc.getRoot();
@@ -112,7 +112,7 @@ public class JDFMessageServiceTest
 	 * 
 	 */
 	@Test
-	public void testsetFamily()
+	void testsetFamily()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
 		JDFMessageService ms = (JDFMessageService) doc.getRoot();
@@ -124,7 +124,7 @@ public class JDFMessageServiceTest
 	 * 
 	 */
 	@Test
-	public void testsetChannelMode()
+	void testsetChannelMode()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
 		JDFMessageService ms = (JDFMessageService) doc.getRoot();
@@ -137,7 +137,7 @@ public class JDFMessageServiceTest
 	 * 
 	 */
 	@Test
-	public void testsetChannelMode2()
+	void testsetChannelMode2()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
 		JDFMessageService ms = (JDFMessageService) doc.getRoot();
@@ -152,7 +152,7 @@ public class JDFMessageServiceTest
 	 * 
 	 */
 	@Test
-	public void testsetFamilies()
+	void testsetFamilies()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
 		JDFMessageService ms = (JDFMessageService) doc.getRoot();

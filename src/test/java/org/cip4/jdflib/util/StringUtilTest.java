@@ -84,7 +84,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSimpleRegexp()
+	void testSimpleRegexp()
 	{
 		assertEquals("(.)(.+)", StringUtil.simpleRegExptoRegExp("?+", false));
 		assertEquals(StringUtil.simpleRegExptoRegExp("??", false), "(.)(.)");
@@ -115,7 +115,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testUndertoCamel()
+	void testUndertoCamel()
 	{
 		assertNull(StringUtil.underToCamel(""));
 		assertNull(StringUtil.underToCamel(""));
@@ -123,25 +123,25 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testUndertoCamelLower()
+	void testUndertoCamelLower()
 	{
 		assertEquals("AaBb", StringUtil.underToCamel("aa_bb"));
 	}
 
 	@Test
-	public void testUndertoCamelLower1()
+	void testUndertoCamelLower1()
 	{
 		assertEquals("Aa", StringUtil.underToCamel("aa"));
 	}
 
 	@Test
-	public void testUndertoCamel1()
+	void testUndertoCamel1()
 	{
 		assertEquals("Aa", StringUtil.underToCamel("AA"));
 	}
 
 	@Test
-	public void testUndertoCamelCamel()
+	void testUndertoCamelCamel()
 	{
 		assertEquals("AaBb", StringUtil.underToCamel("AaBb"));
 	}
@@ -150,7 +150,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWipeInvalidXML10Chars()
+	void testWipeInvalidXML10Chars()
 	{
 		final char[] cs = new char[] { 'a', 0x7, 0x3, 'b', 0x5 };
 		assertEquals(StringUtil.wipeInvalidXML10Chars(new String(cs), null), "ab");
@@ -162,7 +162,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetRelativePath()
+	void testGetRelativePath()
 	{
 		File f = new File("./a");
 		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "a");
@@ -180,7 +180,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 * test for getDefaultNull
 	 */
 	@Test
-	public void testGetDefaultNull()
+	void testGetDefaultNull()
 	{
 		assertNull(StringUtil.getDefaultNull(null, null));
 		assertNull(StringUtil.getDefaultNull("", ""));
@@ -193,7 +193,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 * test for getDefaultNull
 	 */
 	@Test
-	public void testGetDistance()
+	void testGetDistance()
 	{
 		assertEquals(StringUtil.getDistance("", null, false, false, false), 0);
 		assertEquals(StringUtil.getDistance("", "A", false, true, true), 0);
@@ -216,7 +216,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 * test for getDefaultNull
 	 */
 	@Test
-	public void testGetDistanceSlide()
+	void testGetDistanceSlide()
 	{
 		assertEquals(0, StringUtil.getDistance("", null, false, false, false, true));
 		assertEquals(0, StringUtil.getDistance("AA", "A", false, true, true, true));
@@ -229,7 +229,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 * test for getNonEmpty
 	 */
 	@Test
-	public void testGetNonEmpty()
+	void testGetNonEmpty()
 	{
 		assertNull(StringUtil.getNonEmpty(""));
 		assertNull(StringUtil.getNonEmpty(null));
@@ -240,7 +240,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 * test for getNonEmpty
 	 */
 	@Test
-	public void testIsEmpty()
+	void testIsEmpty()
 	{
 		assertTrue(StringUtil.isEmpty(""));
 		assertTrue(StringUtil.isEmpty((String) null));
@@ -251,7 +251,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsEmptyList()
+	void testIsEmptyList()
 	{
 		assertTrue(StringUtil.isEmpty((StringArray) null));
 		final StringArray v = new StringArray();
@@ -266,7 +266,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 * test for getNonEmpty
 	 */
 	@Test
-	public void testHasContent()
+	void testHasContent()
 	{
 		assertFalse(StringUtil.hasContent(" "));
 		assertFalse(StringUtil.hasContent(null));
@@ -278,7 +278,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 * test for gerRandomString
 	 */
 	@Test
-	public void testGetRandomString()
+	void testGetRandomString()
 	{
 		final VString v = new VString();
 		for (int i = 0; i < 1000; i++)
@@ -299,7 +299,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSprintfString()
+	void testSprintfString()
 	{
 		assertEquals(StringUtil.sprintf("part_%04d.txt", "" + 6), "part_0006.txt");
 		assertEquals(StringUtil.sprintf("abc%03ddef", "5"), "abc005def");
@@ -318,7 +318,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSprintf()
+	void testSprintf()
 	{
 		Object[] o = new Object[1];
 		o[0] = new Integer(5);
@@ -356,7 +356,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetHexBinaryBytes()
+	void testSetHexBinaryBytes()
 	{
 		final String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		final byte[] buffer = strTestString.getBytes();
@@ -370,7 +370,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetHexBinaryBytesNull()
+	void testSetHexBinaryBytesNull()
 	{
 		final String strTemp = StringUtil.setHexBinaryBytes(null, -1);
 		assertEquals("", strTemp);
@@ -380,7 +380,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetHexBinaryBytesNull()
+	void testGetHexBinaryBytesNull()
 	{
 		final byte[] tempBuffer = StringUtil.getHexBinaryBytes(null);
 		assertEquals(0, tempBuffer.length);
@@ -390,7 +390,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetUTF8Bytes()
+	void testGetUTF8Bytes()
 	{
 		// String strTestString = "ï¿½";
 		final String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789aöü€";
@@ -409,7 +409,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetUTF8Bytes()
+	void testSetUTF8Bytes()
 	{
 		// String strTestString = "ï¿½";
 		final String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
@@ -426,7 +426,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetVStringEnum()
+	void testSetVStringEnum()
 	{
 		final Vector<Object> v = new Vector<>();
 		v.add(EnumUsage.Input);
@@ -438,7 +438,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetVString()
+	void testSetVString()
 	{
 		final VString v = new VString();
 		v.add("1");
@@ -463,7 +463,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEscape()
+	void testEscape()
 	{
 		final String iri = "file://myHost/a/c%20aöü%25&?.txtß€";
 		assertEquals(iri, StringUtil.unEscape(StringUtil.escape(iri, ":&?%", "%", 16, 2, 0x21, 127), "%", 16, 2), "escape round trip");
@@ -482,7 +482,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUnEscape()
+	void testUnEscape()
 	{
 		assertEquals("\\", StringUtil.unEscape("\\\\", "\\", -1, 1));
 	}
@@ -491,7 +491,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWrite2String()
+	void testWrite2String()
 	{
 		assertNotNull(KElement.parseString(StringUtil.write2String(KElement.createRoot("a", null))));
 	}
@@ -501,7 +501,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWrite2StringBad() throws IOException
+	void testWrite2StringBad() throws IOException
 	{
 		final IStreamWriter w = Mockito.mock(IStreamWriter.class);
 		Mockito.doThrow(IOException.class).when(w).writeStream(any());
@@ -512,7 +512,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testExtension()
+	void testExtension()
 	{
 		final String iri = "file://my.Host/a.n/c%20ï¿½ï¿½ï¿½%25&?.txtï¿½";
 		assertEquals(UrlUtil.extension(iri), "txtï¿½");
@@ -524,7 +524,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatchesIgnoreCase()
+	void testMatchesIgnoreCase()
 	{
 		assertFalse(StringUtil.matchesIgnoreCase(null, "(.+ )*(BB)( .+)*", false));
 		assertTrue(StringUtil.matchesIgnoreCase("a bb c", "(.+ )*(BB)( .+)*", false));
@@ -538,7 +538,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStripPrefix()
+	void testStripPrefix()
 	{
 		assertEquals(StringUtil.stripPrefix("a:b", "a:", true), "b");
 		assertEquals(StringUtil.stripPrefix("a:b", "A:", true), "b");
@@ -553,7 +553,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStripNot()
+	void testStripNot()
 	{
 		assertEquals(StringUtil.stripNot("a1b321", "12"), "121");
 		assertNull(StringUtil.stripNot("a1b321", null));
@@ -564,7 +564,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStripQuote()
+	void testStripQuote()
 	{
 		assertEquals(StringUtil.stripQuote(",123,", ",", true), "123");
 		assertEquals(StringUtil.stripQuote(",123,", ",", false), "123");
@@ -577,7 +577,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTrim()
+	void testTrim()
 	{
 		assertEquals(StringUtil.trim(",123,", ","), "123");
 		assertEquals(StringUtil.trim(", ,123,", ", &"), "123");
@@ -595,7 +595,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatchesSimple()
+	void testMatchesSimple()
 	{
 		assertFalse(StringUtil.matchesSimple(null, "(.+ )*(BB)( .+)*", false));
 		assertTrue(StringUtil.matchesSimple("a bb c", "(.+ )*(bb)( .+)*", false));
@@ -670,7 +670,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatchesRegExp()
+	void testMatchesRegExp()
 	{
 		assertFalse(StringUtil.matches(null, "(.+ )*(BB)( .+)*"));
 		assertTrue(StringUtil.matches("a bb c", "(.+ )*(bb)( .+)*"));
@@ -746,7 +746,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNormalize()
+	void testNormalize()
 	{
 		assertEquals("a b", StringUtil.normalize("\n  a   \t  b ", false));
 		assertEquals("a bbb", StringUtil.normalize("\n  a   \t  BBb ", true));
@@ -760,7 +760,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNormalize3()
+	void testNormalize3()
 	{
 		assertEquals("a11b", StringUtil.normalize("\n  a   \t  b ", false, "11"));
 		assertEquals("abbb", StringUtil.normalize("\n  a   \t  BBb ", true, null));
@@ -773,7 +773,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNumOccurrences()
+	void testNumOccurrences()
 	{
 		assertEquals(StringUtil.numSubstrings("a", "aa"), 0);
 		assertEquals(StringUtil.numSubstrings("aa", "aa"), 1);
@@ -790,7 +790,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRegExpPerformance()
+	void testRegExpPerformance()
 	{
 		final CPUTimer ct = new CPUTimer(false);
 		int b = 0;
@@ -809,7 +809,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReplaceString()
+	void testReplaceString()
 	{
 		assertEquals(StringUtil.replaceString("abbcc", "a", "_"), "_bbcc");
 		assertEquals(StringUtil.replaceString("abbcc", "aa", "_"), "abbcc");
@@ -826,7 +826,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStringReplacer()
+	void testStringReplacer()
 	{
 		StringReplacer sr = new StringReplacer("000000");
 		assertEquals(sr.replaceString("00", "0"), "0");
@@ -839,7 +839,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReplaceChar()
+	void testReplaceChar()
 	{
 		assertEquals(StringUtil.replaceChar("abbcc", 'a', null, 0), "bbcc");
 		assertEquals(StringUtil.replaceChar("abbcc", 'b', null, 0), "acc");
@@ -855,7 +855,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReplaceCharSet()
+	void testReplaceCharSet()
 	{
 		assertEquals(StringUtil.replaceCharSet("abbcc", "ab", null, 0), "cc");
 		assertEquals(StringUtil.replaceCharSet("abbcc", "ab", "_", 0), "___cc");
@@ -866,7 +866,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRightString()
+	void testRightString()
 	{
 		assertEquals(StringUtil.rightStr("abbcc", 2), "cc");
 		assertEquals(StringUtil.rightStr("abbcc", -3), "cc");
@@ -879,7 +879,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLeftString()
+	void testLeftString()
 	{
 		assertEquals(StringUtil.leftStr("abbcc", 2), "ab");
 		assertEquals(StringUtil.leftStr("abbcc", -2), "abb");
@@ -892,7 +892,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSubstring()
+	void testSubstring()
 	{
 		// final String s = "a".substring(0, 0);
 		assertEquals(StringUtil.substring("abbcc", 0, 2), "ab");
@@ -909,7 +909,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseLong()
+	void testParseLong()
 	{
 		assertEquals(StringUtil.parseLong("", 0L), 0L);
 		assertEquals(StringUtil.parseLong("1234567890123456", 0L), 1234567890123456L);
@@ -927,7 +927,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseInt()
+	void testParseInt()
 	{
 		assertEquals(StringUtil.parseInt("", 0), 0);
 		assertEquals(StringUtil.parseInt("1234123456", 0), 1234123456);
@@ -946,7 +946,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseBoolean()
+	void testParseBoolean()
 	{
 		assertEquals(StringUtil.parseBoolean("", false), false);
 		assertEquals(StringUtil.parseBoolean("", true), true);
@@ -960,7 +960,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseDouble()
+	void testParseDouble()
 	{
 		String s = "INF";
 		assertEquals(StringUtil.parseDouble(s, 0), Double.MAX_VALUE, 0.0);
@@ -1003,7 +1003,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFind_last_not_of()
+	void testFind_last_not_of()
 	{
 		assertEquals(StringUtil.find_last_not_of("abc", "bcd"), 0);
 		assertEquals(StringUtil.find_last_not_of("abc", "abc"), -1);
@@ -1016,7 +1016,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFormatLong()
+	void testFormatLong()
 	{
 		long l = 13;
 		while (l > 0) // breaks over top
@@ -1030,7 +1030,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testFormatDouble()
+	void testFormatDouble()
 	{
 		double d = 0.12345678901234;
 		String s = StringUtil.formatDouble(d);
@@ -1063,7 +1063,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testuncToUrl()
+	void testuncToUrl()
 	{
 		if (PlatformUtil.isWindows())
 		{
@@ -1082,7 +1082,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testZappTokenWS()
+	void testZappTokenWS()
 	{
 		assertEquals("1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4 ", JDFConstants.TILDE), "new string");
 		assertEquals("1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4", JDFConstants.TILDE), "new string");
@@ -1094,7 +1094,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHasTokenNeg()
+	void testHasTokenNeg()
 	{
 		assertTrue(StringUtil.hasToken("1", "1", null, -1));
 		assertTrue(StringUtil.hasToken("1 2 1", "1", null, -1));
@@ -1107,7 +1107,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHasToken()
+	void testHasToken()
 	{
 		assertFalse(StringUtil.hasToken("1", "1", null, 1));
 		final String s = "1 2 3 3 \n15\n4";
@@ -1140,7 +1140,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHasTokenPerformance()
+	void testHasTokenPerformance()
 	{
 		final String s = "1 2 33 3 \n15\n4";
 		final String s2 = "ab123456 ab1234567 ab 1234568";
@@ -1166,7 +1166,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToken()
+	void testToken()
 	{
 		String s = "1 2 3 4";
 		assertEquals(StringUtil.token(s, 0, " "), "1");
@@ -1189,7 +1189,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTokenize()
+	void testTokenize()
 	{
 		final String s = " 1 2\n3 \n4   5";
 		final VString v = new VString();
@@ -1209,7 +1209,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReplaceTokenString()
+	void testReplaceTokenString()
 	{
 		final String s = "a/b/c";
 		assertEquals(StringUtil.replaceToken(s, "a", "/", "A"), "A/b/c");
@@ -1222,7 +1222,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveTokenString()
+	void testRemoveTokenString()
 	{
 		final String s = "a/b/c";
 		assertEquals(StringUtil.removeToken(s, "a", "/"), "b/c");
@@ -1235,7 +1235,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReplaceToken()
+	void testReplaceToken()
 	{
 		final String s = "a/b/c";
 		assertEquals(StringUtil.replaceToken(s, 0, "/", "A"), "A/b/c");
@@ -1261,7 +1261,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveToken()
+	void testRemoveToken()
 	{
 		assertEquals(StringUtil.removeToken("a/b/c", 0, "/"), "b/c");
 		assertEquals(StringUtil.removeToken("a/b/c", -1, "/"), "a/b");
@@ -1276,7 +1276,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddToken()
+	void testAddToken()
 	{
 		assertNull(StringUtil.addToken(null, "/", null));
 		assertEquals(StringUtil.addToken("a", "/", "b"), "a/b");
@@ -1292,7 +1292,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTokenizeDelim()
+	void testTokenizeDelim()
 	{
 		final String s = "http://aa/b?c";
 		final VString v = new VString();
@@ -1311,7 +1311,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTokenizeBrackets()
+	void testTokenizeBrackets()
 	{
 		assertEquals(StringUtil.tokenizeBrackets("?", '?', ':'), new VString(new String[] { "", "" }));
 		assertEquals(StringUtil.tokenizeBrackets("a", '?', ':'), new VString(new String[] { "a" }));
@@ -1331,7 +1331,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConcatStrings()
+	void testConcatStrings()
 	{
 		final VString v = StringUtil.tokenize("a b c", " ", false);
 		StringUtil.concatStrings(v, "_foo");
@@ -1342,7 +1342,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConcatString()
+	void testConcatString()
 	{
 		assertEquals("acb", StringUtil.concat("a", "b", "c"));
 		assertEquals("a", StringUtil.concat("a", null, "c"));
@@ -1355,7 +1355,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateString()
+	void testCreateString()
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream("abc".getBytes());
 		assertEquals(StringUtil.createString(ios.getInputStream()), "abc");
@@ -1366,7 +1366,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEndsWithIgnoreCase()
+	void testEndsWithIgnoreCase()
 	{
 		final String s = "a.ZIP";
 		assertTrue(s.toLowerCase().endsWith(".zip"));
@@ -1379,7 +1379,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEquals()
+	void testEquals()
 	{
 		assertTrue(StringUtil.equals("", null));
 		assertTrue(StringUtil.equals(null, null));
@@ -1392,7 +1392,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEqualsPrecision()
+	void testEqualsPrecision()
 	{
 		assertTrue(StringUtil.equals("", null, 0.001));
 		assertTrue(StringUtil.equals(null, null, 0.001));
@@ -1408,7 +1408,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testisInteger()
+	void testisInteger()
 	{
 		assertFalse(StringUtil.isInteger(""));
 		assertFalse(StringUtil.isInteger("a"));
@@ -1422,7 +1422,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testisNumber()
+	void testisNumber()
 	{
 		assertFalse(StringUtil.isNumber(""));
 		assertFalse(StringUtil.isNumber(" a"));
@@ -1439,7 +1439,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testisNumberSpeed()
+	void testisNumberSpeed()
 	{
 		final long t0 = System.currentTimeMillis();
 		for (int i = 0; i < 1000000; i++)
@@ -1460,7 +1460,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testisEqual()
+	void testisEqual()
 	{
 		final double d = 1.3141516171819;
 		double d2 = 0.00000000000001;
@@ -1483,7 +1483,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCompareTo()
+	void testCompareTo()
 	{
 		assertEquals(-1, StringUtil.compareTo(-3, -2));
 		assertEquals(1, StringUtil.compareTo(3, 2));
@@ -1496,7 +1496,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCompare()
+	void testCompare()
 	{
 		assertEquals(-1, StringUtil.compare(null, "a", true));
 		assertEquals(-1, StringUtil.compare(null, "a", false));
@@ -1509,7 +1509,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsNMTOKEN()
+	void testIsNMTOKEN()
 	{
 		assertTrue(StringUtil.isNMTOKEN("abc"));
 		assertTrue(StringUtil.isNMTOKEN("ä"));
@@ -1527,7 +1527,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsBoolean()
+	void testIsBoolean()
 	{
 		assertTrue(StringUtil.isBoolean("1 "));
 		assertFalse(StringUtil.isBoolean("abc "));
@@ -1537,7 +1537,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsID()
+	void testIsID()
 	{
 		assertTrue(StringUtil.isID("abc"));
 		assertFalse(StringUtil.isID("1abc"));
@@ -1547,7 +1547,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsDate()
+	void testIsDate()
 	{
 		assertTrue(StringUtil.isDate(new JDFDate().getDateTimeISO()));
 		assertTrue(StringUtil.isDate(new JDFDate().getDateISO()));
@@ -1558,7 +1558,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIndex()
+	void testIndex()
 	{
 		assertEquals(-1, StringUtil.index(null, null, 0));
 		assertEquals(-1, StringUtil.index("a", null, 0));
@@ -1574,7 +1574,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testList()
+	void testList()
 	{
 		assertTrue(StringUtil.isNumberList("1"));
 		assertTrue(StringUtil.isNumberList("1.04 6.777"));
@@ -1585,7 +1585,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetDatatype()
+	void testgetDatatype()
 	{
 		assertEquals(EDataType.integer, StringUtil.getDataType("-1"));
 		assertEquals(EDataType.integer, StringUtil.getDataType("1234567890"));
@@ -1602,7 +1602,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetCharset()
+	void testgetCharset()
 	{
 		assertEquals(StandardCharsets.UTF_8, StringUtil.getCharset(StringUtil.UTF8));
 		assertEquals(StandardCharsets.ISO_8859_1, StringUtil.getCharset("8859_1"));
@@ -1613,7 +1613,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testisWindowsLocalPath()
+	void testisWindowsLocalPath()
 	{
 		assertTrue(UrlUtil.isWindowsLocalPath("c:\\foo"));
 		assertTrue(UrlUtil.isWindowsLocalPath("c:\\foo\\bar.abc"));
@@ -1629,7 +1629,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPathToName()
+	void testPathToName()
 	{
 		assertEquals(StringUtil.pathToName("\\\\foo\\bar"), "bar");
 		assertEquals(StringUtil.pathToName("c:\\foo\\bar.txt"), "bar.txt");
@@ -1643,7 +1643,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNamesVector()
+	void testGetNamesVector()
 	{
 		VString v = EnumUtil.getNamesVector(EnumType.AbortQueueEntry.getClass());
 		assertTrue(v.contains("Resource"));
@@ -1657,7 +1657,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetEnumsVector()
+	void testGetEnumsVector()
 	{
 		final Vector<ValuedEnum> v = EnumUtil.getEnumsVector(EnumOrientation.Flip180.getClass());
 		assertTrue(v.contains(EnumOrientation.Rotate180));
@@ -1667,7 +1667,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testhasContent()
+	void testhasContent()
 	{
 		assertTrue(StringUtil.hasContent(" a b"));
 		assertFalse(StringUtil.hasContent(""));

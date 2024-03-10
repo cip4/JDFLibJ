@@ -81,7 +81,7 @@ public class XJDFQCExampleTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		JDFAudit.setStaticAgentName(null);

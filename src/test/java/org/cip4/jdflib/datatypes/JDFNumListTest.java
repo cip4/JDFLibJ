@@ -375,7 +375,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDouble() throws Exception
+	void testGetDouble() throws Exception
 	{
 		final JDFNumberList nl = new JDFNumberList("1.1 2.2 3.3");
 		assertEquals(nl.doubleAt(0), 1.1, 0.0);
@@ -390,7 +390,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNorm() throws Exception
+	void testNorm() throws Exception
 	{
 		final JDFNumberList nl = new JDFNumberList("4 3");
 		final JDFNumberList nl2 = new JDFNumberList("-3 4");
@@ -403,7 +403,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMin() throws Exception
+	void testMin() throws Exception
 	{
 		final JDFNumberList nl = new JDFNumberList("4 3 8 7 ");
 		assertEquals(3, nl.min(), 0);
@@ -414,7 +414,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMinNeg() throws Exception
+	void testMinNeg() throws Exception
 	{
 		final JDFNumberList nl = new JDFNumberList("-4 -3 -8 -7 ");
 		assertEquals(-8, nl.min(), 0);
@@ -425,7 +425,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMax() throws Exception
+	void testMax() throws Exception
 	{
 		final JDFNumberList nl = new JDFNumberList("4 3 8 7 -15");
 		assertEquals(8, nl.max(), 0);
@@ -436,7 +436,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMaxNeg() throws Exception
+	void testMaxNeg() throws Exception
 	{
 		final JDFNumberList nl = new JDFNumberList("-1 -1");
 		assertEquals(-1, nl.max(), 0);
@@ -447,7 +447,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testVolume() throws Exception
+	void testVolume() throws Exception
 	{
 		final JDFNumberList nl = new JDFNumberList("4 3");
 		final JDFNumberList nl2 = new JDFNumberList("-3 4");
@@ -460,7 +460,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToString() throws Exception
+	void testToString() throws Exception
 	{
 		final JDFLabColor lc = new JDFLabColor(15, -50, -33);
 		assertEquals("15 -50 -33", lc.toString());
@@ -473,7 +473,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCompare() throws Exception
+	void testCompare() throws Exception
 	{
 		final JDFNumberList nl = new JDFNumberList("1 2");
 		final JDFNumberList nl2 = new JDFNumberList("3 4");
@@ -490,7 +490,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSort()
+	void testSort()
 	{
 		final JDFNumberList l = new JDFNumberList();
 		l.add(2);
@@ -507,7 +507,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetString() throws Exception
+	void testGetString() throws Exception
 	{
 		final JDFNumberList nl = new JDFNumberList("1.11 2.22 3.33");
 		assertEquals(nl.getString(10), "1.11 2.22 3.33");
@@ -521,7 +521,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGet() throws Exception
+	void testGet() throws Exception
 	{
 		final JDFNumberList nl = new JDFNumberList("1.11 2.22 3.33");
 		assertEquals(Double.valueOf(1.11), nl.get(0));
@@ -532,7 +532,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDoubleList() throws Exception
+	void testGetDoubleList() throws Exception
 	{
 		final JDFNumberList nl = new JDFNumberList("1.1 2.2 3.3");
 		assertEquals(nl.getDoubleList().length, 3);
@@ -545,7 +545,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDoubleVector() throws Exception
+	void testGetDoubleVector() throws Exception
 	{
 		final JDFNumberList nl = new JDFNumberList("1.1 2.2 3.3");
 		final Vector<Double> dv = nl.getDoubleVector();
@@ -559,7 +559,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPerformance() throws Exception
+	void testPerformance() throws Exception
 	{
 		final CPUTimer ct = new CPUTimer(true);
 		for (int i = 0; i < 100000; i++)
@@ -575,7 +575,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testShape() throws Exception
+	void testShape() throws Exception
 	{
 		final JDFShape nl = new JDFShape("1.1 2.2 3.3");
 		assertEquals(nl.doubleAt(0), 1.1, 0.0);
@@ -594,7 +594,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testShape2()
+	void testShape2()
 	{
 		final JDFShape nl = new JDFShape(1, 2);
 		assertEquals(nl.doubleAt(0), 1, 0.0);

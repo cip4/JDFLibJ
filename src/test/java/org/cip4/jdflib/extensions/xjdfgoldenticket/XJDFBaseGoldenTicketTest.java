@@ -86,7 +86,7 @@ public class XJDFBaseGoldenTicketTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 	}
@@ -96,7 +96,7 @@ public class XJDFBaseGoldenTicketTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSimple()
+	void testSimple()
 	{
 		final XJDFBaseGoldenTicket bt = new XJDFBaseGoldenTicket(1, EnumVersion.Version_2_0);
 		bt.writeToFile(sm_dirTestDataTemp + "xjdf/BaseGT.xjdf");

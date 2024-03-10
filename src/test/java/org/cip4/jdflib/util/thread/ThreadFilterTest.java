@@ -84,7 +84,7 @@ public class ThreadFilterTest extends JDFTestCaseBase
 	 *  
 	 */
 	@Test
-	public void testGetThis()
+	void testGetThis()
 	{
 		Thread currentThread = Thread.currentThread();
 		Assertions.assertEquals(currentThread, new ThreadFilter().getThread(currentThread.getName(), 0));
@@ -95,7 +95,7 @@ public class ThreadFilterTest extends JDFTestCaseBase
 	 *  
 	 */
 	@Test
-	public void testGetAll()
+	void testGetAll()
 	{
 		Thread currentThread = Thread.currentThread();
 		Assertions.assertTrue(new ThreadFilter().getThreads(null).contains(currentThread));

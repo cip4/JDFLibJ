@@ -51,7 +51,7 @@ public class JDFTransferCurveSetTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTransfercurve()
+	void testGetTransfercurve()
 	{
 		final JDFTransferCurveSet p = (JDFTransferCurveSet) new JDFDoc(ElementName.TRANSFERCURVESET).getRoot();
 		Assertions.assertNull(p.getTransferCurve(0));
@@ -61,7 +61,7 @@ public class JDFTransferCurveSetTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTransfercurveName()
+	void testGetTransfercurveName()
 	{
 		final JDFTransferCurveSet p = (JDFTransferCurveSet) new JDFDoc(ElementName.TRANSFERCURVESET).getRoot();
 		Assertions.assertNull(p.getTransferCurve(null));
@@ -77,7 +77,7 @@ public class JDFTransferCurveSetTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTransfercurveEmpty()
+	void testGetTransfercurveEmpty()
 	{
 		final JDFTransferCurveSet p = (JDFTransferCurveSet) new JDFDoc(ElementName.TRANSFERCURVESET).getRoot();
 		Assertions.assertNull(p.getTransferCurve(null));

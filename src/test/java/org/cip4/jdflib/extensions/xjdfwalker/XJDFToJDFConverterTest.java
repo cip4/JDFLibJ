@@ -140,7 +140,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCompany()
+	void testCompany()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final KElement e = new XMLDoc(XJDFConstants.XJDF, null).getRoot();
@@ -159,7 +159,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testDevice()
+	void testDevice()
 	{
 		final XJDFHelper h = new XJDFHelper(EnumVersion.Version_2_2, "j1");
 		h.setTypes(EnumType.RasterReading.getName());
@@ -175,7 +175,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCSR()
+	void testCSR()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final KElement e = new JDFDoc(XJDFConstants.XJDF, null).getRoot();
@@ -206,7 +206,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testShapeTemplate()
+	void testShapeTemplate()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", null);
@@ -230,7 +230,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testExtendedAddress()
+	void testExtendedAddress()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final KElement e = new XMLDoc(XJDFConstants.XJDF, null).getRoot();
@@ -250,7 +250,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testColorantControl()
+	void testColorantControl()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.setTypes(EnumType.ImageSetting.getName());
@@ -275,7 +275,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testColorantAlias()
+	void testColorantAlias()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.setTypes(EnumType.ImageSetting.getName());
@@ -302,7 +302,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testColorNoSep() throws Exception
+	void testColorNoSep() throws Exception
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.setTypes(EnumType.ImageSetting.getName());
@@ -321,7 +321,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMultiProduct()
+	void testMultiProduct()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
@@ -340,7 +340,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMultiProcess()
+	void testMultiProcess()
 	{
 		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
 		JDFDoc docjdf = null;
@@ -364,7 +364,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMultiComponent()
+	void testMultiComponent()
 	{
 		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
@@ -388,7 +388,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInputStatus()
+	void testInputStatus()
 	{
 		for (int i = 0; i < 3; i++)
 		{
@@ -419,7 +419,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResourceIdentical()
+	void testResourceIdentical()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.setTypes(EnumType.ImageSetting.getName());
@@ -448,7 +448,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNodeInfoStatus()
+	void testNodeInfoStatus()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.setTypes(EnumType.ImageSetting.getName());
@@ -469,7 +469,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNodeInfoStatusSparse()
+	void testNodeInfoStatusSparse()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.setTypes(EnumType.ImageSetting.getName());
@@ -497,7 +497,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNodeInfoWSID()
+	void testNodeInfoWSID()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.setTypes(EnumType.ImageSetting.getName());
@@ -516,7 +516,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNodeInfoGangSource()
+	void testNodeInfoGangSource()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.setTypes(EnumType.ImageSetting.getName());
@@ -543,7 +543,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNodeInfoMulti()
+	void testNodeInfoMulti()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.getCreateRootProduct(0);
@@ -572,7 +572,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testNodeInfoCSR()
+	void testNodeInfoCSR()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.getCreateRootProduct(0);
@@ -609,7 +609,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNodeInfoMultiNoCPI()
+	void testNodeInfoMultiNoCPI()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.getCreateRootProduct(0);
@@ -637,7 +637,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNodeInfoStatusEmpty()
+	void testNodeInfoStatusEmpty()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.setTypes(EnumType.ImageSetting.getName());
@@ -659,7 +659,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testActualColorName()
+	void testActualColorName()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.setTypes(EnumType.ImageSetting.getName());
@@ -687,7 +687,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testConvertingConfig()
+	void testConvertingConfig()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "dielayoutproduction.jdf");
 
@@ -707,7 +707,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 */
 	@SuppressWarnings("deprecation")
 	@Test
-	public void testParameterSet()
+	void testParameterSet()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final KElement e = new XMLDoc("XJDF", null).getRoot();
@@ -727,7 +727,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPrintedPages()
+	void testPrintedPages()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final KElement e = new XMLDoc("XJDF", null).getRoot();
@@ -746,7 +746,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testExternalImpositionTemplate()
+	void testExternalImpositionTemplate()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final KElement e = new XMLDoc(XJDFConstants.XJDF, null).getRoot();
@@ -768,7 +768,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testProductRunList()
+	void testProductRunList()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
@@ -802,7 +802,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testProductRunListProduct()
+	void testProductRunListProduct()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
@@ -835,7 +835,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testProductComponent()
+	void testProductComponent()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
@@ -857,7 +857,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testProductComponentExternalID()
+	void testProductComponentExternalID()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
@@ -877,7 +877,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testProductComponentAmount()
+	void testProductComponentAmount()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
@@ -903,7 +903,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 * check that signame gets automagically inserted below sheetname
 	 */
 	@Test
-	public void testSignatureName()
+	void testSignatureName()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final SetHelper lh = h.appendResourceSet(ElementName.LAYOUT, EnumUsage.Input);
@@ -922,7 +922,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAmountPool()
+	void testAmountPool()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
@@ -945,7 +945,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAmountWaste()
+	void testAmountWaste()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
@@ -970,7 +970,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testApprovalDetails()
+	void testApprovalDetails()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
@@ -994,7 +994,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testApprovalDetailsSheet()
+	void testApprovalDetailsSheet()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
@@ -1025,7 +1025,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testOverage()
+	void testOverage()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
@@ -1045,7 +1045,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testIntentExternalID()
+	void testIntentExternalID()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
@@ -1063,7 +1063,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testResourceExternalID()
+	void testResourceExternalID()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
@@ -1082,7 +1082,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testDeliveryIntent()
+	void testDeliveryIntent()
 	{
 		final KElement xjdf = new JDFToXJDFConverterTest()._testDeliveryIntent();
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
@@ -1099,7 +1099,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testDeliveryIntentFromProduct()
+	void testDeliveryIntentFromProduct()
 	{
 		final XJDFHelper xjdf = new XJDFHelper("j1", null);
 		xjdf.appendProduct().setAmount(42);
@@ -1119,7 +1119,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testDescNameProduct()
+	void testDescNameProduct()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		h.setAttribute(AttributeName.DESCRIPTIVENAME, "x1");
@@ -1134,7 +1134,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testDescNameProduct2()
+	void testDescNameProduct2()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		h.getCreateRootProduct(0).setAttribute(AttributeName.DESCRIPTIVENAME, "p2");
@@ -1148,7 +1148,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testDescName2RootProducts()
+	void testDescName2RootProducts()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		h.setDescriptiveName("h1");
@@ -1165,7 +1165,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testDropID()
+	void testDropID()
 	{
 		final KElement xjdf = new JDFToXJDFConverterTest()._testDeliveryIntent();
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
@@ -1183,7 +1183,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testDropIDContact()
+	void testDropIDContact()
 	{
 		final KElement xjdf = new JDFToXJDFConverterTest()._testDeliveryIntent();
 		final XJDFHelper h = new XJDFHelper(xjdf);
@@ -1212,7 +1212,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testDropIDContactPartition()
+	void testDropIDContactPartition()
 	{
 		final KElement xjdf = new JDFToXJDFConverterTest()._testDeliveryIntent();
 		final XJDFHelper h = new XJDFHelper(xjdf);
@@ -1242,7 +1242,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testPlacedObject()
+	void testPlacedObject()
 	{
 		final KElement xjdf = new XJDFHelper("j1", "p1", null).getRoot();
 		xjdf.setXPathAttribute("ResourceSet[@Name=\"Layout\"]/Resource/Part/@SheetName", "s1");
@@ -1264,7 +1264,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testHolePattern()
+	void testHolePattern()
 	{
 		final KElement xjdf = new JDFToXJDFConverterTest()._testHoleLine();
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
@@ -1280,7 +1280,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testPageList()
+	void testPageList()
 	{
 		final KElement xjdf = new JDFToXJDFConverterTest()._testPageList(false);
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
@@ -1295,7 +1295,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testRunListListName()
+	void testRunListListName()
 	{
 		final XJDFHelper xjdf = new XJDFHelper("j1", null);
 		xjdf.setTypes("ImageSetting");
@@ -1322,7 +1322,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testPreview()
+	void testPreview()
 	{
 		final KElement xjdf = new JDFToXJDFConverterTest()._testPreview();
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
@@ -1337,7 +1337,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testNPage()
+	void testNPage()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("j1", "p1", null);
 		final KElement xjdf = xjdfHelper.getRoot();
@@ -1354,7 +1354,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testNPageFileSpec()
+	void testNPageFileSpec()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("j1", "p1", null);
 		final KElement xjdf = xjdfHelper.getRoot();
@@ -1372,7 +1372,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testPageListEmpty()
+	void testPageListEmpty()
 	{
 		final KElement xjdf = new JDFToXJDFConverterTest()._testPageListEmpty();
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
@@ -1387,7 +1387,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testPartIDKeys()
+	void testPartIDKeys()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
 		final SetHelper rls = h.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input);
@@ -1408,7 +1408,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAmountPoolPart()
+	void testAmountPoolPart()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
@@ -1431,7 +1431,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAmountPoolPart2()
+	void testAmountPoolPart2()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
@@ -1460,7 +1460,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAmountPoolNoPart()
+	void testAmountPoolNoPart()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
@@ -1484,7 +1484,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testPartAmountMap()
+	void testPartAmountMap()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
@@ -1508,7 +1508,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAmountPoolAudit()
+	void testAmountPoolAudit()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
@@ -1540,7 +1540,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAmountPoolAuditNoPart()
+	void testAmountPoolAuditNoPart()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
@@ -1570,7 +1570,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAssemblingIntentBindInt()
+	void testAssemblingIntentBindInt()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Stripping);
@@ -1593,7 +1593,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testBinderySignature()
+	void testBinderySignature()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = XJDFHelper.parseFile(sm_dirTestData + "xjdf/tnr.strip.red.xjdf");
@@ -1611,7 +1611,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCustomerInfoContacts()
+	void testCustomerInfoContacts()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
@@ -1633,7 +1633,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDieLayoutBindery()
+	void testDieLayoutBindery()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
@@ -1660,7 +1660,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCustomerInfoNumber() throws Throwable
+	void testCustomerInfoNumber() throws Throwable
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "p1");
 		h.getCreateSet(ElementName.CUSTOMERINFO, EnumUsage.Input).getCreatePartition(null, true).getResource().setAttribute(AttributeName.CUSTOMERID, "12345.000");
@@ -1676,7 +1676,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCustomerInfoMultiContacts()
+	void testCustomerInfoMultiContacts()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
@@ -1705,7 +1705,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMissingSetID()
+	void testMissingSetID()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
@@ -1721,7 +1721,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMultiSet()
+	void testMultiSet()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
@@ -1737,7 +1737,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetDescName()
+	void testSetDescName()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
@@ -1754,7 +1754,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetSparse()
+	void testSetSparse()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
@@ -1778,7 +1778,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMultiResourcePart()
+	void testMultiResourcePart()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
@@ -1805,7 +1805,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResourceLinkPart()
+	void testResourceLinkPart()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
@@ -1826,7 +1826,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResourceGeneralID()
+	void testResourceGeneralID()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
@@ -1848,7 +1848,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResourceLinkRun()
+	void testResourceLinkRun()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
@@ -1868,7 +1868,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResourceLinkRunIndex()
+	void testResourceLinkRunIndex()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
@@ -1891,7 +1891,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResourceLinkRunIndex2()
+	void testResourceLinkRunIndex2()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
@@ -1918,7 +1918,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResourceLinkPart2()
+	void testResourceLinkPart2()
 	{
 		KElement.setLongID(false);
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
@@ -1942,7 +1942,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWorkstepID()
+	void testWorkstepID()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
 		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
@@ -1957,7 +1957,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetVersion()
+	void testGetVersion()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
 		h.setVersion(EnumVersion.Version_2_1);
@@ -1971,7 +1971,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCounterID()
+	void testCounterID()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
 		final SetHelper sh = h.getCreateSet(ElementName.USAGECOUNTER, null);
@@ -1986,7 +1986,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCanConvert()
+	void testCanConvert()
 	{
 		assertTrue(XJDFToJDFConverter.canConvert(JDFElement.createRoot(XJDFConstants.XJDF)));
 		assertTrue(XJDFToJDFConverter.canConvert(JDFElement.createRoot(XJDFConstants.XJMF)));
@@ -1999,7 +1999,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testXJMFKnownMessages()
+	void testXJMFKnownMessages()
 	{
 		final KElement root = new JDFDoc(XJDFConstants.XJMF).getRoot();
 		root.setAttribute(AttributeName.DEVICEID, "devID");
@@ -2019,7 +2019,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testBackwardProduct()
+	void testBackwardProduct()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);
 		final ProductHelper cover = h.appendProduct();
@@ -2038,7 +2038,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testFoldingIntentDetails()
+	void testFoldingIntentDetails()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);
 		final ProductHelper book = h.appendProduct();
@@ -2055,7 +2055,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testCoverBodyProduct()
+	void testCoverBodyProduct()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);
 		final ProductHelper cover = h.appendProduct();
@@ -2089,7 +2089,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testMultiCoverBodyProduct()
+	void testMultiCoverBodyProduct()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);
 		h.getCreateSet(ElementName.NODEINFO, EnumUsage.Input).getCreateResource(0, true).getResource().setAttribute("Start", new JDFDate().getDateTimeISO());
@@ -2129,7 +2129,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testCoverBodyProductDelivery()
+	void testCoverBodyProductDelivery()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);
 		final ProductHelper cover = h.appendProduct();
@@ -2166,7 +2166,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNasty()
+	void testNasty()
 	{
 		final XJDFHelper h = XJDFHelper.parseFile(sm_dirTestData + "nasty.xjdf");
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
@@ -2180,7 +2180,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testNiciProduct()
+	void testNiciProduct()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);
 		final ProductHelper p1 = h.appendProduct();
@@ -2206,7 +2206,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testMultiBackwardProduct()
+	void testMultiBackwardProduct()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);
 		for (int i = 0; i < 2; i++)
@@ -2228,7 +2228,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFromXJDFColorIntentSurfaceColor()
+	void testFromXJDFColorIntentSurfaceColor()
 	{
 		for (int i = 0; i < 3; i += 2)
 		{
@@ -2268,7 +2268,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStrippingMedia()
+	void testStrippingMedia()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
 		xjdfHelper.setTypes("Stripping");
@@ -2322,7 +2322,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStrippingAmount()
+	void testStrippingAmount()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
 		xjdfHelper.setTypes("Stripping");
@@ -2360,7 +2360,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStrippingMultiBSID()
+	void testStrippingMultiBSID()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
 		xjdfHelper.setTypes("Stripping");
@@ -2413,7 +2413,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testStrippingSignatureCell()
+	void testStrippingSignatureCell()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
 		xjdfHelper.setTypes("Stripping");
@@ -2472,7 +2472,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStrippingDescName()
+	void testStrippingDescName()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
 		xjdfHelper.setTypes("Stripping");

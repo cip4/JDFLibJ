@@ -97,7 +97,7 @@ public class ProcessRunTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetDuration() throws Exception
+	void testGetDuration() throws Exception
 	{
 		final JDFProcessRun pt = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
 		pt.setStart(new JDFDate());
@@ -114,7 +114,7 @@ public class ProcessRunTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testAddPhaseTime()
+	void testAddPhaseTime()
 	{
 		final JDFProcessRun pr = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
 		JDFPhaseTime pt0 = null;
@@ -149,7 +149,7 @@ public class ProcessRunTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -161,7 +161,7 @@ public class ProcessRunTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testMatches()
+	void testMatches()
 	{
 		final JDFProcessRun pr0 = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
 		final JDFPhaseTime pt1 = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);

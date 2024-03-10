@@ -67,7 +67,7 @@ public class LinkRefFinderTest extends JDFTestCaseBase
 	 * Test method for {@link LinkRefFinder#getMap(JDFNode)}.
 	 */
 	@Test
-	public void testGetTheMap()
+	void testGetTheMap()
 	{
 		final LinkRefFinder lrf = new LinkRefFinder(true, true);
 		final ListMap<String, KElement> m = lrf.getMap(n);
@@ -78,7 +78,7 @@ public class LinkRefFinderTest extends JDFTestCaseBase
 	 * Test method for {@link LinkRefFinder#getMap(JDFNode)}.
 	 */
 	@Test
-	public void testGetMap()
+	void testGetMap()
 	{
 		final long t0 = System.currentTimeMillis();
 
@@ -120,7 +120,7 @@ public class LinkRefFinderTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		n = new JDFDoc("JDF").getJDFRoot();

@@ -97,7 +97,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testMISPreContentCreation()
+	void testMISPreContentCreation()
 	{
 		final MISPreGoldenTicket goldenTicket = new MISPreGoldenTicket(1, EnumVersion.Version_1_5, 2, 2, vMap);
 		goldenTicket.nCols[0] = goldenTicket.nCols[1] = 4;
@@ -119,7 +119,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testMISPreImpositionPreparation()
+	void testMISPreImpositionPreparation()
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -155,7 +155,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testMISPreComplex()
+	void testMISPreComplex()
 	{
 
 		for (int i = 0; i < 4; i++)
@@ -215,7 +215,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
 		KElement.setLongID(false);
@@ -241,7 +241,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 	 * @see BaseGoldenTicketTest#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		JDFAudit.setStaticAgentName(agentName);
 		KElement.setLongID(true);

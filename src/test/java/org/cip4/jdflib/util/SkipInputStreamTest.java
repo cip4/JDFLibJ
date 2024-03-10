@@ -91,7 +91,7 @@ public class SkipInputStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testRead() throws Exception
+	void testRead() throws Exception
 	{
 		final SkipInputStream pis = new SkipInputStream("abc", new ByteArrayInputStream("123ab456abc123".getBytes()), false);
 		Assertions.assertEquals(pis.read(), 'a');
@@ -108,7 +108,7 @@ public class SkipInputStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testReadToNextTag() throws Exception
+	void testReadToNextTag() throws Exception
 	{
 		final SkipInputStream pis = new SkipInputStream("ab", new ByteArrayInputStream("123ab456abababc123".getBytes()), false);
 		Assertions.assertEquals(pis.read(), 'a');
@@ -131,7 +131,7 @@ public class SkipInputStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testReadToNextTagStart() throws Exception
+	void testReadToNextTagStart() throws Exception
 	{
 		final SkipInputStream pis = new SkipInputStream("ab", new ByteArrayInputStream("a0caab12".getBytes()), false);
 		Assertions.assertEquals(pis.read(), 'a');
@@ -145,7 +145,7 @@ public class SkipInputStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testNull() throws Exception
+	void testNull() throws Exception
 	{
 		final SkipInputStream pis = new SkipInputStream(null, new ByteArrayInputStream("123abc123".getBytes()), false);
 		Assertions.assertEquals(pis.read(), '1');
@@ -165,7 +165,7 @@ public class SkipInputStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testReadshort() throws Exception
+	void testReadshort() throws Exception
 	{
 		final SkipInputStream pis = new SkipInputStream("abc", new ByteArrayInputStream("123ab456abc123".getBytes()), false, 2);
 		Assertions.assertEquals(pis.read(), -1);
@@ -178,7 +178,7 @@ public class SkipInputStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testIgnoreCase() throws Exception
+	void testIgnoreCase() throws Exception
 	{
 		final SkipInputStream pis = new SkipInputStream("ABC", new ByteArrayInputStream("123ab456abc123".getBytes()), true);
 		Assertions.assertEquals(pis.read(), 'a');

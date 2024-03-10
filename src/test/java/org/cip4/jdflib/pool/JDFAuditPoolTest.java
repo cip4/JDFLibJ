@@ -121,7 +121,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 * Method testIncludesAttribute.
 	 * */
 	@Test
-	public void testGetResourceVector()
+	void testGetResourceVector()
 	{
 		final JDFResourceAudit ra1 = (JDFResourceAudit) myAuditPool.addAudit(EnumAuditType.ResourceAudit, null);
 		final JDFResourceLink rl1 = (JDFResourceLink) ra1.appendElement("MediaLink");
@@ -140,7 +140,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddCreated()
+	void testAddCreated()
 	{
 		jdfRoot.setVersion(EnumVersion.Version_1_2);
 		// Test AddCreated with one parameter
@@ -169,7 +169,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddModified()
+	void testAddModified()
 	{
 		JDFAudit.setStaticAuthor("foo");
 		JDFNode node = JDFNode.createRoot();
@@ -184,7 +184,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
 		super.setUp();
@@ -201,7 +201,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddMerged()
+	void testAddMerged()
 	{
 		// Test AddCreated with one parameter
 		final JDFDoc doc2 = new JDFDoc("JDF");
@@ -221,7 +221,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddSpawned()
+	void testAddSpawned()
 	{
 		// Test AddCreated with one parameter
 		final JDFDoc doc2 = new JDFDoc("JDF");
@@ -241,7 +241,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddNotification()
+	void testAddNotification()
 	{
 
 		final JDFNotification n1 = myAuditPool.addNotification(EnumClass.Event, null, null);
@@ -256,7 +256,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMergePools()
+	void testMergePools()
 	{
 
 		final JDFNotification n1 = myAuditPool.addNotification(EnumClass.Event, null, null);
@@ -279,7 +279,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPhaseNull()
+	void testSetPhaseNull()
 	{
 		JDFPhaseTime p1 = myAuditPool.setPhase(EnumNodeStatus.Setup, "foobar", null, null);
 		Assertions.assertNotNull(p1);
@@ -291,7 +291,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPhase()
+	void testSetPhase()
 	{
 		JDFPhaseTime p1 = myAuditPool.setPhase(EnumNodeStatus.Setup, null, null, null);
 		Assertions.assertNotNull(p1);
@@ -333,7 +333,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLastPhase()
+	void testGetLastPhase()
 	{
 		final JDFPhaseTime p1 = myAuditPool.setPhase(EnumNodeStatus.Setup, null, null, null);
 		Assertions.assertNotNull(p1);
@@ -361,7 +361,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateSubmitProcessRun()
+	void testCreateSubmitProcessRun()
 	{
 		JDFProcessRun pr = myAuditPool.createSubmitProcessRun(null);
 		Assertions.assertNotNull(pr.getSubmissionTime());
@@ -384,7 +384,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testSetPhaseJMF() throws Exception
+	void testSetPhaseJMF() throws Exception
 	{
 
 		final JDFDoc docJMF = new JDFDoc("JMF");
@@ -421,7 +421,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAudit()
+	void testGetAudit()
 	{
 		final JDFAudit a1 = myAuditPool.addAudit(EnumAuditType.Deleted, null);
 		final JDFAudit a2 = myAuditPool.addAudit(EnumAuditType.Created, null);
@@ -439,7 +439,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAuditPartitioned()
+	void testGetAuditPartitioned()
 	{
 		final JDFPhaseTime a3 = (JDFPhaseTime) myAuditPool.addAudit(EnumAuditType.PhaseTime, null);
 		VJDFAttributeMap vParts = new VJDFAttributeMap();

@@ -89,7 +89,7 @@ public class WalkDeviceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeviceStatus()
+	void testDeviceStatus()
 	{
 		JDFDeviceInfo di = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
 		di.setAttribute(AttributeName.STATUS, "Production");

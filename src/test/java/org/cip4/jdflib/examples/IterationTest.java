@@ -45,7 +45,7 @@ public class IterationTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testIterate()
+	void testIterate()
 	{
 		KElement.setLongID(false);
 

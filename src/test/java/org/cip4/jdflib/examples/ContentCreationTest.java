@@ -81,7 +81,7 @@ public class ContentCreationTest extends PreflightTest
 	 * @throws Exception
 	 */
 	@Test
-	public void testLayoutElementPositioningExact() throws Exception
+	void testLayoutElementPositioningExact() throws Exception
 	{
 		// TBD: Fuzzy, Sizes, literal text via comments
 		KElement.setLongID(false);
@@ -118,7 +118,7 @@ public class ContentCreationTest extends PreflightTest
 	 * @throws Exception
 	 */
 	@Test
-	public void testLayoutElementPositioningFuzzy() throws Exception
+	void testLayoutElementPositioningFuzzy() throws Exception
 	{
 		// TBD: Fuzzy, Sizes, literal text via comments
 		KElement.setLongID(false);
@@ -173,7 +173,7 @@ public class ContentCreationTest extends PreflightTest
 	 * @throws Exception
 	 */
 	@Test
-	public void testLayoutElementPositioning() throws Exception
+	void testLayoutElementPositioning() throws Exception
 	{
 		// TBD: Fuzzy, Sizes, literal text via comments
 		KElement.setLongID(false);
@@ -386,7 +386,7 @@ public class ContentCreationTest extends PreflightTest
 	 * @throws Exception
 	 */
 	@Test
-	public void testLayoutPreflight() throws Exception
+	void testLayoutPreflight() throws Exception
 	{
 		KElement.setLongID(false);
 		final JDFDoc d = new JDFDoc("JDF");
@@ -433,7 +433,7 @@ public class ContentCreationTest extends PreflightTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

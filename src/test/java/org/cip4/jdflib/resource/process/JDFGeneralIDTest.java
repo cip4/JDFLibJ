@@ -94,7 +94,7 @@ public class JDFGeneralIDTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatches()
+	void testMatches()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFGeneralID gid1 = n.appendGeneralID("foo", "bar");
@@ -111,7 +111,7 @@ public class JDFGeneralIDTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDataType()
+	void testDataType()
 	{
 		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
 		root.setVersion(EnumVersion.Version_1_4);

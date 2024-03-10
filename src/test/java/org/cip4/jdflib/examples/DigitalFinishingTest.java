@@ -130,7 +130,7 @@ public class DigitalFinishingTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -142,7 +142,7 @@ public class DigitalFinishingTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testNearLineSimpleBarcode()
+	void testNearLineSimpleBarcode()
 	{
 		final JDFDoc jdfDoc = new JDFDoc("JDF");
 		final JDFNode n = jdfDoc.getJDFRoot();
@@ -177,7 +177,7 @@ public class DigitalFinishingTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testNearLineJDFBookletBarcode()
+	void testNearLineJDFBookletBarcode()
 	{
 		final JDFDoc jdfDoc = new JDFDoc("JDF");
 		final JDFNode n = jdfDoc.getJDFRoot();
@@ -233,7 +233,7 @@ public class DigitalFinishingTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testNearLineJDFBookletPipe()
+	void testNearLineJDFBookletPipe()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = jdfDoc.getJDFRoot();
@@ -286,7 +286,7 @@ public class DigitalFinishingTest extends ExampleTest
 	 *
 	 *
 	 */
-	public void testNearLineJDFBookletPipeMetaData()
+	void testNearLineJDFBookletPipeMetaData()
 	{
 		final JDFDoc jdfDoc = new JDFDoc("JDF");
 		final JDFNode n = jdfDoc.getJDFRoot();
@@ -328,7 +328,7 @@ public class DigitalFinishingTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testPipePushSet()
+	void testPipePushSet()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Command, EnumType.PipePush);
 		jmf.setSenderID("Guru");
@@ -405,7 +405,7 @@ public class DigitalFinishingTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testPipePushSheet()
+	void testPipePushSheet()
 	{
 		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setSenderID("Guru");
@@ -451,7 +451,7 @@ public class DigitalFinishingTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testPipePushSheetExample()
+	void testPipePushSheetExample()
 	{
 		createPipePushSheetExample(0, 0, 1, true);
 		createPipePushSheetExample(0, 0, 5, false);
@@ -546,7 +546,7 @@ public class DigitalFinishingTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testPipePushSheetMeta() throws DataFormatException
+	void testPipePushSheetMeta() throws DataFormatException
 	{
 		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setSenderID("Guru");

@@ -78,7 +78,7 @@ public class JDFStrippingTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -97,7 +97,7 @@ public class JDFStrippingTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendAssemblyID()
+	void testAppendAssemblyID()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Stripping);
@@ -116,7 +116,7 @@ public class JDFStrippingTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPositionValid()
+	void testPositionValid()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.Stripping);
@@ -131,7 +131,7 @@ public class JDFStrippingTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testFoldOut() throws Exception
+	void testFoldOut() throws Exception
 	{
 		// 0=1.3; 2=1.4
 		for (int i = 0; i < 3; i++)

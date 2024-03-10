@@ -73,7 +73,7 @@ public class JDFAuditTest extends ExampleTest
 {
 
 	@Test
-	public void readVersionDetails() throws Exception
+	void readVersionDetails() throws Exception
 	{
 		assertEquals("CIP4 JDF Writer Java", JDFAudit.readBuildProperty("lib.name"), "AgentName is wrong");
 		assertTrue(JDFAudit.readBuildProperty("lib.version").toString().startsWith("2.1."), "AgentVersion is wrong");
@@ -83,7 +83,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testInit()
+	void testInit()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -108,7 +108,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testFixVersion()
+	void testFixVersion()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -125,7 +125,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testFixVersion14()
+	void testFixVersion14()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -145,7 +145,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSetRef()
+	void testSetRef()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -163,7 +163,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testGetTimeStamp()
+	void testGetTimeStamp()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -178,7 +178,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testCreateUpdate()
+	void testCreateUpdate()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -199,7 +199,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testGetUpdatedPreviousAudit()
+	void testGetUpdatedPreviousAudit()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -218,7 +218,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testCreated()
+	void testCreated()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -240,7 +240,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testCreatedValid()
+	void testCreatedValid()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFCreated c1 = (JDFCreated) d.getJDFRoot().getAuditPool().getAudit(0, null, null, null);
@@ -252,7 +252,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testReadBuildName()
+	void testReadBuildName()
 	{
 		final String s = JDFAudit.readBuildProperty("lib.name");
 		assertFalse(StringUtil.isEmpty(s));
@@ -262,7 +262,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testReadBuildVersion()
+	void testReadBuildVersion()
 	{
 		final String s = JDFAudit.readBuildProperty("lib.version");
 		assertFalse(StringUtil.isEmpty(s));
@@ -272,7 +272,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testUpdateAudit()
+	void testUpdateAudit()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -288,7 +288,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testProcessRun()
+	void testProcessRun()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
@@ -302,7 +302,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSpawnID()
+	void testSpawnID()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -322,7 +322,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSoftware()
+	void testSoftware()
 	{
 		if (PlatformUtil.isWindows())
 		{
@@ -335,7 +335,7 @@ public class JDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSetStaticAgentVersion()
+	void testSetStaticAgentVersion()
 	{
 		if (!PlatformUtil.isWindows())
 			return;
@@ -377,7 +377,7 @@ public class JDFAuditTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

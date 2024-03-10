@@ -102,7 +102,7 @@ public class JMFKnownMessagesTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testJMFDevCaps()
+	void testJMFDevCaps()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
 		JDFJMF jmfDC = doc.getJMFRoot();

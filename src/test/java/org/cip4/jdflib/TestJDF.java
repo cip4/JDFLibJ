@@ -75,7 +75,7 @@ public class TestJDF extends JDFTestCaseBase
 	 * @throws FileNotFoundException
 	 */
 	// @Test
-	// public void testSize() throws FileNotFoundException
+	// void testSize() throws FileNotFoundException
 	// {
 	// SizeWalker sw = new SizeWalker(new File("/share/data/size.xml"));
 	// final JDFDoc d = new JDFParser().parseFile("/share/data/big.jdf");
@@ -87,7 +87,7 @@ public class TestJDF extends JDFTestCaseBase
 	 */
 	@Test
 	@Disabled
-	public void fixExampleVersions()
+	void fixExampleVersions()
 	{
 		final Vector<File> v = FileUtil.listFilesInTree(new File("/gitreps/samples/src/main/resources/jdf"), "*.jdf");
 		for (final File f : v)
@@ -129,7 +129,7 @@ public class TestJDF extends JDFTestCaseBase
 	 * @throws Throwable
 	 */
 	/*
-	 * public void testSpawnRW() throws Throwable { JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-68493/giant.jdf"); if (jdfDoc == null) return; JDFNode jdfRoot =
+	 * void testSpawnRW() throws Throwable { JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-68493/giant.jdf"); if (jdfDoc == null) return; JDFNode jdfRoot =
 	 * jdfDoc.getJDFRoot(); JDFNode nodeProc = jdfRoot.getJobPart("IPr0.PP", null); JDFResource.setUnpartitiondImplicit(true); CPUTimer ct = new CPUTimer(false); CPUTimer ctm = new CPUTimer(false);
 	 * JDFSpawn spawn; spawn = new JDFSpawn(nodeProc); spawn.bSpawnIdentical = true; spawn.bSpawnRWPartsMultiple = true; JDFMerge m = new JDFMerge(jdfRoot);
 	 *
@@ -150,7 +150,7 @@ public class TestJDF extends JDFTestCaseBase
 	 *
 	 * @throws Throwable
 	 */
-	public void _testSpawnf() throws Throwable
+	void _testSpawnf() throws Throwable
 	{
 		final JDFDoc jdfDoc = JDFDoc.parseFile("/data/JDF/FrankB.jdf");
 
@@ -181,7 +181,7 @@ public class TestJDF extends JDFTestCaseBase
 
 	@Test
 	@Disabled
-	public void testCheckSpawnedResources() throws Throwable
+	void testCheckSpawnedResources() throws Throwable
 	{
 		final JDFDoc jdfDoc = JDFDoc.parseFile("C:/data/spawnedrw.jdf");
 
@@ -205,7 +205,7 @@ public class TestJDF extends JDFTestCaseBase
 
 	@Test
 	@Disabled
-	public void testSpawnedResources() throws Throwable
+	void testSpawnedResources() throws Throwable
 	{
 		final JDFDoc jdfDoc = JDFDoc.parseFile("C:/data/spawnedrw.jdf");
 
@@ -246,7 +246,7 @@ public class TestJDF extends JDFTestCaseBase
 	 */
 	@Override
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		JDFResource.setUnpartitiondImplicit(false);
 		super.tearDown();
@@ -256,7 +256,7 @@ public class TestJDF extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDumy()
+	void testDumy()
 	{
 		Assertions.assertNull(null);
 	}

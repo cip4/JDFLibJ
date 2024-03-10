@@ -100,7 +100,7 @@ public class WalkMessageServiceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRespModesquery()
+	void testRespModesquery()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
 		JDFMessageService ms = jmf.getResponse(0).appendMessageService();
@@ -120,7 +120,7 @@ public class WalkMessageServiceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRespModesSignal()
+	void testRespModesSignal()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
 		JDFMessageService ms = jmf.getResponse(0).appendMessageService();
@@ -141,7 +141,7 @@ public class WalkMessageServiceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testRespModesCM()
+	void testRespModesCM()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
 		JDFMessageService ms = jmf.getResponse(0).appendMessageService();

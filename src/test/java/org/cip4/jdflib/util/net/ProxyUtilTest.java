@@ -113,7 +113,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception if snafu
 	 */
-	public void testSetProxyString() throws Exception
+	void testSetProxyString() throws Exception
 	{
 		if (isTestNetwork())
 		{
@@ -140,7 +140,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	 * @throws Exception if snafu
 	 */
 	@Test
-	public void testSetProxy() throws Exception
+	void testSetProxy() throws Exception
 	{
 		if (isTestNetwork())
 		{
@@ -162,7 +162,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	 * @throws Exception if snafu
 	 */
 	@Test
-	public void testGetProxy() throws Exception
+	void testGetProxy() throws Exception
 	{
 		assertNull(ProxyUtil.getProxy(null));
 		assertNull(ProxyUtil.getProxy(""));
@@ -176,7 +176,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testSystemProxy() throws Exception
+	void testSystemProxy() throws Exception
 	{
 		if (isTestNetwork())
 		{
@@ -215,7 +215,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToURL()
+	void testWriteToURL()
 	{
 		if (!isTestNetwork())
 			return;
@@ -227,7 +227,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToURLSecure()
+	void testWriteToURLSecure()
 	{
 		if (!isTestNetwork())
 			return;
@@ -239,7 +239,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		defaultSel = ProxySelector.getDefault();
 		super.setUp();
@@ -247,7 +247,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 
 	@Override
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		super.tearDown();
 		ProxySelector.setDefault(defaultSel);

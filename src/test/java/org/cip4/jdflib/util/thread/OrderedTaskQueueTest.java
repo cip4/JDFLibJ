@@ -83,7 +83,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		public void run()
+		void run()
 		{
 			log.info("started: " + i);
 			final boolean b = ThreadUtil.sleep(t);
@@ -106,7 +106,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	*/
 	@Test
 	@Disabled
-	synchronized public void testInterruptTask()
+	synchronized void testInterruptTask()
 	{
 		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multiiii2", 3);
 		WaitRunner task = null;
@@ -145,7 +145,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void test3Entry()
+	synchronized void test3Entry()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test");
 		assertEquals(q.getAvQueue(), 0);
@@ -167,7 +167,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void testStop()
+	synchronized void testStop()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("tesffft2");
 		assertTrue(q.queue(new WaitRunner(1)));
@@ -186,7 +186,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void testIsLive()
+	synchronized void testIsLive()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("live");
 		assertTrue(q.isLive());
@@ -200,7 +200,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void testInterruptCurrent()
+	synchronized void testInterruptCurrent()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test3r33");
 		assertTrue(q.queue(new WaitRunner(1, 10000)));
@@ -224,7 +224,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void testStopOne()
+	synchronized void testStopOne()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("testStopOne");
 		assertTrue(q.queue(new WaitRunner(1)));
@@ -243,7 +243,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void testStopAll()
+	synchronized void testStopAll()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("testStopAll");
 		assertTrue(q.queue(new WaitRunner(1, 200)));
@@ -263,7 +263,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void testQueue()
+	synchronized void testQueue()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test42");
 		assertTrue(q.queue(new WaitRunner(1, 200)));
@@ -275,7 +275,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void testString()
+	synchronized void testString()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test42");
 		assertNotNull(q.toString());
@@ -287,7 +287,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 
 	@Override
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		super.tearDown();
 		OrderedTaskQueue.shutDownAll();
@@ -297,7 +297,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		sequential.lock();
 		super.setUp();

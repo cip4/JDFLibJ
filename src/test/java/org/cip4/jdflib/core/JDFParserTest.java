@@ -124,7 +124,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSpeed()
+	void testSpeed()
 	{
 		final long l1 = System.nanoTime();
 		for (int i = 0; i < 222; i++)
@@ -139,7 +139,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSpeed1()
+	void testSpeed1()
 	{
 		final long l1 = System.nanoTime();
 		for (int i = 0; i < 222; i++)
@@ -159,7 +159,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseSpeed()
+	void testParseSpeed()
 	{
 		final JDFParser parser = new JDFParser();
 		System.gc();
@@ -174,7 +174,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseString()
+	void testParseString()
 	{
 		final JDFParser parser = new JDFParser();
 		Assertions.assertNotNull(parser.parseString(s));
@@ -185,7 +185,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseStringJDF()
+	void testParseStringJDF()
 	{
 		final JDFParser parser = new JDFParser();
 		final JDFDoc d = parser.parseString("<JDF/>");
@@ -202,7 +202,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseStringPrintTalk()
+	void testParseStringPrintTalk()
 	{
 		final JDFParser parser = new JDFParser();
 		final JDFDoc d = parser.parseString("<PrintTalk/>");
@@ -215,7 +215,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseStringPrintTalkDeep()
+	void testParseStringPrintTalkDeep()
 	{
 		final JDFParser parser = new JDFParser();
 		final JDFDoc d = parser.parseString("<PrintTalk><Request><XJDF><Contact/></XJDF></Request></PrintTalk>");
@@ -228,7 +228,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseStringJDFBad()
+	void testParseStringJDFBad()
 	{
 		final JDFParser parser = new JDFParser();
 		JDFDoc d = parser.parseString("<JDF");
@@ -243,7 +243,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseStringJDFWrongNS()
+	void testParseStringJDFWrongNS()
 	{
 		final JDFParser parser = new JDFParser();
 		final JDFDoc d = parser.parseString("<JDF xmlns=\"www.cip4.org\"/>");
@@ -262,7 +262,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseFileStream() throws IOException
+	void testParseFileStream() throws IOException
 	{
 		final JDFParser parser = new JDFParser();
 		final File f = new File(sm_dirTestData + "ApprovalSubJDF.jdf");
@@ -286,7 +286,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMyDocClass()
+	void testMyDocClass()
 	{
 		final MyParser p = new MyParser();
 		final JDFDoc doc = p.parseString("<JMF/>");
@@ -299,7 +299,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBadNS()
+	void testBadNS()
 	{
 		final String s2 = "<JMF/>";
 		Assertions.assertEquals(new JDFParser().parseString(s2).getRoot().getLocalName(), "JMF");
@@ -310,7 +310,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSpeed2()
+	void testSpeed2()
 	{
 		final long l1 = System.nanoTime();
 		final JDFParser p = new JDFParser();
@@ -328,7 +328,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSkipParse()
+	void testSkipParse()
 	{
 		JDFParser.m_searchStream = true;
 		final String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF ID=\"abc\"/>";
@@ -349,7 +349,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInit()
+	void testInit()
 	{
 		final JDFDoc d = new JDFParser().parseString(new JDFDoc("JDF").write2String(2));
 		final JDFCreated c = d.getJDFRoot().getCreateAuditPool().addCreated(null, null);
@@ -360,7 +360,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
 	 */
 	@Test
-	public void testSchema()
+	void testSchema()
 	{
 		final File foo = new File(sm_dirTestSchema).getParentFile();
 		Assertions.assertTrue(foo.isDirectory(), "please mount the svn schema parallel to jdflibJ");
@@ -390,7 +390,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		final JDFDoc d = new JDFDoc("JDF");
@@ -402,7 +402,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	}
 
 	@Override
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		super.tearDown();
 		JDFParser.m_searchStream = bSearch;

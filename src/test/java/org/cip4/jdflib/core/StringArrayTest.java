@@ -58,7 +58,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAllString()
+	void testGetAllString()
 	{
 		final StringArray v = new StringArray();
 		v.appendUnique("a");
@@ -73,7 +73,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGet()
+	void testGet()
 	{
 		final StringArray v = new StringArray();
 		v.add("a");
@@ -93,7 +93,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemove() throws Exception
+	void testRemove() throws Exception
 	{
 		final StringArray v = new StringArray("a b c", null);
 		Assertions.assertEquals(v.remove(-1), "c");
@@ -105,7 +105,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testContainsAny()
+	void testContainsAny()
 	{
 		final StringArray v = new StringArray();
 		v.appendUnique("a");
@@ -125,7 +125,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsEmpty()
+	void testIsEmpty()
 	{
 		Assertions.assertTrue(StringArray.isEmpty(null));
 		final StringArray v = new StringArray();
@@ -140,7 +140,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetOverlapping()
+	void testGetOverlapping()
 	{
 		final StringArray v = new StringArray();
 		v.appendUnique("a");
@@ -159,7 +159,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testPerformance()
+	void testPerformance()
 	{
 		final long t0 = System.currentTimeMillis();
 		for (int i = 0; i < 10000; i++)
@@ -216,7 +216,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetNull()
+	void testSetNull()
 	{
 		final StringArray v = new StringArray();
 		v.add((String) null);
@@ -229,7 +229,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSet()
+	void testGetSet()
 	{
 		final StringArray v = new StringArray();
 		v.add("a");
@@ -247,7 +247,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUnify()
+	void testUnify()
 	{
 		final StringArray v = new StringArray();
 		v.add("a");
@@ -272,7 +272,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetString()
+	void testGetString()
 	{
 		final StringArray v = new StringArray();
 		v.add("a");
@@ -286,7 +286,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetStringABC()
+	void testGetStringABC()
 	{
 		final StringArray v = new StringArray();
 		v.add("a");
@@ -300,7 +300,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddAll()
+	void testAddAll()
 	{
 		final StringArray v = new StringArray();
 		v.add("a");
@@ -325,7 +325,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddNonEmpty()
+	void testAddNonEmpty()
 	{
 		final StringArray v = new StringArray();
 		v.addNonEmpty("");
@@ -340,7 +340,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAppendUnique()
+	void testAppendUnique()
 	{
 		final StringArray v = new StringArray();
 		v.appendUnique((String) null);
@@ -359,7 +359,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAppendUniqueV()
+	void testAppendUniqueV()
 	{
 		final StringArray v = new StringArray();
 		v.appendUnique((String) null);
@@ -377,7 +377,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConstructEmpty()
+	void testConstructEmpty()
 	{
 		StringArray v = new StringArray("", ",");
 		Assertions.assertEquals(v.size(), 0);
@@ -397,7 +397,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConstructDouble()
+	void testConstructDouble()
 	{
 		StringArray v = new StringArray("a,b,c, ,", ",");
 		Assertions.assertEquals(v.get(-1), " ");
@@ -409,7 +409,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFactory()
+	void testFactory()
 	{
 		Assertions.assertNull(StringArray.getVString(null, null));
 		Assertions.assertNull(StringArray.getVString("", null));
@@ -420,7 +420,7 @@ public class StringArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetElementAt()
+	void testSetElementAt()
 	{
 		final StringArray v = new StringArray();
 		v.add("a");

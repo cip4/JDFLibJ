@@ -114,13 +114,13 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBuildMimePackageDocJMF() throws MessagingException, IOException
+	void testBuildMimePackageDocJMF() throws MessagingException, IOException
 	{
 		Path tempPath = new File(sm_dirTestDataTemp).toPath();
 		testBuildMimePackageDocJMF(tempPath);
 	}
 
-	public void testBuildMimePackageDocJMF(Path tempDir) throws MessagingException, IOException
+	void testBuildMimePackageDocJMF(Path tempDir) throws MessagingException, IOException
 	{
 		for (int ii = 0; ii < 3; ii++)
 		{
@@ -195,7 +195,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBuildMimePackageDocJMFURL()
+	void testBuildMimePackageDocJMFURL()
 	{
 		/*
 		 * final JDFDoc docJMF = new JDFDoc("JMF"); docJMF.setOriginalFileName("JMF.jmf"); final JDFJMF jmf = docJMF.getJMFRoot(); final JDFCommand com = (JDFCommand)
@@ -215,7 +215,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetJMFSubmission()
+	void testGetJMFSubmission()
 	{
 		final JDFDoc d1 = new JDFDoc("JMF");
 		d1.setOriginalFileName("JMF.jmf");
@@ -261,7 +261,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetPartByCID() throws Exception
+	void testGetPartByCID() throws Exception
 	{
 		testBuildMimePackageDocJMF();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
@@ -275,7 +275,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testIsMimeMultiPart() throws Exception
+	void testIsMimeMultiPart() throws Exception
 	{
 		assertTrue(MimeUtil.isMimeMultiPart(MimeUtil.MULTIPART_RELATED));
 		assertTrue(MimeUtil.isMimeMultiPart(MimeUtil.MULTIPART_RELATED + "; foo"));
@@ -287,7 +287,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testIsPPF() throws Exception
+	void testIsPPF() throws Exception
 	{
 		assertTrue(MimeUtil.isPPFMimeType(MimeUtil.VND_PPF));
 		assertFalse(MimeUtil.isPPFMimeType(MimeUtil.MULTIPART_RELATED + "; foo"));
@@ -297,7 +297,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetContentID() throws Exception
+	void testGetContentID() throws Exception
 	{
 		testBuildMimePackageDocJMF();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
@@ -317,7 +317,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetCreatePartByCID() throws Exception
+	void testGetCreatePartByCID() throws Exception
 	{
 		final Message message = new MimeMessage((Session) null);
 		final Multipart multipart = new MimeMultipart("related"); // JDF:
@@ -337,7 +337,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetJDFDoc() throws Exception
+	void testGetJDFDoc() throws Exception
 	{
 		testBuildMimePackageDocJMF();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
@@ -358,7 +358,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetJDFDocFromStream() throws Exception
+	void testGetJDFDocFromStream() throws Exception
 	{
 		testBuildMimePackageDocJMF();
 		for (int i = 0; i < 3; i++)
@@ -388,7 +388,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetJDFDocFromRawStream() throws Exception
+	void testGetJDFDocFromRawStream() throws Exception
 	{
 		final MimeReader mr = new MimeReader();
 		final String xml = "<xml />";
@@ -402,7 +402,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testBuildMimePackageDoc() throws Exception
+	void testBuildMimePackageDoc() throws Exception
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -431,7 +431,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testUpdateMultipart() throws Exception
+	void testUpdateMultipart() throws Exception
 	{
 		final MimeWriter mw = new MimeWriter();
 		final ByteArrayIOStream bos = new ByteArrayIOStream("abcdefg".getBytes());
@@ -450,7 +450,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testUpdateXMLMultipart() throws Exception
+	void testUpdateXMLMultipart() throws Exception
 	{
 		final Message message = new MimeMessage((Session) null);
 		final Multipart multipart = new MimeMultipart("related"); // JDF:
@@ -492,7 +492,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testReplaceContents() throws Exception
+	void testReplaceContents() throws Exception
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		doc.setOriginalFileName("JDF.jdf");
@@ -545,7 +545,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @author Claes Buckwalter
 	 */
 	@Test
-	public void testResolveRelativeUrls()
+	void testResolveRelativeUrls()
 	{
 		// Build MIME package
 		final String path = sm_dirTestData + File.separator + "MISPrepress-ICS-Complex.jdf";
@@ -578,7 +578,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testBuildMimePackage() throws Exception
+	void testBuildMimePackage() throws Exception
 	{
 		final JDFDoc d1 = new JDFDoc("JMF");
 		d1.setOriginalFileName("JMF.jmf");
@@ -603,7 +603,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testMeanCharsXML() throws Exception
+	void testMeanCharsXML() throws Exception
 	{
 		final XMLParser p = new XMLParser();
 		final XMLDoc d = p.parseString("<foo a=\"SchuÌˆtz_Teil5_bel\"/>");
@@ -628,7 +628,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteToDir() throws Exception
+	void testWriteToDir() throws Exception
 	{
 		testBuildMimePackageDocJMF(testDir);
 
@@ -652,7 +652,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteToDirDown() throws Exception
+	void testWriteToDirDown() throws Exception
 	{
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestData + "evil.mjm");
 
@@ -670,7 +670,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteToFile() throws Exception
+	void testWriteToFile() throws Exception
 	{
 		testBuildMimePackageDocJMF();
 
@@ -692,7 +692,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteToFileMimeDetails() throws Exception
+	void testWriteToFileMimeDetails() throws Exception
 	{
 		testBuildMimePackageDocJMF();
 
@@ -717,7 +717,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteToFileMimeMessage() throws Exception
+	void testWriteToFileMimeMessage() throws Exception
 	{
 		testBuildMimePackageDocJMF();
 
@@ -733,7 +733,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteToURLFile() throws Exception
+	void testWriteToURLFile() throws Exception
 	{
 		testBuildMimePackageDocJMF();
 
@@ -751,7 +751,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testPerformance() throws Exception
+	void testPerformance() throws Exception
 	{
 		testWritePerformance();
 
@@ -778,7 +778,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testPerformanceGet() throws Exception
+	void testPerformanceGet() throws Exception
 	{
 		testWritePerformance();
 		final long write = System.currentTimeMillis();
@@ -797,7 +797,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testURLPerformance()
+	void testURLPerformance()
 	{
 		try
 		{
@@ -839,7 +839,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws MalformedURLException
 	 */
 	@Test
-	public void testWritePerformance() throws IOException, FileNotFoundException, MalformedURLException
+	void testWritePerformance() throws IOException, FileNotFoundException, MalformedURLException
 	{
 		final long start = System.currentTimeMillis();
 		final String big = sm_dirTestData + File.separator + "big.pdf";

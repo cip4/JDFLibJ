@@ -67,7 +67,7 @@ public class JDFEnumerationSpanTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRange()
+	void testRange()
 	{
 		final JDFDoc doc = new JDFDoc("BindingLength");
 		final KElement e = doc.getRoot();
@@ -89,7 +89,7 @@ public class JDFEnumerationSpanTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetActual()
+	void testSetActual()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.BINDINGLENGTH);
 		final JDFSpanBindingLength e = (JDFSpanBindingLength) doc.getRoot();

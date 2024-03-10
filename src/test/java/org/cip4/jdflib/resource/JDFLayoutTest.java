@@ -97,7 +97,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -121,7 +121,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsNewLayout()
+	void testIsNewLayout()
 	{
 		Assertions.assertEquals(n.getVersion(false), defaultVersion, "version ok");
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
@@ -137,7 +137,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAutoRegister()
+	void testAutoRegister()
 	{
 
 		Assertions.assertEquals(n.getVersion(false), defaultVersion, "version ok");
@@ -168,7 +168,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIDField()
+	void testIDField()
 	{
 
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
@@ -185,7 +185,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAllOrds()
+	void testGetAllOrds()
 	{
 		final JDFLayout lo = prepare44();
 		final Vector<Integer> v = lo.getAllOrds();
@@ -198,7 +198,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCalcMaxOrd()
+	void testCalcMaxOrd()
 	{
 		final JDFLayout lo = prepare44();
 		Assertions.assertEquals(lo.calcMaxOrd(), 16);
@@ -210,7 +210,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCalcNumSame()
+	void testCalcNumSame()
 	{
 		final JDFLayout lo = prepare44();
 		Assertions.assertEquals(lo.calcNumSame(), 2);
@@ -246,7 +246,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMedia()
+	void testMedia()
 	{
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		lo.appendMedia();
@@ -260,7 +260,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSheetCondition()
+	void testSheetCondition()
 	{
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		lo.appendSheetCondition();
@@ -274,7 +274,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLogicalStackSchema()
+	void testLogicalStackSchema()
 	{
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		lo.appendLogicalStackParams().appendStack().setLogicalStackOrd(1);
@@ -289,7 +289,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testDynamicMarks() throws Exception
+	void testDynamicMarks() throws Exception
 	{
 		JDFElement.setLongID(false);
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
@@ -392,7 +392,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBuildOldLayout()
+	void testBuildOldLayout()
 	{
 		reset();
 
@@ -469,7 +469,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBuildNewLayout()
+	void testBuildNewLayout()
 	{
 		reset();
 
@@ -528,7 +528,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFixToNewLayout()
+	void testFixToNewLayout()
 	{
 		testBuildOldLayout();
 		n.fixVersion(EnumVersion.Version_1_3);
@@ -543,7 +543,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFixToNewLayoutWithPartIDKeys()
+	void testFixToNewLayoutWithPartIDKeys()
 	{
 		testBuildOldLayout();
 		final JDFLayout loOld = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
@@ -563,7 +563,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFixFromNewLayout()
+	void testFixFromNewLayout()
 	{
 		testBuildNewLayout();
 		n.fixVersion(EnumVersion.Version_1_2);
@@ -578,7 +578,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFixFromFlatNewLayout()
+	void testFixFromFlatNewLayout()
 	{
 		n.setVersion(EnumVersion.Version_1_3);
 		final JDFLayout loNew = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
@@ -599,7 +599,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFixFromSheetNewLayout()
+	void testFixFromSheetNewLayout()
 	{
 		n.setVersion(EnumVersion.Version_1_3);
 		JDFLayout loNew = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
@@ -621,7 +621,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFixFromSurfaceNewLayout()
+	void testFixFromSurfaceNewLayout()
 	{
 		n.setVersion(EnumVersion.Version_1_3);
 		JDFLayout loNew = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
@@ -646,7 +646,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * test getPlacedObjectVector
 	 */
 	@Test
-	public void testGetPlacedObjectVector()
+	void testGetPlacedObjectVector()
 	{
 		testBuildOldLayout();
 		final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
@@ -664,7 +664,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * tests the typed media getter
 	 */
 	@Test
-	public void testGetMedia()
+	void testGetMedia()
 	{
 		final JDFLayout lo = (JDFLayout) new JDFDoc("JDF").getRoot().appendElement(ElementName.RESOURCEPOOL).appendElement(ElementName.LAYOUT);
 		final JDFLayout s1 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
@@ -693,7 +693,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 */
 	// ///////////////////////////////////////////////////
 	@Test
-	public void testGetLayoutLeavesOld()
+	void testGetLayoutLeavesOld()
 	{
 		testBuildOldLayout();
 
@@ -714,7 +714,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLayoutLeavesNew()
+	void testGetLayoutLeavesNew()
 	{
 		testBuildNewLayout();
 
@@ -735,7 +735,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSignatureVector_Old()
+	void testGetSignatureVector_Old()
 	{
 		testBuildOldLayout();
 		final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
@@ -764,7 +764,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSignatureName_Old()
+	void testGetSignatureName_Old()
 	{
 		testBuildOldLayout();
 		final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
@@ -795,7 +795,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSignatureByName()
+	void testGetSignatureByName()
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -827,7 +827,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSignatureName_New()
+	void testGetSignatureName_New()
 	{
 		testBuildNewLayout();
 		final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
@@ -849,7 +849,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSignatureVector_New()
+	void testGetSignatureVector_New()
 	{
 		testBuildNewLayout();
 		final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
@@ -876,7 +876,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFixVersionProblem()
+	void testFixVersionProblem()
 	{
 		final JDFParser p = new JDFParser();
 		final JDFDoc d = p.parseFile(sm_dirTestData + File.separator + "FixVersionProblem.jdf");
@@ -900,7 +900,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGeneratedObject() throws Exception
+	void testGeneratedObject() throws Exception
 	{
 		n = doc.getJDFRoot();
 		final JDFLayout lo = (JDFLayout) n.addResource("Layout", null, EnumUsage.Input, null, null, null, null);

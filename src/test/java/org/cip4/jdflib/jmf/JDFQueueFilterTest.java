@@ -76,7 +76,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		JDFDoc d = new JDFDoc(ElementName.QUEUE);
 		theQueue = (JDFQueue) d.getRoot();
@@ -91,7 +91,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatchDiff_RemoveNonMatching() throws Exception
+	void testMatchDiff_RemoveNonMatching() throws Exception
 	{
 		JDFDoc d = new JDFDoc(ElementName.QUEUE);
 		final JDFQueue newQueue = (JDFQueue) d.getRoot();
@@ -140,7 +140,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 */
 	@SuppressWarnings("deprecation")
 	@Test
-	public void testMatchDiff() throws Exception
+	void testMatchDiff() throws Exception
 	{
 		for (int i = 0; i < 100; i++)
 		{
@@ -184,7 +184,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testRemove() throws Exception
+	void testRemove() throws Exception
 	{
 		for (int i = 0; i < 10; i++)
 		{
@@ -213,7 +213,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetStatusList() throws Exception
+	void testGetStatusList() throws Exception
 	{
 		final Vector<EnumQueueEntryStatus> vs = new Vector<>();
 		vs.add(EnumQueueEntryStatus.Completed);
@@ -230,7 +230,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetIdentifier()
+	void testGetIdentifier()
 	{
 		final NodeIdentifier ni = new NodeIdentifier("j1", "p1", null);
 		filter.setIdentifier(ni);
@@ -242,7 +242,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testMatchesGeneralID() throws Exception
+	void testMatchesGeneralID() throws Exception
 	{
 		final JDFQueueEntry qe1 = theQueue.appendQueueEntry();
 		qe1.setGeneralID("ProductThing", "a1");
@@ -267,7 +267,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testMatches() throws Exception
+	void testMatches() throws Exception
 	{
 		final JDFQueueEntry qe = theQueue.appendQueueEntry();
 		Assertions.assertTrue(filter.matches(qe), "both empty ");
@@ -332,7 +332,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 */
 	@SuppressWarnings("deprecation")
 	@Test
-	public void testMatch() throws Exception
+	void testMatch() throws Exception
 	{
 		for (int i = 0; i < 100; i++)
 		{
@@ -352,7 +352,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetQueueEntrySet() throws Exception
+	void testGetQueueEntrySet() throws Exception
 	{
 		filter.appendQueueEntryDef("qe1");
 		filter.appendQueueEntryDef("qe2");
@@ -366,7 +366,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetDeviceSet() throws Exception
+	void testGetDeviceSet() throws Exception
 	{
 		filter.appendDevice("qe1");
 		filter.appendDevice("qe2");
@@ -381,7 +381,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 */
 	@SuppressWarnings("deprecation")
 	@Test
-	public void testPerformanceDelta()
+	void testPerformanceDelta()
 	{
 		theQueue.setAutomated(false);
 		for (int i = 0; i < 20000; i++)
@@ -406,7 +406,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Test
-	public void testNonStatus() throws Exception
+	void testNonStatus() throws Exception
 	{
 		filter = theJMF.appendCommand(EnumType.SubmitQueueEntry).appendQueueFilter();
 		theQueue.setAutomated(false);
@@ -433,7 +433,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Test
-	public void testQueueSize() throws Exception
+	void testQueueSize() throws Exception
 	{
 		filter = theJMF.appendCommand(EnumType.SubmitQueueEntry).appendQueueFilter();
 		theQueue.setAutomated(false);
@@ -453,7 +453,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyTo()
+	void testCopyTo()
 	{
 		theQueue.setAutomated(false);
 		for (int i = 0; i < 12000; i++)
@@ -488,7 +488,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyToActivation()
+	void testCopyToActivation()
 	{
 		for (int test = 0; test < 6; test++)
 		{
@@ -529,7 +529,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyToDelta()
+	void testCopyToDelta()
 	{
 		theQueue.setAutomated(false);
 		for (int i = 0; i < 1200; i++)
@@ -567,7 +567,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyToDeltaSubset()
+	void testCopyToDeltaSubset()
 	{
 		theQueue.setAutomated(false);
 		final HashSet<String> set = new HashSet<>();
@@ -604,7 +604,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyToDeltaSubsetRemove()
+	void testCopyToDeltaSubsetRemove()
 	{
 		theQueue.setAutomated(false);
 		final HashSet<String> set = new HashSet<>();
@@ -640,7 +640,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyToDeltaPerformance()
+	void testCopyToDeltaPerformance()
 	{
 		theQueue.setAutomated(true);
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
@@ -671,7 +671,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyToDeltaPerformance2()
+	void testCopyToDeltaPerformance2()
 	{
 		theQueue.setAutomated(true);
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
@@ -705,7 +705,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testClean()
+	void testClean()
 	{
 		theQueue.setAutomated(false);
 		final JDFQueueEntry qe = theQueue.appendQueueEntry();

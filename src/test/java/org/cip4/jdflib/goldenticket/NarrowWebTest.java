@@ -83,7 +83,7 @@ public class NarrowWebTest extends BaseGoldenTicketTest
 	 * 
 	 */
 	@Test
-	public void testNarrowAll()
+	void testNarrowAll()
 	{
 		final NarrowWebGoldenTicket gt = new NarrowWebGoldenTicket(1, EnumVersion.Version_1_5, 1);
 		gt.bEmboss = true;

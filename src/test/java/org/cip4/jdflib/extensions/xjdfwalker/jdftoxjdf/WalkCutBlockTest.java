@@ -56,7 +56,7 @@ public class WalkCutBlockTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWalk()
+	void testWalk()
 	{
 		final JDFCutBlock cbo = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
 		final JDFXYPair size = new JDFXYPair(10, 20);
@@ -77,7 +77,7 @@ public class WalkCutBlockTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWalkTRF()
+	void testWalkTRF()
 	{
 		final JDFCutBlock cbo = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
 		final JDFXYPair size = new JDFXYPair(10, 20);
@@ -102,7 +102,7 @@ public class WalkCutBlockTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWalkDescName()
+	void testWalkDescName()
 	{
 		final JDFCutBlock cbo = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
 		final JDFXYPair size = new JDFXYPair(10, 20);
@@ -126,7 +126,7 @@ public class WalkCutBlockTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatches()
+	void testMatches()
 	{
 		final JDFCutBlock cbo = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
 		final WalkCutBlock wa = new WalkCutBlock();
@@ -138,7 +138,7 @@ public class WalkCutBlockTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElementNames()
+	void testGetElementNames()
 	{
 		final JDFCutBlock cbo = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
 		final WalkCutBlock wa = new WalkCutBlock();

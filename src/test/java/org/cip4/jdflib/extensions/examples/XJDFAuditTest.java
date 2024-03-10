@@ -69,7 +69,7 @@ public class XJDFAuditTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testResourceAudit()
+	void testResourceAudit()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("PaperAudit", null, null);
 		xjdfHelper.setTypes(EnumType.ConventionalPrinting.getName());
@@ -154,7 +154,7 @@ public class XJDFAuditTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

@@ -297,7 +297,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testColorantParams()
+	void testColorantParams()
 	{
 		Assertions.assertTrue(colParams.isValid(EnumValidationLevel.RecursiveComplete));
 	}
@@ -307,7 +307,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	 */
 	// //////////////////////////////////////////////////////////////////////
 	@Test
-	public void testGetAllColorantAlias()
+	void testGetAllColorantAlias()
 	{
 		final JDFColorantControl cBlatt = (JDFColorantControl) colControl.addPartition(EnumPartIDKey.SheetName, "s1");
 		Collection<JDFColorantAlias> col = cBlatt.getAllColorantAlias();
@@ -325,7 +325,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetColorantAlias()
+	void testGetColorantAlias()
 	{
 		final JDFColorantControl cBlatt = (JDFColorantControl) colControl.addPartition(EnumPartIDKey.SheetName, "s1");
 		final Collection<JDFColorantAlias> col = cBlatt.getAllColorantAlias();
@@ -342,7 +342,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetColorantAliasRep()
+	void testGetColorantAliasRep()
 	{
 		final JDFColorantControl cBlatt = (JDFColorantControl) colControl.addPartition(EnumPartIDKey.SheetName, "s1");
 		final Collection<JDFColorantAlias> col = cBlatt.getAllColorantAlias();
@@ -359,7 +359,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetColorantAliasMap()
+	void testGetColorantAliasMap()
 	{
 		final JDFColorantAlias a1 = colControl.appendColorantAlias("s1", "t1");
 		final JDFColorantAlias a2 = colControl.appendColorantAlias("s2", "t2");
@@ -369,7 +369,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testAppendColorantAlias()
+	void testAppendColorantAlias()
 	{
 		final JDFColorantAlias a1 = colControl.appendColorantAlias("s1", "t1");
 		final JDFColorantAlias a2 = colControl.appendColorantAlias("s21", "t2");
@@ -379,7 +379,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetColorantAliasMapLeaf()
+	void testGetColorantAliasMapLeaf()
 	{
 		final JDFColorantAlias a1 = colControl.appendColorantAlias("s1", "t1");
 		final JDFColorantAlias a2 = colControl.appendColorantAlias("s2", "t2");
@@ -393,7 +393,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	 * we no longer check all leaves as these can be individualized
 	 */
 	@Test
-	public void testGetColorantAliasMapRec()
+	void testGetColorantAliasMapRec()
 	{
 		final JDFColorantControl cBlatt = (JDFColorantControl) colControl.addPartition(EnumPartIDKey.SheetName, "s1");
 		final JDFColorantAlias a1 = cBlatt.appendColorantAlias("s1", "t1");
@@ -407,7 +407,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAllColorantAliasVector()
+	void testGetAllColorantAliasVector()
 	{
 		final JDFColorantAlias a1 = colControl.appendColorantAlias();
 		final JDFColorantAlias a2 = colControl.appendColorantAlias();
@@ -426,7 +426,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDeviceColorantOrderSeparations()
+	void testGetDeviceColorantOrderSeparations()
 	{
 		colParams.appendSeparation("Black");
 		Assertions.assertEquals(colControl.getDeviceColorantOrderSeparations(), colControl.getSeparations());
@@ -445,7 +445,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetColorantOrderSeparations()
+	void testGetColorantOrderSeparations()
 	{
 		colParams.appendSeparation("Black");
 		Assertions.assertEquals(colControl.getColorantOrderSeparations(), colControl.getSeparations());
@@ -459,7 +459,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMappingSelection()
+	void testMappingSelection()
 	{
 		elem.setVersion(EnumVersion.Version_1_5);
 		colControl.setMappingSelection(EnumMappingSelection.UseLocalPrinterValues);
@@ -473,7 +473,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInternalColorModel() throws SAXException, IOException
+	void testInternalColorModel() throws SAXException, IOException
 	{
 		elem.setVersion(EnumVersion.Version_1_5);
 		colControl.setInternalColorModel(EnumInternalColorModel.Enhanced);
@@ -486,7 +486,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

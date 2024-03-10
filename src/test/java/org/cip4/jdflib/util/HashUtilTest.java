@@ -85,7 +85,7 @@ public class HashUtilTest {
 	 * 
 	 */
 	@Test
-	public void testEqualsAndHashCode()
+	void testEqualsAndHashCode()
 	{
 		JDFIntegerRange range1 = new JDFIntegerRange(100, 200);
 		JDFIntegerRange range2 = new JDFIntegerRange(100, 200);

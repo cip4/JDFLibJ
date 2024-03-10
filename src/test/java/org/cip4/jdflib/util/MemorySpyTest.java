@@ -56,7 +56,7 @@ public class MemorySpyTest {
 	 *
 	 */
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		final MemorySpy ms = new MemorySpy();
 		Assertions.assertNotNull(ms.toString());
@@ -66,7 +66,7 @@ public class MemorySpyTest {
 	 *
 	 */
 	@Test
-	public void testSummary()
+	void testSummary()
 	{
 		final MemorySpy ms = new MemorySpy();
 		final String summary = ms.getSummary();
@@ -77,7 +77,7 @@ public class MemorySpyTest {
 	 *
 	 */
 	@Test
-	public void testSummary2()
+	void testSummary2()
 	{
 		final MemorySpy ms = new MemorySpy();
 		final String summary = ms.getSummary(",");
@@ -89,7 +89,7 @@ public class MemorySpyTest {
 	 *
 	 */
 	@Test
-	public void testSummaryMap()
+	void testSummaryMap()
 	{
 		final MemorySpy ms = new MemorySpy();
 		final Map<String, Long> summary = ms.getSummaryMap();
@@ -100,7 +100,7 @@ public class MemorySpyTest {
 	 *
 	 */
 	@Test
-	public void testWantMega()
+	void testWantMega()
 	{
 		final MemorySpy ms = new MemorySpy();
 		ms.setWantMega(true);
@@ -115,7 +115,7 @@ public class MemorySpyTest {
 	 *
 	 */
 	@Test
-	public void testSizeMap()
+	void testSizeMap()
 	{
 		final MemorySpy ms = new MemorySpy();
 		final Map<String, Long> summary = ms.getSizeMap();
@@ -126,7 +126,7 @@ public class MemorySpyTest {
 	 *
 	 */
 	@Test
-	public void testCurrentMem()
+	void testCurrentMem()
 	{
 		final MemorySpy ms = new MemorySpy();
 		final long summary = ms.getCurrentMem();
@@ -137,7 +137,7 @@ public class MemorySpyTest {
 	 *
 	 */
 	@Test
-	public void testCurrentMemMeg()
+	void testCurrentMemMeg()
 	{
 		final MemorySpy ms = new MemorySpy();
 		ms.setWantMega(true);
@@ -149,7 +149,7 @@ public class MemorySpyTest {
 	 *
 	 */
 	@Test
-	public void testReuse()
+	void testReuse()
 	{
 		final MemorySpy ms = new MemorySpy();
 		final long l = ms.getHeapUsed(MemScope.current);

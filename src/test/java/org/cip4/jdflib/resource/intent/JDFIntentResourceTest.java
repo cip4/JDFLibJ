@@ -91,7 +91,7 @@ public class JDFIntentResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGuessActualStatic()
+	void testGuessActualStatic()
 	{
 		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
 		assertNull(JDFIntentResource.guessActual(di, AttributeName.TRANSFER));
@@ -107,7 +107,7 @@ public class JDFIntentResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGuessActualAttribute()
+	void testGuessActualAttribute()
 	{
 		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
 		assertNull(JDFIntentResource.guessActual(di, AttributeName.TRANSFER));
@@ -119,7 +119,7 @@ public class JDFIntentResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyActualStatic()
+	void testCopyActualStatic()
 	{
 		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
 		JDFDeliveryParams dp = (JDFDeliveryParams) new JDFDoc(ElementName.DELIVERYPARAMS).getRoot();
@@ -138,7 +138,7 @@ public class JDFIntentResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPreferredToActual()
+	void testPreferredToActual()
 	{
 		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
 		JDFSpanTransfer transfer = di.appendTransfer();
@@ -152,7 +152,7 @@ public class JDFIntentResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyProcessStatic()
+	void testCopyProcessStatic()
 	{
 		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
 		JDFDeliveryParams dp = (JDFDeliveryParams) new JDFDoc(ElementName.DELIVERYPARAMS).getRoot();

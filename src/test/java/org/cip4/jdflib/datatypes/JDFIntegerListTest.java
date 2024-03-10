@@ -63,7 +63,7 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConstruct()
+	void testConstruct()
 	{
 		final JDFIntegerList l = new JDFIntegerList(3);
 		Assertions.assertEquals(l.size(), 1);
@@ -74,7 +74,7 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetInt()
+	void testSetInt()
 	{
 		final JDFIntegerList l = new JDFIntegerList(3);
 		Assertions.assertEquals(l.size(), 1);
@@ -92,7 +92,7 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSort()
+	void testSort()
 	{
 		final JDFIntegerList l = new JDFIntegerList(3);
 		l.setInt(0, 2);
@@ -108,7 +108,7 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testUnify()
+	void testUnify()
 	{
 		final JDFIntegerList l = new JDFIntegerList(3);
 		l.setIntX(0, 2).setIntX(1, 2).setInt(2, 2);
@@ -121,7 +121,7 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAdd()
+	void testAdd()
 	{
 		final JDFIntegerList l = new JDFIntegerList(3);
 		l.addX(4).add(5);
@@ -133,7 +133,7 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testShift()
+	void testShift()
 	{
 		final JDFIntegerList l = new JDFIntegerList(1);
 		l.addX(4).shift(10);
@@ -147,7 +147,7 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSubtract() throws DataFormatException
+	void testSubtract() throws DataFormatException
 	{
 		final JDFIntegerList l = new JDFIntegerList(3);
 		l.add(4);

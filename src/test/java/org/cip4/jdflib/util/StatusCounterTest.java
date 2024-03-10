@@ -110,7 +110,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testCollisionWithFixVersion()
+	void testCollisionWithFixVersion()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode docNode = doc.getJDFRoot();
@@ -135,7 +135,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		d = creatXMDoc();
 		n = d.getJDFRoot();
@@ -157,7 +157,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeviceID()
+	void testDeviceID()
 	{
 		final boolean bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		Assertions.assertTrue(bChanged);
@@ -171,7 +171,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWasteAmount()
+	void testWasteAmount()
 	{
 		final VJDFAttributeMap singleMap = new VJDFAttributeMap();
 		singleMap.add(xpMedia.getPartMapVector(false).elementAt(0));
@@ -256,7 +256,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEvent()
+	void testEvent()
 	{
 		Assertions.assertNull(sc.getDocJMFNotification(false));
 		sc.setEvent("id", "value", "blah blah");
@@ -289,7 +289,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 * test for memory leaks in clone
 	 */
 	@Test
-	public void testMemLeak()
+	void testMemLeak()
 	{
 		sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		for (int i = 0; i < 100000; i++)
@@ -307,7 +307,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 * test for memory leaks in clone
 	 */
 	@Test
-	public void testMemLeak2()
+	void testMemLeak2()
 	{
 		sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		final VElement v = new VElement();
@@ -323,7 +323,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 * test for memory leaks in clone
 	 */
 	@Test
-	public void testMemLeak3()
+	void testMemLeak3()
 	{
 		sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		final VJDFAttributeMap v = new VJDFAttributeMap();
@@ -339,7 +339,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEmployee()
+	void testEmployee()
 	{
 		Assertions.assertFalse(sc.removeEmployee(employee));
 		Assertions.assertEquals(sc.addEmployee(employee), 1);
@@ -374,7 +374,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIdle()
+	void testIdle()
 	{
 		final JDFExposedMedia m = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
 		boolean bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
@@ -407,7 +407,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	}
 
 	// @Test
-	// public void testMultiModuleJob()
+	// void testMultiModuleJob()
 	// {
 	// MultiModuleStatusCounter msc = new MultiModuleStatusCounter(
 	// MultiType.JOB);
@@ -439,7 +439,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMultiModule()
+	void testMultiModule()
 	{
 		final StatusCounter scRIP = new StatusCounter(n, null, null);
 		scRIP.addModule("ID_RIP", "RIP");

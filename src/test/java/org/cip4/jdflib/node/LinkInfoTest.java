@@ -79,7 +79,7 @@ public class LinkInfoTest {
 	 * 
 	 */
 	@Test
-	public void testEquals()
+	void testEquals()
 	{
 		LinkInfo li = new LinkInfo("i_");
 		LinkInfo li2 = new LinkInfo("i_");
@@ -92,7 +92,7 @@ public class LinkInfoTest {
 	 * 
 	 */
 	@Test
-	public void testGetStar()
+	void testGetStar()
 	{
 		LinkInfoMap linkInfoMap = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);
 		LinkInfo cp = linkInfoMap.get(ElementName.CONVENTIONALPRINTINGPARAMS);

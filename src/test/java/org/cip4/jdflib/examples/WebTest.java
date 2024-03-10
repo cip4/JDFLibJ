@@ -117,7 +117,7 @@ public class WebTest extends JDFTestCaseBase
 	 * test WebGrowth Compensation
 	 */
 	@Test
-	public void testWebGrowthCompensation()
+	void testWebGrowthCompensation()
 	{
 
 		KElement.setLongID(false);
@@ -180,7 +180,7 @@ public class WebTest extends JDFTestCaseBase
 	 * test direct imaging
 	 */
 	@Test
-	public void testDirectImage()
+	void testDirectImage()
 	{
 
 		KElement.setLongID(false);
@@ -206,7 +206,7 @@ public class WebTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSplitDuct()
+	void testSplitDuct()
 	{
 		// TODO
 	}

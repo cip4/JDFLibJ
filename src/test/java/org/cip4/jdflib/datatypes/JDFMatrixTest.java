@@ -63,7 +63,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreate()
+	void testCreate()
 	{
 		final JDFMatrix m = new JDFMatrix(90, 20, 20);
 		final JDFMatrix m2 = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
@@ -75,7 +75,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateFromRect()
+	void testCreateFromRect()
 	{
 		final JDFRectangle r = new JDFRectangle(0, 10, 30, 40);
 		final JDFMatrix m = new JDFMatrix(r);
@@ -89,7 +89,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testSetString() throws Exception
+	void testSetString() throws Exception
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -105,7 +105,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testOrientation()
+	void testOrientation()
 	{
 
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
@@ -116,7 +116,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetOrientation()
+	void testGetOrientation()
 	{
 		for (final EnumOrientation o : EnumOrientation.getEnumList())
 		{
@@ -128,7 +128,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRotate()
+	void testRotate()
 	{
 		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
 		Assertions.assertEquals(m, JDFMatrix.getUnitMatrix());
@@ -163,7 +163,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsFlip()
+	void testIsFlip()
 	{
 		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
 		Assertions.assertFalse(m.isFlip());
@@ -184,7 +184,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMultiRotate()
+	void testMultiRotate()
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -204,7 +204,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testShift() throws Exception
+	void testShift() throws Exception
 	{
 
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
@@ -220,7 +220,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testShiftXY() throws Exception
+	void testShiftXY() throws Exception
 	{
 
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
@@ -235,7 +235,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testShiftMulti() throws Exception
+	void testShiftMulti() throws Exception
 	{
 
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
@@ -249,7 +249,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetShiftXY() throws Exception
+	void testSetShiftXY() throws Exception
 	{
 
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
@@ -262,7 +262,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTransForm() throws Exception
+	void testTransForm() throws Exception
 	{
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
 		final JDFXYPair p = new JDFXYPair(10, 10);
@@ -275,7 +275,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTransFormShift() throws Exception
+	void testTransFormShift() throws Exception
 	{
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
 		m.shift(30, 30);
@@ -289,7 +289,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTransFormRect() throws Exception
+	void testTransFormRect() throws Exception
 	{
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
 		m.shift(30, 30);
@@ -304,7 +304,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTransFormRotate() throws Exception
+	void testTransFormRotate() throws Exception
 	{
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 10, 10);
 		final JDFMatrix m2 = new JDFMatrix(EnumOrientation.Rotate180, 10, 10);
@@ -320,7 +320,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetShiftXY() throws Exception
+	void testGetShiftXY() throws Exception
 	{
 
 		final JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
@@ -333,7 +333,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConcat()
+	void testConcat()
 	{
 
 		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
@@ -355,7 +355,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInvert()
+	void testInvert()
 	{
 		final JDFMatrix m = new JDFMatrix(90, 20, 20);
 		final JDFMatrix m2 = new JDFMatrix(90, 20, 20).invert();
@@ -367,7 +367,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInvert90()
+	void testInvert90()
 	{
 		final JDFMatrix m = JDFMatrix.getUnitMatrix();
 		final JDFMatrix m2 = JDFMatrix.getUnitMatrix();
@@ -380,7 +380,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testClone() throws Exception
+	void testClone() throws Exception
 	{
 		final JDFMatrix m = JDFMatrix.getUnitMatrix();
 		m.rotate(180);

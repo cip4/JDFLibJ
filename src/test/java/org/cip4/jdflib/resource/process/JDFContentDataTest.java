@@ -95,7 +95,7 @@ public class JDFContentDataTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
 		super.setUp();
@@ -110,7 +110,7 @@ public class JDFContentDataTest extends JDFTestCaseBase
 	 */
 	// ///////////////////////////////////////////////////////////////////////
 	@Test
-	public void testGetIndex()
+	void testGetIndex()
 	{
 		for (int i = 0; i < 10; i++)
 			Assertions.assertEquals(cl.appendContentData().getIndex(), i);

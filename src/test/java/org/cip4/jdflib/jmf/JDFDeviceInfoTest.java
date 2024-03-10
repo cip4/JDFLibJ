@@ -73,7 +73,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		KElement.setLongID(false);
 		final JDFDoc doc = new JDFDoc(ElementName.DEVICEINFO);
@@ -87,7 +87,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDeviceID()
+	void testGetDeviceID()
 	{
 		final JDFJMF jmf = (JDFJMF) new JDFDoc("JMF").getRoot();
 		jmf.setSenderID("S1");
@@ -103,7 +103,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDescriptiveName()
+	void testGetDescriptiveName()
 	{
 		final JDFJMF jmf = (JDFJMF) new JDFDoc("JMF").getRoot();
 		jmf.setSenderID("S1");
@@ -120,7 +120,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNullDeviceStatus()
+	void testNullDeviceStatus()
 	{
 		di.setDeviceStatus(null);
 		Assertions.assertNotNull(di, "got here!");
@@ -132,7 +132,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMergeLastPhase()
+	void testMergeLastPhase()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
@@ -165,7 +165,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsSamePhaseIdle()
+	void testIsSamePhaseIdle()
 	{
 
 		final JDFDeviceInfo di1 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
@@ -193,7 +193,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsSamePhase()
+	void testIsSamePhase()
 	{
 
 		final JDFDeviceInfo di1 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
@@ -220,7 +220,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEmployeeDeprecated15()
+	void testEmployeeDeprecated15()
 	{
 		final JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Brief);
 		final JDFDeviceInfo di2 = jmf.getSignal(0).getCreateDeviceInfo(0);
@@ -233,7 +233,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testEvent()
+	void testEvent()
 	{
 		final JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Brief);
 		final JDFDeviceInfo di2 = jmf.getSignal(0).getCreateDeviceInfo(0);
@@ -248,7 +248,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testEventID()
+	void testEventID()
 	{
 		final JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Brief);
 		final JDFDeviceInfo di2 = jmf.getSignal(0).getCreateDeviceInfo(0);
@@ -260,7 +260,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetIdleStartTime()
+	void testGetIdleStartTime()
 	{
 		final JDFDeviceInfo di1 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
 		Assertions.assertNull(di1.getIdleStartTime());

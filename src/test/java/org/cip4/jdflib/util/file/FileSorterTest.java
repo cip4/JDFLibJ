@@ -57,7 +57,7 @@ public class FileSorterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSortLastModified() throws IOException
+	void testSortLastModified() throws IOException
 	{
 		final File dir = new File(sm_dirTestDataTemp + "filesort");
 		FileUtil.deleteAll(dir);
@@ -86,7 +86,7 @@ public class FileSorterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSortLastModifiedAge() throws IOException
+	void testSortLastModifiedAge() throws IOException
 	{
 		final File dir = new File(sm_dirTestDataTemp + "filesort2");
 		FileUtil.deleteAll(dir);

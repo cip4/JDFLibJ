@@ -51,14 +51,14 @@ public class HotFolderRunnerTest extends JDFTestCaseBase
 {
 
 	@Test
-	public void testTostring()
+	void testTostring()
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
 		assertNotNull(r.toString());
 	}
 
 	@Test
-	public void testRunFile()
+	void testRunFile()
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
 		r.setMaxConcurrent(1);
@@ -71,21 +71,21 @@ public class HotFolderRunnerTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGet()
+	void testGet()
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
 		assertEquals(r, HotFolderRunner.getTherunner());
 	}
 
 	@Test
-	public void testGetCreate()
+	void testGetCreate()
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
 		assertEquals(r, HotFolderRunner.getCreateTherunner());
 	}
 
 	@Test
-	public void testSetMin()
+	void testSetMin()
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
 		r.setMaxConcurrent(-1);
@@ -93,7 +93,7 @@ public class HotFolderRunnerTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSetMax()
+	void testSetMax()
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
 		r.setMaxConcurrent(42);

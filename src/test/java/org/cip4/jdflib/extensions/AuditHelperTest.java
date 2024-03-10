@@ -55,7 +55,7 @@ public class AuditHelperTest {
 	 *
 	 */
 	@Test
-	public void testeAudit()
+	void testeAudit()
 	{
 		for (final eAudit e : eAudit.values())
 		{
@@ -70,7 +70,7 @@ public class AuditHelperTest {
 	 *
 	 */
 	@Test
-	public void testeAuditName()
+	void testeAuditName()
 	{
 		for (final eAudit e : eAudit.values())
 		{
@@ -82,7 +82,7 @@ public class AuditHelperTest {
 	 *
 	 */
 	@Test
-	public void testCleanup()
+	void testCleanup()
 	{
 		final KElement audit = KElement.createRoot(ElementName.CREATED, null);
 		final MessageHelper ah = new MessageHelper(audit);
@@ -95,7 +95,7 @@ public class AuditHelperTest {
 	 *
 	 */
 	@Test
-	public void testCleanupResource()
+	void testCleanupResource()
 	{
 		final KElement audit = KElement.createRoot(XJDFConstants.AuditResource, null);
 		final MessageHelper ah = new MessageHelper(audit);
@@ -109,7 +109,7 @@ public class AuditHelperTest {
 	 *
 	 */
 	@Test
-	public void testIsAudit()
+	void testIsAudit()
 	{
 		final KElement audit = KElement.createRoot(XJDFConstants.AuditResource, null);
 		Assertions.assertTrue(AuditHelper.isAudit(audit));
@@ -121,7 +121,7 @@ public class AuditHelperTest {
 	 *
 	 */
 	@Test
-	public void testXJMFResource()
+	void testXJMFResource()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null);
 		final AuditResourceHelper ah = (AuditResourceHelper) h.getCreateAuditPool().appendMessage(XJDFConstants.AuditResource);

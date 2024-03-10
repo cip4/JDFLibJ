@@ -89,7 +89,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTargetRoot()
+	void testGetTargetRoot()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
@@ -101,7 +101,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTargetLeafGood()
+	void testGetTargetLeafGood()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
@@ -116,7 +116,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTargetLeafBad()
+	void testGetTargetLeafBad()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
@@ -132,7 +132,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLeaves()
+	void testGetLeaves()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
@@ -148,7 +148,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveIdentical()
+	void testRemoveIdentical()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
@@ -166,7 +166,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
-	public void testCollapseIdentical()
+	void testCollapseIdentical()
 	{
 		final JDFNode n = JDFNode.createRoot();
 
@@ -186,7 +186,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
-	public void testUpdateFromLeavesIdentical()
+	void testUpdateFromLeavesIdentical()
 	{
 		final JDFNode n = JDFNode.createRoot();
 
@@ -206,7 +206,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTargetBad()
+	void testGetTargetBad()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
@@ -222,7 +222,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTargetGood()
+	void testGetTargetGood()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
@@ -237,7 +237,7 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testResStatus()
+	void testResStatus()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);

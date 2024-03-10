@@ -64,7 +64,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCPUTime()
+	void testCPUTime()
 	{
 		final CPUTimer t = new CPUTimer(false);
 		t.start();
@@ -83,7 +83,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToXML()
+	void testToXML()
 	{
 		final CPUTimer t = new CPUTimer(false);
 		t.start();
@@ -102,7 +102,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSummary() throws InterruptedException
+	void testGetSummary() throws InterruptedException
 	{
 		final CPUTimer t = new CPUTimer(false);
 		t.start();
@@ -117,7 +117,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStartStop()
+	void testStartStop()
 	{
 		int i = 0;
 		final CPUTimer t = new CPUTimer(false);
@@ -141,7 +141,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCurrentTimer()
+	void testGetCurrentTimer()
 	{
 		final CPUTimerFactory fac = CPUTimer.getFactory();
 		CPUTimer ct0 = fac.getCurrentTimer(null);
@@ -157,7 +157,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetFactory()
+	void testGetFactory()
 	{
 		final CPUTimerFactory fac = CPUTimer.getFactory();
 		assertNotNull(CPUTimer.getFactory());
@@ -168,7 +168,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAdd()
+	void testAdd()
 	{
 		long l = 0;
 		long lCPU = 0;
@@ -199,7 +199,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAverage()
+	void testAverage()
 	{
 		final CPUTimer t = new CPUTimer(false);
 		assertEquals(0, t.getAverageRealTime());

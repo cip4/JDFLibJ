@@ -152,7 +152,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEquals()
+	void testEquals()
 	{
 		assertTrue(ContainerUtil.equals(null, null));
 		assertFalse(ContainerUtil.equals(null, ""));
@@ -165,7 +165,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatches()
+	void testMatches()
 	{
 		final JDFCostCenter cs = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs.setCostCenterID("CS");
@@ -185,7 +185,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatchesExisting()
+	void testMatchesExisting()
 	{
 		final JDFCostCenter cs = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs.setCostCenterID("CS");
@@ -205,7 +205,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUnifyMatches()
+	void testUnifyMatches()
 	{
 		final JDFCostCenter cs = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs.setCostCenterID("CS");
@@ -224,7 +224,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testUnifyFilterMatches()
+	void testUnifyFilterMatches()
 	{
 		final FilterMatch ma = new FilterMatch("a");
 		final FilterMatch mb = new FilterMatch("b");
@@ -247,7 +247,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddAll()
+	void testAddAll()
 	{
 		final VString v1 = new VString("a b c", null);
 		final VString v2 = new VString("e f g", null);
@@ -263,7 +263,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPutAll()
+	void testPutAll()
 	{
 		final JDFAttributeMap m0 = new JDFAttributeMap("a", "b");
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "b1");
@@ -278,7 +278,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPut()
+	void testPut()
 	{
 		final JDFAttributeMap m0 = new JDFAttributeMap("a", "b");
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "b1");
@@ -293,7 +293,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMatch()
+	void testGetMatch()
 	{
 		final Vector<SimpleMatch> v = new Vector<>();
 		for (int i = 0; i < 10; i++)
@@ -309,7 +309,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMatchList()
+	void testGetMatchList()
 	{
 		final Vector<SimpleMatch> v = new Vector<>();
 		for (int i = 0; i < 10; i++)
@@ -325,7 +325,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMatchInverted()
+	void testGetMatchInverted()
 	{
 		final Vector<Integer> v = new Vector<>();
 		for (int i = 0; i < 10; i++)
@@ -341,7 +341,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMatchListInverted()
+	void testGetMatchListInverted()
 	{
 		final List<Integer> v = new ArrayList<>();
 		for (int i = 0; i < 10; i++)
@@ -357,7 +357,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToHashSetArray()
+	void testToHashSetArray()
 	{
 		final String[] a = { "a", "b" };
 		final Set<String> s = ContainerUtil.toHashSet(a);
@@ -371,7 +371,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToArray()
+	void testToArray()
 	{
 		final String[] a = { "a", "b" };
 		final List<String> s = ContainerUtil.toArrayList(a);
@@ -385,7 +385,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToValueVector()
+	void testToValueVector()
 	{
 		final HashMap<String, String> hm = new HashMap<>();
 		for (int i = 0; i < 10; i++)
@@ -407,7 +407,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToValueArray()
+	void testToValueArray()
 	{
 		final HashMap<String, String> hm = new HashMap<>();
 		for (int i = 0; i < 10; i++)
@@ -429,7 +429,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetKeyVector()
+	void testGetKeyVector()
 	{
 		final HashMap<String, String> hm = new HashMap<>();
 		for (int i = 0; i < 10; i++)
@@ -451,7 +451,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetKeyArray()
+	void testGetKeyArray()
 	{
 		final HashMap<String, String> hm = new HashMap<>();
 		for (int i = 0; i < 10; i++)
@@ -473,7 +473,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		final Collection<Integer> l = new HashSet<Integer>();
 		for (int i = 10; i >= 0; i--)
@@ -488,7 +488,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetInvertedVector()
+	void testGetInvertedVector()
 	{
 		final HashMap<String, String> hm = new HashMap<>();
 		for (int i = 0; i < 10; i++)
@@ -519,7 +519,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNonEmpty()
+	void testGetNonEmpty()
 	{
 		final Vector<String> v = new Vector<>();
 		assertNull(ContainerUtil.getNonEmpty(v));
@@ -533,7 +533,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsEmpty()
+	void testIsEmpty()
 	{
 		final Vector<String> v = new Vector<>();
 		assertTrue(ContainerUtil.isEmpty(v));
@@ -547,7 +547,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSize()
+	void testSize()
 	{
 		final JDFAttributeMap m = new JDFAttributeMap();
 		assertEquals(0, ContainerUtil.size(m));
@@ -561,7 +561,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNonEmptyCollection()
+	void testGetNonEmptyCollection()
 	{
 		final Vector<VString> v = new Vector<>();
 		assertNull(ContainerUtil.getNonEmptyCollection(v));
@@ -577,7 +577,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUnify()
+	void testUnify()
 	{
 		final Vector<String> v = new Vector<>();
 		final Vector<String> v2 = new Vector<>();
@@ -601,7 +601,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnsureSize()
+	void testEnsureSize()
 	{
 		final VString v = new VString();
 		ContainerUtil.ensureSize(4, v);
@@ -615,7 +615,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCompare()
+	void testCompare()
 	{
 		assertEquals(ContainerUtil.compare("1", "0"), 1);
 		assertEquals(ContainerUtil.compare("1", "1"), 0);
@@ -629,7 +629,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testContains()
+	void testContains()
 	{
 		assertFalse(ContainerUtil.contains(null, null));
 		assertFalse(ContainerUtil.contains(null, "a"));
@@ -642,7 +642,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testCount()
+	void testCount()
 	{
 		assertEquals(0, ContainerUtil.count(null, null));
 		assertEquals(0, ContainerUtil.count(null, "a"));
@@ -655,7 +655,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testContainsAll()
+	void testContainsAll()
 	{
 		assertTrue(ContainerUtil.containsAll(null, null));
 		assertFalse(ContainerUtil.containsAll(null, new VString("a")));
@@ -668,7 +668,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testContainsAny()
+	void testContainsAny()
 	{
 		assertTrue(ContainerUtil.containsAny(null, null));
 		assertFalse(ContainerUtil.containsAny(null, new VString("a")));

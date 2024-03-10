@@ -129,7 +129,7 @@ public class BaseWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDepth()
+	void testDepth()
 	{
 		BaseWalkerFactory bf = new BaseWalkerFactory();
 		BaseWalker b = new TestWalker(bf);
@@ -140,7 +140,7 @@ public class BaseWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDepthWalk()
+	void testDepthWalk()
 	{
 		BaseWalkerFactory bf = new BaseWalkerFactory();
 		new TestWalker(bf);
@@ -157,7 +157,7 @@ public class BaseWalkerTest extends JDFTestCaseBase
 	 * test to check that the speed up map works
 	 */
 	@Test
-	public void testElementName()
+	void testElementName()
 	{
 		BaseWalkerFactory bf = new BaseWalkerFactory();
 		TestWalker tw = new TestWalker(bf);

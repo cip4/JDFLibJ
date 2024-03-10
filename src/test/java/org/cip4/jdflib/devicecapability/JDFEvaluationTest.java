@@ -131,7 +131,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -162,7 +162,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testIntegerEvaluation() throws Exception
+	void testIntegerEvaluation() throws Exception
 	{
 		JDFDoc d = new JDFDoc(ElementName.INTEGEREVALUATION);
 		JDFIntegerEvaluation ie = (JDFIntegerEvaluation) d.getRoot();
@@ -184,7 +184,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnumerationEvaluation()
+	void testEnumerationEvaluation()
 	{
 		JDFDoc d = new JDFDoc(ElementName.ENUMERATIONEVALUATION);
 		JDFEnumerationEvaluation ee = (JDFEnumerationEvaluation) d.getRoot();
@@ -200,7 +200,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetTolerance()
+	void testSetTolerance()
 	{
 		JDFDoc d = new JDFDoc(ElementName.XYPAIREVALUATION);
 		JDFXYPairEvaluation ie = (JDFXYPairEvaluation) d.getRoot();
@@ -216,7 +216,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPath()
+	void testSetPath()
 	{
 		JDFDoc d = new JDFDoc(ElementName.XYPAIREVALUATION);
 		JDFXYPairEvaluation ie = (JDFXYPairEvaluation) d.getRoot();
@@ -229,7 +229,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsPresentPartition()
+	void testIsPresentPartition()
 	{
 		JDFAction act = devicecap.appendActionPool().appendActionTest(EnumTerm.IsPresentEvaluation, true);
 		JDFTest tst = act.getTest();
@@ -259,7 +259,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAction()
+	void testAction()
 	{
 		JDFAction act = devicecap.appendActionPool().appendActionTest(EnumTerm.or, false);
 		JDFTest tst = act.getTest();

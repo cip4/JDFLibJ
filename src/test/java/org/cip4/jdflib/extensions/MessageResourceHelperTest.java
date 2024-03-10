@@ -47,7 +47,7 @@ public class MessageResourceHelperTest
 	 *
 	 */
 	@Test
-	public void testIsSignal()
+	void testIsSignal()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageResourceHelper mh = (MessageResourceHelper) xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Resource);

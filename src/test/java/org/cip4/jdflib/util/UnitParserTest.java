@@ -64,7 +64,7 @@ public class UnitParserTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		this.unitParser = new UnitParser();
@@ -74,7 +74,7 @@ public class UnitParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUnits()
+	void testUnits()
 	{
 		Assertions.assertEquals(unitParser.extractUnits("123"), "123");
 		Assertions.assertEquals(unitParser.extractUnits("0.4"), "0.4");
@@ -97,7 +97,7 @@ public class UnitParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBlanks()
+	void testBlanks()
 	{
 		Assertions.assertEquals(unitParser.extractUnits("0.1 cm"), "2.8346");
 		Assertions.assertEquals(unitParser.extractUnits("10 cm 10  mm"), "283.4646 28.3465");
@@ -110,7 +110,7 @@ public class UnitParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCase()
+	void testCase()
 	{
 		Assertions.assertEquals(unitParser.extractUnits("0.1CM"), "2.8346");
 		Assertions.assertEquals(unitParser.extractUnits("10Cm 10  mm"), "283.4646 28.3465");
@@ -121,7 +121,7 @@ public class UnitParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAdd()
+	void testAdd()
 	{
 		Assertions.assertEquals(unitParser.extractUnits("0.1CM"), "2.8346");
 		Assertions.assertEquals(unitParser.extractUnits("10Cm 10  mm"), "283.4646 28.3465");
@@ -132,7 +132,7 @@ public class UnitParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testKey()
+	void testKey()
 	{
 		Assertions.assertEquals(unitParser.extractUnits(AttributeName.LENGTH, "0.1CM"), "2.8346");
 		Assertions.assertEquals(unitParser.extractUnits(AttributeName.JOBID, "0.1CM"), "0.1CM");
@@ -142,7 +142,7 @@ public class UnitParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDataType()
+	void testDataType()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setJobID("10CM");
@@ -154,7 +154,7 @@ public class UnitParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSizeDataType()
+	void testSizeDataType()
 	{
 		final XJDFHelper h = new XJDFHelper("1cm", "2mm", null);
 		final KElement li = h.appendProduct().appendIntent("LayoutIntent").getCreateResource();
@@ -172,7 +172,7 @@ public class UnitParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSpanDataType()
+	void testSpanDataType()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 
@@ -194,7 +194,7 @@ public class UnitParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetFactor()
+	void testGetFactor()
 	{
 		Assertions.assertEquals(unitParser.getFactor("cm"), 72. / 2.54, 0.0001);
 		Assertions.assertEquals(unitParser.getFactor("MM"), 72. / 25.4, 0.0001);
@@ -206,7 +206,7 @@ public class UnitParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPrecision()
+	void testPrecision()
 	{
 		unitParser.setPrecision(0);
 		Assertions.assertEquals(unitParser.extractUnits("10cm 10mm"), "283 28");

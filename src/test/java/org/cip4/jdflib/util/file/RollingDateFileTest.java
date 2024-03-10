@@ -93,7 +93,7 @@ public class RollingDateFileTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetFileNameInt()
+	void testGetFileNameInt()
 	{
 		long t = 1332096687756l; // System.currentTimeMillis();
 		assertTrue(rdf.getNewFileName(t).equals("Date.120318.txt") || rdf.getNewFileName(t).equals("Date.120319.txt"));
@@ -104,7 +104,7 @@ public class RollingDateFileTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetJanitor()
+	void testSetJanitor()
 	{
 		rdf.setFormat("yyyy");
 		assertNull(rdf.getJanitor());
@@ -119,7 +119,7 @@ public class RollingDateFileTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetFormat()
+	void testSetFormat()
 	{
 		long t = 1332096687756l; // System.currentTimeMillis();
 		rdf.setFormat("yyyy");
@@ -131,7 +131,7 @@ public class RollingDateFileTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		rdf = new RollingDateFile(sm_dirTestDataTemp, "Date.txt");

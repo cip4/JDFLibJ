@@ -56,7 +56,7 @@ public class WalkJDFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testProductEmpty()
+	void testProductEmpty()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFComment c = n.appendComment();
@@ -69,7 +69,7 @@ public class WalkJDFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeprecated()
+	void testDeprecated()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Split);
@@ -83,7 +83,7 @@ public class WalkJDFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testVersion()
+	void testVersion()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Split);
@@ -97,7 +97,7 @@ public class WalkJDFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testVersion2()
+	void testVersion2()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Split);
@@ -112,7 +112,7 @@ public class WalkJDFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreated()
+	void testCreated()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final KElement xjdf = new JDFToXJDF().convert(n);
@@ -125,7 +125,7 @@ public class WalkJDFTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		JDFToXJDF.setDefaultVersion(XJDFHelper.defaultVersion());
 		super.setUp();

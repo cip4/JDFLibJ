@@ -97,7 +97,7 @@ public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testIDPSimple()
+	void testIDPSimple()
 	{
 		write9GTFiles(idpGoldenTicket, "IDP_Simple", null);
 	}
@@ -106,7 +106,7 @@ public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testIDPRunList()
+	void testIDPRunList()
 	{
 		JDFNode n = idpGoldenTicket.getNode();
 		JDFRunList rl = (JDFRunList) n.getResource(ElementName.RUNLIST, EnumUsage.Input, null, 0);
@@ -123,7 +123,7 @@ public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		BaseGoldenTicket.misURL = "http://192.168.14.143:8010/FJC/Fiery";
 		super.setUp();

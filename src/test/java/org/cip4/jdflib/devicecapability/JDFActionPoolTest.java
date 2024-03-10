@@ -81,7 +81,7 @@ import org.junit.jupiter.api.Test;
 public class JDFActionPoolTest extends JDFTestCaseBase
 {
 	@Test
-	public void testAppendActionTest()
+	void testAppendActionTest()
 	{
 		JDFDoc d = new JDFDoc(ElementName.PREFLIGHTPARAMS);
 		JDFActionPool ap = (JDFActionPool) d.getRoot().appendElement(
@@ -103,7 +103,7 @@ public class JDFActionPoolTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////
 
 	@Test
-	public void testAppendExcludeTest()
+	void testAppendExcludeTest()
 	{
 		JDFDoc d = new JDFDoc(ElementName.DEVICECAP);
 		JDFDeviceCap dc = (JDFDeviceCap) d.getRoot();

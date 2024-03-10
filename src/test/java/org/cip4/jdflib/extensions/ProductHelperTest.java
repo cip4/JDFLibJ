@@ -60,7 +60,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 */
 	@Test
 	@Deprecated
-	public void testGetChild()
+	void testGetChild()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final KElement root = theHelper.getRoot();
@@ -85,7 +85,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEProductType()
+	void testEProductType()
 	{
 		assertEquals(eProductType.Book, eProductType.getEnum("BOOK"));
 		assertEquals(null, eProductType.getEnum(null));
@@ -97,7 +97,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetRoot()
+	void testSetRoot()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final KElement root = theHelper.getRoot();
@@ -112,7 +112,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNodeInfo()
+	void testGetNodeInfo()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final KElement root = theHelper.getRoot();
@@ -133,7 +133,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreateProductResource()
+	void testGetCreateProductResource()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.getCreateProduct(null, "x1");
@@ -149,7 +149,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAppendProduct()
+	void testAppendProduct()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
@@ -162,7 +162,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAppendIntent()
+	void testAppendIntent()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
@@ -175,7 +175,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetChildIntentDefault()
+	void testGetChildIntentDefault()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
@@ -189,7 +189,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetChildIntentExist()
+	void testGetChildIntentExist()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
@@ -203,7 +203,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetIntents()
+	void testGetIntents()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
@@ -218,7 +218,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetDescriptiveName()
+	void testGetDescriptiveName()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
@@ -236,7 +236,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetIntentAtt()
+	void testGetIntentAtt()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
@@ -251,7 +251,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetColorIntent()
+	void testGetColorIntent()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
@@ -267,7 +267,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetCreateRootProduct()
+	void testGetCreateRootProduct()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.getCreateRootProduct(0);
@@ -280,7 +280,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetRootFalse()
+	void testSetRootFalse()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final KElement root = theHelper.getRoot();
@@ -297,7 +297,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testisRootProduct()
+	void testisRootProduct()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final KElement root = theHelper.getRoot();
@@ -317,7 +317,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAmount()
+	void testAmount()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final KElement root = theHelper.getRoot();
@@ -342,7 +342,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetProduct()
+	void testGetProduct()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final KElement root = theHelper.getRoot();
@@ -358,7 +358,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testOverProduction()
+	void testOverProduction()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final KElement root = theHelper.getRoot();
@@ -376,7 +376,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetChild()
+	void testSetChild()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 
@@ -394,7 +394,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildRefs()
+	void testGetChildRefs()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 
@@ -430,7 +430,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetParent()
+	void testGetParent()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 

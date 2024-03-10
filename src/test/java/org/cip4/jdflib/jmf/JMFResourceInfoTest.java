@@ -94,7 +94,7 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetResource()
+	void testGetResource()
 	{
 		Assertions.assertNull(ri.getResource(ElementName.MEDIA));
 		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
@@ -109,7 +109,7 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetResourceNull()
+	void testGetResourceNull()
 	{
 		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
 		JDFMedia m2 = (JDFMedia) ri.getResource(null);
@@ -122,7 +122,7 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetResourceName()
+	void testGetResourceName()
 	{
 		// JDFMedia m=(JDFMedia)
 		ri.appendResource(ElementName.MEDIA);
@@ -135,7 +135,7 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetResourceID()
+	void testGetResourceID()
 	{
 		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
 		String name = ri.getResourceID();
@@ -147,7 +147,7 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetProductID()
+	void testGetProductID()
 	{
 		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
 		m.setProductID("p1");
@@ -160,7 +160,7 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetResStatus()
+	void testGetResStatus()
 	{
 		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
 		EnumResStatus name = ri.getResStatus();
@@ -176,7 +176,7 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -193,7 +193,7 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	 * test the matches algorithm for various data types
 	 */
 	@Test
-	public void testMatches()
+	void testMatches()
 	{
 		ri.appendResource("Media");
 

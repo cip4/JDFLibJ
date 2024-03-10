@@ -112,7 +112,7 @@ public class NetPollTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMulti()
+	void testMulti()
 	{
 		VString v = new VString("http://www.google.de", null);
 		v.add("http://www.example.com");
@@ -127,7 +127,7 @@ public class NetPollTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGoogle()
+	void testGoogle()
 	{
 		NetPoll p = new NetPoll("http://www.google.de", new WebPoller());
 		p.start();

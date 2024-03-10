@@ -85,7 +85,7 @@ public class StrippingTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCommonFolds()
+	void testCommonFolds()
 	{
 		final JDFBinderySignature bs = stripParams.appendBinderySignature();
 		bs.setFoldCatalog("F4-1");
@@ -107,7 +107,7 @@ public class StrippingTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testDieLayoutStrip() throws Exception
+	void testDieLayoutStrip() throws Exception
 	{
 		final JDFBinderySignature bs = stripParams.appendBinderySignature();
 		bs.setBinderySignatureType(EnumBinderySignatureType.Die);
@@ -150,7 +150,7 @@ public class StrippingTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testStripMarks() throws Exception
+	void testStripMarks() throws Exception
 	{
 		// TODO relativeSize AbsoluteSize NextPosition
 		KElement.setLongID(false);
@@ -272,7 +272,7 @@ public class StrippingTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

@@ -98,7 +98,7 @@ public class LinkValidatorTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 	}
@@ -108,7 +108,7 @@ public class LinkValidatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testImageCompression()
+	void testImageCompression()
 	{
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.ImageEnhancement);
@@ -126,7 +126,7 @@ public class LinkValidatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSheetOptimizing()
+	void testSheetOptimizing()
 	{
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.SheetOptimizing);
@@ -147,7 +147,7 @@ public class LinkValidatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSheetWinding()
+	void testSheetWinding()
 	{
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.Winding);

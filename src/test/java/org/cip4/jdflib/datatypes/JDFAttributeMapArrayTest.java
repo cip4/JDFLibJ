@@ -62,7 +62,7 @@ import org.junit.jupiter.api.Test;
 public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 {
 	@Test
-	public void testGetArray()
+	void testGetArray()
 	{
 		Assertions.assertNull(JDFAttributeMapArray.getArray(null));
 		Assertions.assertNull(JDFAttributeMapArray.getArray(new JDFAttributeMap()));
@@ -74,7 +74,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testExtendMap()
+	void testExtendMap()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		final JDFAttributeMapArray v = new JDFAttributeMapArray();
@@ -90,7 +90,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testExtendMapNull()
+	void testExtendMapNull()
 	{
 		final JDFAttributeMapArray v = new JDFAttributeMapArray();
 		v.extendMap("b", null);
@@ -102,7 +102,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testExtendMapEmpty()
+	void testExtendMapEmpty()
 	{
 		final JDFAttributeMapArray v = new JDFAttributeMapArray(new JDFAttributeMap());
 		v.extendMap("b", new VString("", null));
@@ -114,7 +114,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests clone
 	 */
 	@Test
-	public void testClone()
+	void testClone()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -135,7 +135,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests subMap()
 	 */
 	@Test
-	public void testSubMap()
+	void testSubMap()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -159,7 +159,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests subMap()
 	 */
 	@Test
-	public void testSubMapV()
+	void testSubMapV()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -179,7 +179,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests OvelapsMap for individual maps
 	 */
 	@Test
-	public void testOverlapsMap()
+	void testOverlapsMap()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -196,7 +196,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests GetCommonMap for individual maps
 	 */
 	@Test
-	public void testGetCommonMap()
+	void testGetCommonMap()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -214,7 +214,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests GetCommonMap for individual maps
 	 */
 	@Test
-	public void testGetCommonMap2()
+	void testGetCommonMap2()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -230,7 +230,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests OvelapsMap for individual maps
 	 */
 	@Test
-	public void testGetAndMaps()
+	void testGetAndMaps()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -248,7 +248,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests OvelapsMap for individual maps
 	 */
 	@Test
-	public void testGetOverLapMaps()
+	void testGetOverLapMaps()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -268,7 +268,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests OvelapsMap for individual maps
 	 */
 	@Test
-	public void testGetPartValues()
+	void testGetPartValues()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -287,7 +287,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetMatchingMaps()
+	void testgetMatchingMaps()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -313,7 +313,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHash()
+	void testHash()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -332,7 +332,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests OvelapsMap for individual maps
 	 */
 	@Test
-	public void testGetOrMaps()
+	void testGetOrMaps()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -350,7 +350,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests OvelapsMap for individual maps
 	 */
 	@Test
-	public void testGetOrMapsV()
+	void testGetOrMapsV()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -370,7 +370,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests OvelapsMap for individual maps
 	 */
 	@Test
-	public void testGetOrMapsDouble()
+	void testGetOrMapsDouble()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -399,7 +399,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests OvelapsMap for vectors of maps
 	 */
 	@Test
-	public void testOverlapsMapVector()
+	void testOverlapsMapVector()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -424,7 +424,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests OvelapsMap for vectors of maps
 	 */
 	@Test
-	public void testOverlapMapVector()
+	void testOverlapMapVector()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -442,7 +442,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests OvelapsMap for vectors of maps
 	 */
 	@Test
-	public void testOverlapMapVector2()
+	void testOverlapMapVector2()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -462,7 +462,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests OvelapsMap for vectors of maps
 	 */
 	@Test
-	public void testOverlapMap()
+	void testOverlapMap()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -484,7 +484,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests addAll
 	 */
 	@Test
-	public void testAddAll()
+	void testAddAll()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -510,7 +510,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testShowKeys()
+	void testShowKeys()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap();
 		m1.put("a2", "v2");
@@ -527,7 +527,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * test Unify
 	 */
 	@Test
-	public void testUnifyBig()
+	void testUnifyBig()
 	{
 		final JDFAttributeMapArray v = new JDFAttributeMapArray();
 		final long t0 = System.currentTimeMillis();
@@ -555,7 +555,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * test Unify
 	 */
 	@Test
-	public void testUnify()
+	void testUnify()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -598,7 +598,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * test Equals()
 	 */
 	@Test
-	public void testEquals()
+	void testEquals()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -619,7 +619,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * test Equals()
 	 */
 	@Test
-	public void testIndexOf()
+	void testIndexOf()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
@@ -637,7 +637,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests copy constructor
 	 */
 	@Test
-	public void testCopy()
+	void testCopy()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		final JDFAttributeMapArray v2 = new JDFAttributeMapArray();
@@ -650,7 +650,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests maxSize method
 	 */
 	@Test
-	public void testMaxSize()
+	void testMaxSize()
 	{
 		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		final JDFAttributeMapArray v2 = new JDFAttributeMapArray();
@@ -669,7 +669,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests isEmpty method
 	 */
 	@Test
-	public void testIsEmpty()
+	void testIsEmpty()
 	{
 		final JDFAttributeMapArray v = new JDFAttributeMapArray();
 		Assertions.assertTrue(JDFAttributeMapArray.isEmpty(null));
@@ -689,7 +689,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests maxSize method
 	 */
 	@Test
-	public void testGetNonEmpty()
+	void testGetNonEmpty()
 	{
 		final JDFAttributeMapArray v = new JDFAttributeMapArray();
 		Assertions.assertNull(JDFAttributeMapArray.getNonEmpty(v));
@@ -704,7 +704,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMinSize()
+	void testMinSize()
 	{
 		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		final JDFAttributeMapArray v2 = new JDFAttributeMapArray();
@@ -723,7 +723,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests put method
 	 */
 	@Test
-	public void testPut()
+	void testPut()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		final JDFAttributeMapArray v2 = new JDFAttributeMapArray();
@@ -745,7 +745,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * tests put method
 	 */
 	@Test
-	public void testPutMap()
+	void testPutMap()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		final JDFAttributeMapArray v2 = new JDFAttributeMapArray();
@@ -765,7 +765,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * test reduceMap()
 	 */
 	@Test
-	public void testReduceMap()
+	void testReduceMap()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		final JDFAttributeMapArray v2 = new JDFAttributeMapArray();
@@ -785,7 +785,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * test reduceMap()
 	 */
 	@Test
-	public void testRemoveMaps()
+	void testRemoveMaps()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		final JDFAttributeMapArray v2 = new JDFAttributeMapArray();
@@ -809,7 +809,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * test removeKeys()
 	 */
 	@Test
-	public void testRemoveKeys()
+	void testRemoveKeys()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		final JDFAttributeMapArray v2 = new JDFAttributeMapArray();
@@ -830,7 +830,7 @@ public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 	 * test removeKeys()
 	 */
 	@Test
-	public void testRemoveKey()
+	void testRemoveKey()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		final JDFAttributeMapArray v2 = new JDFAttributeMapArray();

@@ -100,7 +100,7 @@ public class JDFPageDataTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		JDFDoc doc = new JDFDoc("JDF");
@@ -116,7 +116,7 @@ public class JDFPageDataTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRefContentData()
+	void testRefContentData()
 	{
 		for (int i = 0; i < 10; i++)
 			Assertions.assertEquals(cl.appendContentData().getIndex(), i);
@@ -130,7 +130,7 @@ public class JDFPageDataTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPageIndex()
+	void testGetPageIndex()
 	{
 		for (int i = 0; i < 10; i++)
 		{
@@ -144,7 +144,7 @@ public class JDFPageDataTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetAssemblyID()
+	void testGetAssemblyID()
 	{
 		JDFPageData d = pl.appendPageData();
 		Assertions.assertEquals(d.getAssemblyID(), "");
@@ -158,7 +158,7 @@ public class JDFPageDataTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetPageIndex()
+	void testSetPageIndex()
 	{
 		JDFPageData d = pl.appendPageData();
 		d.setPageIndex(1);

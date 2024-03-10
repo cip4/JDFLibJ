@@ -99,7 +99,7 @@ public class XJDFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testNamespace()
+	void testNamespace()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
 		xjdfHelper.setTypes(EnumType.Product.getName());
@@ -117,7 +117,7 @@ public class XJDFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSnippet()
+	void testSnippet()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
 		final SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
@@ -131,7 +131,7 @@ public class XJDFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSnippetAuditPool()
+	void testSnippetAuditPool()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
 		setSnippet(xjdfHelper, true);
@@ -147,7 +147,7 @@ public class XJDFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSnippetAuditPoolFirst()
+	void testSnippetAuditPoolFirst()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
 		setSnippet(xjdfHelper.getAuditPool(), false);
@@ -163,7 +163,7 @@ public class XJDFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSnippetRoot()
+	void testSnippetRoot()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
 		final SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
@@ -178,7 +178,7 @@ public class XJDFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testIntentNamespace()
+	void testIntentNamespace()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("IntentExtension", null, null);
 		xjdfHelper.setTypes(EnumType.Product.getName());
@@ -196,7 +196,7 @@ public class XJDFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testResourceNamespace()
+	void testResourceNamespace()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("ResourceExtension", null, null);
 		xjdfHelper.setTypes("foo:Fooing");
@@ -213,7 +213,7 @@ public class XJDFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testCPI()
+	void testCPI()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("CPI_Example", null, null);
 		xjdfHelper.setTypes("Cutting Folding");
@@ -237,7 +237,7 @@ public class XJDFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testProcessNamespace()
+	void testProcessNamespace()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("IntentExtension", null, null);
 		final KElement root = xjdfHelper.getRoot();
@@ -252,7 +252,7 @@ public class XJDFExampleTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

@@ -93,7 +93,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		public void run()
+		void run()
 		{
 			ThreadUtil.sleep(123);
 			i++;
@@ -108,7 +108,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		public void run()
+		void run()
 		{
 			ThreadUtil.sleep(123);
 			i++;
@@ -122,7 +122,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		public void run()
+		void run()
 		{
 		}
 	}
@@ -152,7 +152,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSweep()
+	void testSweep()
 	{
 		final RegularJanitor janitor = RegularJanitor.getJanitor();
 		janitor.setInterval(1);
@@ -167,7 +167,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSweepStart()
+	void testSweepStart()
 	{
 		final RegularJanitor janitor = RegularJanitor.getJanitor();
 		janitor.setInterval(1);
@@ -182,7 +182,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testHasSweeper()
+	void testHasSweeper()
 	{
 		final RegularJanitor janitor = RegularJanitor.getJanitor();
 		janitor.addSweeper(new TimeSweeper(42, new Runner()), true);
@@ -199,7 +199,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAddSweeper()
+	void testAddSweeper()
 	{
 		final RegularJanitor janitor = RegularJanitor.getJanitor();
 		janitor.addSweeper(new TimeSweeper(42, new Runner()), true);
@@ -225,7 +225,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 	 */
 	@Override
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		super.tearDown();
 		RegularJanitor.feierabend();

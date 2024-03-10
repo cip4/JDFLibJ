@@ -60,7 +60,7 @@ public class WalkMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGrade()
+	void testGrade()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
@@ -76,7 +76,7 @@ public class WalkMediaTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testMediaType()
+	void testMediaType()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
@@ -92,7 +92,7 @@ public class WalkMediaTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testHolePattern()
+	void testHolePattern()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
@@ -109,7 +109,7 @@ public class WalkMediaTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testHolePatternComplet()
+	void testHolePatternComplet()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/Media_HoleType.jdf");
 		JDFToXJDF c = new JDFToXJDF();
@@ -123,7 +123,7 @@ public class WalkMediaTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testHolePattern2()
+	void testHolePattern2()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
@@ -140,7 +140,7 @@ public class WalkMediaTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testMediaTypeUnknown()
+	void testMediaTypeUnknown()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
@@ -156,7 +156,7 @@ public class WalkMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGrain()
+	void testGrain()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
@@ -173,7 +173,7 @@ public class WalkMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFlute()
+	void testFlute()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);

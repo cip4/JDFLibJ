@@ -104,7 +104,7 @@ public class VarnishTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testCombinedVarnish() throws Exception
+	void testCombinedVarnish() throws Exception
 	{
 		KElement.setLongID(false);
 		final JDFDoc d = new JDFDoc("JDF");

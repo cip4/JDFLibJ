@@ -85,7 +85,7 @@ public class JDFRegisterMarkTest extends JDFTestCaseBase
 {
 
 	@Test
-	public void testSetCenter()
+	void testSetCenter()
 	{
 		JDFRegisterMark rm = (JDFRegisterMark) JDFElement.createRoot(ElementName.REGISTERMARK);
 		rm.setCenter(1, 2);

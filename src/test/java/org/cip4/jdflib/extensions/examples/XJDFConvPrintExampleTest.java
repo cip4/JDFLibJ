@@ -83,7 +83,7 @@ public class XJDFConvPrintExampleTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		JDFElement.setLongID(false);
 		super.setUp();
@@ -141,7 +141,7 @@ public class XJDFConvPrintExampleTest extends ExampleTest
 	 * @throws StorageAccessException
 	 */
 	@Test
-	public void testSubmitVarnishXJDFFlood()
+	void testSubmitVarnishXJDFFlood()
 	{
 		final long ct = System.currentTimeMillis();
 		final String jobID = "Flood" + ct;
@@ -250,7 +250,7 @@ public class XJDFConvPrintExampleTest extends ExampleTest
 	 * @throws StorageAccessException
 	 */
 	@Test
-	public void testSubmitVarnishXJDFFlexo()
+	void testSubmitVarnishXJDFFlexo()
 	{
 		final long ct = System.currentTimeMillis();
 		final String jobID = "Flexo" + ct;

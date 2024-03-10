@@ -54,7 +54,7 @@ public class AttrInfoTest {
 	 *
 	 */
 	@Test
-	public void testgetFirstLastVersion()
+	void testgetFirstLastVersion()
 	{
 		AtrInfo ai = new AtrInfo(0x44433211, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		Assertions.assertEquals(ai.getFirstVersion(), EnumVersion.Version_1_2, "");
@@ -69,7 +69,7 @@ public class AttrInfoTest {
 	 *
 	 */
 	@Test
-	public void testValidStringForType()
+	void testValidStringForType()
 	{
 		Assertions.assertTrue(AttributeInfo.validStringForType("1", EnumAttributeType.integer, null));
 		Assertions.assertFalse(AttributeInfo.validStringForType("1234567898765432", EnumAttributeType.integer, null));

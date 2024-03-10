@@ -64,7 +64,7 @@ public class StreamUtilTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testGetLines() throws IOException
+	void testGetLines() throws IOException
 	{
 		final ByteArrayIOStream bos = new ByteArrayIOStream();
 		bos.write("foooo\nbar\nbar2".getBytes());
@@ -79,7 +79,7 @@ public class StreamUtilTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testReset() throws IOException
+	void testReset() throws IOException
 	{
 		final InputStream s = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
 		s.mark(42);
@@ -100,7 +100,7 @@ public class StreamUtilTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testCopy() throws IOException
+	void testCopy() throws IOException
 	{
 		final InputStream s = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
 		OutputStream os = new ByteArrayIOStream();
@@ -115,7 +115,7 @@ public class StreamUtilTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testReplaceBytes() throws IOException
+	void testReplaceBytes() throws IOException
 	{
 		final File f1 = new File(sm_dirTestData + "page.pdf");
 		final InputStream s = FileUtil.getBufferedInputStream(f1);
@@ -134,7 +134,7 @@ public class StreamUtilTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testReplaceBytesSingle() throws IOException
+	void testReplaceBytesSingle() throws IOException
 	{
 		final File f1 = new File(sm_dirTestData + "page.pdf");
 		final InputStream s = FileUtil.getBufferedInputStream(f1);
@@ -159,7 +159,7 @@ public class StreamUtilTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testClose() throws IOException
+	void testClose() throws IOException
 	{
 		for (int i = 0; i < 42; i++)
 		{
@@ -184,7 +184,7 @@ public class StreamUtilTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testGetMD5() throws IOException
+	void testGetMD5() throws IOException
 	{
 		final InputStream s = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
 		final byte[] md5 = StreamUtil.getMD5(s);

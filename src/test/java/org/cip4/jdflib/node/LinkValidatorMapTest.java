@@ -53,7 +53,7 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinkNames()
+	void testGetLinkNames()
 	{
 		final VString linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkNames(EnumType.ConventionalPrinting, null);
 		Assertions.assertTrue(linkInfo.contains("ConventionalPrintingParams"));
@@ -66,7 +66,7 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinkNamesStripping()
+	void testGetLinkNamesStripping()
 	{
 		final VString linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkNames(EnumType.Stripping, null);
 		Assertions.assertTrue(linkInfo.contains("Device"));
@@ -78,7 +78,7 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinkInfo()
+	void testGetLinkInfo()
 	{
 		final VString linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkNames(EnumType.ConventionalPrinting, null);
 		final LinkInfoMap linkNames = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);
@@ -89,7 +89,7 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinkInfoMap()
+	void testGetLinkInfoMap()
 	{
 		final HashMap<String, LinkInfo> linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);
 		final LinkInfo cp = linkInfo.get("ConventionalPrintingParams");
@@ -100,7 +100,7 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinkInfoMapVerification()
+	void testGetLinkInfoMapVerification()
 	{
 		final HashMap<String, LinkInfo> linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.Verification, null);
 		final LinkInfo cp = linkInfo.get(ElementName.FILESPEC);
@@ -111,7 +111,7 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinkInfoMapVariableIntent()
+	void testGetLinkInfoMapVariableIntent()
 	{
 		final HashMap<String, LinkInfo> linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.Product, null);
 		final LinkInfo cp = linkInfo.get(ElementName.VARIABLEINTENT);
@@ -122,7 +122,7 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinkInfoMapSheetOptimizing()
+	void testGetLinkInfoMapSheetOptimizing()
 	{
 		final HashMap<String, LinkInfo> linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.SheetOptimizing, null);
 		final LinkInfo cp = linkInfo.get(ElementName.ASSEMBLY);
@@ -133,7 +133,7 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinkInfoMapPerformance()
+	void testGetLinkInfoMapPerformance()
 	{
 		final VString v = new VString(new String[] { JDFConstants.COLORSPACECONVERSION, JDFConstants.SCREENING, JDFConstants.INTERPRETING, JDFConstants.RENDERING, JDFConstants.IMPOSITION,
 				JDFConstants.IMAGESETTING, JDFConstants.CONVENTIONALPRINTING, JDFConstants.FOLDING, JDFConstants.CUTTING });

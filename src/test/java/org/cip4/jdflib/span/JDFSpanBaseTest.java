@@ -98,7 +98,7 @@ public class JDFSpanBaseTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGuessRange() throws DataFormatException
+	void testGuessRange() throws DataFormatException
 	{
 		JDFDoc doc = new JDFDoc("LayoutIntent");
 		JDFLayoutIntent e = (JDFLayoutIntent) doc.getRoot();
@@ -118,7 +118,7 @@ public class JDFSpanBaseTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testPreferredToActual() throws DataFormatException
+	void testPreferredToActual() throws DataFormatException
 	{
 		JDFDoc doc = new JDFDoc("LayoutIntent");
 		JDFLayoutIntent e = (JDFLayoutIntent) doc.getRoot();

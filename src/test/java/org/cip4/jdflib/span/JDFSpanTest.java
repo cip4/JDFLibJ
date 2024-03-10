@@ -100,7 +100,7 @@ public class JDFSpanTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBindTypeNone()
+	void testBindTypeNone()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.BINDINGINTENT);
 		JDFBindingIntent e = (JDFBindingIntent) doc.getRoot();
@@ -110,7 +110,7 @@ public class JDFSpanTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testTimeNull()
+	void testTimeNull()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.DELIVERYINTENT);
 		JDFDeliveryIntent e = (JDFDeliveryIntent) doc.getRoot();

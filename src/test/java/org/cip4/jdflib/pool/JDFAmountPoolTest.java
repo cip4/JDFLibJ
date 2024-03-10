@@ -117,7 +117,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReducePartAmounts()
+	void testReducePartAmounts()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -153,7 +153,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testVirtualAmounts()
+	void testVirtualAmounts()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -184,7 +184,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPartAmount()
+	void testSetPartAmount()
 	{
 		ap.setPartAttribute("Foo", "Bar", null, (JDFAttributeMap) null);
 		Assertions.assertEquals(ap.getPartAttribute("Foo", null, (JDFAttributeMap) null), "Bar");
@@ -208,7 +208,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testVirtualAmountsSplit()
+	void testVirtualAmountsSplit()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -246,7 +246,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMatchingPartAmountVector()
+	void testGetMatchingPartAmountVector()
 	{
 		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
 		final JDFNode n = d.getJDFRoot();
@@ -277,7 +277,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		ap = (JDFAmountPool) new JDFDoc(ElementName.AMOUNTPOOL).getRoot();
@@ -287,7 +287,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartVectorNull()
+	void testGetPartVectorNull()
 	{
 		JDFAmountPool ap = (JDFAmountPool) new JDFDoc(ElementName.AMOUNTPOOL).getRoot();
 		JDFPartAmount pa = ap.appendPartAmount();
@@ -305,7 +305,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartAmountMulti()
+	void testGetPartAmountMulti()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -339,7 +339,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreatePartAmount()
+	void testGetCreatePartAmount()
 	{
 		final JDFAttributeMap map = new JDFAttributeMap("Separation", "Black");
 		final JDFAttributeMap map2 = new JDFAttributeMap("Separation", "Cyan");
@@ -362,7 +362,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAmountMap()
+	void testGetAmountMap()
 	{
 		final JDFAttributeMap map = new JDFAttributeMap("Separation", "Black");
 		final JDFAttributeMap map2 = new JDFAttributeMap("Separation", "Cyan");
@@ -394,7 +394,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartMapVector()
+	void testGetPartMapVector()
 	{
 		final JDFAttributeMap map = new JDFAttributeMap("Separation", "Black");
 		final JDFAttributeMap map2 = new JDFAttributeMap("Separation", "Cyan");
@@ -420,7 +420,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCorruptAmountMap()
+	void testGetCorruptAmountMap()
 	{
 		ap.appendPartAmount();
 		final AmountMap am = ap.getAmountMap(null);
@@ -433,7 +433,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetPartAmountNull() throws Exception
+	void testGetPartAmountNull() throws Exception
 	{
 		final JDFAttributeMap map = new JDFAttributeMap("Separation", "Black");
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
@@ -461,7 +461,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetPartAmountEmpty() throws Exception
+	void testGetPartAmountEmpty() throws Exception
 	{
 
 		final JDFResourceLink rl = (JDFResourceLink) new JDFDoc("MediaLink").getRoot();

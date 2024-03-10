@@ -101,7 +101,7 @@ public class JDFPipeParamsTest {
 	 * 
 	 */
 	@Test
-	public void testAppendResourceLink()
+	void testAppendResourceLink()
 	{
 		JDFResourceLink rl = pp.appendResourceLink("Dummy", true);
 		Assertions.assertEquals(rl.getUsage(), EnumUsage.Input);
@@ -123,7 +123,7 @@ public class JDFPipeParamsTest {
 	 * 
 	 */
 	@Test
-	public void testAppendResource()
+	void testAppendResource()
 	{
 		final JDFCoilBindingParams cbp = (JDFCoilBindingParams) pp.appendResource(ElementName.COILBINDINGPARAMS);
 		Assertions.assertEquals(cbp.getResourceClass(), EnumResourceClass.Parameter);
@@ -138,7 +138,7 @@ public class JDFPipeParamsTest {
 	 * 
 	 */
 	@Test
-	public void testGetResourceLink()
+	void testGetResourceLink()
 	{
 		final JDFExposedMedia xm = (JDFExposedMedia) pp.appendResource(ElementName.EXPOSEDMEDIA);
 		Assertions.assertEquals(xm.getResourceClass(), EnumResourceClass.Handling);
@@ -158,7 +158,7 @@ public class JDFPipeParamsTest {
 	 * 
 	 */
 	@Test
-	public void testGetResource()
+	void testGetResource()
 	{
 		final JDFExposedMedia xm = (JDFExposedMedia) pp.appendResource(ElementName.EXPOSEDMEDIA);
 		Assertions.assertEquals(xm.getResourceClass(), EnumResourceClass.Handling);
@@ -192,7 +192,7 @@ public class JDFPipeParamsTest {
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@BeforeEach
-    public void setUp() throws Exception
+    void setUp() throws Exception
 	{
         final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -204,7 +204,7 @@ public class JDFPipeParamsTest {
 	 * 
 	 */
 	@Test
-	public void testApplyPipeToNode()
+	void testApplyPipeToNode()
 	{
 		JDFResourceLink rl = pp.appendResourceLink("Component", true);
 		rl.setActualAmount(33, null);

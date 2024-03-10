@@ -92,7 +92,7 @@ public class ColorIntentHelperTest
 	 *
 	 */
 	@Test
-	public void testIsColorIntent()
+	void testIsColorIntent()
 	{
 		final KElement intent = new JDFDoc(XJDFConstants.Intent).getRoot();
 		intent.setAttribute("Name", ElementName.COLORINTENT);
@@ -108,7 +108,7 @@ public class ColorIntentHelperTest
 	*
 	*/
 	@Test
-	public void testAppendColorIntent()
+	void testAppendColorIntent()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
@@ -126,7 +126,7 @@ public class ColorIntentHelperTest
 	*
 	*/
 	@Test
-	public void testGetSurfaceAttribute()
+	void testGetSurfaceAttribute()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();
@@ -143,7 +143,7 @@ public class ColorIntentHelperTest
 	*
 	*/
 	@Test
-	public void testGetSurfaceList()
+	void testGetSurfaceList()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 		final ProductHelper ph = theHelper.appendProduct();

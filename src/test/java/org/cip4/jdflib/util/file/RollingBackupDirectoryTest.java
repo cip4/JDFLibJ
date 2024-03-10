@@ -91,7 +91,7 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		theDir = new File(sm_dirTestDataTemp + "RollingBackupDir");
@@ -104,7 +104,7 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateSimple() throws IOException
+	void testCreateSimple() throws IOException
 	{
 		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test.txt");
 		for (int i = 0; i < 155; i++)
@@ -120,7 +120,7 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateSimpleNoExt() throws IOException
+	void testCreateSimpleNoExt() throws IOException
 	{
 		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test");
 		for (int i = 0; i < 55; i++)
@@ -136,7 +136,7 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateNewExt() throws IOException
+	void testCreateNewExt() throws IOException
 	{
 		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test");
 		for (int i = 0; i < 155; i++)
@@ -157,7 +157,7 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateNew() throws IOException
+	void testCreateNew() throws IOException
 	{
 		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test");
 		for (int i = 0; i < 2; i++)
@@ -176,7 +176,7 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateNewDir() throws IOException
+	void testCreateNewDir() throws IOException
 	{
 		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "testDir");
 		dir.setDirectory(true);
@@ -195,7 +195,7 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateNewNumeric() throws IOException
+	void testCreateNewNumeric() throws IOException
 	{
 		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "42");
 		for (int i = 0; i < 2; i++)
@@ -214,7 +214,7 @@ public class RollingBackupDirectoryTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateNewExtWitxExt() throws IOException
+	void testCreateNewExtWitxExt() throws IOException
 	{
 		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test.txt");
 		for (int i = 0; i < 155; i++)

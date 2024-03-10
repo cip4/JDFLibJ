@@ -61,7 +61,7 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendOverage()
+	void testAppendOverage()
 	{
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
 		final JDFNumberSpan ns = di.appendOverage();
@@ -72,7 +72,7 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDropItemForComponent()
+	void testGetDropItemForComponent()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
@@ -88,7 +88,7 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDropItemForComponentPart()
+	void testGetDropItemForComponentPart()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
@@ -108,7 +108,7 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDropID()
+	void testGetDropID()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
@@ -121,7 +121,7 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDropItemID()
+	void testGetDropItemID()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
@@ -135,7 +135,7 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetDropItemIDInherit()
+	void testGetDropItemIDInherit()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
@@ -149,7 +149,7 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDropDropItemForComponentPart()
+	void testGetDropDropItemForComponentPart()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
@@ -169,7 +169,7 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreateDropItemForComponent()
+	void testGetCreateDropItemForComponent()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
@@ -184,7 +184,7 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreateDropItemForComponentPart()
+	void testGetCreateDropItemForComponentPart()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
@@ -205,7 +205,7 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAppendRequired()
+	void testAppendRequired()
 	{
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
 		final JDFTimeSpan req = di.appendRequired();

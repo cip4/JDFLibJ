@@ -23,7 +23,7 @@ public class ResourceIDFinderTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testMap() {
+	void testMap() {
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		JDFResource r1 = n.addResource("RunList", null);
 		n.setType(EnumType.ProcessGroup);

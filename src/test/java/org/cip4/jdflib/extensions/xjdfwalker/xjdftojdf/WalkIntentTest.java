@@ -93,7 +93,7 @@ public class WalkIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testProofingIntent()
+	void testProofingIntent()
 	{
 		XJDFHelper h = new XJDFHelper("j1", "p1", null);
 		h.setXPathValue("ProductList/Product/Intent[@Name=\"ContentCheckIntent\"]/ContentCheckIntent/ProofItem/@ProofType", EnumSpanProofType.Page.getName());
@@ -110,7 +110,7 @@ public class WalkIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInsertingIntent() throws JDFException, DataFormatException
+	void testInsertingIntent() throws JDFException, DataFormatException
 	{
 		XJDFHelper h = new XJDFHelper("j1", "p1", null);
 		h.setXPathValue("ProductList/Product/Intent[@Name=\"AssemblingIntent\"]/AssemblingIntent/BlowIn/@FolioFrom", "1");
@@ -127,7 +127,7 @@ public class WalkIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHoleMakingIntent()
+	void testHoleMakingIntent()
 	{
 		XJDFHelper h = new XJDFHelper("j1", "p1", null);
 
@@ -145,7 +145,7 @@ public class WalkIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFoldingIntent()
+	void testFoldingIntent()
 	{
 		XJDFHelper h = new XJDFHelper("j1", "p1", null);
 

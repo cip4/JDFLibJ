@@ -89,7 +89,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testCommandResumeQE()
+	void testCommandResumeQE()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, XJDFConstants.ModifyQueueEntry);
@@ -105,7 +105,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testCommandAbortQE()
+	void testCommandAbortQE()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, XJDFConstants.ModifyQueueEntry);
@@ -121,7 +121,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testCommandForceGang()
+	void testCommandForceGang()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ForceGang);
@@ -136,7 +136,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testCommandRemoveQE()
+	void testCommandRemoveQE()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, XJDFConstants.ModifyQueueEntry);
@@ -152,7 +152,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testCommandSubmitQE()
+	void testCommandSubmitQE()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry.getName());
@@ -167,7 +167,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testCommandResubmitQE()
+	void testCommandResubmitQE()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry.getName());
@@ -184,7 +184,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testCommandReturnQE()
+	void testCommandReturnQE()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ReturnQueueEntry.getName());
@@ -200,7 +200,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testCommandResubmitQERemove()
+	void testCommandResubmitQERemove()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry.getName());
@@ -217,7 +217,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testResponseResumeQE()
+	void testResponseResumeQE()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		final XJMFHelper xjmfHelper = new XJMFHelper();
@@ -239,7 +239,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testResponseResumeQEBad()
+	void testResponseResumeQEBad()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		final XJMFHelper xjmfHelper = new XJMFHelper();
@@ -259,7 +259,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testResponseNotification()
+	void testResponseNotification()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		final XJMFHelper xjmfHelper = new XJMFHelper();
@@ -279,7 +279,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testQueryPaper()
+	void testQueryPaper()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Resource);
@@ -297,7 +297,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testCommandPaper()
+	void testCommandPaper()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Resource);
@@ -327,7 +327,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSignalPaper()
+	void testSignalPaper()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		final XJMFHelper xjmfHelper = new XJMFHelper();
@@ -356,7 +356,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testResponsePrintCondition()
+	void testResponsePrintCondition()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		final XJMFHelper xjmfHelper = new XJMFHelper().newXJMF(EnumVersion.Version_2_1);
@@ -397,7 +397,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSignalStatus()
+	void testSignalStatus()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		XJMFHelper xjmfHelper = new XJMFHelper();
@@ -444,7 +444,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testResponseStatus()
+	void testResponseStatus()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		final XJMFHelper xjmfHelper = new XJMFHelper();
@@ -470,7 +470,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSubscribeStatus()
+	void testSubscribeStatus()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
@@ -488,7 +488,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testRespondSubscribeStatus()
+	void testRespondSubscribeStatus()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
@@ -504,7 +504,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSignalStatusBuilding()
+	void testSignalStatusBuilding()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		final XJMFHelper xjmfHelper = new XJMFHelper();
@@ -528,7 +528,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testResponsePaper()
+	void testResponsePaper()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		final XJMFHelper xjmfHelper = new XJMFHelper();
@@ -558,7 +558,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testResponsePaperPrintCondition()
+	void testResponsePaperPrintCondition()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		final XJMFHelper xjmfHelper = new XJMFHelper();
@@ -614,7 +614,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testResponseKnownDevices()
+	void testResponseKnownDevices()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("VeggieController");
 		final XJMFHelper xjmfHelper = new XJMFHelper();
@@ -642,7 +642,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testResponseKnownMessages()
+	void testResponseKnownMessages()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		final XJMFHelper xjmfHelper = new XJMFHelper();
@@ -672,7 +672,7 @@ public class XJMFExampleTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentName(null);
@@ -687,7 +687,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testExtendQuery()
+	void testExtendQuery()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final KElement e = xjmfHelper.getRoot().appendElement("foo:QueryBar", "www.foo.org");
@@ -701,7 +701,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testExtendResponse()
+	void testExtendResponse()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final KElement e = xjmfHelper.getRoot().appendElement("foo:ResponseBar", "www.foo.org");
@@ -715,7 +715,7 @@ public class XJMFExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testExtendQueryMixed()
+	void testExtendQueryMixed()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.KnownDevices);
@@ -733,7 +733,7 @@ public class XJMFExampleTest extends ExampleTest
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		JDFDate.setWantISOMilliseconds(false);
 		super.tearDown();

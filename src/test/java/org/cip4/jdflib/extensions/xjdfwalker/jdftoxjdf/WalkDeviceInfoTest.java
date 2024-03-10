@@ -85,7 +85,7 @@ public class WalkDeviceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStatus()
+	void testStatus()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
 		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Running);

@@ -24,7 +24,7 @@ public class XJDFToJDFImplTest extends JDFTestCaseBase
 	*/
 	@Test
 	@Disabled
-	public void testDropIDContactPartition()
+	void testDropIDContactPartition()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null);
 		final SetHelper csh = h.getCreateSet(ElementName.CONTACT, EnumUsage.Input);

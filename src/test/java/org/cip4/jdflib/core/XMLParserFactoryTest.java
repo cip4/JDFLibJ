@@ -89,7 +89,7 @@ public class XMLParserFactoryTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMemory()
+	void testMemory()
 	{
 		XMLParserFactory f = XMLParserFactory.getFactory();
 		Vector<XMLParser> v = new Vector<XMLParser>();

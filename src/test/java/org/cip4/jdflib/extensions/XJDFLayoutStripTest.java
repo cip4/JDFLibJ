@@ -79,7 +79,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testStripLayout_BSSep()
+	void testStripLayout_BSSep()
 	{
 		bssh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		final ResourceHelper bsh = bssh.appendPartition(new JDFAttributeMap(), true);
@@ -145,7 +145,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testStripLayout_AllinOne()
+	void testStripLayout_AllinOne()
 	{
 		theHelper.setTypes("Stripping");
 		theHelper.setJobID("j");
@@ -187,7 +187,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testDescribeFinishedGang()
+	void testDescribeFinishedGang()
 	{
 		for (int k = 0; k < 2; k++)
 		{
@@ -236,7 +236,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testStripLayout_verbose()
+	void testStripLayout_verbose()
 	{
 		for (int k = 0; k < 2; k++)
 		{
@@ -292,7 +292,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		theHelper.getRoot().setXMLComment("create a stripping in a layout\n Stripping now consumes a layout", true);
@@ -307,7 +307,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testStripCell()
+	void testStripCell()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Stripping);
@@ -338,7 +338,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testSides()
+	void testSides()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Stripping);
@@ -361,7 +361,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testAssemblyOnly()
+	void testAssemblyOnly()
 	{
 		theHelper.setTypes("Stripping");
 		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
@@ -377,7 +377,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testBSOnly()
+	void testBSOnly()
 	{
 		theHelper.setTypes("Stripping");
 		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
@@ -394,7 +394,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testSigCell1() throws Exception
+	void testSigCell1() throws Exception
 	{
 		theHelper.setTypes("Stripping");
 		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
@@ -416,7 +416,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testBSRetain()
+	void testBSRetain()
 	{
 		theHelper.setTypes("Stripping");
 		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
@@ -434,7 +434,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testMultiPage1()
+	void testMultiPage1()
 	{
 		theHelper.setTypes("Stripping");
 		theHelper.setJobID("2up");
@@ -466,7 +466,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testMultiPageComeGo()
+	void testMultiPageComeGo()
 	{
 		theHelper.setTypes("Stripping");
 		theHelper.setJobID("comeandgo");
@@ -498,7 +498,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testBSMulti()
+	void testBSMulti()
 	{
 		theHelper.setTypes("Stripping");
 		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
@@ -521,7 +521,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testBSMultiAssembly()
+	void testBSMultiAssembly()
 	{
 		theHelper.setTypes("Stripping");
 		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);

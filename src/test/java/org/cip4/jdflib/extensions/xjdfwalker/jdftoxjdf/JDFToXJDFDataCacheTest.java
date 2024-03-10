@@ -82,7 +82,7 @@ public class JDFToXJDFDataCacheTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetResAttribs()
+	void testGetResAttribs()
 	{
 		final List<String> resAtts = JDFToXJDFDataCache.getResAttribs();
 		Assertions.assertNotNull(resAtts);
@@ -93,7 +93,7 @@ public class JDFToXJDFDataCacheTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetResAttribsStatus()
+	void testGetResAttribsStatus()
 	{
 		final List<String> resAtts = JDFToXJDFDataCache.getResAttribs();
 		Assertions.assertNotNull(resAtts);
@@ -104,7 +104,7 @@ public class JDFToXJDFDataCacheTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetResAttribsPageNumber()
+	void testGetResAttribsPageNumber()
 	{
 		final List<String> resAtts = JDFToXJDFDataCache.getResAttribs();
 		Assertions.assertNotNull(resAtts);
@@ -115,7 +115,7 @@ public class JDFToXJDFDataCacheTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPOAttribs()
+	void testGetPOAttribs()
 	{
 		final List<String> resAtts = JDFToXJDFDataCache.getPlacedObjectAttribs();
 		Assertions.assertNotNull(resAtts);

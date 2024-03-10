@@ -92,7 +92,7 @@ public class WalkSignalResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRQP()
+	void testRQP()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		JDFSignal sig = jmf.getSignal(0);
@@ -108,7 +108,7 @@ public class WalkSignalResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJobID()
+	void testJobID()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		JDFSignal sig = jmf.getSignal(0);
@@ -129,7 +129,7 @@ public class WalkSignalResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testExposedMedia()
+	void testExposedMedia()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 
@@ -154,7 +154,7 @@ public class WalkSignalResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConvert()
+	void testConvert()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		JDFSignal sig = jmf.getSignal(0);

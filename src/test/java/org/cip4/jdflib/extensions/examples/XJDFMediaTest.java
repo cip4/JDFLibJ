@@ -99,7 +99,7 @@ public class XJDFMediaTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testCorrugated()
+	void testCorrugated()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Converting", "Corrugated", null);
 		xjdfHelper.setTypes(JDFConstants.CONVENTIONALPRINTING);
@@ -134,7 +134,7 @@ public class XJDFMediaTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testFlexoPlate()
+	void testFlexoPlate()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Flexo", "Plate", null);
 		xjdfHelper.setTypes(JDFConstants.CONVENTIONALPRINTING);
@@ -170,7 +170,7 @@ public class XJDFMediaTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testFlexoSleeve()
+	void testFlexoSleeve()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Flexo", "Sleeve", null);
 		xjdfHelper.setTypes(JDFConstants.CONVENTIONALPRINTING);
@@ -207,7 +207,7 @@ public class XJDFMediaTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		KElement.setLongID(false);
 		super.setUp();

@@ -80,7 +80,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		b = new JMFBuilder();
@@ -91,7 +91,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test milestone
 	 */
 	@Test
-	public void testBuildMilestone()
+	void testBuildMilestone()
 	{
 		final JDFJMF jmf = b.buildMilestone("PrepressCompleted", "jobID");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "milestone");
@@ -102,7 +102,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test milestone
 	 */
 	@Test
-	public void testBuildSubmitQueueEntry()
+	void testBuildSubmitQueueEntry()
 	{
 		final JDFJMF jmf = b.buildSubmitQueueEntry("retURL", "xxx");
 		final JDFQueueSubmissionParams queueSubmissionParams = jmf.getCommand(0).getQueueSubmissionParams(0);
@@ -138,7 +138,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test resource signal
 	 */
 	@Test
-	public void testBuildResourceSignal()
+	void testBuildResourceSignal()
 	{
 		final JDFJMF jmf = b.buildResourceSignal(true, null);
 		assertEquals(jmf.getSignal(0).getType(), "Resource");
@@ -150,7 +150,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test resource signal
 	 */
 	@Test
-	public void testBuildResourceSignalWastePaper()
+	void testBuildResourceSignalWastePaper()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.setJobID("j1");
@@ -174,7 +174,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testBuildResourceSignalInkLot()
+	void testBuildResourceSignalInkLot()
 	{
 		final JDFJMF jmf = b.buildResourceSignal(false, null);
 
@@ -208,7 +208,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test milestone
 	 */
 	@Test
-	public void testBuildStatusSignal()
+	void testBuildStatusSignal()
 	{
 		final JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
 		assertEquals(jmf.getSignal(0).getType(), "Status");
@@ -220,7 +220,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test milestone
 	 */
 	@Test
-	public void testBuildNewJDFCommand()
+	void testBuildNewJDFCommand()
 	{
 		final JDFJMF jmf = b.buildNewJDFCommand();
 		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
@@ -236,7 +236,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test status subscription
 	 */
 	@Test
-	public void testBuildStatusSubscription()
+	void testBuildStatusSubscription()
 	{
 		final JDFJMF jmf = b.buildStatusSubscription("signalurl", 30, -1, null);
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "SubscriptionStatus");
@@ -247,7 +247,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test status subscription
 	 */
 	@Test
-	public void testBuildAbort()
+	void testBuildAbort()
 	{
 		final JDFJMF jmf = b.buildAbortQueueEntry("q1");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "Abort");
@@ -258,7 +258,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test status subscription
 	 */
 	@Test
-	public void testBuildHold()
+	void testBuildHold()
 	{
 		final JDFJMF jmf = b.buildHoldQueueEntry("q1");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "Hold");
@@ -269,7 +269,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test resource subscription
 	 */
 	@Test
-	public void testBuildResourceSubscription()
+	void testBuildResourceSubscription()
 	{
 		final JDFJMF jmf = b.buildResourceSubscription("signalurl", 30, -1, null);
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "SubscriptionResource");
@@ -280,7 +280,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test notification subscription
 	 */
 	@Test
-	public void testBuildNotificationSubscription()
+	void testBuildNotificationSubscription()
 	{
 		final JDFJMF jmf = b.buildNotificationSubscription("signalurl");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "SubscriptionNotification");
@@ -291,7 +291,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test queue status subscription
 	 */
 	@Test
-	public void testBuildQueueStatusSubscription()
+	void testBuildQueueStatusSubscription()
 	{
 		final JDFJMF jmf = b.buildQueueStatusSubscription("signalurl");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "SubscriptionQueueStatus");
@@ -302,7 +302,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test milestone
 	 */
 	@Test
-	public void testSenderID()
+	void testSenderID()
 	{
 		JDFJMF jmf = b.buildMilestone("PrepressCompleted", "jobID");
 		assertEquals(jmf.getSenderID(), JDFJMF.getTheSenderID());
@@ -319,7 +319,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * test milestone
 	 */
 	@Test
-	public void testSenderIDMessage()
+	void testSenderIDMessage()
 	{
 		JDFJMF jmf = b.buildMilestone("PrepressCompleted", "jobID");
 		assertEquals(jmf.getSenderID(), JDFJMF.getTheSenderID());

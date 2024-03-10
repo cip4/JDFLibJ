@@ -63,7 +63,7 @@ public class FileJanitorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testOld() throws Exception
+	void testOld() throws Exception
 	{
 		final File f = new File(sm_dirTestDataTemp + "testJanitor");
 		FileUtil.deleteAll(f);
@@ -91,7 +91,7 @@ public class FileJanitorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDelEmpty() throws Exception
+	void testDelEmpty() throws Exception
 	{
 		final File f = new File(sm_dirTestDataTemp + "testJanitor");
 		FileUtil.deleteAll(f);
@@ -120,7 +120,7 @@ public class FileJanitorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetDelEmpty() throws Exception
+	void testSetDelEmpty() throws Exception
 	{
 
 		final FileJanitor fileJanitor = new FileJanitor(null, 2);
@@ -137,7 +137,7 @@ public class FileJanitorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAgeTostring() throws Exception
+	void testAgeTostring() throws Exception
 	{
 
 		final FileJanitor fileJanitor = new FileJanitor(null, 2);
@@ -152,7 +152,7 @@ public class FileJanitorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTostring() throws Exception
+	void testTostring() throws Exception
 	{
 
 		final FileJanitor fileJanitor = new FileJanitor(null, 2);
@@ -166,7 +166,7 @@ public class FileJanitorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetLogSingl() throws Exception
+	void testSetLogSingl() throws Exception
 	{
 
 		final FileJanitor fileJanitor = new FileJanitor(null, 2);

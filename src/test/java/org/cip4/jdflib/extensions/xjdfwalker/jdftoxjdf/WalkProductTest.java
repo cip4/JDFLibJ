@@ -86,7 +86,7 @@ public class WalkProductTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReadComponent()
+	void testReadComponent()
 	{
 		final WalkProduct w = new WalkProduct();
 		w.jdfToXJDF = new JDFToXJDF();

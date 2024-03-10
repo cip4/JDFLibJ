@@ -76,7 +76,7 @@ public class JDFNumberListTest
 {
 
 	@Test
-	public void testConstruct()
+	void testConstruct()
 	{
 		final JDFNumberList nl = new JDFNumberList(new double[] { 1.1, 2.2, 3.3 });
 		Assertions.assertEquals(1.1, nl.doubleAt(0), 0);

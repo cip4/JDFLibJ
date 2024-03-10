@@ -67,7 +67,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGetExplicit()
+	void testGetExplicit()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
@@ -80,7 +80,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testRemoveImplicitDup()
+	void testRemoveImplicitDup()
 	{
 		final JDFAttributeMapArray vmap = new JDFAttributeMapArray();
 		for (int i = 0; i < 4; i++)
@@ -106,7 +106,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGet()
+	void testGet()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r1 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
@@ -120,7 +120,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGetCreate()
+	void testGetCreate()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r1 = r.getCreatePartition(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1"), null);
@@ -134,7 +134,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGetCreate_PartIDKeys()
+	void testGetCreate_PartIDKeys()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFAttributeMap partMap = new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1");
@@ -149,7 +149,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGetimplicit()
+	void testGetimplicit()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final PartitionGetter g = new PartitionGetter(r);
@@ -161,7 +161,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGetimplicitGap()
+	void testGetimplicitGap()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		r.addPartition(EnumPartIDKey.SignatureName, "sig1");
@@ -179,7 +179,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGetimplicitGap2()
+	void testGetimplicitGap2()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		JDFResource s1 = r.addPartition(EnumPartIDKey.SignatureName, "sig1").addPartition(EnumPartIDKey.SheetName, "s1");
@@ -202,7 +202,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGetimplicitVector()
+	void testGetimplicitVector()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource p = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
@@ -224,7 +224,7 @@ public class PartitionGetterTest
 	*
 	*/
 	@Test
-	public void testGetimplicitVector2()
+	void testGetimplicitVector2()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource p = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
@@ -252,7 +252,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testPVResMulti()
+	void testPVResMulti()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		final JDFResource ab = r.addPartition(EnumPartIDKey.PartVersion, "a b");
@@ -269,7 +269,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testPVResSkip()
+	void testPVResSkip()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		final JDFResource ab = r.addPartition(EnumPartIDKey.SheetName, "sh1").addPartition(EnumPartIDKey.PartVersion, "a b");
@@ -303,7 +303,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testPVAll()
+	void testPVAll()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		final JDFResource ab = r.addPartition(EnumPartIDKey.SheetName, "sh1").addPartition(EnumPartIDKey.PartVersion, "a b");
@@ -329,7 +329,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testReorderPartitions()
+	void testReorderPartitions()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		r.appendElement(ElementName.MEDIA);
@@ -354,7 +354,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testPVResStrict()
+	void testPVResStrict()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		final JDFResource ab = r.addPartition(EnumPartIDKey.PartVersion, "a b");
@@ -371,7 +371,7 @@ public class PartitionGetterTest
 	*
 	*/
 	@Test
-	public void testPVResDouble()
+	void testPVResDouble()
 	{
 		final JDFResource r0 = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		final JDFResource r = r0.addPartition(EnumPartIDKey.SheetName, "s1");
@@ -390,7 +390,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testPVLinkMulti()
+	void testPVLinkMulti()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		final JDFResource ab = r.addPartition(EnumPartIDKey.PartVersion, "a");
@@ -407,7 +407,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGetimplicitFromMap()
+	void testGetimplicitFromMap()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final PartitionGetter g = new PartitionGetter(r);
@@ -418,7 +418,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testHasGap()
+	void testHasGap()
 	{
 		final VString v = new VString("a b c");
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
@@ -439,7 +439,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testFillSparse()
+	void testFillSparse()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource s1 = r.addPartition(EnumPartIDKey.SheetName, "a1");
@@ -459,7 +459,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testHasGapRange()
+	void testHasGapRange()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFAttributeMap partMap = new JDFAttributeMap();
@@ -502,7 +502,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testMultiGapRange()
+	void testMultiGapRange()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		r.setPartUsage(EnumPartUsage.Implicit);
@@ -536,7 +536,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGetCompleteMap()
+	void testGetCompleteMap()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFAttributeMap partMap = new JDFAttributeMap();
@@ -563,7 +563,7 @@ public class PartitionGetterTest
 	*
 	*/
 	@Test
-	public void testLastPos()
+	void testLastPos()
 	{
 		final VString v = new VString("a b c");
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
@@ -584,7 +584,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testSpecialFromMap()
+	void testSpecialFromMap()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final PartitionGetter g = new PartitionGetter(r);
@@ -612,7 +612,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGetimplicitFromMap2()
+	void testGetimplicitFromMap2()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.SignatureName, "S1");
@@ -628,7 +628,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGetMissing()
+	void testGetMissing()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.SignatureName, "S1");
@@ -642,7 +642,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGetMissingWierd()
+	void testGetMissingWierd()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.SignatureName, "S1");
@@ -661,7 +661,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGetimplicitFromMapnix()
+	void testGetimplicitFromMapnix()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.SignatureName, "S1");
@@ -677,7 +677,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testIdentical()
+	void testIdentical()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		final PartitionGetter pg = new PartitionGetter(r);
@@ -703,7 +703,7 @@ public class PartitionGetterTest
 	*
 	*/
 	@Test
-	public void testIdenticalSibling()
+	void testIdenticalSibling()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		final PartitionGetter pg = new PartitionGetter(r);
@@ -726,7 +726,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testIdenticalForeign()
+	void testIdenticalForeign()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource r = n.addResource("foo.Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, "www.foo.com", null);
@@ -757,7 +757,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testIdenticalFB()
+	void testIdenticalFB()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		final JDFResource rs = r.addPartition(EnumPartIDKey.SheetName, "s1");
@@ -795,7 +795,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testIdenticalPV()
+	void testIdenticalPV()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		final PartitionGetter pg = new PartitionGetter(r);
@@ -834,7 +834,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testImplicitIdenticalPV()
+	void testImplicitIdenticalPV()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		r.setPartUsage(EnumPartUsage.Implicit);
@@ -861,7 +861,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testIdenticalPVLeaf()
+	void testIdenticalPVLeaf()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		final PartitionGetter pg = new PartitionGetter(r);
@@ -884,7 +884,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testIdenticalNot()
+	void testIdenticalNot()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		final JDFResource rs = r.addPartition(EnumPartIDKey.SheetName, "s1");

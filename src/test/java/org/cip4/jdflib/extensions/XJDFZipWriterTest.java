@@ -98,7 +98,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testSimpleXJDF() throws IOException
+	void testSimpleXJDF() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();
@@ -113,7 +113,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testSimpleXJDFAux() throws IOException
+	void testSimpleXJDFAux() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		JDFRunList ruli = (JDFRunList) h.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input).getCreateResource().getResource();
@@ -131,7 +131,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testMultiXJDF() throws IOException
+	void testMultiXJDF() throws IOException
 	{
 		final XJDFZipWriter w = new XJDFZipWriter();
 		for (int i = 0; i < 3; i++)
@@ -148,7 +148,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testEnsureXJMF() throws IOException
+	void testEnsureXJMF() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();
@@ -162,7 +162,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testEnsureXJMFMulti() throws IOException
+	void testEnsureXJMFMulti() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();
@@ -181,7 +181,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testToString() throws IOException
+	void testToString() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();
@@ -195,7 +195,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testEnsureXJMFReturn() throws IOException
+	void testEnsureXJMFReturn() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();
@@ -213,7 +213,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testEnsureXJMFReturnPre() throws IOException
+	void testEnsureXJMFReturnPre() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();
@@ -234,7 +234,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testEnsureXJMFReturnPreNoParams() throws IOException
+	void testEnsureXJMFReturnPreNoParams() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();
@@ -254,7 +254,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testSetCommand() throws IOException
+	void testSetCommand() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();
@@ -267,7 +267,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testEnsureXJMFResubmit() throws IOException
+	void testEnsureXJMFResubmit() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();
@@ -283,7 +283,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testAux() throws IOException
+	void testAux() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();
@@ -303,7 +303,7 @@ public class XJDFZipWriterTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public void testSimpleXJDFFile() throws IOException
+	void testSimpleXJDFFile() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final XJDFZipWriter w = new XJDFZipWriter();

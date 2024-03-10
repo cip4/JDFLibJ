@@ -62,14 +62,14 @@ public class PreflightTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
 	}
 
 	@Test
-	public void testPreflightReport() throws Exception
+	void testPreflightReport() throws Exception
 	{
 		testPreflightProfile();
 		JDFPreflightReport prp = (JDFPreflightReport) n.appendMatchingResource(ElementName.PREFLIGHTREPORT, EnumProcessUsage.AnyOutput, null);
@@ -112,7 +112,7 @@ public class PreflightTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testPreflightProfile()
+	void testPreflightProfile()
 	{
 
 		JDFDoc d = new JDFDoc("JDF");

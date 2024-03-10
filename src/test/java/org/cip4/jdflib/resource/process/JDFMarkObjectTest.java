@@ -70,7 +70,7 @@ public class JDFMarkObjectTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -84,7 +84,7 @@ public class JDFMarkObjectTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetTrimSize()
+	void testSetTrimSize()
 	{
 		final JDFMarkObject co = lo.appendMarkObject();
 		co.setTrimSize(1.12345, 2.3456, 2);
@@ -96,7 +96,7 @@ public class JDFMarkObjectTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetRect()
+	void testGetRect()
 	{
 		final JDFMarkObject co = lo.appendMarkObject();
 		co.setTrimSize(1.2345, 2.3456);
@@ -109,7 +109,7 @@ public class JDFMarkObjectTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetCTM()
+	void testSetCTM()
 	{
 		final JDFMarkObject co = lo.appendMarkObject();
 		co.setTrimSize(1.12345, 2.3456, 2);
@@ -121,7 +121,7 @@ public class JDFMarkObjectTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetClipPath()
+	void testSetClipPath()
 	{
 		final JDFMarkObject co = lo.appendMarkObject();
 		co.setClipPath("1.0000004 1.2345678 l 1 2 3 g ds", 2);
@@ -133,7 +133,7 @@ public class JDFMarkObjectTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetTrimSize()
+	void testGetTrimSize()
 	{
 		final JDFMarkObject co = lo.appendMarkObject();
 		co.setClipBox(JDFRectangle.createRectangle("1 2 44 66"));

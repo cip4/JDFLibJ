@@ -98,7 +98,7 @@ public class AuditToJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLocalJMFs()
+	void testGetLocalJMFs()
 	{
 		final AuditToJMF aj = new AuditToJMF(node, null, true);
 		final VElement vJMF = aj.getLocalJMFs(EnumAuditType.PhaseTime);
@@ -116,7 +116,7 @@ public class AuditToJMFTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		// get the JDF document root element

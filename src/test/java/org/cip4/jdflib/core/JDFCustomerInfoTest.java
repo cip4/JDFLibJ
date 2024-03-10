@@ -85,7 +85,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetContactVector()
+	void testgetContactVector()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		JDFCustomerInfo info = prepareCustomerInfo(doc);
@@ -111,7 +111,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetContactWithContactType()
+	void testGetContactWithContactType()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFCustomerInfo info = prepareCustomerInfo(doc);
@@ -135,7 +135,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetContactWithContactTypeRef()
+	void testGetContactWithContactTypeRef()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -154,7 +154,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetCreateContactWithContactType()
+	void testGetCreateContactWithContactType()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFCustomerInfo info = doc.getJDFRoot().getCreateCustomerInfo();
@@ -170,7 +170,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetContactVectorWithContactType()
+	void testGetContactVectorWithContactType()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFCustomerInfo info = prepareCustomerInfo(doc);
@@ -194,7 +194,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetContact()
+	void testGetContact()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();

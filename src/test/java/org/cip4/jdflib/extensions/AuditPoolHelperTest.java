@@ -58,7 +58,7 @@ public class AuditPoolHelperTest
 	 *
 	 */
 	@Test
-	public void testCleanup()
+	void testCleanup()
 	{
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
 		final KElement created = auditPool.appendElement(ElementName.CREATED);
@@ -73,7 +73,7 @@ public class AuditPoolHelperTest
 	 *
 	 */
 	@Test
-	public void testAppendAudit()
+	void testAppendAudit()
 	{
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL);
 		final AuditPoolHelper aph = new AuditPoolHelper(auditPool);
@@ -85,7 +85,7 @@ public class AuditPoolHelperTest
 	 *
 	 */
 	@Test
-	public void testAppendAuditEnum()
+	void testAppendAuditEnum()
 	{
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL);
 		final AuditPoolHelper aph = new AuditPoolHelper(auditPool);
@@ -98,7 +98,7 @@ public class AuditPoolHelperTest
 	*
 	*/
 	@Test
-	public void testGetHelper()
+	void testGetHelper()
 	{
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
 		assertNull(AuditPoolHelper.getHelper(null));
@@ -110,7 +110,7 @@ public class AuditPoolHelperTest
 	*
 	*/
 	@Test
-	public void testGetCreateAudit()
+	void testGetCreateAudit()
 	{
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
 		final AuditPoolHelper aph = new AuditPoolHelper(auditPool);

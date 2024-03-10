@@ -104,7 +104,7 @@ public class JDFQueueEntryTest {
 	 * 
 	 */
 	@Test
-	public void testEndTime()
+	void testEndTime()
 	{
 		final JDFQueueEntry _qe = (JDFQueueEntry) new JDFDoc(ElementName.QUEUEENTRY).getRoot();
 		final JDFDate d = _qe.getEndTime();
@@ -115,7 +115,7 @@ public class JDFQueueEntryTest {
 	 * 
 	 */
 	@Test
-	public void testGetNextStatusVector()
+	void testGetNextStatusVector()
 	{
 		final JDFQueueEntry qe = (JDFQueueEntry) new JDFDoc(ElementName.QUEUEENTRY).getRoot();
 		qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
@@ -128,7 +128,7 @@ public class JDFQueueEntryTest {
 	 * 
 	 */
 	@Test
-	public void testGetNodeStatus()
+	void testGetNodeStatus()
 	{
 		Assertions.assertEquals(EnumNodeStatus.getNodeStatus(EnumQueueEntryStatus.Waiting), EnumNodeStatus.Waiting);
 		Assertions.assertEquals(EnumNodeStatus.getNodeStatus(EnumQueueEntryStatus.Completed), EnumNodeStatus.Completed);
@@ -139,7 +139,7 @@ public class JDFQueueEntryTest {
 	 * 
 	 */
 	@Test
-	public void testGetQueueEntryStatus()
+	void testGetQueueEntryStatus()
 	{
 		Assertions.assertEquals(EnumNodeStatus.getQueueEntryStatus(EnumNodeStatus.Waiting), EnumQueueEntryStatus.Waiting);
 		Assertions.assertEquals(EnumNodeStatus.getQueueEntryStatus(EnumNodeStatus.Completed), EnumQueueEntryStatus.Completed);
@@ -150,7 +150,7 @@ public class JDFQueueEntryTest {
 	 * 
 	 */
 	@Test
-	public void testSetPriority()
+	void testSetPriority()
 	{
 		JDFQueueEntry qe = q.getQueueEntry("qe2");
 		Assertions.assertEquals(q.getQueueEntryPos("qe2"), 1);
@@ -189,7 +189,7 @@ public class JDFQueueEntryTest {
 	 * 
 	 */
 	@Test
-	public void testSetQueueEntryStatus()
+	void testSetQueueEntryStatus()
 	{
 		JDFQueueEntry qe = q.getQueueEntry("qe2");
 		Assertions.assertEquals(q.getQueueEntryPos("qe2"), 1);
@@ -238,7 +238,7 @@ public class JDFQueueEntryTest {
 	 * 
 	 */
 	@Test
-	public void testSortQueue()
+	void testSortQueue()
 	{
 		q.setAutomated(true);
 		final JDFQueue q2 = (JDFQueue) new JDFDoc("Queue").getRoot();
@@ -256,7 +256,7 @@ public class JDFQueueEntryTest {
 	 * 
 	 */
 	@Test
-	public void testSortQueueMany()
+	void testSortQueueMany()
 	{
 		q.setAutomated(true);
 		for (int i = 0; i < 20; i++)
@@ -275,7 +275,7 @@ public class JDFQueueEntryTest {
 	 */
 	@Deprecated
 	@Test
-	public void testMatchesFilter()
+	void testMatchesFilter()
 	{
 		q.setAutomated(true);
 		final JDFQueue q2 = (JDFQueue) new JDFDoc("Queue").getRoot();
@@ -299,7 +299,7 @@ public class JDFQueueEntryTest {
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@BeforeEach
-    public void setUp() throws Exception
+    void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
         final JDFDoc doc = new JDFDoc(ElementName.QUEUE);

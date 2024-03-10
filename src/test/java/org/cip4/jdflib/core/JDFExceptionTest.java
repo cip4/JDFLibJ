@@ -83,7 +83,7 @@ public class JDFExceptionTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testHash()
+	void testHash()
 	{
 		JDFException x1 = new JDFException("foo");
 		JDFException x2 = new JDFException("bar");
@@ -97,7 +97,7 @@ public class JDFExceptionTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testEquals()
+	void testEquals()
 	{
 		JDFException x1 = new JDFException("foo");
 		JDFException x2 = new JDFException("bar");

@@ -100,7 +100,7 @@ public class JDFUsageCounterTest extends JDFTestCaseBase
 	 * Test method for setCounterTypes
 	 */
 	@Test
-	public void testSetUsageCounterTypes()
+	void testSetUsageCounterTypes()
 	{
 		JDFUsageCounter uc = (JDFUsageCounter) new JDFDoc(ElementName.USAGECOUNTER).getRoot();
 		Vector<EnumCounterType> v = new Vector<JDFUsageCounter.EnumCounterType>();
@@ -116,7 +116,7 @@ public class JDFUsageCounterTest extends JDFTestCaseBase
 	 * Test method for appendCounterTypes
 	 */
 	@Test
-	public void testAppendCounterTypes()
+	void testAppendCounterTypes()
 	{
 		JDFUsageCounter uc = (JDFUsageCounter) new JDFDoc(ElementName.USAGECOUNTER).getRoot();
 		uc.appendCounterType(EnumCounterType.Auxiliary);

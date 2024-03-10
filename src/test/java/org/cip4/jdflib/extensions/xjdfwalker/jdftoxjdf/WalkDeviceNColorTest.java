@@ -84,7 +84,7 @@ public class WalkDeviceNColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWalk()
+	void testWalk()
 	{
 		JDFDeviceNColor dnc = (JDFDeviceNColor) new JDFDoc(ElementName.DEVICENCOLOR).getRoot();
 		dnc.setColorList(JDFNumberList.createNumberList("1 0.5 0.6 1 4"));

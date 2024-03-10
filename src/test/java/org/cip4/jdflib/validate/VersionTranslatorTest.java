@@ -92,7 +92,7 @@ public class VersionTranslatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStreamToXJDF()
+	void testStreamToXJDF()
 	{
 		VersionTranslator vt = new VersionTranslator(EnumVersion.Version_2_0);
 		String s = "<JDF Type=\"Product\"/>";
@@ -106,7 +106,7 @@ public class VersionTranslatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFileToXJDF()
+	void testFileToXJDF()
 	{
 		VersionTranslator vt = new VersionTranslator(EnumVersion.Version_2_0);
 		File input = new File(sm_dirTestData + "ApprovalSubJDF.jdf");
@@ -121,7 +121,7 @@ public class VersionTranslatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStreamFromXJDF()
+	void testStreamFromXJDF()
 	{
 		VersionTranslator vt = new VersionTranslator(EnumVersion.Version_1_4);
 		String s = "<XJDF Types=\"Product\"/>";

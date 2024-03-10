@@ -90,7 +90,7 @@ public class JDFSubscriptionInfoTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetEnumType()
+	void testGetEnumType()
 	{
 		si.setMessageType("Status");
 		Assertions.assertEquals(si.getEnumType(), EnumType.Status);
@@ -100,7 +100,7 @@ public class JDFSubscriptionInfoTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testSetEnumType()
+	void testSetEnumType()
 	{
 		si.setMessageType(EnumType.SubmissionMethods);
 		Assertions.assertEquals(si.getMessageType(), EnumType.SubmissionMethods.getName());
@@ -112,7 +112,7 @@ public class JDFSubscriptionInfoTest extends JDFTestCaseBase
 	*/
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
 		super.setUp();

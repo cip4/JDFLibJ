@@ -55,7 +55,7 @@ public class WalkAssemblyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWalkElements()
+	void testWalkElements()
 	{
 		final JDFAssembly as = (JDFAssembly) new JDFDoc(ElementName.ASSEMBLY).getRoot();
 		as.appendPageAssignedList();
@@ -77,7 +77,7 @@ public class WalkAssemblyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWalkAttributes()
+	void testWalkAttributes()
 	{
 		final JDFAssembly as = (JDFAssembly) new JDFDoc(ElementName.ASSEMBLY).getRoot();
 		as.setPhysicalSection(JDFIntegerList.createIntegerList(" 1 3 5"));
@@ -95,7 +95,7 @@ public class WalkAssemblyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAssemblyIDs()
+	void testAssemblyIDs()
 	{
 		final JDFAssembly as = (JDFAssembly) new JDFDoc(ElementName.ASSEMBLY).getRoot();
 		as.setAssemblyIDs(VString.getVString("a1", null));
@@ -112,7 +112,7 @@ public class WalkAssemblyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatches()
+	void testMatches()
 	{
 		final JDFAssembly as = (JDFAssembly) new JDFDoc(ElementName.ASSEMBLY).getRoot();
 		final WalkAssembly wa = new WalkAssembly();
@@ -124,7 +124,7 @@ public class WalkAssemblyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElementNames()
+	void testGetElementNames()
 	{
 		final JDFAssembly as = (JDFAssembly) new JDFDoc(ElementName.ASSEMBLY).getRoot();
 		final WalkAssembly wa = new WalkAssembly();

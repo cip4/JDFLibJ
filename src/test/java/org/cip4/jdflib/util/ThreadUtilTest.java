@@ -158,7 +158,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMyMutex()
+	void testMyMutex()
 	{
 		int nLast = -1;
 		for (int i = 0; i < 10000; i++)

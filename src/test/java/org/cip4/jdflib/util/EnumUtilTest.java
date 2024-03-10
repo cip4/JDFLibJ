@@ -98,7 +98,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMin()
+	void testMin()
 	{
 		assertEquals(EnumUtil.min(EnumResStatus.Incomplete, EnumResStatus.Available), EnumResStatus.Incomplete);
 	}
@@ -107,7 +107,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMax()
+	void testMax()
 	{
 		assertEquals(EnumUtil.max(EnumResStatus.Incomplete, EnumResStatus.Available), EnumResStatus.Available);
 	}
@@ -116,7 +116,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLessEq()
+	void testLessEq()
 	{
 		assertTrue(EnumUtil.aLessEqualsThanB(EnumResStatus.Incomplete, EnumResStatus.Incomplete));
 		assertTrue(EnumUtil.aLessEqualsThanB(null, EnumResStatus.Incomplete));
@@ -129,7 +129,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLess()
+	void testLess()
 	{
 		assertFalse(EnumUtil.aLessThanB(EnumResStatus.Incomplete, EnumResStatus.Incomplete));
 		assertTrue(EnumUtil.aLessThanB(EnumResStatus.Incomplete, EnumResStatus.Available));
@@ -142,7 +142,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetEnumName()
+	void testGetEnumName()
 	{
 		assertEquals(EnumUtil.getEnumName(EnumAnchor.BottomRight), "EnumAnchor");
 	}
@@ -151,7 +151,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetEnumList()
+	void testGetEnumList()
 	{
 		assertEquals(9, EnumUtil.getNamesList(EnumAnchor.class).size());
 		assertNull(EnumUtil.getNamesList(null));
@@ -161,7 +161,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetEnumValue()
+	void testGetEnumValue()
 	{
 		assertEquals(EnumUtil.getName(EnumAnchor.BottomRight), "BottomRight");
 		assertEquals(EnumUtil.getName(null), "null");
@@ -171,7 +171,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetEnumIgnorecase()
+	void testGetEnumIgnorecase()
 	{
 		assertNull(EnumUtil.getEnumIgnoreCase(EnumAnchor.class, E.a));
 		assertNull(EnumUtil.getEnumIgnoreCase(EnumAnchor.class, (String) null));

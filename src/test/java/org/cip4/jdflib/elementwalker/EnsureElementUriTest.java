@@ -84,7 +84,7 @@ public class EnsureElementUriTest {
 	 * 
 	 */
 	@Test
-	public void testOne()
+	void testOne()
 	{
 		KElement e = KElement.createRoot("a", null);
 		e.setXPathAttribute("b/c/@d", "e");
@@ -100,7 +100,7 @@ public class EnsureElementUriTest {
 	 * 
 	 */
 	@Test
-	public void testNS()
+	void testNS()
 	{
 		KElement e = KElement.createRoot("a:a", "a.com");
 		e.setXPathAttribute("a:b/a:c/@d", "e");
@@ -116,7 +116,7 @@ public class EnsureElementUriTest {
 	 * 
 	 */
 	@Test
-	public void testKid()
+	void testKid()
 	{
 		KElement e = KElement.createRoot("a", null);
 		e.setXPathAttribute("b/c/@d", "e");
@@ -133,7 +133,7 @@ public class EnsureElementUriTest {
 	 * 
 	 */
 	@Test
-	public void testTwo()
+	void testTwo()
 	{
 		KElement e = KElement.createRoot("a", null);
 		e.setXPathAttribute("b/c/@d", "e");

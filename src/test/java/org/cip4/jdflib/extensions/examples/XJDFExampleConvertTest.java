@@ -87,7 +87,7 @@ public class XJDFExampleConvertTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLayoutElementProduction()
+	void testLayoutElementProduction()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "dielayoutproduction.jdf");
 		final KElement x = convertToXJDF(n);
@@ -105,7 +105,7 @@ public class XJDFExampleConvertTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

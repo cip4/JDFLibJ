@@ -81,7 +81,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResubmitQueueEntry()
+	void testResubmitQueueEntry()
 	{
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry);
@@ -96,7 +96,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMessageServiceType()
+	void testMessageServiceType()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.KnownMessages);
 		final JDFMessageService ms = jmf.getResponse(0).appendMessageService();
@@ -116,7 +116,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testScope()
+	void testScope()
 	{
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Query, EnumType.Resource);
@@ -131,7 +131,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResponseModify()
+	void testResponseModify()
 	{
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Response, "ModifyQueueEntry");
@@ -151,7 +151,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResponseModifyType()
+	void testResponseModifyType()
 	{
 		final XJMFHelper h0 = new XJMFHelper();
 		final MessageHelper mh0 = h0.appendMessage(EnumFamily.Command, "ModifyQueueEntry");
@@ -181,7 +181,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResponseModifyReject()
+	void testResponseModifyReject()
 	{
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Response, "ModifyQueueEntry");
@@ -201,7 +201,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResourceInfo()
+	void testResourceInfo()
 	{
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Response, EnumType.Resource);
@@ -231,7 +231,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSenderID()
+	void testSenderID()
 	{
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Signal, EnumType.Status);
@@ -245,7 +245,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSenderID2()
+	void testSenderID2()
 	{
 		final XJMFHelper h = new XJMFHelper();
 		h.getHeader().setAttribute(AttributeName.DEVICEID, "xjmfdev");
@@ -262,7 +262,7 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSenderID3()
+	void testSenderID3()
 	{
 		final XJMFHelper h = new XJMFHelper();
 		h.getHeader().setAttribute(AttributeName.DEVICEID, "xjmfdev");

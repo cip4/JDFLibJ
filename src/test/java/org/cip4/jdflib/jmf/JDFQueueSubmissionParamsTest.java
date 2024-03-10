@@ -114,7 +114,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		JDFDoc d = new JDFDoc(ElementName.QUEUE);
 		theQueue = (JDFQueue) d.getRoot();
@@ -128,7 +128,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddNull()
+	void testAddNull()
 	{
 		JDFResponse resp = qsp.addEntry(null, null, null);
 		assertEquals(2, resp.getReturnCode());
@@ -138,7 +138,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testURLInput()
+	void testURLInput()
 	{
 		assertNull(qsp.getURLInputStream());
 	}
@@ -147,7 +147,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddEntry()
+	void testAddEntry()
 	{
 		JDFResponse resp = qsp.addEntry(theQueue, null, null);
 		assertEquals(0, resp.getReturnCode());
@@ -158,7 +158,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddQueueEntry()
+	void testAddQueueEntry()
 	{
 		MyPair<JDFResponse, JDFQueueEntry> resp = qsp.addQueueEntry(theQueue, null, null);
 		assertEquals(0, resp.a.getReturnCode());
@@ -170,7 +170,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddEntryMany()
+	void testAddEntryMany()
 	{
 		for (int i = 0; i < 20000; i++)
 		{
@@ -202,7 +202,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMimeURL()
+	void testGetMimeURL()
 	{
 		JDFDoc d1 = new JDFDoc("JMF");
 		d1.setOriginalFileName("JMF.jmf");
@@ -236,7 +236,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testSetReturnURL() throws Exception
+	void testSetReturnURL() throws Exception
 	{
 		qsp.setReturnURL((URL) null);
 		assertFalse(qsp.hasAttribute(AttributeName.RETURNURL));
@@ -248,7 +248,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testSetReturnJMFL() throws Exception
+	void testSetReturnJMFL() throws Exception
 	{
 		qsp.setReturnJMF((URL) null);
 		assertFalse(qsp.hasAttribute(AttributeName.RETURNJMF));

@@ -86,7 +86,7 @@ public class JDFAssemblyTest extends JDFTestCaseBase
 	 * test collecting attributes
 	 */
 	@Test
-	public void testGetAssemblyAttributes()
+	void testGetAssemblyAttributes()
 	{
 		JDFAssembly a = (JDFAssembly) new JDFDoc("Assembly").getRoot();
 		JDFAssembly a1 = (JDFAssembly) a.addPartition(EnumPartIDKey.PartVersion, "v1");

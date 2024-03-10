@@ -98,7 +98,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWalkNoURL()
+	void testWalkNoURL()
 	{
 		try
 		{
@@ -127,7 +127,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testWantLog()
+	void testWantLog()
 	{
 		try
 		{
@@ -156,7 +156,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetSave()
+	void testGetSave()
 	{
 		try
 		{
@@ -183,7 +183,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 * extract from zip stream - also test CommentURL
 	 */
 	@Test
-	public void testReadZip()
+	void testReadZip()
 	{
 		final ZipReader zipReader = new ZipReader(sm_dirTestData + "testZip.zip");
 		zipReader.getEntry("dummy.jdf");
@@ -200,7 +200,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIgnoreSelf()
+	void testIgnoreSelf()
 	{
 		final JDFDoc d = testWalk();
 		assertNotNull(d);
@@ -216,7 +216,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRelativePath()
+	void testRelativePath()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -238,7 +238,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDir()
+	void testDir()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -261,7 +261,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRelativePathFromJDF()
+	void testRelativePathFromJDF()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -284,7 +284,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFromJDF()
+	void testFromJDF()
 	{
 		final File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn1");
 		FileUtil.deleteAll(inDir);
@@ -310,7 +310,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFromJDFBadTarget()
+	void testFromJDFBadTarget()
 	{
 		final File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn1");
 		FileUtil.deleteAll(inDir);
@@ -335,7 +335,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		final File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut1");
 		FileUtil.deleteAll(dumpDir);
@@ -347,7 +347,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFromJDFDouble()
+	void testFromJDFDouble()
 	{
 		final File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn1a");
 		FileUtil.deleteAll(inDir);
@@ -379,7 +379,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFromJDFDoubleDelete()
+	void testFromJDFDoubleDelete()
 	{
 		final File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn1a");
 		FileUtil.deleteAll(inDir);
@@ -412,7 +412,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFromJDFBadCommentURL()
+	void testFromJDFBadCommentURL()
 	{
 		final File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn1");
 		FileUtil.deleteAll(inDir);
@@ -441,7 +441,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFromJDFBad()
+	void testFromJDFBad()
 	{
 		if (PlatformUtil.isWindows())
 			return;
@@ -474,7 +474,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFromJDFBadParent()
+	void testFromJDFBadParent()
 	{
 		if (PlatformUtil.isWindows())
 			return;
@@ -510,7 +510,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testFromJDFBad2()
+	void testFromJDFBad2()
 	{
 		final File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn3");
 		FileUtil.deleteAll(inDir);
@@ -537,7 +537,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRelativePathFromJDFSpace()
+	void testRelativePathFromJDFSpace()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -564,7 +564,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRelativePathFromJDFUmlaut()
+	void testRelativePathFromJDFUmlaut()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -590,7 +590,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRelativePathDelete()
+	void testRelativePathDelete()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -614,7 +614,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddProtocol()
+	void testAddProtocol()
 	{
 		try
 		{

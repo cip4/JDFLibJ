@@ -90,7 +90,7 @@ public class JDFIDInfoTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testCreateNull()
+	void testCreateNull()
 	{
 		Assertions.assertNotNull(JDFIDInfo.createFromJDF(null, null));
 	}
@@ -99,7 +99,7 @@ public class JDFIDInfoTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testCreateNode()
+	void testCreateNode()
 	{
 		final JDFNode jdf = new JDFDoc("JDF").getJDFRoot();
 		jdf.setCategory("foo");

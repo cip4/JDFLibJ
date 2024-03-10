@@ -92,7 +92,7 @@ public class JDFNodeProductTest {
 	 * 
 	 */
 	@Test
-	public void testBugBuild058()
+	void testBugBuild058()
 	{
 		// get the JDF document root element
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);

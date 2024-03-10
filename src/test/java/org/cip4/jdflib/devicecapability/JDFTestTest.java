@@ -88,7 +88,7 @@ import org.junit.jupiter.api.Test;
 public class JDFTestTest extends JDFTestCaseBase
 {
 	@Test
-	public void testValidTest1()
+	void testValidTest1()
 	{
 		JDFDoc d = new JDFDoc(ElementName.TEST);
 		JDFTest t = (JDFTest) d.getRoot();
@@ -102,7 +102,7 @@ public class JDFTestTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////////
 
 	@Test
-	public void testValidTest2()
+	void testValidTest2()
 	{
 		JDFDoc d = new JDFDoc(ElementName.TEST);
 		JDFTest t = (JDFTest) d.getRoot();
@@ -122,7 +122,7 @@ public class JDFTestTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////////
 
 	@Test
-	public void testFitsContext()
+	void testFitsContext()
 	{
 		JDFDoc d = new JDFDoc(ElementName.TEST);
 		JDFTest t = (JDFTest) d.getRoot();

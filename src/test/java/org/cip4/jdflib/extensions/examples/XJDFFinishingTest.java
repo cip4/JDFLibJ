@@ -73,7 +73,7 @@ public class XJDFFinishingTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBundlePallet()
+	void testBundlePallet()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Bundle", null, null);
 		xjdfHelper.setTypes(EnumType.Palletizing.getName());
@@ -115,7 +115,7 @@ public class XJDFFinishingTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNestedCutBlock()
+	void testNestedCutBlock()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Bundle", null, null);
 		xjdfHelper.addType(EnumType.Cutting);
@@ -185,7 +185,7 @@ public class XJDFFinishingTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMetaDataMapBarcode()
+	void testMetaDataMapBarcode()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Barcode", "Metadata", null);
 		xjdfHelper.setTypes(EnumType.Verification.getName());
@@ -216,7 +216,7 @@ public class XJDFFinishingTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

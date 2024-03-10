@@ -60,7 +60,7 @@ public class JDFColorPoolTest {
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		try
 		{
@@ -84,7 +84,7 @@ public class JDFColorPoolTest {
 	 *
 	 */
 	@Test
-	public void testGetColorWithName()
+	void testGetColorWithName()
 	{
 		Assertions.assertNotNull(cp.getColorWithName("Grün"), "grün");
 		boolean caught = false;
@@ -105,7 +105,7 @@ public class JDFColorPoolTest {
 	 *
 	 */
 	@Test
-	public void testGetCreateColorWithName()
+	void testGetCreateColorWithName()
 	{
 		Assertions.assertNotNull(cp.getCreateColorWithName("Grün", null), "grün");
 	}
@@ -116,7 +116,7 @@ public class JDFColorPoolTest {
 	 *
 	 */
 	@Test
-	public void testAppendColorWithName()
+	void testAppendColorWithName()
 	{
 		Assertions.assertNotNull(cp.appendColorWithName("Orange", "grün"), "grün");
 		Assertions.assertNotNull(cp.getCreateColorWithName("Orange", null), "grün");
@@ -135,7 +135,7 @@ public class JDFColorPoolTest {
 	 *
 	 */
 	@Test
-	public void testRemoveColor()
+	void testRemoveColor()
 	{
 		Assertions.assertEquals(cp.numChildElements("Color", null), 3, "num");
 		cp.removeColor("bar");
@@ -151,7 +151,7 @@ public class JDFColorPoolTest {
 	 *
 	 */
 	@Test
-	public void testDuplicateColor()
+	void testDuplicateColor()
 	{
 		Assertions.assertNull(cp.getDuplicateColors());
 		final JDFColor c = cp.appendColorWithName("grun", "grun");
@@ -165,7 +165,7 @@ public class JDFColorPoolTest {
 	 *
 	 */
 	@Test
-	public void testDuplicateGetColor()
+	void testDuplicateGetColor()
 	{
 		Assertions.assertNull(cp.getDuplicateColors());
 		final JDFColor c = cp.appendColorWithName("grun", "grun");

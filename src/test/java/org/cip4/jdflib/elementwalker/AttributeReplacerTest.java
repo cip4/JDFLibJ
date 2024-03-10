@@ -89,7 +89,7 @@ public class AttributeReplacerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReplace()
+	void testReplace()
 	{
 		final AttributeReplacer rep = new AttributeReplacer("ID", "foo", null);
 		final KElement e = new XMLDoc("r", null).getRoot();
@@ -105,7 +105,7 @@ public class AttributeReplacerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReplaceNull()
+	void testReplaceNull()
 	{
 		final AttributeReplacer rep = new AttributeReplacer("ID", null, null);
 		final KElement e = new XMLDoc("r", null).getRoot();
@@ -121,7 +121,7 @@ public class AttributeReplacerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRegeExp()
+	void testRegeExp()
 	{
 		final AttributeReplacer rep = new AttributeReplacer("ID", "foo", "b");
 		final KElement e = new XMLDoc("r", null).getRoot();
@@ -137,7 +137,7 @@ public class AttributeReplacerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReplaceMap()
+	void testReplaceMap()
 	{
 		final JDFAttributeMap m = new JDFAttributeMap("ID", "foo");
 		m.put("c", (String) null);

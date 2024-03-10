@@ -86,7 +86,7 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSenderID()
+	void testSenderID()
 	{
 		JMFBuilderFactory.setSenderID(getClass(), "s1");
 		Assertions.assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()).getSenderID(), "s1");
@@ -97,7 +97,7 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAgentName()
+	void testAgentName()
 	{
 		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		b.setAgentName("a1");
@@ -111,7 +111,7 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAgentVersion()
+	void testAgentVersion()
 	{
 		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		b.setAgentVersion("a1");
@@ -125,7 +125,7 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAcknowledgeURL()
+	void testAcknowledgeURL()
 	{
 		JMFBuilderFactory.setAcknowledgeURL(getClass(), "a1");
 		Assertions.assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()).getAcknowledgeURL(), "a1");
@@ -136,7 +136,7 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSame()
+	void testSame()
 	{
 		Assertions.assertNotNull(JMFBuilderFactory.getJMFBuilder(getClass()));
 		Assertions.assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()), JMFBuilderFactory.getJMFBuilder(getClass()));

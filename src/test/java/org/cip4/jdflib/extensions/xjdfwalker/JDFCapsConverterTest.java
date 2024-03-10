@@ -88,7 +88,7 @@ public class JDFCapsConverterTest extends JDFTestCaseBase
 	 * TODO Please insert comment!
 	 */
 	@Test
-	public void testConvert1()
+	void testConvert1()
 	{
 		JDFCapsConverter c = new JDFCapsConverter();
 		KElement e = JDFDoc.parseFile(sm_dirTestData + "devcap.xml").getRoot();
@@ -101,7 +101,7 @@ public class JDFCapsConverterTest extends JDFTestCaseBase
 	 * TODO Please insert comment!
 	 */
 	@Test
-	public void testConvertGeneric()
+	void testConvertGeneric()
 	{
 		XJDF20 c = new XJDF20();
 		KElement e = JDFDoc.parseFile(sm_dirTestData + "devcap.xml").getRoot();

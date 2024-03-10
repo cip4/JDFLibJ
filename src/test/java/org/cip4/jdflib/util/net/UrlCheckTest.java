@@ -73,7 +73,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPing()
+	void testPing()
 	{
 		if (!isTestNetwork())
 			return;
@@ -93,7 +93,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHTTPDetails()
+	void testHTTPDetails()
 	{
 		if (!isTestNetwork())
 			return;
@@ -116,7 +116,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHTTPDetailsString()
+	void testHTTPDetailsString()
 	{
 		final HTTPDetails det = new HTTPDetails();
 		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
@@ -129,7 +129,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBuffer()
+	void testBuffer()
 	{
 		if (!isTestNetwork())
 			return;
@@ -144,7 +144,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPingRC()
+	void testPingRC()
 	{
 		if (!isTestNetwork())
 			return;
@@ -156,7 +156,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPingRCGet()
+	void testPingRCGet()
 	{
 		if (!isTestNetwork())
 			return;
@@ -169,7 +169,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	 */
 	@SuppressWarnings("resource")
 	@Test
-	public void testPingRCPost()
+	void testPingRCPost()
 	{
 		if (!isTestNetwork())
 			return;
@@ -183,7 +183,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPingRC()
+	void testGetPingRC()
 	{
 		if (!isTestNetwork())
 			return;

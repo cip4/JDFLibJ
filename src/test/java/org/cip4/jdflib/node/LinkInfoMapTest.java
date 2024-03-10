@@ -48,7 +48,7 @@ public class LinkInfoMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinkInfoMap()
+	void testGetLinkInfoMap()
 	{
 		final LinkInfoMap linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);
 		Assertions.assertNotNull(linkInfo);
@@ -59,7 +59,7 @@ public class LinkInfoMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetStar()
+	void testGetStar()
 	{
 		final LinkInfoMap linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.Verification, null);
 		Assertions.assertNotNull(linkInfo.getStar(ElementName.COMPONENT, true));
@@ -73,7 +73,7 @@ public class LinkInfoMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMerge()
+	void testMerge()
 	{
 		final LinkInfoMap linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);
 		final LinkInfoMap linkInfo0 = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);

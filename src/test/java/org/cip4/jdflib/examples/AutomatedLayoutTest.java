@@ -121,7 +121,7 @@ public class AutomatedLayoutTest extends ExampleTest
 	 * @return
 	 */
 	@Test
-	public void testAutomatedStripping() throws Exception
+	void testAutomatedStripping() throws Exception
 	{
 		n.setType(EnumType.Stripping);
 		stripParams = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, null, EnumUsage.Input, null, null, null, null);
@@ -140,7 +140,7 @@ public class AutomatedLayoutTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		KElement.setLongID(false);
 		JDFAudit.setStaticAgentName(null);
@@ -157,7 +157,7 @@ public class AutomatedLayoutTest extends ExampleTest
 	// ///////////////////////////////////////////////////
 
 	@Test
-	public void testAutomateLayout_PlateSet() throws Exception
+	void testAutomateLayout_PlateSet() throws Exception
 	{
 		for (int loop = 0; loop < 3; loop++)
 		{
@@ -254,7 +254,7 @@ public class AutomatedLayoutTest extends ExampleTest
 	// ///////////////////////////////////////////////////
 
 	@Test
-	public void testAutomateLayout1() throws Exception
+	void testAutomateLayout1() throws Exception
 	{
 		n.setXMLComment("This is the simplest example of an automated layout\n" + "The structure is aligned as closely as possible with a static Layout\n"
 				+ "note that the actual processes and outputs have been omitted for brevity", true);
@@ -315,7 +315,7 @@ public class AutomatedLayoutTest extends ExampleTest
 	// ///////////////////////////////////////////////////
 
 	@Test
-	public void testAutomateLayout2() throws Exception
+	void testAutomateLayout2() throws Exception
 	{
 		n.setXMLComment("This another example of an automated layout\n"
 				+ "The structure is aligned close to a static Layout but additionally uses OrdExpression and allows for varying numbers of pages in the runlist\n"
@@ -377,7 +377,7 @@ public class AutomatedLayoutTest extends ExampleTest
 	// ///////////////////////////////////////////////////
 
 	@Test
-	public void testAutomateLayout3() throws Exception
+	void testAutomateLayout3() throws Exception
 	{
 		n.setXMLComment(
 				"This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"
@@ -449,7 +449,7 @@ public class AutomatedLayoutTest extends ExampleTest
 	// ///////////////////////////////////////////////////
 
 	@Test
-	public void testAutomateLayout4() throws Exception
+	void testAutomateLayout4() throws Exception
 	{
 		n.setXMLComment(
 				"This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"
@@ -497,7 +497,7 @@ public class AutomatedLayoutTest extends ExampleTest
 	}
 
 	@Test
-	public void testAutomatedStrippingCutAndStack() throws Exception
+	void testAutomatedStrippingCutAndStack() throws Exception
 	{
 		n.setType(EnumType.Stripping);
 		stripParams = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, null, EnumUsage.Input, null, null, null, null);
@@ -534,7 +534,7 @@ public class AutomatedLayoutTest extends ExampleTest
 	 * @throws Exception
 	 */
 	@Test
-	public void testAutomatedBooklet1() throws Exception
+	void testAutomatedBooklet1() throws Exception
 	{
 		n.setXMLComment("This is a simple Automated Booklet using negative ords\n" + "New Attribute @OrdsConsumed limits the number of ords consumed by an automated Layout\n"
 				+ "Negative Ord values are assumed to flow backwards\n" + "MaxOrd is not specified and must be calculated by counting the number of different ord values\n"
@@ -581,7 +581,7 @@ public class AutomatedLayoutTest extends ExampleTest
 	 * @throws Exception
 	 */
 	@Test
-	public void testTaggedAutomatedBooklet() throws Exception
+	void testTaggedAutomatedBooklet() throws Exception
 	{
 		n.setXMLComment("This is a simple Automated Booklet using negative ords and meta data tags\n"
 				+ "New Attribute @OrdsConsumed limits the number of ords consumed by an automated Layout\n" + "Negative Ord values are assumed to flow backwards\n"
@@ -695,7 +695,7 @@ public class AutomatedLayoutTest extends ExampleTest
 	 * @throws Exception
 	 */
 	@Test
-	public void testAutomatedBookletWithCover() throws Exception
+	void testAutomatedBookletWithCover() throws Exception
 	{
 		for (int j = 0; j < 2; j++)
 		{
@@ -836,7 +836,7 @@ public class AutomatedLayoutTest extends ExampleTest
 	 * @throws Exception
 	 */
 	@Test
-	public void testCutAndStack() throws Exception
+	void testCutAndStack() throws Exception
 	{
 		n.setXMLComment("This is a simple cut and stack layout witrh 2 stacks of one page each (two sided)\n", true);
 

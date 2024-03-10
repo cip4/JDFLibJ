@@ -73,7 +73,7 @@ public class XJDFLayoutElementProductionTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testLoPPage()
+	void testLoPPage()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "PageSize", null);
 		xjdfHelper.setTypes(JDFConstants.LAYOUTELEMENTPRODUCTION);
@@ -101,7 +101,7 @@ public class XJDFLayoutElementProductionTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testLoPDataList()
+	void testLoPDataList()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "DataList", null);
 		xjdfHelper.setTypes(JDFConstants.LAYOUTELEMENTPRODUCTION);
@@ -128,7 +128,7 @@ public class XJDFLayoutElementProductionTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testLoPBarcode()
+	void testLoPBarcode()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "Barcode", null);
 		xjdfHelper.setTypes(JDFConstants.LAYOUTELEMENTPRODUCTION);
@@ -166,7 +166,7 @@ public class XJDFLayoutElementProductionTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testLoPShape()
+	void testLoPShape()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "ShapeDef", null);
 		xjdfHelper.setTypes(JDFConstants.LAYOUTELEMENTPRODUCTION);
@@ -193,7 +193,7 @@ public class XJDFLayoutElementProductionTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testLoPBox()
+	void testLoPBox()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "ShapeDef", null);
 		xjdfHelper.setTypes(JDFConstants.LAYOUTELEMENTPRODUCTION);
@@ -219,7 +219,7 @@ public class XJDFLayoutElementProductionTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

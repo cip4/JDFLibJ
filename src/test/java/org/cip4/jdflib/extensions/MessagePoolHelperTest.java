@@ -49,7 +49,7 @@ public class MessagePoolHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendMessage()
+	void testAppendMessage()
 	{
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
 		final AuditPoolHelper ah = new AuditPoolHelper(auditPool);
@@ -62,7 +62,7 @@ public class MessagePoolHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMessage()
+	void testGetMessage()
 	{
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
 		final AuditPoolHelper ah = new AuditPoolHelper(auditPool);
@@ -77,7 +77,7 @@ public class MessagePoolHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMessageHelper()
+	void testGetMessageHelper()
 	{
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
 		final AuditPoolHelper ah = new AuditPoolHelper(auditPool);

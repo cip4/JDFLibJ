@@ -68,7 +68,7 @@ public class IDFinderTest extends JDFTestCaseBase
 	 * Test method for {@link IDFinder#getMap(KElement)}.
 	 */
 	@Test
-	public void testGetMap()
+	void testGetMap()
 	{
 		final IDFinder finder = new IDFinder();
 		final Map<String, IDPart> m = finder.getMap(root);
@@ -79,7 +79,7 @@ public class IDFinderTest extends JDFTestCaseBase
 	 * Test method for {@link IDFinder#getMap(KElement)}.
 	 */
 	@Test
-	public void testSignatureName()
+	void testSignatureName()
 	{
 		final IDFinder finder = new IDFinder();
 		final Map<String, IDPart> m = finder.getMap(root);
@@ -105,7 +105,7 @@ public class IDFinderTest extends JDFTestCaseBase
 	 * Test method for {@link IDFinder#getMap(KElement)}.
 	 */
 	@Test
-	public void testContactType()
+	void testContactType()
 	{
 		JDFPart part = (JDFPart) new JDFDoc("Part").getRoot();
 		for (EnumPartIDKey e : EnumPartIDKey.getEnumList())
@@ -124,7 +124,7 @@ public class IDFinderTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		root = new JDFDoc("XJDF").getRoot();

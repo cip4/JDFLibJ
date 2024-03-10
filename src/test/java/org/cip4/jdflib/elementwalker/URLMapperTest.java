@@ -89,7 +89,7 @@ public class URLMapperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMapToUrl()
+	void testMapToUrl()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, EnumUsage.Input);
@@ -104,7 +104,7 @@ public class URLMapperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testWantLog()
+	void testWantLog()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, EnumUsage.Input);

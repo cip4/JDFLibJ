@@ -99,7 +99,7 @@ public class WalkIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testProofingIntent()
+	void testProofingIntent()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);
@@ -116,7 +116,7 @@ public class WalkIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFoldingIntent()
+	void testFoldingIntent()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);
@@ -133,7 +133,7 @@ public class WalkIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHoleMakingIntent()
+	void testHoleMakingIntent()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);
@@ -152,7 +152,7 @@ public class WalkIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHoleMakingIntentLine()
+	void testHoleMakingIntentLine()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);
@@ -176,7 +176,7 @@ public class WalkIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHoleMakingIntentList()
+	void testHoleMakingIntentList()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);
@@ -200,7 +200,7 @@ public class WalkIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInsertingIntent() throws JDFException, DataFormatException
+	void testInsertingIntent() throws JDFException, DataFormatException
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);

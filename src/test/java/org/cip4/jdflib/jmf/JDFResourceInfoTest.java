@@ -64,7 +64,7 @@ public class JDFResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateCopy()
+	void testCreateCopy()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFLayout l = (JDFLayout) n.addResource("Layout", EnumUsage.Input);
@@ -84,7 +84,7 @@ public class JDFResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateNoCopy()
+	void testCreateNoCopy()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFLayout l = (JDFLayout) n.addResource("Layout", EnumUsage.Input);
@@ -104,7 +104,7 @@ public class JDFResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testOrientation()
+	void testOrientation()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -122,7 +122,7 @@ public class JDFResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetLink()
+	void testSetLink()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -139,7 +139,7 @@ public class JDFResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetLinkName()
+	void testSetLinkName()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -155,7 +155,7 @@ public class JDFResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetLinkResID()
+	void testSetLinkResID()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -171,7 +171,7 @@ public class JDFResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPart()
+	void testSetPart()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "S1");
@@ -187,7 +187,7 @@ public class JDFResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreatePart()
+	void testCreatePart()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "S1");
@@ -203,7 +203,7 @@ public class JDFResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPart_ID()
+	void testSetPart_ID()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "S1");
@@ -219,7 +219,7 @@ public class JDFResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPartPartition()
+	void testSetPartPartition()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "S1");
@@ -237,7 +237,7 @@ public class JDFResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetLinkUsage()
+	void testSetLinkUsage()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);

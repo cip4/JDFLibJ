@@ -71,7 +71,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testAddSheet1()
+	void testAddSheet1()
 	{
 		theHelper.getRoot().setXMLComment("Assume incremental adding of an additional 3rd plate", true);
 		theHelper.getRoot().setAttribute("Types", "PlateMaking");
@@ -105,7 +105,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testAddProcess()
+	void testAddProcess()
 	{
 		theHelper.getRoot().setXMLComment("Added Varnishing - how do we differentiate varnishing only from add varnishing\n", true);
 		theHelper.getRoot().setAttribute("Types", "Varnishing");
@@ -119,7 +119,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testProductOnly()
+	void testProductOnly()
 	{
 		theHelper.getRoot().setXMLComment("Product description only\n", true);
 		theHelper.setJobID("j");
@@ -155,7 +155,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testRemoveSheet()
+	void testRemoveSheet()
 	{
 		theHelper.getRoot().setXMLComment("Assume incremental removal of an existing 3rd plate", true);
 		theHelper.getRoot().setAttribute("Types", "PlateMaking");
@@ -179,7 +179,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testUpdateAmount()
+	void testUpdateAmount()
 	{
 		theHelper.getRoot().setXMLComment("update the required amount for sheet=s3", true);
 		theHelper.getRoot().setAttribute("Types", "ConventionalPrinting");
@@ -198,7 +198,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testCPFromScratch()
+	void testCPFromScratch()
 	{
 		theHelper = new XJDFHelper(null);
 		theXJDF = theHelper.getRoot();
@@ -239,7 +239,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	 *
 	 */
 	@Test
-	public void testFromCPGoldenTicket()
+	void testFromCPGoldenTicket()
 	{
 		final MISCPGoldenTicket gt = new MISCPGoldenTicket(2, EnumVersion.Version_1_4, 2, 2, true, null);
 		gt.assign(null);

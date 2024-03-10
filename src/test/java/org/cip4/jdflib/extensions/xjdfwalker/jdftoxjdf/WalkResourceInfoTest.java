@@ -58,7 +58,7 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAmount()
+	void testAmount()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		final JDFSignal sig = jmf.getSignal(0);
@@ -75,7 +75,7 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTotalAmount()
+	void testTotalAmount()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		final JDFSignal sig = jmf.getSignal(0);
@@ -94,7 +94,7 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResName()
+	void testResName()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		final JDFSignal sig = jmf.getSignal(0);
@@ -114,7 +114,7 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAuditPool()
+	void testAuditPool()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		final JDFSignal sig = jmf.getSignal(0);
@@ -132,7 +132,7 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNameOnly()
+	void testNameOnly()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		final JDFSignal sig = jmf.getSignal(0);
@@ -150,7 +150,7 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMISDetails()
+	void testMISDetails()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		final JDFSignal sig = jmf.getSignal(0);
@@ -169,7 +169,7 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNoResourceName()
+	void testNoResourceName()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		final JDFSignal sig = jmf.getSignal(0);
@@ -187,7 +187,7 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNoResourceNamePart()
+	void testNoResourceNamePart()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		final JDFSignal sig = jmf.getSignal(0);

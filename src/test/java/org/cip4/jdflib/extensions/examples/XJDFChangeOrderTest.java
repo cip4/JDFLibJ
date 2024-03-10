@@ -75,7 +75,7 @@ public class XJDFChangeOrderTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -85,7 +85,7 @@ public class XJDFChangeOrderTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testAmount()
+	void testAmount()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "Amount", null);
 		xjdfHelper.setTypes("Folding");
@@ -104,7 +104,7 @@ public class XJDFChangeOrderTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSchedule()
+	void testSchedule()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "Reschedule", new VJDFAttributeMap(new JDFAttributeMap("SheetName", "Sheet1")));
 		xjdfHelper.setTypes("Folding");
@@ -122,7 +122,7 @@ public class XJDFChangeOrderTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testAddColor()
+	void testAddColor()
 	{
 		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "Sheet1");
 		final XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "AddColor", new VJDFAttributeMap(map));
@@ -172,7 +172,7 @@ public class XJDFChangeOrderTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testInlineVarnish()
+	void testInlineVarnish()
 	{
 		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "Sheet1");
 		final XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "InlineVarnish", new VJDFAttributeMap(map));
@@ -215,7 +215,7 @@ public class XJDFChangeOrderTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testRemoveVarnish()
+	void testRemoveVarnish()
 	{
 		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "Body");
 		final XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "RemoveVarnish", new VJDFAttributeMap(map));
@@ -237,7 +237,7 @@ public class XJDFChangeOrderTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testAddVarnish()
+	void testAddVarnish()
 	{
 		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "Sheet1");
 		final XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "AddVarnish", new VJDFAttributeMap(map));
@@ -290,7 +290,7 @@ public class XJDFChangeOrderTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testDevice()
+	void testDevice()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "Device", new VJDFAttributeMap(new JDFAttributeMap("SheetName", "Sheet1")));
 		xjdfHelper.setTypes("Folding");
@@ -310,7 +310,7 @@ public class XJDFChangeOrderTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testPaper()
+	void testPaper()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "Paper", new VJDFAttributeMap(new JDFAttributeMap("SheetName", "Sheet1")));
 		xjdfHelper.setTypes("ConventionalPrinting");

@@ -94,7 +94,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testBase()
+	void testBase()
 	{
 		final BaseGoldenTicket bgt = new BaseGoldenTicket(1, null);
 		bgt.assign(null);
@@ -110,7 +110,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testJMF()
+	void testJMF()
 	{
 		final JMFGoldenTicket bgt = new JMFGoldenTicket(1, null);
 		bgt.assign(null);
@@ -127,7 +127,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testMIS()
+	void testMIS()
 	{
 		final MISGoldenTicket bgt = new MISGoldenTicket(2, null, 2);
 		bgt.assign(null);
@@ -146,7 +146,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testProductCreatePostCards()
+	void testProductCreatePostCards()
 	{
 		pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_3, 0, 0);
 		pgt.assign(null);
@@ -162,7 +162,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testProductCreateAddressBook()
+	void testProductCreateAddressBook()
 	{
 
 		pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_5, 0, 0);
@@ -179,7 +179,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testProductCreateWatches()
+	void testProductCreateWatches()
 	{
 
 		pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_3, 0, 0);
@@ -195,7 +195,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testProductMultiLabel()
+	void testProductMultiLabel()
 	{
 
 		pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_3, 0, 0);
@@ -212,7 +212,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testProductCreateHarley()
+	void testProductCreateHarley()
 	{
 		pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_5, 0, 0);
 		pgt.assign(null);
@@ -227,7 +227,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testProductCreateHDCity()
+	void testProductCreateHDCity()
 	{
 
 		pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_3, 0, 0);
@@ -245,7 +245,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
 		KElement.setLongID(false);
@@ -258,7 +258,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 	 * @see BaseGoldenTicketTest#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		JDFAudit.setStaticAgentName(agentName);
 		KElement.setLongID(true);

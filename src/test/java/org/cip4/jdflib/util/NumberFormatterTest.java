@@ -85,7 +85,7 @@ public class NumberFormatterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFormat()
+	void testFormat()
 	{
 		final NumberFormatter numberFormatter = new NumberFormatter();
 		numberFormatter.setZapp0(true);
@@ -100,7 +100,7 @@ public class NumberFormatterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFormatExp()
+	void testFormatExp()
 	{
 		final NumberFormatter numberFormatter = new NumberFormatter();
 		assertEquals("25000000000000000000000000000000000000000", numberFormatter.formatDouble(2.5e40));
@@ -112,7 +112,7 @@ public class NumberFormatterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFormatPrecision()
+	void testFormatPrecision()
 	{
 		final NumberFormatter numberFormatter = new NumberFormatter();
 		numberFormatter.setZapp0(false);
@@ -135,7 +135,7 @@ public class NumberFormatterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFormatInt()
+	void testFormatInt()
 	{
 		final NumberFormatter numberFormatter = new NumberFormatter();
 		numberFormatter.setZapp0(false);
@@ -159,7 +159,7 @@ public class NumberFormatterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testFormatIntPerf()
+	void testFormatIntPerf()
 	{
 		final NumberFormatter numberFormatter = new NumberFormatter();
 		long t0 = System.currentTimeMillis();
@@ -220,7 +220,7 @@ public class NumberFormatterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFormatDouble()
+	void testFormatDouble()
 	{
 		final NumberFormatter numberFormatter = new NumberFormatter();
 		assertEquals("3", numberFormatter.formatDouble(3.0));

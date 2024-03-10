@@ -83,7 +83,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateElementNoNS()
+	void testCreateElementNoNS()
 	{
 		final XMLDoc d = new JDFDoc("FOO:TEST");
 		final KElement root = d.getRoot();
@@ -96,7 +96,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateElementNoNS2()
+	void testCreateElementNoNS2()
 	{
 		final JDFDoc d = new JDFDoc("FOO:TEST");
 		final JDFElement root = (JDFElement) d.getRoot();
@@ -107,7 +107,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsDirty()
+	void testIsDirty()
 	{
 		final JDFDoc doc = new JDFDoc("test");
 		final KElement e = doc.getRoot();
@@ -141,7 +141,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 * just a minor test. It only checks the precessgroup count and also the class casts in GetProcessGroups
 	 */
 	@Test
-	public void testRoots()
+	void testRoots()
 	{
 		final String xmlFile = "job.jdf";
 
@@ -162,7 +162,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 * just a minor test. It only checks the precessgroup count and also the class casts in GetProcessGroups
 	 */
 	@Test
-	public void testManyNew()
+	void testManyNew()
 	{
 		for (int i = 0; i < 10000; i++)
 		{
@@ -175,7 +175,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 * just a minor test. It only checks that cloned docs are actually different
 	 */
 	@Test
-	public void testClone()
+	void testClone()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 
@@ -192,7 +192,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCloneTwice()
+	void testCloneTwice()
 	{
 		final JDFDoc d1 = new JDFDoc("JDF");
 		final JDFNode node = d1.getJDFRoot();
@@ -208,7 +208,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyXMLDoc()
+	void testCopyXMLDoc()
 	{
 		final XMLDoc d1 = new XMLDoc("JDF", null);
 		KElement root = d1.getRoot();
@@ -226,7 +226,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 * just a minor test. It only checks that cloned docs are actually different
 	 */
 	@Test
-	public void testCloneNav()
+	void testCloneNav()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode root = d.getJDFRoot();
@@ -249,7 +249,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testForeignRoot()
+	void testForeignRoot()
 	{
 		final XMLDoc doc = new XMLDoc("Foo", "fooNS");
 		final KElement r = doc.getRoot();
@@ -270,7 +270,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 * just a minor test. It only checks the precessgroup count and also the class casts in GetProcessGroups
 	 */
 	@Test
-	public void testNullParser()
+	void testNullParser()
 	{
 		JDFDoc doc = null;
 		final String foo = "wehflkh";
@@ -286,7 +286,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 * just a minor test. It only checks the precessgroup count and also the class casts in GetProcessGroups
 	 */
 	@Test
-	public void testRegisterCustomClass()
+	void testRegisterCustomClass()
 	{
 		JDFDoc.registerCustomClass("Foo123", JDFRunList.class.getName());
 		final JDFResourcePool resourcePool = new JDFDoc("JDF").getJDFRoot().getCreateResourcePool();
@@ -301,7 +301,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 * test graceful null handling
 	 */
 	@Test
-	public void testNull()
+	void testNull()
 	{
 		new JDFDoc((XMLDoc) null);
 		new JDFDoc(new XMLDoc());
@@ -312,7 +312,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 * test graceful null handling
 	 */
 	@Test
-	public void testReparse()
+	void testReparse()
 	{
 		final XMLDoc d = new XMLDoc(ElementName.JDF, null);
 		d.getRoot().appendElement(ElementName.AUDITPOOL);
@@ -326,7 +326,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJDFElementXJDF()
+	void testJDFElementXJDF()
 	{
 		final XMLDoc d = new XMLDoc("PrintTalk", null);
 		d.getRoot().appendElement("Request").appendElement(XJDFConstants.XJDF);
@@ -338,7 +338,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetContentType()
+	void testGetContentType()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		Assertions.assertEquals(d.getContentType(), "application/vnd.cip4-jdf+xml");
@@ -352,7 +352,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSchemaDefault()
+	void testSchemaDefault()
 	{
 		for (int i = 0; i < 3; i++)
 		{
@@ -376,7 +376,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNS()
+	void testNS()
 	{
 		final JDFDoc doc = new JDFDoc("foo:bar");
 		final String s = doc.write2String(2);
@@ -394,7 +394,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 * tests the correct handling of the namespaceuri when a namespace attribute is set
 	 */
 	@Test
-	public void testCreateElementNS()
+	void testCreateElementNS()
 	{
 		JDFDoc doc = new JDFDoc("foo:bar");
 		String s = doc.write2String(2);
@@ -414,7 +414,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 * tests the correct handling of the namespaceuri when a namespace attribute is set
 	 */
 	@Test
-	public void testCreateElement()
+	void testCreateElement()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode root = doc.getJDFRoot();
@@ -426,7 +426,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 * tests the correct handling of the namespaceuri when a namespace attribute is set
 	 */
 	@Test
-	public void testVersionFromName()
+	void testVersionFromName()
 	{
 		assertEquals(EnumVersion.Version_1_1, JDFDoc.getVersionFromDocType(null));
 		assertEquals(EnumVersion.Version_1_1, JDFDoc.getVersionFromDocType("JDF"));
@@ -440,7 +440,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 * tests the correct handling of the namespaceuri when a namespace attribute is set
 	 */
 	@Test
-	public void testCreateElementNull()
+	void testCreateElementNull()
 	{
 		final JDFDoc doc = new JDFDoc();
 		final JDFNode e = (JDFNode) doc.createElement("JDF");
@@ -451,7 +451,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetInitOnCreate()
+	void testSetInitOnCreate()
 	{
 		final JDFDoc doc = new JDFDoc();
 		doc.setInitOnCreate(false);
@@ -466,7 +466,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseDOM() throws SAXException, IOException
+	void testParseDOM() throws SAXException, IOException
 	{
 		final DOMParser domParser = new DOMParser();
 		domParser.parse(new InputSource(new StringReader("<JDF ID=\"1\"><AuditPool><Created ID=\"1\"/></AuditPool></JDF>")));
@@ -482,7 +482,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPerformance()
+	void testPerformance()
 	{
 		{
 			final JDFDoc doc = new JDFDoc("JDF");
@@ -572,7 +572,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCorrupt()
+	void testCorrupt()
 	{
 		JDFDoc doc = null;
 		String foo = "wehflkh";
@@ -594,7 +594,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEmptyString()
+	void testEmptyString()
 	{
 		final JDFDoc inMessageDoc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmfIn = inMessageDoc.getJMFRoot();

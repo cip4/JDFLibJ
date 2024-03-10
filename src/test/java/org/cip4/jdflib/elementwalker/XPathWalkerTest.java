@@ -86,7 +86,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testPerformanceFile() throws Exception
+	void testPerformanceFile() throws Exception
 	{
 		final CPUTimer ct = new CPUTimer(false);
 		final JDFDoc d = new JDFParser().parseFile(sm_dirTestData + "bigWhite.jdf");
@@ -106,7 +106,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testDataType() throws Exception
+	void testDataType() throws Exception
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFResource intent = d.getJDFRoot().addResource(ElementName.LAYOUTINTENT, null);
@@ -127,7 +127,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testCSV() throws Exception
+	void testCSV() throws Exception
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
@@ -146,7 +146,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testCSVUnique() throws Exception
+	void testCSVUnique() throws Exception
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		for (int i = 0; i < 100; i++)
@@ -214,7 +214,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 
 		super.setUp();

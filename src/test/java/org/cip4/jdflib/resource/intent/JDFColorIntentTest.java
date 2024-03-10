@@ -88,7 +88,7 @@ public class JDFColorIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendColorantICCStandard()
+	void testAppendColorantICCStandard()
 	{
 		JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
 		JDFStringSpan ns = ci.appendColorICCStandard();
@@ -99,7 +99,7 @@ public class JDFColorIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNColors()
+	void testGetNColors()
 	{
 		JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
 		ci.appendColorsUsed().setCMYK();
@@ -114,7 +114,7 @@ public class JDFColorIntentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNumVarnish()
+	void testGetNumVarnish()
 	{
 		JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
 		ci.appendColorsUsed().setCMYK();

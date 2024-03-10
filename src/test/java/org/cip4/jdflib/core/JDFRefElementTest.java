@@ -94,7 +94,7 @@ public class JDFRefElementTest extends JDFTestCaseBase
 	 * tests refelements pointing to non resources
 	 */
 	@Test
-	public void testGetBadTarget()
+	void testGetBadTarget()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(this).buildMilestone("Foo", "1234");
 		JDFNotification notification = jmf.getSignal(0).getNotification();
@@ -112,7 +112,7 @@ public class JDFRefElementTest extends JDFTestCaseBase
 	 *  
 	 */
 	@Test
-	public void testGetTarget()
+	void testGetTarget()
 	{
 		JDFDoc d = JDFTestCaseBase.creatXMDoc();
 		JDFNode n = d.getJDFRoot();
@@ -142,7 +142,7 @@ public class JDFRefElementTest extends JDFTestCaseBase
 	*  
 	*/
 	@Test
-	public void testGetTargetRoot()
+	void testGetTargetRoot()
 	{
 		JDFDoc d = JDFTestCaseBase.creatXMDoc();
 		JDFNode n = d.getJDFRoot();
@@ -161,7 +161,7 @@ public class JDFRefElementTest extends JDFTestCaseBase
 	 *  
 	 */
 	@Test
-	public void testInlineRefelement()
+	void testInlineRefelement()
 	{
 		JDFDoc d = JDFTestCaseBase.creatXMDoc();
 		JDFNode n = d.getJDFRoot();

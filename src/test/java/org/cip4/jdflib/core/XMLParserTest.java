@@ -55,7 +55,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStar()
+	void testStar()
 	{
 		final XMLDoc d = new XMLDoc("a*", null);
 		final String xml = d.toXML();
@@ -68,7 +68,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseFile()
+	void testParseFile()
 	{
 		for (int i = 0; i < 444; i++)
 		{
@@ -82,7 +82,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFatalError()
+	void testFatalError()
 	{
 		final String xml = "<a>aaa</b>";
 		final XMLParser p = new XMLParser();
@@ -94,7 +94,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFatalErrorFile()
+	void testFatalErrorFile()
 	{
 		final XMLParser p = new XMLParser();
 		Assertions.assertNull(p.parseFile(sm_dirTestData + "corrupt.jdf"));
@@ -105,7 +105,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetSchemaLocation()
+	void testSetSchemaLocation()
 	{
 		final XMLParser p = new XMLParser();
 		p.setSchemaLocation("foo", "./foo.com");
@@ -117,7 +117,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddSchemaLocation()
+	void testAddSchemaLocation()
 	{
 		final XMLParser p = new XMLParser();
 		p.addSchemaLocation("foo", "./foo.com");
@@ -131,7 +131,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMeanChars()
+	void testMeanChars()
 	{
 		final XMLParser p = new XMLParser();
 		final XMLDoc d = p.parseString("<foo a=\"SchuÌˆtz_Teil5_bel\"/>");
@@ -146,7 +146,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDirty()
+	void testDirty()
 	{
 		final XMLParser p = new XMLParser();
 		final XMLDoc d = p.parseString("<foo/>");
@@ -159,7 +159,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWantLog()
+	void testWantLog()
 	{
 		final XMLParser p = new XMLParser();
 		XMLErrorHandler.isWantLog();
@@ -176,7 +176,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSkip()
+	void testSkip()
 	{
 		final XMLParser p = new XMLParser();
 		final boolean b = XMLParser.m_searchStream;
@@ -195,7 +195,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	 */
 	@Override
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		XMLErrorHandler.setWantLog(true);
 		super.tearDown();

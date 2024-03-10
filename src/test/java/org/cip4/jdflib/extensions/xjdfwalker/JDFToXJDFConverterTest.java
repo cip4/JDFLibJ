@@ -194,7 +194,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testExtendedAddress()
+	void testExtendedAddress()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode n = createBaseProductNode();
@@ -226,7 +226,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCustomerInfoContact()
+	void testCustomerInfoContact()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode n = createBaseProductNode();
@@ -244,7 +244,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testForeignRef()
+	void testForeignRef()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode n = createBaseProductNode();
@@ -262,7 +262,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	// no test
-	public void testSpeed()
+	void testSpeed()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 
@@ -278,7 +278,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @throws StorageAccessException
 	 */
 	@Test
-	public void testparseRef()
+	void testparseRef()
 	{
 		final long ct = System.currentTimeMillis();
 		final String jobID = "Varnish" + ct;
@@ -334,7 +334,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		assertNotNull(conv.toString());
@@ -345,7 +345,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCustomerInfoContactPersonAddress()
+	void testCustomerInfoContactPersonAddress()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode n = createBaseProductNode();
@@ -369,7 +369,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCustomerInfo2Contact()
+	void testCustomerInfo2Contact()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode n = createBaseProductNode();
@@ -398,7 +398,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRefMediaFromInline()
+	void testRefMediaFromInline()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -416,7 +416,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	 */
 	@Test
-	public void testDeliveryIntent()
+	void testDeliveryIntent()
 	{
 		_testDeliveryIntent();
 	}
@@ -425,7 +425,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDependent()
+	void testDependent()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setJobPartID("p");
@@ -461,7 +461,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDependentMulti()
+	void testDependentMulti()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setJobPartID("p");
@@ -494,7 +494,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTypesMulti()
+	void testTypesMulti()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setJobPartID("p");
@@ -514,7 +514,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCPI()
+	void testCPI()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setJobPartID("p");
@@ -555,7 +555,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDependentMultiPart()
+	void testDependentMultiPart()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setJobPartID("p");
@@ -616,7 +616,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testSpanIntent()
+	void testSpanIntent()
 	{
 		final JDFNode nP = createBaseProductNode();
 		nP.setType(EnumType.Product);
@@ -642,7 +642,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testConvertingConfig()
+	void testConvertingConfig()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "dielayoutproduction.jdf");
 
@@ -660,7 +660,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @throws DataFormatException
 	 */
 	@Test
-	public void testTCPPartitioned() throws DataFormatException
+	void testTCPPartitioned() throws DataFormatException
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.setType(EnumType.Stripping);
@@ -702,7 +702,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @throws DataFormatException
 	 */
 	@Test
-	public void testStrippingMultiBS() throws DataFormatException
+	void testStrippingMultiBS() throws DataFormatException
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.setType(EnumType.Stripping);
@@ -740,7 +740,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @throws DataFormatException
 	 */
 	@Test
-	public void testStrippingMultiBSPos() throws DataFormatException
+	void testStrippingMultiBSPos() throws DataFormatException
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.setType(EnumType.Stripping);
@@ -786,7 +786,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @throws DataFormatException
 	 */
 	@Test
-	public void testStrippingMultiBSPosBSName() throws DataFormatException
+	void testStrippingMultiBSPosBSName() throws DataFormatException
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.setType(EnumType.Stripping);
@@ -835,7 +835,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @throws DataFormatException
 	 */
 	@Test
-	public void testTCPRef() throws DataFormatException
+	void testTCPRef() throws DataFormatException
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.setType(EnumType.Stripping);
@@ -877,7 +877,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @throws DataFormatException
 	 */
 	@Test
-	public void testFold() throws DataFormatException
+	void testFold() throws DataFormatException
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.setType(EnumType.Folding);
@@ -897,7 +897,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @throws DataFormatException
 	 */
 	@Test
-	public void testTCPSet() throws DataFormatException
+	void testTCPSet() throws DataFormatException
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.setType(EnumType.Stripping);
@@ -941,7 +941,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @throws DataFormatException
 	 */
 	@Test
-	public void testTCPSig() throws DataFormatException
+	void testTCPSig() throws DataFormatException
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.setType(EnumType.Stripping);
@@ -987,7 +987,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testMultiTypes()
+	void testMultiTypes()
 	{
 		final JDFNode nP = createBaseProductNode();
 		nP.addJDFNode(EnumType.ImageSetting);
@@ -1002,7 +1002,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testMultiTypeProductPart()
+	void testMultiTypeProductPart()
 	{
 		final JDFNode nP = createBaseProductNode();
 		nP.addJDFNode(EnumType.ImageSetting).setJobPartID("j1");
@@ -1017,7 +1017,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testSingleTypes()
+	void testSingleTypes()
 	{
 		final JDFNode nP = createBaseProductNode();
 		nP.setType(EnumType.ImageSetting);
@@ -1031,7 +1031,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testPackingIntent()
+	void testPackingIntent()
 	{
 		final JDFNode nP = createBaseProductNode();
 		final JDFPackingIntent pi = (JDFPackingIntent) nP.addResource(ElementName.PACKINGINTENT, EnumUsage.Input);
@@ -1057,7 +1057,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testScreeningIntent()
+	void testScreeningIntent()
 	{
 		final JDFNode nP = createBaseProductNode();
 		final JDFScreeningIntent pi = (JDFScreeningIntent) nP.addResource(ElementName.SCREENINGINTENT, EnumUsage.Input);
@@ -1083,7 +1083,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testRetainResPool()
+	void testRetainResPool()
 	{
 		final JDFNode nP = createBaseProductNode();
 		final JDFScreeningIntent pi = (JDFScreeningIntent) nP.addResource(ElementName.SCREENINGINTENT, EnumUsage.Input);
@@ -1106,7 +1106,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testRetainPartID()
+	void testRetainPartID()
 	{
 		final JDFNode nP = createBaseProductNode();
 		nP.setJobPartID("jp1");
@@ -1127,7 +1127,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testPageList()
+	void testPageList()
 	{
 		_testPageList(false);
 	}
@@ -1137,7 +1137,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testPageListRetainAll()
+	void testPageListRetainAll()
 	{
 		_testPageList(true);
 	}
@@ -1190,7 +1190,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testPageListEmpty()
+	void testPageListEmpty()
 	{
 		_testPageListEmpty();
 	}
@@ -1200,7 +1200,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testPageListNS()
+	void testPageListNS()
 	{
 		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
 		root.setType(EnumType.Trapping);
@@ -1252,7 +1252,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSignatureName()
+	void testSignatureName()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
@@ -1277,7 +1277,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testKeepParameter()
+	void testKeepParameter()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -1296,7 +1296,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCleanupFalse()
+	void testCleanupFalse()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -1311,7 +1311,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCleanupTrue()
+	void testCleanupTrue()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -1326,7 +1326,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testComponentProductID()
+	void testComponentProductID()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		conv.setWantProduct(true);
@@ -1346,7 +1346,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDisjointingDPP()
+	void testDisjointingDPP()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/Disjointing.jdf");
 
@@ -1366,7 +1366,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testColorantControl()
+	void testColorantControl()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ImageSetting);
@@ -1404,7 +1404,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testColorantControlRefPool()
+	void testColorantControlRefPool()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ImageSetting);
@@ -1439,7 +1439,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testColorPool()
+	void testColorPool()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ImageSetting);
@@ -1460,7 +1460,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testColorPoolSpace()
+	void testColorPoolSpace()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ImageSetting);
@@ -1497,7 +1497,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testColorantControlSpace()
+	void testColorantControlSpace()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ImageSetting);
@@ -1521,7 +1521,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testColorantControlDCO()
+	void testColorantControlDCO()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ImageSetting);
@@ -1543,7 +1543,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testColorIntentStandard()
+	void testColorIntentStandard()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -1569,7 +1569,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testColorIntent()
+	void testColorIntent()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -1597,7 +1597,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testColorIntentCert()
+	void testColorIntentCert()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -1628,7 +1628,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testMultiBackwardProduct()
+	void testMultiBackwardProduct()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);
 		for (int i = 0; i < 2; i++)
@@ -1655,7 +1655,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeviceInfoStatus()
+	void testDeviceInfoStatus()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
@@ -1670,7 +1670,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeviceInfoEmployees()
+	void testDeviceInfoEmployees()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
@@ -1688,7 +1688,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeviceInfoModuleStatus()
+	void testDeviceInfoModuleStatus()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
@@ -1705,7 +1705,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeviceInfoModuleStatusSkip()
+	void testDeviceInfoModuleStatusSkip()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
@@ -1722,7 +1722,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJMFEmployee()
+	void testJMFEmployee()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.PipeClose);
 		jmf.getCommand(0).appendEmployee().setPersonalID("P1");
@@ -1740,7 +1740,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNodeEmployee()
+	void testNodeEmployee()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFEmployee emp = (JDFEmployee) n.addResource(ElementName.EMPLOYEE, EnumUsage.Input);
@@ -1765,7 +1765,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNodeInfoEmployee()
+	void testNodeInfoEmployee()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFNodeInfo ni = n.getCreateNodeInfo();
@@ -1795,7 +1795,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNodeInfoStatus()
+	void testNodeInfoStatus()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFNodeInfo ni = n.getCreateNodeInfo();
@@ -1809,7 +1809,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNodeInfoPartition()
+	void testNodeInfoPartition()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFNodeInfo ni = n.getCreateNodeInfo();
@@ -1834,7 +1834,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRef()
+	void testRef()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFResource r1 = n.addResource(ElementName.PAGELIST, EnumUsage.Input);
@@ -1861,7 +1861,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRefSelf()
+	void testRefSelf()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource r1 = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
@@ -1881,7 +1881,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testRunListDir()
+	void testRunListDir()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.RasterReading);
@@ -1896,7 +1896,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testRunListCopies()
+	void testRunListCopies()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.RasterReading);
@@ -1912,7 +1912,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testRunListRunPage()
+	void testRunListRunPage()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.RasterReading);
@@ -1937,7 +1937,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testRunListPages()
+	void testRunListPages()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.RasterReading);
@@ -1953,7 +1953,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testRunListPagesNeg()
+	void testRunListPagesNeg()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.RasterReading);
@@ -1979,7 +1979,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testRunListPagesLogicalPage()
+	void testRunListPagesLogicalPage()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.RasterReading);
@@ -2001,7 +2001,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testRunListPagesLogicalPageNeg()
+	void testRunListPagesLogicalPageNeg()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.RasterReading);
@@ -2023,7 +2023,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testMetaDataMulti()
+	void testMetaDataMulti()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.RasterReading);
@@ -2042,7 +2042,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResLocked()
+	void testResLocked()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource r1 = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
@@ -2059,7 +2059,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPartUsagePartsExplicit()
+	void testPartUsagePartsExplicit()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource dpp = n.addResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
@@ -2078,7 +2078,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPartUsagePartsImplicit()
+	void testPartUsagePartsImplicit()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource dpp = n.addResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
@@ -2102,7 +2102,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPartUsagePartsImplicitRoot()
+	void testPartUsagePartsImplicitRoot()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource dpp = n.addResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
@@ -2124,7 +2124,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPartUsagePartsImplicitRootRetain()
+	void testPartUsagePartsImplicitRootRetain()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource dpp = n.addResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
@@ -2146,7 +2146,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMixedMediaRef()
+	void testMixedMediaRef()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "mixedMediaRef.jdf");
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -2162,7 +2162,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMixedMediaRef2()
+	void testMixedMediaRef2()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "SaddleStitchBooklet_MixedMedia2.jdf");
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -2186,7 +2186,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPartUsagePartsImplicitRootWantImplicitNot()
+	void testPartUsagePartsImplicitRootWantImplicitNot()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource dpp = n.addResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
@@ -2210,7 +2210,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResUnit()
+	void testResUnit()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource r1 = n.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -2227,7 +2227,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResDescName()
+	void testResDescName()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource r1 = n.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -2243,7 +2243,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSourceRes()
+	void testSourceRes()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource m1 = n.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -2263,7 +2263,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWorkstepID()
+	void testWorkstepID()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFNodeInfo ni = n.getCreateNodeInfo();
@@ -2277,7 +2277,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testVersion()
+	void testVersion()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -2291,7 +2291,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCounterID()
+	void testCounterID()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFUsageCounter uc = (JDFUsageCounter) n.getCreateResource(ElementName.USAGECOUNTER, EnumUsage.Input, null);
@@ -2305,7 +2305,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMISDetails()
+	void testMISDetails()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFNodeInfo ni = n.getCreateNodeInfo();
@@ -2323,7 +2323,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPerson()
+	void testPerson()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFEmployee emp = (JDFEmployee) n.addResource(ElementName.EMPLOYEE, EnumUsage.Input);
@@ -2369,7 +2369,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPreview()
+	void testPreview()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Input);
@@ -2385,7 +2385,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDieLayoutMedia()
+	void testDieLayoutMedia()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFDieLayout dl = (JDFDieLayout) n.addResource(ElementName.DIELAYOUT, EnumUsage.Input);
@@ -2405,7 +2405,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	// @Test
-	public void testDigitalMixed()
+	void testDigitalMixed()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/MixedSides.jdf");
 		writeRoundTrip(n, "mixedsides");
@@ -2415,7 +2415,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGangElementMedia()
+	void testGangElementMedia()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFSheetOptimizingParams sop = (JDFSheetOptimizingParams) n.addResource(ElementName.SHEETOPTIMIZINGPARAMS, EnumUsage.Input);
@@ -2438,7 +2438,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResStatus()
+	void testResStatus()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Input);
@@ -2454,7 +2454,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResStatusMove()
+	void testResStatusMove()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Input);
@@ -2470,7 +2470,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testProductRetainAll()
+	void testProductRetainAll()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);
@@ -2487,7 +2487,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testProductPartVersion()
+	void testProductPartVersion()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);
@@ -2513,7 +2513,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testProductCoverBody()
+	void testProductCoverBody()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);
@@ -2539,7 +2539,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNotificationAudit()
+	void testNotificationAudit()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.getCreateAuditPool().addNotification(EnumClass.Error, "me", null).appendComment().setText("foo");
@@ -2560,7 +2560,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNotificationEvent()
+	void testNotificationEvent()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.getCreateAuditPool().addNotification(EnumClass.Error, "me", null).appendEvent().setEventID("IDfoo");
@@ -2581,7 +2581,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAuditEmployee()
+	void testAuditEmployee()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.getCreateAuditPool().addAudit(EnumAuditType.PhaseTime, "me");
@@ -2600,7 +2600,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testApprovalDetails()
+	void testApprovalDetails()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Approval);
@@ -2625,7 +2625,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testArtDeliveryRunLists()
+	void testArtDeliveryRunLists()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);
@@ -2642,7 +2642,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAuditCreated()
+	void testAuditCreated()
 	{
 		JDFAudit.setStaticAgentName("CIP4 Test Agent");
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -2661,7 +2661,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAuditProcessRun()
+	void testAuditProcessRun()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final VJDFAttributeMap maps = new VJDFAttributeMap();
@@ -2683,7 +2683,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDefVersion()
+	void testDefVersion()
 	{
 		assertEquals(EnumVersion.Version_2_1, JDFToXJDF.getDefaultVersion());
 	}
@@ -2692,7 +2692,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAmountPoolWaste()
+	void testAmountPoolWaste()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource media = n.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -2714,7 +2714,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAncestorPool()
+	void testAncestorPool()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.appendAncestorPool().appendAncestor().setJobPartID("j2");
@@ -2729,7 +2729,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAncestorPoolComments()
+	void testAncestorPoolComments()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFAncestor a = n.appendAncestorPool().appendAncestor();
@@ -2747,7 +2747,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testComments()
+	void testComments()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.appendComment().setText("foo");
@@ -2764,7 +2764,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMediaComponentIn()
+	void testMediaComponentIn()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -2782,7 +2782,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAmountsSimple()
+	void testAmountsSimple()
 	{
 		final JDFNode n1 = JDFNode.createRoot();
 		n1.setType(EnumType.ConventionalPrinting);
@@ -2805,7 +2805,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAmountPoolNoExplicitWaste()
+	void testAmountPoolNoExplicitWaste()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource media = n.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -2843,7 +2843,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMediaInline()
+	void testMediaInline()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -2860,7 +2860,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLocation()
+	void testLocation()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -2878,7 +2878,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLayoutMark()
+	void testLayoutMark()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Imposition);
@@ -2898,7 +2898,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLayoutPrepAutomated()
+	void testLayoutPrepAutomated()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.LayoutPreparation);
@@ -2913,7 +2913,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLayoutPrepLayoutUsage()
+	void testLayoutPrepLayoutUsage()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.LayoutPreparation);
@@ -2928,7 +2928,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLayoutPrepMultiBS()
+	void testLayoutPrepMultiBS()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/lpp.jdf");
 
@@ -2958,7 +2958,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLayoutPrepMultiBS2()
+	void testLayoutPrepMultiBS2()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/DigitalPrintingMultiPDF_IDP-ICS-1.5.jdf");
 
@@ -2988,7 +2988,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLayoutDescName()
+	void testLayoutDescName()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Imposition);
@@ -3008,7 +3008,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLayoutExternalImpo() throws Exception
+	void testLayoutExternalImpo() throws Exception
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Stripping);
@@ -3027,7 +3027,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLayoutExternalImpoBS() throws Exception
+	void testLayoutExternalImpoBS() throws Exception
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Stripping);
@@ -3046,7 +3046,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testExternalID()
+	void testExternalID()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Imposition);
@@ -3064,7 +3064,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLayoutMedia()
+	void testLayoutMedia()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Imposition);
@@ -3083,7 +3083,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLayoutIntentPages()
+	void testLayoutIntentPages()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);
@@ -3099,7 +3099,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLayoutContent()
+	void testLayoutContent()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Imposition);
@@ -3118,7 +3118,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPlatePaperMedia()
+	void testPlatePaperMedia()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -3142,7 +3142,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAssemblySection()
+	void testAssemblySection()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Stripping);
@@ -3171,7 +3171,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAssemblyCollect()
+	void testAssemblyCollect()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Stripping);
@@ -3193,7 +3193,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAssemblySectionCollect()
+	void testAssemblySectionCollect()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Stripping);
@@ -3228,7 +3228,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMediaComponentAmount()
+	void testMediaComponentAmount()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -3261,7 +3261,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMediaGrade()
+	void testMediaGrade()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -3281,7 +3281,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMediaPlatePaper()
+	void testMediaPlatePaper()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -3301,7 +3301,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMediaGrain()
+	void testMediaGrain()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -3325,7 +3325,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMediaSetCount()
+	void testMediaSetCount()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -3344,7 +3344,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMediaUMT()
+	void testMediaUMT()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -3363,7 +3363,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPartAmountPartitions()
+	void testPartAmountPartitions()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -3390,7 +3390,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMultiNode1()
+	void testMultiNode1()
 	{
 		JDFElement.setLongID(false);
 		final JDFNode product = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -3423,7 +3423,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHoleMaking()
+	void testHoleMaking()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.HoleMaking);
@@ -3441,7 +3441,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIdentical()
+	void testIdentical()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.Labeling);
@@ -3464,7 +3464,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testImplicit()
+	void testImplicit()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.DigitalPrinting);
@@ -3489,7 +3489,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testExplicit()
+	void testExplicit()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.DigitalPrinting);
@@ -3513,7 +3513,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testImplicit2()
+	void testImplicit2()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.DigitalPrinting);
@@ -3546,7 +3546,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInsertingIntent()
+	void testInsertingIntent()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.Product);
@@ -3563,7 +3563,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIntentDescName()
+	void testIntentDescName()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.Product);
@@ -3580,7 +3580,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGlueLine()
+	void testGlueLine()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setJobID("glue");
@@ -3610,7 +3610,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGeneralID()
+	void testGeneralID()
 	{
 		final JDFNode node = JDFNode.createRoot();
 		node.setJobID("gid");
@@ -3629,7 +3629,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHoleLine()
+	void testHoleLine()
 	{
 		_testHoleLine();
 	}
@@ -3657,7 +3657,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testCoilBindingTypes()
+	void testCoilBindingTypes()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.CoilBinding);
@@ -3671,7 +3671,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testCoilBindingParams()
+	void testCoilBindingParams()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.CoilBinding);
@@ -3689,7 +3689,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testCoilBindingParamsNOP()
+	void testCoilBindingParamsNOP()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.CoilBinding);
@@ -3708,7 +3708,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testCoilBindingMisc()
+	void testCoilBindingMisc()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.CoilBinding);
@@ -3729,7 +3729,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testChannellBindingMisc()
+	void testChannellBindingMisc()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.ChannelBinding);
@@ -3749,7 +3749,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCutBlocDescName()
+	void testCutBlocDescName()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.setType(EnumType.Cutting);
@@ -3776,7 +3776,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testCoilBindingDetails()
+	void testCoilBindingDetails()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.CoilBinding);
@@ -3795,7 +3795,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testDeprecatedTypes()
+	void testDeprecatedTypes()
 	{
 		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.Buffer);
@@ -3808,7 +3808,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetXJDFs1()
+	void testgetXJDFs1()
 	{
 		final JDFNode product = prepareProduct();
 
@@ -3826,7 +3826,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCombinedFinishing()
+	void testGetCombinedFinishing()
 	{
 		final JDFNode jdf = JDFNode.parseFile(sm_dirTestData + "Folding_sample.jdf");
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -3873,7 +3873,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetCombinedXJDFTypes()
+	void testgetCombinedXJDFTypes()
 	{
 		final JDFNode product = prepareProduct();
 
@@ -3886,7 +3886,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetCombinedXJDFSets()
+	void testgetCombinedXJDFSets()
 	{
 		final JDFNode product = prepareProduct();
 
@@ -3899,7 +3899,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetCombinedXJDF()
+	void testgetCombinedXJDF()
 	{
 		final JDFNode product = prepareProduct();
 
@@ -3912,7 +3912,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetCombinedComplex()
+	void testgetCombinedComplex()
 	{
 		final JDFNode product = JDFNode.parseFile(sm_dirTestData + "SampleFiles/MISPrepress-ICS-Complex.jdf");
 
@@ -3922,7 +3922,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testRemoveAgentFromResource()
+	void testRemoveAgentFromResource()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 
@@ -3941,7 +3941,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		XJMFTypeMap.shutDown();
 		super.tearDown();

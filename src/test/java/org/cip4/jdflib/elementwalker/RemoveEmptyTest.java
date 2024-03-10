@@ -74,7 +74,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemove()
+	void testRemove()
 	{
 		final JDFNode n = JDFDoc.parseFile(sm_dirTestData + "job4.jdf").getJDFRoot();
 		final RemoveEmpty emp = new RemoveEmpty();
@@ -87,7 +87,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveAttributes()
+	void testRemoveAttributes()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
@@ -104,7 +104,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveExchangeResource()
+	void testRemoveExchangeResource()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.setType(org.cip4.jdflib.node.JDFNode.EnumType.Product);
@@ -123,7 +123,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveResource()
+	void testRemoveResource()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -139,7 +139,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveSpan()
+	void testRemoveSpan()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -156,7 +156,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveSpan2()
+	void testRemoveSpan2()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -173,7 +173,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveRef()
+	void testRemoveRef()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -191,7 +191,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveXMLComment()
+	void testRemoveXMLComment()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -207,7 +207,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveComment()
+	void testRemoveComment()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -222,7 +222,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemovePosition()
+	void testRemovePosition()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -239,7 +239,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveJMF()
+	void testRemoveJMF()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
 		final RemoveEmpty emp = new RemoveEmpty();
@@ -252,7 +252,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveExtend()
+	void testRemoveExtend()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -268,7 +268,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveComChannel()
+	void testRemoveComChannel()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();

@@ -101,7 +101,7 @@ public class JMFStatusTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		KElement.setLongID(false);
 		doc = new JDFDoc(ElementName.JMF);
@@ -121,7 +121,7 @@ public class JMFStatusTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testStatusDetails()
+	void testStatusDetails()
 	{
 
 		JDFDeviceInfo di = signal.appendDeviceInfo();
@@ -138,7 +138,7 @@ public class JMFStatusTest extends JDFTestCaseBase
 	 */
 	// ///////////////////////////////////////////////////////////////////
 	@Test
-	public void testInheritedPhase()
+	void testInheritedPhase()
 	{
 
 		JDFDeviceInfo di = signal.appendDeviceInfo();

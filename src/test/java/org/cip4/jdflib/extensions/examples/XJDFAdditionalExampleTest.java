@@ -143,7 +143,7 @@ public class XJDFAdditionalExampleTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		JDFElement.setLongID(false);
 		super.setUp();
@@ -153,7 +153,7 @@ public class XJDFAdditionalExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testBestPracticeComplex()
+	void testBestPracticeComplex()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("FinishingBest", null, null);
 		xjdfHelper.setTypes(new VString("Cutting Folding Gathering CoverApplication Trimming"));

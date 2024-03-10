@@ -90,7 +90,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPersist()
+	void testPersist()
 	{
 		file.delete();
 		Assertions.assertFalse(file.exists());
@@ -106,7 +106,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRun()
+	void testRun()
 	{
 		file.delete();
 		Assertions.assertFalse(file.exists());
@@ -122,7 +122,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRunPersist()
+	void testRunPersist()
 	{
 		file.delete();
 		Assertions.assertFalse(file.exists());
@@ -138,7 +138,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNullPersist()
+	void testNullPersist()
 	{
 		DelayedPersist.getDelayedPersist().queueRunnable((Runnable) null, 555);
 		ThreadUtil.sleep(2000);
@@ -150,7 +150,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testShutdown()
+	void testShutdown()
 	{
 		file.delete();
 		Assertions.assertFalse(file.exists());
@@ -166,7 +166,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testShutdownCurrent()
+	void testShutdownCurrent()
 	{
 		file.delete();
 		Assertions.assertFalse(file.exists());
@@ -211,7 +211,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 		 * @return
 		 */
 		@Override
-		public void run()
+		void run()
 		{
 			FileUtil.createNewFile(file);
 		}
@@ -229,7 +229,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 		 * @return
 		 */
 		@Override
-		public void run()
+		void run()
 		{
 			FileUtil.createNewFile(file);
 		}
@@ -252,7 +252,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		file = new File(sm_dirTestDataTemp + "TestPersist.txt");

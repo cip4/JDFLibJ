@@ -86,7 +86,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 	boolean canTest;
 
 	@Test
-	public void testLibArtifactId()
+	void testLibArtifactId()
 	{
 		if (!canTest)
 			return;
@@ -103,7 +103,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testLibName()
+	void testLibName()
 	{
 		if (!canTest)
 			return;
@@ -120,7 +120,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testLibReleaseDate()
+	void testLibReleaseDate()
 	{
 		if (!canTest)
 			return;
@@ -136,7 +136,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testLibVersion()
+	void testLibVersion()
 	{
 		if (!canTest)
 			return;
@@ -152,7 +152,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testLibMajorVersion()
+	void testLibMajorVersion()
 	{
 		if (!canTest)
 			return;
@@ -170,7 +170,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testLibMinorVersion()
+	void testLibMinorVersion()
 	{
 
 		if (!canTest)
@@ -188,7 +188,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testJdfVersion()
+	void testJdfVersion()
 	{
 		if (!canTest)
 			return;
@@ -204,7 +204,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testJdfVersion_LibVersion()
+	void testJdfVersion_LibVersion()
 	{
 		if (!canTest)
 			return;
@@ -225,7 +225,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testMinorVersion_1() throws Exception
+	void testMinorVersion_1() throws Exception
 	{
 		if (!canTest)
 			return;
@@ -245,7 +245,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testMinorVersion_2() throws Exception
+	void testMinorVersion_2() throws Exception
 	{
 		if (!canTest)
 			return;
@@ -265,7 +265,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testMajorVersion_1() throws Exception
+	void testMajorVersion_1() throws Exception
 	{
 		if (!canTest)
 			return;
@@ -285,7 +285,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testMajorVersion_2() throws Exception
+	void testMajorVersion_2() throws Exception
 	{
 		if (!canTest)
 			return;
@@ -309,7 +309,7 @@ public class JDFVersionTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		try
 		{

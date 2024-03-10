@@ -84,7 +84,7 @@ public class JDFPageCellTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetClipBox()
+	void testGetClipBox()
 	{
 		JDFPageCell pc = (JDFPageCell) new JDFDoc(ElementName.PAGECELL).getRoot();
 		Assertions.assertNull(pc.getClipBox());
@@ -100,7 +100,7 @@ public class JDFPageCellTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTrimSize()
+	void testTrimSize()
 	{
 		JDFPageCell pc = (JDFPageCell) new JDFDoc(ElementName.PAGECELL).getRoot();
 		Assertions.assertNull(pc.getTrimSize());

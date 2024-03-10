@@ -71,7 +71,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFilterRunIndex()
+	void testFilterRunIndex()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Impo", null);
 		xjdfHelper.setTypes(EnumType.Product.getName());
@@ -99,7 +99,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFileTemplate()
+	void testFileTemplate()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Format", null);
 		xjdfHelper.setTypes(EnumType.Product.getName());
@@ -118,7 +118,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMetaDataMap()
+	void testMetaDataMap()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Metadata", null);
 		xjdfHelper.setTypes(EnumType.DigitalPrinting.getName());
@@ -245,7 +245,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

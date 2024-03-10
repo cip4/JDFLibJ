@@ -72,7 +72,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -86,7 +86,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetContactTypeEnum()
+	void testSetContactTypeEnum()
 	{
 		co.setContactTypes(EnumContactType.Accounting);
 		assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
@@ -97,7 +97,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testaddContactType()
+	void testaddContactType()
 	{
 		co.addContactTypes(null);
 		assertTrue(co.getContactTypes().isEmpty());
@@ -113,7 +113,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetContactType()
+	void testSetContactType()
 	{
 		co.setContactTypes("Customer");
 		assertEquals(co.getContactTypes().get(0), "Customer");
@@ -124,7 +124,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetContactTypeEmployee()
+	void testSetContactTypeEmployee()
 	{
 		co.setContactTypes(EnumContactType.Employee);
 		assertEquals(co.getContactTypes().get(0), "Employee");
@@ -135,7 +135,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testsetPerson()
+	void testsetPerson()
 	{
 		assertNull(co.setPerson(null, null));
 
@@ -153,7 +153,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreateCompany()
+	void testGetCreateCompany()
 	{
 		final JDFNode root = co.getJDFRoot();
 		final JDFCompany comp = (JDFCompany) root.addResource(ElementName.COMPANY, null);
@@ -168,7 +168,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreateCompany2()
+	void testGetCreateCompany2()
 	{
 		final JDFNode root = co.getJDFRoot();
 
@@ -187,7 +187,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetCompany()
+	void testGetCompany()
 	{
 		final JDFNode root = co.getJDFRoot();
 		final JDFCompany comp = (JDFCompany) root.addResource(ElementName.COMPANY, null);
@@ -202,7 +202,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAddress()
+	void testGetAddress()
 	{
 		final JDFNode root = co.getJDFRoot();
 		final JDFAddress comp = (JDFAddress) root.addResource(ElementName.ADDRESS, null);
@@ -217,7 +217,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAddressPerson()
+	void testGetAddressPerson()
 	{
 		final JDFAddress a = co.appendPerson().appendAddress();
 		assertEquals(a, co.getAddress());
@@ -228,7 +228,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetComChannel()
+	void testGetComChannel()
 	{
 		final JDFComChannel a = co.appendComChannel(EnumChannelType.Phone, "1234");
 		assertEquals(a, co.getComChannel(EnumChannelType.Phone));
@@ -240,7 +240,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetComChannelPerson()
+	void testGetComChannelPerson()
 	{
 		final JDFComChannel a = co.appendPerson().appendComChannel(EnumChannelType.Phone, "1234");
 		assertEquals(a, co.getComChannel(EnumChannelType.Phone));
@@ -252,7 +252,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreateAddressPerson()
+	void testGetCreateAddressPerson()
 	{
 		final JDFAddress a = co.appendPerson().appendAddress();
 		assertEquals(a, co.getCreateAddress());
@@ -263,7 +263,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreateAddress()
+	void testGetCreateAddress()
 	{
 		final JDFNode root = co.getJDFRoot();
 		final JDFAddress comp = (JDFAddress) root.addResource(ElementName.ADDRESS, null);
@@ -278,7 +278,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreatePerson()
+	void testGetCreatePerson()
 	{
 		final JDFNode root = co.getJDFRoot();
 		final JDFPerson comp = (JDFPerson) root.addResource(ElementName.PERSON, null);
@@ -292,7 +292,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPerson()
+	void testGetPerson()
 	{
 		final JDFNode root = co.getJDFRoot();
 		final JDFPerson comp = (JDFPerson) root.addResource(ElementName.PERSON, null);

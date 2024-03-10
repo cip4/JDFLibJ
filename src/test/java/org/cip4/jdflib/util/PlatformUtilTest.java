@@ -64,7 +64,7 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	 * Test method for {@link org.cip4.jdflib.util.PlatformUtil#isWindows()}.
 	 */
 	@Test
-	public void testIsWindows()
+	void testIsWindows()
 	{
 		assertEquals(File.separator.equals(JDFCoreConstants.BACK_SLASH), PlatformUtil.isWindows(), "Return value is not windows.");
 	}
@@ -73,7 +73,7 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	 * Test method for {@link org.cip4.jdflib.util.PlatformUtil#isWindows()}.
 	 */
 	@Test
-	public void testGetProperty()
+	void testGetProperty()
 	{
 		System.setProperty("foo.bar", "");
 		assertNull(PlatformUtil.getProperty("foo.bar"));
@@ -86,7 +86,7 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	 * Test method for {@link org.cip4.jdflib.util.PlatformUtil#isWindows()}.
 	 */
 	@Test
-	public void testGetJavaVersion()
+	void testGetJavaVersion()
 	{
 		log.info(PlatformUtil.getJavaVersion());
 		assertNotNull(PlatformUtil.getJavaVersion());
@@ -96,7 +96,7 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	 * Test method for {@link org.cip4.jdflib.util.PlatformUtil#isWindows()}.
 	 */
 	@Test
-	public void testGetMap()
+	void testGetMap()
 	{
 		JDFAttributeMap m = PlatformUtil.listProperties(true, true);
 		for (String key : m.keySet())
@@ -114,7 +114,7 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	 * Test method for {@link org.cip4.jdflib.util.PlatformUtil#isWindows()}.
 	 */
 	@Test
-	public void testHasProperty()
+	void testHasProperty()
 	{
 		System.setProperty("foo.bar", "");
 		assertFalse(PlatformUtil.hasProperty("foo.bar"));
@@ -130,7 +130,7 @@ public class PlatformUtilTest extends JDFTestCaseBase
 	 */
 	@Deprecated
 	@Test
-	public void testGetConnectionTimeout()
+	void testGetConnectionTimeout()
 	{
 		assertEquals(PlatformUtil.DEFAULT_CONNECTION_TIMEOUT, PlatformUtil.getConnectionTimeout(), "ConnectionTimeout value is wrong.");
 	}

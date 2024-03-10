@@ -147,7 +147,7 @@ public class XJDFProcessExampleTest extends ExampleTest
 	*
 	*/
 	@Test
-	public void testDrops()
+	void testDrops()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("splitDelivery", null, null);
 		xjdfHelper.setTypes(JDFConstants.PRODUCT);
@@ -236,7 +236,7 @@ public class XJDFProcessExampleTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		JDFElement.setLongID(false);
 		super.setUp();

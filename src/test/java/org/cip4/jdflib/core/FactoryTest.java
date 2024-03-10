@@ -92,7 +92,7 @@ public class FactoryTest extends JDFTestCaseBase
 	 *  
 	 */
 	@Test
-	public void testFactory()
+	void testFactory()
 	{
 		final String strFile = "bookintent.jdf";
 
@@ -106,7 +106,7 @@ public class FactoryTest extends JDFTestCaseBase
 	 * Test for void RemoveAttribute(String, String) - PR-AKMP-000001
 	 */
 	@Test
-	public void testRemoveAttributeStringString()
+	void testRemoveAttributeStringString()
 	{
 		final JDFParser p = new JDFParser();
 		final JDFDoc jdfDoc = p.parseFile(sm_dirTestData + "emptyAuthorAttribute.jdf");

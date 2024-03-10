@@ -43,7 +43,7 @@ public class WalkXElementTest
 {
 
 	@Test
-	public void testUpdateColor()
+	void testUpdateColor()
 	{
 		final WalkXElement w = new WalkXElement();
 		Assertions.assertEquals("Black", w.updateColor("black"));

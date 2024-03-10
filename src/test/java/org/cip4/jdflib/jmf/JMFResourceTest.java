@@ -112,7 +112,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -122,7 +122,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResourceQuParams()
+	void testResourceQuParams()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -143,7 +143,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 * test for nodeidentifier
 	 */
 	@Test
-	public void testGetIdentifier()
+	void testGetIdentifier()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -164,7 +164,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUsageCounter()
+	void testUsageCounter()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -196,7 +196,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMedia()
+	void testMedia()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -219,7 +219,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMediaCatalog()
+	void testMediaCatalog()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -260,7 +260,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMediaCatalogSignal()
+	void testMediaCatalogSignal()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -301,7 +301,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEcmaList()
+	void testEcmaList()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -344,7 +344,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMediaRef()
+	void testMediaRef()
 	{
 
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -376,7 +376,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 * apply a resource cmd
 	 */
 	@Test
-	public void testApplyResourceCmdNodeInfo()
+	void testApplyResourceCmdNodeInfo()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -426,7 +426,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 * apply a resource cmd
 	 */
 	@Test
-	public void testApplyResourceCmd()
+	void testApplyResourceCmd()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -498,7 +498,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResourceCommand()
+	void testResourceCommand()
 	{
 		final JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "ResourceCommandTest.jdf");
 		final JDFNode root = jdfDoc.getJDFRoot();
@@ -547,7 +547,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResourceCommandPartIDKeys()
+	void testResourceCommandPartIDKeys()
 	{
 		final JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "ResourceCmd.jdf");
 		final JDFDoc jdfDocJMF = JDFDoc.parseFile(sm_dirTestData + "ResourceCmd.jmf");
@@ -569,7 +569,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResourceCommandIdentical()
+	void testResourceCommandIdentical()
 	{
 		final JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "ResourceCommandTest.jdf");
 		final JDFNode root = jdfDoc.getJDFRoot();

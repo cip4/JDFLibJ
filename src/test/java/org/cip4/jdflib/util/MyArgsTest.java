@@ -100,7 +100,7 @@ public class MyArgsTest {
 	 * @throws Exception
 	 */
 	@BeforeEach
-    public void setUp() throws Exception
+    void setUp() throws Exception
 	{
         _myArgs = new MyArgs(_testArray, "?cqvVntP", "dlLuhpx", null);
 
@@ -110,7 +110,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.MyArgs(String[], String, String)'
 	 */
 	@Test
-	public void testMyArgsStringArrayStringString()
+	void testMyArgsStringArrayStringString()
 	{
 		MyArgs args = new MyArgs(_testArray, "?cqvVntP", "dlLuhpx", null);
 		System.out.println("Without quotes:");
@@ -125,7 +125,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.MyArgs(String[], String, String, String)'
 	 */
 	@Test
-	public void testMyArgsStringArrayStringStringString()
+	void testMyArgsStringArrayStringStringString()
 	{
 		// dummy
 	}
@@ -134,7 +134,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.MyArgs(Vector, String, String, String)'
 	 */
 	@Test
-	public void testMyArgsVectorStringStringString()
+	void testMyArgsVectorStringStringString()
 	{
 		// dummy
 	}
@@ -143,7 +143,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.initMyArgs(Vector, String, String, String)'
 	 */
 	@Test
-	public void testInitMyArgs()
+	void testInitMyArgs()
 	{
 		// dummy
 	}
@@ -152,7 +152,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.toString()'
 	 */
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		// dummy
 	}
@@ -161,7 +161,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.parameter(String)'
 	 */
 	@Test
-	public void testParameterString()
+	void testParameterString()
 	{
 		String d = _myArgs.parameter("d");
 		Assertions.assertEquals(d, " /Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/tENgU4Gh3huO2iVH9380.xml");
@@ -171,7 +171,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.parameter(char)'
 	 */
 	@Test
-	public void testParameterChar()
+	void testParameterChar()
 	{
 		// dummy
 	}
@@ -180,7 +180,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.parameterString(String)'
 	 */
 	@Test
-	public void testParameterStringString()
+	void testParameterStringString()
 	{
 		// dummy
 	}
@@ -189,7 +189,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.parameterString(char)'
 	 */
 	@Test
-	public void testParameterStringChar()
+	void testParameterStringChar()
 	{
 		// dummy
 	}
@@ -198,7 +198,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.nargs()'
 	 */
 	@Test
-	public void testNargs()
+	void testNargs()
 	{
 		String[] s = { "-abc", "foo" };
 		MyArgs args = new MyArgs(s, "ab", "c", null);
@@ -210,7 +210,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.nargs()'
 	 */
 	@Test
-	public void testSetFlag()
+	void testSetFlag()
 	{
 		String[] s = { "-abc", "foo" };
 		MyArgs args = new MyArgs(s, "ab", "c", null);
@@ -226,7 +226,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.nargs()'
 	 */
 	@Test
-	public void testSetParameter()
+	void testSetParameter()
 	{
 		String[] s = { "-abc", "foo" };
 		MyArgs args = new MyArgs(s, "ab", "c", null);
@@ -243,7 +243,7 @@ public class MyArgsTest {
 	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.hasParameter()'
 	 */
-	public void hasParam()
+	void hasParam()
 	{
 		String[] s = { "-abc", "foo" };
 		MyArgs args = new MyArgs(s, "ab", "c", null);
@@ -258,7 +258,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.argument(int)'
 	 */
 	@Test
-	public void testArgument()
+	void testArgument()
 	{
 		String[] s = { "-abc", "foo", "bar" };
 		MyArgs args = new MyArgs(s, "ab", "c", null);
@@ -270,7 +270,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.argumentString(int)'
 	 */
 	@Test
-	public void testArgumentString()
+	void testArgumentString()
 	{
 		// dummy
 	}
@@ -279,7 +279,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.intParameter(char, int, int)'
 	 */
 	@Test
-	public void testIntParameterCharIntInt()
+	void testIntParameterCharIntInt()
 	{
 		// dummy
 	}
@@ -288,7 +288,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.intParameter(String, int, int)'
 	 */
 	@Test
-	public void testIntParameterStringIntInt()
+	void testIntParameterStringIntInt()
 	{
 		// dummy
 	}
@@ -297,7 +297,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.floatParameter(char, double)'
 	 */
 	@Test
-	public void testFloatParameterCharDouble()
+	void testFloatParameterCharDouble()
 	{
 		// dummy
 	}
@@ -306,7 +306,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.floatParameter(String, double)'
 	 */
 	@Test
-	public void testFloatParameterStringDouble()
+	void testFloatParameterStringDouble()
 	{
 		// dummy
 	}
@@ -315,7 +315,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.boolParameter(char, boolean)'
 	 */
 	@Test
-	public void testBoolParameterCharBoolean()
+	void testBoolParameterCharBoolean()
 	{
 		// dummy
 	}
@@ -324,7 +324,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.boolParameter(String, boolean)'
 	 */
 	@Test
-	public void testBoolParameterStringBoolean()
+	void testBoolParameterStringBoolean()
 	{
 		// dummy
 	}
@@ -333,7 +333,7 @@ public class MyArgsTest {
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.usage(String)'
 	 */
 	@Test
-	public void testUsage()
+	void testUsage()
 	{
 		// dummy
 	}

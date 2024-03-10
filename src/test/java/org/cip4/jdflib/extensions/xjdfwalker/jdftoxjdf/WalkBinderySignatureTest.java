@@ -85,7 +85,7 @@ public class WalkBinderySignatureTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWalkElements()
+	void testWalkElements()
 	{
 		JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.appendFold();
@@ -102,7 +102,7 @@ public class WalkBinderySignatureTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWalkAttributes()
+	void testWalkAttributes()
 	{
 		JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.setBindingEdge(EnumBindingEdge.Bottom);
@@ -119,7 +119,7 @@ public class WalkBinderySignatureTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatches()
+	void testMatches()
 	{
 		JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.setBindingEdge(EnumBindingEdge.Bottom);
@@ -132,7 +132,7 @@ public class WalkBinderySignatureTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElementNames()
+	void testGetElementNames()
 	{
 		JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.setBindingEdge(EnumBindingEdge.Bottom);

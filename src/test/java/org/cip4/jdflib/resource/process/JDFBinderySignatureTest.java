@@ -51,7 +51,7 @@ public class JDFBinderySignatureTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetFoldCatalog()
+	void testSetFoldCatalog()
 	{
 		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.setFoldCatalog("F4-1");
@@ -63,7 +63,7 @@ public class JDFBinderySignatureTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetNumberUp()
+	void testSetNumberUp()
 	{
 		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.setNumberUp(3, 3);
@@ -75,7 +75,7 @@ public class JDFBinderySignatureTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDieLayout()
+	void testDieLayout()
 	{
 		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.appendDieLayout();

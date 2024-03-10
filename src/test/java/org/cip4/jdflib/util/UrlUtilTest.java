@@ -91,7 +91,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * Test method for {@link org.cip4.jdflib.util.UrlUtil#getConnectionTimeout()}.
 	 */
 	@Test
-	public void testGetConnectionTimeout()
+	void testGetConnectionTimeout()
 	{
 		assertEquals(UrlUtil.DEFAULT_CONNECTION_TIMEOUT, UrlUtil.getConnectionTimeout(), "ConnectionTimeout value is wrong.");
 	}
@@ -100,7 +100,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLocalURL()
+	void testGetLocalURL()
 	{
 		assertNull(UrlUtil.getLocalURL("foo", "foo"));
 		assertNull(UrlUtil.getLocalURL("foo", null));
@@ -117,7 +117,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetExtensionTypeFromMimeType()
+	void testGetExtensionTypeFromMimeType()
 	{
 		assertEquals("txt", UrlUtil.getExtensionFromMimeType(UrlUtil.TEXT_UNKNOWN));
 		assertEquals("jdf", UrlUtil.getExtensionFromMimeType(UrlUtil.VND_JDF));
@@ -138,7 +138,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMimeTypeFromExt()
+	void testGetMimeTypeFromExt()
 	{
 		assertEquals(UrlUtil.TEXT_UNKNOWN, UrlUtil.getMimeTypeFromURL("www.foobar.com"));
 		assertEquals(UrlUtil.VND_JDF, UrlUtil.getMimeTypeFromURL(".JDF"));
@@ -165,7 +165,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetURLProtocol()
+	void testGetURLProtocol()
 	{
 		assertNull(UrlUtil.getProtocol(null));
 		assertEquals(URLProtocol.http, UrlUtil.getProtocol("http://foo.bar.com"));
@@ -177,7 +177,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testExtension()
+	void testExtension()
 	{
 		assertNull(UrlUtil.extension("foo"));
 		assertEquals("", UrlUtil.extension("foo."));
@@ -193,7 +193,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * @throws UnsupportedEncodingException
 	 */
 	@Test
-	public void testEscapeUTF8() throws UnsupportedEncodingException
+	void testEscapeUTF8() throws UnsupportedEncodingException
 	{
 		assertEquals(UrlUtil.m_URIEscape.length(), UrlUtil.m_URIEscape.getBytes(StringUtil.UTF8).length);
 		assertEquals(UrlUtil.m_UNCEscape.length(), UrlUtil.m_UNCEscape.getBytes(StringUtil.UTF8).length);
@@ -203,7 +203,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * test the standard url escaping routines
 	 */
 	@Test
-	public void testEscape()
+	void testEscape()
 	{
 		assertNull(UrlUtil.escape(null, true, false));
 		assertNull(UrlUtil.escape(null, false, false));
@@ -222,7 +222,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * test adding a parameter
 	 */
 	@Test
-	public void testAddParameter()
+	void testAddParameter()
 	{
 		assertEquals("a?b=c", UrlUtil.addParameter("a", "b", "c"));
 		assertEquals("a", UrlUtil.addParameter("a", "", "c"));
@@ -237,7 +237,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * test adding a parameter
 	 */
 	@Test
-	public void testSetParameter()
+	void testSetParameter()
 	{
 		assertEquals("", UrlUtil.setParameter("", "b", "c"));
 		assertEquals("a?b=c", UrlUtil.setParameter("a", "b", "c"));
@@ -258,7 +258,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * test adding a parameter
 	 */
 	@Test
-	public void testGetParameter()
+	void testGetParameter()
 	{
 		assertEquals("c", UrlUtil.getParameter("a?b=c", "b"));
 		assertEquals("c", UrlUtil.getParameter("a?d=e&b=c", "b"));
@@ -273,7 +273,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * test adding a path to a url
 	 */
 	@Test
-	public void testAddPath()
+	void testAddPath()
 	{
 		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addPath("A", "/a"));
 		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addPath("A", "../a"));
@@ -289,7 +289,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * test adding a path to a url
 	 */
 	@Test
-	public void testGetSecurePath()
+	void testGetSecurePath()
 	{
 		assertThrows(IllegalArgumentException.class, () -> UrlUtil.getSecurePath("A/../B", true));
 		assertThrows(IllegalArgumentException.class, () -> UrlUtil.getSecurePath("A/../B", false));
@@ -301,7 +301,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToURL()
+	void testWriteToURL()
 	{
 		if (!isTestNetwork())
 			return;
@@ -312,7 +312,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToURLPost()
+	void testWriteToURLPost()
 	{
 		if (!isTestNetwork())
 			return;
@@ -326,7 +326,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToFTP() throws IOException
+	void testWriteToFTP() throws IOException
 	{
 		if (!isTestNetwork() || FTP_SITE == null)
 			return;
@@ -341,7 +341,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetFTPInputstream() throws IOException
+	void testGetFTPInputstream() throws IOException
 	{
 		if (!isTestNetwork() || FTP_SITE == null)
 			return;
@@ -353,7 +353,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToURLClose()
+	void testWriteToURLClose()
 	{
 		if (!isTestNetwork())
 			return;
@@ -366,7 +366,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToURLBearer()
+	void testWriteToURLBearer()
 	{
 		if (!isTestNetwork())
 			return;
@@ -383,7 +383,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToURLRedirect()
+	void testWriteToURLRedirect()
 	{
 		if (!isTestNetwork())
 			return;
@@ -394,7 +394,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToURLSecure()
+	void testWriteToURLSecure()
 	{
 		if (!isTestNetwork())
 			return;
@@ -412,7 +412,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToURLSecureStream() throws IOException
+	void testWriteToURLSecureStream() throws IOException
 	{
 		if (!isTestNetwork())
 			return;
@@ -428,7 +428,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetHTTPSInputstream() throws IOException
+	void testGetHTTPSInputstream() throws IOException
 	{
 		if (!isTestNetwork())
 			return;
@@ -441,7 +441,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetBodyInputstream() throws IOException
+	void testGetBodyInputstream() throws IOException
 	{
 		final InputStream is = UrlUtil.getURLInputStream(UrlUtil.fileToUrl(new File(sm_dirTestData + "url1.pdf"), false), null);
 		assertNotNull(is);
@@ -454,7 +454,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetZipInputstream() throws IOException
+	void testGetZipInputstream() throws IOException
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "testZip.zip");
 		final InputStream is2 = UrlUtil.getURLInputStream("content/boo.pdf", null, r);
@@ -465,7 +465,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsRedirect()
+	void testIsRedirect()
 	{
 		assertTrue(UrlUtil.isRedirect(302));
 		assertFalse(UrlUtil.isRedirect(42));
@@ -476,7 +476,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsReturnOK()
+	void testIsReturnOK()
 	{
 		assertTrue(UrlUtil.isReturnCodeOK(202));
 		assertTrue(UrlUtil.isReturnCodeOK(200));
@@ -489,7 +489,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsReturnOKPart() throws IOException
+	void testIsReturnOKPart() throws IOException
 	{
 		final UrlPart p = new UrlPart(new File(sm_dirTestData + "url1.pdf"));
 		assertTrue(UrlUtil.isReturnCodeOK(p));
@@ -501,7 +501,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDetails()
+	void testGetDetails()
 	{
 		HTTPDetails redirect = null;
 		for (int i = 1; i < 666; i++)
@@ -515,7 +515,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToURLNull()
+	void testWriteToURLNull()
 	{
 		if (!isTestNetwork())
 			return;
@@ -526,7 +526,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveProtocol()
+	void testRemoveProtocol()
 	{
 		assertNull(UrlUtil.removeProtocol(null));
 		assertNull(UrlUtil.removeProtocol("http://"));
@@ -540,7 +540,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsCid()
+	void testIsCid()
 	{
 		assertTrue(UrlUtil.isCID("cid:foo"));
 		assertTrue(UrlUtil.isCID("<cid:foo>"));
@@ -553,7 +553,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsNotCid()
+	void testIsNotCid()
 	{
 		assertFalse(UrlUtil.isNotCID("cid:foo"));
 		assertFalse(UrlUtil.isNotCID("bar.foo"));
@@ -566,7 +566,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsHTTP()
+	void testIsHTTP()
 	{
 		assertTrue(UrlUtil.isHttp("http://foo.bar.com"));
 		assertFalse(UrlUtil.isHttp("https://foo.bar.com"));
@@ -578,7 +578,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsHTTPS()
+	void testIsHTTPS()
 	{
 		assertTrue(UrlUtil.isHttps("https://foo.bar.com"));
 		assertFalse(UrlUtil.isHttps("http://foo.bar.com"));
@@ -590,7 +590,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsNet()
+	void testIsNet()
 	{
 		assertTrue(UrlUtil.isNet("https://foo.bar.com"));
 		assertTrue(UrlUtil.isNet("http://foo.bar.com"));
@@ -603,7 +603,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsIRL()
+	void testIsIRL()
 	{
 		assertTrue(UrlUtil.isIRL("file://blÃ¯Â¿Â½dÃ¯Â¿Â½.txt"));
 		assertTrue(UrlUtil.isIRL("http://foo.com/blÃ¯Â¿Â½dÃ¯Â¿Â½.txt"));
@@ -621,7 +621,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsURL()
+	void testIsURL()
 	{
 		assertFalse(UrlUtil.isURL(null));
 		assertTrue(UrlUtil.isURL("file://bl.txt"));
@@ -640,7 +640,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testIsURLPerformance()
+	void testIsURLPerformance()
 	{
 		final CPUTimer ct = new CPUTimer(false);
 		for (int i = 0; i < 1234; i++)
@@ -666,7 +666,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsXMLType()
+	void testIsXMLType()
 	{
 		assertTrue(UrlUtil.isXMLType("text/xml"));
 		assertTrue(UrlUtil.isXMLType("TEXT/XML"));
@@ -681,7 +681,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsJSONType()
+	void testIsJSONType()
 	{
 		assertFalse(UrlUtil.isJSONType("text/xml"));
 		assertFalse(UrlUtil.isJSONType("TEXT/XML"));
@@ -693,7 +693,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsZIPType()
+	void testIsZIPType()
 	{
 		assertFalse(UrlUtil.isZIPType("text/xml"));
 		assertFalse(UrlUtil.isZIPType("text/xml;"));
@@ -709,7 +709,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * @throws Exception if snafu
 	 */
 	@Test
-	public void testStringToURL() throws Exception
+	void testStringToURL() throws Exception
 	{
 		if (File.separator.equals("\\"))
 		{
@@ -752,7 +752,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsEscaped()
+	void testIsEscaped()
 	{
 		assertTrue(UrlUtil.isEscaped("http%3A%2F%2FDRU-CIP4HD1%3A6331"));
 		assertFalse(UrlUtil.isEscaped("file:http%3A%2F%2FDRU-CIP4HD1%3A6331"));
@@ -767,7 +767,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetBytesFromIP()
+	void testGetBytesFromIP()
 	{
 		assertNull(UrlUtil.getBytesFromIP("foo"));
 		assertNull(UrlUtil.getBytesFromIP("3.141"));
@@ -780,7 +780,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetIPFromBytes()
+	void testGetIPFromBytes()
 	{
 		assertNull(UrlUtil.getIPFromBytes(null));
 		assertNull(UrlUtil.getIPFromBytes(new byte[] { 1, 2 }));
@@ -794,7 +794,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFileToURL()
+	void testFileToURL()
 	{
 		if (PlatformUtil.isWindows())
 		{ // on windows
@@ -816,7 +816,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testNonAsciiFileURL() throws Exception
+	void testNonAsciiFileURL() throws Exception
 	{
 		for (int i = 0; i < 2; i++) // loop over escape and non-escape
 		{
@@ -844,7 +844,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testURLToFileName()
+	void testURLToFileName()
 	{
 		assertEquals("b.c", UrlUtil.urlToFileName("a:b.c"));
 		assertEquals("b.c", UrlUtil.urlToFileName("http:/b.c?gg"));
@@ -854,7 +854,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUNCToUrl()
+	void testUNCToUrl()
 	{
 
 		assertEquals("file://a/b/c.txt", UrlUtil.uncToUrl("\\\\a\\b\\c.txt", true));
@@ -878,7 +878,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testURLToUNC() throws Exception
+	void testURLToUNC() throws Exception
 	{
 		assertEquals("a%5cb", UrlUtil.urlToUNC("file:a%5cb"));
 		assertEquals("a%25", UrlUtil.urlToUNC("file:a%2525"));
@@ -897,7 +897,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testIsFileOK() throws Exception
+	void testIsFileOK() throws Exception
 	{
 		assertFalse(UrlUtil.isFileOK(null));
 		assertFalse(UrlUtil.isFileOK(new File(".")));
@@ -910,7 +910,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testURLToFile() throws Exception
+	void testURLToFile() throws Exception
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -961,7 +961,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testisRelativeURL()
+	void testisRelativeURL()
 	{
 		assertFalse(UrlUtil.isRelativeURL(""));
 		assertFalse(UrlUtil.isRelativeURL("\\\\foo\\bar"));
@@ -979,7 +979,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testisUNC()
+	void testisUNC()
 	{
 		assertTrue(UrlUtil.isUNC("\\\\foo\\bar"));
 		assertFalse(UrlUtil.isUNC("c/d/e.f"));
@@ -990,7 +990,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetRelativeURI()
+	void testGetRelativeURI()
 	{
 		File f = new File("./a b");
 		assertEquals("a%20b", StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0));
@@ -1003,7 +1003,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetParentDirectory()
+	void testGetParentDirectory()
 	{
 		assertEquals(null, UrlUtil.getParentDirectory(null));
 		assertEquals(".", UrlUtil.getParentDirectory("foo.bar"));
@@ -1017,7 +1017,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetRelativeURL()
+	void testGetRelativeURL()
 	{
 		File file = new File("c:\\a\\b\\c.txt");
 		final File cwd = new File("c:\\a\\b1");
@@ -1034,7 +1034,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetURLWithDirectory()
+	void testGetURLWithDirectory()
 	{
 		String url = "File://a.b";
 		assertEquals(url, UrlUtil.getURLWithDirectory("", url), "test nulls");
@@ -1078,7 +1078,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveExtension()
+	void testRemoveExtension()
 	{
 		assertEquals("a", UrlUtil.prefix("a.b"));
 		assertEquals("a", UrlUtil.prefix("a"));
@@ -1094,7 +1094,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCleanDots()
+	void testCleanDots()
 	{
 		assertEquals(".", UrlUtil.cleanDots("."));
 		assertEquals("..", UrlUtil.cleanDots(".."));
@@ -1111,7 +1111,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddSecure()
+	void testAddSecure()
 	{
 		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addSecure(".", null));
 		assertThrows(IllegalArgumentException.class, () -> UrlUtil.addSecure("a", "b"));
@@ -1128,7 +1128,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCleanHttpUrl()
+	void testCleanHttpUrl()
 	{
 		assertEquals("http://localhost", UrlUtil.cleanHttpURL("localhost"));
 		assertEquals("http://localhost", UrlUtil.cleanHttpURL("/http/localhost"));
@@ -1141,7 +1141,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateHttpUrl()
+	void testCreateHttpUrl()
 	{
 		assertEquals("http://d/a", UrlUtil.createHttpUrl(false, "d", 0, "a"));
 		assertEquals("http://d:8080/a", UrlUtil.createHttpUrl(false, "d", 8080, "a"));
@@ -1153,7 +1153,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveToDirMime() throws Exception
+	void testMoveToDirMime() throws Exception
 	{
 		new MimeUtilTest().testBuildMimePackageDoc();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + "testMimePackageDoc.mjm");
@@ -1198,7 +1198,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveToDir() throws Exception
+	void testMoveToDir() throws Exception
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -1225,7 +1225,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveToDownDir() throws Exception
+	void testMoveToDownDir() throws Exception
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -1243,7 +1243,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveToDirDelete() throws Exception
+	void testMoveToDirDelete() throws Exception
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -1265,7 +1265,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNormalize()
+	void testNormalize()
 	{
 		assertEquals("a.b", UrlUtil.normalize("a.b"));
 		assertEquals("a.b", UrlUtil.normalize("./a.b"));
@@ -1286,7 +1286,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNormalizeFile()
+	void testNormalizeFile()
 	{
 		assertEquals("file://host/dir/a%20a.b", UrlUtil.normalize("\\\\host\\dir\\a a.b"));
 		assertEquals("file://host/dir/a%20ö.b", UrlUtil.normalize("\\\\host\\dir\\a ö.b"));
@@ -1297,7 +1297,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUnEscape()
+	void testUnEscape()
 	{
 		assertEquals("a.b", UrlUtil.unEscape("a.b"));
 		assertEquals("a.b", UrlUtil.unEscape("a.b"));
@@ -1312,7 +1312,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNewExtension()
+	void testNewExtension()
 	{
 		assertEquals("a.c", UrlUtil.newExtension("a.b", "c"));
 		assertEquals("a.b.c", UrlUtil.newExtension("a.b.c", "c"));

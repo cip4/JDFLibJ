@@ -51,7 +51,7 @@ public class MimeReaderTest extends JDFTestCaseBase
 {
 
 	@Test
-	public void testGetURL()
+	void testGetURL()
 	{
 
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");

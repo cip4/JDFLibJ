@@ -68,7 +68,7 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSimple()
+	void testSimple()
 	{
 		final XJDFBaseGoldenTicket bt = new XJDFBaseGoldenTicket(1, EnumVersion.Version_2_0);
 		bt.getXJDFHelper().writeToFile(sm_dirTestDataTemp + "xjdf/GTSimple.xjdf");
@@ -79,7 +79,7 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBrochureSimple()
+	void testBrochureSimple()
 	{
 		final XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
 		final XJDFHelper xjdfHelper = bt.getXJDFHelper();
@@ -103,7 +103,7 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testComplexVTSimple()
+	void testComplexVTSimple()
 	{
 		final XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
 		final XJDFHelper xjdfHelper = bt.getXJDFHelper();
@@ -263,7 +263,7 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testNotebook()
+	void testNotebook()
 	{
 		final XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
 		final XJDFHelper xjdfHelper = bt.getXJDFHelper();
@@ -296,7 +296,7 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAssembleEnvelope()
+	void testAssembleEnvelope()
 	{
 		final XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
 		final XJDFHelper xjdfHelper = bt.getXJDFHelper();
@@ -325,7 +325,7 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMultiVariable()
+	void testMultiVariable()
 	{
 		final XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
 		final XJDFHelper xjdfHelper = bt.getXJDFHelper();
@@ -373,7 +373,7 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

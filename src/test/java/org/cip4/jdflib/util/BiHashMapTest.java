@@ -87,7 +87,7 @@ public class BiHashMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPut()
+	void testPut()
 	{
 		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
 		hm.put("a", "b");
@@ -108,7 +108,7 @@ public class BiHashMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testClear()
+	void testClear()
 	{
 		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
 		hm.put("a", "b");
@@ -123,7 +123,7 @@ public class BiHashMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveNull()
+	void testRemoveNull()
 	{
 		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
 		hm.put("a", "b");
@@ -144,7 +144,7 @@ public class BiHashMapTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testRemove()
+	void testRemove()
 	{
 		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
 		hm.put("a", "b");
@@ -162,7 +162,7 @@ public class BiHashMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveVal()
+	void testRemoveVal()
 	{
 		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
 		hm.put("a", "b");

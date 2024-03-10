@@ -91,7 +91,7 @@ public class JDFStringStateTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		JDFDoc doc = new JDFDoc("StringState");

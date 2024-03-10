@@ -97,7 +97,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testDuration() throws Exception
+	void testDuration() throws Exception
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -122,7 +122,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPartUsage()
+	void testPartUsage()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -141,7 +141,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWorkstepID()
+	void testWorkstepID()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -165,7 +165,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWorkstepIDDotPerformance()
+	void testWorkstepIDDotPerformance()
 	{
 		for (int j = 0; j < 3; j++)
 		{
@@ -207,7 +207,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWorkstepIDDotLength()
+	void testWorkstepIDDotLength()
 	{
 		for (int j = 0; j < 3; j++)
 		{
@@ -258,7 +258,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCPI()
+	void testCPI()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -274,7 +274,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetStart()
+	void testGetStart()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFNodeInfo ni = n.getCreateNodeInfo();
@@ -294,7 +294,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetEnd()
+	void testGetEnd()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFNodeInfo ni = n.getCreateNodeInfo();
@@ -312,7 +312,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		currentDate = new JDFDate("2015-09-26T11:43:10+03:00");

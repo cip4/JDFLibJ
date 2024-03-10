@@ -61,7 +61,7 @@ public class WalkMessageTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRegistration()
+	void testRegistration()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Registration, "Resource");
 		final JDFResourceCmdParams rcp = jmf.getRegistration(0).appendResourceCmdParams();
@@ -74,7 +74,7 @@ public class WalkMessageTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAcknowledge()
+	void testAcknowledge()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Acknowledge, "Resource");
 		final JDFResourceInfo ri = jmf.getAcknowledge(0).appendResourceInfo();
@@ -87,7 +87,7 @@ public class WalkMessageTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testVersion()
+	void testVersion()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Signal, "Resource");
 		final JDFSignal signal = jmf.getSignal(0);

@@ -51,7 +51,7 @@ public class RIPTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////
 	@Test
-	public void testReprintJMF() throws Exception
+	void testReprintJMF() throws Exception
 	{
 		testAuditsImageSetting();
 		statCounter.setActiveNode(null, null, null);
@@ -102,7 +102,7 @@ public class RIPTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -146,7 +146,7 @@ public class RIPTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testAuditsImageSetting() throws Exception
+	void testAuditsImageSetting() throws Exception
 	{
 
 		for (int i = 0; i < vsSheet.size(); i++)
@@ -198,7 +198,7 @@ public class RIPTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		// TODO Auto-generated method stub
 		super.tearDown();

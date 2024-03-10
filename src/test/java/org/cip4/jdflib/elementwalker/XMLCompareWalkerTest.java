@@ -56,7 +56,7 @@ public class XMLCompareWalkerTest extends JDFTestCaseBase
 {
 
 	@Test
-	public void testSimple()
+	void testSimple()
 	{
 		final KElement e1 = KElement.createRoot("a", null);
 		final KElement e2 = KElement.createRoot("a", null);
@@ -65,7 +65,7 @@ public class XMLCompareWalkerTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSimpleChild()
+	void testSimpleChild()
 	{
 		final KElement e1 = KElement.createRoot("a", null);
 		e1.setAttribute("b", "b1");
@@ -78,7 +78,7 @@ public class XMLCompareWalkerTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSimpleIgnore()
+	void testSimpleIgnore()
 	{
 		final KElement e1 = KElement.createRoot("a", null);
 		e1.setAttribute("b", "b1");
@@ -90,7 +90,7 @@ public class XMLCompareWalkerTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSimpleIgnoreStandard()
+	void testSimpleIgnoreStandard()
 	{
 		final JDFNode e1 = JDFNode.createRoot();
 		final JDFNode e2 = JDFNode.createRoot();
@@ -104,7 +104,7 @@ public class XMLCompareWalkerTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSimpleIgnoreStandardJMF()
+	void testSimpleIgnoreStandardJMF()
 	{
 		final JDFJMF e1 = new JMFBuilder().buildAbortQueueEntry("q1");
 		final JDFJMF e2 = new JMFBuilder().buildAbortQueueEntry("q1");
@@ -114,7 +114,7 @@ public class XMLCompareWalkerTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSimpleIgnoreValue()
+	void testSimpleIgnoreValue()
 	{
 		final KElement e1 = KElement.createRoot("a", null);
 		e1.setAttribute("b", "b1");
@@ -128,7 +128,7 @@ public class XMLCompareWalkerTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSimpleChildSame()
+	void testSimpleChildSame()
 	{
 		final KElement e1 = KElement.createRoot("a", null);
 		e1.setAttribute("b", "b1");
@@ -139,7 +139,7 @@ public class XMLCompareWalkerTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSimpleChildPrecision()
+	void testSimpleChildPrecision()
 	{
 		final KElement e1 = KElement.createRoot("a", null);
 		e1.setAttribute("b", "1.123");
@@ -153,7 +153,7 @@ public class XMLCompareWalkerTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSimpleChildPrecisionIntDouble()
+	void testSimpleChildPrecisionIntDouble()
 	{
 		final KElement e1 = KElement.createRoot("a", null);
 		e1.setAttribute("b", "1");
@@ -165,7 +165,7 @@ public class XMLCompareWalkerTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testComplexSame()
+	void testComplexSame()
 	{
 		final File[] fs = new File(sm_dirTestData + "SampleFiles").listFiles();
 		for (final File f : fs)

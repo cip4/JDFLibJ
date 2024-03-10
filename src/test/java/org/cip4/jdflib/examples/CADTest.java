@@ -131,7 +131,7 @@ public class CADTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testCompletedJMF()
+	void testCompletedJMF()
 	{
 		createShapeDefProduction();
 		final StatusCounter sc = new StatusCounter(null, null, null);
@@ -157,7 +157,7 @@ public class CADTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testShapeDefProduction()
+	void testShapeDefProduction()
 	{
 		createShapeDefProduction();
 
@@ -170,7 +170,7 @@ public class CADTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testShapeDefLWD()
+	void testShapeDefLWD()
 	{
 		d = new JDFDoc(ElementName.JDF);
 		n = d.getJDFRoot();
@@ -227,7 +227,7 @@ public class CADTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testDieLayoutProduction()
+	void testDieLayoutProduction()
 	{
 		n.setType("DieLayoutProduction", false);
 		n.setDescriptiveName("This process describes placement of one-up shapes on a sheet");
@@ -266,7 +266,7 @@ public class CADTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testDieDesign()
+	void testDieDesign()
 	{
 		createDieDesign();
 		writeTest(n, "CAD_DieDesign_out.jdf", true, null);
@@ -362,7 +362,7 @@ public class CADTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

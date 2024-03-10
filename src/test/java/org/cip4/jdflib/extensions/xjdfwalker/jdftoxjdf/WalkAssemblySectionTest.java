@@ -53,7 +53,7 @@ public class WalkAssemblySectionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWalkElements()
+	void testWalkElements()
 	{
 		final JDFAssemblySection as = (JDFAssemblySection) new JDFDoc(ElementName.ASSEMBLYSECTION).getRoot();
 		as.appendAssemblySection();
@@ -73,7 +73,7 @@ public class WalkAssemblySectionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWalkAttributes()
+	void testWalkAttributes()
 	{
 		final JDFAssemblySection as = (JDFAssemblySection) new JDFDoc(ElementName.ASSEMBLYSECTION).getRoot();
 		as.setJobID("j");
@@ -89,7 +89,7 @@ public class WalkAssemblySectionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWalkAttributesDesc()
+	void testWalkAttributesDesc()
 	{
 		final JDFAssemblySection as = (JDFAssemblySection) new JDFDoc(ElementName.ASSEMBLYSECTION).getRoot();
 		as.setJobID("j");
@@ -109,7 +109,7 @@ public class WalkAssemblySectionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatches()
+	void testMatches()
 	{
 		final JDFAssemblySection as = (JDFAssemblySection) new JDFDoc(ElementName.ASSEMBLYSECTION).getRoot();
 		final WalkAssemblySection wa = new WalkAssemblySection();
@@ -121,7 +121,7 @@ public class WalkAssemblySectionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElementNames()
+	void testGetElementNames()
 	{
 		final JDFAssemblySection as = (JDFAssemblySection) new JDFDoc(ElementName.ASSEMBLYSECTION).getRoot();
 		final WalkAssemblySection wa = new WalkAssemblySection();

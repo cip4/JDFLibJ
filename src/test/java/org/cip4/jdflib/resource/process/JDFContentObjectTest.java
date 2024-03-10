@@ -100,7 +100,7 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
 		super.setUp();
@@ -115,7 +115,7 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testcalcOrd()
+	void testcalcOrd()
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -140,7 +140,7 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetTrimSize()
+	void testSetTrimSize()
 	{
 		final JDFContentObject co = lo.appendContentObject();
 		co.setTrimSize(1.12345, 2.3456, 2);
@@ -152,7 +152,7 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetRect()
+	void testGetRect()
 	{
 		final JDFContentObject co = lo.appendContentObject();
 		co.setTrimSize(1.2345, 2.3456);
@@ -165,7 +165,7 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetCTM()
+	void testSetCTM()
 	{
 		final JDFContentObject co = lo.appendContentObject();
 		co.setTrimSize(1.12345, 2.3456, 2);
@@ -177,7 +177,7 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetClipPath()
+	void testSetClipPath()
 	{
 		final JDFContentObject co = lo.appendContentObject();
 		co.setClipPath("1.0000004 1.2345678 l 1 2 3 g ds", 2);

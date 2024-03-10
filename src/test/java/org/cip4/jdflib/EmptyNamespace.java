@@ -95,7 +95,7 @@ public class EmptyNamespace extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testDefaultNamespace() {
+	void testDefaultNamespace() {
 		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 
 		String defaultFile = "default.jdf";
@@ -116,7 +116,7 @@ public class EmptyNamespace extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testEmptyNamespace() {
+	void testEmptyNamespace() {
 		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 
 		jdfDoc.write2File(sm_dirTestDataTemp + "test.jdf", 0, true);

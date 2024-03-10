@@ -61,7 +61,7 @@ public class RollingBackupTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testConstruct() throws Exception
+	void testConstruct() throws Exception
 	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
 		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 4);
@@ -75,7 +75,7 @@ public class RollingBackupTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testGetNewFile() throws Exception
+	void testGetNewFile() throws Exception
 	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
 		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 4);
@@ -100,7 +100,7 @@ public class RollingBackupTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testGetNewFileWithExtension() throws Exception
+	void testGetNewFileWithExtension() throws Exception
 	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
 		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 4);
@@ -117,7 +117,7 @@ public class RollingBackupTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testGetNewFileWithDotExtension() throws Exception
+	void testGetNewFileWithDotExtension() throws Exception
 	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
 		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 42);
@@ -138,7 +138,7 @@ public class RollingBackupTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testGetNewFileWithNewDotExtension() throws Exception
+	void testGetNewFileWithNewDotExtension() throws Exception
 	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roller"));
 		for (int i = 0; i < 30; i++)
@@ -160,7 +160,7 @@ public class RollingBackupTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testGetNewFileWithPreDotExtension() throws Exception
+	void testGetNewFileWithPreDotExtension() throws Exception
 	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.a.b.txt"));
 		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 42);
@@ -180,7 +180,7 @@ public class RollingBackupTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testGetOldFile() throws Exception
+	void testGetOldFile() throws Exception
 	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
 		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 4);
@@ -207,7 +207,7 @@ public class RollingBackupTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testClearAll() throws Exception
+	void testClearAll() throws Exception
 	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
 		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 4);

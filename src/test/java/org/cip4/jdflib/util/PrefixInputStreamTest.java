@@ -90,7 +90,7 @@ public class PrefixInputStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRead() throws Exception
+	void testRead() throws Exception
 	{
 		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
 		Assertions.assertEquals(pis.read(), 'a');
@@ -107,7 +107,7 @@ public class PrefixInputStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMark1() throws Exception
+	void testMark1() throws Exception
 	{
 		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
 		pis.mark(44);
@@ -129,7 +129,7 @@ public class PrefixInputStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMark2() throws Exception
+	void testMark2() throws Exception
 	{
 		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
 		pis.mark(44);
@@ -157,7 +157,7 @@ public class PrefixInputStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReadBytes() throws Exception
+	void testReadBytes() throws Exception
 	{
 		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
 		final byte b[] = new byte[2];
@@ -173,7 +173,7 @@ public class PrefixInputStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReadByteslen() throws Exception
+	void testReadByteslen() throws Exception
 	{
 		final PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
 		final byte b[] = new byte[2];

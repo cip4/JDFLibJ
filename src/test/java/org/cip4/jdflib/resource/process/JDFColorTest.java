@@ -95,7 +95,7 @@ public class JDFColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSet8BitNames()
+	void testSet8BitNames()
 	{
 		final JDFColor c = cp.appendColor();
 		final byte[] b = { (byte) 0xb8, (byte) 0xde, (byte) 0xd8, (byte) 0xb0, (byte) 0xdd };
@@ -117,7 +117,7 @@ public class JDFColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetRawName()
+	void testSetRawName()
 	{
 		final JDFColor c = cp.appendColor();
 		final byte[] b = "grün".getBytes();
@@ -129,7 +129,7 @@ public class JDFColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCMYK()
+	void testCMYK()
 	{
 		for (final String c : JDFColor.getCMYKSeparations())
 		{
@@ -142,7 +142,7 @@ public class JDFColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testKCMY()
+	void testKCMY()
 	{
 		Assertions.assertTrue(JDFColor.getKCMYSeparations().containsAll(JDFColor.getCMYKSeparations()));
 		Assertions.assertEquals(JDFConstants.SEPARATION_BLACK, JDFColor.getKCMYSeparations().get(0));
@@ -152,7 +152,7 @@ public class JDFColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDuplicateName()
+	void testDuplicateName()
 	{
 		final JDFColor c = cp.appendColorWithName("a", "a");
 		final JDFColor c1 = cp.appendColorWithName("a2", null);
@@ -172,7 +172,7 @@ public class JDFColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDuplicateActualName()
+	void testDuplicateActualName()
 	{
 		final JDFColor c = cp.appendColorWithName("a", null);
 		final JDFColor c1 = cp.appendColorWithName("a2", null);
@@ -187,7 +187,7 @@ public class JDFColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetHTMLColor()
+	void testGetHTMLColor()
 	{
 		final JDFColor c = cp.appendColor();
 		c.setCMYK(new JDFCMYKColor(0, 0, 0, 1));
@@ -200,7 +200,7 @@ public class JDFColorTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		final JDFDoc doc = new JDFDoc("JDF");

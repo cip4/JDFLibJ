@@ -82,7 +82,7 @@ public class WalkNotificationTest
 	 * 
 	 */
 	@Test
-	public void testRemove()
+	void testRemove()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildMilestone("FooBar", "42");
 		KElement xjmf = new JDFToXJDF().convert(jmf).getXPathElement("SignalNotification/Notification");

@@ -47,7 +47,7 @@ public class CxFReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGet()
+	void testGet()
 	{
 		Assertions.assertNull(CxFReader.getReader(null));
 		Assertions.assertNotNull(CxFReader.getReader(new XMLDoc(CxFReader.CXF, CxFReader.CXF_NS).getRoot()));
@@ -59,7 +59,7 @@ public class CxFReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseFile()
+	void testParseFile()
 	{
 		Assertions.assertNull(CxFReader.parseFile(null));
 		Assertions.assertNotNull(CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf"));
@@ -69,7 +69,7 @@ public class CxFReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetColor()
+	void testGetColor()
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		Assertions.assertNotNull(cxf.getColorObject(0));
@@ -79,7 +79,7 @@ public class CxFReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetColorByName()
+	void testGetColorByName()
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		Assertions.assertNotNull(cxf.getColorObject("black"));
@@ -90,7 +90,7 @@ public class CxFReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		final CxFReader cxf = CxFReader.getReader(new XMLDoc(CxFReader.CXF, CxFReader.CXF_NS).getRoot());
 		Assertions.assertEquals("CxFReader", cxf.toString().substring(0, 9));

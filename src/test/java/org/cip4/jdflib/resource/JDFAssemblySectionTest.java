@@ -68,7 +68,7 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		doc = new JDFDoc("JDF");
@@ -81,7 +81,7 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSubAssemblySection()
+	void testSubAssemblySection()
 	{
 		final JDFAssemblySection ass = as.appendAssemblySection();
 		final JDFAssemblySection asss = ass.appendAssemblySection();
@@ -94,7 +94,7 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAssemblySectionCollection()
+	void testAssemblySectionCollection()
 	{
 		JDFAssemblySection ass = as.appendAssemblySection();
 		ass = as.appendAssemblySection();
@@ -114,7 +114,7 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAllAssemblyIDs()
+	void testAllAssemblyIDs()
 	{
 		JDFAssemblySection ass = as.appendAssemblySection();
 		ass = as.appendAssemblySection();

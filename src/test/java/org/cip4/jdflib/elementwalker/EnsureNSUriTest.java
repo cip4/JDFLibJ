@@ -59,7 +59,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnsureNS()
+	void testEnsureNS()
 	{
 		final XMLDoc d = new XMLDoc("foo", "bar");
 		final KElement root = d.getRoot();
@@ -79,7 +79,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnsureNSKeepUnknown()
+	void testEnsureNSKeepUnknown()
 	{
 		final XMLDoc d = new XMLDoc("foo", "www.foo.com");
 		final KElement root = d.getRoot();
@@ -101,7 +101,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnsureNSNull()
+	void testEnsureNSNull()
 	{
 		final XMLDoc d = new XMLDoc("foo", null);
 		final KElement root = d.getRoot();
@@ -123,7 +123,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnsureNSDefault()
+	void testEnsureNSDefault()
 	{
 		final XMLDoc d = new XMLDoc("foo", "foo.com");
 		final KElement root = d.getRoot();
@@ -141,7 +141,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUpdate()
+	void testUpdate()
 	{
 		final XMLDoc d = new XMLDoc("foo", "foo");
 		final KElement root = d.getRoot();
@@ -163,7 +163,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnsureNS2Default()
+	void testEnsureNS2Default()
 	{
 		final XMLDoc d = new XMLDoc("foo", "foo.com");
 		final KElement root = d.getRoot();
@@ -179,7 +179,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnsureNSMapToDefault()
+	void testEnsureNSMapToDefault()
 	{
 		final XMLDoc d = new XMLDoc("foo:foo", "foo.com");
 		final KElement root = d.getRoot();
@@ -198,7 +198,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnsureNSAlias()
+	void testEnsureNSAlias()
 	{
 		final XMLDoc d = new XMLDoc("foo", "bar");
 		final KElement root = d.getRoot();
@@ -227,7 +227,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnsureNSJDF()
+	void testEnsureNSJDF()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode jdfRoot = d.getJDFRoot();
@@ -247,7 +247,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnsureNSAliasBackwards()
+	void testEnsureNSAliasBackwards()
 	{
 		final XMLDoc d = new XMLDoc("foo", "bar");
 		final KElement root = d.getRoot();
@@ -273,7 +273,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBigEnsureNS()
+	void testBigEnsureNS()
 	{
 		final File f = new File(sm_dirTestData + "evilparts.jdf");
 		Assertions.assertTrue(f.exists(), String.format("File %s not exists.", sm_dirTestData + "evilparts.jdf"));

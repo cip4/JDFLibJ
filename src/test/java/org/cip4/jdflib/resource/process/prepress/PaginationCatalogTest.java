@@ -52,7 +52,7 @@ public class PaginationCatalogTest
 	 *
 	 */
 	@Test
-	public void testconstruct()
+	void testconstruct()
 	{
 		Assertions.assertNotNull(PaginationCatalog.instance());
 	}
@@ -61,7 +61,7 @@ public class PaginationCatalogTest
 	 *
 	 */
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		Assertions.assertNotNull(PaginationCatalog.instance().toString());
 	}
@@ -70,7 +70,7 @@ public class PaginationCatalogTest
 	 *
 	 */
 	@Test
-	public void testgetFrontPages()
+	void testgetFrontPages()
 	{
 		Assertions.assertNotNull(PaginationCatalog.instance().getFrontPages("F4-2"));
 		Assertions.assertNull(PaginationCatalog.instance().getFrontPages("ffff"));
@@ -80,7 +80,7 @@ public class PaginationCatalogTest
 	 *
 	 */
 	@Test
-	public void testNUP()
+	void testNUP()
 	{
 		Assertions.assertEquals(new JDFXYPair(1, 1), PaginationCatalog.instance().getNUp("f2-1"));
 		Assertions.assertEquals(new JDFXYPair(2, 1), PaginationCatalog.instance().getNUp("f4-1"));
@@ -91,7 +91,7 @@ public class PaginationCatalogTest
 	 *
 	 */
 	@Test
-	public void testComplete()
+	void testComplete()
 	{
 		final PaginationCatalog pc = PaginationCatalog.instance();
 		final Collection<String> keys = pc.getKeys();

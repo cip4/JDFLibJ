@@ -83,7 +83,7 @@ public class WalkAuditTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreatedTime()
+	void testCreatedTime()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		KElement xjdf = new JDFToXJDF().convert(n);

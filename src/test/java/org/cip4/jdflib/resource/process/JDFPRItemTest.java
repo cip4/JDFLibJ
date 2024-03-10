@@ -85,7 +85,7 @@ public class JDFPRItemTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////////////////
 
 	@Test
-	public void testInsertPageSet()
+	void testInsertPageSet()
 	{
 		JDFDoc d = new JDFDoc("PRItem");
 		JDFPRItem pi = (JDFPRItem) d.getRoot();

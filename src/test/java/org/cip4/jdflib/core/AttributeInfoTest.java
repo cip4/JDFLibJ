@@ -49,7 +49,7 @@ public class AttributeInfoTest
 	 *
 	 */
 	@Test
-	public void testvalidStringForTypeInt()
+	void testvalidStringForTypeInt()
 	{
 		Assertions.assertTrue(AttributeInfo.validStringForType("2", EnumAttributeType.integer, null));
 		Assertions.assertFalse(AttributeInfo.validStringForType("", EnumAttributeType.integer, null));
@@ -60,7 +60,7 @@ public class AttributeInfoTest
 	 *
 	 */
 	@Test
-	public void testvalidStringForTypeNMTOKEN()
+	void testvalidStringForTypeNMTOKEN()
 	{
 		Assertions.assertTrue(AttributeInfo.validStringForType("2", EnumAttributeType.NMTOKEN, null));
 		Assertions.assertFalse(AttributeInfo.validStringForType("", EnumAttributeType.NMTOKEN, null));
@@ -72,7 +72,7 @@ public class AttributeInfoTest
 	 *
 	 */
 	@Test
-	public void testvalidStringForTypeNMTOKENS()
+	void testvalidStringForTypeNMTOKENS()
 	{
 		Assertions.assertTrue(AttributeInfo.validStringForType("2", EnumAttributeType.NMTOKENS, null));
 		Assertions.assertFalse(AttributeInfo.validStringForType("", EnumAttributeType.NMTOKENS, null));
@@ -85,7 +85,7 @@ public class AttributeInfoTest
 	 *
 	 */
 	@Test
-	public void testvalidStringForTypeBool()
+	void testvalidStringForTypeBool()
 	{
 		Assertions.assertFalse(AttributeInfo.validStringForType("2", EnumAttributeType.boolean_, null));
 		Assertions.assertFalse(AttributeInfo.validStringForType("", EnumAttributeType.boolean_, null));

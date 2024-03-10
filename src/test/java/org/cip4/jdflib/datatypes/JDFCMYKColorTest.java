@@ -55,7 +55,7 @@ public class JDFCMYKColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetRGBLcolor()
+	void testgetRGBLcolor()
 	{
 		final JDFCMYKColor c = new JDFCMYKColor(0, 0, 0, 0);
 		final JDFRGBColor rgb = c.getRGB();

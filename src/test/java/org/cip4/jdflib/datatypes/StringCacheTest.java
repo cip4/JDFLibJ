@@ -122,7 +122,7 @@ public class StringCacheTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		StringCache.enable(false);
 		StringCache.enable(true);
@@ -133,7 +133,7 @@ public class StringCacheTest extends JDFTestCaseBase
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		StringCache.enable(false);
 		super.tearDown();

@@ -90,7 +90,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIDPSimplex()
+	void testIDPSimplex()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
 		xjdfHelper.setTypes("Stripping");
@@ -109,7 +109,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIDPBooklet()
+	void testIDPBooklet()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Booklet", null);
 		xjdfHelper.setTypes("Stripping");
@@ -141,7 +141,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSheetActivation()
+	void testSheetActivation()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "SheetActivation", null);
 		xjdfHelper.setTypes("Stripping");
@@ -212,7 +212,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIDPCalendar()
+	void testIDPCalendar()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
 		xjdfHelper.setTypes("Stripping");
@@ -231,7 +231,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTiling()
+	void testTiling()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Tiling", null);
 		xjdfHelper.setTypes("Imposition");
@@ -264,7 +264,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPageCondition()
+	void testPageCondition()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "PageCondition", null);
 		xjdfHelper.setTypes("Imposition");
@@ -301,7 +301,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRegisterMark()
+	void testRegisterMark()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "PageCondition", null);
 		xjdfHelper.setTypes("Imposition");
@@ -325,7 +325,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	// @Test
-	public void testIdentificationField()
+	void testIdentificationField()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "PageCondition", null);
 		xjdfHelper.setTypes("Imposition");
@@ -348,7 +348,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testContentRef()
+	void testContentRef()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "ContentRef", null);
 		xjdfHelper.setTypes("Imposition");
@@ -399,7 +399,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDynamicField()
+	void testDynamicField()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "DynamicField", null);
 		xjdfHelper.setTypes("Imposition");
@@ -428,7 +428,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCutStack()
+	void testCutStack()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "CutStack", null);
 		xjdfHelper.setTypes("Stripping");
@@ -457,7 +457,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStrippingF16()
+	void testStrippingF16()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
 		xjdfHelper.setTypes("Stripping");
@@ -489,7 +489,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStrippingMedia()
+	void testStrippingMedia()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
 		xjdfHelper.setTypes("Stripping");
@@ -535,7 +535,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStrippingMultiPageFold()
+	void testStrippingMultiPageFold()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "MultiPage", null);
 		xjdfHelper.setTypes("Stripping");
@@ -574,7 +574,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStrippingComeGo()
+	void testStrippingComeGo()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "ComeGo", null);
 		xjdfHelper.setTypes("Stripping");
@@ -632,7 +632,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentName(null);
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentVersion(null);

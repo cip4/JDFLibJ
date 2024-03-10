@@ -89,7 +89,7 @@ public class IPPTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		KElement.setLongID(false);
 		JDFAudit.setStaticAgentName(null);
@@ -120,7 +120,7 @@ public class IPPTest extends JDFTestCaseBase
 	 * 1. Simplex A4 job (dead simple job)
 	 */
 	@Test
-	public void testSimpleA4()
+	void testSimpleA4()
 	{
 		med.setDimensionCM(new JDFXYPair(21, 29.7));
 		med.setFrontCoatings(EnumFrontCoatings.None);
@@ -138,7 +138,7 @@ public class IPPTest extends JDFTestCaseBase
 	 * 2. Duplex US Letter job on Glossy media with multiple copies, staple, and letter fold (covers media type, duplex, copies, and common finishing operations for billing/marketing)
 	 */
 	@Test
-	public void testLetterGloss()
+	void testLetterGloss()
 	{
 		n.addTypes(EnumType.Stitching);
 		n.addTypes(EnumType.Folding);
@@ -164,7 +164,7 @@ public class IPPTest extends JDFTestCaseBase
 	 * 3. Duplex A3 job with multiple copies, saddle stitch, booklet fold/imposition, and cover (more complex mapping for reports/small publications)
 	 */
 	@Test
-	public void testBooklet()
+	void testBooklet()
 	{
 		n.addTypes(EnumType.Stitching);
 

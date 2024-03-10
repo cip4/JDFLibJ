@@ -82,7 +82,7 @@ public class JDFDeviceListTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testgetDeviceInfo()
+	void testgetDeviceInfo()
 	{
 		Assertions.assertNull(d.getDeviceInfo("abc"));
 		Assertions.assertNotNull(d.getDeviceInfo("d1"));
@@ -94,7 +94,7 @@ public class JDFDeviceListTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public void testgetCreateDeviceInfo()
+	void testgetCreateDeviceInfo()
 	{
 		Assertions.assertNotNull(d.getCreateDeviceInfo("d3"));
 		Assertions.assertEquals(d.getCreateDeviceInfo("d3").getDeviceID(), "d3");
@@ -105,7 +105,7 @@ public class JDFDeviceListTest extends JDFTestCaseBase
      */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		d = (JDFDeviceList) new JDFDoc("DeviceList").getRoot();
 		d.appendDeviceInfo().appendDevice().setDeviceID("d1");

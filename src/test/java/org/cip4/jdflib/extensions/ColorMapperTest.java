@@ -7,7 +7,7 @@ public class ColorMapperTest
 {
 
 	@Test
-	public void testtestGetColor()
+	void testtestGetColor()
 	{
 		Assertions.assertEquals("yellow", ColorMapper.getMatchingColor("Yellow"));
 	}

@@ -94,7 +94,7 @@ public class PackageElementWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConstruct()
+	void testConstruct()
 	{
 		PackageTestWalker w = new PackageTestWalker();
 		Assertions.assertNotNull(w);
@@ -105,7 +105,7 @@ public class PackageElementWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMultiConstruct()
+	void testMultiConstruct()
 	{
 		FixVersion v = new FixVersion(EnumVersion.Version_1_1);
 		FixVersion v2 = new FixVersion(EnumVersion.Version_1_1);
@@ -119,7 +119,7 @@ public class PackageElementWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMultiConstructJDF()
+	void testMultiConstructJDF()
 	{
 		JDFDoc d = creatXMDoc();
 		JDFNode n = d.getJDFRoot();
@@ -136,7 +136,7 @@ public class PackageElementWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFoo()
+	void testFoo()
 	{
 		PackageTestWalker w = new PackageTestWalker();
 		BaseWalkerFactory factory = w.getFactory();
@@ -149,7 +149,7 @@ public class PackageElementWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFoo2()
+	void testFoo2()
 	{
 		for (int i = 0; i < 10; i++)
 		{

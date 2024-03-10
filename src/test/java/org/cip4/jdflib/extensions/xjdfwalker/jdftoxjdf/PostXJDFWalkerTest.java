@@ -69,7 +69,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAmountsNull()
+	void testAmountsNull()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		final SetHelper sni = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
@@ -86,7 +86,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAuditPool()
+	void testAuditPool()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		h.setXPathValue("AuditPool/AuditCreated/@ID", "42");
@@ -101,7 +101,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSameSets()
+	void testSameSets()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		h.appendResourceSet("a", EnumUsage.Input).appendPartition("Run", "r1", true);
@@ -116,7 +116,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSameResInfo()
+	void testSameResInfo()
 	{
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage("ResponseResource");
@@ -140,7 +140,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSameSetsRetain()
+	void testSameSetsRetain()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		h.appendResourceSet("a", EnumUsage.Input).appendPartition("Run", "r1", true);
@@ -156,7 +156,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHeadbandStrip()
+	void testHeadbandStrip()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		h.appendResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input).appendPartition(null, true).getResource().setAttribute(AttributeName.STRIPMATERIAL, "b1");
@@ -169,7 +169,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHeadbandColor()
+	void testHeadbandColor()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		final KElement band = h.appendResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input).appendPartition(null, true).getResource();
@@ -185,7 +185,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSignatureName()
+	void testSignatureName()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		final ResourceHelper r = h.appendResourceSet(ElementName.COMPONENT, EnumUsage.Input).appendPartition(null, true);
@@ -200,7 +200,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDocRunIndex()
+	void testDocRunIndex()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		final ResourceHelper r = h.appendResourceSet(ElementName.COMPONENT, EnumUsage.Input).appendPartition(null, true);
@@ -215,7 +215,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRunPage()
+	void testRunPage()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		final SetHelper set = h.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input);
@@ -235,7 +235,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testThreadsewMaterial()
+	void testThreadsewMaterial()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		final KElement tsp = h.appendResourceSet(ElementName.THREADSEWINGPARAMS, EnumUsage.Input).appendPartition(null, true).getResource();
@@ -249,7 +249,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLaminateHardener()
+	void testLaminateHardener()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		final KElement tsp = h.appendResourceSet(ElementName.LAMINATINGPARAMS, EnumUsage.Input).appendPartition(null, true).getResource();
@@ -263,7 +263,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLaminateGlue()
+	void testLaminateGlue()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		final KElement tsp = h.appendResourceSet(ElementName.LAMINATINGPARAMS, EnumUsage.Input).appendPartition(null, true).getResource();
@@ -277,7 +277,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStitchGauge()
+	void testStitchGauge()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		final KElement tsp = h.appendResourceSet(ElementName.STITCHINGPARAMS, EnumUsage.Input).appendPartition(null, true).getResource();
@@ -292,7 +292,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStationAmount()
+	void testStationAmount()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		final KElement dl = h.appendResourceSet(ElementName.DIELAYOUT, EnumUsage.Input).appendPartition(null, true).getResource();
@@ -307,7 +307,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAuditOrder()
+	void testAuditOrder()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		h.setXPathValue("AuditPool/AuditCreated/@ID", "42");
@@ -324,7 +324,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHeaderMessageOrder()
+	void testHeaderMessageOrder()
 	{
 		final KElement x = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_2_0).getRoot();
 		final KElement c = x.appendElement("CommandSubmitQueueEntry");
@@ -340,7 +340,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHeaderMessageNameSpace()
+	void testHeaderMessageNameSpace()
 	{
 		final KElement x = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_1_6).getRoot();
 		final KElement c = x.appendElement("SignalNotification");
@@ -356,7 +356,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetNewVersion()
+	void testSetNewVersion()
 	{
 		final KElement x = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_1_6).getRoot();
 		final KElement c = x.appendElement("SignalNotification");
@@ -374,7 +374,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPV()
+	void testPV()
 	{
 		final XJDFHelper h = new XJDFHelper("a", null);
 		h.appendResourceSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getCreatePartition(AttributeName.PARTVERSION, "P1 P2", true);
@@ -388,7 +388,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testOrientation()
+	void testOrientation()
 	{
 		final XJDFHelper h = new XJDFHelper("a", null);
 		final SetHelper set = h.appendResourceSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
@@ -404,7 +404,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveToSet()
+	void testMoveToSet()
 	{
 		final XJDFHelper h = new XJDFHelper("a", null);
 		final SetHelper set = h.appendResourceSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
@@ -425,7 +425,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPVRetain()
+	void testPVRetain()
 	{
 		final XJDFHelper h = new XJDFHelper("a", null);
 		h.appendResourceSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getCreatePartition(AttributeName.PARTVERSION, "P1 P2", true);

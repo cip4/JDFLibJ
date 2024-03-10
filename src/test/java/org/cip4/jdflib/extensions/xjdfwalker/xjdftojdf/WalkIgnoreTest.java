@@ -47,7 +47,7 @@ public class WalkIgnoreTest extends JDFTestCaseBase
 {
 
 	@Test
-	public void testMatches()
+	void testMatches()
 	{
 		final WalkIgnore w = new WalkIgnore();
 		for (String s : w.getElementNames())

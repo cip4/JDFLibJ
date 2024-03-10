@@ -107,7 +107,7 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		JDFDoc d = new JDFDoc("JDF");
@@ -123,7 +123,7 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testCopyNodeData() throws Exception
+	void testCopyNodeData() throws Exception
 	{
 		n.setType(EnumType.Product);
 		JDFNode n1 = n = n.addJDFNode(EnumType.BlockPreparation);
@@ -148,7 +148,7 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testMakeRootResource() throws Exception
+	void testMakeRootResource() throws Exception
 	{
 		//		JDFAncestor a1 = 
 		ap.appendAncestor();
@@ -169,7 +169,7 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testgetAncestorElement() throws Exception
+	void testgetAncestorElement() throws Exception
 	{
 		JDFAncestor a1 = ap.appendAncestor();
 		JDFAncestor a2 = ap.appendAncestor();
@@ -193,7 +193,7 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testgetAncestorElementRef() throws Exception
+	void testgetAncestorElementRef() throws Exception
 	{
 		JDFAncestor a1 = ap.appendAncestor();
 		JDFCustomerInfo ci = n.getCreateCustomerInfo();

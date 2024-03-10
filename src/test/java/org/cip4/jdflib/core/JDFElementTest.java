@@ -129,7 +129,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendElement()
+	void testAppendElement()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final KElement r = d.getRoot();
@@ -147,7 +147,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendGeneralID()
+	void testAppendGeneralID()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode r = d.getJDFRoot();
@@ -160,7 +160,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testEnumValidationLevel()
+	void testEnumValidationLevel()
 	{
 		for (final Object e : EnumValidationLevel.getEnumList())
 		{
@@ -172,7 +172,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testValueForNewAttribute()
+	void testValueForNewAttribute()
 	{
 		final ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_7, 0, 0);
 		pgt.assign(null);
@@ -199,7 +199,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetGeneralID()
+	void testSetGeneralID()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode r = d.getJDFRoot();
@@ -215,7 +215,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyElement()
+	void testCopyElement()
 	{
 		final JDFDoc d = new JDFDoc("d1");
 		final KElement e = d.getRoot();
@@ -236,7 +236,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 * test for copyElement
 	 */
 	@Test
-	public void testCopyChildren()
+	void testCopyChildren()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource ci = n.addResource(ElementName.CUSTOMERINFO, null);
@@ -252,7 +252,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElement_KElement()
+	void testGetElement_KElement()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode root = d.getJDFRoot();
@@ -268,7 +268,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElement_JDFElement()
+	void testGetElement_JDFElement()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode root = d.getJDFRoot();
@@ -286,7 +286,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildElementVector_KElement()
+	void testGetChildElementVector_KElement()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode root = d.getJDFRoot();
@@ -316,7 +316,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNameSpaceElement()
+	void testNameSpaceElement()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
@@ -337,7 +337,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveExtensions()
+	void testRemoveExtensions()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -353,7 +353,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveChild()
+	void testRemoveChild()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -383,7 +383,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetInvalidAttributes()
+	void testGetInvalidAttributes()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setAttribute("xmlns:foo", "bar");
@@ -396,7 +396,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetGeneralID()
+	void testGetGeneralID()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setGeneralID("Foo", "Bar1");
@@ -413,7 +413,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetHRefs()
+	void testGetHRefs()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -440,7 +440,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFixVersion()
+	void testFixVersion()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -459,7 +459,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDefaultVersion()
+	void testDefaultVersion()
 	{
 
 		final EnumVersion j = JDFElement.getDefaultJDFVersion();
@@ -491,7 +491,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	/**
 	 *
 	 */
-	public void testEnumSeparation()
+	void testEnumSeparation()
 	{
 		assertEquals(EnumSeparation.Cyan.getName(), "Cyan");
 		assertNotNull(EnumSeparation.getEnumMap());
@@ -500,7 +500,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	/**
 	 *
 	 */
-	public void testEnumVersion()
+	void testEnumVersion()
 	{
 		assertTrue(EnumVersion.Version_2_0.isXJDF());
 		assertFalse(EnumVersion.Version_1_0.isXJDF());
@@ -511,7 +511,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEvaluateXY()
+	void testEvaluateXY()
 	{
 		EnumXYRelation xyR = EnumXYRelation.eq;
 		assertTrue(xyR.evaluateXY(2, 2, 0, 0), "eq");
@@ -546,7 +546,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGenerateDotID()
+	void testGenerateDotID()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode e = doc.getJDFRoot();
@@ -587,7 +587,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIncludesMatchingAttribute()
+	void testIncludesMatchingAttribute()
 	{
 		_setUp();
 
@@ -615,7 +615,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetRefElement()
+	void testGetRefElement()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFMedia m = (JDFMedia) n.addResource("Media", null);
@@ -637,7 +637,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreateElement()
+	void testGetCreateElement()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFMedia m = (JDFMedia) n.addResource("Media", null);
@@ -650,7 +650,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreateRefElement()
+	void testGetCreateRefElement()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFMedia m = (JDFMedia) n.addResource("Media", null);
@@ -684,7 +684,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetRefElements()
+	void testGetRefElements()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
@@ -700,7 +700,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildElementVector()
+	void testGetChildElementVector()
 	{
 		_setUp();
 		VElement velem = m_jdfRoot.getChildElementVector(null, null, null, true, 0, false);
@@ -717,7 +717,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetChildElementVector_or() throws Exception
+	void testGetChildElementVector_or() throws Exception
 	{
 		final JDFDoc d = new JDFDoc("AmountPool");
 		final JDFAmountPool ap = (JDFAmountPool) d.getRoot();
@@ -742,7 +742,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetParentJDFStatic()
+	void testGetParentJDFStatic()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFElement root = d.getJDFRoot();
@@ -760,7 +760,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSettingsPolicy()
+	void testGetSettingsPolicy()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -775,7 +775,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSchemaVersion()
+	void testGetSchemaVersion()
 	{
 		assertEquals(JDFElement.getSchemaURL(), "http://www.CIP4.org/JDFSchema_1_1");
 		assertEquals(JDFElement.getSchemaURL(1, 3), "http://www.CIP4.org/JDFSchema_1_1");
@@ -789,7 +789,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetValueForNewAttribute()
+	void testGetValueForNewAttribute()
 	{
 		final JDFElement e = new JDFDoc(ElementName.JMF).getJMFRoot();
 		assertTrue(JDFElement.getValueForNewAttribute(e, "ID").startsWith("I"));
@@ -800,7 +800,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testVersionFromRoot()
+	void testVersionFromRoot()
 	{
 		assertEquals(JDFElement.getDefaultJDFVersion(), new JDFDoc(ElementName.JMF).getJMFRoot().getVersion(true));
 		assertEquals(JDFElement.getDefaultJDFVersion(), new JDFDoc(ElementName.JDF).getJDFRoot().getVersion(true));
@@ -815,7 +815,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetVersion()
+	void testGetVersion()
 	{
 		assertEquals(EnumVersion.getEnum("1.5"), EnumVersion.Version_1_5);
 		assertEquals(EnumVersion.getEnum("1.6"), EnumVersion.Version_1_6);
@@ -828,7 +828,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetVersionMajor()
+	void testGetVersionMajor()
 	{
 		assertEquals(EnumVersion.getEnum(1, 5), EnumVersion.Version_1_5);
 		assertEquals(EnumVersion.getEnum(1, 6), EnumVersion.Version_1_6);
@@ -839,7 +839,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testOrientationMap()
+	void testOrientationMap()
 	{
 		final Map<String, EnumOrientation> map = EnumOrientation.getEnumMap();
 		assertEquals(map.get("Flip0"), EnumOrientation.Flip0);
@@ -849,7 +849,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetParentJDFNode()
+	void testGetParentJDFNode()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -870,7 +870,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElementByID()
+	void testGetElementByID()
 	{
 		_setUp();
 		final KElement kelem = m_jdfRoot.getChildWithAttribute("*", "ID", "*", "n0006", 0, true);
@@ -912,7 +912,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsCommentStatic()
+	void testIsCommentStatic()
 	{
 		_setUp();
 		assertFalse(m_kElement instanceof JDFComment, "Bug: This is a comment!");
@@ -925,7 +925,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsInJDFNamespaceStatic()
+	void testIsInJDFNamespaceStatic()
 	{
 		_setUp();
 		assertTrue(JDFElement.isInJDFNameSpaceStatic(JDFElement.getSchemaURL(1, 1)));
@@ -936,7 +936,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsInXJDFNamespaceStatic()
+	void testIsInXJDFNamespaceStatic()
 	{
 		assertTrue(JDFElement.isInXJDFNameSpaceStatic(JDFElement.getSchemaURL(2, 0)));
 	}
@@ -945,7 +945,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsInXJDFNamespaceStaticElem()
+	void testIsInXJDFNamespaceStaticElem()
 	{
 		assertTrue(JDFElement.isInXJDFNameSpaceStatic(new XJDFHelper("j1", null, null).getRoot()));
 
@@ -955,7 +955,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsInAnyNamespaceStaticElem()
+	void testIsInAnyNamespaceStaticElem()
 	{
 		assertTrue(JDFElement.isInAnyJDFNameSpaceStatic(new XJDFHelper("j1", null, null).getRoot()));
 		assertTrue(JDFElement.isInAnyJDFNameSpaceStatic(JDFNode.createRoot()));
@@ -967,7 +967,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testXJDF()
+	void testXJDF()
 	{
 		assertTrue(((JDFElement) new XJDFHelper("a", null, null).getRoot()).isXJDF());
 	}
@@ -976,7 +976,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsDeprecated()
+	void testIsDeprecated()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		assertFalse(n.isDeprecated());
@@ -990,7 +990,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsDeprecated16()
+	void testIsDeprecated16()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setVersion(EnumVersion.Version_1_6);
@@ -1005,7 +1005,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsResourceStatic()
+	void testIsResourceStatic()
 	{
 		_setUp();
 		m_kElement = m_jdfRoot.getChildByTagName("ComponentLink", "", 0, null, false, true);
@@ -1020,7 +1020,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsResourceLinkStatic()
+	void testIsResourceLinkStatic()
 	{
 		_setUp();
 		m_kElement = m_jdfRoot.getChildByTagName("Dimensions", "", 0, null, false, true);
@@ -1033,7 +1033,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInheritedVersionInfo()
+	void testInheritedVersionInfo()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		JDFNode node = doc.getJDFRoot();
@@ -1049,7 +1049,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatchesPathKElement()
+	void testMatchesPathKElement()
 	{
 		final JDFDoc doc = new JDFDoc("Test"); // make sure we call jdf methods
 		final KElement root = doc.getRoot();
@@ -1072,7 +1072,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatchesPath()
+	void testMatchesPath()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode node = doc.getJDFRoot();
@@ -1110,7 +1110,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRefElement()
+	void testRefElement()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode node = doc.getJDFRoot();
@@ -1174,7 +1174,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsValid()
+	void testIsValid()
 	{
 		final File testData = new File(sm_dirTestData + "SampleFiles");
 		assertTrue(testData.isDirectory(), "testData dir");
@@ -1224,7 +1224,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToDirJMF()
+	void testWriteToDirJMF()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Brief, EnumJobDetails.Full);
 		File out = jmf.write2Dir(sm_dirTestDataTemp + "jdfdir");
@@ -1241,7 +1241,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCloneNewDoc() throws CloneNotSupportedException
+	void testCloneNewDoc() throws CloneNotSupportedException
 	{
 		final XMLDoc doc = new JDFDoc("JDF");
 		final KElement e = doc.getRoot();
@@ -1266,7 +1266,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateRoot()
+	void testCreateRoot()
 	{
 		final JDFColor c = (JDFColor) JDFElement.createRoot(ElementName.COLOR);
 		assertNotNull(c);
@@ -1277,7 +1277,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateRoot2()
+	void testCreateRoot2()
 	{
 		final JDFElement x = JDFElement.createRoot(XJDFConstants.XJDF, EnumVersion.Version_2_0);
 		assertEquals(JDFElement.getSchemaURL(EnumVersion.Version_2_0), x.getNamespaceURI());
@@ -1287,7 +1287,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCache()
+	void testCache()
 	{
 		final JDFDoc d1 = new JDFDoc("d1");
 		final JDFDoc d2 = new JDFDoc("d2");
@@ -1335,7 +1335,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDeepElementByID()
+	void testGetDeepElementByID()
 	{
 		final String xmlFile = "bookintent.jdf";
 
@@ -1363,7 +1363,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIncrementUniqueID()
+	void testIncrementUniqueID()
 	{
 		KElement.setLongID(false);
 		KElement.uniqueID(1);
@@ -1378,7 +1378,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUniqueID()
+	void testUniqueID()
 	{
 		final HashSet<String> m = new HashSet<>();
 		KElement.uniqueID(99998);
@@ -1399,7 +1399,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInvalidNameSpace()
+	void testInvalidNameSpace()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFElement e = doc.getJDFRoot();
@@ -1416,7 +1416,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendAnchor()
+	void testAppendAnchor()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFElement e = doc.getJDFRoot();
@@ -1440,7 +1440,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAppendAnchorJMF()
+	void testAppendAnchorJMF()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF e = doc.getJMFRoot();
@@ -1456,7 +1456,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testVersions()
+	void testVersions()
 	{
 		assertEquals(JDFVersions.getTheOffset(EnumVersion.Version_1_0), 0);
 		assertEquals(JDFVersions.getTheOffset(EnumVersion.Version_1_2), 8);
@@ -1466,7 +1466,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMinorVersions()
+	void testMinorVersions()
 	{
 		assertEquals(EnumVersion.Version_1_0.getMinorVersion(), 0);
 		assertEquals(EnumVersion.Version_1_6.getMinorVersion(), 6);
@@ -1477,7 +1477,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMajorVersions()
+	void testMajorVersions()
 	{
 		assertEquals(EnumVersion.Version_1_0.getMajorVersion(), 1);
 		assertEquals(EnumVersion.Version_1_9.getMajorVersion(), 1);
@@ -1490,7 +1490,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetEnumerationsAttribute()
+	void testSetEnumerationsAttribute()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFElement root = d.getJDFRoot();
@@ -1508,7 +1508,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAttributeNumList() throws DataFormatException
+	void testSetAttributeNumList() throws DataFormatException
 	{
 		final JDFNumberList nl = new JDFNumberList("1.11 2.22 3.33");
 		final JDFDoc d = new JDFDoc("JDF");
@@ -1522,7 +1522,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAttributeNameTimestamp() throws Exception
+	void testSetAttributeNameTimestamp() throws Exception
 	{
 		final JDFElement e = JDFElement.createRoot("a");
 		e.setAttributeNameTimeStamp("b", null);
@@ -1535,7 +1535,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetXSIType()
+	void testSetXSIType()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFElement root = d.getJDFRoot();
@@ -1549,7 +1549,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStatusEquals()
+	void testStatusEquals()
 	{
 		// test if the auto classes implement the correct status
 

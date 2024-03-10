@@ -68,7 +68,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 *
 	 *
 	 */
-	public void testSetNull()
+	void testSetNull()
 	{
 		theHelper.setXPathAttribute("@bar", null);
 		assertFalse(theHelper.hasXPathNode("@bar"));
@@ -78,7 +78,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 *
 	 *
 	 */
-	public void testSetNamespaces()
+	void testSetNamespaces()
 	{
 		theHelper.setXPathAttribute("@foo:bar", "b1");
 		theHelper.setXPathAttribute("@xmlns:foo", "www.foo.com");
@@ -92,7 +92,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		this.theHelper = new XPathHelper(KElement.createRoot("foo", null));
@@ -102,7 +102,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetXPathValuesPerformance()
+	void testSetXPathValuesPerformance()
 	{
 		for (int j = 0; j < 1; j++)
 		{
@@ -127,7 +127,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetXPathValuesCustomerPerformance()
+	void testSetXPathValuesCustomerPerformance()
 	{
 		final CPUTimer ct = new CPUTimer(false);
 		final JDFCustomerInfo ci = (JDFCustomerInfo) new JDFDoc(ElementName.CUSTOMERINFO).getRoot();
@@ -166,7 +166,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetXPathValuesJMFPerformance()
+	void testSetXPathValuesJMFPerformance()
 	{
 		final CPUTimer ct = new CPUTimer(false);
 		final JDFDoc d = StatusCounterTest.getJMF();
@@ -188,7 +188,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetXPathValues()
+	void testSetXPathValues()
 	{
 		final JDFDoc d = creatXMDoc();
 		final KElement root = d.getRoot();
@@ -203,7 +203,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetXPathValuesEmptyElem()
+	void testSetXPathValuesEmptyElem()
 	{
 		final XMLDoc d = new XMLDoc("x", null);
 		d.getRoot().appendElement("y");
@@ -219,7 +219,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveXPathElem()
+	void testRemoveXPathElem()
 	{
 		final XMLDoc d = new XMLDoc("x", null);
 		final KElement root = d.getRoot();
@@ -234,7 +234,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetXPathValuesNSElem()
+	void testSetXPathValuesNSElem()
 	{
 		final XMLDoc d = new XMLDoc("x", null);
 		final KElement nsElem = d.getRoot().appendElement("ns:y", "foo");
@@ -258,7 +258,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetXPathValuesNSAttrib()
+	void testSetXPathValuesNSAttrib()
 	{
 		final XMLDoc d = new XMLDoc("x", null);
 		final KElement nsElem = d.getRoot().appendElement("nons");
@@ -284,7 +284,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXPathValueMapNotRoot()
+	void testGetXPathValueMapNotRoot()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("a", null);
 		final KElement root = jdfDoc.getRoot();
@@ -300,7 +300,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXPathValueMapNotRootset()
+	void testGetXPathValueMapNotRootset()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("a", null);
 		final KElement root = jdfDoc.getRoot();

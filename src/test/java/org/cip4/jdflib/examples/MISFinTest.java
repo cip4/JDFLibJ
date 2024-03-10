@@ -116,7 +116,7 @@ public class MISFinTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testAmount()
+	void testAmount()
 	{
 		KElement.setLongID(false);
 		final JDFDoc d = new JDFDoc("JDF");
@@ -161,7 +161,7 @@ public class MISFinTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testAmountPalletteManifest()
+	void testAmountPalletteManifest()
 	{
 		KElement.setLongID(false);
 		final JDFDoc d = new JDFDoc("JDF");
@@ -216,7 +216,7 @@ public class MISFinTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testStitchGB()
+	void testStitchGB()
 	{
 		final MISFinGoldenTicket fgt = new MISFinGoldenTicket(2, EnumVersion.Version_1_3, 2, 2, null);
 		fgt.setCategory(MISFinGoldenTicket.MISFIN_STITCHFIN);
@@ -231,7 +231,7 @@ public class MISFinTest extends BaseGoldenTicketTest
 	 * @throws Exception
 	 */
 	@Test
-	public void testBoxfold() throws DataFormatException
+	void testBoxfold() throws DataFormatException
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.setType("BoxFolding", false);
@@ -263,7 +263,7 @@ public class MISFinTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testAmountPalletteCompleteManifest()
+	void testAmountPalletteCompleteManifest()
 	{
 		KElement.setLongID(false);
 		final JDFDoc d = new JDFDoc("JDF");

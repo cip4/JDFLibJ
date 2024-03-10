@@ -89,7 +89,7 @@ public class JDFExprTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetTerm()
+	void testgetTerm()
 	{
 		JDFExpr expr = (JDFExpr) new JDFDoc("Expr").getRoot();
 		JDFand a = (JDFand) expr.appendTerm(EnumTerm.and);
@@ -101,7 +101,7 @@ public class JDFExprTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetCreateTerm()
+	void testgetCreateTerm()
 	{
 		JDFExpr expr = (JDFExpr) new JDFDoc("Expr").getRoot();
 		JDFNameEvaluation a = (JDFNameEvaluation) expr.getCreateTerm(EnumTerm.NameEvaluation, 0);

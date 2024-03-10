@@ -86,7 +86,7 @@ public class JDFColorMeasurementConditionsTest
 {
 
 	@Test
-	public void testEnumIllumination()
+	void testEnumIllumination()
 	{
 		final EnumIllumination e = EnumIllumination.D50;
 		final JDFColorMeasurementConditions cmc = (JDFColorMeasurementConditions) new JDFDoc(ElementName.COLORMEASUREMENTCONDITIONS).getRoot();

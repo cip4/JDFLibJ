@@ -115,7 +115,7 @@ public class JDFNumberRangeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetString()
+	void testGetString()
 	{
 		JDFNumberRange nr = JDFNumberRange.createNumberRange("8.1~22.234");
 		assertEquals("8 ~ 22", nr.getString(0));

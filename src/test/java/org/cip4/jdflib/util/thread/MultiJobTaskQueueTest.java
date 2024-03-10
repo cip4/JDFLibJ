@@ -75,7 +75,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		public void run()
+		void run()
 		{
 			log.info("running: " + i);
 			final boolean b = ThreadUtil.sleep(t);
@@ -88,7 +88,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSize()
+	void testSize()
 	{
 		final MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij0", 3);
 		assertEquals(0, q.size());
@@ -98,7 +98,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testExecuting()
+	void testExecuting()
 	{
 		final MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij0", 3);
 		assertEquals(0, q.executing());
@@ -108,7 +108,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMaxParallel()
+	void testMaxParallel()
 	{
 		final MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij0", 3);
 		assertEquals(3, q.getMaxParallel());
@@ -118,7 +118,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMaxParallelPercent()
+	void testMaxParallelPercent()
 	{
 		final MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("testMaxParallelPercent", 3);
 		assertEquals(3, q.getMaxParallel());
@@ -143,7 +143,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMulti()
+	void testMulti()
 	{
 		final MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij1" + KElement.uniqueID(0), 7);
 		assertEquals(0, q.getAvQueue());
@@ -190,7 +190,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUniqueMulti()
+	void testUniqueMulti()
 	{
 		final MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("testUniqueMulti", 3);
 		q.setUnique(true);
@@ -223,7 +223,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		final MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multiju", 7);
 		q.setUnique(true);
@@ -235,7 +235,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testManyMulti()
+	void testManyMulti()
 	{
 		nRun = 0;
 		final MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij2", 7);
@@ -261,7 +261,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		sequential.lock();
 		super.setUp();
@@ -271,7 +271,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 
 	@Override
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MultiTaskQueue.setPercentQueue(100);
 		OrderedTaskQueue.shutDownAll();

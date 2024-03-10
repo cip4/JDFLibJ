@@ -52,7 +52,7 @@ public class JDFScavengerAreaTest
 {
 
 	@Test
-	public void testGetRect()
+	void testGetRect()
 	{
 		final JDFLayout lo = (JDFLayout) new JDFDoc(ElementName.LAYOUT).getRoot();
 		final JDFMarkObject mo = lo.appendMarkObject();
@@ -64,7 +64,7 @@ public class JDFScavengerAreaTest
 	}
 
 	@Test
-	public void testGetRect90()
+	void testGetRect90()
 	{
 		final JDFLayout lo = (JDFLayout) new JDFDoc(ElementName.LAYOUT).getRoot();
 		final JDFMarkObject mo = lo.appendMarkObject();
@@ -77,7 +77,7 @@ public class JDFScavengerAreaTest
 	}
 
 	@Test
-	public void testGetSeparations()
+	void testGetSeparations()
 	{
 		final JDFLayout lo = (JDFLayout) new JDFDoc(ElementName.LAYOUT).getRoot();
 		final JDFMarkObject mo = lo.appendMarkObject();

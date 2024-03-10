@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 public class JDFMediaColorTest {
 	@Test
-	public void testMediaColor()
+	void testMediaColor()
 	{
 		// parse input string
 		JDFParser p = new JDFParser();

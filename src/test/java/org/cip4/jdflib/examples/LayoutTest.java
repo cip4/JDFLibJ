@@ -63,7 +63,7 @@ public class LayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testContentRefs()
+	void testContentRefs()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.setJobID("J_Content");
@@ -82,7 +82,7 @@ public class LayoutTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

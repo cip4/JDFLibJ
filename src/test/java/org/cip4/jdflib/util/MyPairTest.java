@@ -70,7 +70,7 @@ public class MyPairTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		Assertions.assertEquals("TestPair a,b", new TestPair("a", "b").toString());
 	}
@@ -80,7 +80,7 @@ public class MyPairTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEquals()
+	void testEquals()
 	{
 		final MyPair<Integer, Integer> p = new MyPair<>(new Integer(1), new Integer(2));
 		final MyPair<Integer, Integer> p2 = new MyPair<>(new Integer(1), new Integer(2));
@@ -94,7 +94,7 @@ public class MyPairTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHash()
+	void testHash()
 	{
 		final MyPair<Integer, Integer> p = new MyPair<>(new Integer(1), new Integer(2));
 		final MyPair<Integer, Integer> p2 = new MyPair<>(new Integer(1), new Integer(2));

@@ -159,7 +159,7 @@ public class JDFExampleDocTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentName(null);
@@ -176,7 +176,7 @@ public class JDFExampleDocTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testAll()
+	void testAll()
 	{
 		final String[] argV = new String[0];
 
@@ -1104,7 +1104,7 @@ public class JDFExampleDocTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testDigitalDelivery()
+	void testDigitalDelivery()
 	{
 		KElement.setLongID(false);
 
@@ -1125,7 +1125,7 @@ public class JDFExampleDocTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testComment()
+	void testComment()
 	{
 		KElement.setLongID(false);
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -1144,7 +1144,7 @@ public class JDFExampleDocTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testGangDigitalDelivery()
+	void testGangDigitalDelivery()
 	{
 		KElement.setLongID(false);
 
@@ -1265,7 +1265,7 @@ public class JDFExampleDocTest extends ExampleTest
 	 * @return
 	 */
 	@Test
-	public void testMISGang() throws Exception
+	void testMISGang() throws Exception
 	{
 		KElement.setLongID(false);
 		// set up the root process node, which is an imposition node

@@ -50,7 +50,7 @@ public class WalkFileSpecTest
 	 *
 	 */
 	@Test
-	public void testExternalImpo()
+	void testExternalImpo()
 	{
 		final JDFExternalImpositionTemplate et = (JDFExternalImpositionTemplate) new JDFDoc(ElementName.EXTERNALIMPOSITIONTEMPLATE).getRoot();
 		final JDFFileSpec fs = et.appendFileSpec("./foo.jdf");

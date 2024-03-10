@@ -115,7 +115,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAmount()
+	void testAmount()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -141,7 +141,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAmountPart()
+	void testAmountPart()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -159,7 +159,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinkedResourceName()
+	void testGetLinkedResourceName()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -177,7 +177,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAmountCondition()
+	void testAmountCondition()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -226,7 +226,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendAmountPool()
+	void testAppendAmountPool()
 	{
 		final JDFDoc d = new JDFDoc("MediaLink");
 		final JDFResourceLink rl = (JDFResourceLink) d.getRoot();
@@ -247,7 +247,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testDraftOK() throws Exception
+	void testDraftOK() throws Exception
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -294,7 +294,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMinAmountPoolAttribute()
+	void testGetMinAmountPoolAttribute()
 	{
 		final JDFDoc d = new JDFDoc("TestLink");
 		final JDFResourceLink rl = (JDFResourceLink) d.getRoot();
@@ -314,7 +314,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testExpandAmountPool()
+	void testExpandAmountPool()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -339,7 +339,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGenerateCPINull() throws Exception
+	void testGenerateCPINull() throws Exception
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
@@ -355,7 +355,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGenerateCPI() throws Exception
+	void testGenerateCPI() throws Exception
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
@@ -386,7 +386,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGenerateCPIComponent() throws Exception
+	void testGenerateCPIComponent() throws Exception
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFResource r = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
@@ -432,7 +432,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAmountPoolDouble()
+	void testGetAmountPoolDouble()
 	{
 		final JDFDoc d = new JDFDoc("TestLink");
 		final JDFResourceLink rl = (JDFResourceLink) d.getRoot();
@@ -450,7 +450,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAmountPoolSumDouble()
+	void testGetAmountPoolSumDouble()
 	{
 		final JDFNode d = new JDFDoc("JDF").getJDFRoot();
 		final JDFResource m = d.addResource("Media", EnumUsage.Input);
@@ -483,7 +483,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAmountPoolVector()
+	void testGetAmountPoolVector()
 	{
 		final JDFDoc d = new JDFDoc("TestLink");
 		final JDFResourceLink rl = (JDFResourceLink) d.getRoot();
@@ -504,7 +504,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testPartAmount() throws Exception
+	void testPartAmount() throws Exception
 	{
 
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -548,7 +548,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPartAmountVirtual()
+	void testPartAmountVirtual()
 	{
 
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -584,7 +584,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAmountPoolAttribute()
+	void testSetAmountPoolAttribute()
 	{
 		final JDFDoc d = new JDFDoc("ResourceLinkPool");
 		final JDFResourceLinkPool rlp = (JDFResourceLinkPool) d.getRoot();
@@ -608,7 +608,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetLinkRootJMF() throws Exception
+	void testGetLinkRootJMF() throws Exception
 	{
 		final JDFDoc d = new JDFDoc("JMF");
 		final JDFJMF jmf = d.getJMFRoot();
@@ -629,7 +629,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLeafVector()
+	void testGetLeafVector()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -666,7 +666,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * Method testGetTarget * @throws Exception
 	 */
 	@Test
-	public void testGetTargetVector()
+	void testGetTargetVector()
 	{
 		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
 		final JDFNode n = d.getJDFRoot();
@@ -682,7 +682,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * Method testGetTarget * @throws Exception
 	 */
 	@Test
-	public void testGetTargetList()
+	void testGetTargetList()
 	{
 		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
 		final JDFNode n = d.getJDFRoot();
@@ -698,7 +698,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * Method testGetTarget * @throws Exception
 	 */
 	@Test
-	public void testGetTargetVectorPartVersion()
+	void testGetTargetVectorPartVersion()
 	{
 		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
 		final JDFNode n = d.getJDFRoot();
@@ -721,7 +721,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * Method testGetTarget * @throws Exception
 	 */
 	@Test
-	public void testGetStatusFromLeaves()
+	void testGetStatusFromLeaves()
 	{
 		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
 		final JDFNode n = d.getJDFRoot();
@@ -751,7 +751,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * Method testGetTarget * @throws Exception
 	 */
 	@Test
-	public void testGetTargetPartVersion()
+	void testGetTargetPartVersion()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFResource comp = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
@@ -774,7 +774,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * Method testGetTarget * @throws Exception
 	 */
 	@Test
-	public void testGetTargetPartVersionMulti()
+	void testGetTargetPartVersionMulti()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFResource comp = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
@@ -802,7 +802,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * Method testGetTarget * @throws Exception
 	 */
 	@Test
-	public void testGetTargetVectorMultiPartVersion()
+	void testGetTargetVectorMultiPartVersion()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFAttributeMap mPartLink = new JDFAttributeMap("PartVersion", "v1");
@@ -823,7 +823,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTargetVectorIdentical()
+	void testGetTargetVectorIdentical()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFResource r = n.addResource("ExposedMedia", EnumUsage.Input);
@@ -863,7 +863,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetRawTargetVectorIdentical()
+	void testGetRawTargetVectorIdentical()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFResource r = n.addResource("ExposedMedia", EnumUsage.Input);
@@ -904,7 +904,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTargetVectorSparse()
+	void testGetTargetVectorSparse()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFExposedMedia xm = (JDFExposedMedia) n.getCreateResource("ExposedMedia", EnumUsage.Input, 0);
@@ -941,7 +941,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTargetVectorNullPart()
+	void testGetTargetVectorNullPart()
 	{
 		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
 		final JDFNode n = d.getJDFRoot();
@@ -979,7 +979,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetTarget() throws Exception
+	void testGetTarget() throws Exception
 	{
 		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
 		final JDFNode n = d.getJDFRoot();
@@ -1056,7 +1056,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetTargetIntermediate() throws Exception
+	void testGetTargetIntermediate() throws Exception
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource xm = n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
@@ -1081,7 +1081,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetCombinedProcessTypes() throws Exception
+	void testGetCombinedProcessTypes() throws Exception
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -1107,7 +1107,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinkRoot()
+	void testGetLinkRoot()
 	{
 
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -1150,7 +1150,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLinkRootDeadLoop()
+	void testLinkRootDeadLoop()
 	{
 		final JDFDoc jdfDoc = new JDFDoc("JDF");
 		final JDFNode node = jdfDoc.getJDFRoot();
@@ -1164,7 +1164,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatchesString()
+	void testMatchesString()
 	{
 		final JDFDoc jdfDoc = new JDFDoc("JDF");
 		final JDFNode node = jdfDoc.getJDFRoot();
@@ -1188,7 +1188,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPartMap()
+	void testSetPartMap()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -1211,7 +1211,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testSetTarget() throws Exception
+	void testSetTarget() throws Exception
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -1245,7 +1245,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetUsage()
+	void testGetUsage()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -1259,7 +1259,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHasResourcePartMap()
+	void testHasResourcePartMap()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -1323,7 +1323,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInvertUsage()
+	void testInvertUsage()
 	{
 		assertEquals(EnumUsage.Output, EnumUsage.Output.invert().invert());
 		assertEquals(EnumUsage.Input, EnumUsage.Output.invert());
@@ -1333,7 +1333,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsResourceLink()
+	void testIsResourceLink()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		assertFalse(JDFResourceLink.isResourceLink(n));
@@ -1350,7 +1350,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsExecutableNull()
+	void testIsExecutableNull()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -1366,7 +1366,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsExecutable()
+	void testIsExecutable()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -1424,7 +1424,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * Method test if the node name matching works.
 	 */
 	@Test
-	public void testValidName()
+	void testValidName()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -1444,7 +1444,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testValidPosition()
+	void testValidPosition()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -1465,7 +1465,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUnPartition()
+	void testUnPartition()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -1487,7 +1487,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testValidAttributesAmountPool()
+	void testValidAttributesAmountPool()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -1507,7 +1507,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testValidCombinedProcessIndex()
+	void testValidCombinedProcessIndex()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -1545,7 +1545,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetCombinedProcessIndex()
+	void testSetCombinedProcessIndex()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -1564,7 +1564,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		JDFResource.setUnpartitiondImplicit(false);

@@ -84,7 +84,7 @@ public class XMLDocUserDataTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGlobalDirty()
+	void testGlobalDirty()
 	{
 		final JDFDoc d = new JDFDoc("d");
 		final XMLDocUserData ud = d.getXMLDocUserData();

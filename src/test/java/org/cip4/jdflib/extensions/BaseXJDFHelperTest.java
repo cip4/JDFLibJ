@@ -61,7 +61,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		theHelper = new XJDFHelper(null);
@@ -73,7 +73,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetXPath()
+	void testSetXPath()
 	{
 		theHelper.setTypes("Product");
 		assertEquals("Product", theHelper.getTypes().get(0));
@@ -84,7 +84,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetBaseRoot()
+	void testGetBaseRoot()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("a", "b", null);
 		final KElement e = xjdfHelper.getRoot();
@@ -96,7 +96,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetBaseRootJMF()
+	void testGetBaseRootJMF()
 	{
 		final XJMFHelper xjdfHelper = new XJMFHelper();
 		final KElement e = xjdfHelper.getRoot();
@@ -108,7 +108,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXRoot()
+	void testGetXRoot()
 	{
 		final ProductHelper p = theHelper.appendProduct();
 		assertEquals(p, p.getXRoot());
@@ -119,7 +119,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXJDFRoot()
+	void testGetXJDFRoot()
 	{
 		final ProductHelper p = theHelper.appendProduct();
 		assertEquals(theHelper, p.getXJDFRoot());
@@ -130,7 +130,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGeneralID()
+	void testGeneralID()
 	{
 		theHelper.setGeneralID("foo", "Product");
 		assertEquals("Product", theHelper.getGeneralID("foo"));
@@ -141,7 +141,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetHelper()
+	void testGetHelper()
 	{
 		assertEquals(theHelper, BaseXJDFHelper.getBaseHelper(theHelper.getRoot()));
 	}
@@ -151,7 +151,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testComment()
+	void testComment()
 	{
 		final SetHelper set = theHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
 		set.setComment("foo");
@@ -163,7 +163,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAttribute()
+	void testGetAttribute()
 	{
 		Assertions.assertNull(theHelper.getAttribute("foo"));
 		theHelper.setAttribute("foo", "bar");
@@ -175,7 +175,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAttributeMap()
+	void testGetAttributeMap()
 	{
 		Assertions.assertNull(theHelper.getAttribute("foo"));
 		theHelper.setAttribute("foo", "bar");
@@ -187,7 +187,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLocalName()
+	void testGetLocalName()
 	{
 		assertEquals(XJDFConstants.XJDF, theHelper.getLocalName());
 	}
@@ -197,7 +197,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetAttribute()
+	void testSetAttribute()
 	{
 		theHelper.setAttribute("foo", "bar");
 		assertEquals("bar", theHelper.getAttribute("foo"));
@@ -208,7 +208,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEquals()
+	void testEquals()
 	{
 		assertEquals(theHelper, theHelper);
 		assertEquals(theHelper, new XJDFHelper(theHelper.getRoot()));
@@ -219,7 +219,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testClone()
+	void testClone()
 	{
 		assertEquals(theHelper, theHelper);
 		Assertions.assertFalse(theHelper.equals(theHelper.clone()));
@@ -231,7 +231,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopy()
+	void testCopy()
 	{
 		final XJDFHelper clone = theHelper.clone();
 		final SetHelper s = clone.appendSet(null, "foo", null);
@@ -244,7 +244,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeleteNode()
+	void testDeleteNode()
 	{
 		assertEquals(theHelper, theHelper);
 		Assertions.assertNotNull(theHelper.getRoot());
@@ -258,7 +258,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHash()
+	void testHash()
 	{
 		assertEquals(theHelper.hashCode(), new XJDFHelper(theHelper.getRoot()).hashCode());
 	}

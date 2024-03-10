@@ -64,7 +64,7 @@ public class XJDFCreatorTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		theXJDF = new JDFDoc(XJDFConstants.XJDF, XJDFHelper.defaultVersion()).getRoot();
@@ -87,7 +87,7 @@ public class XJDFCreatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testXJDFXPath()
+	void testXJDFXPath()
 	{
 		final KElement root = new JDFDoc(XJDFConstants.XJDF).getRoot();
 		root.setAttribute(AttributeName.JOBID, "j");

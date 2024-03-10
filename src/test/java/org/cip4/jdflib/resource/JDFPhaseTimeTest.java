@@ -96,7 +96,7 @@ public class JDFPhaseTimeTest extends JDFTestCaseBase
 	 * Test method for {@link JDFPhaseTime#getDeviceID()}.
 	 */
 	@Test
-	public void testGetDeviceID()
+	void testGetDeviceID()
 	{
 		testSetDeviceID();
 		Assertions.assertEquals("d1", pt.getDeviceID());
@@ -106,7 +106,7 @@ public class JDFPhaseTimeTest extends JDFTestCaseBase
 	 * Test method for {@link JDFPhaseTime#setDeviceID(String)}.
 	 */
 	@Test
-	public void testSetDeviceID()
+	void testSetDeviceID()
 	{
 		pt.setDeviceID("d1");
 		Assertions.assertEquals(pt.getDevice(0).getDeviceID(), "d1");
@@ -118,7 +118,7 @@ public class JDFPhaseTimeTest extends JDFTestCaseBase
 	*/
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		pt = new JDFDoc(ElementName.JDF).getJDFRoot().getCreateAuditPool().addPhaseTime(EnumNodeStatus.InProgress, null, null);
@@ -128,7 +128,7 @@ public class JDFPhaseTimeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPhaseNull()
+	void testSetPhaseNull()
 	{
 		pt.setPhase(null);
 		// we can do null
@@ -138,7 +138,7 @@ public class JDFPhaseTimeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPhase()
+	void testSetPhase()
 	{
 		JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Details, EnumJobDetails.Full);
 		JDFJobPhase jobPhase = jmf.getSignal(0).getDeviceInfo(0).getJobPhase(0);

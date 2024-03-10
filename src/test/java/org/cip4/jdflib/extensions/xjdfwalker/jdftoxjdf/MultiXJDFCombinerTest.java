@@ -76,7 +76,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCombined()
+	void testGetCombined()
 	{
 		final Vector<XJDFHelper> vh = new Vector<>();
 		for (int i = 1; i < 3; i++)
@@ -93,7 +93,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSammelStripping()
+	void testSammelStripping()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel18.jdf");
@@ -119,7 +119,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSammelCPI()
+	void testSammelCPI()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel18.jdf");
@@ -139,7 +139,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSammelSepSpec()
+	void testSammelSepSpec()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel18.jdf");
@@ -153,7 +153,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 	 */
 	@Test
 	@Disabled
-	public void testSammel19()
+	void testSammel19()
 	{
 		for (int i = 0; i < 1; i++)
 		{
@@ -172,7 +172,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSammelDrop()
+	void testSammelDrop()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		conv.setSingleNode(false);
@@ -200,7 +200,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSammelDropUnordered()
+	void testSammelDropUnordered()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		conv.setSingleNode(false);
@@ -216,7 +216,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSammelBindSig()
+	void testSammelBindSig()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel18.jdf").getJobPart("_180309_103033019_000111");

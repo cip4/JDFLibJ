@@ -89,7 +89,7 @@ public class JDFProductionIntentTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testIsDigital()
+	void testIsDigital()
 	{
 		JDFProductionIntent pi = (JDFProductionIntent) new JDFDoc(ElementName.PRODUCTIONINTENT).getRoot();
 		Assertions.assertFalse(pi.isDigital());

@@ -92,7 +92,7 @@ import org.junit.jupiter.api.Test;
 public class PhaseTimeTest extends JDFTestCaseBase
 {
 	@Test
-	public void testGetLink()
+	void testGetLink()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();
@@ -112,7 +112,7 @@ public class PhaseTimeTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetDuration()
+	void testGetDuration()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();
@@ -128,7 +128,7 @@ public class PhaseTimeTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testModuleIDs()
+	void testModuleIDs()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();

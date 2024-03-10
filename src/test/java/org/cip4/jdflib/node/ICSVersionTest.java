@@ -78,21 +78,21 @@ class ICSVersionTest extends JDFTestCaseBase
 {
 
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		assertEquals("MIS-CP_L1-2.1", new ICSVersion("MIS-CP", 1, EnumVersion.Version_2_1).toString());
 
 	}
 
 	@Test
-	public void testGetBase()
+	void testGetBase()
 	{
 		assertEquals("MIS_L1-2.1", new ICSVersion("MIS-CP", 1, EnumVersion.Version_2_1).getBase("MIS", 1).toString());
 
 	}
 
 	@Test
-	public void testGetFromString()
+	void testGetFromString()
 	{
 		assertEquals(new ICSVersion("MIS", 1, EnumVersion.Version_2_1), ICSVersion.getVersion("MIS_L1-2.1"));
 		assertEquals(new ICSVersion("MIS", 1, EnumVersion.Version_2_1).hashCode(), ICSVersion.getVersion("MIS_L1-2.1").hashCode());
@@ -102,7 +102,7 @@ class ICSVersionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetters()
+	void testGetters()
 	{
 		assertEquals(EnumVersion.Version_2_1, ICSVersion.getVersion("MIS_L1-2.1").getVersion());
 		assertEquals("MIS", ICSVersion.getVersion("MIS_L1-2.1").getIcs());

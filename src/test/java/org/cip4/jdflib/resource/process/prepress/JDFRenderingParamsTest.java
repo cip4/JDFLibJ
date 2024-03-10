@@ -90,7 +90,7 @@ public class JDFRenderingParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetObjectResolution()
+	void testGetObjectResolution()
 	{
 		JDFRenderingParams rp = (JDFRenderingParams) new JDFDoc(ElementName.RENDERINGPARAMS).getRoot();
 		JDFObjectResolution or0 = rp.appendObjectResolution();
@@ -109,7 +109,7 @@ public class JDFRenderingParamsTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetObjectResolutionAll()
+	void testGetObjectResolutionAll()
 	{
 		JDFRenderingParams rp = (JDFRenderingParams) new JDFDoc(ElementName.RENDERINGPARAMS).getRoot();
 		JDFObjectResolution or0 = rp.appendObjectResolution();

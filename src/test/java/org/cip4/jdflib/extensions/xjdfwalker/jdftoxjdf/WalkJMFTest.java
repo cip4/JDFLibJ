@@ -87,7 +87,7 @@ public class WalkJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSenderID()
+	void testSenderID()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		jmf.setSenderID("s1");
@@ -106,7 +106,7 @@ public class WalkJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testXSI()
+	void testXSI()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		jmf.setSenderID("s1");

@@ -56,20 +56,20 @@ public class FileTimeTest extends JDFTestCaseBase
 {
 
 	@Test
-	public void testExists()
+	void testExists()
 	{
 		assertTrue(new FileTime(new File(sm_dirTestData), false).exists());
 	}
 
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		assertNotNull(new FileTime(new File(sm_dirTestData), true).toString());
 		assertNotNull(new FileTime(new File(sm_dirTestData), false).toString());
 	}
 
 	@Test
-	public void testmodified()
+	void testmodified()
 	{
 		File f = new File(sm_dirTestDataTemp + "ft1.txt");
 		FileUtil.forceDelete(f);
@@ -82,7 +82,7 @@ public class FileTimeTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testmodifiedFile() throws Exception
+	void testmodifiedFile() throws Exception
 	{
 		for (final boolean b : new boolean[] { true, false })
 		{
@@ -111,7 +111,7 @@ public class FileTimeTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSameModified() throws IOException
+	void testSameModified() throws IOException
 	{
 		final FileTime ft = new FileTime(File.createTempFile("abbb", "txt", new File(sm_dirTestDataTemp)), false);
 		assertFalse(ft.sameModified());
@@ -120,7 +120,7 @@ public class FileTimeTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSameModifiedRO() throws IOException
+	void testSameModifiedRO() throws IOException
 	{
 		final FileTime ft = new FileTime(File.createTempFile("abbb", "txt", new File(sm_dirTestDataTemp)), false);
 		assertFalse(ft.sameModified());

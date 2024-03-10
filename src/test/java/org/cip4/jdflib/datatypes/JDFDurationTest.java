@@ -290,7 +290,7 @@ public class JDFDurationTest {
 	}
 
 	@Test
-	public void testCreateDurationNull() throws Exception
+	void testCreateDurationNull() throws Exception
 	{
 		DataFormatException ex = null;
 		try

@@ -91,7 +91,7 @@ public class XJDFDevCapTest extends JDFTestCaseBase
 	 */
 	@Deprecated
 	@Test
-	public void testTestPool1()
+	void testTestPool1()
 	{
 		JDFTestPool pool = (JDFTestPool) new JDFDoc("TestPool").getRoot();
 		JDFTest t = pool.appendTest();

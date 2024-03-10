@@ -93,7 +93,7 @@ public class JDFColorSpaceConversionOpTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddSourceObjects()
+	void testAddSourceObjects()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFColorSpaceConversionParams cp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input);
@@ -105,7 +105,7 @@ public class JDFColorSpaceConversionOpTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddSameSourceObjects()
+	void testAddSameSourceObjects()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFColorSpaceConversionParams cp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input);
@@ -119,7 +119,7 @@ public class JDFColorSpaceConversionOpTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAdd2SourceObjects()
+	void testAdd2SourceObjects()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFColorSpaceConversionParams cp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input);

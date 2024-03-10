@@ -93,7 +93,7 @@ public class UrlPartTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToString() throws IOException
+	void testToString() throws IOException
 	{
 		final UrlPart p = new UrlPart(new File(sm_dirTestData + "29694232.ptk"));
 		assertNotNull(p);
@@ -107,7 +107,7 @@ public class UrlPartTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRespString() throws IOException
+	void testRespString() throws IOException
 	{
 		final UrlPart p = new UrlPart(new File(sm_dirTestData + "29694232.ptk"));
 		String responseString = p.getResponseString(142);
@@ -118,7 +118,7 @@ public class UrlPartTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXMLDoc()
+	void testGetXMLDoc()
 	{
 		if (!isTestNetwork())
 			return;
@@ -131,7 +131,7 @@ public class UrlPartTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBuffer()
+	void testBuffer()
 	{
 		if (!isTestNetwork())
 			return;
@@ -146,7 +146,7 @@ public class UrlPartTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteStream()
+	void testWriteStream()
 	{
 		if (!isTestNetwork())
 			return;
@@ -162,7 +162,7 @@ public class UrlPartTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFile() throws Exception
+	void testFile() throws Exception
 	{
 		final UrlPart p = new UrlPart(new File("Test.xml"));
 		assertEquals(p.getContentType(), UrlUtil.TEXT_XML);
@@ -173,7 +173,7 @@ public class UrlPartTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRCOK() throws Exception
+	void testRCOK() throws Exception
 	{
 		assertFalse(UrlPart.isReturnCodeOK(null));
 		assertFalse(UrlPart.isReturnCodeOK(new UrlPart(new File("certainly not there"))));

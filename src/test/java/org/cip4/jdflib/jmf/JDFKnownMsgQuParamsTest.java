@@ -91,7 +91,7 @@ public class JDFKnownMsgQuParamsTest
 	 * 
 	 */
 	@Test
-	public void testsetChannelMode()
+	void testsetChannelMode()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.KNOWNMSGQUPARAMS);
 		JDFKnownMsgQuParams ms = (JDFKnownMsgQuParams) doc.getRoot();
@@ -104,7 +104,7 @@ public class JDFKnownMsgQuParamsTest
 	 * 
 	 */
 	@Test
-	public void testsetChannelMode2()
+	void testsetChannelMode2()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.KNOWNMSGQUPARAMS);
 		JDFKnownMsgQuParams ms = (JDFKnownMsgQuParams) doc.getRoot();

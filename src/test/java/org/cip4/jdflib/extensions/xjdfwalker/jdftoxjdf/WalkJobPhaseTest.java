@@ -87,7 +87,7 @@ public class WalkJobPhaseTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGlobal()
+	void testGlobal()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
 		final JDFJobPhase jp = jmf.getSignal(0).appendDeviceInfo().appendJobPhase();
@@ -101,7 +101,7 @@ public class WalkJobPhaseTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUpdatePC()
+	void testUpdatePC()
 	{
 		final WalkJobPhase w = new WalkJobPhase();
 		final JDFAttributeMap m = new JDFAttributeMap();

@@ -719,7 +719,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	 * experimental mapping of tags to partition keys
 	 */
 	@Test
-	public void testTagMapTiff()
+	void testTagMapTiff()
 	{
 		final KElement tagMap = rl.appendElement(METADATA_MAP);
 		tagMap.setAttribute("BoundaryKey", "EndOfDocument");
@@ -736,7 +736,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	 *
 	 */
 	// TODO @Stefan @Test
-	// public void testMetadataMapSchema() {
+	// void testMetadataMapSchema() {
 	// JDFMetadataMap map = rl.appendMetadataMap();
 	// map.getCreateXPathElement("Expr/and/StringEvaluation");
 	// map.setDataType(EnumDataType.integer);
@@ -754,7 +754,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	 * experimental mapping of tags to partition keys
 	 */
 	@Test
-	public void testObjectTagsMetadata()
+	void testObjectTagsMetadata()
 	{
 		final KElement tagMap = rl.appendElement(METADATA_MAP);
 		tagMap.setXMLComment("This tagmap specifies The path for the NMTOKEN \"ObjectTag\"", true);
@@ -791,7 +791,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testTagMap() throws Exception
+	void testTagMap() throws Exception
 	{
 
 		final JDFLayout lo = (JDFLayout) root.addResource(ElementName.LAYOUT, null, EnumUsage.Input, null, null, null, null);
@@ -873,7 +873,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSeparatedTiff()
+	void testSeparatedTiff()
 	{
 		final VString v1 = new VString("Cyan Magenta Yello Black", " ");
 		final VString v2 = new VString();
@@ -892,7 +892,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		KElement.setLongID(false);
 		super.setUp();

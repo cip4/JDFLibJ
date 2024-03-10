@@ -56,7 +56,7 @@ public class RemoveCompareTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveJMFCompare()
+	void testRemoveJMFCompare()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
 		final RemoveCompare emp = new RemoveCompare();
@@ -70,7 +70,7 @@ public class RemoveCompareTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveJMFCompareVoodoo()
+	void testRemoveJMFCompareVoodoo()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
 		final RemoveCompare emp = new RemoveCompare();

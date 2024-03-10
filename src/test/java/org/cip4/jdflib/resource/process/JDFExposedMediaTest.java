@@ -88,7 +88,7 @@ public class JDFExposedMediaTest extends JDFTestCaseBase
 	 * test
 	 */
 	@Test
-	public void testGetMediaDimension()
+	void testGetMediaDimension()
 	{
 		JDFExposedMedia xm = (JDFExposedMedia) new JDFDoc("JDF").getRoot().appendElement(ElementName.RESOURCEPOOL).appendElement(ElementName.EXPOSEDMEDIA);
 		Assertions.assertNull(xm.getMediaDimension());

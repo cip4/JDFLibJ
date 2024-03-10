@@ -50,7 +50,7 @@ public class RemovePrivateTest {
 	 *
 	 */
 	@Test
-	public void testRemove()
+	void testRemove()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -69,7 +69,7 @@ public class RemovePrivateTest {
 	 *
 	 */
 	@Test
-	public void testRemovePrefix()
+	void testRemovePrefix()
 	{
 		final KElement e = KElement.createRoot("a:b", "www.a.com");
 		e.setAttribute("xmlns:foo", "www.foo.com");
@@ -86,7 +86,7 @@ public class RemovePrivateTest {
 	 *
 	 */
 	@Test
-	public void testZappAttributes()
+	void testZappAttributes()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -106,7 +106,7 @@ public class RemovePrivateTest {
 	 *
 	 */
 	@Test
-	public void testZappElements()
+	void testZappElements()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -126,7 +126,7 @@ public class RemovePrivateTest {
 	 *
 	 */
 	@Test
-	public void testGeneralID()
+	void testGeneralID()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -154,7 +154,7 @@ public class RemovePrivateTest {
 	 *
 	 */
 	@Test
-	public void testAddPrefix()
+	void testAddPrefix()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();

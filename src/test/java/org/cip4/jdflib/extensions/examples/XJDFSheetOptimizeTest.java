@@ -80,7 +80,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSimple()
+	void testSimple()
 	{
 		for (int i = 0; i < 6; i++)
 		{
@@ -112,7 +112,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testSimpleUpload()
+	void testSimpleUpload()
 	{
 		final KElement e = addGang();
 		e.setAttribute("NPage", "1");
@@ -134,7 +134,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testOptimizeCutBlock()
+	void testOptimizeCutBlock()
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -192,7 +192,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testOptimizeCutBlockBS()
+	void testOptimizeCutBlockBS()
 	{
 		for (int i = 0; i < 6; i++)
 		{
@@ -242,7 +242,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testLayout()
+	void testLayout()
 	{
 		for (int i = 0; i < 6; i++)
 		{
@@ -258,7 +258,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testReport()
+	void testReport()
 	{
 		for (int i = 0; i < 6; i++)
 		{
@@ -283,7 +283,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testOutputLayout()
+	void testOutputLayout()
 	{
 		prepareLayout(true);
 		for (int i = 0; i < 2; i++)
@@ -310,7 +310,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testOutputLayoutPositionOrd()
+	void testOutputLayoutPositionOrd()
 	{
 		prepareLayout(true);
 		for (int k = 0; k < 2; k++)
@@ -383,7 +383,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		xjdfHelper = new XJDFHelper("job", "root", null);

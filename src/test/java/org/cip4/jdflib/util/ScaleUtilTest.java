@@ -84,7 +84,7 @@ public class ScaleUtilTest {
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@BeforeEach
-    public void setUp() throws Exception
+    void setUp() throws Exception
 	{
     }
 
@@ -92,7 +92,7 @@ public class ScaleUtilTest {
 	 * @see junit.framework.TestCase#tearDown()
 	 */
 	@AfterEach
-    public void tearDown() throws Exception
+    void tearDown() throws Exception
 	{
     }
 
@@ -100,7 +100,7 @@ public class ScaleUtilTest {
 	 * Test method for {@link ScaleUtil#mm2Dtp(double)}.
 	 */
 	@Test
-	public void testMm2Dtp()
+	void testMm2Dtp()
 	{
 		Assertions.assertEquals(28.34645, ScaleUtil.mm2Dtp(10d), 0.00001, "Convertion mm 2 dtp is wrong.");
 	}
@@ -109,7 +109,7 @@ public class ScaleUtilTest {
 	 * Test method for {@link ScaleUtil#dtp2Mm(double)}.
 	 */
 	@Test
-	public void testDtp2Mm()
+	void testDtp2Mm()
 	{
 		Assertions.assertEquals(3.52777, ScaleUtil.dtp2Mm(10d), 0.00001, "Convertion dtp 2 mm is wrong.");
 	}

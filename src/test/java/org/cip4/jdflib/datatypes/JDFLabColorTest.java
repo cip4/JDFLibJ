@@ -44,7 +44,7 @@ public class JDFLabColorTest
 {
 
 	@Test
-	public void testDeltaE()
+	void testDeltaE()
 	{
 		final JDFLabColor lc = new JDFLabColor(1, 2, 3);
 		Assertions.assertEquals(-1, lc.deltaE(null), 0.);

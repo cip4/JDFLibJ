@@ -92,7 +92,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		sequential.lock();
 		super.setUp();
@@ -269,7 +269,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 	 */
 	@Override
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		super.tearDown();
 		hf.stop();

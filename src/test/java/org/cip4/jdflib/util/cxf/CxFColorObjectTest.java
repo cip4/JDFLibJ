@@ -50,7 +50,7 @@ public class CxFColorObjectTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testGetCIEColor()
+	void testGetCIEColor()
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject(0);
@@ -61,7 +61,7 @@ public class CxFColorObjectTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testGetCMYKColor()
+	void testGetCMYKColor()
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject(0);
@@ -72,7 +72,7 @@ public class CxFColorObjectTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testGetJDFColor()
+	void testGetJDFColor()
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject("black");
@@ -84,7 +84,7 @@ public class CxFColorObjectTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testGetRGBColor()
+	void testGetRGBColor()
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject("black");
@@ -96,7 +96,7 @@ public class CxFColorObjectTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testGetSpectrum()
+	void testGetSpectrum()
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject("black");
@@ -108,7 +108,7 @@ public class CxFColorObjectTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testGetSpectrumStart()
+	void testGetSpectrumStart()
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject("black");
@@ -120,7 +120,7 @@ public class CxFColorObjectTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testGetSpectrumLast()
+	void testGetSpectrumLast()
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject("black");
@@ -132,7 +132,7 @@ public class CxFColorObjectTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
 		final CxFColorObject colorObject = cxf.getColorObject(0);

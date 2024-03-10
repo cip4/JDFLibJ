@@ -46,7 +46,7 @@ public class JDFDocumentBuilderTest extends JDFTestCaseBase
 {
 
 	@Test
-	public void testGetParser()
+	void testGetParser()
 	{
 		Assertions.assertNotNull(new JDFDocumentBuilder().getParser());
 	}
@@ -56,7 +56,7 @@ public class JDFDocumentBuilderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSpeed()
+	void testSpeed()
 	{
 		final long l1 = System.nanoTime();
 		final String s = "<JDF />";

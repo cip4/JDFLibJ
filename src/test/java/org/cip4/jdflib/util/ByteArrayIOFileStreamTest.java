@@ -70,7 +70,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSize()
+	void testSize()
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOFileStream(2000);
 		for (int i = 0; i < 12345; i++)
@@ -87,7 +87,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFileSize() throws IOException
+	void testFileSize() throws IOException
 	{
 		final ByteArrayIOFileStream ios = new ByteArrayIOFileStream(2000);
 		for (int i = 0; i < 12345; i++)
@@ -104,7 +104,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTell()
+	void testTell()
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOFileStream(2000);
 		for (int i = 0; i < 12345; i++)
@@ -125,7 +125,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConstructStream()
+	void testConstructStream()
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOFileStream(2000);
 		for (int i = 0; i < 123456; i++)
@@ -147,7 +147,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToStreing()
+	void testToStreing()
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOFileStream(2000);
 		for (int i = 0; i < 123456; i++)
@@ -171,7 +171,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConstructFile() throws IOException
+	void testConstructFile() throws IOException
 	{
 		final File f = new File(sm_dirTestDataTemp + "bios222.fil");
 		f.delete();
@@ -203,7 +203,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeleteFile() throws IOException
+	void testDeleteFile() throws IOException
 	{
 		final File f = new File(sm_dirTestDataTemp + "bios222.fil");
 		f.delete();
@@ -229,7 +229,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeleteFileLarge() throws IOException
+	void testDeleteFileLarge() throws IOException
 	{
 		final File f = new File(sm_dirTestDataTemp + "bios222.fil");
 		f.delete();
@@ -255,7 +255,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConstructBadFile() throws IOException
+	void testConstructBadFile() throws IOException
 	{
 		File f = new File(sm_dirTestDataTemp + "bios1.fil");
 		f.delete();
@@ -277,7 +277,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testInRead() throws Exception
+	void testInRead() throws Exception
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOFileStream(2000);
 		for (int i = 0; i < 200000; i++)
@@ -300,7 +300,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testInReadMulti() throws Exception
+	void testInReadMulti() throws Exception
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOFileStream(2222);
 		final int len = 10000;
@@ -327,7 +327,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testCloseSkip()
+	void testCloseSkip()
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOFileStream(2222);
 		final int len = 10000;
@@ -353,7 +353,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testCloseSkip2()
+	void testCloseSkip2()
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOFileStream(2222);
 		final int len = 10000;
@@ -381,7 +381,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testInReadMulti2() throws Exception
+	void testInReadMulti2() throws Exception
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOFileStream(2222);
 		final int len = 10000;
@@ -408,7 +408,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetBufferedInputStream() throws Exception
+	void testGetBufferedInputStream() throws Exception
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOFileStream(444);
 		final int len = 10000;
@@ -435,7 +435,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetBufferedInputStreamKeep() throws Exception
+	void testGetBufferedInputStreamKeep() throws Exception
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		final int len = 10000;
@@ -472,7 +472,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 * @throws Throwable
 	 */
 	@Test
-	public void testGetBufferedInputStreamFinalize() throws Throwable
+	void testGetBufferedInputStreamFinalize() throws Throwable
 	{
 		final File f = new File(sm_dirTestDataTemp + "bios224.fil");
 		f.delete();
@@ -501,7 +501,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	 * @throws Throwable
 	 */
 	@Test
-	public void testreadFinalize() throws Throwable
+	void testreadFinalize() throws Throwable
 	{
 		final File f = new File(sm_dirTestDataTemp + "bios223.fil");
 		f.delete();

@@ -59,7 +59,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddAll()
+	void testAddAll()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement e = d.getRoot();
@@ -78,7 +78,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendUnique()
+	void testAppendUnique()
 	{
 		final KElement e = KElement.createRoot("doc", null);
 		final VElement v = new VElement();
@@ -92,7 +92,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddAllArray()
+	void testAddAllArray()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement e = d.getRoot();
@@ -117,7 +117,7 @@ public class VElementTest extends JDFTestCaseBase
 	 */
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testCastVector()
+	void testCastVector()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -132,7 +132,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGet()
+	void testGet()
 	{
 		final VElement v = new VElement();
 		final XMLDoc d = new XMLDoc("e", null);
@@ -150,7 +150,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testItem()
+	void testItem()
 	{
 		final VElement v = new VElement();
 		final XMLDoc d = new XMLDoc("e", null);
@@ -167,7 +167,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testElementAt()
+	void testElementAt()
 	{
 		final VElement v = new VElement();
 		final XMLDoc d = new XMLDoc("e", null);
@@ -184,7 +184,7 @@ public class VElementTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testRemoveElements()
+	void testRemoveElements()
 	{
 		final VElement v = new VElement();
 		final VElement v2 = new VElement();
@@ -210,7 +210,7 @@ public class VElementTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testRemoveElement()
+	void testRemoveElement()
 	{
 		final VElement v = new VElement();
 		final XMLDoc d = new XMLDoc("e", null);
@@ -237,7 +237,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testContainsElement()
+	void testContainsElement()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement e = d.getRoot();
@@ -266,7 +266,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetNodeNames()
+	void testgetNodeNames()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement e = d.getRoot();
@@ -285,7 +285,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUnify()
+	void testUnify()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement e = d.getRoot();
@@ -308,7 +308,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUnifyElement()
+	void testUnifyElement()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement e = d.getRoot();
@@ -335,7 +335,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUnifyElementPerformance()
+	void testUnifyElementPerformance()
 	{
 		final JDFDoc dBDoc = creatXMDoc();
 
@@ -364,7 +364,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSort()
+	void testSort()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement e = d.getRoot();
@@ -385,7 +385,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsEqual()
+	void testIsEqual()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement e = d.getRoot();
@@ -412,7 +412,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIndex()
+	void testIndex()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement e = d.getRoot();
@@ -439,7 +439,7 @@ public class VElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNameIndex()
+	void testNameIndex()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement e = d.getRoot();

@@ -78,7 +78,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		public void run()
+		void run()
 		{
 			log.info("run: " + i);
 			final boolean b = ThreadUtil.sleep(t);
@@ -100,7 +100,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void testSize()
+	synchronized void testSize()
 	{
 		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("testSize", 3);
 		assertEquals(0, q.size());
@@ -115,7 +115,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void testMaxParrallel()
+	synchronized void testMaxParrallel()
 	{
 		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("testMaxParrallel", 3);
 		assertEquals(3, q.getMaxParallel());
@@ -126,7 +126,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void testString()
+	synchronized void testString()
 	{
 		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi42", 3);
 		assertNotNull(q.toString());
@@ -141,7 +141,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void testMulti()
+	synchronized void testMulti()
 	{
 		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("testMulti()", 3);
 		assertEquals(0, q.getAvQueue());
@@ -188,7 +188,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void testManyMulti()
+	synchronized void testManyMulti()
 	{
 		nRun = 0;
 		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("testManyMulti()", 3);
@@ -214,7 +214,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void testManyMultiIdle()
+	synchronized void testManyMultiIdle()
 	{
 		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("testManyMultiIdle", 3);
 		assertEquals(0, q.getAvQueue());
@@ -243,7 +243,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized public void testInterruptMulti()
+	synchronized void testInterruptMulti()
 	{
 		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("testInterruptMulti", 3);
 		for (int i = 0; i < 10; i++)
@@ -263,7 +263,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		sequential.lock();
@@ -273,7 +273,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 
 	@Override
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MultiTaskQueue.setPercentQueue(100);
 		OrderedTaskQueue.shutDownAll();

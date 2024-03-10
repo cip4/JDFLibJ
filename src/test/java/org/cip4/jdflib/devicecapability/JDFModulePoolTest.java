@@ -83,7 +83,7 @@ import org.junit.jupiter.api.Test;
 public class JDFModulePoolTest extends JDFTestCaseBase
 {
 	@Test
-	public void testGetMinAvailability()
+	void testGetMinAvailability()
 	{
 		JDFDoc d = new JDFDoc(ElementName.MODULEPOOL);
 		JDFModulePool mp = (JDFModulePool) d.getRoot();

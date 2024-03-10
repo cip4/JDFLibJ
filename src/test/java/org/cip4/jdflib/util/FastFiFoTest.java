@@ -19,7 +19,7 @@ public class FastFiFoTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testPush()
+	void testPush()
 	{
 		final FastFiFo<MyInteger> ff = new FastFiFo<MyInteger>(10);
 		for (int i = 0; i < 100; i++)
@@ -40,7 +40,7 @@ public class FastFiFoTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testPeek()
+	void testPeek()
 	{
 		final FastFiFo<MyInteger> ff = new FastFiFo<MyInteger>(10);
 		for (int i = 0; i < 100; i++)
@@ -66,7 +66,7 @@ public class FastFiFoTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testPeekArray()
+	void testPeekArray()
 	{
 		final FastFiFo<MyInteger> ff = new FastFiFo<MyInteger>(10);
 		for (int i = 0; i < 100; i++)
@@ -87,7 +87,7 @@ public class FastFiFoTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testSpeed()
+	void testSpeed()
 	{
 		final FastFiFo<MyInteger> fifo = new FastFiFo<MyInteger>(10000);
 		long l0 = System.currentTimeMillis();

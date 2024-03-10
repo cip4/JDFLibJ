@@ -88,7 +88,7 @@ public class JDFObjectResolutionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatches()
+	void testMatches()
 	{
 		JDFObjectResolution or = (JDFObjectResolution) new JDFDoc(ElementName.OBJECTRESOLUTION).getRoot();
 		or.addSourceObject(EnumSourceObjects.ImagePhotographic);
@@ -100,7 +100,7 @@ public class JDFObjectResolutionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddSourceObject()
+	void testAddSourceObject()
 	{
 		JDFObjectResolution or = (JDFObjectResolution) new JDFDoc(ElementName.OBJECTRESOLUTION).getRoot();
 		or.addSourceObject(EnumSourceObjects.All);
@@ -119,7 +119,7 @@ public class JDFObjectResolutionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddObjectTag()
+	void testAddObjectTag()
 	{
 		JDFObjectResolution or = (JDFObjectResolution) new JDFDoc(ElementName.OBJECTRESOLUTION).getRoot();
 		or.addObjectTag("foo");

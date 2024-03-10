@@ -115,7 +115,7 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		JDFDoc doc = new JDFDoc("JMF");
@@ -294,7 +294,7 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////
 
 	@Test
-	public void testGetNamePathVector()
+	void testGetNamePathVector()
 	{
 
 		JDFBooleanState b = deviceCap.getBooleanState("Template");

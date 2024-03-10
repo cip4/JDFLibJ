@@ -65,7 +65,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartMap()
+	void testGetPartMap()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
@@ -78,7 +78,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartMapList()
+	void testGetPartMapList()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
@@ -92,7 +92,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testClone()
+	void testClone()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
@@ -107,7 +107,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartKey()
+	void testGetPartKey()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
@@ -120,7 +120,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatchesEmpty()
+	void testMatchesEmpty()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
@@ -136,7 +136,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatches()
+	void testMatches()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
 		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
@@ -153,7 +153,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetResource()
+	void testGetResource()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -168,7 +168,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHasPartition()
+	void testHasPartition()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -195,7 +195,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetResourceAttribute()
+	void testSetResourceAttribute()
 	{
 		final ResourceHelper rh = new XJDFHelper("j1", null).getCreateSet(ElementName.MEDIA, EnumUsage.Input).getCreatePartition(0, false);
 		assertNull(rh.getResourceAttribute("foo"));
@@ -207,7 +207,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetStatus()
+	void testGetStatus()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -221,7 +221,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetStatus()
+	void testSetStatus()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -240,7 +240,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetHelper()
+	void testGetHelper()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -257,7 +257,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSet()
+	void testGetSet()
 	{
 		final JDFDoc d = new JDFDoc("XJDF");
 		final KElement root = d.getRoot();
@@ -272,7 +272,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsAsset()
+	void testIsAsset()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -291,7 +291,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsAssetTwo()
+	void testIsAssetTwo()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -312,7 +312,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXJDF()
+	void testGetXJDF()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -327,7 +327,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testisResourceElement()
+	void testisResourceElement()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -346,7 +346,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCleanup()
+	void testCleanup()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -363,7 +363,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIgnoreOrder()
+	void testIgnoreOrder()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -384,7 +384,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetPartMap()
+	void testSetPartMap()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -399,7 +399,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendPartMap()
+	void testAppendPartMap()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -418,7 +418,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAmount()
+	void testSetAmount()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -438,7 +438,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAmountSum()
+	void testGetAmountSum()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -458,7 +458,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnsureParts()
+	void testEnsureParts()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		final KElement root = d.getRoot();
@@ -477,7 +477,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnsureReference()
+	void testEnsureReference()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null);
 		final ResourceHelper rhm = h.getCreateSet(ElementName.MEDIA, null).getCreatePartition(null, false);
@@ -490,7 +490,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnsureReference2()
+	void testEnsureReference2()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null);
 		final ResourceHelper rhm = h.getCreateSet(ElementName.MEDIA, null).getCreatePartition(null, false);
@@ -503,7 +503,7 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetName()
+	void testGetName()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null);
 		final ResourceHelper rhm = h.getCreateSet(ElementName.MEDIA, null).getCreatePartition(null, false);

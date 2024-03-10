@@ -84,7 +84,7 @@ public class WalkComponentTest
 	 * 
 	 */
 	@Test
-	public void testComponentType()
+	void testComponentType()
 	{
 		JDFComponent cb = (JDFComponent) new JDFDoc(ElementName.COMPONENT).getRoot();
 		cb.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Web);

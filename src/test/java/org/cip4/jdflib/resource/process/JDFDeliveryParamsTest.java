@@ -19,7 +19,7 @@ public class JDFDeliveryParamsTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testSetFromArtDelivery()
+	void testSetFromArtDelivery()
 	{
 		JDFArtDeliveryIntent adi = (JDFArtDeliveryIntent) new JDFDoc(ElementName.ARTDELIVERYINTENT).getRoot();
 		adi.appendContact();

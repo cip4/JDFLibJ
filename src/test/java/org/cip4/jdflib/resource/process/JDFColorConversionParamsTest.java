@@ -84,7 +84,7 @@ public class JDFColorConversionParamsTest extends JDFTestCaseBase
 {
 
 	@Test
-	public void testAbstractProfile()
+	void testAbstractProfile()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		doc.setOriginalFileName("JDF.jdf");

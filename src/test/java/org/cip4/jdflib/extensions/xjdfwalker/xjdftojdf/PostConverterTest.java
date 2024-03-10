@@ -99,7 +99,7 @@ public class PostConverterTest extends JDFTestCaseBase
 	*/
 	@Test
 	@Disabled
-	public void testColorantControlSpace()
+	void testColorantControlSpace()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ImageSetting);
@@ -123,7 +123,7 @@ public class PostConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testBinderySignature()
+	void testBinderySignature()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = XJDFHelper.parseFile(sm_dirTestData + "xjdf/tnr.strip.red.xjdf");
@@ -145,7 +145,7 @@ public class PostConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testBinderySignature2()
+	void testBinderySignature2()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = XJDFHelper.parseFile(sm_dirTestData + "xjdf/tnr.strip.red.xjdf");

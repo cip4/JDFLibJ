@@ -85,7 +85,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSchema()
+	void testSchema()
 	{
 		final JDFDoc d = p.parseFile(new File(sm_dirTestData + "job.jdf"));
 		Assertions.assertNotNull(d);
@@ -96,7 +96,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDieMaking()
+	void testDieMaking()
 	{
 		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d0.getJDFRoot();
@@ -113,7 +113,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLot()
+	void testLot()
 	{
 		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d0.getJDFRoot();
@@ -134,7 +134,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testVariableIntent()
+	void testVariableIntent()
 	{
 		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d0.getJDFRoot();
@@ -154,7 +154,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCertification()
+	void testCertification()
 	{
 		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d0.getJDFRoot();
@@ -173,7 +173,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPlateType()
+	void testPlateType()
 	{
 		final JDFDoc d = p.parseFile(sm_dirTestData + "Example8-15.jdf");
 		Assertions.assertNotNull(d, sm_dirTestData + "Example8-15.jdf");
@@ -185,7 +185,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	// @Test
-	// public void testSetIndex()
+	// void testSetIndex()
 	// {
 	// final JDFDoc d = p.parseFile(sm_dirTestData + "ExampleO-5.3.1.jdf");
 	// assertNotNull(d);
@@ -197,7 +197,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInlineClass()
+	void testInlineClass()
 	{
 		final JDFDoc d0 = new JDFDoc("JDF");
 		final JDFNode n = d0.getJDFRoot();
@@ -217,7 +217,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCasingIn()
+	void testCasingIn()
 	{
 		final JDFDoc d0 = new JDFDoc("JDF");
 		final JDFNode n = d0.getJDFRoot();
@@ -234,7 +234,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPreviewResource()
+	void testPreviewResource()
 	{
 		final JDFDoc d0 = new JDFDoc("JDF");
 		final JDFNode n = d0.getJDFRoot();
@@ -252,7 +252,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSchemafolder()
+	void testSchemafolder()
 	{
 		final File[] jdfs = FileUtil.listFilesWithExtension(new File(sm_dirTestData + "schema"), "jdf");
 
@@ -270,7 +270,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSchemafolderJMF()
+	void testSchemafolderJMF()
 	{
 		final File[] jdfs = FileUtil.listFilesWithExtension(new File(sm_dirTestData + "schema"), "jmf");
 
@@ -288,7 +288,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIdentificationField()
+	void testIdentificationField()
 	{
 		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d0.getJDFRoot();
@@ -310,7 +310,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIntegerrange() throws DataFormatException
+	void testIntegerrange() throws DataFormatException
 	{
 		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d0.getJDFRoot();
@@ -328,7 +328,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMiscConsumableIdentificationField()
+	void testMiscConsumableIdentificationField()
 	{
 		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d0.getJDFRoot();
@@ -349,7 +349,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTemplate()
+	void testTemplate()
 	{
 		final JDFDoc d0 = new JDFDoc("JDF");
 		final JDFNode n = d0.getJDFRoot();
@@ -366,7 +366,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testVersionBad()
+	void testVersionBad()
 	{
 		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d0.getJDFRoot();
@@ -382,7 +382,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testVersion()
+	void testVersion()
 	{
 		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d0.getJDFRoot();
@@ -400,7 +400,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -414,7 +414,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		super.tearDown();
 	}
@@ -424,7 +424,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 */
 	@Test
 	@Disabled
-	public void testSamples()
+	void testSamples()
 	{
 		final List<File> l = FileUtil.listFilesInTree(new File("/gitreps/jdfschema/samples"), "*.j*");
 		for (final File f : l)

@@ -101,7 +101,7 @@ public class XJDFProductExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testPoster()
+	void testPoster()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Simple_Poster", null, null);
 		xjdfHelper.setTypes("Product");
@@ -138,7 +138,7 @@ public class XJDFProductExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testBrochure()
+	void testBrochure()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Brochure4_16", null, null);
 		xjdfHelper.setTypes("Product");
@@ -199,7 +199,7 @@ public class XJDFProductExampleTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

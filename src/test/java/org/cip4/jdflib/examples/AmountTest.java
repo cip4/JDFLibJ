@@ -49,7 +49,7 @@ public class AmountTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public void testPlannedWaste()
+	void testPlannedWaste()
 	{
 		KElement.setLongID(false);
 		d = new JDFDoc("JDF");
@@ -93,7 +93,7 @@ public class AmountTest extends ExampleTest
 	 * @return
 	 */
 	@Test
-	public void testPlannedWasteICS()
+	void testPlannedWasteICS()
 	{
 		final JDFAmountPool ap = rlOut.getCreateAmountPool();
 		final JDFAmountPool apIn = rlMediaIn.getCreateAmountPool();
@@ -151,7 +151,7 @@ public class AmountTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -170,7 +170,7 @@ public class AmountTest extends ExampleTest
 	// //////
 
 	@Test
-	public void testAudits()
+	void testAudits()
 	{
 		testPlannedWasteICS();
 		final VString vs = new VString("Cover Sheet1 Sheet2", " ");

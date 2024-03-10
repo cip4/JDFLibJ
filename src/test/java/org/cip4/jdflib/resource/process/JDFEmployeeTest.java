@@ -137,7 +137,7 @@ public class JDFEmployeeTest extends JDFTestCaseBase
 	/**
 	 *
 	 */
-	public void testGetDescriptiveName()
+	void testGetDescriptiveName()
 	{
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc(ElementName.EMPLOYEE).getRoot();
 		JDFPerson p = emp.appendPerson();
@@ -152,7 +152,7 @@ public class JDFEmployeeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDescriptiveNamePID()
+	void testGetDescriptiveNamePID()
 	{
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc(ElementName.EMPLOYEE).getRoot();
 		emp.setProductID("aaa");
@@ -165,7 +165,7 @@ public class JDFEmployeeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPersonalID()
+	void testGetPersonalID()
 	{
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc(ElementName.EMPLOYEE).getRoot();
 		emp.setProductID("P1");
@@ -178,7 +178,7 @@ public class JDFEmployeeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFixVerion()
+	void testFixVerion()
 	{
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc(ElementName.EMPLOYEE).getRoot();
 		emp.setPersonalID("p1");

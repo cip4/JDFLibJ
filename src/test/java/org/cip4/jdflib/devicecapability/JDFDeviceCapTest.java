@@ -131,7 +131,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		final JDFDoc doc = new JDFDoc("Device");
 		device = (JDFDevice) doc.getRoot();
@@ -283,7 +283,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetBadJDFInfo()
+	void testGetBadJDFInfo()
 	{
 		final JDFDoc d = JDFDoc.parseFile(sm_dirTestData + "Device_Elk_ConventionalPrinting2.xml");
 		final JDFDeviceCap dc = (JDFDeviceCap) d.getRoot().getXPathElement("/JMF/Response/DeviceList/DeviceInfo/Device/DeviceCap");
@@ -301,7 +301,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testAction()
+	void testAction()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.DEVICECAP);
 		final JDFDeviceCap dc = (JDFDeviceCap) d.getRoot();
@@ -320,7 +320,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetDevCapsByName()
+	void testGetDevCapsByName()
 	{
 		JDFDevCaps dcs = devicecap.getDevCapsByName("AuditPool", null, null, null, 0);
 		Assertions.assertNotNull(dcs);
@@ -348,7 +348,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testDevCapsMinOccurs()
+	void testDevCapsMinOccurs()
 	{
 		final JDFDevCaps dcs = devicecap.getDevCapsByName("AuditPool", null, null, null, 0);
 		Assertions.assertEquals(dcs.getMinOccurs(), 1);
@@ -360,7 +360,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testDevCapsMaxOccurs()
+	void testDevCapsMaxOccurs()
 	{
 		final JDFDevCaps dcs = devicecap.getDevCapsByName("AuditPool", null, null, null, 0);
 		Assertions.assertEquals(dcs.getMaxOccurs(), 1);
@@ -372,7 +372,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testLogic()
+	void testLogic()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.DEVICECAP);
 		final JDFDeviceCap dc = (JDFDeviceCap) d.getRoot();
@@ -393,7 +393,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetCombinedMethod()
+	void testGetCombinedMethod()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.DEVICECAP);
 		final JDFDeviceCap dc = (JDFDeviceCap) d.getRoot();
@@ -409,7 +409,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testDeviceCapIsValid()
+	void testDeviceCapIsValid()
 	{
 		final JDFParser p = new JDFParser();
 		final String docDevCap = "DevCaps_Product_MISPrepress_ICS_Minimal.jdf";
@@ -427,7 +427,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetExecutableJDF()
+	void testGetExecutableJDF()
 	{
 
 		final String docTest = "MISPrepress_ICS_Minimal.jdf";
@@ -487,7 +487,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetMatchingTypeNodeVector()
+	void testGetMatchingTypeNodeVector()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -512,7 +512,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetMatchingDeviceCapVector()
+	void testGetMatchingDeviceCapVector()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -536,7 +536,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testProcessUsage() throws Exception
+	void testProcessUsage() throws Exception
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -594,7 +594,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testMatchesType()
+	void testMatchesType()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -644,7 +644,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testSetDefaultsFromCaps() throws Exception
+	void testSetDefaultsFromCaps() throws Exception
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -663,7 +663,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testCreateModuleCaps()
+	void testCreateModuleCaps()
 	{
 		devicecap.createModuleCaps(null);
 		Assertions.assertNotNull(devicecap.getModulePool());
@@ -678,7 +678,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetNamePathVector()
+	void testGetNamePathVector()
 	{
 		{
 			final JDFDevCap dc = (JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_Ancestor", 0, false);
@@ -717,7 +717,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetMessageServiceForJMFType()
+	void testGetMessageServiceForJMFType()
 	{
 		final JDFMessage m = JDFJMF.createJMF(JDFMessage.EnumFamily.Acknowledge, EnumType.KnownDevices).getMessageElement(null, null, 0);
 		final JDFResponse resp = JDFJMF.createJMF(JDFMessage.EnumFamily.Response, EnumType.KnownMessages).getResponse(0);

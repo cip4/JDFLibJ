@@ -89,7 +89,7 @@ public class JDFCostCenterTest extends JDFTestCaseBase
 	 * test the maches method, duh...
 	 */
 	@Test
-	public void testMatches()
+	void testMatches()
 	{
 		JDFCostCenter cs = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs.setCostCenterID("CS");

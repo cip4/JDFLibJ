@@ -55,7 +55,7 @@ public class AuditMoverTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAmountsNull()
+	void testAmountsNull()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		final SetHelper sni = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
@@ -74,7 +74,7 @@ public class AuditMoverTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAmounts()
+	void testAmounts()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		final SetHelper sni = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);

@@ -98,7 +98,7 @@ public class ODPGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testODPSimple()
+	void testODPSimple()
 	{
 		write9GTFiles(odpGoldenTicket, "ODP_Simple", null);
 	}
@@ -107,7 +107,7 @@ public class ODPGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testIDPRunList()
+	void testIDPRunList()
 	{
 		JDFNode n = odpGoldenTicket.getNode();
 		JDFRunList rl = (JDFRunList) n.getResource(ElementName.RUNLIST, EnumUsage.Input, null, 0);
@@ -124,7 +124,7 @@ public class ODPGoldenTicketTest extends BaseGoldenTicketTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		BaseGoldenTicket.misURL = null;
 		super.setUp();

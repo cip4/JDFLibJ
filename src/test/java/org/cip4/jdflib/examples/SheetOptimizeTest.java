@@ -113,7 +113,7 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testDescribeSheetOptimize() throws Exception
+	void testDescribeSheetOptimize() throws Exception
 	{
 		KElement.setLongID(false);
 		final JDFDoc d = new JDFDoc("JDF");
@@ -231,7 +231,7 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 	 * @throws Exception x
 	 */
 	@Test
-	public void testDescribeSheetOptimizeNew() throws Exception
+	void testDescribeSheetOptimizeNew() throws Exception
 	{
 		KElement.setLongID(false);
 		final JDFDoc d = new JDFDoc("JDF");

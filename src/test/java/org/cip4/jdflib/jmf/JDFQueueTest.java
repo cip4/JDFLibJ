@@ -59,7 +59,7 @@ public class JDFQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetEntryCount()
+	void testgetEntryCount()
 	{
 		final JDFQueue q = (JDFQueue) new JDFDoc(ElementName.QUEUE).getRoot();
 		for (int i = 0; i < 42; i++)
@@ -75,7 +75,7 @@ public class JDFQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testQueueStatus()
+	void testQueueStatus()
 	{
 		final JDFQueue q = (JDFQueue) new JDFDoc(ElementName.QUEUE).getRoot();
 		q.setQueueStatus(EnumQueueStatus.Running);
@@ -87,7 +87,7 @@ public class JDFQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAutomated()
+	void testAutomated()
 	{
 		final JDFQueue q = (JDFQueue) new JDFDoc(ElementName.QUEUE).getRoot();
 		q.setQueueStatus(EnumQueueStatus.Running);
@@ -105,7 +105,7 @@ public class JDFQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testXJMFQueue()
+	void testXJMFQueue()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = jdfDoc.getJMFRoot();

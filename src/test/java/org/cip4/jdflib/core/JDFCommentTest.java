@@ -51,7 +51,7 @@ import org.junit.jupiter.api.Test;
 public class JDFCommentTest extends JDFTestCaseBase
 {
 	@Test
-	public void testInit()
+	void testInit()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
@@ -69,7 +69,7 @@ public class JDFCommentTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testIDPrefix()
+	void testIDPrefix()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
@@ -80,7 +80,7 @@ public class JDFCommentTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testFormat()
+	void testFormat()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
@@ -106,7 +106,7 @@ public class JDFCommentTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testEraseEmptyNodes()
+	void testEraseEmptyNodes()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
@@ -118,7 +118,7 @@ public class JDFCommentTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSetText()
+	void testSetText()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();

@@ -84,7 +84,7 @@ public class JDFTransferCurvePoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTransfercurveSet()
+	void testGetTransfercurveSet()
 	{
 		final JDFTransferCurvePool p = (JDFTransferCurvePool) new JDFDoc(ElementName.TRANSFERCURVEPOOL).getRoot();
 		Assertions.assertNull(p.getTransferCurveSet(0));
@@ -94,7 +94,7 @@ public class JDFTransferCurvePoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreateTransfercurveSet()
+	void testGetCreateTransfercurveSet()
 	{
 		final JDFTransferCurvePool p = (JDFTransferCurvePool) new JDFDoc(ElementName.TRANSFERCURVEPOOL).getRoot();
 		Assertions.assertNotNull(p.getCreateTransferCurveSet(0));
@@ -104,7 +104,7 @@ public class JDFTransferCurvePoolTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTransfercurveSetName()
+	void testGetTransfercurveSetName()
 	{
 		final JDFTransferCurvePool p = (JDFTransferCurvePool) new JDFDoc(ElementName.TRANSFERCURVEPOOL).getRoot();
 		Assertions.assertNull(p.getTransferCurveSet(null));
@@ -120,7 +120,7 @@ public class JDFTransferCurvePoolTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetCreateTransfercurveSetName()
+	void testGetCreateTransfercurveSetName()
 	{
 		final JDFTransferCurvePool p = (JDFTransferCurvePool) new JDFDoc(ElementName.TRANSFERCURVEPOOL).getRoot();
 		final JDFTransferCurveSet set = p.getCreateTransferCurveSet("Paper");
@@ -133,7 +133,7 @@ public class JDFTransferCurvePoolTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetCreateTransfercurveSetNamePart()
+	void testGetCreateTransfercurveSetNamePart()
 	{
 		final JDFTransferCurvePool p = (JDFTransferCurvePool) new JDFDoc(ElementName.TRANSFERCURVEPOOL).getRoot();
 		final JDFTransferCurvePool ppart = (JDFTransferCurvePool) p.addPartition(EnumPartIDKey.SheetName, "s1");

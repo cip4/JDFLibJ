@@ -80,17 +80,17 @@ import org.w3c.dom.DOMException;
 public class DirectoryInstantiateVisitor implements DirectoryVisitor
 {
 	@Override
-	public void enterDirectory(File dir)
+	void enterDirectory(File dir)
 	{ /**/
 	}
 
 	@Override
-	public void leaveDirectory(File dir)
+	void leaveDirectory(File dir)
 	{ /**/
 	}
 
 	@Override
-	public void visitFile(File file)
+	void visitFile(File file)
 	{
 		testJDFClass(file.getName());
 	}

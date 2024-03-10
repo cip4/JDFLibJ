@@ -71,7 +71,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMessageVector()
+	void testGetMessageVector()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -90,7 +90,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInit()
+	void testInit()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -106,7 +106,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInitMaxVersion()
+	void testInitMaxVersion()
 	{
 		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_2);
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -120,7 +120,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTheSenderID()
+	void testTheSenderID()
 	{
 		JDFJMF.setTheSenderID("sid");
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -134,7 +134,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToXML()
+	void testToXML()
 	{
 		final JDFDoc d = new JDFDoc("JMF");
 		final JDFJMF jmf = d.getJMFRoot();
@@ -150,7 +150,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetSubmissionParams()
+	void testgetSubmissionParams()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -169,7 +169,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateResponse()
+	void testCreateResponse()
 	{
 		final JDFJMF queries = JDFJMF.createJMF(EnumFamily.Query, EnumType.Status);
 		queries.appendCommand(EnumType.Resource);
@@ -194,7 +194,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCloneNewDocInit() throws CloneNotSupportedException
+	void testCloneNewDocInit() throws CloneNotSupportedException
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -210,7 +210,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCollectICSVersions()
+	void testCollectICSVersions()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -239,7 +239,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConvertResponseToSignal()
+	void testConvertResponseToSignal()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -272,7 +272,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConvertResponseToSignalNameSpace()
+	void testConvertResponseToSignalNameSpace()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmfQuery = doc.getJMFRoot();
@@ -311,7 +311,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConvertResponseToAcknowledge()
+	void testConvertResponseToAcknowledge()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -339,7 +339,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSplitAcknowledge()
+	void testSplitAcknowledge()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -362,7 +362,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConvertResponses()
+	void testConvertResponses()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -383,7 +383,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateJMF()
+	void testCreateJMF()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
 		Assertions.assertEquals(jmf.getResponse(0).getEnumType(), EnumType.AbortQueueEntry);
@@ -395,7 +395,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInitAgent()
+	void testInitAgent()
 	{
 		JDFAudit.setStaticAgentName("foo");
 		JDFAudit.setStaticAgentVersion("v1");
@@ -408,7 +408,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSenderIDBlank()
+	void testSenderIDBlank()
 	{
 		JDFJMF.setTheSenderID("a b");
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
@@ -422,7 +422,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeviceInfo()
+	void testDeviceInfo()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -447,7 +447,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testError()
+	void testError()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -466,7 +466,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMessageElement()
+	void testGetMessageElement()
 	{
 		final JDFDoc d = new JDFDoc("JMF");
 		final JDFJMF jmf = d.getJMFRoot();
@@ -493,7 +493,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetResponseByRefID()
+	void testGetResponseByRefID()
 	{
 		final JDFDoc d = new JDFDoc("JMF");
 		final JDFJMF jmf = d.getJMFRoot();
@@ -510,7 +510,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAcknowledgeByRefID()
+	void testGetAcknowledgeByRefID()
 	{
 		final JDFDoc d = new JDFDoc("JMF");
 		final JDFJMF jmf = d.getJMFRoot();
@@ -529,7 +529,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJobPhase()
+	void testJobPhase()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -551,7 +551,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMessage()
+	void testMessage()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -594,7 +594,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPrivateMessage()
+	void testPrivateMessage()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -609,7 +609,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReturnQueueEntry()
+	void testReturnQueueEntry()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -627,7 +627,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 * @see junit.framework.TestCase#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		JDFJMF.setTheSenderID(null);
 		super.tearDown();

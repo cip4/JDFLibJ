@@ -78,7 +78,7 @@ public class JDFActivityTest
 {
 
 	@Test
-	public void testEvent()
+	void testEvent()
 	{
 		final JDFActivity a = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status).getSignal(0).getCreateDeviceInfo(0).appendActivity();
 		Assertions.assertNotNull(a);

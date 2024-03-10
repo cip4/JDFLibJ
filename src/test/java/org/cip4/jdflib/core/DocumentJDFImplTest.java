@@ -100,7 +100,7 @@ public class DocumentJDFImplTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testContextSensitiveElementNames()
+	void testContextSensitiveElementNames()
 	{ // HoleType, Method, Shape and Surface are context sensitive elements
 		// The type casts below should all succeed
 		JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -136,7 +136,7 @@ public class DocumentJDFImplTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testPrivateResources()
+	void testPrivateResources()
 	{ // HoleType, Method, Shape and Surface are context sensitive elements
 		// The type casts below should all succeed
 		JDFDoc doc = new JDFDoc(ElementName.JDF);

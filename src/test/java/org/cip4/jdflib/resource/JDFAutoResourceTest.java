@@ -102,7 +102,7 @@ import org.junit.jupiter.api.Test;
 
 public class JDFAutoResourceTest {
 	@Test
-	public void testRunList()
+	void testRunList()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode r = d.getJDFRoot();
@@ -130,7 +130,7 @@ public class JDFAutoResourceTest {
 	}
 
 	@Test
-	public void testEnumerations()
+	void testEnumerations()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode r = d.getJDFRoot();
@@ -144,7 +144,7 @@ public class JDFAutoResourceTest {
 	}
 
 	@Test
-	public void testBinderySignature()
+	void testBinderySignature()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -159,7 +159,7 @@ public class JDFAutoResourceTest {
 	}
 
 	@Test
-	public void testMediaIntent()
+	void testMediaIntent()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -176,7 +176,7 @@ public class JDFAutoResourceTest {
 	}
 
 	@Test
-	public void testDevice()
+	void testDevice()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -209,7 +209,7 @@ public class JDFAutoResourceTest {
 
 	// test coverapplication and score
 	@Test
-	public void testScore()
+	void testScore()
 	{
 
 		JDFDoc d = new JDFDoc(ElementName.JDF);

@@ -95,7 +95,7 @@ public class ClassUtilTest extends ClassUtilParent
 	 *
 	 */
 	@Test
-	public void testGetDeclaredClasses()
+	void testGetDeclaredClasses()
 	{
 		Vector<Class<?>> v = ClassUtil.getDeclaredClasses(getClass());
 		Assertions.assertTrue(v.contains(InnerClass.class));

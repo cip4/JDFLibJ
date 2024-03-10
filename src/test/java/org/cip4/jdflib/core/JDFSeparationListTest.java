@@ -85,7 +85,7 @@ public class JDFSeparationListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUnify()
+	void testUnify()
 	{
 		JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
 		sl.setSeparations(new VString("a b b c", null));
@@ -98,7 +98,7 @@ public class JDFSeparationListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveSeparations()
+	void testRemoveSeparations()
 	{
 		JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
 		sl.setSeparations(new VString("a b c", null));
@@ -111,7 +111,7 @@ public class JDFSeparationListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnsureSeparations()
+	void testEnsureSeparations()
 	{
 		JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
 		sl.setSeparations(new VString("a b c", null));

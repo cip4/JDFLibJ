@@ -86,7 +86,7 @@ import org.junit.jupiter.api.Test;
 
 public class JDFDevCapsTest {
 	@Test
-	public void testGetContextName()
+	void testGetContextName()
 	{
 		JDFDoc d = new JDFDoc("DevCaps");
 		JDFDevCaps dcs = (JDFDevCaps) d.getRoot();
@@ -103,7 +103,7 @@ public class JDFDevCapsTest {
 	}
 
 	@Test
-	public void testAppendDevCapInPool_DeviceCap()
+	void testAppendDevCapInPool_DeviceCap()
 	{
 
 		JDFDoc doc = new JDFDoc("DeviceCap");
@@ -116,7 +116,7 @@ public class JDFDevCapsTest {
 	}
 
 	@Test
-	public void testAppendDevCapInPool_JMF()
+	void testAppendDevCapInPool_JMF()
 	{
 
 		JDFDoc doc = new JDFDoc("MessageService");

@@ -84,7 +84,7 @@ public class JDFLayoutIntentTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetSideVectorStatic()
+	void testGetSideVectorStatic()
 	{
 		Assertions.assertNull(JDFLayoutIntent.getSideVector(null));
 		Assertions.assertEquals("Front", JDFLayoutIntent.getSideVector(EnumSides.OneSided).get(0));

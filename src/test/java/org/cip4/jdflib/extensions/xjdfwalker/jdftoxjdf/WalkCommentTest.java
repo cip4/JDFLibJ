@@ -84,7 +84,7 @@ public class WalkCommentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testID()
+	void testID()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFComment c = n.appendComment();
@@ -97,7 +97,7 @@ public class WalkCommentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testText()
+	void testText()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFComment c = n.appendComment();

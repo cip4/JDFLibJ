@@ -53,14 +53,14 @@ public class BodyPartHelperTest extends JDFTestCaseBase
 {
 
 	@Test
-	public void testSetContent()
+	void testSetContent()
 	{
 		final BodyPartHelper h = new BodyPartHelper();
 		assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
 	}
 
 	@Test
-	public void testHeaderMap()
+	void testHeaderMap()
 	{
 		final BodyPartHelper h = new BodyPartHelper();
 		h.setHeader("a", "b");
@@ -68,7 +68,7 @@ public class BodyPartHelperTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testMatchesKey()
+	void testMatchesKey()
 	{
 		final BodyPartHelper h = new BodyPartHelper();
 		h.setHeader("a", "b");
@@ -79,7 +79,7 @@ public class BodyPartHelperTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testMatchesFileName()
+	void testMatchesFileName()
 	{
 		final BodyPartHelper h = new BodyPartHelper();
 		h.setHeader("a", "b");
@@ -91,7 +91,7 @@ public class BodyPartHelperTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testSetContent2()
+	void testSetContent2()
 	{
 		final BodyPartHelper h = new BodyPartHelper();
 		assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
@@ -99,7 +99,7 @@ public class BodyPartHelperTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetContentType()
+	void testGetContentType()
 	{
 		final BodyPartHelper h = new BodyPartHelper();
 		assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
@@ -108,7 +108,7 @@ public class BodyPartHelperTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetFileName()
+	void testGetFileName()
 	{
 		final BodyPartHelper h = new BodyPartHelper();
 		assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));
@@ -116,7 +116,7 @@ public class BodyPartHelperTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetFileName2()
+	void testGetFileName2()
 	{
 		final BodyPartHelper h = new BodyPartHelper();
 		assertTrue(h.setContent(new ByteArrayInputStream("foo".getBytes()), UrlUtil.TEXT_PLAIN));

@@ -68,7 +68,7 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 {
 
 	@Test
-	public void testCombineTypes()
+	void testCombineTypes()
 	{
 		final Vector<XJDFHelper> vh = new Vector<>();
 		for (int i = 1; i < 3; i++)
@@ -84,7 +84,7 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testCombineTypesMulti()
+	void testCombineTypesMulti()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
 		h.addType(EnumType.Product);
@@ -108,7 +108,7 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMainSet()
+	void testGetMainSet()
 	{
 		final Vector<XJDFHelper> vh = new Vector<>();
 		for (int i = 1; i < 3; i++)
@@ -128,7 +128,7 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMergeMediaSet()
+	void testMergeMediaSet()
 	{
 		final Vector<XJDFHelper> vh = new Vector<>();
 		for (int i = 1; i < 3; i++)
@@ -159,7 +159,7 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMergeSet()
+	void testMergeSet()
 	{
 		final Vector<XJDFHelper> vh = new Vector<>();
 		for (int i = 1; i < 3; i++)
@@ -180,7 +180,7 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMergeSetSame()
+	void testMergeSetSame()
 	{
 		final Vector<XJDFHelper> vh = new Vector<>();
 		for (int i = 1; i < 3; i++)
@@ -201,7 +201,7 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAssemblySection()
+	void testAssemblySection()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Stripping);
@@ -233,7 +233,7 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetCombinedComplex()
+	void testgetCombinedComplex()
 	{
 		final JDFNode product = JDFNode.parseFile(sm_dirTestData + "SampleFiles/MISPrepress-ICS-Complex.jdf");
 		final JDFNode cp1 = product.getJobPart("PCS_CVP1058430001");

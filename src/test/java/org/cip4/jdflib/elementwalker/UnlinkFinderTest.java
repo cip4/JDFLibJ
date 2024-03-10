@@ -102,7 +102,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetUlinkedRes()
+	void testGetUlinkedRes()
 	{
 		final UnLinkFinder uf = new UnLinkFinder();
 		final VElement v = uf.getUnlinkedResources(n);
@@ -114,7 +114,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetUlinkedAll()
+	void testGetUlinkedAll()
 	{
 		final UnLinkFinder uf = new UnLinkFinder();
 		final VElement v = uf.getAllUnlinked(n);
@@ -128,7 +128,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetUlinkedRef()
+	void testGetUlinkedRef()
 	{
 		final UnLinkFinder uf = new UnLinkFinder();
 		final VElement v = uf.getUnlinkedRefs(n);
@@ -141,7 +141,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEraseUlinkedRes()
+	void testEraseUlinkedRes()
 	{
 		final UnLinkFinder uf = new UnLinkFinder();
 		uf.eraseUnlinkedResources(n);
@@ -158,7 +158,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEraseUlinkedRefs()
+	void testEraseUlinkedRefs()
 	{
 		final UnLinkFinder uf = new UnLinkFinder();
 		uf.eraseUnlinkedRefs(n);
@@ -174,7 +174,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testIgnoreforeign()
+	void testIgnoreforeign()
 	{
 		n.getResourcePool().appendElement("foo:bar", "www.foo.org");
 		n.getResourceLinkPool().appendElement("foo:blubLink", "www.foo.org");
@@ -194,7 +194,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEraseUlinked()
+	void testEraseUlinked()
 	{
 		final UnLinkFinder uf = new UnLinkFinder();
 		uf.eraseUnlinked(n);
@@ -208,7 +208,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		n = new JDFDoc("JDF").getJDFRoot();

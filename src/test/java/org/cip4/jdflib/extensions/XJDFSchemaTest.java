@@ -225,7 +225,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXJDFSchema()
+	void testGetXJDFSchema()
 	{
 		Assertions.assertNotNull(XMLDoc.parseFile(getXJDFSchema()));
 	}
@@ -234,7 +234,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXJDFSchema21()
+	void testGetXJDFSchema21()
 	{
 		Assertions.assertNotNull(XMLDoc.parseFile(getXJDFSchema(2, 1)));
 	}
@@ -243,7 +243,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBaseValidate()
+	void testBaseValidate()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		final JDFDoc doc = getXJDFSchemaParser().parseString(root.toXML());
@@ -254,7 +254,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSimpleValidate()
+	void testSimpleValidate()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/Resource/ConventionalPrintingParams/@WorkStyle", "WorkAndTurn");
@@ -267,7 +267,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testVersion20()
+	void testVersion20()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/Resource/ConventionalPrintingParams/@WorkStyle", "WorkAndTurn");
@@ -281,7 +281,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testChange()
+	void testChange()
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -293,7 +293,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testVersion21()
+	void testVersion21()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/Resource/ConventionalPrintingParams/@WorkStyle", "WorkAndTurn");
@@ -308,7 +308,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 */
 	@Test
 	@Disabled
-	public void testSamples()
+	void testSamples()
 	{
 		final List<File> l = FileUtil.listFilesInTree(new File("/gitreps/schema/xjdf/src/main/resources/samples"), "*.xj*");
 		for (final File f : l)
@@ -326,7 +326,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testProductPV()
+	void testProductPV()
 	{
 		final KElement root = new XJDFHelper(EnumVersion.Version_2_1, "j1").getRoot();
 		final XJDFHelper xjdfHelper = new XJDFHelper(root);
@@ -343,7 +343,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 */
 	@Test
 	@Disabled
-	public void testLocalSchema() throws SAXNotRecognizedException, SAXNotSupportedException
+	void testLocalSchema() throws SAXNotRecognizedException, SAXNotSupportedException
 	{
 		final KElement schema = KElement.parseFile(getXJDFSchema(2, 1));
 		schema.setAttribute("vc:minVersion", "1.1", "http://www.w3.org/2007/XMLSchema-versioning");
@@ -370,7 +370,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testProductPVBind()
+	void testProductPVBind()
 	{
 		final KElement root = new XJDFHelper(EnumVersion.Version_2_1, "j1").getRoot();
 		final XJDFHelper xjdfHelper = new XJDFHelper(root);
@@ -389,7 +389,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCMYKValidate()
+	void testCMYKValidate()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"Color\"]/Resource/Color/@CMYK", "1 0.2 0.3 0.4");
@@ -407,7 +407,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCountryCodeValidate()
+	void testCountryCodeValidate()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setAttribute("Types", "ConventionalPrinting");
@@ -423,7 +423,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFileSpecValidate()
+	void testFileSpecValidate()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@CheckSum", StringUtil.setHexBinaryBytes(new byte[] { 1, 2, 3 }, -1));
@@ -437,7 +437,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFileSpecValidateLong()
+	void testFileSpecValidateLong()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@FileSize", "123456789012345");
@@ -451,7 +451,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNetworkHeader()
+	void testNetworkHeader()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@CheckSum", StringUtil.setHexBinaryBytes(new byte[] { 1, 2, 3 }, -1));
@@ -472,7 +472,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDateTimeValidate()
+	void testDateTimeValidate()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"NodeInfo\"]/Resource/NodeInfo/@Start", "12345");
@@ -492,7 +492,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDurationValidate()
+	void testDurationValidate()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"NodeInfo\"]/Resource/NodeInfo/@TotalDuration", "12345");
@@ -512,7 +512,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEmptyAuditPool()
+	void testEmptyAuditPool()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/Resource/ConventionalPrintingParams/@WorkStyle", "WorkAndTurn");
@@ -526,7 +526,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAuditExtensions()
+	void testAuditExtensions()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/Resource/ConventionalPrintingParams/@WorkStyle", "WorkAndTurn");
@@ -546,7 +546,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMessageExtensions()
+	void testMessageExtensions()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.KnownMessages);

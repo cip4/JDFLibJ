@@ -50,7 +50,7 @@ public class JDFFoldingIntentTest
 	 *
 	 */
 	@Test
-	public void testOrientation()
+	void testOrientation()
 	{
 		final JDFFoldingIntent fi = (JDFFoldingIntent) new JDFDoc(ElementName.FOLDINGINTENT).getRoot();
 		final JDFSpanOrientation o = fi.getCreateOrientation();
@@ -62,7 +62,7 @@ public class JDFFoldingIntentTest
 	 *
 	 */
 	@Test
-	public void testOrientationOptional()
+	void testOrientationOptional()
 	{
 		final JDFFoldingIntent fi = (JDFFoldingIntent) new JDFDoc(ElementName.FOLDINGINTENT).getRoot();
 		Assertions.assertFalse(fi.requiredElements().contains(ElementName.ORIENTATION));

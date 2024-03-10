@@ -90,7 +90,7 @@ public class URLReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetUrlInputStreamLocal()
+	void testGetUrlInputStreamLocal()
 	{
 		final URLReader reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
@@ -104,7 +104,7 @@ public class URLReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetFileLocal()
+	void testGetFileLocal()
 	{
 		final URLReader reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
@@ -116,7 +116,7 @@ public class URLReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetFileFile()
+	void testGetFileFile()
 	{
 		final String filePath = sm_dirTestData + "job.jdf";
 		final File file = new File(filePath);
@@ -129,7 +129,7 @@ public class URLReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXMLDocLocal()
+	void testGetXMLDocLocal()
 	{
 		final URLReader reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
@@ -143,7 +143,7 @@ public class URLReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXMLDocLocalDoc()
+	void testGetXMLDocLocalDoc()
 	{
 		final JDFDoc d = JDFDoc.parseFile(sm_dirTestData + "job.jdf");
 		final URLReader reader = new URLReader("job.jdf", d);
@@ -157,7 +157,7 @@ public class URLReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXMLDocZip()
+	void testGetXMLDocZip()
 	{
 		final URLReader reader = new URLReader("schema/BarcodeDetails.jdf");
 		final ZipReader zip = new ZipReader(sm_dirTestData + "schema.zip");
@@ -171,7 +171,7 @@ public class URLReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetURLInputStreamRedirect()
+	void testGetURLInputStreamRedirect()
 	{
 		if (!isTestNetwork())
 			return;
@@ -185,7 +185,7 @@ public class URLReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetURLInputStreamSecure()
+	void testGetURLInputStreamSecure()
 	{
 		if (!isTestNetwork())
 			return;
@@ -199,7 +199,7 @@ public class URLReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetURLInputStreamFTP()
+	void testGetURLInputStreamFTP()
 	{
 		if (!isTestNetwork() || UrlUtilTest.FTP_SITE == null)
 			return;

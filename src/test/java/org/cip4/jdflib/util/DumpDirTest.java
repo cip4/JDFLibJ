@@ -60,7 +60,7 @@ public class DumpDirTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testDump() throws Exception
+	void testDump() throws Exception
 	{
 		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir");
 		final DumpDir dumpDir = new DumpDir(theDir);
@@ -87,7 +87,7 @@ public class DumpDirTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testDumpNull() throws Exception
+	void testDumpNull() throws Exception
 	{
 		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir");
 		final DumpDir dumpDir = new DumpDir(theDir);
@@ -101,7 +101,7 @@ public class DumpDirTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testInc() throws Exception
+	void testInc() throws Exception
 	{
 		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir");
 		final DumpDir dumpDir = new DumpDir(theDir);
@@ -124,7 +124,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		 * @see java.lang.Thread#run()
 		 */
 		@Override
-		public void run()
+		void run()
 		{
 			d.increment();
 		}
@@ -135,7 +135,7 @@ public class DumpDirTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testIncThread() throws Exception
+	void testIncThread() throws Exception
 	{
 		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir2");
 		final DumpDir dumpDir = new DumpDir(theDir);
@@ -156,7 +156,7 @@ public class DumpDirTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testNewFile() throws Exception
+	void testNewFile() throws Exception
 	{
 		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir4");
 		final DumpDir dumpDir = new DumpDir(theDir);
@@ -168,7 +168,7 @@ public class DumpDirTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testCleanup() throws Exception
+	void testCleanup() throws Exception
 	{
 		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir3");
 		final DumpDir dumpDir = new DumpDir(theDir);
@@ -198,7 +198,7 @@ public class DumpDirTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testCleanupNoExt() throws Exception
+	void testCleanupNoExt() throws Exception
 	{
 		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir");
 		final DumpDir dumpDir = new DumpDir(theDir);

@@ -89,7 +89,7 @@ public class JDFSourceResourceTest extends JDFTestCaseBase
 	// /
 
 	@Test
-	public void testSourceResource()
+	void testSourceResource()
 	{
 		JDFDoc doc = JDFTestCaseBase.creatXMDoc();
 		JDFNode n = doc.getJDFRoot();

@@ -93,7 +93,7 @@ public class JMFExampleTest extends ExampleTest
 	 * new activity element in JobPhase
 	 */
 	@Test
-	public void testActivity()
+	void testActivity()
 	{
 		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		final JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.MIS);
@@ -134,7 +134,7 @@ public class JMFExampleTest extends ExampleTest
 	 * new activity element in JobPhase
 	 */
 	@Test
-	public void testKnownDevices()
+	void testKnownDevices()
 	{
 		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		final JDFJMF jmf = b.buildKnownDevicesQuery(JDFDeviceFilter.EnumDeviceDetails.Brief);
@@ -147,7 +147,7 @@ public class JMFExampleTest extends ExampleTest
 	 * test status subscription
 	 */
 	@Test
-	public void testBuildAbort()
+	void testBuildAbort()
 	{
 		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		final JDFJMF jmf = b.buildAbortQueueEntry("entry1");
@@ -159,7 +159,7 @@ public class JMFExampleTest extends ExampleTest
 	 * test status subscription
 	 */
 	@Test
-	public void testBuildResume()
+	void testBuildResume()
 	{
 		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		final JDFJMF jmf = b.buildResumeQueueEntry("entry1");
@@ -173,7 +173,7 @@ public class JMFExampleTest extends ExampleTest
 	 * test status subscription
 	 */
 	@Test
-	public void testRespondResume()
+	void testRespondResume()
 	{
 		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		final JDFJMF jmf = b.buildResumeQueueEntry("entry1");
@@ -194,7 +194,7 @@ public class JMFExampleTest extends ExampleTest
 	 * test status subscription
 	 */
 	@Test
-	public void testRespondKnownDevices()
+	void testRespondKnownDevices()
 	{
 		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		final JDFJMF jmf = b.buildKnownDevicesQuery(JDFDeviceFilter.EnumDeviceDetails.Brief);
@@ -215,7 +215,7 @@ public class JMFExampleTest extends ExampleTest
 	 * test status subscription
 	 */
 	@Test
-	public void testStatusSignal()
+	void testStatusSignal()
 	{
 		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		final JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
@@ -235,7 +235,7 @@ public class JMFExampleTest extends ExampleTest
 	 * new activity element in JobPhase
 	 */
 	@Test
-	public void testLotQuery()
+	void testLotQuery()
 	{
 		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		final JDFJMF jmf = b.buildResourceQuery(true);
@@ -254,7 +254,7 @@ public class JMFExampleTest extends ExampleTest
 	 * new activity element in JobPhase
 	 */
 	@Test
-	public void testAbortQueueEntry()
+	void testAbortQueueEntry()
 	{
 		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		final JDFJMF jmf = b.buildAbortQueueEntry("qeid");
@@ -270,7 +270,7 @@ public class JMFExampleTest extends ExampleTest
 	 * new lot
 	 */
 	@Test
-	public void testLot()
+	void testLot()
 	{
 		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		final JDFJMF jmf = b.createJMF(EnumFamily.Response, EnumType.Resource);
@@ -295,7 +295,7 @@ public class JMFExampleTest extends ExampleTest
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		JDFAudit.setStaticAgentName(null);

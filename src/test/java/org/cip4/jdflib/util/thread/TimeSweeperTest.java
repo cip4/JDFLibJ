@@ -79,7 +79,7 @@ public class TimeSweeperTest extends JDFTestCaseBase
 	{
 
 		@Override
-		public void run()
+		void run()
 		{
 			log.info("running: " + n++);
 		}
@@ -92,7 +92,7 @@ public class TimeSweeperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAddSweeperRun()
+	void testAddSweeperRun()
 	{
 		n = 0;
 		RegularJanitor janitor = RegularJanitor.getJanitor();

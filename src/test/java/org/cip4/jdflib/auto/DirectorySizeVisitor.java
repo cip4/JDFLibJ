@@ -79,18 +79,18 @@ public class DirectorySizeVisitor implements DirectoryVisitor
 	long size = 0;
 
 	@Override
-	public void enterDirectory(File dir)
+	void enterDirectory(File dir)
 	{
 		++dirs;
 	}
 
 	@Override
-	public void leaveDirectory(File dir)
+	void leaveDirectory(File dir)
 	{ /**/
 	}
 
 	@Override
-	public void visitFile(File file)
+	void visitFile(File file)
 	{
 		++files;
 		size += file.length();

@@ -76,7 +76,7 @@ public class NColorTest extends JDFTestCaseBase
 	 * test iteration using Identical in NodeInfo
 	 */
 	@Test
-	public void testFrontBackIdentical()
+	void testFrontBackIdentical()
 	{
 		KElement.setLongID(false);
 		setup(null, 2);
@@ -111,7 +111,7 @@ public class NColorTest extends JDFTestCaseBase
 	 * test iteration using Identical in NodeInfo
 	 */
 	@Test
-	public void testPerfectingJMF() throws Exception
+	void testPerfectingJMF() throws Exception
 	{
 		KElement.setLongID(false);
 		final JDFJMF jmfStatus = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
@@ -149,7 +149,7 @@ public class NColorTest extends JDFTestCaseBase
 	 * test iteration using Identical in NodeInfo
 	 */
 	@Test
-	public void testFrontBackSimple()
+	void testFrontBackSimple()
 	{
 		KElement.setLongID(false);
 		setup(null, 1);
@@ -176,7 +176,7 @@ public class NColorTest extends JDFTestCaseBase
 	 * test iteration using Identical in NodeInfo
 	 */
 	@Test
-	public void testNColor()
+	void testNColor()
 	{
 
 		setup(null, 2);

@@ -76,7 +76,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSet()
+	void testGetSet()
 	{
 		final KElement rlSet = theHelper.appendResourceSet(ElementName.RUNLIST, null).getSet();
 		assertEquals(rlSet, theHelper.getSet(ElementName.RUNLIST, 0).getSet());
@@ -87,7 +87,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendSet()
+	void testAppendSet()
 	{
 		final KElement rlSet = theHelper.appendSet(null, ElementName.RUNLIST, null).getSet();
 		assertEquals(rlSet.getLocalName(), XJDFConstants.ResourceSet);
@@ -98,7 +98,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testsetNI()
+	void testsetNI()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "p1");
 		h.setIdentifier(null);
@@ -115,7 +115,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testsetExternal()
+	void testsetExternal()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "p1");
 		h.setExternalID("ex");
@@ -127,7 +127,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testsetGeneralID()
+	void testsetGeneralID()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "p1");
 		h.setGeneralID("j", "ex");
@@ -139,7 +139,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testsetDesc()
+	void testsetDesc()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "p1");
 		h.setDescriptiveName("ex");
@@ -151,7 +151,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddType()
+	void testAddType()
 	{
 		theHelper.setTypes("Folding");
 		theHelper.addType("Cutting", 0);
@@ -171,7 +171,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIndexOfType()
+	void testIndexOfType()
 	{
 		theHelper.setTypes("Folding");
 		theHelper.addType("Cutting", 0);
@@ -192,7 +192,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddTypeChain()
+	void testAddTypeChain()
 	{
 		theHelper.addType("Cutting").addType("Folding");
 		assertEquals(theHelper.getTypes().get(1), "Folding");
@@ -204,7 +204,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveType()
+	void testRemoveType()
 	{
 		theHelper.setTypes("Folding");
 		theHelper.addType("Cutting", 0);
@@ -220,7 +220,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddTypeCPI()
+	void testAddTypeCPI()
 	{
 		theHelper.setTypes("Folding");
 		final SetHelper rlSet = theHelper.appendSet(null, ElementName.FOLDINGPARAMS, null);
@@ -234,7 +234,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveTypeCPI()
+	void testRemoveTypeCPI()
 	{
 		theHelper.setTypes("Folding");
 		final SetHelper rlSet = theHelper.appendSet(null, ElementName.FOLDINGPARAMS, null);
@@ -250,7 +250,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetCreateResourceSet()
+	void testGetCreateResourceSet()
 	{
 		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input, null));
 		final SetHelper sh1 = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Input);
@@ -266,7 +266,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetCreateResource()
+	void testGetCreateResource()
 	{
 		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input, null));
 		final JDFRunList rl = (JDFRunList) theHelper.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, null);
@@ -281,7 +281,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetCreateResourceSet2()
+	void testGetCreateResourceSet2()
 	{
 		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input));
 		final SetHelper sh1 = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Input);
@@ -297,7 +297,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetCreateSet4()
+	void testGetCreateSet4()
 	{
 		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input));
 		final SetHelper sh1 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", new JDFIntegerList(1));
@@ -313,7 +313,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testNumProduct()
+	void testNumProduct()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);
 		assertEquals(h.numProductHelpers(true), 0);
@@ -337,7 +337,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetproduct()
+	void testGetproduct()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);
 		final ProductHelper ph = h.getCreateRootProduct(0);
@@ -351,7 +351,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetproductExternalID()
+	void testGetproductExternalID()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);
 		final ProductHelper ph = h.getCreateRootProduct(0);
@@ -365,7 +365,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSets()
+	void testGetSets()
 	{
 		final SetHelper rlSet = theHelper.appendResourceSet("RunList", EnumUsage.Input);
 		final SetHelper rlSet2 = theHelper.appendResourceSet("Media", EnumUsage.Output);
@@ -384,7 +384,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTyp()
+	void testGetTyp()
 	{
 		theHelper.setTypes("ConventionalPrinting");
 		assertEquals(theHelper.getType(), EnumType.ConventionalPrinting);
@@ -397,7 +397,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSetUsage()
+	void testGetSetUsage()
 	{
 		final SetHelper seta = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
 		assertNull(theHelper.getSet(ElementName.NODEINFO, EnumUsage.Output));
@@ -412,7 +412,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartMapVector()
+	void testGetPartMapVector()
 	{
 		final SetHelper sh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
 		final VJDFAttributeMap v = new VJDFAttributeMap();
@@ -431,7 +431,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetDependentPartIDKeys()
+	void testGetDependentPartIDKeys()
 	{
 		final SetHelper sh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
 		assertNull(theHelper.getDependentJobParts(null));
@@ -453,7 +453,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSetByID()
+	void testGetSetByID()
 	{
 		final SetHelper rlSet = theHelper.appendResourceSet("RunList", null);
 		theHelper.cleanUp();
@@ -465,7 +465,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXJDF()
+	void testGetXJDF()
 	{
 		final JDFDoc d = new JDFDoc("XJDF");
 		final KElement root = d.getRoot();
@@ -479,7 +479,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJobPartID()
+	void testJobPartID()
 	{
 		theHelper = new XJDFHelper("j", "p", null);
 		assertEquals("p", theHelper.getJobPartID());
@@ -491,7 +491,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJobID()
+	void testJobID()
 	{
 		theHelper = new XJDFHelper("j", "p", null);
 		assertEquals("j", theHelper.getJobID());
@@ -504,7 +504,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartition()
+	void testGetPartition()
 	{
 		final KElement rlSet = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", null).getCreatePartition(0, true).getResource();
 		assertEquals(rlSet, theHelper.getResource("RunList", 0, 0));
@@ -518,7 +518,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartitionByID()
+	void testGetPartitionByID()
 	{
 		final ResourceHelper rlSet = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", null).getCreatePartition(0, true);
 		assertEquals(rlSet, theHelper.getPartition("RunList", 0, 0));
@@ -532,7 +532,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreate()
+	void testCreate()
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		final KElement root = theHelper.getRoot();
@@ -545,7 +545,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreate21()
+	void testCreate21()
 	{
 		theHelper = new XJDFHelper(EnumVersion.Version_2_1, "j1");
 		final KElement root = theHelper.getRoot();
@@ -557,7 +557,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testClone()
+	void testClone()
 	{
 		final XJDFHelper clone = theHelper.clone();
 		theHelper.appendResourceSet(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
@@ -570,7 +570,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFactory()
+	void testFactory()
 	{
 		XMLDoc d = new XMLDoc(XJDFConstants.XJDF, null);
 		assertNotNull(XJDFHelper.getHelper(d));
@@ -583,7 +583,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFactoryElem()
+	void testFactoryElem()
 	{
 		XMLDoc d = new XMLDoc(XJDFConstants.XJDF, null);
 		assertNotNull(XJDFHelper.getHelper(d.getRoot()));
@@ -596,7 +596,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRootProducts()
+	void testRootProducts()
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		final KElement root = theHelper.getRoot();
@@ -607,7 +607,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testReorder()
+	void testReorder()
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		theHelper.getCreateSet(XJDFConstants.Resource, "foo", null);
@@ -622,7 +622,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSortProducts()
+	void testSortProducts()
 	{
 		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
 
@@ -651,7 +651,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRootProduct()
+	void testRootProduct()
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		final KElement root = theHelper.getRoot();
@@ -669,7 +669,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToDir()
+	void testWriteToDir()
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		final String foo = sm_dirTestDataTemp + "foo";
@@ -685,7 +685,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseFile()
+	void testParseFile()
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		final String foo = sm_dirTestDataTemp + "foo";
@@ -702,7 +702,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreateRootProduct()
+	void testGetCreateRootProduct()
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		assertNotNull(theHelper.getCreateRootProduct(0));
@@ -722,7 +722,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

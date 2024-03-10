@@ -73,7 +73,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testEnumFamily()
+	void testEnumFamily()
 	{
 		assertEquals(EnumFamily.getEnumMap().get("Signal"), EnumFamily.Signal);
 		assertNotNull(EnumFamily.getEnumList().get(2));
@@ -84,7 +84,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testInit()
+	void testInit()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
 		final JDFSignal s = jmf.getSignal(0);
@@ -95,7 +95,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testIsValidMessageElement()
+	void testIsValidMessageElement()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
 		assertTrue(sig.isValidMessageElement(ElementName.UPDATEJDFCMDPARAMS, 0));
@@ -123,7 +123,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testAppendValidElement()
+	void testAppendValidElement()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
 		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
@@ -133,7 +133,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testAppendNotificationFilter()
+	void testAppendNotificationFilter()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Notification);
 		assertNotNull(sig.appendValidElement(ElementName.NOTIFICATIONFILTER, null));
@@ -143,7 +143,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testAppendGangInfoQu()
+	void testAppendGangInfoQu()
 	{
 		final JDFQuery sig = (JDFQuery) jmf.appendMessageElement(EnumFamily.Query, EnumType.GangStatus);
 		assertNotNull(sig.appendGangQuFilter());
@@ -162,7 +162,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testAppendGangInfo()
+	void testAppendGangInfo()
 	{
 		final JDFResponse sig = (JDFResponse) jmf.appendMessageElement(EnumFamily.Response, EnumType.GangStatus);
 		sig.appendGangInfo();
@@ -186,7 +186,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testGetValidTypeVector()
+	void testGetValidTypeVector()
 	{
 		final JDFMessage sig = jmf.appendMessageElement(EnumFamily.Signal, null);
 		assertTrue(sig.getValidTypeVector(ElementName.NOTIFICATIONFILTER, 0).contains(EnumType.Notification));
@@ -196,7 +196,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testOptionalElements()
+	void testOptionalElements()
 	{
 		final JDFMessage sig = jmf.appendMessageElement(EnumFamily.Signal, EnumType.Notification);
 		assertTrue(sig.optionalElements().contains(ElementName.NOTIFICATIONFILTER));
@@ -206,7 +206,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testAbortQEParams()
+	void testAbortQEParams()
 	{
 		final JDFCommand m = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.AbortQueueEntry);
 		assertNotNull(m.appendValidElement(ElementName.ABORTQUEUEENTRYPARAMS, null));
@@ -216,7 +216,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testAbortQEParams2()
+	void testAbortQEParams2()
 	{
 		final JDFCommand m = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.AbortQueueEntry);
 		assertNotNull(m.appendAbortQueueEntryParams());
@@ -236,7 +236,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testGetDeviceInfo()
+	void testGetDeviceInfo()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Status);
 		assertNull(sig.getDeviceInfo("DevID"));
@@ -281,7 +281,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testAppendValidElementStrictLax()
+	void testAppendValidElementStrictLax()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
 		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
@@ -336,7 +336,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testGetInvalidAttributes()
+	void testGetInvalidAttributes()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
 		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
@@ -352,7 +352,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testModifyNode()
+	void testModifyNode()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.ModifyNode);
 		final JDFModifyNodeCmdParams mnp = sig.appendModifyNodeCmdParams();
@@ -379,7 +379,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testUpdateJDF()
+	void testUpdateJDF()
 	{
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		final JDFUpdateJDFCmdParams ujn = command.appendUpdateJDFCmdParams();
@@ -406,7 +406,7 @@ public class JDFMessageTest
 	 * test for the validity checks of KnownSubscriptions (JDF 1.4)
 	 */
 	@Test
-	public void testKnownSubscriptions()
+	void testKnownSubscriptions()
 	{
 		final JDFSignal sig = jmf.appendSignal(EnumType.KnownSubscriptions);
 		final JDFCommand cmd = jmf.appendCommand(EnumType.KnownSubscriptions);
@@ -448,7 +448,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testSetType()
+	void testSetType()
 	{
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		assertEquals(command.getXSIType(), "CommandUpdateJDF");
@@ -461,7 +461,7 @@ public class JDFMessageTest
 	 * @throws Exception
 	 */
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		jmf = new JDFDoc(ElementName.JMF).getJMFRoot();
 	}
@@ -470,7 +470,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testSenderID()
+	void testSenderID()
 	{
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		assertEquals(jmf.getSenderID(), command.getSenderID());
@@ -482,7 +482,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testGetTime()
+	void testGetTime()
 	{
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		assertEquals(jmf.getTimeStamp(), command.getTime());
@@ -495,7 +495,7 @@ public class JDFMessageTest
 	 * validation slows down append and get by ~ a factor of 2
 	 */
 	@Test
-	public void testValidatePerformance()
+	void testValidatePerformance()
 	{
 		long t0 = System.currentTimeMillis();
 		for (int l = 0; l < 2; l++)
@@ -525,7 +525,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testCreateResponse()
+	void testCreateResponse()
 	{
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		assertEquals(command.getXSIType(), "CommandUpdateJDF");
@@ -546,7 +546,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testCreateSignal()
+	void testCreateSignal()
 	{
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		assertEquals(command.getXSIType(), "CommandUpdateJDF");
@@ -565,7 +565,7 @@ public class JDFMessageTest
 	 *
 	 */
 	@Test
-	public void testCreateSignalVersion()
+	void testCreateSignalVersion()
 	{
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		jmf.setVersion(EnumVersion.Version_1_3);

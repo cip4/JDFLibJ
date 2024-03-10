@@ -136,7 +136,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreator()
+	void testGetCreator()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -148,7 +148,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddPartIDKey()
+	void testAddPartIDKey()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -161,7 +161,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddPartsCompatible()
+	void testAddPartsCompatible()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource rl = n.addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -182,7 +182,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreatorPartition()
+	void testGetCreatorPartition()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
@@ -209,7 +209,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUnPartition()
+	void testUnPartition()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -222,7 +222,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUnPartitionNot()
+	void testUnPartitionNot()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -238,7 +238,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAttributeVector()
+	void testGetAttributeVector()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -262,7 +262,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNonEmpty()
+	void testGetNonEmpty()
 	{
 		final JDFDoc xd = new JDFDoc(ElementName.JDF, null);
 		final JDFNode root = xd.getJDFRoot();
@@ -279,7 +279,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNonEmpty_KElement()
+	void testGetNonEmpty_KElement()
 	{
 		final JDFDoc xd = new JDFDoc(ElementName.JDF, null);
 		final JDFNode root = xd.getJDFRoot();
@@ -298,7 +298,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHasNonEmpty()
+	void testHasNonEmpty()
 	{
 		final JDFDoc xd = new JDFDoc(ElementName.JDF, null);
 		final JDFNode root = xd.getJDFRoot();
@@ -315,7 +315,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testHasNonEmpty_KElement()
+	void testHasNonEmpty_KElement()
 	{
 		final JDFDoc xd = new JDFDoc(ElementName.JDF, null);
 		final JDFNode root = xd.getJDFRoot();
@@ -334,7 +334,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test the the generalized partition matching
 	 */
 	@Test
-	public void testGetAttributeMap()
+	void testGetAttributeMap()
 	{
 		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
 		root.setType(JDFNode.EnumType.ConventionalPrinting.getName(), true);
@@ -360,7 +360,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test the the generalized partition matching
 	 */
 	@Test
-	public void testGetIgnoreCase()
+	void testGetIgnoreCase()
 	{
 		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
 		root.setType(JDFNode.EnumType.ConventionalPrinting.getName(), true);
@@ -377,7 +377,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test the the generalized partition matching
 	 */
 	@Test
-	public void testGetAttributeMap_KElement()
+	void testGetAttributeMap_KElement()
 	{
 		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
 		root.setType(JDFNode.EnumType.ConventionalPrinting.getName(), true);
@@ -403,7 +403,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * tests the hard coded getters and setters
 	 */
 	@Test
-	public void testGetSet()
+	void testGetSet()
 	{
 		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
 		root.setType(JDFNode.EnumType.ConventionalPrinting.getName(), true);
@@ -417,7 +417,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test the the generalized partition matching
 	 */
 	@Test
-	public void testOverlapPartMap()
+	void testOverlapPartMap()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("PartVersion", "DE");
 		m1.put("Run", "r2");
@@ -433,7 +433,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test the the generalized partition matching
 	 */
 	@Test
-	public void testPartIDKeys()
+	void testPartIDKeys()
 	{
 		int n = 0;
 		for (EnumPartIDKey k : EnumPartIDKey.getEnumList())
@@ -449,7 +449,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test initialization and setAutoAgent
 	 */
 	@Test
-	public void testInit()
+	void testInit()
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -469,7 +469,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInitAgentName()
+	void testInitAgentName()
 	{
 		JDFAudit.setStaticAgentName("foo");
 		JDFResource.setAutoAgent(true);
@@ -482,7 +482,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMakeRootResource()
+	void testMakeRootResource()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFResourcePool p = n.appendResourcePool();
@@ -497,7 +497,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test the resource root stuff
 	 */
 	@Test
-	public void testGetResourcePoolNS()
+	void testGetResourcePoolNS()
 	{
 		// set up a test document
 		final JDFDoc jdfDoc = new JDFDoc("JDF");
@@ -513,7 +513,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetResourceRootNI13()
+	void testGetResourceRootNI13()
 	{
 		final JDFNode rootNode = new JDFDoc("JDF").getJDFRoot();
 		final JDFNodeInfo ni = rootNode.getCreateNodeInfo();
@@ -525,7 +525,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test the resource root stuff
 	 */
 	@Test
-	public void testGetResourceRoot()
+	void testGetResourceRoot()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -542,7 +542,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test the resource root stuff
 	 */
 	@Test
-	public void testGetResourceRootJMF()
+	void testGetResourceRootJMF()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Resource);
 		final JDFResourceInfo ri = jmf.getCreateSignal(0).appendResourceInfo();
@@ -562,7 +562,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test the resource root stuff
 	 */
 	@Test
-	public void testGetResourceRoot_Old()
+	void testGetResourceRoot_Old()
 	{
 
 		// set up a test document
@@ -615,7 +615,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsPhysical()
+	void testIsPhysical()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		assertFalse(n.addResource(ElementName.STRAPPINGPARAMS, null).isPhysical());
@@ -635,7 +635,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testIsParameter()
+	void testIsParameter()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		assertTrue(n.addResource(ElementName.STRAPPINGPARAMS, null).isParameter());
@@ -650,7 +650,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testIsEqual()
+	void testIsEqual()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, null);
@@ -668,7 +668,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testInvalidAttributes()
+	void testInvalidAttributes()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, null);
@@ -682,7 +682,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsResourceElement()
+	void testIsResourceElement()
 	{
 		// get the JDF document root element
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
@@ -705,7 +705,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendRaw()
+	void testAppendRaw()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
@@ -723,7 +723,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendRawAtt()
+	void testAppendRawAtt()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
@@ -745,7 +745,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetPartMap()
+	void testgetPartMap()
 	{
 		final String strFileName = sm_dirTestData + "partitioned_private_resources.jdf";
 		final JDFParser p = new JDFParser();
@@ -785,7 +785,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * tests the various implicit and explicit defaults of getPartUsage
 	 */
 	@Test
-	public void testgetPartUsage()
+	void testgetPartUsage()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFRunList r = (JDFRunList) n.addResource("RunList", EnumUsage.Input);
@@ -804,7 +804,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetPartValues()
+	void testgetPartValues()
 	{
 		final String strFileName = sm_dirTestData + "partitioned_private_resources.jdf";
 		final JDFParser p = new JDFParser();
@@ -832,7 +832,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetPartMapVector()
+	void testgetPartMapVector()
 	{
 		final String strFileName = sm_dirTestData + "partitioned_private_resources.jdf";
 		final JDFDoc myJDFDoc = JDFDoc.parseFile(strFileName);
@@ -857,7 +857,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetPartMapVectorSequence()
+	void testgetPartMapVectorSequence()
 	{
 		final JDFResource r = new JDFDoc("JDF").getJDFRoot().addResource("NodeInfo", EnumUsage.Input);
 		final JDFResource sheet = r.addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "1");
@@ -880,7 +880,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildrenByTagName()
+	void testGetChildrenByTagName()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
@@ -911,7 +911,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildElement()
+	void testGetChildElement()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
@@ -935,7 +935,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildElementVector()
+	void testGetChildElementVector()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
@@ -988,7 +988,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetColorPool()
+	void testGetColorPool()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
@@ -1028,7 +1028,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * tests the correct inheritence of refelements, elements and attributes
 	 */
 	@Test
-	public void testPartitionedAttribute()
+	void testPartitionedAttribute()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
@@ -1065,7 +1065,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * tests the correct inheritence of refelements, elements and attributes
 	 */
 	@Test
-	public void testpartitionedElement()
+	void testpartitionedElement()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
@@ -1091,7 +1091,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUpdateValuesFromLeaves()
+	void testUpdateValuesFromLeaves()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc("Media").getRoot();
 		final JDFResource r1 = r.addPartition(EnumPartIDKey.BlockName, "B1");
@@ -1113,7 +1113,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * tests updateAmounts()
 	 */
 	@Test
-	public void testUpdateAmounts()
+	void testUpdateAmounts()
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -1169,7 +1169,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * tests updateAmounts()
 	 */
 	@Test
-	public void testUpdateAmountsVirtual()
+	void testUpdateAmountsVirtual()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
@@ -1196,7 +1196,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testContainsData()
+	void testContainsData()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFResource m = n.addResource("Media", EnumUsage.Input);
@@ -1213,7 +1213,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreatePartitions()
+	void testCreatePartitions()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFElement root = doc.getJDFRoot();
@@ -1262,7 +1262,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 */
 	// ///////////////////////////////////////////////////////////
 	@Test
-	public void testGetCreatePartition()
+	void testGetCreatePartition()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFElement root = doc.getJDFRoot();
@@ -1429,7 +1429,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHasAttribute()
+	void testHasAttribute()
 	{
 		// TODO - behavior of hasattribute!!!
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
@@ -1447,7 +1447,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIdenticalStatus()
+	void testIdenticalStatus()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -1476,7 +1476,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIdentical()
+	void testIdentical()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -1548,7 +1548,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIdenticalValid()
+	void testIdenticalValid()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -1584,7 +1584,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetParentPartition()
+	void testGetParentPartition()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
@@ -1599,7 +1599,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test whether getpartition works for when inconsistently called
 	 */
 	@Test
-	public void testGetPartition()
+	void testGetPartition()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -1623,7 +1623,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartitionSelf()
+	void testGetPartitionSelf()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource media = n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
@@ -1642,7 +1642,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartitionGap()
+	void testGetPartitionGap()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource media = n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
@@ -1665,7 +1665,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetPartitionGapNot()
+	void testGetPartitionGapNot()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource media = n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
@@ -1688,7 +1688,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test whether getpartition works for when inconsistently called
 	 */
 	@Test
-	public void testGetPartition_PartVersion()
+	void testGetPartition_PartVersion()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -1713,7 +1713,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test whether getpartition works for when inconsistently called
 	 */
 	@Test
-	public void testGetPartition_PartVersionWild()
+	void testGetPartition_PartVersionWild()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -1738,7 +1738,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test whether getpartition works for when map has too many keys
 	 */
 	@Test
-	public void testGetPartitionExplicitOver()
+	void testGetPartitionExplicitOver()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -1760,7 +1760,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test getPartitionMap()
 	 */
 	@Test
-	public void testGetPartitionMap()
+	void testGetPartitionMap()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -1793,7 +1793,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test getPartitionFromMap()
 	 */
 	@Test
-	public void testGetPartitionFromMap()
+	void testGetPartitionFromMap()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -1830,7 +1830,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test getPartitionFromMap()
 	 */
 	@Test
-	public void testGetPartitionFromMapTime()
+	void testGetPartitionFromMapTime()
 	{
 		final long t00 = System.currentTimeMillis();
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1894,7 +1894,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test whether getpartition works for lists and ranges
 	 */
 	@Test
-	public void testGetPartsPartition()
+	void testGetPartsPartition()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -1917,7 +1917,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test whether getpartition works for lists and ranges
 	 */
 	@Test
-	public void testStrictPartsPartition()
+	void testStrictPartsPartition()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -1950,7 +1950,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartitionVectorIdentical()
+	void testGetPartitionVectorIdentical()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFResource r = n.addResource("ExposedMedia", EnumUsage.Input);
@@ -1982,7 +1982,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartitionVectorIdenticalNoFollowIdentical()
+	void testGetPartitionVectorIdenticalNoFollowIdentical()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFResource r = n.addResource("ExposedMedia", EnumUsage.Input);
@@ -2024,7 +2024,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartitionVector()
+	void testGetPartitionVector()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -2092,7 +2092,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * check that the vector gets missing levels of prtition correctly
 	 */
 	@Test
-	public void testGetPartionVectorExplicitSkip()
+	void testGetPartionVectorExplicitSkip()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource xm = n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
@@ -2114,7 +2114,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPartitionVectorSkip()
+	void testGetPartitionVectorSkip()
 	{
 		final JDFResource r = new JDFDoc("JDF").getJDFRoot().addResource("NodeInfo", EnumUsage.Input);
 		final JDFResource sheet = r.addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "1");
@@ -2137,7 +2137,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeleteUnlinked()
+	void testDeleteUnlinked()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -2160,7 +2160,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinks()
+	void testGetLinks()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -2180,7 +2180,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinksAndRefsPerformance()
+	void testGetLinksAndRefsPerformance()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.Product);
@@ -2234,7 +2234,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLinksAndRefs()
+	void testGetLinksAndRefs()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -2279,7 +2279,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLocalPartitionKey()
+	void testGetLocalPartitionKey()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -2299,7 +2299,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBuildXPath()
+	void testBuildXPath()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -2315,7 +2315,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBinderySignatureName()
+	void testBinderySignatureName()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -2330,7 +2330,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInvalidPartIDKeysLeaves()
+	void testInvalidPartIDKeysLeaves()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -2345,7 +2345,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testExplicitPartUsage()
+	void testExplicitPartUsage()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
@@ -2370,7 +2370,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInvalidPartUsage()
+	void testInvalidPartUsage()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -2388,7 +2388,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetLeaves()
+	void testGetLeaves()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -2410,7 +2410,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetLeavesPerformance()
+	void testGetLeavesPerformance()
 	{
 
 		final JDFNode n = JDFNode.createRoot();
@@ -2438,7 +2438,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testGetMinStatusFromLeaves()
+	void testGetMinStatusFromLeaves()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -2496,7 +2496,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSubElement()
+	void testSubElement()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -2519,7 +2519,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetAttributes()
+	void testSetAttributes()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -2540,7 +2540,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetAttributesIntermediate()
+	void testSetAttributesIntermediate()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -2561,7 +2561,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetAttributePartition()
+	void testSetAttributePartition()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -2587,7 +2587,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testRunPage()
+	void testRunPage()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
@@ -2602,7 +2602,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testSetLocked()
+	void testSetLocked()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -2645,7 +2645,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testImplicitPartitions()
+	void testImplicitPartitions()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -2683,7 +2683,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test reduction of partitions
 	 */
 	@Test
-	public void testReducePartitions()
+	void testReducePartitions()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -2714,7 +2714,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReorderPartitions()
+	void testReorderPartitions()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource r = n.getCreateResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input, 0);
@@ -2739,7 +2739,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveImplicitPartions()
+	void testRemoveImplicitPartions()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -2755,7 +2755,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveInheritedAttributes()
+	void testRemoveInheritedAttributes()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -2776,7 +2776,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse method for subelements
 	 */
 	@Test
-	public void testCollapseElement()
+	void testCollapseElement()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -2813,7 +2813,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse method for subelements
 	 */
 	@Test
-	public void testCollapseBetween()
+	void testCollapseBetween()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource xm = n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
@@ -2833,7 +2833,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
-	public void testCollapseSubElement()
+	void testCollapseSubElement()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -2863,7 +2863,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	/**
 	 *
 	 */
-	public void testSubelementClass()
+	void testSubelementClass()
 	{
 		final boolean b = JDFResource.getAutoSubElementClass();
 		JDFResource.setAutoSubElementClass(true);
@@ -2879,7 +2879,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test clonePartitions method
 	 */
 	@Test
-	public void testClonePartions()
+	void testClonePartions()
 	{
 		final KElement pool = new JDFDoc("ResourcePool").getRoot();
 		final JDFResource r0 = (JDFResource) pool.appendElement("Preview");
@@ -2937,7 +2937,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test clonePartitions method
 	 */
 	@Test
-	public void testClonePartionsExist()
+	void testClonePartionsExist()
 	{
 		final KElement pool = new JDFDoc("ResourcePool").getRoot();
 		final JDFResource r0 = (JDFResource) pool.appendElement("Preview");
@@ -2959,7 +2959,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test clonePartitions method
 	 */
 	@Test
-	public void testClonePartionsExist2()
+	void testClonePartionsExist2()
 	{
 		final KElement pool = new JDFDoc("ResourcePool").getRoot();
 		final JDFResource r0 = (JDFResource) pool.appendElement("Preview");
@@ -2988,7 +2988,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
-	public void testCollapseUniqueTree()
+	void testCollapseUniqueTree()
 	{
 		final JDFNode n = JDFNode.createRoot();
 
@@ -3011,7 +3011,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
-	public void testDeleteNodePartition()
+	void testDeleteNodePartition()
 	{
 		final JDFNode n = JDFNode.createRoot();
 
@@ -3030,7 +3030,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
-	public void testDeleteNodePartition2()
+	void testDeleteNodePartition2()
 	{
 		final JDFNode n = JDFNode.createRoot();
 
@@ -3050,7 +3050,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
-	public void testCollapseUniqueLeaves()
+	void testCollapseUniqueLeaves()
 	{
 		final JDFNode n = JDFNode.createRoot();
 
@@ -3070,7 +3070,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
-	public void testCollapseEmptyAttribute()
+	void testCollapseEmptyAttribute()
 	{
 		final JDFNode n = JDFNode.createRoot();
 
@@ -3090,7 +3090,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
-	public void testUnpartitionPartIDKeys()
+	void testUnpartitionPartIDKeys()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource r = n.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -3111,7 +3111,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
-	public void testCollapse()
+	void testCollapse()
 	{
 		final JDFDoc doc = creatRLDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -3161,7 +3161,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
-	public void testFixVersion()
+	void testFixVersion()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -3179,7 +3179,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
-	public void testExpand()
+	void testExpand()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -3261,7 +3261,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
-	public void testExpandLeaf()
+	void testExpandLeaf()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -3287,7 +3287,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGeneralID()
+	void testGeneralID()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -3325,7 +3325,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGeneralIDEmptyNamespace()
+	void testGeneralIDEmptyNamespace()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -3343,7 +3343,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInstantiations()
+	void testInstantiations()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode root = doc.getJDFRoot();
@@ -3366,7 +3366,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElement()
+	void testGetElement()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -3396,7 +3396,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * tests getxpathattribute for partitions
 	 */
 	@Test
-	public void testGetXPathAttribute()
+	void testGetXPathAttribute()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -3408,7 +3408,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveChildren()
+	void testRemoveChildren()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource("ExposedMedia", EnumUsage.Input);
@@ -3427,7 +3427,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveAttributeFromLeaves()
+	void testRemoveAttributeFromLeaves()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFResource xm = n.addResource("ExposedMedia", EnumUsage.Input);
@@ -3442,7 +3442,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * tests getxpathattribute for partitions
 	 */
 	@Test
-	public void testGetXPathElement()
+	void testGetXPathElement()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -3456,7 +3456,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetResStatus()
+	void testGetResStatus()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -3514,7 +3514,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreatePartition2()
+	void testGetCreatePartition2()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -3540,7 +3540,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreatePartitionCreate()
+	void testGetCreatePartitionCreate()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -3560,7 +3560,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreatePartition3()
+	void testGetCreatePartition3()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -3587,7 +3587,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreatePartitionSelf()
+	void testGetCreatePartitionSelf()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFResource media = n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
@@ -3608,7 +3608,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddpartitionEnum()
+	void testAddpartitionEnum()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -3624,7 +3624,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddpartition()
+	void testAddpartition()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -3698,7 +3698,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddpartitionStar()
+	void testAddpartitionStar()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -3711,7 +3711,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddpartitionStar2()
+	void testAddpartitionStar2()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -3725,7 +3725,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddpartitionStar1()
+	void testAddpartitionStar1()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -3739,7 +3739,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMultiplePartIDKeys()
+	void testMultiplePartIDKeys()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -3763,7 +3763,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConsistentPartIDKeys()
+	void testConsistentPartIDKeys()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
@@ -3800,7 +3800,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * jdf 1.4 preview anywhere example
 	 */
 	@Test
-	public void testPreview14()
+	void testPreview14()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -3826,7 +3826,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		super.tearDown();
 		JDFResource.setAutoAgent(bAgent);
@@ -3841,7 +3841,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		bAgent = JDFResource.getAutoAgent();

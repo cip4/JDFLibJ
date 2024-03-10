@@ -97,7 +97,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * test whether xmldoc.parse gives a clean empty kelement only doc
 	 */
 	@Test
-	public void testParseFile()
+	void testParseFile()
 	{
 		final XMLDoc d = new XMLDoc("Foo", null);
 		final KElement root = d.getRoot();
@@ -112,7 +112,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testStreamWriter()
+	void testStreamWriter()
 	{
 		final KElement d = KElement.createRoot("aa", null);
 		File f = FileUtil.writeFile(d, new File(sm_dirTestDataTemp + "aa.xml"));
@@ -123,7 +123,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsEqual()
+	void testIsEqual()
 	{
 		final KElement e1 = KElement.createRoot("a", null);
 		final KElement e2 = e1.clone();
@@ -141,7 +141,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsEqualStatic()
+	void testIsEqualStatic()
 	{
 		final KElement e1 = KElement.createRoot("a", null);
 		final KElement e2 = e1.clone();
@@ -166,7 +166,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEquals()
+	void testEquals()
 	{
 		final KElement e1 = KElement.createRoot("a", null);
 		final KElement e2 = e1.clone();
@@ -184,7 +184,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIsEqualBig()
+	void testIsEqualBig()
 	{
 		final JDFDoc d = JDFDoc.parseFile(sm_dirTestData + "matsch.jdf");
 		final KElement root = d.getRoot();
@@ -198,7 +198,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * really weird, eh?
 	 */
 	@Test
-	public void testBadElementNames()
+	void testBadElementNames()
 	{
 		final JDFDoc doc = new JDFDoc("a");
 		final KElement e = doc.getRoot();
@@ -213,7 +213,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAncestorDistance()
+	void testAncestorDistance()
 	{
 		final KElement e = new JDFDoc("a").getRoot();
 		assertEquals(e.ancestorDistance(e), 0);
@@ -229,7 +229,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * check for memory leaks
 	 */
 	@Test
-	public void testDeleteNode()
+	void testDeleteNode()
 	{
 		final KElement k = new XMLDoc("root", null).getRoot();
 		for (int i = 0; i < 100000; i++)
@@ -247,7 +247,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * check for memory leaks
 	 */
 	@Test
-	public void testDirty()
+	void testDirty()
 	{
 		final KElement k = KElement.parseString("<a/>");
 		assertFalse(k.isDirty());
@@ -259,7 +259,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * check for memory leaks
 	 */
 	@Test
-	public void testDirtyRoot()
+	void testDirtyRoot()
 	{
 		final KElement k = KElement.createRoot("a", null);
 		assertTrue(k.isDirty());
@@ -269,7 +269,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * check for memory leaks
 	 */
 	@Test
-	public void testDirtyAtt()
+	void testDirtyAtt()
 	{
 		final KElement k = KElement.parseString("<a/>");
 		assertFalse(k.isDirty());
@@ -281,7 +281,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * check for memory leaks
 	 */
 	@Test
-	public void testDirtyRename()
+	void testDirtyRename()
 	{
 		final KElement k = KElement.parseString("<a><b/></a>");
 		assertFalse(k.isDirty());
@@ -293,7 +293,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * check for memory leaks
 	 */
 	@Test
-	public void testImportNode()
+	void testImportNode()
 	{
 		final long currentMem0 = getCurrentMem();
 		final KElement k = new XMLDoc("root", null).getRoot();
@@ -318,7 +318,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnumValid()
+	void testEnumValid()
 	{
 		EnumValidationLevel level = EnumValidationLevel.RecursiveComplete;
 		assertEquals(EnumValidationLevel.NoWarnComplete, EnumValidationLevel.setNoWarning(level, true));
@@ -332,7 +332,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * Test for void RemoveAttribute(String, String) - PR-AKMP-000001
 	 */
 	@Test
-	public void testRemoveAttributeStringString()
+	void testRemoveAttributeStringString()
 	{
 		final JDFParser p = new JDFParser();
 		final JDFDoc jdfDoc = p.parseFile(sm_dirTestData + "emptyAuthorAttribute.jdf");
@@ -356,7 +356,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRenameElement()
+	void testRenameElement()
 	{
 		final XMLDoc d = new XMLDoc("root", "www.root.com");
 		final KElement root = d.getRoot();
@@ -375,7 +375,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCleanupNS()
+	void testCleanupNS()
 	{
 		final KElement e = KElement.createRoot("a", "www.a.com");
 		e.cleanup();
@@ -386,7 +386,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCleanup()
+	void testCleanup()
 	{
 		final KElement e = KElement.createRoot("a", null);
 		e.setText("foo");
@@ -402,7 +402,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRenameAttribute()
+	void testRenameAttribute()
 	{
 		final XMLDoc d = new XMLDoc("root", null);
 		final KElement root = d.getRoot();
@@ -415,7 +415,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveChildren()
+	void testRemoveChildren()
 	{
 		final XMLDoc d = new XMLDoc("root", null);
 		final KElement root = d.getRoot();
@@ -434,7 +434,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElementsWithMultipleID()
+	void testGetElementsWithMultipleID()
 	{
 		final XMLDoc d = new XMLDoc("e1", null);
 		final KElement e1 = d.getRoot();
@@ -458,7 +458,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetFirstChildElement()
+	void testGetFirstChildElement()
 	{
 		final XMLDoc d = new XMLDoc("e1", null);
 		final KElement e1 = d.getRoot();
@@ -476,7 +476,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNextSibling()
+	void testGetNextSibling()
 	{
 		final XMLDoc d = new XMLDoc("e1", null);
 		final KElement e1 = d.getRoot();
@@ -495,7 +495,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNumChildrenByClass()
+	void testNumChildrenByClass()
 	{
 		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
 		final JDFExposedMedia xm = (JDFExposedMedia) root.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
@@ -510,7 +510,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElementByClass()
+	void testGetElementByClass()
 	{
 		final JDFDoc d = creatXMDoc();
 		final JDFNode n = d.getJDFRoot();
@@ -528,7 +528,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElementByClassRec()
+	void testGetElementByClassRec()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFAuditPool ap = n.getCreateAuditPool();
@@ -544,7 +544,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElementByClassDirect()
+	void testGetElementByClassDirect()
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.appendComment().setText("a");
@@ -559,7 +559,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElementById()
+	void testGetElementById()
 	{
 		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">" + "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>"
 				+ "</ELEM2>" + "</JDF>";
@@ -609,7 +609,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReplaceElementRoot()
+	void testReplaceElementRoot()
 	{
 		final XMLDoc d = new XMLDoc("root", "www.root.com");
 		final XMLDoc d2 = new XMLDoc("root2", "www.root2.com");
@@ -626,7 +626,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * test memory leaks in replaceElement
 	 */
 	@Test
-	public void testReplaceElementMem()
+	void testReplaceElementMem()
 	{
 		final XMLDoc d = new XMLDoc("root", "www.root.com");
 		final KElement e = d.getRoot();
@@ -645,7 +645,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testReplaceElement()
+	void testReplaceElement()
 	{
 		final XMLDoc d = new XMLDoc("root", "www.root.com");
 		final XMLDoc d2 = new XMLDoc("root2", "www.root2.com");
@@ -690,7 +690,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSortChildren()
+	void testSortChildren()
 	{
 		final XMLDoc d = new JDFDoc("parent");
 		final KElement e = d.getRoot();
@@ -719,7 +719,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSortChild()
+	void testSortChild()
 	{
 		final XMLDoc d = new JDFDoc("parent");
 		final KElement e = d.getRoot();
@@ -756,7 +756,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSortChildrenAttribute()
+	void testSortChildrenAttribute()
 	{
 		final XMLDoc d = new JDFDoc("parent");
 		final KElement e = d.getRoot();
@@ -783,7 +783,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSortChildrenAttributeIgnore()
+	void testSortChildrenAttributeIgnore()
 	{
 		final XMLDoc d = new JDFDoc("parent");
 		final KElement e = d.getRoot();
@@ -814,7 +814,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSortChildrenAttributeNumber()
+	void testSortChildrenAttributeNumber()
 	{
 		final XMLDoc d = new JDFDoc("parent");
 		final KElement e = d.getRoot();
@@ -845,7 +845,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSortChildrenXPath()
+	void testSortChildrenXPath()
 	{
 		final XMLDoc d = new JDFDoc("parent");
 		final KElement e = d.getRoot();
@@ -874,7 +874,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSortChildrenCompPerformance()
+	void testSortChildrenCompPerformance()
 	{
 		XMLDoc d = new JDFDoc("parent");
 		KElement e = d.getRoot();
@@ -917,7 +917,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSortChildrenComp()
+	void testSortChildrenComp()
 	{
 
 		final XMLDoc d = new JDFDoc("parent");
@@ -950,7 +950,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveFromAttribute()
+	void testRemoveFromAttribute()
 	{
 		final XMLDoc d = new JDFDoc("Foo");
 		final KElement e = d.getRoot();
@@ -987,7 +987,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveExtensions()
+	void testRemoveExtensions()
 	{
 		final KElement e = new XMLDoc("e", "a.com").getRoot();
 		final KElement b = e.appendElement("b", "b.com");
@@ -1008,7 +1008,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveEmptyAttributes()
+	void testRemoveEmptyAttributes()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final KElement e = d.getJDFRoot();
@@ -1040,7 +1040,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveAttribute()
+	void testRemoveAttribute()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final KElement e = d.getJDFRoot();
@@ -1083,7 +1083,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatchesPath()
+	void testMatchesPath()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
 		final KElement root = doc.getRoot();
@@ -1114,7 +1114,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMergeElement()
+	void testMergeElement()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
 		final KElement root = doc.getRoot();
@@ -1138,7 +1138,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyInto()
+	void testCopyInto()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
 		final KElement root = doc.getRoot();
@@ -1171,7 +1171,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyIntoTxt()
+	void testCopyIntoTxt()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
 		final KElement root = doc.getRoot();
@@ -1188,7 +1188,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMergeElementElements()
+	void testMergeElementElements()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
 		final KElement root = doc.getRoot();
@@ -1216,7 +1216,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMergeElementMultiElements()
+	void testMergeElementMultiElements()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
 		final KElement root = doc.getRoot();
@@ -1247,7 +1247,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveMe()
+	void testMoveMe()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
 		final KElement root = doc.getRoot();
@@ -1269,7 +1269,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNumChildElements()
+	void testNumChildElements()
 	{
 		final KElement root = KElement.createRoot("Test", "www.test.com");
 		root.appendElement("a");
@@ -1286,7 +1286,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNumSiblingElements()
+	void testNumSiblingElements()
 	{
 		final KElement root = KElement.createRoot("Test", "www.test.com");
 		final KElement a = root.appendElement("a");
@@ -1305,7 +1305,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveElement()
+	void testMoveElement()
 	{
 		final XMLDoc doc = new XMLDoc("Test", null);
 		final KElement root = doc.getRoot();
@@ -1324,7 +1324,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyElementMem()
+	void testCopyElementMem()
 	{
 		final KElement k = new XMLDoc("root", null).getRoot();
 		for (int i = 0; i < 20000; i++)
@@ -1349,7 +1349,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCloneElementMem()
+	void testCloneElementMem()
 	{
 		final XMLDoc doc = new XMLDoc("root", null);
 		// KElement k =
@@ -1371,7 +1371,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * @throws CloneNotSupportedException
 	 */
 	@Test
-	public void testClone() throws CloneNotSupportedException
+	void testClone() throws CloneNotSupportedException
 	{
 		final XMLDoc doc = new XMLDoc("root", null);
 		final KElement e = doc.getRoot();
@@ -1395,7 +1395,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * @throws CloneNotSupportedException
 	 */
 	@Test
-	public void testCloneNewDoc() throws CloneNotSupportedException
+	void testCloneNewDoc() throws CloneNotSupportedException
 	{
 		final XMLDoc doc = new XMLDoc("root", null);
 		final KElement e = doc.getRoot();
@@ -1419,7 +1419,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * @throws CloneNotSupportedException
 	 */
 	@Test
-	public void testCloneNewDocText() throws CloneNotSupportedException
+	void testCloneNewDocText() throws CloneNotSupportedException
 	{
 		final XMLDoc doc = new XMLDoc("root", null);
 		final KElement e = doc.getRoot();
@@ -1433,7 +1433,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCloneRoot()
+	void testCloneRoot()
 	{
 		final XMLDoc doc = new XMLDoc("root", null);
 		final KElement k = doc.getRoot();
@@ -1448,7 +1448,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveAttributeNS()
+	void testMoveAttributeNS()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
 		final KElement root = doc.getRoot();
@@ -1463,7 +1463,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveAttribute()
+	void testMoveAttribute()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
 		final KElement root = doc.getRoot();
@@ -1497,7 +1497,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * test for copyElement
 	 */
 	@Test
-	public void testCopyElement()
+	void testCopyElement()
 	{
 		final XMLDoc d = new XMLDoc("d1", null);
 		final KElement e = d.getRoot();
@@ -1512,7 +1512,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * test for copyElement
 	 */
 	@Test
-	public void testCopyChildren()
+	void testCopyChildren()
 	{
 		final XMLDoc d = new XMLDoc("d1", null);
 		final KElement e = d.getRoot();
@@ -1527,7 +1527,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * test for copyElement after clone check for spurious npes here
 	 */
 	@Test
-	public void testCopyElementClone()
+	void testCopyElementClone()
 	{
 		final XMLDoc d = new XMLDoc("d1", null);
 		final KElement e = d.getRoot();
@@ -1560,7 +1560,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * test for copyXPathValue
 	 */
 	@Test
-	public void testCopyXPathValue()
+	void testCopyXPathValue()
 	{
 		final KElement e1 = new XMLDoc("e1", null).getRoot();
 		final KElement e1a = new XMLDoc("e1", null).getRoot();
@@ -1578,7 +1578,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * test
 	 */
 	@Test
-	public void testCopyElements()
+	void testCopyElements()
 	{
 		final XMLDoc d = new XMLDoc("d1", null);
 		final KElement e = d.getRoot();
@@ -1603,7 +1603,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * test
 	 */
 	@Test
-	public void testCopyElementNS()
+	void testCopyElementNS()
 	{
 		final XMLDoc d = new XMLDoc("d1", null);
 		final KElement e = d.getRoot();
@@ -1620,7 +1620,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyAttributeNull()
+	void testCopyAttributeNull()
 	{
 		final KElement root = KElement.createRoot("a", null);
 		final KElement a = root.appendElement("a");
@@ -1631,7 +1631,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyAttributeEmpty()
+	void testCopyAttributeEmpty()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
 		final KElement root = doc.getRoot();
@@ -1648,7 +1648,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyAttribute()
+	void testCopyAttribute()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
 		final KElement root = doc.getRoot();
@@ -1696,7 +1696,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyAttributeNS()
+	void testCopyAttributeNS()
 	{
 		final KElement a = new XMLDoc("a", null).getRoot();
 		a.setAttributeNS("www.foo.com", "foo:test", "bar");
@@ -1712,7 +1712,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNameSpace()
+	void testNameSpace()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final KElement root = doc.getRoot();
@@ -1780,7 +1780,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNameSpaceInElements()
+	void testNameSpaceInElements()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final KElement root = doc.getRoot();
@@ -1861,7 +1861,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNameSpace1()
+	void testNameSpace1()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFElement root = (JDFElement) doc.getRoot();
@@ -1892,7 +1892,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNameSpaceInAttributes()
+	void testNameSpaceInAttributes()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFElement root = (JDFElement) doc.getRoot();
@@ -1928,7 +1928,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPrefix()
+	void testGetPrefix()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode myRoot = (JDFNode) jdfDoc.getRoot();
@@ -1947,7 +1947,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 *
 	 */
-	public void testGetLength()
+	void testGetLength()
 	{
 		final KElement e = new XMLDoc("e", null).getRoot();
 		e.appendElement("c");
@@ -1958,7 +1958,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetLocalName()
+	void testGetLocalName()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode myRoot = (JDFNode) jdfDoc.getRoot();
@@ -1998,7 +1998,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * tests whether the correct virtual call hierarch is followed in getCreateElement
 	 */
 	@Test
-	public void testGetCreateElement()
+	void testGetCreateElement()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
@@ -2018,7 +2018,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMatchesPath()
+	void testGetMatchesPath()
 	{
 		final XMLDoc d = new XMLDoc("a", null);
 		final KElement r = d.getRoot();
@@ -2034,7 +2034,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDefaultAttributeMap()
+	void testGetDefaultAttributeMap()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = (JDFNode) jdfDoc.getRoot();
@@ -2049,7 +2049,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEraseDefaultAttributeMap()
+	void testEraseDefaultAttributeMap()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = (JDFNode) jdfDoc.getRoot();
@@ -2067,7 +2067,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAttributeMap()
+	void testGetAttributeMap()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = (JDFNode) jdfDoc.getRoot();
@@ -2080,7 +2080,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEraseEmptyNodes()
+	void testEraseEmptyNodes()
 	{
 		final JDFParser p = new JDFParser();
 		final String inFile = sm_dirTestData + File.separator + "bigWhite.jdf";
@@ -2098,7 +2098,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveXPathElement()
+	void testRemoveXPathElement()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
@@ -2113,7 +2113,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveXPathValue()
+	void testRemoveXPathValue()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
@@ -2128,7 +2128,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveXPathAttribute2()
+	void testRemoveXPathAttribute2()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
@@ -2152,7 +2152,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXPathAttributeMap()
+	void testGetXPathAttributeMap()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("a", null);
 		final KElement root = jdfDoc.getRoot();
@@ -2170,7 +2170,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXPathAttributeMapLow()
+	void testGetXPathAttributeMapLow()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("a", null);
 		final KElement root = jdfDoc.getRoot();
@@ -2189,7 +2189,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXPathAttributeMapNull()
+	void testGetXPathAttributeMapNull()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("a", null);
 		final KElement root = jdfDoc.getRoot();
@@ -2207,7 +2207,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXPathValueMapText()
+	void testGetXPathValueMapText()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("a", null);
 		final KElement root = jdfDoc.getRoot();
@@ -2220,7 +2220,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXPathValueMapPerformance()
+	void testGetXPathValueMapPerformance()
 	{
 		final CPUTimer ct = new CPUTimer(false);
 		final JDFDoc d = new JDFParser().parseFile(sm_dirTestData + "bigWhite.jdf");
@@ -2238,7 +2238,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXPathElementVector()
+	void testGetXPathElementVector()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("a", null);
 		final KElement root = jdfDoc.getRoot();
@@ -2275,7 +2275,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXPathElementNS()
+	void testGetXPathElementNS()
 	{
 		final XMLDoc d = new XMLDoc("a:A", "www.a.com");
 		final KElement root = d.getRoot();
@@ -2290,7 +2290,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXPathElement()
+	void testGetXPathElement()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = (JDFNode) jdfDoc.getRoot();
@@ -2339,7 +2339,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreateXPathElement()
+	void testGetCreateXPathElement()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = (JDFNode) jdfDoc.getRoot();
@@ -2379,7 +2379,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBuildXPath()
+	void testBuildXPath()
 	{
 		final XMLDoc d = new XMLDoc("d", null);
 		final KElement root = d.getRoot();
@@ -2405,7 +2405,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBuildRelativeXPath()
+	void testBuildRelativeXPath()
 	{
 		final XMLDoc d = new XMLDoc("d", null);
 		final KElement root = d.getRoot();
@@ -2429,7 +2429,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetReal()
+	void testGetReal()
 	{
 		final KElement e = new XMLParser().parseString("<foo bar=\".42\"/>").getRoot();
 		assertEquals(e.getRealAttribute("bar", null, 0.0), 0.42, 0.1);
@@ -2439,7 +2439,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * make sure we also get all valid deep elements
 	 */
 	@Test
-	public void testGetTree()
+	void testGetTree()
 	{
 		final KElement e = new XMLParser().parseString("<a/>").getRoot();
 		final KElement a1 = e.appendElement("a");
@@ -2458,7 +2458,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * make sure we also get all valid deep elements
 	 */
 	@Test
-	public void testGetTree2()
+	void testGetTree2()
 	{
 		final KElement e = new XMLParser().parseString("<a/>").getRoot();
 		final KElement a1 = e.appendElement("a");
@@ -2478,7 +2478,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXPathAttribute()
+	void testGetXPathAttribute()
 	{
 		JDFAudit.setStaticAgentName("foo Agent");
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
@@ -2515,7 +2515,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXPathAttributeText()
+	void testGetXPathAttributeText()
 	{
 		JDFAudit.setStaticAgentName("foo Agent");
 		final KElement e = KElement.createRoot("foo", null);
@@ -2530,7 +2530,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXPathAttributeWithPath()
+	void testGetXPathAttributeWithPath()
 	{
 		JDFAudit.setStaticAgentName("foo Agent");
 		final KElement root = new XMLDoc("a", null).getRoot();
@@ -2547,7 +2547,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetDOMAttr()
+	void testGetDOMAttr()
 	{
 		final XMLDoc xd = new XMLDoc("a", null);
 		final KElement root = xd.getRoot();
@@ -2563,7 +2563,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAttribute()
+	void testGetAttribute()
 	{
 		final XMLDoc xd = new XMLDoc("a", null);
 		final KElement root = xd.getRoot();
@@ -2576,7 +2576,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAttributeIgnoreCase()
+	void testGetAttributeIgnoreCase()
 	{
 		final XMLDoc xd = new XMLDoc("a", null);
 		final KElement root = xd.getRoot();
@@ -2593,7 +2593,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetIgnoreCase()
+	void testGetIgnoreCase()
 	{
 		final XMLDoc xd = new XMLDoc("a", null);
 		final KElement root = xd.getRoot();
@@ -2606,7 +2606,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveIgnoreCase()
+	void testRemoveIgnoreCase()
 	{
 		final XMLDoc xd = new XMLDoc("a", null);
 		final KElement root = xd.getRoot();
@@ -2619,7 +2619,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testEnureCase()
+	void testEnureCase()
 	{
 		final XMLDoc xd = new XMLDoc("a", null);
 		final KElement root = xd.getRoot();
@@ -2633,7 +2633,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetIgnoreCase_KElement()
+	void testGetIgnoreCase_KElement()
 	{
 		final XMLDoc xd = new XMLDoc("a", null);
 		final KElement root = xd.getRoot();
@@ -2646,7 +2646,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNonEmpty()
+	void testGetNonEmpty()
 	{
 		final XMLDoc xd = new XMLDoc("a", null);
 		final KElement root = xd.getRoot();
@@ -2659,7 +2659,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNonEmpty_KElement()
+	void testGetNonEmpty_KElement()
 	{
 		final XMLDoc xd = new XMLDoc("a", null);
 		final KElement root = xd.getRoot();
@@ -2672,7 +2672,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHasNonEmpty()
+	void testHasNonEmpty()
 	{
 		final XMLDoc xd = new XMLDoc("a", null);
 		final KElement root = xd.getRoot();
@@ -2685,7 +2685,7 @@ public class KElementTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testHasNonEmpty_KElement()
+	void testHasNonEmpty_KElement()
 	{
 		final XMLDoc xd = new XMLDoc("a", null);
 		final KElement root = xd.getRoot();
@@ -2698,7 +2698,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveXPathAttribute()
+	void testRemoveXPathAttribute()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = (JDFNode) jdfDoc.getRoot();
@@ -2719,7 +2719,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetXPathAttributeReplace()
+	void testSetXPathAttributeReplace()
 	{
 		final KElement e = new XMLDoc("foo", null).getRoot();
 		e.setXPathAttribute("a[@a=\"b\"]/c[@d=\"e\"]/@f", "g");
@@ -2736,7 +2736,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetXPathAttribute()
+	void testSetXPathAttribute()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = (JDFNode) jdfDoc.getRoot();
@@ -2782,7 +2782,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetXPathValue()
+	void testSetXPathValue()
 	{
 		final XMLDoc doc = new XMLDoc("root", null);
 		final KElement root = doc.getRoot();
@@ -2796,7 +2796,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetXPathValueText()
+	void testSetXPathValueText()
 	{
 		final XMLDoc doc = new XMLDoc("root", null);
 		final KElement root = doc.getRoot();
@@ -2816,7 +2816,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetXPathValues()
+	void testSetXPathValues()
 	{
 		final XMLDoc doc = new XMLDoc("root", null);
 		final KElement root = doc.getRoot();
@@ -2836,7 +2836,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * Method testGetDeepParentChild.
 	 */
 	@Test
-	public void testGetDeepParent()
+	void testGetDeepParent()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("Test", "www.test.com");
 		final KElement e = jdfDoc.getRoot();
@@ -2857,7 +2857,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * Method testGetDeepParentChild.
 	 */
 	@Test
-	public void testGetDeepParentChild()
+	void testGetDeepParentChild()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("Test", "www.test.com");
 		final KElement e = jdfDoc.getRoot();
@@ -2877,7 +2877,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * Method testGetDeepParentNotName.
 	 */
 	@Test
-	public void testGetDeepParentNotName()
+	void testGetDeepParentNotName()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("Test", "www.test.com");
 		final KElement e = jdfDoc.getRoot();
@@ -2896,7 +2896,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInsertBefore()
+	void testInsertBefore()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("Test", "www.test.com");
 		final KElement e = jdfDoc.getRoot();
@@ -2914,7 +2914,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testIncludesAttributes()
+	void testIncludesAttributes()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("Test", "www.test.com");
 		final KElement e = jdfDoc.getRoot();
@@ -2935,7 +2935,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHasAttributeNS()
+	void testHasAttributeNS()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("a:Test", "www.a.com");
 		final KElement e = jdfDoc.getRoot();
@@ -2951,7 +2951,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInfinity()
+	void testInfinity()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("Test", "www.test.com");
 		final KElement e = jdfDoc.getRoot();
@@ -2974,7 +2974,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAttribute_LongAttValue()
+	void testSetAttribute_LongAttValue()
 	{
 		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		JDFNode root = (JDFNode) jdfDoc.getRoot();
@@ -2997,7 +2997,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAttribute_SpecialChar()
+	void testSetAttribute_SpecialChar()
 	{
 		final KElement root = new XMLDoc("a", null).getRoot();
 
@@ -3018,7 +3018,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAttributes()
+	void testSetAttributes()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("Foo", null);
 		final KElement root = jdfDoc.getRoot();
@@ -3038,7 +3038,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAttributesRaw()
+	void testSetAttributesRaw()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("Foo", null);
 		final KElement root = jdfDoc.getRoot();
@@ -3060,7 +3060,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAttributeRaw()
+	void testSetAttributeRaw()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("Foo", null);
 		final KElement root = jdfDoc.getRoot();
@@ -3089,7 +3089,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetNonEmpty()
+	void testSetNonEmpty()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("Foo", null);
 		final KElement root = jdfDoc.getRoot();
@@ -3103,7 +3103,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAttributeIterator()
+	void testSetAttributeIterator()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("Foo", null);
 		final KElement root = jdfDoc.getRoot();
@@ -3132,7 +3132,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAttributesMap()
+	void testSetAttributesMap()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("Foo", null);
 		final KElement a = jdfDoc.getRoot();
@@ -3158,7 +3158,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAttributesResource()
+	void testSetAttributesResource()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -3176,7 +3176,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * @throws DataFormatException
 	 */
 	@Test
-	public void testSetAttributeDate() throws DataFormatException
+	void testSetAttributeDate() throws DataFormatException
 	{
 		final KElement e = KElement.createRoot("a", null);
 		e.setAttribute("d", new JDFDate(1234567891000l), null);
@@ -3187,7 +3187,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * @throws DataFormatException
 	 */
 	@Test
-	public void testSetAttributeXYPair() throws DataFormatException
+	void testSetAttributeXYPair() throws DataFormatException
 	{
 		final KElement e = KElement.createRoot("a", null);
 		e.setAttribute("d", new JDFXYPair(123.456, 234.567), 2);
@@ -3198,7 +3198,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * @throws DataFormatException
 	 */
 	@Test
-	public void testAppendAttributes() throws DataFormatException
+	void testAppendAttributes() throws DataFormatException
 	{
 		final KElement e = KElement.createRoot("a", null);
 		final VString v1 = new VString("a b");
@@ -3216,7 +3216,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAttribute()
+	void testSetAttribute()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = (JDFNode) jdfDoc.getRoot();
@@ -3243,7 +3243,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAttributeNS()
+	void testSetAttributeNS()
 	{
 		final XMLDoc doc = new XMLDoc("a", null);
 		final KElement root = doc.getRoot();
@@ -3261,7 +3261,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * test sequence of getting / setting if attributes in default and explicit ns exist
 	 */
 	@Test
-	public void testSetAttributeNSMix()
+	void testSetAttributeNSMix()
 	{
 		final XMLDoc doc = new XMLDoc("a", null);
 		final KElement root = doc.getRoot();
@@ -3293,7 +3293,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElementHashMap()
+	void testGetElementHashMap()
 	{
 		final XMLDoc d = new XMLDoc("root", null);
 		final KElement root = d.getRoot();
@@ -3315,7 +3315,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElement_KElement()
+	void testGetElement_KElement()
 	{
 		final XMLDoc d = new XMLDoc("JDF", null);
 		final KElement root = d.getRoot();
@@ -3348,7 +3348,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetElementsByTagName_KElement()
+	void testGetElementsByTagName_KElement()
 	{
 		final JDFDoc d = creatXMDoc();
 		final JDFNode n = d.getJDFRoot();
@@ -3364,7 +3364,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildrenByTagNameWildCard()
+	void testGetChildrenByTagNameWildCard()
 	{
 		final KElement root = new XMLDoc("root", null).getRoot();
 		final KElement e1 = root.appendElement("foo");
@@ -3386,7 +3386,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildrenByTagName()
+	void testGetChildrenByTagName()
 	{
 		final String xmlFile = "getChildrenByTagNameTest.jdf";
 
@@ -3407,7 +3407,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildArrayByClass()
+	void testGetChildArrayByClass()
 	{
 		final String xmlFile = "getChildrenByTagNameTest.jdf";
 
@@ -3427,7 +3427,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildArrayByClassMe()
+	void testGetChildArrayByClassMe()
 	{
 		JDFNode n = JDFNode.createRoot();
 		assertEquals(n, n.getChildArrayByClass(n.getClass(), true, 0).get(0));
@@ -3438,7 +3438,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildrenFromList()
+	void testGetChildrenFromList()
 	{
 		final XMLDoc doc = new XMLDoc("Foo", null);
 		final KElement root = doc.getRoot();
@@ -3455,7 +3455,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildrenIgnoreList()
+	void testGetChildrenIgnoreList()
 	{
 		final XMLDoc doc = new XMLDoc("Foo", null);
 		final KElement root = doc.getRoot();
@@ -3473,7 +3473,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildByTagName()
+	void testGetChildByTagName()
 	{
 		final XMLDoc doc = new XMLDoc("Foo", null);
 		final KElement root = doc.getRoot();
@@ -3495,7 +3495,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildWithAttributeClass()
+	void testGetChildWithAttributeClass()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
@@ -3509,7 +3509,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreateChildWithAttribute()
+	void testGetCreateChildWithAttribute()
 	{
 		final XMLDoc doc = new XMLDoc("Foo", null);
 		final KElement root = doc.getRoot();
@@ -3527,7 +3527,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildElementVector_KElement()
+	void testGetChildElementVector_KElement()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -3551,7 +3551,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildElementArray()
+	void testGetChildElementArray()
 	{
 		final XMLDoc doc = new XMLDoc("Foo", null);
 		final KElement root = doc.getRoot();
@@ -3570,7 +3570,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAttributeInfo()
+	void testAttributeInfo()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -3582,7 +3582,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPushUp()
+	void testPushUp()
 	{
 		{// defines a logical test block
 			// pushup from 4 to 1
@@ -3632,7 +3632,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testSetAttribute_DoubleAtt() throws Exception
+	void testSetAttribute_DoubleAtt() throws Exception
 	{
 		final JDFParser p = new JDFParser();
 		{
@@ -3675,7 +3675,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAttribute_NullCreate()
+	void testSetAttribute_NullCreate()
 	{
 		final XMLDoc d = new XMLDoc();
 		d.createElement("blub").setAttribute("xmlns:foo", "bar:fnarf");
@@ -3685,7 +3685,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * test to emulate the creation of spurious NS1 prefixes
 	 */
 	@Test
-	public void testNS1Raw()
+	void testNS1Raw()
 	{
 		final XMLDoc d = new XMLDoc("a", "www.b.com");
 		final KElement root = d.getRoot();
@@ -3698,7 +3698,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAttribute_NameSpaceHandling()
+	void testSetAttribute_NameSpaceHandling()
 	{
 		for (int dd = 0; dd < 2; dd++)
 		{
@@ -3757,7 +3757,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemoveNS1()
+	void testRemoveNS1()
 	{
 		final XMLDoc d = new XMLDoc("foo", null);
 		final KElement root = d.getRoot();
@@ -3773,7 +3773,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetMixedLevelNS()
+	void testSetMixedLevelNS()
 	{
 		final XMLDoc xmlDoc = new XMLDoc("d", null);
 		final KElement e = xmlDoc.getRoot();
@@ -3794,7 +3794,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testXMLNameSpace()
+	void testXMLNameSpace()
 	{
 		assertNull(KElement.xmlnsPrefix("abc"), "no ns");
 		assertNull(KElement.xmlnsPrefix(":abc"), "no ns");
@@ -3808,7 +3808,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendChild()
+	void testAppendChild()
 	{
 		final XMLDoc d = new XMLDoc("e", null);
 		final KElement e = d.getRoot();
@@ -3827,7 +3827,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendCData()
+	void testAppendCData()
 	{
 		final XMLDoc d = new XMLDoc("e", null);
 		final KElement e = d.getRoot();
@@ -3846,7 +3846,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseAppendChild()
+	void testParseAppendChild()
 	{
 		final String s = "<e xmlns=\"a\" xmlns:foo=\"www.foo.com\"><e2/></e>";
 		final XMLParser p = new XMLParser();
@@ -3870,7 +3870,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetXMLComment()
+	void testSetXMLComment()
 	{
 		final XMLDoc d = new XMLDoc("e", null);
 		final KElement root = d.getRoot();
@@ -3892,7 +3892,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendElementRaw()
+	void testAppendElementRaw()
 	{
 		final long t = System.currentTimeMillis();
 		// final JDFDoc d = JDFDoc.parseFile(sm_dirTestData + "bigwhite.jdf");
@@ -3950,7 +3950,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendElement()
+	void testAppendElement()
 	{
 
 		final XMLDoc d = new XMLDoc("e", null);
@@ -3978,7 +3978,7 @@ public class KElementTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAppendAttributeNS()
+	void testAppendAttributeNS()
 	{
 
 		final XMLDoc d = new XMLDoc("e", null);
@@ -3994,7 +3994,7 @@ public class KElementTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testAddAttributeNS()
+	void testAddAttributeNS()
 	{
 		final XMLDoc d = new XMLDoc("e", null);
 		final KElement e = d.getRoot();
@@ -4009,7 +4009,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendElement_NSAtt()
+	void testAppendElement_NSAtt()
 	{
 		final XMLDoc d = new XMLDoc("e", null);
 		final KElement e = d.getRoot();
@@ -4027,7 +4027,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendElement_NSAttJDFDoc()
+	void testAppendElement_NSAttJDFDoc()
 	{
 		JDFDoc d = new JDFDoc("e");
 		final String url = JDFElement.getSchemaURL();
@@ -4068,7 +4068,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendElement_AttRaw()
+	void testAppendElement_AttRaw()
 	{
 		JDFDoc d = new JDFDoc("e");
 		final String url = JDFElement.getSchemaURL();
@@ -4108,7 +4108,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendElement_SingleNS()
+	void testAppendElement_SingleNS()
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -4130,7 +4130,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateElement_NoNS()
+	void testCreateElement_NoNS()
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -4155,7 +4155,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParse_SingleNS()
+	void testParse_SingleNS()
 	{
 		final String wwwECom = "www.e.com";
 		final XMLDoc d = new XMLDoc("e", wwwECom);
@@ -4177,7 +4177,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendXMLComment()
+	void testAppendXMLComment()
 	{
 		final XMLDoc d = new XMLDoc("e", null);
 		final KElement e = d.getRoot();
@@ -4200,7 +4200,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUniqueID()
+	void testUniqueID()
 	{
 		String regExp = "_??????_?????????_??????";
 		regExp = StringUtil.simpleRegExptoRegExp(regExp);
@@ -4215,7 +4215,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testUniqueID2()
+	void testUniqueID2()
 	{
 		for (int i = 0; i < 1000; i++)
 		{
@@ -4227,7 +4227,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAppendAttribute()
+	void testAppendAttribute()
 	{
 		final XMLDoc d = new XMLDoc("e", null);
 		final KElement e = d.getRoot();
@@ -4260,7 +4260,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
@@ -4271,7 +4271,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToXML()
+	void testToXML()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
@@ -4285,7 +4285,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToValueString()
+	void testToValueString()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
@@ -4306,7 +4306,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToXMLParse()
+	void testToXMLParse()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
@@ -4319,7 +4319,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToXMLParseNS()
+	void testToXMLParseNS()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
@@ -4338,7 +4338,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetComment()
+	void testSetComment()
 	{
 		final KElement root = new XMLDoc("root", null).getRoot();
 		root.setXMLComment("foo", true);
@@ -4349,7 +4349,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTextMethods()
+	void testTextMethods()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
@@ -4404,7 +4404,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFillHashSet()
+	void testFillHashSet()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
@@ -4436,7 +4436,7 @@ public class KElementTest extends JDFTestCaseBase
 	 * test the flush method also for xml comments, cdata and similar crap
 	 */
 	@Test
-	public void testFlush()
+	void testFlush()
 	{
 		final XMLDoc doc = new XMLDoc("doc", null);
 		final KElement root = doc.getRoot();
@@ -4456,7 +4456,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWrite2File()
+	void testWrite2File()
 	{
 		final KElement e = KElement.createRoot("foo", null);
 		final KElement e2 = e.appendElement("bar");
@@ -4473,7 +4473,7 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWrite2Stream()
+	void testWrite2Stream()
 	{
 		final KElement e = KElement.createRoot("foo", null);
 		final KElement e2 = e.appendElement("bar");

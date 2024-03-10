@@ -84,7 +84,7 @@ public class URLProxySelectorTest extends JDFTestCaseBase
 	 * @throws URISyntaxException
 	 */
 	@Test
-	public void testSelect() throws URISyntaxException
+	void testSelect() throws URISyntaxException
 	{
 		// nop
 	}

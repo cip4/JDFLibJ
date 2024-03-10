@@ -50,7 +50,7 @@ public class JDFMediaIntentTest
 	 *
 	 */
 	@Test
-	public void testSpanIso()
+	void testSpanIso()
 	{
 		final JDFMediaIntent ci = (JDFMediaIntent) new JDFDoc(ElementName.MEDIAINTENT).getRoot();
 		final JDFSpanISOPaperSubstrate ns = ci.appendISOPaperSubstrate();
@@ -62,7 +62,7 @@ public class JDFMediaIntentTest
 	 *
 	 */
 	@Test
-	public void testCert()
+	void testCert()
 	{
 		final JDFMediaIntent ci = (JDFMediaIntent) new JDFDoc(ElementName.MEDIAINTENT).getRoot();
 		ci.appendCertification().setOrganization("o1");

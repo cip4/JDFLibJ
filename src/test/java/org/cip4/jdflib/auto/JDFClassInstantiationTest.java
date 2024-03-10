@@ -157,7 +157,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDirectoryInstantiateVisitor()
+	void testDirectoryInstantiateVisitor()
 	{
 
 		try
@@ -228,7 +228,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAutoClasses()
+	void testAutoClasses()
 	{
 		// check that every auto class has a corresponding class
 		try
@@ -246,7 +246,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCoverClasses()
+	void testCoverClasses()
 	{
 		// check that every auto class has a corresponding class
 		try
@@ -265,7 +265,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		dir = new File("./src/main/java/org/cip4/jdflib/auto");

@@ -89,7 +89,7 @@ public class WalkDeviceFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeviceDetails()
+	void testDeviceDetails()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
 		JDFDeviceFilter f = jmf.getQuery(0).getDeviceFilter(0);
@@ -107,7 +107,7 @@ public class WalkDeviceFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testLocalization()
+	void testLocalization()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
 		KElement e = new JDFToXJDF().convert(jmf);
@@ -124,7 +124,7 @@ public class WalkDeviceFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDevice()
+	void testDevice()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
 		JDFDeviceFilter f = jmf.getQuery(0).getDeviceFilter(0);
@@ -140,7 +140,7 @@ public class WalkDeviceFilterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeviceFilter()
+	void testDeviceFilter()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
 		JDFDeviceFilter f = jmf.getQuery(0).getDeviceFilter(0);

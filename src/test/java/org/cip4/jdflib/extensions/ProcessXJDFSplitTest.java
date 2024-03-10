@@ -82,7 +82,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSplitTypesCutting() throws Throwable
+	void testSplitTypesCutting() throws Throwable
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
 		h.setTypes("ConventionalPrinting Cutting");
@@ -106,7 +106,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSplitRef()
+	void testSplitRef()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
 		h.setTypes("Product Stripping");
@@ -137,7 +137,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSplitTypesCuttingProduct() throws Throwable
+	void testSplitTypesCuttingProduct() throws Throwable
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
 		h.setTypes("ConventionalPrinting Cutting Product");
@@ -150,7 +150,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSplit()
+	void testSplit()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
 		h.setTypes("ImageSetting PreviewGeneration ConventionalPrinting Cutting Folding");
@@ -193,7 +193,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSplitDevice()
+	void testSplitDevice()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
 		h.setTypes("ImageSetting ConventionalPrinting");
@@ -236,7 +236,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSplitProductNodeInfo()
+	void testSplitProductNodeInfo()
 	{
 		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
 
@@ -265,7 +265,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testProductComponent()
+	void testProductComponent()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
@@ -290,7 +290,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCheckProduct()
+	void testCheckProduct()
 	{
 		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
 
@@ -309,7 +309,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testProcessUsage()
+	void testProcessUsage()
 	{
 		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
 
@@ -338,7 +338,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testProductNodeInfo()
+	void testProductNodeInfo()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
@@ -372,7 +372,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCustomerInfoContacts()
+	void testCustomerInfoContacts()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
@@ -396,7 +396,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSplitNullTypes()
+	void testSplitNullTypes()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
 		h.setTypes((String) null);
@@ -417,7 +417,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSplitJPIDTypes()
+	void testSplitJPIDTypes()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
 		h.setTypes("Screening ImageSetting ConventionalPrinting");
@@ -443,7 +443,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSplitCategory()
+	void testSplitCategory()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
 		h.setTypes("Screening ImageSetting ConventionalPrinting");
@@ -470,7 +470,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSplitCategorySingle()
+	void testSplitCategorySingle()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
 		h.setTypes("Screening");
@@ -493,7 +493,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSplitEndCustomer()
+	void testSplitEndCustomer()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
 		h.appendProduct();
@@ -519,7 +519,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 * @throws Throwable
 	 */
 	@Test
-	public void testSplitTypesExchange() throws Throwable
+	void testSplitTypesExchange() throws Throwable
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
 		h.setTypes("ImageSetting ConventionalPrinting");
@@ -537,7 +537,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSplitColorPool()
+	void testSplitColorPool()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
 		h.appendProduct();
@@ -559,7 +559,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSplitFromFile()
+	void testSplitFromFile()
 	{
 		final XJDFToJDFConverter c = new XJDFToJDFConverter(null);
 		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();

@@ -100,7 +100,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSize()
+	void testSize()
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream(20000);
 		for (int i = 0; i < 12345; i++)
@@ -115,7 +115,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testTell()
+	void testTell()
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream(20000);
 		for (int i = 0; i < 12345; i++)
@@ -137,7 +137,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNewStream()
+	void testGetNewStream()
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream(20000);
 		for (int i = 0; i < 12345; i++)
@@ -163,7 +163,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConstructStream()
+	void testConstructStream()
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		for (int i = 0; i < 1234567; i++)
@@ -181,7 +181,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConstructFile() throws IOException
+	void testConstructFile() throws IOException
 	{
 		final File f = new File(sm_dirTestDataTemp + "bios.fil");
 		FileUtil.forceDelete(f);
@@ -206,7 +206,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConstructBadFile() throws IOException
+	void testConstructBadFile() throws IOException
 	{
 		File f = new File(sm_dirTestDataTemp + "bios.fil");
 		FileUtil.forceDelete(f);
@@ -226,7 +226,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConstructBuf()
+	void testConstructBuf()
 	{
 		final byte[] b = "abc".getBytes();
 		final ByteArrayIOStream ios = new ByteArrayIOStream(b);
@@ -239,7 +239,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAsString()
+	void testAsString()
 	{
 		final byte[] b = "abcdefgh".getBytes();
 		final ByteArrayIOStream ios = new ByteArrayIOStream(b);
@@ -254,7 +254,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		final byte[] b = "abcdefgh".getBytes();
 		final ByteArrayIOStream ios = new ByteArrayIOStream(b);
@@ -268,7 +268,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testInRead() throws Exception
+	void testInRead() throws Exception
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		for (int i = 0; i < 200000; i++)
@@ -291,7 +291,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testInReadMulti() throws Exception
+	void testInReadMulti() throws Exception
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		for (int i = 0; i < 50000; i++)
@@ -317,7 +317,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testInReadMulti2() throws Exception
+	void testInReadMulti2() throws Exception
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		for (int i = 0; i < 50000; i++)
@@ -343,7 +343,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetBufferedInputStream() throws Exception
+	void testGetBufferedInputStream() throws Exception
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		for (int i = 0; i < 50000; i++)

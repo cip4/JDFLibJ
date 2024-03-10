@@ -81,7 +81,7 @@ public class QueueTest extends JDFTestCaseBase
 	protected class QueueTestThread implements Runnable
 	{
 		@Override
-		public void run()
+		void run()
 		{
 			final int t = 1000 * iThread++;
 			for (int i = 0; i < 100; i++)
@@ -110,7 +110,7 @@ public class QueueTest extends JDFTestCaseBase
 		 * @see org.cip4.jdflib.jmf.JDFQueue.CleanupCallback#cleanEntry(org.cip4. jdflib.jmf.JDFQueueEntry)
 		 */
 		@Override
-		public void cleanEntry(final JDFQueueEntry qe)
+		void cleanEntry(final JDFQueueEntry qe)
 		{
 			i++;
 		}
@@ -131,7 +131,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetQueueEntry()
+	void testGetQueueEntry()
 	{
 		assertEquals(q.getQueueEntry(1).getQueueEntryID(), "qe2", "qe2");
 		assertEquals(q.getQueueEntry("qe1").getQueueEntryID(), "qe1", "qe2");
@@ -146,7 +146,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetQueueEntryMap()
+	void testGetQueueEntryMap()
 	{
 		final Map<String, JDFQueueEntry> map = q.getQueueEntryIDMap();
 		assertEquals(map.size(), q.numEntries(null));
@@ -157,7 +157,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCreateQueueEntry()
+	void testCreateQueueEntry()
 	{
 		q.setAutomated(true);
 		q.setMaxRunningEntries(2);
@@ -177,7 +177,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testOpenClose()
+	void testOpenClose()
 	{
 		q.setAutomated(true);
 		q.setMaxRunningEntries(2);
@@ -223,7 +223,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetAutomated()
+	void testSetAutomated()
 	{
 		q.flush();
 		q.setAutomated(true);
@@ -235,7 +235,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFlushAutomated()
+	void testFlushAutomated()
 	{
 		q.setAutomated(true);
 		q.setMaxWaitingEntries(1);
@@ -250,7 +250,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetQueueEntryByIdentifier()
+	void testGetQueueEntryByIdentifier()
 	{
 		q.getQueueEntry(1).setJobID("j7");
 		final NodeIdentifier ni = new NodeIdentifier("j7", null, null);
@@ -272,7 +272,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetQueueEntryVectorByIdentifier()
+	void testGetQueueEntryVectorByIdentifier()
 	{
 		final NodeIdentifier ni = new NodeIdentifier("j2", null, null);
 		assertEquals(q.getQueueEntryVector(ni).elementAt(0), q.getQueueEntry(1));
@@ -284,7 +284,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTimes()
+	void testGetTimes()
 	{
 		final JDFQueueEntry qe = q.getQueueEntry(0);
 		qe.setQueueEntryID("qe1");
@@ -310,7 +310,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFlushQueue()
+	void testFlushQueue()
 	{
 		final JDFQueueFilter qf = (JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();
 		qf.appendQueueEntryDef("qe5");
@@ -325,7 +325,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSortPerformance()
+	void testSortPerformance()
 	{
 		q.setAutomated(false);
 		for (int i = 0; i < 10000; i++)
@@ -344,7 +344,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSortCompleted()
+	void testSortCompleted()
 	{
 		q.removeChildren(null, null, null);
 		q.setAutomated(true);
@@ -365,7 +365,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testThreads()
+	void testThreads()
 	{
 		q.setAutomated(true);
 		q.sortChildren();
@@ -438,7 +438,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNumEntries()
+	void testNumEntries()
 	{
 		assertEquals(5, q.numEntries(null));
 		assertEquals(2, q.numEntries(EnumQueueEntryStatus.Waiting));
@@ -448,7 +448,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHasFewerEntries()
+	void testHasFewerEntries()
 	{
 		assertEquals(true, q.hasFewerEntries(null, 4));
 		assertEquals(true, q.hasFewerEntries(null, 5));
@@ -461,7 +461,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetQueueEntryVector()
+	void testGetQueueEntryVector()
 	{
 		assertEquals(5, q.getQueueEntryVector().size());
 		assertEquals(2, q.getQueueEntryVector(new JDFAttributeMap("Status", EnumQueueEntryStatus.Waiting), null).size());
@@ -471,7 +471,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCanExecute()
+	void testCanExecute()
 	{
 		assertFalse(q.canExecute());
 		q.setMaxRunningEntries(2);
@@ -524,7 +524,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testExecuteCallBack()
+	void testExecuteCallBack()
 	{
 		q.setQueueStatus(EnumQueueStatus.Waiting);
 		q.sortChildren();
@@ -548,7 +548,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNextExecutableQueueEntry()
+	void testGetNextExecutableQueueEntry()
 	{
 		assertNull(q.getNextExecutableQueueEntry());
 		q.setMaxRunningEntries(2);
@@ -567,7 +567,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetNextExecutableQueueEntryActivation()
+	void testGetNextExecutableQueueEntryActivation()
 	{
 		assertNull(q.getNextExecutableQueueEntry());
 		q.setMaxRunningEntries(2);
@@ -588,7 +588,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCleanup()
+	void testCleanup()
 	{
 		final JDFQueueEntry qe = q.appendQueueEntry();
 		final MyClean myClean = new MyClean();
@@ -611,7 +611,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCopyToResponse()
+	void testCopyToResponse()
 	{
 		final JDFResponse r = JDFJMF.createJMF(JDFMessage.EnumFamily.Response, EnumType.AbortQueueEntry).getResponse(0);
 		final JDFQueueFilter qf = (JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();
@@ -633,7 +633,7 @@ public class QueueTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testCopyToResponseNullQF()
+	void testCopyToResponseNullQF()
 	{
 		JDFResponse r = JDFJMF.createJMF(JDFMessage.EnumFamily.Response, EnumType.AbortQueueEntry).getResponse(0);
 		JDFQueue q2 = q.copyToResponse(r, null, null);
@@ -653,7 +653,7 @@ public class QueueTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
 		super.setUp();
@@ -690,7 +690,7 @@ public class QueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetQueueSize()
+	void testgetQueueSize()
 	{
 		assertEquals(q.getQueueSize(), 5, "no size set - count entries");
 		q.setQueueSize(10);

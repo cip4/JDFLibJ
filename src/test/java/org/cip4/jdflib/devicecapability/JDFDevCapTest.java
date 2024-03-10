@@ -86,7 +86,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testBooleanState()
+	void testBooleanState()
 	{
 		final JDFDoc d = new JDFDoc("BooleanState");
 		final JDFBooleanState bs = (JDFBooleanState) d.getRoot();
@@ -106,7 +106,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testAppendStringState()
+	void testAppendStringState()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap root = (JDFDevCap) d.getRoot();
@@ -122,7 +122,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testIntegerState() throws Exception
+	void testIntegerState() throws Exception
 	{
 		final JDFDoc d = new JDFDoc("IntegerState");
 		final JDFIntegerState is = (JDFIntegerState) d.getRoot();
@@ -142,7 +142,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testgetMatchingElementsFromParentSingle()
+	void testgetMatchingElementsFromParentSingle()
 	{
 		final JDFDoc ddc = new JDFDoc("DevCap");
 		final JDFDoc dde = new JDFDoc("Layout");
@@ -172,7 +172,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testgetMatchingElementsFromParentMulti()
+	void testgetMatchingElementsFromParentMulti()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.DEVICECAP);
 		final JDFDeviceCap ddc = (JDFDeviceCap) d.getRoot();
@@ -209,7 +209,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testNumberState() throws Exception
+	void testNumberState() throws Exception
 	{
 		final JDFDoc d = new JDFDoc("NumberState");
 		final JDFNumberState ns = (JDFNumberState) d.getRoot();
@@ -231,7 +231,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testEnumerationState()
+	void testEnumerationState()
 	{
 		final JDFDoc d = new JDFDoc("EnumerationState");
 		final JDFEnumerationState es = (JDFEnumerationState) d.getRoot();
@@ -271,7 +271,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testRegExp()
+	void testRegExp()
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -297,7 +297,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testNameState()
+	void testNameState()
 	{
 		final JDFDoc d = new JDFDoc("NameState");
 		final JDFNameState ns = (JDFNameState) d.getRoot();
@@ -324,7 +324,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetBooleanState()
+	void testGetBooleanState()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -346,7 +346,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetIntegerState()
+	void testGetIntegerState()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -368,7 +368,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetInValidAttributes()
+	void testGetInValidAttributes()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -391,7 +391,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetNumberState()
+	void testGetNumberState()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -413,7 +413,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetEnumerationState()
+	void testGetEnumerationState()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -435,7 +435,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetNameState()
+	void testGetNameState()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -457,7 +457,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetStringState()
+	void testGetStringState()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -479,7 +479,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetXYPairState()
+	void testGetXYPairState()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -501,7 +501,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetShapeState()
+	void testGetShapeState()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -523,7 +523,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetAvailability()
+	void testGetAvailability()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -537,7 +537,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testAppendModuleRef()
+	void testAppendModuleRef()
 	{
 		final JDFDoc d = new JDFDoc("DeviceCap");
 		final JDFDeviceCap deviceCap = (JDFDeviceCap) d.getRoot();
@@ -561,7 +561,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetModuleAvailability()
+	void testGetModuleAvailability()
 	{
 		final JDFDoc d = new JDFDoc("DeviceCap");
 		final JDFDeviceCap deviceCap = (JDFDeviceCap) d.getRoot();
@@ -582,7 +582,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetMatrixState()
+	void testGetMatrixState()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -604,7 +604,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetDateTimeState()
+	void testGetDateTimeState()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -626,7 +626,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetDurationState()
+	void testGetDurationState()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -648,7 +648,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetPDFPathState()
+	void testGetPDFPathState()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -670,7 +670,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testGetRectangleState()
+	void testGetRectangleState()
 	{
 		final JDFDoc d = new JDFDoc("DevCap");
 		final JDFDevCap dc = (JDFDevCap) d.getRoot();
@@ -691,7 +691,7 @@ public class JDFDevCapTest {
 	 *
 	 */
 	@Test
-	public void testStateReportRequired()
+	void testStateReportRequired()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.DEVICECAP);
 		final JDFDeviceCap ddc = (JDFDeviceCap) d.getRoot();

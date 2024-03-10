@@ -45,7 +45,7 @@ import org.junit.jupiter.api.Test;
 public class ElemInfoTest {
 
 	@Test
-	public void testgetFirstLastVersion()
+	void testgetFirstLastVersion()
 	{
 		ElemInfo ai = new ElemInfo(0x44433211);
 		Assertions.assertEquals(ai.getFirstVersion(), EnumVersion.Version_1_2, "");

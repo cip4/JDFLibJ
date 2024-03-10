@@ -94,7 +94,7 @@ public class JDFMatrixEvaluationTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetTransforms()
+	void testGetTransforms()
 	{
 		Vector<EnumOrientation> v = new Vector<EnumOrientation>();
 		v.add(EnumOrientation.Rotate90);
@@ -108,7 +108,7 @@ public class JDFMatrixEvaluationTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testFitsTransforms()
+	void testFitsTransforms()
 	{
 		Vector<EnumOrientation> v = new Vector<EnumOrientation>();
 		v.add(EnumOrientation.Rotate90);
@@ -135,7 +135,7 @@ public class JDFMatrixEvaluationTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		m = (JDFMatrixEvaluation) new JDFDoc(ElementName.MATRIXEVALUATION).getRoot();

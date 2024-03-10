@@ -78,7 +78,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testFixSemicolon1() throws Exception
+	void testFixSemicolon1() throws Exception
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		final FixSemiColonStream fs = new FixSemiColonStream(ios);
@@ -96,7 +96,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testMessageID() throws Exception
+	void testMessageID() throws Exception
 	{
 		final JDFDoc docJMF = new JDFDoc("JMF");
 		final JDFJMF jmf = docJMF.getJMFRoot();
@@ -122,7 +122,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testFixSemicolon2() throws Exception
+	void testFixSemicolon2() throws Exception
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		final FixSemiColonStream fs = new FixSemiColonStream(ios);
@@ -141,7 +141,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteStream() throws Exception
+	void testWriteStream() throws Exception
 	{
 		final JDFDoc docJMF = new JDFDoc("JMF");
 		final JDFJMF jmf = docJMF.getJMFRoot();
@@ -164,7 +164,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteForm() throws Exception
+	void testWriteForm() throws Exception
 	{
 		final MimeWriter mw = new MimeWriter(eMimeSubType.formdata);
 		final BodyPartHelper bph = new BodyPartHelper();
@@ -179,7 +179,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteFormJSON() throws Exception
+	void testWriteFormJSON() throws Exception
 	{
 		final MimeWriter mw = new MimeWriter(eMimeSubType.formdata);
 		final BodyPartHelper bph = new BodyPartHelper();
@@ -198,7 +198,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteFormXJDFJSON() throws Exception
+	void testWriteFormXJDFJSON() throws Exception
 	{
 		final MimeWriter mw = new MimeWriter(eMimeSubType.formdata);
 		final BodyPartHelper bphM = new BodyPartHelper();
@@ -227,7 +227,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteFormPTKJSON() throws Exception
+	void testWriteFormPTKJSON() throws Exception
 	{
 		final MimeWriter mw = new MimeWriter(eMimeSubType.formdata);
 		final BodyPartHelper bphM = new BodyPartHelper();
@@ -257,7 +257,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteURL() throws Exception
+	void testWriteURL() throws Exception
 	{
 		final JDFDoc docJMF = new JDFDoc("JMF");
 		final JDFJMF jmf = docJMF.getJMFRoot();
@@ -280,7 +280,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testExtendRef() throws Exception
+	void testExtendRef() throws Exception
 	{
 		final JDFDoc docJMF = new JDFDoc("JMF");
 		final JDFJMF jmf = docJMF.getJMFRoot();
@@ -320,7 +320,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteQueue() throws Exception
+	void testWriteQueue() throws Exception
 	{
 		final JDFDoc docJMF = new JDFDoc("JMF");
 		final JDFJMF jmf = docJMF.getJMFRoot();
@@ -359,7 +359,7 @@ public class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testWriteQueueNoExtend() throws Exception
+	void testWriteQueueNoExtend() throws Exception
 	{
 		final JDFDoc docJMF = new JDFDoc("JMF");
 		final JDFJMF jmf = docJMF.getJMFRoot();

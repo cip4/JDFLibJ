@@ -121,13 +121,13 @@ public class CoverageVisitor implements DirectoryVisitor
 	final static Log log = LogFactory.getLog(CoverageVisitor.class);
 
 	@Override
-	public void enterDirectory(final File dir)
+	void enterDirectory(final File dir)
 	{
 		totalResult = true;
 	}
 
 	@Override
-	public void leaveDirectory(final File dir)
+	void leaveDirectory(final File dir)
 	{
 		if (!totalResult)
 		{
@@ -137,7 +137,7 @@ public class CoverageVisitor implements DirectoryVisitor
 	}
 
 	@Override
-	public void visitFile(final File file)
+	void visitFile(final File file)
 	{
 		try
 		{

@@ -79,14 +79,14 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 {
 
 	@Test
-	public void testConstruct()
+	void testConstruct()
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction();
 		Assertions.assertEquals(0, tf.size());
 	}
 
 	@Test
-	public void testisUnit()
+	void testisUnit()
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction();
 		Assertions.assertFalse(tf.isUnit());
@@ -98,7 +98,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetUnit()
+	void testGetUnit()
 	{
 		final JDFTransferFunction tf = JDFTransferFunction.getUnit();
 		Assertions.assertTrue(tf.isUnit());
@@ -108,7 +108,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testAdd() throws DataFormatException
+	void testAdd() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction();
 		tf.add("1 2");
@@ -116,14 +116,14 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGet()
+	void testGet()
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction();
 		Assertions.assertEquals(0, tf.getX(0), 0);
 	}
 
 	@Test
-	public void testSet()
+	void testSet()
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction();
 		final Vector<Double> v = new Vector<>();
@@ -139,7 +139,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testToString()
+	void testToString()
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction();
 		final Vector<Double> v = new Vector<>();
@@ -150,7 +150,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetPos() throws DataFormatException
+	void testGetPos() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("10 0.1 20 0.2 30 0.3 100 1.0");
 		Assertions.assertEquals(0, tf.getPos(0, true));
@@ -168,7 +168,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetPosTime() throws DataFormatException
+	void testGetPosTime() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("10 0.1 20 0.2 30 0.3 100 1.0");
 		final long t0 = System.currentTimeMillis();
@@ -191,7 +191,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetVal() throws DataFormatException
+	void testGetVal() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("0 0 10 0.1 20 0.2 30 0.3 100 1.0");
 		final long t0 = System.currentTimeMillis();
@@ -205,7 +205,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetFastVal() throws DataFormatException
+	void testGetFastVal() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("0 0 10 0.05 20 0.1 30 0.15 200 1.0 460 2.3");
 		tf.getFastValue(0);
@@ -220,7 +220,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetFastValUnit() throws DataFormatException
+	void testGetFastValUnit() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("0 0 1 1");
 		tf.getFastValue(0);
@@ -238,7 +238,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testIslUnit() throws DataFormatException
+	void testIslUnit() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("0 0 1 1");
 		final long t0 = System.currentTimeMillis();
@@ -251,7 +251,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetValDesc() throws DataFormatException
+	void testGetValDesc() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("0 1.0 100 0");
 		Assertions.assertEquals(1, tf.getValue(0), 0);
@@ -260,7 +260,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetRange() throws DataFormatException
+	void testGetRange() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("10 1.0 100 0");
 		Assertions.assertEquals(10, tf.getXRange().getX(), 0);
@@ -268,7 +268,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testGetRangeEmpty()
+	void testGetRangeEmpty()
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction();
 		Assertions.assertEquals(0, tf.getXRange().getX(), 0);
@@ -276,7 +276,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testMultiply() throws DataFormatException
+	void testMultiply() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("0 0 1 2.0");
 		final JDFTransferFunction tf2 = new JDFTransferFunction("0 0 0.5 0.4 1 1.0");
@@ -289,7 +289,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public void testMultiplyStatic() throws DataFormatException
+	void testMultiplyStatic() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("0 0 1 2.0");
 		final JDFTransferFunction tf2 = new JDFTransferFunction("0 0 0.5 0.4 1 1.0");

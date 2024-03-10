@@ -88,7 +88,7 @@ public class UserDirTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNotDot() throws Exception
+	void testNotDot() throws Exception
 	{
 		UserDir d = new UserDir("myTool");
 		Assertions.assertNotSame(new File(d.getToolsPath()).getCanonicalPath(), new File(".").getCanonicalPath());

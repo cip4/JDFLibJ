@@ -98,7 +98,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testMISCPGrayBoxFrontBack()
+	void testMISCPGrayBoxFrontBack()
 	{
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
 		JDFAttributeMap map = new JDFAttributeMap();
@@ -158,7 +158,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testMISCPGrayBoxSimplexPoster()
+	void testMISCPGrayBoxSimplexPoster()
 	{
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
 		JDFAttributeMap map = new JDFAttributeMap();
@@ -182,7 +182,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testMISCPGrayBox41Poster()
+	void testMISCPGrayBox41Poster()
 	{
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
 		JDFAttributeMap map = new JDFAttributeMap();
@@ -217,7 +217,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testMISCPProductGrayBoxBrochure()
+	void testMISCPProductGrayBoxBrochure()
 	{
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
 		for (int i = 0; i < 5; i++)
@@ -254,7 +254,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testMISCPProductBrochure()
+	void testMISCPProductBrochure()
 	{
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
 		for (int i = 0; i < 5; i++)
@@ -290,7 +290,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	 *
 	 */
 	@Test
-	public void testGetICSVersions()
+	void testGetICSVersions()
 	{
 		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 1, true, null);
 
@@ -302,7 +302,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	 * test identical inks using black + text
 	 */
 	@Test
-	public void testIdenticalInk()
+	void testIdenticalInk()
 	{
 		VString v = new VString("Cyan,Magenta,Yellow,Black,Text", ",");
 		VString vAct = new VString("Cyan,Magenta,Yellow,Black,Text", ",");
@@ -336,7 +336,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		JDFAudit.setStaticAgentName("JDF MISCP golden ticket generator");

@@ -91,7 +91,7 @@ public class IDRemoverTest extends JDFTestCaseBase
 	 * Test method for {@link IDFinder#getMap(KElement)}.
 	 */
 	@Test
-	public void testRemoveIDs()
+	void testRemoveIDs()
 	{
 		IDRemover finder = new IDRemover();
 		finder.removeIDs(root);
@@ -102,7 +102,7 @@ public class IDRemoverTest extends JDFTestCaseBase
 	 * Test method for {@link IDFinder#getMap(KElement)}.
 	 */
 	@Test
-	public void testHeader()
+	void testHeader()
 	{
 		IDRemover finder = new IDRemover();
 		XJDFHelper h = XJDFHelper.getHelper(root);
@@ -114,7 +114,7 @@ public class IDRemoverTest extends JDFTestCaseBase
 	/**
 	 * 	@Test
 	 */
-	public void testRefs()
+	void testRefs()
 	{
 		IDRemover finder = new IDRemover();
 		XJDFHelper h = XJDFHelper.getHelper(root);
@@ -129,7 +129,7 @@ public class IDRemoverTest extends JDFTestCaseBase
 	/**
 	 * 	@Test
 	 */
-	public void testRef()
+	void testRef()
 	{
 		IDRemover finder = new IDRemover();
 		XJDFHelper h = XJDFHelper.getHelper(root);
@@ -145,7 +145,7 @@ public class IDRemoverTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		root = new XMLDoc(XJDFConstants.XJDF, null).getRoot();

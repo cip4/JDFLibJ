@@ -98,7 +98,7 @@ public class JDFResourcePoolTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testaddComment() throws Exception
+	void testaddComment() throws Exception
 	{
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		JDFComment c = n.appendResourcePool().appendComment();
@@ -111,7 +111,7 @@ public class JDFResourcePoolTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testgetUnlinkedResources() throws Exception
+	void testgetUnlinkedResources() throws Exception
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();

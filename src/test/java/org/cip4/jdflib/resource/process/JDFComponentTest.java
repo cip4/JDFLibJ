@@ -114,7 +114,7 @@ public class JDFComponentTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		doc = new JDFDoc("JDF");
@@ -126,7 +126,7 @@ public class JDFComponentTest extends JDFTestCaseBase
 	 * 	@Test
 	 *
 	 */
-	public void testSetComponentTypeAuto()
+	void testSetComponentTypeAuto()
 	{
 		c.setComponentType(null);
 		Assertions.assertFalse(c.hasAttribute(AttributeName.COMPONENTTYPE));
@@ -136,7 +136,7 @@ public class JDFComponentTest extends JDFTestCaseBase
 	 * 	@Test
 	 *
 	 */
-	public void testIsComponentType()
+	void testIsComponentType()
 	{
 		c.setComponentType(EnumComponentType.FinalProduct, null);
 		Assertions.assertTrue(c.isComponentType(EnumComponentType.FinalProduct));
@@ -153,7 +153,7 @@ public class JDFComponentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMediaLayout()
+	void testGetMediaLayout()
 	{
 		c.setComponentType(null);
 		JDFLayout lo = c.appendLayout();
@@ -167,7 +167,7 @@ public class JDFComponentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMedia()
+	void testGetMedia()
 	{
 		c.setComponentType(null);
 		JDFMedia m = (JDFMedia) c.appendElement(ElementName.MEDIA);
@@ -179,7 +179,7 @@ public class JDFComponentTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetComponentType()
+	void testSetComponentType()
 	{
 		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 		Assertions.assertTrue(c.hasAttribute(AttributeName.COMPONENTTYPE));
@@ -201,7 +201,7 @@ public class JDFComponentTest extends JDFTestCaseBase
 	 * 	@Test
 	 */
 	@Test
-	public void testComponentManifest()
+	void testComponentManifest()
 	{
 		root.getLink(c, null).setUsage(EnumUsage.Output);
 		// TODO complete

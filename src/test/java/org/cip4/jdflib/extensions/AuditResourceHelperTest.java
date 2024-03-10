@@ -84,7 +84,7 @@ public class AuditResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCleanup()
+	void testCleanup()
 	{
 		XJDFHelper h = new XJDFHelper("j", "p", null);
 		SetHelper sh = h.getCreateSet(ElementName.MEDIA, EnumUsage.Input, null);

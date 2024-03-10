@@ -104,7 +104,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		KElement.setLongID(false);
 		jmf = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
@@ -118,7 +118,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJobPhaseFromPhaseTime()
+	void testJobPhaseFromPhaseTime()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
@@ -137,7 +137,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testApplyNode()
+	void testApplyNode()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setJobID("j1");
@@ -156,7 +156,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPhaseAmount()
+	void testGetPhaseAmount()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
@@ -171,7 +171,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetPhaseWaste()
+	void testGetPhaseWaste()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
@@ -185,7 +185,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetStatusQuParams()
+	void testGetStatusQuParams()
 	{
 		JDFStatusQuParams sqp = jmf.getSignal(0).appendStatusQuParams();
 		JDFJobPhase jp = di.appendJobPhase();
@@ -209,7 +209,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetQueueEntryID()
+	void testGetQueueEntryID()
 	{
 		JDFStatusQuParams sqp = jmf.getSignal(0).appendStatusQuParams();
 		sqp.setQueueEntryID("qeID1");
@@ -225,7 +225,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSpeed()
+	void testGetSpeed()
 	{
 
 		di.setSpeed(3);
@@ -239,7 +239,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetAmountDifference()
+	void testGetAmountDifference()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
@@ -257,7 +257,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetWasteDifference()
+	void testGetWasteDifference()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
@@ -275,7 +275,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMergeLastPhase()
+	void testMergeLastPhase()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();

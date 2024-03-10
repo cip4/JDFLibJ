@@ -112,7 +112,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testContentData()
+	void testContentData()
 	{
 		JDFContentData cd0 = cl.appendContentData();
 		// ToDo cd0.setAttribute(AttributeName.CONTENTLISTINDEX, "1 2 3");
@@ -155,7 +155,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	 * @throws DataFormatException
 	 */
 	@Test
-	public void testContentDataFinishing() throws DataFormatException
+	void testContentDataFinishing() throws DataFormatException
 	{
 		testContentData();
 		JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
@@ -173,7 +173,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetNPage() throws Exception
+	void testGetNPage() throws Exception
 	{
 		assertEquals(pl.getNPage(), 0);
 		JDFPageData pd1 = pl.appendPageData();
@@ -192,7 +192,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testIsIndexed() throws Exception
+	void testIsIndexed() throws Exception
 	{
 		assertTrue(pl.isIndexed());
 		JDFPageData pd1 = pl.appendPageData();
@@ -213,7 +213,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testIsNormal() throws Exception
+	void testIsNormal() throws Exception
 	{
 		assertTrue(pl.isNormal());
 		JDFPageData pd1 = pl.appendPageData();
@@ -234,7 +234,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testUniqueIndex() throws Exception
+	void testUniqueIndex() throws Exception
 	{
 		assertTrue(pl.isNormal());
 		JDFPageData pd1 = pl.appendPageData();
@@ -254,7 +254,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testUniqueIndexMissing() throws Exception
+	void testUniqueIndexMissing() throws Exception
 	{
 		assertTrue(pl.isNormal());
 		JDFPageData pd1 = pl.appendPageData();
@@ -275,7 +275,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testUniqueIndexPerformance() throws Exception
+	void testUniqueIndexPerformance() throws Exception
 	{
 		assertTrue(pl.isNormal());
 		for (int i = 0; i <= 10000; i++)
@@ -299,7 +299,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetPageDataByIndex() throws Exception
+	void testGetPageDataByIndex() throws Exception
 	{
 		assertEquals(pl.getNPage(), 0);
 		JDFPageData pd1 = pl.appendPageData();
@@ -317,7 +317,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		d = new JDFDoc("JDF");

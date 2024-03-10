@@ -85,7 +85,7 @@ public class AutoTest {
 	// Beware!
 	// These tests are for checking versioning and JDFValidator internal details
 	@Test
-	public void testElementVersion()
+	void testElementVersion()
 	{
 		Vector vPrerelease = null;
 		Vector vOptional = null;

@@ -92,7 +92,7 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSimpleZip()
+	void testSimpleZip()
 	{
 		new JDFToXJDFConverterTest().testMultiNode1();
 		final XJDFZipReader zr = new XJDFZipReader(new File(sm_dirTestDataTemp + "3files.xjdf.zip"));
@@ -103,7 +103,7 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRunList()
+	void testRunList()
 	{
 		final XJDFZipReader zr = new XJDFZipReader(new File(sm_dirTestData + "runlist.zip"));
 		zr.convert();
@@ -116,7 +116,7 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testConvert()
+	void testConvert()
 	{
 		new JDFToXJDFConverterTest().testMultiNode1();
 		final XJDFZipReader zr = new XJDFZipReader(new File(sm_dirTestDataTemp + "3files.xjdf.zip"));
@@ -130,7 +130,7 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testExtractJMF()
+	void testExtractJMF()
 	{
 		new JDFToXJDFConverterTest().testMultiNode1();
 		final XJDFZipReader zr = new XJDFZipReader(new File(sm_dirTestDataTemp + "3files.xjmf.zip"));
@@ -148,7 +148,7 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXJMF()
+	void testGetXJMF()
 	{
 		new JDFToXJDFConverterTest().testMultiNode1();
 		final XJDFZipReader zr = new XJDFZipReader(new File(sm_dirTestDataTemp + "3files.xjmf.zip"));
@@ -160,7 +160,7 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXJDFs()
+	void testGetXJDFs()
 	{
 		new JDFToXJDFConverterTest().testMultiNode1();
 		final XJDFZipReader zr = new XJDFZipReader(new File(sm_dirTestDataTemp + "3files.xjmf.zip"));
@@ -172,7 +172,7 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetXJDFs2()
+	void testGetXJDFs2()
 	{
 		final XJDFZipWriter w = new XJDFZipWriter();
 		for (int i = 0; i < 3; i++)

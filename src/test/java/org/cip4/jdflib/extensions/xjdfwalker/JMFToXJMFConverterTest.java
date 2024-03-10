@@ -107,7 +107,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testForeignJMF()
+	void testForeignJMF()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Query, JDFMessage.EnumType.PipeClose);
 		JDFQuery query = jmf.getQuery(0);
@@ -122,7 +122,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPipeJMF()
+	void testPipeJMF()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.PipeClose);
 		final JDFPipeParams pp = jmf.getCommand(0).getCreatePipeParams(0);
@@ -142,7 +142,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAbortQE()
+	void testAbortQE()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.AbortQueueEntry);
 		JDFCommand command = jmf.getCommand(0);
@@ -162,7 +162,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAbortQEResp()
+	void testAbortQEResp()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.AbortQueueEntry);
 		JDFResponse resp = jmf.getResponse(0);
@@ -178,7 +178,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCompleteQE()
+	void testCompleteQE()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.AbortQueueEntry);
 		final JDFAbortQueueEntryParams pp = (JDFAbortQueueEntryParams) jmf.getCommand(0).appendElement(ElementName.ABORTQUEUEENTRYPARAMS);
@@ -196,7 +196,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSetGangQE()
+	void testSetGangQE()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, null);
 		final JDFResponse r = jmf.getResponse(0);
@@ -213,7 +213,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHoldQE()
+	void testHoldQE()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.HoldQueueEntry);
 		final JDFHoldQueueEntryParams pp = (JDFHoldQueueEntryParams) jmf.getCommand(0).appendElement(ElementName.HOLDQUEUEENTRYPARAMS);
@@ -230,7 +230,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHoldQueue()
+	void testHoldQueue()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.HoldQueue);
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -242,7 +242,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testOpenQueue()
+	void testOpenQueue()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.OpenQueue);
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -254,7 +254,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testCloseQueue()
+	void testCloseQueue()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.CloseQueue);
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -266,7 +266,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeviceInfo1()
+	void testDeviceInfo1()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		jmf.getSignal(0).appendDeviceInfo().setDeviceID("d1");
@@ -280,7 +280,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeviceInfo2()
+	void testDeviceInfo2()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		jmf.getSignal(0).appendDeviceInfo().appendDevice().setDeviceID("d1");
@@ -294,7 +294,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testDeviceInfoEndTime()
+	void testDeviceInfoEndTime()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		JDFDeviceInfo di = jmf.getSignal(0).appendDeviceInfo();
@@ -315,7 +315,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJobPhaseSpeed()
+	void testJobPhaseSpeed()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFJobPhase jp = jmf.getSignal(0).appendDeviceInfo().appendJobPhase();
@@ -330,7 +330,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testComplexStatus()
+	void testComplexStatus()
 	{
 		final JDFJMF jmf = JDFJMF.parseFile(sm_dirTestData + "jmf/JMF1.jmf");
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -343,7 +343,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJobPhaseWaste()
+	void testJobPhaseWaste()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFJobPhase jp = jmf.getSignal(0).appendDeviceInfo().appendJobPhase();
@@ -358,7 +358,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJobPhaseAmount()
+	void testJobPhaseAmount()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo di = jmf.getSignal(0).appendDeviceInfo();
@@ -377,7 +377,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJobPhaseTotal()
+	void testJobPhaseTotal()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFJobPhase jp = jmf.getSignal(0).appendDeviceInfo().appendJobPhase();
@@ -392,7 +392,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testJobPhaseWorkstepID()
+	void testJobPhaseWorkstepID()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFJobPhase jp = jmf.getSignal(0).appendDeviceInfo().appendJobPhase();
@@ -408,7 +408,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testResumeQE()
+	void testResumeQE()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.ResumeQueueEntry);
 		final JDFResumeQueueEntryParams pp = (JDFResumeQueueEntryParams) jmf.getCommand(0).appendElement(ElementName.RESUMEQUEUEENTRYPARAMS);
@@ -425,7 +425,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testRemovedQE()
+	void testRemovedQE()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.RemoveQueueEntry);
 		final JDFRemoveQueueEntryParams pp = (JDFRemoveQueueEntryParams) jmf.getCommand(0).appendElement(ElementName.REMOVEQUEUEENTRYPARAMS);
@@ -442,7 +442,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMessageServiceMode()
+	void testMessageServiceMode()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.KnownMessages);
 		final JDFMessageService ms = jmf.getResponse(0).appendMessageService();
@@ -459,7 +459,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMessageServiceType()
+	void testMessageServiceType()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.KnownMessages);
 		final JDFMessageService ms = jmf.getResponse(0).appendMessageService();
@@ -476,7 +476,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMessageServiceState()
+	void testMessageServiceState()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.KnownMessages);
 		final JDFMessageService ms = jmf.getResponse(0).appendMessageService();
@@ -495,7 +495,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testKnownMessages()
+	void testKnownMessages()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Query, JDFMessage.EnumType.KnownMessages);
 		final JDFKnownMsgQuParams ms = jmf.getQuery(0).appendKnownMsgQuParams();
@@ -512,7 +512,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSubscriptionJMF()
+	void testSubscriptionJMF()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSubscription("url", 42, 21, "qe33");
 		jmf.getQuery(0).getSubscription().appendObservationTarget().setAttributes(new VString("a", null));
@@ -529,7 +529,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSubscriptionFilter()
+	void testSubscriptionFilter()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Query, JDFMessage.EnumType.KnownSubscriptions);
 		jmf.getQuery(0).getCreateSubscriptionFilter().setJobID("J1");
@@ -543,7 +543,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSubscriptionInfo()
+	void testSubscriptionInfo()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.KnownSubscriptions);
 		final JDFSubscriptionInfo si = jmf.getResponse(0).getCreateSubscriptionInfo(0);
@@ -560,7 +560,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSubscriptionFilterKeep()
+	void testSubscriptionFilterKeep()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Query, JDFMessage.EnumType.KnownSubscriptions);
 		jmf.getQuery(0).getCreateSubscriptionFilter().setJobID("J1");
@@ -574,7 +574,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testKnownDevicesResponse()
+	void testKnownDevicesResponse()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Response, EnumType.KnownDevices);
 		final JDFDeviceInfo deviceInfo = jmf.getResponse(0).appendDeviceList().appendDeviceInfo();
@@ -589,7 +589,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testKnownDevicesDetailedResponse()
+	void testKnownDevicesDetailedResponse()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Response, EnumType.KnownDevices);
 		final JDFDeviceInfo deviceInfo = jmf.getResponse(0).appendDeviceList().appendDeviceInfo();
@@ -605,7 +605,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAbortQEResponse()
+	void testAbortQEResponse()
 	{
 		final JDFJMF jmf0 = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Command, EnumType.AbortQueueEntry);
 		convertToXJDF(jmf0);
@@ -620,7 +620,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStatusJMFQueueSubscription()
+	void testStatusJMFQueueSubscription()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSubscription("url", 42, 21, "qe33");
 		jmf.getQuery(0).getSubscription().appendObservationTarget().setAttributes(new VString("a", null));
@@ -632,7 +632,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		// writeTest(jmf, "../StatusJMF.jmf", true);
 	}
 
-	public void testStatusJMF()
+	void testStatusJMF()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSubscription("url", 42, 21, "qe33");
 		jmf.getQuery(0).getSubscription().appendObservationTarget().setAttributes(new VString("a", null));
@@ -648,7 +648,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testEventID()
+	void testEventID()
 	{
 		final JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Brief);
 		final JDFDeviceInfo di2 = jmf.getSignal(0).getCreateDeviceInfo(0);
@@ -666,7 +666,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBadType()
+	void testBadType()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		jmf.getSignal(0).setType("BadType");
@@ -679,7 +679,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testBadTypeQES()
+	void testBadTypeQES()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.QueueEntryStatus);
 		jmf.getSignal(0).setType("BadType");
@@ -692,7 +692,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveToSender()
+	void testMoveToSender()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceQuery(true);
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -706,7 +706,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveToSenderEmployee()
+	void testMoveToSenderEmployee()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceQuery(true);
 		final JDFQuery q = jmf.getQuery(0);
@@ -726,7 +726,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveToSenderTime()
+	void testMoveToSenderTime()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceQuery(true);
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -740,7 +740,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMoveToSenderSenderID()
+	void testMoveToSenderSenderID()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceQuery(true);
 		jmf.setSenderID("s1");
@@ -756,7 +756,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		XJMFTypeMap.shutDown();
 		super.tearDown();
@@ -767,7 +767,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testBuildResourceQueryPaperLot()
+	void testBuildResourceQueryPaperLot()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceQuery(true);
 
@@ -788,7 +788,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testBuildResourceSignalInkLot()
+	void testBuildResourceSignalInkLot()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
 
@@ -828,7 +828,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testResourceSignalSpeed()
+	void testResourceSignalSpeed()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
 
@@ -853,7 +853,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testResourceSignalScope()
+	void testResourceSignalScope()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
 
@@ -877,7 +877,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testResourceSignalGeneratedScopeEstimate()
+	void testResourceSignalGeneratedScopeEstimate()
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -905,7 +905,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testResourceSignalGeneratedScopeJob()
+	void testResourceSignalGeneratedScopeJob()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
 
@@ -928,7 +928,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testResourceSignalInk()
+	void testResourceSignalInk()
 	{
 		final JDFJMF jmf = JDFJMF.parseFile(sm_dirTestData + "ink.jmf");
 
@@ -954,7 +954,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testResourceSignalKWH()
+	void testResourceSignalKWH()
 	{
 		final JDFJMF jmf = JDFJMF.parseFile(sm_dirTestData + "kwh.jmf");
 
@@ -981,7 +981,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testResourceSignalActualAmount()
+	void testResourceSignalActualAmount()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
 
@@ -1007,7 +1007,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testResourceSignalRepeatDesc()
+	void testResourceSignalRepeatDesc()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
 
@@ -1029,7 +1029,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testResourceSignalPart()
+	void testResourceSignalPart()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
 
@@ -1063,7 +1063,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testBuildResourceSignalPlate()
+	void testBuildResourceSignalPlate()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
 
@@ -1106,7 +1106,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testBuildResourceSignalPlateMedia()
+	void testBuildResourceSignalPlateMedia()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
 
@@ -1138,7 +1138,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSubmitQueueEntryHold()
+	void testSubmitQueueEntryHold()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildSubmitQueueEntry(null);
 		jmf.getCommand(0).getQueueSubmissionParams(0).setHold(true);
@@ -1153,7 +1153,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testSubmitQueueEntryQueueFilter()
+	void testSubmitQueueEntryQueueFilter()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildSubmitQueueEntry(null);
 		jmf.getCommand(0).getQueueSubmissionParams(0).setHold(true);

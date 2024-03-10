@@ -177,7 +177,7 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testScale()
+	void testScale()
 	{
 		final JDFIntegerRange range = new JDFIntegerRange(4, 5, 0);
 		range.scale(2);
@@ -189,7 +189,7 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetIntegerRange()
+	void testGetIntegerRange()
 	{
 		assertEquals(JDFIntegerRange.getIntegerRange("8").getLeft(), 8);
 		assertEquals(JDFIntegerRange.getIntegerRange("8~22").getLeft(), 8);
@@ -203,7 +203,7 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetString()
+	void testGetString()
 	{
 		JDFIntegerRange integerRange = JDFIntegerRange.getIntegerRange("8~22");
 		assertEquals("8 ~ 22", integerRange.getString(0));
@@ -216,7 +216,7 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCount()
+	void testGetCount()
 	{
 		JDFIntegerRange integerRange = JDFIntegerRange.getIntegerRange("8~22");
 		assertEquals(15, integerRange.getElementCount());
@@ -236,7 +236,7 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testgetElementCountBad() throws Exception
+	void testgetElementCountBad() throws Exception
 	{
 		JDFIntegerRange integerRange = JDFIntegerRange.getIntegerRange("1 ~ 4");
 		integerRange.setDef(2);
@@ -251,7 +251,7 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetIntegerList()
+	void testGetIntegerList()
 	{
 		JDFIntegerRange range = new JDFIntegerRange(0, -1, 0);
 		JDFIntegerList il = range.getIntegerList();
@@ -275,7 +275,7 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetIntegerListNeg()
+	void testGetIntegerListNeg()
 	{
 		final JDFIntegerRange range = new JDFIntegerRange(-4, -1, 0);
 		final JDFIntegerList il = range.getIntegerList();

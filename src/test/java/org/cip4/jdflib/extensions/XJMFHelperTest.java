@@ -66,7 +66,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -77,7 +77,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddMessage()
+	void testAddMessage()
 	{
 		final MessageHelper mh = theHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry);
 		assertEquals("CommandSubmitQueueEntry", mh.getRoot().getLocalName());
@@ -87,7 +87,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetCreateMessage()
+	void testGetCreateMessage()
 	{
 		final MessageHelper mh = theHelper.getCreateMessage(EnumFamily.Command, EnumType.SubmitQueueEntry, 0);
 		assertEquals("CommandSubmitQueueEntry", mh.getRoot().getLocalName());
@@ -101,7 +101,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMessageName()
+	void testGetMessageName()
 	{
 		final String s = theHelper.getMessageName(EnumFamily.Command, "SubmitQueueEntry");
 		assertEquals("CommandSubmitQueueEntry", s);
@@ -111,7 +111,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMessageNameDeprecated()
+	void testGetMessageNameDeprecated()
 	{
 		final String s = theHelper.getMessageName(EnumFamily.Registration, "SubmitQueueEntry");
 		assertNull(s);
@@ -123,7 +123,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddMessageNull()
+	void testAddMessageNull()
 	{
 		final MessageHelper mh = theHelper.appendMessage(EnumFamily.Command, "");
 		assertNull(mh);
@@ -133,7 +133,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddMessageDeprecated()
+	void testAddMessageDeprecated()
 	{
 		final MessageHelper mh = theHelper.appendMessage(EnumFamily.Registration, "Resource");
 		assertNull(mh);
@@ -143,7 +143,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHeaderID()
+	void testHeaderID()
 	{
 		assertNotNull(theHelper.getXPathValue("Header/@ID"));
 	}
@@ -152,7 +152,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHeaderID2()
+	void testHeaderID2()
 	{
 		assertNull(theHelper.getXPathElement("Header/Header"));
 	}
@@ -161,7 +161,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testHeaderDate()
+	void testHeaderDate()
 	{
 		assertNotNull(JDFDate.createDate(theHelper.getXPathValue("Header/@Time")));
 	}
@@ -170,7 +170,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testParseFile()
+	void testParseFile()
 	{
 		theHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry);
 		final File file = new File(sm_dirTestDataTemp + "xjmf.xjmf");
@@ -186,7 +186,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWriteToFile()
+	void testWriteToFile()
 	{
 		theHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry);
 		final File file = new File(sm_dirTestDataTemp + "xjmf.xjmf");

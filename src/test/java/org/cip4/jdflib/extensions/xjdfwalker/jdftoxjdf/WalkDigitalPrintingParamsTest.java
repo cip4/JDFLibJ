@@ -85,7 +85,7 @@ public class WalkDigitalPrintingParamsTest
 	 * 
 	 */
 	@Test
-	public void testSides()
+	void testSides()
 	{
 		JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) new JDFDoc(ElementName.DIGITALPRINTINGPARAMS).getRoot();
 		dpp.setSides(EnumSides.TwoSidedFlipX);
@@ -100,7 +100,7 @@ public class WalkDigitalPrintingParamsTest
 	 * 
 	 */
 	@Test
-	public void testSidesBack()
+	void testSidesBack()
 	{
 		JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) new JDFDoc(ElementName.DIGITALPRINTINGPARAMS).getRoot();
 		dpp.setSides(EnumSides.OneSidedBackFlipX);

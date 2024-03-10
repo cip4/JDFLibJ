@@ -136,7 +136,7 @@ public class JDFTileTest extends JDFTestCaseBase
 	 *
 	 *
 	 */
-	public void testPartition()
+	void testPartition()
 	{
 		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
 		root.setVersion(EnumVersion.Version_1_5);
@@ -164,7 +164,7 @@ public class JDFTileTest extends JDFTestCaseBase
 	*
 	*
 	*/
-	public void testPartitionTool()
+	void testPartitionTool()
 	{
 		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
 		root.setVersion(EnumVersion.Version_1_4);
