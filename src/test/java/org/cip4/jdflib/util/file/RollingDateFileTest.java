@@ -131,7 +131,7 @@ public class RollingDateFileTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		rdf = new RollingDateFile(sm_dirTestDataTemp, "Date.txt");

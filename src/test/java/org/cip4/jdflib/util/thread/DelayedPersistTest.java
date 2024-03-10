@@ -211,7 +211,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 		 * @return
 		 */
 		@Override
-		void run()
+		public void run()
 		{
 			FileUtil.createNewFile(file);
 		}
@@ -229,7 +229,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 		 * @return
 		 */
 		@Override
-		void run()
+		public void run()
 		{
 			FileUtil.createNewFile(file);
 		}
@@ -252,7 +252,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		file = new File(sm_dirTestDataTemp + "TestPersist.txt");

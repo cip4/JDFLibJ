@@ -135,7 +135,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		d = creatXMDoc();
 		n = d.getJDFRoot();

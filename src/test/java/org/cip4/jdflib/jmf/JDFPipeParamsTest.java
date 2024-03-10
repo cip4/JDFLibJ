@@ -192,7 +192,7 @@ public class JDFPipeParamsTest {
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@BeforeEach
-    void setUp() throws Exception
+    public void setUp() throws Exception
 	{
         final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();

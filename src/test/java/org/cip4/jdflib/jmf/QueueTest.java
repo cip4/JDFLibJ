@@ -81,7 +81,7 @@ public class QueueTest extends JDFTestCaseBase
 	protected class QueueTestThread implements Runnable
 	{
 		@Override
-		void run()
+		public void run()
 		{
 			final int t = 1000 * iThread++;
 			for (int i = 0; i < 100; i++)
@@ -110,7 +110,7 @@ public class QueueTest extends JDFTestCaseBase
 		 * @see org.cip4.jdflib.jmf.JDFQueue.CleanupCallback#cleanEntry(org.cip4. jdflib.jmf.JDFQueueEntry)
 		 */
 		@Override
-		void cleanEntry(final JDFQueueEntry qe)
+		public void cleanEntry(final JDFQueueEntry qe)
 		{
 			i++;
 		}
@@ -290,7 +290,7 @@ public class QueueTest extends JDFTestCaseBase
 		qe.setQueueEntryID("qe1");
 		JDFDate d = qe.getEndTime();
 		assertNull(d, "date");
-		for (boolean b : new boolean[] { true, false })
+		for (final boolean b : new boolean[] { true, false })
 		{
 			q.setAutomated(b);
 			qe.setEndTime(null);
@@ -299,7 +299,7 @@ public class QueueTest extends JDFTestCaseBase
 			qe.setStartTime(null);
 			d = qe.getStartTime();
 			assertEquals(d.getTimeInMillis(), new JDFDate().getTimeInMillis(), 420000, "date");
-			JDFQueueEntry qe2 = (JDFQueueEntry) JDFElement.createRoot(ElementName.QUEUEENTRY);
+			final JDFQueueEntry qe2 = (JDFQueueEntry) JDFElement.createRoot(ElementName.QUEUEENTRY);
 			qe2.setEndTime(null);
 			d = qe2.getEndTime();
 			assertEquals(d.getTimeInMillis(), new JDFDate().getTimeInMillis(), 420000, "date");
@@ -653,7 +653,7 @@ public class QueueTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
 		super.setUp();

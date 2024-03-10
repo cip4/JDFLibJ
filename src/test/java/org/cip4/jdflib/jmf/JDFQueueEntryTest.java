@@ -299,7 +299,7 @@ public class JDFQueueEntryTest {
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@BeforeEach
-    void setUp() throws Exception
+    public void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
         final JDFDoc doc = new JDFDoc(ElementName.QUEUE);

@@ -1091,7 +1091,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		defaultTime = JDFDate.defaultHour;
@@ -1102,7 +1102,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		JDFDate.setDefaultHour(defaultTime);
 		JDFDate.setWantISOMilliseconds(false);

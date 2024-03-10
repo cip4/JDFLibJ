@@ -124,7 +124,7 @@ public class XJDFTest extends JDFTestCaseBase
 	*/
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		KElement.setLongID(false);
 		super.setUp();

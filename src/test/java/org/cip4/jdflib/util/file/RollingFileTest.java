@@ -70,7 +70,7 @@ public class RollingFileTest extends JDFTestCaseBase
 	{
 
 		@Override
-		void run()
+		public void run()
 		{
 			files.add(r.getNewFile());
 
@@ -172,7 +172,7 @@ public class RollingFileTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		final File f = new File(sm_dirTestDataTemp + "RollingFile");

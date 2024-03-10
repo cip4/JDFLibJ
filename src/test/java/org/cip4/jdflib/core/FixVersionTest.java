@@ -106,7 +106,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		JDFDoc mDoc = new JDFDoc(ElementName.JDF);

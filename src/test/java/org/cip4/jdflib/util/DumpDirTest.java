@@ -124,7 +124,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		 * @see java.lang.Thread#run()
 		 */
 		@Override
-		void run()
+		public void run()
 		{
 			d.increment();
 		}

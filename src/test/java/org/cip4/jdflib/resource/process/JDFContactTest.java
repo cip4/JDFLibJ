@@ -72,7 +72,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);

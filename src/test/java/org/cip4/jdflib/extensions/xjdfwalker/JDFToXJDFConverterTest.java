@@ -3389,8 +3389,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	/**
 	 *
 	 */
-	@Test
-	void testMultiNode1()
+	public void testMultiNode1()
 	{
 		JDFElement.setLongID(false);
 		final JDFNode product = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -3941,7 +3940,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		XJMFTypeMap.shutDown();
 		super.tearDown();

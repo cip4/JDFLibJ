@@ -57,7 +57,7 @@ class MyMutexTest extends MyMutex
 		}
 
 		@Override
-		void run()
+		public void run()
 		{
 			ThreadUtil.sleep(w);
 			mrh.notifyMe();

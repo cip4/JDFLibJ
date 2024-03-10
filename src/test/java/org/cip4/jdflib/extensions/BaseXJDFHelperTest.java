@@ -61,7 +61,7 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		theHelper = new XJDFHelper(null);

@@ -140,7 +140,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		void run()
+		public void run()
 		{
 			try
 			{
@@ -178,7 +178,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		void runMyThread()
+		public void runMyThread()
 		{
 			final KElement root = d.getRoot();
 			final NodeList nl = root.getElementsByTagName("elem" + iLoop % 3);
@@ -203,7 +203,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		 * @see org.cip4.jdflib.core.XMLDocTest.MyThread#runMyThread()
 		 */
 		@Override
-		void runMyThread()
+		public void runMyThread()
 		{
 			log.info("parsing " + sm_dirTestData + "job.jdf " + iLoop);
 			final XMLDoc d = XMLDoc.parseFile(sm_dirTestData + "job.jdf");
@@ -224,7 +224,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		void runMyThread()
+		public void runMyThread()
 		{
 			final KElement root = d.getRoot();
 			final NodeList nl = root.getChildNodes();
@@ -257,7 +257,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
-		void runMyThread()
+		public void runMyThread()
 		{
 			final KElement root = d.getRoot();
 			final String baseDir = sm_dirTestDataTemp + File.separator + "threadDir";
@@ -886,7 +886,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		{
 			d.write2Stream(null, 2, false);
 		}
-		catch (IOException e1)
+		catch (final IOException e1)
 		{
 			// TODO Auto-generated catch block
 			log.info("boom", e1);
@@ -902,7 +902,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	void testStreamWriter()
 	{
 		final XMLDoc d = new XMLDoc("a", null);
-		File f = FileUtil.writeFile(d, new File(sm_dirTestDataTemp + "a.xml"));
+		final File f = FileUtil.writeFile(d, new File(sm_dirTestDataTemp + "a.xml"));
 		assertNotNull(f);
 	}
 

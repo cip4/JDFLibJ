@@ -104,7 +104,7 @@ public abstract class BaseGoldenTicketTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
 		KElement.setLongID(false);
@@ -117,7 +117,7 @@ public abstract class BaseGoldenTicketTest extends ExampleTest
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		JDFAudit.setStaticAgentName(agentName);
 		KElement.setLongID(true);

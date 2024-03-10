@@ -184,7 +184,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
 		super.setUp();

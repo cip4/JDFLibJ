@@ -292,7 +292,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		theHelper.getRoot().setXMLComment("create a stripping in a layout\n Stripping now consumes a layout", true);

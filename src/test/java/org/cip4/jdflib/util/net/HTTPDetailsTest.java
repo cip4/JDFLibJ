@@ -59,7 +59,7 @@ public class HTTPDetailsTest
 		}
 
 		@Override
-		void connect() throws IOException
+		public void connect() throws IOException
 		{
 			// TODO Auto-generated method stub
 
@@ -73,7 +73,7 @@ public class HTTPDetailsTest
 		}
 
 		@Override
-		void disconnect()
+		public void disconnect()
 		{
 			// TODO Auto-generated method stub
 

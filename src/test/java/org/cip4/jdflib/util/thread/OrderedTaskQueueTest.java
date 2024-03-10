@@ -83,7 +83,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		void run()
+		public void run()
 		{
 			log.info("started: " + i);
 			final boolean b = ThreadUtil.sleep(t);
@@ -287,7 +287,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 
 	@Override
 	@AfterEach
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		super.tearDown();
 		OrderedTaskQueue.shutDownAll();
@@ -297,7 +297,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		sequential.lock();
 		super.setUp();

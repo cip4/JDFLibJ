@@ -70,7 +70,7 @@ public class JDFMarkObjectTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		final JDFDoc doc = new JDFDoc("JDF");

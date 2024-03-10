@@ -105,7 +105,7 @@ public class JDFDeviceListTest extends JDFTestCaseBase
      */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		d = (JDFDeviceList) new JDFDoc("DeviceList").getRoot();
 		d.appendDeviceInfo().appendDevice().setDeviceID("d1");

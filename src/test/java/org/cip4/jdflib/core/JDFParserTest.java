@@ -390,7 +390,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		final JDFDoc d = new JDFDoc("JDF");
@@ -402,7 +402,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	}
 
 	@Override
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		super.tearDown();
 		JDFParser.m_searchStream = bSearch;

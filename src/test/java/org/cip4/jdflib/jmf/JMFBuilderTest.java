@@ -80,7 +80,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		b = new JMFBuilder();

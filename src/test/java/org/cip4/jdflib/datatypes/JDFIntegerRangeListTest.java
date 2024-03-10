@@ -653,7 +653,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
 		super.setUp();
@@ -666,7 +666,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		// TODO Auto-generated method stub
 		super.tearDown();

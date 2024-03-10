@@ -75,7 +75,7 @@ public class XJDFChangeOrderTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

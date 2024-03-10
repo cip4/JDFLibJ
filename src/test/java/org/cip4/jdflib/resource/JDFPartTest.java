@@ -103,7 +103,7 @@ public class JDFPartTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp()
+	public void setUp()
 	{
 		final JDFDoc doc = new JDFDoc("Part");
 		part = (JDFPart) doc.getRoot();

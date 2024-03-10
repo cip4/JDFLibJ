@@ -101,15 +101,16 @@ public class CoverageVisitor implements DirectoryVisitor
 	public CoverageVisitor()
 	{
 		super();
-		StringArray skip0 = new StringArray(
+		final StringArray skip0 = new StringArray(
 				"JDFBarCode JDFDevCaps JDFIDPrintingParams JDFLayout.appendSignature JDFLayout.appendSurface JDFLayout.appendFrontSurface JDFLayout.appendBackSurface JDFLayout.appendSheet "
 						+ "JDFAbortQueueEntryParams.appendQueueFilter JDFNotification JDFNumberItem JDFPartAmount");
-		StringArray skip1 = new StringArray("getTest getActionPool getTestPool getTestTerm getUpdatedPreviousAudit getBindingType getCreateHoleType getHoleType appendHoleType"
-				+ " getMethod getSurplusHandling getServiceLevel getReturnMethod getTransfer JDFDevCaps" + " getParentPool getModulePool getCreateParentPool"
-				+ " JDFIDPrintingParams JDFLayout.getCreateSignature JDFLayout.getCreateSurface JDFLayout.getCreateFrontSurface JDFLayout.getCreateBackSurface JDFLayout.getCreateSheet"
-				+ " getCreateModulePool getCreateDevCapPool getDevCapPool getParentPool getDevCapVector getDevCap getMinOccurs getMaxOccurs JDFNumberItem JDFPartAmount JDFPartStatus JDFStatusPool JDFResourceLink");
+		final StringArray skip1 = new StringArray(
+				"getTest getActionPool getTestPool getTestTerm getUpdatedPreviousAudit getBindingType getCreateHoleType getHoleType appendHoleType"
+						+ " getMethod getSurplusHandling getServiceLevel getReturnMethod getTransfer JDFDevCaps" + " getParentPool getModulePool getCreateParentPool"
+						+ " JDFIDPrintingParams JDFLayout.getCreateSignature JDFLayout.getCreateSurface JDFLayout.getCreateFrontSurface JDFLayout.getCreateBackSurface JDFLayout.getCreateSheet"
+						+ " getCreateModulePool getCreateDevCapPool getDevCapPool getParentPool getDevCapVector getDevCap getMinOccurs getMaxOccurs JDFNumberItem JDFPartAmount JDFPartStatus JDFStatusPool JDFResourceLink");
 		;
-		StringArray skip2 = new StringArray(
+		final StringArray skip2 = new StringArray(
 				"JDFNewJDFQuParams setFamily setIdentical setRefTarget JDFColorantControl.setSeparation setPhoneNumber setEMailLocator setQuery JDFPartAmount JDFLayout.refSurface JDFLayout.refSheet");
 		skip = new HashSet<>();
 		skip.addAll(skip0);
@@ -121,13 +122,13 @@ public class CoverageVisitor implements DirectoryVisitor
 	final static Log log = LogFactory.getLog(CoverageVisitor.class);
 
 	@Override
-	void enterDirectory(final File dir)
+	public void enterDirectory(final File dir)
 	{
 		totalResult = true;
 	}
 
 	@Override
-	void leaveDirectory(final File dir)
+	public void leaveDirectory(final File dir)
 	{
 		if (!totalResult)
 		{
@@ -137,13 +138,13 @@ public class CoverageVisitor implements DirectoryVisitor
 	}
 
 	@Override
-	void visitFile(final File file)
+	public void visitFile(final File file)
 	{
 		try
 		{
 			testJDFCoverage(file.getName());
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			log.error("bad coverage", e);
 			throw new JDFException(e.getMessage());
@@ -188,16 +189,16 @@ public class CoverageVisitor implements DirectoryVisitor
 		coverGetters(kElem);
 	}
 
-	private void coverGetters(KElement kElem) throws Exception
+	private void coverGetters(final KElement kElem) throws Exception
 	{
-		Class<? extends KElement> c = kElem.getClass();
-		Method[] methods = c.getMethods();
-		for (Method method : methods)
+		final Class<? extends KElement> c = kElem.getClass();
+		final Method[] methods = c.getMethods();
+		for (final Method method : methods)
 		{
-			String ab = c.getSimpleName() + "." + method.getName();
+			final String ab = c.getSimpleName() + "." + method.getName();
 			if (method.getName().startsWith("get"))
 			{
-				Class<?>[] types = method.getParameterTypes();
+				final Class<?>[] types = method.getParameterTypes();
 				try
 				{
 					if (types.length == 0)
@@ -211,9 +212,9 @@ public class CoverageVisitor implements DirectoryVisitor
 					}
 
 				}
-				catch (InvocationTargetException i)
+				catch (final InvocationTargetException i)
 				{
-					Throwable t = i.getTargetException();
+					final Throwable t = i.getTargetException();
 					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
 							|| skip.contains(c.getSimpleName()))
 					{
@@ -228,7 +229,7 @@ public class CoverageVisitor implements DirectoryVisitor
 						throw i;
 					}
 				}
-				catch (Exception j)
+				catch (final Exception j)
 				{
 
 					log.warn("snafu ", j);
@@ -237,22 +238,22 @@ public class CoverageVisitor implements DirectoryVisitor
 		}
 	}
 
-	private void coverAppenders(KElement kElem) throws Exception
+	private void coverAppenders(final KElement kElem) throws Exception
 	{
-		Class<? extends KElement> c = kElem.getClass();
-		Method[] methods = c.getMethods();
-		for (Method method : methods)
+		final Class<? extends KElement> c = kElem.getClass();
+		final Method[] methods = c.getMethods();
+		for (final Method method : methods)
 		{
 			if (method.getName().startsWith("append"))
 			{
-				String ab = c.getSimpleName() + "." + method.getName();
-				Class<?>[] types = method.getParameterTypes();
+				final String ab = c.getSimpleName() + "." + method.getName();
+				final Class<?>[] types = method.getParameterTypes();
 				try
 				{
 					if (types.length == 0)
 					{
 						log.info(ab);
-						KElement e = (KElement) method.invoke(kElem, new Object[] {});
+						final KElement e = (KElement) method.invoke(kElem, new Object[] {});
 						if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
 								|| skip.contains(c.getSimpleName()))
 						{
@@ -266,9 +267,9 @@ public class CoverageVisitor implements DirectoryVisitor
 							cover(e);
 					}
 				}
-				catch (InvocationTargetException i)
+				catch (final InvocationTargetException i)
 				{
-					Throwable t = i.getTargetException();
+					final Throwable t = i.getTargetException();
 					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
 							|| skip.contains(c.getSimpleName()))
 					{
@@ -283,7 +284,7 @@ public class CoverageVisitor implements DirectoryVisitor
 						throw i;
 					}
 				}
-				catch (Exception j)
+				catch (final Exception j)
 				{
 
 					log.warn("snafu ", j);
@@ -292,16 +293,16 @@ public class CoverageVisitor implements DirectoryVisitor
 		}
 	}
 
-	private void coverrefs(KElement kElem) throws Exception
+	private void coverrefs(final KElement kElem) throws Exception
 	{
-		Class<? extends KElement> c = kElem.getClass();
-		Method[] methods = c.getMethods();
-		for (Method method : methods)
+		final Class<? extends KElement> c = kElem.getClass();
+		final Method[] methods = c.getMethods();
+		for (final Method method : methods)
 		{
 			if (method.getName().startsWith("ref"))
 			{
-				String ab = c.getSimpleName() + "." + method.getName();
-				Class<?>[] types = method.getParameterTypes();
+				final String ab = c.getSimpleName() + "." + method.getName();
+				final Class<?>[] types = method.getParameterTypes();
 				try
 				{
 					if (types.length == 1)
@@ -310,9 +311,9 @@ public class CoverageVisitor implements DirectoryVisitor
 						method.invoke(kElem, new Object[] { null });
 					}
 				}
-				catch (InvocationTargetException i)
+				catch (final InvocationTargetException i)
 				{
-					Throwable t = i.getTargetException();
+					final Throwable t = i.getTargetException();
 					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
 							|| skip.contains(c.getSimpleName()))
 					{
@@ -327,7 +328,7 @@ public class CoverageVisitor implements DirectoryVisitor
 						throw i;
 					}
 				}
-				catch (Exception j)
+				catch (final Exception j)
 				{
 
 					log.warn("snafu ", j);
@@ -336,16 +337,16 @@ public class CoverageVisitor implements DirectoryVisitor
 		}
 	}
 
-	private void coverSetters(KElement kElem) throws Exception
+	private void coverSetters(final KElement kElem) throws Exception
 	{
-		Class<? extends KElement> c = kElem.getClass();
-		Method[] methods = c.getMethods();
-		for (Method method : methods)
+		final Class<? extends KElement> c = kElem.getClass();
+		final Method[] methods = c.getMethods();
+		for (final Method method : methods)
 		{
 			if (method.getName().startsWith("set") && !Modifier.isStatic(method.getModifiers()))
 			{
-				Class<?>[] types = method.getParameterTypes();
-				String ab = c.getSimpleName() + "." + method.getName();
+				final Class<?>[] types = method.getParameterTypes();
+				final String ab = c.getSimpleName() + "." + method.getName();
 				try
 				{
 					if (types.length == 1)
@@ -379,9 +380,9 @@ public class CoverageVisitor implements DirectoryVisitor
 					}
 
 				}
-				catch (InvocationTargetException i)
+				catch (final InvocationTargetException i)
 				{
-					Throwable t = i.getTargetException();
+					final Throwable t = i.getTargetException();
 					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
 							|| skip.contains(c.getSimpleName()))
 					{
@@ -396,7 +397,7 @@ public class CoverageVisitor implements DirectoryVisitor
 						throw i;
 					}
 				}
-				catch (Exception j)
+				catch (final Exception j)
 				{
 
 					log.warn("snafu ", j);

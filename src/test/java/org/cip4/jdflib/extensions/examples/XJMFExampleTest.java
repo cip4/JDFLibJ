@@ -672,7 +672,7 @@ public class XJMFExampleTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentName(null);
@@ -733,7 +733,7 @@ public class XJMFExampleTest extends ExampleTest
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		JDFDate.setWantISOMilliseconds(false);
 		super.tearDown();

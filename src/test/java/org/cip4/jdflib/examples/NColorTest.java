@@ -79,7 +79,7 @@ public class NColorTest extends JDFTestCaseBase
 	void testFrontBackIdentical()
 	{
 		KElement.setLongID(false);
-		setup(null, 2);
+		setUp(null, 2);
 		final JDFAttributeMap mapS1F = new JDFAttributeMap();
 		mapS1F.put(AttributeName.SIGNATURENAME, "Sig1");
 		mapS1F.put("SheetName", "Sheet2");
@@ -152,7 +152,7 @@ public class NColorTest extends JDFTestCaseBase
 	void testFrontBackSimple()
 	{
 		KElement.setLongID(false);
-		setup(null, 1);
+		setUp(null, 1);
 
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "FrontBackSetup.jdf", 2);
 		run2Seps("Sheet1", EnumSide.Front, null, null, 550, 100, "press0", EnumNodeStatus.Stopped, false);
@@ -179,7 +179,7 @@ public class NColorTest extends JDFTestCaseBase
 	void testNColor()
 	{
 
-		setup(null, 2);
+		setUp(null, 2);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "NColorSetup.jdf", 2);
 
 		run2Seps("Sheet1", EnumSide.Front, "Cyan", "Magenta", 510, 55, "press", EnumNodeStatus.Completed, false);
@@ -214,8 +214,7 @@ public class NColorTest extends JDFTestCaseBase
 	 *
 	 * @param bLast TODO
 	 */
-	private void run2Seps(final String sheet, final EnumSide side, final String sep1, final String sep2, @SuppressWarnings("unused") final int good, @SuppressWarnings("unused") final int waste,
-			@SuppressWarnings("unused") final String deviceID, @SuppressWarnings("unused") final EnumNodeStatus endStatus, final boolean bLast)
+	private void run2Seps(final String sheet, final EnumSide side, final String sep1, final String sep2, @SuppressWarnings("unused") final int good, @SuppressWarnings("unused") final int waste, @SuppressWarnings("unused") final String deviceID, @SuppressWarnings("unused") final EnumNodeStatus endStatus, final boolean bLast)
 	{
 		String jmfFile = sm_dirTestDataTemp + File.separator + "NColorStatus";
 		final JDFAttributeMap[] map = new JDFAttributeMap[sep1 == null ? 1 : 2];
@@ -251,7 +250,7 @@ public class NColorTest extends JDFTestCaseBase
 	/**
 	 * create 2 sheets with 2 surfaces of 4 seps each
 	 */
-	private void setup(final EnumPartIDKey scheduleDepth, final int nSheet)
+	private void setUp(final EnumPartIDKey scheduleDepth, final int nSheet)
 	{
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		final JDFAttributeMap map = new JDFAttributeMap();

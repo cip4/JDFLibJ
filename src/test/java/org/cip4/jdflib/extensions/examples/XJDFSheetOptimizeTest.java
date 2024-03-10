@@ -383,7 +383,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		xjdfHelper = new XJDFHelper("job", "root", null);

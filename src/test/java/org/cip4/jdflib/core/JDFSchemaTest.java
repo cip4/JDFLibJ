@@ -400,7 +400,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -414,7 +414,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		super.tearDown();
 	}

@@ -97,7 +97,7 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp()
+	public void setUp()
 	{
 		KElement.setLongID(false);
 		final JDFDoc doc = new JDFDoc(ElementName.DEVICELIST);

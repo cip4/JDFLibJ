@@ -124,7 +124,7 @@ public class IDFinderTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		root = new JDFDoc("XJDF").getRoot();

@@ -317,7 +317,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		d = new JDFDoc("JDF");

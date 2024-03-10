@@ -153,7 +153,7 @@ public class JDFPreviewTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		JDFAudit.setStaticAuthor(null);
 		super.setUp();

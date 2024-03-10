@@ -79,7 +79,7 @@ public class TimeSweeperTest extends JDFTestCaseBase
 	{
 
 		@Override
-		void run()
+		public void run()
 		{
 			log.info("running: " + n++);
 		}

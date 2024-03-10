@@ -1020,7 +1020,7 @@ public class DigiPrintTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	void setUp()
+	public void setUp()
 	{
 		KElement.setLongID(false);
 		JDFAudit.setStaticAgentName(null);

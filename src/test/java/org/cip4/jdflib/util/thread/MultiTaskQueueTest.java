@@ -78,7 +78,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		void run()
+		public void run()
 		{
 			log.info("run: " + i);
 			final boolean b = ThreadUtil.sleep(t);
@@ -263,7 +263,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		sequential.lock();
@@ -273,7 +273,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 
 	@Override
 	@AfterEach
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		MultiTaskQueue.setPercentQueue(100);
 		OrderedTaskQueue.shutDownAll();

@@ -101,7 +101,7 @@ public class JMFStatusTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp()
+	public void setUp()
 	{
 		KElement.setLongID(false);
 		doc = new JDFDoc(ElementName.JMF);

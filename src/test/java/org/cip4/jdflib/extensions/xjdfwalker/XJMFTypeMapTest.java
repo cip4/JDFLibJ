@@ -165,7 +165,7 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		XJMFTypeMap.shutDown();
 		super.tearDown();
@@ -176,7 +176,7 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		XJMFTypeMap.shutDown();

@@ -102,7 +102,7 @@ public class RIPTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
@@ -198,7 +198,7 @@ public class RIPTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		// TODO Auto-generated method stub
 		super.tearDown();

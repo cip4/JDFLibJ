@@ -461,7 +461,7 @@ public class JDFMessageTest
 	 * @throws Exception
 	 */
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		jmf = new JDFDoc(ElementName.JMF).getJMFRoot();
 	}

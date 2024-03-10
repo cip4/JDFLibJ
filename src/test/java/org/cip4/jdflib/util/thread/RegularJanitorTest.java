@@ -93,7 +93,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		void run()
+		public void run()
 		{
 			ThreadUtil.sleep(123);
 			i++;
@@ -108,7 +108,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		void run()
+		public void run()
 		{
 			ThreadUtil.sleep(123);
 			i++;
@@ -122,7 +122,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		void run()
+		public void run()
 		{
 		}
 	}
@@ -225,7 +225,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 	 */
 	@Override
 	@AfterEach
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		super.tearDown();
 		RegularJanitor.feierabend();

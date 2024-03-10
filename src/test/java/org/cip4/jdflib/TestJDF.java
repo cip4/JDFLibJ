@@ -246,7 +246,7 @@ public class TestJDF extends JDFTestCaseBase
 	 */
 	@Override
 	@AfterEach
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		JDFResource.setUnpartitiondImplicit(false);
 		super.tearDown();

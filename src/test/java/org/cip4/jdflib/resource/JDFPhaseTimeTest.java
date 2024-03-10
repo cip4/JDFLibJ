@@ -118,7 +118,7 @@ public class JDFPhaseTimeTest extends JDFTestCaseBase
 	*/
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		pt = new JDFDoc(ElementName.JDF).getJDFRoot().getCreateAuditPool().addPhaseTime(EnumNodeStatus.InProgress, null, null);

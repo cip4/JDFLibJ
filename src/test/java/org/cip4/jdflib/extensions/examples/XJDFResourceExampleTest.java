@@ -80,7 +80,7 @@ public class XJDFResourceExampleTest extends ExampleTest
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		JDFElement.setLongID(false);
 		super.setUp();

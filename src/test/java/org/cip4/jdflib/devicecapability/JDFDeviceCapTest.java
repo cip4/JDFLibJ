@@ -131,7 +131,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		final JDFDoc doc = new JDFDoc("Device");
 		device = (JDFDevice) doc.getRoot();

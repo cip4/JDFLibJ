@@ -75,20 +75,20 @@ public class DirectoryPrintVisitor implements DirectoryVisitor
 	String indent = "";
 
 	@Override
-	void enterDirectory(File dir)
+	public void enterDirectory(final File dir)
 	{
 		System.out.println(indent + "[" + dir.getName() + "]");
 		indent += "  ";
 	}
 
 	@Override
-	void leaveDirectory(File dir)
+	public void leaveDirectory(final File dir)
 	{
 		indent = indent.substring(2);
 	}
 
 	@Override
-	void visitFile(File file)
+	public void visitFile(final File file)
 	{
 		System.out.println(indent + file.getName());
 	}

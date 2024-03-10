@@ -60,7 +60,7 @@ public class JDFColorPoolTest {
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@BeforeEach
-	void setUp()
+	public void setUp()
 	{
 		try
 		{

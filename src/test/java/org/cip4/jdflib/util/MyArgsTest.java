@@ -100,7 +100,7 @@ public class MyArgsTest {
 	 * @throws Exception
 	 */
 	@BeforeEach
-    void setUp() throws Exception
+    public void setUp() throws Exception
 	{
         _myArgs = new MyArgs(_testArray, "?cqvVntP", "dlLuhpx", null);
 

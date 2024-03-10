@@ -93,13 +93,13 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 	final static Log log = LogFactory.getLog(AutoClassInstantiateVisitor.class);
 
 	@Override
-	void enterDirectory(final File dir)
+	public void enterDirectory(final File dir)
 	{
 		totalResult = true;
 	}
 
 	@Override
-	void leaveDirectory(final File dir)
+	public void leaveDirectory(final File dir)
 	{
 		if (!totalResult)
 		{
@@ -109,13 +109,13 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 	}
 
 	@Override
-	void visitFile(final File file)
+	public void visitFile(final File file)
 	{
 		try
 		{
 			testJDFClass(file.getName());
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			log.error("bad autofile", e);
 			throw new JDFException(e.getMessage());

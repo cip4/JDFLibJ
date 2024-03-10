@@ -627,7 +627,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 * @see junit.framework.TestCase#tearDown()
 	 */
 	@Override
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		JDFJMF.setTheSenderID(null);
 		super.tearDown();

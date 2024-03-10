@@ -123,7 +123,7 @@ public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		BaseGoldenTicket.misURL = "http://192.168.14.143:8010/FJC/Fiery";
 		super.setUp();

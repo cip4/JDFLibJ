@@ -336,7 +336,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		JDFAudit.setStaticAgentName("JDF MISCP golden ticket generator");

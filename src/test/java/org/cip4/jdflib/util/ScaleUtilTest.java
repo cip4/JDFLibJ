@@ -84,7 +84,7 @@ public class ScaleUtilTest {
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@BeforeEach
-    void setUp() throws Exception
+    public void setUp() throws Exception
 	{
     }
 
@@ -92,7 +92,7 @@ public class ScaleUtilTest {
 	 * @see junit.framework.TestCase#tearDown()
 	 */
 	@AfterEach
-    void tearDown() throws Exception
+    public void tearDown() throws Exception
 	{
     }
 

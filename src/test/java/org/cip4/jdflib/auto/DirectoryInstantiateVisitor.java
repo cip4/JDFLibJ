@@ -80,17 +80,17 @@ import org.w3c.dom.DOMException;
 public class DirectoryInstantiateVisitor implements DirectoryVisitor
 {
 	@Override
-	void enterDirectory(File dir)
+	public void enterDirectory(final File dir)
 	{ /**/
 	}
 
 	@Override
-	void leaveDirectory(File dir)
+	public void leaveDirectory(final File dir)
 	{ /**/
 	}
 
 	@Override
-	void visitFile(File file)
+	public void visitFile(final File file)
 	{
 		testJDFClass(file.getName());
 	}
@@ -127,8 +127,8 @@ public class DirectoryInstantiateVisitor implements DirectoryVisitor
 		String createdClass = kElem.getClass().toString();
 		createdClass = createdClass.substring(createdClass.lastIndexOf(".") + 1);
 
-		result = fileName.equals(createdClass + ".java") || (fileName.startsWith("JDFAuto") && createdClass.equals(JDFConstants.JDFELEMENT)) || fileName.equals(JDFConstants.JDFNODE)
-				|| !createdClass.equals(JDFConstants.JDFELEMENT);
+		result = fileName.equals(createdClass + ".java") || (fileName.startsWith("JDFAuto") && createdClass.equals(JDFConstants.JDFELEMENT))
+				|| fileName.equals(JDFConstants.JDFNODE) || !createdClass.equals(JDFConstants.JDFELEMENT);
 
 		if (!result)
 		{

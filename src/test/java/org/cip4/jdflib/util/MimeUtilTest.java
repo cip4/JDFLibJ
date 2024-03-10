@@ -116,11 +116,11 @@ public class MimeUtilTest extends JDFTestCaseBase
 	@Test
 	void testBuildMimePackageDocJMF() throws MessagingException, IOException
 	{
-		Path tempPath = new File(sm_dirTestDataTemp).toPath();
+		final Path tempPath = new File(sm_dirTestDataTemp).toPath();
 		testBuildMimePackageDocJMF(tempPath);
 	}
 
-	void testBuildMimePackageDocJMF(Path tempDir) throws MessagingException, IOException
+	public void testBuildMimePackageDocJMF(final Path tempDir) throws MessagingException, IOException
 	{
 		for (int ii = 0; ii < 3; ii++)
 		{
@@ -402,7 +402,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	void testBuildMimePackageDoc() throws Exception
+	public void testBuildMimePackageDoc() throws Exception
 	{
 		for (int i = 0; i < 2; i++)
 		{

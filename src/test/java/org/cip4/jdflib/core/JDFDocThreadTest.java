@@ -100,7 +100,7 @@ public class JDFDocThreadTest {
 		 * @see java.lang.Thread#run()
 		 */
 		@Override
-		void run()
+		public void run()
 		{
 			ThreadUtil.sleep(1);
 			JDFDoc d = new JDFParser().parseString("<JDF/>");

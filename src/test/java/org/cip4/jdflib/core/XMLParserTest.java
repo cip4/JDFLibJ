@@ -195,7 +195,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	 */
 	@Override
 	@AfterEach
-	void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		XMLErrorHandler.setWantLog(true);
 		super.tearDown();

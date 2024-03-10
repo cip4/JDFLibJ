@@ -104,7 +104,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp()
+	public void setUp()
 	{
 		KElement.setLongID(false);
 		jmf = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);

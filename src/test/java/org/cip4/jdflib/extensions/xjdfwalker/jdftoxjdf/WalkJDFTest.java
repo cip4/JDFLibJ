@@ -125,7 +125,7 @@ public class WalkJDFTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		JDFToXJDF.setDefaultVersion(XJDFHelper.defaultVersion());
 		super.setUp();

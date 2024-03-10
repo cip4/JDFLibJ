@@ -457,7 +457,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	 */
 	@Override
 	@BeforeEach
-	void setUp()
+	public void setUp()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		root = d.getRoot();

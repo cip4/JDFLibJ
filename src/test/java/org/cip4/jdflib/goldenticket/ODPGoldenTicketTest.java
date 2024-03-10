@@ -124,7 +124,7 @@ public class ODPGoldenTicketTest extends BaseGoldenTicketTest
 	 */
 	@Override
 	@BeforeEach
-	void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		BaseGoldenTicket.misURL = null;
 		super.setUp();
