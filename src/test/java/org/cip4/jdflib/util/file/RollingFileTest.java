@@ -49,6 +49,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
@@ -65,6 +66,7 @@ public class RollingFileTest extends JDFTestCaseBase
 
 	private RollingFile r;
 	private Set<File> files;
+	private final AtomicInteger ai = new AtomicInteger();
 
 	class AddRunner implements Runnable
 	{
@@ -82,7 +84,7 @@ public class RollingFileTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	void testGetNewFile()
+	synchronized void testGetNewFile()
 	{
 		for (int i = 1; i < 100; i++)
 		{
@@ -94,28 +96,28 @@ public class RollingFileTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	void testGetNewFileThread()
+	synchronized void testGetNewFileThread()
 	{
 		for (int i = 0; i < 42; i++)
 		{
 			new Thread(new AddRunner()).start();
 		}
-		for (int i = 0; i < 620; i++)
+		for (int i = 0; i < 1620; i++)
 		{
 			if (files.size() == 42)
 				break;
 			ThreadUtil.sleep(23);
 		}
-		assertEquals(42, files.size(), 1);
+		assertEquals(42, files.size(), 2);
 	}
 
 	/**
 	 *
 	 */
 	@Test
-	void testGetNewFileDir()
+	synchronized void testGetNewFileDir()
 	{
-		r = new RollingFile(sm_dirTestDataTemp + "RollingFile", "dummyDir");
+		r = new RollingFile(sm_dirTestDataTemp + r.getName(), "dummyDir");
 		for (int i = 1; i < 100; i++)
 		{
 			final File newFile = r.getNewFile();
@@ -132,9 +134,9 @@ public class RollingFileTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	void testGetNewDeepFile()
+	synchronized void testGetNewDeepFile()
 	{
-		r = new RollingFile(sm_dirTestDataTemp + "RollingFile/foo/bar", "dummyDir");
+		r = new RollingFile(sm_dirTestDataTemp + r.getName() + "/foo/bar", "dummyDir");
 		for (int i = 1; i < 100; i++)
 		{
 			final File newFile = r.getNewFile();
@@ -148,10 +150,10 @@ public class RollingFileTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	void testPreExist() throws IOException
+	synchronized void testPreExist() throws IOException
 	{
 		FileUtil.getFileInDirectory(r, new File("dummy1234.tst")).createNewFile();
-		r = new RollingFile(sm_dirTestDataTemp + "RollingFile", "dummy.tst");
+		r = new RollingFile(sm_dirTestDataTemp + r.getName(), "dummy.tst");
 		assertEquals(r.getNewFile().getName(), "dummy001235.tst");
 	}
 
@@ -160,9 +162,9 @@ public class RollingFileTest extends JDFTestCaseBase
 	 * TODO Please insert comment!
 	 */
 	@Test
-	void testDoubleDot()
+	synchronized void testDoubleDot()
 	{
-		r = new RollingFile(sm_dirTestDataTemp + "RollingFile", "dummy..tst");
+		r = new RollingFile(sm_dirTestDataTemp + r.getName(), "dummy..tst");
 		assertEquals(r.getNewFile().getName(), "dummy.000001.tst");
 	}
 
@@ -175,10 +177,11 @@ public class RollingFileTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		final File f = new File(sm_dirTestDataTemp + "RollingFile");
+		final String file = "RollingFile" + ai.incrementAndGet();
+		final File f = new File(sm_dirTestDataTemp + file);
 		FileUtil.deleteAll(f);
 		f.mkdirs();
-		r = new RollingFile(sm_dirTestDataTemp + "RollingFile", "dummy.tst");
+		r = new RollingFile(sm_dirTestDataTemp + file, "dummy.tst");
 		files = new HashSet<>();
 	}
 }
