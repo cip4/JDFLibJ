@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -416,5 +416,22 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 		final EnumMediaType typ = getMediaType();
 		return EnumMediaType.Paper.equals(typ) || EnumMediaType.CorrugatedBoard.equals(typ) || EnumMediaType.SelfAdhesive.equals(typ) || EnumMediaType.Transparency.equals(typ)
 				|| EnumMediaType.Vinyl.equals(typ);
+	}
+
+	/**
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoMedia#setGrade(int)
+	 * @throws IllegalArgumentException if grade not in range 1-5
+	 * @param 1-5 set grade ; 0 zapp grade
+	 */
+	@Override
+	public void setGrade(final int grade)
+	{
+		if (grade > 0 && grade <= 5)
+			super.setGrade(grade);
+		else if (grade == 0)
+			removeAttribute(AttributeName.GRADE);
+		else
+			throw new IllegalArgumentException("Invalid grade (1-5); " + grade);
 	}
 }
