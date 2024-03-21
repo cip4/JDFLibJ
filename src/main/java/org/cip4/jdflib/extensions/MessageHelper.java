@@ -2,7 +2,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * 
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -60,22 +61,53 @@ public class MessageHelper extends BaseXJDFHelper
 	{
 		Audit, Command, Query, Response, Signal;
 
-		public static EFamily getEnum(String s)
+		public static EFamily getEnum(final String s)
 		{
-			try
+			if (s != null)
 			{
-				return valueOf(s);
-			}
-			catch (Exception x)
-			{
-				for (EFamily f : values())
+				try
 				{
-					if (f.name().equalsIgnoreCase(s))
-						return f;
+					return valueOf(s);
+				}
+				catch (final Exception x)
+				{
+					for (final EFamily f : values())
+					{
+						if (f.name().equalsIgnoreCase(s))
+							return f;
+					}
+					final String sl = s.toLowerCase();
+					for (final EFamily f : values())
+					{
+						if (sl.startsWith(f.name().toLowerCase()))
+							return f;
+					}
 				}
 			}
 			return null;
 		}
+
+		public String getType(final String base)
+		{
+			if (StringUtil.length(base) > name().length() && base.toLowerCase().startsWith(name().toLowerCase()))
+			{
+				return base.substring(name().length());
+			}
+			return null;
+		}
+	}
+
+	/**
+	 *
+	 * @param e the element - needed for subclasses
+	 * @param messageName
+	 * @param family
+	 * @return
+	 */
+	String getMessageType(final KElement e, final String messageName, final String family)
+	{
+		final String type = StringUtil.rightStr(messageName, -family.length());
+		return type;
 	}
 
 	/**
@@ -172,7 +204,7 @@ public class MessageHelper extends BaseXJDFHelper
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public void setReturnCode(int rc)
+	public void setReturnCode(final int rc)
 	{
 		if (!isResponse())
 			throw new IllegalArgumentException("Can only set return code on response");
@@ -184,7 +216,7 @@ public class MessageHelper extends BaseXJDFHelper
 	 * @param headerAttribute
 	 * @param value
 	 */
-	public void setHeader(String headerAttribute, String value)
+	public void setHeader(final String headerAttribute, final String value)
 	{
 		final KElement header = getCreateElement(XJDFConstants.Header);
 		header.setAttribute(headerAttribute, value);
@@ -320,7 +352,6 @@ public class MessageHelper extends BaseXJDFHelper
 		final EFamily f = getEFamily();
 		final String name = getLocalName();
 		return (f == null || f.name().equals(name)) ? null : StringUtil.rightStr(name, -f.name().length());
-
 	}
 
 }

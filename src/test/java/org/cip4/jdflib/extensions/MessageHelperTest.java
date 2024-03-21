@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -164,13 +164,26 @@ public class MessageHelperTest extends JDFTestCaseBase
 	@Test
 	void testGetFamilyEnum()
 	{
-		for (EFamily f : EFamily.values())
+		for (final EFamily f : EFamily.values())
 		{
 			assertEquals(f, EFamily.getEnum(f.name().toLowerCase()));
 			assertEquals(f, EFamily.getEnum(f.name()));
 		}
 		assertEquals(null, EFamily.getEnum(null));
 		assertEquals(null, EFamily.getEnum("abc"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetFamilyEnumType()
+	{
+		for (final EFamily f : EFamily.values())
+		{
+			assertEquals(f, EFamily.getEnum(f.name().toLowerCase() + "Foo"));
+			assertEquals("Foo", EFamily.getEnum(f.name()).getType(f.name().toLowerCase() + "Foo"));
+		}
 	}
 
 	/**
