@@ -720,9 +720,9 @@ public class StringUtil
 	 */
 	public static String addToken(String strWork, final String delim, String newToken)
 	{
-		if (strWork == null)
+		if (isEmpty(strWork))
 			return newToken;
-		if (newToken == null)
+		if (isEmpty(newToken))
 			return strWork;
 		while (strWork != null && strWork.endsWith(delim))
 			strWork = leftStr(strWork, -delim.length());
