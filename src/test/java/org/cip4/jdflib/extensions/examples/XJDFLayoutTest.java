@@ -235,7 +235,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Tiling", null);
 		xjdfHelper.setTypes("Imposition");
-		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final SetHelper shLO = xjdfHelper.getCreateSet(ElementName.LAYOUT, EnumUsage.Input);
 		final ResourceHelper rh = shLO.appendPartition(AttributeName.TILEID, "0 0", true);
 		rh.ensurePart(AttributeName.SIDE, "Front");
 		final JDFLayout lo = (JDFLayout) rh.getResource();
