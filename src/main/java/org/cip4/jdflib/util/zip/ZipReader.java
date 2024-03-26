@@ -215,6 +215,18 @@ public class ZipReader
 	 *
 	 * @return
 	 */
+	public ZipEntry ensureEntry()
+	{
+		if (currentEntry == null)
+			getNextEntry();
+		return currentEntry;
+	}
+
+	/**
+	 * get the next entry - this can be used in non-buffered mode returns null in case of snafu
+	 *
+	 * @return
+	 */
 	public ZipEntry getNextEntry()
 	{
 		try
@@ -642,6 +654,7 @@ public class ZipReader
 	 */
 	public InputStream getInputStream()
 	{
+		ensureEntry();
 		return currentEntry == null ? null : zis;
 	}
 
@@ -653,8 +666,7 @@ public class ZipReader
 	 */
 	public XMLDoc getXMLDoc()
 	{
-		if (currentEntry == null)
-			return null;
+		ensureEntry();
 		final XMLDoc doc = XMLDoc.parseStream(zis);
 		if (doc != null)
 			doc.setZipReader(this);
@@ -669,8 +681,7 @@ public class ZipReader
 	 */
 	public JDFDoc getJDFDoc()
 	{
-		if (currentEntry == null)
-			return null;
+		ensureEntry();
 		final JDFDoc doc = JDFDoc.parseStream(zis);
 		if (doc != null)
 			doc.setZipReader(this);

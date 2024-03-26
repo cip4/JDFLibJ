@@ -1221,6 +1221,36 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 */
+	@Test
+	void testWriteToZip()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final File file = new File(sm_dirTestDataTemp + "doc.xml.zip");
+		final File z = d.write2Zip(file);
+		assertNotNull(z);
+		final XMLDoc d2 = XMLDoc.parseZipFile(z);
+		assertEquals("doc", d2.getRootName());
+		assertEquals(UrlUtil.ZIP, FileUtil.getExtension(z));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testWriteToZipNull()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		d.setOriginalFileName(sm_dirTestDataTemp + "doc2.xml");
+		final File z = d.write2Zip(null);
+		assertNotNull(z);
+		final XMLDoc d2 = XMLDoc.parseZipFile(z);
+		assertEquals("doc", d2.getRootName());
+		assertEquals(UrlUtil.ZIP, FileUtil.getExtension(z));
+	}
+
+	/**
 	 * tests all kinds of special characters in file names - including %, ï¿½ and umlauts
 	 *
 	 */

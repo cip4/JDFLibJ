@@ -72,6 +72,7 @@ import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.net.HTTPDetails;
+import org.cip4.jdflib.util.zip.XMLZipWriter;
 import org.cip4.jdflib.util.zip.ZipReader;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
@@ -416,6 +417,28 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	public boolean write2File(final File oFilePath)
 	{
 		return write2File(oFilePath, 2, false);
+	}
+
+	/**
+	 * write2Zip - write to a file and compress as zip; remove the .zip from the extension in the zip entry or add .zip
+	 *
+	 * @param file
+	 *
+	 * @return boolean
+	 * 
+	 */
+	public File write2Zip(File file)
+	{
+		if (file == null)
+		{
+			if (getOriginalFileName() != null)
+				file = new File(getOriginalFileName());
+			if (!UrlUtil.isZip(FileUtil.getExtension(file)))
+				file = new File(file.getAbsolutePath() + ".zip");
+		}
+
+		final XMLZipWriter w = new XMLZipWriter(this, file.getName());
+		return FileUtil.writeFile(w, file);
 	}
 
 	/**
@@ -1935,6 +1958,21 @@ public class XMLDoc implements Cloneable, IStreamWriter
 		final XMLDoc d = p.parseFile(file);
 		factory.push(p);
 		return d;
+	}
+
+	/**
+	 * parse an XML file
+	 *
+	 * @param file
+	 * @return the parsed JDFDoc
+	 */
+	public static XMLDoc parseZipFile(final File file)
+	{
+		final ZipReader r = new ZipReader(file);
+		final XMLDoc doc = r.getXMLDoc();
+		r.close();
+		return doc;
+
 	}
 
 	/**

@@ -763,6 +763,20 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testEnsureEntry()
+	{
+		final ZipReader r = new ZipReader(sm_dirTestData + "testZip.zip");
+		final ZipEntry e1 = r.ensureEntry();
+		assertNotNull(e1);
+		final ZipEntry e2 = r.ensureEntry();
+		assertEquals(e1, e2);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	void testGetMatchingEntryEscapedFile()
 	{
 		final ZipReader r = new ZipReader(new File(sm_dirTestData + "testZip.zip"), 33);

@@ -83,6 +83,8 @@ import org.cip4.jdflib.util.zip.ZipReader;
  */
 public class UrlUtil
 {
+	public static final String ZIP = "zip";
+
 	private static final String SLASHSLASH = "//";
 
 	private static final String FILE = "file:";
@@ -1060,7 +1062,7 @@ public class UrlUtil
 		{
 			if (isZIPType(contentType))
 			{
-				extension = "zip";
+				extension = ZIP;
 			}
 			else if (isXMLType(contentType))
 			{
@@ -1123,7 +1125,7 @@ public class UrlUtil
 			mimeMap.put("mjd", MimeUtil.MULTIPART_RELATED);
 			mimeMap.put("mim", MimeUtil.MULTIPART_RELATED);
 
-			mimeMap.put("zip", APPLICATION_ZIP);
+			mimeMap.put(ZIP, APPLICATION_ZIP);
 
 			mimeMap.put("cf2", APPLICATION_CFF2);
 			mimeMap.put("cff2", APPLICATION_CFF2);
@@ -1949,6 +1951,18 @@ public class UrlUtil
 		while (lower != null && lower.endsWith(";"))
 			lower = StringUtil.leftStr(lower, -1);
 		return lower != null && (APPLICATION_ZIP.equals(lower) || APPLICATION_XZIP.equals(lower) || lower.endsWith("+zip"));
+	}
+
+	/**
+	 * check whether the url type is a known zip
+	 *
+	 * @param url
+	 * @return
+	 */
+	public static boolean isZip(final String url)
+	{
+		final String ext = extension(url);
+		return ZIP.equalsIgnoreCase(ext) || ZIP.equalsIgnoreCase(url);
 	}
 
 	/**
