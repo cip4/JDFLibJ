@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -491,6 +491,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	/**
 	 *
 	 */
+	@Test
 	void testEnumSeparation()
 	{
 		assertEquals(EnumSeparation.Cyan.getName(), "Cyan");
@@ -500,11 +501,26 @@ public class JDFElementTest extends JDFTestCaseBase
 	/**
 	 *
 	 */
+	@Test
 	void testEnumVersion()
 	{
 		assertTrue(EnumVersion.Version_2_0.isXJDF());
 		assertFalse(EnumVersion.Version_1_0.isXJDF());
 		assertFalse(EnumVersion.Version_1_9.isXJDF());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testEnumVersionXJDF()
+	{
+		assertEquals(EnumVersion.Version_1_6, EnumVersion.Version_2_0.getJDFVersion());
+		assertEquals(EnumVersion.Version_1_8, EnumVersion.Version_2_2.getJDFVersion());
+		assertEquals(null, EnumVersion.Version_1_0.getXJDFVersion());
+		assertEquals(null, EnumVersion.Version_1_5.getXJDFVersion());
+		assertEquals(EnumVersion.Version_2_0, EnumVersion.Version_1_6.getXJDFVersion());
+		assertEquals(EnumVersion.Version_2_2, EnumVersion.Version_1_8.getXJDFVersion());
 	}
 
 	/**

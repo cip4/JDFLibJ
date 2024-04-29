@@ -158,7 +158,17 @@ public abstract class JDFTestCaseBase
 	 */
 	protected static JDFParser getXJDFSchemaParser()
 	{
-		return getXJDFSchemaParser(2, 1);
+		return getXJDFSchemaParser(getDefaultXJDFVersion());
+	}
+
+	protected static JDFParser getXJDFSchemaParser(final EnumVersion xJDFVersion)
+	{
+		return getXJDFSchemaParser(xJDFVersion.getMajorVersion(), xJDFVersion.getMinorVersion());
+	}
+
+	protected static EnumVersion getDefaultXJDFVersion()
+	{
+		return defaultVersion.getXJDFVersion();
 	}
 
 	/**

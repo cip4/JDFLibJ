@@ -5273,6 +5273,20 @@ public class JDFElement extends KElement
 			super(name, m_startValue++);
 		}
 
+		public EnumVersion getXJDFVersion()
+		{
+			if (getMajorVersion() == 1)
+				return getMinorVersion() >= 6 ? getEnum(2, getMinorVersion() - 6) : null;
+			return this;
+		}
+
+		public EnumVersion getJDFVersion()
+		{
+			if (getMajorVersion() == 2)
+				return getEnum(1, getMinorVersion() + 6);
+			return this;
+		}
+
 		/**
 		 * casts a String into a corresponding EnumVersion hand coded for speed!
 		 *
