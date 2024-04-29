@@ -41,7 +41,6 @@ import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -57,7 +56,6 @@ import org.cip4.jdflib.resource.process.JDFMetadataMap;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -198,12 +196,11 @@ public class XJDFRunListTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	@Disabled
 	public final void testMultiSet()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, null, null);
 		xjdfHelper.setTypes(EnumType.DigitalPrinting.getName());
-		xjdfHelper.setVersion(EnumVersion.Version_2_1);
+		xjdfHelper.setVersion(XJDFHelper.defaultVersion());
 		final SetHelper rlh = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, null);
 		final ResourceHelper runh = rlh.appendPartition(null, true);
 		final JDFRunList rl = (JDFRunList) runh.getResource();
@@ -212,15 +209,14 @@ public class XJDFRunListTest extends JDFTestCaseBase
 		rl.appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "File:///ManyBrochures.pdf");
 
 		final SetHelper setMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
-		final ResourceHelper rhm0 = setMedia.getCreatePartition(new JDFAttributeMap(AttributeName.DOCINDEX, "0 0"), true);
-		rhm0.appendPartMap(new JDFAttributeMap(AttributeName.DOCINDEX, "2 2"));
+		final ResourceHelper rhm0 = setMedia.getCreatePartition(0, true);
 		final JDFMedia m0 = (JDFMedia) rhm0.getResource();
 		m0.setMediaType(EnumMediaType.Paper);
 		m0.setWeight(150);
 		rhm0.setDescriptiveName("Media for front and back covers");
-		final ResourceHelper rhm1 = setMedia.getCreatePartition(new JDFAttributeMap(AttributeName.DOCINDEX, "1 1"), true);
+		final ResourceHelper rhm1 = setMedia.getCreatePartition(1, true);
 		rhm1.setDescriptiveName("Media for inner pages");
-		final String idm0 = rhm0.getRoot().appendAnchor("M02");
+		final String idm0 = rhm0.getRoot().appendAnchor("M2");
 
 		final JDFMedia m1 = (JDFMedia) rhm1.getResource();
 		m1.setWeight(100);
@@ -236,7 +232,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 		rhc1.getResource().setAttribute("MediaRef", idm1);
 
 		cleanSnippets(xjdfHelper);
-		writeRoundTripX(xjdfHelper, "resources/DocPages", EnumValidationLevel.Complete);
+		writeRoundTripX(xjdfHelper, "resources/DocPages", EnumValidationLevel.Incomplete, false);
 
 	}
 

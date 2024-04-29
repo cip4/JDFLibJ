@@ -64,9 +64,9 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 
@@ -283,7 +283,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	@Test
 	void testChange()
 	{
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			new ChangeOrderMaker().createChangeOrder(i);
 		}
@@ -361,7 +361,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		final JDFParser parser = JDFParserFactory.getFactory().get();
 		parser.setSchemaLocation(JDFElement.getSchemaURL(2, 1), UrlUtil.normalize(schemaUrl));
-		//TODO update linked xerces
+		// TODO update linked xerces
 		SchemaFactory.newInstance("http://www.w3.org/XML/XMLSchema/v1.1");
 		Assertions.assertNotNull(parser.parseString(root.toXML()));
 	}

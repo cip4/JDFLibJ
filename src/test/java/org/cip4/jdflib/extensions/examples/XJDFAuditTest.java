@@ -73,8 +73,8 @@ public class XJDFAuditTest extends ExampleTest
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("PaperAudit", null, null);
 		xjdfHelper.setTypes(EnumType.ConventionalPrinting.getName());
-		final SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, null);
-		final SetHelper shComp = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
+		final SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
+		final SetHelper shComp = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
 
 		final ResourceHelper rhM = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		ResourceHelper rhC = shComp.appendPartition(AttributeName.SHEETNAME, "S1", true);

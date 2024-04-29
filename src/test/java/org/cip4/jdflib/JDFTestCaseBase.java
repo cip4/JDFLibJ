@@ -324,7 +324,8 @@ public abstract class JDFTestCaseBase
 	@BeforeEach
 	public void setUp() throws Exception
 	{
-		JDFElement.setDefaultJDFVersion(defaultVersion);
+		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_8);
+		BaseXJDFHelper.setDefaultVersion(EnumVersion.Version_2_2);
 		senderID = "TestSender";
 		JDFJMF.setTheSenderID(senderID);
 		KElement.uniqueID(1);
@@ -625,7 +626,20 @@ public abstract class JDFTestCaseBase
 	 */
 	protected JDFElement writeRoundTripX(final BaseXJDFHelper h, final String fileBase, final EnumValidationLevel level)
 	{
-		h.cleanUp();
+		return writeRoundTripX(h, fileBase, level, true);
+	}
+
+	/**
+	 *
+	 * @param h convenience method for XJDFHelper
+	 * @param fileBase the filename without extension
+	 * @param level the level to validate the returned JDF
+	 * @return
+	 */
+	protected JDFElement writeRoundTripX(final BaseXJDFHelper h, final String fileBase, final EnumValidationLevel level, final boolean cleanup)
+	{
+		if (cleanup)
+			h.cleanUp();
 		return writeRoundTripX(h.getRoot(), fileBase, level);
 	}
 

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,12 +36,15 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.AuditHelper.eAudit;
-
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -49,7 +52,8 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class AuditHelperTest {
+public class AuditHelperTest
+{
 
 	/**
 	 *
@@ -59,10 +63,11 @@ public class AuditHelperTest {
 	{
 		for (final eAudit e : eAudit.values())
 		{
-			Assertions.assertEquals(e, eAudit.getEnum(e.name()));
-			Assertions.assertEquals(e, eAudit.getEnum(e.name().toLowerCase()));
-			Assertions.assertEquals(e, eAudit.getEnum("audit" + e.name()));
-			Assertions.assertEquals(null, eAudit.getEnum("audit " + e.name()));
+			assertEquals(e, eAudit.getEnum(e.name()));
+			assertEquals(e, eAudit.getEnum(e.name().toLowerCase()));
+			assertEquals(e, eAudit.getEnum("audit" + e.name()));
+			assertEquals(e, eAudit.getEnum("auditaudit" + e.name()));
+			assertEquals(null, eAudit.getEnum("audit " + e.name()));
 		}
 	}
 
@@ -74,7 +79,7 @@ public class AuditHelperTest {
 	{
 		for (final eAudit e : eAudit.values())
 		{
-			Assertions.assertEquals(e, eAudit.getEnum(e.getAuditName()));
+			assertEquals(e, eAudit.getEnum(e.getAuditName()));
 		}
 	}
 
@@ -88,7 +93,7 @@ public class AuditHelperTest {
 		final MessageHelper ah = new MessageHelper(audit);
 		ah.appendElement(XJDFConstants.Header);
 		ah.cleanUp();
-		Assertions.assertNotNull(ah);
+		assertNotNull(ah);
 	}
 
 	/**
@@ -102,7 +107,7 @@ public class AuditHelperTest {
 		final KElement header = ah.appendElement(XJDFConstants.Header);
 		final KElement rs = ah.appendElement(XJDFConstants.ResourceSet);
 		ah.cleanUp();
-		Assertions.assertEquals(header.getNextSiblingElement(), rs);
+		assertEquals(header.getNextSiblingElement(), rs);
 	}
 
 	/**
@@ -112,9 +117,9 @@ public class AuditHelperTest {
 	void testIsAudit()
 	{
 		final KElement audit = KElement.createRoot(XJDFConstants.AuditResource, null);
-		Assertions.assertTrue(AuditHelper.isAudit(audit));
+		assertTrue(AuditHelper.isAudit(audit));
 		final KElement audit2 = KElement.createRoot(XJDFConstants.AuditResource + "2", null);
-		Assertions.assertFalse(AuditHelper.isAudit(audit2));
+		assertFalse(AuditHelper.isAudit(audit2));
 	}
 
 	/**
@@ -128,7 +133,7 @@ public class AuditHelperTest {
 		final SetHelper rs = ah.appendSet(ElementName.RUNLIST);
 		rs.appendPartition("Run", "R1", true).getResource().appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "u");
 		final XJMFHelper xjmf = ah.makeXJMFSignal();
-		Assertions.assertEquals("u", xjmf.getMessageHelper(0).getRoot().getXPathAttribute("ResourceInfo/ResourceSet/Resource/RunList/FileSpec/@URL", null));
+		assertEquals("u", xjmf.getMessageHelper(0).getRoot().getXPathAttribute("ResourceInfo/ResourceSet/Resource/RunList/FileSpec/@URL", null));
 	}
 
 }
