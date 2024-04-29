@@ -115,12 +115,17 @@ public abstract class JDFTestCaseBase
 	 * @param minor
 	 * @return
 	 */
-	protected boolean reparse(final KElement e, final int major, final int minor)
+	protected boolean reparse(final KElement e, final int major, int minor)
 	{
 		final String written = e.toXML();
 		assertNotNull(written);
+		if (minor == -1)
+		{
+			minor = major == 1 ? defaultVersion.getMinorVersion() : getDefaultXJDFVersion().getMinorVersion();
+		}
 		final JDFParser p = getSchemaParser(major, minor);
 		final JDFDoc xParsed = p.parseString(written);
+		final XMLDoc val = xParsed.getValidationResult();
 		return xParsed.isSchemaValid();
 	}
 
@@ -550,7 +555,7 @@ public abstract class JDFTestCaseBase
 
 	protected MyPair<BaseXJDFHelper, JDFElement> writeRoundTrip(final JDFElement root, final String fileBase)
 	{
-		return writeRoundTrip(root, fileBase, BaseXJDFHelper.getDefaultVersion());
+		return writeRoundTrip(root, fileBase, getDefaultXJDFVersion());
 	}
 
 	protected MyPair<BaseXJDFHelper, JDFElement> writeRoundTrip(final JDFElement root, final String fileBase, final EnumVersion version)

@@ -97,7 +97,7 @@ public class StrippingTest extends JDFTestCaseBase
 		ass.setAttribute(AttributeName.COMMONFOLDS, "2");
 		final JDFAssemblySection ass2 = a.appendAssemblySection();
 		ass2.setAssemblyIDs(new VString("bs2"));
-		writeRoundTrip(n, "commonfolds", EnumVersion.Version_2_1);
+		writeRoundTrip(n, "commonfolds");
 		writeTest(n, "resources/commonfolds.jdf", true, null);
 	}
 

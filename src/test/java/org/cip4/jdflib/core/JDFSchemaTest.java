@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -45,6 +45,11 @@
  */
 package org.cip4.jdflib.core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.util.List;
 import java.util.zip.DataFormatException;
@@ -67,7 +72,6 @@ import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -88,7 +92,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	void testSchema()
 	{
 		final JDFDoc d = p.parseFile(new File(sm_dirTestData + "job.jdf"));
-		Assertions.assertNotNull(d);
+		assertNotNull(d);
 	}
 
 	/**
@@ -104,8 +108,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		n.addResource(ElementName.TOOL, EnumUsage.Output);
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assertions.assertNotNull(d);
-		Assertions.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -126,8 +130,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		String s = d0.write2String(2);
 		s = StringUtil.replaceString(s, "<Lot LotID=\"lllll\"/>", "<Lot LotID=\"lllll\">  \n  </Lot>");
 		final JDFDoc d = p.parseString(s);
-		Assertions.assertNotNull(d);
-		Assertions.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -146,8 +150,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		vt.setAttribute(AttributeName.DATATYPE, "EnumerationSpan");
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assertions.assertNotNull(d);
-		Assertions.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -164,8 +168,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		c.setAttribute("Claim", "AddressField");
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assertions.assertNotNull(d);
-		Assertions.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -176,8 +180,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	void testPlateType()
 	{
 		final JDFDoc d = p.parseFile(sm_dirTestData + "Example8-15.jdf");
-		Assertions.assertNotNull(d, sm_dirTestData + "Example8-15.jdf");
-		Assertions.assertNull(p.m_lastExcept);
+		assertNotNull(d, sm_dirTestData + "Example8-15.jdf");
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -208,8 +212,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		rl.addRun("file://foo.pdf", 0, 33);
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assertions.assertNotNull(d);
-		Assertions.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -225,8 +229,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		n.addResource(ElementName.CASINGINPARAMS, EnumUsage.Input);
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assertions.assertNotNull(d);
-		Assertions.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -243,8 +247,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		pv.setPartUsage(EnumPartUsage.Explicit);
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assertions.assertNotNull(d);
-		Assertions.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -259,9 +263,9 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		for (final File jdf : jdfs)
 		{
 			final JDFDoc d = p.parseFile(jdf);
-			Assertions.assertNotNull(d);
+			assertNotNull(d);
 			log.info("Parsing: " + jdf.getName());
-			Assertions.assertNull(p.m_lastExcept, "schema error in: " + jdf.getName());
+			assertNull(p.m_lastExcept, "schema error in: " + jdf.getName());
 		}
 	}
 
@@ -277,9 +281,9 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		for (final File jdf : jdfs)
 		{
 			final JDFDoc d = p.parseFile(jdf);
-			Assertions.assertNotNull(d);
+			assertNotNull(d);
 			log.info("Parsing: " + jdf.getName());
-			Assertions.assertNull(p.m_lastExcept, "schema error in: " + jdf.getName());
+			assertNull(p.m_lastExcept, "schema error in: " + jdf.getName());
 		}
 	}
 
@@ -299,8 +303,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		idf.setPartUsage(EnumPartUsage.Explicit);
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assertions.assertNotNull(d);
-		Assertions.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -319,8 +323,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		rl.setPages(new JDFIntegerRangeList("1 ~ 3 5 7 9~-1"));
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assertions.assertNotNull(d);
-		Assertions.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -340,8 +344,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		idf.setEncodingDetails("D1");
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assertions.assertNotNull(d);
-		Assertions.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -358,8 +362,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		n.setTemplateVersion("1.0");
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assertions.assertNotNull(d);
-		Assertions.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -374,8 +378,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		n.setType(EnumType.ProcessGroup);
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assertions.assertNotNull(d);
-		Assertions.assertNotNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNotNull(p.m_lastExcept);
 	}
 
 	/**
@@ -390,8 +394,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		n.setType(EnumType.ProcessGroup);
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assertions.assertNotNull(d);
-		Assertions.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -405,18 +409,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		super.setUp();
 		KElement.setLongID(false);
 		final File foo = new File(sm_dirTestSchema).getParentFile();
-		Assertions.assertTrue(foo.isDirectory(), "please mount the svn schema parallel to jdflibJ");
-		p = getSchemaParser(EnumVersion.Version_1_7);
-	}
-
-	/**
-	 *
-	 * @see JDFTestCaseBase#tearDown()
-	 */
-	@Override
-	public void tearDown() throws Exception
-	{
-		super.tearDown();
+		assertTrue(foo.isDirectory(), "please mount the svn schema parallel to jdflibJ");
+		p = getSchemaParser(defaultVersion);
 	}
 
 	/**
@@ -444,8 +438,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 				if (StringUtil.matchesIgnoreCase(f.getName(), "custom*.jmf"))
 					continue;
 				final JDFDoc doc = p.parseFile(f);
-				Assertions.assertNotNull(doc, f.getName());
-				Assertions.assertEquals("Valid", doc.getValidationResult().getRoot().getAttribute("ValidationResult"), f.getAbsolutePath());
+				assertNotNull(doc, f.getName());
+				assertEquals("Valid", doc.getValidationResult().getRoot().getAttribute("ValidationResult"), f.getAbsolutePath());
 			}
 		}
 	}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,6 +36,11 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.util.HashSet;
 import java.util.List;
@@ -64,7 +69,6 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXNotRecognizedException;
@@ -227,7 +231,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	@Test
 	void testGetXJDFSchema()
 	{
-		Assertions.assertNotNull(XMLDoc.parseFile(getXJDFSchema()));
+		assertNotNull(XMLDoc.parseFile(getXJDFSchema()));
 	}
 
 	/**
@@ -236,7 +240,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	@Test
 	void testGetXJDFSchema21()
 	{
-		Assertions.assertNotNull(XMLDoc.parseFile(getXJDFSchema(2, 1)));
+		assertNotNull(XMLDoc.parseFile(getXJDFSchema(2, 1)));
 	}
 
 	/**
@@ -247,7 +251,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		final JDFDoc doc = getXJDFSchemaParser().parseString(root.toXML());
-		Assertions.assertNotNull(doc.getValidationResult());
+		assertNotNull(doc.getValidationResult());
 	}
 
 	/**
@@ -316,8 +320,8 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 			if (!"further".equalsIgnoreCase(f.getParentFile().getName()))
 			{
 				final JDFDoc doc = getXJDFSchemaParser(2, 1).parseFile(f);
-				Assertions.assertNotNull(doc, f.getName());
-				Assertions.assertEquals("Valid", doc.getValidationResult().getRoot().getAttribute("ValidationResult"), f.getAbsolutePath());
+				assertNotNull(doc, f.getName());
+				assertEquals("Valid", doc.getValidationResult().getRoot().getAttribute("ValidationResult"), f.getAbsolutePath());
 			}
 		}
 	}
@@ -333,7 +337,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		xjdfHelper.getCreateRootProduct(0).setAttribute(AttributeName.PARTVERSION, "PV1");
 		xjdfHelper.setTypes(JDFConstants.PRODUCT);
 		xjdfHelper.cleanUp();
-		Assertions.assertTrue(reparse(root, 2, 1));
+		assertTrue(reparse(root, 2, 1));
 	}
 
 	/**
@@ -363,7 +367,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		parser.setSchemaLocation(JDFElement.getSchemaURL(2, 1), UrlUtil.normalize(schemaUrl));
 		// TODO update linked xerces
 		SchemaFactory.newInstance("http://www.w3.org/XML/XMLSchema/v1.1");
-		Assertions.assertNotNull(parser.parseString(root.toXML()));
+		assertNotNull(parser.parseString(root.toXML()));
 	}
 
 	/**
@@ -394,13 +398,13 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"Color\"]/Resource/Color/@CMYK", "1 0.2 0.3 0.4");
 		root.setAttribute("Types", "ConventionalPrinting");
-		Assertions.assertTrue(reparse(root, 2, 1));
+		assertTrue(reparse(root, 2, -1));
 		root.setXPathAttribute("ResourceSet[@Name=\"Color\"]/Resource/Color/@CMYK", "1 0.2 0.3");
-		Assertions.assertFalse(reparse(root, 2, 1));
+		assertFalse(reparse(root, 2, -1));
 		root.setXPathAttribute("ResourceSet[@Name=\"Color\"]/Resource/Color/@CMYK", "1 0.2 0.3 0.4 0.5");
-		Assertions.assertFalse(reparse(root, 2, 1));
+		assertFalse(reparse(root, 2, -1));
 		root.setXPathAttribute("ResourceSet[@Name=\"Color\"]/Resource/Color/@CMYK", "1 0,2 0,3 0,4");
-		Assertions.assertFalse(reparse(root, 2, 1));
+		assertFalse(reparse(root, 2, -1));
 	}
 
 	/**
@@ -412,11 +416,11 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setAttribute("Types", "ConventionalPrinting");
 		root.setXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/Address/@CountryCode", "DE");
-		Assertions.assertTrue(reparse(root, 2, 1));
+		assertTrue(reparse(root, 2, -1));
 		root.setXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/Address/@CountryCode", "D2");
-		Assertions.assertFalse(reparse(root, 2, 1));
+		assertFalse(reparse(root, 2, -1));
 		root.setXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/Address/@CountryCode", "987");
-		Assertions.assertFalse(reparse(root, 2, 1));
+		assertFalse(reparse(root, 2, -1));
 	}
 
 	/**
@@ -428,9 +432,9 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@CheckSum", StringUtil.setHexBinaryBytes(new byte[] { 1, 2, 3 }, -1));
 		root.setAttribute("Types", "ConventionalPrinting");
-		Assertions.assertTrue(reparse(root, 2, 1));
+		assertTrue(reparse(root, 2, -1));
 		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@CheckSum", "123");
-		Assertions.assertFalse(reparse(root, 2, 1));
+		assertFalse(reparse(root, 2, -1));
 	}
 
 	/**
@@ -442,9 +446,9 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@FileSize", "123456789012345");
 		root.setAttribute("Types", "ConventionalPrinting");
-		Assertions.assertTrue(reparse(root, 2, 1));
+		assertTrue(reparse(root, 2, -1));
 		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@FileSize", "123456789012345.12");
-		Assertions.assertFalse(reparse(root, 2, 1));
+		assertFalse(reparse(root, 2, -1));
 	}
 
 	/**
@@ -456,16 +460,16 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@CheckSum", StringUtil.setHexBinaryBytes(new byte[] { 1, 2, 3 }, -1));
 		root.setAttribute("Types", "ConventionalPrinting");
-		Assertions.assertTrue(reparse(root, 2, 1));
+		assertTrue(reparse(root, 2, -1));
 		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/NetworkHeader/@Name", "HeaderName");
-		Assertions.assertFalse(reparse(root, 2, 1));
+		assertFalse(reparse(root, 2, -1));
 		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/NetworkHeader/@Value", "HeaderName");
-		Assertions.assertTrue(reparse(root, 2, 1));
-		Assertions.assertFalse(reparse(root, 2, 0));
+		assertTrue(reparse(root, 2, -1));
+		assertFalse(reparse(root, 2, 0));
 		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/NetworkHeader[2]/@Name", "HeaderName");
-		Assertions.assertFalse(reparse(root, 2, 1));
+		assertFalse(reparse(root, 2, -1));
 		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/NetworkHeader[2]/@Value", "HeaderName");
-		Assertions.assertTrue(reparse(root, 2, 1));
+		assertTrue(reparse(root, 2, -1));
 	}
 
 	/**
@@ -480,12 +484,12 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		final String xml = root.getOwnerDocument_KElement().write2String(2);
 		final JDFParser p = getXJDFSchemaParser();
 		final JDFDoc xParsed = p.parseString(xml);
-		Assertions.assertFalse(xParsed.isSchemaValid());
+		assertFalse(xParsed.isSchemaValid());
 		root.setXPathAttribute("ResourceSet[@Name=\"NodeInfo\"]/Resource/NodeInfo/@Start", new JDFDate().getDateTimeISO());
 		final String xml2 = root.getOwnerDocument_KElement().write2String(2);
 		final JDFParser p2 = getXJDFSchemaParser();
 		final JDFDoc xParsed2 = p2.parseString(xml2);
-		Assertions.assertTrue(xParsed2.isSchemaValid());
+		assertTrue(xParsed2.isSchemaValid());
 	}
 
 	/**
@@ -500,12 +504,12 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		final String xml = root.getOwnerDocument_KElement().write2String(2);
 		final JDFParser p = getXJDFSchemaParser(2, 0);
 		final JDFDoc xParsed = p.parseString(xml);
-		Assertions.assertFalse(xParsed.isSchemaValid());
+		assertFalse(xParsed.isSchemaValid());
 		root.setXPathAttribute("ResourceSet[@Name=\"NodeInfo\"]/Resource/NodeInfo/@TotalDuration", new JDFDuration(999).getDurationISO());
 		final String xml2 = root.getOwnerDocument_KElement().write2String(2);
 		final JDFParser p2 = getXJDFSchemaParser();
 		final JDFDoc xParsed2 = p2.parseString(xml2);
-		Assertions.assertTrue(xParsed2.isSchemaValid());
+		assertTrue(xParsed2.isSchemaValid());
 	}
 
 	/**
