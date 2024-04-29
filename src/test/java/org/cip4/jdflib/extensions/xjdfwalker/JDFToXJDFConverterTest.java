@@ -282,7 +282,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	{
 		final long ct = System.currentTimeMillis();
 		final String jobID = "Varnish" + ct;
-		final XJDFHelper xjdfHelper = new XJDFHelper(EnumVersion.Version_2_1, jobID);
+		final XJDFHelper xjdfHelper = new XJDFHelper(getDefaultXJDFVersion(), jobID);
 		xjdfHelper.setTypes(new VString("ConventionalPrinting"));
 
 		final SetHelper pm = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
@@ -2685,7 +2685,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	@Test
 	void testDefVersion()
 	{
-		assertEquals(EnumVersion.Version_2_1, JDFToXJDF.getDefaultVersion());
+		assertEquals(EnumVersion.Version_2_2, JDFToXJDF.getDefaultVersion());
 	}
 
 	/**

@@ -1963,7 +1963,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		h.setVersion(EnumVersion.Version_2_1);
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final JDFDoc d = xCon.convert(h);
-		assertEquals(EnumVersion.Version_1_7, xCon.getVersion());
+		assertEquals(JDFElement.getDefaultJDFVersion(), xCon.getVersion());
 
 	}
 

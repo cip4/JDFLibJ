@@ -691,7 +691,7 @@ public abstract class JDFTestCaseBase
 				printValid(converted);
 			}
 			assertTrue(valid, fileBase + ".xjdf.jdf");
-			final JDFDoc schemaParsed = getSchemaParser(EnumVersion.Version_1_8).parseFile(fileXJ);
+			final JDFDoc schemaParsed = getSchemaParser(defaultVersion).parseFile(fileXJ);
 			dVal = schemaParsed.getValidationResult();
 			valResult = dVal.getRoot().getAttribute("ValidationResult");
 			assertEquals(valResult, VALID);
@@ -701,7 +701,8 @@ public abstract class JDFTestCaseBase
 
 			final String roundXjdf = sm_dirTestDataTemp + fileBase + ".jdf.xjdf";
 			root.write2File(roundXjdf);
-			docXJDF = p.parseFile(roundXjdf);
+			final JDFParser pRound = getXJDFSchemaParser(2, getMinor(root));
+			docXJDF = pRound.parseFile(roundXjdf);
 			dVal = docXJDF.getValidationResult();
 			valResult = dVal.getRoot().getAttribute("ValidationResult");
 			if (!VALID.equals(valResult))
@@ -709,6 +710,7 @@ public abstract class JDFTestCaseBase
 				dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.jdf.xml", 2, false);
 			}
 			assertEquals(VALID, valResult);
+			JDFParserFactory.getFactory().push(pRound);
 		}
 		JDFParserFactory.getFactory().push(p);
 		return jxRoot;
