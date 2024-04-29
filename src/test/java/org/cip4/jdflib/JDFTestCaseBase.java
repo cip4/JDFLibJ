@@ -190,9 +190,9 @@ public abstract class JDFTestCaseBase
 	}
 
 	static protected final String sm_dirTestData = getTestDataDir();
-	static protected final EnumVersion defaultVersion = JDFElement.getDefaultJDFVersion();
+	static protected final EnumVersion defaultVersion = EnumVersion.Version_1_8;
 	static protected final String sm_dirTestSchemaBase = sm_dirTestData + "schema" + File.separator + "Version_";
-	static protected final String sm_dirTestSchema = sm_dirTestSchemaBase + "1_6" + File.separator;
+	static protected final String sm_dirTestSchema = sm_dirTestSchemaBase + "1_8" + File.separator;
 	static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;
 
 	private static String getTestDataDir()
@@ -783,7 +783,7 @@ public abstract class JDFTestCaseBase
 	 */
 	protected JDFParser getSchemaParser()
 	{
-		return getSchemaParser(EnumVersion.Version_1_6);
+		return getSchemaParser(defaultVersion);
 	}
 
 	/**

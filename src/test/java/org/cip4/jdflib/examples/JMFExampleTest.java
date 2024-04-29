@@ -46,9 +46,7 @@ import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -179,10 +177,10 @@ public class JMFExampleTest extends ExampleTest
 		final JDFJMF jmf = b.buildResumeQueueEntry("entry1");
 		jmf.getCommand(0).setID("ID_ResumeQuery");
 
-		JDFJMF jmfr = jmf.createResponse();
+		final JDFJMF jmfr = jmf.createResponse();
 
-		JDFResponse r = jmfr.getResponse(0);
-		JDFQueueEntry qe = r.appendQueue().appendQueueEntry();
+		final JDFResponse r = jmfr.getResponse(0);
+		final JDFQueueEntry qe = r.appendQueue().appendQueueEntry();
 		qe.setQueueEntryID("entry1");
 		qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
 		writeTest(jmfr, "ResponseResumeQueueEntry.jmf", true, null);
@@ -200,10 +198,10 @@ public class JMFExampleTest extends ExampleTest
 		final JDFJMF jmf = b.buildKnownDevicesQuery(JDFDeviceFilter.EnumDeviceDetails.Brief);
 		jmf.getQuery(0).setID("ID_KnownDev");
 
-		JDFJMF jmfr = jmf.createResponse();
+		final JDFJMF jmfr = jmf.createResponse();
 
-		JDFResponse r = jmfr.getResponse(0);
-		JDFDeviceList dl = r.appendDeviceList();
+		final JDFResponse r = jmfr.getResponse(0);
+		final JDFDeviceList dl = r.appendDeviceList();
 		dl.getCreateDeviceInfo(0).setDeviceID("d1");
 		dl.getCreateDeviceInfo(1).setDeviceID("d2");
 		writeTest(jmfr, "ResponseKnownDevice.jmf", true, null);
@@ -219,11 +217,11 @@ public class JMFExampleTest extends ExampleTest
 	{
 		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		final JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
-		JDFSignal s = jmf.getSignal(0);
+		final JDFSignal s = jmf.getSignal(0);
 		s.getStatusQuParams().setJobID("job1");
-		JDFDeviceInfo di = s.getDeviceInfo(0);
+		final JDFDeviceInfo di = s.getDeviceInfo(0);
 		di.setDeviceStatus(EnumDeviceStatus.Setup);
-		JDFJobPhase jp = di.getCreateJobPhase(0);
+		final JDFJobPhase jp = di.getCreateJobPhase(0);
 		jp.setJobID("job1");
 		jp.setStatus(EnumNodeStatus.Setup);
 		writeTest(jmf, "StatusSignal.jmf", true, null);
@@ -261,7 +259,7 @@ public class JMFExampleTest extends ExampleTest
 
 		writeTest(jmf, "jmf/abortqueentry.jmf", true, "Command");
 
-		JDFJMF jmf2 = jmf.createResponse();
+		final JDFJMF jmf2 = jmf.createResponse();
 		writeTest(jmf2, "jmf/abortqueentryresponse.jmf", true, "Response");
 	}
 
@@ -301,7 +299,6 @@ public class JMFExampleTest extends ExampleTest
 		JDFAudit.setStaticAgentName(null);
 		JDFAudit.setStaticAgentVersion(null);
 
-		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_8);
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentName(null);
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentVersion(null);
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID(null);
