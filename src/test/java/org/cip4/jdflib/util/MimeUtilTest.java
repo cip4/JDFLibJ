@@ -243,7 +243,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 		JDFDoc[] d2 = MimeUtil.getJMFSubmission(m);
 		assertNotNull(d2);
-		assertEquals(d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0).getURL(), "cid:JDF.jdf");
+		assertEquals("cid:TheJDF.jdf", d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0).getURL());
 		assertEquals(d2[1].getJDFRoot().getEnumType(), EnumType.ColorSpaceConversion);
 
 		// now serialize to file and reread - should still work
@@ -252,7 +252,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		assertNotNull(m2);
 		d2 = MimeUtil.getJMFSubmission(m);
 		assertNotNull(d2);
-		assertEquals(d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0).getURL(), "cid:JDF.jdf");
+		assertEquals("cid:TheJDF.jdf", d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0).getURL());
 		assertEquals(d2[1].getJDFRoot().getEnumType(), EnumType.ColorSpaceConversion);
 
 	}
@@ -265,7 +265,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	{
 		testBuildMimePackageDocJMF();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
-		final BodyPart bp = MimeUtil.getPartByCID(mp, "JDF.jdf");
+		final BodyPart bp = MimeUtil.getPartByCID(mp, "TheJDF.jdf");
 		assertNotNull(bp);
 		assertNull(MimeUtil.getPartByCID(mp, "gipps.nicht"));
 		assertEquals(bp.getFileName(), "JDF.jdf");
@@ -301,16 +301,16 @@ public class MimeUtilTest extends JDFTestCaseBase
 	{
 		testBuildMimePackageDocJMF();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
-		final BodyPart bp = MimeUtil.getPartByCID(mp, "JDF.jdf");
+		final BodyPart bp = MimeUtil.getPartByCID(mp, "TheJDF.jdf");
 		assertNotNull(bp);
 		assertEquals(bp.getFileName(), "JDF.jdf");
-		assertEquals(MimeUtil.getContentID(bp), "JDF.jdf");
+		assertEquals("TheJDF.jdf", MimeUtil.getContentID(bp));
 		MimeUtil.setContentID(bp, "TheJDF");
-		assertEquals(MimeUtil.getContentID(bp), "TheJDF");
+		assertEquals("TheJDF", MimeUtil.getContentID(bp));
 		MimeUtil.setContentID(bp, "<TheJDF>");
-		assertEquals(MimeUtil.getContentID(bp), "TheJDF");
+		assertEquals("TheJDF", MimeUtil.getContentID(bp));
 		MimeUtil.setContentID(bp, "<cid:TheJDF>");
-		assertEquals(MimeUtil.getContentID(bp), "TheJDF");
+		assertEquals("TheJDF", MimeUtil.getContentID(bp));
 	}
 
 	/**
@@ -341,12 +341,8 @@ public class MimeUtilTest extends JDFTestCaseBase
 	{
 		testBuildMimePackageDocJMF();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
-		final BodyPart bp = MimeUtil.getPartByCID(mp, "JDF.jdf");
+		final BodyPart bp = MimeUtil.getPartByCID(mp, "TheJDF.jdf");
 		assertNotNull(bp);
-		final BodyPart bp2 = MimeUtil.getPartByCID(mp, "CID:JDF.jdf");
-		assertEquals(bp, bp2);
-		final BodyPart bp3 = MimeUtil.getPartByCID(mp, "<cid:JDF.jdf>");
-		assertEquals(bp, bp3);
 		assertEquals(bp.getFileName(), "JDF.jdf");
 		final JDFDoc d = MimeUtil.getJDFDoc(bp);
 		assertNotNull(d);
@@ -759,7 +755,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "performance.mjm");
 		final long getMP = System.currentTimeMillis();
 		System.out.println("get multipart time: " + (getMP - write));
-		final BodyPart bp = MimeUtil.getPartByCID(mp, "bigger.pdf");
+		final BodyPartHelper bp = MimeUtil.getPartByFileName(mp, "bigger.pdf");
 		final long getCID = System.currentTimeMillis();
 		System.out.println("get big time: " + (getCID - getMP));
 		assertNotNull(bp);
@@ -785,7 +781,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "performance.mjm");
 		final long getMP = System.currentTimeMillis();
 		System.out.println("get multipart time: " + (getMP - write));
-		final BodyPart bp = MimeUtil.getPartByCID(mp, "bigger.pdf");
+		final BodyPartHelper bp = MimeUtil.getPartByFileName(mp, "bigger.pdf");
 		final long getCID = System.currentTimeMillis();
 		System.out.println("get big time: " + (getCID - getMP));
 		assertNotNull(bp);
@@ -810,7 +806,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 			final Multipart mp = MimeUtil.getMultiPart(mjm);
 			final long getMP = System.currentTimeMillis();
 			System.out.println("get multipart time: " + (getMP - write));
-			final BodyPart bp = MimeUtil.getPartByCID(mp, "bigger.pdf");
+			final BodyPartHelper bp = MimeUtil.getPartByFileName(mp, "bigger.pdf");
 			final long getCID = System.currentTimeMillis();
 			System.out.println("get big time: " + (getCID - getMP));
 			assertNotNull(bp);

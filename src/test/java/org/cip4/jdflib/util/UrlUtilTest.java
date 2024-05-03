@@ -1170,7 +1170,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		new MimeUtilTest().testBuildMimePackageDoc();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + "testMimePackageDoc.mjm");
-		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
+		final BodyPart bp = MimeUtil.getPartByCID(mp, "thejdf.JDF");
 		final JDFDoc d = MimeUtil.getJDFDoc(bp);
 		final JDFNode n = d.getJDFRoot();
 		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.getMatchingResource(ElementName.COLORSPACECONVERSIONPARAMS, null, null, 0);

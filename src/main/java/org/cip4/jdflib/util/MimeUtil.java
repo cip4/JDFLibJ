@@ -261,6 +261,18 @@ public class MimeUtil extends UrlUtil
 	}
 
 	/**
+	 * get the MIME BodyPart from a multiPart package with a given file name
+	 *
+	 * @param mp the multipart package to search in
+	 * @param name the cid of the requested bodypart
+	 * @return BodyPart the matching BodyPart, null if none is found
+	 */
+	public static BodyPartHelper getPartByFileName(final Multipart mp, final String name)
+	{
+		return new MimeHelper(mp).getPartHelperByLocalName(name);
+	}
+
+	/**
 	 * get the MIME BodyPart from a multiPart package with a given cid create one if it does not exist;
 	 *
 	 * @param mp the multipart package to search in

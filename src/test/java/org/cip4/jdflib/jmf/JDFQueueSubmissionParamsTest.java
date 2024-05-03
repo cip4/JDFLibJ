@@ -130,7 +130,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	@Test
 	void testAddNull()
 	{
-		JDFResponse resp = qsp.addEntry(null, null, null);
+		final JDFResponse resp = qsp.addEntry(null, null, null);
 		assertEquals(2, resp.getReturnCode());
 	}
 
@@ -149,7 +149,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	@Test
 	void testAddEntry()
 	{
-		JDFResponse resp = qsp.addEntry(theQueue, null, null);
+		final JDFResponse resp = qsp.addEntry(theQueue, null, null);
 		assertEquals(0, resp.getReturnCode());
 		assertNull(resp.getQueue(0));
 	}
@@ -160,7 +160,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	@Test
 	void testAddQueueEntry()
 	{
-		MyPair<JDFResponse, JDFQueueEntry> resp = qsp.addQueueEntry(theQueue, null, null);
+		final MyPair<JDFResponse, JDFQueueEntry> resp = qsp.addQueueEntry(theQueue, null, null);
 		assertEquals(0, resp.a.getReturnCode());
 		assertNull(resp.a.getQueue(0));
 		assertEquals(theQueue.getQueueEntry(0), resp.b);
@@ -176,18 +176,18 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 		{
 			theQueue.appendQueueEntry().setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
 		}
-		JDFQueueFilter f = (JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();
+		final JDFQueueFilter f = (JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();
 		f.setMaxEntries(0);
 		for (int b = 0; b < 2; b++)
 		{
 			theQueue.setAutomated(b == 1);
-			CPUTimer t = new CPUTimer(false);
+			final CPUTimer t = new CPUTimer(false);
 			for (int i = 0; i < 300; i++)
 			{
 				t.start();
-				JDFResponse resp = qsp.addEntry(theQueue, null, f);
+				final JDFResponse resp = qsp.addEntry(theQueue, null, f);
 				assertEquals(0, resp.getReturnCode());
-				JDFQueueEntry queueResp = resp.getQueueEntry(0);
+				final JDFQueueEntry queueResp = resp.getQueueEntry(0);
 				assertNotNull(queueResp);
 				t.stop();
 				if (i % 100 == 0)
@@ -204,30 +204,31 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	@Test
 	void testGetMimeURL()
 	{
-		JDFDoc d1 = new JDFDoc("JMF");
+		final JDFDoc d1 = new JDFDoc("JMF");
 		d1.setOriginalFileName("JMF.jmf");
-		JDFJMF jmf = d1.getJMFRoot();
-		JDFCommand com = (JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
+		final JDFJMF jmf = d1.getJMFRoot();
+		final JDFCommand com = (JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
 
 		com.appendQueueSubmissionParams().setURL("cid:TheJDF");
 
-		JDFDoc doc = new JDFDoc("JDF");
+		final JDFDoc doc = new JDFDoc("JDF");
 		doc.setOriginalFileName("JDF.jdf");
-		JDFNode n = doc.getJDFRoot();
+		final JDFNode n = doc.getJDFRoot();
 		n.setType(JDFNode.EnumType.ColorSpaceConversion);
-		JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
-		JDFFileSpec fs0 = cscp.appendFinalTargetDevice();
+		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null,
+				null);
+		final JDFFileSpec fs0 = cscp.appendFinalTargetDevice();
 		fs0.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "test.icc", true));
-		JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
+		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
 		rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "url1.pdf", false), 0, -1);
-		Multipart m = MimeUtil.buildMimePackage(d1, doc, true);
+		final Multipart m = MimeUtil.buildMimePackage(d1, doc, true);
 
-		JDFDoc[] d2 = MimeUtil.getJMFSubmission(m);
+		final JDFDoc[] d2 = MimeUtil.getJMFSubmission(m);
 		assertNotNull(d2);
 		final JDFQueueSubmissionParams queueSubmissionParams = d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0);
-		assertEquals(queueSubmissionParams.getURL(), "cid:JDF.jdf");
+		assertEquals("cid:TheJDF.jdf", queueSubmissionParams.getURL());
 		assertEquals(d2[1].getJDFRoot().getEnumType(), JDFNode.EnumType.ColorSpaceConversion);
-		JDFDoc d3 = queueSubmissionParams.getURLDoc();
+		final JDFDoc d3 = queueSubmissionParams.getURLDoc();
 		assertNotNull(d3);
 		assertEquals(d3.getJDFRoot().getEnumType(), JDFNode.EnumType.ColorSpaceConversion);
 	}

@@ -75,6 +75,7 @@ import org.cip4.jdflib.util.MimeUtilTest;
 import org.cip4.jdflib.util.PlatformUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -209,8 +210,8 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		{
 			mp = MimeUtil.getMultiPart(fileStream);
 		}
-		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
-		final JDFDoc d = MimeUtil.getJDFDoc(bp);
+		final BodyPartHelper bp = MimeUtil.getPartByFileName(mp, "jdf.JDF");
+		final JDFDoc d = MimeUtil.getJDFDoc(bp.getBodyPart());
 		final JDFNode n = d.getJDFRoot();
 		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.getMatchingResource(ElementName.COLORSPACECONVERSIONPARAMS, null, null, 0);
 		assertNotNull(cscp);
@@ -261,7 +262,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		{
 			mp = MimeUtil.getMultiPart(fileStream);
 		}
-		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
+		final BodyPart bp = MimeUtil.getPartByCID(mp, "TheJDF.jdf");
 		final JDFDoc d = MimeUtil.getJDFDoc(bp);
 		final JDFNode n = d.getJDFRoot();
 		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.getMatchingResource(ElementName.COLORSPACECONVERSIONPARAMS, null, null, 0);
