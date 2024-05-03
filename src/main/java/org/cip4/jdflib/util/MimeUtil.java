@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -69,6 +69,8 @@ import org.cip4.jdflib.util.mime.MimeWriter;
  */
 public class MimeUtil extends UrlUtil
 {
+
+	public static final String CID = "cid:";
 
 	/**
 	 * helper class to set mime details
@@ -313,7 +315,7 @@ public class MimeUtil extends UrlUtil
 			cid = cid.substring(1);
 		}
 
-		if (cid.toLowerCase().startsWith("cid:"))
+		if (cid.toLowerCase().startsWith(CID))
 		{
 			cid = cid.substring(4);
 		}
@@ -464,7 +466,7 @@ public class MimeUtil extends UrlUtil
 			urlString = urlString.substring(1);
 		}
 
-		if (urlString.toLowerCase().startsWith("cid:"))
+		if (urlString.toLowerCase().startsWith(CID))
 		{
 			urlString = urlString.substring(4);
 		}
@@ -474,7 +476,8 @@ public class MimeUtil extends UrlUtil
 			urlString = urlString.substring(0, urlString.length() - 1);
 		}
 
-		return "cid:" + StringUtil.normalize(new File(urlString).getName(), false, JDFConstants.UNDERSCORE); //
+		final String normalized = StringUtil.normalizeASCII(urlString);
+		return CID + normalized; //
 	}
 
 	/**

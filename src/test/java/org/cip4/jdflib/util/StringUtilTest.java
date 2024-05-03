@@ -129,6 +129,18 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	@Test
+	void testNormalizeAscii()
+	{
+		assertEquals("AaBb", StringUtil.normalizeASCII("AaBb"));
+		assertEquals("A_b", StringUtil.normalizeASCII("A_b"));
+		assertEquals("A_b", StringUtil.normalizeASCII("A b"));
+		assertEquals("A_b", StringUtil.normalizeASCII("A   b"));
+		assertEquals("A_b", StringUtil.normalizeASCII("A   b "));
+		assertEquals("A_b", StringUtil.normalizeASCII("A  äöü b"));
+		assertEquals("A_b", StringUtil.normalizeASCII("Aäöüb"));
+	}
+
+	@Test
 	void testUndertoCamelLower1()
 	{
 		assertEquals("Aa", StringUtil.underToCamel("aa"));

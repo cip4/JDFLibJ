@@ -75,7 +75,6 @@ import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFResponse;
-import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.FileUtil;
@@ -349,15 +348,9 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 		}
 
 		final String originalFileName = xmlDoc.getOriginalFileName();
-		if (cid == null)
+		if (StringUtil.isEmpty(cid))
 		{
-			cid = originalFileName;
-		}
-
-		if (cid == null)
-		{
-			final KElement root = xmlDoc.getRoot();
-			cid = "CID_" + ((root instanceof JDFNode && root.hasAttribute(AttributeName.ID)) ? ((JDFNode) root).getID() : KElement.uniqueID(0));
+			cid = UrlUtil.extension(originalFileName) + KElement.uniqueID(0, false);
 		}
 
 		final BodyPart messageBodyPart = getCreatePartByCID(cid);
@@ -368,11 +361,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 			bph.setContent(xmlDoc);
 			bph.setContentID(cid);
 		}
-		catch (final MessagingException x)
-		{
-			log.error("cannot update mime package", x);
-		}
-		catch (final IOException x)
+		catch (final Exception x)
 		{
 			log.error("cannot update mime package", x);
 		}
@@ -512,19 +501,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	 */
 	public void buildMimePackage(final JDFDoc docJMF, final XMLDoc docJDF, final boolean extendReferenced)
 	{
-		// Create a MIME package
-		String cid = null;
-		if (docJDF != null)
-		{
-			String originalFileName = docJDF.getOriginalFileName();
-			if (KElement.isWildCard(originalFileName))
-			{
-				originalFileName = "TheJDF.jdf";
-			}
-
-			cid = MimeUtil.urlToCid(originalFileName);
-		}
-
+		final String cid = MimeUtil.urlToCid("TheJDF.jdf");
 		if (docJMF != null && cid != null)
 		{
 			String originalFileName = docJMF.getOriginalFileName();
@@ -569,7 +546,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	 * @param cid the CID the JDF document should have in the multipart
 	 * @return the number of files added to the multipart
 	 */
-	int extendMultipart(final XMLDoc docJDF, String cid)
+	int extendMultipart(final XMLDoc docJDF, final String cid)
 	{
 		int n = 0;
 
@@ -578,19 +555,23 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 			log.error("cannot extend null JDF document");
 			return 0;
 		}
+		if (StringUtil.isEmpty(docJDF.getOriginalFileName()))
+		{
+			docJDF.setOriginalFileName("TheJDF.jdf");
+		}
 
 		// Get all FileSpec elements
 		final KElement e = docJDF.getRoot();
 		final VElement fileSpecs = e.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
-		Map<File, File> done = new HashMap<>();
-		List<BodyPartHelper> bodyparts = new ArrayList<>();
+		final Map<File, String> done = new HashMap<>();
+		final List<BodyPartHelper> bodyparts = new ArrayList<>();
 		if (fileSpecs != null)
 		{
-			for (KElement fs : fileSpecs)
+			for (final KElement fs : fileSpecs)
 			{
 				if (fs instanceof IURLSetter)
 				{
-					IURLSetter ius = (IURLSetter) fs;
+					final IURLSetter ius = (IURLSetter) fs;
 					// Convert URL to CID and update FileSpec
 					String url = ius.getURL();
 					File f = UrlUtil.urlToFile(url);
@@ -606,26 +587,24 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 								url = UrlUtil.fileToUrl(f, false);
 							}
 						}
-						File f2 = done.get(f);
-						if (f2 == null)
+						final String id2 = done.get(f);
+						if (id2 == null)
 						{
-							if (f.canRead())
-							{
-								ius.setURL(MimeUtil.urlToCid(url));
-							}
+							final String id = UrlUtil.extension(url) + KElement.uniqueID(0, false);
 							final BodyPartHelper bph = new BodyPartHelper();
 							final BodyPart bp = bph.createFromURL(url);
+							ius.setURL(MimeUtil.urlToCid(id));
 							if (bp != null)
 							{
+								bph.setContentID(id);
 								bodyparts.add(bph);
 								n++;
 							}
-							done.put(f, f);
+							done.put(f, id);
 						}
 						else
 						{
-							url = UrlUtil.fileToUrl(f2, false);
-							ius.setURL(MimeUtil.urlToCid(url));
+							ius.setURL(MimeUtil.urlToCid(id2));
 						}
 					}
 				}
@@ -634,7 +613,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 
 		updateXMLMultipart(docJDF, cid);
 
-		for (BodyPartHelper bph : bodyparts)
+		for (final BodyPartHelper bph : bodyparts)
 		{
 			addBodyPart(bph);
 		}
@@ -684,7 +663,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	 * @throws IOException
 	 * @throws MessagingException
 	 */
-	public JDFDoc writeToQueue(final JDFDoc docJMF, final JDFDoc docJDF, final String strUrl, boolean extendRef) throws IOException, MessagingException
+	public JDFDoc writeToQueue(final JDFDoc docJMF, final JDFDoc docJDF, final String strUrl, final boolean extendRef) throws IOException, MessagingException
 	{
 		JDFDoc doc = null;
 

@@ -3292,4 +3292,17 @@ public class StringUtil
 		return in == null || search == null ? -1 : in.indexOf(search, i);
 	}
 
+	/**
+	 * 
+	 * @param urlString
+	 * @return
+	 */
+	public static String normalizeASCII(final String urlString)
+	{
+		String normalized = StringUtil.normalize(UrlUtil.urlToFileName(urlString), false, JDFConstants.UNDERSCORE);
+		normalized = StringUtil.escape(normalized, UrlUtil.m_URIEscape, "_", -1, 0, 0x20, 0x7f);
+		normalized = StringUtil.replaceString(normalized, "__", JDFConstants.UNDERSCORE);
+		return normalized;
+	}
+
 }

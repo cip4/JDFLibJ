@@ -320,6 +320,46 @@ public class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	void testNastyRef() throws Exception
+	{
+		final JDFDoc docJMF = new JDFDoc("JMF");
+		final JDFJMF jmf = docJMF.getJMFRoot();
+		jmf.setSenderID("DeviceID");
+		final JDFCommand com = (JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.ReturnQueueEntry);
+		final JDFReturnQueueEntryParams returnQEParams = com.appendReturnQueueEntryParams();
+
+		final String queueEntryID = "qe1";
+		returnQEParams.setQueueEntryID(queueEntryID);
+		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
+		final JDFPreview pv = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		pv.setURL(sm_dirTestData + "spéciäl% charß €.pdf");
+		final JDFPreview pv1 = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		pv1.setURL(sm_dirTestData + "spéciäl% charß €.pdf");
+		returnQEParams.setURL("cid:dummy"); // will be overwritten by buildMimePackage
+		final MimeWriter mw = new MimeWriter();
+		mw.buildMimePackage(docJMF, docJDF, true);
+		assertEquals(3, mw.getCount());
+
+		final File f = new File(sm_dirTestDataTemp + "mimeurlpvnasty.mjm");
+		mw.writeToFile(f.getAbsolutePath());
+		final MimeReader mr = new MimeReader(f);
+		assertTrue(f.exists());
+		// assertNotNull(mr.getPartByCID(StringUtil.normalizeASCII("spéciäl% charß €.pdf")));
+		final JDFNode n = mr.getBodyPartHelper(1).getJDFDoc().getJDFRoot();
+		final JDFPreview pv2 = (JDFPreview) n.getResource(ElementName.PREVIEW);
+		assertNotNull(pv2.getURL());
+		assertNotNull(pv2.getURLInputStream());
+		assertEquals(3, mr.getCount());
+		final JDFPreview pv3 = (JDFPreview) n.getResource(ElementName.PREVIEW, null, 1);
+		assertEquals(pv2.getURL(), pv3.getURL());
+		assertNotNull(pv3.getURLInputStream());
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	void testWriteQueue() throws Exception
 	{
 		final JDFDoc docJMF = new JDFDoc("JMF");

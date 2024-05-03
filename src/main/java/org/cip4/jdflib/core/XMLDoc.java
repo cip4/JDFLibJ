@@ -424,7 +424,7 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 *
 	 * @param file
 	 *
-	 * @return boolean
+	 * @return the created file
 	 * 
 	 */
 	public File write2Zip(File file)
