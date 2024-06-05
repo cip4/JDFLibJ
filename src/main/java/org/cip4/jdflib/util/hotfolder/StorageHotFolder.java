@@ -75,7 +75,7 @@ public class StorageHotFolder
 		return processAux;
 	}
 
-	public void setProcessAux(boolean processAux)
+	public void setProcessAux(final boolean processAux)
 	{
 		this.processAux = processAux;
 	}
@@ -216,7 +216,19 @@ public class StorageHotFolder
 	 */
 	public void copyCompleted(final File storedFile, final boolean ok)
 	{
-		listenerImpl.get(0).copyCompleted(storedFile, ok);
+		copyCompleted(storedFile, ok, null);
+	}
+
+	/**
+	 *
+	 * copy any files to the ok or error files as set by the folder properties
+	 *
+	 * @param storedFile
+	 * @param ok
+	 */
+	public void copyCompleted(final File storedFile, final boolean ok, final Throwable t)
+	{
+		listenerImpl.get(0).copyCompleted(storedFile, ok, t);
 	}
 
 	/**
@@ -321,12 +333,12 @@ public class StorageHotFolder
 		return synchronous;
 	}
 
-	public void setSynchronous(boolean synchronous)
+	public void setSynchronous(final boolean synchronous)
 	{
 		this.synchronous = synchronous;
 	}
 
-	public void setMaxCheck(int maxCheck)
+	public void setMaxCheck(final int maxCheck)
 	{
 		hf.setMaxCheck(maxCheck);
 	}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -112,13 +112,16 @@ public class RemovePrivate extends BaseElementWalker
 			if (!zappAttributes)
 				return e1;
 
-			final VString unknown;
+			VString unknown = new VString();
 			if (prefixes == null)
 			{
 				if (!(e1 instanceof JDFElement))
 					return e1;
 				final JDFElement j = (JDFElement) e1;
-				unknown = j.getUnknownAttributes(false, -1);
+				if (!e1.getClass().equals(JDFElement.class))
+				{
+					unknown = j.getUnknownAttributes(false, -1);
+				}
 			}
 			else
 			{
@@ -208,7 +211,7 @@ public class RemovePrivate extends BaseElementWalker
 			}
 			else
 			{
-				b = !JDFConstants.JDFNAMESPACE.equals(toCheck.getNamespaceURI());
+				b = !JDFElement.isInAnyCIP4NameSpaceStatic(toCheck);
 			}
 			return b;
 		}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,16 +36,25 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class RemovePrivateTest {
+public class RemovePrivateTest
+{
 	/**
 	 *
 	 */
@@ -60,9 +69,28 @@ public class RemovePrivateTest {
 		n.getCreateAuditPool().appendElement("blah:e", "www.blah.com");
 		final RemovePrivate rp = new RemovePrivate();
 		rp.walkTree(n, null);
-		Assertions.assertNull(n.getAttribute("foo:bar", "www.foo.com", null));
-		Assertions.assertNull(n.getElement("e", "www.blah.com", 0));
-		Assertions.assertNotNull(n.getAuditPool());
+		assertNull(n.getAttribute("foo:bar", "www.foo.com", null));
+		assertNull(n.getElement("e", "www.blah.com", 0));
+		assertNotNull(n.getAuditPool());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testRemoveXJDF()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(EnumVersion.Version_2_2, "j1");
+		final SetHelper sh = xjdfHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
+		final JDFDoc d = xjdfHelper.getRootDoc();
+		final KElement n = d.getRoot();
+		n.setAttribute("foo:bar", "www.foo.com", "blub");
+		n.appendElement("blah:e", "www.blah.com");
+		final RemovePrivate rp = new RemovePrivate();
+		rp.walkTree(n, null);
+		assertNull(n.getAttribute("foo:bar", "www.foo.com", null));
+		assertNull(n.getElement("e", "www.blah.com", 0));
+		assertEquals(sh, xjdfHelper.getSet(ElementName.NODEINFO, EnumUsage.Input));
 	}
 
 	/**
@@ -77,9 +105,9 @@ public class RemovePrivateTest {
 		final RemovePrivate rp = new RemovePrivate();
 		rp.addPrefix("foo");
 		rp.walkTree(e, null);
-		Assertions.assertNull(e.getNonEmpty("foo:bar"));
-		Assertions.assertNull(e.getNonEmpty("bar"));
-		Assertions.assertNull(e.getNonEmpty("xmlns:foo"));
+		assertNull(e.getNonEmpty("foo:bar"));
+		assertNull(e.getNonEmpty("bar"));
+		assertNull(e.getNonEmpty("xmlns:foo"));
 	}
 
 	/**
@@ -97,9 +125,9 @@ public class RemovePrivateTest {
 		final RemovePrivate rp = new RemovePrivate();
 		rp.setZappAttributes(false);
 		rp.walkTree(n, null);
-		Assertions.assertEquals("blub", n.getAttribute("foo:bar", "www.foo.com", null));
-		Assertions.assertNull(n.getElement("e", "www.blah.com", 0));
-		Assertions.assertNotNull(n.getAuditPool());
+		assertEquals("blub", n.getAttribute("foo:bar", "www.foo.com", null));
+		assertNull(n.getElement("e", "www.blah.com", 0));
+		assertNotNull(n.getAuditPool());
 	}
 
 	/**
@@ -117,9 +145,9 @@ public class RemovePrivateTest {
 		final RemovePrivate rp = new RemovePrivate();
 		rp.setZappElements(false);
 		rp.walkTree(n, null);
-		Assertions.assertNull(n.getAttribute("foo:bar", "www.foo.com", null));
-		Assertions.assertEquals(e1, n.getElement("e", "www.blah.com", 0));
-		Assertions.assertNotNull(n.getAuditPool());
+		assertNull(n.getAttribute("foo:bar", "www.foo.com", null));
+		assertEquals(e1, n.getElement("e", "www.blah.com", 0));
+		assertNotNull(n.getAuditPool());
 	}
 
 	/**
@@ -133,21 +161,21 @@ public class RemovePrivateTest {
 		n.appendGeneralID("foo:key", "bar");
 		final RemovePrivate rp = new RemovePrivate();
 		rp.walkTree(n, null);
-		Assertions.assertNull(n.getGeneralID(0));
+		assertNull(n.getGeneralID(0));
 		n.appendGeneralID("key", "bar");
 		rp.walkTree(n, null);
-		Assertions.assertEquals(n.getGeneralID("key", 0), "bar");
+		assertEquals(n.getGeneralID("key", 0), "bar");
 		n.appendGeneralID("foo:key", "bar");
 		rp.addPrefix("blub");
 		rp.walkTree(n, null);
-		Assertions.assertEquals(n.getGeneralID("foo:key", 0), "bar");
+		assertEquals(n.getGeneralID("foo:key", 0), "bar");
 		rp.addPrefix("foo");
 		rp.setZappGeneralID(false);
 		rp.walkTree(n, null);
-		Assertions.assertEquals(n.getGeneralID("foo:key", 0), "bar");
+		assertEquals(n.getGeneralID("foo:key", 0), "bar");
 		rp.setZappGeneralID(true);
 		rp.walkTree(n, null);
-		Assertions.assertNull(n.getGeneralID("foo:key", 0));
+		assertNull(n.getGeneralID("foo:key", 0));
 	}
 
 	/**
@@ -166,10 +194,10 @@ public class RemovePrivateTest {
 		final RemovePrivate rp = new RemovePrivate();
 		rp.addPrefix("foo");
 		rp.walkTree(n, null);
-		Assertions.assertNull(n.getAttribute("bar", "www.foo.com", null));
-		Assertions.assertNotNull(n.getAttribute("blah", "www.blah.com", null));
-		Assertions.assertNotNull(n.getElement("e", "www.blah.com", 0));
-		Assertions.assertNotNull(n.getAuditPool());
+		assertNull(n.getAttribute("bar", "www.foo.com", null));
+		assertNotNull(n.getAttribute("blah", "www.blah.com", null));
+		assertNotNull(n.getElement("e", "www.blah.com", 0));
+		assertNotNull(n.getAuditPool());
 
 	}
 }

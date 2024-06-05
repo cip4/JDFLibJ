@@ -2975,6 +2975,34 @@ public class JDFElement extends KElement
 	 * @param ns the KElement to check
 	 * @return boolean - true, if kElem is in the JDF namespace
 	 */
+	public static boolean isInAnyCIP4NameSpaceStatic(final String ns)
+	{
+		return ns != null && (ns.startsWith("http://www.CIP4.org/"));
+	}
+
+	/**
+	 * checks whether kElem is in the JDF namespace
+	 *
+	 * @param kElem the KElement to check
+	 * @return boolean - true, if kElem is in the JDF namespace
+	 */
+	public static boolean isInAnyCIP4NameSpaceStatic(final KElement kElem)
+	{
+		if (kElem == null)
+		{
+			return false; // null ain't no jdf
+		}
+
+		final String ns = kElem.getNamespaceURI();
+		return isInAnyCIP4NameSpaceStatic(ns);
+	}
+
+	/**
+	 * checks whether kElem is in the XJDF or the JDF namespace
+	 *
+	 * @param ns the KElement to check
+	 * @return boolean - true, if kElem is in the JDF namespace
+	 */
 	public static boolean isInAnyJDFNameSpaceStatic(final String ns)
 	{
 		return ns != null && (ns.startsWith("http://www.CIP4.org/JDFSchema_"));

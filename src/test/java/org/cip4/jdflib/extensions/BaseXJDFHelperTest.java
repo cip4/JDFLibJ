@@ -40,6 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.junit.jupiter.api.Assertions;
@@ -88,6 +89,18 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("a", "b", null);
 		final KElement e = xjdfHelper.getRoot();
+		assertEquals(xjdfHelper, BaseXJDFHelper.getBaseHelper(e));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetBaseRootDoc()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper("a", "b", null);
+		final JDFDoc e = xjdfHelper.getRootDoc();
 		assertEquals(xjdfHelper, BaseXJDFHelper.getBaseHelper(e));
 	}
 

@@ -47,9 +47,11 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
@@ -1501,6 +1503,29 @@ public class FileUtil
 	public static boolean isWindows()
 	{
 		return PlatformUtil.isWindows();
+	}
+
+	public static void dumpException(final File except, final Throwable t)
+	{
+		try
+		{
+			createNewFile(except);
+			final FileWriter w = new FileWriter(except);
+			w.write(t.getClass().getSimpleName());
+			w.write("\n");
+			w.write("Message: " + t.getMessage());
+			w.write("\n");
+			final PrintWriter pw = new PrintWriter(w);
+
+			t.printStackTrace(pw);
+			pw.flush();
+			pw.close();
+		}
+		catch (final IOException e)
+		{
+			log.error("Cannot write to exception file: " + except, e);
+		}
+
 	}
 
 }

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -42,6 +42,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
@@ -240,6 +241,15 @@ public abstract class BaseXJDFHelper
 	public KElement getRoot()
 	{
 		return theElement;
+	}
+
+	/**
+	 *
+	 * @return the underlying element
+	 */
+	public JDFDoc getRootDoc()
+	{
+		return theElement == null ? null : new JDFDoc(theElement.getOwnerDocument());
 	}
 
 	/**
@@ -503,7 +513,7 @@ public abstract class BaseXJDFHelper
 		return theElement == null ? null : theElement.getAttributeMap();
 	}
 
-	public KElement appendElement(String elementName, String nameSpaceURI)
+	public KElement appendElement(final String elementName, final String nameSpaceURI)
 	{
 		return theElement == null ? null : theElement.appendElement(elementName, nameSpaceURI);
 	}

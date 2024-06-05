@@ -37,6 +37,7 @@
 package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -62,7 +63,7 @@ class StorageHotFolderListener implements HotFolderListener
 	private File errorStorage;
 	private File okStorage;
 	final StorageHotFolder parent;
-	protected final Log log;
+	private static final Log log = LogFactory.getLog(StorageHotFolderListener.class);
 	private final AtomicInteger nHotOK;
 	private final AtomicInteger nHotError;
 	private final AtomicInteger nQueued;
@@ -80,9 +81,6 @@ class StorageHotFolderListener implements HotFolderListener
 		nHotError = new AtomicInteger();
 		nQueued = new AtomicInteger();
 		setMaxStore(42);
-		errorStorage = null;
-		okStorage = null;
-		log = LogFactory.getLog(getClass());
 		if (hfListener == null)
 		{
 			log.error("hfListner MUST NOT be null");
@@ -91,6 +89,8 @@ class StorageHotFolderListener implements HotFolderListener
 		theListener = hfListener;
 		storage = storageDir;
 		this.parent = parent;
+		errorStorage = new File(parent.getHfDirectory(), "error");
+		okStorage = new File(parent.getHfDirectory(), "ok");
 	}
 
 	/**
@@ -138,7 +138,7 @@ class StorageHotFolderListener implements HotFolderListener
 
 	class DelayedRunner implements Runnable
 	{
-		public DelayedRunner(File hotFile)
+		public DelayedRunner(final File hotFile)
 		{
 			super();
 			this.hotFile = hotFile;
@@ -161,12 +161,12 @@ class StorageHotFolderListener implements HotFolderListener
 			final MyPair<File, File> storedFiles = getStoredFile(hotFile);
 			if (storedFiles == null)
 			{
-				log.warn("snafu retrieving file " + hotFile.getAbsolutePath());
-				copyCompleted(hotFile, false);
+				copyCompleted(hotFile, false, new FileNotFoundException("snafu retrieving file " + hotFile.getAbsolutePath()));
 				ok = false; // not good
 			}
 			else
 			{
+				Throwable t0 = null;
 				try
 				{
 					ok = theListener.hotFile(storedFiles.getA());
@@ -174,8 +174,9 @@ class StorageHotFolderListener implements HotFolderListener
 				catch (final Throwable t)
 				{
 					log.error("Could not process " + hotFile, t);
+					t0 = t;
 				}
-				copyCompleted(storedFiles.getA(), ok);
+				copyCompleted(storedFiles.getA(), ok, t0);
 				if (nQueued.get() % 100 == 0)
 				{
 					log.info("deleting tmp file: " + storedFiles.getB());
@@ -195,7 +196,7 @@ class StorageHotFolderListener implements HotFolderListener
 	@Override
 	public boolean hotFile(final File hotFile)
 	{
-		DelayedRunner runner = new DelayedRunner(hotFile);
+		final DelayedRunner runner = new DelayedRunner(hotFile);
 		if (parent.isSynchronous())
 		{
 			runner.run();
@@ -215,101 +216,46 @@ class StorageHotFolderListener implements HotFolderListener
 	 * @param bOK if true, ok else error
 	 * @param bZappTmp
 	 */
-	void copyCompleted(final File storedFile, final boolean bOK)
+	void copyCompleted(final File storedFile, final boolean bOK, final Throwable t)
 	{
 		final File auxFile = parent.isProcessAux() ? FileUtil.getAuxDir(storedFile) : null;
-
-		if (bOK)
+		final File current = bOK ? okStorage : errorStorage;
+		final File dest = new File(current, storedFile.getName());
+		final RollingBackupFile roller = new RollingBackupFile(dest, 10);
+		roller.setWantExtension(true);
+		roller.getNewFile();
+		final File copied = FileUtil.moveFileToDir(storedFile, current);
+		if (copied == null)
 		{
-			if (okStorage != null)
-			{
-				final File okFile = FileUtil.getFileInDirectory(okStorage, new File(storedFile.getName()));
-				final RollingBackupFile roller = new RollingBackupFile(okFile, 10);
-				roller.setWantExtension(true);
-				roller.getNewFile();
-				final File copied = FileUtil.moveFileToDir(storedFile, okStorage);
-				if (copied == null)
-				{
-					handleBad(storedFile, true);
-				}
-				else
-				{
-					log.info("Copied good file: " + storedFile.getName() + " to " + okStorage);
-					copied.setLastModified(System.currentTimeMillis());
-					if (auxFile != null)
-					{
-						final File auxbackup = FileUtil.getFileInDirectory(okStorage, new File(auxFile.getName()));
-						final RollingBackupFile rollingBackupFile = new RollingBackupFile(auxbackup, 10);
-						rollingBackupFile.setWantExtension(true);
-						rollingBackupFile.getNewFile();
-						final File movedAux = FileUtil.moveFileToDir(auxFile, okStorage);
-						if (movedAux != null)
-						{
-							log.info("Copied good aux dir: " + auxFile.getName() + " to " + movedAux);
-						}
-						else
-						{
-							log.warn("Could not copy good aux dir: " + auxFile.getName() + " to " + okStorage);
-						}
-					}
-				}
-				cleanup(bOK);
-			}
-			else
-			{
-				final boolean ok = FileUtil.forceDelete(storedFile);
-				if (!ok)
-				{
-					log.warn("failed to delete temporary file " + storedFile.getAbsolutePath());
-				}
-				FileUtil.deleteAll(auxFile);
-			}
+			handleBad(storedFile, bOK);
 		}
 		else
 		{
-			if (errorStorage != null)
+			log.info("Copied file: " + storedFile.getName() + " to " + current);
+			copied.setLastModified(System.currentTimeMillis());
+			if (auxFile != null)
 			{
-				final File backup = FileUtil.getFileInDirectory(errorStorage, new File(storedFile.getName()));
-				final RollingBackupFile roller = new RollingBackupFile(backup, 10);
-				roller.setWantExtension(true);
-				roller.getNewFile();
-				final File copied = FileUtil.moveFileToDir(storedFile, errorStorage);
-				if (copied == null)
+				final File auxbackup = new File(current, auxFile.getName());
+				final RollingBackupFile rollingBackupFile = new RollingBackupFile(auxbackup, 10);
+				rollingBackupFile.setWantExtension(true);
+				rollingBackupFile.getNewFile();
+				final File movedAux = FileUtil.moveFileToDir(auxFile, current);
+				if (movedAux != null)
 				{
-					handleBad(storedFile, false);
+					log.info("Copied aux dir: " + auxFile.getName() + " to " + movedAux);
 				}
 				else
 				{
-					log.warn("Copied error file: " + storedFile.getName() + " to " + errorStorage);
-					copied.setLastModified(System.currentTimeMillis());
-					if (auxFile != null)
-					{
-						final File auxbackup = FileUtil.getFileInDirectory(errorStorage, new File(auxFile.getName()));
-						final RollingBackupFile rollingBackupFile = new RollingBackupFile(auxbackup, 10);
-						rollingBackupFile.setWantExtension(true);
-						rollingBackupFile.getNewFile();
-						final File movedAux = FileUtil.moveFileToDir(auxFile, errorStorage);
-						if (movedAux != null)
-						{
-							log.info("Copied error aux dir: " + auxFile.getName() + " to " + movedAux);
-						}
-						else
-						{
-							log.warn("Could not copy error aux dir: " + auxFile.getName() + " to " + okStorage);
-						}
-					}
+					log.warn("Could not copy aux dir: " + auxFile.getName() + " to " + okStorage);
 				}
-
-				cleanup(bOK);
 			}
-			else
+			if (t != null)
 			{
-				final boolean ok = FileUtil.forceDelete(storedFile);
-				if (!ok)
-					log.warn("failed to delete temporary file " + storedFile.getAbsolutePath());
-				FileUtil.deleteAll(auxFile);
+				final File except = new File(copied.getPath() + ".error.txt");
+				FileUtil.dumpException(except, t);
 			}
 		}
+		cleanup(bOK);
 	}
 
 	protected boolean handleBad(final File storedFile, final boolean bOK)
@@ -371,11 +317,7 @@ class StorageHotFolderListener implements HotFolderListener
 		if (i > maxStore)
 		{
 			final boolean ok = FileUtil.forceDelete(hotFile);
-			if (ok)
-			{
-				log.debug("deleted temporary file " + hotFile.getAbsolutePath());
-			}
-			else
+			if (!ok)
 			{
 				log.warn("failed to delete temporary file " + hotFile.getAbsolutePath());
 			}
