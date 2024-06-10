@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,28 +68,30 @@
  */
 package org.cip4.jdflib.auto;
 
-import java.util.Vector;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFAdhesiveBindingParams;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class AutoTest {
+public class AutoTest
+{
 	// Beware!
 	// These tests are for checking versioning and JDFValidator internal details
 	@Test
 	void testElementVersion()
 	{
-		Vector vPrerelease = null;
-		Vector vOptional = null;
-		Vector vDeprecated = null;
+		VString vPrerelease = null;
+		VString vOptional = null;
+		VString vDeprecated = null;
 
 		final JDFDoc jdfDoc = new JDFDoc("JDF");
 		final JDFNode root = jdfDoc.getJDFRoot();
@@ -97,16 +99,17 @@ public class AutoTest {
 		// check AdhesiveBindingParams/GlueApplication
 		//
 		root.setVersion(JDFElement.EnumVersion.Version_1_3);
-		final JDFAdhesiveBindingParams adhesiveBindingParam = (JDFAdhesiveBindingParams) root.addResource(ElementName.ADHESIVEBINDINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFAdhesiveBindingParams adhesiveBindingParam = (JDFAdhesiveBindingParams) root.addResource(ElementName.ADHESIVEBINDINGPARAMS, null, EnumUsage.Input, null, null,
+				null, null);
 		vDeprecated = adhesiveBindingParam.getTheElementInfo().deprecatedElements();
 		adhesiveBindingParam.appendGlueApplication();
 		vDeprecated = adhesiveBindingParam.getDeprecatedElements(99999999);
-		Assertions.assertTrue(vDeprecated.contains(ElementName.GLUEAPPLICATION));
+		assertTrue(vDeprecated.contains(ElementName.GLUEAPPLICATION));
 
-		root.setVersion(JDFElement.EnumVersion.Version_1_0);
+		root.setVersion(JDFElement.EnumVersion.Version_1_1);
 		adhesiveBindingParam.init();
 		vDeprecated = adhesiveBindingParam.getDeprecatedElements(99999999);
-		Assertions.assertEquals(0, vDeprecated.size());
+		assertEquals(1, vDeprecated.size());
 
 		// check MarkObject/DeviceMark
 		//
@@ -115,20 +118,16 @@ public class AutoTest {
 		final JDFMarkObject markObject = layout.appendMarkObject();
 		markObject.appendDeviceMark();
 		vPrerelease = markObject.getPrereleaseElements(99999999);
-		Assertions.assertTrue(vPrerelease.contains(ElementName.DEVICEMARK));
+		assertTrue(vPrerelease.contains(ElementName.DEVICEMARK));
 
 		root.setVersion(JDFElement.EnumVersion.Version_1_1);
 		vOptional = markObject.getTheElementInfo().optionalElements();
-		Assertions.assertTrue(vOptional.contains(ElementName.DEVICEMARK));
+		assertTrue(vOptional.contains(ElementName.DEVICEMARK));
 
 		root.setVersion(JDFElement.EnumVersion.Version_1_2);
 		vOptional = markObject.getTheElementInfo().optionalElements();
-		Assertions.assertTrue(vOptional.contains(ElementName.DEVICEMARK));
+		assertTrue(vOptional.contains(ElementName.DEVICEMARK));
 
-		// DeviceMark is again allowed in 1.4
-		// root.setVersion(JDFElement.EnumVersion.Version_1_3);
-		// vDeprecated = markObject.getTheElementInfo().deprecatedElements();
-		// assertTrue(vDeprecated.contains(ElementName.DEVICEMARK));
 	}
 
 }

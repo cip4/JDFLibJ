@@ -183,7 +183,7 @@ public class JDFVersions
 			i = jdfVersions.length;
 
 		i--; // must be removed if unknown is removed
-		i = Math.max(i, 7);
+		i = Math.min(i, 7);
 		return i;
 	}
 
