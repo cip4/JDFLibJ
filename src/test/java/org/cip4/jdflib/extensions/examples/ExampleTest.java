@@ -46,7 +46,7 @@ import org.junit.jupiter.api.BeforeEach;
  * @author rainer prosi
  *
  */
-class ExampleTest extends JDFTestCaseBase
+public class ExampleTest extends JDFTestCaseBase
 {
 
 	/**
