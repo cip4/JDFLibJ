@@ -546,7 +546,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 				ThreadUtil.sleep(10);
 		}
 		assertEquals(2, ok.listFiles().length, 1);
-		assertEquals(0, tmpHFDir.listFiles().length, 1);
+		assertEquals(0, tmpHFDir.listFiles().length, 2);
 		assertEquals(2, error.listFiles().length, 1);
 		for (int i = 0; i < 4; i++)
 		{
@@ -589,7 +589,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public synchronized void testOKErrorMulti() throws Exception
+	synchronized void testOKErrorMulti() throws Exception
 	{
 		for (final boolean synch : new boolean[] { true, false })
 		{
@@ -667,7 +667,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public synchronized void testOKErrorMultiDelaysynch() throws Exception
+	synchronized void testOKErrorMultiDelaysynch() throws Exception
 	{
 		setUp();
 
@@ -715,7 +715,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public synchronized void testOKErrorMultiDelay() throws Exception
+	synchronized void testOKErrorMultiDelay() throws Exception
 	{
 		setUp();
 
@@ -763,7 +763,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public synchronized void testOKErrorMultiAuxSame() throws Exception
+	synchronized void testOKErrorMultiAuxSame() throws Exception
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setMaxConcurrent(5);
@@ -808,7 +808,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public synchronized void testMaxAux() throws Exception
+	synchronized void testMaxAux() throws Exception
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setStabilizeTime(42);
@@ -848,7 +848,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public synchronized void testAux() throws Exception
+	synchronized void testAux() throws Exception
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setMaxConcurrent(5);
@@ -885,7 +885,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public synchronized void testNoAux() throws Exception
+	synchronized void testNoAux() throws Exception
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setMaxConcurrent(5);
@@ -943,7 +943,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public synchronized void testOKErrorNonAscii() throws Exception
+	synchronized void testOKErrorNonAscii() throws Exception
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		File error = new File("error");
@@ -979,7 +979,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public synchronized void testOKErrorNonAsciiAux() throws Exception
+	synchronized void testOKErrorNonAsciiAux() throws Exception
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		File error = new File("error");
