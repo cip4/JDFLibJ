@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,6 +44,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -85,6 +87,7 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFToXJDF extends PackageElementWalker
 {
 	private static EnumVersion defaultVersion = BaseXJDFHelper.getDefaultVersion();
+	final private static Log log = LogFactory.getLog(JDFToXJDF.class);
 
 	public static void setDefaultVersion(final EnumVersion v)
 	{
@@ -246,7 +249,7 @@ public class JDFToXJDF extends PackageElementWalker
 		return bPreprocess;
 	}
 
-	public void setPreprocess(boolean bPreprocess)
+	public void setPreprocess(final boolean bPreprocess)
 	{
 		this.bPreprocess = bPreprocess;
 	}
@@ -1137,7 +1140,7 @@ public class JDFToXJDF extends PackageElementWalker
 		return wantImplicit;
 	}
 
-	public void setwantImplicit(boolean wantImplicit)
+	public void setwantImplicit(final boolean wantImplicit)
 	{
 		this.wantImplicit = wantImplicit;
 	}

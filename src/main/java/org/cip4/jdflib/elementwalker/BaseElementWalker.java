@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,18 +39,21 @@ package org.cip4.jdflib.elementwalker;
 
 import java.lang.reflect.Constructor;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
  *
- * elementwalker class that allows you to traverse a dom tree starting at a given root also handles the construction of the walker classes by name, just make sure that your walker subclasses match the
- * naming convention $Walk<name>, e.g. if your class is called FixVersion, the subclasses must be called WalkFoo, WalkBar etc.
+ * elementwalker class that allows you to traverse a dom tree starting at a given root also handles the construction of the walker classes by name, just make sure that your walker
+ * subclasses match the naming convention $Walk<name>, e.g. if your class is called FixVersion, the subclasses must be called WalkFoo, WalkBar etc.
  *
  * @author rainer prosi
  *
  */
 public class BaseElementWalker extends ElementWalker
 {
+	final private static Log log = LogFactory.getLog(BaseElementWalker.class);
 
 	/**
 	 * @param _theFactory

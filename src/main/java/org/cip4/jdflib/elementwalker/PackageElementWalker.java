@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,6 +44,8 @@ import java.security.CodeSource;
 import java.util.List;
 import java.util.zip.ZipEntry;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
@@ -51,15 +53,17 @@ import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.zip.ZipReader;
 
 /**
- * this class is similar to BaseElementWalker but searches it package rather than the local walker classes elementwalker class that allows you to traverse a dom tree starting at a given root also
- * handles the construction of the walker classes by name, just make sure that your walker subclasses match the naming convention Walk<name> and reside in one of the declared packages, e.g. if your
- * class is called FixVersion, the classes in the same package must be called WalkFoo, WalkBar etc.
+ * this class is similar to BaseElementWalker but searches it package rather than the local walker classes elementwalker class that allows you to traverse a dom tree starting at a
+ * given root also handles the construction of the walker classes by name, just make sure that your walker subclasses match the naming convention Walk<name> and reside in one of
+ * the declared packages, e.g. if your class is called FixVersion, the classes in the same package must be called WalkFoo, WalkBar etc.
  *
  * @author rainer prosi
  *
  */
 public class PackageElementWalker extends ElementWalker
 {
+	final private static Log slog = LogFactory.getLog(PackageElementWalker.class); // final protected Log log = LogFactory.getLog(getClass());
+
 	/**
 	 *
 	 */
@@ -97,7 +101,7 @@ public class PackageElementWalker extends ElementWalker
 			{
 				final CodeSource codesrc = parent.getProtectionDomain().getCodeSource();
 				final URL packsrc = codesrc.getLocation();
-				log.info("Constructing walkers for package URL: " + packsrc.toExternalForm());
+				slog.info("Constructing walkers for package URL: " + packsrc.toExternalForm());
 				final File f = UrlUtil.urlToFile(UrlUtil.urlToString(packsrc));
 				if (f.isDirectory())
 				{
@@ -132,13 +136,13 @@ public class PackageElementWalker extends ElementWalker
 		final ZipReader zr = ZipReader.getZipReader(jarFile);
 		if (zr == null)
 		{
-			log.error("Could not unpack zip file: " + jarFile);
+			slog.error("Could not unpack zip file: " + jarFile);
 		}
 		else
 		{
 			Class<? extends PackageElementWalker> currentClass = getClass();
 			final Class<? extends PackageElementWalker> baseClass = currentClass;
-			log.info("constructing from jar: " + jarFile);
+			slog.info("constructing from jar: " + jarFile);
 			while (currentClass != null)
 			{
 				final String packageName = currentClass.getPackage().getName();
@@ -167,8 +171,7 @@ public class PackageElementWalker extends ElementWalker
 			final String name = packageName + "." + UrlUtil.newExtension(className, null);
 			if (name.indexOf('$') < 0)
 			{
-				final BaseWalker w = constructWalker(name);
-				log.info("constructed class: " + name + " Depth=" + w.getDepth());
+				constructWalker(name);
 				classes.putOne(baseClass, name);
 			}
 		}
@@ -198,13 +201,9 @@ public class PackageElementWalker extends ElementWalker
 						continue;
 					name = packageName + "." + name;
 					final BaseWalker w = constructWalker(name);
-					if (w != null)
+					if (w == null)
 					{
-						log.debug("constructed class: " + name + " Depth=" + w.getDepth());
-					}
-					else
-					{
-						log.warn("could not construct class: " + name);
+						slog.warn("could not construct class: " + name);
 					}
 					classes.putOne(baseClass, name);
 				}
@@ -248,7 +247,7 @@ public class PackageElementWalker extends ElementWalker
 		}
 		catch (final Throwable e)
 		{
-			log.warn("Cannot construct class: " + name, e);
+			slog.warn("Cannot construct class: " + name, e);
 		}
 		return null;
 	}

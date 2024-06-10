@@ -41,6 +41,8 @@ package org.cip4.jdflib.extensions.xjdfwalker;
 
 import java.util.Collection;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -60,6 +62,8 @@ import org.cip4.jdflib.resource.process.JDFColor;
  */
 public class XJDFToJDFConverter extends XJDFToJDFImpl
 {
+	final private static Log log = LogFactory.getLog(XJDFToJDFConverter.class);
+
 	protected IXJDFSplit splitter;
 	private static StringArray resLinkAttribs;
 	public static final String SIG = "Sig_";
@@ -68,8 +72,8 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 	{
 		if (resLinkAttribs == null)
 		{
-			resLinkAttribs = new StringArray(new String[] { AttributeName.PROCESSUSAGE, AttributeName.AMOUNT, AttributeName.ACTUALAMOUNT, AttributeName.MAXAMOUNT, AttributeName.MINAMOUNT,
-					AttributeName.COMBINEDPROCESSINDEX });
+			resLinkAttribs = new StringArray(new String[] { AttributeName.PROCESSUSAGE, AttributeName.AMOUNT, AttributeName.ACTUALAMOUNT, AttributeName.MAXAMOUNT,
+					AttributeName.MINAMOUNT, AttributeName.COMBINEDPROCESSINDEX });
 
 		}
 		return resLinkAttribs;

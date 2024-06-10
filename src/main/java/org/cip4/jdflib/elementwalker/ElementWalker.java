@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -52,7 +52,7 @@ import org.cip4.jdflib.core.KElement;
 public class ElementWalker
 {
 	final protected IWalkerFactory theFactory;
-	final protected Log log = LogFactory.getLog(getClass());
+	final private static Log log = LogFactory.getLog(ElementWalker.class);
 
 	/**
 	 * @param _theFactory used to find the individual instances for the children
