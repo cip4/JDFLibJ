@@ -63,7 +63,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class XJDFGeneratorTest extends XJDFCreatorTest
+class XJDFGeneratorTest extends XJDFCreatorTest
 {
 	// TODO do we need an explicit incremental flag in the JDF proper and or sets
 

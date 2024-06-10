@@ -53,7 +53,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi
  *
  */
-public class DumpDirTest extends JDFTestCaseBase
+class DumpDirTest extends JDFTestCaseBase
 {
 
 	/**

@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFNameState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-public class JDFNameStateTest extends JDFTestCaseBase
+class JDFNameStateTest extends JDFTestCaseBase
 {
 
 	JDFNameState theState = null;

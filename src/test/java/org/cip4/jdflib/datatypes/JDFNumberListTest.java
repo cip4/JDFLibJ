@@ -72,7 +72,7 @@ package org.cip4.jdflib.datatypes;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-public class JDFNumberListTest
+class JDFNumberListTest
 {
 
 	@Test

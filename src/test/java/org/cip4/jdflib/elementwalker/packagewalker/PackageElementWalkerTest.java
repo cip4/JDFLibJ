@@ -87,7 +87,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date May 10, 2014
  */
-public class PackageElementWalkerTest extends JDFTestCaseBase
+class PackageElementWalkerTest extends JDFTestCaseBase
 {
 	/**
 	 *

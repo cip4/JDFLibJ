@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class JDFDeliveryParamsTest extends JDFTestCaseBase
+class JDFDeliveryParamsTest extends JDFTestCaseBase
 {
 
 	/**

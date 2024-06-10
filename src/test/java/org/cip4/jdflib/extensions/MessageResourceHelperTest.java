@@ -41,7 +41,7 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class MessageResourceHelperTest
+class MessageResourceHelperTest
 {
 	/**
 	 *

@@ -83,7 +83,7 @@ import org.junit.jupiter.api.Test;
  * @author prosirai
  *
  */
-public class BaseWalkerTest extends JDFTestCaseBase
+class BaseWalkerTest extends JDFTestCaseBase
 {
 
 	static class TestWalker extends BaseWalker

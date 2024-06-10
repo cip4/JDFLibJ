@@ -80,7 +80,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFModuleCap;
 import org.cip4.jdflib.resource.devicecapability.JDFModulePool;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-public class JDFModulePoolTest extends JDFTestCaseBase
+class JDFModulePoolTest extends JDFTestCaseBase
 {
 	@Test
 	void testGetMinAvailability()

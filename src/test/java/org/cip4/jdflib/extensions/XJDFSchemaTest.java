@@ -77,7 +77,7 @@ import org.xml.sax.SAXNotSupportedException;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class XJDFSchemaTest extends JDFTestCaseBase
+class XJDFSchemaTest extends JDFTestCaseBase
 {
 
 	class ChangeOrderMaker

@@ -81,7 +81,7 @@ import org.junit.jupiter.api.Test;
  * @author prosirai
  *
  */
-public class JDFPersonTest extends JDFTestCaseBase
+class JDFPersonTest extends JDFTestCaseBase
 {
 	private JDFPerson person;
 

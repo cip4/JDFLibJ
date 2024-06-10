@@ -50,7 +50,7 @@ import org.junit.jupiter.api.Test;
  *
  *         08.12.2008
  */
-public class ThreadUtilTest extends JDFTestCaseBase
+class ThreadUtilTest extends JDFTestCaseBase
 {
 	private class TestWait extends WaitTimeout<Integer>
 	{

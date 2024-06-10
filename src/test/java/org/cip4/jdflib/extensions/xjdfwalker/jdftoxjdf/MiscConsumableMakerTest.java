@@ -48,7 +48,7 @@ import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class MiscConsumableMakerTest
+class MiscConsumableMakerTest
 {
 	/**
 	 *

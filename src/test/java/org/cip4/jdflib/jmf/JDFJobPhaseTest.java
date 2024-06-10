@@ -94,7 +94,7 @@ import org.junit.jupiter.api.Test;
  *
  * Test of the Status JMF
  */
-public class JDFJobPhaseTest extends JDFTestCaseBase
+class JDFJobPhaseTest extends JDFTestCaseBase
 {
 	private JDFDeviceInfo di;
 	private JDFJMF jmf;

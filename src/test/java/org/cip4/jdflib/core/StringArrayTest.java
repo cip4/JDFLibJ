@@ -52,7 +52,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class StringArrayTest extends JDFTestCaseBase
+class StringArrayTest extends JDFTestCaseBase
 {
 	/**
 	 *

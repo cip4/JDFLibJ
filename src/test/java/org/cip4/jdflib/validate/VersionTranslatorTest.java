@@ -86,7 +86,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Nov 16, 2010
  */
-public class VersionTranslatorTest extends JDFTestCaseBase
+class VersionTranslatorTest extends JDFTestCaseBase
 {
 	/**
 	 *

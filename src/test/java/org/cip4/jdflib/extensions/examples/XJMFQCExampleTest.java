@@ -66,7 +66,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJMFQCExampleTest extends ExampleTest
+class XJMFQCExampleTest extends ExampleTest
 {
 
 	private static final String SPECTRUM = "Spectrum";

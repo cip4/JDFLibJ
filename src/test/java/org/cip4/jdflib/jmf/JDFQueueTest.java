@@ -52,7 +52,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Apr 4, 2014
  */
-public class JDFQueueTest extends JDFTestCaseBase
+class JDFQueueTest extends JDFTestCaseBase
 {
 	/**
 	 *

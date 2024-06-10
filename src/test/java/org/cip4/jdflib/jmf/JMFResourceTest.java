@@ -105,7 +105,7 @@ import org.junit.jupiter.api.Test;
  *
  *         Test of the Resource JMF
  */
-public class JMFResourceTest extends JDFTestCaseBase
+class JMFResourceTest extends JDFTestCaseBase
 {
 	/**
 	 * @see JDFTestCaseBase#setUp()

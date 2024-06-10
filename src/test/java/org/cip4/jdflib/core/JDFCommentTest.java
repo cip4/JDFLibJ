@@ -48,7 +48,7 @@ import org.cip4.jdflib.resource.JDFNotification;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFCommentTest extends JDFTestCaseBase
+class JDFCommentTest extends JDFTestCaseBase
 {
 	@Test
 	void testInit()

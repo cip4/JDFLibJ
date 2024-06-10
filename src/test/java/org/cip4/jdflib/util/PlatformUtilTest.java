@@ -57,7 +57,7 @@ import org.junit.jupiter.api.Test;
  *         01.09.2009
  *
  */
-public class PlatformUtilTest extends JDFTestCaseBase
+class PlatformUtilTest extends JDFTestCaseBase
 {
 
 	/**

@@ -90,7 +90,7 @@ import org.w3c.dom.Element;
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
-public class KElementTest extends JDFTestCaseBase
+class KElementTest extends JDFTestCaseBase
 {
 
 	/**

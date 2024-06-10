@@ -49,7 +49,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.Test;
 
-public class BodyPartHelperTest extends JDFTestCaseBase
+class BodyPartHelperTest extends JDFTestCaseBase
 {
 
 	@Test

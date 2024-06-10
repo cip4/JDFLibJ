@@ -90,7 +90,7 @@ import org.cip4.jdflib.util.JDFDuration;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-public class JDFDurationStateTest extends JDFTestCaseBase
+class JDFDurationStateTest extends JDFTestCaseBase
 {
 
 	JDFDurationState iState = null;

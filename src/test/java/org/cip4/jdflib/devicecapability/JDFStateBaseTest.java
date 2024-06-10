@@ -108,7 +108,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-public class JDFStateBaseTest extends JDFTestCaseBase
+class JDFStateBaseTest extends JDFTestCaseBase
 {
 
 	private JDFDeviceCap deviceCap;

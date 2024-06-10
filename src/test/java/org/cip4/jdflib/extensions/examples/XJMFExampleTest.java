@@ -81,7 +81,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJMFExampleTest extends ExampleTest
+class XJMFExampleTest extends ExampleTest
 {
 	static final boolean defaultDateMilli = JDFDate.isWantISOMilliseconds();
 

@@ -111,7 +111,7 @@ import org.junit.jupiter.api.Test;
  *
  * This implements the first fixture with unit tests for class JDFElement.
  */
-public class JDFAuditPoolTest extends JDFTestCaseBase
+class JDFAuditPoolTest extends JDFTestCaseBase
 {
 	private JDFDoc jdfDoc;
 	private JDFNode jdfRoot;

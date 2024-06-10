@@ -87,7 +87,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Jan 9, 2012
  */
-public class JDFPageDataTest extends JDFTestCaseBase
+class JDFPageDataTest extends JDFTestCaseBase
 {
 
 	JDFContentList cl;

@@ -75,7 +75,7 @@ import org.cip4.jdflib.core.KElement;
  * @author rainer prosi
  * @date Mar 15, 2013
  */
-public class ExtendedRemoveEmpty extends RemoveEmpty
+class ExtendedRemoveEmpty extends RemoveEmpty
 {
 
 	/**
@@ -92,7 +92,7 @@ public class ExtendedRemoveEmpty extends RemoveEmpty
 	 * @author prosirai
 	 * 
 	 */
-	public class WalkFoo extends WalkElement
+	class WalkFoo extends WalkElement
 	{
 
 		/**

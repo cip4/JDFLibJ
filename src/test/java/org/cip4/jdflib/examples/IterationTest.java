@@ -27,7 +27,7 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-public class IterationTest extends JDFTestCaseBase
+class IterationTest extends JDFTestCaseBase
 {
 	private static final String ITERATION_PAUSED = "IterationPaused";
 	private JDFLayoutElementProductionParams iterLepp;

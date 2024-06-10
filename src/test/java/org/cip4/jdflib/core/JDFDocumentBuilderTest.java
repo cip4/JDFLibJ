@@ -42,7 +42,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFDocumentBuilderTest extends JDFTestCaseBase
+class JDFDocumentBuilderTest extends JDFTestCaseBase
 {
 
 	@Test

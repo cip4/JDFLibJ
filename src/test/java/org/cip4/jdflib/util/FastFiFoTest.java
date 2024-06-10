@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
  * 
  * May 26, 2009
  */
-public class FastFiFoTest extends JDFTestCaseBase
+class FastFiFoTest extends JDFTestCaseBase
 {
 	/**
 	 * 

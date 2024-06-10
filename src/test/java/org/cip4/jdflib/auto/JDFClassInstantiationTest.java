@@ -88,7 +88,7 @@ import org.w3c.dom.DOMException;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class JDFClassInstantiationTest extends JDFTestCaseBase
+class JDFClassInstantiationTest extends JDFTestCaseBase
 {
 	File dir;
 

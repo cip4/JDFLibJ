@@ -77,7 +77,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFTransferCurvePoolTest extends JDFTestCaseBase
+class JDFTransferCurvePoolTest extends JDFTestCaseBase
 {
 
 	/**

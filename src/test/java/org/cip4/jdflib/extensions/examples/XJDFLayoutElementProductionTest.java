@@ -67,7 +67,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJDFLayoutElementProductionTest extends ExampleTest
+class XJDFLayoutElementProductionTest extends ExampleTest
 {
 	/**
 	 *

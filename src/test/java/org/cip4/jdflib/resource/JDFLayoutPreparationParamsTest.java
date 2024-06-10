@@ -89,7 +89,7 @@ import org.junit.jupiter.api.Test;
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts also some tests for automated layout
  *
  */
-public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
+class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 {
 
 	JDFNode n = null;

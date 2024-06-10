@@ -42,7 +42,7 @@ import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class AttributeInfoTest
+class AttributeInfoTest
 {
 
 	/**

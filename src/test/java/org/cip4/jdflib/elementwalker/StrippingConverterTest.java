@@ -97,7 +97,7 @@ import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.junit.jupiter.api.Test;
 
-public class StrippingConverterTest extends JDFTestCaseBase
+class StrippingConverterTest extends JDFTestCaseBase
 {
 
 	@Test

@@ -79,7 +79,7 @@ import org.junit.jupiter.api.Test;
  *
  * 08.12.2008
  */
-public class BiHashMapTest extends JDFTestCaseBase
+class BiHashMapTest extends JDFTestCaseBase
 {
 
 	// /////////////////////////////////////////////////////////////////////////

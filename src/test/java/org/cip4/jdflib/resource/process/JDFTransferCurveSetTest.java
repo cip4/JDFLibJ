@@ -44,7 +44,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFTransferCurveSetTest extends JDFTestCaseBase
+class JDFTransferCurveSetTest extends JDFTestCaseBase
 {
 
 	/**

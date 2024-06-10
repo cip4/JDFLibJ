@@ -88,7 +88,7 @@ import org.junit.jupiter.api.Test;
  * 
  *         Test of the Status JMF
  */
-public class JMFStatusTest extends JDFTestCaseBase
+class JMFStatusTest extends JDFTestCaseBase
 {
 	private JDFDoc doc;
 	private JDFJMF jmf;

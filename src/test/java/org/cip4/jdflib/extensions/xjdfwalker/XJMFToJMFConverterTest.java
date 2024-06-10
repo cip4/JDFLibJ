@@ -74,7 +74,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJMFToJMFConverterTest extends JDFTestCaseBase
+class XJMFToJMFConverterTest extends JDFTestCaseBase
 {
 
 	/**

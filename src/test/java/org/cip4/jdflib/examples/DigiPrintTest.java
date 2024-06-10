@@ -144,7 +144,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class DigiPrintTest extends ExampleTest
+class DigiPrintTest extends ExampleTest
 {
 	private JDFDoc doc;
 	private JDFNode n;

@@ -63,7 +63,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class JDFNumListTest extends JDFTestCaseBase
+class JDFNumListTest extends JDFTestCaseBase
 {
 	/**
 	 *

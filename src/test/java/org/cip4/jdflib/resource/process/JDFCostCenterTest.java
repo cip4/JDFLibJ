@@ -82,7 +82,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Dec 12, 2011
  */
-public class JDFCostCenterTest extends JDFTestCaseBase
+class JDFCostCenterTest extends JDFTestCaseBase
 {
 	/**
 	 * 

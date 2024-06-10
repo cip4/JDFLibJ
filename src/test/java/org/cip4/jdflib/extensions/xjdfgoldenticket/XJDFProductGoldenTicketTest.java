@@ -60,7 +60,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Jun 22, 2014
  */
-public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
+class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 {
 
 	/**

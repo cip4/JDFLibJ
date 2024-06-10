@@ -82,7 +82,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class PrefixInputStreamTest extends JDFTestCaseBase
+class PrefixInputStreamTest extends JDFTestCaseBase
 {
 
 	/**

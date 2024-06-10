@@ -78,7 +78,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class JDFLayoutIntentTest extends JDFTestCaseBase
+class JDFLayoutIntentTest extends JDFTestCaseBase
 {
 	/**
 	*

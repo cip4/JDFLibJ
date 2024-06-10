@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFTest;
 import org.cip4.jdflib.resource.devicecapability.JDFor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-public class JDFTestTest extends JDFTestCaseBase
+class JDFTestTest extends JDFTestCaseBase
 {
 	@Test
 	void testValidTest1()

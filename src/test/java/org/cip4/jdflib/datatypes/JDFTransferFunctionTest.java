@@ -75,7 +75,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFTransferFunctionTest extends JDFTestCaseBase
+class JDFTransferFunctionTest extends JDFTestCaseBase
 {
 
 	@Test

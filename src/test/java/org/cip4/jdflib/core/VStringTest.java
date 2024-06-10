@@ -53,7 +53,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class VStringTest extends JDFTestCaseBase
+class VStringTest extends JDFTestCaseBase
 {
 	/**
 	 *

@@ -56,7 +56,7 @@ import org.cip4.jdflib.resource.process.JDFLayout;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class LayoutTest extends JDFTestCaseBase
+class LayoutTest extends JDFTestCaseBase
 {
 
 	/**

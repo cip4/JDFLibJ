@@ -126,7 +126,7 @@ import org.junit.jupiter.api.Test;
  *
  *         20.01.2009
  */
-public class JDFResourceTest extends JDFTestCaseBase
+class JDFResourceTest extends JDFTestCaseBase
 {
 
 	private boolean bAgent;

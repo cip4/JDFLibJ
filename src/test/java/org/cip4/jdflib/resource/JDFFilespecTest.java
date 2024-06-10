@@ -84,7 +84,7 @@ import org.junit.jupiter.api.io.TempDir;
  *
  *         26.11.2008
  */
-public class JDFFilespecTest extends JDFTestCaseBase
+class JDFFilespecTest extends JDFTestCaseBase
 {
 	@TempDir
 	Path tempDir;

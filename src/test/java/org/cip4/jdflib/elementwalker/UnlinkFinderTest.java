@@ -88,7 +88,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class UnlinkFinderTest extends JDFTestCaseBase
+class UnlinkFinderTest extends JDFTestCaseBase
 {
 
 	private JDFNode n;

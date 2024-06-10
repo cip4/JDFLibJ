@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-public class PhaseTimeTest extends JDFTestCaseBase
+class PhaseTimeTest extends JDFTestCaseBase
 {
 	@Test
 	void testGetLink()

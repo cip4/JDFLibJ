@@ -73,7 +73,7 @@ import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class TimeSweeperTest extends JDFTestCaseBase
+class TimeSweeperTest extends JDFTestCaseBase
 {
 	class TestRun implements Runnable
 	{

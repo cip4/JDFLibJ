@@ -66,7 +66,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class JDFAttributeMapTest extends JDFTestCaseBase
+class JDFAttributeMapTest extends JDFTestCaseBase
 {
 	/**
 	 *

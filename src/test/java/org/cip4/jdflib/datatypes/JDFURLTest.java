@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
  *         Heidelberger Druckmaschinen AG, Tel. 3538
  * 
  */
-public class JDFURLTest {
+class JDFURLTest {
 
 	@Test
 	public final void testAmpersand()

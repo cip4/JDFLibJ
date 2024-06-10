@@ -75,7 +75,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFToXJDFDataCacheTest extends JDFTestCaseBase
+class JDFToXJDFDataCacheTest extends JDFTestCaseBase
 {
 
 	/**

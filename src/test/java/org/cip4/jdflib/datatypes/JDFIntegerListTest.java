@@ -56,7 +56,7 @@ import org.junit.jupiter.api.Test;
  *
  *         prior to May 7, 2009
  */
-public class JDFIntegerListTest extends JDFTestCaseBase
+class JDFIntegerListTest extends JDFTestCaseBase
 {
 
 	/**

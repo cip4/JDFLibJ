@@ -64,7 +64,7 @@ import org.junit.jupiter.api.Test;
  *
  *         far before May 17, 2009
  */
-public class JDFMessageTest
+class JDFMessageTest
 {
 	private JDFJMF jmf;
 

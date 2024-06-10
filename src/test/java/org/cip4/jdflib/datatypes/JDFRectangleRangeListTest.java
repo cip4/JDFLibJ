@@ -54,7 +54,7 @@ import java.util.zip.DataFormatException;
 
 import org.junit.jupiter.api.Test;
 
-public class JDFRectangleRangeListTest
+class JDFRectangleRangeListTest
 {
 
 	/*

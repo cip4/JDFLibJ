@@ -82,7 +82,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class JDFObjectResolutionTest extends JDFTestCaseBase
+class JDFObjectResolutionTest extends JDFTestCaseBase
 {
 	/**
 	 *

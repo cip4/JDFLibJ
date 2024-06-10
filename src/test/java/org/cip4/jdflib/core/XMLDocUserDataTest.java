@@ -77,7 +77,7 @@ import org.junit.jupiter.api.Test;
  * 
  * 02.12.2008
  */
-public class XMLDocUserDataTest extends JDFTestCaseBase
+class XMLDocUserDataTest extends JDFTestCaseBase
 {
 
 	/**

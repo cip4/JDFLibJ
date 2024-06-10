@@ -76,7 +76,7 @@ import org.xml.sax.SAXException;
  *
  *         14.01.2009
  */
-public class JDFDocTest extends JDFTestCaseBase
+class JDFDocTest extends JDFTestCaseBase
 {
 
 	/**

@@ -58,7 +58,7 @@ import org.junit.jupiter.api.Test;
  *
  *         before July 7, 2009
  */
-public class JDFCustomerInfoTest extends JDFTestCaseBase
+class JDFCustomerInfoTest extends JDFTestCaseBase
 {
 
 	@Override

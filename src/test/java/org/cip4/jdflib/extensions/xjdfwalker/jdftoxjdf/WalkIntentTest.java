@@ -93,7 +93,7 @@ import org.cip4.jdflib.span.JDFSpanProofType.EnumSpanProofType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class WalkIntentTest extends JDFTestCaseBase
+class WalkIntentTest extends JDFTestCaseBase
 {
 	/**
 	 *

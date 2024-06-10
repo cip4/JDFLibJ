@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFMatrixState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-public class JDFMatrixStateTest extends JDFTestCaseBase
+class JDFMatrixStateTest extends JDFTestCaseBase
 {
 
 	JDFMatrixState sState = null;

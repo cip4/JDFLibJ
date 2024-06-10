@@ -78,7 +78,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CapabilitiesCreatorTest extends JDFTestCaseBase
+class CapabilitiesCreatorTest extends JDFTestCaseBase
 {
 
 	/**

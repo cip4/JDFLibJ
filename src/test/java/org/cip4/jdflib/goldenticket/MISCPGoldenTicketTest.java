@@ -89,7 +89,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
+class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 {
 
 	private final boolean bExpandGB = false;

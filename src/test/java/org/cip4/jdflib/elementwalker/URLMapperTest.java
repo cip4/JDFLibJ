@@ -82,7 +82,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Apr 21, 2011
  */
-public class URLMapperTest extends JDFTestCaseBase
+class URLMapperTest extends JDFTestCaseBase
 {
 	/**
 	 *

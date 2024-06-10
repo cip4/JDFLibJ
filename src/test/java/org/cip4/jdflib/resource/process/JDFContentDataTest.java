@@ -83,7 +83,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class JDFContentDataTest extends JDFTestCaseBase
+class JDFContentDataTest extends JDFTestCaseBase
 {
 
 	JDFContentList cl;

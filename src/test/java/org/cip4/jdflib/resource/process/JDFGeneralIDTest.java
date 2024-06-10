@@ -87,7 +87,7 @@ import org.junit.jupiter.api.Test;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class JDFGeneralIDTest extends JDFTestCaseBase
+class JDFGeneralIDTest extends JDFTestCaseBase
 {
 
 	/**

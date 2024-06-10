@@ -81,7 +81,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class WideFormatGoldenTicketTest extends BaseGoldenTicketTest
+class WideFormatGoldenTicketTest extends BaseGoldenTicketTest
 {
 	WideFormatGoldenTicket theTicket;
 

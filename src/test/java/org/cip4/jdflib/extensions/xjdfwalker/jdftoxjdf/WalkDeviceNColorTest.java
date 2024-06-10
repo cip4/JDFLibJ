@@ -77,7 +77,7 @@ import org.cip4.jdflib.resource.process.JDFDeviceNColor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class WalkDeviceNColorTest extends JDFTestCaseBase
+class WalkDeviceNColorTest extends JDFTestCaseBase
 {
 
 	/**

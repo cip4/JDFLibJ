@@ -73,7 +73,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJDFIDPTest extends JDFTestCaseBase
+class XJDFIDPTest extends JDFTestCaseBase
 {
 	/**
 	 *

@@ -82,7 +82,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date July 10, 2012
  */
-public class RollingBackupDirectoryTest extends JDFTestCaseBase
+class RollingBackupDirectoryTest extends JDFTestCaseBase
 {
 	File theDir;
 

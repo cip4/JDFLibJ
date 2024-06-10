@@ -56,7 +56,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Apr 14, 2011
  */
-public class StreamUtilTest extends JDFTestCaseBase
+class StreamUtilTest extends JDFTestCaseBase
 {
 	/**
 	 *

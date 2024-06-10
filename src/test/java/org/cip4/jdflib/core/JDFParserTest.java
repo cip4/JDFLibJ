@@ -66,7 +66,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class JDFParserTest extends JDFTestCaseBase
+class JDFParserTest extends JDFTestCaseBase
 {
 	String s;
 	boolean bSearch;

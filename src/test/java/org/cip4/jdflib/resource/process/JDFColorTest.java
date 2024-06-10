@@ -86,7 +86,7 @@ import org.junit.jupiter.api.Test;
  *
  *         23.01.2009
  */
-public class JDFColorTest extends JDFTestCaseBase
+class JDFColorTest extends JDFTestCaseBase
 {
 
 	private JDFColorPool cp;

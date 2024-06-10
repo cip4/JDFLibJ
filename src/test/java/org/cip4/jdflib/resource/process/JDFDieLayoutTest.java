@@ -87,7 +87,7 @@ import org.junit.jupiter.api.Test;
 /**
  *
  */
-public class JDFDieLayoutTest extends JDFTestCaseBase
+class JDFDieLayoutTest extends JDFTestCaseBase
 {
 	private JDFNode n;
 	private JDFDoc d;

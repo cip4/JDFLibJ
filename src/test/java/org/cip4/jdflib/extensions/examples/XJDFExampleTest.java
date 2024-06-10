@@ -93,7 +93,7 @@ import org.w3c.dom.Comment;
  * @author rainer prosi
  *
  */
-public class XJDFExampleTest extends ExampleTest
+class XJDFExampleTest extends ExampleTest
 {
 	/**
 	 *

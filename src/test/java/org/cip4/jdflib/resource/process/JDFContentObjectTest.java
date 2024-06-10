@@ -88,7 +88,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date before Sep 18, 2012
  */
-public class JDFContentObjectTest extends JDFTestCaseBase
+class JDFContentObjectTest extends JDFTestCaseBase
 {
 
 	JDFLayout lo;

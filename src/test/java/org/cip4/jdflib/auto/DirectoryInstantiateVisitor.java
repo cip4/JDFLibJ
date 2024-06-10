@@ -77,7 +77,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.w3c.dom.DOMException;
 
-public class DirectoryInstantiateVisitor implements DirectoryVisitor
+class DirectoryInstantiateVisitor implements DirectoryVisitor
 {
 	@Override
 	public void enterDirectory(final File dir)

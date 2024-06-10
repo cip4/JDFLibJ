@@ -83,7 +83,7 @@ import org.junit.jupiter.api.Test;
  *
  * before June 4, 2009
  */
-public class JDFEmployeeTest extends JDFTestCaseBase
+class JDFEmployeeTest extends JDFTestCaseBase
 {
 	/**
 	 *

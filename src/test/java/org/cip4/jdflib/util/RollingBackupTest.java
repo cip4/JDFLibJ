@@ -51,7 +51,7 @@ import org.junit.jupiter.api.io.TempDir;
  *
  *         08.12.2008
  */
-public class RollingBackupTest extends JDFTestCaseBase
+class RollingBackupTest extends JDFTestCaseBase
 {
 	@TempDir
 	File dir;

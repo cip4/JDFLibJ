@@ -107,7 +107,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class WebTest extends JDFTestCaseBase
+class WebTest extends JDFTestCaseBase
 {
 	private JDFNode node;
 	private JDFNodeInfo nodeInfo;

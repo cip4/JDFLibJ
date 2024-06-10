@@ -34,7 +34,7 @@ import org.cip4.jdflib.util.StatusCounter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class AmountTest extends ExampleTest
+class AmountTest extends ExampleTest
 {
 	private JDFNode n;
 	private JDFComponent outComp;

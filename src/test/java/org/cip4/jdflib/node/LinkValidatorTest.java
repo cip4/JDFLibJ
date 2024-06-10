@@ -90,7 +90,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date May 27, 2014
  */
-public class LinkValidatorTest extends JDFTestCaseBase
+class LinkValidatorTest extends JDFTestCaseBase
 {
 
 	/**

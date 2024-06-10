@@ -60,7 +60,7 @@ import org.junit.jupiter.api.Test;
  *
  *         before June 10, 2009
  */
-public class JDFDateTest extends JDFTestCaseBase
+class JDFDateTest extends JDFTestCaseBase
 {
 	int defaultTime;
 

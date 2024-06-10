@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-public class JDFStringStateTest extends JDFTestCaseBase
+class JDFStringStateTest extends JDFTestCaseBase
 {
 
 	JDFStringState sState = null;

@@ -53,7 +53,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Dec 19, 2012
  */
-public class OrderedTaskQueueTest extends JDFTestCaseBase
+class OrderedTaskQueueTest extends JDFTestCaseBase
 {
 
 	class WaitRunner implements Runnable

@@ -80,7 +80,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date before Jun 7, 2012
  */
-public class JDFDevCapTest {
+class JDFDevCapTest {
 	/**
 	 *
 	 *

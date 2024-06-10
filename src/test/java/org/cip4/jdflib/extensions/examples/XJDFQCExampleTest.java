@@ -73,7 +73,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJDFQCExampleTest extends ExampleTest
+class XJDFQCExampleTest extends ExampleTest
 {
 
 	/**

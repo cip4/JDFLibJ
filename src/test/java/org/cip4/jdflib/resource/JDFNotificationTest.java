@@ -88,7 +88,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG 13.11.2008
  */
-public class JDFNotificationTest extends JDFTestCaseBase
+class JDFNotificationTest extends JDFTestCaseBase
 {
 
 	JDFNotification n;

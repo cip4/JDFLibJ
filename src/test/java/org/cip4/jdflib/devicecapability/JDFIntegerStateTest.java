@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-public class JDFIntegerStateTest extends JDFTestCaseBase
+class JDFIntegerStateTest extends JDFTestCaseBase
 {
 
 	JDFIntegerState iState = null;

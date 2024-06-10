@@ -78,7 +78,7 @@ import org.junit.jupiter.api.Test;
  * @author rainerprosi
  * @date Jun 22, 2014
  */
-public class XJDFBaseGoldenTicketTest extends ExampleTest
+class XJDFBaseGoldenTicketTest extends ExampleTest
 {
 
 	/**

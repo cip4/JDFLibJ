@@ -55,7 +55,7 @@ import org.junit.jupiter.api.Test;
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts
  *
  */
-public class JDFAssemblySectionTest extends JDFTestCaseBase
+class JDFAssemblySectionTest extends JDFTestCaseBase
 {
 
 	private JDFDoc doc = null;

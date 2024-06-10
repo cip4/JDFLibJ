@@ -52,7 +52,7 @@ import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.jupiter.api.Test;
 
-public class FileTimeTest extends JDFTestCaseBase
+class FileTimeTest extends JDFTestCaseBase
 {
 
 	@Test

@@ -48,7 +48,7 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class AuditMoverTest extends JDFTestCaseBase
+class AuditMoverTest extends JDFTestCaseBase
 {
 
 	/**

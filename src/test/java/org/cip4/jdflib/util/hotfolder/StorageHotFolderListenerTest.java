@@ -50,7 +50,7 @@ import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.hotfolder.StorageHotFolderListener.DelayedRunner;
 import org.junit.jupiter.api.Test;
 
-public class StorageHotFolderListenerTest extends JDFTestCaseBase
+class StorageHotFolderListenerTest extends JDFTestCaseBase
 {
 
 	protected class DummyListener implements HotFolderListener

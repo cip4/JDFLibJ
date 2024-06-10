@@ -89,7 +89,7 @@ import org.junit.jupiter.api.Test;
  * 
  * July 20, 2009
  */
-public class ProcessRunTest extends JDFTestCaseBase
+class ProcessRunTest extends JDFTestCaseBase
 {
 	private JDFAuditPool ap;
 

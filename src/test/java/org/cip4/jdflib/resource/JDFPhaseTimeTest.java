@@ -88,7 +88,7 @@ import org.junit.jupiter.api.Test;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class JDFPhaseTimeTest extends JDFTestCaseBase
+class JDFPhaseTimeTest extends JDFTestCaseBase
 {
 	private JDFPhaseTime pt = null;
 

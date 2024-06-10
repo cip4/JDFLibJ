@@ -69,7 +69,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class MultiXJDFCombinerTest extends JDFTestCaseBase
+class MultiXJDFCombinerTest extends JDFTestCaseBase
 {
 
 	/**

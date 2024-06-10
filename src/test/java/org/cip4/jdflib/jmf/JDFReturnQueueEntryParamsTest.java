@@ -76,7 +76,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.junit.jupiter.api.Test;
 
-public class JDFReturnQueueEntryParamsTest extends JDFTestCaseBase
+class JDFReturnQueueEntryParamsTest extends JDFTestCaseBase
 {
 
 	@Test

@@ -52,7 +52,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.MyPair;
 import org.junit.jupiter.api.Test;
 
-public class XMLCompareWalkerTest extends JDFTestCaseBase
+class XMLCompareWalkerTest extends JDFTestCaseBase
 {
 
 	@Test

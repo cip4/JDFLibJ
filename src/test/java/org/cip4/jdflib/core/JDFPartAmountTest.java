@@ -88,7 +88,7 @@ import org.junit.jupiter.api.Test;
  *
  *         This implements the first fixture with unit tests for class JDFAudit.
  */
-public class JDFPartAmountTest extends JDFTestCaseBase
+class JDFPartAmountTest extends JDFTestCaseBase
 {
 
 	private JDFResourceLink rl;

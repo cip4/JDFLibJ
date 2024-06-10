@@ -80,7 +80,7 @@ import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class WalkJMFTest extends JDFTestCaseBase
+class WalkJMFTest extends JDFTestCaseBase
 {
 
 	/**

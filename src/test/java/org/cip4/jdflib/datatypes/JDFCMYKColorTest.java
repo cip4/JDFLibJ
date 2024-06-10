@@ -48,7 +48,7 @@ import org.junit.jupiter.api.Test;
  *
  *         23.01.2009
  */
-public class JDFCMYKColorTest extends JDFTestCaseBase
+class JDFCMYKColorTest extends JDFTestCaseBase
 {
 
 	/**

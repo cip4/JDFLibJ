@@ -83,7 +83,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class WalkDeviceFilterTest extends JDFTestCaseBase
+class WalkDeviceFilterTest extends JDFTestCaseBase
 {
 	/**
 	 *

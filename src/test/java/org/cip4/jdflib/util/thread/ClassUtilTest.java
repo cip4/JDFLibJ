@@ -78,7 +78,7 @@ import org.junit.jupiter.api.Assertions;
  * @author rainer prosi
  * @date Mar 15, 2013
  */
-public class ClassUtilTest extends ClassUtilParent
+class ClassUtilTest extends ClassUtilParent
 {
 	/**
 	 *

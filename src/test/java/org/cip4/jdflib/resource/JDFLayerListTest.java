@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.junit.jupiter.api.Test;
 
-public class JDFLayerListTest extends JDFTestCaseBase
+class JDFLayerListTest extends JDFTestCaseBase
 {
 	private JDFRunList rlIn;
 	private JDFRunList rlOut;

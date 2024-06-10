@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class ResourceIDFinderTest extends JDFTestCaseBase {
+class ResourceIDFinderTest extends JDFTestCaseBase {
 
 	/**
 	 * 

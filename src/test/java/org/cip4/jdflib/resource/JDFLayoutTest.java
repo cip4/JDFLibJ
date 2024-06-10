@@ -84,7 +84,7 @@ import org.junit.jupiter.api.Test;
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts also some tests for automated layout
  *
  */
-public class JDFLayoutTest extends JDFTestCaseBase
+class JDFLayoutTest extends JDFTestCaseBase
 {
 
 	private JDFDoc doc = null;

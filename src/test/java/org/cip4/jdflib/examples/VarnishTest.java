@@ -96,7 +96,7 @@ import org.junit.jupiter.api.Test;
  *
  * 28.11.2008
  */
-public class VarnishTest extends JDFTestCaseBase
+class VarnishTest extends JDFTestCaseBase
 {
 	/**
 	 * test varnish

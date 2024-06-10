@@ -100,7 +100,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFAutoResourceTest {
+class JDFAutoResourceTest {
 	@Test
 	void testRunList()
 	{

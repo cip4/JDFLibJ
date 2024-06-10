@@ -91,7 +91,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Feb 23, 2011
  */
-public class JDFShapeTest {
+class JDFShapeTest {
 	/**
 	 * 
 	 *  

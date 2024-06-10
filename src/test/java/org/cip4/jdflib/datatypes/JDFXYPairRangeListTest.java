@@ -60,7 +60,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFTest;
 import org.cip4.jdflib.resource.devicecapability.JDFXYPairEvaluation;
 import org.junit.jupiter.api.Test;
 
-public class JDFXYPairRangeListTest
+class JDFXYPairRangeListTest
 {
 	@Test
 	public final void testSetString() throws DataFormatException

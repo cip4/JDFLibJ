@@ -63,7 +63,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class XPathWalkerTest extends JDFTestCaseBase
+class XPathWalkerTest extends JDFTestCaseBase
 {
 
 	private final String testFile = "matsch.jdf";

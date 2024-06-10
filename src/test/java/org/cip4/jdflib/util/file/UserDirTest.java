@@ -81,7 +81,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class UserDirTest extends JDFTestCaseBase
+class UserDirTest extends JDFTestCaseBase
 {
 	/**
 	 * @throws Exception

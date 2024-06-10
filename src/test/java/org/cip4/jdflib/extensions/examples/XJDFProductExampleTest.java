@@ -95,7 +95,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJDFProductExampleTest extends ExampleTest
+class XJDFProductExampleTest extends ExampleTest
 {
 	/**
 	 *

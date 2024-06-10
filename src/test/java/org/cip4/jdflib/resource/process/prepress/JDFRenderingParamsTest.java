@@ -83,7 +83,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class JDFRenderingParamsTest extends JDFTestCaseBase
+class JDFRenderingParamsTest extends JDFTestCaseBase
 {
 
 	/**

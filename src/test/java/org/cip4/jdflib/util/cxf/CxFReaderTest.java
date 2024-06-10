@@ -41,7 +41,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CxFReaderTest extends JDFTestCaseBase
+class CxFReaderTest extends JDFTestCaseBase
 {
 	/**
 	 *

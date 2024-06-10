@@ -63,7 +63,7 @@ import org.junit.jupiter.api.Test;
  * all kinds of fun tests around Stripping also some tests for automated layout
  *
  */
-public class JDFStrippingTest extends JDFTestCaseBase
+class JDFStrippingTest extends JDFTestCaseBase
 {
 
 	private JDFDoc doc = null;

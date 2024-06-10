@@ -93,7 +93,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class WalkMessageServiceTest extends JDFTestCaseBase
+class WalkMessageServiceTest extends JDFTestCaseBase
 {
 
 	/**

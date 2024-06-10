@@ -80,7 +80,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-public class JDFColorConversionParamsTest extends JDFTestCaseBase
+class JDFColorConversionParamsTest extends JDFTestCaseBase
 {
 
 	@Test

@@ -59,7 +59,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Nov 16, 2012
  */
-public class UrlCheckTest extends JDFTestCaseBase
+class UrlCheckTest extends JDFTestCaseBase
 {
 
 	@BeforeEach

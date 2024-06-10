@@ -82,7 +82,7 @@ import org.junit.jupiter.api.Test;
  *
  *         July 23, 2009
  */
-public class SkipInputStreamTest extends JDFTestCaseBase
+class SkipInputStreamTest extends JDFTestCaseBase
 {
 
 	// /////////////////////////////////////////////////////////////////////////

@@ -72,7 +72,7 @@ import org.junit.jupiter.api.Test;
  *
  *         This implements the first fixture with unit tests for class JDFQueue.
  */
-public class QueueTest extends JDFTestCaseBase
+class QueueTest extends JDFTestCaseBase
 {
 	JDFQueue q;
 	protected static int iThread = 0;

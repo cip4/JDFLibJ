@@ -78,7 +78,7 @@ import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class WalkBinderySignatureTest extends JDFTestCaseBase
+class WalkBinderySignatureTest extends JDFTestCaseBase
 {
 
 	/**

@@ -76,7 +76,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Nov 14, 2012
  */
-public class ThreadFilterTest extends JDFTestCaseBase
+class ThreadFilterTest extends JDFTestCaseBase
 {
 
 	/**

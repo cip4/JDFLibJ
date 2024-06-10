@@ -60,7 +60,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.junit.jupiter.api.Test;
 
-public class PartitionGetterTest
+class PartitionGetterTest
 {
 
 	/**

@@ -48,7 +48,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Sep 30, 2010
  */
-public class XMLParserTest extends JDFTestCaseBase
+class XMLParserTest extends JDFTestCaseBase
 {
 	/**
 	 *

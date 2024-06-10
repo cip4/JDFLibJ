@@ -75,7 +75,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class ProcessXJDFSplitTest extends JDFTestCaseBase
+class ProcessXJDFSplitTest extends JDFTestCaseBase
 {
 	/**
 	 * @throws Throwable

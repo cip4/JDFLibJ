@@ -81,7 +81,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 
  */
-public class JDFRegisterMarkTest extends JDFTestCaseBase
+class JDFRegisterMarkTest extends JDFTestCaseBase
 {
 
 	@Test

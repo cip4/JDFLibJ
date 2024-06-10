@@ -98,7 +98,7 @@ import org.junit.jupiter.api.Test;
  *         Heidelberger Druckmaschinen AG, Tel. 3538
  * 
  */
-public class JDFPathTest extends JDFTestCaseBase
+class JDFPathTest extends JDFTestCaseBase
 {
 	private static final String PACKAGEDATA = "TestClipPfadCorr.jdf";
 	// "PackageData-Top.jdf";

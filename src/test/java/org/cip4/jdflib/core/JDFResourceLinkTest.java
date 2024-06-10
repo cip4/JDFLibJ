@@ -109,7 +109,7 @@ import org.junit.jupiter.api.Test;
  *
  *         This implements the first fixture with unit tests for class JDFElement.
  */
-public class JDFResourceLinkTest extends JDFTestCaseBase
+class JDFResourceLinkTest extends JDFTestCaseBase
 {
 	/**
 	 *

@@ -96,7 +96,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date way before Jan 11, 2012
  */
-public class JDFIntegerRangeListTest extends JDFTestCaseBase
+class JDFIntegerRangeListTest extends JDFTestCaseBase
 {
 	private int defaultDef;
 

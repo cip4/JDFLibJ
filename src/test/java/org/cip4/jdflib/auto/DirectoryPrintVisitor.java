@@ -70,7 +70,7 @@ package org.cip4.jdflib.auto;
 
 import java.io.File;
 
-public class DirectoryPrintVisitor implements DirectoryVisitor
+class DirectoryPrintVisitor implements DirectoryVisitor
 {
 	String indent = "";
 

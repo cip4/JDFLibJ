@@ -78,7 +78,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Mar 6, 2012
  */
-public class JDFSeparationListTest extends JDFTestCaseBase
+class JDFSeparationListTest extends JDFTestCaseBase
 {
 	/**
 	 *

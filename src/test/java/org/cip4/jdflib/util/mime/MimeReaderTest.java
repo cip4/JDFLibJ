@@ -47,7 +47,7 @@ import org.cip4.jdflib.util.MimeUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class MimeReaderTest extends JDFTestCaseBase
+class MimeReaderTest extends JDFTestCaseBase
 {
 
 	@Test

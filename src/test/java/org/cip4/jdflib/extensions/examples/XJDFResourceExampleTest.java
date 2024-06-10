@@ -73,7 +73,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJDFResourceExampleTest extends ExampleTest
+class XJDFResourceExampleTest extends ExampleTest
 {
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()

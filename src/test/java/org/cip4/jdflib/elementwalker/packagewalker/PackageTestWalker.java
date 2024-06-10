@@ -76,7 +76,7 @@ import org.cip4.jdflib.elementwalker.PackageElementWalker;
  * @author rainer prosi
  * @date May 10, 2014
  */
-public class PackageTestWalker extends PackageElementWalker
+class PackageTestWalker extends PackageElementWalker
 {
 
 	/**

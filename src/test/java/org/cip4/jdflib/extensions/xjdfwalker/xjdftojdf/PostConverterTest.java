@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-public class PostConverterTest extends JDFTestCaseBase
+class PostConverterTest extends JDFTestCaseBase
 {
 
 	/**

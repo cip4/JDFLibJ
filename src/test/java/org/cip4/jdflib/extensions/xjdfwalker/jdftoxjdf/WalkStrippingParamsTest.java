@@ -77,7 +77,7 @@ import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class WalkStrippingParamsTest extends JDFTestCaseBase
+class WalkStrippingParamsTest extends JDFTestCaseBase
 {
 
 	/**

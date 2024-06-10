@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFDevCapsTest {
+class JDFDevCapsTest {
 	@Test
 	void testGetContextName()
 	{

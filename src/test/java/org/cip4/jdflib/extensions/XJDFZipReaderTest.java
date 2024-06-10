@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
 import org.junit.jupiter.api.Test;
 
-public class XJDFZipReaderTest extends JDFTestCaseBase
+class XJDFZipReaderTest extends JDFTestCaseBase
 {
 
 	/**

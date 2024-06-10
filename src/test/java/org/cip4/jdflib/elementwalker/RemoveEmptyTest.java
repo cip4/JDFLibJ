@@ -67,7 +67,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Oct 11, 2012
  */
-public class RemoveEmptyTest extends JDFTestCaseBase
+class RemoveEmptyTest extends JDFTestCaseBase
 {
 	/**
 	 *

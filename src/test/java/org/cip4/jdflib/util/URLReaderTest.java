@@ -83,7 +83,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Feb 1, 2012
  */
-public class URLReaderTest extends JDFTestCaseBase
+class URLReaderTest extends JDFTestCaseBase
 {
 	/**
 	 *

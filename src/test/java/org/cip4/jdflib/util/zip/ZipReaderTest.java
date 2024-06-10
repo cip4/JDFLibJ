@@ -67,7 +67,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Feb 1, 2012
  */
-public class ZipReaderTest extends JDFTestCaseBase
+class ZipReaderTest extends JDFTestCaseBase
 {
 	/**
 	 *

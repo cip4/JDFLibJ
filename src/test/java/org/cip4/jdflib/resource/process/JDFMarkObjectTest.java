@@ -58,7 +58,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date before Sep 18, 2012
  */
-public class JDFMarkObjectTest extends JDFTestCaseBase
+class JDFMarkObjectTest extends JDFTestCaseBase
 {
 
 	JDFLayout lo;

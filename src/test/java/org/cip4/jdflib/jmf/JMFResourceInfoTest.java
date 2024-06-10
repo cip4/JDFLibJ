@@ -85,7 +85,7 @@ import org.junit.jupiter.api.Test;
  * 
  *         Test of the ResourceInfo JMF element
  */
-public class JMFResourceInfoTest extends JDFTestCaseBase
+class JMFResourceInfoTest extends JDFTestCaseBase
 {
 	private JDFResourceInfo ri;
 	private JDFResponse r;

@@ -86,7 +86,7 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.util.JDFDuration;
 import org.junit.jupiter.api.Test;
 
-public class JDFDurationRangeTest
+class JDFDurationRangeTest
 {
 
 	/*

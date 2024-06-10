@@ -84,7 +84,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class WalkCutBlockTest extends JDFTestCaseBase
+class WalkCutBlockTest extends JDFTestCaseBase
 {
 	/**
 	 *

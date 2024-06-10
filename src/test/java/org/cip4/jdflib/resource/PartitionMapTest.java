@@ -47,7 +47,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class PartitionMapTest
+class PartitionMapTest
 {
 
 	/**

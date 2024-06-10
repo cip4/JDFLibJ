@@ -72,7 +72,7 @@ import org.xml.sax.SAXException;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class JDFColorantControlTest extends JDFTestCaseBase
+class JDFColorantControlTest extends JDFTestCaseBase
 {
 	private JDFNode elem;
 	private JDFColorantControl colControl;

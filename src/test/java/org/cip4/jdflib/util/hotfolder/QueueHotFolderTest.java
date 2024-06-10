@@ -66,7 +66,7 @@ import org.junit.jupiter.api.Test;
  *
  *         To change the template for this generated type comment go to Window - Preferences - Java - Code Generation - Code and Comments
  */
-public class QueueHotFolderTest extends JDFTestCaseBase
+class QueueHotFolderTest extends JDFTestCaseBase
 {
 	private File theHF;
 	private File theStorage;

@@ -62,7 +62,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Jan 22, 2013
  */
-public class XSLTransformHelperTest extends JDFTestCaseBase
+class XSLTransformHelperTest extends JDFTestCaseBase
 {
 	/**
 	 * make sure we also get all valid deep elements

@@ -78,7 +78,7 @@ import org.cip4.jdflib.resource.devicecapability.*;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-public class JDFActionPoolTest extends JDFTestCaseBase
+class JDFActionPoolTest extends JDFTestCaseBase
 {
 	@Test
 	void testAppendActionTest()

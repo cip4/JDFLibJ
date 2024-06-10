@@ -94,7 +94,7 @@ import org.junit.jupiter.api.Test;
  * 
  * Jun 11, 2009
  */
-public class JDFPipeParamsTest {
+class JDFPipeParamsTest {
 	private JDFPipeParams pp;
 
 	/**

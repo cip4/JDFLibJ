@@ -57,7 +57,7 @@ import org.junit.jupiter.api.Test;
  *
  *         Sep 3, 2009
  */
-public class LinkRefFinderTest extends JDFTestCaseBase
+class LinkRefFinderTest extends JDFTestCaseBase
 {
 
 	JDFNode n;

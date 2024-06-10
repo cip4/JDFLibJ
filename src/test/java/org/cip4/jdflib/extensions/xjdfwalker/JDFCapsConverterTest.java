@@ -81,7 +81,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Nov 6, 2010
  */
-public class JDFCapsConverterTest extends JDFTestCaseBase
+class JDFCapsConverterTest extends JDFTestCaseBase
 {
 	/**
 	 * 

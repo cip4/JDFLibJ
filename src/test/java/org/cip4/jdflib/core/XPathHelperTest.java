@@ -60,7 +60,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Dec 23, 2012
  */
-public class XPathHelperTest extends JDFTestCaseBase
+class XPathHelperTest extends JDFTestCaseBase
 {
 	private XPathHelper theHelper;
 

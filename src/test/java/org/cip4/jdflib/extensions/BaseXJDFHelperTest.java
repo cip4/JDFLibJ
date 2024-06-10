@@ -52,7 +52,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Dec 23, 2012
  */
-public class BaseXJDFHelperTest extends JDFTestCaseBase
+class BaseXJDFHelperTest extends JDFTestCaseBase
 {
 	private XJDFHelper theHelper;
 

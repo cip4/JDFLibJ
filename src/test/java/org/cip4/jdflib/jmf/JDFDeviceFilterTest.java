@@ -88,7 +88,7 @@ import org.junit.jupiter.api.Test;
  *
  * Test of the Status JMF
  */
-public class JDFDeviceFilterTest extends JDFTestCaseBase
+class JDFDeviceFilterTest extends JDFTestCaseBase
 {
 	private JDFDeviceList dl;
 

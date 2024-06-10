@@ -84,7 +84,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 
  */
-public class FactoryTest extends JDFTestCaseBase
+class FactoryTest extends JDFTestCaseBase
 {
 
 	/**

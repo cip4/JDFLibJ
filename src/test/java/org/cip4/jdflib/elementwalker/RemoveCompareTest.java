@@ -49,7 +49,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Oct 11, 2012
  */
-public class RemoveCompareTest extends JDFTestCaseBase
+class RemoveCompareTest extends JDFTestCaseBase
 {
 	/**
 	 *

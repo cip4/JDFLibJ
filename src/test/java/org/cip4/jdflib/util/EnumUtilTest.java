@@ -87,7 +87,7 @@ import org.junit.jupiter.api.Test;
  * @author prosirai
  *
  */
-public class EnumUtilTest extends JDFTestCaseBase
+class EnumUtilTest extends JDFTestCaseBase
 {
 	static enum E
 	{

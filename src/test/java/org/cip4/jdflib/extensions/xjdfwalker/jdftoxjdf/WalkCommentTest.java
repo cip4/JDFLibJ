@@ -77,7 +77,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class WalkCommentTest extends JDFTestCaseBase
+class WalkCommentTest extends JDFTestCaseBase
 {
 
 	/**

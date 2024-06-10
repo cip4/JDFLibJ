@@ -85,7 +85,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Dec 3, 2010
  */
-public class UrlPartTest extends JDFTestCaseBase
+class UrlPartTest extends JDFTestCaseBase
 {
 
 	/**

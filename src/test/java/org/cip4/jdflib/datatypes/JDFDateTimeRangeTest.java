@@ -58,7 +58,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Apr 12, 2013
  */
-public class JDFDateTimeRangeTest {
+class JDFDateTimeRangeTest {
 	/**
 	 * Class under test for void JDFDateTimeRange(JDFDateTimeRange)
 	 */

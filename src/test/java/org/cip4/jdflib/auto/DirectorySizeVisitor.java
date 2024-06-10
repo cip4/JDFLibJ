@@ -72,7 +72,7 @@ package org.cip4.jdflib.auto;
 
 import java.io.File;
 
-public class DirectorySizeVisitor implements DirectoryVisitor
+class DirectorySizeVisitor implements DirectoryVisitor
 {
 	int files = 0;
 	int dirs = 0;

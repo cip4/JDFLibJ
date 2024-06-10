@@ -116,7 +116,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Mar 17, 2013
  */
-public class JDFEvaluationTest extends JDFTestCaseBase
+class JDFEvaluationTest extends JDFTestCaseBase
 {
 
 	private JDFDeviceCap devicecap;

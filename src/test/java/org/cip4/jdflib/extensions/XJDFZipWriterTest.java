@@ -90,7 +90,7 @@ import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.zip.ZipReader;
 import org.junit.jupiter.api.Test;
 
-public class XJDFZipWriterTest extends JDFTestCaseBase
+class XJDFZipWriterTest extends JDFTestCaseBase
 {
 
 	/**

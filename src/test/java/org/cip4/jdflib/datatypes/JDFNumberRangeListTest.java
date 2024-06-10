@@ -81,7 +81,7 @@ import org.junit.jupiter.api.Test;
  * @author rainerprosi
  * @date Sep 12, 2012
  */
-public class JDFNumberRangeListTest {
+class JDFNumberRangeListTest {
 
 	/**
 	 * 

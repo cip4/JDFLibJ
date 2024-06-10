@@ -93,7 +93,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG 13.11.2008
  */
-public class JDFTileTest extends JDFTestCaseBase
+class JDFTileTest extends JDFTestCaseBase
 {
 
 	/**

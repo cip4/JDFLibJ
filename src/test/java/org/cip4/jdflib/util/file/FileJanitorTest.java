@@ -55,7 +55,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Dec 8, 2011
  */
-public class FileJanitorTest extends JDFTestCaseBase
+class FileJanitorTest extends JDFTestCaseBase
 {
 	/**
 	 * @throws Exception

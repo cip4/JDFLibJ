@@ -87,7 +87,7 @@ import org.junit.jupiter.api.Test;
  * 
  * 14.01.2009
  */
-public class JDFDocThreadTest {
+class JDFDocThreadTest {
 	/**
 	 * 
 	 *

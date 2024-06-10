@@ -94,7 +94,7 @@ import org.junit.jupiter.api.Test;
  *
  *         Jul 16, 2009
  */
-public class ByteArrayIOStreamTest extends JDFTestCaseBase
+class ByteArrayIOStreamTest extends JDFTestCaseBase
 {
 	/**
 	 *

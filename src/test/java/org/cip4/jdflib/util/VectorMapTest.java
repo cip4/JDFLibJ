@@ -83,7 +83,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen tests for the VectorMap class
  */
-public class VectorMapTest extends JDFTestCaseBase
+class VectorMapTest extends JDFTestCaseBase
 {
 	private VectorMap<String, String> m;
 

@@ -48,7 +48,7 @@ import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class WalkAssemblyTest extends JDFTestCaseBase
+class WalkAssemblyTest extends JDFTestCaseBase
 {
 
 	/**

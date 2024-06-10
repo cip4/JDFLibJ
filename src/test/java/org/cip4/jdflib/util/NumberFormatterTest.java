@@ -78,7 +78,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Jan 4, 2011
  */
-public class NumberFormatterTest extends JDFTestCaseBase
+class NumberFormatterTest extends JDFTestCaseBase
 {
 	/**
 	 *

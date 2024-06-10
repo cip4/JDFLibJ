@@ -94,7 +94,7 @@ import org.cip4.jdflib.span.JDFSpanBase;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 
-public class CoverageVisitor implements DirectoryVisitor
+class CoverageVisitor implements DirectoryVisitor
 {
 	final Set<String> skip;
 

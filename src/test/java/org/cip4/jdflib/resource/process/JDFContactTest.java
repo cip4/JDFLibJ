@@ -61,7 +61,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Jan 18, 2013
  */
-public class JDFContactTest extends JDFTestCaseBase
+class JDFContactTest extends JDFTestCaseBase
 {
 
 	JDFContact co;

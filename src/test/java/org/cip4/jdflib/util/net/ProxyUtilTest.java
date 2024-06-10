@@ -100,7 +100,7 @@ import org.junit.jupiter.api.Test;
  *
  *         12.01.2009
  */
-public class ProxyUtilTest extends JDFTestCaseBase
+class ProxyUtilTest extends JDFTestCaseBase
 {
 	ProxySelector defaultSel;
 

@@ -82,7 +82,7 @@ import org.junit.jupiter.api.Test;
  * @author rainerprosi
  *
  */
-public class XMLParserFactoryTest extends JDFTestCaseBase
+class XMLParserFactoryTest extends JDFTestCaseBase
 {
 
 	/**

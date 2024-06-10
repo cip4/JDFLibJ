@@ -90,7 +90,7 @@ import org.junit.jupiter.api.Test;
  *
  *         14.11.2008
  */
-public class AuditToJMFTest extends JDFTestCaseBase
+class AuditToJMFTest extends JDFTestCaseBase
 {
 	JDFNode node = null;
 

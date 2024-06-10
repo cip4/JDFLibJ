@@ -80,7 +80,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class JDFShapeTemplateTest extends JDFTestCaseBase
+class JDFShapeTemplateTest extends JDFTestCaseBase
 {
 	/**
 	 *

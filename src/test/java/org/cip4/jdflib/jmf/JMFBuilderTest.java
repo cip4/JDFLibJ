@@ -70,7 +70,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Sept 7, 2010
  */
-public class JMFBuilderTest extends JDFTestCaseBase
+class JMFBuilderTest extends JDFTestCaseBase
 {
 	private JMFBuilder b;
 

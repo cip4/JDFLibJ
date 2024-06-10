@@ -63,7 +63,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJDFRunListTest extends JDFTestCaseBase
+class XJDFRunListTest extends JDFTestCaseBase
 {
 	/**
 	 *

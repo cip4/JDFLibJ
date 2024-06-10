@@ -81,7 +81,7 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for JDFVersion.
  */
-public class JDFVersionTest extends JDFTestCaseBase
+class JDFVersionTest extends JDFTestCaseBase
 {
 	boolean canTest;
 

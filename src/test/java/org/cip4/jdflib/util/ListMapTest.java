@@ -84,7 +84,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen tests for the ListMap class
  */
-public class ListMapTest extends JDFTestCaseBase
+class ListMapTest extends JDFTestCaseBase
 {
 	private ListMap<String, String> m;
 

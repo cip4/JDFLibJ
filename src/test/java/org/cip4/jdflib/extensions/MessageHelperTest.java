@@ -57,7 +57,7 @@ import org.cip4.jdflib.resource.JDFNotification;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class MessageHelperTest extends JDFTestCaseBase
+class MessageHelperTest extends JDFTestCaseBase
 {
 	/**
 	 * @see junit.framework.TestCase#setUp()

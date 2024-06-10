@@ -77,7 +77,7 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class WalkComponentTest
+class WalkComponentTest
 {
 
 	/**

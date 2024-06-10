@@ -65,7 +65,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG 13.11.2008
  */
-public class JDFPartTest extends JDFTestCaseBase
+class JDFPartTest extends JDFTestCaseBase
 {
 	JDFPart part = null;
 

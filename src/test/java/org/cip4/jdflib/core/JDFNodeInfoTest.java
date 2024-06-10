@@ -89,7 +89,7 @@ import org.junit.jupiter.api.Test;
  *
  *         This implements the first fixture with unit tests for class JDFNodeInfo.
  */
-public class JDFNodeInfoTest extends JDFTestCaseBase
+class JDFNodeInfoTest extends JDFTestCaseBase
 {
 	private JDFDate currentDate;
 

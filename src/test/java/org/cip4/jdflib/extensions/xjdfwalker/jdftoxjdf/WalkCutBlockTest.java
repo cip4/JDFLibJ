@@ -49,7 +49,7 @@ import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class WalkCutBlockTest extends JDFTestCaseBase
+class WalkCutBlockTest extends JDFTestCaseBase
 {
 
 	/**

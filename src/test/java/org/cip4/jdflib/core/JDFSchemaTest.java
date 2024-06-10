@@ -80,7 +80,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class JDFSchemaTest extends JDFTestCaseBase
+class JDFSchemaTest extends JDFTestCaseBase
 {
 	JDFParser p = null;
 

@@ -83,7 +83,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Nov 14, 2013
  */
-public class RegularJanitorTest extends JDFTestCaseBase
+class RegularJanitorTest extends JDFTestCaseBase
 {
 	class Runner implements Runnable
 	{

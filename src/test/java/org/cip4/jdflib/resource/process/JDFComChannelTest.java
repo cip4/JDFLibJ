@@ -81,7 +81,7 @@ import org.junit.jupiter.api.Test;
  * @author prosirai
  *
  */
-public class JDFComChannelTest extends JDFTestCaseBase
+class JDFComChannelTest extends JDFTestCaseBase
 {
 	JDFComChannel cc;
 

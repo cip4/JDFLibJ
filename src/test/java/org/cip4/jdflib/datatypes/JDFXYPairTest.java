@@ -60,7 +60,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Feb 23, 2011
  */
-public class JDFXYPairTest extends JDFTestCaseBase
+class JDFXYPairTest extends JDFTestCaseBase
 {
 	/**
 	 *

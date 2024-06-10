@@ -79,7 +79,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.junit.jupiter.api.Test;
 
-public class WalkProductTest extends JDFTestCaseBase
+class WalkProductTest extends JDFTestCaseBase
 {
 
 	/**

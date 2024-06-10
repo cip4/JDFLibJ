@@ -93,7 +93,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJDFMediaTest extends ExampleTest
+class XJDFMediaTest extends ExampleTest
 {
 	/**
 	 *

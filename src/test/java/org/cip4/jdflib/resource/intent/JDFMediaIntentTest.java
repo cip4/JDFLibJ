@@ -43,7 +43,7 @@ import org.cip4.jdflib.span.JDFSpanISOPaperSubstrate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFMediaIntentTest
+class JDFMediaIntentTest
 {
 
 	/**

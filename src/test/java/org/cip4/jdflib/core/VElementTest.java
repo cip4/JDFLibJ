@@ -53,7 +53,7 @@ import org.junit.jupiter.api.Test;
  *
  *         05.12.2008
  */
-public class VElementTest extends JDFTestCaseBase
+class VElementTest extends JDFTestCaseBase
 {
 	/**
 	 *

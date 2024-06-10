@@ -11,7 +11,7 @@ package org.cip4.jdflib.datatypes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFRectangleRangeTest {
+class JDFRectangleRangeTest {
 
 	@Test
 	public final void testIsPartOfRange()

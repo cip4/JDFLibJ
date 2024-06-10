@@ -63,7 +63,7 @@ import org.junit.jupiter.api.Test;
  *
  *         19.11.2008
  */
-public class JDFPreviewTest extends JDFTestCaseBase
+class JDFPreviewTest extends JDFTestCaseBase
 {
 
 	/**

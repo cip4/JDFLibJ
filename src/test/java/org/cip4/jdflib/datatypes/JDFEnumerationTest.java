@@ -82,7 +82,7 @@ import org.junit.jupiter.api.Test;
  *         Heidelberger Druckmaschinen AG, Tel. 3538
  * 
  */
-public class JDFEnumerationTest extends JDFTestCaseBase
+class JDFEnumerationTest extends JDFTestCaseBase
 {
 
 	@Test

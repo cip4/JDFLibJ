@@ -53,7 +53,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.jupiter.api.Test;
 
-public class WalkMediaTest extends JDFTestCaseBase
+class WalkMediaTest extends JDFTestCaseBase
 {
 
 	/**

@@ -164,15 +164,15 @@ class RemovePrivateTest
 		assertNull(n.getGeneralID(0));
 		n.appendGeneralID("key", "bar");
 		rp.walkTree(n, null);
-		assertEquals(n.getGeneralID("key", 0), "bar");
+		assertEquals("bar", n.getGeneralID("key", 0));
 		n.appendGeneralID("foo:key", "bar");
 		rp.addPrefix("blub");
 		rp.walkTree(n, null);
-		assertEquals(n.getGeneralID("foo:key", 0), "bar");
+		assertEquals("bar", n.getGeneralID("foo:key", 0));
 		rp.addPrefix("foo");
 		rp.setZappGeneralID(false);
 		rp.walkTree(n, null);
-		assertEquals(n.getGeneralID("foo:key", 0), "bar");
+		assertEquals("bar", n.getGeneralID("foo:key", 0));
 		rp.setZappGeneralID(true);
 		rp.walkTree(n, null);
 		assertNull(n.getGeneralID("foo:key", 0));

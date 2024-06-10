@@ -81,7 +81,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * test for exposedmedia related stuff
  */
-public class JDFExposedMediaTest extends JDFTestCaseBase
+class JDFExposedMediaTest extends JDFTestCaseBase
 {
 
 	/**

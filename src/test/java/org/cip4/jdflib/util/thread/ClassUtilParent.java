@@ -79,7 +79,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Mar 15, 2013
  */
-public class ClassUtilParent extends JDFTestCaseBase
+class ClassUtilParent extends JDFTestCaseBase
 {
 	/**
 	 *

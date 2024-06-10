@@ -62,7 +62,7 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.XJMFHelper;
 import org.junit.jupiter.api.Test;
 
-public class PostXJDFWalkerTest extends JDFTestCaseBase
+class PostXJDFWalkerTest extends JDFTestCaseBase
 {
 
 	/**

@@ -52,7 +52,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class AuditHelperTest
+class AuditHelperTest
 {
 
 	/**

@@ -59,7 +59,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class IDFinderTest extends JDFTestCaseBase
+class IDFinderTest extends JDFTestCaseBase
 {
 
 	KElement root;

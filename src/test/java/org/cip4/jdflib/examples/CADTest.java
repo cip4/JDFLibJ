@@ -107,7 +107,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen tests for CAD production
  */
-public class CADTest extends JDFTestCaseBase
+class CADTest extends JDFTestCaseBase
 {
 	/**
 	 * @see junit.framework.TestCase#toString()

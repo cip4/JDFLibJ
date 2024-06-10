@@ -42,7 +42,7 @@ import org.cip4.jdflib.core.KElement;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class MessagePoolHelperTest extends JDFTestCaseBase
+class MessagePoolHelperTest extends JDFTestCaseBase
 {
 
 	/**

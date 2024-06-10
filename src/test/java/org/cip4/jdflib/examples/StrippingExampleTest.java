@@ -86,7 +86,7 @@ import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFStation;
 import org.junit.jupiter.api.Test;
 
-public class StrippingExampleTest extends ExampleTest
+class StrippingExampleTest extends ExampleTest
 {
 	@Test
 	void testMultiDieLayout()

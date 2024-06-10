@@ -102,7 +102,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
+class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 {
 	JDFQueue theQueue;
 	JDFJMF theJMF;

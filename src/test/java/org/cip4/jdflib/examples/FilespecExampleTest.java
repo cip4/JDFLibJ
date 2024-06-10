@@ -82,7 +82,7 @@ import org.cip4.jdflib.util.MimeUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class FilespecExampleTest extends JDFTestCaseBase
+class FilespecExampleTest extends JDFTestCaseBase
 {
 
 	JDFNode n;

@@ -116,7 +116,7 @@ import org.junit.jupiter.api.Test;
  *
  *         This implements the first fixture with unit tests for class JDFElement.
  */
-public class JDFElementTest extends JDFTestCaseBase
+class JDFElementTest extends JDFTestCaseBase
 {
 
 	// member variables for the fixture

@@ -91,7 +91,7 @@ import org.junit.jupiter.api.Test;
  *
  *         May 14, 2009
  */
-public class JDFIntegerRangeTest extends JDFTestCaseBase
+class JDFIntegerRangeTest extends JDFTestCaseBase
 {
 
 	/**

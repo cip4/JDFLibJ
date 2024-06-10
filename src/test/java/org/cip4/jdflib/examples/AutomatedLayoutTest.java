@@ -107,7 +107,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class AutomatedLayoutTest extends ExampleTest
+class AutomatedLayoutTest extends ExampleTest
 {
 	private JDFDoc doc;
 	private JDFNode n;

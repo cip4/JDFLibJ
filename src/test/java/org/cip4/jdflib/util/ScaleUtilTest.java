@@ -78,7 +78,7 @@ import org.junit.jupiter.api.Test;
  * @author Stefan Meißner, CIP4
  * @date 26.01.2010
  */
-public class ScaleUtilTest {
+class ScaleUtilTest {
 
 	/**
 	 * @see junit.framework.TestCase#setUp()

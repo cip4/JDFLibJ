@@ -82,7 +82,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFIdenticalTest extends JDFTestCaseBase
+class JDFIdenticalTest extends JDFTestCaseBase
 {
 
 	/**

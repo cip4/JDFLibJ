@@ -89,7 +89,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date May 15, 2014
  */
-public class JDFComponentTest extends JDFTestCaseBase
+class JDFComponentTest extends JDFTestCaseBase
 {
 	private JDFComponent c;
 	private JDFNode root;

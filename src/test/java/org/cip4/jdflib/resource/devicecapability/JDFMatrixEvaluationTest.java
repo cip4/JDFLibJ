@@ -86,7 +86,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Dec 10, 2010
  */
-public class JDFMatrixEvaluationTest extends JDFTestCaseBase
+class JDFMatrixEvaluationTest extends JDFTestCaseBase
 {
 	private JDFMatrixEvaluation m;
 

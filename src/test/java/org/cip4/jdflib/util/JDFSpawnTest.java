@@ -117,7 +117,7 @@ import org.w3c.dom.Node;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
-public class JDFSpawnTest extends JDFTestCaseBase
+class JDFSpawnTest extends JDFTestCaseBase
 {
 
 	/**

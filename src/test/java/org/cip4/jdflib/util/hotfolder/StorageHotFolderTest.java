@@ -64,7 +64,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Feb 14, 2011
  */
-public class StorageHotFolderTest extends JDFTestCaseBase
+class StorageHotFolderTest extends JDFTestCaseBase
 {
 
 	/**
@@ -73,7 +73,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	 * @author rainer prosi
 	 * @date Mar 11, 2013
 	 */
-	public class CountListener implements HotFolderListener
+	class CountListener implements HotFolderListener
 	{
 		/**
 		 *
@@ -125,7 +125,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	 * @author rainer prosi
 	 * @date Mar 11, 2013
 	 */
-	public class ExtractListener implements HotFolderListener
+	class ExtractListener implements HotFolderListener
 	{
 		/**
 		 *

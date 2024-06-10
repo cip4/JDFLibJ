@@ -82,7 +82,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFSourceResource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-public class JDFSourceResourceTest extends JDFTestCaseBase
+class JDFSourceResourceTest extends JDFTestCaseBase
 {
 
 	////////////////////////////////////////////////////////////////////////////

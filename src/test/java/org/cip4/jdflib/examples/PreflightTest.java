@@ -47,7 +47,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-public class PreflightTest extends JDFTestCaseBase
+class PreflightTest extends JDFTestCaseBase
 {
 	protected JDFActionPool aPool;
 	protected JDFNode n;

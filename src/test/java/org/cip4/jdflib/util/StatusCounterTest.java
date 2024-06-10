@@ -80,7 +80,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class StatusCounterTest extends JDFTestCaseBase
+class StatusCounterTest extends JDFTestCaseBase
 {
 	protected JDFDoc d;
 	private JDFNode n;

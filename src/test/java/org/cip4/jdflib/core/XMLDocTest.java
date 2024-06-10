@@ -110,7 +110,7 @@ import org.xml.sax.SAXException;
 /**
  * @author MuchaD
  */
-public class XMLDocTest extends JDFTestCaseBase
+class XMLDocTest extends JDFTestCaseBase
 {
 
 	protected abstract class MyThread implements Runnable

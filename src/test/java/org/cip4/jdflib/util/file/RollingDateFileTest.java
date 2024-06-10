@@ -84,7 +84,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Mar 18, 2012
  */
-public class RollingDateFileTest extends JDFTestCaseBase
+class RollingDateFileTest extends JDFTestCaseBase
 {
 	RollingDateFile rdf;
 

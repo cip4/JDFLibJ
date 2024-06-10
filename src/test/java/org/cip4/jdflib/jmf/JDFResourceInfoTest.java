@@ -57,7 +57,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Jan 22, 2013
  */
-public class JDFResourceInfoTest extends JDFTestCaseBase
+class JDFResourceInfoTest extends JDFTestCaseBase
 {
 	/**
 	 *

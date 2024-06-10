@@ -113,7 +113,7 @@ import org.xml.sax.SAXException;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
-public class XJDFTest extends JDFTestCaseBase
+class XJDFTest extends JDFTestCaseBase
 {
 	private JDFNode n = null;
 	private KElement xjdf = null;

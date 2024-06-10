@@ -88,7 +88,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Jun 21, 2014
  */
-public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
+class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 {
 	String agentName;
 	VJDFAttributeMap vMap;

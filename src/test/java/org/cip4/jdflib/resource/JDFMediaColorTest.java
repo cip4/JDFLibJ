@@ -13,7 +13,7 @@ import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFMediaColorTest {
+class JDFMediaColorTest {
 	@Test
 	void testMediaColor()
 	{

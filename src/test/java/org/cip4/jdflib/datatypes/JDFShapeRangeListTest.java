@@ -16,7 +16,7 @@ import java.util.zip.DataFormatException;
 
 import org.junit.jupiter.api.Test;
 
-public class JDFShapeRangeListTest
+class JDFShapeRangeListTest
 {
 	/*
 	 * Class under test for void append(JDFShapeRange)

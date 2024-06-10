@@ -86,7 +86,7 @@ import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class XJMFTypeMapTest extends JDFTestCaseBase
+class XJMFTypeMapTest extends JDFTestCaseBase
 {
 
 	/**

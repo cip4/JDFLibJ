@@ -85,7 +85,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date May 9, 2014
  */
-public class JDFAddressTest extends JDFTestCaseBase
+class JDFAddressTest extends JDFTestCaseBase
 {
 	/**
 	 * tests the JDFAddress class

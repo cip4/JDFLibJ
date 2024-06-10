@@ -82,7 +82,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class DelayedPersistTest extends JDFTestCaseBase
+class DelayedPersistTest extends JDFTestCaseBase
 {
 	File file;
 
@@ -185,7 +185,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
-	public class TestPersist implements IPersistable
+	class TestPersist implements IPersistable
 	{
 
 		/**
@@ -203,7 +203,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
-	public class TestRun implements Runnable
+	class TestRun implements Runnable
 	{
 
 		/**
@@ -221,7 +221,7 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
-	public class TestRunPersist implements Runnable, IPersistable
+	class TestRunPersist implements Runnable, IPersistable
 	{
 
 		/**

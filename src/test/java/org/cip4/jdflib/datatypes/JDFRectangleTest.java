@@ -47,7 +47,7 @@ package org.cip4.jdflib.datatypes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFRectangleTest {
+class JDFRectangleTest {
 	/**
 	 *
 	 * @throws Exception

@@ -108,7 +108,7 @@ import org.junit.jupiter.api.Test;
  *
  * Apr 1, 2009
  */
-public class MISFinTest extends BaseGoldenTicketTest
+class MISFinTest extends BaseGoldenTicketTest
 {
 	/**
 	 * test MIS to Finishing ICS

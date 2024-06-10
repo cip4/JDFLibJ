@@ -82,7 +82,7 @@ import org.junit.jupiter.api.Test;
  *
  *         12.01.2009
  */
-public class UrlUtilTest extends JDFTestCaseBase
+class UrlUtilTest extends JDFTestCaseBase
 {
 
 	static final String FTP_SITE = null; // "ftp://speedtest.tele2.net/";

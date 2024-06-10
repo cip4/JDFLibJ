@@ -64,7 +64,7 @@ import org.junit.jupiter.api.Test;
  *
  *         < July 4, 2009
  */
-public class JDFQueueFilterTest extends JDFTestCaseBase
+class JDFQueueFilterTest extends JDFTestCaseBase
 {
 	JDFQueue theQueue;
 	JDFJMF theJMF;

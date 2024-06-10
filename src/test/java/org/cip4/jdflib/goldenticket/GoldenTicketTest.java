@@ -84,7 +84,7 @@ import org.junit.jupiter.api.Test;
  *
  * May 13, 2009
  */
-public class GoldenTicketTest extends BaseGoldenTicketTest
+class GoldenTicketTest extends BaseGoldenTicketTest
 {
 	protected ProductGoldenTicket pgt;
 	protected String agentName;

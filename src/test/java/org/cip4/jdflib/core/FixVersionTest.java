@@ -96,7 +96,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class FixVersionTest extends JDFTestCaseBase
+class FixVersionTest extends JDFTestCaseBase
 {
 	private JDFNode n;
 

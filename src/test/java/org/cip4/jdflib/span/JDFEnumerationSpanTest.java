@@ -59,7 +59,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class JDFEnumerationSpanTest extends JDFTestCaseBase
+class JDFEnumerationSpanTest extends JDFTestCaseBase
 {
 
 	/**

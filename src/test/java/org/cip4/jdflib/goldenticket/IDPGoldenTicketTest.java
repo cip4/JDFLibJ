@@ -86,7 +86,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class IDPGoldenTicketTest extends BaseGoldenTicketTest
+class IDPGoldenTicketTest extends BaseGoldenTicketTest
 {
 
 	// //////////////////////////////////////////////////////////////////////////

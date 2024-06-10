@@ -76,7 +76,7 @@ import org.junit.jupiter.api.Test;
  * 
  * Sep 23, 2009
  */
-public class NarrowWebTest extends BaseGoldenTicketTest
+class NarrowWebTest extends BaseGoldenTicketTest
 {
 
 	/**

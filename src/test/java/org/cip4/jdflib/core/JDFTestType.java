@@ -10,7 +10,7 @@
 package org.cip4.jdflib.core;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-public class JDFTestType extends JDFElement
+class JDFTestType extends JDFElement
 {
 	private static final long serialVersionUID = 1L;
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];

@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class WalkSignalResourceTest extends JDFTestCaseBase
+class WalkSignalResourceTest extends JDFTestCaseBase
 {
 
 	/**

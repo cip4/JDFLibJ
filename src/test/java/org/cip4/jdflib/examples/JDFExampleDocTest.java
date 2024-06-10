@@ -150,7 +150,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class JDFExampleDocTest extends ExampleTest
+class JDFExampleDocTest extends ExampleTest
 {
 	private JDFDoc m_doc = null;
 

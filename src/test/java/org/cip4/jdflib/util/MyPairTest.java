@@ -45,7 +45,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Dec 21, 2012
  */
-public class MyPairTest extends JDFTestCaseBase
+class MyPairTest extends JDFTestCaseBase
 {
 	/**
 	 *

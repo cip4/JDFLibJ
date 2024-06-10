@@ -79,7 +79,7 @@ import org.junit.jupiter.api.Test;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class BackupDirectoryTest extends JDFTestCaseBase
+class BackupDirectoryTest extends JDFTestCaseBase
 {
 	BackupDirectory dir;
 

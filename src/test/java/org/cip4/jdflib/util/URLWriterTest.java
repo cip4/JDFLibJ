@@ -63,7 +63,7 @@ import org.cip4.jdflib.util.thread.OrderedTaskQueue;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class URLWriterTest extends JDFTestCaseBase
+class URLWriterTest extends JDFTestCaseBase
 {
 	/**
 	 * @throws MalformedURLException

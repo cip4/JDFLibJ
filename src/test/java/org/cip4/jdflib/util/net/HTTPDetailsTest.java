@@ -48,7 +48,7 @@ import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class HTTPDetailsTest
+class HTTPDetailsTest
 {
 
 	private final class TestConnection extends HttpURLConnection

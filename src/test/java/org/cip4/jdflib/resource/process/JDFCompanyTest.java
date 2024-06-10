@@ -44,7 +44,7 @@ import org.cip4.jdflib.core.VString;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFCompanyTest extends JDFTestCaseBase
+class JDFCompanyTest extends JDFTestCaseBase
 {
 	/**
 	 *

@@ -55,7 +55,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Mar 3 2013
  */
-public class JMFPipeTest extends JDFTestCaseBase
+class JMFPipeTest extends JDFTestCaseBase
 {
 	/**
 	 *

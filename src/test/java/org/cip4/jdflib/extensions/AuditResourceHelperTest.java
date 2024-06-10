@@ -77,7 +77,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class AuditResourceHelperTest extends JDFTestCaseBase
+class AuditResourceHelperTest extends JDFTestCaseBase
 {
 
 	/**

@@ -43,7 +43,7 @@ import org.cip4.jdflib.resource.process.JDFColor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CxFColorObjectTest extends ExampleTest
+class CxFColorObjectTest extends ExampleTest
 {
 
 	/**

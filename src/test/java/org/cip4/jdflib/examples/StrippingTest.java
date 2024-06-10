@@ -75,7 +75,7 @@ import org.cip4.jdflib.resource.process.JDFStripMark;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class StrippingTest extends JDFTestCaseBase
+class StrippingTest extends JDFTestCaseBase
 {
 	private JDFNode n;
 	private JDFDoc d;

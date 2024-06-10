@@ -118,7 +118,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class JDFNodeTest extends JDFTestCaseBase
+class JDFNodeTest extends JDFTestCaseBase
 {
 	/**
 	 *

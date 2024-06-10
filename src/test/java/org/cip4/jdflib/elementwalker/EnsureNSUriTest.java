@@ -53,7 +53,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class EnsureNSUriTest extends JDFTestCaseBase
+class EnsureNSUriTest extends JDFTestCaseBase
 {
 	/**
 	 *

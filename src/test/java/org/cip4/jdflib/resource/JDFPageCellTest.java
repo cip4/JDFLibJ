@@ -77,7 +77,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JDFPageCellTest extends JDFTestCaseBase
+class JDFPageCellTest extends JDFTestCaseBase
 {
 
 	/**

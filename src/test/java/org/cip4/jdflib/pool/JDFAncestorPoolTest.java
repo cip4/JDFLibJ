@@ -89,7 +89,7 @@ import org.junit.jupiter.api.Test;
  *         This implements the first fixture with unit tests for class
  *         JDFAmountPool.
  */
-public class JDFAncestorPoolTest extends JDFTestCaseBase
+class JDFAncestorPoolTest extends JDFTestCaseBase
 {
 	/**
 	 * @see junit.framework.TestCase#toString()

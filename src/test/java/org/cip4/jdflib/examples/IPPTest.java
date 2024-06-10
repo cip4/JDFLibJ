@@ -73,7 +73,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class IPPTest extends JDFTestCaseBase
+class IPPTest extends JDFTestCaseBase
 {
 	private JDFNode n;
 	private JDFComponent comp;

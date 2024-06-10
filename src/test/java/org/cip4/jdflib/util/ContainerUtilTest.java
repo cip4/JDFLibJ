@@ -71,7 +71,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi
  *
  */
-public class ContainerUtilTest extends JDFTestCaseBase
+class ContainerUtilTest extends JDFTestCaseBase
 {
 	private class SimpleMatch implements IMatches
 	{

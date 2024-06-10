@@ -60,7 +60,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class VJDFAttributeMapTest extends JDFTestCaseBase
+class VJDFAttributeMapTest extends JDFTestCaseBase
 {
 	/**
 	 * tests clone

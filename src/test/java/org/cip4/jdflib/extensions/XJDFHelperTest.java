@@ -67,7 +67,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class XJDFHelperTest extends JDFTestCaseBase
+class XJDFHelperTest extends JDFTestCaseBase
 {
 	XJDFHelper theHelper = null;
 

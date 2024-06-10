@@ -93,7 +93,7 @@ import org.junit.jupiter.api.Test;
  * @author rainerprosi
  * @date Jan 10, 2012
  */
-public class JDFUsageCounterTest extends JDFTestCaseBase
+class JDFUsageCounterTest extends JDFTestCaseBase
 {
 
 	/**

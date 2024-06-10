@@ -64,7 +64,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class NColorTest extends JDFTestCaseBase
+class NColorTest extends JDFTestCaseBase
 {
 	private JDFNode node;
 	private MISCPGoldenTicket bgt;

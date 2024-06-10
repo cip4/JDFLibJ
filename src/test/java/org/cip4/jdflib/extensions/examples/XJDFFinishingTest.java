@@ -67,7 +67,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJDFFinishingTest extends JDFTestCaseBase
+class XJDFFinishingTest extends JDFTestCaseBase
 {
 	/**
 	 *

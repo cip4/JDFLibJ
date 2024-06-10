@@ -53,7 +53,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class UnitParserTest extends JDFTestCaseBase
+class UnitParserTest extends JDFTestCaseBase
 {
 
 	private UnitParser unitParser;

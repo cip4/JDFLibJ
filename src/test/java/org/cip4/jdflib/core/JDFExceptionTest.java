@@ -77,7 +77,7 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * simple JDFException test case class
  */
-public class JDFExceptionTest extends JDFTestCaseBase
+class JDFExceptionTest extends JDFTestCaseBase
 {
 	/**
 	 * 

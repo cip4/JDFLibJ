@@ -76,7 +76,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Nov 22, 2011
  */
-public class JMFExampleTest extends ExampleTest
+class JMFExampleTest extends ExampleTest
 {
 	/**
 	 *

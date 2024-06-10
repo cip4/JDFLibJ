@@ -64,7 +64,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJDFCombinerTest extends JDFTestCaseBase
+class XJDFCombinerTest extends JDFTestCaseBase
 {
 
 	@Test

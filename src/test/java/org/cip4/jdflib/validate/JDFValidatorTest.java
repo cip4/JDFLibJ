@@ -91,7 +91,7 @@ import org.junit.jupiter.api.Test;
  *
  * Jul 16, 2010
  */
-public class JDFValidatorTest extends JDFTestCaseBase
+class JDFValidatorTest extends JDFTestCaseBase
 {
 	private JDFValidator validator;
 	private JDFDoc doc;

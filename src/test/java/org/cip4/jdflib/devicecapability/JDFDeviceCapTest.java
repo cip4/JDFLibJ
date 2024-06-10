@@ -120,7 +120,7 @@ import org.junit.jupiter.api.Test;
  * 
  * < July 6, 2009
  */
-public class JDFDeviceCapTest extends JDFTestCaseBase
+class JDFDeviceCapTest extends JDFTestCaseBase
 {
 
 	// ///////////////////////////////////////////////////////////////

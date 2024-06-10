@@ -78,7 +78,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Oct 6, 2010
  */
-public class JDFAssemblyTest extends JDFTestCaseBase
+class JDFAssemblyTest extends JDFTestCaseBase
 {
 
 	/**

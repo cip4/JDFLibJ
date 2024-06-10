@@ -67,7 +67,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Dec 23, 2012
  */
-public class XJDFSheetOptimizeTest extends ExampleTest
+class XJDFSheetOptimizeTest extends ExampleTest
 {
 	private static final String GANG = "Gang_";
 	private XJDFHelper xjdfHelper;

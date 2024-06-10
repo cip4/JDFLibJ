@@ -80,7 +80,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-public class JDFStitchingParamsTest extends JDFTestCaseBase
+class JDFStitchingParamsTest extends JDFTestCaseBase
 {
 	/**
 	 * tests the separationlist class

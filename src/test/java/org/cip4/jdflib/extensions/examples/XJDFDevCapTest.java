@@ -84,7 +84,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJDFDevCapTest extends JDFTestCaseBase
+class XJDFDevCapTest extends JDFTestCaseBase
 {
 	/**
 	 * @deprecated we now use schema

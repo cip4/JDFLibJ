@@ -78,7 +78,7 @@ import org.junit.jupiter.api.Test;
  * @author rainerprosi
  * @date Jan 29, 2013
  */
-public class EnsureElementUriTest {
+class EnsureElementUriTest {
 	/**
 	 * 
 	 * 

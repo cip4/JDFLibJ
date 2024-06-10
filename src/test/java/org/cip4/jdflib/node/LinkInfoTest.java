@@ -73,7 +73,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class LinkInfoTest {
+class LinkInfoTest {
 
 	/**
 	 * 

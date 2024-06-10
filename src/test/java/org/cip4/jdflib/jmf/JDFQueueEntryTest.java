@@ -88,7 +88,7 @@ import org.junit.jupiter.api.Test;
  * 
  * This implements the first fixture with unit tests for class JDFQueue.
  */
-public class JDFQueueEntryTest {
+class JDFQueueEntryTest {
 	private JDFQueue q;
 
 	/**

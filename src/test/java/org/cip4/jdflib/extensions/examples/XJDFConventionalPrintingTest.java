@@ -72,7 +72,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJDFConventionalPrintingTest extends JDFTestCaseBase
+class XJDFConventionalPrintingTest extends JDFTestCaseBase
 {
 
 	/**

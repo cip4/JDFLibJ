@@ -69,7 +69,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author MuchaD This implements the first fixture with unit tests for class JDFAudit.
  */
-public class JDFAuditTest extends ExampleTest
+class JDFAuditTest extends ExampleTest
 {
 
 	@Test

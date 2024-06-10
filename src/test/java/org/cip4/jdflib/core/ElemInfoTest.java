@@ -42,7 +42,7 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class ElemInfoTest {
+class ElemInfoTest {
 
 	@Test
 	void testgetFirstLastVersion()

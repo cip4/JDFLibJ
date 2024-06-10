@@ -39,7 +39,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-public class WalkXElementTest
+class WalkXElementTest
 {
 
 	@Test

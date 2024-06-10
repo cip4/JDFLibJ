@@ -43,7 +43,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
 import org.junit.jupiter.api.Test;
 
-public class WalkIgnoreTest extends JDFTestCaseBase
+class WalkIgnoreTest extends JDFTestCaseBase
 {
 
 	@Test

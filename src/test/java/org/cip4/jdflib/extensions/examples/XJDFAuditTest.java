@@ -63,7 +63,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  *
  */
-public class XJDFAuditTest extends ExampleTest
+class XJDFAuditTest extends ExampleTest
 {
 	/**
 	 *

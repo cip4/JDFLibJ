@@ -114,7 +114,7 @@ import org.junit.jupiter.api.Test;
  * @author rainer prosi
  * @date Mar 3 2013
  */
-public class DigitalFinishingTest extends ExampleTest
+class DigitalFinishingTest extends ExampleTest
 {
 	/**
 	 *

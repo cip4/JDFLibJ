@@ -76,7 +76,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.junit.jupiter.api.Test;
 
-public class JDFResubmissionParamsTest extends JDFTestCaseBase
+class JDFResubmissionParamsTest extends JDFTestCaseBase
 {
 
 	@Test

@@ -47,7 +47,7 @@ import java.io.File;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.Test;
 
-public class HotFolderRunnerTest extends JDFTestCaseBase
+class HotFolderRunnerTest extends JDFTestCaseBase
 {
 
 	@Test

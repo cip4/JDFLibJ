@@ -81,7 +81,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.w3c.dom.DOMException;
 
-public class AutoClassInstantiateVisitor implements DirectoryVisitor
+class AutoClassInstantiateVisitor implements DirectoryVisitor
 {
 
 	public AutoClassInstantiateVisitor()

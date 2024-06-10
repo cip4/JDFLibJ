@@ -57,7 +57,7 @@ import org.junit.jupiter.api.Test;
  *
  *         June 11, 2009
  */
-public class CPUTimerTest extends JDFTestCaseBase
+class CPUTimerTest extends JDFTestCaseBase
 {
 
 	/**

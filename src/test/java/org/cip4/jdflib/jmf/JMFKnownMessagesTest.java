@@ -96,7 +96,7 @@ import org.junit.jupiter.api.Test;
  * 
  *         Test of the Resource JMF
  */
-public class JMFKnownMessagesTest extends JDFTestCaseBase
+class JMFKnownMessagesTest extends JDFTestCaseBase
 {
 	/**
 	 * 
