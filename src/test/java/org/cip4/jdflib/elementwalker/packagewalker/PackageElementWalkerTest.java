@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,7 +96,7 @@ class PackageElementWalkerTest extends JDFTestCaseBase
 	@Test
 	void testConstruct()
 	{
-		PackageTestWalker w = new PackageTestWalker();
+		final PackageTestWalker w = new PackageTestWalker();
 		Assertions.assertNotNull(w);
 	}
 
@@ -107,8 +107,8 @@ class PackageElementWalkerTest extends JDFTestCaseBase
 	@Test
 	void testMultiConstruct()
 	{
-		FixVersion v = new FixVersion(EnumVersion.Version_1_1);
-		FixVersion v2 = new FixVersion(EnumVersion.Version_1_1);
+		final FixVersion v = new FixVersion(EnumVersion.Version_1_1);
+		final FixVersion v2 = new FixVersion(EnumVersion.Version_1_1);
 		Assertions.assertNotNull(v2);
 		Assertions.assertNotNull(v);
 		Assertions.assertEquals(v.getFactory().getBaseWalkers().size(), v2.getFactory().getBaseWalkers().size());
@@ -121,13 +121,13 @@ class PackageElementWalkerTest extends JDFTestCaseBase
 	@Test
 	void testMultiConstructJDF()
 	{
-		JDFDoc d = creatXMDoc();
-		JDFNode n = d.getJDFRoot();
-		XJDF20 conv = new XJDF20();
-		KElement xjdf = conv.convert(n);
-		XJDFToJDFConverter c2 = new XJDFToJDFConverter(null);
-		JDFDoc d2 = c2.convert(xjdf);
-		JDFNode n2 = d2.getJDFRoot();
+		final JDFDoc d = creatXMDoc();
+		final JDFNode n = d.getJDFRoot();
+		final XJDF20 conv = new XJDF20();
+		final KElement xjdf = conv.convert(n);
+		final XJDFToJDFConverter c2 = new XJDFToJDFConverter(null);
+		final JDFDoc d2 = c2.convert(xjdf);
+		final JDFNode n2 = d2.getJDFRoot();
 		Assertions.assertNotNull(n2.getResource(ElementName.EXPOSEDMEDIA, null, 0));
 	}
 
@@ -138,8 +138,8 @@ class PackageElementWalkerTest extends JDFTestCaseBase
 	@Test
 	void testFoo()
 	{
-		PackageTestWalker w = new PackageTestWalker();
-		BaseWalkerFactory factory = w.getFactory();
+		final PackageTestWalker w = new PackageTestWalker();
+		final BaseWalkerFactory factory = w.getFactory();
 		Assertions.assertNotNull(factory);
 		Assertions.assertEquals(WalkFoo.class, factory.getWalker(new XMLDoc("D", null).getRoot()).getClass());
 	}
@@ -153,8 +153,8 @@ class PackageElementWalkerTest extends JDFTestCaseBase
 	{
 		for (int i = 0; i < 10; i++)
 		{
-			PackageTestWalker w = new PackageTestWalker();
-			BaseWalkerFactory factory = w.getFactory();
+			final PackageTestWalker w = new PackageTestWalker();
+			final BaseWalkerFactory factory = w.getFactory();
 			Assertions.assertNotNull(factory);
 			Assertions.assertEquals(WalkFoo.class, factory.getWalker(new XMLDoc("D", null).getRoot()).getClass());
 		}
