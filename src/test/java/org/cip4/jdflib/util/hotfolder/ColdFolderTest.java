@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -43,12 +43,15 @@
  */
 package org.cip4.jdflib.util.hotfolder;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -83,10 +86,10 @@ public class ColdFolderTest extends JDFTestCaseBase
 		final ColdFolder cf = new ColdFolder(cfd, null, listener);
 		final File file = new File(cfd, "f1.txt");
 		file.createNewFile();
-		Assertions.assertTrue(file.exists());
-		ThreadUtil.sleep(4200);
-		Assertions.assertTrue(file.exists());
-		Assertions.assertEquals(1, listener.getN());
+		assertTrue(file.exists());
+		ThreadUtil.sleep(1420);
+		assertTrue(file.exists());
+		assertEquals(1, listener.getN());
 		cf.stop();
 	}
 
@@ -97,17 +100,18 @@ public class ColdFolderTest extends JDFTestCaseBase
 	public synchronized void testDoMulti() throws Exception
 	{
 		final File cfd = new File(sm_dirTestDataTemp + "Cold3");
+		FileUtil.deleteAll(cfd);
 		final HotFolderListener listener = Mockito.mock(HotFolderListener.class);
 
 		final ColdFolder cf = new ColdFolder(cfd, null, listener);
 		for (int i = 0; i < 3; i++)
 		{
 			final File file = new File(cfd, "f1.txt");
-			Assertions.assertTrue(file.createNewFile(), "File could not be created");
-			Assertions.assertTrue(file.exists());
+			assertTrue(file.createNewFile(), "File could not be created");
+			assertTrue(file.exists());
 			Mockito.verify(listener, Mockito.timeout(10_000)).hotFile(file);
-			Assertions.assertTrue(file.exists());
-			Assertions.assertTrue(file.delete(), "File could not be deleted");
+			assertTrue(file.exists());
+			file.delete();
 		}
 		cf.stop();
 	}
@@ -123,8 +127,8 @@ public class ColdFolderTest extends JDFTestCaseBase
 		final ColdFolder cf = new ColdFolder(cfd, null, listener);
 		final File file = new File(cfd, "f1.txt");
 		file.createNewFile();
-		Assertions.assertTrue(file.exists());
-		Assertions.assertEquals(1, cf.getHotFiles().length);
+		assertTrue(file.exists());
+		assertEquals(1, cf.getHotFiles().length);
 		cf.stop();
 	}
 
@@ -139,8 +143,8 @@ public class ColdFolderTest extends JDFTestCaseBase
 		final ColdFolder cf = new ColdFolder(cfd, null, listener);
 		final File file = new File(cfd, "f1.txt");
 		file.createNewFile();
-		Assertions.assertTrue(file.exists());
-		Assertions.assertTrue(cf.processSingleFile(new FileTime(file, true)));
+		assertTrue(file.exists());
+		assertTrue(cf.processSingleFile(new FileTime(file, true)));
 		cf.stop();
 	}
 
