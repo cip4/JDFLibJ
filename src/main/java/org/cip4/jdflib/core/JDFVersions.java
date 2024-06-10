@@ -4,7 +4,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,8 +77,7 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 /**
  * @author funkevol
  *
- *         TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style -
- *         Code Templates
+ *         TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style - Code Templates
  */
 public class JDFVersions
 {
@@ -113,6 +112,7 @@ public class JDFVersions
 
 	/**
 	 * Sets the default JDF version.
+	 * 
 	 * @param v
 	 *
 	 * @deprecated use JDFElement.setDefaultJDFVersion(v);
@@ -183,6 +183,7 @@ public class JDFVersions
 			i = jdfVersions.length;
 
 		i--; // must be removed if unknown is removed
+		i = Math.max(i, 7);
 		return i;
 	}
 
