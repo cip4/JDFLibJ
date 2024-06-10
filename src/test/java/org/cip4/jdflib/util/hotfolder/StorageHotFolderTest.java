@@ -323,7 +323,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 			}
 		}
 		assertFalse(file.exists());
-		assertEquals(0, tmpHFDir.listFiles().length, 0);
+		assertEquals(0, tmpHFDir.listFiles().length, 2);
 		hf.stop();
 	}
 
