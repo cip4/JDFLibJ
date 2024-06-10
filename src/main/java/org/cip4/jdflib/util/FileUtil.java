@@ -1507,23 +1507,35 @@ public class FileUtil
 
 	public static void dumpException(final File except, final Throwable t)
 	{
+		FileWriter w = null;
+		PrintWriter pw = null;
 		try
 		{
 			createNewFile(except);
-			final FileWriter w = new FileWriter(except);
+			w = new FileWriter(except);
 			w.write(t.getClass().getSimpleName());
 			w.write("\n");
 			w.write("Message: " + t.getMessage());
 			w.write("\n");
-			final PrintWriter pw = new PrintWriter(w);
-
+			pw = new PrintWriter(w);
 			t.printStackTrace(pw);
-			pw.flush();
-			pw.close();
 		}
 		catch (final IOException e)
 		{
 			log.error("Cannot write to exception file: " + except, e);
+		}
+		finally
+		{
+			if (pw != null)
+			{
+				pw.flush();
+				pw.close();
+			}
+			else if (w != null)
+			{
+				ContainerUtil.close(w);
+			}
+
 		}
 
 	}

@@ -47,6 +47,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.io.Closeable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -1193,6 +1194,22 @@ public class ContainerUtil
 		if (map != null && key != null && value != null)
 			return map.put(key, value);
 		return null;
+
+	}
+
+	public static void close(final Closeable w)
+	{
+		if (w != null)
+		{
+			try
+			{
+				w.close();
+			}
+			catch (final Exception x)
+			{
+				// nop
+			}
+		}
 
 	}
 

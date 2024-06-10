@@ -44,6 +44,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -595,6 +598,23 @@ public class ContainerUtilTest extends JDFTestCaseBase
 
 		ContainerUtil.unify(v);
 		assertEquals(v, v2);
+	}
+
+	/**
+	 * @throws FileNotFoundException
+	 *
+	 */
+	@Test
+	void testClose() throws FileNotFoundException
+	{
+		final File out = new File(sm_dirTestDataTemp + "pw.out");
+
+		final PrintWriter pw = new PrintWriter(out);
+		pw.write("foo");
+		assertFalse(pw.checkError());
+		ContainerUtil.close(pw);
+		pw.write("bar");
+		assertTrue(pw.checkError());
 	}
 
 	/**

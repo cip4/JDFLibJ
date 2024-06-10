@@ -80,7 +80,7 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for JDFVersion.
  */
-public class JDFVersionsTest extends JDFTestCaseBase
+class JDFVersionsTest extends JDFTestCaseBase
 {
 
 	@Test

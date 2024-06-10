@@ -82,7 +82,7 @@ import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.junit.jupiter.api.Test;
 
-public class AutoTest
+class AutoTest
 {
 	// Beware!
 	// These tests are for checking versioning and JDFValidator internal details
