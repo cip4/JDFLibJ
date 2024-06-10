@@ -329,6 +329,38 @@ class StorageHotFolderTest extends JDFTestCaseBase
 
 	/**
 	 *
+	 * check problems with special characters
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public synchronized void testCopyCompleted() throws IOException
+	{
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		final File file = new File(sm_dirTestDataTemp + "complete.xml");
+		file.createNewFile();
+		hf.copyCompleted(file, true);
+		assertFalse(file.exists());
+	}
+
+	/**
+	 *
+	 * check problems with special characters
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public synchronized void testCopyCompletedBad() throws IOException
+	{
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		final File file = new File(sm_dirTestDataTemp + "complete.xml");
+		file.createNewFile();
+		hf.copyCompleted(file, false, new IllegalArgumentException("foo"));
+		assertFalse(file.exists());
+	}
+
+	/**
+	 *
 	 * simple creation
 	 *
 	 * @throws IOException
