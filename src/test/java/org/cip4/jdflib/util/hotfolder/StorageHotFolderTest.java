@@ -192,7 +192,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 *
 	 * @throws IOException
 	 */
-	public synchronized void testSimple() throws IOException
+	synchronized void testSimple() throws IOException
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		final File file = new File(theHFDir + File.separator + "f1.txt");
@@ -217,7 +217,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public synchronized void testSubdir() throws IOException
+	synchronized void testSubdir() throws IOException
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -250,7 +250,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public synchronized void testSubdirSpace() throws IOException
+	synchronized void testSubdirSpace() throws IOException
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -286,7 +286,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public synchronized void testNonAscii() throws IOException
+	synchronized void testNonAscii() throws IOException
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		final File file = new File(theHFDir + File.separator + "42 äöü €.txt");
@@ -309,7 +309,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public synchronized void testEvilFile() throws IOException
+	synchronized void testEvilFile() throws IOException
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		final File file = new File(theHFDir + File.separator + "a.~#~2.xml");
@@ -334,7 +334,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public synchronized void testCopyCompleted() throws IOException
+	synchronized void testCopyCompleted() throws IOException
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		final File file = new File(sm_dirTestDataTemp + "complete.xml");
@@ -350,7 +350,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public synchronized void testCopyCompletedBad() throws IOException
+	synchronized void testCopyCompletedBad() throws IOException
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		final File file = new File(sm_dirTestDataTemp + "complete.xml");
@@ -366,7 +366,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
-	public synchronized void testAddListener() throws IOException
+	synchronized void testAddListener() throws IOException
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, ".xml", new CountListener());
 		final File file = new File(theHFDir + File.separator + "ffff1.txt");
@@ -393,7 +393,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public synchronized void testOKError() throws Exception
+	synchronized void testOKError() throws Exception
 	{
 		for (final int retry : new int[] { 1, 99 })
 			for (final boolean synch : new boolean[] { true, false })
@@ -470,7 +470,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public synchronized void testOKErrorMaxCheck() throws Exception
+	synchronized void testOKErrorMaxCheck() throws Exception
 	{
 		for (final boolean synch : new boolean[] { true, false })
 		{
@@ -513,7 +513,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public synchronized void testSetRetry() throws Exception
+	synchronized void testSetRetry() throws Exception
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setRetry(-99);
@@ -523,7 +523,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public synchronized void testProcessAux() throws Exception
+	synchronized void testProcessAux() throws Exception
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.stop();
@@ -539,7 +539,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	}
 
 	@Test
-	public synchronized void testToString() throws Exception
+	synchronized void testToString() throws Exception
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		assertNotNull(hf.toString());
@@ -552,7 +552,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public synchronized void testOKErrorRetry() throws Exception
+	synchronized void testOKErrorRetry() throws Exception
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setRetry(99);
