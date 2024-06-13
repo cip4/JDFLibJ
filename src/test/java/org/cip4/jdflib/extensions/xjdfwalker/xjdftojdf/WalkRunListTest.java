@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,63 +68,26 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import org.cip4.jdflib.core.AttributeName;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.resource.process.JDFRunList;
+import org.junit.jupiter.api.Test;
 
-/**
- * continue walking on these without copying e
- * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
- */
-public class WalkContent extends WalkResource
+class WalkRunListTest extends WalkRunList
 {
-	/**
-	 *
-	 */
-	public WalkContent()
-	{
-		super();
-	}
 
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected void updateAttributes(final KElement elem)
+	@Test
+	void testSplit()
 	{
-		elem.renameAttribute(AttributeName.PAGENUMBER, AttributeName.PAGEINDEX, null, null);
-		elem.renameAttribute("ContentStatus", AttributeName.PAGESTATUS, null, null);
-		elem.removeAttribute(AttributeName.ID);
-		elem.removeAttribute(AttributeName.PARTIDKEYS);
-		elem.removeAttribute(AttributeName.STATUS);
-		elem.removeAttribute("ContentType");
-		super.updateAttributes(elem);
-	}
-
-	/**
-	 *
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
-	{
-		if (e.hasChildElement(ElementName.FILESPEC, null))
-		{
-
-		}
-		return super.walk(e, trackElem);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return VString.getVString(XJDFConstants.Content, null);
+		final JDFRunList rl = (JDFRunList) new JDFDoc(ElementName.RUNLIST).getRoot();
+		rl.setGeneralID("g", "i");
+		rl.setFileSpecURL("foo");
+		final WalkRunList wrl = new WalkRunList();
+		wrl.splitLayoutElem(rl, null);
+		assertEquals("foo", rl.getFileURL());
+		assertEquals("i", rl.getGeneralID("g"));
 	}
 
 }

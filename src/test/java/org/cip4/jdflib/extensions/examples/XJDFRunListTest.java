@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,6 +40,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -165,6 +166,42 @@ class XJDFRunListTest extends JDFTestCaseBase
 		rl.appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "File:///in/colortest.pdf");
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "resources/RunListSimple.xjdf");
+
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public final void testContentList()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper("RunList", null, null);
+		xjdfHelper.setTypes(EnumType.Imposition.getName());
+
+		final SetHelper csh = xjdfHelper.getCreateSet(XJDFConstants.Content, (EnumUsage) null, null);
+		final ResourceHelper ch1 = csh.appendPartition(AttributeName.PAGENUMBER, "0 0", true);
+		ch1.setDescriptiveName("PageList 1");
+		final JDFElement c1 = (JDFElement) ch1.getResource();
+		c1.setAttribute(AttributeName.CONTENTTYPE, "Page");
+		final ResourceHelper ch2 = csh.appendPartition(AttributeName.PAGENUMBER, "1 1", true);
+		ch2.setDescriptiveName("PageList 2");
+		final JDFElement c2 = (JDFElement) ch2.getResource();
+		c2.setAttribute(AttributeName.CONTENTTYPE, "Page");
+
+		final SetHelper rlh = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, null);
+		final ResourceHelper runh1 = rlh.appendPartition(AttributeName.RUN, "r1", true);
+		final JDFRunList rl1 = (JDFRunList) runh1.getResource();
+		rl1.setAttribute(AttributeName.PAGES, "0 -1");
+		rl1.appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "File:///in/colortest1.pdf");
+		csh.ensureReference(rl1, XJDFConstants.ContentRefs);
+
+		final ResourceHelper runh2 = rlh.appendPartition(AttributeName.RUN, "r2", true);
+		final JDFRunList rl2 = (JDFRunList) runh2.getResource();
+		rl2.setAttribute(AttributeName.PAGES, "0 -1");
+		rl2.appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "File:///in/colortest2.pdf");
+		csh.ensureReference(rl2, XJDFConstants.ContentRefs);
+
+		writeRoundTripX(xjdfHelper, "contentlist", EnumValidationLevel.Incomplete);
 
 	}
 

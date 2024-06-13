@@ -118,7 +118,7 @@ public class WalkRunList extends WalkResource
 	 * 
 	 * @param xjdf
 	 */
-	void splitLayoutElem(final KElement xjdf, KElement trackJDF)
+	void splitLayoutElem(final KElement xjdf, final KElement trackJDF)
 	{
 		if (trackJDF != null && trackJDF.getXPathElement("LayoutElement/FileSpec") != null)
 		{
@@ -141,8 +141,10 @@ public class WalkRunList extends WalkResource
 				}
 			}
 			final VString knownLayouteElems = loe.knownElements();
+			knownLayouteElems.remove(ElementName.COMMENT);
+			knownLayouteElems.remove(ElementName.GENERALID);
 			final VElement vMyElm = xjdf.getChildElementVector(null, null);
-			for (KElement myElm : vMyElm)
+			for (final KElement myElm : vMyElm)
 			{
 				if (knownLayouteElems.contains(myElm.getLocalName()))
 				{

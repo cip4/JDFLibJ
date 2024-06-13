@@ -1146,7 +1146,42 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 * @return
 	 */
-	public KElement _testPageList(final boolean retainAll)
+	@Test
+	void testPageListSimple()
+	{
+		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
+		root.setType(EnumType.Trapping);
+
+		final JDFRunList rl = (JDFRunList) root.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		final JDFRunList ruLiRun = rl.addRun("foo.pdf", 0, 42);
+		final JDFRunList ruLiRun2 = rl.addRun("foo2.pdf", 0, 666);
+		JDFPageList pList = ruLiRun.appendPageList();
+		pList = (JDFPageList) pList.makeRootResource(null, null, true);
+		for (int i = 0; i < 2; i++)
+		{
+			final JDFPageData pd = pList.appendPageData();
+			pd.setPageStatus("DigitalArtArrived");
+		}
+
+		ruLiRun2.refElement(pList);
+
+		final XJDF20 xjdf20 = new XJDF20();
+		xjdf20.setSingleNode(true);
+		final KElement xjdf = xjdf20.makeNewJDF(root, null);
+		xjdf.write2File(sm_dirTestDataTemp + "pageListTest.simple.xjdf");
+		assertTrue(reparse(xjdf, 2, -1));
+		assertNotNull(xjdf);
+		for (int i = 1; i < 3; i++)
+		{
+			assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[" + i + "]/Content/@ContentStatus", null), "DigitalArtArrived");
+		}
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	KElement _testPageList(final boolean retainAll)
 	{
 		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
 		root.setType(EnumType.Trapping);

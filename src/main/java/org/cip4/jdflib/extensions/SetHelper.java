@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -105,6 +106,26 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	{
 		super();
 		this.theElement = set;
+	}
+
+	/**
+	 * ensure a reference *FROM* src
+	 *
+	 * @param src
+	 * @param key the reference key in src
+	 *
+	 */
+	public void ensureReference(final KElement src, String key)
+	{
+		if (src != null && theElement != null)
+		{
+			if (StringUtil.isEmpty(key))
+				key = getName();
+			if (!key.endsWith(JDFConstants.REF) && !key.endsWith(JDFConstants.REFS))
+				key += JDFConstants.REF;
+			final String id = ensureID();
+			src.setAttribute(key, id);
+		}
 	}
 
 	/**
@@ -270,7 +291,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public ResourceHelper getCreateExactPartition(final JDFAttributeMap map, final boolean addRes)
 	{
-		ResourceHelper h = getExactPartition(map);
+		final ResourceHelper h = getExactPartition(map);
 
 		return h != null ? h : appendPartition(map, addRes);
 	}
@@ -282,7 +303,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public ResourceHelper getExactPartition(final JDFAttributeMap map)
 	{
-		for (ResourceHelper h : getPartitionList())
+		for (final ResourceHelper h : getPartitionList())
 		{
 			if (h.hasPartition(map))
 			{
@@ -336,7 +357,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 * @param addRes
 	 * @return
 	 */
-	public ResourceHelper getCreatePartition(int index, final boolean addRes)
+	public ResourceHelper getCreatePartition(final int index, final boolean addRes)
 	{
 		return getCreateResource(index, addRes);
 	}

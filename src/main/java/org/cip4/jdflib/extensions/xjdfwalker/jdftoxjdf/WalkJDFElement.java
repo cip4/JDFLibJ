@@ -222,7 +222,7 @@ public class WalkJDFElement extends WalkElement
 		{
 			name = "RunListRef";
 		}
-		if ("ContactRef".equals(name))
+		if ("ContactRef".equals(name) || "ContentRef".equals(name))
 		{
 			name += 's';
 		}
