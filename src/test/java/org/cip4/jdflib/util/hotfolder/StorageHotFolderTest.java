@@ -445,7 +445,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 				}
 				for (int i = 0; i < 1000; i++)
 				{
-					ThreadUtil.sleep(200);
+					ThreadUtil.sleep(42);
 					if (theHFDir.listFiles().length <= 2 && tmpHFDir.listFiles().length <= 2)
 					{
 						log.info("stop " + i);
