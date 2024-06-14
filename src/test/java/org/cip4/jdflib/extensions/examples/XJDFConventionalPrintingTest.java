@@ -173,7 +173,7 @@ class XJDFConventionalPrintingTest extends JDFTestCaseBase
 		final SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, EnumUsage.Input);
 		final ResourceHelper rhMedia = shMedia.getCreatePartition(0, true);
 		final JDFMedia m = (JDFMedia) rhMedia.getCreateResource();
-		m.setDimensionCM(87, 0);
+		m.setDimensionCM(87.5, 0);
 		m.setMediaType(EnumMediaType.Paper);
 		m.setMediaTypeDetails("Cardboard");
 		m.setWeight(260);

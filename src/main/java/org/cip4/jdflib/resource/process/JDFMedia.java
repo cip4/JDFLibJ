@@ -276,7 +276,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	 *
 	 * @param value the value (in centimeter) to set the dimension to
 	 */
-	public void setDimensionCM(final int x, final int y)
+	public void setDimensionCM(final double x, final double y)
 	{
 		setDimensionCM(new JDFXYPair(x, y));
 	}
