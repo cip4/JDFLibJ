@@ -82,12 +82,12 @@ class XJDFRunListTest extends JDFTestCaseBase
 		rl2.setNPage(8);
 		rl2.setXPathAttribute("FileSpec/@URL", "file:///indir/file2.pdf");
 
-		final SetHelper shOut = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
+		final SetHelper shOut = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Output);
 		shOut.removePartitions();
 		final ResourceHelper rh = shOut.appendPartition(new JDFAttributeMap(AttributeName.RUNINDEX, "0 0"), true);
 		rh.appendPartMap(new JDFAttributeMap(AttributeName.RUNINDEX, "3 6"));
 		final JDFRunList rlo = (JDFRunList) rh.getResource();
-		rl2.setXPathAttribute("FileSpec/@URL", "file:///outdir/output.pdf");
+		rlo.setXPathAttribute("FileSpec/@URL", "file:///outdir/output.pdf");
 		xjdfHelper.cleanUp();
 		setSnippet(shOut, true);
 		setSnippet(shRL, true);
