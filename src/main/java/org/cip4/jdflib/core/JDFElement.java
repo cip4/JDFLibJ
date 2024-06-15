@@ -1285,6 +1285,28 @@ public class JDFElement extends KElement
 		public static final EnumOrientation Rotate270 = new EnumOrientation(JDFConstants.ORIENTATION_ROTATE270);
 	}
 
+	public enum eUnit
+	{
+		count, um, pt, m, m2, m3, l, g, kWh;
+
+		public static eUnit getEnum(final String name)
+		{
+			try
+			{
+				return valueOf(name);
+			}
+			catch (final Exception x)
+			{
+				for (final eUnit e : values())
+				{
+					if (e.name().equalsIgnoreCase(name))
+						return e;
+				}
+			}
+			return null;
+		}
+	}
+
 	/**
 	 * XYRelation Enumeration <br>
 	 * XML attributes of type XYRelation define the relationship between two ordered numbers. <br>

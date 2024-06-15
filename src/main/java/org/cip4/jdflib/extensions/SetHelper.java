@@ -43,6 +43,7 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement.eUnit;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -812,6 +813,26 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	public void setProcessUsage(final String processUsage)
 	{
 		setAttribute(AttributeName.PROCESSUSAGE, processUsage);
+	}
+
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	public void setUnit(final eUnit unit)
+	{
+		setAttribute(AttributeName.UNIT, unit == null ? null : unit.name());
+	}
+
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	public eUnit getUnit()
+	{
+		return eUnit.getEnum(getAttribute(AttributeName.UNIT));
 	}
 
 	/**

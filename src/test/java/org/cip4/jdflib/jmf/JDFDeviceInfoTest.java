@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,6 +38,9 @@
 
 package org.cip4.jdflib.jmf;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
@@ -45,8 +48,10 @@ import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.eUnit;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
@@ -81,8 +86,6 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 
 	}
 
-	// ///////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -97,6 +100,20 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 		Assertions.assertEquals(di.getDeviceID(), "dd");
 		di.setDeviceID("da");
 		Assertions.assertEquals(di.getDeviceID(), "da");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetCounterUnit()
+	{
+		final JDFDeviceInfo c = (JDFDeviceInfo) JDFElement.createRoot(ElementName.DEVICEINFO);
+		assertNull(c.getCountUnitEnum());
+		c.setCounterUnit(eUnit.m2);
+		assertEquals(eUnit.m2, c.getCountUnitEnum());
+		c.setCounterUnit((eUnit) null);
+		assertNull(c.getCountUnitEnum());
 	}
 
 	/**

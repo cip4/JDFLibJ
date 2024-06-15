@@ -2039,8 +2039,8 @@ public class JDFResource extends JDFElement
 					vRet = new VElement();
 				for (final JDFNode nE : vNodes)
 				{
-					JDFResourceLinkPool rlp = nE.getResourceLinkPool();
-					List<JDFResourceLink> vTmp = rlp == null ? null : rlp.getLinkArray();
+					final JDFResourceLinkPool rlp = nE.getResourceLinkPool();
+					final List<JDFResourceLink> vTmp = rlp == null ? null : rlp.getLinkArray();
 					if (vTmp != null)
 					{
 						for (final JDFResourceLink link : vTmp)
@@ -2185,8 +2185,8 @@ public class JDFResource extends JDFElement
 				if (!isPartsCompatible(partIDKeys))
 				{
 					old = (JDFResource) clone();
-					List<? extends KElement> a = getDirectPartitionArray();
-					for (KElement l : a)
+					final List<? extends KElement> a = getDirectPartitionArray();
+					for (final KElement l : a)
 						l.deleteNode();
 					setPartIDKeys(partIDKeys);
 				}
@@ -2195,10 +2195,10 @@ public class JDFResource extends JDFElement
 				{
 					final JDFAttributeMap partMap = leaf.getPartMap();
 					partMap.reduceMap(partIDKeys);
-					JDFResource newPart = getCreatePartition(partMap, partIDKeys);
+					final JDFResource newPart = getCreatePartition(partMap, partIDKeys);
 					if (old != null)
 					{
-						JDFResource oldPart = old.getPartition(partMap, EnumPartUsage.Implicit);
+						final JDFResource oldPart = old.getPartition(partMap, EnumPartUsage.Implicit);
 						newPart.copyInto(oldPart, false);
 					}
 				}
@@ -2211,10 +2211,10 @@ public class JDFResource extends JDFElement
 	 * @param partIDKeys
 	 * @return
 	 */
-	boolean isPartsCompatible(List<String> partIDKeys)
+	boolean isPartsCompatible(final List<String> partIDKeys)
 	{
-		StringArray list = getPartIDKeyList();
-		int size = ContainerUtil.size(list);
+		final StringArray list = getPartIDKeyList();
+		final int size = ContainerUtil.size(list);
 		for (int i = 0; i < size; i++)
 		{
 			if (!StringUtil.equals(list.get(i), ContainerUtil.get(partIDKeys, i)))
@@ -3723,7 +3723,7 @@ public class JDFResource extends JDFElement
 			final int localSize = localLeaves.size();
 			final List<KElement> vElm = leaf.getChildArray_KElement(null, null, null, true, 0);
 			final String resName = parent.getNodeName();
-			for (KElement e : vElm)
+			for (final KElement e : vElm)
 			{
 				final String nodeName = e.getNodeName();
 				if (resName.equals(nodeName))
@@ -3803,12 +3803,12 @@ public class JDFResource extends JDFElement
 						{
 							for (int kk = 0; kk < localSize; kk++)
 							{
-								KElement localLeafN = localLeaves.elementAt(kk);
+								final KElement localLeafN = localLeaves.elementAt(kk);
 								if (localLeafN.getElement_KElement(nodeName, null, 0) != null)
 								{
 									for (int k = 0; k < elm0Size; k++)
 									{
-										KElement elem = localLeafN.getElement_KElement(nodeName, null, 0);
+										final KElement elem = localLeafN.getElement_KElement(nodeName, null, 0);
 										parent.moveElement(elem, null);
 									}
 									break;
@@ -5430,6 +5430,26 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
+	 *
+	 *
+	 * @return
+	 */
+	public void setUnit(final eUnit unit)
+	{
+		setUnit(unit == null ? null : unit.name());
+	}
+
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	public eUnit getUnitEnum()
+	{
+		return eUnit.getEnum(getUnit());
+	}
+
+	/**
 	 * Sets attribute BundleItemIndex
 	 *
 	 * @param value the value to set the attribute to
@@ -6168,7 +6188,7 @@ public class JDFResource extends JDFElement
 		final Vector<EnumPartIDKey> v = (Vector<EnumPartIDKey>) getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPartIDKey.getEnum(0), false);
 		if (v != null)
 		{
-			for (EnumPartIDKey p : v)
+			for (final EnumPartIDKey p : v)
 			{
 				if (!vPartIDKeys.contains(p.getName()))
 				{

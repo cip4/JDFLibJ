@@ -49,6 +49,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.eUnit;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -144,6 +145,20 @@ class SetHelperTest extends JDFTestCaseBase
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetUnit()
+	{
+		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		assertNull(sh.getUnit());
+		sh.setUnit(eUnit.m2);
+		assertEquals(eUnit.m2, sh.getUnit());
+		sh.setUnit(null);
+		assertNull(sh.getUnit());
 	}
 
 	/**
@@ -357,8 +372,8 @@ class SetHelperTest extends JDFTestCaseBase
 	void testGetExactPartition()
 	{
 		final SetHelper sh = new XJDFHelper(root).appendSet("RunList", null);
-		ResourceHelper rh1 = sh.getCreateExactPartition(new JDFAttributeMap("SheetName", "S1"), true);
-		ResourceHelper rh2 = sh.getCreateExactPartition(new JDFAttributeMap("SheetName", "S2"), true);
+		final ResourceHelper rh1 = sh.getCreateExactPartition(new JDFAttributeMap("SheetName", "S1"), true);
+		final ResourceHelper rh2 = sh.getCreateExactPartition(new JDFAttributeMap("SheetName", "S2"), true);
 		rh2.appendPartMap(new JDFAttributeMap("SheetName", "S3"));
 
 		assertEquals(null, sh.getExactPartition(null));

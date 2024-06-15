@@ -130,6 +130,26 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 		elemInfoTable[1] = new ElemInfoTable(ElementName.EVENT, 0x33333333);
 	}
 
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	public void setCounterUnit(final eUnit unit)
+	{
+		setCounterUnit(unit == null ? null : unit.name());
+	}
+
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	public eUnit getCountUnitEnum()
+	{
+		return eUnit.getEnum(getCounterUnit());
+	}
+
 	@Override
 	protected ElementInfo getTheElementInfo()
 	{
@@ -413,6 +433,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 * @param iSkip number of elements to skip
 	 * @return JDFEvent the element
 	 */
+	@Override
 	public JDFEvent getCreateEvent(final int iSkip)
 	{
 		return (JDFEvent) getCreateElement_JDFElement(ElementName.EVENT, null, iSkip);
@@ -424,6 +445,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 * @param iSkip number of elements to skip
 	 * @return JDFEvent the element default is getEvent(0)
 	 */
+	@Override
 	public JDFEvent getEvent(final int iSkip)
 	{
 		return (JDFEvent) getElement(ElementName.EVENT, null, iSkip);
@@ -434,6 +456,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 *
 	 * @return Collection<JDFEvent>, null if none are available
 	 */
+	@Override
 	public Collection<JDFEvent> getAllEvent()
 	{
 		return getChildrenByClass(JDFEvent.class, false, 0);
@@ -444,6 +467,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 *
 	 * @return JDFEvent the element
 	 */
+	@Override
 	public JDFEvent appendEvent()
 	{
 		return (JDFEvent) appendElement(ElementName.EVENT, null);

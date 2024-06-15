@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -69,6 +69,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFElement.eUnit;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
@@ -142,6 +143,20 @@ class JDFResourceTest extends JDFTestCaseBase
 		final JDFNode n = doc.getJDFRoot();
 		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
 		assertTrue(xm.getCreator(false).contains(n));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetUnit()
+	{
+		final JDFComponent c = (JDFComponent) JDFElement.createRoot(ElementName.COMPONENT);
+		assertNull(c.getUnitEnum());
+		c.setUnit(eUnit.m2);
+		assertEquals(eUnit.m2, c.getUnitEnum());
+		c.setUnit((eUnit) null);
+		assertNull(c.getUnitEnum());
 	}
 
 	/**
@@ -436,7 +451,7 @@ class JDFResourceTest extends JDFTestCaseBase
 	void testPartIDKeys()
 	{
 		int n = 0;
-		for (EnumPartIDKey k : EnumPartIDKey.getEnumList())
+		for (final EnumPartIDKey k : EnumPartIDKey.getEnumList())
 		{
 			assertEquals(k, EnumPartIDKey.getEnum(k.getName()));
 			if (k.isXJDF())
@@ -2946,7 +2961,7 @@ class JDFResourceTest extends JDFTestCaseBase
 		final JDFResource r1 = (JDFResource) pool.appendElement("Ink");
 		r1.addPartition(EnumPartIDKey.Separation, "Black");
 		r1.clonePartitions(r0, null);
-		int size = r1.getLeaves(false).size();
+		final int size = r1.getLeaves(false).size();
 		assertEquals(size, r0.getLeaves(false).size());
 		for (int i = 0; i < size; i++)
 		{
@@ -2967,17 +2982,17 @@ class JDFResourceTest extends JDFTestCaseBase
 		final JDFResource sep1 = sh1.addPartition(EnumPartIDKey.Side, "Front").addPartition(EnumPartIDKey.Separation, "Black");
 		final JDFResource sep2 = sh1.addPartition(EnumPartIDKey.Side, "Back").addPartition(EnumPartIDKey.Separation, "Black");
 		final JDFResource r1 = (JDFResource) pool.appendElement("Ink");
-		JDFResource black = r1.addPartition(EnumPartIDKey.Separation, "Black");
+		final JDFResource black = r1.addPartition(EnumPartIDKey.Separation, "Black");
 		black.setDescriptiveName("black color");
 		black.addPartition(EnumPartIDKey.Side, "Back");
 		black.addPartition(EnumPartIDKey.Side, "Front");
 		r1.clonePartitions(r0, null);
-		int size = r1.getLeaves(false).size();
+		final int size = r1.getLeaves(false).size();
 		assertEquals(size, r0.getLeaves(false).size());
 		for (int i = 0; i < size; i++)
 		{
-			JDFResource l1 = (JDFResource) r1.getLeaves(false).get(i);
-			JDFResource l0 = (JDFResource) r0.getLeaves(false).get(i);
+			final JDFResource l1 = (JDFResource) r1.getLeaves(false).get(i);
+			final JDFResource l0 = (JDFResource) r0.getLeaves(false).get(i);
 			assertEquals(l1.getPartMap(), l0.getPartMap());
 			assertEquals("black color", l1.getDescriptiveName());
 		}
