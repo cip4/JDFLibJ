@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -100,7 +100,7 @@ import org.cip4.jdflib.util.JDFDuration;
  *****************************************************************************
  * class JDFAutoResourceLink : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoResourceLink extends JDFElement
@@ -111,32 +111,32 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[26];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUALAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMBINEDPROCESSTYPE, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.DRAFTOK, 0x44444333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.DURATION, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXAMOUNT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MINAMOUNT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.MINLATESTATUS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.MINSTATUS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.PIPEPARTIDKEYS, 0x44333333, AttributeInfo.EnumAttributeType.enumerations, EnumPipePartIDKeys.getEnum(0), null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.PIPEPAUSE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.PIPEPROTOCOL, 0x44433331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.PIPERESUME, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.PIPEURL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.RECOMMENDATION, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[18] = new AtrInfoTable(AttributeName.REMOTEPIPEENDPAUSE, 0x44433333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[19] = new AtrInfoTable(AttributeName.REMOTEPIPEENDRESUME, 0x44433333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[20] = new AtrInfoTable(AttributeName.RREF, 0x22222222, AttributeInfo.EnumAttributeType.IDREF, null, null);
-		atrInfoTable[21] = new AtrInfoTable(AttributeName.RSUBREF, 0x44444433, AttributeInfo.EnumAttributeType.IDREF, null, null);
-		atrInfoTable[22] = new AtrInfoTable(AttributeName.START, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[23] = new AtrInfoTable(AttributeName.STARTOFFSET, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[24] = new AtrInfoTable(AttributeName.USAGE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
-		atrInfoTable[25] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUALAMOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x3333333331l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMBINEDPROCESSTYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.DRAFTOK, 0x4444444333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.DURATION, 0x3333333333l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXAMOUNT, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MINAMOUNT, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.MINLATESTATUS, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.MINSTATUS, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.PIPEPARTIDKEYS, 0x4444333333l, AttributeInfo.EnumAttributeType.enumerations, EnumPipePartIDKeys.getEnum(0), null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.PIPEPAUSE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.PIPEPROTOCOL, 0x4444433331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.PIPERESUME, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.PIPEURL, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.RECOMMENDATION, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[18] = new AtrInfoTable(AttributeName.REMOTEPIPEENDPAUSE, 0x4444433333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[19] = new AtrInfoTable(AttributeName.REMOTEPIPEENDRESUME, 0x4444433333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[20] = new AtrInfoTable(AttributeName.RREF, 0x2222222222l, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[21] = new AtrInfoTable(AttributeName.RSUBREF, 0x4444444433l, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[22] = new AtrInfoTable(AttributeName.START, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[23] = new AtrInfoTable(AttributeName.STARTOFFSET, 0x3333333333l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[24] = new AtrInfoTable(AttributeName.USAGE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
+		atrInfoTable[25] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x3333333331l, AttributeInfo.EnumAttributeType.matrix, null, null);
 	}
 
 	@Override
@@ -148,8 +148,8 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.AMOUNTPOOL, 0x66666661);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.LOT, 0x44333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.AMOUNTPOOL, 0x6666666661l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.LOT, 0x4444333111l);
 	}
 
 	@Override
@@ -160,7 +160,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoResourceLink
-	 *
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -171,7 +171,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoResourceLink
-	 *
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -183,7 +183,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoResourceLink
-	 *
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -204,7 +204,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMinLateStatus(final String name)
+		protected EnumMinLateStatus(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -277,7 +277,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMinStatus(final String name)
+		protected EnumMinStatus(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -350,7 +350,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOrientation(final String name)
+		protected EnumOrientation(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -425,7 +425,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPipePartIDKeys(final String name)
+		protected EnumPipePartIDKeys(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -612,17 +612,17 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		public static final EnumPipePartIDKeys WebSetup = new EnumPipePartIDKeys("WebSetup");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ActualAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ActualAmount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ActualAmount
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setActualAmount(final double value)
@@ -632,7 +632,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (17) get double attribute ActualAmount
-	 *
+	 * 
 	 * @return double the value of the attribute
 	 */
 	public double getActualAmount()
@@ -640,12 +640,12 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getRealAttribute(AttributeName.ACTUALAMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Amount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Amount
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setAmount(final double value)
@@ -655,7 +655,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (17) get double attribute Amount
-	 *
+	 * 
 	 * @return double the value of the attribute
 	 */
 	public double getAmount()
@@ -663,12 +663,13 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getRealAttribute(AttributeName.AMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CombinedProcessIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CombinedProcessIndex
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CombinedProcessIndex
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setCombinedProcessIndex(final JDFIntegerList value)
@@ -678,7 +679,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (20) get JDFIntegerList attribute CombinedProcessIndex
-	 *
+	 * 
 	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getCombinedProcessIndex()
@@ -688,12 +689,13 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CombinedProcessType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CombinedProcessType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CombinedProcessType
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setCombinedProcessType(final String value)
@@ -703,7 +705,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (23) get String attribute CombinedProcessType
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public String getCombinedProcessType()
@@ -711,12 +713,12 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getAttribute(AttributeName.COMBINEDPROCESSTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DraftOK
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DraftOK ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DraftOK
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setDraftOK(final boolean value)
@@ -726,7 +728,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (18) get boolean attribute DraftOK
-	 *
+	 * 
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getDraftOK()
@@ -734,12 +736,12 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getBoolAttribute(AttributeName.DRAFTOK, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Duration
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Duration ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Duration
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setDuration(final JDFDuration value)
@@ -749,7 +751,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (20) get JDFDuration attribute Duration
-	 *
+	 * 
 	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getDuration()
@@ -759,12 +761,12 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxAmount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxAmount
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setMaxAmount(final double value)
@@ -774,7 +776,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (17) get double attribute MaxAmount
-	 *
+	 * 
 	 * @return double the value of the attribute
 	 */
 	public double getMaxAmount()
@@ -782,12 +784,12 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getRealAttribute(AttributeName.MAXAMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinAmount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinAmount
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setMinAmount(final double value)
@@ -797,7 +799,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (17) get double attribute MinAmount
-	 *
+	 * 
 	 * @return double the value of the attribute
 	 */
 	public double getMinAmount()
@@ -805,12 +807,13 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getRealAttribute(AttributeName.MINAMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinLateStatus
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinLateStatus
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute MinLateStatus
-	 *
+	 * 
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setMinLateStatus(final JDFResource.EnumResStatus enumVar)
@@ -820,7 +823,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (9) get attribute MinLateStatus
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public JDFResource.EnumResStatus getMinLateStatus()
@@ -828,12 +831,12 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return JDFResource.EnumResStatus.getEnum(getAttribute(AttributeName.MINLATESTATUS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinStatus
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinStatus ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute MinStatus
-	 *
+	 * 
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setMinStatus(final JDFResource.EnumResStatus enumVar)
@@ -843,7 +846,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (9) get attribute MinStatus
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public JDFResource.EnumResStatus getMinStatus()
@@ -851,12 +854,12 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return JDFResource.EnumResStatus.getEnum(getAttribute(AttributeName.MINSTATUS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Orientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Orientation
-	 *
+	 * 
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setOrientation(final EnumOrientation enumVar)
@@ -866,7 +869,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (9) get attribute Orientation
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public EnumOrientation getOrientation()
@@ -874,12 +877,13 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PipePartIDKeys
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PipePartIDKeys
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5.2) set attribute PipePartIDKeys
-	 *
+	 * 
 	 * @param v vector of the enumeration values
 	 */
 	public void setPipePartIDKeys(final Vector<? extends ValuedEnum> v)
@@ -889,7 +893,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (9.2) get PipePartIDKeys attribute PipePartIDKeys
-	 *
+	 * 
 	 * @return Vector of the enumerations
 	 */
 	public Vector<? extends ValuedEnum> getPipePartIDKeys()
@@ -897,12 +901,12 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPipePartIDKeys.getEnum(0), false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PipePause
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PipePause ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PipePause
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setPipePause(final double value)
@@ -912,7 +916,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (17) get double attribute PipePause
-	 *
+	 * 
 	 * @return double the value of the attribute
 	 */
 	public double getPipePause()
@@ -920,12 +924,13 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getRealAttribute(AttributeName.PIPEPAUSE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PipeProtocol
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PipeProtocol
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PipeProtocol
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setPipeProtocol(final String value)
@@ -935,7 +940,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (23) get String attribute PipeProtocol
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public String getPipeProtocol()
@@ -943,12 +948,12 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getAttribute(AttributeName.PIPEPROTOCOL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PipeResume
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PipeResume ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PipeResume
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setPipeResume(final double value)
@@ -958,7 +963,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (17) get double attribute PipeResume
-	 *
+	 * 
 	 * @return double the value of the attribute
 	 */
 	public double getPipeResume()
@@ -966,12 +971,12 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getRealAttribute(AttributeName.PIPERESUME, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PipeURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PipeURL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PipeURL
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setPipeURL(final String value)
@@ -981,7 +986,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (23) get String attribute PipeURL
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public String getPipeURL()
@@ -989,12 +994,13 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getAttribute(AttributeName.PIPEURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProcessUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProcessUsage
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ProcessUsage
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setProcessUsage(final String value)
@@ -1004,7 +1010,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (23) get String attribute ProcessUsage
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public String getProcessUsage()
@@ -1012,12 +1018,13 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getAttribute(AttributeName.PROCESSUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Recommendation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Recommendation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Recommendation
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setRecommendation(final boolean value)
@@ -1027,7 +1034,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (18) get boolean attribute Recommendation
-	 *
+	 * 
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getRecommendation()
@@ -1035,12 +1042,13 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getBoolAttribute(AttributeName.RECOMMENDATION, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RemotePipeEndPause
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RemotePipeEndPause
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RemotePipeEndPause
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setRemotePipeEndPause(final double value)
@@ -1050,7 +1058,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (17) get double attribute RemotePipeEndPause
-	 *
+	 * 
 	 * @return double the value of the attribute
 	 */
 	public double getRemotePipeEndPause()
@@ -1058,12 +1066,13 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getRealAttribute(AttributeName.REMOTEPIPEENDPAUSE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RemotePipeEndResume
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RemotePipeEndResume
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RemotePipeEndResume
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setRemotePipeEndResume(final double value)
@@ -1073,7 +1082,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (17) get double attribute RemotePipeEndResume
-	 *
+	 * 
 	 * @return double the value of the attribute
 	 */
 	public double getRemotePipeEndResume()
@@ -1081,12 +1090,12 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getRealAttribute(AttributeName.REMOTEPIPEENDRESUME, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute rRef
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute rRef ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute rRef
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setrRef(final String value)
@@ -1096,7 +1105,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (23) get String attribute rRef
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public String getrRef()
@@ -1104,12 +1113,12 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getAttribute(AttributeName.RREF, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute rSubRef
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute rSubRef ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute rSubRef
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setrSubRef(final String value)
@@ -1119,7 +1128,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (23) get String attribute rSubRef
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public String getrSubRef()
@@ -1127,27 +1136,25 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return getAttribute(AttributeName.RSUBREF, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Start
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Start ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute Start
-	 *
+	 * 
 	 * @param value the value to set the attribute to or null
 	 */
 	public void setStart(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
-		{
 			date = new JDFDate();
-		}
 		setAttribute(AttributeName.START, date.getDateTimeISO(), null);
 	}
 
 	/**
 	 * (12) get JDFDate attribute Start
-	 *
+	 * 
 	 * @return JDFDate the value of the attribute
 	 */
 	public JDFDate getStart()
@@ -1157,12 +1164,12 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StartOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StartOffset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StartOffset
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setStartOffset(final JDFDuration value)
@@ -1172,7 +1179,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (20) get JDFDuration attribute StartOffset
-	 *
+	 * 
 	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getStartOffset()
@@ -1182,12 +1189,12 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Usage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Usage
-	 *
+	 * 
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setUsage(final EnumUsage enumVar)
@@ -1197,7 +1204,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (9) get attribute Usage
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public EnumUsage getUsage()
@@ -1205,12 +1212,13 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Transformation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Transformation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Transformation
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
 	public void setTransformation(final JDFMatrix value)
@@ -1220,7 +1228,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (20) get JDFMatrix attribute Transformation
-	 *
+	 * 
 	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getTransformation()
@@ -1230,14 +1238,13 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element AmountPool
-	 *
+	 * 
 	 * @return JDFAmountPool the element
 	 */
 	public JDFAmountPool getAmountPool()
@@ -1247,7 +1254,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (25) getCreateAmountPool
-	 *
+	 * 
 	 * @return JDFAmountPool the element
 	 */
 	public JDFAmountPool getCreateAmountPool()
@@ -1257,7 +1264,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (29) append element AmountPool
-	 *
+	 * 
 	 * @return JDFAmountPool the element @ if the element already exists
 	 */
 	public JDFAmountPool appendAmountPool()
@@ -1267,7 +1274,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (26) getCreateLot
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLot the element
 	 */
@@ -1278,7 +1285,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (27) const get element Lot
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLot the element default is getLot(0)
 	 */
@@ -1289,7 +1296,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * Get all Lot from the current element
-	 *
+	 * 
 	 * @return Collection<JDFLot>, null if none are available
 	 */
 	public Collection<JDFLot> getAllLot()
@@ -1299,7 +1306,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 
 	/**
 	 * (30) append element Lot
-	 *
+	 * 
 	 * @return JDFLot the element
 	 */
 	public JDFLot appendLot()

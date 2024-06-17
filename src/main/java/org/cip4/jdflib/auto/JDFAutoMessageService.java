@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -108,17 +108,17 @@ public abstract class JDFAutoMessageService extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACKNOWLEDGE, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x33331111, AttributeInfo.EnumAttributeType.enumerations, EnumChannelMode.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.COMMAND, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.GENERICATTRIBUTES, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.JMFROLE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumJMFRole.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PERSISTENT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUERY, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.REGISTRATION, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.SIGNAL, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.TYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.URLSCHEMES, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACKNOWLEDGE, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumerations, EnumChannelMode.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.COMMAND, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.GENERICATTRIBUTES, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.JMFROLE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumJMFRole.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PERSISTENT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUERY, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.REGISTRATION, 0x3333333111l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.SIGNAL, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.TYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.URLSCHEMES, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
 	@Override
@@ -130,11 +130,11 @@ public abstract class JDFAutoMessageService extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIONPOOL, 0x66666111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVCAPPOOL, 0x66666111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.DEVCAPS, 0x33333331);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.MODULEPOOL, 0x66666111);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.TESTPOOL, 0x66666111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIONPOOL, 0x6666666111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVCAPPOOL, 0x6666666111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.DEVCAPS, 0x3333333331l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.MODULEPOOL, 0x6666666111l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.TESTPOOL, 0x6666666111l);
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoMessageService
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -156,7 +156,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoMessageService
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -168,7 +168,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoMessageService
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -314,7 +314,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	/**
 	 * (36) set attribute Acknowledge
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAcknowledge(boolean value)
@@ -324,7 +324,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (18) get boolean attribute Acknowledge
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getAcknowledge()
@@ -337,7 +337,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	/**
 	 * (5.2) set attribute ChannelMode
-	 * 
+	 *
 	 * @param v vector of the enumeration values
 	 */
 	public void setChannelMode(Vector<? extends ValuedEnum> v)
@@ -347,7 +347,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (9.2) get ChannelMode attribute ChannelMode
-	 * 
+	 *
 	 * @return Vector of the enumerations
 	 */
 	public Vector<? extends ValuedEnum> getChannelMode()
@@ -360,7 +360,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	/**
 	 * (36) set attribute Command
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCommand(boolean value)
@@ -370,7 +370,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (18) get boolean attribute Command
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getCommand()
@@ -384,7 +384,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	/**
 	 * (36) set attribute GenericAttributes
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setGenericAttributes(VString value)
@@ -394,13 +394,13 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (21) get VString attribute GenericAttributes
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getGenericAttributes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.GENERICATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.GENERICATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -410,7 +410,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	/**
 	 * (5) set attribute JMFRole
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setJMFRole(EnumJMFRole enumVar)
@@ -420,7 +420,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (9) get attribute JMFRole
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumJMFRole getJMFRole()
@@ -433,7 +433,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	/**
 	 * (36) set attribute Persistent
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPersistent(boolean value)
@@ -443,7 +443,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (18) get boolean attribute Persistent
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getPersistent()
@@ -456,7 +456,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	/**
 	 * (36) set attribute Query
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setQuery(boolean value)
@@ -466,7 +466,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (18) get boolean attribute Query
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getQuery()
@@ -480,7 +480,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	/**
 	 * (36) set attribute Registration
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRegistration(boolean value)
@@ -490,7 +490,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (18) get boolean attribute Registration
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getRegistration()
@@ -503,7 +503,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	/**
 	 * (36) set attribute Signal
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSignal(boolean value)
@@ -513,7 +513,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (18) get boolean attribute Signal
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getSignal()
@@ -526,7 +526,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	/**
 	 * (36) set attribute Type
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setType(String value)
@@ -536,7 +536,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (23) get String attribute Type
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getType()
@@ -549,7 +549,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	/**
 	 * (36) set attribute URLSchemes
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setURLSchemes(VString value)
@@ -559,13 +559,13 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (21) get VString attribute URLSchemes
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getURLSchemes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.URLSCHEMES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.URLSCHEMES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -576,7 +576,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (24) const get element ActionPool
-	 * 
+	 *
 	 * @return JDFActionPool the element
 	 */
 	public JDFActionPool getActionPool()
@@ -596,7 +596,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (29) append element ActionPool
-	 * 
+	 *
 	 * @return JDFActionPool the element @ if the element already exists
 	 */
 	public JDFActionPool appendActionPool()
@@ -606,7 +606,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (24) const get element DevCapPool
-	 * 
+	 *
 	 * @return JDFDevCapPool the element
 	 */
 	public JDFDevCapPool getDevCapPool()
@@ -626,7 +626,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (29) append element DevCapPool
-	 * 
+	 *
 	 * @return JDFDevCapPool the element @ if the element already exists
 	 */
 	public JDFDevCapPool appendDevCapPool()
@@ -647,7 +647,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (27) const get element DevCaps
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevCaps the element default is getDevCaps(0)
 	 */
@@ -668,7 +668,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (30) append element DevCaps
-	 * 
+	 *
 	 * @return JDFDevCaps the element
 	 */
 	public JDFDevCaps appendDevCaps()
@@ -678,7 +678,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (24) const get element ModulePool
-	 * 
+	 *
 	 * @return JDFModulePool the element
 	 */
 	public JDFModulePool getModulePool()
@@ -698,7 +698,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (29) append element ModulePool
-	 * 
+	 *
 	 * @return JDFModulePool the element @ if the element already exists
 	 */
 	public JDFModulePool appendModulePool()
@@ -708,7 +708,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (24) const get element TestPool
-	 * 
+	 *
 	 * @return JDFTestPool the element
 	 */
 	public JDFTestPool getTestPool()
@@ -728,7 +728,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
 	/**
 	 * (29) append element TestPool
-	 * 
+	 *
 	 * @return JDFTestPool the element @ if the element already exists
 	 */
 	public JDFTestPool appendTestPool()

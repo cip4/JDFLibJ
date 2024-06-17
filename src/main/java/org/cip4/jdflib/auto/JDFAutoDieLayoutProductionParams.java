@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.process.JDFRepeatDesc;
  *****************************************************************************
  * class JDFAutoDieLayoutProductionParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
@@ -103,8 +103,8 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ESTIMATE, 0x33331111, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ESTIMATE, 0x3333331111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
 	}
 
 	@Override
@@ -116,9 +116,9 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CONVERTINGCONFIG, 0x22221111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.REPEATDESC, 0x22221111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.CONTACT, 0x33331111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONVERTINGCONFIG, 0x2222221111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.REPEATDESC, 0x2222221111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.CONTACT, 0x3333331111l);
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPosition(String name)
+		protected EnumPosition(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -260,14 +260,13 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 		public static final EnumPosition BottomRight = new EnumPosition("BottomRight");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Estimate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Estimate ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Estimate
 	 *
@@ -288,9 +287,9 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 		return getBoolAttribute(AttributeName.ESTIMATE, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Position
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Position
 	 *
@@ -311,14 +310,13 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateConvertingConfig
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFConvertingConfig the element
 	 */
@@ -340,7 +338,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 
 	/**
 	 * Get all ConvertingConfig from the current element
-	 *
+	 * 
 	 * @return Collection<JDFConvertingConfig>, null if none are available
 	 */
 	public Collection<JDFConvertingConfig> getAllConvertingConfig()
@@ -360,7 +358,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 
 	/**
 	 * (26) getCreateRepeatDesc
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFRepeatDesc the element
 	 */
@@ -382,7 +380,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 
 	/**
 	 * Get all RepeatDesc from the current element
-	 *
+	 * 
 	 * @return Collection<JDFRepeatDesc>, null if none are available
 	 */
 	public Collection<JDFRepeatDesc> getAllRepeatDesc()
@@ -402,7 +400,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -424,7 +422,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()

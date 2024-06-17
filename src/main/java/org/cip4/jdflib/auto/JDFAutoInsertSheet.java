@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFSheet;
  *****************************************************************************
  * class JDFAutoInsertSheet : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoInsertSheet extends JDFResource
@@ -104,13 +104,13 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHEETTYPE, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumSheetType.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETUSAGE, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumSheetUsage.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.INCLUDEINBUNDLEITEM, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumIncludeInBundleItem.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ISWASTE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MARKLIST, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SHEETFORMAT, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.USAGE, 0x44444443, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHEETTYPE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETUSAGE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetUsage.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.INCLUDEINBUNDLEITEM, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumIncludeInBundleItem.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ISWASTE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MARKLIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SHEETFORMAT, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.USAGE, 0x4444444443l, AttributeInfo.EnumAttributeType.Any, null, null);
 	}
 
 	@Override
@@ -122,9 +122,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.RUNLIST, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.LAYOUT, 0x66666111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.SHEET, 0x77777666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.RUNLIST, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.LAYOUT, 0x6666666111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.SHEET, 0x7777777666l);
 	}
 
 	@Override
@@ -199,7 +199,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSheetType(String name)
+		protected EnumSheetType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -270,7 +270,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSheetUsage(String name)
+		protected EnumSheetUsage(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -353,7 +353,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumIncludeInBundleItem(String name)
+		protected EnumIncludeInBundleItem(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -410,14 +410,13 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		public static final EnumIncludeInBundleItem New = new EnumIncludeInBundleItem("New");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SheetType
 	 *
@@ -438,9 +437,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		return EnumSheetType.getEnum(getAttribute(AttributeName.SHEETTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetUsage ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SheetUsage
 	 *
@@ -461,9 +460,10 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		return EnumSheetUsage.getEnum(getAttribute(AttributeName.SHEETUSAGE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IncludeInBundleItem
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IncludeInBundleItem
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute IncludeInBundleItem
 	 *
@@ -484,9 +484,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		return EnumIncludeInBundleItem.getEnum(getAttribute(AttributeName.INCLUDEINBUNDLEITEM, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IsWaste
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IsWaste ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IsWaste
 	 *
@@ -507,9 +507,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		return getBoolAttribute(AttributeName.ISWASTE, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MarkList
 	 *
@@ -533,9 +533,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetFormat ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SheetFormat
 	 *
@@ -556,9 +556,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		return getAttribute(AttributeName.SHEETFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Usage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Usage
 	 *
@@ -579,9 +579,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		return EnumSheetUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -596,7 +595,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 
 	/**
 	 * (25) getCreateRunList
-	 *
+	 * 
 	 * @return JDFRunList the element
 	 */
 	public JDFRunList getCreateRunList()
@@ -636,7 +635,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 
 	/**
 	 * (25) getCreateLayout
-	 *
+	 * 
 	 * @return JDFLayout the element
 	 */
 	public JDFLayout getCreateLayout()
@@ -676,7 +675,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 
 	/**
 	 * (25) getCreateSheet
-	 *
+	 * 
 	 * @return JDFSheet the element
 	 */
 	public JDFSheet getCreateSheet()

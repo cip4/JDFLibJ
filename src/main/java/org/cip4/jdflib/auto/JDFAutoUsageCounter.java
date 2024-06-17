@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoUsageCounter : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoUsageCounter extends JDFResource
@@ -98,9 +98,9 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COUNTERID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SCOPE, 0x22222111, AttributeInfo.EnumAttributeType.enumeration, EnumScope.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.COUNTERTYPES, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COUNTERID, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SCOPE, 0x2222222111l, AttributeInfo.EnumAttributeType.enumeration, EnumScope.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.COUNTERTYPES, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumScope(String name)
+		protected EnumScope(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -230,14 +230,13 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 		public static final EnumScope Job = new EnumScope("Job");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CounterID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CounterID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CounterID
 	 *
@@ -258,9 +257,9 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 		return getAttribute(AttributeName.COUNTERID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Scope
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Scope ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Scope
 	 *
@@ -281,9 +280,10 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 		return EnumScope.getEnum(getAttribute(AttributeName.SCOPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CounterTypes
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CounterTypes
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CounterTypes
 	 *

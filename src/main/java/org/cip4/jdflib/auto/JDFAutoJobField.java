@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoJobField : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoJobField extends JDFResource
@@ -97,11 +97,11 @@ public abstract class JDFAutoJobField extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHOWLIST, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBFORMAT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBTEMPLATE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.OPERATORTEXT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.USERTEXT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHOWLIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBFORMAT, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBTEMPLATE, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OPERATORTEXT, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.USERTEXT, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public abstract class JDFAutoJobField extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x6666666661l);
 	}
 
 	@Override
@@ -178,14 +178,13 @@ public abstract class JDFAutoJobField extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShowList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShowList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ShowList
 	 *
@@ -209,9 +208,9 @@ public abstract class JDFAutoJobField extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobFormat ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobFormat
 	 *
@@ -232,9 +231,9 @@ public abstract class JDFAutoJobField extends JDFResource
 		return getAttribute(AttributeName.JOBFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobTemplate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobTemplate ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobTemplate
 	 *
@@ -255,9 +254,10 @@ public abstract class JDFAutoJobField extends JDFResource
 		return getAttribute(AttributeName.JOBTEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OperatorText
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OperatorText
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OperatorText
 	 *
@@ -278,9 +278,9 @@ public abstract class JDFAutoJobField extends JDFResource
 		return getAttribute(AttributeName.OPERATORTEXT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UserText
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UserText ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute UserText
 	 *
@@ -301,9 +301,8 @@ public abstract class JDFAutoJobField extends JDFResource
 		return getAttribute(AttributeName.USERTEXT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -318,7 +317,7 @@ public abstract class JDFAutoJobField extends JDFResource
 
 	/**
 	 * (25) getCreateDeviceMark
-	 *
+	 * 
 	 * @return JDFDeviceMark the element
 	 */
 	public JDFDeviceMark getCreateDeviceMark()

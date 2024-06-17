@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.core.VString;
  *****************************************************************************
  * class JDFAutoObservationTarget : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoObservationTarget extends JDFElement
@@ -93,10 +93,10 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ELEMENTTYPE, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ATTRIBUTES, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ELEMENTIDS, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.OBSERVATIONPATH, 0x33333311, AttributeInfo.EnumAttributeType.XPath, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ELEMENTTYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ATTRIBUTES, 0x4444444433l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ELEMENTIDS, 0x4444444433l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OBSERVATIONPATH, 0x3333333311l, AttributeInfo.EnumAttributeType.XPath, null, null);
 	}
 
 	@Override
@@ -141,14 +141,13 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ElementType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ElementType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ElementType
 	 *
@@ -169,9 +168,9 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 		return getAttribute(AttributeName.ELEMENTTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Attributes
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Attributes ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Attributes
 	 *
@@ -195,9 +194,9 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ElementIDs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ElementIDs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ElementIDs
 	 *
@@ -221,9 +220,10 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ObservationPath
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ObservationPath
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ObservationPath
 	 *

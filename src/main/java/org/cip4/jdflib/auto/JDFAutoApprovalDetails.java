@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoApprovalDetails : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoApprovalDetails extends JDFElement
@@ -102,8 +102,8 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.APPROVALSTATE, 0x22222111, AttributeInfo.EnumAttributeType.enumeration, EnumApprovalState.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.APPROVALSTATEDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.APPROVALSTATE, 0x2222222111l, AttributeInfo.EnumAttributeType.enumeration, EnumApprovalState.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.APPROVALSTATEDETAILS, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -115,8 +115,8 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x66666111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x66666111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x6666666111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x6666666111l);
 	}
 
 	@Override
@@ -171,7 +171,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumApprovalState(String name)
+		protected EnumApprovalState(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -226,14 +226,14 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 		public static final EnumApprovalState Rejected = new EnumApprovalState("Rejected");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ApprovalState
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ApprovalState
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ApprovalState
 	 *
@@ -254,9 +254,10 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 		return EnumApprovalState.getEnum(getAttribute(AttributeName.APPROVALSTATE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ApprovalStateDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ApprovalStateDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ApprovalStateDetails
 	 *
@@ -277,9 +278,8 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 		return getAttribute(AttributeName.APPROVALSTATEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -294,7 +294,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 
 	/**
 	 * (25) getCreateContact
-	 *
+	 * 
 	 * @return JDFContact the element
 	 */
 	public JDFContact getCreateContact()
@@ -334,7 +334,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()

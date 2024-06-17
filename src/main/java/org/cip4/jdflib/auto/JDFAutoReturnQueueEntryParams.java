@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.core.VString;
  *****************************************************************************
  * class JDFAutoReturnQueueEntryParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
@@ -93,11 +93,11 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ABORTED, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMPLETED, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PRIORITY, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x22222211, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.URL, 0x22222211, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ABORTED, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMPLETED, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PRIORITY, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x2222222211l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.URL, 0x2222222211l, AttributeInfo.EnumAttributeType.URL, null, null);
 	}
 
 	@Override
@@ -142,14 +142,13 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Aborted
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Aborted ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Aborted
 	 *
@@ -173,9 +172,9 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Completed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Completed ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Completed
 	 *
@@ -199,9 +198,9 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Priority
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Priority ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Priority
 	 *
@@ -222,9 +221,10 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 		return getIntAttribute(AttributeName.PRIORITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QueueEntryID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute QueueEntryID
 	 *
@@ -245,9 +245,9 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute URL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute URL
 	 *

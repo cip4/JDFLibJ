@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.util.JDFDuration;
  *****************************************************************************
  * class JDFAutoDisposition : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDisposition extends JDFElement
@@ -98,12 +98,12 @@ public abstract class JDFAutoDisposition extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DISPOSITIONACTION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumDispositionAction.getEnum(0), "Delete");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRIORITY, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "0");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DISPOSITIONUSAGE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumDispositionUsage.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.EXTRADURATION, 0x33333311, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MINDURATION, 0x33333311, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.UNTIL, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DISPOSITIONACTION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDispositionAction.getEnum(0), "Delete");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRIORITY, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "0");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DISPOSITIONUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDispositionUsage.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.EXTRADURATION, 0x3333333311l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MINDURATION, 0x3333333311l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.UNTIL, 0x3333333311l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 	}
 
 	@Override
@@ -158,7 +158,7 @@ public abstract class JDFAutoDisposition extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDispositionAction(String name)
+		protected EnumDispositionAction(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -221,7 +221,7 @@ public abstract class JDFAutoDisposition extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDispositionUsage(String name)
+		protected EnumDispositionUsage(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -274,14 +274,14 @@ public abstract class JDFAutoDisposition extends JDFElement
 		public static final EnumDispositionUsage Output = new EnumDispositionUsage("Output");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DispositionAction
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DispositionAction
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DispositionAction
 	 *
@@ -302,9 +302,9 @@ public abstract class JDFAutoDisposition extends JDFElement
 		return EnumDispositionAction.getEnum(getAttribute(AttributeName.DISPOSITIONACTION, null, "Delete"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Priority
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Priority ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Priority
 	 *
@@ -325,9 +325,10 @@ public abstract class JDFAutoDisposition extends JDFElement
 		return getIntAttribute(AttributeName.PRIORITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DispositionUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DispositionUsage
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DispositionUsage
 	 *
@@ -348,9 +349,10 @@ public abstract class JDFAutoDisposition extends JDFElement
 		return EnumDispositionUsage.getEnum(getAttribute(AttributeName.DISPOSITIONUSAGE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ExtraDuration
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ExtraDuration
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ExtraDuration
 	 *
@@ -373,9 +375,9 @@ public abstract class JDFAutoDisposition extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinDuration
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinDuration ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinDuration
 	 *
@@ -398,9 +400,9 @@ public abstract class JDFAutoDisposition extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Until
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Until ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute Until
 	 *

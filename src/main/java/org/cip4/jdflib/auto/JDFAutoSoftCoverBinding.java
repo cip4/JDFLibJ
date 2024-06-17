@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.span.JDFSpanScoring;
  *****************************************************************************
  * class JDFAutoSoftCoverBinding : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoSoftCoverBinding extends JDFElement
@@ -96,20 +96,20 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[14];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BLOCKTHREADSEWING, 0x66666661);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.ENDSHEETS, 0x66666661);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.FOLDINGWIDTH, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.FOLDINGWIDTHBACK, 0x66666661);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.GLUEPROCEDURE, 0x66666661);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.SCORING, 0x66666661);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.SPINEBRUSHING, 0x66666661);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.SPINEFIBERROUGHING, 0x66666661);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.SPINEGLUE, 0x66666661);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.SPINELEVELLING, 0x66666661);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.SPINEMILLING, 0x66666661);
-		elemInfoTable[11] = new ElemInfoTable(ElementName.SPINENOTCHING, 0x66666661);
-		elemInfoTable[12] = new ElemInfoTable(ElementName.SPINESANDING, 0x66666661);
-		elemInfoTable[13] = new ElemInfoTable(ElementName.SPINESHREDDING, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BLOCKTHREADSEWING, 0x6666666661l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.ENDSHEETS, 0x6666666661l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.FOLDINGWIDTH, 0x6666666661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.FOLDINGWIDTHBACK, 0x6666666661l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.GLUEPROCEDURE, 0x6666666661l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.SCORING, 0x6666666661l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.SPINEBRUSHING, 0x6666666661l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.SPINEFIBERROUGHING, 0x6666666661l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.SPINEGLUE, 0x6666666661l);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.SPINELEVELLING, 0x6666666661l);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.SPINEMILLING, 0x6666666661l);
+		elemInfoTable[11] = new ElemInfoTable(ElementName.SPINENOTCHING, 0x6666666661l);
+		elemInfoTable[12] = new ElemInfoTable(ElementName.SPINESANDING, 0x6666666661l);
+		elemInfoTable[13] = new ElemInfoTable(ElementName.SPINESHREDDING, 0x6666666661l);
 	}
 
 	@Override
@@ -154,9 +154,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -171,7 +170,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateBlockThreadSewing
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateBlockThreadSewing()
@@ -201,7 +200,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateEndSheets
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateEndSheets()
@@ -231,7 +230,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateFoldingWidth
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateFoldingWidth()
@@ -261,7 +260,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateFoldingWidthBack
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateFoldingWidthBack()
@@ -291,7 +290,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateGlueProcedure
-	 *
+	 * 
 	 * @return JDFSpanGlueProcedure the element
 	 */
 	public JDFSpanGlueProcedure getCreateGlueProcedure()
@@ -321,7 +320,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateScoring
-	 *
+	 * 
 	 * @return JDFSpanScoring the element
 	 */
 	public JDFSpanScoring getCreateScoring()
@@ -351,7 +350,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineBrushing
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineBrushing()
@@ -381,7 +380,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineFiberRoughing
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineFiberRoughing()
@@ -411,7 +410,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineGlue
-	 *
+	 * 
 	 * @return JDFSpanGlue the element
 	 */
 	public JDFSpanGlue getCreateSpineGlue()
@@ -441,7 +440,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineLevelling
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineLevelling()
@@ -471,7 +470,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineMilling
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineMilling()
@@ -501,7 +500,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineNotching
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineNotching()
@@ -531,7 +530,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineSanding
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineSanding()
@@ -561,7 +560,7 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineShredding
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineShredding()

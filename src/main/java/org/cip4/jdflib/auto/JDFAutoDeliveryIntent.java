@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -103,7 +103,7 @@ import org.cip4.jdflib.span.JDFTimeSpan;
  *****************************************************************************
  * class JDFAutoDeliveryIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
@@ -114,11 +114,11 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACCEPTED, 0x44444333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ADDITIONALAMOUNT, 0x44444311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.OWNERSHIP, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumOwnership.getEnum(0), "Origin");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.BUYERACCOUNT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PICKUP, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACCEPTED, 0x4444444333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ADDITIONALAMOUNT, 0x4444444311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.OWNERSHIP, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumOwnership.getEnum(0), "Origin");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.BUYERACCOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PICKUP, 0x4444444443l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
 	@Override
@@ -130,23 +130,23 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[17];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DELIVERYCHARGE, 0x66666661);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.EARLIEST, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.EARLIESTDURATION, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.METHOD, 0x66666666);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.OVERAGE, 0x66666666);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.REQUIRED, 0x66666666);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.REQUIREDDURATION, 0x66666666);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.RETURNMETHOD, 0x66666661);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.SERVICELEVEL, 0x66666611);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.SURPLUSHANDLING, 0x66666661);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.TRANSFER, 0x66666661);
-		elemInfoTable[11] = new ElemInfoTable(ElementName.UNDERAGE, 0x66666666);
-		elemInfoTable[12] = new ElemInfoTable(ElementName.COMPANY, 0x77777776);
-		elemInfoTable[13] = new ElemInfoTable(ElementName.FILESPEC, 0x33311111);
-		elemInfoTable[14] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
-		elemInfoTable[15] = new ElemInfoTable(ElementName.DROPINTENT, 0x22222222);
-		elemInfoTable[16] = new ElemInfoTable(ElementName.PRICING, 0x77777666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DELIVERYCHARGE, 0x6666666661l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EARLIEST, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.EARLIESTDURATION, 0x6666666666l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.METHOD, 0x6666666666l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.OVERAGE, 0x6666666666l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.REQUIRED, 0x6666666666l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.REQUIREDDURATION, 0x6666666666l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.RETURNMETHOD, 0x6666666661l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.SERVICELEVEL, 0x6666666611l);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.SURPLUSHANDLING, 0x6666666661l);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.TRANSFER, 0x6666666661l);
+		elemInfoTable[11] = new ElemInfoTable(ElementName.UNDERAGE, 0x6666666666l);
+		elemInfoTable[12] = new ElemInfoTable(ElementName.COMPANY, 0x7777777776l);
+		elemInfoTable[13] = new ElemInfoTable(ElementName.FILESPEC, 0x3333311111l);
+		elemInfoTable[14] = new ElemInfoTable(ElementName.CONTACT, 0x3333333331l);
+		elemInfoTable[15] = new ElemInfoTable(ElementName.DROPINTENT, 0x2222222222l);
+		elemInfoTable[16] = new ElemInfoTable(ElementName.PRICING, 0x7777777666l);
 	}
 
 	@Override
@@ -201,7 +201,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOwnership(String name)
+		protected EnumOwnership(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -254,14 +254,13 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		public static final EnumOwnership Destination = new EnumOwnership("Destination");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Accepted
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Accepted ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Accepted
 	 *
@@ -282,9 +281,10 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return getBoolAttribute(AttributeName.ACCEPTED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AdditionalAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AdditionalAmount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AdditionalAmount
 	 *
@@ -305,9 +305,9 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return getIntAttribute(AttributeName.ADDITIONALAMOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Ownership
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Ownership ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Ownership
 	 *
@@ -328,9 +328,10 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return EnumOwnership.getEnum(getAttribute(AttributeName.OWNERSHIP, null, "Origin"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BuyerAccount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BuyerAccount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BuyerAccount
 	 *
@@ -351,9 +352,9 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return getAttribute(AttributeName.BUYERACCOUNT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Pickup
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Pickup ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Pickup
 	 *
@@ -374,9 +375,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return getBoolAttribute(AttributeName.PICKUP, null, false);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -391,7 +391,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateDeliveryCharge
-	 *
+	 * 
 	 * @return JDFSpanDeliveryCharge the element
 	 */
 	public JDFSpanDeliveryCharge getCreateDeliveryCharge()
@@ -421,7 +421,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateEarliest
-	 *
+	 * 
 	 * @return JDFTimeSpan the element
 	 */
 	public JDFTimeSpan getCreateEarliest()
@@ -451,7 +451,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateEarliestDuration
-	 *
+	 * 
 	 * @return JDFDurationSpan the element
 	 */
 	public JDFDurationSpan getCreateEarliestDuration()
@@ -481,7 +481,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMethod
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateMethod()
@@ -511,7 +511,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateOverage
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateOverage()
@@ -541,7 +541,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateRequired
-	 *
+	 * 
 	 * @return JDFTimeSpan the element
 	 */
 	public JDFTimeSpan getCreateRequired()
@@ -571,7 +571,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateRequiredDuration
-	 *
+	 * 
 	 * @return JDFDurationSpan the element
 	 */
 	public JDFDurationSpan getCreateRequiredDuration()
@@ -601,7 +601,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateReturnMethod
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateReturnMethod()
@@ -631,7 +631,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateServiceLevel
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateServiceLevel()
@@ -661,7 +661,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateSurplusHandling
-	 *
+	 * 
 	 * @return JDFSpanSurplusHandling the element
 	 */
 	public JDFSpanSurplusHandling getCreateSurplusHandling()
@@ -691,7 +691,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateTransfer
-	 *
+	 * 
 	 * @return JDFSpanTransfer the element
 	 */
 	public JDFSpanTransfer getCreateTransfer()
@@ -721,7 +721,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateUnderage
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateUnderage()
@@ -751,7 +751,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCompany
-	 *
+	 * 
 	 * @return JDFCompany the element
 	 */
 	public JDFCompany getCreateCompany()
@@ -781,7 +781,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreateFileSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
@@ -803,7 +803,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * Get all FileSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFFileSpec>, null if none are available
 	 */
 	public Collection<JDFFileSpec> getAllFileSpec()
@@ -833,7 +833,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -855,7 +855,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -886,7 +886,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreateDropIntent
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDropIntent the element
 	 */
@@ -908,7 +908,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * Get all DropIntent from the current element
-	 *
+	 * 
 	 * @return Collection<JDFDropIntent>, null if none are available
 	 */
 	public Collection<JDFDropIntent> getAllDropIntent()
@@ -938,7 +938,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePricing
-	 *
+	 * 
 	 * @return JDFPricing the element
 	 */
 	public JDFPricing getCreatePricing()

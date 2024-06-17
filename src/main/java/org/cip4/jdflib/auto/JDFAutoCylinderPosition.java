@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,10 +97,10 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PLATEPOSITION, 0x22222111, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PLATETYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumPlateType.getEnum(0), "Exposed");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PLATEUSAGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumPlateUsage.getEnum(0), "Original");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVICEMODULEINDEX, 0x22222111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PLATEPOSITION, 0x2222222111l, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PLATETYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumPlateType.getEnum(0), "Exposed");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PLATEUSAGE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumPlateUsage.getEnum(0), "Original");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVICEMODULEINDEX, 0x2222222111l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override

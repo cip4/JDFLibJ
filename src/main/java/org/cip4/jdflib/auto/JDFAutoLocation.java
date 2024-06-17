@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.process.JDFAddress;
  *****************************************************************************
  * class JDFAutoLocation : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLocation extends JDFElement
@@ -98,8 +98,8 @@ public abstract class JDFAutoLocation extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.LOCATIONNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LOCATIONNAME, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public abstract class JDFAutoLocation extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ADDRESS, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ADDRESS, 0x3333333333l);
 	}
 
 	@Override
@@ -156,14 +156,14 @@ public abstract class JDFAutoLocation extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LocationName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LocationName
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LocationName
 	 *
@@ -184,9 +184,9 @@ public abstract class JDFAutoLocation extends JDFElement
 		return getAttribute(AttributeName.LOCATIONNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LocID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LocID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LocID
 	 *
@@ -207,14 +207,13 @@ public abstract class JDFAutoLocation extends JDFElement
 		return getAttribute(AttributeName.LOCID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateAddress
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFAddress the element
 	 */
@@ -236,7 +235,7 @@ public abstract class JDFAutoLocation extends JDFElement
 
 	/**
 	 * Get all Address from the current element
-	 *
+	 * 
 	 * @return Collection<JDFAddress>, null if none are available
 	 */
 	public Collection<JDFAddress> getAllAddress()

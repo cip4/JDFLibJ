@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoReferenceXObjParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoReferenceXObjParams extends JDFElement
@@ -96,7 +96,7 @@ public abstract class JDFAutoReferenceXObjParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MODE, 0x22211111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MODE, 0x2222211111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public abstract class JDFAutoReferenceXObjParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66611111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x6666611111l);
 	}
 
 	@Override
@@ -153,14 +153,13 @@ public abstract class JDFAutoReferenceXObjParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Mode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Mode ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Mode
 	 *
@@ -181,9 +180,8 @@ public abstract class JDFAutoReferenceXObjParams extends JDFElement
 		return getAttribute(AttributeName.MODE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -198,7 +196,7 @@ public abstract class JDFAutoReferenceXObjParams extends JDFElement
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoTabDimensions : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTabDimensions extends JDFElement
@@ -97,12 +97,12 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TABEDGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumTabEdge.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.TABEXTENSIONDISTANCE, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TABOFFSET, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.TABSPERBANK, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.TABSETCOLLATIONORDER, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.TABWIDTH, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TABEDGE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumTabEdge.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TABEXTENSIONDISTANCE, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TABOFFSET, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TABSPERBANK, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.TABSETCOLLATIONORDER, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TABWIDTH, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -157,7 +157,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumTabEdge(String name)
+		protected EnumTabEdge(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -214,14 +214,13 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 		public static final EnumTabEdge Bottom = new EnumTabEdge("Bottom");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TabEdge
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TabEdge ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute TabEdge
 	 *
@@ -242,9 +241,10 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 		return EnumTabEdge.getEnum(getAttribute(AttributeName.TABEDGE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TabExtensionDistance
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TabExtensionDistance
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TabExtensionDistance
 	 *
@@ -265,9 +265,9 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 		return getRealAttribute(AttributeName.TABEXTENSIONDISTANCE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TabOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TabOffset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TabOffset
 	 *
@@ -288,9 +288,9 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 		return getRealAttribute(AttributeName.TABOFFSET, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TabsPerBank
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TabsPerBank ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TabsPerBank
 	 *
@@ -311,9 +311,10 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 		return getIntAttribute(AttributeName.TABSPERBANK, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TabSetCollationOrder
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TabSetCollationOrder
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TabSetCollationOrder
 	 *
@@ -334,9 +335,9 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 		return getAttribute(AttributeName.TABSETCOLLATIONORDER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TabWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TabWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TabWidth
 	 *

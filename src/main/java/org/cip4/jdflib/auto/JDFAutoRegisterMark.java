@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFSeparationSpec;
  *****************************************************************************
  * class JDFAutoRegisterMark : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoRegisterMark extends JDFResource
@@ -104,10 +104,10 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MARKTYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MARKUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumMarkUsage.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MARKTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MARKUSAGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumMarkUsage.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x3333333333l);
 	}
 
 	@Override
@@ -194,7 +194,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMarkUsage(String name)
+		protected EnumMarkUsage(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -249,14 +249,13 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 		public static final EnumMarkUsage Tile = new EnumMarkUsage("Tile");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Center
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Center
 	 *
@@ -279,9 +278,9 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MarkType
 	 *
@@ -305,9 +304,9 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkUsage ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute MarkUsage
 	 *
@@ -328,9 +327,9 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 		return EnumMarkUsage.getEnum(getAttribute(AttributeName.MARKUSAGE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Rotation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Rotation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Rotation
 	 *
@@ -351,14 +350,13 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 		return getRealAttribute(AttributeName.ROTATION, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateSeparationSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
@@ -380,7 +378,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 
 	/**
 	 * Get all SeparationSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFSeparationSpec>, null if none are available
 	 */
 	public Collection<JDFSeparationSpec> getAllSeparationSpec()

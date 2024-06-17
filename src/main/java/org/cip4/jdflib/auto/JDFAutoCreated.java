@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
  *****************************************************************************
  * class JDFAutoCreated : public JDFAudit
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCreated extends JDFAudit
@@ -98,10 +98,10 @@ public abstract class JDFAutoCreated extends JDFAudit
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.REF, 0x33333333, AttributeInfo.EnumAttributeType.IDREF, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.TEMPLATEID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TEMPLATEVERSION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.XPATH, 0x33333311, AttributeInfo.EnumAttributeType.XPath, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.REF, 0x3333333333l, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TEMPLATEID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TEMPLATEVERSION, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.XPATH, 0x3333333311l, AttributeInfo.EnumAttributeType.XPath, null, null);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public abstract class JDFAutoCreated extends JDFAudit
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x3333333333l);
 	}
 
 	@Override
@@ -158,14 +158,13 @@ public abstract class JDFAutoCreated extends JDFAudit
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ref
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ref ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ref
 	 *
@@ -186,9 +185,9 @@ public abstract class JDFAutoCreated extends JDFAudit
 		return getAttribute(AttributeName.REF, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TemplateID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TemplateID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TemplateID
 	 *
@@ -209,9 +208,10 @@ public abstract class JDFAutoCreated extends JDFAudit
 		return getAttribute(AttributeName.TEMPLATEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TemplateVersion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TemplateVersion
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TemplateVersion
 	 *
@@ -232,9 +232,9 @@ public abstract class JDFAutoCreated extends JDFAudit
 		return getAttribute(AttributeName.TEMPLATEVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute XPath
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute XPath ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute XPath
 	 *
@@ -255,14 +255,13 @@ public abstract class JDFAutoCreated extends JDFAudit
 		return getAttribute(AttributeName.XPATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateEmployee
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -286,7 +285,7 @@ public abstract class JDFAutoCreated extends JDFAudit
 
 	/**
 	 * Get all Employee from the current element
-	 *
+	 * 
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	@Override

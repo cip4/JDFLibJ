@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoInkZoneProfile : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoInkZoneProfile extends JDFResource
@@ -92,10 +92,10 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ZONESETTINGSX, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ZONEWIDTH, 0x22222222, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ZONEHEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ZONESETTINGSY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ZONESETTINGSX, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ZONEWIDTH, 0x2222222222l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ZONEHEIGHT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ZONESETTINGSY, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -160,14 +160,14 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ZoneSettingsX
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ZoneSettingsX
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ZoneSettingsX
 	 *
@@ -190,9 +190,9 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ZoneWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ZoneWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ZoneWidth
 	 *
@@ -213,9 +213,9 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 		return getRealAttribute(AttributeName.ZONEWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ZoneHeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ZoneHeight ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ZoneHeight
 	 *
@@ -236,9 +236,10 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 		return getRealAttribute(AttributeName.ZONEHEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ZoneSettingsY
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ZoneSettingsY
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ZoneSettingsY
 	 *

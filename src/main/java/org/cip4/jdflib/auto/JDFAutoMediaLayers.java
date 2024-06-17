@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
  *****************************************************************************
  * class JDFAutoMediaLayers : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoMediaLayers extends JDFElement
@@ -95,8 +95,8 @@ public abstract class JDFAutoMediaLayers extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x33333111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x3333333111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x3333333111l);
 	}
 
 	@Override
@@ -141,14 +141,13 @@ public abstract class JDFAutoMediaLayers extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateGlueLine
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
@@ -170,7 +169,7 @@ public abstract class JDFAutoMediaLayers extends JDFElement
 
 	/**
 	 * Get all GlueLine from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGlueLine>, null if none are available
 	 */
 	public Collection<JDFGlueLine> getAllGlueLine()
@@ -190,7 +189,7 @@ public abstract class JDFAutoMediaLayers extends JDFElement
 
 	/**
 	 * (26) getCreateMedia
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMedia the element
 	 */
@@ -212,7 +211,7 @@ public abstract class JDFAutoMediaLayers extends JDFElement
 
 	/**
 	 * Get all Media from the current element
-	 *
+	 * 
 	 * @return Collection<JDFMedia>, null if none are available
 	 */
 	public Collection<JDFMedia> getAllMedia()

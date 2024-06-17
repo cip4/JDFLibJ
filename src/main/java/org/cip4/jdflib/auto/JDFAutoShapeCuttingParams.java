@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFDieLayout;
  *****************************************************************************
  * class JDFAutoShapeCuttingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoShapeCuttingParams extends JDFResource
@@ -102,9 +102,9 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DELIVERYMODE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumDeliveryMode.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHEETLAY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DELIVERYMODE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumDeliveryMode.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
 	}
 
 	@Override
@@ -116,8 +116,8 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DIELAYOUT, 0x66666661);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.SHAPE, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DIELAYOUT, 0x6666666661l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SHAPE, 0x3333333331l);
 	}
 
 	@Override
@@ -192,7 +192,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDeliveryMode(String name)
+		protected EnumDeliveryMode(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -257,7 +257,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSheetLay(String name)
+		protected EnumSheetLay(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -312,14 +312,14 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 		public static final EnumSheetLay Center = new EnumSheetLay("Center");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeliveryMode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeliveryMode
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DeliveryMode
 	 *
@@ -340,9 +340,9 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 		return EnumDeliveryMode.getEnum(getAttribute(AttributeName.DELIVERYMODE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleIndex
 	 *
@@ -363,9 +363,9 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 		return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetLay
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SheetLay
 	 *
@@ -386,9 +386,8 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -403,7 +402,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 
 	/**
 	 * (25) getCreateDieLayout
-	 *
+	 * 
 	 * @return JDFDieLayout the element
 	 */
 	public JDFDieLayout getCreateDieLayout()
@@ -433,7 +432,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 
 	/**
 	 * (26) getCreateShape
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFShapeElement the element
 	 */
@@ -455,7 +454,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 
 	/**
 	 * Get all Shape from the current element
-	 *
+	 * 
 	 * @return Collection<JDFShapeElement>, null if none are available
 	 */
 	public Collection<JDFShapeElement> getAllShape()

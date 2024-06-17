@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoModulePhase : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoModulePhase extends JDFElement
@@ -102,15 +102,15 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33333111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICESTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, JDFDeviceInfo.EnumDeviceStatus.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.END, 0x44443333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULETYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.START, 0x44443333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x3333333111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x2222222222l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICESTATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, JDFDeviceInfo.EnumDeviceStatus.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.END, 0x4444443333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULETYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.START, 0x4444443333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x44433333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x4444433333l);
 	}
 
 	@Override
@@ -167,14 +167,14 @@ public abstract class JDFAutoModulePhase extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CombinedProcessIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CombinedProcessIndex
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CombinedProcessIndex
 	 *
@@ -197,9 +197,9 @@ public abstract class JDFAutoModulePhase extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DeviceID
 	 *
@@ -220,9 +220,10 @@ public abstract class JDFAutoModulePhase extends JDFElement
 		return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceStatus
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceStatus
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DeviceStatus
 	 *
@@ -243,9 +244,9 @@ public abstract class JDFAutoModulePhase extends JDFElement
 		return JDFDeviceInfo.EnumDeviceStatus.getEnum(getAttribute(AttributeName.DEVICESTATUS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute End
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute End ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute End
 	 *
@@ -273,9 +274,9 @@ public abstract class JDFAutoModulePhase extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleID
 	 *
@@ -296,9 +297,9 @@ public abstract class JDFAutoModulePhase extends JDFElement
 		return getAttribute(AttributeName.MODULEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleIndex
 	 *
@@ -321,9 +322,9 @@ public abstract class JDFAutoModulePhase extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleType
 	 *
@@ -344,9 +345,9 @@ public abstract class JDFAutoModulePhase extends JDFElement
 		return getAttribute(AttributeName.MODULETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Start
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Start ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute Start
 	 *
@@ -374,9 +375,10 @@ public abstract class JDFAutoModulePhase extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StatusDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StatusDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StatusDetails
 	 *
@@ -397,14 +399,13 @@ public abstract class JDFAutoModulePhase extends JDFElement
 		return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateEmployee
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -426,7 +427,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 
 	/**
 	 * Get all Employee from the current element
-	 *
+	 * 
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	public Collection<JDFEmployee> getAllEmployee()

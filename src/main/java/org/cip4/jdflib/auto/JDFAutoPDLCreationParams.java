@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFPSToPDFConversionParams;
  *****************************************************************************
  * class JDFAutoPDLCreationParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPDLCreationParams extends JDFResource
@@ -98,7 +98,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MIMETYPE, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MIMETYPE, 0x2222222111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -110,9 +110,9 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FONTPARAMS, 0x66666111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PDFTOPSCONVERSIONPARAMS, 0x66666111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.PSTOPDFCONVERSIONPARAMS, 0x66666111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FONTPARAMS, 0x6666666111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PDFTOPSCONVERSIONPARAMS, 0x6666666111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PSTOPDFCONVERSIONPARAMS, 0x6666666111l);
 	}
 
 	@Override
@@ -177,14 +177,13 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MimeType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MimeType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MimeType
 	 *
@@ -205,9 +204,8 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 		return getAttribute(AttributeName.MIMETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -222,7 +220,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 
 	/**
 	 * (25) getCreateFontParams
-	 *
+	 * 
 	 * @return JDFFontParams the element
 	 */
 	public JDFFontParams getCreateFontParams()
@@ -262,7 +260,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 
 	/**
 	 * (25) getCreatePDFToPSConversionParams
-	 *
+	 * 
 	 * @return JDFPDFToPSConversionParams the element
 	 */
 	public JDFPDFToPSConversionParams getCreatePDFToPSConversionParams()
@@ -302,7 +300,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 
 	/**
 	 * (25) getCreatePSToPDFConversionParams
-	 *
+	 * 
 	 * @return JDFPSToPDFConversionParams the element
 	 */
 	public JDFPSToPDFConversionParams getCreatePSToPDFConversionParams()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.core.VString;
  *****************************************************************************
  * class JDFAutoRepeatDesc : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoRepeatDesc extends JDFElement
@@ -98,14 +98,14 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDROTATE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumAllowedRotate.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.GUTTERX, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.GUTTERX2, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.GUTTERY, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.GUTTERY2, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.LAYOUTSTYLE, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.ORDERQUANTITY, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.USEBLEEDS, 0x33331111, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDROTATE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumAllowedRotate.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.GUTTERX, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.GUTTERX2, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.GUTTERY, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.GUTTERY2, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.LAYOUTSTYLE, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.ORDERQUANTITY, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.USEBLEEDS, 0x3333331111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
 	@Override
@@ -160,7 +160,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumAllowedRotate(String name)
+		protected EnumAllowedRotate(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -217,14 +217,14 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		public static final EnumAllowedRotate CrossGrain = new EnumAllowedRotate("CrossGrain");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedRotate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedRotate
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute AllowedRotate
 	 *
@@ -245,9 +245,9 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		return EnumAllowedRotate.getEnum(getAttribute(AttributeName.ALLOWEDROTATE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GutterX
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GutterX ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GutterX
 	 *
@@ -268,9 +268,9 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		return getRealAttribute(AttributeName.GUTTERX, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GutterX2
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GutterX2 ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GutterX2
 	 *
@@ -291,9 +291,9 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		return getRealAttribute(AttributeName.GUTTERX2, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GutterY
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GutterY ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GutterY
 	 *
@@ -314,9 +314,9 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		return getRealAttribute(AttributeName.GUTTERY, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GutterY2
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GutterY2 ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GutterY2
 	 *
@@ -337,9 +337,9 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		return getRealAttribute(AttributeName.GUTTERY2, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LayoutStyle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LayoutStyle ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LayoutStyle
 	 *
@@ -363,9 +363,10 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OrderQuantity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OrderQuantity
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OrderQuantity
 	 *
@@ -386,9 +387,9 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		return getIntAttribute(AttributeName.ORDERQUANTITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UseBleeds
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UseBleeds ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute UseBleeds
 	 *

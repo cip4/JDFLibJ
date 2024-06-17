@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFLoc;
  *****************************************************************************
  * class JDFAutoStringState : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStringState extends JDFResource
@@ -100,12 +100,12 @@ public abstract class JDFAutoStringState extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDLENGTH, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDREGEXP, 0x33333311, AttributeInfo.EnumAttributeType.Any, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTLENGTH, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTREGEXP, 0x33333311, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDLENGTH, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDREGEXP, 0x3333333311l, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTLENGTH, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTREGEXP, 0x3333333311l, AttributeInfo.EnumAttributeType.Any, null, null);
 	}
 
 	@Override
@@ -117,8 +117,8 @@ public abstract class JDFAutoStringState extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x33333331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUE, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUE, 0x3333333331l);
 	}
 
 	@Override
@@ -174,14 +174,14 @@ public abstract class JDFAutoStringState extends JDFResource
 		return bRet;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DefaultValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DefaultValue
 	 *
@@ -202,9 +202,10 @@ public abstract class JDFAutoStringState extends JDFResource
 		return getAttribute(AttributeName.DEFAULTVALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CurrentValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CurrentValue
 	 *
@@ -225,9 +226,10 @@ public abstract class JDFAutoStringState extends JDFResource
 		return getAttribute(AttributeName.CURRENTVALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedLength
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedLength
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedLength
 	 *
@@ -250,9 +252,10 @@ public abstract class JDFAutoStringState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedRegExp
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedRegExp
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedRegExp
 	 *
@@ -273,9 +276,10 @@ public abstract class JDFAutoStringState extends JDFResource
 		return getAttribute(AttributeName.ALLOWEDREGEXP, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentLength
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentLength
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentLength
 	 *
@@ -298,9 +302,10 @@ public abstract class JDFAutoStringState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentRegExp
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentRegExp
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentRegExp
 	 *
@@ -321,14 +326,13 @@ public abstract class JDFAutoStringState extends JDFResource
 		return getAttribute(AttributeName.PRESENTREGEXP, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateLoc
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
@@ -350,7 +354,7 @@ public abstract class JDFAutoStringState extends JDFResource
 
 	/**
 	 * Get all Loc from the current element
-	 *
+	 * 
 	 * @return Collection<JDFLoc>, null if none are available
 	 */
 	public Collection<JDFLoc> getAllLoc()
@@ -370,7 +374,7 @@ public abstract class JDFAutoStringState extends JDFResource
 
 	/**
 	 * (26) getCreateValue
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFValue the element
 	 */
@@ -392,7 +396,7 @@ public abstract class JDFAutoStringState extends JDFResource
 
 	/**
 	 * Get all Value from the current element
-	 *
+	 * 
 	 * @return Collection<JDFValue>, null if none are available
 	 */
 	public Collection<JDFValue> getAllValue()

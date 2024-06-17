@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.resource.JDFPart;
 
@@ -88,7 +89,7 @@ import org.cip4.jdflib.resource.JDFPart;
  *****************************************************************************
  * class JDFAutoSubscriptionInfo : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoSubscriptionInfo extends JDFElement
@@ -96,16 +97,17 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SENDERID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.FAMILY, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MESSAGETYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELID, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SENDERID, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FAMILY, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.LANGUAGES, 0x3333333333l, AttributeInfo.EnumAttributeType.languages, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MESSAGETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -117,8 +119,8 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x55555555);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x5555555555l);
 	}
 
 	@Override
@@ -163,14 +165,13 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ChannelID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ChannelID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ChannelID
 	 *
@@ -191,9 +192,9 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 		return getAttribute(AttributeName.CHANNELID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SenderID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SenderID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SenderID
 	 *
@@ -214,9 +215,9 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 		return getAttribute(AttributeName.SENDERID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Family
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Family ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Family
 	 *
@@ -237,9 +238,9 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 		return getAttribute(AttributeName.FAMILY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobID
 	 *
@@ -260,9 +261,9 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobPartID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobPartID
 	 *
@@ -283,9 +284,35 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MessageType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Languages ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute Languages
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setLanguages(VString value)
+	{
+		setAttribute(AttributeName.LANGUAGES, value, null);
+	}
+
+	/**
+	 * (21) get VString attribute Languages
+	 *
+	 * @return VString the value of the attribute
+	 */
+	public VString getLanguages()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MessageType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MessageType
 	 *
@@ -306,9 +333,10 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 		return getAttribute(AttributeName.MESSAGETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QueueEntryID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute QueueEntryID
 	 *
@@ -329,14 +357,13 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -358,7 +385,7 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()
@@ -388,7 +415,7 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 
 	/**
 	 * (25) getCreateSubscription
-	 *
+	 * 
 	 * @return JDFSubscription the element
 	 */
 	public JDFSubscription getCreateSubscription()

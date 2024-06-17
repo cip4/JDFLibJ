@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.jmf.JDFQueueFilter;
  *****************************************************************************
  * class JDFAutoHoldQueueEntryParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoHoldQueueEntryParams extends JDFElement
@@ -92,7 +92,7 @@ public abstract class JDFAutoHoldQueueEntryParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x66611111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x6666611111l);
 	}
 
 	@Override
@@ -137,9 +137,8 @@ public abstract class JDFAutoHoldQueueEntryParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -154,7 +153,7 @@ public abstract class JDFAutoHoldQueueEntryParams extends JDFElement
 
 	/**
 	 * (25) getCreateQueueFilter
-	 *
+	 * 
 	 * @return JDFQueueFilter the element
 	 */
 	public JDFQueueFilter getCreateQueueFilter()

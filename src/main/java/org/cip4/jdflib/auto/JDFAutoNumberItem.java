@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoNumberItem : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoNumberItem extends JDFElement
@@ -100,8 +100,8 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STARTVALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, "1");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.STEP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STARTVALUE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, "1");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.STEP, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "1");
 	}
 
 	@Override
@@ -113,12 +113,12 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORNAME, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORNAMEDETAILS, 0x22221111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.XPOSITION, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.YPOSITION, 0x66666666);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.ORIENTATION, 0x66666666);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORNAME, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORNAMEDETAILS, 0x2222221111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.XPOSITION, 0x6666666666l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.YPOSITION, 0x6666666666l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.ORIENTATION, 0x6666666666l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x6666666666l);
 	}
 
 	@Override
@@ -163,14 +163,13 @@ public abstract class JDFAutoNumberItem extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StartValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StartValue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StartValue
 	 *
@@ -191,9 +190,9 @@ public abstract class JDFAutoNumberItem extends JDFElement
 		return getAttribute(AttributeName.STARTVALUE, null, "1");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Step
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Step ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Step
 	 *
@@ -214,9 +213,8 @@ public abstract class JDFAutoNumberItem extends JDFElement
 		return getIntAttribute(AttributeName.STEP, null, 1);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -231,7 +229,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 
 	/**
 	 * (25) getCreateColorName
-	 *
+	 * 
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateColorName()
@@ -251,7 +249,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 
 	/**
 	 * (26) getCreateColorNameDetails
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
@@ -273,7 +271,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 
 	/**
 	 * Get all ColorNameDetails from the current element
-	 *
+	 * 
 	 * @return Collection<JDFStringSpan>, null if none are available
 	 */
 	public Collection<JDFStringSpan> getAllColorNameDetails()
@@ -303,7 +301,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 
 	/**
 	 * (25) getCreateXPosition
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateXPosition()
@@ -333,7 +331,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 
 	/**
 	 * (25) getCreateYPosition
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateYPosition()
@@ -363,7 +361,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 
 	/**
 	 * (25) getCreateOrientation
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateOrientation()
@@ -393,7 +391,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 
 	/**
 	 * (25) getCreateSeparationSpec
-	 *
+	 * 
 	 * @return JDFSeparationSpec the element
 	 */
 	public JDFSeparationSpec getCreateSeparationSpec()

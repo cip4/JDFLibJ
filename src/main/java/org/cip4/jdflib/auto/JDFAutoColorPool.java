@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.process.JDFColor;
  *****************************************************************************
  * class JDFAutoColorPool : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoColorPool extends JDFResource
@@ -98,7 +98,7 @@ public abstract class JDFAutoColorPool extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORANTSETNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORANTSETNAME, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public abstract class JDFAutoColorPool extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COLOR, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLOR, 0x3333333333l);
 	}
 
 	@Override
@@ -175,14 +175,14 @@ public abstract class JDFAutoColorPool extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorantSetName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorantSetName
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ColorantSetName
 	 *
@@ -203,14 +203,13 @@ public abstract class JDFAutoColorPool extends JDFResource
 		return getAttribute(AttributeName.COLORANTSETNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateColor
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFColor the element
 	 */
@@ -232,7 +231,7 @@ public abstract class JDFAutoColorPool extends JDFResource
 
 	/**
 	 * Get all Color from the current element
-	 *
+	 * 
 	 * @return Collection<JDFColor>, null if none are available
 	 */
 	public Collection<JDFColor> getAllColor()

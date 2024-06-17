@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
  *****************************************************************************
  * class JDFAutoBundle : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBundle extends JDFResource
@@ -103,11 +103,11 @@ public abstract class JDFAutoBundle extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BUNDLETYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumBundleType.getEnum(0), "Stack");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.FOLIOCOUNT, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.READERPAGECOUNT, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHEETCOUNT, 0x33311111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.TOTALAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BUNDLETYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumBundleType.getEnum(0), "Stack");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FOLIOCOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.READERPAGECOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHEETCOUNT, 0x3333311111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.TOTALAMOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -119,9 +119,9 @@ public abstract class JDFAutoBundle extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BUNDLEITEM, 0x33333331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BUNDLEITEM, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x3333333331l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x3333333331l);
 	}
 
 	@Override
@@ -196,7 +196,7 @@ public abstract class JDFAutoBundle extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBundleType(String name)
+		protected EnumBundleType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -271,14 +271,13 @@ public abstract class JDFAutoBundle extends JDFResource
 		public static final EnumBundleType WrappedBundle = new EnumBundleType("WrappedBundle");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BundleType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BundleType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute BundleType
 	 *
@@ -299,9 +298,9 @@ public abstract class JDFAutoBundle extends JDFResource
 		return EnumBundleType.getEnum(getAttribute(AttributeName.BUNDLETYPE, null, "Stack"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FolioCount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FolioCount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FolioCount
 	 *
@@ -322,9 +321,10 @@ public abstract class JDFAutoBundle extends JDFResource
 		return getIntAttribute(AttributeName.FOLIOCOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ReaderPageCount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ReaderPageCount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ReaderPageCount
 	 *
@@ -345,9 +345,9 @@ public abstract class JDFAutoBundle extends JDFResource
 		return getIntAttribute(AttributeName.READERPAGECOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetCount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetCount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SheetCount
 	 *
@@ -368,9 +368,9 @@ public abstract class JDFAutoBundle extends JDFResource
 		return getIntAttribute(AttributeName.SHEETCOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TotalAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TotalAmount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TotalAmount
 	 *
@@ -391,14 +391,13 @@ public abstract class JDFAutoBundle extends JDFResource
 		return getIntAttribute(AttributeName.TOTALAMOUNT, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateBundleItem
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFBundleItem the element
 	 */
@@ -420,7 +419,7 @@ public abstract class JDFAutoBundle extends JDFResource
 
 	/**
 	 * Get all BundleItem from the current element
-	 *
+	 * 
 	 * @return Collection<JDFBundleItem>, null if none are available
 	 */
 	public Collection<JDFBundleItem> getAllBundleItem()
@@ -440,7 +439,7 @@ public abstract class JDFAutoBundle extends JDFResource
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -462,7 +461,7 @@ public abstract class JDFAutoBundle extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -493,7 +492,7 @@ public abstract class JDFAutoBundle extends JDFResource
 
 	/**
 	 * (26) getCreateIdentificationField
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element
 	 */
@@ -517,7 +516,7 @@ public abstract class JDFAutoBundle extends JDFResource
 
 	/**
 	 * Get all IdentificationField from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIdentificationField>, null if none are available
 	 */
 	public Collection<JDFIdentificationField> getAllIdentificationField()

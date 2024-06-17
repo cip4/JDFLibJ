@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoHoleMakingIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
@@ -102,8 +102,8 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.HOLEREFERENCEEDGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumHoleReferenceEdge.getEnum(0), "Left");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXTENT, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.HOLEREFERENCEEDGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumHoleReferenceEdge.getEnum(0), "Left");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXTENT, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -115,8 +115,8 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLETYPE, 0x55555555);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.HOLELIST, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLETYPE, 0x5555555555l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.HOLELIST, 0x6666666666l);
 	}
 
 	@Override
@@ -171,7 +171,7 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumHoleReferenceEdge(String name)
+		protected EnumHoleReferenceEdge(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -230,14 +230,14 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 		public static final EnumHoleReferenceEdge Pattern = new EnumHoleReferenceEdge("Pattern");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HoleReferenceEdge
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HoleReferenceEdge
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute HoleReferenceEdge
 	 *
@@ -258,9 +258,9 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 		return EnumHoleReferenceEdge.getEnum(getAttribute(AttributeName.HOLEREFERENCEEDGE, null, "Left"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Extent
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Extent ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Extent
 	 *
@@ -283,9 +283,8 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -300,7 +299,7 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateHoleType
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateHoleType()
@@ -330,7 +329,7 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateHoleList
-	 *
+	 * 
 	 * @return JDFHoleList the element
 	 */
 	public JDFHoleList getCreateHoleList()

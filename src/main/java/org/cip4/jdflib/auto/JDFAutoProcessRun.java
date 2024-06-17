@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.util.JDFDuration;
  *****************************************************************************
  * class JDFAutoProcessRun : public JDFAudit
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoProcessRun extends JDFAudit
@@ -104,12 +104,12 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DURATION, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.END, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDSTATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumEndStatus.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.RETURNTIME, 0x33331111, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.START, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x33331111, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DURATION, 0x3333333333l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.END, 0x2222222222l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDSTATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumEndStatus.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.RETURNTIME, 0x3333331111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.START, 0x2222222222l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x3333331111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 	}
 
 	@Override
@@ -121,8 +121,8 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x3333333331l);
 	}
 
 	@Override
@@ -177,7 +177,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumEndStatus(String name)
+		protected EnumEndStatus(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -236,14 +236,13 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 		public static final EnumEndStatus Stopped = new EnumEndStatus("Stopped");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Duration
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Duration ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Duration
 	 *
@@ -266,9 +265,9 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute End
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute End ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute End
 	 *
@@ -296,9 +295,9 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EndStatus
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EndStatus ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute EndStatus
 	 *
@@ -321,9 +320,9 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 		return EnumNodeStatus.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ReturnTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ReturnTime ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute ReturnTime
 	 *
@@ -351,9 +350,9 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Start
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Start ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute Start
 	 *
@@ -381,9 +380,10 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SubmissionTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SubmissionTime
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute SubmissionTime
 	 *
@@ -411,14 +411,13 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 		return ret;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateEmployee
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -442,7 +441,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 
 	/**
 	 * Get all Employee from the current element
-	 *
+	 * 
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	@Override
@@ -464,7 +463,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -486,7 +485,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()

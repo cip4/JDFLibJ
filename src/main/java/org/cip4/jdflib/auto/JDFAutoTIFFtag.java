@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,7 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
  *****************************************************************************
  * class JDFAutoTIFFtag : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTIFFtag extends JDFElement
@@ -94,12 +94,12 @@ public abstract class JDFAutoTIFFtag extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TAGNUMBER, 0x44422211, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.TAGTYPE, 0x44422211, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.INTEGERVALUE, 0x44433311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMBERVALUE, 0x44433311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.STRINGVALUE, 0x44433311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.BINARYVALUE, 0x44433311, AttributeInfo.EnumAttributeType.hexBinary, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TAGNUMBER, 0x4444422211l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TAGTYPE, 0x4444422211l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.INTEGERVALUE, 0x4444433311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMBERVALUE, 0x4444433311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.STRINGVALUE, 0x4444433311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.BINARYVALUE, 0x4444433311l, AttributeInfo.EnumAttributeType.hexBinary, null, null);
 	}
 
 	@Override
@@ -144,14 +144,13 @@ public abstract class JDFAutoTIFFtag extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TagNumber
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TagNumber ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TagNumber
 	 *
@@ -172,9 +171,9 @@ public abstract class JDFAutoTIFFtag extends JDFElement
 		return getIntAttribute(AttributeName.TAGNUMBER, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TagType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TagType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TagType
 	 *
@@ -195,9 +194,10 @@ public abstract class JDFAutoTIFFtag extends JDFElement
 		return getIntAttribute(AttributeName.TAGTYPE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IntegerValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IntegerValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IntegerValue
 	 *
@@ -220,9 +220,9 @@ public abstract class JDFAutoTIFFtag extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NumberValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NumberValue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NumberValue
 	 *
@@ -245,9 +245,9 @@ public abstract class JDFAutoTIFFtag extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StringValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StringValue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StringValue
 	 *
@@ -268,9 +268,9 @@ public abstract class JDFAutoTIFFtag extends JDFElement
 		return getAttribute(AttributeName.STRINGVALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BinaryValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BinaryValue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BinaryValue
 	 *

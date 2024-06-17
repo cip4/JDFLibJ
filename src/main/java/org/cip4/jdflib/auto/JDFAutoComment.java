@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoComment : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoComment extends JDFElement
@@ -94,17 +94,17 @@ public abstract class JDFAutoComment extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AGENTNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ATTRIBUTE, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.AUTHOR, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.BOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.ID, 0x33333111, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.LANGUAGE, 0x33333333, AttributeInfo.EnumAttributeType.language, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.NAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Description");
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.PATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PERSONALID, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x33333111, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AGENTNAME, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ATTRIBUTE, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.AUTHOR, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.BOX, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ID, 0x3333333111l, AttributeInfo.EnumAttributeType.ID, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.LANGUAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.language, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.NAME, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Description");
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.PATH, 0x3333333333l, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PERSONALID, 0x3333111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x3333333111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 	}
 
 	@Override
@@ -149,14 +149,13 @@ public abstract class JDFAutoComment extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AgentName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AgentName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AgentName
 	 *
@@ -177,9 +176,10 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.AGENTNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AgentVersion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AgentVersion
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AgentVersion
 	 *
@@ -200,9 +200,9 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.AGENTVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Attribute
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Attribute ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Attribute
 	 *
@@ -223,9 +223,9 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.ATTRIBUTE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Author
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Author ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Author
 	 *
@@ -246,9 +246,9 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.AUTHOR, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Box
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Box ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Box
 	 *
@@ -271,9 +271,9 @@ public abstract class JDFAutoComment extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ID
 	 *
@@ -296,9 +296,9 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Language
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Language ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Language
 	 *
@@ -319,9 +319,9 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.LANGUAGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Name
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Name
 	 *
@@ -342,9 +342,9 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.NAME, null, "Description");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Path
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Path ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Path
 	 *
@@ -365,9 +365,9 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.PATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PersonalID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PersonalID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PersonalID
 	 *
@@ -388,9 +388,9 @@ public abstract class JDFAutoComment extends JDFElement
 		return getAttribute(AttributeName.PERSONALID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TimeStamp
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TimeStamp ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute TimeStamp
 	 *

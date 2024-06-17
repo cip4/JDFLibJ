@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoTabs : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTabs extends JDFElement
@@ -100,9 +100,9 @@ public abstract class JDFAutoTabs extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TABBANKS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.TABCOUNT, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TABSPERBANK, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TABBANKS, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TABCOUNT, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TABSPERBANK, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -114,13 +114,13 @@ public abstract class JDFAutoTabs extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[7];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.TABBRAND, 0x66666111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.TABEXTENSIONDISTANCE, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.TABEXTENSIONMYLAR, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.TABBINDMYLAR, 0x66666666);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.TABBODYCOPY, 0x66666666);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.TABMYLARCOLOR, 0x66666666);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.TABMYLARCOLORDETAILS, 0x33331111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.TABBRAND, 0x6666666111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.TABEXTENSIONDISTANCE, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.TABEXTENSIONMYLAR, 0x6666666666l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.TABBINDMYLAR, 0x6666666666l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.TABBODYCOPY, 0x6666666666l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.TABMYLARCOLOR, 0x6666666666l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.TABMYLARCOLORDETAILS, 0x3333331111l);
 	}
 
 	@Override
@@ -165,14 +165,13 @@ public abstract class JDFAutoTabs extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TabBanks
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TabBanks ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TabBanks
 	 *
@@ -193,9 +192,9 @@ public abstract class JDFAutoTabs extends JDFElement
 		return getIntAttribute(AttributeName.TABBANKS, null, 1);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TabCount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TabCount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TabCount
 	 *
@@ -216,9 +215,9 @@ public abstract class JDFAutoTabs extends JDFElement
 		return getIntAttribute(AttributeName.TABCOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TabsPerBank
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TabsPerBank ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TabsPerBank
 	 *
@@ -239,9 +238,8 @@ public abstract class JDFAutoTabs extends JDFElement
 		return getIntAttribute(AttributeName.TABSPERBANK, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -256,7 +254,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (25) getCreateTabBrand
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateTabBrand()
@@ -286,7 +284,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (25) getCreateTabExtensionDistance
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateTabExtensionDistance()
@@ -316,7 +314,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (25) getCreateTabExtensionMylar
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateTabExtensionMylar()
@@ -346,7 +344,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (25) getCreateTabBindMylar
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateTabBindMylar()
@@ -376,7 +374,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (25) getCreateTabBodyCopy
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateTabBodyCopy()
@@ -406,7 +404,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (25) getCreateTabMylarColor
-	 *
+	 * 
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateTabMylarColor()
@@ -426,7 +424,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * (26) getCreateTabMylarColorDetails
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
@@ -448,7 +446,7 @@ public abstract class JDFAutoTabs extends JDFElement
 
 	/**
 	 * Get all TabMylarColorDetails from the current element
-	 *
+	 * 
 	 * @return Collection<JDFStringSpan>, null if none are available
 	 */
 	public Collection<JDFStringSpan> getAllTabMylarColorDetails()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoBarcodeCompParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBarcodeCompParams extends JDFResource
@@ -96,8 +96,8 @@ public abstract class JDFAutoBarcodeCompParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPENSATIONPROCESS, 0x22222111, AttributeInfo.EnumAttributeType.enumeration, EnumCompensationProcess.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMPENSATIONVALUE, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPENSATIONPROCESS, 0x2222222111l, AttributeInfo.EnumAttributeType.enumeration, EnumCompensationProcess.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMPENSATIONVALUE, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -172,7 +172,7 @@ public abstract class JDFAutoBarcodeCompParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumCompensationProcess(String name)
+		protected EnumCompensationProcess(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -225,14 +225,14 @@ public abstract class JDFAutoBarcodeCompParams extends JDFResource
 		public static final EnumCompensationProcess Platemaking = new EnumCompensationProcess("Platemaking");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CompensationProcess
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CompensationProcess
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute CompensationProcess
 	 *
@@ -253,9 +253,10 @@ public abstract class JDFAutoBarcodeCompParams extends JDFResource
 		return EnumCompensationProcess.getEnum(getAttribute(AttributeName.COMPENSATIONPROCESS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CompensationValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CompensationValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CompensationValue
 	 *

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFEmployee;
@@ -88,7 +89,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
  *****************************************************************************
  * class JDFAutoResponse : public JDFMessage
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoResponse extends JDFMessage
@@ -96,13 +97,14 @@ public abstract class JDFAutoResponse extends JDFMessage
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACKNOWLEDGED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.REFID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.RETURNCODE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "0");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SUBSCRIBED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACKNOWLEDGED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LANGUAGES, 0x3333333333l, AttributeInfo.EnumAttributeType.languages, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.REFID, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.RETURNCODE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "0");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SUBSCRIBED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
 	@Override
@@ -114,8 +116,8 @@ public abstract class JDFAutoResponse extends JDFMessage
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.NOTIFICATION, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.NOTIFICATION, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x3333333333l);
 	}
 
 	@Override
@@ -160,14 +162,14 @@ public abstract class JDFAutoResponse extends JDFMessage
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Acknowledged
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Acknowledged
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Acknowledged
 	 *
@@ -188,9 +190,35 @@ public abstract class JDFAutoResponse extends JDFMessage
 		return getBoolAttribute(AttributeName.ACKNOWLEDGED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute refID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Languages ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute Languages
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setLanguages(VString value)
+	{
+		setAttribute(AttributeName.LANGUAGES, value, null);
+	}
+
+	/**
+	 * (21) get VString attribute Languages
+	 *
+	 * @return VString the value of the attribute
+	 */
+	public VString getLanguages()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute refID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute refID
 	 *
@@ -213,9 +241,9 @@ public abstract class JDFAutoResponse extends JDFMessage
 		return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ReturnCode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ReturnCode ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ReturnCode
 	 *
@@ -237,9 +265,9 @@ public abstract class JDFAutoResponse extends JDFMessage
 		return getIntAttribute(AttributeName.RETURNCODE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Subscribed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Subscribed ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Subscribed
 	 *
@@ -260,14 +288,13 @@ public abstract class JDFAutoResponse extends JDFMessage
 		return getBoolAttribute(AttributeName.SUBSCRIBED, null, false);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateNotification
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFNotification the element
 	 */
@@ -289,7 +316,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 
 	/**
 	 * Get all Notification from the current element
-	 *
+	 * 
 	 * @return Collection<JDFNotification>, null if none are available
 	 */
 	public Collection<JDFNotification> getAllNotification()
@@ -309,7 +336,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 
 	/**
 	 * (26) getCreateEmployee
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -331,7 +358,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 
 	/**
 	 * Get all Employee from the current element
-	 *
+	 * 
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	public Collection<JDFEmployee> getAllEmployee()

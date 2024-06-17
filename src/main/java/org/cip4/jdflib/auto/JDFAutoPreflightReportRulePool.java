@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.process.JDFPRRuleAttr;
  *****************************************************************************
  * class JDFAutoPreflightReportRulePool : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPreflightReportRulePool extends JDFResource
@@ -98,7 +98,7 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MAXOCCURRENCES, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MAXOCCURRENCES, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -110,8 +110,8 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PRRULE, 0x33333311);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PRRULEATTR, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PRRULE, 0x3333333311l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PRRULEATTR, 0x6666666611l);
 	}
 
 	@Override
@@ -176,14 +176,14 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxOccurrences
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxOccurrences
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxOccurrences
 	 *
@@ -204,14 +204,13 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 		return getIntAttribute(AttributeName.MAXOCCURRENCES, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatePRRule
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPRRule the element
 	 */
@@ -233,7 +232,7 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 
 	/**
 	 * Get all PRRule from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPRRule>, null if none are available
 	 */
 	public Collection<JDFPRRule> getAllPRRule()
@@ -263,7 +262,7 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 
 	/**
 	 * (25) getCreatePRRuleAttr
-	 *
+	 * 
 	 * @return JDFPRRuleAttr the element
 	 */
 	public JDFPRRuleAttr getCreatePRRuleAttr()

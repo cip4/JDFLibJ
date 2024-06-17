@@ -46,6 +46,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 
 /**
@@ -118,7 +119,7 @@ public class RemovePrivate extends BaseElementWalker
 				if (!(e1 instanceof JDFElement))
 					return e1;
 				final JDFElement j = (JDFElement) e1;
-				if (!e1.getClass().equals(JDFElement.class))
+				if (!e1.getClass().equals(JDFElement.class) && !e1.getClass().equals(JDFResource.class))
 				{
 					unknown = j.getUnknownAttributes(false, -1);
 				}
@@ -181,7 +182,8 @@ public class RemovePrivate extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			if (!JDFConstants.JDFNAMESPACE.equals(e.getNamespaceURI()))
+
+			if (!JDFElement.isInAnyCIP4NameSpaceStatic(e))
 			{
 				e.deleteNode();
 				return null;
@@ -237,7 +239,7 @@ public class RemovePrivate extends BaseElementWalker
 		{
 			final String idUsage = ((JDFGeneralID) e).getIDUsage();
 			final String prefix = KElement.xmlnsPrefix(idUsage);
-			if (prefix != null && !"JDF".equalsIgnoreCase(prefix))
+			if (prefix != null && !"JDF".equalsIgnoreCase(prefix) && !"XJDF".equalsIgnoreCase(prefix))
 			{
 				if (prefixes == null || prefixes.contains(prefix))
 				{

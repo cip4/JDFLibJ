@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,7 +97,7 @@ import org.cip4.jdflib.span.JDFTimeSpan;
  *****************************************************************************
  * class JDFAutoDropIntent : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDropIntent extends JDFElement
@@ -108,10 +108,10 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDITIONALAMOUNT, 0x44444311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BUYERACCOUNT, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DROPID, 0x33311111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PICKUP, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDITIONALAMOUNT, 0x4444444311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BUYERACCOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DROPID, 0x3333311111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PICKUP, 0x4444444443l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
 	@Override
@@ -123,20 +123,20 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[14];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.EARLIEST, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.EARLIESTDURATION, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.METHOD, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.REQUIRED, 0x66666666);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.REQUIREDDURATION, 0x66666666);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.RETURNMETHOD, 0x66666661);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.SERVICELEVEL, 0x66666611);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.SURPLUSHANDLING, 0x66666661);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.TRANSFER, 0x66666661);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.COMPANY, 0x77777776);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
-		elemInfoTable[11] = new ElemInfoTable(ElementName.FILESPEC, 0x66111111);
-		elemInfoTable[12] = new ElemInfoTable(ElementName.DROPITEMINTENT, 0x22222222);
-		elemInfoTable[13] = new ElemInfoTable(ElementName.PRICING, 0x77777666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EARLIEST, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EARLIESTDURATION, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.METHOD, 0x6666666666l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.REQUIRED, 0x6666666666l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.REQUIREDDURATION, 0x6666666666l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.RETURNMETHOD, 0x6666666661l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.SERVICELEVEL, 0x6666666611l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.SURPLUSHANDLING, 0x6666666661l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.TRANSFER, 0x6666666661l);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.COMPANY, 0x7777777776l);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.CONTACT, 0x3333333331l);
+		elemInfoTable[11] = new ElemInfoTable(ElementName.FILESPEC, 0x6666111111l);
+		elemInfoTable[12] = new ElemInfoTable(ElementName.DROPITEMINTENT, 0x2222222222l);
+		elemInfoTable[13] = new ElemInfoTable(ElementName.PRICING, 0x7777777666l);
 	}
 
 	@Override
@@ -181,14 +181,14 @@ public abstract class JDFAutoDropIntent extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AdditionalAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AdditionalAmount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AdditionalAmount
 	 *
@@ -209,9 +209,10 @@ public abstract class JDFAutoDropIntent extends JDFElement
 		return getIntAttribute(AttributeName.ADDITIONALAMOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BuyerAccount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BuyerAccount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BuyerAccount
 	 *
@@ -232,9 +233,9 @@ public abstract class JDFAutoDropIntent extends JDFElement
 		return getAttribute(AttributeName.BUYERACCOUNT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DropID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DropID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DropID
 	 *
@@ -255,9 +256,9 @@ public abstract class JDFAutoDropIntent extends JDFElement
 		return getAttribute(AttributeName.DROPID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Pickup
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Pickup ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Pickup
 	 *
@@ -278,9 +279,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 		return getBoolAttribute(AttributeName.PICKUP, null, false);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -295,7 +295,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * (25) getCreateEarliest
-	 *
+	 * 
 	 * @return JDFTimeSpan the element
 	 */
 	public JDFTimeSpan getCreateEarliest()
@@ -325,7 +325,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * (25) getCreateEarliestDuration
-	 *
+	 * 
 	 * @return JDFDurationSpan the element
 	 */
 	public JDFDurationSpan getCreateEarliestDuration()
@@ -355,7 +355,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * (25) getCreateMethod
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateMethod()
@@ -385,7 +385,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * (25) getCreateRequired
-	 *
+	 * 
 	 * @return JDFTimeSpan the element
 	 */
 	public JDFTimeSpan getCreateRequired()
@@ -415,7 +415,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * (25) getCreateRequiredDuration
-	 *
+	 * 
 	 * @return JDFDurationSpan the element
 	 */
 	public JDFDurationSpan getCreateRequiredDuration()
@@ -445,7 +445,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * (25) getCreateReturnMethod
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateReturnMethod()
@@ -475,7 +475,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * (25) getCreateServiceLevel
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateServiceLevel()
@@ -505,7 +505,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * (25) getCreateSurplusHandling
-	 *
+	 * 
 	 * @return JDFSpanSurplusHandling the element
 	 */
 	public JDFSpanSurplusHandling getCreateSurplusHandling()
@@ -535,7 +535,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * (25) getCreateTransfer
-	 *
+	 * 
 	 * @return JDFSpanTransfer the element
 	 */
 	public JDFSpanTransfer getCreateTransfer()
@@ -565,7 +565,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * (25) getCreateCompany
-	 *
+	 * 
 	 * @return JDFCompany the element
 	 */
 	public JDFCompany getCreateCompany()
@@ -595,7 +595,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -617,7 +617,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -657,7 +657,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()
@@ -687,7 +687,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * (26) getCreateDropItemIntent
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDropItemIntent the element
 	 */
@@ -709,7 +709,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * Get all DropItemIntent from the current element
-	 *
+	 * 
 	 * @return Collection<JDFDropItemIntent>, null if none are available
 	 */
 	public Collection<JDFDropItemIntent> getAllDropItemIntent()
@@ -739,7 +739,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 
 	/**
 	 * (25) getCreatePricing
-	 *
+	 * 
 	 * @return JDFPricing the element
 	 */
 	public JDFPricing getCreatePricing()

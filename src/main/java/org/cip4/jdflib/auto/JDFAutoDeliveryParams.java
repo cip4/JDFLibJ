@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,7 +96,7 @@ import org.cip4.jdflib.util.JDFDuration;
  *****************************************************************************
  * class JDFAutoDeliveryParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDeliveryParams extends JDFResource
@@ -107,15 +107,15 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DELIVERYID, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.EARLIEST, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.EARLIESTDURATION, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.METHOD, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PICKUP, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.REQUIRED, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.REQUIREDDURATION, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.SERVICELEVEL, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.TRANSFER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumTransfer.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DELIVERYID, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EARLIEST, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.EARLIESTDURATION, 0x3333333333l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.METHOD, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PICKUP, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.REQUIRED, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.REQUIREDDURATION, 0x3333333333l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SERVICELEVEL, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.TRANSFER, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumTransfer.getEnum(0), null);
 	}
 
 	@Override
@@ -127,10 +127,10 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPANY, 0x77777776);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.DROP, 0x22222222);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.FILESPEC, 0x33111111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPANY, 0x7777777776l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x3333333331l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.DROP, 0x2222222222l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.FILESPEC, 0x3333111111l);
 	}
 
 	@Override
@@ -205,7 +205,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumTransfer(String name)
+		protected EnumTransfer(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -262,14 +262,13 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 		public static final EnumTransfer PrinterToBuyerPickup = new EnumTransfer("PrinterToBuyerPickup");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeliveryID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeliveryID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DeliveryID
 	 *
@@ -290,9 +289,9 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 		return getAttribute(AttributeName.DELIVERYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Earliest
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Earliest ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute Earliest
 	 *
@@ -320,9 +319,10 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EarliestDuration
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EarliestDuration
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute EarliestDuration
 	 *
@@ -345,9 +345,9 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Method
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Method ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Method
 	 *
@@ -368,9 +368,9 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 		return getAttribute(AttributeName.METHOD, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Pickup
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Pickup ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Pickup
 	 *
@@ -391,9 +391,9 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 		return getBoolAttribute(AttributeName.PICKUP, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Required
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Required ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute Required
 	 *
@@ -421,9 +421,10 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RequiredDuration
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RequiredDuration
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RequiredDuration
 	 *
@@ -446,9 +447,10 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ServiceLevel
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ServiceLevel
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ServiceLevel
 	 *
@@ -469,9 +471,9 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 		return getAttribute(AttributeName.SERVICELEVEL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Transfer
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Transfer ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Transfer
 	 *
@@ -492,9 +494,8 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 		return EnumTransfer.getEnum(getAttribute(AttributeName.TRANSFER, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -509,7 +510,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 
 	/**
 	 * (25) getCreateCompany
-	 *
+	 * 
 	 * @return JDFCompany the element
 	 */
 	public JDFCompany getCreateCompany()
@@ -539,7 +540,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -561,7 +562,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -592,7 +593,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 
 	/**
 	 * (26) getCreateDrop
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDrop the element
 	 */
@@ -614,7 +615,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 
 	/**
 	 * Get all Drop from the current element
-	 *
+	 * 
 	 * @return Collection<JDFDrop>, null if none are available
 	 */
 	public Collection<JDFDrop> getAllDrop()
@@ -634,7 +635,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 
 	/**
 	 * (26) getCreateFileSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
@@ -656,7 +657,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 
 	/**
 	 * Get all FileSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFFileSpec>, null if none are available
 	 */
 	public Collection<JDFFileSpec> getAllFileSpec()

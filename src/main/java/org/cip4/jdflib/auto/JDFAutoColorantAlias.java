@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.JDFSeparationSpec;
  *****************************************************************************
  * class JDFAutoColorantAlias : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoColorantAlias extends JDFResource
@@ -99,8 +99,8 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.REPLACEMENTCOLORANTNAME, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.RAWNAMES, 0x33331111, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.REPLACEMENTCOLORANTNAME, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.RAWNAMES, 0x3333331111l, AttributeInfo.EnumAttributeType.Any, null, null);
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x22222222);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x2222222222l);
 	}
 
 	@Override
@@ -177,14 +177,14 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ReplacementColorantName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ReplacementColorantName
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ReplacementColorantName
 	 *
@@ -205,9 +205,9 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 		return getAttribute(AttributeName.REPLACEMENTCOLORANTNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RawNames
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RawNames ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RawNames
 	 *
@@ -231,14 +231,13 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateSeparationSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
@@ -260,7 +259,7 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 
 	/**
 	 * Get all SeparationSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFSeparationSpec>, null if none are available
 	 */
 	public Collection<JDFSeparationSpec> getAllSeparationSpec()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoLaminatingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLaminatingParams extends JDFResource
@@ -99,14 +99,14 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADHESIVETYPE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.GAPLIST, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.HARDENERTYPE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.LAMINATINGBOX, 0x33333331, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.LAMINATINGMETHOD, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumLaminatingMethod.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.NIPWIDTH, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.TEMPERATURE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADHESIVETYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.GAPLIST, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.HARDENERTYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.LAMINATINGBOX, 0x3333333331l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.LAMINATINGMETHOD, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumLaminatingMethod.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.NIPWIDTH, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.TEMPERATURE, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -181,7 +181,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumLaminatingMethod(String name)
+		protected EnumLaminatingMethod(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -238,14 +238,14 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 		public static final EnumLaminatingMethod Unknown = new EnumLaminatingMethod("Unknown");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AdhesiveType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AdhesiveType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AdhesiveType
 	 *
@@ -266,9 +266,9 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 		return getAttribute(AttributeName.ADHESIVETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GapList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GapList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GapList
 	 *
@@ -291,9 +291,10 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HardenerType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HardenerType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HardenerType
 	 *
@@ -314,9 +315,10 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 		return getAttribute(AttributeName.HARDENERTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LaminatingBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LaminatingBox
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LaminatingBox
 	 *
@@ -339,9 +341,10 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LaminatingMethod
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LaminatingMethod
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute LaminatingMethod
 	 *
@@ -362,9 +365,9 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 		return EnumLaminatingMethod.getEnum(getAttribute(AttributeName.LAMINATINGMETHOD, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NipWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NipWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NipWidth
 	 *
@@ -385,9 +388,9 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 		return getRealAttribute(AttributeName.NIPWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleIndex
 	 *
@@ -408,9 +411,9 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 		return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Temperature
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Temperature ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Temperature
 	 *

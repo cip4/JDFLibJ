@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,7 @@ import org.cip4.jdflib.span.JDFSpanScreeningType;
  *****************************************************************************
  * class JDFAutoScreeningIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoScreeningIntent extends JDFIntentResource
@@ -94,10 +94,10 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DOTSIZE, 0x66666611);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.FREQUENCY, 0x66666611);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.FREQUENCYSELECTION, 0x66666611);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.SCREENINGTYPE, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DOTSIZE, 0x6666666611l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FREQUENCY, 0x6666666611l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.FREQUENCYSELECTION, 0x6666666611l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.SCREENINGTYPE, 0x6666666611l);
 	}
 
 	@Override
@@ -142,9 +142,8 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -159,7 +158,7 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateDotSize
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateDotSize()
@@ -189,7 +188,7 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateFrequency
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateFrequency()
@@ -219,7 +218,7 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateFrequencySelection
-	 *
+	 * 
 	 * @return JDFSpanFrequencySelection the element
 	 */
 	public JDFSpanFrequencySelection getCreateFrequencySelection()
@@ -249,7 +248,7 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateScreeningType
-	 *
+	 * 
 	 * @return JDFSpanScreeningType the element
 	 */
 	public JDFSpanScreeningType getCreateScreeningType()

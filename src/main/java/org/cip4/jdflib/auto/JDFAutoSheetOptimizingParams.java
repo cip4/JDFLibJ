@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFGangElement;
  *****************************************************************************
  * class JDFAutoSheetOptimizingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoSheetOptimizingParams extends JDFResource
@@ -102,7 +102,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.POLICY, 0x31111111, AttributeInfo.EnumAttributeType.enumeration, EnumPolicy.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.POLICY, 0x3331111111l, AttributeInfo.EnumAttributeType.enumeration, EnumPolicy.getEnum(0), null);
 	}
 
 	@Override
@@ -114,8 +114,8 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CONVERTINGCONFIG, 0x22211111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.GANGELEMENT, 0x22211111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONVERTINGCONFIG, 0x3333311111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.GANGELEMENT, 0x2222211111l);
 	}
 
 	@Override
@@ -190,7 +190,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPolicy(String name)
+		protected EnumPolicy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -245,14 +245,13 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 		public static final EnumPolicy NoGang = new EnumPolicy("NoGang");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Policy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Policy ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Policy
 	 *
@@ -273,14 +272,13 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 		return EnumPolicy.getEnum(getAttribute(AttributeName.POLICY, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateConvertingConfig
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFConvertingConfig the element
 	 */
@@ -302,7 +300,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 
 	/**
 	 * Get all ConvertingConfig from the current element
-	 *
+	 * 
 	 * @return Collection<JDFConvertingConfig>, null if none are available
 	 */
 	public Collection<JDFConvertingConfig> getAllConvertingConfig()
@@ -322,7 +320,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 
 	/**
 	 * (26) getCreateGangElement
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGangElement the element
 	 */
@@ -344,7 +342,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 
 	/**
 	 * Get all GangElement from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGangElement>, null if none are available
 	 */
 	public Collection<JDFGangElement> getAllGangElement()

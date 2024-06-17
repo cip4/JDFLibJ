@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,7 +95,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoJMF : public JDFPool
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoJMF extends JDFPool
@@ -106,15 +106,15 @@ public abstract class JDFAutoJMF extends JDFPool
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AGENTNAME, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXVERSION, 0x33333111, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.RESPONSEURL, 0x44433311, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SENDERID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.VERSION, 0x22222222, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AGENTNAME, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXVERSION, 0x3333333111l, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.RESPONSEURL, 0x4444433311l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SENDERID, 0x2222222222l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x2222222222l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.VERSION, 0x2222222222l, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
 	}
 
 	@Override
@@ -126,13 +126,13 @@ public abstract class JDFAutoJMF extends JDFPool
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[7];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33331111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COMMAND, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.ACKNOWLEDGE, 0x33333333);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.RESPONSE, 0x33333333);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.SIGNAL, 0x33333333);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.QUERY, 0x33333333);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.REGISTRATION, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x3333331111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COMMAND, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.ACKNOWLEDGE, 0x3333333333l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.RESPONSE, 0x3333333333l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.SIGNAL, 0x3333333333l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.QUERY, 0x3333333333l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.REGISTRATION, 0x3333333333l);
 	}
 
 	@Override
@@ -147,7 +147,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJMF(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoJMF(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -159,7 +159,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJMF(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoJMF(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -172,25 +172,24 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoJMF(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoJMF(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AgentName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AgentName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AgentName
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAgentName(String value)
+	public void setAgentName(final String value)
 	{
 		setAttribute(AttributeName.AGENTNAME, value, null);
 	}
@@ -205,15 +204,16 @@ public abstract class JDFAutoJMF extends JDFPool
 		return getAttribute(AttributeName.AGENTNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AgentVersion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AgentVersion
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AgentVersion
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAgentVersion(String value)
+	public void setAgentVersion(final String value)
 	{
 		setAttribute(AttributeName.AGENTVERSION, value, null);
 	}
@@ -228,15 +228,15 @@ public abstract class JDFAutoJMF extends JDFPool
 		return getAttribute(AttributeName.AGENTVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DeviceID
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeviceID(String value)
+	public void setDeviceID(final String value)
 	{
 		setAttribute(AttributeName.DEVICEID, value, null);
 	}
@@ -251,15 +251,15 @@ public abstract class JDFAutoJMF extends JDFPool
 		return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ICSVersions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ICSVersions ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ICSVersions
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setICSVersions(VString value)
+	public void setICSVersions(final VString value)
 	{
 		setAttribute(AttributeName.ICSVERSIONS, value, null);
 	}
@@ -277,15 +277,15 @@ public abstract class JDFAutoJMF extends JDFPool
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxVersion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxVersion ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute MaxVersion
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMaxVersion(EnumVersion enumVar)
+	public void setMaxVersion(final EnumVersion enumVar)
 	{
 		setAttribute(AttributeName.MAXVERSION, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -300,15 +300,15 @@ public abstract class JDFAutoJMF extends JDFPool
 		return EnumVersion.getEnum(getAttribute(AttributeName.MAXVERSION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ResponseURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ResponseURL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ResponseURL
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResponseURL(String value)
+	public void setResponseURL(final String value)
 	{
 		setAttribute(AttributeName.RESPONSEURL, value, null);
 	}
@@ -323,15 +323,15 @@ public abstract class JDFAutoJMF extends JDFPool
 		return getAttribute(AttributeName.RESPONSEURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SenderID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SenderID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SenderID
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSenderID(String value)
+	public void setSenderID(final String value)
 	{
 		setAttribute(AttributeName.SENDERID, value, null);
 	}
@@ -346,15 +346,15 @@ public abstract class JDFAutoJMF extends JDFPool
 		return getAttribute(AttributeName.SENDERID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TimeStamp
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TimeStamp ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute TimeStamp
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setTimeStamp(JDFDate value)
+	public void setTimeStamp(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -376,18 +376,17 @@ public abstract class JDFAutoJMF extends JDFPool
 		return ret;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateEmployee
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -398,14 +397,14 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element default is getEmployee(0)
 	 */
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}
 
 	/**
 	 * Get all Employee from the current element
-	 *
+	 * 
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	public Collection<JDFEmployee> getAllEmployee()
@@ -425,11 +424,11 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (26) getCreateCommand
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCommand the element
 	 */
-	public JDFCommand getCreateCommand(int iSkip)
+	public JDFCommand getCreateCommand(final int iSkip)
 	{
 		return (JDFCommand) getCreateElement_JDFElement(ElementName.COMMAND, null, iSkip);
 	}
@@ -440,14 +439,14 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFCommand the element default is getCommand(0)
 	 */
-	public JDFCommand getCommand(int iSkip)
+	public JDFCommand getCommand(final int iSkip)
 	{
 		return (JDFCommand) getElement(ElementName.COMMAND, null, iSkip);
 	}
 
 	/**
 	 * Get all Command from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCommand>, null if none are available
 	 */
 	public Collection<JDFCommand> getAllCommand()
@@ -467,11 +466,11 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (26) getCreateAcknowledge
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFAcknowledge the element
 	 */
-	public JDFAcknowledge getCreateAcknowledge(int iSkip)
+	public JDFAcknowledge getCreateAcknowledge(final int iSkip)
 	{
 		return (JDFAcknowledge) getCreateElement_JDFElement(ElementName.ACKNOWLEDGE, null, iSkip);
 	}
@@ -482,14 +481,14 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFAcknowledge the element default is getAcknowledge(0)
 	 */
-	public JDFAcknowledge getAcknowledge(int iSkip)
+	public JDFAcknowledge getAcknowledge(final int iSkip)
 	{
 		return (JDFAcknowledge) getElement(ElementName.ACKNOWLEDGE, null, iSkip);
 	}
 
 	/**
 	 * Get all Acknowledge from the current element
-	 *
+	 * 
 	 * @return Collection<JDFAcknowledge>, null if none are available
 	 */
 	public Collection<JDFAcknowledge> getAllAcknowledge()
@@ -509,11 +508,11 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (26) getCreateResponse
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFResponse the element
 	 */
-	public JDFResponse getCreateResponse(int iSkip)
+	public JDFResponse getCreateResponse(final int iSkip)
 	{
 		return (JDFResponse) getCreateElement_JDFElement(ElementName.RESPONSE, null, iSkip);
 	}
@@ -524,14 +523,14 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFResponse the element default is getResponse(0)
 	 */
-	public JDFResponse getResponse(int iSkip)
+	public JDFResponse getResponse(final int iSkip)
 	{
 		return (JDFResponse) getElement(ElementName.RESPONSE, null, iSkip);
 	}
 
 	/**
 	 * Get all Response from the current element
-	 *
+	 * 
 	 * @return Collection<JDFResponse>, null if none are available
 	 */
 	public Collection<JDFResponse> getAllResponse()
@@ -551,11 +550,11 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (26) getCreateSignal
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSignal the element
 	 */
-	public JDFSignal getCreateSignal(int iSkip)
+	public JDFSignal getCreateSignal(final int iSkip)
 	{
 		return (JDFSignal) getCreateElement_JDFElement(ElementName.SIGNAL, null, iSkip);
 	}
@@ -566,14 +565,14 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFSignal the element default is getSignal(0)
 	 */
-	public JDFSignal getSignal(int iSkip)
+	public JDFSignal getSignal(final int iSkip)
 	{
 		return (JDFSignal) getElement(ElementName.SIGNAL, null, iSkip);
 	}
 
 	/**
 	 * Get all Signal from the current element
-	 *
+	 * 
 	 * @return Collection<JDFSignal>, null if none are available
 	 */
 	public Collection<JDFSignal> getAllSignal()
@@ -593,11 +592,11 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (26) getCreateQuery
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFQuery the element
 	 */
-	public JDFQuery getCreateQuery(int iSkip)
+	public JDFQuery getCreateQuery(final int iSkip)
 	{
 		return (JDFQuery) getCreateElement_JDFElement(ElementName.QUERY, null, iSkip);
 	}
@@ -608,14 +607,14 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFQuery the element default is getQuery(0)
 	 */
-	public JDFQuery getQuery(int iSkip)
+	public JDFQuery getQuery(final int iSkip)
 	{
 		return (JDFQuery) getElement(ElementName.QUERY, null, iSkip);
 	}
 
 	/**
 	 * Get all Query from the current element
-	 *
+	 * 
 	 * @return Collection<JDFQuery>, null if none are available
 	 */
 	public Collection<JDFQuery> getAllQuery()
@@ -635,11 +634,11 @@ public abstract class JDFAutoJMF extends JDFPool
 
 	/**
 	 * (26) getCreateRegistration
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegistration the element
 	 */
-	public JDFRegistration getCreateRegistration(int iSkip)
+	public JDFRegistration getCreateRegistration(final int iSkip)
 	{
 		return (JDFRegistration) getCreateElement_JDFElement(ElementName.REGISTRATION, null, iSkip);
 	}
@@ -650,14 +649,14 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegistration the element default is getRegistration(0)
 	 */
-	public JDFRegistration getRegistration(int iSkip)
+	public JDFRegistration getRegistration(final int iSkip)
 	{
 		return (JDFRegistration) getElement(ElementName.REGISTRATION, null, iSkip);
 	}
 
 	/**
 	 * Get all Registration from the current element
-	 *
+	 * 
 	 * @return Collection<JDFRegistration>, null if none are available
 	 */
 	public Collection<JDFRegistration> getAllRegistration()

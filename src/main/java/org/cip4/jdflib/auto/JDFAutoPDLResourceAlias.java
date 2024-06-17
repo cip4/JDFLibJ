@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoPDLResourceAlias : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPDLResourceAlias extends JDFResource
@@ -96,8 +96,8 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.RESOURCETYPE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SOURCENAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.RESOURCETYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SOURCENAME, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x6666666666l);
 	}
 
 	@Override
@@ -174,14 +174,14 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ResourceType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ResourceType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ResourceType
 	 *
@@ -202,9 +202,9 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 		return getAttribute(AttributeName.RESOURCETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SourceName
 	 *
@@ -225,9 +225,8 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 		return getAttribute(AttributeName.SOURCENAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -242,7 +241,7 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()

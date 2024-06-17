@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
  *****************************************************************************
  * class JDFAutoDurationEvaluation : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDurationEvaluation extends JDFResource
@@ -98,7 +98,7 @@ public abstract class JDFAutoDurationEvaluation extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUERANGE, 0x33333333, AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUERANGE, 0x3333333333l, AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public abstract class JDFAutoDurationEvaluation extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x3333333333l);
 	}
 
 	@Override
@@ -166,14 +166,13 @@ public abstract class JDFAutoDurationEvaluation extends JDFResource
 		return bRet;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ValueRange
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ValueRange ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ValueRange
 	 *
@@ -196,14 +195,13 @@ public abstract class JDFAutoDurationEvaluation extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateBasicPreflightTest
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest the element
 	 */
@@ -225,7 +223,7 @@ public abstract class JDFAutoDurationEvaluation extends JDFResource
 
 	/**
 	 * Get all BasicPreflightTest from the current element
-	 *
+	 * 
 	 * @return Collection<JDFBasicPreflightTest>, null if none are available
 	 */
 	public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()

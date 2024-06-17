@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -13,7 +13,7 @@
  * 1. Redistributions of source code must retain the above copyright
  *    notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright 
+ * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
@@ -111,30 +111,30 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[24];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEADLINE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumDeadLine.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ENDTIME, 0x31111111, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PERCENTCOMPLETED, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.PHASEAMOUNT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.PHASESTARTTIME, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PHASEWASTE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.RELATEDJOBID, 0x31111111, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.RELATEDJOBPARTID, 0x31111111, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.RESTTIME, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.SPEED, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.SPAWNID, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.STARTTIME, 0x33333331, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
-		atrInfoTable[18] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[19] = new AtrInfoTable(AttributeName.TOOLIDS, 0x31111111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[20] = new AtrInfoTable(AttributeName.TOTALAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[21] = new AtrInfoTable(AttributeName.URL, 0x33331111, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[22] = new AtrInfoTable(AttributeName.WASTE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[23] = new AtrInfoTable(AttributeName.WORKSTEPID, 0x31111111, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEADLINE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumDeadLine.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ENDTIME, 0x3331111111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PERCENTCOMPLETED, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PHASEAMOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.PHASESTARTTIME, 0x3333333311l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PHASEWASTE, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.RELATEDJOBID, 0x3331111111l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.RELATEDJOBPARTID, 0x3331111111l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.RESTTIME, 0x3333333331l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.SPEED, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.SPAWNID, 0x3333311111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.STARTTIME, 0x3333333331l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.STATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[18] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[19] = new AtrInfoTable(AttributeName.TOOLIDS, 0x3331111111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[20] = new AtrInfoTable(AttributeName.TOTALAMOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[21] = new AtrInfoTable(AttributeName.URL, 0x3333331111l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[22] = new AtrInfoTable(AttributeName.WASTE, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[23] = new AtrInfoTable(AttributeName.WORKSTEPID, 0x3331111111l, AttributeInfo.EnumAttributeType.shortString, null, null);
 	}
 
 	@Override
@@ -146,12 +146,12 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIVITY, 0x33311111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COSTCENTER, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.GANGSOURCE, 0x33111111);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666611);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.MODULESTATUS, 0x33333111);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.PART, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIVITY, 0x3333311111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COSTCENTER, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.GANGSOURCE, 0x3333111111l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.MISDETAILS, 0x6666666611l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.MODULESTATUS, 0x3333333111l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.PART, 0x3333333333l);
 	}
 
 	@Override
@@ -162,7 +162,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoJobPhase
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -173,7 +173,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoJobPhase
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -185,7 +185,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoJobPhase
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -270,7 +270,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (5) set attribute Activation
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setActivation(EnumActivation enumVar)
@@ -280,7 +280,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (9) get attribute Activation
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumActivation getActivation()
@@ -293,7 +293,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute Amount
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAmount(double value)
@@ -303,7 +303,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (17) get double attribute Amount
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getAmount()
@@ -316,7 +316,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (5) set attribute DeadLine
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setDeadLine(EnumDeadLine enumVar)
@@ -326,7 +326,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (9) get attribute DeadLine
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumDeadLine getDeadLine()
@@ -339,26 +339,28 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (11) set attribute EndTime
-	 * 
+	 *
 	 * @param value the value to set the attribute to or null
 	 */
 	public void setEndTime(JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
+		{
 			date = new JDFDate();
+		}
 		setAttribute(AttributeName.ENDTIME, date.getDateTimeISO(), null);
 	}
 
 	/**
 	 * (12) get JDFDate attribute EndTime
-	 * 
+	 *
 	 * @return JDFDate the value of the attribute
 	 */
 	public JDFDate getEndTime()
 	{
-		String str = getAttribute(AttributeName.ENDTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.ENDTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -367,7 +369,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute JobID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setJobID(String value)
@@ -377,7 +379,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (23) get String attribute JobID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getJobID()
@@ -390,7 +392,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute JobPartID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setJobPartID(String value)
@@ -400,7 +402,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (23) get String attribute JobPartID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getJobPartID()
@@ -414,7 +416,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute PercentCompleted
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPercentCompleted(double value)
@@ -424,7 +426,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (17) get double attribute PercentCompleted
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getPercentCompleted()
@@ -437,7 +439,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute PhaseAmount
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPhaseAmount(double value)
@@ -447,7 +449,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (17) get double attribute PhaseAmount
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getPhaseAmount()
@@ -461,26 +463,28 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (11) set attribute PhaseStartTime
-	 * 
+	 *
 	 * @param value the value to set the attribute to or null
 	 */
 	public void setPhaseStartTime(JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
+		{
 			date = new JDFDate();
+		}
 		setAttribute(AttributeName.PHASESTARTTIME, date.getDateTimeISO(), null);
 	}
 
 	/**
 	 * (12) get JDFDate attribute PhaseStartTime
-	 * 
+	 *
 	 * @return JDFDate the value of the attribute
 	 */
 	public JDFDate getPhaseStartTime()
 	{
-		String str = getAttribute(AttributeName.PHASESTARTTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.PHASESTARTTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -489,7 +493,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute PhaseWaste
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPhaseWaste(double value)
@@ -499,7 +503,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (17) get double attribute PhaseWaste
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getPhaseWaste()
@@ -512,23 +516,23 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * ---------------------------------------------------------------------
 	 */
 	/**
-	 * set attribute QueueEntryID
-	 * 
+	 * (36) set attribute QueueEntryID
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setQueueEntryID(String value)
 	{
-		setAttribute(AttributeName.QUEUEENTRYID, value);
+		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}
 
 	/**
-	 * get String attribute QueueEntryID
-	 * 
+	 * (23) get String attribute QueueEntryID
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getQueueEntryID()
 	{
-		return getAttribute(AttributeName.QUEUEENTRYID);
+		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/*
@@ -536,23 +540,23 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * ---------------------------------------------------------------------
 	 */
 	/**
-	 * set attribute RelatedJobID
-	 * 
+	 * (36) set attribute RelatedJobID
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRelatedJobID(String value)
 	{
-		setAttribute(AttributeName.RELATEDJOBID, value);
+		setAttribute(AttributeName.RELATEDJOBID, value, null);
 	}
 
 	/**
-	 * get String attribute RelatedJobID
-	 * 
+	 * (23) get String attribute RelatedJobID
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getRelatedJobID()
 	{
-		return getAttribute(AttributeName.RELATEDJOBID);
+		return getAttribute(AttributeName.RELATEDJOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/*
@@ -560,23 +564,23 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * ---------------------------------------------------------------------
 	 */
 	/**
-	 * set attribute RelatedJobPartID
-	 * 
+	 * (36) set attribute RelatedJobPartID
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRelatedJobPartID(String value)
 	{
-		setAttribute(AttributeName.RELATEDJOBPARTID, value);
+		setAttribute(AttributeName.RELATEDJOBPARTID, value, null);
 	}
 
 	/**
-	 * get String attribute RelatedJobPartID
-	 * 
+	 * (23) get String attribute RelatedJobPartID
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getRelatedJobPartID()
 	{
-		return getAttribute(AttributeName.RELATEDJOBPARTID);
+		return getAttribute(AttributeName.RELATEDJOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/*
@@ -584,7 +588,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute RestTime
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRestTime(JDFDuration value)
@@ -594,13 +598,13 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (20) get JDFDuration attribute RestTime
-	 * 
+	 *
 	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getRestTime()
 	{
-		String strAttrName = getAttribute(AttributeName.RESTTIME, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.RESTTIME, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -609,7 +613,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute Speed
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSpeed(double value)
@@ -619,7 +623,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (17) get double attribute Speed
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getSpeed()
@@ -632,7 +636,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute SpawnID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setSpawnID(String value)
@@ -642,7 +646,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (23) get String attribute SpawnID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getSpawnID()
@@ -655,26 +659,28 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (11) set attribute StartTime
-	 * 
+	 *
 	 * @param value the value to set the attribute to or null
 	 */
 	public void setStartTime(JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
+		{
 			date = new JDFDate();
+		}
 		setAttribute(AttributeName.STARTTIME, date.getDateTimeISO(), null);
 	}
 
 	/**
 	 * (12) get JDFDate attribute StartTime
-	 * 
+	 *
 	 * @return JDFDate the value of the attribute
 	 */
 	public JDFDate getStartTime()
 	{
-		String str = getAttribute(AttributeName.STARTTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.STARTTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -684,7 +690,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute StatusDetails
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setStatusDetails(String value)
@@ -694,7 +700,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (23) get String attribute StatusDetails
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getStatusDetails()
@@ -707,7 +713,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute ToolIDs
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setToolIDs(VString value)
@@ -717,13 +723,13 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (21) get VString attribute ToolIDs
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getToolIDs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.TOOLIDS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.TOOLIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -733,7 +739,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute TotalAmount
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setTotalAmount(double value)
@@ -743,7 +749,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (17) get double attribute TotalAmount
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getTotalAmount()
@@ -756,7 +762,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute URL
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setURL(String value)
@@ -766,7 +772,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (23) get String attribute URL
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getURL()
@@ -779,7 +785,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute Waste
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setWaste(double value)
@@ -789,7 +795,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (17) get double attribute Waste
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getWaste()
@@ -802,7 +808,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	/**
 	 * (36) set attribute WorkStepID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setWorkStepID(String value)
@@ -812,7 +818,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (23) get String attribute WorkStepID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getWorkStepID()
@@ -837,7 +843,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (27) const get element Activity
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFActivity the element default is getActivity(0)
 	 */
@@ -858,7 +864,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (30) append element Activity
-	 * 
+	 *
 	 * @return JDFActivity the element
 	 */
 	public JDFActivity appendActivity()
@@ -868,7 +874,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (24) const get element CostCenter
-	 * 
+	 *
 	 * @return JDFCostCenter the element
 	 */
 	public JDFCostCenter getCostCenter()
@@ -888,7 +894,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (29) append element CostCenter
-	 * 
+	 *
 	 * @return JDFCostCenter the element @ if the element already exists
 	 */
 	public JDFCostCenter appendCostCenter()
@@ -909,7 +915,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (27) const get element GangSource
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFGangSource the element default is getGangSource(0)
 	 */
@@ -930,7 +936,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (30) append element GangSource
-	 * 
+	 *
 	 * @return JDFGangSource the element
 	 */
 	public JDFGangSource appendGangSource()
@@ -940,7 +946,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (24) const get element MISDetails
-	 * 
+	 *
 	 * @return JDFMISDetails the element
 	 */
 	public JDFMISDetails getMISDetails()
@@ -960,7 +966,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (29) append element MISDetails
-	 * 
+	 *
 	 * @return JDFMISDetails the element @ if the element already exists
 	 */
 	public JDFMISDetails appendMISDetails()
@@ -981,7 +987,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (27) const get element ModuleStatus
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFModuleStatus the element default is getModuleStatus(0)
 	 */
@@ -1002,7 +1008,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (30) append element ModuleStatus
-	 * 
+	 *
 	 * @return JDFModuleStatus the element
 	 */
 	public JDFModuleStatus appendModuleStatus()
@@ -1023,7 +1029,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (27) const get element Part
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element default is getPart(0)
 	 */
@@ -1044,7 +1050,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (30) append element Part
-	 * 
+	 *
 	 * @return JDFPart the element
 	 */
 	public JDFPart appendPart()

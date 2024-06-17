@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoMISDetails : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoMISDetails extends JDFElement
@@ -97,10 +97,10 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COSTTYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumCostType.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEOPERATIONMODE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceOperationMode.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.WORKTYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumWorkType.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.WORKTYPEDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COSTTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumCostType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEOPERATIONMODE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceOperationMode.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.WORKTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkType.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.WORKTYPEDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -155,7 +155,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumCostType(String name)
+		protected EnumCostType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -218,7 +218,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDeviceOperationMode(String name)
+		protected EnumDeviceOperationMode(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -283,7 +283,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumWorkType(String name)
+		protected EnumWorkType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -338,14 +338,13 @@ public abstract class JDFAutoMISDetails extends JDFElement
 		public static final EnumWorkType Rework = new EnumWorkType("Rework");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CostType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CostType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute CostType
 	 *
@@ -366,9 +365,10 @@ public abstract class JDFAutoMISDetails extends JDFElement
 		return EnumCostType.getEnum(getAttribute(AttributeName.COSTTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceOperationMode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceOperationMode
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DeviceOperationMode
 	 *
@@ -389,9 +389,9 @@ public abstract class JDFAutoMISDetails extends JDFElement
 		return EnumDeviceOperationMode.getEnum(getAttribute(AttributeName.DEVICEOPERATIONMODE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WorkType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute WorkType
 	 *
@@ -412,9 +412,10 @@ public abstract class JDFAutoMISDetails extends JDFElement
 		return EnumWorkType.getEnum(getAttribute(AttributeName.WORKTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WorkTypeDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkTypeDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WorkTypeDetails
 	 *

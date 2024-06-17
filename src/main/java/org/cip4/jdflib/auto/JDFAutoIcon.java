@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoIcon : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoIcon extends JDFElement
@@ -102,9 +102,9 @@ public abstract class JDFAutoIcon extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIZE, 0x22222221, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BITDEPTH, 0x22222221, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ICONUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumerations, EnumIconUsage.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIZE, 0x2222222221l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BITDEPTH, 0x2222222221l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ICONUSAGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations, EnumIconUsage.getEnum(0), null);
 	}
 
 	@Override
@@ -116,7 +116,7 @@ public abstract class JDFAutoIcon extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x55555551);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x5555555551l);
 	}
 
 	@Override
@@ -171,7 +171,7 @@ public abstract class JDFAutoIcon extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumIconUsage(String name)
+		protected EnumIconUsage(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -234,14 +234,13 @@ public abstract class JDFAutoIcon extends JDFElement
 		public static final EnumIconUsage Stopped = new EnumIconUsage("Stopped");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Size
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Size ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Size
 	 *
@@ -264,9 +263,9 @@ public abstract class JDFAutoIcon extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BitDepth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BitDepth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BitDepth
 	 *
@@ -287,9 +286,9 @@ public abstract class JDFAutoIcon extends JDFElement
 		return getIntAttribute(AttributeName.BITDEPTH, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IconUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IconUsage ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5.2) set attribute IconUsage
 	 *
@@ -310,9 +309,8 @@ public abstract class JDFAutoIcon extends JDFElement
 		return getEnumerationsAttribute(AttributeName.ICONUSAGE, null, EnumIconUsage.getEnum(0), false);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -327,7 +325,7 @@ public abstract class JDFAutoIcon extends JDFElement
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()

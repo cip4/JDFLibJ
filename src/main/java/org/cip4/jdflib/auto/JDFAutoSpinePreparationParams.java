@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoSpinePreparationParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoSpinePreparationParams extends JDFResource
@@ -93,15 +93,15 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, "0");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.FLEXVALUE, 0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MILLINGDEPTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.NOTCHINGDEPTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.NOTCHINGDISTANCE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.OPERATIONS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PULLOUTVALUE, 0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.SEALINGTEMPERATURE, 0x33111111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.WORKINGLENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, "0");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FLEXVALUE, 0x4444444431l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MILLINGDEPTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.NOTCHINGDEPTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.NOTCHINGDISTANCE, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.OPERATIONS, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PULLOUTVALUE, 0x4444444431l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SEALINGTEMPERATURE, 0x3333111111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.WORKINGLENGTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -166,14 +166,14 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StartPosition
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StartPosition
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StartPosition
 	 *
@@ -194,9 +194,9 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 		return getRealAttribute(AttributeName.STARTPOSITION, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FlexValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FlexValue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FlexValue
 	 *
@@ -217,9 +217,10 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 		return getRealAttribute(AttributeName.FLEXVALUE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MillingDepth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MillingDepth
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MillingDepth
 	 *
@@ -240,9 +241,10 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 		return getRealAttribute(AttributeName.MILLINGDEPTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NotchingDepth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NotchingDepth
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NotchingDepth
 	 *
@@ -263,9 +265,10 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 		return getRealAttribute(AttributeName.NOTCHINGDEPTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NotchingDistance
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NotchingDistance
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NotchingDistance
 	 *
@@ -286,9 +289,9 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 		return getRealAttribute(AttributeName.NOTCHINGDISTANCE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Operations
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Operations ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Operations
 	 *
@@ -312,9 +315,10 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PullOutValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PullOutValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PullOutValue
 	 *
@@ -335,9 +339,10 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 		return getRealAttribute(AttributeName.PULLOUTVALUE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SealingTemperature
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SealingTemperature
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SealingTemperature
 	 *
@@ -358,9 +363,10 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 		return getIntAttribute(AttributeName.SEALINGTEMPERATURE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WorkingLength
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkingLength
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WorkingLength
 	 *

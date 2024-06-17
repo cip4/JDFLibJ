@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
  *****************************************************************************
  * class JDFAutoStrap : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStrap extends JDFResource
@@ -103,8 +103,8 @@ public abstract class JDFAutoStrap extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MATERIAL, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumMaterial.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.STRAPCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MATERIAL, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumMaterial.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.STRAPCOLOR, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -116,8 +116,8 @@ public abstract class JDFAutoStrap extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x3333333331l);
 	}
 
 	@Override
@@ -192,7 +192,7 @@ public abstract class JDFAutoStrap extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMaterial(String name)
+		protected EnumMaterial(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -247,14 +247,13 @@ public abstract class JDFAutoStrap extends JDFResource
 		public static final EnumMaterial String = new EnumMaterial("String");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Material
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Material ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Material
 	 *
@@ -275,9 +274,9 @@ public abstract class JDFAutoStrap extends JDFResource
 		return EnumMaterial.getEnum(getAttribute(AttributeName.MATERIAL, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StrapColor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StrapColor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (13) set attribute StrapColor
 	 *
@@ -302,14 +301,13 @@ public abstract class JDFAutoStrap extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -331,7 +329,7 @@ public abstract class JDFAutoStrap extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -362,7 +360,7 @@ public abstract class JDFAutoStrap extends JDFResource
 
 	/**
 	 * (26) getCreateIdentificationField
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element
 	 */
@@ -386,7 +384,7 @@ public abstract class JDFAutoStrap extends JDFResource
 
 	/**
 	 * Get all IdentificationField from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIdentificationField>, null if none are available
 	 */
 	public Collection<JDFIdentificationField> getAllIdentificationField()

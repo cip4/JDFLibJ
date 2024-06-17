@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoDBMergeParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDBMergeParams extends JDFResource
@@ -95,7 +95,7 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SPLITDOCUMENTS, 0x44433333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SPLITDOCUMENTS, 0x4444433333l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x77766666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x7777766666l);
 	}
 
 	@Override
@@ -172,14 +172,14 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SplitDocuments
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SplitDocuments
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SplitDocuments
 	 *
@@ -200,9 +200,8 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 		return getIntAttribute(AttributeName.SPLITDOCUMENTS, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -217,7 +216,7 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()

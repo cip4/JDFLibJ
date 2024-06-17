@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.JDFPart;
  *****************************************************************************
  * class JDFAutoAncestorPool : public JDFPool
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoAncestorPool extends JDFPool
@@ -95,8 +95,8 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ANCESTOR, 0x22222222);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ANCESTOR, 0x2222222222l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x3333333331l);
 	}
 
 	@Override
@@ -141,14 +141,13 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateAncestor
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFAncestor the element
 	 */
@@ -170,7 +169,7 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 
 	/**
 	 * Get all Ancestor from the current element
-	 *
+	 * 
 	 * @return Collection<JDFAncestor>, null if none are available
 	 */
 	public Collection<JDFAncestor> getAllAncestor()
@@ -190,7 +189,7 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -212,7 +211,7 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()

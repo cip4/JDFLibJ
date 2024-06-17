@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoInspection : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoInspection extends JDFElement
@@ -93,8 +93,8 @@ public abstract class JDFAutoInspection extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DEFECT, 0x66666611);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEFECT, 0x6666666611l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x6666666611l);
 	}
 
 	@Override
@@ -139,9 +139,8 @@ public abstract class JDFAutoInspection extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -156,7 +155,7 @@ public abstract class JDFAutoInspection extends JDFElement
 
 	/**
 	 * (25) getCreateDefect
-	 *
+	 * 
 	 * @return JDFDefect the element
 	 */
 	public JDFDefect getCreateDefect()
@@ -186,7 +185,7 @@ public abstract class JDFAutoInspection extends JDFElement
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()

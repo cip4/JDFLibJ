@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.process.JDFStack;
  *****************************************************************************
  * class JDFAutoLogicalStackParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLogicalStackParams extends JDFElement
@@ -101,8 +101,8 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MAXSTACKDEPTH, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.RESTRICTIONS, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumRestrictions.getEnum(0), "None");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MAXSTACKDEPTH, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.RESTRICTIONS, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumRestrictions.getEnum(0), "None");
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.STACK, 0x22221111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.STACK, 0x2222221111l);
 	}
 
 	@Override
@@ -169,7 +169,7 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumRestrictions(String name)
+		protected EnumRestrictions(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -224,14 +224,14 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 		public static final EnumRestrictions WithinLogicalStack = new EnumRestrictions("WithinLogicalStack");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxStackDepth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxStackDepth
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxStackDepth
 	 *
@@ -252,9 +252,10 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 		return getIntAttribute(AttributeName.MAXSTACKDEPTH, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Restrictions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Restrictions
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Restrictions
 	 *
@@ -275,14 +276,13 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 		return EnumRestrictions.getEnum(getAttribute(AttributeName.RESTRICTIONS, null, "None"));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateStack
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFStack the element
 	 */
@@ -304,7 +304,7 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 
 	/**
 	 * Get all Stack from the current element
-	 *
+	 * 
 	 * @return Collection<JDFStack>, null if none are available
 	 */
 	public Collection<JDFStack> getAllStack()

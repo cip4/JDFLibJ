@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
  *****************************************************************************
  * class JDFAutoInk : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoInk extends JDFResource
@@ -100,11 +100,11 @@ public abstract class JDFAutoInk extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORNAME, 0x44443333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.FAMILY, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.INKNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SPECIALINK, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.SPECIFICYIELD, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORNAME, 0x4444443333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FAMILY, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.INKNAME, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SPECIALINK, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SPECIFICYIELD, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -116,9 +116,9 @@ public abstract class JDFAutoInk extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CERTIFICATION, 0x31111111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CERTIFICATION, 0x3331111111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x3333333333l);
 	}
 
 	@Override
@@ -183,14 +183,13 @@ public abstract class JDFAutoInk extends JDFResource
 		return JDFResource.EnumResourceClass.Consumable;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ColorName
 	 *
@@ -211,9 +210,9 @@ public abstract class JDFAutoInk extends JDFResource
 		return getAttribute(AttributeName.COLORNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Family
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Family ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Family
 	 *
@@ -234,9 +233,9 @@ public abstract class JDFAutoInk extends JDFResource
 		return getAttribute(AttributeName.FAMILY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute InkName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InkName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute InkName
 	 *
@@ -257,9 +256,9 @@ public abstract class JDFAutoInk extends JDFResource
 		return getAttribute(AttributeName.INKNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SpecialInk
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SpecialInk ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SpecialInk
 	 *
@@ -280,9 +279,10 @@ public abstract class JDFAutoInk extends JDFResource
 		return getAttribute(AttributeName.SPECIALINK, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SpecificYield
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SpecificYield
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SpecificYield
 	 *
@@ -303,14 +303,13 @@ public abstract class JDFAutoInk extends JDFResource
 		return getRealAttribute(AttributeName.SPECIFICYIELD, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateCertification
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCertification the element
 	 */
@@ -332,7 +331,7 @@ public abstract class JDFAutoInk extends JDFResource
 
 	/**
 	 * Get all Certification from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCertification>, null if none are available
 	 */
 	public Collection<JDFCertification> getAllCertification()
@@ -352,7 +351,7 @@ public abstract class JDFAutoInk extends JDFResource
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -374,7 +373,7 @@ public abstract class JDFAutoInk extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -405,7 +404,7 @@ public abstract class JDFAutoInk extends JDFResource
 
 	/**
 	 * (26) getCreateIdentificationField
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element
 	 */
@@ -429,7 +428,7 @@ public abstract class JDFAutoInk extends JDFResource
 
 	/**
 	 * Get all IdentificationField from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIdentificationField>, null if none are available
 	 */
 	public Collection<JDFIdentificationField> getAllIdentificationField()

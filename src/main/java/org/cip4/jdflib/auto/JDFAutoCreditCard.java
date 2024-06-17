@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoCreditCard : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCreditCard extends JDFElement
@@ -92,11 +92,11 @@ public abstract class JDFAutoCreditCard extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHORIZATION, 0x44444331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.AUTHORIZATIONEXPIRES, 0x44444331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.EXPIRES, 0x44444221, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMBER, 0x44444221, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.TYPE, 0x44444221, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHORIZATION, 0x4444444331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AUTHORIZATIONEXPIRES, 0x4444444331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.EXPIRES, 0x4444444221l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMBER, 0x4444444221l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.TYPE, 0x4444444221l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -141,14 +141,14 @@ public abstract class JDFAutoCreditCard extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Authorization
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Authorization
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Authorization
 	 *
@@ -169,9 +169,10 @@ public abstract class JDFAutoCreditCard extends JDFElement
 		return getAttribute(AttributeName.AUTHORIZATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AuthorizationExpires
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AuthorizationExpires
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AuthorizationExpires
 	 *
@@ -192,9 +193,9 @@ public abstract class JDFAutoCreditCard extends JDFElement
 		return getAttribute(AttributeName.AUTHORIZATIONEXPIRES, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Expires
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Expires ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Expires
 	 *
@@ -215,9 +216,9 @@ public abstract class JDFAutoCreditCard extends JDFElement
 		return getAttribute(AttributeName.EXPIRES, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Number
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Number ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Number
 	 *
@@ -238,9 +239,9 @@ public abstract class JDFAutoCreditCard extends JDFElement
 		return getAttribute(AttributeName.NUMBER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Type
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Type
 	 *

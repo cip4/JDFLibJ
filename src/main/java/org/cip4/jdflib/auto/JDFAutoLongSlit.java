@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
  *****************************************************************************
  * class JDFAutoLongSlit : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLongSlit extends JDFElement
@@ -92,8 +92,8 @@ public abstract class JDFAutoLongSlit extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.WORKINGLIST, 0x44444443, AttributeInfo.EnumAttributeType.string, null, "0 1000000000");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.XOFFSET, 0x44444442, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.WORKINGLIST, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, "0 1000000000");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.XOFFSET, 0x4444444442l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -138,14 +138,13 @@ public abstract class JDFAutoLongSlit extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WorkingList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkingList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WorkingList
 	 *
@@ -168,9 +167,9 @@ public abstract class JDFAutoLongSlit extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute XOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute XOffset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute XOffset
 	 *

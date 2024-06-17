@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoDBSchema : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDBSchema extends JDFResource
@@ -96,7 +96,7 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DBSCHEMATYPE, 0x44422222, AttributeInfo.EnumAttributeType.enumeration, EnumDBSchemaType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DBSCHEMATYPE, 0x4444422222l, AttributeInfo.EnumAttributeType.enumeration, EnumDBSchemaType.getEnum(0), null);
 	}
 
 	@Override
@@ -171,7 +171,7 @@ public abstract class JDFAutoDBSchema extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDBSchemaType(String name)
+		protected EnumDBSchemaType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -226,14 +226,14 @@ public abstract class JDFAutoDBSchema extends JDFResource
 		public static final EnumDBSchemaType XML = new EnumDBSchemaType("XML");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DBSchemaType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DBSchemaType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DBSchemaType
 	 *

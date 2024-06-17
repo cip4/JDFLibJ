@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.process.JDFFeeder;
  *****************************************************************************
  * class JDFAutoFeedingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoFeedingParams extends JDFResource
@@ -95,8 +95,8 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FEEDER, 0x33333311);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COLLATINGITEM, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FEEDER, 0x3333333311l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COLLATINGITEM, 0x3333333311l);
 	}
 
 	@Override
@@ -161,14 +161,13 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateFeeder
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFFeeder the element
 	 */
@@ -190,7 +189,7 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 
 	/**
 	 * Get all Feeder from the current element
-	 *
+	 * 
 	 * @return Collection<JDFFeeder>, null if none are available
 	 */
 	public Collection<JDFFeeder> getAllFeeder()
@@ -210,7 +209,7 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 
 	/**
 	 * (26) getCreateCollatingItem
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCollatingItem the element
 	 */
@@ -232,7 +231,7 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 
 	/**
 	 * Get all CollatingItem from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCollatingItem>, null if none are available
 	 */
 	public Collection<JDFCollatingItem> getAllCollatingItem()

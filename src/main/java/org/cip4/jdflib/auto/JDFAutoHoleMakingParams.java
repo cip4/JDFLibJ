@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,7 +97,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHole;
  *****************************************************************************
  * class JDFAutoHoleMakingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoHoleMakingParams extends JDFResource
@@ -108,13 +108,14 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTERREFERENCE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumCenterReference.getEnum(0), "TrailingEdge");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.HOLETYPE, 0x22222221, AttributeInfo.EnumAttributeType.enumerations, EnumHoleType.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.CENTER, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.EXTENT, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.HOLECOUNT, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.HOLEREFERENCEEDGE, 0x44444431, AttributeInfo.EnumAttributeType.enumeration, EnumHoleReferenceEdge.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SHAPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTERREFERENCE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumCenterReference.getEnum(0),
+				"TrailingEdge");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.HOLETYPE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumerations, EnumHoleType.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CENTER, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.EXTENT, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.HOLECOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.HOLEREFERENCEEDGE, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration, EnumHoleReferenceEdge.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SHAPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), null);
 	}
 
 	@Override
@@ -126,9 +127,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLE, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.HOLELINE, 0x33333331);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.REGISTERMARK, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLE, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.HOLELINE, 0x3333333331l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.REGISTERMARK, 0x6666666661l);
 	}
 
 	@Override
@@ -203,7 +204,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumCenterReference(String name)
+		protected EnumCenterReference(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -266,7 +267,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumHoleReferenceEdge(String name)
+		protected EnumHoleReferenceEdge(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -335,7 +336,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumShape(String name)
+		protected EnumShape(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -390,14 +391,14 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 		public static final EnumShape Rectangular = new EnumShape("Rectangular");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CenterReference
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CenterReference
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute CenterReference
 	 *
@@ -418,9 +419,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 		return EnumCenterReference.getEnum(getAttribute(AttributeName.CENTERREFERENCE, null, "TrailingEdge"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HoleType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HoleType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5.2) set attribute HoleType
 	 *
@@ -441,9 +442,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 		return getEnumerationsAttribute(AttributeName.HOLETYPE, null, JDFMedia.EnumHoleType.getEnum(0), false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Center
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Center
 	 *
@@ -466,9 +467,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Extent
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Extent ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Extent
 	 *
@@ -491,9 +492,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HoleCount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HoleCount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HoleCount
 	 *
@@ -516,9 +517,10 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HoleReferenceEdge
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HoleReferenceEdge
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute HoleReferenceEdge
 	 *
@@ -539,9 +541,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 		return EnumHoleReferenceEdge.getEnum(getAttribute(AttributeName.HOLEREFERENCEEDGE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Shape
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Shape ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Shape
 	 *
@@ -562,14 +564,13 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 		return EnumShape.getEnum(getAttribute(AttributeName.SHAPE, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateHole
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFHole the element
 	 */
@@ -591,7 +592,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 
 	/**
 	 * Get all Hole from the current element
-	 *
+	 * 
 	 * @return Collection<JDFHole>, null if none are available
 	 */
 	public Collection<JDFHole> getAllHole()
@@ -611,7 +612,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 
 	/**
 	 * (26) getCreateHoleLine
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFHoleLine the element
 	 */
@@ -633,7 +634,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 
 	/**
 	 * Get all HoleLine from the current element
-	 *
+	 * 
 	 * @return Collection<JDFHoleLine>, null if none are available
 	 */
 	public Collection<JDFHoleLine> getAllHoleLine()
@@ -663,7 +664,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 
 	/**
 	 * (25) getCreateRegisterMark
-	 *
+	 * 
 	 * @return JDFRegisterMark the element
 	 */
 	public JDFRegisterMark getCreateRegisterMark()

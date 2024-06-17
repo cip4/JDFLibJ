@@ -1,6 +1,6 @@
 /**
  *
- * Copyright (c) 2008 Heidelberger Druckmaschinen AG, All Rights Reserved.
+ * Copyright (c) 2008-2024 Heidelberger Druckmaschinen AG, All Rights Reserved.
  *
  * JDFShapeDef.java
  *
@@ -22,7 +22,7 @@ public class JDFShapeDef extends JDFAutoShapeDef
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFShapeDef(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFShapeDef(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -34,7 +34,7 @@ public class JDFShapeDef extends JDFAutoShapeDef
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFShapeDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFShapeDef(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -47,20 +47,20 @@ public class JDFShapeDef extends JDFAutoShapeDef
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFShapeDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFShapeDef(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	// **************************************** Methods
 	/**
-	 * toString
+	 * (26) getCreateFileSpec
 	 * 
-	 * @return String
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element
 	 */
-	@Override
-	public String toString()
+	public JDFFileSpec getCreateFileSpec()
 	{
-		return "JDFShapeDef[  --> " + super.toString() + " ]";
+		return getCreateFileSpec(0);
 	}
+
 }

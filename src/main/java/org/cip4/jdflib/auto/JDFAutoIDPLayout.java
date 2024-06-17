@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.JDFImageShift;
  *****************************************************************************
  * class JDFAutoIDPLayout : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoIDPLayout extends JDFElement
@@ -104,13 +104,14 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BORDER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, "0");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.FINISHEDPAGEORIENTATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumFinishedPageOrientation.getEnum(0), "Portrait");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.FORCEFRONTSIDE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMBERUP, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTATIONDIRECTION, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.ROTATE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, "0");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SIDES, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), "OneSided");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BORDER, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, "0");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FINISHEDPAGEORIENTATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumFinishedPageOrientation.getEnum(0), "Portrait");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FORCEFRONTSIDE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMBERUP, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTATIONDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ROTATE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, "0");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SIDES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), "OneSided");
 	}
 
 	@Override
@@ -122,7 +123,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.IMAGESHIFT, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.IMAGESHIFT, 0x3333333333l);
 	}
 
 	@Override
@@ -177,7 +178,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumFinishedPageOrientation(String name)
+		protected EnumFinishedPageOrientation(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -240,7 +241,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSides(String name)
+		protected EnumSides(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -295,14 +296,13 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 		public static final EnumSides TwoSidedShortEdge = new EnumSides("TwoSidedShortEdge");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Border
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Border ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Border
 	 *
@@ -323,9 +323,10 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 		return getRealAttribute(AttributeName.BORDER, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FinishedPageOrientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FinishedPageOrientation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute FinishedPageOrientation
 	 *
@@ -346,9 +347,10 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 		return EnumFinishedPageOrientation.getEnum(getAttribute(AttributeName.FINISHEDPAGEORIENTATION, null, "Portrait"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ForceFrontSide
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ForceFrontSide
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ForceFrontSide
 	 *
@@ -371,9 +373,9 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NumberUp
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NumberUp ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NumberUp
 	 *
@@ -396,9 +398,10 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentationDirection
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentationDirection
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentationDirection
 	 *
@@ -419,9 +422,9 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 		return getAttribute(AttributeName.PRESENTATIONDIRECTION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Rotate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Rotate ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Rotate
 	 *
@@ -442,9 +445,9 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 		return getRealAttribute(AttributeName.ROTATE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Sides
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Sides ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Sides
 	 *
@@ -465,14 +468,13 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSided"));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateImageShift
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFImageShift the element
 	 */
@@ -494,7 +496,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 
 	/**
 	 * Get all ImageShift from the current element
-	 *
+	 * 
 	 * @return Collection<JDFImageShift>, null if none are available
 	 */
 	public Collection<JDFImageShift> getAllImageShift()

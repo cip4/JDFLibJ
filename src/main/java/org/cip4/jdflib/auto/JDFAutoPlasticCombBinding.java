@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoPlasticCombBinding : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPlasticCombBinding extends JDFElement
@@ -95,10 +95,10 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COMBBRAND, 0x66666111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PLASTICCOMBTYPE, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.HOLELIST, 0x66666611);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.HOLETYPE, 0x66111111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMBBRAND, 0x6666666111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PLASTICCOMBTYPE, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.HOLELIST, 0x6666666611l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.HOLETYPE, 0x6666111111l);
 	}
 
 	@Override
@@ -143,9 +143,8 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -160,7 +159,7 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
 
 	/**
 	 * (25) getCreateCombBrand
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateCombBrand()
@@ -190,7 +189,7 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
 
 	/**
 	 * (25) getCreatePlasticCombType
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreatePlasticCombType()
@@ -220,7 +219,7 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
 
 	/**
 	 * (25) getCreateHoleList
-	 *
+	 * 
 	 * @return JDFHoleList the element
 	 */
 	public JDFHoleList getCreateHoleList()
@@ -250,7 +249,7 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
 
 	/**
 	 * (25) getCreateHoleType
-	 *
+	 * 
 	 * @return JDFSpanHoleType the element
 	 */
 	public JDFSpanHoleType getCreateHoleType()

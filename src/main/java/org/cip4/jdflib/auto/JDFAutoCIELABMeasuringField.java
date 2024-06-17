@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoCIELABMeasuringField : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCIELABMeasuringField extends JDFResource
@@ -104,17 +104,17 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CIELAB, 0x22222222, AttributeInfo.EnumAttributeType.LabColor, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DENSITYSTANDARD, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumDensityStandard.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.DIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.LIGHT, 0x44444443, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.OBSERVER, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PERCENTAGES, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.SCREENRULING, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.SCREENSHAPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.SETUP, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CIELAB, 0x2222222222l, AttributeInfo.EnumAttributeType.LabColor, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DENSITYSTANDARD, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumDensityStandard.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DIAMETER, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.LIGHT, 0x4444444443l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.OBSERVER, 0x4444444443l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PERCENTAGES, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SCREENRULING, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.SCREENSHAPE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.SETUP, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.TOLERANCE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORMEASUREMENTCONDITIONS, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORMEASUREMENTCONDITIONS, 0x6666666661l);
 	}
 
 	@Override
@@ -201,7 +201,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDensityStandard(String name)
+		protected EnumDensityStandard(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -262,14 +262,13 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 		public static final EnumDensityStandard DIN16536NB = new EnumDensityStandard("DIN16536NB");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Center
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Center
 	 *
@@ -292,9 +291,9 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CIELab
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CIELab ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CIELab
 	 *
@@ -317,9 +316,10 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DensityStandard
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DensityStandard
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DensityStandard
 	 *
@@ -340,9 +340,9 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 		return EnumDensityStandard.getEnum(getAttribute(AttributeName.DENSITYSTANDARD, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Diameter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Diameter ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Diameter
 	 *
@@ -363,9 +363,9 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 		return getRealAttribute(AttributeName.DIAMETER, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Light
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Light ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Light
 	 *
@@ -386,9 +386,9 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 		return getAttribute(AttributeName.LIGHT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Observer
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Observer ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Observer
 	 *
@@ -409,9 +409,9 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 		return getIntAttribute(AttributeName.OBSERVER, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Percentages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Percentages ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Percentages
 	 *
@@ -434,9 +434,10 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ScreenRuling
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ScreenRuling
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ScreenRuling
 	 *
@@ -459,9 +460,9 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ScreenShape
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ScreenShape ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ScreenShape
 	 *
@@ -482,9 +483,9 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 		return getAttribute(AttributeName.SCREENSHAPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Setup
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Setup ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Setup
 	 *
@@ -505,9 +506,9 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 		return getAttribute(AttributeName.SETUP, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Tolerance
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Tolerance ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Tolerance
 	 *
@@ -528,9 +529,8 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 		return getRealAttribute(AttributeName.TOLERANCE, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -545,7 +545,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 
 	/**
 	 * (25) getCreateColorMeasurementConditions
-	 *
+	 * 
 	 * @return JDFColorMeasurementConditions the element
 	 */
 	public JDFColorMeasurementConditions getCreateColorMeasurementConditions()

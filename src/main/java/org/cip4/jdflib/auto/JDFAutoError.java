@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.JDFErrorData;
  *****************************************************************************
  * class JDFAutoError : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoError extends JDFElement
@@ -102,9 +102,9 @@ public abstract class JDFAutoError extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.RESEND, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumResend.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.RETURNCODE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORID, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.RESEND, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumResend.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RETURNCODE, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -116,7 +116,7 @@ public abstract class JDFAutoError extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ERRORDATA, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ERRORDATA, 0x3333333111l);
 	}
 
 	@Override
@@ -171,7 +171,7 @@ public abstract class JDFAutoError extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumResend(String name)
+		protected EnumResend(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -224,14 +224,13 @@ public abstract class JDFAutoError extends JDFElement
 		public static final EnumResend Prohibited = new EnumResend("Prohibited");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ErrorID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ErrorID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ErrorID
 	 *
@@ -252,9 +251,9 @@ public abstract class JDFAutoError extends JDFElement
 		return getAttribute(AttributeName.ERRORID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Resend
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Resend ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Resend
 	 *
@@ -275,9 +274,9 @@ public abstract class JDFAutoError extends JDFElement
 		return EnumResend.getEnum(getAttribute(AttributeName.RESEND, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ReturnCode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ReturnCode ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ReturnCode
 	 *
@@ -298,14 +297,13 @@ public abstract class JDFAutoError extends JDFElement
 		return getIntAttribute(AttributeName.RETURNCODE, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateErrorData
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFErrorData the element
 	 */
@@ -327,7 +325,7 @@ public abstract class JDFAutoError extends JDFElement
 
 	/**
 	 * Get all ErrorData from the current element
-	 *
+	 * 
 	 * @return Collection<JDFErrorData>, null if none are available
 	 */
 	public Collection<JDFErrorData> getAllErrorData()

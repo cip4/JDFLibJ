@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoMessage : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoMessage extends JDFElement
@@ -94,14 +94,14 @@ public abstract class JDFAutoMessage extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AGENTNAME, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.SENDERID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.TIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.TYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.VERSION, 0x33331111, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AGENTNAME, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ID, 0x2222222222l, AttributeInfo.EnumAttributeType.ID, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SENDERID, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TIME, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.TYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.VERSION, 0x3333331111l, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
 	}
 
 	@Override
@@ -146,14 +146,13 @@ public abstract class JDFAutoMessage extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AgentName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AgentName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AgentName
 	 *
@@ -174,9 +173,10 @@ public abstract class JDFAutoMessage extends JDFElement
 		return getAttribute(AttributeName.AGENTNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AgentVersion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AgentVersion
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AgentVersion
 	 *
@@ -197,9 +197,9 @@ public abstract class JDFAutoMessage extends JDFElement
 		return getAttribute(AttributeName.AGENTVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ICSVersions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ICSVersions ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ICSVersions
 	 *
@@ -223,9 +223,9 @@ public abstract class JDFAutoMessage extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ID
 	 *
@@ -248,9 +248,9 @@ public abstract class JDFAutoMessage extends JDFElement
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SenderID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SenderID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SenderID
 	 *
@@ -271,9 +271,9 @@ public abstract class JDFAutoMessage extends JDFElement
 		return getAttribute(AttributeName.SENDERID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Time
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Time ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute Time
 	 *
@@ -301,9 +301,9 @@ public abstract class JDFAutoMessage extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Type
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Type
 	 *

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -98,7 +98,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFScreeningParams;
  *****************************************************************************
  * class JDFAutoExposedMedia : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoExposedMedia extends JDFResource
@@ -109,15 +109,15 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.POLARITY, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COLORTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumColorType.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x33333111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PLATETYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumPlateType.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROOFNAME, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PROOFQUALITY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumProofQuality.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PROOFTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumProofType.getEnum(0), null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.PUNCHTYPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOLUTION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.POLARITY, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COLORTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumColorType.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x3333333111l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PLATETYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumPlateType.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROOFNAME, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PROOFQUALITY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumProofQuality.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PROOFTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumProofType.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PUNCHTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -129,12 +129,12 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x55555555);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.PAGELIST, 0x66666111);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.SCREENINGPARAMS, 0x66666666);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.CONTACT, 0x33333333);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x5555555555l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PAGELIST, 0x6666666111l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.SCREENINGPARAMS, 0x6666666666l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.CONTACT, 0x3333333333l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x3333333333l);
 	}
 
 	@Override
@@ -209,7 +209,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumColorType(String name)
+		protected EnumColorType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -274,7 +274,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPlateType(String name)
+		protected EnumPlateType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -337,7 +337,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumProofQuality(String name)
+		protected EnumProofQuality(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -404,7 +404,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumProofType(String name)
+		protected EnumProofType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -459,14 +459,13 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		public static final EnumProofType Page = new EnumProofType("Page");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Polarity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Polarity ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Polarity
 	 *
@@ -487,9 +486,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		return getBoolAttribute(AttributeName.POLARITY, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ColorType
 	 *
@@ -510,9 +509,10 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		return EnumColorType.getEnum(getAttribute(AttributeName.COLORTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageListIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageListIndex
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PageListIndex
 	 *
@@ -535,9 +535,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PlateType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PlateType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PlateType
 	 *
@@ -558,9 +558,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		return EnumPlateType.getEnum(getAttribute(AttributeName.PLATETYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProofName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProofName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ProofName
 	 *
@@ -581,9 +581,10 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		return getAttribute(AttributeName.PROOFNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProofQuality
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProofQuality
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ProofQuality
 	 *
@@ -604,9 +605,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		return EnumProofQuality.getEnum(getAttribute(AttributeName.PROOFQUALITY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProofType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProofType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ProofType
 	 *
@@ -627,9 +628,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		return EnumProofType.getEnum(getAttribute(AttributeName.PROOFTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PunchType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PunchType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PunchType
 	 *
@@ -650,9 +651,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		return getAttribute(AttributeName.PUNCHTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Resolution
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Resolution ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Resolution
 	 *
@@ -675,39 +676,50 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
-	 * (24) const get element FileSpec
-	 *
+	 * (26) getCreateFileSpec
+	 * 
+	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getFileSpec()
+	public JDFFileSpec getCreateFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**
-	 * (25) getCreateFileSpec
+	 * (27) const get element FileSpec
 	 *
-	 * @return JDFFileSpec the element
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element default is getFileSpec(0)
 	 */
-	public JDFFileSpec getCreateFileSpec()
+	public JDFFileSpec getFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**
-	 * (29) append element FileSpec
+	 * Get all FileSpec from the current element
+	 * 
+	 * @return Collection<JDFFileSpec>, null if none are available
+	 */
+	public Collection<JDFFileSpec> getAllFileSpec()
+	{
+		return getChildArrayByClass(JDFFileSpec.class, false, 0);
+	}
+
+	/**
+	 * (30) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
-		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+		return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
 	}
 
 	/**
@@ -732,7 +744,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()
@@ -772,7 +784,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 
 	/**
 	 * (25) getCreatePageList
-	 *
+	 * 
 	 * @return JDFPageList the element
 	 */
 	public JDFPageList getCreatePageList()
@@ -812,7 +824,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 
 	/**
 	 * (25) getCreateScreeningParams
-	 *
+	 * 
 	 * @return JDFScreeningParams the element
 	 */
 	public JDFScreeningParams getCreateScreeningParams()
@@ -842,7 +854,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -864,7 +876,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -895,7 +907,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 
 	/**
 	 * (26) getCreateIdentificationField
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element
 	 */
@@ -919,7 +931,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 
 	/**
 	 * Get all IdentificationField from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIdentificationField>, null if none are available
 	 */
 	public Collection<JDFIdentificationField> getAllIdentificationField()

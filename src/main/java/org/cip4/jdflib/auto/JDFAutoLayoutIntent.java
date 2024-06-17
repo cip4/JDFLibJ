@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,7 +97,7 @@ import org.cip4.jdflib.span.JDFXYPairSpan;
  *****************************************************************************
  * class JDFAutoLayoutIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLayoutIntent extends JDFIntentResource
@@ -108,13 +108,14 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLIOCOUNT, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumFolioCount.getEnum(0), "Booklet");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.NUMBERUP, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.FINISHEDPAGEORIENTATION, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumFinishedPageOrientation.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33111111, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ROTATEPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumRotatePolicy.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SPREADTYPE, 0x33111111, AttributeInfo.EnumAttributeType.enumeration, EnumSpreadType.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SIDES, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLIOCOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumFolioCount.getEnum(0), "Booklet");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.NUMBERUP, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FINISHEDPAGEORIENTATION, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumFinishedPageOrientation.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333111111l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ROTATEPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumRotatePolicy.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SPREADTYPE, 0x3333111111l, AttributeInfo.EnumAttributeType.enumeration, EnumSpreadType.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SIDES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), null);
 	}
 
 	@Override
@@ -126,14 +127,14 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BLEED, 0x33311111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.DIMENSIONS, 0x66666661);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.FINISHEDDIMENSIONS, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.FINISHEDGRAINDIRECTION, 0x77766611);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.PAGES, 0x66666661);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.PAGEVARIANCE, 0x66666661);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.LAYOUT, 0x66666661);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.SIZEPOLICY, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BLEED, 0x3333311111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DIMENSIONS, 0x6666666661l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.FINISHEDDIMENSIONS, 0x6666666661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.FINISHEDGRAINDIRECTION, 0x7777766611l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.PAGES, 0x6666666661l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.PAGEVARIANCE, 0x6666666661l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.LAYOUT, 0x6666666661l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.SIZEPOLICY, 0x6666666611l);
 	}
 
 	@Override
@@ -188,7 +189,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumFolioCount(String name)
+		protected EnumFolioCount(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -251,7 +252,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumFinishedPageOrientation(String name)
+		protected EnumFinishedPageOrientation(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -314,7 +315,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOrientation(String name)
+		protected EnumOrientation(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -389,7 +390,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumRotatePolicy(String name)
+		protected EnumRotatePolicy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -456,7 +457,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSpreadType(String name)
+		protected EnumSpreadType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -519,7 +520,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSides(String name)
+		protected EnumSides(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -574,16 +575,17 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		public static final EnumSides TwoSidedHeadToHead = new EnumSides("TwoSidedHeadToHead");
 		/**  */
 		public static final EnumSides TwoSidedHeadToFoot = new EnumSides("TwoSidedHeadToFoot");
+		/**  */
+		public static final EnumSides Unprinted = new EnumSides("Unprinted");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FolioCount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FolioCount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute FolioCount
 	 *
@@ -604,9 +606,9 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		return EnumFolioCount.getEnum(getAttribute(AttributeName.FOLIOCOUNT, null, "Booklet"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NumberUp
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NumberUp ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NumberUp
 	 *
@@ -629,9 +631,10 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FinishedPageOrientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FinishedPageOrientation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute FinishedPageOrientation
 	 *
@@ -652,9 +655,9 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		return EnumFinishedPageOrientation.getEnum(getAttribute(AttributeName.FINISHEDPAGEORIENTATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Orientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Orientation
 	 *
@@ -675,9 +678,10 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RotatePolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RotatePolicy
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute RotatePolicy
 	 *
@@ -698,9 +702,9 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		return EnumRotatePolicy.getEnum(getAttribute(AttributeName.ROTATEPOLICY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SpreadType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SpreadType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SpreadType
 	 *
@@ -721,9 +725,9 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		return EnumSpreadType.getEnum(getAttribute(AttributeName.SPREADTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Sides
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Sides ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Sides
 	 *
@@ -744,14 +748,13 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateBleed
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFNumberSpan the element
 	 */
@@ -773,7 +776,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * Get all Bleed from the current element
-	 *
+	 * 
 	 * @return Collection<JDFNumberSpan>, null if none are available
 	 */
 	public Collection<JDFNumberSpan> getAllBleed()
@@ -803,7 +806,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateDimensions
-	 *
+	 * 
 	 * @return JDFXYPairSpan the element
 	 */
 	public JDFXYPairSpan getCreateDimensions()
@@ -833,7 +836,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateFinishedDimensions
-	 *
+	 * 
 	 * @return JDFShapeSpan the element
 	 */
 	public JDFShapeSpan getCreateFinishedDimensions()
@@ -863,7 +866,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateFinishedGrainDirection
-	 *
+	 * 
 	 * @return JDFSpanFinishedGrainDirection the element
 	 */
 	public JDFSpanFinishedGrainDirection getCreateFinishedGrainDirection()
@@ -893,7 +896,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePages
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreatePages()
@@ -923,7 +926,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePageVariance
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreatePageVariance()
@@ -953,7 +956,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateLayout
-	 *
+	 * 
 	 * @return JDFLayout the element
 	 */
 	public JDFLayout getCreateLayout()
@@ -993,7 +996,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateSizePolicy
-	 *
+	 * 
 	 * @return JDFSpanSizePolicy the element
 	 */
 	public JDFSpanSizePolicy getCreateSizePolicy()

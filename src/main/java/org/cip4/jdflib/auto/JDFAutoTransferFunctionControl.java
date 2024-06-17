@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
  *****************************************************************************
  * class JDFAutoTransferFunctionControl : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTransferFunctionControl extends JDFResource
@@ -100,7 +100,8 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TRANSFERFUNCTIONSOURCE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumTransferFunctionSource.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TRANSFERFUNCTIONSOURCE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumTransferFunctionSource.getEnum(0),
+				null);
 	}
 
 	@Override
@@ -112,7 +113,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.TRANSFERCURVEPOOL, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.TRANSFERCURVEPOOL, 0x6666666666l);
 	}
 
 	@Override
@@ -187,7 +188,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumTransferFunctionSource(String name)
+		protected EnumTransferFunctionSource(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -242,14 +243,14 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 		public static final EnumTransferFunctionSource Custom = new EnumTransferFunctionSource("Custom");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TransferFunctionSource
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TransferFunctionSource
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute TransferFunctionSource
 	 *
@@ -270,9 +271,8 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 		return EnumTransferFunctionSource.getEnum(getAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -287,7 +287,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 
 	/**
 	 * (25) getCreateTransferCurvePool
-	 *
+	 * 
 	 * @return JDFTransferCurvePool the element
 	 */
 	public JDFTransferCurvePool getCreateTransferCurvePool()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.span.JDFXYPairSpan;
  *****************************************************************************
  * class JDFAutoEmbossingItem : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoEmbossingItem extends JDFElement
@@ -102,7 +102,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TOOLNAME, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TOOLNAME, 0x3333111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -114,16 +114,16 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[10];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DIRECTION, 0x55555551);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.EDGEANGLE, 0x66666661);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.EDGESHAPE, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.EMBOSSINGTYPE, 0x66666661);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.FOILCOLOR, 0x66666661);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.FOILCOLORDETAILS, 0x66666661);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.HEIGHT, 0x66666661);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.IMAGESIZE, 0x66666661);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.LEVEL, 0x66666661);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.POSITION, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DIRECTION, 0x5555555551l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EDGEANGLE, 0x6666666661l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.EDGESHAPE, 0x6666666661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.EMBOSSINGTYPE, 0x6666666661l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.FOILCOLOR, 0x6666666661l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.FOILCOLORDETAILS, 0x6666666661l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.HEIGHT, 0x6666666661l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.IMAGESIZE, 0x6666666661l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.LEVEL, 0x6666666661l);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.POSITION, 0x6666666661l);
 	}
 
 	@Override
@@ -168,14 +168,13 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ToolName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ToolName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ToolName
 	 *
@@ -196,9 +195,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 		return getAttribute(AttributeName.TOOLNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -213,7 +211,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
 	/**
 	 * (25) getCreateDirection
-	 *
+	 * 
 	 * @return JDFSpanDirection the element
 	 */
 	public JDFSpanDirection getCreateDirection()
@@ -243,7 +241,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
 	/**
 	 * (25) getCreateEdgeAngle
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateEdgeAngle()
@@ -273,7 +271,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
 	/**
 	 * (25) getCreateEdgeShape
-	 *
+	 * 
 	 * @return JDFSpanEdgeShape the element
 	 */
 	public JDFSpanEdgeShape getCreateEdgeShape()
@@ -303,7 +301,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
 	/**
 	 * (25) getCreateEmbossingType
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateEmbossingType()
@@ -333,7 +331,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
 	/**
 	 * (25) getCreateFoilColor
-	 *
+	 * 
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateFoilColor()
@@ -363,7 +361,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
 	/**
 	 * (25) getCreateFoilColorDetails
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateFoilColorDetails()
@@ -393,7 +391,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
 	/**
 	 * (25) getCreateHeight
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateHeight()
@@ -423,7 +421,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
 	/**
 	 * (25) getCreateImageSize
-	 *
+	 * 
 	 * @return JDFXYPairSpan the element
 	 */
 	public JDFXYPairSpan getCreateImageSize()
@@ -453,7 +451,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
 	/**
 	 * (25) getCreateLevel
-	 *
+	 * 
 	 * @return JDFSpanLevel the element
 	 */
 	public JDFSpanLevel getCreateLevel()
@@ -483,7 +481,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
 	/**
 	 * (25) getCreatePosition
-	 *
+	 * 
 	 * @return JDFXYPairSpan the element
 	 */
 	public JDFXYPairSpan getCreatePosition()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,7 @@ import org.cip4.jdflib.span.JDFSpanMethod;
  *****************************************************************************
  * class JDFAutoInsertingIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoInsertingIntent extends JDFIntentResource
@@ -94,9 +94,9 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUETYPE, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.INSERTLIST, 0x55555555);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.METHOD, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUETYPE, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.INSERTLIST, 0x5555555555l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.METHOD, 0x6666666666l);
 	}
 
 	@Override
@@ -141,9 +141,8 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -158,7 +157,7 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateGlueType
-	 *
+	 * 
 	 * @return JDFSpanGlueType the element
 	 */
 	public JDFSpanGlueType getCreateGlueType()
@@ -188,7 +187,7 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateInsertList
-	 *
+	 * 
 	 * @return JDFInsertList the element
 	 */
 	public JDFInsertList getCreateInsertList()
@@ -218,7 +217,7 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMethod
-	 *
+	 * 
 	 * @return JDFSpanMethod the element
 	 */
 	public JDFSpanMethod getCreateMethod()

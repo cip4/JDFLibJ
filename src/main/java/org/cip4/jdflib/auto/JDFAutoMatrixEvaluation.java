@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
  *****************************************************************************
  * class JDFAutoMatrixEvaluation : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoMatrixEvaluation extends JDFResource
@@ -100,10 +100,10 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ROTATEMOD, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHIFT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ROTATEMOD, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHIFT, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TOLERANCE, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMS, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -115,8 +115,8 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUE, 0x3333333333l);
 	}
 
 	@Override
@@ -172,14 +172,13 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 		return bRet;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RotateMod
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RotateMod ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RotateMod
 	 *
@@ -200,9 +199,9 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 		return getRealAttribute(AttributeName.ROTATEMOD, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Shift
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Shift ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Shift
 	 *
@@ -223,9 +222,9 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 		return getAttribute(AttributeName.SHIFT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Tolerance
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Tolerance ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Tolerance
 	 *
@@ -248,9 +247,9 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Transforms
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Transforms ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Transforms
 	 *
@@ -271,14 +270,13 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 		return getAttribute(AttributeName.TRANSFORMS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateBasicPreflightTest
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest the element
 	 */
@@ -300,7 +298,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 
 	/**
 	 * Get all BasicPreflightTest from the current element
-	 *
+	 * 
 	 * @return Collection<JDFBasicPreflightTest>, null if none are available
 	 */
 	public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
@@ -320,7 +318,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 
 	/**
 	 * (26) getCreateValue
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFValue the element
 	 */
@@ -342,7 +340,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 
 	/**
 	 * Get all Value from the current element
-	 *
+	 * 
 	 * @return Collection<JDFValue>, null if none are available
 	 */
 	public Collection<JDFValue> getAllValue()

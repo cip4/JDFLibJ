@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
  *****************************************************************************
  * class JDFAutoPageCondition : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPageCondition extends JDFElement
@@ -99,7 +99,7 @@ public abstract class JDFAutoPageCondition extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.RESTRICTEDCONTENTOBJECTS, 0x22221111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.RESTRICTEDCONTENTOBJECTS, 0x2222221111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 	}
 
 	@Override
@@ -111,8 +111,8 @@ public abstract class JDFAutoPageCondition extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.RUNLIST, 0x33331111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33331111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.RUNLIST, 0x3333331111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x3333331111l);
 	}
 
 	@Override
@@ -157,14 +157,14 @@ public abstract class JDFAutoPageCondition extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RestrictedContentObjects
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RestrictedContentObjects
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RestrictedContentObjects
 	 *
@@ -187,14 +187,13 @@ public abstract class JDFAutoPageCondition extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateRunList
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFRunList the element
 	 */
@@ -216,7 +215,7 @@ public abstract class JDFAutoPageCondition extends JDFElement
 
 	/**
 	 * Get all RunList from the current element
-	 *
+	 * 
 	 * @return Collection<JDFRunList>, null if none are available
 	 */
 	public Collection<JDFRunList> getAllRunList()
@@ -246,7 +245,7 @@ public abstract class JDFAutoPageCondition extends JDFElement
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -268,7 +267,7 @@ public abstract class JDFAutoPageCondition extends JDFElement
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
  *****************************************************************************
  * class JDFAutoCasingInParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCasingInParams extends JDFResource
@@ -98,9 +98,9 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CASERADIUS, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COVERBOARDWIDTH, 0x33311111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SPINEBOARDWIDTH, 0x33311111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CASERADIUS, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COVERBOARDWIDTH, 0x3333311111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SPINEBOARDWIDTH, 0x3333311111l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -112,8 +112,8 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x33333331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x3333333331l);
 	}
 
 	@Override
@@ -178,14 +178,13 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CaseRadius
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CaseRadius ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CaseRadius
 	 *
@@ -206,9 +205,10 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 		return getRealAttribute(AttributeName.CASERADIUS, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CoverBoardWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CoverBoardWidth
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CoverBoardWidth
 	 *
@@ -229,9 +229,10 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 		return getRealAttribute(AttributeName.COVERBOARDWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SpineBoardWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SpineBoardWidth
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SpineBoardWidth
 	 *
@@ -252,14 +253,13 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 		return getRealAttribute(AttributeName.SPINEBOARDWIDTH, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateGlueApplication
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueApplication the element
 	 */
@@ -281,7 +281,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 
 	/**
 	 * Get all GlueApplication from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGlueApplication>, null if none are available
 	 */
 	public Collection<JDFGlueApplication> getAllGlueApplication()
@@ -311,7 +311,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 
 	/**
 	 * (26) getCreateGlueLine
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
@@ -333,7 +333,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 
 	/**
 	 * Get all GlueLine from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGlueLine>, null if none are available
 	 */
 	public Collection<JDFGlueLine> getAllGlueLine()

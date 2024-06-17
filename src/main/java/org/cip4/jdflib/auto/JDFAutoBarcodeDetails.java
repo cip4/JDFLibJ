@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoBarcodeDetails : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBarcodeDetails extends JDFElement
@@ -92,10 +92,10 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BARCODEVERSION, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORCORRECTIONLEVEL, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.XCELLS, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.YCELLS, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BARCODEVERSION, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORCORRECTIONLEVEL, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.XCELLS, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.YCELLS, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -140,14 +140,14 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BarcodeVersion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BarcodeVersion
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BarcodeVersion
 	 *
@@ -168,9 +168,10 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 		return getAttribute(AttributeName.BARCODEVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ErrorCorrectionLevel
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ErrorCorrectionLevel
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ErrorCorrectionLevel
 	 *
@@ -191,9 +192,9 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 		return getAttribute(AttributeName.ERRORCORRECTIONLEVEL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute XCells
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute XCells ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute XCells
 	 *
@@ -214,9 +215,9 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 		return getIntAttribute(AttributeName.XCELLS, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute YCells
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute YCells ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute YCells
 	 *

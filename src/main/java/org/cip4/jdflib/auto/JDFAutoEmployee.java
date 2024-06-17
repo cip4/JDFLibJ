@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.process.JDFPerson;
  *****************************************************************************
  * class JDFAutoEmployee : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoEmployee extends JDFResource
@@ -98,9 +98,9 @@ public abstract class JDFAutoEmployee extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PERSONALID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ROLES, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHIFT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PERSONALID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ROLES, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHIFT, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -112,8 +112,8 @@ public abstract class JDFAutoEmployee extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COSTCENTER, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PERSON, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COSTCENTER, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PERSON, 0x6666666666l);
 	}
 
 	@Override
@@ -178,14 +178,13 @@ public abstract class JDFAutoEmployee extends JDFResource
 		return JDFResource.EnumResourceClass.Implementation;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PersonalID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PersonalID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PersonalID
 	 *
@@ -206,9 +205,9 @@ public abstract class JDFAutoEmployee extends JDFResource
 		return getAttribute(AttributeName.PERSONALID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Roles
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Roles ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Roles
 	 *
@@ -232,9 +231,9 @@ public abstract class JDFAutoEmployee extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Shift
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Shift ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Shift
 	 *
@@ -255,9 +254,8 @@ public abstract class JDFAutoEmployee extends JDFResource
 		return getAttribute(AttributeName.SHIFT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -272,7 +270,7 @@ public abstract class JDFAutoEmployee extends JDFResource
 
 	/**
 	 * (25) getCreateCostCenter
-	 *
+	 * 
 	 * @return JDFCostCenter the element
 	 */
 	public JDFCostCenter getCreateCostCenter()
@@ -302,7 +300,7 @@ public abstract class JDFAutoEmployee extends JDFResource
 
 	/**
 	 * (25) getCreatePerson
-	 *
+	 * 
 	 * @return JDFPerson the element
 	 */
 	public JDFPerson getCreatePerson()

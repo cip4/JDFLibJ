@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHole;
  *****************************************************************************
  * class JDFAutoHoleList : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoHoleList extends JDFResource
@@ -95,8 +95,8 @@ public abstract class JDFAutoHoleList extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLE, 0x22222211);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.HOLELINE, 0x22222211);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLE, 0x2222222211l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.HOLELINE, 0x2222222211l);
 	}
 
 	@Override
@@ -161,14 +161,13 @@ public abstract class JDFAutoHoleList extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateHole
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFHole the element
 	 */
@@ -190,7 +189,7 @@ public abstract class JDFAutoHoleList extends JDFResource
 
 	/**
 	 * Get all Hole from the current element
-	 *
+	 * 
 	 * @return Collection<JDFHole>, null if none are available
 	 */
 	public Collection<JDFHole> getAllHole()
@@ -220,7 +219,7 @@ public abstract class JDFAutoHoleList extends JDFResource
 
 	/**
 	 * (26) getCreateHoleLine
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFHoleLine the element
 	 */
@@ -242,7 +241,7 @@ public abstract class JDFAutoHoleList extends JDFResource
 
 	/**
 	 * Get all HoleLine from the current element
-	 *
+	 * 
 	 * @return Collection<JDFHoleLine>, null if none are available
 	 */
 	public Collection<JDFHoleLine> getAllHoleLine()

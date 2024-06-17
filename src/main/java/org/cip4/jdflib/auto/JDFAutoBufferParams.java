@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.util.JDFDuration;
  *****************************************************************************
  * class JDFAutoBufferParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBufferParams extends JDFResource
@@ -92,7 +92,7 @@ public abstract class JDFAutoBufferParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MINIMUMWAIT, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MINIMUMWAIT, 0x3333333331l, AttributeInfo.EnumAttributeType.duration, null, null);
 	}
 
 	@Override
@@ -157,14 +157,13 @@ public abstract class JDFAutoBufferParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinimumWait
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinimumWait ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinimumWait
 	 *

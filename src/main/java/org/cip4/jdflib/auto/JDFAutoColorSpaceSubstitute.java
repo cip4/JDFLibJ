@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFPDLResourceAlias;
  *****************************************************************************
  * class JDFAutoColorSpaceSubstitute : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
@@ -95,8 +95,8 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PDLRESOURCEALIAS, 0x55555555);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x22222222);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PDLRESOURCEALIAS, 0x5555555555l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x2222222222l);
 	}
 
 	@Override
@@ -141,9 +141,8 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -158,7 +157,7 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 
 	/**
 	 * (25) getCreatePDLResourceAlias
-	 *
+	 * 
 	 * @return JDFPDLResourceAlias the element
 	 */
 	public JDFPDLResourceAlias getCreatePDLResourceAlias()
@@ -188,7 +187,7 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 
 	/**
 	 * (26) getCreateSeparationSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
@@ -210,7 +209,7 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 
 	/**
 	 * Get all SeparationSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFSeparationSpec>, null if none are available
 	 */
 	public Collection<JDFSeparationSpec> getAllSeparationSpec()

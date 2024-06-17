@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFCostCenter;
  *****************************************************************************
  * class JDFAutoDevice : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDevice extends JDFResource
@@ -102,32 +102,32 @@ public abstract class JDFAutoDevice extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[26];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICECLASS, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEFAMILY, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVICETYPE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.DIRECTORY, 0x33333331, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.FRIENDLYNAME, 0x44443331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.JDFERRORURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.JDFINPUTURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.JDFOUTPUTURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.JDFVERSIONS, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.JMFSENDERID, 0x33333331, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.JMFURL, 0x33333331, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.KNOWNLOCALIZATIONS, 0x33333311, AttributeInfo.EnumAttributeType.languages, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.MANUFACTURER, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.MANUFACTURERURL, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.MAXRUNSPEED, 0x31111111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.MODELDESCRIPTION, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[18] = new AtrInfoTable(AttributeName.MODELNAME, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[19] = new AtrInfoTable(AttributeName.MODELNUMBER, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[20] = new AtrInfoTable(AttributeName.MODELURL, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[21] = new AtrInfoTable(AttributeName.PRESENTATIONURL, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[22] = new AtrInfoTable(AttributeName.REVISION, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[23] = new AtrInfoTable(AttributeName.SERIALNUMBER, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[24] = new AtrInfoTable(AttributeName.SECUREJMFURL, 0x33333111, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[25] = new AtrInfoTable(AttributeName.UPC, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICECLASS, 0x3333311111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEFAMILY, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEID, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVICETYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.DIRECTORY, 0x3333333331l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.FRIENDLYNAME, 0x4444443331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.JDFERRORURL, 0x3333333311l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.JDFINPUTURL, 0x3333333311l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.JDFOUTPUTURL, 0x3333333311l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.JDFVERSIONS, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.JMFSENDERID, 0x3333333331l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.JMFURL, 0x3333333331l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.KNOWNLOCALIZATIONS, 0x3333333311l, AttributeInfo.EnumAttributeType.languages, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.MANUFACTURER, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.MANUFACTURERURL, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.MAXRUNSPEED, 0x3331111111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.MODELDESCRIPTION, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[18] = new AtrInfoTable(AttributeName.MODELNAME, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[19] = new AtrInfoTable(AttributeName.MODELNUMBER, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[20] = new AtrInfoTable(AttributeName.MODELURL, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[21] = new AtrInfoTable(AttributeName.PRESENTATIONURL, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[22] = new AtrInfoTable(AttributeName.REVISION, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[23] = new AtrInfoTable(AttributeName.SERIALNUMBER, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[24] = new AtrInfoTable(AttributeName.SECUREJMFURL, 0x3333333111l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[25] = new AtrInfoTable(AttributeName.UPC, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -139,10 +139,10 @@ public abstract class JDFAutoDevice extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COSTCENTER, 0x66666661);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICECAP, 0x33333331);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.ICONLIST, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.MODULE, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COSTCENTER, 0x6666666661l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICECAP, 0x3333333331l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.ICONLIST, 0x6666666661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.MODULE, 0x3333333111l);
 	}
 
 	@Override
@@ -207,14 +207,13 @@ public abstract class JDFAutoDevice extends JDFResource
 		return JDFResource.EnumResourceClass.Implementation;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceClass
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceClass ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DeviceClass
 	 *
@@ -238,9 +237,10 @@ public abstract class JDFAutoDevice extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceFamily
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceFamily
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DeviceFamily
 	 *
@@ -261,9 +261,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.DEVICEFAMILY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DeviceID
 	 *
@@ -284,9 +284,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DeviceType
 	 *
@@ -307,9 +307,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.DEVICETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Directory
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Directory ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Directory
 	 *
@@ -330,9 +330,10 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.DIRECTORY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FriendlyName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FriendlyName
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FriendlyName
 	 *
@@ -353,9 +354,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.FRIENDLYNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ICSVersions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ICSVersions ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ICSVersions
 	 *
@@ -379,9 +380,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JDFErrorURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JDFErrorURL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JDFErrorURL
 	 *
@@ -402,9 +403,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.JDFERRORURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JDFInputURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JDFInputURL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JDFInputURL
 	 *
@@ -425,9 +426,10 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.JDFINPUTURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JDFOutputURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JDFOutputURL
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JDFOutputURL
 	 *
@@ -448,9 +450,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.JDFOUTPUTURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JDFVersions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JDFVersions ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JDFVersions
 	 *
@@ -471,9 +473,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.JDFVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JMFSenderID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JMFSenderID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JMFSenderID
 	 *
@@ -494,9 +496,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.JMFSENDERID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JMFURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JMFURL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JMFURL
 	 *
@@ -517,9 +519,10 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.JMFURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute KnownLocalizations
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute KnownLocalizations
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute KnownLocalizations
 	 *
@@ -543,9 +546,10 @@ public abstract class JDFAutoDevice extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Manufacturer
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Manufacturer
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Manufacturer
 	 *
@@ -568,9 +572,10 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.MANUFACTURER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ManufacturerURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ManufacturerURL
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ManufacturerURL
 	 *
@@ -591,9 +596,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.MANUFACTURERURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxRunSpeed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxRunSpeed ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxRunSpeed
 	 *
@@ -614,9 +619,10 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getRealAttribute(AttributeName.MAXRUNSPEED, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModelDescription
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModelDescription
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModelDescription
 	 *
@@ -637,9 +643,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.MODELDESCRIPTION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModelName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModelName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModelName
 	 *
@@ -660,9 +666,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.MODELNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModelNumber
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModelNumber ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModelNumber
 	 *
@@ -683,9 +689,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.MODELNUMBER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModelURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModelURL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModelURL
 	 *
@@ -706,9 +712,10 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.MODELURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentationURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentationURL
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentationURL
 	 *
@@ -729,9 +736,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.PRESENTATIONURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Revision
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Revision ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Revision
 	 *
@@ -752,9 +759,10 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.REVISION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SerialNumber
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SerialNumber
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SerialNumber
 	 *
@@ -775,9 +783,10 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.SERIALNUMBER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SecureJMFURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SecureJMFURL
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SecureJMFURL
 	 *
@@ -798,9 +807,9 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.SECUREJMFURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UPC
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UPC ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute UPC
 	 *
@@ -821,9 +830,8 @@ public abstract class JDFAutoDevice extends JDFResource
 		return getAttribute(AttributeName.UPC, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -838,7 +846,7 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * (25) getCreateCostCenter
-	 *
+	 * 
 	 * @return JDFCostCenter the element
 	 */
 	public JDFCostCenter getCreateCostCenter()
@@ -858,7 +866,7 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * (26) getCreateDeviceCap
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDeviceCap the element
 	 */
@@ -880,7 +888,7 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * Get all DeviceCap from the current element
-	 *
+	 * 
 	 * @return Collection<JDFDeviceCap>, null if none are available
 	 */
 	public Collection<JDFDeviceCap> getAllDeviceCap()
@@ -910,7 +918,7 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * (25) getCreateIconList
-	 *
+	 * 
 	 * @return JDFIconList the element
 	 */
 	public JDFIconList getCreateIconList()
@@ -930,7 +938,7 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * (26) getCreateModule
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFModule the element
 	 */
@@ -952,7 +960,7 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * Get all Module from the current element
-	 *
+	 * 
 	 * @return Collection<JDFModule>, null if none are available
 	 */
 	public Collection<JDFModule> getAllModule()

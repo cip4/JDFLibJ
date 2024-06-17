@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.util.JDFDuration;
  *****************************************************************************
  * class JDFAutoDevelopingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDevelopingParams extends JDFResource
@@ -92,11 +92,11 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREHEATTEMP, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREHEATTIME, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.POSTBAKETEMP, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.POSTBAKETIME, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.POSTEXPOSETIME, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREHEATTEMP, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREHEATTIME, 0x3333333331l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.POSTBAKETEMP, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.POSTBAKETIME, 0x3333333331l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.POSTEXPOSETIME, 0x3333333331l, AttributeInfo.EnumAttributeType.duration, null, null);
 	}
 
 	@Override
@@ -161,14 +161,13 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreHeatTemp
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreHeatTemp ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PreHeatTemp
 	 *
@@ -189,9 +188,9 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 		return getRealAttribute(AttributeName.PREHEATTEMP, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreHeatTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreHeatTime ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PreHeatTime
 	 *
@@ -214,9 +213,10 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PostBakeTemp
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PostBakeTemp
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PostBakeTemp
 	 *
@@ -237,9 +237,10 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 		return getRealAttribute(AttributeName.POSTBAKETEMP, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PostBakeTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PostBakeTime
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PostBakeTime
 	 *
@@ -262,9 +263,10 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PostExposeTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PostExposeTime
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PostExposeTime
 	 *

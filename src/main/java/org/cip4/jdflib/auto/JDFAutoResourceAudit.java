@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.process.JDFMISDetails;
  *****************************************************************************
  * class JDFAutoResourceAudit : public JDFAudit
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoResourceAudit extends JDFAudit
@@ -103,9 +103,9 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTSMODIFIED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.NODESTATUS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.REASON, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0), "ProcessResult");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTSMODIFIED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.NODESTATUS, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.REASON, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0), "ProcessResult");
 	}
 
 	@Override
@@ -117,9 +117,9 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.MISDETAILS, 0x6666666111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x3333333111l);
 	}
 
 	@Override
@@ -174,7 +174,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumReason(String name)
+		protected EnumReason(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -229,14 +229,14 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 		public static final EnumReason ProcessResult = new EnumReason("ProcessResult");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ContentsModified
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ContentsModified
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ContentsModified
 	 *
@@ -257,9 +257,9 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 		return getBoolAttribute(AttributeName.CONTENTSMODIFIED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NodeStatus
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NodeStatus ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute NodeStatus
 	 *
@@ -280,9 +280,9 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 		return EnumNodeStatus.getEnum(getAttribute(AttributeName.NODESTATUS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Reason
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Reason ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Reason
 	 *
@@ -303,14 +303,13 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 		return EnumReason.getEnum(getAttribute(AttributeName.REASON, null, "ProcessResult"));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateEmployee
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -334,7 +333,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 
 	/**
 	 * Get all Employee from the current element
-	 *
+	 * 
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	@Override
@@ -366,7 +365,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 
 	/**
 	 * (25) getCreateMISDetails
-	 *
+	 * 
 	 * @return JDFMISDetails the element
 	 */
 	public JDFMISDetails getCreateMISDetails()
@@ -386,7 +385,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -408,7 +407,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()

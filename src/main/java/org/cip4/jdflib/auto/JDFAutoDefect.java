@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoDefect : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDefect extends JDFElement
@@ -102,13 +102,13 @@ public abstract class JDFAutoDefect extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOX, 0x31111111, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEFECTREASON, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFECTTYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumDefectType.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEFECTTYPEDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.FACE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumFace.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SEVERITY, 0x31111111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SIZE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOX, 0x3331111111l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEFECTREASON, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFECTTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDefectType.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEFECTTYPEDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.FACE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumFace.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SEVERITY, 0x3331111111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SIZE, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public abstract class JDFAutoDefect extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x6666666611l);
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public abstract class JDFAutoDefect extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDefectType(String name)
+		protected EnumDefectType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -246,7 +246,7 @@ public abstract class JDFAutoDefect extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumFace(String name)
+		protected EnumFace(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -307,14 +307,13 @@ public abstract class JDFAutoDefect extends JDFElement
 		public static final EnumFace Back = new EnumFace("Back");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Box
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Box ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Box
 	 *
@@ -337,9 +336,10 @@ public abstract class JDFAutoDefect extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DefectReason
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefectReason
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DefectReason
 	 *
@@ -360,9 +360,9 @@ public abstract class JDFAutoDefect extends JDFElement
 		return getAttribute(AttributeName.DEFECTREASON, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DefectType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefectType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DefectType
 	 *
@@ -383,9 +383,10 @@ public abstract class JDFAutoDefect extends JDFElement
 		return EnumDefectType.getEnum(getAttribute(AttributeName.DEFECTTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DefectTypeDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefectTypeDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DefectTypeDetails
 	 *
@@ -406,9 +407,9 @@ public abstract class JDFAutoDefect extends JDFElement
 		return getAttribute(AttributeName.DEFECTTYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Face
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Face ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Face
 	 *
@@ -429,9 +430,9 @@ public abstract class JDFAutoDefect extends JDFElement
 		return EnumFace.getEnum(getAttribute(AttributeName.FACE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Severity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Severity ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Severity
 	 *
@@ -452,9 +453,9 @@ public abstract class JDFAutoDefect extends JDFElement
 		return getIntAttribute(AttributeName.SEVERITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Size
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Size ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Size
 	 *
@@ -475,9 +476,8 @@ public abstract class JDFAutoDefect extends JDFElement
 		return getRealAttribute(AttributeName.SIZE, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -492,7 +492,7 @@ public abstract class JDFAutoDefect extends JDFElement
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()

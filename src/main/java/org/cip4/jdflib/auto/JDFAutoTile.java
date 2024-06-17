@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.process.JDFMediaSource;
  *****************************************************************************
  * class JDFAutoTile : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTile extends JDFResource
@@ -101,9 +101,9 @@ public abstract class JDFAutoTile extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLIPBOX, 0x22222222, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CTM, 0x22222222, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRIMBOX, 0x33311111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLIPBOX, 0x2222222222l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CTM, 0x2222222222l, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRIMBOX, 0x3333311111l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 	}
 
 	@Override
@@ -115,9 +115,9 @@ public abstract class JDFAutoTile extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.MARKOBJECT, 0x33331111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x66666611);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777766);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.MARKOBJECT, 0x3333331111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x6666666611l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x7777777766l);
 	}
 
 	@Override
@@ -182,14 +182,13 @@ public abstract class JDFAutoTile extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ClipBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ClipBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ClipBox
 	 *
@@ -212,9 +211,9 @@ public abstract class JDFAutoTile extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CTM
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CTM
 	 *
@@ -237,9 +236,9 @@ public abstract class JDFAutoTile extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrimBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrimBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TrimBox
 	 *
@@ -262,14 +261,13 @@ public abstract class JDFAutoTile extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateMarkObject
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMarkObject the element
 	 */
@@ -291,7 +289,7 @@ public abstract class JDFAutoTile extends JDFResource
 
 	/**
 	 * Get all MarkObject from the current element
-	 *
+	 * 
 	 * @return Collection<JDFMarkObject>, null if none are available
 	 */
 	public Collection<JDFMarkObject> getAllMarkObject()
@@ -321,7 +319,7 @@ public abstract class JDFAutoTile extends JDFResource
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()
@@ -361,7 +359,7 @@ public abstract class JDFAutoTile extends JDFResource
 
 	/**
 	 * (25) getCreateMediaSource
-	 *
+	 * 
 	 * @return JDFMediaSource the element
 	 */
 	public JDFMediaSource getCreateMediaSource()

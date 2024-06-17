@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoFeatureAttribute : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoFeatureAttribute extends JDFElement
@@ -97,9 +97,9 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.EDITABLE, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.USERDISPLAY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumUserDisplay.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EDITABLE, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.USERDISPLAY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumUserDisplay.getEnum(0), null);
 	}
 
 	@Override
@@ -154,7 +154,7 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumUserDisplay(String name)
+		protected EnumUserDisplay(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -209,14 +209,14 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 		public static final EnumUserDisplay Dependant = new EnumUserDisplay("Dependant");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CurrentValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CurrentValue
 	 *
@@ -237,9 +237,9 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 		return getAttribute(AttributeName.CURRENTVALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Editable
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Editable ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Editable
 	 *
@@ -260,9 +260,9 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 		return getBoolAttribute(AttributeName.EDITABLE, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UserDisplay
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UserDisplay ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute UserDisplay
 	 *

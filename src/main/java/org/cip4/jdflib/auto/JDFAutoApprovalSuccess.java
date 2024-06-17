@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoApprovalSuccess : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoApprovalSuccess extends JDFResource
@@ -96,9 +96,9 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.APPROVALDETAILS, 0x33333111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x77777666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.CONTACT, 0x44444311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.APPROVALDETAILS, 0x3333333111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x7777777666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.CONTACT, 0x4444444311l);
 	}
 
 	@Override
@@ -163,14 +163,13 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateApprovalDetails
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFApprovalDetails the element
 	 */
@@ -192,7 +191,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 
 	/**
 	 * Get all ApprovalDetails from the current element
-	 *
+	 * 
 	 * @return Collection<JDFApprovalDetails>, null if none are available
 	 */
 	public Collection<JDFApprovalDetails> getAllApprovalDetails()
@@ -222,7 +221,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()
@@ -252,7 +251,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -274,7 +273,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()

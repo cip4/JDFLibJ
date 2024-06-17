@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,7 +95,7 @@ import org.cip4.jdflib.resource.process.JDFPageAssignedList;
  *****************************************************************************
  * class JDFAutoAssembly : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoAssembly extends JDFResource
@@ -106,13 +106,13 @@ public abstract class JDFAutoAssembly extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.JOGSIDE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumJogSide.getEnum(0), "Top");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ORDER, 0x44443311, AttributeInfo.EnumAttributeType.enumeration, EnumOrder.getEnum(0), "Gathering");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.BINDINGSIDE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumBindingSide.getEnum(0), "Left");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x44444311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PHYSICALSECTION, 0x33333111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.JOGSIDE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumJogSide.getEnum(0), "Top");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ORDER, 0x4444443311l, AttributeInfo.EnumAttributeType.enumeration, EnumOrder.getEnum(0), "Gathering");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BINDINGSIDE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumBindingSide.getEnum(0), "Left");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x4444444311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PHYSICALSECTION, 0x3333333111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 	}
 
 	@Override
@@ -124,9 +124,9 @@ public abstract class JDFAutoAssembly extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLYSECTION, 0x33333311);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PAGELIST, 0x66666611);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.PAGEASSIGNEDLIST, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLYSECTION, 0x3333333311l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PAGELIST, 0x6666666611l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PAGEASSIGNEDLIST, 0x3333333311l);
 	}
 
 	@Override
@@ -201,7 +201,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumJogSide(String name)
+		protected EnumJogSide(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -270,7 +270,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOrder(String name)
+		protected EnumOrder(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -337,7 +337,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBindingSide(String name)
+		protected EnumBindingSide(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -394,14 +394,13 @@ public abstract class JDFAutoAssembly extends JDFResource
 		public static final EnumBindingSide Bottom = new EnumBindingSide("Bottom");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JogSide
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JogSide ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute JogSide
 	 *
@@ -422,9 +421,9 @@ public abstract class JDFAutoAssembly extends JDFResource
 		return EnumJogSide.getEnum(getAttribute(AttributeName.JOGSIDE, null, "Top"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Order
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Order ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Order
 	 *
@@ -445,9 +444,9 @@ public abstract class JDFAutoAssembly extends JDFResource
 		return EnumOrder.getEnum(getAttribute(AttributeName.ORDER, null, "Gathering"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BindingSide
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BindingSide ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute BindingSide
 	 *
@@ -468,9 +467,9 @@ public abstract class JDFAutoAssembly extends JDFResource
 		return EnumBindingSide.getEnum(getAttribute(AttributeName.BINDINGSIDE, null, "Left"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AssemblyID
 	 *
@@ -491,9 +490,9 @@ public abstract class JDFAutoAssembly extends JDFResource
 		return getAttribute(AttributeName.ASSEMBLYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyIDs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AssemblyIDs
 	 *
@@ -517,9 +516,9 @@ public abstract class JDFAutoAssembly extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobID
 	 *
@@ -540,9 +539,10 @@ public abstract class JDFAutoAssembly extends JDFResource
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PhysicalSection
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PhysicalSection
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PhysicalSection
 	 *
@@ -565,14 +565,13 @@ public abstract class JDFAutoAssembly extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateAssemblySection
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFAssemblySection the element
 	 */
@@ -594,7 +593,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * Get all AssemblySection from the current element
-	 *
+	 * 
 	 * @return Collection<JDFAssemblySection>, null if none are available
 	 */
 	public Collection<JDFAssemblySection> getAllAssemblySection()
@@ -624,7 +623,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * (25) getCreatePageList
-	 *
+	 * 
 	 * @return JDFPageList the element
 	 */
 	public JDFPageList getCreatePageList()
@@ -654,7 +653,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * (26) getCreatePageAssignedList
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageAssignedList the element
 	 */
@@ -676,7 +675,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * Get all PageAssignedList from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPageAssignedList>, null if none are available
 	 */
 	public Collection<JDFPageAssignedList> getAllPageAssignedList()

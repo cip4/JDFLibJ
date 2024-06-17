@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -94,7 +94,7 @@ import org.cip4.jdflib.resource.process.JDFTIFFFormatParams;
  *****************************************************************************
  * class JDFAutoRenderingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoRenderingParams extends JDFResource
@@ -105,12 +105,12 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BANDHEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BANDORDERING, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBandOrdering.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.BANDWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.COLORANTDEPTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.INTERLEAVED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MIMETYPE, 0x33311111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BANDHEIGHT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BANDORDERING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumBandOrdering.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BANDWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COLORANTDEPTH, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.INTERLEAVED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MIMETYPE, 0x3333311111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -122,10 +122,10 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.AUTOMATEDOVERPRINTPARAMS, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.OBJECTRESOLUTION, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x77777761);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.TIFFFORMATPARAMS, 0x66611111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.AUTOMATEDOVERPRINTPARAMS, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.OBJECTRESOLUTION, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x7777777761l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.TIFFFORMATPARAMS, 0x6666611111l);
 	}
 
 	@Override
@@ -200,7 +200,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBandOrdering(String name)
+		protected EnumBandOrdering(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -253,14 +253,13 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 		public static final EnumBandOrdering ColorMajor = new EnumBandOrdering("ColorMajor");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BandHeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BandHeight ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BandHeight
 	 *
@@ -281,9 +280,10 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 		return getIntAttribute(AttributeName.BANDHEIGHT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BandOrdering
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BandOrdering
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute BandOrdering
 	 *
@@ -304,9 +304,9 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 		return EnumBandOrdering.getEnum(getAttribute(AttributeName.BANDORDERING, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BandWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BandWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BandWidth
 	 *
@@ -327,9 +327,10 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 		return getIntAttribute(AttributeName.BANDWIDTH, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorantDepth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorantDepth
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ColorantDepth
 	 *
@@ -350,9 +351,9 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 		return getIntAttribute(AttributeName.COLORANTDEPTH, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Interleaved
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Interleaved ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Interleaved
 	 *
@@ -373,9 +374,9 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 		return getBoolAttribute(AttributeName.INTERLEAVED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MimeType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MimeType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MimeType
 	 *
@@ -396,9 +397,8 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 		return getAttribute(AttributeName.MIMETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -413,7 +413,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 
 	/**
 	 * (25) getCreateAutomatedOverPrintParams
-	 *
+	 * 
 	 * @return JDFAutomatedOverPrintParams the element
 	 */
 	public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams()
@@ -443,7 +443,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 
 	/**
 	 * (26) getCreateObjectResolution
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFObjectResolution the element
 	 */
@@ -465,7 +465,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 
 	/**
 	 * Get all ObjectResolution from the current element
-	 *
+	 * 
 	 * @return Collection<JDFObjectResolution>, null if none are available
 	 */
 	public Collection<JDFObjectResolution> getAllObjectResolution()
@@ -505,7 +505,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()
@@ -545,7 +545,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 
 	/**
 	 * (25) getCreateTIFFFormatParams
-	 *
+	 * 
 	 * @return JDFTIFFFormatParams the element
 	 */
 	public JDFTIFFFormatParams getCreateTIFFFormatParams()

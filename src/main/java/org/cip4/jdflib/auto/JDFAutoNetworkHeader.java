@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoNetworkHeader : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoNetworkHeader extends JDFElement
@@ -92,8 +92,8 @@ public abstract class JDFAutoNetworkHeader extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUE, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -138,14 +138,13 @@ public abstract class JDFAutoNetworkHeader extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Name
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Name
 	 *
@@ -166,9 +165,9 @@ public abstract class JDFAutoNetworkHeader extends JDFElement
 		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Value
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Value ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Value
 	 *

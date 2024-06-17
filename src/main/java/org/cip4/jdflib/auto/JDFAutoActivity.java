@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoActivity : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoActivity extends JDFElement
@@ -93,11 +93,11 @@ public abstract class JDFAutoActivity extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVITYID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACTIVITYNAME, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PERSONALID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.STARTTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVITYID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACTIVITYNAME, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDTIME, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PERSONALID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.STARTTIME, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 	}
 
 	@Override
@@ -142,14 +142,13 @@ public abstract class JDFAutoActivity extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ActivityID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ActivityID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ActivityID
 	 *
@@ -170,9 +169,10 @@ public abstract class JDFAutoActivity extends JDFElement
 		return getAttribute(AttributeName.ACTIVITYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ActivityName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ActivityName
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ActivityName
 	 *
@@ -193,9 +193,9 @@ public abstract class JDFAutoActivity extends JDFElement
 		return getAttribute(AttributeName.ACTIVITYNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EndTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EndTime ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute EndTime
 	 *
@@ -223,9 +223,9 @@ public abstract class JDFAutoActivity extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PersonalID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PersonalID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PersonalID
 	 *
@@ -246,9 +246,9 @@ public abstract class JDFAutoActivity extends JDFElement
 		return getAttribute(AttributeName.PERSONALID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StartTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StartTime ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute StartTime
 	 *

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
  *****************************************************************************
  * class JDFAutoDeviceNColor : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDeviceNColor extends JDFElement
@@ -93,9 +93,9 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORLIST, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.N, 0x22222222, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORLIST, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.N, 0x2222222222l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.NAME, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -140,14 +140,13 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ColorList
 	 *
@@ -170,9 +169,9 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute N
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute N ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute N
 	 *
@@ -193,9 +192,9 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
 		return getIntAttribute(AttributeName.N, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Name
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Name
 	 *

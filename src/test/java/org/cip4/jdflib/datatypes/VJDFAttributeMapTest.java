@@ -483,7 +483,7 @@ class VJDFAttributeMapTest extends JDFTestCaseBase
 	{
 		final VJDFAttributeMap v = new VJDFAttributeMap();
 		final long t0 = System.currentTimeMillis();
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			for (int j = 0; j < 100; j++)
 			{

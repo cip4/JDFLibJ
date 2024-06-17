@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
  *****************************************************************************
  * class JDFAutoSheetCondition : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoSheetCondition extends JDFElement
@@ -94,7 +94,7 @@ public abstract class JDFAutoSheetCondition extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.RUNLIST, 0x33331111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.RUNLIST, 0x3333331111l);
 	}
 
 	@Override
@@ -139,14 +139,13 @@ public abstract class JDFAutoSheetCondition extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateRunList
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFRunList the element
 	 */
@@ -168,7 +167,7 @@ public abstract class JDFAutoSheetCondition extends JDFElement
 
 	/**
 	 * Get all RunList from the current element
-	 *
+	 * 
 	 * @return Collection<JDFRunList>, null if none are available
 	 */
 	public Collection<JDFRunList> getAllRunList()

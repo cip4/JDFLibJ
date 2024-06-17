@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFPerson;
  *****************************************************************************
  * class JDFAutoContact : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoContact extends JDFResource
@@ -102,9 +102,9 @@ public abstract class JDFAutoContact extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTACTTYPES, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTACTTYPEDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.USERID, 0x33311111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTACTTYPES, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTACTTYPEDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.USERID, 0x3333311111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -116,10 +116,10 @@ public abstract class JDFAutoContact extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ADDRESS, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COMCHANNEL, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.COMPANY, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.PERSON, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ADDRESS, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COMCHANNEL, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.COMPANY, 0x6666666661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.PERSON, 0x6666666666l);
 	}
 
 	@Override
@@ -184,14 +184,14 @@ public abstract class JDFAutoContact extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ContactTypes
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ContactTypes
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ContactTypes
 	 *
@@ -215,9 +215,10 @@ public abstract class JDFAutoContact extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ContactTypeDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ContactTypeDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ContactTypeDetails
 	 *
@@ -238,9 +239,9 @@ public abstract class JDFAutoContact extends JDFResource
 		return getAttribute(AttributeName.CONTACTTYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UserID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UserID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute UserID
 	 *
@@ -261,9 +262,8 @@ public abstract class JDFAutoContact extends JDFResource
 		return getAttribute(AttributeName.USERID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -278,7 +278,7 @@ public abstract class JDFAutoContact extends JDFResource
 
 	/**
 	 * (25) getCreateAddress
-	 *
+	 * 
 	 * @return JDFAddress the element
 	 */
 	public JDFAddress getCreateAddress()
@@ -308,7 +308,7 @@ public abstract class JDFAutoContact extends JDFResource
 
 	/**
 	 * (26) getCreateComChannel
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFComChannel the element
 	 */
@@ -330,7 +330,7 @@ public abstract class JDFAutoContact extends JDFResource
 
 	/**
 	 * Get all ComChannel from the current element
-	 *
+	 * 
 	 * @return Collection<JDFComChannel>, null if none are available
 	 */
 	public Collection<JDFComChannel> getAllComChannel()
@@ -370,7 +370,7 @@ public abstract class JDFAutoContact extends JDFResource
 
 	/**
 	 * (25) getCreateCompany
-	 *
+	 * 
 	 * @return JDFCompany the element
 	 */
 	public JDFCompany getCreateCompany()
@@ -410,7 +410,7 @@ public abstract class JDFAutoContact extends JDFResource
 
 	/**
 	 * (25) getCreatePerson
-	 *
+	 * 
 	 * @return JDFPerson the element
 	 */
 	public JDFPerson getCreatePerson()

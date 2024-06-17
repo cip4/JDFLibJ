@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFTrappingParams;
  *****************************************************************************
  * class JDFAutoTrapRegion : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTrapRegion extends JDFResource
@@ -97,8 +97,8 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PAGES, 0x22222222, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.TRAPZONE, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PAGES, 0x2222222222l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TRAPZONE, 0x3333333333l, AttributeInfo.EnumAttributeType.PDFPath, null, null);
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.TRAPPINGPARAMS, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.TRAPPINGPARAMS, 0x6666666666l);
 	}
 
 	@Override
@@ -175,14 +175,13 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Pages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Pages ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Pages
 	 *
@@ -205,9 +204,9 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrapZone
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrapZone ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TrapZone
 	 *
@@ -228,9 +227,8 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 		return getAttribute(AttributeName.TRAPZONE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -245,7 +243,7 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 
 	/**
 	 * (25) getCreateTrappingParams
-	 *
+	 * 
 	 * @return JDFTrappingParams the element
 	 */
 	public JDFTrappingParams getCreateTrappingParams()

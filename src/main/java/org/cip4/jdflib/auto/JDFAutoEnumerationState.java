@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
  *****************************************************************************
  * class JDFAutoEnumerationState : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoEnumerationState extends JDFResource
@@ -100,10 +100,10 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
 	@Override
@@ -115,8 +115,8 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x33333331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUELOC, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUELOC, 0x3333333331l);
 	}
 
 	@Override
@@ -172,14 +172,14 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 		return bRet;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DefaultValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DefaultValue
 	 *
@@ -200,9 +200,10 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 		return getAttribute(AttributeName.DEFAULTVALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CurrentValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CurrentValue
 	 *
@@ -223,9 +224,10 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 		return getAttribute(AttributeName.CURRENTVALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedValueList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueList
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedValueList
 	 *
@@ -249,9 +251,10 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentValueList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentValueList
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentValueList
 	 *
@@ -275,14 +278,13 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateLoc
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
@@ -304,7 +306,7 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 
 	/**
 	 * Get all Loc from the current element
-	 *
+	 * 
 	 * @return Collection<JDFLoc>, null if none are available
 	 */
 	public Collection<JDFLoc> getAllLoc()
@@ -324,7 +326,7 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 
 	/**
 	 * (26) getCreateValueLoc
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFValueLoc the element
 	 */
@@ -346,7 +348,7 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 
 	/**
 	 * Get all ValueLoc from the current element
-	 *
+	 * 
 	 * @return Collection<JDFValueLoc>, null if none are available
 	 */
 	public Collection<JDFValueLoc> getAllValueLoc()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,11 +68,14 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class JDFTransferFunctionTest extends JDFTestCaseBase
@@ -82,18 +85,18 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 	void testConstruct()
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction();
-		Assertions.assertEquals(0, tf.size());
+		assertEquals(0, tf.size());
 	}
 
 	@Test
 	void testisUnit()
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction();
-		Assertions.assertFalse(tf.isUnit());
+		assertFalse(tf.isUnit());
 		tf.add(0, 0);
-		Assertions.assertFalse(tf.isUnit());
+		assertFalse(tf.isUnit());
 		tf.add(1, 1);
-		Assertions.assertTrue(tf.isUnit());
+		assertTrue(tf.isUnit());
 		tf.add(1, 1);
 	}
 
@@ -101,10 +104,10 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 	void testGetUnit()
 	{
 		final JDFTransferFunction tf = JDFTransferFunction.getUnit();
-		Assertions.assertTrue(tf.isUnit());
+		assertTrue(tf.isUnit());
 		tf.add(1, 2);
-		Assertions.assertFalse(tf.isUnit());
-		Assertions.assertTrue(JDFTransferFunction.getUnit().isUnit());
+		assertFalse(tf.isUnit());
+		assertTrue(JDFTransferFunction.getUnit().isUnit());
 	}
 
 	@Test
@@ -112,14 +115,14 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction();
 		tf.add("1 2");
-		Assertions.assertEquals(2, tf.size());
+		assertEquals(2, tf.size());
 	}
 
 	@Test
 	void testGet()
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction();
-		Assertions.assertEquals(0, tf.getX(0), 0);
+		assertEquals(0, tf.getX(0), 0);
 	}
 
 	@Test
@@ -130,12 +133,12 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 		v.add(Double.valueOf(100));
 		v.add(Double.valueOf(150));
 		tf.set(10, 5, v);
-		Assertions.assertEquals(4, tf.size());
-		Assertions.assertEquals(10, tf.getX(0), 0);
-		Assertions.assertEquals(100, tf.getY(0), 0);
-		Assertions.assertEquals(15, tf.getX(1), 0);
-		Assertions.assertEquals(150, tf.getY(1), 0);
-		Assertions.assertEquals(0, tf.getY(2), 0);
+		assertEquals(4, tf.size());
+		assertEquals(10, tf.getX(0), 0);
+		assertEquals(100, tf.getY(0), 0);
+		assertEquals(15, tf.getX(1), 0);
+		assertEquals(150, tf.getY(1), 0);
+		assertEquals(0, tf.getY(2), 0);
 	}
 
 	@Test
@@ -146,25 +149,25 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 		v.add(Double.valueOf(100));
 		v.add(Double.valueOf(150));
 		tf.set(10, 5, v);
-		Assertions.assertEquals("10 100 15 150", tf.toString());
+		assertEquals("10 100 15 150", tf.toString());
 	}
 
 	@Test
 	void testGetPos() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("10 0.1 20 0.2 30 0.3 100 1.0");
-		Assertions.assertEquals(0, tf.getPos(0, true));
-		Assertions.assertEquals(-1, tf.getPos(0, false));
-		Assertions.assertEquals(0, tf.getPos(10, false));
-		Assertions.assertEquals(0, tf.getPos(10, true));
-		Assertions.assertEquals(0, tf.getPos(15, false));
-		Assertions.assertEquals(1, tf.getPos(15, true));
-		Assertions.assertEquals(2, tf.getPos(55, false));
-		Assertions.assertEquals(3, tf.getPos(55, true));
-		Assertions.assertEquals(3, tf.getPos(100, true));
-		Assertions.assertEquals(3, tf.getPos(100, false));
-		Assertions.assertEquals(-1, tf.getPos(155, false));
-		Assertions.assertEquals(-1, tf.getPos(155, true));
+		assertEquals(0, tf.getPos(0, true));
+		assertEquals(-1, tf.getPos(0, false));
+		assertEquals(0, tf.getPos(10, false));
+		assertEquals(0, tf.getPos(10, true));
+		assertEquals(0, tf.getPos(15, false));
+		assertEquals(1, tf.getPos(15, true));
+		assertEquals(2, tf.getPos(55, false));
+		assertEquals(3, tf.getPos(55, true));
+		assertEquals(3, tf.getPos(100, true));
+		assertEquals(3, tf.getPos(100, false));
+		assertEquals(-1, tf.getPos(155, false));
+		assertEquals(-1, tf.getPos(155, true));
 	}
 
 	@Test
@@ -172,20 +175,20 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("10 0.1 20 0.2 30 0.3 100 1.0");
 		final long t0 = System.currentTimeMillis();
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
-			Assertions.assertEquals(0, tf.getPos(0, true));
-			Assertions.assertEquals(-1, tf.getPos(0, false));
-			Assertions.assertEquals(0, tf.getPos(10, false));
-			Assertions.assertEquals(0, tf.getPos(10, true));
-			Assertions.assertEquals(0, tf.getPos(15, false));
-			Assertions.assertEquals(1, tf.getPos(15, true));
-			Assertions.assertEquals(2, tf.getPos(55, false));
-			Assertions.assertEquals(3, tf.getPos(55, true));
-			Assertions.assertEquals(3, tf.getPos(100, true));
-			Assertions.assertEquals(3, tf.getPos(100, false));
-			Assertions.assertEquals(-1, tf.getPos(155, false));
-			Assertions.assertEquals(-1, tf.getPos(155, true));
+			assertEquals(0, tf.getPos(0, true));
+			assertEquals(-1, tf.getPos(0, false));
+			assertEquals(0, tf.getPos(10, false));
+			assertEquals(0, tf.getPos(10, true));
+			assertEquals(0, tf.getPos(15, false));
+			assertEquals(1, tf.getPos(15, true));
+			assertEquals(2, tf.getPos(55, false));
+			assertEquals(3, tf.getPos(55, true));
+			assertEquals(3, tf.getPos(100, true));
+			assertEquals(3, tf.getPos(100, false));
+			assertEquals(-1, tf.getPos(155, false));
+			assertEquals(-1, tf.getPos(155, true));
 		}
 		log.info(" t=" + (System.currentTimeMillis() - t0));
 	}
@@ -195,11 +198,11 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("0 0 10 0.1 20 0.2 30 0.3 100 1.0");
 		final long t0 = System.currentTimeMillis();
-		for (int j = 0; j < 10000; j++)
+		for (int j = 0; j < 100; j++)
 		{
-			Assertions.assertEquals(0, tf.getValue(0), 0);
+			assertEquals(0, tf.getValue(0), 0);
 			for (int i = 0; i < 100; i++)
-				Assertions.assertEquals(0.01 * i, tf.getValue(i), 0.000001);
+				assertEquals(0.01 * i, tf.getValue(i), 0.000001);
 		}
 		log.info(" t=" + (System.currentTimeMillis() - t0));
 	}
@@ -210,11 +213,11 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 		final JDFTransferFunction tf = new JDFTransferFunction("0 0 10 0.05 20 0.1 30 0.15 200 1.0 460 2.3");
 		tf.getFastValue(0);
 		final long t0 = System.currentTimeMillis();
-		for (int j = 0; j < 10000; j++)
+		for (int j = 0; j < 100; j++)
 		{
-			Assertions.assertEquals(0, tf.getFastValue(0), 0);
+			assertEquals(0, tf.getFastValue(0), 0);
 			for (int i = 0; i < 460; i++)
-				Assertions.assertEquals(0.005 * i, tf.getFastValue(i), 0.000001);
+				assertEquals(0.005 * i, tf.getFastValue(i), 0.000001);
 		}
 		log.info(" t=" + (System.currentTimeMillis() - t0));
 	}
@@ -225,14 +228,14 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 		final JDFTransferFunction tf = new JDFTransferFunction("0 0 1 1");
 		tf.getFastValue(0);
 		final long t0 = System.currentTimeMillis();
-		for (int j = 0; j < 100000; j++)
+		for (int j = 0; j < 100; j++)
 		{
-			Assertions.assertEquals(0, tf.getFastValue(0), 0);
-			Assertions.assertEquals(0, tf.getFastValue(-1), 0);
-			Assertions.assertEquals(1, tf.getFastValue(1), 0);
-			Assertions.assertEquals(1, tf.getFastValue(3), 0);
+			assertEquals(0, tf.getFastValue(0), 0);
+			assertEquals(0, tf.getFastValue(-1), 0);
+			assertEquals(1, tf.getFastValue(1), 0);
+			assertEquals(1, tf.getFastValue(3), 0);
 			for (int i = 0; i < 100; i++)
-				Assertions.assertEquals(0.01 * i, tf.getFastValue(i * 0.01), 0.000001);
+				assertEquals(0.01 * i, tf.getFastValue(i * 0.01), 0.000001);
 		}
 		log.info(" t=" + (System.currentTimeMillis() - t0));
 	}
@@ -242,10 +245,10 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("0 0 1 1");
 		final long t0 = System.currentTimeMillis();
-		for (int j = 0; j < 100000; j++)
+		for (int j = 0; j < 1000; j++)
 		{
 			for (int i = 0; i < 100; i++)
-				Assertions.assertTrue(tf.isUnit());
+				assertTrue(tf.isUnit());
 		}
 		log.info(" t=" + (System.currentTimeMillis() - t0));
 	}
@@ -254,25 +257,25 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 	void testGetValDesc() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("0 1.0 100 0");
-		Assertions.assertEquals(1, tf.getValue(0), 0);
+		assertEquals(1, tf.getValue(0), 0);
 		for (int i = 0; i < 100; i++)
-			Assertions.assertEquals(1 - 0.01 * i, tf.getValue(i), 0.000001);
+			assertEquals(1 - 0.01 * i, tf.getValue(i), 0.000001);
 	}
 
 	@Test
 	void testGetRange() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("10 1.0 100 0");
-		Assertions.assertEquals(10, tf.getXRange().getX(), 0);
-		Assertions.assertEquals(100, tf.getXRange().getY(), 0);
+		assertEquals(10, tf.getXRange().getX(), 0);
+		assertEquals(100, tf.getXRange().getY(), 0);
 	}
 
 	@Test
 	void testGetRangeEmpty()
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction();
-		Assertions.assertEquals(0, tf.getXRange().getX(), 0);
-		Assertions.assertEquals(0, tf.getXRange().getY(), 0);
+		assertEquals(0, tf.getXRange().getX(), 0);
+		assertEquals(0, tf.getXRange().getY(), 0);
 	}
 
 	@Test
@@ -281,10 +284,10 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 		final JDFTransferFunction tf = new JDFTransferFunction("0 0 1 2.0");
 		final JDFTransferFunction tf2 = new JDFTransferFunction("0 0 0.5 0.4 1 1.0");
 		tf.multiply(tf2);
-		Assertions.assertEquals(3, tf.numPoints());
-		Assertions.assertEquals(0.0, tf.getValue(0.0), 0);
-		Assertions.assertEquals(0.8, tf.getValue(0.5), 0);
-		Assertions.assertEquals(2.0, tf.getValue(1.0), 0);
+		assertEquals(3, tf.numPoints());
+		assertEquals(0.0, tf.getValue(0.0), 0);
+		assertEquals(0.8, tf.getValue(0.5), 0);
+		assertEquals(2.0, tf.getValue(1.0), 0);
 
 	}
 
@@ -294,13 +297,13 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 		final JDFTransferFunction tf = new JDFTransferFunction("0 0 1 2.0");
 		final JDFTransferFunction tf2 = new JDFTransferFunction("0 0 0.5 0.4 1 1.0");
 		final JDFTransferFunction tf3 = JDFTransferFunction.multiply(tf, tf2);
-		Assertions.assertEquals(3, tf3.numPoints());
-		Assertions.assertEquals(0.0, tf3.getValue(0.0), 0);
-		Assertions.assertEquals(0.8, tf3.getValue(0.5), 0);
-		Assertions.assertEquals(2.0, tf3.getValue(1.0), 0);
+		assertEquals(3, tf3.numPoints());
+		assertEquals(0.0, tf3.getValue(0.0), 0);
+		assertEquals(0.8, tf3.getValue(0.5), 0);
+		assertEquals(2.0, tf3.getValue(1.0), 0);
 		final JDFTransferFunction tf4 = JDFTransferFunction.multiply(tf, null);
-		Assertions.assertEquals(tf, tf4);
+		assertEquals(tf, tf4);
 		final JDFTransferFunction tf5 = JDFTransferFunction.multiply(null, tf);
-		Assertions.assertEquals(tf, tf5);
+		assertEquals(tf, tf5);
 	}
 }

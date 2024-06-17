@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -103,9 +103,9 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ICCPROFILEUSAGE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumICCProfileUsage.getEnum(0), "UsePDL");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COLORMANAGEMENTSYSTEM, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.CONVERTDEVINDEPCOLORS, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ICCPROFILEUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumICCProfileUsage.getEnum(0), "UsePDL");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COLORMANAGEMENTSYSTEM, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CONVERTDEVINDEPCOLORS, 0x4444444443l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
 	@Override
@@ -117,8 +117,8 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORSPACECONVERSIONOP, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORSPACECONVERSIONOP, 0x3333333333l);
 	}
 
 	@Override
@@ -129,7 +129,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoColorSpaceConversionParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -140,7 +140,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoColorSpaceConversionParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -152,7 +152,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoColorSpaceConversionParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -169,7 +169,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -256,7 +256,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	 */
 	/**
 	 * (5) set attribute ICCProfileUsage
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setICCProfileUsage(EnumICCProfileUsage enumVar)
@@ -266,7 +266,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * (9) get attribute ICCProfileUsage
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumICCProfileUsage getICCProfileUsage()
@@ -280,7 +280,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	 */
 	/**
 	 * (36) set attribute ColorManagementSystem
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setColorManagementSystem(String value)
@@ -290,7 +290,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * (23) get String attribute ColorManagementSystem
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getColorManagementSystem()
@@ -304,7 +304,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	 */
 	/**
 	 * (36) set attribute ConvertDevIndepColors
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setConvertDevIndepColors(boolean value)
@@ -314,7 +314,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * (18) get boolean attribute ConvertDevIndepColors
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getConvertDevIndepColors()
@@ -339,7 +339,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * (27) const get element FileSpec
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element default is getFileSpec(0)
 	 */
@@ -360,7 +360,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * (30) append element FileSpec
-	 * 
+	 *
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec appendFileSpec()
@@ -370,7 +370,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refFileSpec(JDFFileSpec refTarget)
@@ -391,7 +391,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * (27) const get element ColorSpaceConversionOp
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorSpaceConversionOp the element default is getColorSpaceConversionOp(0)
 	 */
@@ -412,7 +412,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
 	/**
 	 * (30) append element ColorSpaceConversionOp
-	 * 
+	 *
 	 * @return JDFColorSpaceConversionOp the element
 	 */
 	public JDFColorSpaceConversionOp appendColorSpaceConversionOp()

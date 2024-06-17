@@ -156,7 +156,7 @@ class AutoClassInstantiateVisitor implements DirectoryVisitor
 		createdClass = createdClass.substring(createdClass.lastIndexOf(".") + 1);
 
 		result = elementName.equals(createdClass.substring("JDF".length())) || (elementName.equals(ElementName.COLORSUSED) && createdClass.equals("JDFSeparationList"))
-				|| (elementName.equals(ElementName.CONTENTMETADATA) && createdClass.equals("JDFContentMetaData"))
+				|| (elementName.equals(ElementName.CONTENTMETADATA) && createdClass.equals("JDFContentMetadata"))
 				|| (elementName.equals(ElementName.SHAPE) && createdClass.equals("JDFShapeElement"))
 				|| (elementName.endsWith(JDFConstants.LINK) && createdClass.substring("JDF".length()).equals(ElementName.RESOURCELINK));
 

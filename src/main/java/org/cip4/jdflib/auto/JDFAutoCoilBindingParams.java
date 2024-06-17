@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
  *****************************************************************************
  * class JDFAutoCoilBindingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCoilBindingParams extends JDFResource
@@ -101,14 +101,14 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TUCKED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.COLOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.COLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.DIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MATERIAL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMaterial.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SHIFT, 0x44444433, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.THICKNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TUCKED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BRAND, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.COLOR, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COLORDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.DIAMETER, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MATERIAL, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMaterial.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SHIFT, 0x4444444433l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.THICKNESS, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x6666666611l);
 	}
 
 	@Override
@@ -195,7 +195,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMaterial(String name)
+		protected EnumMaterial(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -254,14 +254,13 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 		public static final EnumMaterial ZincsSteel = new EnumMaterial("ZincsSteel");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Tucked
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Tucked ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Tucked
 	 *
@@ -282,9 +281,9 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 		return getBoolAttribute(AttributeName.TUCKED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Brand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Brand ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Brand
 	 *
@@ -307,9 +306,9 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 		return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Color
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Color ---------------------------------------------------------------------
+	 */
 	/**
 	 * (13) set attribute Color
 	 *
@@ -334,9 +333,10 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ColorDetails
 	 *
@@ -357,9 +357,9 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 		return getAttribute(AttributeName.COLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Diameter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Diameter ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Diameter
 	 *
@@ -380,9 +380,9 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.DIAMETER, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Material
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Material ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Material
 	 *
@@ -403,9 +403,9 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 		return EnumMaterial.getEnum(getAttribute(AttributeName.MATERIAL, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Shift
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Shift ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Shift
 	 *
@@ -426,9 +426,9 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.SHIFT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Thickness
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Thickness ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Thickness
 	 *
@@ -449,9 +449,8 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.THICKNESS, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -466,7 +465,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 
 	/**
 	 * (25) getCreateHoleMakingParams
-	 *
+	 * 
 	 * @return JDFHoleMakingParams the element
 	 */
 	public JDFHoleMakingParams getCreateHoleMakingParams()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.jmf.JDFQueueFilter;
  *****************************************************************************
  * class JDFAutoFlushResourceParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoFlushResourceParams extends JDFElement
@@ -100,7 +100,7 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FLUSHPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumFlushPolicy.getEnum(0), "QueueEntry");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FLUSHPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumFlushPolicy.getEnum(0), "QueueEntry");
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x6666666611l);
 	}
 
 	@Override
@@ -167,7 +167,7 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumFlushPolicy(String name)
+		protected EnumFlushPolicy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -222,14 +222,13 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 		public static final EnumFlushPolicy Intermediate = new EnumFlushPolicy("Intermediate");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FlushPolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FlushPolicy ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute FlushPolicy
 	 *
@@ -250,9 +249,8 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 		return EnumFlushPolicy.getEnum(getAttribute(AttributeName.FLUSHPOLICY, null, "QueueEntry"));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -267,7 +265,7 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 
 	/**
 	 * (25) getCreateQueueFilter
-	 *
+	 * 
 	 * @return JDFQueueFilter the element
 	 */
 	public JDFQueueFilter getCreateQueueFilter()

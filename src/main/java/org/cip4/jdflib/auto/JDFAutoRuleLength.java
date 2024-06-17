@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoRuleLength : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoRuleLength extends JDFElement
@@ -91,8 +91,8 @@ public abstract class JDFAutoRuleLength extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DDESCUTTYPE, 0x22221111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.LENGTHJDF, 0x22221111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DDESCUTTYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LENGTHJDF, 0x2222222222l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -137,14 +137,13 @@ public abstract class JDFAutoRuleLength extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DDESCutType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DDESCutType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DDESCutType
 	 *
@@ -165,9 +164,9 @@ public abstract class JDFAutoRuleLength extends JDFElement
 		return getIntAttribute(AttributeName.DDESCUTTYPE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LengthJDF
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LengthJDF ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LengthJDF
 	 *

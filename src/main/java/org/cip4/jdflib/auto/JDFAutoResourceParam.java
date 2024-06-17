@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoResourceParam : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoResourceParam extends JDFElement
@@ -97,9 +97,9 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTID, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEFAULTJDF, 0x33333331, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTPRIORITY, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumDefaultPriority.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTID, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEFAULTJDF, 0x3333333331l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTPRIORITY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumDefaultPriority.getEnum(0), null);
 	}
 
 	@Override
@@ -154,7 +154,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDefaultPriority(String name)
+		protected EnumDefaultPriority(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -207,14 +207,13 @@ public abstract class JDFAutoResourceParam extends JDFElement
 		public static final EnumDefaultPriority DefaultJDF = new EnumDefaultPriority("DefaultJDF");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DefaultID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefaultID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DefaultID
 	 *
@@ -235,9 +234,9 @@ public abstract class JDFAutoResourceParam extends JDFElement
 		return getAttribute(AttributeName.DEFAULTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DefaultJDF
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefaultJDF ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DefaultJDF
 	 *
@@ -258,9 +257,10 @@ public abstract class JDFAutoResourceParam extends JDFElement
 		return getAttribute(AttributeName.DEFAULTJDF, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DefaultPriority
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefaultPriority
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DefaultPriority
 	 *

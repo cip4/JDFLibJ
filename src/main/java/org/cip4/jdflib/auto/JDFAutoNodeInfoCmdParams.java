@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.JDFPart;
  *****************************************************************************
  * class JDFAutoNodeInfoCmdParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
@@ -103,10 +103,10 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.JOBID, 0x44444211, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBPARTID, 0x44444311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x44444311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.UPDATEMETHOD, 0x44444311, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateMethod.getEnum(0), "Complete");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.JOBID, 0x4444444211l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBPARTID, 0x4444444311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x4444444311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.UPDATEMETHOD, 0x4444444311l, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateMethod.getEnum(0), "Complete");
 	}
 
 	@Override
@@ -118,8 +118,8 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x44444311);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.NODEINFO, 0x77777611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x4444444311l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.NODEINFO, 0x7777777611l);
 	}
 
 	@Override
@@ -174,7 +174,7 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumUpdateMethod(String name)
+		protected EnumUpdateMethod(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -229,14 +229,13 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 		public static final EnumUpdateMethod Remove = new EnumUpdateMethod("Remove");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobID
 	 *
@@ -257,9 +256,9 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobPartID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobPartID
 	 *
@@ -280,9 +279,10 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QueueEntryID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute QueueEntryID
 	 *
@@ -303,9 +303,10 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UpdateMethod
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UpdateMethod
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute UpdateMethod
 	 *
@@ -326,14 +327,13 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 		return EnumUpdateMethod.getEnum(getAttribute(AttributeName.UPDATEMETHOD, null, "Complete"));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -355,7 +355,7 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()
@@ -385,7 +385,7 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 
 	/**
 	 * (25) getCreateNodeInfo
-	 *
+	 * 
 	 * @return JDFNodeInfo the element
 	 */
 	public JDFNodeInfo getCreateNodeInfo()

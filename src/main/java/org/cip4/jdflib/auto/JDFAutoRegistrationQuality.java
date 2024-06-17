@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,8 +93,8 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.OFFSET, 0x21111111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.REFERENCE, 0x21111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.OFFSET, 0x2221111111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.REFERENCE, 0x2221111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoRegistrationQuality
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -116,7 +116,7 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoRegistrationQuality
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -128,7 +128,7 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoRegistrationQuality
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -139,17 +139,16 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Offset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Offset
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setOffset(JDFXYPair value)
@@ -159,7 +158,7 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 
 	/**
 	 * (20) get JDFXYPair attribute Offset
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getOffset()
@@ -169,12 +168,12 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Reference
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Reference ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Reference
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setReference(String value)
@@ -184,7 +183,7 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 
 	/**
 	 * (23) get String attribute Reference
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getReference()

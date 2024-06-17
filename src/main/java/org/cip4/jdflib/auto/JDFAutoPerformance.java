@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.util.JDFDuration;
  *****************************************************************************
  * class JDFAutoPerformance : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPerformance extends JDFElement
@@ -93,18 +93,18 @@ public abstract class JDFAutoPerformance extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AVERAGEAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.AVERAGECLEANUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.AVERAGESETUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXCLEANUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MAXSETUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MINAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MINCLEANUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.MINSETUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.NAME, 0x44444431, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.DEVCAPSREF, 0x33333311, AttributeInfo.EnumAttributeType.IDREF, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.UNIT, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AVERAGEAMOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AVERAGECLEANUP, 0x3333333331l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.AVERAGESETUP, 0x3333333331l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXAMOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXCLEANUP, 0x3333333331l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MAXSETUP, 0x3333333331l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MINAMOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MINCLEANUP, 0x3333333331l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.MINSETUP, 0x3333333331l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.NAME, 0x4444444431l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.DEVCAPSREF, 0x3333333311l, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.UNIT, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -149,14 +149,14 @@ public abstract class JDFAutoPerformance extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AverageAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AverageAmount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AverageAmount
 	 *
@@ -177,9 +177,10 @@ public abstract class JDFAutoPerformance extends JDFElement
 		return getRealAttribute(AttributeName.AVERAGEAMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AverageCleanup
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AverageCleanup
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AverageCleanup
 	 *
@@ -202,9 +203,10 @@ public abstract class JDFAutoPerformance extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AverageSetup
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AverageSetup
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AverageSetup
 	 *
@@ -227,9 +229,9 @@ public abstract class JDFAutoPerformance extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxAmount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxAmount
 	 *
@@ -250,9 +252,9 @@ public abstract class JDFAutoPerformance extends JDFElement
 		return getRealAttribute(AttributeName.MAXAMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxCleanup
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxCleanup ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxCleanup
 	 *
@@ -275,9 +277,9 @@ public abstract class JDFAutoPerformance extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxSetup
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxSetup ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxSetup
 	 *
@@ -300,9 +302,9 @@ public abstract class JDFAutoPerformance extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinAmount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinAmount
 	 *
@@ -323,9 +325,9 @@ public abstract class JDFAutoPerformance extends JDFElement
 		return getRealAttribute(AttributeName.MINAMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinCleanup
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinCleanup ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinCleanup
 	 *
@@ -348,9 +350,9 @@ public abstract class JDFAutoPerformance extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinSetup
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinSetup ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinSetup
 	 *
@@ -373,9 +375,9 @@ public abstract class JDFAutoPerformance extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Name
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Name
 	 *
@@ -396,9 +398,9 @@ public abstract class JDFAutoPerformance extends JDFElement
 		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DevCapsRef
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DevCapsRef ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DevCapsRef
 	 *
@@ -419,9 +421,9 @@ public abstract class JDFAutoPerformance extends JDFElement
 		return getAttribute(AttributeName.DEVCAPSREF, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Unit
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Unit ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Unit
 	 *

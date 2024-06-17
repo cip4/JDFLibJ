@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -98,15 +98,15 @@ public abstract class JDFAutoAddress extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDRESSUSAGE, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CITY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.CIVICNUMBER, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.COUNTRY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.COUNTRYCODE, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.POSTBOX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.POSTALCODE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.REGION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.STREET, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDRESSUSAGE, 0x3333111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CITY, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CIVICNUMBER, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COUNTRY, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.COUNTRYCODE, 0x3333333333l, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.POSTBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.POSTALCODE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.REGION, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.STREET, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -118,8 +118,8 @@ public abstract class JDFAutoAddress extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ADDRESSLINE, 0x33111111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.EXTENDEDADDRESS, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ADDRESSLINE, 0x3333111111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EXTENDEDADDRESS, 0x6666666666l);
 	}
 
 	@Override
@@ -130,7 +130,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoAddress
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -141,7 +141,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoAddress
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -153,7 +153,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoAddress
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -184,17 +184,17 @@ public abstract class JDFAutoAddress extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AddressUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AddressUsage
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AddressUsage
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setAddressUsage(String value)
@@ -204,7 +204,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * (23) get String attribute AddressUsage
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getAddressUsage()
@@ -212,12 +212,12 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.ADDRESSUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute City
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute City ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute City
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCity(String value)
@@ -227,7 +227,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * (23) get String attribute City
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getCity()
@@ -235,12 +235,12 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.CITY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CivicNumber
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CivicNumber ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CivicNumber
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCivicNumber(String value)
@@ -250,7 +250,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * (23) get String attribute CivicNumber
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getCivicNumber()
@@ -258,12 +258,12 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.CIVICNUMBER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Country
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Country ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Country
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCountry(String value)
@@ -273,7 +273,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * (23) get String attribute Country
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getCountry()
@@ -281,12 +281,12 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.COUNTRY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CountryCode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CountryCode ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CountryCode
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setCountryCode(String value)
@@ -296,7 +296,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * (23) get String attribute CountryCode
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getCountryCode()
@@ -304,12 +304,12 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.COUNTRYCODE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PostBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PostBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PostBox
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPostBox(String value)
@@ -319,7 +319,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * (23) get String attribute PostBox
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getPostBox()
@@ -327,12 +327,12 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.POSTBOX, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PostalCode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PostalCode ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PostalCode
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPostalCode(String value)
@@ -342,7 +342,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * (23) get String attribute PostalCode
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getPostalCode()
@@ -350,12 +350,12 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.POSTALCODE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Region
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Region ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Region
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRegion(String value)
@@ -365,7 +365,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * (23) get String attribute Region
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getRegion()
@@ -373,12 +373,12 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.REGION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Street
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Street ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Street
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setStreet(String value)
@@ -388,7 +388,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * (23) get String attribute Street
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getStreet()
@@ -396,9 +396,8 @@ public abstract class JDFAutoAddress extends JDFResource
 		return getAttribute(AttributeName.STREET, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -414,7 +413,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * (27) const get element AddressLine
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element default is getAddressLine(0)
 	 */
@@ -435,7 +434,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * (30) append element AddressLine
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement appendAddressLine()
@@ -445,7 +444,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * (24) const get element ExtendedAddress
-	 * 
+	 *
 	 * @return JDFElement the element
 	 */
 	public JDFElement getExtendedAddress()
@@ -465,7 +464,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * (29) append element ExtendedAddress
-	 * 
+	 *
 	 * @return JDFElement the element @ if the element already exists
 	 */
 	public JDFElement appendExtendedAddress()

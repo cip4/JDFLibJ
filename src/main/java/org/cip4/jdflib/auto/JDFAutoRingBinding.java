@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoRingBinding : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoRingBinding extends JDFElement
@@ -96,15 +96,15 @@ public abstract class JDFAutoRingBinding extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[9];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDERBRAND, 0x66666111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.BINDERMATERIAL, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.HOLETYPE, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.RINGDIAMETER, 0x66666666);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.RINGMECHANIC, 0x66666666);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.RINGSHAPE, 0x66666666);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.RINGSYSTEM, 0x77777776);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.RIVETSEXPOSED, 0x66666666);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.VIEWBINDER, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDERBRAND, 0x6666666111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.BINDERMATERIAL, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.HOLETYPE, 0x6666666661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.RINGDIAMETER, 0x6666666666l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.RINGMECHANIC, 0x6666666666l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.RINGSHAPE, 0x6666666666l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.RINGSYSTEM, 0x7777777776l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.RIVETSEXPOSED, 0x6666666666l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.VIEWBINDER, 0x6666666666l);
 	}
 
 	@Override
@@ -149,9 +149,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -166,7 +165,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (25) getCreateBinderBrand
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateBinderBrand()
@@ -196,7 +195,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (25) getCreateBinderMaterial
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateBinderMaterial()
@@ -226,7 +225,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (25) getCreateHoleType
-	 *
+	 * 
 	 * @return JDFSpanHoleType the element
 	 */
 	public JDFSpanHoleType getCreateHoleType()
@@ -256,7 +255,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (25) getCreateRingDiameter
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateRingDiameter()
@@ -286,7 +285,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (25) getCreateRingMechanic
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateRingMechanic()
@@ -316,7 +315,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (25) getCreateRingShape
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateRingShape()
@@ -346,7 +345,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (25) getCreateRingSystem
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateRingSystem()
@@ -376,7 +375,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (25) getCreateRivetsExposed
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateRivetsExposed()
@@ -406,7 +405,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (25) getCreateViewBinder
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateViewBinder()

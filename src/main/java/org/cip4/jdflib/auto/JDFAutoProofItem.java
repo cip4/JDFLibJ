@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,7 +97,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoProofItem : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoProofItem extends JDFElement
@@ -108,10 +108,10 @@ public abstract class JDFAutoProofItem extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTRACT, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PAGEINDEX, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PROOFNAME, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PROOFTARGET, 0x33333331, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTRACT, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PAGEINDEX, 0x3333333331l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PROOFNAME, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PROOFTARGET, 0x3333333331l, AttributeInfo.EnumAttributeType.URL, null, null);
 	}
 
 	@Override
@@ -123,16 +123,16 @@ public abstract class JDFAutoProofItem extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[10];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.AMOUNT, 0x66666661);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.BRANDNAME, 0x66666661);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORTYPE, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.HALFTONE, 0x66666661);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.IMAGESTRATEGY, 0x66666611);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.TECHNOLOGY, 0x66666661);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.PROOFTYPE, 0x66666661);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.APPROVALPARAMS, 0x66666611);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.FILESPEC, 0x61111111);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.AMOUNT, 0x6666666661l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.BRANDNAME, 0x6666666661l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORTYPE, 0x6666666661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.HALFTONE, 0x6666666661l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.IMAGESTRATEGY, 0x6666666611l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.TECHNOLOGY, 0x6666666661l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.PROOFTYPE, 0x6666666661l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.APPROVALPARAMS, 0x6666666611l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.FILESPEC, 0x6661111111l);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x3333333331l);
 	}
 
 	@Override
@@ -177,14 +177,13 @@ public abstract class JDFAutoProofItem extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Contract
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Contract ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Contract
 	 *
@@ -205,9 +204,9 @@ public abstract class JDFAutoProofItem extends JDFElement
 		return getBoolAttribute(AttributeName.CONTRACT, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageIndex ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PageIndex
 	 *
@@ -230,9 +229,9 @@ public abstract class JDFAutoProofItem extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProofName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProofName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ProofName
 	 *
@@ -253,9 +252,9 @@ public abstract class JDFAutoProofItem extends JDFElement
 		return getAttribute(AttributeName.PROOFNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProofTarget
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProofTarget ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ProofTarget
 	 *
@@ -276,9 +275,8 @@ public abstract class JDFAutoProofItem extends JDFElement
 		return getAttribute(AttributeName.PROOFTARGET, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -293,7 +291,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateAmount
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreateAmount()
@@ -323,7 +321,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateBrandName
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateBrandName()
@@ -353,7 +351,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateColorType
-	 *
+	 * 
 	 * @return JDFSpanColorType the element
 	 */
 	public JDFSpanColorType getCreateColorType()
@@ -383,7 +381,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateHalfTone
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateHalfTone()
@@ -413,7 +411,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateImageStrategy
-	 *
+	 * 
 	 * @return JDFSpanImageStrategy the element
 	 */
 	public JDFSpanImageStrategy getCreateImageStrategy()
@@ -443,7 +441,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateTechnology
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateTechnology()
@@ -473,7 +471,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateProofType
-	 *
+	 * 
 	 * @return JDFSpanProofType the element
 	 */
 	public JDFSpanProofType getCreateProofType()
@@ -503,7 +501,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateApprovalParams
-	 *
+	 * 
 	 * @return JDFApprovalParams the element
 	 */
 	public JDFApprovalParams getCreateApprovalParams()
@@ -543,7 +541,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()
@@ -563,7 +561,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * (26) getCreateSeparationSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
@@ -585,7 +583,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 
 	/**
 	 * Get all SeparationSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFSeparationSpec>, null if none are available
 	 */
 	public Collection<JDFSeparationSpec> getAllSeparationSpec()

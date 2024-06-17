@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,7 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -90,12 +91,13 @@ import org.cip4.jdflib.resource.JDFShapeElement;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFRuleLength;
 
 /**
  *****************************************************************************
  * class JDFAutoShapeDef : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoShapeDef extends JDFResource
@@ -106,14 +108,14 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AREA, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CUTBOX, 0x33331111, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DIMENSIONS, 0x33331111, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.FLATDIMENSIONS, 0x33311111, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.FLUTEDIRECTION, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumFluteDirection.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.GRAINDIRECTION, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumGrainDirection.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MEDIASIDE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumMediaSide.getEnum(0), null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.RESOURCEWEIGHT, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AREA, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CUTBOX, 0x3333331111l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DIMENSIONS, 0x3333331111l, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.FLATDIMENSIONS, 0x3333311111l, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.FLUTEDIRECTION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumFluteDirection.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.GRAINDIRECTION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumGrainDirection.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MEDIASIDE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumMediaSide.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.RESOURCEWEIGHT, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -122,14 +124,15 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORPOOL, 0x66661111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.CUTLINES, 0x66661111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.FILESPEC, 0x66661111);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.MEDIA, 0x66661111);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.SHAPE, 0x66661111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORPOOL, 0x6666661111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CUTLINES, 0x6666661111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.FILESPEC, 0x3333331111l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.MEDIA, 0x6666661111l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.RULELENGTH, 0x3333331111l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.SHAPE, 0x6666661111l);
 	}
 
 	@Override
@@ -204,7 +207,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumFluteDirection(String name)
+		protected EnumFluteDirection(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -277,7 +280,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumGrainDirection(String name)
+		protected EnumGrainDirection(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -350,7 +353,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMediaSide(String name)
+		protected EnumMediaSide(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -405,14 +408,13 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		public static final EnumMediaSide Both = new EnumMediaSide("Both");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Area
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Area ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Area
 	 *
@@ -433,9 +435,9 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		return getRealAttribute(AttributeName.AREA, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CutBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CutBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CutBox
 	 *
@@ -458,9 +460,9 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Dimensions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Dimensions ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Dimensions
 	 *
@@ -483,9 +485,10 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FlatDimensions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FlatDimensions
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FlatDimensions
 	 *
@@ -508,9 +511,10 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FluteDirection
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FluteDirection
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute FluteDirection
 	 *
@@ -531,9 +535,10 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		return EnumFluteDirection.getEnum(getAttribute(AttributeName.FLUTEDIRECTION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GrainDirection
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GrainDirection
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute GrainDirection
 	 *
@@ -554,9 +559,9 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		return EnumGrainDirection.getEnum(getAttribute(AttributeName.GRAINDIRECTION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MediaSide
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MediaSide ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute MediaSide
 	 *
@@ -577,9 +582,10 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		return EnumMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ResourceWeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ResourceWeight
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ResourceWeight
 	 *
@@ -602,9 +608,8 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		return getRealAttribute(AttributeName.RESOURCEWEIGHT, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -619,7 +624,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 
 	/**
 	 * (25) getCreateColorPool
-	 *
+	 * 
 	 * @return JDFColorPool the element
 	 */
 	public JDFColorPool getCreateColorPool()
@@ -659,7 +664,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 
 	/**
 	 * (25) getCreateCutLines
-	 *
+	 * 
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getCreateCutLines()
@@ -678,33 +683,45 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	}
 
 	/**
-	 * (24) const get element FileSpec
-	 *
+	 * (26) getCreateFileSpec
+	 * 
+	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getFileSpec()
+	public JDFFileSpec getCreateFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**
-	 * (25) getCreateFileSpec
+	 * (27) const get element FileSpec
 	 *
-	 * @return JDFFileSpec the element
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element default is getFileSpec(0)
 	 */
-	public JDFFileSpec getCreateFileSpec()
+	public JDFFileSpec getFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**
-	 * (29) append element FileSpec
+	 * Get all FileSpec from the current element
+	 * 
+	 * @return Collection<JDFFileSpec>, null if none are available
+	 */
+	public Collection<JDFFileSpec> getAllFileSpec()
+	{
+		return getChildArrayByClass(JDFFileSpec.class, false, 0);
+	}
+
+	/**
+	 * (30) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
-		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+		return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
 	}
 
 	/**
@@ -729,7 +746,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()
@@ -758,6 +775,48 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	}
 
 	/**
+	 * (26) getCreateRuleLength
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFRuleLength the element
+	 */
+	public JDFRuleLength getCreateRuleLength(int iSkip)
+	{
+		return (JDFRuleLength) getCreateElement_JDFElement(ElementName.RULELENGTH, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element RuleLength
+	 *
+	 * @param iSkip number of elements to skip
+	 * @return JDFRuleLength the element default is getRuleLength(0)
+	 */
+	public JDFRuleLength getRuleLength(int iSkip)
+	{
+		return (JDFRuleLength) getElement(ElementName.RULELENGTH, null, iSkip);
+	}
+
+	/**
+	 * Get all RuleLength from the current element
+	 * 
+	 * @return Collection<JDFRuleLength>, null if none are available
+	 */
+	public Collection<JDFRuleLength> getAllRuleLength()
+	{
+		return getChildArrayByClass(JDFRuleLength.class, false, 0);
+	}
+
+	/**
+	 * (30) append element RuleLength
+	 *
+	 * @return JDFRuleLength the element
+	 */
+	public JDFRuleLength appendRuleLength()
+	{
+		return (JDFRuleLength) appendElement(ElementName.RULELENGTH, null);
+	}
+
+	/**
 	 * (24) const get element Shape
 	 *
 	 * @return JDFShapeElement the element
@@ -769,7 +828,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 
 	/**
 	 * (25) getCreateShape
-	 *
+	 * 
 	 * @return JDFShapeElement the element
 	 */
 	public JDFShapeElement getCreateShape()

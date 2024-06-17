@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
  *****************************************************************************
  * class JDFAutoDigitalMedia : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDigitalMedia extends JDFResource
@@ -100,10 +100,10 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MEDIATYPE, 0x22222211, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CAPACITY, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MEDIALABEL, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MEDIATYPEDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MEDIATYPE, 0x2222222211l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CAPACITY, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MEDIALABEL, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MEDIATYPEDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -115,9 +115,9 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.RUNLIST, 0x66666611);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x33333311);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.RUNLIST, 0x6666666611l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x3333333311l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x3333333311l);
 	}
 
 	@Override
@@ -182,14 +182,13 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 		return JDFResource.EnumResourceClass.Handling;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MediaType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MediaType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MediaType
 	 *
@@ -210,9 +209,9 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 		return getAttribute(AttributeName.MEDIATYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Capacity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Capacity ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Capacity
 	 *
@@ -233,9 +232,9 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 		return getIntAttribute(AttributeName.CAPACITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MediaLabel
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MediaLabel ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MediaLabel
 	 *
@@ -256,9 +255,10 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 		return getAttribute(AttributeName.MEDIALABEL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MediaTypeDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MediaTypeDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MediaTypeDetails
 	 *
@@ -279,9 +279,8 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 		return getAttribute(AttributeName.MEDIATYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -296,7 +295,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (25) getCreateRunList
-	 *
+	 * 
 	 * @return JDFRunList the element
 	 */
 	public JDFRunList getCreateRunList()
@@ -326,7 +325,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -348,7 +347,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -379,7 +378,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * (26) getCreateIdentificationField
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element
 	 */
@@ -403,7 +402,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 
 	/**
 	 * Get all IdentificationField from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIdentificationField>, null if none are available
 	 */
 	public Collection<JDFIdentificationField> getAllIdentificationField()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.jmf.JDFQueueFilter;
  *****************************************************************************
  * class JDFAutoQueueEntryPriParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoQueueEntryPriParams extends JDFElement
@@ -96,8 +96,8 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PRIORITY, 0x22222222, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x44433333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PRIORITY, 0x2222222222l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x4444433333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x66611111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x6666611111l);
 	}
 
 	@Override
@@ -154,14 +154,13 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Priority
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Priority ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Priority
 	 *
@@ -182,9 +181,10 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 		return getIntAttribute(AttributeName.PRIORITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QueueEntryID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute QueueEntryID
 	 *
@@ -205,9 +205,8 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -222,7 +221,7 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 
 	/**
 	 * (25) getCreateQueueFilter
-	 *
+	 * 
 	 * @return JDFQueueFilter the element
 	 */
 	public JDFQueueFilter getCreateQueueFilter()

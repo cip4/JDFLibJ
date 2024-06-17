@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoBlockPreparationParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBlockPreparationParams extends JDFResource
@@ -101,9 +101,9 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKING, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ROUNDING, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TIGHTBACKING, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumTightBacking.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKING, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ROUNDING, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TIGHTBACKING, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumTightBacking.getEnum(0), null);
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.REGISTERRIBBON, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.REGISTERRIBBON, 0x3333333331l);
 	}
 
 	@Override
@@ -190,7 +190,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumTightBacking(String name)
+		protected EnumTightBacking(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -247,14 +247,13 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 		public static final EnumTightBacking RoundBacked = new EnumTightBacking("RoundBacked");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Backing
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Backing ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Backing
 	 *
@@ -275,9 +274,9 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 		return getRealAttribute(AttributeName.BACKING, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Rounding
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Rounding ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Rounding
 	 *
@@ -298,9 +297,10 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 		return getRealAttribute(AttributeName.ROUNDING, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TightBacking
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TightBacking
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute TightBacking
 	 *
@@ -321,14 +321,13 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 		return EnumTightBacking.getEnum(getAttribute(AttributeName.TIGHTBACKING, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateRegisterRibbon
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegisterRibbon the element
 	 */
@@ -350,7 +349,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 
 	/**
 	 * Get all RegisterRibbon from the current element
-	 *
+	 * 
 	 * @return Collection<JDFRegisterRibbon>, null if none are available
 	 */
 	public Collection<JDFRegisterRibbon> getAllRegisterRibbon()

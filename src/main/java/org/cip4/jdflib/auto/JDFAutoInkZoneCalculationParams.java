@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoInkZoneCalculationParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
@@ -97,12 +97,12 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOUNTAINPOSITIONS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRINTABLEAREA, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ZONEWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ZONES, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ZONESY, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.ZONEHEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOUNTAINPOSITIONS, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRINTABLEAREA, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ZONEWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ZONES, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ZONESY, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ZONEHEIGHT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x6666666611l);
 	}
 
 	@Override
@@ -179,14 +179,14 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FountainPositions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FountainPositions
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FountainPositions
 	 *
@@ -209,9 +209,10 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PrintableArea
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PrintableArea
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PrintableArea
 	 *
@@ -234,9 +235,9 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ZoneWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ZoneWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ZoneWidth
 	 *
@@ -257,9 +258,9 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		return getRealAttribute(AttributeName.ZONEWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Zones
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Zones ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Zones
 	 *
@@ -280,9 +281,9 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		return getIntAttribute(AttributeName.ZONES, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ZonesY
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ZonesY ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ZonesY
 	 *
@@ -303,9 +304,9 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		return getIntAttribute(AttributeName.ZONESY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ZoneHeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ZoneHeight ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ZoneHeight
 	 *
@@ -326,9 +327,8 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 		return getRealAttribute(AttributeName.ZONEHEIGHT, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -343,7 +343,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 
 	/**
 	 * (25) getCreateDevice
-	 *
+	 * 
 	 * @return JDFDevice the element
 	 */
 	public JDFDevice getCreateDevice()

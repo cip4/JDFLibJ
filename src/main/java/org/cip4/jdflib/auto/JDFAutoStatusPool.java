@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.pool.JDFPool;
  *****************************************************************************
  * class JDFAutoStatusPool : public JDFPool
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStatusPool extends JDFPool
@@ -98,8 +98,8 @@ public abstract class JDFAutoStatusPool extends JDFPool
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x44444333, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x44444311, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x4444444333l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x4444444311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public abstract class JDFAutoStatusPool extends JDFPool
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PARTSTATUS, 0x44444333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PARTSTATUS, 0x4444444333l);
 	}
 
 	@Override
@@ -156,14 +156,14 @@ public abstract class JDFAutoStatusPool extends JDFPool
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StatusDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StatusDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StatusDetails
 	 *
@@ -184,14 +184,13 @@ public abstract class JDFAutoStatusPool extends JDFPool
 		return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatePartStatus
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPartStatus the element
 	 */
@@ -213,7 +212,7 @@ public abstract class JDFAutoStatusPool extends JDFPool
 
 	/**
 	 * Get all PartStatus from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPartStatus>, null if none are available
 	 */
 	public Collection<JDFPartStatus> getAllPartStatus()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
  *****************************************************************************
  * class JDFAutoStripBindingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStripBindingParams extends JDFResource
@@ -96,11 +96,11 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BRAND, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DISTANCE, 0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.LENGTHJDF, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.STRIPCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.STRIPCOLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BRAND, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DISTANCE, 0x4444444431l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.LENGTHJDF, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.STRIPCOLOR, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.STRIPCOLORDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x6666666661l);
 	}
 
 	@Override
@@ -177,14 +177,13 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Brand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Brand ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Brand
 	 *
@@ -207,9 +206,9 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 		return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Distance
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Distance ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Distance
 	 *
@@ -230,9 +229,9 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.DISTANCE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LengthJDF
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LengthJDF ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LengthJDF
 	 *
@@ -253,9 +252,9 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.LENGTHJDF, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StripColor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StripColor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (13) set attribute StripColor
 	 *
@@ -280,9 +279,10 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StripColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StripColorDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StripColorDetails
 	 *
@@ -303,9 +303,8 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 		return getAttribute(AttributeName.STRIPCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -320,7 +319,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 
 	/**
 	 * (25) getCreateHoleMakingParams
-	 *
+	 * 
 	 * @return JDFHoleMakingParams the element
 	 */
 	public JDFHoleMakingParams getCreateHoleMakingParams()

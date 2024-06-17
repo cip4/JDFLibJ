@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoPipeParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPipeParams extends JDFElement
@@ -99,12 +99,12 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PIPEID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PROJECTID, 0x33311111, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), "InProgress");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.UPDATEDSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.JOBID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PIPEID, 0x2222222222l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PROJECTID, 0x3333311111l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.STATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), "InProgress");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.UPDATEDSTATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
 	}
 
 	@Override
@@ -116,8 +116,8 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.AMOUNTPOOL, 0x66611111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.AMOUNTPOOL, 0x6666611111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.RESOURCE, 0x3333333333l);
 	}
 
 	@Override
@@ -162,14 +162,13 @@ public abstract class JDFAutoPipeParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobID
 	 *
@@ -190,9 +189,9 @@ public abstract class JDFAutoPipeParams extends JDFElement
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobPartID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobPartID
 	 *
@@ -213,9 +212,9 @@ public abstract class JDFAutoPipeParams extends JDFElement
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PipeID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PipeID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PipeID
 	 *
@@ -236,9 +235,9 @@ public abstract class JDFAutoPipeParams extends JDFElement
 		return getAttribute(AttributeName.PIPEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProjectID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProjectID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ProjectID
 	 *
@@ -259,9 +258,10 @@ public abstract class JDFAutoPipeParams extends JDFElement
 		return getAttribute(AttributeName.PROJECTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UpdatedStatus
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UpdatedStatus
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute UpdatedStatus
 	 *
@@ -282,9 +282,8 @@ public abstract class JDFAutoPipeParams extends JDFElement
 		return JDFResource.EnumResStatus.getEnum(getAttribute(AttributeName.UPDATEDSTATUS, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -299,7 +298,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 
 	/**
 	 * (25) getCreateAmountPool
-	 *
+	 * 
 	 * @return JDFAmountPool the element
 	 */
 	public JDFAmountPool getCreateAmountPool()
@@ -319,7 +318,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 
 	/**
 	 * (26) getCreateResource
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFResource the element
 	 */
@@ -341,7 +340,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 
 	/**
 	 * Get all Resource from the current element
-	 *
+	 * 
 	 * @return Collection<JDFResource>, null if none are available
 	 */
 	public Collection<JDFResource> getAllResource()

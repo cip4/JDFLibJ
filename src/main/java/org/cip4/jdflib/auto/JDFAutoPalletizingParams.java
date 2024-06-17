@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoPalletizingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPalletizingParams extends JDFResource
@@ -100,12 +100,12 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.LAYERAMOUNT, 0x33331111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MAXHEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXWEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.OVERHANG, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.OVERHANGOFFSET, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PATTERN, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LAYERAMOUNT, 0x3333331111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MAXHEIGHT, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXWEIGHT, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OVERHANG, 0x3333331111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.OVERHANGOFFSET, 0x3333331111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PATTERN, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BUNDLE, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BUNDLE, 0x3333333331l);
 	}
 
 	@Override
@@ -182,14 +182,13 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LayerAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LayerAmount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LayerAmount
 	 *
@@ -212,9 +211,9 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxHeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxHeight ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxHeight
 	 *
@@ -235,9 +234,9 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 		return getRealAttribute(AttributeName.MAXHEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxWeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxWeight ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxWeight
 	 *
@@ -258,9 +257,9 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 		return getRealAttribute(AttributeName.MAXWEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Overhang
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Overhang ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Overhang
 	 *
@@ -283,9 +282,10 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OverhangOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OverhangOffset
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OverhangOffset
 	 *
@@ -308,9 +308,9 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Pattern
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Pattern ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Pattern
 	 *
@@ -331,14 +331,13 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 		return getAttribute(AttributeName.PATTERN, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateBundle
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFBundle the element
 	 */
@@ -360,7 +359,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 
 	/**
 	 * Get all Bundle from the current element
-	 *
+	 * 
 	 * @return Collection<JDFBundle>, null if none are available
 	 */
 	public Collection<JDFBundle> getAllBundle()

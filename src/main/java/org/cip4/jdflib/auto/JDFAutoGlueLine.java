@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoGlueLine : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoGlueLine extends JDFResource
@@ -98,16 +98,16 @@ public abstract class JDFAutoGlueLine extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AREAGLUE, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.GLUEBRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.GLUELINEWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.GLUINGPATTERN, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.GLUETYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumGlueType.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MELTINGTEMPERATURE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.RELATIVESTARTPOSITION, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AREAGLUE, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.GLUEBRAND, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.GLUELINEWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.GLUINGPATTERN, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.GLUETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumGlueType.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MELTINGTEMPERATURE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.RELATIVESTARTPOSITION, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -182,7 +182,7 @@ public abstract class JDFAutoGlueLine extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumGlueType(String name)
+		protected EnumGlueType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -237,14 +237,13 @@ public abstract class JDFAutoGlueLine extends JDFResource
 		public static final EnumGlueType PUR = new EnumGlueType("PUR");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AreaGlue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AreaGlue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AreaGlue
 	 *
@@ -265,9 +264,9 @@ public abstract class JDFAutoGlueLine extends JDFResource
 		return getBoolAttribute(AttributeName.AREAGLUE, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GlueBrand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GlueBrand ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GlueBrand
 	 *
@@ -288,9 +287,10 @@ public abstract class JDFAutoGlueLine extends JDFResource
 		return getAttribute(AttributeName.GLUEBRAND, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GlueLineWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GlueLineWidth
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GlueLineWidth
 	 *
@@ -311,9 +311,10 @@ public abstract class JDFAutoGlueLine extends JDFResource
 		return getRealAttribute(AttributeName.GLUELINEWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GluingPattern
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GluingPattern
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GluingPattern
 	 *
@@ -336,9 +337,9 @@ public abstract class JDFAutoGlueLine extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GlueType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GlueType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute GlueType
 	 *
@@ -359,9 +360,10 @@ public abstract class JDFAutoGlueLine extends JDFResource
 		return EnumGlueType.getEnum(getAttribute(AttributeName.GLUETYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MeltingTemperature
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MeltingTemperature
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MeltingTemperature
 	 *
@@ -382,9 +384,10 @@ public abstract class JDFAutoGlueLine extends JDFResource
 		return getIntAttribute(AttributeName.MELTINGTEMPERATURE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RelativeStartPosition
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelativeStartPosition
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RelativeStartPosition
 	 *
@@ -407,9 +410,10 @@ public abstract class JDFAutoGlueLine extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RelativeWorkingPath
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelativeWorkingPath
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RelativeWorkingPath
 	 *
@@ -432,9 +436,10 @@ public abstract class JDFAutoGlueLine extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StartPosition
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StartPosition
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StartPosition
 	 *
@@ -457,9 +462,9 @@ public abstract class JDFAutoGlueLine extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WorkingPath
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkingPath ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WorkingPath
 	 *

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
  *****************************************************************************
  * class JDFAutoFeeder : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoFeeder extends JDFElement
@@ -104,12 +104,13 @@ public abstract class JDFAutoFeeder extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALTERNATEPOSITIONS, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.FEEDERSYNCHRONIZATION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumFeederSynchronization.getEnum(0), "Primary");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.FEEDERTYPE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.LOADING, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.OPENING, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOpening.getEnum(0), "None");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALTERNATEPOSITIONS, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FEEDERSYNCHRONIZATION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumFeederSynchronization.getEnum(0),
+				"Primary");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.FEEDERTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.LOADING, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.OPENING, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumOpening.getEnum(0), "None");
 	}
 
 	@Override
@@ -121,9 +122,9 @@ public abstract class JDFAutoFeeder extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x66666611);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.FEEDERQUALITYPARAMS, 0x66666611);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x6666666611l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FEEDERQUALITYPARAMS, 0x6666666611l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x6666666611l);
 	}
 
 	@Override
@@ -178,7 +179,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumFeederSynchronization(String name)
+		protected EnumFeederSynchronization(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -245,7 +246,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOpening(String name)
+		protected EnumOpening(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -302,14 +303,14 @@ public abstract class JDFAutoFeeder extends JDFElement
 		public static final EnumOpening Sucker = new EnumOpening("Sucker");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AlternatePositions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AlternatePositions
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AlternatePositions
 	 *
@@ -332,9 +333,9 @@ public abstract class JDFAutoFeeder extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Position
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Position
 	 *
@@ -355,9 +356,10 @@ public abstract class JDFAutoFeeder extends JDFElement
 		return getIntAttribute(AttributeName.POSITION, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FeederSynchronization
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FeederSynchronization
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute FeederSynchronization
 	 *
@@ -378,9 +380,9 @@ public abstract class JDFAutoFeeder extends JDFElement
 		return EnumFeederSynchronization.getEnum(getAttribute(AttributeName.FEEDERSYNCHRONIZATION, null, "Primary"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FeederType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FeederType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FeederType
 	 *
@@ -401,9 +403,9 @@ public abstract class JDFAutoFeeder extends JDFElement
 		return getAttribute(AttributeName.FEEDERTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Loading
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Loading ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Loading
 	 *
@@ -424,9 +426,9 @@ public abstract class JDFAutoFeeder extends JDFElement
 		return getAttribute(AttributeName.LOADING, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Opening
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Opening ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Opening
 	 *
@@ -447,9 +449,8 @@ public abstract class JDFAutoFeeder extends JDFElement
 		return EnumOpening.getEnum(getAttribute(AttributeName.OPENING, null, "None"));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -464,7 +465,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 
 	/**
 	 * (25) getCreateComponent
-	 *
+	 * 
 	 * @return JDFComponent the element
 	 */
 	public JDFComponent getCreateComponent()
@@ -504,7 +505,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 
 	/**
 	 * (25) getCreateFeederQualityParams
-	 *
+	 * 
 	 * @return JDFFeederQualityParams the element
 	 */
 	public JDFFeederQualityParams getCreateFeederQualityParams()
@@ -534,7 +535,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()

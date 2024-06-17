@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoRefAnchor : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoRefAnchor extends JDFElement
@@ -97,9 +97,9 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ANCHORTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumAnchorType.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.RREF, 0x33333333, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ANCHORTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchorType.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RREF, 0x3333333333l, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
 
 	@Override
@@ -154,7 +154,7 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumAnchor(String name)
+		protected EnumAnchor(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -231,7 +231,7 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumAnchorType(String name)
+		protected EnumAnchorType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -284,14 +284,13 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 		public static final EnumAnchorType Sibling = new EnumAnchorType("Sibling");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Anchor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Anchor
 	 *
@@ -312,9 +311,9 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AnchorType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AnchorType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute AnchorType
 	 *
@@ -335,9 +334,9 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 		return EnumAnchorType.getEnum(getAttribute(AttributeName.ANCHORTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute rRef
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute rRef ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute rRef
 	 *

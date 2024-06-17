@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
  *****************************************************************************
  * class JDFAutoOrderingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoOrderingParams extends JDFResource
@@ -99,8 +99,8 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AMOUNT, 0x44422222, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.UNIT, 0x44422222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AMOUNT, 0x4444422222l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.UNIT, 0x4444422222l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -112,8 +112,8 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPANY, 0x77766666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x44433333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPANY, 0x7777766666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x4444433333l);
 	}
 
 	@Override
@@ -178,14 +178,13 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Amount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Amount
 	 *
@@ -208,9 +207,9 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 		return getRealAttribute(AttributeName.AMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Unit
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Unit ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Unit
 	 *
@@ -233,9 +232,8 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 		return getAttribute(AttributeName.UNIT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -250,7 +248,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 
 	/**
 	 * (25) getCreateCompany
-	 *
+	 * 
 	 * @return JDFCompany the element
 	 */
 	public JDFCompany getCreateCompany()
@@ -280,7 +278,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -302,7 +300,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()

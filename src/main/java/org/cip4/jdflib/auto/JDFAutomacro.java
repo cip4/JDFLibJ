@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFset;
  *****************************************************************************
  * class JDFAutomacro : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutomacro extends JDFElement
@@ -100,7 +100,7 @@ public abstract class JDFAutomacro extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x2222222222l, AttributeInfo.EnumAttributeType.ID, null, null);
 	}
 
 	@Override
@@ -112,9 +112,9 @@ public abstract class JDFAutomacro extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CHOICE, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.SET, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.CALL, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CHOICE, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SET, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.CALL, 0x3333333333l);
 	}
 
 	@Override
@@ -159,14 +159,13 @@ public abstract class JDFAutomacro extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ID
 	 *
@@ -189,14 +188,13 @@ public abstract class JDFAutomacro extends JDFElement
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatechoice
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFchoice the element
 	 */
@@ -218,7 +216,7 @@ public abstract class JDFAutomacro extends JDFElement
 
 	/**
 	 * Get all choice from the current element
-	 *
+	 * 
 	 * @return Collection<JDFchoice>, null if none are available
 	 */
 	public Collection<JDFchoice> getAllchoice()
@@ -238,7 +236,7 @@ public abstract class JDFAutomacro extends JDFElement
 
 	/**
 	 * (26) getCreateset
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFset the element
 	 */
@@ -260,7 +258,7 @@ public abstract class JDFAutomacro extends JDFElement
 
 	/**
 	 * Get all set from the current element
-	 *
+	 * 
 	 * @return Collection<JDFset>, null if none are available
 	 */
 	public Collection<JDFset> getAllset()
@@ -280,7 +278,7 @@ public abstract class JDFAutomacro extends JDFElement
 
 	/**
 	 * (26) getCreatecall
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFcall the element
 	 */
@@ -302,7 +300,7 @@ public abstract class JDFAutomacro extends JDFElement
 
 	/**
 	 * Get all call from the current element
-	 *
+	 * 
 	 * @return Collection<JDFcall>, null if none are available
 	 */
 	public Collection<JDFcall> getAllcall()

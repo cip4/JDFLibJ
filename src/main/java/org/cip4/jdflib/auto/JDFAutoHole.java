@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoHole : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoHole extends JDFResource
@@ -97,9 +97,9 @@ public abstract class JDFAutoHole extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXTENT, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHAPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXTENT, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHAPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), null);
 	}
 
 	@Override
@@ -174,7 +174,7 @@ public abstract class JDFAutoHole extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumShape(String name)
+		protected EnumShape(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -229,14 +229,13 @@ public abstract class JDFAutoHole extends JDFResource
 		public static final EnumShape Rectangular = new EnumShape("Rectangular");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Center
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Center
 	 *
@@ -259,9 +258,9 @@ public abstract class JDFAutoHole extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Extent
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Extent ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Extent
 	 *
@@ -284,9 +283,9 @@ public abstract class JDFAutoHole extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Shape
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Shape ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Shape
 	 *

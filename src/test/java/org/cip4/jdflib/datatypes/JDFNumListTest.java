@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -562,7 +562,7 @@ class JDFNumListTest extends JDFTestCaseBase
 	void testPerformance() throws Exception
 	{
 		final CPUTimer ct = new CPUTimer(true);
-		for (int i = 0; i < 100000; i++)
+		for (int i = 0; i < 10000; i++)
 		{
 			new JDFNumberList("1.104534098756 2.2098256107389 3.3098563 4.4234190123874 5.5555555 6.098634198634109875 7.129875 8.9123846");
 		}

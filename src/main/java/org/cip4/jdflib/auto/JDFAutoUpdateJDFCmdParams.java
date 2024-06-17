@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.jmf.JDFRemoveLink;
  *****************************************************************************
  * class JDFAutoUpdateJDFCmdParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
@@ -101,8 +101,8 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PARENTJOBID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PARENTJOBPARTID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PARENTJOBID, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PARENTJOBPARTID, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -114,10 +114,10 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CREATELINK, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.CREATERESOURCE, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.MOVERESOURCE, 0x33333333);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.REMOVELINK, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CREATELINK, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CREATERESOURCE, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.MOVERESOURCE, 0x3333333333l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.REMOVELINK, 0x3333333333l);
 	}
 
 	@Override
@@ -162,14 +162,13 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ParentJobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ParentJobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ParentJobID
 	 *
@@ -190,9 +189,10 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 		return getAttribute(AttributeName.PARENTJOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ParentJobPartID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ParentJobPartID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ParentJobPartID
 	 *
@@ -213,14 +213,13 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 		return getAttribute(AttributeName.PARENTJOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateCreateLink
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCreateLink the element
 	 */
@@ -242,7 +241,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 
 	/**
 	 * Get all CreateLink from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCreateLink>, null if none are available
 	 */
 	public Collection<JDFCreateLink> getAllCreateLink()
@@ -262,7 +261,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 
 	/**
 	 * (26) getCreateCreateResource
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCreateResource the element
 	 */
@@ -284,7 +283,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 
 	/**
 	 * Get all CreateResource from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCreateResource>, null if none are available
 	 */
 	public Collection<JDFCreateResource> getAllCreateResource()
@@ -304,7 +303,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 
 	/**
 	 * (26) getCreateMoveResource
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMoveResource the element
 	 */
@@ -326,7 +325,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 
 	/**
 	 * Get all MoveResource from the current element
-	 *
+	 * 
 	 * @return Collection<JDFMoveResource>, null if none are available
 	 */
 	public Collection<JDFMoveResource> getAllMoveResource()
@@ -346,7 +345,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 
 	/**
 	 * (26) getCreateRemoveLink
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFRemoveLink the element
 	 */
@@ -368,7 +367,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 
 	/**
 	 * Get all RemoveLink from the current element
-	 *
+	 * 
 	 * @return Collection<JDFRemoveLink>, null if none are available
 	 */
 	public Collection<JDFRemoveLink> getAllRemoveLink()

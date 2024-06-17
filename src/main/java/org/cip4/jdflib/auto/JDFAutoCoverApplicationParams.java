@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFScore;
  *****************************************************************************
  * class JDFAutoCoverApplicationParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCoverApplicationParams extends JDFResource
@@ -99,7 +99,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COVEROFFSET, 0x44444431, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COVEROFFSET, 0x4444444431l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -111,8 +111,8 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x33333331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.SCORE, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SCORE, 0x3333333331l);
 	}
 
 	@Override
@@ -177,14 +177,13 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CoverOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CoverOffset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CoverOffset
 	 *
@@ -207,14 +206,13 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateGlueApplication
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueApplication the element
 	 */
@@ -236,7 +234,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 
 	/**
 	 * Get all GlueApplication from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGlueApplication>, null if none are available
 	 */
 	public Collection<JDFGlueApplication> getAllGlueApplication()
@@ -266,7 +264,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 
 	/**
 	 * (26) getCreateScore
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFScore the element
 	 */
@@ -288,7 +286,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 
 	/**
 	 * Get all Score from the current element
-	 *
+	 * 
 	 * @return Collection<JDFScore>, null if none are available
 	 */
 	public Collection<JDFScore> getAllScore()

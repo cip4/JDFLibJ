@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
  *****************************************************************************
  * class JDFAutoPlasticCombBindingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
@@ -101,12 +101,12 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COLOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.COLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.DIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.THICKNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.TYPE, 0x44444433, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BRAND, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COLOR, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.COLORDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DIAMETER, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.THICKNESS, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), null);
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x6666666666l);
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumType(String name)
+		protected EnumType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -310,14 +310,13 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 		public static final EnumType C9_5m_round_0t = new EnumType("C9.5m-round-0t");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Brand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Brand ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Brand
 	 *
@@ -340,9 +339,9 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 		return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Color
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Color ---------------------------------------------------------------------
+	 */
 	/**
 	 * (13) set attribute Color
 	 *
@@ -367,9 +366,10 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ColorDetails
 	 *
@@ -390,9 +390,9 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 		return getAttribute(AttributeName.COLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Diameter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Diameter ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Diameter
 	 *
@@ -413,9 +413,9 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.DIAMETER, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Thickness
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Thickness ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Thickness
 	 *
@@ -436,9 +436,9 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.THICKNESS, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Type
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Type
 	 *
@@ -459,9 +459,8 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 		return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -476,7 +475,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 
 	/**
 	 * (25) getCreateHoleMakingParams
-	 *
+	 * 
 	 * @return JDFHoleMakingParams the element
 	 */
 	public JDFHoleMakingParams getCreateHoleMakingParams()

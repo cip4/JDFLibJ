@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoAssetListCreationParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoAssetListCreationParams extends JDFResource
@@ -102,8 +102,8 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.LISTPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumListPolicy.getEnum(0), "All");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSETTYPES, 0x33333311, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LISTPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumListPolicy.getEnum(0), "All");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSETTYPES, 0x3333333311l, AttributeInfo.EnumAttributeType.Any, null, null);
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x3333333311l);
 	}
 
 	@Override
@@ -190,7 +190,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumListPolicy(String name)
+		protected EnumListPolicy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -243,14 +243,13 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 		public static final EnumListPolicy Available = new EnumListPolicy("Available");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ListPolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ListPolicy ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ListPolicy
 	 *
@@ -271,9 +270,9 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 		return EnumListPolicy.getEnum(getAttribute(AttributeName.LISTPOLICY, null, "All"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssetTypes
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssetTypes ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AssetTypes
 	 *
@@ -294,14 +293,13 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 		return getAttribute(AttributeName.ASSETTYPES, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateFileSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
@@ -323,7 +321,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 
 	/**
 	 * Get all FileSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFFileSpec>, null if none are available
 	 */
 	public Collection<JDFFileSpec> getAllFileSpec()

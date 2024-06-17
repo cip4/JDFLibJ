@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.JDFShapeElement;
  *****************************************************************************
  * class JDFAutoShapeElement : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoShapeElement extends JDFResource
@@ -103,16 +103,16 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.LOCKORIGINS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CUTBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.CUTOUT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.CUTPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.CUTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCutType.getEnum(0), "Cut");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.DDESCUTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "101");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MATERIAL, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.SHAPEDEPTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.SHAPETYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumShapeType.getEnum(0), null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.TEETHPERDIMENSION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LOCKORIGINS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CUTBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CUTOUT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.CUTPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.CUTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCutType.getEnum(0), "Cut");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.DDESCUTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "101");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MATERIAL, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SHAPEDEPTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.SHAPETYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumShapeType.getEnum(0), null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.TEETHPERDIMENSION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.SHAPE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SHAPE, 0x3333333333l);
 	}
 
 	@Override
@@ -199,7 +199,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumCutType(String name)
+		protected EnumCutType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -262,7 +262,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumShapeType(String name)
+		protected EnumShapeType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -319,14 +319,13 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		public static final EnumShapeType RoundedRectangle = new EnumShapeType("RoundedRectangle");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LockOrigins
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LockOrigins ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LockOrigins
 	 *
@@ -347,9 +346,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		return getBoolAttribute(AttributeName.LOCKORIGINS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CutBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CutBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CutBox
 	 *
@@ -372,9 +371,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CutOut
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CutOut ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CutOut
 	 *
@@ -395,9 +394,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		return getBoolAttribute(AttributeName.CUTOUT, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CutPath
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CutPath ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CutPath
 	 *
@@ -418,9 +417,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		return getAttribute(AttributeName.CUTPATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CutType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CutType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute CutType
 	 *
@@ -441,9 +440,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		return EnumCutType.getEnum(getAttribute(AttributeName.CUTTYPE, null, "Cut"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DDESCutType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DDESCutType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DDESCutType
 	 *
@@ -464,9 +463,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		return getIntAttribute(AttributeName.DDESCUTTYPE, null, 101);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Material
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Material ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Material
 	 *
@@ -487,9 +486,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		return getAttribute(AttributeName.MATERIAL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShapeDepth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShapeDepth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ShapeDepth
 	 *
@@ -510,9 +509,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		return getRealAttribute(AttributeName.SHAPEDEPTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShapeType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShapeType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ShapeType
 	 *
@@ -533,9 +532,10 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		return EnumShapeType.getEnum(getAttribute(AttributeName.SHAPETYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TeethPerDimension
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TeethPerDimension
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TeethPerDimension
 	 *
@@ -556,14 +556,13 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		return getRealAttribute(AttributeName.TEETHPERDIMENSION, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateShape
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFShapeElement the element
 	 */
@@ -585,7 +584,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 
 	/**
 	 * Get all Shape from the current element
-	 *
+	 * 
 	 * @return Collection<JDFShapeElement>, null if none are available
 	 */
 	public Collection<JDFShapeElement> getAllShape()

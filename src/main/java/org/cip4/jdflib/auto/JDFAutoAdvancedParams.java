@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoAdvancedParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoAdvancedParams extends JDFElement
@@ -96,23 +96,24 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[17];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWPSXOBJECTS, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWTRANSPARENCY, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.AUTOPOSITIONEPSINFO, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.EMBEDJOBOPTIONS, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.EMITDSCWARNINGS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.LOCKDISTILLERPARAMS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PARSEDSCCOMMENTS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.PARSEDSCCOMMENTSFORDOCINFO, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.PASSTHROUGHJPEGIMAGES, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESERVECOPYPAGE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.PRESERVEEPSINFO, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRESERVEHALFTONEINFO, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRESERVEOVERPRINTSETTINGS, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.PRESERVEOPICOMMENTS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.TRANSFERFUNCTIONINFO, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumTransferFunctionInfo.getEnum(0), "Preserve");
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.UCRANDBGINFO, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumUCRandBGInfo.getEnum(0), "Preserve");
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.USEPROLOGUE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWPSXOBJECTS, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWTRANSPARENCY, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.AUTOPOSITIONEPSINFO, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.EMBEDJOBOPTIONS, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.EMITDSCWARNINGS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.LOCKDISTILLERPARAMS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PARSEDSCCOMMENTS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PARSEDSCCOMMENTSFORDOCINFO, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.PASSTHROUGHJPEGIMAGES, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESERVECOPYPAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.PRESERVEEPSINFO, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRESERVEHALFTONEINFO, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRESERVEOVERPRINTSETTINGS, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.PRESERVEOPICOMMENTS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.TRANSFERFUNCTIONINFO, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumTransferFunctionInfo.getEnum(0),
+				"Preserve");
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.UCRANDBGINFO, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumUCRandBGInfo.getEnum(0), "Preserve");
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.USEPROLOGUE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 	}
 
 	@Override
@@ -167,7 +168,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumTransferFunctionInfo(String name)
+		protected EnumTransferFunctionInfo(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -232,7 +233,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumUCRandBGInfo(String name)
+		protected EnumUCRandBGInfo(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -285,14 +286,14 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		public static final EnumUCRandBGInfo Remove = new EnumUCRandBGInfo("Remove");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowPSXObjects
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowPSXObjects
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowPSXObjects
 	 *
@@ -313,9 +314,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.ALLOWPSXOBJECTS, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowTransparency
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowTransparency
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowTransparency
 	 *
@@ -336,9 +338,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.ALLOWTRANSPARENCY, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AutoPositionEPSInfo
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AutoPositionEPSInfo
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AutoPositionEPSInfo
 	 *
@@ -359,9 +362,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.AUTOPOSITIONEPSINFO, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EmbedJobOptions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EmbedJobOptions
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute EmbedJobOptions
 	 *
@@ -382,9 +386,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.EMBEDJOBOPTIONS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EmitDSCWarnings
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EmitDSCWarnings
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute EmitDSCWarnings
 	 *
@@ -405,9 +410,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.EMITDSCWARNINGS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LockDistillerParams
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LockDistillerParams
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LockDistillerParams
 	 *
@@ -428,9 +434,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.LOCKDISTILLERPARAMS, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ParseDSCComments
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ParseDSCComments
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ParseDSCComments
 	 *
@@ -451,9 +458,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PARSEDSCCOMMENTS, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ParseDSCCommentsForDocInfo
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ParseDSCCommentsForDocInfo
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ParseDSCCommentsForDocInfo
 	 *
@@ -474,9 +482,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PARSEDSCCOMMENTSFORDOCINFO, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PassThroughJPEGImages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PassThroughJPEGImages
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PassThroughJPEGImages
 	 *
@@ -497,9 +506,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PASSTHROUGHJPEGIMAGES, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreserveCopyPage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreserveCopyPage
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PreserveCopyPage
 	 *
@@ -520,9 +530,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PRESERVECOPYPAGE, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreserveEPSInfo
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreserveEPSInfo
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PreserveEPSInfo
 	 *
@@ -543,9 +554,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PRESERVEEPSINFO, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreserveHalftoneInfo
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreserveHalftoneInfo
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PreserveHalftoneInfo
 	 *
@@ -566,9 +578,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PRESERVEHALFTONEINFO, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreserveOverprintSettings
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreserveOverprintSettings
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PreserveOverprintSettings
 	 *
@@ -589,9 +602,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PRESERVEOVERPRINTSETTINGS, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreserveOPIComments
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreserveOPIComments
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PreserveOPIComments
 	 *
@@ -612,9 +626,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return getBoolAttribute(AttributeName.PRESERVEOPICOMMENTS, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TransferFunctionInfo
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TransferFunctionInfo
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute TransferFunctionInfo
 	 *
@@ -635,9 +650,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return EnumTransferFunctionInfo.getEnum(getAttribute(AttributeName.TRANSFERFUNCTIONINFO, null, "Preserve"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UCRandBGInfo
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UCRandBGInfo
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute UCRandBGInfo
 	 *
@@ -658,9 +674,9 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		return EnumUCRandBGInfo.getEnum(getAttribute(AttributeName.UCRANDBGINFO, null, "Preserve"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UsePrologue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UsePrologue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute UsePrologue
 	 *

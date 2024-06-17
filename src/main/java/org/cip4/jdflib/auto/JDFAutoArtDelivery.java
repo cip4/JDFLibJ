@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -106,7 +106,7 @@ import org.cip4.jdflib.span.JDFTimeSpan;
  *****************************************************************************
  * class JDFAutoArtDelivery : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoArtDelivery extends JDFElement
@@ -117,13 +117,13 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ARTDELIVERYTYPE, 0x22222221, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.HASBLEEDS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ISTRAPPED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PAGELIST, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PREFLIGHTOUTPUT, 0x33333331, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PREFLIGHTSTATUS, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPreflightStatus.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ARTDELIVERYTYPE, 0x2222222221l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.HASBLEEDS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ISTRAPPED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PAGELIST, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PREFLIGHTOUTPUT, 0x3333333331l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PREFLIGHTSTATUS, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPreflightStatus.getEnum(0), null);
 	}
 
 	@Override
@@ -135,22 +135,22 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[16];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ARTDELIVERYDATE, 0x66666661);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.ARTDELIVERYDURATION, 0x66666661);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.ARTHANDLING, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.DELIVERYCHARGE, 0x66666661);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.METHOD, 0x66666666);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.RETURNMETHOD, 0x66666661);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.SERVICELEVEL, 0x66666611);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.TRANSFER, 0x66666661);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.COMPANY, 0x77777776);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.COMPONENT, 0x77777776);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
-		elemInfoTable[11] = new ElemInfoTable(ElementName.DIGITALMEDIA, 0x66666611);
-		elemInfoTable[12] = new ElemInfoTable(ElementName.EXPOSEDMEDIA, 0x66666666);
-		elemInfoTable[13] = new ElemInfoTable(ElementName.RUNLIST, 0x66666666);
-		elemInfoTable[14] = new ElemInfoTable(ElementName.SCANPARAMS, 0x66666666);
-		elemInfoTable[15] = new ElemInfoTable(ElementName.TOOL, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ARTDELIVERYDATE, 0x6666666661l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.ARTDELIVERYDURATION, 0x6666666661l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.ARTHANDLING, 0x6666666661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.DELIVERYCHARGE, 0x6666666661l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.METHOD, 0x6666666666l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.RETURNMETHOD, 0x6666666661l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.SERVICELEVEL, 0x6666666611l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.TRANSFER, 0x6666666661l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.COMPANY, 0x7777777776l);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.COMPONENT, 0x7777777776l);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.CONTACT, 0x3333333331l);
+		elemInfoTable[11] = new ElemInfoTable(ElementName.DIGITALMEDIA, 0x6666666611l);
+		elemInfoTable[12] = new ElemInfoTable(ElementName.EXPOSEDMEDIA, 0x6666666666l);
+		elemInfoTable[13] = new ElemInfoTable(ElementName.RUNLIST, 0x6666666666l);
+		elemInfoTable[14] = new ElemInfoTable(ElementName.SCANPARAMS, 0x6666666666l);
+		elemInfoTable[15] = new ElemInfoTable(ElementName.TOOL, 0x6666666661l);
 	}
 
 	@Override
@@ -205,7 +205,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPreflightStatus(String name)
+		protected EnumPreflightStatus(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -262,14 +262,13 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 		public static final EnumPreflightStatus WithoutErrors = new EnumPreflightStatus("WithoutErrors");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Amount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Amount
 	 *
@@ -290,9 +289,10 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 		return getIntAttribute(AttributeName.AMOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ArtDeliveryType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ArtDeliveryType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ArtDeliveryType
 	 *
@@ -313,9 +313,9 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 		return getAttribute(AttributeName.ARTDELIVERYTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HasBleeds
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HasBleeds ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HasBleeds
 	 *
@@ -336,9 +336,9 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 		return getBoolAttribute(AttributeName.HASBLEEDS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IsTrapped
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IsTrapped ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IsTrapped
 	 *
@@ -359,9 +359,9 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 		return getBoolAttribute(AttributeName.ISTRAPPED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PageList
 	 *
@@ -384,9 +384,10 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreflightOutput
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreflightOutput
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PreflightOutput
 	 *
@@ -407,9 +408,10 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 		return getAttribute(AttributeName.PREFLIGHTOUTPUT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreflightStatus
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreflightStatus
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PreflightStatus
 	 *
@@ -430,9 +432,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 		return EnumPreflightStatus.getEnum(getAttribute(AttributeName.PREFLIGHTSTATUS, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -447,7 +448,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateArtDeliveryDate
-	 *
+	 * 
 	 * @return JDFTimeSpan the element
 	 */
 	public JDFTimeSpan getCreateArtDeliveryDate()
@@ -477,7 +478,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateArtDeliveryDuration
-	 *
+	 * 
 	 * @return JDFDurationSpan the element
 	 */
 	public JDFDurationSpan getCreateArtDeliveryDuration()
@@ -507,7 +508,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateArtHandling
-	 *
+	 * 
 	 * @return JDFSpanArtHandling the element
 	 */
 	public JDFSpanArtHandling getCreateArtHandling()
@@ -537,7 +538,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateDeliveryCharge
-	 *
+	 * 
 	 * @return JDFSpanDeliveryCharge the element
 	 */
 	public JDFSpanDeliveryCharge getCreateDeliveryCharge()
@@ -567,7 +568,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateMethod
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateMethod()
@@ -597,7 +598,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateReturnMethod
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateReturnMethod()
@@ -627,7 +628,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateServiceLevel
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateServiceLevel()
@@ -657,7 +658,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateTransfer
-	 *
+	 * 
 	 * @return JDFSpanTransfer the element
 	 */
 	public JDFSpanTransfer getCreateTransfer()
@@ -687,7 +688,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateCompany
-	 *
+	 * 
 	 * @return JDFCompany the element
 	 */
 	public JDFCompany getCreateCompany()
@@ -727,7 +728,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateComponent
-	 *
+	 * 
 	 * @return JDFComponent the element
 	 */
 	public JDFComponent getCreateComponent()
@@ -757,7 +758,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -779,7 +780,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -819,7 +820,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateDigitalMedia
-	 *
+	 * 
 	 * @return JDFDigitalMedia the element
 	 */
 	public JDFDigitalMedia getCreateDigitalMedia()
@@ -859,7 +860,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateExposedMedia
-	 *
+	 * 
 	 * @return JDFExposedMedia the element
 	 */
 	public JDFExposedMedia getCreateExposedMedia()
@@ -899,7 +900,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateRunList
-	 *
+	 * 
 	 * @return JDFRunList the element
 	 */
 	public JDFRunList getCreateRunList()
@@ -939,7 +940,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateScanParams
-	 *
+	 * 
 	 * @return JDFScanParams the element
 	 */
 	public JDFScanParams getCreateScanParams()
@@ -979,7 +980,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 
 	/**
 	 * (25) getCreateTool
-	 *
+	 * 
 	 * @return JDFTool the element
 	 */
 	public JDFTool getCreateTool()

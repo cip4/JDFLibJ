@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
  *****************************************************************************
  * class JDFAutoInsertingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoInsertingParams extends JDFResource
@@ -102,10 +102,10 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.INSERTLOCATION, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumInsertLocation.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.METHOD, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMethod.getEnum(0), "BlowIn");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHEETOFFSET, 0x44444443, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.FINISHEDPAGE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.INSERTLOCATION, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumInsertLocation.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.METHOD, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMethod.getEnum(0), "BlowIn");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHEETOFFSET, 0x4444444443l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.FINISHEDPAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x3333333333l);
 	}
 
 	@Override
@@ -192,7 +192,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumInsertLocation(String name)
+		protected EnumInsertLocation(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -263,7 +263,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMethod(String name)
+		protected EnumMethod(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -316,14 +316,14 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 		public static final EnumMethod BindIn = new EnumMethod("BindIn");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute InsertLocation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InsertLocation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute InsertLocation
 	 *
@@ -344,9 +344,9 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 		return EnumInsertLocation.getEnum(getAttribute(AttributeName.INSERTLOCATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Method
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Method ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Method
 	 *
@@ -367,9 +367,9 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 		return EnumMethod.getEnum(getAttribute(AttributeName.METHOD, null, "BlowIn"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetOffset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SheetOffset
 	 *
@@ -392,9 +392,10 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FinishedPage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FinishedPage
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FinishedPage
 	 *
@@ -415,14 +416,13 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 		return getIntAttribute(AttributeName.FINISHEDPAGE, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateGlueLine
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
@@ -444,7 +444,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 
 	/**
 	 * Get all GlueLine from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGlueLine>, null if none are available
 	 */
 	public Collection<JDFGlueLine> getAllGlueLine()

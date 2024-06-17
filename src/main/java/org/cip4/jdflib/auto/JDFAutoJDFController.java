@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoJDFController : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoJDFController extends JDFElement
@@ -97,9 +97,9 @@ public abstract class JDFAutoJDFController extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTROLLERID, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.URL, 0x22222222, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.URLTYPE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumURLType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTROLLERID, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.URL, 0x2222222222l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.URLTYPE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumURLType.getEnum(0), null);
 	}
 
 	@Override
@@ -154,7 +154,7 @@ public abstract class JDFAutoJDFController extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumURLType(String name)
+		protected EnumURLType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -213,14 +213,14 @@ public abstract class JDFAutoJDFController extends JDFElement
 		public static final EnumURLType SecureJMF = new EnumURLType("SecureJMF");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ControllerID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ControllerID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ControllerID
 	 *
@@ -241,9 +241,9 @@ public abstract class JDFAutoJDFController extends JDFElement
 		return getAttribute(AttributeName.CONTROLLERID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute URL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute URL
 	 *
@@ -264,9 +264,9 @@ public abstract class JDFAutoJDFController extends JDFElement
 		return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute URLType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute URLType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute URLType
 	 *

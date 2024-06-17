@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.JDFPRRuleAttr;
  *****************************************************************************
  * class JDFAutoPRRule : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPRRule extends JDFElement
@@ -99,7 +99,7 @@ public abstract class JDFAutoPRRule extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIONREFS, 0x22222222, AttributeInfo.EnumAttributeType.IDREFS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIONREFS, 0x2222222222l, AttributeInfo.EnumAttributeType.IDREFS, null, null);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public abstract class JDFAutoPRRule extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PRRULEATTR, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PRRULEATTR, 0x3333333333l);
 	}
 
 	@Override
@@ -156,14 +156,13 @@ public abstract class JDFAutoPRRule extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ActionRefs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ActionRefs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ActionRefs
 	 *
@@ -187,14 +186,13 @@ public abstract class JDFAutoPRRule extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatePRRuleAttr
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPRRuleAttr the element
 	 */
@@ -216,7 +214,7 @@ public abstract class JDFAutoPRRule extends JDFElement
 
 	/**
 	 * Get all PRRuleAttr from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPRRuleAttr>, null if none are available
 	 */
 	public Collection<JDFPRRuleAttr> getAllPRRuleAttr()

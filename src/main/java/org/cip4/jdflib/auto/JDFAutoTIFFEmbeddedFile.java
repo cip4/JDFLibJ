@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoTIFFEmbeddedFile : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
@@ -95,8 +95,8 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TAGNUMBER, 0x44422211, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.TAGTYPE, 0x44422211, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TAGNUMBER, 0x4444422211l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TAGTYPE, 0x4444422211l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x77755551);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x7777755551l);
 	}
 
 	@Override
@@ -153,14 +153,13 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TagNumber
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TagNumber ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TagNumber
 	 *
@@ -181,9 +180,9 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 		return getIntAttribute(AttributeName.TAGNUMBER, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TagType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TagType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TagType
 	 *
@@ -204,9 +203,8 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 		return getIntAttribute(AttributeName.TAGTYPE, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -221,7 +219,7 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()

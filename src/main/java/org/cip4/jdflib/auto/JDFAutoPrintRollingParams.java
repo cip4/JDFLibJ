@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoPrintRollingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPrintRollingParams extends JDFResource
@@ -91,8 +91,8 @@ public abstract class JDFAutoPrintRollingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COPIES, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MAXDIAMETER, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COPIES, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MAXDIAMETER, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -157,14 +157,13 @@ public abstract class JDFAutoPrintRollingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Copies
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Copies ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Copies
 	 *
@@ -185,9 +184,9 @@ public abstract class JDFAutoPrintRollingParams extends JDFResource
 		return getIntAttribute(AttributeName.COPIES, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxDiameter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxDiameter ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxDiameter
 	 *

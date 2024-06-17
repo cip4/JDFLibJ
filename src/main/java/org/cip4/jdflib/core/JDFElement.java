@@ -179,7 +179,7 @@ public class JDFElement extends KElement
 	private MyPair<AttributeInfo, ElementInfo> infotables;
 	private static final long serialVersionUID = 1L;
 	private static final Log jLog = LogFactory.getLog(JDFElement.class);
-	private static EnumVersion defaultVersion = EnumVersion.Version_1_7;
+	private static EnumVersion defaultVersion = EnumVersion.Version_1_8;
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
@@ -4070,7 +4070,8 @@ public class JDFElement extends KElement
 			vBad.appendUnique(new VString(getDeprecatedElements(nMax)));
 			if (nMax <= 0 || vBad.size() < nMax)
 			{
-				vBad.appendUnique(new VString(getPrereleaseElements(nMax)));
+				VString prereleaseElements = getPrereleaseElements(nMax);
+				vBad.appendUnique(new VString(prereleaseElements));
 			}
 		}
 
@@ -5521,11 +5522,18 @@ public class JDFElement extends KElement
 		public static final EnumVersion Version_1_8 = new EnumVersion(JDFConstants.VERSION_1_8);
 		/** * */
 		public static final EnumVersion Version_1_9 = new EnumVersion(JDFConstants.VERSION_1_9);
+		/** * */
+		public static final EnumVersion Version_1_10 = new EnumVersion(JDFConstants.VERSION_1_10);
+		/** * */
+		public static final EnumVersion Version_1_11 = new EnumVersion(JDFConstants.VERSION_1_11);
 
 		public static final EnumVersion Version_2_0 = new EnumVersion(JDFConstants.VERSION_2_0);
 		public static final EnumVersion Version_2_1 = new EnumVersion(JDFConstants.VERSION_2_1);
 		public static final EnumVersion Version_2_2 = new EnumVersion(JDFConstants.VERSION_2_2);
 		public static final EnumVersion Version_2_3 = new EnumVersion(JDFConstants.VERSION_2_3);
+		public static final EnumVersion Version_2_4 = new EnumVersion(JDFConstants.VERSION_2_4);
+
+		private static int LAST_1 = getEnumList().indexOf(Version_2_0) - 1;
 
 		/**
 		 * gets the integer value of the minor version, e.g 2 for 1.3 etc
@@ -5534,7 +5542,7 @@ public class JDFElement extends KElement
 		 */
 		public int getMinorVersion()
 		{
-			return (getValue() - 1) % 10;
+			return (getValue() - 1) % LAST_1;
 		}
 
 		/**
@@ -5544,7 +5552,7 @@ public class JDFElement extends KElement
 		 */
 		public int getMajorVersion()
 		{
-			return 1 + (getValue() - 1) / 10;
+			return 1 + (getValue() - 1) / LAST_1;
 		}
 
 	}

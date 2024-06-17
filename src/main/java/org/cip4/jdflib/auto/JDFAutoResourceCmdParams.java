@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,7 +96,7 @@ import org.cip4.jdflib.resource.process.JDFMISDetails;
  *****************************************************************************
  * class JDFAutoResourceCmdParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoResourceCmdParams extends JDFElement
@@ -107,20 +107,20 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[14];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), "Active");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXACT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRODUCTIONAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.RESOURCEID, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.STATUS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.UPDATEIDS, 0x44444331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.UPDATEMETHOD, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateMethod.getEnum(0), "Complete");
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.USAGE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), "Active");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXACT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRODUCTID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRODUCTIONAMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.RESOURCEID, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.STATUS, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.UPDATEIDS, 0x4444444331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.UPDATEMETHOD, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateMethod.getEnum(0), "Complete");
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.USAGE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
 	}
 
 	@Override
@@ -132,9 +132,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333311);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666611);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x3333333311l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.MISDETAILS, 0x6666666611l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.RESOURCE, 0x3333333333l);
 	}
 
 	@Override
@@ -189,7 +189,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumUpdateMethod(String name)
+		protected EnumUpdateMethod(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -244,14 +244,13 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		public static final EnumUpdateMethod Remove = new EnumUpdateMethod("Remove");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Activation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Activation
 	 *
@@ -272,9 +271,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, "Active"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Exact
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Exact ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Exact
 	 *
@@ -295,9 +294,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		return getBoolAttribute(AttributeName.EXACT, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobID
 	 *
@@ -318,9 +317,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobPartID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobPartID
 	 *
@@ -341,9 +340,10 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProcessUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProcessUsage
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ProcessUsage
 	 *
@@ -364,9 +364,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		return getAttribute(AttributeName.PROCESSUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProductID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProductID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ProductID
 	 *
@@ -387,9 +387,10 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		return getAttribute(AttributeName.PRODUCTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProductionAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProductionAmount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ProductionAmount
 	 *
@@ -410,9 +411,10 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		return getRealAttribute(AttributeName.PRODUCTIONAMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QueueEntryID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute QueueEntryID
 	 *
@@ -433,9 +435,10 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ResourceName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ResourceName
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ResourceName
 	 *
@@ -456,9 +459,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		return getAttribute(AttributeName.RESOURCENAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ResourceID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ResourceID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ResourceID
 	 *
@@ -479,9 +482,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		return getAttribute(AttributeName.RESOURCEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Status
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Status ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Status
 	 *
@@ -502,9 +505,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		return JDFResource.EnumResStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UpdateIDs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UpdateIDs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute UpdateIDs
 	 *
@@ -528,9 +531,10 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UpdateMethod
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UpdateMethod
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute UpdateMethod
 	 *
@@ -551,9 +555,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		return EnumUpdateMethod.getEnum(getAttribute(AttributeName.UPDATEMETHOD, null, "Complete"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Usage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Usage
 	 *
@@ -574,14 +578,13 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -603,7 +606,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()
@@ -633,7 +636,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 
 	/**
 	 * (25) getCreateMISDetails
-	 *
+	 * 
 	 * @return JDFMISDetails the element
 	 */
 	public JDFMISDetails getCreateMISDetails()
@@ -653,7 +656,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 
 	/**
 	 * (26) getCreateResource
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFResource the element
 	 */
@@ -675,7 +678,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 
 	/**
 	 * Get all Resource from the current element
-	 *
+	 * 
 	 * @return Collection<JDFResource>, null if none are available
 	 */
 	public Collection<JDFResource> getAllResource()

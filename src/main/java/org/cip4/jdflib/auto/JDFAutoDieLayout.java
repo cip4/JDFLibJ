@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,7 +96,7 @@ import org.cip4.jdflib.resource.process.JDFStation;
  *****************************************************************************
  * class JDFAutoDieLayout : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDieLayout extends JDFResource
@@ -107,11 +107,11 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CUTBOX, 0x33311111, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DIESIDE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumDieSide.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MEDIASIDE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumMediaSide.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATED, 0x33331111, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.WASTE, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CUTBOX, 0x3333311111l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DIESIDE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumDieSide.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MEDIASIDE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumMediaSide.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATED, 0x3333331111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.WASTE, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -123,12 +123,12 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x33333111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x33333111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x66666111);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.RULELENGTH, 0x33333111);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.STATION, 0x33333111);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.CUTLINES, 0x66666111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x3333333111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x3333333111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x6666666111l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.RULELENGTH, 0x3333333111l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.STATION, 0x3333333111l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.CUTLINES, 0x6666666111l);
 	}
 
 	@Override
@@ -203,7 +203,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDieSide(String name)
+		protected EnumDieSide(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -266,7 +266,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMediaSide(String name)
+		protected EnumMediaSide(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -321,14 +321,13 @@ public abstract class JDFAutoDieLayout extends JDFResource
 		public static final EnumMediaSide Both = new EnumMediaSide("Both");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CutBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CutBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CutBox
 	 *
@@ -351,9 +350,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DieSide
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DieSide ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DieSide
 	 *
@@ -374,9 +373,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 		return EnumDieSide.getEnum(getAttribute(AttributeName.DIESIDE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MediaSide
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MediaSide ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute MediaSide
 	 *
@@ -397,9 +396,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 		return EnumMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Rotated
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Rotated ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Rotated
 	 *
@@ -420,9 +419,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 		return getBoolAttribute(AttributeName.ROTATED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Waste
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Waste ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Waste
 	 *
@@ -443,14 +442,13 @@ public abstract class JDFAutoDieLayout extends JDFResource
 		return getRealAttribute(AttributeName.WASTE, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateDevice
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
 	 */
@@ -472,7 +470,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
 	/**
 	 * Get all Device from the current element
-	 *
+	 * 
 	 * @return Collection<JDFDevice>, null if none are available
 	 */
 	public Collection<JDFDevice> getAllDevice()
@@ -502,7 +500,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
 	/**
 	 * (26) getCreateFileSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
@@ -524,7 +522,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
 	/**
 	 * Get all FileSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFFileSpec>, null if none are available
 	 */
 	public Collection<JDFFileSpec> getAllFileSpec()
@@ -564,7 +562,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()
@@ -594,7 +592,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
 	/**
 	 * (26) getCreateRuleLength
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFRuleLength the element
 	 */
@@ -616,7 +614,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
 	/**
 	 * Get all RuleLength from the current element
-	 *
+	 * 
 	 * @return Collection<JDFRuleLength>, null if none are available
 	 */
 	public Collection<JDFRuleLength> getAllRuleLength()
@@ -636,7 +634,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
 	/**
 	 * (26) getCreateStation
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFStation the element
 	 */
@@ -658,7 +656,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
 	/**
 	 * Get all Station from the current element
-	 *
+	 * 
 	 * @return Collection<JDFStation>, null if none are available
 	 */
 	public Collection<JDFStation> getAllStation()
@@ -688,7 +686,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
 	/**
 	 * (25) getCreateCutLines
-	 *
+	 * 
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getCreateCutLines()

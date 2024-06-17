@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
  *****************************************************************************
  * class JDFAutoRingBindingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoRingBindingParams extends JDFResource
@@ -101,19 +101,19 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BINDERCOLOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BINDERCOLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.BINDERMATERIAL, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.BINDERNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.RINGDIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.RINGMECHANIC, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.RINGSHAPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.RINGSYSTEM, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumRingSystem.getEnum(0), null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.RIVETSEXPOSED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.SPINECOLOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.SPINECOLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.SPINEWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.VIEWBINDER, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BINDERCOLOR, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BINDERCOLORDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BINDERMATERIAL, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.BINDERNAME, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.RINGDIAMETER, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.RINGMECHANIC, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.RINGSHAPE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.RINGSYSTEM, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumRingSystem.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.RIVETSEXPOSED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.SPINECOLOR, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.SPINECOLORDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.SPINEWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.VIEWBINDER, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -125,7 +125,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x6666666611l);
 	}
 
 	@Override
@@ -200,7 +200,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumRingSystem(String name)
+		protected EnumRingSystem(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -255,14 +255,13 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		public static final EnumRingSystem RingSystem_4HoleEuro = new EnumRingSystem("4HoleEuro");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BinderColor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BinderColor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (13) set attribute BinderColor
 	 *
@@ -287,9 +286,10 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BinderColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BinderColorDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BinderColorDetails
 	 *
@@ -310,9 +310,10 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getAttribute(AttributeName.BINDERCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BinderMaterial
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BinderMaterial
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BinderMaterial
 	 *
@@ -333,9 +334,9 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getAttribute(AttributeName.BINDERMATERIAL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BinderName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BinderName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BinderName
 	 *
@@ -356,9 +357,10 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getAttribute(AttributeName.BINDERNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RingDiameter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RingDiameter
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RingDiameter
 	 *
@@ -379,9 +381,10 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.RINGDIAMETER, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RingMechanic
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RingMechanic
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RingMechanic
 	 *
@@ -402,9 +405,9 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getBoolAttribute(AttributeName.RINGMECHANIC, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RingShape
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RingShape ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RingShape
 	 *
@@ -425,9 +428,9 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getAttribute(AttributeName.RINGSHAPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RingSystem
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RingSystem ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute RingSystem
 	 *
@@ -448,9 +451,10 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return EnumRingSystem.getEnum(getAttribute(AttributeName.RINGSYSTEM, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RivetsExposed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RivetsExposed
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RivetsExposed
 	 *
@@ -471,9 +475,9 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getBoolAttribute(AttributeName.RIVETSEXPOSED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SpineColor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SpineColor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (13) set attribute SpineColor
 	 *
@@ -498,9 +502,10 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SpineColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SpineColorDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SpineColorDetails
 	 *
@@ -521,9 +526,9 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getAttribute(AttributeName.SPINECOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SpineWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SpineWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SpineWidth
 	 *
@@ -544,9 +549,9 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.SPINEWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ViewBinder
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ViewBinder ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ViewBinder
 	 *
@@ -567,9 +572,8 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		return getAttribute(AttributeName.VIEWBINDER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -584,7 +588,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
 	/**
 	 * (25) getCreateHoleMakingParams
-	 *
+	 * 
 	 * @return JDFHoleMakingParams the element
 	 */
 	public JDFHoleMakingParams getCreateHoleMakingParams()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,13 +97,13 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x33331111, AttributeInfo.EnumAttributeType.enumerations, EnumChannelMode.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXACT, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.LISTCOMMANDS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.LISTQUERIES, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.LISTREGISTRATIONS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.LISTSIGNALS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PERSISTENT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumerations, EnumChannelMode.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXACT, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.LISTCOMMANDS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.LISTQUERIES, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.LISTREGISTRATIONS, 0x3333333111l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.LISTSIGNALS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PERSISTENT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoKnownMsgQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -125,7 +125,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoKnownMsgQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -137,7 +137,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoKnownMsgQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -220,7 +220,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 */
 	/**
 	 * (5.2) set attribute ChannelMode
-	 * 
+	 *
 	 * @param v vector of the enumeration values
 	 */
 	public void setChannelMode(Vector<? extends ValuedEnum> v)
@@ -230,7 +230,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 
 	/**
 	 * (9.2) get ChannelMode attribute ChannelMode
-	 * 
+	 *
 	 * @return Vector of the enumerations
 	 */
 	public Vector<? extends ValuedEnum> getChannelMode()
@@ -243,7 +243,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 */
 	/**
 	 * (36) set attribute Exact
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setExact(boolean value)
@@ -253,7 +253,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute Exact
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getExact()
@@ -267,7 +267,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 */
 	/**
 	 * (36) set attribute ListCommands
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setListCommands(boolean value)
@@ -277,7 +277,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute ListCommands
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getListCommands()
@@ -290,7 +290,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 */
 	/**
 	 * (36) set attribute ListQueries
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setListQueries(boolean value)
@@ -300,7 +300,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute ListQueries
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getListQueries()
@@ -314,7 +314,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 */
 	/**
 	 * (36) set attribute ListRegistrations
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setListRegistrations(boolean value)
@@ -324,7 +324,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute ListRegistrations
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getListRegistrations()
@@ -337,7 +337,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 */
 	/**
 	 * (36) set attribute ListSignals
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setListSignals(boolean value)
@@ -347,7 +347,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute ListSignals
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getListSignals()
@@ -360,7 +360,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 */
 	/**
 	 * (36) set attribute Persistent
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPersistent(boolean value)
@@ -370,7 +370,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 
 	/**
 	 * (18) get boolean attribute Persistent
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getPersistent()

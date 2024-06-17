@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoLoc : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLoc extends JDFElement
@@ -92,10 +92,10 @@ public abstract class JDFAutoLoc extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.HELPTEXT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.LANG, 0x33333333, AttributeInfo.EnumAttributeType.language, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHORTVALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.VALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.HELPTEXT, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LANG, 0x3333333333l, AttributeInfo.EnumAttributeType.language, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHORTVALUE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.VALUE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -140,14 +140,13 @@ public abstract class JDFAutoLoc extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HelpText
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HelpText ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HelpText
 	 *
@@ -168,9 +167,9 @@ public abstract class JDFAutoLoc extends JDFElement
 		return getAttribute(AttributeName.HELPTEXT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Lang
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Lang ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Lang
 	 *
@@ -191,9 +190,9 @@ public abstract class JDFAutoLoc extends JDFElement
 		return getAttribute(AttributeName.LANG, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShortValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShortValue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ShortValue
 	 *
@@ -214,9 +213,9 @@ public abstract class JDFAutoLoc extends JDFElement
 		return getAttribute(AttributeName.SHORTVALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Value
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Value ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Value
 	 *

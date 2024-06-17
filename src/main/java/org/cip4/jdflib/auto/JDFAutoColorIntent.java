@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoColorIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoColorIntent extends JDFIntentResource
@@ -102,7 +102,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.NUMCOLORS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NUMCOLORS, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -114,14 +114,14 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CERTIFICATION, 0x31111111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COATINGS, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORSTANDARD, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.COLORICCSTANDARD, 0x66666611);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.COVERAGE, 0x66666666);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.INKMANUFACTURER, 0x77777766);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666661);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.COLORSUSED, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CERTIFICATION, 0x3331111111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COATINGS, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORSTANDARD, 0x6666666666l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.COLORICCSTANDARD, 0x6666666611l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.COVERAGE, 0x6666666666l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.INKMANUFACTURER, 0x7777777766l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.COLORPOOL, 0x6666666661l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.COLORSUSED, 0x6666666666l);
 	}
 
 	@Override
@@ -166,14 +166,13 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NumColors
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NumColors ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NumColors
 	 *
@@ -194,14 +193,13 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 		return getIntAttribute(AttributeName.NUMCOLORS, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateCertification
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCertification the element
 	 */
@@ -223,7 +221,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * Get all Certification from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCertification>, null if none are available
 	 */
 	public Collection<JDFCertification> getAllCertification()
@@ -253,7 +251,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCoatings
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateCoatings()
@@ -283,7 +281,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateColorStandard
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateColorStandard()
@@ -313,7 +311,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateColorICCStandard
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateColorICCStandard()
@@ -343,7 +341,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCoverage
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateCoverage()
@@ -373,7 +371,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateInkManufacturer
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateInkManufacturer()
@@ -403,7 +401,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateColorPool
-	 *
+	 * 
 	 * @return JDFColorPool the element
 	 */
 	public JDFColorPool getCreateColorPool()
@@ -443,7 +441,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateColorsUsed
-	 *
+	 * 
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getCreateColorsUsed()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoInterpretingDetails : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoInterpretingDetails extends JDFElement
@@ -91,7 +91,7 @@ public abstract class JDFAutoInterpretingDetails extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MINLINEWIDTH, 0x33311111, AttributeInfo.EnumAttributeType.double_, null, "1.0");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MINLINEWIDTH, 0x3333311111l, AttributeInfo.EnumAttributeType.double_, null, "1.0");
 	}
 
 	@Override
@@ -136,14 +136,14 @@ public abstract class JDFAutoInterpretingDetails extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinLineWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinLineWidth
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinLineWidth
 	 *

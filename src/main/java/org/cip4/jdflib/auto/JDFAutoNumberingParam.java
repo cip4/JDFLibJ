@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
  *****************************************************************************
  * class JDFAutoNumberingParam : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoNumberingParam extends JDFElement
@@ -93,11 +93,11 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STARTVALUE, 0x44433333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.XPOSITION, 0x44433333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.YPOSITION, 0x44433333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORIENTATION, 0x44433333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.STEP, 0x44433333, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STARTVALUE, 0x4444433333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.XPOSITION, 0x4444433333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.YPOSITION, 0x4444433333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORIENTATION, 0x4444433333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.STEP, 0x4444433333l, AttributeInfo.EnumAttributeType.integer, null, "1");
 	}
 
 	@Override
@@ -142,14 +142,13 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StartValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StartValue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StartValue
 	 *
@@ -170,9 +169,9 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 		return getAttribute(AttributeName.STARTVALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute XPosition
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute XPosition ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute XPosition
 	 *
@@ -193,9 +192,9 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 		return getRealAttribute(AttributeName.XPOSITION, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute YPosition
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute YPosition ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute YPosition
 	 *
@@ -218,9 +217,9 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Orientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Orientation
 	 *
@@ -241,9 +240,9 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 		return getRealAttribute(AttributeName.ORIENTATION, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Step
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Step ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Step
 	 *

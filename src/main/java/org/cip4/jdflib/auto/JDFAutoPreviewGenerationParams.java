@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.process.JDFImageSetterParams;
  *****************************************************************************
  * class JDFAutoPreviewGenerationParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPreviewGenerationParams extends JDFResource
@@ -101,12 +101,12 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASPECTRATIO, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumAspectRatio.getEnum(0), "Ignore");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewFileType.getEnum(0), "PNG");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewUsage.getEnum(0), "Separation");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.RESOLUTION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SIZE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASPECTRATIO, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumAspectRatio.getEnum(0), "Ignore");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewFileType.getEnum(0), "PNG");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewUsage.getEnum(0), "Separation");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.RESOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SIZE, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.IMAGESETTERPARAMS, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.IMAGESETTERPARAMS, 0x6666666661l);
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumAspectRatio(String name)
+		protected EnumAspectRatio(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -262,7 +262,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPreviewFileType(String name)
+		protected EnumPreviewFileType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -327,7 +327,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPreviewUsage(String name)
+		protected EnumPreviewUsage(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -402,7 +402,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumCompensation(String name)
+		protected EnumCompensation(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -459,14 +459,13 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		public static final EnumCompensation Press = new EnumCompensation("Press");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AspectRatio
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AspectRatio ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute AspectRatio
 	 *
@@ -487,9 +486,10 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		return EnumAspectRatio.getEnum(getAttribute(AttributeName.ASPECTRATIO, null, "Ignore"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreviewFileType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreviewFileType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PreviewFileType
 	 *
@@ -510,9 +510,10 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		return EnumPreviewFileType.getEnum(getAttribute(AttributeName.PREVIEWFILETYPE, null, "PNG"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreviewUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreviewUsage
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PreviewUsage
 	 *
@@ -533,9 +534,10 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		return EnumPreviewUsage.getEnum(getAttribute(AttributeName.PREVIEWUSAGE, null, "Separation"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Compensation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Compensation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Compensation
 	 *
@@ -556,9 +558,9 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		return EnumCompensation.getEnum(getAttribute(AttributeName.COMPENSATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Resolution
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Resolution ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Resolution
 	 *
@@ -581,9 +583,9 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Size
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Size ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Size
 	 *
@@ -606,9 +608,8 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -623,7 +624,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 
 	/**
 	 * (25) getCreateImageSetterParams
-	 *
+	 * 
 	 * @return JDFImageSetterParams the element
 	 */
 	public JDFImageSetterParams getCreateImageSetterParams()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
  *****************************************************************************
  * class JDFAutoCollatingItem : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCollatingItem extends JDFElement
@@ -102,11 +102,12 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AMOUNT, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BUNDLEDEPTH, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x33333311, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.TRANSFORMATIONCONTEXT, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumTransformationContext.getEnum(0), "StackItem");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AMOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BUNDLEDEPTH, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x3333333311l, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.TRANSFORMATIONCONTEXT, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumTransformationContext.getEnum(0),
+				"StackItem");
 	}
 
 	@Override
@@ -118,8 +119,8 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x66666611);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x6666666611l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x6666666611l);
 	}
 
 	@Override
@@ -174,7 +175,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOrientation(String name)
+		protected EnumOrientation(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -249,7 +250,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumTransformationContext(String name)
+		protected EnumTransformationContext(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -304,14 +305,13 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 		public static final EnumTransformationContext CollateItem = new EnumTransformationContext("CollateItem");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Amount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Amount
 	 *
@@ -332,9 +332,9 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 		return getIntAttribute(AttributeName.AMOUNT, null, 1);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BundleDepth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BundleDepth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BundleDepth
 	 *
@@ -355,9 +355,9 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 		return getIntAttribute(AttributeName.BUNDLEDEPTH, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Orientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Orientation
 	 *
@@ -378,9 +378,10 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Transformation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Transformation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Transformation
 	 *
@@ -403,9 +404,10 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TransformationContext
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TransformationContext
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute TransformationContext
 	 *
@@ -426,9 +428,8 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 		return EnumTransformationContext.getEnum(getAttribute(AttributeName.TRANSFORMATIONCONTEXT, null, "StackItem"));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -443,7 +444,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 
 	/**
 	 * (25) getCreateComponent
-	 *
+	 * 
 	 * @return JDFComponent the element
 	 */
 	public JDFComponent getCreateComponent()
@@ -483,7 +484,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()

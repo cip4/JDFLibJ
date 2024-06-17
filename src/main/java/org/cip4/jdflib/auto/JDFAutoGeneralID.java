@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoGeneralID : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoGeneralID extends JDFElement
@@ -97,9 +97,9 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DATATYPE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumDataType.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.IDUSAGE, 0x22222111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.IDVALUE, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DATATYPE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumDataType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.IDUSAGE, 0x2222222111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.IDVALUE, 0x2222222111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -154,7 +154,7 @@ public abstract class JDFAutoGeneralID extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDataType(String name)
+		protected EnumDataType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -219,14 +219,13 @@ public abstract class JDFAutoGeneralID extends JDFElement
 		public static final EnumDataType NamedFeature = new EnumDataType("NamedFeature");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DataType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DataType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DataType
 	 *
@@ -247,9 +246,9 @@ public abstract class JDFAutoGeneralID extends JDFElement
 		return EnumDataType.getEnum(getAttribute(AttributeName.DATATYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IDUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IDUsage ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IDUsage
 	 *
@@ -270,9 +269,9 @@ public abstract class JDFAutoGeneralID extends JDFElement
 		return getAttribute(AttributeName.IDUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IDValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IDValue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IDValue
 	 *

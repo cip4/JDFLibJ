@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.resource.JDFPart;
  *****************************************************************************
  * class JDFAutoIdentical : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoIdentical extends JDFElement
@@ -92,7 +92,7 @@ public abstract class JDFAutoIdentical extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x55555111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x5555555111l);
 	}
 
 	@Override
@@ -137,9 +137,8 @@ public abstract class JDFAutoIdentical extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -154,7 +153,7 @@ public abstract class JDFAutoIdentical extends JDFElement
 
 	/**
 	 * (25) getCreatePart
-	 *
+	 * 
 	 * @return JDFPart the element
 	 */
 	public JDFPart getCreatePart()

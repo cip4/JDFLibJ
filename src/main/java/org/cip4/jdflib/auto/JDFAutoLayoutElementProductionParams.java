@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.process.JDFShapeDef;
  *****************************************************************************
  * class JDFAutoLayoutElementProductionParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
@@ -98,11 +98,11 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIONPOOL, 0x66666111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x66666111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.LAYOUTELEMENTPART, 0x33333111);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.SHAPEDEF, 0x66666111);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.TESTPOOL, 0x66666111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIONPOOL, 0x6666666111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x6666666111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.LAYOUTELEMENTPART, 0x3333333111l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.SHAPEDEF, 0x6666666111l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.TESTPOOL, 0x6666666111l);
 	}
 
 	@Override
@@ -167,9 +167,8 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -184,7 +183,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 
 	/**
 	 * (25) getCreateActionPool
-	 *
+	 * 
 	 * @return JDFActionPool the element
 	 */
 	public JDFActionPool getCreateActionPool()
@@ -214,7 +213,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()
@@ -244,7 +243,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 
 	/**
 	 * (26) getCreateLayoutElementPart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLayoutElementPart the element
 	 */
@@ -266,7 +265,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 
 	/**
 	 * Get all LayoutElementPart from the current element
-	 *
+	 * 
 	 * @return Collection<JDFLayoutElementPart>, null if none are available
 	 */
 	public Collection<JDFLayoutElementPart> getAllLayoutElementPart()
@@ -296,7 +295,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 
 	/**
 	 * (25) getCreateShapeDef
-	 *
+	 * 
 	 * @return JDFShapeDef the element
 	 */
 	public JDFShapeDef getCreateShapeDef()
@@ -336,7 +335,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 
 	/**
 	 * (25) getCreateTestPool
-	 *
+	 * 
 	 * @return JDFTestPool the element
 	 */
 	public JDFTestPool getCreateTestPool()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -94,7 +94,7 @@ import org.cip4.jdflib.resource.JDFSeparationTint;
  *****************************************************************************
  * class JDFAutoPatch : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPatch extends JDFElement
@@ -102,17 +102,18 @@ public abstract class JDFAutoPatch extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x31111111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DENSITY, 0x31111111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.LAB, 0x31111111, AttributeInfo.EnumAttributeType.LabColor, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.NEUTRALDENSITY, 0x31111111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PATCHUSAGE, 0x21111111, AttributeInfo.EnumAttributeType.enumeration, EnumPatchUsage.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.RGB, 0x31111111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SIZE, 0x31111111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.SPECTRUM, 0x31111111, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x3331111111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DENSITY, 0x3331111111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.LAB, 0x3331111111l, AttributeInfo.EnumAttributeType.LabColor, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.NEUTRALDENSITY, 0x3331111111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PATCHUSAGE, 0x2221111111l, AttributeInfo.EnumAttributeType.enumeration, EnumPatchUsage.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.RGB, 0x3331111111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SIZE, 0x3331111111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SPECTRUM, 0x3331111111l, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.SPOTTYPE, 0x3311111111l, AttributeInfo.EnumAttributeType.enumeration, EnumSpotType.getEnum(0), null);
 	}
 
 	@Override
@@ -124,7 +125,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONTINT, 0x31111111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONTINT, 0x3331111111l);
 	}
 
 	@Override
@@ -179,7 +180,7 @@ public abstract class JDFAutoPatch extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPatchUsage(String name)
+		protected EnumPatchUsage(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -236,14 +237,76 @@ public abstract class JDFAutoPatch extends JDFElement
 		public static final EnumPatchUsage Ignore = new EnumPatchUsage("Ignore");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for SpotType
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Center
-	--------------------------------------------------------------------- */
+	@SuppressWarnings("rawtypes")
+	public static class EnumSpotType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		protected EnumSpotType(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumSpotType getEnum(String enumName)
+		{
+			return (EnumSpotType) getEnum(EnumSpotType.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumSpotType getEnum(int enumValue)
+		{
+			return (EnumSpotType) getEnum(EnumSpotType.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSpotType.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSpotType.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumSpotType.class);
+		}
+
+		/**  */
+		public static final EnumSpotType Emulated = new EnumSpotType("Emulated");
+		/**  */
+		public static final EnumSpotType Spot = new EnumSpotType("Spot");
+	}
+
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 */
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Center
 	 *
@@ -266,9 +329,9 @@ public abstract class JDFAutoPatch extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Density
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Density ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Density
 	 *
@@ -289,9 +352,9 @@ public abstract class JDFAutoPatch extends JDFElement
 		return getRealAttribute(AttributeName.DENSITY, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Lab
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Lab ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Lab
 	 *
@@ -314,9 +377,10 @@ public abstract class JDFAutoPatch extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NeutralDensity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NeutralDensity
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NeutralDensity
 	 *
@@ -337,9 +401,9 @@ public abstract class JDFAutoPatch extends JDFElement
 		return getRealAttribute(AttributeName.NEUTRALDENSITY, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PatchUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PatchUsage ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PatchUsage
 	 *
@@ -360,9 +424,9 @@ public abstract class JDFAutoPatch extends JDFElement
 		return EnumPatchUsage.getEnum(getAttribute(AttributeName.PATCHUSAGE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RGB
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RGB ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RGB
 	 *
@@ -385,9 +449,9 @@ public abstract class JDFAutoPatch extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Size
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Size ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Size
 	 *
@@ -410,9 +474,9 @@ public abstract class JDFAutoPatch extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Spectrum
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Spectrum ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Spectrum
 	 *
@@ -435,14 +499,36 @@ public abstract class JDFAutoPatch extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SpotType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SpotType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 */
+	public void setSpotType(EnumSpotType enumVar)
+	{
+		setAttribute(AttributeName.SPOTTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	 * (9) get attribute SpotType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EnumSpotType getSpotType()
+	{
+		return EnumSpotType.getEnum(getAttribute(AttributeName.SPOTTYPE, null, null));
+	}
+
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateSeparationTint
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationTint the element
 	 */
@@ -464,7 +550,7 @@ public abstract class JDFAutoPatch extends JDFElement
 
 	/**
 	 * Get all SeparationTint from the current element
-	 *
+	 * 
 	 * @return Collection<JDFSeparationTint>, null if none are available
 	 */
 	public Collection<JDFSeparationTint> getAllSeparationTint()

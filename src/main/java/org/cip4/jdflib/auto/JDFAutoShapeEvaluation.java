@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
  *****************************************************************************
  * class JDFAutoShapeEvaluation : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoShapeEvaluation extends JDFResource
@@ -100,11 +100,11 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.ShapeRangeList, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.X, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.Y, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.Z, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TOLERANCE, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x3333333333l, AttributeInfo.EnumAttributeType.ShapeRangeList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.X, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.Y, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.Z, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -116,7 +116,7 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x3333333333l);
 	}
 
 	@Override
@@ -172,14 +172,13 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 		return bRet;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Tolerance
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Tolerance ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Tolerance
 	 *
@@ -202,9 +201,9 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ValueList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ValueList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ValueList
 	 *
@@ -227,9 +226,9 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute X
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute X ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute X
 	 *
@@ -252,9 +251,9 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Y
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Y ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Y
 	 *
@@ -277,9 +276,9 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Z
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Z ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Z
 	 *
@@ -302,14 +301,13 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateBasicPreflightTest
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest the element
 	 */
@@ -331,7 +329,7 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 
 	/**
 	 * Get all BasicPreflightTest from the current element
-	 *
+	 * 
 	 * @return Collection<JDFBasicPreflightTest>, null if none are available
 	 */
 	public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()

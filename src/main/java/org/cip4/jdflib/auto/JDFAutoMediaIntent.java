@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -102,7 +102,7 @@ import org.cip4.jdflib.span.JDFXYPairSpan;
  *****************************************************************************
  * class JDFAutoMediaIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoMediaIntent extends JDFIntentResource
@@ -113,9 +113,9 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREPRINTED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MEDIASETCOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.USERMEDIATYPE, 0x44333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREPRINTED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MEDIASETCOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.USERMEDIATYPE, 0x4444333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -127,36 +127,36 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[30];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BACKCOATINGS, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.BRIGHTNESS, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.BUYERSUPPLIED, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.CERTIFICATION, 0x33111111);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.DIMENSIONS, 0x77777766);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.FLUTE, 0x66661111);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.FLUTEDIRECTION, 0x66661111);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.FRONTCOATINGS, 0x66666666);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.GRADE, 0x77666666);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.GRAINDIRECTION, 0x66666611);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.HOLECOUNT, 0x77777776);
-		elemInfoTable[11] = new ElemInfoTable(ElementName.HOLETYPE, 0x66666661);
-		elemInfoTable[12] = new ElemInfoTable(ElementName.ISOPAPERSUBSTRATE, 0x66611111);
-		elemInfoTable[13] = new ElemInfoTable(ElementName.MEDIACOLOR, 0x66666666);
-		elemInfoTable[14] = new ElemInfoTable(ElementName.MEDIACOLORDETAILS, 0x66666611);
-		elemInfoTable[15] = new ElemInfoTable(ElementName.MEDIAQUALITY, 0x66661111);
-		elemInfoTable[16] = new ElemInfoTable(ElementName.MEDIATYPE, 0x66666661);
-		elemInfoTable[17] = new ElemInfoTable(ElementName.MEDIATYPEDETAILS, 0x66666111);
-		elemInfoTable[18] = new ElemInfoTable(ElementName.MEDIAUNIT, 0x77777766);
-		elemInfoTable[19] = new ElemInfoTable(ElementName.OPACITY, 0x66666666);
-		elemInfoTable[20] = new ElemInfoTable(ElementName.OPACITYLEVEL, 0x66666611);
-		elemInfoTable[21] = new ElemInfoTable(ElementName.RECYCLED, 0x77777766);
-		elemInfoTable[22] = new ElemInfoTable(ElementName.RECYCLEDPERCENTAGE, 0x66666611);
-		elemInfoTable[23] = new ElemInfoTable(ElementName.STOCKBRAND, 0x66666666);
-		elemInfoTable[24] = new ElemInfoTable(ElementName.STOCKTYPE, 0x66666666);
-		elemInfoTable[25] = new ElemInfoTable(ElementName.TEXTURE, 0x66666666);
-		elemInfoTable[26] = new ElemInfoTable(ElementName.THICKNESS, 0x66666661);
-		elemInfoTable[27] = new ElemInfoTable(ElementName.USWEIGHT, 0x77777766);
-		elemInfoTable[28] = new ElemInfoTable(ElementName.WEIGHT, 0x66666666);
-		elemInfoTable[29] = new ElemInfoTable(ElementName.MEDIALAYERS, 0x66661111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BACKCOATINGS, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.BRIGHTNESS, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.BUYERSUPPLIED, 0x6666666666l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.CERTIFICATION, 0x3333111111l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.DIMENSIONS, 0x7777777766l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.FLUTE, 0x6666661111l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.FLUTEDIRECTION, 0x6666661111l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.FRONTCOATINGS, 0x6666666666l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.GRADE, 0x7777666666l);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.GRAINDIRECTION, 0x6666666611l);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.HOLECOUNT, 0x7777777776l);
+		elemInfoTable[11] = new ElemInfoTable(ElementName.HOLETYPE, 0x6666666661l);
+		elemInfoTable[12] = new ElemInfoTable(ElementName.ISOPAPERSUBSTRATE, 0x6666611111l);
+		elemInfoTable[13] = new ElemInfoTable(ElementName.MEDIACOLOR, 0x6666666666l);
+		elemInfoTable[14] = new ElemInfoTable(ElementName.MEDIACOLORDETAILS, 0x6666666611l);
+		elemInfoTable[15] = new ElemInfoTable(ElementName.MEDIAQUALITY, 0x6666661111l);
+		elemInfoTable[16] = new ElemInfoTable(ElementName.MEDIATYPE, 0x6666666661l);
+		elemInfoTable[17] = new ElemInfoTable(ElementName.MEDIATYPEDETAILS, 0x6666666111l);
+		elemInfoTable[18] = new ElemInfoTable(ElementName.MEDIAUNIT, 0x7777777766l);
+		elemInfoTable[19] = new ElemInfoTable(ElementName.OPACITY, 0x6666666666l);
+		elemInfoTable[20] = new ElemInfoTable(ElementName.OPACITYLEVEL, 0x6666666611l);
+		elemInfoTable[21] = new ElemInfoTable(ElementName.RECYCLED, 0x7777777766l);
+		elemInfoTable[22] = new ElemInfoTable(ElementName.RECYCLEDPERCENTAGE, 0x6666666611l);
+		elemInfoTable[23] = new ElemInfoTable(ElementName.STOCKBRAND, 0x6666666666l);
+		elemInfoTable[24] = new ElemInfoTable(ElementName.STOCKTYPE, 0x6666666666l);
+		elemInfoTable[25] = new ElemInfoTable(ElementName.TEXTURE, 0x6666666666l);
+		elemInfoTable[26] = new ElemInfoTable(ElementName.THICKNESS, 0x6666666661l);
+		elemInfoTable[27] = new ElemInfoTable(ElementName.USWEIGHT, 0x7777777766l);
+		elemInfoTable[28] = new ElemInfoTable(ElementName.WEIGHT, 0x6666666666l);
+		elemInfoTable[29] = new ElemInfoTable(ElementName.MEDIALAYERS, 0x6666661111l);
 	}
 
 	@Override
@@ -171,7 +171,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMediaIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -183,7 +183,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMediaIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -196,25 +196,24 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMediaIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PrePrinted
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PrePrinted ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PrePrinted
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPrePrinted(final boolean value)
+	public void setPrePrinted(boolean value)
 	{
 		setAttribute(AttributeName.PREPRINTED, value, null);
 	}
@@ -229,15 +228,16 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 		return getBoolAttribute(AttributeName.PREPRINTED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MediaSetCount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MediaSetCount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MediaSetCount
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMediaSetCount(final int value)
+	public void setMediaSetCount(int value)
 	{
 		setAttribute(AttributeName.MEDIASETCOUNT, value, null);
 	}
@@ -252,15 +252,16 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 		return getIntAttribute(AttributeName.MEDIASETCOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UserMediaType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UserMediaType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute UserMediaType
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUserMediaType(final String value)
+	public void setUserMediaType(String value)
 	{
 		setAttribute(AttributeName.USERMEDIATYPE, value, null);
 	}
@@ -275,9 +276,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 		return getAttribute(AttributeName.USERMEDIATYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -292,7 +292,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBackCoatings
-	 *
+	 * 
 	 * @return JDFSpanCoatings the element
 	 */
 	public JDFSpanCoatings getCreateBackCoatings()
@@ -322,7 +322,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBrightness
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateBrightness()
@@ -352,7 +352,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBuyerSupplied
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateBuyerSupplied()
@@ -372,11 +372,11 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreateCertification
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCertification the element
 	 */
-	public JDFCertification getCreateCertification(final int iSkip)
+	public JDFCertification getCreateCertification(int iSkip)
 	{
 		return (JDFCertification) getCreateElement_JDFElement(ElementName.CERTIFICATION, null, iSkip);
 	}
@@ -387,14 +387,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFCertification the element default is getCertification(0)
 	 */
-	public JDFCertification getCertification(final int iSkip)
+	public JDFCertification getCertification(int iSkip)
 	{
 		return (JDFCertification) getElement(ElementName.CERTIFICATION, null, iSkip);
 	}
 
 	/**
 	 * Get all Certification from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCertification>, null if none are available
 	 */
 	public Collection<JDFCertification> getAllCertification()
@@ -424,7 +424,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateDimensions
-	 *
+	 * 
 	 * @return JDFXYPairSpan the element
 	 */
 	public JDFXYPairSpan getCreateDimensions()
@@ -454,7 +454,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateFlute
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateFlute()
@@ -484,7 +484,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateFluteDirection
-	 *
+	 * 
 	 * @return JDFSpanFluteDirection the element
 	 */
 	public JDFSpanFluteDirection getCreateFluteDirection()
@@ -514,7 +514,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateFrontCoatings
-	 *
+	 * 
 	 * @return JDFSpanCoatings the element
 	 */
 	public JDFSpanCoatings getCreateFrontCoatings()
@@ -544,7 +544,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateGrade
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreateGrade()
@@ -574,7 +574,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateGrainDirection
-	 *
+	 * 
 	 * @return JDFSpanGrainDirection the element
 	 */
 	public JDFSpanGrainDirection getCreateGrainDirection()
@@ -604,7 +604,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateHoleCount
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreateHoleCount()
@@ -634,7 +634,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateHoleType
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateHoleType()
@@ -664,7 +664,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateISOPaperSubstrate
-	 *
+	 * 
 	 * @return JDFSpanISOPaperSubstrate the element
 	 */
 	public JDFSpanISOPaperSubstrate getCreateISOPaperSubstrate()
@@ -694,7 +694,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMediaColor
-	 *
+	 * 
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateMediaColor()
@@ -724,7 +724,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMediaColorDetails
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateMediaColorDetails()
@@ -754,7 +754,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMediaQuality
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateMediaQuality()
@@ -784,7 +784,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMediaType
-	 *
+	 * 
 	 * @return JDFSpanMediaType the element
 	 */
 	public JDFSpanMediaType getCreateMediaType()
@@ -814,7 +814,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMediaTypeDetails
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateMediaTypeDetails()
@@ -844,7 +844,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMediaUnit
-	 *
+	 * 
 	 * @return JDFSpanMediaUnit the element
 	 */
 	public JDFSpanMediaUnit getCreateMediaUnit()
@@ -874,7 +874,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateOpacity
-	 *
+	 * 
 	 * @return JDFSpanOpacity the element
 	 */
 	public JDFSpanOpacity getCreateOpacity()
@@ -904,7 +904,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateOpacityLevel
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateOpacityLevel()
@@ -934,7 +934,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateRecycled
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateRecycled()
@@ -964,7 +964,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateRecycledPercentage
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateRecycledPercentage()
@@ -994,7 +994,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateStockBrand
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateStockBrand()
@@ -1024,7 +1024,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateStockType
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateStockType()
@@ -1054,7 +1054,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateTexture
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateTexture()
@@ -1084,7 +1084,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateThickness
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateThickness()
@@ -1114,7 +1114,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateUSWeight
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateUSWeight()
@@ -1144,7 +1144,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateWeight
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateWeight()
@@ -1174,7 +1174,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMediaLayers
-	 *
+	 * 
 	 * @return JDFMediaLayers the element
 	 */
 	public JDFMediaLayers getCreateMediaLayers()

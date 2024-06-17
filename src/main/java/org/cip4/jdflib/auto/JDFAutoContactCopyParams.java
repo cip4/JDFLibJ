@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFScreeningParams;
  *****************************************************************************
  * class JDFAutoContactCopyParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoContactCopyParams extends JDFResource
@@ -101,12 +101,12 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTACTSCREEN, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POLARITYCHANGE, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.REPEATSTEP, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.CYCLE, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.DIFFUSION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumDiffusion.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.VACUUM, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTACTSCREEN, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POLARITYCHANGE, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.REPEATSTEP, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.CYCLE, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.DIFFUSION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumDiffusion.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.VACUUM, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.SCREENINGPARAMS, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SCREENINGPARAMS, 0x6666666661l);
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDiffusion(String name)
+		protected EnumDiffusion(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -246,14 +246,14 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 		public static final EnumDiffusion Off = new EnumDiffusion("Off");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ContactScreen
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ContactScreen
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ContactScreen
 	 *
@@ -274,9 +274,10 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 		return getBoolAttribute(AttributeName.CONTACTSCREEN, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PolarityChange
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PolarityChange
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PolarityChange
 	 *
@@ -297,9 +298,9 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 		return getBoolAttribute(AttributeName.POLARITYCHANGE, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RepeatStep
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RepeatStep ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RepeatStep
 	 *
@@ -322,9 +323,9 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Cycle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Cycle ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Cycle
 	 *
@@ -345,9 +346,9 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 		return getIntAttribute(AttributeName.CYCLE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Diffusion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Diffusion ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Diffusion
 	 *
@@ -368,9 +369,9 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 		return EnumDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Vacuum
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Vacuum ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Vacuum
 	 *
@@ -391,9 +392,8 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 		return getRealAttribute(AttributeName.VACUUM, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -408,7 +408,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 
 	/**
 	 * (25) getCreateScreeningParams
-	 *
+	 * 
 	 * @return JDFScreeningParams the element
 	 */
 	public JDFScreeningParams getCreateScreeningParams()

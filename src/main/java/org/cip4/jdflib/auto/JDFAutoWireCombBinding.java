@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoWireCombBinding : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoWireCombBinding extends JDFElement
@@ -96,11 +96,11 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.WIRECOMBBRAND, 0x66666111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.WIRECOMBMATERIAL, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.WIRECOMBSHAPE, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.HOLELIST, 0x66666611);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.HOLETYPE, 0x66111111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.WIRECOMBBRAND, 0x6666666111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.WIRECOMBMATERIAL, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.WIRECOMBSHAPE, 0x6666666666l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.HOLELIST, 0x6666666611l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.HOLETYPE, 0x6666111111l);
 	}
 
 	@Override
@@ -145,9 +145,8 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -162,7 +161,7 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 
 	/**
 	 * (25) getCreateWireCombBrand
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateWireCombBrand()
@@ -192,7 +191,7 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 
 	/**
 	 * (25) getCreateWireCombMaterial
-	 *
+	 * 
 	 * @return JDFSpanWireCombMaterial the element
 	 */
 	public JDFSpanWireCombMaterial getCreateWireCombMaterial()
@@ -222,7 +221,7 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 
 	/**
 	 * (25) getCreateWireCombShape
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateWireCombShape()
@@ -252,7 +251,7 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 
 	/**
 	 * (25) getCreateHoleList
-	 *
+	 * 
 	 * @return JDFHoleList the element
 	 */
 	public JDFHoleList getCreateHoleList()
@@ -282,7 +281,7 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 
 	/**
 	 * (25) getCreateHoleType
-	 *
+	 * 
 	 * @return JDFSpanHoleType the element
 	 */
 	public JDFSpanHoleType getCreateHoleType()

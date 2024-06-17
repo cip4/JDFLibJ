@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
  *****************************************************************************
  * class JDFAutoImageSetterParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoImageSetterParams extends JDFResource
@@ -104,24 +104,24 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[18];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MIRRORAROUND, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMirrorAround.getEnum(0), "None");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POLARITY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPolarity.getEnum(0), "Positive");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SIDES, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), "OneSidedFront");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ADVANCEDISTANCE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.BURNOUTAREA, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.CENTERACROSS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCenterAcross.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.CUTMEDIA, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MANUALFEED, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINBOTTOM, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINLEFT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINRIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINTOP, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.PUNCH, 0x44444333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.PUNCHTYPE, 0x44444333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.RESOLUTION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.ROLLCUT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumSourceWorkStyle.getEnum(0), null);
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.TRANSFERCURVE, 0x33333333, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MIRRORAROUND, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMirrorAround.getEnum(0), "None");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POLARITY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPolarity.getEnum(0), "Positive");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SIDES, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), "OneSidedFront");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ADVANCEDISTANCE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.BURNOUTAREA, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.CENTERACROSS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCenterAcross.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.CUTMEDIA, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MANUALFEED, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINBOTTOM, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINLEFT, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINRIGHT, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINTOP, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.PUNCH, 0x4444444333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.PUNCHTYPE, 0x4444444333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.RESOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.ROLLCUT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumSourceWorkStyle.getEnum(0), null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.TRANSFERCURVE, 0x3333333333l, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
 	}
 
 	@Override
@@ -133,8 +133,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.MEDIA, 0x66666661);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.FITPOLICY, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.MEDIA, 0x6666666661l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FITPOLICY, 0x6666666611l);
 	}
 
 	@Override
@@ -209,7 +209,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMirrorAround(String name)
+		protected EnumMirrorAround(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -276,7 +276,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPolarity(String name)
+		protected EnumPolarity(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -339,7 +339,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSides(String name)
+		protected EnumSides(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -408,7 +408,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumCenterAcross(String name)
+		protected EnumCenterAcross(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -475,7 +475,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSourceWorkStyle(String name)
+		protected EnumSourceWorkStyle(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -536,14 +536,14 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		public static final EnumSourceWorkStyle WorkAndTwist = new EnumSourceWorkStyle("WorkAndTwist");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MirrorAround
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MirrorAround
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute MirrorAround
 	 *
@@ -564,9 +564,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return EnumMirrorAround.getEnum(getAttribute(AttributeName.MIRRORAROUND, null, "None"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Polarity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Polarity ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Polarity
 	 *
@@ -587,9 +587,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return EnumPolarity.getEnum(getAttribute(AttributeName.POLARITY, null, "Positive"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Sides
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Sides ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Sides
 	 *
@@ -610,9 +610,10 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSidedFront"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AdvanceDistance
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AdvanceDistance
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AdvanceDistance
 	 *
@@ -633,9 +634,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return getRealAttribute(AttributeName.ADVANCEDISTANCE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BurnOutArea
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BurnOutArea ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BurnOutArea
 	 *
@@ -658,9 +659,10 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CenterAcross
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CenterAcross
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute CenterAcross
 	 *
@@ -681,9 +683,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return EnumCenterAcross.getEnum(getAttribute(AttributeName.CENTERACROSS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CutMedia
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CutMedia ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CutMedia
 	 *
@@ -704,9 +706,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return getBoolAttribute(AttributeName.CUTMEDIA, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ManualFeed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ManualFeed ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ManualFeed
 	 *
@@ -727,9 +729,10 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return getBoolAttribute(AttributeName.MANUALFEED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NonPrintableMarginBottom
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginBottom
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NonPrintableMarginBottom
 	 *
@@ -750,9 +753,10 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NonPrintableMarginLeft
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginLeft
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NonPrintableMarginLeft
 	 *
@@ -773,9 +777,10 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINLEFT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NonPrintableMarginRight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginRight
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NonPrintableMarginRight
 	 *
@@ -796,9 +801,10 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINRIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NonPrintableMarginTop
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginTop
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NonPrintableMarginTop
 	 *
@@ -819,9 +825,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINTOP, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Punch
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Punch ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Punch
 	 *
@@ -842,9 +848,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return getBoolAttribute(AttributeName.PUNCH, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PunchType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PunchType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PunchType
 	 *
@@ -865,9 +871,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return getAttribute(AttributeName.PUNCHTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Resolution
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Resolution ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Resolution
 	 *
@@ -890,9 +896,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RollCut
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RollCut ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RollCut
 	 *
@@ -913,9 +919,10 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return getRealAttribute(AttributeName.ROLLCUT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceWorkStyle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceWorkStyle
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SourceWorkStyle
 	 *
@@ -936,9 +943,10 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return EnumSourceWorkStyle.getEnum(getAttribute(AttributeName.SOURCEWORKSTYLE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TransferCurve
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TransferCurve
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TransferCurve
 	 *
@@ -961,9 +969,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -978,7 +985,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()
@@ -1018,7 +1025,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 
 	/**
 	 * (25) getCreateFitPolicy
-	 *
+	 * 
 	 * @return JDFFitPolicy the element
 	 */
 	public JDFFitPolicy getCreateFitPolicy()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoFitPolicy : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoFitPolicy extends JDFResource
@@ -97,11 +97,11 @@ public abstract class JDFAutoFitPolicy extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.GUTTERPOLICY, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumGutterPolicy.getEnum(0), "Fixed");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CLIPOFFSET, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MINGUTTER, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATEPOLICY, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumRotatePolicy.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.SIZEPOLICY, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumSizePolicy.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.GUTTERPOLICY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumGutterPolicy.getEnum(0), "Fixed");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CLIPOFFSET, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MINGUTTER, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATEPOLICY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumRotatePolicy.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SIZEPOLICY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumSizePolicy.getEnum(0), null);
 	}
 
 	@Override
@@ -176,7 +176,7 @@ public abstract class JDFAutoFitPolicy extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumGutterPolicy(String name)
+		protected EnumGutterPolicy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -239,7 +239,7 @@ public abstract class JDFAutoFitPolicy extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumRotatePolicy(String name)
+		protected EnumRotatePolicy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -306,7 +306,7 @@ public abstract class JDFAutoFitPolicy extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSizePolicy(String name)
+		protected EnumSizePolicy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -365,14 +365,14 @@ public abstract class JDFAutoFitPolicy extends JDFResource
 		public static final EnumSizePolicy Tile = new EnumSizePolicy("Tile");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GutterPolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GutterPolicy
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute GutterPolicy
 	 *
@@ -393,9 +393,9 @@ public abstract class JDFAutoFitPolicy extends JDFResource
 		return EnumGutterPolicy.getEnum(getAttribute(AttributeName.GUTTERPOLICY, null, "Fixed"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ClipOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ClipOffset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ClipOffset
 	 *
@@ -418,9 +418,9 @@ public abstract class JDFAutoFitPolicy extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinGutter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinGutter ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinGutter
 	 *
@@ -443,9 +443,10 @@ public abstract class JDFAutoFitPolicy extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RotatePolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RotatePolicy
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute RotatePolicy
 	 *
@@ -466,9 +467,9 @@ public abstract class JDFAutoFitPolicy extends JDFResource
 		return EnumRotatePolicy.getEnum(getAttribute(AttributeName.ROTATEPOLICY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SizePolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SizePolicy ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SizePolicy
 	 *

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.span.JDFTimeSpan;
  *****************************************************************************
  * class JDFAutoPublishingIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPublishingIntent extends JDFIntentResource
@@ -101,7 +101,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x33331111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x3333331111l, AttributeInfo.EnumAttributeType.IDREFS, null, null);
 	}
 
 	@Override
@@ -113,11 +113,11 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ISSUEDATE, 0x55555111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.ISSUENAME, 0x55555111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.ISSUETYPE, 0x55555111);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.CIRCULATION, 0x66666111);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.CONTENTLIST, 0x66666111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ISSUEDATE, 0x5555555111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.ISSUENAME, 0x5555555111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.ISSUETYPE, 0x5555555111l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.CIRCULATION, 0x6666666111l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.CONTENTLIST, 0x6666666111l);
 	}
 
 	@Override
@@ -162,14 +162,14 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ContentDataRefs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ContentDataRefs
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ContentDataRefs
 	 *
@@ -193,9 +193,8 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 		return vStrAttrib;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -210,7 +209,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateIssueDate
-	 *
+	 * 
 	 * @return JDFTimeSpan the element
 	 */
 	public JDFTimeSpan getCreateIssueDate()
@@ -240,7 +239,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateIssueName
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateIssueName()
@@ -270,7 +269,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateIssueType
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateIssueType()
@@ -300,7 +299,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCirculation
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreateCirculation()
@@ -330,7 +329,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateContentList
-	 *
+	 * 
 	 * @return JDFContentList the element
 	 */
 	public JDFContentList getCreateContentList()

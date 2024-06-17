@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.JDFPart;
  *****************************************************************************
  * class JDFAutoRequestQueueEntryParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
@@ -104,11 +104,11 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUEURL, 0x22222211, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.SUBMITPOLICY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumSubmitPolicy.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUEURL, 0x2222222211l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SUBMITPOLICY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumSubmitPolicy.getEnum(0), null);
 	}
 
 	@Override
@@ -120,8 +120,8 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333311);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.QUEUE, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x3333333311l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.QUEUE, 0x6666666611l);
 	}
 
 	@Override
@@ -176,7 +176,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSubmitPolicy(String name)
+		protected EnumSubmitPolicy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -231,14 +231,13 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 		public static final EnumSubmitPolicy Force = new EnumSubmitPolicy("Force");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Activation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Activation
 	 *
@@ -259,9 +258,9 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobID
 	 *
@@ -282,9 +281,9 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobPartID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobPartID
 	 *
@@ -305,9 +304,9 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QueueURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QueueURL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute QueueURL
 	 *
@@ -328,9 +327,10 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 		return getAttribute(AttributeName.QUEUEURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SubmitPolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SubmitPolicy
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SubmitPolicy
 	 *
@@ -351,14 +351,13 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 		return EnumSubmitPolicy.getEnum(getAttribute(AttributeName.SUBMITPOLICY, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -380,7 +379,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()
@@ -410,7 +409,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 
 	/**
 	 * (25) getCreateQueue
-	 *
+	 * 
 	 * @return JDFQueue the element
 	 */
 	public JDFQueue getCreateQueue()

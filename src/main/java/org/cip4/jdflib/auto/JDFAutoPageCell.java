@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,7 +96,7 @@ import org.cip4.jdflib.resource.process.JDFColor;
  *****************************************************************************
  * class JDFAutoPageCell : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPageCell extends JDFElement
@@ -107,11 +107,11 @@ public abstract class JDFAutoPageCell extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BORDER, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CLIPBOX, 0x33333331, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MARKLIST, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumRotate.getEnum(0), "Rotate0");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.TRIMSIZE, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BORDER, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CLIPBOX, 0x3333333331l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MARKLIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumRotate.getEnum(0), "Rotate0");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.TRIMSIZE, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -123,10 +123,10 @@ public abstract class JDFAutoPageCell extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COLOR, 0x66666661);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICEMARK, 0x66666661);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.FITPOLICY, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.IMAGESHIFT, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLOR, 0x6666666661l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICEMARK, 0x6666666661l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.FITPOLICY, 0x6666666661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.IMAGESHIFT, 0x6666666661l);
 	}
 
 	@Override
@@ -181,7 +181,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumRotate(String name)
+		protected EnumRotate(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -238,14 +238,13 @@ public abstract class JDFAutoPageCell extends JDFElement
 		public static final EnumRotate Rotate270 = new EnumRotate("Rotate270");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Border
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Border ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Border
 	 *
@@ -266,9 +265,9 @@ public abstract class JDFAutoPageCell extends JDFElement
 		return getRealAttribute(AttributeName.BORDER, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ClipBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ClipBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ClipBox
 	 *
@@ -291,9 +290,9 @@ public abstract class JDFAutoPageCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MarkList
 	 *
@@ -317,9 +316,9 @@ public abstract class JDFAutoPageCell extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Rotate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Rotate ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Rotate
 	 *
@@ -340,9 +339,9 @@ public abstract class JDFAutoPageCell extends JDFElement
 		return EnumRotate.getEnum(getAttribute(AttributeName.ROTATE, null, "Rotate0"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrimSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrimSize ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TrimSize
 	 *
@@ -365,9 +364,8 @@ public abstract class JDFAutoPageCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -382,7 +380,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 
 	/**
 	 * (25) getCreateColor
-	 *
+	 * 
 	 * @return JDFColor the element
 	 */
 	public JDFColor getCreateColor()
@@ -422,7 +420,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 
 	/**
 	 * (25) getCreateDeviceMark
-	 *
+	 * 
 	 * @return JDFDeviceMark the element
 	 */
 	public JDFDeviceMark getCreateDeviceMark()
@@ -462,7 +460,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 
 	/**
 	 * (25) getCreateFitPolicy
-	 *
+	 * 
 	 * @return JDFFitPolicy the element
 	 */
 	public JDFFitPolicy getCreateFitPolicy()
@@ -502,7 +500,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 
 	/**
 	 * (25) getCreateImageShift
-	 *
+	 * 
 	 * @return JDFImageShift the element
 	 */
 	public JDFImageShift getCreateImageShift()

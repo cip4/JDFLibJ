@@ -135,11 +135,12 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 		return ri;
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
 		int i = 0;
 		elemInfoTable[i++] = new ElemInfoTable(ElementName.PREVIEW, 0x33333333);
+		elemInfoTable[i++] = new ElemInfoTable(ElementName.PART, 0x3333333333l);
 	}
 
 	@Override
@@ -649,7 +650,8 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	}
 
 	/**
-	 * get the sum of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e. mPart is a submap of the searche PartAmount elements
+	 * get the sum of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e. mPart is a submap of the searche
+	 * PartAmount elements
 	 *
 	 *
 	 * @param attName the Attribute name , e.g Amount, ActualAmount

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
  *****************************************************************************
  * class JDFAutoContentObject : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoContentObject extends JDFElement
@@ -101,29 +101,29 @@ public abstract class JDFAutoContentObject extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[23];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ORD, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SOURCECLIPPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRIMCLIPPATH, 0x33331111, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.LOGICALSTACKORD, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.CLIPBOXFORMAT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.ANCHOR, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.ORDID, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.TYPE, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.CLIPBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.ORDEXPRESSION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.COMPENSATIONCTMTEMPLATE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.LAYERID, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.TRIMCTM, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.SETORD, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.CLIPPATH, 0x33333111, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.HALFTONEPHASEORIGIN, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.DOCORD, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.COMPENSATIONCTMFORMAT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[18] = new AtrInfoTable(AttributeName.ID, 0x33311111, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable[19] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[20] = new AtrInfoTable(AttributeName.CTM, 0x22222222, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[21] = new AtrInfoTable(AttributeName.CLIPBOXTEMPLATE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[22] = new AtrInfoTable(AttributeName.TRIMSIZE, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ORD, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SOURCECLIPPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRIMCLIPPATH, 0x3333331111l, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.LOGICALSTACKORD, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.CLIPBOXFORMAT, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ANCHOR, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.ORDID, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.TYPE, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.CLIPBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.ORDEXPRESSION, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.COMPENSATIONCTMTEMPLATE, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.LAYERID, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.TRIMCTM, 0x3333333331l, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.SETORD, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.CLIPPATH, 0x3333333111l, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.HALFTONEPHASEORIGIN, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.DOCORD, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.COMPENSATIONCTMFORMAT, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[18] = new AtrInfoTable(AttributeName.ID, 0x3333311111l, AttributeInfo.EnumAttributeType.ID, null, null);
+		atrInfoTable[19] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x3333311111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[20] = new AtrInfoTable(AttributeName.CTM, 0x2222222222l, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[21] = new AtrInfoTable(AttributeName.CLIPBOXTEMPLATE, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[22] = new AtrInfoTable(AttributeName.TRIMSIZE, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -178,7 +178,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumAnchor(String name)
+		protected EnumAnchor(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -255,7 +255,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumType(String name)
+		protected EnumType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -308,14 +308,13 @@ public abstract class JDFAutoContentObject extends JDFElement
 		public static final EnumType Mark = new EnumType("Mark");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Ord
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Ord ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Ord
 	 *
@@ -336,9 +335,10 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getIntAttribute(AttributeName.ORD, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceClipPath
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceClipPath
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SourceClipPath
 	 *
@@ -359,9 +359,10 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.SOURCECLIPPATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrimClipPath
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrimClipPath
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TrimClipPath
 	 *
@@ -382,9 +383,10 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.TRIMCLIPPATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LogicalStackOrd
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LogicalStackOrd
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LogicalStackOrd
 	 *
@@ -405,9 +407,10 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getIntAttribute(AttributeName.LOGICALSTACKORD, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ClipBoxFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ClipBoxFormat
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ClipBoxFormat
 	 *
@@ -428,9 +431,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.CLIPBOXFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Anchor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Anchor
 	 *
@@ -451,9 +454,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OrdID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OrdID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OrdID
 	 *
@@ -474,9 +477,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getIntAttribute(AttributeName.ORDID, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Type
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Type
 	 *
@@ -497,9 +500,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ClipBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ClipBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ClipBox
 	 *
@@ -522,9 +525,10 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OrdExpression
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OrdExpression
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OrdExpression
 	 *
@@ -545,9 +549,10 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.ORDEXPRESSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CompensationCTMTemplate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CompensationCTMTemplate
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CompensationCTMTemplate
 	 *
@@ -568,9 +573,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.COMPENSATIONCTMTEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LayerID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LayerID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LayerID
 	 *
@@ -591,9 +596,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getIntAttribute(AttributeName.LAYERID, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrimCTM
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrimCTM ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TrimCTM
 	 *
@@ -616,9 +621,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SetOrd
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SetOrd ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SetOrd
 	 *
@@ -639,9 +644,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getIntAttribute(AttributeName.SETORD, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ClipPath
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ClipPath ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ClipPath
 	 *
@@ -662,9 +667,10 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.CLIPPATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HalfTonePhaseOrigin
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HalfTonePhaseOrigin
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HalfTonePhaseOrigin
 	 *
@@ -687,9 +693,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DocOrd
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DocOrd ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DocOrd
 	 *
@@ -710,9 +716,10 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getIntAttribute(AttributeName.DOCORD, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CompensationCTMFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CompensationCTMFormat
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CompensationCTMFormat
 	 *
@@ -733,9 +740,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.COMPENSATIONCTMFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ID
 	 *
@@ -758,9 +765,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyIDs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AssemblyIDs
 	 *
@@ -784,9 +791,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CTM
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CTM
 	 *
@@ -809,9 +816,10 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ClipBoxTemplate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ClipBoxTemplate
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ClipBoxTemplate
 	 *
@@ -832,9 +840,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 		return getAttribute(AttributeName.CLIPBOXTEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrimSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrimSize ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TrimSize
 	 *

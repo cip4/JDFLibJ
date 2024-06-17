@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,7 @@ import org.cip4.jdflib.resource.intent.JDFShapeCut;
  *****************************************************************************
  * class JDFAutoShapeCuttingIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
@@ -94,7 +94,7 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.SHAPECUT, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SHAPECUT, 0x3333333333l);
 	}
 
 	@Override
@@ -139,14 +139,13 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateShapeCut
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFShapeCut the element
 	 */
@@ -168,7 +167,7 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
 
 	/**
 	 * Get all ShapeCut from the current element
-	 *
+	 * 
 	 * @return Collection<JDFShapeCut>, null if none are available
 	 */
 	public Collection<JDFShapeCut> getAllShapeCut()

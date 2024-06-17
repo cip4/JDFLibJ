@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,7 +95,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoQueueEntry : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoQueueEntry extends JDFElement
@@ -106,21 +106,21 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[15];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33311111, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDTIME, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.GANGNAME, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.GANGPOLICY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumGangPolicy.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRIORITY, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.RELATEDJOBID, 0x31111111, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.RELATEDJOBPARTID, 0x31111111, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumQueueEntryStatus.getEnum(0), null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.STARTTIME, 0x33333331, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33311111, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDTIME, 0x3333333311l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.GANGNAME, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.GANGPOLICY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumGangPolicy.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRIORITY, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x2222222222l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.RELATEDJOBID, 0x3331111111l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.RELATEDJOBPARTID, 0x3331111111l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.STATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumQueueEntryStatus.getEnum(0), null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.STARTTIME, 0x3333333331l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x3333311111l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 	}
 
 	@Override
@@ -132,9 +132,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.JOBPHASE, 0x33333311);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.GANGSOURCE, 0x33111111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.JOBPHASE, 0x3333333311l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.GANGSOURCE, 0x3333111111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x3333333311l);
 	}
 
 	@Override
@@ -189,7 +189,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumGangPolicy(String name)
+		protected EnumGangPolicy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -254,7 +254,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumQueueEntryStatus(String name)
+		protected EnumQueueEntryStatus(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -319,14 +319,13 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		public static final EnumQueueEntryStatus Aborted = new EnumQueueEntryStatus("Aborted");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Activation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Activation
 	 *
@@ -347,9 +346,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DeviceID
 	 *
@@ -370,9 +369,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EndTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EndTime ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute EndTime
 	 *
@@ -400,9 +399,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GangName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GangName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GangName
 	 *
@@ -423,9 +422,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return getAttribute(AttributeName.GANGNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GangPolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GangPolicy ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute GangPolicy
 	 *
@@ -446,9 +445,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return EnumGangPolicy.getEnum(getAttribute(AttributeName.GANGPOLICY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobID
 	 *
@@ -469,9 +468,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobPartID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobPartID
 	 *
@@ -492,9 +491,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Priority
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Priority ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Priority
 	 *
@@ -515,9 +514,10 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return getIntAttribute(AttributeName.PRIORITY, null, 1);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QueueEntryID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute QueueEntryID
 	 *
@@ -538,9 +538,10 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RelatedJobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelatedJobID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RelatedJobID
 	 *
@@ -561,9 +562,10 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return getAttribute(AttributeName.RELATEDJOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RelatedJobPartID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelatedJobPartID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RelatedJobPartID
 	 *
@@ -584,9 +586,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return getAttribute(AttributeName.RELATEDJOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Status
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Status ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Status
 	 *
@@ -607,9 +609,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return EnumQueueEntryStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StartTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StartTime ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute StartTime
 	 *
@@ -637,9 +639,10 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StatusDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StatusDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StatusDetails
 	 *
@@ -660,9 +663,10 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SubmissionTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SubmissionTime
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute SubmissionTime
 	 *
@@ -690,14 +694,13 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		return ret;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateJobPhase
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFJobPhase the element
 	 */
@@ -719,7 +722,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 
 	/**
 	 * Get all JobPhase from the current element
-	 *
+	 * 
 	 * @return Collection<JDFJobPhase>, null if none are available
 	 */
 	public Collection<JDFJobPhase> getAllJobPhase()
@@ -739,7 +742,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 
 	/**
 	 * (26) getCreateGangSource
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGangSource the element
 	 */
@@ -761,7 +764,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 
 	/**
 	 * Get all GangSource from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGangSource>, null if none are available
 	 */
 	public Collection<JDFGangSource> getAllGangSource()
@@ -781,7 +784,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -803,7 +806,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()

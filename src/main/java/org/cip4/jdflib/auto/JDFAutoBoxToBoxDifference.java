@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoBoxToBoxDifference : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBoxToBoxDifference extends JDFElement
@@ -96,8 +96,8 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FROMBOX, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumFromBox.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.TOBOX, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumToBox.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FROMBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumFromBox.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TOBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumToBox.getEnum(0), null);
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumFromBox(String name)
+		protected EnumFromBox(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -225,7 +225,7 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumToBox(String name)
+		protected EnumToBox(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -288,14 +288,13 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 		public static final EnumToBox TrimBox = new EnumToBox("TrimBox");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FromBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FromBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute FromBox
 	 *
@@ -316,9 +315,9 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 		return EnumFromBox.getEnum(getAttribute(AttributeName.FROMBOX, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ToBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ToBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ToBox
 	 *

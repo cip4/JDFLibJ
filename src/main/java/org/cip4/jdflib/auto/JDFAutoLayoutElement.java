@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -102,7 +102,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFScreeningParams;
  *****************************************************************************
  * class JDFAutoLayoutElement : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLayoutElement extends JDFResource
@@ -113,22 +113,22 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[16];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.IGNOREPDLCOPIES, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.IGNOREPDLIMPOSITION, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.CLIPPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x33331111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ELEMENTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumElementType.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.HASBLEEDS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.ISBLANK, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.ISPRINTABLE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.ISTRAPPED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.SETLEVEL, 0x33331111, AttributeInfo.EnumAttributeType.XPath, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.SOURCEBLEEDBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.SOURCECLIPBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.SOURCEMEDIABOX, 0x33331111, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.SOURCETRIMBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.TEMPLATE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.IGNOREPDLCOPIES, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.IGNOREPDLIMPOSITION, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CLIPPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x3333331111l, AttributeInfo.EnumAttributeType.IDREFS, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ELEMENTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumElementType.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.HASBLEEDS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.ISBLANK, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.ISPRINTABLE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.ISTRAPPED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.SETLEVEL, 0x3333331111l, AttributeInfo.EnumAttributeType.XPath, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.SOURCEBLEEDBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.SOURCECLIPBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.SOURCEMEDIABOX, 0x3333331111l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.SOURCETRIMBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.TEMPLATE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
 	@Override
@@ -140,15 +140,15 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[9];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666611);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTENTLIST, 0x33331111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.DEPENDENCIES, 0x66666611);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.ELEMENTCOLORPARAMS, 0x66666611);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.FILESPEC, 0x66666666);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x66666611);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.PAGELIST, 0x66666611);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.SCREENINGPARAMS, 0x66666611);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORPOOL, 0x6666666611l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTENTLIST, 0x3333331111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.DEPENDENCIES, 0x6666666611l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.ELEMENTCOLORPARAMS, 0x6666666611l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.FILESPEC, 0x6666666666l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x6666666611l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.PAGELIST, 0x6666666611l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.SCREENINGPARAMS, 0x6666666611l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x3333333333l);
 	}
 
 	@Override
@@ -223,7 +223,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumElementType(String name)
+		protected EnumElementType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -302,14 +302,14 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		public static final EnumElementType Unknown = new EnumElementType("Unknown");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IgnorePDLCopies
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IgnorePDLCopies
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IgnorePDLCopies
 	 *
@@ -330,9 +330,10 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return getBoolAttribute(AttributeName.IGNOREPDLCOPIES, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IgnorePDLImposition
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IgnorePDLImposition
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IgnorePDLImposition
 	 *
@@ -353,9 +354,9 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return getBoolAttribute(AttributeName.IGNOREPDLIMPOSITION, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ClipPath
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ClipPath ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ClipPath
 	 *
@@ -376,9 +377,10 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return getAttribute(AttributeName.CLIPPATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ContentDataRefs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ContentDataRefs
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ContentDataRefs
 	 *
@@ -402,9 +404,9 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ElementType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ElementType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ElementType
 	 *
@@ -425,9 +427,9 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return EnumElementType.getEnum(getAttribute(AttributeName.ELEMENTTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HasBleeds
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HasBleeds ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HasBleeds
 	 *
@@ -448,9 +450,9 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return getBoolAttribute(AttributeName.HASBLEEDS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IsBlank
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IsBlank ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IsBlank
 	 *
@@ -471,9 +473,9 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return getBoolAttribute(AttributeName.ISBLANK, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IsPrintable
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IsPrintable ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IsPrintable
 	 *
@@ -494,9 +496,9 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return getBoolAttribute(AttributeName.ISPRINTABLE, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IsTrapped
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IsTrapped ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IsTrapped
 	 *
@@ -517,9 +519,10 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return getBoolAttribute(AttributeName.ISTRAPPED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageListIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageListIndex
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PageListIndex
 	 *
@@ -542,9 +545,9 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SetLevel
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SetLevel ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SetLevel
 	 *
@@ -565,9 +568,10 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return getAttribute(AttributeName.SETLEVEL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceBleedBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceBleedBox
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SourceBleedBox
 	 *
@@ -590,9 +594,10 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceClipBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceClipBox
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SourceClipBox
 	 *
@@ -615,9 +620,10 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceMediaBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceMediaBox
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SourceMediaBox
 	 *
@@ -640,9 +646,10 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceTrimBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceTrimBox
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SourceTrimBox
 	 *
@@ -665,9 +672,9 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Template
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Template ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Template
 	 *
@@ -688,9 +695,8 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		return getBoolAttribute(AttributeName.TEMPLATE, null, false);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -705,7 +711,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 
 	/**
 	 * (25) getCreateColorPool
-	 *
+	 * 
 	 * @return JDFColorPool the element
 	 */
 	public JDFColorPool getCreateColorPool()
@@ -735,7 +741,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 
 	/**
 	 * (26) getCreateContentList
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContentList the element
 	 */
@@ -757,7 +763,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 
 	/**
 	 * Get all ContentList from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContentList>, null if none are available
 	 */
 	public Collection<JDFContentList> getAllContentList()
@@ -797,7 +803,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 
 	/**
 	 * (25) getCreateDependencies
-	 *
+	 * 
 	 * @return JDFDependencies the element
 	 */
 	public JDFDependencies getCreateDependencies()
@@ -827,7 +833,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 
 	/**
 	 * (25) getCreateElementColorParams
-	 *
+	 * 
 	 * @return JDFElementColorParams the element
 	 */
 	public JDFElementColorParams getCreateElementColorParams()
@@ -867,7 +873,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()
@@ -907,7 +913,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 
 	/**
 	 * (25) getCreateImageCompressionParams
-	 *
+	 * 
 	 * @return JDFImageCompressionParams the element
 	 */
 	public JDFImageCompressionParams getCreateImageCompressionParams()
@@ -947,7 +953,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 
 	/**
 	 * (25) getCreatePageList
-	 *
+	 * 
 	 * @return JDFPageList the element
 	 */
 	public JDFPageList getCreatePageList()
@@ -987,7 +993,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 
 	/**
 	 * (25) getCreateScreeningParams
-	 *
+	 * 
 	 * @return JDFScreeningParams the element
 	 */
 	public JDFScreeningParams getCreateScreeningParams()
@@ -1017,7 +1023,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 
 	/**
 	 * (26) getCreateSeparationSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
@@ -1039,7 +1045,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 
 	/**
 	 * Get all SeparationSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFSeparationSpec>, null if none are available
 	 */
 	public Collection<JDFSeparationSpec> getAllSeparationSpec()

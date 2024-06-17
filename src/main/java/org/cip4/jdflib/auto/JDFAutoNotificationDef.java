@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoNotificationDef : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoNotificationDef extends JDFElement
@@ -96,9 +96,9 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumClass.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SIGNALTYPE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Notification");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumClass.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SIGNALTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Notification");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -143,14 +143,13 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Classes
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Classes ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5.2) set attribute Classes
 	 *
@@ -171,9 +170,9 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 		return getEnumerationsAttribute(AttributeName.CLASSES, null, EnumClass.getEnum(0), false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SignalType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SignalType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SignalType
 	 *
@@ -194,9 +193,9 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 		return getAttribute(AttributeName.SIGNALTYPE, null, "Notification");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Type
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Type
 	 *

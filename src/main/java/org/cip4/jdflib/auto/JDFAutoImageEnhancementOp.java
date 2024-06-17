@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.core.VString;
  *****************************************************************************
  * class JDFAutoImageEnhancementOp : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoImageEnhancementOp extends JDFElement
@@ -99,10 +99,10 @@ public abstract class JDFAutoImageEnhancementOp extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.OPERATION, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.OPERATIONDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.OPERATION, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.OPERATIONDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), null);
 	}
 
 	@Override
@@ -157,7 +157,7 @@ public abstract class JDFAutoImageEnhancementOp extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSourceObjects(String name)
+		protected EnumSourceObjects(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -218,14 +218,13 @@ public abstract class JDFAutoImageEnhancementOp extends JDFElement
 		public static final EnumSourceObjects Text = new EnumSourceObjects("Text");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ObjectTags
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ObjectTags ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ObjectTags
 	 *
@@ -249,9 +248,9 @@ public abstract class JDFAutoImageEnhancementOp extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Operation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Operation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Operation
 	 *
@@ -272,9 +271,10 @@ public abstract class JDFAutoImageEnhancementOp extends JDFElement
 		return getAttribute(AttributeName.OPERATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OperationDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OperationDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OperationDetails
 	 *
@@ -295,9 +295,10 @@ public abstract class JDFAutoImageEnhancementOp extends JDFElement
 		return getAttribute(AttributeName.OPERATIONDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceObjects
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5.2) set attribute SourceObjects
 	 *

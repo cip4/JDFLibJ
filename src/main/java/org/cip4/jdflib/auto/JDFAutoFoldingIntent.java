@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.span.JDFSpanOrientation;
  *****************************************************************************
  * class JDFAutoFoldingIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoFoldingIntent extends JDFIntentResource
@@ -101,8 +101,8 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDS, 0x44444443, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.FOLDINGDETAILS, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDS, 0x4444444443l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FOLDINGDETAILS, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -114,9 +114,9 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FOLDINGCATALOG, 0x55555555);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.FOLD, 0x33333331);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.ORIENTATION, 0x55111111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FOLDINGCATALOG, 0x5555555555l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FOLD, 0x3333333331l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.ORIENTATION, 0x5555111111l);
 	}
 
 	@Override
@@ -161,14 +161,13 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Folds
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Folds ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Folds
 	 *
@@ -191,9 +190,10 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FoldingDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FoldingDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FoldingDetails
 	 *
@@ -214,9 +214,8 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 		return getAttribute(AttributeName.FOLDINGDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -231,7 +230,7 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateFoldingCatalog
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateFoldingCatalog()
@@ -251,7 +250,7 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreateFold
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFFold the element
 	 */
@@ -273,7 +272,7 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 
 	/**
 	 * Get all Fold from the current element
-	 *
+	 * 
 	 * @return Collection<JDFFold>, null if none are available
 	 */
 	public Collection<JDFFold> getAllFold()
@@ -303,7 +302,7 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateOrientation
-	 *
+	 * 
 	 * @return JDFSpanOrientation the element
 	 */
 	public JDFSpanOrientation getCreateOrientation()

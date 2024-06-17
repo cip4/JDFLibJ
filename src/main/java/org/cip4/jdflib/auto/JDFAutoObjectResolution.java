@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoObjectResolution : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoObjectResolution extends JDFResource
@@ -100,10 +100,10 @@ public abstract class JDFAutoObjectResolution extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.RESOLUTION, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ANTIALIASING, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.RESOLUTION, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ANTIALIASING, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
 	@Override
@@ -178,7 +178,7 @@ public abstract class JDFAutoObjectResolution extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSourceObjects(String name)
+		protected EnumSourceObjects(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -239,14 +239,13 @@ public abstract class JDFAutoObjectResolution extends JDFResource
 		public static final EnumSourceObjects Text = new EnumSourceObjects("Text");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Resolution
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Resolution ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Resolution
 	 *
@@ -269,9 +268,10 @@ public abstract class JDFAutoObjectResolution extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceObjects
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5.2) set attribute SourceObjects
 	 *
@@ -292,9 +292,10 @@ public abstract class JDFAutoObjectResolution extends JDFResource
 		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AntiAliasing
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AntiAliasing
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AntiAliasing
 	 *
@@ -315,9 +316,9 @@ public abstract class JDFAutoObjectResolution extends JDFResource
 		return getAttribute(AttributeName.ANTIALIASING, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ObjectTags
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ObjectTags ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ObjectTags
 	 *

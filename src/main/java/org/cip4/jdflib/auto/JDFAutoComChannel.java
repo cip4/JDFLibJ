@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoComChannel : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoComChannel extends JDFResource
@@ -98,10 +98,10 @@ public abstract class JDFAutoComChannel extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELTYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumChannelType.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCATOR, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.CHANNELTYPEDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.CHANNELUSAGE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELTYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumChannelType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCATOR, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CHANNELTYPEDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.CHANNELUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
 	@Override
@@ -176,7 +176,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumChannelType(String name)
+		protected EnumChannelType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -243,14 +243,13 @@ public abstract class JDFAutoComChannel extends JDFResource
 		public static final EnumChannelType WWW = new EnumChannelType("WWW");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ChannelType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ChannelType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ChannelType
 	 *
@@ -271,9 +270,9 @@ public abstract class JDFAutoComChannel extends JDFResource
 		return EnumChannelType.getEnum(getAttribute(AttributeName.CHANNELTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Locator
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Locator ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Locator
 	 *
@@ -294,9 +293,10 @@ public abstract class JDFAutoComChannel extends JDFResource
 		return getAttribute(AttributeName.LOCATOR, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ChannelTypeDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ChannelTypeDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ChannelTypeDetails
 	 *
@@ -317,9 +317,10 @@ public abstract class JDFAutoComChannel extends JDFResource
 		return getAttribute(AttributeName.CHANNELTYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ChannelUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ChannelUsage
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ChannelUsage
 	 *

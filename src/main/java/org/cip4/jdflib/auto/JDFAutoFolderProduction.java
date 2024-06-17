@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoFolderProduction : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoFolderProduction extends JDFElement
@@ -96,8 +96,8 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDERMODULEINDEX, 0x22222111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRODUCTIONTYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumProductionType.getEnum(0), "NonCollect");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDERMODULEINDEX, 0x2222222111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRODUCTIONTYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumProductionType.getEnum(0), "NonCollect");
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumProductionType(String name)
+		protected EnumProductionType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -205,14 +205,14 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 		public static final EnumProductionType NonCollect = new EnumProductionType("NonCollect");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FolderModuleIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FolderModuleIndex
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FolderModuleIndex
 	 *
@@ -233,9 +233,10 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 		return getIntAttribute(AttributeName.FOLDERMODULEINDEX, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProductionType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProductionType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ProductionType
 	 *

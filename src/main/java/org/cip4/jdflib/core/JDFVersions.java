@@ -84,7 +84,7 @@ public class JDFVersions
 
 	private static boolean forceVersion = false; // if true, force all checks to
 	// defaultversion
-	private static JDFVersion[] jdfVersions = new JDFVersion[8];
+	private static JDFVersion[] jdfVersions = new JDFVersion[10];
 
 	static
 	{
@@ -96,6 +96,8 @@ public class JDFVersions
 		jdfVersions[5] = new JDFVersion(EnumVersion.Version_1_5, 0x00F00000L, 20L);
 		jdfVersions[6] = new JDFVersion(EnumVersion.Version_1_6, 0x0F000000L, 24L);
 		jdfVersions[7] = new JDFVersion(EnumVersion.Version_1_7, 0xF0000000L, 28L);
+		jdfVersions[8] = new JDFVersion(EnumVersion.Version_1_8, 0xF00000000L, 32L);
+		jdfVersions[9] = new JDFVersion(EnumVersion.Version_1_9, 0xF000000000L, 36L);
 	}
 
 	/**
@@ -183,7 +185,6 @@ public class JDFVersions
 			i = jdfVersions.length;
 
 		i--; // must be removed if unknown is removed
-		i = Math.min(i, 7);
 		return i;
 	}
 

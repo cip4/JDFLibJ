@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.JDFPart;
  *****************************************************************************
  * class JDFAutoNewComment : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoNewComment extends JDFElement
@@ -102,9 +102,9 @@ public abstract class JDFAutoNewComment extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTION, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumAction.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMMENTID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.REFID, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTION, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumAction.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMMENTID, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.REFID, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -116,7 +116,7 @@ public abstract class JDFAutoNewComment extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x3333333333l);
 	}
 
 	@Override
@@ -171,7 +171,7 @@ public abstract class JDFAutoNewComment extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumAction(String name)
+		protected EnumAction(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -228,14 +228,13 @@ public abstract class JDFAutoNewComment extends JDFElement
 		public static final EnumAction Remove = new EnumAction("Remove");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Action
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Action ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Action
 	 *
@@ -256,9 +255,9 @@ public abstract class JDFAutoNewComment extends JDFElement
 		return EnumAction.getEnum(getAttribute(AttributeName.ACTION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CommentID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CommentID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CommentID
 	 *
@@ -279,9 +278,9 @@ public abstract class JDFAutoNewComment extends JDFElement
 		return getAttribute(AttributeName.COMMENTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute refID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute refID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute refID
 	 *
@@ -302,14 +301,13 @@ public abstract class JDFAutoNewComment extends JDFElement
 		return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -331,7 +329,7 @@ public abstract class JDFAutoNewComment extends JDFElement
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()

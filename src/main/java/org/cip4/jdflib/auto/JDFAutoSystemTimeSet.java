@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoSystemTimeSet : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoSystemTimeSet extends JDFElement
@@ -92,8 +92,8 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.NEWTIME, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.OLDTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NEWTIME, 0x2222222222l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.OLDTIME, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 	}
 
 	@Override
@@ -138,14 +138,13 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NewTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NewTime ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute NewTime
 	 *
@@ -173,9 +172,9 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OldTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OldTime ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute OldTime
 	 *

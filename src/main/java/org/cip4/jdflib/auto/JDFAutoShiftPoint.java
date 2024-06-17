@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
  *****************************************************************************
  * class JDFAutoShiftPoint : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoShiftPoint extends JDFElement
@@ -93,8 +93,8 @@ public abstract class JDFAutoShiftPoint extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CTM, 0x22221111, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x22221111, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CTM, 0x2222221111l, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x2222221111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -139,14 +139,13 @@ public abstract class JDFAutoShiftPoint extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CTM
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CTM
 	 *
@@ -169,9 +168,9 @@ public abstract class JDFAutoShiftPoint extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Position
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Position
 	 *

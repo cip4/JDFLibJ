@@ -81,7 +81,7 @@ import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFBendingParams;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFComponent;
-import org.cip4.jdflib.resource.process.JDFContentMetaData;
+import org.cip4.jdflib.resource.process.JDFContentMetadata;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
@@ -458,7 +458,7 @@ class FixVersionTest extends JDFTestCaseBase
 	@Test
 	void testContentMetaData()
 	{
-		final JDFContentMetaData c = (JDFContentMetaData) new JDFDoc(ElementName.CONTENTMETADATA).getRoot();
+		final JDFContentMetadata c = (JDFContentMetadata) new JDFDoc(ElementName.CONTENTMETADATA).getRoot();
 		c.setISBN13("12345");
 		assertTrue(new FixVersion(EnumVersion.Version_1_6).convert(c));
 		assertEquals(c.getAttribute(AttributeName.ISBN), "12345");

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,7 +40,6 @@ package org.cip4.jdflib.core;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.util.ContainerUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -48,7 +47,8 @@ import org.junit.jupiter.api.Test;
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-class AttrInfoTest {
+class AttrInfoTest
+{
 
 	/**
 	 *
@@ -60,9 +60,9 @@ class AttrInfoTest {
 		Assertions.assertEquals(ai.getFirstVersion(), EnumVersion.Version_1_2, "");
 		Assertions.assertEquals(ai.getLastVersion(), EnumVersion.Version_1_4, "");
 
-		ai = new AtrInfo(0x33333222, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		ai = new AtrInfo(0x133333222l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		Assertions.assertEquals(ai.getFirstVersion(), EnumVersion.Version_1_0, "");
-		Assertions.assertEquals(ai.getLastVersion(), ContainerUtil.get(EnumVersion.getEnumList(), -1), "");
+		Assertions.assertEquals(ai.getLastVersion(), EnumVersion.Version_1_7);
 	}
 
 	/**

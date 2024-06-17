@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFComponent;
  *****************************************************************************
  * class JDFAutoBundleItem : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBundleItem extends JDFElement
@@ -102,10 +102,10 @@ public abstract class JDFAutoBundleItem extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AMOUNT, 0x22222221, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ITEMNAME, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AMOUNT, 0x2222222221l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ITEMNAME, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x3333333331l, AttributeInfo.EnumAttributeType.matrix, null, null);
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public abstract class JDFAutoBundleItem extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x55555551);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x5555555551l);
 	}
 
 	@Override
@@ -172,7 +172,7 @@ public abstract class JDFAutoBundleItem extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOrientation(String name)
+		protected EnumOrientation(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -237,14 +237,13 @@ public abstract class JDFAutoBundleItem extends JDFElement
 		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Amount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Amount
 	 *
@@ -265,9 +264,9 @@ public abstract class JDFAutoBundleItem extends JDFElement
 		return getIntAttribute(AttributeName.AMOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ItemName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ItemName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ItemName
 	 *
@@ -288,9 +287,9 @@ public abstract class JDFAutoBundleItem extends JDFElement
 		return getAttribute(AttributeName.ITEMNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Orientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Orientation
 	 *
@@ -311,9 +310,10 @@ public abstract class JDFAutoBundleItem extends JDFElement
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Transformation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Transformation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Transformation
 	 *
@@ -336,9 +336,8 @@ public abstract class JDFAutoBundleItem extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -353,7 +352,7 @@ public abstract class JDFAutoBundleItem extends JDFElement
 
 	/**
 	 * (25) getCreateComponent
-	 *
+	 * 
 	 * @return JDFComponent the element
 	 */
 	public JDFComponent getCreateComponent()

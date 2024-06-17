@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.span.JDFSpanStapleShape;
  *****************************************************************************
  * class JDFAutoSaddleStitching : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoSaddleStitching extends JDFElement
@@ -93,8 +93,8 @@ public abstract class JDFAutoSaddleStitching extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.STAPLESHAPE, 0x66111111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.STITCHNUMBER, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.STAPLESHAPE, 0x6666111111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.STITCHNUMBER, 0x6666666661l);
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public abstract class JDFAutoSaddleStitching extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSaddleStitching(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	protected JDFAutoSaddleStitching(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -121,7 +121,7 @@ public abstract class JDFAutoSaddleStitching extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSaddleStitching(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	protected JDFAutoSaddleStitching(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -134,14 +134,13 @@ public abstract class JDFAutoSaddleStitching extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSaddleStitching(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	protected JDFAutoSaddleStitching(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -156,7 +155,7 @@ public abstract class JDFAutoSaddleStitching extends JDFElement
 
 	/**
 	 * (25) getCreateStapleShape
-	 *
+	 * 
 	 * @return JDFSpanStapleShape the element
 	 */
 	public JDFSpanStapleShape getCreateStapleShape()
@@ -186,7 +185,7 @@ public abstract class JDFAutoSaddleStitching extends JDFElement
 
 	/**
 	 * (25) getCreateStitchNumber
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreateStitchNumber()

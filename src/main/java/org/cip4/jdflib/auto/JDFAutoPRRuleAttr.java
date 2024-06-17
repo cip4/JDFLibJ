@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.core.VString;
  *****************************************************************************
  * class JDFAutoPRRuleAttr : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPRRuleAttr extends JDFElement
@@ -93,11 +93,11 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.GROUPBY, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, "Tested");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.REPORTATTR, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.LOGERRORS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXGROUPS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXPERGROUP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.GROUPBY, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, "Tested");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.REPORTATTR, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.LOGERRORS, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXGROUPS, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXPERGROUP, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -142,14 +142,13 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GroupBy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GroupBy ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GroupBy
 	 *
@@ -173,9 +172,9 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ReportAttr
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ReportAttr ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ReportAttr
 	 *
@@ -199,9 +198,9 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LogErrors
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LogErrors ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LogErrors
 	 *
@@ -222,9 +221,9 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 		return getIntAttribute(AttributeName.LOGERRORS, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxGroups
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxGroups ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxGroups
 	 *
@@ -245,9 +244,9 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 		return getIntAttribute(AttributeName.MAXGROUPS, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxPerGroup
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxPerGroup ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxPerGroup
 	 *

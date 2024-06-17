@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoMilestone : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoMilestone extends JDFElement
@@ -92,8 +92,8 @@ public abstract class JDFAutoMilestone extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MILESTONETYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.TYPEAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MILESTONETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TYPEAMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -138,14 +138,14 @@ public abstract class JDFAutoMilestone extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MilestoneType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MilestoneType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MilestoneType
 	 *
@@ -166,9 +166,9 @@ public abstract class JDFAutoMilestone extends JDFElement
 		return getAttribute(AttributeName.MILESTONETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TypeAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TypeAmount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TypeAmount
 	 *

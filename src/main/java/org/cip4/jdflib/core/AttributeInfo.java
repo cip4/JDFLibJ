@@ -248,7 +248,7 @@ public class AttributeInfo
 			else
 			{
 				// grab values from tables
-				final long l1 = ai.getAtrValidityStatus();
+				final long l1 = ai.getValidityStatus();
 				final long l3 = l1 & l2;
 
 				// calculate correct mask from attrValidity and version
@@ -282,7 +282,7 @@ public class AttributeInfo
 			final AtrInfo ai = attribInfoTable.get(theKey);
 			final long l2 = JDFVersions.getTheMask(version);
 			final long v2 = JDFVersions.getTheOffset(version);
-			final EnumAttributeValidity versionVal = EnumAttributeValidity.getEnum((int) ((ai.getAtrValidityStatus() & l2) >> v2));
+			final EnumAttributeValidity versionVal = EnumAttributeValidity.getEnum((int) ((ai.getValidityStatus() & l2) >> v2));
 			if (versionVal.equals(EnumAttributeValidity.Optional) || versionVal.equals(EnumAttributeValidity.Required))
 			{
 				final String def = ai.getAtrDefault();
@@ -310,7 +310,7 @@ public class AttributeInfo
 		for (final String s : set)
 		{
 			final AtrInfo ai = attribInfoTable.get(s);
-			if ((ai.getAtrValidityStatus() & l2) == ((long) attrValidity.getValue() << v2))
+			if ((ai.getValidityStatus() & l2) == ((long) attrValidity.getValue() << v2))
 			{
 				return true;
 			}
@@ -330,8 +330,8 @@ public class AttributeInfo
 	}
 
 	/**
-	 * Returns the list of optional attributes for the specified JDF version. Note: This includes attributes marked as optional as well as attributes marked as deprecated (since, for backward
-	 * compatibility, these are also optional).
+	 * Returns the list of optional attributes for the specified JDF version. Note: This includes attributes marked as optional as well as attributes marked as deprecated (since,
+	 * for backward compatibility, these are also optional).
 	 *
 	 * @return VString: list of strings containing the names of the optional attributes
 	 */
@@ -399,7 +399,8 @@ public class AttributeInfo
 	}
 
 	/**
-	 * Returns the validity of the given attribute for the latest JDF version. Attribute types of previous versions have to be provided by attribute-specific functions (if necessary).
+	 * Returns the validity of the given attribute for the latest JDF version. Attribute types of previous versions have to be provided by attribute-specific functions (if
+	 * necessary).
 	 *
 	 * @param attributeName name of the attribute
 	 * @return EnumAttributeType: the attribute's type
@@ -409,7 +410,7 @@ public class AttributeInfo
 		final AtrInfo atrInfo = attribInfoTable.get(attributeName);
 		if (atrInfo != null)
 		{
-			long l = atrInfo.getAtrValidityStatus();
+			long l = atrInfo.getValidityStatus();
 			final long l2 = JDFVersions.getTheMask(version);
 			final long v2 = JDFVersions.getTheOffset(version);
 			l = (l & l2) >> v2;
@@ -452,7 +453,8 @@ public class AttributeInfo
 	}
 
 	/*
-	 * ----------------------------------------------------------------------- Enumeration of valid attribute types -----------------------------------------------------------------------
+	 * ----------------------------------------------------------------------- Enumeration of valid attribute types
+	 * -----------------------------------------------------------------------
 	 */
 
 	/**
@@ -653,7 +655,8 @@ public class AttributeInfo
 	}
 
 	/*
-	 * ----------------------------------------------------------------------- Enumeration of attribute validity values -----------------------------------------------------------------------
+	 * ----------------------------------------------------------------------- Enumeration of attribute validity values
+	 * -----------------------------------------------------------------------
 	 */
 
 	/**
@@ -1075,7 +1078,7 @@ public class AttributeInfo
 	@Override
 	public String toString()
 	{
-		String s = "AttributeInfoTable verion=" + version;
+		String s = "AttributeInfoTable version=" + version;
 		s += attribInfoTable.toString();
 		return s;
 	}

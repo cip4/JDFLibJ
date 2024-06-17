@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoAuthenticationQuParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoAuthenticationQuParams extends JDFElement
@@ -96,7 +96,7 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHENTICATIONTYPE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumAuthenticationType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHENTICATIONTYPE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumAuthenticationType.getEnum(0), null);
 	}
 
 	@Override
@@ -151,7 +151,7 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumAuthenticationType(String name)
+		protected EnumAuthenticationType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -204,14 +204,14 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 		public static final EnumAuthenticationType AsServer = new EnumAuthenticationType("AsServer");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AuthenticationType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AuthenticationType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute AuthenticationType
 	 *

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoQualityMeasurement : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoQualityMeasurement extends JDFElement
@@ -96,10 +96,10 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.END, 0x33111111, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.FAILED, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PASSED, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.START, 0x33111111, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.END, 0x3333111111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FAILED, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PASSED, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.START, 0x3333111111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDINGQUALITYMEASUREMENT, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDINGQUALITYMEASUREMENT, 0x6666666611l);
 	}
 
 	@Override
@@ -156,14 +156,13 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute End
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute End ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute End
 	 *
@@ -191,9 +190,9 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Failed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Failed ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Failed
 	 *
@@ -214,9 +213,9 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 		return getIntAttribute(AttributeName.FAILED, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Passed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Passed ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Passed
 	 *
@@ -237,9 +236,9 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 		return getIntAttribute(AttributeName.PASSED, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Start
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Start ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute Start
 	 *
@@ -267,9 +266,8 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 		return ret;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -284,7 +282,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 
 	/**
 	 * (25) getCreateBindingQualityMeasurement
-	 *
+	 * 
 	 * @return JDFBindingQualityMeasurement the element
 	 */
 	public JDFBindingQualityMeasurement getCreateBindingQualityMeasurement()

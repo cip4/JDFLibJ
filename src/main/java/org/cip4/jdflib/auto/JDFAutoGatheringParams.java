@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.resource.process.JDFDisjointing;
  *****************************************************************************
  * class JDFAutoGatheringParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoGatheringParams extends JDFResource
@@ -92,7 +92,7 @@ public abstract class JDFAutoGatheringParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DISJOINTING, 0x77666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DISJOINTING, 0x7777666666l);
 	}
 
 	@Override
@@ -157,9 +157,8 @@ public abstract class JDFAutoGatheringParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -174,7 +173,7 @@ public abstract class JDFAutoGatheringParams extends JDFResource
 
 	/**
 	 * (25) getCreateDisjointing
-	 *
+	 * 
 	 * @return JDFDisjointing the element
 	 */
 	public JDFDisjointing getCreateDisjointing()

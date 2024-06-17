@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
  *****************************************************************************
  * class JDFAutoBarcodeProductionParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBarcodeProductionParams extends JDFElement
@@ -93,8 +93,8 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODEREPROPARAMS, 0x66666111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x55555111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODEREPROPARAMS, 0x6666666111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x5555555111l);
 	}
 
 	@Override
@@ -139,9 +139,8 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -156,7 +155,7 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
 
 	/**
 	 * (25) getCreateBarcodeReproParams
-	 *
+	 * 
 	 * @return JDFBarcodeReproParams the element
 	 */
 	public JDFBarcodeReproParams getCreateBarcodeReproParams()
@@ -186,7 +185,7 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
 
 	/**
 	 * (25) getCreateIdentificationField
-	 *
+	 * 
 	 * @return JDFIdentificationField the element
 	 */
 	public JDFIdentificationField getCreateIdentificationField()

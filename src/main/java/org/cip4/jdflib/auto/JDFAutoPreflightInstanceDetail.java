@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoPreflightInstanceDetail : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
@@ -97,8 +97,8 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PROPERTY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PROPERTY, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.VALUE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.VALUE, 0x3333333333l);
 	}
 
 	@Override
@@ -155,14 +155,13 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Property
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Property ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Property
 	 *
@@ -183,14 +182,13 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 		return getAttribute(AttributeName.PROPERTY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateValue
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element
 	 */
@@ -212,7 +210,7 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 
 	/**
 	 * Get all Value from the current element
-	 *
+	 * 
 	 * @return Collection<JDFElement>, null if none are available
 	 */
 	public Collection<JDFElement> getAllValue()

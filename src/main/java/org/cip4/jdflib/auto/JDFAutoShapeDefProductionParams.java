@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.process.JDFShapeTemplate;
  *****************************************************************************
  * class JDFAutoShapeDefProductionParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoShapeDefProductionParams extends JDFResource
@@ -95,8 +95,8 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.OBJECTMODEL, 0x33331111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.SHAPETEMPLATE, 0x66661111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.OBJECTMODEL, 0x3333331111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SHAPETEMPLATE, 0x6666661111l);
 	}
 
 	@Override
@@ -161,14 +161,13 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateObjectModel
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFObjectModel the element
 	 */
@@ -190,7 +189,7 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 
 	/**
 	 * Get all ObjectModel from the current element
-	 *
+	 * 
 	 * @return Collection<JDFObjectModel>, null if none are available
 	 */
 	public Collection<JDFObjectModel> getAllObjectModel()
@@ -220,7 +219,7 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 
 	/**
 	 * (25) getCreateShapeTemplate
-	 *
+	 * 
 	 * @return JDFShapeTemplate the element
 	 */
 	public JDFShapeTemplate getCreateShapeTemplate()

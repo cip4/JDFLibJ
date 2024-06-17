@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.util.JDFDuration;
  *****************************************************************************
  * class JDFAutoShrinkingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoShrinkingParams extends JDFResource
@@ -97,9 +97,9 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHRINKINGMETHOD, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumShrinkingMethod.getEnum(0), "ShrinkHot");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DURATION, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TEMPERATURE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHRINKINGMETHOD, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumShrinkingMethod.getEnum(0), "ShrinkHot");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DURATION, 0x3333333331l, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TEMPERATURE, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -174,7 +174,7 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumShrinkingMethod(String name)
+		protected EnumShrinkingMethod(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -227,14 +227,14 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 		public static final EnumShrinkingMethod ShrinkHot = new EnumShrinkingMethod("ShrinkHot");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShrinkingMethod
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShrinkingMethod
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ShrinkingMethod
 	 *
@@ -255,9 +255,9 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 		return EnumShrinkingMethod.getEnum(getAttribute(AttributeName.SHRINKINGMETHOD, null, "ShrinkHot"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Duration
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Duration ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Duration
 	 *
@@ -280,9 +280,9 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Temperature
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Temperature ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Temperature
 	 *

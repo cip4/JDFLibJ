@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoLabelingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLabelingParams extends JDFResource
@@ -104,10 +104,10 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.APPLICATION, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CTM, 0x44333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.OFFSET, 0x33111111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.POSITION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.APPLICATION, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CTM, 0x4444333331l, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.OFFSET, 0x3333111111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.POSITION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x3333333331l);
 	}
 
 	@Override
@@ -194,7 +194,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPosition(String name)
+		protected EnumPosition(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -255,14 +255,13 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 		public static final EnumPosition Back = new EnumPosition("Back");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Application
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Application ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Application
 	 *
@@ -283,9 +282,9 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 		return getAttribute(AttributeName.APPLICATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CTM
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CTM
 	 *
@@ -308,9 +307,9 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Offset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Offset
 	 *
@@ -333,9 +332,9 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Position
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Position
 	 *
@@ -356,14 +355,13 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateFileSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
@@ -385,7 +383,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 
 	/**
 	 * Get all FileSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFFileSpec>, null if none are available
 	 */
 	public Collection<JDFFileSpec> getAllFileSpec()

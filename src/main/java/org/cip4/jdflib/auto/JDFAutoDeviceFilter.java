@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.JDFDevice;
  *****************************************************************************
  * class JDFAutoDeviceFilter : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDeviceFilter extends JDFElement
@@ -102,8 +102,8 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEDETAILS, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceDetails.getEnum(0), "None");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCALIZATION, 0x33333311, AttributeInfo.EnumAttributeType.languages, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEDETAILS, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceDetails.getEnum(0), "None");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCALIZATION, 0x3333333311l, AttributeInfo.EnumAttributeType.languages, null, null);
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x3333333333l);
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDeviceDetails(String name)
+		protected EnumDeviceDetails(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -233,14 +233,14 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 		public static final EnumDeviceDetails Full = new EnumDeviceDetails("Full");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DeviceDetails
 	 *
@@ -261,9 +261,10 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 		return EnumDeviceDetails.getEnum(getAttribute(AttributeName.DEVICEDETAILS, null, "None"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Localization
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Localization
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Localization
 	 *
@@ -284,14 +285,13 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 		return getAttribute(AttributeName.LOCALIZATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateDevice
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
 	 */
@@ -313,7 +313,7 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 
 	/**
 	 * Get all Device from the current element
-	 *
+	 * 
 	 * @return Collection<JDFDevice>, null if none are available
 	 */
 	public Collection<JDFDevice> getAllDevice()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -99,7 +99,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoQualityControlResult : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoQualityControlResult extends JDFResource
@@ -110,17 +110,17 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOX, 0x31111111, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.END, 0x33111111, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.FAILED, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MEASUREMENTS, 0x31111111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MEASUREMENTUSAGE, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumMeasurementUsage.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.POSITION, 0x31111111, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PASSED, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.SAMPLE, 0x31111111, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.SEVERITY, 0x31111111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.SOURCEDEVICEID, 0x31111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.START, 0x33111111, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOX, 0x3331111111l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.END, 0x3333111111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FAILED, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MEASUREMENTS, 0x3331111111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MEASUREMENTUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumerations, EnumMeasurementUsage.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.POSITION, 0x3331111111l, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PASSED, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SAMPLE, 0x3331111111l, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.SEVERITY, 0x3331111111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.SOURCEDEVICEID, 0x3331111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.START, 0x3333111111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 	}
 
 	@Override
@@ -132,11 +132,11 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDINGQUALITYPARAMS, 0x66666611);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x66666611);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.INSPECTION, 0x66666611);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.QUALITYMEASUREMENT, 0x33333311);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.REGISTRATIONQUALITY, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDINGQUALITYPARAMS, 0x6666666611l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x6666666611l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.INSPECTION, 0x6666666611l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.QUALITYMEASUREMENT, 0x3333333311l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.REGISTRATIONQUALITY, 0x6666666611l);
 	}
 
 	@Override
@@ -151,7 +151,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQualityControlResult(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	protected JDFAutoQualityControlResult(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -163,7 +163,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQualityControlResult(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	protected JDFAutoQualityControlResult(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -176,7 +176,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoQualityControlResult(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	protected JDFAutoQualityControlResult(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -211,7 +211,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMeasurementUsage(final String name)
+		protected EnumMeasurementUsage(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -220,7 +220,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumMeasurementUsage getEnum(final String enumName)
+		public static EnumMeasurementUsage getEnum(String enumName)
 		{
 			return (EnumMeasurementUsage) getEnum(EnumMeasurementUsage.class, enumName);
 		}
@@ -229,7 +229,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumMeasurementUsage getEnum(final int enumValue)
+		public static EnumMeasurementUsage getEnum(int enumValue)
 		{
 			return (EnumMeasurementUsage) getEnum(EnumMeasurementUsage.class, enumValue);
 		}
@@ -274,7 +274,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPosition(final String name)
+		protected EnumPosition(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -283,7 +283,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumPosition getEnum(final String enumName)
+		public static EnumPosition getEnum(String enumName)
 		{
 			return (EnumPosition) getEnum(EnumPosition.class, enumName);
 		}
@@ -292,7 +292,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumPosition getEnum(final int enumValue)
+		public static EnumPosition getEnum(int enumValue)
 		{
 			return (EnumPosition) getEnum(EnumPosition.class, enumValue);
 		}
@@ -335,20 +335,19 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		public static final EnumPosition Back = new EnumPosition("Back");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Box
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Box ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Box
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBox(final JDFRectangle value)
+	public void setBox(JDFRectangle value)
 	{
 		setAttribute(AttributeName.BOX, value, null);
 	}
@@ -365,15 +364,15 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute End
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute End ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute End
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setEnd(final JDFDate value)
+	public void setEnd(JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -395,15 +394,15 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Failed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Failed ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Failed
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFailed(final int value)
+	public void setFailed(int value)
 	{
 		setAttribute(AttributeName.FAILED, value, null);
 	}
@@ -418,15 +417,16 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		return getIntAttribute(AttributeName.FAILED, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Measurements
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Measurements
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Measurements
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMeasurements(final int value)
+	public void setMeasurements(int value)
 	{
 		setAttribute(AttributeName.MEASUREMENTS, value, null);
 	}
@@ -441,15 +441,16 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		return getIntAttribute(AttributeName.MEASUREMENTS, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MeasurementUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MeasurementUsage
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5.2) set attribute MeasurementUsage
 	 *
 	 * @param v vector of the enumeration values
 	 */
-	public void setMeasurementUsage(final Vector<? extends ValuedEnum> v)
+	public void setMeasurementUsage(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.MEASUREMENTUSAGE, v, null);
 	}
@@ -464,15 +465,15 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		return getEnumerationsAttribute(AttributeName.MEASUREMENTUSAGE, null, EnumMeasurementUsage.getEnum(0), false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Position
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Position
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPosition(final EnumPosition enumVar)
+	public void setPosition(EnumPosition enumVar)
 	{
 		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -487,15 +488,15 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Passed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Passed ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Passed
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPassed(final int value)
+	public void setPassed(int value)
 	{
 		setAttribute(AttributeName.PASSED, value, null);
 	}
@@ -510,15 +511,15 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		return getIntAttribute(AttributeName.PASSED, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Sample
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Sample ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Sample
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSample(final JDFIntegerRange value)
+	public void setSample(JDFIntegerRange value)
 	{
 		setAttribute(AttributeName.SAMPLE, value, null);
 	}
@@ -535,15 +536,15 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Severity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Severity ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Severity
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSeverity(final int value)
+	public void setSeverity(int value)
 	{
 		setAttribute(AttributeName.SEVERITY, value, null);
 	}
@@ -558,15 +559,16 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		return getIntAttribute(AttributeName.SEVERITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceDeviceID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceDeviceID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SourceDeviceID
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSourceDeviceID(final String value)
+	public void setSourceDeviceID(String value)
 	{
 		setAttribute(AttributeName.SOURCEDEVICEID, value, null);
 	}
@@ -581,15 +583,15 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		return getAttribute(AttributeName.SOURCEDEVICEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Start
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Start ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute Start
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setStart(final JDFDate value)
+	public void setStart(JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -611,9 +613,8 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		return ret;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -628,7 +629,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 
 	/**
 	 * (25) getCreateBindingQualityParams
-	 *
+	 * 
 	 * @return JDFBindingQualityParams the element
 	 */
 	public JDFBindingQualityParams getCreateBindingQualityParams()
@@ -658,7 +659,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()
@@ -681,7 +682,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(final JDFFileSpec refTarget)
+	public void refFileSpec(JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -698,7 +699,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 
 	/**
 	 * (25) getCreateInspection
-	 *
+	 * 
 	 * @return JDFInspection the element
 	 */
 	public JDFInspection getCreateInspection()
@@ -718,11 +719,11 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 
 	/**
 	 * (26) getCreateQualityMeasurement
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFQualityMeasurement the element
 	 */
-	public JDFQualityMeasurement getCreateQualityMeasurement(final int iSkip)
+	public JDFQualityMeasurement getCreateQualityMeasurement(int iSkip)
 	{
 		return (JDFQualityMeasurement) getCreateElement_JDFElement(ElementName.QUALITYMEASUREMENT, null, iSkip);
 	}
@@ -733,14 +734,14 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFQualityMeasurement the element default is getQualityMeasurement(0)
 	 */
-	public JDFQualityMeasurement getQualityMeasurement(final int iSkip)
+	public JDFQualityMeasurement getQualityMeasurement(int iSkip)
 	{
 		return (JDFQualityMeasurement) getElement(ElementName.QUALITYMEASUREMENT, null, iSkip);
 	}
 
 	/**
 	 * Get all QualityMeasurement from the current element
-	 *
+	 * 
 	 * @return Collection<JDFQualityMeasurement>, null if none are available
 	 */
 	public Collection<JDFQualityMeasurement> getAllQualityMeasurement()
@@ -770,7 +771,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 
 	/**
 	 * (25) getCreateRegistrationQuality
-	 *
+	 * 
 	 * @return JDFRegistrationQuality the element
 	 */
 	public JDFRegistrationQuality getCreateRegistrationQuality()

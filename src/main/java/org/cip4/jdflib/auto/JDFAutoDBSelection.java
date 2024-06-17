@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoDBSelection : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDBSelection extends JDFResource
@@ -93,9 +93,9 @@ public abstract class JDFAutoDBSelection extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DATABASE, 0x44422222, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.RECORDS, 0x44433333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SELECT, 0x44433333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DATABASE, 0x4444422222l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.RECORDS, 0x4444433333l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SELECT, 0x4444433333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -160,14 +160,13 @@ public abstract class JDFAutoDBSelection extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DataBase
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DataBase ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DataBase
 	 *
@@ -188,9 +187,9 @@ public abstract class JDFAutoDBSelection extends JDFResource
 		return getAttribute(AttributeName.DATABASE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Records
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Records ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Records
 	 *
@@ -213,9 +212,9 @@ public abstract class JDFAutoDBSelection extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Select
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Select ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Select
 	 *

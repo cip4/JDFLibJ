@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoEmbossingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoEmbossingParams extends JDFResource
@@ -97,7 +97,7 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.EMBOSS, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMBOSS, 0x3333333331l);
 	}
 
 	@Override
@@ -174,14 +174,13 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleIndex
 	 *
@@ -202,14 +201,13 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 		return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateEmboss
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmboss the element
 	 */
@@ -231,7 +229,7 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 
 	/**
 	 * Get all Emboss from the current element
-	 *
+	 * 
 	 * @return Collection<JDFEmboss>, null if none are available
 	 */
 	public Collection<JDFEmboss> getAllEmboss()

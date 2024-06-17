@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
  *****************************************************************************
  * class JDFAutoPageElement : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPageElement extends JDFElement
@@ -95,11 +95,11 @@ public abstract class JDFAutoPageElement extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x33331111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTENTLISTINDEX, 0x44443111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ELEMENTPAGES, 0x33333111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.CONTENTTYPE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.RELATIVEBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x3333331111l, AttributeInfo.EnumAttributeType.IDREFS, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTENTLISTINDEX, 0x4444443111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ELEMENTPAGES, 0x3333333111l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.CONTENTTYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.RELATIVEBOX, 0x3333333111l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 	}
 
 	@Override
@@ -144,14 +144,14 @@ public abstract class JDFAutoPageElement extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ContentDataRefs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ContentDataRefs
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ContentDataRefs
 	 *
@@ -175,9 +175,10 @@ public abstract class JDFAutoPageElement extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ContentListIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ContentListIndex
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ContentListIndex
 	 *
@@ -198,9 +199,10 @@ public abstract class JDFAutoPageElement extends JDFElement
 		return getIntAttribute(AttributeName.CONTENTLISTINDEX, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ElementPages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ElementPages
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ElementPages
 	 *
@@ -223,9 +225,9 @@ public abstract class JDFAutoPageElement extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ContentType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ContentType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ContentType
 	 *
@@ -246,9 +248,9 @@ public abstract class JDFAutoPageElement extends JDFElement
 		return getAttribute(AttributeName.CONTENTTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RelativeBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelativeBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RelativeBox
 	 *

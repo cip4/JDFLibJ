@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
  *****************************************************************************
  * class JDFAutoCommand : public JDFMessage
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCommand extends JDFMessage
@@ -104,12 +104,12 @@ public abstract class JDFAutoCommand extends JDFMessage
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACKNOWLEDGEFORMAT, 0x44433311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACKNOWLEDGETEMPLATE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ACKNOWLEDGEURL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumerations, EnumAcknowledgeType.getEnum(0), "Completed");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.RELATEDCOMMANDS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.TRANSACTIONID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACKNOWLEDGEFORMAT, 0x4444433311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACKNOWLEDGETEMPLATE, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ACKNOWLEDGEURL, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations, EnumAcknowledgeType.getEnum(0), "Completed");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.RELATEDCOMMANDS, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TRANSACTIONID, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -121,7 +121,7 @@ public abstract class JDFAutoCommand extends JDFMessage
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x3333333333l);
 	}
 
 	@Override
@@ -176,7 +176,7 @@ public abstract class JDFAutoCommand extends JDFMessage
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumAcknowledgeType(String name)
+		protected EnumAcknowledgeType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -231,14 +231,14 @@ public abstract class JDFAutoCommand extends JDFMessage
 		public static final EnumAcknowledgeType Completed = new EnumAcknowledgeType("Completed");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AcknowledgeFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeFormat
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AcknowledgeFormat
 	 *
@@ -259,9 +259,10 @@ public abstract class JDFAutoCommand extends JDFMessage
 		return getAttribute(AttributeName.ACKNOWLEDGEFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AcknowledgeTemplate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeTemplate
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AcknowledgeTemplate
 	 *
@@ -282,9 +283,10 @@ public abstract class JDFAutoCommand extends JDFMessage
 		return getAttribute(AttributeName.ACKNOWLEDGETEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AcknowledgeURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeURL
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AcknowledgeURL
 	 *
@@ -305,9 +307,10 @@ public abstract class JDFAutoCommand extends JDFMessage
 		return getAttribute(AttributeName.ACKNOWLEDGEURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AcknowledgeType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5.2) set attribute AcknowledgeType
 	 *
@@ -328,9 +331,10 @@ public abstract class JDFAutoCommand extends JDFMessage
 		return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.Completed, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RelatedCommands
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelatedCommands
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RelatedCommands
 	 *
@@ -354,9 +358,10 @@ public abstract class JDFAutoCommand extends JDFMessage
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TransactionID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TransactionID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TransactionID
 	 *
@@ -377,14 +382,13 @@ public abstract class JDFAutoCommand extends JDFMessage
 		return getAttribute(AttributeName.TRANSACTIONID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateEmployee
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -406,7 +410,7 @@ public abstract class JDFAutoCommand extends JDFMessage
 
 	/**
 	 * Get all Employee from the current element
-	 *
+	 * 
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	public Collection<JDFEmployee> getAllEmployee()

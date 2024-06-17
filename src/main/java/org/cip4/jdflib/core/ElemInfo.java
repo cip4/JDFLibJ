@@ -39,15 +39,21 @@
  */
 package org.cip4.jdflib.core;
 
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
-
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class ElemInfo
+public class ElemInfo extends AtrElemInfo
 {
 
-	private final long elemValidityStatus;
+	// 0 Unknown UNKNOWN);
+	// 1 None NONE);
+	// 2 Required REQUIRED);
+	// 3 Optional OPTIONAL);
+	// 4 Deprecated DEPRECATED);
+	// 5 SingleRequired SINGLEREQUIRED);
+	// 6 SingleOptional SINGLEOPTIONAL);
+	// 7 SingleDeprecated SINGLEDEPRECATED);
+	// 8 Dummy DUMMY);
 
 	/**
 	 * Constructor
@@ -56,64 +62,13 @@ public class ElemInfo
 	 */
 	public ElemInfo(final long s)
 	{
-		elemValidityStatus = s;
+		super(s);
 	}
 
-	/**
-	 * @return Returns the elemValidityStatus.
-	 */
-	public long getElemValidityStatus()
-	{
-		return elemValidityStatus;
-	}
-
-	/**
-	 * @see java.lang.Object#toString()
-	 * @return
-	 */
 	@Override
-	public String toString()
+	boolean isMasked(final long masked)
 	{
-		return "Validity: " + Long.toHexString(elemValidityStatus) + " " + getFirstVersion().getName() + " - " + getLastVersion().getName();
-	}
-
-	/**
-	 * get the first jdf version where an attrinute of this type is valid
-	 *
-	 * @return
-	 */
-	public EnumVersion getFirstVersion()
-	{
-		for (int i = 0; i < 8; i++)
-		{
-			long masked = elemValidityStatus & (0xFl << (4 * i));
-			masked = masked >> (4 * i);
-			if (masked == 2 || masked == 3 || masked == 5 || masked == 6)
-				return EnumVersion.getEnum(i + 1);
-		}
-		return null;
-	}
-
-	/**
-	 * get the last jdf version where an element of this type is valid
-	 *
-	 * @return
-	 */
-	public EnumVersion getLastVersion()
-	{
-		for (int i = 7; i >= 0; i--)
-		{
-			long masked = elemValidityStatus & 0xFl << (4 * i);
-			masked = masked >> (4 * i);
-			if (masked == 2 || masked == 3 || masked == 5 || masked == 6)
-			{
-				if (i == 7)
-					return EnumVersion.Version_2_3;
-				else
-					return EnumVersion.getEnum(i + 1);
-			}
-		}
-		return null;
+		return masked == 2 || masked == 3 || masked == 5 || masked == 6;
 	}
 
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.process.JDFProductionSubPath;
  *****************************************************************************
  * class JDFAutoProductionPath : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoProductionPath extends JDFResource
@@ -98,7 +98,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PRODUCTIONPATHID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PRODUCTIONPATHID, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -110,9 +110,9 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, 0x66666111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.POSTPRESSCOMPONENTPATH, 0x33333111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.PRINTINGUNITWEBPATH, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, 0x6666666111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.POSTPRESSCOMPONENTPATH, 0x3333333111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PRINTINGUNITWEBPATH, 0x3333333111l);
 	}
 
 	@Override
@@ -177,14 +177,14 @@ public abstract class JDFAutoProductionPath extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProductionPathID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProductionPathID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ProductionPathID
 	 *
@@ -205,9 +205,8 @@ public abstract class JDFAutoProductionPath extends JDFResource
 		return getAttribute(AttributeName.PRODUCTIONPATHID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -222,7 +221,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 
 	/**
 	 * (25) getCreateFolderSuperstructureWebPath
-	 *
+	 * 
 	 * @return JDFProductionSubPath the element
 	 */
 	public JDFProductionSubPath getCreateFolderSuperstructureWebPath()
@@ -242,7 +241,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 
 	/**
 	 * (26) getCreatePostPressComponentPath
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFProductionSubPath the element
 	 */
@@ -264,7 +263,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 
 	/**
 	 * Get all PostPressComponentPath from the current element
-	 *
+	 * 
 	 * @return Collection<JDFProductionSubPath>, null if none are available
 	 */
 	public Collection<JDFProductionSubPath> getAllPostPressComponentPath()
@@ -284,7 +283,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 
 	/**
 	 * (26) getCreatePrintingUnitWebPath
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFProductionSubPath the element
 	 */
@@ -306,7 +305,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 
 	/**
 	 * Get all PrintingUnitWebPath from the current element
-	 *
+	 * 
 	 * @return Collection<JDFProductionSubPath>, null if none are available
 	 */
 	public Collection<JDFProductionSubPath> getAllPrintingUnitWebPath()

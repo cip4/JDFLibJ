@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorCorrectionOp;
  *****************************************************************************
  * class JDFAutoColorCorrectionParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoColorCorrectionParams extends JDFResource
@@ -99,7 +99,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORMANAGEMENTSYSTEM, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORMANAGEMENTSYSTEM, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -111,8 +111,8 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORCORRECTIONOP, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORCORRECTIONOP, 0x3333333333l);
 	}
 
 	@Override
@@ -177,14 +177,14 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorManagementSystem
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorManagementSystem
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ColorManagementSystem
 	 *
@@ -205,14 +205,13 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 		return getAttribute(AttributeName.COLORMANAGEMENTSYSTEM, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateFileSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
@@ -234,7 +233,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 
 	/**
 	 * Get all FileSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFFileSpec>, null if none are available
 	 */
 	public Collection<JDFFileSpec> getAllFileSpec()
@@ -264,7 +263,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 
 	/**
 	 * (26) getCreateColorCorrectionOp
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorCorrectionOp the element
 	 */
@@ -286,7 +285,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 
 	/**
 	 * Get all ColorCorrectionOp from the current element
-	 *
+	 * 
 	 * @return Collection<JDFColorCorrectionOp>, null if none are available
 	 */
 	public Collection<JDFColorCorrectionOp> getAllColorCorrectionOp()

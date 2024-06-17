@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
  *****************************************************************************
  * class JDFAutoMerged : public JDFAudit
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoMerged extends JDFAudit
@@ -100,12 +100,12 @@ public abstract class JDFAutoMerged extends JDFAudit
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.INDEPENDENT, 0x44433333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.JREF, 0x22222222, AttributeInfo.EnumAttributeType.IDREF, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.JREFSOURCE, 0x44433333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MERGEID, 0x22222221, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.RREFSOVERWRITTEN, 0x33333333, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.URL, 0x33333331, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.INDEPENDENT, 0x4444433333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.JREF, 0x2222222222l, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JREFSOURCE, 0x4444433333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MERGEID, 0x2222222221l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.RREFSOVERWRITTEN, 0x3333333333l, AttributeInfo.EnumAttributeType.IDREFS, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.URL, 0x3333333331l, AttributeInfo.EnumAttributeType.URL, null, null);
 	}
 
 	@Override
@@ -117,8 +117,8 @@ public abstract class JDFAutoMerged extends JDFAudit
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x3333333333l);
 	}
 
 	@Override
@@ -163,14 +163,13 @@ public abstract class JDFAutoMerged extends JDFAudit
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Independent
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Independent ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Independent
 	 *
@@ -191,9 +190,9 @@ public abstract class JDFAutoMerged extends JDFAudit
 		return getBoolAttribute(AttributeName.INDEPENDENT, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute jRef
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute jRef ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute jRef
 	 *
@@ -214,9 +213,9 @@ public abstract class JDFAutoMerged extends JDFAudit
 		return getAttribute(AttributeName.JREF, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute jRefSource
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute jRefSource ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute jRefSource
 	 *
@@ -237,9 +236,9 @@ public abstract class JDFAutoMerged extends JDFAudit
 		return getAttribute(AttributeName.JREFSOURCE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MergeID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MergeID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MergeID
 	 *
@@ -260,9 +259,10 @@ public abstract class JDFAutoMerged extends JDFAudit
 		return getAttribute(AttributeName.MERGEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute rRefsOverwritten
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute rRefsOverwritten
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute rRefsOverwritten
 	 *
@@ -286,9 +286,9 @@ public abstract class JDFAutoMerged extends JDFAudit
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute URL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute URL
 	 *
@@ -309,14 +309,13 @@ public abstract class JDFAutoMerged extends JDFAudit
 		return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateEmployee
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -340,7 +339,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 
 	/**
 	 * Get all Employee from the current element
-	 *
+	 * 
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	@Override
@@ -362,7 +361,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -384,7 +383,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()

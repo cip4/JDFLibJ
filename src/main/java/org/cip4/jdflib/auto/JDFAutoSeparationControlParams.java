@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
  *****************************************************************************
  * class JDFAutoSeparationControlParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoSeparationControlParams extends JDFResource
@@ -95,8 +95,8 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.AUTOMATEDOVERPRINTPARAMS, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.TRANSFERFUNCTIONCONTROL, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.AUTOMATEDOVERPRINTPARAMS, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.TRANSFERFUNCTIONCONTROL, 0x3333333333l);
 	}
 
 	@Override
@@ -161,14 +161,13 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateAutomatedOverPrintParams
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFAutomatedOverPrintParams the element
 	 */
@@ -190,7 +189,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 
 	/**
 	 * Get all AutomatedOverPrintParams from the current element
-	 *
+	 * 
 	 * @return Collection<JDFAutomatedOverPrintParams>, null if none are available
 	 */
 	public Collection<JDFAutomatedOverPrintParams> getAllAutomatedOverPrintParams()
@@ -220,7 +219,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 
 	/**
 	 * (26) getCreateTransferFunctionControl
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFTransferFunctionControl the element
 	 */
@@ -242,7 +241,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 
 	/**
 	 * Get all TransferFunctionControl from the current element
-	 *
+	 * 
 	 * @return Collection<JDFTransferFunctionControl>, null if none are available
 	 */
 	public Collection<JDFTransferFunctionControl> getAllTransferFunctionControl()

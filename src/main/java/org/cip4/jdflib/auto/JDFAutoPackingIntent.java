@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.span.JDFXYPairSpan;
  *****************************************************************************
  * class JDFAutoPackingIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPackingIntent extends JDFIntentResource
@@ -96,22 +96,22 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[16];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BOXEDQUANTITY, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.BOXSHAPE, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.CARTONQUANTITY, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.CARTONSHAPE, 0x66666666);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.CARTONMAXWEIGHT, 0x66666666);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.CARTONSTRENGTH, 0x66666666);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.FOLDINGCATALOG, 0x66666666);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.PALLETCORNERBOARDS, 0x66666111);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.PALLETQUANTITY, 0x66666666);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.PALLETSIZE, 0x66666666);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.PALLETMAXHEIGHT, 0x66666666);
-		elemInfoTable[11] = new ElemInfoTable(ElementName.PALLETMAXWEIGHT, 0x66666666);
-		elemInfoTable[12] = new ElemInfoTable(ElementName.PALLETTYPE, 0x66666666);
-		elemInfoTable[13] = new ElemInfoTable(ElementName.PALLETWRAPPING, 0x66666666);
-		elemInfoTable[14] = new ElemInfoTable(ElementName.WRAPPEDQUANTITY, 0x66666666);
-		elemInfoTable[15] = new ElemInfoTable(ElementName.WRAPPINGMATERIAL, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BOXEDQUANTITY, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.BOXSHAPE, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.CARTONQUANTITY, 0x6666666666l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.CARTONSHAPE, 0x6666666666l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.CARTONMAXWEIGHT, 0x6666666666l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.CARTONSTRENGTH, 0x6666666666l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.FOLDINGCATALOG, 0x6666666666l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.PALLETCORNERBOARDS, 0x6666666111l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.PALLETQUANTITY, 0x6666666666l);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.PALLETSIZE, 0x6666666666l);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.PALLETMAXHEIGHT, 0x6666666666l);
+		elemInfoTable[11] = new ElemInfoTable(ElementName.PALLETMAXWEIGHT, 0x6666666666l);
+		elemInfoTable[12] = new ElemInfoTable(ElementName.PALLETTYPE, 0x6666666666l);
+		elemInfoTable[13] = new ElemInfoTable(ElementName.PALLETWRAPPING, 0x6666666666l);
+		elemInfoTable[14] = new ElemInfoTable(ElementName.WRAPPEDQUANTITY, 0x6666666666l);
+		elemInfoTable[15] = new ElemInfoTable(ElementName.WRAPPINGMATERIAL, 0x6666666666l);
 	}
 
 	@Override
@@ -156,9 +156,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -173,7 +172,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBoxedQuantity
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreateBoxedQuantity()
@@ -203,7 +202,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBoxShape
-	 *
+	 * 
 	 * @return JDFShapeSpan the element
 	 */
 	public JDFShapeSpan getCreateBoxShape()
@@ -233,7 +232,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCartonQuantity
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreateCartonQuantity()
@@ -263,7 +262,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCartonShape
-	 *
+	 * 
 	 * @return JDFShapeSpan the element
 	 */
 	public JDFShapeSpan getCreateCartonShape()
@@ -293,7 +292,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCartonMaxWeight
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateCartonMaxWeight()
@@ -323,7 +322,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCartonStrength
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateCartonStrength()
@@ -353,7 +352,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateFoldingCatalog
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateFoldingCatalog()
@@ -383,7 +382,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePalletCornerBoards
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreatePalletCornerBoards()
@@ -413,7 +412,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePalletQuantity
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreatePalletQuantity()
@@ -443,7 +442,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePalletSize
-	 *
+	 * 
 	 * @return JDFXYPairSpan the element
 	 */
 	public JDFXYPairSpan getCreatePalletSize()
@@ -473,7 +472,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePalletMaxHeight
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreatePalletMaxHeight()
@@ -503,7 +502,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePalletMaxWeight
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreatePalletMaxWeight()
@@ -533,7 +532,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePalletType
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreatePalletType()
@@ -563,7 +562,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePalletWrapping
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreatePalletWrapping()
@@ -593,7 +592,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateWrappedQuantity
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreateWrappedQuantity()
@@ -623,7 +622,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateWrappingMaterial
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateWrappingMaterial()

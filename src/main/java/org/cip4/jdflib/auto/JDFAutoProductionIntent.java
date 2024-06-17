@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.span.JDFSpanPrintPreference;
  *****************************************************************************
  * class JDFAutoProductionIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoProductionIntent extends JDFIntentResource
@@ -97,10 +97,10 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CERTIFICATION, 0x31111111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PRINTPREFERENCE, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.PRINTPROCESS, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CERTIFICATION, 0x3331111111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PRINTPREFERENCE, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PRINTPROCESS, 0x6666666666l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.RESOURCE, 0x3333333333l);
 	}
 
 	@Override
@@ -145,14 +145,13 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateCertification
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCertification the element
 	 */
@@ -174,7 +173,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 
 	/**
 	 * Get all Certification from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCertification>, null if none are available
 	 */
 	public Collection<JDFCertification> getAllCertification()
@@ -204,7 +203,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePrintPreference
-	 *
+	 * 
 	 * @return JDFSpanPrintPreference the element
 	 */
 	public JDFSpanPrintPreference getCreatePrintPreference()
@@ -234,7 +233,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePrintProcess
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreatePrintProcess()
@@ -254,7 +253,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreateResource
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFResource the element
 	 */
@@ -276,7 +275,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 
 	/**
 	 * Get all Resource from the current element
-	 *
+	 * 
 	 * @return Collection<JDFResource>, null if none are available
 	 */
 	public Collection<JDFResource> getAllResource()

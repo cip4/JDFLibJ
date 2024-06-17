@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoTrigger : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTrigger extends JDFResource
@@ -100,8 +100,8 @@ public abstract class JDFAutoTrigger extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.REPEATSTEP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.REPEATTIME, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.REPEATSTEP, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.REPEATTIME, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -113,10 +113,10 @@ public abstract class JDFAutoTrigger extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CHANGEDATTRIBUTE, 0x44444433);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.ADDED, 0x77777766);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.CHANGEDPATH, 0x33333311);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.REMOVED, 0x77777766);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CHANGEDATTRIBUTE, 0x4444444433l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.ADDED, 0x7777777766l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.CHANGEDPATH, 0x3333333311l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.REMOVED, 0x7777777766l);
 	}
 
 	@Override
@@ -181,14 +181,13 @@ public abstract class JDFAutoTrigger extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RepeatStep
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RepeatStep ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RepeatStep
 	 *
@@ -209,9 +208,9 @@ public abstract class JDFAutoTrigger extends JDFResource
 		return getIntAttribute(AttributeName.REPEATSTEP, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RepeatTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RepeatTime ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RepeatTime
 	 *
@@ -232,14 +231,13 @@ public abstract class JDFAutoTrigger extends JDFResource
 		return getRealAttribute(AttributeName.REPEATTIME, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateChangedAttribute
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFChangedAttribute the element
 	 */
@@ -261,7 +259,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * Get all ChangedAttribute from the current element
-	 *
+	 * 
 	 * @return Collection<JDFChangedAttribute>, null if none are available
 	 */
 	public Collection<JDFChangedAttribute> getAllChangedAttribute()
@@ -291,7 +289,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * (25) getCreateAdded
-	 *
+	 * 
 	 * @return JDFAdded the element
 	 */
 	public JDFAdded getCreateAdded()
@@ -311,7 +309,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * (26) getCreateChangedPath
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFChangedPath the element
 	 */
@@ -333,7 +331,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * Get all ChangedPath from the current element
-	 *
+	 * 
 	 * @return Collection<JDFChangedPath>, null if none are available
 	 */
 	public Collection<JDFChangedPath> getAllChangedPath()
@@ -363,7 +361,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 
 	/**
 	 * (25) getCreateRemoved
-	 *
+	 * 
 	 * @return JDFRemoved the element
 	 */
 	public JDFRemoved getCreateRemoved()

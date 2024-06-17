@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
  *****************************************************************************
  * class JDFAutoCustomerInfo : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCustomerInfo extends JDFResource
@@ -149,14 +149,13 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BillingCode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BillingCode ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BillingCode
 	 *
@@ -177,9 +176,9 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 		return getAttribute(AttributeName.BILLINGCODE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CustomerID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CustomerID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CustomerID
 	 *
@@ -200,9 +199,10 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 		return getAttribute(AttributeName.CUSTOMERID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CustomerJobName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CustomerJobName
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CustomerJobName
 	 *
@@ -223,9 +223,10 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 		return getAttribute(AttributeName.CUSTOMERJOBNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CustomerOrderID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CustomerOrderID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CustomerOrderID
 	 *
@@ -246,9 +247,10 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 		return getAttribute(AttributeName.CUSTOMERORDERID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CustomerProjectID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CustomerProjectID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CustomerProjectID
 	 *
@@ -269,9 +271,8 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 		return getAttribute(AttributeName.CUSTOMERPROJECTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -286,7 +287,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 
 	/**
 	 * (25) getCreateCompany
-	 *
+	 * 
 	 * @return JDFCompany the element
 	 */
 	public JDFCompany getCreateCompany()
@@ -316,7 +317,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -338,7 +339,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -369,7 +370,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 
 	/**
 	 * (26) getCreateCustomerMessage
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCustomerMessage the element
 	 */
@@ -391,7 +392,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 
 	/**
 	 * Get all CustomerMessage from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCustomerMessage>, null if none are available
 	 */
 	public Collection<JDFCustomerMessage> getAllCustomerMessage()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoPackingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPackingParams extends JDFResource
@@ -98,20 +98,20 @@ public abstract class JDFAutoPackingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[14];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PALLETWRAPPING, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumPalletWrapping.getEnum(0), "None");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.WRAPPINGMATERIAL, 0x44444443, AttributeInfo.EnumAttributeType.NMTOKEN, null, "None");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.BOXEDQUANTITY, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.BOXSHAPE, 0x44444443, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.CARTONQUANTITY, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.CARTONSHAPE, 0x44444443, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.CARTONMAXWEIGHT, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.CARTONSTRENGTH, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.PALLETQUANTITY, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PALLETSIZE, 0x44444443, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.PALLETMAXHEIGHT, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.PALLETMAXWEIGHT, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.PALLETTYPE, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumPalletType.getEnum(0), null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.WRAPPEDQUANTITY, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PALLETWRAPPING, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumPalletWrapping.getEnum(0), "None");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.WRAPPINGMATERIAL, 0x4444444443l, AttributeInfo.EnumAttributeType.NMTOKEN, null, "None");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BOXEDQUANTITY, 0x4444444443l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.BOXSHAPE, 0x4444444443l, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.CARTONQUANTITY, 0x4444444443l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.CARTONSHAPE, 0x4444444443l, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.CARTONMAXWEIGHT, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.CARTONSTRENGTH, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.PALLETQUANTITY, 0x4444444443l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PALLETSIZE, 0x4444444443l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.PALLETMAXHEIGHT, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.PALLETMAXWEIGHT, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.PALLETTYPE, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumPalletType.getEnum(0), null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.WRAPPEDQUANTITY, 0x4444444443l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -186,7 +186,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPalletWrapping(String name)
+		protected EnumPalletWrapping(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -251,7 +251,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPalletType(String name)
+		protected EnumPalletType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -306,14 +306,14 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		public static final EnumPalletType Euro = new EnumPalletType("Euro");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PalletWrapping
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PalletWrapping
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PalletWrapping
 	 *
@@ -334,9 +334,10 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		return EnumPalletWrapping.getEnum(getAttribute(AttributeName.PALLETWRAPPING, null, "None"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WrappingMaterial
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WrappingMaterial
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WrappingMaterial
 	 *
@@ -357,9 +358,10 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		return getAttribute(AttributeName.WRAPPINGMATERIAL, null, "None");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BoxedQuantity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BoxedQuantity
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BoxedQuantity
 	 *
@@ -380,9 +382,9 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		return getIntAttribute(AttributeName.BOXEDQUANTITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BoxShape
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BoxShape ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BoxShape
 	 *
@@ -405,9 +407,10 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CartonQuantity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CartonQuantity
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CartonQuantity
 	 *
@@ -428,9 +431,9 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		return getIntAttribute(AttributeName.CARTONQUANTITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CartonShape
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CartonShape ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CartonShape
 	 *
@@ -453,9 +456,10 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CartonMaxWeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CartonMaxWeight
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CartonMaxWeight
 	 *
@@ -476,9 +480,10 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		return getRealAttribute(AttributeName.CARTONMAXWEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CartonStrength
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CartonStrength
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CartonStrength
 	 *
@@ -499,9 +504,10 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		return getRealAttribute(AttributeName.CARTONSTRENGTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PalletQuantity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PalletQuantity
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PalletQuantity
 	 *
@@ -522,9 +528,9 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		return getIntAttribute(AttributeName.PALLETQUANTITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PalletSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PalletSize ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PalletSize
 	 *
@@ -547,9 +553,10 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PalletMaxHeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PalletMaxHeight
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PalletMaxHeight
 	 *
@@ -570,9 +577,10 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		return getRealAttribute(AttributeName.PALLETMAXHEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PalletMaxWeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PalletMaxWeight
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PalletMaxWeight
 	 *
@@ -593,9 +601,9 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		return getRealAttribute(AttributeName.PALLETMAXWEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PalletType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PalletType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PalletType
 	 *
@@ -616,9 +624,10 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		return EnumPalletType.getEnum(getAttribute(AttributeName.PALLETTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WrappedQuantity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WrappedQuantity
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WrappedQuantity
 	 *

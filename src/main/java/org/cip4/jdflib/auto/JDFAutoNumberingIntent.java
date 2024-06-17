@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoNumberingIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoNumberingIntent extends JDFIntentResource
@@ -97,10 +97,10 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORNAME, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORNAMEDETAILS, 0x33331111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.NUMBERITEM, 0x22222222);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORNAME, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORNAMEDETAILS, 0x3333331111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORPOOL, 0x6666666666l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.NUMBERITEM, 0x2222222222l);
 	}
 
 	@Override
@@ -145,9 +145,8 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -162,7 +161,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateColorName
-	 *
+	 * 
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateColorName()
@@ -182,7 +181,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreateColorNameDetails
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
@@ -204,7 +203,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 
 	/**
 	 * Get all ColorNameDetails from the current element
-	 *
+	 * 
 	 * @return Collection<JDFStringSpan>, null if none are available
 	 */
 	public Collection<JDFStringSpan> getAllColorNameDetails()
@@ -234,7 +233,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateColorPool
-	 *
+	 * 
 	 * @return JDFColorPool the element
 	 */
 	public JDFColorPool getCreateColorPool()
@@ -264,7 +263,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreateNumberItem
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFNumberItem the element
 	 */
@@ -286,7 +285,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 
 	/**
 	 * Get all NumberItem from the current element
-	 *
+	 * 
 	 * @return Collection<JDFNumberItem>, null if none are available
 	 */
 	public Collection<JDFNumberItem> getAllNumberItem()

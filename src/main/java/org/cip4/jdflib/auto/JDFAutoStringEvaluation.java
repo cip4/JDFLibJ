@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
  *****************************************************************************
  * class JDFAutoStringEvaluation : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStringEvaluation extends JDFResource
@@ -100,8 +100,8 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.LENGTHJDF, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.REGEXP, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LENGTHJDF, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.REGEXP, 0x3333333333l, AttributeInfo.EnumAttributeType.Any, null, null);
 	}
 
 	@Override
@@ -113,8 +113,8 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUE, 0x3333333333l);
 	}
 
 	@Override
@@ -170,14 +170,13 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 		return bRet;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LengthJDF
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LengthJDF ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LengthJDF
 	 *
@@ -200,9 +199,9 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RegExp
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RegExp ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RegExp
 	 *
@@ -223,14 +222,13 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 		return getAttribute(AttributeName.REGEXP, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateBasicPreflightTest
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest the element
 	 */
@@ -252,7 +250,7 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 
 	/**
 	 * Get all BasicPreflightTest from the current element
-	 *
+	 * 
 	 * @return Collection<JDFBasicPreflightTest>, null if none are available
 	 */
 	public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
@@ -272,7 +270,7 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 
 	/**
 	 * (26) getCreateValue
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFValue the element
 	 */
@@ -294,7 +292,7 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 
 	/**
 	 * Get all Value from the current element
-	 *
+	 * 
 	 * @return Collection<JDFValue>, null if none are available
 	 */
 	public Collection<JDFValue> getAllValue()

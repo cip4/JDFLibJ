@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoPreflightProfile : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPreflightProfile extends JDFResource
@@ -92,12 +92,12 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORSCONSTRAINTSPOOL, 0x77777766);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.DOCUMENTCONSTRAINTSPOOL, 0x77777766);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.FONTSCONSTRAINTSPOOL, 0x77777766);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.FILETYPECONSTRAINTSPOOL, 0x77777766);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.IMAGESCONSTRAINTSPOOL, 0x77777766);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.PAGESCONSTRAINTSPOOL, 0x77777766);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORSCONSTRAINTSPOOL, 0x7777777766l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DOCUMENTCONSTRAINTSPOOL, 0x7777777766l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.FONTSCONSTRAINTSPOOL, 0x7777777766l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.FILETYPECONSTRAINTSPOOL, 0x7777777766l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.IMAGESCONSTRAINTSPOOL, 0x7777777766l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.PAGESCONSTRAINTSPOOL, 0x7777777766l);
 	}
 
 	@Override
@@ -162,9 +162,8 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -179,7 +178,7 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 
 	/**
 	 * (25) getCreateColorsConstraintsPool
-	 *
+	 * 
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateColorsConstraintsPool()
@@ -209,7 +208,7 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 
 	/**
 	 * (25) getCreateDocumentConstraintsPool
-	 *
+	 * 
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateDocumentConstraintsPool()
@@ -239,7 +238,7 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 
 	/**
 	 * (25) getCreateFontsConstraintsPool
-	 *
+	 * 
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateFontsConstraintsPool()
@@ -269,7 +268,7 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 
 	/**
 	 * (25) getCreateFileTypeConstraintsPool
-	 *
+	 * 
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateFileTypeConstraintsPool()
@@ -299,7 +298,7 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 
 	/**
 	 * (25) getCreateImagesConstraintsPool
-	 *
+	 * 
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateImagesConstraintsPool()
@@ -329,7 +328,7 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 
 	/**
 	 * (25) getCreatePagesConstraintsPool
-	 *
+	 * 
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreatePagesConstraintsPool()

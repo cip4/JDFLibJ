@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
  *****************************************************************************
  * class JDFAutoThreadSewingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoThreadSewingParams extends JDFResource
@@ -104,17 +104,17 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLINDSTITCH, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CASTINGMATERIAL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCastingMaterial.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.COREMATERIAL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCoreMaterial.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.GLUELINEREFSHEETS, 0x33333333, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.OFFSET, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.NEEDLEPOSITIONS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.NUMBEROFNEEDLES, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.SEALING, 0x44333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.SEWINGPATTERN, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSewingPattern.getEnum(0), null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.THREADTHICKNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.THREADBRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLINDSTITCH, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CASTINGMATERIAL, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCastingMaterial.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.COREMATERIAL, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCoreMaterial.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.GLUELINEREFSHEETS, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.OFFSET, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.NEEDLEPOSITIONS, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.NUMBEROFNEEDLES, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SEALING, 0x4444333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.SEWINGPATTERN, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSewingPattern.getEnum(0), null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.THREADTHICKNESS, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.THREADBRAND, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x3333333333l);
 	}
 
 	@Override
@@ -201,7 +201,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumCastingMaterial(String name)
+		protected EnumCastingMaterial(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -266,7 +266,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumCoreMaterial(String name)
+		protected EnumCoreMaterial(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -331,7 +331,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSewingPattern(String name)
+		protected EnumSewingPattern(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -388,14 +388,13 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		public static final EnumSewingPattern Side = new EnumSewingPattern("Side");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlindStitch
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlindStitch ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BlindStitch
 	 *
@@ -416,9 +415,10 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		return getBoolAttribute(AttributeName.BLINDSTITCH, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CastingMaterial
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CastingMaterial
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute CastingMaterial
 	 *
@@ -439,9 +439,10 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		return EnumCastingMaterial.getEnum(getAttribute(AttributeName.CASTINGMATERIAL, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CoreMaterial
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CoreMaterial
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute CoreMaterial
 	 *
@@ -462,9 +463,10 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		return EnumCoreMaterial.getEnum(getAttribute(AttributeName.COREMATERIAL, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GlueLineRefSheets
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GlueLineRefSheets
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GlueLineRefSheets
 	 *
@@ -487,9 +489,9 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Offset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Offset
 	 *
@@ -510,9 +512,10 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		return getRealAttribute(AttributeName.OFFSET, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NeedlePositions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NeedlePositions
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NeedlePositions
 	 *
@@ -535,9 +538,10 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NumberOfNeedles
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NumberOfNeedles
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NumberOfNeedles
 	 *
@@ -558,9 +562,9 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		return getIntAttribute(AttributeName.NUMBEROFNEEDLES, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Sealing
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Sealing ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Sealing
 	 *
@@ -581,9 +585,10 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		return getBoolAttribute(AttributeName.SEALING, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SewingPattern
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SewingPattern
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SewingPattern
 	 *
@@ -604,9 +609,10 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		return EnumSewingPattern.getEnum(getAttribute(AttributeName.SEWINGPATTERN, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ThreadThickness
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ThreadThickness
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ThreadThickness
 	 *
@@ -627,9 +633,9 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		return getRealAttribute(AttributeName.THREADTHICKNESS, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ThreadBrand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ThreadBrand ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ThreadBrand
 	 *
@@ -650,14 +656,13 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		return getAttribute(AttributeName.THREADBRAND, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateGlueLine
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
@@ -679,7 +684,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 
 	/**
 	 * Get all GlueLine from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGlueLine>, null if none are available
 	 */
 	public Collection<JDFGlueLine> getAllGlueLine()

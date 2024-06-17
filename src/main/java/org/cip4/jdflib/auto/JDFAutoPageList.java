@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,7 +96,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFScreeningParams;
  *****************************************************************************
  * class JDFAutoPageList : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPageList extends JDFResource
@@ -107,19 +107,19 @@ public abstract class JDFAutoPageList extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TEMPLATE, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x44444311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.HASBLEEDS, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ISBLANK, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.ISPRINTABLE, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.ISTRAPPED, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.PAGELABELPREFIX, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PAGELABELSUFFIX, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.SOURCEBLEEDBOX, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.SOURCECLIPBOX, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.SOURCETRIMBOX, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TEMPLATE, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x4444444311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.HASBLEEDS, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ISBLANK, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ISPRINTABLE, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.ISTRAPPED, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.JOBID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.PAGELABELPREFIX, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PAGELABELSUFFIX, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.SOURCEBLEEDBOX, 0x3333333311l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.SOURCECLIPBOX, 0x3333333311l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.SOURCETRIMBOX, 0x3333333311l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 	}
 
 	@Override
@@ -131,14 +131,14 @@ public abstract class JDFAutoPageList extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLY, 0x66666611);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666611);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.CONTENTLIST, 0x66666611);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x66666611);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.PAGEDATA, 0x33333311);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.SCREENINGPARAMS, 0x66666611);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333311);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.ELEMENTCOLORPARAMS, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLY, 0x6666666611l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORPOOL, 0x6666666611l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.CONTENTLIST, 0x6666666611l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x6666666611l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.PAGEDATA, 0x3333333311l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.SCREENINGPARAMS, 0x6666666611l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x3333333311l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.ELEMENTCOLORPARAMS, 0x6666666611l);
 	}
 
 	@Override
@@ -203,14 +203,13 @@ public abstract class JDFAutoPageList extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Template
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Template ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Template
 	 *
@@ -231,9 +230,9 @@ public abstract class JDFAutoPageList extends JDFResource
 		return getBoolAttribute(AttributeName.TEMPLATE, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AssemblyID
 	 *
@@ -254,9 +253,9 @@ public abstract class JDFAutoPageList extends JDFResource
 		return getAttribute(AttributeName.ASSEMBLYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyIDs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AssemblyIDs
 	 *
@@ -280,9 +279,9 @@ public abstract class JDFAutoPageList extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HasBleeds
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HasBleeds ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HasBleeds
 	 *
@@ -303,9 +302,9 @@ public abstract class JDFAutoPageList extends JDFResource
 		return getBoolAttribute(AttributeName.HASBLEEDS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IsBlank
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IsBlank ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IsBlank
 	 *
@@ -326,9 +325,9 @@ public abstract class JDFAutoPageList extends JDFResource
 		return getBoolAttribute(AttributeName.ISBLANK, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IsPrintable
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IsPrintable ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IsPrintable
 	 *
@@ -349,9 +348,9 @@ public abstract class JDFAutoPageList extends JDFResource
 		return getBoolAttribute(AttributeName.ISPRINTABLE, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IsTrapped
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IsTrapped ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IsTrapped
 	 *
@@ -372,9 +371,9 @@ public abstract class JDFAutoPageList extends JDFResource
 		return getBoolAttribute(AttributeName.ISTRAPPED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobID
 	 *
@@ -395,9 +394,10 @@ public abstract class JDFAutoPageList extends JDFResource
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageLabelPrefix
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageLabelPrefix
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PageLabelPrefix
 	 *
@@ -418,9 +418,10 @@ public abstract class JDFAutoPageList extends JDFResource
 		return getAttribute(AttributeName.PAGELABELPREFIX, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageLabelSuffix
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageLabelSuffix
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PageLabelSuffix
 	 *
@@ -441,9 +442,10 @@ public abstract class JDFAutoPageList extends JDFResource
 		return getAttribute(AttributeName.PAGELABELSUFFIX, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceBleedBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceBleedBox
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SourceBleedBox
 	 *
@@ -466,9 +468,10 @@ public abstract class JDFAutoPageList extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceClipBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceClipBox
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SourceClipBox
 	 *
@@ -491,9 +494,10 @@ public abstract class JDFAutoPageList extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceTrimBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceTrimBox
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SourceTrimBox
 	 *
@@ -516,9 +520,8 @@ public abstract class JDFAutoPageList extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -533,7 +536,7 @@ public abstract class JDFAutoPageList extends JDFResource
 
 	/**
 	 * (25) getCreateAssembly
-	 *
+	 * 
 	 * @return JDFAssembly the element
 	 */
 	public JDFAssembly getCreateAssembly()
@@ -573,7 +576,7 @@ public abstract class JDFAutoPageList extends JDFResource
 
 	/**
 	 * (25) getCreateColorPool
-	 *
+	 * 
 	 * @return JDFColorPool the element
 	 */
 	public JDFColorPool getCreateColorPool()
@@ -613,7 +616,7 @@ public abstract class JDFAutoPageList extends JDFResource
 
 	/**
 	 * (25) getCreateContentList
-	 *
+	 * 
 	 * @return JDFContentList the element
 	 */
 	public JDFContentList getCreateContentList()
@@ -653,7 +656,7 @@ public abstract class JDFAutoPageList extends JDFResource
 
 	/**
 	 * (25) getCreateImageCompressionParams
-	 *
+	 * 
 	 * @return JDFImageCompressionParams the element
 	 */
 	public JDFImageCompressionParams getCreateImageCompressionParams()
@@ -683,7 +686,7 @@ public abstract class JDFAutoPageList extends JDFResource
 
 	/**
 	 * (26) getCreatePageData
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageData the element
 	 */
@@ -705,7 +708,7 @@ public abstract class JDFAutoPageList extends JDFResource
 
 	/**
 	 * Get all PageData from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPageData>, null if none are available
 	 */
 	public Collection<JDFPageData> getAllPageData()
@@ -735,7 +738,7 @@ public abstract class JDFAutoPageList extends JDFResource
 
 	/**
 	 * (25) getCreateScreeningParams
-	 *
+	 * 
 	 * @return JDFScreeningParams the element
 	 */
 	public JDFScreeningParams getCreateScreeningParams()
@@ -765,7 +768,7 @@ public abstract class JDFAutoPageList extends JDFResource
 
 	/**
 	 * (26) getCreateSeparationSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
@@ -787,7 +790,7 @@ public abstract class JDFAutoPageList extends JDFResource
 
 	/**
 	 * Get all SeparationSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFSeparationSpec>, null if none are available
 	 */
 	public Collection<JDFSeparationSpec> getAllSeparationSpec()
@@ -817,7 +820,7 @@ public abstract class JDFAutoPageList extends JDFResource
 
 	/**
 	 * (25) getCreateElementColorParams
-	 *
+	 * 
 	 * @return JDFElementColorParams the element
 	 */
 	public JDFElementColorParams getCreateElementColorParams()

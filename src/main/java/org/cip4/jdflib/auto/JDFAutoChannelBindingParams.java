@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoChannelBindingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoChannelBindingParams extends JDFResource
@@ -93,12 +93,12 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLAMPSYSTEM, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.CLAMPCOLOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.CLAMPCOLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.CLAMPD, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.CLAMPSIZE, 0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLAMPSYSTEM, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BRAND, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CLAMPCOLOR, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.CLAMPCOLORDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.CLAMPD, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.CLAMPSIZE, 0x3333333333l, AttributeInfo.EnumAttributeType.shape, null, null);
 	}
 
 	@Override
@@ -163,14 +163,13 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ClampSystem
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ClampSystem ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ClampSystem
 	 *
@@ -191,9 +190,9 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 		return getBoolAttribute(AttributeName.CLAMPSYSTEM, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Brand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Brand ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Brand
 	 *
@@ -216,9 +215,9 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 		return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ClampColor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ClampColor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (13) set attribute ClampColor
 	 *
@@ -243,9 +242,10 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ClampColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ClampColorDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ClampColorDetails
 	 *
@@ -266,9 +266,9 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 		return getAttribute(AttributeName.CLAMPCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ClampD
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ClampD ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ClampD
 	 *
@@ -289,9 +289,9 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.CLAMPD, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ClampSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ClampSize ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ClampSize
 	 *

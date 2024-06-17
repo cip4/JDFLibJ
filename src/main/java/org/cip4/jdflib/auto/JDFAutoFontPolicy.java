@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoFontPolicy : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoFontPolicy extends JDFResource
@@ -92,9 +92,9 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREFERREDFONT, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.USEDEFAULTFONT, 0x22222222, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.USEFONTEMULATION, 0x22222222, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREFERREDFONT, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.USEDEFAULTFONT, 0x2222222222l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.USEFONTEMULATION, 0x2222222222l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
 	@Override
@@ -159,14 +159,14 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreferredFont
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreferredFont
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PreferredFont
 	 *
@@ -187,9 +187,10 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 		return getAttribute(AttributeName.PREFERREDFONT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UseDefaultFont
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UseDefaultFont
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute UseDefaultFont
 	 *
@@ -210,9 +211,10 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 		return getBoolAttribute(AttributeName.USEDEFAULTFONT, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UseFontEmulation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UseFontEmulation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute UseFontEmulation
 	 *

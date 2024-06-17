@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,7 +95,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceSubstitute;
  *****************************************************************************
  * class JDFAutoColorantControl : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoColorantControl extends JDFResource
@@ -106,10 +106,10 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FORCESEPARATIONS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.INTERNALCOLORMODEL, 0x33311111, AttributeInfo.EnumAttributeType.enumeration, EnumInternalColorModel.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAPPINGSELECTION, 0x33311111, AttributeInfo.EnumAttributeType.enumeration, EnumMappingSelection.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PROCESSCOLORMODEL, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FORCESEPARATIONS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.INTERNALCOLORMODEL, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumInternalColorModel.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAPPINGSELECTION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumMappingSelection.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PROCESSCOLORMODEL, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -121,14 +121,14 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORANTALIAS, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORANTCONVERTPROCESS, 0x66661111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORANTORDER, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.COLORANTPARAMS, 0x66666666);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666666);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.COLORSPACESUBSTITUTE, 0x33333333);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.DEVICECOLORANTORDER, 0x66666666);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.DEVICENSPACE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORANTALIAS, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORANTCONVERTPROCESS, 0x6666661111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORANTORDER, 0x6666666666l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.COLORANTPARAMS, 0x6666666666l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.COLORPOOL, 0x6666666666l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.COLORSPACESUBSTITUTE, 0x3333333333l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.DEVICECOLORANTORDER, 0x6666666666l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.DEVICENSPACE, 0x3333333333l);
 	}
 
 	@Override
@@ -203,7 +203,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumInternalColorModel(String name)
+		protected EnumInternalColorModel(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -268,7 +268,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMappingSelection(String name)
+		protected EnumMappingSelection(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -323,14 +323,14 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		public static final EnumMappingSelection UseProcessColorValues = new EnumMappingSelection("UseProcessColorValues");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ForceSeparations
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ForceSeparations
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ForceSeparations
 	 *
@@ -351,9 +351,10 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		return getBoolAttribute(AttributeName.FORCESEPARATIONS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute InternalColorModel
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InternalColorModel
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute InternalColorModel
 	 *
@@ -374,9 +375,10 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		return EnumInternalColorModel.getEnum(getAttribute(AttributeName.INTERNALCOLORMODEL, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MappingSelection
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MappingSelection
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute MappingSelection
 	 *
@@ -397,9 +399,10 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		return EnumMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProcessColorModel
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProcessColorModel
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ProcessColorModel
 	 *
@@ -420,14 +423,13 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		return getAttribute(AttributeName.PROCESSCOLORMODEL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateColorantAlias
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorantAlias the element
 	 */
@@ -449,7 +451,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * Get all ColorantAlias from the current element
-	 *
+	 * 
 	 * @return Collection<JDFColorantAlias>, null if none are available
 	 */
 	public Collection<JDFColorantAlias> getAllColorantAlias()
@@ -489,7 +491,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (25) getCreateColorantConvertProcess
-	 *
+	 * 
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getCreateColorantConvertProcess()
@@ -519,7 +521,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (25) getCreateColorantOrder
-	 *
+	 * 
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getCreateColorantOrder()
@@ -549,7 +551,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (25) getCreateColorantParams
-	 *
+	 * 
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getCreateColorantParams()
@@ -579,7 +581,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (25) getCreateColorPool
-	 *
+	 * 
 	 * @return JDFColorPool the element
 	 */
 	public JDFColorPool getCreateColorPool()
@@ -609,7 +611,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (26) getCreateColorSpaceSubstitute
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorSpaceSubstitute the element
 	 */
@@ -631,7 +633,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * Get all ColorSpaceSubstitute from the current element
-	 *
+	 * 
 	 * @return Collection<JDFColorSpaceSubstitute>, null if none are available
 	 */
 	public Collection<JDFColorSpaceSubstitute> getAllColorSpaceSubstitute()
@@ -661,7 +663,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (25) getCreateDeviceColorantOrder
-	 *
+	 * 
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getCreateDeviceColorantOrder()
@@ -681,7 +683,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (26) getCreateDeviceNSpace
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDeviceNSpace the element
 	 */
@@ -703,7 +705,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * Get all DeviceNSpace from the current element
-	 *
+	 * 
 	 * @return Collection<JDFDeviceNSpace>, null if none are available
 	 */
 	public Collection<JDFDeviceNSpace> getAllDeviceNSpace()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
  *****************************************************************************
  * class JDFAutoApprovalPerson : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoApprovalPerson extends JDFElement
@@ -101,9 +101,9 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.OBLIGATED, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.APPROVALROLE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumApprovalRole.getEnum(0), "Obligated");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.APPROVALROLEDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.OBLIGATED, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.APPROVALROLE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumApprovalRole.getEnum(0), "Obligated");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.APPROVALROLEDETAILS, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x55555555);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x5555555555l);
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumApprovalRole(String name)
+		protected EnumApprovalRole(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -227,14 +227,13 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 		public static final EnumApprovalRole Obligated = new EnumApprovalRole("Obligated");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Obligated
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Obligated ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Obligated
 	 *
@@ -255,9 +254,10 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 		return getBoolAttribute(AttributeName.OBLIGATED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ApprovalRole
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ApprovalRole
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ApprovalRole
 	 *
@@ -278,9 +278,10 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 		return EnumApprovalRole.getEnum(getAttribute(AttributeName.APPROVALROLE, null, "Obligated"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ApprovalRoleDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ApprovalRoleDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ApprovalRoleDetails
 	 *
@@ -301,9 +302,8 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 		return getAttribute(AttributeName.APPROVALROLEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -318,7 +318,7 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 
 	/**
 	 * (25) getCreateContact
-	 *
+	 * 
 	 * @return JDFContact the element
 	 */
 	public JDFContact getCreateContact()

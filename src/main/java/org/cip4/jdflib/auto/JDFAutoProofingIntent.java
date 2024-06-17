@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.intent.JDFPreflightItem;
  *****************************************************************************
  * class JDFAutoProofingIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoProofingIntent extends JDFIntentResource
@@ -95,8 +95,8 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PROOFITEM, 0x33333331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PREFLIGHTITEM, 0x33111111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PROOFITEM, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PREFLIGHTITEM, 0x3333111111l);
 	}
 
 	@Override
@@ -141,14 +141,13 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateProofItem
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFProofItem the element
 	 */
@@ -170,7 +169,7 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 
 	/**
 	 * Get all ProofItem from the current element
-	 *
+	 * 
 	 * @return Collection<JDFProofItem>, null if none are available
 	 */
 	public Collection<JDFProofItem> getAllProofItem()
@@ -190,7 +189,7 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreatePreflightItem
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPreflightItem the element
 	 */
@@ -212,7 +211,7 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 
 	/**
 	 * Get all PreflightItem from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPreflightItem>, null if none are available
 	 */
 	public Collection<JDFPreflightItem> getAllPreflightItem()

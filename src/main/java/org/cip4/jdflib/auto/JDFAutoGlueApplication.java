@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
  *****************************************************************************
  * class JDFAutoGlueApplication : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoGlueApplication extends JDFResource
@@ -100,7 +100,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.GLUINGTECHNIQUE, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumGluingTechnique.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.GLUINGTECHNIQUE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumGluingTechnique.getEnum(0), null);
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x55555551);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x5555555551l);
 	}
 
 	@Override
@@ -187,7 +187,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumGluingTechnique(String name)
+		protected EnumGluingTechnique(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -242,14 +242,14 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 		public static final EnumGluingTechnique SideGluingBack = new EnumGluingTechnique("SideGluingBack");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GluingTechnique
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GluingTechnique
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute GluingTechnique
 	 *
@@ -270,9 +270,8 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 		return EnumGluingTechnique.getEnum(getAttribute(AttributeName.GLUINGTECHNIQUE, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -287,7 +286,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 
 	/**
 	 * (25) getCreateGlueLine
-	 *
+	 * 
 	 * @return JDFGlueLine the element
 	 */
 	public JDFGlueLine getCreateGlueLine()

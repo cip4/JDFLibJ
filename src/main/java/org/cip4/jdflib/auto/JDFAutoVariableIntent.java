@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.span.JDFSpanVariableType;
  *****************************************************************************
  * class JDFAutoVariableIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoVariableIntent extends JDFIntentResource
@@ -98,14 +98,14 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.AREA, 0x66111111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.AVERAGEPAGES, 0x66111111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.MAXPAGES, 0x33111111);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.MINPAGES, 0x66111111);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.NUMBEROFCOPIES, 0x66111111);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.VARIABLETYPE, 0x66111111);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.VARIABLEQUALITY, 0x66111111);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.COLORSUSED, 0x66111111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.AREA, 0x6666111111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.AVERAGEPAGES, 0x6666111111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.MAXPAGES, 0x3333111111l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.MINPAGES, 0x6666111111l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.NUMBEROFCOPIES, 0x6666111111l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.VARIABLETYPE, 0x6666111111l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.VARIABLEQUALITY, 0x6666111111l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.COLORSUSED, 0x6666111111l);
 	}
 
 	@Override
@@ -150,9 +150,8 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -167,7 +166,7 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateArea
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateArea()
@@ -197,7 +196,7 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateAveragePages
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreateAveragePages()
@@ -217,7 +216,7 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreatemaxPages
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIntegerSpan the element
 	 */
@@ -239,7 +238,7 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 
 	/**
 	 * Get all maxPages from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIntegerSpan>, null if none are available
 	 */
 	public Collection<JDFIntegerSpan> getAllmaxPages()
@@ -269,7 +268,7 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMinPages
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreateMinPages()
@@ -299,7 +298,7 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateNumberOfCopies
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreateNumberOfCopies()
@@ -329,7 +328,7 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateVariableType
-	 *
+	 * 
 	 * @return JDFSpanVariableType the element
 	 */
 	public JDFSpanVariableType getCreateVariableType()
@@ -359,7 +358,7 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateVariableQuality
-	 *
+	 * 
 	 * @return JDFSpanVariableQuality the element
 	 */
 	public JDFSpanVariableQuality getCreateVariableQuality()
@@ -389,7 +388,7 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateColorsUsed
-	 *
+	 * 
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getCreateColorsUsed()

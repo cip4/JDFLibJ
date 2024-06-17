@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.JDFComChannel;
  *****************************************************************************
  * class JDFAutoCustomerMessage : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCustomerMessage extends JDFElement
@@ -99,9 +99,9 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.LANGUAGE, 0x44433311, AttributeInfo.EnumAttributeType.language, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MESSAGEEVENTS, 0x44422211, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHOWLIST, 0x44433311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LANGUAGE, 0x4444433311l, AttributeInfo.EnumAttributeType.language, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MESSAGEEVENTS, 0x4444422211l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHOWLIST, 0x4444433311l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COMCHANNEL, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMCHANNEL, 0x3333333311l);
 	}
 
 	@Override
@@ -158,14 +158,13 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Language
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Language ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Language
 	 *
@@ -186,9 +185,10 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 		return getAttribute(AttributeName.LANGUAGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MessageEvents
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MessageEvents
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MessageEvents
 	 *
@@ -212,9 +212,9 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShowList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShowList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ShowList
 	 *
@@ -238,14 +238,13 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateComChannel
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFComChannel the element
 	 */
@@ -267,7 +266,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 
 	/**
 	 * Get all ComChannel from the current element
-	 *
+	 * 
 	 * @return Collection<JDFComChannel>, null if none are available
 	 */
 	public Collection<JDFComChannel> getAllComChannel()

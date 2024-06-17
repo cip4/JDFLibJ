@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -103,7 +103,7 @@ import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
  *****************************************************************************
  * class JDFAutoLayout : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLayout extends JDFResource
@@ -114,23 +114,23 @@ public abstract class JDFAutoLayout extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[17];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTOMATED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCKORIGINS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXDOCORD, 0x44443331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXSETORD, 0x44443331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ORDRESET, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumOrdReset.getEnum(0), "Continue");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SHEETCOUNTRESET, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumSheetCountReset.getEnum(0), "Continue");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.NAME, 0x44443331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.BASEORDRESET, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumBaseOrdReset.getEnum(0), null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.MAXCOLLECT, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.MAXORD, 0x44443333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.MINCOLLECT, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.ORDSCONSUMED, 0x33331111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.SHEETNAMEFORMAT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.SHEETNAMETEMPLATE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumSourceWorkStyle.getEnum(0), null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.TEMPLATETYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumTemplateType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTOMATED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCKORIGINS, 0x3333333111l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXDOCORD, 0x4444443331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXSETORD, 0x4444443331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ORDRESET, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumOrdReset.getEnum(0), "Continue");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SHEETCOUNTRESET, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetCountReset.getEnum(0), "Continue");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.NAME, 0x4444443331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.BASEORDRESET, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumBaseOrdReset.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.MAXCOLLECT, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.MAXORD, 0x4444443333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.MINCOLLECT, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.ORDSCONSUMED, 0x3333331111l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.SHEETNAMEFORMAT, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.SHEETNAMETEMPLATE, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumSourceWorkStyle.getEnum(0), null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x3333333111l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.TEMPLATETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumTemplateType.getEnum(0), null);
 	}
 
 	@Override
@@ -142,17 +142,17 @@ public abstract class JDFAutoLayout extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[11];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTENTOBJECT, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.INSERTSHEET, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.LAYERLIST, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.LOGICALSTACKPARAMS, 0x66661111);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.MARKOBJECT, 0x33333333);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.MEDIA, 0x33333331);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777776);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.PAGECONDITION, 0x33331111);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.SHEETCONDITION, 0x33331111);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.SIGNATURE, 0x44444333);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.TRANSFERCURVEPOOL, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTENTOBJECT, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.INSERTSHEET, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.LAYERLIST, 0x6666666661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.LOGICALSTACKPARAMS, 0x6666661111l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.MARKOBJECT, 0x3333333333l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.MEDIA, 0x3333333331l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x7777777776l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.PAGECONDITION, 0x3333331111l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.SHEETCONDITION, 0x3333331111l);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.SIGNATURE, 0x4444444333l);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.TRANSFERCURVEPOOL, 0x6666666661l);
 	}
 
 	@Override
@@ -227,7 +227,7 @@ public abstract class JDFAutoLayout extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOrdReset(String name)
+		protected EnumOrdReset(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -292,7 +292,7 @@ public abstract class JDFAutoLayout extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSheetCountReset(String name)
+		protected EnumSheetCountReset(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -357,7 +357,7 @@ public abstract class JDFAutoLayout extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBaseOrdReset(String name)
+		protected EnumBaseOrdReset(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -420,7 +420,7 @@ public abstract class JDFAutoLayout extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSourceWorkStyle(String name)
+		protected EnumSourceWorkStyle(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -491,7 +491,7 @@ public abstract class JDFAutoLayout extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumTemplateType(String name)
+		protected EnumTemplateType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -544,14 +544,13 @@ public abstract class JDFAutoLayout extends JDFResource
 		public static final EnumTemplateType ConditionalSheets = new EnumTemplateType("ConditionalSheets");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Automated
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Automated ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Automated
 	 *
@@ -572,9 +571,9 @@ public abstract class JDFAutoLayout extends JDFResource
 		return getBoolAttribute(AttributeName.AUTOMATED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LockOrigins
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LockOrigins ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LockOrigins
 	 *
@@ -595,9 +594,9 @@ public abstract class JDFAutoLayout extends JDFResource
 		return getBoolAttribute(AttributeName.LOCKORIGINS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxDocOrd
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxDocOrd ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxDocOrd
 	 *
@@ -618,9 +617,9 @@ public abstract class JDFAutoLayout extends JDFResource
 		return getIntAttribute(AttributeName.MAXDOCORD, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxSetOrd
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxSetOrd ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxSetOrd
 	 *
@@ -641,9 +640,9 @@ public abstract class JDFAutoLayout extends JDFResource
 		return getIntAttribute(AttributeName.MAXSETORD, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OrdReset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OrdReset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute OrdReset
 	 *
@@ -664,9 +663,10 @@ public abstract class JDFAutoLayout extends JDFResource
 		return EnumOrdReset.getEnum(getAttribute(AttributeName.ORDRESET, null, "Continue"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetCountReset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetCountReset
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SheetCountReset
 	 *
@@ -687,9 +687,9 @@ public abstract class JDFAutoLayout extends JDFResource
 		return EnumSheetCountReset.getEnum(getAttribute(AttributeName.SHEETCOUNTRESET, null, "Continue"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Name
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Name
 	 *
@@ -710,9 +710,10 @@ public abstract class JDFAutoLayout extends JDFResource
 		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BaseOrdReset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BaseOrdReset
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute BaseOrdReset
 	 *
@@ -733,9 +734,9 @@ public abstract class JDFAutoLayout extends JDFResource
 		return EnumBaseOrdReset.getEnum(getAttribute(AttributeName.BASEORDRESET, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxCollect
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxCollect ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxCollect
 	 *
@@ -756,9 +757,9 @@ public abstract class JDFAutoLayout extends JDFResource
 		return getIntAttribute(AttributeName.MAXCOLLECT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxOrd
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxOrd ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxOrd
 	 *
@@ -779,9 +780,9 @@ public abstract class JDFAutoLayout extends JDFResource
 		return getIntAttribute(AttributeName.MAXORD, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinCollect
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinCollect ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinCollect
 	 *
@@ -802,9 +803,10 @@ public abstract class JDFAutoLayout extends JDFResource
 		return getIntAttribute(AttributeName.MINCOLLECT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OrdsConsumed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OrdsConsumed
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OrdsConsumed
 	 *
@@ -827,9 +829,10 @@ public abstract class JDFAutoLayout extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetNameFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetNameFormat
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SheetNameFormat
 	 *
@@ -850,9 +853,10 @@ public abstract class JDFAutoLayout extends JDFResource
 		return getAttribute(AttributeName.SHEETNAMEFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetNameTemplate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetNameTemplate
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SheetNameTemplate
 	 *
@@ -873,9 +877,10 @@ public abstract class JDFAutoLayout extends JDFResource
 		return getAttribute(AttributeName.SHEETNAMETEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceWorkStyle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceWorkStyle
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SourceWorkStyle
 	 *
@@ -896,9 +901,10 @@ public abstract class JDFAutoLayout extends JDFResource
 		return EnumSourceWorkStyle.getEnum(getAttribute(AttributeName.SOURCEWORKSTYLE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SurfaceContentsBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SurfaceContentsBox
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SurfaceContentsBox
 	 *
@@ -921,9 +927,10 @@ public abstract class JDFAutoLayout extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TemplateType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TemplateType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute TemplateType
 	 *
@@ -944,14 +951,13 @@ public abstract class JDFAutoLayout extends JDFResource
 		return EnumTemplateType.getEnum(getAttribute(AttributeName.TEMPLATETYPE, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateContentObject
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContentObject the element
 	 */
@@ -973,7 +979,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * Get all ContentObject from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContentObject>, null if none are available
 	 */
 	public Collection<JDFContentObject> getAllContentObject()
@@ -993,7 +999,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (26) getCreateInsertSheet
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFInsertSheet the element
 	 */
@@ -1015,7 +1021,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * Get all InsertSheet from the current element
-	 *
+	 * 
 	 * @return Collection<JDFInsertSheet>, null if none are available
 	 */
 	public Collection<JDFInsertSheet> getAllInsertSheet()
@@ -1055,7 +1061,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (25) getCreateLayerList
-	 *
+	 * 
 	 * @return JDFLayerList the element
 	 */
 	public JDFLayerList getCreateLayerList()
@@ -1085,7 +1091,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (25) getCreateLogicalStackParams
-	 *
+	 * 
 	 * @return JDFLogicalStackParams the element
 	 */
 	public JDFLogicalStackParams getCreateLogicalStackParams()
@@ -1105,7 +1111,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (26) getCreateMarkObject
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMarkObject the element
 	 */
@@ -1127,7 +1133,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * Get all MarkObject from the current element
-	 *
+	 * 
 	 * @return Collection<JDFMarkObject>, null if none are available
 	 */
 	public Collection<JDFMarkObject> getAllMarkObject()
@@ -1147,7 +1153,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (26) getCreateMedia
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMedia the element
 	 */
@@ -1169,7 +1175,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * Get all Media from the current element
-	 *
+	 * 
 	 * @return Collection<JDFMedia>, null if none are available
 	 */
 	public Collection<JDFMedia> getAllMedia()
@@ -1209,7 +1215,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (25) getCreateMediaSource
-	 *
+	 * 
 	 * @return JDFMediaSource the element
 	 */
 	public JDFMediaSource getCreateMediaSource()
@@ -1239,7 +1245,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (26) getCreatePageCondition
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageCondition the element
 	 */
@@ -1261,7 +1267,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * Get all PageCondition from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPageCondition>, null if none are available
 	 */
 	public Collection<JDFPageCondition> getAllPageCondition()
@@ -1281,7 +1287,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (26) getCreateSheetCondition
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSheetCondition the element
 	 */
@@ -1303,7 +1309,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * Get all SheetCondition from the current element
-	 *
+	 * 
 	 * @return Collection<JDFSheetCondition>, null if none are available
 	 */
 	public Collection<JDFSheetCondition> getAllSheetCondition()
@@ -1323,7 +1329,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (26) getCreateSignature
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSignature the element
 	 */
@@ -1345,7 +1351,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * Get all Signature from the current element
-	 *
+	 * 
 	 * @return Collection<JDFSignature>, null if none are available
 	 */
 	public Collection<JDFSignature> getAllSignature()
@@ -1375,7 +1381,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (25) getCreateTransferCurvePool
-	 *
+	 * 
 	 * @return JDFTransferCurvePool the element
 	 */
 	public JDFTransferCurvePool getCreateTransferCurvePool()

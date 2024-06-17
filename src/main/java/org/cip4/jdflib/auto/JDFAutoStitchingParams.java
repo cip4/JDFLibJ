@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoStitchingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStitchingParams extends JDFResource
@@ -98,19 +98,19 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STITCHORIGIN, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumStitchOrigin.getEnum(0), "UntrimmedJogSide");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ANGLE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.NUMBEROFSTITCHES, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFSET, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.REFERENCEEDGE, 0x44444431, AttributeInfo.EnumAttributeType.enumeration, EnumReferenceEdge.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.STAPLESHAPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumStapleShape.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.STITCHFROMFRONT, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.STITCHPOSITIONS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.STITCHTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumStitchType.getEnum(0), null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.STITCHWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.TIGHTBACKING, 0x33311111, AttributeInfo.EnumAttributeType.enumeration, EnumTightBacking.getEnum(0), null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.WIREGAUGE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.WIREBRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STITCHORIGIN, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumStitchOrigin.getEnum(0), "UntrimmedJogSide");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ANGLE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.NUMBEROFSTITCHES, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFSET, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.REFERENCEEDGE, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration, EnumReferenceEdge.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.STAPLESHAPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumStapleShape.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.STITCHFROMFRONT, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.STITCHPOSITIONS, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.STITCHTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumStitchType.getEnum(0), null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.STITCHWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.TIGHTBACKING, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumTightBacking.getEnum(0), null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.WIREGAUGE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.WIREBRAND, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -185,7 +185,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumStitchOrigin(String name)
+		protected EnumStitchOrigin(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -250,7 +250,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumReferenceEdge(String name)
+		protected EnumReferenceEdge(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -317,7 +317,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumStapleShape(String name)
+		protected EnumStapleShape(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -386,7 +386,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumStitchType(String name)
+		protected EnumStitchType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -451,7 +451,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumTightBacking(String name)
+		protected EnumTightBacking(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -504,14 +504,14 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		public static final EnumTightBacking Pressure = new EnumTightBacking("Pressure");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StitchOrigin
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StitchOrigin
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute StitchOrigin
 	 *
@@ -532,9 +532,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		return EnumStitchOrigin.getEnum(getAttribute(AttributeName.STITCHORIGIN, null, "UntrimmedJogSide"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Angle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Angle ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Angle
 	 *
@@ -555,9 +555,10 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		return getRealAttribute(AttributeName.ANGLE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NumberOfStitches
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NumberOfStitches
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NumberOfStitches
 	 *
@@ -578,9 +579,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		return getIntAttribute(AttributeName.NUMBEROFSTITCHES, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Offset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Offset
 	 *
@@ -601,9 +602,10 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		return getRealAttribute(AttributeName.OFFSET, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ReferenceEdge
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ReferenceEdge
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ReferenceEdge
 	 *
@@ -624,9 +626,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		return EnumReferenceEdge.getEnum(getAttribute(AttributeName.REFERENCEEDGE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StapleShape
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StapleShape ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute StapleShape
 	 *
@@ -647,9 +649,10 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		return EnumStapleShape.getEnum(getAttribute(AttributeName.STAPLESHAPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StitchFromFront
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StitchFromFront
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StitchFromFront
 	 *
@@ -670,9 +673,10 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		return getBoolAttribute(AttributeName.STITCHFROMFRONT, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StitchPositions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StitchPositions
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StitchPositions
 	 *
@@ -695,9 +699,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StitchType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StitchType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute StitchType
 	 *
@@ -718,9 +722,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		return EnumStitchType.getEnum(getAttribute(AttributeName.STITCHTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StitchWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StitchWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StitchWidth
 	 *
@@ -741,9 +745,10 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		return getRealAttribute(AttributeName.STITCHWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TightBacking
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TightBacking
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute TightBacking
 	 *
@@ -764,9 +769,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		return EnumTightBacking.getEnum(getAttribute(AttributeName.TIGHTBACKING, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WireGauge
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WireGauge ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WireGauge
 	 *
@@ -787,9 +792,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		return getRealAttribute(AttributeName.WIREGAUGE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WireBrand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WireBrand ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WireBrand
 	 *

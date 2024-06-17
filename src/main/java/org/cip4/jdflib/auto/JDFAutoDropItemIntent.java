@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,7 +96,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFInk;
  *****************************************************************************
  * class JDFAutoDropItemIntent : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDropItemIntent extends JDFElement
@@ -107,12 +107,12 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDITIONALAMOUNT, 0x44444333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DROPID, 0x33311111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORDEREDAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROOF, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.UNIT, 0x44333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDITIONALAMOUNT, 0x4444444333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DROPID, 0x3333311111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORDEREDAMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROOF, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.UNIT, 0x4444333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -124,18 +124,18 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[12];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PRICING, 0x77777666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COMPONENT, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.EXPOSEDMEDIA, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.INK, 0x66666666);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.MEDIA, 0x66666666);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.PALLET, 0x66666666);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.REGISTERRIBBON, 0x66666666);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.STRAP, 0x66666666);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.BUNDLE, 0x66666666);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.DIGITALMEDIA, 0x66666666);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.ROLLSTAND, 0x66666666);
-		elemInfoTable[11] = new ElemInfoTable(ElementName.TOOL, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PRICING, 0x7777777666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COMPONENT, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.EXPOSEDMEDIA, 0x6666666666l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.INK, 0x6666666666l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.MEDIA, 0x6666666666l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.PALLET, 0x6666666666l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.REGISTERRIBBON, 0x6666666666l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.STRAP, 0x6666666666l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.BUNDLE, 0x6666666666l);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.DIGITALMEDIA, 0x6666666666l);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.ROLLSTAND, 0x6666666666l);
+		elemInfoTable[11] = new ElemInfoTable(ElementName.TOOL, 0x6666666666l);
 	}
 
 	@Override
@@ -180,14 +180,14 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AdditionalAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AdditionalAmount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AdditionalAmount
 	 *
@@ -208,9 +208,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 		return getIntAttribute(AttributeName.ADDITIONALAMOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Amount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Amount
 	 *
@@ -231,9 +231,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 		return getIntAttribute(AttributeName.AMOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DropID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DropID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DropID
 	 *
@@ -254,9 +254,10 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 		return getAttribute(AttributeName.DROPID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OrderedAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OrderedAmount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OrderedAmount
 	 *
@@ -277,9 +278,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 		return getIntAttribute(AttributeName.ORDEREDAMOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Proof
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Proof ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Proof
 	 *
@@ -300,9 +301,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 		return getAttribute(AttributeName.PROOF, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Unit
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Unit ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Unit
 	 *
@@ -323,9 +324,8 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 		return getAttribute(AttributeName.UNIT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -340,7 +340,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 
 	/**
 	 * (25) getCreatePricing
-	 *
+	 * 
 	 * @return JDFPricing the element
 	 */
 	public JDFPricing getCreatePricing()
@@ -370,7 +370,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 
 	/**
 	 * (25) getCreateComponent
-	 *
+	 * 
 	 * @return JDFComponent the element
 	 */
 	public JDFComponent getCreateComponent()
@@ -410,7 +410,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 
 	/**
 	 * (25) getCreateExposedMedia
-	 *
+	 * 
 	 * @return JDFExposedMedia the element
 	 */
 	public JDFExposedMedia getCreateExposedMedia()
@@ -450,7 +450,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 
 	/**
 	 * (25) getCreateInk
-	 *
+	 * 
 	 * @return JDFInk the element
 	 */
 	public JDFInk getCreateInk()
@@ -490,7 +490,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()
@@ -530,7 +530,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 
 	/**
 	 * (25) getCreatePallet
-	 *
+	 * 
 	 * @return JDFPallet the element
 	 */
 	public JDFPallet getCreatePallet()
@@ -570,7 +570,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 
 	/**
 	 * (25) getCreateRegisterRibbon
-	 *
+	 * 
 	 * @return JDFRegisterRibbon the element
 	 */
 	public JDFRegisterRibbon getCreateRegisterRibbon()
@@ -610,7 +610,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 
 	/**
 	 * (25) getCreateStrap
-	 *
+	 * 
 	 * @return JDFStrap the element
 	 */
 	public JDFStrap getCreateStrap()
@@ -650,7 +650,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 
 	/**
 	 * (25) getCreateBundle
-	 *
+	 * 
 	 * @return JDFBundle the element
 	 */
 	public JDFBundle getCreateBundle()
@@ -690,7 +690,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 
 	/**
 	 * (25) getCreateDigitalMedia
-	 *
+	 * 
 	 * @return JDFDigitalMedia the element
 	 */
 	public JDFDigitalMedia getCreateDigitalMedia()
@@ -730,7 +730,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 
 	/**
 	 * (25) getCreateRollStand
-	 *
+	 * 
 	 * @return JDFRollStand the element
 	 */
 	public JDFRollStand getCreateRollStand()
@@ -770,7 +770,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 
 	/**
 	 * (25) getCreateTool
-	 *
+	 * 
 	 * @return JDFTool the element
 	 */
 	public JDFTool getCreateTool()

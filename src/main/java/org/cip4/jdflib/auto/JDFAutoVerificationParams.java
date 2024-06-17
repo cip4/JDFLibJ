@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoVerificationParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoVerificationParams extends JDFResource
@@ -93,10 +93,10 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FIELDRANGE, 0x44433333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.INSERTERROR, 0x44433333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.INSERTOK, 0x44433333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FIELDRANGE, 0x4444433333l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.INSERTERROR, 0x4444433333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.INSERTOK, 0x4444433333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TOLERANCE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -161,14 +161,13 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FieldRange
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FieldRange ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FieldRange
 	 *
@@ -191,9 +190,9 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute InsertError
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InsertError ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute InsertError
 	 *
@@ -214,9 +213,9 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 		return getAttribute(AttributeName.INSERTERROR, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute InsertOK
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InsertOK ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute InsertOK
 	 *
@@ -237,9 +236,9 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 		return getAttribute(AttributeName.INSERTOK, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Tolerance
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Tolerance ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Tolerance
 	 *

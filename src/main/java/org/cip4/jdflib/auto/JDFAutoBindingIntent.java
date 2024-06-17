@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -114,7 +114,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoBindingIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBindingIntent extends JDFIntentResource
@@ -125,7 +125,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BINDINGORDER, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumBindingOrder.getEnum(0), "Gathering");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BINDINGORDER, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumBindingOrder.getEnum(0), "Gathering");
 	}
 
 	@Override
@@ -137,35 +137,35 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[29];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BACKCOVERCOLOR, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.BACKCOVERCOLORDETAILS, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.BINDINGTYPE, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.BINDINGCOLOR, 0x66666666);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.BINDINGCOLORDETAILS, 0x33333333);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.BINDINGLENGTH, 0x66666666);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.BINDINGSIDE, 0x66666666);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.COVERCOLOR, 0x66666666);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.COVERCOLORDETAILS, 0x33333333);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.ADHESIVEBINDING, 0x66666666);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.ADHESIVENOTE, 0x66666666);
-		elemInfoTable[11] = new ElemInfoTable(ElementName.BINDLIST, 0x66666666);
-		elemInfoTable[12] = new ElemInfoTable(ElementName.BOOKCASE, 0x66666666);
-		elemInfoTable[13] = new ElemInfoTable(ElementName.CHANNELBINDING, 0x66666666);
-		elemInfoTable[14] = new ElemInfoTable(ElementName.COILBINDING, 0x66666666);
-		elemInfoTable[15] = new ElemInfoTable(ElementName.EDGEGLUING, 0x66666666);
-		elemInfoTable[16] = new ElemInfoTable(ElementName.HARDCOVERBINDING, 0x66666666);
-		elemInfoTable[17] = new ElemInfoTable(ElementName.PLASTICCOMBBINDING, 0x66666666);
-		elemInfoTable[18] = new ElemInfoTable(ElementName.RINGBINDING, 0x66666666);
-		elemInfoTable[19] = new ElemInfoTable(ElementName.SADDLESTITCHING, 0x66666666);
-		elemInfoTable[20] = new ElemInfoTable(ElementName.SIDESEWING, 0x66666666);
-		elemInfoTable[21] = new ElemInfoTable(ElementName.SIDESTITCHING, 0x66666666);
-		elemInfoTable[22] = new ElemInfoTable(ElementName.SOFTCOVERBINDING, 0x66666666);
-		elemInfoTable[23] = new ElemInfoTable(ElementName.TAPE, 0x66666666);
-		elemInfoTable[24] = new ElemInfoTable(ElementName.TABS, 0x66666666);
-		elemInfoTable[25] = new ElemInfoTable(ElementName.THREADSEALING, 0x66666666);
-		elemInfoTable[26] = new ElemInfoTable(ElementName.THREADSEWING, 0x66666666);
-		elemInfoTable[27] = new ElemInfoTable(ElementName.STRIPBINDING, 0x66666666);
-		elemInfoTable[28] = new ElemInfoTable(ElementName.WIRECOMBBINDING, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BACKCOVERCOLOR, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.BACKCOVERCOLORDETAILS, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.BINDINGTYPE, 0x6666666666l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.BINDINGCOLOR, 0x6666666666l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.BINDINGCOLORDETAILS, 0x3333333333l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.BINDINGLENGTH, 0x6666666666l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.BINDINGSIDE, 0x6666666666l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.COVERCOLOR, 0x6666666666l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.COVERCOLORDETAILS, 0x3333333333l);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.ADHESIVEBINDING, 0x6666666666l);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.ADHESIVENOTE, 0x6666666666l);
+		elemInfoTable[11] = new ElemInfoTable(ElementName.BINDLIST, 0x6666666666l);
+		elemInfoTable[12] = new ElemInfoTable(ElementName.BOOKCASE, 0x6666666666l);
+		elemInfoTable[13] = new ElemInfoTable(ElementName.CHANNELBINDING, 0x6666666666l);
+		elemInfoTable[14] = new ElemInfoTable(ElementName.COILBINDING, 0x6666666666l);
+		elemInfoTable[15] = new ElemInfoTable(ElementName.EDGEGLUING, 0x6666666666l);
+		elemInfoTable[16] = new ElemInfoTable(ElementName.HARDCOVERBINDING, 0x6666666666l);
+		elemInfoTable[17] = new ElemInfoTable(ElementName.PLASTICCOMBBINDING, 0x6666666666l);
+		elemInfoTable[18] = new ElemInfoTable(ElementName.RINGBINDING, 0x6666666666l);
+		elemInfoTable[19] = new ElemInfoTable(ElementName.SADDLESTITCHING, 0x6666666666l);
+		elemInfoTable[20] = new ElemInfoTable(ElementName.SIDESEWING, 0x6666666666l);
+		elemInfoTable[21] = new ElemInfoTable(ElementName.SIDESTITCHING, 0x6666666666l);
+		elemInfoTable[22] = new ElemInfoTable(ElementName.SOFTCOVERBINDING, 0x6666666666l);
+		elemInfoTable[23] = new ElemInfoTable(ElementName.TAPE, 0x6666666666l);
+		elemInfoTable[24] = new ElemInfoTable(ElementName.TABS, 0x6666666666l);
+		elemInfoTable[25] = new ElemInfoTable(ElementName.THREADSEALING, 0x6666666666l);
+		elemInfoTable[26] = new ElemInfoTable(ElementName.THREADSEWING, 0x6666666666l);
+		elemInfoTable[27] = new ElemInfoTable(ElementName.STRIPBINDING, 0x6666666666l);
+		elemInfoTable[28] = new ElemInfoTable(ElementName.WIRECOMBBINDING, 0x6666666666l);
 	}
 
 	@Override
@@ -220,7 +220,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBindingOrder(String name)
+		protected EnumBindingOrder(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -277,14 +277,14 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 		public static final EnumBindingOrder None = new EnumBindingOrder("None");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BindingOrder
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BindingOrder
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute BindingOrder
 	 *
@@ -305,9 +305,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 		return EnumBindingOrder.getEnum(getAttribute(AttributeName.BINDINGORDER, null, "Gathering"));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -322,7 +321,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBackCoverColor
-	 *
+	 * 
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateBackCoverColor()
@@ -342,7 +341,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreateBackCoverColorDetails
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
@@ -364,7 +363,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * Get all BackCoverColorDetails from the current element
-	 *
+	 * 
 	 * @return Collection<JDFStringSpan>, null if none are available
 	 */
 	public Collection<JDFStringSpan> getAllBackCoverColorDetails()
@@ -394,7 +393,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBindingType
-	 *
+	 * 
 	 * @return JDFSpanBindingType the element
 	 */
 	public JDFSpanBindingType getCreateBindingType()
@@ -424,7 +423,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBindingColor
-	 *
+	 * 
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateBindingColor()
@@ -444,7 +443,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreateBindingColorDetails
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
@@ -466,7 +465,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * Get all BindingColorDetails from the current element
-	 *
+	 * 
 	 * @return Collection<JDFStringSpan>, null if none are available
 	 */
 	public Collection<JDFStringSpan> getAllBindingColorDetails()
@@ -496,7 +495,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBindingLength
-	 *
+	 * 
 	 * @return JDFSpanBindingLength the element
 	 */
 	public JDFSpanBindingLength getCreateBindingLength()
@@ -526,7 +525,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBindingSide
-	 *
+	 * 
 	 * @return JDFSpanBindingSide the element
 	 */
 	public JDFSpanBindingSide getCreateBindingSide()
@@ -556,7 +555,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCoverColor
-	 *
+	 * 
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateCoverColor()
@@ -576,7 +575,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreateCoverColorDetails
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
@@ -598,7 +597,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * Get all CoverColorDetails from the current element
-	 *
+	 * 
 	 * @return Collection<JDFStringSpan>, null if none are available
 	 */
 	public Collection<JDFStringSpan> getAllCoverColorDetails()
@@ -628,7 +627,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateAdhesiveBinding
-	 *
+	 * 
 	 * @return JDFAdhesiveBinding the element
 	 */
 	public JDFAdhesiveBinding getCreateAdhesiveBinding()
@@ -658,7 +657,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateAdhesiveNote
-	 *
+	 * 
 	 * @return JDFAdhesiveNote the element
 	 */
 	public JDFAdhesiveNote getCreateAdhesiveNote()
@@ -688,7 +687,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBindList
-	 *
+	 * 
 	 * @return JDFBindList the element
 	 */
 	public JDFBindList getCreateBindList()
@@ -718,7 +717,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateBookCase
-	 *
+	 * 
 	 * @return JDFBookCase the element
 	 */
 	public JDFBookCase getCreateBookCase()
@@ -748,7 +747,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateChannelBinding
-	 *
+	 * 
 	 * @return JDFChannelBinding the element
 	 */
 	public JDFChannelBinding getCreateChannelBinding()
@@ -778,7 +777,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCoilBinding
-	 *
+	 * 
 	 * @return JDFCoilBinding the element
 	 */
 	public JDFCoilBinding getCreateCoilBinding()
@@ -808,7 +807,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateEdgeGluing
-	 *
+	 * 
 	 * @return JDFEdgeGluing the element
 	 */
 	public JDFEdgeGluing getCreateEdgeGluing()
@@ -838,7 +837,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateHardCoverBinding
-	 *
+	 * 
 	 * @return JDFHardCoverBinding the element
 	 */
 	public JDFHardCoverBinding getCreateHardCoverBinding()
@@ -868,7 +867,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePlasticCombBinding
-	 *
+	 * 
 	 * @return JDFPlasticCombBinding the element
 	 */
 	public JDFPlasticCombBinding getCreatePlasticCombBinding()
@@ -898,7 +897,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateRingBinding
-	 *
+	 * 
 	 * @return JDFRingBinding the element
 	 */
 	public JDFRingBinding getCreateRingBinding()
@@ -928,7 +927,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateSaddleStitching
-	 *
+	 * 
 	 * @return JDFSaddleStitching the element
 	 */
 	public JDFSaddleStitching getCreateSaddleStitching()
@@ -958,7 +957,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateSideSewing
-	 *
+	 * 
 	 * @return JDFSideSewing the element
 	 */
 	public JDFSideSewing getCreateSideSewing()
@@ -988,7 +987,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateSideStitching
-	 *
+	 * 
 	 * @return JDFSideStitching the element
 	 */
 	public JDFSideStitching getCreateSideStitching()
@@ -1018,7 +1017,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateSoftCoverBinding
-	 *
+	 * 
 	 * @return JDFSoftCoverBinding the element
 	 */
 	public JDFSoftCoverBinding getCreateSoftCoverBinding()
@@ -1048,7 +1047,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateTape
-	 *
+	 * 
 	 * @return JDFTape the element
 	 */
 	public JDFTape getCreateTape()
@@ -1078,7 +1077,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateTabs
-	 *
+	 * 
 	 * @return JDFTabs the element
 	 */
 	public JDFTabs getCreateTabs()
@@ -1108,7 +1107,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateThreadSealing
-	 *
+	 * 
 	 * @return JDFThreadSealing the element
 	 */
 	public JDFThreadSealing getCreateThreadSealing()
@@ -1138,7 +1137,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateThreadSewing
-	 *
+	 * 
 	 * @return JDFThreadSewing the element
 	 */
 	public JDFThreadSewing getCreateThreadSewing()
@@ -1168,7 +1167,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateStripBinding
-	 *
+	 * 
 	 * @return JDFStripBinding the element
 	 */
 	public JDFStripBinding getCreateStripBinding()
@@ -1198,7 +1197,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateWireCombBinding
-	 *
+	 * 
 	 * @return JDFWireCombBinding the element
 	 */
 	public JDFWireCombBinding getCreateWireCombBinding()

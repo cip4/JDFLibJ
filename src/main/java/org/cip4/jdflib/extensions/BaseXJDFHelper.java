@@ -95,7 +95,7 @@ public abstract class BaseXJDFHelper
 	}
 
 	protected final static Log log = LogFactory.getLog(BaseXJDFHelper.class);
-	private static EnumVersion defaultVersion = EnumVersion.Version_2_1;
+	private static EnumVersion defaultVersion = EnumVersion.Version_2_2;
 
 	/**
 	 * @return the defaultVersion

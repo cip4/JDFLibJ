@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
  *****************************************************************************
  * class JDFAutoConvertingConfig : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoConvertingConfig extends JDFElement
@@ -100,12 +100,12 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MARGINBOTTOM, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MARGINLEFT, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MARGINRIGHT, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MARGINTOP, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.SHEETHEIGHT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SHEETWIDTH, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MARGINBOTTOM, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MARGINLEFT, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MARGINRIGHT, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MARGINTOP, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SHEETHEIGHT, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SHEETWIDTH, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -117,9 +117,9 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CUTBLOCK, 0x33331111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x66661111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x66661111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CUTBLOCK, 0x3333331111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x6666661111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x6666661111l);
 	}
 
 	@Override
@@ -164,14 +164,14 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarginBottom
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarginBottom
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MarginBottom
 	 *
@@ -192,9 +192,9 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 		return getRealAttribute(AttributeName.MARGINBOTTOM, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarginLeft
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarginLeft ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MarginLeft
 	 *
@@ -215,9 +215,9 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 		return getRealAttribute(AttributeName.MARGINLEFT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarginRight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarginRight ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MarginRight
 	 *
@@ -238,9 +238,9 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 		return getRealAttribute(AttributeName.MARGINRIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarginTop
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarginTop ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MarginTop
 	 *
@@ -261,9 +261,9 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 		return getRealAttribute(AttributeName.MARGINTOP, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetHeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetHeight ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SheetHeight
 	 *
@@ -286,9 +286,9 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SheetWidth
 	 *
@@ -311,14 +311,13 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateCutBlock
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCutBlock the element
 	 */
@@ -340,7 +339,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 
 	/**
 	 * Get all CutBlock from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCutBlock>, null if none are available
 	 */
 	public Collection<JDFCutBlock> getAllCutBlock()
@@ -370,7 +369,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 
 	/**
 	 * (25) getCreateDevice
-	 *
+	 * 
 	 * @return JDFDevice the element
 	 */
 	public JDFDevice getCreateDevice()
@@ -410,7 +409,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()

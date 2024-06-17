@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.JDFPart;
  *****************************************************************************
  * class JDFAutoStatusQuParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStatusQuParams extends JDFElement
@@ -102,13 +102,13 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceDetails.getEnum(0), "None");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.EMPLOYEEINFO, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumJobDetails.getEnum(0), "None");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEINFO, 0x44333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceDetails.getEnum(0), "None");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EMPLOYEEINFO, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumJobDetails.getEnum(0), "None");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEINFO, 0x4444333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x3333333311l);
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDeviceDetails(String name)
+		protected EnumDeviceDetails(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -246,7 +246,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumJobDetails(String name)
+		protected EnumJobDetails(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -303,14 +303,14 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 		public static final EnumJobDetails Full = new EnumJobDetails("Full");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DeviceDetails
 	 *
@@ -331,9 +331,10 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 		return EnumDeviceDetails.getEnum(getAttribute(AttributeName.DEVICEDETAILS, null, "None"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EmployeeInfo
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EmployeeInfo
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute EmployeeInfo
 	 *
@@ -354,9 +355,9 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 		return getBoolAttribute(AttributeName.EMPLOYEEINFO, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobDetails ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute JobDetails
 	 *
@@ -377,9 +378,9 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 		return EnumJobDetails.getEnum(getAttribute(AttributeName.JOBDETAILS, null, "None"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobID
 	 *
@@ -400,9 +401,9 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobPartID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobPartID
 	 *
@@ -423,9 +424,10 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QueueEntryID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute QueueEntryID
 	 *
@@ -446,9 +448,9 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QueueInfo
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QueueInfo ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute QueueInfo
 	 *
@@ -469,14 +471,13 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 		return getBoolAttribute(AttributeName.QUEUEINFO, null, false);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -498,7 +499,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()

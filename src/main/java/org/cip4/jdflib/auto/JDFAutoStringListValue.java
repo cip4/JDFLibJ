@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.JDFValue;
  *****************************************************************************
  * class JDFAutoStringListValue : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStringListValue extends JDFElement
@@ -98,7 +98,7 @@ public abstract class JDFAutoStringListValue extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public abstract class JDFAutoStringListValue extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.VALUE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.VALUE, 0x3333333333l);
 	}
 
 	@Override
@@ -155,14 +155,13 @@ public abstract class JDFAutoStringListValue extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Name
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Name
 	 *
@@ -183,14 +182,13 @@ public abstract class JDFAutoStringListValue extends JDFElement
 		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateValue
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFValue the element
 	 */
@@ -212,7 +210,7 @@ public abstract class JDFAutoStringListValue extends JDFElement
 
 	/**
 	 * Get all Value from the current element
-	 *
+	 * 
 	 * @return Collection<JDFValue>, null if none are available
 	 */
 	public Collection<JDFValue> getAllValue()

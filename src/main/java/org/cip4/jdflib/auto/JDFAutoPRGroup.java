@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.JDFPROccurrence;
  *****************************************************************************
  * class JDFAutoPRGroup : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPRGroup extends JDFElement
@@ -99,8 +99,8 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.OCCURRENCES, 0x22222211, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PAGESET, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.OCCURRENCES, 0x2222222211l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PAGESET, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 	}
 
 	@Override
@@ -112,8 +112,8 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PRGROUPOCCURRENCE, 0x33333311);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PROCCURRENCE, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PRGROUPOCCURRENCE, 0x3333333311l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PROCCURRENCE, 0x3333333311l);
 	}
 
 	@Override
@@ -158,14 +158,13 @@ public abstract class JDFAutoPRGroup extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Occurrences
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Occurrences ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Occurrences
 	 *
@@ -186,9 +185,9 @@ public abstract class JDFAutoPRGroup extends JDFElement
 		return getIntAttribute(AttributeName.OCCURRENCES, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageSet
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageSet ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PageSet
 	 *
@@ -211,14 +210,13 @@ public abstract class JDFAutoPRGroup extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatePRGroupOccurrence
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPRGroupOccurrence the element
 	 */
@@ -240,7 +238,7 @@ public abstract class JDFAutoPRGroup extends JDFElement
 
 	/**
 	 * Get all PRGroupOccurrence from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPRGroupOccurrence>, null if none are available
 	 */
 	public Collection<JDFPRGroupOccurrence> getAllPRGroupOccurrence()
@@ -260,7 +258,7 @@ public abstract class JDFAutoPRGroup extends JDFElement
 
 	/**
 	 * (26) getCreatePROccurrence
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPROccurrence the element
 	 */
@@ -282,7 +280,7 @@ public abstract class JDFAutoPRGroup extends JDFElement
 
 	/**
 	 * Get all PROccurrence from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPROccurrence>, null if none are available
 	 */
 	public Collection<JDFPROccurrence> getAllPROccurrence()

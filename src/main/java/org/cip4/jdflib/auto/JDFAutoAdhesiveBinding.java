@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,7 @@ import org.cip4.jdflib.span.JDFSpanScoring;
  *****************************************************************************
  * class JDFAutoAdhesiveBinding : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoAdhesiveBinding extends JDFElement
@@ -94,9 +94,9 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.SCORING, 0x77777776);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.SPINEGLUE, 0x77777776);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.TAPEBINDING, 0x77777776);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SCORING, 0x7777777776l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SPINEGLUE, 0x7777777776l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.TAPEBINDING, 0x7777777776l);
 	}
 
 	@Override
@@ -141,9 +141,8 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -158,7 +157,7 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
 
 	/**
 	 * (25) getCreateScoring
-	 *
+	 * 
 	 * @return JDFSpanScoring the element
 	 */
 	public JDFSpanScoring getCreateScoring()
@@ -188,7 +187,7 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineGlue
-	 *
+	 * 
 	 * @return JDFSpanGlue the element
 	 */
 	public JDFSpanGlue getCreateSpineGlue()
@@ -218,7 +217,7 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
 
 	/**
 	 * (25) getCreateTapeBinding
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateTapeBinding()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
  *****************************************************************************
  * class JDFAutoWireCombBindingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoWireCombBindingParams extends JDFResource
@@ -101,15 +101,15 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FLIPBACKCOVER, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHAPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), "Single");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.BRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.COLOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.COLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.DIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.DISTANCE, 0x44444433, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MATERIAL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMaterial.getEnum(0), null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.THICKNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FLIPBACKCOVER, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHAPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), "Single");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BRAND, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COLOR, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.COLORDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.DIAMETER, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.DISTANCE, 0x4444444433l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MATERIAL, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMaterial.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.THICKNESS, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -121,7 +121,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x6666666611l);
 	}
 
 	@Override
@@ -196,7 +196,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumShape(String name)
+		protected EnumShape(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -259,7 +259,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMaterial(String name)
+		protected EnumMaterial(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -314,14 +314,14 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		public static final EnumMaterial ZincsSteel = new EnumMaterial("ZincsSteel");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FlipBackCover
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FlipBackCover
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FlipBackCover
 	 *
@@ -342,9 +342,9 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		return getBoolAttribute(AttributeName.FLIPBACKCOVER, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Shape
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Shape ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Shape
 	 *
@@ -365,9 +365,9 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		return EnumShape.getEnum(getAttribute(AttributeName.SHAPE, null, "Single"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Brand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Brand ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Brand
 	 *
@@ -390,9 +390,9 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Color
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Color ---------------------------------------------------------------------
+	 */
 	/**
 	 * (13) set attribute Color
 	 *
@@ -417,9 +417,10 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ColorDetails
 	 *
@@ -440,9 +441,9 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		return getAttribute(AttributeName.COLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Diameter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Diameter ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Diameter
 	 *
@@ -463,9 +464,9 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.DIAMETER, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Distance
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Distance ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Distance
 	 *
@@ -486,9 +487,9 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.DISTANCE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Material
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Material ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Material
 	 *
@@ -509,9 +510,9 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		return EnumMaterial.getEnum(getAttribute(AttributeName.MATERIAL, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Thickness
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Thickness ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Thickness
 	 *
@@ -532,9 +533,8 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.THICKNESS, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -549,7 +549,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 
 	/**
 	 * (25) getCreateHoleMakingParams
-	 *
+	 * 
 	 * @return JDFHoleMakingParams the element
 	 */
 	public JDFHoleMakingParams getCreateHoleMakingParams()

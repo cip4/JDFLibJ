@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.jmf.JDFQueueFilter;
  *****************************************************************************
  * class JDFAutoAbortQueueEntryParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
@@ -100,7 +100,7 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ENDSTATUS, 0x22211111, AttributeInfo.EnumAttributeType.enumeration, EnumEndStatus.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ENDSTATUS, 0x2222211111l, AttributeInfo.EnumAttributeType.enumeration, EnumEndStatus.getEnum(0), null);
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x66611111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x6666611111l);
 	}
 
 	@Override
@@ -167,7 +167,7 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumEndStatus(String name)
+		protected EnumEndStatus(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -220,14 +220,13 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 		public static final EnumEndStatus Completed = new EnumEndStatus("Completed");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EndStatus
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EndStatus ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute EndStatus
 	 *
@@ -248,9 +247,8 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 		return EnumNodeStatus.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -265,7 +263,7 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 
 	/**
 	 * (25) getCreateQueueFilter
-	 *
+	 * 
 	 * @return JDFQueueFilter the element
 	 */
 	public JDFQueueFilter getCreateQueueFilter()

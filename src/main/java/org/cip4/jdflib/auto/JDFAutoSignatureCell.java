@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
  *****************************************************************************
  * class JDFAutoSignatureCell : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoSignatureCell extends JDFElement
@@ -97,18 +97,18 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKFACEPAGES, 0x44443311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BACKPAGES, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.BACKSPREAD, 0x33311111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.BOTTLEANGLE, 0x44333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.BOTTLEAXIS, 0x44333311, AttributeInfo.EnumAttributeType.enumeration, EnumBottleAxis.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.FACECELLS, 0x33331111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.FRONTFACEPAGES, 0x44443311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.FRONTPAGES, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.FRONTSPREAD, 0x33311111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), "Up");
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.SECTIONINDEX, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "0");
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, "0");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKFACEPAGES, 0x4444443311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BACKPAGES, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BACKSPREAD, 0x3333311111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.BOTTLEANGLE, 0x4444333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.BOTTLEAXIS, 0x4444333311l, AttributeInfo.EnumAttributeType.enumeration, EnumBottleAxis.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.FACECELLS, 0x3333331111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.FRONTFACEPAGES, 0x4444443311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.FRONTPAGES, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.FRONTSPREAD, 0x3333311111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), "Up");
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.SECTIONINDEX, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "0");
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.STATIONNAME, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, "0");
 	}
 
 	@Override
@@ -163,7 +163,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBottleAxis(String name)
+		protected EnumBottleAxis(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -230,7 +230,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOrientation(String name)
+		protected EnumOrientation(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -287,14 +287,14 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		public static final EnumOrientation Right = new EnumOrientation("Right");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BackFacePages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BackFacePages
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BackFacePages
 	 *
@@ -317,9 +317,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BackPages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BackPages ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BackPages
 	 *
@@ -342,9 +342,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BackSpread
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BackSpread ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BackSpread
 	 *
@@ -367,9 +367,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BottleAngle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BottleAngle ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BottleAngle
 	 *
@@ -390,9 +390,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return getRealAttribute(AttributeName.BOTTLEANGLE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BottleAxis
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BottleAxis ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute BottleAxis
 	 *
@@ -413,9 +413,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return EnumBottleAxis.getEnum(getAttribute(AttributeName.BOTTLEAXIS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FaceCells
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FaceCells ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FaceCells
 	 *
@@ -438,9 +438,10 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FrontFacePages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FrontFacePages
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FrontFacePages
 	 *
@@ -463,9 +464,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FrontPages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FrontPages ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FrontPages
 	 *
@@ -488,9 +489,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FrontSpread
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FrontSpread ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FrontSpread
 	 *
@@ -513,9 +514,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Orientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Orientation
 	 *
@@ -536,9 +537,10 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, "Up"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SectionIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SectionIndex
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SectionIndex
 	 *
@@ -559,9 +561,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		return getIntAttribute(AttributeName.SECTIONINDEX, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StationName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StationName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StationName
 	 *

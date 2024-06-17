@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.process.JDFThinPDFParams;
  *****************************************************************************
  * class JDFAutoPSToPDFConversionParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
@@ -103,21 +103,22 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[15];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASCII85ENCODEPAGES, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BINDING, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBinding.getEnum(0), "Left");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DETECTBLEND, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.DOTHUMBNAILS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.OPTIMIZE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.AUTOROTATEPAGES, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumAutoRotatePages.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.COMPRESSPAGES, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.DEFAULTRENDERINGINTENT, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumDefaultRenderingIntent.getEnum(0), null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.ENDPAGE, 0x44444333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.IMAGEMEMORY, 0x44444433, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.INITIALPAGESIZE, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.INITIALRESOLUTION, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.OVERPRINTMODE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.PDFVERSION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.STARTPAGE, 0x44444333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASCII85ENCODEPAGES, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BINDING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumBinding.getEnum(0), "Left");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DETECTBLEND, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DOTHUMBNAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.OPTIMIZE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.AUTOROTATEPAGES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumAutoRotatePages.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.COMPRESSPAGES, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.DEFAULTRENDERINGINTENT, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumDefaultRenderingIntent.getEnum(0),
+				null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.ENDPAGE, 0x4444444333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.IMAGEMEMORY, 0x4444444433l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.INITIALPAGESIZE, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.INITIALRESOLUTION, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.OVERPRINTMODE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.PDFVERSION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.STARTPAGE, 0x4444444333l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -129,9 +130,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ADVANCEDPARAMS, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PDFXPARAMS, 0x66666611);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.THINPDFPARAMS, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ADVANCEDPARAMS, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PDFXPARAMS, 0x6666666611l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.THINPDFPARAMS, 0x6666666666l);
 	}
 
 	@Override
@@ -206,7 +207,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBinding(String name)
+		protected EnumBinding(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -269,7 +270,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumAutoRotatePages(String name)
+		protected EnumAutoRotatePages(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -334,7 +335,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDefaultRenderingIntent(String name)
+		protected EnumDefaultRenderingIntent(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -393,14 +394,14 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		public static final EnumDefaultRenderingIntent AbsoluteColorimetric = new EnumDefaultRenderingIntent("AbsoluteColorimetric");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ASCII85EncodePages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ASCII85EncodePages
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ASCII85EncodePages
 	 *
@@ -421,9 +422,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getBoolAttribute(AttributeName.ASCII85ENCODEPAGES, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Binding
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Binding ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Binding
 	 *
@@ -444,9 +445,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return EnumBinding.getEnum(getAttribute(AttributeName.BINDING, null, "Left"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DetectBlend
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DetectBlend ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DetectBlend
 	 *
@@ -467,9 +468,10 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getBoolAttribute(AttributeName.DETECTBLEND, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DoThumbnails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DoThumbnails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DoThumbnails
 	 *
@@ -490,9 +492,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getBoolAttribute(AttributeName.DOTHUMBNAILS, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Optimize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Optimize ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Optimize
 	 *
@@ -513,9 +515,10 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getBoolAttribute(AttributeName.OPTIMIZE, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AutoRotatePages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AutoRotatePages
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute AutoRotatePages
 	 *
@@ -536,9 +539,10 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return EnumAutoRotatePages.getEnum(getAttribute(AttributeName.AUTOROTATEPAGES, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CompressPages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CompressPages
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CompressPages
 	 *
@@ -559,9 +563,10 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getBoolAttribute(AttributeName.COMPRESSPAGES, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DefaultRenderingIntent
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefaultRenderingIntent
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DefaultRenderingIntent
 	 *
@@ -582,9 +587,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return EnumDefaultRenderingIntent.getEnum(getAttribute(AttributeName.DEFAULTRENDERINGINTENT, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EndPage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EndPage ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute EndPage
 	 *
@@ -605,9 +610,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getIntAttribute(AttributeName.ENDPAGE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImageMemory
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImageMemory ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ImageMemory
 	 *
@@ -628,9 +633,10 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getIntAttribute(AttributeName.IMAGEMEMORY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute InitialPageSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InitialPageSize
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute InitialPageSize
 	 *
@@ -653,9 +659,10 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute InitialResolution
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InitialResolution
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute InitialResolution
 	 *
@@ -678,9 +685,10 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OverPrintMode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OverPrintMode
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OverPrintMode
 	 *
@@ -701,9 +709,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getIntAttribute(AttributeName.OVERPRINTMODE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PDFVersion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PDFVersion ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PDFVersion
 	 *
@@ -724,9 +732,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getRealAttribute(AttributeName.PDFVERSION, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StartPage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StartPage ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StartPage
 	 *
@@ -747,9 +755,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return getIntAttribute(AttributeName.STARTPAGE, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -764,7 +771,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (25) getCreateAdvancedParams
-	 *
+	 * 
 	 * @return JDFAdvancedParams the element
 	 */
 	public JDFAdvancedParams getCreateAdvancedParams()
@@ -794,7 +801,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (25) getCreatePDFXParams
-	 *
+	 * 
 	 * @return JDFPDFXParams the element
 	 */
 	public JDFPDFXParams getCreatePDFXParams()
@@ -824,7 +831,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (25) getCreateThinPDFParams
-	 *
+	 * 
 	 * @return JDFThinPDFParams the element
 	 */
 	public JDFThinPDFParams getCreateThinPDFParams()

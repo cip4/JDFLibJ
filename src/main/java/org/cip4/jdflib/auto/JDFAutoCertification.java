@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoCertification : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCertification extends JDFElement
@@ -92,9 +92,9 @@ public abstract class JDFAutoCertification extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLAIM, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.IDENTIFIER, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORGANIZATION, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLAIM, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.IDENTIFIER, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORGANIZATION, 0x3333111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -139,14 +139,13 @@ public abstract class JDFAutoCertification extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Claim
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Claim ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Claim
 	 *
@@ -167,9 +166,9 @@ public abstract class JDFAutoCertification extends JDFElement
 		return getAttribute(AttributeName.CLAIM, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Identifier
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Identifier ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Identifier
 	 *
@@ -190,9 +189,10 @@ public abstract class JDFAutoCertification extends JDFElement
 		return getAttribute(AttributeName.IDENTIFIER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Organization
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Organization
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Organization
 	 *

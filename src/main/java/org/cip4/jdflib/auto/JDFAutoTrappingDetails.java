@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFTrappingParams;
  *****************************************************************************
  * class JDFAutoTrappingDetails : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTrappingDetails extends JDFResource
@@ -100,10 +100,10 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTTRAPPING, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.IGNOREFILEPARAMS, 0x44443333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAPPING, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRAPPINGTYPE, 0x44444433, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTTRAPPING, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.IGNOREFILEPARAMS, 0x4444443333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAPPING, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRAPPINGTYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -115,10 +115,10 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.TRAPPINGORDER, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.TRAPPINGPARAMS, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.OBJECTRESOLUTION, 0x33333331);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.TRAPREGION, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.TRAPPINGORDER, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.TRAPPINGPARAMS, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.OBJECTRESOLUTION, 0x3333333331l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.TRAPREGION, 0x3333333333l);
 	}
 
 	@Override
@@ -183,14 +183,14 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DefaultTrapping
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefaultTrapping
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DefaultTrapping
 	 *
@@ -211,9 +211,10 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 		return getBoolAttribute(AttributeName.DEFAULTTRAPPING, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IgnoreFileParams
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IgnoreFileParams
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IgnoreFileParams
 	 *
@@ -234,9 +235,9 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 		return getBoolAttribute(AttributeName.IGNOREFILEPARAMS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Trapping
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Trapping ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Trapping
 	 *
@@ -257,9 +258,10 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 		return getBoolAttribute(AttributeName.TRAPPING, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrappingType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrappingType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TrappingType
 	 *
@@ -280,9 +282,8 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 		return getIntAttribute(AttributeName.TRAPPINGTYPE, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -297,7 +298,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 
 	/**
 	 * (25) getCreateTrappingOrder
-	 *
+	 * 
 	 * @return JDFTrappingOrder the element
 	 */
 	public JDFTrappingOrder getCreateTrappingOrder()
@@ -327,7 +328,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 
 	/**
 	 * (25) getCreateTrappingParams
-	 *
+	 * 
 	 * @return JDFTrappingParams the element
 	 */
 	public JDFTrappingParams getCreateTrappingParams()
@@ -357,7 +358,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 
 	/**
 	 * (26) getCreateObjectResolution
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFObjectResolution the element
 	 */
@@ -379,7 +380,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 
 	/**
 	 * Get all ObjectResolution from the current element
-	 *
+	 * 
 	 * @return Collection<JDFObjectResolution>, null if none are available
 	 */
 	public Collection<JDFObjectResolution> getAllObjectResolution()
@@ -409,7 +410,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 
 	/**
 	 * (26) getCreateTrapRegion
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFTrapRegion the element
 	 */
@@ -431,7 +432,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 
 	/**
 	 * Get all TrapRegion from the current element
-	 *
+	 * 
 	 * @return Collection<JDFTrapRegion>, null if none are available
 	 */
 	public Collection<JDFTrapRegion> getAllTrapRegion()

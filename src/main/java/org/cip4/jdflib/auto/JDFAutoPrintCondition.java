@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoPrintCondition : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPrintCondition extends JDFResource
@@ -101,9 +101,9 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x22222211, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.AIMCURVE, 0x33333311, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DENSITY, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x2222222211l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AIMCURVE, 0x3333333311l, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DENSITY, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -115,9 +115,9 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORMEASUREMENTCONDITIONS, 0x66666611);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x66666611);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.FILESPEC, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORMEASUREMENTCONDITIONS, 0x6666666611l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x6666666611l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.FILESPEC, 0x3333333311l);
 	}
 
 	@Override
@@ -182,14 +182,13 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Name
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Name
 	 *
@@ -210,9 +209,9 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AimCurve
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AimCurve ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AimCurve
 	 *
@@ -235,9 +234,9 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Density
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Density ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Density
 	 *
@@ -258,9 +257,8 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 		return getRealAttribute(AttributeName.DENSITY, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -275,7 +273,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 
 	/**
 	 * (25) getCreateColorMeasurementConditions
-	 *
+	 * 
 	 * @return JDFColorMeasurementConditions the element
 	 */
 	public JDFColorMeasurementConditions getCreateColorMeasurementConditions()
@@ -315,7 +313,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 
 	/**
 	 * (25) getCreateDevice
-	 *
+	 * 
 	 * @return JDFDevice the element
 	 */
 	public JDFDevice getCreateDevice()
@@ -345,7 +343,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 
 	/**
 	 * (26) getCreateFileSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
@@ -367,7 +365,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 
 	/**
 	 * Get all FileSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFFileSpec>, null if none are available
 	 */
 	public Collection<JDFFileSpec> getAllFileSpec()

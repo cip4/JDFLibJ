@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoThreadSealingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoThreadSealingParams extends JDFResource
@@ -97,12 +97,12 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLINDSTITCH, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.THREADMATERIAL, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumThreadMaterial.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.THREADPOSITIONS, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.THREADLENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.THREADSTITCHWIDTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SEALINGTEMPERATURE, 0x44333331, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLINDSTITCH, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.THREADMATERIAL, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumThreadMaterial.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.THREADPOSITIONS, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.THREADLENGTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.THREADSTITCHWIDTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SEALINGTEMPERATURE, 0x4444333331l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -177,7 +177,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumThreadMaterial(String name)
+		protected EnumThreadMaterial(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -232,14 +232,13 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 		public static final EnumThreadMaterial Polyester = new EnumThreadMaterial("Polyester");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlindStitch
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlindStitch ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BlindStitch
 	 *
@@ -260,9 +259,10 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 		return getBoolAttribute(AttributeName.BLINDSTITCH, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ThreadMaterial
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ThreadMaterial
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ThreadMaterial
 	 *
@@ -283,9 +283,10 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 		return EnumThreadMaterial.getEnum(getAttribute(AttributeName.THREADMATERIAL, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ThreadPositions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ThreadPositions
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ThreadPositions
 	 *
@@ -308,9 +309,10 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ThreadLength
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ThreadLength
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ThreadLength
 	 *
@@ -331,9 +333,10 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 		return getRealAttribute(AttributeName.THREADLENGTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ThreadStitchWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ThreadStitchWidth
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ThreadStitchWidth
 	 *
@@ -354,9 +357,10 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 		return getRealAttribute(AttributeName.THREADSTITCHWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SealingTemperature
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SealingTemperature
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SealingTemperature
 	 *

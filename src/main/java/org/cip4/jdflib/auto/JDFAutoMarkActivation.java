@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
  *****************************************************************************
  * class JDFAutoMarkActivation : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoMarkActivation extends JDFElement
@@ -97,8 +97,8 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTEXT, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumContext.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.INDEX, 0x22222222, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTEXT, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumContext.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.INDEX, 0x2222222222l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumContext(String name)
+		protected EnumContext(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -232,14 +232,13 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 		public static final EnumContext SubDocIndex9 = new EnumContext("SubDocIndex9");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Context
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Context ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Context
 	 *
@@ -260,9 +259,9 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 		return EnumContext.getEnum(getAttribute(AttributeName.CONTEXT, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Index
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Index ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Index
 	 *

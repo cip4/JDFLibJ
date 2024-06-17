@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFColorantZoneDetails;
  *****************************************************************************
  * class JDFAutoTrappingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTrappingParams extends JDFResource
@@ -102,27 +102,27 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[21];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MINIMUMBLACKWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, "0");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.TRAPENDSTYLE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Miter");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAPJOINSTYLE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Miter");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.BLACKCOLORLIMIT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.BLACKDENSITYLIMIT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.BLACKWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.ENABLED, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.HALFTONENAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.IMAGEINTERNALTRAPPING, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.IMAGERESOLUTION, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.IMAGEMASKTRAPPING, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.IMAGETOIMAGETRAPPING, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.IMAGETOOBJECTTRAPPING, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.IMAGETRAPPLACEMENT, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumImageTrapPlacement.getEnum(0), null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.IMAGETRAPWIDTH, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.IMAGETRAPWIDTHY, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.SLIDINGTRAPLIMIT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.STEPLIMIT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[18] = new AtrInfoTable(AttributeName.TRAPCOLORSCALING, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[19] = new AtrInfoTable(AttributeName.TRAPWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[20] = new AtrInfoTable(AttributeName.TRAPWIDTHY, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MINIMUMBLACKWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, "0");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TRAPENDSTYLE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Miter");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAPJOINSTYLE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Miter");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.BLACKCOLORLIMIT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.BLACKDENSITYLIMIT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.BLACKWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.ENABLED, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.HALFTONENAME, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.IMAGEINTERNALTRAPPING, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.IMAGERESOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.IMAGEMASKTRAPPING, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.IMAGETOIMAGETRAPPING, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.IMAGETOOBJECTTRAPPING, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.IMAGETRAPPLACEMENT, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumImageTrapPlacement.getEnum(0), null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.IMAGETRAPWIDTH, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.IMAGETRAPWIDTHY, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.SLIDINGTRAPLIMIT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.STEPLIMIT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[18] = new AtrInfoTable(AttributeName.TRAPCOLORSCALING, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[19] = new AtrInfoTable(AttributeName.TRAPWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[20] = new AtrInfoTable(AttributeName.TRAPWIDTHY, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORANTZONEDETAILS, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORANTZONEDETAILS, 0x3333333333l);
 	}
 
 	@Override
@@ -209,7 +209,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumImageTrapPlacement(String name)
+		protected EnumImageTrapPlacement(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -266,14 +266,14 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		public static final EnumImageTrapPlacement Spread = new EnumImageTrapPlacement("Spread");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinimumBlackWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinimumBlackWidth
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinimumBlackWidth
 	 *
@@ -294,9 +294,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.MINIMUMBLACKWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrapEndStyle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrapEndStyle
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TrapEndStyle
 	 *
@@ -317,9 +318,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getAttribute(AttributeName.TRAPENDSTYLE, null, "Miter");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrapJoinStyle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrapJoinStyle
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TrapJoinStyle
 	 *
@@ -340,9 +342,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getAttribute(AttributeName.TRAPJOINSTYLE, null, "Miter");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlackColorLimit
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlackColorLimit
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BlackColorLimit
 	 *
@@ -363,9 +366,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.BLACKCOLORLIMIT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlackDensityLimit
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlackDensityLimit
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BlackDensityLimit
 	 *
@@ -386,9 +390,9 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.BLACKDENSITYLIMIT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlackWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlackWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BlackWidth
 	 *
@@ -409,9 +413,9 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.BLACKWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Enabled
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Enabled ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Enabled
 	 *
@@ -432,9 +436,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getBoolAttribute(AttributeName.ENABLED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HalftoneName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HalftoneName
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HalftoneName
 	 *
@@ -455,9 +460,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getAttribute(AttributeName.HALFTONENAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImageInternalTrapping
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImageInternalTrapping
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ImageInternalTrapping
 	 *
@@ -478,9 +484,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getBoolAttribute(AttributeName.IMAGEINTERNALTRAPPING, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImageResolution
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImageResolution
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ImageResolution
 	 *
@@ -501,9 +508,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getIntAttribute(AttributeName.IMAGERESOLUTION, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImageMaskTrapping
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImageMaskTrapping
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ImageMaskTrapping
 	 *
@@ -524,9 +532,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getBoolAttribute(AttributeName.IMAGEMASKTRAPPING, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImageToImageTrapping
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImageToImageTrapping
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ImageToImageTrapping
 	 *
@@ -547,9 +556,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getBoolAttribute(AttributeName.IMAGETOIMAGETRAPPING, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImageToObjectTrapping
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImageToObjectTrapping
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ImageToObjectTrapping
 	 *
@@ -570,9 +580,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getBoolAttribute(AttributeName.IMAGETOOBJECTTRAPPING, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImageTrapPlacement
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImageTrapPlacement
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ImageTrapPlacement
 	 *
@@ -593,9 +604,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return EnumImageTrapPlacement.getEnum(getAttribute(AttributeName.IMAGETRAPPLACEMENT, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImageTrapWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImageTrapWidth
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ImageTrapWidth
 	 *
@@ -616,9 +628,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.IMAGETRAPWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImageTrapWidthY
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImageTrapWidthY
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ImageTrapWidthY
 	 *
@@ -639,9 +652,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.IMAGETRAPWIDTHY, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SlidingTrapLimit
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SlidingTrapLimit
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SlidingTrapLimit
 	 *
@@ -662,9 +676,9 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.SLIDINGTRAPLIMIT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StepLimit
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StepLimit ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StepLimit
 	 *
@@ -685,9 +699,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.STEPLIMIT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrapColorScaling
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrapColorScaling
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TrapColorScaling
 	 *
@@ -708,9 +723,9 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.TRAPCOLORSCALING, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrapWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrapWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TrapWidth
 	 *
@@ -731,9 +746,9 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.TRAPWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrapWidthY
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrapWidthY ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TrapWidthY
 	 *
@@ -754,14 +769,13 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		return getRealAttribute(AttributeName.TRAPWIDTHY, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateColorantZoneDetails
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorantZoneDetails the element
 	 */
@@ -783,7 +797,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
 	/**
 	 * Get all ColorantZoneDetails from the current element
-	 *
+	 * 
 	 * @return Collection<JDFColorantZoneDetails>, null if none are available
 	 */
 	public Collection<JDFColorantZoneDetails> getAllColorantZoneDetails()

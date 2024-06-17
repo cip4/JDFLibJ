@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.process.JDFStringListValue;
  *****************************************************************************
  * class JDFAutoPRGroupOccurrence : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPRGroupOccurrence extends JDFElement
@@ -95,8 +95,8 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.STRINGLISTVALUE, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.ARGUMENTVALUE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.STRINGLISTVALUE, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.ARGUMENTVALUE, 0x3333333333l);
 	}
 
 	@Override
@@ -141,14 +141,13 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateStringListValue
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringListValue the element
 	 */
@@ -170,7 +169,7 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 
 	/**
 	 * Get all StringListValue from the current element
-	 *
+	 * 
 	 * @return Collection<JDFStringListValue>, null if none are available
 	 */
 	public Collection<JDFStringListValue> getAllStringListValue()
@@ -190,7 +189,7 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 
 	/**
 	 * (26) getCreateArgumentValue
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFArgumentValue the element
 	 */
@@ -212,7 +211,7 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 
 	/**
 	 * Get all ArgumentValue from the current element
-	 *
+	 * 
 	 * @return Collection<JDFArgumentValue>, null if none are available
 	 */
 	public Collection<JDFArgumentValue> getAllArgumentValue()

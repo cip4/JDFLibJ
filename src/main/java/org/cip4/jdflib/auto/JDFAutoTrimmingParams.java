@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoTrimmingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTrimmingParams extends JDFResource
@@ -96,11 +96,11 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TRIMCOVER, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumTrimCover.getEnum(0), "Both");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.WIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.HEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRIMMINGOFFSET, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.TRIMMINGTYPE, 0x44444431, AttributeInfo.EnumAttributeType.enumeration, EnumTrimmingType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TRIMCOVER, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumTrimCover.getEnum(0), "Both");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.WIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.HEIGHT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRIMMINGOFFSET, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.TRIMMINGTYPE, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration, EnumTrimmingType.getEnum(0), null);
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumTrimCover(String name)
+		protected EnumTrimCover(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -242,7 +242,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumTrimmingType(String name)
+		protected EnumTrimmingType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -295,14 +295,13 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 		public static final EnumTrimmingType SystemSpecified = new EnumTrimmingType("SystemSpecified");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrimCover
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrimCover ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute TrimCover
 	 *
@@ -323,9 +322,9 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 		return EnumTrimCover.getEnum(getAttribute(AttributeName.TRIMCOVER, null, "Both"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Width
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Width ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Width
 	 *
@@ -346,9 +345,9 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 		return getRealAttribute(AttributeName.WIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Height
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Height ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Height
 	 *
@@ -369,9 +368,10 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 		return getRealAttribute(AttributeName.HEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrimmingOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrimmingOffset
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TrimmingOffset
 	 *
@@ -392,9 +392,10 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 		return getRealAttribute(AttributeName.TRIMMINGOFFSET, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrimmingType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrimmingType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute TrimmingType
 	 *

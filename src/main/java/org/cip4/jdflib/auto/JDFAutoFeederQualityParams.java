@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoFeederQualityParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoFeederQualityParams extends JDFElement
@@ -96,12 +96,13 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.INCORRECTCOMPONENTQUALITY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumIncorrectComponentQuality.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.INCORRECTCOMPONENTS, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DOUBLEFEEDQUALITY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumDoubleFeedQuality.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.DOUBLEFEEDS, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.BADFEEDQUALITY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumBadFeedQuality.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.BADFEEDS, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.INCORRECTCOMPONENTQUALITY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumIncorrectComponentQuality.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.INCORRECTCOMPONENTS, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DOUBLEFEEDQUALITY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDoubleFeedQuality.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DOUBLEFEEDS, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.BADFEEDQUALITY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumBadFeedQuality.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.BADFEEDS, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -156,7 +157,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumIncorrectComponentQuality(String name)
+		protected EnumIncorrectComponentQuality(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -225,7 +226,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDoubleFeedQuality(String name)
+		protected EnumDoubleFeedQuality(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -294,7 +295,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBadFeedQuality(String name)
+		protected EnumBadFeedQuality(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -353,14 +354,14 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 		public static final EnumBadFeedQuality StopWaste = new EnumBadFeedQuality("StopWaste");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IncorrectComponentQuality
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IncorrectComponentQuality
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute IncorrectComponentQuality
 	 *
@@ -381,9 +382,10 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 		return EnumIncorrectComponentQuality.getEnum(getAttribute(AttributeName.INCORRECTCOMPONENTQUALITY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IncorrectComponents
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IncorrectComponents
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IncorrectComponents
 	 *
@@ -404,9 +406,10 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 		return getIntAttribute(AttributeName.INCORRECTCOMPONENTS, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DoubleFeedQuality
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DoubleFeedQuality
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DoubleFeedQuality
 	 *
@@ -427,9 +430,9 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 		return EnumDoubleFeedQuality.getEnum(getAttribute(AttributeName.DOUBLEFEEDQUALITY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DoubleFeeds
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DoubleFeeds ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DoubleFeeds
 	 *
@@ -450,9 +453,10 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 		return getIntAttribute(AttributeName.DOUBLEFEEDS, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BadFeedQuality
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BadFeedQuality
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute BadFeedQuality
 	 *
@@ -473,9 +477,9 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 		return EnumBadFeedQuality.getEnum(getAttribute(AttributeName.BADFEEDQUALITY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BadFeeds
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BadFeeds ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BadFeeds
 	 *

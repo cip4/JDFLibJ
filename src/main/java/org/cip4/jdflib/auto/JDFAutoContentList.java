@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,7 @@ import org.cip4.jdflib.resource.process.JDFContentData;
  *****************************************************************************
  * class JDFAutoContentList : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoContentList extends JDFResource
@@ -94,7 +94,7 @@ public abstract class JDFAutoContentList extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTENTDATA, 0x22222111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTENTDATA, 0x2222222111l);
 	}
 
 	@Override
@@ -159,14 +159,13 @@ public abstract class JDFAutoContentList extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateContentData
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContentData the element
 	 */
@@ -188,7 +187,7 @@ public abstract class JDFAutoContentList extends JDFResource
 
 	/**
 	 * Get all ContentData from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContentData>, null if none are available
 	 */
 	public Collection<JDFContentData> getAllContentData()

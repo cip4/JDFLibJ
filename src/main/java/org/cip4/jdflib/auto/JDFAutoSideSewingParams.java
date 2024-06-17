@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoSideSewingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoSideSewingParams extends JDFResource
@@ -98,13 +98,13 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.NUMBEROFNEEDLES, 0x44444442, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.OFFSET, 0x44444442, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.NEEDLEPOSITIONS, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SEWINGPATTERN, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumSewingPattern.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.THREADMATERIAL, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumThreadMaterial.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.THREADTHICKNESS, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.THREADBRAND, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NUMBEROFNEEDLES, 0x4444444442l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.OFFSET, 0x4444444442l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.NEEDLEPOSITIONS, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SEWINGPATTERN, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumSewingPattern.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.THREADMATERIAL, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumThreadMaterial.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.THREADTHICKNESS, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.THREADBRAND, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -179,7 +179,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSewingPattern(String name)
+		protected EnumSewingPattern(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -244,7 +244,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumThreadMaterial(String name)
+		protected EnumThreadMaterial(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -299,14 +299,14 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 		public static final EnumThreadMaterial Polyester = new EnumThreadMaterial("Polyester");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NumberOfNeedles
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NumberOfNeedles
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NumberOfNeedles
 	 *
@@ -327,9 +327,9 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 		return getIntAttribute(AttributeName.NUMBEROFNEEDLES, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Offset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Offset
 	 *
@@ -350,9 +350,10 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 		return getRealAttribute(AttributeName.OFFSET, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NeedlePositions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NeedlePositions
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NeedlePositions
 	 *
@@ -375,9 +376,10 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SewingPattern
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SewingPattern
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SewingPattern
 	 *
@@ -398,9 +400,10 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 		return EnumSewingPattern.getEnum(getAttribute(AttributeName.SEWINGPATTERN, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ThreadMaterial
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ThreadMaterial
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ThreadMaterial
 	 *
@@ -421,9 +424,10 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 		return EnumThreadMaterial.getEnum(getAttribute(AttributeName.THREADMATERIAL, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ThreadThickness
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ThreadThickness
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ThreadThickness
 	 *
@@ -444,9 +448,9 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 		return getRealAttribute(AttributeName.THREADTHICKNESS, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ThreadBrand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ThreadBrand ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ThreadBrand
 	 *

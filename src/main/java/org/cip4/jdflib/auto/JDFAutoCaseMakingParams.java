@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
  *****************************************************************************
  * class JDFAutoCaseMakingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCaseMakingParams extends JDFResource
@@ -96,14 +96,14 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOTTOMFOLDIN, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COVERWIDTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.CORNERTYPE, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.FRONTFOLDIN, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.TOPFOLDIN, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.HEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.JOINTWIDTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.SPINEWIDTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOTTOMFOLDIN, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COVERWIDTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CORNERTYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.FRONTFOLDIN, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.TOPFOLDIN, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.HEIGHT, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.JOINTWIDTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SPINEWIDTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x6666666661l);
 	}
 
 	@Override
@@ -180,14 +180,14 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BottomFoldIn
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BottomFoldIn
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BottomFoldIn
 	 *
@@ -208,9 +208,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 		return getRealAttribute(AttributeName.BOTTOMFOLDIN, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CoverWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CoverWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CoverWidth
 	 *
@@ -231,9 +231,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 		return getRealAttribute(AttributeName.COVERWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CornerType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CornerType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CornerType
 	 *
@@ -254,9 +254,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 		return getAttribute(AttributeName.CORNERTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FrontFoldIn
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FrontFoldIn ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FrontFoldIn
 	 *
@@ -277,9 +277,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 		return getRealAttribute(AttributeName.FRONTFOLDIN, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TopFoldIn
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TopFoldIn ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TopFoldIn
 	 *
@@ -300,9 +300,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 		return getRealAttribute(AttributeName.TOPFOLDIN, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Height
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Height ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Height
 	 *
@@ -323,9 +323,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 		return getRealAttribute(AttributeName.HEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JointWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JointWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JointWidth
 	 *
@@ -346,9 +346,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 		return getRealAttribute(AttributeName.JOINTWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SpineWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SpineWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SpineWidth
 	 *
@@ -369,9 +369,8 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 		return getRealAttribute(AttributeName.SPINEWIDTH, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -386,7 +385,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 
 	/**
 	 * (25) getCreateGlueLine
-	 *
+	 * 
 	 * @return JDFGlueLine the element
 	 */
 	public JDFGlueLine getCreateGlueLine()

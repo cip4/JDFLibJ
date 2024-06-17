@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFPreflightArgument;
  *****************************************************************************
  * class JDFAutoBasicPreflightTest : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBasicPreflightTest extends JDFElement
@@ -102,13 +102,13 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CLASSNAME, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVNS, 0x33333333, AttributeInfo.EnumAttributeType.URI, null, "http://www.CIP4.org/JDFSchema_1_1");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.LISTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumListType.getEnum(0), "SingleValue");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXOCCURS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MINOCCURS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CLASSNAME, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVNS, 0x3333333333l, AttributeInfo.EnumAttributeType.URI, null, "http://www.CIP4.org/JDFSchema_1_1");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.LISTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumListType.getEnum(0), "SingleValue");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXOCCURS, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MINOCCURS, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.NAME, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PREFLIGHTARGUMENT, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PREFLIGHTARGUMENT, 0x6666666666l);
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumListType(String name)
+		protected EnumListType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -252,14 +252,13 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 		public static final EnumListType UniqueOrderedRangeList = new EnumListType("UniqueOrderedRangeList");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Classes
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Classes ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Classes
 	 *
@@ -283,9 +282,9 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ClassName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ClassName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ClassName
 	 *
@@ -306,9 +305,9 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 		return getAttribute(AttributeName.CLASSNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DevNS
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DevNS ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DevNS
 	 *
@@ -329,9 +328,9 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 		return getAttribute(AttributeName.DEVNS, null, "http://www.CIP4.org/JDFSchema_1_1");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ListType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ListType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ListType
 	 *
@@ -352,9 +351,9 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 		return EnumListType.getEnum(getAttribute(AttributeName.LISTTYPE, null, "SingleValue"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxOccurs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxOccurs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxOccurs
 	 *
@@ -375,9 +374,9 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 		return getIntAttribute(AttributeName.MAXOCCURS, null, 1);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinOccurs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinOccurs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinOccurs
 	 *
@@ -398,9 +397,9 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 		return getIntAttribute(AttributeName.MINOCCURS, null, 1);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Name
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Name
 	 *
@@ -421,9 +420,8 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -438,7 +436,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 
 	/**
 	 * (25) getCreatePreflightArgument
-	 *
+	 * 
 	 * @return JDFPreflightArgument the element
 	 */
 	public JDFPreflightArgument getCreatePreflightArgument()

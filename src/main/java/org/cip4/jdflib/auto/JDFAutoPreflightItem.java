@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoPreflightItem : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPreflightItem extends JDFElement
@@ -96,7 +96,7 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREFLIGHTLEVEL, 0x33111111, AttributeInfo.EnumAttributeType.enumeration, EnumPreflightLevel.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREFLIGHTLEVEL, 0x3333111111l, AttributeInfo.EnumAttributeType.enumeration, EnumPreflightLevel.getEnum(0), null);
 	}
 
 	@Override
@@ -151,7 +151,7 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPreflightLevel(String name)
+		protected EnumPreflightLevel(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -206,14 +206,14 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 		public static final EnumPreflightLevel Premium = new EnumPreflightLevel("Premium");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreflightLevel
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreflightLevel
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PreflightLevel
 	 *

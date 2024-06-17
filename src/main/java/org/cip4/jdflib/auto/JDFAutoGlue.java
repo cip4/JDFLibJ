@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
  *****************************************************************************
  * class JDFAutoGlue : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoGlue extends JDFElement
@@ -101,7 +101,7 @@ public abstract class JDFAutoGlue extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
 	}
 
 	@Override
@@ -113,8 +113,8 @@ public abstract class JDFAutoGlue extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x66666111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x6666666111l);
 	}
 
 	@Override
@@ -169,7 +169,7 @@ public abstract class JDFAutoGlue extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumWorkingDirection(String name)
+		protected EnumWorkingDirection(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -222,14 +222,14 @@ public abstract class JDFAutoGlue extends JDFElement
 		public static final EnumWorkingDirection Bottom = new EnumWorkingDirection("Bottom");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WorkingDirection
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkingDirection
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute WorkingDirection
 	 *
@@ -250,9 +250,8 @@ public abstract class JDFAutoGlue extends JDFElement
 		return EnumWorkingDirection.getEnum(getAttribute(AttributeName.WORKINGDIRECTION, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -267,7 +266,7 @@ public abstract class JDFAutoGlue extends JDFElement
 
 	/**
 	 * (25) getCreateGlueApplication
-	 *
+	 * 
 	 * @return JDFGlueApplication the element
 	 */
 	public JDFGlueApplication getCreateGlueApplication()
@@ -307,7 +306,7 @@ public abstract class JDFAutoGlue extends JDFElement
 
 	/**
 	 * (25) getCreateGlueLine
-	 *
+	 * 
 	 * @return JDFGlueLine the element
 	 */
 	public JDFGlueLine getCreateGlueLine()

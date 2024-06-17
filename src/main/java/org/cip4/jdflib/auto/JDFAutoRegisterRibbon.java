@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
  *****************************************************************************
  * class JDFAutoRegisterRibbon : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoRegisterRibbon extends JDFResource
@@ -99,12 +99,12 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.LENGTHOVERALL, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MATERIAL, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.RIBBONCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.RIBBONCOLORDETAILS, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.RIBBONEND, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.VISIBLELENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LENGTHOVERALL, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MATERIAL, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RIBBONCOLOR, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.RIBBONCOLORDETAILS, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.RIBBONEND, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.VISIBLELENGTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -116,8 +116,8 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x3333333331l);
 	}
 
 	@Override
@@ -182,14 +182,14 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 		return JDFResource.EnumResourceClass.Consumable;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LengthOverall
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LengthOverall
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LengthOverall
 	 *
@@ -210,9 +210,9 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 		return getRealAttribute(AttributeName.LENGTHOVERALL, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Material
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Material ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Material
 	 *
@@ -233,9 +233,9 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 		return getAttribute(AttributeName.MATERIAL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RibbonColor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RibbonColor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (13) set attribute RibbonColor
 	 *
@@ -260,9 +260,10 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RibbonColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RibbonColorDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RibbonColorDetails
 	 *
@@ -283,9 +284,9 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 		return getAttribute(AttributeName.RIBBONCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RibbonEnd
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RibbonEnd ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RibbonEnd
 	 *
@@ -306,9 +307,10 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 		return getAttribute(AttributeName.RIBBONEND, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute VisibleLength
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute VisibleLength
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute VisibleLength
 	 *
@@ -329,14 +331,13 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 		return getRealAttribute(AttributeName.VISIBLELENGTH, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -358,7 +359,7 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -389,7 +390,7 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 
 	/**
 	 * (26) getCreateIdentificationField
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element
 	 */
@@ -413,7 +414,7 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 
 	/**
 	 * Get all IdentificationField from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIdentificationField>, null if none are available
 	 */
 	public Collection<JDFIdentificationField> getAllIdentificationField()

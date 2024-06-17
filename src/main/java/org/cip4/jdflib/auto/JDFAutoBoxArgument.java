@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
  *****************************************************************************
  * class JDFAutoBoxArgument : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBoxArgument extends JDFElement
@@ -97,10 +97,10 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOX, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumBox.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MIRRORMARGINS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMirrorMargins.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.OFFSET, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.OVERLAP, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOX, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumBox.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MIRRORMARGINS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMirrorMargins.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.OFFSET, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OVERLAP, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 	}
 
 	@Override
@@ -155,7 +155,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBox(String name)
+		protected EnumBox(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -228,7 +228,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMirrorMargins(String name)
+		protected EnumMirrorMargins(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -281,14 +281,13 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 		public static final EnumMirrorMargins Horizontal = new EnumMirrorMargins("Horizontal");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Box
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Box ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Box
 	 *
@@ -309,9 +308,10 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 		return EnumBox.getEnum(getAttribute(AttributeName.BOX, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MirrorMargins
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MirrorMargins
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute MirrorMargins
 	 *
@@ -332,9 +332,9 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 		return EnumMirrorMargins.getEnum(getAttribute(AttributeName.MIRRORMARGINS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Offset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Offset
 	 *
@@ -357,9 +357,9 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Overlap
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Overlap ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Overlap
 	 *

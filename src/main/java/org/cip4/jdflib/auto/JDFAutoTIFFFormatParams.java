@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.process.JDFTIFFtag;
  *****************************************************************************
  * class JDFAutoTIFFFormatParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTIFFFormatParams extends JDFElement
@@ -103,13 +103,13 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BYTEORDER, 0x44433311, AttributeInfo.EnumAttributeType.enumeration, EnumByteOrder.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.INTERLEAVING, 0x44433311, AttributeInfo.EnumAttributeType.integer, null, "1");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.WHITEISZERO, 0x44433311, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SEGMENTATION, 0x44433311, AttributeInfo.EnumAttributeType.enumeration, EnumSegmentation.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ROWSPERSTRIP, 0x44433311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.TILESIZE, 0x44433311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SEPARATIONNAMETAG, 0x44433311, AttributeInfo.EnumAttributeType.integer, null, "270");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BYTEORDER, 0x4444433311l, AttributeInfo.EnumAttributeType.enumeration, EnumByteOrder.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.INTERLEAVING, 0x4444433311l, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.WHITEISZERO, 0x4444433311l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SEGMENTATION, 0x4444433311l, AttributeInfo.EnumAttributeType.enumeration, EnumSegmentation.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ROWSPERSTRIP, 0x4444433311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TILESIZE, 0x4444433311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SEPARATIONNAMETAG, 0x4444433311l, AttributeInfo.EnumAttributeType.integer, null, "270");
 	}
 
 	@Override
@@ -121,8 +121,8 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.TIFFTAG, 0x44433331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.TIFFEMBEDDEDFILE, 0x44433331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.TIFFTAG, 0x4444433331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.TIFFEMBEDDEDFILE, 0x4444433331l);
 	}
 
 	@Override
@@ -177,7 +177,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumByteOrder(String name)
+		protected EnumByteOrder(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -240,7 +240,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSegmentation(String name)
+		protected EnumSegmentation(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -295,14 +295,13 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 		public static final EnumSegmentation Tiled = new EnumSegmentation("Tiled");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ByteOrder
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ByteOrder ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ByteOrder
 	 *
@@ -323,9 +322,10 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 		return EnumByteOrder.getEnum(getAttribute(AttributeName.BYTEORDER, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Interleaving
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Interleaving
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Interleaving
 	 *
@@ -346,9 +346,9 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 		return getIntAttribute(AttributeName.INTERLEAVING, null, 1);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WhiteIsZero
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WhiteIsZero ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WhiteIsZero
 	 *
@@ -369,9 +369,10 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 		return getBoolAttribute(AttributeName.WHITEISZERO, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Segmentation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Segmentation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Segmentation
 	 *
@@ -392,9 +393,10 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 		return EnumSegmentation.getEnum(getAttribute(AttributeName.SEGMENTATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RowsPerStrip
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RowsPerStrip
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RowsPerStrip
 	 *
@@ -415,9 +417,9 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 		return getIntAttribute(AttributeName.ROWSPERSTRIP, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TileSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TileSize ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TileSize
 	 *
@@ -440,9 +442,10 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SeparationNameTag
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SeparationNameTag
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SeparationNameTag
 	 *
@@ -463,14 +466,13 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 		return getIntAttribute(AttributeName.SEPARATIONNAMETAG, null, 270);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateTIFFtag
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFTIFFtag the element
 	 */
@@ -492,7 +494,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 
 	/**
 	 * Get all TIFFtag from the current element
-	 *
+	 * 
 	 * @return Collection<JDFTIFFtag>, null if none are available
 	 */
 	public Collection<JDFTIFFtag> getAllTIFFtag()
@@ -512,7 +514,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 
 	/**
 	 * (26) getCreateTIFFEmbeddedFile
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFTIFFEmbeddedFile the element
 	 */
@@ -534,7 +536,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 
 	/**
 	 * Get all TIFFEmbeddedFile from the current element
-	 *
+	 * 
 	 * @return Collection<JDFTIFFEmbeddedFile>, null if none are available
 	 */
 	public Collection<JDFTIFFEmbeddedFile> getAllTIFFEmbeddedFile()

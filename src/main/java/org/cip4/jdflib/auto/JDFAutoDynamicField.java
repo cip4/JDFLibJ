@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.JDFDeviceMark;
  *****************************************************************************
  * class JDFAutoDynamicField : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDynamicField extends JDFElement
@@ -96,12 +96,12 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FORMAT, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.INPUTFIELD, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORD, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORDEXPRESSION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.REPLACEFIELD, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.TEMPLATE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FORMAT, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.INPUTFIELD, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORD, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORDEXPRESSION, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.REPLACEFIELD, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TEMPLATE, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x6666666661l);
 	}
 
 	@Override
@@ -158,14 +158,13 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Format
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Format ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Format
 	 *
@@ -186,9 +185,9 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		return getAttribute(AttributeName.FORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute InputField
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InputField ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute InputField
 	 *
@@ -209,9 +208,9 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		return getAttribute(AttributeName.INPUTFIELD, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Ord
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Ord ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Ord
 	 *
@@ -232,9 +231,10 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		return getIntAttribute(AttributeName.ORD, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OrdExpression
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OrdExpression
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OrdExpression
 	 *
@@ -255,9 +255,10 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		return getAttribute(AttributeName.ORDEXPRESSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ReplaceField
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ReplaceField
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ReplaceField
 	 *
@@ -278,9 +279,9 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		return getAttribute(AttributeName.REPLACEFIELD, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Template
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Template ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Template
 	 *
@@ -301,9 +302,8 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		return getAttribute(AttributeName.TEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -318,7 +318,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 
 	/**
 	 * (25) getCreateDeviceMark
-	 *
+	 * 
 	 * @return JDFDeviceMark the element
 	 */
 	public JDFDeviceMark getCreateDeviceMark()

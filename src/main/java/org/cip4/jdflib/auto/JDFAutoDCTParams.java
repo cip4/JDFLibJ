@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
  *****************************************************************************
  * class JDFAutoDCTParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDCTParams extends JDFElement
@@ -99,13 +99,13 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SOURCECSS, 0x44333311, AttributeInfo.EnumAttributeType.enumerations, EnumSourceCSs.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.HSAMPLES, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.VSAMPLES, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.QFACTOR, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, "1.0");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.QUANTTABLE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.HUFFTABLE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.COLORTRANSFORM, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumColorTransform.getEnum(0), "Automatic");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SOURCECSS, 0x4444333311l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceCSs.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.HSAMPLES, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.VSAMPLES, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.QFACTOR, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, "1.0");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.QUANTTABLE, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.HUFFTABLE, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.COLORTRANSFORM, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumColorTransform.getEnum(0), "Automatic");
 	}
 
 	@Override
@@ -160,7 +160,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSourceCSs(String name)
+		protected EnumSourceCSs(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -255,7 +255,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumColorTransform(String name)
+		protected EnumColorTransform(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -310,14 +310,13 @@ public abstract class JDFAutoDCTParams extends JDFElement
 		public static final EnumColorTransform Automatic = new EnumColorTransform("Automatic");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceCSs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceCSs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5.2) set attribute SourceCSs
 	 *
@@ -338,9 +337,9 @@ public abstract class JDFAutoDCTParams extends JDFElement
 		return getEnumerationsAttribute(AttributeName.SOURCECSS, null, EnumSourceCSs.getEnum(0), false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HSamples
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HSamples ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HSamples
 	 *
@@ -363,9 +362,9 @@ public abstract class JDFAutoDCTParams extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute VSamples
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute VSamples ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute VSamples
 	 *
@@ -388,9 +387,9 @@ public abstract class JDFAutoDCTParams extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QFactor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QFactor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute QFactor
 	 *
@@ -411,9 +410,9 @@ public abstract class JDFAutoDCTParams extends JDFElement
 		return getRealAttribute(AttributeName.QFACTOR, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QuantTable
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QuantTable ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute QuantTable
 	 *
@@ -436,9 +435,9 @@ public abstract class JDFAutoDCTParams extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HuffTable
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HuffTable ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HuffTable
 	 *
@@ -461,9 +460,10 @@ public abstract class JDFAutoDCTParams extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorTransform
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorTransform
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ColorTransform
 	 *

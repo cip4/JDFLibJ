@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFMediaSource;
  *****************************************************************************
  * class JDFAutoIDPCover : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoIDPCover extends JDFElement
@@ -104,9 +104,9 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKSIDE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COVERTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCoverType.getEnum(0), "Front");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.FRONTSIDE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKSIDE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COVERTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCoverType.getEnum(0), "Front");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FRONTSIDE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 	}
 
 	@Override
@@ -118,10 +118,10 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.IDPFINISHING, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.IDPLAYOUT, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIAINTENT, 0x33333333);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.IDPFINISHING, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.IDPLAYOUT, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIAINTENT, 0x3333333333l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x3333333333l);
 	}
 
 	@Override
@@ -176,7 +176,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumCoverType(String name)
+		protected EnumCoverType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -229,14 +229,13 @@ public abstract class JDFAutoIDPCover extends JDFElement
 		public static final EnumCoverType Back = new EnumCoverType("Back");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BackSide
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BackSide ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BackSide
 	 *
@@ -257,9 +256,9 @@ public abstract class JDFAutoIDPCover extends JDFElement
 		return getBoolAttribute(AttributeName.BACKSIDE, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CoverType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CoverType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute CoverType
 	 *
@@ -280,9 +279,9 @@ public abstract class JDFAutoIDPCover extends JDFElement
 		return EnumCoverType.getEnum(getAttribute(AttributeName.COVERTYPE, null, "Front"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FrontSide
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FrontSide ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FrontSide
 	 *
@@ -303,14 +302,13 @@ public abstract class JDFAutoIDPCover extends JDFElement
 		return getBoolAttribute(AttributeName.FRONTSIDE, null, false);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateIDPFinishing
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPFinishing the element
 	 */
@@ -332,7 +330,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 
 	/**
 	 * Get all IDPFinishing from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIDPFinishing>, null if none are available
 	 */
 	public Collection<JDFIDPFinishing> getAllIDPFinishing()
@@ -352,7 +350,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 
 	/**
 	 * (26) getCreateIDPLayout
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPLayout the element
 	 */
@@ -374,7 +372,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 
 	/**
 	 * Get all IDPLayout from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIDPLayout>, null if none are available
 	 */
 	public Collection<JDFIDPLayout> getAllIDPLayout()
@@ -394,7 +392,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 
 	/**
 	 * (26) getCreateMediaIntent
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMediaIntent the element
 	 */
@@ -416,7 +414,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 
 	/**
 	 * Get all MediaIntent from the current element
-	 *
+	 * 
 	 * @return Collection<JDFMediaIntent>, null if none are available
 	 */
 	public Collection<JDFMediaIntent> getAllMediaIntent()
@@ -446,7 +444,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 
 	/**
 	 * (26) getCreateMediaSource
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMediaSource the element
 	 */
@@ -468,7 +466,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 
 	/**
 	 * Get all MediaSource from the current element
-	 *
+	 * 
 	 * @return Collection<JDFMediaSource>, null if none are available
 	 */
 	public Collection<JDFMediaSource> getAllMediaSource()

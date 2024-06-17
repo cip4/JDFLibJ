@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
  *****************************************************************************
  * class JDFAutoNameEvaluation : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoNameEvaluation extends JDFResource
@@ -99,8 +99,8 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.REGEXP, 0x22222222, AttributeInfo.EnumAttributeType.Any, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.REGEXP, 0x2222222222l, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x3333333333l);
 	}
 
 	@Override
@@ -168,14 +168,13 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
 		return bRet;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RegExp
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RegExp ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RegExp
 	 *
@@ -196,9 +195,9 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
 		return getAttribute(AttributeName.REGEXP, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ValueList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ValueList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ValueList
 	 *
@@ -222,14 +221,13 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateBasicPreflightTest
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest the element
 	 */
@@ -251,7 +249,7 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
 
 	/**
 	 * Get all BasicPreflightTest from the current element
-	 *
+	 * 
 	 * @return Collection<JDFBasicPreflightTest>, null if none are available
 	 */
 	public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()

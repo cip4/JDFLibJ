@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoLZWParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLZWParams extends JDFElement
@@ -91,8 +91,8 @@ public abstract class JDFAutoLZWParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.EARLYCHANGE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREDICTOR, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.EARLYCHANGE, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREDICTOR, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "1");
 	}
 
 	@Override
@@ -137,14 +137,13 @@ public abstract class JDFAutoLZWParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EarlyChange
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EarlyChange ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute EarlyChange
 	 *
@@ -165,9 +164,9 @@ public abstract class JDFAutoLZWParams extends JDFElement
 		return getIntAttribute(AttributeName.EARLYCHANGE, null, 1);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Predictor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Predictor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Predictor
 	 *

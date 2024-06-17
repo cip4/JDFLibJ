@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
  *****************************************************************************
  * class JDFAutoDigitalDeliveryParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
@@ -102,9 +102,10 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DIGITALDELIVERYDIRECTION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumDigitalDeliveryDirection.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DIGITALDELIVERYPROTOCOL, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.METHOD, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DIGITALDELIVERYDIRECTION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumDigitalDeliveryDirection.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DIGITALDELIVERYPROTOCOL, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.METHOD, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -116,7 +117,7 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x3333333311l);
 	}
 
 	@Override
@@ -191,7 +192,7 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDigitalDeliveryDirection(String name)
+		protected EnumDigitalDeliveryDirection(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -244,14 +245,14 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 		public static final EnumDigitalDeliveryDirection Pull = new EnumDigitalDeliveryDirection("Pull");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DigitalDeliveryDirection
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DigitalDeliveryDirection
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DigitalDeliveryDirection
 	 *
@@ -272,9 +273,10 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 		return EnumDigitalDeliveryDirection.getEnum(getAttribute(AttributeName.DIGITALDELIVERYDIRECTION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DigitalDeliveryProtocol
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DigitalDeliveryProtocol
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DigitalDeliveryProtocol
 	 *
@@ -295,9 +297,9 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 		return getAttribute(AttributeName.DIGITALDELIVERYPROTOCOL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Method
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Method ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Method
 	 *
@@ -318,14 +320,13 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 		return getAttribute(AttributeName.METHOD, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -347,7 +348,7 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoBendingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBendingParams extends JDFResource
@@ -92,9 +92,9 @@ public abstract class JDFAutoBendingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BEND, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PUNCH, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PUNCHTYPE, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BEND, 0x3333333111l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PUNCH, 0x3333333111l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PUNCHTYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -159,14 +159,13 @@ public abstract class JDFAutoBendingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Bend
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Bend ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Bend
 	 *
@@ -187,9 +186,9 @@ public abstract class JDFAutoBendingParams extends JDFResource
 		return getBoolAttribute(AttributeName.BEND, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Punch
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Punch ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Punch
 	 *
@@ -210,9 +209,9 @@ public abstract class JDFAutoBendingParams extends JDFResource
 		return getBoolAttribute(AttributeName.PUNCH, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PunchType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PunchType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PunchType
 	 *

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.span.JDFSpanMethod;
  *****************************************************************************
  * class JDFAutoInsert : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoInsert extends JDFElement
@@ -102,10 +102,10 @@ public abstract class JDFAutoInsert extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLIO, 0x22222222, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETOFFSET, 0x44444443, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x33333333, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.WRAPPAGES, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLIO, 0x2222222222l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETOFFSET, 0x4444444443l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x3333333333l, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.WRAPPAGES, 0x3333333331l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 	}
 
 	@Override
@@ -117,9 +117,9 @@ public abstract class JDFAutoInsert extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUETYPE, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.METHOD, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.GLUELINE, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUETYPE, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.METHOD, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.GLUELINE, 0x3333333331l);
 	}
 
 	@Override
@@ -164,14 +164,13 @@ public abstract class JDFAutoInsert extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Folio
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Folio ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Folio
 	 *
@@ -194,9 +193,9 @@ public abstract class JDFAutoInsert extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetOffset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SheetOffset
 	 *
@@ -219,9 +218,10 @@ public abstract class JDFAutoInsert extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Transformation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Transformation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Transformation
 	 *
@@ -244,9 +244,9 @@ public abstract class JDFAutoInsert extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WrapPages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WrapPages ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WrapPages
 	 *
@@ -269,9 +269,8 @@ public abstract class JDFAutoInsert extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -286,7 +285,7 @@ public abstract class JDFAutoInsert extends JDFElement
 
 	/**
 	 * (25) getCreateGlueType
-	 *
+	 * 
 	 * @return JDFSpanGlueType the element
 	 */
 	public JDFSpanGlueType getCreateGlueType()
@@ -316,7 +315,7 @@ public abstract class JDFAutoInsert extends JDFElement
 
 	/**
 	 * (25) getCreateMethod
-	 *
+	 * 
 	 * @return JDFSpanMethod the element
 	 */
 	public JDFSpanMethod getCreateMethod()
@@ -336,7 +335,7 @@ public abstract class JDFAutoInsert extends JDFElement
 
 	/**
 	 * (26) getCreateGlueLine
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
@@ -358,7 +357,7 @@ public abstract class JDFAutoInsert extends JDFElement
 
 	/**
 	 * Get all GlueLine from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGlueLine>, null if none are available
 	 */
 	public Collection<JDFGlueLine> getAllGlueLine()

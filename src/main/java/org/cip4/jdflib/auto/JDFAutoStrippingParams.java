@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -100,7 +100,7 @@ import org.cip4.jdflib.resource.process.JDFStripMark;
  *****************************************************************************
  * class JDFAutoStrippingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStrippingParams extends JDFResource
@@ -108,21 +108,22 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x44444311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.AUTOMATED, 0x33311111, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.GANGELEMENTID, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.INNERMOSTSHINGLING, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.OUTERMOSTSHINGLING, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.SECTIONLIST, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.SHEETNAMEFORMAT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.SHEETNAMETEMPLATE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.STACKDEPTH, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.WORKSTYLE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x4444444311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.AUTOMATED, 0x3333311111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.GANGELEMENTID, 0x3333311111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.INNERMOSTSHINGLING, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.OUTERMOSTSHINGLING, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SECTIONLIST, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3331111111l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.SHEETNAMEFORMAT, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.SHEETNAMETEMPLATE, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.STACKDEPTH, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.WORKSTYLE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0), null);
 	}
 
 	@Override
@@ -134,14 +135,14 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDERYSIGNATURE, 0x66666611);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x33333311);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.EXTERNALIMPOSITIONTEMPLATE, 0x66666611);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.FITPOLICY, 0x33333311);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.MEDIA, 0x33333311);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.POSITION, 0x33333311);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.STRIPCELLPARAMS, 0x66666611);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.STRIPMARK, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDERYSIGNATURE, 0x6666666611l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x3333333311l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.EXTERNALIMPOSITIONTEMPLATE, 0x6666666611l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.FITPOLICY, 0x3333333311l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.MEDIA, 0x3333333311l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.POSITION, 0x3333333311l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.STRIPCELLPARAMS, 0x6666666611l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.STRIPMARK, 0x3333333311l);
 	}
 
 	@Override
@@ -207,6 +208,71 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	}
 
 	/**
+	 * Enumeration strings for SheetLay
+	 */
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumSheetLay extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		protected EnumSheetLay(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumSheetLay getEnum(String enumName)
+		{
+			return (EnumSheetLay) getEnum(EnumSheetLay.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumSheetLay getEnum(int enumValue)
+		{
+			return (EnumSheetLay) getEnum(EnumSheetLay.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSheetLay.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSheetLay.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumSheetLay.class);
+		}
+
+		/**  */
+		public static final EnumSheetLay Left = new EnumSheetLay("Left");
+		/**  */
+		public static final EnumSheetLay Right = new EnumSheetLay("Right");
+		/**  */
+		public static final EnumSheetLay Center = new EnumSheetLay("Center");
+	}
+
+	/**
 	 * Enumeration strings for WorkStyle
 	 */
 
@@ -216,7 +282,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumWorkStyle(String name)
+		protected EnumWorkStyle(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -277,14 +343,13 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		public static final EnumWorkStyle WorkAndTwist = new EnumWorkStyle("WorkAndTwist");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AssemblyID
 	 *
@@ -305,9 +370,9 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return getAttribute(AttributeName.ASSEMBLYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyIDs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AssemblyIDs
 	 *
@@ -331,9 +396,9 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Automated
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Automated ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Automated
 	 *
@@ -354,9 +419,10 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return getBoolAttribute(AttributeName.AUTOMATED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GangElementID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GangElementID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GangElementID
 	 *
@@ -377,9 +443,10 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return getAttribute(AttributeName.GANGELEMENTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute InnermostShingling
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InnermostShingling
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute InnermostShingling
 	 *
@@ -400,9 +467,9 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return getRealAttribute(AttributeName.INNERMOSTSHINGLING, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobID
 	 *
@@ -423,9 +490,10 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OutermostShingling
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OutermostShingling
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OutermostShingling
 	 *
@@ -446,9 +514,9 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return getRealAttribute(AttributeName.OUTERMOSTSHINGLING, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SectionList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SectionList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SectionList
 	 *
@@ -471,9 +539,33 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetNameFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SheetLay
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 */
+	public void setSheetLay(EnumSheetLay enumVar)
+	{
+		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	 * (9) get attribute SheetLay
+	 *
+	 * @return the value of the attribute
+	 */
+	public EnumSheetLay getSheetLay()
+	{
+		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetNameFormat
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SheetNameFormat
 	 *
@@ -494,9 +586,10 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return getAttribute(AttributeName.SHEETNAMEFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetNameTemplate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetNameTemplate
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SheetNameTemplate
 	 *
@@ -517,9 +610,9 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return getAttribute(AttributeName.SHEETNAMETEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StackDepth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StackDepth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StackDepth
 	 *
@@ -540,9 +633,9 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return getIntAttribute(AttributeName.STACKDEPTH, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WorkStyle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkStyle ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute WorkStyle
 	 *
@@ -563,9 +656,8 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return EnumWorkStyle.getEnum(getAttribute(AttributeName.WORKSTYLE, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -580,7 +672,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (25) getCreateBinderySignature
-	 *
+	 * 
 	 * @return JDFBinderySignature the element
 	 */
 	public JDFBinderySignature getCreateBinderySignature()
@@ -610,7 +702,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (26) getCreateDevice
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
 	 */
@@ -632,7 +724,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * Get all Device from the current element
-	 *
+	 * 
 	 * @return Collection<JDFDevice>, null if none are available
 	 */
 	public Collection<JDFDevice> getAllDevice()
@@ -672,7 +764,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (25) getCreateExternalImpositionTemplate
-	 *
+	 * 
 	 * @return JDFExternalImpositionTemplate the element
 	 */
 	public JDFExternalImpositionTemplate getCreateExternalImpositionTemplate()
@@ -702,7 +794,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (26) getCreateFitPolicy
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFFitPolicy the element
 	 */
@@ -724,7 +816,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * Get all FitPolicy from the current element
-	 *
+	 * 
 	 * @return Collection<JDFFitPolicy>, null if none are available
 	 */
 	public Collection<JDFFitPolicy> getAllFitPolicy()
@@ -744,7 +836,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (26) getCreateMedia
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMedia the element
 	 */
@@ -766,7 +858,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * Get all Media from the current element
-	 *
+	 * 
 	 * @return Collection<JDFMedia>, null if none are available
 	 */
 	public Collection<JDFMedia> getAllMedia()
@@ -796,7 +888,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (26) getCreatePosition
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPosition the element
 	 */
@@ -818,7 +910,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * Get all Position from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPosition>, null if none are available
 	 */
 	public Collection<JDFPosition> getAllPosition()
@@ -848,7 +940,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (25) getCreateStripCellParams
-	 *
+	 * 
 	 * @return JDFStripCellParams the element
 	 */
 	public JDFStripCellParams getCreateStripCellParams()
@@ -868,7 +960,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (26) getCreateStripMark
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFStripMark the element
 	 */
@@ -890,7 +982,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * Get all StripMark from the current element
-	 *
+	 * 
 	 * @return Collection<JDFStripMark>, null if none are available
 	 */
 	public Collection<JDFStripMark> getAllStripMark()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoChangedPath : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoChangedPath extends JDFElement
@@ -97,10 +97,10 @@ public abstract class JDFAutoChangedPath extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PATH, 0x22222222, AttributeInfo.EnumAttributeType.XPath, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MODIFICATION, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumModification.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.OLDVALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.NEWVALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PATH, 0x2222222222l, AttributeInfo.EnumAttributeType.XPath, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MODIFICATION, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumModification.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.OLDVALUE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.NEWVALUE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -155,7 +155,7 @@ public abstract class JDFAutoChangedPath extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumModification(String name)
+		protected EnumModification(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -210,14 +210,13 @@ public abstract class JDFAutoChangedPath extends JDFElement
 		public static final EnumModification Modify = new EnumModification("Modify");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Path
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Path ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Path
 	 *
@@ -238,9 +237,10 @@ public abstract class JDFAutoChangedPath extends JDFElement
 		return getAttribute(AttributeName.PATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Modification
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Modification
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Modification
 	 *
@@ -261,9 +261,9 @@ public abstract class JDFAutoChangedPath extends JDFElement
 		return EnumModification.getEnum(getAttribute(AttributeName.MODIFICATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OldValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OldValue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OldValue
 	 *
@@ -284,9 +284,9 @@ public abstract class JDFAutoChangedPath extends JDFElement
 		return getAttribute(AttributeName.OLDVALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NewValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NewValue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NewValue
 	 *

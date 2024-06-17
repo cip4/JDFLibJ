@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.node.JDFNode.EnumActivation;
  *****************************************************************************
  * class JDFAutoModifyNodeCmdParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
@@ -99,9 +99,9 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x2222222111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x2222222111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.NEWCOMMENT, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.NEWCOMMENT, 0x3333333111l);
 	}
 
 	@Override
@@ -158,14 +158,13 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Activation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Activation
 	 *
@@ -186,9 +185,9 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobID
 	 *
@@ -209,9 +208,9 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobPartID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobPartID
 	 *
@@ -232,14 +231,13 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateNewComment
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFNewComment the element
 	 */
@@ -261,7 +259,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 
 	/**
 	 * Get all NewComment from the current element
-	 *
+	 * 
 	 * @return Collection<JDFNewComment>, null if none are available
 	 */
 	public Collection<JDFNewComment> getAllNewComment()

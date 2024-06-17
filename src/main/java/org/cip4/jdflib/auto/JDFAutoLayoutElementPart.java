@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorCorrectionParams;
  *****************************************************************************
  * class JDFAutoLayoutElementPart : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLayoutElementPart extends JDFElement
@@ -103,7 +103,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x33331111, AttributeInfo.EnumAttributeType.ID, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x3333331111l, AttributeInfo.EnumAttributeType.ID, null, null);
 	}
 
 	@Override
@@ -115,12 +115,12 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODEPRODUCTIONPARAMS, 0x66666111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORCORRECTIONPARAMS, 0x33333111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x33333111);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.IMAGEENHANCEMENTPARAMS, 0x33333111);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.LAYOUTELEMENT, 0x66666111);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.POSITIONOBJ, 0x66666111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODEPRODUCTIONPARAMS, 0x6666666111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORCORRECTIONPARAMS, 0x3333333111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x3333333111l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.IMAGEENHANCEMENTPARAMS, 0x3333333111l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.LAYOUTELEMENT, 0x6666666111l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.POSITIONOBJ, 0x6666666111l);
 	}
 
 	@Override
@@ -165,14 +165,13 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ID
 	 *
@@ -195,9 +194,8 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -212,7 +210,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (25) getCreateBarcodeProductionParams
-	 *
+	 * 
 	 * @return JDFBarcodeProductionParams the element
 	 */
 	public JDFBarcodeProductionParams getCreateBarcodeProductionParams()
@@ -232,7 +230,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (26) getCreateColorCorrectionParams
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorCorrectionParams the element
 	 */
@@ -254,7 +252,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * Get all ColorCorrectionParams from the current element
-	 *
+	 * 
 	 * @return Collection<JDFColorCorrectionParams>, null if none are available
 	 */
 	public Collection<JDFColorCorrectionParams> getAllColorCorrectionParams()
@@ -284,7 +282,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (26) getCreateImageCompressionParams
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFImageCompressionParams the element
 	 */
@@ -306,7 +304,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * Get all ImageCompressionParams from the current element
-	 *
+	 * 
 	 * @return Collection<JDFImageCompressionParams>, null if none are available
 	 */
 	public Collection<JDFImageCompressionParams> getAllImageCompressionParams()
@@ -336,7 +334,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (26) getCreateImageEnhancementParams
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFImageEnhancementParams the element
 	 */
@@ -358,7 +356,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * Get all ImageEnhancementParams from the current element
-	 *
+	 * 
 	 * @return Collection<JDFImageEnhancementParams>, null if none are available
 	 */
 	public Collection<JDFImageEnhancementParams> getAllImageEnhancementParams()
@@ -398,7 +396,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (25) getCreateLayoutElement
-	 *
+	 * 
 	 * @return JDFLayoutElement the element
 	 */
 	public JDFLayoutElement getCreateLayoutElement()
@@ -438,7 +436,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
 	/**
 	 * (25) getCreatePositionObj
-	 *
+	 * 
 	 * @return JDFPositionObj the element
 	 */
 	public JDFPositionObj getCreatePositionObj()

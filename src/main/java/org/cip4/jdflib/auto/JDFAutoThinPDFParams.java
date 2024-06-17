@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoThinPDFParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoThinPDFParams extends JDFElement
@@ -91,10 +91,10 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FILEPERPAGE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SIDELINEEPS, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SIDELINEFONTS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SIDELINEIMAGES, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FILEPERPAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SIDELINEEPS, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SIDELINEFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SIDELINEIMAGES, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 	}
 
 	@Override
@@ -139,14 +139,13 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FilePerPage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FilePerPage ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FilePerPage
 	 *
@@ -167,9 +166,9 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 		return getBoolAttribute(AttributeName.FILEPERPAGE, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SidelineEPS
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SidelineEPS ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SidelineEPS
 	 *
@@ -190,9 +189,10 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 		return getBoolAttribute(AttributeName.SIDELINEEPS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SidelineFonts
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SidelineFonts
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SidelineFonts
 	 *
@@ -213,9 +213,10 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 		return getBoolAttribute(AttributeName.SIDELINEFONTS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SidelineImages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SidelineImages
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SidelineImages
 	 *

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.span.JDFSpanTemperature;
  *****************************************************************************
  * class JDFAutoLaminatingIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
@@ -96,11 +96,11 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.LAMINATED, 0x77777776);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.TEMPERATURE, 0x55555555);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.SURFACE, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.TEXTURE, 0x66666111);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.THICKNESS, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LAMINATED, 0x7777777776l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.TEMPERATURE, 0x5555555555l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.SURFACE, 0x6666666666l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.TEXTURE, 0x6666666111l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.THICKNESS, 0x6666666666l);
 	}
 
 	@Override
@@ -145,9 +145,8 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -162,7 +161,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateLaminated
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateLaminated()
@@ -192,7 +191,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateTemperature
-	 *
+	 * 
 	 * @return JDFSpanTemperature the element
 	 */
 	public JDFSpanTemperature getCreateTemperature()
@@ -222,7 +221,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateSurface
-	 *
+	 * 
 	 * @return JDFSpanSurface the element
 	 */
 	public JDFSpanSurface getCreateSurface()
@@ -252,7 +251,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateTexture
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateTexture()
@@ -282,7 +281,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateThickness
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateThickness()

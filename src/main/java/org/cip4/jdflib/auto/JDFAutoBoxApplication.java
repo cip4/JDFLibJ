@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
  *****************************************************************************
  * class JDFAutoBoxApplication : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBoxApplication extends JDFElement
@@ -99,7 +99,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.APPLICATIONAREA, 0x44443111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.APPLICATIONAREA, 0x4444443111l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 	}
 
 	@Override
@@ -111,8 +111,8 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x33333111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x3333333111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x3333333111l);
 	}
 
 	@Override
@@ -157,14 +157,14 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ApplicationArea
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ApplicationArea
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ApplicationArea
 	 *
@@ -187,14 +187,13 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateComponent
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFComponent the element
 	 */
@@ -216,7 +215,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 
 	/**
 	 * Get all Component from the current element
-	 *
+	 * 
 	 * @return Collection<JDFComponent>, null if none are available
 	 */
 	public Collection<JDFComponent> getAllComponent()
@@ -246,7 +245,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 
 	/**
 	 * (26) getCreateGlueLine
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
@@ -268,7 +267,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 
 	/**
 	 * Get all GlueLine from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGlueLine>, null if none are available
 	 */
 	public Collection<JDFGlueLine> getAllGlueLine()

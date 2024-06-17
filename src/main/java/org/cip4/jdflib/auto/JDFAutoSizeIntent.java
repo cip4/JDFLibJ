@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.span.JDFXYPairSpan;
  *****************************************************************************
  * class JDFAutoSizeIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoSizeIntent extends JDFIntentResource
@@ -101,7 +101,7 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TYPE, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), "Folded");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TYPE, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), "Folded");
 	}
 
 	@Override
@@ -113,8 +113,8 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DIMENSIONS, 0x77777775);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PAGES, 0x77777776);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DIMENSIONS, 0x7777777775l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PAGES, 0x7777777776l);
 	}
 
 	@Override
@@ -169,7 +169,7 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumType(String name)
+		protected EnumType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -222,14 +222,13 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 		public static final EnumType Flat = new EnumType("Flat");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Type
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Type
 	 *
@@ -250,9 +249,8 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 		return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, "Folded"));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -267,7 +265,7 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateDimensions
-	 *
+	 * 
 	 * @return JDFXYPairSpan the element
 	 */
 	public JDFXYPairSpan getCreateDimensions()
@@ -297,7 +295,7 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreatePages
-	 *
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCreatePages()

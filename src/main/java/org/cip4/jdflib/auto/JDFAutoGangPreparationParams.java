@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.JDFDisjointing;
  *****************************************************************************
  * class JDFAutoGangPreparationParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoGangPreparationParams extends JDFResource
@@ -99,8 +99,8 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.GANGNAME, 0x31111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBIDS, 0x31111111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.GANGNAME, 0x3331111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBIDS, 0x3331111111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DISJOINTING, 0x31111111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DISJOINTING, 0x3331111111l);
 	}
 
 	@Override
@@ -177,14 +177,13 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GangName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GangName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GangName
 	 *
@@ -205,9 +204,9 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 		return getAttribute(AttributeName.GANGNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobIDs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobIDs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobIDs
 	 *
@@ -231,14 +230,13 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateDisjointing
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDisjointing the element
 	 */
@@ -260,7 +258,7 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 
 	/**
 	 * Get all Disjointing from the current element
-	 *
+	 * 
 	 * @return Collection<JDFDisjointing>, null if none are available
 	 */
 	public Collection<JDFDisjointing> getAllDisjointing()

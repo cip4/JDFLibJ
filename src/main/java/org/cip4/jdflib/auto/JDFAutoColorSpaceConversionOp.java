@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -106,19 +106,19 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLACKPOINTCOMPENSATION, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BLACKPOINTCOMPENSATIONDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PRESERVEBLACK, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.RENDERINGINTENT, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumRenderingIntent.getEnum(0),
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLACKPOINTCOMPENSATION, 0x3311111111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BLACKPOINTCOMPENSATIONDETAILS, 0x3311111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PRESERVEBLACK, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.RENDERINGINTENT, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumRenderingIntent.getEnum(0),
 				"ColorSpaceDependent");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.RGBGRAY2BLACK, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.RGBGRAY2BLACKTHRESHOLD, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, "1");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.IGNOREEMBEDDEDICC, 0x44443333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.OPERATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumOperation.getEnum(0), null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.SOURCECS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSourceCS.getEnum(0), null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.SOURCERENDERINGINTENT, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumSourceRenderingIntent.getEnum(0),
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.RGBGRAY2BLACK, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.RGBGRAY2BLACKTHRESHOLD, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, "1");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.IGNOREEMBEDDEDICC, 0x4444443333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.OPERATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumOperation.getEnum(0), null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.SOURCECS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSourceCS.getEnum(0), null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.SOURCERENDERINGINTENT, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumSourceRenderingIntent.getEnum(0),
 				null);
 	}
 
@@ -131,9 +131,9 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICENSPACE, 0x66666611);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICENSPACE, 0x6666666611l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x3333333311l);
 	}
 
 	@Override
@@ -144,7 +144,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoColorSpaceConversionOp
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -155,7 +155,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoColorSpaceConversionOp
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -167,7 +167,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoColorSpaceConversionOp
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -561,7 +561,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	/**
 	 * (36) set attribute BlackPointCompensation
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBlackPointCompensation(boolean value)
@@ -571,7 +571,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (18) get boolean attribute BlackPointCompensation
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getBlackPointCompensation()
@@ -585,7 +585,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	/**
 	 * (36) set attribute BlackPointCompensationDetails
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setBlackPointCompensationDetails(String value)
@@ -595,7 +595,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (23) get String attribute BlackPointCompensationDetails
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getBlackPointCompensationDetails()
@@ -609,7 +609,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	/**
 	 * (36) set attribute PreserveBlack
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setPreserveBlack(boolean value)
@@ -619,7 +619,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (18) get boolean attribute PreserveBlack
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getPreserveBlack()
@@ -633,7 +633,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	/**
 	 * (5) set attribute RenderingIntent
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setRenderingIntent(EnumRenderingIntent enumVar)
@@ -643,7 +643,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (9) get attribute RenderingIntent
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumRenderingIntent getRenderingIntent()
@@ -657,7 +657,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	/**
 	 * (36) set attribute RGBGray2Black
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRGBGray2Black(boolean value)
@@ -667,7 +667,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (18) get boolean attribute RGBGray2Black
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getRGBGray2Black()
@@ -681,7 +681,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	/**
 	 * (36) set attribute RGBGray2BlackThreshold
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRGBGray2BlackThreshold(double value)
@@ -691,7 +691,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (17) get double attribute RGBGray2BlackThreshold
-	 * 
+	 *
 	 * @return double the value of the attribute
 	 */
 	public double getRGBGray2BlackThreshold()
@@ -705,7 +705,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	/**
 	 * (5.2) set attribute SourceObjects
-	 * 
+	 *
 	 * @param v vector of the enumeration values
 	 */
 	public void setSourceObjects(Vector<? extends ValuedEnum> v)
@@ -715,7 +715,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (9.2) get SourceObjects attribute SourceObjects
-	 * 
+	 *
 	 * @return Vector of the enumerations
 	 */
 	public Vector<? extends ValuedEnum> getSourceObjects()
@@ -729,7 +729,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	/**
 	 * (36) set attribute IgnoreEmbeddedICC
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setIgnoreEmbeddedICC(boolean value)
@@ -739,7 +739,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (18) get boolean attribute IgnoreEmbeddedICC
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 */
 	public boolean getIgnoreEmbeddedICC()
@@ -752,7 +752,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	/**
 	 * (36) set attribute ObjectTags
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setObjectTags(VString value)
@@ -762,13 +762,13 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (21) get VString attribute ObjectTags
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getObjectTags()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -778,7 +778,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	/**
 	 * (5) set attribute Operation
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setOperation(EnumOperation enumVar)
@@ -788,7 +788,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (9) get attribute Operation
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumOperation getOperation()
@@ -801,7 +801,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	/**
 	 * (5) set attribute SourceCS
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setSourceCS(EnumSourceCS enumVar)
@@ -811,7 +811,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (9) get attribute SourceCS
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumSourceCS getSourceCS()
@@ -825,7 +825,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	/**
 	 * (5) set attribute SourceRenderingIntent
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	public void setSourceRenderingIntent(EnumSourceRenderingIntent enumVar)
@@ -835,7 +835,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (9) get attribute SourceRenderingIntent
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumSourceRenderingIntent getSourceRenderingIntent()
@@ -849,7 +849,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (24) const get element DeviceNSpace
-	 * 
+	 *
 	 * @return JDFDeviceNSpace the element
 	 */
 	public JDFDeviceNSpace getDeviceNSpace()
@@ -869,7 +869,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (29) append element DeviceNSpace
-	 * 
+	 *
 	 * @return JDFDeviceNSpace the element @ if the element already exists
 	 */
 	public JDFDeviceNSpace appendDeviceNSpace()
@@ -890,7 +890,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (27) const get element FileSpec
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element default is getFileSpec(0)
 	 */
@@ -911,7 +911,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (30) append element FileSpec
-	 * 
+	 *
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec appendFileSpec()
@@ -921,7 +921,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
 	public void refFileSpec(JDFFileSpec refTarget)
@@ -942,7 +942,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (27) const get element SeparationSpec
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element default is getSeparationSpec(0)
 	 */
@@ -963,7 +963,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (30) append element SeparationSpec
-	 * 
+	 *
 	 * @return JDFSeparationSpec the element
 	 */
 	public JDFSeparationSpec appendSeparationSpec()

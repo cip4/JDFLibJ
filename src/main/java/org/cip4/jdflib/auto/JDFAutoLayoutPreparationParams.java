@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -102,7 +102,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
  *****************************************************************************
  * class JDFAutoLayoutPreparationParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLayoutPreparationParams extends JDFResource
@@ -113,29 +113,30 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[23];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FINISHINGORDER, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumFinishingOrder.getEnum(0), "GatherFold");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.FOLDCATALOGORIENTATION, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumFoldCatalogOrientation.getEnum(0), "Rotate0");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGEDISTRIBUTIONSCHEME, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Sequential");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PAGEORDER, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Reader");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ROTATE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumRotate.getEnum(0), "Rotate0");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SIDES, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), "OneSidedFront");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.BINDINGEDGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumBindingEdge.getEnum(0), null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.BACKMARKLIST, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.CREEPVALUE, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.FOLDCATALOG, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.FRONTMARKLIST, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.GUTTER, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.GUTTERMINIMUMLIMIT, 0x33333111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.HORIZONTALCREEP, 0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.IMPLICITGUTTER, 0x33333111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.IMPLICITGUTTERMINIMUMLIMIT, 0x33333111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.NUMBERUP, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.PRESENTATIONDIRECTION, 0x33333331, AttributeInfo.EnumAttributeType.Any, null, null);
-		atrInfoTable[18] = new AtrInfoTable(AttributeName.STACKDEPTH, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[19] = new AtrInfoTable(AttributeName.STEPDOCS, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[20] = new AtrInfoTable(AttributeName.STEPREPEAT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[21] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x33333331, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[22] = new AtrInfoTable(AttributeName.VERTICALCREEP, 0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FINISHINGORDER, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumFinishingOrder.getEnum(0), "GatherFold");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FOLDCATALOGORIENTATION, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumFoldCatalogOrientation.getEnum(0),
+				"Rotate0");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGEDISTRIBUTIONSCHEME, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Sequential");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PAGEORDER, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Reader");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ROTATE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumRotate.getEnum(0), "Rotate0");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SIDES, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), "OneSidedFront");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.BINDINGEDGE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumBindingEdge.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.BACKMARKLIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.CREEPVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.FOLDCATALOG, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.FRONTMARKLIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.GUTTER, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.GUTTERMINIMUMLIMIT, 0x3333333111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.HORIZONTALCREEP, 0x3333333331l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.IMPLICITGUTTER, 0x3333333111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.IMPLICITGUTTERMINIMUMLIMIT, 0x3333333111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.NUMBERUP, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.PRESENTATIONDIRECTION, 0x3333333331l, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[18] = new AtrInfoTable(AttributeName.STACKDEPTH, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[19] = new AtrInfoTable(AttributeName.STEPDOCS, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[20] = new AtrInfoTable(AttributeName.STEPREPEAT, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[21] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x3333333331l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[22] = new AtrInfoTable(AttributeName.VERTICALCREEP, 0x3333333331l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 	}
 
 	@Override
@@ -147,14 +148,14 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.IMAGESHIFT, 0x66666661);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.INSERTSHEET, 0x33333331);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.DEVICEMARK, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.EXTERNALIMPOSITIONTEMPLATE, 0x66666661);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.FITPOLICY, 0x66666661);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.JOBFIELD, 0x33333331);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.MEDIA, 0x66666661);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.PAGECELL, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.IMAGESHIFT, 0x6666666661l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.INSERTSHEET, 0x3333333331l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.DEVICEMARK, 0x6666666661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.EXTERNALIMPOSITIONTEMPLATE, 0x6666666661l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.FITPOLICY, 0x6666666661l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.JOBFIELD, 0x3333333331l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.MEDIA, 0x6666666661l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.PAGECELL, 0x6666666661l);
 	}
 
 	@Override
@@ -229,7 +230,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumFinishingOrder(String name)
+		protected EnumFinishingOrder(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -296,7 +297,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumFoldCatalogOrientation(String name)
+		protected EnumFoldCatalogOrientation(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -371,7 +372,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumRotate(String name)
+		protected EnumRotate(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -438,7 +439,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSides(String name)
+		protected EnumSides(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -507,7 +508,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBindingEdge(String name)
+		protected EnumBindingEdge(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -566,14 +567,14 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		public static final EnumBindingEdge None = new EnumBindingEdge("None");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FinishingOrder
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FinishingOrder
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute FinishingOrder
 	 *
@@ -594,9 +595,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return EnumFinishingOrder.getEnum(getAttribute(AttributeName.FINISHINGORDER, null, "GatherFold"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FoldCatalogOrientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FoldCatalogOrientation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute FoldCatalogOrientation
 	 *
@@ -617,9 +619,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return EnumFoldCatalogOrientation.getEnum(getAttribute(AttributeName.FOLDCATALOGORIENTATION, null, "Rotate0"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageDistributionScheme
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageDistributionScheme
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PageDistributionScheme
 	 *
@@ -640,9 +643,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return getAttribute(AttributeName.PAGEDISTRIBUTIONSCHEME, null, "Sequential");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageOrder
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageOrder ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PageOrder
 	 *
@@ -663,9 +666,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return getAttribute(AttributeName.PAGEORDER, null, "Reader");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Rotate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Rotate ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Rotate
 	 *
@@ -686,9 +689,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return EnumRotate.getEnum(getAttribute(AttributeName.ROTATE, null, "Rotate0"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Sides
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Sides ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Sides
 	 *
@@ -709,9 +712,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSidedFront"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BindingEdge
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BindingEdge ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute BindingEdge
 	 *
@@ -732,9 +735,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return EnumBindingEdge.getEnum(getAttribute(AttributeName.BINDINGEDGE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BackMarkList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BackMarkList
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BackMarkList
 	 *
@@ -758,9 +762,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CreepValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CreepValue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CreepValue
 	 *
@@ -783,9 +787,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FoldCatalog
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FoldCatalog ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FoldCatalog
 	 *
@@ -806,9 +810,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return getAttribute(AttributeName.FOLDCATALOG, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FrontMarkList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FrontMarkList
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FrontMarkList
 	 *
@@ -832,9 +837,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Gutter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Gutter ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Gutter
 	 *
@@ -857,9 +862,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GutterMinimumLimit
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GutterMinimumLimit
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GutterMinimumLimit
 	 *
@@ -882,9 +888,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HorizontalCreep
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HorizontalCreep
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HorizontalCreep
 	 *
@@ -907,9 +914,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImplicitGutter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImplicitGutter
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ImplicitGutter
 	 *
@@ -932,9 +940,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImplicitGutterMinimumLimit
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImplicitGutterMinimumLimit
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ImplicitGutterMinimumLimit
 	 *
@@ -957,9 +966,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NumberUp
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NumberUp ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NumberUp
 	 *
@@ -982,9 +991,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentationDirection
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentationDirection
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentationDirection
 	 *
@@ -1005,9 +1015,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return getAttribute(AttributeName.PRESENTATIONDIRECTION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StackDepth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StackDepth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StackDepth
 	 *
@@ -1028,9 +1038,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return getIntAttribute(AttributeName.STACKDEPTH, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StepDocs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StepDocs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StepDocs
 	 *
@@ -1053,9 +1063,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StepRepeat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StepRepeat ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StepRepeat
 	 *
@@ -1078,9 +1088,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SurfaceContentsBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SurfaceContentsBox
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SurfaceContentsBox
 	 *
@@ -1103,9 +1114,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute VerticalCreep
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute VerticalCreep
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute VerticalCreep
 	 *
@@ -1128,9 +1140,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -1145,7 +1156,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (25) getCreateImageShift
-	 *
+	 * 
 	 * @return JDFImageShift the element
 	 */
 	public JDFImageShift getCreateImageShift()
@@ -1165,7 +1176,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (26) getCreateInsertSheet
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFInsertSheet the element
 	 */
@@ -1187,7 +1198,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * Get all InsertSheet from the current element
-	 *
+	 * 
 	 * @return Collection<JDFInsertSheet>, null if none are available
 	 */
 	public Collection<JDFInsertSheet> getAllInsertSheet()
@@ -1227,7 +1238,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (25) getCreateDeviceMark
-	 *
+	 * 
 	 * @return JDFDeviceMark the element
 	 */
 	public JDFDeviceMark getCreateDeviceMark()
@@ -1267,7 +1278,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (25) getCreateExternalImpositionTemplate
-	 *
+	 * 
 	 * @return JDFExternalImpositionTemplate the element
 	 */
 	public JDFExternalImpositionTemplate getCreateExternalImpositionTemplate()
@@ -1307,7 +1318,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (25) getCreateFitPolicy
-	 *
+	 * 
 	 * @return JDFFitPolicy the element
 	 */
 	public JDFFitPolicy getCreateFitPolicy()
@@ -1337,7 +1348,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (26) getCreateJobField
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFJobField the element
 	 */
@@ -1359,7 +1370,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * Get all JobField from the current element
-	 *
+	 * 
 	 * @return Collection<JDFJobField>, null if none are available
 	 */
 	public Collection<JDFJobField> getAllJobField()
@@ -1399,7 +1410,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()
@@ -1439,7 +1450,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (25) getCreatePageCell
-	 *
+	 * 
 	 * @return JDFPageCell the element
 	 */
 	public JDFPageCell getCreatePageCell()

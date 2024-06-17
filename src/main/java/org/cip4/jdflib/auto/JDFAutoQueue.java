@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.JDFDevice;
  *****************************************************************************
  * class JDFAutoQueue : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoQueue extends JDFElement
@@ -103,10 +103,10 @@ public abstract class JDFAutoQueue extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumQueueStatus.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXQUEUESIZE, 0x33111111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUESIZE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumQueueStatus.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x2222222222l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXQUEUESIZE, 0x3333111111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUESIZE, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -118,8 +118,8 @@ public abstract class JDFAutoQueue extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.QUEUEENTRY, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.QUEUEENTRY, 0x3333333333l);
 	}
 
 	@Override
@@ -174,7 +174,7 @@ public abstract class JDFAutoQueue extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumQueueStatus(String name)
+		protected EnumQueueStatus(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -235,14 +235,13 @@ public abstract class JDFAutoQueue extends JDFElement
 		public static final EnumQueueStatus Held = new EnumQueueStatus("Held");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Status
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Status ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Status
 	 *
@@ -263,9 +262,9 @@ public abstract class JDFAutoQueue extends JDFElement
 		return EnumQueueStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DeviceID
 	 *
@@ -286,9 +285,10 @@ public abstract class JDFAutoQueue extends JDFElement
 		return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxQueueSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxQueueSize
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxQueueSize
 	 *
@@ -309,9 +309,9 @@ public abstract class JDFAutoQueue extends JDFElement
 		return getIntAttribute(AttributeName.MAXQUEUESIZE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QueueSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QueueSize ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute QueueSize
 	 *
@@ -332,14 +332,13 @@ public abstract class JDFAutoQueue extends JDFElement
 		return getIntAttribute(AttributeName.QUEUESIZE, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateDevice
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
 	 */
@@ -361,7 +360,7 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	/**
 	 * Get all Device from the current element
-	 *
+	 * 
 	 * @return Collection<JDFDevice>, null if none are available
 	 */
 	public Collection<JDFDevice> getAllDevice()
@@ -381,7 +380,7 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	/**
 	 * (26) getCreateQueueEntry
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFQueueEntry the element
 	 */
@@ -403,7 +402,7 @@ public abstract class JDFAutoQueue extends JDFElement
 
 	/**
 	 * Get all QueueEntry from the current element
-	 *
+	 * 
 	 * @return Collection<JDFQueueEntry>, null if none are available
 	 */
 	public Collection<JDFQueueEntry> getAllQueueEntry()

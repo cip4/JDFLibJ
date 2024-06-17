@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.process.JDFBoxToBoxDifference;
  *****************************************************************************
  * class JDFAutoPreflightArgument : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPreflightArgument extends JDFElement
@@ -95,8 +95,8 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BOXARGUMENT, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.BOXTOBOXDIFFERENCE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BOXARGUMENT, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.BOXTOBOXDIFFERENCE, 0x3333333333l);
 	}
 
 	@Override
@@ -141,14 +141,13 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateBoxArgument
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFBoxArgument the element
 	 */
@@ -170,7 +169,7 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 
 	/**
 	 * Get all BoxArgument from the current element
-	 *
+	 * 
 	 * @return Collection<JDFBoxArgument>, null if none are available
 	 */
 	public Collection<JDFBoxArgument> getAllBoxArgument()
@@ -190,7 +189,7 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 
 	/**
 	 * (26) getCreateBoxToBoxDifference
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFBoxToBoxDifference the element
 	 */
@@ -212,7 +211,7 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 
 	/**
 	 * Get all BoxToBoxDifference from the current element
-	 *
+	 * 
 	 * @return Collection<JDFBoxToBoxDifference>, null if none are available
 	 */
 	public Collection<JDFBoxToBoxDifference> getAllBoxToBoxDifference()

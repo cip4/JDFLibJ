@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoMsgFilter : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoMsgFilter extends JDFElement
@@ -103,18 +103,18 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AFTER, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BEFORE, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.COUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.FAMILY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumFamily.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MESSAGEREFID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.MESSAGEID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.MESSAGETYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.RECEIVERURL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AFTER, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BEFORE, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.COUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVICEID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.FAMILY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumFamily.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MESSAGEREFID, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.MESSAGEID, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.MESSAGETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.RECEIVERURL, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x3333333311l);
 	}
 
 	@Override
@@ -181,7 +181,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumFamily(String name)
+		protected EnumFamily(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -238,14 +238,13 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		public static final EnumFamily All = new EnumFamily("All");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute After
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute After ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute After
 	 *
@@ -273,9 +272,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Before
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Before ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute Before
 	 *
@@ -303,9 +302,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Count
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Count ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Count
 	 *
@@ -326,9 +325,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		return getIntAttribute(AttributeName.COUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DeviceID
 	 *
@@ -349,9 +348,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Family
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Family ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Family
 	 *
@@ -372,9 +371,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		return EnumFamily.getEnum(getAttribute(AttributeName.FAMILY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobID
 	 *
@@ -395,9 +394,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobPartID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobPartID
 	 *
@@ -418,9 +417,10 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MessageRefID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MessageRefID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MessageRefID
 	 *
@@ -441,9 +441,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		return getAttribute(AttributeName.MESSAGEREFID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MessageID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MessageID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MessageID
 	 *
@@ -464,9 +464,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		return getAttribute(AttributeName.MESSAGEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MessageType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MessageType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MessageType
 	 *
@@ -487,9 +487,10 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		return getAttribute(AttributeName.MESSAGETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QueueEntryID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute QueueEntryID
 	 *
@@ -510,9 +511,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ReceiverURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ReceiverURL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ReceiverURL
 	 *
@@ -533,14 +534,13 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		return getAttribute(AttributeName.RECEIVERURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -562,7 +562,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()

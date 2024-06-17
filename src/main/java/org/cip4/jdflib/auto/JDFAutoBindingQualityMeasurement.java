@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoBindingQualityMeasurement : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBindingQualityMeasurement extends JDFElement
@@ -91,8 +91,8 @@ public abstract class JDFAutoBindingQualityMeasurement extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FLEXVALUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PULLOUTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FLEXVALUE, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PULLOUTVALUE, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -137,14 +137,13 @@ public abstract class JDFAutoBindingQualityMeasurement extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FlexValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FlexValue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FlexValue
 	 *
@@ -165,9 +164,10 @@ public abstract class JDFAutoBindingQualityMeasurement extends JDFElement
 		return getRealAttribute(AttributeName.FLEXVALUE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PullOutValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PullOutValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PullOutValue
 	 *

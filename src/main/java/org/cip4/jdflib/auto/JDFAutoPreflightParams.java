@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoPreflightParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPreflightParams extends JDFResource
@@ -96,9 +96,9 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIONPOOL, 0x33333311);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x66666611);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.TESTPOOL, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIONPOOL, 0x3333333311l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x6666666611l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.TESTPOOL, 0x6666666611l);
 	}
 
 	@Override
@@ -163,14 +163,13 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateActionPool
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFActionPool the element
 	 */
@@ -192,7 +191,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
 	/**
 	 * Get all ActionPool from the current element
-	 *
+	 * 
 	 * @return Collection<JDFActionPool>, null if none are available
 	 */
 	public Collection<JDFActionPool> getAllActionPool()
@@ -222,7 +221,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()
@@ -262,7 +261,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
 	/**
 	 * (25) getCreateTestPool
-	 *
+	 * 
 	 * @return JDFTestPool the element
 	 */
 	public JDFTestPool getCreateTestPool()

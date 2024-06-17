@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -100,7 +100,7 @@ import org.cip4.jdflib.span.JDFTimeSpan;
  *****************************************************************************
  * class JDFAutoArtDeliveryIntent : public JDFIntentResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
@@ -111,8 +111,9 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREFLIGHTSTATUS, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPreflightStatus.getEnum(0), "NotPerformed");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.RETURNLIST, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, "None");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREFLIGHTSTATUS, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPreflightStatus.getEnum(0),
+				"NotPerformed");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.RETURNLIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, "None");
 	}
 
 	@Override
@@ -124,17 +125,17 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[11];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ARTDELIVERYDATE, 0x66666661);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.ARTDELIVERYDURATION, 0x66666661);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.ARTHANDLING, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.DELIVERYCHARGE, 0x66666661);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.METHOD, 0x66666666);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.RETURNMETHOD, 0x66666661);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.SERVICELEVEL, 0x66666611);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.TRANSFER, 0x66666661);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.ARTDELIVERY, 0x22222222);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.COMPANY, 0x77777776);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ARTDELIVERYDATE, 0x6666666661l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.ARTDELIVERYDURATION, 0x6666666661l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.ARTHANDLING, 0x6666666661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.DELIVERYCHARGE, 0x6666666661l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.METHOD, 0x6666666666l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.RETURNMETHOD, 0x6666666661l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.SERVICELEVEL, 0x6666666611l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.TRANSFER, 0x6666666661l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.ARTDELIVERY, 0x2222222222l);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.COMPANY, 0x7777777776l);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.CONTACT, 0x3333333331l);
 	}
 
 	@Override
@@ -189,7 +190,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPreflightStatus(String name)
+		protected EnumPreflightStatus(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -246,14 +247,14 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 		public static final EnumPreflightStatus WithoutErrors = new EnumPreflightStatus("WithoutErrors");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreflightStatus
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreflightStatus
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PreflightStatus
 	 *
@@ -274,9 +275,9 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 		return EnumPreflightStatus.getEnum(getAttribute(AttributeName.PREFLIGHTSTATUS, null, "NotPerformed"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ReturnList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ReturnList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ReturnList
 	 *
@@ -300,9 +301,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 		return vStrAttrib;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -317,7 +317,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateArtDeliveryDate
-	 *
+	 * 
 	 * @return JDFTimeSpan the element
 	 */
 	public JDFTimeSpan getCreateArtDeliveryDate()
@@ -347,7 +347,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateArtDeliveryDuration
-	 *
+	 * 
 	 * @return JDFDurationSpan the element
 	 */
 	public JDFDurationSpan getCreateArtDeliveryDuration()
@@ -377,7 +377,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateArtHandling
-	 *
+	 * 
 	 * @return JDFSpanArtHandling the element
 	 */
 	public JDFSpanArtHandling getCreateArtHandling()
@@ -407,7 +407,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateDeliveryCharge
-	 *
+	 * 
 	 * @return JDFSpanDeliveryCharge the element
 	 */
 	public JDFSpanDeliveryCharge getCreateDeliveryCharge()
@@ -437,7 +437,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateMethod
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateMethod()
@@ -467,7 +467,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateReturnMethod
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateReturnMethod()
@@ -497,7 +497,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateServiceLevel
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateServiceLevel()
@@ -527,7 +527,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateTransfer
-	 *
+	 * 
 	 * @return JDFSpanTransfer the element
 	 */
 	public JDFSpanTransfer getCreateTransfer()
@@ -547,7 +547,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreateArtDelivery
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFArtDelivery the element
 	 */
@@ -569,7 +569,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * Get all ArtDelivery from the current element
-	 *
+	 * 
 	 * @return Collection<JDFArtDelivery>, null if none are available
 	 */
 	public Collection<JDFArtDelivery> getAllArtDelivery()
@@ -599,7 +599,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateCompany
-	 *
+	 * 
 	 * @return JDFCompany the element
 	 */
 	public JDFCompany getCreateCompany()
@@ -629,7 +629,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -651,7 +651,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()

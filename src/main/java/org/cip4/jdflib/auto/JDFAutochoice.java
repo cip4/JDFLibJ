@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFwhen;
  *****************************************************************************
  * class JDFAutochoice : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutochoice extends JDFElement
@@ -95,8 +95,8 @@ public abstract class JDFAutochoice extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.WHEN, 0x22222211);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.OTHERWISE, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.WHEN, 0x2222222211l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.OTHERWISE, 0x6666666611l);
 	}
 
 	@Override
@@ -141,14 +141,13 @@ public abstract class JDFAutochoice extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatewhen
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFwhen the element
 	 */
@@ -170,7 +169,7 @@ public abstract class JDFAutochoice extends JDFElement
 
 	/**
 	 * Get all when from the current element
-	 *
+	 * 
 	 * @return Collection<JDFwhen>, null if none are available
 	 */
 	public Collection<JDFwhen> getAllwhen()
@@ -200,7 +199,7 @@ public abstract class JDFAutochoice extends JDFElement
 
 	/**
 	 * (25) getCreateotherwise
-	 *
+	 * 
 	 * @return JDFotherwise the element
 	 */
 	public JDFotherwise getCreateotherwise()

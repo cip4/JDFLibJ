@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.JDFShapeDef;
  *****************************************************************************
  * class JDFAutoStation : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStation extends JDFElement
@@ -99,9 +99,9 @@ public abstract class JDFAutoStation extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.STATIONAMOUNT, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, "1");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.STATIONAMOUNT, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.STATIONNAME, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public abstract class JDFAutoStation extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.SHAPEDEF, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SHAPEDEF, 0x3333333111l);
 	}
 
 	@Override
@@ -158,14 +158,13 @@ public abstract class JDFAutoStation extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyIDs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AssemblyIDs
 	 *
@@ -189,9 +188,10 @@ public abstract class JDFAutoStation extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StationAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StationAmount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StationAmount
 	 *
@@ -212,9 +212,9 @@ public abstract class JDFAutoStation extends JDFElement
 		return getIntAttribute(AttributeName.STATIONAMOUNT, null, 1);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StationName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StationName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StationName
 	 *
@@ -235,14 +235,13 @@ public abstract class JDFAutoStation extends JDFElement
 		return getAttribute(AttributeName.STATIONNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateShapeDef
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFShapeDef the element
 	 */
@@ -264,7 +263,7 @@ public abstract class JDFAutoStation extends JDFElement
 
 	/**
 	 * Get all ShapeDef from the current element
-	 *
+	 * 
 	 * @return Collection<JDFShapeDef>, null if none are available
 	 */
 	public Collection<JDFShapeDef> getAllShapeDef()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoHardCoverBinding : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoHardCoverBinding extends JDFElement
@@ -103,27 +103,27 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[21];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BLOCKTHREADSEWING, 0x66666661);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COVERSTYLE, 0x66666661);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.ENDSHEETS, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.HEADBANDS, 0x66666661);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.HEADBANDCOLOR, 0x66666661);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.HEADBANDCOLORDETAILS, 0x33333331);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.JACKET, 0x66666661);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.JACKETFOLDINGWIDTH, 0x66666661);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.JAPANBIND, 0x66666661);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.SPINEBRUSHING, 0x66666661);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.SPINEFIBERROUGHING, 0x66666661);
-		elemInfoTable[11] = new ElemInfoTable(ElementName.SPINEGLUE, 0x66666661);
-		elemInfoTable[12] = new ElemInfoTable(ElementName.SPINELEVELLING, 0x66666661);
-		elemInfoTable[13] = new ElemInfoTable(ElementName.SPINEMILLING, 0x66666661);
-		elemInfoTable[14] = new ElemInfoTable(ElementName.SPINENOTCHING, 0x66666661);
-		elemInfoTable[15] = new ElemInfoTable(ElementName.SPINESANDING, 0x66666661);
-		elemInfoTable[16] = new ElemInfoTable(ElementName.SPINESHREDDING, 0x66666661);
-		elemInfoTable[17] = new ElemInfoTable(ElementName.STRIPMATERIAL, 0x66666661);
-		elemInfoTable[18] = new ElemInfoTable(ElementName.TIGHTBACKING, 0x66666661);
-		elemInfoTable[19] = new ElemInfoTable(ElementName.THICKNESS, 0x66666661);
-		elemInfoTable[20] = new ElemInfoTable(ElementName.REGISTERRIBBON, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BLOCKTHREADSEWING, 0x6666666661l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COVERSTYLE, 0x6666666661l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.ENDSHEETS, 0x6666666661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.HEADBANDS, 0x6666666661l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.HEADBANDCOLOR, 0x6666666661l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.HEADBANDCOLORDETAILS, 0x3333333331l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.JACKET, 0x6666666661l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.JACKETFOLDINGWIDTH, 0x6666666661l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.JAPANBIND, 0x6666666661l);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.SPINEBRUSHING, 0x6666666661l);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.SPINEFIBERROUGHING, 0x6666666661l);
+		elemInfoTable[11] = new ElemInfoTable(ElementName.SPINEGLUE, 0x6666666661l);
+		elemInfoTable[12] = new ElemInfoTable(ElementName.SPINELEVELLING, 0x6666666661l);
+		elemInfoTable[13] = new ElemInfoTable(ElementName.SPINEMILLING, 0x6666666661l);
+		elemInfoTable[14] = new ElemInfoTable(ElementName.SPINENOTCHING, 0x6666666661l);
+		elemInfoTable[15] = new ElemInfoTable(ElementName.SPINESANDING, 0x6666666661l);
+		elemInfoTable[16] = new ElemInfoTable(ElementName.SPINESHREDDING, 0x6666666661l);
+		elemInfoTable[17] = new ElemInfoTable(ElementName.STRIPMATERIAL, 0x6666666661l);
+		elemInfoTable[18] = new ElemInfoTable(ElementName.TIGHTBACKING, 0x6666666661l);
+		elemInfoTable[19] = new ElemInfoTable(ElementName.THICKNESS, 0x6666666661l);
+		elemInfoTable[20] = new ElemInfoTable(ElementName.REGISTERRIBBON, 0x3333333331l);
 	}
 
 	@Override
@@ -168,9 +168,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -185,7 +184,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateBlockThreadSewing
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateBlockThreadSewing()
@@ -215,7 +214,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateCoverStyle
-	 *
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateCoverStyle()
@@ -245,7 +244,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateEndSheets
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateEndSheets()
@@ -275,7 +274,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateHeadBands
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateHeadBands()
@@ -305,7 +304,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateHeadBandColor
-	 *
+	 * 
 	 * @return JDFSpanNamedColor the element
 	 */
 	public JDFSpanNamedColor getCreateHeadBandColor()
@@ -325,7 +324,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (26) getCreateHeadBandColorDetails
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
@@ -347,7 +346,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * Get all HeadBandColorDetails from the current element
-	 *
+	 * 
 	 * @return Collection<JDFStringSpan>, null if none are available
 	 */
 	public Collection<JDFStringSpan> getAllHeadBandColorDetails()
@@ -377,7 +376,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateJacket
-	 *
+	 * 
 	 * @return JDFSpanJacket the element
 	 */
 	public JDFSpanJacket getCreateJacket()
@@ -407,7 +406,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateJacketFoldingWidth
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateJacketFoldingWidth()
@@ -437,7 +436,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateJapanBind
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateJapanBind()
@@ -467,7 +466,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineBrushing
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineBrushing()
@@ -497,7 +496,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineFiberRoughing
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineFiberRoughing()
@@ -527,7 +526,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineGlue
-	 *
+	 * 
 	 * @return JDFSpanGlue the element
 	 */
 	public JDFSpanGlue getCreateSpineGlue()
@@ -557,7 +556,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineLevelling
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineLevelling()
@@ -587,7 +586,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineMilling
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineMilling()
@@ -617,7 +616,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineNotching
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineNotching()
@@ -647,7 +646,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineSanding
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineSanding()
@@ -677,7 +676,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateSpineShredding
-	 *
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateSpineShredding()
@@ -707,7 +706,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateStripMaterial
-	 *
+	 * 
 	 * @return JDFSpanStripMaterial the element
 	 */
 	public JDFSpanStripMaterial getCreateStripMaterial()
@@ -737,7 +736,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateTightBacking
-	 *
+	 * 
 	 * @return JDFSpanTightBacking the element
 	 */
 	public JDFSpanTightBacking getCreateTightBacking()
@@ -767,7 +766,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (25) getCreateThickness
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateThickness()
@@ -787,7 +786,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * (26) getCreateRegisterRibbon
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegisterRibbon the element
 	 */
@@ -809,7 +808,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
 	/**
 	 * Get all RegisterRibbon from the current element
-	 *
+	 * 
 	 * @return Collection<JDFRegisterRibbon>, null if none are available
 	 */
 	public Collection<JDFRegisterRibbon> getAllRegisterRibbon()

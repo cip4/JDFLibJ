@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
  *****************************************************************************
  * class JDFAutoShapeState : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoShapeState extends JDFResource
@@ -101,20 +101,20 @@ public abstract class JDFAutoShapeState extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[14];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.ShapeRangeList, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX, 0x44444431, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN, 0x44444431, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.ALLOWEDX, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.ALLOWEDY, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.ALLOWEDZ, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.ShapeRangeList, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESENTVALUEMAX, 0x44444431, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.PRESENTVALUEMIN, 0x44444431, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRESENTX, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRESENTY, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.PRESENTZ, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x3333333331l, AttributeInfo.EnumAttributeType.ShapeRangeList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX, 0x4444444431l, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN, 0x4444444431l, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ALLOWEDX, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.ALLOWEDY, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.ALLOWEDZ, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x3333333331l, AttributeInfo.EnumAttributeType.ShapeRangeList, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESENTVALUEMAX, 0x4444444431l, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.PRESENTVALUEMIN, 0x4444444431l, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRESENTX, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRESENTY, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.PRESENTZ, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -126,8 +126,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x33333331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUELOC, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUELOC, 0x3333333331l);
 	}
 
 	@Override
@@ -183,14 +183,14 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return bRet;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DefaultValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DefaultValue
 	 *
@@ -213,9 +213,10 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CurrentValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CurrentValue
 	 *
@@ -238,9 +239,10 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedValueList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueList
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedValueList
 	 *
@@ -263,9 +265,10 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedValueMax
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueMax
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedValueMax
 	 *
@@ -288,9 +291,10 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedValueMin
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueMin
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedValueMin
 	 *
@@ -313,9 +317,9 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedX
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedX ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedX
 	 *
@@ -338,9 +342,9 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedY
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedY ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedY
 	 *
@@ -363,9 +367,9 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedZ
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedZ ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedZ
 	 *
@@ -388,9 +392,10 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentValueList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentValueList
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentValueList
 	 *
@@ -413,9 +418,10 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentValueMax
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentValueMax
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentValueMax
 	 *
@@ -438,9 +444,10 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentValueMin
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentValueMin
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentValueMin
 	 *
@@ -463,9 +470,9 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentX
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentX ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentX
 	 *
@@ -488,9 +495,9 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentY
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentY ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentY
 	 *
@@ -513,9 +520,9 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentZ
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentZ ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentZ
 	 *
@@ -538,14 +545,13 @@ public abstract class JDFAutoShapeState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateLoc
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
@@ -567,7 +573,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 
 	/**
 	 * Get all Loc from the current element
-	 *
+	 * 
 	 * @return Collection<JDFLoc>, null if none are available
 	 */
 	public Collection<JDFLoc> getAllLoc()
@@ -587,7 +593,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 
 	/**
 	 * (26) getCreateValueLoc
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFValueLoc the element
 	 */
@@ -609,7 +615,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 
 	/**
 	 * Get all ValueLoc from the current element
-	 *
+	 * 
 	 * @return Collection<JDFValueLoc>, null if none are available
 	 */
 	public Collection<JDFValueLoc> getAllValueLoc()

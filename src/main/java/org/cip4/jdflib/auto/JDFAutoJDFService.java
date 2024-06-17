@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.core.VString;
  *****************************************************************************
  * class JDFAutoJDFService : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoJDFService extends JDFElement
@@ -98,10 +98,10 @@ public abstract class JDFAutoJDFService extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDMETHOD, 0x44444431, AttributeInfo.EnumAttributeType.enumeration, EnumCombinedMethod.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.TYPE, 0x44444422, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPEORDER, 0x44444431, AttributeInfo.EnumAttributeType.enumeration, EnumTypeOrder.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.TYPES, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDMETHOD, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration, EnumCombinedMethod.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TYPE, 0x4444444422l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPEORDER, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration, EnumTypeOrder.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TYPES, 0x4444444433l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
 	@Override
@@ -156,7 +156,7 @@ public abstract class JDFAutoJDFService extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumCombinedMethod(String name)
+		protected EnumCombinedMethod(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -225,7 +225,7 @@ public abstract class JDFAutoJDFService extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumTypeOrder(String name)
+		protected EnumTypeOrder(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -280,14 +280,14 @@ public abstract class JDFAutoJDFService extends JDFElement
 		public static final EnumTypeOrder Unrestricted = new EnumTypeOrder("Unrestricted");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CombinedMethod
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CombinedMethod
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute CombinedMethod
 	 *
@@ -308,9 +308,9 @@ public abstract class JDFAutoJDFService extends JDFElement
 		return EnumCombinedMethod.getEnum(getAttribute(AttributeName.COMBINEDMETHOD, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Type
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Type
 	 *
@@ -331,9 +331,9 @@ public abstract class JDFAutoJDFService extends JDFElement
 		return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TypeOrder
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TypeOrder ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute TypeOrder
 	 *
@@ -354,9 +354,9 @@ public abstract class JDFAutoJDFService extends JDFElement
 		return EnumTypeOrder.getEnum(getAttribute(AttributeName.TYPEORDER, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Types
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Types ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Types
 	 *

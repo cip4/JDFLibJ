@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
  *****************************************************************************
  * class JDFAutoRasterReadingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoRasterReadingParams extends JDFResource
@@ -103,13 +103,13 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MIRRORAROUND, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumMirrorAround.getEnum(0), "None");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.POLARITY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumPolarity.getEnum(0), "Positive");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.POSTER, 0x44433111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.POSTEROVERLAP, 0x44433111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SCALING, 0x33333111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SCALINGORIGIN, 0x33333111, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x3333333111l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MIRRORAROUND, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumMirrorAround.getEnum(0), "None");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.POLARITY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumPolarity.getEnum(0), "Positive");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.POSTER, 0x4444433111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.POSTEROVERLAP, 0x4444433111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SCALING, 0x3333333111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SCALINGORIGIN, 0x3333333111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -121,8 +121,8 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FITPOLICY, 0x66666111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FITPOLICY, 0x6666666111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x3333333111l);
 	}
 
 	@Override
@@ -197,7 +197,7 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMirrorAround(String name)
+		protected EnumMirrorAround(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -264,7 +264,7 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPolarity(String name)
+		protected EnumPolarity(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -317,14 +317,13 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 		public static final EnumPolarity Negative = new EnumPolarity("Negative");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Center
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Center
 	 *
@@ -345,9 +344,10 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 		return getBoolAttribute(AttributeName.CENTER, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MirrorAround
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MirrorAround
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute MirrorAround
 	 *
@@ -368,9 +368,9 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 		return EnumMirrorAround.getEnum(getAttribute(AttributeName.MIRRORAROUND, null, "None"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Polarity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Polarity ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Polarity
 	 *
@@ -391,9 +391,9 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 		return EnumPolarity.getEnum(getAttribute(AttributeName.POLARITY, null, "Positive"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Poster
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Poster ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Poster
 	 *
@@ -416,9 +416,10 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PosterOverlap
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PosterOverlap
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PosterOverlap
 	 *
@@ -441,9 +442,9 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Scaling
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Scaling ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Scaling
 	 *
@@ -466,9 +467,10 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ScalingOrigin
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ScalingOrigin
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ScalingOrigin
 	 *
@@ -491,9 +493,8 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -508,7 +509,7 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 
 	/**
 	 * (25) getCreateFitPolicy
-	 *
+	 * 
 	 * @return JDFFitPolicy the element
 	 */
 	public JDFFitPolicy getCreateFitPolicy()
@@ -538,7 +539,7 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 
 	/**
 	 * (26) getCreateMedia
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMedia the element
 	 */
@@ -560,7 +561,7 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 
 	/**
 	 * Get all Media from the current element
-	 *
+	 * 
 	 * @return Collection<JDFMedia>, null if none are available
 	 */
 	public Collection<JDFMedia> getAllMedia()

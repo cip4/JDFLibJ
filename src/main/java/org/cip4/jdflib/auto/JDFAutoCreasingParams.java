@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFCrease;
  *****************************************************************************
  * class JDFAutoCreasingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCreasingParams extends JDFResource
@@ -94,7 +94,7 @@ public abstract class JDFAutoCreasingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CREASE, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CREASE, 0x3333333331l);
 	}
 
 	@Override
@@ -159,14 +159,13 @@ public abstract class JDFAutoCreasingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateCrease
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCrease the element
 	 */
@@ -188,7 +187,7 @@ public abstract class JDFAutoCreasingParams extends JDFResource
 
 	/**
 	 * Get all Crease from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCrease>, null if none are available
 	 */
 	public Collection<JDFCrease> getAllCrease()

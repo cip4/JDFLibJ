@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,7 +95,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
  *****************************************************************************
  * class JDFAutoElementColorParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoElementColorParams extends JDFResource
@@ -106,8 +106,9 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORMANAGEMENTSYSTEM, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ICCOUTPUTPROFILEUSAGE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumICCOutputProfileUsage.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORMANAGEMENTSYSTEM, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ICCOUTPUTPROFILEUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumICCOutputProfileUsage.getEnum(0),
+				null);
 	}
 
 	@Override
@@ -119,11 +120,11 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.AUTOMATEDOVERPRINTPARAMS, 0x66666611);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORANTALIAS, 0x33333311);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORCORRECTIONOP, 0x33333311);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.COLORSPACECONVERSIONOP, 0x66666611);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.FILESPEC, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.AUTOMATEDOVERPRINTPARAMS, 0x6666666611l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORANTALIAS, 0x3333333311l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORCORRECTIONOP, 0x3333333311l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.COLORSPACECONVERSIONOP, 0x6666666611l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.FILESPEC, 0x3333333311l);
 	}
 
 	@Override
@@ -198,7 +199,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumICCOutputProfileUsage(String name)
+		protected EnumICCOutputProfileUsage(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -253,14 +254,14 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 		public static final EnumICCOutputProfileUsage IgnorePDL = new EnumICCOutputProfileUsage("IgnorePDL");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorManagementSystem
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorManagementSystem
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ColorManagementSystem
 	 *
@@ -281,9 +282,10 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 		return getAttribute(AttributeName.COLORMANAGEMENTSYSTEM, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ICCOutputProfileUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ICCOutputProfileUsage
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ICCOutputProfileUsage
 	 *
@@ -304,9 +306,8 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 		return EnumICCOutputProfileUsage.getEnum(getAttribute(AttributeName.ICCOUTPUTPROFILEUSAGE, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -321,7 +322,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (25) getCreateAutomatedOverPrintParams
-	 *
+	 * 
 	 * @return JDFAutomatedOverPrintParams the element
 	 */
 	public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams()
@@ -351,7 +352,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (26) getCreateColorantAlias
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorantAlias the element
 	 */
@@ -373,7 +374,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * Get all ColorantAlias from the current element
-	 *
+	 * 
 	 * @return Collection<JDFColorantAlias>, null if none are available
 	 */
 	public Collection<JDFColorantAlias> getAllColorantAlias()
@@ -403,7 +404,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (26) getCreateColorCorrectionOp
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorCorrectionOp the element
 	 */
@@ -425,7 +426,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * Get all ColorCorrectionOp from the current element
-	 *
+	 * 
 	 * @return Collection<JDFColorCorrectionOp>, null if none are available
 	 */
 	public Collection<JDFColorCorrectionOp> getAllColorCorrectionOp()
@@ -455,7 +456,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 	/**
 	 * (25) getCreateColorSpaceConversionOp
-	 *
+	 * 
 	 * @return JDFColorSpaceConversionOp the element
 	 */
 	public JDFColorSpaceConversionOp getCreateColorSpaceConversionOp()
@@ -474,33 +475,45 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	}
 
 	/**
-	 * (24) const get element FileSpec
-	 *
+	 * (26) getCreateFileSpec
+	 * 
+	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getFileSpec()
+	public JDFFileSpec getCreateFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**
-	 * (25) getCreateFileSpec
+	 * (27) const get element FileSpec
 	 *
-	 * @return JDFFileSpec the element
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element default is getFileSpec(0)
 	 */
-	public JDFFileSpec getCreateFileSpec()
+	public JDFFileSpec getFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**
-	 * (29) append element FileSpec
+	 * Get all FileSpec from the current element
+	 * 
+	 * @return Collection<JDFFileSpec>, null if none are available
+	 */
+	public Collection<JDFFileSpec> getAllFileSpec()
+	{
+		return getChildArrayByClass(JDFFileSpec.class, false, 0);
+	}
+
+	/**
+	 * (30) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
-		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+		return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
 	}
 
 	/**

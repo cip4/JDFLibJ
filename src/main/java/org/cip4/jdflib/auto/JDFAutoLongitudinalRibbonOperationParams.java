@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.resource.process.JDFLongSlit;
  *****************************************************************************
  * class JDFAutoLongitudinalRibbonOperationParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResource
@@ -97,10 +97,10 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.LONGFOLD, 0x44444443);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.LONGGLUE, 0x44444443);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.LONGPERFORATE, 0x44444443);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.LONGSLIT, 0x44444443);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LONGFOLD, 0x4444444443l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.LONGGLUE, 0x4444444443l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.LONGPERFORATE, 0x4444444443l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.LONGSLIT, 0x4444444443l);
 	}
 
 	@Override
@@ -165,14 +165,13 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateLongFold
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLongFold the element
 	 */
@@ -194,7 +193,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
 	/**
 	 * Get all LongFold from the current element
-	 *
+	 * 
 	 * @return Collection<JDFLongFold>, null if none are available
 	 */
 	public Collection<JDFLongFold> getAllLongFold()
@@ -214,7 +213,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
 	/**
 	 * (26) getCreateLongGlue
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLongGlue the element
 	 */
@@ -236,7 +235,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
 	/**
 	 * Get all LongGlue from the current element
-	 *
+	 * 
 	 * @return Collection<JDFLongGlue>, null if none are available
 	 */
 	public Collection<JDFLongGlue> getAllLongGlue()
@@ -256,7 +255,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
 	/**
 	 * (26) getCreateLongPerforate
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLongPerforate the element
 	 */
@@ -278,7 +277,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
 	/**
 	 * Get all LongPerforate from the current element
-	 *
+	 * 
 	 * @return Collection<JDFLongPerforate>, null if none are available
 	 */
 	public Collection<JDFLongPerforate> getAllLongPerforate()
@@ -298,7 +297,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
 	/**
 	 * (26) getCreateLongSlit
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLongSlit the element
 	 */
@@ -320,7 +319,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
 	/**
 	 * Get all LongSlit from the current element
-	 *
+	 * 
 	 * @return Collection<JDFLongSlit>, null if none are available
 	 */
 	public Collection<JDFLongSlit> getAllLongSlit()

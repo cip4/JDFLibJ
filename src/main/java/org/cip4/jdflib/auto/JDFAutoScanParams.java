@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,7 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -92,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoScanParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoScanParams extends JDFResource
@@ -103,17 +104,17 @@ public abstract class JDFAutoScanParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BITDEPTH, 0x22222222, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MAGNIFICATION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.OUTPUTCOLORSPACE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumOutputColorSpace.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPRESSIONFILTER, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCompressionFilter.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.DCTQUALITY, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.INPUTBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MOUNTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MOUNTING, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMounting.getEnum(0), null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.OUTPUTRESOLUTION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.OUTPUTSIZE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.SPLITDOCUMENTS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BITDEPTH, 0x2222222222l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MAGNIFICATION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.OUTPUTCOLORSPACE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumOutputColorSpace.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPRESSIONFILTER, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCompressionFilter.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.DCTQUALITY, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.INPUTBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MOUNTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MOUNTING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMounting.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.OUTPUTRESOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.OUTPUTSIZE, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.SPLITDOCUMENTS, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -125,7 +126,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x3333333333l);
 	}
 
 	@Override
@@ -200,7 +201,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOutputColorSpace(String name)
+		protected EnumOutputColorSpace(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -267,7 +268,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumCompressionFilter(String name)
+		protected EnumCompressionFilter(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -336,7 +337,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMounting(String name)
+		protected EnumMounting(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -393,14 +394,13 @@ public abstract class JDFAutoScanParams extends JDFResource
 		public static final EnumMounting Registered = new EnumMounting("Registered");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BitDepth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BitDepth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BitDepth
 	 *
@@ -421,9 +421,10 @@ public abstract class JDFAutoScanParams extends JDFResource
 		return getIntAttribute(AttributeName.BITDEPTH, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Magnification
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Magnification
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Magnification
 	 *
@@ -446,9 +447,10 @@ public abstract class JDFAutoScanParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OutputColorSpace
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OutputColorSpace
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute OutputColorSpace
 	 *
@@ -469,9 +471,10 @@ public abstract class JDFAutoScanParams extends JDFResource
 		return EnumOutputColorSpace.getEnum(getAttribute(AttributeName.OUTPUTCOLORSPACE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CompressionFilter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CompressionFilter
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute CompressionFilter
 	 *
@@ -492,9 +495,9 @@ public abstract class JDFAutoScanParams extends JDFResource
 		return EnumCompressionFilter.getEnum(getAttribute(AttributeName.COMPRESSIONFILTER, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DCTQuality
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DCTQuality ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DCTQuality
 	 *
@@ -515,9 +518,9 @@ public abstract class JDFAutoScanParams extends JDFResource
 		return getRealAttribute(AttributeName.DCTQUALITY, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute InputBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InputBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute InputBox
 	 *
@@ -540,9 +543,9 @@ public abstract class JDFAutoScanParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MountID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MountID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MountID
 	 *
@@ -563,9 +566,9 @@ public abstract class JDFAutoScanParams extends JDFResource
 		return getAttribute(AttributeName.MOUNTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Mounting
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Mounting ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Mounting
 	 *
@@ -586,9 +589,10 @@ public abstract class JDFAutoScanParams extends JDFResource
 		return EnumMounting.getEnum(getAttribute(AttributeName.MOUNTING, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OutputResolution
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OutputResolution
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OutputResolution
 	 *
@@ -611,9 +615,9 @@ public abstract class JDFAutoScanParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OutputSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OutputSize ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OutputSize
 	 *
@@ -636,9 +640,10 @@ public abstract class JDFAutoScanParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SplitDocuments
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SplitDocuments
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SplitDocuments
 	 *
@@ -659,39 +664,50 @@ public abstract class JDFAutoScanParams extends JDFResource
 		return getIntAttribute(AttributeName.SPLITDOCUMENTS, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
-	 * (24) const get element FileSpec
-	 *
+	 * (26) getCreateFileSpec
+	 * 
+	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getFileSpec()
+	public JDFFileSpec getCreateFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**
-	 * (25) getCreateFileSpec
+	 * (27) const get element FileSpec
 	 *
-	 * @return JDFFileSpec the element
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element default is getFileSpec(0)
 	 */
-	public JDFFileSpec getCreateFileSpec()
+	public JDFFileSpec getFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**
-	 * (29) append element FileSpec
+	 * Get all FileSpec from the current element
+	 * 
+	 * @return Collection<JDFFileSpec>, null if none are available
+	 */
+	public Collection<JDFFileSpec> getAllFileSpec()
+	{
+		return getChildArrayByClass(JDFFileSpec.class, false, 0);
+	}
+
+	/**
+	 * (30) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
-		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+		return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
 	}
 
 	/**

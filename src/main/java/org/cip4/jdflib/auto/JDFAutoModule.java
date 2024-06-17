@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFModule;
  *****************************************************************************
  * class JDFAutoModule : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoModule extends JDFElement
@@ -98,19 +98,19 @@ public abstract class JDFAutoModule extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICETYPE, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MANUFACTURER, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MANUFACTURERURL, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MODELDESCRIPTION, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODELNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODELNUMBER, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODELURL, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MODULEID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.MODULETYPE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.REVISION, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.SERIALNUMBER, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.SUBMODULEINDEX, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICETYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MANUFACTURER, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MANUFACTURERURL, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MODELDESCRIPTION, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODELNAME, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODELNUMBER, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODELURL, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MODULEID, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.MODULETYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.REVISION, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.SERIALNUMBER, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.SUBMODULEINDEX, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public abstract class JDFAutoModule extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.MODULE, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.MODULE, 0x3333333111l);
 	}
 
 	@Override
@@ -167,14 +167,13 @@ public abstract class JDFAutoModule extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DeviceType
 	 *
@@ -195,9 +194,10 @@ public abstract class JDFAutoModule extends JDFElement
 		return getAttribute(AttributeName.DEVICETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Manufacturer
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Manufacturer
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Manufacturer
 	 *
@@ -218,9 +218,10 @@ public abstract class JDFAutoModule extends JDFElement
 		return getAttribute(AttributeName.MANUFACTURER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ManufacturerURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ManufacturerURL
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ManufacturerURL
 	 *
@@ -241,9 +242,10 @@ public abstract class JDFAutoModule extends JDFElement
 		return getAttribute(AttributeName.MANUFACTURERURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModelDescription
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModelDescription
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModelDescription
 	 *
@@ -264,9 +266,9 @@ public abstract class JDFAutoModule extends JDFElement
 		return getAttribute(AttributeName.MODELDESCRIPTION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModelName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModelName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModelName
 	 *
@@ -287,9 +289,9 @@ public abstract class JDFAutoModule extends JDFElement
 		return getAttribute(AttributeName.MODELNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModelNumber
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModelNumber ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModelNumber
 	 *
@@ -310,9 +312,9 @@ public abstract class JDFAutoModule extends JDFElement
 		return getAttribute(AttributeName.MODELNUMBER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModelURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModelURL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModelURL
 	 *
@@ -333,9 +335,9 @@ public abstract class JDFAutoModule extends JDFElement
 		return getAttribute(AttributeName.MODELURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleID
 	 *
@@ -356,9 +358,9 @@ public abstract class JDFAutoModule extends JDFElement
 		return getAttribute(AttributeName.MODULEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleIndex
 	 *
@@ -379,9 +381,9 @@ public abstract class JDFAutoModule extends JDFElement
 		return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleType
 	 *
@@ -402,9 +404,9 @@ public abstract class JDFAutoModule extends JDFElement
 		return getAttribute(AttributeName.MODULETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Revision
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Revision ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Revision
 	 *
@@ -425,9 +427,10 @@ public abstract class JDFAutoModule extends JDFElement
 		return getAttribute(AttributeName.REVISION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SerialNumber
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SerialNumber
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SerialNumber
 	 *
@@ -448,9 +451,10 @@ public abstract class JDFAutoModule extends JDFElement
 		return getAttribute(AttributeName.SERIALNUMBER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SubModuleIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SubModuleIndex
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SubModuleIndex
 	 *
@@ -471,14 +475,13 @@ public abstract class JDFAutoModule extends JDFElement
 		return getIntAttribute(AttributeName.SUBMODULEINDEX, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateModule
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFModule the element
 	 */
@@ -500,7 +503,7 @@ public abstract class JDFAutoModule extends JDFElement
 
 	/**
 	 * Get all Module from the current element
-	 *
+	 * 
 	 * @return Collection<JDFModule>, null if none are available
 	 */
 	public Collection<JDFModule> getAllModule()

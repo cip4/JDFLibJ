@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
  *****************************************************************************
  * class JDFAutoMediaSource : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoMediaSource extends JDFResource
@@ -102,10 +102,10 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MANUALFEED, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.LEADINGEDGE, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MEDIALOCATION, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHEETLAY, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MANUALFEED, 0x4444444443l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LEADINGEDGE, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MEDIALOCATION, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHEETLAY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
 	}
 
 	@Override
@@ -117,8 +117,8 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.MEDIA, 0x77777776);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COMPONENT, 0x77777776);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.MEDIA, 0x7777777776l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COMPONENT, 0x7777777776l);
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSheetLay(String name)
+		protected EnumSheetLay(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -248,14 +248,13 @@ public abstract class JDFAutoMediaSource extends JDFResource
 		public static final EnumSheetLay Center = new EnumSheetLay("Center");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ManualFeed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ManualFeed ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ManualFeed
 	 *
@@ -276,9 +275,9 @@ public abstract class JDFAutoMediaSource extends JDFResource
 		return getBoolAttribute(AttributeName.MANUALFEED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LeadingEdge
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LeadingEdge ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LeadingEdge
 	 *
@@ -299,9 +298,10 @@ public abstract class JDFAutoMediaSource extends JDFResource
 		return getRealAttribute(AttributeName.LEADINGEDGE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MediaLocation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MediaLocation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MediaLocation
 	 *
@@ -322,9 +322,9 @@ public abstract class JDFAutoMediaSource extends JDFResource
 		return getAttribute(AttributeName.MEDIALOCATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetLay
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SheetLay
 	 *
@@ -345,9 +345,8 @@ public abstract class JDFAutoMediaSource extends JDFResource
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -362,7 +361,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()
@@ -402,7 +401,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
 
 	/**
 	 * (25) getCreateComponent
-	 *
+	 * 
 	 * @return JDFComponent the element
 	 */
 	public JDFComponent getCreateComponent()

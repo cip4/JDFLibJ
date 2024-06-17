@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.core.VString;
  *****************************************************************************
  * class JDFAutoSubmissionMethods : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoSubmissionMethods extends JDFElement
@@ -99,12 +99,12 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FILE, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.HOTFOLDER, 0x44443333, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.HTTPGET, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PACKAGING, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumPackaging.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MIME, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.URLSCHEMES, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FILE, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.HOTFOLDER, 0x4444443333l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.HTTPGET, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PACKAGING, 0x3333333311l, AttributeInfo.EnumAttributeType.enumerations, EnumPackaging.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MIME, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.URLSCHEMES, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
 	@Override
@@ -159,7 +159,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPackaging(String name)
+		protected EnumPackaging(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -212,14 +212,13 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 		public static final EnumPackaging None = new EnumPackaging("None");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute File
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute File ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute File
 	 *
@@ -240,9 +239,9 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 		return getBoolAttribute(AttributeName.FILE, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HotFolder
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HotFolder ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HotFolder
 	 *
@@ -263,9 +262,9 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 		return getAttribute(AttributeName.HOTFOLDER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HttpGet
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HttpGet ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HttpGet
 	 *
@@ -286,9 +285,9 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 		return getBoolAttribute(AttributeName.HTTPGET, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Packaging
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Packaging ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5.2) set attribute Packaging
 	 *
@@ -309,9 +308,9 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 		return getEnumerationsAttribute(AttributeName.PACKAGING, null, EnumPackaging.getEnum(0), false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MIME
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MIME ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MIME
 	 *
@@ -332,9 +331,9 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 		return getBoolAttribute(AttributeName.MIME, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute URLSchemes
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute URLSchemes ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute URLSchemes
 	 *

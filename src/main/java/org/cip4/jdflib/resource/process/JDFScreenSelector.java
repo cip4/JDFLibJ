@@ -81,9 +81,6 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoScreenSelector;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
 import org.w3c.dom.DOMException;
 
 public class JDFScreenSelector extends JDFAutoScreenSelector
@@ -97,7 +94,7 @@ public class JDFScreenSelector extends JDFAutoScreenSelector
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFScreenSelector(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFScreenSelector(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -110,7 +107,7 @@ public class JDFScreenSelector extends JDFAutoScreenSelector
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFScreenSelector(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFScreenSelector(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -124,27 +121,9 @@ public class JDFScreenSelector extends JDFAutoScreenSelector
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFScreenSelector(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFScreenSelector(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	@Override
-	public String toString()
-	{
-		return "JDFScreenSelector[  --> " + super.toString() + " ]";
-	}
-
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-	static
-	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SEPARATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-	}
-
-	@Override
-	protected AttributeInfo getTheAttributeInfo()
-	{
-		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
 }

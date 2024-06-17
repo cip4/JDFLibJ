@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,7 @@ import org.cip4.jdflib.auto.JDFAutoContentMetadata;
  * @author prosirai
  *
  */
-public class JDFContentMetaData extends JDFAutoContentMetadata
+public class JDFContentMetadata extends JDFAutoContentMetadata
 {
 	private static final long serialVersionUID = 1L;
 
@@ -93,7 +93,7 @@ public class JDFContentMetaData extends JDFAutoContentMetadata
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFContentMetaData(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	public JDFContentMetadata(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -105,7 +105,7 @@ public class JDFContentMetaData extends JDFAutoContentMetadata
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFContentMetaData(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	public JDFContentMetadata(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public class JDFContentMetaData extends JDFAutoContentMetadata
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFContentMetaData(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	public JDFContentMetadata(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

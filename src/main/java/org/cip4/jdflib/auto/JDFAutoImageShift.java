@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
  *****************************************************************************
  * class JDFAutoImageShift : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoImageShift extends JDFElement
@@ -97,10 +97,10 @@ public abstract class JDFAutoImageShift extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.POSITIONX, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPositionX.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITIONY, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPositionY.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHIFTBACK, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHIFTFRONT, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.POSITIONX, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPositionX.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITIONY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPositionY.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHIFTBACK, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHIFTFRONT, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
 	}
 
 	@Override
@@ -155,7 +155,7 @@ public abstract class JDFAutoImageShift extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPositionX(String name)
+		protected EnumPositionX(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -224,7 +224,7 @@ public abstract class JDFAutoImageShift extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPositionY(String name)
+		protected EnumPositionY(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -283,14 +283,13 @@ public abstract class JDFAutoImageShift extends JDFElement
 		public static final EnumPositionY None = new EnumPositionY("None");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PositionX
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PositionX ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PositionX
 	 *
@@ -311,9 +310,9 @@ public abstract class JDFAutoImageShift extends JDFElement
 		return EnumPositionX.getEnum(getAttribute(AttributeName.POSITIONX, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PositionY
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PositionY ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PositionY
 	 *
@@ -334,9 +333,9 @@ public abstract class JDFAutoImageShift extends JDFElement
 		return EnumPositionY.getEnum(getAttribute(AttributeName.POSITIONY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShiftBack
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShiftBack ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ShiftBack
 	 *
@@ -359,9 +358,9 @@ public abstract class JDFAutoImageShift extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShiftFront
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShiftFront ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ShiftFront
 	 *

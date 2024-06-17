@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
  *****************************************************************************
  * class JDFAutoTool : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTool extends JDFResource
@@ -96,12 +96,13 @@ public abstract class JDFAutoTool extends JDFResource
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TOOLID, 0x44444331, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.TOOLAMOUNT, 0x44444331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TOOLTYPE, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TOOLID, 0x4444444331l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SERIALNUMBER, 0x3311111111l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TOOLAMOUNT, 0x4444444331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TOOLTYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -113,8 +114,8 @@ public abstract class JDFAutoTool extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x3333333331l);
 	}
 
 	@Override
@@ -179,14 +180,13 @@ public abstract class JDFAutoTool extends JDFResource
 		return JDFResource.EnumResourceClass.Handling;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ToolID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ToolID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ToolID
 	 *
@@ -207,9 +207,33 @@ public abstract class JDFAutoTool extends JDFResource
 		return getAttribute(AttributeName.TOOLID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ToolAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SerialNumber
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute SerialNumber
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setSerialNumber(String value)
+	{
+		setAttribute(AttributeName.SERIALNUMBER, value, null);
+	}
+
+	/**
+	 * (23) get String attribute SerialNumber
+	 *
+	 * @return the value of the attribute
+	 */
+	public String getSerialNumber()
+	{
+		return getAttribute(AttributeName.SERIALNUMBER, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ToolAmount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ToolAmount
 	 *
@@ -230,9 +254,9 @@ public abstract class JDFAutoTool extends JDFResource
 		return getIntAttribute(AttributeName.TOOLAMOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ToolType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ToolType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ToolType
 	 *
@@ -253,14 +277,13 @@ public abstract class JDFAutoTool extends JDFResource
 		return getAttribute(AttributeName.TOOLTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -282,7 +305,7 @@ public abstract class JDFAutoTool extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -313,7 +336,7 @@ public abstract class JDFAutoTool extends JDFResource
 
 	/**
 	 * (26) getCreateIdentificationField
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element
 	 */
@@ -337,7 +360,7 @@ public abstract class JDFAutoTool extends JDFResource
 
 	/**
 	 * Get all IdentificationField from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIdentificationField>, null if none are available
 	 */
 	public Collection<JDFIdentificationField> getAllIdentificationField()

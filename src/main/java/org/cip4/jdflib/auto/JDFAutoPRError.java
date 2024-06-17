@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoPRError : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPRError extends JDFElement
@@ -97,8 +97,8 @@ public abstract class JDFAutoPRError extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORTYPE, 0x22222211, AttributeInfo.EnumAttributeType.enumeration, EnumErrorType.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUE, 0x22222211, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORTYPE, 0x2222222211l, AttributeInfo.EnumAttributeType.enumeration, EnumErrorType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUE, 0x2222222211l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public abstract class JDFAutoPRError extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumErrorType(String name)
+		protected EnumErrorType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -206,14 +206,13 @@ public abstract class JDFAutoPRError extends JDFElement
 		public static final EnumErrorType TestWrongPDL = new EnumErrorType("TestWrongPDL");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ErrorType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ErrorType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ErrorType
 	 *
@@ -234,9 +233,9 @@ public abstract class JDFAutoPRError extends JDFElement
 		return EnumErrorType.getEnum(getAttribute(AttributeName.ERRORTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Value
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Value ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Value
 	 *

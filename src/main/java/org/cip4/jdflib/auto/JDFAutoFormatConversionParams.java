@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.process.JDFTIFFFormatParams;
  *****************************************************************************
  * class JDFAutoFormatConversionParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoFormatConversionParams extends JDFResource
@@ -95,10 +95,10 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x77755551);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.TIFFFORMATPARAMS, 0x77766661);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x77766661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.COLORPOOL, 0x77766661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x7777755551l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.TIFFFORMATPARAMS, 0x7777766661l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x7777766661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.COLORPOOL, 0x7777766661l);
 	}
 
 	@Override
@@ -163,9 +163,8 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -180,7 +179,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()
@@ -220,7 +219,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 
 	/**
 	 * (25) getCreateTIFFFormatParams
-	 *
+	 * 
 	 * @return JDFTIFFFormatParams the element
 	 */
 	public JDFTIFFFormatParams getCreateTIFFFormatParams()
@@ -250,7 +249,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 
 	/**
 	 * (25) getCreateImageCompressionParams
-	 *
+	 * 
 	 * @return JDFImageCompressionParams the element
 	 */
 	public JDFImageCompressionParams getCreateImageCompressionParams()
@@ -290,7 +289,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 
 	/**
 	 * (25) getCreateColorPool
-	 *
+	 * 
 	 * @return JDFColorPool the element
 	 */
 	public JDFColorPool getCreateColorPool()

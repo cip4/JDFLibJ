@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
  *****************************************************************************
  * class JDFAutoAdhesiveBindingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
@@ -100,8 +100,8 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PULLOUTVALUE, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.FLEXVALUE, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PULLOUTVALUE, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FLEXVALUE, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -113,10 +113,10 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.SPINEPREPARATIONPARAMS, 0x44444442);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x44444442);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.SPINETAPINGPARAMS, 0x44444442);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.COVERAPPLICATIONPARAMS, 0x44444442);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SPINEPREPARATIONPARAMS, 0x4444444442l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x4444444442l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.SPINETAPINGPARAMS, 0x4444444442l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.COVERAPPLICATIONPARAMS, 0x4444444442l);
 	}
 
 	@Override
@@ -181,14 +181,14 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PullOutValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PullOutValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PullOutValue
 	 *
@@ -209,9 +209,9 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.PULLOUTVALUE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FlexValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FlexValue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FlexValue
 	 *
@@ -232,14 +232,13 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 		return getRealAttribute(AttributeName.FLEXVALUE, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateSpinePreparationParams
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSpinePreparationParams the element
 	 */
@@ -261,7 +260,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 
 	/**
 	 * Get all SpinePreparationParams from the current element
-	 *
+	 * 
 	 * @return Collection<JDFSpinePreparationParams>, null if none are available
 	 */
 	public Collection<JDFSpinePreparationParams> getAllSpinePreparationParams()
@@ -281,7 +280,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 
 	/**
 	 * (26) getCreateGlueApplication
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueApplication the element
 	 */
@@ -303,7 +302,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 
 	/**
 	 * Get all GlueApplication from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGlueApplication>, null if none are available
 	 */
 	public Collection<JDFGlueApplication> getAllGlueApplication()
@@ -323,7 +322,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 
 	/**
 	 * (26) getCreateSpineTapingParams
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSpineTapingParams the element
 	 */
@@ -345,7 +344,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 
 	/**
 	 * Get all SpineTapingParams from the current element
-	 *
+	 * 
 	 * @return Collection<JDFSpineTapingParams>, null if none are available
 	 */
 	public Collection<JDFSpineTapingParams> getAllSpineTapingParams()
@@ -365,7 +364,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 
 	/**
 	 * (26) getCreateCoverApplicationParams
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCoverApplicationParams the element
 	 */
@@ -387,7 +386,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 
 	/**
 	 * Get all CoverApplicationParams from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCoverApplicationParams>, null if none are available
 	 */
 	public Collection<JDFCoverApplicationParams> getAllCoverApplicationParams()

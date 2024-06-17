@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
  *****************************************************************************
  * class JDFAutoShapeCut : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoShapeCut extends JDFElement
@@ -102,11 +102,11 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CUTBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CUTOUT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.CUTPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PAGES, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.SHAPETYPEDETAILS, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CUTBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CUTOUT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CUTPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PAGES, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SHAPETYPEDETAILS, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -118,12 +118,12 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.MATERIAL, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.CUTTYPE, 0x66666666);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.CUTDEPTH, 0x66111111);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.SHAPEDEPTH, 0x77666661);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.SHAPETYPE, 0x55555555);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.TEETHPERDIMENSION, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.MATERIAL, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CUTTYPE, 0x6666666666l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.CUTDEPTH, 0x6666111111l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.SHAPEDEPTH, 0x7777666661l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.SHAPETYPE, 0x5555555555l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.TEETHPERDIMENSION, 0x6666666666l);
 	}
 
 	@Override
@@ -168,14 +168,13 @@ public abstract class JDFAutoShapeCut extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CutBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CutBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CutBox
 	 *
@@ -198,9 +197,9 @@ public abstract class JDFAutoShapeCut extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CutOut
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CutOut ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CutOut
 	 *
@@ -221,9 +220,9 @@ public abstract class JDFAutoShapeCut extends JDFElement
 		return getBoolAttribute(AttributeName.CUTOUT, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CutPath
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CutPath ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CutPath
 	 *
@@ -244,9 +243,9 @@ public abstract class JDFAutoShapeCut extends JDFElement
 		return getAttribute(AttributeName.CUTPATH, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Pages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Pages ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Pages
 	 *
@@ -269,9 +268,10 @@ public abstract class JDFAutoShapeCut extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShapeTypeDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShapeTypeDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ShapeTypeDetails
 	 *
@@ -292,9 +292,8 @@ public abstract class JDFAutoShapeCut extends JDFElement
 		return getAttribute(AttributeName.SHAPETYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -309,7 +308,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (25) getCreateMaterial
-	 *
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getCreateMaterial()
@@ -339,7 +338,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (25) getCreateCutType
-	 *
+	 * 
 	 * @return JDFSpanCutType the element
 	 */
 	public JDFSpanCutType getCreateCutType()
@@ -369,7 +368,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (25) getCreateCutDepth
-	 *
+	 * 
 	 * @return JDFSpanCutDepth the element
 	 */
 	public JDFSpanCutDepth getCreateCutDepth()
@@ -399,7 +398,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (25) getCreateShapeDepth
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateShapeDepth()
@@ -429,7 +428,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (25) getCreateShapeType
-	 *
+	 * 
 	 * @return JDFSpanShapeType the element
 	 */
 	public JDFSpanShapeType getCreateShapeType()
@@ -459,7 +458,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 
 	/**
 	 * (25) getCreateTeethPerDimension
-	 *
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateTeethPerDimension()

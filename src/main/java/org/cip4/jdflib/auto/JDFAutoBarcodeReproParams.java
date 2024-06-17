@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.process.JDFBarcodeCompParams;
  *****************************************************************************
  * class JDFAutoBarcodeReproParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBarcodeReproParams extends JDFResource
@@ -101,13 +101,13 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BEARERBARS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumBearerBars.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.HEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAGNIFICATION, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MASKING, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumMasking.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEHEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEWIDTH, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.RATIO, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BEARERBARS, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumBearerBars.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.HEIGHT, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAGNIFICATION, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MASKING, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumMasking.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEHEIGHT, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEWIDTH, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.RATIO, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODECOMPPARAMS, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODECOMPPARAMS, 0x3333333111l);
 	}
 
 	@Override
@@ -194,7 +194,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBearerBars(String name)
+		protected EnumBearerBars(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -261,7 +261,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMasking(String name)
+		protected EnumMasking(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -314,14 +314,13 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 		public static final EnumMasking WhiteBox = new EnumMasking("WhiteBox");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BearerBars
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BearerBars ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute BearerBars
 	 *
@@ -342,9 +341,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 		return EnumBearerBars.getEnum(getAttribute(AttributeName.BEARERBARS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Height
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Height ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Height
 	 *
@@ -365,9 +364,10 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 		return getRealAttribute(AttributeName.HEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Magnification
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Magnification
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Magnification
 	 *
@@ -388,9 +388,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 		return getRealAttribute(AttributeName.MAGNIFICATION, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Masking
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Masking ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Masking
 	 *
@@ -411,9 +411,10 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 		return EnumMasking.getEnum(getAttribute(AttributeName.MASKING, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleHeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleHeight
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleHeight
 	 *
@@ -434,9 +435,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 		return getRealAttribute(AttributeName.MODULEHEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleWidth
 	 *
@@ -457,9 +458,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 		return getRealAttribute(AttributeName.MODULEWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Ratio
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Ratio ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Ratio
 	 *
@@ -480,14 +481,13 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 		return getRealAttribute(AttributeName.RATIO, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateBarcodeCompParams
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFBarcodeCompParams the element
 	 */
@@ -509,7 +509,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 
 	/**
 	 * Get all BarcodeCompParams from the current element
-	 *
+	 * 
 	 * @return Collection<JDFBarcodeCompParams>, null if none are available
 	 */
 	public Collection<JDFBarcodeCompParams> getAllBarcodeCompParams()

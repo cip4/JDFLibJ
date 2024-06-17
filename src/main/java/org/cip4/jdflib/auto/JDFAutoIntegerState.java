@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
  *****************************************************************************
  * class JDFAutoIntegerState : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoIntegerState extends JDFResource
@@ -101,17 +101,17 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX, 0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN, 0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMOD, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTVALUEMAX, 0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.PRESENTVALUEMIN, 0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESENTVALUEMOD, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.UNITTYPE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x3333333331l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX, 0x4444444431l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN, 0x4444444431l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMOD, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x3333333331l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTVALUEMAX, 0x4444444431l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.PRESENTVALUEMIN, 0x4444444431l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESENTVALUEMOD, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.UNITTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -123,8 +123,8 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x33333331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUELOC, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUELOC, 0x3333333331l);
 	}
 
 	@Override
@@ -180,14 +180,14 @@ public abstract class JDFAutoIntegerState extends JDFResource
 		return bRet;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DefaultValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DefaultValue
 	 *
@@ -208,9 +208,10 @@ public abstract class JDFAutoIntegerState extends JDFResource
 		return getIntAttribute(AttributeName.DEFAULTVALUE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CurrentValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CurrentValue
 	 *
@@ -231,9 +232,10 @@ public abstract class JDFAutoIntegerState extends JDFResource
 		return getIntAttribute(AttributeName.CURRENTVALUE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedValueList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueList
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedValueList
 	 *
@@ -256,9 +258,10 @@ public abstract class JDFAutoIntegerState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedValueMax
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueMax
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedValueMax
 	 *
@@ -279,9 +282,10 @@ public abstract class JDFAutoIntegerState extends JDFResource
 		return getIntAttribute(AttributeName.ALLOWEDVALUEMAX, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedValueMin
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueMin
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedValueMin
 	 *
@@ -302,9 +306,10 @@ public abstract class JDFAutoIntegerState extends JDFResource
 		return getIntAttribute(AttributeName.ALLOWEDVALUEMIN, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedValueMod
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueMod
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedValueMod
 	 *
@@ -327,9 +332,10 @@ public abstract class JDFAutoIntegerState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentValueList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentValueList
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentValueList
 	 *
@@ -352,9 +358,10 @@ public abstract class JDFAutoIntegerState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentValueMax
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentValueMax
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentValueMax
 	 *
@@ -375,9 +382,10 @@ public abstract class JDFAutoIntegerState extends JDFResource
 		return getIntAttribute(AttributeName.PRESENTVALUEMAX, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentValueMin
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentValueMin
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentValueMin
 	 *
@@ -398,9 +406,10 @@ public abstract class JDFAutoIntegerState extends JDFResource
 		return getIntAttribute(AttributeName.PRESENTVALUEMIN, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentValueMod
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentValueMod
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentValueMod
 	 *
@@ -423,9 +432,9 @@ public abstract class JDFAutoIntegerState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UnitType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UnitType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute UnitType
 	 *
@@ -446,14 +455,13 @@ public abstract class JDFAutoIntegerState extends JDFResource
 		return getAttribute(AttributeName.UNITTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateLoc
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
@@ -475,7 +483,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 
 	/**
 	 * Get all Loc from the current element
-	 *
+	 * 
 	 * @return Collection<JDFLoc>, null if none are available
 	 */
 	public Collection<JDFLoc> getAllLoc()
@@ -495,7 +503,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 
 	/**
 	 * (26) getCreateValueLoc
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFValueLoc the element
 	 */
@@ -517,7 +525,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 
 	/**
 	 * Get all ValueLoc from the current element
-	 *
+	 * 
 	 * @return Collection<JDFValueLoc>, null if none are available
 	 */
 	public Collection<JDFValueLoc> getAllValueLoc()

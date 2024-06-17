@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoPreflightInventory : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPreflightInventory extends JDFResource
@@ -92,12 +92,12 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORSRESULTSPOOL, 0x77777766);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.DOCUMENTRESULTSPOOL, 0x77777766);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.FONTSRESULTSPOOL, 0x77777766);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.FILETYPERESULTSPOOL, 0x77777766);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.IMAGESRESULTSPOOL, 0x77777766);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.PAGESRESULTSPOOL, 0x77777766);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORSRESULTSPOOL, 0x7777777766l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DOCUMENTRESULTSPOOL, 0x7777777766l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.FONTSRESULTSPOOL, 0x7777777766l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.FILETYPERESULTSPOOL, 0x7777777766l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.IMAGESRESULTSPOOL, 0x7777777766l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.PAGESRESULTSPOOL, 0x7777777766l);
 	}
 
 	@Override
@@ -162,9 +162,8 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -179,7 +178,7 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
 
 	/**
 	 * (25) getCreateColorsResultsPool
-	 *
+	 * 
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateColorsResultsPool()
@@ -209,7 +208,7 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
 
 	/**
 	 * (25) getCreateDocumentResultsPool
-	 *
+	 * 
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateDocumentResultsPool()
@@ -239,7 +238,7 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
 
 	/**
 	 * (25) getCreateFontsResultsPool
-	 *
+	 * 
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateFontsResultsPool()
@@ -269,7 +268,7 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
 
 	/**
 	 * (25) getCreateFileTypeResultsPool
-	 *
+	 * 
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateFileTypeResultsPool()
@@ -299,7 +298,7 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
 
 	/**
 	 * (25) getCreateImagesResultsPool
-	 *
+	 * 
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreateImagesResultsPool()
@@ -329,7 +328,7 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
 
 	/**
 	 * (25) getCreatePagesResultsPool
-	 *
+	 * 
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreatePagesResultsPool()

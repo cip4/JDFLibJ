@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoOCGControl : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoOCGControl extends JDFElement
@@ -92,10 +92,10 @@ public abstract class JDFAutoOCGControl extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.INCLUDEOCG, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.OCGNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PROCSTEPSGROUP, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PROCSTEPSTYPE, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.INCLUDEOCG, 0x3333333111l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.OCGNAME, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PROCSTEPSGROUP, 0x3333111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PROCSTEPSTYPE, 0x3333111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -140,14 +140,13 @@ public abstract class JDFAutoOCGControl extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IncludeOCG
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IncludeOCG ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IncludeOCG
 	 *
@@ -168,9 +167,9 @@ public abstract class JDFAutoOCGControl extends JDFElement
 		return getBoolAttribute(AttributeName.INCLUDEOCG, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OCGName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OCGName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OCGName
 	 *
@@ -191,9 +190,10 @@ public abstract class JDFAutoOCGControl extends JDFElement
 		return getAttribute(AttributeName.OCGNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProcStepsGroup
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProcStepsGroup
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ProcStepsGroup
 	 *
@@ -214,9 +214,10 @@ public abstract class JDFAutoOCGControl extends JDFElement
 		return getAttribute(AttributeName.PROCSTEPSGROUP, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProcStepsType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProcStepsType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ProcStepsType
 	 *

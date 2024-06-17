@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
  *****************************************************************************
  * class JDFAutoCuttingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCuttingParams extends JDFResource
@@ -104,8 +104,8 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.NUPSEPARATION, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETLAY, 0x33311111, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NUPSEPARATION, 0x3333331111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
 	}
 
 	@Override
@@ -117,9 +117,9 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CUTBLOCK, 0x33333331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.CUTMARK, 0x33333331);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.CUT, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CUTBLOCK, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CUTMARK, 0x3333333331l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.CUT, 0x3333333331l);
 	}
 
 	@Override
@@ -194,7 +194,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSheetLay(String name)
+		protected EnumSheetLay(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -247,14 +247,14 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 		public static final EnumSheetLay Right = new EnumSheetLay("Right");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NUpSeparation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NUpSeparation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NUpSeparation
 	 *
@@ -277,9 +277,9 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetLay
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SheetLay
 	 *
@@ -300,14 +300,13 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateCutBlock
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCutBlock the element
 	 */
@@ -329,7 +328,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 
 	/**
 	 * Get all CutBlock from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCutBlock>, null if none are available
 	 */
 	public Collection<JDFCutBlock> getAllCutBlock()
@@ -359,7 +358,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 
 	/**
 	 * (26) getCreateCutMark
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCutMark the element
 	 */
@@ -381,7 +380,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 
 	/**
 	 * Get all CutMark from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCutMark>, null if none are available
 	 */
 	public Collection<JDFCutMark> getAllCutMark()
@@ -411,7 +410,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 
 	/**
 	 * (26) getCreateCut
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCut the element
 	 */
@@ -433,7 +432,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 
 	/**
 	 * Get all Cut from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCut>, null if none are available
 	 */
 	public Collection<JDFCut> getAllCut()

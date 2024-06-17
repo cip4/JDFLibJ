@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -80,6 +80,8 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.junit.jupiter.api.Test;
 
@@ -96,8 +98,8 @@ class JDFMessageServiceTest
 	@Test
 	void testgetFamilies()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
-		JDFMessageService ms = (JDFMessageService) doc.getRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
+		final JDFMessageService ms = (JDFMessageService) doc.getRoot();
 		ms.setQuery(true);
 		assertEquals(ms.getFamilies().elementAt(0), EnumFamily.Query);
 		assertEquals(ms.getFamilies().size(), 1);
@@ -114,8 +116,8 @@ class JDFMessageServiceTest
 	@Test
 	void testsetFamily()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
-		JDFMessageService ms = (JDFMessageService) doc.getRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
+		final JDFMessageService ms = (JDFMessageService) doc.getRoot();
 		ms.setFamily(EnumFamily.Query);
 		assertTrue(ms.getQuery());
 	}
@@ -126,8 +128,8 @@ class JDFMessageServiceTest
 	@Test
 	void testsetChannelMode()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
-		JDFMessageService ms = (JDFMessageService) doc.getRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
+		final JDFMessageService ms = (JDFMessageService) doc.getRoot();
 		ms.setChannelMode((EnumChannelMode) null);
 		ms.setChannelMode(EnumChannelMode.FireAndForget);
 		assertEquals(EnumChannelMode.FireAndForget, ms.getChannelMode().get(0));
@@ -139,10 +141,10 @@ class JDFMessageServiceTest
 	@Test
 	void testsetChannelMode2()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
-		JDFMessageService ms = (JDFMessageService) doc.getRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
+		final JDFMessageService ms = (JDFMessageService) doc.getRoot();
 		ms.setChannelMode(EnumChannelMode.FireAndForget);
-		Vector<? extends ValuedEnum> channelMode = ms.getChannelMode();
+		final Vector<? extends ValuedEnum> channelMode = ms.getChannelMode();
 		ms.setChannelMode((EnumChannelMode) null);
 		ms.setChannelMode(channelMode);
 		assertEquals(EnumChannelMode.FireAndForget, channelMode.get(0));
@@ -152,11 +154,29 @@ class JDFMessageServiceTest
 	 * 
 	 */
 	@Test
+	void testDeprecated()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
+
+		final JDFMessageService ms = jmf.getResponse(0).appendMessageService();
+		final Vector<EnumFamily> v = new Vector<EnumFamily>();
+		v.add(EnumFamily.Query);
+		v.add(EnumFamily.Command);
+		ms.setFamilies(v);
+
+		final VString invalidAttributes = ms.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0);
+		assertTrue(invalidAttributes.isEmpty());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	void testsetFamilies()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
-		JDFMessageService ms = (JDFMessageService) doc.getRoot();
-		Vector<EnumFamily> v = new Vector<EnumFamily>();
+		final JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
+		final JDFMessageService ms = (JDFMessageService) doc.getRoot();
+		final Vector<EnumFamily> v = new Vector<EnumFamily>();
 		v.add(EnumFamily.Query);
 		v.add(EnumFamily.Command);
 		ms.setFamilies(v);
@@ -164,8 +184,5 @@ class JDFMessageServiceTest
 		assertTrue(ms.getCommand());
 		assertFalse(ms.getRegistration());
 	}
-
-	////////////////////////////////////////////////////////////////////////////
-	// /////////////////
 
 }

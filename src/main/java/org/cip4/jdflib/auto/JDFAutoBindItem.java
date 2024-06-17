@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -103,7 +103,7 @@ import org.cip4.jdflib.span.JDFSpanBindingType;
  *****************************************************************************
  * class JDFAutoBindItem : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBindItem extends JDFElement
@@ -114,10 +114,10 @@ public abstract class JDFAutoBindItem extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHILDFOLIO, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PARENTFOLIO, 0x22222221, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.WRAPPAGES, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHILDFOLIO, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PARENTFOLIO, 0x2222222221l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x3333333331l, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.WRAPPAGES, 0x3333333331l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 	}
 
 	@Override
@@ -129,23 +129,23 @@ public abstract class JDFAutoBindItem extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[17];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDINGTYPE, 0x66666661);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.CHANNELBINDING, 0x66666661);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.COILBINDING, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.EDGEGLUING, 0x66666661);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.HARDCOVERBINDING, 0x66666661);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.PLASTICCOMBBINDING, 0x66666661);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.RINGBINDING, 0x66666661);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.SADDLESTITCHING, 0x66666661);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.SIDESEWING, 0x66666661);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.SIDESTITCHING, 0x66666661);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.SOFTCOVERBINDING, 0x66666661);
-		elemInfoTable[11] = new ElemInfoTable(ElementName.TAPE, 0x66666661);
-		elemInfoTable[12] = new ElemInfoTable(ElementName.TABS, 0x66666661);
-		elemInfoTable[13] = new ElemInfoTable(ElementName.THREADSEALING, 0x66666661);
-		elemInfoTable[14] = new ElemInfoTable(ElementName.THREADSEWING, 0x66666661);
-		elemInfoTable[15] = new ElemInfoTable(ElementName.STRIPBINDING, 0x66666661);
-		elemInfoTable[16] = new ElemInfoTable(ElementName.WIRECOMBBINDING, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDINGTYPE, 0x6666666661l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CHANNELBINDING, 0x6666666661l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.COILBINDING, 0x6666666661l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.EDGEGLUING, 0x6666666661l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.HARDCOVERBINDING, 0x6666666661l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.PLASTICCOMBBINDING, 0x6666666661l);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.RINGBINDING, 0x6666666661l);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.SADDLESTITCHING, 0x6666666661l);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.SIDESEWING, 0x6666666661l);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.SIDESTITCHING, 0x6666666661l);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.SOFTCOVERBINDING, 0x6666666661l);
+		elemInfoTable[11] = new ElemInfoTable(ElementName.TAPE, 0x6666666661l);
+		elemInfoTable[12] = new ElemInfoTable(ElementName.TABS, 0x6666666661l);
+		elemInfoTable[13] = new ElemInfoTable(ElementName.THREADSEALING, 0x6666666661l);
+		elemInfoTable[14] = new ElemInfoTable(ElementName.THREADSEWING, 0x6666666661l);
+		elemInfoTable[15] = new ElemInfoTable(ElementName.STRIPBINDING, 0x6666666661l);
+		elemInfoTable[16] = new ElemInfoTable(ElementName.WIRECOMBBINDING, 0x6666666661l);
 	}
 
 	@Override
@@ -190,14 +190,13 @@ public abstract class JDFAutoBindItem extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ChildFolio
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ChildFolio ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ChildFolio
 	 *
@@ -220,9 +219,9 @@ public abstract class JDFAutoBindItem extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ParentFolio
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ParentFolio ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ParentFolio
 	 *
@@ -245,9 +244,10 @@ public abstract class JDFAutoBindItem extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Transformation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Transformation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Transformation
 	 *
@@ -270,9 +270,9 @@ public abstract class JDFAutoBindItem extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WrapPages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WrapPages ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WrapPages
 	 *
@@ -295,9 +295,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -312,7 +311,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateBindingType
-	 *
+	 * 
 	 * @return JDFSpanBindingType the element
 	 */
 	public JDFSpanBindingType getCreateBindingType()
@@ -342,7 +341,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateChannelBinding
-	 *
+	 * 
 	 * @return JDFChannelBinding the element
 	 */
 	public JDFChannelBinding getCreateChannelBinding()
@@ -372,7 +371,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateCoilBinding
-	 *
+	 * 
 	 * @return JDFCoilBinding the element
 	 */
 	public JDFCoilBinding getCreateCoilBinding()
@@ -402,7 +401,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateEdgeGluing
-	 *
+	 * 
 	 * @return JDFEdgeGluing the element
 	 */
 	public JDFEdgeGluing getCreateEdgeGluing()
@@ -432,7 +431,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateHardCoverBinding
-	 *
+	 * 
 	 * @return JDFHardCoverBinding the element
 	 */
 	public JDFHardCoverBinding getCreateHardCoverBinding()
@@ -462,7 +461,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreatePlasticCombBinding
-	 *
+	 * 
 	 * @return JDFPlasticCombBinding the element
 	 */
 	public JDFPlasticCombBinding getCreatePlasticCombBinding()
@@ -492,7 +491,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateRingBinding
-	 *
+	 * 
 	 * @return JDFRingBinding the element
 	 */
 	public JDFRingBinding getCreateRingBinding()
@@ -522,7 +521,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateSaddleStitching
-	 *
+	 * 
 	 * @return JDFSaddleStitching the element
 	 */
 	public JDFSaddleStitching getCreateSaddleStitching()
@@ -552,7 +551,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateSideSewing
-	 *
+	 * 
 	 * @return JDFSideSewing the element
 	 */
 	public JDFSideSewing getCreateSideSewing()
@@ -582,7 +581,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateSideStitching
-	 *
+	 * 
 	 * @return JDFSideStitching the element
 	 */
 	public JDFSideStitching getCreateSideStitching()
@@ -612,7 +611,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateSoftCoverBinding
-	 *
+	 * 
 	 * @return JDFSoftCoverBinding the element
 	 */
 	public JDFSoftCoverBinding getCreateSoftCoverBinding()
@@ -642,7 +641,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateTape
-	 *
+	 * 
 	 * @return JDFTape the element
 	 */
 	public JDFTape getCreateTape()
@@ -672,7 +671,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateTabs
-	 *
+	 * 
 	 * @return JDFTabs the element
 	 */
 	public JDFTabs getCreateTabs()
@@ -702,7 +701,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateThreadSealing
-	 *
+	 * 
 	 * @return JDFThreadSealing the element
 	 */
 	public JDFThreadSealing getCreateThreadSealing()
@@ -732,7 +731,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateThreadSewing
-	 *
+	 * 
 	 * @return JDFThreadSewing the element
 	 */
 	public JDFThreadSewing getCreateThreadSewing()
@@ -762,7 +761,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateStripBinding
-	 *
+	 * 
 	 * @return JDFStripBinding the element
 	 */
 	public JDFStripBinding getCreateStripBinding()
@@ -792,7 +791,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 
 	/**
 	 * (25) getCreateWireCombBinding
-	 *
+	 * 
 	 * @return JDFWireCombBinding the element
 	 */
 	public JDFWireCombBinding getCreateWireCombBinding()

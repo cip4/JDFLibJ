@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoPreflightAction : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPreflightAction extends JDFElement
@@ -97,8 +97,8 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SETSPLITBY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSetSplitBy.getEnum(0), "RunList");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SETREF, 0x33333333, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SETSPLITBY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSetSplitBy.getEnum(0), "RunList");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SETREF, 0x3333333333l, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSetSplitBy(String name)
+		protected EnumSetSplitBy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -208,14 +208,13 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 		public static final EnumSetSplitBy RunList = new EnumSetSplitBy("RunList");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SetSplitBy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SetSplitBy ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SetSplitBy
 	 *
@@ -236,9 +235,9 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 		return EnumSetSplitBy.getEnum(getAttribute(AttributeName.SETSPLITBY, null, "RunList"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SetRef
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SetRef ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SetRef
 	 *

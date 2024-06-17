@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ import org.cip4.jdflib.resource.process.JDFIDPTrimming;
  *****************************************************************************
  * class JDFAutoIDPFinishing : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoIDPFinishing extends JDFElement
@@ -101,7 +101,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FINISHINGS, 0x33333333, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FINISHINGS, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 	}
 
 	@Override
@@ -113,10 +113,10 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.IDPFOLDING, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.IDPHOLEMAKING, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.IDPSTITCHING, 0x33333333);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.IDPTRIMMING, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.IDPFOLDING, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.IDPHOLEMAKING, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.IDPSTITCHING, 0x3333333333l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.IDPTRIMMING, 0x3333333333l);
 	}
 
 	@Override
@@ -161,14 +161,13 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Finishings
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Finishings ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Finishings
 	 *
@@ -191,14 +190,13 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateIDPFolding
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPFolding the element
 	 */
@@ -220,7 +218,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 
 	/**
 	 * Get all IDPFolding from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIDPFolding>, null if none are available
 	 */
 	public Collection<JDFIDPFolding> getAllIDPFolding()
@@ -240,7 +238,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 
 	/**
 	 * (26) getCreateIDPHoleMaking
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPHoleMaking the element
 	 */
@@ -262,7 +260,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 
 	/**
 	 * Get all IDPHoleMaking from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIDPHoleMaking>, null if none are available
 	 */
 	public Collection<JDFIDPHoleMaking> getAllIDPHoleMaking()
@@ -282,7 +280,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 
 	/**
 	 * (26) getCreateIDPStitching
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPStitching the element
 	 */
@@ -304,7 +302,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 
 	/**
 	 * Get all IDPStitching from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIDPStitching>, null if none are available
 	 */
 	public Collection<JDFIDPStitching> getAllIDPStitching()
@@ -324,7 +322,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 
 	/**
 	 * (26) getCreateIDPTrimming
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPTrimming the element
 	 */
@@ -346,7 +344,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 
 	/**
 	 * Get all IDPTrimming from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIDPTrimming>, null if none are available
 	 */
 	public Collection<JDFIDPTrimming> getAllIDPTrimming()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoTransferCurve : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTransferCurve extends JDFResource
@@ -93,8 +93,8 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CURVE, 0x22222222, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SEPARATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CURVE, 0x2222222222l, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SEPARATION, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -159,14 +159,13 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Curve
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Curve ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Curve
 	 *
@@ -189,9 +188,9 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Separation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Separation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Separation
 	 *

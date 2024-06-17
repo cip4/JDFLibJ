@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoLot : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLot extends JDFElement
@@ -97,10 +97,10 @@ public abstract class JDFAutoLot extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUALAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.LOTID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.CONSUMPTION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumConsumption.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUALAMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.LOTID, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.CONSUMPTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumConsumption.getEnum(0), null);
 	}
 
 	@Override
@@ -155,7 +155,7 @@ public abstract class JDFAutoLot extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumConsumption(String name)
+		protected EnumConsumption(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -208,14 +208,14 @@ public abstract class JDFAutoLot extends JDFElement
 		public static final EnumConsumption Partial = new EnumConsumption("Partial");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ActualAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ActualAmount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ActualAmount
 	 *
@@ -236,9 +236,9 @@ public abstract class JDFAutoLot extends JDFElement
 		return getRealAttribute(AttributeName.ACTUALAMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Amount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Amount
 	 *
@@ -259,9 +259,9 @@ public abstract class JDFAutoLot extends JDFElement
 		return getRealAttribute(AttributeName.AMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LotID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LotID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LotID
 	 *
@@ -282,9 +282,9 @@ public abstract class JDFAutoLot extends JDFElement
 		return getAttribute(AttributeName.LOTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Consumption
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Consumption ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Consumption
 	 *

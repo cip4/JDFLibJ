@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
  *****************************************************************************
  * class JDFAutoPDFXParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPDFXParams extends JDFElement
@@ -98,18 +98,18 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PDFXCHECK, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PDFX1ACHECK, 0x44433311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PDFX3CHECK, 0x44433311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PDFXBLEEDBOXTOTRIMBOXOFFSET, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PDFXCOMPLIANTPDFONLY, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PDFXOUTPUTCONDITION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PDFXOUTPUTINTENTPROFILE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.PDFXNOTRIMBOXERROR, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.PDFXREGISTRYNAME, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PDFXSETBLEEDBOXTOMEDIABOX, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.PDFXTRAPPED, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumPDFXTrapped.getEnum(0), null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PDFXCHECK, 0x3333311111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PDFX1ACHECK, 0x4444433311l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PDFX3CHECK, 0x4444433311l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PDFXBLEEDBOXTOTRIMBOXOFFSET, 0x3333333311l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PDFXCOMPLIANTPDFONLY, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PDFXOUTPUTCONDITION, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PDFXOUTPUTINTENTPROFILE, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PDFXNOTRIMBOXERROR, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.PDFXREGISTRYNAME, 0x3333333311l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PDFXSETBLEEDBOXTOMEDIABOX, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.PDFXTRAPPED, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumPDFXTrapped.getEnum(0), null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, 0x3333333311l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 	}
 
 	@Override
@@ -164,7 +164,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPDFXTrapped(String name)
+		protected EnumPDFXTrapped(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -219,14 +219,13 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		public static final EnumPDFXTrapped False = new EnumPDFXTrapped("False");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PDFXCheck
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PDFXCheck ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PDFXCheck
 	 *
@@ -247,9 +246,9 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		return getAttribute(AttributeName.PDFXCHECK, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PDFX1aCheck
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PDFX1aCheck ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PDFX1aCheck
 	 *
@@ -270,9 +269,9 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		return getBoolAttribute(AttributeName.PDFX1ACHECK, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PDFX3Check
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PDFX3Check ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PDFX3Check
 	 *
@@ -293,9 +292,10 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		return getBoolAttribute(AttributeName.PDFX3CHECK, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PDFXBleedBoxToTrimBoxOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PDFXBleedBoxToTrimBoxOffset
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PDFXBleedBoxToTrimBoxOffset
 	 *
@@ -318,9 +318,10 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PDFXCompliantPDFOnly
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PDFXCompliantPDFOnly
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PDFXCompliantPDFOnly
 	 *
@@ -341,9 +342,10 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		return getBoolAttribute(AttributeName.PDFXCOMPLIANTPDFONLY, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PDFXOutputCondition
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PDFXOutputCondition
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PDFXOutputCondition
 	 *
@@ -364,9 +366,10 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		return getAttribute(AttributeName.PDFXOUTPUTCONDITION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PDFXOutputIntentProfile
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PDFXOutputIntentProfile
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PDFXOutputIntentProfile
 	 *
@@ -387,9 +390,10 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		return getAttribute(AttributeName.PDFXOUTPUTINTENTPROFILE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PDFXNoTrimBoxError
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PDFXNoTrimBoxError
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PDFXNoTrimBoxError
 	 *
@@ -410,9 +414,10 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		return getBoolAttribute(AttributeName.PDFXNOTRIMBOXERROR, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PDFXRegistryName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PDFXRegistryName
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PDFXRegistryName
 	 *
@@ -433,9 +438,10 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		return getAttribute(AttributeName.PDFXREGISTRYNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PDFXSetBleedBoxToMediaBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PDFXSetBleedBoxToMediaBox
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PDFXSetBleedBoxToMediaBox
 	 *
@@ -456,9 +462,9 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		return getBoolAttribute(AttributeName.PDFXSETBLEEDBOXTOMEDIABOX, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PDFXTrapped
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PDFXTrapped ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PDFXTrapped
 	 *
@@ -479,9 +485,10 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		return EnumPDFXTrapped.getEnum(getAttribute(AttributeName.PDFXTRAPPED, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PDFXTrimBoxToMediaBoxOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PDFXTrimBoxToMediaBoxOffset
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PDFXTrimBoxToMediaBoxOffset
 	 *

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoStrappingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStrappingParams extends JDFResource
@@ -97,8 +97,8 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STRAPPINGTYPE, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumStrappingType.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.STRAPPOSITIONS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STRAPPINGTYPE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumStrappingType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.STRAPPOSITIONS, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -173,7 +173,7 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumStrappingType(String name)
+		protected EnumStrappingType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -230,14 +230,14 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 		public static final EnumStrappingType DoubleCross = new EnumStrappingType("DoubleCross");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StrappingType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StrappingType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute StrappingType
 	 *
@@ -258,9 +258,10 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 		return EnumStrappingType.getEnum(getAttribute(AttributeName.STRAPPINGTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StrapPositions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StrapPositions
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StrapPositions
 	 *

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFMediaSource;
  *****************************************************************************
  * class JDFAutoIDPJobSheet : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoIDPJobSheet extends JDFElement
@@ -104,9 +104,9 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHEETFORMAT, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Standard");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETOCCURRENCE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSheetOccurrence.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHEETTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSheetType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHEETFORMAT, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Standard");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETOCCURRENCE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetOccurrence.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHEETTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetType.getEnum(0), null);
 	}
 
 	@Override
@@ -118,10 +118,10 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.IDPFINISHING, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.IDPLAYOUT, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIAINTENT, 0x33333333);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.IDPFINISHING, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.IDPLAYOUT, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIAINTENT, 0x3333333333l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x3333333333l);
 	}
 
 	@Override
@@ -176,7 +176,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSheetOccurrence(String name)
+		protected EnumSheetOccurrence(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -249,7 +249,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSheetType(String name)
+		protected EnumSheetType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -306,14 +306,13 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 		public static final EnumSheetType SeparatorSheet = new EnumSheetType("SeparatorSheet");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetFormat ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SheetFormat
 	 *
@@ -334,9 +333,10 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 		return getAttribute(AttributeName.SHEETFORMAT, null, "Standard");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetOccurrence
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetOccurrence
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SheetOccurrence
 	 *
@@ -357,9 +357,9 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 		return EnumSheetOccurrence.getEnum(getAttribute(AttributeName.SHEETOCCURRENCE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SheetType
 	 *
@@ -380,14 +380,13 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 		return EnumSheetType.getEnum(getAttribute(AttributeName.SHEETTYPE, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateIDPFinishing
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPFinishing the element
 	 */
@@ -409,7 +408,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 
 	/**
 	 * Get all IDPFinishing from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIDPFinishing>, null if none are available
 	 */
 	public Collection<JDFIDPFinishing> getAllIDPFinishing()
@@ -429,7 +428,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 
 	/**
 	 * (26) getCreateIDPLayout
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPLayout the element
 	 */
@@ -451,7 +450,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 
 	/**
 	 * Get all IDPLayout from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIDPLayout>, null if none are available
 	 */
 	public Collection<JDFIDPLayout> getAllIDPLayout()
@@ -471,7 +470,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 
 	/**
 	 * (26) getCreateMediaIntent
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMediaIntent the element
 	 */
@@ -493,7 +492,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 
 	/**
 	 * Get all MediaIntent from the current element
-	 *
+	 * 
 	 * @return Collection<JDFMediaIntent>, null if none are available
 	 */
 	public Collection<JDFMediaIntent> getAllMediaIntent()
@@ -523,7 +522,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 
 	/**
 	 * (26) getCreateMediaSource
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMediaSource the element
 	 */
@@ -545,7 +544,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 
 	/**
 	 * Get all MediaSource from the current element
-	 *
+	 * 
 	 * @return Collection<JDFMediaSource>, null if none are available
 	 */
 	public Collection<JDFMediaSource> getAllMediaSource()

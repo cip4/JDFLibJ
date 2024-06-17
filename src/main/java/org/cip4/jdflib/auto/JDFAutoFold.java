@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoFold : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoFold extends JDFResource
@@ -96,10 +96,10 @@ public abstract class JDFAutoFold extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FROM, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumFrom.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.TO, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumTo.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAVEL, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.RELATIVETRAVEL, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FROM, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumFrom.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TO, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumTo.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAVEL, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.RELATIVETRAVEL, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -174,7 +174,7 @@ public abstract class JDFAutoFold extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumFrom(String name)
+		protected EnumFrom(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -237,7 +237,7 @@ public abstract class JDFAutoFold extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumTo(String name)
+		protected EnumTo(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -290,14 +290,13 @@ public abstract class JDFAutoFold extends JDFResource
 		public static final EnumTo Down = new EnumTo("Down");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute From
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute From ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute From
 	 *
@@ -318,9 +317,9 @@ public abstract class JDFAutoFold extends JDFResource
 		return EnumFrom.getEnum(getAttribute(AttributeName.FROM, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute To
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute To ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute To
 	 *
@@ -341,9 +340,9 @@ public abstract class JDFAutoFold extends JDFResource
 		return EnumTo.getEnum(getAttribute(AttributeName.TO, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Travel
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Travel ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Travel
 	 *
@@ -364,9 +363,10 @@ public abstract class JDFAutoFold extends JDFResource
 		return getRealAttribute(AttributeName.TRAVEL, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RelativeTravel
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelativeTravel
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RelativeTravel
 	 *

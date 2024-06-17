@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFLoc;
  *****************************************************************************
  * class JDFAutoDevCap : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDevCap extends JDFElement
@@ -100,15 +100,15 @@ public abstract class JDFAutoDevCap extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, JDFDeviceCap.EnumAvailability.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVCAPREFS, 0x33333111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVNS, 0x33333331, AttributeInfo.EnumAttributeType.URI, null, "http://www.CIP4.org/JDFSchema_1_1");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ID, 0x33333111, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXOCCURS, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, "1");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MINOCCURS, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, "1");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULEREFS, 0x33333111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.NAME, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOURCEUSAGE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, JDFDeviceCap.EnumAvailability.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVCAPREFS, 0x3333333111l, AttributeInfo.EnumAttributeType.IDREFS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVNS, 0x3333333331l, AttributeInfo.EnumAttributeType.URI, null, "http://www.CIP4.org/JDFSchema_1_1");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ID, 0x3333333111l, AttributeInfo.EnumAttributeType.ID, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXOCCURS, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MINOCCURS, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULEREFS, 0x3333333111l, AttributeInfo.EnumAttributeType.IDREFS, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.NAME, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOURCEUSAGE, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public abstract class JDFAutoDevCap extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x3333333331l);
 	}
 
 	@Override
@@ -165,14 +165,14 @@ public abstract class JDFAutoDevCap extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Availability
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Availability
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Availability
 	 *
@@ -193,9 +193,9 @@ public abstract class JDFAutoDevCap extends JDFElement
 		return JDFDeviceCap.EnumAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DevCapRefs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DevCapRefs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DevCapRefs
 	 *
@@ -219,9 +219,9 @@ public abstract class JDFAutoDevCap extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DevNS
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DevNS ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DevNS
 	 *
@@ -242,9 +242,9 @@ public abstract class JDFAutoDevCap extends JDFElement
 		return getAttribute(AttributeName.DEVNS, null, "http://www.CIP4.org/JDFSchema_1_1");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ID
 	 *
@@ -267,9 +267,9 @@ public abstract class JDFAutoDevCap extends JDFElement
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxOccurs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxOccurs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxOccurs
 	 *
@@ -290,9 +290,9 @@ public abstract class JDFAutoDevCap extends JDFElement
 		return getIntAttribute(AttributeName.MAXOCCURS, null, 1);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinOccurs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinOccurs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinOccurs
 	 *
@@ -313,9 +313,9 @@ public abstract class JDFAutoDevCap extends JDFElement
 		return getIntAttribute(AttributeName.MINOCCURS, null, 1);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleRefs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleRefs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleRefs
 	 *
@@ -339,9 +339,9 @@ public abstract class JDFAutoDevCap extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Name
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Name
 	 *
@@ -362,9 +362,10 @@ public abstract class JDFAutoDevCap extends JDFElement
 		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ResourceUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ResourceUsage
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ResourceUsage
 	 *
@@ -385,14 +386,13 @@ public abstract class JDFAutoDevCap extends JDFElement
 		return getAttribute(AttributeName.RESOURCEUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateLoc
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
@@ -414,7 +414,7 @@ public abstract class JDFAutoDevCap extends JDFElement
 
 	/**
 	 * Get all Loc from the current element
-	 *
+	 * 
 	 * @return Collection<JDFLoc>, null if none are available
 	 */
 	public Collection<JDFLoc> getAllLoc()

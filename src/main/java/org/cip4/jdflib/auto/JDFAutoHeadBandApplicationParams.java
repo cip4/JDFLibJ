@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
  *****************************************************************************
  * class JDFAutoHeadBandApplicationParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
@@ -102,16 +102,16 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOTTOMBRAND, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BOTTOMCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.BOTTOMCOLORDETAILS, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.BOTTOMLENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.TOPBRAND, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.TOPCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.TOPCOLORDETAILS, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.TOPLENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.STRIPMATERIAL, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumStripMaterial.getEnum(0), null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.WIDTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOTTOMBRAND, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BOTTOMCOLOR, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BOTTOMCOLORDETAILS, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.BOTTOMLENGTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.TOPBRAND, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TOPCOLOR, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.TOPCOLORDETAILS, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.TOPLENGTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.STRIPMATERIAL, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumStripMaterial.getEnum(0), null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.WIDTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -123,7 +123,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x3333333331l);
 	}
 
 	@Override
@@ -198,7 +198,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumStripMaterial(String name)
+		protected EnumStripMaterial(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -261,14 +261,13 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		public static final EnumStripMaterial Tape = new EnumStripMaterial("Tape");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BottomBrand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BottomBrand ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BottomBrand
 	 *
@@ -289,9 +288,9 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		return getAttribute(AttributeName.BOTTOMBRAND, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BottomColor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BottomColor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (13) set attribute BottomColor
 	 *
@@ -316,9 +315,10 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BottomColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BottomColorDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BottomColorDetails
 	 *
@@ -339,9 +339,10 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		return getAttribute(AttributeName.BOTTOMCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BottomLength
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BottomLength
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BottomLength
 	 *
@@ -362,9 +363,9 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		return getRealAttribute(AttributeName.BOTTOMLENGTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TopBrand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TopBrand ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TopBrand
 	 *
@@ -385,9 +386,9 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		return getAttribute(AttributeName.TOPBRAND, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TopColor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TopColor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (13) set attribute TopColor
 	 *
@@ -412,9 +413,10 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TopColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TopColorDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TopColorDetails
 	 *
@@ -435,9 +437,9 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		return getAttribute(AttributeName.TOPCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TopLength
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TopLength ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TopLength
 	 *
@@ -458,9 +460,10 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		return getRealAttribute(AttributeName.TOPLENGTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StripMaterial
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StripMaterial
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute StripMaterial
 	 *
@@ -481,9 +484,9 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		return EnumStripMaterial.getEnum(getAttribute(AttributeName.STRIPMATERIAL, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Width
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Width ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Width
 	 *
@@ -504,14 +507,13 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		return getRealAttribute(AttributeName.WIDTH, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateGlueLine
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
@@ -533,7 +535,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 
 	/**
 	 * Get all GlueLine from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGlueLine>, null if none are available
 	 */
 	public Collection<JDFGlueLine> getAllGlueLine()

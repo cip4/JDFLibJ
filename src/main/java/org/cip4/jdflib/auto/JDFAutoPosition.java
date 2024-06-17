@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
  *****************************************************************************
  * class JDFAutoPosition : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPosition extends JDFElement
@@ -97,13 +97,13 @@ public abstract class JDFAutoPosition extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ABSOLUTEBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MARGINBOTTOM, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MARGINTOP, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MARGINLEFT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MARGINRIGHT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.RELATIVEBOX, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ABSOLUTEBOX, 0x3333333111l, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MARGINBOTTOM, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MARGINTOP, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MARGINLEFT, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MARGINRIGHT, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.RELATIVEBOX, 0x3333333311l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 	}
 
 	@Override
@@ -158,7 +158,7 @@ public abstract class JDFAutoPosition extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOrientation(String name)
+		protected EnumOrientation(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -223,14 +223,13 @@ public abstract class JDFAutoPosition extends JDFElement
 		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AbsoluteBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AbsoluteBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AbsoluteBox
 	 *
@@ -253,9 +252,10 @@ public abstract class JDFAutoPosition extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarginBottom
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarginBottom
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MarginBottom
 	 *
@@ -276,9 +276,9 @@ public abstract class JDFAutoPosition extends JDFElement
 		return getRealAttribute(AttributeName.MARGINBOTTOM, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarginTop
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarginTop ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MarginTop
 	 *
@@ -299,9 +299,9 @@ public abstract class JDFAutoPosition extends JDFElement
 		return getRealAttribute(AttributeName.MARGINTOP, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarginLeft
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarginLeft ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MarginLeft
 	 *
@@ -322,9 +322,9 @@ public abstract class JDFAutoPosition extends JDFElement
 		return getRealAttribute(AttributeName.MARGINLEFT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarginRight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarginRight ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MarginRight
 	 *
@@ -345,9 +345,9 @@ public abstract class JDFAutoPosition extends JDFElement
 		return getRealAttribute(AttributeName.MARGINRIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Orientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Orientation
 	 *
@@ -368,9 +368,9 @@ public abstract class JDFAutoPosition extends JDFElement
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RelativeBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelativeBox ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RelativeBox
 	 *

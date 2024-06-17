@@ -74,7 +74,7 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.resource.process.JDFContentMetaData;
+import org.cip4.jdflib.resource.process.JDFContentMetadata;
 import org.cip4.jdflib.util.EnumUtil;
 
 /**
@@ -100,7 +100,7 @@ public class WalkContentMetaData extends WalkElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return (toCheck instanceof JDFContentMetaData);
+		return (toCheck instanceof JDFContentMetadata);
 	}
 
 	/**

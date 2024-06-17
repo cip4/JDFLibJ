@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.intent.JDFPricing;
  *****************************************************************************
  * class JDFAutoPricing : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPricing extends JDFElement
@@ -99,11 +99,11 @@ public abstract class JDFAutoPricing extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDITIONALPRICE, 0x44444333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENCY, 0x44444333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.HASPRICE, 0x44444333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ITEM, 0x44444333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRICE, 0x44444333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDITIONALPRICE, 0x4444444333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENCY, 0x4444444333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.HASPRICE, 0x4444444333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ITEM, 0x4444444333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRICE, 0x4444444333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -115,8 +115,8 @@ public abstract class JDFAutoPricing extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PAYMENT, 0x44444333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PRICING, 0x44444333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PAYMENT, 0x4444444333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PRICING, 0x4444444333l);
 	}
 
 	@Override
@@ -161,14 +161,14 @@ public abstract class JDFAutoPricing extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AdditionalPrice
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AdditionalPrice
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AdditionalPrice
 	 *
@@ -189,9 +189,9 @@ public abstract class JDFAutoPricing extends JDFElement
 		return getRealAttribute(AttributeName.ADDITIONALPRICE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Currency
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Currency ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Currency
 	 *
@@ -212,9 +212,9 @@ public abstract class JDFAutoPricing extends JDFElement
 		return getAttribute(AttributeName.CURRENCY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HasPrice
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HasPrice ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HasPrice
 	 *
@@ -235,9 +235,9 @@ public abstract class JDFAutoPricing extends JDFElement
 		return getBoolAttribute(AttributeName.HASPRICE, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Item
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Item ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Item
 	 *
@@ -258,9 +258,9 @@ public abstract class JDFAutoPricing extends JDFElement
 		return getAttribute(AttributeName.ITEM, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Price
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Price ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Price
 	 *
@@ -281,14 +281,13 @@ public abstract class JDFAutoPricing extends JDFElement
 		return getRealAttribute(AttributeName.PRICE, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatePayment
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPayment the element
 	 */
@@ -310,7 +309,7 @@ public abstract class JDFAutoPricing extends JDFElement
 
 	/**
 	 * Get all Payment from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPayment>, null if none are available
 	 */
 	public Collection<JDFPayment> getAllPayment()
@@ -330,7 +329,7 @@ public abstract class JDFAutoPricing extends JDFElement
 
 	/**
 	 * (26) getCreatePricing
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPricing the element
 	 */
@@ -352,7 +351,7 @@ public abstract class JDFAutoPricing extends JDFElement
 
 	/**
 	 * Get all Pricing from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPricing>, null if none are available
 	 */
 	public Collection<JDFPricing> getAllPricing()

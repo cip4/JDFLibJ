@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
  *****************************************************************************
  * class JDFAutoMiscConsumable : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoMiscConsumable extends JDFResource
@@ -100,10 +100,10 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLOR, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COLORDETAILS, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.CONSUMABLETYPE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.TYPEDETAILS, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLOR, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COLORDETAILS, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CONSUMABLETYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TYPEDETAILS, 0x3333111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -115,9 +115,9 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CERTIFICATION, 0x33333111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x33333111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CERTIFICATION, 0x3333333111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x3333333111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x3333333111l);
 	}
 
 	@Override
@@ -182,14 +182,13 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 		return JDFResource.EnumResourceClass.Consumable;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Color
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Color ---------------------------------------------------------------------
+	 */
 	/**
 	 * (13) set attribute Color
 	 *
@@ -214,9 +213,10 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ColorDetails
 	 *
@@ -237,9 +237,10 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 		return getAttribute(AttributeName.COLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ConsumableType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ConsumableType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ConsumableType
 	 *
@@ -260,9 +261,9 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 		return getAttribute(AttributeName.CONSUMABLETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TypeDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TypeDetails ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TypeDetails
 	 *
@@ -283,14 +284,13 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 		return getAttribute(AttributeName.TYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateCertification
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCertification the element
 	 */
@@ -312,7 +312,7 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 
 	/**
 	 * Get all Certification from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCertification>, null if none are available
 	 */
 	public Collection<JDFCertification> getAllCertification()
@@ -332,7 +332,7 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -354,7 +354,7 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -385,7 +385,7 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 
 	/**
 	 * (26) getCreateIdentificationField
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element
 	 */
@@ -409,7 +409,7 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 
 	/**
 	 * Get all IdentificationField from the current element
-	 *
+	 * 
 	 * @return Collection<JDFIdentificationField>, null if none are available
 	 */
 	public Collection<JDFIdentificationField> getAllIdentificationField()

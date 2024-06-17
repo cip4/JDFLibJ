@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoFlateParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoFlateParams extends JDFElement
@@ -91,8 +91,8 @@ public abstract class JDFAutoFlateParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.EFFORT, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREDICTOR, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.EFFORT, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREDICTOR, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "1");
 	}
 
 	@Override
@@ -137,14 +137,13 @@ public abstract class JDFAutoFlateParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Effort
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Effort ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Effort
 	 *
@@ -165,9 +164,9 @@ public abstract class JDFAutoFlateParams extends JDFElement
 		return getIntAttribute(AttributeName.EFFORT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Predictor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Predictor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Predictor
 	 *

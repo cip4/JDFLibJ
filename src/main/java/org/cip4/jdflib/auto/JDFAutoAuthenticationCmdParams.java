@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.JDFPart;
  *****************************************************************************
  * class JDFAutoAuthenticationCmdParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
@@ -102,10 +102,10 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHENTICATIONTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumAuthenticationType.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.REASON, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.REASONDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SECUREURL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHENTICATIONTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumAuthenticationType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.REASON, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.REASONDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SECUREURL, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
 	}
 
 	@Override
@@ -117,8 +117,8 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.CERTIFICATE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CERTIFICATE, 0x3333333333l);
 	}
 
 	@Override
@@ -173,7 +173,7 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumAuthenticationType(String name)
+		protected EnumAuthenticationType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -236,7 +236,7 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumReason(String name)
+		protected EnumReason(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -301,14 +301,14 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 		public static final EnumReason Other = new EnumReason("Other");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AuthenticationType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AuthenticationType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute AuthenticationType
 	 *
@@ -329,9 +329,9 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 		return EnumAuthenticationType.getEnum(getAttribute(AttributeName.AUTHENTICATIONTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Reason
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Reason ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Reason
 	 *
@@ -352,9 +352,10 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 		return EnumReason.getEnum(getAttribute(AttributeName.REASON, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ReasonDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ReasonDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ReasonDetails
 	 *
@@ -375,9 +376,9 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 		return getAttribute(AttributeName.REASONDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SecureURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SecureURL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SecureURL
 	 *
@@ -398,14 +399,13 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 		return getAttribute(AttributeName.SECUREURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -427,7 +427,7 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()
@@ -447,7 +447,7 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 
 	/**
 	 * (26) getCreateCertificate
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element
 	 */
@@ -469,7 +469,7 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 
 	/**
 	 * Get all Certificate from the current element
-	 *
+	 * 
 	 * @return Collection<JDFElement>, null if none are available
 	 */
 	public Collection<JDFElement> getAllCertificate()

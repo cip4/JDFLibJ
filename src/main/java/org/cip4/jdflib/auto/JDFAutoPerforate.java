@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
  *****************************************************************************
  * class JDFAutoPerforate : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPerforate extends JDFElement
@@ -97,13 +97,13 @@ public abstract class JDFAutoPerforate extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEPTH, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.RELATIVESTARTPOSITION, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.TEETHPERDIMENSION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEPTH, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.RELATIVESTARTPOSITION, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.TEETHPERDIMENSION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -158,7 +158,7 @@ public abstract class JDFAutoPerforate extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumWorkingDirection(String name)
+		protected EnumWorkingDirection(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -211,14 +211,13 @@ public abstract class JDFAutoPerforate extends JDFElement
 		public static final EnumWorkingDirection Bottom = new EnumWorkingDirection("Bottom");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Depth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Depth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Depth
 	 *
@@ -239,9 +238,10 @@ public abstract class JDFAutoPerforate extends JDFElement
 		return getRealAttribute(AttributeName.DEPTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RelativeStartPosition
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelativeStartPosition
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RelativeStartPosition
 	 *
@@ -264,9 +264,10 @@ public abstract class JDFAutoPerforate extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RelativeWorkingPath
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelativeWorkingPath
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RelativeWorkingPath
 	 *
@@ -289,9 +290,10 @@ public abstract class JDFAutoPerforate extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StartPosition
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StartPosition
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StartPosition
 	 *
@@ -314,9 +316,9 @@ public abstract class JDFAutoPerforate extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WorkingPath
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkingPath ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WorkingPath
 	 *
@@ -339,9 +341,10 @@ public abstract class JDFAutoPerforate extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WorkingDirection
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkingDirection
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute WorkingDirection
 	 *
@@ -362,9 +365,10 @@ public abstract class JDFAutoPerforate extends JDFElement
 		return EnumWorkingDirection.getEnum(getAttribute(AttributeName.WORKINGDIRECTION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TeethPerDimension
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TeethPerDimension
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TeethPerDimension
 	 *

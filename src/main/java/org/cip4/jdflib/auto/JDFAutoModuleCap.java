@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
  *****************************************************************************
  * class JDFAutoModuleCap : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoModuleCap extends JDFElement
@@ -93,9 +93,9 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, JDFDeviceCap.EnumAvailability.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ID, 0x22222111, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x22222111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, JDFDeviceCap.EnumAvailability.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ID, 0x2222222111l, AttributeInfo.EnumAttributeType.ID, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x2222222111l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -140,14 +140,14 @@ public abstract class JDFAutoModuleCap extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Availability
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Availability
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Availability
 	 *
@@ -168,9 +168,9 @@ public abstract class JDFAutoModuleCap extends JDFElement
 		return JDFDeviceCap.EnumAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ID
 	 *
@@ -193,9 +193,9 @@ public abstract class JDFAutoModuleCap extends JDFElement
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleIndex
 	 *

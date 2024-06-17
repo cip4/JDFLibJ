@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
  *****************************************************************************
  * class JDFAutoCompany : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCompany extends JDFResource
@@ -99,7 +99,7 @@ public abstract class JDFAutoCompany extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ORGANIZATIONNAME, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ORGANIZATIONNAME, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -111,8 +111,8 @@ public abstract class JDFAutoCompany extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x44444443);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.ORGANIZATIONALUNIT, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x4444444443l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.ORGANIZATIONALUNIT, 0x3333333333l);
 	}
 
 	@Override
@@ -177,14 +177,14 @@ public abstract class JDFAutoCompany extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OrganizationName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OrganizationName
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OrganizationName
 	 *
@@ -205,14 +205,13 @@ public abstract class JDFAutoCompany extends JDFResource
 		return getAttribute(AttributeName.ORGANIZATIONNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -234,7 +233,7 @@ public abstract class JDFAutoCompany extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -265,7 +264,7 @@ public abstract class JDFAutoCompany extends JDFResource
 
 	/**
 	 * (26) getCreateOrganizationalUnit
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element
 	 */
@@ -287,7 +286,7 @@ public abstract class JDFAutoCompany extends JDFResource
 
 	/**
 	 * Get all OrganizationalUnit from the current element
-	 *
+	 * 
 	 * @return Collection<JDFElement>, null if none are available
 	 */
 	public Collection<JDFElement> getAllOrganizationalUnit()

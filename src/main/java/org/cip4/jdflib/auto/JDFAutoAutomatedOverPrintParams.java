@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoAutomatedOverPrintParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
@@ -91,12 +91,12 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.KNOCKOUTCMYKWHITE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.OVERPRINTBLACKTEXT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.OVERPRINTBLACKLINEART, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.TEXTBLACKLEVEL, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, "1");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.LINEARTBLACKLEVEL, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.TEXTSIZETHRESHOLD, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.KNOCKOUTCMYKWHITE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.OVERPRINTBLACKTEXT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.OVERPRINTBLACKLINEART, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TEXTBLACKLEVEL, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, "1");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.LINEARTBLACKLEVEL, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TEXTSIZETHRESHOLD, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -161,14 +161,14 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute KnockOutCMYKWhite
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute KnockOutCMYKWhite
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute KnockOutCMYKWhite
 	 *
@@ -189,9 +189,10 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
 		return getBoolAttribute(AttributeName.KNOCKOUTCMYKWHITE, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OverPrintBlackText
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OverPrintBlackText
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OverPrintBlackText
 	 *
@@ -212,9 +213,10 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
 		return getBoolAttribute(AttributeName.OVERPRINTBLACKTEXT, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OverPrintBlackLineArt
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OverPrintBlackLineArt
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OverPrintBlackLineArt
 	 *
@@ -235,9 +237,10 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
 		return getBoolAttribute(AttributeName.OVERPRINTBLACKLINEART, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TextBlackLevel
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TextBlackLevel
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TextBlackLevel
 	 *
@@ -258,9 +261,10 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
 		return getRealAttribute(AttributeName.TEXTBLACKLEVEL, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LineArtBlackLevel
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LineArtBlackLevel
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LineArtBlackLevel
 	 *
@@ -281,9 +285,10 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
 		return getRealAttribute(AttributeName.LINEARTBLACKLEVEL, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TextSizeThreshold
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TextSizeThreshold
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TextSizeThreshold
 	 *

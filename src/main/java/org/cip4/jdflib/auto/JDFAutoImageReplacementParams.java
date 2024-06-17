@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  *****************************************************************************
  * class JDFAutoImageReplacementParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoImageReplacementParams extends JDFResource
@@ -104,13 +104,15 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.IMAGEREPLACEMENTSTRATEGY, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumImageReplacementStrategy.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.IMAGEPRESCANSTRATEGY, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXRESOLUTION, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MINRESOLUTION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumResolutionReductionStrategy.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.IGNOREEXTENSIONS, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXSEARCHRECURSION, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.IMAGEREPLACEMENTSTRATEGY, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumImageReplacementStrategy.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.IMAGEPRESCANSTRATEGY, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXRESOLUTION, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MINRESOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumResolutionReductionStrategy.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.IGNOREEXTENSIONS, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXSEARCHRECURSION, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -122,8 +124,8 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x22222221);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.SEARCHPATH, 0x44444443);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SEARCHPATH, 0x4444444443l);
 	}
 
 	@Override
@@ -198,7 +200,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumImageReplacementStrategy(String name)
+		protected EnumImageReplacementStrategy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -265,7 +267,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumResolutionReductionStrategy(String name)
+		protected EnumResolutionReductionStrategy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -320,14 +322,14 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		public static final EnumResolutionReductionStrategy Bicubic = new EnumResolutionReductionStrategy("Bicubic");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImageReplacementStrategy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImageReplacementStrategy
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ImageReplacementStrategy
 	 *
@@ -348,9 +350,10 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return EnumImageReplacementStrategy.getEnum(getAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImagePreScanStrategy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImagePreScanStrategy
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ImagePreScanStrategy
 	 *
@@ -371,9 +374,10 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return getAttribute(AttributeName.IMAGEPRESCANSTRATEGY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxResolution
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxResolution
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxResolution
 	 *
@@ -394,9 +398,10 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return getRealAttribute(AttributeName.MAXRESOLUTION, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinResolution
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinResolution
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinResolution
 	 *
@@ -417,9 +422,10 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return getRealAttribute(AttributeName.MINRESOLUTION, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ResolutionReductionStrategy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ResolutionReductionStrategy
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ResolutionReductionStrategy
 	 *
@@ -440,9 +446,10 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return EnumResolutionReductionStrategy.getEnum(getAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IgnoreExtensions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IgnoreExtensions
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IgnoreExtensions
 	 *
@@ -466,9 +473,10 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxSearchRecursion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxSearchRecursion
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxSearchRecursion
 	 *
@@ -489,14 +497,13 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		return getIntAttribute(AttributeName.MAXSEARCHRECURSION, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateFileSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
@@ -518,7 +525,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * Get all FileSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFFileSpec>, null if none are available
 	 */
 	public Collection<JDFFileSpec> getAllFileSpec()
@@ -548,7 +555,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * (26) getCreateSearchPath
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element
 	 */
@@ -570,7 +577,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
 	/**
 	 * Get all SearchPath from the current element
-	 *
+	 * 
 	 * @return Collection<JDFElement>, null if none are available
 	 */
 	public Collection<JDFElement> getAllSearchPath()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
  *****************************************************************************
  * class JDFAutoContentMetadata : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoContentMetadata extends JDFElement
@@ -100,10 +100,10 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ISBN, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ISBN10, 0x44331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ISBN13, 0x44331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.TITLE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ISBN, 0x3333111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ISBN10, 0x4444331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ISBN13, 0x4444331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TITLE, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -115,9 +115,9 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33331111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x66661111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x66661111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x3333331111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x6666661111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x6666661111l);
 	}
 
 	@Override
@@ -162,14 +162,13 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ISBN
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ISBN ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ISBN
 	 *
@@ -190,9 +189,9 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 		return getAttribute(AttributeName.ISBN, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ISBN10
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ISBN10 ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ISBN10
 	 *
@@ -213,9 +212,9 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 		return getAttribute(AttributeName.ISBN10, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ISBN13
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ISBN13 ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ISBN13
 	 *
@@ -236,9 +235,9 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 		return getAttribute(AttributeName.ISBN13, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Title
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Title ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Title
 	 *
@@ -259,14 +258,13 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 		return getAttribute(AttributeName.TITLE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateContact
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -288,7 +286,7 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 
 	/**
 	 * Get all Contact from the current element
-	 *
+	 * 
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -328,7 +326,7 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 
 	/**
 	 * (25) getCreateEmployee
-	 *
+	 * 
 	 * @return JDFEmployee the element
 	 */
 	public JDFEmployee getCreateEmployee()
@@ -368,7 +366,7 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 
 	/**
 	 * (25) getCreatePart
-	 *
+	 * 
 	 * @return JDFPart the element
 	 */
 	public JDFPart getCreatePart()

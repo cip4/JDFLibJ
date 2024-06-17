@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.span.JDFSpanHoleType;
  *****************************************************************************
  * class JDFAutoStripBinding : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStripBinding extends JDFElement
@@ -93,8 +93,8 @@ public abstract class JDFAutoStripBinding extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLELIST, 0x66666611);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.HOLETYPE, 0x66111111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLELIST, 0x6666666611l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.HOLETYPE, 0x6666111111l);
 	}
 
 	@Override
@@ -139,9 +139,8 @@ public abstract class JDFAutoStripBinding extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -156,7 +155,7 @@ public abstract class JDFAutoStripBinding extends JDFElement
 
 	/**
 	 * (25) getCreateHoleList
-	 *
+	 * 
 	 * @return JDFHoleList the element
 	 */
 	public JDFHoleList getCreateHoleList()
@@ -186,7 +185,7 @@ public abstract class JDFAutoStripBinding extends JDFElement
 
 	/**
 	 * (25) getCreateHoleType
-	 *
+	 * 
 	 * @return JDFSpanHoleType the element
 	 */
 	public JDFSpanHoleType getCreateHoleType()

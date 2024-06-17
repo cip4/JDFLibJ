@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoPlateCopyParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPlateCopyParams extends JDFResource
@@ -96,9 +96,9 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CYCLE, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DIFFUSION, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumDiffusion.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.VACUUM, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CYCLE, 0x4444444443l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DIFFUSION, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumDiffusion.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.VACUUM, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -173,7 +173,7 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDiffusion(String name)
+		protected EnumDiffusion(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -226,14 +226,13 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 		public static final EnumDiffusion Off = new EnumDiffusion("Off");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Cycle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Cycle ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Cycle
 	 *
@@ -254,9 +253,9 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 		return getIntAttribute(AttributeName.CYCLE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Diffusion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Diffusion ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Diffusion
 	 *
@@ -277,9 +276,9 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 		return EnumDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Vacuum
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Vacuum ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Vacuum
 	 *

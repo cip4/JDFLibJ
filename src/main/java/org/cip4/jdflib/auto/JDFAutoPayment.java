@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.resource.JDFCreditCard;
  *****************************************************************************
  * class JDFAutoPayment : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPayment extends JDFElement
@@ -92,8 +92,8 @@ public abstract class JDFAutoPayment extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PAYTERM, 0x77777666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.CREDITCARD, 0x77777666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PAYTERM, 0x7777777666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CREDITCARD, 0x7777777666l);
 	}
 
 	@Override
@@ -138,9 +138,8 @@ public abstract class JDFAutoPayment extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -155,7 +154,7 @@ public abstract class JDFAutoPayment extends JDFElement
 
 	/**
 	 * (25) getCreatePayTerm
-	 *
+	 * 
 	 * @return JDFElement the element
 	 */
 	public JDFElement getCreatePayTerm()
@@ -185,7 +184,7 @@ public abstract class JDFAutoPayment extends JDFElement
 
 	/**
 	 * (25) getCreateCreditCard
-	 *
+	 * 
 	 * @return JDFCreditCard the element
 	 */
 	public JDFCreditCard getCreateCreditCard()

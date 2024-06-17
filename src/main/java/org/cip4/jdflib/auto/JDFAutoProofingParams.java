@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
  *****************************************************************************
  * class JDFAutoProofingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoProofingParams extends JDFResource
@@ -102,14 +102,15 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DISPLAYTRAPS, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.HALFTONE, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.IMAGEVIEWINGSTRATEGY, 0x44444433, AttributeInfo.EnumAttributeType.string, null, "NoImages");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MANUALFEED, 0x44444431, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROOFRENDERINGINTENT, 0x44444431, AttributeInfo.EnumAttributeType.enumeration, EnumProofRenderingIntent.getEnum(0), "Perceptual");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PROOFTYPE, 0x44444433, AttributeInfo.EnumAttributeType.enumeration, EnumProofType.getEnum(0), "None");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.COLORTYPE, 0x44444433, AttributeInfo.EnumAttributeType.enumeration, EnumColorType.getEnum(0), null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.RESOLUTION, 0x44444433, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DISPLAYTRAPS, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.HALFTONE, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.IMAGEVIEWINGSTRATEGY, 0x4444444433l, AttributeInfo.EnumAttributeType.string, null, "NoImages");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MANUALFEED, 0x4444444431l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROOFRENDERINGINTENT, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration, EnumProofRenderingIntent.getEnum(0),
+				"Perceptual");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PROOFTYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration, EnumProofType.getEnum(0), "None");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.COLORTYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration, EnumColorType.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.RESOLUTION, 0x4444444433l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -121,8 +122,8 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x77777766);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x77777766);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x7777777766l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x7777777766l);
 	}
 
 	@Override
@@ -197,7 +198,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumProofRenderingIntent(String name)
+		protected EnumProofRenderingIntent(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -264,7 +265,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumProofType(String name)
+		protected EnumProofType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -329,7 +330,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumColorType(String name)
+		protected EnumColorType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -384,14 +385,14 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		public static final EnumColorType MatchedColor = new EnumColorType("MatchedColor");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DisplayTraps
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DisplayTraps
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DisplayTraps
 	 *
@@ -412,9 +413,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		return getBoolAttribute(AttributeName.DISPLAYTRAPS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HalfTone
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HalfTone ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute HalfTone
 	 *
@@ -435,9 +436,10 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		return getBoolAttribute(AttributeName.HALFTONE, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImageViewingStrategy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImageViewingStrategy
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ImageViewingStrategy
 	 *
@@ -458,9 +460,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		return getAttribute(AttributeName.IMAGEVIEWINGSTRATEGY, null, "NoImages");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ManualFeed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ManualFeed ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ManualFeed
 	 *
@@ -481,9 +483,10 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		return getBoolAttribute(AttributeName.MANUALFEED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProofRenderingIntent
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProofRenderingIntent
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ProofRenderingIntent
 	 *
@@ -504,9 +507,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		return EnumProofRenderingIntent.getEnum(getAttribute(AttributeName.PROOFRENDERINGINTENT, null, "Perceptual"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProofType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProofType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ProofType
 	 *
@@ -527,9 +530,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		return EnumProofType.getEnum(getAttribute(AttributeName.PROOFTYPE, null, "None"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ColorType
 	 *
@@ -550,9 +553,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		return EnumColorType.getEnum(getAttribute(AttributeName.COLORTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Resolution
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Resolution ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Resolution
 	 *
@@ -575,9 +578,8 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -592,7 +594,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()
@@ -632,7 +634,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()

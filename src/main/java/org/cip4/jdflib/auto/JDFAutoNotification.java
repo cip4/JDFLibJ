@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,7 +95,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
  *****************************************************************************
  * class JDFAutoNotification : public JDFAudit
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoNotification extends JDFAudit
@@ -106,14 +106,14 @@ public abstract class JDFAutoNotification extends JDFAudit
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumClass.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33331111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULETYPE, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.TYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumClass.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x3333331111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEID, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x3333331111l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULETYPE, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.TYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -125,9 +125,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COSTCENTER, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COSTCENTER, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x3333333331l);
 	}
 
 	@Override
@@ -182,7 +182,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumClass(String name)
+		protected EnumClass(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -241,14 +241,13 @@ public abstract class JDFAutoNotification extends JDFAudit
 		public static final EnumClass Fatal = new EnumClass("Fatal");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Class
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Class ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Class
 	 *
@@ -269,9 +268,10 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return EnumClass.getEnum(getAttribute(AttributeName.CLASS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CombinedProcessIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CombinedProcessIndex
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CombinedProcessIndex
 	 *
@@ -294,9 +294,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobID
 	 *
@@ -317,9 +317,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobPartID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobPartID
 	 *
@@ -340,9 +340,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleID
 	 *
@@ -363,9 +363,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return getAttribute(AttributeName.MODULEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleIndex
 	 *
@@ -388,9 +388,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ModuleType
 	 *
@@ -411,9 +411,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return getAttribute(AttributeName.MODULETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Type
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Type
 	 *
@@ -434,9 +434,8 @@ public abstract class JDFAutoNotification extends JDFAudit
 		return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -451,7 +450,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (25) getCreateCostCenter
-	 *
+	 * 
 	 * @return JDFCostCenter the element
 	 */
 	public JDFCostCenter getCreateCostCenter()
@@ -471,7 +470,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (26) getCreateEmployee
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -495,7 +494,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * Get all Employee from the current element
-	 *
+	 * 
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	@Override
@@ -517,7 +516,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -539,7 +538,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()

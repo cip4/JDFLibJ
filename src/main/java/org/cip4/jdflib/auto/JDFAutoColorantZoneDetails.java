@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoColorantZoneDetails : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoColorantZoneDetails extends JDFElement
@@ -92,9 +92,9 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORANT, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.STEPLIMIT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAPCOLORSCALING, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORANT, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.STEPLIMIT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAPCOLORSCALING, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -139,14 +139,13 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Colorant
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Colorant ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Colorant
 	 *
@@ -167,9 +166,9 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
 		return getAttribute(AttributeName.COLORANT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StepLimit
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StepLimit ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StepLimit
 	 *
@@ -190,9 +189,10 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
 		return getRealAttribute(AttributeName.STEPLIMIT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TrapColorScaling
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TrapColorScaling
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TrapColorScaling
 	 *

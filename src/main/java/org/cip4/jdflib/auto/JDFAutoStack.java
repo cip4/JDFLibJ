@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoStack : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStack extends JDFElement
@@ -96,8 +96,9 @@ public abstract class JDFAutoStack extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.LOGICALSTACKORD, 0x22221111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOGICALSTACKSEQUENCE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumLogicalStackSequence.getEnum(0), "SheetIndex");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LOGICALSTACKORD, 0x2222221111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOGICALSTACKSEQUENCE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumLogicalStackSequence.getEnum(0),
+				"SheetIndex");
 	}
 
 	@Override
@@ -152,7 +153,7 @@ public abstract class JDFAutoStack extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumLogicalStackSequence(String name)
+		protected EnumLogicalStackSequence(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -205,14 +206,14 @@ public abstract class JDFAutoStack extends JDFElement
 		public static final EnumLogicalStackSequence DescendingSheetIndex = new EnumLogicalStackSequence("DescendingSheetIndex");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LogicalStackOrd
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LogicalStackOrd
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LogicalStackOrd
 	 *
@@ -233,9 +234,10 @@ public abstract class JDFAutoStack extends JDFElement
 		return getIntAttribute(AttributeName.LOGICALSTACKORD, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LogicalStackSequence
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LogicalStackSequence
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute LogicalStackSequence
 	 *

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoErrorData : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoErrorData extends JDFElement
@@ -97,10 +97,10 @@ public abstract class JDFAutoErrorData extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORTYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumErrorType.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORURL, 0x33333333, AttributeInfo.EnumAttributeType.URI, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.FIXEXPRESSION, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PATH, 0x33333333, AttributeInfo.EnumAttributeType.XPath, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORTYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumErrorType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORURL, 0x3333333333l, AttributeInfo.EnumAttributeType.URI, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FIXEXPRESSION, 0x3333333333l, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PATH, 0x3333333333l, AttributeInfo.EnumAttributeType.XPath, null, null);
 	}
 
 	@Override
@@ -155,7 +155,7 @@ public abstract class JDFAutoErrorData extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumErrorType(String name)
+		protected EnumErrorType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -210,14 +210,13 @@ public abstract class JDFAutoErrorData extends JDFElement
 		public static final EnumErrorType Unsupported = new EnumErrorType("Unsupported");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ErrorType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ErrorType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ErrorType
 	 *
@@ -238,9 +237,9 @@ public abstract class JDFAutoErrorData extends JDFElement
 		return EnumErrorType.getEnum(getAttribute(AttributeName.ERRORTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ErrorURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ErrorURL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ErrorURL
 	 *
@@ -261,9 +260,10 @@ public abstract class JDFAutoErrorData extends JDFElement
 		return getAttribute(AttributeName.ERRORURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FixExpression
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FixExpression
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FixExpression
 	 *
@@ -284,9 +284,9 @@ public abstract class JDFAutoErrorData extends JDFElement
 		return getAttribute(AttributeName.FIXEXPRESSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Path
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Path ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Path
 	 *

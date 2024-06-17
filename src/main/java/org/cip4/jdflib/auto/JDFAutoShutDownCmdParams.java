@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.jmf.JDFFlushQueueParams;
  *****************************************************************************
  * class JDFAutoShutDownCmdParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoShutDownCmdParams extends JDFElement
@@ -100,7 +100,7 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHUTDOWNTYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumShutDownType.getEnum(0), "StandBy");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHUTDOWNTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumShutDownType.getEnum(0), "StandBy");
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FLUSHQUEUEPARAMS, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FLUSHQUEUEPARAMS, 0x6666666611l);
 	}
 
 	@Override
@@ -167,7 +167,7 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumShutDownType(String name)
+		protected EnumShutDownType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -220,14 +220,14 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 		public static final EnumShutDownType Full = new EnumShutDownType("Full");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShutDownType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShutDownType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ShutDownType
 	 *
@@ -248,9 +248,8 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 		return EnumShutDownType.getEnum(getAttribute(AttributeName.SHUTDOWNTYPE, null, "StandBy"));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -265,7 +264,7 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 
 	/**
 	 * (25) getCreateFlushQueueParams
-	 *
+	 * 
 	 * @return JDFFlushQueueParams the element
 	 */
 	public JDFFlushQueueParams getCreateFlushQueueParams()

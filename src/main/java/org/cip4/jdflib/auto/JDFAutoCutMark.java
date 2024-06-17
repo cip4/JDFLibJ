@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFAssembly;
  *****************************************************************************
  * class JDFAutoCutMark : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCutMark extends JDFResource
@@ -104,9 +104,9 @@ public abstract class JDFAutoCutMark extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MARKTYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumMarkType.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.BLOCKS, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MARKTYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumMarkType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BLOCKS, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLY, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLY, 0x3333333333l);
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMarkType(String name)
+		protected EnumMarkType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -260,14 +260,13 @@ public abstract class JDFAutoCutMark extends JDFResource
 		public static final EnumMarkType UpperRightCutMark = new EnumMarkType("UpperRightCutMark");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute MarkType
 	 *
@@ -288,9 +287,9 @@ public abstract class JDFAutoCutMark extends JDFResource
 		return EnumMarkType.getEnum(getAttribute(AttributeName.MARKTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Position
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Position
 	 *
@@ -313,9 +312,9 @@ public abstract class JDFAutoCutMark extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Blocks
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Blocks ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Blocks
 	 *
@@ -339,14 +338,13 @@ public abstract class JDFAutoCutMark extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateAssembly
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFAssembly the element
 	 */
@@ -368,7 +366,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 
 	/**
 	 * Get all Assembly from the current element
-	 *
+	 * 
 	 * @return Collection<JDFAssembly>, null if none are available
 	 */
 	public Collection<JDFAssembly> getAllAssembly()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.resource.process.JDFScreenSelector;
  *****************************************************************************
  * class JDFAutoScreeningParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoScreeningParams extends JDFResource
@@ -97,8 +97,8 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.IGNORESOURCEFILE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ABORTJOBWHENSCREENMATCHINGFAILS, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.IGNORESOURCEFILE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ABORTJOBWHENSCREENMATCHINGFAILS, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.SCREENSELECTOR, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SCREENSELECTOR, 0x3333333333l);
 	}
 
 	@Override
@@ -175,14 +175,14 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IgnoreSourceFile
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IgnoreSourceFile
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IgnoreSourceFile
 	 *
@@ -203,9 +203,10 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 		return getBoolAttribute(AttributeName.IGNORESOURCEFILE, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AbortJobWhenScreenMatchingFails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AbortJobWhenScreenMatchingFails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AbortJobWhenScreenMatchingFails
 	 *
@@ -226,14 +227,13 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 		return getBoolAttribute(AttributeName.ABORTJOBWHENSCREENMATCHINGFAILS, null, false);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateScreenSelector
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFScreenSelector the element
 	 */
@@ -255,7 +255,7 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 
 	/**
 	 * Get all ScreenSelector from the current element
-	 *
+	 * 
 	 * @return Collection<JDFScreenSelector>, null if none are available
 	 */
 	public Collection<JDFScreenSelector> getAllScreenSelector()

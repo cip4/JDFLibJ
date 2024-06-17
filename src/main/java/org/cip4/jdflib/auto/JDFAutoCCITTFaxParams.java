@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoCCITTFaxParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCCITTFaxParams extends JDFElement
@@ -91,11 +91,11 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.UNCOMPRESSED, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.K, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "0");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDOFLINE, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ENCODEDBYTEALIGN, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ENDOFBLOCK, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.UNCOMPRESSED, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.K, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "0");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDOFLINE, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ENCODEDBYTEALIGN, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ENDOFBLOCK, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
 	@Override
@@ -140,14 +140,14 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Uncompressed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Uncompressed
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Uncompressed
 	 *
@@ -168,9 +168,9 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 		return getBoolAttribute(AttributeName.UNCOMPRESSED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute K
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute K ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute K
 	 *
@@ -191,9 +191,9 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 		return getIntAttribute(AttributeName.K, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EndOfLine
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EndOfLine ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute EndOfLine
 	 *
@@ -214,9 +214,10 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 		return getBoolAttribute(AttributeName.ENDOFLINE, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EncodedByteAlign
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EncodedByteAlign
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute EncodedByteAlign
 	 *
@@ -237,9 +238,9 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 		return getBoolAttribute(AttributeName.ENCODEDBYTEALIGN, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EndOfBlock
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EndOfBlock ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute EndOfBlock
 	 *

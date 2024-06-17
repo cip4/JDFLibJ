@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlue;
  *****************************************************************************
  * class JDFAutoGluingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoGluingParams extends JDFResource
@@ -98,7 +98,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.GLUINGPRODUCTIONID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.GLUINGPRODUCTIONID, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUE, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUE, 0x3333333331l);
 	}
 
 	@Override
@@ -175,14 +175,14 @@ public abstract class JDFAutoGluingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GluingProductionID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GluingProductionID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GluingProductionID
 	 *
@@ -203,14 +203,13 @@ public abstract class JDFAutoGluingParams extends JDFResource
 		return getAttribute(AttributeName.GLUINGPRODUCTIONID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateGlue
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlue the element
 	 */
@@ -232,7 +231,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
 
 	/**
 	 * Get all Glue from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGlue>, null if none are available
 	 */
 	public Collection<JDFGlue> getAllGlue()

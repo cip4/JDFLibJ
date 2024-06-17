@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFFold;
  *****************************************************************************
  * class JDFAutoFoldingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoFoldingParams extends JDFResource
@@ -103,11 +103,11 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHEETLAY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), "Left");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DESCRIPTIONTYPE, 0x44444433, AttributeInfo.EnumAttributeType.enumeration, EnumDescriptionType.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.FOLDCATALOG, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.FOLDINGDETAILS, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.FOLDSHEETIN, 0x44444443, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), "Left");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DESCRIPTIONTYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration, EnumDescriptionType.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FOLDCATALOG, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.FOLDINGDETAILS, 0x3333111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.FOLDSHEETIN, 0x4444444443l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FOLD, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FOLD, 0x3333333331l);
 	}
 
 	@Override
@@ -194,7 +194,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSheetLay(String name)
+		protected EnumSheetLay(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -257,7 +257,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumDescriptionType(String name)
+		protected EnumDescriptionType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -310,14 +310,13 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		public static final EnumDescriptionType FoldCatalog = new EnumDescriptionType("FoldCatalog");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetLay
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute SheetLay
 	 *
@@ -338,9 +337,10 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, "Left"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DescriptionType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DescriptionType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute DescriptionType
 	 *
@@ -361,9 +361,9 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		return EnumDescriptionType.getEnum(getAttribute(AttributeName.DESCRIPTIONTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FoldCatalog
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FoldCatalog ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FoldCatalog
 	 *
@@ -384,9 +384,10 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		return getAttribute(AttributeName.FOLDCATALOG, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FoldingDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FoldingDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FoldingDetails
 	 *
@@ -407,9 +408,9 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		return getAttribute(AttributeName.FOLDINGDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FoldSheetIn
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FoldSheetIn ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FoldSheetIn
 	 *
@@ -432,14 +433,13 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateFold
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFFold the element
 	 */
@@ -461,7 +461,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 
 	/**
 	 * Get all Fold from the current element
-	 *
+	 * 
 	 * @return Collection<JDFFold>, null if none are available
 	 */
 	public Collection<JDFFold> getAllFold()

@@ -240,7 +240,7 @@ public class ElementInfo
 		for (final String theKey : keySet)
 		{
 			final ElemInfo ei = elementInfoTable.get(theKey);
-			final long eiValStatus = ei.getElemValidityStatus() & l2;
+			final long eiValStatus = ei.getValidityStatus() & l2;
 			if (eiValStatus == s1)
 			{
 				matchingElements.add(theKey);
@@ -282,7 +282,7 @@ public class ElementInfo
 		for (final String theKey : keySet)
 		{
 			final ElemInfo ei = elementInfoTable.get(theKey);
-			final long eiValStatus = ei.getElemValidityStatus() & l2;
+			final long eiValStatus = ei.getValidityStatus() & l2;
 			if (eiValStatus == s1)
 			{
 				matchingElements.add(theKey);

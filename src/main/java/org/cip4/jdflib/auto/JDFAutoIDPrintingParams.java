@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,7 +97,7 @@ import org.cip4.jdflib.resource.process.JDFMediaSource;
  *****************************************************************************
  * class JDFAutoIDPrintingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoIDPrintingParams extends JDFResource
@@ -108,14 +108,14 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ATTRIBUTESNATURALLANG, 0x44444443, AttributeInfo.EnumAttributeType.language, null, "US");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.IDPATTRIBUTEFIDELITY, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.IPPJOBPRIORITY, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, "50");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.IPPVERSION, 0x44444443, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.OUTPUTBIN, 0x44444443, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PAGEDELIVERY, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumPageDelivery.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRINTQUALITY, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumPrintQuality.getEnum(0), null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.SHEETCOLLATE, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ATTRIBUTESNATURALLANG, 0x4444444443l, AttributeInfo.EnumAttributeType.language, null, "US");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.IDPATTRIBUTEFIDELITY, 0x4444444443l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.IPPJOBPRIORITY, 0x4444444443l, AttributeInfo.EnumAttributeType.integer, null, "50");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.IPPVERSION, 0x4444444443l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.OUTPUTBIN, 0x4444444443l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PAGEDELIVERY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumPageDelivery.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRINTQUALITY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumPrintQuality.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SHEETCOLLATE, 0x4444444443l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
 	@Override
@@ -127,12 +127,12 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COVER, 0x44444443);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.IDPFINISHING, 0x77777776);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.IDPLAYOUT, 0x77777776);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.JOBSHEET, 0x44444443);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.MEDIAINTENT, 0x77777776);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777776);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COVER, 0x4444444443l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.IDPFINISHING, 0x7777777776l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.IDPLAYOUT, 0x7777777776l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.JOBSHEET, 0x4444444443l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.MEDIAINTENT, 0x7777777776l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x7777777776l);
 	}
 
 	@Override
@@ -207,7 +207,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPageDelivery(String name)
+		protected EnumPageDelivery(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -276,7 +276,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPrintQuality(String name)
+		protected EnumPrintQuality(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -331,14 +331,14 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		public static final EnumPrintQuality Draft = new EnumPrintQuality("Draft");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AttributesNaturalLang
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AttributesNaturalLang
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AttributesNaturalLang
 	 *
@@ -359,9 +359,10 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		return getAttribute(AttributeName.ATTRIBUTESNATURALLANG, null, "US");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IDPAttributeFidelity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IDPAttributeFidelity
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IDPAttributeFidelity
 	 *
@@ -382,9 +383,10 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		return getBoolAttribute(AttributeName.IDPATTRIBUTEFIDELITY, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IPPJobPriority
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IPPJobPriority
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IPPJobPriority
 	 *
@@ -405,9 +407,9 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		return getIntAttribute(AttributeName.IPPJOBPRIORITY, null, 50);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IPPVersion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IPPVersion ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute IPPVersion
 	 *
@@ -430,9 +432,9 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OutputBin
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OutputBin ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OutputBin
 	 *
@@ -453,9 +455,10 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		return getAttribute(AttributeName.OUTPUTBIN, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageDelivery
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageDelivery
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PageDelivery
 	 *
@@ -476,9 +479,10 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		return EnumPageDelivery.getEnum(getAttribute(AttributeName.PAGEDELIVERY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PrintQuality
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PrintQuality
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PrintQuality
 	 *
@@ -499,9 +503,10 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		return EnumPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetCollate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetCollate
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SheetCollate
 	 *
@@ -522,14 +527,13 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		return getBoolAttribute(AttributeName.SHEETCOLLATE, null, false);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateCover
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCover the element
 	 */
@@ -551,7 +555,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 
 	/**
 	 * Get all Cover from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCover>, null if none are available
 	 */
 	public Collection<JDFCover> getAllCover()
@@ -581,7 +585,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 
 	/**
 	 * (25) getCreateIDPFinishing
-	 *
+	 * 
 	 * @return JDFIDPFinishing the element
 	 */
 	public JDFIDPFinishing getCreateIDPFinishing()
@@ -611,7 +615,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 
 	/**
 	 * (25) getCreateIDPLayout
-	 *
+	 * 
 	 * @return JDFIDPLayout the element
 	 */
 	public JDFIDPLayout getCreateIDPLayout()
@@ -631,7 +635,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 
 	/**
 	 * (26) getCreateJobSheet
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFJobSheet the element
 	 */
@@ -653,7 +657,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 
 	/**
 	 * Get all JobSheet from the current element
-	 *
+	 * 
 	 * @return Collection<JDFJobSheet>, null if none are available
 	 */
 	public Collection<JDFJobSheet> getAllJobSheet()
@@ -683,7 +687,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 
 	/**
 	 * (25) getCreateMediaIntent
-	 *
+	 * 
 	 * @return JDFMediaIntent the element
 	 */
 	public JDFMediaIntent getCreateMediaIntent()
@@ -723,7 +727,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 
 	/**
 	 * (25) getCreateMediaSource
-	 *
+	 * 
 	 * @return JDFMediaSource the element
 	 */
 	public JDFMediaSource getCreateMediaSource()

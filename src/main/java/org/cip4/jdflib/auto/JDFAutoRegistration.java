@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
  *****************************************************************************
  * class JDFAutoRegistration : public JDFMessage
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoRegistration extends JDFMessage
@@ -95,8 +95,8 @@ public abstract class JDFAutoRegistration extends JDFMessage
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x55555555);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x5555555555l);
 	}
 
 	@Override
@@ -141,14 +141,13 @@ public abstract class JDFAutoRegistration extends JDFMessage
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateEmployee
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -170,7 +169,7 @@ public abstract class JDFAutoRegistration extends JDFMessage
 
 	/**
 	 * Get all Employee from the current element
-	 *
+	 * 
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	public Collection<JDFEmployee> getAllEmployee()
@@ -200,7 +199,7 @@ public abstract class JDFAutoRegistration extends JDFMessage
 
 	/**
 	 * (25) getCreateSubscription
-	 *
+	 * 
 	 * @return JDFSubscription the element
 	 */
 	public JDFSubscription getCreateSubscription()

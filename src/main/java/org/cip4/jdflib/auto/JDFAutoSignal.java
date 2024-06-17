@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -94,7 +94,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoSignal : public JDFMessage
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoSignal extends JDFMessage
@@ -105,11 +105,11 @@ public abstract class JDFAutoSignal extends JDFMessage
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0), "FireAndForget");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.LASTREPEAT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.REFID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.REPLACEAFTER, 0x31111111, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.REPLACEBEFORE, 0x31111111, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0), "FireAndForget");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LASTREPEAT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.REFID, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.REPLACEAFTER, 0x3331111111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.REPLACEBEFORE, 0x3331111111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 	}
 
 	@Override
@@ -121,9 +121,9 @@ public abstract class JDFAutoSignal extends JDFMessage
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.NOTIFICATION, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.TRIGGER, 0x66666666);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.NOTIFICATION, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.TRIGGER, 0x6666666666l);
 	}
 
 	@Override
@@ -178,7 +178,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumChannelMode(String name)
+		protected EnumChannelMode(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -231,14 +231,13 @@ public abstract class JDFAutoSignal extends JDFMessage
 		public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ChannelMode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ChannelMode ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ChannelMode
 	 *
@@ -259,9 +258,9 @@ public abstract class JDFAutoSignal extends JDFMessage
 		return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, "FireAndForget"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LastRepeat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LastRepeat ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LastRepeat
 	 *
@@ -282,9 +281,9 @@ public abstract class JDFAutoSignal extends JDFMessage
 		return getBoolAttribute(AttributeName.LASTREPEAT, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute refID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute refID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute refID
 	 *
@@ -307,9 +306,10 @@ public abstract class JDFAutoSignal extends JDFMessage
 		return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ReplaceAfter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ReplaceAfter
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute ReplaceAfter
 	 *
@@ -337,9 +337,10 @@ public abstract class JDFAutoSignal extends JDFMessage
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ReplaceBefore
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ReplaceBefore
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute ReplaceBefore
 	 *
@@ -367,14 +368,13 @@ public abstract class JDFAutoSignal extends JDFMessage
 		return ret;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateEmployee
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -396,7 +396,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * Get all Employee from the current element
-	 *
+	 * 
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	public Collection<JDFEmployee> getAllEmployee()
@@ -416,7 +416,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (26) getCreateNotification
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFNotification the element
 	 */
@@ -438,7 +438,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * Get all Notification from the current element
-	 *
+	 * 
 	 * @return Collection<JDFNotification>, null if none are available
 	 */
 	public Collection<JDFNotification> getAllNotification()
@@ -468,7 +468,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (25) getCreateTrigger
-	 *
+	 * 
 	 * @return JDFTrigger the element
 	 */
 	public JDFTrigger getCreateTrigger()

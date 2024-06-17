@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoPhaseTime : public JDFAudit
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPhaseTime extends JDFAudit
@@ -104,10 +104,10 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.END, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.START, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.END, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.START, 0x2222222222l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.STATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 	}
 
 	@Override
@@ -119,12 +119,12 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.ACTIVITY, 0x33311111);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666611);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.MODULEPHASE, 0x33333333);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.PART, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x3333333333l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.ACTIVITY, 0x3333311111l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.MISDETAILS, 0x6666666611l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.MODULEPHASE, 0x3333333333l);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.PART, 0x3333333333l);
 	}
 
 	@Override
@@ -169,14 +169,13 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute End
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute End ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute End
 	 *
@@ -204,9 +203,9 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Start
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Start ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute Start
 	 *
@@ -234,9 +233,10 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StatusDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StatusDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StatusDetails
 	 *
@@ -257,14 +257,13 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 		return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateDevice
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
 	 */
@@ -286,7 +285,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * Get all Device from the current element
-	 *
+	 * 
 	 * @return Collection<JDFDevice>, null if none are available
 	 */
 	public Collection<JDFDevice> getAllDevice()
@@ -316,7 +315,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * (26) getCreateEmployee
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -340,7 +339,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * Get all Employee from the current element
-	 *
+	 * 
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	@Override
@@ -372,7 +371,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * (26) getCreateActivity
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFActivity the element
 	 */
@@ -394,7 +393,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * Get all Activity from the current element
-	 *
+	 * 
 	 * @return Collection<JDFActivity>, null if none are available
 	 */
 	public Collection<JDFActivity> getAllActivity()
@@ -424,7 +423,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * (25) getCreateMISDetails
-	 *
+	 * 
 	 * @return JDFMISDetails the element
 	 */
 	public JDFMISDetails getCreateMISDetails()
@@ -444,7 +443,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * (26) getCreateModulePhase
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFModulePhase the element
 	 */
@@ -466,7 +465,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * Get all ModulePhase from the current element
-	 *
+	 * 
 	 * @return Collection<JDFModulePhase>, null if none are available
 	 */
 	public Collection<JDFModulePhase> getAllModulePhase()
@@ -486,7 +485,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -508,7 +507,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()

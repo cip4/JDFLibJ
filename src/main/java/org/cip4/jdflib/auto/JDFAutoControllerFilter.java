@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoControllerFilter : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoControllerFilter extends JDFElement
@@ -98,8 +98,8 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTROLLERID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.URLTYPES, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumURLTypes.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTROLLERID, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.URLTYPES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumURLTypes.getEnum(0), null);
 	}
 
 	@Override
@@ -154,7 +154,7 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumURLTypes(String name)
+		protected EnumURLTypes(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -213,14 +213,14 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 		public static final EnumURLTypes SecureJMF = new EnumURLTypes("SecureJMF");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ControllerID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ControllerID
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ControllerID
 	 *
@@ -241,9 +241,9 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 		return getAttribute(AttributeName.CONTROLLERID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute URLTypes
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute URLTypes ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5.2) set attribute URLTypes
 	 *

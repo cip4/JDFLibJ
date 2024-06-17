@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -94,7 +94,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
  *****************************************************************************
  * class JDFAutoPreflightReport : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPreflightReport extends JDFResource
@@ -105,9 +105,9 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORCOUNT, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORSTATE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumErrorState.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.WARNINGCOUNT, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORCOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORSTATE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumErrorState.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.WARNINGCOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -119,11 +119,11 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666611);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PREFLIGHTPARAMS, 0x55555511);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.PREFLIGHTREPORTRULEPOOL, 0x66666611);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.RUNLIST, 0x55555511);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.PRITEM, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x6666666611l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PREFLIGHTPARAMS, 0x5555555511l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PREFLIGHTREPORTRULEPOOL, 0x6666666611l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.RUNLIST, 0x5555555511l);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.PRITEM, 0x3333333311l);
 	}
 
 	@Override
@@ -198,7 +198,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumErrorState(String name)
+		protected EnumErrorState(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -251,14 +251,13 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 		public static final EnumErrorState TestWrongPDL = new EnumErrorState("TestWrongPDL");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ErrorCount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ErrorCount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ErrorCount
 	 *
@@ -279,9 +278,9 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 		return getIntAttribute(AttributeName.ERRORCOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ErrorState
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ErrorState ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute ErrorState
 	 *
@@ -302,9 +301,10 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 		return EnumErrorState.getEnum(getAttribute(AttributeName.ERRORSTATE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WarningCount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WarningCount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WarningCount
 	 *
@@ -325,9 +325,8 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 		return getIntAttribute(AttributeName.WARNINGCOUNT, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -342,7 +341,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 
 	/**
 	 * (25) getCreateFileSpec
-	 *
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getCreateFileSpec()
@@ -382,7 +381,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 
 	/**
 	 * (25) getCreatePreflightParams
-	 *
+	 * 
 	 * @return JDFPreflightParams the element
 	 */
 	public JDFPreflightParams getCreatePreflightParams()
@@ -422,7 +421,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 
 	/**
 	 * (25) getCreatePreflightReportRulePool
-	 *
+	 * 
 	 * @return JDFPreflightReportRulePool the element
 	 */
 	public JDFPreflightReportRulePool getCreatePreflightReportRulePool()
@@ -462,7 +461,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 
 	/**
 	 * (25) getCreateRunList
-	 *
+	 * 
 	 * @return JDFRunList the element
 	 */
 	public JDFRunList getCreateRunList()
@@ -492,7 +491,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 
 	/**
 	 * (26) getCreatePRItem
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPRItem the element
 	 */
@@ -514,7 +513,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 
 	/**
 	 * Get all PRItem from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPRItem>, null if none are available
 	 */
 	public Collection<JDFPRItem> getAllPRItem()

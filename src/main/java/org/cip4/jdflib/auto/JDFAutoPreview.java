@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFGeneralID;
  *****************************************************************************
  * class JDFAutoPreview : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPreview extends JDFResource
@@ -104,13 +104,13 @@ public abstract class JDFAutoPreview extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, "PNG");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewUsage.getEnum(0), "Separation");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.URL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.CTM, 0x33333333, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.DIRECTORY, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MIMETYPEDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, "PNG");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewUsage.getEnum(0), "Separation");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.URL, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.CTM, 0x3333333333l, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.DIRECTORY, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MIMETYPEDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -122,8 +122,8 @@ public abstract class JDFAutoPreview extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COMMENT, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.GENERALID, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMMENT, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.GENERALID, 0x3333333333l);
 	}
 
 	@Override
@@ -189,7 +189,7 @@ public abstract class JDFAutoPreview extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPreviewUsage(String name)
+		protected EnumPreviewUsage(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -264,7 +264,7 @@ public abstract class JDFAutoPreview extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumCompensation(String name)
+		protected EnumCompensation(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -323,14 +323,14 @@ public abstract class JDFAutoPreview extends JDFResource
 		public static final EnumCompensation Press = new EnumCompensation("Press");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreviewFileType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreviewFileType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PreviewFileType
 	 *
@@ -351,9 +351,10 @@ public abstract class JDFAutoPreview extends JDFResource
 		return getAttribute(AttributeName.PREVIEWFILETYPE, null, "PNG");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreviewUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreviewUsage
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PreviewUsage
 	 *
@@ -374,9 +375,9 @@ public abstract class JDFAutoPreview extends JDFResource
 		return EnumPreviewUsage.getEnum(getAttribute(AttributeName.PREVIEWUSAGE, null, "Separation"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute URL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute URL
 	 *
@@ -397,9 +398,10 @@ public abstract class JDFAutoPreview extends JDFResource
 		return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Compensation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Compensation
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Compensation
 	 *
@@ -420,9 +422,9 @@ public abstract class JDFAutoPreview extends JDFResource
 		return EnumCompensation.getEnum(getAttribute(AttributeName.COMPENSATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CTM
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CTM
 	 *
@@ -445,9 +447,9 @@ public abstract class JDFAutoPreview extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Directory
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Directory ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Directory
 	 *
@@ -468,9 +470,10 @@ public abstract class JDFAutoPreview extends JDFResource
 		return getAttribute(AttributeName.DIRECTORY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MimeTypeDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MimeTypeDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MimeTypeDetails
 	 *
@@ -491,14 +494,13 @@ public abstract class JDFAutoPreview extends JDFResource
 		return getAttribute(AttributeName.MIMETYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateComment
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFComment the element
 	 */
@@ -522,7 +524,7 @@ public abstract class JDFAutoPreview extends JDFResource
 
 	/**
 	 * Get all Comment from the current element
-	 *
+	 * 
 	 * @return Collection<JDFComment>, null if none are available
 	 */
 	public Collection<JDFComment> getAllComment()
@@ -543,7 +545,7 @@ public abstract class JDFAutoPreview extends JDFResource
 
 	/**
 	 * (26) getCreateGeneralID
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGeneralID the element
 	 */
@@ -566,7 +568,7 @@ public abstract class JDFAutoPreview extends JDFResource
 
 	/**
 	 * Get all GeneralID from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGeneralID>, null if none are available
 	 */
 	public Collection<JDFGeneralID> getAllGeneralID()

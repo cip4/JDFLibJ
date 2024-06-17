@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFSeparationSpec;
  *****************************************************************************
  * class JDFAutoColorControlStrip : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoColorControlStrip extends JDFResource
@@ -102,10 +102,10 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ROTATION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SIZE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.STRIPTYPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ROTATION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SIZE, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.STRIPTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -117,10 +117,10 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CIELABMEASURINGFIELD, 0x33333331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.DENSITYMEASURINGFIELD, 0x33333331);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.PATCH, 0x31111111);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33331111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CIELABMEASURINGFIELD, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DENSITYMEASURINGFIELD, 0x3333333331l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PATCH, 0x3331111111l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x3333331111l);
 	}
 
 	@Override
@@ -185,14 +185,13 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Center
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Center
 	 *
@@ -215,9 +214,9 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Rotation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Rotation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Rotation
 	 *
@@ -238,9 +237,9 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 		return getRealAttribute(AttributeName.ROTATION, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Size
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Size ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Size
 	 *
@@ -263,9 +262,9 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StripType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StripType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StripType
 	 *
@@ -286,14 +285,13 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 		return getAttribute(AttributeName.STRIPTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateCIELABMeasuringField
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCIELABMeasuringField the element
 	 */
@@ -315,7 +313,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 
 	/**
 	 * Get all CIELABMeasuringField from the current element
-	 *
+	 * 
 	 * @return Collection<JDFCIELABMeasuringField>, null if none are available
 	 */
 	public Collection<JDFCIELABMeasuringField> getAllCIELABMeasuringField()
@@ -335,7 +333,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 
 	/**
 	 * (26) getCreateDensityMeasuringField
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDensityMeasuringField the element
 	 */
@@ -357,7 +355,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 
 	/**
 	 * Get all DensityMeasuringField from the current element
-	 *
+	 * 
 	 * @return Collection<JDFDensityMeasuringField>, null if none are available
 	 */
 	public Collection<JDFDensityMeasuringField> getAllDensityMeasuringField()
@@ -387,7 +385,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 
 	/**
 	 * (26) getCreatePatch
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPatch the element
 	 */
@@ -409,7 +407,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 
 	/**
 	 * Get all Patch from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPatch>, null if none are available
 	 */
 	public Collection<JDFPatch> getAllPatch()
@@ -429,7 +427,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 
 	/**
 	 * (26) getCreateSeparationSpec
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
@@ -451,7 +449,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 
 	/**
 	 * Get all SeparationSpec from the current element
-	 *
+	 * 
 	 * @return Collection<JDFSeparationSpec>, null if none are available
 	 */
 	public Collection<JDFSeparationSpec> getAllSeparationSpec()

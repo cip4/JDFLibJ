@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoBand : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBand extends JDFElement
@@ -92,11 +92,11 @@ public abstract class JDFAutoBand extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DATA, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.HEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MASK, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.WASMARKED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.WIDTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DATA, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.HEIGHT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MASK, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.WASMARKED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.WIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -141,14 +141,13 @@ public abstract class JDFAutoBand extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Data
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Data ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Data
 	 *
@@ -169,9 +168,9 @@ public abstract class JDFAutoBand extends JDFElement
 		return getAttribute(AttributeName.DATA, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Height
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Height ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Height
 	 *
@@ -192,9 +191,9 @@ public abstract class JDFAutoBand extends JDFElement
 		return getIntAttribute(AttributeName.HEIGHT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Mask
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Mask ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Mask
 	 *
@@ -215,9 +214,9 @@ public abstract class JDFAutoBand extends JDFElement
 		return getAttribute(AttributeName.MASK, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WasMarked
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WasMarked ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WasMarked
 	 *
@@ -238,9 +237,9 @@ public abstract class JDFAutoBand extends JDFElement
 		return getBoolAttribute(AttributeName.WASMARKED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Width
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Width ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Width
 	 *

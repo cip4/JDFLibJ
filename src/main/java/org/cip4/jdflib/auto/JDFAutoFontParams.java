@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoFontParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoFontParams extends JDFResource
@@ -98,12 +98,13 @@ public abstract class JDFAutoFontParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.EMBEDALLFONTS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CANNOTEMBEDFONTPOLICY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCannotEmbedFontPolicy.getEnum(0), "Warning");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALWAYSEMBED, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXSUBSETPCT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.NEVEREMBED, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SUBSETFONTS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.EMBEDALLFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CANNOTEMBEDFONTPOLICY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCannotEmbedFontPolicy.getEnum(0),
+				"Warning");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALWAYSEMBED, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXSUBSETPCT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.NEVEREMBED, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SUBSETFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
 	@Override
@@ -178,7 +179,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumCannotEmbedFontPolicy(String name)
+		protected EnumCannotEmbedFontPolicy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -233,14 +234,14 @@ public abstract class JDFAutoFontParams extends JDFResource
 		public static final EnumCannotEmbedFontPolicy OK = new EnumCannotEmbedFontPolicy("OK");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EmbedAllFonts
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EmbedAllFonts
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute EmbedAllFonts
 	 *
@@ -261,9 +262,10 @@ public abstract class JDFAutoFontParams extends JDFResource
 		return getBoolAttribute(AttributeName.EMBEDALLFONTS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CannotEmbedFontPolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CannotEmbedFontPolicy
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute CannotEmbedFontPolicy
 	 *
@@ -284,9 +286,9 @@ public abstract class JDFAutoFontParams extends JDFResource
 		return EnumCannotEmbedFontPolicy.getEnum(getAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, null, "Warning"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AlwaysEmbed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AlwaysEmbed ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AlwaysEmbed
 	 *
@@ -310,9 +312,10 @@ public abstract class JDFAutoFontParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxSubsetPct
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxSubsetPct
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxSubsetPct
 	 *
@@ -333,9 +336,9 @@ public abstract class JDFAutoFontParams extends JDFResource
 		return getIntAttribute(AttributeName.MAXSUBSETPCT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NeverEmbed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NeverEmbed ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute NeverEmbed
 	 *
@@ -359,9 +362,9 @@ public abstract class JDFAutoFontParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SubsetFonts
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SubsetFonts ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SubsetFonts
 	 *

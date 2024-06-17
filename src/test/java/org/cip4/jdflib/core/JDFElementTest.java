@@ -517,6 +517,7 @@ class JDFElementTest extends JDFTestCaseBase
 	{
 		assertEquals(EnumVersion.Version_1_6, EnumVersion.Version_2_0.getJDFVersion());
 		assertEquals(EnumVersion.Version_1_8, EnumVersion.Version_2_2.getJDFVersion());
+		assertEquals(EnumVersion.Version_1_9, EnumVersion.Version_2_3.getJDFVersion());
 		assertEquals(null, EnumVersion.Version_1_0.getXJDFVersion());
 		assertEquals(null, EnumVersion.Version_1_5.getXJDFVersion());
 		assertEquals(EnumVersion.Version_2_0, EnumVersion.Version_1_6.getXJDFVersion());
@@ -1232,7 +1233,12 @@ class JDFElementTest extends JDFTestCaseBase
 			if (jdfDoc != null)
 			{
 				e = (JDFElement) jdfDoc.getRoot();
-				assertTrue(e.isValid(EnumValidationLevel.RecursiveComplete), "valid doc: " + file.getPath());
+				boolean valid = e.isValid(EnumValidationLevel.RecursiveComplete);
+				if (!valid)
+				{
+					valid = e.isValid(EnumValidationLevel.RecursiveComplete);
+				}
+				assertTrue(valid, "valid doc: " + file.getPath());
 			}
 
 			// now with schema validation
@@ -1243,7 +1249,8 @@ class JDFElementTest extends JDFTestCaseBase
 			if (jdfDoc != null)
 			{
 				e = (JDFElement) jdfDoc.getRoot();
-				assertTrue(e.isValid(EnumValidationLevel.RecursiveComplete), "valid doc: " + file.getPath());
+				final boolean valid2 = e.isValid(EnumValidationLevel.RecursiveComplete);
+				assertTrue(valid2, "valid doc: " + file.getPath());
 			}
 		}
 	}

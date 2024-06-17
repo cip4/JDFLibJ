@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
  *****************************************************************************
  * class JDFAutoBoxFoldAction : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoBoxFoldAction extends JDFElement
@@ -102,8 +102,8 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDINDEX, 0x22222111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACTION, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumAction.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDINDEX, 0x2222222111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACTION, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumAction.getEnum(0), null);
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x3333333111l);
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumAction(String name)
+		protected EnumAction(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -249,14 +249,13 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 		public static final EnumAction Rotate270 = new EnumAction("Rotate270");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FoldIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FoldIndex ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FoldIndex
 	 *
@@ -279,9 +278,9 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Action
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Action ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Action
 	 *
@@ -302,14 +301,13 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 		return EnumAction.getEnum(getAttribute(AttributeName.ACTION, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateGlueLine
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
@@ -331,7 +329,7 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 
 	/**
 	 * Get all GlueLine from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGlueLine>, null if none are available
 	 */
 	public Collection<JDFGlueLine> getAllGlueLine()

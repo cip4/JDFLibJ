@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoIDPImageShift : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoIDPImageShift extends JDFElement
@@ -96,14 +96,14 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.POSITIONX, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPositionX.getEnum(0), "None");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITIONY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPositionY.getEnum(0), "None");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHIFTX, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHIFTY, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.SHIFTXSIDE1, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SHIFTXSIDE2, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SHIFTYSIDE1, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.SHIFTYSIDE2, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.POSITIONX, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPositionX.getEnum(0), "None");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITIONY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPositionY.getEnum(0), "None");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHIFTX, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHIFTY, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SHIFTXSIDE1, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SHIFTXSIDE2, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SHIFTYSIDE1, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SHIFTYSIDE2, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -158,7 +158,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPositionX(String name)
+		protected EnumPositionX(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -225,7 +225,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPositionY(String name)
+		protected EnumPositionY(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -282,14 +282,13 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 		public static final EnumPositionY Top = new EnumPositionY("Top");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PositionX
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PositionX ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PositionX
 	 *
@@ -310,9 +309,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 		return EnumPositionX.getEnum(getAttribute(AttributeName.POSITIONX, null, "None"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PositionY
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PositionY ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PositionY
 	 *
@@ -333,9 +332,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 		return EnumPositionY.getEnum(getAttribute(AttributeName.POSITIONY, null, "None"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShiftX
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShiftX ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ShiftX
 	 *
@@ -356,9 +355,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 		return getIntAttribute(AttributeName.SHIFTX, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShiftY
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShiftY ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ShiftY
 	 *
@@ -379,9 +378,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 		return getIntAttribute(AttributeName.SHIFTY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShiftXSide1
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShiftXSide1 ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ShiftXSide1
 	 *
@@ -402,9 +401,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 		return getIntAttribute(AttributeName.SHIFTXSIDE1, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShiftXSide2
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShiftXSide2 ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ShiftXSide2
 	 *
@@ -425,9 +424,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 		return getIntAttribute(AttributeName.SHIFTXSIDE2, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShiftYSide1
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShiftYSide1 ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ShiftYSide1
 	 *
@@ -448,9 +447,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 		return getIntAttribute(AttributeName.SHIFTYSIDE1, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShiftYSide2
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShiftYSide2 ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ShiftYSide2
 	 *

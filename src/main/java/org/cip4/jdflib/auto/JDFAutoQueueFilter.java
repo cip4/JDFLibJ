@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -98,7 +98,7 @@ import org.cip4.jdflib.util.JDFDate;
  *****************************************************************************
  * class JDFAutoQueueFilter : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoQueueFilter extends JDFElement
@@ -109,21 +109,21 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[15];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33311111, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.FIRSTENTRY, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.GANGNAMES, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.LASTENTRY, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXENTRIES, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MAXPRIORITY, 0x33111111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.MINPRIORITY, 0x33111111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.OLDERTHAN, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.PREVIEWUSAGES, 0x33331111, AttributeInfo.EnumAttributeType.enumerations, EnumPreviewUsages.getEnum(0), "Separation");
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.NEWERTHAN, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.QUEUEENTRYDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumQueueEntryDetails.getEnum(0), "Brief");
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.STATUSLIST, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumStatusList.getEnum(0), null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.UPDATEGRANULARITY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateGranularity.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FIRSTENTRY, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.GANGNAMES, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.LASTENTRY, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXENTRIES, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MAXPRIORITY, 0x3333111111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.MINPRIORITY, 0x3333111111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.OLDERTHAN, 0x3333333311l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.PREVIEWUSAGES, 0x3333331111l, AttributeInfo.EnumAttributeType.enumerations, EnumPreviewUsages.getEnum(0), "Separation");
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.NEWERTHAN, 0x3333333311l, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.QUEUEENTRYDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumQueueEntryDetails.getEnum(0), "Brief");
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.STATUSLIST, 0x3333333311l, AttributeInfo.EnumAttributeType.enumerations, EnumStatusList.getEnum(0), null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.UPDATEGRANULARITY, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateGranularity.getEnum(0), null);
 	}
 
 	@Override
@@ -135,10 +135,10 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEENTRYDEF, 0x33333311);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x33333311);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.GANGSOURCE, 0x33333311);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.PART, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEENTRYDEF, 0x3333333311l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x3333333311l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.GANGSOURCE, 0x3333333311l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.PART, 0x3333333311l);
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPreviewUsages(String name)
+		protected EnumPreviewUsages(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -266,7 +266,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumQueueEntryDetails(String name)
+		protected EnumQueueEntryDetails(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -333,7 +333,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumStatusList(String name)
+		protected EnumStatusList(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -408,7 +408,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumUpdateGranularity(String name)
+		protected EnumUpdateGranularity(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -461,14 +461,13 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		public static final EnumUpdateGranularity ChangesOnly = new EnumUpdateGranularity("ChangesOnly");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Activation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Activation
 	 *
@@ -489,9 +488,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FirstEntry
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FirstEntry ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FirstEntry
 	 *
@@ -512,9 +511,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return getAttribute(AttributeName.FIRSTENTRY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GangNames
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GangNames ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute GangNames
 	 *
@@ -538,9 +537,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobID
 	 *
@@ -561,9 +560,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobPartID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JobPartID
 	 *
@@ -584,9 +583,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LastEntry
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LastEntry ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LastEntry
 	 *
@@ -607,9 +606,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return getAttribute(AttributeName.LASTENTRY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxEntries
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxEntries ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxEntries
 	 *
@@ -630,9 +629,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return getIntAttribute(AttributeName.MAXENTRIES, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxPriority
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxPriority ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxPriority
 	 *
@@ -653,9 +652,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return getIntAttribute(AttributeName.MAXPRIORITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinPriority
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinPriority ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinPriority
 	 *
@@ -676,9 +675,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return getIntAttribute(AttributeName.MINPRIORITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OlderThan
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OlderThan ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute OlderThan
 	 *
@@ -706,9 +705,10 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreviewUsages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreviewUsages
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5.2) set attribute PreviewUsages
 	 *
@@ -729,9 +729,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return getEnumerationsAttribute(AttributeName.PREVIEWUSAGES, null, EnumPreviewUsages.Separation, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NewerThan
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NewerThan ---------------------------------------------------------------------
+	 */
 	/**
 	 * (11) set attribute NewerThan
 	 *
@@ -759,9 +759,10 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QueueEntryDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute QueueEntryDetails
 	 *
@@ -782,9 +783,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return EnumQueueEntryDetails.getEnum(getAttribute(AttributeName.QUEUEENTRYDETAILS, null, "Brief"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StatusList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StatusList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5.2) set attribute StatusList
 	 *
@@ -805,9 +806,10 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return getEnumerationsAttribute(AttributeName.STATUSLIST, null, EnumStatusList.getEnum(0), false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UpdateGranularity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UpdateGranularity
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute UpdateGranularity
 	 *
@@ -828,14 +830,13 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		return EnumUpdateGranularity.getEnum(getAttribute(AttributeName.UPDATEGRANULARITY, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateQueueEntryDef
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFQueueEntryDef the element
 	 */
@@ -857,7 +858,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * Get all QueueEntryDef from the current element
-	 *
+	 * 
 	 * @return Collection<JDFQueueEntryDef>, null if none are available
 	 */
 	public Collection<JDFQueueEntryDef> getAllQueueEntryDef()
@@ -877,7 +878,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (26) getCreateDevice
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
 	 */
@@ -899,7 +900,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * Get all Device from the current element
-	 *
+	 * 
 	 * @return Collection<JDFDevice>, null if none are available
 	 */
 	public Collection<JDFDevice> getAllDevice()
@@ -919,7 +920,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (26) getCreateGangSource
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGangSource the element
 	 */
@@ -941,7 +942,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * Get all GangSource from the current element
-	 *
+	 * 
 	 * @return Collection<JDFGangSource>, null if none are available
 	 */
 	public Collection<JDFGangSource> getAllGangSource()
@@ -961,7 +962,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * (26) getCreatePart
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
@@ -983,7 +984,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	/**
 	 * Get all Part from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()

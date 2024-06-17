@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.process.JDFPreflightAction;
  *****************************************************************************
  * class JDFAutoAction : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoAction extends JDFElement
@@ -103,9 +103,9 @@ public abstract class JDFAutoAction extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SEVERITY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSeverity.getEnum(0), "Error");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TESTREF, 0x22222222, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SEVERITY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSeverity.getEnum(0), "Error");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ID, 0x2222222222l, AttributeInfo.EnumAttributeType.ID, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TESTREF, 0x2222222222l, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
 
 	@Override
@@ -117,8 +117,8 @@ public abstract class JDFAutoAction extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PREFLIGHTACTION, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x3333333333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PREFLIGHTACTION, 0x3333333333l);
 	}
 
 	@Override
@@ -173,7 +173,7 @@ public abstract class JDFAutoAction extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumSeverity(String name)
+		protected EnumSeverity(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -228,14 +228,13 @@ public abstract class JDFAutoAction extends JDFElement
 		public static final EnumSeverity Information = new EnumSeverity("Information");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Severity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Severity ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Severity
 	 *
@@ -256,9 +255,9 @@ public abstract class JDFAutoAction extends JDFElement
 		return EnumSeverity.getEnum(getAttribute(AttributeName.SEVERITY, null, "Error"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ID
 	 *
@@ -281,9 +280,9 @@ public abstract class JDFAutoAction extends JDFElement
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TestRef
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TestRef ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TestRef
 	 *
@@ -304,14 +303,13 @@ public abstract class JDFAutoAction extends JDFElement
 		return getAttribute(AttributeName.TESTREF, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateLoc
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
@@ -333,7 +331,7 @@ public abstract class JDFAutoAction extends JDFElement
 
 	/**
 	 * Get all Loc from the current element
-	 *
+	 * 
 	 * @return Collection<JDFLoc>, null if none are available
 	 */
 	public Collection<JDFLoc> getAllLoc()
@@ -353,7 +351,7 @@ public abstract class JDFAutoAction extends JDFElement
 
 	/**
 	 * (26) getCreatePreflightAction
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPreflightAction the element
 	 */
@@ -375,7 +373,7 @@ public abstract class JDFAutoAction extends JDFElement
 
 	/**
 	 * Get all PreflightAction from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPreflightAction>, null if none are available
 	 */
 	public Collection<JDFPreflightAction> getAllPreflightAction()

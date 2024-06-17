@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.process.JDFDisjointing;
  *****************************************************************************
  * class JDFAutoStackingParams : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStackingParams extends JDFResource
@@ -103,23 +103,23 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[17];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BUNDLEDEPTH, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, "0");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMPENSATE, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.LAYERAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.LAYERLIFT, 0x33331111, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.LAYERCOMPRESSION, 0x33331111, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MAXAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXHEIGHT, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MINAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.MAXWEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.OFFSET, 0x44444431, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.OUTPUTBIN, 0x31111111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRESTACKAMOUNT, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRESTACKMETHOD, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumPreStackMethod.getEnum(0), null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.STACKAMOUNT, 0x31111111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.STACKCOMPRESSION, 0x33331111, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.UNDERLAYS, 0x33333111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.STANDARDAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BUNDLEDEPTH, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, "0");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMPENSATE, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.LAYERAMOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.LAYERLIFT, 0x3333331111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.LAYERCOMPRESSION, 0x3333331111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MAXAMOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXHEIGHT, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MINAMOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.MAXWEIGHT, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.OFFSET, 0x4444444431l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.OUTPUTBIN, 0x3331111111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRESTACKAMOUNT, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRESTACKMETHOD, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumPreStackMethod.getEnum(0), null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.STACKAMOUNT, 0x3331111111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.STACKCOMPRESSION, 0x3333331111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.UNDERLAYS, 0x3333333111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.STANDARDAMOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -131,7 +131,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DISJOINTING, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DISJOINTING, 0x6666666661l);
 	}
 
 	@Override
@@ -206,7 +206,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPreStackMethod(String name)
+		protected EnumPreStackMethod(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -261,14 +261,13 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		public static final EnumPreStackMethod None = new EnumPreStackMethod("None");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BundleDepth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BundleDepth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BundleDepth
 	 *
@@ -289,9 +288,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return getIntAttribute(AttributeName.BUNDLEDEPTH, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Compensate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Compensate ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Compensate
 	 *
@@ -312,9 +311,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return getBoolAttribute(AttributeName.COMPENSATE, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LayerAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LayerAmount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LayerAmount
 	 *
@@ -337,9 +336,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LayerLift
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LayerLift ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LayerLift
 	 *
@@ -360,9 +359,10 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return getBoolAttribute(AttributeName.LAYERLIFT, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LayerCompression
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LayerCompression
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LayerCompression
 	 *
@@ -383,9 +383,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return getBoolAttribute(AttributeName.LAYERCOMPRESSION, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxAmount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxAmount
 	 *
@@ -406,9 +406,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return getIntAttribute(AttributeName.MAXAMOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxHeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxHeight ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxHeight
 	 *
@@ -429,9 +429,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return getIntAttribute(AttributeName.MAXHEIGHT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinAmount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MinAmount
 	 *
@@ -452,9 +452,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return getIntAttribute(AttributeName.MINAMOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxWeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxWeight ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MaxWeight
 	 *
@@ -475,9 +475,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return getRealAttribute(AttributeName.MAXWEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Offset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Offset
 	 *
@@ -498,9 +498,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return getBoolAttribute(AttributeName.OFFSET, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OutputBin
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OutputBin ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute OutputBin
 	 *
@@ -524,9 +524,10 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreStackAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreStackAmount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PreStackAmount
 	 *
@@ -547,9 +548,10 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return getIntAttribute(AttributeName.PRESTACKAMOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreStackMethod
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreStackMethod
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute PreStackMethod
 	 *
@@ -570,9 +572,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return EnumPreStackMethod.getEnum(getAttribute(AttributeName.PRESTACKMETHOD, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StackAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StackAmount ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StackAmount
 	 *
@@ -593,9 +595,10 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return getIntAttribute(AttributeName.STACKAMOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StackCompression
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StackCompression
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StackCompression
 	 *
@@ -616,9 +619,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return getBoolAttribute(AttributeName.STACKCOMPRESSION, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UnderLays
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UnderLays ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute UnderLays
 	 *
@@ -641,9 +644,10 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StandardAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StandardAmount
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StandardAmount
 	 *
@@ -664,9 +668,8 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		return getIntAttribute(AttributeName.STANDARDAMOUNT, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -681,7 +684,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 
 	/**
 	 * (25) getCreateDisjointing
-	 *
+	 * 
 	 * @return JDFDisjointing the element
 	 */
 	public JDFDisjointing getCreateDisjointing()

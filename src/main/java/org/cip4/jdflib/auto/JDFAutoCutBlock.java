@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoCutBlock : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoCutBlock extends JDFResource
@@ -100,15 +100,15 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLOCKSIZE, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BLOCKSUBDIVISION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.BLOCKTRF, 0x33333333, AttributeInfo.EnumAttributeType.matrix, null, "1 0 0 1 0 0");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.BLOCKTYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumBlockType.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.BLOCKELEMENTSIZE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.BLOCKELEMENTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBlockElementType.getEnum(0), null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.CUTWIDTH, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.OPERATIONS, 0x31111111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLOCKSIZE, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BLOCKSUBDIVISION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BLOCKTRF, 0x3333333333l, AttributeInfo.EnumAttributeType.matrix, null, "1 0 0 1 0 0");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.BLOCKTYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumBlockType.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.BLOCKELEMENTSIZE, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.BLOCKELEMENTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumBlockElementType.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.CUTWIDTH, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.OPERATIONS, 0x3331111111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
 	@Override
@@ -183,7 +183,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBlockType(String name)
+		protected EnumBlockType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -250,7 +250,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBlockElementType(String name)
+		protected EnumBlockElementType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -303,14 +303,13 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		public static final EnumBlockElementType PunchElement = new EnumBlockElementType("PunchElement");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlockSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlockSize ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BlockSize
 	 *
@@ -333,9 +332,10 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlockSubdivision
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlockSubdivision
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BlockSubdivision
 	 *
@@ -358,9 +358,9 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlockTrf
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlockTrf ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BlockTrf
 	 *
@@ -383,9 +383,9 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlockType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlockType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute BlockType
 	 *
@@ -406,9 +406,9 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		return EnumBlockType.getEnum(getAttribute(AttributeName.BLOCKTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyIDs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AssemblyIDs
 	 *
@@ -432,9 +432,10 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlockElementSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlockElementSize
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BlockElementSize
 	 *
@@ -457,9 +458,10 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlockElementType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlockElementType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute BlockElementType
 	 *
@@ -480,9 +482,9 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		return EnumBlockElementType.getEnum(getAttribute(AttributeName.BLOCKELEMENTTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CutWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CutWidth ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CutWidth
 	 *
@@ -503,9 +505,9 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		return getRealAttribute(AttributeName.CUTWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Operations
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Operations ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Operations
 	 *

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.JDFTransferCurve;
  *****************************************************************************
  * class JDFAutoTransferCurveSet : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoTransferCurveSet extends JDFElement
@@ -99,8 +99,8 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CTM, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CTM, 0x3333333331l, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.NAME, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.TRANSFERCURVE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.TRANSFERCURVE, 0x3333333333l);
 	}
 
 	@Override
@@ -157,14 +157,13 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CTM
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CTM
 	 *
@@ -187,9 +186,9 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Name
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Name
 	 *
@@ -210,14 +209,13 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateTransferCurve
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFTransferCurve the element
 	 */
@@ -239,7 +237,7 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 
 	/**
 	 * Get all TransferCurve from the current element
-	 *
+	 * 
 	 * @return Collection<JDFTransferCurve>, null if none are available
 	 */
 	public Collection<JDFTransferCurve> getAllTransferCurve()

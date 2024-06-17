@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFFeatureAttribute;
  *****************************************************************************
  * class JDFAutoset : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoset extends JDFElement
@@ -96,7 +96,7 @@ public abstract class JDFAutoset extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.RREF, 0x22222211, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.RREF, 0x2222222211l, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public abstract class JDFAutoset extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.FEATUREATTRIBUTE, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FEATUREATTRIBUTE, 0x6666666611l);
 	}
 
 	@Override
@@ -153,14 +153,13 @@ public abstract class JDFAutoset extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute rRef
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute rRef ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute rRef
 	 *
@@ -181,9 +180,8 @@ public abstract class JDFAutoset extends JDFElement
 		return getAttribute(AttributeName.RREF, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -198,7 +196,7 @@ public abstract class JDFAutoset extends JDFElement
 
 	/**
 	 * (25) getCreateFeatureAttribute
-	 *
+	 * 
 	 * @return JDFFeatureAttribute the element
 	 */
 	public JDFFeatureAttribute getCreateFeatureAttribute()

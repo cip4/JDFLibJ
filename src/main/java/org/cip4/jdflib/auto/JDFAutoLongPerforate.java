@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
  *****************************************************************************
  * class JDFAutoLongPerforate : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoLongPerforate extends JDFElement
@@ -92,9 +92,9 @@ public abstract class JDFAutoLongPerforate extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TEETHPERDIMENSION, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.WORKINGLIST, 0x44444443, AttributeInfo.EnumAttributeType.string, null, "0 1000000000");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.XOFFSET, 0x44444442, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TEETHPERDIMENSION, 0x4444444443l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.WORKINGLIST, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, "0 1000000000");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.XOFFSET, 0x4444444442l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -139,14 +139,14 @@ public abstract class JDFAutoLongPerforate extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TeethPerDimension
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TeethPerDimension
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute TeethPerDimension
 	 *
@@ -167,9 +167,9 @@ public abstract class JDFAutoLongPerforate extends JDFElement
 		return getIntAttribute(AttributeName.TEETHPERDIMENSION, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WorkingList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkingList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute WorkingList
 	 *
@@ -192,9 +192,9 @@ public abstract class JDFAutoLongPerforate extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute XOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute XOffset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute XOffset
 	 *

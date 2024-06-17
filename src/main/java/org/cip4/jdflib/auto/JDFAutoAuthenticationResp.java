@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,7 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
  *****************************************************************************
  * class JDFAutoAuthenticationResp : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoAuthenticationResp extends JDFElement
@@ -97,7 +97,7 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SECUREURL, 0x33331111, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SECUREURL, 0x3333331111l, AttributeInfo.EnumAttributeType.URL, null, null);
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CERTIFICATE, 0x33331111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CERTIFICATE, 0x3333331111l);
 	}
 
 	@Override
@@ -154,14 +154,13 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SecureURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SecureURL ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute SecureURL
 	 *
@@ -182,14 +181,13 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 		return getAttribute(AttributeName.SECUREURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateCertificate
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element
 	 */
@@ -211,7 +209,7 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 
 	/**
 	 * Get all Certificate from the current element
-	 *
+	 * 
 	 * @return Collection<JDFElement>, null if none are available
 	 */
 	public Collection<JDFElement> getAllCertificate()

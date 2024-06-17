@@ -1,4 +1,6 @@
-/*
+/**
+ *
+ *
  * The CIP4 Software License, Version 1.0
  *
  *
@@ -33,41 +35,114 @@
  *
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
- *
+ * Created on Feb 9, 2005 by funkevol 09022005 VF initial version
  */
 package org.cip4.jdflib.core;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.junit.jupiter.api.Test;
 
-class ElemInfoTest
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
+public abstract class AtrElemInfo
 {
+	// the number of maximum possible versions
+	protected final static int MAXLOOP = 10;// 1 + EnumVersion.getEnumList().indexOf(JDFElement.getDefaultJDFVersion()); // index of default JDF version +1
+	protected final long validity;
 
-	@Test
-	void testgetFirstLastVersion()
+	/**
+	 * Constructor
+	 *
+	 * @param s
+	 */
+	public AtrElemInfo(final long s)
 	{
-		ElemInfo ai = new ElemInfo(0x44433211);
-		assertEquals(ai.getFirstVersion(), EnumVersion.Version_1_2);
-		assertEquals(ai.getLastVersion(), EnumVersion.Version_1_4);
+		final long masked = s & (0xFl << (4 * (MAXLOOP - 1)));
+		// we have hand coded stuff - assume that the last valid version (32 bit) applies to later versions
+		if (masked == 0)
+		{
+			long last = 0;
+			long s2 = 0;
 
-		ai = new ElemInfo(0x43333222);
-		assertEquals(ai.getFirstVersion(), EnumVersion.Version_1_0);
-		assertEquals(ai.getLastVersion(), EnumVersion.Version_1_6);
-
+			for (int i = 0; i < MAXLOOP; i++)
+			{
+				final int i4 = 4 * i;
+				long next = s & 0xFl << i4;
+				next = next >> i4;
+				if (next == 0)
+				{
+					next = last;
+				}
+				last = next;
+				s2 += next << i4;
+			}
+			validity = s2;
+		}
+		else
+		{
+			validity = s;
+		}
 	}
 
-	@Test
-	void testgetFirstLastVersion64()
+	/**
+	 * @return Returns the elemValidityStatus.
+	 */
+	public long getValidityStatus()
 	{
-		ElemInfo ai = new ElemInfo(0x43211111111l);
-		assertEquals(ai.getFirstVersion(), EnumVersion.Version_1_8);
-		assertEquals(EnumVersion.Version_2_3, ai.getLastVersion());
+		return validity;
+	}
 
-		ai = new ElemInfo(0x33333333222l);
-		assertEquals(ai.getFirstVersion(), EnumVersion.Version_1_0);
-		assertEquals(ai.getLastVersion().getMajorVersion(), 2);
+	/**
+	 * @see java.lang.Object#toString()
+	 * @return
+	 */
+	@Override
+	public String toString()
+	{
+		return getClass().getSimpleName() + " " + Long.toHexString(validity) + " " + getFirstVersion().getName() + " - " + getLastVersion().getName();
+	}
+
+	/**
+	 * get the first jdf version where an attribute of this type is valid
+	 *
+	 * @return the first valid version
+	 */
+	public EnumVersion getFirstVersion()
+	{
+		for (int i = 0; i < MAXLOOP; i++)
+		{
+			long masked = validity & (0xFl << (4 * i));
+			masked = masked >> (4 * i);
+			if (isMasked(masked))
+			{
+				return EnumVersion.getEnum(i + 1);
+			}
+		}
+		return null;
+	}
+
+	abstract boolean isMasked(long masked);
+
+	/**
+	 * get the last jdf version where an element of this type is valid
+	 *
+	 * @return
+	 */
+	public EnumVersion getLastVersion()
+	{
+		for (int i = MAXLOOP - 1; i >= 0; i--)
+		{
+			long masked = validity & 0xFl << (4 * i);
+			masked = masked >> (4 * i);
+			if (masked == 2 || masked == 3)
+			{
+				EnumVersion ret = EnumVersion.getEnum(i + 1);
+				if (i == MAXLOOP - 1)
+					ret = ret.getXJDFVersion();
+				return ret;
+			}
+		}
+		return null;
 	}
 
 }

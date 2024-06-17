@@ -46,7 +46,6 @@ package org.cip4.jdflib.core;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
@@ -57,14 +56,19 @@ import org.cip4.jdflib.datatypes.JDFXYPairRange;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
 import org.cip4.jdflib.util.StringUtil;
 
+// 0 Unknown UNKNOWN);
+// 1 None NONE);
+// 2 Required REQUIRED);
+// 3 Optional OPTIONAL);
+// 4 Deprecated DEPRECATED);
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
  *         Aug 10, 2009
  */
-public class AtrInfo
+public class AtrInfo extends AtrElemInfo
 {
-	private final long atrValidityStatus;
 	private final AttributeInfo.EnumAttributeType atrType;
 	private final ValuedEnum enumEnum;
 	private final String atrDefault;
@@ -77,7 +81,7 @@ public class AtrInfo
 	 */
 	public AtrInfo(final long s, final AttributeInfo.EnumAttributeType t, final ValuedEnum e, final String _atrDefault)
 	{
-		atrValidityStatus = s;
+		super(s);
 		atrType = t;
 		enumEnum = e;
 		atrDefault = _atrDefault;
@@ -90,7 +94,7 @@ public class AtrInfo
 	 */
 	public AtrInfo(final long s, final AttributeInfo.EnumAttributeType t, final ValuedEnum e)
 	{
-		atrValidityStatus = s;
+		super(s);
 		atrType = t;
 		enumEnum = e;
 		atrDefault = null;
@@ -320,9 +324,10 @@ public class AtrInfo
 	/**
 	 * @return Returns the atrValidityStatus.
 	 */
-	public long getAtrValidityStatus()
+	@Override
+	public long getValidityStatus()
 	{
-		return atrValidityStatus;
+		return validity;
 	}
 
 	/**
@@ -347,8 +352,7 @@ public class AtrInfo
 	@Override
 	public String toString()
 	{
-		String s = "Type: " + atrType.toString();
-		s += "; Validity: " + Long.toHexString(atrValidityStatus);
+		String s = super.toString();
 		if (enumEnum != null)
 		{
 			s += "; Enum: " + enumEnum.toString();
@@ -361,45 +365,10 @@ public class AtrInfo
 		return s;
 	}
 
-	/**
-	 * get the first jdf version where an attribute of this type is valid
-	 *
-	 * @return the first valid version
-	 */
-	public EnumVersion getFirstVersion()
+	@Override
+	boolean isMasked(final long masked)
 	{
-		for (int i = 0; i < 8; i++)
-		{
-			long masked = atrValidityStatus & (0xFl << (4 * i));
-			masked = masked >> (4 * i);
-			if (masked == 2 || masked == 3)
-			{
-				return EnumVersion.getEnum(i + 1);
-			}
-		}
-		return null;
+		return masked == 2 || masked == 3;
 	}
 
-	/**
-	 * get the last jdf version where an attribute of this type is valid
-	 *
-	 * @return the last valid version
-	 */
-	public EnumVersion getLastVersion()
-	{
-		for (int i = 7; i >= 0; i--)
-		{
-			long masked = atrValidityStatus & 0xFl << (4 * i);
-			masked = masked >> (4 * i);
-			if (masked == 2 || masked == 3)
-			{
-				// dirty hack to allow FixVersion with 2.x, if all bits, we also assume jdf 2.2 (xjdf)
-				if (i == 7)
-					return EnumVersion.Version_2_3;
-				else
-					return EnumVersion.getEnum(i + 1);
-			}
-		}
-		return null;
-	}
 }

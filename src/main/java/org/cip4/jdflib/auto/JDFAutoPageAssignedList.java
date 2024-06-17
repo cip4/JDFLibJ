@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
  *****************************************************************************
  * class JDFAutoPageAssignedList : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPageAssignedList extends JDFElement
@@ -93,10 +93,10 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BROADSHEETNUMBER, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOGICALPRINTERSECTION, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x22222111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PAGEPLACEMENTNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BROADSHEETNUMBER, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOGICALPRINTERSECTION, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x2222222111l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PAGEPLACEMENTNAME, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -141,14 +141,14 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BroadsheetNumber
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BroadsheetNumber
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute BroadsheetNumber
 	 *
@@ -169,9 +169,10 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 		return getIntAttribute(AttributeName.BROADSHEETNUMBER, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LogicalPrinterSection
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LogicalPrinterSection
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute LogicalPrinterSection
 	 *
@@ -192,9 +193,10 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 		return getAttribute(AttributeName.LOGICALPRINTERSECTION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageListIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageListIndex
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PageListIndex
 	 *
@@ -217,9 +219,10 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PagePlacementName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PagePlacementName
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PagePlacementName
 	 *

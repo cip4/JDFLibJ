@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.jmf.JDFIDInfo;
  *****************************************************************************
  * class JDFAutoNewJDFCmdParams : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoNewJDFCmdParams extends JDFElement
@@ -95,7 +95,7 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.JDFDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, "Brief");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.JDFDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, "Brief");
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.IDINFO, 0x55555511);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.IDINFO, 0x5555555511l);
 	}
 
 	@Override
@@ -152,14 +152,13 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JDFDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JDFDetails ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute JDFDetails
 	 *
@@ -180,9 +179,8 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
 		return getAttribute(AttributeName.JDFDETAILS, null, "Brief");
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -197,7 +195,7 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
 
 	/**
 	 * (25) getCreateIDInfo
-	 *
+	 * 
 	 * @return JDFIDInfo the element
 	 */
 	public JDFIDInfo getCreateIDInfo()

@@ -293,14 +293,13 @@ public abstract class JDFAutoCertificate extends JDFElement
 		public static final EnumAnchorType Sibling = new EnumAnchorType("Sibling");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Anchor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Anchor
 	 *
@@ -321,9 +320,9 @@ public abstract class JDFAutoCertificate extends JDFElement
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AnchorType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AnchorType ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute AnchorType
 	 *
@@ -344,9 +343,9 @@ public abstract class JDFAutoCertificate extends JDFElement
 		return EnumAnchorType.getEnum(getAttribute(AttributeName.ANCHORTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute rRef
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute rRef ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute rRef
 	 *

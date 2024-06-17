@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.resource.process.JDFEmployee;
@@ -93,7 +94,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
  *****************************************************************************
  * class JDFAutoQuery : public JDFMessage
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoQuery extends JDFMessage
@@ -101,13 +102,14 @@ public abstract class JDFAutoQuery extends JDFMessage
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACKNOWLEDGEFORMAT, 0x44433111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACKNOWLEDGETEMPLATE, 0x44433111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ACKNOWLEDGEURL, 0x33333111, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumerations, EnumAcknowledgeType.getEnum(0), "Completed");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACKNOWLEDGEFORMAT, 0x4444433111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACKNOWLEDGETEMPLATE, 0x4444433111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ACKNOWLEDGEURL, 0x3333333111l, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumerations, EnumAcknowledgeType.getEnum(0), "Completed");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.LANGUAGES, 0x3311111111l, AttributeInfo.EnumAttributeType.languages, null, null);
 	}
 
 	@Override
@@ -119,8 +121,8 @@ public abstract class JDFAutoQuery extends JDFMessage
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x6666666666l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x3333333333l);
 	}
 
 	@Override
@@ -175,7 +177,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumAcknowledgeType(String name)
+		protected EnumAcknowledgeType(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -230,14 +232,14 @@ public abstract class JDFAutoQuery extends JDFMessage
 		public static final EnumAcknowledgeType Completed = new EnumAcknowledgeType("Completed");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AcknowledgeFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeFormat
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AcknowledgeFormat
 	 *
@@ -258,9 +260,10 @@ public abstract class JDFAutoQuery extends JDFMessage
 		return getAttribute(AttributeName.ACKNOWLEDGEFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AcknowledgeTemplate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeTemplate
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AcknowledgeTemplate
 	 *
@@ -281,9 +284,10 @@ public abstract class JDFAutoQuery extends JDFMessage
 		return getAttribute(AttributeName.ACKNOWLEDGETEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AcknowledgeURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeURL
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AcknowledgeURL
 	 *
@@ -304,9 +308,10 @@ public abstract class JDFAutoQuery extends JDFMessage
 		return getAttribute(AttributeName.ACKNOWLEDGEURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AcknowledgeType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeType
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5.2) set attribute AcknowledgeType
 	 *
@@ -327,9 +332,34 @@ public abstract class JDFAutoQuery extends JDFMessage
 		return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.Completed, false);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Languages ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute Languages
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setLanguages(VString value)
+	{
+		setAttribute(AttributeName.LANGUAGES, value, null);
+	}
+
+	/**
+	 * (21) get VString attribute Languages
+	 *
+	 * @return VString the value of the attribute
+	 */
+	public VString getLanguages()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
+
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -344,7 +374,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 
 	/**
 	 * (25) getCreateSubscription
-	 *
+	 * 
 	 * @return JDFSubscription the element
 	 */
 	public JDFSubscription getCreateSubscription()
@@ -364,7 +394,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 
 	/**
 	 * (26) getCreateEmployee
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -386,7 +416,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 
 	/**
 	 * Get all Employee from the current element
-	 *
+	 * 
 	 * @return Collection<JDFEmployee>, null if none are available
 	 */
 	public Collection<JDFEmployee> getAllEmployee()

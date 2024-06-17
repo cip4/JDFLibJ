@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.resource.JDFResource;
  *****************************************************************************
  * class JDFAutoDensityMeasuringField : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoDensityMeasuringField extends JDFResource
@@ -98,19 +98,19 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DENSITY, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DIAMETER, 0x22222222, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.DOTGAIN, 0x22222222, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PERCENTAGE, 0x22222222, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SCREEN, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SEPARATION, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.TOLERANCECYAN, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.TOLERANCEMAGENTA, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.TOLERANCEYELLOW, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.TOLERANCEBLACK, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.TOLERANCEDOTGAIN, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.SETUP, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DENSITY, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DIAMETER, 0x2222222222l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DOTGAIN, 0x2222222222l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PERCENTAGE, 0x2222222222l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SCREEN, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SEPARATION, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.TOLERANCECYAN, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.TOLERANCEMAGENTA, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.TOLERANCEYELLOW, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.TOLERANCEBLACK, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.TOLERANCEDOTGAIN, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.SETUP, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORMEASUREMENTCONDITIONS, 0x66666661);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORMEASUREMENTCONDITIONS, 0x6666666661l);
 	}
 
 	@Override
@@ -187,14 +187,13 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Center
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Center
 	 *
@@ -217,9 +216,9 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Density
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Density ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Density
 	 *
@@ -242,9 +241,9 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Diameter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Diameter ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Diameter
 	 *
@@ -265,9 +264,9 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 		return getRealAttribute(AttributeName.DIAMETER, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DotGain
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DotGain ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DotGain
 	 *
@@ -288,9 +287,9 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 		return getRealAttribute(AttributeName.DOTGAIN, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Percentage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Percentage ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Percentage
 	 *
@@ -311,9 +310,9 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 		return getRealAttribute(AttributeName.PERCENTAGE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Screen
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Screen ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Screen
 	 *
@@ -334,9 +333,9 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 		return getAttribute(AttributeName.SCREEN, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Separation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Separation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Separation
 	 *
@@ -359,9 +358,10 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 		return getAttribute(AttributeName.SEPARATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ToleranceCyan
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ToleranceCyan
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ToleranceCyan
 	 *
@@ -384,9 +384,10 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ToleranceMagenta
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ToleranceMagenta
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ToleranceMagenta
 	 *
@@ -409,9 +410,10 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ToleranceYellow
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ToleranceYellow
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ToleranceYellow
 	 *
@@ -434,9 +436,10 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ToleranceBlack
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ToleranceBlack
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ToleranceBlack
 	 *
@@ -459,9 +462,10 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ToleranceDotGain
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ToleranceDotGain
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ToleranceDotGain
 	 *
@@ -484,9 +488,9 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Setup
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Setup ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Setup
 	 *
@@ -507,9 +511,8 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 		return getAttribute(AttributeName.SETUP, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
@@ -524,7 +527,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 
 	/**
 	 * (25) getCreateColorMeasurementConditions
-	 *
+	 * 
 	 * @return JDFColorMeasurementConditions the element
 	 */
 	public JDFColorMeasurementConditions getCreateColorMeasurementConditions()

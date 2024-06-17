@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,7 +95,7 @@ import org.cip4.jdflib.resource.process.JDFPosition;
  *****************************************************************************
  * class JDFAutoStripMark : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoStripMark extends JDFElement
@@ -106,23 +106,23 @@ public abstract class JDFAutoStripMark extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[17];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ABSOLUTEHEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ABSOLUTEWIDTH, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ANCHOR, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.FONT, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.FONTSIZE, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.HORIZONTALFITPOLICY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumHorizontalFitPolicy.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.ID, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MARKCONTEXT, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumMarkContext.getEnum(0), null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.MARKNAME, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.MARKSIDE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumMarkSide.getEnum(0), null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.OFFSET, 0x33333111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.ORD, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.RELATIVEHEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.RELATIVEWIDTH, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.STRIPMARKDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.VERTICALFITPOLICY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumVerticalFitPolicy.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ABSOLUTEHEIGHT, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ABSOLUTEWIDTH, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ANCHOR, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.FONT, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.FONTSIZE, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.HORIZONTALFITPOLICY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumHorizontalFitPolicy.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.ID, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MARKCONTEXT, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumMarkContext.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.MARKNAME, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.MARKSIDE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumMarkSide.getEnum(0), null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.OFFSET, 0x3333333111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.ORD, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.RELATIVEHEIGHT, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.RELATIVEWIDTH, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.STRIPMARKDETAILS, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.VERTICALFITPOLICY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumVerticalFitPolicy.getEnum(0), null);
 	}
 
 	@Override
@@ -134,10 +134,10 @@ public abstract class JDFAutoStripMark extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.MARKCOLOR, 0x33333111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.POSITION, 0x66666111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.JOBFIELD, 0x66666111);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.REFANCHOR, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.MARKCOLOR, 0x3333333111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.POSITION, 0x6666666111l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.JOBFIELD, 0x6666666111l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.REFANCHOR, 0x3333333111l);
 	}
 
 	@Override
@@ -192,7 +192,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumAnchor(String name)
+		protected EnumAnchor(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -269,7 +269,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumHorizontalFitPolicy(String name)
+		protected EnumHorizontalFitPolicy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -338,7 +338,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMarkContext(String name)
+		protected EnumMarkContext(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -407,7 +407,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumMarkSide(String name)
+		protected EnumMarkSide(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -474,7 +474,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOrientation(String name)
+		protected EnumOrientation(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -549,7 +549,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumVerticalFitPolicy(String name)
+		protected EnumVerticalFitPolicy(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -608,14 +608,14 @@ public abstract class JDFAutoStripMark extends JDFElement
 		public static final EnumVerticalFitPolicy RepeatUnclipped = new EnumVerticalFitPolicy("RepeatUnclipped");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AbsoluteHeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AbsoluteHeight
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AbsoluteHeight
 	 *
@@ -636,9 +636,10 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getRealAttribute(AttributeName.ABSOLUTEHEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AbsoluteWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AbsoluteWidth
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AbsoluteWidth
 	 *
@@ -659,9 +660,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getRealAttribute(AttributeName.ABSOLUTEWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Anchor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Anchor
 	 *
@@ -682,9 +683,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Font
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Font ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Font
 	 *
@@ -705,9 +706,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getAttribute(AttributeName.FONT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FontSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FontSize ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute FontSize
 	 *
@@ -728,9 +729,10 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getRealAttribute(AttributeName.FONTSIZE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HorizontalFitPolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HorizontalFitPolicy
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute HorizontalFitPolicy
 	 *
@@ -751,9 +753,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return EnumHorizontalFitPolicy.getEnum(getAttribute(AttributeName.HORIZONTALFITPOLICY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ID
 	 *
@@ -776,9 +778,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkContext
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkContext ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute MarkContext
 	 *
@@ -799,9 +801,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return EnumMarkContext.getEnum(getAttribute(AttributeName.MARKCONTEXT, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkName ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute MarkName
 	 *
@@ -822,9 +824,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getAttribute(AttributeName.MARKNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkSide
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkSide ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute MarkSide
 	 *
@@ -845,9 +847,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return EnumMarkSide.getEnum(getAttribute(AttributeName.MARKSIDE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Offset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Offset
 	 *
@@ -870,9 +872,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Ord
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Ord ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Ord
 	 *
@@ -893,9 +895,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getIntAttribute(AttributeName.ORD, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Orientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute Orientation
 	 *
@@ -916,9 +918,10 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RelativeHeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelativeHeight
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RelativeHeight
 	 *
@@ -939,9 +942,10 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getRealAttribute(AttributeName.RELATIVEHEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RelativeWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelativeWidth
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute RelativeWidth
 	 *
@@ -962,9 +966,10 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getRealAttribute(AttributeName.RELATIVEWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StripMarkDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StripMarkDetails
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute StripMarkDetails
 	 *
@@ -985,9 +990,10 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return getAttribute(AttributeName.STRIPMARKDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute VerticalFitPolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute VerticalFitPolicy
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute VerticalFitPolicy
 	 *
@@ -1008,14 +1014,13 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return EnumVerticalFitPolicy.getEnum(getAttribute(AttributeName.VERTICALFITPOLICY, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateMarkColor
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMarkColor the element
 	 */
@@ -1037,7 +1042,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * Get all MarkColor from the current element
-	 *
+	 * 
 	 * @return Collection<JDFMarkColor>, null if none are available
 	 */
 	public Collection<JDFMarkColor> getAllMarkColor()
@@ -1067,7 +1072,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (25) getCreatePosition
-	 *
+	 * 
 	 * @return JDFPosition the element
 	 */
 	public JDFPosition getCreatePosition()
@@ -1097,7 +1102,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (25) getCreateJobField
-	 *
+	 * 
 	 * @return JDFJobField the element
 	 */
 	public JDFJobField getCreateJobField()
@@ -1127,7 +1132,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (26) getCreateRefAnchor
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFRefAnchor the element
 	 */
@@ -1149,7 +1154,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * Get all RefAnchor from the current element
-	 *
+	 * 
 	 * @return Collection<JDFRefAnchor>, null if none are available
 	 */
 	public Collection<JDFRefAnchor> getAllRefAnchor()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
  *****************************************************************************
  * class JDFAutoXYPairEvaluation : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoXYPairEvaluation extends JDFResource
@@ -103,9 +103,9 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.XYRELATION, 0x33333333, AttributeInfo.EnumAttributeType.XYRelation, EnumXYRelation.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TOLERANCE, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.XYRELATION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYRelation, EnumXYRelation.getEnum(0), null);
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x3333333333l);
 	}
 
 	@Override
@@ -183,7 +183,7 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumXYRelation(String name)
+		protected EnumXYRelation(String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -244,14 +244,13 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 		public static final EnumXYRelation ne = new EnumXYRelation("ne");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Tolerance
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Tolerance ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Tolerance
 	 *
@@ -274,9 +273,9 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ValueList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ValueList ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ValueList
 	 *
@@ -284,7 +283,7 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 	 */
 	public void setValueList(JDFXYPairRangeList value)
 	{
-		setAttribute(AttributeName.VALUELIST, value.toString(), null);
+		setAttribute(AttributeName.VALUELIST, value == null ? null : value.toString(), null);
 	}
 
 	/**
@@ -299,9 +298,9 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute XYRelation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute XYRelation ---------------------------------------------------------------------
+	 */
 	/**
 	 * (5) set attribute XYRelation
 	 *
@@ -322,14 +321,13 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 		return EnumXYRelation.getEnum(getAttribute(AttributeName.XYRELATION, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateBasicPreflightTest
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest the element
 	 */
@@ -351,7 +349,7 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 
 	/**
 	 * Get all BasicPreflightTest from the current element
-	 *
+	 * 
 	 * @return Collection<JDFBasicPreflightTest>, null if none are available
 	 */
 	public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()

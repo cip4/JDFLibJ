@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -2422,7 +2422,8 @@ public final class AttributeName
 	public static final String PIXELSKIP = "PixelSkip";
 	/** */
 	public static final String PIXELWIDTH = "PixelWidth";
-	/** */
+	public static final String PLACEDQUANTITY = "PlacedQuantity";
+
 	public static final String PLATELAYOUT = "PlateLayout";
 	public static final String PLATEPOSITION = "PlatePosition";
 	public static final String PLATETECHNOLOGY = "PlateTechnology";
@@ -3107,6 +3108,7 @@ public final class AttributeName
 	public static final String SPLITDOCUMENTS = "SplitDocuments";
 	/** */
 	public static final String SPOTFUNCTION = "SpotFunction";
+	public static final String SPOTTYPE = "SpotType";
 	public static final String SPREADTYPE = "SpreadType";
 	public static final String SRGB = "sRGB";
 	/** */

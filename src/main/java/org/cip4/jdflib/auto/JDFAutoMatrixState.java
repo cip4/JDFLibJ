@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFLoc;
  *****************************************************************************
  * class JDFAutoMatrixState : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoMatrixState extends JDFResource
@@ -100,14 +100,14 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDROTATEMOD, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDSHIFT, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ALLOWEDTRANSFORMS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTROTATEMOD, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRESENTSHIFT, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTTRANSFORMS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDROTATEMOD, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDSHIFT, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ALLOWEDTRANSFORMS, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTROTATEMOD, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRESENTSHIFT, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTTRANSFORMS, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -119,8 +119,8 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x33333331);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUE, 0x33333331);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x3333333331l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUE, 0x3333333331l);
 	}
 
 	@Override
@@ -176,14 +176,14 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return bRet;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DefaultValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute DefaultValue
 	 *
@@ -206,9 +206,10 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CurrentValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute CurrentValue
 	 *
@@ -231,9 +232,10 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedRotateMod
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedRotateMod
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedRotateMod
 	 *
@@ -254,9 +256,10 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return getRealAttribute(AttributeName.ALLOWEDROTATEMOD, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedShift
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedShift
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedShift
 	 *
@@ -277,9 +280,10 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return getAttribute(AttributeName.ALLOWEDSHIFT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedTransforms
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedTransforms
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute AllowedTransforms
 	 *
@@ -300,9 +304,10 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return getAttribute(AttributeName.ALLOWEDTRANSFORMS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentRotateMod
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentRotateMod
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentRotateMod
 	 *
@@ -323,9 +328,10 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return getRealAttribute(AttributeName.PRESENTROTATEMOD, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentShift
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentShift
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentShift
 	 *
@@ -346,9 +352,10 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return getAttribute(AttributeName.PRESENTSHIFT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentTransforms
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentTransforms
+	 * ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PresentTransforms
 	 *
@@ -369,14 +376,13 @@ public abstract class JDFAutoMatrixState extends JDFResource
 		return getAttribute(AttributeName.PRESENTTRANSFORMS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreateLoc
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
@@ -398,7 +404,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * Get all Loc from the current element
-	 *
+	 * 
 	 * @return Collection<JDFLoc>, null if none are available
 	 */
 	public Collection<JDFLoc> getAllLoc()
@@ -418,7 +424,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * (26) getCreateValue
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFValue the element
 	 */
@@ -440,7 +446,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 
 	/**
 	 * Get all Value from the current element
-	 *
+	 * 
 	 * @return Collection<JDFValue>, null if none are available
 	 */
 	public Collection<JDFValue> getAllValue()

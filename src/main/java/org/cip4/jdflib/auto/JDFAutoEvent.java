@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,8 +92,8 @@ public abstract class JDFAutoEvent extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.EVENTID, 0x22222211, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.EVENTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.EVENTID, 0x2222222211l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EVENTVALUE, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -104,7 +104,7 @@ public abstract class JDFAutoEvent extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoEvent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -115,7 +115,7 @@ public abstract class JDFAutoEvent extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoEvent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -127,7 +127,7 @@ public abstract class JDFAutoEvent extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoEvent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -138,17 +138,16 @@ public abstract class JDFAutoEvent extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EventID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EventID ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute EventID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEventID(String value)
@@ -158,7 +157,7 @@ public abstract class JDFAutoEvent extends JDFElement
 
 	/**
 	 * (23) get String attribute EventID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getEventID()
@@ -166,12 +165,12 @@ public abstract class JDFAutoEvent extends JDFElement
 		return getAttribute(AttributeName.EVENTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EventValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EventValue ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute EventValue
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEventValue(String value)
@@ -181,7 +180,7 @@ public abstract class JDFAutoEvent extends JDFElement
 
 	/**
 	 * (23) get String attribute EventValue
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getEventValue()

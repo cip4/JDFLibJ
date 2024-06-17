@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.process.JDFPRGroup;
  *****************************************************************************
  * class JDFAutoPRItem : public JDFElement
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoPRItem extends JDFElement
@@ -100,9 +100,9 @@ public abstract class JDFAutoPRItem extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIONREF, 0x22222211, AttributeInfo.EnumAttributeType.IDREF, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.OCCURRENCES, 0x22222211, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGESET, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIONREF, 0x2222222211l, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.OCCURRENCES, 0x2222222211l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGESET, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 	}
 
 	@Override
@@ -114,8 +114,8 @@ public abstract class JDFAutoPRItem extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PRERROR, 0x33333311);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PRGROUP, 0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PRERROR, 0x3333333311l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PRGROUP, 0x3333333311l);
 	}
 
 	@Override
@@ -160,14 +160,13 @@ public abstract class JDFAutoPRItem extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ActionRef
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ActionRef ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute ActionRef
 	 *
@@ -188,9 +187,9 @@ public abstract class JDFAutoPRItem extends JDFElement
 		return getAttribute(AttributeName.ACTIONREF, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Occurrences
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Occurrences ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute Occurrences
 	 *
@@ -211,9 +210,9 @@ public abstract class JDFAutoPRItem extends JDFElement
 		return getIntAttribute(AttributeName.OCCURRENCES, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageSet
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageSet ---------------------------------------------------------------------
+	 */
 	/**
 	 * (36) set attribute PageSet
 	 *
@@ -236,14 +235,13 @@ public abstract class JDFAutoPRItem extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (26) getCreatePRError
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPRError the element
 	 */
@@ -265,7 +263,7 @@ public abstract class JDFAutoPRItem extends JDFElement
 
 	/**
 	 * Get all PRError from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPRError>, null if none are available
 	 */
 	public Collection<JDFPRError> getAllPRError()
@@ -285,7 +283,7 @@ public abstract class JDFAutoPRItem extends JDFElement
 
 	/**
 	 * (26) getCreatePRGroup
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPRGroup the element
 	 */
@@ -307,7 +305,7 @@ public abstract class JDFAutoPRItem extends JDFElement
 
 	/**
 	 * Get all PRGroup from the current element
-	 *
+	 * 
 	 * @return Collection<JDFPRGroup>, null if none are available
 	 */
 	public Collection<JDFPRGroup> getAllPRGroup()
