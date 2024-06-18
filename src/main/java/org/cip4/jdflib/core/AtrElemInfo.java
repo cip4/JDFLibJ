@@ -44,7 +44,7 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public abstract class AtrElemInfo
+abstract class AtrElemInfo
 {
 	// the number of maximum possible versions
 	protected final static int MAXLOOP = 10;// 1 + EnumVersion.getEnumList().indexOf(JDFElement.getDefaultJDFVersion()); // index of default JDF version +1
@@ -55,7 +55,7 @@ public abstract class AtrElemInfo
 	 *
 	 * @param s
 	 */
-	public AtrElemInfo(final long s)
+	AtrElemInfo(final long s)
 	{
 		final long masked = s & (0xFl << (4 * (MAXLOOP - 1)));
 		// we have hand coded stuff - assume that the last valid version (32 bit) applies to later versions

@@ -56,11 +56,11 @@ import org.cip4.jdflib.datatypes.JDFXYPairRange;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
 import org.cip4.jdflib.util.StringUtil;
 
-// 0 Unknown UNKNOWN);
+// 0 Unknown UNKNOWN;
 // 1 None NONE);
-// 2 Required REQUIRED);
-// 3 Optional OPTIONAL);
-// 4 Deprecated DEPRECATED);
+// 2 Required REQUIRED;
+// 3 Optional OPTIONAL;
+// 4 Deprecated DEPRECATED;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG

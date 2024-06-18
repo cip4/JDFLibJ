@@ -49,12 +49,19 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeValidity;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 
-/**
+/*
  * @author MatternK
  * @See EnumElementValidity below for current list of validity value
  *
- *      0 Unknown UNKNOWN); 1 None NONE); 2 Required REQUIRED); 3 Optional OPTIONAL); 4 Deprecated DEPRECATED); 5 SingleRequired SINGLEREQUIRED); 6 SingleOptional SINGLEOPTIONAL); 7 SingleDeprecated
- *      SINGLEDEPRECATED); 8 Dummy DUMMY);
+ *      0 Unknown UNKNOWN
+ *      1 None NONE
+ *      2 Required REQUIRED
+ *      3 Optional OPTIONAL
+ *      4 Deprecated DEPRECATED
+ *      5 SingleRequired SINGLEREQUIRED
+ *      6 SingleOptional SINGLEOPTIONAL
+ *      7 SingleDeprecated SINGLEDEPRECATED
+ *      8 Dummy DUMMY
  */
 public class ElementInfo
 {
@@ -224,8 +231,7 @@ public class ElementInfo
 	 * @param elemValidity4
 	 * @return VString: list of strings containing the names of the matching elements
 	 */
-	private VString conformingElements(final EnumElementValidity elemValidity1, final EnumElementValidity elemValidity2, final EnumElementValidity elemValidity3,
-			final EnumElementValidity elemValidity4)
+	private VString conformingElements(final EnumElementValidity elemValidity1, final EnumElementValidity elemValidity2, final EnumElementValidity elemValidity3, final EnumElementValidity elemValidity4)
 	{
 		final VString matchingElements = new VString();
 		final Set<String> keySet = elementInfoTable.keySet();
@@ -305,8 +311,7 @@ public class ElementInfo
 	 * @param elemValidity4
 	 * @return boolean: true if at least one sub-element matches the requested validity
 	 */
-	public boolean hasConformingElements(final EnumElementValidity elemValidity1, final EnumElementValidity elemValidity2, final EnumElementValidity elemValidity3,
-			final EnumElementValidity elemValidity4)
+	public boolean hasConformingElements(final EnumElementValidity elemValidity1, final EnumElementValidity elemValidity2, final EnumElementValidity elemValidity3, final EnumElementValidity elemValidity4)
 	{
 		return !conformingElements(elemValidity1, elemValidity2, elemValidity3, elemValidity4).isEmpty();
 	}
@@ -322,8 +327,8 @@ public class ElementInfo
 	}
 
 	/**
-	 * Returns the list of optional sub-elements for the specified JDF version. Note: This includes elements marked as optional as well as elements marked as deprecated (since, for backward
-	 * compatibility, these are also optional).
+	 * Returns the list of optional sub-elements for the specified JDF version. Note: This includes elements marked as optional as well as elements marked as deprecated (since, for
+	 * backward compatibility, these are also optional).
 	 *
 	 * @return VString: list of strings containing the names of the optional attributes
 	 */
@@ -363,7 +368,8 @@ public class ElementInfo
 	}
 
 	/*
-	 * ----------------------------------------------------------------------- Enumeration of element validity values -----------------------------------------------------------------------
+	 * ----------------------------------------------------------------------- Enumeration of element validity values
+	 * -----------------------------------------------------------------------
 	 */
 
 	/**

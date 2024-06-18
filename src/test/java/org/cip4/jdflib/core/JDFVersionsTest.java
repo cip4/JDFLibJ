@@ -72,7 +72,6 @@ package org.cip4.jdflib.core;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -99,7 +98,7 @@ class JDFVersionsTest extends JDFTestCaseBase
 		for (final Object o : EnumVersion.getEnumList())
 		{
 			final EnumVersion v = (EnumVersion) o;
-			assertNotNull(JDFVersions.getTheMask(v));
+			assertNotEquals(0, JDFVersions.getTheMask(v));
 			assertNotEquals(v, vLast);
 			vLast = v;
 
