@@ -40,7 +40,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.process.JDFContact;
@@ -79,12 +78,6 @@ public class WalkContact extends WalkResource
 	{
 		final JDFContact c = (JDFContact) e;
 		final ResourceHelper h = ResourceHelper.getHelper(c);
-		final VJDFAttributeMap vMap = h == null ? null : h.getPartMapVector();
-		if (!VJDFAttributeMap.isEmpty(vMap))
-		{
-			final VString cTypes = vMap.getPartValues(XJDFConstants.ContactType, true);
-			c.setContactTypes(cTypes);
-		}
 		if (trackElem instanceof JDFEmployee)
 		{
 			c.removeAttribute(AttributeName.CONTACTTYPES);

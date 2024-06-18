@@ -40,7 +40,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.resource.process.JDFContact;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -78,7 +78,8 @@ public class WalkXJDFContactResource extends WalkXJDFResource
 		boolean isContact = ResourceHelper.isAsset(toCheck, ElementName.CONTACT);
 		if (isContact)
 		{
-			isContact = toCheck.getChildWithAttribute(ElementName.PART, XJDFConstants.ContactType, null, ElementName.EMPLOYEE, 0, true) != null;
+			final JDFContact c = (JDFContact) toCheck.getElement(ElementName.CONTACT);
+			isContact = c != null && c.getContactTypes().contains(ElementName.EMPLOYEE);
 		}
 		return isContact;
 	}

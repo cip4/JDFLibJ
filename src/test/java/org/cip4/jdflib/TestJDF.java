@@ -56,8 +56,8 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFSpawn;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -66,7 +66,7 @@ import org.junit.jupiter.api.Test;
  *
  *         < July 9, 2009
  */
-public class TestJDF extends JDFTestCaseBase
+class TestJDF extends JDFTestCaseBase
 {
 
 	/**
@@ -130,18 +130,19 @@ public class TestJDF extends JDFTestCaseBase
 	 */
 	/*
 	 * void testSpawnRW() throws Throwable { JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-68493/giant.jdf"); if (jdfDoc == null) return; JDFNode jdfRoot =
-	 * jdfDoc.getJDFRoot(); JDFNode nodeProc = jdfRoot.getJobPart("IPr0.PP", null); JDFResource.setUnpartitiondImplicit(true); CPUTimer ct = new CPUTimer(false); CPUTimer ctm = new CPUTimer(false);
-	 * JDFSpawn spawn; spawn = new JDFSpawn(nodeProc); spawn.bSpawnIdentical = true; spawn.bSpawnRWPartsMultiple = true; JDFMerge m = new JDFMerge(jdfRoot);
+	 * jdfDoc.getJDFRoot(); JDFNode nodeProc = jdfRoot.getJobPart("IPr0.PP", null); JDFResource.setUnpartitiondImplicit(true); CPUTimer ct = new CPUTimer(false); CPUTimer ctm = new
+	 * CPUTimer(false); JDFSpawn spawn; spawn = new JDFSpawn(nodeProc); spawn.bSpawnIdentical = true; spawn.bSpawnRWPartsMultiple = true; JDFMerge m = new JDFMerge(jdfRoot);
 	 *
-	 * Vector<JDFNode> vSpawned = new Vector<JDFNode>(); for (int ii = 1; ii < 21; ii++) { final VJDFAttributeMap vamParts = new VJDFAttributeMap(); for (int i = 1; i <= 20; i++) { JDFAttributeMap
-	 * amParts0 = new JDFAttributeMap(); amParts0.put("BinderySignatureName", "Booklet_" + ii); amParts0.put("PartVersion", "Pol"); amParts0.put("SheetName", StringUtil.sprintf("FB %03i", "" + i));
-	 * amParts0.put("SignatureName", StringUtil.sprintf("Sig%03i", "" + i)); amParts0.put("Side", "Front"); vamParts.add(amParts0); amParts0 = amParts0.clone(); amParts0.put("Side", "Back");
-	 * vamParts.add(amParts0); } final VString vsRWResourceIDs = new VString("Output", null);
+	 * Vector<JDFNode> vSpawned = new Vector<JDFNode>(); for (int ii = 1; ii < 21; ii++) { final VJDFAttributeMap vamParts = new VJDFAttributeMap(); for (int i = 1; i <= 20; i++) {
+	 * JDFAttributeMap amParts0 = new JDFAttributeMap(); amParts0.put("BinderySignatureName", "Booklet_" + ii); amParts0.put("PartVersion", "Pol"); amParts0.put("SheetName",
+	 * StringUtil.sprintf("FB %03i", "" + i)); amParts0.put("SignatureName", StringUtil.sprintf("Sig%03i", "" + i)); amParts0.put("Side", "Front"); vamParts.add(amParts0); amParts0
+	 * = amParts0.clone(); amParts0.put("Side", "Back"); vamParts.add(amParts0); } final VString vsRWResourceIDs = new VString("Output", null);
 	 *
-	 * ct.start(); JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false); vSpawned.add(nodeSubJDF); log.info(ii + " " + ct.getSingleSummary()); ct.stop(); if
-	 * (ii == 1) nodeSubJDF.getOwnerDocument_JDFElement().write2File("/share/data/fehler/PD-68493/spawn.jdf", 2, false); } String strOutJDFPath = "/share/data/fehler/PD-68493/giant_out.jdf";
-	 * jdfDoc.write2File(strOutJDFPath, 2, false); int ii = 0; for (JDFNode nodeSubJDF : vSpawned) { ctm.start(); m.mergeJDF(nodeSubJDF); log.info(ii++ + " " + ctm.getSingleSummary()); ctm.stop(); }
-	 * strOutJDFPath = "/share/data/fehler/PD-68493/giant_merged.jdf"; jdfDoc.write2File(strOutJDFPath, 2, false);
+	 * ct.start(); JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false); vSpawned.add(nodeSubJDF); log.info(ii + " " +
+	 * ct.getSingleSummary()); ct.stop(); if (ii == 1) nodeSubJDF.getOwnerDocument_JDFElement().write2File("/share/data/fehler/PD-68493/spawn.jdf", 2, false); } String
+	 * strOutJDFPath = "/share/data/fehler/PD-68493/giant_out.jdf"; jdfDoc.write2File(strOutJDFPath, 2, false); int ii = 0; for (JDFNode nodeSubJDF : vSpawned) { ctm.start();
+	 * m.mergeJDF(nodeSubJDF); log.info(ii++ + " " + ctm.getSingleSummary()); ctm.stop(); } strOutJDFPath = "/share/data/fehler/PD-68493/giant_merged.jdf";
+	 * jdfDoc.write2File(strOutJDFPath, 2, false);
 	 *
 	 * }
 	 */

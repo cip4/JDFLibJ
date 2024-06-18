@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -153,6 +153,30 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFNode root = d.getJDFRoot();
 		final JDFContact contact = (JDFContact) root.getResource("Contact", EnumUsage.Input, 0);
 		assertEquals(contact.getCompany().getProductID(), "company_id");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testContactPartitioned()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", null);
+		final SetHelper cs = h.appendSet(ElementName.CONTACT, EnumUsage.Input);
+		final ResourceHelper cr1 = cs.appendResource(XJDFConstants.ContactType, "Customer", true);
+		cr1.appendPartMap(new JDFAttributeMap(XJDFConstants.ContactType, "Billing"));
+		cr1.getResource().appendElement(ElementName.COMPANY).setAttribute("CompanyID", "company_id1");
+		final ResourceHelper cr2 = cs.appendResource(XJDFConstants.ContactType, "Delivery", true);
+		cr2.getResource().appendElement(ElementName.COMPANY).setAttribute("CompanyID", "company_id2");
+		final JDFDoc d = xCon.convert(h);
+		assertNotNull(d);
+		final JDFNode root = d.getJDFRoot();
+		final JDFContact contact = (JDFContact) root.getResource("Contact", EnumUsage.Input, 0).getLeaf(0);
+		assertEquals(contact.getCompany().getProductID(), "company_id1");
+		final JDFContact contact2 = (JDFContact) root.getResource("Contact", EnumUsage.Input, 0).getLeaf(1);
+		assertEquals(contact2.getCompany().getProductID(), "company_id2");
 	}
 
 	/**

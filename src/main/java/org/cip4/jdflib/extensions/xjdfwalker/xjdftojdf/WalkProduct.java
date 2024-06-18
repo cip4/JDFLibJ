@@ -36,6 +36,9 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -56,7 +59,8 @@ import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDropIntent;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.process.JDFComponent;
-import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
+import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -148,11 +152,15 @@ public class WalkProduct extends WalkXElement
 			final JDFDropIntent dropIntent = di.getCreateDropIntent(0);
 			final XJDFHelper h = XJDFHelper.getHelper(xjdfProduct);
 			final SetHelper contacts = h == null ? null : h.getSet(ElementName.CONTACT, EnumUsage.Input);
-			final ResourceHelper contact = contacts == null ? null : contacts.getPartition(XJDFConstants.ContactType, EnumContactType.Delivery.getName());
-			if (contact != null)
+			final List<ResourceHelper> resources = contacts == null ? new ArrayList<>() : contacts.getPartitionList();
+			for (final ResourceHelper resource : resources)
 			{
-				contact.ensureReference(di, null);
-				cleanRefs(di, di);
+				final JDFContact contact = (JDFContact) resource.getResource();
+				if (contact != null && ContainerUtil.contains(contact.getContactTypes(), "Delivery"))
+				{
+					resource.ensureReference(di, null);
+					cleanRefs(di, di);
+				}
 			}
 			final JDFDropItemIntent dropItemIntent = dropIntent.appendDropItemIntent();
 			dropItemIntent.setAmount((int) amount);

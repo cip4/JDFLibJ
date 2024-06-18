@@ -105,7 +105,7 @@ public class IDFinder extends BaseElementWalker
 
 	static void checkKey(final JDFAttributeMap p, final String key)
 	{
-		EnumPartIDKey eKey = EnumPartIDKey.getEnum(key);
+		final EnumPartIDKey eKey = EnumPartIDKey.getEnum(key);
 		if (eKey == null || eKey.isXJDF())
 		{
 			p.remove(key);

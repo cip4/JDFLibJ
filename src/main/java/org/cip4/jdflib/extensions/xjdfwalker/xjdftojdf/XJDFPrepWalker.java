@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,10 +38,12 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import java.util.List;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
@@ -49,6 +51,7 @@ import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDFDataCache;
+import org.cip4.jdflib.resource.process.JDFContact;
 
 /**
  * some generic preprocessing that is better done on the XJDF prior to XJDF--> JDF Conversion
@@ -64,6 +67,58 @@ class XJDFPrepWalker extends BaseElementWalker
 	XJDFPrepWalker()
 	{
 		super(new BaseWalkerFactory());
+	}
+
+	protected class WalkContact extends WalkElement
+	{
+		/**
+		 *
+		 */
+		public WalkContact()
+		{
+			super();
+		}
+
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			final JDFContact c = (JDFContact) e;
+			final ResourceHelper h = ResourceHelper.getHelper(c);
+			final VJDFAttributeMap vMap = h == null ? null : h.getPartMapVector();
+			if (!VJDFAttributeMap.isEmpty(vMap))
+			{
+				final VString cTypes = vMap.getPartValues(XJDFConstants.ContactType, true);
+				if (!VString.isEmpty(cTypes))
+				{
+					final SetHelper sh = h.getSet();
+					c.setContactTypes(cTypes);
+					vMap.removeKey(XJDFConstants.ContactType);
+					if (vMap.getKeys().isEmpty() && sh.size() > 1)
+					{
+						final String ctypeString = cTypes.getString("_", null, null);
+						if (!ElementName.EMPLOYEE.equals(ctypeString))
+							vMap.put(AttributeName.OPTION, ctypeString);
+					}
+					vMap.unify();
+					h.setPartMapVector(vMap);
+				}
+			}
+			final KElement ret = super.walk(e, trackElem);
+			return ret;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(ElementName.CONTACT, null);
+		}
 	}
 
 	/**
@@ -108,19 +163,19 @@ class XJDFPrepWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			KElement parent = xjdf.getParentNode_KElement();
+			final KElement parent = xjdf.getParentNode_KElement();
 			if (parent != null)
 			{
-				SetHelper sh = SetHelper.getHelper(xjdf.getElement(XJDFConstants.ResourceSet));
+				final SetHelper sh = SetHelper.getHelper(xjdf.getElement(XJDFConstants.ResourceSet));
 				if (sh != null)
 				{
-					for (int i = 1; i < sh.size();)
+					for (final int i = 1; i < sh.size();)
 					{
-						KElement newRI = parent.appendElement(ElementName.RESOURCEINFO);
+						final KElement newRI = parent.appendElement(ElementName.RESOURCEINFO);
 						newRI.setAttributes(xjdf);
-						KElement newSet = newRI.appendElement(XJDFConstants.ResourceSet);
+						final KElement newSet = newRI.appendElement(XJDFConstants.ResourceSet);
 						newSet.setAttributes(sh.getRoot());
-						ResourceHelper part = sh.getPartition(i);
+						final ResourceHelper part = sh.getPartition(i);
 						newSet.moveElement(part.getRoot(), null);
 					}
 				}
@@ -154,23 +209,23 @@ class XJDFPrepWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			List<KElement> kids = xjdf.getChildList();
-			StringArray names = JDFToXJDFDataCache.getStripMarkElements();
-			for (KElement kid : kids)
+			final List<KElement> kids = xjdf.getChildList();
+			final StringArray names = JDFToXJDFDataCache.getStripMarkElements();
+			for (final KElement kid : kids)
 			{
 				if (names.contains(kid.getLocalName()))
 				{
-					KElement parent = xjdf.getParentNode_KElement();
+					final KElement parent = xjdf.getParentNode_KElement();
 
 					KElement mo = parent.getElement("PlacedObject/MarkObject");
 					if (mo == null)
 					{
-						KElement po = parent.insertBefore(XJDFConstants.PlacedObject, xjdf, null);
+						final KElement po = parent.insertBefore(XJDFConstants.PlacedObject, xjdf, null);
 						mo = po.appendElement(ElementName.MARKOBJECT);
 					}
-					for (KElement kid2 : kids)
+					for (final KElement kid2 : kids)
 						mo.moveElement(kid2, null);
-					KElement dm = mo.appendElement(ElementName.DEVICEMARK);
+					final KElement dm = mo.appendElement(ElementName.DEVICEMARK);
 					dm.setAttributes(xjdf);
 					xjdf.deleteNode();
 					return super.walk(mo, dummy);

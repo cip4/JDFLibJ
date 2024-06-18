@@ -182,7 +182,8 @@ public class WalkXJDFResource extends WalkXElement
 		handleIdentical(vParts, res.getResourceRoot());
 	}
 
-	private final static StringArray keepKeys = new StringArray("SignatureName SheetName Side PartVersion Separation BlockName Run DocIndex RunIndex SetIndex SheetIndex", null);
+	private final static StringArray keepKeys = new StringArray("SignatureName SheetName Side Option PartVersion Separation BlockName Run DocIndex RunIndex SetIndex SheetIndex",
+			null);
 	private final static StringArray indexKeys = new StringArray("RunIndex DocIndex SetIndex SheetIndex", null);
 
 	/**
