@@ -116,7 +116,7 @@ public class RemovePrivate extends BaseElementWalker
 			VString unknown = new VString();
 			if (prefixes == null)
 			{
-				if (!(e1 instanceof JDFElement))
+				if (!(e1 instanceof JDFElement) || JDFElement.isInXJDFNameSpaceStatic(e1))
 					return e1;
 				final JDFElement j = (JDFElement) e1;
 				if (!e1.getClass().equals(JDFElement.class) && !e1.getClass().equals(JDFResource.class))

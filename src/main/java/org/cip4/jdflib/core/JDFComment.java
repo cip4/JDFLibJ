@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -145,5 +145,15 @@ public class JDFComment extends JDFAutoComment
 	public int eraseEmptyNodes(final boolean bTrimWhite)
 	{
 		return 0; // NOP to fool compiler. also retain whitespace in comments
+	}
+
+	/**
+	 * XJDF only setType is similar to setName
+	 * 
+	 * @param string
+	 */
+	public void setType(final String typ)
+	{
+		setAttribute(AttributeName.TYPE, typ);
 	}
 }

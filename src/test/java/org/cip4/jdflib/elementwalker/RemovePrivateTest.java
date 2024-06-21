@@ -40,7 +40,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -91,6 +93,24 @@ class RemovePrivateTest
 		assertNull(n.getAttribute("foo:bar", "www.foo.com", null));
 		assertNull(n.getElement("e", "www.blah.com", 0));
 		assertEquals(sh, xjdfHelper.getSet(ElementName.NODEINFO, EnumUsage.Input));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testRemoveXJDFAtt()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(EnumVersion.Version_2_2, "j1");
+		final SetHelper sh = xjdfHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
+		final JDFDoc d = xjdfHelper.getRootDoc();
+		final KElement n = d.getRoot();
+		final JDFComment c = xjdfHelper.setComment("foo");
+		c.setType("Foo");
+		final RemovePrivate rp = new RemovePrivate();
+		rp.walkTree(n, null);
+		assertEquals(sh, xjdfHelper.getSet(ElementName.NODEINFO, EnumUsage.Input));
+		assertEquals("Foo", c.getAttribute(AttributeName.TYPE));
 	}
 
 	/**
