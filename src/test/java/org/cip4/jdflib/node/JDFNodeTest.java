@@ -202,10 +202,12 @@ class JDFNodeTest extends JDFTestCaseBase
 		final JDFNode n = JDFNode.createRoot();
 		n.setCommentText("foo");
 		assertEquals("foo", n.getComment(0).getText());
+		assertEquals("foo", n.getCommentText(null, 0));
 		n.setCommentText("next", "bar");
 		assertEquals("next", n.getCommentText("bar", 0));
 		assertEquals(null, n.getCommentText("foo", 0));
 		assertEquals(null, n.getCommentText("bar", 1));
+		assertEquals("next", n.getCommentText(null, 1));
 	}
 
 	/**

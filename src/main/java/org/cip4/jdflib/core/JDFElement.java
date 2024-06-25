@@ -4070,7 +4070,7 @@ public class JDFElement extends KElement
 			vBad.appendUnique(new VString(getDeprecatedElements(nMax)));
 			if (nMax <= 0 || vBad.size() < nMax)
 			{
-				VString prereleaseElements = getPrereleaseElements(nMax);
+				final VString prereleaseElements = getPrereleaseElements(nMax);
 				vBad.appendUnique(new VString(prereleaseElements));
 			}
 		}
@@ -6338,7 +6338,9 @@ public class JDFElement extends KElement
 	 */
 	public String getCommentText(final String _name, final int index)
 	{
-		final JDFComment c = getComment(_name, index);
+		JDFComment c = getComment(_name, index);
+		if (c == null && StringUtil.isEmpty(_name))
+			c = getComment(index);
 		return c == null ? null : c.getText();
 	}
 
