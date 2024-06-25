@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,10 @@
  */
 package org.cip4.jdflib.goldenticket;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -79,7 +83,6 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -109,13 +112,13 @@ class ODPGoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	void testIDPRunList()
 	{
-		JDFNode n = odpGoldenTicket.getNode();
-		JDFRunList rl = (JDFRunList) n.getResource(ElementName.RUNLIST, EnumUsage.Input, null, 0);
-		Assertions.assertNotNull(rl);
-		JDFRunList leaf = (JDFRunList) rl.getLeaves(false).elementAt(0);
-		JDFFileSpec fs = leaf.getLayoutElement().getFileSpec();
-		Assertions.assertEquals(fs.getURL(), UrlUtil.normalize(odpGoldenTicket.m_pdfFile));
-		Assertions.assertTrue(n.isValid(EnumValidationLevel.Complete));
+		final JDFNode n = odpGoldenTicket.getNode();
+		final JDFRunList rl = (JDFRunList) n.getResource(ElementName.RUNLIST, EnumUsage.Input, null, 0);
+		assertNotNull(rl);
+		final JDFRunList leaf = (JDFRunList) rl.getLeaves(false).elementAt(0);
+		final JDFFileSpec fs = leaf.getLayoutElement().getFileSpec();
+		assertEquals(fs.getURL(), UrlUtil.normalize(odpGoldenTicket.m_pdfFile));
+		assertTrue(n.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
@@ -133,10 +136,10 @@ class ODPGoldenTicketTest extends BaseGoldenTicketTest
 
 		odpGoldenTicket.assign(null);
 		final JDFNode node = odpGoldenTicket.getNode();
-		VString icsVersions = node.getICSVersions(false);
-		Assertions.assertTrue(icsVersions.contains("Base_L0-1.5"));
-		Assertions.assertTrue(icsVersions.contains("ODP_L1-1.5"));
-		Assertions.assertEquals(icsVersions.size(), 2);
+		final VString icsVersions = node.getICSVersions(false);
+		assertTrue(icsVersions.contains("Base_L0-1.8"));
+		assertTrue(icsVersions.contains("ODP_L1-1.8"));
+		assertEquals(icsVersions.size(), 2);
 
 		odpGoldenTicket.good = 10;
 		odpGoldenTicket.waste = 0;

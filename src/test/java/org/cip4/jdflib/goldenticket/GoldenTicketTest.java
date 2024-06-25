@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * May 13, 2009
+ *         May 13, 2009
  */
 class GoldenTicketTest extends BaseGoldenTicketTest
 {
@@ -96,7 +96,7 @@ class GoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	void testBase()
 	{
-		final BaseGoldenTicket bgt = new BaseGoldenTicket(1, null);
+		final BaseGoldenTicket bgt = new BaseGoldenTicket(1, EnumVersion.Version_1_5);
 		bgt.assign(null);
 		final JDFNode node = bgt.getNode();
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "GoldenTicket_Base_1.jdf", 2, false);
@@ -112,7 +112,7 @@ class GoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	void testJMF()
 	{
-		final JMFGoldenTicket bgt = new JMFGoldenTicket(1, null);
+		final JMFGoldenTicket bgt = new JMFGoldenTicket(1, EnumVersion.Version_1_5);
 		bgt.assign(null);
 		final JDFNode node = bgt.getNode();
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "GoldenTicket_JMF_1.jdf", 2, false);
@@ -129,7 +129,7 @@ class GoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	void testMIS()
 	{
-		final MISGoldenTicket bgt = new MISGoldenTicket(2, null, 2);
+		final MISGoldenTicket bgt = new MISGoldenTicket(2, EnumVersion.Version_1_5, 2);
 		bgt.assign(null);
 		final JDFNode node = bgt.getNode();
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "GoldenTicket_MIS_2.jdf", 2, false);

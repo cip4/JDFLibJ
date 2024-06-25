@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,18 +70,23 @@
  */
 package org.cip4.jdflib.goldenticket;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
-import org.cip4.jdflib.core.*;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -100,25 +105,25 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	void testMISCPGrayBoxFrontBack()
 	{
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
-		JDFAttributeMap map = new JDFAttributeMap();
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap();
 		map.put(EnumPartIDKey.SignatureName, "Sig1");
 		map.put(EnumPartIDKey.SheetName, "Sheet1");
 		map.put(EnumPartIDKey.Side, "Front");
 		vMap.add(new JDFAttributeMap(map));
 		map.put(EnumPartIDKey.Side, "Back");
 		vMap.add(new JDFAttributeMap(map));
-		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2, true, vMap);
+		final MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2, true, vMap);
 		cpGoldenTicket.nCols[0] = cpGoldenTicket.nCols[1] = 4;
 
 		cpGoldenTicket.assign(null);
 		JDFNode node = cpGoldenTicket.getNode();
 		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Manager", "_MISCPS_1_GB", null);
-		Assertions.assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
-		Assertions.assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
-		Assertions.assertTrue(node.getICSVersions(false).contains("MIS_L2-1.5"));
-		Assertions.assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.5"));
-		Assertions.assertTrue(node.isValid(EnumValidationLevel.Complete));
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1.8"));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.8"));
+		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.8"));
+		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.8"));
+		assertTrue(node.isValid(EnumValidationLevel.Complete));
 
 		cpGoldenTicket.good = 1000;
 		cpGoldenTicket.waste = 90;
@@ -126,14 +131,14 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.execute(null, true, true);
 		node = cpGoldenTicket.getNode();
 		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Worker", "_MISCPS_1_GB", null);
-		Assertions.assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
-		Assertions.assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
-		Assertions.assertTrue(node.getICSVersions(false).contains("MIS_L2-1.5"));
-		Assertions.assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.5"));
-		Assertions.assertTrue(node.isValid(EnumValidationLevel.Complete));
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1.8"));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.8"));
+		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.8"));
+		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.8"));
+		assertTrue(node.isValid(EnumValidationLevel.Complete));
 
 		cpGoldenTicket.assign(null);
-		VJDFAttributeMap mapSingle = new VJDFAttributeMap();
+		final VJDFAttributeMap mapSingle = new VJDFAttributeMap();
 		map.put(EnumPartIDKey.Side, "Front");
 		mapSingle.add(map);
 		cpGoldenTicket.schedule(mapSingle, 6, 2);
@@ -160,14 +165,14 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	void testMISCPGrayBoxSimplexPoster()
 	{
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
-		JDFAttributeMap map = new JDFAttributeMap();
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap();
 		map.put(EnumPartIDKey.SignatureName, "Sig1");
 		map.put(EnumPartIDKey.SheetName, "Sheet1");
 		map.put(EnumPartIDKey.Side, "Front");
 		vMap.add(new JDFAttributeMap(map));
 
-		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2, true, vMap);
+		final MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2, true, vMap);
 		cpGoldenTicket.nCols[0] = cpGoldenTicket.nCols[1] = 6;
 		cpGoldenTicket.workStyle = EnumWorkStyle.Simplex;
 		cpGoldenTicket.assign(null);
@@ -184,8 +189,8 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	void testMISCPGrayBox41Poster()
 	{
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
-		JDFAttributeMap map = new JDFAttributeMap();
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap();
 		map.put(EnumPartIDKey.SignatureName, "Sig1");
 		map.put(EnumPartIDKey.SheetName, "Sheet1");
 		map.put(EnumPartIDKey.Side, "Front");
@@ -193,7 +198,7 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		map.put(EnumPartIDKey.Side, "Back");
 		vMap.add(new JDFAttributeMap(map));
 
-		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2, true, vMap);
+		final MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2, true, vMap);
 		cpGoldenTicket.nCols[0] = 4;
 		cpGoldenTicket.nCols[1] = 1;
 		cpGoldenTicket.workStyle = EnumWorkStyle.WorkAndTurn;
@@ -203,8 +208,8 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.partsAtOnce = 1;
 		cpGoldenTicket.partsForAvailable = 2;
 
-		JDFNode n = cpGoldenTicket.getNode();
-		JDFDevice dev = (JDFDevice) n.getResource("Device", EnumUsage.Input, 0);
+		final JDFNode n = cpGoldenTicket.getNode();
+		final JDFDevice dev = (JDFDevice) n.getResource("Device", EnumUsage.Input, 0);
 		dev.removeAttribute(AttributeName.DEVICEID);
 		dev.getCreatePartition(map, null).setAttribute("DeviceID", "BackSidePress");
 		map.put(EnumPartIDKey.Side, "Front");
@@ -219,11 +224,11 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	void testMISCPProductGrayBoxBrochure()
 	{
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		for (int i = 0; i < 5; i++)
 		{
-			String sheetName = i == 0 ? "Cover" : "Body" + i;
-			JDFAttributeMap map = new JDFAttributeMap();
+			final String sheetName = i == 0 ? "Cover" : "Body" + i;
+			final JDFAttributeMap map = new JDFAttributeMap();
 			map.put(EnumPartIDKey.SignatureName, "Sig1");
 			map.put(EnumPartIDKey.SheetName, sheetName);
 			map.put(EnumPartIDKey.Side, "Front");
@@ -232,15 +237,15 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 			vMap.add(new JDFAttributeMap(map));
 		}
 
-		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2, true, vMap);
+		final MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2, true, vMap);
 		cpGoldenTicket.nCols[0] = cpGoldenTicket.nCols[1] = 6;
 		cpGoldenTicket.workStyle = EnumWorkStyle.WorkAndTurn;
 
-		ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_5, 0, 0);
+		final ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_5, 0, 0);
 		pgt.assign(null);
 		pgt.createHDCity();
-		JDFNode node = pgt.getNode();
-		JDFNode nodeCP = node.addJDFNode(EnumType.ProcessGroup);
+		final JDFNode node = pgt.getNode();
+		final JDFNode nodeCP = node.addJDFNode(EnumType.ProcessGroup);
 
 		cpGoldenTicket.assign(nodeCP);
 		cpGoldenTicket.good = 1000;
@@ -256,11 +261,11 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	void testMISCPProductBrochure()
 	{
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		for (int i = 0; i < 5; i++)
 		{
-			String sheetName = i == 0 ? "Cover" : "Body" + i;
-			JDFAttributeMap map = new JDFAttributeMap();
+			final String sheetName = i == 0 ? "Cover" : "Body" + i;
+			final JDFAttributeMap map = new JDFAttributeMap();
 			map.put(EnumPartIDKey.SignatureName, "Sig1");
 			map.put(EnumPartIDKey.SheetName, sheetName);
 			map.put(EnumPartIDKey.Side, "Front");
@@ -269,11 +274,11 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 			vMap.add(new JDFAttributeMap(map));
 		}
 
-		ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_5, 0, 0);
+		final ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_5, 0, 0);
 		pgt.assign(null);
 		pgt.createFlyer();
 
-		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2, true, vMap);
+		final MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2, true, vMap);
 		cpGoldenTicket.setParent(pgt);
 		cpGoldenTicket.nCols[0] = cpGoldenTicket.nCols[1] = 6;
 		cpGoldenTicket.workStyle = EnumWorkStyle.WorkAndTurn;
@@ -292,10 +297,10 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	void testGetICSVersions()
 	{
-		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 1, true, null);
+		final MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 1, true, null);
 
-		VString vICS = new VString("Base_L2-1.5,MIS_L1-1.5,MISCPS_L1-1.5", ",");
-		Assertions.assertEquals(cpGoldenTicket.getICSVersions(), vICS);
+		final VString vICS = new VString("Base_L2-1.8,MIS_L1-1.8,MISCPS_L1-1.8", ",");
+		assertEquals(cpGoldenTicket.getICSVersions(), vICS);
 	}
 
 	/**
@@ -304,19 +309,19 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	void testIdenticalInk()
 	{
-		VString v = new VString("Cyan,Magenta,Yellow,Black,Text", ",");
-		VString vAct = new VString("Cyan,Magenta,Yellow,Black,Text", ",");
-		VString vInk = new VString("Cyan,Magenta,Yellow,Black,Black", ",");
-		VString vInkProd = new VString("MIS-Ink-4711,MIS-Ink-4712,MIS-Ink-4713,MIS-Ink-4714,MIS-Ink-4714", ",");
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
-		JDFAttributeMap map = new JDFAttributeMap();
+		final VString v = new VString("Cyan,Magenta,Yellow,Black,Text", ",");
+		final VString vAct = new VString("Cyan,Magenta,Yellow,Black,Text", ",");
+		final VString vInk = new VString("Cyan,Magenta,Yellow,Black,Black", ",");
+		final VString vInkProd = new VString("MIS-Ink-4711,MIS-Ink-4712,MIS-Ink-4713,MIS-Ink-4714,MIS-Ink-4714", ",");
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap();
 		map.put(EnumPartIDKey.SignatureName, "Sig1");
 		map.put(EnumPartIDKey.SheetName, "Sheet1");
 		map.put(EnumPartIDKey.Side, "Front");
 		vMap.add(new JDFAttributeMap(map));
 
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
-		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 1, true, vMap);
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 1, true, vMap);
 		cpGoldenTicket.cols = v;
 		cpGoldenTicket.colsActual = vAct;
 		cpGoldenTicket.inks = vInk;
