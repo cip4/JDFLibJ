@@ -1507,7 +1507,7 @@ class PostXJDFWalker extends BaseElementWalker
 		mergeLayout = true;
 		removeSignatureName = true;
 		retainAll = false;
-		newVersion = EnumVersion.Version_2_0;
+		newVersion = XJDFHelper.defaultVersion();
 	}
 
 	/**

@@ -76,6 +76,7 @@ import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumPosition;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -438,7 +439,7 @@ class DigitalFinishingTest extends ExampleTest
 	{
 		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setSenderID("Printer");
-		jmf.setVersion(EnumVersion.Version_1_5);
+		jmf.setVersion(JDFElement.getDefaultJDFVersion());
 		final JDFCommand command = jmf.appendCommand();
 		command.setType(EnumType.PipePush);
 		final JDFPipeParams pp = createPipeParams(command);

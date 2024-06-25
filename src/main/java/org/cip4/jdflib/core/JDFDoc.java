@@ -56,6 +56,7 @@ import javax.mail.BodyPart;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -168,7 +169,7 @@ public class JDFDoc extends XMLDoc
 
 	static EnumVersion getVersionFromDocType(final String strDocType)
 	{
-		return XJDFConstants.XJDF.equals(strDocType) || XJDFConstants.XJMF.equals(strDocType) ? EnumVersion.Version_2_0 : EnumVersion.Version_1_1;
+		return XJDFConstants.XJDF.equals(strDocType) || XJDFConstants.XJMF.equals(strDocType) ? XJDFHelper.defaultVersion() : JDFElement.getDefaultJDFVersion();
 	}
 
 	/**

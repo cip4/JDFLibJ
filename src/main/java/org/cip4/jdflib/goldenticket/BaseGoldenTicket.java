@@ -93,8 +93,8 @@ import org.cip4.jdflib.util.UrlUtil;
 /**
  * @author rainer prosi class that generates golden tickets based on ICS levels etc basegolden ticket should generally be the last in the cascade domain - mis - jmf - base
  *
- *         To generate a new golden ticket, follow these steps 1.) construct the appropriate domain subclass, e.g. MISCPGoldenTicket for mis to conventional print 2.) call .assign(null) (or your
- *         favorite hand-coded jdf node) 3.) retrieve the updated copy with .getNode()
+ *         To generate a new golden ticket, follow these steps 1.) construct the appropriate domain subclass, e.g. MISCPGoldenTicket for mis to conventional print 2.) call
+ *         .assign(null) (or your favorite hand-coded jdf node) 3.) retrieve the updated copy with .getNode()
  *
  */
 public class BaseGoldenTicket
@@ -242,7 +242,7 @@ public class BaseGoldenTicket
 		fillCatMaps();
 		paperProductID = "paperID";
 		baseICSLevel = pIcsLevel;
-		theVersion = jdfVersion == null ? EnumVersion.Version_1_5 : jdfVersion;
+		theVersion = jdfVersion == null ? JDFElement.getDefaultJDFVersion() : jdfVersion;
 		theStatusCounter = new StatusCounter(null, null, null);
 		KElement.setLongID(false);
 	}
@@ -879,7 +879,8 @@ public class BaseGoldenTicket
 			ccLink = theNode.linkResource(theParentNode.getResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0), EnumUsage.Input, null);
 		}
 
-		final JDFColorantControl cc = (JDFColorantControl) (ccLink == null ? (JDFColorantControl) theNode.getCreateResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0) : ccLink.getTarget());
+		final JDFColorantControl cc = (JDFColorantControl) (ccLink == null ? (JDFColorantControl) theNode.getCreateResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0)
+				: ccLink.getTarget());
 		cc.setResStatus(EnumResStatus.Available, false);
 
 		final JDFColorPool cp = initColorPool();
