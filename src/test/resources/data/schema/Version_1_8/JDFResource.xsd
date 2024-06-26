@@ -2432,6 +2432,7 @@
         <Version Path="DensityMeasuringField" First="1.1" />
         <Version Path="DensityMeasuringFieldRef" First="1.1" />
         <Version Path="Patch" First="1.7" />
+        <Version Path="Patch/@SpotType" First="1.8" />
         <Version Path="SeparationSpec" First="1.4" />
         <Constraint Path="CIELABMeasuringField" minOccurs="0" maxOccurs="unbounded" />
         <Constraint Path="CIELABMeasuringFieldRef" minOccurs="0" maxOccurs="unbounded" />
@@ -2526,7 +2527,8 @@
         <xs:attribute name="RGB" type="jdftyp:sRGBColor" use="optional" />
         <xs:attribute name="Size" type="jdftyp:XYPair" use="optional" />
         <xs:attribute name="Spectrum" type="jdftyp:TransferFunction" use="optional" />
-      </xs:extension>
+        <xs:attribute name="SpotType" type="jdftyp:eSpotType_" use="optional"/>
+     </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ColorControlStrip_Patch_SeparationTint_lr" mixed="false">
@@ -5294,7 +5296,7 @@
           <xs:element ref="jdf:FileSpecRef" minOccurs="0" />
           <xs:element name="Media" type="jdf:Media_re" minOccurs="0" />
           <xs:element ref="jdf:MediaRef" minOccurs="0" />
-          <xs:element name="RuleLength" type="jdf:DieLayout_RuleLength_lr" minOccurs="0" />
+          <xs:element name="RuleLength" type="jdf:RuleLength_re" minOccurs="0" />
           <xs:element name="Station" type="jdf:DieLayout_Station_lr" minOccurs="0" />
           <xs:element name="DieLayoutUpdate" type="jdf:DieLayout_re" minOccurs="0" />
           <xs:element name="DieLayout" type="jdf:DieLayout_rp" minOccurs="0" />
@@ -5316,7 +5318,7 @@
           <xs:element name="CutLines" type="jdf:SeparationList" minOccurs="0" />
           <xs:element name="Media" type="jdf:Media_re" minOccurs="0" />
           <xs:element ref="jdf:MediaRef" minOccurs="0" />
-          <xs:element name="RuleLength" type="jdf:DieLayout_RuleLength_lr" minOccurs="0" />
+          <xs:element name="RuleLength" type="jdf:RuleLength_re" minOccurs="0" />
         </xs:sequence>
         <xs:attributeGroup ref="jdf:DieLayoutAttribs_r" />
       </xs:extension>
@@ -5336,7 +5338,7 @@
             <xs:element name="CutLines" type="jdf:SeparationList" minOccurs="0" />
             <xs:element name="Media" type="jdf:Media_re" minOccurs="0" />
             <xs:element ref="jdf:MediaRef" minOccurs="0" />
-            <xs:element name="RuleLength" type="jdf:DieLayout_RuleLength_lr" minOccurs="0" />
+            <xs:element name="RuleLength" type="jdf:RuleLength_re" minOccurs="0" />
           </xs:sequence>
           <xs:element name="Identical" type="jdf:Identical" minOccurs="0" />
         </xs:choice>
@@ -5344,7 +5346,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="DieLayout_RuleLength_lr" mixed="false">
+  <xs:complexType name="RuleLength_re" mixed="false">
     <xs:complexContent mixed="false">
       <xs:extension base="jdf:BaseElement_">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -6419,6 +6421,7 @@
         <Version Path="@FileVersion" First="1.1" />
         <Version Path="@MimeType" First="1.0" />
         <Version Path="@MimeTypeVersion" First="1.2" />
+        <Version Path="@NPage" First="1.8" />
         <Version Path="@OSVersion" Last="1.5" />
         <Version Path="@OverwritePolicy" First="1.2" />
         <Version Path="@Password" First="1.3" />
@@ -6455,6 +6458,7 @@
     <xs:attribute name="FileVersion" type="jdftyp:string" use="optional" />
     <xs:attribute name="MimeType" type="jdftyp:string" use="optional" />
     <xs:attribute name="MimeTypeVersion" type="jdftyp:string" use="optional" />
+    <xs:attribute name="NPage" type="jdftyp:Integer" use="optional" />
     <xs:attribute name="OverwritePolicy" type="jdftyp:eOverwritePolicy_" use="optional" />
     <xs:attribute name="OSVersion" type="jdftyp:string" use="optional" />
     <xs:attribute name="PageOrder" type="jdftyp:ePageOrder_" use="optional" />
@@ -12267,6 +12271,8 @@
     <xs:annotation>
       <xs:appinfo>
         <Version Path="@Languages" First="1.4" />
+        <Version Path="@PhoneticFirstName" First="1.5" />
+        <Version Path="@PhoneticLastName" First="1.5" />
         <Version Path="Address" First="1.2" />
         <Version Path="AddressRef" First="1.2" />
         <Constraint Path="Address" minOccurs="0" maxOccurs="1" />
@@ -12281,7 +12287,9 @@
   <xs:attributeGroup name="PersonAttribs_c">
     <xs:attribute name="AdditionalNames" type="jdftyp:string" use="optional" />
     <xs:attribute name="FamilyName" type="jdftyp:string" use="optional" />
+    <xs:attribute name="PhoneticLastName" type="jdftyp:string" use="optional" />
     <xs:attribute name="FirstName" type="jdftyp:string" use="optional" />
+    <xs:attribute name="PhoneticFirstName" type="jdftyp:string" use="optional" />
     <xs:attribute name="JobTitle" type="jdftyp:string" use="optional" />
     <xs:attribute name="Languages" type="jdftyp:languages" use="optional" />
     <xs:attribute name="NamePrefix" type="jdftyp:string" use="optional" />
@@ -15712,6 +15720,7 @@
         <Version Path="ColorPool" First="1.5" />
         <Version Path="ColorPoolRef" First="1.5" />
         <Version Path="CutLines" First="1.5" />
+        <Version Path="RuleLength" First="1.8" />
         <Constraint Path="ColorPool" minOccurs="0" maxOccurs="1" />
         <Constraint Path="ColorPoolRef" minOccurs="0" maxOccurs="1" />
         <Constraint Path="CutLines" minOccurs="0" maxOccurs="1" />
@@ -15755,6 +15764,7 @@
           <xs:element ref="jdf:FileSpecRef" minOccurs="0" />
           <xs:element name="Media" type="jdf:Media_re" minOccurs="0" />
           <xs:element ref="jdf:MediaRef" minOccurs="0" />
+          <xs:element minOccurs="0" name="RuleLength" type="jdf:RuleLength_re"/>		
           <xs:element name="Shape" type="jdf:Shape_re" minOccurs="0" />
           <xs:element ref="jdf:ShapeRef" minOccurs="0" />
         </xs:sequence>

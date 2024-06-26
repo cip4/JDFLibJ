@@ -807,13 +807,12 @@ public abstract class JDFTestCaseBase
 	 *
 	 * @return
 	 */
-	protected static JDFParser getSchemaParser(final EnumVersion version)
+	protected static JDFParser getSchemaParser(EnumVersion version)
 	{
-		int minor = 6;
-		if (EnumVersion.Version_2_1.equals(version) || EnumVersion.Version_1_7.equals(version))
-			minor = 7;
-		else if (EnumVersion.Version_2_2.equals(version) || EnumVersion.Version_1_8.equals(version))
-			minor = 8;
+		if (version == null)
+			version = JDFElement.getDefaultJDFVersion();
+		int minor = version.isXJDF() ? 6 : 0;
+		minor += version.getMinorVersion();
 		final JDFParser parser = JDFParserFactory.getFactory().get();
 		final File jdfxsd = new File(sm_dirTestSchemaBase + "1_" + minor + File.separator + "JDF.xsd");
 		assertTrue(jdfxsd.canRead());

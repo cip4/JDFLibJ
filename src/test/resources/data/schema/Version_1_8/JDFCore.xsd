@@ -1250,7 +1250,7 @@
         <Version Path="@ActualAmount" First="1.1" />
         <Version Path="@CombinedProcessIndex" First="1.1" />
         <Version Path="@CombinedProcessType" Last="1.1" />
-        <Version Path="@DraftOK" Last="1.1" />
+        <Version Path="@DraftOK" Last="1.2" />
         <Version Path="@MaxAmount" First="1.3" />
         <Version Path="@MinAmount" First="1.3" />
         <Version Path="@MinLateStatus" First="1.3" />
@@ -1497,6 +1497,7 @@
     <xs:annotation>
       <xs:appinfo>
         <Constraint Path="Subscription" minOccurs="1" maxOccurs="1" />
+        <Version Path="@Languages" First="1.8" />
       </xs:appinfo>
     </xs:annotation>
     <xs:complexContent mixed="false">
@@ -1530,6 +1531,7 @@
           <xs:element ref="jdf:Employee" minOccurs="0" />
         </xs:sequence>
         <xs:attribute name="Acknowledged" type="jdftyp:boolean" default="false" />
+        <xs:attribute name="Languages" type="jdftyp:languages" use="optional" />
         <xs:attribute name="refID" type="jdftyp:NMTOKEN" use="optional" />
         <xs:attribute name="ReturnCode" type="jdftyp:Integer" default="0" />
         <xs:attribute name="Subscribed" type="jdftyp:boolean" use="optional" />

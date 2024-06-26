@@ -496,7 +496,7 @@
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="jdf:GenericElements" minOccurs="0" />
         </xs:sequence>
-        <xs:attribute name="ChannelMode" type="jdftyp:eChannelMode_" />
+        <xs:attribute name="ChannelMode" type="jdftyp:eChannelModeList_" />
         <xs:attribute name="Exact" type="jdftyp:boolean" default="false" />
         <xs:attribute name="ListCommands" type="jdftyp:boolean" default="true" />
         <xs:attribute name="ListQueries" type="jdftyp:boolean" default="true" />
@@ -519,7 +519,7 @@
           <xs:element name="TestPool" type="jdf:TestPool" minOccurs="0" />
         </xs:sequence>
         <xs:attribute name="Acknowledge" type="jdftyp:boolean" default="false" />
-        <xs:attribute name="ChannelMode" type="jdftyp:eChannelMode_" />
+        <xs:attribute name="ChannelMode" type="jdftyp:eChannelModeList_" />
         <xs:attribute name="Command" type="jdftyp:boolean" default="false" />
         <xs:attribute name="GenericAttributes" type="jdftyp:NMTOKENS" use="optional" />
         <xs:attribute name="JMFRole" type="jdftyp:eJMFRole_" use="optional" />
@@ -587,8 +587,13 @@
   </xs:complexType>
   <xs:element name="SubscriptionFilter" type="jdf:SubscriptionFilter_m" substitutionGroup="jdf:QueryTypeObj">
     <xs:annotation>
-      <xs:appinfo />
-    </xs:annotation>
+      <xs:appinfo>
+	         <Version Path="@JobID" Last="1.4" />
+	         <Version Path="@JobPartID" Last="1.4" />
+	         <Version Path="@QueueEntryID" Last="1.4" />
+			<Version Path="Part" Last="1.4" />
+       </xs:appinfo>
+   </xs:annotation>
   </xs:element>
   <xs:element name="SubscriptionInfo" type="jdf:SubscriptionInfo_m" substitutionGroup="jdf:ResponseTypeObj">
     <xs:annotation>
@@ -617,6 +622,15 @@
   </xs:complexType>
   <xs:complexType name="SubscriptionInfo_m" mixed="false">
     <xs:complexContent mixed="false">
+    <xs:annotation>
+      <xs:appinfo>
+         <Version Path="Part" Last="1.4" />
+         <Version Path="@QueueEntryID" Last="1.4" />
+         <Version Path="@JobPartID" Last="1.4" />
+         <Version Path="@JobID" Last="1.4" />
+         <Version Path="@Languages" First="1.8" />
+      </xs:appinfo>
+    </xs:annotation>
       <xs:extension base="jdf:ResponseTypeObj_">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="jdf:GenericElements" minOccurs="0" />
@@ -628,6 +642,7 @@
         <xs:attribute name="Family" type="jdftyp:NMTOKEN" />
         <xs:attribute name="JobID" type="jdftyp:string" />
         <xs:attribute name="JobPartID" type="jdftyp:string" />
+        <xs:attribute name="Languages" type="jdftyp:languages" use="optional" />
         <xs:attribute name="MessageType" type="jdftyp:NMTOKEN" />
         <xs:attribute name="QueueEntryID" type="jdftyp:string" />
       </xs:extension>
@@ -1364,7 +1379,7 @@
   </xs:complexType>
   <xs:complexType name="SignalNodeInfo" mixed="false">
     <xs:annotation>
-      <xs:appinfo>
+		<xs:appinfo>
         <Version Path="." First="1.2" Last="1.2" />
         <Constraint Path="NodeInfoQuParams" minOccurs="1" maxOccurs="1" />
         <Constraint Path="NodeInfoResp" minOccurs="0" maxOccurs="unbounded" />
