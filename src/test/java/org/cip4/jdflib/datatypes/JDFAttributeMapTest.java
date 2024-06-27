@@ -373,6 +373,26 @@ class JDFAttributeMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testGetCommonMap()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		final JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m4 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m3 = new JDFAttributeMap("a1", "v2");
+		assertEquals(m2, m1.getCommonMap(m2));
+		assertEquals(m2, m2.getCommonMap(m1));
+		assertNull(m1.getCommonMap(null));
+		assertNull(m1.getCommonMap(m3));
+		assertNull(m1.getCommonMap(new JDFAttributeMap()));
+		m4.put("a2", "v3");
+		assertEquals(m2, m1.getCommonMap(m4));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testGetOrMapNull()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");

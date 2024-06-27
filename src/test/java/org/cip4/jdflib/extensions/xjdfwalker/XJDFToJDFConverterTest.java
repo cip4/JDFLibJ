@@ -155,6 +155,34 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertEquals(contact.getCompany().getProductID(), "company_id");
 	}
 
+	@Test
+	void testReorder3()
+	{
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		for (int i = 0; i < 3; i++)
+		{
+			final JDFAttributeMap map = new JDFAttributeMap("Run", "Run" + i);
+			for (int j = 0; j < 2; j++)
+			{
+				map.put("Option", "" + j);
+				for (int k = 0; k < 2; k++)
+				{
+					map.put("RunPage", "" + k);
+					v.add(map.clone());
+				}
+			}
+		}
+		final XJDFHelper h = new XJDFHelper("j1", null, v);
+		h.getNodeInfo().setDescriptiveName("foo");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(h);
+		assertNotNull(d);
+		final JDFNode root = d.getJDFRoot();
+		final JDFNodeInfo ni = root.getNodeInfo();
+		assertEquals(new VString("Run Option RunPage"), ni.getPartIDKeys());
+		assertEquals(22, ni.getLeaves(true).size());
+	}
+
 	/**
 	 *
 	 *

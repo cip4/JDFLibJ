@@ -38,13 +38,17 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.xjdfwalker.IDFinder;
+import org.cip4.jdflib.extensions.xjdfwalker.IDPart;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.ContainerUtil;
@@ -100,8 +104,7 @@ public class WalkSet extends WalkXElement
 	 */
 	void reorderResources(final KElement xjdf)
 	{
-		final SetHelper h = new SetHelper(xjdf);
-		final List<ResourceHelper> vp = h.getPartitionList();
+		final List<ResourceHelper> vp = addLowerParts(xjdf);
 		if (ContainerUtil.size(vp) > 1)
 		{
 			vp.sort(new PartSizeComparator());
@@ -110,6 +113,31 @@ public class WalkSet extends WalkXElement
 		{
 			xjdf.moveElement(p.getRoot(), null);
 		}
+	}
+
+	List<ResourceHelper> addLowerParts(final KElement xjdf)
+	{
+		final SetHelper h = new SetHelper(xjdf);
+		final List<ResourceHelper> vp = h.getPartitionList();
+
+		JDFAttributeMap map = new JDFAttributeMap();
+		for (final ResourceHelper p : vp)
+		{
+			final JDFAttributeMap pMap = p.getPartMap();
+			final JDFAttributeMap map2 = map.getCommonMap(pMap);
+			if (!JDFAttributeMap.isEmpty(map2))
+			{
+				h.getCreateResource(map2, false);
+			}
+			map = pMap;
+		}
+		final List<ResourceHelper> ret = h.getPartitionList();
+		if (ret.size() > vp.size())
+		{
+			final Map<String, IDPart> ids = new IDFinder().getMap(xjdf);
+			ContainerUtil.putAll(xjdfToJDFImpl.idMap, ids);
+		}
+		return ret;
 	}
 
 	static class PartSizeComparator implements Comparator<ResourceHelper>

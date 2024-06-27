@@ -521,6 +521,31 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
+	 * return the map that is common to all elements of this. All keys exist and have the same value
+	 *
+	 * @return the vector of all keys
+	 */
+	public JDFAttributeMap getCommonMap(final JDFAttributeMap other)
+	{
+
+		if (isEmpty() || isEmpty(other))
+		{
+			return null;
+		}
+		final JDFAttributeMap newMap = new JDFAttributeMap();
+		for (final Entry<String, String> entry : entrySet())
+		{
+			final String val0 = other.get(entry.getKey());
+			if (StringUtil.equals(val0, entry.getValue()))
+			{
+				newMap.put(entry.getKey(), val0);
+			}
+		}
+
+		return newMap.isEmpty() ? null : newMap;
+	}
+
+	/**
 	 * reduceKey - reduces the map, only valid map entries with the given key vector will be copied to the new hashtable; if null, clear this map
 	 *
 	 *
