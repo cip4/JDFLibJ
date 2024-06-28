@@ -51,6 +51,7 @@ import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -84,6 +85,8 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
+import org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkSet;
+import org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.XJDFToJDFImpl;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -181,6 +184,37 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFNodeInfo ni = root.getNodeInfo();
 		assertEquals(new VString("Run Option RunPage"), ni.getPartIDKeys());
 		assertEquals(22, ni.getLeaves(true).size());
+	}
+
+	@Test
+	void testAddLowerSSS()
+	{
+		final WalkSet set = new WalkSet();
+		set.setParent(new XJDFToJDFImpl(null));
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		for (int i = 0; i < 2; i++)
+		{
+			final JDFAttributeMap map = new JDFAttributeMap("SheetName", "S" + i);
+			for (int j = 0; j < 2; j++)
+			{
+				map.put("Separation", "sep" + j);
+				for (int k = 0; k < 2; k++)
+				{
+					map.put("Side", (EnumSide) EnumSide.getEnumList().get(k));
+					v.add(map.clone());
+				}
+			}
+		}
+		final XJDFHelper h = new XJDFHelper("j1", null, v);
+		h.getNodeInfo().setDescriptiveName("foo");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(h);
+		assertNotNull(d);
+		final JDFNode root = d.getJDFRoot();
+		final JDFNodeInfo ni = root.getNodeInfo();
+		assertEquals(new VString("SignatureName SheetName Side Separation"), ni.getPartIDKeys());
+		assertEquals(8, ni.getLeaves(false).size());
+		assertEquals(17, ni.getLeaves(true).size());
 	}
 
 	/**

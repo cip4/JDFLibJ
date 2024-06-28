@@ -42,6 +42,7 @@ import java.util.Map;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.ProductHelper;
@@ -119,7 +120,7 @@ public class WalkSet extends WalkXElement
 	{
 		final SetHelper h = new SetHelper(xjdf);
 		final List<ResourceHelper> vp = h.getPartitionList();
-
+		final StringArray sss = new StringArray("SignatureName SheetName Side Separation");
 		JDFAttributeMap map = new JDFAttributeMap();
 		for (final ResourceHelper p : vp)
 		{
@@ -127,7 +128,9 @@ public class WalkSet extends WalkXElement
 			final JDFAttributeMap map2 = map.getCommonMap(pMap);
 			if (!JDFAttributeMap.isEmpty(map2))
 			{
-				h.getCreateResource(map2, false);
+				map2.removeKeys(sss);
+				if (!map2.isEmpty())
+					h.getCreateResource(map2, false);
 			}
 			map = pMap;
 		}

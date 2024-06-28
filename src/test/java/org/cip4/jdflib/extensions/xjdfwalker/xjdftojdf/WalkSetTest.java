@@ -40,6 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
@@ -114,6 +115,30 @@ class WalkSetTest extends WalkSet
 		final XJDFHelper h = new XJDFHelper("j1", null, v);
 		final List<ResourceHelper> l = set.addLowerParts(h.getNodeInfo().getRoot());
 		assertEquals(12, l.size());
+	}
+
+	@Test
+	void testAddLowerSSS()
+	{
+		final WalkSet set = new WalkSet();
+		set.setParent(new XJDFToJDFImpl(null));
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		for (int i = 0; i < 2; i++)
+		{
+			final JDFAttributeMap map = new JDFAttributeMap("SheetName", "S" + i);
+			for (int j = 0; j < 2; j++)
+			{
+				map.put("Separation", "sep" + j);
+				for (int k = 0; k < 2; k++)
+				{
+					map.put("Side", (EnumSide) EnumSide.getEnumList().get(k));
+					v.add(map.clone());
+				}
+			}
+		}
+		final XJDFHelper h = new XJDFHelper("j1", null, v);
+		final List<ResourceHelper> l = set.addLowerParts(h.getNodeInfo().getRoot());
+		assertEquals(8, l.size());
 	}
 
 }
