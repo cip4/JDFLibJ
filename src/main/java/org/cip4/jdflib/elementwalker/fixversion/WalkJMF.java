@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -114,9 +114,9 @@ public class WalkJMF extends WalkPool
 	}
 
 	/**
-	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
-	 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
-	 * high versions but potentially fail when attempting to move from higher to lower versions
+	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine for JDF uses heuristics to modify this element and its children to
+	 *      be compatible with a given version in general, it will be able to move from low to high versions but potentially fail when attempting to move from higher to lower
+	 *      versions
 	 */
 	@Override
 	public KElement walk(final KElement e1, final KElement trackElem)
@@ -127,7 +127,6 @@ public class WalkJMF extends WalkPool
 			if (EnumUtil.aLessThanB(fixVersion.version, EnumVersion.Version_2_0))
 			{
 				jmf.setVersion(this.fixVersion.version);
-				jmf.setMaxVersion(this.fixVersion.version);
 			}
 			if (EnumUtil.aLessThanB(EnumVersion.Version_1_3, fixVersion.version))
 			{

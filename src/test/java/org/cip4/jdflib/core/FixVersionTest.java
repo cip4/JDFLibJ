@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -109,7 +109,7 @@ class FixVersionTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		JDFDoc mDoc = new JDFDoc(ElementName.JDF);
+		final JDFDoc mDoc = new JDFDoc(ElementName.JDF);
 		n = mDoc.getJDFRoot();
 	}
 
@@ -193,7 +193,7 @@ class FixVersionTest extends JDFTestCaseBase
 	@Test
 	void testNamespaceParse()
 	{
-		JDFNode n = JDFDoc.parseFile(sm_dirTestData + "fixns.jdf").getJDFRoot();
+		final JDFNode n = JDFDoc.parseFile(sm_dirTestData + "fixns.jdf").getJDFRoot();
 		n.fixVersion(null);
 		KElement ns2 = n.getResourcePool().getElement("foo:myresource");
 		assertEquals(ns2.getNamespaceURI(), "http://www.foo.com/schema");
@@ -208,7 +208,7 @@ class FixVersionTest extends JDFTestCaseBase
 	@Test
 	void testNamespaceRetain()
 	{
-		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.addNameSpace("foo", "http://www.foo.com/schema");
 		n.fixVersion(EnumVersion.Version_1_3);
 		assertEquals(n.getAttribute("xmlns:foo"), "http://www.foo.com/schema");
@@ -220,7 +220,7 @@ class FixVersionTest extends JDFTestCaseBase
 	@Test
 	void testNamespaceRetain2()
 	{
-		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final KElement e = n.appendElement("foo:" + this.getClass().getSimpleName(), "http://www.foo.com/schema");
 		final JDFNode n0 = (JDFNode) e.appendElement(ElementName.JDF);
 		n0.appendStatusPool();
@@ -234,7 +234,7 @@ class FixVersionTest extends JDFTestCaseBase
 	@Test
 	void testNamespaceRetainZappDeprecated()
 	{
-		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.addNameSpace("foo", "http://www.foo.com/schema");
 		final FixVersion fv = new FixVersion(EnumVersion.Version_1_5);
 		fv.setZappDeprecated(true);
@@ -271,6 +271,21 @@ class FixVersionTest extends JDFTestCaseBase
 		n.removeAttribute(AttributeName.JOBID);
 		f1.convert(n);
 		assertTrue(n.hasNonEmpty(AttributeName.JOBID));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testMaxVersion()
+	{
+		final FixVersion f1 = new FixVersion(EnumVersion.Version_1_4);
+		n.setMaxVersion(EnumVersion.Version_1_8);
+		n.setVersion(EnumVersion.Version_1_8);
+		f1.convert(n);
+		assertEquals(EnumVersion.Version_1_8, n.getMaxVersion(true));
+		assertEquals(EnumVersion.Version_1_4, n.getVersion(true));
 
 	}
 
@@ -474,7 +489,7 @@ class FixVersionTest extends JDFTestCaseBase
 	void testNamedFeature()
 	{
 		n.setNamedFeatures(new VString("a b", null));
-		FixVersion fv15 = new FixVersion(EnumVersion.Version_1_5);
+		final FixVersion fv15 = new FixVersion(EnumVersion.Version_1_5);
 		assertTrue(fv15.convert(n));
 		assertTrue(fv15.convert(n));
 		assertEquals(n.getGeneralID("a", 0), "b");
@@ -492,7 +507,7 @@ class FixVersionTest extends JDFTestCaseBase
 	void testNamedFeatureZapp()
 	{
 		n.setNamedFeatures(new VString("a b", null));
-		FixVersion fv15 = new FixVersion(EnumVersion.Version_1_5);
+		final FixVersion fv15 = new FixVersion(EnumVersion.Version_1_5);
 		fv15.setZappDeprecated(true);
 		assertTrue(fv15.convert(n));
 		assertEquals(n.getGeneralID("a", 0), "b");
@@ -1011,16 +1026,16 @@ class FixVersionTest extends JDFTestCaseBase
 	@Test
 	void testMatches()
 	{
-		FixVersion fv = new FixVersion(EnumVersion.Version_1_7);
-		WalkElement we = new WalkElement();
+		final FixVersion fv = new FixVersion(EnumVersion.Version_1_7);
+		final WalkElement we = new WalkElement();
 		assertFalse(we.matches(null));
-		KElement e = KElement.createRoot("a", null);
+		final KElement e = KElement.createRoot("a", null);
 		assertFalse(we.matches(null));
 		assertFalse(we.matches(e));
-		JDFElement ee = JDFElement.createRoot("a:a");
+		final JDFElement ee = JDFElement.createRoot("a:a");
 		ee.setNamespaceURI("aaa");
 		assertFalse(we.matches(ee));
-		JDFElement e2 = JDFElement.createRoot("a");
+		final JDFElement e2 = JDFElement.createRoot("a");
 		assertTrue(we.matches(e2));
 	}
 
