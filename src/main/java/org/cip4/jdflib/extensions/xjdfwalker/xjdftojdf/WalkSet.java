@@ -37,14 +37,18 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFAttributeMapArray;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -120,8 +124,21 @@ public class WalkSet extends WalkXElement
 	{
 		final SetHelper h = new SetHelper(xjdf);
 		final List<ResourceHelper> vp = h.getPartitionList();
+		final JDFAttributeMapArray foundparts = findCommonParts(vp);
+		final StringArray seq = findSubSequence(foundparts);
+		if (!seq.isEmpty())
+		{
+			return reallyAddSubParts(h, seq);
+		}
+		return vp;
+	}
+
+	private JDFAttributeMapArray findCommonParts(final List<ResourceHelper> vp)
+	{
+		final JDFAttributeMapArray foundparts = new JDFAttributeMapArray();
 		final StringArray sss = new StringArray("SignatureName SheetName Side Separation");
 		JDFAttributeMap map = new JDFAttributeMap();
+		final Set<String> keyset = new HashSet<String>();
 		for (final ResourceHelper p : vp)
 		{
 			final JDFAttributeMap pMap = p.getPartMap();
@@ -129,18 +146,68 @@ public class WalkSet extends WalkXElement
 			if (!JDFAttributeMap.isEmpty(map2))
 			{
 				map2.removeKeys(sss);
+				if (!map2.keySet().containsAll(keyset))
+				{
+					map2.reduceMap(keyset);
+				}
 				if (!map2.isEmpty())
-					h.getCreateResource(map2, false);
+				{
+					foundparts.add(map2);
+					keyset.addAll(map2.keySet());
+				}
 			}
 			map = pMap;
 		}
-		final List<ResourceHelper> ret = h.getPartitionList();
-		if (ret.size() > vp.size())
+		return foundparts;
+	}
+
+	private StringArray findSubSequence(final JDFAttributeMapArray foundparts)
+	{
+		final StringArray seq = new StringArray();
+		boolean nostop = true;
+		for (int i = 1; nostop; i++)
 		{
-			final Map<String, IDPart> ids = new IDFinder().getMap(xjdf);
-			ContainerUtil.putAll(xjdfToJDFImpl.idMap, ids);
+			nostop = false;
+			for (final JDFAttributeMap found : foundparts)
+			{
+				final int size = found.size();
+				nostop = nostop || size >= i;
+				if (size == i)
+				{
+					final StringArray keys = new StringArray(found.getKeyList());
+					keys.removeAll(seq);
+					seq.add(keys.get(0));
+					break;
+				}
+			}
+
 		}
-		return ret;
+		return seq;
+	}
+
+	private List<ResourceHelper> reallyAddSubParts(final SetHelper h, final StringArray seq)
+	{
+		final VJDFAttributeMap allParts = h.getPartMapVector();
+		for (final JDFAttributeMap found : allParts)
+		{
+			final JDFAttributeMap subMap = new JDFAttributeMap();
+			for (final String key : seq)
+			{
+				final String value = found.get(key);
+				if (!StringUtil.isEmpty(value))
+				{
+					subMap.put(key, value);
+					h.getCreateResource(subMap, false);
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+		final Map<String, IDPart> ids = new IDFinder().getMap(h.getRoot());
+		ContainerUtil.putAll(xjdfToJDFImpl.idMap, ids);
+		return h.getPartitionList();
 	}
 
 	static class PartSizeComparator implements Comparator<ResourceHelper>

@@ -98,6 +98,32 @@ class WalkSetTest extends WalkSet
 	}
 
 	@Test
+	void testReordersingle()
+	{
+		final WalkSet set = new WalkSet();
+		set.setParent(new XJDFToJDFImpl(null));
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		for (int i = 0; i < 3; i++)
+		{
+			final JDFAttributeMap map = new JDFAttributeMap("Run", "Run" + i);
+			for (int j = 0; j < 2; j++)
+			{
+				map.put("Option", "" + j);
+				for (int k = 0; k < j + 1; k++)
+				{
+					map.put("RunPage", "" + k);
+					v.add(map.clone());
+				}
+			}
+		}
+		final XJDFHelper h = new XJDFHelper("j1", null, v);
+		set.reorderResources(h.getNodeInfo().getRoot());
+		final List<ResourceHelper> l = h.getNodeInfo().getPartitionList();
+		assertEquals("Run0", h.getNodeInfo().getPartition(0).getPartKey("Run"));
+		assertEquals(18, l.size());
+	}
+
+	@Test
 	void testAddLower()
 	{
 		final WalkSet set = new WalkSet();
