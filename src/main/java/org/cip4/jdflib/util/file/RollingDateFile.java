@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,8 @@ package org.cip4.jdflib.util.file;
 
 import java.io.File;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
@@ -83,13 +85,14 @@ import org.cip4.jdflib.util.StringUtil;
 public class RollingDateFile extends RollingFile
 {
 	FileJanitor janitor;
+	private static final Log log = LogFactory.getLog(RollingDateFile.class);
 
 	public FileJanitor getJanitor()
 	{
 		return janitor;
 	}
 
-	public void setJanitor(long seconds)
+	public void setJanitor(final long seconds)
 	{
 		janitor = new FileJanitor(this, seconds);
 	}

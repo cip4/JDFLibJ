@@ -75,8 +75,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -96,7 +94,6 @@ public class RollingFile extends File
 	private final String base;
 	private final String ext;
 	private int digits;
-	protected final Log log;
 
 	/**
 	 * @param pathname the base filename
@@ -111,7 +108,6 @@ public class RollingFile extends File
 		base = UrlUtil.prefix(baseName);
 		digits = 6;
 		pos = new AtomicInteger(calcPos());
-		log = LogFactory.getLog(getClass());
 		mkdirs();
 	}
 
