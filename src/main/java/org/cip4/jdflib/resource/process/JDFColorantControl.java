@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -56,6 +56,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFSeparationList;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource;
@@ -143,32 +144,50 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	}
 
 	/**
-	 * get the list of separations that this colorantcontrol describes - adds the separations that are implied by ProcessColorModel uses devicecolorantorder if it is specified, else calls
-	 * getColorantOrderSeparations()
+	 * get the list of separations that this colorantcontrol describes - adds the separations that are implied by ProcessColorModel uses devicecolorantorder if it is specified,
+	 * else calls getColorantOrderSeparations()
 	 *
 	 * @return
 	 */
 	public VString getDeviceColorantOrderSeparations()
 	{
-		if (hasChildElement(ElementName.DEVICECOLORANTORDER, null))
-		{
-			return super.getDeviceColorantOrder().getSeparations();
-		}
-		return getColorantOrderSeparations();
+		final StringArray tmp = getSeparations(ElementName.DEVICECOLORANTORDER);
+		return tmp.isEmpty() ? getColorantOrderSeparations() : new VString(tmp);
 	}
 
 	/**
-	 * get the list of separations that this colorantcontrol describes - adds the separations that are implied by ProcessColorModel uses colorantorder if it is specified, else calls getSeparations()
+	 * get the list of separations that this colorantcontrol describes - adds the separations that are implied by ProcessColorModel uses devicecolorantorder if it is specified,
+	 * else calls getColorantOrderSeparations()
+	 *
+	 * @return
+	 */
+	StringArray getSeparations(final String listName)
+	{
+		if (hasChildElement(listName, null))
+		{
+			final JDFSeparationList sl = (JDFSeparationList) getElement(listName);
+			return sl.getSeparationList();
+		}
+		else if (hasNonEmpty(listName))
+		{
+			return new StringArray(getNonEmpty(listName));
+		}
+		else
+		{
+			return new StringArray();
+		}
+	}
+
+	/**
+	 * get the list of separations that this colorantcontrol describes - adds the separations that are implied by ProcessColorModel uses colorantorder if it is specified, else
+	 * calls getSeparations()
 	 *
 	 * @return
 	 */
 	public VString getColorantOrderSeparations()
 	{
-		if (hasChildElement(ElementName.COLORANTORDER, null))
-		{
-			return super.getColorantOrder().getSeparations();
-		}
-		return getSeparations();
+		final StringArray tmp = getSeparations(ElementName.COLORANTORDER);
+		return tmp.isEmpty() ? getSeparations() : new VString(tmp);
 	}
 
 	/**
@@ -199,19 +218,16 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	 */
 	public VString getSeparations()
 	{
+		if (hasAttribute(ElementName.COLORANTPARAMS) && !hasChildElement(ElementName.COLORANTPARAMS, null))
+			return new VString(getSeparations(ElementName.COLORANTPARAMS));
 		final VString vName = getProcessSeparations();
-
-		final JDFSeparationList colpar = getColorantParams();
-		if (colpar != null)
-		{
-			vName.addAll(colpar.getSeparations());
-		}
-		vName.unify();
+		vName.appendUnique(getSeparations(ElementName.COLORANTPARAMS));
 		return vName;
 	}
 
 	/**
-	 * get the list of separations that the value of ProcessColorModel implies adds the separations that are implied by ProcessColorModel ignores colorantorder and devicecolorantorder
+	 * get the list of separations that the value of ProcessColorModel implies adds the separations that are implied by ProcessColorModel ignores colorantorder and
+	 * devicecolorantorder
 	 *
 	 * @return VString the complete list of process and spot colors
 	 */
