@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,7 +95,7 @@ public class UnitParser
 	public static final String UNIT_CM = "cm";
 	public static final String UNIT_MM = "mm";
 	public static final String UNIT_PT = "pt";
-	final static Set<String> unitKeys = new HashSet<>();
+	final static Set<String> unitKeys = getUnitKeys();
 	private int precision;
 
 	/**
@@ -105,7 +105,6 @@ public class UnitParser
 	{
 		super();
 		setPrecision(4);
-		getUnitKeys();
 	}
 
 	/**
@@ -163,49 +162,50 @@ public class UnitParser
 		unitKeys.add(key);
 	}
 
-	private void getUnitKeys()
+	private static Set<String> getUnitKeys()
 	{
-		if (unitKeys.isEmpty())
+		final Set<String> keys = new HashSet<>();
+		if (keys.isEmpty())
 		{
-			unitKeys.add(AttributeName.BACKOVERFOLD);
-			unitKeys.add(AttributeName.BLEEDBOTTOM);
-			unitKeys.add(AttributeName.BLEEDFACE);
-			unitKeys.add(AttributeName.BLEEDFOOT);
-			unitKeys.add(AttributeName.BLEEDHEAD);
-			unitKeys.add(AttributeName.BLEEDLEFT);
-			unitKeys.add(AttributeName.BLEEDRIGHT);
-			unitKeys.add(AttributeName.BLEEDSPINE);
-			unitKeys.add(AttributeName.BOUNDINGBOX);
-			unitKeys.add(AttributeName.CENTER);
-			unitKeys.add(AttributeName.CUTBOX);
-			unitKeys.add(AttributeName.DIAMETER);
-			unitKeys.add(AttributeName.DIMENSION);
-			unitKeys.add(ElementName.DIMENSIONS);
-			unitKeys.add(AttributeName.EXTENT);
-			unitKeys.add(ElementName.FINISHEDDIMENSIONS);
-			unitKeys.add(AttributeName.FOLDINGWIDTH);
-			unitKeys.add(AttributeName.FOLDINGWIDTH + "Back");
-			unitKeys.add(AttributeName.FRONTOVERFOLD);
-			unitKeys.add(AttributeName.HEIGHT);
-			unitKeys.add(AttributeName.LENGTH);
-			unitKeys.add(AttributeName.MILLINGDEPTH);
-			unitKeys.add(AttributeName.PITCH);
-			unitKeys.add(ElementName.POSITION);
-			unitKeys.add(AttributeName.SPINE);
-			unitKeys.add(AttributeName.TABEXTENSIONDISTANCE);
-			unitKeys.add(AttributeName.THICKNESS);
-			unitKeys.add(AttributeName.TRIMBOTTOM);
-			unitKeys.add(AttributeName.TRIMBOX);
-			unitKeys.add(AttributeName.TRIMFACE);
-			unitKeys.add(AttributeName.TRIMFOOT);
-			unitKeys.add(AttributeName.TRIMHEAD);
-			unitKeys.add(AttributeName.TRIMLEFT);
-			unitKeys.add(AttributeName.TRIMRIGHT);
-			unitKeys.add(AttributeName.TRIMSIZE);
-			unitKeys.add(AttributeName.TRIMTOP);
-			unitKeys.add(AttributeName.WIDTH);
+			keys.add(AttributeName.BACKOVERFOLD);
+			keys.add(AttributeName.BLEEDBOTTOM);
+			keys.add(AttributeName.BLEEDFACE);
+			keys.add(AttributeName.BLEEDFOOT);
+			keys.add(AttributeName.BLEEDHEAD);
+			keys.add(AttributeName.BLEEDLEFT);
+			keys.add(AttributeName.BLEEDRIGHT);
+			keys.add(AttributeName.BLEEDSPINE);
+			keys.add(AttributeName.BOUNDINGBOX);
+			keys.add(AttributeName.CENTER);
+			keys.add(AttributeName.CUTBOX);
+			keys.add(AttributeName.DIAMETER);
+			keys.add(AttributeName.DIMENSION);
+			keys.add(ElementName.DIMENSIONS);
+			keys.add(AttributeName.EXTENT);
+			keys.add(ElementName.FINISHEDDIMENSIONS);
+			keys.add(AttributeName.FOLDINGWIDTH);
+			keys.add(AttributeName.FOLDINGWIDTH + "Back");
+			keys.add(AttributeName.FRONTOVERFOLD);
+			keys.add(AttributeName.HEIGHT);
+			keys.add(AttributeName.LENGTH);
+			keys.add(AttributeName.MILLINGDEPTH);
+			keys.add(AttributeName.PITCH);
+			keys.add(ElementName.POSITION);
+			keys.add(AttributeName.SPINE);
+			keys.add(AttributeName.TABEXTENSIONDISTANCE);
+			keys.add(AttributeName.THICKNESS);
+			keys.add(AttributeName.TRIMBOTTOM);
+			keys.add(AttributeName.TRIMBOX);
+			keys.add(AttributeName.TRIMFACE);
+			keys.add(AttributeName.TRIMFOOT);
+			keys.add(AttributeName.TRIMHEAD);
+			keys.add(AttributeName.TRIMLEFT);
+			keys.add(AttributeName.TRIMRIGHT);
+			keys.add(AttributeName.TRIMSIZE);
+			keys.add(AttributeName.TRIMTOP);
+			keys.add(AttributeName.WIDTH);
 		}
-
+		return keys;
 	}
 
 	/**
@@ -256,7 +256,8 @@ public class UnitParser
 	}
 
 	/**
-	 * extract units if and only if the string has a pattern of "<##>mm" or "<##>cm"or "<##>in" whitespace characters may be placed between the numbers and the units the unit case is ignored
+	 * extract units if and only if the string has a pattern of "<##>mm" or "<##>cm"or "<##>in" whitespace characters may be placed between the numbers and the units the unit case
+	 * is ignored
 	 *
 	 * @param val the string to convert
 	 * @return the converted unit string
