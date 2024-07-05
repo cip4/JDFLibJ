@@ -1676,6 +1676,23 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 
 	/**
 	*
+	*/
+	@Test
+	void testAssembly()
+	{
+		final XJDFHelper xh = new XJDFHelper("j1", "p1", null);
+		final JDFAssembly assembly = (JDFAssembly) xh.getCreateSet(ElementName.ASSEMBLY, EnumUsage.Input).getCreatePartition(0, true).getResource();
+		assembly.appendAssemblySection().setAttribute(XJDFConstants.BinderySignatureID, "b1");
+		assembly.appendAssemblySection().setAttribute(XJDFConstants.BinderySignatureID, "b2");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xh);
+		final JDFAssembly ja = (JDFAssembly) d.getJDFRoot().getResource(ElementName.ASSEMBLY);
+		assertNotNull(ja);
+		assertEquals(EnumOrder.List, ja.getOrder());
+	}
+
+	/**
+	*
 	*
 	*/
 	@Test
