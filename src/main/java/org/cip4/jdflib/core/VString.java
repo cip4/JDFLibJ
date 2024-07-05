@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -82,7 +82,7 @@ public class VString extends Vector<String>
 	 * @param v
 	 * @return
 	 */
-	public static boolean isEmpty(final VString v)
+	public static boolean isEmpty(final Collection<String> v)
 	{
 		return StringUtil.isEmpty(v);
 	}
@@ -100,7 +100,7 @@ public class VString extends Vector<String>
 	 *
 	 * @param m
 	 */
-	public VString(final Vector<String> m)
+	public VString(final Collection<String> m)
 	{
 		super();
 		if (m != null)
@@ -357,14 +357,14 @@ public class VString extends Vector<String>
 	 *
 	 * @param v the vector to append, if null nothing is added
 	 */
-	public void appendUnique(final VString v)
+	public void appendUnique(final Collection<String> v)
 	{
 		if (!VString.isEmpty(v))
 		{
 			final int size = v.size();
 			if (size == 1) // speedup for single append
 			{
-				final String theOther = v.elementAt(0);
+				final String theOther = v.iterator().next();
 				if (!contains(theOther))
 				{
 					add(theOther);
@@ -372,10 +372,7 @@ public class VString extends Vector<String>
 			}
 			else
 			{
-				for (int i = 0; i < size; i++)
-				{
-					add(v.elementAt(i));
-				}
+				addAll(v);
 				unify();
 			}
 		}
@@ -394,12 +391,12 @@ public class VString extends Vector<String>
 	}
 
 	/**
-	 * removeStrings - remove all occurrences of a string
+	 * removeStrings - remove all occurrences of a set of string
 	 *
 	 * @param v the vector of strings to remove from <code>this</code>
 	 * @param nMax the max number of strings to remove
 	 */
-	public void removeStrings(final VString v, int nMax)
+	public void removeStrings(final Collection<String> v, int nMax)
 	{
 		if (v == null || v.size() == 0)
 		{
@@ -579,7 +576,7 @@ public class VString extends Vector<String>
 	 * @param others the VSTring of values to test
 	 * @return true if at least one String in other is in <code>this</code>
 	 */
-	public boolean containsAny(final VString others)
+	public boolean containsAny(final Collection<String> others)
 	{
 		return ContainerUtil.containsAny(this, others);
 	}
@@ -590,7 +587,7 @@ public class VString extends Vector<String>
 	 * @param others the VString of values to test
 	 * @return true if at least one String in other is in <code>this</code>
 	 */
-	public VString getOverlapping(final VString others)
+	public VString getOverlapping(final Collection<String> others)
 	{
 		final List<String> l = ContainerUtil.getOverlapping(this, others);
 

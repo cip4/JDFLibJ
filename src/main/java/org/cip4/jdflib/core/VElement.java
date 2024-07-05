@@ -46,8 +46,10 @@
  */
 package org.cip4.jdflib.core;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
@@ -80,7 +82,7 @@ public class VElement extends Vector<KElement>
 	 * @param m
 	 */
 	@SuppressWarnings("unchecked")
-	public VElement(final Vector m)
+	public VElement(final Collection m)
 	{
 		super();
 		addAll(m);
@@ -255,7 +257,7 @@ public class VElement extends Vector<KElement>
 	 * @param v the vector to compare
 	 * @return true, if v is equal to this
 	 */
-	public boolean isEqual(final VElement v)
+	public boolean isEqual(final List<KElement> v)
 	{
 		final int size = size();
 		if (v == null)
@@ -286,7 +288,7 @@ public class VElement extends Vector<KElement>
 	 *
 	 * @param v the vector of elements to append
 	 */
-	public void appendUnique(final VElement v)
+	public void appendUnique(final Collection<KElement> v)
 	{
 		if (v == null)
 		{
@@ -302,7 +304,7 @@ public class VElement extends Vector<KElement>
 	 *
 	 * @param v the vector of elements to append
 	 */
-	public void appendUniqueElement(final VElement v)
+	public void appendUniqueElement(final Collection<KElement> v)
 	{
 		if (v == null)
 		{
@@ -323,7 +325,7 @@ public class VElement extends Vector<KElement>
 	 * @default setAttributes(key, vValue, null)
 	 * @throws IllegalArgumentException if size mismatch of vValue anf this
 	 */
-	public void setAttributes(final String key, final Vector<String> vValue, final String nameSpaceURI)
+	public void setAttributes(final String key, final List<String> vValue, final String nameSpaceURI)
 	{
 		if (size() != vValue.size())
 		{
@@ -333,7 +335,7 @@ public class VElement extends Vector<KElement>
 		for (int i = 0; i < size(); i++)
 		{
 			final KElement k = elementAt(i);
-			k.setAttribute(key, vValue.elementAt(i), nameSpaceURI);
+			k.setAttribute(key, vValue.get(i), nameSpaceURI);
 		}
 	}
 

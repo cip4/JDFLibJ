@@ -137,7 +137,7 @@ public class ContainerUtil
 	 * @param list the list
 	 * @return a Set created from list
 	 */
-	public static <A> Set<A> toHashSet(final List<A> list)
+	public static <A> Set<A> toHashSet(final Collection<A> list)
 	{
 		if (list == null)
 		{
@@ -146,9 +146,10 @@ public class ContainerUtil
 		final int size = list.size();
 		final HashSet<A> s = new HashSet<>(size + 10);
 
-		for (int i = 0; i < size; i++)
+		final Iterator<A> it = list.iterator();
+		while (it.hasNext())
 		{
-			s.add(list.get(i));
+			s.add(it.next());
 		}
 		return s;
 	}

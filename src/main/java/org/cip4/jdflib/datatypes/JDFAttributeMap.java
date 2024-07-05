@@ -296,7 +296,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @param vMap the vector submaps to check against
 	 * @return true if this has at least one entry that vMap contains at least a submap of
 	 */
-	public boolean subMap(final VJDFAttributeMap vMap)
+	public boolean subMap(final Collection<JDFAttributeMap> vMap)
 	{
 		if (vMap == null || vMap.size() == 0)
 		{
@@ -318,7 +318,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @param vMap the vector submaps to check against
 	 * @return true if this has at least one entry that vMap contains at least a submap or supermap of
 	 */
-	public boolean overlapMap(final VJDFAttributeMap vMap)
+	public boolean overlapMap(final Collection<JDFAttributeMap> vMap)
 	{
 		return overlapsMap(vMap);
 	}

@@ -49,13 +49,15 @@
 package org.cip4.jdflib.core;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoSeparationList;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 
 /**
- * This class represents a list of SeparationSpec elements it allows high level string manipulation of the separation names by hiding the fact that the separations are written in SeparationSpec/@Name
+ * This class represents a list of SeparationSpec elements it allows high level string manipulation of the separation names by hiding the fact that the separations are written in
+ * SeparationSpec/@Name
  */
 public class JDFSeparationList extends JDFAutoSeparationList
 {
@@ -127,11 +129,27 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	}
 
 	/**
+	 * Get a list of all separation names in the SeparationSpec elements
+	 *
+	 * @return the vector of separation names - empty VString if no separations are present
+	 */
+	public StringArray getSeparationList()
+	{
+		final StringArray vName = new StringArray();
+		final Collection<JDFSeparationSpec> v = getAllSeparationSpec();
+		for (final JDFSeparationSpec sep : v)
+		{
+			vName.add(sep.getName());
+		}
+		return vName;
+	}
+
+	/**
 	 * set all separation names in the SeparationSpec elements, remove any prior elements
 	 *
 	 * @param vSeps the vector of separation names to set
 	 */
-	public void setSeparations(final VString vSeps)
+	public void setSeparations(final List<String> vSeps)
 	{
 		removeChildren(ElementName.SEPARATIONSPEC, null, null);
 		appendSeparations(vSeps);
@@ -142,15 +160,13 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	 *
 	 * @param vSeps the vector of separation names to append
 	 */
-	public void appendSeparations(final VString vSeps)
+	public void appendSeparations(final List<String> vSeps)
 	{
-		if (vSeps == null)
-			return;
-
-		for (final String sep : vSeps)
-		{
-			appendSeparation(sep);
-		}
+		if (vSeps != null)
+			for (final String sep : vSeps)
+			{
+				appendSeparation(sep);
+			}
 	}
 
 	/**
@@ -158,7 +174,7 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	 *
 	 * @param vSeps the vector of separation names to append
 	 */
-	public void ensureSeparations(final VString vSeps)
+	public void ensureSeparations(final List<String> vSeps)
 	{
 		if (vSeps != null)
 		{
@@ -270,7 +286,7 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	 *
 	 * @param seps
 	 */
-	public void removeSeparations(final VString seps)
+	public void removeSeparations(final List<String> seps)
 	{
 		if (seps != null)
 		{

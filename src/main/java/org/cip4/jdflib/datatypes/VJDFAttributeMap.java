@@ -89,7 +89,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 *
 	 * @param toAdd Vector of elements to clone
 	 */
-	public VJDFAttributeMap(final Vector<JDFAttributeMap> toAdd)
+	public VJDFAttributeMap(final Collection<JDFAttributeMap> toAdd)
 	{
 		super();
 		if (toAdd != null)
@@ -167,9 +167,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @param v
 	 * @return
 	 */
-	public static boolean isEmpty(final VJDFAttributeMap v)
+	public static boolean isEmpty(final Collection<JDFAttributeMap> v)
 	{
-		return v == null || v.isEmpty() || v.size() == 1 && JDFAttributeMap.isEmpty(v.get(0));
+		return v == null || v.isEmpty() || v.size() == 1 && JDFAttributeMap.isEmpty(v.iterator().next());
 	}
 
 	/**
@@ -325,7 +325,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @param map the given map
 	 * @return the anded map, null if mismatches occurred
 	 */
-	public VJDFAttributeMap getOrMaps(final VJDFAttributeMap vMap)
+	public VJDFAttributeMap getOrMaps(final Collection<JDFAttributeMap> vMap)
 	{
 		if (VJDFAttributeMap.isEmpty(vMap))
 		{
@@ -375,7 +375,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 *
 	 * @param vec the Vector with JDFAttributeMap elements
 	 */
-	public void setVector(final List<JDFAttributeMap> vec)
+	public void setVector(final Collection<JDFAttributeMap> vec)
 	{
 		clear();
 		if (vec != null)
@@ -714,7 +714,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 *
 	 * @param maps maps to append
 	 */
-	public void appendUnique(final VJDFAttributeMap maps)
+	public void appendUnique(final Collection<JDFAttributeMap> maps)
 	{
 		ContainerUtil.appendUnique(this, maps);
 	}
@@ -793,7 +793,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 *
 	 * @param vMap the map to check against
 	 */
-	public void overlapMap(final VJDFAttributeMap vMap)
+	public void overlapMap(final Collection<JDFAttributeMap> vMap)
 	{
 		if (vMap == null)
 		{
@@ -852,7 +852,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @param vMap the vector submaps to check against
 	 * @return true if this has at least one entry that vMap contains at least a submap of
 	 */
-	public boolean subMap(final VJDFAttributeMap vMap)
+	public boolean subMap(final Collection<JDFAttributeMap> vMap)
 	{
 		if (isEmpty(vMap))
 		{
@@ -874,7 +874,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @param vMap the vector to check against
 	 * @return true if this has at least one entry that vMap contains at least a submap of
 	 */
-	public boolean overlapsMap(final VJDFAttributeMap vMap)
+	public boolean overlapsMap(final Collection<JDFAttributeMap> vMap)
 	{
 		final int size = vMap == null ? 0 : vMap.size();
 		if (size == 0)
@@ -884,9 +884,10 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 		if (vMap != null)
 		{
-			for (int i = 0; i < size; i++)
+			final Iterator<JDFAttributeMap> it = vMap.iterator();
+			while (it.hasNext())
 			{
-				if (overlapsMap(vMap.elementAt(i)))
+				if (overlapsMap(it.next()))
 				{
 					return true;
 				}

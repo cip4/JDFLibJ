@@ -283,7 +283,7 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	 * @param map the given map
 	 * @return the anded map, null if mismatches occurred
 	 */
-	public JDFAttributeMapArray getOrMaps(final JDFAttributeMapArray vMap)
+	public JDFAttributeMapArray getOrMaps(final Collection<JDFAttributeMap> vMap)
 	{
 		if (JDFAttributeMapArray.isEmpty(vMap))
 		{
@@ -648,7 +648,7 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	 * @param vMap the vector submaps to check against
 	 * @return true if this has at least one entry that vMap contains at least a submap of
 	 */
-	public boolean subMap(final JDFAttributeMapArray vMap)
+	public boolean subMap(final Collection<JDFAttributeMap> vMap)
 	{
 		if (isEmpty(vMap))
 		{
@@ -670,7 +670,7 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	 * @param vMap the vector to check against
 	 * @return true if this has at least one entry that vMap contains at least a submap of
 	 */
-	public boolean overlapsMap(final JDFAttributeMapArray vMap)
+	public boolean overlapsMap(final Collection<JDFAttributeMap> vMap)
 	{
 		if (JDFAttributeMapArray.isEmpty(vMap))
 		{
@@ -735,7 +735,7 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	 * @param strKey the new key to add
 	 * @param vsValues String of values
 	 */
-	public void extendMap(final String strKey, final List<String> vsValues)
+	public void extendMap(final String strKey, final Collection<String> vsValues)
 	{
 		if (StringUtil.isEmpty(vsValues) || StringUtil.isEmpty(strKey))
 		{
