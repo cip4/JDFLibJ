@@ -13,8 +13,8 @@ jobs:
     name: 🏭
     uses: cip4/.github/.github/workflows/library-snapshot.yml@master
     with:
-      java-version: 8
-      java-distribution: adopt
+      java-version: 17
+      java-distribution: temurin
       codecov-enabled: true
     secrets:
       SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
