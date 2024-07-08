@@ -152,7 +152,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	public VString getDeviceColorantOrderSeparations()
 	{
 		final StringArray tmp = getSeparations(ElementName.DEVICECOLORANTORDER);
-		return tmp.isEmpty() ? getColorantOrderSeparations() : new VString(tmp);
+		return tmp == null ? getColorantOrderSeparations() : new VString(tmp);
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 		}
 		else
 		{
-			return new StringArray();
+			return null;
 		}
 	}
 
@@ -187,7 +187,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	public VString getColorantOrderSeparations()
 	{
 		final StringArray tmp = getSeparations(ElementName.COLORANTORDER);
-		return tmp.isEmpty() ? getSeparations() : new VString(tmp);
+		return tmp == null ? getSeparations() : new VString(tmp);
 	}
 
 	/**
