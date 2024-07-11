@@ -5956,6 +5956,20 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * get first NodeInfo element from child list or child list of any ancestor
 	 *
+	 * @param xPath the xPath to an element or attribute that must exist in the queried CustomerInfo<br>
+	 *        note that attributes must be marked with an "@", if xPath=null, simply return the next in line
+	 *
+	 * @return JDFNodeInfo The matching NodeInfo element
+	 */
+	JDFNodeInfo getScheduleNodeInfo(final String att)
+	{
+		final KElement ni = getNiCi(ElementName.NODEINFO, true, '@' + att);
+		return (JDFNodeInfo) (ni == null ? JDFElement.createRoot(ElementName.NODEINFO) : ni);
+	}
+
+	/**
+	 * get first NodeInfo element from child list or child list of any ancestor
+	 *
 	 * @return JDFNodeInfo - the element
 	 * @deprecated 060221 use getInheritedNodeInfo(String xPath)
 	 */
@@ -7650,13 +7664,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 * @deprecated use getInheritedNodeInfo(String attName)
 	 * @return JDFDuration
 	 */
-	@Deprecated
 	public JDFDuration getNodeInfoCleanupDuration()
 	{
-		return getInheritedNodeInfo(null).getCleanupDuration();
+		return getScheduleNodeInfo(AttributeName.CLEANUPDURATION).getCleanupDuration();
 	}
 
 	/**
@@ -7681,9 +7693,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 * @return #
-	 * @deprecated 06�221 use getInheritedNodeInfo(String attName)
 	 */
-	@Deprecated
 	public JDFNodeInfo.EnumDueLevel getNodeInfoDueLevel()
 	{
 		final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
@@ -7691,52 +7701,32 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			return null;
 		}
-		return inheritedNodeInfo.getDueLevel();
+		return getScheduleNodeInfo(AttributeName.DUELEVEL).getDueLevel();
 	}
 
 	/**
 	 * @return
-	 * @deprecated 06�221 use getInheritedNodeInfo(String attName)
+	 * 
 	 */
-	@Deprecated
 	public JDFDate getNodeInfoEnd()
 	{
-		final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
-		if (inheritedNodeInfo == null)
-		{
-			return null;
-		}
-		return inheritedNodeInfo.getEnd();
+		return getScheduleNodeInfo(AttributeName.END).getEnd();
 	}
 
 	/**
 	 * @return
-	 * @deprecated 06�221 use getInheritedNodeInfo(String attName)
 	 */
-	@Deprecated
 	public JDFDate getNodeInfoFirstEnd()
 	{
-		final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
-		if (inheritedNodeInfo == null)
-		{
-			return null;
-		}
-		return inheritedNodeInfo.getFirstEnd();
+		return getScheduleNodeInfo(AttributeName.FIRSTEND).getFirstEnd();
 	}
 
 	/**
 	 * @return
-	 * @deprecated 06�221 use getInheritedNodeInfo(String attName)
 	 */
-	@Deprecated
 	public JDFDate getNodeInfoFirstStart()
 	{
-		final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
-		if (inheritedNodeInfo == null)
-		{
-			return null;
-		}
-		return inheritedNodeInfo.getFirstStart();
+		return getScheduleNodeInfo(AttributeName.FIRSTSTART).getFirstStart();
 	}
 
 	/**
@@ -7771,32 +7761,18 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 * @return
-	 * @deprecated 06�221 use getInheritedNodeInfo(String attName)
 	 */
-	@Deprecated
 	public JDFDate getNodeInfoLastEnd()
 	{
-		final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
-		if (inheritedNodeInfo == null)
-		{
-			return null;
-		}
-		return inheritedNodeInfo.getLastEnd();
+		return getScheduleNodeInfo(AttributeName.LASTEND).getLastEnd();
 	}
 
 	/**
 	 * @return
-	 * @deprecated 06�221 use getInheritedNodeInfo(String attName)
 	 */
-	@Deprecated
 	public JDFDate getNodeInfoLastStart()
 	{
-		final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
-		if (inheritedNodeInfo == null)
-		{
-			return null;
-		}
-		return inheritedNodeInfo.getLastStart();
+		return getScheduleNodeInfo(AttributeName.LASTSTART).getLastStart();
 	}
 
 	/**
@@ -7830,33 +7806,20 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
+	 * 
 	 * @return
-	 * @deprecated 06�221 use getInheritedNodeInfo(String attName)
 	 */
-	@Deprecated
 	public JDFDuration getNodeInfoSetupDuration()
 	{
-		final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
-		if (inheritedNodeInfo == null)
-		{
-			return null;
-		}
-		return inheritedNodeInfo.getSetupDuration();
+		return getScheduleNodeInfo(AttributeName.SETUPDURATION).getSetupDuration();
 	}
 
 	/**
 	 * @return
-	 * @deprecated 06�221 use getInheritedNodeInfo(String attName)
 	 */
-	@Deprecated
 	public JDFDate getNodeInfoStart()
 	{
-		final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
-		if (inheritedNodeInfo == null)
-		{
-			return null;
-		}
-		return inheritedNodeInfo.getStart();
+		return getScheduleNodeInfo(AttributeName.START).getStart();
 	}
 
 	/**
@@ -7876,17 +7839,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 * @return
-	 * @deprecated 06�221 use getInheritedNodeInfo(String attName)
 	 */
-	@Deprecated
 	public JDFDuration getNodeInfoTotalDuration()
 	{
-		final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
-		if (inheritedNodeInfo == null)
-		{
-			return null;
-		}
-		return inheritedNodeInfo.getTotalDuration();
+		return getScheduleNodeInfo(AttributeName.TOTALDURATION).getTotalDuration();
 	}
 
 	/**

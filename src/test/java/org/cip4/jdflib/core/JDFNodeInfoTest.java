@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,13 @@
  */
 package org.cip4.jdflib.core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.HashSet;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -80,7 +87,6 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -99,19 +105,19 @@ class JDFNodeInfoTest extends JDFTestCaseBase
 	@Test
 	void testDuration() throws Exception
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
-		JDFNodeInfo ni = n.getCreateNodeInfo();
+		final JDFNodeInfo ni = n.getCreateNodeInfo();
 		final JDFDuration duration = new JDFDuration("PT1H20M30S");
 		ni.setTotalDuration(duration);
-		Assertions.assertEquals(ni.getTotalDuration(), duration);
+		assertEquals(ni.getTotalDuration(), duration);
 		try
 		{
 			ni.setCleanupDuration(new JDFDuration("PS1L20M30S"));
-			Assertions.fail("bad duration");
+			fail("bad duration");
 		}
-		catch (Exception x)
+		catch (final Exception x)
 		{
 			// nop
 		}
@@ -124,15 +130,15 @@ class JDFNodeInfoTest extends JDFTestCaseBase
 	@Test
 	void testPartUsage()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
-		JDFNodeInfo ni = n.getCreateNodeInfo();
+		final JDFNodeInfo ni = n.getCreateNodeInfo();
 		final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.Separation, "Cyan");
 		n.setPartStatus(map, EnumNodeStatus.Ready, null);
-		JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
-		Assertions.assertNotNull(niPart);
-		Assertions.assertNull(niPart.getAttribute_KElement(AttributeName.PARTUSAGE, null, null));
+		final JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
+		assertNotNull(niPart);
+		assertNull(niPart.getAttribute_KElement(AttributeName.PARTUSAGE, null, null));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -143,21 +149,21 @@ class JDFNodeInfoTest extends JDFTestCaseBase
 	@Test
 	void testWorkstepID()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
 		JDFNodeInfo.setDefaultWorkStepID(true);
-		JDFNodeInfo ni = n.getCreateNodeInfo();
-		Assertions.assertTrue(ni.hasAttribute("WorkStepID"));
+		final JDFNodeInfo ni = n.getCreateNodeInfo();
+		assertTrue(ni.hasAttribute("WorkStepID"));
 		final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.Separation, "Cyan");
 		n.setPartStatus(map, EnumNodeStatus.Ready, null);
-		JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
-		Assertions.assertNotNull(niPart);
-		Assertions.assertTrue(niPart.hasAttribute("WorkStepID"));
+		final JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
+		assertNotNull(niPart);
+		assertTrue(niPart.hasAttribute("WorkStepID"));
 		d.write2File(sm_dirTestDataTemp + "workstepidtest.jdf", 2, false);
-		//		VString v =
+		// VString v =
 		ni.getInvalidAttributes(EnumValidationLevel.Incomplete, true, -1);
-		Assertions.assertTrue(ni.isValid(EnumValidationLevel.Incomplete));
+		assertTrue(ni.isValid(EnumValidationLevel.Incomplete));
 
 	}
 
@@ -169,37 +175,37 @@ class JDFNodeInfoTest extends JDFTestCaseBase
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			JDFDoc d = new JDFDoc(ElementName.JDF);
-			JDFNode n = d.getJDFRoot();
+			final JDFDoc d = new JDFDoc(ElementName.JDF);
+			final JDFNode n = d.getJDFRoot();
 			n.setType("ConventionalPrinting", true);
 
 			JDFNodeInfo.setDefaultWorkStepID(j == 1);
-			JDFNodeInfo ni = n.getCreateNodeInfo();
+			final JDFNodeInfo ni = n.getCreateNodeInfo();
 			if (j == 1)
-				Assertions.assertTrue(ni.hasAttribute("WorkStepID"));
+				assertTrue(ni.hasAttribute("WorkStepID"));
 			else
-				Assertions.assertFalse(ni.hasAttribute("WorkStepID"));
-			long l = System.currentTimeMillis();
-			HashSet<String> s = new HashSet<String>();
+				assertFalse(ni.hasAttribute("WorkStepID"));
+			final long l = System.currentTimeMillis();
+			final HashSet<String> s = new HashSet<String>();
 			for (int i = 0; i < 1000; i++)
 			{
 				final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SheetName, "Sheet" + i);
 				n.setPartStatus(map, EnumNodeStatus.Ready, null);
-				JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
-				Assertions.assertNotNull(niPart);
+				final JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
+				assertNotNull(niPart);
 				if (j == 1)
 				{
-					Assertions.assertTrue(niPart.hasAttribute("WorkStepID"));
-					String workStepID = niPart.getWorkStepID();
-					Assertions.assertTrue(workStepID.startsWith(ni.getWorkStepID()));
-					Assertions.assertFalse(s.contains(workStepID));
+					assertTrue(niPart.hasAttribute("WorkStepID"));
+					final String workStepID = niPart.getWorkStepID();
+					assertTrue(workStepID.startsWith(ni.getWorkStepID()));
+					assertFalse(s.contains(workStepID));
 					s.add(workStepID);
 				}
 				else
-					Assertions.assertFalse(niPart.hasAttribute("WorkStepID"));
+					assertFalse(niPart.hasAttribute("WorkStepID"));
 			}
 			System.out.println(j + " t: " + (System.currentTimeMillis() - l));
-			//			assertTrue(ni.isValid(EnumValidationLevel.Incomplete));
+			// assertTrue(ni.isValid(EnumValidationLevel.Incomplete));
 		}
 	}
 
@@ -211,18 +217,18 @@ class JDFNodeInfoTest extends JDFTestCaseBase
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			JDFDoc d = new JDFDoc(ElementName.JDF);
-			JDFNode n = d.getJDFRoot();
+			final JDFDoc d = new JDFDoc(ElementName.JDF);
+			final JDFNode n = d.getJDFRoot();
 			n.setType("ConventionalPrinting", true);
 			JDFNodeInfo.setDefaultWorkStepID(j == 1);
-			JDFNodeInfo ni = n.getCreateNodeInfo();
+			final JDFNodeInfo ni = n.getCreateNodeInfo();
 			ni.setPartIDKeys(new VString("SignatureName SheetName PartVersion", null));
 			if (j == 1)
-				Assertions.assertTrue(ni.hasAttribute("WorkStepID"));
+				assertTrue(ni.hasAttribute("WorkStepID"));
 			else
-				Assertions.assertFalse(ni.hasAttribute("WorkStepID"));
-			long l = System.currentTimeMillis();
-			HashSet<String> s = new HashSet<String>();
+				assertFalse(ni.hasAttribute("WorkStepID"));
+			final long l = System.currentTimeMillis();
+			final HashSet<String> s = new HashSet<String>();
 			for (int i = 0; i < 10; i++)
 			{
 				final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SignatureName, "Sig" + i);
@@ -234,23 +240,23 @@ class JDFNodeInfoTest extends JDFTestCaseBase
 						map.put(EnumPartIDKey.PartVersion, "PV" + iii);
 
 						n.setPartStatus(map, EnumNodeStatus.Ready, null);
-						JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
-						Assertions.assertNotNull(niPart);
+						final JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
+						assertNotNull(niPart);
 						if (j == 1)
 						{
-							Assertions.assertTrue(niPart.hasAttribute("WorkStepID"));
-							String workStepID = niPart.getWorkStepID();
-							Assertions.assertTrue(workStepID.startsWith(ni.getWorkStepID()));
-							Assertions.assertFalse(s.contains(workStepID));
+							assertTrue(niPart.hasAttribute("WorkStepID"));
+							final String workStepID = niPart.getWorkStepID();
+							assertTrue(workStepID.startsWith(ni.getWorkStepID()));
+							assertFalse(s.contains(workStepID));
 							s.add(workStepID);
 						}
 						else
-							Assertions.assertFalse(niPart.hasAttribute("WorkStepID"));
+							assertFalse(niPart.hasAttribute("WorkStepID"));
 					}
 				}
 			}
 			System.out.println(j + " t: " + (System.currentTimeMillis() - l));
-			//			assertTrue(ni.isValid(EnumValidationLevel.Incomplete));
+			// assertTrue(ni.isValid(EnumValidationLevel.Incomplete));
 		}
 	}
 
@@ -260,14 +266,14 @@ class JDFNodeInfoTest extends JDFTestCaseBase
 	@Test
 	void testCPI()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType("Combined", true);
 		n.setTypes(new VString("ConventionalPrinting Folding", " "));
 
-		JDFNodeInfo ni = n.getCreateNodeInfo();
-		JDFResourceLink rl = n.getLink(ni, null);
-		Assertions.assertFalse(rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
+		final JDFNodeInfo ni = n.getCreateNodeInfo();
+		final JDFResourceLink rl = n.getLink(ni, null);
+		assertFalse(rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
 	}
 
 	/**
@@ -276,18 +282,38 @@ class JDFNodeInfoTest extends JDFTestCaseBase
 	@Test
 	void testGetStart()
 	{
-		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		JDFNodeInfo ni = n.getCreateNodeInfo();
-		JDFDate setDate = currentDate.clone();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFNodeInfo ni = n.getCreateNodeInfo();
+		final JDFDate setDate = currentDate.clone();
 		ni.setFirstStart(setDate);
-		Assertions.assertEquals(ni.getStart(), setDate);
+		assertEquals(ni.getStart(), setDate);
 		setDate.addOffset(0, 0, 1, 0);
 		ni.setStart(setDate);
-		Assertions.assertEquals(ni.getStart(), setDate);
+		assertEquals(ni.getStart(), setDate);
 		setDate.addOffset(0, 0, 1, 0);
 		ni.setLastStart(setDate);
 		setDate.addOffset(0, 0, -1, 0);
-		Assertions.assertEquals(ni.getStart(), setDate);
+		assertEquals(ni.getStart(), setDate);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetInheritedStart()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFNodeInfo ni = n.getCreateNodeInfo();
+		final JDFDate setDate = currentDate.clone();
+		ni.setFirstStart(setDate);
+		assertEquals(ni.getStart(), setDate);
+		setDate.addOffset(0, 0, 1, 0);
+		ni.setStart(setDate);
+		assertEquals(ni.getStart(), setDate);
+		setDate.addOffset(0, 0, 1, 0);
+		ni.setLastStart(setDate);
+		setDate.addOffset(0, 0, -1, 0);
+		assertEquals(ni.getStart(), setDate);
 	}
 
 	/**
@@ -296,18 +322,18 @@ class JDFNodeInfoTest extends JDFTestCaseBase
 	@Test
 	void testGetEnd()
 	{
-		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		JDFNodeInfo ni = n.getCreateNodeInfo();
-		JDFDate setDate = currentDate.clone();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFNodeInfo ni = n.getCreateNodeInfo();
+		final JDFDate setDate = currentDate.clone();
 		ni.setFirstEnd(setDate);
-		Assertions.assertEquals(ni.getEnd(), setDate);
+		assertEquals(ni.getEnd(), setDate);
 		setDate.addOffset(0, 0, 1, 0);
 		ni.setEnd(setDate);
-		Assertions.assertEquals(ni.getEnd(), setDate);
+		assertEquals(ni.getEnd(), setDate);
 		setDate.addOffset(0, 0, 1, 0);
 		ni.setLastEnd(setDate);
 		setDate.addOffset(0, 0, -1, 0);
-		Assertions.assertEquals(ni.getEnd(), setDate);
+		assertEquals(ni.getEnd(), setDate);
 	}
 
 	@Override

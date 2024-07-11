@@ -109,6 +109,7 @@ import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StatusCounter;
@@ -2668,6 +2669,94 @@ class JDFNodeTest extends JDFTestCaseBase
 		n.removeAttribute(AttributeName.TYPES);
 		assertNotNull(n.getNodeInfo(), "invalid types attribute, but still retrieve ni with no cpi");
 		assertNotNull(n.getNodeInfo(), "invalid types attribute, but...");
+	}
+
+	/**
+	 * @throws DataFormatException
+	 */
+	@Test
+	void testGetNodeInfoStart() throws DataFormatException
+	{
+		final JDFNode nRoot = JDFNode.createRoot();
+		nRoot.setType(JDFNode.EnumType.ProcessGroup);
+		final JDFNodeInfo niRoot = nRoot.getCreateNodeInfo();
+		niRoot.setStart(new JDFDate().addOffset(0, 0, 0, 1));
+		final JDFNode ng = nRoot.addJDFNode(EnumType.ProcessGroup);
+		final JDFNodeInfo nig = ng.getCreateNodeInfo();
+		final JDFDate date = new JDFDate().addOffset(0, 0, 0, 0);
+		nig.setStart(date);
+		final JDFNode nl = ng.addJDFNode(EnumType.ProcessGroup);
+		final JDFNodeInfo nil = nl.getCreateNodeInfo();
+
+		final JDFNodeInfo ni2 = nl.getInheritedNodeInfo("@Start");
+		assertEquals(nig, ni2);
+		assertEquals(date, nl.getNodeInfoStart());
+	}
+
+	/**
+	 * @throws DataFormatException
+	 */
+	@Test
+	void testGetNodeInfoFirstStart() throws DataFormatException
+	{
+		final JDFNode nRoot = JDFNode.createRoot();
+		nRoot.setType(JDFNode.EnumType.ProcessGroup);
+		final JDFNodeInfo niRoot = nRoot.getCreateNodeInfo();
+		niRoot.setStart(new JDFDate().addOffset(0, 0, 0, 1));
+		final JDFNode ng = nRoot.addJDFNode(EnumType.ProcessGroup);
+		final JDFNodeInfo nig = ng.getCreateNodeInfo();
+		final JDFDate date = new JDFDate().addOffset(0, 0, 0, 0);
+		nig.setFirstStart(date);
+		nig.setLastStart(new JDFDate(date).addOffset(0, 0, 0, 1));
+		final JDFNode nl = ng.addJDFNode(EnumType.ProcessGroup);
+		final JDFNodeInfo nil = nl.getCreateNodeInfo();
+
+		assertEquals(date, nl.getNodeInfoFirstStart());
+		assertEquals(date.addOffset(0, 0, 0, 1), nl.getNodeInfoLastStart());
+	}
+
+	/**
+	 * @throws DataFormatException
+	 */
+	@Test
+	void testGetNodeInfoFirstEnd() throws DataFormatException
+	{
+		final JDFNode nRoot = JDFNode.createRoot();
+		nRoot.setType(JDFNode.EnumType.ProcessGroup);
+		final JDFNodeInfo niRoot = nRoot.getCreateNodeInfo();
+		niRoot.setEnd(new JDFDate().addOffset(0, 0, 0, 1));
+		final JDFNode ng = nRoot.addJDFNode(EnumType.ProcessGroup);
+		final JDFNodeInfo nig = ng.getCreateNodeInfo();
+		final JDFDate date = new JDFDate().addOffset(0, 0, 0, 0);
+		nig.setFirstEnd(date);
+		nig.setLastEnd(new JDFDate(date).addOffset(0, 0, 0, 1));
+		final JDFNode nl = ng.addJDFNode(EnumType.ProcessGroup);
+		final JDFNodeInfo nil = nl.getCreateNodeInfo();
+
+		assertEquals(date, nl.getNodeInfoFirstEnd());
+		assertEquals(date.addOffset(0, 0, 0, 1), nl.getNodeInfoLastEnd());
+	}
+
+	/**
+	 * @throws DataFormatException
+	 */
+	@Test
+	void testGetNodeInfoDuration() throws DataFormatException
+	{
+		final JDFNode nRoot = JDFNode.createRoot();
+		nRoot.setType(JDFNode.EnumType.ProcessGroup);
+		final JDFNodeInfo niRoot = nRoot.getCreateNodeInfo();
+		niRoot.setSetupDuration(new JDFDuration(42));
+		niRoot.setTotalDuration(new JDFDuration(66));
+		niRoot.setCleanupDuration(new JDFDuration(88));
+		final JDFNode ng = nRoot.addJDFNode(EnumType.ProcessGroup);
+		final JDFNodeInfo nig = ng.getCreateNodeInfo();
+		final JDFNode nl = ng.addJDFNode(EnumType.ProcessGroup);
+		final JDFNodeInfo nil = nl.getCreateNodeInfo();
+
+		assertEquals(new JDFDuration(42), nl.getNodeInfoSetupDuration());
+		assertEquals(new JDFDuration(66), nl.getNodeInfoTotalDuration());
+		assertEquals(new JDFDuration(88), nl.getNodeInfoCleanupDuration());
 	}
 
 	/**
