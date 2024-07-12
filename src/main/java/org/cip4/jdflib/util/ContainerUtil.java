@@ -137,6 +137,18 @@ public class ContainerUtil
 	 * @param list the list
 	 * @return a Set created from list
 	 */
+	public static <A> Set<A> toHashSet(final List<A> list)
+	{
+		return toHashSet((Collection<A>) list);
+	}
+
+	/**
+	 * create a HashSet from a List (Vector...)
+	 *
+	 * @param <A> the data type of the sets
+	 * @param list the list
+	 * @return a Set created from list
+	 */
 	public static <A> Set<A> toHashSet(final Collection<A> list)
 	{
 		if (list == null)
