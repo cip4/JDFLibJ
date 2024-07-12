@@ -156,6 +156,16 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	}
 
 	/**
+	 * set all separation names in the SeparationSpec elements, remove any prior elements
+	 *
+	 * @param vSeps the vector of separation names to set
+	 */
+	public void setSeparations(final VString vSeps)
+	{
+		setSeparations((List<String>) vSeps);
+	}
+
+	/**
 	 * append all separation names in the SeparationSpec elements without removing any prior elements
 	 *
 	 * @param vSeps the vector of separation names to append

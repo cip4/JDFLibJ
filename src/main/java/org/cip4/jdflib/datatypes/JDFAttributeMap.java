@@ -290,6 +290,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 		return true;
 	}
 
+	public boolean subMap(final VJDFAttributeMap vMap)
+	{
+		return subMap((Collection<JDFAttributeMap>) vMap);
+	}
+
 	/**
 	 * Method subMap check if any of the maps in vMap are a subMap oft this (see subMap for details) if vMap is null, the function returns true
 	 *
@@ -312,6 +317,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 		return false;
 	}
 
+	public boolean overlapMap(final VJDFAttributeMap vMap)
+	{
+		return overlapsMap((Collection<JDFAttributeMap>) vMap);
+	}
+
 	/**
 	 * Method overlapMap.
 	 *
@@ -321,6 +331,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 	public boolean overlapMap(final Collection<JDFAttributeMap> vMap)
 	{
 		return overlapsMap(vMap);
+	}
+
+	public boolean overlapsMap(final VJDFAttributeMap vMap)
+	{
+		return overlapsMap((Collection<JDFAttributeMap>) vMap);
 	}
 
 	/**

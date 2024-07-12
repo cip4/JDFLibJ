@@ -606,6 +606,11 @@ public class VString extends Vector<String>
 		return ContainerUtil.containsAny(this, others);
 	}
 
+	public boolean containsAny(final VString others)
+	{
+		return ContainerUtil.containsAny(this, others);
+	}
+
 	/**
 	 * vector of strings that is contained in <code>this</code>
 	 *

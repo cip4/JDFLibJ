@@ -334,6 +334,11 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		return newMap;
 	}
 
+	public VJDFAttributeMap getOrMaps(final VJDFAttributeMap vMap)
+	{
+		return getOrMaps((Collection<JDFAttributeMap>) vMap);
+	}
+
 	/**
 	 * andMap - builds a new vector of maps with identical pairs of both maps does not modify this
 	 *
