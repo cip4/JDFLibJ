@@ -290,13 +290,12 @@ public class VElement extends Vector<KElement>
 	 */
 	public void appendUnique(final Collection<KElement> v)
 	{
-		if (v == null)
-		{
-			return;
-		}
+		ContainerUtil.appendUnique(this, v);
+	}
 
-		addAll(v);
-		unify();
+	public void appendUnique(final VElement v)
+	{
+		ContainerUtil.appendUnique(this, v);
 	}
 
 	/**
