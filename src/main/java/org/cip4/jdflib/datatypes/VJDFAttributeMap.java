@@ -89,6 +89,16 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 *
 	 * @param toAdd Vector of elements to clone
 	 */
+	public VJDFAttributeMap(final Vector<JDFAttributeMap> toAdd)
+	{
+		this((Collection<JDFAttributeMap>) toAdd);
+	}
+
+	/**
+	 * copy constructor, the map elements are cloned
+	 *
+	 * @param toAdd Vector of elements to clone
+	 */
 	public VJDFAttributeMap(final Collection<JDFAttributeMap> toAdd)
 	{
 		super();
@@ -167,6 +177,11 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @param v
 	 * @return
 	 */
+	public static boolean isEmpty(final VJDFAttributeMap v)
+	{
+		return isEmpty((Collection<JDFAttributeMap>) v);
+	}
+
 	public static boolean isEmpty(final Collection<JDFAttributeMap> v)
 	{
 		return v == null || v.isEmpty() || v.size() == 1 && JDFAttributeMap.isEmpty(v.iterator().next());
@@ -707,6 +722,16 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	public void unify()
 	{
 		ContainerUtil.unify(this);
+	}
+
+	/**
+	 * Method appendUnique.
+	 *
+	 * @param maps maps to append
+	 */
+	public void appendUnique(final VJDFAttributeMap maps)
+	{
+		ContainerUtil.appendUnique(this, maps);
 	}
 
 	/**
