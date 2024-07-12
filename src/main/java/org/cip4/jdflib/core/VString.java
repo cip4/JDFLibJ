@@ -88,6 +88,17 @@ public class VString extends Vector<String>
 	}
 
 	/**
+	 * are we null or empty or contain only an empty JDFAttributeMap
+	 *
+	 * @param v
+	 * @return
+	 */
+	public static boolean isEmpty(final VString v)
+	{
+		return StringUtil.isEmpty(v);
+	}
+
+	/**
 	 * constructor
 	 */
 	public VString()
@@ -107,6 +118,26 @@ public class VString extends Vector<String>
 		{
 			addAll(m);
 		}
+	}
+
+	/**
+	 * constructor
+	 *
+	 * @param m
+	 */
+	public VString(final Vector<String> v)
+	{
+		this((Collection<String>) v);
+	}
+
+	/**
+	 * constructor
+	 *
+	 * @param m
+	 */
+	public VString(final VString v)
+	{
+		this((Collection<String>) v);
 	}
 
 	/**
@@ -369,23 +400,7 @@ public class VString extends Vector<String>
 	 */
 	public void appendUnique(final Collection<String> v)
 	{
-		if (!VString.isEmpty(v))
-		{
-			final int size = v.size();
-			if (size == 1) // speedup for single append
-			{
-				final String theOther = v.iterator().next();
-				if (!contains(theOther))
-				{
-					add(theOther);
-				}
-			}
-			else
-			{
-				addAll(v);
-				unify();
-			}
-		}
+		ContainerUtil.appendUnique(this, v);
 	}
 
 	/**
