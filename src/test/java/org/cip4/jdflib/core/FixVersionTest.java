@@ -278,6 +278,21 @@ class FixVersionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testNMToken()
+	{
+		final FixVersion f1 = new FixVersion(EnumVersion.Version_1_4);
+		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		final JDFRunList rlr = rl.addRun("foo,pdf", 0, 0);
+		rlr.setRun("a b");
+		f1.convert(n);
+		assertEquals("a_b", rlr.getRun());
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testMaxVersion()
 	{
 		final FixVersion f1 = new FixVersion(EnumVersion.Version_1_4);

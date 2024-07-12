@@ -221,6 +221,10 @@ public class WalkElement extends BaseWalker
 		{
 			fixDateTime(el, key, value);
 		}
+		else if (EnumAttributeType.NMTOKEN.equals(attType))
+		{
+			fixNMTOKEN(el, key, value);
+		}
 		else if (EnumAttributeType.XYPair.equals(attType))
 		{
 			final JDFXYPair xyPair = JDFXYPair.createXYPair(value);
@@ -250,6 +254,19 @@ public class WalkElement extends BaseWalker
 			if (el == null || !AttributeInfo.validStringForType(newValue, attType, null))
 			{
 				el.removeAttribute_KElement(key, null);
+			}
+		}
+	}
+
+	void fixNMTOKEN(final JDFElement el, final String key, final String value)
+	{
+		if (!StringUtil.isNMTOKEN(value))
+		{
+			final String newVal = StringUtil.replaceCharSet(value, " ", "_", 0);
+			if (!StringUtil.equals(newVal, value) && StringUtil.isNMTOKEN(newVal))
+			{
+				el.setAttribute(key, "" + newVal);
+
 			}
 		}
 	}
