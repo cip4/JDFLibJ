@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,15 +38,20 @@
  */
 package org.cip4.jdflib.core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -66,7 +71,7 @@ class VStringTest extends JDFTestCaseBase
 		v.appendUnique("b");
 		v.appendUnique("c");
 		v.appendUnique("c");
-		Assertions.assertEquals(StringUtil.setvString(v, " ", null, null), "a b c", "a b c");
+		assertEquals(StringUtil.setvString(v, " ", null, null), "a b c", "a b c");
 
 	}
 
@@ -81,12 +86,12 @@ class VStringTest extends JDFTestCaseBase
 		v.add("b");
 		v.add("c");
 		v.add("c");
-		Assertions.assertEquals("a", v.get(0));
-		Assertions.assertEquals("c", v.get(3));
-		Assertions.assertEquals("c", v.get(-2));
-		Assertions.assertEquals("b", v.get(-3));
-		Assertions.assertNull(v.get(-6), "b");
-		Assertions.assertNull(v.get(7), "b");
+		assertEquals("a", v.get(0));
+		assertEquals("c", v.get(3));
+		assertEquals("c", v.get(-2));
+		assertEquals("b", v.get(-3));
+		assertNull(v.get(-6), "b");
+		assertNull(v.get(7), "b");
 	}
 
 	/**
@@ -100,10 +105,10 @@ class VStringTest extends JDFTestCaseBase
 		v.add("b");
 		v.add("c");
 		v.add("c");
-		Assertions.assertEquals("a", v.elementAt(0));
-		Assertions.assertEquals("c", v.elementAt(3));
-		Assertions.assertEquals("c", v.elementAt(-2));
-		Assertions.assertEquals("b", v.elementAt(-3));
+		assertEquals("a", v.elementAt(0));
+		assertEquals("c", v.elementAt(3));
+		assertEquals("c", v.elementAt(-2));
+		assertEquals("b", v.elementAt(-3));
 	}
 
 	/**
@@ -114,9 +119,9 @@ class VStringTest extends JDFTestCaseBase
 	void testRemove() throws Exception
 	{
 		final VString v = new VString("a b c", null);
-		Assertions.assertEquals(v.remove(-1), "c");
-		Assertions.assertEquals(v.remove(-1), "b");
-		Assertions.assertEquals(v.size(), 1);
+		assertEquals(v.remove(-1), "c");
+		assertEquals(v.remove(-1), "b");
+		assertEquals(v.size(), 1);
 	}
 
 	/**
@@ -132,14 +137,14 @@ class VStringTest extends JDFTestCaseBase
 		v.add("c");
 		VString v2 = new VString(v);
 		v2.removeStrings((String) null, 2);
-		Assertions.assertEquals(v2, v);
+		assertEquals(v2, v);
 		v2 = new VString(v);
 		v2.removeStrings("c", 1);
-		Assertions.assertEquals(v2.size(), 3);
-		Assertions.assertTrue(v2.contains("c"));
+		assertEquals(v2.size(), 3);
+		assertTrue(v2.contains("c"));
 		v2 = new VString(v);
 		v2.removeStrings("c", 0);
-		Assertions.assertFalse(v2.contains("c"));
+		assertFalse(v2.contains("c"));
 	}
 
 	/**
@@ -155,17 +160,17 @@ class VStringTest extends JDFTestCaseBase
 		v.add("c");
 		VString v2 = new VString(v);
 		v2.removeStrings((VString) null, 2);
-		Assertions.assertEquals(v2, v);
+		assertEquals(v2, v);
 		v2 = new VString(v);
 		v2.removeStrings(new VString("a c", null), 1);
-		Assertions.assertEquals(v2.size(), 3);
-		Assertions.assertTrue(v2.contains("c"));
+		assertEquals(v2.size(), 3);
+		assertTrue(v2.contains("c"));
 		v2 = new VString(v);
 		v2.removeStrings(new VString("a c", null), 0);
-		Assertions.assertFalse(v2.contains("c"));
+		assertFalse(v2.contains("c"));
 		v2 = new VString(v);
 		v2.removeStrings(new VString("a b c", null), 0);
-		Assertions.assertEquals(v2.size(), 0);
+		assertEquals(v2.size(), 0);
 	}
 
 	/**
@@ -179,12 +184,12 @@ class VStringTest extends JDFTestCaseBase
 		v.appendUnique("b");
 		v.appendUnique("c");
 		v.add("c");
-		Assertions.assertTrue(v.containsAny(null));
-		Assertions.assertFalse(v.containsAny(new VString("d e", " ")));
-		Assertions.assertTrue(v.containsAny(new VString("b e", " ")));
-		Assertions.assertTrue(v.containsAny(new VString("e b", " ")));
-		Assertions.assertTrue(v.containsAny(new VString("g c h", " ")));
-		Assertions.assertTrue(v.containsAny(v));
+		assertTrue(v.containsAny(null));
+		assertFalse(v.containsAny(new VString("d e", " ")));
+		assertTrue(v.containsAny(new VString("b e", " ")));
+		assertTrue(v.containsAny(new VString("e b", " ")));
+		assertTrue(v.containsAny(new VString("g c h", " ")));
+		assertTrue(v.containsAny(v));
 
 	}
 
@@ -194,13 +199,13 @@ class VStringTest extends JDFTestCaseBase
 	@Test
 	void testIsEmpty()
 	{
-		Assertions.assertTrue(VString.isEmpty(null));
+		assertTrue(VString.isEmpty(null));
 		final VString v = new VString();
-		Assertions.assertTrue(VString.isEmpty(v));
+		assertTrue(VString.isEmpty(v));
 		v.appendUnique("");
-		Assertions.assertTrue(VString.isEmpty(v));
+		assertTrue(VString.isEmpty(v));
 		v.set(0, "b");
-		Assertions.assertFalse(VString.isEmpty(v));
+		assertFalse(VString.isEmpty(v));
 	}
 
 	/**
@@ -214,12 +219,12 @@ class VStringTest extends JDFTestCaseBase
 		v.appendUnique("b");
 		v.appendUnique("c");
 		v.add("c");
-		Assertions.assertNull(v.getOverlapping(null));
-		Assertions.assertNull(v.getOverlapping(new VString("d e", " ")));
-		Assertions.assertEquals(new VString("b", null), v.getOverlapping(new VString("b e", " ")));
-		Assertions.assertEquals(new VString("c c", null), v.getOverlapping(new VString("c", " ")));
-		Assertions.assertEquals(new VString("b c c", null), v.getOverlapping(new VString("b c c c", " ")));
-		Assertions.assertEquals(v, v.getOverlapping(v));
+		assertNull(v.getOverlapping(null));
+		assertNull(v.getOverlapping(new VString("d e", " ")));
+		assertEquals(new VString("b", null), v.getOverlapping(new VString("b e", " ")));
+		assertEquals(new VString("c c", null), v.getOverlapping(new VString("c", " ")));
+		assertEquals(new VString("b c c", null), v.getOverlapping(new VString("b c c c", " ")));
+		assertEquals(v, v.getOverlapping(v));
 	}
 
 	/**
@@ -233,7 +238,7 @@ class VStringTest extends JDFTestCaseBase
 		v.add("c");
 		v.add("b");
 		v.sort();
-		Assertions.assertEquals(StringUtil.setvString(v, " ", null, null), "a b c", "a b c");
+		assertEquals(StringUtil.setvString(v, " ", null, null), "a b c", "a b c");
 	}
 
 	/**
@@ -303,7 +308,7 @@ class VStringTest extends JDFTestCaseBase
 		v.add((String) null);
 		v.add("b");
 		v.add("c");
-		Assertions.assertEquals(StringUtil.setvString(v, " ", null, null), "b c", "b c");
+		assertEquals(StringUtil.setvString(v, " ", null, null), "b c", "b c");
 	}
 
 	/**
@@ -317,8 +322,8 @@ class VStringTest extends JDFTestCaseBase
 		v.add("c");
 		v.add("b");
 		final Set<?> s = v.getSet();
-		Assertions.assertEquals(v.size(), s.size());
-		Assertions.assertTrue(s.contains("c"));
+		assertEquals(v.size(), s.size());
+		assertTrue(s.contains("c"));
 
 	}
 
@@ -343,9 +348,9 @@ class VStringTest extends JDFTestCaseBase
 		w.add("d");
 
 		v.unify();
-		Assertions.assertEquals(StringUtil.setvString(v, " ", null, null), "a b c", "a b c");
+		assertEquals(StringUtil.setvString(v, " ", null, null), "a b c", "a b c");
 		v.appendUnique(w);
-		Assertions.assertEquals(StringUtil.setvString(v, " ", null, null), "a b c d", "a b c d");
+		assertEquals(StringUtil.setvString(v, " ", null, null), "a b c d", "a b c d");
 
 	}
 
@@ -360,7 +365,7 @@ class VStringTest extends JDFTestCaseBase
 		v.add("b");
 		v.add("c");
 		v.add("c");
-		Assertions.assertEquals("a b c c", v.getString());
+		assertEquals("a b c c", v.getString());
 	}
 
 	/**
@@ -374,7 +379,7 @@ class VStringTest extends JDFTestCaseBase
 		v.add("b");
 		v.add("c");
 		v.add("c");
-		Assertions.assertEquals("abcc", v.getString(null, null, null));
+		assertEquals("abcc", v.getString(null, null, null));
 	}
 
 	/**
@@ -395,10 +400,10 @@ class VStringTest extends JDFTestCaseBase
 		h.add("d");
 
 		v.unify();
-		Assertions.assertEquals(StringUtil.setvString(v, " ", null, null), "a b c", "a b c");
+		assertEquals(StringUtil.setvString(v, " ", null, null), "a b c", "a b c");
 		v.addAll(h);
 		v.unify();
-		Assertions.assertEquals(StringUtil.setvString(v, " ", null, null), "a b c d", "a b c d");
+		assertEquals(StringUtil.setvString(v, " ", null, null), "a b c d", "a b c d");
 
 	}
 
@@ -410,11 +415,11 @@ class VStringTest extends JDFTestCaseBase
 	{
 		final VString v = new VString();
 		v.addNonEmpty("");
-		Assertions.assertEquals(0, v.size());
+		assertEquals(0, v.size());
 		v.addNonEmpty(null);
-		Assertions.assertEquals(0, v.size());
+		assertEquals(0, v.size());
 		v.addNonEmpty(" ");
-		Assertions.assertEquals(1, v.size());
+		assertEquals(1, v.size());
 	}
 
 	/**
@@ -425,15 +430,15 @@ class VStringTest extends JDFTestCaseBase
 	{
 		final VString v = new VString();
 		v.appendUnique((String) null);
-		Assertions.assertEquals(0, v.size());
+		assertEquals(0, v.size());
 		v.appendUnique("a");
-		Assertions.assertEquals(1, v.size());
+		assertEquals(1, v.size());
 		v.appendUnique("b");
-		Assertions.assertEquals(2, v.size());
+		assertEquals(2, v.size());
 		v.appendUnique("c");
-		Assertions.assertEquals(3, v.size());
+		assertEquals(3, v.size());
 		v.appendUnique("c");
-		Assertions.assertEquals(3, v.size());
+		assertEquals(3, v.size());
 	}
 
 	/**
@@ -444,14 +449,32 @@ class VStringTest extends JDFTestCaseBase
 	{
 		final VString v = new VString();
 		v.appendUnique((String) null);
-		Assertions.assertEquals(0, v.size());
+		assertEquals(0, v.size());
 		v.appendUnique("a");
-		Assertions.assertEquals(1, v.size());
+		assertEquals(1, v.size());
 		v.appendUnique(v);
-		Assertions.assertEquals(1, v.size());
+		assertEquals(1, v.size());
 		final VString v2 = new VString("b c");
 		v.appendUnique(v2);
-		Assertions.assertEquals(3, v.size());
+		assertEquals(3, v.size());
+	}
+
+	/**
+	*
+	*/
+	@Test
+	void testAppendUniqueV2()
+	{
+		final VString v = new VString();
+		v.appendUnique((String) null);
+		assertEquals(0, v.size());
+		v.appendUnique("a");
+		assertEquals(1, v.size());
+		v.appendUnique(v);
+		assertEquals(1, v.size());
+		final List<String> v2 = new StringArray("b c");
+		v.appendUnique(v2);
+		assertEquals(3, v.size());
 	}
 
 	/**
@@ -461,17 +484,17 @@ class VStringTest extends JDFTestCaseBase
 	void testConstructEmpty()
 	{
 		VString v = new VString("", ",");
-		Assertions.assertEquals(v.size(), 0);
+		assertEquals(v.size(), 0);
 		v = new VString((String) null, null);
-		Assertions.assertEquals(v.size(), 0);
+		assertEquals(v.size(), 0);
 		v = new VString((String[]) null);
-		Assertions.assertEquals(v.size(), 0);
+		assertEquals(v.size(), 0);
 		v = new VString((new String[] {}));
-		Assertions.assertEquals(v.size(), 0);
+		assertEquals(v.size(), 0);
 		v = new VString((VString) null);
-		Assertions.assertEquals(v.size(), 0);
+		assertEquals(v.size(), 0);
 		v = new VString(new VString());
-		Assertions.assertEquals(v.size(), 0);
+		assertEquals(v.size(), 0);
 	}
 
 	/**
@@ -481,9 +504,9 @@ class VStringTest extends JDFTestCaseBase
 	void testConstructDouble()
 	{
 		VString v = new VString("a,b,c, ,", ",");
-		Assertions.assertEquals(v.get(-1), " ");
+		assertEquals(v.get(-1), " ");
 		v = new VString("a,b,c,,", ",");
-		Assertions.assertEquals(v.get(-1), "c", "double tokens are ignored");
+		assertEquals(v.get(-1), "c", "double tokens are ignored");
 	}
 
 	/**
@@ -492,9 +515,9 @@ class VStringTest extends JDFTestCaseBase
 	@Test
 	void testFactory()
 	{
-		Assertions.assertNull(VString.getVString(null, null));
-		Assertions.assertNull(VString.getVString("", null));
-		Assertions.assertEquals(VString.getVString("a", null).get(0), "a");
+		assertNull(VString.getVString(null, null));
+		assertNull(VString.getVString("", null));
+		assertEquals(VString.getVString("a", null).get(0), "a");
 	}
 
 	/**
@@ -505,7 +528,7 @@ class VStringTest extends JDFTestCaseBase
 	{
 		final VString v = new VString();
 		v.add(EnumType.AdhesiveBinding);
-		Assertions.assertEquals(StringUtil.setvString(v, " ", null, null), EnumType.AdhesiveBinding.getName());
+		assertEquals(StringUtil.setvString(v, " ", null, null), EnumType.AdhesiveBinding.getName());
 	}
 
 	/**
@@ -521,7 +544,7 @@ class VStringTest extends JDFTestCaseBase
 		v.add("c");
 		v.add("e");
 		v.setElementAt("d", 3);
-		Assertions.assertEquals("a b c d e", StringUtil.setvString(v, " ", null, null));
+		assertEquals("a b c d e", StringUtil.setvString(v, " ", null, null));
 
 	}
 

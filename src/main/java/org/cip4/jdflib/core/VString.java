@@ -357,6 +357,16 @@ public class VString extends Vector<String>
 	 *
 	 * @param v the vector to append, if null nothing is added
 	 */
+	public void appendUnique(final VString v)
+	{
+		appendUnique((Collection<String>) v);
+	}
+
+	/**
+	 * AppendUnique - append a vector but ignore multiple entries
+	 *
+	 * @param v the vector to append, if null nothing is added
+	 */
 	public void appendUnique(final Collection<String> v)
 	{
 		if (!VString.isEmpty(v))
