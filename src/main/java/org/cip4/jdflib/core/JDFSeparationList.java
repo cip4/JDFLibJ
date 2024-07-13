@@ -165,6 +165,11 @@ public class JDFSeparationList extends JDFAutoSeparationList
 		setSeparations((List<String>) vSeps);
 	}
 
+	public void appendSeparations(final VString vSeps)
+	{
+		appendSeparations((List<String>) vSeps);
+	}
+
 	/**
 	 * append all separation names in the SeparationSpec elements without removing any prior elements
 	 *
@@ -177,6 +182,11 @@ public class JDFSeparationList extends JDFAutoSeparationList
 			{
 				appendSeparation(sep);
 			}
+	}
+
+	public void ensureSeparations(final VString vSeps)
+	{
+		ensureSeparations((List<String>) vSeps);
 	}
 
 	/**
