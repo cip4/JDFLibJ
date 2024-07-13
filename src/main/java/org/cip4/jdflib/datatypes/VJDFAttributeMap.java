@@ -881,6 +881,12 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		return false;
 	}
 
+	public boolean subMap(final VJDFAttributeMap vMap)
+	{
+		return subMap((Collection<JDFAttributeMap>) vMap);
+
+	}
+
 	/**
 	 * Method subMap.
 	 *
