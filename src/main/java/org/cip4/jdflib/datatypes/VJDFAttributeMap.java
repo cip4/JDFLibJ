@@ -823,6 +823,11 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 *
 	 * @param vMap the map to check against
 	 */
+	public void overlapMap(final VJDFAttributeMap vMap)
+	{
+		overlapMap((Collection<JDFAttributeMap>) vMap);
+	}
+
 	public void overlapMap(final Collection<JDFAttributeMap> vMap)
 	{
 		if (vMap == null)
@@ -896,6 +901,11 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 			}
 		}
 		return false;
+	}
+
+	public boolean overlapsMap(final VJDFAttributeMap vMap)
+	{
+		return overlapsMap((Collection<JDFAttributeMap>) vMap);
 	}
 
 	/**
