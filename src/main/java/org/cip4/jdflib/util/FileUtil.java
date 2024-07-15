@@ -929,13 +929,7 @@ public class FileUtil
 		{
 			return true;
 		}
-		if (fromFile.isDirectory())
-		{
-			final File parent = toFile.getParentFile();
-			final String parentPath = parent == null ? null : parent.getAbsolutePath();
-
-			getCreateDirectory(parentPath);
-		}
+		ensureParent(toFile);
 		forceDelete(toFile, 2);
 		if (fromFile.renameTo(toFile))
 		{
@@ -1012,6 +1006,7 @@ public class FileUtil
 		}
 		try
 		{
+			ensureParent(toFile);
 			FileUtils.copyFile(fromFile, toFile);
 			return true;
 		}
@@ -1085,10 +1080,7 @@ public class FileUtil
 		{
 			return null;
 		}
-		if (!toDir.isDirectory())
-		{
-			toDir.mkdirs();
-		}
+		getCreateDirectory(toDir.getAbsolutePath());
 		final File newFile = getFileInDirectory(toDir, new File(fromFile.getName()));
 		final boolean b = copyFile(fromFile, newFile);
 		return b ? newFile : null;
@@ -1395,16 +1387,18 @@ public class FileUtil
 		{
 			throw new NullPointerException("file must not be null");
 		}
+		ensureParent(file);
+		return file.exists() || file.createNewFile();
+	}
+
+	public static boolean ensureParent(final File file)
+	{
 		if (file.exists())
 		{
 			return true;
 		}
 		final File parent = file.getParentFile();
-		if (parent != null)
-		{
-			parent.mkdirs();
-		}
-		return file.createNewFile();
+		return (parent != null) && parent.mkdirs();
 	}
 
 	/**
