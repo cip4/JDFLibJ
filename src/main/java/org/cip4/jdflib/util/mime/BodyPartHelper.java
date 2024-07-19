@@ -145,7 +145,7 @@ public class BodyPartHelper
 
 		try
 		{
-			theBodyPart.setHeader(UrlUtil.CONTENT_ID, "<" + MimeUtil.urlToCid(cid).substring(4) + ">");
+			theBodyPart.setHeader(UrlUtil.CONTENT_ID, "<" + MimeUtil.urlToCid(cid, true).substring(4) + ">");
 		}
 		catch (final MessagingException x)
 		{
@@ -203,6 +203,10 @@ public class BodyPartHelper
 		{
 			final int index = getIndex();
 			s = String.format("part_%04d.txt", index);
+		}
+		else
+		{
+			s = StringUtil.token(s, -1, "/\\");
 		}
 
 		return s;
@@ -271,7 +275,7 @@ public class BodyPartHelper
 			return s;
 		}
 
-		return MimeUtil.urlToCid(s).substring(4);
+		return MimeUtil.urlToCid(s, true).substring(4);
 	}
 
 	/**
@@ -365,7 +369,7 @@ public class BodyPartHelper
 			theBodyPart.setDataHandler(new DataHandler(dataSrc));
 
 			setFileName(f.getAbsolutePath());
-			setContentID(urlString);
+			setContentID(MimeUtil.urlToCid(urlString));
 		}
 		catch (final MessagingException e1)
 		{

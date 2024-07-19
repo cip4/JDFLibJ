@@ -466,29 +466,41 @@ public class MimeUtil extends UrlUtil
 	 * @param urlString
 	 * @return
 	 */
-	public static String urlToCid(String urlString)
+	public static String urlToCid(final String urlString)
 	{
-		if (urlString == null)
+		return urlToCid(urlString, false);
+	}
+
+	/**
+	 * @param normalized
+	 * @return
+	 */
+	public static String urlToCid(final String urlString, final boolean raw)
+	{
+		String normalized = urlString;
+		if (normalized == null)
 		{
 			return null;
 		}
 
-		if (urlString.startsWith("<"))
+		if (normalized.startsWith("<"))
 		{
-			urlString = urlString.substring(1);
+
+			normalized = normalized.substring(1);
 		}
 
-		if (urlString.toLowerCase().startsWith(CID))
+		if (normalized.toLowerCase().startsWith(CID))
 		{
-			urlString = urlString.substring(4);
+			normalized = normalized.substring(4);
 		}
 
-		if (urlString.endsWith(">"))
+		if (normalized.endsWith(">"))
 		{
-			urlString = urlString.substring(0, urlString.length() - 1);
+			normalized = normalized.substring(0, normalized.length() - 1);
 		}
 
-		final String normalized = StringUtil.normalizeASCII(urlString);
+		if (!raw)
+			normalized = StringUtil.normalizeASCII(urlString);
 		return CID + normalized; //
 	}
 

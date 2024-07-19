@@ -502,7 +502,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	public void buildMimePackage(final JDFDoc docJMF, final XMLDoc docJDF, final boolean extendReferenced)
 	{
 		final String cid = MimeUtil.urlToCid("TheJDF.jdf");
-		if (docJMF != null && cid != null)
+		if (docJMF != null)
 		{
 			String originalFileName = docJMF.getOriginalFileName();
 			if (KElement.isWildCard(originalFileName))

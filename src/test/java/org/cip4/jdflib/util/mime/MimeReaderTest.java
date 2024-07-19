@@ -38,13 +38,15 @@
  */
 package org.cip4.jdflib.util.mime;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.io.File;
 
 import javax.mail.Multipart;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.MimeUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class MimeReaderTest extends JDFTestCaseBase
@@ -56,7 +58,21 @@ class MimeReaderTest extends JDFTestCaseBase
 
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
 		MimeUtil.writeToFile(mp, sm_dirTestDataTemp + File.separator + "testMimePackageReader.mjm", null);
-		MimeReader mr = new MimeReader(sm_dirTestDataTemp + File.separator + "testMimePackageReader.mjm");
-		Assertions.assertNull(mr.getURLInputStream("a"));
+		final MimeReader mr = new MimeReader(sm_dirTestDataTemp + File.separator + "testMimePackageReader.mjm");
+		assertNull(mr.getURLInputStream("a"));
+	}
+
+	@Test
+	void testGetByCID()
+	{
+		final MimeReader mr = new MimeReader(sm_dirTestData + File.separator + "evilchars.mjm");
+		assertNotNull(mr.getPartByCID("@OtherJDF"));
+	}
+
+	@Test
+	void testGetByCID2()
+	{
+		final MimeReader mr = new MimeReader(sm_dirTestData + File.separator + "evil.mjm");
+		assertNotNull(mr.getPartByCID("../../OtherJDF.jdf"));
 	}
 }
