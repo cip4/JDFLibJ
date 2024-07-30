@@ -115,7 +115,7 @@ class KElementTest extends JDFTestCaseBase
 	void testStreamWriter()
 	{
 		final KElement d = KElement.createRoot("aa", null);
-		File f = FileUtil.writeFile(d, new File(sm_dirTestDataTemp + "aa.xml"));
+		final File f = FileUtil.writeFile(d, new File(sm_dirTestDataTemp + "aa.xml"));
 		assertNotNull(f);
 	}
 
@@ -794,14 +794,14 @@ class KElementTest extends JDFTestCaseBase
 		final KElement c = e.appendElement("c");
 		c.setAttribute("at", "a3");
 		// sort forward
-		KElement.SingleAttributeComparator comparator = new KElement.SingleAttributeComparator("at", false);
+		final KElement.SingleAttributeComparator comparator = new KElement.SingleAttributeComparator("at", false);
 		comparator.setCaseSensitive(false);
 		e.sortChildren(comparator);
 		assertEquals(e.getFirstChildElement(), a);
 		assertEquals(a.getNextSiblingElement(), b);
 		assertEquals(b.getNextSiblingElement(), c);
 		// now invert
-		KElement.SingleAttributeComparator comparator2 = new KElement.SingleAttributeComparator("at", true);
+		final KElement.SingleAttributeComparator comparator2 = new KElement.SingleAttributeComparator("at", true);
 		comparator2.setCaseSensitive(false);
 		e.sortChildren(comparator2);
 		assertEquals(e.getFirstChildElement(), c);
@@ -825,14 +825,14 @@ class KElementTest extends JDFTestCaseBase
 		final KElement c = e.appendElement("c");
 		c.setAttribute("at", "11");
 		// sort forward
-		KElement.SingleAttributeComparator comparator = new KElement.SingleAttributeComparator("at", false);
+		final KElement.SingleAttributeComparator comparator = new KElement.SingleAttributeComparator("at", false);
 		comparator.setCheckNumber(true);
 		e.sortChildren(comparator);
 		assertEquals(e.getFirstChildElement(), a);
 		assertEquals(a.getNextSiblingElement(), b);
 		assertEquals(b.getNextSiblingElement(), c);
 		// now invert
-		KElement.SingleAttributeComparator comparator2 = new KElement.SingleAttributeComparator("at", true);
+		final KElement.SingleAttributeComparator comparator2 = new KElement.SingleAttributeComparator("at", true);
 		comparator2.setCheckNumber(true);
 		e.sortChildren(comparator2);
 		assertEquals(e.getFirstChildElement(), c);
@@ -3429,7 +3429,7 @@ class KElementTest extends JDFTestCaseBase
 	@Test
 	void testGetChildArrayByClassMe()
 	{
-		JDFNode n = JDFNode.createRoot();
+		final JDFNode n = JDFNode.createRoot();
 		assertEquals(n, n.getChildArrayByClass(n.getClass(), true, 0).get(0));
 		assertTrue(n.getChildArrayByClass(n.getClass(), false, 0).isEmpty());
 	}
@@ -4048,20 +4048,15 @@ class KElementTest extends JDFTestCaseBase
 		final JDFParser p = new JDFParser();
 		final int pos = s.indexOf(url);
 		s = s.substring(0, pos - 7) + s.substring(pos + url.length() + 1); // +/-
-		// for xmlns
-		// =
-		// " and "
 		d = p.parseString(s);
-		{
-			final KElement e = d.getRoot();
-			assertNull(e.getNamespaceURI());
-			final KElement foo = e.appendElement("foo", null);
-			assertNull(foo.getNamespaceURI());
-			final KElement bar = foo.appendElement("bar");
-			assertNull(bar.getNamespaceURI());
-			final KElement bar2 = foo.appendElement("pt:bar");
-			assertEquals(bar2.getNamespaceURI(), "www.pt.com");
-		}
+		final KElement e = d.getRoot();
+		assertNotNull(e.getNamespaceURI());
+		final KElement foo = e.appendElement("foo", null);
+		assertNotNull(foo.getNamespaceURI());
+		final KElement bar = foo.appendElement("bar");
+		assertNotNull(bar.getNamespaceURI());
+		final KElement bar2 = foo.appendElement("pt:bar");
+		assertEquals(bar2.getNamespaceURI(), "www.pt.com");
 	}
 
 	/**
@@ -4092,16 +4087,14 @@ class KElementTest extends JDFTestCaseBase
 		s = s.substring(0, pos - 7) + s.substring(pos + url.length() + 1); // +/-
 
 		d = p.parseString(s);
-		{
-			final KElement e = d.getRoot();
-			assertNull(e.getNamespaceURI());
-			final KElement foo = e.appendElement("foo", null);
-			assertNull(foo.getNamespaceURI());
-			final KElement bar = foo.appendElement("bar");
-			assertNull(bar.getNamespaceURI());
-			final KElement bar2 = foo.appendElement("pt:bar");
-			assertEquals(bar2.getNamespaceURI(), "www.pt.com");
-		}
+		final KElement e = d.getRoot();
+		assertNotNull(e.getNamespaceURI());
+		final KElement foo = e.appendElement("foo", null);
+		assertNotNull(foo.getNamespaceURI());
+		final KElement bar = foo.appendElement("bar");
+		assertNotNull(bar.getNamespaceURI());
+		final KElement bar2 = foo.appendElement("pt:bar");
+		assertEquals(bar2.getNamespaceURI(), "www.pt.com");
 	}
 
 	/**

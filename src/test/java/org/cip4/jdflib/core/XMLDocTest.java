@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -599,8 +599,8 @@ class XMLDocTest extends JDFTestCaseBase
 		final XMLDoc d = new XMLDoc("TEST", null);
 		final String fn = sm_dirTestDataTemp + "testParseNoNS.xml";
 		d.write2File(fn, 2, true);
-		final JDFParser p = new JDFParser();
-		final JDFDoc d2 = p.parseFile(fn);
+		final XMLParser p = new XMLParser();
+		final XMLDoc d2 = p.parseFile(fn);
 		final KElement root = d2.getRoot();
 		assertNull(root.getNamespaceURI());
 		assertFalse(d2.toString().indexOf("xmlns=\"\"") >= 0);
