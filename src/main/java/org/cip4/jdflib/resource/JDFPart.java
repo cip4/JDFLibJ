@@ -283,7 +283,16 @@ public class JDFPart extends JDFAutoPart
 		if (resourceValue == null || linkValue == null)
 			return false;
 
-		boolean b;
+                /** 
+                 * Error with this part of code. 
+                 * Cannot add severals <ExposedMedia> with reused Version from JDFExposedMedia.getCreatePartition
+                 * Because of the StringUtils.hasToken() 
+                 * This should be possible.
+                 * Exemple : 
+                 * <ExposedMedia PartVersion="ReusedVersion"/>
+                 * <ExposedMedia PartVersion="Version2 Version3 ReusedVersion"/>
+                 **/
+		/*boolean b;
 		b = resourceValue.equals(linkValue) || KElement.isWildCard(resourceValue) || KElement.isWildCard(linkValue) || ALL.equalsIgnoreCase(linkValue) || ALL.equalsIgnoreCase(resourceValue);
 		if (!b)
 		{
@@ -298,7 +307,8 @@ public class JDFPart extends JDFAutoPart
 				b = StringUtil.hasToken(resourceValue, linkValue, null, 0);
 			}
 		}
-		return b;
+                return b;*/
+		return resourceValue.equals(linkValue) || KElement.isWildCard(resourceValue) || KElement.isWildCard(linkValue) || ALL.equalsIgnoreCase(linkValue) || ALL.equalsIgnoreCase(resourceValue);
 	}
 
 	/**
