@@ -68,12 +68,14 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.util.StringUtil;
@@ -122,22 +124,34 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 		String status = map.get(AttributeName.STATUS);
 		final String opMode = map.remove(AttributeName.DEVICEOPERATIONMODE);
 
-		final EnumDeviceOperationMode eOpMode = EnumDeviceOperationMode.getEnum(opMode);
-		if (EnumDeviceOperationMode.NonProductive.equals(eOpMode) || EnumDeviceOperationMode.Maintenance.equals(eOpMode))
+		final String devCondition = map.remove(AttributeName.DEVICECONDITION);
+		final EnumDeviceCondition dc = EnumDeviceCondition.getEnum(devCondition);
+		eDeviceStatus eS = eDeviceStatus.getEnum(status);
+		if (dc != null && (EnumDeviceCondition.OffLine.equals(dc) || EnumDeviceCondition.Failure.equals(dc)))
 		{
-			status = "NonProductive";
+			eS = eDeviceStatus.Offline;
 		}
-		else if (StringUtil.getNonEmpty(status) != null)
+		else
 		{
-			if ("Unknown".equals(status) || "Down".equals(status))
+			final EnumDeviceOperationMode eOpMode = EnumDeviceOperationMode.getEnum(opMode);
+			if (EnumDeviceOperationMode.NonProductive.equals(eOpMode) || EnumDeviceOperationMode.Maintenance.equals(eOpMode))
 			{
-				status = "Offline";
+				eS = eDeviceStatus.NonProductive;
 			}
-			else if ("Running".equals(status))
+			else if (StringUtil.getNonEmpty(status) != null)
 			{
-				status = "Production";
+				if ("Unknown".equals(status) || "Down".equals(status))
+				{
+					eS = eDeviceStatus.Offline;
+				}
+				else if ("Running".equals(status))
+				{
+					eS = eDeviceStatus.Production;
+				}
 			}
 		}
+		if (eS != null)
+			status = eS.name();
 		map.put(AttributeName.STATUS, status);
 	}
 

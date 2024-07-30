@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,14 +68,20 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class WalkDeviceInfoTest extends JDFTestCaseBase
@@ -94,12 +100,42 @@ class WalkDeviceInfoTest extends JDFTestCaseBase
 		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Down);
 		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Idle);
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
-		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), "Offline");
-		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[2]/@Status", null), "Production");
-		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[3]/@Status", null), "Setup");
-		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[4]/@Status", null), "Cleanup");
-		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[5]/@Status", null), "Offline");
-		Assertions.assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[6]/@Status", null), "Idle");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), "Offline");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[2]/@Status", null), "Production");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[3]/@Status", null), "Setup");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[4]/@Status", null), "Cleanup");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[5]/@Status", null), "Offline");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[6]/@Status", null), "Idle");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testStatusCondition()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		final JDFDeviceInfo di = jmf.getSignal(0).getDeviceInfo(0);
+		di.setDeviceStatus(EnumDeviceStatus.Running);
+		di.setDeviceCondition(EnumDeviceCondition.Failure);
+		final KElement xjmf = new JDFToXJDF().convert(jmf);
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), "Offline");
+		assertNull(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@DeviceCondition", null));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testStatusOperationMode()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		final JDFDeviceInfo di = jmf.getSignal(0).getDeviceInfo(0);
+		di.setDeviceStatus(EnumDeviceStatus.Running);
+		di.setDeviceOperationMode(EnumDeviceOperationMode.NonProductive);
+		final KElement xjmf = new JDFToXJDF().convert(jmf);
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), eDeviceStatus.NonProductive.name());
 	}
 
 }
