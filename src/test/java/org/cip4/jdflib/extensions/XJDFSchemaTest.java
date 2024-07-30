@@ -64,6 +64,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
@@ -225,6 +226,64 @@ class XJDFSchemaTest extends JDFTestCaseBase
 		}
 	}
 
+	void cleancontext(final int minor)
+	{
+		final String date = new JDFDate().getFormattedDateTime(JDFDate.DATEISO);
+		final String commentText = " XJDF 2." + minor + " job submission schema updated on " + date + " ";
+		final XMLDoc d0 = XMLDoc.parseFile(getXJDFSchema(2, minor));
+		d0.getRoot().setXMLComment(commentText, false);
+		d0.write2File(sm_dirTestDataTemp + "schema/xjdf.2_" + minor + "." + date + ".xsd", 2, false);
+		d0.write2File(sm_dirTestDataTemp + "schema/xjdf.job.2_" + minor + "/xjdf.xsd", 2, false);
+
+		final XMLDoc d = XMLDoc.parseFile(getXJDFSchema(2, minor));
+		final KElement root = d.getRoot();
+		final VElement elems = root.getChildrenByTagName("xs:element", null, null, false, true, 0);
+		final VElement complex = root.getChildrenByTagName("xs:element", null, null, false, true, 0);
+		final VElement rootelems = root.getChildElementVector("xs:element", null);
+		final VElement complexelems = root.getChildElementVector("xs:complexType", null);
+		for (final KElement e : rootelems)
+		{
+
+			if (!e.getBoolAttribute("abstract", null, false))
+			{
+				final String t = e.getAttribute("type");
+				final String n = e.getAttribute("name");
+				if (t != null && t.equals(n))
+				{
+					for (final KElement c : complexelems)
+					{
+						if (n.equals(c.getAttribute("name")))
+						{
+							c.removeAttribute("name");
+							e.removeAttribute("type");
+							e.moveElement(c, null);
+						}
+					}
+				}
+			}
+		}
+		root.setXMLComment(" XJDF 2." + minor + " changeorder schema updated on " + date + " ", false);
+		d.write2File(sm_dirTestDataTemp + "schema/xjdf.cleanup.2_" + minor + "/xjdf.xsd", 2, false);
+	}
+
+	void cleansubst(final int minor)
+	{
+		final String date = new JDFDate().getFormattedDateTime(JDFDate.DATEISO);
+		final String commentText = " XJDF 2." + minor + " job submission schema updated on " + date + " ";
+		final XMLDoc d0 = XMLDoc.parseFile(getXJDFSchema(2, minor));
+		d0.getRoot().setXMLComment(commentText, false);
+		d0.write2File(sm_dirTestDataTemp + "schema/xjdf.2_" + minor + "." + date + ".xsd", 2, false);
+		d0.write2File(sm_dirTestDataTemp + "schema/xjdf.sub.2_" + minor + "/xjdf.xsd", 2, false);
+
+		final XMLDoc d = XMLDoc.parseFile(getXJDFSchema(2, minor));
+		final KElement root = d.getRoot();
+		final VElement elems = root.getChildrenByTagName("xs:element", null, null, false, true, 0);
+		for (final KElement elem : elems)
+			elem.removeAttribute("substitutionGroup");
+		root.setXMLComment(" XJDF 2." + minor + " changeorder schema updated on " + date + " ", false);
+		d.write2File(sm_dirTestDataTemp + "schema/xjdf.cleanup.2_" + minor + "/xjdf.xsd", 2, false);
+	}
+
 	/**
 	 *
 	 */
@@ -289,7 +348,9 @@ class XJDFSchemaTest extends JDFTestCaseBase
 	{
 		for (int i = 0; i < 3; i++)
 		{
-			new ChangeOrderMaker().createChangeOrder(i);
+			// new ChangeOrderMaker().createChangeOrder(i);
+			cleancontext(i);
+			// cleansubst(i);
 		}
 	}
 
@@ -405,6 +466,21 @@ class XJDFSchemaTest extends JDFTestCaseBase
 		assertFalse(reparse(root, 2, -1));
 		root.setXPathAttribute("ResourceSet[@Name=\"Color\"]/Resource/Color/@CMYK", "1 0,2 0,3 0,4");
 		assertFalse(reparse(root, 2, -1));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testDeviceValidate()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p", null);
+		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.Product);
+		final JDFDevice d = (JDFDevice) h.getCreateSet(ElementName.DEVICE, EnumUsage.Input).getCreateResource().getResource();
+		d.setDeviceID("id");
+		final KElement root = h.getRoot();
+		assertTrue(reparse(root, 2, -1));
+
 	}
 
 	/**
