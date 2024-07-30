@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,6 +90,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFEvent;
@@ -485,4 +486,13 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 		return e;
 	}
 
+	public eDeviceStatus getXJMFStatus()
+	{
+		return eDeviceStatus.getEnum(getAttribute(AttributeName.STATUS));
+	}
+
+	public void setXJMFStatus(final eDeviceStatus s)
+	{
+		setAttribute(AttributeName.STATUS, s == null ? null : s.name());
+	}
 }

@@ -39,7 +39,10 @@
 package org.cip4.jdflib.jmf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
@@ -53,6 +56,7 @@ import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.eUnit;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFDevice;
@@ -60,7 +64,6 @@ import org.cip4.jdflib.resource.JDFEvent;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -95,11 +98,11 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 		final JDFJMF jmf = (JDFJMF) new JDFDoc("JMF").getRoot();
 		jmf.setSenderID("S1");
 		di = jmf.appendSignal(EnumType.Status).appendDeviceInfo();
-		Assertions.assertEquals(jmf.getSenderID(), di.getDeviceID());
+		assertEquals(jmf.getSenderID(), di.getDeviceID());
 		di.appendDevice().setDeviceID("dd");
-		Assertions.assertEquals(di.getDeviceID(), "dd");
+		assertEquals(di.getDeviceID(), "dd");
 		di.setDeviceID("da");
-		Assertions.assertEquals(di.getDeviceID(), "da");
+		assertEquals(di.getDeviceID(), "da");
 	}
 
 	/**
@@ -126,9 +129,9 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 		jmf.setSenderID("S1");
 		di = jmf.appendSignal(EnumType.Status).appendDeviceInfo();
 		di.appendDevice().setDescriptiveName("dd");
-		Assertions.assertEquals(di.getDescriptiveName(), "dd");
+		assertEquals(di.getDescriptiveName(), "dd");
 		di.setDescriptiveName("da");
-		Assertions.assertEquals(di.getDescriptiveName(), "da");
+		assertEquals(di.getDescriptiveName(), "da");
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -140,7 +143,7 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 	void testNullDeviceStatus()
 	{
 		di.setDeviceStatus(null);
-		Assertions.assertNotNull(di, "got here!");
+		assertNotNull(di, "got here!");
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -170,11 +173,11 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 		jp2.setPhaseAmount(300);
 		jp2.setPhaseWaste(30);
 		jp2.setAmount(500);
-		Assertions.assertTrue(di2.mergeLastPhase(di));
-		Assertions.assertEquals(jp2.getPhaseStartTime(), d1);
-		Assertions.assertEquals(jp2.getPhaseWaste(), 130., 0.);
-		Assertions.assertEquals(jp2.getPhaseAmount(), 500., 0.);
-		Assertions.assertEquals(jp2.getAmount(), 500., 0.);
+		assertTrue(di2.mergeLastPhase(di));
+		assertEquals(jp2.getPhaseStartTime(), d1);
+		assertEquals(jp2.getPhaseWaste(), 130., 0.);
+		assertEquals(jp2.getPhaseAmount(), 500., 0.);
+		assertEquals(jp2.getAmount(), 500., 0.);
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -188,22 +191,22 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 		final JDFDeviceInfo di1 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
 		final JDFDeviceInfo di2 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
 
-		Assertions.assertTrue(di1.isSamePhase(di2, false));
+		assertTrue(di1.isSamePhase(di2, false));
 		final JDFDate date = new JDFDate();
 		di1.setIdleStartTime(date);
 		di2.setIdleStartTime(date);
-		Assertions.assertTrue(di1.isSamePhase(di2, false));
+		assertTrue(di1.isSamePhase(di2, false));
 		di1.setDeviceStatus(EnumDeviceStatus.Idle);
 		di2.setDeviceStatus(EnumDeviceStatus.Idle);
-		Assertions.assertTrue(di1.isSamePhase(di2, false));
+		assertTrue(di1.isSamePhase(di2, false));
 		di1.setDeviceOperationMode(EnumDeviceOperationMode.Productive);
 		di2.setDeviceOperationMode(EnumDeviceOperationMode.Productive);
-		Assertions.assertTrue(di1.isSamePhase(di2, false));
+		assertTrue(di1.isSamePhase(di2, false));
 		final JDFDevice dev = di1.appendDevice();
 		dev.setDeviceID("d1");
 		dev.setDeviceType("foo");
 		di2.copyElement(dev, null);
-		Assertions.assertTrue(di1.isSamePhase(di2, false));
+		assertTrue(di1.isSamePhase(di2, false));
 	}
 
 	/**
@@ -216,21 +219,21 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 		final JDFDeviceInfo di1 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
 		final JDFDeviceInfo di2 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
 
-		Assertions.assertTrue(di1.isSamePhase(di2, false));
+		assertTrue(di1.isSamePhase(di2, false));
 		di1.appendEmployee().setPersonalID("p1");
-		Assertions.assertFalse(di1.isSamePhase(di2, false));
+		assertFalse(di1.isSamePhase(di2, false));
 		di2.appendEmployee().setPersonalID("p1");
-		Assertions.assertTrue(di1.isSamePhase(di2, false));
+		assertTrue(di1.isSamePhase(di2, false));
 
 		di1.appendJobPhase();
-		Assertions.assertFalse(di1.isSamePhase(di2, false));
+		assertFalse(di1.isSamePhase(di2, false));
 		di2.appendJobPhase();
-		Assertions.assertTrue(di1.isSamePhase(di2, false));
+		assertTrue(di1.isSamePhase(di2, false));
 
 		di1.appendEmployee().setPersonalID("p2");
-		Assertions.assertFalse(di1.isSamePhase(di2, false));
+		assertFalse(di1.isSamePhase(di2, false));
 		di2.appendEmployee().setPersonalID("p3");
-		Assertions.assertFalse(di1.isSamePhase(di2, false));
+		assertFalse(di1.isSamePhase(di2, false));
 	}
 
 	/**
@@ -242,7 +245,7 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 		final JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Brief);
 		final JDFDeviceInfo di2 = jmf.getSignal(0).getCreateDeviceInfo(0);
 		di2.appendEmployee().setPersonalID("p");
-		Assertions.assertTrue(di2.getDeprecatedElements(0).isEmpty());
+		assertTrue(di2.getDeprecatedElements(0).isEmpty());
 
 	}
 
@@ -258,7 +261,7 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 		di2.setDeviceStatus(EnumDeviceStatus.Cleanup);
 		di2.removeChild(ElementName.JOBPHASE, null, 0);
 		ev.setEventID("e1");
-		Assertions.assertTrue(di2.isValid(EnumValidationLevel.Complete));
+		assertTrue(di2.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
@@ -270,7 +273,19 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 		final JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Brief);
 		final JDFDeviceInfo di2 = jmf.getSignal(0).getCreateDeviceInfo(0);
 		final JDFEvent ev = di2.appendEvent("e3");
-		Assertions.assertEquals("e3", ev.getEventID());
+		assertEquals("e3", ev.getEventID());
+	}
+
+	/**
+	*
+	*/
+	@Test
+	void testXJMFStatus()
+	{
+		final JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Brief);
+		final JDFDeviceInfo di2 = jmf.getSignal(0).getCreateDeviceInfo(0);
+		di.setXJMFStatus(eDeviceStatus.Offline);
+		assertEquals(eDeviceStatus.Offline, di.getXJMFStatus());
 	}
 
 	/**
@@ -280,8 +295,8 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 	void testGetIdleStartTime()
 	{
 		final JDFDeviceInfo di1 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
-		Assertions.assertNull(di1.getIdleStartTime());
+		assertNull(di1.getIdleStartTime());
 		di1.setIdleStartTime(null);
-		Assertions.assertNotNull(di1.getIdleStartTime());
+		assertNotNull(di1.getIdleStartTime());
 	}
 }
