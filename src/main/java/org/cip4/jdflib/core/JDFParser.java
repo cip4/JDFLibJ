@@ -191,8 +191,7 @@ public class JDFParser extends XMLParser
 	 * @deprecated set the parser members instead
 	 */
 	@Deprecated
-	public JDFDoc parseInputSource(final InputSource inSource, final String schemaLocation, final String documentClassName, final ErrorHandler errorHandler, final boolean bEraseEmpty,
-			final boolean bDoNamespaces)
+	public JDFDoc parseInputSource(final InputSource inSource, final String schemaLocation, final String documentClassName, final ErrorHandler errorHandler, final boolean bEraseEmpty, final boolean bDoNamespaces)
 	{
 		JDFDoc doc = null;
 		if (errorHandler instanceof XMLErrorHandler)
@@ -289,7 +288,8 @@ public class JDFParser extends XMLParser
 	}
 
 	/**
-	 * @see org.apache.xerces.parsers.AbstractDOMParser#startDocument(org.apache.xerces.xni.XMLLocator, java.lang.String, org.apache.xerces.xni.NamespaceContext, org.apache.xerces.xni.Augmentations)
+	 * @see org.apache.xerces.parsers.AbstractDOMParser#startDocument(org.apache.xerces.xni.XMLLocator, java.lang.String, org.apache.xerces.xni.NamespaceContext,
+	 *      org.apache.xerces.xni.Augmentations)
 	 */
 	@Override
 	public void startDocument(final XMLLocator locator, final String encoding, final NamespaceContext namespaceContext, final Augmentations augs) throws XNIException
@@ -316,7 +316,15 @@ public class JDFParser extends XMLParser
 	{
 		final XMLDoc doc = super.runParser(inSource, bEraseEmpty);
 		if (doc != null)
+		{
 			((JDFDoc) doc).setInitOnCreate(true);
+			if (doc.getRoot().getNamespaceURI() == null)
+			{
+				final KElement root = doc.getRoot();
+				final String nsURI = JDFElement.getSchemaURL(JDFDoc.getVersionFromDocType(root.getLocalName()));
+				root.setNamespaceURI(nsURI);
+			}
+		}
 		return doc;
 	}
 
