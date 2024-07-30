@@ -457,6 +457,17 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	/**
 	 *
 	 * @param id
+	 * @return
+	 */
+	public ProductHelper getCreateProduct(final int iProduct)
+	{
+		final ProductHelper ph = getProduct(iProduct);
+		return (ph == null) ? appendProduct() : ph;
+	}
+
+	/**
+	 *
+	 * @param id
 	 * @param externalID TODO
 	 * @return
 	 */
@@ -478,19 +489,22 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * @param iProduct the index of root products
 	 * @return the product, null if no matching product exists
 	 */
-	public ProductHelper getRootProduct(int iProduct)
+	public ProductHelper getProduct(final int iProduct)
 	{
-		final Vector<ProductHelper> rootProductHelpers = getRootProductHelpers();
-		if (rootProductHelpers == null)
-		{
-			return null;
-		}
-		if (iProduct < 0)
-			iProduct = rootProductHelpers.size() + iProduct;
-		if (iProduct >= rootProductHelpers.size() || iProduct < 0)
-			return null;
-		final ProductHelper productHelper = rootProductHelpers.get(iProduct);
-		return productHelper;
+		final List<ProductHelper> productHelpers = getProductHelpers();
+		return ContainerUtil.get(productHelpers, iProduct);
+	}
+
+	/**
+	 * get the Root product by index - note that this need not be the index in the product list but rather depends on the index of the ID in ProductList/@RootProducts
+	 *
+	 * @param iProduct the index of root products
+	 * @return the product, null if no matching product exists
+	 */
+	public ProductHelper getRootProduct(final int iProduct)
+	{
+		final List<ProductHelper> rootProductHelpers = getRootProductHelpers();
+		return ContainerUtil.get(rootProductHelpers, iProduct);
 	}
 
 	/**
