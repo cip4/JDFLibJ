@@ -46,6 +46,7 @@ package org.cip4.jdflib.resource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -1946,7 +1947,7 @@ class JDFResourceTest extends JDFTestCaseBase
 		final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(), "DE");
 		m1.put(EnumPartIDKey.SheetName, "S1");
 		assertEquals(xmRoot.getPartition(m1, null), xmp);
-		assertEquals(xmRoot.getCreatePartition(m1, null), xmp);
+		assertNotEquals(xmRoot.getCreatePartition(m1, null), xmp);
 		assertNull(xmRoot.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(), "GR"), null));
 
 		final PartitionGetter pg = new PartitionGetter(xmRoot);
@@ -1955,7 +1956,7 @@ class JDFResourceTest extends JDFTestCaseBase
 		final JDFAttributeMap m = new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(), "DE FR");
 		m.put(EnumPartIDKey.SheetName, "S1");
 		assertEquals(pg.getPartition(m, null), xmp);
-		assertNull(pg.getPartition(m1, null));
+		assertNotNull(pg.getPartition(m1, null));
 		assertEquals(pg.getCreatePartition(m1, null).getPartVersion(), "DE");
 	}
 
@@ -3617,6 +3618,21 @@ class JDFResourceTest extends JDFTestCaseBase
 		assertEquals(m2, m2.getCreatePartition(map, null));
 		assertEquals(m2, mp1.getCreatePartition(map, new VString("SignatureName SheetName", null)));
 		assertEquals(m2, mp1.getCreatePartition(map, null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetCreate_PartVersionStrict()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
+		final JDFAttributeMap partMap1 = new JDFAttributeMap(EnumPartIDKey.PartVersion, "EN");
+		final JDFAttributeMap partMap2 = new JDFAttributeMap(EnumPartIDKey.PartVersion, "EN FR");
+		final JDFResource r1 = r.getCreatePartition(partMap1, null);
+		final JDFResource r2 = r.getCreatePartition(partMap2, null);
+		assertEquals(2, r.getLeafArray(false).size());
+		assertNotEquals(r1, r2);
 	}
 
 	/**

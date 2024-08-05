@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,6 +40,7 @@ package org.cip4.jdflib.resource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -149,6 +150,23 @@ class PartitionGetterTest
 	 *
 	 */
 	@Test
+	void testGetCreate_PartVersionStrict()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
+		final JDFAttributeMap partMap1 = new JDFAttributeMap(EnumPartIDKey.PartVersion, "EN");
+		final JDFAttributeMap partMap2 = new JDFAttributeMap(EnumPartIDKey.PartVersion, "EN FR");
+		final PartitionGetter pg = new PartitionGetter(r);
+		pg.setStrictPartVersion(true);
+		final JDFResource r1 = pg.getCreatePartition(partMap1, null);
+		final JDFResource r2 = pg.getCreatePartition(partMap2, null);
+		assertEquals(2, r.getLeafArray(false).size());
+		assertNotEquals(r1, r2);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testGetimplicit()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
@@ -165,7 +183,7 @@ class PartitionGetterTest
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
 		r.addPartition(EnumPartIDKey.SignatureName, "sig1");
-		JDFResource s2 = r.addPartition(EnumPartIDKey.SignatureName, "sig2").addPartition(EnumPartIDKey.SheetName, "s2");
+		final JDFResource s2 = r.addPartition(EnumPartIDKey.SignatureName, "sig2").addPartition(EnumPartIDKey.SheetName, "s2");
 		s2.addPartition(EnumPartIDKey.Side, "Front");
 		s2.addPartition(EnumPartIDKey.Side, "Back");
 		r.setPartUsage(EnumPartUsage.Implicit);
@@ -182,8 +200,8 @@ class PartitionGetterTest
 	void testGetimplicitGap2()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
-		JDFResource s1 = r.addPartition(EnumPartIDKey.SignatureName, "sig1").addPartition(EnumPartIDKey.SheetName, "s1");
-		JDFResource s2 = r.addPartition(EnumPartIDKey.SignatureName, "sig2").addPartition(EnumPartIDKey.SheetName, "s2");
+		final JDFResource s1 = r.addPartition(EnumPartIDKey.SignatureName, "sig1").addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource s2 = r.addPartition(EnumPartIDKey.SignatureName, "sig2").addPartition(EnumPartIDKey.SheetName, "s2");
 		s1.addPartition(EnumPartIDKey.Side, "Front");
 		s1.addPartition(EnumPartIDKey.Side, "Back");
 		s2.addPartition(EnumPartIDKey.Side, "Front").addPartition(EnumPartIDKey.Separation, "B");
