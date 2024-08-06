@@ -45,6 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -59,9 +60,10 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-class PartitionGetterTest
+class PartitionGetterTest extends JDFTestCaseBase
 {
 
 	/**
@@ -379,6 +381,25 @@ class PartitionGetterTest
 		final JDFResource cd = r.addPartition(EnumPartIDKey.PartVersion, "c d");
 		final PartitionGetter pg = new PartitionGetter(r);
 		pg.setStrictPartVersion(true);
+		assertNull(pg.getPartition(new JDFAttributeMap(AttributeName.PARTVERSION, "a"), EnumPartUsage.Explicit));
+		assertEquals(ab, pg.getPartition(new JDFAttributeMap(AttributeName.PARTVERSION, "a b"), EnumPartUsage.Explicit));
+		assertEquals(cd, pg.getPartition(new JDFAttributeMap(AttributeName.PARTVERSION, "c d"), EnumPartUsage.Explicit));
+		assertNull(pg.getPartition(new JDFAttributeMap(AttributeName.PARTVERSION, "e"), EnumPartUsage.Explicit));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGlobalStrict()
+	{
+		assertFalse(PartitionGetter.isAlwaysStrictPartVersion());
+		PartitionGetter.setAlwaysStrictPartVersion(true);
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
+		final JDFResource ab = r.addPartition(EnumPartIDKey.PartVersion, "a b");
+		final JDFResource cd = r.addPartition(EnumPartIDKey.PartVersion, "c d");
+		final PartitionGetter pg = new PartitionGetter(r);
+		assertTrue(pg.isStrictPartVersion());
 		assertNull(pg.getPartition(new JDFAttributeMap(AttributeName.PARTVERSION, "a"), EnumPartUsage.Explicit));
 		assertEquals(ab, pg.getPartition(new JDFAttributeMap(AttributeName.PARTVERSION, "a b"), EnumPartUsage.Explicit));
 		assertEquals(cd, pg.getPartition(new JDFAttributeMap(AttributeName.PARTVERSION, "c d"), EnumPartUsage.Explicit));
@@ -922,6 +943,15 @@ class PartitionGetterTest
 		assertEquals(c, pg.getPartition(m, EnumPartUsage.Explicit));
 		m.put(AttributeName.SEPARATION, "d");
 		assertNull(pg.getPartition(m, EnumPartUsage.Explicit));
+	}
+
+	@Override
+	@AfterEach
+	public void tearDown() throws Exception
+	{
+		super.tearDown();
+		PartitionGetter.setAlwaysStrictPartVersion(false);
+
 	}
 
 }

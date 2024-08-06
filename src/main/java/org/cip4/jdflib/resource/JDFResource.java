@@ -2261,7 +2261,6 @@ public class JDFResource extends JDFElement
 	public JDFResource getCreatePartition(final JDFAttributeMap partMap, final VString vPartKeys)
 	{
 		final org.cip4.jdflib.resource.PartitionGetter partitionGetter = new org.cip4.jdflib.resource.PartitionGetter(this);
-		partitionGetter.setStrictPartVersion(true);
 		return partitionGetter.getCreatePartition(partMap, vPartKeys);
 	}
 

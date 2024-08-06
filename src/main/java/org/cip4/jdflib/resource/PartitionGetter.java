@@ -71,6 +71,22 @@ public class PartitionGetter
 	 *
 	 */
 	private final JDFResource resourceRoot;
+	private static boolean alwaysStrictPartVersion = false;
+
+	public static boolean isAlwaysStrictPartVersion()
+	{
+		return alwaysStrictPartVersion;
+	}
+
+	/**
+	 * globally enable/disable matching of single versions to multiple versions
+	 * 
+	 * @param alwaysStrictPartVersion
+	 */
+	public static void setAlwaysStrictPartVersion(final boolean alwaysStrictPartVersion)
+	{
+		PartitionGetter.alwaysStrictPartVersion = alwaysStrictPartVersion;
+	}
 
 	/**
 	 *
@@ -263,7 +279,7 @@ public class PartitionGetter
 	{
 		super();
 		resourceRoot = jdfResource.getResourceRoot();
-		strictPartVersion = false;
+		strictPartVersion = alwaysStrictPartVersion;
 		followIdentical = true;
 		leafMap = resourceRoot.getPartitionMapper();
 		localPartMap = jdfResource.getPartMap();
@@ -450,7 +466,7 @@ public class PartitionGetter
 			}
 		}
 
-		JDFAttributeMapArray v2 = ContainerUtil.isEmpty(vExplicit) ? v : vExplicit;
+		final JDFAttributeMapArray v2 = ContainerUtil.isEmpty(vExplicit) ? v : vExplicit;
 		v2.unify();
 		if (!ignoreExplicit && v2.size() > 1)
 		{
@@ -1234,6 +1250,11 @@ public class PartitionGetter
 			}
 		}
 		return newMap.size() > 0 ? newMap : null;
+	}
+
+	public boolean isStrictPartVersion()
+	{
+		return strictPartVersion;
 	}
 
 }
