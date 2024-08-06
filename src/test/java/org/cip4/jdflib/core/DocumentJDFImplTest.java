@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,11 +77,17 @@
  */
 package org.cip4.jdflib.core;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFShapeElement;
+import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFSurface;
 import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFSpanHoleType;
@@ -89,10 +95,10 @@ import org.cip4.jdflib.span.JDFSpanMethod;
 import org.cip4.jdflib.span.JDFSpanShape;
 import org.cip4.jdflib.span.JDFSpanSurface;
 import org.cip4.jdflib.span.JDFStringSpan;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 class DocumentJDFImplTest extends JDFTestCaseBase
 {
@@ -103,31 +109,31 @@ class DocumentJDFImplTest extends JDFTestCaseBase
 	void testContextSensitiveElementNames()
 	{ // HoleType, Method, Shape and Surface are context sensitive elements
 		// The type casts below should all succeed
-		JDFDoc doc = new JDFDoc(ElementName.JDF);
-		KElement rootNode = doc.getRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final KElement rootNode = doc.getRoot();
 
-		JDFStringSpan kelem21 = (JDFStringSpan) rootNode.appendElement("HoleType", null);
+		final JDFStringSpan kelem21 = (JDFStringSpan) rootNode.appendElement("HoleType", null);
 		kelem21.setAttribute("Type", "org.cip4.jdflib.span.JDFStringSpan");
-		KElement kelem22 = rootNode.appendElement("RingBinding", null);
-		JDFSpanHoleType kelem23 = (JDFSpanHoleType) kelem22.appendElement("HoleType", null);
+		final KElement kelem22 = rootNode.appendElement("RingBinding", null);
+		final JDFSpanHoleType kelem23 = (JDFSpanHoleType) kelem22.appendElement("HoleType", null);
 		kelem23.setAttribute("Type", "org.cip4.jdflib.span.JDFSpanHoleType");
 
-		JDFNameSpan kelem11 = (JDFNameSpan) rootNode.appendElement("Method", null);
+		final JDFNameSpan kelem11 = (JDFNameSpan) rootNode.appendElement("Method", null);
 		kelem11.setAttribute("Type", "org.cip4.jdflib.span.JDFNameSpan");
-		KElement kelem12 = rootNode.appendElement("InsertingIntent", null);
-		JDFSpanMethod kelem13 = (JDFSpanMethod) kelem12.appendElement("Method", null);
+		final KElement kelem12 = rootNode.appendElement("InsertingIntent", null);
+		final JDFSpanMethod kelem13 = (JDFSpanMethod) kelem12.appendElement("Method", null);
 		kelem13.setAttribute("Type", "org.cip4.jdflib.span.JDFSpanMethod");
 
-		JDFShapeElement kelem4 = (JDFShapeElement) rootNode.appendElement("Shape", null);
+		final JDFShapeElement kelem4 = (JDFShapeElement) rootNode.appendElement("Shape", null);
 		kelem4.setAttribute("Type", "org.cip4.jdflib.resource.JDFShapeElement");
-		KElement kelem5 = rootNode.appendElement("BookCase", null);
-		JDFSpanShape kelem6 = (JDFSpanShape) kelem5.appendElement("Shape", null);
+		final KElement kelem5 = rootNode.appendElement("BookCase", null);
+		final JDFSpanShape kelem6 = (JDFSpanShape) kelem5.appendElement("Shape", null);
 		kelem6.setAttribute("Type", "org.cip4.jdflib.span.JDFSpanShape");
 
-		JDFSurface kelem7 = (JDFSurface) rootNode.appendElement("Surface", null);
+		final JDFSurface kelem7 = (JDFSurface) rootNode.appendElement("Surface", null);
 		kelem7.setAttribute("Type", "org.cip4.jdflib.resource.process.JDFSurface");
-		KElement kelem8 = rootNode.appendElement("LaminatingIntent", null);
-		JDFSpanSurface kelem9 = (JDFSpanSurface) kelem8.appendElement("Surface", null);
+		final KElement kelem8 = rootNode.appendElement("LaminatingIntent", null);
+		final JDFSpanSurface kelem9 = (JDFSpanSurface) kelem8.appendElement("Surface", null);
 		kelem9.setAttribute("Type", "org.cip4.jdflib.span.JDFSpanSurface");
 
 	}
@@ -139,11 +145,23 @@ class DocumentJDFImplTest extends JDFTestCaseBase
 	void testPrivateResources()
 	{ // HoleType, Method, Shape and Surface are context sensitive elements
 		// The type casts below should all succeed
-		JDFDoc doc = new JDFDoc(ElementName.JDF);
-		JDFNode n = doc.getJDFRoot();
-		JDFResourcePool rp = n.getCreateResourcePool();
-		KElement e = rp.appendElement("test:res", "www.test.org");
-		Assertions.assertTrue(e instanceof JDFResource);
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode n = doc.getJDFRoot();
+		final JDFResourcePool rp = n.getCreateResourcePool();
+		final KElement e = rp.appendElement("test:res", "www.test.org");
+		assertTrue(e instanceof JDFResource);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	void testGetClasses()
+	{
+		final List<Class<?>> l = DocumentJDFImpl.getClasses(JDFResource.class);
+		assertTrue(l.contains(JDFResource.class));
+		assertTrue(l.contains(JDFConventionalPrintingParams.class));
+		assertFalse(l.contains(JDFNode.class));
 	}
 
 }

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -49,6 +49,8 @@
 package org.cip4.jdflib.core;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.ParentNode;
@@ -179,6 +181,33 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		super();
 		bInitOnCreate = true;
 		myXMLUserDat = new XMLDocUserData(this);
+	}
+
+	public static List<Class<?>> getClasses(final Class<?> clazz)
+	{
+		final ArrayList<Class<?>> classes = new ArrayList<>();
+		new DocumentJDFImpl().fillAllClasses();
+		for (final Class<?> c : data.sm_hashPathToClass.values())
+		{
+			if (clazz.isAssignableFrom(c))
+			{
+				classes.add(c);
+			}
+		}
+		return classes;
+	}
+
+	void fillAllClasses()
+	{
+		bInJDFJMF = true;
+		if (data.sm_PackageNames.size() > data.sm_hashPathToClass.size())
+		{
+			for (final String classPath : data.sm_PackageNames.keySet())
+			{
+				getFactoryClass(classPath);
+			}
+		}
+
 	}
 
 	/**
@@ -328,17 +357,15 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	 */
 	public Class<?> getFactoryClass(final String qualifiedName)
 	{
-		Class<?> packageNameClass = null;
-
 		try
 		{
-			packageNameClass = getFactoryClass(null, qualifiedName, qualifiedName, null);
+			return getFactoryClass(null, qualifiedName, qualifiedName, null);
 		}
 		catch (final ClassNotFoundException e)
 		{ /**/
 		}
 
-		return packageNameClass;
+		return null;
 	}
 
 	private Class<?> getFactoryClass(final String strNameSpaceURI, final String qualifiedName, final String localPart, String strClassPath) throws ClassNotFoundException
@@ -537,7 +564,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	protected String getHoleTypeClass(final String strParentNodeClass)
 	{
 		final String strClassPath;
-		String simple = StringUtil.token(strParentNodeClass, -1, ".");
+		final String simple = StringUtil.token(strParentNodeClass, -1, ".");
 		if ("JDFRingBinding".equals(simple) || "JDFCoilBinding".equals(simple))
 		{
 			strClassPath = "org.cip4.jdflib.span.JDFSpanHoleType";
