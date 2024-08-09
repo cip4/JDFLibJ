@@ -2822,8 +2822,8 @@ public class StringUtil
 
 		simpleRegExp = StringUtil.escape(simpleRegExp, ".\\{}|[]()", JDFConstants.BACK_SLASH, 0, 0, 0, Integer.MAX_VALUE);
 		// attention note sequence, otherwise we get unwanted side effects
-		final String[] in = new String[] { "*", "+", "?" };
-		final String[] out = new String[] { "(.*)", "(.+)", "(.)" };
+		final String[] in = new String[] { "*", "+", "?", "$" };
+		final String[] out = new String[] { "(.*)", "(.+)", "(.)", "(\\$)" };
 		for (int i = 0; i < in.length; i++)
 		{
 			final StringBuilder b = new StringBuilder(simpleRegExp.length() * 2);

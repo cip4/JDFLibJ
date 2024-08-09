@@ -623,6 +623,8 @@ class StringUtilTest extends JDFTestCaseBase
 		assertFalse(StringUtil.matchesSimple("1234", "\\d{5,5}", false));
 		assertTrue(StringUtil.matchesSimple("12345", "\\d{5,5}"));
 		assertTrue(StringUtil.matchesSimple("abc", "*", false));
+		assertTrue(StringUtil.matchesSimple("abc", "*abc", false));
+		assertTrue(StringUtil.matchesSimple("$abc", "*$abc", true));
 		assertTrue(StringUtil.matchesSimple("abc", "?*", false));
 		assertTrue(StringUtil.matchesSimple("abc", "?+", false));
 		assertTrue(StringUtil.matchesSimple("abc", "", false));
@@ -711,6 +713,7 @@ class StringUtilTest extends JDFTestCaseBase
 		assertFalse(StringUtil.matches("12dk", JDFConstants.REGEXP_HEXBINARY));
 
 		assertTrue(StringUtil.matches("€", "(€)?"));
+		assertTrue(StringUtil.matches("$", "(\\$)"));
 
 		assertTrue(StringUtil.matches(null, null));
 		assertFalse(StringUtil.matches("abc", "?"));
