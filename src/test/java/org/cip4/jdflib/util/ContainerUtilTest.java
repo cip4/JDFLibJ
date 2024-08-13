@@ -59,6 +59,7 @@ import java.util.Vector;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.ifaces.IMatches;
@@ -275,6 +276,23 @@ class ContainerUtilTest extends JDFTestCaseBase
 		assertEquals(m0, ContainerUtil.putAll(m0, null));
 		assertEquals(m0, ContainerUtil.putAll(m0, m1));
 		assertEquals(2, m0.size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testRetainAll()
+	{
+		final JDFAttributeMap m0 = new JDFAttributeMap("a", "b");
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "b1");
+		assertNull(ContainerUtil.putAll(null, null));
+		assertEquals(m0, ContainerUtil.putAll(m0, m1));
+		assertEquals(null, ContainerUtil.retainAll(null, null));
+		assertEquals(null, ContainerUtil.retainAll(null, new StringArray()));
+		assertEquals(null, ContainerUtil.retainAll(null, new StringArray("a b")));
+		assertEquals(m1, ContainerUtil.retainAll(m0, new StringArray("a1 b")));
+
 	}
 
 	/**

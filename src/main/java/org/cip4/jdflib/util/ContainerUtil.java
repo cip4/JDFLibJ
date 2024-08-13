@@ -1202,6 +1202,33 @@ public class ContainerUtil
 	 * @param map2
 	 * @return
 	 */
+	public static <A, B> Map<A, B> retainAll(final Map<A, B> map, final Collection<A> keep)
+	{
+		if (map != null)
+		{
+			if (isEmpty(keep))
+				map.clear();
+			else
+			{
+				for (final A key : getKeyArray(map))
+				{
+					if (!keep.contains(key))
+						map.remove(key);
+				}
+			}
+		}
+		return map;
+
+	}
+
+	/**
+	 * 
+	 * @param <A>
+	 * @param <B>
+	 * @param map
+	 * @param map2
+	 * @return
+	 */
 	public static <A, B> B put(final Map<A, B> map, final A key, final B value)
 	{
 		if (map != null && key != null && value != null)
