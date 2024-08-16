@@ -458,8 +458,10 @@ class StorageHotFolderTest extends JDFTestCaseBase
 				assertEquals(42, error.listFiles().length, 13);
 
 				hf.stop();
+				tearDown();
 				if (synch)
 					ThreadUtil.sleep(420);
+
 			}
 	}
 
@@ -506,6 +508,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 			assertEquals(30, error.listFiles().length, 5);
 
 			hf.stop();
+			tearDown();
 			if (synch)
 				ThreadUtil.sleep(420);
 
@@ -687,6 +690,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 			assertEquals(42, error.listFiles().length, 13);
 
 			hf.stop();
+			tearDown();
 			if (synch)
 				ThreadUtil.sleep(420);
 		}
@@ -701,7 +705,6 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	synchronized void testOKErrorMultiDelaysynch() throws Exception
 	{
-		setUp();
 
 		final CountListener cl = new CountListener();
 		cl.setDelay(2000);
@@ -749,7 +752,6 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	synchronized void testOKErrorMultiDelay() throws Exception
 	{
-		setUp();
 
 		final CountListener cl = new CountListener();
 		cl.setDelay(2000);
