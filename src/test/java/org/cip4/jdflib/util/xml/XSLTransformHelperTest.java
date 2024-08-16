@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -78,6 +78,23 @@ class XSLTransformHelperTest extends JDFTestCaseBase
 		final KElement a = new XMLDoc("a", null).getRoot();
 		final KElement t = new XSLTransformHelper(a, xsl).getTransformElement().getRoot();
 		assertNotNull(t);
+	}
+
+	/**
+	 * make sure we also get all valid deep elements
+	 */
+	@Test
+	void testGetTransformRoot()
+	{
+		final XMLDoc xsl = XMLDoc.parseFile(sm_dirTestData + "xsl/ab.xsl");
+
+		final KElement a = new XMLDoc("a", null).getRoot();
+		a.setXPathValue("b/@c", "d");
+		a.setXPathValue("b/@e", "f");
+		final XMLDoc transformElement = new XSLTransformHelper(a, xsl).getTransformElement();
+		final KElement t = transformElement.getRoot();
+		assertNotNull(t);
+		assertEquals("f", t.getXPathAttribute("/a1/b1/@e1", null));
 	}
 
 	/**
