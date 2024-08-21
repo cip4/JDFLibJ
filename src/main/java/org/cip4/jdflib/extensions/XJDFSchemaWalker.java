@@ -84,7 +84,16 @@ import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
  */
 public class XJDFSchemaWalker extends BaseElementWalker
 {
+	static final String MATRIX = "matrix";
+	static final String CMYK_COLOR = "CMYKColor";
+	static final String RECTANGLE = "rectangle";
+	static final String SRGB_COLOR = "sRGBColor";
+	static final String LAB_COLOR = "LabColor";
+	static final String SHAPE = "shape";
+	static final String XY_PAIR = "XYPair";
 	private final JDFAttributeMap typeMap;
+	static final String NAME = "name";
+	static final String TYPE = "type";
 
 	/**
 	 * 
@@ -140,9 +149,9 @@ public class XJDFSchemaWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement a, final KElement xjdf)
 		{
-			final String typ = a.getNonEmpty("type");
-			final String parent = a.getParentNode_KElement().getInheritedAttribute("name", null, null);
-			final String name = a.getNonEmpty("name");
+			final String typ = a.getNonEmpty(TYPE);
+			final String parent = a.getParentNode_KElement().getInheritedAttribute(NAME, null, null);
+			final String name = a.getNonEmpty(NAME);
 			typeMap.putNotNull(parent + "/" + name, typ);
 			return null;
 		}
@@ -184,16 +193,16 @@ public class XJDFSchemaWalker extends BaseElementWalker
 		if (typ != null)
 			switch (typ)
 			{
-			case "XYPair":
+			case XY_PAIR:
 				return 2;
-			case "shape":
-			case "LabColor":
-			case "sRGBColor":
+			case SHAPE:
+			case LAB_COLOR:
+			case SRGB_COLOR:
 				return 3;
-			case "rectangle":
-			case "CMYKColor":
+			case RECTANGLE:
+			case CMYK_COLOR:
 				return 4;
-			case "matrix":
+			case MATRIX:
 				return 6;
 			default:
 			}
@@ -207,9 +216,9 @@ public class XJDFSchemaWalker extends BaseElementWalker
 		if (typ != null)
 			switch (typ)
 			{
-			case "shape":
-			case "sRGBColor":
-			case "CMYKColor":
+			case SHAPE:
+			case SRGB_COLOR:
+			case CMYK_COLOR:
 				return 0;
 			default:
 			}
@@ -223,8 +232,8 @@ public class XJDFSchemaWalker extends BaseElementWalker
 		if (typ != null)
 			switch (typ)
 			{
-			case "sRGBColor":
-			case "CMYKColor":
+			case SRGB_COLOR:
+			case CMYK_COLOR:
 				return 1;
 			default:
 			}
