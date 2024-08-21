@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,35 +68,23 @@
  */
 package org.cip4.jdflib.extensions;
 
-import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
-import org.cip4.jdflib.util.FileUtil;
 
 /**
  * 
- * most extremely very prototypical skeleton schema converter<br/>
- * TODO: we may want to simply generate from autoclasses rather than from the existing schema...<br/>
- * or forget the walker pattern and simply loop^
+ * the old implementattion was obsolete this implementation extracts more data from the xml schema that can be injected into the json schema
  * 
- * Schema policies: Retain substitutiongroups (elements of resource/parameter)
- * make local elements local - there is only one remaining element definition
- * make attribute definitions local but retain global attribute type definitions - think about unique enumerations -probably local
- * 
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * June 3, 2009
- * @deprecated - schema is created with @see XJDFSchemaCreator
  */
-@Deprecated
 public class XJDFSchemaWalker extends BaseElementWalker
 {
-	protected HashMap<String, KElement> newSchemaMap;
+	private final JDFAttributeMap typeMap;
 
 	/**
 	 * 
@@ -104,42 +92,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	public XJDFSchemaWalker()
 	{
 		super(new BaseWalkerFactory());
-		init();
-	}
-
-	/**
-	 * @param in
-	 * @param out
-	 * @throws IllegalArgumentException if no output is declared
-	 */
-	public void newFile(final File in, final File out)
-	{
-		if (!in.canRead())
-		{
-			throw new IllegalArgumentException("need a valid input file");
-		}
-		if (!out.canWrite())
-		{
-			FileUtil.createNewFile(out);
-			if (!out.canWrite())
-			{
-				throw new IllegalArgumentException("need a valid output file");
-			}
-		}
-		final XMLDoc dIn = XMLDoc.parseFile(in);
-		final KElement rootIn = dIn.getRoot();
-		final XMLDoc dOut = new XMLDoc(rootIn.getNodeName(), rootIn.getNamespaceURI());
-		final KElement rootOut = dOut.getRoot();
-		walkTree(rootIn, rootOut);
-		dOut.write2File(out, 2, false);
-	}
-
-	/**
-	 * 
-	 */
-	private void init()
-	{
-		newSchemaMap = new HashMap<String, KElement>();
+		typeMap = new JDFAttributeMap();
 	}
 
 	/**
@@ -149,7 +102,6 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	 */
 	protected class WalkElement extends BaseWalker
 	{
-		@SuppressWarnings("synthetic-access")
 		public WalkElement()
 		{
 			super(getFactory());
@@ -163,21 +115,20 @@ public class XJDFSchemaWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement in, final KElement out)
 		{
-			final KElement eNew = out.copyElement(in, null);
-			eNew.removeChildren(null, null, null);
-			return eNew;
+			return in;
 		}
 	}
 
 	/**
 	 * any matching class will be removed with extreme prejudice...
+	 * 
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
 	 */
-	protected class WalkIgnore extends WalkElement
+	protected class WalkAttribute extends WalkElement
 	{
 
-		public WalkIgnore()
+		public WalkAttribute()
 		{
 			super();
 		}
@@ -187,8 +138,12 @@ public class XJDFSchemaWalker extends BaseElementWalker
 		 * @return true if must continue
 		 */
 		@Override
-		public KElement walk(final KElement jdf, final KElement xjdf)
+		public KElement walk(final KElement a, final KElement xjdf)
 		{
+			final String typ = a.getNonEmpty("type");
+			final String parent = a.getParentNode_KElement().getInheritedAttribute("name", null, null);
+			final String name = a.getNonEmpty("name");
+			typeMap.putNotNull(parent + "/" + name, typ);
 			return null;
 		}
 
@@ -200,65 +155,81 @@ public class XJDFSchemaWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final String elmName = toCheck.getLocalName();
-			if (elmName == null)
-			{
-				return false;
-			}
-			if ("complexType".equals(elmName))
-			{
-				final String name = toCheck.getAttribute("name");
-				boolean b = name.endsWith("_rp");
-				b = b || name.endsWith("_r");
-				return b;
-			}
-			if ("element".equals(elmName))
-			{
-				final String name = toCheck.getAttribute("name");
-				boolean b = name.equals("Identical");
-				b = b || name.endsWith("Update");
-				return b;
-			}
-			if ("xs:annotation".equals(elmName))
-			{
-				return true;
-			}
-			return false;
+			return "xs:attribute".equals(toCheck.getNodeName());
 		}
 	}
 
-	/**
-	 * any matching class will be removed with extreme prejudice...
-	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
-	 */
-	protected class WalkComplexType extends WalkElement
+	public JDFAttributeMap getTypeMap()
 	{
-
-		public WalkComplexType()
-		{
-			super();
-		}
-
-		/**
-		 * @param xjdf
-		 * @return true if must continue
-		 */
-		@Override
-		public KElement walk(final KElement jdf, final KElement xjdf)
-		{
-			return null;
-		}
-
-		/**
-		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-		 * @param toCheck
-		 * @return true if it matches
-		 */
-		@Override
-		public boolean matches(final KElement toCheck)
-		{
-			return "xs:complexType".equals(toCheck.getLocalName());
-		}
+		return typeMap;
 	}
+
+	public Map<String, Integer> getLengthMap()
+	{
+		final Map<String, Integer> ret = new HashMap<>();
+		for (final String key : typeMap.getKeyList())
+		{
+			final int l = getLength(key);
+			if (l > 0)
+			{
+				ret.put(key, Integer.valueOf(l));
+			}
+		}
+		return ret;
+	}
+
+	public int getLength(final String path)
+	{
+		final String typ = typeMap.get(path);
+		if (typ != null)
+			switch (typ)
+			{
+			case "XYPair":
+				return 2;
+			case "shape":
+			case "LabColor":
+			case "sRGBColor":
+				return 3;
+			case "rectangle":
+			case "CMYKColor":
+				return 4;
+			case "matrix":
+				return 6;
+			default:
+			}
+		return 0;
+
+	}
+
+	public Integer getMin(final String path)
+	{
+		final String typ = typeMap.get(path);
+		if (typ != null)
+			switch (typ)
+			{
+			case "shape":
+			case "sRGBColor":
+			case "CMYKColor":
+				return 0;
+			default:
+			}
+		return null;
+
+	}
+
+	public Integer getMax(final String path)
+	{
+		final String typ = typeMap.get(path);
+		if (typ != null)
+			switch (typ)
+			{
+			case "sRGBColor":
+			case "CMYKColor":
+				return 1;
+			default:
+			}
+		return null;
+
+	}
+
 }

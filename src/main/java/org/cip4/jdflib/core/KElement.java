@@ -224,7 +224,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 * searches for the first attribute occurence in this element or any ancestors
+	 * searches for the first attribute occurrence in this element or any ancestors
 	 *
 	 * @param attrib the attribute name
 	 * @param nameSpaceURI the XML-namespace
@@ -238,7 +238,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 * searches for the first attribute occurence in this element or any ancestors
+	 * searches for the first attribute occurrence in this element or any ancestors
 	 *
 	 * @param attrib the attribute name
 	 * @param nameSpaceURI the XML-namespace
