@@ -724,7 +724,7 @@ class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	void testStringToURL() throws Exception
 	{
-		if (File.separator.equals("\\"))
+		if (PlatformUtil.isWindows())
 		{
 			// test for an existing directory (a trailing slash is appended by StringToURL)
 			assertTrue(UrlUtil.stringToURL("c:\\temp\\").getPath().startsWith(new URL("File:/c:/temp").getPath()));
@@ -823,6 +823,7 @@ class UrlUtilTest extends JDFTestCaseBase
 			assertEquals("file:/fooBar/4%e2%82%ac.txt", s);
 			assertEquals("file:/a/4%25.txt", UrlUtil.fileToUrl(new File("/a/4%.txt"), false));
 		}
+		assertEquals("a,b.txt", UrlUtil.getFileName(UrlUtil.fileToUrl(new File("a,b.txt"), false), null));
 	}
 
 	/**
@@ -860,6 +861,8 @@ class UrlUtilTest extends JDFTestCaseBase
 	void testURLToFileName()
 	{
 		assertEquals("b.c", UrlUtil.urlToFileName("a:b.c"));
+		assertEquals("b,c", UrlUtil.urlToFileName("a:b,c"));
+		assertEquals("b c", UrlUtil.urlToFileName("a:b%20c"));
 		assertEquals("b.c", UrlUtil.urlToFileName("http:/b.c?gg"));
 	}
 

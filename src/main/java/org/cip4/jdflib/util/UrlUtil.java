@@ -196,7 +196,7 @@ public class UrlUtil
 	/**
 	 * strings that must be escaped in urls
 	 */
-	public static final String m_URIEscape = "|#%?@&=+$,;[]\\\"\'<>^{}~*";
+	public static final String m_URIEscape = "|#%?@&=+$;[]\\\"\'<>^{}~*";
 
 	/**
 	 * strings that must be escaped in uncs
