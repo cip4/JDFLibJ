@@ -904,6 +904,8 @@ class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("//host/dir/file"));
 		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("file://host/dir/file"));
 		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("file:\\\\host\\dir\\file"));
+		assertEquals("\\\\host\\dir\\a - .b".length(), UrlUtil.urlToUNC("FILE://host/dir/a%20%E2%80%93%20.b").length());
+
 	}
 
 	/**
@@ -1303,7 +1305,12 @@ class UrlUtilTest extends JDFTestCaseBase
 	{
 		assertEquals("file://host/dir/a%20a.b", UrlUtil.normalize("\\\\host\\dir\\a a.b"));
 		assertEquals("file://host/dir/a%20ö.b", UrlUtil.normalize("\\\\host\\dir\\a ö.b"));
+		assertEquals("file://host/dir/a%2520ö.b", UrlUtil.normalize("\\\\host\\dir\\a%20ö.b"));
 		assertEquals("file://host/dir/a%20ö.b", UrlUtil.normalize("FILE://host/dir/a ö.b"));
+		assertEquals("file://host/dir/a%20ö.b", UrlUtil.normalize("FILE://host/dir/a%20ö.b"));
+		assertEquals("file://host/dir/a%20ö.b", UrlUtil.normalize("FILE://host/dir/a%20ö.b"));
+		assertEquals("file://host/dir/a%20-%20.b".length(), UrlUtil.normalize("FILE://host/dir/a%20%E2%80%93%20.b").length());
+
 	}
 
 	/**
