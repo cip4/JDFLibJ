@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -113,28 +113,6 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	public JDFColorSpaceConversionOp(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
-	}
-
-	/**
-	 * (26) getCreateFileSpec
-	 * 
-	 * 
-	 * @return JDFFileSpec the element
-	 */
-	public JDFFileSpec getCreateFileSpec()
-	{
-		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
-	}
-
-	/**
-	 * (27) const get element FileSpec
-	 * 
-	 * 
-	 * @return JDFFileSpec the element default is getFileSpec(0)
-	 */
-	public JDFFileSpec getFileSpec()
-	{
-		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**

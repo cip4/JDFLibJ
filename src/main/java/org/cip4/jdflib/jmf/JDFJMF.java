@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -517,17 +517,6 @@ public class JDFJMF extends JDFAutoJMF
 	}
 
 	/**
-	 * Get the 0h command
-	 *
-	 * @return JDFCommand: the message element
-	 * 
-	 */
-	public JDFCommand getCommand()
-	{
-		return getCommand(0);
-	}
-
-	/**
 	 *
 	 * @param i
 	 * @param bCreate
@@ -542,17 +531,6 @@ public class JDFJMF extends JDFAutoJMF
 			return (JDFCommand) getCreateMessageElement(JDFMessage.EnumFamily.Command, null, i);
 		}
 		return (JDFCommand) getMessageElement(JDFMessage.EnumFamily.Command, null, i);
-	}
-
-	/**
-	 * Get the 0th query,
-	 *
-	 * @return JDFQuery the message element
-	 *
-	 */
-	public JDFQuery getQuery()
-	{
-		return getQuery(0);
 	}
 
 	/**
@@ -576,17 +554,6 @@ public class JDFJMF extends JDFAutoJMF
 	/**
 	 * getResponse()
 	 *
-	 * @return JDFResponse the message element
-	 *
-	 */
-	public JDFResponse getResponse()
-	{
-		return getResponse(0);
-	}
-
-	/**
-	 * getResponse()
-	 *
 	 * @param i
 	 * @param bCreate
 	 * @return
@@ -600,17 +567,6 @@ public class JDFJMF extends JDFAutoJMF
 			return (JDFResponse) getCreateMessageElement(JDFMessage.EnumFamily.Response, null, i);
 		}
 		return (JDFResponse) getMessageElement(JDFMessage.EnumFamily.Response, null, i);
-	}
-
-	/**
-	 * Get the 0th signal,
-	 *
-	 * @return JDFSignal the message element
-	 *
-	 */
-	public JDFSignal getSignal()
-	{
-		return getSignal(0);
 	}
 
 	/**
@@ -864,17 +820,6 @@ public class JDFJMF extends JDFAutoJMF
 			}
 		}
 		return vM;
-	}
-
-	/**
-	 * Get the 0 acknowledge,
-	 *
-	 * @return JDFAcknowledge: the message element
-	 *
-	 */
-	public JDFAcknowledge getAcknowledge()
-	{
-		return getAcknowledge(0);
 	}
 
 	/**

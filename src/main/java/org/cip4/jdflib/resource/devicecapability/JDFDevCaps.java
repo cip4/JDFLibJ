@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -129,7 +129,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFDevCaps(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFDevCaps(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFDevCaps(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFDevCaps(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,7 +154,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFDevCaps(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFDevCaps(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,7 +170,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDevCapRef(String value)
+	public void setDevCapRef(final String value)
 	{
 		setAttribute(AttributeName.DEVCAPREF, value, null);
 	}
@@ -180,7 +180,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 *
 	 * @param dc the DevCap to set
 	 */
-	public void setDevCapRef(JDFDevCap dc)
+	public void setDevCapRef(final JDFDevCap dc)
 	{
 		if (dc != null)
 		{
@@ -202,7 +202,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	@Override
 	public JDFDevCap appendDevCap()
 	{
-		JDFDevCap dc = super.appendDevCap();
+		final JDFDevCap dc = super.appendDevCap();
 		if (hasAttribute(AttributeName.NAME))
 			dc.setName(getName());
 		return dc;
@@ -215,8 +215,8 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 */
 	public JDFDevCap appendDevCapInPool()
 	{
-		JDFDevCapPool dcp = getCreateDevCapPool();
-		JDFDevCap dc = dcp.appendDevCap();
+		final JDFDevCapPool dcp = getCreateDevCapPool();
+		final JDFDevCap dc = dcp.appendDevCap();
 		final String id2 = dc.getID();
 		setDevCapRef(id2);
 		if (hasAttribute(AttributeName.NAME))
@@ -239,7 +239,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 *
 	 * @return JDFDevCapPool the pool
 	 */
-	private KElement getParentPool(String poolName)
+	private KElement getParentPool(final String poolName)
 	{
 		final KElement parent = getParentNode_KElement();
 		if (!(parent instanceof JDFDeviceCap) && !(parent instanceof JDFMessageService))
@@ -252,7 +252,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 *
 	 * @return JDFDevCapPool the pool
 	 */
-	private KElement getCreateParentPool(String poolName)
+	private KElement getCreateParentPool(final String poolName)
 	{
 		final KElement parent = getParentNode_KElement();
 		if (!(parent instanceof JDFDeviceCap) && !(parent instanceof JDFMessageService))
@@ -301,6 +301,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 *
 	 * @return the DevCap
 	 */
+	@Override
 	public JDFDevCap getDevCap()
 	{
 		final String dcr = getAttribute(AttributeName.DEVCAPREF, null, null);
@@ -329,9 +330,9 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * @deprecated use getNamePathVector
 	 */
 	@Deprecated
-	public final String getNamePath(boolean onlyNames)
+	public final String getNamePath(final boolean onlyNames)
 	{
-		StringBuffer xPath = new StringBuffer(getName());
+		final StringBuffer xPath = new StringBuffer(getName());
 		if (!onlyNames)
 		{
 			xPath.append("[Context=").append(getContext().getName()).append(", LinkUsage=").append(getLinkUsage().getName()).append("]");
@@ -354,11 +355,11 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	{
 		String result = getDevCapsName();
 		final EnumContext cont = getContext();
-		VString vResult = new VString();
+		final VString vResult = new VString();
 		if (cont.equals(EnumContext.JMF) && (getParentNode() instanceof JDFMessageService) && result.length() > 4)
 		{
-			JDFMessageService serv = (JDFMessageService) getParentNode();
-			Vector<EnumFamily> vf = serv.getFamilies();
+			final JDFMessageService serv = (JDFMessageService) getParentNode();
+			final Vector<EnumFamily> vf = serv.getFamilies();
 			if (vf != null)
 			{
 				final int size = vf.size();
@@ -379,7 +380,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 			}
 			else if (cont.equals(EnumContext.Resource))
 			{
-				String nam = result;
+				final String nam = result;
 				result = ElementName.JDF + "/" + ElementName.RESOURCEPOOL + "/" + result;
 				for (int i = 0; i < maxPartitionDepth; i++)
 				{
@@ -420,17 +421,17 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 */
 	public final VElement getDevCapVector()
 	{
-		VElement vDevCap = getChildElementVector(ElementName.DEVCAP, null, null, true, 0, false);
+		final VElement vDevCap = getChildElementVector(ElementName.DEVCAP, null, null, true, 0, false);
 		final String dcr = getAttribute(AttributeName.DEVCAPREF, null, null);
 		if (dcr != null)
 		{
 			final JDFDevCapPool dcp = getDevCapPool();
 			if (dcp != null)
 			{
-				VString v = StringUtil.tokenize(dcr, " ", false);
+				final VString v = StringUtil.tokenize(dcr, " ", false);
 				for (int i = 0; i < v.size(); i++)
 				{
-					String s = v.get(i);
+					final String s = v.get(i);
 					final KElement dcre = dcp.getChildWithAttribute(ElementName.DEVCAP, AttributeName.ID, null, s, 0, true);
 					vDevCap.appendUnique(dcre);
 				}
@@ -454,7 +455,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * @throws JDFException if DevCaps/@DevCapRef refers to the DevCap elements in a non-existent DevCapPool
 	 * @throws JDFException if DevCaps/@DevCapRef refers to the non-existent DevCap
 	 */
-	public final KElement devCapReport(KElement elem, EnumFitsValue testlists, EnumValidationLevel level, boolean ignoreExtensions, KElement parentReport)
+	public final KElement devCapReport(final KElement elem, final EnumFitsValue testlists, final EnumValidationLevel level, final boolean ignoreExtensions, final KElement parentReport)
 	{
 		if (elem == null)
 			return null;
@@ -464,11 +465,11 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 			throw new JDFException("JDFDevCaps.devCapReport: Invalid DeviceCap: DevCaps/@DevCapRef refers to the non-existent DevCap: " + getDevCapRef());
 		}
 
-		KElement r = parentReport.appendElement("Invalid" + getContext().getName());
+		final KElement r = parentReport.appendElement("Invalid" + getContext().getName());
 		for (int i = 0; i < dcV.size(); i++)
 		{
 			final JDFDevCap dc = (JDFDevCap) dcV.elementAt(i);
-			KElement stateTestResult = dc.stateReport(elem, testlists, level, ignoreExtensions, true, r);
+			final KElement stateTestResult = dc.stateReport(elem, testlists, level, ignoreExtensions, true, r);
 			if (stateTestResult == null)
 			{
 				r.deleteNode();
@@ -494,7 +495,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 		String s = getName();
 		if (s == null)
 			return null;
-		EnumContext context = getContext();
+		final EnumContext context = getContext();
 		if (EnumContext.Link.equals(context))
 			s += JDFConstants.LINK;
 		return s;
@@ -507,13 +508,13 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 *
 	 * @param root root of the XMLDoc document where the CapXPaths must be corrected
 	 */
-	private final static void correction_Static(KElement root)
+	private final static void correction_Static(final KElement root)
 	{
-		VElement v = root.getChildElementVector("InvalidResource", null, null, true, 0, false);
+		final VElement v = root.getChildElementVector("InvalidResource", null, null, true, 0, false);
 		for (int i = 0; i < v.size(); i++)
 		{
-			KElement invRes = v.elementAt(i);
-			VElement vv = invRes.getChildElementVector(null, null, null, true, 0, false);
+			final KElement invRes = v.elementAt(i);
+			final VElement vv = invRes.getChildElementVector(null, null, null, true, 0, false);
 			for (int j = vv.size() - 1; j >= 0; j--)
 			{
 				capXPathCorrection_Static(vv.elementAt(j), invRes.getAttribute("CapXPath"));
@@ -523,13 +524,13 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 		return;
 	}
 
-	private final static void removePoolElements_Static(KElement root)
+	private final static void removePoolElements_Static(final KElement root)
 	{
-		VElement v = root.getChildElementVector(null, null, null, true, 0, false);
+		final VElement v = root.getChildElementVector(null, null, null, true, 0, false);
 		for (int j = v.size() - 1; j >= 0; j--)
 		{
-			KElement el = v.elementAt(j);
-			String nam = el.getNodeName();
+			final KElement el = v.elementAt(j);
+			final String nam = el.getNodeName();
 			if (nam.equals("InvalidAttributes") || nam.equals("InvalidElements") || nam.equals("UnknownAttributes") || nam.equals("UnknownElements")
 					|| nam.equals("MissingAttributes"))
 			{
@@ -539,7 +540,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 			}
 
 		}
-		VElement vv = root.getChildElementVector(null, null, null, true, 0, false);
+		final VElement vv = root.getChildElementVector(null, null, null, true, 0, false);
 		for (int i = vv.size() - 1; i >= 0; i--)
 		{
 			removePoolElements_Static(vv.elementAt(i));
@@ -555,16 +556,16 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 *        From this element we have access to its parent and children and can compare their CapXPath's
 	 * @param originalPath parent CapXPath before correction.
 	 */
-	private final static void capXPathCorrection_Static(KElement elem, String originalPath)
+	private final static void capXPathCorrection_Static(final KElement elem, final String originalPath)
 	{
-		String parentPath = elem.getParentNode_KElement().getAttribute("CapXPath");
+		final String parentPath = elem.getParentNode_KElement().getAttribute("CapXPath");
 
-		Vector vEl = elem.getChildElementVector(null, null, null, true, 0, false);
+		final Vector vEl = elem.getChildElementVector(null, null, null, true, 0, false);
 
 		for (int i = 0; i < vEl.size(); i++)
 		{
-			KElement child = (KElement) vEl.elementAt(i);
-			String childPath = child.getAttribute("CapXPath");
+			final KElement child = (KElement) vEl.elementAt(i);
+			final String childPath = child.getAttribute("CapXPath");
 
 			if (!parentPath.equals(JDFConstants.EMPTYSTRING) && !childPath.equals(JDFConstants.EMPTYSTRING))
 			{
@@ -577,7 +578,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 				child.setAttribute("CapXPath", parentPath + "/" + childPathPart);
 
 				// recursion to set everywhere the right CapXPath
-				VElement vSubEl = child.getChildElementVector(null, null, null, true, 0, false);
+				final VElement vSubEl = child.getChildElementVector(null, null, null, true, 0, false);
 				for (int j = 0; j < vSubEl.size(); j++)
 				{
 					capXPathCorrection_Static(vSubEl.elementAt(j), childPath);
@@ -593,11 +594,11 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * @param moveToElement the first element - new parent for the children of the second element
 	 * @param moveFromElement the second element - element whose children will be removed
 	 */
-	private final static void moveChildElementVector_Static(KElement moveToElement, KElement moveFromElement)
+	private final static void moveChildElementVector_Static(final KElement moveToElement, final KElement moveFromElement)
 	{
 		if (moveToElement != null && moveFromElement != null)
 		{
-			VElement v = moveFromElement.getChildElementVector(null, null, null, true, 0, false);
+			final VElement v = moveFromElement.getChildElementVector(null, null, null, true, 0, false);
 			for (int i = 0; i < v.size(); i++)
 			{
 				moveToElement.moveElement(v.elementAt(i), null);
@@ -612,13 +613,13 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * @param node the node to search in
 	 * @return VElement - the element vector of matching elements, <code>null</code> if none were found
 	 */
-	private VElement getMatchingElementsFromNode(JDFNode node)
+	private VElement getMatchingElementsFromNode(final JDFNode node)
 	{
 		VElement vElem = new VElement();
 
 		final String nam = getName();
 		final EnumContext context = getContext();
-		JDFResourceLinkPool resLinkPool = node.getResourceLinkPool();
+		final JDFResourceLinkPool resLinkPool = node.getResourceLinkPool();
 
 		if (context.equals(EnumContext.Element))
 		{ // vElem - for a common return type in all cases
@@ -637,14 +638,14 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 			{
 				final EnumUsage linkUsage = getLinkUsage();
 				final String procUsage = getProcessUsage();
-				boolean bLink = context.equals(EnumContext.Link);
-				VElement vElemLinks = resLinkPool.getInOutLinks(linkUsage, true, nam, null);
+				final boolean bLink = context.equals(EnumContext.Link);
+				final VElement vElemLinks = resLinkPool.getInOutLinks(linkUsage, true, nam, null);
 				if (vElemLinks != null)
 				{
 					final int linkSize = vElemLinks.size() - 1;
 					for (int j = linkSize; j >= 0; j--)
 					{
-						JDFResourceLink rl = (JDFResourceLink) vElemLinks.elementAt(j);
+						final JDFResourceLink rl = (JDFResourceLink) vElemLinks.elementAt(j);
 						final String rlProcessUsage = rl.getProcessUsage();
 						if (!rlProcessUsage.equals(procUsage))
 						{
@@ -684,7 +685,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * @param node the node to search in
 	 * @return VElement - the element vector of matching elements, <code>null</code> if none were found
 	 */
-	public VElement getMatchingElementsFromJMF(JDFMessage messageElement)
+	public VElement getMatchingElementsFromJMF(final JDFMessage messageElement)
 	{
 		final String nam = getName();
 		final EnumContext context = getContext();
@@ -722,7 +723,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 *
 	 * @return KElement - the last element that was appended
 	 */
-	public KElement appendMatchingElementsToNode(JDFNode node, boolean bAll, VectorMap indexResMap, boolean bLink)
+	public KElement appendMatchingElementsToNode(final JDFNode node, final boolean bAll, final VectorMap indexResMap, final boolean bLink)
 	{
 		KElement e = null;
 
@@ -759,7 +760,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 			{
 				final EnumUsage linkUsage = getLinkUsage();
 				final String procUsage = getProcessUsage();
-				JDFAttributeMap map = new JDFAttributeMap();
+				final JDFAttributeMap map = new JDFAttributeMap();
 				EnumProcessUsage pu = null;
 
 				if (procUsage != null && procUsage.length() > 0)
@@ -773,17 +774,17 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 					map.put(AttributeName.USAGE, linkUsage.getName());
 				}
 
-				VElement links = node.getResourceLinks(nam, map, null);
+				final VElement links = node.getResourceLinks(nam, map, null);
 				// now look for the correct combinedprocessindex - remove all
 				// non-matching
-				JDFIntegerRangeList tocNum = getTypeOccurrenceNum();
-				JDFIntegerList tocNum2 = tocNum == null ? null : tocNum.getIntegerList();
+				final JDFIntegerRangeList tocNum = getTypeOccurrenceNum();
+				final JDFIntegerList tocNum2 = tocNum == null ? null : tocNum.getIntegerList();
 				if (links != null && tocNum != null)
 				{
 					for (int ll = links.size() - 1; ll >= 0; ll--)
 					{
-						JDFResourceLink rl = (JDFResourceLink) links.elementAt(ll);
-						JDFIntegerList il = rl.getCombinedProcessIndex();
+						final JDFResourceLink rl = (JDFResourceLink) links.elementAt(ll);
+						final JDFIntegerList il = rl.getCombinedProcessIndex();
 						if (il == null || !il.contains(tocNum2))
 							links.remove(ll);
 					}
@@ -798,13 +799,13 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 						int kk = (tocNum2 == null || tocNum2.size() == 0) ? -1 : tocNum2.getInt(0);
 						if (EnumUsage.Input.equals(linkUsage))
 							kk--;
-						Vector<JDFResource> v = (Vector) indexResMap.get(Integer.valueOf(kk));
+						final Vector<JDFResource> v = (Vector) indexResMap.get(Integer.valueOf(kk));
 						if (v != null)
 						{
-							int sv = v.size();
+							final int sv = v.size();
 							for (int kkk = 0; kkk < sv; kkk++)
 							{
-								JDFResource rr = v.elementAt(kkk);
+								final JDFResource rr = v.elementAt(kkk);
 								if (rr.getLocalName().equals(nam))
 								{
 									r = rr;
@@ -821,7 +822,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 						final String id = devCap.getAttribute(AttributeName.ID, null, null);
 						if (id != null)
 						{
-							JDFResourceLink rl = node.getLink(r, linkUsage);
+							final JDFResourceLink rl = node.getLink(r, linkUsage);
 
 							r.setID(id);
 							if (rl != null)
@@ -847,7 +848,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 					e = node.getLink(r, linkUsage);
 					if (e != null)
 					{
-						JDFResourceLink rl = (JDFResourceLink) e;
+						final JDFResourceLink rl = (JDFResourceLink) e;
 						rl.setCombinedProcessIndex(tocNum2);
 					}
 
@@ -855,10 +856,10 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 					final JDFEnumerationState pidKeys = devCap.getEnumerationState(AttributeName.PARTIDKEYS);
 					if (pidKeys != null)
 					{
-						VString keys = pidKeys.getAllowedValueList();
+						final VString keys = pidKeys.getAllowedValueList();
 						if (keys != null && keys.size() > 0)
 						{
-							JDFAttributeMap keyMap = new JDFAttributeMap();
+							final JDFAttributeMap keyMap = new JDFAttributeMap();
 							for (int k = 0; k < keys.size(); k++)
 							{
 								String sk = "PartKey" + k;
@@ -890,14 +891,14 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 *
 	 * @return boolean true if a default element was created, else false
 	 */
-	public boolean setDefaultsFromCaps(JDFNode node, boolean bAll)
+	public boolean setDefaultsFromCaps(final JDFNode node, final boolean bAll)
 	{
 		boolean modified = false;
 
 		final JDFDevCap dc = getDevCap();
 		if (dc != null)
 		{
-			VElement v = getMatchingElementsFromNode(node);
+			final VElement v = getMatchingElementsFromNode(node);
 			if (v != null)
 			{
 				final int size = v.size();
@@ -920,13 +921,13 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	{
 		int m = 0;
 
-		VElement vDC = getDevCapVector();
+		final VElement vDC = getDevCapVector();
 		if (vDC != null)
 		{
-			int svDC = vDC.size();
+			final int svDC = vDC.size();
 			for (int i = 0; i < svDC; i++)
 			{
-				JDFDevCap dc = (JDFDevCap) vDC.elementAt(i);
+				final JDFDevCap dc = (JDFDevCap) vDC.elementAt(i);
 				if (m < dc.getMaxOccurs())
 					m = dc.getMaxOccurs();
 			}
@@ -945,13 +946,13 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	{
 		int m = Integer.MAX_VALUE;
 
-		VElement vDC = getDevCapVector();
+		final VElement vDC = getDevCapVector();
 		if (vDC != null)
 		{
-			int svDC = vDC.size();
+			final int svDC = vDC.size();
 			for (int i = 0; i < svDC; i++)
 			{
-				JDFDevCap dc = (JDFDevCap) vDC.elementAt(i);
+				final JDFDevCap dc = (JDFDevCap) vDC.elementAt(i);
 				if (m > dc.getMinOccurs())
 					m = dc.getMinOccurs();
 			}
@@ -976,9 +977,9 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * @param devCaps
 	 * @return
 	 */
-	public void analyzeDevCaps(final KElement testRoot, EnumFitsValue testlists, EnumValidationLevel level, KElement mrp, KElement irp, HashSet goodElems, HashMap badElems, boolean ignoreExtensions)
+	public void analyzeDevCaps(final KElement testRoot, final EnumFitsValue testlists, final EnumValidationLevel level, final KElement mrp, final KElement irp, final HashSet goodElems, final HashMap badElems, final boolean ignoreExtensions)
 	{
-		EnumAvailability av = getModuleAvailability();
+		final EnumAvailability av = getModuleAvailability();
 		KElement xpathRoot = testRoot;
 		VElement vElemResources = null;
 		if (testRoot instanceof JDFNode)
@@ -994,7 +995,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 			vElemResources = getMatchingElementsFromJMF((JDFMessage) testRoot);
 		}
 
-		int svElemResources = vElemResources == null ? 0 : vElemResources.size();
+		final int svElemResources = vElemResources == null ? 0 : vElemResources.size();
 
 		final EnumContext context = getContext();
 		KElement r = null;
@@ -1064,11 +1065,11 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 				final KElement elem = vElemResources.item(j);
 				if (!goodElems.contains(elem))
 				{
-					KElement report = devCapReport(elem, testlists, level, ignoreExtensions, irp); // InvalidResources
+					final KElement report = devCapReport(elem, testlists, level, ignoreExtensions, irp); // InvalidResources
 					if (report == null)
 					{
 						goodElems.add(elem);
-						KElement badReport = (KElement) badElems.get(elem);
+						final KElement badReport = (KElement) badElems.get(elem);
 						if (badReport != null)
 							badReport.deleteNode();
 					}
@@ -1097,9 +1098,9 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib. core.KElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
-	public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
 	{
-		VString vs = super.getInvalidAttributes(level, bIgnorePrivate, nMax);
+		final VString vs = super.getInvalidAttributes(level, bIgnorePrivate, nMax);
 		if (nMax > 0 && vs.size() > nMax)
 			return vs;
 		if (!EnumValidationLevel.RecursiveComplete.equals(level) && !EnumValidationLevel.RecursiveIncomplete.equals(level))
@@ -1109,16 +1110,16 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 		if (hasAttribute(AttributeName.DEVCAPREF))
 		{
-			JDFDevCapPool devCapPool = getDevCapPool();
+			final JDFDevCapPool devCapPool = getDevCapPool();
 			if (devCapPool == null)
 			{
 				vs.add(AttributeName.DEVCAPREF);
 				return vs;
 			}
-			VString idRefs = getDevCapRef();
+			final VString idRefs = getDevCapRef();
 			for (int i = 0; i < idRefs.size(); i++)
 			{
-				JDFDevCap devCap = devCapPool.getDevCap(idRefs.get(i));
+				final JDFDevCap devCap = devCapPool.getDevCap(idRefs.get(i));
 				if (devCap == null)
 				{
 					vs.add(AttributeName.DEVCAPREF);
@@ -1135,7 +1136,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * @see org.cip4.jdflib.ifaces.IModuleCapability#appendModuleRef(java.lang.String )
 	 */
 	@Override
-	public JDFModuleCap appendModuleRef(String id)
+	public JDFModuleCap appendModuleRef(final String id)
 	{
 		return JDFModulePool.appendModuleRef(this, id);
 	}

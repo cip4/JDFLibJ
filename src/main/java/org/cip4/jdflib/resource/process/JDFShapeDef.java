@@ -52,15 +52,4 @@ public class JDFShapeDef extends JDFAutoShapeDef
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * (26) getCreateFileSpec
-	 * 
-	 * @param iSkip number of elements to skip
-	 * @return JDFFileSpec the element
-	 */
-	public JDFFileSpec getCreateFileSpec()
-	{
-		return getCreateFileSpec(0);
-	}
-
 }

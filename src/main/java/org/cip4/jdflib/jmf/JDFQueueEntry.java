@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -123,7 +123,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 			super();
 			if (fastStat == null)
 			{
-				HashMap<String, MyInteger> fastStat2 = new HashMap<String, MyInteger>();
+				final HashMap<String, MyInteger> fastStat2 = new HashMap<String, MyInteger>();
 				final Iterator<EnumQueueEntryStatus> it = EnumQueueEntryStatus.iterator();
 				while (it.hasNext())
 				{
@@ -177,7 +177,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 				{
 					final String d1 = q1.getAttribute(AttributeName.ENDTIME, null, null);
 					final String d2 = q2.getAttribute(AttributeName.ENDTIME, null, null);
-					int d = ContainerUtil.compare(d2, d1);
+					final int d = ContainerUtil.compare(d2, d1);
 					if (d != 0)
 					{
 						return d;
@@ -602,7 +602,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	 */
 	public boolean isCompleted()
 	{
-		String status = getAttribute(AttributeName.STATUS, null, null);
+		final String status = getAttribute(AttributeName.STATUS, null, null);
 		return "Completed".equals(status) || "Removed".equals(status) || "Aborted".equals(status);
 	}
 
@@ -615,30 +615,6 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	public int getSortPriority()
 	{
 		return getSortPriority(getQueueEntryStatus(), getPriority());
-	}
-
-	/**
-	 * (24) const get element JobPhase
-	 * 
-	 * @return JDFJobPhase the element
-	 * @deprecated use getJobPhase(n) this is a legacy version
-	 */
-	@Deprecated
-	public JDFJobPhase getJobPhase()
-	{
-		return getJobPhase(0);
-	}
-
-	/**
-	 * (24) const get element JobPhase
-	 * 
-	 * @return JDFJobPhase the element
-	 * @deprecated use getCreateJobPhase(n) this is a legacy version
-	 */
-	@Deprecated
-	public JDFJobPhase getCreateJobPhase()
-	{
-		return getCreateJobPhase(0);
 	}
 
 	/**
@@ -703,7 +679,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	 * @param value
 	 */
 	@Override
-	public void setEndTime(JDFDate value)
+	public void setEndTime(final JDFDate value)
 	{
 		setSortDate(AttributeName.ENDTIME, value == null ? null : value.getDateTimeISO());
 	}
@@ -713,7 +689,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	 * @param value
 	 */
 	@Override
-	public void setStartTime(JDFDate value)
+	public void setStartTime(final JDFDate value)
 	{
 		setSortDate(AttributeName.STARTTIME, value == null ? null : value.getDateTimeISO());
 	}
@@ -722,7 +698,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	 * @param attName
 	 * @param value
 	 */
-	private void setSortDate(String attName, String value)
+	private void setSortDate(final String attName, String value)
 	{
 		if (value == null)
 			value = new JDFDate().getDateTimeISO();
@@ -747,7 +723,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	 * @param value
 	 */
 	@Override
-	public void setSubmissionTime(JDFDate value)
+	public void setSubmissionTime(final JDFDate value)
 	{
 		setSortDate(AttributeName.SUBMISSIONTIME, value == null ? null : value.getDateTimeISO());
 	}

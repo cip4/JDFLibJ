@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -227,16 +227,6 @@ public class JDFResponse extends JDFAutoResponse
 	}
 
 	/**
-	 * 
-	 * 
-	 * @return JDFNotification the element
-	 */
-	public JDFNotification getCreateNotification()
-	{
-		return getCreateNotification(0);
-	}
-
-	/**
 	 * Set ErrorText, (Notification/Comment/#text) also sets Notification/@Type=Error and Notification/@Class=Error doesn't create a notification if ErroerText=null
 	 * 
 	 * @param errorText new error text
@@ -292,16 +282,6 @@ public class JDFResponse extends JDFAutoResponse
 		removeChildren(null, null, null);
 		setAcknowledged(true);
 		return ack;
-	}
-
-	/**
-	 * legacy get first notification
-	 * 
-	 * @return
-	 */
-	public JDFNotification getNotification()
-	{
-		return getNotification(0);
 	}
 
 }

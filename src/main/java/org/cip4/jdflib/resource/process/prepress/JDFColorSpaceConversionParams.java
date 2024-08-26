@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,7 +97,7 @@ public class JDFColorSpaceConversionParams extends JDFAutoColorSpaceConversionPa
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorSpaceConversionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFColorSpaceConversionParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -110,7 +110,7 @@ public class JDFColorSpaceConversionParams extends JDFAutoColorSpaceConversionPa
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorSpaceConversionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFColorSpaceConversionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -124,7 +124,8 @@ public class JDFColorSpaceConversionParams extends JDFAutoColorSpaceConversionPa
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFColorSpaceConversionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFColorSpaceConversionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,31 +143,9 @@ public class JDFColorSpaceConversionParams extends JDFAutoColorSpaceConversionPa
 	 */
 	public JDFFileSpec appendFinalTargetDevice()
 	{
-		JDFFileSpec res = appendFileSpec();
+		final JDFFileSpec res = appendFileSpec();
 		res.setResourceUsage("FinalTargetDevice");
 		return res;
-	}
-
-	/**
-	 * (26) getCreateFileSpec
-	 * 
-	 * 
-	 * @return JDFFileSpec the element
-	 */
-	public JDFFileSpec getCreateFileSpec()
-	{
-		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
-	}
-
-	/**
-	 * (27) const get element FileSpec
-	 * 
-	 * 
-	 * @return JDFFileSpec the element default is getFileSpec(0)
-	 */
-	public JDFFileSpec getFileSpec()
-	{
-		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
