@@ -79,7 +79,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHole;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkHole extends WalkResource
+public class WalkHole extends WalkJDFElement
 {
 	/**
 	 * 
@@ -113,7 +113,7 @@ public class WalkHole extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected String getXJDFName(KElement jdf)
+	protected String getXJDFName(final KElement jdf)
 	{
 		return XJDFConstants.HolePattern;
 	}

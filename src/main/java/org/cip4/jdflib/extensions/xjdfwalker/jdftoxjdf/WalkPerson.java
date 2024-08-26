@@ -49,7 +49,7 @@ import org.cip4.jdflib.resource.process.JDFPerson;
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen at this point only a dummy since we have a specific WalkResourceAudit child
  */
-public class WalkPerson extends WalkResource
+public class WalkPerson extends WalkJDFElement
 {
 
 	/**
