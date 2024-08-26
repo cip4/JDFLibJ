@@ -956,6 +956,26 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ContentObject
+	 *
+	 * @return JDFContentObject the element
+	 */
+	public JDFContentObject getContentObject()
+	{
+		return (JDFContentObject) getElement(ElementName.CONTENTOBJECT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateContentObject
+	 * 
+	 * @return JDFContentObject the element
+	 */
+	public JDFContentObject getCreateContentObject()
+	{
+		return (JDFContentObject) getCreateElement_JDFElement(ElementName.CONTENTOBJECT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateContentObject
 	 * 
 	 * @param iSkip number of elements to skip
@@ -995,6 +1015,26 @@ public abstract class JDFAutoLayout extends JDFResource
 	public JDFContentObject appendContentObject()
 	{
 		return (JDFContentObject) appendElement(ElementName.CONTENTOBJECT, null);
+	}
+
+	/**
+	 * (24) const get element InsertSheet
+	 *
+	 * @return JDFInsertSheet the element
+	 */
+	public JDFInsertSheet getInsertSheet()
+	{
+		return (JDFInsertSheet) getElement(ElementName.INSERTSHEET, null, 0);
+	}
+
+	/**
+	 * (25) getCreateInsertSheet
+	 * 
+	 * @return JDFInsertSheet the element
+	 */
+	public JDFInsertSheet getCreateInsertSheet()
+	{
+		return (JDFInsertSheet) getCreateElement_JDFElement(ElementName.INSERTSHEET, null, 0);
 	}
 
 	/**
@@ -1110,6 +1150,26 @@ public abstract class JDFAutoLayout extends JDFResource
 	}
 
 	/**
+	 * (24) const get element MarkObject
+	 *
+	 * @return JDFMarkObject the element
+	 */
+	public JDFMarkObject getMarkObject()
+	{
+		return (JDFMarkObject) getElement(ElementName.MARKOBJECT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMarkObject
+	 * 
+	 * @return JDFMarkObject the element
+	 */
+	public JDFMarkObject getCreateMarkObject()
+	{
+		return (JDFMarkObject) getCreateElement_JDFElement(ElementName.MARKOBJECT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateMarkObject
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1149,6 +1209,26 @@ public abstract class JDFAutoLayout extends JDFResource
 	public JDFMarkObject appendMarkObject()
 	{
 		return (JDFMarkObject) appendElement(ElementName.MARKOBJECT, null);
+	}
+
+	/**
+	 * (24) const get element Media
+	 *
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getMedia()
+	{
+		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMedia
+	 * 
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateMedia()
+	{
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**
@@ -1244,6 +1324,26 @@ public abstract class JDFAutoLayout extends JDFResource
 	}
 
 	/**
+	 * (24) const get element PageCondition
+	 *
+	 * @return JDFPageCondition the element
+	 */
+	public JDFPageCondition getPageCondition()
+	{
+		return (JDFPageCondition) getElement(ElementName.PAGECONDITION, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePageCondition
+	 * 
+	 * @return JDFPageCondition the element
+	 */
+	public JDFPageCondition getCreatePageCondition()
+	{
+		return (JDFPageCondition) getCreateElement_JDFElement(ElementName.PAGECONDITION, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePageCondition
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1286,6 +1386,26 @@ public abstract class JDFAutoLayout extends JDFResource
 	}
 
 	/**
+	 * (24) const get element SheetCondition
+	 *
+	 * @return JDFSheetCondition the element
+	 */
+	public JDFSheetCondition getSheetCondition()
+	{
+		return (JDFSheetCondition) getElement(ElementName.SHEETCONDITION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSheetCondition
+	 * 
+	 * @return JDFSheetCondition the element
+	 */
+	public JDFSheetCondition getCreateSheetCondition()
+	{
+		return (JDFSheetCondition) getCreateElement_JDFElement(ElementName.SHEETCONDITION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateSheetCondition
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1325,6 +1445,26 @@ public abstract class JDFAutoLayout extends JDFResource
 	public JDFSheetCondition appendSheetCondition()
 	{
 		return (JDFSheetCondition) appendElement(ElementName.SHEETCONDITION, null);
+	}
+
+	/**
+	 * (24) const get element Signature
+	 *
+	 * @return JDFSignature the element
+	 */
+	public JDFSignature getSignature()
+	{
+		return (JDFSignature) getElement(ElementName.SIGNATURE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSignature
+	 * 
+	 * @return JDFSignature the element
+	 */
+	public JDFSignature getCreateSignature()
+	{
+		return (JDFSignature) getCreateElement_JDFElement(ElementName.SIGNATURE, null, 0);
 	}
 
 	/**

@@ -354,6 +354,26 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element PageAssignedList
+	 *
+	 * @return JDFPageAssignedList the element
+	 */
+	public JDFPageAssignedList getPageAssignedList()
+	{
+		return (JDFPageAssignedList) getElement(ElementName.PAGEASSIGNEDLIST, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePageAssignedList
+	 * 
+	 * @return JDFPageAssignedList the element
+	 */
+	public JDFPageAssignedList getCreatePageAssignedList()
+	{
+		return (JDFPageAssignedList) getCreateElement_JDFElement(ElementName.PAGEASSIGNEDLIST, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePageAssignedList
 	 * 
 	 * @param iSkip number of elements to skip

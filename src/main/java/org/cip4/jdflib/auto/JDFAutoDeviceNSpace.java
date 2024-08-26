@@ -80,17 +80,17 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 
 /**
  *****************************************************************************
- * class JDFAutoDeviceNSpace : public JDFResource
+ * class JDFAutoDeviceNSpace : public JDFElement
  *****************************************************************************
  * 
  */
 
-public abstract class JDFAutoDeviceNSpace extends JDFResource
+public abstract class JDFAutoDeviceNSpace extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
@@ -156,26 +156,6 @@ public abstract class JDFAutoDeviceNSpace extends JDFResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return true if ok
-	 */
-	@Override
-	public boolean init()
-	{
-		final boolean bRet = super.init();
-		setResourceClass(JDFResource.EnumResourceClass.Parameter);
-		return bRet;
-	}
-
-	/**
-	 * @return the resource Class
-	 */
-	@Override
-	public EnumResourceClass getValidClass()
-	{
-		return JDFResource.EnumResourceClass.Parameter;
-	}
-
 	/*
 	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
@@ -229,6 +209,26 @@ public abstract class JDFAutoDeviceNSpace extends JDFResource
 	/*
 	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
+
+	/**
+	 * (24) const get element SeparationSpec
+	 *
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getSeparationSpec()
+	{
+		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSeparationSpec
+	 * 
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getCreateSeparationSpec()
+	{
+		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, 0);
+	}
 
 	/**
 	 * (26) getCreateSeparationSpec

@@ -249,6 +249,26 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	}
 
 	/**
+	 * (24) const get element CylinderPosition
+	 *
+	 * @return JDFCylinderPosition the element
+	 */
+	public JDFCylinderPosition getCylinderPosition()
+	{
+		return (JDFCylinderPosition) getElement(ElementName.CYLINDERPOSITION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCylinderPosition
+	 * 
+	 * @return JDFCylinderPosition the element
+	 */
+	public JDFCylinderPosition getCreateCylinderPosition()
+	{
+		return (JDFCylinderPosition) getCreateElement_JDFElement(ElementName.CYLINDERPOSITION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateCylinderPosition
 	 * 
 	 * @param iSkip number of elements to skip

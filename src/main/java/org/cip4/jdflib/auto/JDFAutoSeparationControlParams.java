@@ -166,6 +166,26 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element AutomatedOverPrintParams
+	 *
+	 * @return JDFAutomatedOverPrintParams the element
+	 */
+	public JDFAutomatedOverPrintParams getAutomatedOverPrintParams()
+	{
+		return (JDFAutomatedOverPrintParams) getElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateAutomatedOverPrintParams
+	 * 
+	 * @return JDFAutomatedOverPrintParams the element
+	 */
+	public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams()
+	{
+		return (JDFAutomatedOverPrintParams) getCreateElement_JDFElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateAutomatedOverPrintParams
 	 * 
 	 * @param iSkip number of elements to skip
@@ -208,13 +228,23 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
+	 * (24) const get element TransferFunctionControl
 	 *
-	 * @param refTarget the element that is referenced
+	 * @return JDFTransferFunctionControl the element
 	 */
-	public void refAutomatedOverPrintParams(JDFAutomatedOverPrintParams refTarget)
+	public JDFTransferFunctionControl getTransferFunctionControl()
 	{
-		refElement(refTarget);
+		return (JDFTransferFunctionControl) getElement(ElementName.TRANSFERFUNCTIONCONTROL, null, 0);
+	}
+
+	/**
+	 * (25) getCreateTransferFunctionControl
+	 * 
+	 * @return JDFTransferFunctionControl the element
+	 */
+	public JDFTransferFunctionControl getCreateTransferFunctionControl()
+	{
+		return (JDFTransferFunctionControl) getCreateElement_JDFElement(ElementName.TRANSFERFUNCTIONCONTROL, null, 0);
 	}
 
 	/**

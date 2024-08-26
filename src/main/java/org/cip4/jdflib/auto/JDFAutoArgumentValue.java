@@ -187,6 +187,26 @@ public abstract class JDFAutoArgumentValue extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element PreflightArgument
+	 *
+	 * @return JDFPreflightArgument the element
+	 */
+	public JDFPreflightArgument getPreflightArgument()
+	{
+		return (JDFPreflightArgument) getElement(ElementName.PREFLIGHTARGUMENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePreflightArgument
+	 * 
+	 * @return JDFPreflightArgument the element
+	 */
+	public JDFPreflightArgument getCreatePreflightArgument()
+	{
+		return (JDFPreflightArgument) getCreateElement_JDFElement(ElementName.PREFLIGHTARGUMENT, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePreflightArgument
 	 * 
 	 * @param iSkip number of elements to skip

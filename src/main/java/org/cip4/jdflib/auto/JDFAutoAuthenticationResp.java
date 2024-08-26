@@ -186,6 +186,26 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Certificate
+	 *
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCertificate()
+	{
+		return (JDFElement) getElement(ElementName.CERTIFICATE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCertificate
+	 * 
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreateCertificate()
+	{
+		return (JDFElement) getCreateElement_JDFElement(ElementName.CERTIFICATE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateCertificate
 	 * 
 	 * @param iSkip number of elements to skip

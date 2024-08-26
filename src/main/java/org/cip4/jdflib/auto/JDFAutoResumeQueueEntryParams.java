@@ -144,6 +144,26 @@ public abstract class JDFAutoResumeQueueEntryParams extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element QueueFilter
+	 *
+	 * @return JDFQueueFilter the element
+	 */
+	public JDFQueueFilter getQueueFilter()
+	{
+		return (JDFQueueFilter) getElement(ElementName.QUEUEFILTER, null, 0);
+	}
+
+	/**
+	 * (25) getCreateQueueFilter
+	 * 
+	 * @return JDFQueueFilter the element
+	 */
+	public JDFQueueFilter getCreateQueueFilter()
+	{
+		return (JDFQueueFilter) getCreateElement_JDFElement(ElementName.QUEUEFILTER, null, 0);
+	}
+
+	/**
 	 * (26) getCreateQueueFilter
 	 * 
 	 * @param iSkip number of elements to skip

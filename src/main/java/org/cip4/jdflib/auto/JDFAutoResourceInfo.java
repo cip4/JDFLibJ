@@ -1063,6 +1063,26 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/**
+	 * (24) const get element Event
+	 *
+	 * @return JDFEvent the element
+	 */
+	public JDFEvent getEvent()
+	{
+		return (JDFEvent) getElement(ElementName.EVENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateEvent
+	 * 
+	 * @return JDFEvent the element
+	 */
+	public JDFEvent getCreateEvent()
+	{
+		return (JDFEvent) getCreateElement_JDFElement(ElementName.EVENT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateEvent
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1102,6 +1122,26 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	public JDFEvent appendEvent()
 	{
 		return (JDFEvent) appendElement(ElementName.EVENT, null);
+	}
+
+	/**
+	 * (24) const get element Lot
+	 *
+	 * @return JDFLot the element
+	 */
+	public JDFLot getLot()
+	{
+		return (JDFLot) getElement(ElementName.LOT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateLot
+	 * 
+	 * @return JDFLot the element
+	 */
+	public JDFLot getCreateLot()
+	{
+		return (JDFLot) getCreateElement_JDFElement(ElementName.LOT, null, 0);
 	}
 
 	/**
@@ -1174,6 +1214,26 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	public JDFMISDetails appendMISDetails()
 	{
 		return (JDFMISDetails) appendElementN(ElementName.MISDETAILS, 1, null);
+	}
+
+	/**
+	 * (24) const get element Part
+	 *
+	 * @return JDFPart the element
+	 */
+	public JDFPart getPart()
+	{
+		return (JDFPart) getElement(ElementName.PART, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePart
+	 * 
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart()
+	{
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, 0);
 	}
 
 	/**

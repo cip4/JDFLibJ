@@ -218,6 +218,26 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element CreateLink
+	 *
+	 * @return JDFCreateLink the element
+	 */
+	public JDFCreateLink getCreateLink()
+	{
+		return (JDFCreateLink) getElement(ElementName.CREATELINK, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCreateLink
+	 * 
+	 * @return JDFCreateLink the element
+	 */
+	public JDFCreateLink getCreateCreateLink()
+	{
+		return (JDFCreateLink) getCreateElement_JDFElement(ElementName.CREATELINK, null, 0);
+	}
+
+	/**
 	 * (26) getCreateCreateLink
 	 * 
 	 * @param iSkip number of elements to skip
@@ -257,6 +277,26 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	public JDFCreateLink appendCreateLink()
 	{
 		return (JDFCreateLink) appendElement(ElementName.CREATELINK, null);
+	}
+
+	/**
+	 * (24) const get element CreateResource
+	 *
+	 * @return JDFCreateResource the element
+	 */
+	public JDFCreateResource getCreateResource()
+	{
+		return (JDFCreateResource) getElement(ElementName.CREATERESOURCE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCreateResource
+	 * 
+	 * @return JDFCreateResource the element
+	 */
+	public JDFCreateResource getCreateCreateResource()
+	{
+		return (JDFCreateResource) getCreateElement_JDFElement(ElementName.CREATERESOURCE, null, 0);
 	}
 
 	/**
@@ -302,6 +342,26 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	}
 
 	/**
+	 * (24) const get element MoveResource
+	 *
+	 * @return JDFMoveResource the element
+	 */
+	public JDFMoveResource getMoveResource()
+	{
+		return (JDFMoveResource) getElement(ElementName.MOVERESOURCE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMoveResource
+	 * 
+	 * @return JDFMoveResource the element
+	 */
+	public JDFMoveResource getCreateMoveResource()
+	{
+		return (JDFMoveResource) getCreateElement_JDFElement(ElementName.MOVERESOURCE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateMoveResource
 	 * 
 	 * @param iSkip number of elements to skip
@@ -341,6 +401,26 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	public JDFMoveResource appendMoveResource()
 	{
 		return (JDFMoveResource) appendElement(ElementName.MOVERESOURCE, null);
+	}
+
+	/**
+	 * (24) const get element RemoveLink
+	 *
+	 * @return JDFRemoveLink the element
+	 */
+	public JDFRemoveLink getRemoveLink()
+	{
+		return (JDFRemoveLink) getElement(ElementName.REMOVELINK, null, 0);
+	}
+
+	/**
+	 * (25) getCreateRemoveLink
+	 * 
+	 * @return JDFRemoveLink the element
+	 */
+	public JDFRemoveLink getCreateRemoveLink()
+	{
+		return (JDFRemoveLink) getCreateElement_JDFElement(ElementName.REMOVELINK, null, 0);
 	}
 
 	/**

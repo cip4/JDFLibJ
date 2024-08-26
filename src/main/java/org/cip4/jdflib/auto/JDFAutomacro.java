@@ -193,6 +193,26 @@ public abstract class JDFAutomacro extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element choice
+	 *
+	 * @return JDFchoice the element
+	 */
+	public JDFchoice getchoice()
+	{
+		return (JDFchoice) getElement(ElementName.CHOICE, null, 0);
+	}
+
+	/**
+	 * (25) getCreatechoice
+	 * 
+	 * @return JDFchoice the element
+	 */
+	public JDFchoice getCreatechoice()
+	{
+		return (JDFchoice) getCreateElement_JDFElement(ElementName.CHOICE, null, 0);
+	}
+
+	/**
 	 * (26) getCreatechoice
 	 * 
 	 * @param iSkip number of elements to skip
@@ -235,6 +255,26 @@ public abstract class JDFAutomacro extends JDFElement
 	}
 
 	/**
+	 * (24) const get element set
+	 *
+	 * @return JDFset the element
+	 */
+	public JDFset getset()
+	{
+		return (JDFset) getElement(ElementName.SET, null, 0);
+	}
+
+	/**
+	 * (25) getCreateset
+	 * 
+	 * @return JDFset the element
+	 */
+	public JDFset getCreateset()
+	{
+		return (JDFset) getCreateElement_JDFElement(ElementName.SET, null, 0);
+	}
+
+	/**
 	 * (26) getCreateset
 	 * 
 	 * @param iSkip number of elements to skip
@@ -274,6 +314,26 @@ public abstract class JDFAutomacro extends JDFElement
 	public JDFset appendset()
 	{
 		return (JDFset) appendElement(ElementName.SET, null);
+	}
+
+	/**
+	 * (24) const get element call
+	 *
+	 * @return JDFcall the element
+	 */
+	public JDFcall getcall()
+	{
+		return (JDFcall) getElement(ElementName.CALL, null, 0);
+	}
+
+	/**
+	 * (25) getCreatecall
+	 * 
+	 * @return JDFcall the element
+	 */
+	public JDFcall getCreatecall()
+	{
+		return (JDFcall) getCreateElement_JDFElement(ElementName.CALL, null, 0);
 	}
 
 	/**

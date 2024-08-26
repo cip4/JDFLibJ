@@ -460,6 +460,26 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element GlueApplication
+	 *
+	 * @return JDFGlueApplication the element
+	 */
+	public JDFGlueApplication getGlueApplication()
+	{
+		return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateGlueApplication
+	 * 
+	 * @return JDFGlueApplication the element
+	 */
+	public JDFGlueApplication getCreateGlueApplication()
+	{
+		return (JDFGlueApplication) getCreateElement_JDFElement(ElementName.GLUEAPPLICATION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateGlueApplication
 	 * 
 	 * @param iSkip number of elements to skip

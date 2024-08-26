@@ -100,14 +100,14 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SEPARATION, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, "All");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ANGLE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ANGLEMAP, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.DOTSIZE, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.FREQUENCY, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SCREENINGFAMILY, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.SCREENINGTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumScreeningType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANGLE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ANGLEMAP, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DOTSIZE, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.FREQUENCY, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SCREENINGFAMILY, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SCREENINGTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumScreeningType.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SEPARATION, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, "All");
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.SOURCEFREQUENCY, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.SPOTFUNCTION, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -302,29 +302,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Separation ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute Separation
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setSeparation(String value)
-	{
-		setAttribute(AttributeName.SEPARATION, value, null);
-	}
-
-	/**
-	 * (23) get String attribute Separation
-	 *
-	 * @return the value of the attribute
-	 */
-	public String getSeparation()
-	{
-		return getAttribute(AttributeName.SEPARATION, null, "All");
-	}
-
-	/*
 	 * --------------------------------------------------------------------- Methods for Attribute Angle ---------------------------------------------------------------------
 	 */
 	/**
@@ -488,6 +465,29 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	public EnumScreeningType getScreeningType()
 	{
 		return EnumScreeningType.getEnum(getAttribute(AttributeName.SCREENINGTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Separation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute Separation
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setSeparation(String value)
+	{
+		setAttribute(AttributeName.SEPARATION, value, null);
+	}
+
+	/**
+	 * (23) get String attribute Separation
+	 *
+	 * @return the value of the attribute
+	 */
+	public String getSeparation()
+	{
+		return getAttribute(AttributeName.SEPARATION, null, "All");
 	}
 
 	/*

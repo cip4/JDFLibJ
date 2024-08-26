@@ -389,6 +389,26 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element IdentificationField
+	 *
+	 * @return JDFIdentificationField the element
+	 */
+	public JDFIdentificationField getIdentificationField()
+	{
+		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, 0);
+	}
+
+	/**
+	 * (25) getCreateIdentificationField
+	 * 
+	 * @return JDFIdentificationField the element
+	 */
+	public JDFIdentificationField getCreateIdentificationField()
+	{
+		return (JDFIdentificationField) getCreateElement_JDFElement(ElementName.IDENTIFICATIONFIELD, null, 0);
+	}
+
+	/**
 	 * (26) getCreateIdentificationField
 	 * 
 	 * @param iSkip number of elements to skip

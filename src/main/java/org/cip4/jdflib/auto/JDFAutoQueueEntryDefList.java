@@ -144,6 +144,26 @@ public abstract class JDFAutoQueueEntryDefList extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element QueueEntryDef
+	 *
+	 * @return JDFQueueEntryDef the element
+	 */
+	public JDFQueueEntryDef getQueueEntryDef()
+	{
+		return (JDFQueueEntryDef) getElement(ElementName.QUEUEENTRYDEF, null, 0);
+	}
+
+	/**
+	 * (25) getCreateQueueEntryDef
+	 * 
+	 * @return JDFQueueEntryDef the element
+	 */
+	public JDFQueueEntryDef getCreateQueueEntryDef()
+	{
+		return (JDFQueueEntryDef) getCreateElement_JDFElement(ElementName.QUEUEENTRYDEF, null, 0);
+	}
+
+	/**
 	 * (26) getCreateQueueEntryDef
 	 * 
 	 * @param iSkip number of elements to skip

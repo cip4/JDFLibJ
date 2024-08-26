@@ -308,6 +308,26 @@ public abstract class JDFAutoAction extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Loc
+	 *
+	 * @return JDFLoc the element
+	 */
+	public JDFLoc getLoc()
+	{
+		return (JDFLoc) getElement(ElementName.LOC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateLoc
+	 * 
+	 * @return JDFLoc the element
+	 */
+	public JDFLoc getCreateLoc()
+	{
+		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateLoc
 	 * 
 	 * @param iSkip number of elements to skip
@@ -347,6 +367,26 @@ public abstract class JDFAutoAction extends JDFElement
 	public JDFLoc appendLoc()
 	{
 		return (JDFLoc) appendElement(ElementName.LOC, null);
+	}
+
+	/**
+	 * (24) const get element PreflightAction
+	 *
+	 * @return JDFPreflightAction the element
+	 */
+	public JDFPreflightAction getPreflightAction()
+	{
+		return (JDFPreflightAction) getElement(ElementName.PREFLIGHTACTION, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePreflightAction
+	 * 
+	 * @return JDFPreflightAction the element
+	 */
+	public JDFPreflightAction getCreatePreflightAction()
+	{
+		return (JDFPreflightAction) getCreateElement_JDFElement(ElementName.PREFLIGHTACTION, null, 0);
 	}
 
 	/**

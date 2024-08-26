@@ -186,6 +186,26 @@ public abstract class JDFAutoPROccurrence extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element PRGroup
+	 *
+	 * @return JDFPRGroup the element
+	 */
+	public JDFPRGroup getPRGroup()
+	{
+		return (JDFPRGroup) getElement(ElementName.PRGROUP, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePRGroup
+	 * 
+	 * @return JDFPRGroup the element
+	 */
+	public JDFPRGroup getCreatePRGroup()
+	{
+		return (JDFPRGroup) getCreateElement_JDFElement(ElementName.PRGROUP, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePRGroup
 	 * 
 	 * @param iSkip number of elements to skip

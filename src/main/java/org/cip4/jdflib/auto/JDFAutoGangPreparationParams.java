@@ -235,6 +235,26 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Disjointing
+	 *
+	 * @return JDFDisjointing the element
+	 */
+	public JDFDisjointing getDisjointing()
+	{
+		return (JDFDisjointing) getElement(ElementName.DISJOINTING, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDisjointing
+	 * 
+	 * @return JDFDisjointing the element
+	 */
+	public JDFDisjointing getCreateDisjointing()
+	{
+		return (JDFDisjointing) getCreateElement_JDFElement(ElementName.DISJOINTING, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDisjointing
 	 * 
 	 * @param iSkip number of elements to skip

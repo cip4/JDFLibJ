@@ -683,6 +683,26 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	}
 
 	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFileSpec
 	 * 
 	 * @param iSkip number of elements to skip
@@ -772,6 +792,26 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	public void refMedia(JDFMedia refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element RuleLength
+	 *
+	 * @return JDFRuleLength the element
+	 */
+	public JDFRuleLength getRuleLength()
+	{
+		return (JDFRuleLength) getElement(ElementName.RULELENGTH, null, 0);
+	}
+
+	/**
+	 * (25) getCreateRuleLength
+	 * 
+	 * @return JDFRuleLength the element
+	 */
+	public JDFRuleLength getCreateRuleLength()
+	{
+		return (JDFRuleLength) getCreateElement_JDFElement(ElementName.RULELENGTH, null, 0);
 	}
 
 	/**

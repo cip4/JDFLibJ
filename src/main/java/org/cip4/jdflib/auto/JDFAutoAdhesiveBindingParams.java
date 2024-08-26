@@ -237,6 +237,26 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element SpinePreparationParams
+	 *
+	 * @return JDFSpinePreparationParams the element
+	 */
+	public JDFSpinePreparationParams getSpinePreparationParams()
+	{
+		return (JDFSpinePreparationParams) getElement(ElementName.SPINEPREPARATIONPARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSpinePreparationParams
+	 * 
+	 * @return JDFSpinePreparationParams the element
+	 */
+	public JDFSpinePreparationParams getCreateSpinePreparationParams()
+	{
+		return (JDFSpinePreparationParams) getCreateElement_JDFElement(ElementName.SPINEPREPARATIONPARAMS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateSpinePreparationParams
 	 * 
 	 * @param iSkip number of elements to skip
@@ -276,6 +296,26 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	public JDFSpinePreparationParams appendSpinePreparationParams()
 	{
 		return (JDFSpinePreparationParams) appendElement(ElementName.SPINEPREPARATIONPARAMS, null);
+	}
+
+	/**
+	 * (24) const get element GlueApplication
+	 *
+	 * @return JDFGlueApplication the element
+	 */
+	public JDFGlueApplication getGlueApplication()
+	{
+		return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateGlueApplication
+	 * 
+	 * @return JDFGlueApplication the element
+	 */
+	public JDFGlueApplication getCreateGlueApplication()
+	{
+		return (JDFGlueApplication) getCreateElement_JDFElement(ElementName.GLUEAPPLICATION, null, 0);
 	}
 
 	/**
@@ -321,6 +361,26 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	}
 
 	/**
+	 * (24) const get element SpineTapingParams
+	 *
+	 * @return JDFSpineTapingParams the element
+	 */
+	public JDFSpineTapingParams getSpineTapingParams()
+	{
+		return (JDFSpineTapingParams) getElement(ElementName.SPINETAPINGPARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSpineTapingParams
+	 * 
+	 * @return JDFSpineTapingParams the element
+	 */
+	public JDFSpineTapingParams getCreateSpineTapingParams()
+	{
+		return (JDFSpineTapingParams) getCreateElement_JDFElement(ElementName.SPINETAPINGPARAMS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateSpineTapingParams
 	 * 
 	 * @param iSkip number of elements to skip
@@ -360,6 +420,26 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	public JDFSpineTapingParams appendSpineTapingParams()
 	{
 		return (JDFSpineTapingParams) appendElement(ElementName.SPINETAPINGPARAMS, null);
+	}
+
+	/**
+	 * (24) const get element CoverApplicationParams
+	 *
+	 * @return JDFCoverApplicationParams the element
+	 */
+	public JDFCoverApplicationParams getCoverApplicationParams()
+	{
+		return (JDFCoverApplicationParams) getElement(ElementName.COVERAPPLICATIONPARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCoverApplicationParams
+	 * 
+	 * @return JDFCoverApplicationParams the element
+	 */
+	public JDFCoverApplicationParams getCreateCoverApplicationParams()
+	{
+		return (JDFCoverApplicationParams) getCreateElement_JDFElement(ElementName.COVERAPPLICATIONPARAMS, null, 0);
 	}
 
 	/**

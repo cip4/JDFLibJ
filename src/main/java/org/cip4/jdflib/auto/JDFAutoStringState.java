@@ -331,6 +331,26 @@ public abstract class JDFAutoStringState extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Loc
+	 *
+	 * @return JDFLoc the element
+	 */
+	public JDFLoc getLoc()
+	{
+		return (JDFLoc) getElement(ElementName.LOC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateLoc
+	 * 
+	 * @return JDFLoc the element
+	 */
+	public JDFLoc getCreateLoc()
+	{
+		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateLoc
 	 * 
 	 * @param iSkip number of elements to skip
@@ -370,6 +390,26 @@ public abstract class JDFAutoStringState extends JDFResource
 	public JDFLoc appendLoc()
 	{
 		return (JDFLoc) appendElement(ElementName.LOC, null);
+	}
+
+	/**
+	 * (24) const get element Value
+	 *
+	 * @return JDFValue the element
+	 */
+	public JDFValue getValue()
+	{
+		return (JDFValue) getElement(ElementName.VALUE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateValue
+	 * 
+	 * @return JDFValue the element
+	 */
+	public JDFValue getCreateValue()
+	{
+		return (JDFValue) getCreateElement_JDFElement(ElementName.VALUE, null, 0);
 	}
 
 	/**

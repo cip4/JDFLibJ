@@ -432,13 +432,23 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
+	 * (24) const get element ObjectResolution
 	 *
-	 * @param refTarget the element that is referenced
+	 * @return JDFObjectResolution the element
 	 */
-	public void refAutomatedOverPrintParams(JDFAutomatedOverPrintParams refTarget)
+	public JDFObjectResolution getObjectResolution()
 	{
-		refElement(refTarget);
+		return (JDFObjectResolution) getElement(ElementName.OBJECTRESOLUTION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateObjectResolution
+	 * 
+	 * @return JDFObjectResolution the element
+	 */
+	public JDFObjectResolution getCreateObjectResolution()
+	{
+		return (JDFObjectResolution) getCreateElement_JDFElement(ElementName.OBJECTRESOLUTION, null, 0);
 	}
 
 	/**
@@ -481,16 +491,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	public JDFObjectResolution appendObjectResolution()
 	{
 		return (JDFObjectResolution) appendElement(ElementName.OBJECTRESOLUTION, null);
-	}
-
-	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refObjectResolution(JDFObjectResolution refTarget)
-	{
-		refElement(refTarget);
 	}
 
 	/**

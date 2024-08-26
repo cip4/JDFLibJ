@@ -164,6 +164,26 @@ public abstract class JDFAutoEndSheetGluingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element EndSheet
+	 *
+	 * @return JDFEndSheet the element
+	 */
+	public JDFEndSheet getEndSheet()
+	{
+		return (JDFEndSheet) getElement(ElementName.ENDSHEET, null, 0);
+	}
+
+	/**
+	 * (25) getCreateEndSheet
+	 * 
+	 * @return JDFEndSheet the element
+	 */
+	public JDFEndSheet getCreateEndSheet()
+	{
+		return (JDFEndSheet) getCreateElement_JDFElement(ElementName.ENDSHEET, null, 0);
+	}
+
+	/**
 	 * (26) getCreateEndSheet
 	 * 
 	 * @param iSkip number of elements to skip

@@ -144,6 +144,26 @@ public abstract class JDFAutoIDPFolding extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element FoldingParams
+	 *
+	 * @return JDFFoldingParams the element
+	 */
+	public JDFFoldingParams getFoldingParams()
+	{
+		return (JDFFoldingParams) getElement(ElementName.FOLDINGPARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFoldingParams
+	 * 
+	 * @return JDFFoldingParams the element
+	 */
+	public JDFFoldingParams getCreateFoldingParams()
+	{
+		return (JDFFoldingParams) getCreateElement_JDFElement(ElementName.FOLDINGPARAMS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFoldingParams
 	 * 
 	 * @param iSkip number of elements to skip

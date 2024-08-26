@@ -79,16 +79,16 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.core.JDFElement;
 
 /**
  *****************************************************************************
- * class JDFAutoFold : public JDFResource
+ * class JDFAutoFold : public JDFElement
  *****************************************************************************
  * 
  */
 
-public abstract class JDFAutoFold extends JDFResource
+public abstract class JDFAutoFold extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
@@ -96,10 +96,10 @@ public abstract class JDFAutoFold extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FROM, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumFrom.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.TO, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumTo.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAVEL, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.RELATIVETRAVEL, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FROM, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumFrom.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.RELATIVETRAVEL, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TO, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumTo.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRAVEL, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -142,26 +142,6 @@ public abstract class JDFAutoFold extends JDFResource
 	protected JDFAutoFold(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return true if ok
-	 */
-	@Override
-	public boolean init()
-	{
-		final boolean bRet = super.init();
-		setResourceClass(JDFResource.EnumResourceClass.Parameter);
-		return bRet;
-	}
-
-	/**
-	 * @return the resource Class
-	 */
-	@Override
-	public EnumResourceClass getValidClass()
-	{
-		return JDFResource.EnumResourceClass.Parameter;
 	}
 
 	/**
@@ -318,6 +298,30 @@ public abstract class JDFAutoFold extends JDFResource
 	}
 
 	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelativeTravel
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute RelativeTravel
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setRelativeTravel(double value)
+	{
+		setAttribute(AttributeName.RELATIVETRAVEL, value, null);
+	}
+
+	/**
+	 * (17) get double attribute RelativeTravel
+	 *
+	 * @return double the value of the attribute
+	 */
+	public double getRelativeTravel()
+	{
+		return getRealAttribute(AttributeName.RELATIVETRAVEL, null, 0.0);
+	}
+
+	/*
 	 * --------------------------------------------------------------------- Methods for Attribute To ---------------------------------------------------------------------
 	 */
 	/**
@@ -361,30 +365,6 @@ public abstract class JDFAutoFold extends JDFResource
 	public double getTravel()
 	{
 		return getRealAttribute(AttributeName.TRAVEL, null, 0.0);
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelativeTravel
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute RelativeTravel
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setRelativeTravel(double value)
-	{
-		setAttribute(AttributeName.RELATIVETRAVEL, value, null);
-	}
-
-	/**
-	 * (17) get double attribute RelativeTravel
-	 *
-	 * @return double the value of the attribute
-	 */
-	public double getRelativeTravel()
-	{
-		return getRealAttribute(AttributeName.RELATIVETRAVEL, null, 0.0);
 	}
 
 }

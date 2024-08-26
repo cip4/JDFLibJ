@@ -471,6 +471,26 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element TIFFtag
+	 *
+	 * @return JDFTIFFtag the element
+	 */
+	public JDFTIFFtag getTIFFtag()
+	{
+		return (JDFTIFFtag) getElement(ElementName.TIFFTAG, null, 0);
+	}
+
+	/**
+	 * (25) getCreateTIFFtag
+	 * 
+	 * @return JDFTIFFtag the element
+	 */
+	public JDFTIFFtag getCreateTIFFtag()
+	{
+		return (JDFTIFFtag) getCreateElement_JDFElement(ElementName.TIFFTAG, null, 0);
+	}
+
+	/**
 	 * (26) getCreateTIFFtag
 	 * 
 	 * @param iSkip number of elements to skip
@@ -510,6 +530,26 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	public JDFTIFFtag appendTIFFtag()
 	{
 		return (JDFTIFFtag) appendElement(ElementName.TIFFTAG, null);
+	}
+
+	/**
+	 * (24) const get element TIFFEmbeddedFile
+	 *
+	 * @return JDFTIFFEmbeddedFile the element
+	 */
+	public JDFTIFFEmbeddedFile getTIFFEmbeddedFile()
+	{
+		return (JDFTIFFEmbeddedFile) getElement(ElementName.TIFFEMBEDDEDFILE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateTIFFEmbeddedFile
+	 * 
+	 * @return JDFTIFFEmbeddedFile the element
+	 */
+	public JDFTIFFEmbeddedFile getCreateTIFFEmbeddedFile()
+	{
+		return (JDFTIFFEmbeddedFile) getCreateElement_JDFElement(ElementName.TIFFEMBEDDEDFILE, null, 0);
 	}
 
 	/**

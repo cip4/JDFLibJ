@@ -187,6 +187,26 @@ public abstract class JDFAutoStringListValue extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Value
+	 *
+	 * @return JDFValue the element
+	 */
+	public JDFValue getValue()
+	{
+		return (JDFValue) getElement(ElementName.VALUE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateValue
+	 * 
+	 * @return JDFValue the element
+	 */
+	public JDFValue getCreateValue()
+	{
+		return (JDFValue) getCreateElement_JDFElement(ElementName.VALUE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateValue
 	 * 
 	 * @param iSkip number of elements to skip

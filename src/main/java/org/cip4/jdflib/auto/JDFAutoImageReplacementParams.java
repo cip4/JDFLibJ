@@ -502,6 +502,26 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFileSpec
 	 * 
 	 * @param iSkip number of elements to skip
@@ -551,6 +571,26 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	public void refFileSpec(JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element SearchPath
+	 *
+	 * @return JDFElement the element
+	 */
+	public JDFElement getSearchPath()
+	{
+		return (JDFElement) getElement(ElementName.SEARCHPATH, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSearchPath
+	 * 
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreateSearchPath()
+	{
+		return (JDFElement) getCreateElement_JDFElement(ElementName.SEARCHPATH, null, 0);
 	}
 
 	/**

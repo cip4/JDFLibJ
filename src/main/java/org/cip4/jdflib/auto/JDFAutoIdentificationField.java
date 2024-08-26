@@ -763,6 +763,26 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/**
+	 * (24) const get element MetadataMap
+	 *
+	 * @return JDFMetadataMap the element
+	 */
+	public JDFMetadataMap getMetadataMap()
+	{
+		return (JDFMetadataMap) getElement(ElementName.METADATAMAP, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMetadataMap
+	 * 
+	 * @return JDFMetadataMap the element
+	 */
+	public JDFMetadataMap getCreateMetadataMap()
+	{
+		return (JDFMetadataMap) getCreateElement_JDFElement(ElementName.METADATAMAP, null, 0);
+	}
+
+	/**
 	 * (26) getCreateMetadataMap
 	 * 
 	 * @param iSkip number of elements to skip

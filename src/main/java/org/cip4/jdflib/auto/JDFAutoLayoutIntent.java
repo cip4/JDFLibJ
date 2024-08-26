@@ -753,6 +753,26 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 */
 
 	/**
+	 * (24) const get element Bleed
+	 *
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getBleed()
+	{
+		return (JDFNumberSpan) getElement(ElementName.BLEED, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBleed
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateBleed()
+	{
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.BLEED, null, 0);
+	}
+
+	/**
 	 * (26) getCreateBleed
 	 * 
 	 * @param iSkip number of elements to skip

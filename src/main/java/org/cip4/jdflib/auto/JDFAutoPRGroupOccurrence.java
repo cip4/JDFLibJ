@@ -146,6 +146,26 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element StringListValue
+	 *
+	 * @return JDFStringListValue the element
+	 */
+	public JDFStringListValue getStringListValue()
+	{
+		return (JDFStringListValue) getElement(ElementName.STRINGLISTVALUE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateStringListValue
+	 * 
+	 * @return JDFStringListValue the element
+	 */
+	public JDFStringListValue getCreateStringListValue()
+	{
+		return (JDFStringListValue) getCreateElement_JDFElement(ElementName.STRINGLISTVALUE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateStringListValue
 	 * 
 	 * @param iSkip number of elements to skip
@@ -185,6 +205,26 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	public JDFStringListValue appendStringListValue()
 	{
 		return (JDFStringListValue) appendElement(ElementName.STRINGLISTVALUE, null);
+	}
+
+	/**
+	 * (24) const get element ArgumentValue
+	 *
+	 * @return JDFArgumentValue the element
+	 */
+	public JDFArgumentValue getArgumentValue()
+	{
+		return (JDFArgumentValue) getElement(ElementName.ARGUMENTVALUE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateArgumentValue
+	 * 
+	 * @return JDFArgumentValue the element
+	 */
+	public JDFArgumentValue getCreateArgumentValue()
+	{
+		return (JDFArgumentValue) getCreateElement_JDFElement(ElementName.ARGUMENTVALUE, null, 0);
 	}
 
 	/**

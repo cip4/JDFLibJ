@@ -146,6 +146,26 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 	 */
 
 	/**
+	 * (24) const get element ProofItem
+	 *
+	 * @return JDFProofItem the element
+	 */
+	public JDFProofItem getProofItem()
+	{
+		return (JDFProofItem) getElement(ElementName.PROOFITEM, null, 0);
+	}
+
+	/**
+	 * (25) getCreateProofItem
+	 * 
+	 * @return JDFProofItem the element
+	 */
+	public JDFProofItem getCreateProofItem()
+	{
+		return (JDFProofItem) getCreateElement_JDFElement(ElementName.PROOFITEM, null, 0);
+	}
+
+	/**
 	 * (26) getCreateProofItem
 	 * 
 	 * @param iSkip number of elements to skip
@@ -185,6 +205,26 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 	public JDFProofItem appendProofItem()
 	{
 		return (JDFProofItem) appendElement(ElementName.PROOFITEM, null);
+	}
+
+	/**
+	 * (24) const get element PreflightItem
+	 *
+	 * @return JDFPreflightItem the element
+	 */
+	public JDFPreflightItem getPreflightItem()
+	{
+		return (JDFPreflightItem) getElement(ElementName.PREFLIGHTITEM, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePreflightItem
+	 * 
+	 * @return JDFPreflightItem the element
+	 */
+	public JDFPreflightItem getCreatePreflightItem()
+	{
+		return (JDFPreflightItem) getCreateElement_JDFElement(ElementName.PREFLIGHTITEM, null, 0);
 	}
 
 	/**

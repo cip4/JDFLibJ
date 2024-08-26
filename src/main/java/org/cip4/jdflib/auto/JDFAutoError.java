@@ -302,6 +302,26 @@ public abstract class JDFAutoError extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element ErrorData
+	 *
+	 * @return JDFErrorData the element
+	 */
+	public JDFErrorData getErrorData()
+	{
+		return (JDFErrorData) getElement(ElementName.ERRORDATA, null, 0);
+	}
+
+	/**
+	 * (25) getCreateErrorData
+	 * 
+	 * @return JDFErrorData the element
+	 */
+	public JDFErrorData getCreateErrorData()
+	{
+		return (JDFErrorData) getCreateElement_JDFElement(ElementName.ERRORDATA, null, 0);
+	}
+
+	/**
 	 * (26) getCreateErrorData
 	 * 
 	 * @param iSkip number of elements to skip

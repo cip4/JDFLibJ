@@ -92,7 +92,7 @@ public abstract class JDFAutoCostCenter extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COSTCENTERID, 0x2222222222l, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COSTCENTERID, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.NAME, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 

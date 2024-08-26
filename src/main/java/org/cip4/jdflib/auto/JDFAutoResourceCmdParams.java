@@ -583,6 +583,26 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Part
+	 *
+	 * @return JDFPart the element
+	 */
+	public JDFPart getPart()
+	{
+		return (JDFPart) getElement(ElementName.PART, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePart
+	 * 
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart()
+	{
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePart
 	 * 
 	 * @param iSkip number of elements to skip
@@ -652,6 +672,26 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	public JDFMISDetails appendMISDetails()
 	{
 		return (JDFMISDetails) appendElementN(ElementName.MISDETAILS, 1, null);
+	}
+
+	/**
+	 * (24) const get element Resource
+	 *
+	 * @return JDFResource the element
+	 */
+	public JDFResource getResource()
+	{
+		return (JDFResource) getElement(ElementName.RESOURCE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateResource
+	 * 
+	 * @return JDFResource the element
+	 */
+	public JDFResource getCreateResource()
+	{
+		return (JDFResource) getCreateElement_JDFElement(ElementName.RESOURCE, null, 0);
 	}
 
 	/**

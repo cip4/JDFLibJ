@@ -286,6 +286,26 @@ public abstract class JDFAutoPricing extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Payment
+	 *
+	 * @return JDFPayment the element
+	 */
+	public JDFPayment getPayment()
+	{
+		return (JDFPayment) getElement(ElementName.PAYMENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePayment
+	 * 
+	 * @return JDFPayment the element
+	 */
+	public JDFPayment getCreatePayment()
+	{
+		return (JDFPayment) getCreateElement_JDFElement(ElementName.PAYMENT, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePayment
 	 * 
 	 * @param iSkip number of elements to skip
@@ -325,6 +345,26 @@ public abstract class JDFAutoPricing extends JDFElement
 	public JDFPayment appendPayment()
 	{
 		return (JDFPayment) appendElement(ElementName.PAYMENT, null);
+	}
+
+	/**
+	 * (24) const get element Pricing
+	 *
+	 * @return JDFPricing the element
+	 */
+	public JDFPricing getPricing()
+	{
+		return (JDFPricing) getElement(ElementName.PRICING, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePricing
+	 * 
+	 * @return JDFPricing the element
+	 */
+	public JDFPricing getCreatePricing()
+	{
+		return (JDFPricing) getCreateElement_JDFElement(ElementName.PRICING, null, 0);
 	}
 
 	/**

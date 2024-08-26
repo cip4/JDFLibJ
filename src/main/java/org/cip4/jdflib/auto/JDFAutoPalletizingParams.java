@@ -336,6 +336,26 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Bundle
+	 *
+	 * @return JDFBundle the element
+	 */
+	public JDFBundle getBundle()
+	{
+		return (JDFBundle) getElement(ElementName.BUNDLE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBundle
+	 * 
+	 * @return JDFBundle the element
+	 */
+	public JDFBundle getCreateBundle()
+	{
+		return (JDFBundle) getCreateElement_JDFElement(ElementName.BUNDLE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateBundle
 	 * 
 	 * @param iSkip number of elements to skip

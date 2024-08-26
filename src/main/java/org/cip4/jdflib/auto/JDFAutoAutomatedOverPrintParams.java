@@ -74,16 +74,16 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.core.JDFElement;
 
 /**
  *****************************************************************************
- * class JDFAutoAutomatedOverPrintParams : public JDFResource
+ * class JDFAutoAutomatedOverPrintParams : public JDFElement
  *****************************************************************************
  * 
  */
 
-public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
+public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
@@ -92,10 +92,10 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.KNOCKOUTCMYKWHITE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.OVERPRINTBLACKTEXT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LINEARTBLACKLEVEL, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.OVERPRINTBLACKLINEART, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.TEXTBLACKLEVEL, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, "1");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.LINEARTBLACKLEVEL, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OVERPRINTBLACKTEXT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.TEXTBLACKLEVEL, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, "1");
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.TEXTSIZETHRESHOLD, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
@@ -141,26 +141,6 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return true if ok
-	 */
-	@Override
-	public boolean init()
-	{
-		final boolean bRet = super.init();
-		setResourceClass(JDFResource.EnumResourceClass.Parameter);
-		return bRet;
-	}
-
-	/**
-	 * @return the resource Class
-	 */
-	@Override
-	public EnumResourceClass getValidClass()
-	{
-		return JDFResource.EnumResourceClass.Parameter;
-	}
-
 	/*
 	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
@@ -190,27 +170,27 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OverPrintBlackText
+	 * --------------------------------------------------------------------- Methods for Attribute LineArtBlackLevel
 	 * ---------------------------------------------------------------------
 	 */
 	/**
-	 * (36) set attribute OverPrintBlackText
+	 * (36) set attribute LineArtBlackLevel
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOverPrintBlackText(boolean value)
+	public void setLineArtBlackLevel(double value)
 	{
-		setAttribute(AttributeName.OVERPRINTBLACKTEXT, value, null);
+		setAttribute(AttributeName.LINEARTBLACKLEVEL, value, null);
 	}
 
 	/**
-	 * (18) get boolean attribute OverPrintBlackText
+	 * (17) get double attribute LineArtBlackLevel
 	 *
-	 * @return boolean the value of the attribute
+	 * @return double the value of the attribute
 	 */
-	public boolean getOverPrintBlackText()
+	public double getLineArtBlackLevel()
 	{
-		return getBoolAttribute(AttributeName.OVERPRINTBLACKTEXT, null, false);
+		return getRealAttribute(AttributeName.LINEARTBLACKLEVEL, null, 0.0);
 	}
 
 	/*
@@ -238,6 +218,30 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
 	}
 
 	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OverPrintBlackText
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute OverPrintBlackText
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setOverPrintBlackText(boolean value)
+	{
+		setAttribute(AttributeName.OVERPRINTBLACKTEXT, value, null);
+	}
+
+	/**
+	 * (18) get boolean attribute OverPrintBlackText
+	 *
+	 * @return boolean the value of the attribute
+	 */
+	public boolean getOverPrintBlackText()
+	{
+		return getBoolAttribute(AttributeName.OVERPRINTBLACKTEXT, null, false);
+	}
+
+	/*
 	 * --------------------------------------------------------------------- Methods for Attribute TextBlackLevel
 	 * ---------------------------------------------------------------------
 	 */
@@ -259,30 +263,6 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
 	public double getTextBlackLevel()
 	{
 		return getRealAttribute(AttributeName.TEXTBLACKLEVEL, null, 0.0);
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LineArtBlackLevel
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute LineArtBlackLevel
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setLineArtBlackLevel(double value)
-	{
-		setAttribute(AttributeName.LINEARTBLACKLEVEL, value, null);
-	}
-
-	/**
-	 * (17) get double attribute LineArtBlackLevel
-	 *
-	 * @return double the value of the attribute
-	 */
-	public double getLineArtBlackLevel()
-	{
-		return getRealAttribute(AttributeName.LINEARTBLACKLEVEL, null, 0.0);
 	}
 
 	/*

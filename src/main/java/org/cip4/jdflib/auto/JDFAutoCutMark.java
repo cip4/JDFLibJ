@@ -343,6 +343,26 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Assembly
+	 *
+	 * @return JDFAssembly the element
+	 */
+	public JDFAssembly getAssembly()
+	{
+		return (JDFAssembly) getElement(ElementName.ASSEMBLY, null, 0);
+	}
+
+	/**
+	 * (25) getCreateAssembly
+	 * 
+	 * @return JDFAssembly the element
+	 */
+	public JDFAssembly getCreateAssembly()
+	{
+		return (JDFAssembly) getCreateElement_JDFElement(ElementName.ASSEMBLY, null, 0);
+	}
+
+	/**
 	 * (26) getCreateAssembly
 	 * 
 	 * @param iSkip number of elements to skip

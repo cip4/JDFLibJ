@@ -405,6 +405,26 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Component
+	 *
+	 * @return JDFComponent the element
+	 */
+	public JDFComponent getComponent()
+	{
+		return (JDFComponent) getElement(ElementName.COMPONENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateComponent
+	 * 
+	 * @return JDFComponent the element
+	 */
+	public JDFComponent getCreateComponent()
+	{
+		return (JDFComponent) getCreateElement_JDFElement(ElementName.COMPONENT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateComponent
 	 * 
 	 * @param iSkip number of elements to skip
@@ -454,6 +474,26 @@ public abstract class JDFAutoDropItem extends JDFElement
 	public void refComponent(JDFComponent refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element ExposedMedia
+	 *
+	 * @return JDFExposedMedia the element
+	 */
+	public JDFExposedMedia getExposedMedia()
+	{
+		return (JDFExposedMedia) getElement(ElementName.EXPOSEDMEDIA, null, 0);
+	}
+
+	/**
+	 * (25) getCreateExposedMedia
+	 * 
+	 * @return JDFExposedMedia the element
+	 */
+	public JDFExposedMedia getCreateExposedMedia()
+	{
+		return (JDFExposedMedia) getCreateElement_JDFElement(ElementName.EXPOSEDMEDIA, null, 0);
 	}
 
 	/**
@@ -509,6 +549,26 @@ public abstract class JDFAutoDropItem extends JDFElement
 	}
 
 	/**
+	 * (24) const get element Ink
+	 *
+	 * @return JDFInk the element
+	 */
+	public JDFInk getInk()
+	{
+		return (JDFInk) getElement(ElementName.INK, null, 0);
+	}
+
+	/**
+	 * (25) getCreateInk
+	 * 
+	 * @return JDFInk the element
+	 */
+	public JDFInk getCreateInk()
+	{
+		return (JDFInk) getCreateElement_JDFElement(ElementName.INK, null, 0);
+	}
+
+	/**
 	 * (26) getCreateInk
 	 * 
 	 * @param iSkip number of elements to skip
@@ -558,6 +618,26 @@ public abstract class JDFAutoDropItem extends JDFElement
 	public void refInk(JDFInk refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element Media
+	 *
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getMedia()
+	{
+		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMedia
+	 * 
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateMedia()
+	{
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**
@@ -613,6 +693,26 @@ public abstract class JDFAutoDropItem extends JDFElement
 	}
 
 	/**
+	 * (24) const get element Pallet
+	 *
+	 * @return JDFPallet the element
+	 */
+	public JDFPallet getPallet()
+	{
+		return (JDFPallet) getElement(ElementName.PALLET, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePallet
+	 * 
+	 * @return JDFPallet the element
+	 */
+	public JDFPallet getCreatePallet()
+	{
+		return (JDFPallet) getCreateElement_JDFElement(ElementName.PALLET, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePallet
 	 * 
 	 * @param iSkip number of elements to skip
@@ -662,6 +762,26 @@ public abstract class JDFAutoDropItem extends JDFElement
 	public void refPallet(JDFPallet refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element RegisterRibbon
+	 *
+	 * @return JDFRegisterRibbon the element
+	 */
+	public JDFRegisterRibbon getRegisterRibbon()
+	{
+		return (JDFRegisterRibbon) getElement(ElementName.REGISTERRIBBON, null, 0);
+	}
+
+	/**
+	 * (25) getCreateRegisterRibbon
+	 * 
+	 * @return JDFRegisterRibbon the element
+	 */
+	public JDFRegisterRibbon getCreateRegisterRibbon()
+	{
+		return (JDFRegisterRibbon) getCreateElement_JDFElement(ElementName.REGISTERRIBBON, null, 0);
 	}
 
 	/**
@@ -717,6 +837,26 @@ public abstract class JDFAutoDropItem extends JDFElement
 	}
 
 	/**
+	 * (24) const get element Strap
+	 *
+	 * @return JDFStrap the element
+	 */
+	public JDFStrap getStrap()
+	{
+		return (JDFStrap) getElement(ElementName.STRAP, null, 0);
+	}
+
+	/**
+	 * (25) getCreateStrap
+	 * 
+	 * @return JDFStrap the element
+	 */
+	public JDFStrap getCreateStrap()
+	{
+		return (JDFStrap) getCreateElement_JDFElement(ElementName.STRAP, null, 0);
+	}
+
+	/**
 	 * (26) getCreateStrap
 	 * 
 	 * @param iSkip number of elements to skip
@@ -766,6 +906,26 @@ public abstract class JDFAutoDropItem extends JDFElement
 	public void refStrap(JDFStrap refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element Bundle
+	 *
+	 * @return JDFBundle the element
+	 */
+	public JDFBundle getBundle()
+	{
+		return (JDFBundle) getElement(ElementName.BUNDLE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBundle
+	 * 
+	 * @return JDFBundle the element
+	 */
+	public JDFBundle getCreateBundle()
+	{
+		return (JDFBundle) getCreateElement_JDFElement(ElementName.BUNDLE, null, 0);
 	}
 
 	/**
@@ -821,6 +981,26 @@ public abstract class JDFAutoDropItem extends JDFElement
 	}
 
 	/**
+	 * (24) const get element DigitalMedia
+	 *
+	 * @return JDFDigitalMedia the element
+	 */
+	public JDFDigitalMedia getDigitalMedia()
+	{
+		return (JDFDigitalMedia) getElement(ElementName.DIGITALMEDIA, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDigitalMedia
+	 * 
+	 * @return JDFDigitalMedia the element
+	 */
+	public JDFDigitalMedia getCreateDigitalMedia()
+	{
+		return (JDFDigitalMedia) getCreateElement_JDFElement(ElementName.DIGITALMEDIA, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDigitalMedia
 	 * 
 	 * @param iSkip number of elements to skip
@@ -873,6 +1053,26 @@ public abstract class JDFAutoDropItem extends JDFElement
 	}
 
 	/**
+	 * (24) const get element RollStand
+	 *
+	 * @return JDFRollStand the element
+	 */
+	public JDFRollStand getRollStand()
+	{
+		return (JDFRollStand) getElement(ElementName.ROLLSTAND, null, 0);
+	}
+
+	/**
+	 * (25) getCreateRollStand
+	 * 
+	 * @return JDFRollStand the element
+	 */
+	public JDFRollStand getCreateRollStand()
+	{
+		return (JDFRollStand) getCreateElement_JDFElement(ElementName.ROLLSTAND, null, 0);
+	}
+
+	/**
 	 * (26) getCreateRollStand
 	 * 
 	 * @param iSkip number of elements to skip
@@ -922,6 +1122,26 @@ public abstract class JDFAutoDropItem extends JDFElement
 	public void refRollStand(JDFRollStand refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element Tool
+	 *
+	 * @return JDFTool the element
+	 */
+	public JDFTool getTool()
+	{
+		return (JDFTool) getElement(ElementName.TOOL, null, 0);
+	}
+
+	/**
+	 * (25) getCreateTool
+	 * 
+	 * @return JDFTool the element
+	 */
+	public JDFTool getCreateTool()
+	{
+		return (JDFTool) getCreateElement_JDFElement(ElementName.TOOL, null, 0);
 	}
 
 	/**

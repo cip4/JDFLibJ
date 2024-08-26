@@ -164,6 +164,26 @@ public abstract class JDFAutoLayoutShift extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ShiftPoint
+	 *
+	 * @return JDFShiftPoint the element
+	 */
+	public JDFShiftPoint getShiftPoint()
+	{
+		return (JDFShiftPoint) getElement(ElementName.SHIFTPOINT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateShiftPoint
+	 * 
+	 * @return JDFShiftPoint the element
+	 */
+	public JDFShiftPoint getCreateShiftPoint()
+	{
+		return (JDFShiftPoint) getCreateElement_JDFElement(ElementName.SHIFTPOINT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateShiftPoint
 	 * 
 	 * @param iSkip number of elements to skip

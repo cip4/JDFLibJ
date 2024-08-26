@@ -685,6 +685,26 @@ public abstract class JDFAutoPageList extends JDFResource
 	}
 
 	/**
+	 * (24) const get element PageData
+	 *
+	 * @return JDFPageData the element
+	 */
+	public JDFPageData getPageData()
+	{
+		return (JDFPageData) getElement(ElementName.PAGEDATA, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePageData
+	 * 
+	 * @return JDFPageData the element
+	 */
+	public JDFPageData getCreatePageData()
+	{
+		return (JDFPageData) getCreateElement_JDFElement(ElementName.PAGEDATA, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePageData
 	 * 
 	 * @param iSkip number of elements to skip
@@ -764,6 +784,26 @@ public abstract class JDFAutoPageList extends JDFResource
 	public void refScreeningParams(JDFScreeningParams refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element SeparationSpec
+	 *
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getSeparationSpec()
+	{
+		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSeparationSpec
+	 * 
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getCreateSeparationSpec()
+	{
+		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, 0);
 	}
 
 	/**

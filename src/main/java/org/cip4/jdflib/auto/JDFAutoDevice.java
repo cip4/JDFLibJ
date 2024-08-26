@@ -865,6 +865,26 @@ public abstract class JDFAutoDevice extends JDFResource
 	}
 
 	/**
+	 * (24) const get element DeviceCap
+	 *
+	 * @return JDFDeviceCap the element
+	 */
+	public JDFDeviceCap getDeviceCap()
+	{
+		return (JDFDeviceCap) getElement(ElementName.DEVICECAP, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDeviceCap
+	 * 
+	 * @return JDFDeviceCap the element
+	 */
+	public JDFDeviceCap getCreateDeviceCap()
+	{
+		return (JDFDeviceCap) getCreateElement_JDFElement(ElementName.DEVICECAP, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDeviceCap
 	 * 
 	 * @param iSkip number of elements to skip
@@ -934,6 +954,26 @@ public abstract class JDFAutoDevice extends JDFResource
 	public JDFIconList appendIconList()
 	{
 		return (JDFIconList) appendElementN(ElementName.ICONLIST, 1, null);
+	}
+
+	/**
+	 * (24) const get element Module
+	 *
+	 * @return JDFModule the element
+	 */
+	public JDFModule getModule()
+	{
+		return (JDFModule) getElement(ElementName.MODULE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateModule
+	 * 
+	 * @return JDFModule the element
+	 */
+	public JDFModule getCreateModule()
+	{
+		return (JDFModule) getCreateElement_JDFElement(ElementName.MODULE, null, 0);
 	}
 
 	/**

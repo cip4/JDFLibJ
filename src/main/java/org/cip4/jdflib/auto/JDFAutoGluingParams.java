@@ -208,6 +208,26 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Glue
+	 *
+	 * @return JDFGlue the element
+	 */
+	public JDFGlue getGlue()
+	{
+		return (JDFGlue) getElement(ElementName.GLUE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateGlue
+	 * 
+	 * @return JDFGlue the element
+	 */
+	public JDFGlue getCreateGlue()
+	{
+		return (JDFGlue) getCreateElement_JDFElement(ElementName.GLUE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateGlue
 	 * 
 	 * @param iSkip number of elements to skip

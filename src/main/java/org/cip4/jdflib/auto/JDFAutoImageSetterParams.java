@@ -1043,14 +1043,4 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return (JDFFitPolicy) appendElementN(ElementName.FITPOLICY, 1, null);
 	}
 
-	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refFitPolicy(JDFFitPolicy refTarget)
-	{
-		refElement(refTarget);
-	}
-
 }

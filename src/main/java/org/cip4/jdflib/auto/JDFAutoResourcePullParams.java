@@ -504,6 +504,26 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Part
+	 *
+	 * @return JDFPart the element
+	 */
+	public JDFPart getPart()
+	{
+		return (JDFPart) getElement(ElementName.PART, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePart
+	 * 
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart()
+	{
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePart
 	 * 
 	 * @param iSkip number of elements to skip

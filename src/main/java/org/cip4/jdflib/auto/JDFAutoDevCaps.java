@@ -598,6 +598,26 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element DevCap
+	 *
+	 * @return JDFDevCap the element
+	 */
+	public JDFDevCap getDevCap()
+	{
+		return (JDFDevCap) getElement(ElementName.DEVCAP, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDevCap
+	 * 
+	 * @return JDFDevCap the element
+	 */
+	public JDFDevCap getCreateDevCap()
+	{
+		return (JDFDevCap) getCreateElement_JDFElement(ElementName.DEVCAP, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDevCap
 	 * 
 	 * @param iSkip number of elements to skip
@@ -637,6 +657,26 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	public JDFDevCap appendDevCap()
 	{
 		return (JDFDevCap) appendElement(ElementName.DEVCAP, null);
+	}
+
+	/**
+	 * (24) const get element Loc
+	 *
+	 * @return JDFLoc the element
+	 */
+	public JDFLoc getLoc()
+	{
+		return (JDFLoc) getElement(ElementName.LOC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateLoc
+	 * 
+	 * @return JDFLoc the element
+	 */
+	public JDFLoc getCreateLoc()
+	{
+		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, 0);
 	}
 
 	/**

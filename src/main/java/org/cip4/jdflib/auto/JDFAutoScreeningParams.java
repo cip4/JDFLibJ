@@ -232,6 +232,26 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ScreenSelector
+	 *
+	 * @return JDFScreenSelector the element
+	 */
+	public JDFScreenSelector getScreenSelector()
+	{
+		return (JDFScreenSelector) getElement(ElementName.SCREENSELECTOR, null, 0);
+	}
+
+	/**
+	 * (25) getCreateScreenSelector
+	 * 
+	 * @return JDFScreenSelector the element
+	 */
+	public JDFScreenSelector getCreateScreenSelector()
+	{
+		return (JDFScreenSelector) getCreateElement_JDFElement(ElementName.SCREENSELECTOR, null, 0);
+	}
+
+	/**
 	 * (26) getCreateScreenSelector
 	 * 
 	 * @param iSkip number of elements to skip

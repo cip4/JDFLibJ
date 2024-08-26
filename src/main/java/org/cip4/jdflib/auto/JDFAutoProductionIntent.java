@@ -150,6 +150,26 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	 */
 
 	/**
+	 * (24) const get element Certification
+	 *
+	 * @return JDFCertification the element
+	 */
+	public JDFCertification getCertification()
+	{
+		return (JDFCertification) getElement(ElementName.CERTIFICATION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCertification
+	 * 
+	 * @return JDFCertification the element
+	 */
+	public JDFCertification getCreateCertification()
+	{
+		return (JDFCertification) getCreateElement_JDFElement(ElementName.CERTIFICATION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateCertification
 	 * 
 	 * @param iSkip number of elements to skip
@@ -249,6 +269,26 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	public JDFNameSpan appendPrintProcess()
 	{
 		return (JDFNameSpan) appendElementN(ElementName.PRINTPROCESS, 1, null);
+	}
+
+	/**
+	 * (24) const get element Resource
+	 *
+	 * @return JDFResource the element
+	 */
+	public JDFResource getResource()
+	{
+		return (JDFResource) getElement(ElementName.RESOURCE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateResource
+	 * 
+	 * @return JDFResource the element
+	 */
+	public JDFResource getCreateResource()
+	{
+		return (JDFResource) getCreateElement_JDFElement(ElementName.RESOURCE, null, 0);
 	}
 
 	/**

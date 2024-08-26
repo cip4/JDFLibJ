@@ -546,6 +546,26 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	}
 
 	/**
+	 * (24) const get element ArtDelivery
+	 *
+	 * @return JDFArtDelivery the element
+	 */
+	public JDFArtDelivery getArtDelivery()
+	{
+		return (JDFArtDelivery) getElement(ElementName.ARTDELIVERY, null, 0);
+	}
+
+	/**
+	 * (25) getCreateArtDelivery
+	 * 
+	 * @return JDFArtDelivery the element
+	 */
+	public JDFArtDelivery getCreateArtDelivery()
+	{
+		return (JDFArtDelivery) getCreateElement_JDFElement(ElementName.ARTDELIVERY, null, 0);
+	}
+
+	/**
 	 * (26) getCreateArtDelivery
 	 * 
 	 * @param iSkip number of elements to skip
@@ -625,6 +645,28 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	public void refCompany(JDFCompany refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element Contact
+	 *
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getContact()
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateContact
+	 * 
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getCreateContact()
+	{
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, 0);
 	}
 
 	/**

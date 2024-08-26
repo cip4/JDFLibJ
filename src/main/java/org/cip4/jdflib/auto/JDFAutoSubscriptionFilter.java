@@ -129,36 +129,36 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoSubscriptionFilter
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSubscriptionFilter(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	protected JDFAutoSubscriptionFilter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoSubscriptionFilter
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSubscriptionFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	protected JDFAutoSubscriptionFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoSubscriptionFilter
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSubscriptionFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	protected JDFAutoSubscriptionFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -172,17 +172,17 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 */
 	/**
 	 * (36) set attribute ChannelID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setChannelID(final String value)
+	public void setChannelID(String value)
 	{
 		setAttribute(AttributeName.CHANNELID, value, null);
 	}
 
 	/**
 	 * (23) get String attribute ChannelID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getChannelID()
@@ -195,17 +195,17 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 */
 	/**
 	 * (36) set attribute DeviceID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeviceID(final String value)
+	public void setDeviceID(String value)
 	{
 		setAttribute(AttributeName.DEVICEID, value, null);
 	}
 
 	/**
 	 * (23) get String attribute DeviceID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDeviceID()
@@ -218,17 +218,17 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 */
 	/**
 	 * (36) set attribute Families
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFamilies(final VString value)
+	public void setFamilies(VString value)
 	{
 		setAttribute(AttributeName.FAMILIES, value, null);
 	}
 
 	/**
 	 * (21) get VString attribute Families
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getFamilies()
@@ -244,17 +244,17 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 */
 	/**
 	 * (36) set attribute JobID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(final String value)
+	public void setJobID(String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
 
 	/**
 	 * (23) get String attribute JobID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getJobID()
@@ -267,17 +267,17 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 */
 	/**
 	 * (36) set attribute JobPartID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(final String value)
+	public void setJobPartID(String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
 
 	/**
 	 * (23) get String attribute JobPartID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getJobPartID()
@@ -291,17 +291,17 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 */
 	/**
 	 * (36) set attribute MessageTypes
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMessageTypes(final VString value)
+	public void setMessageTypes(VString value)
 	{
 		setAttribute(AttributeName.MESSAGETYPES, value, null);
 	}
 
 	/**
 	 * (21) get VString attribute MessageTypes
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getMessageTypes()
@@ -318,17 +318,17 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 */
 	/**
 	 * (36) set attribute QueueEntryID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueEntryID(final String value)
+	public void setQueueEntryID(String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}
 
 	/**
 	 * (23) get String attribute QueueEntryID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getQueueEntryID()
@@ -341,17 +341,17 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 */
 	/**
 	 * (36) set attribute URL
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setURL(final String value)
+	public void setURL(String value)
 	{
 		setAttribute(AttributeName.URL, value, null);
 	}
 
 	/**
 	 * (23) get String attribute URL
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getURL()
@@ -364,23 +364,43 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Part
+	 *
+	 * @return JDFPart the element
+	 */
+	public JDFPart getPart()
+	{
+		return (JDFPart) getElement(ElementName.PART, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePart
+	 * 
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart()
+	{
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePart
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(final int iSkip)
+	public JDFPart getCreatePart(int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
 
 	/**
 	 * (27) const get element Part
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element default is getPart(0)
 	 */
-	public JDFPart getPart(final int iSkip)
+	public JDFPart getPart(int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}
@@ -397,7 +417,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 
 	/**
 	 * (30) append element Part
-	 * 
+	 *
 	 * @return JDFPart the element
 	 */
 	public JDFPart appendPart()

@@ -144,6 +144,26 @@ public abstract class JDFAutoActionPool extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Action
+	 *
+	 * @return JDFAction the element
+	 */
+	public JDFAction getAction()
+	{
+		return (JDFAction) getElement(ElementName.ACTION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateAction
+	 * 
+	 * @return JDFAction the element
+	 */
+	public JDFAction getCreateAction()
+	{
+		return (JDFAction) getCreateElement_JDFElement(ElementName.ACTION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateAction
 	 * 
 	 * @param iSkip number of elements to skip

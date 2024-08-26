@@ -512,6 +512,26 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element GlueLine
+	 *
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getGlueLine()
+	{
+		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateGlueLine
+	 * 
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getCreateGlueLine()
+	{
+		return (JDFGlueLine) getCreateElement_JDFElement(ElementName.GLUELINE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateGlueLine
 	 * 
 	 * @param iSkip number of elements to skip
@@ -551,16 +571,6 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	public JDFGlueLine appendGlueLine()
 	{
 		return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
-	}
-
-	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refGlueLine(JDFGlueLine refTarget)
-	{
-		refElement(refTarget);
 	}
 
 }

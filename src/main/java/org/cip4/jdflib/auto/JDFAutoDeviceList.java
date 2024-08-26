@@ -144,6 +144,26 @@ public abstract class JDFAutoDeviceList extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element DeviceInfo
+	 *
+	 * @return JDFDeviceInfo the element
+	 */
+	public JDFDeviceInfo getDeviceInfo()
+	{
+		return (JDFDeviceInfo) getElement(ElementName.DEVICEINFO, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDeviceInfo
+	 * 
+	 * @return JDFDeviceInfo the element
+	 */
+	public JDFDeviceInfo getCreateDeviceInfo()
+	{
+		return (JDFDeviceInfo) getCreateElement_JDFElement(ElementName.DEVICEINFO, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDeviceInfo
 	 * 
 	 * @param iSkip number of elements to skip

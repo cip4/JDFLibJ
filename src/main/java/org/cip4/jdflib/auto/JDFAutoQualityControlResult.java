@@ -718,6 +718,26 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	}
 
 	/**
+	 * (24) const get element QualityMeasurement
+	 *
+	 * @return JDFQualityMeasurement the element
+	 */
+	public JDFQualityMeasurement getQualityMeasurement()
+	{
+		return (JDFQualityMeasurement) getElement(ElementName.QUALITYMEASUREMENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateQualityMeasurement
+	 * 
+	 * @return JDFQualityMeasurement the element
+	 */
+	public JDFQualityMeasurement getCreateQualityMeasurement()
+	{
+		return (JDFQualityMeasurement) getCreateElement_JDFElement(ElementName.QUALITYMEASUREMENT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateQualityMeasurement
 	 * 
 	 * @param iSkip number of elements to skip

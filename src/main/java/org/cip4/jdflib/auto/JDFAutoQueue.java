@@ -337,6 +337,26 @@ public abstract class JDFAutoQueue extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Device
+	 *
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getDevice()
+	{
+		return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDevice
+	 * 
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getCreateDevice()
+	{
+		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDevice
 	 * 
 	 * @param iSkip number of elements to skip
@@ -376,6 +396,26 @@ public abstract class JDFAutoQueue extends JDFElement
 	public JDFDevice appendDevice()
 	{
 		return (JDFDevice) appendElement(ElementName.DEVICE, null);
+	}
+
+	/**
+	 * (24) const get element QueueEntry
+	 *
+	 * @return JDFQueueEntry the element
+	 */
+	public JDFQueueEntry getQueueEntry()
+	{
+		return (JDFQueueEntry) getElement(ElementName.QUEUEENTRY, null, 0);
+	}
+
+	/**
+	 * (25) getCreateQueueEntry
+	 * 
+	 * @return JDFQueueEntry the element
+	 */
+	public JDFQueueEntry getCreateQueueEntry()
+	{
+		return (JDFQueueEntry) getCreateElement_JDFElement(ElementName.QUEUEENTRY, null, 0);
 	}
 
 	/**

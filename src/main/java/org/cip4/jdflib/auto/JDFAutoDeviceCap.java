@@ -677,6 +677,26 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	}
 
 	/**
+	 * (24) const get element DevCaps
+	 *
+	 * @return JDFDevCaps the element
+	 */
+	public JDFDevCaps getDevCaps()
+	{
+		return (JDFDevCaps) getElement(ElementName.DEVCAPS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDevCaps
+	 * 
+	 * @return JDFDevCaps the element
+	 */
+	public JDFDevCaps getCreateDevCaps()
+	{
+		return (JDFDevCaps) getCreateElement_JDFElement(ElementName.DEVCAPS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDevCaps
 	 * 
 	 * @param iSkip number of elements to skip
@@ -836,6 +856,26 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	public JDFModulePool appendModulePool()
 	{
 		return (JDFModulePool) appendElementN(ElementName.MODULEPOOL, 1, null);
+	}
+
+	/**
+	 * (24) const get element Performance
+	 *
+	 * @return JDFPerformance the element
+	 */
+	public JDFPerformance getPerformance()
+	{
+		return (JDFPerformance) getElement(ElementName.PERFORMANCE, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePerformance
+	 * 
+	 * @return JDFPerformance the element
+	 */
+	public JDFPerformance getCreatePerformance()
+	{
+		return (JDFPerformance) getCreateElement_JDFElement(ElementName.PERFORMANCE, null, 0);
 	}
 
 	/**

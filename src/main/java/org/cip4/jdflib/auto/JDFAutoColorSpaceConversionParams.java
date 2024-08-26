@@ -327,6 +327,26 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFileSpec
 	 * 
 	 * @param iSkip number of elements to skip
@@ -376,6 +396,26 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	public void refFileSpec(JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element ColorSpaceConversionOp
+	 *
+	 * @return JDFColorSpaceConversionOp the element
+	 */
+	public JDFColorSpaceConversionOp getColorSpaceConversionOp()
+	{
+		return (JDFColorSpaceConversionOp) getElement(ElementName.COLORSPACECONVERSIONOP, null, 0);
+	}
+
+	/**
+	 * (25) getCreateColorSpaceConversionOp
+	 * 
+	 * @return JDFColorSpaceConversionOp the element
+	 */
+	public JDFColorSpaceConversionOp getCreateColorSpaceConversionOp()
+	{
+		return (JDFColorSpaceConversionOp) getCreateElement_JDFElement(ElementName.COLORSPACECONVERSIONOP, null, 0);
 	}
 
 	/**

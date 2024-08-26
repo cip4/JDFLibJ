@@ -539,6 +539,28 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	}
 
 	/**
+	 * (24) const get element Contact
+	 *
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getContact()
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateContact
+	 * 
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getCreateContact()
+	{
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateContact
 	 * 
 	 * @param iSkip number of elements to skip
@@ -592,6 +614,26 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	}
 
 	/**
+	 * (24) const get element Drop
+	 *
+	 * @return JDFDrop the element
+	 */
+	public JDFDrop getDrop()
+	{
+		return (JDFDrop) getElement(ElementName.DROP, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDrop
+	 * 
+	 * @return JDFDrop the element
+	 */
+	public JDFDrop getCreateDrop()
+	{
+		return (JDFDrop) getCreateElement_JDFElement(ElementName.DROP, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDrop
 	 * 
 	 * @param iSkip number of elements to skip
@@ -631,6 +673,26 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	public JDFDrop appendDrop()
 	{
 		return (JDFDrop) appendElement(ElementName.DROP, null);
+	}
+
+	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**

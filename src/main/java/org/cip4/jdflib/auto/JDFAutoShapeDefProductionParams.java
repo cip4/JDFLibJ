@@ -166,6 +166,26 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ObjectModel
+	 *
+	 * @return JDFObjectModel the element
+	 */
+	public JDFObjectModel getObjectModel()
+	{
+		return (JDFObjectModel) getElement(ElementName.OBJECTMODEL, null, 0);
+	}
+
+	/**
+	 * (25) getCreateObjectModel
+	 * 
+	 * @return JDFObjectModel the element
+	 */
+	public JDFObjectModel getCreateObjectModel()
+	{
+		return (JDFObjectModel) getCreateElement_JDFElement(ElementName.OBJECTMODEL, null, 0);
+	}
+
+	/**
 	 * (26) getCreateObjectModel
 	 * 
 	 * @param iSkip number of elements to skip

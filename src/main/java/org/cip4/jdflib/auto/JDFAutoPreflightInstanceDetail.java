@@ -187,6 +187,26 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Value
+	 *
+	 * @return JDFElement the element
+	 */
+	public JDFElement getValue()
+	{
+		return (JDFElement) getElement(ElementName.VALUE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateValue
+	 * 
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreateValue()
+	{
+		return (JDFElement) getCreateElement_JDFElement(ElementName.VALUE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateValue
 	 * 
 	 * @param iSkip number of elements to skip

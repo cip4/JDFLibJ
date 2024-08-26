@@ -618,6 +618,26 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ObjectResolution
+	 *
+	 * @return JDFObjectResolution the element
+	 */
+	public JDFObjectResolution getObjectResolution()
+	{
+		return (JDFObjectResolution) getElement(ElementName.OBJECTRESOLUTION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateObjectResolution
+	 * 
+	 * @return JDFObjectResolution the element
+	 */
+	public JDFObjectResolution getCreateObjectResolution()
+	{
+		return (JDFObjectResolution) getCreateElement_JDFElement(ElementName.OBJECTRESOLUTION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateObjectResolution
 	 * 
 	 * @param iSkip number of elements to skip
@@ -660,16 +680,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refObjectResolution(JDFObjectResolution refTarget)
-	{
-		refElement(refTarget);
-	}
-
-	/**
 	 * (24) const get element FitPolicy
 	 *
 	 * @return JDFFitPolicy the element
@@ -700,13 +710,23 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
+	 * (24) const get element InterpretingDetails
 	 *
-	 * @param refTarget the element that is referenced
+	 * @return JDFInterpretingDetails the element
 	 */
-	public void refFitPolicy(JDFFitPolicy refTarget)
+	public JDFInterpretingDetails getInterpretingDetails()
 	{
-		refElement(refTarget);
+		return (JDFInterpretingDetails) getElement(ElementName.INTERPRETINGDETAILS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateInterpretingDetails
+	 * 
+	 * @return JDFInterpretingDetails the element
+	 */
+	public JDFInterpretingDetails getCreateInterpretingDetails()
+	{
+		return (JDFInterpretingDetails) getCreateElement_JDFElement(ElementName.INTERPRETINGDETAILS, null, 0);
 	}
 
 	/**
@@ -749,6 +769,26 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	public JDFInterpretingDetails appendInterpretingDetails()
 	{
 		return (JDFInterpretingDetails) appendElement(ElementName.INTERPRETINGDETAILS, null);
+	}
+
+	/**
+	 * (24) const get element Media
+	 *
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getMedia()
+	{
+		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMedia
+	 * 
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateMedia()
+	{
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**

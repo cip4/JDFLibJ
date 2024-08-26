@@ -1282,6 +1282,26 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	}
 
 	/**
+	 * (24) const get element Fold
+	 *
+	 * @return JDFFold the element
+	 */
+	public JDFFold getFold()
+	{
+		return (JDFFold) getElement(ElementName.FOLD, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFold
+	 * 
+	 * @return JDFFold the element
+	 */
+	public JDFFold getCreateFold()
+	{
+		return (JDFFold) getCreateElement_JDFElement(ElementName.FOLD, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFold
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1321,6 +1341,26 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	public JDFFold appendFold()
 	{
 		return (JDFFold) appendElement(ElementName.FOLD, null);
+	}
+
+	/**
+	 * (24) const get element SignatureCell
+	 *
+	 * @return JDFSignatureCell the element
+	 */
+	public JDFSignatureCell getSignatureCell()
+	{
+		return (JDFSignatureCell) getElement(ElementName.SIGNATURECELL, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSignatureCell
+	 * 
+	 * @return JDFSignatureCell the element
+	 */
+	public JDFSignatureCell getCreateSignatureCell()
+	{
+		return (JDFSignatureCell) getCreateElement_JDFElement(ElementName.SIGNATURECELL, null, 0);
 	}
 
 	/**

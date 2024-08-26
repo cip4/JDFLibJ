@@ -240,6 +240,26 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	}
 
 	/**
+	 * (24) const get element PostPressComponentPath
+	 *
+	 * @return JDFProductionSubPath the element
+	 */
+	public JDFProductionSubPath getPostPressComponentPath()
+	{
+		return (JDFProductionSubPath) getElement(ElementName.POSTPRESSCOMPONENTPATH, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePostPressComponentPath
+	 * 
+	 * @return JDFProductionSubPath the element
+	 */
+	public JDFProductionSubPath getCreatePostPressComponentPath()
+	{
+		return (JDFProductionSubPath) getCreateElement_JDFElement(ElementName.POSTPRESSCOMPONENTPATH, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePostPressComponentPath
 	 * 
 	 * @param iSkip number of elements to skip
@@ -279,6 +299,26 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	public JDFProductionSubPath appendPostPressComponentPath()
 	{
 		return (JDFProductionSubPath) appendElement(ElementName.POSTPRESSCOMPONENTPATH, null);
+	}
+
+	/**
+	 * (24) const get element PrintingUnitWebPath
+	 *
+	 * @return JDFProductionSubPath the element
+	 */
+	public JDFProductionSubPath getPrintingUnitWebPath()
+	{
+		return (JDFProductionSubPath) getElement(ElementName.PRINTINGUNITWEBPATH, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePrintingUnitWebPath
+	 * 
+	 * @return JDFProductionSubPath the element
+	 */
+	public JDFProductionSubPath getCreatePrintingUnitWebPath()
+	{
+		return (JDFProductionSubPath) getCreateElement_JDFElement(ElementName.PRINTINGUNITWEBPATH, null, 0);
 	}
 
 	/**

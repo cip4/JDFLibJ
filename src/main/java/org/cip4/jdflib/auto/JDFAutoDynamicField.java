@@ -336,14 +336,4 @@ public abstract class JDFAutoDynamicField extends JDFElement
 		return (JDFDeviceMark) appendElementN(ElementName.DEVICEMARK, 1, null);
 	}
 
-	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refDeviceMark(JDFDeviceMark refTarget)
-	{
-		refElement(refTarget);
-	}
-
 }

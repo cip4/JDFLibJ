@@ -447,6 +447,26 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	}
 
 	/**
+	 * (24) const get element ColorMeasurement
+	 *
+	 * @return JDFColorMeasurement the element
+	 */
+	public JDFColorMeasurement getColorMeasurement()
+	{
+		return (JDFColorMeasurement) getElement(ElementName.COLORMEASUREMENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateColorMeasurement
+	 * 
+	 * @return JDFColorMeasurement the element
+	 */
+	public JDFColorMeasurement getCreateColorMeasurement()
+	{
+		return (JDFColorMeasurement) getCreateElement_JDFElement(ElementName.COLORMEASUREMENT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateColorMeasurement
 	 * 
 	 * @param iSkip number of elements to skip
@@ -486,6 +506,26 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	public JDFColorMeasurement appendColorMeasurement()
 	{
 		return (JDFColorMeasurement) appendElement(ElementName.COLORMEASUREMENT, null);
+	}
+
+	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**

@@ -326,6 +326,26 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element BasicPreflightTest
+	 *
+	 * @return JDFBasicPreflightTest the element
+	 */
+	public JDFBasicPreflightTest getBasicPreflightTest()
+	{
+		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBasicPreflightTest
+	 * 
+	 * @return JDFBasicPreflightTest the element
+	 */
+	public JDFBasicPreflightTest getCreateBasicPreflightTest()
+	{
+		return (JDFBasicPreflightTest) getCreateElement_JDFElement(ElementName.BASICPREFLIGHTTEST, null, 0);
+	}
+
+	/**
 	 * (26) getCreateBasicPreflightTest
 	 * 
 	 * @param iSkip number of elements to skip

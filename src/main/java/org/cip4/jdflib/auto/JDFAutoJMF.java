@@ -147,7 +147,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJMF(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	protected JDFAutoJMF(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -159,7 +159,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJMF(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	protected JDFAutoJMF(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -172,7 +172,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoJMF(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	protected JDFAutoJMF(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -189,7 +189,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAgentName(final String value)
+	public void setAgentName(String value)
 	{
 		setAttribute(AttributeName.AGENTNAME, value, null);
 	}
@@ -213,7 +213,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAgentVersion(final String value)
+	public void setAgentVersion(String value)
 	{
 		setAttribute(AttributeName.AGENTVERSION, value, null);
 	}
@@ -236,7 +236,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeviceID(final String value)
+	public void setDeviceID(String value)
 	{
 		setAttribute(AttributeName.DEVICEID, value, null);
 	}
@@ -259,7 +259,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setICSVersions(final VString value)
+	public void setICSVersions(VString value)
 	{
 		setAttribute(AttributeName.ICSVERSIONS, value, null);
 	}
@@ -285,7 +285,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMaxVersion(final EnumVersion enumVar)
+	public void setMaxVersion(EnumVersion enumVar)
 	{
 		setAttribute(AttributeName.MAXVERSION, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -308,7 +308,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResponseURL(final String value)
+	public void setResponseURL(String value)
 	{
 		setAttribute(AttributeName.RESPONSEURL, value, null);
 	}
@@ -331,7 +331,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSenderID(final String value)
+	public void setSenderID(String value)
 	{
 		setAttribute(AttributeName.SENDERID, value, null);
 	}
@@ -354,7 +354,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setTimeStamp(final JDFDate value)
+	public void setTimeStamp(JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -381,12 +381,32 @@ public abstract class JDFAutoJMF extends JDFPool
 	 */
 
 	/**
+	 * (24) const get element Employee
+	 *
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getEmployee()
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateEmployee
+	 * 
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getCreateEmployee()
+	{
+		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateEmployee
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
-	public JDFEmployee getCreateEmployee(final int iSkip)
+	public JDFEmployee getCreateEmployee(int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -397,7 +417,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element default is getEmployee(0)
 	 */
-	public JDFEmployee getEmployee(final int iSkip)
+	public JDFEmployee getEmployee(int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -423,12 +443,32 @@ public abstract class JDFAutoJMF extends JDFPool
 	}
 
 	/**
+	 * (24) const get element Command
+	 *
+	 * @return JDFCommand the element
+	 */
+	public JDFCommand getCommand()
+	{
+		return (JDFCommand) getElement(ElementName.COMMAND, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCommand
+	 * 
+	 * @return JDFCommand the element
+	 */
+	public JDFCommand getCreateCommand()
+	{
+		return (JDFCommand) getCreateElement_JDFElement(ElementName.COMMAND, null, 0);
+	}
+
+	/**
 	 * (26) getCreateCommand
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCommand the element
 	 */
-	public JDFCommand getCreateCommand(final int iSkip)
+	public JDFCommand getCreateCommand(int iSkip)
 	{
 		return (JDFCommand) getCreateElement_JDFElement(ElementName.COMMAND, null, iSkip);
 	}
@@ -439,7 +479,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFCommand the element default is getCommand(0)
 	 */
-	public JDFCommand getCommand(final int iSkip)
+	public JDFCommand getCommand(int iSkip)
 	{
 		return (JDFCommand) getElement(ElementName.COMMAND, null, iSkip);
 	}
@@ -465,12 +505,32 @@ public abstract class JDFAutoJMF extends JDFPool
 	}
 
 	/**
+	 * (24) const get element Acknowledge
+	 *
+	 * @return JDFAcknowledge the element
+	 */
+	public JDFAcknowledge getAcknowledge()
+	{
+		return (JDFAcknowledge) getElement(ElementName.ACKNOWLEDGE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateAcknowledge
+	 * 
+	 * @return JDFAcknowledge the element
+	 */
+	public JDFAcknowledge getCreateAcknowledge()
+	{
+		return (JDFAcknowledge) getCreateElement_JDFElement(ElementName.ACKNOWLEDGE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateAcknowledge
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFAcknowledge the element
 	 */
-	public JDFAcknowledge getCreateAcknowledge(final int iSkip)
+	public JDFAcknowledge getCreateAcknowledge(int iSkip)
 	{
 		return (JDFAcknowledge) getCreateElement_JDFElement(ElementName.ACKNOWLEDGE, null, iSkip);
 	}
@@ -481,7 +541,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFAcknowledge the element default is getAcknowledge(0)
 	 */
-	public JDFAcknowledge getAcknowledge(final int iSkip)
+	public JDFAcknowledge getAcknowledge(int iSkip)
 	{
 		return (JDFAcknowledge) getElement(ElementName.ACKNOWLEDGE, null, iSkip);
 	}
@@ -507,12 +567,32 @@ public abstract class JDFAutoJMF extends JDFPool
 	}
 
 	/**
+	 * (24) const get element Response
+	 *
+	 * @return JDFResponse the element
+	 */
+	public JDFResponse getResponse()
+	{
+		return (JDFResponse) getElement(ElementName.RESPONSE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateResponse
+	 * 
+	 * @return JDFResponse the element
+	 */
+	public JDFResponse getCreateResponse()
+	{
+		return (JDFResponse) getCreateElement_JDFElement(ElementName.RESPONSE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateResponse
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFResponse the element
 	 */
-	public JDFResponse getCreateResponse(final int iSkip)
+	public JDFResponse getCreateResponse(int iSkip)
 	{
 		return (JDFResponse) getCreateElement_JDFElement(ElementName.RESPONSE, null, iSkip);
 	}
@@ -523,7 +603,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFResponse the element default is getResponse(0)
 	 */
-	public JDFResponse getResponse(final int iSkip)
+	public JDFResponse getResponse(int iSkip)
 	{
 		return (JDFResponse) getElement(ElementName.RESPONSE, null, iSkip);
 	}
@@ -549,12 +629,32 @@ public abstract class JDFAutoJMF extends JDFPool
 	}
 
 	/**
+	 * (24) const get element Signal
+	 *
+	 * @return JDFSignal the element
+	 */
+	public JDFSignal getSignal()
+	{
+		return (JDFSignal) getElement(ElementName.SIGNAL, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSignal
+	 * 
+	 * @return JDFSignal the element
+	 */
+	public JDFSignal getCreateSignal()
+	{
+		return (JDFSignal) getCreateElement_JDFElement(ElementName.SIGNAL, null, 0);
+	}
+
+	/**
 	 * (26) getCreateSignal
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSignal the element
 	 */
-	public JDFSignal getCreateSignal(final int iSkip)
+	public JDFSignal getCreateSignal(int iSkip)
 	{
 		return (JDFSignal) getCreateElement_JDFElement(ElementName.SIGNAL, null, iSkip);
 	}
@@ -565,7 +665,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFSignal the element default is getSignal(0)
 	 */
-	public JDFSignal getSignal(final int iSkip)
+	public JDFSignal getSignal(int iSkip)
 	{
 		return (JDFSignal) getElement(ElementName.SIGNAL, null, iSkip);
 	}
@@ -591,12 +691,32 @@ public abstract class JDFAutoJMF extends JDFPool
 	}
 
 	/**
+	 * (24) const get element Query
+	 *
+	 * @return JDFQuery the element
+	 */
+	public JDFQuery getQuery()
+	{
+		return (JDFQuery) getElement(ElementName.QUERY, null, 0);
+	}
+
+	/**
+	 * (25) getCreateQuery
+	 * 
+	 * @return JDFQuery the element
+	 */
+	public JDFQuery getCreateQuery()
+	{
+		return (JDFQuery) getCreateElement_JDFElement(ElementName.QUERY, null, 0);
+	}
+
+	/**
 	 * (26) getCreateQuery
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFQuery the element
 	 */
-	public JDFQuery getCreateQuery(final int iSkip)
+	public JDFQuery getCreateQuery(int iSkip)
 	{
 		return (JDFQuery) getCreateElement_JDFElement(ElementName.QUERY, null, iSkip);
 	}
@@ -607,7 +727,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFQuery the element default is getQuery(0)
 	 */
-	public JDFQuery getQuery(final int iSkip)
+	public JDFQuery getQuery(int iSkip)
 	{
 		return (JDFQuery) getElement(ElementName.QUERY, null, iSkip);
 	}
@@ -633,12 +753,32 @@ public abstract class JDFAutoJMF extends JDFPool
 	}
 
 	/**
+	 * (24) const get element Registration
+	 *
+	 * @return JDFRegistration the element
+	 */
+	public JDFRegistration getRegistration()
+	{
+		return (JDFRegistration) getElement(ElementName.REGISTRATION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateRegistration
+	 * 
+	 * @return JDFRegistration the element
+	 */
+	public JDFRegistration getCreateRegistration()
+	{
+		return (JDFRegistration) getCreateElement_JDFElement(ElementName.REGISTRATION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateRegistration
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegistration the element
 	 */
-	public JDFRegistration getCreateRegistration(final int iSkip)
+	public JDFRegistration getCreateRegistration(int iSkip)
 	{
 		return (JDFRegistration) getCreateElement_JDFElement(ElementName.REGISTRATION, null, iSkip);
 	}
@@ -649,7 +789,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegistration the element default is getRegistration(0)
 	 */
-	public JDFRegistration getRegistration(final int iSkip)
+	public JDFRegistration getRegistration(int iSkip)
 	{
 		return (JDFRegistration) getElement(ElementName.REGISTRATION, null, iSkip);
 	}

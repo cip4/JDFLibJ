@@ -83,17 +83,17 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFBarcodeCompParams;
 
 /**
  *****************************************************************************
- * class JDFAutoBarcodeReproParams : public JDFResource
+ * class JDFAutoBarcodeReproParams : public JDFElement
  *****************************************************************************
  * 
  */
 
-public abstract class JDFAutoBarcodeReproParams extends JDFResource
+public abstract class JDFAutoBarcodeReproParams extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
@@ -101,13 +101,13 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BEARERBARS, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumBearerBars.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.HEIGHT, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAGNIFICATION, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MASKING, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumMasking.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEHEIGHT, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEWIDTH, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.RATIO, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BEARERBARS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumBearerBars.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.HEIGHT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAGNIFICATION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MASKING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMasking.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEHEIGHT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.RATIO, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODECOMPPARAMS, 0x3333333111l);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODECOMPPARAMS, 0x3333333333l);
 	}
 
 	@Override
@@ -162,26 +162,6 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 	protected JDFAutoBarcodeReproParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return true if ok
-	 */
-	@Override
-	public boolean init()
-	{
-		final boolean bRet = super.init();
-		setResourceClass(JDFResource.EnumResourceClass.Parameter);
-		return bRet;
-	}
-
-	/**
-	 * @return the resource Class
-	 */
-	@Override
-	public EnumResourceClass getValidClass()
-	{
-		return JDFResource.EnumResourceClass.Parameter;
 	}
 
 	/**
@@ -486,6 +466,26 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element BarcodeCompParams
+	 *
+	 * @return JDFBarcodeCompParams the element
+	 */
+	public JDFBarcodeCompParams getBarcodeCompParams()
+	{
+		return (JDFBarcodeCompParams) getElement(ElementName.BARCODECOMPPARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBarcodeCompParams
+	 * 
+	 * @return JDFBarcodeCompParams the element
+	 */
+	public JDFBarcodeCompParams getCreateBarcodeCompParams()
+	{
+		return (JDFBarcodeCompParams) getCreateElement_JDFElement(ElementName.BARCODECOMPPARAMS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateBarcodeCompParams
 	 * 
 	 * @param iSkip number of elements to skip
@@ -525,16 +525,6 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 	public JDFBarcodeCompParams appendBarcodeCompParams()
 	{
 		return (JDFBarcodeCompParams) appendElement(ElementName.BARCODECOMPPARAMS, null);
-	}
-
-	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refBarcodeCompParams(JDFBarcodeCompParams refTarget)
-	{
-		refElement(refTarget);
 	}
 
 }

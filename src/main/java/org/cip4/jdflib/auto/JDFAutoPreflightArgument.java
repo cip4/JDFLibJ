@@ -146,6 +146,26 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element BoxArgument
+	 *
+	 * @return JDFBoxArgument the element
+	 */
+	public JDFBoxArgument getBoxArgument()
+	{
+		return (JDFBoxArgument) getElement(ElementName.BOXARGUMENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBoxArgument
+	 * 
+	 * @return JDFBoxArgument the element
+	 */
+	public JDFBoxArgument getCreateBoxArgument()
+	{
+		return (JDFBoxArgument) getCreateElement_JDFElement(ElementName.BOXARGUMENT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateBoxArgument
 	 * 
 	 * @param iSkip number of elements to skip
@@ -185,6 +205,26 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	public JDFBoxArgument appendBoxArgument()
 	{
 		return (JDFBoxArgument) appendElement(ElementName.BOXARGUMENT, null);
+	}
+
+	/**
+	 * (24) const get element BoxToBoxDifference
+	 *
+	 * @return JDFBoxToBoxDifference the element
+	 */
+	public JDFBoxToBoxDifference getBoxToBoxDifference()
+	{
+		return (JDFBoxToBoxDifference) getElement(ElementName.BOXTOBOXDIFFERENCE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBoxToBoxDifference
+	 * 
+	 * @return JDFBoxToBoxDifference the element
+	 */
+	public JDFBoxToBoxDifference getCreateBoxToBoxDifference()
+	{
+		return (JDFBoxToBoxDifference) getCreateElement_JDFElement(ElementName.BOXTOBOXDIFFERENCE, null, 0);
 	}
 
 	/**

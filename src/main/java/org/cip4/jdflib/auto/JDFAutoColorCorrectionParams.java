@@ -210,6 +210,26 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFileSpec
 	 * 
 	 * @param iSkip number of elements to skip
@@ -259,6 +279,26 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	public void refFileSpec(JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element ColorCorrectionOp
+	 *
+	 * @return JDFColorCorrectionOp the element
+	 */
+	public JDFColorCorrectionOp getColorCorrectionOp()
+	{
+		return (JDFColorCorrectionOp) getElement(ElementName.COLORCORRECTIONOP, null, 0);
+	}
+
+	/**
+	 * (25) getCreateColorCorrectionOp
+	 * 
+	 * @return JDFColorCorrectionOp the element
+	 */
+	public JDFColorCorrectionOp getCreateColorCorrectionOp()
+	{
+		return (JDFColorCorrectionOp) getCreateElement_JDFElement(ElementName.COLORCORRECTIONOP, null, 0);
 	}
 
 	/**

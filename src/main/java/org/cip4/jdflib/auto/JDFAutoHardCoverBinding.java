@@ -323,6 +323,26 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	}
 
 	/**
+	 * (24) const get element HeadBandColorDetails
+	 *
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getHeadBandColorDetails()
+	{
+		return (JDFStringSpan) getElement(ElementName.HEADBANDCOLORDETAILS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateHeadBandColorDetails
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateHeadBandColorDetails()
+	{
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.HEADBANDCOLORDETAILS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateHeadBandColorDetails
 	 * 
 	 * @param iSkip number of elements to skip
@@ -782,6 +802,26 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	public JDFNumberSpan appendThickness()
 	{
 		return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
+	}
+
+	/**
+	 * (24) const get element RegisterRibbon
+	 *
+	 * @return JDFRegisterRibbon the element
+	 */
+	public JDFRegisterRibbon getRegisterRibbon()
+	{
+		return (JDFRegisterRibbon) getElement(ElementName.REGISTERRIBBON, null, 0);
+	}
+
+	/**
+	 * (25) getCreateRegisterRibbon
+	 * 
+	 * @return JDFRegisterRibbon the element
+	 */
+	public JDFRegisterRibbon getCreateRegisterRibbon()
+	{
+		return (JDFRegisterRibbon) getCreateElement_JDFElement(ElementName.REGISTERRIBBON, null, 0);
 	}
 
 	/**

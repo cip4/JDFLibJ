@@ -266,6 +266,26 @@ public abstract class JDFAutoTile extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element MarkObject
+	 *
+	 * @return JDFMarkObject the element
+	 */
+	public JDFMarkObject getMarkObject()
+	{
+		return (JDFMarkObject) getElement(ElementName.MARKOBJECT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMarkObject
+	 * 
+	 * @return JDFMarkObject the element
+	 */
+	public JDFMarkObject getCreateMarkObject()
+	{
+		return (JDFMarkObject) getCreateElement_JDFElement(ElementName.MARKOBJECT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateMarkObject
 	 * 
 	 * @param iSkip number of elements to skip

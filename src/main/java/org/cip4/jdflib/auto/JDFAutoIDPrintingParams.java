@@ -532,6 +532,26 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Cover
+	 *
+	 * @return JDFCover the element
+	 */
+	public JDFCover getCover()
+	{
+		return (JDFCover) getElement(ElementName.COVER, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCover
+	 * 
+	 * @return JDFCover the element
+	 */
+	public JDFCover getCreateCover()
+	{
+		return (JDFCover) getCreateElement_JDFElement(ElementName.COVER, null, 0);
+	}
+
+	/**
 	 * (26) getCreateCover
 	 * 
 	 * @param iSkip number of elements to skip
@@ -631,6 +651,26 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	public JDFIDPLayout appendIDPLayout()
 	{
 		return (JDFIDPLayout) appendElementN(ElementName.IDPLAYOUT, 1, null);
+	}
+
+	/**
+	 * (24) const get element JobSheet
+	 *
+	 * @return JDFJobSheet the element
+	 */
+	public JDFJobSheet getJobSheet()
+	{
+		return (JDFJobSheet) getElement(ElementName.JOBSHEET, null, 0);
+	}
+
+	/**
+	 * (25) getCreateJobSheet
+	 * 
+	 * @return JDFJobSheet the element
+	 */
+	public JDFJobSheet getCreateJobSheet()
+	{
+		return (JDFJobSheet) getCreateElement_JDFElement(ElementName.JOBSHEET, null, 0);
 	}
 
 	/**

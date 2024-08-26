@@ -806,6 +806,26 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Media
+	 *
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getMedia()
+	{
+		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMedia
+	 * 
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateMedia()
+	{
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
+	}
+
+	/**
 	 * (26) getCreateMedia
 	 * 
 	 * @param iSkip number of elements to skip
@@ -855,6 +875,26 @@ public abstract class JDFAutoGangElement extends JDFElement
 	public void refMedia(JDFMedia refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element RunList
+	 *
+	 * @return JDFRunList the element
+	 */
+	public JDFRunList getRunList()
+	{
+		return (JDFRunList) getElement(ElementName.RUNLIST, null, 0);
+	}
+
+	/**
+	 * (25) getCreateRunList
+	 * 
+	 * @return JDFRunList the element
+	 */
+	public JDFRunList getCreateRunList()
+	{
+		return (JDFRunList) getCreateElement_JDFElement(ElementName.RUNLIST, null, 0);
 	}
 
 	/**

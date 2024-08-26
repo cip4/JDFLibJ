@@ -606,6 +606,26 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFileSpec
 	 * 
 	 * @param iSkip number of elements to skip
@@ -658,6 +678,26 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	}
 
 	/**
+	 * (24) const get element DeviceNColor
+	 *
+	 * @return JDFDeviceNColor the element
+	 */
+	public JDFDeviceNColor getDeviceNColor()
+	{
+		return (JDFDeviceNColor) getElement(ElementName.DEVICENCOLOR, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDeviceNColor
+	 * 
+	 * @return JDFDeviceNColor the element
+	 */
+	public JDFDeviceNColor getCreateDeviceNColor()
+	{
+		return (JDFDeviceNColor) getCreateElement_JDFElement(ElementName.DEVICENCOLOR, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDeviceNColor
 	 * 
 	 * @param iSkip number of elements to skip
@@ -697,6 +737,26 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	public JDFDeviceNColor appendDeviceNColor()
 	{
 		return (JDFDeviceNColor) appendElement(ElementName.DEVICENCOLOR, null);
+	}
+
+	/**
+	 * (24) const get element Media
+	 *
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getMedia()
+	{
+		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMedia
+	 * 
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateMedia()
+	{
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**
@@ -749,6 +809,26 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	public void refMedia(JDFMedia refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element TransferCurve
+	 *
+	 * @return JDFTransferCurve the element
+	 */
+	public JDFTransferCurve getTransferCurve()
+	{
+		return (JDFTransferCurve) getElement(ElementName.TRANSFERCURVE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateTransferCurve
+	 * 
+	 * @return JDFTransferCurve the element
+	 */
+	public JDFTransferCurve getCreateTransferCurve()
+	{
+		return (JDFTransferCurve) getCreateElement_JDFElement(ElementName.TRANSFERCURVE, null, 0);
 	}
 
 	/**

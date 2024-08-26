@@ -262,6 +262,26 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 */
 
 	/**
+	 * (24) const get element Device
+	 *
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getDevice()
+	{
+		return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDevice
+	 * 
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getCreateDevice()
+	{
+		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDevice
 	 * 
 	 * @param iSkip number of elements to skip
@@ -311,6 +331,26 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	public void refDevice(JDFDevice refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element Employee
+	 *
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getEmployee()
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateEmployee
+	 * 
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getCreateEmployee()
+	{
+		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, 0);
 	}
 
 	/**
@@ -367,6 +407,26 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	public void refEmployee(JDFEmployee refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element Activity
+	 *
+	 * @return JDFActivity the element
+	 */
+	public JDFActivity getActivity()
+	{
+		return (JDFActivity) getElement(ElementName.ACTIVITY, null, 0);
+	}
+
+	/**
+	 * (25) getCreateActivity
+	 * 
+	 * @return JDFActivity the element
+	 */
+	public JDFActivity getCreateActivity()
+	{
+		return (JDFActivity) getCreateElement_JDFElement(ElementName.ACTIVITY, null, 0);
 	}
 
 	/**
@@ -442,6 +502,26 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	}
 
 	/**
+	 * (24) const get element ModulePhase
+	 *
+	 * @return JDFModulePhase the element
+	 */
+	public JDFModulePhase getModulePhase()
+	{
+		return (JDFModulePhase) getElement(ElementName.MODULEPHASE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateModulePhase
+	 * 
+	 * @return JDFModulePhase the element
+	 */
+	public JDFModulePhase getCreateModulePhase()
+	{
+		return (JDFModulePhase) getCreateElement_JDFElement(ElementName.MODULEPHASE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateModulePhase
 	 * 
 	 * @param iSkip number of elements to skip
@@ -481,6 +561,26 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	public JDFModulePhase appendModulePhase()
 	{
 		return (JDFModulePhase) appendElement(ElementName.MODULEPHASE, null);
+	}
+
+	/**
+	 * (24) const get element Part
+	 *
+	 * @return JDFPart the element
+	 */
+	public JDFPart getPart()
+	{
+		return (JDFPart) getElement(ElementName.PART, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePart
+	 * 
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart()
+	{
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, 0);
 	}
 
 	/**

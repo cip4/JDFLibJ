@@ -104,8 +104,8 @@ public abstract class JDFAutoCut extends JDFElement
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.UPPERRIBBONNAME, 0x3333311111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -367,6 +367,30 @@ public abstract class JDFAutoCut extends JDFElement
 	}
 
 	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkingDirection
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute WorkingDirection
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 */
+	public void setWorkingDirection(EnumWorkingDirection enumVar)
+	{
+		setAttribute(AttributeName.WORKINGDIRECTION, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	 * (9) get attribute WorkingDirection
+	 *
+	 * @return the value of the attribute
+	 */
+	public EnumWorkingDirection getWorkingDirection()
+	{
+		return EnumWorkingDirection.getEnum(getAttribute(AttributeName.WORKINGDIRECTION, null, null));
+	}
+
+	/*
 	 * --------------------------------------------------------------------- Methods for Attribute WorkingPath ---------------------------------------------------------------------
 	 */
 	/**
@@ -389,30 +413,6 @@ public abstract class JDFAutoCut extends JDFElement
 		final String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, null);
 		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingDirection
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute WorkingDirection
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 */
-	public void setWorkingDirection(EnumWorkingDirection enumVar)
-	{
-		setAttribute(AttributeName.WORKINGDIRECTION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute WorkingDirection
-	 *
-	 * @return the value of the attribute
-	 */
-	public EnumWorkingDirection getWorkingDirection()
-	{
-		return EnumWorkingDirection.getEnum(getAttribute(AttributeName.WORKINGDIRECTION, null, null));
 	}
 
 }

@@ -84,18 +84,18 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFBarcodeReproParams;
 
 /**
  *****************************************************************************
- * class JDFAutoDeviceMark : public JDFResource
+ * class JDFAutoDeviceMark : public JDFElement
  *****************************************************************************
  * 
  */
 
-public abstract class JDFAutoDeviceMark extends JDFResource
+public abstract class JDFAutoDeviceMark extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
@@ -166,26 +166,6 @@ public abstract class JDFAutoDeviceMark extends JDFResource
 	protected JDFAutoDeviceMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return true if ok
-	 */
-	@Override
-	public boolean init()
-	{
-		final boolean bRet = super.init();
-		setResourceClass(JDFResource.EnumResourceClass.Parameter);
-		return bRet;
-	}
-
-	/**
-	 * @return the resource Class
-	 */
-	@Override
-	public EnumResourceClass getValidClass()
-	{
-		return JDFResource.EnumResourceClass.Parameter;
 	}
 
 	/**
@@ -821,6 +801,26 @@ public abstract class JDFAutoDeviceMark extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element BarcodeReproParams
+	 *
+	 * @return JDFBarcodeReproParams the element
+	 */
+	public JDFBarcodeReproParams getBarcodeReproParams()
+	{
+		return (JDFBarcodeReproParams) getElement(ElementName.BARCODEREPROPARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBarcodeReproParams
+	 * 
+	 * @return JDFBarcodeReproParams the element
+	 */
+	public JDFBarcodeReproParams getCreateBarcodeReproParams()
+	{
+		return (JDFBarcodeReproParams) getCreateElement_JDFElement(ElementName.BARCODEREPROPARAMS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateBarcodeReproParams
 	 * 
 	 * @param iSkip number of elements to skip
@@ -860,16 +860,6 @@ public abstract class JDFAutoDeviceMark extends JDFResource
 	public JDFBarcodeReproParams appendBarcodeReproParams()
 	{
 		return (JDFBarcodeReproParams) appendElement(ElementName.BARCODEREPROPARAMS, null);
-	}
-
-	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refBarcodeReproParams(JDFBarcodeReproParams refTarget)
-	{
-		refElement(refTarget);
 	}
 
 }

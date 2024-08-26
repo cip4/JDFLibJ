@@ -439,16 +439,6 @@ public abstract class JDFAutoPageCell extends JDFElement
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refDeviceMark(JDFDeviceMark refTarget)
-	{
-		refElement(refTarget);
-	}
-
-	/**
 	 * (24) const get element FitPolicy
 	 *
 	 * @return JDFFitPolicy the element
@@ -476,16 +466,6 @@ public abstract class JDFAutoPageCell extends JDFElement
 	public JDFFitPolicy appendFitPolicy()
 	{
 		return (JDFFitPolicy) appendElementN(ElementName.FITPOLICY, 1, null);
-	}
-
-	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refFitPolicy(JDFFitPolicy refTarget)
-	{
-		refElement(refTarget);
 	}
 
 	/**

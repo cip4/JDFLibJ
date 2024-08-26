@@ -499,6 +499,26 @@ public abstract class JDFAutoPreview extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Comment
+	 *
+	 * @return JDFComment the element
+	 */
+	public JDFComment getComment()
+	{
+		return (JDFComment) getElement(ElementName.COMMENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateComment
+	 * 
+	 * @return JDFComment the element
+	 */
+	public JDFComment getCreateComment()
+	{
+		return (JDFComment) getCreateElement_JDFElement(ElementName.COMMENT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateComment
 	 * 
 	 * @param iSkip number of elements to skip
@@ -541,6 +561,26 @@ public abstract class JDFAutoPreview extends JDFResource
 	public JDFComment appendComment()
 	{
 		return (JDFComment) appendElement(ElementName.COMMENT, null);
+	}
+
+	/**
+	 * (24) const get element GeneralID
+	 *
+	 * @return JDFGeneralID the element
+	 */
+	public JDFGeneralID getGeneralID()
+	{
+		return (JDFGeneralID) getElement(ElementName.GENERALID, null, 0);
+	}
+
+	/**
+	 * (25) getCreateGeneralID
+	 * 
+	 * @return JDFGeneralID the element
+	 */
+	public JDFGeneralID getCreateGeneralID()
+	{
+		return (JDFGeneralID) getCreateElement_JDFElement(ElementName.GENERALID, null, 0);
 	}
 
 	/**

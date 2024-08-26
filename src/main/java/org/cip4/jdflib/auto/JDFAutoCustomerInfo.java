@@ -316,6 +316,28 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	}
 
 	/**
+	 * (24) const get element Contact
+	 *
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getContact()
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateContact
+	 * 
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getCreateContact()
+	{
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateContact
 	 * 
 	 * @param iSkip number of elements to skip
@@ -366,6 +388,26 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	public void refContact(JDFContact refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element CustomerMessage
+	 *
+	 * @return JDFCustomerMessage the element
+	 */
+	public JDFCustomerMessage getCustomerMessage()
+	{
+		return (JDFCustomerMessage) getElement(ElementName.CUSTOMERMESSAGE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCustomerMessage
+	 * 
+	 * @return JDFCustomerMessage the element
+	 */
+	public JDFCustomerMessage getCreateCustomerMessage()
+	{
+		return (JDFCustomerMessage) getCreateElement_JDFElement(ElementName.CUSTOMERMESSAGE, null, 0);
 	}
 
 	/**

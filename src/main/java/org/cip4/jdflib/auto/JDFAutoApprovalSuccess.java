@@ -168,6 +168,26 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ApprovalDetails
+	 *
+	 * @return JDFApprovalDetails the element
+	 */
+	public JDFApprovalDetails getApprovalDetails()
+	{
+		return (JDFApprovalDetails) getElement(ElementName.APPROVALDETAILS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateApprovalDetails
+	 * 
+	 * @return JDFApprovalDetails the element
+	 */
+	public JDFApprovalDetails getCreateApprovalDetails()
+	{
+		return (JDFApprovalDetails) getCreateElement_JDFElement(ElementName.APPROVALDETAILS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateApprovalDetails
 	 * 
 	 * @param iSkip number of elements to skip
@@ -247,6 +267,28 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	public void refFileSpec(JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element Contact
+	 *
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getContact()
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateContact
+	 * 
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getCreateContact()
+	{
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, 0);
 	}
 
 	/**

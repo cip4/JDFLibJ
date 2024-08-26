@@ -357,6 +357,26 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	}
 
 	/**
+	 * (24) const get element ObjectResolution
+	 *
+	 * @return JDFObjectResolution the element
+	 */
+	public JDFObjectResolution getObjectResolution()
+	{
+		return (JDFObjectResolution) getElement(ElementName.OBJECTRESOLUTION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateObjectResolution
+	 * 
+	 * @return JDFObjectResolution the element
+	 */
+	public JDFObjectResolution getCreateObjectResolution()
+	{
+		return (JDFObjectResolution) getCreateElement_JDFElement(ElementName.OBJECTRESOLUTION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateObjectResolution
 	 * 
 	 * @param iSkip number of elements to skip
@@ -399,13 +419,23 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
+	 * (24) const get element TrapRegion
 	 *
-	 * @param refTarget the element that is referenced
+	 * @return JDFTrapRegion the element
 	 */
-	public void refObjectResolution(JDFObjectResolution refTarget)
+	public JDFTrapRegion getTrapRegion()
 	{
-		refElement(refTarget);
+		return (JDFTrapRegion) getElement(ElementName.TRAPREGION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateTrapRegion
+	 * 
+	 * @return JDFTrapRegion the element
+	 */
+	public JDFTrapRegion getCreateTrapRegion()
+	{
+		return (JDFTrapRegion) getCreateElement_JDFElement(ElementName.TRAPREGION, null, 0);
 	}
 
 	/**

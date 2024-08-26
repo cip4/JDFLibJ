@@ -1335,6 +1335,26 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/**
+	 * (24) const get element DynamicInput
+	 *
+	 * @return JDFDynamicInput the element
+	 */
+	public JDFDynamicInput getDynamicInput()
+	{
+		return (JDFDynamicInput) getElement(ElementName.DYNAMICINPUT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDynamicInput
+	 * 
+	 * @return JDFDynamicInput the element
+	 */
+	public JDFDynamicInput getCreateDynamicInput()
+	{
+		return (JDFDynamicInput) getCreateElement_JDFElement(ElementName.DYNAMICINPUT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDynamicInput
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1377,6 +1397,26 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/**
+	 * (24) const get element MetadataMap
+	 *
+	 * @return JDFMetadataMap the element
+	 */
+	public JDFMetadataMap getMetadataMap()
+	{
+		return (JDFMetadataMap) getElement(ElementName.METADATAMAP, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMetadataMap
+	 * 
+	 * @return JDFMetadataMap the element
+	 */
+	public JDFMetadataMap getCreateMetadataMap()
+	{
+		return (JDFMetadataMap) getCreateElement_JDFElement(ElementName.METADATAMAP, null, 0);
+	}
+
+	/**
 	 * (26) getCreateMetadataMap
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1416,6 +1456,26 @@ public abstract class JDFAutoRunList extends JDFResource
 	public JDFMetadataMap appendMetadataMap()
 	{
 		return (JDFMetadataMap) appendElement(ElementName.METADATAMAP, null);
+	}
+
+	/**
+	 * (24) const get element InsertSheet
+	 *
+	 * @return JDFInsertSheet the element
+	 */
+	public JDFInsertSheet getInsertSheet()
+	{
+		return (JDFInsertSheet) getElement(ElementName.INSERTSHEET, null, 0);
+	}
+
+	/**
+	 * (25) getCreateInsertSheet
+	 * 
+	 * @return JDFInsertSheet the element
+	 */
+	public JDFInsertSheet getCreateInsertSheet()
+	{
+		return (JDFInsertSheet) getCreateElement_JDFElement(ElementName.INSERTSHEET, null, 0);
 	}
 
 	/**

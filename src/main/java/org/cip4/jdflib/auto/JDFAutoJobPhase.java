@@ -831,6 +831,26 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Activity
+	 *
+	 * @return JDFActivity the element
+	 */
+	public JDFActivity getActivity()
+	{
+		return (JDFActivity) getElement(ElementName.ACTIVITY, null, 0);
+	}
+
+	/**
+	 * (25) getCreateActivity
+	 * 
+	 * @return JDFActivity the element
+	 */
+	public JDFActivity getCreateActivity()
+	{
+		return (JDFActivity) getCreateElement_JDFElement(ElementName.ACTIVITY, null, 0);
+	}
+
+	/**
 	 * (26) getCreateActivity
 	 * 
 	 * @param iSkip number of elements to skip
@@ -900,6 +920,26 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	public JDFCostCenter appendCostCenter()
 	{
 		return (JDFCostCenter) appendElementN(ElementName.COSTCENTER, 1, null);
+	}
+
+	/**
+	 * (24) const get element GangSource
+	 *
+	 * @return JDFGangSource the element
+	 */
+	public JDFGangSource getGangSource()
+	{
+		return (JDFGangSource) getElement(ElementName.GANGSOURCE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateGangSource
+	 * 
+	 * @return JDFGangSource the element
+	 */
+	public JDFGangSource getCreateGangSource()
+	{
+		return (JDFGangSource) getCreateElement_JDFElement(ElementName.GANGSOURCE, null, 0);
 	}
 
 	/**
@@ -975,6 +1015,26 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/**
+	 * (24) const get element ModuleStatus
+	 *
+	 * @return JDFModuleStatus the element
+	 */
+	public JDFModuleStatus getModuleStatus()
+	{
+		return (JDFModuleStatus) getElement(ElementName.MODULESTATUS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateModuleStatus
+	 * 
+	 * @return JDFModuleStatus the element
+	 */
+	public JDFModuleStatus getCreateModuleStatus()
+	{
+		return (JDFModuleStatus) getCreateElement_JDFElement(ElementName.MODULESTATUS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateModuleStatus
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1014,6 +1074,26 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	public JDFModuleStatus appendModuleStatus()
 	{
 		return (JDFModuleStatus) appendElement(ElementName.MODULESTATUS, null);
+	}
+
+	/**
+	 * (24) const get element Part
+	 *
+	 * @return JDFPart the element
+	 */
+	public JDFPart getPart()
+	{
+		return (JDFPart) getElement(ElementName.PART, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePart
+	 * 
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart()
+	{
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, 0);
 	}
 
 	/**

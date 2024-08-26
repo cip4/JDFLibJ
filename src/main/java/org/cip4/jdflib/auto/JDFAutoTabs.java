@@ -423,6 +423,26 @@ public abstract class JDFAutoTabs extends JDFElement
 	}
 
 	/**
+	 * (24) const get element TabMylarColorDetails
+	 *
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getTabMylarColorDetails()
+	{
+		return (JDFStringSpan) getElement(ElementName.TABMYLARCOLORDETAILS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateTabMylarColorDetails
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateTabMylarColorDetails()
+	{
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.TABMYLARCOLORDETAILS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateTabMylarColorDetails
 	 * 
 	 * @param iSkip number of elements to skip

@@ -198,6 +198,26 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 */
 
 	/**
+	 * (24) const get element Certification
+	 *
+	 * @return JDFCertification the element
+	 */
+	public JDFCertification getCertification()
+	{
+		return (JDFCertification) getElement(ElementName.CERTIFICATION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCertification
+	 * 
+	 * @return JDFCertification the element
+	 */
+	public JDFCertification getCreateCertification()
+	{
+		return (JDFCertification) getCreateElement_JDFElement(ElementName.CERTIFICATION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateCertification
 	 * 
 	 * @param iSkip number of elements to skip

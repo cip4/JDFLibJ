@@ -318,14 +318,4 @@ public abstract class JDFAutoEmployee extends JDFResource
 		return (JDFPerson) appendElementN(ElementName.PERSON, 1, null);
 	}
 
-	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refPerson(JDFPerson refTarget)
-	{
-		refElement(refTarget);
-	}
-
 }

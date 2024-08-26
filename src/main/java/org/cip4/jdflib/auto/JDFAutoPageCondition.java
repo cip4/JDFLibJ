@@ -192,6 +192,26 @@ public abstract class JDFAutoPageCondition extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element RunList
+	 *
+	 * @return JDFRunList the element
+	 */
+	public JDFRunList getRunList()
+	{
+		return (JDFRunList) getElement(ElementName.RUNLIST, null, 0);
+	}
+
+	/**
+	 * (25) getCreateRunList
+	 * 
+	 * @return JDFRunList the element
+	 */
+	public JDFRunList getCreateRunList()
+	{
+		return (JDFRunList) getCreateElement_JDFElement(ElementName.RUNLIST, null, 0);
+	}
+
+	/**
 	 * (26) getCreateRunList
 	 * 
 	 * @param iSkip number of elements to skip
@@ -241,6 +261,26 @@ public abstract class JDFAutoPageCondition extends JDFElement
 	public void refRunList(JDFRunList refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element Part
+	 *
+	 * @return JDFPart the element
+	 */
+	public JDFPart getPart()
+	{
+		return (JDFPart) getElement(ElementName.PART, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePart
+	 * 
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart()
+	{
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, 0);
 	}
 
 	/**

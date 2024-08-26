@@ -117,7 +117,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.CUTBLOCK, 0x3333331111l);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CUTBLOCK, 0x3331111111l);
 		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x6666661111l);
 		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x6666661111l);
 	}
@@ -314,6 +314,26 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	/*
 	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
+
+	/**
+	 * (24) const get element CutBlock
+	 *
+	 * @return JDFCutBlock the element
+	 */
+	public JDFCutBlock getCutBlock()
+	{
+		return (JDFCutBlock) getElement(ElementName.CUTBLOCK, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCutBlock
+	 * 
+	 * @return JDFCutBlock the element
+	 */
+	public JDFCutBlock getCreateCutBlock()
+	{
+		return (JDFCutBlock) getCreateElement_JDFElement(ElementName.CUTBLOCK, null, 0);
+	}
 
 	/**
 	 * (26) getCreateCutBlock

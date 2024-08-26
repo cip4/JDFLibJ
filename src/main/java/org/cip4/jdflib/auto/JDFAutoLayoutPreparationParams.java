@@ -1175,6 +1175,26 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
+	 * (24) const get element InsertSheet
+	 *
+	 * @return JDFInsertSheet the element
+	 */
+	public JDFInsertSheet getInsertSheet()
+	{
+		return (JDFInsertSheet) getElement(ElementName.INSERTSHEET, null, 0);
+	}
+
+	/**
+	 * (25) getCreateInsertSheet
+	 * 
+	 * @return JDFInsertSheet the element
+	 */
+	public JDFInsertSheet getCreateInsertSheet()
+	{
+		return (JDFInsertSheet) getCreateElement_JDFElement(ElementName.INSERTSHEET, null, 0);
+	}
+
+	/**
 	 * (26) getCreateInsertSheet
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1257,16 +1277,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refDeviceMark(JDFDeviceMark refTarget)
-	{
-		refElement(refTarget);
-	}
-
-	/**
 	 * (24) const get element ExternalImpositionTemplate
 	 *
 	 * @return JDFExternalImpositionTemplate the element
@@ -1337,13 +1347,23 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
+	 * (24) const get element JobField
 	 *
-	 * @param refTarget the element that is referenced
+	 * @return JDFJobField the element
 	 */
-	public void refFitPolicy(JDFFitPolicy refTarget)
+	public JDFJobField getJobField()
 	{
-		refElement(refTarget);
+		return (JDFJobField) getElement(ElementName.JOBFIELD, null, 0);
+	}
+
+	/**
+	 * (25) getCreateJobField
+	 * 
+	 * @return JDFJobField the element
+	 */
+	public JDFJobField getCreateJobField()
+	{
+		return (JDFJobField) getCreateElement_JDFElement(ElementName.JOBFIELD, null, 0);
 	}
 
 	/**
@@ -1386,16 +1406,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	public JDFJobField appendJobField()
 	{
 		return (JDFJobField) appendElement(ElementName.JOBFIELD, null);
-	}
-
-	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refJobField(JDFJobField refTarget)
-	{
-		refElement(refTarget);
 	}
 
 	/**

@@ -144,6 +144,26 @@ public abstract class JDFAutoMacroPool extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element macro
+	 *
+	 * @return JDFmacro the element
+	 */
+	public JDFmacro getmacro()
+	{
+		return (JDFmacro) getElement(ElementName.MACRO, null, 0);
+	}
+
+	/**
+	 * (25) getCreatemacro
+	 * 
+	 * @return JDFmacro the element
+	 */
+	public JDFmacro getCreatemacro()
+	{
+		return (JDFmacro) getCreateElement_JDFElement(ElementName.MACRO, null, 0);
+	}
+
+	/**
 	 * (26) getCreatemacro
 	 * 
 	 * @param iSkip number of elements to skip

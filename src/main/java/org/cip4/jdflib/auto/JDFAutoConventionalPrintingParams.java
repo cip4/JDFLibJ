@@ -1200,6 +1200,26 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Ink
+	 *
+	 * @return JDFInk the element
+	 */
+	public JDFInk getInk()
+	{
+		return (JDFInk) getElement(ElementName.INK, null, 0);
+	}
+
+	/**
+	 * (25) getCreateInk
+	 * 
+	 * @return JDFInk the element
+	 */
+	public JDFInk getCreateInk()
+	{
+		return (JDFInk) getCreateElement_JDFElement(ElementName.INK, null, 0);
+	}
+
+	/**
 	 * (26) getCreateInk
 	 * 
 	 * @param iSkip number of elements to skip

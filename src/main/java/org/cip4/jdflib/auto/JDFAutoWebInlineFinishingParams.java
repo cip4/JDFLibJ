@@ -164,6 +164,26 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element FolderProduction
+	 *
+	 * @return JDFFolderProduction the element
+	 */
+	public JDFFolderProduction getFolderProduction()
+	{
+		return (JDFFolderProduction) getElement(ElementName.FOLDERPRODUCTION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFolderProduction
+	 * 
+	 * @return JDFFolderProduction the element
+	 */
+	public JDFFolderProduction getCreateFolderProduction()
+	{
+		return (JDFFolderProduction) getCreateElement_JDFElement(ElementName.FOLDERPRODUCTION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFolderProduction
 	 * 
 	 * @param iSkip number of elements to skip

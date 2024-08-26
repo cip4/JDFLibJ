@@ -180,6 +180,26 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	}
 
 	/**
+	 * (24) const get element ColorNameDetails
+	 *
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getColorNameDetails()
+	{
+		return (JDFStringSpan) getElement(ElementName.COLORNAMEDETAILS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateColorNameDetails
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateColorNameDetails()
+	{
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.COLORNAMEDETAILS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateColorNameDetails
 	 * 
 	 * @param iSkip number of elements to skip
@@ -259,6 +279,26 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	public void refColorPool(JDFColorPool refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element NumberItem
+	 *
+	 * @return JDFNumberItem the element
+	 */
+	public JDFNumberItem getNumberItem()
+	{
+		return (JDFNumberItem) getElement(ElementName.NUMBERITEM, null, 0);
+	}
+
+	/**
+	 * (25) getCreateNumberItem
+	 * 
+	 * @return JDFNumberItem the element
+	 */
+	public JDFNumberItem getCreateNumberItem()
+	{
+		return (JDFNumberItem) getCreateElement_JDFElement(ElementName.NUMBERITEM, null, 0);
 	}
 
 	/**

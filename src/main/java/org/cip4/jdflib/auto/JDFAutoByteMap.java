@@ -540,6 +540,26 @@ public abstract class JDFAutoByteMap extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Band
+	 *
+	 * @return JDFBand the element
+	 */
+	public JDFBand getBand()
+	{
+		return (JDFBand) getElement(ElementName.BAND, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBand
+	 * 
+	 * @return JDFBand the element
+	 */
+	public JDFBand getCreateBand()
+	{
+		return (JDFBand) getCreateElement_JDFElement(ElementName.BAND, null, 0);
+	}
+
+	/**
 	 * (26) getCreateBand
 	 * 
 	 * @param iSkip number of elements to skip
@@ -622,6 +642,26 @@ public abstract class JDFAutoByteMap extends JDFResource
 	}
 
 	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFileSpec
 	 * 
 	 * @param iSkip number of elements to skip
@@ -671,6 +711,26 @@ public abstract class JDFAutoByteMap extends JDFResource
 	public void refFileSpec(JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element PixelColorant
+	 *
+	 * @return JDFPixelColorant the element
+	 */
+	public JDFPixelColorant getPixelColorant()
+	{
+		return (JDFPixelColorant) getElement(ElementName.PIXELCOLORANT, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePixelColorant
+	 * 
+	 * @return JDFPixelColorant the element
+	 */
+	public JDFPixelColorant getCreatePixelColorant()
+	{
+		return (JDFPixelColorant) getCreateElement_JDFElement(ElementName.PIXELCOLORANT, null, 0);
 	}
 
 	/**

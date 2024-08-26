@@ -144,6 +144,26 @@ public abstract class JDFAutoBindList extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element BindItem
+	 *
+	 * @return JDFBindItem the element
+	 */
+	public JDFBindItem getBindItem()
+	{
+		return (JDFBindItem) getElement(ElementName.BINDITEM, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBindItem
+	 * 
+	 * @return JDFBindItem the element
+	 */
+	public JDFBindItem getCreateBindItem()
+	{
+		return (JDFBindItem) getCreateElement_JDFElement(ElementName.BINDITEM, null, 0);
+	}
+
+	/**
 	 * (26) getCreateBindItem
 	 * 
 	 * @param iSkip number of elements to skip

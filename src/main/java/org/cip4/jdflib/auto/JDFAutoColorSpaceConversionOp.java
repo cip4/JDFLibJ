@@ -89,6 +89,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFDeviceNSpace;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFScreenSelector;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 
 /**
@@ -108,16 +109,16 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLACKPOINTCOMPENSATION, 0x3311111111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.BLACKPOINTCOMPENSATIONDETAILS, 0x3311111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PRESERVEBLACK, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.RENDERINGINTENT, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumRenderingIntent.getEnum(0),
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.IGNOREEMBEDDEDICC, 0x4444443333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.OPERATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumOperation.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESERVEBLACK, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.RENDERINGINTENT, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumRenderingIntent.getEnum(0),
 				"ColorSpaceDependent");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.RGBGRAY2BLACK, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.RGBGRAY2BLACKTHRESHOLD, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, "1");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.IGNOREEMBEDDEDICC, 0x4444443333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.OPERATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumOperation.getEnum(0), null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.SOURCECS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSourceCS.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.RGBGRAY2BLACK, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.RGBGRAY2BLACKTHRESHOLD, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, "1");
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.SOURCECS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumSourceCS.getEnum(0), null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.SOURCERENDERINGINTENT, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumSourceRenderingIntent.getEnum(0),
 				null);
 	}
@@ -128,12 +129,13 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICENSPACE, 0x6666666611l);
 		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x3333333333l);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x3333333311l);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.SCREENSELECTOR, 0x3333333333l);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x3333333311l);
 	}
 
 	@Override
@@ -176,146 +178,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	protected JDFAutoColorSpaceConversionOp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * Enumeration strings for RenderingIntent
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumRenderingIntent extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumRenderingIntent(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumRenderingIntent getEnum(String enumName)
-		{
-			return (EnumRenderingIntent) getEnum(EnumRenderingIntent.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumRenderingIntent getEnum(int enumValue)
-		{
-			return (EnumRenderingIntent) getEnum(EnumRenderingIntent.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumRenderingIntent.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumRenderingIntent.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumRenderingIntent.class);
-		}
-
-		/**  */
-		public static final EnumRenderingIntent ColorSpaceDependent = new EnumRenderingIntent("ColorSpaceDependent");
-		/**  */
-		public static final EnumRenderingIntent Perceptual = new EnumRenderingIntent("Perceptual");
-		/**  */
-		public static final EnumRenderingIntent Saturation = new EnumRenderingIntent("Saturation");
-		/**  */
-		public static final EnumRenderingIntent RelativeColorimetric = new EnumRenderingIntent("RelativeColorimetric");
-		/**  */
-		public static final EnumRenderingIntent AbsoluteColorimetric = new EnumRenderingIntent("AbsoluteColorimetric");
-	}
-
-	/**
-	 * Enumeration strings for SourceObjects
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSourceObjects extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSourceObjects(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumSourceObjects getEnum(String enumName)
-		{
-			return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSourceObjects getEnum(int enumValue)
-		{
-			return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSourceObjects.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSourceObjects.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSourceObjects.class);
-		}
-
-		/**  */
-		public static final EnumSourceObjects All = new EnumSourceObjects("All");
-		/**  */
-		public static final EnumSourceObjects ImagePhotographic = new EnumSourceObjects("ImagePhotographic");
-		/**  */
-		public static final EnumSourceObjects ImageScreenShot = new EnumSourceObjects("ImageScreenShot");
-		/**  */
-		public static final EnumSourceObjects LineArt = new EnumSourceObjects("LineArt");
-		/**  */
-		public static final EnumSourceObjects SmoothShades = new EnumSourceObjects("SmoothShades");
-		/**  */
-		public static final EnumSourceObjects Text = new EnumSourceObjects("Text");
 	}
 
 	/**
@@ -385,6 +247,75 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 		public static final EnumOperation Retag = new EnumOperation("Retag");
 		/**  */
 		public static final EnumOperation ConvertIgnore = new EnumOperation("ConvertIgnore");
+	}
+
+	/**
+	 * Enumeration strings for RenderingIntent
+	 */
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumRenderingIntent extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		protected EnumRenderingIntent(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumRenderingIntent getEnum(String enumName)
+		{
+			return (EnumRenderingIntent) getEnum(EnumRenderingIntent.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumRenderingIntent getEnum(int enumValue)
+		{
+			return (EnumRenderingIntent) getEnum(EnumRenderingIntent.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumRenderingIntent.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumRenderingIntent.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumRenderingIntent.class);
+		}
+
+		/**  */
+		public static final EnumRenderingIntent ColorSpaceDependent = new EnumRenderingIntent("ColorSpaceDependent");
+		/**  */
+		public static final EnumRenderingIntent Perceptual = new EnumRenderingIntent("Perceptual");
+		/**  */
+		public static final EnumRenderingIntent Saturation = new EnumRenderingIntent("Saturation");
+		/**  */
+		public static final EnumRenderingIntent RelativeColorimetric = new EnumRenderingIntent("RelativeColorimetric");
+		/**  */
+		public static final EnumRenderingIntent AbsoluteColorimetric = new EnumRenderingIntent("AbsoluteColorimetric");
 	}
 
 	/**
@@ -480,6 +411,77 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 		public static final EnumSourceCS YUV = new EnumSourceCS("YUV");
 		/**  */
 		public static final EnumSourceCS All = new EnumSourceCS("All");
+	}
+
+	/**
+	 * Enumeration strings for SourceObjects
+	 */
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumSourceObjects extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		protected EnumSourceObjects(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumSourceObjects getEnum(String enumName)
+		{
+			return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumSourceObjects getEnum(int enumValue)
+		{
+			return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSourceObjects.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSourceObjects.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumSourceObjects.class);
+		}
+
+		/**  */
+		public static final EnumSourceObjects All = new EnumSourceObjects("All");
+		/**  */
+		public static final EnumSourceObjects ImagePhotographic = new EnumSourceObjects("ImagePhotographic");
+		/**  */
+		public static final EnumSourceObjects ImageScreenShot = new EnumSourceObjects("ImageScreenShot");
+		/**  */
+		public static final EnumSourceObjects LineArt = new EnumSourceObjects("LineArt");
+		/**  */
+		public static final EnumSourceObjects SmoothShades = new EnumSourceObjects("SmoothShades");
+		/**  */
+		public static final EnumSourceObjects Text = new EnumSourceObjects("Text");
 	}
 
 	/**
@@ -604,6 +606,79 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IgnoreEmbeddedICC
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute IgnoreEmbeddedICC
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setIgnoreEmbeddedICC(boolean value)
+	{
+		setAttribute(AttributeName.IGNOREEMBEDDEDICC, value, null);
+	}
+
+	/**
+	 * (18) get boolean attribute IgnoreEmbeddedICC
+	 *
+	 * @return boolean the value of the attribute
+	 */
+	public boolean getIgnoreEmbeddedICC()
+	{
+		return getBoolAttribute(AttributeName.IGNOREEMBEDDEDICC, null, false);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ObjectTags ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute ObjectTags
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setObjectTags(VString value)
+	{
+		setAttribute(AttributeName.OBJECTTAGS, value, null);
+	}
+
+	/**
+	 * (21) get VString attribute ObjectTags
+	 *
+	 * @return VString the value of the attribute
+	 */
+	public VString getObjectTags()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Operation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Operation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 */
+	public void setOperation(EnumOperation enumVar)
+	{
+		setAttribute(AttributeName.OPERATION, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	 * (9) get attribute Operation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EnumOperation getOperation()
+	{
+		return EnumOperation.getEnum(getAttribute(AttributeName.OPERATION, null, null));
+	}
+
+	/*
 	 * --------------------------------------------------------------------- Methods for Attribute PreserveBlack
 	 * ---------------------------------------------------------------------
 	 */
@@ -700,6 +775,29 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceCS ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SourceCS
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 */
+	public void setSourceCS(EnumSourceCS enumVar)
+	{
+		setAttribute(AttributeName.SOURCECS, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	 * (9) get attribute SourceCS
+	 *
+	 * @return the value of the attribute
+	 */
+	public EnumSourceCS getSourceCS()
+	{
+		return EnumSourceCS.getEnum(getAttribute(AttributeName.SOURCECS, null, null));
+	}
+
+	/*
 	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
 	 * ---------------------------------------------------------------------
 	 */
@@ -721,102 +819,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	public Vector<? extends ValuedEnum> getSourceObjects()
 	{
 		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreEmbeddedICC
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute IgnoreEmbeddedICC
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setIgnoreEmbeddedICC(boolean value)
-	{
-		setAttribute(AttributeName.IGNOREEMBEDDEDICC, value, null);
-	}
-
-	/**
-	 * (18) get boolean attribute IgnoreEmbeddedICC
-	 *
-	 * @return boolean the value of the attribute
-	 */
-	public boolean getIgnoreEmbeddedICC()
-	{
-		return getBoolAttribute(AttributeName.IGNOREEMBEDDEDICC, null, false);
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ObjectTags ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute ObjectTags
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setObjectTags(VString value)
-	{
-		setAttribute(AttributeName.OBJECTTAGS, value, null);
-	}
-
-	/**
-	 * (21) get VString attribute ObjectTags
-	 *
-	 * @return VString the value of the attribute
-	 */
-	public VString getObjectTags()
-	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
-		vStrAttrib.setAllStrings(s, " ");
-		return vStrAttrib;
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Operation ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Operation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 */
-	public void setOperation(EnumOperation enumVar)
-	{
-		setAttribute(AttributeName.OPERATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Operation
-	 *
-	 * @return the value of the attribute
-	 */
-	public EnumOperation getOperation()
-	{
-		return EnumOperation.getEnum(getAttribute(AttributeName.OPERATION, null, null));
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceCS ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SourceCS
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 */
-	public void setSourceCS(EnumSourceCS enumVar)
-	{
-		setAttribute(AttributeName.SOURCECS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SourceCS
-	 *
-	 * @return the value of the attribute
-	 */
-	public EnumSourceCS getSourceCS()
-	{
-		return EnumSourceCS.getEnum(getAttribute(AttributeName.SOURCECS, null, null));
 	}
 
 	/*
@@ -878,6 +880,26 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFileSpec
 	 * 
 	 * @param iSkip number of elements to skip
@@ -927,6 +949,88 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	public void refFileSpec(JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element ScreenSelector
+	 *
+	 * @return JDFScreenSelector the element
+	 */
+	public JDFScreenSelector getScreenSelector()
+	{
+		return (JDFScreenSelector) getElement(ElementName.SCREENSELECTOR, null, 0);
+	}
+
+	/**
+	 * (25) getCreateScreenSelector
+	 * 
+	 * @return JDFScreenSelector the element
+	 */
+	public JDFScreenSelector getCreateScreenSelector()
+	{
+		return (JDFScreenSelector) getCreateElement_JDFElement(ElementName.SCREENSELECTOR, null, 0);
+	}
+
+	/**
+	 * (26) getCreateScreenSelector
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFScreenSelector the element
+	 */
+	public JDFScreenSelector getCreateScreenSelector(int iSkip)
+	{
+		return (JDFScreenSelector) getCreateElement_JDFElement(ElementName.SCREENSELECTOR, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element ScreenSelector
+	 *
+	 * @param iSkip number of elements to skip
+	 * @return JDFScreenSelector the element default is getScreenSelector(0)
+	 */
+	public JDFScreenSelector getScreenSelector(int iSkip)
+	{
+		return (JDFScreenSelector) getElement(ElementName.SCREENSELECTOR, null, iSkip);
+	}
+
+	/**
+	 * Get all ScreenSelector from the current element
+	 * 
+	 * @return Collection<JDFScreenSelector>, null if none are available
+	 */
+	public Collection<JDFScreenSelector> getAllScreenSelector()
+	{
+		return getChildArrayByClass(JDFScreenSelector.class, false, 0);
+	}
+
+	/**
+	 * (30) append element ScreenSelector
+	 *
+	 * @return JDFScreenSelector the element
+	 */
+	public JDFScreenSelector appendScreenSelector()
+	{
+		return (JDFScreenSelector) appendElement(ElementName.SCREENSELECTOR, null);
+	}
+
+	/**
+	 * (24) const get element SeparationSpec
+	 *
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getSeparationSpec()
+	{
+		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSeparationSpec
+	 * 
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getCreateSeparationSpec()
+	{
+		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, 0);
 	}
 
 	/**

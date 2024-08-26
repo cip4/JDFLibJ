@@ -355,6 +355,26 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element SeparationSpec
+	 *
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getSeparationSpec()
+	{
+		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSeparationSpec
+	 * 
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getCreateSeparationSpec()
+	{
+		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateSeparationSpec
 	 * 
 	 * @param iSkip number of elements to skip

@@ -447,6 +447,26 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Device
+	 *
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getDevice()
+	{
+		return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDevice
+	 * 
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getCreateDevice()
+	{
+		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDevice
 	 * 
 	 * @param iSkip number of elements to skip
@@ -496,6 +516,26 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	public void refDevice(JDFDevice refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
@@ -591,6 +631,26 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	}
 
 	/**
+	 * (24) const get element RuleLength
+	 *
+	 * @return JDFRuleLength the element
+	 */
+	public JDFRuleLength getRuleLength()
+	{
+		return (JDFRuleLength) getElement(ElementName.RULELENGTH, null, 0);
+	}
+
+	/**
+	 * (25) getCreateRuleLength
+	 * 
+	 * @return JDFRuleLength the element
+	 */
+	public JDFRuleLength getCreateRuleLength()
+	{
+		return (JDFRuleLength) getCreateElement_JDFElement(ElementName.RULELENGTH, null, 0);
+	}
+
+	/**
 	 * (26) getCreateRuleLength
 	 * 
 	 * @param iSkip number of elements to skip
@@ -630,6 +690,26 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	public JDFRuleLength appendRuleLength()
 	{
 		return (JDFRuleLength) appendElement(ElementName.RULELENGTH, null);
+	}
+
+	/**
+	 * (24) const get element Station
+	 *
+	 * @return JDFStation the element
+	 */
+	public JDFStation getStation()
+	{
+		return (JDFStation) getElement(ElementName.STATION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateStation
+	 * 
+	 * @return JDFStation the element
+	 */
+	public JDFStation getCreateStation()
+	{
+		return (JDFStation) getCreateElement_JDFElement(ElementName.STATION, null, 0);
 	}
 
 	/**

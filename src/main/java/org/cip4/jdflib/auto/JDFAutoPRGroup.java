@@ -215,6 +215,26 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element PRGroupOccurrence
+	 *
+	 * @return JDFPRGroupOccurrence the element
+	 */
+	public JDFPRGroupOccurrence getPRGroupOccurrence()
+	{
+		return (JDFPRGroupOccurrence) getElement(ElementName.PRGROUPOCCURRENCE, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePRGroupOccurrence
+	 * 
+	 * @return JDFPRGroupOccurrence the element
+	 */
+	public JDFPRGroupOccurrence getCreatePRGroupOccurrence()
+	{
+		return (JDFPRGroupOccurrence) getCreateElement_JDFElement(ElementName.PRGROUPOCCURRENCE, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePRGroupOccurrence
 	 * 
 	 * @param iSkip number of elements to skip
@@ -254,6 +274,26 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	public JDFPRGroupOccurrence appendPRGroupOccurrence()
 	{
 		return (JDFPRGroupOccurrence) appendElement(ElementName.PRGROUPOCCURRENCE, null);
+	}
+
+	/**
+	 * (24) const get element PROccurrence
+	 *
+	 * @return JDFPROccurrence the element
+	 */
+	public JDFPROccurrence getPROccurrence()
+	{
+		return (JDFPROccurrence) getElement(ElementName.PROCCURRENCE, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePROccurrence
+	 * 
+	 * @return JDFPROccurrence the element
+	 */
+	public JDFPROccurrence getCreatePROccurrence()
+	{
+		return (JDFPROccurrence) getCreateElement_JDFElement(ElementName.PROCCURRENCE, null, 0);
 	}
 
 	/**

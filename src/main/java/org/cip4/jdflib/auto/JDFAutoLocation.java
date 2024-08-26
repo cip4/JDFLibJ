@@ -212,6 +212,26 @@ public abstract class JDFAutoLocation extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Address
+	 *
+	 * @return JDFAddress the element
+	 */
+	public JDFAddress getAddress()
+	{
+		return (JDFAddress) getElement(ElementName.ADDRESS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateAddress
+	 * 
+	 * @return JDFAddress the element
+	 */
+	public JDFAddress getCreateAddress()
+	{
+		return (JDFAddress) getCreateElement_JDFElement(ElementName.ADDRESS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateAddress
 	 * 
 	 * @param iSkip number of elements to skip
@@ -251,16 +271,6 @@ public abstract class JDFAutoLocation extends JDFElement
 	public JDFAddress appendAddress()
 	{
 		return (JDFAddress) appendElement(ElementName.ADDRESS, null);
-	}
-
-	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refAddress(JDFAddress refTarget)
-	{
-		refElement(refTarget);
 	}
 
 }

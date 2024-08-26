@@ -569,6 +569,26 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Hole
+	 *
+	 * @return JDFHole the element
+	 */
+	public JDFHole getHole()
+	{
+		return (JDFHole) getElement(ElementName.HOLE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateHole
+	 * 
+	 * @return JDFHole the element
+	 */
+	public JDFHole getCreateHole()
+	{
+		return (JDFHole) getCreateElement_JDFElement(ElementName.HOLE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateHole
 	 * 
 	 * @param iSkip number of elements to skip
@@ -608,6 +628,26 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	public JDFHole appendHole()
 	{
 		return (JDFHole) appendElement(ElementName.HOLE, null);
+	}
+
+	/**
+	 * (24) const get element HoleLine
+	 *
+	 * @return JDFHoleLine the element
+	 */
+	public JDFHoleLine getHoleLine()
+	{
+		return (JDFHoleLine) getElement(ElementName.HOLELINE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateHoleLine
+	 * 
+	 * @return JDFHoleLine the element
+	 */
+	public JDFHoleLine getCreateHoleLine()
+	{
+		return (JDFHoleLine) getCreateElement_JDFElement(ElementName.HOLELINE, null, 0);
 	}
 
 	/**

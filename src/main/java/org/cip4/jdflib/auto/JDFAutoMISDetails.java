@@ -94,13 +94,14 @@ public abstract class JDFAutoMISDetails extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COSTTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumCostType.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEOPERATIONMODE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceOperationMode.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.WORKTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkType.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.WORKTYPEDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPLEXITY, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COSTTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumCostType.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEOPERATIONMODE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceOperationMode.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.WORKTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkType.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.WORKTYPEDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -341,6 +342,29 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	/*
 	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Complexity ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute Complexity
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setComplexity(double value)
+	{
+		setAttribute(AttributeName.COMPLEXITY, value, null);
+	}
+
+	/**
+	 * (17) get double attribute Complexity
+	 *
+	 * @return double the value of the attribute
+	 */
+	public double getComplexity()
+	{
+		return getRealAttribute(AttributeName.COMPLEXITY, null, 0.0);
+	}
 
 	/*
 	 * --------------------------------------------------------------------- Methods for Attribute CostType ---------------------------------------------------------------------

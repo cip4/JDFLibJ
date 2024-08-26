@@ -164,6 +164,26 @@ public abstract class JDFAutoPerforatingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Perforate
+	 *
+	 * @return JDFPerforate the element
+	 */
+	public JDFPerforate getPerforate()
+	{
+		return (JDFPerforate) getElement(ElementName.PERFORATE, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePerforate
+	 * 
+	 * @return JDFPerforate the element
+	 */
+	public JDFPerforate getCreatePerforate()
+	{
+		return (JDFPerforate) getCreateElement_JDFElement(ElementName.PERFORATE, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePerforate
 	 * 
 	 * @param iSkip number of elements to skip

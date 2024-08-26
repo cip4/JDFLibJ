@@ -214,6 +214,26 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element TransferCurve
+	 *
+	 * @return JDFTransferCurve the element
+	 */
+	public JDFTransferCurve getTransferCurve()
+	{
+		return (JDFTransferCurve) getElement(ElementName.TRANSFERCURVE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateTransferCurve
+	 * 
+	 * @return JDFTransferCurve the element
+	 */
+	public JDFTransferCurve getCreateTransferCurve()
+	{
+		return (JDFTransferCurve) getCreateElement_JDFElement(ElementName.TRANSFERCURVE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateTransferCurve
 	 * 
 	 * @param iSkip number of elements to skip

@@ -236,6 +236,26 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ChangedAttribute
+	 *
+	 * @return JDFChangedAttribute the element
+	 */
+	public JDFChangedAttribute getChangedAttribute()
+	{
+		return (JDFChangedAttribute) getElement(ElementName.CHANGEDATTRIBUTE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateChangedAttribute
+	 * 
+	 * @return JDFChangedAttribute the element
+	 */
+	public JDFChangedAttribute getCreateChangedAttribute()
+	{
+		return (JDFChangedAttribute) getCreateElement_JDFElement(ElementName.CHANGEDATTRIBUTE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateChangedAttribute
 	 * 
 	 * @param iSkip number of elements to skip
@@ -305,6 +325,26 @@ public abstract class JDFAutoTrigger extends JDFResource
 	public JDFAdded appendAdded()
 	{
 		return (JDFAdded) appendElementN(ElementName.ADDED, 1, null);
+	}
+
+	/**
+	 * (24) const get element ChangedPath
+	 *
+	 * @return JDFChangedPath the element
+	 */
+	public JDFChangedPath getChangedPath()
+	{
+		return (JDFChangedPath) getElement(ElementName.CHANGEDPATH, null, 0);
+	}
+
+	/**
+	 * (25) getCreateChangedPath
+	 * 
+	 * @return JDFChangedPath the element
+	 */
+	public JDFChangedPath getCreateChangedPath()
+	{
+		return (JDFChangedPath) getCreateElement_JDFElement(ElementName.CHANGEDPATH, null, 0);
 	}
 
 	/**

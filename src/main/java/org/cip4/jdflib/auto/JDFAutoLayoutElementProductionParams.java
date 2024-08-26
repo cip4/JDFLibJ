@@ -242,6 +242,26 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	}
 
 	/**
+	 * (24) const get element LayoutElementPart
+	 *
+	 * @return JDFLayoutElementPart the element
+	 */
+	public JDFLayoutElementPart getLayoutElementPart()
+	{
+		return (JDFLayoutElementPart) getElement(ElementName.LAYOUTELEMENTPART, null, 0);
+	}
+
+	/**
+	 * (25) getCreateLayoutElementPart
+	 * 
+	 * @return JDFLayoutElementPart the element
+	 */
+	public JDFLayoutElementPart getCreateLayoutElementPart()
+	{
+		return (JDFLayoutElementPart) getCreateElement_JDFElement(ElementName.LAYOUTELEMENTPART, null, 0);
+	}
+
+	/**
 	 * (26) getCreateLayoutElementPart
 	 * 
 	 * @param iSkip number of elements to skip

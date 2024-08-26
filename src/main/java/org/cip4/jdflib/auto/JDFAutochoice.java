@@ -146,6 +146,26 @@ public abstract class JDFAutochoice extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element when
+	 *
+	 * @return JDFwhen the element
+	 */
+	public JDFwhen getwhen()
+	{
+		return (JDFwhen) getElement(ElementName.WHEN, null, 0);
+	}
+
+	/**
+	 * (25) getCreatewhen
+	 * 
+	 * @return JDFwhen the element
+	 */
+	public JDFwhen getCreatewhen()
+	{
+		return (JDFwhen) getCreateElement_JDFElement(ElementName.WHEN, null, 0);
+	}
+
+	/**
 	 * (26) getCreatewhen
 	 * 
 	 * @param iSkip number of elements to skip

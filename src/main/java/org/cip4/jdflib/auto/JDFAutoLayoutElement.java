@@ -740,6 +740,26 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	}
 
 	/**
+	 * (24) const get element ContentList
+	 *
+	 * @return JDFContentList the element
+	 */
+	public JDFContentList getContentList()
+	{
+		return (JDFContentList) getElement(ElementName.CONTENTLIST, null, 0);
+	}
+
+	/**
+	 * (25) getCreateContentList
+	 * 
+	 * @return JDFContentList the element
+	 */
+	public JDFContentList getCreateContentList()
+	{
+		return (JDFContentList) getCreateElement_JDFElement(ElementName.CONTENTLIST, null, 0);
+	}
+
+	/**
 	 * (26) getCreateContentList
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1019,6 +1039,26 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	public void refScreeningParams(JDFScreeningParams refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element SeparationSpec
+	 *
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getSeparationSpec()
+	{
+		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSeparationSpec
+	 * 
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getCreateSeparationSpec()
+	{
+		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, 0);
 	}
 
 	/**

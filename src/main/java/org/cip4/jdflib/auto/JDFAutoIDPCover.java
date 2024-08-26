@@ -307,6 +307,26 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element IDPFinishing
+	 *
+	 * @return JDFIDPFinishing the element
+	 */
+	public JDFIDPFinishing getIDPFinishing()
+	{
+		return (JDFIDPFinishing) getElement(ElementName.IDPFINISHING, null, 0);
+	}
+
+	/**
+	 * (25) getCreateIDPFinishing
+	 * 
+	 * @return JDFIDPFinishing the element
+	 */
+	public JDFIDPFinishing getCreateIDPFinishing()
+	{
+		return (JDFIDPFinishing) getCreateElement_JDFElement(ElementName.IDPFINISHING, null, 0);
+	}
+
+	/**
 	 * (26) getCreateIDPFinishing
 	 * 
 	 * @param iSkip number of elements to skip
@@ -349,6 +369,26 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	}
 
 	/**
+	 * (24) const get element IDPLayout
+	 *
+	 * @return JDFIDPLayout the element
+	 */
+	public JDFIDPLayout getIDPLayout()
+	{
+		return (JDFIDPLayout) getElement(ElementName.IDPLAYOUT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateIDPLayout
+	 * 
+	 * @return JDFIDPLayout the element
+	 */
+	public JDFIDPLayout getCreateIDPLayout()
+	{
+		return (JDFIDPLayout) getCreateElement_JDFElement(ElementName.IDPLAYOUT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateIDPLayout
 	 * 
 	 * @param iSkip number of elements to skip
@@ -388,6 +428,26 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	public JDFIDPLayout appendIDPLayout()
 	{
 		return (JDFIDPLayout) appendElement(ElementName.IDPLAYOUT, null);
+	}
+
+	/**
+	 * (24) const get element MediaIntent
+	 *
+	 * @return JDFMediaIntent the element
+	 */
+	public JDFMediaIntent getMediaIntent()
+	{
+		return (JDFMediaIntent) getElement(ElementName.MEDIAINTENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMediaIntent
+	 * 
+	 * @return JDFMediaIntent the element
+	 */
+	public JDFMediaIntent getCreateMediaIntent()
+	{
+		return (JDFMediaIntent) getCreateElement_JDFElement(ElementName.MEDIAINTENT, null, 0);
 	}
 
 	/**
@@ -440,6 +500,26 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	public void refMediaIntent(JDFMediaIntent refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element MediaSource
+	 *
+	 * @return JDFMediaSource the element
+	 */
+	public JDFMediaSource getMediaSource()
+	{
+		return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMediaSource
+	 * 
+	 * @return JDFMediaSource the element
+	 */
+	public JDFMediaSource getCreateMediaSource()
+	{
+		return (JDFMediaSource) getCreateElement_JDFElement(ElementName.MEDIASOURCE, null, 0);
 	}
 
 	/**

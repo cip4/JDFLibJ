@@ -780,6 +780,26 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	}
 
 	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFileSpec
 	 * 
 	 * @param iSkip number of elements to skip
@@ -829,6 +849,28 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	public void refFileSpec(JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element Contact
+	 *
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getContact()
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateContact
+	 * 
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getCreateContact()
+	{
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, 0);
 	}
 
 	/**
@@ -882,6 +924,26 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	public void refContact(JDFContact refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element DropIntent
+	 *
+	 * @return JDFDropIntent the element
+	 */
+	public JDFDropIntent getDropIntent()
+	{
+		return (JDFDropIntent) getElement(ElementName.DROPINTENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDropIntent
+	 * 
+	 * @return JDFDropIntent the element
+	 */
+	public JDFDropIntent getCreateDropIntent()
+	{
+		return (JDFDropIntent) getCreateElement_JDFElement(ElementName.DROPINTENT, null, 0);
 	}
 
 	/**

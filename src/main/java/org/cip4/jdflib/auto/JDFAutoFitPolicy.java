@@ -79,17 +79,17 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.JDFResource;
 
 /**
  *****************************************************************************
- * class JDFAutoFitPolicy : public JDFResource
+ * class JDFAutoFitPolicy : public JDFElement
  *****************************************************************************
  * 
  */
 
-public abstract class JDFAutoFitPolicy extends JDFResource
+public abstract class JDFAutoFitPolicy extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
@@ -97,11 +97,11 @@ public abstract class JDFAutoFitPolicy extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.GUTTERPOLICY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumGutterPolicy.getEnum(0), "Fixed");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CLIPOFFSET, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MINGUTTER, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATEPOLICY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumRotatePolicy.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.SIZEPOLICY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumSizePolicy.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLIPOFFSET, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.GUTTERPOLICY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumGutterPolicy.getEnum(0), "Fixed");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MINGUTTER, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATEPOLICY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumRotatePolicy.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SIZEPOLICY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSizePolicy.getEnum(0), null);
 	}
 
 	@Override
@@ -144,26 +144,6 @@ public abstract class JDFAutoFitPolicy extends JDFResource
 	protected JDFAutoFitPolicy(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return true if ok
-	 */
-	@Override
-	public boolean init()
-	{
-		final boolean bRet = super.init();
-		setResourceClass(JDFResource.EnumResourceClass.Parameter);
-		return bRet;
-	}
-
-	/**
-	 * @return the resource Class
-	 */
-	@Override
-	public EnumResourceClass getValidClass()
-	{
-		return JDFResource.EnumResourceClass.Parameter;
 	}
 
 	/**
@@ -370,30 +350,6 @@ public abstract class JDFAutoFitPolicy extends JDFResource
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GutterPolicy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute GutterPolicy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 */
-	public void setGutterPolicy(EnumGutterPolicy enumVar)
-	{
-		setAttribute(AttributeName.GUTTERPOLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute GutterPolicy
-	 *
-	 * @return the value of the attribute
-	 */
-	public EnumGutterPolicy getGutterPolicy()
-	{
-		return EnumGutterPolicy.getEnum(getAttribute(AttributeName.GUTTERPOLICY, null, "Fixed"));
-	}
-
-	/*
 	 * --------------------------------------------------------------------- Methods for Attribute ClipOffset ---------------------------------------------------------------------
 	 */
 	/**
@@ -416,6 +372,30 @@ public abstract class JDFAutoFitPolicy extends JDFResource
 		final String strAttrName = getAttribute(AttributeName.CLIPOFFSET, null, null);
 		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GutterPolicy
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute GutterPolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 */
+	public void setGutterPolicy(EnumGutterPolicy enumVar)
+	{
+		setAttribute(AttributeName.GUTTERPOLICY, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	 * (9) get attribute GutterPolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public EnumGutterPolicy getGutterPolicy()
+	{
+		return EnumGutterPolicy.getEnum(getAttribute(AttributeName.GUTTERPOLICY, null, "Fixed"));
 	}
 
 	/*

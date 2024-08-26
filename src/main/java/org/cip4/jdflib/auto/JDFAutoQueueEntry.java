@@ -699,6 +699,26 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element JobPhase
+	 *
+	 * @return JDFJobPhase the element
+	 */
+	public JDFJobPhase getJobPhase()
+	{
+		return (JDFJobPhase) getElement(ElementName.JOBPHASE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateJobPhase
+	 * 
+	 * @return JDFJobPhase the element
+	 */
+	public JDFJobPhase getCreateJobPhase()
+	{
+		return (JDFJobPhase) getCreateElement_JDFElement(ElementName.JOBPHASE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateJobPhase
 	 * 
 	 * @param iSkip number of elements to skip
@@ -741,6 +761,26 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	}
 
 	/**
+	 * (24) const get element GangSource
+	 *
+	 * @return JDFGangSource the element
+	 */
+	public JDFGangSource getGangSource()
+	{
+		return (JDFGangSource) getElement(ElementName.GANGSOURCE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateGangSource
+	 * 
+	 * @return JDFGangSource the element
+	 */
+	public JDFGangSource getCreateGangSource()
+	{
+		return (JDFGangSource) getCreateElement_JDFElement(ElementName.GANGSOURCE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateGangSource
 	 * 
 	 * @param iSkip number of elements to skip
@@ -780,6 +820,26 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	public JDFGangSource appendGangSource()
 	{
 		return (JDFGangSource) appendElement(ElementName.GANGSOURCE, null);
+	}
+
+	/**
+	 * (24) const get element Part
+	 *
+	 * @return JDFPart the element
+	 */
+	public JDFPart getPart()
+	{
+		return (JDFPart) getElement(ElementName.PART, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePart
+	 * 
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart()
+	{
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, 0);
 	}
 
 	/**

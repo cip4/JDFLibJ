@@ -438,6 +438,26 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Fold
+	 *
+	 * @return JDFFold the element
+	 */
+	public JDFFold getFold()
+	{
+		return (JDFFold) getElement(ElementName.FOLD, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFold
+	 * 
+	 * @return JDFFold the element
+	 */
+	public JDFFold getCreateFold()
+	{
+		return (JDFFold) getCreateElement_JDFElement(ElementName.FOLD, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFold
 	 * 
 	 * @param iSkip number of elements to skip

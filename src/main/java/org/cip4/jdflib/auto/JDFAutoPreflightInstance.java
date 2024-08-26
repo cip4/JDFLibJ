@@ -214,6 +214,26 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element PreflightInstanceDetail
+	 *
+	 * @return JDFPreflightInstanceDetail the element
+	 */
+	public JDFPreflightInstanceDetail getPreflightInstanceDetail()
+	{
+		return (JDFPreflightInstanceDetail) getElement(ElementName.PREFLIGHTINSTANCEDETAIL, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePreflightInstanceDetail
+	 * 
+	 * @return JDFPreflightInstanceDetail the element
+	 */
+	public JDFPreflightInstanceDetail getCreatePreflightInstanceDetail()
+	{
+		return (JDFPreflightInstanceDetail) getCreateElement_JDFElement(ElementName.PREFLIGHTINSTANCEDETAIL, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePreflightInstanceDetail
 	 * 
 	 * @param iSkip number of elements to skip

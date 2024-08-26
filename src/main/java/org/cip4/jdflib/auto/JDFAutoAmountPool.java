@@ -144,6 +144,26 @@ public abstract class JDFAutoAmountPool extends JDFPool
 	 */
 
 	/**
+	 * (24) const get element PartAmount
+	 *
+	 * @return JDFPartAmount the element
+	 */
+	public JDFPartAmount getPartAmount()
+	{
+		return (JDFPartAmount) getElement(ElementName.PARTAMOUNT, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePartAmount
+	 * 
+	 * @return JDFPartAmount the element
+	 */
+	public JDFPartAmount getCreatePartAmount()
+	{
+		return (JDFPartAmount) getCreateElement_JDFElement(ElementName.PARTAMOUNT, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePartAmount
 	 * 
 	 * @param iSkip number of elements to skip

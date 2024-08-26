@@ -236,6 +236,26 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element NewComment
+	 *
+	 * @return JDFNewComment the element
+	 */
+	public JDFNewComment getNewComment()
+	{
+		return (JDFNewComment) getElement(ElementName.NEWCOMMENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateNewComment
+	 * 
+	 * @return JDFNewComment the element
+	 */
+	public JDFNewComment getCreateNewComment()
+	{
+		return (JDFNewComment) getCreateElement_JDFElement(ElementName.NEWCOMMENT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateNewComment
 	 * 
 	 * @param iSkip number of elements to skip

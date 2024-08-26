@@ -275,6 +275,26 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element BasicPreflightTest
+	 *
+	 * @return JDFBasicPreflightTest the element
+	 */
+	public JDFBasicPreflightTest getBasicPreflightTest()
+	{
+		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBasicPreflightTest
+	 * 
+	 * @return JDFBasicPreflightTest the element
+	 */
+	public JDFBasicPreflightTest getCreateBasicPreflightTest()
+	{
+		return (JDFBasicPreflightTest) getCreateElement_JDFElement(ElementName.BASICPREFLIGHTTEST, null, 0);
+	}
+
+	/**
 	 * (26) getCreateBasicPreflightTest
 	 * 
 	 * @param iSkip number of elements to skip
@@ -314,6 +334,26 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	public JDFBasicPreflightTest appendBasicPreflightTest()
 	{
 		return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
+	}
+
+	/**
+	 * (24) const get element Value
+	 *
+	 * @return JDFValue the element
+	 */
+	public JDFValue getValue()
+	{
+		return (JDFValue) getElement(ElementName.VALUE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateValue
+	 * 
+	 * @return JDFValue the element
+	 */
+	public JDFValue getCreateValue()
+	{
+		return (JDFValue) getCreateElement_JDFElement(ElementName.VALUE, null, 0);
 	}
 
 	/**

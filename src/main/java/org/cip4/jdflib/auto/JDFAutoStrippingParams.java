@@ -701,6 +701,26 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	}
 
 	/**
+	 * (24) const get element Device
+	 *
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getDevice()
+	{
+		return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDevice
+	 * 
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getCreateDevice()
+	{
+		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDevice
 	 * 
 	 * @param iSkip number of elements to skip
@@ -793,6 +813,26 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	}
 
 	/**
+	 * (24) const get element FitPolicy
+	 *
+	 * @return JDFFitPolicy the element
+	 */
+	public JDFFitPolicy getFitPolicy()
+	{
+		return (JDFFitPolicy) getElement(ElementName.FITPOLICY, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFitPolicy
+	 * 
+	 * @return JDFFitPolicy the element
+	 */
+	public JDFFitPolicy getCreateFitPolicy()
+	{
+		return (JDFFitPolicy) getCreateElement_JDFElement(ElementName.FITPOLICY, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFitPolicy
 	 * 
 	 * @param iSkip number of elements to skip
@@ -832,6 +872,26 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	public JDFFitPolicy appendFitPolicy()
 	{
 		return (JDFFitPolicy) appendElement(ElementName.FITPOLICY, null);
+	}
+
+	/**
+	 * (24) const get element Media
+	 *
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getMedia()
+	{
+		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMedia
+	 * 
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateMedia()
+	{
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**
@@ -884,6 +944,26 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	public void refMedia(JDFMedia refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element Position
+	 *
+	 * @return JDFPosition the element
+	 */
+	public JDFPosition getPosition()
+	{
+		return (JDFPosition) getElement(ElementName.POSITION, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePosition
+	 * 
+	 * @return JDFPosition the element
+	 */
+	public JDFPosition getCreatePosition()
+	{
+		return (JDFPosition) getCreateElement_JDFElement(ElementName.POSITION, null, 0);
 	}
 
 	/**
@@ -956,6 +1036,26 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	public JDFStripCellParams appendStripCellParams()
 	{
 		return (JDFStripCellParams) appendElementN(ElementName.STRIPCELLPARAMS, 1, null);
+	}
+
+	/**
+	 * (24) const get element StripMark
+	 *
+	 * @return JDFStripMark the element
+	 */
+	public JDFStripMark getStripMark()
+	{
+		return (JDFStripMark) getElement(ElementName.STRIPMARK, null, 0);
+	}
+
+	/**
+	 * (25) getCreateStripMark
+	 * 
+	 * @return JDFStripMark the element
+	 */
+	public JDFStripMark getCreateStripMark()
+	{
+		return (JDFStripMark) getCreateElement_JDFElement(ElementName.STRIPMARK, null, 0);
 	}
 
 	/**

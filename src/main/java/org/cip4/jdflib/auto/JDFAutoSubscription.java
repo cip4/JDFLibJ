@@ -517,6 +517,26 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element ObservationTarget
+	 *
+	 * @return JDFObservationTarget the element
+	 */
+	public JDFObservationTarget getObservationTarget()
+	{
+		return (JDFObservationTarget) getElement(ElementName.OBSERVATIONTARGET, null, 0);
+	}
+
+	/**
+	 * (25) getCreateObservationTarget
+	 * 
+	 * @return JDFObservationTarget the element
+	 */
+	public JDFObservationTarget getCreateObservationTarget()
+	{
+		return (JDFObservationTarget) getCreateElement_JDFElement(ElementName.OBSERVATIONTARGET, null, 0);
+	}
+
+	/**
 	 * (26) getCreateObservationTarget
 	 * 
 	 * @param iSkip number of elements to skip

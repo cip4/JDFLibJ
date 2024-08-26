@@ -164,6 +164,26 @@ public abstract class JDFAutoImageEnhancementParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ImageEnhancementOp
+	 *
+	 * @return JDFImageEnhancementOp the element
+	 */
+	public JDFImageEnhancementOp getImageEnhancementOp()
+	{
+		return (JDFImageEnhancementOp) getElement(ElementName.IMAGEENHANCEMENTOP, null, 0);
+	}
+
+	/**
+	 * (25) getCreateImageEnhancementOp
+	 * 
+	 * @return JDFImageEnhancementOp the element
+	 */
+	public JDFImageEnhancementOp getCreateImageEnhancementOp()
+	{
+		return (JDFImageEnhancementOp) getCreateElement_JDFElement(ElementName.IMAGEENHANCEMENTOP, null, 0);
+	}
+
+	/**
 	 * (26) getCreateImageEnhancementOp
 	 * 
 	 * @param iSkip number of elements to skip

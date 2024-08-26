@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -78,18 +80,18 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFDeviceMark;
-import org.cip4.jdflib.resource.JDFResource;
 
 /**
  *****************************************************************************
- * class JDFAutoJobField : public JDFResource
+ * class JDFAutoJobField : public JDFElement
  *****************************************************************************
  * 
  */
 
-public abstract class JDFAutoJobField extends JDFResource
+public abstract class JDFAutoJobField extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
@@ -97,11 +99,11 @@ public abstract class JDFAutoJobField extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHOWLIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBFORMAT, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBTEMPLATE, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.OPERATORTEXT, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.USERTEXT, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.JOBFORMAT, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBTEMPLATE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.OPERATORTEXT, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHOWLIST, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.USERTEXT, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -113,7 +115,7 @@ public abstract class JDFAutoJobField extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x6666666661l);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x3333333333l);
 	}
 
 	@Override
@@ -158,55 +160,9 @@ public abstract class JDFAutoJobField extends JDFResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * @return true if ok
-	 */
-	@Override
-	public boolean init()
-	{
-		final boolean bRet = super.init();
-		setResourceClass(JDFResource.EnumResourceClass.Parameter);
-		return bRet;
-	}
-
-	/**
-	 * @return the resource Class
-	 */
-	@Override
-	public EnumResourceClass getValidClass()
-	{
-		return JDFResource.EnumResourceClass.Parameter;
-	}
-
 	/*
 	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShowList ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute ShowList
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setShowList(VString value)
-	{
-		setAttribute(AttributeName.SHOWLIST, value, null);
-	}
-
-	/**
-	 * (21) get VString attribute ShowList
-	 *
-	 * @return VString the value of the attribute
-	 */
-	public VString getShowList()
-	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
-		vStrAttrib.setAllStrings(s, " ");
-		return vStrAttrib;
-	}
 
 	/*
 	 * --------------------------------------------------------------------- Methods for Attribute JobFormat ---------------------------------------------------------------------
@@ -279,6 +235,32 @@ public abstract class JDFAutoJobField extends JDFResource
 	}
 
 	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShowList ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute ShowList
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setShowList(VString value)
+	{
+		setAttribute(AttributeName.SHOWLIST, value, null);
+	}
+
+	/**
+	 * (21) get VString attribute ShowList
+	 *
+	 * @return VString the value of the attribute
+	 */
+	public VString getShowList()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
+
+	/*
 	 * --------------------------------------------------------------------- Methods for Attribute UserText ---------------------------------------------------------------------
 	 */
 	/**
@@ -326,23 +308,45 @@ public abstract class JDFAutoJobField extends JDFResource
 	}
 
 	/**
-	 * (29) append element DeviceMark
-	 *
-	 * @return JDFDeviceMark the element @ if the element already exists
+	 * (26) getCreateDeviceMark
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFDeviceMark the element
 	 */
-	public JDFDeviceMark appendDeviceMark()
+	public JDFDeviceMark getCreateDeviceMark(int iSkip)
 	{
-		return (JDFDeviceMark) appendElementN(ElementName.DEVICEMARK, 1, null);
+		return (JDFDeviceMark) getCreateElement_JDFElement(ElementName.DEVICEMARK, null, iSkip);
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
+	 * (27) const get element DeviceMark
 	 *
-	 * @param refTarget the element that is referenced
+	 * @param iSkip number of elements to skip
+	 * @return JDFDeviceMark the element default is getDeviceMark(0)
 	 */
-	public void refDeviceMark(JDFDeviceMark refTarget)
+	public JDFDeviceMark getDeviceMark(int iSkip)
 	{
-		refElement(refTarget);
+		return (JDFDeviceMark) getElement(ElementName.DEVICEMARK, null, iSkip);
+	}
+
+	/**
+	 * Get all DeviceMark from the current element
+	 * 
+	 * @return Collection<JDFDeviceMark>, null if none are available
+	 */
+	public Collection<JDFDeviceMark> getAllDeviceMark()
+	{
+		return getChildArrayByClass(JDFDeviceMark.class, false, 0);
+	}
+
+	/**
+	 * (30) append element DeviceMark
+	 *
+	 * @return JDFDeviceMark the element
+	 */
+	public JDFDeviceMark appendDeviceMark()
+	{
+		return (JDFDeviceMark) appendElement(ElementName.DEVICEMARK, null);
 	}
 
 }

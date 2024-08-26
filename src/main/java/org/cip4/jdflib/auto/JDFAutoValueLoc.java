@@ -187,6 +187,26 @@ public abstract class JDFAutoValueLoc extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Loc
+	 *
+	 * @return JDFLoc the element
+	 */
+	public JDFLoc getLoc()
+	{
+		return (JDFLoc) getElement(ElementName.LOC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateLoc
+	 * 
+	 * @return JDFLoc the element
+	 */
+	public JDFLoc getCreateLoc()
+	{
+		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateLoc
 	 * 
 	 * @param iSkip number of elements to skip

@@ -79,27 +79,29 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.JDFResource;
 
 /**
  *****************************************************************************
- * class JDFAutoHole : public JDFResource
+ * class JDFAutoHole : public JDFElement
  *****************************************************************************
  * 
  */
 
-public abstract class JDFAutoHole extends JDFResource
+public abstract class JDFAutoHole extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXTENT, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHAPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.REINFORCEMENT, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHAPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), null);
 	}
 
 	@Override
@@ -142,26 +144,6 @@ public abstract class JDFAutoHole extends JDFResource
 	protected JDFAutoHole(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return true if ok
-	 */
-	@Override
-	public boolean init()
-	{
-		final boolean bRet = super.init();
-		setResourceClass(JDFResource.EnumResourceClass.Parameter);
-		return bRet;
-	}
-
-	/**
-	 * @return the resource Class
-	 */
-	@Override
-	public EnumResourceClass getValidClass()
-	{
-		return JDFResource.EnumResourceClass.Parameter;
 	}
 
 	/**
@@ -281,6 +263,30 @@ public abstract class JDFAutoHole extends JDFResource
 		final String strAttrName = getAttribute(AttributeName.EXTENT, null, null);
 		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Reinforcement
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute Reinforcement
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setReinforcement(String value)
+	{
+		setAttribute(AttributeName.REINFORCEMENT, value, null);
+	}
+
+	/**
+	 * (23) get String attribute Reinforcement
+	 *
+	 * @return the value of the attribute
+	 */
+	public String getReinforcement()
+	{
+		return getAttribute(AttributeName.REINFORCEMENT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/*

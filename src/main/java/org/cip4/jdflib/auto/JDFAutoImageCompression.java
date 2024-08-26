@@ -738,6 +738,26 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/**
+	 * (24) const get element JBIG2Params
+	 *
+	 * @return JDFJBIG2Params the element
+	 */
+	public JDFJBIG2Params getJBIG2Params()
+	{
+		return (JDFJBIG2Params) getElement(ElementName.JBIG2PARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateJBIG2Params
+	 * 
+	 * @return JDFJBIG2Params the element
+	 */
+	public JDFJBIG2Params getCreateJBIG2Params()
+	{
+		return (JDFJBIG2Params) getCreateElement_JDFElement(ElementName.JBIG2PARAMS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateJBIG2Params
 	 * 
 	 * @param iSkip number of elements to skip
@@ -777,6 +797,26 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	public JDFJBIG2Params appendJBIG2Params()
 	{
 		return (JDFJBIG2Params) appendElement(ElementName.JBIG2PARAMS, null);
+	}
+
+	/**
+	 * (24) const get element JPEG2000Params
+	 *
+	 * @return JDFJPEG2000Params the element
+	 */
+	public JDFJPEG2000Params getJPEG2000Params()
+	{
+		return (JDFJPEG2000Params) getElement(ElementName.JPEG2000PARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateJPEG2000Params
+	 * 
+	 * @return JDFJPEG2000Params the element
+	 */
+	public JDFJPEG2000Params getCreateJPEG2000Params()
+	{
+		return (JDFJPEG2000Params) getCreateElement_JDFElement(ElementName.JPEG2000PARAMS, null, 0);
 	}
 
 	/**

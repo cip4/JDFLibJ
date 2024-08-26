@@ -290,6 +290,26 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Device
+	 *
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getDevice()
+	{
+		return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDevice
+	 * 
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getCreateDevice()
+	{
+		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDevice
 	 * 
 	 * @param iSkip number of elements to skip

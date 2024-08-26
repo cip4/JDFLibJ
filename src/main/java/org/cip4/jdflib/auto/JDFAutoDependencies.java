@@ -144,6 +144,26 @@ public abstract class JDFAutoDependencies extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element LayoutElement
+	 *
+	 * @return JDFLayoutElement the element
+	 */
+	public JDFLayoutElement getLayoutElement()
+	{
+		return (JDFLayoutElement) getElement(ElementName.LAYOUTELEMENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateLayoutElement
+	 * 
+	 * @return JDFLayoutElement the element
+	 */
+	public JDFLayoutElement getCreateLayoutElement()
+	{
+		return (JDFLayoutElement) getCreateElement_JDFElement(ElementName.LAYOUTELEMENT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateLayoutElement
 	 * 
 	 * @param iSkip number of elements to skip

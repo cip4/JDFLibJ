@@ -211,6 +211,26 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element GlueApplication
+	 *
+	 * @return JDFGlueApplication the element
+	 */
+	public JDFGlueApplication getGlueApplication()
+	{
+		return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateGlueApplication
+	 * 
+	 * @return JDFGlueApplication the element
+	 */
+	public JDFGlueApplication getCreateGlueApplication()
+	{
+		return (JDFGlueApplication) getCreateElement_JDFElement(ElementName.GLUEAPPLICATION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateGlueApplication
 	 * 
 	 * @param iSkip number of elements to skip
@@ -260,6 +280,26 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	public void refGlueApplication(JDFGlueApplication refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element Score
+	 *
+	 * @return JDFScore the element
+	 */
+	public JDFScore getScore()
+	{
+		return (JDFScore) getElement(ElementName.SCORE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateScore
+	 * 
+	 * @return JDFScore the element
+	 */
+	public JDFScore getCreateScore()
+	{
+		return (JDFScore) getCreateElement_JDFElement(ElementName.SCORE, null, 0);
 	}
 
 	/**

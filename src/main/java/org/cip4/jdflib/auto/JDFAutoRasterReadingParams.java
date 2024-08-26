@@ -528,13 +528,23 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
+	 * (24) const get element Media
 	 *
-	 * @param refTarget the element that is referenced
+	 * @return JDFMedia the element
 	 */
-	public void refFitPolicy(JDFFitPolicy refTarget)
+	public JDFMedia getMedia()
 	{
-		refElement(refTarget);
+		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMedia
+	 * 
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateMedia()
+	{
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**

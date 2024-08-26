@@ -98,14 +98,14 @@ public abstract class JDFAutoGlueLine extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AREAGLUE, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AREAGLUE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.GLUEBRAND, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.GLUELINEWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.GLUINGPATTERN, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.GLUETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumGlueType.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.GLUETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumGlueType.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.GLUINGPATTERN, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.MELTINGTEMPERATURE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.RELATIVESTARTPOSITION, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.RELATIVESTARTPOSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
@@ -161,15 +161,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
 		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
-	}
-
-	/**
-	 * @return the resource Class
-	 */
-	@Override
-	public EnumResourceClass getValidClass()
-	{
-		return JDFResource.EnumResourceClass.Parameter;
 	}
 
 	/**
@@ -312,6 +303,29 @@ public abstract class JDFAutoGlueLine extends JDFResource
 	}
 
 	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GlueType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute GlueType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 */
+	public void setGlueType(EnumGlueType enumVar)
+	{
+		setAttribute(AttributeName.GLUETYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	 * (9) get attribute GlueType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EnumGlueType getGlueType()
+	{
+		return EnumGlueType.getEnum(getAttribute(AttributeName.GLUETYPE, null, null));
+	}
+
+	/*
 	 * --------------------------------------------------------------------- Methods for Attribute GluingPattern
 	 * ---------------------------------------------------------------------
 	 */
@@ -335,29 +349,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
 		final String strAttrName = getAttribute(AttributeName.GLUINGPATTERN, null, null);
 		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GlueType ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute GlueType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 */
-	public void setGlueType(EnumGlueType enumVar)
-	{
-		setAttribute(AttributeName.GLUETYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute GlueType
-	 *
-	 * @return the value of the attribute
-	 */
-	public EnumGlueType getGlueType()
-	{
-		return EnumGlueType.getEnum(getAttribute(AttributeName.GLUETYPE, null, null));
 	}
 
 	/*

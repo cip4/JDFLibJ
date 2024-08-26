@@ -206,6 +206,26 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Emboss
+	 *
+	 * @return JDFEmboss the element
+	 */
+	public JDFEmboss getEmboss()
+	{
+		return (JDFEmboss) getElement(ElementName.EMBOSS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateEmboss
+	 * 
+	 * @return JDFEmboss the element
+	 */
+	public JDFEmboss getCreateEmboss()
+	{
+		return (JDFEmboss) getCreateElement_JDFElement(ElementName.EMBOSS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateEmboss
 	 * 
 	 * @param iSkip number of elements to skip

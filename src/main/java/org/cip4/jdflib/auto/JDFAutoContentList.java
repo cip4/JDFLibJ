@@ -164,6 +164,26 @@ public abstract class JDFAutoContentList extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ContentData
+	 *
+	 * @return JDFContentData the element
+	 */
+	public JDFContentData getContentData()
+	{
+		return (JDFContentData) getElement(ElementName.CONTENTDATA, null, 0);
+	}
+
+	/**
+	 * (25) getCreateContentData
+	 * 
+	 * @return JDFContentData the element
+	 */
+	public JDFContentData getCreateContentData()
+	{
+		return (JDFContentData) getCreateElement_JDFElement(ElementName.CONTENTDATA, null, 0);
+	}
+
+	/**
 	 * (26) getCreateContentData
 	 * 
 	 * @param iSkip number of elements to skip

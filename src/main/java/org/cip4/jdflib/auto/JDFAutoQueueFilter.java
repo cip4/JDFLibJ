@@ -835,6 +835,26 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element QueueEntryDef
+	 *
+	 * @return JDFQueueEntryDef the element
+	 */
+	public JDFQueueEntryDef getQueueEntryDef()
+	{
+		return (JDFQueueEntryDef) getElement(ElementName.QUEUEENTRYDEF, null, 0);
+	}
+
+	/**
+	 * (25) getCreateQueueEntryDef
+	 * 
+	 * @return JDFQueueEntryDef the element
+	 */
+	public JDFQueueEntryDef getCreateQueueEntryDef()
+	{
+		return (JDFQueueEntryDef) getCreateElement_JDFElement(ElementName.QUEUEENTRYDEF, null, 0);
+	}
+
+	/**
 	 * (26) getCreateQueueEntryDef
 	 * 
 	 * @param iSkip number of elements to skip
@@ -874,6 +894,26 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	public JDFQueueEntryDef appendQueueEntryDef()
 	{
 		return (JDFQueueEntryDef) appendElement(ElementName.QUEUEENTRYDEF, null);
+	}
+
+	/**
+	 * (24) const get element Device
+	 *
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getDevice()
+	{
+		return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDevice
+	 * 
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getCreateDevice()
+	{
+		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, 0);
 	}
 
 	/**
@@ -919,6 +959,26 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	}
 
 	/**
+	 * (24) const get element GangSource
+	 *
+	 * @return JDFGangSource the element
+	 */
+	public JDFGangSource getGangSource()
+	{
+		return (JDFGangSource) getElement(ElementName.GANGSOURCE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateGangSource
+	 * 
+	 * @return JDFGangSource the element
+	 */
+	public JDFGangSource getCreateGangSource()
+	{
+		return (JDFGangSource) getCreateElement_JDFElement(ElementName.GANGSOURCE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateGangSource
 	 * 
 	 * @param iSkip number of elements to skip
@@ -958,6 +1018,26 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	public JDFGangSource appendGangSource()
 	{
 		return (JDFGangSource) appendElement(ElementName.GANGSOURCE, null);
+	}
+
+	/**
+	 * (24) const get element Part
+	 *
+	 * @return JDFPart the element
+	 */
+	public JDFPart getPart()
+	{
+		return (JDFPart) getElement(ElementName.PART, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePart
+	 * 
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart()
+	{
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, 0);
 	}
 
 	/**

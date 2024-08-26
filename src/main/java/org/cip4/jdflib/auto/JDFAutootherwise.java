@@ -144,6 +144,26 @@ public abstract class JDFAutootherwise extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element set
+	 *
+	 * @return JDFset the element
+	 */
+	public JDFset getset()
+	{
+		return (JDFset) getElement(ElementName.SET, null, 0);
+	}
+
+	/**
+	 * (25) getCreateset
+	 * 
+	 * @return JDFset the element
+	 */
+	public JDFset getCreateset()
+	{
+		return (JDFset) getCreateElement_JDFElement(ElementName.SET, null, 0);
+	}
+
+	/**
 	 * (26) getCreateset
 	 * 
 	 * @param iSkip number of elements to skip

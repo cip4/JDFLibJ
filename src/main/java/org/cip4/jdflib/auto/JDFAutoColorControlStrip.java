@@ -290,6 +290,26 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element CIELABMeasuringField
+	 *
+	 * @return JDFCIELABMeasuringField the element
+	 */
+	public JDFCIELABMeasuringField getCIELABMeasuringField()
+	{
+		return (JDFCIELABMeasuringField) getElement(ElementName.CIELABMEASURINGFIELD, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCIELABMeasuringField
+	 * 
+	 * @return JDFCIELABMeasuringField the element
+	 */
+	public JDFCIELABMeasuringField getCreateCIELABMeasuringField()
+	{
+		return (JDFCIELABMeasuringField) getCreateElement_JDFElement(ElementName.CIELABMEASURINGFIELD, null, 0);
+	}
+
+	/**
 	 * (26) getCreateCIELABMeasuringField
 	 * 
 	 * @param iSkip number of elements to skip
@@ -329,6 +349,26 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	public JDFCIELABMeasuringField appendCIELABMeasuringField()
 	{
 		return (JDFCIELABMeasuringField) appendElement(ElementName.CIELABMEASURINGFIELD, null);
+	}
+
+	/**
+	 * (24) const get element DensityMeasuringField
+	 *
+	 * @return JDFDensityMeasuringField the element
+	 */
+	public JDFDensityMeasuringField getDensityMeasuringField()
+	{
+		return (JDFDensityMeasuringField) getElement(ElementName.DENSITYMEASURINGFIELD, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDensityMeasuringField
+	 * 
+	 * @return JDFDensityMeasuringField the element
+	 */
+	public JDFDensityMeasuringField getCreateDensityMeasuringField()
+	{
+		return (JDFDensityMeasuringField) getCreateElement_JDFElement(ElementName.DENSITYMEASURINGFIELD, null, 0);
 	}
 
 	/**
@@ -384,6 +424,26 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	}
 
 	/**
+	 * (24) const get element Patch
+	 *
+	 * @return JDFPatch the element
+	 */
+	public JDFPatch getPatch()
+	{
+		return (JDFPatch) getElement(ElementName.PATCH, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePatch
+	 * 
+	 * @return JDFPatch the element
+	 */
+	public JDFPatch getCreatePatch()
+	{
+		return (JDFPatch) getCreateElement_JDFElement(ElementName.PATCH, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePatch
 	 * 
 	 * @param iSkip number of elements to skip
@@ -423,6 +483,26 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	public JDFPatch appendPatch()
 	{
 		return (JDFPatch) appendElement(ElementName.PATCH, null);
+	}
+
+	/**
+	 * (24) const get element SeparationSpec
+	 *
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getSeparationSpec()
+	{
+		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSeparationSpec
+	 * 
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getCreateSeparationSpec()
+	{
+		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, 0);
 	}
 
 	/**

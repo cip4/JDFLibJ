@@ -594,6 +594,26 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	}
 
 	/**
+	 * (24) const get element Contact
+	 *
+	 * @return JDFContact the element
+	 */
+	public JDFContact getContact()
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateContact
+	 * 
+	 * @return JDFContact the element
+	 */
+	public JDFContact getCreateContact()
+	{
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateContact
 	 * 
 	 * @param iSkip number of elements to skip
@@ -683,6 +703,26 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	public void refFileSpec(JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element DropItemIntent
+	 *
+	 * @return JDFDropItemIntent the element
+	 */
+	public JDFDropItemIntent getDropItemIntent()
+	{
+		return (JDFDropItemIntent) getElement(ElementName.DROPITEMINTENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDropItemIntent
+	 * 
+	 * @return JDFDropItemIntent the element
+	 */
+	public JDFDropItemIntent getCreateDropItemIntent()
+	{
+		return (JDFDropItemIntent) getCreateElement_JDFElement(ElementName.DROPITEMINTENT, null, 0);
 	}
 
 	/**

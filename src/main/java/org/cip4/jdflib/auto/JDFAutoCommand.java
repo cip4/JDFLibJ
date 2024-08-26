@@ -387,6 +387,26 @@ public abstract class JDFAutoCommand extends JDFMessage
 	 */
 
 	/**
+	 * (24) const get element Employee
+	 *
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getEmployee()
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateEmployee
+	 * 
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getCreateEmployee()
+	{
+		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateEmployee
 	 * 
 	 * @param iSkip number of elements to skip

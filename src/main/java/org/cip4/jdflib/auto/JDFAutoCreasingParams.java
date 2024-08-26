@@ -164,6 +164,26 @@ public abstract class JDFAutoCreasingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Crease
+	 *
+	 * @return JDFCrease the element
+	 */
+	public JDFCrease getCrease()
+	{
+		return (JDFCrease) getElement(ElementName.CREASE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCrease
+	 * 
+	 * @return JDFCrease the element
+	 */
+	public JDFCrease getCreateCrease()
+	{
+		return (JDFCrease) getCreateElement_JDFElement(ElementName.CREASE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateCrease
 	 * 
 	 * @param iSkip number of elements to skip

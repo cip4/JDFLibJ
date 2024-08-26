@@ -202,21 +202,6 @@ class JDFContactTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	void testGetAddress()
-	{
-		final JDFNode root = co.getJDFRoot();
-		final JDFAddress comp = (JDFAddress) root.addResource(ElementName.ADDRESS, null);
-
-		co.refElement(comp);
-
-		assertEquals(comp, co.getAddress());
-	}
-
-	/**
-	 *
-	 *
-	 */
-	@Test
 	void testGetAddressPerson()
 	{
 		final JDFAddress a = co.appendPerson().appendAddress();
@@ -256,49 +241,6 @@ class JDFContactTest extends JDFTestCaseBase
 	{
 		final JDFAddress a = co.appendPerson().appendAddress();
 		assertEquals(a, co.getCreateAddress());
-	}
-
-	/**
-	 *
-	 *
-	 */
-	@Test
-	void testGetCreateAddress()
-	{
-		final JDFNode root = co.getJDFRoot();
-		final JDFAddress comp = (JDFAddress) root.addResource(ElementName.ADDRESS, null);
-
-		co.refElement(comp);
-
-		assertEquals(comp, co.getCreateAddress());
-	}
-
-	/**
-	 *
-	 *
-	 */
-	@Test
-	void testGetCreatePerson()
-	{
-		final JDFNode root = co.getJDFRoot();
-		final JDFPerson comp = (JDFPerson) root.addResource(ElementName.PERSON, null);
-		co.refElement(comp);
-
-		assertEquals(comp, co.getCreatePerson());
-	}
-
-	/**
-	 *
-	 *
-	 */
-	@Test
-	void testGetPerson()
-	{
-		final JDFNode root = co.getJDFRoot();
-		final JDFPerson comp = (JDFPerson) root.addResource(ElementName.PERSON, null);
-		co.refElement(comp);
-
-		assertEquals(comp, co.getPerson());
 	}
 
 	/**

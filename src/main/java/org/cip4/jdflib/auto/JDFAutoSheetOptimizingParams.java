@@ -277,6 +277,26 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ConvertingConfig
+	 *
+	 * @return JDFConvertingConfig the element
+	 */
+	public JDFConvertingConfig getConvertingConfig()
+	{
+		return (JDFConvertingConfig) getElement(ElementName.CONVERTINGCONFIG, null, 0);
+	}
+
+	/**
+	 * (25) getCreateConvertingConfig
+	 * 
+	 * @return JDFConvertingConfig the element
+	 */
+	public JDFConvertingConfig getCreateConvertingConfig()
+	{
+		return (JDFConvertingConfig) getCreateElement_JDFElement(ElementName.CONVERTINGCONFIG, null, 0);
+	}
+
+	/**
 	 * (26) getCreateConvertingConfig
 	 * 
 	 * @param iSkip number of elements to skip
@@ -316,6 +336,26 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	public JDFConvertingConfig appendConvertingConfig()
 	{
 		return (JDFConvertingConfig) appendElement(ElementName.CONVERTINGCONFIG, null);
+	}
+
+	/**
+	 * (24) const get element GangElement
+	 *
+	 * @return JDFGangElement the element
+	 */
+	public JDFGangElement getGangElement()
+	{
+		return (JDFGangElement) getElement(ElementName.GANGELEMENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateGangElement
+	 * 
+	 * @return JDFGangElement the element
+	 */
+	public JDFGangElement getCreateGangElement()
+	{
+		return (JDFGangElement) getCreateElement_JDFElement(ElementName.GANGELEMENT, null, 0);
 	}
 
 	/**

@@ -209,6 +209,26 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element PRRule
+	 *
+	 * @return JDFPRRule the element
+	 */
+	public JDFPRRule getPRRule()
+	{
+		return (JDFPRRule) getElement(ElementName.PRRULE, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePRRule
+	 * 
+	 * @return JDFPRRule the element
+	 */
+	public JDFPRRule getCreatePRRule()
+	{
+		return (JDFPRRule) getCreateElement_JDFElement(ElementName.PRRULE, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePRRule
 	 * 
 	 * @param iSkip number of elements to skip

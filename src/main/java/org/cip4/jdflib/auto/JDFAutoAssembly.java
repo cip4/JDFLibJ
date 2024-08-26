@@ -570,6 +570,26 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element AssemblySection
+	 *
+	 * @return JDFAssemblySection the element
+	 */
+	public JDFAssemblySection getAssemblySection()
+	{
+		return (JDFAssemblySection) getElement(ElementName.ASSEMBLYSECTION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateAssemblySection
+	 * 
+	 * @return JDFAssemblySection the element
+	 */
+	public JDFAssemblySection getCreateAssemblySection()
+	{
+		return (JDFAssemblySection) getCreateElement_JDFElement(ElementName.ASSEMBLYSECTION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateAssemblySection
 	 * 
 	 * @param iSkip number of elements to skip
@@ -649,6 +669,26 @@ public abstract class JDFAutoAssembly extends JDFResource
 	public void refPageList(JDFPageList refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element PageAssignedList
+	 *
+	 * @return JDFPageAssignedList the element
+	 */
+	public JDFPageAssignedList getPageAssignedList()
+	{
+		return (JDFPageAssignedList) getElement(ElementName.PAGEASSIGNEDLIST, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePageAssignedList
+	 * 
+	 * @return JDFPageAssignedList the element
+	 */
+	public JDFPageAssignedList getCreatePageAssignedList()
+	{
+		return (JDFPageAssignedList) getCreateElement_JDFElement(ElementName.PAGEASSIGNEDLIST, null, 0);
 	}
 
 	/**

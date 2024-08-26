@@ -480,6 +480,26 @@ public abstract class JDFAutoModule extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Module
+	 *
+	 * @return JDFModule the element
+	 */
+	public JDFModule getModule()
+	{
+		return (JDFModule) getElement(ElementName.MODULE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateModule
+	 * 
+	 * @return JDFModule the element
+	 */
+	public JDFModule getCreateModule()
+	{
+		return (JDFModule) getCreateElement_JDFElement(ElementName.MODULE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateModule
 	 * 
 	 * @param iSkip number of elements to skip

@@ -211,6 +211,26 @@ public abstract class JDFAutoCreateResource extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Resource
+	 *
+	 * @return JDFResource the element
+	 */
+	public JDFResource getResource()
+	{
+		return (JDFResource) getElement(ElementName.RESOURCE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateResource
+	 * 
+	 * @return JDFResource the element
+	 */
+	public JDFResource getCreateResource()
+	{
+		return (JDFResource) getCreateElement_JDFElement(ElementName.RESOURCE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateResource
 	 * 
 	 * @param iSkip number of elements to skip

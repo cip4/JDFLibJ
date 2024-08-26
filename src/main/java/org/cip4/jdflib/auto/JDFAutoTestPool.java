@@ -144,6 +144,26 @@ public abstract class JDFAutoTestPool extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Test
+	 *
+	 * @return JDFTest the element
+	 */
+	public JDFTest getTest()
+	{
+		return (JDFTest) getElement(ElementName.TEST, null, 0);
+	}
+
+	/**
+	 * (25) getCreateTest
+	 * 
+	 * @return JDFTest the element
+	 */
+	public JDFTest getCreateTest()
+	{
+		return (JDFTest) getCreateElement_JDFElement(ElementName.TEST, null, 0);
+	}
+
+	/**
 	 * (26) getCreateTest
 	 * 
 	 * @param iSkip number of elements to skip

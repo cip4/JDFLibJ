@@ -105,8 +105,8 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTEXT, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumContext.getEnum(0), "PagePool");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DATATYPE, 0x2222221111l, AttributeInfo.EnumAttributeType.enumeration, EnumDataType.getEnum(0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.NAME, 0x2222221111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.VALUEFORMAT, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.VALUETEMPLATE, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.VALUEFORMAT, 0x2222221111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.VALUETEMPLATE, 0x2222221111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -450,6 +450,26 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	/*
 	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
+
+	/**
+	 * (24) const get element Expr
+	 *
+	 * @return JDFExpr the element
+	 */
+	public JDFExpr getExpr()
+	{
+		return (JDFExpr) getElement(ElementName.EXPR, null, 0);
+	}
+
+	/**
+	 * (25) getCreateExpr
+	 * 
+	 * @return JDFExpr the element
+	 */
+	public JDFExpr getCreateExpr()
+	{
+		return (JDFExpr) getCreateElement_JDFElement(ElementName.EXPR, null, 0);
+	}
 
 	/**
 	 * (26) getCreateExpr

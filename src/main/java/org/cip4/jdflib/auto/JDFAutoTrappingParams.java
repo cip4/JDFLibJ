@@ -774,6 +774,26 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ColorantZoneDetails
+	 *
+	 * @return JDFColorantZoneDetails the element
+	 */
+	public JDFColorantZoneDetails getColorantZoneDetails()
+	{
+		return (JDFColorantZoneDetails) getElement(ElementName.COLORANTZONEDETAILS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateColorantZoneDetails
+	 * 
+	 * @return JDFColorantZoneDetails the element
+	 */
+	public JDFColorantZoneDetails getCreateColorantZoneDetails()
+	{
+		return (JDFColorantZoneDetails) getCreateElement_JDFElement(ElementName.COLORANTZONEDETAILS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateColorantZoneDetails
 	 * 
 	 * @param iSkip number of elements to skip

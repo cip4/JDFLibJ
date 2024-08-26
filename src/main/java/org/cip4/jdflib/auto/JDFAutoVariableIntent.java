@@ -215,6 +215,26 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	}
 
 	/**
+	 * (24) const get element maxPages
+	 *
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getmaxPages()
+	{
+		return (JDFIntegerSpan) getElement(ElementName.MAXPAGES, null, 0);
+	}
+
+	/**
+	 * (25) getCreatemaxPages
+	 * 
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getCreatemaxPages()
+	{
+		return (JDFIntegerSpan) getCreateElement_JDFElement(ElementName.MAXPAGES, null, 0);
+	}
+
+	/**
 	 * (26) getCreatemaxPages
 	 * 
 	 * @param iSkip number of elements to skip

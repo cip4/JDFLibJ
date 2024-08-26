@@ -144,6 +144,26 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element DisplayGroup
+	 *
+	 * @return JDFDisplayGroup the element
+	 */
+	public JDFDisplayGroup getDisplayGroup()
+	{
+		return (JDFDisplayGroup) getElement(ElementName.DISPLAYGROUP, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDisplayGroup
+	 * 
+	 * @return JDFDisplayGroup the element
+	 */
+	public JDFDisplayGroup getCreateDisplayGroup()
+	{
+		return (JDFDisplayGroup) getCreateElement_JDFElement(ElementName.DISPLAYGROUP, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDisplayGroup
 	 * 
 	 * @param iSkip number of elements to skip

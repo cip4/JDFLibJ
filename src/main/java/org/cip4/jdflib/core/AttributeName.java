@@ -289,8 +289,7 @@ public final class AttributeName
 	public static final String BACKING = "Backing";
 	public static final String BACKISOPAPERSUBSTRATE = "BackISOPaperSubstrate";
 	public static final String BACKLABCOLORVALUE = "BackLabColorValue";
-	@Deprecated
-	public static final String BACKLABCOLORVALUEE = BACKLABCOLORVALUE;
+	public static final String BACKOPTICALBRIGHTENING = "BackOpticalBrightening";
 	public static final String BACKMARKLIST = "BackMarkList";
 	public static final String BACKOVERFOLD = "BackOverfold";
 	public static final String BACKPAGES = "BackPages";
@@ -626,6 +625,7 @@ public final class AttributeName
 	public static final String COMPENSATIONVALUE = "CompensationValue";
 	/** */
 	public static final String COMPLETED = "Completed";
+	public static final String COMPLEXITY = "Complexity";
 	/** */
 	public static final String COMPONENTGRANULARITY = "ComponentGranularity";
 	/** */
@@ -2166,7 +2166,7 @@ public final class AttributeName
 	public static final String OPTIMIZE = "Optimize";
 	/** */
 	public static final String OPTION = "Option";
-	/** */
+	public static final String OPTICALBRIGHTENING = "OpticalBrightening";
 	public static final String OPTIONALCOMBINEDTYPES = "OptionalCombinedTypes";
 	/** */
 	public static final String ORD = "Ord";
@@ -2684,7 +2684,8 @@ public final class AttributeName
 	public static final String REGION = "Region";
 	/** */
 	public static final String REGISTRATION = "Registration";
-	/** */
+	public static final String REINFORCEMENT = "Reinforcement";
+
 	public static final String RELATEDCOMMANDS = "RelatedCommands";
 	/** */
 	public static final String RELATEDJOBID = "RelatedJobID";
@@ -3671,7 +3672,7 @@ public final class AttributeName
 	/** */
 	public static final String ZONEWIDTH = "ZoneWidth";
 
-	// JDF 1.6 + 1.7 additions
+	// JDF 1.6 + 1.7 + 1.8 additions
 	public static final String TYPEDETAILS = "TypeDetails";
 	public static final String BOXTYPE = "BoxType";
 	public static final String BOXTYPEDETAILS = "BoxTypeDetails";

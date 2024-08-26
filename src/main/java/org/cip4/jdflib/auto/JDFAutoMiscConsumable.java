@@ -289,6 +289,26 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Certification
+	 *
+	 * @return JDFCertification the element
+	 */
+	public JDFCertification getCertification()
+	{
+		return (JDFCertification) getElement(ElementName.CERTIFICATION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCertification
+	 * 
+	 * @return JDFCertification the element
+	 */
+	public JDFCertification getCreateCertification()
+	{
+		return (JDFCertification) getCreateElement_JDFElement(ElementName.CERTIFICATION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateCertification
 	 * 
 	 * @param iSkip number of elements to skip
@@ -328,6 +348,28 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 	public JDFCertification appendCertification()
 	{
 		return (JDFCertification) appendElement(ElementName.CERTIFICATION, null);
+	}
+
+	/**
+	 * (24) const get element Contact
+	 *
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getContact()
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateContact
+	 * 
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getCreateContact()
+	{
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, 0);
 	}
 
 	/**
@@ -381,6 +423,26 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 	public void refContact(JDFContact refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element IdentificationField
+	 *
+	 * @return JDFIdentificationField the element
+	 */
+	public JDFIdentificationField getIdentificationField()
+	{
+		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, 0);
+	}
+
+	/**
+	 * (25) getCreateIdentificationField
+	 * 
+	 * @return JDFIdentificationField the element
+	 */
+	public JDFIdentificationField getCreateIdentificationField()
+	{
+		return (JDFIdentificationField) getCreateElement_JDFElement(ElementName.IDENTIFICATIONFIELD, null, 0);
 	}
 
 	/**

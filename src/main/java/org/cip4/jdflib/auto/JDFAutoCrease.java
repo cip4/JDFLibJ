@@ -99,12 +99,12 @@ public abstract class JDFAutoCrease extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEPTH, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.RELATIVESTARTPOSITION, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.TRAVEL, 0x4444333311l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.RELATIVETRAVEL, 0x4444333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RELATIVETRAVEL, 0x4444333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TRAVEL, 0x4444333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -266,6 +266,30 @@ public abstract class JDFAutoCrease extends JDFElement
 	}
 
 	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelativeTravel
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute RelativeTravel
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setRelativeTravel(double value)
+	{
+		setAttribute(AttributeName.RELATIVETRAVEL, value, null);
+	}
+
+	/**
+	 * (17) get double attribute RelativeTravel
+	 *
+	 * @return double the value of the attribute
+	 */
+	public double getRelativeTravel()
+	{
+		return getRealAttribute(AttributeName.RELATIVETRAVEL, null, 0.0);
+	}
+
+	/*
 	 * --------------------------------------------------------------------- Methods for Attribute RelativeWorkingPath
 	 * ---------------------------------------------------------------------
 	 */
@@ -318,28 +342,26 @@ public abstract class JDFAutoCrease extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingPath ---------------------------------------------------------------------
+	 * --------------------------------------------------------------------- Methods for Attribute Travel ---------------------------------------------------------------------
 	 */
 	/**
-	 * (36) set attribute WorkingPath
+	 * (36) set attribute Travel
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWorkingPath(JDFXYPair value)
+	public void setTravel(double value)
 	{
-		setAttribute(AttributeName.WORKINGPATH, value, null);
+		setAttribute(AttributeName.TRAVEL, value, null);
 	}
 
 	/**
-	 * (20) get JDFXYPair attribute WorkingPath
+	 * (17) get double attribute Travel
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return double the value of the attribute
 	 */
-	public JDFXYPair getWorkingPath()
+	public double getTravel()
 	{
-		final String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-		return nPlaceHolder;
+		return getRealAttribute(AttributeName.TRAVEL, null, 0.0);
 	}
 
 	/*
@@ -367,50 +389,28 @@ public abstract class JDFAutoCrease extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Travel ---------------------------------------------------------------------
+	 * --------------------------------------------------------------------- Methods for Attribute WorkingPath ---------------------------------------------------------------------
 	 */
 	/**
-	 * (36) set attribute Travel
+	 * (36) set attribute WorkingPath
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTravel(double value)
+	public void setWorkingPath(JDFXYPair value)
 	{
-		setAttribute(AttributeName.TRAVEL, value, null);
+		setAttribute(AttributeName.WORKINGPATH, value, null);
 	}
 
 	/**
-	 * (17) get double attribute Travel
+	 * (20) get JDFXYPair attribute WorkingPath
 	 *
-	 * @return double the value of the attribute
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
-	public double getTravel()
+	public JDFXYPair getWorkingPath()
 	{
-		return getRealAttribute(AttributeName.TRAVEL, null, 0.0);
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelativeTravel
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute RelativeTravel
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setRelativeTravel(double value)
-	{
-		setAttribute(AttributeName.RELATIVETRAVEL, value, null);
-	}
-
-	/**
-	 * (17) get double attribute RelativeTravel
-	 *
-	 * @return double the value of the attribute
-	 */
-	public double getRelativeTravel()
-	{
-		return getRealAttribute(AttributeName.RELATIVETRAVEL, null, 0.0);
+		final String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
 	}
 
 }

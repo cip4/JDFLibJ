@@ -1132,6 +1132,26 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	}
 
 	/**
+	 * (24) const get element FileAlias
+	 *
+	 * @return JDFFileAlias the element
+	 */
+	public JDFFileAlias getFileAlias()
+	{
+		return (JDFFileAlias) getElement(ElementName.FILEALIAS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileAlias
+	 * 
+	 * @return JDFFileAlias the element
+	 */
+	public JDFFileAlias getCreateFileAlias()
+	{
+		return (JDFFileAlias) getCreateElement_JDFElement(ElementName.FILEALIAS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFileAlias
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1171,6 +1191,26 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	public JDFFileAlias appendFileAlias()
 	{
 		return (JDFFileAlias) appendElement(ElementName.FILEALIAS, null);
+	}
+
+	/**
+	 * (24) const get element NetworkHeader
+	 *
+	 * @return JDFNetworkHeader the element
+	 */
+	public JDFNetworkHeader getNetworkHeader()
+	{
+		return (JDFNetworkHeader) getElement(ElementName.NETWORKHEADER, null, 0);
+	}
+
+	/**
+	 * (25) getCreateNetworkHeader
+	 * 
+	 * @return JDFNetworkHeader the element
+	 */
+	public JDFNetworkHeader getCreateNetworkHeader()
+	{
+		return (JDFNetworkHeader) getCreateElement_JDFElement(ElementName.NETWORKHEADER, null, 0);
 	}
 
 	/**

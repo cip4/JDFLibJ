@@ -195,6 +195,26 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element IDPFolding
+	 *
+	 * @return JDFIDPFolding the element
+	 */
+	public JDFIDPFolding getIDPFolding()
+	{
+		return (JDFIDPFolding) getElement(ElementName.IDPFOLDING, null, 0);
+	}
+
+	/**
+	 * (25) getCreateIDPFolding
+	 * 
+	 * @return JDFIDPFolding the element
+	 */
+	public JDFIDPFolding getCreateIDPFolding()
+	{
+		return (JDFIDPFolding) getCreateElement_JDFElement(ElementName.IDPFOLDING, null, 0);
+	}
+
+	/**
 	 * (26) getCreateIDPFolding
 	 * 
 	 * @param iSkip number of elements to skip
@@ -234,6 +254,26 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	public JDFIDPFolding appendIDPFolding()
 	{
 		return (JDFIDPFolding) appendElement(ElementName.IDPFOLDING, null);
+	}
+
+	/**
+	 * (24) const get element IDPHoleMaking
+	 *
+	 * @return JDFIDPHoleMaking the element
+	 */
+	public JDFIDPHoleMaking getIDPHoleMaking()
+	{
+		return (JDFIDPHoleMaking) getElement(ElementName.IDPHOLEMAKING, null, 0);
+	}
+
+	/**
+	 * (25) getCreateIDPHoleMaking
+	 * 
+	 * @return JDFIDPHoleMaking the element
+	 */
+	public JDFIDPHoleMaking getCreateIDPHoleMaking()
+	{
+		return (JDFIDPHoleMaking) getCreateElement_JDFElement(ElementName.IDPHOLEMAKING, null, 0);
 	}
 
 	/**
@@ -279,6 +319,26 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	}
 
 	/**
+	 * (24) const get element IDPStitching
+	 *
+	 * @return JDFIDPStitching the element
+	 */
+	public JDFIDPStitching getIDPStitching()
+	{
+		return (JDFIDPStitching) getElement(ElementName.IDPSTITCHING, null, 0);
+	}
+
+	/**
+	 * (25) getCreateIDPStitching
+	 * 
+	 * @return JDFIDPStitching the element
+	 */
+	public JDFIDPStitching getCreateIDPStitching()
+	{
+		return (JDFIDPStitching) getCreateElement_JDFElement(ElementName.IDPSTITCHING, null, 0);
+	}
+
+	/**
 	 * (26) getCreateIDPStitching
 	 * 
 	 * @param iSkip number of elements to skip
@@ -318,6 +378,26 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	public JDFIDPStitching appendIDPStitching()
 	{
 		return (JDFIDPStitching) appendElement(ElementName.IDPSTITCHING, null);
+	}
+
+	/**
+	 * (24) const get element IDPTrimming
+	 *
+	 * @return JDFIDPTrimming the element
+	 */
+	public JDFIDPTrimming getIDPTrimming()
+	{
+		return (JDFIDPTrimming) getElement(ElementName.IDPTRIMMING, null, 0);
+	}
+
+	/**
+	 * (25) getCreateIDPTrimming
+	 * 
+	 * @return JDFIDPTrimming the element
+	 */
+	public JDFIDPTrimming getCreateIDPTrimming()
+	{
+		return (JDFIDPTrimming) getCreateElement_JDFElement(ElementName.IDPTRIMMING, null, 0);
 	}
 
 	/**

@@ -229,6 +229,26 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	}
 
 	/**
+	 * (24) const get element ColorCorrectionParams
+	 *
+	 * @return JDFColorCorrectionParams the element
+	 */
+	public JDFColorCorrectionParams getColorCorrectionParams()
+	{
+		return (JDFColorCorrectionParams) getElement(ElementName.COLORCORRECTIONPARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateColorCorrectionParams
+	 * 
+	 * @return JDFColorCorrectionParams the element
+	 */
+	public JDFColorCorrectionParams getCreateColorCorrectionParams()
+	{
+		return (JDFColorCorrectionParams) getCreateElement_JDFElement(ElementName.COLORCORRECTIONPARAMS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateColorCorrectionParams
 	 * 
 	 * @param iSkip number of elements to skip
@@ -281,6 +301,26 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	}
 
 	/**
+	 * (24) const get element ImageCompressionParams
+	 *
+	 * @return JDFImageCompressionParams the element
+	 */
+	public JDFImageCompressionParams getImageCompressionParams()
+	{
+		return (JDFImageCompressionParams) getElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateImageCompressionParams
+	 * 
+	 * @return JDFImageCompressionParams the element
+	 */
+	public JDFImageCompressionParams getCreateImageCompressionParams()
+	{
+		return (JDFImageCompressionParams) getCreateElement_JDFElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateImageCompressionParams
 	 * 
 	 * @param iSkip number of elements to skip
@@ -330,6 +370,26 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	public void refImageCompressionParams(JDFImageCompressionParams refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element ImageEnhancementParams
+	 *
+	 * @return JDFImageEnhancementParams the element
+	 */
+	public JDFImageEnhancementParams getImageEnhancementParams()
+	{
+		return (JDFImageEnhancementParams) getElement(ElementName.IMAGEENHANCEMENTPARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateImageEnhancementParams
+	 * 
+	 * @return JDFImageEnhancementParams the element
+	 */
+	public JDFImageEnhancementParams getCreateImageEnhancementParams()
+	{
+		return (JDFImageEnhancementParams) getCreateElement_JDFElement(ElementName.IMAGEENHANCEMENTPARAMS, null, 0);
 	}
 
 	/**

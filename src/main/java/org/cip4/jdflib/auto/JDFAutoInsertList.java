@@ -144,6 +144,26 @@ public abstract class JDFAutoInsertList extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Insert
+	 *
+	 * @return JDFInsert the element
+	 */
+	public JDFInsert getInsert()
+	{
+		return (JDFInsert) getElement(ElementName.INSERT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateInsert
+	 * 
+	 * @return JDFInsert the element
+	 */
+	public JDFInsert getCreateInsert()
+	{
+		return (JDFInsert) getCreateElement_JDFElement(ElementName.INSERT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateInsert
 	 * 
 	 * @param iSkip number of elements to skip

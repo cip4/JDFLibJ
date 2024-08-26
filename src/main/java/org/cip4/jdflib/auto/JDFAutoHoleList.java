@@ -166,6 +166,26 @@ public abstract class JDFAutoHoleList extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Hole
+	 *
+	 * @return JDFHole the element
+	 */
+	public JDFHole getHole()
+	{
+		return (JDFHole) getElement(ElementName.HOLE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateHole
+	 * 
+	 * @return JDFHole the element
+	 */
+	public JDFHole getCreateHole()
+	{
+		return (JDFHole) getCreateElement_JDFElement(ElementName.HOLE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateHole
 	 * 
 	 * @param iSkip number of elements to skip
@@ -208,13 +228,23 @@ public abstract class JDFAutoHoleList extends JDFResource
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
+	 * (24) const get element HoleLine
 	 *
-	 * @param refTarget the element that is referenced
+	 * @return JDFHoleLine the element
 	 */
-	public void refHole(JDFHole refTarget)
+	public JDFHoleLine getHoleLine()
 	{
-		refElement(refTarget);
+		return (JDFHoleLine) getElement(ElementName.HOLELINE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateHoleLine
+	 * 
+	 * @return JDFHoleLine the element
+	 */
+	public JDFHoleLine getCreateHoleLine()
+	{
+		return (JDFHoleLine) getCreateElement_JDFElement(ElementName.HOLELINE, null, 0);
 	}
 
 	/**
@@ -257,16 +287,6 @@ public abstract class JDFAutoHoleList extends JDFResource
 	public JDFHoleLine appendHoleLine()
 	{
 		return (JDFHoleLine) appendElement(ElementName.HOLELINE, null);
-	}
-
-	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refHoleLine(JDFHoleLine refTarget)
-	{
-		refElement(refTarget);
 	}
 
 }

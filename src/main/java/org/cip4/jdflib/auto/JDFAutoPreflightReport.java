@@ -490,6 +490,26 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	}
 
 	/**
+	 * (24) const get element PRItem
+	 *
+	 * @return JDFPRItem the element
+	 */
+	public JDFPRItem getPRItem()
+	{
+		return (JDFPRItem) getElement(ElementName.PRITEM, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePRItem
+	 * 
+	 * @return JDFPRItem the element
+	 */
+	public JDFPRItem getCreatePRItem()
+	{
+		return (JDFPRItem) getCreateElement_JDFElement(ElementName.PRITEM, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePRItem
 	 * 
 	 * @param iSkip number of elements to skip

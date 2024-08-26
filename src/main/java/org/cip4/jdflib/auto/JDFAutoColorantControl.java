@@ -428,6 +428,26 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ColorantAlias
+	 *
+	 * @return JDFColorantAlias the element
+	 */
+	public JDFColorantAlias getColorantAlias()
+	{
+		return (JDFColorantAlias) getElement(ElementName.COLORANTALIAS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateColorantAlias
+	 * 
+	 * @return JDFColorantAlias the element
+	 */
+	public JDFColorantAlias getCreateColorantAlias()
+	{
+		return (JDFColorantAlias) getCreateElement_JDFElement(ElementName.COLORANTALIAS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateColorantAlias
 	 * 
 	 * @param iSkip number of elements to skip
@@ -610,6 +630,26 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/**
+	 * (24) const get element ColorSpaceSubstitute
+	 *
+	 * @return JDFColorSpaceSubstitute the element
+	 */
+	public JDFColorSpaceSubstitute getColorSpaceSubstitute()
+	{
+		return (JDFColorSpaceSubstitute) getElement(ElementName.COLORSPACESUBSTITUTE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateColorSpaceSubstitute
+	 * 
+	 * @return JDFColorSpaceSubstitute the element
+	 */
+	public JDFColorSpaceSubstitute getCreateColorSpaceSubstitute()
+	{
+		return (JDFColorSpaceSubstitute) getCreateElement_JDFElement(ElementName.COLORSPACESUBSTITUTE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateColorSpaceSubstitute
 	 * 
 	 * @param iSkip number of elements to skip
@@ -682,6 +722,26 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/**
+	 * (24) const get element DeviceNSpace
+	 *
+	 * @return JDFDeviceNSpace the element
+	 */
+	public JDFDeviceNSpace getDeviceNSpace()
+	{
+		return (JDFDeviceNSpace) getElement(ElementName.DEVICENSPACE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDeviceNSpace
+	 * 
+	 * @return JDFDeviceNSpace the element
+	 */
+	public JDFDeviceNSpace getCreateDeviceNSpace()
+	{
+		return (JDFDeviceNSpace) getCreateElement_JDFElement(ElementName.DEVICENSPACE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDeviceNSpace
 	 * 
 	 * @param iSkip number of elements to skip
@@ -721,16 +781,6 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	public JDFDeviceNSpace appendDeviceNSpace()
 	{
 		return (JDFDeviceNSpace) appendElement(ElementName.DEVICENSPACE, null);
-	}
-
-	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refDeviceNSpace(JDFDeviceNSpace refTarget)
-	{
-		refElement(refTarget);
 	}
 
 }

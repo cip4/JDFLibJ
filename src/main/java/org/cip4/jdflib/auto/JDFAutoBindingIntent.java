@@ -340,6 +340,26 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	}
 
 	/**
+	 * (24) const get element BackCoverColorDetails
+	 *
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getBackCoverColorDetails()
+	{
+		return (JDFStringSpan) getElement(ElementName.BACKCOVERCOLORDETAILS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBackCoverColorDetails
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateBackCoverColorDetails()
+	{
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.BACKCOVERCOLORDETAILS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateBackCoverColorDetails
 	 * 
 	 * @param iSkip number of elements to skip
@@ -439,6 +459,26 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	public JDFSpanNamedColor appendBindingColor()
 	{
 		return (JDFSpanNamedColor) appendElementN(ElementName.BINDINGCOLOR, 1, null);
+	}
+
+	/**
+	 * (24) const get element BindingColorDetails
+	 *
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getBindingColorDetails()
+	{
+		return (JDFStringSpan) getElement(ElementName.BINDINGCOLORDETAILS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBindingColorDetails
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateBindingColorDetails()
+	{
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.BINDINGCOLORDETAILS, null, 0);
 	}
 
 	/**
@@ -571,6 +611,26 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	public JDFSpanNamedColor appendCoverColor()
 	{
 		return (JDFSpanNamedColor) appendElementN(ElementName.COVERCOLOR, 1, null);
+	}
+
+	/**
+	 * (24) const get element CoverColorDetails
+	 *
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCoverColorDetails()
+	{
+		return (JDFStringSpan) getElement(ElementName.COVERCOLORDETAILS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCoverColorDetails
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateCoverColorDetails()
+	{
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.COVERCOLORDETAILS, null, 0);
 	}
 
 	/**

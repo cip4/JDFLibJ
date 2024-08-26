@@ -315,6 +315,26 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ConvertingConfig
+	 *
+	 * @return JDFConvertingConfig the element
+	 */
+	public JDFConvertingConfig getConvertingConfig()
+	{
+		return (JDFConvertingConfig) getElement(ElementName.CONVERTINGCONFIG, null, 0);
+	}
+
+	/**
+	 * (25) getCreateConvertingConfig
+	 * 
+	 * @return JDFConvertingConfig the element
+	 */
+	public JDFConvertingConfig getCreateConvertingConfig()
+	{
+		return (JDFConvertingConfig) getCreateElement_JDFElement(ElementName.CONVERTINGCONFIG, null, 0);
+	}
+
+	/**
 	 * (26) getCreateConvertingConfig
 	 * 
 	 * @param iSkip number of elements to skip
@@ -357,6 +377,26 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	}
 
 	/**
+	 * (24) const get element RepeatDesc
+	 *
+	 * @return JDFRepeatDesc the element
+	 */
+	public JDFRepeatDesc getRepeatDesc()
+	{
+		return (JDFRepeatDesc) getElement(ElementName.REPEATDESC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateRepeatDesc
+	 * 
+	 * @return JDFRepeatDesc the element
+	 */
+	public JDFRepeatDesc getCreateRepeatDesc()
+	{
+		return (JDFRepeatDesc) getCreateElement_JDFElement(ElementName.REPEATDESC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateRepeatDesc
 	 * 
 	 * @param iSkip number of elements to skip
@@ -396,6 +436,28 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	public JDFRepeatDesc appendRepeatDesc()
 	{
 		return (JDFRepeatDesc) appendElement(ElementName.REPEATDESC, null);
+	}
+
+	/**
+	 * (24) const get element Contact
+	 *
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getContact()
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateContact
+	 * 
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getCreateContact()
+	{
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, 0);
 	}
 
 	/**

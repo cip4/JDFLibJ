@@ -263,6 +263,26 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Contact
+	 *
+	 * @return JDFContact the element
+	 */
+	public JDFContact getContact()
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateContact
+	 * 
+	 * @return JDFContact the element
+	 */
+	public JDFContact getCreateContact()
+	{
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateContact
 	 * 
 	 * @param iSkip number of elements to skip

@@ -79,16 +79,16 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.core.JDFElement;
 
 /**
  *****************************************************************************
- * class JDFAutoBarcodeCompParams : public JDFResource
+ * class JDFAutoBarcodeCompParams : public JDFElement
  *****************************************************************************
  * 
  */
 
-public abstract class JDFAutoBarcodeCompParams extends JDFResource
+public abstract class JDFAutoBarcodeCompParams extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
@@ -96,8 +96,8 @@ public abstract class JDFAutoBarcodeCompParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPENSATIONPROCESS, 0x2222222111l, AttributeInfo.EnumAttributeType.enumeration, EnumCompensationProcess.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMPENSATIONVALUE, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPENSATIONPROCESS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumCompensationProcess.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMPENSATIONVALUE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -140,26 +140,6 @@ public abstract class JDFAutoBarcodeCompParams extends JDFResource
 	protected JDFAutoBarcodeCompParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return true if ok
-	 */
-	@Override
-	public boolean init()
-	{
-		final boolean bRet = super.init();
-		setResourceClass(JDFResource.EnumResourceClass.Parameter);
-		return bRet;
-	}
-
-	/**
-	 * @return the resource Class
-	 */
-	@Override
-	public EnumResourceClass getValidClass()
-	{
-		return JDFResource.EnumResourceClass.Parameter;
 	}
 
 	/**

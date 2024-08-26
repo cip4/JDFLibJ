@@ -818,6 +818,26 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Lot
+	 *
+	 * @return JDFLot the element
+	 */
+	public JDFLot getLot()
+	{
+		return (JDFLot) getElement(ElementName.LOT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateLot
+	 * 
+	 * @return JDFLot the element
+	 */
+	public JDFLot getCreateLot()
+	{
+		return (JDFLot) getCreateElement_JDFElement(ElementName.LOT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateLot
 	 * 
 	 * @param iSkip number of elements to skip

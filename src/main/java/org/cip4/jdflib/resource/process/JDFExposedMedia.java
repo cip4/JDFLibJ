@@ -85,6 +85,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 
 /**
  * wrapper for ExposedMedia elements
+ * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
@@ -98,7 +99,7 @@ public class JDFExposedMedia extends JDFAutoExposedMedia
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFExposedMedia(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFExposedMedia(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -110,7 +111,7 @@ public class JDFExposedMedia extends JDFAutoExposedMedia
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFExposedMedia(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFExposedMedia(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -123,7 +124,7 @@ public class JDFExposedMedia extends JDFAutoExposedMedia
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFExposedMedia(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFExposedMedia(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -139,14 +140,26 @@ public class JDFExposedMedia extends JDFAutoExposedMedia
 	}
 
 	/**
-	 * gets the media dimension in points, 
+	 * gets the media dimension in points,
+	 * 
 	 * @return the media/@Dimension; null if no media is available
 	 */
 	public JDFXYPair getMediaDimension()
 	{
-		JDFMedia m = getMedia();
+		final JDFMedia m = getMedia();
 		if (m == null)
 			return null;
 		return m.getDimension();
+	}
+
+	/**
+	 * gets the media dimension in points,
+	 * 
+	 * @return the media/@Dimension; null if no media is available
+	 */
+	@Override
+	public JDFFileSpec getFileSpec()
+	{
+		return getFileSpec(0);
 	}
 }

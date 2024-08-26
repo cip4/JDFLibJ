@@ -326,6 +326,26 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element RegisterRibbon
+	 *
+	 * @return JDFRegisterRibbon the element
+	 */
+	public JDFRegisterRibbon getRegisterRibbon()
+	{
+		return (JDFRegisterRibbon) getElement(ElementName.REGISTERRIBBON, null, 0);
+	}
+
+	/**
+	 * (25) getCreateRegisterRibbon
+	 * 
+	 * @return JDFRegisterRibbon the element
+	 */
+	public JDFRegisterRibbon getCreateRegisterRibbon()
+	{
+		return (JDFRegisterRibbon) getCreateElement_JDFElement(ElementName.REGISTERRIBBON, null, 0);
+	}
+
+	/**
 	 * (26) getCreateRegisterRibbon
 	 * 
 	 * @param iSkip number of elements to skip

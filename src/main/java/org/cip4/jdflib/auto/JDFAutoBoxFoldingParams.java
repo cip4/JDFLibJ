@@ -351,6 +351,26 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element BoxFoldAction
+	 *
+	 * @return JDFBoxFoldAction the element
+	 */
+	public JDFBoxFoldAction getBoxFoldAction()
+	{
+		return (JDFBoxFoldAction) getElement(ElementName.BOXFOLDACTION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBoxFoldAction
+	 * 
+	 * @return JDFBoxFoldAction the element
+	 */
+	public JDFBoxFoldAction getCreateBoxFoldAction()
+	{
+		return (JDFBoxFoldAction) getCreateElement_JDFElement(ElementName.BOXFOLDACTION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateBoxFoldAction
 	 * 
 	 * @param iSkip number of elements to skip
@@ -390,6 +410,26 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	public JDFBoxFoldAction appendBoxFoldAction()
 	{
 		return (JDFBoxFoldAction) appendElement(ElementName.BOXFOLDACTION, null);
+	}
+
+	/**
+	 * (24) const get element GlueLine
+	 *
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getGlueLine()
+	{
+		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateGlueLine
+	 * 
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getCreateGlueLine()
+	{
+		return (JDFGlueLine) getCreateElement_JDFElement(ElementName.GLUELINE, null, 0);
 	}
 
 	/**
@@ -435,13 +475,23 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
+	 * (24) const get element BoxApplication
 	 *
-	 * @param refTarget the element that is referenced
+	 * @return JDFBoxApplication the element
 	 */
-	public void refGlueLine(JDFGlueLine refTarget)
+	public JDFBoxApplication getBoxApplication()
 	{
-		refElement(refTarget);
+		return (JDFBoxApplication) getElement(ElementName.BOXAPPLICATION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBoxApplication
+	 * 
+	 * @return JDFBoxApplication the element
+	 */
+	public JDFBoxApplication getCreateBoxApplication()
+	{
+		return (JDFBoxApplication) getCreateElement_JDFElement(ElementName.BOXAPPLICATION, null, 0);
 	}
 
 	/**

@@ -189,6 +189,26 @@ public abstract class JDFAutoStatusPool extends JDFPool
 	 */
 
 	/**
+	 * (24) const get element PartStatus
+	 *
+	 * @return JDFPartStatus the element
+	 */
+	public JDFPartStatus getPartStatus()
+	{
+		return (JDFPartStatus) getElement(ElementName.PARTSTATUS, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePartStatus
+	 * 
+	 * @return JDFPartStatus the element
+	 */
+	public JDFPartStatus getCreatePartStatus()
+	{
+		return (JDFPartStatus) getCreateElement_JDFElement(ElementName.PARTSTATUS, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePartStatus
 	 * 
 	 * @param iSkip number of elements to skip

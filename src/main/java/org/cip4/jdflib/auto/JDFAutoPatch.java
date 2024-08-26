@@ -527,6 +527,26 @@ public abstract class JDFAutoPatch extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element SeparationTint
+	 *
+	 * @return JDFSeparationTint the element
+	 */
+	public JDFSeparationTint getSeparationTint()
+	{
+		return (JDFSeparationTint) getElement(ElementName.SEPARATIONTINT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSeparationTint
+	 * 
+	 * @return JDFSeparationTint the element
+	 */
+	public JDFSeparationTint getCreateSeparationTint()
+	{
+		return (JDFSeparationTint) getCreateElement_JDFElement(ElementName.SEPARATIONTINT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateSeparationTint
 	 * 
 	 * @param iSkip number of elements to skip

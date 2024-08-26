@@ -144,6 +144,26 @@ public abstract class JDFAutoDevCapPool extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element DevCap
+	 *
+	 * @return JDFDevCap the element
+	 */
+	public JDFDevCap getDevCap()
+	{
+		return (JDFDevCap) getElement(ElementName.DEVCAP, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDevCap
+	 * 
+	 * @return JDFDevCap the element
+	 */
+	public JDFDevCap getCreateDevCap()
+	{
+		return (JDFDevCap) getCreateElement_JDFElement(ElementName.DEVCAP, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDevCap
 	 * 
 	 * @param iSkip number of elements to skip

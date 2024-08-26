@@ -164,6 +164,26 @@ public abstract class JDFAutoNumberingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element NumberingParam
+	 *
+	 * @return JDFNumberingParam the element
+	 */
+	public JDFNumberingParam getNumberingParam()
+	{
+		return (JDFNumberingParam) getElement(ElementName.NUMBERINGPARAM, null, 0);
+	}
+
+	/**
+	 * (25) getCreateNumberingParam
+	 * 
+	 * @return JDFNumberingParam the element
+	 */
+	public JDFNumberingParam getCreateNumberingParam()
+	{
+		return (JDFNumberingParam) getCreateElement_JDFElement(ElementName.NUMBERINGPARAM, null, 0);
+	}
+
+	/**
 	 * (26) getCreateNumberingParam
 	 * 
 	 * @param iSkip number of elements to skip

@@ -635,6 +635,26 @@ public abstract class JDFAutoMessageService extends JDFElement
 	}
 
 	/**
+	 * (24) const get element DevCaps
+	 *
+	 * @return JDFDevCaps the element
+	 */
+	public JDFDevCaps getDevCaps()
+	{
+		return (JDFDevCaps) getElement(ElementName.DEVCAPS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDevCaps
+	 * 
+	 * @return JDFDevCaps the element
+	 */
+	public JDFDevCaps getCreateDevCaps()
+	{
+		return (JDFDevCaps) getCreateElement_JDFElement(ElementName.DEVCAPS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDevCaps
 	 * 
 	 * @param iSkip number of elements to skip

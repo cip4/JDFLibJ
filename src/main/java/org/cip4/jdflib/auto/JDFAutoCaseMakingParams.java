@@ -403,14 +403,4 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 		return (JDFGlueLine) appendElementN(ElementName.GLUELINE, 1, null);
 	}
 
-	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refGlueLine(JDFGlueLine refTarget)
-	{
-		refElement(refTarget);
-	}
-
 }

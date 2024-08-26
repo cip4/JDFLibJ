@@ -473,6 +473,26 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element ImageShift
+	 *
+	 * @return JDFImageShift the element
+	 */
+	public JDFImageShift getImageShift()
+	{
+		return (JDFImageShift) getElement(ElementName.IMAGESHIFT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateImageShift
+	 * 
+	 * @return JDFImageShift the element
+	 */
+	public JDFImageShift getCreateImageShift()
+	{
+		return (JDFImageShift) getCreateElement_JDFElement(ElementName.IMAGESHIFT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateImageShift
 	 * 
 	 * @param iSkip number of elements to skip

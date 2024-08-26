@@ -1019,6 +1019,26 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element MarkColor
+	 *
+	 * @return JDFMarkColor the element
+	 */
+	public JDFMarkColor getMarkColor()
+	{
+		return (JDFMarkColor) getElement(ElementName.MARKCOLOR, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMarkColor
+	 * 
+	 * @return JDFMarkColor the element
+	 */
+	public JDFMarkColor getCreateMarkColor()
+	{
+		return (JDFMarkColor) getCreateElement_JDFElement(ElementName.MARKCOLOR, null, 0);
+	}
+
+	/**
 	 * (26) getCreateMarkColor
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1121,13 +1141,23 @@ public abstract class JDFAutoStripMark extends JDFElement
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
+	 * (24) const get element RefAnchor
 	 *
-	 * @param refTarget the element that is referenced
+	 * @return JDFRefAnchor the element
 	 */
-	public void refJobField(JDFJobField refTarget)
+	public JDFRefAnchor getRefAnchor()
 	{
-		refElement(refTarget);
+		return (JDFRefAnchor) getElement(ElementName.REFANCHOR, null, 0);
+	}
+
+	/**
+	 * (25) getCreateRefAnchor
+	 * 
+	 * @return JDFRefAnchor the element
+	 */
+	public JDFRefAnchor getCreateRefAnchor()
+	{
+		return (JDFRefAnchor) getCreateElement_JDFElement(ElementName.REFANCHOR, null, 0);
 	}
 
 	/**

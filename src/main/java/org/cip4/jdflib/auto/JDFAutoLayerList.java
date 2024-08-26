@@ -144,6 +144,26 @@ public abstract class JDFAutoLayerList extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element LayerDetails
+	 *
+	 * @return JDFLayerDetails the element
+	 */
+	public JDFLayerDetails getLayerDetails()
+	{
+		return (JDFLayerDetails) getElement(ElementName.LAYERDETAILS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateLayerDetails
+	 * 
+	 * @return JDFLayerDetails the element
+	 */
+	public JDFLayerDetails getCreateLayerDetails()
+	{
+		return (JDFLayerDetails) getCreateElement_JDFElement(ElementName.LAYERDETAILS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateLayerDetails
 	 * 
 	 * @param iSkip number of elements to skip

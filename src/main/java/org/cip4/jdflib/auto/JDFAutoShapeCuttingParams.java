@@ -431,6 +431,26 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	}
 
 	/**
+	 * (24) const get element Shape
+	 *
+	 * @return JDFShapeElement the element
+	 */
+	public JDFShapeElement getShape()
+	{
+		return (JDFShapeElement) getElement(ElementName.SHAPE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateShape
+	 * 
+	 * @return JDFShapeElement the element
+	 */
+	public JDFShapeElement getCreateShape()
+	{
+		return (JDFShapeElement) getCreateElement_JDFElement(ElementName.SHAPE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateShape
 	 * 
 	 * @param iSkip number of elements to skip

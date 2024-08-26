@@ -81,18 +81,18 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.JDFResource;
 
 /**
  *****************************************************************************
- * class JDFAutoObjectResolution : public JDFResource
+ * class JDFAutoObjectResolution : public JDFElement
  *****************************************************************************
  * 
  */
 
-public abstract class JDFAutoObjectResolution extends JDFResource
+public abstract class JDFAutoObjectResolution extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
@@ -100,10 +100,10 @@ public abstract class JDFAutoObjectResolution extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.RESOLUTION, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ANTIALIASING, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANTIALIASING, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RESOLUTION, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), null);
 	}
 
 	@Override
@@ -146,26 +146,6 @@ public abstract class JDFAutoObjectResolution extends JDFResource
 	protected JDFAutoObjectResolution(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return true if ok
-	 */
-	@Override
-	public boolean init()
-	{
-		final boolean bRet = super.init();
-		setResourceClass(JDFResource.EnumResourceClass.Parameter);
-		return bRet;
-	}
-
-	/**
-	 * @return the resource Class
-	 */
-	@Override
-	public EnumResourceClass getValidClass()
-	{
-		return JDFResource.EnumResourceClass.Parameter;
 	}
 
 	/**
@@ -244,55 +224,6 @@ public abstract class JDFAutoObjectResolution extends JDFResource
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Resolution ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute Resolution
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setResolution(JDFXYPair value)
-	{
-		setAttribute(AttributeName.RESOLUTION, value, null);
-	}
-
-	/**
-	 * (20) get JDFXYPair attribute Resolution
-	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
-	 */
-	public JDFXYPair getResolution()
-	{
-		final String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-		return nPlaceHolder;
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute SourceObjects
-	 *
-	 * @param v vector of the enumeration values
-	 */
-	public void setSourceObjects(Vector<? extends ValuedEnum> v)
-	{
-		setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
-	}
-
-	/**
-	 * (9.2) get SourceObjects attribute SourceObjects
-	 *
-	 * @return Vector of the enumerations
-	 */
-	public Vector<? extends ValuedEnum> getSourceObjects()
-	{
-		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
-	}
-
-	/*
 	 * --------------------------------------------------------------------- Methods for Attribute AntiAliasing
 	 * ---------------------------------------------------------------------
 	 */
@@ -340,6 +271,55 @@ public abstract class JDFAutoObjectResolution extends JDFResource
 		final String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Resolution ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute Resolution
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setResolution(JDFXYPair value)
+	{
+		setAttribute(AttributeName.RESOLUTION, value, null);
+	}
+
+	/**
+	 * (20) get JDFXYPair attribute Resolution
+	 *
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
+	public JDFXYPair getResolution()
+	{
+		final String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute SourceObjects
+	 *
+	 * @param v vector of the enumeration values
+	 */
+	public void setSourceObjects(Vector<? extends ValuedEnum> v)
+	{
+		setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
+	}
+
+	/**
+	 * (9.2) get SourceObjects attribute SourceObjects
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public Vector<? extends ValuedEnum> getSourceObjects()
+	{
+		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.getEnum(0), false);
 	}
 
 }

@@ -243,6 +243,26 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element ComChannel
+	 *
+	 * @return JDFComChannel the element
+	 */
+	public JDFComChannel getComChannel()
+	{
+		return (JDFComChannel) getElement(ElementName.COMCHANNEL, null, 0);
+	}
+
+	/**
+	 * (25) getCreateComChannel
+	 * 
+	 * @return JDFComChannel the element
+	 */
+	public JDFComChannel getCreateComChannel()
+	{
+		return (JDFComChannel) getCreateElement_JDFElement(ElementName.COMCHANNEL, null, 0);
+	}
+
+	/**
 	 * (26) getCreateComChannel
 	 * 
 	 * @param iSkip number of elements to skip

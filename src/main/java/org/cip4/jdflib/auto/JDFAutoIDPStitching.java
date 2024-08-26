@@ -369,6 +369,26 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element StitchingParams
+	 *
+	 * @return JDFStitchingParams the element
+	 */
+	public JDFStitchingParams getStitchingParams()
+	{
+		return (JDFStitchingParams) getElement(ElementName.STITCHINGPARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateStitchingParams
+	 * 
+	 * @return JDFStitchingParams the element
+	 */
+	public JDFStitchingParams getCreateStitchingParams()
+	{
+		return (JDFStitchingParams) getCreateElement_JDFElement(ElementName.STITCHINGPARAMS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateStitchingParams
 	 * 
 	 * @param iSkip number of elements to skip

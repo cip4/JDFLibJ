@@ -810,6 +810,26 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	}
 
 	/**
+	 * (24) const get element GangSource
+	 *
+	 * @return JDFGangSource the element
+	 */
+	public JDFGangSource getGangSource()
+	{
+		return (JDFGangSource) getElement(ElementName.GANGSOURCE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateGangSource
+	 * 
+	 * @return JDFGangSource the element
+	 */
+	public JDFGangSource getCreateGangSource()
+	{
+		return (JDFGangSource) getCreateElement_JDFElement(ElementName.GANGSOURCE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateGangSource
 	 * 
 	 * @param iSkip number of elements to skip
@@ -849,6 +869,26 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	public JDFGangSource appendGangSource()
 	{
 		return (JDFGangSource) appendElement(ElementName.GANGSOURCE, null);
+	}
+
+	/**
+	 * (24) const get element JMF
+	 *
+	 * @return JDFJMF the element
+	 */
+	public JDFJMF getJMF()
+	{
+		return (JDFJMF) getElement(ElementName.JMF, null, 0);
+	}
+
+	/**
+	 * (25) getCreateJMF
+	 * 
+	 * @return JDFJMF the element
+	 */
+	public JDFJMF getCreateJMF()
+	{
+		return (JDFJMF) getCreateElement_JDFElement(ElementName.JMF, null, 0);
 	}
 
 	/**
@@ -921,6 +961,26 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	public JDFMISDetails appendMISDetails()
 	{
 		return (JDFMISDetails) appendElementN(ElementName.MISDETAILS, 1, null);
+	}
+
+	/**
+	 * (24) const get element NotificationFilter
+	 *
+	 * @return JDFNotificationFilter the element
+	 */
+	public JDFNotificationFilter getNotificationFilter()
+	{
+		return (JDFNotificationFilter) getElement(ElementName.NOTIFICATIONFILTER, null, 0);
+	}
+
+	/**
+	 * (25) getCreateNotificationFilter
+	 * 
+	 * @return JDFNotificationFilter the element
+	 */
+	public JDFNotificationFilter getCreateNotificationFilter()
+	{
+		return (JDFNotificationFilter) getCreateElement_JDFElement(ElementName.NOTIFICATIONFILTER, null, 0);
 	}
 
 	/**

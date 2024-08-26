@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -77,17 +79,17 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.postpress.JDFHole;
 
 /**
  *****************************************************************************
- * class JDFAutoHoleLine : public JDFResource
+ * class JDFAutoHoleLine : public JDFElement
  *****************************************************************************
  * 
  */
 
-public abstract class JDFAutoHoleLine extends JDFResource
+public abstract class JDFAutoHoleLine extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
@@ -95,7 +97,7 @@ public abstract class JDFAutoHoleLine extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PITCH, 0x2222222221l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PITCH, 0x2222222222l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -107,7 +109,7 @@ public abstract class JDFAutoHoleLine extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLE, 0x5555555551l);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLE, 0x3333333333l);
 	}
 
 	@Override
@@ -150,26 +152,6 @@ public abstract class JDFAutoHoleLine extends JDFResource
 	protected JDFAutoHoleLine(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * @return true if ok
-	 */
-	@Override
-	public boolean init()
-	{
-		final boolean bRet = super.init();
-		setResourceClass(JDFResource.EnumResourceClass.Parameter);
-		return bRet;
-	}
-
-	/**
-	 * @return the resource Class
-	 */
-	@Override
-	public EnumResourceClass getValidClass()
-	{
-		return JDFResource.EnumResourceClass.Parameter;
 	}
 
 	/*
@@ -224,13 +206,45 @@ public abstract class JDFAutoHoleLine extends JDFResource
 	}
 
 	/**
-	 * (29) append element Hole
+	 * (26) getCreateHole
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFHole the element
+	 */
+	public JDFHole getCreateHole(int iSkip)
+	{
+		return (JDFHole) getCreateElement_JDFElement(ElementName.HOLE, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element Hole
 	 *
-	 * @return JDFHole the element @ if the element already exists
+	 * @param iSkip number of elements to skip
+	 * @return JDFHole the element default is getHole(0)
+	 */
+	public JDFHole getHole(int iSkip)
+	{
+		return (JDFHole) getElement(ElementName.HOLE, null, iSkip);
+	}
+
+	/**
+	 * Get all Hole from the current element
+	 * 
+	 * @return Collection<JDFHole>, null if none are available
+	 */
+	public Collection<JDFHole> getAllHole()
+	{
+		return getChildArrayByClass(JDFHole.class, false, 0);
+	}
+
+	/**
+	 * (30) append element Hole
+	 *
+	 * @return JDFHole the element
 	 */
 	public JDFHole appendHole()
 	{
-		return (JDFHole) appendElementN(ElementName.HOLE, 1, null);
+		return (JDFHole) appendElement(ElementName.HOLE, null);
 	}
 
 }

@@ -240,6 +240,26 @@ public abstract class JDFAutoStation extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element ShapeDef
+	 *
+	 * @return JDFShapeDef the element
+	 */
+	public JDFShapeDef getShapeDef()
+	{
+		return (JDFShapeDef) getElement(ElementName.SHAPEDEF, null, 0);
+	}
+
+	/**
+	 * (25) getCreateShapeDef
+	 * 
+	 * @return JDFShapeDef the element
+	 */
+	public JDFShapeDef getCreateShapeDef()
+	{
+		return (JDFShapeDef) getCreateElement_JDFElement(ElementName.SHAPEDEF, null, 0);
+	}
+
+	/**
 	 * (26) getCreateShapeDef
 	 * 
 	 * @param iSkip number of elements to skip

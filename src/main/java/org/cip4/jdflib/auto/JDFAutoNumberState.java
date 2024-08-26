@@ -460,6 +460,26 @@ public abstract class JDFAutoNumberState extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Loc
+	 *
+	 * @return JDFLoc the element
+	 */
+	public JDFLoc getLoc()
+	{
+		return (JDFLoc) getElement(ElementName.LOC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateLoc
+	 * 
+	 * @return JDFLoc the element
+	 */
+	public JDFLoc getCreateLoc()
+	{
+		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateLoc
 	 * 
 	 * @param iSkip number of elements to skip
@@ -499,6 +519,26 @@ public abstract class JDFAutoNumberState extends JDFResource
 	public JDFLoc appendLoc()
 	{
 		return (JDFLoc) appendElement(ElementName.LOC, null);
+	}
+
+	/**
+	 * (24) const get element ValueLoc
+	 *
+	 * @return JDFValueLoc the element
+	 */
+	public JDFValueLoc getValueLoc()
+	{
+		return (JDFValueLoc) getElement(ElementName.VALUELOC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateValueLoc
+	 * 
+	 * @return JDFValueLoc the element
+	 */
+	public JDFValueLoc getCreateValueLoc()
+	{
+		return (JDFValueLoc) getCreateElement_JDFElement(ElementName.VALUELOC, null, 0);
 	}
 
 	/**

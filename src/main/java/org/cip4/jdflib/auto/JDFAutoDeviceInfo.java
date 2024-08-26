@@ -690,6 +690,26 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Activity
+	 *
+	 * @return JDFActivity the element
+	 */
+	public JDFActivity getActivity()
+	{
+		return (JDFActivity) getElement(ElementName.ACTIVITY, null, 0);
+	}
+
+	/**
+	 * (25) getCreateActivity
+	 * 
+	 * @return JDFActivity the element
+	 */
+	public JDFActivity getCreateActivity()
+	{
+		return (JDFActivity) getCreateElement_JDFElement(ElementName.ACTIVITY, null, 0);
+	}
+
+	/**
 	 * (26) getCreateActivity
 	 * 
 	 * @param iSkip number of elements to skip
@@ -762,6 +782,26 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/**
+	 * (24) const get element Employee
+	 *
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getEmployee()
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateEmployee
+	 * 
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getCreateEmployee()
+	{
+		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateEmployee
 	 * 
 	 * @param iSkip number of elements to skip
@@ -801,6 +841,26 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	public JDFEmployee appendEmployee()
 	{
 		return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+	}
+
+	/**
+	 * (24) const get element Event
+	 *
+	 * @return JDFEvent the element
+	 */
+	public JDFEvent getEvent()
+	{
+		return (JDFEvent) getElement(ElementName.EVENT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateEvent
+	 * 
+	 * @return JDFEvent the element
+	 */
+	public JDFEvent getCreateEvent()
+	{
+		return (JDFEvent) getCreateElement_JDFElement(ElementName.EVENT, null, 0);
 	}
 
 	/**
@@ -846,6 +906,26 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/**
+	 * (24) const get element JobPhase
+	 *
+	 * @return JDFJobPhase the element
+	 */
+	public JDFJobPhase getJobPhase()
+	{
+		return (JDFJobPhase) getElement(ElementName.JOBPHASE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateJobPhase
+	 * 
+	 * @return JDFJobPhase the element
+	 */
+	public JDFJobPhase getCreateJobPhase()
+	{
+		return (JDFJobPhase) getCreateElement_JDFElement(ElementName.JOBPHASE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateJobPhase
 	 * 
 	 * @param iSkip number of elements to skip
@@ -885,6 +965,26 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	public JDFJobPhase appendJobPhase()
 	{
 		return (JDFJobPhase) appendElement(ElementName.JOBPHASE, null);
+	}
+
+	/**
+	 * (24) const get element ModuleStatus
+	 *
+	 * @return JDFModuleStatus the element
+	 */
+	public JDFModuleStatus getModuleStatus()
+	{
+		return (JDFModuleStatus) getElement(ElementName.MODULESTATUS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateModuleStatus
+	 * 
+	 * @return JDFModuleStatus the element
+	 */
+	public JDFModuleStatus getCreateModuleStatus()
+	{
+		return (JDFModuleStatus) getCreateElement_JDFElement(ElementName.MODULESTATUS, null, 0);
 	}
 
 	/**

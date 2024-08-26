@@ -240,6 +240,26 @@ public abstract class JDFAutoPRItem extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element PRError
+	 *
+	 * @return JDFPRError the element
+	 */
+	public JDFPRError getPRError()
+	{
+		return (JDFPRError) getElement(ElementName.PRERROR, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePRError
+	 * 
+	 * @return JDFPRError the element
+	 */
+	public JDFPRError getCreatePRError()
+	{
+		return (JDFPRError) getCreateElement_JDFElement(ElementName.PRERROR, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePRError
 	 * 
 	 * @param iSkip number of elements to skip
@@ -279,6 +299,26 @@ public abstract class JDFAutoPRItem extends JDFElement
 	public JDFPRError appendPRError()
 	{
 		return (JDFPRError) appendElement(ElementName.PRERROR, null);
+	}
+
+	/**
+	 * (24) const get element PRGroup
+	 *
+	 * @return JDFPRGroup the element
+	 */
+	public JDFPRGroup getPRGroup()
+	{
+		return (JDFPRGroup) getElement(ElementName.PRGROUP, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePRGroup
+	 * 
+	 * @return JDFPRGroup the element
+	 */
+	public JDFPRGroup getCreatePRGroup()
+	{
+		return (JDFPRGroup) getCreateElement_JDFElement(ElementName.PRGROUP, null, 0);
 	}
 
 	/**

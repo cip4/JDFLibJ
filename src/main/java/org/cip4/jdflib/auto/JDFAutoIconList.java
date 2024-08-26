@@ -144,6 +144,26 @@ public abstract class JDFAutoIconList extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Icon
+	 *
+	 * @return JDFIcon the element
+	 */
+	public JDFIcon getIcon()
+	{
+		return (JDFIcon) getElement(ElementName.ICON, null, 0);
+	}
+
+	/**
+	 * (25) getCreateIcon
+	 * 
+	 * @return JDFIcon the element
+	 */
+	public JDFIcon getCreateIcon()
+	{
+		return (JDFIcon) getCreateElement_JDFElement(ElementName.ICON, null, 0);
+	}
+
+	/**
 	 * (26) getCreateIcon
 	 * 
 	 * @param iSkip number of elements to skip

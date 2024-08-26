@@ -146,6 +146,26 @@ public abstract class JDFAutoMediaLayers extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element GlueLine
+	 *
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getGlueLine()
+	{
+		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateGlueLine
+	 * 
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getCreateGlueLine()
+	{
+		return (JDFGlueLine) getCreateElement_JDFElement(ElementName.GLUELINE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateGlueLine
 	 * 
 	 * @param iSkip number of elements to skip
@@ -185,6 +205,26 @@ public abstract class JDFAutoMediaLayers extends JDFElement
 	public JDFGlueLine appendGlueLine()
 	{
 		return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
+	}
+
+	/**
+	 * (24) const get element Media
+	 *
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getMedia()
+	{
+		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMedia
+	 * 
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateMedia()
+	{
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**

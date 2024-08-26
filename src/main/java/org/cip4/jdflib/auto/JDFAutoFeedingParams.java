@@ -166,6 +166,26 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Feeder
+	 *
+	 * @return JDFFeeder the element
+	 */
+	public JDFFeeder getFeeder()
+	{
+		return (JDFFeeder) getElement(ElementName.FEEDER, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFeeder
+	 * 
+	 * @return JDFFeeder the element
+	 */
+	public JDFFeeder getCreateFeeder()
+	{
+		return (JDFFeeder) getCreateElement_JDFElement(ElementName.FEEDER, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFeeder
 	 * 
 	 * @param iSkip number of elements to skip
@@ -205,6 +225,26 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	public JDFFeeder appendFeeder()
 	{
 		return (JDFFeeder) appendElement(ElementName.FEEDER, null);
+	}
+
+	/**
+	 * (24) const get element CollatingItem
+	 *
+	 * @return JDFCollatingItem the element
+	 */
+	public JDFCollatingItem getCollatingItem()
+	{
+		return (JDFCollatingItem) getElement(ElementName.COLLATINGITEM, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCollatingItem
+	 * 
+	 * @return JDFCollatingItem the element
+	 */
+	public JDFCollatingItem getCreateCollatingItem()
+	{
+		return (JDFCollatingItem) getCreateElement_JDFElement(ElementName.COLLATINGITEM, null, 0);
 	}
 
 	/**

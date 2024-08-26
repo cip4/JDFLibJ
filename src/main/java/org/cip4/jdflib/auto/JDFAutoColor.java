@@ -926,6 +926,26 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFileSpec
 	 * 
 	 * @param iSkip number of elements to skip
@@ -978,6 +998,26 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/**
+	 * (24) const get element DeviceNColor
+	 *
+	 * @return JDFDeviceNColor the element
+	 */
+	public JDFDeviceNColor getDeviceNColor()
+	{
+		return (JDFDeviceNColor) getElement(ElementName.DEVICENCOLOR, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDeviceNColor
+	 * 
+	 * @return JDFDeviceNColor the element
+	 */
+	public JDFDeviceNColor getCreateDeviceNColor()
+	{
+		return (JDFDeviceNColor) getCreateElement_JDFElement(ElementName.DEVICENCOLOR, null, 0);
+	}
+
+	/**
 	 * (26) getCreateDeviceNColor
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1020,6 +1060,26 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/**
+	 * (24) const get element PrintConditionColor
+	 *
+	 * @return JDFPrintConditionColor the element
+	 */
+	public JDFPrintConditionColor getPrintConditionColor()
+	{
+		return (JDFPrintConditionColor) getElement(ElementName.PRINTCONDITIONCOLOR, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePrintConditionColor
+	 * 
+	 * @return JDFPrintConditionColor the element
+	 */
+	public JDFPrintConditionColor getCreatePrintConditionColor()
+	{
+		return (JDFPrintConditionColor) getCreateElement_JDFElement(ElementName.PRINTCONDITIONCOLOR, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePrintConditionColor
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1059,6 +1119,26 @@ public abstract class JDFAutoColor extends JDFResource
 	public JDFPrintConditionColor appendPrintConditionColor()
 	{
 		return (JDFPrintConditionColor) appendElement(ElementName.PRINTCONDITIONCOLOR, null);
+	}
+
+	/**
+	 * (24) const get element TransferCurve
+	 *
+	 * @return JDFTransferCurve the element
+	 */
+	public JDFTransferCurve getTransferCurve()
+	{
+		return (JDFTransferCurve) getElement(ElementName.TRANSFERCURVE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateTransferCurve
+	 * 
+	 * @return JDFTransferCurve the element
+	 */
+	public JDFTransferCurve getCreateTransferCurve()
+	{
+		return (JDFTransferCurve) getCreateElement_JDFElement(ElementName.TRANSFERCURVE, null, 0);
 	}
 
 	/**

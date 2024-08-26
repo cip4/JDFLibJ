@@ -208,6 +208,26 @@ public abstract class JDFAutoColorPool extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element Color
+	 *
+	 * @return JDFColor the element
+	 */
+	public JDFColor getColor()
+	{
+		return (JDFColor) getElement(ElementName.COLOR, null, 0);
+	}
+
+	/**
+	 * (25) getCreateColor
+	 * 
+	 * @return JDFColor the element
+	 */
+	public JDFColor getCreateColor()
+	{
+		return (JDFColor) getCreateElement_JDFElement(ElementName.COLOR, null, 0);
+	}
+
+	/**
 	 * (26) getCreateColor
 	 * 
 	 * @param iSkip number of elements to skip

@@ -191,6 +191,26 @@ public abstract class JDFAutoPRRule extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element PRRuleAttr
+	 *
+	 * @return JDFPRRuleAttr the element
+	 */
+	public JDFPRRuleAttr getPRRuleAttr()
+	{
+		return (JDFPRRuleAttr) getElement(ElementName.PRRULEATTR, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePRRuleAttr
+	 * 
+	 * @return JDFPRRuleAttr the element
+	 */
+	public JDFPRRuleAttr getCreatePRRuleAttr()
+	{
+		return (JDFPRRuleAttr) getCreateElement_JDFElement(ElementName.PRRULEATTR, null, 0);
+	}
+
+	/**
 	 * (26) getCreatePRRuleAttr
 	 * 
 	 * @param iSkip number of elements to skip

@@ -170,6 +170,26 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 */
 
 	/**
+	 * (24) const get element LongFold
+	 *
+	 * @return JDFLongFold the element
+	 */
+	public JDFLongFold getLongFold()
+	{
+		return (JDFLongFold) getElement(ElementName.LONGFOLD, null, 0);
+	}
+
+	/**
+	 * (25) getCreateLongFold
+	 * 
+	 * @return JDFLongFold the element
+	 */
+	public JDFLongFold getCreateLongFold()
+	{
+		return (JDFLongFold) getCreateElement_JDFElement(ElementName.LONGFOLD, null, 0);
+	}
+
+	/**
 	 * (26) getCreateLongFold
 	 * 
 	 * @param iSkip number of elements to skip
@@ -209,6 +229,26 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	public JDFLongFold appendLongFold()
 	{
 		return (JDFLongFold) appendElement(ElementName.LONGFOLD, null);
+	}
+
+	/**
+	 * (24) const get element LongGlue
+	 *
+	 * @return JDFLongGlue the element
+	 */
+	public JDFLongGlue getLongGlue()
+	{
+		return (JDFLongGlue) getElement(ElementName.LONGGLUE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateLongGlue
+	 * 
+	 * @return JDFLongGlue the element
+	 */
+	public JDFLongGlue getCreateLongGlue()
+	{
+		return (JDFLongGlue) getCreateElement_JDFElement(ElementName.LONGGLUE, null, 0);
 	}
 
 	/**
@@ -254,6 +294,26 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	}
 
 	/**
+	 * (24) const get element LongPerforate
+	 *
+	 * @return JDFLongPerforate the element
+	 */
+	public JDFLongPerforate getLongPerforate()
+	{
+		return (JDFLongPerforate) getElement(ElementName.LONGPERFORATE, null, 0);
+	}
+
+	/**
+	 * (25) getCreateLongPerforate
+	 * 
+	 * @return JDFLongPerforate the element
+	 */
+	public JDFLongPerforate getCreateLongPerforate()
+	{
+		return (JDFLongPerforate) getCreateElement_JDFElement(ElementName.LONGPERFORATE, null, 0);
+	}
+
+	/**
 	 * (26) getCreateLongPerforate
 	 * 
 	 * @param iSkip number of elements to skip
@@ -293,6 +353,26 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	public JDFLongPerforate appendLongPerforate()
 	{
 		return (JDFLongPerforate) appendElement(ElementName.LONGPERFORATE, null);
+	}
+
+	/**
+	 * (24) const get element LongSlit
+	 *
+	 * @return JDFLongSlit the element
+	 */
+	public JDFLongSlit getLongSlit()
+	{
+		return (JDFLongSlit) getElement(ElementName.LONGSLIT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateLongSlit
+	 * 
+	 * @return JDFLongSlit the element
+	 */
+	public JDFLongSlit getCreateLongSlit()
+	{
+		return (JDFLongSlit) getCreateElement_JDFElement(ElementName.LONGSLIT, null, 0);
 	}
 
 	/**

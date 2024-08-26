@@ -323,6 +323,26 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ResourceParam
+	 *
+	 * @return JDFResourceParam the element
+	 */
+	public JDFResourceParam getResourceParam()
+	{
+		return (JDFResourceParam) getElement(ElementName.RESOURCEPARAM, null, 0);
+	}
+
+	/**
+	 * (25) getCreateResourceParam
+	 * 
+	 * @return JDFResourceParam the element
+	 */
+	public JDFResourceParam getCreateResourceParam()
+	{
+		return (JDFResourceParam) getCreateElement_JDFElement(ElementName.RESOURCEPARAM, null, 0);
+	}
+
+	/**
 	 * (26) getCreateResourceParam
 	 * 
 	 * @param iSkip number of elements to skip

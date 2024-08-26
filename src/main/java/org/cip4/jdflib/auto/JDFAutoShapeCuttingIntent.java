@@ -144,6 +144,26 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
 	 */
 
 	/**
+	 * (24) const get element ShapeCut
+	 *
+	 * @return JDFShapeCut the element
+	 */
+	public JDFShapeCut getShapeCut()
+	{
+		return (JDFShapeCut) getElement(ElementName.SHAPECUT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateShapeCut
+	 * 
+	 * @return JDFShapeCut the element
+	 */
+	public JDFShapeCut getCreateShapeCut()
+	{
+		return (JDFShapeCut) getCreateElement_JDFElement(ElementName.SHAPECUT, null, 0);
+	}
+
+	/**
 	 * (26) getCreateShapeCut
 	 * 
 	 * @param iSkip number of elements to skip

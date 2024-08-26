@@ -305,6 +305,26 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element CutBlock
+	 *
+	 * @return JDFCutBlock the element
+	 */
+	public JDFCutBlock getCutBlock()
+	{
+		return (JDFCutBlock) getElement(ElementName.CUTBLOCK, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCutBlock
+	 * 
+	 * @return JDFCutBlock the element
+	 */
+	public JDFCutBlock getCreateCutBlock()
+	{
+		return (JDFCutBlock) getCreateElement_JDFElement(ElementName.CUTBLOCK, null, 0);
+	}
+
+	/**
 	 * (26) getCreateCutBlock
 	 * 
 	 * @param iSkip number of elements to skip
@@ -357,6 +377,26 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	}
 
 	/**
+	 * (24) const get element CutMark
+	 *
+	 * @return JDFCutMark the element
+	 */
+	public JDFCutMark getCutMark()
+	{
+		return (JDFCutMark) getElement(ElementName.CUTMARK, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCutMark
+	 * 
+	 * @return JDFCutMark the element
+	 */
+	public JDFCutMark getCreateCutMark()
+	{
+		return (JDFCutMark) getCreateElement_JDFElement(ElementName.CUTMARK, null, 0);
+	}
+
+	/**
 	 * (26) getCreateCutMark
 	 * 
 	 * @param iSkip number of elements to skip
@@ -406,6 +446,26 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	public void refCutMark(JDFCutMark refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element Cut
+	 *
+	 * @return JDFCut the element
+	 */
+	public JDFCut getCut()
+	{
+		return (JDFCut) getElement(ElementName.CUT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCut
+	 * 
+	 * @return JDFCut the element
+	 */
+	public JDFCut getCreateCut()
+	{
+		return (JDFCut) getCreateElement_JDFElement(ElementName.CUT, null, 0);
 	}
 
 	/**

@@ -164,6 +164,26 @@ public abstract class JDFAutoImageCompressionParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ImageCompression
+	 *
+	 * @return JDFImageCompression the element
+	 */
+	public JDFImageCompression getImageCompression()
+	{
+		return (JDFImageCompression) getElement(ElementName.IMAGECOMPRESSION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateImageCompression
+	 * 
+	 * @return JDFImageCompression the element
+	 */
+	public JDFImageCompression getCreateImageCompression()
+	{
+		return (JDFImageCompression) getCreateElement_JDFElement(ElementName.IMAGECOMPRESSION, null, 0);
+	}
+
+	/**
 	 * (26) getCreateImageCompression
 	 * 
 	 * @param iSkip number of elements to skip

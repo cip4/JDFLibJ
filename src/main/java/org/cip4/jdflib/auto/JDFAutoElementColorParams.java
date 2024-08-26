@@ -341,13 +341,23 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
+	 * (24) const get element ColorantAlias
 	 *
-	 * @param refTarget the element that is referenced
+	 * @return JDFColorantAlias the element
 	 */
-	public void refAutomatedOverPrintParams(JDFAutomatedOverPrintParams refTarget)
+	public JDFColorantAlias getColorantAlias()
 	{
-		refElement(refTarget);
+		return (JDFColorantAlias) getElement(ElementName.COLORANTALIAS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateColorantAlias
+	 * 
+	 * @return JDFColorantAlias the element
+	 */
+	public JDFColorantAlias getCreateColorantAlias()
+	{
+		return (JDFColorantAlias) getCreateElement_JDFElement(ElementName.COLORANTALIAS, null, 0);
 	}
 
 	/**
@@ -400,6 +410,26 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	public void refColorantAlias(JDFColorantAlias refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element ColorCorrectionOp
+	 *
+	 * @return JDFColorCorrectionOp the element
+	 */
+	public JDFColorCorrectionOp getColorCorrectionOp()
+	{
+		return (JDFColorCorrectionOp) getElement(ElementName.COLORCORRECTIONOP, null, 0);
+	}
+
+	/**
+	 * (25) getCreateColorCorrectionOp
+	 * 
+	 * @return JDFColorCorrectionOp the element
+	 */
+	public JDFColorCorrectionOp getCreateColorCorrectionOp()
+	{
+		return (JDFColorCorrectionOp) getCreateElement_JDFElement(ElementName.COLORCORRECTIONOP, null, 0);
 	}
 
 	/**
@@ -472,6 +502,26 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	public JDFColorSpaceConversionOp appendColorSpaceConversionOp()
 	{
 		return (JDFColorSpaceConversionOp) appendElementN(ElementName.COLORSPACECONVERSIONOP, 1, null);
+	}
+
+	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**

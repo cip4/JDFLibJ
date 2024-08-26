@@ -207,6 +207,26 @@ public abstract class JDFAutoApprovalParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ApprovalPerson
+	 *
+	 * @return JDFApprovalPerson the element
+	 */
+	public JDFApprovalPerson getApprovalPerson()
+	{
+		return (JDFApprovalPerson) getElement(ElementName.APPROVALPERSON, null, 0);
+	}
+
+	/**
+	 * (25) getCreateApprovalPerson
+	 * 
+	 * @return JDFApprovalPerson the element
+	 */
+	public JDFApprovalPerson getCreateApprovalPerson()
+	{
+		return (JDFApprovalPerson) getCreateElement_JDFElement(ElementName.APPROVALPERSON, null, 0);
+	}
+
+	/**
 	 * (26) getCreateApprovalPerson
 	 * 
 	 * @param iSkip number of elements to skip

@@ -530,6 +530,26 @@ public abstract class JDFAutoContentData extends JDFElement
 	}
 
 	/**
+	 * (24) const get element OCGControl
+	 *
+	 * @return JDFOCGControl the element
+	 */
+	public JDFOCGControl getOCGControl()
+	{
+		return (JDFOCGControl) getElement(ElementName.OCGCONTROL, null, 0);
+	}
+
+	/**
+	 * (25) getCreateOCGControl
+	 * 
+	 * @return JDFOCGControl the element
+	 */
+	public JDFOCGControl getCreateOCGControl()
+	{
+		return (JDFOCGControl) getCreateElement_JDFElement(ElementName.OCGCONTROL, null, 0);
+	}
+
+	/**
 	 * (26) getCreateOCGControl
 	 * 
 	 * @param iSkip number of elements to skip
@@ -609,6 +629,26 @@ public abstract class JDFAutoContentData extends JDFElement
 	public void refScreeningParams(JDFScreeningParams refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element SeparationSpec
+	 *
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getSeparationSpec()
+	{
+		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateSeparationSpec
+	 * 
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getCreateSeparationSpec()
+	{
+		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, 0);
 	}
 
 	/**

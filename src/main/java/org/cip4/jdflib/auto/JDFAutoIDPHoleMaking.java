@@ -144,6 +144,26 @@ public abstract class JDFAutoIDPHoleMaking extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element HoleMakingParams
+	 *
+	 * @return JDFHoleMakingParams the element
+	 */
+	public JDFHoleMakingParams getHoleMakingParams()
+	{
+		return (JDFHoleMakingParams) getElement(ElementName.HOLEMAKINGPARAMS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateHoleMakingParams
+	 * 
+	 * @return JDFHoleMakingParams the element
+	 */
+	public JDFHoleMakingParams getCreateHoleMakingParams()
+	{
+		return (JDFHoleMakingParams) getCreateElement_JDFElement(ElementName.HOLEMAKINGPARAMS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateHoleMakingParams
 	 * 
 	 * @param iSkip number of elements to skip

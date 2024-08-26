@@ -146,6 +146,26 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	 */
 
 	/**
+	 * (24) const get element Ancestor
+	 *
+	 * @return JDFAncestor the element
+	 */
+	public JDFAncestor getAncestor()
+	{
+		return (JDFAncestor) getElement(ElementName.ANCESTOR, null, 0);
+	}
+
+	/**
+	 * (25) getCreateAncestor
+	 * 
+	 * @return JDFAncestor the element
+	 */
+	public JDFAncestor getCreateAncestor()
+	{
+		return (JDFAncestor) getCreateElement_JDFElement(ElementName.ANCESTOR, null, 0);
+	}
+
+	/**
 	 * (26) getCreateAncestor
 	 * 
 	 * @param iSkip number of elements to skip
@@ -185,6 +205,26 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	public JDFAncestor appendAncestor()
 	{
 		return (JDFAncestor) appendElement(ElementName.ANCESTOR, null);
+	}
+
+	/**
+	 * (24) const get element Part
+	 *
+	 * @return JDFPart the element
+	 */
+	public JDFPart getPart()
+	{
+		return (JDFPart) getElement(ElementName.PART, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePart
+	 * 
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart()
+	{
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, 0);
 	}
 
 	/**

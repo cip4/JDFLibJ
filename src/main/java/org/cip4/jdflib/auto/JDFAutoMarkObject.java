@@ -863,6 +863,26 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element CIELABMeasuringField
+	 *
+	 * @return JDFCIELABMeasuringField the element
+	 */
+	public JDFCIELABMeasuringField getCIELABMeasuringField()
+	{
+		return (JDFCIELABMeasuringField) getElement(ElementName.CIELABMEASURINGFIELD, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCIELABMeasuringField
+	 * 
+	 * @return JDFCIELABMeasuringField the element
+	 */
+	public JDFCIELABMeasuringField getCreateCIELABMeasuringField()
+	{
+		return (JDFCIELABMeasuringField) getCreateElement_JDFElement(ElementName.CIELABMEASURINGFIELD, null, 0);
+	}
+
+	/**
 	 * (26) getCreateCIELABMeasuringField
 	 * 
 	 * @param iSkip number of elements to skip
@@ -912,6 +932,26 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	public void refCIELABMeasuringField(JDFCIELABMeasuringField refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element ColorControlStrip
+	 *
+	 * @return JDFColorControlStrip the element
+	 */
+	public JDFColorControlStrip getColorControlStrip()
+	{
+		return (JDFColorControlStrip) getElement(ElementName.COLORCONTROLSTRIP, null, 0);
+	}
+
+	/**
+	 * (25) getCreateColorControlStrip
+	 * 
+	 * @return JDFColorControlStrip the element
+	 */
+	public JDFColorControlStrip getCreateColorControlStrip()
+	{
+		return (JDFColorControlStrip) getCreateElement_JDFElement(ElementName.COLORCONTROLSTRIP, null, 0);
 	}
 
 	/**
@@ -967,6 +1007,26 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/**
+	 * (24) const get element CutMark
+	 *
+	 * @return JDFCutMark the element
+	 */
+	public JDFCutMark getCutMark()
+	{
+		return (JDFCutMark) getElement(ElementName.CUTMARK, null, 0);
+	}
+
+	/**
+	 * (25) getCreateCutMark
+	 * 
+	 * @return JDFCutMark the element
+	 */
+	public JDFCutMark getCreateCutMark()
+	{
+		return (JDFCutMark) getCreateElement_JDFElement(ElementName.CUTMARK, null, 0);
+	}
+
+	/**
 	 * (26) getCreateCutMark
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1016,6 +1076,26 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	public void refCutMark(JDFCutMark refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element DensityMeasuringField
+	 *
+	 * @return JDFDensityMeasuringField the element
+	 */
+	public JDFDensityMeasuringField getDensityMeasuringField()
+	{
+		return (JDFDensityMeasuringField) getElement(ElementName.DENSITYMEASURINGFIELD, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDensityMeasuringField
+	 * 
+	 * @return JDFDensityMeasuringField the element
+	 */
+	public JDFDensityMeasuringField getCreateDensityMeasuringField()
+	{
+		return (JDFDensityMeasuringField) getCreateElement_JDFElement(ElementName.DENSITYMEASURINGFIELD, null, 0);
 	}
 
 	/**
@@ -1101,13 +1181,23 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
+	 * (24) const get element DynamicField
 	 *
-	 * @param refTarget the element that is referenced
+	 * @return JDFDynamicField the element
 	 */
-	public void refDeviceMark(JDFDeviceMark refTarget)
+	public JDFDynamicField getDynamicField()
 	{
-		refElement(refTarget);
+		return (JDFDynamicField) getElement(ElementName.DYNAMICFIELD, null, 0);
+	}
+
+	/**
+	 * (25) getCreateDynamicField
+	 * 
+	 * @return JDFDynamicField the element
+	 */
+	public JDFDynamicField getCreateDynamicField()
+	{
+		return (JDFDynamicField) getCreateElement_JDFElement(ElementName.DYNAMICFIELD, null, 0);
 	}
 
 	/**
@@ -1153,6 +1243,26 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/**
+	 * (24) const get element FillMark
+	 *
+	 * @return JDFFillMark the element
+	 */
+	public JDFFillMark getFillMark()
+	{
+		return (JDFFillMark) getElement(ElementName.FILLMARK, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFillMark
+	 * 
+	 * @return JDFFillMark the element
+	 */
+	public JDFFillMark getCreateFillMark()
+	{
+		return (JDFFillMark) getCreateElement_JDFElement(ElementName.FILLMARK, null, 0);
+	}
+
+	/**
 	 * (26) getCreateFillMark
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1192,6 +1302,26 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	public JDFFillMark appendFillMark()
 	{
 		return (JDFFillMark) appendElement(ElementName.FILLMARK, null);
+	}
+
+	/**
+	 * (24) const get element IdentificationField
+	 *
+	 * @return JDFIdentificationField the element
+	 */
+	public JDFIdentificationField getIdentificationField()
+	{
+		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, 0);
+	}
+
+	/**
+	 * (25) getCreateIdentificationField
+	 * 
+	 * @return JDFIdentificationField the element
+	 */
+	public JDFIdentificationField getCreateIdentificationField()
+	{
+		return (JDFIdentificationField) getCreateElement_JDFElement(ElementName.IDENTIFICATIONFIELD, null, 0);
 	}
 
 	/**
@@ -1277,16 +1407,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/**
-	 * (31) create inter-resource link to refTarget
-	 *
-	 * @param refTarget the element that is referenced
-	 */
-	public void refJobField(JDFJobField refTarget)
-	{
-		refElement(refTarget);
-	}
-
-	/**
 	 * (24) const get element LayoutElement
 	 *
 	 * @return JDFLayoutElement the element
@@ -1324,6 +1444,26 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	public void refLayoutElement(JDFLayoutElement refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element MarkActivation
+	 *
+	 * @return JDFMarkActivation the element
+	 */
+	public JDFMarkActivation getMarkActivation()
+	{
+		return (JDFMarkActivation) getElement(ElementName.MARKACTIVATION, null, 0);
+	}
+
+	/**
+	 * (25) getCreateMarkActivation
+	 * 
+	 * @return JDFMarkActivation the element
+	 */
+	public JDFMarkActivation getCreateMarkActivation()
+	{
+		return (JDFMarkActivation) getCreateElement_JDFElement(ElementName.MARKACTIVATION, null, 0);
 	}
 
 	/**
@@ -1399,6 +1539,26 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/**
+	 * (24) const get element RegisterMark
+	 *
+	 * @return JDFRegisterMark the element
+	 */
+	public JDFRegisterMark getRegisterMark()
+	{
+		return (JDFRegisterMark) getElement(ElementName.REGISTERMARK, null, 0);
+	}
+
+	/**
+	 * (25) getCreateRegisterMark
+	 * 
+	 * @return JDFRegisterMark the element
+	 */
+	public JDFRegisterMark getCreateRegisterMark()
+	{
+		return (JDFRegisterMark) getCreateElement_JDFElement(ElementName.REGISTERMARK, null, 0);
+	}
+
+	/**
 	 * (26) getCreateRegisterMark
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1448,6 +1608,26 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	public void refRegisterMark(JDFRegisterMark refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element ScavengerArea
+	 *
+	 * @return JDFScavengerArea the element
+	 */
+	public JDFScavengerArea getScavengerArea()
+	{
+		return (JDFScavengerArea) getElement(ElementName.SCAVENGERAREA, null, 0);
+	}
+
+	/**
+	 * (25) getCreateScavengerArea
+	 * 
+	 * @return JDFScavengerArea the element
+	 */
+	public JDFScavengerArea getCreateScavengerArea()
+	{
+		return (JDFScavengerArea) getCreateElement_JDFElement(ElementName.SCAVENGERAREA, null, 0);
 	}
 
 	/**

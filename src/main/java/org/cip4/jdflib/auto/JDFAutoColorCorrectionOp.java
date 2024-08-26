@@ -104,15 +104,15 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADJUSTCONTRAST, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ADJUSTCYANRED, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ADJUSTMAGENTAGREEN, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ADJUSTYELLOWBLUE, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ADJUSTCONTRAST, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.ADJUSTHUE, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.ADJUSTLIGHTNESS, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.ADJUSTSATURATION, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ADJUSTHUE, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ADJUSTLIGHTNESS, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ADJUSTMAGENTAGREEN, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ADJUSTSATURATION, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.ADJUSTYELLOWBLUE, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
 	}
 
 	@Override
@@ -245,27 +245,27 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * --------------------------------------------------------------------- Methods for Attribute AdjustContrast
 	 * ---------------------------------------------------------------------
 	 */
 	/**
-	 * (5.2) set attribute SourceObjects
+	 * (36) set attribute AdjustContrast
 	 *
-	 * @param v vector of the enumeration values
+	 * @param value the value to set the attribute to
 	 */
-	public void setSourceObjects(Vector<? extends ValuedEnum> v)
+	public void setAdjustContrast(double value)
 	{
-		setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
+		setAttribute(AttributeName.ADJUSTCONTRAST, value, null);
 	}
 
 	/**
-	 * (9.2) get SourceObjects attribute SourceObjects
+	 * (17) get double attribute AdjustContrast
 	 *
-	 * @return Vector of the enumerations
+	 * @return double the value of the attribute
 	 */
-	public Vector<? extends ValuedEnum> getSourceObjects()
+	public double getAdjustContrast()
 	{
-		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
+		return getRealAttribute(AttributeName.ADJUSTCONTRAST, null, 0.0);
 	}
 
 	/*
@@ -290,78 +290,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	public double getAdjustCyanRed()
 	{
 		return getRealAttribute(AttributeName.ADJUSTCYANRED, null, 0.0);
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdjustMagentaGreen
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute AdjustMagentaGreen
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setAdjustMagentaGreen(double value)
-	{
-		setAttribute(AttributeName.ADJUSTMAGENTAGREEN, value, null);
-	}
-
-	/**
-	 * (17) get double attribute AdjustMagentaGreen
-	 *
-	 * @return double the value of the attribute
-	 */
-	public double getAdjustMagentaGreen()
-	{
-		return getRealAttribute(AttributeName.ADJUSTMAGENTAGREEN, null, 0.0);
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdjustYellowBlue
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute AdjustYellowBlue
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setAdjustYellowBlue(double value)
-	{
-		setAttribute(AttributeName.ADJUSTYELLOWBLUE, value, null);
-	}
-
-	/**
-	 * (17) get double attribute AdjustYellowBlue
-	 *
-	 * @return double the value of the attribute
-	 */
-	public double getAdjustYellowBlue()
-	{
-		return getRealAttribute(AttributeName.ADJUSTYELLOWBLUE, null, 0.0);
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdjustContrast
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute AdjustContrast
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setAdjustContrast(double value)
-	{
-		setAttribute(AttributeName.ADJUSTCONTRAST, value, null);
-	}
-
-	/**
-	 * (17) get double attribute AdjustContrast
-	 *
-	 * @return double the value of the attribute
-	 */
-	public double getAdjustContrast()
-	{
-		return getRealAttribute(AttributeName.ADJUSTCONTRAST, null, 0.0);
 	}
 
 	/*
@@ -412,6 +340,30 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	}
 
 	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AdjustMagentaGreen
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute AdjustMagentaGreen
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setAdjustMagentaGreen(double value)
+	{
+		setAttribute(AttributeName.ADJUSTMAGENTAGREEN, value, null);
+	}
+
+	/**
+	 * (17) get double attribute AdjustMagentaGreen
+	 *
+	 * @return double the value of the attribute
+	 */
+	public double getAdjustMagentaGreen()
+	{
+		return getRealAttribute(AttributeName.ADJUSTMAGENTAGREEN, null, 0.0);
+	}
+
+	/*
 	 * --------------------------------------------------------------------- Methods for Attribute AdjustSaturation
 	 * ---------------------------------------------------------------------
 	 */
@@ -433,6 +385,30 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	public double getAdjustSaturation()
 	{
 		return getRealAttribute(AttributeName.ADJUSTSATURATION, null, 0.0);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AdjustYellowBlue
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute AdjustYellowBlue
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setAdjustYellowBlue(double value)
+	{
+		setAttribute(AttributeName.ADJUSTYELLOWBLUE, value, null);
+	}
+
+	/**
+	 * (17) get double attribute AdjustYellowBlue
+	 *
+	 * @return double the value of the attribute
+	 */
+	public double getAdjustYellowBlue()
+	{
+		return getRealAttribute(AttributeName.ADJUSTYELLOWBLUE, null, 0.0);
 	}
 
 	/*
@@ -462,8 +438,52 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	}
 
 	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute SourceObjects
+	 *
+	 * @param v vector of the enumeration values
+	 */
+	public void setSourceObjects(Vector<? extends ValuedEnum> v)
+	{
+		setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
+	}
+
+	/**
+	 * (9.2) get SourceObjects attribute SourceObjects
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public Vector<? extends ValuedEnum> getSourceObjects()
+	{
+		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
+	}
+
+	/*
 	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
+
+	/**
+	 * (24) const get element FileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
+	}
 
 	/**
 	 * (26) getCreateFileSpec

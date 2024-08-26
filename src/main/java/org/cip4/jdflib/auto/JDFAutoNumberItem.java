@@ -248,6 +248,26 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	}
 
 	/**
+	 * (24) const get element ColorNameDetails
+	 *
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getColorNameDetails()
+	{
+		return (JDFStringSpan) getElement(ElementName.COLORNAMEDETAILS, null, 0);
+	}
+
+	/**
+	 * (25) getCreateColorNameDetails
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateColorNameDetails()
+	{
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.COLORNAMEDETAILS, null, 0);
+	}
+
+	/**
 	 * (26) getCreateColorNameDetails
 	 * 
 	 * @param iSkip number of elements to skip

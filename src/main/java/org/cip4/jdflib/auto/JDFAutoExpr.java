@@ -92,7 +92,7 @@ public abstract class JDFAutoExpr extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.PATH, 0x3333333333l, AttributeInfo.EnumAttributeType.XPath, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.VALUE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}

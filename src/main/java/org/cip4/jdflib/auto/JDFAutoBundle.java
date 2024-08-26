@@ -396,6 +396,26 @@ public abstract class JDFAutoBundle extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element BundleItem
+	 *
+	 * @return JDFBundleItem the element
+	 */
+	public JDFBundleItem getBundleItem()
+	{
+		return (JDFBundleItem) getElement(ElementName.BUNDLEITEM, null, 0);
+	}
+
+	/**
+	 * (25) getCreateBundleItem
+	 * 
+	 * @return JDFBundleItem the element
+	 */
+	public JDFBundleItem getCreateBundleItem()
+	{
+		return (JDFBundleItem) getCreateElement_JDFElement(ElementName.BUNDLEITEM, null, 0);
+	}
+
+	/**
 	 * (26) getCreateBundleItem
 	 * 
 	 * @param iSkip number of elements to skip
@@ -435,6 +455,28 @@ public abstract class JDFAutoBundle extends JDFResource
 	public JDFBundleItem appendBundleItem()
 	{
 		return (JDFBundleItem) appendElement(ElementName.BUNDLEITEM, null);
+	}
+
+	/**
+	 * (24) const get element Contact
+	 *
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getContact()
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, 0);
+	}
+
+	/**
+	 * (25) getCreateContact
+	 * 
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact getCreateContact()
+	{
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, 0);
 	}
 
 	/**
@@ -488,6 +530,26 @@ public abstract class JDFAutoBundle extends JDFResource
 	public void refContact(JDFContact refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element IdentificationField
+	 *
+	 * @return JDFIdentificationField the element
+	 */
+	public JDFIdentificationField getIdentificationField()
+	{
+		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, 0);
+	}
+
+	/**
+	 * (25) getCreateIdentificationField
+	 * 
+	 * @return JDFIdentificationField the element
+	 */
+	public JDFIdentificationField getCreateIdentificationField()
+	{
+		return (JDFIdentificationField) getCreateElement_JDFElement(ElementName.IDENTIFICATIONFIELD, null, 0);
 	}
 
 	/**

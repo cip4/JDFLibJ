@@ -281,6 +281,26 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	 */
 
 	/**
+	 * (24) const get element Stack
+	 *
+	 * @return JDFStack the element
+	 */
+	public JDFStack getStack()
+	{
+		return (JDFStack) getElement(ElementName.STACK, null, 0);
+	}
+
+	/**
+	 * (25) getCreateStack
+	 * 
+	 * @return JDFStack the element
+	 */
+	public JDFStack getCreateStack()
+	{
+		return (JDFStack) getCreateElement_JDFElement(ElementName.STACK, null, 0);
+	}
+
+	/**
 	 * (26) getCreateStack
 	 * 
 	 * @param iSkip number of elements to skip

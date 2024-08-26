@@ -168,6 +168,26 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	 */
 
 	/**
+	 * (24) const get element ActionPool
+	 *
+	 * @return JDFActionPool the element
+	 */
+	public JDFActionPool getActionPool()
+	{
+		return (JDFActionPool) getElement(ElementName.ACTIONPOOL, null, 0);
+	}
+
+	/**
+	 * (25) getCreateActionPool
+	 * 
+	 * @return JDFActionPool the element
+	 */
+	public JDFActionPool getCreateActionPool()
+	{
+		return (JDFActionPool) getCreateElement_JDFElement(ElementName.ACTIONPOOL, null, 0);
+	}
+
+	/**
 	 * (26) getCreateActionPool
 	 * 
 	 * @param iSkip number of elements to skip
