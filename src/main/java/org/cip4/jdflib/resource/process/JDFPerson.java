@@ -99,8 +99,7 @@ public class JDFPerson extends JDFAutoPerson implements IMatches
 	 * @throws DOMException
 	 *
 	 */
-	public JDFPerson(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
-			throws DOMException
+	public JDFPerson(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,6 +141,26 @@ public class JDFPerson extends JDFAutoPerson implements IMatches
 			descName = StringUtil.replaceString(descName, oldName, familyName);
 			setDescriptiveName(descName);
 		}
+	}
+
+	/**
+	 * Sets attribute ProductID
+	 *
+	 * @param value value to set the attribute to
+	 */
+	public void setProductID(final String value)
+	{
+		setAttribute(AttributeName.PRODUCTID, value);
+	}
+
+	/**
+	 * Gets string attribute ProductID
+	 *
+	 * @return String - the attribute value
+	 */
+	public String getProductID()
+	{
+		return getAttribute(AttributeName.PRODUCTID);
 	}
 
 	/**
@@ -264,12 +283,12 @@ public class JDFPerson extends JDFAutoPerson implements IMatches
 		return super.getCreateAddress();
 	}
 
-	public JDFComChannel getComChannel(EnumChannelType ct)
+	public JDFComChannel getComChannel(final EnumChannelType ct)
 	{
 		return JDFComChannel.getChannelByType(this, ct);
 	}
 
-	public JDFComChannel appendComChannel(EnumChannelType ct, String locator)
+	public JDFComChannel appendComChannel(final EnumChannelType ct, final String locator)
 	{
 		return JDFComChannel.appendChannel(this, ct, locator);
 	}
