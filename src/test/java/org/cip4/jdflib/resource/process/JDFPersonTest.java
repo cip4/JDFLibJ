@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,11 +69,14 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -93,8 +96,8 @@ class JDFPersonTest extends JDFTestCaseBase
 	void testGetComChannelPerson()
 	{
 		final JDFComChannel a = person.appendComChannel(EnumChannelType.Phone, "1234");
-		Assertions.assertEquals(a, person.getComChannel(EnumChannelType.Phone));
-		Assertions.assertEquals(null, person.getComChannel(EnumChannelType.Mobile));
+		assertEquals(a, person.getComChannel(EnumChannelType.Phone));
+		assertEquals(null, person.getComChannel(EnumChannelType.Mobile));
 	}
 
 	/**
@@ -104,14 +107,14 @@ class JDFPersonTest extends JDFTestCaseBase
 	void testFamilyName()
 	{
 		person.setFamilyName("Müller");
-		Assertions.assertEquals(person.getFamilyName(), "Müller");
-		Assertions.assertEquals(person.getDescriptiveName(), "Müller");
+		assertEquals(person.getFamilyName(), "Müller");
+		assertEquals(person.getDescriptiveName(), "Müller");
 		person.setFamilyName("Meyer");
-		Assertions.assertEquals(person.getFamilyName(), "Meyer");
-		Assertions.assertEquals(person.getDescriptiveName(), "Meyer");
+		assertEquals(person.getFamilyName(), "Meyer");
+		assertEquals(person.getDescriptiveName(), "Meyer");
 		person.setFamilyName("Müller");
-		Assertions.assertEquals(person.getFamilyName(), "Müller");
-		Assertions.assertEquals(person.getDescriptiveName(), "Müller");
+		assertEquals(person.getFamilyName(), "Müller");
+		assertEquals(person.getDescriptiveName(), "Müller");
 	}
 
 	/**
@@ -121,14 +124,14 @@ class JDFPersonTest extends JDFTestCaseBase
 	void testFirstName()
 	{
 		person.setFirstName("Joe");
-		Assertions.assertEquals(person.getFirstName(), "Joe");
-		Assertions.assertEquals(person.getDescriptiveName(), "Joe");
+		assertEquals(person.getFirstName(), "Joe");
+		assertEquals(person.getDescriptiveName(), "Joe");
 		person.setFirstName("Mary");
-		Assertions.assertEquals(person.getFirstName(), "Mary");
-		Assertions.assertEquals(person.getDescriptiveName(), "Mary");
+		assertEquals(person.getFirstName(), "Mary");
+		assertEquals(person.getDescriptiveName(), "Mary");
 		person.setFirstName("Joe");
-		Assertions.assertEquals(person.getFirstName(), "Joe");
-		Assertions.assertEquals(person.getDescriptiveName(), "Joe");
+		assertEquals(person.getFirstName(), "Joe");
+		assertEquals(person.getDescriptiveName(), "Joe");
 	}
 
 	/**
@@ -139,23 +142,23 @@ class JDFPersonTest extends JDFTestCaseBase
 	{
 		testFirstName();
 		person.setFamilyName("M�ller");
-		Assertions.assertEquals(person.getFamilyName(), "M�ller");
-		Assertions.assertEquals(person.getDescriptiveName(), "Joe M�ller");
+		assertEquals(person.getFamilyName(), "M�ller");
+		assertEquals(person.getDescriptiveName(), "Joe M�ller");
 		person.setFirstName("Mary");
-		Assertions.assertEquals(person.getFirstName(), "Mary");
-		Assertions.assertEquals(person.getDescriptiveName(), "Mary M�ller");
+		assertEquals(person.getFirstName(), "Mary");
+		assertEquals(person.getDescriptiveName(), "Mary M�ller");
 		person.setFamilyName("Meyer");
-		Assertions.assertEquals(person.getFamilyName(), "Meyer");
-		Assertions.assertEquals(person.getDescriptiveName(), "Mary Meyer");
+		assertEquals(person.getFamilyName(), "Meyer");
+		assertEquals(person.getDescriptiveName(), "Mary Meyer");
 		person.setFamilyName("Meyer");
-		Assertions.assertEquals(person.getFamilyName(), "Meyer");
-		Assertions.assertEquals(person.getDescriptiveName(), "Mary Meyer");
+		assertEquals(person.getFamilyName(), "Meyer");
+		assertEquals(person.getDescriptiveName(), "Mary Meyer");
 		person.setFamilyName("Schmidt");
-		Assertions.assertEquals(person.getFamilyName(), "Schmidt");
-		Assertions.assertEquals(person.getDescriptiveName(), "Mary Schmidt");
+		assertEquals(person.getFamilyName(), "Schmidt");
+		assertEquals(person.getDescriptiveName(), "Mary Schmidt");
 		person.setFamilyName(null);
-		Assertions.assertFalse(person.hasAttribute("FamilyName"));
-		Assertions.assertEquals(person.getDescriptiveName(), "Mary Schmidt");
+		assertFalse(person.hasAttribute("FamilyName"));
+		assertEquals(person.getDescriptiveName(), "Mary Schmidt");
 	}
 
 	/**
@@ -166,8 +169,8 @@ class JDFPersonTest extends JDFTestCaseBase
 	{
 		testFamilyName();
 		person.setFirstName("Joe");
-		Assertions.assertEquals(person.getFirstName(), "Joe");
-		Assertions.assertEquals(person.getDescriptiveName(), "Joe Müller");
+		assertEquals(person.getFirstName(), "Joe");
+		assertEquals(person.getDescriptiveName(), "Joe Müller");
 	}
 
 	/**
@@ -178,7 +181,7 @@ class JDFPersonTest extends JDFTestCaseBase
 	{
 		testFamilyName();
 		person.setPhoneticFirstName("Joe");
-		Assertions.assertEquals(person.getPhoneticFirstName(), "Joe");
+		assertEquals(person.getPhoneticFirstName(), "Joe");
 	}
 
 	/**
@@ -189,7 +192,7 @@ class JDFPersonTest extends JDFTestCaseBase
 	{
 		testFamilyName();
 		person.setPhoneticLastName("Joe");
-		Assertions.assertEquals(person.getPhoneticLastName(), "Joe");
+		assertEquals(person.getPhoneticLastName(), "Joe");
 	}
 
 	/**
@@ -200,8 +203,8 @@ class JDFPersonTest extends JDFTestCaseBase
 	{
 		person.setDescriptiveName("foo");
 		person.setFirstName("Joe");
-		Assertions.assertEquals(person.getFirstName(), "Joe");
-		Assertions.assertEquals(person.getDescriptiveName(), "foo", "no overwrite of non-matching name");
+		assertEquals(person.getFirstName(), "Joe");
+		assertEquals(person.getDescriptiveName(), "foo", "no overwrite of non-matching name");
 	}
 
 	/**
@@ -211,16 +214,26 @@ class JDFPersonTest extends JDFTestCaseBase
 	void testGetDescName()
 	{
 		person.setFirstName("Joe");
-		Assertions.assertEquals(person.getDescriptiveName(), "Joe");
+		assertEquals(person.getDescriptiveName(), "Joe");
 		person.setFamilyName("Cool");
-		Assertions.assertEquals(person.getDescriptiveName(), "Joe Cool", "create correct descname");
+		assertEquals(person.getDescriptiveName(), "Joe Cool", "create correct descname");
 		person.setFirstName(null);
-		Assertions.assertEquals(person.getDescriptiveName(), "Cool", "create correct descname");
+		assertEquals(person.getDescriptiveName(), "Cool", "create correct descname");
 		person.setNamePrefix("Prof.");
 		person.setFirstName("Joe");
-		Assertions.assertEquals(person.getDescriptiveName(), "Prof. Joe Cool", "create correct descname");
+		assertEquals(person.getDescriptiveName(), "Prof. Joe Cool", "create correct descname");
 		person.setNameSuffix("IV");
-		Assertions.assertEquals(person.getDescriptiveName(), "Prof. Joe Cool IV", "create correct descname");
+		assertEquals(person.getDescriptiveName(), "Prof. Joe Cool IV", "create correct descname");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetProductID()
+	{
+		person.setProductID("p1");
+		assertEquals(person.getProductID(), "p1");
 	}
 
 	/**
@@ -240,20 +253,20 @@ class JDFPersonTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testMatches()
+	final void testMatches()
 	{
-		JDFDoc doc = new JDFDoc("Person");
-		JDFPerson c = (JDFPerson) doc.getRoot();
-		JDFPerson c2 = (JDFPerson) new JDFDoc("Person").getRoot();
-		Assertions.assertTrue(c.matches(c2));
+		final JDFDoc doc = new JDFDoc("Person");
+		final JDFPerson c = (JDFPerson) doc.getRoot();
+		final JDFPerson c2 = (JDFPerson) new JDFDoc("Person").getRoot();
+		assertTrue(c.matches(c2));
 		c.setFirstName("foo");
-		Assertions.assertTrue(c.matches(c2));
+		assertTrue(c.matches(c2));
 		c2.setFirstName("Foo");
-		Assertions.assertTrue(c.matches(c));
-		Assertions.assertTrue(c.matches("foo"));
+		assertTrue(c.matches(c));
+		assertTrue(c.matches("foo"));
 		c2.setFamilyName("bar");
-		Assertions.assertFalse(c.matches(c2));
+		assertFalse(c.matches(c2));
 		c.setFamilyName("bar");
-		Assertions.assertTrue(c.matches("foo bar"));
+		assertTrue(c.matches("foo bar"));
 	}
 }
