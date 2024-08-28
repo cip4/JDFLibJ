@@ -126,6 +126,40 @@ class JDFElementTest extends JDFTestCaseBase
 	private JDFElement m_jdfElement;
 
 	/**
+	 * test whether xmldoc.parse gives a clean empty kelement only doc
+	 */
+	@Test
+	void testParseFile()
+	{
+		final XMLDoc d = new JDFDoc("JDF");
+		final JDFElement root = (JDFElement) d.getRoot();
+		final String fn = sm_dirTestDataTemp + "jdfdocParseTest42.xml";
+		d.write2File(fn, 0, true);
+
+		final JDFElement r2 = JDFElement.parseFile(fn);
+		assertTrue(root.isEqual(r2));
+		final JDFElement r3 = JDFElement.parseFile(new File(fn));
+		assertTrue(root.isEqual(r3));
+		final JDFElement r4 = JDFElement.parseStream(FileUtil.getBufferedInputStream(new File(fn)));
+		assertTrue(root.isEqual(r4));
+	}
+
+	/**
+	 * test whether xmldoc.parse gives a clean empty kelement only doc
+	 */
+	@Test
+	void testParseString()
+	{
+		final XMLDoc d = new JDFDoc("JDF");
+		final JDFElement root = (JDFElement) d.getRoot();
+
+		final String s = d.write2String(2);
+
+		final JDFElement r2 = JDFElement.parseString(s);
+		assertTrue(root.isEqual(r2));
+	}
+
+	/**
 	 *
 	 */
 	@Test

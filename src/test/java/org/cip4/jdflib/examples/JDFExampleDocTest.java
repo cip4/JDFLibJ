@@ -59,6 +59,8 @@
  */
 package org.cip4.jdflib.examples;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.File;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
@@ -73,6 +75,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
@@ -87,6 +90,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.examples.ExampleTest;
 import org.cip4.jdflib.jmf.JDFDeviceFilter;
@@ -139,6 +143,8 @@ import org.cip4.jdflib.resource.process.JDFSurface;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
 import org.cip4.jdflib.span.JDFIntegerSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
+import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.MyArgs;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Assertions;
@@ -147,6 +153,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * some simple examples
+ * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
@@ -171,8 +178,7 @@ class JDFExampleDocTest extends ExampleTest
 	/**
 	 * a simple generic main routine for a dumb console app
 	 *
-	 * switches: -a: actions to perform - DoAll calls all test programs -i input
-	 * JDF file -o output JDF File
+	 * switches: -a: actions to perform - DoAll calls all test programs -i input JDF file -o output JDF File
 	 *
 	 */
 	@Test
@@ -212,12 +218,9 @@ class JDFExampleDocTest extends ExampleTest
 	/**
 	 * dispatcher to the individual example tasks
 	 *
-	 * @param String
-	 *            action the routine to call
-	 * @param String
-	 *            infile name of the input JDF file to parse
-	 * @param String
-	 *            outfile name of the output JDF file to write
+	 * @param String action the routine to call
+	 * @param String infile name of the input JDF file to parse
+	 * @param String outfile name of the output JDF file to write
 	 * @return >=0 if successful
 	 */
 	public int doExample(final String strDocType, final String action, final String inFile, final String outFile)
@@ -309,7 +312,7 @@ class JDFExampleDocTest extends ExampleTest
 		{
 			// remove whitespace only nodes before writing
 			root.eraseEmptyNodes(true);
-			//		writeRoundTrip((JDFElement) m_doc.getRoot(), UrlUtil.newExtension(outFile, null));
+			// writeRoundTrip((JDFElement) m_doc.getRoot(), UrlUtil.newExtension(outFile, null));
 			m_doc.write2File(sm_dirTestDataTemp + outFile, 0, true);
 		}
 		else
@@ -347,8 +350,7 @@ class JDFExampleDocTest extends ExampleTest
 	// the actual examples start here
 
 	/**
-	 * Example 1: create an incomplete product node for a simple 8.5 * 11
-	 * brochure from scratch
+	 * Example 1: create an incomplete product node for a simple 8.5 * 11 brochure from scratch
 	 */
 	private int createSimple()
 	{
@@ -512,8 +514,7 @@ class JDFExampleDocTest extends ExampleTest
 	////////////////////////////////////////////////////////////////////////////
 	// /
 	/**
-	 * Example 4: create an Imposition process node with a runlist the Runlist
-	 * has various separated, combined and referenced files
+	 * Example 4: create an Imposition process node with a runlist the Runlist has various separated, combined and referenced files
 	 */
 
 	private int doRunList()
@@ -532,16 +533,19 @@ class JDFExampleDocTest extends ExampleTest
 		final String separationList = "Cyan Magenta Yellow Black SpotGreen";
 
 		// runPart is used to reference the partitioned runlist leaves
-		JDFRunList runPart = runList.addSepRun(StringUtil.tokenize("Cyan.pdf Magenta.pdf Yellow.pdf Black.pdf Green.pdf", " ", false), StringUtil.tokenize(separationList, " ", false), 0, 1, true);
+		JDFRunList runPart = runList.addSepRun(StringUtil.tokenize("Cyan.pdf Magenta.pdf Yellow.pdf Black.pdf Green.pdf", " ", false),
+				StringUtil.tokenize(separationList, " ", false), 0, 1, true);
 
 		// add a JDF Comment
-		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(), JDFElement.getSchemaURL()).appendText("Preseparated Runs in multiple files\nAll LayoutElements are inline resources");
+		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(), JDFElement.getSchemaURL())
+				.appendText("Preseparated Runs in multiple files\nAll LayoutElements are inline resources");
 
 		final VString v = new VString();
 		v.add("PreSepCMYKG.pdf");
 		// add a preseparated run
 		runPart = runList.addSepRun(v, StringUtil.tokenize(separationList, " ", false), 0, 2, true);
-		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(), JDFElement.getSchemaURL()).appendText("Preseparated Runs in one file CMYKGCMYKG\nLayoutElements are inter-resource links");
+		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(), JDFElement.getSchemaURL())
+				.appendText("Preseparated Runs in one file CMYKGCMYKG\nLayoutElements are inter-resource links");
 
 		runPart = runList.addSepRun(v, StringUtil.tokenize("Cyan Yellow Black Green", " ", false), 10, 1, true);
 
@@ -549,8 +553,8 @@ class JDFExampleDocTest extends ExampleTest
 
 		// add a preseparated run
 		runPart = runList.addSepRun(v, StringUtil.tokenize(separationList, " ", false), 14, 2, true);
-		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(), JDFElement.getSchemaURL()).appendText("Continuation of Preseparated Runs in one file CMYKGCMYKG - "
-				+ "the missing sep of the previous page does not exist as a page");
+		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(), JDFElement.getSchemaURL())
+				.appendText("Continuation of Preseparated Runs in one file CMYKGCMYKG - " + "the missing sep of the previous page does not exist as a page");
 
 		v.setElementAt("PreSepCCMMYYKKGG.pdf", 0);
 
@@ -572,8 +576,7 @@ class JDFExampleDocTest extends ExampleTest
 	////////////////////////////////////////////////////////////////////////////
 	// /
 	/**
-	 * Example 5: parse a JDF and simulate processing it also add some audit
-	 * elements
+	 * Example 5: parse a JDF and simulate processing it also add some audit elements
 	 *
 	 */
 
@@ -813,8 +816,7 @@ class JDFExampleDocTest extends ExampleTest
 	////////////////////////////////////////////////////////////////////////////
 	// /
 	/**
-	 * Example 7.7: modify a combined RIP node for reprint of one plate from
-	 * scratch
+	 * Example 7.7: modify a combined RIP node for reprint of one plate from scratch
 	 */
 	private int reprint()
 	{
@@ -879,9 +881,8 @@ class JDFExampleDocTest extends ExampleTest
 	////////////////////////////////////////////////////////////////////////////
 	// /
 	/**
-	 * Example 8:write a JMF message from scratch and fill it with various
-	 * signals, queries and commands return the message as a string this
-	 * simulates the JMF post input within an http server
+	 * Example 8:write a JMF message from scratch and fill it with various signals, queries and commands return the message as a string this simulates the JMF post input within an
+	 * http server
 	 */
 
 	private String writeMessage()
@@ -907,8 +908,7 @@ class JDFExampleDocTest extends ExampleTest
 	////////////////////////////////////////////////////////////////////////////
 	// /
 	/**
-	 * Example 9:read the JMF message from example 8 and create the appropriate
-	 * responses and acknowledges
+	 * Example 9:read the JMF message from example 8 and create the appropriate responses and acknowledges
 	 */
 
 	private int processMessage(final String inputMessage)
@@ -1007,7 +1007,8 @@ class JDFExampleDocTest extends ExampleTest
 		partAmount.setOrientation(JDFResourceLink.EnumOrientation.Rotate0);
 
 		// get the MediaLink and set the attributes
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) printNode.appendMatchingResource(ElementName.DIGITALPRINTINGPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) printNode.appendMatchingResource(ElementName.DIGITALPRINTINGPARAMS, JDFNode.EnumProcessUsage.AnyInput,
+				null);
 
 		dpp.addPartitions(JDFResource.EnumPartIDKey.RunIndex, new VString("0 -1,1~-2", ","));
 
@@ -1055,7 +1056,8 @@ class JDFExampleDocTest extends ExampleTest
 
 		final JDFComponent outComp = (JDFComponent) printNode.appendMatchingResource(ElementName.COMPONENT, JDFNode.EnumProcessUsage.AnyOutput, null);
 
-		final JDFConventionalPrintingParams cpOffset = (JDFConventionalPrintingParams) printNode.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
+		final JDFConventionalPrintingParams cpOffset = (JDFConventionalPrintingParams) printNode.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS,
+				JDFNode.EnumProcessUsage.AnyInput, null);
 		cpOffset.setDescriptiveName("Offset parameters");
 
 		final JDFExposedMedia xmOffset = (JDFExposedMedia) printNode.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.Plate, null);
@@ -1063,7 +1065,8 @@ class JDFExampleDocTest extends ExampleTest
 		xmOffset.addPartition(EnumPartIDKey.Side, "Front");
 		xmOffset.addPartition(EnumPartIDKey.Side, "Back");
 
-		final JDFConventionalPrintingParams cpFlexo = (JDFConventionalPrintingParams) printNode.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
+		final JDFConventionalPrintingParams cpFlexo = (JDFConventionalPrintingParams) printNode.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS,
+				JDFNode.EnumProcessUsage.AnyInput, null);
 		cpFlexo.setDescriptiveName("Flexo parameters");
 
 		final JDFExposedMedia xmFlexo = (JDFExposedMedia) printNode.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.Plate, null);
@@ -1137,6 +1140,51 @@ class JDFExampleDocTest extends ExampleTest
 		setSnippet(comment, true);
 		writeTest(pgNode, "subelements/comment.jdf", true, "Comment");
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testUpdateExamples()
+	{
+		int n = 0;
+		for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData + "SampleFiles"), (String) null))
+		// for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData + "samples"), (String) null))
+		{
+
+			final boolean b = updateExample(f, EnumVersion.Version_1_9, 2024);
+			if (b)
+				n++;
+		}
+		assertEquals(12, n);
+
+	}
+
+	boolean updateExample(final File f, final EnumVersion version, final int i)
+	{
+		if (!f.isDirectory())
+		{
+			final String r1 = StringUtil.replaceString(f.getAbsolutePath(), "\\test\\data\\", "\\test\\data\\temp\\");
+			final String r2 = StringUtil.replaceString(r1, "/test/data/", "/test/data/temp/");
+			final File out = new File(r2);
+			final JDFDoc d = JDFDoc.parseFile(f);
+			if (d != null)
+			{
+				final JDFElement e = (JDFElement) d.getRoot();
+				final boolean v = e.isValid(EnumValidationLevel.NoWarnIncomplete);
+				final FixVersion fv = new FixVersion(version);
+				fv.setZappDeprecated(true);
+				fv.setNewYear(new JDFDate().getYear());
+				fv.setFixICSVersions(true);
+				fv.convert(e);
+				e.write2File(out);
+				final boolean v2 = e.isValid(EnumValidationLevel.NoWarnIncomplete);
+				assertEquals(v2 || v, v, f.getName());
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -1313,7 +1361,7 @@ class JDFExampleDocTest extends ExampleTest
 			Assertions.fail("rectangle");
 		}
 		misNode.addResource(ElementName.LAYOUT, EnumUsage.Output);
-		//TODO		writeRoundTrip(misNode, "StrippingGang");
+		// TODO writeRoundTrip(misNode, "StrippingGang");
 	}
 
 }

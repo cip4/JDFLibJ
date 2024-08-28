@@ -6704,6 +6704,17 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
+	 *
+	 * @param filename
+	 * @return
+	 */
+	public static KElement parseFile(final File file)
+	{
+		final XMLDoc f = XMLDoc.parseFile(file);
+		return f == null ? null : f.getRoot();
+	}
+
+	/**
 	 * cleanup all namespace stuff
 	 */
 	public void clearNSMap()

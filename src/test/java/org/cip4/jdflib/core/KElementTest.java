@@ -106,6 +106,12 @@ class KElementTest extends JDFTestCaseBase
 
 		final KElement r2 = KElement.parseFile(fn);
 		assertTrue(root.isEqual(r2));
+		final KElement r3 = KElement.parseFile(new File(fn));
+		assertTrue(root.isEqual(r3));
+
+		final KElement r4 = KElement.parseStream(FileUtil.getBufferedInputStream(new File(fn)));
+		assertTrue(root.isEqual(r4));
+
 	}
 
 	/**

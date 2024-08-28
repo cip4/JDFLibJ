@@ -43,6 +43,13 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
@@ -50,7 +57,6 @@ import java.util.TimeZone;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -71,10 +77,10 @@ class JDFDateTest extends JDFTestCaseBase
 	@Test
 	void testCreateDate() throws DataFormatException
 	{
-		Assertions.assertNull(JDFDate.createDate("1999+09-26T11:43:10+03:00"));
-		Assertions.assertNull(JDFDate.createDate(null));
+		assertNull(JDFDate.createDate("1999+09-26T11:43:10+03:00"));
+		assertNull(JDFDate.createDate(null));
 		final String dateString = "2008-12-19T07:00:11.300+00:00";
-		Assertions.assertEquals(JDFDate.createDate(dateString), new JDFDate(dateString));
+		assertEquals(JDFDate.createDate(dateString), new JDFDate(dateString));
 	}
 
 	/**
@@ -84,8 +90,8 @@ class JDFDateTest extends JDFTestCaseBase
 	@Test
 	void testCreateDateNormalize() throws DataFormatException
 	{
-		Assertions.assertNotNull(JDFDate.createDate("   1999-09-26T11:43:10+03:00  "));
-		Assertions.assertNotNull(JDFDate.createDate("   1999-09-26 T 11:43:10+ 03:00  "));
+		assertNotNull(JDFDate.createDate("   1999-09-26T11:43:10+03:00  "));
+		assertNotNull(JDFDate.createDate("   1999-09-26 T 11:43:10+ 03:00  "));
 	}
 
 	/**
@@ -95,12 +101,12 @@ class JDFDateTest extends JDFTestCaseBase
 	@Test
 	void testCreateDateBadTimeZone() throws DataFormatException
 	{
-		Assertions.assertNotNull(JDFDate.createDate("1999-09-26T11:43:10+3:00"));
+		assertNotNull(JDFDate.createDate("1999-09-26T11:43:10+3:00"));
 		final JDFDate createDate = JDFDate.createDate("1999-09-26T11:43:10-3:00");
-		Assertions.assertNotNull(createDate);
-		Assertions.assertEquals(createDate, JDFDate.createDate("1999-09-26T11:43:10-3"));
-		Assertions.assertEquals(createDate, JDFDate.createDate("1999-09-26T11:43:10-3:"));
-		Assertions.assertNotNull(JDFDate.createDate("1999-09-26T11:43:10Z"));
+		assertNotNull(createDate);
+		assertEquals(createDate, JDFDate.createDate("1999-09-26T11:43:10-3"));
+		assertEquals(createDate, JDFDate.createDate("1999-09-26T11:43:10-3:"));
+		assertNotNull(JDFDate.createDate("1999-09-26T11:43:10Z"));
 	}
 
 	/**
@@ -110,7 +116,7 @@ class JDFDateTest extends JDFTestCaseBase
 	@Test
 	void testCreateDateBlank() throws DataFormatException
 	{
-		Assertions.assertEquals(JDFDate.createDate("1999-09-26T 1:43:10+03:00"), JDFDate.createDate("1999-09-26T01:43:10+03:00"));
+		assertEquals(JDFDate.createDate("1999-09-26T 1:43:10+03:00"), JDFDate.createDate("1999-09-26T01:43:10+03:00"));
 	}
 
 	/**
@@ -124,7 +130,7 @@ class JDFDateTest extends JDFTestCaseBase
 		final JDFDate d2 = JDFDate.createDate("2022-09-26T 1:13:10+03:00");
 		final long m = d.getTimeInMillis();
 		final long m2 = d2.getTimeInMillis();
-		Assertions.assertEquals(m, m2);
+		assertEquals(m, m2);
 	}
 
 	/**
@@ -138,7 +144,7 @@ class JDFDateTest extends JDFTestCaseBase
 		final JDFDate d2 = JDFDate.createDate("2022-09-26T 2:13:10-03:00");
 		final long m = d.getTimeInMillis();
 		final long m2 = d2.getTimeInMillis();
-		Assertions.assertEquals(m, m2);
+		assertEquals(m, m2);
 	}
 
 	/**
@@ -152,7 +158,7 @@ class JDFDateTest extends JDFTestCaseBase
 		final JDFDate d2 = JDFDate.createDate("2022-09-26T 2:43:10+00:30");
 		final long m = d.getTimeInMillis();
 		final long m2 = d2.getTimeInMillis();
-		Assertions.assertEquals(m, m2);
+		assertEquals(m, m2);
 	}
 
 	/**
@@ -162,8 +168,8 @@ class JDFDateTest extends JDFTestCaseBase
 	@Test
 	void testCreateDateSeconds() throws DataFormatException
 	{
-		Assertions.assertEquals(JDFDate.createDate("1587055153"), new JDFDate(1587055153));
-		Assertions.assertEquals(2020, new JDFDate(1587055153).getYear());
+		assertEquals(JDFDate.createDate("1587055153"), new JDFDate(1587055153));
+		assertEquals(2020, new JDFDate(1587055153).getYear());
 	}
 
 	/**
@@ -174,13 +180,13 @@ class JDFDateTest extends JDFTestCaseBase
 	void testRoundDate() throws DataFormatException
 	{
 		final JDFDate d = new JDFDate();
-		Assertions.assertTrue(d.getFormattedDateTime(JDFDate.DATETIMEISO_00).contains(":00:00"));
+		assertTrue(d.getFormattedDateTime(JDFDate.DATETIMEISO_00).contains(":00:00"));
 		final JDFDate d1 = new JDFDate(d.getFormattedDateTime(JDFDate.DATETIMEISO_0));
-		Assertions.assertFalse(d.isEarlier(d1));
+		assertFalse(d.isEarlier(d1));
 		final JDFDate d2 = new JDFDate(d.getFormattedDateTime(JDFDate.DATETIMEISO_00));
-		Assertions.assertFalse(d1.isEarlier(d2));
+		assertFalse(d1.isEarlier(d2));
 		final JDFDate d3 = new JDFDate(d.getFormattedDateTime(JDFDate.DATETIMEISO_000));
-		Assertions.assertFalse(d2.isEarlier(d3));
+		assertFalse(d2.isEarlier(d3));
 	}
 
 	/**
@@ -193,8 +199,8 @@ class JDFDateTest extends JDFTestCaseBase
 		final JDFDate d = new JDFDate();
 		final JDFDate d1 = new JDFDate();
 		d1.setTime(22, 0, 0);
-		Assertions.assertTrue(d1.getFormattedDateTime(JDFDate.DATETIMEISO).contains("T22:00:00"));
-		Assertions.assertEquals(d.getDay(), d1.getDay());
+		assertTrue(d1.getFormattedDateTime(JDFDate.DATETIMEISO).contains("T22:00:00"));
+		assertEquals(d.getDay(), d1.getDay());
 	}
 
 	/**
@@ -207,9 +213,9 @@ class JDFDateTest extends JDFTestCaseBase
 		final JDFDate d = new JDFDate();
 		final JDFDate d1 = new JDFDate();
 		d1.setTime(22, 0, 0);
-		Assertions.assertTrue(d1.getFormattedDateTime(JDFDate.DATETIMEISO_MILLI).contains("T22:00:00.000"));
-		Assertions.assertEquals(d.getDay(), d1.getDay());
-		Assertions.assertEquals(0, d1.getTimeInMillis() % 1000l);
+		assertTrue(d1.getFormattedDateTime(JDFDate.DATETIMEISO_MILLI).contains("T22:00:00.000"));
+		assertEquals(d.getDay(), d1.getDay());
+		assertEquals(0, d1.getTimeInMillis() % 1000l);
 	}
 
 	/**
@@ -224,8 +230,8 @@ class JDFDateTest extends JDFTestCaseBase
 			d.addOffset(0, 0, 0, -5);
 		final JDFDate d1 = new JDFDate(d);
 		d1.setTime(0, 0, 0).addOffset(0, 0, 22, 3);
-		Assertions.assertTrue(d1.getFormattedDateTime(JDFDate.DATETIMEISO).contains("T22:00:00"));
-		Assertions.assertEquals(d.getDay() + 3, d1.getDay());
+		assertTrue(d1.getFormattedDateTime(JDFDate.DATETIMEISO).contains("T22:00:00"));
+		assertEquals(d.getDay() + 3, d1.getDay());
 	}
 
 	/**
@@ -235,13 +241,16 @@ class JDFDateTest extends JDFTestCaseBase
 	@Test
 	void testDefaultHour()
 	{
-		int defaultHour = JDFDate.getDefaultHour();
-		try {
+		final int defaultHour = JDFDate.getDefaultHour();
+		try
+		{
 			JDFDate.setDefaultHour(4);
-			Assertions.assertEquals(4, JDFDate.getDefaultHour());
+			assertEquals(4, JDFDate.getDefaultHour());
 			JDFDate.setDefaultHour(44);
-			Assertions.assertEquals(4, JDFDate.getDefaultHour());
-		} finally {
+			assertEquals(4, JDFDate.getDefaultHour());
+		}
+		finally
+		{
 			JDFDate.setDefaultHour(defaultHour);
 		}
 	}
@@ -256,10 +265,10 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		final JDFDate d = new JDFDate();
 		JDFDate d1 = d.createDateFromDuration(new JDFDuration("P1DT18H"), 18, 0);
-		Assertions.assertTrue(d1.isLater(d));
+		assertTrue(d1.isLater(d));
 		d1 = d.createDateFromDuration(new JDFDuration("P1200DT18H"), 18, 0);
-		Assertions.assertTrue(d1.isLater(d));
-		Assertions.assertTrue(d1.getYear() - d.getYear() > 2);
+		assertTrue(d1.isLater(d));
+		assertTrue(d1.getYear() - d.getYear() > 2);
 	}
 
 	/**
@@ -273,7 +282,7 @@ class JDFDateTest extends JDFTestCaseBase
 		try
 		{
 			date = new JDFDate("1999+09-26T11:43:10+03:00");
-			Assertions.fail("date exception: " + date);
+			fail("date exception: " + date);
 		}
 		catch (final DataFormatException dfe)
 		{
@@ -287,13 +296,13 @@ class JDFDateTest extends JDFTestCaseBase
 		}
 		catch (final DataFormatException dfe)
 		{
-			Assertions.fail("date exception: ");
+			fail("date exception: ");
 		}
 
 		try
 		{
 			date = new JDFDate("2004-11-26T11:43:10.33-3A");
-			Assertions.fail("date exception: " + date);
+			fail("date exception: " + date);
 		}
 		catch (final DataFormatException dfe)
 		{
@@ -303,7 +312,7 @@ class JDFDateTest extends JDFTestCaseBase
 		try
 		{
 			date = new JDFDate("2004-11-26T11:43:10.+0A00");
-			Assertions.fail("date exception: " + date);
+			fail("date exception: " + date);
 		}
 		catch (final DataFormatException dfe)
 		{
@@ -323,7 +332,7 @@ class JDFDateTest extends JDFTestCaseBase
 		String strDate = date.getDateTimeISO();
 		date = new JDFDate("2006-11-26");
 		strDate = date.getDateTimeISO();
-		Assertions.assertTrue(strDate.startsWith("2006-11-26T"));
+		assertTrue(strDate.startsWith("2006-11-26T"));
 	}
 
 	/**
@@ -336,16 +345,16 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		JDFDate date = new JDFDate();
 		date = new JDFDate("2006-11-26");
-		Assertions.assertTrue(date.getDateTimeISO().startsWith("2006-11-26T12"));
+		assertTrue(date.getDateTimeISO().startsWith("2006-11-26T12"));
 		JDFDate.setDefaultHour(23);
 		date = new JDFDate("2006-11-26");
-		Assertions.assertTrue(date.getDateTimeISO().startsWith("2006-11-26T23"));
+		assertTrue(date.getDateTimeISO().startsWith("2006-11-26T23"));
 		JDFDate.setDefaultHour(0);
 		date = new JDFDate("2006-11-26");
-		Assertions.assertTrue(date.getDateTimeISO().startsWith("2006-11-26T00"));
+		assertTrue(date.getDateTimeISO().startsWith("2006-11-26T00"));
 		JDFDate.setDefaultHour(7);
 		date = new JDFDate("2006-11-26");
-		Assertions.assertTrue(date.getDateTimeISO().startsWith("2006-11-26T07"));
+		assertTrue(date.getDateTimeISO().startsWith("2006-11-26T07"));
 	}
 
 	/**
@@ -360,7 +369,7 @@ class JDFDateTest extends JDFTestCaseBase
 		String strDate = date.getDateTimeISO();
 		date = new JDFDate("2006-7-6");
 		strDate = date.getDateTimeISO();
-		Assertions.assertTrue(strDate.startsWith("2006-07-06T"));
+		assertTrue(strDate.startsWith("2006-07-06T"));
 	}
 
 	/**
@@ -375,7 +384,7 @@ class JDFDateTest extends JDFTestCaseBase
 		String strDate = date.getDateTimeISO();
 		date = new JDFDate("2006-07-06T12");
 		strDate = date.getDateTimeISO();
-		Assertions.assertTrue(strDate.startsWith("2006-07-06T12:00"));
+		assertTrue(strDate.startsWith("2006-07-06T12:00"));
 	}
 
 	/**
@@ -390,7 +399,7 @@ class JDFDateTest extends JDFTestCaseBase
 		String strDate = date.getDateTimeISO();
 		date = new JDFDate("2006-07-06", 10, 5);
 		strDate = date.getDateTimeISO();
-		Assertions.assertTrue(strDate.startsWith("2006-07-06T10:05"));
+		assertTrue(strDate.startsWith("2006-07-06T10:05"));
 	}
 
 	/**
@@ -405,7 +414,7 @@ class JDFDateTest extends JDFTestCaseBase
 		String strDate = date.getDateTimeISO();
 		date = new JDFDate("2006-07-06T14", 10, 5);
 		strDate = date.getDateTimeISO();
-		Assertions.assertTrue(strDate.startsWith("2006-07-06T14:05"));
+		assertTrue(strDate.startsWith("2006-07-06T14:05"));
 	}
 
 	/**
@@ -420,7 +429,29 @@ class JDFDateTest extends JDFTestCaseBase
 		String strDate = date.getDateTimeISO();
 		date = new JDFDate("2006-11");
 		strDate = date.getDateTimeISO();
-		Assertions.assertTrue(strDate.startsWith("2006-11"));
+		assertTrue(strDate.startsWith("2006-11"));
+	}
+
+	/**
+	 * 
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	void testSetYear() throws Exception
+	{
+		JDFDate date = new JDFDate();
+		String strDate = date.getDateTimeISO();
+		date = new JDFDate("2006-11");
+
+		date.setYear(123);
+		strDate = date.getDateTimeISO();
+
+		assertTrue(strDate.startsWith("0123-11"));
+		date.setYear(1234);
+		strDate = date.getDateTimeISO();
+
+		assertTrue(strDate.startsWith("1234-11"));
 	}
 
 	/**
@@ -432,12 +463,12 @@ class JDFDateTest extends JDFTestCaseBase
 	void testdateTimeZone() throws Exception
 	{
 		JDFDate date = new JDFDate("1999-12-26T11:43:10-03:00");
-		Assertions.assertEquals("-03:00", date.getTimeZoneISO());
+		assertEquals("-03:00", date.getTimeZoneISO());
 		date = new JDFDate("1999-12-26T11:43:10-05:00");
-		Assertions.assertEquals("-05:00", date.getTimeZoneISO());
+		assertEquals("-05:00", date.getTimeZoneISO());
 		date = new JDFDate("1999-06-26T11:43:10-05:00");
-		Assertions.assertEquals("-05:00", date.getTimeZoneISO());
-		Assertions.assertEquals(1000 * 60 * 60 * -5, date.getTimeZoneOffsetInMillis());
+		assertEquals("-05:00", date.getTimeZoneISO());
+		assertEquals(1000 * 60 * 60 * -5, date.getTimeZoneOffsetInMillis());
 	}
 
 	/**
@@ -462,9 +493,9 @@ class JDFDateTest extends JDFTestCaseBase
 	void testdateMillis()
 	{
 		JDFDate date = new JDFDate(1);
-		Assertions.assertEquals(date.getCalendar().get(Calendar.YEAR), 1970, 1);
+		assertEquals(date.getCalendar().get(Calendar.YEAR), 1970, 1);
 		date = new JDFDate(-1);
-		Assertions.assertEquals(date.getCalendar().get(Calendar.YEAR), 1970, 1);
+		assertEquals(date.getCalendar().get(Calendar.YEAR), 1970, 1);
 	}
 
 	/**
@@ -477,12 +508,12 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		final long l = System.currentTimeMillis();
 		JDFDate date = new JDFDate("" + l);
-		Assertions.assertEquals(0, date.getTimeInMillis() - l, 15000l);
+		assertEquals(0, date.getTimeInMillis() - l, 15000l);
 		date = new JDFDate("" + (l / 1000l));
-		Assertions.assertEquals(0, date.getTimeInMillis() - l, 170000l);
+		assertEquals(0, date.getTimeInMillis() - l, 170000l);
 		date = new JDFDate("" + ((l / 1000l) - 365 * 24 * 3600 * 5));
 		date.addOffset(0, 0, 0, 365 * 5);
-		Assertions.assertEquals(0, date.getTimeInMillis() - l, 190000l);
+		assertEquals(0, date.getTimeInMillis() - l, 190000l);
 	}
 
 	/**
@@ -498,73 +529,73 @@ class JDFDateTest extends JDFTestCaseBase
 		// summer
 		date = new JDFDate("1999-09-26T11:43:10+03:00");
 		strDate = date.getDateTimeISO();
-		Assertions.assertTrue(strDate.equals("1999-09-26T11:43:10+03:00"), "Bug " + strDate + " is not equal to 1999-09-26T11:43:10+03:00");
+		assertTrue(strDate.equals("1999-09-26T11:43:10+03:00"), "Bug " + strDate + " is not equal to 1999-09-26T11:43:10+03:00");
 
 		date = new JDFDate("1999-09-26T11:43:10-03:00");
 		strDate = date.getDateTimeISO();
-		Assertions.assertTrue(strDate.equals("1999-09-26T11:43:10-03:00"), "Bug " + strDate + " is not equal to 1999-09-26T11:43:10-03:00");
+		assertTrue(strDate.equals("1999-09-26T11:43:10-03:00"), "Bug " + strDate + " is not equal to 1999-09-26T11:43:10-03:00");
 
 		// winter
 		date = new JDFDate("1999-11-26T11:43:10+03:00");
 		strDate = date.getDateTimeISO();
-		Assertions.assertTrue(strDate.equals("1999-11-26T11:43:10+03:00"), "Bug " + strDate + " is not equal to 1999-11-26T11:43:10+03:00");
+		assertTrue(strDate.equals("1999-11-26T11:43:10+03:00"), "Bug " + strDate + " is not equal to 1999-11-26T11:43:10+03:00");
 
 		date = new JDFDate("1999-11-26T11:43:10-03:00");
 		strDate = date.getDateTimeISO();
-		Assertions.assertTrue(strDate.equals("1999-11-26T11:43:10-03:00"), "Bug " + strDate + " is not equal to 1999-11-26T11:43:10-03:00");
+		assertTrue(strDate.equals("1999-11-26T11:43:10-03:00"), "Bug " + strDate + " is not equal to 1999-11-26T11:43:10-03:00");
 
 		// note the various A,c zulu etc times below
 		date = new JDFDate("1999-11-26T11:43:10a");
 		strDate = date.getDateTimeISO();
-		Assertions.assertEquals(strDate, "1999-11-26T11:43:10+01:00", "Bug ");
+		assertEquals(strDate, "1999-11-26T11:43:10+01:00", "Bug ");
 
 		date = new JDFDate("1999-11-26T11:43:10C");
 		strDate = date.getDateTimeISO();
-		Assertions.assertEquals(strDate, "1999-11-26T11:43:10+03:00", "Bug ");
+		assertEquals(strDate, "1999-11-26T11:43:10+03:00", "Bug ");
 
 		date = new JDFDate("1999-11-26T11:43:10Z");
 		strDate = date.getDateTimeISO();
-		Assertions.assertEquals(strDate, "1999-11-26T11:43:10+00:00", "Bug ");
+		assertEquals(strDate, "1999-11-26T11:43:10+00:00", "Bug ");
 
 		date = new JDFDate("1999-11-26T11:43:10i");
 		strDate = date.getDateTimeISO();
-		Assertions.assertEquals(strDate, "1999-11-26T11:43:10+09:00", "Bug ");
+		assertEquals(strDate, "1999-11-26T11:43:10+09:00", "Bug ");
 
 		date = new JDFDate("1999-11-26T11:43:10K");
 		strDate = date.getDateTimeISO();
-		Assertions.assertEquals(strDate, "1999-11-26T11:43:10+10:00", "Bug ");
+		assertEquals(strDate, "1999-11-26T11:43:10+10:00", "Bug ");
 
 		date = new JDFDate("1999-11-26T11:43:10M");
 		strDate = date.getDateTimeISO();
-		Assertions.assertEquals(strDate, "1999-11-26T11:43:10+12:00", "Bug ");
+		assertEquals(strDate, "1999-11-26T11:43:10+12:00", "Bug ");
 
 		date = new JDFDate("1999-11-26T11:43:10N");
 		strDate = date.getDateTimeISO();
-		Assertions.assertEquals(strDate, "1999-11-26T11:43:10-01:00", "Bug ");
+		assertEquals(strDate, "1999-11-26T11:43:10-01:00", "Bug ");
 
 		date = new JDFDate("1999-11-26T11:43:10V");
 		strDate = date.getDateTimeISO();
-		Assertions.assertEquals(strDate, "1999-11-26T11:43:10-09:00", "Bug ");
+		assertEquals(strDate, "1999-11-26T11:43:10-09:00", "Bug ");
 
 		date = new JDFDate("1999-11-26T11:43:10W");
 		strDate = date.getDateTimeISO();
-		Assertions.assertEquals(strDate, "1999-11-26T11:43:10-10:00", "Bug ");
+		assertEquals(strDate, "1999-11-26T11:43:10-10:00", "Bug ");
 
 		date = new JDFDate("1999-11-26T11:43:10Y");
 		strDate = date.getDateTimeISO();
-		Assertions.assertEquals(strDate, "1999-11-26T11:43:10-12:00", "Bug ");
+		assertEquals(strDate, "1999-11-26T11:43:10-12:00", "Bug ");
 
 		date = new JDFDate("1999-11-26T11:43:10.123Y");
 		strDate = date.getDateTimeISO();
-		Assertions.assertEquals(strDate, "1999-11-26T11:43:10-12:00", "Bug ");
+		assertEquals(strDate, "1999-11-26T11:43:10-12:00", "Bug ");
 
 		date = new JDFDate("1999-11-26T11:43:10.12345-03:00");
 		strDate = date.getDateTimeISO();
-		Assertions.assertTrue(strDate.equals("1999-11-26T11:43:10-03:00"), "Bug " + strDate + " is not equal to 1999-11-26T11:43:10-03:00");
+		assertTrue(strDate.equals("1999-11-26T11:43:10-03:00"), "Bug " + strDate + " is not equal to 1999-11-26T11:43:10-03:00");
 
 		date = new JDFDate("2004-11-26T11:43:10.-03:00");
 		strDate = date.getDateTimeISO();
-		Assertions.assertTrue(strDate.equals("2004-11-26T11:43:10-03:00"), "Bug " + strDate + " is not equal to 2004-11-26T11:43:10-03:00");
+		assertTrue(strDate.equals("2004-11-26T11:43:10-03:00"), "Bug " + strDate + " is not equal to 2004-11-26T11:43:10-03:00");
 	}
 
 	/**
@@ -581,10 +612,10 @@ class JDFDateTest extends JDFTestCaseBase
 		// summer
 		date = new JDFDate("1999-09-26T11:43:10+03:00");
 		strDate = date.getDateTimeISO();
-		Assertions.assertEquals(strDate, "1999-09-26T11:43:10.000+03:00");
+		assertEquals(strDate, "1999-09-26T11:43:10.000+03:00");
 		date = new JDFDate("2018-09-26T11:43:10.777+07:00");
 		strDate = date.getDateTimeISO();
-		Assertions.assertEquals(strDate, "2018-09-26T11:43:10.777+07:00");
+		assertEquals(strDate, "2018-09-26T11:43:10.777+07:00");
 
 	}
 
@@ -602,10 +633,10 @@ class JDFDateTest extends JDFTestCaseBase
 		// summer
 		date = new JDFDate("1999-09-26T11");
 		strDate = date.getDateTimeISO();
-		Assertions.assertTrue(strDate.startsWith("1999-09-26T11:00:00.000"));
+		assertTrue(strDate.startsWith("1999-09-26T11:00:00.000"));
 		date = new JDFDate("2018-09-26T11:43");
 		strDate = date.getDateTimeISO();
-		Assertions.assertTrue(strDate.startsWith("2018-09-26T11:43:00.000"));
+		assertTrue(strDate.startsWith("2018-09-26T11:43:00.000"));
 
 	}
 
@@ -623,10 +654,10 @@ class JDFDateTest extends JDFTestCaseBase
 		// summer
 		date = new JDFDate("1999-09-26T11:43:10+03:00");
 		strDate = date.getTimeISO();
-		Assertions.assertEquals(strDate, "11:43:10.000");
+		assertEquals(strDate, "11:43:10.000");
 		date = new JDFDate("2018-09-26T11:43:10.777+07:00");
 		strDate = date.getTimeISO();
-		Assertions.assertEquals(strDate, "11:43:10.777");
+		assertEquals(strDate, "11:43:10.777");
 
 	}
 
@@ -638,8 +669,8 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		final JDFDate date1 = new JDFDate();
 		final JDFDate date2 = new JDFDate(date1);
-		Assertions.assertEquals(date1, date2);
-		Assertions.assertTrue(date1.equals(date2));
+		assertEquals(date1, date2);
+		assertTrue(date1.equals(date2));
 	}
 
 	/**
@@ -649,8 +680,10 @@ class JDFDateTest extends JDFTestCaseBase
 	@Test
 	void testRegexp()
 	{
-		Assertions.assertTrue(StringUtil.matches(new JDFDate().getDateTimeISO(), "(19|20)\\d\\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])[T](0[0-9]|1[0-9]|2[0123])[:]([0-5][0-9])[:]([0-5][0-9])([.](\\d)*)?(([+-](0[0-9]|1[0-9]|2[0123])[:](00))|[a-zA-Z])"));
-		Assertions.assertTrue(StringUtil.matches(new JDFDate().getDateTimeISO(), "(19|20)\\d\\d(-)(0[1-9]|1[012])(-)(0[1-9]|[12][0-9]|3[01])[T](0[0-9]|1[0-9]|2[0123])(:)([0-5][0-9])(:)([0-5][0-9])((.)(\\d)*)?(([+-](0[0-9]|1[0-9]|2[0123])(:)(00))|[a-zA-Z])"));
+		assertTrue(StringUtil.matches(new JDFDate().getDateTimeISO(),
+				"(19|20)\\d\\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])[T](0[0-9]|1[0-9]|2[0123])[:]([0-5][0-9])[:]([0-5][0-9])([.](\\d)*)?(([+-](0[0-9]|1[0-9]|2[0123])[:](00))|[a-zA-Z])"));
+		assertTrue(StringUtil.matches(new JDFDate().getDateTimeISO(),
+				"(19|20)\\d\\d(-)(0[1-9]|1[012])(-)(0[1-9]|[12][0-9]|3[01])[T](0[0-9]|1[0-9]|2[0123])(:)([0-5][0-9])(:)([0-5][0-9])((.)(\\d)*)?(([+-](0[0-9]|1[0-9]|2[0123])(:)(00))|[a-zA-Z])"));
 	}
 
 	/**
@@ -670,7 +703,7 @@ class JDFDateTest extends JDFTestCaseBase
 		Arrays.sort(a);
 		for (int i = 0; i < 999; i++)
 		{
-			Assertions.assertTrue(a[i].compareTo(a[i + 1]) < 0);
+			assertTrue(a[i].compareTo(a[i + 1]) < 0);
 		}
 	}
 
@@ -684,11 +717,11 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		final JDFDate date1 = new JDFDate();
 		final JDFDate date2 = new JDFDate();
-		Assertions.assertEquals(date1.compareTo(date2), 0);
+		assertEquals(date1.compareTo(date2), 0);
 		date2.addOffset(0, 0, 0, 1); // it is now later
-		Assertions.assertTrue(date1.compareTo(date2) < 0);
-		Assertions.assertTrue(date2.compareTo(date1) > 0);
-		Assertions.assertTrue(date2.compareTo(date2) == 0);
+		assertTrue(date1.compareTo(date2) < 0);
+		assertTrue(date2.compareTo(date1) > 0);
+		assertTrue(date2.compareTo(date2) == 0);
 	}
 
 	/**
@@ -699,10 +732,10 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		final JDFDate date1 = new JDFDate();
 		final JDFDate date2 = new JDFDate(date1);
-		Assertions.assertFalse(date1.before(date2.getTimeInMillis()));
-		Assertions.assertFalse(date2.before(date1.getTimeInMillis()));
+		assertFalse(date1.before(date2.getTimeInMillis()));
+		assertFalse(date2.before(date1.getTimeInMillis()));
 		date1.addOffset(22, 22, 22, 22);
-		Assertions.assertTrue(date2.before(date1.getTimeInMillis()));
+		assertTrue(date2.before(date1.getTimeInMillis()));
 	}
 
 	/**
@@ -713,11 +746,11 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		final JDFDate date1 = new JDFDate();
 		final JDFDate date2 = new JDFDate(date1);
-		Assertions.assertFalse(date1.isEarlier(date2));
-		Assertions.assertFalse(date2.isEarlier(date1));
-		Assertions.assertFalse(date2.isEarlier(null));
+		assertFalse(date1.isEarlier(date2));
+		assertFalse(date2.isEarlier(date1));
+		assertFalse(date2.isEarlier(null));
 		date1.addOffset(22, 22, 22, 22);
-		Assertions.assertTrue(date2.isEarlier(date1));
+		assertTrue(date2.isEarlier(date1));
 	}
 
 	/**
@@ -728,10 +761,10 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		final JDFDate date1 = new JDFDate();
 		final JDFDate date2 = new JDFDate(date1);
-		Assertions.assertFalse(date1.after(date2.getTimeInMillis()));
-		Assertions.assertFalse(date2.after(date1.getTimeInMillis()));
+		assertFalse(date1.after(date2.getTimeInMillis()));
+		assertFalse(date2.after(date1.getTimeInMillis()));
 		date1.addOffset(22, 22, 22, 22);
-		Assertions.assertTrue(date1.after(date2.getTimeInMillis()));
+		assertTrue(date1.after(date2.getTimeInMillis()));
 	}
 
 	/**
@@ -742,11 +775,11 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		final JDFDate date1 = new JDFDate();
 		final JDFDate date2 = new JDFDate(date1);
-		Assertions.assertFalse(date1.isLater(date2));
-		Assertions.assertFalse(date2.isLater(date1));
-		Assertions.assertTrue(date2.isLater(null));
+		assertFalse(date1.isLater(date2));
+		assertFalse(date2.isLater(date1));
+		assertTrue(date2.isLater(null));
 		date1.addOffset(22, 22, 22, 22);
-		Assertions.assertTrue(date1.isLater(date2));
+		assertTrue(date1.isLater(date2));
 	}
 
 	/**
@@ -757,10 +790,10 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		final JDFDate date1 = new JDFDate();
 		final JDFDate date2 = new JDFDate();
-		Assertions.assertEquals(date1.compareTo(date2), 0);
+		assertEquals(date1.compareTo(date2), 0);
 		date2.addOffset(0, 0, 0, 1); // it is now later
-		Assertions.assertTrue(date1.compareTo(date2.getDateTimeISO()) < 0);
-		Assertions.assertTrue(date2.compareTo(date1.getDateTimeISO()) > 0);
+		assertTrue(date1.compareTo(date2.getDateTimeISO()) < 0);
+		assertTrue(date2.compareTo(date1.getDateTimeISO()) > 0);
 	}
 
 	/**
@@ -771,31 +804,31 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		final JDFDate date1 = new JDFDate();
 		final JDFDate date2 = new JDFDate(date1);
-		Assertions.assertEquals(date1.compareTo(date2), 0);
+		assertEquals(date1.compareTo(date2), 0);
 		date2.addOffset(0, 0, 0, 1); // it is now later
-		Assertions.assertEquals(date1.toString().compareTo(date2.toString()), -1);
+		assertEquals(date1.toString().compareTo(date2.toString()), -1);
 		date1.addOffset(0, 0, 24, 0); // it is now later
-		Assertions.assertEquals(date1.toString().compareTo(date2.toString()), 0);
-		Assertions.assertEquals(date1.compareTo(date2), 0);
+		assertEquals(date1.toString().compareTo(date2.toString()), 0);
+		assertEquals(date1.compareTo(date2), 0);
 		date2.addOffset(60, 0, 0, 1); // it is now later
 		date1.addOffset(0, 1, 24, 0); // it is now later
-		Assertions.assertEquals(date1.compareTo(date2), 0);
+		assertEquals(date1.compareTo(date2), 0);
 		date2.addOffset(0, 60, 0, 1); // it is now later
 		date1.addOffset(0, 0, 25, 0); // it is now later
-		Assertions.assertEquals(date1.compareTo(date2), 0);
+		assertEquals(date1.compareTo(date2), 0);
 
 		final JDFDate date = new JDFDate("2007-09-26T11:43:10+03:00");
 		date.addOffset(0, 0, 0, 1); // it is now later
-		Assertions.assertEquals(date.getDateTimeISO(), "2007-09-27T11:43:10+03:00");
+		assertEquals(date.getDateTimeISO(), "2007-09-27T11:43:10+03:00");
 		date.addOffset(0, 0, 0, 1); // it is now later
-		Assertions.assertEquals(date.getDateTimeISO(), "2007-09-28T11:43:10+03:00");
+		assertEquals(date.getDateTimeISO(), "2007-09-28T11:43:10+03:00");
 		date.addOffset(2, 0, 0, 0); // it is now later
-		Assertions.assertEquals(date.getDateTimeISO(), "2007-09-28T11:43:12+03:00");
-		Assertions.assertEquals(date.getDateISO(), "2007-09-28");
+		assertEquals(date.getDateTimeISO(), "2007-09-28T11:43:12+03:00");
+		assertEquals(date.getDateISO(), "2007-09-28");
 		date.addOffset(0, 0, 0, 4); // it is now later
-		Assertions.assertEquals(date.getDateISO(), "2007-10-02");
+		assertEquals(date.getDateISO(), "2007-10-02");
 		date.addOffset(0, 0, 0, 10 * 365 + 3); // it is now 10 years later (the +3 is for leap years)
-		Assertions.assertEquals(date.getDateISO(), "2017-10-02", "big steps are ok ");
+		assertEquals(date.getDateISO(), "2017-10-02", "big steps are ok ");
 	}
 
 	/**
@@ -807,25 +840,25 @@ class JDFDateTest extends JDFTestCaseBase
 		final long timeMilli = 1008745211300L; // 2001-12-19T07:00:11+00:00
 
 		final JDFDate date = new JDFDate(timeMilli);
-		Assertions.assertTrue(date.getTimeInMillis() == timeMilli, "Bug " + date.getTimeInMillis() + " is not equal to 1008745211000L");
+		assertTrue(date.getTimeInMillis() == timeMilli, "Bug " + date.getTimeInMillis() + " is not equal to 1008745211000L");
 
 		final String strDate = date.getDateTimeISO();
 		final JDFDate date2 = new JDFDate("2001-12-19T07:00:11.300+00:00");
 
 		final String strDate2 = date2.getDateTimeISO();
-		Assertions.assertEquals(date, date2, "Bug " + strDate + " is not equal to " + strDate2);
+		assertEquals(date, date2, "Bug " + strDate + " is not equal to " + strDate2);
 
 		final JDFDate date3 = new JDFDate("2001-12-19T07:00:11.300-00:00");
 		final String strDate3 = date3.getDateTimeISO();
-		Assertions.assertEquals(date, date3, "Bug " + strDate + " is not equal to " + strDate3);
+		assertEquals(date, date3, "Bug " + strDate + " is not equal to " + strDate3);
 
 		final JDFDate date4 = new JDFDate("2001-12-19T07:00:11.300Z");
 		final String strDate4 = date4.getDateTimeISO();
-		Assertions.assertEquals(date, date4, "Bug " + strDate + " is not equal to " + strDate4);
+		assertEquals(date, date4, "Bug " + strDate + " is not equal to " + strDate4);
 
 		final JDFDate dateLess = new JDFDate(timeMilli / 1000l);
-		Assertions.assertEquals(dateLess.getDateISO(), date.getDateISO());
-		Assertions.assertEquals(dateLess.getDateTimeISO(), date.getDateTimeISO());
+		assertEquals(dateLess.getDateISO(), date.getDateISO());
+		assertEquals(dateLess.getDateTimeISO(), date.getDateTimeISO());
 	}
 
 	/**
@@ -837,7 +870,7 @@ class JDFDateTest extends JDFTestCaseBase
 		try
 		{
 			new JDFDate().getFormattedDateTime("abc");
-			Assertions.fail("Illegal");
+			fail("Illegal");
 		}
 		catch (final IllegalArgumentException x)
 		{
@@ -853,15 +886,15 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		final String dateString = "2008-11-19T20:00:11.300+00:00";
 		final JDFDate date = new JDFDate(dateString);
-		Assertions.assertEquals("2008", date.getFormattedDateTime("yyyy"));
-		Assertions.assertEquals("11", date.getFormattedDateTime("MM"));
-		Assertions.assertEquals("Nov", date.getFormattedDateTime("MMM"));
-		Assertions.assertEquals("Nov 19 2008 - 20:00", date.getFormattedDateTime("MMM dd yyyy - HH:mm"));
-		Assertions.assertEquals("300", date.getFormattedDateTime("SSS")); // test for milliseconds
-		Assertions.assertEquals("300", date.getFormattedDateTime("S")); // test for milliseconds
-		Assertions.assertEquals(dateString, date.getFormattedDateTime("yyyy'-'MM'-'dd'T'HH:mm:ss.SSSZZ"));
-		Assertions.assertEquals(dateString, date.getFormattedDateTime("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"));
-		Assertions.assertEquals("11 19-20:00:11", date.getFormattedDateTime("MM dd-HH:mm:ss"));
+		assertEquals("2008", date.getFormattedDateTime("yyyy"));
+		assertEquals("11", date.getFormattedDateTime("MM"));
+		assertEquals("Nov", date.getFormattedDateTime("MMM"));
+		assertEquals("Nov 19 2008 - 20:00", date.getFormattedDateTime("MMM dd yyyy - HH:mm"));
+		assertEquals("300", date.getFormattedDateTime("SSS")); // test for milliseconds
+		assertEquals("300", date.getFormattedDateTime("S")); // test for milliseconds
+		assertEquals(dateString, date.getFormattedDateTime("yyyy'-'MM'-'dd'T'HH:mm:ss.SSSZZ"));
+		assertEquals(dateString, date.getFormattedDateTime("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"));
+		assertEquals("11 19-20:00:11", date.getFormattedDateTime("MM dd-HH:mm:ss"));
 	}
 
 	/**
@@ -872,11 +905,11 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		final String dateString = "2008-01-19T20:00:11+00:00";
 		final JDFDate date = new JDFDate(dateString);
-		Assertions.assertEquals("01", date.getFormattedDateTime("MM"));
-		Assertions.assertEquals("1", date.getFormattedDateTime("M"));
+		assertEquals("01", date.getFormattedDateTime("MM"));
+		assertEquals("1", date.getFormattedDateTime("M"));
 		date.addOffset(0, 0, 0, 300);
-		Assertions.assertEquals("11", date.getFormattedDateTime("MM"));
-		Assertions.assertEquals("11", date.getFormattedDateTime("M"));
+		assertEquals("11", date.getFormattedDateTime("MM"));
+		assertEquals("11", date.getFormattedDateTime("M"));
 	}
 
 	/**
@@ -886,7 +919,7 @@ class JDFDateTest extends JDFTestCaseBase
 	void testGetDateTime() throws Exception
 	{
 		final JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
-		Assertions.assertEquals("20081219070011", date.getDateTime());
+		assertEquals("20081219070011", date.getDateTime());
 	}
 
 	/**
@@ -897,7 +930,7 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 
 		final JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
-		Assertions.assertEquals(12, date.getMonth());
+		assertEquals(12, date.getMonth());
 	}
 
 	/**
@@ -907,7 +940,7 @@ class JDFDateTest extends JDFTestCaseBase
 	void testGetYear() throws Exception
 	{
 		final JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
-		Assertions.assertEquals(2008, date.getYear());
+		assertEquals(2008, date.getYear());
 	}
 
 	/**
@@ -917,7 +950,7 @@ class JDFDateTest extends JDFTestCaseBase
 	void testGetDay() throws Exception
 	{
 		final JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
-		Assertions.assertEquals(19, date.getDay());
+		assertEquals(19, date.getDay());
 	}
 
 	/**
@@ -935,7 +968,7 @@ class JDFDateTest extends JDFTestCaseBase
 		log.info(Locale.getDefault() + " " + formattedDateTime);
 		Locale.setDefault(Locale.GERMANY);
 		formattedDateTime = date.getFormattedDateTime("ww");
-		Assertions.assertEquals("53", formattedDateTime);
+		assertEquals("53", formattedDateTime);
 		log.info(Locale.getDefault() + " " + formattedDateTime);
 		Locale.setDefault(l);
 		formattedDateTime = date.getFormattedDateTime("ww");
@@ -949,7 +982,7 @@ class JDFDateTest extends JDFTestCaseBase
 	void testGetHour() throws Exception
 	{
 		final JDFDate date = new JDFDate("2008-12-19T17:20:11.300+00:00");
-		Assertions.assertEquals(17, date.getHour());
+		assertEquals(17, date.getHour());
 	}
 
 	/**
@@ -959,7 +992,7 @@ class JDFDateTest extends JDFTestCaseBase
 	void testGetMinute() throws Exception
 	{
 		final JDFDate date = new JDFDate("2008-12-19T07:20:11.300+00:00");
-		Assertions.assertEquals(20, date.getMinute());
+		assertEquals(20, date.getMinute());
 	}
 
 	/**
@@ -969,7 +1002,7 @@ class JDFDateTest extends JDFTestCaseBase
 	void testGetSecond() throws Exception
 	{
 		final JDFDate date = new JDFDate("2008-12-19T07:20:11.800+00:00");
-		Assertions.assertEquals(11, date.getSecond());
+		assertEquals(11, date.getSecond());
 	}
 
 	/**
@@ -987,7 +1020,7 @@ class JDFDateTest extends JDFTestCaseBase
 			d = new JDFDate(d.getDateTimeISO());
 			if (i > 0)
 			{
-				Assertions.assertTrue(d.isLater(v[i - 1]));
+				assertTrue(d.isLater(v[i - 1]));
 			}
 		}
 	}
@@ -1000,17 +1033,17 @@ class JDFDateTest extends JDFTestCaseBase
 	void testNoTimeZone() throws DataFormatException
 	{
 		JDFDate date = new JDFDate("1999-09-26T11:43:10+03:00");
-		Assertions.assertNotNull(date);
-		Assertions.assertEquals(3600000l * 3, date.getTimeZoneOffsetInMillis());
+		assertNotNull(date);
+		assertEquals(3600000l * 3, date.getTimeZoneOffsetInMillis());
 		date = new JDFDate("1999-07-26");
-		Assertions.assertNotNull(date);
-		Assertions.assertEquals(TimeZone.getDefault().getOffset(date.getTimeInMillis()), date.getTimeZoneOffsetInMillis());
+		assertNotNull(date);
+		assertEquals(TimeZone.getDefault().getOffset(date.getTimeInMillis()), date.getTimeZoneOffsetInMillis());
 		date = new JDFDate("1999-09-26T11:43:10");
-		Assertions.assertNotNull(date);
-		Assertions.assertEquals(TimeZone.getDefault().getOffset(date.getTimeInMillis()), date.getTimeZoneOffsetInMillis());
+		assertNotNull(date);
+		assertEquals(TimeZone.getDefault().getOffset(date.getTimeInMillis()), date.getTimeZoneOffsetInMillis());
 		date = new JDFDate("1999-11-26T11:43:10.04");
-		Assertions.assertNotNull(date);
-		Assertions.assertEquals(TimeZone.getDefault().getOffset(date.getTimeInMillis()), date.getTimeZoneOffsetInMillis());
+		assertNotNull(date);
+		assertEquals(TimeZone.getDefault().getOffset(date.getTimeInMillis()), date.getTimeZoneOffsetInMillis());
 	}
 
 	/**
@@ -1021,7 +1054,7 @@ class JDFDateTest extends JDFTestCaseBase
 	void testToString() throws DataFormatException
 	{
 		final JDFDate date = new JDFDate("2015-02-26T11:43:10+03:00");
-		Assertions.assertTrue(date.toString().endsWith("2015-02-26T11:43:10+03:00]"));
+		assertTrue(date.toString().endsWith("2015-02-26T11:43:10+03:00]"));
 	}
 
 	/**
@@ -1034,13 +1067,13 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		final TimeZone t = TimeZone.getDefault();
 		JDFDate d = new JDFDate();
-		Assertions.assertEquals(t.getOffset(System.currentTimeMillis()), d.getTimeZoneOffsetInMillis());
+		assertEquals(t.getOffset(System.currentTimeMillis()), d.getTimeZoneOffsetInMillis());
 		boolean bSummer = false;
 		final JDFDate dNow = new JDFDate();
 		for (long i = 0; i < 4; i++)
 		{
 			d = new JDFDate(System.currentTimeMillis() + i * 100l * 24l * 60l * 60l * 1000l);
-			Assertions.assertEquals(t.getOffset(System.currentTimeMillis() + i * 100l * 24l * 60l * 60l * 1000l), d.getTimeZoneOffsetInMillis());
+			assertEquals(t.getOffset(System.currentTimeMillis() + i * 100l * 24l * 60l * 60l * 1000l), d.getTimeZoneOffsetInMillis());
 
 			log.info("dNow.getTimeZoneISO: " + dNow.getTimeZoneISO() + "; d.TimeZoneISO: " + d.getTimeZoneISO());
 
@@ -1050,12 +1083,12 @@ class JDFDateTest extends JDFTestCaseBase
 			}
 
 			final JDFDate d4 = new JDFDate(d.getDateTimeISO());
-			Assertions.assertEquals(d.getDateTimeISO(), d4.getDateTimeISO());
+			assertEquals(d.getDateTimeISO(), d4.getDateTimeISO());
 		}
 
 		if (PlatformUtil.isWindows() && d.getTimeZoneOffsetInMillis() < 1000 * 3600 * 4 && d.getTimeZoneOffsetInMillis() >= 0)
 		{
-			Assertions.assertTrue(bSummer, "timezone test only in europe...");
+			assertTrue(bSummer, "timezone test only in europe...");
 		}
 	}
 

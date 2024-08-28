@@ -87,6 +87,7 @@ public class FixVersionImpl extends PackageElementWalker
 	// hours for missing times in dates
 	int firsthour;
 	int lasthour;
+	int newYear;
 
 	/**
 	 * @return the bZappDeprecated
@@ -169,8 +170,19 @@ public class FixVersionImpl extends PackageElementWalker
 		bFixNewDuplicate = false;
 		firsthour = 6;
 		lasthour = 18;
+		newYear = -1;
 		ignoreMap = new ListMap<>();
 		ignoreMap.setUnique(true);
+	}
+
+	public int getNewYear()
+	{
+		return newYear;
+	}
+
+	public void setNewYear(final int newYear)
+	{
+		this.newYear = newYear;
 	}
 
 	/**
@@ -187,6 +199,10 @@ public class FixVersionImpl extends PackageElementWalker
 		bLayoutPrepToStripping = fixVersion.bLayoutPrepToStripping;
 		bFixNewDuplicate = fixVersion.bFixNewDuplicate;
 		ignoreMap = fixVersion.ignoreMap;
+		firsthour = fixVersion.firsthour;
+		lasthour = fixVersion.lasthour;
+		newYear = fixVersion.newYear;
+
 	}
 
 	/**

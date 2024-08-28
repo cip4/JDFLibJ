@@ -427,6 +427,20 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
+	 * parse a JDF string
+	 *
+	 * @param file
+	 * @return the parsed JDFDoc
+	 */
+	public static JDFDoc parseString(final String string)
+	{
+		final JDFParser p = JDFParserFactory.getFactory().get();
+		final JDFDoc doc = p.parseString(string);
+		JDFParserFactory.getFactory().push(p);
+		return doc;
+	}
+
+	/**
 	 * parse a JDF file
 	 *
 	 * @param fileName

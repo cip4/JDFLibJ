@@ -6923,4 +6923,48 @@ public class JDFElement extends KElement
 		infotables = null;
 		return super.init();
 	}
+
+	/**
+	 *
+	 * @param filename
+	 * @return
+	 */
+	public static JDFElement parseFile(final File file)
+	{
+		final JDFDoc f = JDFDoc.parseFile(file);
+		return f == null ? null : (JDFElement) f.getRoot();
+	}
+
+	/**
+	 *
+	 * @param filename
+	 * @return
+	 */
+	public static JDFElement parseFile(final String filename)
+	{
+		final JDFDoc f = JDFDoc.parseFile(filename);
+		return f == null ? null : (JDFElement) f.getRoot();
+	}
+
+	/**
+	 *
+	 * @param s
+	 * @return
+	 */
+	public static JDFElement parseStream(final InputStream s)
+	{
+		final JDFDoc f = JDFDoc.parseStream(s);
+		return f == null ? null : (JDFElement) f.getRoot();
+	}
+
+	/**
+	 *
+	 * @param string
+	 * @return
+	 */
+	public static JDFElement parseString(final String string)
+	{
+		final JDFDoc f = JDFDoc.parseString(string);
+		return f == null ? null : (JDFElement) f.getRoot();
+	}
 }

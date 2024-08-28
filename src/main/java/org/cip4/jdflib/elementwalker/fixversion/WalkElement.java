@@ -385,14 +385,18 @@ public class WalkElement extends BaseWalker
 			else if (check.endsWith(AttributeName.START) || AttributeName.EARLIEST.equals(check))
 				hour = fixVersion.firsthour;
 		}
-		try
+		final JDFDate d = JDFDate.createDate(value);
+		if (d != null)
 		{
-			el.setAttribute(key, new JDFDate(value, hour, 0).getDateTimeISO());
+			if (hour >= 0)
+				d.setTime(hour, hour, hour);
+			if (fixVersion.newYear > 0)
+			{
+				d.setYear(fixVersion.newYear);
+			}
 		}
-		catch (final DataFormatException ex)
-		{
-			// nop - continue
-		}
+		el.setAttribute(key, d.getDateTimeISO());
+
 	}
 
 	/**

@@ -231,8 +231,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * Allocates a <code>JDFDate</code> object and initializes it so that it represents the time at which it was allocated, measured to the nearest millisecond. Also sets the current time zone to the
-	 * system default time zone
+	 * Allocates a <code>JDFDate</code> object and initializes it so that it represents the time at which it was allocated, measured to the nearest millisecond. Also sets the
+	 * current time zone to the system default time zone
 	 */
 	public JDFDate()
 	{
@@ -240,8 +240,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * Allocates a <code>JDFDate</code> object and initializes it so that it represents the time point, expressed in milliseconds after January 1, 1970, 0:00:00 GMT. Also sets the current time zone to
-	 * the system default time zone
+	 * Allocates a <code>JDFDate</code> object and initializes it so that it represents the time point, expressed in milliseconds after January 1, 1970, 0:00:00 GMT. Also sets the
+	 * current time zone to the system default time zone
 	 *
 	 * @param iTime current time in milliseconds after January 1, 1970, 0:00:00 GMT. Use JDFDuration instead. This class will be modified to handle only JDFDate objects
 	 */
@@ -300,7 +300,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * @param strDateTime formatted date and time
 	 * @throws DataFormatException if strDateTime is not a valid DateTime
 	 *
-	 *             Attention! you can enter milliseconds, but getDateTimeISO() still returns the time rounded to full seconds only long getTimeInMillis() returns the exact time
+	 *         Attention! you can enter milliseconds, but getDateTimeISO() still returns the time rounded to full seconds only long getTimeInMillis() returns the exact time
 	 */
 	public JDFDate(final String strDateTime) throws DataFormatException
 	{
@@ -1069,8 +1069,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * Compares two JDFDates for equality.<br>
-	 * The result is <code>true</code> if and only if the argument is not <code>null</code> and is a <code>JDFDate</code> object that represents the same point in time, to the millisecond, as this
-	 * object.
+	 * The result is <code>true</code> if and only if the argument is not <code>null</code> and is a <code>JDFDate</code> object that represents the same point in time, to the
+	 * millisecond, as this object.
 	 * <p>
 	 * Thus, two <code>JDFDate</code> objects are equal if and only if the <code>getTimeInMillis</code> method returns the same <code>long</code> value for both.
 	 */
@@ -1104,8 +1104,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 *
-	 * @see java.lang.Comparable#compareTo(java.lang.Object) the value 0 if the argument is a Date equal to this Date; a value less than 0 if the argument is a Date after this Date; and a value
-	 *      greater than 0 if the argument is a Date before this Date.
+	 * @see java.lang.Comparable#compareTo(java.lang.Object) the value 0 if the argument is a Date equal to this Date; a value less than 0 if the argument is a Date after this
+	 *      Date; and a value greater than 0 if the argument is a Date before this Date.
 	 */
 	@Override
 	public int compareTo(final Object arg0)
@@ -1195,5 +1195,17 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	public int getSecond()
 	{
 		return getCalendar().get(Calendar.SECOND);
+	}
+
+	/**
+	 * not performance optimized dirty hack...
+	 * 
+	 * @param newYear
+	 */
+	public void setYear(final int newYear)
+	{
+		String s = getDateTimeISO();
+		s = StringUtil.replaceToken(s, 0, "-", StringUtil.rightStr("0000" + Integer.valueOf(newYear), 4));
+		setTimeInMillis(createDate(s).getTimeInMillis());
 	}
 }
