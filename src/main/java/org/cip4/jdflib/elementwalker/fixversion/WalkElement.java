@@ -385,22 +385,34 @@ public class WalkElement extends BaseWalker
 			hour = StringUtil.parseInt(StringUtil.substring(timeToken, 0, 2), -1);
 			minute = StringUtil.parseInt(StringUtil.substring(timeToken, 3, 5), 0);
 			if (hour < 0)
-				if (check.endsWith(AttributeName.END) || AttributeName.REQUIRED.equals(check))
-					hour = fixVersion.lasthour;
-				else if (check.endsWith(AttributeName.START) || AttributeName.EARLIEST.equals(check))
-					hour = fixVersion.firsthour;
-		}
-		final JDFDate d = JDFDate.createDate(value);
-		if (d != null && (hour > 0 || fixVersion.newYear > 0))
-		{
-			if (hour >= 0 && d.getHour() == JDFDate.getDefaultHour() && d.getMinute() == 0)
-				d.setTime(hour, minute, 0);
-			if (fixVersion.newYear > 0)
 			{
-				d.setYear(fixVersion.newYear);
+				if (check.endsWith(AttributeName.END) || AttributeName.REQUIRED.equals(check))
+				{
+					hour = fixVersion.lasthour;
+				}
+				else if (check.endsWith(AttributeName.START) || AttributeName.EARLIEST.equals(check))
+				{
+					hour = fixVersion.firsthour;
+				}
 			}
 		}
-		el.setAttribute(key, d.getDateTimeISO());
+		final JDFDate d = JDFDate.createDate(value);
+		if (d != null)
+		{
+			if (hour > 0 || fixVersion.newYear > 0)
+			{
+				if (hour >= 0 && d.getHour() == JDFDate.getDefaultHour() && d.getMinute() == 0)
+				{
+					d.setTime(hour, minute, 0);
+				}
+				if (fixVersion.newYear > 0)
+				{
+					d.setYear(fixVersion.newYear);
+				}
+			}
+			el.setAttribute(key, d.getDateTimeISO());
+		}
+		el.removeAttribute(key);
 	}
 
 	/**

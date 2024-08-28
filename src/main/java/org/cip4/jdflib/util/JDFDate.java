@@ -1206,6 +1206,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	{
 		String s = getDateTimeISO();
 		s = StringUtil.replaceToken(s, 0, "-", StringUtil.rightStr("0000" + Integer.valueOf(newYear), 4));
-		setTimeInMillis(createDate(s).getTimeInMillis());
+		final JDFDate snew = createDate(s);
+		if (snew != null)
+			setTimeInMillis(snew.getTimeInMillis());
 	}
 }
