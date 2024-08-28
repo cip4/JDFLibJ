@@ -672,6 +672,25 @@ class FixVersionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testNodeInfoTimePart()
+	{
+		final JDFNodeInfo ni = n.appendNodeInfo();
+		ni.setAttribute(AttributeName.START, new JDFDate().getDateISO() + "T15");
+		ni.setAttribute(AttributeName.LASTEND, new JDFDate().getDateISO() + "T12:30");
+		ni.setAttribute(AttributeName.FIRSTSTART, new JDFDate().getDateISO() + "TZ");
+		final FixVersion fixVersion = new FixVersion((EnumVersion) null);
+		fixVersion.setBZappInvalid(true);
+		final boolean converted = fixVersion.convert(n);
+		assertTrue(converted);
+		assertTrue(ni.getAttribute(AttributeName.START).indexOf("T15:00") > 0);
+		assertTrue(ni.getAttribute(AttributeName.LASTEND).indexOf("T12:30") > 0);
+		assertTrue(ni.getAttribute(AttributeName.FIRSTSTART).indexOf("T06:00") > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testNodeInfoTimeSet()
 	{
 		final JDFNodeInfo ni = n.appendNodeInfo();

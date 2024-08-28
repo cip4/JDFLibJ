@@ -373,30 +373,34 @@ public class WalkElement extends BaseWalker
 	void fixDateTime(final JDFElement el, final String key, final String value)
 	{
 		int hour = -1;
+		int minute = 0;
 		String check = key;
 		if (el instanceof JDFTimeSpan)
 		{
 			check = el.getLocalName();
 		}
-		if (check != null)
+		final String timeToken = StringUtil.token(value, 1, "T");
+		if (check != null && StringUtil.length(timeToken) < 9)
 		{
-			if (check.endsWith(AttributeName.END) || AttributeName.REQUIRED.equals(check))
-				hour = fixVersion.lasthour;
-			else if (check.endsWith(AttributeName.START) || AttributeName.EARLIEST.equals(check))
-				hour = fixVersion.firsthour;
+			hour = StringUtil.parseInt(StringUtil.substring(timeToken, 0, 2), -1);
+			minute = StringUtil.parseInt(StringUtil.substring(timeToken, 3, 5), 0);
+			if (hour < 0)
+				if (check.endsWith(AttributeName.END) || AttributeName.REQUIRED.equals(check))
+					hour = fixVersion.lasthour;
+				else if (check.endsWith(AttributeName.START) || AttributeName.EARLIEST.equals(check))
+					hour = fixVersion.firsthour;
 		}
 		final JDFDate d = JDFDate.createDate(value);
-		if (d != null)
+		if (d != null && (hour > 0 || fixVersion.newYear > 0))
 		{
-			if (hour >= 0)
-				d.setTime(hour, hour, hour);
+			if (hour >= 0 && d.getHour() == JDFDate.getDefaultHour() && d.getMinute() == 0)
+				d.setTime(hour, minute, 0);
 			if (fixVersion.newYear > 0)
 			{
 				d.setYear(fixVersion.newYear);
 			}
 		}
 		el.setAttribute(key, d.getDateTimeISO());
-
 	}
 
 	/**
