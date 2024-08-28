@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,16 +71,21 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -106,8 +111,8 @@ class UnlinkFinderTest extends JDFTestCaseBase
 	{
 		final UnLinkFinder uf = new UnLinkFinder();
 		final VElement v = uf.getUnlinkedResources(n);
-		Assertions.assertEquals(v.size(), 1);
-		Assertions.assertTrue(v.contains(r));
+		assertEquals(v.size(), 1);
+		assertTrue(v.contains(r));
 	}
 
 	/**
@@ -118,10 +123,10 @@ class UnlinkFinderTest extends JDFTestCaseBase
 	{
 		final UnLinkFinder uf = new UnLinkFinder();
 		final VElement v = uf.getAllUnlinked(n);
-		Assertions.assertEquals(v.size(), 3);
-		Assertions.assertTrue(v.contains(r));
-		Assertions.assertTrue(v.contains(rl));
-		Assertions.assertTrue(v.contains(re));
+		assertEquals(v.size(), 3);
+		assertTrue(v.contains(r));
+		assertTrue(v.contains(rl));
+		assertTrue(v.contains(re));
 	}
 
 	/**
@@ -132,9 +137,9 @@ class UnlinkFinderTest extends JDFTestCaseBase
 	{
 		final UnLinkFinder uf = new UnLinkFinder();
 		final VElement v = uf.getUnlinkedRefs(n);
-		Assertions.assertEquals(v.size(), 2);
-		Assertions.assertTrue(v.contains(rl));
-		Assertions.assertTrue(v.contains(re));
+		assertEquals(v.size(), 2);
+		assertTrue(v.contains(rl));
+		assertTrue(v.contains(re));
 	}
 
 	/**
@@ -146,11 +151,11 @@ class UnlinkFinderTest extends JDFTestCaseBase
 		final UnLinkFinder uf = new UnLinkFinder();
 		uf.eraseUnlinkedResources(n);
 		VElement v = uf.getUnlinkedResources(n);
-		Assertions.assertNull(v);
+		assertNull(v);
 		v = uf.getUnlinkedRefs(n);
-		Assertions.assertEquals(v.size(), 2);
+		assertEquals(v.size(), 2);
 		v = uf.getAllUnlinked(n);
-		Assertions.assertEquals(v.size(), 2);
+		assertEquals(v.size(), 2);
 
 	}
 
@@ -163,11 +168,11 @@ class UnlinkFinderTest extends JDFTestCaseBase
 		final UnLinkFinder uf = new UnLinkFinder();
 		uf.eraseUnlinkedRefs(n);
 		VElement v = uf.getUnlinkedResources(n);
-		Assertions.assertEquals(v.size(), 1);
+		assertEquals(v.size(), 1);
 		v = uf.getAllUnlinked(n);
-		Assertions.assertEquals(v.size(), 1);
+		assertEquals(v.size(), 1);
 		v = uf.getUnlinkedRefs(n);
-		Assertions.assertNull(v);
+		assertNull(v);
 	}
 
 	/**
@@ -183,11 +188,11 @@ class UnlinkFinderTest extends JDFTestCaseBase
 		uf.setIgnoreForeign(true);
 		uf.eraseUnlinkedRefs(n);
 		VElement v = uf.getUnlinkedResources(n);
-		Assertions.assertEquals(v.size(), 1);
+		assertEquals(v.size(), 1);
 		v = uf.getAllUnlinked(n);
-		Assertions.assertEquals(v.size(), 1);
+		assertEquals(v.size(), 1);
 		v = uf.getUnlinkedRefs(n);
-		Assertions.assertNull(v);
+		assertNull(v);
 	}
 
 	/**
@@ -199,11 +204,30 @@ class UnlinkFinderTest extends JDFTestCaseBase
 		final UnLinkFinder uf = new UnLinkFinder();
 		uf.eraseUnlinked(n);
 		VElement v = uf.getUnlinkedResources(n);
-		Assertions.assertNull(v);
+		assertNull(v);
 		v = uf.getUnlinkedRefs(n);
-		Assertions.assertNull(v);
+		assertNull(v);
 		v = uf.getAllUnlinked(n);
-		Assertions.assertNull(v);
+		assertNull(v);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testEraseUlinkedElem()
+	{
+		final KElement add = n.getResourcePool().appendElement(ElementName.ADDRESS);
+		add.setAttribute(AttributeName.ID, "id_add");
+		final UnLinkFinder uf = new UnLinkFinder();
+		VElement v = uf.getUnlinkedResources(n);
+		assertTrue(v.contains(add));
+		uf.eraseUnlinked(n);
+		v = uf.getUnlinkedResources(n);
+		v = uf.getUnlinkedRefs(n);
+		assertNull(v);
+		v = uf.getAllUnlinked(n);
+		assertNull(v);
 	}
 
 	@Override

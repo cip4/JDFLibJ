@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,6 +77,7 @@ import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -84,7 +85,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
-import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.ListMap;
 
@@ -225,7 +226,7 @@ public class UnLinkFinder extends BaseElementWalker
 		int siz = ContainerUtil.size(v);
 		if (siz > 0 && v != null)
 		{
-			for (KElement e : v)
+			for (final KElement e : v)
 			{
 				e.deleteNode();
 			}
@@ -288,7 +289,7 @@ public class UnLinkFinder extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			final JDFResource r = (JDFResource) e;
+			final JDFElement r = (JDFElement) e;
 			final String id = r.getID();
 			if (linkData.doneSet.contains(id))
 			{
@@ -314,7 +315,8 @@ public class UnLinkFinder extends BaseElementWalker
 		{
 			if (ignoreForeign && !JDFElement.isInJDFNameSpaceStatic(toCheck))
 				return false;
-			return (toCheck instanceof JDFResource) && (toCheck.getParentNode() instanceof JDFResourcePool);
+			return (toCheck.getParentNode() instanceof JDFResourcePool) && (toCheck instanceof JDFElement) && !(toCheck instanceof JDFComment)
+					&& !(toCheck instanceof JDFGeneralID);
 		}
 	}
 
