@@ -297,6 +297,16 @@ public abstract class JDFAutoContact extends JDFResource
 	}
 
 	/**
+	 * (31) create inter-resource link to refTarget
+	 *
+	 * @param refTarget the element that is referenced
+	 */
+	public void refAddress(JDFAddress refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/**
 	 * (24) const get element ComChannel
 	 *
 	 * @return JDFComChannel the element
@@ -436,6 +446,16 @@ public abstract class JDFAutoContact extends JDFResource
 	public JDFPerson appendPerson()
 	{
 		return (JDFPerson) appendElementN(ElementName.PERSON, 1, null);
+	}
+
+	/**
+	 * (31) create inter-resource link to refTarget
+	 *
+	 * @param refTarget the element that is referenced
+	 */
+	public void refPerson(JDFPerson refTarget)
+	{
+		refElement(refTarget);
 	}
 
 }

@@ -81,15 +81,16 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
  *****************************************************************************
- * class JDFAutoAddress : public JDFElement
+ * class JDFAutoAddress : public JDFResource
  *****************************************************************************
  * 
  */
 
-public abstract class JDFAutoAddress extends JDFElement
+public abstract class JDFAutoAddress extends JDFResource
 {
 
 	private static final long serialVersionUID = 1L;
@@ -97,9 +98,9 @@ public abstract class JDFAutoAddress extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDRESSUSAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDRESSUSAGE, 0x3333111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CITY, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.CIVICNUMBER, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CIVICNUMBER, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.COUNTRY, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.COUNTRYCODE, 0x3333333333l, AttributeInfo.EnumAttributeType.Any, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.POSTBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -117,8 +118,8 @@ public abstract class JDFAutoAddress extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ADDRESSLINE, 0x3333333333l);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.EXTENDEDADDRESS, 0x3333333333l);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ADDRESSLINE, 0x3333111111l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EXTENDEDADDRESS, 0x6666666666l);
 	}
 
 	@Override
@@ -161,6 +162,26 @@ public abstract class JDFAutoAddress extends JDFElement
 	protected JDFAutoAddress(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * @return true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
+
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
 	}
 
 	/*
@@ -462,45 +483,13 @@ public abstract class JDFAutoAddress extends JDFElement
 	}
 
 	/**
-	 * (26) getCreateExtendedAddress
-	 * 
-	 * @param iSkip number of elements to skip
-	 * @return JDFElement the element
-	 */
-	public JDFElement getCreateExtendedAddress(int iSkip)
-	{
-		return (JDFElement) getCreateElement_JDFElement(ElementName.EXTENDEDADDRESS, null, iSkip);
-	}
-
-	/**
-	 * (27) const get element ExtendedAddress
+	 * (29) append element ExtendedAddress
 	 *
-	 * @param iSkip number of elements to skip
-	 * @return JDFElement the element default is getExtendedAddress(0)
-	 */
-	public JDFElement getExtendedAddress(int iSkip)
-	{
-		return (JDFElement) getElement(ElementName.EXTENDEDADDRESS, null, iSkip);
-	}
-
-	/**
-	 * Get all ExtendedAddress from the current element
-	 * 
-	 * @return Collection<JDFElement>, null if none are available
-	 */
-	public Collection<JDFElement> getAllExtendedAddress()
-	{
-		return getChildArrayByClass(JDFElement.class, false, 0);
-	}
-
-	/**
-	 * (30) append element ExtendedAddress
-	 *
-	 * @return JDFElement the element
+	 * @return JDFElement the element @ if the element already exists
 	 */
 	public JDFElement appendExtendedAddress()
 	{
-		return (JDFElement) appendElement(ElementName.EXTENDEDADDRESS, null);
+		return (JDFElement) appendElementN(ElementName.EXTENDEDADDRESS, 1, null);
 	}
 
 }

@@ -80,19 +80,19 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAddress;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 
 /**
  *****************************************************************************
- * class JDFAutoPerson : public JDFElement
+ * class JDFAutoPerson : public JDFResource
  *****************************************************************************
  * 
  */
 
-public abstract class JDFAutoPerson extends JDFElement
+public abstract class JDFAutoPerson extends JDFResource
 {
 
 	private static final long serialVersionUID = 1L;
@@ -102,13 +102,13 @@ public abstract class JDFAutoPerson extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDITIONALNAMES, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.FAMILYNAME, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.FIRSTNAME, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBTITLE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.LANGUAGES, 0x3333331111l, AttributeInfo.EnumAttributeType.languages, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.NAMEPREFIX, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.NAMESUFFIX, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.PHONETICFIRSTNAME, 0x3333311111l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.PHONETICLASTNAME, 0x3333311111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PHONETICLASTNAME, 0x3333311111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.FIRSTNAME, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PHONETICFIRSTNAME, 0x3333311111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBTITLE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.LANGUAGES, 0x3333331111l, AttributeInfo.EnumAttributeType.languages, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.NAMEPREFIX, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.NAMESUFFIX, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -166,6 +166,26 @@ public abstract class JDFAutoPerson extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @return true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
+
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
+
 	/*
 	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
@@ -218,6 +238,30 @@ public abstract class JDFAutoPerson extends JDFElement
 	}
 
 	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PhoneticLastName
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute PhoneticLastName
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setPhoneticLastName(String value)
+	{
+		setAttribute(AttributeName.PHONETICLASTNAME, value, null);
+	}
+
+	/**
+	 * (23) get String attribute PhoneticLastName
+	 *
+	 * @return the value of the attribute
+	 */
+	public String getPhoneticLastName()
+	{
+		return getAttribute(AttributeName.PHONETICLASTNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/*
 	 * --------------------------------------------------------------------- Methods for Attribute FirstName ---------------------------------------------------------------------
 	 */
 	/**
@@ -238,6 +282,30 @@ public abstract class JDFAutoPerson extends JDFElement
 	public String getFirstName()
 	{
 		return getAttribute(AttributeName.FIRSTNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PhoneticFirstName
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute PhoneticFirstName
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setPhoneticFirstName(String value)
+	{
+		setAttribute(AttributeName.PHONETICFIRSTNAME, value, null);
+	}
+
+	/**
+	 * (23) get String attribute PhoneticFirstName
+	 *
+	 * @return the value of the attribute
+	 */
+	public String getPhoneticFirstName()
+	{
+		return getAttribute(AttributeName.PHONETICFIRSTNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/*
@@ -336,54 +404,6 @@ public abstract class JDFAutoPerson extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PhoneticFirstName
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute PhoneticFirstName
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setPhoneticFirstName(String value)
-	{
-		setAttribute(AttributeName.PHONETICFIRSTNAME, value, null);
-	}
-
-	/**
-	 * (23) get String attribute PhoneticFirstName
-	 *
-	 * @return the value of the attribute
-	 */
-	public String getPhoneticFirstName()
-	{
-		return getAttribute(AttributeName.PHONETICFIRSTNAME, null, JDFCoreConstants.EMPTYSTRING);
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PhoneticLastName
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute PhoneticLastName
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setPhoneticLastName(String value)
-	{
-		setAttribute(AttributeName.PHONETICLASTNAME, value, null);
-	}
-
-	/**
-	 * (23) get String attribute PhoneticLastName
-	 *
-	 * @return the value of the attribute
-	 */
-	public String getPhoneticLastName()
-	{
-		return getAttribute(AttributeName.PHONETICLASTNAME, null, JDFCoreConstants.EMPTYSTRING);
-	}
-
-	/*
 	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
@@ -415,6 +435,16 @@ public abstract class JDFAutoPerson extends JDFElement
 	public JDFAddress appendAddress()
 	{
 		return (JDFAddress) appendElementN(ElementName.ADDRESS, 1, null);
+	}
+
+	/**
+	 * (31) create inter-resource link to refTarget
+	 *
+	 * @param refTarget the element that is referenced
+	 */
+	public void refAddress(JDFAddress refTarget)
+	{
+		refElement(refTarget);
 	}
 
 	/**
@@ -477,6 +507,16 @@ public abstract class JDFAutoPerson extends JDFElement
 	public JDFComChannel appendComChannel()
 	{
 		return (JDFComChannel) appendElement(ElementName.COMCHANNEL, null);
+	}
+
+	/**
+	 * (31) create inter-resource link to refTarget
+	 *
+	 * @param refTarget the element that is referenced
+	 */
+	public void refComChannel(JDFComChannel refTarget)
+	{
+		refElement(refTarget);
 	}
 
 }
