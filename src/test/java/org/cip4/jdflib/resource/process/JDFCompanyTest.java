@@ -55,7 +55,7 @@ class JDFCompanyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testMatches()
+	final void testMatches()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.COMPANY);
 		final JDFCompany c = (JDFCompany) doc.getRoot();
@@ -74,7 +74,7 @@ class JDFCompanyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testDescriptiveName()
+	final void testDescriptiveName()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.COMPANY);
 		final JDFCompany c = (JDFCompany) doc.getRoot();
@@ -90,7 +90,7 @@ class JDFCompanyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testProductID()
+	final void testProductID()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.COMPANY);
 		final JDFCompany c = (JDFCompany) doc.getRoot();
@@ -104,7 +104,7 @@ class JDFCompanyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testOrgUnit()
+	final void testOrgUnit()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.COMPANY);
 		final JDFCompany c = (JDFCompany) doc.getRoot();
@@ -127,7 +127,7 @@ class JDFCompanyTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public final void testGetAllOrgUnit()
+	final void testGetAllOrgUnit()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.COMPANY);
 		final JDFCompany c = (JDFCompany) doc.getRoot();

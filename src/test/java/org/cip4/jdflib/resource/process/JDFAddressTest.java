@@ -92,7 +92,7 @@ class JDFAddressTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testExtendedAddress()
+	final void testExtendedAddress()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.ADDRESS);
 		final JDFAddress ad = (JDFAddress) doc.getRoot();
@@ -105,7 +105,7 @@ class JDFAddressTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testAddressLine()
+	final void testAddressLine()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.ADDRESS);
 		final JDFAddress ad = (JDFAddress) doc.getRoot();
@@ -125,7 +125,7 @@ class JDFAddressTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testAddressLines()
+	final void testAddressLines()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.ADDRESS);
 		final JDFAddress ad = (JDFAddress) doc.getRoot();
@@ -147,7 +147,7 @@ class JDFAddressTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testExtendedAddressText()
+	final void testExtendedAddressText()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.ADDRESS);
 		final JDFAddress ad = (JDFAddress) doc.getRoot();
@@ -160,7 +160,7 @@ class JDFAddressTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testMatches()
+	final void testMatches()
 	{
 		final JDFDoc doc = new JDFDoc("Address");
 		final JDFAddress ad = (JDFAddress) doc.getRoot();
