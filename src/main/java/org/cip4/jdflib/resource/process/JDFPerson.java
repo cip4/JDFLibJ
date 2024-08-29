@@ -144,26 +144,6 @@ public class JDFPerson extends JDFAutoPerson implements IMatches
 	}
 
 	/**
-	 * Sets attribute ProductID
-	 *
-	 * @param value value to set the attribute to
-	 */
-	public void setProductID(final String value)
-	{
-		setAttribute(AttributeName.PRODUCTID, value);
-	}
-
-	/**
-	 * Gets string attribute ProductID
-	 *
-	 * @return String - the attribute value
-	 */
-	public String getProductID()
-	{
-		return getAttribute(AttributeName.PRODUCTID);
-	}
-
-	/**
 	 * sets the firstame to value and also prepends firstName to value in case descriptivename is either FirstName or empty/null
 	 *
 	 * @param firstName the given name to set

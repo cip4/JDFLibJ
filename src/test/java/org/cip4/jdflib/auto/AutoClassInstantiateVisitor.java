@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.node.JDFNode;
 import org.w3c.dom.DOMException;
 
@@ -127,7 +128,7 @@ class AutoClassInstantiateVisitor implements DirectoryVisitor
 		boolean result = false;
 
 		String elementName = fileName;
-		final String prefix = elementName.startsWith("JDFAuto") ? "JDFAuto" : "JDF";
+		final String prefix = elementName.startsWith("JDFAuto") ? "JDFAuto" : ElementName.JDF;
 
 		elementName = elementName.substring(prefix.length(), elementName.length() - ".java".length());
 
@@ -142,7 +143,7 @@ class AutoClassInstantiateVisitor implements DirectoryVisitor
 		}
 		else if (elementName.equals("Node"))
 		{
-			elementName = "JDF";
+			elementName = ElementName.JDF;
 		}
 
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
@@ -151,14 +152,15 @@ class AutoClassInstantiateVisitor implements DirectoryVisitor
 		final KElement kElem = jdfRoot.appendElement(elementName); // create a class
 																	// for
 																	// elementName
+		checkMethods(kElem);
 
 		String createdClass = kElem.getClass().toString();
 		createdClass = createdClass.substring(createdClass.lastIndexOf(".") + 1);
 
-		result = elementName.equals(createdClass.substring("JDF".length())) || (elementName.equals(ElementName.COLORSUSED) && createdClass.equals("JDFSeparationList"))
+		result = elementName.equals(createdClass.substring(ElementName.JDF.length())) || (elementName.equals(ElementName.COLORSUSED) && createdClass.equals("JDFSeparationList"))
 				|| (elementName.equals(ElementName.CONTENTMETADATA) && createdClass.equals("JDFContentMetadata"))
 				|| (elementName.equals(ElementName.SHAPE) && createdClass.equals("JDFShapeElement"))
-				|| (elementName.endsWith(JDFConstants.LINK) && createdClass.substring("JDF".length()).equals(ElementName.RESOURCELINK));
+				|| (elementName.endsWith(JDFConstants.LINK) && createdClass.substring(ElementName.JDF.length()).equals(ElementName.RESOURCELINK));
 
 		kElem.removeAttribute(AttributeName.RREF);
 		if (!result)
@@ -167,5 +169,30 @@ class AutoClassInstantiateVisitor implements DirectoryVisitor
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "AutoClassIntantiateVisitor: Class JDF" + elementName + " (for " + fileName + ") could not be instantiated!"
 					+ " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
 		}
+
+	}
+
+	final String emptyClasses = "Added Removed BusinessInfo CollectingParams DBRules FeaturePool FlushedResources InterpretedPDLData PlaceHolderResource SideSewing StaticBlockingParams ThreadSealing WakeUpCmdParams";
+
+	void checkMethods(final KElement kElem)
+	{
+		Class<?> c = kElem.getClass();
+		String pack = c.getPackageName();
+		final String localName = kElem.getLocalName();
+		if (new StringArray(emptyClasses).contains(localName))
+			return;
+
+		while (kElem != null && !"org.cip4.jdflib.auto".equals(pack))
+		{
+			c = c.getSuperclass();
+			pack = c.getPackageName();
+			if (!c.getPackageName().startsWith("org.cip4.jdflib."))
+				return;
+		}
+		if (c.getMethods().length == c.getSuperclass().getMethods().length)
+		{
+			throw new JDFException("class with no methods! " + localName);
+		}
+
 	}
 }

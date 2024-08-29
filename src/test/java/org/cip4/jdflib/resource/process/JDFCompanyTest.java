@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -37,11 +37,15 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class JDFCompanyTest extends JDFTestCaseBase
@@ -56,13 +60,13 @@ class JDFCompanyTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.COMPANY);
 		final JDFCompany c = (JDFCompany) doc.getRoot();
 		final JDFCompany c2 = (JDFCompany) new JDFDoc(ElementName.COMPANY).getRoot();
-		Assertions.assertTrue(c.matches(c2));
+		assertTrue(c.matches(c2));
 		c.setOrganizationName("org1");
-		Assertions.assertTrue(c.matches(c2));
+		assertTrue(c.matches(c2));
 		c2.setOrganizationName("Org1");
-		Assertions.assertTrue(c.matches(c));
+		assertTrue(c.matches(c));
 		c2.setOrganizationName("Organ2");
-		Assertions.assertFalse(c.matches(c2));
+		assertFalse(c.matches(c2));
 	}
 
 	/**
@@ -74,11 +78,25 @@ class JDFCompanyTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.COMPANY);
 		final JDFCompany c = (JDFCompany) doc.getRoot();
-		Assertions.assertEquals("", c.getDescriptiveName());
+		assertEquals("", c.getDescriptiveName());
 		c.setOrganizationName("o");
-		Assertions.assertEquals("o", c.getDescriptiveName());
+		assertEquals("o", c.getDescriptiveName());
 		c.setDescriptiveName("d");
-		Assertions.assertEquals("d", c.getDescriptiveName());
+		assertEquals("d", c.getDescriptiveName());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public final void testProductID()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.COMPANY);
+		final JDFCompany c = (JDFCompany) doc.getRoot();
+		assertEquals("", c.getProductID());
+		c.setProductID("o");
+		assertEquals("o", c.getProductID());
 	}
 
 	/**
@@ -90,17 +108,33 @@ class JDFCompanyTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.COMPANY);
 		final JDFCompany c = (JDFCompany) doc.getRoot();
-		Assertions.assertNull(c.getOrganizationalUnits());
+		assertNull(c.getOrganizationalUnits());
 		c.appendOrganizationalUnit("foo");
-		Assertions.assertEquals(new VString("foo"), c.getOrganizationalUnits());
+		assertEquals(new VString("foo"), c.getOrganizationalUnits());
 		c.appendOrganizationalUnit("bar");
-		Assertions.assertEquals(new VString("foo bar"), c.getOrganizationalUnits());
+		assertEquals(new VString("foo bar"), c.getOrganizationalUnits());
 		c.setOrganizationalUnit("abc");
-		Assertions.assertEquals(new VString("abc"), c.getOrganizationalUnits());
+		assertEquals(new VString("abc"), c.getOrganizationalUnits());
 		c.appendOrganizationalUnit("");
-		Assertions.assertEquals(new VString("abc"), c.getOrganizationalUnits());
+		assertEquals(new VString("abc"), c.getOrganizationalUnits());
 		c.setOrganizationalUnit("");
-		Assertions.assertNull(c.getOrganizationalUnits());
+		assertNull(c.getOrganizationalUnits());
 
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public final void testGetAllOrgUnit()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.COMPANY);
+		final JDFCompany c = (JDFCompany) doc.getRoot();
+		assertTrue(c.getAllOrganizationalUnit().isEmpty());
+		c.setGeneralID("a", "b");
+		assertTrue(c.getAllOrganizationalUnit().isEmpty());
+		c.appendOrganizationalUnit("foo");
+		assertEquals("foo", c.getAllOrganizationalUnit().iterator().next().getText());
 	}
 }

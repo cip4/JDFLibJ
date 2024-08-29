@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -46,6 +46,7 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -53,6 +54,7 @@ import org.cip4.jdflib.auto.JDFAutoCompany;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.util.StringUtil;
@@ -193,6 +195,21 @@ public class JDFCompany extends JDFAutoCompany implements IMatches
 		{
 			appendOrganizationalUnit().setText(unit);
 		}
+	}
+
+	/**
+	 * Get all OrganizationalUnit from the current element
+	 *
+	 * @return Collection<JDFElement>, empty if none are available
+	 */
+	@Override
+	public Collection<JDFElement> getAllOrganizationalUnit()
+	{
+		final Collection<KElement> c = getChildArray(ElementName.ORGANIZATIONALUNIT, null);
+		final Collection<JDFElement> cc = new ArrayList<>();
+		for (final KElement l : c)
+			cc.add((JDFElement) l);
+		return cc;
 	}
 
 }
