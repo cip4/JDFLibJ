@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,7 +69,14 @@
  */
 package org.cip4.jdflib.pool;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
@@ -81,13 +88,12 @@ import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 /**
  * @author MuchaD
  * 
- *         This implements the first fixture with unit tests for class
- *         JDFElement.
+ *         This implements the first fixture with unit tests for class JDFElement.
  */
 class JDFResourcePoolTest extends JDFTestCaseBase
 {
@@ -95,14 +101,34 @@ class JDFResourcePoolTest extends JDFTestCaseBase
 	/**
 	 * 
 	 * make sure that coomments are not cast as resources
+	 * 
 	 * @throws Exception
 	 */
 	@Test
 	void testaddComment() throws Exception
 	{
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
-		JDFComment c = n.appendResourcePool().appendComment();
-		Assertions.assertTrue(c instanceof JDFComment);
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFComment c = n.appendResourcePool().appendComment();
+		assertTrue(c instanceof JDFComment);
+	}
+
+	/**
+	 * 
+	 * make sure that coomments are not cast as resources
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	void testGetResourceByID() throws Exception
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFResourcePool rp = n.appendResourcePool();
+		rp.appendComment();
+		final String id1 = n.addResource(ElementName.RUNLIST, EnumUsage.Input).getID();
+		final String id2 = n.addResource(ElementName.COMPONENT, EnumUsage.Input).getID();
+		assertNotNull(rp.getResourceByID(id2));
+		assertNotNull(rp.getXMLDocUserData().getTarget(id1));
+
 	}
 
 	/**
@@ -113,36 +139,32 @@ class JDFResourcePoolTest extends JDFTestCaseBase
 	@Test
 	void testgetUnlinkedResources() throws Exception
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
-		JDFResource r = n.addResource("Component", null, null, null, null, null, null);
-		JDFResourcePool rp = n.getResourcePool();
-		Assertions.assertTrue(r instanceof JDFComponent);
-		Assertions.assertFalse(n.hasChildElement("ResourceLinkPool", null));
-		JDFResourceLinkPool rlp = n.getCreateResourceLinkPool();
-		Assertions.assertEquals(rp.getUnlinkedResources().elementAt(0), r);
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		final JDFResource r = n.addResource("Component", null, null, null, null, null, null);
+		final JDFResourcePool rp = n.getResourcePool();
+		assertTrue(r instanceof JDFComponent);
+		assertFalse(n.hasChildElement("ResourceLinkPool", null));
+		final JDFResourceLinkPool rlp = n.getCreateResourceLinkPool();
+		assertEquals(rp.getUnlinkedResources().elementAt(0), r);
 
-		JDFResourceLink rl = rlp.linkResource(r, EnumUsage.Input, EnumProcessUsage.BookBlock);
-		Assertions.assertNotNull(rl);
-		Assertions.assertNull(rp.getUnlinkedResources());
-		JDFResource rx = n.addResource("ExposedMedia", null, null, null, null, null, null);
-		Assertions.assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
+		final JDFResourceLink rl = rlp.linkResource(r, EnumUsage.Input, EnumProcessUsage.BookBlock);
+		assertNotNull(rl);
+		assertNull(rp.getUnlinkedResources());
+		final JDFResource rx = n.addResource("ExposedMedia", null, null, null, null, null, null);
+		assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
 
 		n.setVersion(EnumVersion.Version_1_2);
-		JDFCustomerInfo ci = n.appendCustomerInfo();
+		final JDFCustomerInfo ci = n.appendCustomerInfo();
 		JDFContact co = ci.appendContact();
 		co = (JDFContact) co.makeRootResource(null, null, true);
-		Assertions.assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
-		Assertions.assertEquals(rp.getUnlinkedResources().size(), 1);
+		assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
+		assertEquals(rp.getUnlinkedResources().size(), 1);
 
 		ci.deleteNode();
-		Assertions.assertEquals(rp.getUnlinkedResources().elementAt(1), co);
-		Assertions.assertEquals(rp.getUnlinkedResources().size(), 2);
+		assertEquals(rp.getUnlinkedResources().elementAt(1), co);
+		assertEquals(rp.getUnlinkedResources().size(), 2);
 
 	}
-
-	// //////////////////////////////////////////////////////////////////
-	// //////////////////////////////////////////////////////////////////
-	// //////////////////////////////////////////////////////////////////
 
 }

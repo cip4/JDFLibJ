@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -113,7 +113,7 @@ import org.w3c.dom.Attr;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * long before June 7, 2009
+ *         long before June 7, 2009
  */
 public class JDFResourcePool extends JDFPool
 {
@@ -489,7 +489,7 @@ public class JDFResourcePool extends JDFPool
 	 * @param nameSpaceURI
 	 * @return VElement - a vector with all elements in the pool matching the conditions
 	 * 
-	 * default: GetPoolChildren(null, null, null)
+	 *         default: GetPoolChildren(null, null, null)
 	 */
 	public VElement getPoolChildren(final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
 	{
@@ -592,7 +592,7 @@ public class JDFResourcePool extends JDFPool
 	 */
 	public JDFResource getResourceByID(final String id)
 	{
-		XMLDocUserData userData = getXMLDocUserData();
+		final XMLDocUserData userData = getXMLDocUserData();
 		if (userData != null)
 		{
 			KElement kRet = userData.getTarget(id);
@@ -608,11 +608,13 @@ public class JDFResourcePool extends JDFPool
 		KElement e = getFirstChildElement();
 		while (e != null)
 		{
-			Attr attr = e.getAttributeNode(AttributeName.ID);
+			final Attr attr = e.getAttributeNode(AttributeName.ID);
 			if (attr != null)
 			{
 				if (userData != null)
-					userData.setTarget(e, id);
+				{
+					userData.setTarget(e, attr.getValue());
+				}
 				if (id.equals(attr.getValue()))
 				{
 					break;

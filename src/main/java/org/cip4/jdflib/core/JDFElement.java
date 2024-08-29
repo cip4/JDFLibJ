@@ -307,7 +307,7 @@ public class JDFElement extends KElement
 	 *
 	 * @return the XMLDocUserData of this
 	 */
-	protected XMLDocUserData getXMLDocUserData()
+	public XMLDocUserData getXMLDocUserData()
 	{
 		return (ownerDocument == null) ? null : ((DocumentJDFImpl) ownerDocument).getMyUserData();
 	}
