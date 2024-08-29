@@ -412,7 +412,10 @@ public class WalkElement extends BaseWalker
 			}
 			el.setAttribute(key, d.getDateTimeISO());
 		}
-		el.removeAttribute(key);
+		else
+		{
+			el.removeAttribute(key);
+		}
 	}
 
 	/**
