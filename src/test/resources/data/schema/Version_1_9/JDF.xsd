@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JDF Schema @@version@@ (@@buildTime@@)
+
+    CIP4 Organization
+    https://www.cip4.org
+    
+    Questions/Feedback: https://confluence.cip4.org/questions
+    Issue Tracking: https://cip4.atlassian.net/projects/JDF
+
+    Published on: https://schema.cip4.org
+    
+    Copyright (c) 2001-@@year@@. All rights reserved.
+    License: https://github.com/cip4/JDF-Schema/blob/@@branch@@/LICENSE.md
+-->
+<xs:schema xmlns:jdftyp="http://www.CIP4.org/JDFSchema_1_7_Types" xmlns:jdf="http://www.CIP4.org/JDFSchema_1_1"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.CIP4.org/JDFSchema_1_1" elementFormDefault="qualified"
+  attributeFormDefault="unqualified" version="@@version@@">
+  <xs:import namespace="http://www.CIP4.org/JDFSchema_1_7_Types" schemaLocation="JDFTypes.xsd" />
+  <xs:include schemaLocation="JDFCore.xsd" />
+  <xs:include schemaLocation="JDFCapability.xsd" />
+  <xs:include schemaLocation="JDFResource.xsd" />
+  <xs:include schemaLocation="JDFResourceElements.xsd" />
+  <xs:include schemaLocation="JDFProcess.xsd" />
+  <xs:include schemaLocation="JDFMessage.xsd" />
+  <xs:element name="JDF" type="jdf:JDFProcessNode" />
+  <xs:element name="JMF" type="jdf:JMFRootMessage" />
+</xs:schema>
