@@ -84,7 +84,7 @@ public class WalkKElement extends WalkAnyElement
 				}
 			}
 		}
-		return e;
+		return null;
 	}
 
 	/**

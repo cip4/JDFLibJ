@@ -124,8 +124,8 @@ class XJDFExampleConvertTest extends JDFTestCaseBase
 		XMLDoc.setLineWidth(95);
 		// " C:\\gitreps\\cip4\\XJDFSchema\\src\\main\\resources"
 
-		for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData + "resources"), (String) null))
-		// for (final File f : FileUtil.listFilesWithExtension(new File(sm_dirTestData + "xjdf"), "xjdf"))
+		// for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData + "resources"), (String) null))
+		for (final File f : FileUtil.listFilesWithExtension(new File(sm_dirTestData + "xjdf"), "xjdf"))
 		{
 			if (!f.isDirectory())
 			{

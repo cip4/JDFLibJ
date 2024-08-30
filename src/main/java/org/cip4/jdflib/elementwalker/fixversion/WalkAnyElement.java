@@ -55,6 +55,12 @@ import org.cip4.jdflib.util.StringUtil;
 public class WalkAnyElement extends BaseWalker
 {
 
+	@Override
+	public KElement walk(final KElement e, final KElement trackElem)
+	{
+		return null;
+	}
+
 	/**
 	 * fills this into the factory
 	 */
