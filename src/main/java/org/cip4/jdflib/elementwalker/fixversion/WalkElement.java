@@ -53,11 +53,8 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.elementwalker.BaseWalker;
-import org.cip4.jdflib.span.JDFTimeSpan;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
-import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -67,13 +64,8 @@ import org.cip4.jdflib.util.StringUtil;
  * @author prosirai
  *
  */
-public class WalkElement extends BaseWalker
+public class WalkElement extends WalkAnyElement
 {
-
-	/**
-	 *
-	 */
-	FixVersionImpl fixVersion;
 
 	/**
 	 * fills this into the factory
@@ -81,17 +73,6 @@ public class WalkElement extends BaseWalker
 	public WalkElement()
 	{
 		super();
-		fixVersion = null;
-	}
-
-	/**
-	 * fills this into the factory
-	 *
-	 * @param fixVersion
-	 */
-	public void setParent(final FixVersionImpl fixVersion)
-	{
-		this.fixVersion = fixVersion;
 	}
 
 	/**
@@ -219,7 +200,7 @@ public class WalkElement extends BaseWalker
 		}
 		else if (EnumAttributeType.dateTime.equals(attType))
 		{
-			fixDateTime(el, key, value);
+			fixDateTime(el, key, value, true);
 		}
 		else if (EnumAttributeType.NMTOKEN.equals(attType))
 		{
@@ -247,6 +228,10 @@ public class WalkElement extends BaseWalker
 		{
 			fixICSVersions(el, value);
 		}
+		else if (fixVersion.version != null && (AttributeName.VERSION.equals(key) || AttributeName.MAXVERSION.equals(key)))
+		{
+			el.setAttribute(key, fixVersion.version, null);
+		}
 		if (fixVersion.bZappInvalid && !AttributeInfo.validStringForType(value, attType, null))
 		{
 			// we may have fixed it earlier - recheck
@@ -256,6 +241,7 @@ public class WalkElement extends BaseWalker
 				el.removeAttribute_KElement(key, null);
 			}
 		}
+		fixDateTime(el, key, value, false);
 	}
 
 	void fixNMTOKEN(final JDFElement el, final String key, final String value)
@@ -331,7 +317,7 @@ public class WalkElement extends BaseWalker
 	 * @param key
 	 * @param value
 	 */
-	private void fixRange(final JDFElement el, final String key, final String value)
+	void fixRange(final JDFElement el, final String key, final String value)
 	{
 		try
 		{
@@ -362,59 +348,6 @@ public class WalkElement extends BaseWalker
 		catch (final DataFormatException ex)
 		{
 			// nop - continue
-		}
-	}
-
-	/**
-	 * @param el
-	 * @param key
-	 * @param value
-	 */
-	void fixDateTime(final JDFElement el, final String key, final String value)
-	{
-		int hour = -1;
-		int minute = 0;
-		String check = key;
-		if (el instanceof JDFTimeSpan)
-		{
-			check = el.getLocalName();
-		}
-		final String timeToken = StringUtil.token(value, 1, "T");
-		if (check != null && StringUtil.length(timeToken) < 9)
-		{
-			hour = StringUtil.parseInt(StringUtil.substring(timeToken, 0, 2), -1);
-			minute = StringUtil.parseInt(StringUtil.substring(timeToken, 3, 5), 0);
-			if (hour < 0)
-			{
-				if (check.endsWith(AttributeName.END) || AttributeName.REQUIRED.equals(check))
-				{
-					hour = fixVersion.lasthour;
-				}
-				else if (check.endsWith(AttributeName.START) || AttributeName.EARLIEST.equals(check))
-				{
-					hour = fixVersion.firsthour;
-				}
-			}
-		}
-		final JDFDate d = JDFDate.createDate(value);
-		if (d != null)
-		{
-			if (hour > 0 || fixVersion.newYear > 0)
-			{
-				if (hour >= 0 && d.getHour() == JDFDate.getDefaultHour() && d.getMinute() == 0)
-				{
-					d.setTime(hour, minute, 0);
-				}
-				if (fixVersion.newYear > 0)
-				{
-					d.setYear(fixVersion.newYear);
-				}
-			}
-			el.setAttribute(key, d.getDateTimeISO());
-		}
-		else
-		{
-			el.removeAttribute(key);
 		}
 	}
 
@@ -459,6 +392,6 @@ public class WalkElement extends BaseWalker
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return (toCheck instanceof JDFElement && JDFElement.isInJDFNameSpaceStatic(toCheck));
+		return (toCheck instanceof JDFElement && JDFElement.isInAnyCIP4NameSpaceStatic(toCheck));
 	}
 }

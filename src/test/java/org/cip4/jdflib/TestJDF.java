@@ -39,9 +39,7 @@
 
 package org.cip4.jdflib;
 
-import java.io.File;
 import java.util.Collection;
-import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -54,7 +52,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -69,59 +66,6 @@ import org.junit.jupiter.api.Test;
 class TestJDF extends JDFTestCaseBase
 {
 
-	/**
-	 *
-	 *
-	 * @throws FileNotFoundException
-	 */
-	// @Test
-	// void testSize() throws FileNotFoundException
-	// {
-	// SizeWalker sw = new SizeWalker(new File("/share/data/size.xml"));
-	// final JDFDoc d = new JDFParser().parseFile("/share/data/big.jdf");
-	// sw.walkAll(d.getRoot());
-	// }
-
-	/**
-	 *
-	 */
-	@Test
-	@Disabled
-	void fixExampleVersions()
-	{
-		final Vector<File> v = FileUtil.listFilesInTree(new File("/gitreps/samples/src/main/resources/jdf"), "*.jdf");
-		for (final File f : v)
-		{
-			final JDFDoc d = JDFDoc.parseFile(f);
-			final KElement e = d == null ? null : d.getRoot();
-			final VElement vAll = e == null ? null : e.getChildrenByTagName_KElement(null, null, null, false, true, 0);
-			if (vAll != null)
-			{
-				vAll.add(e);
-				boolean b = false;
-				for (final KElement e2 : vAll)
-				{
-					String s = e2.getNonEmpty(AttributeName.VERSION);
-					if (s != null && !"1.6".equals(s))
-					{
-						e2.setAttribute(AttributeName.VERSION, "1.6");
-						b = true;
-					}
-					s = e2.getNonEmpty(AttributeName.MAXVERSION);
-					if (s != null && !"1.6".equals(s))
-					{
-						e2.setAttribute(AttributeName.MAXVERSION, "1.6");
-						b = true;
-					}
-				}
-				if (b)
-				{
-					log.info(f.getAbsolutePath());
-					d.write2File(f, 2, false);
-				}
-			}
-		}
-	}
 	/**
 	 *
 	 * TODO Please insert comment!

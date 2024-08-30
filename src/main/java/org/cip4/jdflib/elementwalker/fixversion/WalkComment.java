@@ -79,7 +79,7 @@ import org.cip4.jdflib.util.StringUtil;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * June 7, 2009
+ *         June 7, 2009
  */
 public class WalkComment extends WalkElement
 {
@@ -103,9 +103,9 @@ public class WalkComment extends WalkElement
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.fixversion.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
-	 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
-	 * high versions but potentially fail when attempting to move from higher to lower versions
+	 * @see org.cip4.jdflib.elementwalker.fixversion.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine for JDF uses heuristics
+	 *      to modify this element and its children to be compatible with a given version in general, it will be able to move from low to high versions but potentially fail when
+	 *      attempting to move from higher to lower versions
 	 */
 	@Override
 	public KElement walk(final KElement e1, final KElement trackElem)
@@ -113,7 +113,7 @@ public class WalkComment extends WalkElement
 		final JDFComment c = (JDFComment) e1;
 		if (this.fixVersion.version != null)
 		{
-			if (this.fixVersion.version.getValue() >= EnumVersion.Version_1_3.getValue() && c.getLocalName().equals(ElementName.COMMENT))
+			if (this.fixVersion.version.getValue() >= EnumVersion.Version_1_3.getValue() && !fixVersion.version.isXJDF() && c.getLocalName().equals(ElementName.COMMENT))
 			{
 				c.appendAnchor(null);
 			}

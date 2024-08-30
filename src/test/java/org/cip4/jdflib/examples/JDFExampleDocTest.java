@@ -60,6 +60,7 @@
 package org.cip4.jdflib.examples;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.util.Vector;
@@ -70,6 +71,7 @@ import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaUnit;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
@@ -85,6 +87,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
@@ -171,7 +174,9 @@ class JDFExampleDocTest extends ExampleTest
 		super.setUp();
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentName(null);
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentVersion(null);
-		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID(null);
+		JDFAudit.setStaticAgentName(null);
+		JDFAudit.setStaticAgentVersion(null);
+		JDFAudit.setStaticAuthor(null);
 		KElement.setLongID(false);
 	}
 
@@ -1149,14 +1154,20 @@ class JDFExampleDocTest extends ExampleTest
 	void testUpdateExamples()
 	{
 		int n = 0;
-		for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData + "SampleFiles"), (String) null))
-		// for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData + "samples"), (String) null))
-		{
+		XMLDoc.setIndent(2);
+		final int l = XMLDoc.getLineWidth();
+		XMLDoc.setLineWidth(100);
 
+		// for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData + "SampleFiles"), (String) null))
+		for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData + "samples"), (String) null))
+		{
 			final boolean b = updateExample(f, EnumVersion.Version_1_9, 2024);
 			if (b)
 				n++;
 		}
+
+		XMLDoc.setLineWidth(l);
+
 		assertEquals(12, n);
 
 	}
@@ -1172,15 +1183,29 @@ class JDFExampleDocTest extends ExampleTest
 			if (d != null)
 			{
 				final JDFElement e = (JDFElement) d.getRoot();
-				final boolean v = e.isValid(EnumValidationLevel.NoWarnIncomplete);
+				final boolean vPre = e.isValid(EnumValidationLevel.NoWarnIncomplete);
+				final boolean reparse0 = reparse(e, 1, version.getMinorVersion());
 				final FixVersion fv = new FixVersion(version);
 				fv.setZappDeprecated(true);
 				fv.setNewYear(new JDFDate().getYear());
 				fv.setFixICSVersions(true);
 				fv.convert(e);
-				e.write2File(out);
-				final boolean v2 = e.isValid(EnumValidationLevel.NoWarnIncomplete);
-				assertEquals(v2 || v, v, f.getName());
+				if (e.getPrefix() != null)
+				{
+					String t = e.getXSIType();
+					if (!e.getPrefix().equals(KElement.xmlnsPrefix(t)))
+					{
+						t = e.getPrefix() + ":" + t;
+						e.setXSIType(t);
+					}
+
+				}
+				d.write2File(out);
+				final boolean vPost = e.isValid(EnumValidationLevel.NoWarnIncomplete);
+				assertEquals(vPost || vPre, vPost, f.getName());
+				final boolean reparse = reparse(e, 1, version.getMinorVersion());
+				if (reparse0)
+					assertTrue(reparse);
 				return true;
 			}
 		}

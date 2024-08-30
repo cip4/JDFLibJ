@@ -107,6 +107,28 @@ public class XMLDoc implements Cloneable, IStreamWriter
 
 	protected DocumentXMLImpl m_doc;
 	final private static Log log = LogFactory.getLog(XMLDoc.class);
+	private static int lineWidth = 100;
+	private static int indent = 2;
+
+	public static int getIndent()
+	{
+		return indent;
+	}
+
+	public static void setIndent(final int indent)
+	{
+		XMLDoc.indent = indent;
+	}
+
+	public static int getLineWidth()
+	{
+		return lineWidth;
+	}
+
+	public static void setLineWidth(final int lineWidth)
+	{
+		XMLDoc.lineWidth = lineWidth;
+	}
 
 	// **************************************** Constructors
 	// ****************************************
@@ -402,7 +424,7 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 */
 	public boolean write2File(final String oFilePath)
 	{
-		return write2File(oFilePath, 2, false);
+		return write2File(oFilePath, indent, indent == 0);
 	}
 
 	/**
@@ -416,7 +438,7 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 */
 	public boolean write2File(final File oFilePath)
 	{
-		return write2File(oFilePath, 2, false);
+		return write2File(oFilePath, indent, indent == 0);
 	}
 
 	/**
@@ -542,7 +564,7 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	@Override
 	public void writeStream(final OutputStream stream) throws IOException
 	{
-		write2Stream(stream, 2);
+		write2Stream(stream, indent);
 	}
 
 	/**
@@ -581,6 +603,7 @@ public class XMLDoc implements Cloneable, IStreamWriter
 					{
 						format.setIndenting(true);
 						format.setIndent(indent);
+						format.setLineWidth(lineWidth);
 						// TODO remove schema defaulted attributes when serializing
 					}
 					if (!XMLFormatter.isDefault())

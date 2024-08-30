@@ -139,8 +139,6 @@ class FixVersionTest extends JDFTestCaseBase
 		assertFalse(bRet, "fix not ok");
 	}
 
-	// //////////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -151,6 +149,25 @@ class FixVersionTest extends JDFTestCaseBase
 		rp.setAttribute(AttributeName.RREFS, "a b", null);
 		n.fixVersion(null);
 		assertFalse(rp.hasAttribute(AttributeName.RREFS));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testRanges()
+	{
+		final FixVersion v = new FixVersion(EnumVersion.Version_2_2);
+		final JDFRunList rl = (JDFRunList) JDFElement.createRoot(ElementName.RUNLIST);
+		rl.setAttribute(AttributeName.PAGES, "0 4 5 5");
+		v.convert(rl);
+		assertEquals("0 4 5 5", rl.getNonEmpty(AttributeName.PAGES));
+		rl.setAttribute(AttributeName.PAGES, "0 1 2 3");
+		v.convert(rl);
+		assertEquals("0 1 2 3", rl.getNonEmpty(AttributeName.PAGES));
+		rl.setAttribute(AttributeName.PAGES, "3 2 1 0");
+		v.convert(rl);
+		assertEquals("3 2 1 0", rl.getNonEmpty(AttributeName.PAGES));
 	}
 
 	/**

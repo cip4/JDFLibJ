@@ -36,8 +36,12 @@
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
+import java.util.Collection;
+import java.util.List;
+
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
 /**
  * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
@@ -45,7 +49,7 @@ import org.cip4.jdflib.core.KElement;
  * @author prosirai
  *
  */
-public class WalkKElement extends WalkElement
+public class WalkKElement extends WalkAnyElement
 {
 
 	/**
@@ -64,9 +68,23 @@ public class WalkKElement extends WalkElement
 	 * @return the element to continue walking
 	 */
 	@Override
-	public KElement walk(final KElement e1, final KElement trackElem)
+	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		return null;
+		final JDFAttributeMap m = e.getAttributeMap_KElement();
+		final Collection<String> keys = m.keySet();
+		if (keys != null)
+		{
+			final List<String> ignore = fixVersion.ignoreMap.get(e.getLocalName());
+			for (final String key : keys)
+			{
+				final String value = m.get(key);
+				if (ignore == null || !ignore.contains(key))
+				{
+					fixDateTime(e, key, value, false);
+				}
+			}
+		}
+		return e;
 	}
 
 	/**
@@ -77,6 +95,6 @@ public class WalkKElement extends WalkElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !JDFElement.isInJDFNameSpaceStatic(toCheck);
+		return !(toCheck instanceof JDFElement);
 	}
 }

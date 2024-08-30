@@ -57,6 +57,7 @@ import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.time.FastDateFormat;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 
 /**
@@ -536,7 +537,18 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 			// interpret the string - low level enhances performance quite a bit...
 			byte[] b = strDateTime.getBytes();
-			if (b[4] != '-' || b[7] != '-' || b[10] != 'T' || b[13] != ':' || b[16] != ':' || strDateTime.length() - decimalLength != 25) // 6 digit tz
+			int n = 0;
+			for (int i = 0; i < 16; i++)
+			{
+				if (b[i] < '0' || b[i] > '9')
+				{
+					if (n++ > 4)
+					{
+						break;
+					}
+				}
+			}
+			if (n > 4 || b[4] != '-' || b[7] != '-' || b[10] != 'T' || b[13] != ':' || b[16] != ':' || strDateTime.length() - decimalLength != 25) // 6 digit tz
 			{
 				cleanDateTime();
 				b = strDateTime.getBytes();
@@ -608,7 +620,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			if (timeZone == null)
 				throw new DataFormatException("bad time zone ");
 
-			final VString times = StringUtil.tokenize(time, ":", false);
+			final StringArray times = StringArray.getVString(time, ":");
 			if (times != null)
 			{
 				int hours = StringUtil.parseInt(times.get(0), -1);

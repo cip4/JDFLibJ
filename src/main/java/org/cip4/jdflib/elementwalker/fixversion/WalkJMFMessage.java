@@ -99,8 +99,9 @@ public class WalkJMFMessage extends WalkElement
 	}
 
 	/**
-	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine for JDF uses heuristics to modify this element and its children to be compatible with
-	 *      a given version in general, it will be able to move from low to high versions but potentially fail when attempting to move from higher to lower versions
+	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine for JDF uses heuristics to modify this element and its children to
+	 *      be compatible with a given version in general, it will be able to move from low to high versions but potentially fail when attempting to move from higher to lower
+	 *      versions
 	 */
 	@Override
 	public KElement walk(final KElement e1, final KElement trackElem)
@@ -115,7 +116,7 @@ public class WalkJMFMessage extends WalkElement
 
 	/**
 	 *
-	 * this is one of the message types where queue or queueufilter should be zapped in JDF1.5 and above
+	 * this is one of the message types where queue or queuefilter should be zapped in JDF1.5 and above
 	 *
 	 * @param toCheck
 	 * @return

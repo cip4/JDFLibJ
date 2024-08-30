@@ -766,6 +766,34 @@ class XMLDocTest extends JDFTestCaseBase
 
 	/**
 	 *
+	 * test graceful null handling
+	 */
+	@Test
+	void testIndent()
+	{
+		final int i = XMLDoc.getIndent();
+		XMLDoc.setIndent(i + 1);
+		assertEquals(i + 1, XMLDoc.getIndent());
+		XMLDoc.setIndent(i);
+		assertEquals(i, XMLDoc.getIndent());
+	}
+
+	/**
+	 *
+	 * test graceful null handling
+	 */
+	@Test
+	void testLineWidth()
+	{
+		final int i = XMLDoc.getLineWidth();
+		XMLDoc.setLineWidth(i + 1);
+		assertEquals(i + 1, XMLDoc.getLineWidth());
+		XMLDoc.setLineWidth(i);
+		assertEquals(i, XMLDoc.getLineWidth());
+	}
+
+	/**
+	 *
 	 */
 	@Test
 	void testCopyXMLDoc()
