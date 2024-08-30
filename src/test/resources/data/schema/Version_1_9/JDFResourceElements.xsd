@@ -201,7 +201,7 @@
           <xs:element name="DeviceNSpace" type="jdf:DeviceNSpace_re" minOccurs="0"/>
           <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
           <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
-          <xs:element name="ScreenSelector" ref="jdf:ScreenSelector_re" minOccurs="0"/>
+          <xs:element name="ScreenSelector" type="jdf:ScreenSelector_re" minOccurs="0"/>
           <xs:element name="SeparationSpec" type="jdf:SeparationSpec_re" minOccurs="0"/>
         </xs:sequence>
         <xs:attributeGroup ref="jdf:ColorSpaceConversionOpAttribs"/>
@@ -469,7 +469,7 @@
   </xs:attributeGroup>
   <xs:complexType name="FitPolicy_re" mixed="false">
     <xs:complexContent mixed="false">
-      <xs:extension base="jdf:BaseElement">
+      <xs:extension base="jdf:BaseElement_">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="jdf:GenericElements" minOccurs="0" />
         </xs:sequence>
@@ -528,7 +528,7 @@
     <xs:attribute name="IDUsage" type="jdftyp:NMTOKEN" use="required" />
     <xs:attribute name="IDValue" type="jdftyp:string" use="required" />
   </xs:attributeGroup>
-  <xs:complexType name="GeneralID_re" mixed="false">
+  <xs:complexType name="GeneralID" mixed="false">
     <xs:annotation>
       <xs:appinfo>
         <Version Path="." First="1.3" />
@@ -559,7 +559,7 @@
   </xs:attributeGroup>
   <xs:complexType name="GlueLine_re" mixed="false">
     <xs:complexContent mixed="false">
-      <xs:extension base="jdf:BaseeElement">
+      <xs:extension base="jdf:BaseElement_">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="jdf:GenericElements" minOccurs="0" />
         </xs:sequence>
@@ -586,8 +586,7 @@
   </xs:complexType>
   
   <xs:attributeGroup name="HoleLineAttribs">
-    <xs:attributeGroup ref="jdf:HoleLineAttribs_c" />
-    <xs:attribute name="Pitch" type="jdftyp:double" use="required" />
+   <xs:attribute name="Pitch" type="jdftyp:double" use="required" />
   </xs:attributeGroup>
   <xs:complexType name="HoleLine_re" mixed="false">
     <xs:complexContent mixed="false">
@@ -621,7 +620,6 @@
   </xs:complexType>
 
   <xs:attributeGroup name="MarkColorAttribs">
-    <xs:attributeGroup ref="jdf:MarkColorAttribs_c"/>
     <xs:attribute name="Name" type="jdftyp:string" use="required"/>
     <xs:attribute name="Tint" type="jdftyp:double" use="required"/>
   </xs:attributeGroup>

@@ -305,6 +305,7 @@
     <xs:attribute name="SortAmount" type="jdftyp:pSortAmount" use="optional" />
   </xs:attributeGroup>
   <xs:element name="Comment" type="jdf:Comment_Type" />
+  <xs:element name="GeneralID" type="jdf:GeneralID" />
   <xs:group name="GenericElements">
     <xs:sequence>
       <xs:element ref="jdf:Comment" minOccurs="0" />

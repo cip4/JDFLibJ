@@ -1158,8 +1158,8 @@ class JDFExampleDocTest extends ExampleTest
 		final int l = XMLDoc.getLineWidth();
 		XMLDoc.setLineWidth(100);
 
-		// for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData + "SampleFiles"), (String) null))
-		for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData + "samples"), (String) null))
+		for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData + "SampleFiles"), (String) null))
+		// for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData + "samples"), (String) null))
 		{
 			final boolean b = updateExample(f, EnumVersion.Version_1_9, 2024);
 			if (b)
