@@ -4056,11 +4056,11 @@ class KElementTest extends JDFTestCaseBase
 		s = s.substring(0, pos - 7) + s.substring(pos + url.length() + 1); // +/-
 		d = p.parseString(s);
 		final KElement e = d.getRoot();
-		assertNotNull(e.getNamespaceURI());
+		assertNull(e.getNamespaceURI());
 		final KElement foo = e.appendElement("foo", null);
-		assertNotNull(foo.getNamespaceURI());
+		assertNull(foo.getNamespaceURI());
 		final KElement bar = foo.appendElement("bar");
-		assertNotNull(bar.getNamespaceURI());
+		assertNull(bar.getNamespaceURI());
 		final KElement bar2 = foo.appendElement("pt:bar");
 		assertEquals(bar2.getNamespaceURI(), "www.pt.com");
 	}
@@ -4094,11 +4094,11 @@ class KElementTest extends JDFTestCaseBase
 
 		d = p.parseString(s);
 		final KElement e = d.getRoot();
-		assertNotNull(e.getNamespaceURI());
+		assertNull(e.getNamespaceURI());
 		final KElement foo = e.appendElement("foo", null);
-		assertNotNull(foo.getNamespaceURI());
+		assertNull(foo.getNamespaceURI());
 		final KElement bar = foo.appendElement("bar");
-		assertNotNull(bar.getNamespaceURI());
+		assertNull(bar.getNamespaceURI());
 		final KElement bar2 = foo.appendElement("pt:bar");
 		assertEquals(bar2.getNamespaceURI(), "www.pt.com");
 	}
