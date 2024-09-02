@@ -228,7 +228,11 @@ public class WalkElement extends WalkAnyElement
 		{
 			fixICSVersions(el, value);
 		}
-		else if (fixVersion.version != null && (AttributeName.VERSION.equals(key) || AttributeName.MAXVERSION.equals(key)))
+		else if (fixVersion.version != null && AttributeName.VERSION.equals(key))
+		{
+			el.setAttribute(key, fixVersion.version, null);
+		}
+		else if (fixVersion.version != null && AttributeName.MAXVERSION.equals(key) && EnumUtil.aLessEqualsThanB(EnumVersion.getEnum(value), fixVersion.version))
 		{
 			el.setAttribute(key, fixVersion.version, null);
 		}

@@ -312,13 +312,16 @@ class FixVersionTest extends JDFTestCaseBase
 	@Test
 	void testMaxVersion()
 	{
+		n.setMaxVersion(EnumVersion.Version_1_6);
+		n.setVersion(EnumVersion.Version_1_6);
 		final FixVersion f1 = new FixVersion(EnumVersion.Version_1_4);
-		n.setMaxVersion(EnumVersion.Version_1_8);
-		n.setVersion(EnumVersion.Version_1_8);
 		f1.convert(n);
-		assertEquals(EnumVersion.Version_1_8, n.getMaxVersion(true));
+		assertEquals(EnumVersion.Version_1_6, n.getMaxVersion(true));
 		assertEquals(EnumVersion.Version_1_4, n.getVersion(true));
-
+		final FixVersion f2 = new FixVersion(EnumVersion.Version_1_8);
+		f2.convert(n);
+		assertEquals(EnumVersion.Version_1_8, n.getMaxVersion(true));
+		assertEquals(EnumVersion.Version_1_8, n.getVersion(true));
 	}
 
 	/**
