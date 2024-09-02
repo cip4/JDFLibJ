@@ -149,20 +149,18 @@ public class WalkAnyElement extends BaseWalker
 	private JDFDate fixDate(final String value, final int hour, final int minute)
 	{
 		final JDFDate d = value.contains("INF") || StringUtil.isNumber(value) ? null : JDFDate.createDate(value);
-		if (d != null)
+		if (d != null && (hour > 0 || fixVersion.newYear > 0))
 		{
-			if (hour > 0 || fixVersion.newYear > 0)
+			if (hour >= 0 && d.getHour() == JDFDate.getDefaultHour() && d.getMinute() == 0)
 			{
-				if (hour >= 0 && d.getHour() == JDFDate.getDefaultHour() && d.getMinute() == 0)
-				{
-					d.setTime(hour, minute, 0);
-				}
-				if (fixVersion.newYear > 0)
-				{
-					d.setYear(fixVersion.newYear);
-				}
+				d.setTime(hour, minute, 0);
+			}
+			if (fixVersion.newYear > 0)
+			{
+				d.setYear(fixVersion.newYear);
 			}
 		}
+
 		return d;
 	}
 

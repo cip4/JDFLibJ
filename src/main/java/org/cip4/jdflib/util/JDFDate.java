@@ -540,14 +540,12 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			int n = 0;
 			for (int i = 0; i < 16; i++)
 			{
-				if (b[i] < '0' || b[i] > '9')
+				if ((b[i] < '0' || b[i] > '9') && (n++ > 4))
 				{
-					if (n++ > 4)
-					{
-						break;
-					}
+					break;
 				}
 			}
+
 			if (n > 4 || b[4] != '-' || b[7] != '-' || b[10] != 'T' || b[13] != ':' || b[16] != ':' || strDateTime.length() - decimalLength != 25) // 6 digit tz
 			{
 				cleanDateTime();
@@ -568,7 +566,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		}
 
 		/**
-		 * TODO Please insert comment!
+		 * 
 		 *
 		 * @throws DataFormatException
 		 */
