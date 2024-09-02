@@ -1156,7 +1156,7 @@ class JDFExampleDocTest extends ExampleTest
 		int n = 0;
 		XMLDoc.setIndent(2);
 		final int l = XMLDoc.getLineWidth();
-		XMLDoc.setLineWidth(100);
+		XMLDoc.setLineWidth(95);
 
 		for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData + "SampleFiles"), (String) null))
 		// for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData + "samples"), (String) null))
@@ -1205,7 +1205,7 @@ class JDFExampleDocTest extends ExampleTest
 				assertEquals(vPost || vPre, vPost, f.getName());
 				final boolean reparse = reparse(e, 1, version.getMinorVersion());
 				if (reparse0)
-					assertTrue(reparse);
+					assertTrue(reparse, f.getName());
 				return true;
 			}
 		}

@@ -595,6 +595,10 @@ public class XMLDoc implements Cloneable, IStreamWriter
 						format.setPreserveSpace(true);
 					}
 
+					if (!XMLFormatter.isDefault())
+					{
+						XMLFormatter.apply(format);
+					}
 					if (indent < 1)
 					{
 						format.setIndenting(false);
@@ -605,10 +609,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 						format.setIndent(indent);
 						format.setLineWidth(lineWidth);
 						// TODO remove schema defaulted attributes when serializing
-					}
-					if (!XMLFormatter.isDefault())
-					{
-						XMLFormatter.apply(format);
 					}
 
 					final XMLSerializer serial = new XMLSerializer(outStream, format);
