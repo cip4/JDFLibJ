@@ -39,7 +39,6 @@ package org.cip4.jdflib.elementwalker.fixversion;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.span.JDFTimeSpan;
 import org.cip4.jdflib.util.ContainerUtil;
@@ -92,7 +91,6 @@ public class WalkAnyElement extends BaseWalker
 	 */
 	void fixDateTime(final KElement el, final String key, final String value, final boolean zapp)
 	{
-		int hour = -1;
 		int minute = 0;
 		String check = key;
 		if (el instanceof JDFTimeSpan)
@@ -100,6 +98,7 @@ public class WalkAnyElement extends BaseWalker
 			check = el.getLocalName();
 		}
 		final String timeToken = StringUtil.token(value, 1, "T");
+		int hour = -1;
 		if (check != null && StringUtil.length(timeToken) < 9)
 		{
 			hour = StringUtil.parseInt(StringUtil.substring(timeToken, 0, 2), -1);
@@ -116,7 +115,12 @@ public class WalkAnyElement extends BaseWalker
 				}
 			}
 		}
-		final VString vals = StringUtil.tokenize(value, null, false);
+		fixDate(el, key, value, zapp, minute, hour);
+	}
+
+	void fixDate(final KElement el, final String key, final String value, final boolean zapp, final int minute, final int hour)
+	{
+		final StringArray vals = new StringArray(value);
 		if (ContainerUtil.size(vals) > 1)
 		{
 			final StringArray newVals = new StringArray();
@@ -146,7 +150,7 @@ public class WalkAnyElement extends BaseWalker
 		}
 	}
 
-	private JDFDate fixDate(final String value, final int hour, final int minute)
+	JDFDate fixDate(final String value, final int hour, final int minute)
 	{
 		final JDFDate d = value.contains("INF") || StringUtil.isNumber(value) ? null : JDFDate.createDate(value);
 		if (d != null && (hour > 0 || fixVersion.newYear > 0))
