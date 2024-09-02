@@ -169,7 +169,11 @@ public class JDFDoc extends XMLDoc
 
 	static EnumVersion getVersionFromDocType(final String strDocType)
 	{
-		return XJDFConstants.XJDF.equals(strDocType) || XJDFConstants.XJMF.equals(strDocType) ? XJDFHelper.defaultVersion() : JDFElement.getDefaultJDFVersion();
+		final boolean isXjdf = XJDFConstants.XJDF.equals(strDocType) || XJDFConstants.XJMF.equals(strDocType);
+		if (isXjdf)
+			return XJDFHelper.defaultVersion();
+		final boolean isJdf = ElementName.JDF.equals(strDocType) || ElementName.JMF.equals(strDocType);
+		return isJdf ? JDFElement.getDefaultJDFVersion() : null;
 	}
 
 	/**

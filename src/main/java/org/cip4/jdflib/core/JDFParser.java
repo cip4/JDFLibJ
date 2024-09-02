@@ -49,6 +49,7 @@ import org.apache.xerces.xni.NamespaceContext;
 import org.apache.xerces.xni.QName;
 import org.apache.xerces.xni.XMLLocator;
 import org.apache.xerces.xni.XNIException;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
@@ -318,10 +319,11 @@ public class JDFParser extends XMLParser
 		if (doc != null)
 		{
 			((JDFDoc) doc).setInitOnCreate(true);
-			if (doc.getRoot().getNamespaceURI() == null)
+			final KElement root = doc.getRoot();
+			final EnumVersion v = JDFDoc.getVersionFromDocType(root.getLocalName());
+			if (v != null && root.getNamespaceURI() == null)
 			{
-				final KElement root = doc.getRoot();
-				final String nsURI = JDFElement.getSchemaURL(JDFDoc.getVersionFromDocType(root.getLocalName()));
+				final String nsURI = JDFElement.getSchemaURL(v);
 				root.setNamespaceURI(nsURI);
 			}
 		}

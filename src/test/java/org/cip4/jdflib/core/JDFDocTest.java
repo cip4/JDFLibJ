@@ -444,10 +444,10 @@ class JDFDocTest extends JDFTestCaseBase
 	@Test
 	void testVersionFromName()
 	{
-		assertEquals(EnumVersion.Version_1_8, JDFDoc.getVersionFromDocType(null));
+		assertEquals(null, JDFDoc.getVersionFromDocType(null));
 		assertEquals(EnumVersion.Version_1_8, JDFDoc.getVersionFromDocType("JDF"));
 		assertEquals(EnumVersion.Version_1_8, JDFDoc.getVersionFromDocType("JMF"));
-		assertEquals(EnumVersion.Version_1_8, JDFDoc.getVersionFromDocType("Foo"));
+		assertEquals(null, JDFDoc.getVersionFromDocType("Foo"));
 		assertEquals(EnumVersion.Version_2_2, JDFDoc.getVersionFromDocType("XJDF"));
 		assertEquals(EnumVersion.Version_2_2, JDFDoc.getVersionFromDocType("XJMF"));
 	}
