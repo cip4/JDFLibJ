@@ -72,6 +72,7 @@
 package org.cip4.jdflib.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
@@ -120,5 +121,16 @@ class HashUtilTest
 		assertEquals(0, HashUtil.hashCode(0, 0));
 		assertEquals(0, HashUtil.hashCode(0, (float) 0));
 		assertEquals(0, HashUtil.hashCode(0, (double) 0));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	void test1()
+	{
+		assertNotEquals(1, HashUtil.hashCode(1, 1));
+		assertNotEquals(1, HashUtil.hashCode(1, (float) 1));
+		assertNotEquals(1, HashUtil.hashCode(1, (double) 1));
 	}
 }
