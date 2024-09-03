@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -92,7 +92,7 @@ import java.util.Collection;
  * 
  * public int hashCode()
  * {
- * 	//        int hash = super.hashCode();    // use when not extending Object
+ * 	// int hash = super.hashCode(); // use when not extending Object
  * 	int hash = 0; // use when extending Object
  * 	hash = HashUtil.hashCode(hash, myIntField);
  * 	hash = HashUtil.hashCode(hash, myObject);
@@ -101,8 +101,8 @@ import java.util.Collection;
  * </pre>
  * 
  * <br>
- * Hint: Start your hashCode calculation depending on the object your data object extends. If you extend Object initialize your hash value to 0. Otherwise
- * initialize hash to super.hashCode(). See the example code.
+ * Hint: Start your hashCode calculation depending on the object your data object extends. If you extend Object initialize your hash value to 0. Otherwise initialize hash to
+ * super.hashCode(). See the example code.
  * 
  * @author Manfred Steinbach
  */
@@ -155,7 +155,7 @@ public class HashUtil extends Object
 	 */
 	public static final int hashCode(final int source, final float x)
 	{
-		return hashCode(source, ((new Float(x).equals(new Float(0.0))) ? 0 : Float.floatToIntBits(x)));
+		return hashCode(source, x == 0 ? 0 : Float.floatToIntBits(x));
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class HashUtil extends Object
 	 */
 	public static final int hashCode(final int source, final double x)
 	{
-		return hashCode(source, ((Double.valueOf(x).equals(Double.valueOf(0.0))) ? 0L : Double.doubleToLongBits(x)));
+		return hashCode(source, x == 0 ? 0L : Double.doubleToLongBits(x));
 	}
 
 	/**
@@ -187,7 +187,7 @@ public class HashUtil extends Object
 	{
 		if (null != c)
 		{
-			for (Object o : c)
+			for (final Object o : c)
 			{
 				source = hashCode(source, o);
 			}

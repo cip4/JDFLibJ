@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,8 +71,10 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -80,31 +82,43 @@ import org.junit.jupiter.api.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-class HashUtilTest {
+class HashUtilTest
+{
 	/**
 	 * 
 	 */
 	@Test
 	void testEqualsAndHashCode()
 	{
-		JDFIntegerRange range1 = new JDFIntegerRange(100, 200);
-		JDFIntegerRange range2 = new JDFIntegerRange(100, 200);
+		final JDFIntegerRange range1 = new JDFIntegerRange(100, 200);
+		final JDFIntegerRange range2 = new JDFIntegerRange(100, 200);
 		// different objects with same content should be equal
-		Assertions.assertEquals(range1, range2);
-		Assertions.assertEquals(range2, range1);
+		assertEquals(range1, range2);
+		assertEquals(range2, range1);
 
-		int range1Hash = range1.hashCode();
-		int range2Hash = range2.hashCode();
+		final int range1Hash = range1.hashCode();
+		final int range2Hash = range2.hashCode();
 		// the hashCode of equal objects should be equal
-		Assertions.assertEquals(range1Hash, range2Hash);
+		assertEquals(range1Hash, range2Hash);
 
-		String str3 = "100 ~ 200";
-		int str3Hash = str3.hashCode();
+		final String str3 = "100 ~ 200";
+		final int str3Hash = str3.hashCode();
 		// different objects can have the same hashCode
-		Assertions.assertEquals(range1Hash, str3Hash);
+		assertEquals(range1Hash, str3Hash);
 
 		// objects of different type should be different
-		Assertions.assertNotSame(str3, range1);
-		Assertions.assertNotSame(range1, str3);
+		assertNotSame(str3, range1);
+		assertNotSame(range1, str3);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	void test0()
+	{
+		assertEquals(0, HashUtil.hashCode(0, 0));
+		assertEquals(0, HashUtil.hashCode(0, (float) 0));
+		assertEquals(0, HashUtil.hashCode(0, (double) 0));
 	}
 }
