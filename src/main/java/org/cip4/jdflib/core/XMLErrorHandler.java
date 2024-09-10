@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -128,7 +128,7 @@ public class XMLErrorHandler implements ErrorHandler
 			kEl.setAttribute(MESSAGE, er);
 			if (wantLog)
 			{
-				log.error("Parser error: " + er);
+				log.error("Parser error: " + er, exception);
 			}
 		}
 	}
@@ -146,7 +146,7 @@ public class XMLErrorHandler implements ErrorHandler
 		parser.m_lastExcept = exception;
 		if (wantLog)
 		{
-			log.fatal(er);
+			log.fatal(er, exception);
 		}
 		throw new JDFException("Fatal error in the Parser: " + er);
 	}
