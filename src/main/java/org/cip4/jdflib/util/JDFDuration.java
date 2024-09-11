@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -195,6 +195,20 @@ public class JDFDuration implements Comparable<JDFDuration>
 	}
 
 	/**
+	 * Allocates a <code>JDFDuration</code> object and initializes it with days, hours, minutes, seconds
+	 * 
+	 * @param d
+	 * @param h
+	 * @param m
+	 * @param s
+	 */
+	public JDFDuration(final int s, final int m, final int h, final int d)
+	{
+		m_lDuration = 0;
+		addOffset(s, m, h, d);
+	}
+
+	/**
 	 * Allocates a <code>JDFDuration</code> object and initializes it with a value of <code>strDuration</code>, represented as a formatted duration string. <br>
 	 * Duration examples:
 	 * <li>"P1Y2M3DT10H30M"</li>
@@ -220,6 +234,21 @@ public class JDFDuration implements Comparable<JDFDuration>
 	{
 		m_lDuration += seconds;
 		return m_lDuration;
+	}
+
+	/**
+	 * add a given offset to this <br/>
+	 * note: multiple calls stack
+	 *
+	 * @param seconds seconds to add to this
+	 * @param minutes minutes to add to this
+	 * @param hours hours to add to this
+	 * @param days days to add to this
+	 */
+	public JDFDuration addOffset(final int seconds, final int minutes, final int hours, final int days)
+	{
+		m_lDuration += (seconds + 60l * minutes + 3600l * hours + 3600l * 24l * days);
+		return this;
 	}
 
 	/**
@@ -532,7 +561,8 @@ public class JDFDuration implements Comparable<JDFDuration>
 	}
 
 	/**
-	 * isLess - tests if the duration of this JDFDuration is longer than the duration of the specified JDFDuration. Compares the integer durations, thus -PT15S is shorter than -PT5S
+	 * isLess - tests if the duration of this JDFDuration is longer than the duration of the specified JDFDuration. Compares the integer durations, thus -PT15S is shorter than
+	 * -PT5S
 	 *
 	 * @param x the JDFDuration object to compare to <code>this</code>
 	 * @return boolean - true if the duration of this JDFDuration is longer than the duration of the JDFDuration 'x'.
@@ -543,7 +573,8 @@ public class JDFDuration implements Comparable<JDFDuration>
 	}
 
 	/**
-	 * isShorter - tests if the duration of this JDFDuration is less than the duration of the specified JDFDuration. Compares the integer durations, thus -PT15S is shorter than -PT5S
+	 * isShorter - tests if the duration of this JDFDuration is less than the duration of the specified JDFDuration. Compares the integer durations, thus -PT15S is shorter than
+	 * -PT5S
 	 *
 	 * @param x the JDFDuration object to compare to <code>this</code>
 	 * @return boolean - true if the duration of this JDFDuration is shorter than the duration of the JDFDuration 'x'.
@@ -555,7 +586,8 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * Compares two JDFDuration objects for equality.<br>
-	 * The result is <code>true</code> if and only if the argument is not <code>null</code> and is a <code>JDFDuration</code> object that represents the same duration, as this object.
+	 * The result is <code>true</code> if and only if the argument is not <code>null</code> and is a <code>JDFDuration</code> object that represents the same duration, as this
+	 * object.
 	 * <p>
 	 */
 	@Override
