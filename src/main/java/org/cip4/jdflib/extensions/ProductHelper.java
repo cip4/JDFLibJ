@@ -64,7 +64,8 @@ public class ProductHelper extends BaseXJDFHelper
 
 		public static eProductType getEnum(final String val)
 		{
-			return EnumUtil.getJavaEnumIgnoreCase(eProductType.class, val);
+			final String val2 = StringUtil.replaceString(val, JDFConstants.BLANK, null);
+			return EnumUtil.getJavaEnumIgnoreCase(eProductType.class, val2);
 		}
 	}
 

@@ -64,7 +64,18 @@ public class MessageHelper extends BaseXJDFHelper
 
 		public static EFamily getEnum(final String name)
 		{
-			return EnumUtil.getJavaEnumIgnoreCase(EFamily.class, name);
+			final EFamily ret = EnumUtil.getJavaEnumIgnoreCase(EFamily.class, name);
+			if (ret == null && name != null)
+			{
+				final String sl = name.toLowerCase();
+				for (final EFamily f : values())
+				{
+					if (sl.startsWith(f.name().toLowerCase()))
+						return f;
+				}
+
+			}
+			return ret;
 		}
 
 		public String getType(final String base)
@@ -75,6 +86,7 @@ public class MessageHelper extends BaseXJDFHelper
 			}
 			return null;
 		}
+
 	}
 
 	/**

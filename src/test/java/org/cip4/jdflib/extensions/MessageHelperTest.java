@@ -39,6 +39,7 @@ package org.cip4.jdflib.extensions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -184,6 +185,8 @@ class MessageHelperTest extends JDFTestCaseBase
 			assertEquals(f, EFamily.getEnum(f.name().toLowerCase() + "Foo"));
 			assertEquals("Foo", EFamily.getEnum(f.name()).getType(f.name().toLowerCase() + "Foo"));
 		}
+		assertNull(EFamily.getEnum(null));
+		assertNull(EFamily.getEnum("blub"));
 	}
 
 	/**
