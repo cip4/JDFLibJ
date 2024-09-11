@@ -51,6 +51,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoFileSpec;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.ifaces.IURLSetter;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -153,14 +154,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 
 		public static EnumResourceUsage getEnum(final String val)
 		{
-			for (final EnumResourceUsage e : values())
-			{
-				if (e.name().equalsIgnoreCase(val))
-				{
-					return e;
-				}
-			}
-			return null;
+			return EnumUtil.getJavaEnumIgnoreCase(EnumResourceUsage.class, val);
 		}
 
 	}
@@ -170,6 +164,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	 *
 	 * @return InputStream the input stream that the url points to, null if the url is inaccessible
 	 */
+	@Override
 	public InputStream getURLInputStream()
 	{
 		return getURLInputStream(getURL());
@@ -210,7 +205,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	 */
 	public String getFileName()
 	{
-		String filename = getUserFileName();
+		final String filename = getUserFileName();
 		if (!StringUtil.isEmpty(filename))
 			return filename;
 

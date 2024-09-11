@@ -108,6 +108,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNumList;
 import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.MyPair;
@@ -865,6 +866,28 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public void setAttribute(final String key, final String value)
 	{
 		setAttribute(key, value, null);
+	}
+
+	/**
+	 * no namespace variant
+	 *
+	 * @param key name of the attribute to set
+	 * @param value value of the attribute
+	 */
+	public void setAttribute(final String key, final Enum<?> value, final String ns)
+	{
+		setAttribute(key, value == null ? null : value.name(), ns);
+	}
+
+	/**
+	 * no namespace variant
+	 *
+	 * @param key name of the attribute to set
+	 * @param value value of the attribute
+	 */
+	public <T extends Enum<T>> T getAttribute(final String key, final Class<T> c)
+	{
+		return EnumUtil.getJavaEnumIgnoreCase(c, getNonEmpty(key));
 	}
 
 	/**

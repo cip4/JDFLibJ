@@ -1291,19 +1291,7 @@ public class JDFElement extends KElement
 
 		public static eUnit getEnum(final String name)
 		{
-			try
-			{
-				return valueOf(name);
-			}
-			catch (final Exception x)
-			{
-				for (final eUnit e : values())
-				{
-					if (e.name().equalsIgnoreCase(name))
-						return e;
-				}
-			}
-			return null;
+			return EnumUtil.getJavaEnumIgnoreCase(eUnit.class, name);
 		}
 	}
 

@@ -40,6 +40,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -58,12 +59,7 @@ public class AuditHelper extends MessageHelper
 				return null;
 			while (name.toLowerCase().startsWith("audit"))
 				name = name.substring(5);
-			for (final eAudit e : values())
-			{
-				if (e.name().equalsIgnoreCase(name))
-					return e;
-			}
-			return null;
+			return EnumUtil.getJavaEnumIgnoreCase(eAudit.class, name);
 		}
 
 		public String getAuditName()

@@ -36,7 +36,7 @@
  */
 package org.cip4.jdflib.extensions;
 
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.EnumUtil;
 
 public abstract class XJDFEnums
 {
@@ -47,24 +47,7 @@ public abstract class XJDFEnums
 
 		public static eDeviceStatus getEnum(final String val)
 		{
-			if (!StringUtil.isEmpty(val))
-			{
-				try
-				{
-					return eDeviceStatus.valueOf(val);
-				}
-				catch (final Exception x)
-				{
-					for (final eDeviceStatus n : values())
-					{
-						if (n.name().equalsIgnoreCase(val))
-						{
-							return n;
-						}
-					}
-				}
-			}
-			return null;
+			return EnumUtil.getJavaEnumIgnoreCase(eDeviceStatus.class, val);
 
 		}
 	}

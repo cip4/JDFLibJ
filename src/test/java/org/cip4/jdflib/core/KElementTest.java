@@ -68,6 +68,7 @@ import org.cip4.jdflib.core.KElement.SimpleNodeComparator;
 import org.cip4.jdflib.core.KElement.SingleXPathComparator;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.extensions.ProductHelper.eProductType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -3243,6 +3244,19 @@ class KElementTest extends JDFTestCaseBase
 		assertTrue(kElem.getAttribute("NewAttribute", null, null).equals(""), "");
 		kElem.setAttribute("foo", "€€€\"\'");
 		assertEquals(kElem.getAttribute("foo", null, null), "€€€\"\'", "special characters");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testSetAttributeEnum()
+	{
+		final KElement e = KElement.createRoot("e");
+		e.setAttribute("b", eProductType.BackCover, null);
+		assertEquals(eProductType.BackCover, e.getAttribute("b", eProductType.class));
+		assertEquals(null, e.getAttribute("c", eProductType.class));
+
 	}
 
 	/**

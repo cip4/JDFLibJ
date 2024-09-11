@@ -47,6 +47,7 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -61,30 +62,9 @@ public class MessageHelper extends BaseXJDFHelper
 	{
 		Audit, Command, Query, Response, Signal;
 
-		public static EFamily getEnum(final String s)
+		public static EFamily getEnum(final String name)
 		{
-			if (s != null)
-			{
-				try
-				{
-					return valueOf(s);
-				}
-				catch (final Exception x)
-				{
-					for (final EFamily f : values())
-					{
-						if (f.name().equalsIgnoreCase(s))
-							return f;
-					}
-					final String sl = s.toLowerCase();
-					for (final EFamily f : values())
-					{
-						if (sl.startsWith(f.name().toLowerCase()))
-							return f;
-					}
-				}
-			}
-			return null;
+			return EnumUtil.getJavaEnumIgnoreCase(EFamily.class, name);
 		}
 
 		public String getType(final String base)

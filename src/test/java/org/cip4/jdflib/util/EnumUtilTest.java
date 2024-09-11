@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,6 +78,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMarkObject.EnumAnchor;
+import org.cip4.jdflib.extensions.ProductHelper.eProductType;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.junit.jupiter.api.Test;
 
@@ -145,6 +146,23 @@ class EnumUtilTest extends JDFTestCaseBase
 	void testGetEnumName()
 	{
 		assertEquals(EnumUtil.getEnumName(EnumAnchor.BottomRight), "EnumAnchor");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetJavaEnumNameIgnoreCase()
+	{
+		for (final eProductType t : eProductType.values())
+		{
+			assertEquals(t, EnumUtil.getJavaEnumIgnoreCase(eProductType.class, t.name().toLowerCase()));
+			assertEquals(t, EnumUtil.getJavaEnumIgnoreCase(eProductType.class, t.name()));
+			assertEquals(t, EnumUtil.getJavaEnumIgnoreCase(eProductType.class, t.name().toUpperCase()));
+		}
+		assertNull(EnumUtil.getJavaEnumIgnoreCase(eProductType.class, null));
+		assertNull(EnumUtil.getJavaEnumIgnoreCase(eProductType.class, ""));
+		assertNull(EnumUtil.getJavaEnumIgnoreCase(eProductType.class, "foo"));
 	}
 
 	/**

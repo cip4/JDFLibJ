@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -264,7 +264,7 @@ public class EnumUtil
 			final Iterator<ValuedEnum> it = EnumUtils.iterator(clazz);
 			while (it.hasNext())
 			{
-				ValuedEnum next = it.next();
+				final ValuedEnum next = it.next();
 				if (s.equalsIgnoreCase(next.getName()))
 				{
 					return (ValuedEnum) EnumUtils.getEnum(clazz, next.getName());
@@ -274,4 +274,35 @@ public class EnumUtil
 		return null;
 	}
 
+	/**
+	 * @param <T>
+	 * @param val
+	 * @param c
+	 * @return
+	 */
+	public static <T extends Enum<T>> T getJavaEnumIgnoreCase(final Class<T> c, final String val)
+	{
+		if (!StringUtil.isEmpty(val))
+		{
+			try
+			{
+				return Enum.valueOf(c, val);
+			}
+			catch (final Exception x)
+			{
+				final T[] vals = c.getEnumConstants();
+				if (vals != null)
+				{
+					for (final T e : vals)
+					{
+						if (e.name().equalsIgnoreCase(val))
+						{
+							return e;
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
 }

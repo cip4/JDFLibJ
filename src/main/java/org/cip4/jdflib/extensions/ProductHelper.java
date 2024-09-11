@@ -50,6 +50,7 @@ import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -61,15 +62,9 @@ public class ProductHelper extends BaseXJDFHelper
 	{
 		BackCover, BlankBox, BlankSheet, BlankWeb, Body, Book, BookBlock, BookCase, Booklet, Box, Brochure, BusinessCard, Carton, Cover, CoverBoard, CoverLetter, EndSheet, Envelope, FlatBox, FlatWork, FrontCover, Insert, Jacket, Label, Leaflet, Letter, Map, Media, Newspaper, Notebook, Pallet, Postcard, Poster, Proof, ResponseCard, Section, SelfMailer, Spine, SpineBoard, Stack, WrapAroundCover;
 
-		public static eProductType getEnum(String val)
+		public static eProductType getEnum(final String val)
 		{
-			val = StringUtil.normalize(val, false, null);
-			for (final eProductType t : values())
-			{
-				if (t.name().equalsIgnoreCase(val))
-					return t;
-			}
-			return null;
+			return EnumUtil.getJavaEnumIgnoreCase(eProductType.class, val);
 		}
 	}
 
