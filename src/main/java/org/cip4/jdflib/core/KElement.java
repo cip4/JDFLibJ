@@ -108,9 +108,9 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNumList;
 import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -887,7 +887,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 */
 	public <T extends Enum<T>> T getAttribute(final String key, final Class<T> c)
 	{
-		return EnumUtil.getJavaEnumIgnoreCase(c, getNonEmpty(key));
+		return JavaEnumUtil.getEnumIgnoreCase(c, getNonEmpty(key));
 	}
 
 	/**

@@ -282,27 +282,7 @@ public class EnumUtil
 	 */
 	public static <T extends Enum<T>> T getJavaEnumIgnoreCase(final Class<T> c, final String val)
 	{
-		if (!StringUtil.isEmpty(val))
-		{
-			try
-			{
-				return Enum.valueOf(c, val);
-			}
-			catch (final Exception x)
-			{
-				final T[] vals = c.getEnumConstants();
-				if (vals != null)
-				{
-					for (final T e : vals)
-					{
-						if (e.name().equalsIgnoreCase(val))
-						{
-							return e;
-						}
-					}
-				}
-			}
-		}
-		return null;
+		return JavaEnumUtil.getEnumIgnoreCase(c, val, null);
 	}
+
 }

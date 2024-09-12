@@ -79,6 +79,7 @@ import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
 import org.cip4.jdflib.util.StreamUtil;
@@ -121,7 +122,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 
 				if (ret == null && name.toLowerCase().startsWith(MULTIPART))
 				{
-					return EnumUtil.getJavaEnumIgnoreCase(eMimeSubType.class, name);
+					return JavaEnumUtil.getEnumIgnoreCase(eMimeSubType.class, name, null);
 				}
 				return ret;
 			}
