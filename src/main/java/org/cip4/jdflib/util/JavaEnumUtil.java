@@ -83,6 +83,11 @@ import org.cip4.jdflib.core.StringArray;
 public class JavaEnumUtil
 {
 
+	private JavaEnumUtil()
+	{
+		super();
+	}
+
 	/**
 	 * get the lower of two enum values, null is lowest
 	 *
@@ -90,7 +95,7 @@ public class JavaEnumUtil
 	 * @param e2
 	 * @return the lower of the two values
 	 */
-	public static Enum<?> min(final Enum<?> e1, final Enum<?> e2)
+	public static <T extends Enum<T>> T min(final T e1, final T e2)
 	{
 		if (e1 == null || e2 == null)
 		{
@@ -106,7 +111,7 @@ public class JavaEnumUtil
 	 * @param e2
 	 * @return the higher of the two values
 	 */
-	public static Enum<?> max(final Enum<?> e1, final Enum<?> e2)
+	public static <T extends Enum<T>> T max(final T e1, final T e2)
 	{
 		if (e1 == null)
 		{
@@ -138,7 +143,7 @@ public class JavaEnumUtil
 	 * @param b the second enum
 	 * @return boolean a is < b
 	 */
-	public static boolean aLessThanB(final Enum<?> a, final Enum<?> b)
+	public static <T extends Enum<T>> boolean aLessThanB(final T a, final T b)
 	{
 		final int aa = a == null ? -1 : a.ordinal();
 		final int bb = b == null ? -1 : b.ordinal();
@@ -153,7 +158,7 @@ public class JavaEnumUtil
 	 * @param b the second enum
 	 * @return boolean a is <= b
 	 */
-	public static boolean aLessEqualsThanB(final Enum<?> a, final Enum<?> b)
+	public static <T extends Enum<T>> boolean aLessEqualsThanB(final T a, final T b)
 	{
 		final int aa = a == null ? -1 : a.ordinal();
 		final int bb = b == null ? -1 : b.ordinal();

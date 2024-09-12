@@ -86,6 +86,11 @@ import org.cip4.jdflib.core.VString;
  */
 public class EnumUtil
 {
+	private EnumUtil()
+	{
+		super();
+	}
+
 	private static final String NULL = "null";
 
 	/**
