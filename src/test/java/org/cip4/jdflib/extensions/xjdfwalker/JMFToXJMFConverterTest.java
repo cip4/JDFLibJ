@@ -87,6 +87,7 @@ import org.cip4.jdflib.jmf.JDFSubscriptionInfo;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFEvent;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
@@ -110,11 +111,11 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	void testForeignJMF()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Query, JDFMessage.EnumType.PipeClose);
-		JDFQuery query = jmf.getQuery(0);
+		final JDFQuery query = jmf.getQuery(0);
 		query.setType("foo:bar");
 		query.appendSubscription().setURL("http://foo/bar");
 		final JDFToXJDF conv = new JDFToXJDF();
-		KElement xjmf = conv.makeNewJMF(jmf);
+		final KElement xjmf = conv.makeNewJMF(jmf);
 		assertNull(xjmf);
 	}
 
@@ -145,7 +146,7 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	void testAbortQE()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.AbortQueueEntry);
-		JDFCommand command = jmf.getCommand(0);
+		final JDFCommand command = jmf.getCommand(0);
 		command.setID("C1");
 		final JDFAbortQueueEntryParams pp = (JDFAbortQueueEntryParams) command.appendElement(ElementName.ABORTQUEUEENTRYPARAMS);
 		pp.appendQueueFilter().appendQueueEntryDef("q1e");
@@ -165,7 +166,7 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	void testAbortQEResp()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.AbortQueueEntry);
-		JDFResponse resp = jmf.getResponse(0);
+		final JDFResponse resp = jmf.getResponse(0);
 		resp.setID("R1");
 		resp.setrefID("C1");
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -294,12 +295,28 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testDeviceInfoDescName()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.KnownDevices);
+		final JDFDevice dev = jmf.getResponse(0).appendDeviceList().appendDeviceInfo().appendDevice();
+		dev.setDeviceID("d1");
+		dev.setDescriptiveName("d");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		final XJMFHelper xh = new XJMFHelper(xjmf);
+		assertEquals("d", xh.getMessageHelper(0).getXPathValue("Device/@DescriptiveName"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testDeviceInfoEndTime()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
-		JDFDeviceInfo di = jmf.getSignal(0).appendDeviceInfo();
+		final JDFDeviceInfo di = jmf.getSignal(0).appendDeviceInfo();
 		di.appendDevice().setDeviceID("d1");
-		JDFDate now = new JDFDate();
+		final JDFDate now = new JDFDate();
 		di.appendJobPhase().setEndTime(now);
 		di.setEndTime(now);
 		di.appendActivity().setEndTime(now);
@@ -307,7 +324,7 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		final XJMFHelper xh = new XJMFHelper(xjmf);
 		assertEquals("d1", xh.getMessageHelper(0).getHeader().getAttribute(AttributeName.DEVICEID));
-		KElement xdi = xh.getMessageHelper(0).getRoot().getElement(ElementName.DEVICEINFO);
+		final KElement xdi = xh.getMessageHelper(0).getRoot().getElement(ElementName.DEVICEINFO);
 		assertEquals(now.getDateTimeISO(), xdi.getAttribute(AttributeName.ENDTIME));
 	}
 
@@ -1016,8 +1033,8 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 		rqp.setJobID("job1");
 		final JDFResourceInfo ri = signal.getCreateResourceInfo(0);
 		ri.setResourceName(ElementName.DIELAYOUTPRODUCTIONPARAMS);
-		JDFDieLayoutProductionParams dlp = (JDFDieLayoutProductionParams) ri.getCreateResource(null);
-		JDFRepeatDesc rd = dlp.appendRepeatDesc();
+		final JDFDieLayoutProductionParams dlp = (JDFDieLayoutProductionParams) ri.getCreateResource(null);
+		final JDFRepeatDesc rd = dlp.appendRepeatDesc();
 		rd.setGutterX(0);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);

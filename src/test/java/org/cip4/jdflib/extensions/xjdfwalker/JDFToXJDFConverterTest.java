@@ -115,6 +115,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFCoilBindingParams;
 import org.cip4.jdflib.resource.JDFCuttingParams;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFHoleLine;
 import org.cip4.jdflib.resource.JDFInsert;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
@@ -3017,6 +3018,23 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 			}
 		}
 		assertTrue(vv.isEmpty());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testDeviceDescName()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Imposition);
+		final JDFDevice dev = (JDFDevice) n.addResource(ElementName.DEVICE, EnumUsage.Input);
+		dev.setDescriptiveName("d1");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+
+		assertEquals("d1", new XJDFHelper(xjdf).getSet(ElementName.DEVICE, 0).getResource(0).getDescriptiveName());
+		assertEquals("d1", new XJDFHelper(xjdf).getSet(ElementName.DEVICE, 0).getResource(0).getResource().getAttribute(AttributeName.DESCRIPTIVENAME));
 	}
 
 	/**

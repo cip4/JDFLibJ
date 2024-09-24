@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -87,13 +87,13 @@ public class WalkResource extends WalkJDFElement
 			if (bRoot)
 			{
 				removeDeprecatedResourceAttribs(r, xjdf);
-				EnumResStatus status = r.getResStatus(false);
+				final EnumResStatus status = r.getResStatus(false);
 				if (status != null)
 				{
-					ResourceHelper h = ResourceHelper.getHelper(xjdf);
+					final ResourceHelper h = ResourceHelper.getHelper(xjdf);
 					if (h != null)
 					{
-						EnumResStatus newStatus = status.compareTo(EnumResStatus.Available) >= 0 ? EnumResStatus.Available : EnumResStatus.Unavailable;
+						final EnumResStatus newStatus = status.compareTo(EnumResStatus.Available) >= 0 ? EnumResStatus.Available : EnumResStatus.Unavailable;
 						h.setStatus(newStatus);
 					}
 				}
@@ -138,14 +138,27 @@ public class WalkResource extends WalkJDFElement
 			{
 				if (bRoot)
 				{
-					xjdf.moveAttribute(attrib, newResLeaf);
+					if (retainRoot(attrib))
+					{
+						xjdf.copyAttribute(attrib, newResLeaf);
+
+					}
+					else
+					{
+						xjdf.moveAttribute(attrib, newResLeaf);
+					}
 				}
-				else
+				else if (!retainRoot(attrib))
 				{
 					newResLeaf.removeAttribute(attrib);
 				}
 			}
 		}
+	}
+
+	protected boolean retainRoot(final String attrib)
+	{
+		return false;
 	}
 
 	/**
