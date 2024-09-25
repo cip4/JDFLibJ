@@ -245,7 +245,6 @@ public class WalkElement extends WalkAnyElement
 				el.removeAttribute_KElement(key, null);
 			}
 		}
-		fixDateTime(el, key, value, false);
 	}
 
 	void fixNMTOKEN(final JDFElement el, final String key, final String value)

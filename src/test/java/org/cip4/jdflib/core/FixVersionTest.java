@@ -680,12 +680,14 @@ class FixVersionTest extends JDFTestCaseBase
 		final JDFNodeInfo ni = n.appendNodeInfo();
 		ni.setAttribute(AttributeName.START, new JDFDate().getDateISO());
 		ni.setAttribute(AttributeName.LASTEND, new JDFDate().getDateISO());
+		final JDFResource nip = ni.addPartition(EnumPartIDKey.Run, new JDFDate().getDateISO());
 		final FixVersion fixVersion = new FixVersion((EnumVersion) null);
 		fixVersion.setBZappInvalid(true);
 		final boolean converted = fixVersion.convert(n);
 		assertTrue(converted);
 		assertTrue(ni.getAttribute(AttributeName.START).indexOf("T06:00") > 0);
 		assertTrue(ni.getAttribute(AttributeName.LASTEND).indexOf("T18:00") > 0);
+		assertFalse(nip.getAttribute(AttributeName.RUN).indexOf("T") > 0);
 	}
 
 	/**
