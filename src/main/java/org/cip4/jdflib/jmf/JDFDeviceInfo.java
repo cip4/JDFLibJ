@@ -495,4 +495,70 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	{
 		setAttribute(AttributeName.STATUS, s == null ? null : s.name());
 	}
+
+	/**
+	 * XJDF only!
+	 * 
+	 * @return
+	 */
+	public JDFModuleInfo getModuleInfo()
+	{
+		return (JDFModuleInfo) getElement(ElementName.MODULEINFO, null, 0);
+	}
+
+	/**
+	 * 
+	 * XJDF only!
+	 * 
+	 * @return
+	 */
+	public JDFModuleInfo getCreateModuleInfo()
+	{
+		return (JDFModuleInfo) getCreateElement_JDFElement(ElementName.MODULEINFO, null, 0);
+	}
+
+	/**
+	 * 
+	 * XJDF only!
+	 * 
+	 * @param iSkip
+	 * @return
+	 */
+	public JDFModuleInfo getCreateModuleInfo(final int iSkip)
+	{
+		return (JDFModuleInfo) getCreateElement_JDFElement(ElementName.MODULEINFO, null, iSkip);
+	}
+
+	/**
+	 * 
+	 * XJDF only!
+	 * 
+	 * @param iSkip
+	 * @return
+	 */
+	public JDFModuleInfo getModuleInfo(final int iSkip)
+	{
+		return (JDFModuleInfo) getElement(ElementName.MODULEINFO, null, iSkip);
+	}
+
+	/**
+	 * 
+	 * XJDF only!
+	 * 
+	 * @return
+	 */
+	public Collection<JDFModuleInfo> getAllModuleInfo()
+	{
+		return getChildArrayByClass(JDFModuleInfo.class, false, 0);
+	}
+
+	/**
+	 * XJDF only!
+	 * 
+	 * @return
+	 */
+	public JDFModuleInfo appendModuleInfo()
+	{
+		return (JDFModuleInfo) appendElement(ElementName.MODULEINFO, null);
+	}
 }

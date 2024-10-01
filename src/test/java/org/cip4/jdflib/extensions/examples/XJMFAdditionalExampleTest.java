@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -34,71 +34,68 @@
  *
  *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.examples;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.extensions.XJMFHelper;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.jmf.JDFModuleInfo;
+import org.cip4.jdflib.util.JDFDuration;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ *
+ * @author rainer prosi
+ *
  */
-public class WalkModuleStatus extends WalkJDFSubElement
+class XJMFAdditionalExampleTest extends ExampleTest
 {
+
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	@BeforeEach
+	public void setUp() throws Exception
+	{
+		JDFElement.setLongID(false);
+		super.setUp();
+	}
+
 	/**
 	 *
 	 */
-	public WalkModuleStatus()
+	@Test
+	void testModuleStatus()
 	{
-		super();
-	}
+		final XJMFHelper xjmf = new XJMFHelper();
+		final MessageHelper signalStatus = xjmf.appendMessage(EnumFamily.Signal, EnumType.Status);
+		final JDFDeviceInfo di = (JDFDeviceInfo) signalStatus.appendElement(ElementName.DEVICEINFO);
+		di.setHourCounter(new JDFDuration().addOffset(0, 0, 10, 500));
+		di.setSpeed(12000);
+		di.setXJMFStatus(eDeviceStatus.Production);
 
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return !jdfToXJDF.isRetainAll();
-	}
+		final JDFModuleInfo mi1 = di.appendModuleInfo();
+		mi1.setModuleID("P1");
+		mi1.setModuleStatus(eDeviceStatus.Production);
+		final JDFModuleInfo mi11 = di.appendModuleInfo();
+		mi11.setModuleID("P2");
+		mi11.setModuleStatus(eDeviceStatus.Production);
 
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return new VString(ElementName.MODULESTATUS, null);
-	}
+		final JDFModuleInfo mi2 = di.appendModuleInfo();
+		mi2.setModuleID("V1");
+		mi2.setModuleStatus(eDeviceStatus.Idle);
 
-	@Override
-	protected void updateAttributes(final JDFAttributeMap map)
-	{
-		super.updateAttributes(map);
-		map.remove(AttributeName.MODULETYPE);
-		final String id = map.remove(AttributeName.MODULEINDEX);
-		if (id != null && map.get(AttributeName.MODULEID) == null)
-		{
-			map.put(AttributeName.MODULEID, StringUtil.token(id, 0, null));
-		}
-		String deviceStatus = map.remove(AttributeName.DEVICESTATUS);
-		if ("Running".equals(deviceStatus))
-			deviceStatus = eDeviceStatus.Production.name();
-		map.putNotNull(AttributeName.STATUS, deviceStatus);
-
-		map.remove(AttributeName.COMBINEDPROCESSINDEX);
-	}
-
-	@Override
-	protected String getXJDFName(final KElement jdf)
-	{
-		return ElementName.MODULEINFO;
+		xjmf.cleanUp();
+		xjmf.writeToFile(sm_dirTestDataTemp + "preliminary/moduleinfo.xjmf");
+		writeRoundTripX(xjmf, "ModuleInfo", EnumValidationLevel.Incomplete);
 	}
 
 }

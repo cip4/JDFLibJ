@@ -134,8 +134,6 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 		assertEquals(di.getDescriptiveName(), "da");
 	}
 
-	// ///////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -146,7 +144,20 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 		assertNotNull(di, "got here!");
 	}
 
-	// ///////////////////////////////////////////////////////////////////
+	/**
+	 *
+	 */
+	@Test
+	void testModuleInfo()
+	{
+		di.setDeviceStatus(null);
+		assertNull(di.getModuleInfo());
+		assertNull(di.getModuleInfo(0));
+		final JDFModuleInfo mi = di.appendModuleInfo();
+		assertEquals(mi, di.getModuleInfo());
+		assertEquals(mi, di.getCreateModuleInfo(0));
+		assertEquals(mi, di.getAllModuleInfo().iterator().next());
+	}
 
 	/**
 	 *
@@ -180,7 +191,6 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 		assertEquals(jp2.getAmount(), 500., 0.);
 	}
 
-	// ///////////////////////////////////////////////////////////////////
 	/**
 	 *
 	 */

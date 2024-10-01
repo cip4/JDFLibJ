@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,32 +73,18 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.jmf.JDFDeviceInfo;
-import org.cip4.jdflib.resource.JDFModuleStatus;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkDeviceInfo extends WalkXElement
+public class WalkModuleInfo extends WalkXElement
 {
 	/**
 	 *
 	 */
-	public WalkDeviceInfo()
+	public WalkModuleInfo()
 	{
 		super();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return toCheck instanceof JDFDeviceInfo;
 	}
 
 	/**
@@ -107,7 +93,7 @@ public class WalkDeviceInfo extends WalkXElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.DEVICEINFO, null);
+		return new VString(ElementName.MODULEINFO, null);
 	}
 
 	/**
@@ -117,46 +103,18 @@ public class WalkDeviceInfo extends WalkXElement
 	protected void updateAttributes(final KElement elem)
 	{
 		elem.renameAttribute(AttributeName.STATUS, AttributeName.DEVICESTATUS);
-		final String newStatus = updateDeviceStatus(elem.getNonEmpty(AttributeName.DEVICESTATUS));
+		final String newStatus = WalkDeviceInfo.updateDeviceStatus(elem.getNonEmpty(AttributeName.DEVICESTATUS));
 		elem.setAttribute(AttributeName.DEVICESTATUS, newStatus);
-		updateModuleIDS(elem);
+		elem.removeAttribute(AttributeName.HOURCOUNTER);
+		elem.removeAttribute(AttributeName.PRODUCTIONCOUNTER);
+		elem.removeAttribute(AttributeName.TOTALPRODUCTIONCOUNTER);
+		elem.removeAttribute(XJDFConstants.ModuleCondition);
 		super.updateAttributes(elem);
 	}
 
-	private void updateModuleIDS(final KElement elem)
+	@Override
+	String getJDFName(final KElement e)
 	{
-		final VString modules = VString.getVString(elem.getNonEmpty(XJDFConstants.ModuleIDs), null);
-		elem.removeAttribute(XJDFConstants.ModuleIDs);
-		if (modules != null)
-		{
-			for (final String module : modules)
-			{
-				final JDFModuleStatus mp = (JDFModuleStatus) elem.appendElement(ElementName.MODULESTATUS);
-				mp.setModuleID(module);
-				mp.copyAttribute(AttributeName.DEVICESTATUS, elem);
-				mp.setModuleType("Unknown");
-			}
-		}
-	}
-
-	/**
-	 *
-	 * @param val
-	 * @return
-	 */
-	static String updateDeviceStatus(String val)
-	{
-		if (StringUtil.getNonEmpty(val) != null)
-		{
-			if ("Offline".equals(val))
-			{
-				val = "Unknown";
-			}
-			else if ("Production".equals(val))
-			{
-				val = "Running";
-			}
-		}
-		return val;
+		return ElementName.MODULESTATUS;
 	}
 }

@@ -2005,9 +2005,8 @@ public final class AttributeName
 	public static final String MODIFICATIONID = "ModificationID";
 	/** */
 	public static final String MODULEAVAILABLEINDEX = "ModuleAvailableIndex";
-	/** */
+	public static final String MODULECONDITION = "ModuleCondition";
 	public static final String MODULEDRYING = "ModuleDrying";
-	/** */
 	public static final String MODULEHEIGHT = "ModuleHeight";
 	/** */
 	public static final String MODULEID = "ModuleID";

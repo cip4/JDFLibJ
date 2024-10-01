@@ -48,7 +48,6 @@ public abstract class XJDFEnums
 		public static eDeviceStatus getEnum(final String val)
 		{
 			return EnumUtil.getJavaEnumIgnoreCase(eDeviceStatus.class, val);
-
 		}
 	}
 }

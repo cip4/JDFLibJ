@@ -2205,7 +2205,7 @@
         <xs:attribute name="DeviceStatus" type="jdftyp:eDeviceStatus_" use="required" />
         <xs:attribute name="ModuleID" type="jdftyp:string" use="optional" />
         <xs:attribute name="ModuleIndex" type="jdftyp:IntegerRangeList" use="optional" />
-        <xs:attribute name="ModuleType" type="jdftyp:NMTOKEN" use="required" />
+        <xs:attribute name="ModuleType" type="jdftyp:NMTOKEN" use="optional" />
         <xs:attribute name="StatusDetails" type="jdftyp:shortString" use="optional" />
       </xs:extension>
     </xs:complexContent>

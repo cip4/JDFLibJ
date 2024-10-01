@@ -107,6 +107,11 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	private static final long serialVersionUID = 1L;
 	private static boolean bDefaultWorkStepID = false;
 
+	public enum eJobPhaseStatus
+	{
+		Aborted, Cleanup, Completed, InProress, Setup, Stopped, Suspended, Waiting
+	}
+
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[20];
 	static
 	{
@@ -517,7 +522,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	}
 
 	/**
-	 * getStart with some better defaulting  
+	 * getStart with some better defaulting
 	 * 
 	 * @return
 	 */

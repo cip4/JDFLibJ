@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -124,7 +124,7 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 		String status = map.get(AttributeName.STATUS);
 		final String opMode = map.remove(AttributeName.DEVICEOPERATIONMODE);
 
-		final String devCondition = map.remove(AttributeName.DEVICECONDITION);
+		final String devCondition = map.get(AttributeName.DEVICECONDITION);
 		final EnumDeviceCondition dc = EnumDeviceCondition.getEnum(devCondition);
 		eDeviceStatus eS = eDeviceStatus.getEnum(status);
 		if (dc != null && (EnumDeviceCondition.OffLine.equals(dc) || EnumDeviceCondition.Failure.equals(dc)))

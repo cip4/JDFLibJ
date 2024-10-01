@@ -83,9 +83,9 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JDFDate;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
 import org.w3c.dom.Comment;
 
 /**
@@ -103,7 +103,7 @@ class XJDFExampleTest extends ExampleTest
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
 		xjdfHelper.setTypes(EnumType.Product.getName());
-		final SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
+		final SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, EnumUsage.Input);
 		final ResourceHelper rh = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		final JDFMedia m = (JDFMedia) rh.getResource();
 		m.setAttribute("foo:FooAtt", "FooVal", "http://www.foo.org");

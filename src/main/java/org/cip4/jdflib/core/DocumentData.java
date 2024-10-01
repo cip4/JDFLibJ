@@ -556,6 +556,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.MODULE, JDFLIB + "resource.devicecapability.JDFModule");
 		sm_PackageNames.put(ElementName.MODULECAP, JDFLIB + "resource.devicecapability.JDFModuleCap");
 		sm_PackageNames.put(ElementName.MODULEPHASE, JDFLIB + "resource.JDFModulePhase");
+		sm_PackageNames.put(ElementName.MODULEINFO, JDFLIB + "jmf.JDFModuleInfo");
 		sm_PackageNames.put(ElementName.MODULEPOOL, JDFLIB + "resource.devicecapability.JDFModulePool");
 		sm_PackageNames.put(ElementName.MODULESTATUS, JDFLIB + "resource.JDFModuleStatus");
 		sm_PackageNames.put(ElementName.MOVERESOURCE, JDFLIB + "jmf.JDFMoveResource");

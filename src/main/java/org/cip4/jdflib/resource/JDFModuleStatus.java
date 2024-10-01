@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,8 @@ package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoModuleStatus;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
@@ -96,7 +98,7 @@ public class JDFModuleStatus extends JDFAutoModuleStatus
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFModuleStatus(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFModuleStatus(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -109,7 +111,7 @@ public class JDFModuleStatus extends JDFAutoModuleStatus
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFModuleStatus(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFModuleStatus(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -123,20 +125,25 @@ public class JDFModuleStatus extends JDFAutoModuleStatus
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFModuleStatus(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFModuleStatus(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	@Override
-	public String toString()
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
 	{
-		return "JDFModuleStatus[  --> " + super.toString() + " ]";
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MODULETYPE, 0x3333322222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+	}
+
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
 	/**
-	 * This function first, gets all required attributes and then compare them with the attributes present and returns a
-	 * Vector with the missing attributes
+	 * This function first, gets all required attributes and then compare them with the attributes present and returns a Vector with the missing attributes
 	 * 
 	 * @param nMax maximum size of the returned Vector
 	 * 
@@ -145,7 +152,7 @@ public class JDFModuleStatus extends JDFAutoModuleStatus
 	 * @default getMissingAttributes(9999999)
 	 */
 	@Override
-	public VString getMissingAttributes(int nMax)
+	public VString getMissingAttributes(final int nMax)
 	{
 		final VString v = super.getMissingAttributes(nMax);
 		if (nMax <= 0 || v.size() <= nMax)

@@ -116,6 +116,8 @@ public abstract class XJDFConstants
 	public static final String ModifyQueueEntry = "ModifyQueueEntry";
 	public static final String ModifyQueueEntryParams = "ModifyQueueEntryParams";
 	public static final String ModuleIDs = "ModuleIDs";
+	public static final String ModuleCondition = "ModuleCondition";
+	public static final String ModuleStatus = "ModuleStatus";
 	public static final String MultiPageFold = "MultiPageFold";
 
 	public static final String OrderQuantity = "OrderQuantity";

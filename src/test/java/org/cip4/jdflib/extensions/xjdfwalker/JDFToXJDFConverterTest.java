@@ -102,6 +102,7 @@ import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
@@ -121,6 +122,7 @@ import org.cip4.jdflib.resource.JDFInsert;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
 import org.cip4.jdflib.resource.JDFLabelingParams;
 import org.cip4.jdflib.resource.JDFMarkObject;
+import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
@@ -1730,11 +1732,13 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
 		di.appendDevice().setDeviceID("id");
 		di.setDeviceStatus(EnumDeviceStatus.Running);
-		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 0 }));
-		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 1 }));
+		final JDFModuleStatus moduleStatus = di.appendModuleStatus();
+		moduleStatus.setModuleIndex(new JDFIntegerRangeList(new int[] { 0 }));
+		moduleStatus.setDeviceStatus(EnumDeviceStatus.Running);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@ModuleIDs", null), "0 1");
+		assertEquals("0", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/ModuleInfo/@ModuleID", null));
+		assertEquals(eDeviceStatus.Production.name(), xjmf.getXPathAttribute("SignalStatus/DeviceInfo/ModuleInfo/@Status", null));
 	}
 
 	/**
@@ -1751,7 +1755,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 4, 6 }));
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@ModuleIDs", null), "0 4 6");
+		assertEquals("0", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/ModuleInfo/@ModuleID", null));
 	}
 
 	/**

@@ -604,6 +604,14 @@
 			<xs:enumeration value="Fatal"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="DeviceCondition">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OK"/>
+			<xs:enumeration value="NeedsAttention"/>
+			<xs:enumeration value="Failure"/>
+			<xs:enumeration value="OffLine"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="DeviceStatus">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="Cleanup"/>
@@ -898,8 +906,10 @@
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Event"/>
 				<xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="JobPhase"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ModuleInfo"/>
 			</xs:sequence>
 			<xs:attribute name="CounterUnit" type="xs:NMTOKEN" use="optional"/>
+			<xs:attribute name="DeviceCondition" type="DeviceCondition" use="optional"/>
 			<xs:attribute name="EndTime" type="xs:dateTime" use="optional"/>
 			<xs:attribute name="HourCounter" type="xs:duration" use="optional"/>
 			<xs:attribute name="IdleStartTime" type="xs:dateTime" use="optional"/>
@@ -988,6 +998,18 @@
 			<xs:attribute name="ToolIDs" type="xs:NMTOKENS" use="optional"/>
 			<xs:attribute name="Waste" type="xs:float" use="optional"/>
 			<xs:attribute name="WorkStepID" type="xs:NMTOKEN" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModuleInfo">
+		<xs:complexType>
+			<xs:attribute name="HourCounter" type="xs:duration" use="optional"/>
+			<xs:attribute name="ModuleCondition" type="DeviceCondition" use="optional"/>
+			<xs:attribute name="ModuleID" type="xs:NMTOKEN" use="required"/>
+			<xs:attribute name="ProductionCounter" type="xs:float" use="optional"/>
+			<xs:attribute name="Status" type="DeviceStatus" use="required"/>
+			<xs:attribute name="StatusDetails" type="xs:string" use="optional"/>
+			<xs:attribute name="TotalProductionCounter" type="xs:float" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
@@ -3049,12 +3071,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:element name="SizeIntent" substitutionGroup="ProductIntent" type="SizeIntent"/>
-	<xs:complexType name="SizeIntent">
-		<xs:complexContent>
-			<xs:extension base="ProductIntent"/>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:element name="Address">
 		<xs:complexType>
 			<xs:sequence>
@@ -4381,6 +4397,7 @@
 			<xs:sequence>
 				<xs:element maxOccurs="unbounded" minOccurs="1" ref="Condition"/>
 			</xs:sequence>
+			<xs:attribute name="Amount" type="xs:int" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>

@@ -1,7 +1,8 @@
-/**
+/*
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ *
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -34,71 +35,90 @@
  *
  *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
+package org.cip4.jdflib.jmf;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.JDFDuration;
+import org.junit.jupiter.api.Test;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * @author Rainer Prosi
+ *
+ *         Test of the Status JMF
  */
-public class WalkModuleStatus extends WalkJDFSubElement
+class JDFModuleInfoTest extends JDFTestCaseBase
 {
-	/**
-	 *
-	 */
-	public WalkModuleStatus()
-	{
-		super();
-	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
+	*
+	*/
+	@Test
+	void testModuleStatus()
 	{
-		return !jdfToXJDF.isRetainAll();
+		final JDFModuleInfo mi = (JDFModuleInfo) JDFElement.createRoot(ElementName.MODULEINFO);
+		mi.setModuleStatus(eDeviceStatus.Offline);
+		assertEquals(eDeviceStatus.Offline, mi.getModuleStatus());
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
+	*
+	*/
+	@Test
+	void testModuleIDs()
 	{
-		return new VString(ElementName.MODULESTATUS, null);
+		final JDFModuleInfo mi = (JDFModuleInfo) JDFElement.createRoot(ElementName.MODULEINFO);
+		assertTrue(mi.getModuleID().isEmpty());
+		mi.setModuleID("M1");
+
+		assertEquals("M1", mi.getModuleID());
 	}
 
-	@Override
-	protected void updateAttributes(final JDFAttributeMap map)
+	/**
+	*
+	*/
+	@Test
+	void testAttributes()
 	{
-		super.updateAttributes(map);
-		map.remove(AttributeName.MODULETYPE);
-		final String id = map.remove(AttributeName.MODULEINDEX);
-		if (id != null && map.get(AttributeName.MODULEID) == null)
-		{
-			map.put(AttributeName.MODULEID, StringUtil.token(id, 0, null));
-		}
-		String deviceStatus = map.remove(AttributeName.DEVICESTATUS);
-		if ("Running".equals(deviceStatus))
-			deviceStatus = eDeviceStatus.Production.name();
-		map.putNotNull(AttributeName.STATUS, deviceStatus);
+		final JDFModuleInfo mi = (JDFModuleInfo) JDFElement.createRoot(ElementName.MODULEINFO);
+		mi.setHourCounter(null);
+		assertNull(mi.getHourCounter());
 
-		map.remove(AttributeName.COMBINEDPROCESSINDEX);
+		final JDFDuration h = new JDFDuration(400000);
+		mi.setHourCounter(h);
+		assertEquals(h, mi.getHourCounter());
+
+		mi.setModuleCondition(EnumDeviceCondition.NeedsAttention);
+		assertEquals(EnumDeviceCondition.NeedsAttention, mi.getModuleCondition());
+
+		mi.setStatusDetails("aaa");
+		assertEquals("aaa", mi.getStatusDetails());
+
+		mi.setProductionCounter(42);
+		assertEquals(42, mi.getProductionCounter(), 0.001);
+
+		mi.setTotalProductionCounter(420);
+		assertEquals(420, mi.getTotalProductionCounter(), 0.001);
 	}
 
-	@Override
-	protected String getXJDFName(final KElement jdf)
+	/**
+	*
+	*/
+	@Test
+	void testToString()
 	{
-		return ElementName.MODULEINFO;
+		final JDFModuleInfo mi = (JDFModuleInfo) JDFElement.createRoot(ElementName.MODULEINFO);
+		final String s = mi.toString();
+		assertNotNull(s);
 	}
 
 }
