@@ -39,8 +39,10 @@ package org.cip4.jdflib.extensions.examples;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.XJMFHelper;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -66,6 +68,8 @@ class XJMFAdditionalExampleTest extends ExampleTest
 	public void setUp() throws Exception
 	{
 		JDFElement.setLongID(false);
+		XJDFHelper.setDefaultVersion(EnumVersion.Version_2_3);
+		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_9);
 		super.setUp();
 	}
 

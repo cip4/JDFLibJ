@@ -353,7 +353,7 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		xjmf.write2File(sm_dirTestDataTemp + "JMF1.xjmf");
-		assertEquals("0 1 2 3 4 5 6 7", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@ModuleIDs", null));
+		assertEquals("0", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/ModuleInfo/@ModuleID", null));
 	}
 
 	/**

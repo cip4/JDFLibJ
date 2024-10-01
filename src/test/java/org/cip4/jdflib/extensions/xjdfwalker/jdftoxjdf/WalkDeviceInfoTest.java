@@ -69,7 +69,6 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
@@ -120,7 +119,7 @@ class WalkDeviceInfoTest extends JDFTestCaseBase
 		di.setDeviceCondition(EnumDeviceCondition.Failure);
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), "Offline");
-		assertNull(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@DeviceCondition", null));
+		assertEquals(EnumDeviceCondition.Failure.getName(), xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@DeviceCondition", null));
 
 	}
 

@@ -561,4 +561,9 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	{
 		return (JDFModuleInfo) appendElement(ElementName.MODULEINFO, null);
 	}
+
+	public JDFModuleInfo getModuleInfo(final String id)
+	{
+		return getChildWithAttribute(JDFModuleInfo.class, AttributeName.MODULEID, id);
+	}
 }

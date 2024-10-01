@@ -75,7 +75,10 @@ import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JDFMessageService;
+import org.cip4.jdflib.jmf.JDFModuleInfo;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
@@ -662,6 +665,61 @@ class PostXJDFWalker extends BaseElementWalker
 		public VString getElementNames()
 		{
 			return new VString(new String[] { ElementName.CONTENTOBJECT, ElementName.MARKOBJECT });
+		}
+	}
+
+	/**
+	 *
+	 *
+	 */
+	public class WalkModuleInfo extends WalkElement
+	{
+		/**
+		 *
+		 */
+		public WalkModuleInfo()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkRefElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			final KElement parent = xjdf.getParentNode_KElement();
+			if (parent instanceof JDFJobPhase)
+			{
+				moveToDeviceInfo((JDFJobPhase) parent, (JDFModuleInfo) xjdf);
+			}
+			return super.walk(xjdf, dummy);
+		}
+
+		void moveToDeviceInfo(final JDFJobPhase jp, final JDFModuleInfo moduleInfo)
+		{
+			final JDFDeviceInfo di = (JDFDeviceInfo) jp.getParentNode_KElement();
+			final String id = moduleInfo.getModuleID();
+			final JDFModuleInfo existing = di.getModuleInfo(id);
+			if (existing == null)
+			{
+				di.moveElement(moduleInfo, null);
+			}
+			else
+			{
+				moduleInfo.deleteNode();
+			}
+			jp.appendAttribute(XJDFConstants.ModuleIDs, id, true);
+
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(new String[] { ElementName.MODULEINFO });
 		}
 	}
 
