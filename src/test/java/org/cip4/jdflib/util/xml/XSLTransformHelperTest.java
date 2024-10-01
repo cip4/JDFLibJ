@@ -45,6 +45,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
@@ -78,6 +79,38 @@ class XSLTransformHelperTest extends JDFTestCaseBase
 		final KElement a = new XMLDoc("a", null).getRoot();
 		final KElement t = new XSLTransformHelper(a, xsl).getTransformElement().getRoot();
 		assertNotNull(t);
+	}
+
+	/**
+	 * make sure we also transform JDFDoc
+	 */
+	@Test
+	void testGetTransformElementJDFDoc()
+	{
+		final XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
+		final KElement style = xsl.getRoot();
+		final KElement template = style.appendElement("xsl:template");
+		template.setAttribute("match", "*");
+		template.appendElement("html", "http://www.w3.org/1999/xhtml");
+		final JDFElement a = (JDFElement) new JDFDoc("a", null).getRoot();
+		final KElement t = new XSLTransformHelper(a, xsl).getTransformElement().getRoot();
+		assertEquals("html", t.getNodeName());
+	}
+
+	/**
+	 * make sure we also transform JDFDoc
+	 */
+	@Test
+	void testGetTransformElementJDFDoc2()
+	{
+		final XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
+		final KElement style = xsl.getRoot();
+		final KElement template = style.appendElement("xsl:template");
+		template.setAttribute("match", "*");
+		template.appendElement("html", "http://www.w3.org/1999/xhtml");
+		final KElement a = JDFDoc.parseString("<a/>").getRoot();
+		final KElement t = new XSLTransformHelper(a, xsl).getTransformElement().getRoot();
+		assertEquals("html", t.getNodeName());
 	}
 
 	/**
