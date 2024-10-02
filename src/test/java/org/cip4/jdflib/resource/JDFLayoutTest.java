@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -48,6 +48,7 @@ import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.auto.JDFAutoRegisterMark.EnumMarkUsage;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -123,7 +124,7 @@ class JDFLayoutTest extends JDFTestCaseBase
 	@Test
 	void testIsNewLayout()
 	{
-		Assertions.assertEquals(n.getVersion(false), defaultVersion, "version ok");
+		Assertions.assertEquals(n.getVersion(false), JDFAudit.getDefaultJDFVersion(), "version ok");
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		Assertions.assertTrue(JDFLayout.isNewLayout(lo), "lo 1.3");
 		n.setVersion(EnumVersion.Version_1_2);
@@ -140,7 +141,7 @@ class JDFLayoutTest extends JDFTestCaseBase
 	void testAutoRegister()
 	{
 
-		Assertions.assertEquals(n.getVersion(false), defaultVersion, "version ok");
+		Assertions.assertEquals(n.getVersion(false), JDFAudit.getDefaultJDFVersion(), "version ok");
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		final JDFColorControlStrip autoReg = lo.appendMarkObject().appendColorControlStrip();
 		autoReg.setStripType("AutoRegister");
@@ -172,7 +173,7 @@ class JDFLayoutTest extends JDFTestCaseBase
 	{
 
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
-		JDFMarkObject mo = lo.appendMarkObject();
+		final JDFMarkObject mo = lo.appendMarkObject();
 		mo.setCTM(JDFMatrix.getUnitMatrix());
 		mo.setOrd(0);
 		final JDFIdentificationField idf = mo.appendIdentificationField();
@@ -319,7 +320,7 @@ class JDFLayoutTest extends JDFTestCaseBase
 			mark0.setTrimSize(20, 30);
 			mark0.setCTM(new JDFMatrix(1, 0, 0, 1, 500 - 20, 350 - 30));
 			mark0.appendDeviceMark().setAttribute("Anchor", "TopRight");
-			JDFRegisterMark registerMark = mark0.appendRegisterMark();
+			final JDFRegisterMark registerMark = mark0.appendRegisterMark();
 			registerMark.setXMLComment("mark metadata goes here", true);
 			registerMark.setCenter(10, 10);
 			appendRefAnchor(mark0, "TopRight", "Parent", null);
