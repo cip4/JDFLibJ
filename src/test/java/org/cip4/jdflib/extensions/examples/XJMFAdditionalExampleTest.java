@@ -68,9 +68,9 @@ class XJMFAdditionalExampleTest extends ExampleTest
 	public void setUp() throws Exception
 	{
 		JDFElement.setLongID(false);
+		super.setUp();
 		XJDFHelper.setDefaultVersion(EnumVersion.Version_2_3);
 		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_9);
-		super.setUp();
 	}
 
 	/**

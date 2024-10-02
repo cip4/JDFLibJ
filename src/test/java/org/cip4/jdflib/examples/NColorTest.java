@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -37,6 +37,8 @@
  */
 package org.cip4.jdflib.examples;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.util.HashSet;
 
@@ -45,12 +47,15 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.goldenticket.MISCPGoldenTicket;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -61,7 +66,6 @@ import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class NColorTest extends JDFTestCaseBase
@@ -142,7 +146,7 @@ class NColorTest extends JDFTestCaseBase
 
 		// jmfStatus.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "StatusPerfecting.jmf", 2, false);
 		writeRoundTrip(jmfStatus, "StatusPerfecting.jmf");
-		Assertions.assertTrue(jmfStatus.isValid(EnumValidationLevel.Complete), "known defect - wait for autoclass fix");
+		assertTrue(jmfStatus.isValid(EnumValidationLevel.Complete), "known defect - wait for autoclass fix");
 	}
 
 	/**
@@ -273,8 +277,12 @@ class NColorTest extends JDFTestCaseBase
 		node = bgt.getNode();
 	}
 
-	// /////////////////////////////////////////////////////////////////
-
-	// /////////////////////////////////////////////////////////////////
+	@Override
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		XJDFHelper.setDefaultVersion(EnumVersion.Version_2_3);
+		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_9);
+	}
 
 }
