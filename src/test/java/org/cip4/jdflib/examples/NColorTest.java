@@ -66,6 +66,7 @@ import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.util.EnumUtil;
 import org.junit.jupiter.api.Test;
 
 class NColorTest extends JDFTestCaseBase
@@ -117,6 +118,11 @@ class NColorTest extends JDFTestCaseBase
 	@Test
 	void testPerfectingJMF() throws Exception
 	{
+		if (EnumUtil.aLessThanB(getDefaultXJDFVersion(), EnumVersion.Version_2_3))
+		{
+			XJDFHelper.setDefaultVersion(EnumVersion.Version_2_3);
+			JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_9);
+		}
 		KElement.setLongID(false);
 		final JDFJMF jmfStatus = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
 		jmfStatus.setSenderID("thePress");
@@ -146,6 +152,46 @@ class NColorTest extends JDFTestCaseBase
 
 		// jmfStatus.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "StatusPerfecting.jmf", 2, false);
 		writeRoundTrip(jmfStatus, "StatusPerfecting.jmf");
+		assertTrue(jmfStatus.isValid(EnumValidationLevel.Complete), "known defect - wait for autoclass fix");
+	}
+
+	/**
+	 * test iteration using Identical in NodeInfo
+	 */
+	@Test
+	void testPerfectingJMFOld() throws Exception
+	{
+		XJDFHelper.setDefaultVersion(EnumVersion.Version_2_2);
+		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_8);
+		KElement.setLongID(false);
+		final JDFJMF jmfStatus = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
+		jmfStatus.setSenderID("thePress");
+		final JDFSignal sig = jmfStatus.getSignal(0);
+		final JDFDeviceInfo di = sig.appendDeviceInfo();
+		di.setDeviceStatus(EnumDeviceStatus.Running);
+
+		final JDFJobPhase jp = di.appendJobPhase();
+		jp.setJobID("jobID");
+		jp.setJobPartID("jobPartID");
+		jp.setStatus(EnumNodeStatus.InProgress);
+
+		JDFModuleStatus ms = jp.appendModuleStatus();
+		ms.setModuleID("ID_Perfecting_1");
+		ms.setModuleType("PerfectingModule");
+		ms.setDeviceStatus(EnumDeviceStatus.Idle);
+
+		ms = jp.appendModuleStatus();
+		ms.setModuleType("PrintModule");
+		ms.setDeviceStatus(EnumDeviceStatus.Running);
+		ms.setModuleIndex(new JDFIntegerRangeList("0 1 3 4"));
+
+		ms = jp.appendModuleStatus();
+		ms.setModuleType("PrintModule");
+		ms.setDeviceStatus(EnumDeviceStatus.Idle);
+		ms.setModuleIndex(new JDFIntegerRangeList("2"));
+
+		// jmfStatus.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "StatusPerfecting.jmf", 2, false);
+		writeRoundTrip(jmfStatus, "StatusPerfectingOld.jmf", EnumVersion.Version_2_2);
 		assertTrue(jmfStatus.isValid(EnumValidationLevel.Complete), "known defect - wait for autoclass fix");
 	}
 
@@ -275,14 +321,6 @@ class NColorTest extends JDFTestCaseBase
 		bgt.nCols[0] = bgt.nCols[1] = 4;
 		bgt.assign(null);
 		node = bgt.getNode();
-	}
-
-	@Override
-	public void setUp() throws Exception
-	{
-		super.setUp();
-		XJDFHelper.setDefaultVersion(EnumVersion.Version_2_3);
-		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_9);
 	}
 
 }

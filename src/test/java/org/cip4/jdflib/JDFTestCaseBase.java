@@ -144,7 +144,7 @@ public abstract class JDFTestCaseBase
 	 */
 	public static String getXJDFSchema()
 	{
-		return getXJDFSchema(2, 0);
+		return getXJDFSchema(2, getDefaultXJDFVersion().getMinorVersion());
 	}
 
 	/**
@@ -206,9 +206,9 @@ public abstract class JDFTestCaseBase
 
 	static protected final String sm_dirTestData = getTestDataDir();
 	static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;
-	static protected final EnumVersion defaultVersion = EnumVersion.Version_1_8;
+	static protected final EnumVersion defaultVersion = EnumVersion.Version_1_9;
 	static protected final String sm_dirTestSchemaBase = sm_dirTestData + "schema" + File.separator + "Version_";
-	static protected final String sm_dirTestSchema = sm_dirTestSchemaBase + "1_8" + File.separator;
+	static protected final String sm_dirTestSchema = sm_dirTestSchemaBase + "1_9" + File.separator;
 
 	private static String getTestDataDir()
 	{
@@ -540,14 +540,11 @@ public abstract class JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		conv.setTrackAudits(false);
 
-		final String v = e.getAttribute(AttributeName.VERSION);
-		if ("1.7".equals(v))
+		final String sv = e.getInheritedAttribute(AttributeName.VERSION, null, null);
+		final EnumVersion v = EnumVersion.getEnum(sv);
+		if (v != null)
 		{
-			conv.setNewVersion(EnumVersion.Version_2_1);
-		}
-		else if ("1.8".equals(v))
-		{
-			conv.setNewVersion(EnumVersion.Version_2_2);
+			conv.setNewVersion(v.getXJDFVersion());
 		}
 		final KElement x = conv.convert(e);
 		return x;
@@ -696,7 +693,10 @@ public abstract class JDFTestCaseBase
 				printValid(converted);
 			}
 			assertTrue(valid, fileBase + ".xjdf.jdf");
-			final JDFDoc schemaParsed = getSchemaParser(defaultVersion).parseFile(fileXJ);
+			final String sv = xjdfRoot.getInheritedAttribute(AttributeName.VERSION, null, null);
+			final EnumVersion v = EnumVersion.getEnum(sv);
+
+			final JDFDoc schemaParsed = getSchemaParser(v).parseFile(fileXJ);
 			dVal = schemaParsed.getValidationResult();
 			valResult = dVal.getRoot().getAttribute("ValidationResult");
 			assertEquals(valResult, VALID);

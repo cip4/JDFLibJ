@@ -36,12 +36,23 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFJobPhase;
+import org.cip4.jdflib.resource.JDFModuleStatus;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -101,4 +112,65 @@ public class WalkModuleStatus extends WalkJDFSubElement
 		return ElementName.MODULEINFO;
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	public KElement walkOld(final KElement jdf, final KElement xjdf)
+	{
+		final boolean parentIdle;
+		if (xjdf instanceof JDFJobPhase)
+		{
+			final EnumNodeStatus ns = ((JDFJobPhase) xjdf).getStatus();
+			parentIdle = !EnumNodeStatus.InProgress.equals(ns) && !EnumNodeStatus.Setup.equals(ns) && !EnumNodeStatus.Cleanup.equals(ns);
+		}
+		else
+		{
+			String deviceStatus = (xjdf instanceof JDFDeviceInfo) ? xjdf.getAttribute(AttributeName.STATUS) : null;
+			if ("Production".equals(deviceStatus))
+				deviceStatus = "Running";
+			final EnumDeviceStatus eDeviceInfoStatus = EnumDeviceStatus.getEnum(deviceStatus);
+			parentIdle = EnumDeviceStatus.Down.equals(eDeviceInfoStatus) || EnumDeviceStatus.Idle.equals(eDeviceInfoStatus) || EnumDeviceStatus.Stopped.equals(eDeviceInfoStatus);
+		}
+
+		final JDFModuleStatus ms = (JDFModuleStatus) jdf;
+		final String moduleStatus = ms.getNonEmpty(AttributeName.DEVICESTATUS);
+		final EnumDeviceStatus eModuleStatus = EnumDeviceStatus.getEnum(moduleStatus);
+		final boolean bModuleIdle = EnumDeviceStatus.Down.equals(eModuleStatus) || EnumDeviceStatus.Idle.equals(eModuleStatus) || EnumDeviceStatus.Stopped.equals(eModuleStatus);
+
+		final boolean needCopy = moduleStatus == null || bModuleIdle == parentIdle;
+		if (needCopy)
+		{
+			final String id = StringUtil.getNonEmpty(ms.getModuleID());
+			if (id != null && xjdf != null)
+			{
+				xjdf.appendAttribute(XJDFConstants.ModuleIDs, id, null, null, true);
+			}
+			else
+			{
+				final JDFIntegerRangeList index = ms.getModuleIndex();
+				if (index != null && xjdf != null)
+				{
+					final JDFIntegerList il = index.getIntegerList();
+					il.unify();
+					final int size = il.size();
+					for (int i = 0; i < size; i++)
+					{
+						xjdf.appendAttribute(XJDFConstants.ModuleIDs, JDFConstants.EMPTYSTRING + il.getInt(i), null, null, true);
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		final EnumVersion v = jdfToXJDF.getNewVersion();
+		if (EnumUtil.aLessThanB(v, EnumVersion.Version_2_3))
+		{
+			return walkOld(jdf, xjdf);
+		}
+		return super.walk(jdf, xjdf);
+	}
 }
