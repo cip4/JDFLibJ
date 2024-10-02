@@ -55,6 +55,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -351,6 +352,7 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	{
 		final JDFJMF jmf = JDFJMF.parseFile(sm_dirTestData + "jmf/JMF1.jmf");
 		final JDFToXJDF conv = new JDFToXJDF();
+		conv.setNewVersion(EnumVersion.Version_2_3);
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		xjmf.write2File(sm_dirTestDataTemp + "JMF1.xjmf");
 		assertEquals("0", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/ModuleInfo/@ModuleID", null));
