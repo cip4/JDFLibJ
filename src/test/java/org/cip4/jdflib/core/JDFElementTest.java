@@ -504,11 +504,11 @@ class JDFElementTest extends JDFTestCaseBase
 
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();
-		assertEquals(n.getVersion(true), defaultVersion);
+		assertEquals(n.getVersion(true), j);
 		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_2);
 		n.setType("ProcessGroup", true);
 		n = n.addJDFNode("Combined");
-		assertEquals(n.getVersion(true), defaultVersion);
+		assertEquals(n.getVersion(true), j);
 
 		doc = new JDFDoc("JDF");
 		n = doc.getJDFRoot();

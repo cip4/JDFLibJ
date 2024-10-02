@@ -2066,7 +2066,7 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		h.setVersion(EnumVersion.Version_2_1);
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final JDFDoc d = xCon.convert(h);
-		assertEquals(JDFElement.getDefaultJDFVersion(), xCon.getVersion());
+		assertEquals(EnumVersion.Version_2_1.getJDFVersion(), xCon.getVersion());
 
 	}
 

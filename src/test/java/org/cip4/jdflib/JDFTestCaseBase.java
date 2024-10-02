@@ -693,7 +693,7 @@ public abstract class JDFTestCaseBase
 				printValid(converted);
 			}
 			assertTrue(valid, fileBase + ".xjdf.jdf");
-			final String sv = xjdfRoot.getInheritedAttribute(AttributeName.VERSION, null, null);
+			final String sv = jxRoot.getInheritedAttribute(AttributeName.VERSION, null, null);
 			final EnumVersion v = EnumVersion.getEnum(sv);
 
 			final JDFDoc schemaParsed = getSchemaParser(v).parseFile(fileXJ);

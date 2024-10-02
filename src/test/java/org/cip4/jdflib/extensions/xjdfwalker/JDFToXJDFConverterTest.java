@@ -1729,6 +1729,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	void testDeviceInfoModuleStatus()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		jmf.setVersion(EnumVersion.Version_1_9);
 		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
 		di.appendDevice().setDeviceID("id");
 		di.setDeviceStatus(EnumDeviceStatus.Running);
@@ -1736,6 +1737,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		moduleStatus.setModuleIndex(new JDFIntegerRangeList(new int[] { 0 }));
 		moduleStatus.setDeviceStatus(EnumDeviceStatus.Running);
 		final JDFToXJDF conv = new JDFToXJDF();
+		conv.setNewVersion(EnumVersion.Version_2_3);
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		assertEquals("0", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/ModuleInfo/@ModuleID", null));
 		assertEquals(eDeviceStatus.Production.name(), xjmf.getXPathAttribute("SignalStatus/DeviceInfo/ModuleInfo/@Status", null));
@@ -1754,6 +1756,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 0 }));
 		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 4, 6 }));
 		final JDFToXJDF conv = new JDFToXJDF();
+		conv.setNewVersion(EnumVersion.Version_2_3);
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		assertEquals("0", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/ModuleInfo/@ModuleID", null));
 	}

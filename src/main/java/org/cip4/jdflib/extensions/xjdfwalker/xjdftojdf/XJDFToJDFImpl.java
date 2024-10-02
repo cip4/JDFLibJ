@@ -75,7 +75,6 @@ import org.cip4.jdflib.extensions.xjdfwalker.IDPart;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFComponent;
-import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UnitParser;
 
@@ -482,16 +481,8 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 */
 	public EnumVersion getVersion()
 	{
-		if (xjdf != null)
-		{
-			final String xVersion = xjdf.getAttribute(AttributeName.VERSION);
-			final int minor = StringUtil.parseInt(StringUtil.token(xVersion, -1, JDFConstants.DOT), -1);
-			if (minor == 1)
-				version = (EnumVersion) EnumUtil.max(EnumVersion.Version_1_7, version);
-			if (minor == 2)
-				version = (EnumVersion) EnumUtil.max(EnumVersion.Version_1_8, version);
-		}
-		return version;
+		final EnumVersion xV = getXJDFVersion();
+		return xV.getJDFVersion();
 	}
 
 	/**
@@ -635,9 +626,9 @@ public class XJDFToJDFImpl extends PackageElementWalker
 
 	public EnumVersion getXJDFVersion()
 	{
-		final EnumVersion v = getVersion();
-		if (EnumVersion.Version_1_7.equals(v))
-			return EnumVersion.Version_2_1;
-		return BaseXJDFHelper.getDefaultVersion();
+
+		final String xVersion = xjdf == null ? null : xjdf.getAttribute(AttributeName.VERSION);
+		final EnumVersion xv = EnumVersion.getEnum(xVersion);
+		return xv == null ? BaseXJDFHelper.getDefaultVersion() : xv;
 	}
 }

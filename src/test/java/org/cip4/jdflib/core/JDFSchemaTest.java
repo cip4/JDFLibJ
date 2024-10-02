@@ -377,9 +377,11 @@ class JDFSchemaTest extends JDFTestCaseBase
 		n.setVersion(EnumVersion.Version_1_9);
 		n.setType(EnumType.ProcessGroup);
 		final String s = d0.write2String(2);
-		final JDFDoc d = p.parseString(s);
+		final JDFParser p2 = getSchemaParser(EnumVersion.Version_1_4);
+
+		final JDFDoc d = p2.parseString(s);
 		assertNotNull(d);
-		assertNotNull(p.m_lastExcept);
+		assertNotNull(p2.m_lastExcept);
 	}
 
 	/**
