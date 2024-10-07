@@ -50,7 +50,6 @@ import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.DocumentJDFImpl;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
@@ -194,15 +193,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		convertUnits = false;
 		typeLinks = false;
 		heuristicLink = true;
-	}
-
-	private EnumVersion getVersion(final JDFDoc template)
-	{
-		final JDFNode n = template == null ? null : template.getJDFRoot();
-		EnumVersion v = (n != null) ? n.getVersion(true) : null;
-		if (v == null)
-			v = JDFAudit.getDefaultJDFVersion();
-		return v;
 	}
 
 	/**
