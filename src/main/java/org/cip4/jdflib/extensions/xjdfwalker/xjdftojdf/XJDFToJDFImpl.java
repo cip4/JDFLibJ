@@ -99,6 +99,14 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	boolean createProduct;
 
 	/**
+	 * @param version the version to set - unused
+	 */
+	public void setVersion(final EnumVersion version)
+	{
+		// nop
+	}
+
+	/**
 	 * @see org.cip4.jdflib.elementwalker.PackageElementWalker#constructWalker(java.lang.String)
 	 */
 	@Override
