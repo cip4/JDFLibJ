@@ -168,7 +168,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	/**
 	 *
 	 */
-	private EnumVersion version;
 	private boolean bConvertTilde;
 	private boolean typeLinks;
 	private boolean heuristicLink;
@@ -195,7 +194,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		convertUnits = false;
 		typeLinks = false;
 		heuristicLink = true;
-		version = getVersion(template);
 	}
 
 	private EnumVersion getVersion(final JDFDoc template)
@@ -466,14 +464,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 				}
 			}
 		}
-	}
-
-	/**
-	 * @param version the version to set
-	 */
-	public void setVersion(final EnumVersion version)
-	{
-		this.version = version;
 	}
 
 	/**
