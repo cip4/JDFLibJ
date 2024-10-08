@@ -37,10 +37,12 @@
 package org.cip4.jdflib.extensions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.Map;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.junit.jupiter.api.Test;
@@ -55,6 +57,29 @@ class XJDFSchemaWalkerTest extends JDFTestCaseBase
 
 		w.walkTree(KElement.parseFile(getXJDFSchema(2, 2)), null);
 		assertEquals(1500, w.getTypeMap().size(), 100);
+	}
+
+	@Test
+	void testGetEnumMap()
+	{
+		final XJDFSchemaWalker w = new XJDFSchemaWalker();
+
+		w.walkTree(KElement.parseFile(getXJDFSchema(2, 2)), null);
+		assertEquals(41, w.getEnumMap().size(), 5);
+	}
+
+	@Test
+	void testGetEnums()
+	{
+		final XJDFSchemaWalker w = new XJDFSchemaWalker();
+
+		w.walkTree(KElement.parseFile(getXJDFSchema(2, 2)), null);
+		assertEquals(3, w.getEnums(AttributeName.OPACITY).size(), 0);
+		assertEquals(3, w.getEnums("EnumOpacity").size(), 0);
+		assertEquals(5, w.getEnums("EnumRenderingIntent").size(), 0);
+		assertEquals(5, w.getEnums(AttributeName.RENDERINGINTENT).size(), 0);
+		assertNull(w.getEnums("foo"));
+		assertNull(w.getEnums("Enum"));
 	}
 
 	@Test

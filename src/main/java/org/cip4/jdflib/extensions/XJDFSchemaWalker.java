@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.cip4.jdflib.core.KElement;
@@ -76,6 +77,8 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.util.ListMap;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * 
@@ -84,6 +87,7 @@ import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
  */
 public class XJDFSchemaWalker extends BaseElementWalker
 {
+	private static final String ENUM = "Enum";
 	static final String MATRIX = "matrix";
 	static final String CMYK_COLOR = "CMYKColor";
 	static final String RECTANGLE = "rectangle";
@@ -92,6 +96,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	static final String SHAPE = "shape";
 	static final String XY_PAIR = "XYPair";
 	private final JDFAttributeMap typeMap;
+	private final ListMap<String, String> enumMap;
 	static final String NAME = "name";
 	static final String TYPE = "type";
 
@@ -102,6 +107,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	{
 		super(new BaseWalkerFactory());
 		typeMap = new JDFAttributeMap();
+		enumMap = new ListMap<>();
 	}
 
 	/**
@@ -165,6 +171,50 @@ public class XJDFSchemaWalker extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return "xs:attribute".equals(toCheck.getNodeName());
+		}
+	}
+
+	/**
+	 * any matching class will be removed with extreme prejudice...
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkEnum extends WalkElement
+	{
+
+		private static final String VALUE = "value";
+
+		public WalkEnum()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement a, final KElement xjdf)
+		{
+			final String val = a.getNonEmpty(VALUE);
+			if (!StringUtil.isEmpty(val))
+			{
+				final String name = a.getInheritedAttribute(NAME, null, null);
+				enumMap.putOne(name, val);
+			}
+			return null;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return "xs:enumeration".equals(toCheck.getNodeName());
 		}
 	}
 
@@ -239,6 +289,25 @@ public class XJDFSchemaWalker extends BaseElementWalker
 			}
 		return null;
 
+	}
+
+	public List<String> getEnums(final String name)
+	{
+		List<String> typs = enumMap.get(name);
+		if (typs == null)
+		{
+			if (name.startsWith(ENUM))
+				typs = enumMap.get(name.substring(4));
+			else
+				typs = enumMap.get(ENUM + name);
+		}
+		return typs;
+
+	}
+
+	public ListMap<String, String> getEnumMap()
+	{
+		return enumMap;
 	}
 
 }
