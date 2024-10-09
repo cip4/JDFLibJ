@@ -65,7 +65,7 @@ class XJDFSchemaWalkerTest extends JDFTestCaseBase
 		final XJDFSchemaWalker w = new XJDFSchemaWalker();
 
 		w.walkTree(KElement.parseFile(getXJDFSchema(2, 2)), null);
-		assertEquals(41, w.getEnumMap().size(), 5);
+		assertEquals(200, w.getEnumMap().size(), 5);
 	}
 
 	@Test
