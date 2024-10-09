@@ -158,8 +158,9 @@ public class XJDFSchemaWalker extends BaseElementWalker
 			final String typ = a.getNonEmpty(TYPE);
 			final String parent = a.getParentNode_KElement().getInheritedAttribute(NAME, null, null);
 			final String name = a.getNonEmpty(NAME);
-			typeMap.putNotNull(parent + "/" + name, typ);
-			return null;
+			final String key = parent + "/" + name;
+			typeMap.putNotNull(key, typ);
+			return super.walk(a, xjdf);
 		}
 
 		/**
@@ -200,10 +201,37 @@ public class XJDFSchemaWalker extends BaseElementWalker
 			final String val = a.getNonEmpty(VALUE);
 			if (!StringUtil.isEmpty(val))
 			{
-				final String name = a.getInheritedAttribute(NAME, null, null);
+				final String name = getKey(a);
 				enumMap.putOne(name, val);
 			}
 			return null;
+		}
+
+		/**
+		 * searches for the first attribute occurrence in this element or any ancestors
+		 *
+		 * @param attrib the attribute name
+		 * @param nameSpaceURI the XML-namespace
+		 * @param def the default if it does not exist
+		 * @return String value of attribute found, value of def if not available
+		 * @default getInheritedAttribute_KElement(attrib, null, JDFCoreConstants.EMPTYSTRING)
+		 */
+		String getKey(KElement a)
+		{
+			int i = 0;
+			String strRet = "";
+			while (i < 2 && a != null)
+			{
+				final String name = a.getNonEmpty(NAME);
+				if (name != null)
+				{
+					strRet = i == 0 ? name : name + "/" + strRet;
+					i++;
+				}
+				a = a.getParentNode_KElement();
+			}
+
+			return strRet;
 		}
 
 		/**
@@ -293,15 +321,23 @@ public class XJDFSchemaWalker extends BaseElementWalker
 
 	public List<String> getEnums(final String name)
 	{
-		List<String> typs = enumMap.get(name);
-		if (typs == null)
-		{
-			if (name.startsWith(ENUM))
-				typs = enumMap.get(name.substring(4));
-			else
-				typs = enumMap.get(ENUM + name);
-		}
-		return typs;
+		final String newName = getKey(name);
+		return newName == null ? null : enumMap.get(newName);
+
+	}
+
+	public String getKey(final String name)
+	{
+		if (enumMap.containsKey(name))
+			return name;
+		else if (name.startsWith(ENUM) && enumMap.containsKey(name.substring(4)))
+			return name.substring(4);
+		else if (enumMap.containsKey(ENUM + name))
+			return ENUM + name;
+		else if (name.indexOf('/') > 0)
+			return getKey(StringUtil.removeToken(name, 0, "/"));
+		else
+			return null;
 
 	}
 
