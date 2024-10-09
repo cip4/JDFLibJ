@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -75,25 +75,25 @@ class XJDFGeneratorTest extends XJDFCreatorTest
 	{
 		theHelper.getRoot().setXMLComment("Assume incremental adding of an additional 3rd plate", true);
 		theHelper.getRoot().setAttribute("Types", "PlateMaking");
-		final SetHelper rlh = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", EnumUsage.Input);
+		final SetHelper rlh = theHelper.getCreateSet("RunList", EnumUsage.Input);
 		ResourceHelper p = rlh.getCreatePartition(null, true);
 		final JDFRunList rl = (JDFRunList) p.getCreateResource();
 		rl.setNPage(48);
 		rlh.getSet().setXMLComment("set the updated total number of pages", true);
 
-		final SetHelper loh = theHelper.getCreateSet(XJDFConstants.Resource, "Layout", EnumUsage.Input);
+		final SetHelper loh = theHelper.getCreateSet("Layout", EnumUsage.Input);
 		p = loh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		final JDFLayout lo = (JDFLayout) p.getCreateResource();
 		final JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
 		bs.setNumberUp(new JDFXYPair(4, 4));
 		loh.getSet().setXMLComment("only specify the 3rd sheet", true);
 
-		final SetHelper mh = theHelper.getCreateSet(XJDFConstants.Resource, "Media", EnumUsage.Input);
+		final SetHelper mh = theHelper.getCreateSet("Media", EnumUsage.Input);
 		p = mh.getCreatePartition(null, true);
 		final KElement mPart = p.getPartition();
 		mPart.setAttribute("ProductID", "PlateID");
 
-		final SetHelper xmh = theHelper.getCreateSet(XJDFConstants.Resource, "ExposedMedia", EnumUsage.Output);
+		final SetHelper xmh = theHelper.getCreateSet("ExposedMedia", EnumUsage.Output);
 		p = xmh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		final JDFExposedMedia xm = (JDFExposedMedia) p.getCreateResource();
 		xm.setAttribute("MediaRef", mPart.getAttribute("ID"));
@@ -109,7 +109,7 @@ class XJDFGeneratorTest extends XJDFCreatorTest
 	{
 		theHelper.getRoot().setXMLComment("Added Varnishing - how do we differentiate varnishing only from add varnishing\n", true);
 		theHelper.getRoot().setAttribute("Types", "Varnishing");
-		final SetHelper rlh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.VARNISHINGPARAMS, EnumUsage.Input);
+		final SetHelper rlh = theHelper.getCreateSet(ElementName.VARNISHINGPARAMS, EnumUsage.Input);
 		final ResourceHelper p = rlh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		// JDFVarnishingParams vp = (JDFRunList) p.getCreateResource();
 		// rl.setNPage(48);
