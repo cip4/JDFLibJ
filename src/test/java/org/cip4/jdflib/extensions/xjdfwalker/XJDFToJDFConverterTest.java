@@ -2141,7 +2141,35 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	void testFoldingIntentDetails()
+	void testMediaIntent()
+	{
+		final XJDFHelper h = new XJDFHelper("j", "root", null);
+		final ProductHelper book = h.appendProduct();
+		book.setRoot();
+		final KElement mi = book.getCreateIntent(ElementName.MEDIAINTENT).getResource();
+		mi.setAttribute(XJDFConstants.Coating, "Gloss");
+		mi.setAttribute(XJDFConstants.BackCoating, "gloss", null);
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(h);
+		final JDFMediaIntent mij = (JDFMediaIntent) d.getJDFRoot().getResource(ElementName.MEDIAINTENT, EnumUsage.Input, 0);
+		assertEquals("Glossy", JDFIntentResource.guessActual(mij, ElementName.FRONTCOATINGS));
+		assertEquals("Glossy", JDFIntentResource.guessActual(mij, ElementName.BACKCOATINGS));
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(d.getJDFRoot());
+
+		final XJDFHelper rt = XJDFHelper.getHelper(xjdf);
+		assertEquals("Gloss", rt.getProduct(0).getIntentAttribute(ElementName.MEDIAINTENT, XJDFConstants.Coating));
+		assertEquals("Gloss", rt.getProduct(0).getIntentAttribute(ElementName.MEDIAINTENT, XJDFConstants.BackCoating));
+
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	void testFoldinfIntentDetails()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);
 		final ProductHelper book = h.appendProduct();

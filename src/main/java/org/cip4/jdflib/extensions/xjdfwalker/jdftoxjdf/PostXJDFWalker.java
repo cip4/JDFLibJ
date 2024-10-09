@@ -762,11 +762,17 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		void updateAttributes(final KElement xjdf)
 		{
-			final String coating = xjdf.getNonEmpty("FrontCoatings");
-			if (xjdf != null)
+			final String coating = xjdf.getNonEmpty(ElementName.FRONTCOATINGS);
+			if (coating != null)
 			{
-				xjdf.removeAttribute("FrontCoatings");
+				xjdf.removeAttribute(ElementName.FRONTCOATINGS);
 				xjdf.setAttribute(XJDFConstants.Coating, getCoating(coating));
+			}
+			final String backcoating = xjdf.getNonEmpty(ElementName.BACKCOATINGS);
+			if (backcoating != null)
+			{
+				xjdf.removeAttribute(ElementName.BACKCOATINGS);
+				xjdf.setAttribute(XJDFConstants.BackCoating, getCoating(backcoating));
 			}
 			super.updateAttributes(xjdf);
 		}

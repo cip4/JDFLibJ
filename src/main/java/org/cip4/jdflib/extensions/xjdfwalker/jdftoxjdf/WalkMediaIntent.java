@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -117,7 +117,7 @@ public class WalkMediaIntent extends WalkIntentResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.MEDIASETCOUNT);
 		if (map.get(AttributeName.MEDIATYPE) == null)
@@ -131,7 +131,7 @@ public class WalkMediaIntent extends WalkIntentResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void removeUnusedElements(KElement jdf)
+	protected void removeUnusedElements(final KElement jdf)
 	{
 		jdf.removeChild(ElementName.BRIGHTNESS, null, 0);
 		jdf.removeChild(ElementName.MEDIALAYERS, null, 0);
@@ -142,7 +142,7 @@ public class WalkMediaIntent extends WalkIntentResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#setAttributes(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void setAttributes(KElement jdf, KElement eNew)
+	protected void setAttributes(final KElement jdf, final KElement eNew)
 	{
 		eNew.setNonEmpty(AttributeName.BRAND, JDFIntentResource.guessActual((JDFElement) jdf, ElementName.STOCKBRAND));
 		super.setAttributes(jdf, eNew);

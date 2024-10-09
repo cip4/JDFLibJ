@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,7 +76,8 @@ import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 
 /**
  * TODO discuss and implement varying numcolors for front and back, e.g. 4/1
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class WalkMediaIntent extends WalkIntentResource
 {
@@ -114,13 +115,19 @@ public class WalkMediaIntent extends WalkIntentResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkIntentResource#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(final KElement elem)
 	{
-		String nonEmpty = elem.getNonEmpty(XJDFConstants.Coating);
-		if (nonEmpty != null)
+		final String c = elem.getNonEmpty(XJDFConstants.Coating);
+		if (c != null)
 		{
 			elem.removeAttribute(XJDFConstants.Coating);
-			elem.setAttribute("FrontCoatings", getCoating(nonEmpty));
+			elem.setAttribute(ElementName.FRONTCOATINGS, getCoating(c));
+		}
+		final String bc = elem.getNonEmpty(XJDFConstants.BackCoating);
+		if (bc != null)
+		{
+			elem.removeAttribute(XJDFConstants.BackCoating);
+			elem.setAttribute(ElementName.BACKCOATINGS, getCoating(bc));
 		}
 		super.updateAttributes(elem);
 	}
