@@ -53,9 +53,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.StringTokenizer;
 
-import org.cip4.jdflib.datatypes.StringCache;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -127,29 +125,12 @@ public class StringArray extends ArrayList<String>
 	 * constructs a VString by tokenizing a string
 	 *
 	 * @param strIn the string to tokenize
-	 * @param strSep the separator character
+	 * @param strSep the list of separator characters - null if whitespace
 	 */
-	public StringArray(final String strIn, String strSep)
+	public StringArray(final String strIn, final String strSep)
 	{
 		super();
-		if (!StringUtil.isEmpty(strIn))
-		{
-			if (strSep == null)
-			{
-				strSep = JDFCoreConstants.BLANK;
-			}
-			if (strSep.length() == 1 && strIn.indexOf(strSep) < 0)
-			{
-				add(strIn);
-				return;
-			}
-
-			final StringTokenizer sToken = new StringTokenizer(strIn, strSep);
-			while (sToken.hasMoreTokens())
-			{
-				add(StringCache.getString(sToken.nextToken()));
-			}
-		}
+		StringUtil.tokenize(this, strIn, strSep);
 	}
 
 	/**

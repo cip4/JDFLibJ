@@ -186,30 +186,10 @@ public class VString extends Vector<String>
 	 * @param strIn the string to tokenize
 	 * @param strSep the separator character
 	 */
-	public VString(final String strIn, String strSep)
+	public VString(final String strIn, final String strSep)
 	{
 		super();
-		if (!StringUtil.isEmpty(strIn))
-		{
-			if (strSep == null)
-			{
-				strSep = JDFCoreConstants.BLANK;
-			}
-			if (strSep.length() == 1)
-			{
-				// performance boost...
-				if (strIn.indexOf(strSep) < 0)
-				{
-					addElement(strIn);
-					return;
-				}
-			}
-			final StringTokenizer sToken = new StringTokenizer(strIn, strSep);
-			while (sToken.hasMoreTokens())
-			{
-				this.addElement(sToken.nextToken());
-			}
-		}
+		StringUtil.tokenize(this, strIn, strSep);
 	}
 
 	/**

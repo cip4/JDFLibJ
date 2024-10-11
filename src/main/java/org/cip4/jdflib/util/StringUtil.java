@@ -62,11 +62,13 @@ import java.util.regex.PatternSyntaxException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.datatypes.JDFNumberList;
+import org.cip4.jdflib.datatypes.StringCache;
 import org.cip4.jdflib.ifaces.IStreamWriter;
 
 /**
@@ -561,6 +563,49 @@ public class StringUtil
 		{
 			return new VString(strWork, delim);
 		}
+	}
+
+	/**
+	 *
+	 * constructs a VString by tokenizing a string
+	 *
+	 * @param strIn the string to tokenize
+	 * @param strSep the list of separator characters - null if whitespace
+	 */
+	public static List<String> tokenize(final List<String> l, final String strIn, String strSep)
+	{
+		if (!StringUtil.isEmpty(strIn))
+		{
+			String keep = JDFConstants.EMPTYSTRING;
+			if (isEmpty(strSep))
+			{
+				for (final int s : JDFCoreConstants.WHITESPACE.getBytes())
+				{
+					if (strIn.indexOf(s) >= 0)
+					{
+						keep += (char) s;
+					}
+				}
+				strSep = keep;
+			}
+			else if (strSep.length() == 1 && strIn.indexOf(strSep.charAt(0)) < 0)
+			{
+				strSep = JDFConstants.EMPTYSTRING;
+			}
+			if (strSep.isEmpty())
+			{
+				l.add(strIn);
+			}
+			else
+			{
+				final StringTokenizer sToken = new StringTokenizer(strIn, strSep);
+				while (sToken.hasMoreTokens())
+				{
+					l.add(StringCache.getString(sToken.nextToken()));
+				}
+			}
+		}
+		return l;
 	}
 
 	/**
@@ -1360,7 +1405,7 @@ public class StringUtil
 	 */
 	public static boolean isID(final String strWork)
 	{
-		if (strWork == null || strWork.length() == 0)
+		if (isEmpty(strWork))
 		{
 			return false;
 		}
@@ -1453,9 +1498,7 @@ public class StringUtil
 	 *
 	 * @param strWork the string to check
 	 * @return boolean - true if strWork is an NMTOKENS list
-	 * @deprecated 060309 use isNMTOKENS(strWork,false)
 	 */
-	@Deprecated
 	public static boolean isNMTOKENS(final String strWork)
 	{
 		return isNMTOKENS(strWork, false);
@@ -1474,15 +1517,14 @@ public class StringUtil
 		{
 			return false;
 		}
-		final VString vs = StringUtil.tokenize(strWork, "\t ", false);
-		final int s = vs.size();
-		if (s == 0)
+		final List<String> vs = StringUtil.tokenize(new StringArray(), strWork, null);
+		if (vs.isEmpty())
 		{
 			return true; // tbd is an empty list an NMTOKENS ?
 		}
-		for (int i = 0; i < s; i++)
+		for (final String s : vs)
 		{
-			if ((bID && !StringUtil.isID(vs.get(i))) || !StringUtil.isNMTOKEN(vs.get(i)))
+			if (!StringUtil.isNMTOKEN(s) || (bID && !StringUtil.isID(s)))
 			{
 				return false;
 			}

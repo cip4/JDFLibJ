@@ -310,6 +310,35 @@ class FixVersionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testNMTokens()
+	{
+		final FixVersion f1 = new FixVersion(EnumVersion.Version_1_6);
+		final JDFAssembly as = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
+		as.setAttribute(AttributeName.ASSEMBLYIDS, "a\tb");
+		f1.convert(n);
+		assertEquals("a b", as.getAttribute(AttributeName.ASSEMBLYIDS));
+		as.setAttribute(AttributeName.ASSEMBLYIDS, "a\nb");
+		f1.convert(n);
+		assertEquals("a b", as.getAttribute(AttributeName.ASSEMBLYIDS));
+		as.setAttribute(AttributeName.ASSEMBLYIDS, "a\nb");
+		f1.convert(n);
+		assertEquals("a b", as.getAttribute(AttributeName.ASSEMBLYIDS));
+		as.setAttribute(AttributeName.ASSEMBLYIDS, "a\n \t \nb");
+		f1.convert(n);
+		assertEquals("a b", as.getAttribute(AttributeName.ASSEMBLYIDS));
+		as.setAttribute(AttributeName.ASSEMBLYIDS, "a b");
+		f1.convert(n);
+		assertEquals("a b", as.getAttribute(AttributeName.ASSEMBLYIDS));
+		as.setAttribute(AttributeName.ASSEMBLYIDS, "");
+		f1.convert(n);
+		assertEquals("", as.getAttribute(AttributeName.ASSEMBLYIDS));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testMaxVersion()
 	{
 		n.setMaxVersion(EnumVersion.Version_1_6);

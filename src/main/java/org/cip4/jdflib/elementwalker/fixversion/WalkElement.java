@@ -206,6 +206,10 @@ public class WalkElement extends WalkAnyElement
 		{
 			fixNMTOKEN(el, key, value);
 		}
+		else if (EnumAttributeType.NMTOKENS.equals(attType))
+		{
+			fixNMTOKENS(el, key, value);
+		}
 		else if (EnumAttributeType.XYPair.equals(attType))
 		{
 			final JDFXYPair xyPair = JDFXYPair.createXYPair(value);
@@ -247,6 +251,17 @@ public class WalkElement extends WalkAnyElement
 		}
 	}
 
+	void fixNMTOKENS(final JDFElement el, final String key, final String value)
+	{
+		final StringArray a = StringArray.getVString(value, null);
+		final String v2 = a == null ? null : a.getString();
+		if (!StringUtil.equals(v2, value))
+		{
+			el.setAttribute(key, v2);
+		}
+
+	}
+
 	void fixNMTOKEN(final JDFElement el, final String key, final String value)
 	{
 		if (!StringUtil.isNMTOKEN(value))
@@ -254,8 +269,7 @@ public class WalkElement extends WalkAnyElement
 			final String newVal = StringUtil.replaceCharSet(value, " ", "_", 0);
 			if (!StringUtil.equals(newVal, value) && StringUtil.isNMTOKEN(newVal))
 			{
-				el.setAttribute(key, "" + newVal);
-
+				el.setAttribute(key, newVal);
 			}
 		}
 	}

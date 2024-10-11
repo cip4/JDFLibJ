@@ -260,6 +260,19 @@ class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test for getNonEmpty
+	 */
+	@Test
+	void testIsNMTokens()
+	{
+		assertTrue(StringUtil.isNMTOKENS(""));
+		assertFalse(StringUtil.isNMTOKENS(null));
+		assertTrue(StringUtil.isNMTOKENS("a c"));
+		assertFalse(StringUtil.isNMTOKENS("a 1", true));
+		assertTrue(StringUtil.isNMTOKENS("a\tc\n\n\nd"));
+	}
+
+	/**
 	 *
 	 */
 	@Test
