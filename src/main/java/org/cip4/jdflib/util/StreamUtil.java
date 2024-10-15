@@ -54,6 +54,7 @@ import java.security.NoSuchAlgorithmException;
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 
 /**
@@ -84,6 +85,29 @@ public class StreamUtil
 			return is;
 		}
 		return new BufferedInputStream(is);
+	}
+
+	/**
+	 * write to a file
+	 *
+	 * @param file the file to write
+	 * @param w the writer to write to
+	 *
+	 * @return the file that was created, null if snafu
+	 */
+	public static OutputStream write2Stream(final IStreamWriter w, final OutputStream os)
+	{
+		final OutputStream os1 = getBufferedOutputStream(os);
+		try
+		{
+			w.writeStream(os1);
+			os1.flush();
+		}
+		catch (final IOException e)
+		{
+			return null;
+		}
+		return os1;
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,7 +39,9 @@ package org.cip4.jdflib.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,8 +50,11 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 /**
  *
@@ -71,6 +76,29 @@ class StreamUtilTest extends JDFTestCaseBase
 		final VString vs = StreamUtil.getLines(bos.getInputStream());
 		assertEquals(3, vs.size());
 		bos.close();
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testWrite2Stream()
+	{
+		final ByteArrayIOStream s = (ByteArrayIOStream) StreamUtil.write2Stream(KElement.createRoot("a", null), new ByteArrayIOStream());
+		assertNotNull(KElement.parseStream(s.getInputStream()));
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	void testWrite2StringBad() throws IOException
+	{
+		final IStreamWriter w = Mockito.mock(IStreamWriter.class);
+		Mockito.doThrow(IOException.class).when(w).writeStream(any());
+		final ByteArrayIOStream s = (ByteArrayIOStream) StreamUtil.write2Stream(w, new ByteArrayIOStream());
+		assertNull(s);
 	}
 
 	/**
@@ -103,7 +131,7 @@ class StreamUtilTest extends JDFTestCaseBase
 	void testCopy() throws IOException
 	{
 		final InputStream s = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
-		OutputStream os = new ByteArrayIOStream();
+		final OutputStream os = new ByteArrayIOStream();
 		StreamUtil.copy(null, os);
 		StreamUtil.copy(s, null);
 		StreamUtil.copy(s, os);
@@ -140,16 +168,10 @@ class StreamUtilTest extends JDFTestCaseBase
 		final InputStream s = FileUtil.getBufferedInputStream(f1);
 		final File f2 = new File(sm_dirTestDataTemp + "page1.pdf");
 		final OutputStream os = FileUtil.getBufferedOutputStream(f2);
-		asserTrue(StreamUtil.replaceBytes(s, os, "QuarkXPress".getBytes(StandardCharsets.UTF_8), "CIP4Library AND LOTS Longer".getBytes(StandardCharsets.UTF_8), 1));
+		assertTrue(StreamUtil.replaceBytes(s, os, "QuarkXPress".getBytes(StandardCharsets.UTF_8), "CIP4Library AND LOTS Longer".getBytes(StandardCharsets.UTF_8), 1));
 		StreamUtil.close(s);
 		StreamUtil.close(os);
 		assertEquals(f1.length(), f2.length() - "CIP4Library AND LOTS Longer".length() + "QuarkXPress".length());
-
-	}
-
-	private void asserTrue(final boolean replaceBytes)
-	{
-		// TODO Auto-generated method stub
 
 	}
 

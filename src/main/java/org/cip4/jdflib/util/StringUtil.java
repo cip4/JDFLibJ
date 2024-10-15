@@ -50,6 +50,7 @@ package org.cip4.jdflib.util;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -264,15 +265,8 @@ public class StringUtil
 	public static String write2String(final IStreamWriter w)
 	{
 		final ByteArrayIOStream os = new ByteArrayIOStream();
-		try
-		{
-			w.writeStream(os);
-		}
-		catch (final IOException e)
-		{
-			return null;
-		}
-		return new String(os.toByteArray(), StandardCharsets.UTF_8);
+		final OutputStream ok = StreamUtil.write2Stream(w, os);
+		return ok == null ? null : new String(os.toByteArray(), StandardCharsets.UTF_8);
 	}
 
 	/**
