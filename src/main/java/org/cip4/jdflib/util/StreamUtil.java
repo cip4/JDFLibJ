@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -88,24 +88,27 @@ public class StreamUtil
 	}
 
 	/**
-	 * write to a file
+	 * write to a stream
 	 *
 	 * @param file the file to write
 	 * @param w the writer to write to
 	 *
-	 * @return the file that was created, null if snafu
+	 * @return the stream that was created, null if snafu
 	 */
 	public static OutputStream write2Stream(final IStreamWriter w, final OutputStream os)
 	{
 		final OutputStream os1 = getBufferedOutputStream(os);
-		try
+		if (os1 != null)
 		{
-			w.writeStream(os1);
-			os1.flush();
-		}
-		catch (final IOException e)
-		{
-			return null;
+			try
+			{
+				w.writeStream(os1);
+				os1.flush();
+			}
+			catch (final IOException e)
+			{
+				return null;
+			}
 		}
 		return os1;
 	}
