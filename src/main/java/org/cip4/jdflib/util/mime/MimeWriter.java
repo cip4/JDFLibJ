@@ -96,6 +96,7 @@ import org.cip4.jdflib.util.UrlUtil;
  */
 public class MimeWriter extends MimeHelper implements IStreamWriter
 {
+	private static final String THE_JDF = "TheJDF.jdf";
 	protected final static Log log = LogFactory.getLog(MimeReader.class);
 
 	public enum eMimeSubType
@@ -501,7 +502,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	 */
 	public void buildMimePackage(final JDFDoc docJMF, final XMLDoc docJDF, final boolean extendReferenced)
 	{
-		final String cid = MimeUtil.urlToCid("TheJDF.jdf");
+		final String cid = MimeUtil.urlToCid(THE_JDF);
 		if (docJMF != null)
 		{
 			String originalFileName = docJMF.getOriginalFileName();
@@ -526,6 +527,10 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 			}
 		}
 		updateXMLMultipart(docJMF, null);
+		if (StringUtil.isEmpty(docJDF.getOriginalFileName()))
+		{
+			docJDF.setOriginalFileName(THE_JDF);
+		}
 
 		if (extendReferenced)
 		{
@@ -534,7 +539,6 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 		else
 		{
 			updateXMLMultipart(docJDF, cid);
-
 		}
 	}
 
@@ -554,10 +558,6 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 		{
 			log.error("cannot extend null JDF document");
 			return 0;
-		}
-		if (StringUtil.isEmpty(docJDF.getOriginalFileName()))
-		{
-			docJDF.setOriginalFileName("TheJDF.jdf");
 		}
 
 		// Get all FileSpec elements
