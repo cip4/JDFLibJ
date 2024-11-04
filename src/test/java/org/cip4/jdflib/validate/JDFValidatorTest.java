@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,12 @@
 
 package org.cip4.jdflib.validate;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -82,14 +88,14 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.process.JDFColorPool;
-import org.junit.jupiter.api.Assertions;
+import org.cip4.jdflib.util.FileUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * Jul 16, 2010
+ *         Jul 16, 2010
  */
 class JDFValidatorTest extends JDFTestCaseBase
 {
@@ -107,7 +113,7 @@ class JDFValidatorTest extends JDFTestCaseBase
 		final JDFColorPool cp = (JDFColorPool) cc.appendElement(ElementName.COLORPOOL);
 		cp.appendColorWithName("B", null);
 		cp.appendColorWithName("C", null);
-		Assertions.assertTrue(validator.isValid(doc));
+		assertTrue(validator.isValid(doc));
 	}
 
 	/**
@@ -122,7 +128,7 @@ class JDFValidatorTest extends JDFTestCaseBase
 		cp.appendColorWithName("B", null).setActualColorName("A");
 		cp.appendColorWithName("C", null).setActualColorName("A");
 
-		Assertions.assertFalse(validator.isValid(doc));
+		assertFalse(validator.isValid(doc));
 	}
 
 	/**
@@ -134,7 +140,43 @@ class JDFValidatorTest extends JDFTestCaseBase
 		final JDFNode node = doc.getJDFRoot();
 		final JDFResource cc = node.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
 		final JDFColorPool cp = (JDFColorPool) cc.appendElement(ElementName.COLORPOOL);
-		Assertions.assertTrue(validator.isValid(doc));
+		assertTrue(validator.isValid(doc));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testExamples()
+	{
+		for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData), "*.jdf"))
+		{
+			final JDFDoc d = JDFDoc.parseFile(f);
+			if (f.length() < 1000000 && d != null)
+			{
+				assertNotNull(d);
+				final boolean ok = validator.isValid(d);
+				log.info(f.getPath() + " " + ok);
+			}
+		}
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testJMFExamples()
+	{
+		for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData), "*.jmf"))
+		{
+			final JDFDoc d = JDFDoc.parseFile(f);
+			if (d != null)
+			{
+				assertNotNull(d);
+				final boolean ok = validator.isValid(d);
+				log.info(f.getPath() + " " + ok);
+			}
+		}
 	}
 
 	/**
@@ -149,8 +191,8 @@ class JDFValidatorTest extends JDFTestCaseBase
 		final JDFResourceLink rl = ra.addNewOldLink(true, media, EnumUsage.Input);
 		rl.setActualAmount(42, null);
 		validator.setWarning(false);
-		Assertions.assertNotNull(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0));
-		Assertions.assertTrue(validator.isValid(doc));
+		assertNotNull(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0));
+		assertTrue(validator.isValid(doc));
 	}
 
 	/**
@@ -182,8 +224,8 @@ class JDFValidatorTest extends JDFTestCaseBase
 	{
 		final JDFJMF jmf = JDFDoc.parseFile(sm_dirTestData + "ResourceInfo.jmf").getJMFRoot();
 		final JDFResourceInfo resourceInfo = jmf.getResponse(0).getResourceInfo(0);
-		Assertions.assertTrue(resourceInfo.isValid(EnumValidationLevel.Complete));
-		Assertions.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+		assertTrue(resourceInfo.isValid(EnumValidationLevel.Complete));
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 	}
 
 }

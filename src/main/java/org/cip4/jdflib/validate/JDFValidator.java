@@ -347,78 +347,19 @@ public class JDFValidator
 			printPrivate(privateAttributes, privateElements, jdfElement, indent, testElement);
 		}
 
-		boolean bIsOK = true;
-
-		if (jdfElement instanceof JDFResourceLinkPool)
-		{// check typesafe node links
-			bIsOK = true; // nop this is done in printnode
-		}
-		else if (jdfElement instanceof JDFRefElement)
-		{
-			bIsOK = printRefElement((JDFRefElement) jdfElement, indent, testElement);
-		}
-		else if (jdfElement instanceof JDFResourceLink)
-		{
-			bIsOK = printResourceLink((JDFResourceLink) jdfElement, indent, testElement);
-		}
-		else if (jdfElement instanceof JDFResource)
-		{
-			bIsOK = printResource((JDFResource) jdfElement, indent, testElement);
-		}
-		if (bWarnDanglingURL)
-		{
-			printURL(kElement, indent, testElement);
-		}
+		boolean bIsOK = isOK(kElement, indent, testElement, jdfElement);
 
 		final boolean bValidID = id == null || id.equals(JDFConstants.EMPTYSTRING) ? true : !vBadID.contains(id);
 		boolean bUnknownElem = false;
 
 		if (testElement != null && xmlParent != null)
 		{
-			if (bIsOK)
-			{
-				final String invElems = xmlParent.getAttribute("PreReleaseElements");
-				bIsOK = !StringUtil.hasToken(invElems, elmName, " ", 0);
-				if (!bIsOK)
-				{
-					final EnumVersion v = ((JDFElement) jdfElement.getParentNode_KElement()).getFirstVersion(elmName, true);
-					testElement.setAttribute("FirstVersion", v.getName());
-					setErrorType(testElement, "PreReleaseElement",
-							elmName + " is not valid in JDF Version" + jdfElement.getVersion(true).getName() + " First Valid version: " + v.getName(), indent + 2);
-				}
-			}
+			bIsOK = checkPrerelease(indent, xmlParent, elmName, testElement, jdfElement, bIsOK);
 
-			if (bIsOK && bWarning)
-			{
-				final String invElems = xmlParent.getAttribute("DeprecatedElements");
-				bIsOK = !StringUtil.hasToken(invElems, elmName, " ", 0);
-				if (!bIsOK)
-				{
-					final EnumVersion v = ((JDFElement) jdfElement.getParentNode_KElement()).getLastVersion(elmName, true);
-					testElement.setAttribute("LastVersion", v.getName());
-					setErrorType(testElement, "DeprecatedElement",
-							elmName + " is not valid in JDF Version" + jdfElement.getVersion(true).getName() + " Last Valid version: " + v.getName(), indent + 2);
-				}
-			}
+			bIsOK = checkDeprecated(indent, xmlParent, elmName, testElement, jdfElement, bIsOK);
 
-			if (bIsOK)
-			{
-				final String invElems = xmlParent.getAttribute("PrivateElements");
-				bIsOK = !StringUtil.hasToken(invElems, elmName, " ", 0);
-				if (!bIsOK)
-				{
-					setErrorType(testElement, "PrivateElement", elmName + " is not a valid subelement");
-				}
-			}
-			if (bIsOK)
-			{
-				final String swapElems = xmlParent.getAttribute("SwapElements");
-				bIsOK = !StringUtil.hasToken(swapElems, elmName, " ", 0);
-				if (!bIsOK)
-				{
-					setErrorType(testElement, "SwapElement", elmName + " is written as an Element");
-				}
-			}
+			bIsOK = checkPrivate(xmlParent, elmName, testElement, bIsOK);
+			bIsOK = checkSwap(xmlParent, elmName, testElement, bIsOK);
 			if (bIsOK)
 			{
 				final String unkElems = xmlParent.getAttribute("UnknownElements", null, null);
@@ -440,26 +381,13 @@ public class JDFValidator
 		}
 		else if (bIsValid && bValidID && bIsOK)
 		{
-			// print out validity if not quiet
-			if (!bQuiet)
-			{
-				sysOut.println(indent(indent) + "--- Valid:" + jdfElement.buildXPath(null, 1) + " " + id);
-			}
-			if (testElement != null)
-			{
-				testElement.setAttribute(IS_VALID, true, null);
-			}
-			if (bIsNodeRoot && xmlParent != null)
-			{
-				xmlParent.setAttribute(IS_VALID, true, null);
-			}
+			printValid(indent, xmlParent, bIsNodeRoot, id, testElement, jdfElement);
 
 		}
 		else
 		// this one is bad -> recurse to find a reason
 		{
-			if (bIsOK) // for the case "Logic is not OK", we printed this line
-			// already.
+			if (bIsOK) // for the case "Logic is not OK", we printed this line already.
 			{
 				sysOut.println(indent(indent) + "!!! InValid Element: " + kElement.buildXPath(null, 1) + " " + id + " !!! ");
 			}
@@ -473,14 +401,7 @@ public class JDFValidator
 				setErrorType(testElement, "InvalidElement", elmName + getInvalidText(jdfElement), 2);
 			}
 
-			if (!bValidID && testElement != null)
-			{
-				final KElement e = testElement.appendElement("TestAttribute");
-				setErrorType(e, "MultipleID", "Multiply defined ID = " + id, indent);
-				e.setAttribute("NodeName", "ID");
-				e.setAttribute("Value", id);
-				e.setAttribute("XPath", jdfElement.buildXPath(null, 1) + "/@ID");
-			}
+			checkMultiID(indent, id, testElement, jdfElement, bValidID);
 
 			boolean printMissElms = true;
 			if (jdfElement instanceof JDFResource)
@@ -525,24 +446,12 @@ public class JDFValidator
 			final VString prereleaseAttributes = jdfElement.getPrereleaseAttributes(9999999);
 			final VString prereleaseElements = jdfElement.getPrereleaseElements(9999999);
 
-			// unknown attributes are also invalid -> remove them from the print
-			// list
-			invalidAttributes.removeStrings(unknownAttributes, 99999);
-			invalidAttributes.removeStrings(deprecatedAttributes, 99999);
-			invalidAttributes.removeStrings(prereleaseAttributes, 99999);
+			cleanupInvalid(unknownAttributes, invalidAttributes, deprecatedAttributes, prereleaseAttributes);
 			unknownAttributes.removeStrings(prereleaseAttributes, 99999);
 			unknownAttributes.removeStrings(deprecatedAttributes, 99999);
 
-			// unknown elements are also invalid -> remove them from the print
-			// list
-			invalidElements.removeStrings(unknownElements, 99999);
-			invalidElements.removeStrings(deprecatedElements, 99999);
-			invalidElements.removeStrings(prereleaseElements, 99999);
-			unknownElements.removeStrings(deprecatedElements, 99999);
-			unknownElements.removeStrings(prereleaseElements, 99999);
-
-			// swapped elements are also invalid -> remove them from the print list
-			unknownElements.removeStrings(swapElem, 99999);
+			cleanupInvalid(unknownElements, invalidElements, deprecatedElements, prereleaseElements);
+			cleanupInvalid(deprecatedElements, unknownElements, prereleaseElements, swapElem);
 			// swapped attributes are also invalid -> remove them from the print list
 			unknownAttributes.removeStrings(swapAtt, 99999);
 
@@ -572,10 +481,9 @@ public class JDFValidator
 
 			printAttributeList(indent, testElement, jdfElement, printMissElms, unknownAttributes, "Unknown", "Unknown Attribute");
 			printAttributeList(indent, testElement, jdfElement, printMissElms, invalidAttributes, "Invalid", "Invalid attribute Value");
-			printAttributeList(indent, testElement, jdfElement, printMissElms, deprecatedAttributes, "Deprecated",
-					"Deprecated Attribute in JDF Version " + jdfElement.getVersion(true).getName());
+			printAttributeList(indent, testElement, jdfElement, printMissElms, deprecatedAttributes, "Deprecated", "Deprecated Attribute in JDF Version " + getVersion(jdfElement));
 			printAttributeList(indent, testElement, jdfElement, printMissElms, prereleaseAttributes, "PreRelease",
-					"Attribute not yet defined in JDF Version " + jdfElement.getVersion(true).getName());
+					"Attribute not yet defined in JDF Version " + getVersion(jdfElement));
 			printAttributeList(indent, testElement, jdfElement, printMissElms, missingAttributes, "Missing", "Missing Attribute");
 			printAttributeList(indent, testElement, jdfElement, printMissElms, swapAtt, "Swap", "Element written as Attribute");
 
@@ -622,21 +530,161 @@ public class JDFValidator
 			printElementList(indent, testElement, jdfElement, prereleaseElements, "PreRelease");
 			printElementList(indent, testElement, jdfElement, privateElements, "Private");
 
-			if (jdfElement instanceof JDFResource)
-			{
-				final JDFResource res = (JDFResource) jdfElement;
+			recurseResources(indent, testElement, jdfElement);
+		}
+		return jdfElement;
+	}
 
-				if (!res.isLeaf())
-				{ // handle partitioned resources
-					final VElement vr = res.getLeaves(false);
-					for (final KElement leaf : vr)
-					{
-						printBad(leaf, indent + 2, testElement, false);
-					}
+	String getVersion(final JDFElement jdfElement)
+	{
+		EnumVersion v = jdfElement.getVersion(true);
+		if (v == null)
+			v = JDFElement.getDefaultJDFVersion();
+		return v.getName();
+	}
+
+	void recurseResources(final int indent, final KElement testElement, final JDFElement jdfElement)
+	{
+		if (jdfElement instanceof JDFResource)
+		{
+			final JDFResource res = (JDFResource) jdfElement;
+
+			if (!res.isLeaf())
+			{ // handle partitioned resources
+				final VElement vr = res.getLeaves(false);
+				for (final KElement leaf : vr)
+				{
+					printBad(leaf, indent + 2, testElement, false);
 				}
 			}
 		}
-		return jdfElement;
+	}
+
+	void cleanupInvalid(final VString unknownAttributes, final VString invalidAttributes, final VString deprecatedAttributes, final VString prereleaseAttributes)
+	{
+		// unknown attributes are also invalid -> remove them from the print
+		// list
+		invalidAttributes.removeStrings(unknownAttributes, 99999);
+		invalidAttributes.removeStrings(deprecatedAttributes, 99999);
+		invalidAttributes.removeStrings(prereleaseAttributes, 99999);
+	}
+
+	void checkMultiID(final int indent, final String id, final KElement testElement, final JDFElement jdfElement, final boolean bValidID)
+	{
+		if (!bValidID && testElement != null)
+		{
+			final KElement e = testElement.appendElement("TestAttribute");
+			setErrorType(e, "MultipleID", "Multiply defined ID = " + id, indent);
+			e.setAttribute("NodeName", "ID");
+			e.setAttribute("Value", id);
+			e.setAttribute("XPath", jdfElement.buildXPath(null, 1) + "/@ID");
+		}
+	}
+
+	void printValid(final int indent, final KElement xmlParent, final boolean bIsNodeRoot, final String id, final KElement testElement, final JDFElement jdfElement)
+	{
+		// print out validity if not quiet
+		if (!bQuiet)
+		{
+			sysOut.println(indent(indent) + "--- Valid:" + jdfElement.buildXPath(null, 1) + " " + id);
+		}
+		if (testElement != null)
+		{
+			testElement.setAttribute(IS_VALID, true, null);
+		}
+		if (bIsNodeRoot && xmlParent != null)
+		{
+			xmlParent.setAttribute(IS_VALID, true, null);
+		}
+	}
+
+	boolean checkSwap(final KElement xmlParent, final String elmName, final KElement testElement, boolean bIsOK)
+	{
+		if (bIsOK)
+		{
+			final String swapElems = xmlParent.getAttribute("SwapElements");
+			bIsOK = !StringUtil.hasToken(swapElems, elmName, " ", 0);
+			if (!bIsOK)
+			{
+				setErrorType(testElement, "SwapElement", elmName + " is written as an Element");
+			}
+		}
+		return bIsOK;
+	}
+
+	boolean checkPrivate(final KElement xmlParent, final String elmName, final KElement testElement, boolean bIsOK)
+	{
+		if (bIsOK)
+		{
+			final String invElems = xmlParent.getAttribute("PrivateElements");
+			bIsOK = !StringUtil.hasToken(invElems, elmName, " ", 0);
+			if (!bIsOK)
+			{
+				setErrorType(testElement, "PrivateElement", elmName + " is not a valid subelement");
+			}
+		}
+		return bIsOK;
+	}
+
+	boolean checkDeprecated(final int indent, final KElement xmlParent, final String elmName, final KElement testElement, final JDFElement jdfElement, boolean bIsOK)
+	{
+		if (bIsOK && bWarning)
+		{
+			final String invElems = xmlParent.getAttribute("DeprecatedElements");
+			bIsOK = !StringUtil.hasToken(invElems, elmName, " ", 0);
+			if (!bIsOK)
+			{
+				final EnumVersion v = ((JDFElement) jdfElement.getParentNode_KElement()).getLastVersion(elmName, true);
+				testElement.setAttribute("LastVersion", v.getName());
+				setErrorType(testElement, "DeprecatedElement", elmName + " is not valid in JDF Version" + getVersion(jdfElement) + " Last Valid version: " + v.getName(),
+						indent + 2);
+			}
+		}
+		return bIsOK;
+	}
+
+	boolean checkPrerelease(final int indent, final KElement xmlParent, final String elmName, final KElement testElement, final JDFElement jdfElement, boolean bIsOK)
+	{
+		if (bIsOK)
+		{
+			final String invElems = xmlParent.getAttribute("PreReleaseElements");
+			bIsOK = !StringUtil.hasToken(invElems, elmName, " ", 0);
+			if (!bIsOK)
+			{
+				final EnumVersion v = ((JDFElement) jdfElement.getParentNode_KElement()).getFirstVersion(elmName, true);
+				testElement.setAttribute("FirstVersion", v.getName());
+				setErrorType(testElement, "PreReleaseElement", elmName + " is not valid in JDF Version" + getVersion(jdfElement) + " First Valid version: " + v.getName(),
+						indent + 2);
+			}
+		}
+		return bIsOK;
+	}
+
+	boolean isOK(final KElement kElement, final int indent, final KElement testElement, final JDFElement jdfElement)
+	{
+		boolean bIsOK = true;
+
+		if (jdfElement instanceof JDFResourceLinkPool)
+		{// check typesafe node links
+			bIsOK = true; // nop this is done in printnode
+		}
+		else if (jdfElement instanceof JDFRefElement)
+		{
+			bIsOK = printRefElement((JDFRefElement) jdfElement, indent, testElement);
+		}
+		else if (jdfElement instanceof JDFResourceLink)
+		{
+			bIsOK = printResourceLink((JDFResourceLink) jdfElement, indent, testElement);
+		}
+		else if (jdfElement instanceof JDFResource)
+		{
+			bIsOK = printResource((JDFResource) jdfElement, indent, testElement);
+		}
+		if (bWarnDanglingURL)
+		{
+			printURL(kElement, indent, testElement);
+		}
+		return bIsOK;
 	}
 
 	protected void printNonNamespace(final KElement kElement, final int indent, final KElement xmlParent, final String pref, final String elmName, final String nsURI, final KElement testElement, final boolean isJDFNS, boolean bTypo)
