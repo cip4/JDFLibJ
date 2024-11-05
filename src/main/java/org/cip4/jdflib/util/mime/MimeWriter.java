@@ -527,7 +527,8 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 			}
 		}
 		updateXMLMultipart(docJMF, null);
-		if (StringUtil.isEmpty(docJDF.getOriginalFileName()))
+
+		if (docJDF != null && StringUtil.isEmpty(docJDF.getOriginalFileName()))
 		{
 			docJDF.setOriginalFileName(THE_JDF);
 		}

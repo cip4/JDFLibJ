@@ -320,6 +320,21 @@ class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	void testBuildNull() throws Exception
+	{
+		final JDFDoc docJMF = new JDFDoc("JMF");
+		final JDFJMF jmf = docJMF.getJMFRoot();
+		jmf.setSenderID("DeviceID");
+		final MimeWriter mw = new MimeWriter();
+		mw.buildMimePackage(docJMF, null, true);
+		assertEquals(1, mw.getCount());
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	void testNastyRef() throws Exception
 	{
 		final JDFDoc docJMF = new JDFDoc("JMF");
