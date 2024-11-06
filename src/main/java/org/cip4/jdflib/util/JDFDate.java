@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -71,8 +71,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 {
 	private long lTimeInMillis;
 	private int m_TimeZoneOffsetInMillis; // in milliseconds from GMT-tim
-	static int defaultHour = 12;
-	static boolean wantISOMilliseconds = false;
+	private static int defaultHour = 12;
+	private static boolean wantISOMilliseconds = false;
 
 	/**
 	 * @return the wantISOMilliseconds

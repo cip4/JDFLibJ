@@ -611,6 +611,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/DeliveryParams/DropItem/@Amount", null), "42");
 		assertEquals(date.getDateTimeISO(), xjdf.getXPathAttribute("ResourceSet/Resource/DeliveryParams/@Required", null));
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/DeliveryParams/DropItem[2]/@Amount", null), "63");
+		final XJDFHelper h = new XJDFHelper(xjdf);
+		final SetHelper dh = h.getSet(ElementName.DELIVERYPARAMS, 0);
+		final ResourceHelper drh = dh.getResource(0);
+		assertEquals("DROP_0", drh.getPartKey(AttributeName.DROPID));
+		assertNull(drh.getResourceAttribute(AttributeName.DROPID));
 		return xjdf;
 	}
 

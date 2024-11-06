@@ -1188,47 +1188,58 @@ class PostXJDFWalker extends BaseElementWalker
 				int i = 0;
 				for (final JDFDrop drop : dp.getAllDrop())
 				{
-					String dropid = drop.getDropID();
-					if (StringUtil.isEmpty(dropid))
-					{
-						dropid = "DROP_" + i++;
-					}
-					final ResourceHelper rh2 = StringUtil.isEmpty(dropid) ? sh.getCreateExactPartition(null, false)
-							: sh.getCreateExactPartition(new JDFAttributeMap(AttributeName.DROPID, dropid), false);
-					JDFDeliveryParams dp2 = (JDFDeliveryParams) rh2.getResource();
-					if (dp2 == null)
-					{
-						dp2 = (JDFDeliveryParams) rh2.getRoot().copyElement(dp, null);
-						dp2.setAttributes(drop);
-						dp2.removeChildren(ElementName.DROP, null);
-					}
-					for (final JDFDropItem dropitem : drop.getAllDropItem())
-					{
-						dropitem.renameAttribute("ProductRef", XJDFConstants.ItemRef);
-						dropitem.renameAttribute("ComponentRef", XJDFConstants.ItemRef);
-						if (!dropitem.hasNonEmpty(XJDFConstants.ItemRef))
-						{
-							String productRef = rh.getPartKey(XJDFConstants.Product);
-							if (productRef != null)
-							{
-								final XJDFHelper xh = sh.getXJDF();
-								final ProductHelper p = xh.getProductByExternalID(productRef);
-								if (p != null)
-								{
-									productRef = p.ensureID();
-								}
-							}
-							dropitem.setAttribute(XJDFConstants.ItemRef, productRef);
-						}
-						if (dropitem.hasNonEmpty(XJDFConstants.ItemRef))
-						{
-							dp2.moveElement(dropitem, null);
-						}
-					}
+					i = walkSingleDrop(sh, rh, dp, i, drop);
 				}
 				rh.deleteNode();
 			}
 			return super.walk(xjdf, dummy);
+		}
+
+		int walkSingleDrop(final SetHelper sh, final ResourceHelper rh, final JDFDeliveryParams dp, int i, final JDFDrop drop)
+		{
+			String dropid = drop.getDropID();
+			if (StringUtil.isEmpty(dropid))
+			{
+				dropid = "DROP_" + i++;
+			}
+			final ResourceHelper rh2 = sh.getCreateExactPartition(new JDFAttributeMap(AttributeName.DROPID, dropid), false);
+			JDFDeliveryParams dp2 = (JDFDeliveryParams) rh2.getResource();
+			if (dp2 == null)
+			{
+				dp2 = (JDFDeliveryParams) rh2.getRoot().copyElement(dp, null);
+				dp2.setAttributes(drop);
+				dp2.removeChildren(ElementName.DROP, null);
+				dp2.removeAttribute(AttributeName.DROPID);
+			}
+			for (final JDFDropItem dropitem : drop.getAllDropItem())
+			{
+				walkSingleDropItem(sh, rh, dp2, dropitem);
+			}
+			return i;
+		}
+
+		void walkSingleDropItem(final SetHelper sh, final ResourceHelper rh, final JDFDeliveryParams dp2, final JDFDropItem dropitem)
+		{
+			dropitem.renameAttribute("ProductRef", XJDFConstants.ItemRef);
+			dropitem.renameAttribute("ComponentRef", XJDFConstants.ItemRef);
+			if (!dropitem.hasNonEmpty(XJDFConstants.ItemRef))
+			{
+				String productRef = rh.getPartKey(XJDFConstants.Product);
+				if (productRef != null)
+				{
+					final XJDFHelper xh = sh.getXJDF();
+					final ProductHelper p = xh.getProductByExternalID(productRef);
+					if (p != null)
+					{
+						productRef = p.ensureID();
+					}
+				}
+				dropitem.setAttribute(XJDFConstants.ItemRef, productRef);
+			}
+			if (dropitem.hasNonEmpty(XJDFConstants.ItemRef))
+			{
+				dp2.moveElement(dropitem, null);
+			}
 		}
 	}
 

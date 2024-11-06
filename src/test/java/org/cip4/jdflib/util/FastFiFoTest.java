@@ -3,15 +3,17 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * May 26, 2009
+ *         May 26, 2009
  */
 class FastFiFoTest extends JDFTestCaseBase
 {
@@ -45,8 +47,8 @@ class FastFiFoTest extends JDFTestCaseBase
 		final FastFiFo<MyInteger> ff = new FastFiFo<MyInteger>(10);
 		for (int i = 0; i < 100; i++)
 		{
-//			final MyInteger r = 
-				ff.push(new MyInteger(i));
+			// final MyInteger r =
+			ff.push(new MyInteger(i));
 			for (int j = 0; j < 10; j++)
 			{
 				final MyInteger r2 = ff.peek(j);
@@ -71,8 +73,8 @@ class FastFiFoTest extends JDFTestCaseBase
 		final FastFiFo<MyInteger> ff = new FastFiFo<MyInteger>(10);
 		for (int i = 0; i < 100; i++)
 		{
-//			final MyInteger r = 
-				ff.push(new MyInteger(i));
+			// final MyInteger r =
+			ff.push(new MyInteger(i));
 			final MyInteger[] a = ff.peekArray();
 			Assertions.assertEquals(a[0], new MyInteger(Math.max(0, i - 9)), "loop " + i);
 			if (i > 5)
@@ -99,6 +101,17 @@ class FastFiFoTest extends JDFTestCaseBase
 
 		l0 = System.currentTimeMillis();
 		final ArrayList<MyInteger> v = new ArrayList<MyInteger>(10000);
+		for (int i = 0; i < 100000; i++) // note the factor 10 less for the arraylist...
+		{
+			v.add(new MyInteger(i));
+			if (i > 10000)
+			{
+				v.remove(0);
+			}
+		}
+		System.out.println("T=" + (System.currentTimeMillis() - l0));
+		l0 = System.currentTimeMillis();
+		final ArrayDeque<MyInteger> ad = new ArrayDeque<MyInteger>(10000);
 		for (int i = 0; i < 100000; i++) // note the factor 10 less for the arraylist...
 		{
 			v.add(new MyInteger(i));

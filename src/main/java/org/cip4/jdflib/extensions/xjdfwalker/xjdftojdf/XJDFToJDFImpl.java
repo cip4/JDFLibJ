@@ -280,6 +280,9 @@ public class XJDFToJDFImpl extends PackageElementWalker
 			final String strDocType = isJMF ? ElementName.JMF : ElementName.JDF;
 			jdfDoc = new JDFDoc(strDocType);
 			jdfDoc.copyMeta(newXJDF.getOwnerDocument_KElement());
+			final KElement root = jdfDoc.getRoot();
+			root.removeChildren(ElementName.AUDITPOOL, null);
+			root.removeAttributes(root.getAttributeMap().keySet());
 		}
 		xjdf.setAttribute(AttributeName.MAXVERSION, getXJDFVersion().getName());
 		xjdf.setAttribute(AttributeName.VERSION, getVersion().getName());

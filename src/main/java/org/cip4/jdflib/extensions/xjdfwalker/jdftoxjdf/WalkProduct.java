@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -178,7 +178,7 @@ public class WalkProduct extends WalkJDF
 	 * @param xjdf
 	 * @return the created resource
 	 */
-	private KElement walkProduct(final KElement jdf, final KElement xjdf)
+	KElement walkProduct(final KElement jdf, final KElement xjdf)
 	{
 		final JDFNode node = (JDFNode) jdf;
 
@@ -191,25 +191,11 @@ public class WalkProduct extends WalkJDF
 		if (readComponent(node, prod))
 		{
 			final JDFAttributeMap map = jdf.getAttributeMap();
-			map.remove(AttributeName.ID);
-			map.remove(AttributeName.TYPE);
-			map.remove(AttributeName.ACTIVATION);
-			map.remove(AttributeName.VERSION);
-			map.remove(AttributeName.MAXVERSION);
-			map.remove(AttributeName.ICSVERSIONS);
-			map.remove(AttributeName.STATUS);
-			map.remove(AttributeName.STATUSDETAILS);
-			map.remove(AttributeName.XMLNS);
-			map.remove(AttributeName.XSITYPE);
-			map.remove(AttributeName.JOBID);
 			if (prod.getNonEmpty(XJDFConstants.ExternalID) == null)
 			{
 				final String xid = WalkResLink.getXJDFExternalID(node);
 				map.put(XJDFConstants.ExternalID, xid);
 			}
-
-			map.remove("xmlns:xsi");
-			map.remove(AttributeName.JOBPARTID);
 			updateAttributes(map);
 			prod.setAttributes(map);
 
@@ -222,5 +208,27 @@ public class WalkProduct extends WalkJDF
 			prod.deleteNode();
 			return xjdf;
 		}
+	}
+
+	@Override
+	protected void updateAttributes(final JDFAttributeMap map)
+	{
+		map.remove(AttributeName.ID);
+		map.remove(AttributeName.CATEGORY);
+		map.remove(AttributeName.TYPE);
+		map.remove(AttributeName.ACTIVATION);
+		map.remove(AttributeName.VERSION);
+		map.remove(AttributeName.MAXVERSION);
+		map.remove(AttributeName.ICSVERSIONS);
+		map.remove(AttributeName.PROJECTID);
+		map.remove(AttributeName.STATUS);
+		map.remove(AttributeName.STATUSDETAILS);
+		map.remove(AttributeName.XMLNS);
+		map.remove(AttributeName.XSITYPE);
+		map.remove(AttributeName.JOBID);
+
+		map.remove("xmlns:xsi");
+		map.remove(AttributeName.JOBPARTID);
+		super.updateAttributes(map);
 	}
 }

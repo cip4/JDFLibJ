@@ -324,6 +324,18 @@ class JDFDocTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	@Test
+	void testNoInit()
+	{
+		final JDFDoc d = new JDFDoc(new XMLDoc(ElementName.JDF));
+		assertNull(d.getJDFRoot().getAuditPool());
+		final JDFDoc d2 = new JDFDoc(ElementName.JDF);
+		assertNotNull(d2.getJDFRoot().getAuditPool());
+	}
+
+	/**
 	 *
 	 * test graceful null handling
 	 */
