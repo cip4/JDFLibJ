@@ -37,11 +37,8 @@
 package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLFormatter;
-import org.cip4.jdflib.extensions.XJDFHelper;
 import org.junit.jupiter.api.BeforeEach;
 
 /**
@@ -62,7 +59,5 @@ public class ExampleTest extends JDFTestCaseBase
 		super.setUp();
 		KElement.setLongID(false);
 		XMLFormatter.getFormatter().setLineWidth(64);
-		XJDFHelper.setDefaultVersion(EnumVersion.Version_2_3);
-		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_9);
 	}
 }
