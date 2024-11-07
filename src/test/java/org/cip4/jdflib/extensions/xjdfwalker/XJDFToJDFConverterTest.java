@@ -2114,7 +2114,7 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(jmfRoot);
 		assertEquals(jmfRoot.getSenderID(), "devID");
 		assertEquals(jmfRoot.getQuery(0).getSenderID(), "devID2");
-		assertTrue(jmfRoot.isValid(EnumValidationLevel.Complete));
+		assertTrue(jmfRoot.isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**

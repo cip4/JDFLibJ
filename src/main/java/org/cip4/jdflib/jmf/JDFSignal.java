@@ -177,6 +177,30 @@ public class JDFSignal extends JDFAutoSignal
 	}
 
 	/**
+	 * create a new response for this if this is any message except response correctly fills refId, type etc.
+	 *
+	 * @return the newly created message
+	 */
+	@Override
+	public JDFJMF createResponse()
+	{
+
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, getEnumType());
+		final JDFResponse response = jmf.getResponse();
+
+		response.mergeElement(this, false);
+		for (final KElement e : response.getChildArray(null, null))
+		{
+			if (!response.isValidMessageElement(e.getLocalName(), 0))
+			{
+				response.removeChild(e.getLocalName(), null, 0);
+			}
+		}
+		return jmf;
+
+	}
+
+	/**
 	 * @param response
 	 * @param q
 	 */
