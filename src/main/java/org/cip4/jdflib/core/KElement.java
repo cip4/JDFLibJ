@@ -2031,6 +2031,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
+	@SuppressWarnings("unchecked")
 	public <A extends KElement> List<A> getChildArrayByClass_KElement(final Class<A> clazz, final boolean bRecurse, final int nMax)
 	{
 		final List<A> v = new ArrayList<>();
