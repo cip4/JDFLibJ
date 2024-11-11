@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,11 +76,11 @@ import org.cip4.jdflib.elementwalker.fixversion.FixVersionImpl;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG<br/>
- * fixes versions within JDF 1.x June 7, 2009<br/>
- * uses heuristics to modify this element and its children to be compatible with a given version<br>
- * in general, it will be able to move from low to high versions, but potentially fail when attempting to move from higher to lower versions
+ *         fixes versions within JDF 1.x June 7, 2009<br/>
+ *         uses heuristics to modify this element and its children to be compatible with a given version<br>
+ *         in general, it will be able to move from low to high versions, but potentially fail when attempting to move from higher to lower versions
  * 
- * This class is the result of refactoring the recursive fixVersion routines from the dom node tree into one class
+ *         This class is the result of refactoring the recursive fixVersion routines from the dom node tree into one class
  * 
  */
 public class FixVersion extends FixVersionImpl
@@ -89,7 +89,7 @@ public class FixVersion extends FixVersionImpl
 	 * 
 	 * @param fixVersion
 	 */
-	public FixVersion(FixVersionImpl fixVersion)
+	public FixVersion(final FixVersionImpl fixVersion)
 	{
 		super(fixVersion);
 	}
@@ -97,7 +97,7 @@ public class FixVersion extends FixVersionImpl
 	/**
 	 * @param _version
 	 */
-	public FixVersion(EnumVersion _version)
+	public FixVersion(final EnumVersion _version)
 	{
 		super(_version);
 	}

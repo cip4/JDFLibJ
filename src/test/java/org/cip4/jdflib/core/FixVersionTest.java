@@ -712,10 +712,33 @@ class FixVersionTest extends JDFTestCaseBase
 		final JDFResource nip = ni.addPartition(EnumPartIDKey.Run, new JDFDate().getDateISO());
 		final FixVersion fixVersion = new FixVersion((EnumVersion) null);
 		fixVersion.setBZappInvalid(true);
+		fixVersion.setFirsthour(6);
+		fixVersion.setLasthour(18);
 		final boolean converted = fixVersion.convert(n);
 		assertTrue(converted);
 		assertTrue(ni.getAttribute(AttributeName.START).indexOf("T06:00") > 0);
 		assertTrue(ni.getAttribute(AttributeName.LASTEND).indexOf("T18:00") > 0);
+		assertFalse(nip.getAttribute(AttributeName.RUN).indexOf("T") > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testNodeInfoTime2()
+	{
+		final JDFNodeInfo ni = n.appendNodeInfo();
+		FixVersion.setDefaultFirstHour(-1);
+		FixVersion.setDefaultLastHour(-1);
+		ni.setAttribute(AttributeName.START, new JDFDate().getDateISO());
+		ni.setAttribute(AttributeName.LASTEND, new JDFDate().getDateISO());
+		final JDFResource nip = ni.addPartition(EnumPartIDKey.Run, new JDFDate().getDateISO());
+		final FixVersion fixVersion = new FixVersion((EnumVersion) null);
+		fixVersion.setBZappInvalid(true);
+		final boolean converted = fixVersion.convert(n);
+		assertTrue(converted);
+		assertFalse(ni.getAttribute(AttributeName.START).indexOf("T06:00") > 0);
+		assertFalse(ni.getAttribute(AttributeName.LASTEND).indexOf("T18:00") > 0);
 		assertFalse(nip.getAttribute(AttributeName.RUN).indexOf("T") > 0);
 	}
 
@@ -731,6 +754,7 @@ class FixVersionTest extends JDFTestCaseBase
 		ni.setAttribute(AttributeName.FIRSTSTART, new JDFDate().getDateISO() + "TZ");
 		final FixVersion fixVersion = new FixVersion((EnumVersion) null);
 		fixVersion.setBZappInvalid(true);
+		fixVersion.setFirsthour(6);
 		final boolean converted = fixVersion.convert(n);
 		assertTrue(converted);
 		assertTrue(ni.getAttribute(AttributeName.START).indexOf("T15:00") > 0);
@@ -1172,6 +1196,14 @@ class FixVersionTest extends JDFTestCaseBase
 	public String toString()
 	{
 		return super.toString() + "\n" + n;
+	}
+
+	@Override
+	public void tearDown() throws Exception
+	{
+		FixVersion.setDefaultFirstHour(6);
+		FixVersion.setDefaultLastHour(18);
+		super.tearDown();
 	}
 
 }

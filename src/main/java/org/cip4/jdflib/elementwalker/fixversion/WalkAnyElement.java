@@ -105,11 +105,11 @@ public class WalkAnyElement extends BaseWalker
 			minute = StringUtil.parseInt(StringUtil.substring(timeToken, 3, 5), 0);
 			if (hour < 0)
 			{
-				if (check.endsWith(AttributeName.END) || AttributeName.REQUIRED.equals(check))
+				if ((check.endsWith(AttributeName.END) || AttributeName.REQUIRED.equals(check)) && fixVersion.lasthour > 0)
 				{
 					hour = fixVersion.lasthour;
 				}
-				else if (check.endsWith(AttributeName.START) || AttributeName.EARLIEST.equals(check))
+				else if ((check.endsWith(AttributeName.START) || AttributeName.EARLIEST.equals(check)) && fixVersion.firsthour > 0)
 				{
 					hour = fixVersion.firsthour;
 				}
@@ -153,7 +153,7 @@ public class WalkAnyElement extends BaseWalker
 	JDFDate fixDate(final String value, final int hour, final int minute)
 	{
 		final JDFDate d = value.contains("INF") || StringUtil.isNumber(value) ? null : JDFDate.createDate(value);
-		if (d != null && (hour > 0 || fixVersion.newYear > 0))
+		if (d != null && (hour >= 0 || fixVersion.newYear > 0))
 		{
 			if (hour >= 0 && d.getHour() == JDFDate.getDefaultHour() && d.getMinute() == 0)
 			{

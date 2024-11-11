@@ -152,6 +152,30 @@ public class FixVersionImpl extends PackageElementWalker
 		bFixIDs = fixVersionIDFix;
 	}
 
+	private static int defaultFirstHour = 6;
+
+	public static int getDefaultFirstHour()
+	{
+		return defaultFirstHour;
+	}
+
+	public static void setDefaultFirstHour(final int defaultFirstHour)
+	{
+		FixVersionImpl.defaultFirstHour = defaultFirstHour;
+	}
+
+	public static int getDefaultLastHour()
+	{
+		return defaultLastHour;
+	}
+
+	public static void setDefaultLastHour(final int defaultLastHour)
+	{
+		FixVersionImpl.defaultLastHour = defaultLastHour;
+	}
+
+	private static int defaultLastHour = 18;
+
 	/**
 	 * @param _version
 	 *
@@ -168,8 +192,8 @@ public class FixVersionImpl extends PackageElementWalker
 		fixICSVersions = false;
 		bLayoutPrepToStripping = false;
 		bFixNewDuplicate = false;
-		firsthour = 6;
-		lasthour = 18;
+		firsthour = defaultFirstHour;
+		lasthour = defaultLastHour;
 		newYear = -1;
 		ignoreMap = new ListMap<>();
 		ignoreMap.setUnique(true);
