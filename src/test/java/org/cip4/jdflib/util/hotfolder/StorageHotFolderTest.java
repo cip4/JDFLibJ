@@ -174,11 +174,11 @@ class StorageHotFolderTest extends JDFTestCaseBase
 		super.setUp();
 		ThreadUtil.sleep(12);
 		final int n = ai.incrementAndGet();
-		theHFDir = new File(sm_dirTestDataTemp + File.separator + "StHFTest" + n);
+		theHFDir = new File(sm_dirTestDataTemp + "StHFTest" + n);
 		FileUtil.deleteAll(theHFDir);
 		theHFDir.mkdirs();
 
-		tmpHFDir = new File(sm_dirTestDataTemp + File.separator + "StHFTemp" + n);
+		tmpHFDir = new File(sm_dirTestDataTemp + "StHFTemp" + n);
 		FileUtil.deleteAll(tmpHFDir);
 
 		log.info("Setting up: " + theHFDir);
