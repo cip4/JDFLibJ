@@ -292,7 +292,7 @@ public class StatusCounter
 
 		if (node == null)
 		{
-			setPhase(null, null, EnumDeviceStatus.Idle, null);
+			setPhase(null, null, EnumDeviceStatus.Idle, EnumDeviceStatus.Idle.getName());
 		}
 
 		if (m_vPartMap == null && m_Node != null)
@@ -971,8 +971,7 @@ public class StatusCounter
 
 	}
 
-	private void updateCurrentJobPhase(final EnumNodeStatus nodeStatus, final String nodeStatusDetails, final EnumDeviceStatus deviceStatus, final String deviceStatusDetails, final JDFJMF jmf,
-			final LinkAmount la, final JDFPhaseTime pt2, final boolean bEnd)
+	private void updateCurrentJobPhase(final EnumNodeStatus nodeStatus, final String nodeStatusDetails, final EnumDeviceStatus deviceStatus, final String deviceStatusDetails, final JDFJMF jmf, final LinkAmount la, final JDFPhaseTime pt2, final boolean bEnd)
 	{
 		final JDFResponse respStatus = (JDFResponse) jmf.appendMessageElement(JDFMessage.EnumFamily.Response, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo deviceInfo = respStatus.getCreateDeviceInfo(0);

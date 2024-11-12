@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,9 +70,10 @@
  */
 package org.cip4.jdflib.util;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VElement;
@@ -80,31 +81,46 @@ import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 
 /**
- * @author prosirai module combining statuscounter simply update the child status counters regularly. call
- *         getStatusResponse to generate a new Response based on the data in the statuscounters
+ * @author prosirai module combining statuscounter simply update the child status counters regularly. call getStatusResponse to generate a new Response based on the data in the
+ *         statuscounters
  * 
  */
 public class MultiModuleStatusCounter
 {
-	private final Vector<StatusCounter> counters = new Vector<StatusCounter>();
+	private final ArrayList<StatusCounter> counters = new ArrayList<StatusCounter>();
+	private StatusCounter deviceCounter;
 
 	/**
 	 * 
 	 */
 	public MultiModuleStatusCounter()
 	{
-		super();
+		this(null);
 	}
 
 	/**
-	 * add a statuscounter representing a set of modules to this device status counter
+	 * 
+	 */
+	public MultiModuleStatusCounter(final StatusCounter deviceCounter)
+	{
+		super();
+		this.deviceCounter = deviceCounter;
+	}
+
+	/**
+	 * add a statuscounter representing a set of modules or jobphases to this device status counter
 	 * 
 	 * @param sc the statuscounter to add
 	 */
-	public void addModule(StatusCounter sc)
+	public void addModule(final StatusCounter sc)
 	{
 		if (sc != null)
-			counters.add(sc);
+		{
+			if (deviceCounter == null)
+				deviceCounter = sc;
+			else
+				counters.add(sc);
+		}
 	}
 
 	/**
@@ -112,10 +128,16 @@ public class MultiModuleStatusCounter
 	 * 
 	 * @param sc the statuscounter to add
 	 */
-	public void removeModule(StatusCounter sc)
+	public void removeModule(final StatusCounter sc)
 	{
 		if (sc != null)
+		{
 			counters.remove(sc);
+			if (counters.isEmpty())
+			{
+				deviceCounter.setActiveNode(null, null, null);
+			}
+		}
 	}
 
 	/**
@@ -125,27 +147,39 @@ public class MultiModuleStatusCounter
 	 */
 	public JDFDoc getStatusResponse()
 	{
-		if (counters.size() == 0)
+		if (counters.isEmpty() && deviceCounter == null)
 			return null;
 
-		StatusCounter root = counters.elementAt(0);
-		JDFDoc d = new JDFDoc("JMF");
+		final JDFDoc d = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = d.getJMFRoot();
-		jmf.copyInto(root.getDocJMFPhaseTime().getJMFRoot(), false);
-		JDFDeviceInfo di = jmf.getResponse(0).getDeviceInfo(0);
-		for (int i = 1; i < counters.size(); i++)
+		jmf.copyInto(deviceCounter.getDocJMFPhaseTime().getJMFRoot(), false);
+		final JDFDeviceInfo di = jmf.getResponse(0).getDeviceInfo(0);
+		for (final StatusCounter counter : counters)
 		{
-			StatusCounter counter = counters.elementAt(i);
 			final JDFDoc docJMFPhaseTime = counter.getDocJMFPhaseTime();
-			if (docJMFPhaseTime == null)
-				continue;
-			JDFDeviceInfo di2 = docJMFPhaseTime.getJMFRoot().getResponse(0).getDeviceInfo(0);
-			VElement phases = di2.getChildElementVector(ElementName.JOBPHASE, null, null, true, -1, false);
-			for (int j = 0; j < phases.size(); j++)
-				di.copyElement(phases.elementAt(j), null);
-			di.setDeviceStatus(getDeviceStatus());
+			if (docJMFPhaseTime != null)
+			{
+				final JDFDeviceInfo di2 = docJMFPhaseTime.getJMFRoot().getResponse(0).getDeviceInfo(0);
+				final VElement phases = di2.getChildElementVector(ElementName.JOBPHASE, null, null, true, -1, false);
+				for (int j = 0; j < phases.size(); j++)
+					di.copyElement(phases.elementAt(j), null);
+				di.setDeviceStatus(getDeviceStatus());
+				di.setStatusDetails(getStatusDetails());
+				di.removeAttribute(AttributeName.IDLESTARTTIME);
+			}
 		}
 		return d;
+	}
+
+	String getStatusDetails()
+	{
+		final StatusCounter maxModule = getMaxModule();
+		return maxModule == null ? EnumDeviceStatus.Idle.getName() : maxModule.getStatusDetails();
+	}
+
+	int size()
+	{
+		return counters.size();
 	}
 
 	/**
@@ -153,14 +187,25 @@ public class MultiModuleStatusCounter
 	 */
 	public EnumDeviceStatus getDeviceStatus()
 	{
-		final int counterSize = counters.size();
-		if (counterSize == 0)
-			return EnumDeviceStatus.Idle;
-		EnumDeviceStatus maxStatus = null;
-		for (int i = 0; i < counterSize; i++)
+		final StatusCounter maxModule = getMaxModule();
+		return maxModule == null ? EnumDeviceStatus.Idle : maxModule.getStatus();
+	}
+
+	/**
+	 * @return the amalgamated device status
+	 */
+	public StatusCounter getMaxModule()
+	{
+		EnumDeviceStatus maxStatus = EnumDeviceStatus.Idle;
+		StatusCounter ret = counters.get(0);
+		for (final StatusCounter counter : counters)
 		{
-			maxStatus = (EnumDeviceStatus) EnumUtil.max(maxStatus, counters.elementAt(i).getStatus());
+			if (maxStatus.getValue() < EnumUtil.getValue(counter.getStatus()))
+			{
+				maxStatus = counter.getStatus();
+				ret = counter;
+			}
 		}
-		return maxStatus;
+		return ret;
 	}
 }

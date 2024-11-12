@@ -223,9 +223,14 @@ public class EnumUtil
 	 */
 	public static boolean aLessThanB(final ValuedEnum a, final ValuedEnum b)
 	{
-		final int aa = a == null ? -1 : a.getValue();
-		final int bb = b == null ? -1 : b.getValue();
+		final int aa = getValue(a);
+		final int bb = getValue(b);
 		return aa < bb;
+	}
+
+	public static int getValue(final ValuedEnum a)
+	{
+		return a == null ? -1 : a.getValue();
 	}
 
 	/**
@@ -238,8 +243,8 @@ public class EnumUtil
 	 */
 	public static boolean aLessEqualsThanB(final ValuedEnum a, final ValuedEnum b)
 	{
-		final int aa = a == null ? -1 : a.getValue();
-		final int bb = b == null ? -1 : b.getValue();
+		final int aa = getValue(a);
+		final int bb = getValue(b);
 		return aa <= bb;
 	}
 
