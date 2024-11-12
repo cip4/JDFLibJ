@@ -150,9 +150,8 @@ public class MultiModuleStatusCounter
 		if (counters.isEmpty() && deviceCounter == null)
 			return null;
 
-		final JDFDoc d = new JDFDoc(ElementName.JMF);
+		final JDFDoc d = deviceCounter.getDocJMFPhaseTime().clone();
 		final JDFJMF jmf = d.getJMFRoot();
-		jmf.copyInto(deviceCounter.getDocJMFPhaseTime().getJMFRoot(), false);
 		final JDFDeviceInfo di = jmf.getResponse(0).getDeviceInfo(0);
 		for (final StatusCounter counter : counters)
 		{
@@ -207,5 +206,10 @@ public class MultiModuleStatusCounter
 			}
 		}
 		return ret;
+	}
+
+	public StatusCounter getDeviceCounter()
+	{
+		return deviceCounter;
 	}
 }

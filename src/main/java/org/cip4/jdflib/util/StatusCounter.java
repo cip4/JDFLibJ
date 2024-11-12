@@ -806,7 +806,6 @@ public class StatusCounter
 		{
 			return setIdlePhase(deviceStatus, deviceStatusDetails);
 		}
-
 		if (deviceStatus != null)
 			status = deviceStatus;
 		if (StringUtil.getNonEmpty(deviceStatusDetails) != null)
@@ -815,6 +814,11 @@ public class StatusCounter
 		final JDFJMF jmfRes = createResourceJMF();
 
 		final LinkAmount mainLinkAmount = getLinkAmount(getFirstRefID());
+		// other threads may have broken things
+		if (m_Node == null)
+		{
+			return setIdlePhase(deviceStatus, deviceStatusDetails);
+		}
 
 		final JDFAuditPool auditPool = m_Node.getCreateAuditPool();
 		// TODO rethink when to send 2 phases
