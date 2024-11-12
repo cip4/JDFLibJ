@@ -174,6 +174,15 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testShortString()
+	{
+		assertNotNull(sc.shortString());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testWasteAmount()
 	{
 		final VJDFAttributeMap singleMap = new VJDFAttributeMap();

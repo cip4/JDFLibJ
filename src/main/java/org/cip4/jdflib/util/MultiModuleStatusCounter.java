@@ -76,6 +76,7 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -211,5 +212,21 @@ public class MultiModuleStatusCounter
 	public StatusCounter getDeviceCounter()
 	{
 		return deviceCounter;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "MultiModuleStatusCounter [counters=" + getJobIDS() + ", deviceCounter=" + deviceCounter.shortString() + "]";
+	}
+
+	StringArray getJobIDS()
+	{
+		final StringArray b = new StringArray();
+		for (final StatusCounter c : counters)
+		{
+			b.add(c.getJobID());
+		}
+		return b;
 	}
 }

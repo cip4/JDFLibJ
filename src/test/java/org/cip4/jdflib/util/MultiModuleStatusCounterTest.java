@@ -41,6 +41,7 @@ package org.cip4.jdflib.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -107,6 +108,14 @@ public class MultiModuleStatusCounterTest extends JDFTestCaseBase
 		final StatusCounter scDev = new StatusCounter(null, null, null);
 		final MultiModuleStatusCounter msc = new MultiModuleStatusCounter(scDev);
 		assertEquals(scDev, msc.getDeviceCounter());
+	}
+
+	@Test
+	void testToString()
+	{
+		final StatusCounter scDev = new StatusCounter(null, null, null);
+		final MultiModuleStatusCounter msc = new MultiModuleStatusCounter(scDev);
+		assertNotNull(msc.toString());
 	}
 
 	/**

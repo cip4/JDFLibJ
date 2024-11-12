@@ -2007,4 +2007,14 @@ public class StatusCounter
 
 	}
 
+	public String shortString()
+	{
+		return getClass().getSimpleName() + " JobID=" + getJobID() + " DeviceID=" + getDeviceID();
+	}
+
+	public String getJobID()
+	{
+		return m_Node == null ? "null" : m_Node.getJobID(true);
+	}
+
 }
