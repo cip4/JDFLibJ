@@ -103,6 +103,43 @@ public class MultiModuleStatusCounterTest extends JDFTestCaseBase
 	}
 
 	@Test
+	void testMultiModuleJob2()
+	{
+		final MultiModuleStatusCounter msc = new MultiModuleStatusCounter();
+		final StatusCounter scDev = new StatusCounter(null, null, null);
+		scDev.setDeviceID("d1");
+		msc.addModule(scDev);
+		final JDFResponse idlePhase = msc.getStatusResponse().getJMFRoot().getResponse(0);
+		assertEquals(idlePhase.numChildElements(ElementName.DEVICEINFO, null), 1);
+		final JDFNode n = creatXMDoc().getJDFRoot();
+		final StatusCounter scRIP = new StatusCounter(n, null, null);
+		msc.addModule(scRIP);
+		final JDFExposedMedia m = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
+		final String resID = m.getID();
+		scRIP.setFirstRefID(resID);
+		scRIP.setPhase(EnumNodeStatus.InProgress, "RIP", EnumDeviceStatus.Running, null);
+
+		scRIP.addPhase(resID, 200, 0, true);
+		final JDFResponse p1 = msc.getStatusResponse().getJMFRoot().getResponse(0);
+		assertEquals(1, p1.numChildElements(ElementName.DEVICEINFO, null));
+		assertEquals(1, p1.getDeviceInfo(0).getAllJobPhase().size());
+		scRIP.setPhase(EnumNodeStatus.Cleanup, "abc", EnumDeviceStatus.Cleanup, null);
+
+		final JDFNode n2 = creatXMDoc().getJDFRoot();
+		final StatusCounter scRIP2 = new StatusCounter(n2, null, null);
+		msc.addModule(scRIP2);
+		scRIP2.setPhase(EnumNodeStatus.InProgress, "RIP", EnumDeviceStatus.Running, null);
+		scRIP2.addPhase(resID, 100, 0, true);
+		final JDFResponse p2 = msc.getStatusResponse().getJMFRoot().getResponse(0);
+		assertEquals(1, p2.numChildElements(ElementName.DEVICEINFO, null));
+		assertEquals(2, p2.getDeviceInfo(0).getAllJobPhase().size());
+		final JDFResponse p22 = msc.getStatusResponse().getJMFRoot().getResponse(1);
+		assertEquals(1, p22.numChildElements(ElementName.DEVICEINFO, null));
+		assertEquals(2, p22.getDeviceInfo(0).getAllJobPhase().size());
+
+	}
+
+	@Test
 	void testGetDevCounter()
 	{
 		final StatusCounter scDev = new StatusCounter(null, null, null);

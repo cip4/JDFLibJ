@@ -76,10 +76,12 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFResponse;
 
 /**
  * @author prosirai module combining statuscounter simply update the child status counters regularly. call getStatusResponse to generate a new Response based on the data in the
@@ -153,13 +155,39 @@ public class MultiModuleStatusCounter
 
 		final JDFDoc d = deviceCounter.getDocJMFPhaseTime().clone();
 		final JDFJMF jmf = d.getJMFRoot();
-		final JDFDeviceInfo di = jmf.getResponse(0).getDeviceInfo(0);
+		int maxresp = getNumResponses();
+		JDFResponse response = jmf.getResponse(0);
+		for (int i = 0; i < maxresp; i++)
+		{
+			response = copyResponse(jmf, response, i);
+		}
+		return d;
+	}
+
+	JDFResponse copyResponse(final JDFJMF jmf, JDFResponse response, int i)
+	{
+		if (i > 0)
+		{
+			response = copyResponse(jmf, response);
+		}
+		final JDFDeviceInfo di = response.getDeviceInfo(0);
 		for (final StatusCounter counter : counters)
 		{
-			final JDFDoc docJMFPhaseTime = counter.getDocJMFPhaseTime();
-			if (docJMFPhaseTime != null)
+			copyPhaseTime(i, di, counter);
+		}
+		return response;
+	}
+
+	void copyPhaseTime(int i, final JDFDeviceInfo di, final StatusCounter counter)
+	{
+		final JDFDoc docJMFPhaseTime = counter.getDocJMFPhaseTime();
+		if (docJMFPhaseTime != null)
+		{
+			final JDFJMF jmfRoot = docJMFPhaseTime.getJMFRoot();
+			final int nResp = jmfRoot.numChildElements(ElementName.RESPONSE, null);
+			if (nResp > 0)
 			{
-				final JDFDeviceInfo di2 = docJMFPhaseTime.getJMFRoot().getResponse(0).getDeviceInfo(0);
+				final JDFDeviceInfo di2 = jmfRoot.getResponse(Math.min(i, nResp - 1)).getDeviceInfo(0);
 				final VElement phases = di2.getChildElementVector(ElementName.JOBPHASE, null, null, true, -1, false);
 				for (int j = 0; j < phases.size(); j++)
 					di.copyElement(phases.elementAt(j), null);
@@ -168,7 +196,33 @@ public class MultiModuleStatusCounter
 				di.removeAttribute(AttributeName.IDLESTARTTIME);
 			}
 		}
-		return d;
+	}
+
+	JDFResponse copyResponse(final JDFJMF jmf, JDFResponse response)
+	{
+		final JDFResponse response2 = jmf.appendResponse();
+		response2.setAttributes(response);
+		final JDFDeviceInfo di2 = response2.appendDeviceInfo();
+		di2.setAttributes(response.getDeviceInfo(0));
+		response2.setID(KElement.uniqueID(0));
+		response = response2;
+		return response;
+	}
+
+	int getNumResponses()
+	{
+		int maxresp = 0;
+		for (final StatusCounter counter : counters)
+		{
+			final JDFDoc docJMFPhaseTime = counter.getDocJMFPhaseTime();
+			if (docJMFPhaseTime != null)
+			{
+				final JDFJMF jmfRoot = docJMFPhaseTime.getJMFRoot();
+				final int nResp = jmfRoot.numChildElements(ElementName.RESPONSE, null);
+				maxresp = Math.max(maxresp, nResp);
+			}
+		}
+		return maxresp;
 	}
 
 	String getStatusDetails()

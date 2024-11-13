@@ -42,6 +42,7 @@ package org.cip4.jdflib.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -168,6 +169,44 @@ public class StatusCounterTest extends JDFTestCaseBase
 		final JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		final JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
 		assertEquals(deviceInfo.getDeviceID(), deviceID);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testPercentComplete()
+	{
+		final boolean bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
+		assertTrue(bChanged);
+		final JDFDoc docJMF = sc.getDocJMFPhaseTime();
+		final JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
+		final JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
+		assertEquals(200, deviceInfo.getJobPhase().getPercentCompleted(), 0.1);
+		sc.setPercentComplete(42);
+		final boolean bChanged2 = sc.setPhase(null, null, null, null);
+		assertFalse(bChanged2);
+		final JDFDoc docJMF2 = sc.getDocJMFPhaseTime();
+		assertEquals(42, docJMF2.getJMFRoot().getResponse().getDeviceInfo(0).getJobPhase().getPercentCompleted(), 0.1);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testSetPhaseNull()
+	{
+		final boolean bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
+		assertTrue(bChanged);
+		final JDFDoc docJMF = sc.getDocJMFPhaseTime();
+		final JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
+		final JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
+		assertEquals(deviceInfo.getDeviceID(), deviceID);
+		final boolean bChanged2 = sc.setPhase(null, null, null, null);
+		assertFalse(bChanged2);
+		final JDFDoc docJMF2 = sc.getDocJMFPhaseTime();
+		assertNotSame(docJMF, docJMF2);
+
 	}
 
 	/**

@@ -808,7 +808,7 @@ public class StatusCounter
 		}
 		if (deviceStatus != null)
 			status = deviceStatus;
-		if (StringUtil.getNonEmpty(deviceStatusDetails) != null)
+		if (!StringUtil.isEmpty(deviceStatusDetails))
 			statusDetails = deviceStatusDetails;
 		final JDFJMF jmfStatus = createPhaseTimeJMF();
 		final JDFJMF jmfRes = createResourceJMF();
