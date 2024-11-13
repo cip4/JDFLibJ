@@ -155,6 +155,14 @@ public class MultiModuleStatusCounterTest extends JDFTestCaseBase
 		assertNotNull(msc.toString());
 	}
 
+	@Test
+	void testMaxModule()
+	{
+		final StatusCounter scDev = new StatusCounter(null, null, null);
+		final MultiModuleStatusCounter msc = new MultiModuleStatusCounter(scDev);
+		assertEquals(scDev, msc.getMaxModule());
+	}
+
 	/**
 	 *
 	 */

@@ -155,7 +155,7 @@ public class MultiModuleStatusCounter
 
 		final JDFDoc d = deviceCounter.getDocJMFPhaseTime().clone();
 		final JDFJMF jmf = d.getJMFRoot();
-		int maxresp = getNumResponses();
+		final int maxresp = getNumResponses();
 		JDFResponse response = jmf.getResponse(0);
 		for (int i = 0; i < maxresp; i++)
 		{
@@ -164,7 +164,7 @@ public class MultiModuleStatusCounter
 		return d;
 	}
 
-	JDFResponse copyResponse(final JDFJMF jmf, JDFResponse response, int i)
+	JDFResponse copyResponse(final JDFJMF jmf, JDFResponse response, final int i)
 	{
 		if (i > 0)
 		{
@@ -178,7 +178,7 @@ public class MultiModuleStatusCounter
 		return response;
 	}
 
-	void copyPhaseTime(int i, final JDFDeviceInfo di, final StatusCounter counter)
+	void copyPhaseTime(final int i, final JDFDeviceInfo di, final StatusCounter counter)
 	{
 		final JDFDoc docJMFPhaseTime = counter.getDocJMFPhaseTime();
 		if (docJMFPhaseTime != null)
@@ -251,7 +251,7 @@ public class MultiModuleStatusCounter
 	public StatusCounter getMaxModule()
 	{
 		EnumDeviceStatus maxStatus = EnumDeviceStatus.Idle;
-		StatusCounter ret = counters.get(0);
+		StatusCounter ret = deviceCounter;
 		for (final StatusCounter counter : counters)
 		{
 			if (maxStatus.getValue() < EnumUtil.getValue(counter.getStatus()))
