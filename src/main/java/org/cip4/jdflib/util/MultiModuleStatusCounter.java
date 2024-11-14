@@ -231,7 +231,7 @@ public class MultiModuleStatusCounter
 		return maxModule == null ? EnumDeviceStatus.Idle.getName() : maxModule.getStatusDetails();
 	}
 
-	int size()
+	public int size()
 	{
 		return counters.size();
 	}
@@ -274,7 +274,7 @@ public class MultiModuleStatusCounter
 		return "MultiModuleStatusCounter [counters=" + getJobIDS() + ", deviceCounter=" + deviceCounter.shortString() + "]";
 	}
 
-	StringArray getJobIDS()
+	public StringArray getJobIDS()
 	{
 		final StringArray b = new StringArray();
 		for (final StatusCounter c : counters)
