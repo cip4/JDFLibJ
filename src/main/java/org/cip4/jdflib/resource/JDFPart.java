@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -55,6 +55,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -152,9 +153,12 @@ public class JDFPart extends JDFAutoPart
 		return guessPartIDKeys(map);
 	}
 
+	private final static String[] partSequence = new String[] { AttributeName.SIGNATURENAME, AttributeName.SHEETNAME, AttributeName.SIDE, AttributeName.SEPARATION,
+			AttributeName.RUNSET, AttributeName.RUN };
+
 	public static VString guessPartIDKeys(final JDFAttributeMap map)
 	{
-		if (map == null || map.size() == 0)
+		if (ContainerUtil.isEmpty(map))
 		{
 			return null;
 		}
@@ -164,25 +168,13 @@ public class JDFPart extends JDFAutoPart
 		}
 		final VString v = new VString();
 		final StringArray keys = map.getKeyList();
-		if (keys.contains(AttributeName.SIGNATURENAME))
+		for (final String key : partSequence)
 		{
-			v.add(AttributeName.SIGNATURENAME);
-			keys.remove(AttributeName.SIGNATURENAME);
-		}
-		if (keys.contains(AttributeName.SHEETNAME))
-		{
-			v.add(AttributeName.SHEETNAME);
-			keys.remove(AttributeName.SHEETNAME);
-		}
-		if (keys.contains(AttributeName.SIDE))
-		{
-			v.add(AttributeName.SIDE);
-			keys.remove(AttributeName.SIDE);
-		}
-		if (keys.contains(AttributeName.SEPARATION))
-		{
-			v.add(AttributeName.SEPARATION);
-			keys.remove(AttributeName.SEPARATION);
+			if (keys.contains(key))
+			{
+				v.add(key);
+				keys.remove(key);
+			}
 		}
 		v.addAll(keys);
 		return v;
@@ -284,7 +276,8 @@ public class JDFPart extends JDFAutoPart
 			return false;
 
 		boolean b;
-		b = resourceValue.equals(linkValue) || KElement.isWildCard(resourceValue) || KElement.isWildCard(linkValue) || ALL.equalsIgnoreCase(linkValue) || ALL.equalsIgnoreCase(resourceValue);
+		b = resourceValue.equals(linkValue) || KElement.isWildCard(resourceValue) || KElement.isWildCard(linkValue) || ALL.equalsIgnoreCase(linkValue)
+				|| ALL.equalsIgnoreCase(resourceValue);
 		if (!b)
 		{
 			final int iResPos = resourceValue.indexOf(' ');

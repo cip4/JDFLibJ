@@ -43,6 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Vector;
+import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
@@ -464,6 +465,30 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 			assertEquals(n.isJDFRoot() ? "w2p" : "", n.getCategory());
 		}
 		d.write2File(sm_dirTestDataTemp + "splitxjdfCategory.jdf", 2, false);
+	}
+
+	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
+	void testSplitNodeInfo() throws DataFormatException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		h.setTypes("Screening ImageSetting ConventionalPrinting Cutting Folding Trimming");
+		h.appendSet(ElementName.NODEINFO, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("0 1"));
+		h.appendSet(ElementName.NODEINFO, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("2"));
+		h.appendSet(ElementName.NODEINFO, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("3 4 5"));
+
+		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+
+		VString types = h.getTypes();
+		final VString t0 = splitter.extractTypes(h, types, 0);
+		assertEquals(2, t0.size());
+		final VString t1 = splitter.extractTypes(h, types, 2);
+		assertEquals(1, t1.size());
+		final VString t2 = splitter.extractTypes(h, types, 3);
+		assertEquals(3, t2.size());
 	}
 
 	/**

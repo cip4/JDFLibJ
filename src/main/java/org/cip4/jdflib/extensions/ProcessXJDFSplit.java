@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,8 +41,11 @@ import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -173,9 +176,10 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 			return null;
 		}
 		boolean hasProduct = false;
+		int pos = 0;
 		while (types.size() > 0)
 		{
-			final VString overlap = extractTypes(types);
+			final VString overlap = extractTypes(root, types, pos);
 			if (overlap.contains(XJDFConstants.Product))
 			{
 				ret.insertElementAt(overlap, 0);
@@ -185,12 +189,40 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 			{
 				ret.add(overlap);
 			}
+			pos += overlap.size();
 		}
 		if (!hasProduct && ret.size() > 1)
 		{
 			ret.insertElementAt(new VString(XJDFConstants.Product, null), 0);
 		}
 		return ret.size() == 0 ? null : ret;
+	}
+
+	protected VString extractTypes(final XJDFHelper root, final VString types, final int pos)
+	{
+		final SetHelper niSet = root.getSet(ElementName.NODEINFO, EnumUsage.Input, null, pos);
+		if (niSet != null)
+		{
+			final JDFIntegerList cpi = niSet.getCombinedProcessIndex();
+			final VString found = new VString();
+			final int[] il = cpi.getIntArray();
+			int currentPos = pos;
+			for (final int ipos : il)
+			{
+				if (ipos == currentPos++)
+				{
+					found.add(types.get(ipos - pos));
+				}
+				else
+				{
+					return extractTypes(types);
+				}
+			}
+			for (int i = 0; i < il.length; i++)
+				types.remove(0);
+			return found;
+		}
+		return extractTypes(types);
 	}
 
 	/**

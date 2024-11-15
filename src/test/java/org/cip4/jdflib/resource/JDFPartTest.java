@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -90,6 +90,22 @@ class JDFPartTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testGuessPartIDKeys()
+	{
+		final JDFAttributeMap map = new JDFAttributeMap();
+		map.put("Option", "Back");
+		map.put("Run", "1");
+		part.setPartMap(map);
+		assertEquals(new VString("Run Option"), part.guessPartIDKeys());
+		map.put("SheetName", "S1");
+		part.setPartMap(map);
+		assertEquals(new VString("SheetName Run Option"), part.guessPartIDKeys());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testGetPartMap()
 	{
 		final JDFAttributeMap map = new JDFAttributeMap("Side", "Front");
@@ -119,7 +135,7 @@ class JDFPartTest extends JDFTestCaseBase
 		final Iterator<EnumPartIDKey> it = EnumPartIDKey.iterator();
 		while (it.hasNext())
 		{
-			EnumPartIDKey next = it.next();
+			final EnumPartIDKey next = it.next();
 			if (!next.isXJDF())
 			{
 				final String name = next.getName();
