@@ -408,12 +408,12 @@ public class OrderedTaskQueue extends Thread
 				mutex = null;
 				break;
 			}
-			if (idle.incrementAndGet() > 3)
+			if (idle.incrementAndGet() > 42)
 			{
 				shutDown();
 				break;
 			}
-			if (!ThreadUtil.wait(mutex, 100000))
+			if (!ThreadUtil.wait(mutex, 4200))
 			{
 				break;
 			}
