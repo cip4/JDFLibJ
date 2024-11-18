@@ -115,7 +115,7 @@ public class MultiModuleStatusCounter
 	 * 
 	 * @param sc the statuscounter to add
 	 */
-	public void addModule(final StatusCounter sc)
+	public synchronized void addModule(final StatusCounter sc)
 	{
 		if (sc != null)
 		{
@@ -131,7 +131,7 @@ public class MultiModuleStatusCounter
 	 * 
 	 * @param sc the statuscounter to add
 	 */
-	public void removeModule(final StatusCounter sc)
+	public synchronized void removeModule(final StatusCounter sc)
 	{
 		if (sc != null)
 		{
@@ -164,7 +164,7 @@ public class MultiModuleStatusCounter
 		return d;
 	}
 
-	JDFResponse copyResponse(final JDFJMF jmf, JDFResponse response, final int i)
+	synchronized JDFResponse copyResponse(final JDFJMF jmf, JDFResponse response, final int i)
 	{
 		if (i > 0)
 		{
@@ -209,7 +209,7 @@ public class MultiModuleStatusCounter
 		return response;
 	}
 
-	int getNumResponses()
+	synchronized int getNumResponses()
 	{
 		int maxresp = 0;
 		for (final StatusCounter counter : counters)
@@ -248,7 +248,7 @@ public class MultiModuleStatusCounter
 	/**
 	 * @return the amalgamated device status
 	 */
-	public StatusCounter getMaxModule()
+	public synchronized StatusCounter getMaxModule()
 	{
 		EnumDeviceStatus maxStatus = EnumDeviceStatus.Idle;
 		StatusCounter ret = deviceCounter;
