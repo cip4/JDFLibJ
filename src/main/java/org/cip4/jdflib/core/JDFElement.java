@@ -2920,7 +2920,9 @@ public class JDFElement extends KElement
 	/**
 	 * remove all private extensions form a jdf element and its children
 	 *
+	 * @deprecated use RemovePrivate
 	 */
+	@Deprecated
 	public void removeExtensions()
 	{
 		Node n = getFirstChild();

@@ -1695,11 +1695,11 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	}
 
 	/**
-	 * @return Returns the m_OriginalFileName.
+	 * @return Returns the validation result.
 	 */
 	public XMLDoc getValidationResult()
 	{
-		return ((DocumentJDFImpl) m_doc).m_validationResult;
+		return m_doc.m_validationResult;
 	}
 
 	/**

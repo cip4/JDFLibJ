@@ -87,7 +87,7 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class XJDFSchemaWalker extends BaseElementWalker
 {
-	private static final String ENUM = "Enum";
+	static final String ENUM = "Enum";
 	static final String MATRIX = "matrix";
 	static final String CMYK_COLOR = "CMYKColor";
 	static final String RECTANGLE = "rectangle";
@@ -97,8 +97,6 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	static final String XY_PAIR = "XYPair";
 	private final JDFAttributeMap typeMap;
 	private final ListMap<String, String> enumMap;
-	static final String NAME = "name";
-	static final String TYPE = "type";
 
 	/**
 	 * 
@@ -155,9 +153,9 @@ public class XJDFSchemaWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement a, final KElement xjdf)
 		{
-			final String typ = a.getNonEmpty(TYPE);
-			final String parent = a.getParentNode_KElement().getInheritedAttribute(NAME, null, null);
-			final String name = a.getNonEmpty(NAME);
+			final String typ = a.getNonEmpty(XSDConstants.TYPE);
+			final String parent = a.getParentNode_KElement().getInheritedAttribute(XSDConstants.NAME, null, null);
+			final String name = a.getNonEmpty(XSDConstants.NAME);
 			final String key = parent + "/" + name;
 			typeMap.putNotNull(key, typ);
 			return super.walk(a, xjdf);
@@ -222,7 +220,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 			String strRet = "";
 			while (i < 2 && a != null)
 			{
-				final String name = a.getNonEmpty(NAME);
+				final String name = a.getNonEmpty(XSDConstants.NAME);
 				if (name != null)
 				{
 					strRet = i == 0 ? name : name + "/" + strRet;
