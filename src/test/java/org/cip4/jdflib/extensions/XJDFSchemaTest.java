@@ -454,6 +454,25 @@ class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testProductChicagoBind()
+	{
+		final KElement root = new XJDFHelper(EnumVersion.Version_2_3, "j1").getRoot();
+		final XJDFHelper xjdfHelper = new XJDFHelper(root);
+		final ProductHelper createRootProduct = xjdfHelper.getCreateRootProduct(0);
+		createRootProduct.setID("i1");
+		final KElement createResource = createRootProduct.appendIntent(ElementName.BINDINGINTENT).getCreateResource();
+		createResource.setAttribute(ElementName.BINDINGTYPE, "ScrewBinding");
+		final KElement sbd = createResource.appendElement(XJDFConstants.LooseBinding).appendElement(XJDFConstants.ScrewBinding);
+		sbd.setAttribute(AttributeName.MATERIAL, "ColorCoatedSteel");
+		xjdfHelper.setTypes(JDFConstants.PRODUCT);
+		xjdfHelper.cleanUp();
+		writeTest(root, "../Chicago.xjdf", true, null);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testCMYKValidate()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();

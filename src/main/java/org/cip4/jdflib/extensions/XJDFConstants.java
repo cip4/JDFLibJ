@@ -56,6 +56,7 @@ public abstract class XJDFConstants
 	public static final String BackUse = "BackUse";
 
 	public static final String BindIn = "BindIn";
+	public static final String BindingScrewSet = "BindingScrewSet";
 	public static final String BinderySignatureID = "BinderySignatureID";
 	public static final String BinderySignatureIDs = "BinderySignatureIDs";
 	public static final String BlowIn = "BlowIn";
@@ -162,6 +163,8 @@ public abstract class XJDFConstants
 	public static final String ResponseStatus = "ResponseStatus";
 	public static final String RestApiBaseURL = "RestApiBaseURL";
 
+	public static final String ScrewBinding = "ScrewBinding";
+	public static final String ScrewBindingDetails = "ScrewBindingDetails";
 	public static final String Separations = "Separations";
 
 	public static final String ShapeDefRef = "ShapeDefRef";

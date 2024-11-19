@@ -226,6 +226,13 @@
 			<xs:enumeration value="FlatBacked"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="LooseBindMaterial">
+	<xs:restriction base="xs:NMTOKEN">
+		<xs:enumeration value="Steel"/>
+		<xs:enumeration value="ColorCoatedSteel"/>
+		<xs:enumeration value="Plastic"/>
+	</xs:restriction>
+    </xs:simpleType>
 	<xs:simpleType name="EnumEmbossDirection">
 		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="Both"/>
@@ -374,7 +381,7 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Anchor">
-		<xs:restriction base="xs:string">
+		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="BottomCenter"/>
 			<xs:enumeration value="BottomLeft"/>
 			<xs:enumeration value="BottomRight"/>
@@ -538,7 +545,7 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Orientation">
-		<xs:restriction base="xs:string">
+		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="Rotate0"/>
 			<xs:enumeration value="Rotate90"/>
 			<xs:enumeration value="Rotate180"/>
@@ -550,7 +557,7 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="WorkStyle">
-		<xs:restriction base="xs:string">
+		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="Perfecting"/>
 			<xs:enumeration value="Simplex"/>
 			<xs:enumeration value="WorkAndBack"/>
@@ -559,7 +566,7 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Coating">
-		<xs:restriction base="xs:string">
+		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="Coated"/>
 			<xs:enumeration value="Gloss"/>
 			<xs:enumeration value="Matte"/>
@@ -570,7 +577,7 @@
 	<xs:simpleType name="SourceObjects">
 		<xs:list>
 			<xs:simpleType>
-				<xs:restriction base="xs:string">
+				<xs:restriction base="xs:NMTOKEN">
 					<xs:enumeration value="ImagePhotographic"/>
 					<xs:enumeration value="ImageScreenShot"/>
 					<xs:enumeration value="LineArt"/>
@@ -605,7 +612,7 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="DeviceCondition">
-		<xs:restriction base="xs:string">
+		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="OK"/>
 			<xs:enumeration value="NeedsAttention"/>
 			<xs:enumeration value="Failure"/>
@@ -613,7 +620,7 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="DeviceStatus">
-		<xs:restriction base="xs:string">
+		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="Cleanup"/>
 			<xs:enumeration value="Idle"/>
 			<xs:enumeration value="NonProductive"/>
@@ -1660,7 +1667,7 @@
 					<xs:simpleType>
 						<xs:list>
 							<xs:simpleType>
-								<xs:restriction base="xs:string">
+								<xs:restriction base="xs:NMTOKEN">
 									<xs:enumeration value="XML"/>
 									<xs:enumeration value="Zip"/>
 								</xs:restriction>
@@ -2159,8 +2166,9 @@
 			<xs:attribute name="PartVersion" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="PreviewType" use="optional">
 				<xs:simpleType>
-					<xs:restriction base="xs:string">
+					<xs:restriction base="xs:NMTOKEN">
 						<xs:enumeration value="Animation"/>
+						<xs:enumeration value="Icon"/>
 						<xs:enumeration value="Identification"/>
 						<xs:enumeration value="SeparatedThumbNail"/>
 						<xs:enumeration value="Separation"/>
@@ -2541,7 +2549,7 @@
 				</xs:attribute>
 				<xs:attribute name="VarnishArea" use="optional">
 					<xs:simpleType>
-						<xs:restriction base="xs:string">
+						<xs:restriction base="xs:NMTOKEN">
 							<xs:enumeration value="Full"/>
 							<xs:enumeration value="Spot"/>
 						</xs:restriction>
@@ -2549,7 +2557,7 @@
 				</xs:attribute>
 				<xs:attribute name="VarnishMethod" use="optional">
 					<xs:simpleType>
-						<xs:restriction base="xs:string">
+						<xs:restriction base="xs:NMTOKEN">
 							<xs:enumeration value="Blanket"/>
 							<xs:enumeration value="Plate"/>
 							<xs:enumeration value="Independent"/>
@@ -2656,6 +2664,7 @@
 							<xs:enumeration value="None"/>
 							<xs:enumeration value="RingBinding"/>
 							<xs:enumeration value="SaddleStitch"/>
+							<xs:enumeration value="ScrewBinding"/>
 							<xs:enumeration value="SideStitch"/>
 							<xs:enumeration value="SoftCover"/>
 							<xs:enumeration value="StripBinding"/>
@@ -2691,6 +2700,7 @@
 				<xs:element maxOccurs="1" minOccurs="0" ref="CoilBinding"/>
 				<xs:element maxOccurs="1" minOccurs="0" ref="CombBinding"/>
 				<xs:element maxOccurs="1" minOccurs="0" ref="RingBinding"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ScrewBinding"/>
 			</xs:sequence>
 			<xs:attribute name="Brand" type="xs:string" use="optional"/>
 			<xs:attribute name="Diameter" type="xs:float" use="optional"/>
@@ -2700,30 +2710,14 @@
 	<xs:element name="CoilBinding">
 		<xs:complexType>
 			<xs:attribute name="CoilShape" type="xs:NMTOKEN" use="optional"/>
-			<xs:attribute name="Material" use="optional">
-				<xs:simpleType>
-					<xs:restriction base="xs:NMTOKEN">
-						<xs:enumeration value="Steel"/>
-						<xs:enumeration value="ColorCoatedSteel"/>
-						<xs:enumeration value="Plastic"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
+			<xs:attribute name="Material" type="LooseBindMaterial"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="CombBinding">
 		<xs:complexType>
 			<xs:attribute name="CombShape" type="xs:NMTOKEN" use="optional"/>
-			<xs:attribute name="Material" use="optional">
-				<xs:simpleType>
-					<xs:restriction base="xs:NMTOKEN">
-						<xs:enumeration value="Steel"/>
-						<xs:enumeration value="ColorCoatedSteel"/>
-						<xs:enumeration value="Plastic"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
+			<xs:attribute name="Material" type="LooseBindMaterial"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
@@ -2733,6 +2727,12 @@
 			<xs:attribute name="RingShape" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="RivetsExposed" type="xs:boolean" use="optional"/>
 			<xs:attribute name="ViewBinder" type="xs:NMTOKEN" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ScrewBinding">
+		<xs:complexType>
+			<xs:attribute name="Material" type="LooseBindMaterial"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
@@ -2746,6 +2746,7 @@
 					<xs:element maxOccurs="1" minOccurs="0" ref="CombBindingDetails"/>
 					<xs:element maxOccurs="unbounded" minOccurs="0" ref="HolePattern"/>
 					<xs:element maxOccurs="1" minOccurs="0" ref="RingBindingDetails"/>
+					<xs:element maxOccurs="1" minOccurs="0" ref="ScrewBindingDetails"/>
 					<xs:element maxOccurs="1" minOccurs="0" ref="StripBindingDetails"/>
 				</xs:sequence>
 				<xs:attribute name="BindingType" use="required">
@@ -2755,6 +2756,7 @@
 							<xs:enumeration value="CoilBinding"/>
 							<xs:enumeration value="CombBinding"/>
 							<xs:enumeration value="RingBinding"/>
+							<xs:enumeration value="ScrewBinding"/>
 							<xs:enumeration value="StripBinding"/>
 						</xs:restriction>
 					</xs:simpleType>
@@ -4473,7 +4475,7 @@
 				<xs:attribute name="GrainDirection" type="MediaDirection" use="optional"/>
 				<xs:attribute name="ImagableSide" use="optional">
 					<xs:simpleType>
-						<xs:restriction base="xs:string">
+						<xs:restriction base="xs:NMTOKEN">
 							<xs:enumeration value="Front"/>
 							<xs:enumeration value="Back"/>
 							<xs:enumeration value="Both"/>
@@ -5441,7 +5443,7 @@
 			<xs:attribute name="RowsPerStrip" type="xs:int" use="optional"/>
 			<xs:attribute name="Segmentation" use="optional">
 				<xs:simpleType>
-					<xs:restriction base="xs:string">
+					<xs:restriction base="xs:NMTOKEN">
 						<xs:enumeration value="SingleStrip"/>
 						<xs:enumeration value="Stripped"/>
 						<xs:enumeration value="Tiled"/>
@@ -5735,6 +5737,12 @@
 			<xs:attribute name="RivetsExposed" type="xs:boolean" use="optional"/>
 			<xs:attribute name="SpineWidth" type="xs:float" use="optional"/>
 			<xs:attribute name="ViewBinder" type="xs:NMTOKEN" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ScrewBindingDetails">
+		<xs:complexType>
+			<xs:attribute name="Length" type="xs:float" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
