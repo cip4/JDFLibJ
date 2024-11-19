@@ -170,44 +170,11 @@ public class XJDFSchemaPrune
 			while (schemaParent != null)
 			{
 
-				KElement ref = schemaParent.getChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.REF, null, nodeName, 0, false);
+				final KElement ref = schemaParent.getChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.REF, null, nodeName, 0, false);
 				ContainerUtil.add(v, ref);
-				final String parenttyp = schemaParent.getNonEmpty(XSDConstants.TYPE);
-				KElement schemaParentCT = parenttyp == null ? schemaParent.getElement(XSDConstants.XS_COMPLEX_TYPE)
-						: schema.getChildWithAttribute(XSDConstants.XS_COMPLEX_TYPE, XSDConstants.NAME, null, parenttyp, 0, false);
-				while (schemaParentCT != null)
-				{
-					ContainerUtil.add(v, schemaParentCT);
-					ref = schemaParentCT.getChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.REF, null, nodeName, 0, false);
-					ContainerUtil.add(v, ref);
-					final KElement ext = getExtension(schemaParentCT);
-					final String base = ext == null ? null : ext.getNonEmpty(XSDConstants.BASE);
-					schemaParentCT = base == null ? null : schema.getChildWithAttribute(XSDConstants.XS_COMPLEX_TYPE, XSDConstants.NAME, null, base, 0, false);
-				}
-				String subst = xsElement.getAttribute(XSDConstants.SUBSTITUTION_GROUP);
-				while (!StringUtil.isEmpty(subst))
-				{
-					final KElement next = getElementByName(subst);
-					ContainerUtil.add(v, next);
-					KElement xsSubst = schemaParent.getChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.REF, null, subst, 0, false);
-					if (xsSubst == null)
-					{
-						xsSubst = schema.getChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.NAME, null, subst, 0, false);
-					}
-					ContainerUtil.add(v, xsSubst);
-					final KElement ctSubst = schema.getChildWithAttribute(XSDConstants.XS_COMPLEX_TYPE, XSDConstants.NAME, null, subst, 0, false);
-					ContainerUtil.add(v, ctSubst);
-					subst = next == null ? null : next.getAttribute(XSDConstants.SUBSTITUTION_GROUP);
-				}
-
-				KElement extension = getExtension(ct);
-				while (extension != null)
-				{
-					final String base = extension.getNonEmpty(XSDConstants.BASE);
-					final KElement ctBase = schema.getChildWithAttribute(XSDConstants.XS_COMPLEX_TYPE, XSDConstants.NAME, null, base, 0, false);
-					ContainerUtil.add(v, ctBase);
-					extension = getExtension(ctBase);
-				}
+				checkSchemaParent(v, nodeName, schemaParent);
+				checkSubstitution(v, xsElement, schemaParent);
+				checkExtension(v, ct);
 
 				final String parentSubst = schemaParent.getNonEmpty(XSDConstants.SUBSTITUTION_GROUP);
 				schemaParent = parentSubst == null ? null : getElementByName(parentSubst);
@@ -217,6 +184,54 @@ public class XJDFSchemaPrune
 
 		return v;
 
+	}
+
+	void checkSchemaParent(final VElement v, final String nodeName, final KElement schemaParent)
+	{
+		KElement ref;
+		final String parenttyp = schemaParent.getNonEmpty(XSDConstants.TYPE);
+		KElement schemaParentCT = parenttyp == null ? schemaParent.getElement(XSDConstants.XS_COMPLEX_TYPE)
+				: schema.getChildWithAttribute(XSDConstants.XS_COMPLEX_TYPE, XSDConstants.NAME, null, parenttyp, 0, false);
+		while (schemaParentCT != null)
+		{
+			ContainerUtil.add(v, schemaParentCT);
+			ref = schemaParentCT.getChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.REF, null, nodeName, 0, false);
+			ContainerUtil.add(v, ref);
+			final KElement ext = getExtension(schemaParentCT);
+			final String base = ext == null ? null : ext.getNonEmpty(XSDConstants.BASE);
+			schemaParentCT = base == null ? null : schema.getChildWithAttribute(XSDConstants.XS_COMPLEX_TYPE, XSDConstants.NAME, null, base, 0, false);
+		}
+	}
+
+	void checkExtension(final VElement v, final KElement ct)
+	{
+		KElement extension = getExtension(ct);
+		while (extension != null)
+		{
+			final String base = extension.getNonEmpty(XSDConstants.BASE);
+			final KElement ctBase = schema.getChildWithAttribute(XSDConstants.XS_COMPLEX_TYPE, XSDConstants.NAME, null, base, 0, false);
+			ContainerUtil.add(v, ctBase);
+			extension = getExtension(ctBase);
+		}
+	}
+
+	void checkSubstitution(final VElement v, final KElement xsElement, final KElement schemaParent)
+	{
+		String subst = xsElement.getAttribute(XSDConstants.SUBSTITUTION_GROUP);
+		while (!StringUtil.isEmpty(subst))
+		{
+			final KElement next = getElementByName(subst);
+			ContainerUtil.add(v, next);
+			KElement xsSubst = schemaParent.getChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.REF, null, subst, 0, false);
+			if (xsSubst == null)
+			{
+				xsSubst = schema.getChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.NAME, null, subst, 0, false);
+			}
+			ContainerUtil.add(v, xsSubst);
+			final KElement ctSubst = schema.getChildWithAttribute(XSDConstants.XS_COMPLEX_TYPE, XSDConstants.NAME, null, subst, 0, false);
+			ContainerUtil.add(v, ctSubst);
+			subst = next == null ? null : next.getAttribute(XSDConstants.SUBSTITUTION_GROUP);
+		}
 	}
 
 	void addAttributes(final KElement root, final KElement example)

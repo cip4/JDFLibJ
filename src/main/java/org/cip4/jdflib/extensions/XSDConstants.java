@@ -38,6 +38,11 @@ package org.cip4.jdflib.extensions;
 
 public class XSDConstants
 {
+	private XSDConstants()
+	{
+		super();
+	}
+
 	static final String NAME = "name";
 	static final String REF = "ref";
 	static final String TYPE = "type";
