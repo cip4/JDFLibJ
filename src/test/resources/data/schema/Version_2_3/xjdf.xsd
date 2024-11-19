@@ -2710,14 +2710,14 @@
 	<xs:element name="CoilBinding">
 		<xs:complexType>
 			<xs:attribute name="CoilShape" type="xs:NMTOKEN" use="optional"/>
-			<xs:attribute name="Material" type="LooseBindMaterial"/>
+			<xs:attribute name="Material" type="LooseBindMaterial" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="CombBinding">
 		<xs:complexType>
 			<xs:attribute name="CombShape" type="xs:NMTOKEN" use="optional"/>
-			<xs:attribute name="Material" type="LooseBindMaterial"/>
+			<xs:attribute name="Material" type="LooseBindMaterial" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
@@ -2732,7 +2732,7 @@
 	</xs:element>
 	<xs:element name="ScrewBinding">
 		<xs:complexType>
-			<xs:attribute name="Material" type="LooseBindMaterial"/>
+			<xs:attribute name="Material" type="LooseBindMaterial" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
